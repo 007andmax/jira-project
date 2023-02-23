@@ -90,7 +90,11 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     (<any>document.body.querySelector(".nav-header")).style.display = "none";
-    this.getTicket(this.activateRoute.snapshot.params['id']);
+    if (this.activateRoute.snapshot.params['id']) this.getTicket(this.activateRoute.snapshot.params['id']);
+    let subscription = this.activateRoute.params.subscribe(params => {
+      if (params['id']) this.getTicket(this.activateRoute.snapshot.params['id']);
+    });
+    this.sub.add(subscription);
     this.listColors = this.ticketsStateService.getListStatusColor();
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
@@ -104,6 +108,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+
     this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
       let ticket = new Ticket(data);
       console.log("ticket", ticket);
@@ -179,6 +184,26 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onEditUpdateByForm);
   }
+  onMoveToTrash(data) {
+    this.ticketsService.trashTicket(this.ticketProfile.id, data).subscribe(res => {
+    })
+  }
+  restoreFromSpam() {
+    this.ticketsService.restoreFromSpam(this.ticketProfile.id, false).subscribe(data => {
+
+    })
+  }
+  markAsOpen() {
+    this.ticketsService.changeStatus(this.ticketProfile.id, 'IN_PROGRESS').subscribe((data: any) => {
+      if (data.code == 403) {
+        var user = this.usersStateService.getAllUsers().find(item => item.id === data.message);
+        return;
+      }
+      this.ticketMessage.isMarkAsOpen = false;
+      this.toastrService.success("The ticket has been successfully changed");
+      this.appStateService.changeDetectorRef();
+    })
+  };
   onAddUpdate(data) {
     this.tabFormUpdate = data;
     this.showFormUpdate = true;
@@ -335,11 +360,9 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   onOpenCompaniesDropDown() {
     this.cd.detectChanges();
   }
-  showTooltipCompany(userCompanyTooltip, $event) {
-    if (this.ticketProfile.ticketSource === 'FROM_EMAIL' && this.checkExistServicesProducts() && this.getCompany(this.ticketProfile.company.id) && this.getCompany(this.ticketProfile.company.id).isUnknown) userCompanyTooltip.show($event.target)
-  }
+
   goToCompanyDashboard() {
-    if (!this.getPermissions('VIEW_COMPANIES') && this.ticketProfile.ticketSource === 'FROM_EMAIL' && !this.checkExistServicesProducts() && this.getCompany(this.ticketProfile.company.id).isUnknown) return;
+    if (!this.getPermissions('VIEW_COMPANIES')) return;
     this.companiesStateService.setCompanyRoutingId(this.ticketProfile.company.id);
     this.router.navigate(
       [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.ticketProfile.company.id, 'dashboard']);

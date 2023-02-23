@@ -7,6 +7,8 @@
         [ticketProfile]="ticketProfile"
         (onAddUpdate)="onAddUpdate($event)"
         (onClaimTicket)="claimTicket()"
+        (onMoveToSpam)="onMoveIntoSpam()"
+        (onMoveToTrash)="onMoveToTrash($event)"
     ></ticket-detail-header>
     <!-- <div -->
     <!-- class="collapse-arrow icon__close" -->
@@ -77,13 +79,6 @@
                                                 [textContent]="'sent ' + parseTicketSource()"
                                             ></span>
                                         </div>
-                                        <app-dynamic-tooltip
-                                            class="user-companies-tooltip"
-                                            [content]="'You must remove all Product/Services updates from the ticket before changing the company.'"
-                                            [position]="'bottom'"
-                                            #userCompanyTooltip
-                                            [disableTooltip]="ticketProfile.ticketSource !== 'FROM_EMAIL' && !checkExistServicesProducts() && getCompany(ticketProfile.company) && !getCompany(ticketProfile.company.id).isUnknown"
-                                        ></app-dynamic-tooltip>
                                         <div class="ticket-detail-page-content__body-header-data">
                                             <span [textContent]="getCreatAt()"></span>
                                             <div class="ticket-detail-page-content__body-header-data-divider"></div>
@@ -94,8 +89,6 @@
                                                 (click)="goToCompanyDashboard()"
                                                 id="dropdownCompany"
                                                 ngbDropdownToggle
-                                                (mouseenter)="showTooltipCompany(userCompanyTooltip,$event)"
-                                                (mouseleave)="userCompanyTooltip.hide()"
                                             ></span>
                                         </div>
                                         <span
@@ -104,28 +97,6 @@
                                         >
                                             - Archived
                                         </span>
-                                        <div
-                                            *ngIf="ticketProfile.ticketSource === 'FROM_EMAIL' && !checkExistServicesProducts() && getCompany(ticketProfile.company.id) && getCompany(ticketProfile.company.id).isUnknown"
-                                            ngbDropdownMenu
-                                            aria-labelledby="dropdownCompany"
-                                        >
-                                            <div class="dropdown-menu-qt">
-                                                <ul>
-                                                    <ng-template
-                                                        ngFor
-                                                        let-item
-                                                        [ngForOf]="getClientsList()"
-                                                        let-i="index"
-                                                    >
-                                                        <li
-                                                            ngbDropdownItem
-                                                            [textContent]="item.name"
-                                                            (click)="changeTicketCompany(item.id)"
-                                                        ></li>
-                                                    </ng-template>
-                                                </ul>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -177,6 +148,14 @@
                         #ticketTasks
                         [ticketProfile]="ticketProfile"
                     ></ticket-detail-tasks>
+                    <ticket-detail-message
+                        #ticketMessage
+                        (onMoveToTrash)="onMoveToTrash($event)"
+                        (onRestoreFromSpam)="restoreFromSpam()"
+                        (onOpenTicket)="markAsOpen()"
+                        (onClaimTicket)="claimTicket()"
+                        [ticketProfile]="ticketProfile"
+                    ></ticket-detail-message>
                     <ticket-detail-profile-updates
                         #ticketProfileUpdates
                         [hidden]="!ticketProfile.updates || ticketProfile.updates.length === 0"
@@ -200,15 +179,7 @@
                 (tagsChange)="onChangeTags($event)"
                 [hidden]="showAddAssignedUser"
             ></app-ticket-edit-tags> -->
-                    <!-- <app-ticket-message
-                #ticketMessage
-                (onMoveToTrash)="moveToTrash($event)"
-                (onRestoreFromSpam)="restoreFromSpam()"
-                (onOpenTicket)="markAsOpen()"
-                (onClaimTicket)="claimTicket()"
-                [ticketProfile]="ticketProfile"
-            ></app-ticket-message>
-            <app-ticket-profile-attachments [attachments]="ticketProfile.attachments"></app-ticket-profile-attachments>
+                    <!-- <app-ticket-profile-attachments [attachments]="ticketProfile.attachments"></app-ticket-profile-attachments>
 
             <ticket-profile-edit-form-update
                 [ngClass]="{'--open':openedMobileEditUpdate}"

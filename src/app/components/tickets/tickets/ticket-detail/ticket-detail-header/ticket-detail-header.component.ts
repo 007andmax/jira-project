@@ -23,6 +23,8 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
   @Input() ticketProfile: TicketProfile = new TicketProfile();
   @Output() onAddUpdate = new EventEmitter();
   @Output() onClaimTicket = new EventEmitter();
+  @Output() onMoveToSpam = new EventEmitter();
+  @Output() onMoveToTrash = new EventEmitter();
   @ViewChild('update_closeBtn') update_closeBtn: DisabledBtnDirective;
   isUpdateAndClose: boolean = false;
   currentUser: CurrentUser;
@@ -66,25 +68,16 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === MOVE_TO_SPAM_TICKET_DETAIL) {
-          this.onMoveToSpam();
+          this.onMoveToSpam.emit(data);
         }
         if (this.confirmStateService.getConfirmAction() === MOVE_TO_TRASH_TICKET_DETAIL) {
-          this.onMoveToTrash();
+          this.onMoveToTrash.emit(this.movedWay);
         }
       }
     })
     this.sub.add(getConfirm);
   }
-  onMoveToSpam() {
-    if (this.currentUser.isOwner) {
-      this.ticketsService.markAsSpamTicket(this.ticketProfile.id, false).subscribe(res => {
-      })
 
-    } else {
-      this.ticketsService.reportAsSpamTicket(this.ticketProfile.id, false).subscribe(res => {
-      })
-    }
-  }
   checkClose() {
     if (this.ticketProfile.updates.length === 0) return true;
     let completeServices = true;
@@ -130,10 +123,7 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to move the ticket to Trash?`;
   };
-  onMoveToTrash() {
-    this.ticketsService.trashTicket(this.ticketProfile.id, this.movedWay).subscribe(res => {
-    })
-  }
+
   claimTicket() {
     this.onClaimTicket.emit(null);
   }

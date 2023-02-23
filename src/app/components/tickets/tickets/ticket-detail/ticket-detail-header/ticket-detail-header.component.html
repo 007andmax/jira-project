@@ -8,7 +8,7 @@
             <span [textContent]="'Tkt #' + ticketProfile.number"></span>
         </div>
     </div>
-    <div class="qt-df qt-ai-c">
+    <div class="qt-df qt-ai-c qt-pos-rel">
         <div class="qt-button qt-button-timer --gray qt-ml-12">
             <span class="icon__timer qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon qt-fs-0"></span>
             {{dateTxt}}
@@ -16,7 +16,7 @@
         <div
             [hidden]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
             class="qt-button qt-ml-12"
-            placement="bottom"
+            placement="rigth"
             ngbTooltip="You cannot close the ticket. It contains incomplete products / services."
             [disableTooltip]="checkClose()"
             appDisabledBtn
@@ -41,36 +41,41 @@
             [ngStyle]="{'background': ticketsListService.getStyleAvatar(currentUser)}"
         ></div>
         <div
-            class="qt-button qt-button--with-icon --gray --md pointer qt-mr-8"
-            (click)="addUpdate('NOTE')"
+            class="qt-df qt-ai-c"
+            *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
         >
-            <div class="icon__chat qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
-            Chat
-        </div>
-        <div
-            class="qt-button qt-button--with-icon --gray --md pointer qt-mr-8"
-            (click)="addUpdate('PRODUCT')"
-        >
-            <div class="icon__products qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
-            Products
-        </div>
-        <div
-            class="qt-button qt-button--with-icon --gray --md pointer qt-mr-8"
-            (click)="addUpdate('SERVICE')"
-        >
-            <div class="icon__service qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
-            Service
-        </div>
-        <div
-            class="qt-button qt-button--with-icon --gray --md pointer qt-mr-8"
-            (click)="addUpdate('QUICK_SUPPORT')"
-        >
-            <div class="icon__quick-support-strip qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
-            Quick Support
-        </div>
-        <div class="qt-button qt-button--with-icon --gray --md pointer qt-mr-8">
-            <div class="icon__merge qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
-            Merge Ticket
+            <div
+                class="qt-button qt-button--with-icon --gray --md pointer qt-mr-8"
+                (click)="addUpdate('NOTE')"
+            >
+                <div class="icon__chat qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
+                Chat
+            </div>
+            <div
+                class="qt-button qt-button--with-icon --gray --md pointer qt-mr-8"
+                (click)="addUpdate('PRODUCT')"
+            >
+                <div class="icon__products qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
+                Products
+            </div>
+            <div
+                class="qt-button qt-button--with-icon --gray --md pointer qt-mr-8"
+                (click)="addUpdate('SERVICE')"
+            >
+                <div class="icon__service qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
+                Service
+            </div>
+            <div
+                class="qt-button qt-button--with-icon --gray --md pointer qt-mr-8"
+                (click)="addUpdate('QUICK_SUPPORT')"
+            >
+                <div class="icon__quick-support-strip qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
+                Quick Support
+            </div>
+            <div class="qt-button qt-button--with-icon --gray --md pointer qt-mr-8">
+                <div class="icon__merge qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
+                Merge Ticket
+            </div>
         </div>
     </div>
     <div

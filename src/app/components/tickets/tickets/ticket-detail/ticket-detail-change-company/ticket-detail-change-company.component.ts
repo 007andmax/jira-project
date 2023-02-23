@@ -16,5 +16,10 @@ export class TicketDetailChangeCompanyComponent implements OnInit {
   ngOnInit() {
     this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.ticketProfile.company.id);
   }
-
+  checkExistServicesProducts() {
+    return this.ticketProfile.updates.filter(item => item.type == 'PRODUCT' || item.type == 'SERVICE').length > 0;
+  }
+  getCompany(id) {
+    return this.companiesStateService.getCompanies().find(item => item.id === id);
+  }
 }
