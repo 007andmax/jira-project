@@ -15,13 +15,6 @@
             *ngIf="update.type === 'PRODUCT'"
             [update]="update"
         ></ticket-detail-profile-edit-updates-products>
-        <ticket-detail-profile-form-update-support
-            *ngIf="update.type === 'QUICK_SUPPORT'"
-            (onCreateOneTimeRemoteSession)="onCreateOneTimeRemoteSession()"
-            [item]="remoteSession"
-            (onConnectRemoteAccess)="onConnectRemoteAccess($event)"
-        >
-        </ticket-detail-profile-form-update-support>
     </div>
 </div>
 <div class="ticket-detail-profile-form-update__footer qt-df jc-sb qt-ai-c">
@@ -39,7 +32,6 @@
             appDisabledBtn
             #updateBtn="disabled"
             (onClick)="save()"
-            *ngIf="tab !== 'QUICK_SUPPORT'"
         >
             <span>Post</span>
             <app-preloader-ticket *ngIf="isUpdate"></app-preloader-ticket>

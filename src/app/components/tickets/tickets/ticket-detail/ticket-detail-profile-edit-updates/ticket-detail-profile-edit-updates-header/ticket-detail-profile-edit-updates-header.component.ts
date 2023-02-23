@@ -33,4 +33,7 @@ export class TicketDetailProfileEditUpdatesHeaderComponent implements OnInit {
   getUserName(user) {
     return `${user.firstName} ${user.lastName}`;
   }
+  public trackByIndex(index, item) {
+    return index;
+  }
 }

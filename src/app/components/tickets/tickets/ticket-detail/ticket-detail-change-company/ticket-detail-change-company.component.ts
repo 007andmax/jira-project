@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Company } from 'src/app/interfaces/company/company';
+import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { TicketProfile } from '../../class/ticket-profile';
 
@@ -11,7 +12,8 @@ import { TicketProfile } from '../../class/ticket-profile';
 export class TicketDetailChangeCompanyComponent implements OnInit {
   selectedCompany: Company;
   @Input() ticketProfile: TicketProfile = new TicketProfile();
-  constructor(private companiesStateService: CompaniesStateService) { }
+  constructor(private companiesStateService: CompaniesStateService,
+    private ticketsService: TicketsService,) { }
 
   ngOnInit() {
     this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.ticketProfile.company.id);
@@ -21,5 +23,9 @@ export class TicketDetailChangeCompanyComponent implements OnInit {
   }
   getCompany(id) {
     return this.companiesStateService.getCompanies().find(item => item.id === id);
+  }
+  onSelectCompany(data) {
+    this.ticketsService.changeSubjectNoteTicket(this.ticketProfile.id, this.ticketProfile.subject, this.ticketProfile.note, data.id).subscribe(data => {
+    })
   }
 }

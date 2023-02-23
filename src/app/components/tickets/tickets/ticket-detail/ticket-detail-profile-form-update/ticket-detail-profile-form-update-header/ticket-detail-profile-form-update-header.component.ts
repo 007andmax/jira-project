@@ -41,6 +41,9 @@ export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
   selectUser(user) {
     this.ticketProfileFormUpdate.setTechUser(user);
   }
+  public trackByIndex(index, item) {
+    return index;
+  }
   public onChangeType(data) {
     this.ticketProfileFormUpdate.setNoteType(data);
     this.usersForUpdate = this.getUsersForUpdate(this.ticketProfileFormUpdate.noteType);
