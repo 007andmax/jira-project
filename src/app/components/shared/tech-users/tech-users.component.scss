@@ -2,7 +2,7 @@
 @import "./src/assets/styles/mixin/dropdown";
 
 .select-wrapper {
-  height: 252px;
+  height: 284px !important;
   max-height: 586px;
   overflow: hidden;
   display: block;
@@ -57,4 +57,43 @@
   width: 32px;
   height: 32px;
   background-size: cover;
+}
+.user-item-detail {
+  display: flex;
+  align-items: center;
+  height: 36px;
+  border-radius: 8px;
+  margin: 4px 0;
+  padding: 0 12px;
+  &:hover {
+    background-color: #F9FAFB;
+  }
+}
+.user-item-user-avatar {
+  width: 20px;
+  height: 20px;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 500;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+  border-radius: 50%;
+}
+.users-list .active {
+  background-color: #F9FAFB;
+}
+.user-item-user-name {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #101828;
+  margin-right: 4px;
+}
+.user-item-user-email {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  color: #667085;
 }

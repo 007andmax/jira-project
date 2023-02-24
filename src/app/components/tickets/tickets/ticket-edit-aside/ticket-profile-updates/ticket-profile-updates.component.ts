@@ -59,6 +59,7 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
     })
   }
   fetchUpdates() {
+    if (this.showPreloader) return;
     this.showPreloader = true;
     this.ticketsService.fetchUpdates(this.ticketProfile).subscribe((resp: any) => {
       this.onFetchUpdates.emit(resp);

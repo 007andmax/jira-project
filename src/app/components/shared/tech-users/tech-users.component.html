@@ -176,12 +176,35 @@
                                         [ngForTrackBy]="trackByIndex"
                                     >
                                         <div
-                                            class="user-item"
+                                            class="user-item-detail pointer"
                                             data-index="1"
                                             (click)="selectUser(i)"
                                             [ngClass]="(user.selected) ? 'active' : ''"
                                         >
-                                            <a
+                                            <div
+                                                class="user-item-user-avatar"
+                                                [textContent]="getAssignedUserNameForAvatar(user)"
+                                                [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'cover'}"
+                                            ></div>
+                                            <div
+                                                class="user-item-user-name"
+                                                [textContent]="getUserName(user)"
+                                            ></div>
+                                            <span
+                                                class="user-item-user-email"
+                                                [textContent]="user.primaryEmail"
+                                            ></span>
+                                            <i
+                                                *ngIf="isSelected(user)"
+                                                class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
+                                            ></i>
+
+
+
+
+
+
+                                            <!-- <a
                                                 href="javascript:void(0)"
                                                 [id]="user.id"
                                                 class="dropdown-link"
@@ -217,7 +240,7 @@
                                                         [textContent]="user.primaryEmail"
                                                     ></p>
                                                 </span>
-                                            </a>
+                                            </a> -->
                                         </div>
                                     </ng-template>
                                 </div>

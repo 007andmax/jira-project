@@ -97,24 +97,28 @@
                 role="menu"
                 class="dropdown-qt"
             >
-                <li *ngIf="ticketsPermissionsService.isActionVisible('claim_ticket', ticketProfile,null,null)">
+                <li
+                    *ngIf="ticketsPermissionsService.isActionVisible('claim_ticket', ticketProfile,null,null)"
+                    (click)="claimTicket()"
+                >
                     <a
                         tabindex="-1"
                         class="dropdown-item"
                         href="javascript:void(0)"
-                        (click)="claimTicket()"
                     >
                         <i class="qt-sz-20 qt-bg-contain icon__claim-edit-ticket"></i>
                         Claim Ticket
                     </a>
                 </li>
-                <li *ngIf="ticketsPermissionsService.isActionVisible('send_to_spam', ticketProfile,null,null)">
+                <li
+                    *ngIf="ticketsPermissionsService.isActionVisible('send_to_spam', ticketProfile,null,null)"
+                    (click)="moveIntoSpam()"
+                >
                     <a
                         tabindex="-1"
                         class="dropdown-item spam-user"
                         href="javascript:void(0)"
                         *ngIf="currentUser && currentUser.isOwner"
-                        (click)="moveIntoSpam()"
                     >
                         <i class="qt-sz-20 qt-bg-contain icon__terminate"></i>
                         Mark as Spam
@@ -124,7 +128,6 @@
                         class="dropdown-item spam-user"
                         href="javascript:void(0)"
                         *ngIf="currentUser && !currentUser.isOwner"
-                        (click)="moveIntoSpam()"
                     >
                         <i class="qt-sz-20 qt-bg-contain icon__spam"></i>
                         Report as Spam
@@ -133,12 +136,12 @@
                 <li
                     class="trash-user-list"
                     *ngIf="ticketsPermissionsService.isActionVisible('send_to_trash', ticketProfile,null,null)"
+                    (click)="moveToTrash(true)"
                 >
                     <a
                         tabindex="-1"
                         class="dropdown-item trash-user"
                         href="javascript:void(0)"
-                        (click)="moveToTrash(true)"
                     >
                         <i class="qt-sz-20 qt-bg-contain icon__remove"></i>
                         Move to Trash
