@@ -224,6 +224,7 @@ export class AppComponent implements OnInit {
         if (!data && !localStorage.getItem("width-left-aside")) $("#aside-left-panel").outerWidth(280);
       }
       this.toggleLeftPanel = data;
+      console.log("this.toggleLeftPanel", this.toggleLeftPanel);
       this.cd.detectChanges();
     })
     this.leftPanelStateService.onToggleMobileLeftPanel.subscribe(data => {
