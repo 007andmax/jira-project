@@ -88,6 +88,16 @@ export class TicketProfile {
             })
         }
     }
+    public refreshAttachments() {
+        this.attachments = [];
+        this.updates.forEach(item => {
+            if (item.attachments && item.attachments.length > 0) {
+                item.attachments.forEach(attachment => {
+                    this.attachments.push(new TicketProfileAttachment(attachment));
+                })
+            }
+        })
+    }
     public setUserCompanies(data) {
         this.userCompanies = data;
     }

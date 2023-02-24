@@ -47,4 +47,8 @@
     }
   }
 }
-
+/deep/ .assigned-user-ticket-detail {
+ .mat-form-field-label {
+  display: none !important;
+ }
+}

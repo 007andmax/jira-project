@@ -6,7 +6,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./ticket-detail-profile-form-update-visible-users.component.scss']
 })
 export class TicketDetailProfileFormUpdateVisibleUsersComponent implements OnInit {
-  type: string = "PUBLIC";
+  type: string = "PRIVATE";
   @Output() onChangeType = new EventEmitter();
   constructor() { }
 

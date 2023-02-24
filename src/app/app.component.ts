@@ -220,7 +220,7 @@ export class AppComponent implements OnInit {
       if (!this.appService.isMobile && this.state !== 'help-center') {
         console.log("data", data);
         if (data) $("#aside-left-panel").width("");
-        if (!data && localStorage.getItem("width-left-aside") && $("#aside-left-panel").width() == (64 || 280)) $("#aside-left-panel").outerWidth(localStorage.getItem("width-left-aside"));
+        if (!data && localStorage.getItem("width-left-aside") && Math.ceil($("#aside-left-panel").width()) == (64 || 280)) $("#aside-left-panel").outerWidth(localStorage.getItem("width-left-aside"));
         if (!data && !localStorage.getItem("width-left-aside")) $("#aside-left-panel").outerWidth(280);
       }
       this.toggleLeftPanel = data;

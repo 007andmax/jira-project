@@ -96,13 +96,15 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
     this.update_closeBtn.setDisabled(true);
     this.isUpdateAndClose = true;
     this.ticketsService.updateTicket(this.getDataForClose(), true).subscribe(data => {
-      this.isUpdateAndClose = false;
-      //   this.onClosed.emit(null);
-      this.update_closeBtn.setDisabled(false);
+
     }, err => {
       this.isUpdateAndClose = false;
       this.update_closeBtn.setDisabled(false);
     })
+  }
+  public resetClosedBtn() {
+    this.isUpdateAndClose = false;
+    this.update_closeBtn.setDisabled(false);
   }
   public getDataForClose() {
     return {

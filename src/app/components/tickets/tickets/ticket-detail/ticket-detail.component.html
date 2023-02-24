@@ -3,6 +3,7 @@
     [ngClass]="{'clear-bottom-padding' :!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)}"
 >
     <ticket-detail-header
+        #detailHeader
         *ngIf="!showPreloader"
         [ticketProfile]="ticketProfile"
         (onAddUpdate)="onAddUpdate($event)"

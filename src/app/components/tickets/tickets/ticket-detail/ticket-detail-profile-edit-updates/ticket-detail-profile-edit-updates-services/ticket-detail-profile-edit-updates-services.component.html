@@ -41,6 +41,7 @@
                     [editMode]="true"
                     [editDate]="service.getDateTimeWithTimeOffset(companiesStateService.getCurrentCompany())"
                     [useMinDate]="false"
+                    [container]="'body'"
                     (onChange)="onChangeDatePicker($event)"
                 ></app-date-picker>
             </div>

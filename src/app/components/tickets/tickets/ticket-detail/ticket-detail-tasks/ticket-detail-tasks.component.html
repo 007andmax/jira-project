@@ -98,14 +98,14 @@
             <i
                 [hidden]="item.status != 'INCOMPLETED'"
                 class="icon__active icn-20"
-                (click)="setStatus(item,'COMPLETED')"
+                (click)="setStatus(item,'COMPLETED');onEditTicketTask(item)"
                 (mouseenter)="complete.show($event.target)"
                 (mouseleave)="complete.hide()"
             ></i>
             <i
                 [hidden]="item.status != 'COMPLETED'"
                 class="icon__task-pending icn-20"
-                (click)="setStatus(item,'INCOMPLETED')"
+                (click)="setStatus(item,'INCOMPLETED');onEditTicketTask(item)"
                 (mouseenter)="incomplete.show($event.target)"
                 (mouseleave)="incomplete.hide()"
             ></i>
@@ -129,7 +129,7 @@
                 [placement]="'bottom-right'"
                 [useMinDate]="false"
                 [type]="'DETAIL_TICKET'"
-                (onChange)="onChangeDatePicker($event,item)"
+                (onChange)="onChangeDatePicker($event,item);onEditTicketTask(item)"
             ></app-date-picker>
             <app-tech-users
                 [editMode]="true"
@@ -137,7 +137,7 @@
                 [type]="'TICEKTS'"
                 [selectedMode]="'SINGLE'"
                 [users]="listTechUsers"
-                (usersChange)="onChangeUser($event,item)"
+                (usersChange)="onChangeUser($event,item);onEditTicketTask(item)"
                 [placement]="'bottom-right'"
             ></app-tech-users>
             <app-dynamic-tooltip

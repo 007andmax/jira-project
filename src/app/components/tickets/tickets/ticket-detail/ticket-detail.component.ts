@@ -36,6 +36,7 @@ import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { TicketDetailProfileFormUpdateComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update.component';
 import { TicketProfileUpdate } from '../class/ticket-profile-update';
 import { DatePickerStateService } from 'src/app/components/shared/date-picker/services/date-picker-state.service';
+import { TicketDetailHeaderComponent } from './ticket-detail-header/ticket-detail-header.component';
 
 @Component({
   selector: 'ticket-detail',
@@ -50,6 +51,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   @ViewChild('ticketMessage') ticketMessage: TicketMessageComponent;
   @ViewChild('ticketProfileUpdates') ticketProfileUpdates: TicketDetailProfileUpdatesComponent;
   @ViewChild('ticketTasks') ticketTasks: TicketDetailTasksComponent;
+  @ViewChild('detailHeader') detailHeader: TicketDetailHeaderComponent;
   isInit: boolean = false;
   ticketProfile: TicketProfile = new TicketProfile();
   showFormUpdate: boolean = false;
@@ -135,18 +137,14 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
 
 
       if (newChange.action == 'UPDATE_SAVED' || newChange.action == 'UPDATE_CREATED' || newChange.action === 'UPDATE_EXPENSE_DELETED') {
-        let update = this.ticketProfile.updates.find(item => item.id === newChange.data.id),
-          attachments = newChange.data.attachments;
+        let update = this.ticketProfile.updates.find(item => item.id === newChange.data.id);
         if (update) {
           this.ticketProfile.setUpdate(newChange.data);
         } else {
           this.ticketProfile.addUpdate(newChange.data);
         }
-        if (attachments && attachments.length) {
-          for (var i = 0; i < attachments.length; i++) {
-            this.ticketProfile.addAttachment(attachments[i]);
-          }
-        }
+        this.detailHeader.resetClosedBtn();
+        this.ticketProfile.refreshAttachments();
         this.cd.detectChanges();
         this.datePickerStateService.onInitReset();
       }
@@ -423,10 +421,8 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.showAddAssignedUser = false;
     this.showPreloader = true;
     this.listAssignedUser = [];
-    // this.rightPanel.close();
     this.ticketStateService.unsubscribeTicket();
     this.ticketStateService.onTicketClosed();
-    //  this.ticketMessage.reset();
     this.appService.toggleMobileAside(false);
     this.ticketProfileUpdates.resetShowLoadMoreUpdates();
     (<any>document.body.querySelector(".nav-header")).style.display = "flex";
