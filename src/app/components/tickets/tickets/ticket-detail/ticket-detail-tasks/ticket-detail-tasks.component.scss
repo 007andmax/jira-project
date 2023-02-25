@@ -129,6 +129,10 @@
 /deep/ .qt-input-search input {
   box-shadow: unset;
 }
+/deep/ .select-wrapper .content .assign-ticket-header {
+  margin-bottom: 2px !important;
+  padding: 0 !important;
+}
 /deep/ .qt-input-search input::placeholder {
     font-weight: 400;
     font-size: 14px;

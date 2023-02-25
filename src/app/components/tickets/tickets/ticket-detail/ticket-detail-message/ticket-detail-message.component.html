@@ -67,7 +67,7 @@
         *ngIf="ticketsPermissionsService.isActionVisible('restore', ticketProfile, 'from_trash',null) && currentUser && ticketProfile.deletePerformer.id !== currentUser.id"
     >
         <div class="ticket-notify__item-icon icon__ticket-status"></div>
-        <div>
+        <div class="qt-f-1">
             <div class="ticket-notify__item-title">
                 <strong>
                     {{ getUserName(ticketProfile.deletePerformer) }}
@@ -103,7 +103,7 @@
         *ngIf="ticketsPermissionsService.isActionVisible('restore', ticketProfile, 'from_trash',null) && currentUser && ticketProfile.deletePerformer.id === currentUser.id"
     >
         <div class="ticket-notify__item-icon icon__ticket-status"></div>
-        <div>
+        <div class="qt-f-1">
             <div class="ticket-notify__item-title">
                 <strong>You</strong>
                 can
@@ -137,7 +137,7 @@
         *ngIf="ticketsPermissionsService.isActionVisible('restore', ticketProfile, 'from_spam',null)"
     >
         <div class="ticket-notify__item-icon icon__ticket-status"></div>
-        <div>
+        <div class="qt-f-1">
             <div
                 class="ticket-notify__item-title"
                 *ngIf="currentUser"
