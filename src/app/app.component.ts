@@ -298,6 +298,10 @@ export class AppComponent implements OnInit {
         $("#aside-left-panel").width("");
       } else {
         if (localStorage.getItem("width-left-aside") && Number(localStorage.getItem("width-left-aside")) >= 280 && Number(localStorage.getItem("width-left-aside")) <= 560) $("#aside-left-panel").outerWidth(localStorage.getItem("width-left-aside"));
+        if (localStorage.getItem("width-left-aside") && Number(localStorage.getItem("width-left-aside")) < 280) {
+          $("#aside-left-panel").outerWidth(280);
+          localStorage.setItem("width-left-aside", "280");
+        }
         if (!localStorage.getItem("width-left-aside")) $("#aside-left-panel").outerWidth(280);
         if (this.appService.isMobile || (this.currentUser && this.currentUser.role === "SUPER_ADMIN") || this.state === 'help-center') {
           $("#aside-left-panel").width("auto");
