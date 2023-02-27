@@ -74,6 +74,7 @@ export class LeftPanelComponent implements OnInit {
    * Initializes left panel. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
+    console.log("this.toggleLeftPanel", this.toggleLeftPanel);
     if (this.usersStateService.getCurrentUser()) this.getCurrentUser(this.usersStateService.getCurrentUser());
     this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.getCurrentUser(data)

@@ -291,9 +291,9 @@ export class AppComponent implements OnInit {
     })
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
       this.state = data;
-      console.log("this.state", this.state);
+      console.log("this.state 1", this.state);
       if (this.state === "ticket-detail") {
-        console.log("this.state", this.state);
+        console.log("this.state 2", this.state);
         this.leftPanelStateService.toggleLeftPanel(true);
         $("#aside-left-panel").width("");
       } else {
