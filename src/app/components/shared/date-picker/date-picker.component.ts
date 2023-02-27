@@ -29,6 +29,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   @Input() placement: string = "bottom";
   @Input() isDisabled: boolean = false;
   @Input() container: string;
+  @Input() dropdownClass = [];
   @Output() onChange: EventEmitter<ChangeDatePicker> = new EventEmitter();
   public datepicker: NgbDateStruct;
   public date: RecurringTicketsEditAsideDate = new RecurringTicketsEditAsideDate();
