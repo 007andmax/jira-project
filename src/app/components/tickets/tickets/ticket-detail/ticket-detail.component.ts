@@ -110,10 +110,8 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
-
     this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
       let ticket = new Ticket(data);
-      console.log("ticket", ticket);
       if (this.ticketProfile.id === ticket.id) {
         this.ticketProfile.update(data);
         this.elRef.nativeElement.querySelector("#ticket-note").innerHTML = this.ticketProfile.note;

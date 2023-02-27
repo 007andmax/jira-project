@@ -45,7 +45,6 @@ export class ServicesListComponent implements OnInit {
   public setEditItem(data) {
     this.editItem = data;
     this.elRef.nativeElement.querySelector('#dropdownServices').value = this.getNameOrDescription(this.editItem);
-    console.log("this.editItem", this.editItem);
     this.cd.detectChanges();
   }
 

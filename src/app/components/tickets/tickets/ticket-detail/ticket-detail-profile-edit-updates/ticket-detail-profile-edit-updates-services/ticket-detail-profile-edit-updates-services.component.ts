@@ -14,7 +14,6 @@ export class TicketDetailProfileEditUpdatesServicesComponent extends TicketProfi
   service: TicketProfileService;
   ngOnInit() {
     this.service = new TicketProfileService(this.update.services[0]);
-    console.log("this.currentService", this.currentService);
     this.currentCompany = this.companiesStateService.getCurrentCompany();
     this.getServices();
     this.ticketStateService.getOnGetServicesList().subscribe(data => {

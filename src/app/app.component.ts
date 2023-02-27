@@ -218,13 +218,11 @@ export class AppComponent implements OnInit {
     })
     this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       if (!this.appService.isMobile && this.state !== 'help-center') {
-        console.log("data", data);
         if (data) $("#aside-left-panel").width("");
         if (!data && localStorage.getItem("width-left-aside") && Math.ceil($("#aside-left-panel").width()) == (64 || 280)) $("#aside-left-panel").outerWidth(localStorage.getItem("width-left-aside"));
         if (!data && !localStorage.getItem("width-left-aside")) $("#aside-left-panel").outerWidth(280);
       }
       this.toggleLeftPanel = data;
-      console.log("this.toggleLeftPanel", this.toggleLeftPanel);
       this.cd.detectChanges();
     })
     this.leftPanelStateService.onToggleMobileLeftPanel.subscribe(data => {
@@ -265,10 +263,7 @@ export class AppComponent implements OnInit {
     })
     this.companiesState.onCurrentCompany.subscribe(data => {
       if (!this.currentUser) return;
-      console.log('this.router.url', this.router.url);
-      console.log("this.state", this.state);
       if (this.router.url.includes("tickets") && (this.state == "new-tickets" || this.state == '')) {
-        console.log("this.currentUser.startPage", this.currentUser.startPage);
         this.ticketsStateService.onChangeTypeFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
         this.ticketsStateService.onChangeLeftPanelFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
       }
@@ -291,9 +286,7 @@ export class AppComponent implements OnInit {
     })
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
       this.state = data;
-      console.log("this.state 1", this.state);
       if (this.state === "ticket-detail") {
-        console.log("this.state 2", this.state);
         this.leftPanelStateService.toggleLeftPanel(true);
         $("#aside-left-panel").width("");
       } else {

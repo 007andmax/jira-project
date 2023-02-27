@@ -19,7 +19,6 @@ export class TicketDetailAddAssignedUserComponent implements OnInit, OnDestroy {
   constructor(private usersStateService: UsersStateService,) { }
 
   ngOnInit() {
-    console.log("getUsersForAssign", this.getUsersForAssign());
     if (this.usersStateService.getAllUsers().length > 0) {
       this.userList = this.getUsersForAssign();
       this.assignedUser.resetList(this.userList);

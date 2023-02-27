@@ -130,9 +130,19 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
   }
   editTicket(id) {
     if (!this.appService.isMobile) {
-      this.ticketStateService.setTicketRoutingId(id);
-      const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/ticket/${id}`;
-      window.open(url, '_blank');
+      if (this.companiesStateService.getCurrentCompany().id == "73221c72-f87c-4519-8235-c4b57ad1cc19") {
+        this.ticketStateService.setTicketRoutingId(id);
+        const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/ticket/${id}`;
+        window.open(url, '_blank');
+      } else {
+        this.idEditTicket = id;
+        let ticket = this.tickets.find(item => item.id === id);
+        this.ticketsStateService.onOpenTicket();
+        this.ticketsService.getTicket(id).subscribe(data => {
+          data.setUserCompanies(ticket.userCompanies);
+          this.ticketsStateService.onEditTicket(data);
+        })
+      }
     } else {
       this.idEditTicket = id;
       let ticket = this.tickets.find(item => item.id === id);

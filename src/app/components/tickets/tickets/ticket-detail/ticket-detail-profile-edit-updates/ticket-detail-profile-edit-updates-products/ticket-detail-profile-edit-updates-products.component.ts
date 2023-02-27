@@ -14,7 +14,6 @@ export class TicketDetailProfileEditUpdatesProductsComponent extends TicketProfi
   product: TicketProfileProduct = new TicketProfileProduct();
   ngOnInit() {
     this.product = new TicketProfileProduct(this.update.products[0]);
-    console.log("this.product", this.product);
   }
   public selectProduct(item, taxesDropDown) {
     if (item) {

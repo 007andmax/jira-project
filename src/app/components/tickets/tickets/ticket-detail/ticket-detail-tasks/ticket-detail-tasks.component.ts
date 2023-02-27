@@ -50,7 +50,6 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnUsers);
     let changeTicketTasks = this.ticketsRealTimeService.changeTicketTasks.subscribe(data => {
-      console.log("data", data);
       if (data.action == "TASK_EDITED") {
         let index = this.list.findIndex(item => item.id == data.data.id);
         this.list[index] = new TicketProfileTask(data.data);

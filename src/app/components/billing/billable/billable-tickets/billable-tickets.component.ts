@@ -18,6 +18,7 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { TicketStateService } from 'src/app/components/tickets/tickets/ticket-edit-aside/services/ticket-state.service';
 
 @Component({
   selector: 'billable-tickets',
@@ -46,6 +47,7 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
     private toastrService: ToastrService,
     private appStateService: AppStateService,
     private permissionsService: PermissionsService,
+    private ticketStateService: TicketStateService,
     public cd: ChangeDetectorRef,) { }
 
 
@@ -106,10 +108,16 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
 
   }
   editTicket(id) {
-    this.ticketsStateService.onOpenTicket();
-    this.ticketsService.getTicket(id).subscribe(data => {
-      this.ticketsStateService.onEditTicket(data);
-    })
+    if (this.companiesStateService.getCurrentCompany().id == "73221c72-f87c-4519-8235-c4b57ad1cc19") {
+      this.ticketStateService.setTicketRoutingId(id);
+      const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/ticket/${id}`;
+      window.open(url, '_blank');
+    } else {
+      this.ticketsStateService.onOpenTicket();
+      this.ticketsService.getTicket(id).subscribe(data => {
+        this.ticketsStateService.onEditTicket(data);
+      })
+    }
   }
   setSelectedTickets(listIds) {
     this.billableProfile.tickets.forEach(item => {

@@ -19,7 +19,6 @@ export class TicketDetailProfileEditUpdatesHeaderComponent implements OnInit {
 
   ngOnInit() {
     this.listTechUsers = this.getUsersForUpdate();
-    console.log(this.update);
   }
   getUsersForUpdate() {
     let userList = this.usersStateService.getAllUsers().sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?

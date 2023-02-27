@@ -74,7 +74,6 @@ export class LeftPanelComponent implements OnInit {
    * Initializes left panel. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-    console.log("this.toggleLeftPanel", this.toggleLeftPanel);
     if (this.usersStateService.getCurrentUser()) this.getCurrentUser(this.usersStateService.getCurrentUser());
     this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.getCurrentUser(data)
@@ -269,7 +268,6 @@ export class LeftPanelComponent implements OnInit {
     this.leftPanelStateService.toggleLeftPanel(false);
   }
   onToggleLeftPanel() {
-    console.log("onToggleLeftPanel");
     this.toggleLeftPanel = !this.toggleLeftPanel;
     this.leftPanelStateService.toggleLeftPanel(this.toggleLeftPanel);
     if (!this.cd['destroyed']) {
@@ -277,7 +275,6 @@ export class LeftPanelComponent implements OnInit {
     }
   }
   onHideLeftPanel() {
-    console.log("onHideLeftPanel");
     this.toggleLeftPanel = true;
     this.leftPanelStateService.toggleLeftPanel(this.toggleLeftPanel);
     if (!this.cd['destroyed']) {

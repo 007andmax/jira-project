@@ -114,9 +114,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   */
   private oninitreset() {
     let reset = this.stateDatePicker.getOnReset().subscribe((data) => {
-      console.log("this.sericeDatePicker.getDateForDatePicker(null)", new Date(this.editDate));
       if (this.editMode) this.setEditDate(this.editDate);
-      //  this.selectDate(this.sericeDatePicker.getDateForDatePicker(null));
     })
     this.sericeDatePicker.addSubscription(reset);
   }

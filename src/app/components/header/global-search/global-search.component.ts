@@ -84,9 +84,16 @@ export class GlobalSearchComponent implements OnInit {
     }
     if (item.type === 'TICKETS') {
       if (!this.appService.isMobile) {
-        this.ticketStateService.setTicketRoutingId(item.id);
-        const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/ticket/${item.id}`;
-        window.open(url, '_blank');
+        if (this.companiesStateService.getCurrentCompany().id == "73221c72-f87c-4519-8235-c4b57ad1cc19") {
+          this.ticketStateService.setTicketRoutingId(item.id);
+          const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/ticket/${item.id}`;
+          window.open(url, '_blank');
+        } else {
+          this.ticketsStateService.onOpenTicket();
+          this.ticketsService.getTicket(item.id).subscribe(data => {
+            this.ticketsStateService.onEditTicket(data);
+          })
+        }
       } else {
         this.ticketsStateService.onOpenTicket();
         this.ticketsService.getTicket(item.id).subscribe(data => {

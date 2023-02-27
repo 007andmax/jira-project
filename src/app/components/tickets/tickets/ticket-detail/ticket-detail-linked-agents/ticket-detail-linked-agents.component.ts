@@ -28,7 +28,6 @@ export class TicketDetailLinkedAgentsComponent extends PasswordManagerLinkedComp
       })
       this.devicesList.sort((a, b) => (`${a.name}`.toLowerCase() > `${b.name}`.toLowerCase()) ?
         1 : ((`${b.name}`.toLowerCase() > `${a.name}`.toLowerCase()) ? -1 : 0));
-      console.log("this.devicesList", this.devicesList);
     }
   }
   public onSearch(event) {

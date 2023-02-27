@@ -60,10 +60,7 @@ export class TicketDetailProfileFormUpdateComponent extends TicketProfileFormUpd
     this.sub.add(onChangeAssignedUser);
     if (this.tab === 'NOTE' && this.noteList) this.noteList.onGetNoteList();
     this.ticketProfileFormUpdate.setType(this.tab);
-    //   console.log($(".ticket-detail-page-content__body").width() + 50);
-    console.log($(".ticket-detail-page-content__body").offset());
     $("ticket-detail-profile-form-update").css({ left: $(".ticket-detail-page-content__body").offset().left - 64 });
-    //  $("ticket-detail-profile-form-update").width($(".ticket-detail-page-content__body").width() + 50);
     window.addEventListener('resize', this.resize);
   }
   resize = () => {
@@ -72,7 +69,6 @@ export class TicketDetailProfileFormUpdateComponent extends TicketProfileFormUpd
 
 
   onUpdateTicket(data) {
-    console.log("onUpdateTicket");
     this.updateBtn.setDisabled(true);
     this.isUpdate = true;
     this.ticketsService.updateTicket(data).subscribe(data => {

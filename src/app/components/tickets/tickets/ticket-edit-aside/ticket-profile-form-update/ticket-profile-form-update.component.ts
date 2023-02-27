@@ -210,8 +210,6 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     }
     if (this.tab === "SERVICE") {
       this.onChangeServices(this.selectServices.getSelectedServices());
-      console.log("this.selectServices.onValidateServices()", this.selectServices.onValidateServices());
-      console.log("this.ticketProfileFormUpdate.isValidateService()", this.ticketProfileFormUpdate.isValidateService());
       if (!this.selectServices.onValidateServices() || !this.ticketProfileFormUpdate.isValidateService()) return;
       this.onUpdateTicket(this.ticketProfileFormUpdate.getDataForUpdateService());
     }
@@ -319,7 +317,6 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     this.ticketProfileFormUpdate.setProducts(data);
   }
   onChangeServices(data) {
-    console.log("data", data);
     this.ticketProfileFormUpdate.setServices(data);
   }
   onToggleAddUpdateUser() {

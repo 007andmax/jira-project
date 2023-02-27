@@ -26,13 +26,10 @@ export class TicketDetailChangeStatusComponent extends TicketChangeStatusCompone
   }
   setList() {
     this.list = [];
-    console.log("this.ticketsStatus", this.ticketsStatus);
     this.ticketsStatus.forEach(item => {
       if (item.name !== 'COMPLETED' && item.name !== 'UNASSIGNED') this.list.push(new TitleListType(this.parseStatus(item.name), item.name));
-
     })
     this.selectedTicketStatus = this.list.find(item => item.type == (this.ticketProfile.status === null ? "UNASSIGNED" : this.ticketProfile.status));
-    console.log("selectedTicketStatus", this.selectedTicketStatus);
   }
   changeTicketStatus(item) {
     this.ticketsService.changeStatus(this.ticketProfile.id, item.type).subscribe((data: any) => {

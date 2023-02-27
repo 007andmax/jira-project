@@ -42,7 +42,6 @@ export class PasswordManagerLinkedComponent implements OnInit {
     private usersStateService: UsersStateService,) { }
 
   ngOnInit() {
-    console.log("this.selectedCompanyId", this.selectedCompanyId);
     if (this.devicesStateService.getAllDevices()) {
       this.preloader = false;
       if (this.selectedCompanyId) this.onSelectCompany(this.selectedCompanyId);
@@ -86,7 +85,6 @@ export class PasswordManagerLinkedComponent implements OnInit {
       this.devicesList.sort((a, b) => (`${a.name}`.toLowerCase() > `${b.name}`.toLowerCase()) ?
         1 : ((`${b.name}`.toLowerCase() > `${a.name}`.toLowerCase()) ? -1 : 0));
       if (!this.isInitGetGadgets) this.getGadgets();
-      console.log("this.devicesList", this.devicesList);
     }
     this.validate.resetCompany();
   }

@@ -47,7 +47,6 @@ export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
   public onChangeType(data) {
     this.ticketProfileFormUpdate.setNoteType(data);
     this.usersForUpdate = this.getUsersForUpdate(this.ticketProfileFormUpdate.noteType);
-    console.log("this.usersForUpdate", this.usersForUpdate);
     this.addAssignedUser.resetList(this.usersForUpdate);
   }
   getUsersForUpdate(type) {

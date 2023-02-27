@@ -1,11 +1,13 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
+import { TicketStateService } from 'src/app/components/tickets/tickets/ticket-edit-aside/services/ticket-state.service';
 import { ARCHIVE_QUOTE } from 'src/app/const/confirm';
 import { QUOTE_MODAL_ACTION_LIST } from 'src/app/const/quote';
 import { ModalQuoteComponent } from 'src/app/services/modal/modal-quote/modal-quote.component';
 import { QuoteService } from 'src/app/services/quote/quote.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toastr-progress-state.service';
@@ -44,6 +46,8 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     private quoteStateService: QuoteStateService,
     private confirmStateService: ConfirmStateService,
     private toastrProgressStateService: ToastrProgressStateService,
+    private companiesStateService: CompaniesStateService,
+    private ticketStateService: TicketStateService,
     private quoteServices: QuoteService,) { }
 
   ngOnInit() {
@@ -150,10 +154,17 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     }
   }
   openTikcet(id) {
-    this.ticketsStateService.onOpenTicket();
-    this.ticketsService.getTicket(id).subscribe(data => {
-      this.ticketsStateService.onEditTicket(data);
-    })
+    if (this.companiesStateService.getCurrentCompany().id == "73221c72-f87c-4519-8235-c4b57ad1cc19") {
+      this.ticketStateService.setTicketRoutingId(id);
+      const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/ticket/${id}`;
+      window.open(url, '_blank');
+    } else {
+      this.ticketsStateService.onOpenTicket();
+      this.ticketsService.getTicket(id).subscribe(data => {
+        this.ticketsStateService.onEditTicket(data);
+      })
+    }
+
   }
   goToQuoteEdit(quote) {
     this.quoteStateService.setEdit(quote);
