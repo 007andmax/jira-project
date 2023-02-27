@@ -268,6 +268,7 @@ export class LeftPanelComponent implements OnInit {
     this.leftPanelStateService.toggleLeftPanel(false);
   }
   onToggleLeftPanel() {
+    console.log("onToggleLeftPanel");
     this.toggleLeftPanel = !this.toggleLeftPanel;
     this.leftPanelStateService.toggleLeftPanel(this.toggleLeftPanel);
     if (!this.cd['destroyed']) {
@@ -275,6 +276,7 @@ export class LeftPanelComponent implements OnInit {
     }
   }
   onHideLeftPanel() {
+    console.log("onHideLeftPanel");
     this.toggleLeftPanel = true;
     this.leftPanelStateService.toggleLeftPanel(this.toggleLeftPanel);
     if (!this.cd['destroyed']) {
