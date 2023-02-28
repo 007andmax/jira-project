@@ -135,14 +135,15 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
 
 
       if (newChange.action == 'UPDATE_SAVED' || newChange.action == 'UPDATE_CREATED' || newChange.action === 'UPDATE_EXPENSE_DELETED') {
-        let update = this.ticketProfile.updates.find(item => item.id === newChange.data.id);
+        let update = this.ticketProfile.updates.find(item => item.id === newChange.data.id),
+          attachments = newChange.data.attachments;
         if (update) {
           this.ticketProfile.setUpdate(newChange.data);
         } else {
           this.ticketProfile.addUpdate(newChange.data);
         }
         this.detailHeader.resetClosedBtn();
-        this.ticketProfile.refreshAttachments();
+        this.ticketProfile.refreshAttachments(attachments);
         this.cd.detectChanges();
         this.datePickerStateService.onInitReset();
       }
@@ -238,7 +239,9 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       })
     }
   }
-  onChangeTags(data) {
+  onChangeTags(data, remove) {
+    console.log("remove", remove);
+    let textNotification = (remove == true) ? "The tag has been successfully removed" : "The tag has been successfully added";
     this.ticketProfile.tags = data;
     let tags = this.ticketProfile.tags.map(item => {
       return {
@@ -248,7 +251,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
         usedCounter: item.usedCounter,
       }
     })
-    this.ticketsService.addTags(this.ticketProfile.id, tags).subscribe(res => {
+    this.ticketsService.addTags(this.ticketProfile.id, tags, textNotification).subscribe(res => {
 
     })
   }

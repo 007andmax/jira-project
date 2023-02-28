@@ -88,8 +88,9 @@ export class TicketProfile {
             })
         }
     }
-    public refreshAttachments() {
+    public refreshAttachments(attachments) {
         this.attachments = [];
+        console.log("this.updates", this.updates);
         this.updates.forEach(item => {
             if (item.attachments && item.attachments.length > 0) {
                 item.attachments.forEach(attachment => {

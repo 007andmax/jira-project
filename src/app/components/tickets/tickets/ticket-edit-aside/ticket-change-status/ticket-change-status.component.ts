@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { TicketProfile } from '../../class/ticket-profile';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { TitleListType } from '../../tickets-header/class/title-list-type';
@@ -46,6 +46,7 @@ export class TicketChangeStatusComponent implements OnInit, OnDestroy {
   }
   changeTicketStatus(item) {
     this.ticketsService.changeStatus(this.ticketProfile.id, item.name).subscribe((data: any) => {
+      this.ticketProfile.status = item.name;
       this.toastrService.success(`The tickets “${this.ticketProfile.number}” status has been changed`);
       this.appStateService.changeDetectorRef();
     })

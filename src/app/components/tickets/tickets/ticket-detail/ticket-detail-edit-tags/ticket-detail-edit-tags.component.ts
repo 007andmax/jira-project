@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
 import { TicketEditTagsComponent } from '../../ticket-edit-aside/ticket-edit-tags/ticket-edit-tags.component';
 
 @Component({
@@ -8,15 +8,17 @@ import { TicketEditTagsComponent } from '../../ticket-edit-aside/ticket-edit-tag
 })
 export class TicketDetailEditTagsComponent extends TicketEditTagsComponent {
 
-
+  @Output() tagsRemove = new EventEmitter();
   public selected(tag): void {
     // this.init = true;
     let find = this.selectedTag.find(item => item.id === tag.id);
     if (!find) {
       this.selectedTag.push(tag);
+      this.isChangeInput = false;
+      this.tagsChange.emit(this.selectedTag);
+    } else {
+      this.isChangeInput = false;
     }
-    this.isChangeInput = false;
-    this.tagsChange.emit(this.selectedTag);
   }
   @HostListener('document:click', ['$event'])
   clickout(event) {
@@ -106,5 +108,11 @@ export class TicketDetailEditTagsComponent extends TicketEditTagsComponent {
       this.elRef.nativeElement.querySelector("#search-dropdown").value = "";
     }
   }
-
+  public remove(index): void {
+    if (index >= 0) {
+      this.selectedTag.splice(index, 1);
+      this.tagsRemove.emit(this.selectedTag);
+    }
+    //   this.init = true;
+  }
 }

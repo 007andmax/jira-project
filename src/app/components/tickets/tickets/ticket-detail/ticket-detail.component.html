@@ -206,7 +206,8 @@
                 ></ticket-detail-add-assigned-user>
                 <ticket-detail-edit-tags
                     [selectedTag]="ticketProfile.tags"
-                    (tagsChange)="onChangeTags($event)"
+                    (tagsChange)="onChangeTags($event,false)"
+                    (tagsRemove)="onChangeTags($event,true)"
                 ></ticket-detail-edit-tags>
                 <ticket-detail-linked-agents
                     [ticketProfile]="ticketProfile"

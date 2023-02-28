@@ -249,8 +249,13 @@ export class TicketsService {
     return this.http.put(this.apiUrl + `v2/tickets/${id}/assign`, data);
   }
 
-  public addTags(id, tags) {
-    return this.http.put(this.apiUrl + `tags?ticketId=${id}`, tags)
+  public addTags(id, tags, textNotification) {
+    return this.http.put(this.apiUrl + `tags?ticketId=${id}`, tags).pipe(
+      tap(data => {
+        this.toastrService.success(textNotification);
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public addAssignUsers(id, ids) {
     return this.http.put(this.apiUrl + `v2/tickets/${id}/assign`, { value: ids.join(",") })
