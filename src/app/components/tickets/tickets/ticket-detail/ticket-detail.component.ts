@@ -143,7 +143,11 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
           this.ticketProfile.addUpdate(newChange.data);
         }
         this.detailHeader.resetClosedBtn();
-        this.ticketProfile.refreshAttachments(attachments);
+        if (attachments && attachments.length) {
+          for (var i = 0; i < attachments.length; i++) {
+            this.ticketProfile.addAttachment(attachments[i]);
+          }
+        }
         this.cd.detectChanges();
         this.datePickerStateService.onInitReset();
       }
