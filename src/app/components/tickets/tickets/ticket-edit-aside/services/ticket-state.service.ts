@@ -29,11 +29,18 @@ export class TicketStateService {
   taskForRemove: TicketProfileTask;
   attachmentForRemove: TicketProfileAttachment;
   updateForEdit: TicketProfileUpdate;
+  listTasks: Array<TicketProfileTask> = [];
   constructor(private serviceAgreementsService: ServiceAgreementsService,
     private recurringService: RecurringService, private ticketsRealTimeService: TicketsRealTimeService, private websocketService: WebsocketService) {
     this.ticketsRealTimeService.changeTicket.subscribe(newChange => {
       this.changeUpdatesTicket.emit(newChange);
     });
+  }
+  public setListTasks(data) {
+    this.listTasks = data;
+  }
+  public getListTasks() {
+    return this.listTasks;
   }
   public editUpdateByFrom(data) {
     this.updateForEdit = data;

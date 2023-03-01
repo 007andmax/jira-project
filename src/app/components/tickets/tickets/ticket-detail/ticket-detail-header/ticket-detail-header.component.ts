@@ -11,6 +11,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CurrentUser } from 'src/class/current-user/current-user';
 import { TicketProfile } from '../../class/ticket-profile';
 import { TicketsListService } from '../../services/tickets-list.service';
+import { TicketStateService } from '../../ticket-edit-aside/services/ticket-state.service';
 import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tickets-permissions.service';
 
 @Component({
@@ -41,6 +42,7 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     public ticketsService: TicketsService,
+    private ticketStateService: TicketStateService,
     public ticketsListService: TicketsListService,) { }
 
 
@@ -82,13 +84,17 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
     if (this.ticketProfile.updates.length === 0) return true;
     let completeServices = true;
     let completeProducts = true;
+    let completeTasks = true;
     this.ticketProfile.updates.forEach(update => {
       if (update.type !== 'MIXED') {
         if (completeServices) completeServices = (update.services.find(item => !item.completed) ? false : true);
         if (completeProducts) completeProducts = (update.products.find(item => !item.completed) ? false : true);
       }
     });
-    return completeServices && completeProducts;
+    this.ticketStateService.getListTasks().forEach(item => {
+      if (item.status != "COMPLETED") completeTasks = false;
+    })
+    return completeServices && completeProducts && completeTasks;
   }
   close() {
     if (!this.checkClose()) return;

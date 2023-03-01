@@ -4,6 +4,7 @@
     [container]="container"
     [autoClose]="'outside'"
     [placement]="placement"
+    (openChange)="onCloseDropDown($event)"
 >
     <div
         class="device-user pointer"
@@ -156,8 +157,8 @@
                                     <div class="qt-input-search">
                                         <input
                                             placeholder="Search Users"
-                                            value
                                             autocomplete="off"
+                                            id="search-user"
                                             (input)="onSearch($event)"
                                         >
                                     </div>
@@ -184,7 +185,7 @@
                                             <div
                                                 class="user-item-user-avatar"
                                                 [textContent]="getAssignedUserNameForAvatar(user)"
-                                                [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'cover'}"
+                                                [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'contain'}"
                                             ></div>
                                             <div
                                                 class="user-item-user-name"
@@ -198,49 +199,6 @@
                                                 *ngIf="isSelected(user)"
                                                 class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
                                             ></i>
-
-
-
-
-
-
-                                            <!-- <a
-                                                href="javascript:void(0)"
-                                                [id]="user.id"
-                                                class="dropdown-link"
-                                            >
-                                                <div
-                                                    class="default-user-avatar avatar-background-color-odd ng-scope"
-                                                    *ngIf="!user.avatar"
-                                                >
-                                                    <span
-                                                        class="qt-color-white qt-fs-16"
-                                                        [textContent]="(user.firstName) ? user.firstName[0].toUpperCase() : ''"
-                                                    ></span>
-                                                </div>
-                                                <div
-                                                    class="default-user-avatar avatar-background-color-odd ng-scope"
-                                                    *ngIf="user.avatar"
-                                                >
-                                                    <img
-                                                        ng-if="user.avatar"
-                                                        class="qt-circle avatar-26"
-                                                        style="margin: 0;"
-                                                        [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
-                                                        alt="..."
-                                                    >
-                                                </div>
-                                                <span>
-                                                    <p
-                                                        class="dropdown-avatar__name"
-                                                        [textContent]="user.firstName + ' ' + user.lastName"
-                                                    ></p>
-                                                    <p
-                                                        class="dropdown-avatar__email"
-                                                        [textContent]="user.primaryEmail"
-                                                    ></p>
-                                                </span>
-                                            </a> -->
                                         </div>
                                     </ng-template>
                                 </div>
@@ -268,8 +226,8 @@
                                 <input
                                     class="qt-input-search__page-settings-input"
                                     placeholder="Search Users"
-                                    value
                                     autocomplete="off"
+                                    id="search-user"
                                     (input)="onSearch($event)"
                                 >
                             </div>

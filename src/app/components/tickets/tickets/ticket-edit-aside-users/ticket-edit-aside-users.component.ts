@@ -161,9 +161,9 @@ export class TicketEditAsideUsersComponent implements OnInit, OnDestroy {
     }
     if (user.id) {
       return `url(${'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
-        '')}) 0% 0% / cover no-repeat`
+        '')}) 0% 0% / contain no-repeat`
     } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
-      return `url(/file/${(user.avatar.origin.id)}.jpg) 0% 0% / cover no-repeat`;
+      return `url(/file/${(user.avatar.origin.id)}.jpg) 0% 0% / contain no-repeat`;
     } else {
       return '/company/default/logo.jpg';
     }

@@ -80,7 +80,7 @@
         *ngFor="let item of list; let i = index"
         appClickOtside
         [init]="item.isInitEdit"
-        [ngClass]="['edit-ticket-container-' + i,item.isInitEdit ? '--selected' : '',item.status == 'COMPLETED' ? '--completed' : '']"
+        [ngClass]="['edit-ticket-container-' + i,item.status == 'COMPLETED' ? '--completed' : '']"
         [class]="'.edit-ticket-container-' + i"
         (onOutSide)="onEditTicketTask(item)"
     >
