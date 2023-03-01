@@ -11,32 +11,36 @@
         ></div>
         <ul class="cps-block__nav">
             <li
-                class="cps-block__nav-item icon__chat"
+                class="cps-block__nav-item"
                 [ngClass]="{'active':tab === 'NOTE' }"
                 (click)="setTab('NOTE')"
             >
+                <span class="icon__chat qt-sz-16 qt-mr-8 qt-dib"></span>
                 Chat
             </li>
             <li
-                class="cps-block__nav-item icon__products"
+                class="cps-block__nav-item"
                 [ngClass]="{'active':tab === 'PRODUCT' }"
                 (click)="setTab('PRODUCT')"
             >
-                Products
+              <span class="icon__products qt-sz-16 qt-mr-8 qt-dib"></span>
+              Products
             </li>
             <li
-                class="cps-block__nav-item icon__service"
+                class="cps-block__nav-item"
                 [ngClass]="{'active':tab === 'SERVICE' }"
                 (click)="setTab('SERVICE')"
             >
+                <span class="icon__service qt-sz-16 qt-mr-8 qt-dib"></span>
                 Service
             </li>
             <li
-                class="cps-block__nav-item icon__quick-support"
+                class="cps-block__nav-item"
                 [ngClass]="{'active':tab === 'QUICK_SUPPORT' }"
                 (click)="setTab('QUICK_SUPPORT')"
                 *ngIf="getPermissions('ALLOW_QUICK_CONNECT')"
             >
+                <span class="icon__quick-support qt-sz-16 qt-mr-8 qt-bg-contain qt-dib"></span>
                 Quick Support
             </li>
         </ul>

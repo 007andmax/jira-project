@@ -17,7 +17,7 @@
             [hidden]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
             class="qt-button qt-ml-12"
             placement="left"
-            ngbTooltip="You cannot close the ticket. It contains incomplete products / services."
+            ngbTooltip="You cannot close the ticket. It contains incomplete products / services / tasks."
             [disableTooltip]="checkClose()"
             appDisabledBtn
             #update_closeBtn="disabled"

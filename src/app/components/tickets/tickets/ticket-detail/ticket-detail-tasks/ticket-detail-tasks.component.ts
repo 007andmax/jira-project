@@ -59,6 +59,7 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
         let index = this.list.findIndex(item => item.id == data.data);
         this.list.splice(index, 1);
       }
+      this.ticketStateService.setListTasks(this.list);
     })
     this.sub.add(changeTicketTasks);
     let date = new Date();
@@ -67,6 +68,7 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
   public getTicketTasks(id) {
     this.ticketsService.getTicketTasks(id).subscribe((data: any) => {
       this.list = data.map(item => new TicketProfileTask(item))
+      this.ticketStateService.setListTasks(this.list);
     })
   }
   setStatus(item, status) {
