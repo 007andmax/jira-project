@@ -6,6 +6,7 @@ import { ChangeDatePicker } from './class/change-date-picker';
 import { NgbDatepickerNavigateEvent } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker';
 import { DatePickerService } from './services/date-picker.service';
 import { TYPE_INPUT, FORMAT_DATE_1 } from 'src/app/const/date-picker';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-date-picker',
@@ -27,6 +28,8 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   @Input() maxDate: number = new Date().getTime();
   @Input() placement: string = "bottom";
   @Input() isDisabled: boolean = false;
+  @Input() container: string;
+  @Input() dropdownClass = [];
   @Output() onChange: EventEmitter<ChangeDatePicker> = new EventEmitter();
   public datepicker: NgbDateStruct;
   public date: RecurringTicketsEditAsideDate = new RecurringTicketsEditAsideDate();
@@ -104,6 +107,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   }
 
   public geTextDate() {
+    if (this.type === 'DETAIL_TICKET' || this.type === 'DETAIL_TICKET_UPDATE') return moment(new Date(this.date.getTitle())).format('DD MMM, YYYY');
     return this.date.getTitle();
   }
   /**
@@ -111,7 +115,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   */
   private oninitreset() {
     let reset = this.stateDatePicker.getOnReset().subscribe((data) => {
-      this.selectDate(this.sericeDatePicker.getDateForDatePicker(null));
+      if (this.editMode) this.setEditDate(this.editDate);
     })
     this.sericeDatePicker.addSubscription(reset);
   }

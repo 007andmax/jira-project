@@ -29,3 +29,15 @@
     border: none;
     background-color: $white;
 }
+.detail-ticket-txt {
+  position: absolute;
+  right: 35px;
+  width: max-content;
+  display: block;
+  top: 2px;
+}
+.detail-ticket-date-picker {
+  .qt-input-block__input {
+    border-color: #D0D5DD !important;
+  }
+}

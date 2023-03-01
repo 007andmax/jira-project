@@ -288,7 +288,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
         usedCounter: item.usedCounter,
       }
     })
-    this.ticketsService.addTags(this.ticketProfile.id, tags).subscribe(res => {
+    this.ticketsService.addTags(this.ticketProfile.id, tags, false).subscribe(res => {
 
     })
   }

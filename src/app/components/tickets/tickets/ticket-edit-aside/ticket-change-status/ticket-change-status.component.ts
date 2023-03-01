@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { TicketProfile } from '../../class/ticket-profile';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { TitleListType } from '../../tickets-header/class/title-list-type';
@@ -21,10 +21,10 @@ export class TicketChangeStatusComponent implements OnInit, OnDestroy {
   new TitleListType('On Hold', 'ON_HOLD')];
   ticketsStatus: Array<TicketStatus> = [];
   sub: Subscription = new Subscription();
-  constructor(private ticketsStateService: TicketsStateService,
-    private toastrService: ToastrService,
-    private appStateService: AppStateService,
-    private ticketsService: TicketsService,) { }
+  constructor(public ticketsStateService: TicketsStateService,
+    public toastrService: ToastrService,
+    public appStateService: AppStateService,
+    public ticketsService: TicketsService,) { }
 
 
   ngOnInit() {
@@ -40,12 +40,13 @@ export class TicketChangeStatusComponent implements OnInit, OnDestroy {
   getStyleStatus(name) {
     let find = this.ticketsStatus.find(item => item.name === name);
     return {
-      'border-color': (this.listColors) ? this.listColors[find.color].textColor : null,
-      'background-color': (this.listColors) ? this.listColors[find.color].borderColor : null, 'color': (this.listColors) ? this.listColors[find.color].textColor : null
+      'border-color': (this.listColors && find && this.listColors[find.color]) ? this.listColors[find.color].textColor : null,
+      'background-color': (this.listColors && find && this.listColors[find.color]) ? this.listColors[find.color].borderColor : null, 'color': (this.listColors && find && this.listColors[find.color]) ? this.listColors[find.color].textColor : null
     }
   }
   changeTicketStatus(item) {
     this.ticketsService.changeStatus(this.ticketProfile.id, item.name).subscribe((data: any) => {
+      this.ticketProfile.status = item.name;
       this.toastrService.success(`The tickets “${this.ticketProfile.number}” status has been changed`);
       this.appStateService.changeDetectorRef();
     })
@@ -54,6 +55,8 @@ export class TicketChangeStatusComponent implements OnInit, OnDestroy {
   parseStatus(name) {
     if (name === "IN_PROGRESS") return "In progress";
     if (name === "ON_HOLD") return "On hold";
+    if (name === "COMPLETED") return "Completed";
+    if (name === "UNASSIGNED") return "Unassigned";
     return name;
   }
   ngOnDestroy(): void {

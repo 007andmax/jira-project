@@ -1,0 +1,322 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
+
+.cps-block {
+    padding: 20px 40px;
+    border-top: 1px solid $gray-100--old;
+
+    @media (max-width: 767px) {
+        padding: 0;
+        border: none;
+    }
+
+    &__header {
+        margin-bottom: 20px;
+
+        @media (max-width: 767px) {
+            position: relative;
+            height: 56px;
+            background-color: $primary-2;
+            padding: 0 18px;
+            margin-bottom: 4px;
+        }
+    }
+
+    &__photo {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-size: cover !important;
+        background-position: center !important;
+        margin-right: 18px;
+
+        @media (max-width: 767px) {
+            display: none;
+        }
+    }
+
+    &__nav {
+        padding: 0;
+        display: flex;
+        list-style: none;
+
+        @media (max-width: 767px) {
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0;
+        }
+    }
+
+    &__nav-item {
+        @include body-m__sb;
+        margin-right: 30px;
+        color: $gray-800--old;
+        cursor: pointer;
+        padding-left: 25px;
+        background-repeat: no-repeat;
+        background-size: 20px;
+        background-position: center left;
+        position: relative;
+
+        @media (max-width: 767px) {
+            @include body-l__sb;
+            background: none;
+            display: none;
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        &.active {
+            color: $primary-1;
+
+            @media (max-width: 767px) {
+                color: $white;
+                display: block;
+            }
+
+            &:before {
+                content: "";
+                position: absolute;
+                bottom: -10px;
+                height: 3px;
+                width: calc(100% + 5px);
+                background: $primary-1;
+                left: 0;
+                border-radius: 100px;
+
+                @media (max-width: 767px) {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    &__content-textarea {
+        min-height: 208px;
+        max-height: 300px;
+        width: 100%;
+        border-radius: 4px;
+        border: none;
+        overflow: auto;
+        outline: none;
+        padding: 16px;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        color: $gray-900;
+
+        &:last-child {
+            display: block !important;
+        }
+
+        &::placeholder {
+            opacity: 1;
+            color: $gray-400;
+        }
+    }
+
+    .support-timeline-status__line {
+        width: 140px;
+    }
+
+    &__support-message {
+        width: 100%;
+        font-size: 12px;
+        color: $primary-2;
+        line-height: 1.33;
+        border: 1px solid #fff1d6;
+        height: 24px;
+        margin-top: 8px;
+        display: flex;
+        align-items: center;
+        border-radius: 4px;
+        background-color: $gray-100--old;
+        padding: 4px 10px;
+    }
+
+    &__create-connection-btn {
+        width: fit-content;
+    }
+}
+.editable-chat {
+    max-height: 500px;
+    border: unset;
+}
+.files-list {
+  display: flex;
+  flex-wrap: wrap;
+  border-top: 1px solid $gray-200;
+  padding: 4px 16px;
+  position: relative;
+
+  &__title {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: $gray-500;
+    padding: 13px 0;
+  }
+
+ .single-file {
+    display: flex;
+    padding: 8px;
+    justify-content: space-between;
+    align-items: center;
+    border: solid 1px $gray-200;
+    margin: 4px;
+    position: relative;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    color: $gray-900;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+    border-radius: 6px;
+  }
+  .size {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: $gray-500;
+    margin-left: 2px;
+  }
+  /deep/ .progress-cont {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background-color: transparent;
+    border-radius: 0 0 6px 6px;
+    overflow: hidden;
+
+    .progress {
+      background-color: $green-600 !important;
+      position: static;
+    }
+  }
+}
+
+.fileover {
+    animation: shake 1s;
+    animation-iteration-count: infinite;
+    position: relative;
+    z-index: 999;
+
+    .file-background {
+        display: block;
+    }
+}
+
+.file-background-show {
+    .file-background {
+        display: block;
+    }
+}
+
+.file-background {
+    display: none;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+
+    .file-background-footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 3;
+
+        p {
+            text-align: center;
+            font-weight: bold;
+        }
+    }
+
+    .file-background-mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+        filter: blur(4px);
+        display: block;
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+}
+
+/* Shake animation */
+@keyframes shake {
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+
+    20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
+}
+
+[contenteditable="true"]:empty:before {
+    content: attr(placeholder);
+    pointer-events: none;
+    display: block;
+    /* For Firefox */
+    color: $gray-400;
+}
+
+.icn-remove-old {
+  position: static;
+  transform: unset;
+  margin-left: 2px;
+  width: 12px;
+  height: 12px;
+}
+///deep/ .editable-description { // TODO check this style
+//  border-radius: 0;
+//  border: unset;
+//}

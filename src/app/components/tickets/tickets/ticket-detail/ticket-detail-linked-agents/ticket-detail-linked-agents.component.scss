@@ -1,0 +1,169 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
+@import "./src/assets/styles/mixin/dropdown";
+
+.device-user-wrap {
+    * {
+        width: 100%;
+    }
+}
+/deep/ ticket-detail-linked-agents .qt-input-block  .device-user {
+  &.has-placeholder:before {
+    content: unset;
+  }
+}
+.device-user {
+    outline: none;
+    min-height: 32px;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 8px;
+
+  @media (max-width: 767px) {
+    padding: 0 16px 14px 16px;
+  }
+}
+
+.select-wrapper {
+    @include dropdown-menu;
+    @include dropdown-content;
+    overflow: hidden;
+    width: 288px;
+    height: 235px;
+    left: unset;
+
+    .content {
+      padding: 2px 8px 0;
+    }
+
+    .qt-input-search {
+      margin: 8px 8px 0;
+      height: 36px;
+
+      input {
+        padding-left: 40px;
+        height: 100%;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: $gray-900;
+
+        &::placeholder {
+          color: $gray-400;
+        }
+      }
+    }
+
+    .dropdown-item {
+        @include dropdown-checkbox-item;
+        max-width: 100%;
+
+        .icn-remove-old {
+            margin: 2px 0 0 auto;
+        }
+    }
+
+    .content {
+        height: calc(100% - 45px);
+    }
+
+    .tab-wrapper {
+        display: flex;
+        padding: 0 20px;
+        justify-content: space-between;
+        border-bottom: 1px solid #dce0e6;
+
+        .tab {
+            cursor: pointer;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            border-bottom: 2px solid transparent;
+            color: $gray-800--old;
+            font-size: 13px;
+            transition: all 0.3s;
+            font-weight: $fw-bold;
+
+            &.active,
+            &:hover {
+                color: $primary-1;
+                border-bottom: 2px solid $primary-1;
+            }
+        }
+    }
+
+    .content {
+        >div {
+            .content-btn {
+                background: $primary-1;
+                border-radius: 4px;
+                padding: 4px 15px;
+                margin: 8px 10px;
+                color: $white;
+                cursor: pointer;
+            }
+
+            .content-header {
+                display: flex;
+                align-items: center;
+
+                input {
+                    padding: 4px 12px;
+                    height: 20px;
+                    width: 100%;
+                    outline: none;
+                    font-size: 13px;
+                    border: 1px solid $gray-800--old;
+                    border-radius: 4px;
+                }
+
+                >div {
+                    margin-left: 20px;
+                }
+            }
+        }
+    }
+}
+
+.selected-user {
+    border: 1px solid $gray-200;
+    border-radius: 6px;
+    padding: 8px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    background-color: $white;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+
+    i {
+        position: static;
+
+        //@media (max-width: 767px) { // TODO check this style
+        //    padding: 12px;
+        //    margin-left: 4px;
+        //    transform: translateY(0);
+        //}
+
+      &.icon__close--light-gray  {
+        margin-left: 4px;
+      }
+    }
+
+    .icon__devices-grey,
+    .icon__user-grey {
+        margin: 0 5px 0 0;
+    }
+}
+
+.gadget-wrap {
+    position: relative;
+
+    .icn-remove-old {
+        z-index: 9999;
+    }
+}
+
+.device-user.has-placeholder:before {
+    content: "Select agent";
+}

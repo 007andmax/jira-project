@@ -1,0 +1,52 @@
+<div
+    class="qt-df qt-ai-c visible-to-all-user-dropdown"
+    ngbDropdown
+>
+    <div class="button-globe qt-mr-8">
+        <i
+            *ngIf="type == 'PUBLIC'"
+            class="icon__globe qt-za-16 qt-sz-16 qt-bg-contain"
+        ></i>
+        <i
+            *ngIf="type == 'PRIVATE'"
+            class="icon__private qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"
+        ></i>
+    </div>
+    <span [textContent]="getText()"></span>
+    <i
+        class="icon__down-arrow qt-za-16 qt-sz-16 qt-bg-contain qt-ml-4 pointer"
+        ngbDropdownToggle
+    ></i>
+    <div
+        class="autocomplete-user-tags"
+        ngbDropdownMenu
+        aria-labelledby="dropdown"
+    >
+        <div
+            class="visible-users-item"
+            (click)="changeType('PUBLIC')"
+            ngbDropdownItem
+        >
+            <div class="icon__globe qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"></div>
+            <p>Public</p>
+            <span>Visible to all users</span>
+            <i
+                *ngIf="type == 'PUBLIC'"
+                class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
+            ></i>
+        </div>
+        <div
+            class="visible-users-item"
+            (click)="changeType('PRIVATE')"
+            ngbDropdownItem
+        >
+            <div class="icon__private qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"></div>
+            <p>Private</p>
+            <span>Visible to tech users only</span>
+            <i
+                *ngIf="type == 'PRIVATE'"
+                class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
+            ></i>
+        </div>
+    </div>
+</div>

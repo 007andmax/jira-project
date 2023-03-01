@@ -1,0 +1,102 @@
+<div class="ticket-updates__update-block qt-mb-16">
+    <div class="qt-df qt-ai-c qt-mb-16 ticket-updates__update-block__inner">
+        <div
+            class="ticket-updates__ticket-photo"
+            [textContent]="ticketsListService.getAssignedUserNameForAvatar(update.user)"
+            [ngStyle]="{'background': ticketsListService.getStyleAvatar(update.user)}"
+        ></div>
+        <div class="qt-f-1">
+            <div class="qt-mb-4">
+                <span
+                    class="ticket-updates__author"
+                    [textContent]="ticketsListService.getUserName(update.user)"
+                ></span>
+                <span class="ticket-updates__add-note">&nbsp;added a service</span>
+            </div>
+            <ticket-detail-profile-updates-service-header-info
+                *ngIf="update.services.length > 0"
+                [date]="update.createdAt"
+                [shares]="update.shares"
+                [service]="update.services[0]"
+            ></ticket-detail-profile-updates-service-header-info>
+        </div>
+        <div
+            class="qt-button-square-wrap"
+            *ngIf="!isBlockChange"
+            [ngClass]="classActions"
+        >
+            <div
+                class="qt-button-square qt-button-square__prepend pointer"
+                (click)="edit()"
+                *ngIf="!isIOSDevice() && update.services.length > 0"
+                (mouseenter)="editTooltip.show($event.target)"
+                (mouseleave)="editTooltip.hide()"
+            >
+                <div class="icon__edit qt-sz-16"></div>
+            </div>
+            <div
+                class="qt-button-square qt-button-square__prepend pointer"
+                (touchstart)="edit()"
+                *ngIf="isIOSDevice() && update.services.length > 0"
+                (mouseenter)="editTooltip.show($event.target)"
+                (mouseleave)="editTooltip.hide()"
+            >
+                <div class="icon__edit qt-sz-16"></div>
+            </div>
+            <div
+                class="qt-button-square qt-button-square__afterpend pointer"
+                (click)="removeService()"
+                *ngIf="update.services.length > 0"
+                (mouseenter)="deleteTooltip.show($event.target)"
+                (mouseleave)="deleteTooltip.hide()"
+            >
+                <div class="icon__remove qt-sz-16"></div>
+            </div>
+            <app-dynamic-tooltip
+                [content]="'Delete Service'"
+                [position]="'top'"
+                #deleteTooltip
+            >
+            </app-dynamic-tooltip>
+            <app-dynamic-tooltip
+                [content]="'Edit'"
+                [position]="'top'"
+                #editTooltip
+            ></app-dynamic-tooltip>
+            <div
+                class="qt-button-square qt-ml-24 pointer"
+                (click)="remove()"
+                (mouseenter)="deleteUpdate.show($event.target)"
+                (mouseleave)="deleteUpdate.hide()"
+            >
+                <div class="icon__remove--red-600 qt-sz-16"></div>
+            </div>
+        </div>
+    </div>
+    <app-dynamic-tooltip
+        [content]="'Delete Update'"
+        [position]="'top'"
+        #deleteUpdate
+    ></app-dynamic-tooltip>
+    <ng-template
+        ngFor
+        let-service
+        [ngForOf]="update.services"
+        let-i="index"
+        [ngForTrackBy]="trackById"
+    >
+        <ticket-detail-profile-updates-service-item
+            [update]="update"
+            [service]="service"
+            [isBlockChange]="isBlockChange"
+            [showCompleteLabel]="i > 0"
+            [index]="i"
+            (mouseenter)="setClassForActions(i,'--show')"
+            (mouseleave)="setClassForActions(i,'')"
+        ></ticket-detail-profile-updates-service-item>
+    </ng-template>
+    <!-- <app-ticket-profile-updates-footer
+      [date]="update.createdAt"
+      [shares]="update.shares"
+  ></app-ticket-profile-updates-footer> -->
+</div>

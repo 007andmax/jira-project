@@ -1,0 +1,81 @@
+<div class="attachment-component">
+    <div class="attachment-item__header">
+        <div
+            class="attachment-item__count-items"
+            [textContent]="attachments.length + ' Attachments'"
+        ></div>
+        <div
+            class="qt-button qt-button--with-icon --sm --gray attachment-item__show-hide-btn pointer"
+            (click)="downloadAll()"
+            *ngIf="attachments.length > 0"
+        >
+            <div class="icon__download qt-bg-contain qt-sz-16 qt-mr-4"></div>
+            Download
+        </div>
+    </div>
+    <div class="attached-files-container">
+        <ng-template
+            ngFor
+            let-attachment
+            let-i="index"
+            [ngForOf]="attachments"
+            [ngForTrackBy]="trackById"
+        >
+            <div
+                class="attachment-item pointer"
+                [ngClass]="attachment.file.contentType"
+                ngbDropdown
+                [container]="'body'"
+            >
+                <div
+                    class="qt-sz-36 attachment-item__icon qt-circle qt-mr-8 qt-df qt-ai-c qt-jc-c qt-fs-0"
+                    (click)="preview(attachment.file.id,attachment.file.contentType)"
+                >
+                    <div class="icon__attachments qt-sz-16"></div>
+                </div>
+                <div
+                    class="qt-w100 ellipsis"
+                    (click)="preview(attachment.file.id,attachment.file.contentType)"
+                >
+                    <div
+                        class="attachment-item__text"
+                        [textContent]="attachment.file.name"
+                        (click)="preview(attachment.file.id,attachment.file.contentType)"
+                    ></div>
+                    <div class="attachment-item__type">
+                        <span [textContent]="getTypeFile(attachment.file.name)"></span>
+                        <span class="divider-point"></span>
+                        Download
+                    </div>
+                </div>
+                <div
+                    class="icon__category-more qt-pointer qt-sz-16 qt-bg-contain qt-ml-8 qt-fs-0"
+                    ngbDropdownToggle
+                    [attr.id]="'dropdown' + i"
+                ></div>
+                <div
+                    ngbDropdownMenu
+                    [attr.aria-labelledby]="'dropdown' + i"
+                    class="app-drop-down__dropdown app-drop-down__dropdown-attachments"
+                >
+                    <div
+                        class="qt-df"
+                        ngbDropdownItem
+                        (click)="download(attachment.file.id,attachment.file.contentType,attachment.file.name)"
+                    >
+                        <i class="icon__download qt-bg-contain qt-sz-20 qt-mr-12"></i>
+                        <span>Download attachment</span>
+                    </div>
+                    <div
+                        class="qt-df"
+                        ngbDropdownItem
+                        (click)="deleteFile(attachment.file.id)"
+                    >
+                        <i class="icon__remove qt-bg-contain qt-sz-20 qt-mr-12"></i>
+                        <span>Delete attachment</span>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</div>

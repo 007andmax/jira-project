@@ -23,7 +23,7 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
   showLoadMoreUpdates = true;
   showPreloader: boolean = false;
   constructor(private ticketsService: TicketsService,
-    private confirmStateService: ConfirmStateService,
+    public confirmStateService: ConfirmStateService,
     private ticketStateService: TicketStateService,
     public cd: ChangeDetectorRef,
     public ticketsPermissionsService: TicketsPermissionsService,) { }
@@ -58,6 +58,7 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
     })
   }
   fetchUpdates() {
+    if (this.showPreloader) return;
     this.showPreloader = true;
     this.ticketsService.fetchUpdates(this.ticketProfile).subscribe((resp: any) => {
       this.onFetchUpdates.emit(resp);

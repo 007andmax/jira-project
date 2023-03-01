@@ -1,19 +1,25 @@
-<p
+<div
     id="datepairExample"
     class="start-end-timer"
 >
-    <input
+    <label class="start-end-timer__label qt-mr-8">
+      <input
         type="text"
         class="time start qt-input-block__input"
         [ngClass]="{'--input-error':!validate}"
-    >
-    <input
+      >
+      <span class="icn-16 icon__time pointer"></span>
+    </label>
+    <label class="start-end-timer__label qt-mr-8">
+      <input
         *ngIf="!editMode || editMode && currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'"
         type="text"
         class="time end qt-input-block__input"
         [ngClass]="{'--input-error':! validate}"
-    >
-</p>
+      >
+      <span class="icn-16 icon__time pointer"></span>
+    </label>
+</div>
 <mat-error
   class="invalid-feedback --pos-static"
   *ngIf="!validate"

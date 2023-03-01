@@ -38,13 +38,27 @@
         aria-labelledby="dropdownProducts"
     >
         <div class="select-product__header">
-            <div class="select-product__header-title">Product list</div>
-            <div
-                class="select-product__header-add-product"
-                (click)="onCreateProduct()"
-                *ngIf="getPermissions('MANAGE_PRODUCTS')"
-            >
-                + Create Product
+            <div class="qt-df qt-jc-sb qt-mb-8 qt-ai-c">
+                <div class="select-product__header-title">Product list</div>
+                <div
+                    class="qt-button qt-button--with-icon --gray --sm select-product__header-add-product"
+                    (click)="onCreateProduct()"
+                    *ngIf="getPermissions('MANAGE_PRODUCTS')"
+                >
+                    <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-4 qt-button-icon"></span>
+                    Create Product
+                </div>
+            </div>
+            <div class="qt-input-search">
+                <input
+                    class="pointer qt-input-search qt-dropdown-input"
+                    type="text"
+                    autocomplete="new-password"
+                    [ngClass]="{'--input-error' : !validate}"
+                    placeholder="Search Products"
+                    (input)="onSearch($event)"
+                    id="search-drop-down"
+                >
             </div>
         </div>
         <ngb-accordion
@@ -66,7 +80,7 @@
                             {{item.name}}
                             <span *ngIf="item.products.length">({{item.products.length}})</span>
                         </div>
-                        <div class="select-product__expand icon__expand"></div>
+                        <div class="icon__add-grey qt-sz-16"></div>
                     </button>
                 </ng-template>
                 <ng-template ngbPanelContent>
@@ -78,14 +92,25 @@
                         <div class="qt-df category-product__main-info">
                             <div class="qt-df qt-ai-c qt-jc-sb category-product__title-price">
                                 <div class="title">{{productItem.description}}</div>
-                                <div class="qt-text-right total-count">{{ productItem.sale | currency: '$' }}</div>
+                                <div class="total-count qt-mt-4">{{ productItem.sale | currency: '$' }}</div>
                             </div>
                             <div class="manufacture">
                                 <span *ngIf="productItem.ilc">ILC: {{ productItem.ilc }}</span>
                                 <span *ngIf="productItem.manufacture">P/N: {{ productItem.manufacture }}</span>
                             </div>
                         </div>
-                        <div class="button-add">Add this</div>
+                        <div class="qt-button-square pointer qt-ml-20 qt-bg-white">
+                            <app-dynamic-tooltip
+                                [content]="'Click to add'"
+                                [position]="'top'"
+                                #pointerTooltip
+                            ></app-dynamic-tooltip>
+                            <div
+                                class="icon__add-grey qt-sz-16 qt-bg-contain"
+                                (mouseenter)="pointerTooltip.show($event.target)"
+                                (mouseleave)="pointerTooltip.hide()"
+                            ></div>
+                        </div>
                     </div>
                 </ng-template>
             </ngb-panel>

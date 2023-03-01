@@ -1,0 +1,38 @@
+@import './src/assets/styles/variable';
+
+.ticket-edit-aside__claimed-info {
+  background: $gray-25;
+  border: 1px solid $gray-200;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-bottom: 16px;
+}
+
+//.ticket-edit-aside__claimed-info-lines { // TODO check this style
+//    position: absolute;
+//    border: 1px solid $gray-400--old;
+//    border-left: none;
+//    border-right: none;
+//    width: calc(100% - 64px);
+//    height: 4px;
+//    top: calc(50% - 2px);
+//
+//    @media (max-width: 767px) {
+//        width: 100%;
+//    }
+//}
+
+.ticket-edit-aside__claimed-date {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: $gray-500;
+
+  strong {
+    color: $gray-900;
+  }
+}
+.ticket-edit-aside__claimed-icon {
+  background-color: $gray-100;
+}

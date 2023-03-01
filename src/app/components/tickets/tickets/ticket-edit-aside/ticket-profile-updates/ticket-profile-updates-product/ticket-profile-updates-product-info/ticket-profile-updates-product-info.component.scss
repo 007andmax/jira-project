@@ -288,9 +288,14 @@
     background: $white;
     padding: 4px 6px;
     text-transform: unset;
+    margin-left: auto;
+    margin-right: 0 !important;
+    margin-top: 8px;
+    display: flex;
+    width: fit-content;
 
     @media (max-width: 767px) {
-      margin: 10px 0px 0px 0px;
+      margin: 10px 0 0 0;
     }
   }
   &__serial-number {

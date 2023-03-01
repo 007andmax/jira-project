@@ -1,0 +1,46 @@
+<div
+    class="cps-block__chat-block"
+    appDnd
+    (fileDropped)="fileBrowseHandler($event)"
+>
+    <div class="editable-description editable-chat">
+        <div class="file-background">
+            <div class="file-background-mask"></div>
+            <div class="file-background-footer">
+                <p>Drop to Attach file</p>
+            </div>
+        </div>
+        <div
+            contenteditable="true"
+            id="chat"
+            name="cps-chat"
+            class="cps-block__content-textarea"
+            placeholder="Write ticket conversation here…"
+            (input)="onChangeChat($event)"
+            (keypress)="onKeyPress($event)"
+        ></div>
+    </div>
+    <div
+        class="files-list "
+        *ngIf="files.length > 0"
+    >
+        <div class="files-list__title qt-mr-4">Attachments:</div>
+        <div
+            class="single-file"
+            *ngFor="let file of files; let i = index"
+        >
+            <div class="info qt-df qt-ai-c">
+                <div class="name">{{ file?.name }}</div>
+                <div class="size">
+                    ({{ formatBytes(file?.size,2) }})
+                    <span class="file-error">{{(file.showError) ? file.error : ''}}</span>
+                </div>
+            </div>
+            <i
+                class="icn-sm icn-remove-old"
+                (click)="deleteFile(i)"
+            ></i>
+            <app-upload-area-progress [progress]="file?.progress"></app-upload-area-progress>
+        </div>
+    </div>
+</div>

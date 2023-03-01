@@ -157,7 +157,7 @@
   &__menu {
     display: flex;
     align-items: center;
-    cursor: pointer;
+    cursor: default;
 
     @media (max-width: 767px) {
       padding: 24px 16px;

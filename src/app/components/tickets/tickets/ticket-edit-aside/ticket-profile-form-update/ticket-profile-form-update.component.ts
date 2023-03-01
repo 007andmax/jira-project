@@ -61,7 +61,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
   isUpdateMobile: boolean = false;
   isUpdateAndClose: boolean = false;
   files: any[] = [];
-  tab: string = "NOTE";
+  @Input() tab: string = "NOTE";
   currentUser: CurrentUser;
   sub: Subscription = new Subscription();
   constructor(public ticketsStateService: TicketsStateService,
@@ -84,9 +84,12 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
   ngOnInit() {
     if (this.appService.checkMobile()) this.tab = null;
     this.currentUser = this.usersStateService.getCurrentUser();
+    this.ticketProfileFormUpdate.setTechUser(this.currentUser);
     this.usersStateService.onGetCurrentUser.subscribe(data => {
       this.currentUser = data;
+      this.ticketProfileFormUpdate.setTechUser(this.currentUser);
     })
+    console.log(" this.ticketProfileFormUpdate", this.ticketProfileFormUpdate);
     let oneTimeConnectionArray = this.devicesRealTimeService.oneTimeConnectionArray.subscribe(newChange => {
       if (newChange.action === 'ONE_TIME_DOWNLOADED' || newChange.action === 'ONE_TIME_INSTALLED' || newChange.action === 'ONE_TIME_CONNECTION_OPEN' || newChange.action === 'ONE_TIME_URL_GENERATED' || newChange.action === 'ONE_TIME_URL_OPEN' || newChange.action === 'ONE_TIME_ONLINE' || newChange.action === 'ONE_TIME_OFFLINE') {
         if (newChange.data.oneTime) {
@@ -183,6 +186,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     this.files = [];
     this.showAddUpdateUser = false;
     this.ticketProfileFormUpdate = new TicketProfileFormUpdate();
+    this.ticketProfileFormUpdate.setTechUser(this.currentUser);
   }
   closeMobile() {
     this.ticketStateService.setTabUpdate(null);

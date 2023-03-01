@@ -22,7 +22,7 @@ export class LeftPanelStateService {
   onSearchChange: EventEmitter<any> = new EventEmitter();
   onSearchItemAdded: EventEmitter<any> = new EventEmitter();
   onSearchCompanyChange: EventEmitter<any> = new EventEmitter();
-  onPageActive:EventEmitter<any> = new EventEmitter();  
+  onPageActive: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
@@ -46,7 +46,7 @@ export class LeftPanelStateService {
   public openCompanPage() {
     this.onOpenCompanyPage.emit(null);
   }
-  
+
   public changeState(data) {
     this.activePage = data;
     this.onChangeState.emit(data);
@@ -88,17 +88,15 @@ export class LeftPanelStateService {
     this.onSearchChange.emit(data);
   }
 
-  public searchItemAdded(data) {    
+  public searchItemAdded(data) {
     this.onSearchItemAdded.emit(data);
   }
 
-  public onSearchCompany(data)
-  {
+  public onSearchCompany(data) {
     this.onSearchCompanyChange.emit(data);
   }
 
-  public onActivePageReport(data)
-  {
+  public onActivePageReport(data) {
     this.onPageActive.emit(data);
   }
 

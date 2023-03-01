@@ -58,13 +58,14 @@ import { PreviewPhoneMaskModule } from 'src/app/components/shared/preview-phone-
 import { TechUsersModule } from 'src/app/components/shared/tech-users/tech-users.module';
 import { TicketProfileFormUpdateNoteListComponent } from './ticket-profile-form-update/ticket-profile-form-update-note-list/ticket-profile-form-update-note-list.component';
 import { InvoiceFormTicketEditTaxesModule } from 'src/app/components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.module';
+import { TicketChangeStatusModule } from './ticket-change-status/ticket-change-status.module';
+import { AddAssignedUserModule } from './add-assigned-user/add-assigned-user.module';
+import { TicketProfileFormUpdateNoteListModule } from './ticket-profile-form-update/ticket-profile-form-update-note-list/ticket-profile-form-update-note-list.module';
 
 @NgModule({
     declarations: [TicketEditAsideComponent,
-        TicketChangeStatusComponent,
         TicketProfileActionsComponent,
         TicketEditTagsComponent,
-        AddAssignedUserComponent,
         TicketClaimInfoComponent,
         TicketMessageComponent,
         TicketProfileUpdatesComponent,
@@ -93,7 +94,7 @@ import { InvoiceFormTicketEditTaxesModule } from 'src/app/components/billing/bil
         TicketProfileEditFormUpdateComponent,
         TicketProfileEditFormUpdateProductsComponent,
         TicketProfileEditFormUpdateServicesComponent,
-        TicketProfileFormUpdateNoteListComponent
+
 
     ],
     imports: [
@@ -123,7 +124,10 @@ import { InvoiceFormTicketEditTaxesModule } from 'src/app/components/billing/bil
         ClickOtsideModule,
         TicketProfileAttachmentsModule,
         PreviewPhoneMaskModule,
-        InvoiceFormTicketEditTaxesModule
+        InvoiceFormTicketEditTaxesModule,
+        TicketChangeStatusModule,
+        AddAssignedUserModule,
+        TicketProfileFormUpdateNoteListModule
     ],
     exports: [TicketEditAsideComponent,]
 })

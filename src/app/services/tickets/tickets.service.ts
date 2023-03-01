@@ -23,6 +23,25 @@ export class TicketsService {
   public getDashboardByTech(startDate, endDate) {
     return this.http.get(this.apiUrl + `dashboard/ticket/counters?startDate=${startDate}&endDate=${endDate}`);
   }
+  public getTicketTasks(id) {
+    return this.http.get(this.apiUrl + `v2/tickets/task?ticketId=${id}`);
+  }
+  public removeTicketTask(id) {
+    return this.http.delete(this.apiUrl + `v2/tickets/task/${id}`).pipe(
+      tap(data => {
+        this.toastrService.success("The task has been successfully deleted");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public addTicketTasks(data) {
+    return this.http.post(this.apiUrl + `v2/tickets/task`, data).pipe(
+      tap(data => {
+        this.toastrService.success("The task has been successfully created");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
   public getDashboard(frequency) {
     return this.http.get(this.apiUrl + `dashboard/ticket?frequency=${frequency}`).pipe(map((data: any) => new DashboardTickets(data)));
   }
@@ -105,6 +124,14 @@ export class TicketsService {
     }).pipe(
       tap(data => data));
   }
+  public deleteFile(fileID) {
+    return this.http.delete(this.apiUrl + `v2/tickets/attachment/${fileID}`).pipe(
+      tap(data => {
+        this.toastrService.success("The attachment has been successfully deleted");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
   public deleteUpdate(id, updateId) {
 
     return this.http.delete(this.apiUrl + `v2/tickets/${id}/updates/${updateId}`).pipe(
@@ -150,11 +177,29 @@ export class TicketsService {
         return data;
       }));
   }
+  public editTicketTask(data) {
+
+    return this.http.put(this.apiUrl + `v2/tickets/task`, data).pipe(
+      tap(data => {
+        this.toastrService.success("The task has been successfully updated");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
   public editStatus(data) {
 
     return this.http.put(this.apiUrl + `ticket/status`, data).pipe(
       tap(data => {
         this.toastrService.success("Status edited successfully");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public changePriority(data, number) {
+
+    return this.http.put(this.apiUrl + `v2/tickets/priority`, data).pipe(
+      tap(data => {
+        this.toastrService.success(`The tickets “${number}” priorty has been changed`);
         this.appStateService.changeDetectorRef();
         return data;
       }));
@@ -192,15 +237,25 @@ export class TicketsService {
   }
   public linkedAgentToTicket(id, value) {
     let data = { value: value };
-    return this.http.put(this.apiUrl + `v2/tickets/${id}/linkedAgent`, data);
+    return this.http.put(this.apiUrl + `v2/tickets/${id}/linkedAgent`, data).pipe(
+      tap(data => {
+        this.toastrService.success((value === "") ? "The agent has been successfully unlinked" : "The agent has been successfully linked");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public assignUserToTicket(id, value) {
     let data = { value: value };
     return this.http.put(this.apiUrl + `v2/tickets/${id}/assign`, data);
   }
 
-  public addTags(id, tags) {
-    return this.http.put(this.apiUrl + `tags?ticketId=${id}`, tags)
+  public addTags(id, tags, textNotification) {
+    return this.http.put(this.apiUrl + `tags?ticketId=${id}`, tags).pipe(
+      tap(data => {
+        this.toastrService.success(textNotification);
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public addAssignUsers(id, ids) {
     return this.http.put(this.apiUrl + `v2/tickets/${id}/assign`, { value: ids.join(",") })

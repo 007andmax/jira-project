@@ -27,6 +27,7 @@ export class TechUsersComponent implements OnInit, OnDestroy {
   @Input() editMode: boolean = false;
   @Input() isDisabled: boolean = false;
   @Input() type: string = RECURRING_TICEKTS;
+  @Input() placement: string;
   users: Array<TechUserItem> = [];
   sub = new Subscription();
   @Output() usersChange = new EventEmitter();
@@ -102,6 +103,34 @@ export class TechUsersComponent implements OnInit, OnDestroy {
   public showSelectWrapper($event) {
     this.showSelect = !this.showSelect;
     this.stopEvent($event);
+  }
+
+  public getUserName(user) {
+    return (user) ? `${user.firstName} ${user.lastName}` : '';
+  }
+
+  getStyleAvatar(user) {
+    if (!(user && user.avatar)) {
+      return '#16a4fa';
+    }
+    if (user.id) {
+      return `url(${'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
+        '')}) no-repeat`
+    } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
+      return `url(/file/${(user.avatar.origin.id)}.jpg) no-repeat`;
+    } else {
+      return '#16a4fa';
+    }
+  };
+
+  isSelected(data) {
+    return this.selectedUsers.find(item => item.id === data.id);
+  }
+
+  getAssignedUserNameForAvatar(user) {
+    if (!user) return '';
+    if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}`;
+    return '';
   }
 
   /**

@@ -9,6 +9,7 @@ import { PasswordManagerStateService } from 'src/app/states/password-manager/pas
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
+import { TicketStateService } from '../tickets/tickets/ticket-edit-aside/services/ticket-state.service';
 import { User } from '../users/class/user';
 import { LeftPanelBillingComponent } from './left-panel-billing/left-panel-billing.component';
 import { LeftPanelCompaniesComponent } from './left-panel-companies/left-panel-companies.component';
@@ -59,6 +60,7 @@ export class LeftPanelComponent implements OnInit {
     private router: Router,
     private leftPanelStateService: LeftPanelStateService,
     public companiesStateService: CompaniesStateService,
+    private ticketStateService: TicketStateService,
     private usersStateService: UsersStateService,
     private appService: AppService,
     private permissionsService: PermissionsService,
@@ -135,6 +137,9 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/reports`)) this.state = 'new-reports';
           if (window.location.href.includes(`/tickets-dashboard`)) this.state = 'new-tickets-dashboard';
           if (window.location.href.includes(`/tickets`) && !window.location.href.includes(`/tickets-dashboard`)) this.state = 'new-tickets';
+          if (window.location.href.includes(`/ticket/`)) {
+            this.state = 'ticket-detail';
+          }
           if (window.location.href.includes(`/recurring-tickets`)) this.state = 'recurring-tickets';
           if (window.location.href.includes(`/quickSupport`)) this.state = 'new-quickSupport';
           if (window.location.href.includes(`/billable-tickets`) && !window.location.href.includes(`/billable`)) this.state = 'new-billable-tickets';
@@ -191,6 +196,7 @@ export class LeftPanelComponent implements OnInit {
             this.cd.detectChanges();
             this.updatePage(this.state);
           }
+
         }
       });
 
@@ -236,6 +242,7 @@ export class LeftPanelComponent implements OnInit {
   updatePage(data) {
     if (this.leftPanelService.isSupportPage(data)) this.page = "SUPPORT";
     if (this.leftPanelService.isTicketsPage(data)) this.page = "TICKETS";
+    if (this.leftPanelService.isTicketDetailPage(data)) this.page = "TICKET-DETAIL";
     if (this.leftPanelService.isUsersPage(data)) this.page = "USERS";
     if (this.leftPanelService.isMarketingPage(data)) this.page = "MARKETING";
     if (this.leftPanelService.isCompanyPage(data)) this.page = "COMPANIES";
@@ -262,6 +269,13 @@ export class LeftPanelComponent implements OnInit {
   }
   onToggleLeftPanel() {
     this.toggleLeftPanel = !this.toggleLeftPanel;
+    this.leftPanelStateService.toggleLeftPanel(this.toggleLeftPanel);
+    if (!this.cd['destroyed']) {
+      this.cd.detectChanges();
+    }
+  }
+  onHideLeftPanel() {
+    this.toggleLeftPanel = true;
     this.leftPanelStateService.toggleLeftPanel(this.toggleLeftPanel);
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
@@ -324,6 +338,10 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'new-reports') this.goToLink('reports');
       if (this.state === 'new-tickets-dashboard') this.goToLink('tickets-dashboard');
       if (this.state === 'new-tickets') this.goToLink('tickets');
+      if (this.state === 'ticket-detail') {
+        this.goToLink(`ticket/${this.ticketStateService.getTicketRoutingId()}`);
+        this.onHideLeftPanel();
+      }
       if (this.state === 'recurring-tickets') this.goToLink('recurring-tickets');
       if (this.state === 'new-quickSupport') this.goToLink('quickSupport');
       if (this.state === 'new-billable-tickets') this.goToLink('billable-tickets');

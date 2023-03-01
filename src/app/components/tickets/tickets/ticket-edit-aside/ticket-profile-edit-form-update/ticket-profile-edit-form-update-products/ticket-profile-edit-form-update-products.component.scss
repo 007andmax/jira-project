@@ -44,5 +44,9 @@
         &::placeholder {
             color: $gray-600--old;
         }
+      @media (max-width: 767px) {
+        border-color: $gray-200;
+        border-radius: 6px;
+      }
     }
 }

@@ -1,0 +1,30 @@
+<div class="qt-ml-24 qt-mr-24 qt-mt-24">
+    <span
+        class="tag__modern"
+        [ngStyle]="getStyleStatus((ticketProfile.customStatus) ? ticketProfile.customStatus : ticketProfile.status)"
+        *ngIf="ticketProfile.status === 'IN_PROGRESS'"
+    >
+        {{(!ticketProfile.customStatus) ? 'In Progress' : parseStatus(ticketProfile.customStatus)}}
+    </span>
+    <span
+        class="tag__modern"
+        [ngStyle]="getStyleStatus(ticketProfile.status)"
+        *ngIf="ticketProfile.status === 'COMPLETED'"
+    >
+        Completed
+    </span>
+    <span
+        class="tag__modern"
+        [ngStyle]="getStyleStatus('UNASSIGNED')"
+        *ngIf="ticketProfile.status === null"
+    >
+        Unassigned
+    </span>
+    <span
+        class="tag__modern"
+        [ngStyle]="getStyleStatus(ticketProfile.status)"
+        *ngIf="ticketProfile.status === 'ON_HOLD'"
+    >
+        On Hold
+    </span>
+</div>

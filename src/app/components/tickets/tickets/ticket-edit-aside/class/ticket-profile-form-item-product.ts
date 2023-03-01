@@ -16,7 +16,7 @@ export class TicketProfileFormItemProduct implements Product {
     manufacture: string;
     description: string;
     billable: boolean;
-    taxes: import("../../../../../interfaces/service/tax").Tax[];
+    taxes: import("../../../../../interfaces/service/tax").Tax[] = [];
     oldVersion: boolean;
     quantity: number = 1;
     constructor(data = null) {

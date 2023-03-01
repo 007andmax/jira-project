@@ -1,0 +1,30 @@
+<div class="qt-input-block">
+    <span class="qt-input-block__label">
+        Company
+        <i
+            class="icon__help default-services-page__question-icon qt-sz-12 qt-ic-c"
+            *ngIf="ticketProfile.ticketSource === 'FROM_EMAIL' && checkExistServicesProducts() && getCompany(ticketProfile.company) && getCompany(ticketProfile.company.id).isUnknown"
+            (mouseenter)="userCompanyTooltip.show($event.target)"
+            (mouseleave)="userCompanyTooltip.hide()"
+        ></i>
+        <app-dynamic-tooltip
+            class="user-companies-tooltip"
+            [content]="'You must remove all Product/Services updates from the ticket before changing the company.'"
+            [position]="'bottom'"
+            #userCompanyTooltip
+        ></app-dynamic-tooltip>
+    </span>
+    <company-drop-down
+        #companyDP
+        [class]="['qt-dropdown']"
+        [heightInput]="'32px'"
+        [placeholder]="'Select Company'"
+        [clientType]="'CLIENT'"
+        [field]="'name'"
+        [search]="true"
+        [change]="true"
+        [editItem]="selectedCompany"
+        [isDisabled]="!(ticketProfile.ticketSource === 'FROM_EMAIL' && !checkExistServicesProducts() && getCompany(ticketProfile.company.id) && getCompany(ticketProfile.company.id).isUnknown)"
+        (onSelectedItem)="onSelectCompany($event)"
+    ></company-drop-down>
+</div>

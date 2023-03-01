@@ -4,7 +4,7 @@ import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { MatAutocomplete } from '@angular/material';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { TicketStateService } from '../services/ticket-state.service';
 
 
@@ -23,7 +23,8 @@ export class AddAssignedUserComponent implements OnInit {
   @Input() selectedUsers = [];
   @Input() userList = [];
   @Input() placement = 'top-left';
-
+  @Input() type: string;
+  @Input() container: string;
   users = [];
   reqUsers = [];
   currentUsers = [];
@@ -33,6 +34,7 @@ export class AddAssignedUserComponent implements OnInit {
   @Output() onSelected = new EventEmitter<any>();
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
+  @ViewChild('assignedUserDp') assignedUserDp: NgbDropdown;
 
   /**
    * Creates an instance of the QuoteCreateContentComponent with the injected services
@@ -58,6 +60,12 @@ export class AddAssignedUserComponent implements OnInit {
     this.reqUsers = JSON.parse(JSON.stringify(this.userList));
   }
 
+  public resetList(data) {
+    this.userList = data;
+    this.users = JSON.parse(JSON.stringify(this.userList));
+    this.reqUsers = JSON.parse(JSON.stringify(this.userList));
+  }
+
   @HostListener('document:click', ['$event'])
   clickout(event) {
     if (event.target.classList.contains('toggle-select-user')) return;
@@ -69,7 +77,7 @@ export class AddAssignedUserComponent implements OnInit {
    * @param index - user index
    */
   public remove(index): void {
-    if (index >= 0 && this.selectedUsers.length > 1) {
+    if (index >= 0 && this.selectedUsers.length > 1 && this.type != "DETAIL-TICKET" || this.type == "DETAIL-TICKET") {
       this.selectedUsers.splice(index, 1);
       this.onSelected.emit(this.selectedUsers);
     }
@@ -89,6 +97,9 @@ export class AddAssignedUserComponent implements OnInit {
     this.userCtrl.setValue(null);
     this.userInput.nativeElement.value = '';
   }
+  isSelected(data) {
+    return this.selectedUsers.find(item => item.id === data.id);
+  }
 
   onSearchUser(event) {
     if (event.target.value.length > 0) {
@@ -100,7 +111,7 @@ export class AddAssignedUserComponent implements OnInit {
 
   getAssignedUserNameForAvatar(user) {
     if (!user) return '';
-    if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}${(user.lastName) ? user.lastName[0].toUpperCase() : ''}`;
+    if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}`;
     return '';
   }
 

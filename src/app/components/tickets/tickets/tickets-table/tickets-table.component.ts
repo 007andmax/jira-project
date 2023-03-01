@@ -8,6 +8,10 @@ import { Subscription } from 'rxjs';
 import { TicketStateService } from '../ticket-edit-aside/services/ticket-state.service';
 import { TicketStatus } from 'src/app/components/setting/ticket-settings-page/tickets-status/class/ticket-status';
 import { StatusColor } from '../../class/status-color';
+import { AppService } from 'src/app/states/app/app.service';
+import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { Router } from '@angular/router';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 
 @Component({
@@ -33,6 +37,10 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     private ticketsListService: TicketsListService,
     private ticketStateService: TicketStateService,
     public cd: ChangeDetectorRef,
+    private appService: AppService,
+    private router: Router,
+    private companiesStateService: CompaniesStateService,
+    private leftPanelStateService: LeftPanelStateService,
     private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
@@ -91,13 +99,30 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
   }
 
   editTicket(id) {
-    this.idEditTicket = id;
-    let ticket = this.tickets.find(item => item.id === id);
-    this.ticketsStateService.onOpenTicket();
-    this.ticketsService.getTicket(id).subscribe(data => {
-      data.setUserCompanies(ticket.userCompanies);
-      this.ticketsStateService.onEditTicket(data);
-    })
+    if (!this.appService.isMobile) {
+      if (["73221c72-f87c-4519-8235-c4b57ad1cc19", "72381bff-127c-4a63-9d2e-6e952350dcbd"].find(item => item == this.companiesStateService.getCurrentCompany().id)) {
+        this.ticketStateService.setTicketRoutingId(id);
+        const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/ticket/${id}`;
+        window.open(url, '_blank');
+      } else {
+        this.idEditTicket = id;
+        let ticket = this.tickets.find(item => item.id === id);
+        this.ticketsStateService.onOpenTicket();
+        this.ticketsService.getTicket(id).subscribe(data => {
+          data.setUserCompanies(ticket.userCompanies);
+          this.ticketsStateService.onEditTicket(data);
+        })
+      }
+
+    } else {
+      this.idEditTicket = id;
+      let ticket = this.tickets.find(item => item.id === id);
+      this.ticketsStateService.onOpenTicket();
+      this.ticketsService.getTicket(id).subscribe(data => {
+        data.setUserCompanies(ticket.userCompanies);
+        this.ticketsStateService.onEditTicket(data);
+      })
+    }
   }
   private getTickets() {
     if (this.ticketsListService.getBlockList()) {

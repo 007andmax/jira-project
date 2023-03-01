@@ -1,0 +1,267 @@
+<div
+    class="ticket-detail-page"
+    [ngClass]="{'clear-bottom-padding' :!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)}"
+>
+    <ticket-detail-header
+        #detailHeader
+        *ngIf="!showPreloader"
+        [ticketProfile]="ticketProfile"
+        (onAddUpdate)="onAddUpdate($event)"
+        (onClaimTicket)="claimTicket()"
+        (onMoveToSpam)="onMoveIntoSpam()"
+        (onMoveToTrash)="onMoveToTrash($event)"
+    ></ticket-detail-header>
+    <!-- <div -->
+    <!-- class="collapse-arrow icon__close" -->
+    <!-- (click)="close()" -->
+    <!-- ></div> -->
+    <div
+        class="prelaoder-body"
+        *ngIf="showPreloader"
+    >
+        <div class="loading"></div>
+    </div>
+    <div
+        class="ticket-detail-page-content"
+        [hidden]="showPreloader"
+    >
+        <div class="ticket-detail-page-content-main">
+            <div class="ticket-detail-page-content__body">
+                <div class="ticket-detail-page-content__body-inner">
+                    <ticket-detail-info-status [ticketProfile]="ticketProfile"></ticket-detail-info-status>
+                    <div class="ticket-detail-page-title qt-mt-10 qt-mb-16 qt-mr-24 qt-ml-24">
+                        <div
+                            class="ticket-detail-page-title__text pointer"
+                            [hidden]="modeSubject === 'edit'"
+                            (click)="toggleSubject()"
+                        >
+                            <span [textContent]="ticketProfile.subject"></span>
+                        </div>
+                        <div
+                            class
+                            [hidden]="modeSubject === 'view'"
+                            appClickOtside
+                            [init]="modeSubject === 'edit'"
+                            [class]="'.ticket-detail-page-title'"
+                            (onOutSide)="toggleSubject()"
+                        >
+                            <input
+                                id="ticket-subject"
+                                class="--editable ticket-detail-page-title__input"
+                                [value]="ticketProfile.subject"
+                                [readonly]="appService.checkMobile()"
+                            >
+                        </div>
+                    </div>
+                    <div class="ticket-detail-page-content__body-header qt-pl-24 qt-pr-24">
+                        <div class="qt-df qt-ai-fs">
+                            <div
+                                class="ticket-edit-aside__header-avatar"
+                                [textContent]="ticketsListService.getAssignedUserNameForAvatar(ticketProfile.createdUser)"
+                                [ngStyle]="{'background': ticketsListService.getStyleAvatar(ticketProfile.createdUser)}"
+                            ></div>
+                            <div>
+                                <div class="qt-df qt-ai-c">
+                                    <div
+                                        class
+                                        ngbDropdown
+                                        (openChange)="onOpenCompaniesDropDown()"
+                                        placement="bottom-left"
+                                    >
+                                        <!-- <span [textContent]="parseTicketSource() + getAgentName()"></span> -->
+                                        <div class="ticket-detail-page-content__body-header-info qt-mb-6">
+                                            <span
+                                                class="pointer"
+                                                [textContent]="getNameCreateUser()"
+                                                (click)="showDetailUser()"
+                                            ></span>
+                                            <span
+                                                class="ticket-detail-page-content__body-header-info-email"
+                                                [textContent]="'sent ' + parseTicketSource()"
+                                            ></span>
+                                        </div>
+                                        <div class="ticket-detail-page-content__body-header-data">
+                                            <span [textContent]="getCreatAt()"></span>
+                                            <div class="ticket-detail-page-content__body-header-data-divider"></div>
+                                            <span class="icon__companies qt-sz-16 qt-dib qt-mr-8"></span>
+                                            <span
+                                                class="pointer"
+                                                [textContent]="getCompanyName()"
+                                                (click)="goToCompanyDashboard()"
+                                                id="dropdownCompany"
+                                                ngbDropdownToggle
+                                            ></span>
+                                        </div>
+                                        <span
+                                            class="qt-color-red-600"
+                                            *ngIf="ticketProfile.company.isCompanyDeleted"
+                                        >
+                                            - Archived
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="qt-df qt-ai-fs qt-mt-24 qt-mb-24">
+                            <div class="ticket-detail-page__desc-icon qt-mr-16">
+                                <span
+                                    class="icon__email qt-sz-16 qt-dib"
+                                    *ngIf="ticketProfile.ticketSource === 'FROM_EMAIL'"
+                                ></span>
+                                <span
+                                    class="icon__monitor qt-sz-16 qt-dib"
+                                    *ngIf="ticketProfile.ticketSource === 'FROM_AGENT'"
+                                ></span>
+                                <span
+                                    class="icon__globe qt-sz-16 qt-dib"
+                                    *ngIf="ticketProfile.ticketSource === 'FROM_WEB'"
+                                ></span>
+                                <span
+                                    class="icon__calendar-recurring-ticket qt-sz-16 qt-dib"
+                                    *ngIf="ticketProfile.ticketSource === 'FROM_RECURRING_TICKET'"
+                                ></span>
+                                <span
+                                    class="icon__receipt qt-sz-16 qt-dib"
+                                    *ngIf="ticketProfile.ticketSource === 'FROM_SALE_QUOTE'"
+                                ></span>
+                            </div>
+                            <div class="ticket-detail-page__edit-wrap">
+                                <div
+                                    class="ticket-detail-page__edit"
+                                    appClickOtside
+                                    [init]="modeDescription === 'edit'"
+                                    [class]="'.ticket-detail-page__edit-wrap'"
+                                    (onOutSide)="toggleNote()"
+                                >
+                                    <div
+                                        class="ticket-detail-page__editor pointer"
+                                        [ngClass]="{'no-edit-note':!getPermissions('EDIT_TICKETS')}"
+                                        (blur)="modeDescription = 'edit'"
+                                        [attr.contenteditable]="!appService.checkMobile() && getPermissions('EDIT_TICKETS')"
+                                        id="ticket-note"
+                                        placeholder="Enter description here"
+                                    ></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ticket-detail-tasks
+                        #ticketTasks
+                        [ticketProfile]="ticketProfile"
+                    ></ticket-detail-tasks>
+                    <ticket-detail-message
+                        #ticketMessage
+                        (onMoveToTrash)="onMoveToTrash($event)"
+                        (onRestoreFromSpam)="restoreFromSpam()"
+                        (onOpenTicket)="markAsOpen()"
+                        (onClaimTicket)="claimTicket()"
+                        [ticketProfile]="ticketProfile"
+                    ></ticket-detail-message>
+                    <ticket-detail-profile-updates
+                        #ticketProfileUpdates
+                        [hidden]="!ticketProfile.updates || ticketProfile.updates.length === 0"
+                        (onFetchUpdates)="onFetchUpdates($event)"
+                        [ticketProfile]="ticketProfile"
+                        [updates]="ticketProfile.updates"
+                    ></ticket-detail-profile-updates>
+                    <ticket-detail-profile-form-update
+                        (onCloseForm)="showFormUpdate = false"
+                        *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && showFormUpdate"
+                        [ticket]="ticketProfile"
+                        [lisUpdateUser]="lisUpdateUser"
+                        [tab]="tabFormUpdate"
+                    ></ticket-detail-profile-form-update>
+                    <ticket-detail-profile-edit-updates
+                        (onCloseForm)="showEditUpdate = false"
+                        *ngIf="showEditUpdate"
+                    ></ticket-detail-profile-edit-updates>
+                    <!-- <app-ticket-edit-tags
+                [selectedTag]="ticketProfile.tags"
+                (tagsChange)="onChangeTags($event)"
+                [hidden]="showAddAssignedUser"
+            ></app-ticket-edit-tags> -->
+                    <!-- <app-ticket-profile-attachments [attachments]="ticketProfile.attachments"></app-ticket-profile-attachments>
+
+            <ticket-profile-edit-form-update
+                [ngClass]="{'--open':openedMobileEditUpdate}"
+                (onClosed)="openedMobileEditUpdate = false"
+                [hidden]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || !appService.checkMobile()"
+                #editUpdateForm
+                [ticket]="ticketProfile"
+                [lisUpdateUser]="lisUpdateUser"
+            ></ticket-profile-edit-form-update> -->
+                </div>
+            </div>
+            <div
+                class="ticket-detail-page-content__sidebar-preview"
+                *ngIf="!showPreloader"
+            >
+                <ticket-detail-claim-info [ticketProfile]="ticketProfile"></ticket-detail-claim-info>
+                <ticket-detail-change-status [ticketProfile]="ticketProfile"></ticket-detail-change-status>
+                <ticket-detail-change-priority [ticketProfile]="ticketProfile"></ticket-detail-change-priority>
+                <ticket-detail-change-company [ticketProfile]="ticketProfile"></ticket-detail-change-company>
+                <ticket-detail-add-assigned-user
+                    [listAssignedUser]="listAssignedUser"
+                    (onSelectAssignedUser)="onSelectAssignedUser($event)"
+                ></ticket-detail-add-assigned-user>
+                <ticket-detail-edit-tags
+                    [selectedTag]="ticketProfile.tags"
+                    (tagsChange)="onChangeTags($event,false)"
+                    (tagsRemove)="onChangeTags($event,true)"
+                ></ticket-detail-edit-tags>
+                <ticket-detail-linked-agents
+                    [ticketProfile]="ticketProfile"
+                    [selectedCompanyId]="ticketProfile.company.id"
+                ></ticket-detail-linked-agents>
+                <ticket-detail-attachments [attachments]="ticketProfile.attachments"></ticket-detail-attachments>
+                <!-- <div class="qt-input-block">
+                    <span class="qt-input-block__label">Priority Level</span>
+                    <app-drop-down
+                        [class]="['qt-dropdown']"
+                        [field]="'title'"
+                        [isBlockClear]="true"
+                        [editItem]="selectedTicketPriorities"
+                        [list]="ticketPriorities"
+                        (onSelectedItem)="setPriorityLevel($event)"
+                        [placeholder]="'Low'"
+                    ></app-drop-down>
+                </div> -->
+            </div>
+        </div>
+        <div class="ticket-detail-page-content__sidebar-info"></div>
+        <div class="ticket-detail-page-content__sidebar-menu">
+            <div class="ticket-detail-page-content__sidebar-menu-button">
+                <div class="icon__company-info qt-sz-20 qt-bg-contain"></div>
+            </div>
+            <div class="ticket-detail-page-content__sidebar-menu-button">
+                <div class="icon__locked qt-sz-20 qt-bg-contain"></div>
+            </div>
+            <div class="ticket-detail-page-content__sidebar-menu-button">
+                <div class="icon__devices-computer qt-sz-20 qt-bg-contain"></div>
+            </div>
+            <div class="ticket-detail-page-content__sidebar-menu-button">
+                <div class="icon__documents qt-sz-20 qt-bg-contain"></div>
+            </div>
+        </div>
+    </div>
+    <!-- <app-ticket-edit-aside-right-panel
+        #rightPanel
+        [ticketProfile]="ticketProfile"
+    ></app-ticket-edit-aside-right-panel>
+    <div
+        class="qt-aside-modern__footer updata-close"
+        [hidden]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
+    >
+        <button
+            class="qt-button"
+            (click)="updateAndCloseMobile()"
+        >
+            <span>Update & Close</span>
+        </button>
+    </div>
+    <div
+        class="mobile-action-btn"
+        (click)="showModalAddUpdate()"
+        [hidden]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
+    ></div> -->
+</div>

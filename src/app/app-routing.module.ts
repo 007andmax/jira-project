@@ -28,6 +28,11 @@ const routes: Routes = [
     canActivate: [PermissionTechUserService]
   },
   {
+    path: ':company/ticket/:id',
+    loadChildren: './components/tickets/tickets/ticket-detail/ticket-detail.module#TicketDetailModule',
+    canActivate: [PermissionTechUserService]
+  },
+  {
     path: ':company/support-page',
     loadChildren: './components/super-admin/support-page/support-page.module#SupportPageModule'
   },

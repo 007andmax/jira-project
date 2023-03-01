@@ -1,0 +1,75 @@
+<div class="qt-df ticket-updates__update-block">
+    <div class="ticket-updates__content">
+        <div class="qt-df qt-ai-fs">
+            <div
+                class="ticket-updates__ticket-photo"
+                [textContent]="ticketsListService.getAssignedUserNameForAvatar(update.user)"
+                [ngStyle]="{'background': ticketsListService.getStyleAvatar(update.user)}"
+            ></div>
+            <div class="ticket-updates__author-line qt-df jc-sb qt-ai-c ">
+                <div>
+                    <span
+                        class="ticket-updates__author"
+                        [textContent]="ticketsListService.getUserName(update.user)"
+                    ></span>
+                    <span class="ticket-updates__add-note">
+                        added a {{update.noteType === 'PRIVATE' ? 'private' : 'public'}} note
+                    </span>
+                    <ticket-detail-profile-updates-header-info
+                        [date]="update.createdAt"
+                        [shares]="update.shares"
+                    ></ticket-detail-profile-updates-header-info>
+                </div>
+                <app-dynamic-tooltip
+                    [content]="'Delete Update'"
+                    [position]="'top'"
+                    #deleteTooltip
+                ></app-dynamic-tooltip>
+                <div class="qt-button-square-wrap">
+                    <div
+                        class="qt-button-square qt-button-square__prepend pointer"
+                        *ngIf="update.type === 'NOTE' && !isBlockChange && !isIOSDevice() && !updatesNoteItem.editMode"
+                        (click)="updatesNoteItem.edit()"
+                        placement="top"
+                        ngbTooltip="Edit Update"
+                    >
+                        <div class="icon__edit qt-sz-16"></div>
+                    </div>
+                    <div
+                        class="qt-button-square qt-button-square__prepend pointer"
+                        *ngIf="update.type === 'NOTE' && !isBlockChange && isIOSDevice() && !updatesNoteItem.editMode"
+                        (touchstart)="updatesNoteItem.edit()"
+                        placement="top"
+                        ngbTooltip="Edit Update"
+                    >
+                        <div class="icon__edit qt-sz-16"></div>
+                    </div>
+                    <div
+                        class="qt-button-square qt-button-square__afterpend pointer"
+                        *ngIf="!isBlockChange && !updatesNoteItem.editMode"
+                        (click)="remove()"
+                        (mouseenter)="deleteTooltip.show($event.target)"
+                        (mouseleave)="deleteTooltip.hide()"
+                    >
+                        <div class="icon__remove qt-sz-16"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="qt-df">
+            <div class="qt-df qt-fd-c qt-ai-c qt-mr-16">
+                <div class="ticket-updates__ticket-icon qt-mb-4">
+                    <i class="icon__ticket-note icn-16 qt-bg-contain"></i>
+                </div>
+                <div class="ticket-updates__ticket-line"></div>
+            </div>
+            <ticket-detail-profile-updates-note-item
+                #updatesNoteItem
+                class="qt-w100"
+                [isBlockChange]="isBlockChange"
+                [idTicket]="idTicket"
+                [update]="update"
+            ></ticket-detail-profile-updates-note-item>
+        </div>
+    </div>
+</div>

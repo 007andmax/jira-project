@@ -1,0 +1,44 @@
+<div class="qt-df qt-ai-c ticket-updates__update-info">
+    <span
+        class="ticket-updates__date"
+        [textContent]="getDate()"
+    ></span>
+    <span class="divider-line"></span>
+    <div class="ticket-updates__photo-row">
+        <ng-template
+            ngFor
+            let-share
+            [ngForOf]="shares"
+            let-i="index"
+            [ngForTrackBy]="trackByIndex"
+        >
+            <ng-template #tipContent>
+                <div [textContent]="ticketsListService.getUserName(share.user)"></div>
+                <div [textContent]="((share.user.accountType === 'TECH') ? 'Tech' : 'Client') + ' user'"></div>
+            </ng-template>
+            <div
+                class="ticket-updates__photo-people"
+                [textContent]="ticketsListService.getAssignedUserNameForAvatar(share.user)"
+                [ngStyle]="{'background': ticketsListService.getStyleAvatar(share.user)}"
+                placement="top"
+                [ngbTooltip]="tipContent"
+            ></div>
+        </ng-template>
+    </div>
+    <span
+      class="ticket-updates__people-added"
+      [textContent]="' ' + shares.length + ' people added to this update'"
+    ></span>
+    <span class="divider-line"></span>
+    <div class="icn-16 icon__calendar pointer qt-mr-8"></div>
+    <span
+      class="ticket-updates__service-tag-completed --completed"
+      *ngIf="service.completed"
+      [textContent]="'Completed on ' + getDateService(service.date)"
+    ></span>
+    <span
+      class="ticket-updates__service-tag-completed"
+      *ngIf="!service.completed && service.date"
+      [textContent]="'Due date - ' + getDateService(service.date)"
+    ></span>
+</div>

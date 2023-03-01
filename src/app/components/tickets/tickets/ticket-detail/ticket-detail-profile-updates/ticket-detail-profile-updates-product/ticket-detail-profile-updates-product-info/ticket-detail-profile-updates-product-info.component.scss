@@ -1,0 +1,339 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
+
+.ticket-updates {
+    padding: 24px 32px;
+    background-color: $gray-100--old;
+    font-size: 13px;
+
+    @media (max-width: 767px) {
+        padding: 16px;
+    }
+
+    &__count {
+        font-weight: 600;
+    }
+
+    &__ticket-photo {
+        width: 32px;
+        height: 32px;
+        background-position: center;
+        background-size: cover;
+        border-radius: 50%;
+        margin-right: 16px;
+    }
+
+    &__content {
+        flex-grow: 1;
+    }
+
+    &__author-line,
+    &__message-line {
+        margin-bottom: 8px;
+    }
+
+    &__atuhor-line {
+        transform: translateY(5px);
+    }
+
+    &__author {
+        font-weight: 600;
+    }
+
+    &__add-note {
+        color: $gray-600--old;
+        cursor: pointer;
+    }
+
+    &__edit,
+    &__delete {
+        width: 24px;
+        height: 24px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 16px;
+        cursor: pointer;
+    }
+
+    &__update-info {
+        @include сaption-l;
+        margin-left: -48px;
+    }
+
+    &__people-added {
+        color: $gray-600--old;
+        margin-right: 8px;
+    }
+
+    &__photo-people {
+        width: 24px;
+        height: 24px;
+        margin-right: 2px;
+        border-radius: 50%;
+        background-position: center;
+        background-size: cover;
+        text-align: center;
+        color: $white;
+        font-weight: 600;
+    }
+
+    &__ticket-info {
+      border-radius: 8px;
+      border: 1px solid $gray-200;
+      box-shadow: 0 1px 2px rgba(16, 24, 40,.05);
+    }
+    &__ticket-header {
+      display: flex;
+      align-items: center;
+      padding: 0 24px 0 16px;
+      background-color: #F9FAFB;
+      border-bottom: 1px solid #EAECF0;
+    }
+    &__ticket-body {
+      padding: 16px 24px 16px 16px;
+    }
+
+    &__done-status {
+        width: 24px;
+        height: 24px;
+        margin-right: 4px;
+    }
+
+    &__ticket-title {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        margin-right: 8px;
+
+        pre:not(:empty) {
+          font-family: "Inter", sans-serif;
+          color: $gray-900;
+          font-size: 14px;
+          line-height: 17px;
+          font-weight: 400;
+          text-overflow: unset;
+          overflow: auto;
+          white-space: pre-wrap;
+          margin: 0;
+        }
+        pre:empty {
+          margin: 0;
+        }
+    }
+
+    &__service-title,
+    &__ticket-price,
+    &__ticket-qty,
+    &__ticket-total {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      color: $gray-900;
+    }
+
+    &__ticket-price {
+      flex: 1 0 90px;
+    }
+
+    &__ticket-qty {
+      flex: 1 0 90px;
+    }
+
+    &__ticket-total {
+      flex: 1 0 66px;
+      padding-left: 0;
+    }
+
+    &__date-icon {
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        margin-right: 8px;
+    }
+    &__ticket-header-name,
+    &__ticket-header-price,
+    &__ticket-header-qty,
+    &__ticket-header-total {
+      padding: 12px 8px 12px 0;
+      font-weight: 500;
+      font-size: 13px;
+      line-height: 16px;
+      color: $gray-500;
+    }
+
+    &__ticket-header-name {
+      flex: 100%;
+    }
+
+    &__ticket-header-price {
+      flex: 1 0 90px;
+    }
+
+    &__ticket-header-qty {
+      flex: 1 0 90px;
+    }
+
+    &__ticket-header-total {
+      flex: 1 0 66px;
+      padding-left: 0;
+    }
+
+    &__more {
+        width: 24px;
+        height: 24px;
+        background-repeat: no-repeat;
+        background-position: center;
+        cursor: pointer;
+        position: relative;
+    }
+
+    &__service-header-name {
+        width: 289px;
+        margin-right: 8px;
+    }
+
+    &__service-header-price {
+        margin-right: 8px;
+        width: 60px;
+    }
+
+    &__service-header-qty {
+        margin-right: 8px;
+        width: 60px;
+    }
+
+    &__service-header-total {
+        margin-right: 8px;
+        width: 60px;
+    }
+
+    &__service-title {
+        width: 252px;
+        font-weight: 600;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        margin-right: 8px;
+    }
+
+    &__service-time-in {
+        width: 60px;
+        margin-right: 8px;
+    }
+
+    &__service-time-out {
+        width: 60px;
+        margin-right: 8px;
+    }
+
+    &__service-duration {
+        width: 60px;
+        margin-right: 8px;
+    }
+
+    &__service-subinfo {
+        line-height: 16px;
+        color: $primary-2;
+        margin-top: 3px;
+        margin-left: 28px;
+    }
+
+    &__service-tag-completed {
+        line-height: 12px;
+        color: $success;
+        font-size: 10px;
+        border-color: $success;
+        background: $white;
+        padding: 4px 6px;
+        text-transform: unset;
+
+        @media (max-width: 767px) {
+            margin: 10px 0px 0px 0px;
+        }
+    }
+
+    &__serial-number {
+        border: none;
+        font-size: 12px;
+        padding: 5px 6px 5px 36px;
+        font-weight: 600;
+        color: #212b36;
+        text-transform: unset;
+        font-family: "Inter", sans-serif;
+
+        pre {
+            font-size: 12px;
+            margin: 0px;
+        }
+    }
+
+    &__ticket-info-container {
+        .dropdown {
+            @media (max-width: 767px) {
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
+        }
+        /deep/ .input-group {
+          //width: 131px; // TODO check this style
+          padding: 1px 12px;
+          border: 1px solid $gray-200;
+          border-radius: 6px;
+          margin: 0 0 0 8px;
+
+          .qt-input-block__input {
+            width: 83px;
+            padding: 0;
+            border: unset;
+            box-shadow: unset;
+            height: auto;
+            margin-left: 6px;
+            font-weight: 500;
+            font-size: 13px;
+            line-height: 16px;
+            color: #667085;
+          }
+          .icon__calendar {
+            display: inline-block;
+            position: static;
+            margin: 0;
+            transform: translateY(3px);
+          }
+        }
+
+        /deep/ .device-user {
+          margin-bottom: 0 !important;
+          border: 1px solid $gray-200;
+          box-shadow: 0 1px 2px rgba(16, 24, 40, .05);
+          border-radius: 6px;
+          font-weight: 500;
+          font-size: 13px;
+          line-height: 16px;
+          color: $gray-500;
+          padding: 5px 12px;
+
+          .add-user {
+            width: 16px;
+            height: 16px;
+            background: url('/assets/img/icons/assign-user-plus.svg') no-repeat center/contain;
+            margin-right: 6px;
+          }
+        }
+    }
+}
+
+.show-desktop {
+    @media (max-width: 767px) {
+        display: none;
+    }
+}
+
+/deep/ .detail-ticket-txt {
+  display: none;
+}
+
+.ticket-updates-tag__modern-row {
+  min-height: 36px;
+}
+
