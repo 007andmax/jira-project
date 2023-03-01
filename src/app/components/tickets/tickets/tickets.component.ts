@@ -20,7 +20,6 @@ export class TicketsComponent implements OnInit, OnDestroy {
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe((data: any) => {
       this.listType = data.listType;
     })
-    console.log("this.listType", this.listType);
     this.sub.add(getOnInitFilter);
     this.ticketsService.getActualNumber().subscribe((data: any) => {
       this.ticketsStateService.onInitActualNumber(data.number);
