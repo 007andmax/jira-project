@@ -287,12 +287,12 @@
     border-color: $success;
     background: $white;
     padding: 4px 6px;
-    text-transform: unset;
     margin-left: auto;
     margin-right: 0 !important;
     margin-top: 8px;
     display: flex;
     width: fit-content;
+    text-transform: capitalize;
 
     @media (max-width: 767px) {
       margin: 10px 0 0 0;
@@ -325,5 +325,13 @@
 .show-desktop {
   @media (max-width: 767px) {
     display: none;
+  }
+}
+
+/deep/ .icon__task-pending {
+  background: url('/assets/img/icons/active.svg') no-repeat center / cover;
+
+  &.--done {
+    background: url('/assets/img/icons/task-pending.svg') no-repeat center / cover;
   }
 }

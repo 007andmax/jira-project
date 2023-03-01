@@ -18,6 +18,10 @@
     }
 
     &__content {
+      position: relative;
+    }
+
+    &__content {
       flex-grow: 1;
     }
 
@@ -221,4 +225,14 @@
       margin-right: 32px;
     }
 
+}
+/deep/ app-ticket-profile-updates-product,
+/deep/ app-ticket-profile-updates-service {
+  .ticket-updates__update-info {
+    font-size: 12px;
+    position: absolute;
+    bottom: 12px;
+    left: -44px;
   }
+}
+
