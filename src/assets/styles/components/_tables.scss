@@ -205,6 +205,7 @@ table.qt-table-modern {
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
+      position: relative;
 
       @media (max-width: 767px) {
         flex: 100%;
@@ -219,6 +220,11 @@ table.qt-table-modern {
       }
 
       .ellipsis {
+        position: absolute;
+        width: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 6px;
         @media (max-width: 767px) {
           white-space: unset;
         }
