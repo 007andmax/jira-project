@@ -46,7 +46,7 @@ export class AddAssignedUserComponent implements OnInit {
   public constructor(
     public usersStateService: UsersStateService,
     public ticketStateService: TicketStateService,
-    private elRef: ElementRef,
+    public elRef: ElementRef,
   ) {
 
 
