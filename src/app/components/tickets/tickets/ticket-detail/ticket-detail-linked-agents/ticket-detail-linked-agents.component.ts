@@ -52,4 +52,11 @@ export class TicketDetailLinkedAgentsComponent extends PasswordManagerLinkedComp
   isSeletedDevice(item) {
     return this.selectedDevice && this.selectedDevice.id === item.id;
   }
+  onCloseDropDown(data) {
+    if (!data) {
+      this.elRef.nativeElement.querySelector("#search-user").value = "";
+      this.devicesList = this.devicesStateService.getAllDevices()[this.selectedCompanyId].sort((a, b) => (`${a.name}`.toLowerCase() > `${b.name}`.toLowerCase()) ?
+        1 : ((`${b.name}`.toLowerCase() > `${a.name}`.toLowerCase()) ? -1 : 0));
+    }
+  }
 }

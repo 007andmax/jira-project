@@ -211,6 +211,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   onAddUpdate(data) {
     this.tabFormUpdate = data;
     this.showFormUpdate = true;
+    this.ticketStateService.setTabUpdate(data);
   }
   getTicket(id) {
     this.isInit = true;
@@ -228,7 +229,6 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       this.onInitRealTimes();
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
-        //  if (!this.rightPanel.toggleRightPanel && !this.appService.isMobile) this.rightPanel.toggleTypeOnPanel('COMPANY_INFO');
       }
     })
   }
@@ -244,7 +244,6 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     }
   }
   onChangeTags(data, remove) {
-    console.log("remove", remove);
     let textNotification = (remove == true) ? "The tag has been successfully removed" : "The tag has been successfully added";
     this.ticketProfile.tags = data;
     let tags = this.ticketProfile.tags.map(item => {
@@ -319,6 +318,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
         result += ' ';
       }
     }
+    if (this.ticketProfile.ticketSource === "FROM_AGENT" && this.ticketProfile.agent == null) return `${result} ${this.ticketProfile.deviceId} (new agents stuff)`
     return result;
   };
   getAgentName() {

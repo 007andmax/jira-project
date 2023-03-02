@@ -36,7 +36,9 @@
     margin-bottom: 8px;
   }
   &__author-line {
-    padding-left: 0px !important;
+    @media (min-width: 768px) {
+      padding-left: 0px !important;
+    }
   }
   &__author {
     font-weight: 600;

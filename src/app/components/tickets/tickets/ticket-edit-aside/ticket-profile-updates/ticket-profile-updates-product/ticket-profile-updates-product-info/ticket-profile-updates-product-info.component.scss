@@ -301,7 +301,7 @@
   &__serial-number {
     border: none;
     font-size: 12px;
-    padding: 5px 6px 5px 36px;
+    padding: 5px 6px 5px 6px;
     font-weight: 600;
     color: #212b36;
     text-transform: unset;
@@ -309,6 +309,9 @@
     pre {
       font-size: 12px;
       margin: 0px;
+    }
+    @media (max-width: 767px) {
+      padding-left: 0;
     }
   }
 

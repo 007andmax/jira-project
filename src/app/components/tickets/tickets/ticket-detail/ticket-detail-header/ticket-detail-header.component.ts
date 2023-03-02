@@ -114,6 +114,7 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
     return {
       note: "Ticket has been closed",
       type: "NOTE",
+      noteType: "PUBLIC",
       shares: [],
       ticket: { id: this.ticketProfile.id },
       attachments: []

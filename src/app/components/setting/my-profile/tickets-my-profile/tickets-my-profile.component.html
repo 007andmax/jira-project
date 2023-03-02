@@ -1,0 +1,37 @@
+<div
+    class="cmn-area profile"
+    [hidden]="loading"
+>
+    <div class="tab-pane__header">
+        <div class="tab-pane__header-title">Tickets</div>
+    </div>
+    <div class="tab-pane__body">
+        <form>
+            <div class="tab-pane__row">
+                <div class="tab-pane__subtitle">Default ticket section</div>
+                <div class="tab-pane-input__row">
+                    <label class="qt-input-block">
+                        <app-drop-down
+                            #intervalsDp
+                            [class]="['qt-select-input-40']"
+                            [placeholder]="'Select Default page'"
+                            [editItem]="selectedDefaulPage"
+                            [isBlockClear]="true"
+                            [sort]="false"
+                            [field]="'title'"
+                            [list]="listDefaultPages"
+                            (onSelectedItem)="onChangeDefaultPage($event)"
+                        >
+                        </app-drop-down>
+                    </label>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div
+    class="loading-container"
+    *ngIf="loading"
+>
+    <div class="loading"></div>
+</div>

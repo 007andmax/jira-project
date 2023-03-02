@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddAssignedUserComponent } from 'src/app/components/tickets/tickets/ticket-edit-aside/add-assigned-user/add-assigned-user.component';
 import { TicketStateService } from 'src/app/components/tickets/tickets/ticket-edit-aside/services/ticket-state.service';
@@ -17,8 +17,9 @@ export class ModalAddUsersNotifyComponent extends AddAssignedUserComponent {
     public activeModal: NgbActiveModal,
     public ticketStateService: TicketStateService,
     private addUsersNotifyStateService: AddUsersNotifyStateService,
+    public elRef: ElementRef,
   ) {
-    super(usersStateService, ticketStateService);
+    super(usersStateService, ticketStateService, elRef);
   }
 
   isSelected(user) {
