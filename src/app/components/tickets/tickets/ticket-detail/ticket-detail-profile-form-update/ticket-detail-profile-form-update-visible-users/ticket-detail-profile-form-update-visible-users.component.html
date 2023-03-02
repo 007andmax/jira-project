@@ -9,7 +9,7 @@
         ></i>
         <i
             *ngIf="type == 'PRIVATE'"
-            class="icon__private qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"
+            class="icon__private qt-za-16 qt-sz-16 qt-bg-contain"
         ></i>
     </div>
     <span [textContent]="getText()"></span>
@@ -40,7 +40,7 @@
             (click)="changeType('PRIVATE')"
             ngbDropdownItem
         >
-            <div class="icon__private qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"></div>
+            <div class="icon__private qt-za-16 qt-sz-16 qt-bg-contain"></div>
             <p>Private</p>
             <span>Visible to tech users only</span>
             <i

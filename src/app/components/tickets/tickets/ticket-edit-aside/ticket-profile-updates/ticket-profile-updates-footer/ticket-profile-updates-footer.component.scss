@@ -230,9 +230,11 @@
 /deep/ app-ticket-profile-updates-service {
   .ticket-updates__update-info {
     font-size: 12px;
-    position: absolute;
-    bottom: 12px;
-    left: -44px;
+    @media (min-width: 768px) {
+      position: absolute;
+      bottom: 12px;
+      left: -44px;
+    }
   }
 }
 

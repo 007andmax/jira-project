@@ -43,8 +43,20 @@
     .ticket-status-table__status:not(.--parse-status) input {
       color: $gray-400;
     }
+    /deep/ .detail-ticket-txt {
+      color: $gray-400;
+    }
+  }
+  /deep/ .detail-ticket-txt {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $gray-500;
   }
 }
+
 .ticket-status-table {
   &__status:not(.--parse-status) {
     flex: 1;
@@ -71,7 +83,7 @@
 /deep/ .date-picker {
   margin-right: 8px;
 }
-/deep/ .date-picker .icon__calendar {
+/deep/ .date-picker .detail-ticket-date-picker .icon__calendar {
   right: 50%;
   transform: translate(50%, -50%);
 }
@@ -119,11 +131,11 @@
   border-radius: 4px;
 }
 /deep/ .tech-users-container .tech-user-body .select-wrapper {
-  width: 440px;
+  width: 464px;
   height: 360px;
 }
 /deep/ .dropdown-assign-ticket .users-list {
-  max-width: 440px;
+  max-width: 464px;
   max-height: 298px;
 }
 /deep/ .qt-input-search input {
