@@ -11,9 +11,9 @@
         <mat-chip-list
             #chipList
             aria-label="Fruit selection"
+            ngbDropdownAnchor
         >
             <mat-chip
-                ngbDropdownAnchor
                 class="selected-tag-user"
                 *ngFor="let user of selectedUsers; let i = index"
                 [selectable]="selectable"
