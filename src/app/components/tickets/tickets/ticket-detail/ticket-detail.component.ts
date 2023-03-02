@@ -227,10 +227,8 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       this.ticketProfileUpdates.resetShowLoadMoreUpdates();
       this.ticketTasks.getTicketTasks(id);
       this.onInitRealTimes();
-      console.log("this.ticketProfile", this.ticketProfile);
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
-        //  if (!this.rightPanel.toggleRightPanel && !this.appService.isMobile) this.rightPanel.toggleTypeOnPanel('COMPANY_INFO');
       }
     })
   }
@@ -246,7 +244,6 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     }
   }
   onChangeTags(data, remove) {
-    console.log("remove", remove);
     let textNotification = (remove == true) ? "The tag has been successfully removed" : "The tag has been successfully added";
     this.ticketProfile.tags = data;
     let tags = this.ticketProfile.tags.map(item => {

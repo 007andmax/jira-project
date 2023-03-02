@@ -41,7 +41,6 @@ export class TicketProfileUpdatesServiceInfoComponent implements OnInit, OnDestr
 
   ngOnInit() {
     if (this.service.user) this.userService = [this.service.user];
-    console.log("this.listTechUsers", this.listTechUsers);
     if (this.usersStateService.getAllUsers().length > 0) this.listTechUsers = this.getUsersForAssign();
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.listTechUsers = this.getUsersForAssign();
