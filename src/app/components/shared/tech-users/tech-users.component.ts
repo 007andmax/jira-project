@@ -116,9 +116,9 @@ export class TechUsersComponent implements OnInit, OnDestroy {
     }
     if (user.id) {
       return `url(${'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
-        '')}) no-repeat`
+        '')}) contain no-repeat`
     } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
-      return `url(/file/${(user.avatar.origin.id)}.jpg) no-repeat`;
+      return `url(/file/${(user.avatar.origin.id)}.jpg) contain no-repeat`;
     } else {
       return '#16a4fa';
     }

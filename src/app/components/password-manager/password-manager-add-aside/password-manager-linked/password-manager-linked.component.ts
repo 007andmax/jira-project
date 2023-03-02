@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Company } from 'src/app/interfaces/company/company';
 import { GadgetsService } from 'src/app/services/gadgets/gadgets.service';
@@ -39,6 +39,7 @@ export class PasswordManagerLinkedComponent implements OnInit {
     public devicesStateService: DevicesStateService,
     private gadgetsService: GadgetsService,
     public ticketsService: TicketsService,
+    public elRef: ElementRef,
     private usersStateService: UsersStateService,) { }
 
   ngOnInit() {

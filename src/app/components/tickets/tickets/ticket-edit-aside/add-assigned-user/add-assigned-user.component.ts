@@ -45,7 +45,8 @@ export class AddAssignedUserComponent implements OnInit {
    */
   public constructor(
     public usersStateService: UsersStateService,
-    public ticketStateService: TicketStateService
+    public ticketStateService: TicketStateService,
+    private elRef: ElementRef,
   ) {
 
 
@@ -121,15 +122,21 @@ export class AddAssignedUserComponent implements OnInit {
     }
     if (user.id) {
       return `url(${'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
-        '')}) no-repeat`
+        '')}) contain no-repeat`
     } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
-      return `url(/file/${(user.avatar.origin.id)}.jpg) no-repeat`;
+      return `url(/file/${(user.avatar.origin.id)}.jpg) contain no-repeat`;
     } else {
       return '#16a4fa';
     }
   };
   public getUserName(user) {
     return (user) ? `${user.firstName} ${user.lastName}` : '';
+  }
+  onCloseDropDown(data) {
+    if (!data && this.type == 'DETAIL_TICKET_ASSIGNED_USER') {
+      this.elRef.nativeElement.querySelector("#search-user").value = "";
+      this.users = JSON.parse(JSON.stringify(this.reqUsers));
+    }
   }
 
   /**

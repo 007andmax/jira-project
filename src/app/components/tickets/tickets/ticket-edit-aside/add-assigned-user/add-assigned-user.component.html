@@ -6,6 +6,7 @@
         [placement]="placement"
         #assignedUserDp="ngbDropdown"
         [container]="container"
+        (openChange)="onCloseDropDown($event)"
     >
         <mat-chip-list
             #chipList
@@ -57,6 +58,7 @@
             >
                 <input
                     #userInput
+                    id="search-user"
                     class="pointer"
                     [formControl]="userCtrl"
                     [matChipInputFor]="chipList"

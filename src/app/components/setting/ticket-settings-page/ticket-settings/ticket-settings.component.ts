@@ -21,15 +21,6 @@ export class TicketSettingsComponent implements OnInit {
   new CompanySetting('15 minutes', 'FIFTEEN_MINUTES')];
   timepickerTypes = [new CompanySetting('Start-End time picker', 'TIME_PICKER'),
   new CompanySetting('Duration picker', 'DURATION_PICKER')];
-  listDefaultPages = [new TitleListType("All Tickets", "ALL"),
-  new TitleListType("Unassigned Tickets", "UNASSIGNED"),
-  new TitleListType("My Tickets", "MY_TICKETS"),
-  //new TitleListType("Shared", "SHARED"),
-  new TitleListType("Open Tickets", "OPEN"),
-  new TitleListType("Closed Tickets", "CLOSED"),
-  new TitleListType("Trash Tickets", "TRASH"),
-  new TitleListType("Spam Tickets", "SPAM")];
-  selectedDefaulPage = new TitleListType("All", "ALL");
   @ViewChild('intervalsDp') intervalsDp: DropDownComponent;
   loading = true;
   submitted = false;
@@ -55,11 +46,9 @@ export class TicketSettingsComponent implements OnInit {
     // get current user
     if (this.usersStateService.getCurrentUser()) {
       this.currentUser = this.usersStateService.getCurrentUser();
-      this.selectedDefaulPage = this.listDefaultPages.find(item => item.type == this.currentUser.startPage);
     }
     this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.currentUser = data;
-      this.selectedDefaulPage = this.listDefaultPages.find(item => item.type == this.currentUser.startPage);
     })
     this.ticketForm = this.formBuilder.group({
       ticketCount: [
@@ -147,9 +136,7 @@ export class TicketSettingsComponent implements OnInit {
   getSelectedTimepickerType() {
     return this.timepickerTypes.find(item => item.value === this.ticketForm.value.timepickerType);
   }
-  onChangeDefaultPage(data) {
-    this.selectedDefaulPage = data;
-  }
+
   /**
    * saved
    */
@@ -189,10 +176,5 @@ export class TicketSettingsComponent implements OnInit {
         this.toastr.error('Bad Request');
       }
     );
-    if (this.selectedDefaulPage.type != this.currentUser.startPage) {
-      this.usersService.setDefaultPage(this.selectedDefaulPage.type).subscribe(res => {
-
-      })
-    }
   }
 }

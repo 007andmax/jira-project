@@ -4,6 +4,7 @@ import { AccountComponent } from "./account/account.component";
 import { ActivityHistoryComponent } from "./activity-history/activity-history.component";
 import { EmailNotificationsComponent } from "./email-notifications/email-notifications.component";
 import { ProfileComponent } from "./profile/profile.component";
+import { TicketsMyProfileComponent } from "./tickets-my-profile/tickets-my-profile.component";
 declare var $: any;
 
 @Component({
@@ -17,6 +18,7 @@ export class MyProfileComponent implements OnInit, OnDestroy {
   @ViewChild('account') account: AccountComponent;
   @ViewChild('emailNotifications') emailNotifications: EmailNotificationsComponent;
   @ViewChild('activityHistory') activityHistory: ActivityHistoryComponent;
+  @ViewChild('tickets') tickets: TicketsMyProfileComponent;
   constructor(private settingStateService: SettingStateService) { }
 
   ngOnInit() {
@@ -37,6 +39,7 @@ export class MyProfileComponent implements OnInit, OnDestroy {
     if (this.profile) this.profile.onSubmit();
     if (this.account) this.account.onSubmit();
     if (this.emailNotifications) this.emailNotifications.onSubmit();
+    if (this.tickets) this.tickets.onSubmit();
   }
   onBackMenu() {
     let body = document.getElementsByTagName("body")[0];

@@ -2,6 +2,7 @@
     class="qt-input-block --required"
     ngbDropdown
     container="body"
+    (openChange)="onCloseDropDown($event)"
 >
     <div class="qt-df qt-ai-c qt-jc-sb qt-mb-16">
         <span class="qt-input-block__label">Linked Agents</span>
@@ -36,6 +37,7 @@
         <div class="qt-input-search">
             <input
                 type="text"
+                id="search-user"
                 autocomplete="off"
                 class="qt-dropdown-input"
                 placeholder="Search Agents"
