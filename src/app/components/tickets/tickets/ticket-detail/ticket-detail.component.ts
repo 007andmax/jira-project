@@ -37,6 +37,7 @@ import { TicketDetailProfileFormUpdateComponent } from './ticket-detail-profile-
 import { TicketProfileUpdate } from '../class/ticket-profile-update';
 import { DatePickerStateService } from 'src/app/components/shared/date-picker/services/date-picker-state.service';
 import { TicketDetailHeaderComponent } from './ticket-detail-header/ticket-detail-header.component';
+import { TicketProfileAgent } from '../class/ticket-profile-agent';
 
 @Component({
   selector: 'ticket-detail',
@@ -124,7 +125,8 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       if (this.ticketProfile.id === data.id) {
         if (data.field === "agent.deviceId") {
           let device = this.devicesStateService.getAllDevices()[this.ticketProfile.company.id].find(item => item.agentId === data.value || item.id === data.value);
-          this.ticketProfile.agent.label = device.label;
+          if (device) this.ticketProfile.agent = new TicketProfileAgent(device);
+          if (!device) this.ticketProfile.agent = null;
         }
         this.ticketProfile[data.field] = data.value;
       }
