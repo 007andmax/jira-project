@@ -61,7 +61,7 @@ export class LeftPanelDevicesComponent implements OnInit {
     });
 
     this.companiesState.getOnCompanies().subscribe(data => {
-      this.companyReportList = this.getCompaniesNames(data.filter((item) => item.accountType === "CLIENT" || item.accountType === "LEAD"));
+      this.companyReportList = this.getCompaniesNames(data.filter((item) => (item.accountType === "CLIENT" || item.accountType === "LEAD") && !item.deletedAt));
       this.companyList = this.companyReportList.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0);
     })
 
