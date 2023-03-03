@@ -26,6 +26,7 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
   @Output() onClaimTicket = new EventEmitter();
   @Output() onMoveToSpam = new EventEmitter();
   @Output() onMoveToTrash = new EventEmitter();
+  @Output() onToggleRigthPanel = new EventEmitter();
   @ViewChild('update_closeBtn') update_closeBtn: DisabledBtnDirective;
   isUpdateAndClose: boolean = false;
   currentUser: CurrentUser;
@@ -140,6 +141,9 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
   }
   addUpdate(type) {
     this.onAddUpdate.emit(type);
+  }
+  toggleRigthPanel() {
+    this.onToggleRigthPanel.emit(null);
   }
   ngOnDestroy(): void {
     if (this.interval) clearInterval(this.interval);

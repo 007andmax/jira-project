@@ -1,0 +1,13 @@
+<p class="header">
+    <span (click)="toggleContainer = !toggleContainer">Contact Details</span>
+    <i
+        (click)="toggleContainer = !toggleContainer"
+        class="icn-sm report-caret-icon"
+    ></i>
+</p>
+<div
+    class="container"
+    *ngIf="toggleContainer"
+>
+    <p>container</p>
+</div>

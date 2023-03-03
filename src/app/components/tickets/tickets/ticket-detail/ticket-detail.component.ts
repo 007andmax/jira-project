@@ -57,6 +57,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   ticketProfile: TicketProfile = new TicketProfile();
   showFormUpdate: boolean = false;
   showEditUpdate: boolean = false;
+  toggleRigthPanel: boolean = true;
   tabFormUpdate: string;
   openedMobileEditUpdate = false;
   modeSubject = 'view';
@@ -198,6 +199,9 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.ticketsService.restoreFromSpam(this.ticketProfile.id, false).subscribe(data => {
 
     })
+  }
+  onToggleRigthPanel() {
+    this.toggleRigthPanel = !this.toggleRigthPanel;
   }
   markAsOpen() {
     this.ticketsService.changeStatus(this.ticketProfile.id, 'IN_PROGRESS').subscribe((data: any) => {
