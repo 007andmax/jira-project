@@ -35,7 +35,11 @@ export class CompanyDevicesRemoteAccessComponent implements OnInit {
 
   }
   downloadViewer() {
-    window.location.href = '/data/new/connection-viewer';
+    if (this.action == "CONNECT_DEVICE_BETA") {
+      window.location.href = '/data/new/connection-viewer';
+    } else {
+      window.location.href = '/data/connection-viewer';
+    }
   }
   getConstant(sessionId) {
     this.remoteControlService
