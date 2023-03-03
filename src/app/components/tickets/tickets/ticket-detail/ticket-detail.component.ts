@@ -306,6 +306,30 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     (<any>document.body.querySelector(".ticket-edit-aside")).style.zIndex = "1";
   }
   parseTicketSource() {
+    if (this.ticketProfile.deviceId && this.ticketProfile.sourceName == null && this.ticketProfile.ticketSource == "FROM_AGENT") {
+      var words = this.ticketProfile.ticketSource.split('_'),
+        result = '';
+      for (var i = 0, len = words.length; i < len; i++) {
+        var word = words[i];
+        result += word[0].toLowerCase() + word.slice(1).toLowerCase();
+        if (i !== len - 1) {
+          result += ' ';
+        }
+      }
+      return `${result} ${this.ticketProfile.deviceId} (new agents stuff)`
+    }
+    if (this.ticketProfile.deviceId && this.ticketProfile.sourceName && this.ticketProfile.ticketSource == "FROM_AGENT") {
+      var words = this.ticketProfile.ticketSource.split('_'),
+        result = '';
+      for (var i = 0, len = words.length; i < len; i++) {
+        var word = words[i];
+        result += word[0].toLowerCase() + word.slice(1).toLowerCase();
+        if (i !== len - 1) {
+          result += ' ';
+        }
+      }
+      return `${result} ${this.ticketProfile.sourceName}`
+    }
     if (!this.ticketProfile.ticketSource) {
       return '';
     }
@@ -318,7 +342,6 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
         result += ' ';
       }
     }
-    if (this.ticketProfile.ticketSource === "FROM_AGENT" && this.ticketProfile.agent == null) return `${result} ${this.ticketProfile.deviceId} (new agents stuff)`
     return result;
   };
   getAgentName() {

@@ -24,6 +24,7 @@
         [search]="true"
         [change]="true"
         [editItem]="selectedCompany"
+        [isBlockClear]="true"
         [isDisabled]="!(ticketProfile.ticketSource === 'FROM_EMAIL' && !checkExistServicesProducts() && getCompany(ticketProfile.company.id) && getCompany(ticketProfile.company.id).isUnknown)"
         (onSelectedItem)="onSelectCompany($event)"
     ></company-drop-down>

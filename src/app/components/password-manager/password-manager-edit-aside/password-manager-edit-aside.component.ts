@@ -106,11 +106,12 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       this.selectedClient = this.companiesState.getCompanies().find(item => item.id === this.editItem.companyId);
       if (!this.companiesState.isInitLightAllCompanies) this.companiesState.onInitGetLightCompanies();
       this.opened = true;
-      this.showSecretCode = false;
+      this.showSecretCode = true;
       this.isEditSecretKey = false;
-      this.isGetSecretCode = false;
+      this.isGetSecretCode = true;
       this.showPassword = false;
       if (this.intervalContainer) clearInterval(this.intervalContainer);
+      if (this.showSecretCode && this.editItem.otpEnable) this.getCodeRecords();
     });
     this.sub.add(onEditForm);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {

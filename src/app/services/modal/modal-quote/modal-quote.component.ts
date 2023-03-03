@@ -15,6 +15,7 @@ import { QUOTE_MODAL_ACTION_ADD, QUOTE_MODAL_ACTION_EDIT, QUOTE_MODAL_ACTION_LIS
 import { SUPPORT_MODAL_ACTION_SEND } from 'src/app/const/support';
 import { SupportStateService } from 'src/app/states/support/support-state.service';
 import { QuoteEdit } from 'src/app/components/billing/quotes/class/quote-edit';
+import { QuotePreview } from 'src/app/components/billing/quotes/class/quote-preview';
 
 /**
  * Modal quote component
@@ -84,7 +85,8 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
    */
   public ngOnInit() {
     this.initResendMode();
-    this.getAllUsers((this.data instanceof QuoteEdit) ? this.data.company.id : this.data.companyId);
+    console.log("this", this.data);
+    this.getAllUsers((this.data instanceof QuoteEdit || this.data instanceof QuotePreview) ? this.data.company.id : this.data.companyId);
     this.userInput.nativeElement.onblur = (e) => {
       if (this.matAutocomplete.isOpen) {
         let modal = this.matAutocomplete.panel.nativeElement;
@@ -154,6 +156,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
    * Get user list
    */
   private getAllUsers(companyId) {
+    console.log("companyId", companyId);
     let userList = this.usersStateService.getAllUsers();
     this.initialized = true;
     this.reqUsersListTechnical = userList.filter((item) => item.accountType === USER.TYPE.TECH && !item.deletedAt && item.primaryEmail !== "").sort((a, b) => (this.getFirstLastName(a).toLowerCase() > this.getFirstLastName(b).toLowerCase()) ?
