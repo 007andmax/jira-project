@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Company } from 'src/app/interfaces/company/company';
 import { CompanyAndressContact } from 'src/app/interfaces/company/company-address-contact';
@@ -38,8 +38,8 @@ export class TicketEditAsideCompanyInfoComponent implements OnInit {
   constructor(private companiesStateService: CompaniesStateService,
     public ticketsListService: TicketsListService,
     private usersStateService: UsersStateService,
-
-    private mapModalStateService: MapModalStateService) { }
+    private mapModalStateService: MapModalStateService,
+    public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
 
@@ -81,6 +81,7 @@ export class TicketEditAsideCompanyInfoComponent implements OnInit {
       } else {
         this.location = '';
       }
+      this.cd.detectChanges();
       if (this.company && this.createdUser && this.companyHistory) {
         this.lastCompanyId = this.company.id;
         this.lastUserId = this.createdUser.id;

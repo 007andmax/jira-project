@@ -9,5 +9,45 @@
     class="container"
     *ngIf="toggleContainer"
 >
-    <p>container</p>
+    <div class="qt-df qt-ai-c">
+        <div
+            class="ticket-edit-aside__header-avatar"
+            [textContent]="ticketsListService.getAssignedUserNameForAvatar(ticketProfile.createdUser)"
+            [ngStyle]="{'background': ticketsListService.getStyleAvatar(ticketProfile.createdUser)}"
+        ></div>
+        <span
+            class="pointer"
+            [textContent]="getNameCreateUser()"
+        ></span>
+    </div>
+    <div class="qt-df qt-ai-c">
+        <i class="icon__companies qt-bg-contain qt-sz-16 qt-mr-8"></i>
+        <div [textContent]="getCompanyUser().name"></div>
+    </div>
+    <div class="qt-df qt-ai-c">
+        <i class="icon__email qt-bg-contain qt-sz-16 qt-mr-8"></i>
+        <div [textContent]="ticketProfile.createdUser.email"></div>
+    </div>
+    <div
+        class="qt-df qt-ai-c"
+        *ngIf="primaryContact"
+    >
+        <ng-template
+            class="assigned-ticket-user"
+            ngFor
+            let-phoneNumber
+            [ngForOf]="getPhoneNumbers()"
+            [ngForTrackBy]="trackByIndex"
+        >
+            <div class="qt-df qt-ai-c">
+                <i class="icon__phone-gray-500 qt-bg-contain qt-sz-16 qt-mr-8"></i>
+                <preview-phone-mask
+                    [class]="'company-info-aside__ticket-created-name'"
+                    *ngIf="phoneNumber.number"
+                    [number]="phoneNumber.number"
+                ></preview-phone-mask>
+            </div>
+        </ng-template>
+    </div>
+    <button (click)="showMore()">View more info</button>
 </div>

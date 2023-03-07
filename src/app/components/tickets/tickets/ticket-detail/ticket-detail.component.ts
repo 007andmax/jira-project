@@ -64,6 +64,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   modeDescription = 'view';
   showAddAssignedUser = false;
   showPreloader: boolean = true;
+  typeRigthDetailAside: string;
   listColors: Array<StatusColor> = [];
   listAssignedUser: Array<CurrentUser> = [];
   lisUpdateUser: Array<CurrentUser> = [];
@@ -180,6 +181,10 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onEditUpdateByForm);
   }
+  onShowMore(data) {
+    this.typeRigthDetailAside = data;
+    this.toggleRigthPanel = false;
+  }
   onInitRealTimes() {
     if (this.websocketService.isInit) {
       this.ticketStateService.subsribeToTicket(this.ticketProfile.id);
@@ -199,6 +204,10 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.ticketsService.restoreFromSpam(this.ticketProfile.id, false).subscribe(data => {
 
     })
+  }
+  onCloseDetails() {
+    this.typeRigthDetailAside = null;
+    this.toggleRigthPanel = true;
   }
   onToggleRigthPanel() {
     this.toggleRigthPanel = !this.toggleRigthPanel;
