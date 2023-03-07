@@ -56,7 +56,13 @@
                     </div>
                     <div class="ticket-detail-page-content__body-header qt-pl-24 qt-pr-24">
                         <div class="qt-df qt-ai-fs">
+                            <img
+                                [src]="ticketsListService.getUrlAvatar(ticketProfile.createdUser)"
+                                *ngIf="ticketsListService.getUrlAvatar(ticketProfile.createdUser)"
+                                class="ticket-edit-aside__header-avatar"
+                            >
                             <div
+                                *ngIf="!ticketsListService.getUrlAvatar(ticketProfile.createdUser)"
                                 class="ticket-edit-aside__header-avatar"
                                 [textContent]="ticketsListService.getAssignedUserNameForAvatar(ticketProfile.createdUser)"
                                 [ngStyle]="{'background': ticketsListService.getStyleAvatar(ticketProfile.createdUser)}"

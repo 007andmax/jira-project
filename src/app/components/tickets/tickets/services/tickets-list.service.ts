@@ -78,6 +78,19 @@ export class TicketsListService {
       return (color) ? color : '#16a4fa';
     }
   };
+  getUrlAvatar(user) {
+    if (!(user && user.avatar)) {
+      return null;
+    }
+    if (user.id) {
+      return `url(${'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
+        '')}) 0% 0% / contain no-repeat`
+    } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
+      return `url(/file/${(user.avatar.origin.id)}.jpg) 0% 0% / contain no-repeat`;
+    } else {
+      return null;
+    }
+  };
   randomInteger(min, max) {
     // случайное число от min до (max+1)
     let rand = min + Math.random() * (max + 1 - min);

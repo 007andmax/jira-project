@@ -21,6 +21,17 @@
                 (removed)="remove(i)"
             >
                 <div class="assigne-user-item">
+                    <img
+                        [src]="ticketsListService.getUrlAvatar(user)"
+                        *ngIf="ticketsListService.getUrlAvatar(user)"
+                        class="assigne-user-avatar"
+                    >
+                    <div
+                        *ngIf="!ticketsListService.getUrlAvatar(user)"
+                        class="assigne-user-avatar"
+                        [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+                        [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
+                    ></div>
                     <div
                         class="assigne-user-avatar"
                         [textContent]="getAssignedUserNameForAvatar(user)"
