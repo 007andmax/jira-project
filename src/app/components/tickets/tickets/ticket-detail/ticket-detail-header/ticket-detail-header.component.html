@@ -35,13 +35,7 @@
 </div>
 <div class="ticket-detail-page__panel">
     <div class="qt-df qt-ai-c">
-        <img
-            [src]="ticketsListService.getUrlAvatar(currentUser)"
-            *ngIf="ticketsListService.getUrlAvatar(currentUser)"
-            class="qt-sz-36 qt-img-cover qt-circle qt-mr-16 header-avatar"
-        >
         <div
-            *ngIf="!ticketsListService.getUrlAvatar(currentUser)"
             class="qt-sz-36 qt-img-cover qt-circle qt-mr-16 header-avatar"
             [textContent]="ticketsListService.getAssignedUserNameForAvatar(currentUser)"
             [ngStyle]="{'background': ticketsListService.getStyleAvatar(currentUser)}"

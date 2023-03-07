@@ -1,13 +1,7 @@
 <div class="ticket-updates__update-block qt-mb-16">
     <div>
         <div class="qt-df qt-ai-c qt-mb-16 ticket-updates__update-block__inner">
-            <img
-                [src]="ticketsListService.getUrlAvatar(update.user)"
-                *ngIf="ticketsListService.getUrlAvatar(update.user)"
-                class="ticket-updates__ticket-photo"
-            >
             <div
-                *ngIf="!ticketsListService.getUrlAvatar(update.user)"
                 class="ticket-updates__ticket-photo"
                 [textContent]="ticketsListService.getAssignedUserNameForAvatar(update.user)"
                 [ngStyle]="{'background': ticketsListService.getStyleAvatar(update.user)}"
