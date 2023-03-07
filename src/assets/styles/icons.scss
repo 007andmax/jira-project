@@ -145,6 +145,13 @@
   &__menu-white {
     background-image: url("/assets/img/icons/menu-white.svg");
   }
+  &__tickets-detail-contact {
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-tickets.svg");
+    mask-image: url("/assets/img/icons-left-sidebar/menu-tickets.svg");
+  }
   &__menu-email-settings {
     background-color: $gray-300;
     -webkit-mask-position: center;

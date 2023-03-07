@@ -75,10 +75,13 @@
                     class="company-info-aside__primary-contact-name"
                     [textContent]="getCompanyUser().name"
                 ></div>
-                <div
-                    class="company-info-aside__primary-contact-name"
-                    [textContent]="ticketProfile.createdUser.email"
-                ></div>
+                <div class="qt-df qt-ai-c">
+                    <i class="icon__email qt-bg-contain qt-sz-16 qt-mr-8"></i>
+                    <div
+                        class="company-info-aside__primary-contact-name"
+                        [textContent]="ticketProfile.createdUser.email"
+                    ></div>
+                </div>
                 <ng-template
                     class="assigned-ticket-user"
                     ngFor
@@ -86,21 +89,23 @@
                     [ngForOf]="getPhoneNumbers()"
                     [ngForTrackBy]="trackByIndex"
                 >
-
-                    <preview-phone-mask
-                        [class]="'company-info-aside__ticket-created-name'"
-                        *ngIf="phoneNumber.number"
-                        [number]="phoneNumber.number"
-                    ></preview-phone-mask>
+                    <div class="qt-df qt-ai-c">
+                        <i class="icon__phone-gray-500 qt-bg-contain qt-sz-16 qt-mr-8"></i>
+                        <preview-phone-mask
+                            [class]="'company-info-aside__ticket-created-name'"
+                            *ngIf="phoneNumber.number"
+                            [number]="phoneNumber.number"
+                        ></preview-phone-mask>
+                    </div>
                 </ng-template>
 
             </div>
         </div>
-        <app-company-info-history
+        <ticket-detail-contact-details-history
             #companyHistory
             [user]="ticketProfile.createdUser"
             [company]="company"
             [hidden]="!ticketProfile.createdUser"
-        ></app-company-info-history>
+        ></ticket-detail-contact-details-history>
     </div>
 </div>

@@ -8,6 +8,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketProfile } from '../../class/ticket-profile';
 import { TicketsListService } from '../../services/tickets-list.service';
 import { CompanyInfoHistoryComponent } from '../../ticket-edit-aside-company-info/company-info-history/company-info-history.component';
+import { TicketDetailContactDetailsHistoryComponent } from './ticket-detail-contact-details-history/ticket-detail-contact-details-history.component';
 
 @Component({
   selector: 'ticket-detail-contact-details',
@@ -17,7 +18,7 @@ import { CompanyInfoHistoryComponent } from '../../ticket-edit-aside-company-inf
 })
 export class TicketDetailContactDetailsComponent implements OnInit, OnDestroy {
   @Input() ticketProfile: TicketProfile = new TicketProfile();
-  @ViewChild('companyHistory') companyHistory: CompanyInfoHistoryComponent;
+  @ViewChild('companyHistory') companyHistory: TicketDetailContactDetailsHistoryComponent;
   @Output() onClose = new EventEmitter<any>();
   company: Company;
   primaryContact: any;

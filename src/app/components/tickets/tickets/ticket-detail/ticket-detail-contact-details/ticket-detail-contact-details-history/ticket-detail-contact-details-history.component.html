@@ -1,0 +1,46 @@
+<div
+    class="company-info-aside__history"
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="15"
+    [infiniteScrollDisabled]="infiniteScrollDisabled"
+    [scrollWindow]="false"
+    (scrolled)="onScroll()"
+    [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}"
+>
+    <ng-template
+        ngFor
+        let-ticket
+        [ngForOf]="tickets"
+        [ngForTrackBy]="trackById"
+    >
+        <div
+            class="company-info-aside__history-block"
+            (click)="editTicket(ticket.id)"
+        >
+            <div class="qt-df qt-ai-c">
+                <i class="icon__tickets-detail-contact qt-bg-contain qt-sz-20 qt-mr-8"></i>
+                <div>
+                    <div
+                        class="company-info-aside__history-block-title"
+                        [textContent]="ticket.subject"
+                    >
+                    </div>
+                    <div
+                        class="company-info-aside__history-block-date"
+                        [textContent]="'Tkt# ' + ticket.number + ' ' + getCreateAt(ticket.createdAt)"
+                    >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <div
+        class="loading pengind-loading"
+        *ngIf="showPendingPreloader"
+    ></div>
+    <div
+        class="loading"
+        *ngIf="showPreloader"
+    ></div>
+</div>
