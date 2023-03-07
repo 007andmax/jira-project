@@ -134,12 +134,6 @@ export class TechUsersComponent implements OnInit, OnDestroy {
     return this.selectedUsers.find(item => item.id === data.id);
   }
 
-  getAssignedUserNameForAvatar(user) {
-    if (!user) return '';
-    if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}`;
-    return '';
-  }
-
   /**
    * stop event
    */

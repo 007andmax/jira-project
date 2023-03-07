@@ -118,20 +118,6 @@ export class AddAssignedUserComponent implements OnInit {
     if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}`;
     return '';
   }
-
-  getStyleAvatar(user) {
-    if (!(user && user.avatar)) {
-      return '#16a4fa';
-    }
-    if (user.id) {
-      return `url(${'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
-        '')}) contain no-repeat`
-    } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
-      return `url(/file/${(user.avatar.origin.id)}.jpg) contain no-repeat`;
-    } else {
-      return '#16a4fa';
-    }
-  };
   public getUserName(user) {
     return (user) ? `${user.firstName} ${user.lastName}` : '';
   }
