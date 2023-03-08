@@ -1,4 +1,5 @@
 @import './src/assets/styles/variable';
+@import "./src/assets/styles/mixin/dropdown";
 
 .ticket-detail-contact {
   &__divider {
@@ -12,35 +13,36 @@
     color: $gray-500;
     margin-bottom: 12px
   }
-
   &__history {
-    height: 300px;
+    max-height: 300px;
     overflow-y: auto;
     position: relative;
+    @include dropdown-scrollbar;
+
+    &-block {
+      position: relative;
+      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+      border: solid 1px $gray-200;
+      padding: 9.5px 10px;
+      margin-bottom: 8px;
+      border-radius: 8px;
+
+      &::after {
+        position: absolute;
+        content: "";
+        width: 2px;
+        height: calc(100% - 16px);
+        background-color: $blue-light-600;
+        top: 8px;
+        bottom: 8px;
+        left: 0;
+      }
+    }
 
     .loading {
       width: 25px;
       height: 25px;
       left: calc(50% - 12px);
-    }
-  }
-  &__history-block {
-    position: relative;
-    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
-    border: solid 1px $gray-200;
-    padding: 9.5px 10px;
-    margin-bottom: 8px;
-    border-radius: 8px;
-
-    &::after {
-      position: absolute;
-      content: "";
-      width: 2px;
-      height: calc(100% - 16px);
-      background-color: $blue-light-600;
-      top: 8px;
-      bottom: 8px;
-      left: 0;
     }
   }
 
@@ -59,6 +61,9 @@
     color: $gray-500;
   }
   &__icon-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     width: 32px;
     height: 32px;
     background-color: $gray-100;
@@ -67,7 +72,6 @@
 }
 
 .pengind-loading {
-
     top: auto;
 }
 .company-info-aside__history {

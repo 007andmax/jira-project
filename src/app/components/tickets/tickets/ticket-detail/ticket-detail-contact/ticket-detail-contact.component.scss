@@ -21,6 +21,12 @@
   &__header {
     padding: 12px 16px;
     border-bottom: 1px solid $gray-200;
+
+    &:only-child {
+      .report-caret-icon {
+        transform: rotate(180deg) translateY(50%);
+      }
+    }
   }
   &__body {
     padding: 16px;
@@ -43,5 +49,17 @@
       line-height: 17px;
       color: $gray-900;
     }
+  }
+}
+
+/deep/ preview-phone-mask {
+  line-height: 16px;
+
+  .ticket-detail-contact__subtitle {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: $gray-500;
+    padding: 0;
   }
 }

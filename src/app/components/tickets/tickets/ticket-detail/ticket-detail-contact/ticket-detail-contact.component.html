@@ -44,7 +44,7 @@
             ></div>
         </div>
         <div
-            class="qt-df qt-ai-c"
+            class=""
             *ngIf="checkExistUser()"
         >
             <ng-template
@@ -54,10 +54,10 @@
                 [ngForOf]="getPhoneNumbers()"
                 [ngForTrackBy]="trackByIndex"
             >
-                <div class="qt-df qt-ai-c">
+                <div class="qt-df qt-ai-c qt-mb-12">
                     <i class="icon__phone-gray-500 qt-bg-contain qt-sz-16 qt-mr-8"></i>
                     <preview-phone-mask
-                        [class]="'company-info-aside__ticket-created-name'"
+                        [class]="'company-info-aside__ticket-created-name ticket-detail-contact__subtitle'"
                         *ngIf="phoneNumber.number"
                         [number]="phoneNumber.number"
                     ></preview-phone-mask>

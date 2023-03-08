@@ -1,5 +1,7 @@
+<hr class="ticket-detail-contact__divider">
+<div class="ticket-detail-contact__primary-contacts-title">Associate Tickets</div>
 <div
-    class="company-info-aside__history"
+    class="company-info-aside__history ticket-detail-contact__history"
     infiniteScroll
     [infiniteScrollDistance]="2"
     [infiniteScrollThrottle]="15"
@@ -8,8 +10,6 @@
     (scrolled)="onScroll()"
     [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}"
 >
-    <hr class="ticket-detail-contact__divider">
-    <div class="ticket-detail-contact__primary-contacts-title">Associate Tickets</div>
     <ng-template
         ngFor
         let-ticket
@@ -22,7 +22,7 @@
         >
             <div class="qt-df qt-ai-fs">
                 <div class="ticket-detail-contact__icon-wrap qt-dif qt-jc-c qt-ai-c qt-mr-8">
-                  <i class="icon__tickets-detail-contact qt-bg-contain qt-sz-20 qt-mr-8 qt-dib"></i>
+                  <i class="icon__tickets-detail-contact qt-bg-contain qt-sz-20 qt-dib"></i>
                 </div>
                 <div>
                     <div
