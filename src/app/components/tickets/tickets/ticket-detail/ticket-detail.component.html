@@ -205,15 +205,15 @@
                     [listAssignedUser]="listAssignedUser"
                     (onSelectAssignedUser)="onSelectAssignedUser($event)"
                 ></ticket-detail-add-assigned-user>
+                <ticket-detail-linked-agents
+                    [ticketProfile]="ticketProfile"
+                    [selectedCompanyId]="ticketProfile.company.id"
+                ></ticket-detail-linked-agents>
                 <ticket-detail-edit-tags
                     [selectedTag]="ticketProfile.tags"
                     (tagsChange)="onChangeTags($event,false)"
                     (tagsRemove)="onChangeTags($event,true)"
                 ></ticket-detail-edit-tags>
-                <ticket-detail-linked-agents
-                    [ticketProfile]="ticketProfile"
-                    [selectedCompanyId]="ticketProfile.company.id"
-                ></ticket-detail-linked-agents>
                 <ticket-detail-attachments [attachments]="ticketProfile.attachments"></ticket-detail-attachments>
                 <!-- <div class="qt-input-block">
                     <span class="qt-input-block__label">Priority Level</span>

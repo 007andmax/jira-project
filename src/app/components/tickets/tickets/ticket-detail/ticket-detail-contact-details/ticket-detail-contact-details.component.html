@@ -1,15 +1,15 @@
 <div class="ticket-detail-contact ticket-detail-contact__full">
     <div class="ticket-detail-contact__header qt-df qt-ai-c qt-jc-sb">
         <div class="ticket-detail-contact__title">Contact Details</div>
-        <div class="qt-button --square-md --gray pointer">
-            <div
-                class="icon__close qt-bg-contain qt-sz-16 pointer"
-                (click)="close()"
-            ></div>
+        <div
+            class="qt-button --square-md --gray pointer"
+            (click)="close()"
+        >
+            <div class="icon__close qt-bg-contain qt-sz-16 pointer"></div>
         </div>
     </div>
     <div class="ticket-detail-contact__body">
-        <div>
+        <div *ngIf="checkExistUser()">
             <div
                 class="square-avatar qt-mr-10"
                 [ngClass]="{'with-logo': checkLogo(getCompanyUser())}"
@@ -75,7 +75,7 @@
         </div>
         <hr class="ticket-detail-contact__divider">
         <div class="ticket-detail-contact__primary-contacts">
-            <div class="ticket-detail-contact__primary-contacts-title">Primary Contact(s)</div>
+            <div class="ticket-detail-contact__primary-contacts-title">Ticket creator</div>
             <div class="qt-df qt-ai-c qt-mb-10">
                 <div
                     class="ticket-detail-contact__avatar qt-mr-8"
@@ -127,6 +127,9 @@
             ></ticket-detail-contact-details-history>
         </div>
     </div>
+
+
+
 
 
 

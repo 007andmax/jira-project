@@ -25,6 +25,9 @@ export class TicketDetailContactComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
   }
+  checkExistUser() {
+    return this.usersStateService.getAllUsers().find(user => user.id === this.ticketProfile.createdUser.id);
+  }
   getCompanyUser() {
     return this.companiesStateService.getCompanies().find(item => item.id === this.usersStateService.getAllUsers().find(user => user.id === this.ticketProfile.createdUser.id).company.id);
   }
