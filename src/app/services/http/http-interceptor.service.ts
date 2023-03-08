@@ -1,9 +1,10 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { ChangeDetectorRef, Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
+import { empty, NEVER, Observable, throwError } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AppStateService } from 'src/app/states/app/app-state.service';
+import { environment } from 'src/environments/environment';
 import { AppService } from '../../states/app/app.service';
 
 @Injectable()
@@ -18,8 +19,7 @@ export class HttpInterceptorService implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-
-
+    if (req.url.includes(environment.apiAgent)) return NEVER; // block agent requests
     return next.handle(req).pipe(
       tap(
         (event) => {
