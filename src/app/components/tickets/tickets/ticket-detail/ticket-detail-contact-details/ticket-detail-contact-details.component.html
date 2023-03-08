@@ -11,9 +11,14 @@
     <div class="ticket-detail-contact__body">
         <div>
             <div
-                class="ticket-detail-contact__main-avatar"
-                [ngStyle]="{'background': 'url('+getCompanyLogoUrl(getCompanyUser())+') center / cover no-repeat'}"
+                class="square-avatar qt-mr-10"
+                [ngClass]="{'with-logo': checkLogo(getCompanyUser())}"
             >
+                <img
+                    [src]="getCompanyLogoUrl(getCompanyUser())"
+                    alt
+                    *ngIf="checkLogo(getCompanyUser())"
+                >
                 <span
                     *ngIf="!checkLogo(getCompanyUser())"
                     [textContent]="getCompanyUser().name[0].toUpperCase()"
@@ -122,6 +127,12 @@
             ></ticket-detail-contact-details-history>
         </div>
     </div>
+
+
+
+
+
+
 
 
 

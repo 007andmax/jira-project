@@ -65,7 +65,7 @@ h6,
     content: "%";
   }
 }
-.circle-avatar {
+.circle-avatar,.square-avatar {
   width: 40px;
   height: 40px;
   min-width: 40px;
@@ -86,6 +86,20 @@ h6,
       height: 40px;
       min-width: 40px;
       object-fit: cover;
+    }
+  }
+}
+.square-avatar {
+  border-radius: 8px;
+  width: 64px;
+  height: 64px;
+  min-width: 64px;
+  min-height: 64px;
+   &.with-logo {
+     img {
+      border-radius: 8px;
+      height: 64px;
+      min-width: 64px;
     }
   }
 }
