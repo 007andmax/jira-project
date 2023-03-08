@@ -38,18 +38,18 @@
     }
 
     &__panel {
+      background-color: $gray-50;
+      border-top: 1px solid $gray-200;
+      border-bottom: 1px solid $gray-200;
+
+      &-container {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        width: 1626px;
+        margin: 0 auto;
         padding: 10px 0 10px 24px;
-        background-color: $gray-50;
-        border-top: 1px solid $gray-200;
-        border-bottom: 1px solid $gray-200;
-
-        //.qt-button:not(.--square-md) { // TODO check this style
-        //    padding-left: 12px;
-        //    padding-right: 12px;
-        //}
+      }
     }
 
     &__separator {

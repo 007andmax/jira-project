@@ -952,14 +952,15 @@ app-ticket-edit-aside-right-panel {
     display: flex;
     align-items: flex-start;
     height: calc(100% - 122px);
+    background-color: $gray-50;
 
     &-main {
-      width: calc(100% - 360px - 56px);
       background-color: $gray-50;
       display: flex;
       justify-content: center;
       align-items: flex-start;
       height: 100%;
+      margin: 0 auto;
     }
 
     &__body {
@@ -1039,6 +1040,7 @@ app-ticket-edit-aside-right-panel {
       overflow-y: auto;
       height: 100%;
       border-left: 1px solid $gray-200;
+      border-right: 1px solid $gray-200;
 
       &-button {
         width: 40px;
