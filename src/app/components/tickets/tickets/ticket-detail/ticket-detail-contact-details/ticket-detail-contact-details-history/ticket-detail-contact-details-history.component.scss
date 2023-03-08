@@ -1,45 +1,69 @@
 @import './src/assets/styles/variable';
 
-.company-info-aside {
-    &__history {
-        height: 300px;
-        overflow-y: auto;
-        position: relative;
+.ticket-detail-contact {
+  &__divider {
+    margin: 16px 0;
+    border-color: $gray-200;
+  }
+  &__primary-contacts-title {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: $gray-500;
+    margin-bottom: 12px
+  }
 
-        .loading {
-            width: 25px;
-            height: 25px;
-            left: calc(50% - 12px);
-        }
+  &__history {
+    height: 300px;
+    overflow-y: auto;
+    position: relative;
+
+    .loading {
+      width: 25px;
+      height: 25px;
+      left: calc(50% - 12px);
     }
+  }
+  &__history-block {
+    position: relative;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+    border: solid 1px $gray-200;
+    padding: 9.5px 10px;
+    margin-bottom: 8px;
+    border-radius: 8px;
 
-
-
-    &__history-block {
-        border-radius: 6px;
-        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.05);
-        border: solid 1px $gray-400--old;
-        padding: 9px 12px;
-        margin-bottom: 6px;
-        // margin-left: -9px;
-        // margin-right: -9px;
-
+    &::after {
+      position: absolute;
+      content: "";
+      width: 2px;
+      height: calc(100% - 16px);
+      background-color: $blue-light-600;
+      top: 8px;
+      bottom: 8px;
+      left: 0;
     }
+  }
 
-    &__history-block-title {
-        font-size: 12px;
-        font-weight: 600;
-        line-height: 1.33;
-        color: $gray-800--old;
-        margin-bottom: 4px;
-    }
+  &__history-block-title {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    color: $gray-900;
+    margin-bottom: 4px;
+  }
 
-    &__history-block-date {
-        font-size: 11px;
-        line-height: 1.45;
-        color: $gray-800--old;
-    }
-
+  &__history-block-date {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: $gray-500;
+  }
+  &__icon-wrap {
+    width: 32px;
+    height: 32px;
+    background-color: $gray-100;
+    border-radius: 8px;
+  }
 }
 
 .pengind-loading {

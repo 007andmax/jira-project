@@ -1,53 +1,56 @@
-<p class="header">
-    <span (click)="toggleContainer = !toggleContainer">Contact Details</span>
+<div class="ticket-detail-contact qt-mb-8">
+  <div class="ticket-detail-contact__header qt-pos-rel">
+    <div class="ticket-detail-contact__title pointer" (click)="toggleContainer = !toggleContainer">Contact Details</div>
     <i
-        (click)="toggleContainer = !toggleContainer"
-        class="icn-sm report-caret-icon"
+      (click)="toggleContainer = !toggleContainer"
+      class="icn-sm report-caret-icon"
     ></i>
-</p>
-<div
-    class="container"
+  </div>
+  <div
+    class="ticket-detail-contact__body"
     *ngIf="toggleContainer"
->
-    <div class="qt-df qt-ai-c">
-        <div
-            class="ticket-edit-aside__header-avatar"
-            [textContent]="ticketsListService.getAssignedUserNameForAvatar(ticketProfile.createdUser)"
-            [ngStyle]="{'background': ticketsListService.getStyleAvatar(ticketProfile.createdUser)}"
-        ></div>
-        <span
-            class="pointer"
-            [textContent]="getNameCreateUser()"
-        ></span>
+  >
+    <div class="qt-df qt-ai-c qt-mb-10">
+      <div
+        class="ticket-detail-contact__avatar qt-mr-8"
+        [textContent]="ticketsListService.getAssignedUserNameForAvatar(ticketProfile.createdUser)"
+        [ngStyle]="{'background': ticketsListService.getStyleAvatar(ticketProfile.createdUser)}"
+      ></div>
+      <span
+        class="ticket-detail-contact__avatar-title pointer"
+        [textContent]="getNameCreateUser()"
+      ></span>
     </div>
-    <div class="qt-df qt-ai-c">
-        <i class="icon__companies qt-bg-contain qt-sz-16 qt-mr-8"></i>
-        <div [textContent]="getCompanyUser().name"></div>
+    <div class="qt-df qt-ai-c qt-mb-12">
+      <i class="icon__companies qt-bg-contain qt-sz-16 qt-mr-8"></i>
+      <div class="ticket-detail-contact__subtitle" [textContent]="getCompanyUser().name"></div>
     </div>
-    <div class="qt-df qt-ai-c">
-        <i class="icon__email qt-bg-contain qt-sz-16 qt-mr-8"></i>
-        <div [textContent]="ticketProfile.createdUser.email"></div>
+    <div class="qt-df qt-ai-c qt-mb-12">
+      <i class="icon__email qt-bg-contain qt-sz-16 qt-mr-8"></i>
+      <div class="ticket-detail-contact__subtitle" [textContent]="ticketProfile.createdUser.email"></div>
     </div>
     <div
-        class="qt-df qt-ai-c"
-        *ngIf="primaryContact"
+      class="qt-df qt-ai-c"
+      *ngIf="primaryContact"
     >
-        <ng-template
-            class="assigned-ticket-user"
-            ngFor
-            let-phoneNumber
-            [ngForOf]="getPhoneNumbers()"
-            [ngForTrackBy]="trackByIndex"
-        >
-            <div class="qt-df qt-ai-c">
-                <i class="icon__phone-gray-500 qt-bg-contain qt-sz-16 qt-mr-8"></i>
-                <preview-phone-mask
-                    [class]="'company-info-aside__ticket-created-name'"
-                    *ngIf="phoneNumber.number"
-                    [number]="phoneNumber.number"
-                ></preview-phone-mask>
-            </div>
-        </ng-template>
+      <ng-template
+        class="assigned-ticket-user"
+        ngFor
+        let-phoneNumber
+        [ngForOf]="getPhoneNumbers()"
+        [ngForTrackBy]="trackByIndex"
+      >
+        <div class="qt-df qt-ai-c">
+          <i class="icon__phone-gray-500 qt-bg-contain qt-sz-16 qt-mr-8"></i>
+          <preview-phone-mask
+            [class]="'company-info-aside__ticket-created-name'"
+            *ngIf="phoneNumber.number"
+            [number]="phoneNumber.number"
+          ></preview-phone-mask>
+        </div>
+      </ng-template>
     </div>
-    <button (click)="showMore()">View more info</button>
+    <button class="qt-button --gray --sm qt-w100 qt-jc-c" (click)="showMore()">View more info</button>
+  </div>
 </div>
+

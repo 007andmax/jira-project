@@ -1,0 +1,117 @@
+@import './src/assets/styles/variable';
+
+.ticket-detail-contact {
+  border: 1px solid $gray-200;
+  background-color: $white;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+  border-radius: 8px;
+
+  &__title {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    color: $gray-900;
+  }
+  &__subtitle {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: $gray-500;
+  }
+  &__card-title {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: $gray-900;
+  }
+  &__header {
+    padding: 16px;
+    border-bottom: 1px solid $gray-200;
+  }
+  &__body {
+    padding: 16px;
+  }
+  &__avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: $white;
+    background-size: cover !important;
+    background-position: center !important;
+    font-weight: 600;
+
+    &-title {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 17px;
+      color: $gray-900;
+    }
+  }
+
+  &__avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: $white;
+    background-size: cover !important;
+    background-position: center !important;
+    font-weight: 600;
+
+    &-title {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 17px;
+      color: $gray-900;
+    }
+  }
+
+  .qt-button.--square-md {
+    width: 32px;
+    height: 32px;
+  }
+  &-info-line {
+    margin: 16px 0;
+
+    &__label {
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 16px;
+      color: $gray-500;
+    }
+
+    &__text {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 17px;
+      color: $gray-900;
+
+      &:not(:empty) {
+        margin-top: 4px;
+      }
+    }
+  }
+
+  &__divider {
+    border-color: $gray-200;
+    margin: 16px 0;
+  }
+  &__primary-contacts-title {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: $gray-500;
+    margin-bottom: 12px;
+  }
+}
+/deep/ .ticket-detail-contact-info-line__input {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: $gray-900;
+}
