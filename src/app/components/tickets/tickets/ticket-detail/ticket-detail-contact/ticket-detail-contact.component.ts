@@ -40,6 +40,9 @@ export class TicketDetailContactComponent implements OnInit, OnDestroy {
   showMore() {
     this.onShowMore.emit(null);
   }
+  public trackByIndex(index, item) {
+    return index;
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

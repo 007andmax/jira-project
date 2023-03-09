@@ -48,4 +48,5 @@ export class ModalAddUsersNotifyComponent extends AddAssignedUserComponent {
   close() {
     this.activeModal.dismiss('Cross click');
   }
+
 }

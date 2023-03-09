@@ -213,7 +213,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.typeRigthDetailAside = null;
     this.toggleRigthPanel = true;
   }
-  onToggleRigthPanel() {
+  onToggleRigthPanel(data) {
     this.toggleRigthPanel = !this.toggleRigthPanel;
   }
   markAsOpen() {

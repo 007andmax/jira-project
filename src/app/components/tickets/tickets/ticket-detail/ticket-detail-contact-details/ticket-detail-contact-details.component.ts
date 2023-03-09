@@ -98,6 +98,9 @@ export class TicketDetailContactDetailsComponent implements OnInit, OnDestroy {
       title: this.company.companyInfo.addresses[0].longCity
     })
   }
+  public trackByIndex(index, item) {
+    return index;
+  }
   getPhoneNumbers() {
     let user = this.usersStateService.getAllUsers().find(item => item.id === this.ticketProfile.createdUser.id);
     if (user && user.phoneNumbers) return user.phoneNumbers;

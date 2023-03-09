@@ -11,6 +11,7 @@ export class CurrentUser {
     lastName: string;
     phoneNumbers: []
     status: string;
+    email: string;
     primaryEmail: string;
     secondaryEmail: string;
     deletedAt: number;
