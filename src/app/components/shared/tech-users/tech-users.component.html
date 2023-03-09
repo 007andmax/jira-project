@@ -75,7 +75,7 @@
         </div>
         <div class="qt-ml-12 qt-f-1 ellipsis">
             <div
-                class="tab-pane__table-user-item-name qt-fw-600 qt-color-gray-900 ellipsis"
+                class="tab-pane__table-user-item-name qt-fw-500 ellipsis"
                 [textContent]="ticketsListService.getUserName(selectedUsers[0])"
             ></div>
         </div>
@@ -184,8 +184,8 @@
                                         >
                                             <div
                                                 class="user-item-user-avatar"
-                                                [textContent]="getAssignedUserNameForAvatar(user)"
-                                                [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'contain'}"
+                                                [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+                                                [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
                                             ></div>
                                             <div
                                                 class="user-item-user-name"

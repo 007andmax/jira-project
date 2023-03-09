@@ -69,6 +69,13 @@ import { TicketDetailProfileEditUpdatesHeaderComponent } from './ticket-detail-p
 import { TicketDetailProfileEditUpdatesServicesComponent } from './ticket-detail-profile-edit-updates/ticket-detail-profile-edit-updates-services/ticket-detail-profile-edit-updates-services.component';
 import { TicketDetailProfileEditUpdatesProductsComponent } from './ticket-detail-profile-edit-updates/ticket-detail-profile-edit-updates-products/ticket-detail-profile-edit-updates-products.component';
 import { TicketDetailMessageComponent } from './ticket-detail-message/ticket-detail-message.component';
+import { TicketDetailContactComponent } from './ticket-detail-contact/ticket-detail-contact.component';
+import { TicketDetailPasswordsComponent } from './ticket-detail-passwords/ticket-detail-passwords.component';
+import { TicketDetailDevicesComponent } from './ticket-detail-devices/ticket-detail-devices.component';
+import { TicketDetailDocumentsComponent } from './ticket-detail-documents/ticket-detail-documents.component';
+import { TicketDetailContactDetailsComponent } from './ticket-detail-contact-details/ticket-detail-contact-details.component';
+import { CompanyInfoHistoryModule } from '../ticket-edit-aside-company-info/company-info-history/company-info-history.module';
+import { TicketDetailContactDetailsHistoryComponent } from './ticket-detail-contact-details/ticket-detail-contact-details-history/ticket-detail-contact-details-history.component';
 
 
 
@@ -112,7 +119,13 @@ import { TicketDetailMessageComponent } from './ticket-detail-message/ticket-det
         TicketDetailProfileEditUpdatesHeaderComponent,
         TicketDetailProfileEditUpdatesServicesComponent,
         TicketDetailProfileEditUpdatesProductsComponent,
-        TicketDetailMessageComponent
+        TicketDetailMessageComponent,
+        TicketDetailContactComponent,
+        TicketDetailPasswordsComponent,
+        TicketDetailDevicesComponent,
+        TicketDetailDocumentsComponent,
+        TicketDetailContactDetailsComponent,
+        TicketDetailContactDetailsHistoryComponent
 
     ],
     imports: [
@@ -149,7 +162,8 @@ import { TicketDetailMessageComponent } from './ticket-detail-message/ticket-det
         TicketProfileFormUpdateNoteListModule,
         KeyUpEnterModule,
         DropDownModule,
-        CompanyDropDownModule
+        CompanyDropDownModule,
+        CompanyInfoHistoryModule
     ],
 
 

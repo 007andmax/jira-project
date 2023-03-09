@@ -85,7 +85,6 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
    */
   public ngOnInit() {
     this.initResendMode();
-    console.log("this", this.data);
     this.getAllUsers((this.data instanceof QuoteEdit || this.data instanceof QuotePreview) ? this.data.company.id : this.data.companyId);
     this.userInput.nativeElement.onblur = (e) => {
       if (this.matAutocomplete.isOpen) {
@@ -156,7 +155,6 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
    * Get user list
    */
   private getAllUsers(companyId) {
-    console.log("companyId", companyId);
     let userList = this.usersStateService.getAllUsers();
     this.initialized = true;
     this.reqUsersListTechnical = userList.filter((item) => item.accountType === USER.TYPE.TECH && !item.deletedAt && item.primaryEmail !== "").sort((a, b) => (this.getFirstLastName(a).toLowerCase() > this.getFirstLastName(b).toLowerCase()) ?

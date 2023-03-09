@@ -34,124 +34,129 @@
     </div>
 </div>
 <div class="ticket-detail-page__panel">
-    <div class="qt-df qt-ai-c">
-        <div
-            class="qt-sz-36 qt-img-cover qt-circle qt-mr-16 header-avatar"
-            [textContent]="ticketsListService.getAssignedUserNameForAvatar(currentUser)"
-            [ngStyle]="{'background': ticketsListService.getStyleAvatar(currentUser)}"
-        ></div>
-        <div
-            class="qt-df qt-ai-c"
-            *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
-        >
-            <div
-                class="qt-button qt-button--with-icon --gray --md pointer qt-mr-8"
-                (click)="addUpdate('NOTE')"
-            >
-                <div class="icon__chat qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
-                Chat
-            </div>
-            <div
-                class="qt-button qt-button--with-icon --gray --md pointer qt-mr-8"
-                (click)="addUpdate('PRODUCT')"
-            >
-                <div class="icon__products qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
-                Products
-            </div>
-            <div
-                class="qt-button qt-button--with-icon --gray --md pointer qt-mr-8"
-                (click)="addUpdate('SERVICE')"
-            >
-                <div class="icon__service qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
-                Service
-            </div>
-            <div
-                class="qt-button qt-button--with-icon --gray --md pointer qt-mr-8"
-                (click)="addUpdate('QUICK_SUPPORT')"
-            >
-                <div class="icon__quick-support-strip qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
-                Quick Support
-            </div>
-            <div class="qt-button qt-button--with-icon --gray --md pointer qt-mr-8">
-                <div class="icon__merge qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
-                Merge Ticket
-            </div>
-        </div>
-    </div>
-    <div
-        class="qt-df qt-ai-c ticket-detail-page__dropdown-category-more"
-        ngbDropdown
-    >
-        <div
-            class="qt-button --square-md --gray pointer qt-ml-8"
-            ngbDropdownToggle
-        >
-            <div class="icon__category-more qt-sz-16 qt-bg-contain"></div>
-        </div>
-        <div
-            ngbDropdownMenu
-            class="dropdown-menu-qt icon__category-more-dropdown"
-        >
-            <ul
-                class
-                role="menu"
-                class="dropdown-qt"
-            >
-                <li
-                    *ngIf="ticketsPermissionsService.isActionVisible('claim_ticket', ticketProfile,null,null)"
-                    (click)="claimTicket()"
-                >
-                    <a
-                        tabindex="-1"
-                        class="dropdown-item"
-                        href="javascript:void(0)"
-                    >
-                        <i class="qt-sz-20 qt-bg-contain icon__claim-edit-ticket"></i>
-                        Claim Ticket
-                    </a>
-                </li>
-                <li
-                    *ngIf="ticketsPermissionsService.isActionVisible('send_to_spam', ticketProfile,null,null)"
-                    (click)="moveIntoSpam()"
-                >
-                    <a
-                        tabindex="-1"
-                        class="dropdown-item spam-user"
-                        href="javascript:void(0)"
-                        *ngIf="currentUser && currentUser.isOwner"
-                    >
-                        <i class="qt-sz-20 qt-bg-contain icon__terminate"></i>
-                        Mark as Spam
-                    </a>
-                    <a
-                        tabindex="-1"
-                        class="dropdown-item spam-user"
-                        href="javascript:void(0)"
-                        *ngIf="currentUser && !currentUser.isOwner"
-                    >
-                        <i class="qt-sz-20 qt-bg-contain icon__spam"></i>
-                        Report as Spam
-                    </a>
-                </li>
-                <li
-                    class="trash-user-list"
-                    *ngIf="ticketsPermissionsService.isActionVisible('send_to_trash', ticketProfile,null,null)"
-                    (click)="moveToTrash(true)"
-                >
-                    <a
-                        tabindex="-1"
-                        class="dropdown-item trash-user"
-                        href="javascript:void(0)"
-                    >
-                        <i class="qt-sz-20 qt-bg-contain icon__remove"></i>
-                        Move to Trash
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="ticket-detail-page__separator"></div>
-        <div class="qt-button --square-md --gray pointer">
-            <div class="icon__panel-open qt-sz-16 qt-bg-contain"></div>
-        </div>
-    </div>
+   <div class="ticket-detail-page__panel-container">
+     <div class="qt-df qt-ai-c">
+       <div
+         class="qt-sz-36 qt-img-cover qt-circle qt-mr-16 header-avatar"
+         [textContent]="ticketsListService.getAssignedUserNameForAvatar(currentUser)"
+         [ngStyle]="{'background': ticketsListService.getStyleAvatar(currentUser)}"
+       ></div>
+       <div
+         class="qt-df qt-ai-c"
+         *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
+       >
+         <div
+           class="qt-button qt-button--with-icon --gray --md pointer qt-mr-8"
+           (click)="addUpdate('NOTE')"
+         >
+           <div class="icon__chat qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
+           Chat
+         </div>
+         <div
+           class="qt-button qt-button--with-icon --gray --md pointer qt-mr-8"
+           (click)="addUpdate('PRODUCT')"
+         >
+           <div class="icon__products qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
+           Products
+         </div>
+         <div
+           class="qt-button qt-button--with-icon --gray --md pointer qt-mr-8"
+           (click)="addUpdate('SERVICE')"
+         >
+           <div class="icon__service qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
+           Service
+         </div>
+         <div
+           class="qt-button qt-button--with-icon --gray --md pointer qt-mr-8"
+           (click)="addUpdate('QUICK_SUPPORT')"
+         >
+           <div class="icon__quick-support-strip qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
+           Quick Support
+         </div>
+         <div class="qt-button qt-button--with-icon --gray --md pointer qt-mr-8">
+           <div class="icon__merge qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
+           Merge Ticket
+         </div>
+       </div>
+     </div>
+     <div
+       class="qt-df qt-ai-c ticket-detail-page__dropdown-category-more"
+       ngbDropdown
+     >
+       <div
+         class="qt-button --square-md --gray pointer qt-ml-8"
+         ngbDropdownToggle
+       >
+         <div class="icon__category-more qt-sz-16 qt-bg-contain"></div>
+       </div>
+       <div
+         ngbDropdownMenu
+         class="dropdown-menu-qt icon__category-more-dropdown"
+       >
+         <ul
+           class
+           role="menu"
+           class="dropdown-qt"
+         >
+           <li
+             *ngIf="ticketsPermissionsService.isActionVisible('claim_ticket', ticketProfile,null,null)"
+             (click)="claimTicket()"
+           >
+             <a
+               tabindex="-1"
+               class="dropdown-item"
+               href="javascript:void(0)"
+             >
+               <i class="qt-sz-20 qt-bg-contain icon__claim-edit-ticket"></i>
+               Claim Ticket
+             </a>
+           </li>
+           <li
+             *ngIf="ticketsPermissionsService.isActionVisible('send_to_spam', ticketProfile,null,null)"
+             (click)="moveIntoSpam()"
+           >
+             <a
+               tabindex="-1"
+               class="dropdown-item spam-user"
+               href="javascript:void(0)"
+               *ngIf="currentUser && currentUser.isOwner"
+             >
+               <i class="qt-sz-20 qt-bg-contain icon__terminate"></i>
+               Mark as Spam
+             </a>
+             <a
+               tabindex="-1"
+               class="dropdown-item spam-user"
+               href="javascript:void(0)"
+               *ngIf="currentUser && !currentUser.isOwner"
+             >
+               <i class="qt-sz-20 qt-bg-contain icon__spam"></i>
+               Report as Spam
+             </a>
+           </li>
+           <li
+             class="trash-user-list"
+             *ngIf="ticketsPermissionsService.isActionVisible('send_to_trash', ticketProfile,null,null)"
+             (click)="moveToTrash(true)"
+           >
+             <a
+               tabindex="-1"
+               class="dropdown-item trash-user"
+               href="javascript:void(0)"
+             >
+               <i class="qt-sz-20 qt-bg-contain icon__remove"></i>
+               Move to Trash
+             </a>
+           </li>
+         </ul>
+       </div>
+       <div class="ticket-detail-page__separator"></div>
+       <div
+         class="qt-button --square-md --gray pointer"
+         (click)="toggleRigthPanel()"
+       >
+         <div class="icon__panel-open qt-sz-16 qt-bg-contain"></div>
+       </div>
+     </div>
+   </div>
 </div>

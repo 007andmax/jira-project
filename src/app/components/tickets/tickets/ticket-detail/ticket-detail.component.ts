@@ -57,12 +57,14 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   ticketProfile: TicketProfile = new TicketProfile();
   showFormUpdate: boolean = false;
   showEditUpdate: boolean = false;
+  toggleRigthPanel: boolean = true;
   tabFormUpdate: string;
   openedMobileEditUpdate = false;
   modeSubject = 'view';
   modeDescription = 'view';
   showAddAssignedUser = false;
   showPreloader: boolean = true;
+  typeRigthDetailAside: string;
   listColors: Array<StatusColor> = [];
   listAssignedUser: Array<CurrentUser> = [];
   lisUpdateUser: Array<CurrentUser> = [];
@@ -179,6 +181,10 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onEditUpdateByForm);
   }
+  onShowMore(data) {
+    this.typeRigthDetailAside = data;
+    this.toggleRigthPanel = false;
+  }
   onInitRealTimes() {
     if (this.websocketService.isInit) {
       this.ticketStateService.subsribeToTicket(this.ticketProfile.id);
@@ -198,6 +204,17 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.ticketsService.restoreFromSpam(this.ticketProfile.id, false).subscribe(data => {
 
     })
+  }
+  openDetailRigthPanel(data) {
+    this.typeRigthDetailAside = data;
+    this.toggleRigthPanel = false;
+  }
+  onCloseDetails() {
+    this.typeRigthDetailAside = null;
+    this.toggleRigthPanel = true;
+  }
+  onToggleRigthPanel() {
+    this.toggleRigthPanel = !this.toggleRigthPanel;
   }
   markAsOpen() {
     this.ticketsService.changeStatus(this.ticketProfile.id, 'IN_PROGRESS').subscribe((data: any) => {

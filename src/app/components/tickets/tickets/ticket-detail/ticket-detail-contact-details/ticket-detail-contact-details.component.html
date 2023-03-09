@@ -1,0 +1,160 @@
+<div class="ticket-detail-contact ticket-detail-contact__full">
+    <div class="ticket-detail-contact__header qt-df qt-ai-c qt-jc-sb">
+        <div class="ticket-detail-contact__title">Contact Details</div>
+        <div
+            class="qt-button --square-md --gray pointer"
+            (click)="close()"
+        >
+            <div class="icon__close qt-bg-contain qt-sz-16 pointer"></div>
+        </div>
+    </div>
+    <div class="ticket-detail-contact__body">
+        <div *ngIf="checkExistUser()">
+            <div
+                class="square-avatar qt-mr-10"
+                [ngClass]="{'with-logo': checkLogo(getCompanyUser())}"
+            >
+                <img
+                    [src]="getCompanyLogoUrl(getCompanyUser())"
+                    alt
+                    *ngIf="checkLogo(getCompanyUser())"
+                >
+                <span
+                    *ngIf="!checkLogo(getCompanyUser())"
+                    [textContent]="getCompanyUser().name[0].toUpperCase()"
+                ></span>
+            </div>
+            <div
+                class="ticket-detail-contact__card-title qt-mb-16 qt-mt-16"
+                [textContent]="getCompanyUser().name"
+            ></div>
+        </div>
+        <div class="ticket-detail-contact-info-line">
+            <div class="ticket-detail-contact-info-line__label">Telephone</div>
+            <preview-phone-mask
+                [class]="'company-info-aside__row-info-value ticket-detail-contact-info-line__input'"
+                *ngIf="getPrimaryPhone()"
+                [number]="getPrimaryPhone()"
+            ></preview-phone-mask>
+        </div>
+        <div class="ticket-detail-contact-info-line">
+            <div class="ticket-detail-contact-info-line__label">Address</div>
+            <div
+                class="ticket-detail-contact-info-line__text"
+                [textContent]="location != '' ? location : 'No information'"
+            ></div>
+            <div
+                *ngIf="company && company.companyInfo.addresses[0].locationLat && company.companyInfo.addresses[0].locationLng"
+                class="qt-button --gray --sm qt-w100 qt-jc-c qt-mt-8"
+                (click)="onShowMap()"
+            >
+                <span class="icon__map qt-sz-16 qt-dib qt-mr-4"></span>
+                Get Direction
+            </div>
+        </div>
+        <div class="ticket-detail-contact-info-line">
+            <div class="ticket-detail-contact-info-line__label">Website</div>
+            <div
+                class="ticket-detail-contact-info-line__text"
+                [textContent]="company.domain ? company.domain : 'No information'"
+            ></div>
+        </div>
+        <div class="ticket-detail-contact-info-line">
+            <div class="ticket-detail-contact-info-line__label">Working Hours</div>
+            <div
+                class="ticket-detail-contact-info-line__text"
+                [textContent]="workingTime != '' ? workingTime : 'No information'"
+            ></div>
+        </div>
+        <div class="ticket-detail-contact-info-line">
+            <div class="ticket-detail-contact-info-line__label">Industry</div>
+            <div
+                class="ticket-detail-contact-info-line__text"
+                [textContent]="(company.clientIndustry) ? company.clientIndustry.name : 'No information'"
+            ></div>
+        </div>
+        <hr class="ticket-detail-contact__divider">
+        <div class="ticket-detail-contact__primary-contacts">
+            <div class="ticket-detail-contact__primary-contacts-title">Ticket creator</div>
+            <div class="qt-df qt-ai-c qt-mb-10">
+                <div
+                    class="ticket-detail-contact__avatar qt-mr-8"
+                    [textContent]="ticketsListService.getAssignedUserNameForAvatar(ticketProfile.createdUser)"
+                    [ngStyle]="{'background': ticketsListService.getStyleAvatar(ticketProfile.createdUser)}"
+                ></div>
+                <div
+                    class="ticket-detail-contact__avatar-title"
+                    [textContent]="ticketsListService.getUserName(ticketProfile.createdUser)"
+                ></div>
+            </div>
+            <div>
+                <div
+                    class="qt-df qt-ai-c qt-mb-16"
+                    *ngIf="checkExistUser()"
+                >
+                    <i class="icon__email qt-bg-contain qt-sz-16 qt-mr-8"></i>
+                    <div
+                        class="ticket-detail-contact-info-line__label"
+                        [textContent]="ticketProfile.createdUser.email"
+                    ></div>
+                </div>
+                <div
+                    class="qt-df qt-ai-c"
+                    *ngIf="checkExistUser() && getPhoneNumbers().length == 0"
+                >
+                    <i class="icon__phone-gray-500 qt-bg-contain qt-sz-16 qt-mr-8"></i>
+                    <div class="ticket-detail-contact-info-line__label">No information</div>
+                </div>
+                <ng-template
+                    *ngIf="checkExistUser()"
+                    class="assigned-ticket-user"
+                    ngFor
+                    let-phoneNumber
+                    [ngForOf]="getPhoneNumbers()"
+                    [ngForTrackBy]="trackByIndex"
+                >
+                    <div class="qt-df qt-ai-c qt-mb-16">
+                        <i class="icon__phone-gray-500 qt-bg-contain qt-sz-16 qt-mr-8"></i>
+                        <preview-phone-mask
+                            [class]="'company-info-aside__ticket-created-name ticket-detail-contact-info-line__label'"
+                            *ngIf="phoneNumber.number"
+                            [number]="phoneNumber.number"
+                        ></preview-phone-mask>
+                    </div>
+                </ng-template>
+            </div>
+            <ticket-detail-contact-details-history
+                #companyHistory
+                [user]="ticketProfile.createdUser"
+                [company]="company"
+                [hidden]="!ticketProfile.createdUser"
+            ></ticket-detail-contact-details-history>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>

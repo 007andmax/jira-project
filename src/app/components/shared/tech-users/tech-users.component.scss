@@ -92,6 +92,8 @@
   margin-right: 8px;
   border-radius: 50%;
   min-width: 20px;
+  background-size: cover !important;
+  background-position: center !important;
 }
 .users-list .active {
   background-color: #F9FAFB;
@@ -114,5 +116,7 @@
   align-items: center;
   justify-content: center;
   font-weight: 600;
-  color: #ffffff;
+  color: $white;
+  background-size: cover !important;
+  background-position: center !important;
 }

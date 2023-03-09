@@ -23,8 +23,8 @@
                 <div class="assigne-user-item">
                     <div
                         class="assigne-user-avatar"
-                        [textContent]="getAssignedUserNameForAvatar(user)"
-                        [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'contain'}"
+                        [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+                        [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
                     ></div>
                     <div [textContent]="getUserName(user)"></div>
                     <mat-icon
@@ -77,8 +77,8 @@
                     <div class="assigne-user-item">
                         <div
                             class="assigne-user-avatar"
-                            [textContent]="getAssignedUserNameForAvatar(user)"
-                            [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'contain'}"
+                            [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+                            [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
                         ></div>
                         <div
                             class="assigne-user-name"

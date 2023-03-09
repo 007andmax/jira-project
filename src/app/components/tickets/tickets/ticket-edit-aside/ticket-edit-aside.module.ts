@@ -61,6 +61,7 @@ import { InvoiceFormTicketEditTaxesModule } from 'src/app/components/billing/bil
 import { TicketChangeStatusModule } from './ticket-change-status/ticket-change-status.module';
 import { AddAssignedUserModule } from './add-assigned-user/add-assigned-user.module';
 import { TicketProfileFormUpdateNoteListModule } from './ticket-profile-form-update/ticket-profile-form-update-note-list/ticket-profile-form-update-note-list.module';
+import { CompanyInfoHistoryModule } from '../ticket-edit-aside-company-info/company-info-history/company-info-history.module';
 
 @NgModule({
     declarations: [TicketEditAsideComponent,
@@ -84,7 +85,6 @@ import { TicketProfileFormUpdateNoteListModule } from './ticket-profile-form-upd
         TicketProfileUpdatesFooterComponent,
         TicketProfileUpdatesProductItemComponent,
         TicketProfileUpdatesServiceItemComponent,
-        CompanyInfoHistoryComponent,
         TicketProfileUpdatesNoteInfoComponent,
         TicketProfileUpdatesNoteEditComponent,
         TicketProfileUpdatesProductInfoComponent,
@@ -127,7 +127,8 @@ import { TicketProfileFormUpdateNoteListModule } from './ticket-profile-form-upd
         InvoiceFormTicketEditTaxesModule,
         TicketChangeStatusModule,
         AddAssignedUserModule,
-        TicketProfileFormUpdateNoteListModule
+        TicketProfileFormUpdateNoteListModule,
+        CompanyInfoHistoryModule
     ],
     exports: [TicketEditAsideComponent,]
 })
