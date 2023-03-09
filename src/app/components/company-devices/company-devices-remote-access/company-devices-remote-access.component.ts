@@ -36,9 +36,9 @@ export class CompanyDevicesRemoteAccessComponent implements OnInit {
   }
   downloadViewer() {
     if (this.action == "CONNECT_DEVICE_BETA") {
-      window.location.href = '/data/new/connection-viewer';
+      window.location.href = '/data/downloadViewerInstaller';
     } else {
-      window.location.href = '/data/connection-viewer';
+      window.location.href = '/data/downloadViewerInstaller';
     }
   }
   getConstant(sessionId) {
