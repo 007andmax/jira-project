@@ -43,14 +43,10 @@ export class CompanyInfoHistoryComponent implements OnInit {
     this.company = data;
   }
   public onInitGetTickets() {
-    console.log("this.company", this.company);
-    console.log("this.user", this.user);
     if (this.company && this.user && this.lastCompanyId !== this.company.id && this.lastUserId !== this.user.id) {
       this.lastCompanyId = this.company.id;
       this.lastUserId = this.user.id;
-      console.log("1");
     } else {
-      console.log("2");
       return;
     }
     this.ticketsFilter.setCompany(this.company);

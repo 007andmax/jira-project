@@ -34,7 +34,6 @@ export class TicketDetailContactDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.company = this.companiesStateService.getCompanies().find(item => item.id === this.ticketProfile.company.id);
-    console.log("company", this.company);
     this.getDataCompany();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.company = this.companiesStateService.getCompanies().find(item => item.id === this.ticketProfile.company.id);
@@ -93,7 +92,6 @@ export class TicketDetailContactDetailsComponent implements OnInit, OnDestroy {
     return this.companiesStateService.getCompanies().find(item => item.id === this.usersStateService.getAllUsers().find(user => user.id === this.ticketProfile.createdUser.id).company.id);
   }
   onShowMap() {
-    console.log("this.company.companyInfo.addresses", this.company.companyInfo.addresses);
     this.mapModalStateService.onSohwMap({
       latitude: this.company.companyInfo.addresses[0].locationLat,
       longitude: this.company.companyInfo.addresses[0].locationLng,
