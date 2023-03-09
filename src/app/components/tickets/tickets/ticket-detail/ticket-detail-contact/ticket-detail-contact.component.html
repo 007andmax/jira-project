@@ -1,15 +1,10 @@
 <div class="ticket-detail-contact qt-mb-8">
-    <div class="ticket-detail-contact__header qt-pos-rel">
-        <div
-            class="ticket-detail-contact__title pointer"
-            (click)="toggleContainer = !toggleContainer"
-        >
-            Contact Details
-        </div>
-        <i
-            (click)="toggleContainer = !toggleContainer"
-            class="icn-sm report-caret-icon pointer"
-        ></i>
+    <div
+        class="ticket-detail-contact__header qt-pos-rel pointer"
+        (click)="toggleContainer = !toggleContainer"
+    >
+        <div class="ticket-detail-contact__title">Contact Details</div>
+        <i class="icn-sm report-caret-icon pointer"></i>
     </div>
     <div
         class="ticket-detail-contact__body"
@@ -48,7 +43,7 @@
             ></div>
         </div>
         <div
-            class=""
+            class
             *ngIf="checkExistUser()"
         >
             <ng-template

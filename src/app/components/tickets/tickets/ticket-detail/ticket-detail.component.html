@@ -77,6 +77,12 @@
                                                 (click)="showDetailUser()"
                                             ></span>
                                             <span
+                                                *ngIf="!checkExistUser()"
+                                                class="qt-color-red-600"
+                                            >
+                                                (archived)
+                                            </span>
+                                            <span
                                                 class="ticket-detail-page-content__body-header-info-email"
                                                 [textContent]="'sent ' + parseTicketSource()"
                                             ></span>
@@ -92,13 +98,13 @@
                                                 id="dropdownCompany"
                                                 ngbDropdownToggle
                                             ></span>
+                                            <span
+                                                class="qt-color-red-600"
+                                                *ngIf="ticketProfile.company.isCompanyDeleted"
+                                            >
+                                                - Archived
+                                            </span>
                                         </div>
-                                        <span
-                                            class="qt-color-red-600"
-                                            *ngIf="ticketProfile.company.isCompanyDeleted"
-                                        >
-                                            - Archived
-                                        </span>
                                     </div>
                                 </div>
                             </div>
