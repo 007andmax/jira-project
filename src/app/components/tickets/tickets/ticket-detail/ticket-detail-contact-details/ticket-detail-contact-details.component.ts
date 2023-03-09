@@ -9,6 +9,7 @@ import { TicketProfile } from '../../class/ticket-profile';
 import { TicketsListService } from '../../services/tickets-list.service';
 import { CompanyInfoHistoryComponent } from '../../ticket-edit-aside-company-info/company-info-history/company-info-history.component';
 import { TicketDetailContactDetailsHistoryComponent } from './ticket-detail-contact-details-history/ticket-detail-contact-details-history.component';
+import * as moment from "moment";
 
 @Component({
   selector: 'ticket-detail-contact-details',
@@ -25,7 +26,7 @@ export class TicketDetailContactDetailsComponent implements OnInit, OnDestroy {
   primaryAddress: any;
   primaryPhone: any;
   location: string;
-  workingTime: string;
+  companyOpen: string = 'Close';
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
     private mapModalStateService: MapModalStateService,
@@ -34,6 +35,7 @@ export class TicketDetailContactDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.company = this.companiesStateService.getCompanies().find(item => item.id === this.ticketProfile.company.id);
+
     this.getDataCompany();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.company = this.companiesStateService.getCompanies().find(item => item.id === this.ticketProfile.company.id);
@@ -43,6 +45,7 @@ export class TicketDetailContactDetailsComponent implements OnInit, OnDestroy {
   }
   getDataCompany() {
     if (this.company) {
+      console.log("this.company", this.company);
       let primaryContact,
         primaryAddress,
         primaryPhone;
@@ -57,17 +60,22 @@ export class TicketDetailContactDetailsComponent implements OnInit, OnDestroy {
           }
         }
         if (primaryAddress && primaryAddress.phoneNumbers.length) primaryPhone = primaryAddress.phoneNumbers[0];
-        if (!this.company.companyInfo.workingTime) {
-          this.workingTime = '';
-        } else {
-          let workingTime = this.company.companyInfo.workingTime[new Date().getDay() - 1];
-          let startTime = workingTime.startTime / 3600;
-          let typeTime = (startTime > 12) ? "PM" : "AM";
-          startTime = (startTime > 12) ? startTime - 12 : startTime;
-          var timeInMinutes = startTime * 60,
-            hours = Math.floor(timeInMinutes / 60),
-            minutes = Math.round(timeInMinutes - (hours * 60));
-          this.workingTime = `${(hours < 10) ? '0' + hours : hours}:${(minutes < 10) ? '0' + minutes : minutes} ${typeTime}`;
+        if (this.company.companyInfo.workingTime) {
+          let day = moment(new Date()).format('dddd');
+          let workingDays: any = this.company.companyInfo.workingTime;
+          if (workingDays.length !== 0) {
+            workingDays.forEach((element, index) => {
+              if (element.isSelected) {
+                element.timing = `${this.timeFormatter(element.startTime)} ${this.getTimeFormat(element.startTime)} - ${this.timeFormatter(element.endTime)} ${this.getTimeFormat(element.endTime)}`
+              }
+            });
+            let arr = workingDays.filter(val => val.dayOfWeek.toLowerCase() === day.toLowerCase())
+            if (arr.length !== 0 && arr[0].isSelected) {
+              this.companyOpen = (arr[0].timing) ? `Opens ${arr[0].timing}` : 'Opens';
+            } else {
+              this.companyOpen = `Close`;
+            }
+          }
         }
       }
       this.primaryContact = primaryContact;
@@ -83,6 +91,31 @@ export class TicketDetailContactDetailsComponent implements OnInit, OnDestroy {
         this.companyHistory.setCompany(this.company);
         this.companyHistory.onInitGetTickets();
       }
+    }
+  }
+  getTimeFormat(time) {
+    if (time && time > 0) {
+      var timeInHour = time / 3600;
+      // var timeInHour = time / 60;
+      if (timeInHour < 12) {
+        return 'AM';
+      } else {
+        return 'PM';
+      }
+    } else {
+      return 'AM';
+    }
+  }
+  timeFormatter(time) {
+    if (time && time > 0) {
+      var seconds = time > 43200 ? time - 43200 : time;
+      var hours = Math.floor(seconds / 3600);
+      var hoursToReturn = hours.toString().length > 1 ? hours : '0' + hours;
+      var minutes = Math.floor((seconds - (hours * 3600)) / 60);
+      var minutesToreturn = minutes.toString().length > 1 ? minutes : '0' + minutes;
+      return hoursToReturn + ':' + minutesToreturn;
+    } else {
+      return "12:00";
     }
   }
   checkExistUser() {
