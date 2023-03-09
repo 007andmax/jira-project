@@ -248,7 +248,10 @@
             <ticket-detail-documents *ngIf="toggleRigthPanel"></ticket-detail-documents>
         </div>
         <div class="ticket-detail-page-content__sidebar-menu">
-            <div class="ticket-detail-page-content__sidebar-menu-button">
+            <div
+                class="ticket-detail-page-content__sidebar-menu-button"
+                (click)="openDetailRigthPanel('CONTACT')"
+            >
                 <div class="icon__company-info qt-sz-20 qt-bg-contain"></div>
             </div>
             <div class="ticket-detail-page-content__sidebar-menu-button">

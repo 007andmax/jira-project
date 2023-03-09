@@ -87,7 +87,7 @@ export class TicketDetailContactDetailsComponent implements OnInit, OnDestroy {
     }
   }
   checkExistUser() {
-    return this.usersStateService.getAllUsers().find(user => user.id === this.ticketProfile.createdUser.id);
+    return (this.ticketProfile.createdUser) ? this.usersStateService.getAllUsers().find(user => user.id === this.ticketProfile.createdUser.id) : null;
   }
   getCompanyUser() {
     return this.companiesStateService.getCompanies().find(item => item.id === this.usersStateService.getAllUsers().find(user => user.id === this.ticketProfile.createdUser.id).company.id);

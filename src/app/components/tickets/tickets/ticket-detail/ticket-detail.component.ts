@@ -205,6 +205,10 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
 
     })
   }
+  openDetailRigthPanel(data) {
+    this.typeRigthDetailAside = data;
+    this.toggleRigthPanel = false;
+  }
   onCloseDetails() {
     this.typeRigthDetailAside = null;
     this.toggleRigthPanel = true;

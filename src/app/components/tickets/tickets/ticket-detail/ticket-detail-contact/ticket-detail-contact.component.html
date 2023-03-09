@@ -22,6 +22,7 @@
                 [ngStyle]="{'background': ticketsListService.getStyleAvatar(ticketProfile.createdUser)}"
             ></div>
             <span
+                *ngIf="checkExistUser()"
                 class="ticket-detail-contact__avatar-title pointer"
                 [textContent]="getNameCreateUser()"
             ></span>
@@ -36,7 +37,10 @@
                 [textContent]="getCompanyUser().name"
             ></div>
         </div>
-        <div class="qt-df qt-ai-c qt-mb-12">
+        <div
+            class="qt-df qt-ai-c qt-mb-12"
+            *ngIf="checkExistUser()"
+        >
             <i class="icon__email qt-bg-contain qt-sz-16 qt-mr-8"></i>
             <div
                 class="ticket-detail-contact__subtitle"

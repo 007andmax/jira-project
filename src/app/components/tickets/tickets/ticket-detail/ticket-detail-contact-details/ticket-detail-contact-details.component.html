@@ -44,7 +44,7 @@
                 [textContent]="location != '' ? location : 'No information'"
             ></div>
             <div
-                *ngIf="company.companyInfo.addresses[0].locationLat && company.companyInfo.addresses[0].locationLng"
+                *ngIf="company && company.companyInfo.addresses[0].locationLat && company.companyInfo.addresses[0].locationLng"
                 class="qt-button --gray --sm qt-w100 qt-jc-c qt-mt-8"
                 (click)="onShowMap()"
             >
@@ -88,7 +88,10 @@
                 ></div>
             </div>
             <div>
-                <div class="qt-df qt-ai-c qt-mb-16">
+                <div
+                    class="qt-df qt-ai-c qt-mb-16"
+                    *ngIf="checkExistUser()"
+                >
                     <i class="icon__email qt-bg-contain qt-sz-16 qt-mr-8"></i>
                     <div
                         class="ticket-detail-contact-info-line__label"
@@ -97,12 +100,13 @@
                 </div>
                 <div
                     class="qt-df qt-ai-c"
-                    *ngIf="getPhoneNumbers().length == 0"
+                    *ngIf="checkExistUser() && getPhoneNumbers().length == 0"
                 >
                     <i class="icon__phone-gray-500 qt-bg-contain qt-sz-16 qt-mr-8"></i>
                     <div class="ticket-detail-contact-info-line__label">No information</div>
                 </div>
                 <ng-template
+                    *ngIf="checkExistUser()"
                     class="assigned-ticket-user"
                     ngFor
                     let-phoneNumber
@@ -127,6 +131,11 @@
             ></ticket-detail-contact-details-history>
         </div>
     </div>
+
+
+
+
+
 
 
 
