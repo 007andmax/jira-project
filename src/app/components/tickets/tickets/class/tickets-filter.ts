@@ -163,7 +163,7 @@ export class TicketsFilter {
 
             payload.groupFieldFilters[0].fieldFilterDtos.push({
                 operator: "EQ",
-                path: "createdUserId",
+                path: "createdUser.id",
                 values: [this.selectedUser.id]
             });
             payload.groupFieldFilters[0].predicateRule = "AND";
