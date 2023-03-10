@@ -20,6 +20,9 @@ export class TicketsService {
   public getDashboardByServices(data) {
     return this.http.post(this.apiUrl + `dashboard/ticket/byServices`, data);
   }
+  public getPasswordsDocuments(userId) {
+    return this.http.get(this.apiUrl + `v2/tickets/previewInfo?userId=${userId}`);
+  }
   public getDashboardByTech(startDate, endDate) {
     return this.http.get(this.apiUrl + `dashboard/ticket/counters?startDate=${startDate}&endDate=${endDate}`);
   }

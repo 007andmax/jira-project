@@ -8,6 +8,8 @@ import { TicketsRealTimeService } from 'src/app/states/tickets/tickets-real-time
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { TicketProfileTask } from '../../class/ticket-profile-task';
 import { TicketProfileAttachment } from '../../class/ticket-profile-attachment';
+import { TicketsService } from 'src/app/services/tickets/tickets.service';
+import { Document } from 'src/app/components/documents/class/document';
 
 @Injectable({
   providedIn: 'root'
@@ -30,11 +32,32 @@ export class TicketStateService {
   attachmentForRemove: TicketProfileAttachment;
   updateForEdit: TicketProfileUpdate;
   listTasks: Array<TicketProfileTask> = [];
+  documents: Array<Document> = [];
+  documentForPreview: Document;
+  onGetDocuments: EventEmitter<any> = new EventEmitter();
   constructor(private serviceAgreementsService: ServiceAgreementsService,
-    private recurringService: RecurringService, private ticketsRealTimeService: TicketsRealTimeService, private websocketService: WebsocketService) {
+    private recurringService: RecurringService,
+    private ticketsRealTimeService: TicketsRealTimeService,
+    private ticketsService: TicketsService,
+    private websocketService: WebsocketService) {
     this.ticketsRealTimeService.changeTicket.subscribe(newChange => {
       this.changeUpdatesTicket.emit(newChange);
     });
+  }
+  public setDocumentForPreview(data) {
+    this.documentForPreview = data;
+  }
+  public getDocumentForPreview() {
+    return this.documentForPreview;
+  }
+  public getDocuments() {
+    return this.documents;
+  }
+  public getPasswordsDocuments(userId) {
+    this.ticketsService.getPasswordsDocuments(userId).subscribe((data: any) => {
+      this.documents = data.documentDtos.map(item => new Document(item));
+      this.onGetDocuments.emit(this.documents);
+    })
   }
   public setListTasks(data) {
     this.listTasks = data;
