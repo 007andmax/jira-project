@@ -1,7 +1,9 @@
-import { ChangeDetectorRef, ElementRef, Input } from '@angular/core';
+import { ChangeDetectorRef, ElementRef, EventEmitter, Input, Output } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Document } from 'src/app/components/documents/class/document';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'ticket-detail-documents-preview',
@@ -10,9 +12,12 @@ import { DocumentsService } from 'src/app/services/documents/documents.service';
 })
 export class TicketDetailDocumentsPreviewComponent implements OnInit {
   @Input() document: Document;
+  @Output() onClose = new EventEmitter<any>();
   showPreloader: boolean = false;
   constructor(private documentsService: DocumentsService,
     private elRef: ElementRef,
+    public router: Router,
+    public companiesStateService: CompaniesStateService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
@@ -25,5 +30,22 @@ export class TicketDetailDocumentsPreviewComponent implements OnInit {
       this.cd.detectChanges();
     })
   }
+  close() {
+    this.onClose.emit(null);
+  }
+  printPdf() {
+    const url = `/documents/show/${this.document.id}/pdf`;
+    let open = window.open(url, '_blank');
+    open.print();
+  }
+  editDocument() {
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/edit/`, this.document.id]);
+  }
+  exportPdf() {
+    const url = `/documents/export?id=${this.document.id}`;
+    window.open(url, '_blank');
+  }
+
 
 }

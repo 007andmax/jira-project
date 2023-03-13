@@ -9,6 +9,7 @@ import { TicketStateService } from '../../ticket-edit-aside/services/ticket-stat
 })
 export class TicketDetailDocumentsComponent implements OnInit {
   @Output() onViewDocument = new EventEmitter<any>();
+  @Output() onShowMore = new EventEmitter<any>();
   toggleContainer: boolean = true;
   documents: Array<Document> = [];
   constructor(private ticketStateService: TicketStateService,) { }
@@ -23,5 +24,7 @@ export class TicketDetailDocumentsComponent implements OnInit {
   viewDocument(data) {
     this.onViewDocument.emit(data);
   }
-
+  showMore() {
+    this.onShowMore.emit(null);
+  }
 }

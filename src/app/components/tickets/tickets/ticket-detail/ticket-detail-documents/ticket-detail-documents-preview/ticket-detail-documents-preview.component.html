@@ -1,7 +1,41 @@
 <div class="ticket-detail-documents qt-mb-8">
-    <div class="ticket-detail-documents__header qt-pos-rel pointer">
+    <div class="ticket-detail-documents__header qt-pos-rel pointer qt-df qt-ai-c qt-jc-sb">
         <div class="ticket-detail-documents__title">Document Preview</div>
-        <i class="icn-sm report-caret-icon pointer"></i>
+        <div class="qt-df qt-ai-c">
+            <div
+                class="qt-button --square-md --gray pointer qt-mr-8"
+                (click)="exportPdf()"
+                placement="top"
+                container="body"
+                ngbTooltip="Download"
+            >
+                <div class="icon__download qt-bg-contain qt-sz-16 pointer"></div>
+            </div>
+            <div
+                class="qt-button --square-md --gray pointer qt-mr-8"
+                (click)="editDocument()"
+                placement="top"
+                container="body"
+                ngbTooltip="Edit"
+            >
+                <div class="icon__edit qt-bg-contain qt-sz-16 pointer"></div>
+            </div>
+            <div
+                class="qt-button --square-md --gray pointer qt-mr-8"
+                (click)="printPdf()"
+                placement="top"
+                ngbTooltip="Print"
+                container="body"
+            >
+                <div class="icon__print qt-bg-contain qt-sz-16 pointer"></div>
+            </div>
+            <div
+                class="qt-button --square-md --gray pointer"
+                (click)="close()"
+            >
+                <div class="icon__close qt-bg-contain qt-sz-16 pointer"></div>
+            </div>
+        </div>
     </div>
     <div
         class="ticket-detail-documents__body"
