@@ -239,33 +239,32 @@
                 *ngIf="!showPreloader"
             >
                 <div class="ticket-detail-page-content__sidebar-info-inner">
-                  <ticket-detail-contact-details
-                    *ngIf="typeRigthDetailAside == 'CONTACT'"
-                    [ticketProfile]="ticketProfile"
-                    (onClose)="onCloseDetails()"
-                  ></ticket-detail-contact-details>
-                  <ticket-detail-contact
-                    *ngIf="toggleRigthPanel"
-                    [ticketProfile]="ticketProfile"
-                    (onShowMore)="onShowMore('CONTACT')"
-                  ></ticket-detail-contact>
-                  <ticket-detail-documents
-                    *ngIf="toggleRigthPanel"
-                    (onViewDocument)="onViewDocument($event)"
-                    (onShowMore)="onShowMore('DOCUMENT')"
-                  ></ticket-detail-documents>
-                  <ticket-detail-documents-preview
-                    [document]="ticketStateService.getDocumentForPreview()"
-                    *ngIf="typeRigthDetailAside == 'DOCUMENT_PREVIEW' || typeRigthDetailAside == 'DOCUMENTS_PREVIEW'"
-                    (onClose)="onCloseDetails()"
-                  ></ticket-detail-documents-preview>
-                  <ticket-detail-documents-details
-                    [ticketProfile]="ticketProfile"
-                    (onViewDocument)="onViewDocumentsPreview($event)"
-                    *ngIf="typeRigthDetailAside == 'DOCUMENT' || typeRigthDetailAside == 'DOCUMENTS_PREVIEW'"
-                    (onClose)="onCloseDetails()"
-                  ></ticket-detail-documents-details>
-                  <!-- <ticket-detail-passwords *ngIf="toggleRigthPanel"></ticket-detail-passwords>
+                    <ticket-detail-contact-details
+                        *ngIf="typeRigthDetailAside == 'CONTACT'"
+                        [ticketProfile]="ticketProfile"
+                        (onClose)="onCloseDetails()"
+                    ></ticket-detail-contact-details>
+                    <ticket-detail-contact
+                        *ngIf="toggleRigthPanel"
+                        [ticketProfile]="ticketProfile"
+                        (onShowMore)="onShowMore('CONTACT')"
+                    ></ticket-detail-contact>
+                    <ticket-detail-documents
+                        *ngIf="toggleRigthPanel"
+                        (onViewDocument)="onViewDocument($event)"
+                        (onShowMore)="onShowMore('DOCUMENT')"
+                    ></ticket-detail-documents>
+                    <ticket-detail-documents-preview
+                        [document]="ticketStateService.getDocumentForPreview()"
+                        *ngIf="ticketStateService.getDocumentForPreview()"
+                    ></ticket-detail-documents-preview>
+                    <ticket-detail-documents-details
+                        [ticketProfile]="ticketProfile"
+                        (onViewDocument)="onViewDocumentsPreview($event)"
+                        *ngIf="typeRigthDetailAside == 'DOCUMENT'"
+                        (onClose)="onCloseDetails()"
+                    ></ticket-detail-documents-details>
+                    <!-- <ticket-detail-passwords *ngIf="toggleRigthPanel"></ticket-detail-passwords>
                   <ticket-detail-devices *ngIf="toggleRigthPanel"></ticket-detail-devices> -->
                 </div>
             </div>
@@ -281,10 +280,13 @@
                 </div>
                 <div class="ticket-detail-page-content__sidebar-menu-button">
                     <div class="icon__devices-computer qt-sz-20 qt-bg-contain"></div>
-                </div>
-                <div class="ticket-detail-page-content__sidebar-menu-button">
-                    <div class="icon__documents qt-sz-20 qt-bg-contain"></div>
                 </div> -->
+                <div
+                    class="ticket-detail-page-content__sidebar-menu-button"
+                    (click)="openDetailRigthPanel('DOCUMENT')"
+                >
+                    <div class="icon__documents qt-sz-20 qt-bg-contain"></div>
+                </div>
             </div>
         </div>
     </div>

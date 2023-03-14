@@ -9,10 +9,16 @@
         </div>
     </div>
     <div class="qt-input-search qt-mt-16 qt-mb-16 qt-ml-16 qt-mr-16">
-      <input
-        placeholder="Search Documents"
-        (input)="search($event)"
-      >
+        <input
+            id="search-documents"
+            placeholder="Search Documents"
+            (input)="search($event)"
+        >
+        <span
+            *ngIf="isSearch"
+            (click)="clearSearch()"
+            class="search-clear icon__close-round"
+        ></span>
     </div>
     <div class="ticket-detail-documents__body">
         <ng-template

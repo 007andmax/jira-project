@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Document } from 'src/app/components/documents/class/document';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-state.service';
 
 @Component({
   selector: 'ticket-detail-documents-preview',
@@ -12,12 +13,12 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 })
 export class TicketDetailDocumentsPreviewComponent implements OnInit {
   @Input() document: Document;
-  @Output() onClose = new EventEmitter<any>();
   showPreloader: boolean = false;
   constructor(private documentsService: DocumentsService,
     private elRef: ElementRef,
     public router: Router,
     public companiesStateService: CompaniesStateService,
+    public ticketStateService: TicketStateService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
@@ -31,7 +32,8 @@ export class TicketDetailDocumentsPreviewComponent implements OnInit {
     })
   }
   close() {
-    this.onClose.emit(null);
+    this.ticketStateService.setDocumentForPreview(null);
+
   }
   printPdf() {
     const url = `/documents/show/${this.document.id}/pdf`;

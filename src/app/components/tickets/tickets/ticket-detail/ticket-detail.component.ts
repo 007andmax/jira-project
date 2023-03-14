@@ -187,7 +187,6 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   }
   onViewDocumentsPreview(data) {
     this.ticketStateService.setDocumentForPreview(data);
-    this.typeRigthDetailAside = 'DOCUMENTS_PREVIEW';
   }
   onShowMore(data) {
     this.typeRigthDetailAside = data;
@@ -218,12 +217,8 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.toggleRigthPanel = false;
   }
   onCloseDetails() {
-    if (this.typeRigthDetailAside == 'DOCUMENTS_PREVIEW') {
-      this.typeRigthDetailAside = 'DOCUMENT';
-    } else {
-      this.typeRigthDetailAside = null;
-      this.toggleRigthPanel = true;
-    }
+    this.typeRigthDetailAside = null;
+    this.toggleRigthPanel = true;
   }
   onToggleRigthPanel(data) {
     this.toggleRigthPanel = !this.toggleRigthPanel;

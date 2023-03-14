@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Document } from 'src/app/components/documents/class/document';
 import { DocumentFilter } from 'src/app/components/documents/class/document-filter';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
@@ -16,8 +16,10 @@ export class TicketDetailDocumentsDetailsComponent implements OnInit {
   showPreloader: boolean = false;
   documents: Array<Document> = [];
   documentsReq: Array<Document> = [];
+  isSearch: boolean = false;
   filter: DocumentFilter = new DocumentFilter();
-  constructor(public documentsService: DocumentsService) { }
+  constructor(public documentsService: DocumentsService,
+    private elRef: ElementRef,) { }
 
   ngOnInit() {
     this.showPreloader = true;
@@ -30,14 +32,21 @@ export class TicketDetailDocumentsDetailsComponent implements OnInit {
       this.showPreloader = false;
     })
   }
+  clearSearch() {
+    this.documents = JSON.parse(JSON.stringify(this.documentsReq));
+    this.elRef.nativeElement.querySelector("#search-documents").value = '';
+    this.isSearch = false;
+  }
   viewDocument(data) {
     this.onViewDocument.emit(data);
   }
   search(event) {
     if (event.target.value.length > 0) {
       this.documents = this.documentsReq.filter(item => item.title.toLowerCase().includes(event.target.value.toLowerCase()));
+      this.isSearch = true;
     } else {
       this.documents = JSON.parse(JSON.stringify(this.documentsReq));
+      this.isSearch = false;
     }
   }
   close() {

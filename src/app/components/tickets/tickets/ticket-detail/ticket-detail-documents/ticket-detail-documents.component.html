@@ -8,7 +8,7 @@
     </div>
     <div
         class="ticket-detail-documents__body"
-        *ngIf="documents.length > 0"
+        *ngIf="toggleContainer && documents.length > 0"
     >
         <ng-template
             ngFor
