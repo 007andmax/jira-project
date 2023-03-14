@@ -5,5 +5,6 @@ export const environment = {
   production: false,
   apiUrl: 'http://localhost:4200/',
   apiAgent: 'https://offlineagent01.quicktech.com/',
-  realTime: 'ws://localhost:4200/realtime/'
+  realTime: 'ws://localhost:4200/realtime/',
+  webserverDomain: 'dev.quicktech.com'
 };
