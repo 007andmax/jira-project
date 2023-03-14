@@ -21,7 +21,7 @@
                 <div class="icon__edit qt-bg-contain qt-sz-16 pointer"></div>
             </div>
             <div
-                class="qt-button --square-md --gray pointer qt-mr-8"
+                class="qt-button --square-md --gray pointer"
                 (click)="printPdf()"
                 placement="top"
                 ngbTooltip="Print"
@@ -29,6 +29,7 @@
             >
                 <div class="icon__print qt-bg-contain qt-sz-16 pointer"></div>
             </div>
+            <div class="ticket-detail-documents__separator qt-mr-16 qt-ml-16"></div>
             <div
                 class="qt-button --square-md --gray pointer"
                 (click)="close()"
@@ -41,7 +42,7 @@
         class="ticket-detail-documents__body"
         [hidden]="showPreloader"
     >
-        <div class="documents-create-panel__body qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
+        <div class="documents-create-panel__body">
             <div class="documents-create-panel__header">
                 <h3 [textContent]="document.title"></h3>
             </div>

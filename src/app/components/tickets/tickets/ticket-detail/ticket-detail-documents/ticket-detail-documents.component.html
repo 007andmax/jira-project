@@ -16,12 +16,12 @@
             [ngForOf]="documents"
             [ngForTrackBy]="trackByIndex"
         >
-            <div class="ticket-detail-documents__container">
+            <div class="ticket-detail-documents__item">
                 <div
-                    class="ticket-detail-documents__title"
+                    class="ticket-detail-documents__title qt-mb-8"
                     [textContent]="document.title"
                 ></div>
-                <div class="qt-df qt-ai-c qt-mb-12">
+                <div class="qt-df qt-ai-c">
                     <i class="icon__ticket-document qt-bg-contain qt-sz-16 qt-mr-8"></i>
                     <div
                         class="ticket-detail-documents__subtitle"
@@ -40,7 +40,7 @@
             class="qt-button --gray --sm qt-w100 qt-jc-c"
             (click)="showMore()"
         >
-            View more info
+            View All
         </button>
     </div>
 </div>

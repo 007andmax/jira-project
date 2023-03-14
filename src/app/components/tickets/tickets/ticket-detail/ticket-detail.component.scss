@@ -1025,12 +1025,17 @@ app-ticket-edit-aside-right-panel {
       @include dropdown-scrollbar;
     }
     &__sidebar-info {
-      width: 360px;
-      padding: 16px;
-      background-color: $gray-50;
-      overflow: auto;
+      position: relative;
+      z-index: 3;
       height: 100%;
-      @include dropdown-scrollbar;
+      &-inner {
+        width: 360px;
+        padding: 16px;
+        background-color: $gray-50;
+        overflow: auto;
+        height: 100%;
+        @include dropdown-scrollbar;
+      }
     }
     &__sidebar-menu {
       width: 56px;

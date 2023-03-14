@@ -7,13 +7,17 @@
     border-radius: 8px;
 
     &__title {
-        font-weight: 500;
+        font-weight: 600;
         font-size: 13px;
         line-height: 16px;
-        color: $gray-900;
+        color: $gray-700;
     }
-    &__container {
+    &__item {
         position: relative;
+        border-bottom: 1px solid $gray-200;
+        padding-right: 52px;
+        padding-bottom: 12px;
+        margin-bottom: 12px;
         &:hover {
             .ticket-detail-documents__view {
                 display: flex;
@@ -22,8 +26,8 @@
     }
     &__view {
         position: absolute;
-        top: calc(50% - 14px);
-        right: 0px;
+        top: 6px;
+        right: 0;
         width: 47px;
         height: 28px;
         display: none;

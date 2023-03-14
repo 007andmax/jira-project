@@ -1,6 +1,6 @@
 <div class="ticket-detail-documents ticket-detail-documents__full">
     <div class="ticket-detail-documents__header qt-df qt-ai-c qt-jc-sb">
-        <div class="ticket-detail-documents__title">Documents</div>
+        <div class="ticket-detail-documents__main-title">Documents</div>
         <div
             class="qt-button --square-md --gray pointer"
             (click)="close()"
@@ -8,23 +8,25 @@
             <div class="icon__close qt-bg-contain qt-sz-16 pointer"></div>
         </div>
     </div>
+    <div class="qt-input-search qt-mt-16 qt-mb-16 qt-ml-16 qt-mr-16">
+      <input
+        placeholder="Search Documents"
+        (input)="search($event)"
+      >
+    </div>
     <div class="ticket-detail-documents__body">
-        <input
-            placeholder="search"
-            (input)="search($event)"
-        >
         <ng-template
             ngFor
             let-document
             [ngForOf]="documents"
             [ngForTrackBy]="trackByIndex"
         >
-            <div class="ticket-detail-documents__container">
+            <div class="ticket-detail-documents__item">
                 <div
-                    class="ticket-detail-documents__title"
+                    class="ticket-detail-documents__title qt-mb-8"
                     [textContent]="document.title"
                 ></div>
-                <div class="qt-df qt-ai-c qt-mb-12">
+                <div class="qt-df qt-ai-c">
                     <i class="icon__ticket-document qt-bg-contain qt-sz-16 qt-mr-8"></i>
                     <div
                         class="ticket-detail-documents__subtitle"
