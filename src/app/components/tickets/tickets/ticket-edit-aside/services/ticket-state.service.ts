@@ -21,6 +21,7 @@ export class TicketStateService {
   onEditUpdateByForm: EventEmitter<any> = new EventEmitter();
   changeUpdatesTicket: EventEmitter<any> = new EventEmitter();
   closedTicket: EventEmitter<any> = new EventEmitter();
+  onDocumentForPreview: EventEmitter<any> = new EventEmitter();
   updateForRemove: TicketProfileUpdate = null;
   serviceForRemove: TicketProfileService = null;
   productForRemove: TicketProfileProduct = null;
@@ -46,6 +47,7 @@ export class TicketStateService {
   }
   public setDocumentForPreview(data) {
     this.documentForPreview = data;
+    this.onDocumentForPreview.emit(data);
   }
   public getDocumentForPreview() {
     return this.documentForPreview;
