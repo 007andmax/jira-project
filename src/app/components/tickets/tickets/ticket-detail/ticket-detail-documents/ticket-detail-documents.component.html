@@ -13,7 +13,10 @@
             [ngForOf]="documents"
             [ngForTrackBy]="trackByIndex"
         >
-            <div class="ticket-detail-documents__item">
+            <div
+                class="ticket-detail-documents__item"
+                [ngClass]="{'--active-document-preview': ticketStateService.getDocumentForPreview() && ticketStateService.getDocumentForPreview().id === document.id }"
+            >
                 <div
                     class="ticket-detail-documents__title qt-mb-8"
                     [textContent]="document.title"

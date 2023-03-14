@@ -12,7 +12,7 @@ export class TicketDetailDocumentsComponent implements OnInit {
   @Output() onShowMore = new EventEmitter<any>();
   toggleContainer: boolean = true;
   documents: Array<Document> = [];
-  constructor(private ticketStateService: TicketStateService,) { }
+  constructor(public ticketStateService: TicketStateService,) { }
 
   ngOnInit() {
     this.documents = this.ticketStateService.getDocuments();
