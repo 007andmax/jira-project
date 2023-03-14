@@ -1,4 +1,5 @@
 @import './src/assets/styles/variable';
+@import "./src/assets/styles/mixin/dropdown";
 
 .ticket-detail-documents {
     position: absolute;
@@ -81,6 +82,7 @@
         padding: 16px 20px;
         overflow: auto;
         height: calc(100% - 57px);
+        @include dropdown-scrollbar;
     }
 
     &__avatar {
