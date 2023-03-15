@@ -1,0 +1,65 @@
+<div class="ticket-detail-documents qt-mb-8">
+    <div class="ticket-detail-documents__header qt-pos-rel qt-df qt-ai-c qt-jc-sb">
+        <div class="ticket-detail-documents__title">Document Preview</div>
+        <div class="qt-df qt-ai-c">
+            <div
+                class="qt-button --square-md --gray pointer qt-mr-8"
+                (click)="previewDocument()"
+                placement="top"
+                container="body"
+                ngbTooltip="New tab"
+            >
+                <div class="icon__go-to qt-bg-contain qt-sz-16 pointer"></div>
+            </div>
+            <div
+                class="qt-button --square-md --gray pointer qt-mr-8"
+                (click)="exportPdf()"
+                placement="top"
+                container="body"
+                ngbTooltip="Download"
+            >
+                <div class="icon__download qt-bg-contain qt-sz-16 pointer"></div>
+            </div>
+            <div
+                class="qt-button --square-md --gray pointer qt-mr-8"
+                (click)="editDocument()"
+                placement="top"
+                container="body"
+                ngbTooltip="Edit"
+            >
+                <div class="icon__edit qt-bg-contain qt-sz-16 pointer"></div>
+            </div>
+            <div
+                class="qt-button --square-md --gray pointer"
+                (click)="printPdf()"
+                placement="top"
+                ngbTooltip="Print"
+                container="body"
+            >
+                <div class="icon__print qt-bg-contain qt-sz-16 pointer"></div>
+            </div>
+            <div class="ticket-detail-documents__separator qt-mr-16 qt-ml-16"></div>
+            <div
+                class="qt-button --square-md --gray pointer"
+                (click)="close()"
+            >
+                <div class="icon__close qt-bg-contain qt-sz-16 pointer"></div>
+            </div>
+        </div>
+    </div>
+    <div
+        class="ticket-detail-documents__body"
+        [hidden]="showPreloader"
+    >
+        <div class="documents-create-panel__body">
+            <div class="documents-create-panel__header">
+                <h3 [textContent]="document.title"></h3>
+            </div>
+            <div class="documents-create-panel__content"></div>
+        </div>
+    </div>
+    <div
+        class="loading"
+        *ngIf="showPreloader"
+    ></div>
+</div>

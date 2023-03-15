@@ -76,6 +76,8 @@ import { TicketDetailDocumentsComponent } from './ticket-detail-documents/ticket
 import { TicketDetailContactDetailsComponent } from './ticket-detail-contact-details/ticket-detail-contact-details.component';
 import { CompanyInfoHistoryModule } from '../ticket-edit-aside-company-info/company-info-history/company-info-history.module';
 import { TicketDetailContactDetailsHistoryComponent } from './ticket-detail-contact-details/ticket-detail-contact-details-history/ticket-detail-contact-details-history.component';
+import { TicketDetailDocumentsPreviewComponent } from './ticket-detail-documents/ticket-detail-documents-preview/ticket-detail-documents-preview.component';
+import { TicketDetailDocumentsDetailsComponent } from './ticket-detail-documents/ticket-detail-documents-details/ticket-detail-documents-details.component';
 
 
 
@@ -125,7 +127,9 @@ import { TicketDetailContactDetailsHistoryComponent } from './ticket-detail-cont
         TicketDetailDevicesComponent,
         TicketDetailDocumentsComponent,
         TicketDetailContactDetailsComponent,
-        TicketDetailContactDetailsHistoryComponent
+        TicketDetailContactDetailsHistoryComponent,
+        TicketDetailDocumentsPreviewComponent,
+        TicketDetailDocumentsDetailsComponent
 
     ],
     imports: [

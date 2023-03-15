@@ -76,7 +76,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     private elRef: ElementRef,
     public ticketsListService: TicketsListService,
     private usersStateService: UsersStateService,
-    private ticketStateService: TicketStateService,
+    public ticketStateService: TicketStateService,
     public ticketsPermissionsService: TicketsPermissionsService,
     public cd: ChangeDetectorRef,
     private toastrService: ToastrService,
@@ -181,6 +181,13 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onEditUpdateByForm);
   }
+  onViewDocument(data) {
+    this.ticketStateService.setDocumentForPreview(data);
+    this.typeRigthDetailAside = 'DOCUMENT_PREVIEW';
+  }
+  onViewDocumentsPreview(data) {
+    this.ticketStateService.setDocumentForPreview(data);
+  }
   onShowMore(data) {
     this.typeRigthDetailAside = data;
     this.toggleRigthPanel = false;
@@ -242,6 +249,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       this.updateLisUpdateUser();
       this.showPreloader = false;
       this.ticketStateService.getServicesList(this.ticketProfile);
+      this.ticketStateService.getPasswordsDocuments(this.ticketProfile.createdUser.id);
       if (this.ticketMessage) this.ticketMessage.reset();
       this.ticketProfileUpdates.resetShowLoadMoreUpdates();
       this.ticketTasks.getTicketTasks(id);

@@ -1,13 +1,53 @@
-<p class="header">
-    <span (click)="toggleContainer = !toggleContainer">Documents</span>
-    <i
+<div class="ticket-detail-documents qt-mb-8">
+    <div
+        class="ticket-detail-documents__header qt-pos-rel pointer"
         (click)="toggleContainer = !toggleContainer"
-        class="icn-sm report-caret-icon"
-    ></i>
-</p>
-<div
-    class="container"
-    *ngIf="toggleContainer"
->
-    <p>container</p>
+    >
+        <div class="ticket-detail-documents__main-title">Documents</div>
+        <i class="icn-sm report-caret-icon pointer"></i>
+    </div>
+    <div class="ticket-detail-documents__body">
+        <ng-template
+            ngFor
+            let-document
+            [ngForOf]="documents"
+            [ngForTrackBy]="trackByIndex"
+        >
+            <div
+                class="ticket-detail-documents__item"
+                [ngClass]="{'--active-document-preview': ticketStateService.getDocumentForPreview() && ticketStateService.getDocumentForPreview().id === document.id }"
+            >
+                <div
+                    class="ticket-detail-documents__title qt-mb-8"
+                    [textContent]="document.title"
+                ></div>
+                <div class="qt-df qt-ai-c">
+                    <i class="icon__ticket-document qt-bg-contain qt-sz-16 qt-mr-8"></i>
+                    <div
+                        class="ticket-detail-documents__subtitle"
+                        [textContent]="document.categoryName"
+                    ></div>
+                </div>
+                <div
+                    class="ticket-detail-documents__view pointer"
+                    (click)="viewDocument(document)"
+                >
+                    View
+                </div>
+            </div>
+        </ng-template>
+        <div
+            class="qt-df qt-ai-c qt-jc-c"
+            *ngIf="toggleContainer && documents.length === 0"
+        >
+            <span>No associated documents</span>
+        </div>
+        <button
+            *ngIf="toggleContainer && documents.length > 0"
+            class="qt-button --gray --sm qt-w100 qt-jc-c"
+            (click)="showMore()"
+        >
+            View All
+        </button>
+    </div>
 </div>
