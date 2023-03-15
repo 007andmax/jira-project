@@ -54,4 +54,7 @@ export class TicketDetailDocumentsDetailsComponent implements OnInit {
   close() {
     this.onClose.emit(null);
   }
+  public trackByIndex(index, item) {
+    return index;
+  }
 }
