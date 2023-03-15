@@ -47,7 +47,7 @@ export class TicketStateService {
   }
   public setDocumentForPreview(data) {
     this.documentForPreview = data;
-    this.onDocumentForPreview.emit(data);
+    if (data) this.onDocumentForPreview.emit(data);
   }
   public getDocumentForPreview() {
     return this.documentForPreview;
