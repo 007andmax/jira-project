@@ -10,6 +10,7 @@
         <ng-template
             ngFor
             let-document
+            *ngIf="toggleContainer"
             [ngForOf]="documents"
             [ngForTrackBy]="trackByIndex"
         >
@@ -43,7 +44,6 @@
             <span>No associated documents</span>
         </div>
         <button
-            *ngIf="toggleContainer && documents.length > 0"
             class="qt-button --gray --sm qt-w100 qt-jc-c"
             (click)="showMore()"
         >
