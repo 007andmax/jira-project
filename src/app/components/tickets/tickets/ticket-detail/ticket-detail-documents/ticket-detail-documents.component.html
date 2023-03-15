@@ -6,11 +6,13 @@
         <div class="ticket-detail-documents__main-title">Documents</div>
         <i class="icn-sm report-caret-icon pointer"></i>
     </div>
-    <div class="ticket-detail-documents__body">
+    <div
+        class="ticket-detail-documents__body"
+        *ngIf="toggleContainer"
+    >
         <ng-template
             ngFor
             let-document
-            *ngIf="toggleContainer"
             [ngForOf]="documents"
             [ngForTrackBy]="trackByIndex"
         >
@@ -39,7 +41,7 @@
         </ng-template>
         <div
             class="qt-df qt-ai-c qt-jc-c"
-            *ngIf="toggleContainer && documents.length === 0"
+            *ngIf="documents.length === 0"
         >
             <span>No associated documents</span>
         </div>
