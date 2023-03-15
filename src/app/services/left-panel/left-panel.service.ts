@@ -77,6 +77,7 @@ export class LeftPanelService {
       state === 'new-category-documents' ||
       state === 'new-add-documents' ||
       state === 'new-edit-documents' ||
+      state === 'new-preview-documents' ||
       state === 'new-template-documents')
   }
   isReportsState(state) {

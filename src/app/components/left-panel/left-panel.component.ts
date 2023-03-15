@@ -189,6 +189,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/devices/reports`)) this.state == 'new-device-summary';
           if (window.location.href.includes(`/help-center`)) this.state = 'help-center';
           if (window.location.href.includes(`/device/`)) this.state = 'new-device';
+          console.log("this.state", this.state);
           if (this.state === '' && this.companiesStateService.getCurrentCompany() && this.usersStateService.getCurrentUser().role !== "SUPER_ADMIN") this.goToDefaultPage();
           this.leftPanelStateService.firstOpen(this.state);
           this.leftPanelStateService.changeState(this.state);
