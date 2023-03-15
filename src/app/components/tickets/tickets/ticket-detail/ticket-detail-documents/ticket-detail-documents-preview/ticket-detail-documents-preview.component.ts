@@ -36,7 +36,6 @@ export class TicketDetailDocumentsPreviewComponent implements OnInit, OnDestroy 
   getDocument() {
     this.documentsService.getDocument(this.document.id).subscribe(data => {
       this.document = new Document(data);
-      console.log("this.document", this.document);
       this.elRef.nativeElement.querySelector(".documents-create-panel__content").innerHTML = '';
       this.elRef.nativeElement.querySelector(".documents-create-panel__content").insertAdjacentHTML('afterbegin', this.document.content);
       this.showPreloader = false;
