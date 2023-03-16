@@ -30,7 +30,7 @@ export class DocumentPreviewComponent implements OnInit {
     private documentsService: DocumentsService) { }
 
   ngOnInit() {
-    this.leftPanelStateService.hideLeftPanel(true);
+    // this.leftPanelStateService.hideLeftPanel(true);
     let id = this.activateRoute.snapshot.params['id'];
     let subscription = this.activateRoute.params.subscribe(params => {
       this.showPreloader = true;

@@ -45,7 +45,6 @@ export class TicketDetailContactDetailsComponent implements OnInit, OnDestroy {
   }
   getDataCompany() {
     if (this.company) {
-      console.log("this.company", this.company);
       let primaryContact,
         primaryAddress,
         primaryPhone;

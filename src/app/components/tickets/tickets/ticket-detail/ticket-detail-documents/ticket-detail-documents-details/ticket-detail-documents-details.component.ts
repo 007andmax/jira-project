@@ -3,6 +3,7 @@ import { Document } from 'src/app/components/documents/class/document';
 import { DocumentFilter } from 'src/app/components/documents/class/document-filter';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { TicketProfile } from '../../../class/ticket-profile';
+import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-state.service';
 
 @Component({
   selector: 'ticket-detail-documents-details',
@@ -19,6 +20,7 @@ export class TicketDetailDocumentsDetailsComponent implements OnInit {
   isSearch: boolean = false;
   filter: DocumentFilter = new DocumentFilter();
   constructor(public documentsService: DocumentsService,
+    public ticketStateService: TicketStateService,
     private elRef: ElementRef,) { }
 
   ngOnInit() {

@@ -196,7 +196,6 @@ export class LeftPanelComponent implements OnInit {
             this.cd.detectChanges();
             this.updatePage(this.state);
           }
-
         }
       });
 

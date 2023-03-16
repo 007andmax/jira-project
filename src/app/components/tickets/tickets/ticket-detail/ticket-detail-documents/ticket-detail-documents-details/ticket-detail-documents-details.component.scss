@@ -19,6 +19,15 @@
                 display: flex;
             }
         }
+        &.--active-document-preview::after {
+          position: absolute;
+          content: "";
+          left: -16px;
+          bottom: 0;
+          height: calc(100% + 12px);
+          width: 3px;
+          background-color: $blue-light-600;
+        }
     }
 
     &__view {
