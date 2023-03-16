@@ -8,7 +8,7 @@ import { TicketStateService } from '../../ticket-edit-aside/services/ticket-stat
   styleUrls: ['./ticket-detail-passwords.component.scss']
 })
 export class TicketDetailPasswordsComponent implements OnInit {
-  @Output() onViewDocument = new EventEmitter<any>();
+
   @Output() onShowMore = new EventEmitter<any>();
   toggleContainer: boolean = true;
   passwords: Array<PasswordRecord> = [];
@@ -19,10 +19,6 @@ export class TicketDetailPasswordsComponent implements OnInit {
     this.ticketStateService.onGetPasswords.subscribe(data => {
       this.passwords = data;
     })
-
-  }
-  viewDocument(data) {
-    this.onViewDocument.emit(data);
   }
   showMore() {
     this.onShowMore.emit(null);

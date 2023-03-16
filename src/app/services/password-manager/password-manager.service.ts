@@ -188,7 +188,10 @@ export class PasswordManagerService {
 
     return this.http.get(this.apiUrl + 'passwordRecords');
   }
+  public getRecordsDetailsTicket(companyId) {
 
+    return this.http.get(this.apiUrl + 'passwordRecords/company/' + companyId);
+  }
   public getRecordsForUserDetail(user) {
 
     return this.http.get(this.apiUrl + `passwordRecords/user/${user}`);
