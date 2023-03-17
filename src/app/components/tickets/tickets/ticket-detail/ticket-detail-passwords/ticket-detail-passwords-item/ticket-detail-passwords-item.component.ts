@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { PasswordRecord } from 'src/app/components/password-manager/class/password-record';
 import { PasswordManagerService } from 'src/app/services/password-manager/password-manager.service';
@@ -10,7 +10,7 @@ import { AppStateService } from 'src/app/states/app/app-state.service';
   templateUrl: './ticket-detail-passwords-item.component.html',
   styleUrls: ['./ticket-detail-passwords-item.component.scss']
 })
-export class TicketDetailPasswordsItemComponent implements OnInit {
+export class TicketDetailPasswordsItemComponent implements OnInit, OnDestroy {
   @Input() password: PasswordRecord;
   togglePassword: boolean = false;
   toggleBodyPassword: boolean = false;
@@ -23,6 +23,7 @@ export class TicketDetailPasswordsItemComponent implements OnInit {
     private toastrService: ToastrService,
     public cd: ChangeDetectorRef,
     private appStateService: AppStateService) { }
+
 
   ngOnInit() {
   }
@@ -78,5 +79,8 @@ export class TicketDetailPasswordsItemComponent implements OnInit {
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
+  }
+  ngOnDestroy(): void {
+    if (this.intervalContainer) clearInterval(this.intervalContainer);
   }
 }

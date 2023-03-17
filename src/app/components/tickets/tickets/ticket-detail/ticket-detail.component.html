@@ -249,6 +249,10 @@
                         [ticketProfile]="ticketProfile"
                         (onShowMore)="onShowMore('CONTACT')"
                     ></ticket-detail-contact>
+                    <ticket-detail-passwords
+                        *ngIf="toggleRigthPanel"
+                        (onShowMore)="onShowMore('PASSWORD')"
+                    ></ticket-detail-passwords>
                     <ticket-detail-documents
                         *ngIf="toggleRigthPanel"
                         (onViewDocument)="onViewDocument($event)"
@@ -269,10 +273,8 @@
                         *ngIf="typeRigthDetailAside == 'PASSWORD'"
                         (onClose)="onCloseDetails()"
                     ></ticket-detail-passwords-details>
-                    <ticket-detail-passwords
-                        *ngIf="toggleRigthPanel"
-                        (onShowMore)="onShowMore('PASSWORD')"
-                    ></ticket-detail-passwords>
+
+
                     <!-- <ticket-detail-devices *ngIf="toggleRigthPanel"></ticket-detail-devices> -->
                 </div>
             </div>
