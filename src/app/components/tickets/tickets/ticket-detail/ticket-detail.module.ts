@@ -80,6 +80,8 @@ import { TicketDetailDocumentsPreviewComponent } from './ticket-detail-documents
 import { TicketDetailDocumentsDetailsComponent } from './ticket-detail-documents/ticket-detail-documents-details/ticket-detail-documents-details.component';
 import { TicketDetailPasswordsItemComponent } from './ticket-detail-passwords/ticket-detail-passwords-item/ticket-detail-passwords-item.component';
 import { TicketDetailPasswordsDetailsComponent } from './ticket-detail-passwords/ticket-detail-passwords-details/ticket-detail-passwords-details.component';
+import { TicketDetailDevicesItemComponent } from './ticket-detail-devices/ticket-detail-devices-item/ticket-detail-devices-item.component';
+import { TicketDetailDevicesDetailsComponent } from './ticket-detail-devices/ticket-detail-devices-details/ticket-detail-devices-details.component';
 
 
 
@@ -133,7 +135,9 @@ import { TicketDetailPasswordsDetailsComponent } from './ticket-detail-passwords
         TicketDetailDocumentsPreviewComponent,
         TicketDetailDocumentsDetailsComponent,
         TicketDetailPasswordsItemComponent,
-        TicketDetailPasswordsDetailsComponent
+        TicketDetailPasswordsDetailsComponent,
+        TicketDetailDevicesItemComponent,
+        TicketDetailDevicesDetailsComponent
 
     ],
     imports: [

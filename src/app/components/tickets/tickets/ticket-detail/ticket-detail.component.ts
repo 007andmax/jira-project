@@ -250,6 +250,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       this.showPreloader = false;
       this.ticketStateService.getServicesList(this.ticketProfile);
       this.ticketStateService.getPasswordsDocuments(this.ticketProfile.createdUser.id);
+      this.ticketStateService.getDevicesByCompany(this.ticketProfile.company.id);
       if (this.ticketMessage) this.ticketMessage.reset();
       this.ticketProfileUpdates.resetShowLoadMoreUpdates();
       this.ticketTasks.getTicketTasks(id);
@@ -483,6 +484,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.ticketStateService.onTicketClosed();
     this.appService.toggleMobileAside(false);
     this.ticketProfileUpdates.resetShowLoadMoreUpdates();
+    this.ticketStateService.sub.unsubscribe();
     (<any>document.body.querySelector(".nav-header")).style.display = "flex";
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();

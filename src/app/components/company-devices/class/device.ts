@@ -44,6 +44,10 @@ export class Device {
     public setIconName(data) {
         this.iconName = data;
     }
+    getLabelForEdit() {
+        if (this.label) return this.label;
+        return this.hostName || this.ip;
+    }
     public update(data) {
         this.agentId = data.agentId;
         this.agentVersion = data.agentVersion;

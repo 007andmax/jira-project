@@ -11,6 +11,10 @@ import { TicketProfileAttachment } from '../../class/ticket-profile-attachment';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { Document } from 'src/app/components/documents/class/document';
 import { PasswordRecord } from 'src/app/components/password-manager/class/password-record';
+import { DevicesService } from 'src/app/services/devices/devices.service';
+import { DeviceCompany } from 'src/app/components/company-devices/class/device-company';
+import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
+import { Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -39,10 +43,15 @@ export class TicketStateService {
   documentForPreview: Document;
   onGetDocuments: EventEmitter<any> = new EventEmitter();
   onGetPasswords: EventEmitter<any> = new EventEmitter();
+  onGetDevices: EventEmitter<any> = new EventEmitter();
+  devices: Array<DeviceCompany> = [];
+  sub: Subscription = new Subscription();
   constructor(private serviceAgreementsService: ServiceAgreementsService,
     private recurringService: RecurringService,
     private ticketsRealTimeService: TicketsRealTimeService,
     private ticketsService: TicketsService,
+    private devicesService: DevicesService,
+    private devicesStateService: DevicesStateService,
     private websocketService: WebsocketService) {
     this.ticketsRealTimeService.changeTicket.subscribe(newChange => {
       this.changeUpdatesTicket.emit(newChange);
@@ -51,6 +60,9 @@ export class TicketStateService {
   public setDocumentForPreview(data) {
     this.documentForPreview = data;
     if (data) this.onDocumentForPreview.emit(data);
+  }
+  public getDevices() {
+    return this.devices;
   }
   public getDocumentForPreview() {
     return this.documentForPreview;
@@ -67,6 +79,62 @@ export class TicketStateService {
       this.passwords = data.passwordRecordDtos.map(item => new PasswordRecord(item));
       this.onGetDocuments.emit(this.documents);
       this.onGetPasswords.emit(this.passwords);
+    })
+  }
+  public getDevicesByCompany(companyID) {
+    this.devicesService.getCompanyDevices(companyID).subscribe((data: any) => {
+      if (data) {
+        this.devices = data[companyID].map(item => new DeviceCompany(item, companyID));
+        this.onGetDevices.emit(this.devices);
+        if (this.devices.length > 0 && this.devicesStateService.getIsInitWebSocket()) this.sendDeviceStatusRequest(companyID, this.devices.filter(item => item.agentId).map(item => item.agentId));
+      }
+    });
+    let getOnUpdateAgentActivityStatus = this.devicesStateService.getOnUpdateAgentActivityStatus().subscribe(newChange => {
+      var isCurrentCompany = this.devices.find(item => item.agentId === newChange.data.agentId);
+      if (newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('Idle')) {
+        if (isCurrentCompany) {
+          for (var i = 0; i < this.devices.length; i++) {
+            if (this.devices[i].agentId === newChange.data.agentId) {
+              if (newChange.data.statuses.Idle) {
+                this.devices[i].timing.idle = this.devicesStateService.getMillisecondsFromTimeString(newChange.data.statuses.Idle);
+              } else {
+                this.devices[i].timing.idle = null;
+              }
+              break;
+            }
+          }
+        }
+      } else if (newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('NoRestart') && newChange.data.statuses.hasOwnProperty('Online')) {
+        if (isCurrentCompany) {
+          for (var i = 0; i < this.devices.length; i++) {
+            if (this.devices[i].agentId === newChange.data.agentId) {
+              this.devices[i].timing.noRestart = this.devicesStateService.getMillisecondsFromTimeString(newChange.data.statuses.NoRestart);
+              this.devices[i].timing.online = this.devicesStateService.getMillisecondsFromTimeString(newChange.data.statuses.Online);
+              this.devices[i].timing.uptimeForOrdering = this.devicesStateService.getMillisecondsFromTimeString(newChange.data.statuses.Online);
+              break;
+            }
+          }
+        }
+      }
+    })
+    this.sub.add(getOnUpdateAgentActivityStatus);
+    let getOnResetDeviceTiming = this.devicesStateService.getOnResetDeviceTiming().subscribe(data => {
+      let findIndex = this.devices.findIndex(item => item.id === data.id);
+      if (findIndex > -1) {
+        this.devices[findIndex].timing.idle = null;
+        if (data.online) {
+          this.devices[findIndex].timing.online = 0;
+        } else {
+          this.devices[findIndex].timing.offline = 0;
+          this.devices[findIndex].offlineAt = new Date().toUTCString();
+          this.devices[findIndex].timing.uptimeForOrdering = 0;
+        }
+      }
+    })
+    this.sub.add(getOnResetDeviceTiming);
+  }
+  sendDeviceStatusRequest(companyId, ids) {
+    this.devicesService.sendDeviceStatusRequest(companyId, ids, ["idle", "norestart", "online"]).subscribe(data => {
     })
   }
   public setListTasks(data) {

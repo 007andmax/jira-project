@@ -273,9 +273,14 @@
                         *ngIf="typeRigthDetailAside == 'PASSWORD'"
                         (onClose)="onCloseDetails()"
                     ></ticket-detail-passwords-details>
-
-
-                    <!-- <ticket-detail-devices *ngIf="toggleRigthPanel"></ticket-detail-devices> -->
+                    <ticket-detail-devices-details
+                        *ngIf="typeRigthDetailAside == 'DEVICES'"
+                        (onClose)="onCloseDetails()"
+                    ></ticket-detail-devices-details>
+                    <ticket-detail-devices
+                        *ngIf="toggleRigthPanel"
+                        (onShowMore)="onShowMore('DEVICES')"
+                    ></ticket-detail-devices>
                 </div>
             </div>
             <div class="ticket-detail-page-content__sidebar-menu">

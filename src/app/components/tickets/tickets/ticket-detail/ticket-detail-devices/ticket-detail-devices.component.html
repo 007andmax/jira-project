@@ -1,13 +1,40 @@
-<p class="header">
-    <span (click)="toggleContainer = !toggleContainer">Devices</span>
-    <i
+<div class="ticket-detail-devices qt-mb-8">
+    <div
+        class="ticket-detail-devices__header qt-pos-rel pointer"
         (click)="toggleContainer = !toggleContainer"
-        class="icn-sm report-caret-icon"
-    ></i>
-</p>
-<div
-    class="container"
-    *ngIf="toggleContainer"
->
-    <p>container</p>
+    >
+        <div class="ticket-detail-devices__title">Devices</div>
+        <i class="icn-sm report-caret-icon pointer"></i>
+    </div>
+    <div
+        class="ticket-detail-devices__body"
+        *ngIf="toggleContainer"
+    >
+        <ng-template
+            ngFor
+            let-device
+            let-i="index"
+            [ngForOf]="devices"
+            [ngForTrackBy]="trackByIndex"
+        >
+            <ticket-detail-devices-item
+                [device]="device"
+                *ngIf="i < 3"
+            ></ticket-detail-devices-item>
+        </ng-template>
+        <div
+            class="qt-df qt-ai-c qt-jc-c"
+            *ngIf="devices.length === 0"
+        >
+            <span>
+                No associated devices with the ticket creator
+            </span>
+        </div>
+        <button
+            class="qt-button --gray --sm qt-w100 qt-jc-c"
+            (click)="showMore()"
+        >
+            View All
+        </button>
+    </div>
 </div>
