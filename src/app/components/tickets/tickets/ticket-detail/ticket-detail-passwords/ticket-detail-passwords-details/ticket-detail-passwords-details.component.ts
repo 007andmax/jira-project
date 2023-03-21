@@ -42,6 +42,12 @@ export class TicketDetailPasswordsDetailsComponent implements OnInit {
       this.cd.detectChanges();
     });
   }
+  public trackByIndex(index, item) {
+    return index;
+  }
+  public trackById(index, item) {
+    return item.id;
+  }
   clearSearch() {
     this.list_records = JSON.parse(JSON.stringify(this.recordsData)).map(item => new PasswordRecord(item));
     this.elRef.nativeElement.querySelector("#search-passwords").value = '';

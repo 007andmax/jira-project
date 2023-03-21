@@ -23,5 +23,7 @@ export class TicketDetailPasswordsComponent implements OnInit {
   showMore() {
     this.onShowMore.emit(null);
   }
-
+  public trackByIndex(index, item) {
+    return index;
+  }
 }
