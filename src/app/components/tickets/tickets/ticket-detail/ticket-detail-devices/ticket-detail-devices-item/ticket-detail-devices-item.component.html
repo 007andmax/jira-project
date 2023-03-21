@@ -25,7 +25,8 @@
             <div class="ticket-detail-devices__item-text ellipsis qt-df qt-ai-c">
                 <span
                     class="qt-mr-4"
-                    [textContent]="device.userName || ''"
+                    *ngIf="device.userName"
+                    [textContent]="device.userName"
                 ></span>
                 <span
                     [ngClass]="{'logged-time-point':device.userName,
@@ -49,7 +50,8 @@
                     *ngIf="device.timing.idle == 0"
                 >
                     <div *ngIf="device.online">
-                        Online (
+                        Online 
+                        (
                         <span *ngIf="returnTimeFormatUpTime(device.timing.online).days > 0">
                             {{returnTimeFormatUpTime(device.timing.online).days}} day
                         </span>
@@ -63,7 +65,8 @@
                         )
                     </div>
                     <div *ngIf="!device.online">
-                        Offline (
+                        Offline 
+                        (
                         <span *ngIf="returnTimeFormatUpTime(device.timing.offline).days > 0">
                             {{returnTimeFormatUpTime(device.timing.offline).days}} day
                         </span>

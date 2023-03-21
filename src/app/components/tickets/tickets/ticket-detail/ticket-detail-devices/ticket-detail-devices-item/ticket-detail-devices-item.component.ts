@@ -57,6 +57,10 @@ export class TicketDetailDevicesItemComponent implements OnInit {
     modalRef.componentInstance.message = `Do you want to remove 1 device?`;
     this.devicesStateService.setDevicesForRemove([this.device]);
   }
+  getTimeStatus(data) {
+    let { days, hours, minutes } = this.returnTimeFormatUpTime(data);
+    return `(${days > 0 ? days + ' day' : ''}${hours > 0 ? ' ' + hours + ' hrs' : ''}${minutes > 0 ? ' ' + minutes + ' min' : ''}${minutes < 1 && hours < 1 && days < 1 ? ' 0 min' : ''})`
+  }
   returnTimeFormatUpTime(time) {
     let days = 0;
     let hours = 0;
