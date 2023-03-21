@@ -89,6 +89,10 @@ export class TicketStateService {
         if (this.devices.length > 0 && this.devicesStateService.getIsInitWebSocket()) this.sendDeviceStatusRequest(companyID, this.devices.filter(item => item.agentId).map(item => item.agentId));
       }
     });
+    let onInitWebSocket = this.devicesStateService.onInitWebSocket.subscribe(data => {
+      if (this.devices.length > 0 && this.devicesStateService.getIsInitWebSocket()) this.sendDeviceStatusRequest(companyID, this.devices.filter(item => item.agentId).map(item => item.agentId));
+    })
+    this.sub.add(onInitWebSocket);
     let getOnUpdateAgentActivityStatus = this.devicesStateService.getOnUpdateAgentActivityStatus().subscribe(newChange => {
       var isCurrentCompany = this.devices.find(item => item.agentId === newChange.data.agentId);
       if (newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('Idle')) {

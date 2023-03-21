@@ -13,15 +13,18 @@
             >
             </div>
         </div>
-        <div>
+        <div ngbDropdown>
             <div
                 class="ticket-detail-devices__item-subtitle ellipsis"
                 [textContent]="device.getLabelForEdit()"
             ></div>
-            <div class="ticket-detail-devices__item-text ellipsis">
-                <span [textContent]="device.userName || ''"></span>
+            <div class="ticket-detail-devices__item-text ellipsis qt-df qt-ai-c">
                 <span
-                    class="logged-time"
+                    class="qt-mr-4"
+                    [textContent]="device.userName || ''"
+                ></span>
+                <span
+                    class="logged-time qt-ml-4"
                     *ngIf="device.online && device.userName && device.timing.idle > 0"
                 >
                     Idle:
@@ -34,10 +37,11 @@
                     <span *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).minutes < 1 || !device.timing.idle">0 min</span>
                 </span>
                 <span
-                    class="logged-time"
+                    class="logged-time qt-ml-4"
                     *ngIf="device.userName && device.timing.idle == 0"
                 >
                     <div *ngIf="device.online">
+                        Online (
                         <span *ngIf="returnTimeFormatUpTime(device.timing.online).days > 0">
                             {{returnTimeFormatUpTime(device.timing.online).days}} day
                         </span>
@@ -48,8 +52,10 @@
                             {{returnTimeFormatUpTime(device.timing.online).minutes}} min
                         </span>
                         <span *ngIf="returnTimeFormatUpTime(device.timing.online).minutes < 1 && returnTimeFormatUpTime(device.timing.online).hours < 1 && returnTimeFormatUpTime(device.timing.online).days < 1">0 min</span>
+                        )
                     </div>
                     <div *ngIf="!device.online">
+                        Offline (
                         <span *ngIf="returnTimeFormatUpTime(device.timing.offline).days > 0">
                             {{returnTimeFormatUpTime(device.timing.offline).days}} day
                         </span>
@@ -60,8 +66,46 @@
                             {{returnTimeFormatUpTime(device.timing.offline).minutes}} min
                         </span>
                         <span *ngIf="returnTimeFormatUpTime(device.timing.offline).minutes < 1 && returnTimeFormatUpTime(device.timing.offline).hours < 1 && returnTimeFormatUpTime(device.timing.offline).days < 1">0 min</span>
+                        )
                     </div>
                 </span>
+            </div>
+            <div
+                class="icon__category-more qt-sz-16 qt-bg-contain"
+                ngbDropdownToggle
+            ></div>
+            <div
+                ngbDropdownMenu
+                class="dropdown-menu-qt icon__category-more-dropdown"
+            >
+                <div
+                    class="qt-df qt-ai-c pointer"
+                    (click)="remoteAccess('CSS')"
+                >
+                    <i class="icon__remote-access-ticket qt-sz-20 qt-bg-contain qt-mr-12 qt-fs-0 qt-dib"></i>
+                    Remote Access
+                </div>
+                <div
+                    class="qt-df qt-ai-c pointer"
+                    (click)="turnOff('reboot')"
+                >
+                    <i class="icon__restart qt-sz-20 qt-bg-contain qt-mr-12 qt-fs-0 qt-dib"></i>
+                    Restart
+                </div>
+                <div
+                    class="qt-df qt-ai-c pointer"
+                    (click)="turnOff('shutdown')"
+                >
+                    <i class="icon__shutdown qt-sz-20 qt-bg-contain qt-mr-12 qt-fs-0 qt-dib"></i>
+                    Shutdown
+                </div>
+                <div
+                    class="qt-df qt-ai-c pointer"
+                    (click)="removeDevice()"
+                >
+                    <i class="icon__remove qt-sz-20 qt-bg-contain qt-mr-12 qt-fs-0 qt-dib"></i>
+                    Remove
+                </div>
             </div>
         </div>
     </div>

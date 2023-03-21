@@ -1,5 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DeviceCompany } from 'src/app/components/company-devices/class/device-company';
+import { CompanyDevicesRemoteAccessComponent } from 'src/app/components/company-devices/company-devices-remote-access/company-devices-remote-access.component';
+import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
+import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
+import { REBOOT_DEVICE, REMOVE_DEVICES, SHUTDOWN_DEVICE } from 'src/app/const/confirm';
+import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 
 @Component({
   selector: 'ticket-detail-devices-item',
@@ -8,7 +14,9 @@ import { DeviceCompany } from 'src/app/components/company-devices/class/device-c
 })
 export class TicketDetailDevicesItemComponent implements OnInit {
   @Input() device: DeviceCompany;
-  constructor() { }
+  constructor(private modalService: NgbModal,
+    private confirmStateService: ConfirmStateService,
+    private devicesStateService: DevicesStateService,) { }
 
   ngOnInit() {
   }
@@ -21,6 +29,33 @@ export class TicketDetailDevicesItemComponent implements OnInit {
       hours: hours,
       minutes: minutes,
     }
+  }
+  remoteAccess(connectionType) {
+    const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, { windowClass: 'device-send-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.connectionType = connectionType;
+    modalRef.componentInstance.device = this.device;
+    modalRef.componentInstance.companyId = this.device.companyId;
+    modalRef.componentInstance.action = 'CONNECT_DEVICE';
+  }
+  turnOff(action) {
+    if (action === 'reboot') {
+      this.confirmStateService.setConfirmAction(REBOOT_DEVICE);
+      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+      modalRef.componentInstance.message = `Are you sure you want to reboot chosen device?`;
+      this.devicesStateService.setDevicesForReboot([this.device]);
+    }
+    if (action === 'shutdown') {
+      this.confirmStateService.setConfirmAction(SHUTDOWN_DEVICE);
+      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+      modalRef.componentInstance.message = `Are you sure you want to shutdown chosen device?`;
+      this.devicesStateService.setDevicesForShutDown([this.device]);
+    }
+  }
+  removeDevice() {
+    this.confirmStateService.setConfirmAction(REMOVE_DEVICES);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.message = `Do you want to remove 1 device?`;
+    this.devicesStateService.setDevicesForRemove([this.device]);
   }
   returnTimeFormatUpTime(time) {
     let days = 0;
