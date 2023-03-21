@@ -1,6 +1,7 @@
 <div
     class="ticket-detail-devices__item"
     ngbDropdown
+    placement="top-right"
 >
     <div class="qt-df qt-ai-c">
         <div
@@ -27,7 +28,9 @@
                     [textContent]="device.userName || ''"
                 ></span>
                 <span
-                    class="logged-time qt-ml-4"
+                    [ngClass]="{'logged-time-point':device.userName,
+                'qt-ml-4': device.userName}"
+                    class="logged-time"
                     *ngIf="device.online && device.timing.idle > 0"
                 >
                     Idle:
@@ -40,7 +43,9 @@
                     <span *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).minutes < 1 || !device.timing.idle">0 min</span>
                 </span>
                 <span
-                    class="logged-time qt-ml-4"
+                    [ngClass]="{'logged-time-point':device.userName,
+                'qt-ml-4': device.userName}"
+                    class="logged-time"
                     *ngIf="device.timing.idle == 0"
                 >
                     <div *ngIf="device.online">
