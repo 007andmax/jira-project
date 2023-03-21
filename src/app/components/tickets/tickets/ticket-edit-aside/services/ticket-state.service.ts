@@ -10,6 +10,7 @@ import { TicketProfileTask } from '../../class/ticket-profile-task';
 import { TicketProfileAttachment } from '../../class/ticket-profile-attachment';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { Document } from 'src/app/components/documents/class/document';
+import { PasswordRecord } from 'src/app/components/password-manager/class/password-record';
 
 @Injectable({
   providedIn: 'root'
@@ -34,8 +35,10 @@ export class TicketStateService {
   updateForEdit: TicketProfileUpdate;
   listTasks: Array<TicketProfileTask> = [];
   documents: Array<Document> = [];
+  passwords: Array<PasswordRecord> = [];
   documentForPreview: Document;
   onGetDocuments: EventEmitter<any> = new EventEmitter();
+  onGetPasswords: EventEmitter<any> = new EventEmitter();
   constructor(private serviceAgreementsService: ServiceAgreementsService,
     private recurringService: RecurringService,
     private ticketsRealTimeService: TicketsRealTimeService,
@@ -55,10 +58,15 @@ export class TicketStateService {
   public getDocuments() {
     return this.documents;
   }
+  public getPasswords() {
+    return this.passwords;
+  }
   public getPasswordsDocuments(userId) {
     this.ticketsService.getPasswordsDocuments(userId).subscribe((data: any) => {
       this.documents = data.documentDtos.map(item => new Document(item));
+      this.passwords = data.passwordRecordDtos.map(item => new PasswordRecord(item));
       this.onGetDocuments.emit(this.documents);
+      this.onGetPasswords.emit(this.passwords);
     })
   }
   public setListTasks(data) {

@@ -26,14 +26,14 @@ export class TicketDetailLinkedAgentsComponent extends PasswordManagerLinkedComp
         this.devicesList.push(item);
         if (this.ticketProfile.agent && this.ticketProfile.agent.deviceId == item.id) this.selectedDevice = item;
       })
-      this.devicesList.sort((a, b) => (`${a.name}`.toLowerCase() > `${b.name}`.toLowerCase()) ?
-        1 : ((`${b.name}`.toLowerCase() > `${a.name}`.toLowerCase()) ? -1 : 0));
+      this.devicesList.sort((a, b) => (this.getLabelDevice(a).toLowerCase() > this.getLabelDevice(b).toLowerCase()) ?
+        1 : ((this.getLabelDevice(b).toLowerCase() > this.getLabelDevice(a).toLowerCase()) ? -1 : 0));
     }
   }
   public onSearch(event) {
     this.devicesList = this.devicesStateService.getAllDevices()[this.selectedCompanyId].filter(item => this.getLabelDevice(item).toLowerCase().includes(event.target.value.toLowerCase()))
-      .sort((a, b) => (`${a.name}`.toLowerCase() > `${b.name}`.toLowerCase()) ?
-        1 : ((`${b.name}`.toLowerCase() > `${a.name}`.toLowerCase()) ? -1 : 0));
+      .sort((a, b) => (this.getLabelDevice(a).toLowerCase() > this.getLabelDevice(b).toLowerCase()) ?
+        1 : ((this.getLabelDevice(b).toLowerCase() > this.getLabelDevice(a).toLowerCase()) ? -1 : 0));
     this.cd.detectChanges();
   }
   public selected(newItem) {
