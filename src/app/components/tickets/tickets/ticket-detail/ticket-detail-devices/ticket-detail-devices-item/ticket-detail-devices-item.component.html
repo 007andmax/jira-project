@@ -1,4 +1,7 @@
-<div class="ticket-detail-devices__item">
+<div
+    class="ticket-detail-devices__item"
+    ngbDropdown
+>
     <div class="qt-df qt-ai-c">
         <div
             class="qt-df qt-ai-c qt-jc-c qt-sz-40 qt-circle ticket-detail-devices__item-icon qt-mr-8 device-type-icon"
@@ -13,7 +16,7 @@
             >
             </div>
         </div>
-        <div ngbDropdown>
+        <div>
             <div
                 class="ticket-detail-devices__item-subtitle ellipsis"
                 [textContent]="device.getLabelForEdit()"
@@ -25,7 +28,7 @@
                 ></span>
                 <span
                     class="logged-time qt-ml-4"
-                    *ngIf="device.online && device.userName && device.timing.idle > 0"
+                    *ngIf="device.online && device.timing.idle > 0"
                 >
                     Idle:
                     <span *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).hours > 0">
@@ -38,7 +41,7 @@
                 </span>
                 <span
                     class="logged-time qt-ml-4"
-                    *ngIf="device.userName && device.timing.idle == 0"
+                    *ngIf="device.timing.idle == 0"
                 >
                     <div *ngIf="device.online">
                         Online (
@@ -70,43 +73,44 @@
                     </div>
                 </span>
             </div>
-            <div
-                class="icon__category-more qt-sz-16 qt-bg-contain"
-                ngbDropdownToggle
-            ></div>
-            <div
-                ngbDropdownMenu
-                class="dropdown-menu-qt icon__category-more-dropdown"
-            >
-                <div
-                    class="qt-df qt-ai-c pointer"
-                    (click)="remoteAccess('CSS')"
-                >
-                    <i class="icon__remote-access-ticket qt-sz-20 qt-bg-contain qt-mr-12 qt-fs-0 qt-dib"></i>
-                    Remote Access
-                </div>
-                <div
-                    class="qt-df qt-ai-c pointer"
-                    (click)="turnOff('reboot')"
-                >
-                    <i class="icon__restart qt-sz-20 qt-bg-contain qt-mr-12 qt-fs-0 qt-dib"></i>
-                    Restart
-                </div>
-                <div
-                    class="qt-df qt-ai-c pointer"
-                    (click)="turnOff('shutdown')"
-                >
-                    <i class="icon__shutdown qt-sz-20 qt-bg-contain qt-mr-12 qt-fs-0 qt-dib"></i>
-                    Shutdown
-                </div>
-                <div
-                    class="qt-df qt-ai-c pointer"
-                    (click)="removeDevice()"
-                >
-                    <i class="icon__remove qt-sz-20 qt-bg-contain qt-mr-12 qt-fs-0 qt-dib"></i>
-                    Remove
-                </div>
-            </div>
+        </div>
+    </div>
+    <div
+        class="icon__category-more qt-sz-16 qt-bg-contain action-more"
+        ngbDropdownToggle
+    ></div>
+    <div
+        ngbDropdownMenu
+        class="dropdown-menu-qt"
+    >
+        <div
+            class="qt-df qt-ai-c pointer dropdown-menu-qt-item"
+            (click)="remoteAccess('CSS')"
+        >
+            <i class="icon__remote-access-ticket qt-sz-20 qt-bg-contain qt-mr-12 qt-fs-0 qt-dib"></i>
+            Remote Access
+        </div>
+        <div
+            class="qt-df qt-ai-c pointer dropdown-menu-qt-item"
+            (click)="turnOff('reboot')"
+        >
+            <i class="icon__restart qt-sz-20 qt-bg-contain qt-mr-12 qt-fs-0 qt-dib"></i>
+            Restart
+        </div>
+        <div
+            class="qt-df qt-ai-c pointer dropdown-menu-qt-item"
+            (click)="turnOff('shutdown')"
+        >
+            <i class="icon__shutdown qt-sz-20 qt-bg-contain qt-mr-12 qt-fs-0 qt-dib"></i>
+            Shutdown
+        </div>
+        <hr>
+        <div
+            class="qt-df qt-ai-c pointer dropdown-menu-qt-item qt-color-red-600"
+            (click)="removeDevice()"
+        >
+            <i class="icon__remove qt-sz-20 qt-bg-contain qt-mr-12 qt-fs-0 qt-dib"></i>
+            Remove
         </div>
     </div>
 </div>

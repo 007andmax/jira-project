@@ -249,7 +249,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       this.updateLisUpdateUser();
       this.showPreloader = false;
       this.ticketStateService.getServicesList(this.ticketProfile);
-      this.ticketStateService.getPasswordsDocuments(this.ticketProfile.createdUser.id);
+      if (this.ticketProfile.createdUser) this.ticketStateService.getPasswordsDocuments(this.ticketProfile.createdUser.id);
       this.ticketStateService.getDevicesByCompany(this.ticketProfile.company.id);
       if (this.ticketMessage) this.ticketMessage.reset();
       this.ticketProfileUpdates.resetShowLoadMoreUpdates();

@@ -5,6 +5,11 @@
     margin-bottom: 12px;
     border-bottom: 1px solid $gray-200;
 
+    &:hover {
+        .action-more {
+            display: block;
+        }
+    }
     &-icon {
         background-color: #F2F4F7;
     }
@@ -81,4 +86,20 @@
         height: 3px;
         border-radius: 50%;
     }
+}
+.action-more {
+    display: none;
+    position: absolute;
+    top: calc(50% - 12px);
+    right: 0px;
+    cursor: pointer;
+}
+.icon__remove {
+    background-color: #D92D20;
+}
+.dropdown-menu-qt {
+    padding: 8px;
+}
+.dropdown-menu-qt-item {
+    padding: 6px 12px 6px 8px;
 }
