@@ -30,7 +30,7 @@ export class TicketDetailPasswordsDetailsComponent implements OnInit {
     this.getRecords();
   }
   public getRecords() {
-    this.passwordManagerService.getRecordsDetailsTicket(this.ticketProfile.company.id).subscribe((res: any) => {
+    this.passwordManagerService.getCompanyRecords(this.ticketProfile.company.id).subscribe((res: any) => {
       this.recordsData = res.map(item => new PasswordRecord(item));
       this.recordsData.sort((a, b) => (a.companyName.toLowerCase() > b.companyName.toLowerCase()) ?
         1 : ((b.companyName.toLowerCase() > a.companyName.toLowerCase()) ? -1 : 0));
