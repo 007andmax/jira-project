@@ -1,6 +1,7 @@
 <div
     class="ticket-detail-devices__item"
     ngbDropdown
+    container="body"
     placement="top-right"
 >
     <div class="qt-df qt-ai-c">
@@ -50,34 +51,12 @@
                     *ngIf="device.timing.idle == 0"
                 >
                     <div *ngIf="device.online">
-                        Online 
-                        (
-                        <span *ngIf="returnTimeFormatUpTime(device.timing.online).days > 0">
-                            {{returnTimeFormatUpTime(device.timing.online).days}} day
-                        </span>
-                        <span *ngIf="returnTimeFormatUpTime(device.timing.online).hours > 0">
-                            {{returnTimeFormatUpTime(device.timing.online).hours}} hrs
-                        </span>
-                        <span *ngIf="returnTimeFormatUpTime(device.timing.online).minutes > 0 && returnTimeFormatUpTime(device.timing.online).days < 1">
-                            {{returnTimeFormatUpTime(device.timing.online).minutes}} min
-                        </span>
-                        <span *ngIf="returnTimeFormatUpTime(device.timing.online).minutes < 1 && returnTimeFormatUpTime(device.timing.online).hours < 1 && returnTimeFormatUpTime(device.timing.online).days < 1">0 min</span>
-                        )
+                        Online
+                        <span [textContent]="getTimeStatus(device.timing.online)"></span>
                     </div>
                     <div *ngIf="!device.online">
-                        Offline 
-                        (
-                        <span *ngIf="returnTimeFormatUpTime(device.timing.offline).days > 0">
-                            {{returnTimeFormatUpTime(device.timing.offline).days}} day
-                        </span>
-                        <span *ngIf="returnTimeFormatUpTime(device.timing.offline).hours > 0">
-                            {{returnTimeFormatUpTime(device.timing.offline).hours}} hrs
-                        </span>
-                        <span *ngIf="returnTimeFormatUpTime(device.timing.offline).minutes > 0 && returnTimeFormatUpTime(device.timing.offline).days < 1">
-                            {{returnTimeFormatUpTime(device.timing.offline).minutes}} min
-                        </span>
-                        <span *ngIf="returnTimeFormatUpTime(device.timing.offline).minutes < 1 && returnTimeFormatUpTime(device.timing.offline).hours < 1 && returnTimeFormatUpTime(device.timing.offline).days < 1">0 min</span>
-                        )
+                        Offline
+                        <span [textContent]="getTimeStatus(device.timing.offline)"></span>
                     </div>
                 </span>
             </div>

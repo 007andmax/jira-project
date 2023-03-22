@@ -59,7 +59,7 @@ export class TicketDetailDevicesItemComponent implements OnInit {
   }
   getTimeStatus(data) {
     let { days, hours, minutes } = this.returnTimeFormatUpTime(data);
-    return `(${days > 0 ? days + ' day' : ''}${hours > 0 ? ' ' + hours + ' hrs' : ''}${minutes > 0 ? ' ' + minutes + ' min' : ''}${minutes < 1 && hours < 1 && days < 1 ? ' 0 min' : ''})`
+    return `(${days > 0 ? days + ' day ' : ''}${hours > 0 ? hours + ' hrs ' : ''}${minutes > 0 ? minutes + ' min' : ''}${minutes < 1 && hours < 1 && days < 1 ? ' 0 min' : ''})`
   }
   returnTimeFormatUpTime(time) {
     let days = 0;
