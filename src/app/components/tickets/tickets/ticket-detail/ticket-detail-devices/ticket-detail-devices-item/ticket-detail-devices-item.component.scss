@@ -102,9 +102,14 @@
 }
 .dropdown-menu-qt {
     padding: 8px;
+    width: 200px;
 }
 .dropdown-menu-qt-item {
-    padding: 6px 12px 6px 8px;
+    padding: 4px 12px 4px 8px;
+    margin-bottom: 4px;
+    &:last-child {
+        margin-bottom: 0px;
+    }
     &:hover {
         background: #F9FAFB;
     }
