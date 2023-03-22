@@ -27,4 +27,7 @@ export class TicketDetailDocumentsComponent implements OnInit {
   showMore() {
     this.onShowMore.emit(null);
   }
+  public trackByIndex(index, item) {
+    return index;
+  }
 }

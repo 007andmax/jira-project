@@ -3,6 +3,7 @@ import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-boots
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { ConstantsStateService } from 'src/app/states/constants/constants-state.service';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
+import { environment } from 'src/environments/environment';
 import { RemoteControlService } from '../../device/_services/remoteControl.service';
 import { DeviceCompany } from '../class/device-company';
 
@@ -19,6 +20,7 @@ export class CompanyDevicesRemoteAccessComponent implements OnInit {
   @Input() companyId: string;
   @Input() guid: string;
   @Input() action: string;
+  webserverDomain = environment.webserverDomain;
   sessionId: string;
   isConnection: boolean = false;
   constructor(private constantsStateService: ConstantsStateService,
@@ -36,9 +38,9 @@ export class CompanyDevicesRemoteAccessComponent implements OnInit {
   }
   downloadViewer() {
     if (this.action == "CONNECT_DEVICE_BETA") {
-      window.location.href = '/data/new/connection-viewer';
+      window.location.href = '/data/downloadViewerInstaller';
     } else {
-      window.location.href = '/data/connection-viewer';
+      window.location.href = '/data/downloadViewerInstaller';
     }
   }
   getConstant(sessionId) {
@@ -85,7 +87,7 @@ export class CompanyDevicesRemoteAccessComponent implements OnInit {
         this.sessionId = resp.sessionId;
         let remoteConnectPort = this.constantsStateService.getConstant('remote.connect.port'),
           restServerAddress = this.constantsStateService.getConstant('rest.server.address'),
-          url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + resp.sessionId;
+          url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + resp.sessionId + '&webserverDomain=' + this.webserverDomain;
         window.open(url, '_self');
         this.isConnection = true;
       })
