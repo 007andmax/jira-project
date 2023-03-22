@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { USERS_TO_EDIT_TICKET } from 'src/app/const/add-users-notify';
-import { DELETE_FOREVER, MOVE_TO_SPAM_OR_REPORT_TICKET } from 'src/app/const/confirm';
+import { DELETE_FOREVER, MOVE_TO_SPAM_OR_REPORT_TICKET, REBOOT_DEVICE, REMOVE_DEVICES, SHUTDOWN_DEVICE } from 'src/app/const/confirm';
 import { AddUsersNotifyStateService } from 'src/app/services/modal/modal-add-users-notify/state/add-users-notify-state.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
@@ -38,6 +38,7 @@ import { TicketProfileUpdate } from '../class/ticket-profile-update';
 import { DatePickerStateService } from 'src/app/components/shared/date-picker/services/date-picker-state.service';
 import { TicketDetailHeaderComponent } from './ticket-detail-header/ticket-detail-header.component';
 import { TicketProfileAgent } from '../class/ticket-profile-agent';
+import { DevicesService } from 'src/app/services/devices/devices.service';
 
 @Component({
   selector: 'ticket-detail',
@@ -89,6 +90,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     private addUsersNotifyStateService: AddUsersNotifyStateService,
     public activateRoute: ActivatedRoute,
     public websocketService: WebsocketService,
+    private devicesService: DevicesService,
     private datePickerStateService: DatePickerStateService,
     private companiesStateService: CompaniesStateService) { }
 
@@ -109,9 +111,21 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
         if (this.confirmStateService.getConfirmAction() === MOVE_TO_SPAM_OR_REPORT_TICKET) {
           this.onMoveIntoSpam();
         }
+        if (this.confirmStateService.getConfirmAction() === REBOOT_DEVICE) {
+          this.devicesService.sendPowerAction(this.ticketProfile.company.id, this.devicesStateService.getDevicesForReboot().map(item => item.agentId), 'reboot').subscribe(data => {
+          });
+        }
+        if (this.confirmStateService.getConfirmAction() === SHUTDOWN_DEVICE) {
+          this.devicesService.sendPowerAction(this.ticketProfile.company.id, this.devicesStateService.getDevicesForShutDown().map(item => item.agentId), 'shutdown').subscribe(data => {
+          });
+        }
+        if (this.confirmStateService.getConfirmAction() === REMOVE_DEVICES) {
+          this.devicesService.sendUninstallAgentRequest(this.ticketProfile.company.id, this.devicesStateService.getDevicesForRemove().map(item => item.id)).subscribe(data => {
 
+          });
+        }
       }
-    })
+    });
     this.sub.add(getConfirm);
     this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
       let ticket = new Ticket(data);

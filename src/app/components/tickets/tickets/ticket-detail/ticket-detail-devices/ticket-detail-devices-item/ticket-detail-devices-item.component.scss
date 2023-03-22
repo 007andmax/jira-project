@@ -105,4 +105,7 @@
 }
 .dropdown-menu-qt-item {
     padding: 6px 12px 6px 8px;
+    &:hover {
+        background: #F9FAFB;
+    }
 }
