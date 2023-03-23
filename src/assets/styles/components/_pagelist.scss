@@ -164,6 +164,9 @@
   }
   &__body-table-container {
     min-height: 100vh;
+    @media (hover:none) and (min-width: 767px), (pointer:coarse) and (min-width: 767px) {
+      min-height: 100%;
+    }
 
     @media (max-width: 767px) {
       height: 100%;
