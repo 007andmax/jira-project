@@ -23,6 +23,7 @@ export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
       this.showPreloader = true;
       this.companyId = params['id'];
       if (this.companyId) this.companiesStateService.setCompanyRoutingId(this.companyId);
+      this.filter.setCompany({ id: this.companyId });
       this.onScroll();
     });
     this.sub.add(subscription);

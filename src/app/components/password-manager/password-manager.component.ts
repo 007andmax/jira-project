@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from "rxjs";
 import { PasswordManagerService } from "../../services/password-manager/password-manager.service";
 import { PermissionsService } from "../../services/permissions/permissions.service";
@@ -26,7 +26,6 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
   public list_records: Array<PasswordRecord> = [];
   public showPreloader: boolean = true;
   public infiniteScrollDisabled = true;
-  public page_number: number = 0;
   public filter: FilterPasswordManager = new FilterPasswordManager();
   public selectAll: boolean = false;
   public sub: Subscription = new Subscription();
@@ -41,6 +40,7 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
     public activateRoute: ActivatedRoute,
     public leftPanelStateService: LeftPanelStateService,
     public cd: ChangeDetectorRef,
+    public elRef: ElementRef,
   ) { }
 
   /**
@@ -84,7 +84,7 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
     this.onScroll();
   }
   public setDefaultScoll() {
-    this.page_number = 0;
+    this.filter.page = 0;
     this.passwordManagerListService.setBlockList(false);
     this.list_records = [];
   }
@@ -105,7 +105,7 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
       this.list_records = [...this.list_records, ...res.map(item => new PasswordRecord(item))];
       this.showPreloader = false;
       this.infiniteScrollDisabled = false;
-      if (res.length < 30) this.passwordManagerListService.setBlockList(true);
+      if (res.length < this.filter.limit) this.passwordManagerListService.setBlockList(true);
       this.filter.page += 1;
       this.cd.detectChanges();
     });

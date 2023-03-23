@@ -1,6 +1,7 @@
 import { Company } from "src/app/interfaces/company/company";
 import { FilterListTop } from "src/class/list/filter-list-top";
 import { TitleListType } from "../../tickets/tickets/tickets-header/class/title-list-type";
+import { PasswordDeviceUser } from "./password-device-user";
 import { PasswordRecord } from "./password-record";
 import { PasswordRecordCategories } from "./password-record-categories";
 
@@ -12,16 +13,17 @@ export class FilterPasswordManager {
     search: string;
     selectedCompany: Company;
     selectedDate: TitleListType;
-    selectedUserOrDevice: any;
+    selectedUserOrDevice: PasswordDeviceUser;
     selectedCategory: PasswordRecordCategories;
     page: number = 0;
+    limit: number = 20;
     constructor() {
 
     }
     public getDataForRequest() {
         let sortOrder = this.filterTop.find(item => item.filter != '');
         let data: any = {
-            size: 30,
+            size: 20,
             page: this.page,
             sortOrder: `${sortOrder.field}_${sortOrder.filter}`
         };

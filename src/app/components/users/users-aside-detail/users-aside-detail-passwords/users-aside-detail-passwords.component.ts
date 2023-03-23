@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { PasswordDeviceUser } from 'src/app/components/password-manager/class/password-device-user';
 import { PasswordRecord } from 'src/app/components/password-manager/class/password-record';
 import { PasswordManagerComponent } from 'src/app/components/password-manager/password-manager.component';
 import { PasswordManagerListService } from 'src/app/components/password-manager/services/password-manager-list.service';
@@ -15,7 +16,9 @@ export class UsersAsideDetailPasswordsComponent extends PasswordManagerComponent
   @Input() user: User;
 
   ngOnInit() {
-
+    this.container = this.elRef.nativeElement.querySelector(".qt-page-list__body");
+    this.elRef.nativeElement.querySelector(".qt-page-list__body").scrollTo(0, 0);
+    this.filter.setDeviceUser(new PasswordDeviceUser(this.user.id, this.user.firstName, "USER"));
     this.onScroll();
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {

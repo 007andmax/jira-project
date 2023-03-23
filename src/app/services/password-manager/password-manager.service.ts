@@ -92,10 +92,6 @@ export class PasswordManagerService {
   public setDate(item) {
     this.selectedDate.emit(item)
   }
-
-  public getAgentsCredentialsForCompany(companyId) {
-    return this.http.get(this.apiUrl + `passwordRecords/${companyId}/agents/password`);
-  }
   public setOpenRecord(id) {
 
     return this.http.get(this.apiUrl + `passwordRecords/${id}/password`);
@@ -139,10 +135,6 @@ export class PasswordManagerService {
     return this.http.get(this.apiUrl + `google/code/otp/${id}`)
   }
 
-  public getCompanyRecords(id) {
-
-    return this.http.get(this.apiUrl + `passwordRecords/company/${id}`)
-  }
   /**
    * Format day and mouth
    * @param item - date data
@@ -188,10 +180,7 @@ export class PasswordManagerService {
 
     return this.http.post(this.apiUrl + 'passwordRecords/filtered', data);
   }
-  public getRecordsForUserDetail(user) {
 
-    return this.http.get(this.apiUrl + `passwordRecords/user/${user}`);
-  }
 
   /**
    * Get data info
