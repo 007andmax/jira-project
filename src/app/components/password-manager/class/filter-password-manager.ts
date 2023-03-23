@@ -5,17 +5,33 @@ import { PasswordRecord } from "./password-record";
 import { PasswordRecordCategories } from "./password-record-categories";
 
 export class FilterPasswordManager {
-    filterTop: Array<FilterListTop> = [new FilterListTop('company', 'ASC'),
-    new FilterListTop('account_type', ''),
-    new FilterListTop('description', ''),
-    new FilterListTop('user_password', '')];
+    filterTop: Array<FilterListTop> = [new FilterListTop('COMPANY_NAME', 'ASC'),
+    new FilterListTop('CATEGORY', ''),
+    new FilterListTop('DESCRIPTION', ''),
+    new FilterListTop('USERNAME', '')];
     search: string;
     selectedCompany: Company;
     selectedDate: TitleListType;
     selectedUserOrDevice: any;
     selectedCategory: PasswordRecordCategories;
+    page: number = 0;
     constructor() {
 
+    }
+    public getDataForRequest() {
+        let sortOrder = this.filterTop.find(item => item.filter != '');
+        let data: any = {
+            size: 30,
+            page: this.page,
+            sortOrder: `${sortOrder.field}_${sortOrder.filter}`
+        };
+        if (this.selectedCategory) data.categoryId = this.selectedCategory.id;
+        if (this.selectedCompany) data.companyId = this.selectedCompany.id;
+        if (this.search) data.description = this.search;
+        if (this.selectedUserOrDevice && this.selectedUserOrDevice.type == "USER") data.linkedUserId = this.selectedUserOrDevice.id;
+        if (this.selectedUserOrDevice && this.selectedUserOrDevice.type == "DEVICE") data.gadgetId = this.selectedUserOrDevice.id;
+        if (this.selectedDate) data.expireDateLeft = this.selectedDate.type;
+        return data
     }
     public setSearch(data) {
         this.search = data;
@@ -32,12 +48,13 @@ export class FilterPasswordManager {
     public setCompany(data) {
         this.selectedCompany = data;
     }
-
     public setFilter(data) {
         this.selectedCompany = data.selectedCompany;
         this.selectedDate = data.selectedDate;
         this.selectedUserOrDevice = data.selectedUserOrDevice;
         this.selectedCategory = data.selectedCategory;
+        this.page = 0;
+        console.log(data);
     }
     public getFilterList(reqList: Array<PasswordRecord>) {
         let list = reqList.filter((item) => {
@@ -48,9 +65,9 @@ export class FilterPasswordManager {
                 let expired = new Date(item.expiredDate).getTime();
                 if (expired > current) {
                     let day = (expired - current) / 86400000;
-                    if (this.selectedDate.type === "5_DAYS" && day > 5) return false;
-                    if (this.selectedDate.type === "15_DAYS" && day > 15) return false;
-                    if (this.selectedDate.type === "30_DAYS" && day > 30) return false;
+                    if (this.selectedDate.type === "5" && day > 5) return false;
+                    if (this.selectedDate.type === "15" && day > 15) return false;
+                    if (this.selectedDate.type === "30" && day > 30) return false;
                 } else {
                     return false;
                 }
@@ -79,108 +96,121 @@ export class FilterPasswordManager {
     public clearFilter() {
         this.filterTop.forEach(item => item.filter = '');
     }
-    public onFilter(field, reqList) {
-        let index = this.filterTop.findIndex(item => item.field === field);
-        if (index > -1) {
-            let sort = this.filterTop[index].filter;
-            if (field === 'account_type') {
-                this.clearFilter();
-                if (sort === '' || sort === 'DESC') {
-                    this.filterTop[index].filter = 'ASC';
-                    this.onAccountType(reqList);
+    public setSort(field) {
+        this.filterTop.forEach(item => {
+            if (item.field == field) {
+                if (item.filter === '' || item.filter === 'DESC') {
+                    item.filter = 'ASC';
                 } else {
-                    this.filterTop[index].filter = 'DESC';
-                    reqList.reverse();
+                    item.filter = 'DESC';
                 }
-            }
-            if (field === 'company') {
-                this.clearFilter();
-                if (sort === '' || sort === 'DESC') {
-                    this.filterTop[index].filter = 'ASC';
-                    this.onFilterCompany(reqList);
-                } else {
-                    this.filterTop[index].filter = 'DESC';
-                    reqList.reverse();
-                }
-            }
-            if (field === 'description') {
-                this.clearFilter();
-                if (sort === '' || sort === 'DESC') {
-                    this.filterTop[index].filter = 'ASC';
-                    this.onFilterDescription(reqList);
-                } else {
-                    this.filterTop[index].filter = 'DESC';
-                    reqList.reverse();
-                }
-            }
-            if (field === 'user_password') {
-                this.clearFilter();
-                if (sort === '' || sort === 'DESC') {
-                    this.filterTop[index].filter = 'ASC';
-                    this.onFilterUserName(reqList);
-                } else {
-                    this.filterTop[index].filter = 'DESC';
-                    reqList.reverse();
-                }
-            }
-        }
-    }
-    public onSortList(reqList) {
-        let filter = this.filterTop.find(item => item.filter !== '');
-        let sort = filter.filter;
-        if (filter.field === 'account_type') {
-
-            if (sort === 'ASC') {
-                this.onAccountType(reqList);
             } else {
-                reqList.reverse();
+                item.filter = '';
             }
-        }
-        if (filter.field === 'company') {
-
-            if (sort === 'ASC') {
-
-                this.onFilterCompany(reqList);
-            } else {
-
-                reqList.reverse();
-            }
-        }
-        if (filter.field === 'description') {
-
-            if (sort === 'ASC') {
-
-                this.onFilterDescription(reqList);
-            } else {
-
-                reqList.reverse();
-            }
-        }
-        if (filter.field === 'user_password') {
-
-            if (sort === 'ASC') {
-
-                this.onFilterUserName(reqList);
-            } else {
-
-                reqList.reverse();
-            }
-        }
+        })
     }
-    private onFilterUserName(reqList) {
-        reqList.sort((a, b) => (a.companyName.toLowerCase() > b.companyName.toLowerCase()) ?
-            1 : (b.companyName.toLowerCase() > a.companyName.toLowerCase() ? -1 : 0));
-    }
-    private onFilterCompany(reqList) {
-        reqList.sort((a, b) => (a.companyName.toLowerCase() > b.companyName.toLowerCase()) ?
-            1 : (b.companyName.toLowerCase() > a.companyName.toLowerCase() ? -1 : 0));
-    }
-    private onFilterDescription(reqList) {
-        reqList.sort((a, b) => ((a.description ? a.description : '').toLowerCase() > (b.description ? b.description : '').toLowerCase()) ?
-            1 : ((b.description ? b.description : '').toLowerCase() > (a.description ? a.description : '').toLowerCase() ? -1 : 0));
-    }
-    private onAccountType(reqList) {
-        reqList.sort((a, b) => (a.template.title > b.template.title) ?
-            1 : ((b.template.title > a.template.title) ? -1 : 0));
-    }
+    /* public onFilter(field, reqList) {
+         let index = this.filterTop.findIndex(item => item.field === field);
+         if (index > -1) {
+             let sort = this.filterTop[index].filter;
+             if (field === 'account_type') {
+                 this.clearFilter();
+                 if (sort === '' || sort === 'DESC') {
+                     this.filterTop[index].filter = 'ASC';
+                     this.onAccountType(reqList);
+                 } else {
+                     this.filterTop[index].filter = 'DESC';
+                     reqList.reverse();
+                 }
+             }
+             if (field === 'company') {
+                 this.clearFilter();
+                 if (sort === '' || sort === 'DESC') {
+                     this.filterTop[index].filter = 'ASC';
+                     this.onFilterCompany(reqList);
+                 } else {
+                     this.filterTop[index].filter = 'DESC';
+                     reqList.reverse();
+                 }
+             }
+             if (field === 'description') {
+                 this.clearFilter();
+                 if (sort === '' || sort === 'DESC') {
+                     this.filterTop[index].filter = 'ASC';
+                     this.onFilterDescription(reqList);
+                 } else {
+                     this.filterTop[index].filter = 'DESC';
+                     reqList.reverse();
+                 }
+             }
+             if (field === 'user_password') {
+                 this.clearFilter();
+                 if (sort === '' || sort === 'DESC') {
+                     this.filterTop[index].filter = 'ASC';
+                     this.onFilterUserName(reqList);
+                 } else {
+                     this.filterTop[index].filter = 'DESC';
+                     reqList.reverse();
+                 }
+             }
+         }
+     }*/
+    /*  public onSortList(reqList) {
+          let filter = this.filterTop.find(item => item.filter !== '');
+          let sort = filter.filter;
+          if (filter.field === 'account_type') {
+  
+              if (sort === 'ASC') {
+                  this.onAccountType(reqList);
+              } else {
+                  reqList.reverse();
+              }
+          }
+          if (filter.field === 'company') {
+  
+              if (sort === 'ASC') {
+  
+                  this.onFilterCompany(reqList);
+              } else {
+  
+                  reqList.reverse();
+              }
+          }
+          if (filter.field === 'description') {
+  
+              if (sort === 'ASC') {
+  
+                  this.onFilterDescription(reqList);
+              } else {
+  
+                  reqList.reverse();
+              }
+          }
+          if (filter.field === 'user_password') {
+  
+              if (sort === 'ASC') {
+  
+                  this.onFilterUserName(reqList);
+              } else {
+  
+                  reqList.reverse();
+              }
+          }
+      }*/
+    /*  private onFilterUserName(reqList) {
+          reqList.sort((a, b) => (a.companyName.toLowerCase() > b.companyName.toLowerCase()) ?
+              1 : (b.companyName.toLowerCase() > a.companyName.toLowerCase() ? -1 : 0));
+      }
+      private onFilterCompany(reqList) {
+          reqList.sort((a, b) => (a.companyName.toLowerCase() > b.companyName.toLowerCase()) ?
+              1 : (b.companyName.toLowerCase() > a.companyName.toLowerCase() ? -1 : 0));
+      }
+      private onFilterDescription(reqList) {
+          reqList.sort((a, b) => ((a.description ? a.description : '').toLowerCase() > (b.description ? b.description : '').toLowerCase()) ?
+              1 : ((b.description ? b.description : '').toLowerCase() > (a.description ? a.description : '').toLowerCase() ? -1 : 0));
+      }
+      private onAccountType(reqList) {
+          reqList.sort((a, b) => (a.template.title > b.template.title) ?
+              1 : ((b.template.title > a.template.title) ? -1 : 0));
+      }*/
 }

@@ -184,9 +184,9 @@ export class PasswordManagerService {
   /**
   * Get records list
   */
-  public getRecords() {
+  public getRecords(data) {
 
-    return this.http.get(this.apiUrl + 'passwordRecords');
+    return this.http.post(this.apiUrl + 'passwordRecords/filtered', data);
   }
   public getRecordsForUserDetail(user) {
 

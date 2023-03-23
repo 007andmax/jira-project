@@ -25,7 +25,7 @@ export class PasswoordManagerFiltersComponent implements OnInit, OnDestroy {
   categories: Array<PasswordRecordCategories> = [];
   disabledDevicesUsers: boolean = true;
   devicesUsers: Array<PasswordDeviceUser> = [];
-  listDates: Array<TitleListType> = [new TitleListType('5 days', '5_DAYS'), new TitleListType('15 days', '15_DAYS'), new TitleListType('30 days', '30_DAYS')];
+  listDates: Array<TitleListType> = [new TitleListType('5 days', '5'), new TitleListType('15 days', '15'), new TitleListType('30 days', '30')];
   @Output() onChangeCountFilter = new EventEmitter<any>();
   selectedCompany: Company;
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;

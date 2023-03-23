@@ -23,7 +23,6 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 })
 
 export class PasswordManagerComponent implements OnInit, OnDestroy {
-  public recordsData: Array<PasswordRecord> = [];
   public list_records: Array<PasswordRecord> = [];
   public showPreloader: boolean = true;
   public infiniteScrollDisabled = true;
@@ -49,7 +48,7 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
     document.body.querySelector(".main-container").scrollTo(0, 0);
-    this.getRecords();
+    this.onScroll();
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_RECORD) this.onRemoveRecord(this.passwordManagerStateService.getRecordForRemove().id);
@@ -65,19 +64,12 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
     this.sub.add(geLefttFilter);
     let onChangeRealTime = this.passwordManagerStateService.onChangeRealTime.subscribe(newChange => {
       if (newChange.action === 'PASSWORD_RECORD_CREATED') {
-        this.recordsData.push(new PasswordRecord(newChange.data));
-        this.filter.onSortList(this.recordsData);
-        let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
-        if (index < this.list_records.length) this.list_records.splice(index, 0, this.recordsData[index]);
+        this.list_records.push(new PasswordRecord(newChange.data));
       } else if (newChange.action === 'PASSWORD_RECORD_UPDATED') {
-        let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
-        if (index > -1) this.recordsData[index].onUpdate(newChange.data);
-        let indexList = this.list_records.findIndex(item => item.id === newChange.data.id);
-        if (indexList > -1) this.list_records[indexList].onUpdate(newChange.data);
+        let index = this.list_records.findIndex(item => item.id === newChange.data.id);
+        if (index > -1) this.list_records[index].onUpdate(newChange.data);
       } else if (newChange.action === 'PASSWORD_RECORD_DELETED') {
-        let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
         let indexList = this.list_records.findIndex(item => item.id === newChange.data.id);
-        if (index > -1) this.recordsData.splice(index, 1);
         if (indexList > -1) this.list_records.splice(indexList, 1);
       }
       if (!this.cd['destroyed']) this.cd.detectChanges();
@@ -109,21 +101,18 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
       this.infiniteScrollDisabled = false;
       return;
     }
-    this.page_number += 1;
-    let listFilter = this.filter.getFilterList(this.recordsData);
-    let start = (this.page_number - 1) * 30;
-    let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
-    let list_records = [];
-    for (let i = start; i < end; i++) {
-      list_records.push(listFilter[i]);
-    }
-    this.list_records = [...this.list_records, ...list_records.map(item => new PasswordRecord(JSON.parse(JSON.stringify(item))))];
-    this.infiniteScrollDisabled = false;
-    if ((this.page_number * 30) > listFilter.length) this.passwordManagerListService.setBlockList(true);
+    this.passwordManagerService.getRecords(this.filter.getDataForRequest()).subscribe((res: any) => {
+      this.list_records = [...this.list_records, ...res.map(item => new PasswordRecord(item))];
+      this.showPreloader = false;
+      this.infiniteScrollDisabled = false;
+      if (res.length < 30) this.passwordManagerListService.setBlockList(true);
+      this.filter.page += 1;
+      this.cd.detectChanges();
+    });
   }
   onSelectRecord(record) {
-    this.recordsData.find(item => item.id === record.id).selected = record.selected;
-    this.selectAll = (this.filter.getFilterList(this.recordsData).find(item => !item.selected)) ? false : true;
+    this.list_records.find(item => item.id === record.id).selected = record.selected;
+    this.selectAll = (this.filter.getFilterList(this.list_records).find(item => !item.selected)) ? false : true;
   }
   onSelectAll(event) {
     if (event.target.checked) {
@@ -131,35 +120,22 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
       this.list_records.forEach(item => {
         item.selected = true;
       })
-      this.filter.getFilterList(this.recordsData).forEach(item => {
-        this.recordsData.find(user => user.id === item.id).selected = true;
+      this.filter.getFilterList(this.list_records).forEach(item => {
+        this.list_records.find(user => user.id === item.id).selected = true;
       })
     } else {
       this.selectAll = false;
       this.list_records.forEach(item => {
         item.selected = false;
       })
-      this.recordsData.forEach(item => {
-        item.selected = false;
-      })
     }
   }
   public onFilter(field) {
-    this.filter.onFilter(field, this.recordsData)
-    this.page_number = 0;
+    this.filter.setSort(field);
+    this.filter.page = 0;
     this.passwordManagerListService.setBlockList(false);
     this.list_records = [];
     this.onScroll();
-  }
-  public getRecords() {
-    this.passwordManagerService.getRecords().subscribe((res: any) => {
-      this.recordsData = res.map(item => new PasswordRecord(item));
-      this.recordsData.sort((a, b) => (a.companyName.toLowerCase() > b.companyName.toLowerCase()) ?
-        1 : ((b.companyName.toLowerCase() > a.companyName.toLowerCase()) ? -1 : 0));
-      this.showPreloader = false;
-      this.onScroll();
-      this.cd.detectChanges();
-    });
   }
   public addRecord() {
     this.passwordManagerService.showAddForm();
