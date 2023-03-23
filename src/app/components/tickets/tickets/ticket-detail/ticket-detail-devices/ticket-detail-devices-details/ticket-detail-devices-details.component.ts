@@ -39,6 +39,9 @@ export class TicketDetailDevicesDetailsComponent implements OnInit {
       this.isSearch = false;
     }
   }
+  public trackById(index, item) {
+    return item.id;
+  }
   close() {
     this.onClose.emit(null);
   }

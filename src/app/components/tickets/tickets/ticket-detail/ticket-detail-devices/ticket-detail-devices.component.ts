@@ -19,6 +19,9 @@ export class TicketDetailDevicesComponent implements OnInit {
       this.devices = data;
     })
   }
+  public trackByIndex(index, item) {
+    return index;
+  }
   showMore() {
     this.onShowMore.emit(null);
   }
