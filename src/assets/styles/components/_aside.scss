@@ -9,7 +9,8 @@
   position: fixed;
   top: $header-height;
   right: 0;
-  height: calc(100vh - #{$header-height});
+  //height: calc(100vh - #{$header-height}); // TODO check this style
+  height: calc(100% - #{$header-height});
   z-index: 5;
 
   @media (max-width: 767px) {

@@ -48,6 +48,14 @@
     overflow: hidden;
     overflow-x: auto;
     height: 100vh;
+    @media (hover:none) and (min-width: 541px), (pointer:coarse) and (min-width: 541px) {
+      position: fixed;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+    }
+
     &::-webkit-scrollbar {
       width: 8px;
       height: 8px;
@@ -56,7 +64,8 @@
         order: 0;
         flex: 0 0 auto;
         align-self: auto;
-        height: 100vh;
+        //height: 100vh; // TODO check this style
+        height: 100%;
         width: 64px;
         transition: width 300ms;
         z-index: 10;
