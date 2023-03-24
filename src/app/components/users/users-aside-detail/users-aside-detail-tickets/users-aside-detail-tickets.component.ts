@@ -8,6 +8,8 @@ import { TicketsFilter } from 'src/app/components/tickets/tickets/class/tickets-
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 import { TicketStateService } from 'src/app/components/tickets/tickets/ticket-edit-aside/services/ticket-state.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
+import { AppService } from 'src/app/states/app/app.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { User } from '../../class/user';
 
@@ -37,6 +39,8 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
     private ticketsListService: TicketsListService,
     private ticketStateService: TicketStateService,
     public cd: ChangeDetectorRef,
+    private appService: AppService,
+    private companiesStateService: CompaniesStateService,
     private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
@@ -97,15 +101,34 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
     );
   }
   editTicket(id) {
-    let ticket = this.tickets.find(item => item.id === id);
-    this.ticketsStateService.onOpenTicket();
-    this.ticketsService.getTicket(id).subscribe(data => {
-      data.setUserCompanies(ticket.userCompanies);
-      this.ticketsStateService.onEditTicket(data);
-      (<any>document.body.querySelector(".ticket-edit-aside")).style.zIndex = "2";
-      (<any>document.body.querySelector(".user-aside-detail-page__aside")).style.zIndex = "1";
+    if (!this.appService.isMobile) {
+      if (["73221c72-f87c-4519-8235-c4b57ad1cc19", "72381bff-127c-4a63-9d2e-6e952350dcbd"].find(item => item == this.companiesStateService.getCurrentCompany().id)) {
+        this.ticketStateService.setTicketRoutingId(id);
+        const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/ticket/${id}`;
+        window.open(url, '_blank');
+      } else {
+        let ticket = this.tickets.find(item => item.id === id);
+        this.ticketsStateService.onOpenTicket();
+        this.ticketsService.getTicket(id).subscribe(data => {
+          data.setUserCompanies(ticket.userCompanies);
+          this.ticketsStateService.onEditTicket(data);
+          (<any>document.body.querySelector(".ticket-edit-aside")).style.zIndex = "2";
+          (<any>document.body.querySelector(".user-aside-detail-page__aside")).style.zIndex = "1";
 
-    })
+        })
+      }
+
+    } else {
+      let ticket = this.tickets.find(item => item.id === id);
+      this.ticketsStateService.onOpenTicket();
+      this.ticketsService.getTicket(id).subscribe(data => {
+        data.setUserCompanies(ticket.userCompanies);
+        this.ticketsStateService.onEditTicket(data);
+        (<any>document.body.querySelector(".ticket-edit-aside")).style.zIndex = "2";
+        (<any>document.body.querySelector(".user-aside-detail-page__aside")).style.zIndex = "1";
+
+      })
+    }
   }
   private getTickets() {
     if (this.ticketsListService.getBlockList()) {
