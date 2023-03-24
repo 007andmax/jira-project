@@ -18,6 +18,7 @@ export class UsersAsideDetailPasswordsComponent extends PasswordManagerComponent
   ngOnInit() {
     this.container = this.elRef.nativeElement.querySelector(".qt-page-list__body");
     this.elRef.nativeElement.querySelector(".qt-page-list__body").scrollTo(0, 0);
+    this.filter.setSort('USERNAME');
     this.filter.setDeviceUser(new PasswordDeviceUser(this.user.id, this.user.firstName, "USER"));
     this.onScroll();
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {

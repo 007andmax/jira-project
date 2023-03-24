@@ -30,6 +30,7 @@ export class TicketDetailPasswordsDetailsComponent implements OnInit {
   ngOnInit() {
     this.container = this.elRef.nativeElement.querySelector(".ticket-detail-passwords__body");
     this.elRef.nativeElement.querySelector(".ticket-detail-passwords__body").scrollTo(0, 0);
+    this.filter.setSort('DESCRIPTION');
     this.filter.setCompany({ id: this.ticketProfile.company.id });
     this.onScroll();
   }
@@ -38,6 +39,7 @@ export class TicketDetailPasswordsDetailsComponent implements OnInit {
     this.filterList();
   }
   public setDefaultScoll() {
+    this.showPreloader = true;
     this.filter.page = 0;
     this.passwordManagerListService.setBlockList(false);
     this.list_records = [];
@@ -49,7 +51,9 @@ export class TicketDetailPasswordsDetailsComponent implements OnInit {
     return item.id;
   }
   clearSearch() {
+    this.filter.setSearch(null);
     this.setDefaultScoll();
+    this.onScroll();
     this.elRef.nativeElement.querySelector("#search-passwords").value = '';
     this.isSearch = false;
   }
@@ -60,6 +64,8 @@ export class TicketDetailPasswordsDetailsComponent implements OnInit {
     } else {
       this.isSearch = false;
     }
+    this.setDefaultScoll();
+    this.onScroll();
   }
   close() {
     this.onClose.emit(null);

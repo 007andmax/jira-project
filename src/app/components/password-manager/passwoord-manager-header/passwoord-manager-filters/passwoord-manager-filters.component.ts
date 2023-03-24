@@ -130,7 +130,9 @@ export class PasswoordManagerFiltersComponent implements OnInit, OnDestroy {
   }
   selectCompany(data) {
     this.selectedCompany = data;
+    this.filter.setDeviceUser(null);
     this.filter.setCompany(data);
+    this.deviceUserSelect.clearWithOutChanges();
     if (!this.appService.checkMobile()) {
       this.passwordManagerStateService.onInitFilter(this.filter);
       this.onChangeCounterFilter();
