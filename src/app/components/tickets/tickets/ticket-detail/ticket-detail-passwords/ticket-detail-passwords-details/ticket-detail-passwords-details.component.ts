@@ -18,6 +18,7 @@ export class TicketDetailPasswordsDetailsComponent implements OnInit {
   public showPreloader: boolean = true;
   public infiniteScrollDisabled = true;
   public page_number: number = 0;
+  showPendingPreloader: boolean = false;
   public filter: FilterPasswordManager = new FilterPasswordManager();
   public list_records: Array<PasswordRecord> = [];
   isSearch: boolean = false;
@@ -75,9 +76,11 @@ export class TicketDetailPasswordsDetailsComponent implements OnInit {
       this.infiniteScrollDisabled = false;
       return;
     }
+    if (this.filter.page > 0) this.showPendingPreloader = true;
     this.passwordManagerService.getRecords(this.filter.getDataForRequest()).subscribe((res: any) => {
       this.list_records = [...this.list_records, ...res.map(item => new PasswordRecord(item))];
       this.infiniteScrollDisabled = false;
+      this.showPendingPreloader = false;
       if (res.length < this.filter.limit) this.passwordManagerListService.setBlockList(true);
       this.filter.page += 1;
       this.showPreloader = false;

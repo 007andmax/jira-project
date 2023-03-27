@@ -28,6 +28,7 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
   public infiniteScrollDisabled = true;
   public filter: FilterPasswordManager = new FilterPasswordManager();
   public selectAll: boolean = false;
+  public showPendingPreloader: boolean = false;
   public sub: Subscription = new Subscription();
   container = document.body.querySelector(".main-container");
   constructor(
@@ -98,13 +99,16 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
     this.filterList();
   }
   private filterList() {
+    console.log("this.passwordManagerListService.getBlockList()", this.passwordManagerListService.getBlockList());
     if (this.passwordManagerListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;
     }
+    if (this.filter.page > 0) this.showPendingPreloader = true;
     this.passwordManagerService.getRecords(this.filter.getDataForRequest()).subscribe((res: any) => {
       this.list_records = [...this.list_records, ...res.map(item => new PasswordRecord(item))];
       this.showPreloader = false;
+      this.showPendingPreloader = false;
       this.infiniteScrollDisabled = false;
       if (res.length < this.filter.limit) this.passwordManagerListService.setBlockList(true);
       this.filter.page += 1;
