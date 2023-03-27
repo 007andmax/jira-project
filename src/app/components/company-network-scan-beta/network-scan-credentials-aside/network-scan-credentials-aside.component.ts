@@ -26,6 +26,7 @@ export class NetworkScanCredentialsAsideComponent implements OnInit, OnDestroy {
   public filter: FilterPasswordManager = new FilterPasswordManager();
   sub: Subscription = new Subscription();
   public infiniteScrollDisabled = true;
+  showPendingPreloader: boolean = false;
   container;
   constructor(private passwordManagerService: PasswordManagerService,
     private passwordManagerStateService: PasswordManagerStateService,
@@ -81,9 +82,11 @@ export class NetworkScanCredentialsAsideComponent implements OnInit, OnDestroy {
       this.infiniteScrollDisabled = false;
       return;
     }
+    if (this.filter.page > 0) this.showPendingPreloader = true;
     this.passwordManagerService.getRecords(this.filter.getDataForRequest()).subscribe((res: any) => {
       this.list = [...this.list, ...res.map(item => new NetworkScanCredential(item.id, item.username))];
       this.infiniteScrollDisabled = false;
+      this.showPendingPreloader = false;
       if (res.length < this.filter.limit) this.passwordManagerListService.setBlockList(true);
       this.filter.page += 1;
       this.cd.detectChanges();

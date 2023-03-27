@@ -33,6 +33,7 @@
     position: relative;
     min-height: auto !important;
     height: calc(100% - 120px);
+    overflow: scroll;
 }
 .pengind-loading {
     bottom: 20px;
