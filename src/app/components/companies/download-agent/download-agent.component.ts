@@ -26,17 +26,20 @@ export class DownloadAgentComponent implements OnInit {
     this.activeModal.close();
   }
   getDonwloadLink() {
-    let textArea: any = document.createElement("textarea");
-    textArea.style.opacity = 0;
-    textArea.value = `${environment.apiUrl}data/downloadNewInstaller?companyId=${this.downloadAgentStateService.getCompany().id}`;
-    document.body.appendChild(textArea);
-    textArea.select();
-    try {
-      let successful = document.execCommand('copy');
-    } catch (err) {
-      //  UserNotificationService.show('Copy failed', true);
-    }
-    document.body.removeChild(textArea);
+    this.downloadAgentService.download(this.downloadAgentStateService.getCompany().id, "", "", false).subscribe((data: any) => {
+      let textArea: any = document.createElement("textarea");
+      textArea.style.opacity = 0;
+      textArea.value = data.link;
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        let successful = document.execCommand('copy');
+      } catch (err) {
+        //  UserNotificationService.show('Copy failed', true);
+      }
+      document.body.removeChild(textArea);
+    })
+
   }
   downloadAgent() {
     this.downloadAgentService.download(this.downloadAgentStateService.getCompany().id, "", "", false).subscribe((data: any) => {
