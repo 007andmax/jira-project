@@ -1,0 +1,421 @@
+<div class="cmn-wrapper">
+  <div class="page-container software-programes">
+    <!-- Page Title -->
+        <div class="page-header">
+            <h3>Startup Programmes</h3>
+            <div class="page-header-opt">
+              <div class="selected-item" *ngIf="show">
+                  <span>2 Selected</span>
+                  <a class="Enable" title="Enable" href="javascript:;"><img src="assets/images/enable-blue.svg" alt="enable-blue"/></a>
+                  <a class="Disable" title="Disable" href="javascript:;"><img src="assets/images/disable-blue.svg" alt="disable-blue"/></a>
+                  <a class="ol-search" title="Online Search" href="javascript:;"><img src="assets/images/online-search-blue.svg" alt="Search"/></a>
+              </div>
+            </div>    
+        </div>
+        <!-- Page Content -->
+        <div class="contant-area">
+          <div class="table-wrap">
+              <table class="cmn-tab-head">
+                  <thead>
+                    <tr>
+                      <th class="check-area">
+                        <div class="cmn-checkbox">
+                          <input type="checkbox" name="check" id="sl" (change)="show=!show"> 
+                          <label for="sl" aria-label="checkbox"></label>
+                        </div>
+                      </th>
+                      <th class="s-name">Software Name</th>
+                      <th class="pulisher">Publisher</th>
+                      <th class="Status">Status</th>
+                      <th class="Impact">Status Impact</th>
+                      <th class="action">&nbsp;</th>
+                    </tr>
+                  </thead>
+              </table>
+              <table class="cmn-table">
+                <tr>
+                  <td class="check-area">
+                    <div class="cmn-checkbox">
+                      <input type="checkbox" name="check" (change)="show=!show" id="ar" />
+                      <label for="ar" aria-label="checkbox"></label>
+                    </div>
+                  </td>
+                  <td class="s-name">
+                    <span class="device-pic"><img src="assets/images/adb-reader.png" alt="adb-reader"/></span>
+                    <h5>Acrobat Reader</h5>
+                  </td>
+                  <td class="pulisher">Adobe Systems</td>
+                  <td class="Status">Enable</td>
+                  <td class="Impact">Low</td>
+                  <td class="action" dropdown>
+                    <a href="javascript:;" is="button-basic" aria-controls="dropdown-basic" dropdownToggle class="more" data-tooltip="More" ><img src="assets/images/more.svg" alt="more"/></a>
+                    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu list-unstyled"
+                          role="menu" aria-labelledby="button-basic">
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/enable.svg" alt="enable" />Enable</a>
+                        </li>
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/disable.svg" alt="Disable" />Disable</a>
+                        </li>
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/online-search.svg" alt="Online Search" />Online Search</a>
+                        </li>
+                        
+                      </ul>
+                  
+                  </td>
+                </tr>
+              </table>
+              <table class="cmn-table">
+                <tr>
+                  <td class="check-area">
+                    <div class="cmn-checkbox">
+                      <input type="checkbox" name="check" (change)="show=!show" id="ar" />
+                      <label for="ar" aria-label="checkbox"></label>
+                    </div>
+                  </td>
+                  <td class="s-name">
+                    <span class="device-pic"><img src="assets/images/adb-reader.png" alt="adb-reader"/></span>
+                    <h5>Driver Booster</h5>
+                  </td>
+                  <td class="pulisher">IO bit</td>
+                  <td class="Status">Disable</td>
+                  <td class="Impact">High</td>
+                  <td class="action" dropdown>
+                    <a href="javascript:;" is="button-basic" aria-controls="dropdown-basic2" dropdownToggle class="more" data-tooltip="More" ><img src="assets/images/more.svg" alt="more"/></a>
+                    <ul id="dropdown-basic2" *dropdownMenu class="dropdown-menu list-unstyled"
+                          role="menu" aria-labelledby="button-basic2">
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/enable.svg" alt="enable" />Enable</a>
+                        </li>
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/disable.svg" alt="Disable" />Disable</a>
+                        </li>
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/online-search.svg" alt="Online Search" />Online Search</a>
+                        </li>
+                        
+                      </ul>
+                  
+                  </td>
+                </tr>
+              </table>
+              <table class="cmn-table">
+                <tr>
+                  <td class="check-area">
+                    <div class="cmn-checkbox">
+                      <input type="checkbox" name="check" (change)="show=!show" id="ar" />
+                      <label for="ar" aria-label="checkbox"></label>
+                    </div>
+                  </td>
+                  <td class="s-name">
+                    <span class="device-pic"><img src="assets/images/adb-reader.png" alt="adb-reader"/></span>
+                    <h5>Google Chrome</h5>
+                  </td>
+                  <td class="pulisher">Google Inc.</td>
+                  <td class="Status">Enable</td>
+                  <td class="Impact">Not Measured</td>
+                  <td class="action" dropdown>
+                    <a href="javascript:;" is="button-basic" aria-controls="dropdown-basic2" dropdownToggle class="more" data-tooltip="More" ><img src="assets/images/more.svg" alt="more"/></a>
+                    <ul id="dropdown-basic2" *dropdownMenu class="dropdown-menu list-unstyled"
+                          role="menu" aria-labelledby="button-basic2">
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/enable.svg" alt="enable" />Enable</a>
+                        </li>
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/disable.svg" alt="Disable" />Disable</a>
+                        </li>
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/online-search.svg" alt="Online Search" />Online Search</a>
+                        </li>
+                        
+                      </ul>
+                  
+                  </td>
+                </tr>
+              </table>
+              <table class="cmn-table">
+                <tr>
+                  <td class="check-area">
+                    <div class="cmn-checkbox">
+                      <input type="checkbox" name="check" (change)="show=!show" id="ar" />
+                      <label for="ar" aria-label="checkbox"></label>
+                    </div>
+                  </td>
+                  <td class="s-name">
+                    <span class="device-pic"><img src="assets/images/adb-reader.png" alt="adb-reader"/></span>
+                    <h5>Aimersoft Video Converter</h5>
+                  </td>
+                  <td class="pulisher">Aimersoft Software</td>
+                  <td class="Status">Enable</td>
+                  <td class="Impact">High</td>
+                  <td class="action" dropdown>
+                    <a href="javascript:;" is="button-basic" aria-controls="dropdown-basic2" dropdownToggle class="more" data-tooltip="More" ><img src="assets/images/more.svg" alt="more"/></a>
+                    <ul id="dropdown-basic2" *dropdownMenu class="dropdown-menu list-unstyled"
+                          role="menu" aria-labelledby="button-basic2">
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/enable.svg" alt="enable" />Enable</a>
+                        </li>
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/disable.svg" alt="Disable" />Disable</a>
+                        </li>
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/online-search.svg" alt="Online Search" />Online Search</a>
+                        </li>
+                        
+                      </ul>
+                  
+                  </td>
+                </tr>
+              </table>
+              <table class="cmn-table">
+                <tr>
+                  <td class="check-area">
+                    <div class="cmn-checkbox">
+                      <input type="checkbox" name="check" (change)="show=!show" id="ar" />
+                      <label for="ar" aria-label="checkbox"></label>
+                    </div>
+                  </td>
+                  <td class="s-name">
+                    <span class="device-pic"><img src="assets/images/adb-reader.png" alt="adb-reader"/></span>
+                    <h5>Microsoft Word</h5>
+                  </td>
+                  <td class="pulisher">Microsoft</td>
+                  <td class="Status">Disable</td>
+                  <td class="Impact">High</td>
+                  <td class="action" dropdown>
+                    <a href="javascript:;" is="button-basic" aria-controls="dropdown-basic2" dropdownToggle class="more" data-tooltip="More" ><img src="assets/images/more.svg" alt="more"/></a>
+                    <ul id="dropdown-basic2" *dropdownMenu class="dropdown-menu list-unstyled"
+                          role="menu" aria-labelledby="button-basic2">
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/enable.svg" alt="enable" />Enable</a>
+                        </li>
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/disable.svg" alt="Disable" />Disable</a>
+                        </li>
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/online-search.svg" alt="Online Search" />Online Search</a>
+                        </li>
+                        
+                      </ul>
+                  
+                  </td>
+                </tr>
+              </table>
+              <table class="cmn-table">
+                <tr>
+                  <td class="check-area">
+                    <div class="cmn-checkbox">
+                      <input type="checkbox" name="check" (change)="show=!show" id="ar" />
+                      <label for="ar" aria-label="checkbox"></label>
+                    </div>
+                  </td>
+                  <td class="s-name">
+                    <span class="device-pic"><img src="assets/images/adb-reader.png" alt="adb-reader"/></span>
+                    <h5>Dropbox</h5>
+                  </td>
+                  <td class="pulisher">Dropbox Inc.</td>
+                  <td class="Status">Enable</td>
+                  <td class="Impact">Medium</td>
+                  <td class="action" dropdown>
+                    <a href="javascript:;" is="button-basic" aria-controls="dropdown-basic2" dropdownToggle class="more" data-tooltip="More" ><img src="assets/images/more.svg" alt="more"/></a>
+                    <ul id="dropdown-basic2" *dropdownMenu class="dropdown-menu list-unstyled"
+                          role="menu" aria-labelledby="button-basic2">
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/enable.svg" alt="enable" />Enable</a>
+                        </li>
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/disable.svg" alt="Disable" />Disable</a>
+                        </li>
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/online-search.svg" alt="Online Search" />Online Search</a>
+                        </li>
+                        
+                      </ul>
+                  
+                  </td>
+                </tr>
+              </table>
+              <table class="cmn-table">
+                <tr>
+                  <td class="check-area">
+                    <div class="cmn-checkbox">
+                      <input type="checkbox" name="check" (change)="show=!show" id="ar" />
+                      <label for="ar" aria-label="checkbox"></label>
+                    </div>
+                  </td>
+                  <td class="s-name">
+                    <span class="device-pic"><img src="assets/images/adb-reader.png" alt="adb-reader"/></span>
+                    <h5>Back & Sync from Google</h5>
+                  </td>
+                  <td class="pulisher">Google Inc.</td>
+                  <td class="Status">Disable</td>
+                  <td class="Impact">Low</td>
+                  <td class="action" dropdown>
+                    <a href="javascript:;" is="button-basic" aria-controls="dropdown-basic2" dropdownToggle class="more" data-tooltip="More" ><img src="assets/images/more.svg" alt="more"/></a>
+                    <ul id="dropdown-basic2" *dropdownMenu class="dropdown-menu list-unstyled"
+                          role="menu" aria-labelledby="button-basic2">
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/enable.svg" alt="enable" />Enable</a>
+                        </li>
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/disable.svg" alt="Disable" />Disable</a>
+                        </li>
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/online-search.svg" alt="Online Search" />Online Search</a>
+                        </li>
+                        
+                      </ul>
+                  
+                  </td>
+                </tr>
+              </table>
+              <table class="cmn-table">
+                <tr>
+                  <td class="check-area">
+                    <div class="cmn-checkbox">
+                      <input type="checkbox" name="check" (change)="show=!show" id="ar" />
+                      <label for="ar" aria-label="checkbox"></label>
+                    </div>
+                  </td>
+                  <td class="s-name">
+                    <span class="device-pic"><img src="assets/images/adb-reader.png" alt="adb-reader"/></span>
+                    <h5>Back & Sync from Google</h5>
+                  </td>
+                  <td class="pulisher">Picasa 3</td>
+                  <td class="Status">Disable</td>
+                  <td class="Impact">Low</td>
+                  <td class="action" dropdown>
+                    <a href="javascript:;" is="button-basic" aria-controls="dropdown-basic2" dropdownToggle class="more" data-tooltip="More" ><img src="assets/images/more.svg" alt="more"/></a>
+                    <ul id="dropdown-basic2" *dropdownMenu class="dropdown-menu list-unstyled"
+                          role="menu" aria-labelledby="button-basic2">
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/enable.svg" alt="enable" />Enable</a>
+                        </li>
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/disable.svg" alt="Disable" />Disable</a>
+                        </li>
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/online-search.svg" alt="Online Search" />Online Search</a>
+                        </li>
+                        
+                      </ul>
+                  
+                  </td>
+                </tr>
+              </table>
+              <table class="cmn-table">
+                <tr>
+                  <td class="check-area">
+                    <div class="cmn-checkbox">
+                      <input type="checkbox" name="check" (change)="show=!show" id="ar" />
+                      <label for="ar" aria-label="checkbox"></label>
+                    </div>
+                  </td>
+                  <td class="s-name">
+                    <span class="device-pic"><img src="assets/images/adb-reader.png" alt="adb-reader"/></span>
+                    <h5>Origin</h5>
+                  </td>
+                  <td class="pulisher">Electronics Arts, Inc.</td>
+                  <td class="Status">Disable</td>
+                  <td class="Impact">Low</td>
+                  <td class="action" dropdown>
+                    <a href="javascript:;" is="button-basic" aria-controls="dropdown-basic2" dropdownToggle class="more" data-tooltip="More" ><img src="assets/images/more.svg" alt="more"/></a>
+                    <ul id="dropdown-basic2" *dropdownMenu class="dropdown-menu list-unstyled"
+                          role="menu" aria-labelledby="button-basic2">
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/enable.svg" alt="enable" />Enable</a>
+                        </li>
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/disable.svg" alt="Disable" />Disable</a>
+                        </li>
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/online-search.svg" alt="Online Search" />Online Search</a>
+                        </li>
+                        
+                      </ul>
+                  
+                  </td>
+                </tr>
+              </table>
+              <table class="cmn-table">
+                <tr>
+                  <td class="check-area">
+                    <div class="cmn-checkbox">
+                      <input type="checkbox" name="check" (change)="show=!show" id="ar" />
+                      <label for="ar" aria-label="checkbox"></label>
+                    </div>
+                  </td>
+                  <td class="s-name">
+                    <span class="device-pic"><img src="assets/images/adb-reader.png" alt="adb-reader"/></span>
+                    <h5>VPN Unlimited 6.1</h5>
+                  </td>
+                  <td class="pulisher">Keepsolid Inc.</td>
+                  <td class="Status">Disable</td>
+                  <td class="Impact">Low</td>
+                  <td class="action" dropdown>
+                    <a href="javascript:;" is="button-basic" aria-controls="dropdown-basic2" dropdownToggle class="more" data-tooltip="More" ><img src="assets/images/more.svg" alt="more"/></a>
+                    <ul id="dropdown-basic2" *dropdownMenu class="dropdown-menu list-unstyled"
+                          role="menu" aria-labelledby="button-basic2">
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/enable.svg" alt="enable" />Enable</a>
+                        </li>
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/disable.svg" alt="Disable" />Disable</a>
+                        </li>
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/online-search.svg" alt="Online Search" />Online Search</a>
+                        </li>
+                        
+                      </ul>
+                  
+                  </td>
+                </tr>
+              </table>
+              <table class="cmn-table">
+                <tr>
+                  <td class="check-area">
+                    <div class="cmn-checkbox">
+                      <input type="checkbox" name="check" (change)="show=!show" id="ar" />
+                      <label for="ar" aria-label="checkbox"></label>
+                    </div>
+                  </td>
+                  <td class="s-name">
+                    <span class="device-pic"><img src="assets/images/adb-reader.png" alt="adb-reader"/></span>
+                    <h5>VeraCrypt</h5>
+                  </td>
+                  <td class="pulisher">Keepsolid Inc.</td>
+                  <td class="Status">Disable</td>
+                  <td class="Impact">Low</td>
+                  <td class="action" dropdown>
+                    <a href="javascript:;" is="button-basic" aria-controls="dropdown-basic2" dropdownToggle class="more" data-tooltip="More" ><img src="assets/images/more.svg" alt="more"/></a>
+                    <ul id="dropdown-basic2" *dropdownMenu class="dropdown-menu list-unstyled"
+                          role="menu" aria-labelledby="button-basic2">
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/enable.svg" alt="enable" />Enable</a>
+                        </li>
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/disable.svg" alt="Disable" />Disable</a>
+                        </li>
+                        <li role="menuitem">
+                          <a class="dropdown-item" href="javascript:;"><img src="assets/images/online-search.svg" alt="Online Search" />Online Search</a>
+                        </li>
+                        
+                      </ul>
+                  
+                  </td>
+                </tr>
+              </table>
+            
+             
+             
+              
+          </div>  
+        </div>
+  </div>
+
+  <app-ticket-task></app-ticket-task>
+
+
+</div>
+

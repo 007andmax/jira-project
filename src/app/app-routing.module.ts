@@ -255,14 +255,16 @@ const routes: Routes = [
     path: ':company/payments',
     loadChildren: './components/billing/payments/payments.module#PaymentsModule',
     canActivate: [PermissionTechUserService]
-
-
   },
   {
     path: ':company/device',
     loadChildren: './components/device/device-root.module#DeviceModule',
     canActivate: [TestPermissionService]
-
+  },
+  {
+    path: ':company/device-old',
+    loadChildren: './components/device-old/device-old.module#DevicesOldModule',
+    canActivate: [TestPermissionService]
   },
   {
     path: ':company/billing-dashboard',

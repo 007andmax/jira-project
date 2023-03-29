@@ -138,6 +138,7 @@ export class WebsocketService {
       that.subsribeToCustomSubscription();
       that.subsribeToNoteTemplateSubscription();
       that.subsribeToEmailNotification();
+      console.log("data.command", data.command);
       if (data.command === "CONNECTED") this.websocketStateService.initConnection();
       that.onInit.emit(true);
       that.isInit = true;
