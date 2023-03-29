@@ -34,11 +34,10 @@
                 <a
                     href="javascript:;"
                     class="head-btn"
-                    (click)="openModal(template)"
+                    (click)="openModal()"
                 >
                     Remote Control
                 </a>
-                <!-- <a href="javascript:;" class="head-btn-info btn-print" (click)="lock();"><img src="/html/assets/img/device/print-sheet.svg" alt="Print" /></a> -->
                 <a
                     href="javascript:;"
                     (click)="sendCommand('r')"
@@ -93,73 +92,9 @@
         <nav-old></nav-old>
     </aside>
     <!-- Main content bar -->
-
     <router-outlet></router-outlet>
-
 </div>
 <!-- Modal create Tags -->
-<ng-template
-    #template
-    let-modal
->
-    <div class="modal-body">
-        <button
-            type="button"
-            class="close pull-right"
-            aria-label="Close"
-            (click)="modal.dismiss('Cross click')"
-        >
-            <span aria-hidden="true">&times;</span>
-        </button>
-
-        <div class="remote-area">
-            <ul class="list-unstyled">
-                <li>
-                    <span class="remote-ico">
-                        <img
-                            src="/html/assets/img/device/quicktech-connect.svg"
-                            alt="quicktech-connect"
-                        >
-                    </span>
-                    <div class="remote-info">
-                        <h3>Quicktech Connect</h3>
-                        <p>
-                            Get our Windows Installer package to install the app on your system. The app will be available to join future sessions instantly.
-                        </p>
-                        <a
-                            (click)="createConnection('CSS');"
-                            class="btn btn-primary"
-                        >
-                            Launch Quicktech Connect
-                        </a>
-                    </div>
-                </li>
-                <!-- <li>
-                      <span class="remote-ico">
-                          <img src="assets/images/remote-desktop.svg" alt="quicktech-connect"/>
-                      </span>
-                      <div class="remote-info">
-                          <h3>Remote Desktop</h3>
-                          <p>Launch our app already installed on your device. If not installed, we will attempt the next option after 2 seconds 
-                            have elapsed.</p>
-                          <a (click)="createConnection('RDP');" class="btn btn-primary">Launch RDP Connect</a>
-                      </div>
-                  </li> -->
-            </ul>
-        </div>
-        <div class="viewer-footer">
-            <p>
-                You may need to download and install the viewer
-            </p>
-            <a
-                (click)="getViewer();"
-                class="btn btn-dowanload"
-            >
-                Download Viewer
-            </a>
-        </div>
-    </div>
-</ng-template>
 <div
     class="loading"
     *ngIf="loading"

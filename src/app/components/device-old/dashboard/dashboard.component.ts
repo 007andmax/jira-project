@@ -19,11 +19,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   @ViewChild(NgbDatepicker) d: NgbDatepicker;
   url = environment.apiUrl + 'upload';
   formData: FormData;
-  files: UploadFile[];
-  uploadInput: EventEmitter<UploadInput>;
-  humanizeBytes: Function;
+  files: UploadFile[] = [];
+  uploadInput: EventEmitter<UploadInput> = new EventEmitter<UploadInput>();
+  humanizeBytes: Function = humanizeBytes
   dragOver: boolean;
-  options: UploaderOptions;
+  options: UploaderOptions = { concurrency: 1, maxUploads: 10, maxFileSize: 1000000 };
   show = false;
   deviceDetail: any = {};
   windows_info: string = '';
@@ -53,14 +53,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   type = '';
   _id = '';
   DateFormat = CONFIGCONSTANTS.DateFormat1;
+  myDateValue: Date;
   sub: Subscription = new Subscription();
   constructor(private hardwareService: HardwareService,
     private deviceDetailService: DeviceDetailService,
     private toastr: ToastrService) {
-    this.options = { concurrency: 1, maxUploads: 10, maxFileSize: 1000000 };
-    this.files = [];
-    this.uploadInput = new EventEmitter<UploadInput>();
-    this.humanizeBytes = humanizeBytes;
   }
 
   onUploadOutput(output: UploadOutput): void {
@@ -108,7 +105,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   removeAllFiles(): void {
     this.uploadInput.emit({ type: 'removeAll' });
   }
-  myDateValue: Date;
+
   ngOnInit() {
     this.type = window.location.href.split('/')[window.location.href.split('/').length - 2];
     this._id = window.location.href.split('/')[window.location.href.split('/').length - 1];

@@ -15,6 +15,7 @@ import { TerminalService } from './_services/terminal.service';
 import { command } from './class/device';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Subscription } from 'rxjs';
+import { CompanyDevicesRemoteAccessComponent } from '../company-devices/company-devices-remote-access/company-devices-remote-access.component';
 declare var $: any;
 
 @Component({
@@ -48,30 +49,12 @@ export class DeviceOldComponent implements OnInit, OnDestroy {
     private shellStateService: ShellStateService,
     private terminalService: TerminalService) { }
 
-  openModal(template) {
-    if (this.deviceDetail.online === true) {
-      this.modalService.open(template, { ariaLabelledBy: 'modal-basic-title', centered: true }).result.then((result) => {
-      }, (reason) => {
-      });
-    } else {
-      this.toastr.error('The device is offline!');
-    }
-
-  }
-  private getDismiss(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
-  lock() {
-    // this.modalRef = this.modalService.show(
-    //   LockScreenComponent,
-    //   Object.assign({}, { class: 'remote-control modal-dialog-centered lock', backdrop: true })
-    // );
+  openModal() {
+    const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, { windowClass: 'device-send-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.connectionType = 'CSS';
+    modalRef.componentInstance.companyId = localStorage.getItem('company_id');
+    modalRef.componentInstance.device = this.deviceDetail;
+    modalRef.componentInstance.action = 'CONNECT_DEVICE';
   }
 
   ngOnInit(): void {
@@ -92,20 +75,6 @@ export class DeviceOldComponent implements OnInit, OnDestroy {
       this.updateTime();
     }, 1000);
   }
-
-  getDeviceDetail() {
-
-    this.hardwareService.getAllHardwareList(localStorage.getItem('company_id'), this.deviceDetail.agentId)
-      .pipe(first())
-      .subscribe(
-        resp => {
-          this.deviceDetailService.addDevice(resp);
-        },
-        error => {
-          this.toastr.error('Something went wrong please try again.');
-        }
-      );
-  }
   updateTime() {
     this.totalSeconds++;
     if (parseInt(this.totalSeconds) === 60) {
@@ -119,7 +88,6 @@ export class DeviceOldComponent implements OnInit, OnDestroy {
     $('#counter').text(this.padNumber(this.totalHours) + ' hr : ' + this.padNumber(this.totalMinutes) + ' min : ' + this.padNumber(this.totalSeconds) + ' sec');
   }
   getDevicesByCompany() {
-    // localStorage.getItem('currentCompany')
     this.commonHttpServices.getDevicesByCompany(localStorage.getItem('company_id'), this._id)
       .pipe()
       .subscribe(resp => {
@@ -137,54 +105,6 @@ export class DeviceOldComponent implements OnInit, OnDestroy {
         localStorage.setItem('deviceDetail_' + this._id, JSON.stringify(deviceList[index]))
         localStorage.setItem('company_id', deviceList[index].company_id);
         this.deviceDetailService.setDevice(JSON.stringify(deviceList[index]));
-        // this.getDeviceDetail();
-      },
-        error => {
-          this.toastr.error('Something went wrong please try again.');
-        });
-  }
-  getViewer() {
-    this.loading = true;
-    this.remoteControlService.getViewer()
-      .pipe()
-      .subscribe(resp => {
-        this.loading = false;
-      },
-        error => {
-
-        });
-  }
-  getConstant(sessionId) {
-    this.remoteControlService.getConstant()
-      .pipe()
-      .subscribe(resp => {
-        this.restServerAddress = resp['rest.server.url'];
-        this.remoteConnectPort = resp['remote.connect.port'];
-        let url = 'quicktech://connect?serverIP=' + this.restServerAddress + '&port=' + this.remoteConnectPort + '&sessionID=' + sessionId;
-        window.open(url, '_self');
-      },
-        error => {
-
-        });
-  }
-  createConnection(type) {
-    this.loading = true;
-    let data = {
-      deviceId: this.deviceDetail.id,
-      type: type,
-      companyId: localStorage.getItem('company_id')
-    };
-    this.remoteControlService.createConnection(data)
-      .pipe()
-      .subscribe(resp => {
-        this.loading = false;
-        if (type === 'CSS') {
-          // this.modalRef.hide();
-          // this.getViewer();
-          this.getConstant(resp.sessionId);
-        } else {
-          this.getConstant(resp.sessionId);
-        }
       },
         error => {
           this.toastr.error('Something went wrong please try again.');

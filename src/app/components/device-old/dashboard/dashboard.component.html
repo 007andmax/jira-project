@@ -31,6 +31,7 @@
 
 
 
+
                                 </div>
                                 <ul class="list-unstyled">
                                     <li>
@@ -55,6 +56,7 @@
                                     <li>
                                         <span>Windows Info</span>
                                         <div>{{windows_info || 'N/A'}}</div>
+
 
 
 
@@ -167,6 +169,7 @@
 
 
 
+
                                 </ul>
                             </div>
                         </div>
@@ -178,6 +181,7 @@
                                         [ngClass]="{'e-drive':drive.is_system == false,'c-drive':drive.is_system == true, 'd-drive':drive.is_system == false && drive.device_id == 'D:', 'f-drive':drive.is_system == false && drive.device_id == 'F:'}"
                                         *ngFor="let drive of logicalDisk"
                                     >
+
 
 
 
@@ -212,6 +216,7 @@
 
 
 
+
                                 </ul>
                             </div>
                             <div class="dashboard-col col-50 services">
@@ -242,6 +247,7 @@
 
 
 
+
                                     <li class="updated">
                                         <figure>
                                             <img
@@ -252,6 +258,7 @@
                                         <h4>Drivers Missing</h4>
                                         <span>Up-to-date</span>
                                     </li>
+
 
 
 
@@ -734,6 +741,7 @@
 
 
 
+
                     </div>
                 </div>
             </div>
@@ -844,6 +852,7 @@
 
 
 
+
                                                 <span class="f-name">{{ f.name }}</span>
                                                 <i
                                                     class="ionicon ion-close-round"
@@ -854,12 +863,14 @@
 
 
 
+
                                                 <!-- File Upload progress content -->
                                                 <!-- <div class="progress-content">
                                   <div class="progress">
                                     <span class="bar" [style.width]="f?.progress?.data?.percentage + '%'" [class.is-done]="f?.progress?.data?.percentage === 100"></span>
                                   </div>
                                 </div> -->
+
 
 
 
@@ -1006,6 +1017,7 @@
 
 
 
+
                                                 <span class="f-name">{{ f.name }}</span>
                                                 <i
                                                     class="ionicon ion-close-round"
@@ -1016,12 +1028,14 @@
 
 
 
+
                                                 <!-- File Upload progress content -->
                                                 <!-- <div class="progress-content">
                                   <div class="progress">
                                     <span class="bar" [style.width]="f?.progress?.data?.percentage + '%'" [class.is-done]="f?.progress?.data?.percentage === 100"></span>
                                   </div>
                                 </div> -->
+
 
 
 
