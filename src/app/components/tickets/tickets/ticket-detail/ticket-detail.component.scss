@@ -953,6 +953,11 @@ app-ticket-edit-aside-right-panel {
     align-items: flex-start;
     height: calc(100% - 122px);
     background-color: $gray-50;
+    @media (hover:none) and (min-width: 767px), (pointer:coarse) and (min-width: 767px) {
+      position: fixed; // TODO check add style for fix height
+      width: 100%;
+      overflow: auto;
+    }
 
     &-main {
       background-color: $gray-50;
