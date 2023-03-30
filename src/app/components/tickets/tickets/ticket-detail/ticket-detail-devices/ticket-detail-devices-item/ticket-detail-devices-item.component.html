@@ -3,9 +3,9 @@
     ngbDropdown
     container="body"
 >
-    <div class="qt-df qt-ai-c">
+    <div class="qt-df qt-ai-fs">
         <div
-            class="qt-df qt-ai-c qt-jc-c qt-sz-40 qt-circle ticket-detail-devices__item-icon qt-mr-8 device-type-icon"
+            class="qt-df qt-ai-c qt-jc-c qt-sz-40 qt-circle ticket-detail-devices__item-icon qt-mr-8 device-type-icon qt-fs-0"
             [ngClass]="{'--ofline': !device.online}"
         >
             <div
@@ -19,10 +19,10 @@
         </div>
         <div>
             <div
-                class="ticket-detail-devices__item-subtitle ellipsis"
+                class="ticket-detail-devices__item-subtitle"
                 [textContent]="device.getLabelForEdit()"
             ></div>
-            <div class="ticket-detail-devices__item-text ellipsis qt-df qt-ai-c">
+            <div class="ticket-detail-devices__item-text qt-df qt-ai-c">
                 <span
                     class="qt-mr-4"
                     *ngIf="device.userName"

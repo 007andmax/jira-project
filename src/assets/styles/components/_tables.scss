@@ -43,7 +43,9 @@ table.qt-table-modern {
           padding-left: 16px;
         }
       }
-
+      &:hover td {
+        background-color: $gray-50;
+      }
       &.--selected {
         td {
           background: #f4fbff;
@@ -87,6 +89,12 @@ table.qt-table-modern {
     border-radius: 5px;
     height: 48px;
     border: 1px solid $white;
+    &:hover {
+      border: 1px solid $gray-50;
+      > div {
+        background-color: $gray-50;
+      }
+    }
 
     &.--selected {
       border-color: $primary-1;
