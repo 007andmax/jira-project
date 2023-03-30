@@ -10,6 +10,9 @@ import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { NgbCalendar, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { DeviceDetailService } from '../_services/device_detail.service';
 import { Subscription } from 'rxjs';
+import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
+import * as moment from "moment";
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -36,15 +39,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
     model: '',
     caption: '',
     version: '',
-    release_id: ''
+    release_id: '',
+    warrantyTime: null,
+    install_dateTime: null,
   };
   networkAdapters = {
     ip_address: ''
   }
   logicalDisk: any = [];
   virusInfo: any = [];
-  hostName = '';
-  label = '';
+
+
   showInput = true;
   progressClass = 'p20';
   visible = false;
@@ -54,6 +59,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   _id = '';
   DateFormat = CONFIGCONSTANTS.DateFormat1;
   myDateValue: Date;
+
   sub: Subscription = new Subscription();
   constructor(private hardwareService: HardwareService,
     private deviceDetailService: DeviceDetailService,
@@ -105,7 +111,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
   removeAllFiles(): void {
     this.uploadInput.emit({ type: 'removeAll' });
   }
-
+  onChangeInstallDate(data) {
+    this.system.install_date = data;
+    this.system.install_dateTime = new Date(data.year, data.month - 1, data.day).getTime();
+    this.updateDashboard('install_date');
+  }
+  onChangeWarranty(data) {
+    this.system.warranty = data;
+    this.system.warrantyTime = new Date(data.year, data.month - 1, data.day).getTime();
+    this.updateDashboard('warranty');
+  }
   ngOnInit() {
     this.type = window.location.href.split('/')[window.location.href.split('/').length - 2];
     this._id = window.location.href.split('/')[window.location.href.split('/').length - 1];
@@ -120,8 +135,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
   setPreviewDataDevice() {
     this.deviceDetail = JSON.parse(localStorage.getItem('deviceDetail_' + this._id));
-    this.hostName = this.deviceDetail.hostName;
-    this.label = this.deviceDetail.label;
     this.getDeviceDetail();
   }
   getDeviceDetail() {
@@ -138,20 +151,27 @@ export class DashboardComponent implements OnInit, OnDestroy {
           let architecture = this.system.architecture === '' ? '' : ` ( ${this.system.architecture} )`;
           this.windows_info = `${caption}${architecture}${release_id}`;
           if (this.system.install_date !== '') {
+            this.system.install_dateTime = new Date(this.system.install_date).getTime();
             this.system.install_date = {
               "day": new Date(this.system.install_date).getDate(),
-              "month": new Date(this.system.install_date).getMonth() + 1,
+              "month": new Date(this.system.install_date).getMonth(),
               "year": new Date(this.system.install_date).getFullYear(),
             };
+          } else {
+            this.system.install_dateTime = new Date().getTime();
           }
           this.networkAdapters = resp['reports'][0].networkAdapters.filter(value => value.ip_enabled === true)[0] || {};
           if (this.system.warranty !== '') {
+            this.system.warrantyTime = new Date(this.system.warranty).getTime();
             this.system.warranty = {
               "day": new Date(this.system.warranty).getDate(),
-              "month": new Date(this.system.warranty).getMonth() + 1,
+              "month": new Date(this.system.warranty).getMonth(),
               "year": new Date(this.system.warranty).getFullYear()
             };
+          } else {
+            this.system.warrantyTime = new Date().getTime();
           }
+          console.log("this.system", this.system);
           let colors = ['#0057a8', '#00d8e7', '#16a4fa', '#0CB2B2', '#485EF0'];
           let count = 0;
           this.logicalDisk.forEach(element => {
@@ -226,9 +246,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     } else if (type === 'architecture') {
       obj.system['architecture'] = this.system.architecture;
     } else if (type === 'install_date') {
-      obj.system['install_date'] = this.system.install_date.year + '/' + this.system.install_date.month + '/' + this.system.install_date.day;
+      obj.system['install_date'] = moment(new Date(this.system.install_date.year, this.system.install_date.month - 1, this.system.install_date.day)).format('YYYY/MM/DD');
     } else if (type === 'warranty') {
-      obj.system['warranty'] = this.system.warranty.year + '/' + this.system.warranty.month + '/' + this.system.warranty.day;
+      obj.system['warranty'] = moment(new Date(this.system.warranty.year, this.system.warranty.month - 1, this.system.warranty.day)).format('YYYY/MM/DD');
     }
     const data = {
       agentId: this._id,
@@ -256,27 +276,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     return (parseFloat(val1) - parseFloat(val2)).toFixed(2)
   }
 
-  saveLabel() {
-    this.label = this.label.toUpperCase();
-    const data = {
-      agentId: this._id,
-      companyId: localStorage.getItem('company_id'),
-      newLabelValue: this.label
-    }
-    this.hardwareService.saveDeviceName(data)
-      .pipe(first())
-      .subscribe(
-        resp => {
-          $('#head-label').text(this.label);
-          let obj = JSON.parse(localStorage.getItem('deviceDetail_' + this._id));
-          obj.label = this.label;
-          localStorage.setItem('deviceDetail_' + this._id, JSON.stringify(obj));
-        },
-        error => {
-          this.toastr.error('Something went wrong please try again.');
-        }
-      );
-  }
+
   format(date: NgbDateStruct | null): string {
     return date ? date.day + '/' + date.month + '/' + date.year : '';
   }

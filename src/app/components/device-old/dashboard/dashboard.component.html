@@ -10,168 +10,17 @@
                 <div class="contant-area">
                     <div class="dashboard-list">
                         <div class="dashboard-row">
-                            <div class="dashboard-col  work-group">
-                                <div class="col-title">
-                                    <span class="hardware-ico">
-                                        <img
-                                            src="/html/assets/img/computer.svg"
-                                            alt="computer"
-                                        >
-                                    </span>
-                                    <!-- <h3 (mouseenter)="showInput = true;" [ngStyle]="{'display':showInput === true ? 'none' : 'block' }">{{label}}</h3> -->
-                                    <span class="edit-field">
-                                        <input
-                                            type="text"
-                                            class="form-control label-field"
-                                            [(ngModel)]="label"
-                                            (blur)="saveLabel();"
-                                        >
-                                    </span>
-
-
-
-
-
-                                </div>
-                                <ul class="list-unstyled">
-                                    <li>
-                                        <span>Host Name</span>
-                                        <div>{{hostName || 'N/A'}}</div>
-                                    </li>
-                                    <li>
-                                        <span>Warranty</span>
-                                        <!-- <div>{{system?.warranty || 'N/A'}}</div> -->
-                                        <span class="edit-field">
-                                            <input
-                                                type="text"
-                                                class="form-control sub-label-field"
-                                                [(ngModel)]="system.warranty"
-                                                (dateSelect)="updateDashboard('warranty')"
-                                                ngbDatepicker
-                                                #warranty="ngbDatepicker"
-                                                (click)="warranty.toggle()"
-                                            >
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <span>Windows Info</span>
-                                        <div>{{windows_info || 'N/A'}}</div>
-
-
-
-
-
-                                    </li>
-                                    <li>
-                                        <span>Asset Tag</span>
-                                        <!-- <div>{{system?.asset_tag || 'N/A'}}</div> -->
-                                        <span
-                                            id="tag"
-                                            class="edit-field"
-                                            data-tooltip
-                                        >
-                                            <input
-                                                type="text"
-                                                class="form-control sub-label-field"
-                                                [(ngModel)]="system.asset_tag"
-                                                (blur)="updateDashboard('asset_tag')"
-                                            >
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <span>Manufacturer</span>
-                                        <!-- <div>{{system?.manufacturer || 'N/A'}}</div> -->
-                                        <span
-                                            id="manufacture"
-                                            class="edit-field"
-                                            data-tooltip
-                                        >
-                                            <input
-                                                type="text"
-                                                class="form-control sub-label-field"
-                                                [(ngModel)]="system.manufacturer"
-                                                (blur)="updateDashboard('manufacturer')"
-                                            >
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <span>IP</span>
-                                        <div>{{networkAdapters.ip_address || 'N/A'}}</div>
-                                    </li>
-                                    <li>
-                                        <span>Install Date</span>
-                                        <!-- <div (click)="visible = !visible">{{(system?.install_date | date : DateFormat) || 'N/A'}}</div> -->
-                                        <!-- <ngb-datepicker class="dropdown-menu p-0"
-                    [class.show]="visible">
-                  </ngb-datepicker> -->
-                                        <span class="edit-field">
-                                            <input
-                                                type="text"
-                                                class="form-control sub-label-field"
-                                                [(ngModel)]="system.install_date"
-                                                ngbDatepicker
-                                                #d="ngbDatepicker"
-                                                (click)="d.toggle()"
-                                                (dateSelect)="updateDashboard('install_date')"
-                                            >
-                                        </span>
-                                    </li>
-                                    <!-- <li>
-                    <span>Warranty Date</span>
-                    <span class="edit-field">
-                      <input type="text" class="form-control sub-label-field" [(ngModel)]="system.warranty" (dateSelect)="updateDashboard('warranty')" ngbDatepicker #dWarranty="ngbDatepicker" (click)="dWarranty.toggle()">
-                    </span>
-                  </li> -->
-                                    <li>
-                                        <span>Computer Model</span>
-                                        <!-- <div>{{system?.model || 'N/A'}}</div> -->
-                                        <span class="edit-field">
-                                            <input
-                                                type="text"
-                                                class="form-control sub-label-field"
-                                                [(ngModel)]="system.model"
-                                                (blur)="updateDashboard('model')"
-                                            >
-                                        </span>
-                                    </li>
-                                    <!-- <li>
-                    <span>Site</span>
-                    <div>N/A</div>
-                  </li> -->
-                                    <!-- <li>
-                    <span>Bought Date</span>
-                    <span class="edit-field">
-                      <input type="text" class="form-control sub-label-field" [(ngModel)]="system.install_date" (dateSelect)="updateDashboard('install_date')" ngbDatepicker #dInstall="ngbDatepicker" (click)="dInstall.toggle()">
-                    </span>
-                  </li> -->
-                                    <li>
-                                        <span>System Type</span>
-                                        <!-- <div *ngIf="system?.architecture != undefined && system?.architecture != ''">({{system?.architecture}}) system</div>
-                    <div *ngIf="system?.architecture == undefined || system?.architecture == ''">N/A</div> -->
-                                        <span class="edit-field">
-                                            <input
-                                                type="text"
-                                                class="form-control sub-label-field"
-                                                [(ngModel)]="system.architecture"
-                                                (blur)="updateDashboard('architecture')"
-                                            >
-                                        </span>
-                                    </li>
-                                    <!-- <li>
-                    <span>Time Zone</span>
-                    <div>(UTC +08:00) Perth</div>
-                  </li> -->
-                                    <!-- <li>
-                    <span>Expire Date</span>
-                    <div>2019-03-12</div>
-                  </li> -->
-
-
-
-
-
-                                </ul>
-                            </div>
+                            <dashboard-details-dashboard
+                                [_id]="_id"
+                                [label]="deviceDetail.label"
+                                [hostName]="deviceDetail.hostName"
+                                [system]="system"
+                                [windows_info]="windows_info"
+                                [networkAdapters]="networkAdapters"
+                                (onChangeInstallDate)="onChangeInstallDate($event)"
+                                (onChangeWarranty)="onChangeWarranty($event)"
+                                (onUpdateDashboard)="updateDashboard($event)"
+                            ></dashboard-details-dashboard>
                         </div>
                         <div class="dashboard-row auto-marging">
                             <div class="dashboard-col col-50 disk-drive">
@@ -181,11 +30,6 @@
                                         [ngClass]="{'e-drive':drive.is_system == false,'c-drive':drive.is_system == true, 'd-drive':drive.is_system == false && drive.device_id == 'D:', 'f-drive':drive.is_system == false && drive.device_id == 'F:'}"
                                         *ngFor="let drive of logicalDisk"
                                     >
-
-
-
-
-
                                         <div
                                             class="progress-circle p{{drive.percent}}"
                                             [ngClass]="{'over50': drive.percent >= 50}"
@@ -212,11 +56,6 @@
                                             </span>
                                         </div>
                                     </li>
-
-
-
-
-
                                 </ul>
                             </div>
                             <div class="dashboard-col col-50 services">
@@ -243,11 +82,6 @@
                                         <h4>Security Update</h4>
                                         <span>7 missing Updates</span>
                                     </li>
-
-
-
-
-
                                     <li class="updated">
                                         <figure>
                                             <img
@@ -258,12 +92,6 @@
                                         <h4>Drivers Missing</h4>
                                         <span>Up-to-date</span>
                                     </li>
-
-
-
-
-
-
                                 </ul>
                             </div>
                             <div class="dashboard-col col-50 tags">
@@ -737,11 +565,6 @@
                                 </ul>
                             </div>
                         </div>
-
-
-
-
-
                     </div>
                 </div>
             </div>
@@ -848,33 +671,18 @@
                                                 class="upload-item-content"
                                                 *ngFor="let f of files; let i = index;"
                                             >
-
-
-
-
-
                                                 <span class="f-name">{{ f.name }}</span>
                                                 <i
                                                     class="ionicon ion-close-round"
                                                     (click)="cancelUpload(f.id)"
                                                     title="Close Tag"
                                                 ></i>
-
-
-
-
-
                                                 <!-- File Upload progress content -->
                                                 <!-- <div class="progress-content">
                                   <div class="progress">
                                     <span class="bar" [style.width]="f?.progress?.data?.percentage + '%'" [class.is-done]="f?.progress?.data?.percentage === 100"></span>
                                   </div>
                                 </div> -->
-
-
-
-
-
                                                 <!-- <div class="progress-text-content">
                                   <span class="progress-text" [class.is-done]="f?.progress?.data?.percentage === 100">
                                     <span>{{ f.progress?.data?.percentage }}% </span>
@@ -1013,33 +821,18 @@
                                                 class="upload-item-content"
                                                 *ngFor="let f of files; let i = index;"
                                             >
-
-
-
-
-
                                                 <span class="f-name">{{ f.name }}</span>
                                                 <i
                                                     class="ionicon ion-close-round"
                                                     (click)="cancelUpload(f.id)"
                                                     title="Close Tag"
                                                 ></i>
-
-
-
-
-
                                                 <!-- File Upload progress content -->
                                                 <!-- <div class="progress-content">
                                   <div class="progress">
                                     <span class="bar" [style.width]="f?.progress?.data?.percentage + '%'" [class.is-done]="f?.progress?.data?.percentage === 100"></span>
                                   </div>
                                 </div> -->
-
-
-
-
-
                                                 <!-- <div class="progress-text-content">
                                   <span class="progress-text" [class.is-done]="f?.progress?.data?.percentage === 100">
                                     <span>{{ f.progress?.data?.percentage }}% </span>
