@@ -32,7 +32,12 @@ users-aside-detail-tickets-item {
     top: auto;
 }
 .qt-page-list__body {
-    position: relative;
+  position: relative;
+
+  .loading.pengind-loading {
+    bottom: 20px;
+    top: auto;
+  }
 }
 .no-exist-tickets {
     position: absolute;
