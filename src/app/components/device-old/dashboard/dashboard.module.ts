@@ -7,10 +7,11 @@ import { NgxUploaderModule } from 'ngx-uploader';
 import { DashboardRoutingOldModule } from './dashboard-routing.module';
 import { DatePickerModule } from '../../shared/date-picker/date-picker.module';
 import { DashboardDetailsDashboardComponent } from './dashboard-details-dashboard/dashboard-details-dashboard.component';
+import { DashboardDiskDrivesComponent } from './dashboard-disk-drives/dashboard-disk-drives.component';
 
 
 @NgModule({
-    declarations: [DashboardComponent, DashboardDetailsDashboardComponent
+    declarations: [DashboardComponent, DashboardDetailsDashboardComponent, DashboardDiskDrivesComponent
     ],
     imports: [
         CommonModule,

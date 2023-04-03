@@ -270,11 +270,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   convertToGB(value) {
     return (parseInt(value) / 1024 / 1024 / 1024).toFixed(2)
   }
-  diskSpaceDiff(v1, v2) {
-    let val1 = (parseInt(v1) / 1024 / 1024 / 1024).toFixed(2)
-    let val2 = (parseInt(v2) / 1024 / 1024 / 1024).toFixed(2)
-    return (parseFloat(val1) - parseFloat(val2)).toFixed(2)
-  }
+
 
 
   format(date: NgbDateStruct | null): string {
