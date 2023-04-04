@@ -56,6 +56,7 @@ export class User {
             this.defaultSubscriptions = new UserDefaultSubscription(data.defaultSubscriptions);
             this.customSubscriptions = data.customSubscriptions.map(item => new UserCustomSubscription(item));
             this.userEmailNotifications = new UserEmailNotifications(data.userEmailNotifications);
+            this.clientCompanies = data.clientCompanies ? data.clientCompanies : [];
         }
 
     }
