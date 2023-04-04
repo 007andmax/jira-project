@@ -19,6 +19,7 @@ import { Subscription } from 'rxjs';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
+import { PasswordRecordHistory } from '../class/password-record-history';
 
 /**
  * Password manager edit aside component
@@ -32,6 +33,7 @@ import { AppStateService } from 'src/app/states/app/app-state.service';
 export class PasswordManagerEditAsideComponent implements OnInit {
   public selectedClient: any;
   public opened: boolean = false;
+  preloaderHistory: boolean = true;
   showSecretCode: boolean = false;
   isEditSecretKey: boolean = false;
   isGetSecretCode: boolean = false;
@@ -110,6 +112,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       this.isEditSecretKey = false;
       this.isGetSecretCode = true;
       this.showPassword = false;
+      this.preloaderHistory = true;
+      this.changeTab('PASSWORD_DETAIL');
       if (this.intervalContainer) clearInterval(this.intervalContainer);
       if (this.showSecretCode && this.editItem.otpEnable) this.getCodeRecords();
     });
@@ -150,6 +154,16 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.editItem.setAuthenticationKey("");
     this.editItem.setResetAuthenticationKey(true);
     this.isEditSecretKey = false;
+  }
+  changeTab(data) {
+    this.tab = data;
+    if (data == 'PASSWORD_HISTORY') {
+      if (!this.editItem.isHistory) this.passwordManagerService.getHistory(this.editItem.id).subscribe((res: any) => {
+        console.log(res);
+        this.editItem.updateHistories(res.map(item => new PasswordRecordHistory(item)));
+        this.preloaderHistory = false;
+      })
+    }
   }
   getCodeRecords() {
     this.timeCount = 0;

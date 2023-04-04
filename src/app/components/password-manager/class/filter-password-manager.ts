@@ -16,14 +16,14 @@ export class FilterPasswordManager {
     selectedUserOrDevice: PasswordDeviceUser;
     selectedCategory: PasswordRecordCategories;
     page: number = 0;
-    limit: number = 20;
+    limit: number = 30;
     constructor() {
 
     }
     public getDataForRequest() {
         let sortOrder = this.filterTop.find(item => item.filter != '');
         let data: any = {
-            size: 20,
+            size: this.limit,
             page: this.page,
             sortOrder: `${sortOrder.field}_${sortOrder.filter}`
         };
