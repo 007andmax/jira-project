@@ -227,7 +227,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     let userList = this.usersStateService.getAllUsers().sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
       1 : ((`${b.firstName} ${b.lastName}`.toLowerCase() > `${a.firstName} ${a.lastName}`.toLowerCase()) ? -1 : 0));
     let techusers = userList.filter((item) => item.accountType === "TECH" && !item.deletedAt);
-    let clientUsers = userList.filter((item) => item.accountType === "CLIENT" && !item.deletedAt && item.company.id === this.contractsBlockTime.companyId);
+    let clientUsers = userList.filter((item) => item.accountType === "CLIENT" && !item.deletedAt && item.clientCompanies.find(clientCompany => clientCompany === this.contractsBlockTime.companyId));
     this.userList = [...techusers, ...clientUsers];
 
   }

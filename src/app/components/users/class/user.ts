@@ -13,6 +13,7 @@ export class User {
     avatar: UserAvatar;
     company: UserCompany;
     contact: any;
+    clientCompanies: Array<string> = [];
     deletedAt: number;
     designation: string;
     firstName: string;

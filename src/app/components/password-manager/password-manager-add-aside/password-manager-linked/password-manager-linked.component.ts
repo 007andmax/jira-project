@@ -70,9 +70,9 @@ export class PasswordManagerLinkedComponent implements OnInit {
     if (id) {
       this.selectedCompanyId = id;
       let users = this.usersStateService.getAllUsers().filter(item => {
-        let company = this.companies.find(itemCompany => itemCompany.id === item.company.id);
+        let company = this.companies.find(itemCompany => item.clientCompanies.find(clientCompany => clientCompany === itemCompany.id));
         let isArchived = item.deletedAt || !company;
-        return !isArchived && item.company.id === id
+        return !isArchived && item.clientCompanies.find(clientCompany => clientCompany === id)
       });
       users.forEach(item => {
         this.usersList.push(new PasswordDeviceUser(item.id, `${item.firstName} ${item.lastName}`, 'USER'));

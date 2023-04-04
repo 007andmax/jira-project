@@ -158,7 +158,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     let users = data;
     this.countUsers = users.filter((user) => {
       var isArchived = user.deletedAt || this.company.deletedAt;
-      return !isArchived && !this.showArchivedCompanies && user.company.id === this.company.id || this.showArchivedCompanies && isArchived && user.company.id === this.company.id;
+      return !isArchived && !this.showArchivedCompanies && user.clientCompanies.find(clientCompany => clientCompany === this.company.id) || this.showArchivedCompanies && isArchived && user.clientCompanies.find(clientCompany => clientCompany === this.company.id);
     }).length;
   }
 

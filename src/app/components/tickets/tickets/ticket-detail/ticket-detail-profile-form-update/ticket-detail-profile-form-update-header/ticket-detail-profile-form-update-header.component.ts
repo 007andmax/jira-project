@@ -55,7 +55,7 @@ export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
   getUsersForUpdate(type) {
     let userList = this.usersStateService.getAllUsers();
     let techusers = userList.filter((item) => item.accountType === "TECH" && !item.deletedAt);
-    let clientUsers = userList.filter((item) => item.accountType === "CLIENT" && !item.deletedAt && item.company.id === this.ticketProfile.company.id);
+    let clientUsers = userList.filter((item) => item.accountType === "CLIENT" && !item.deletedAt && item.clientCompanies.find(clientCompany => clientCompany === this.ticketProfile.company.id));
     if (type == "PUBLIC") return [...techusers, ...clientUsers].sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
       1 : ((`${b.firstName} ${b.lastName}`.toLowerCase() > `${a.firstName} ${a.lastName}`.toLowerCase()) ? -1 : 0));
     if (type == "PRIVATE") return [...techusers].sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?

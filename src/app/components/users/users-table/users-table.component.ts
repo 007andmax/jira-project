@@ -149,7 +149,7 @@ export class UsersTableComponent implements OnInit, OnDestroy {
       modalRef.componentInstance.message = `You cannot archive primary contact user`;
       return;
     }
-    if (this.usersTableService.getUsersCount(this.usersStateService.getAllUsers(), this.user.company.id, this.showArchivedUsers) === 1) {
+    if (this.usersTableService.getUsersCount(this.usersStateService.getAllUsers(), this.user.clientCompanies, this.showArchivedUsers) === 1) {
       const modalRef = this.modalService.open(AlertComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
       modalRef.componentInstance.message = `You cannot archive all users. At least one must remain.`;
       return;
