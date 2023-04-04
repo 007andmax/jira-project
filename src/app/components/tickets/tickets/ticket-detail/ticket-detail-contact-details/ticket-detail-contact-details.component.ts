@@ -121,7 +121,7 @@ export class TicketDetailContactDetailsComponent implements OnInit, OnDestroy {
     return (this.ticketProfile.createdUser) ? this.usersStateService.getAllUsers().find(user => user.id === this.ticketProfile.createdUser.id) : null;
   }
   getCompanyUser() {
-    return this.companiesStateService.getCompanies().find(item => this.usersStateService.getAllUsers().find(user => user.id === this.ticketProfile.createdUser.id).clientCompanies.find(clientCompany => clientCompany === item.id));
+    return this.companiesStateService.getCompanies().find(item => this.usersStateService.getAllUsers().find(user => user.id === this.ticketProfile.createdUser.id).clientCompanies.some(clientCompany => clientCompany === item.id));
   }
   onShowMap() {
     this.mapModalStateService.onSohwMap({
