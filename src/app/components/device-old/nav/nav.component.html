@@ -12,8 +12,6 @@
                 [src]="imgUrl"
                 alt="user"
             >
-
-
         </span>
         <div class="user-log-info">
             <h6>{{currentUser}}</h6>
@@ -22,38 +20,34 @@
         <span class="user-status online">online</span>
     </div>
 </div>
-
-
 <nav>
     <ul class="list-unstyled">
         <li
             [routerLinkActive]="['active']"
             [routerLinkActiveOptions]="{ exact: true }"
         >
-            <a routerLink="/ng2/device/dashboard/{{type}}/{{_id}}">Dashboard</a>
+            <a (click)="goToDashboard()">Dashboard</a>
         </li>
         <li
             [routerLinkActive]="['active']"
             *ngIf="deviceType !== 'printer'"
         >
-            <a routerLink="/ng2/device/hardware/{{type}}/{{_id}}">Hardware</a>
+            <a>Hardware</a>
         </li>
         <li
             [routerLinkActive]="['active']"
             *ngIf="deviceType !== 'printer'"
         >
-            <a routerLink="/ng2/device/software/{{type}}/{{_id}}">Software list</a>
+            <a>Software list</a>
         </li>
         <!-- <li [routerLinkActive]="['active']"><a routerLink="/device/startup-programes">Startup Programmes</a></li>
     <li [routerLinkActive]="['active']"><a routerLink="/device/services">Services</a></li>
     <li [routerLinkActive]="['active']"><a routerLink="/device/antivirus">Antivirus</a></li> - -->
         <li [routerLinkActive]="['active']">
-            <a routerLink="/ng2/device/terminal/{{type}}/{{_id}}">Terminal</a>
+            <a>Terminal</a>
         </li>
         <!-- <li [routerLinkActive]="['active']"><a routerLink="/device/windows-update">Window Update</a></li>
     <li [routerLinkActive]="['active']"><a routerLink="/device/file-explorer">File Explorer</a></li>
     <li [routerLinkActive]="['active']"><a routerLink="/device/password">Passwords</a></li> -->
-
-
     </ul>
 </nav>

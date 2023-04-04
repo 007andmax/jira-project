@@ -3,6 +3,8 @@ import { CommonHttpServices } from './../_services/common_http.service';
 import { CommonServices } from './../_services/common.service';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'nav-old',
@@ -20,6 +22,8 @@ export class NavOldComponent implements OnInit {
   type: string = '';
   constructor(private commonHttpServices: CommonHttpServices,
     private toastr: ToastrService,
+    public router: Router,
+    public companiesStateService: CompaniesStateService,
     public commonServices: CommonServices) { }
 
   ngOnInit() {
@@ -64,5 +68,8 @@ export class NavOldComponent implements OnInit {
         }
       );
   }
-
+  goToDashboard() {
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device-old/dashboard/${this.type}/${this._id}`]);
+  }
 }
