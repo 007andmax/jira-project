@@ -1,0 +1,36 @@
+<div class="dashboard-col col-50 services">
+    <h2>Services</h2>
+    <ul class="list-unstyled">
+        <li [ngClass]="{'updated': virusInfo?.isUpToDate == true, 'alert': virusInfo?.isUpToDate == false}">
+            <figure>
+                <img
+                    src="/html/assets/img/device/virus-protection.svg"
+                    alt="virus-protection"
+                >
+            </figure>
+            <h4>Virus Protection</h4>
+            <span *ngIf="virusInfo?.isUpToDate == true">Up-to-date</span>
+            <span *ngIf="virusInfo?.isUpToDate == false">Out-of-date</span>
+        </li>
+        <li class="alert">
+            <figure>
+                <img
+                    src="/html/assets/img/device/security-update.svg"
+                    alt="Security Update"
+                >
+            </figure>
+            <h4>Security Update</h4>
+            <span>7 missing Updates</span>
+        </li>
+        <li class="updated">
+            <figure>
+                <img
+                    src="/html/assets/img/device/drivers-missing.svg"
+                    alt="drivers-missing"
+                >
+            </figure>
+            <h4>Drivers Missing</h4>
+            <span>Up-to-date</span>
+        </li>
+    </ul>
+</div>
