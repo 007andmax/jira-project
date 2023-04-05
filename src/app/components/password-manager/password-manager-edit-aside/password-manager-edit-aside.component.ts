@@ -15,7 +15,7 @@ import { REMOVE_RECORD } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { PasswordRecordCategories } from '../class/password-record-categories';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
@@ -37,6 +37,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   showSecretCode: boolean = false;
   isEditSecretKey: boolean = false;
   isGetSecretCode: boolean = false;
+  subSecretCode: Subscription;
   showPassword: boolean = false;
   tab: string = 'PASSWORD_DETAIL'
   categories: Array<PasswordRecordCategories> = [];
@@ -85,6 +86,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     })
     this.sub.add(getOnCompanies);
     let onEditForm = this.passwordManagerService.onEditForm.subscribe((res) => {
+      if (this.subSecretCode) this.subSecretCode.unsubscribe();
       this.editItem = new PasswordRecord(JSON.parse(JSON.stringify(res)));
       this.selectedUserAndDevices = [];
       this.usersList = [];
@@ -167,7 +169,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
   getCodeRecords() {
     this.timeCount = 0;
-    this.passwordManagerService.getCodeRecords(this.editItem.id).subscribe((data: any) => {
+    this.subSecretCode = this.passwordManagerService.getCodeRecords(this.editItem.id).subscribe((data: any) => {
       this.editItem.setOtp(data.otp);
       this.editItem.setExpirationDate(data.expirationDate);
       this.isGetSecretCode = true;
