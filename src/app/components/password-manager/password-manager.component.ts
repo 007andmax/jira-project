@@ -140,9 +140,7 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
   public onFilter(field) {
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.filter.setSort(field);
-    this.filter.page = 0;
-    this.passwordManagerListService.setBlockList(false);
-    this.list_records = [];
+    this.setDefaultScoll();
     this.onScroll();
   }
   public addRecord() {

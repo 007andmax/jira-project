@@ -132,11 +132,11 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       if (this.categoriesSelect) this.categoriesSelect.reset(this.categories);
     })
     this.sub.add(onGetCategories);
-    let onChangeRealTime = this.passwordManagerStateService.onChangeRealTime.subscribe(newChange => {
-      if (newChange.action === 'PASSWORD_RECORD_UPDATED' && this.editItem && newChange.data.id === this.editItem.id) this.editItem.updateHistories(newChange.data.histories);
-      if (!this.cd['destroyed']) this.cd.detectChanges();
-    })
-    this.sub.add(onChangeRealTime);
+    /* let onChangeRealTime = this.passwordManagerStateService.onChangeRealTime.subscribe(newChange => {
+       if (newChange.action === 'PASSWORD_RECORD_UPDATED' && this.editItem && newChange.data.id === this.editItem.id) this.editItem.updateHistories(newChange.data.histories);
+       if (!this.cd['destroyed']) this.cd.detectChanges();
+     })
+     this.sub.add(onChangeRealTime);*/
   }
   toggleSecretCode() {
     this.showSecretCode = !this.showSecretCode;
@@ -183,6 +183,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
           this.cd.detectChanges();
         }, 1000);
       }
+      console.log("this.editItem", this.editItem);
     })
   }
   getCodeProgress() {
