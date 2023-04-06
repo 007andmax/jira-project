@@ -1,4 +1,4 @@
-
+@import "./src/assets/styles/variable";
 .user-name {
 min-width: 50px;
 overflow: hidden;
@@ -11,4 +11,16 @@ white-space: nowrap;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
- 
+.modal-quote-user-item {
+    font-size: 14px;
+    transition: all 0.3s;
+    &:hover {
+        color: #ffffff;
+    }
+}
+.mat-autocomplete-panel {
+    padding: 0px;
+    &::-webkit-scrollbar-thumb {
+        background-color: $primary-1;
+    }
+}

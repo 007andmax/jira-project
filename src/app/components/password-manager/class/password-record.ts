@@ -30,9 +30,13 @@ export class PasswordRecord {
     description: string;
     password: string;
     selected: boolean = false;
+    isHistory: boolean = false;
     resetAuthenticationKey: boolean = false;
     constructor(data) {
         this.onUpdate(data);
+    }
+    public setIsHistory(data) {
+        this.isHistory = data;
     }
     public setOtp(data) {
         this.otp = data;

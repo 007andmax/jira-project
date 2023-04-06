@@ -10,7 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatAutocompleteModule, MatIconModule } from '@angular/material';
+import { MatAutocompleteModule, MatIconModule, MatRow } from '@angular/material';
 import { AppComponent } from './app.component';
 import { MainComponent } from './components/main/main.component';
 import { ModalQuoteComponent } from './services/modal/modal-quote/modal-quote.component';
@@ -109,6 +109,7 @@ import { ReportSendEmailModule } from './components/reports/report-additional-ac
 import { GoogleAuthenticatorModule } from './components/shared/google-authenticator/google-authenticator.module';
 import { SupportPageEditCategoryModule } from './components/super-admin/shared/support-page-edit-category/support-page-edit-category.module';
 import { TestPermissionService } from './services/test-permission/test-permission.service';
+import { ModalQuoteModule } from './services/modal/modal-quote/modal-quote.module';
 declare var $: any;
 
 /**
@@ -119,7 +120,6 @@ declare var $: any;
   declarations: [
     AppComponent,
     MainComponent,
-    ModalQuoteComponent,
     AlertComponent,
     ConfirmComponent,
     DownloadAgentComponent,
@@ -187,10 +187,10 @@ declare var $: any;
     SupportPageAddSubCategoryModule,
     ReportSendEmailModule,
     GoogleAuthenticatorModule,
-    SupportPageEditCategoryModule
+    SupportPageEditCategoryModule,
+    ModalQuoteModule
   ],
   entryComponents: [
-    ModalQuoteComponent,
     ConfirmComponent,
     DownloadAgentComponent,
     ImageCropperComponent,

@@ -18,29 +18,32 @@ export class TicketDetailPasswordsDetailsComponent implements OnInit {
   public showPreloader: boolean = true;
   public infiniteScrollDisabled = true;
   public page_number: number = 0;
+  showPendingPreloader: boolean = false;
   public filter: FilterPasswordManager = new FilterPasswordManager();
   public list_records: Array<PasswordRecord> = [];
   isSearch: boolean = false;
+  container;
   constructor(public passwordManagerService: PasswordManagerService,
     public passwordManagerListService: PasswordManagerListService,
     private elRef: ElementRef,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
-    this.getRecords();
+    this.container = this.elRef.nativeElement.querySelector(".ticket-detail-passwords__body");
+    this.elRef.nativeElement.querySelector(".ticket-detail-passwords__body").scrollTo(0, 0);
+    this.filter.setSort('DESCRIPTION');
+    this.filter.setCompany({ id: this.ticketProfile.company.id });
+    this.onScroll();
   }
-  public getRecords() {
-    this.passwordManagerService.getCompanyRecords(this.ticketProfile.company.id).subscribe((res: any) => {
-      this.recordsData = res.map(item => new PasswordRecord(item));
-      this.recordsData.sort((a, b) => (a.companyName.toLowerCase() > b.companyName.toLowerCase()) ?
-        1 : ((b.companyName.toLowerCase() > a.companyName.toLowerCase()) ? -1 : 0));
-
-      this.list_records = res.map(item => new PasswordRecord(item));
-      this.list_records.sort((a, b) => (a.companyName.toLowerCase() > b.companyName.toLowerCase()) ?
-        1 : ((b.companyName.toLowerCase() > a.companyName.toLowerCase()) ? -1 : 0));
-      this.showPreloader = false;
-      this.cd.detectChanges();
-    });
+  public onScroll() {
+    this.infiniteScrollDisabled = true;
+    this.filterList();
+  }
+  public setDefaultScoll() {
+    this.showPreloader = true;
+    this.filter.page = 0;
+    this.passwordManagerListService.setBlockList(false);
+    this.list_records = [];
   }
   public trackByIndex(index, item) {
     return index;
@@ -49,18 +52,21 @@ export class TicketDetailPasswordsDetailsComponent implements OnInit {
     return item.id;
   }
   clearSearch() {
-    this.list_records = JSON.parse(JSON.stringify(this.recordsData)).map(item => new PasswordRecord(item));
+    this.filter.setSearch(null);
+    this.setDefaultScoll();
+    this.onScroll();
     this.elRef.nativeElement.querySelector("#search-passwords").value = '';
     this.isSearch = false;
   }
   search(event) {
+    this.filter.setSearch(event.target.value);
     if (event.target.value.length > 0) {
-      this.list_records = this.recordsData.filter(item => item.description.toLowerCase().includes(event.target.value.toLowerCase()));
       this.isSearch = true;
     } else {
-      this.list_records = JSON.parse(JSON.stringify(this.recordsData)).map(item => new PasswordRecord(item));
       this.isSearch = false;
     }
+    this.setDefaultScoll();
+    this.onScroll();
   }
   close() {
     this.onClose.emit(null);
@@ -70,16 +76,15 @@ export class TicketDetailPasswordsDetailsComponent implements OnInit {
       this.infiniteScrollDisabled = false;
       return;
     }
-    this.page_number += 1;
-    let listFilter = this.filter.getFilterList(this.recordsData);
-    let start = (this.page_number - 1) * 30;
-    let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
-    let list_records = [];
-    for (let i = start; i < end; i++) {
-      list_records.push(listFilter[i]);
-    }
-    this.list_records = [...this.list_records, ...list_records.map(item => new PasswordRecord(JSON.parse(JSON.stringify(item))))];
-    this.infiniteScrollDisabled = false;
-    if ((this.page_number * 30) > listFilter.length) this.passwordManagerListService.setBlockList(true);
+    if (this.filter.page > 0) this.showPendingPreloader = true;
+    this.passwordManagerService.getRecords(this.filter.getDataForRequest()).subscribe((res: any) => {
+      this.list_records = [...this.list_records, ...res.map(item => new PasswordRecord(item))];
+      this.infiniteScrollDisabled = false;
+      this.showPendingPreloader = false;
+      if (res.length < this.filter.limit) this.passwordManagerListService.setBlockList(true);
+      this.filter.page += 1;
+      this.showPreloader = false;
+      this.cd.detectChanges();
+    });
   }
 }

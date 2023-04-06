@@ -18,12 +18,6 @@
 }
 tr {
   cursor: pointer;
-  &:hover {
-    td {
-      background: #f4fbff;
-      border-color: $primary-1;
-    }
-  }
 }
 .users-table__name--profession {
   color: $gray-600--old;

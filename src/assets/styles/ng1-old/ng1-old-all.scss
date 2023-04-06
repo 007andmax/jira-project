@@ -360,6 +360,10 @@
     padding-top: 0;
     background-color: $background;
   }
+
+  &__ticket-detail-page {
+    height: 100vh;
+  }
 }
 .left-panel-closed .content-container {
   margin-left: 76px;
