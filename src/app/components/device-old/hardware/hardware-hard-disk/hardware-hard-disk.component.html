@@ -1,0 +1,37 @@
+<div class="hardware-col">
+    <div class="col-title">
+        <span class="hardware-ico">
+            <img
+                src="/html/assets/img/device/harddisk.svg"
+                alt="Hard disk"
+            >
+        </span>
+        <h3>Hard disk</h3>
+    </div>
+    <ul class="list-unstyled">
+        <li>
+            <span>Model:</span>
+            {{logicalDisks.device_id}}
+        </li>
+        <li>
+            <span>File Format(s):</span>
+            NTFS ({{logicalDisks.device_id}})
+        </li>
+        <li *ngIf="logicalDisks.size != undefined">
+            <span>Size:</span>
+            {{logicalDisks.size/1024/1024/1024}} GB
+        </li>
+        <li *ngIf="logicalDisks.size == undefined">
+            <span>Size:</span>
+            N/A
+        </li>
+        <li *ngIf="logicalDisks.free_space">
+            <span>Free Space:</span>
+            {{logicalDisks.free_space/1024/1024/1024}} GB
+        </li>
+        <li *ngIf="!logicalDisks.free_space">
+            <span>Free Space:</span>
+            N/A
+        </li>
+    </ul>
+</div>

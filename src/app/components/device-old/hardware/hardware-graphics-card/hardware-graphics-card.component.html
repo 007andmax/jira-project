@@ -1,0 +1,33 @@
+<div class="hardware-col">
+    <div class="col-title">
+        <span class="hardware-ico">
+            <img
+                src="/html/assets/img/device/graphic-card.svg"
+                alt="Graphics Card"
+            >
+        </span>
+        <h3>Graphics Card</h3>
+    </div>
+    <ul class="list-unstyled">
+        <li>
+            <span>Model:</span>
+            {{graphics.hardwareDeviceName || 'N/A'}}
+        </li>
+        <li>
+            <span>Video Processor:</span>
+            N/A
+        </li>
+        <li *ngIf="graphics.memory != undefined">
+            <span>Memory Size:</span>
+            {{graphics.memory/1024/1024}} MB VRAM
+        </li>
+        <li *ngIf="graphics.memory == undefined">
+            <span>Memory Size:</span>
+            N/A
+        </li>
+        <li>
+            <span>Driver:</span>
+            version {{graphics.driverVersion}}
+        </li>
+    </ul>
+</div>

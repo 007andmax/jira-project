@@ -1,0 +1,42 @@
+<div class="hardware-col">
+    <div class="col-title">
+        <span class="hardware-ico">
+            <img
+                src="/html/assets/img/device/computer.svg"
+                alt="computer"
+            >
+        </span>
+        <h3>Computer</h3>
+    </div>
+    <ul class="list-unstyled">
+        <li>
+            <span>Manufacturer:</span>
+            {{system.manufacturer || 'N/A'}}
+        </li>
+        <li>
+            <span>Computer Model:</span>
+            {{system.model || 'N/A'}}
+        </li>
+        <li>
+            <span>Computer Name:</span>
+            <input
+                type="text"
+                class="form-control label-field"
+                [(ngModel)]="deviceName"
+                (blur)="saveLabel();"
+            >
+        </li>
+        <li *ngIf="system.architecture != undefined && system.architecture != ''">
+            <span>System Type:</span>
+            ({{system.architecture}}) system
+        </li>
+        <li *ngIf="system.architecture == undefined || system.architecture == ''">
+            <span>System Type:</span>
+            N/A
+        </li>
+        <li>
+            <span>Warranty:</span>
+            {{system.warranty || 'N/A'}}
+        </li>
+    </ul>
+</div>

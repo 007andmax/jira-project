@@ -1,0 +1,27 @@
+<div class="hardware-col">
+    <div class="col-title">
+        <span class="hardware-ico">
+            <img
+                src="/html/assets/img/device/memory.svg"
+                alt="memory"
+            >
+        </span>
+        <h3>Memory</h3>
+    </div>
+    <ul class="list-unstyled">
+        <li *ngIf="memory.capacity != undefined">
+            <span>Size:</span>
+            {{memory.capacity/1024/1024}} MB RAM
+            <!-- <div>DIMM 1: 4,096 MB RAM (DDR3-1066 PC3-85— 533 MHz, DIMM)</div>
+                                <div>DIMM 1: 4,096 MB RAM (DDR3-1066 PC3-85— 533 MHz, DIMM)</div>
+                                <div>DIMM 1: 4,096 MB RAM (DDR3-1066 PC3-85— 533 MHz, DIMM)</div>
+                                <div>DIMM 1: 4,096 MB RAM (DDR3-1066 PC3-85— 533 MHz, DIMM)</div>
+                                <div>DIMM 1: 4,096 MB RAM (DDR3-1066 PC3-85— 533 MHz, DIMM)</div>
+                                <div>DIMM 1: 4,096 MB RAM (DDR3-1066 PC3-85— 533 MHz, DIMM)</div> -->
+        </li>
+        <li *ngIf="memory.capacity == undefined">
+            <span>Size:</span>
+            N/A
+        </li>
+    </ul>
+</div>

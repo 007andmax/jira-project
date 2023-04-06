@@ -52,7 +52,10 @@ export class NavOldComponent implements OnInit {
         }
       );
   }
-
+  goToSoftware() {
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device-old/software/${this.type}/${this._id}`]);
+  }
   getCurrentCompany() {
 
     this.commonHttpServices.getCurrentCompany()
@@ -67,6 +70,10 @@ export class NavOldComponent implements OnInit {
           this.toastr.error('Something went wrong please try again.');
         }
       );
+  }
+  goToHardware() {
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device-old/hardware/${this.type}/${this._id}`]);
   }
   goToDashboard() {
     this.router.navigate(

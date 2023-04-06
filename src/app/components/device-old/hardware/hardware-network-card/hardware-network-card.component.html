@@ -1,0 +1,49 @@
+<div class="hardware-col">
+    <div class="col-title">
+        <span class="hardware-ico">
+            <img
+                src="/html/assets/img/device/networkcard.svg"
+                alt="networkcard"
+            >
+        </span>
+        <h3>Network Card</h3>
+    </div>
+    <ul class="list-unstyled">
+        <li>
+            <span>Model(s):</span>
+            {{networkAdapters.description || 'N/A'}}
+        </li>
+        <li>
+            <span>IP:</span>
+            {{networkAdapters.ip_address || 'N/A'}}
+        </li>
+        <li>
+            <span>Subnet Mask:</span>
+            {{networkAdapters.subnet || 'N/A'}}
+        </li>
+        <li>
+            <span>DNS 1:</span>
+            {{networkAdapters.dns || 'N/A'}}
+        </li>
+        <li *ngIf="networkAdapters.speed != undefined">
+            <span>Link Speed:</span>
+            {{networkAdapters.speed/1000000}} (MegaBit)
+        </li>
+        <li *ngIf="networkAdapters.speed == undefined">
+            <span>Link Speed:</span>
+            N/A
+        </li>
+        <li>
+            <span>External IP:</span>
+            {{externalIp || 'N/A'}}
+        </li>
+        <li>
+            <span>MAC:</span>
+            {{formatMacAddress(networkAdapters.mac) || 'N/A'}}
+        </li>
+        <li>
+            <span>DHCP:</span>
+            {{networkAdapters.dhcp_server || 'N/A'}}
+        </li>
+    </ul>
+</div>
