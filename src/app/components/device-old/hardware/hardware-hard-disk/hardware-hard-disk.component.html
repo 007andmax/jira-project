@@ -1,37 +1,42 @@
 <div class="hardware-col">
-    <div class="col-title">
+    <div class="hardware-col-title">
         <span class="hardware-ico">
             <img
                 src="/html/assets/img/device/harddisk.svg"
                 alt="Hard disk"
             >
         </span>
-        <h3>Hard disk</h3>
+        <div class="hardware-col__title">Hard disk</div>
     </div>
-    <ul class="list-unstyled">
-        <li>
-            <span>Model:</span>
-            {{logicalDisks.device_id}}
+    <ul class="hardware-col__list">
+        <li class="hardware-col__list-item">
+            <span class="hardware-col__list-title">Model:</span>
+            <div class="hardware-col__list-text">{{logicalDisks.device_id}}</div>
         </li>
-        <li>
-            <span>File Format(s):</span>
-            NTFS ({{logicalDisks.device_id}})
+        <li class="hardware-col__list-item">
+            <span class="hardware-col__list-title">File Format(s):</span>
+            <div class="hardware-col__list-text">NTFS ({{logicalDisks.device_id}})</div>
         </li>
-        <li *ngIf="logicalDisks.size != undefined">
-            <span>Size:</span>
-            {{logicalDisks.size/1024/1024/1024}} GB
+        <li class="hardware-col__list-item"
+          *ngIf="logicalDisks.size != undefined"
+        >
+            <span class="hardware-col__list-title">Size:</span>
+            <div class="hardware-col__list-text">{{logicalDisks.size/1024/1024/1024}} GB</div>
         </li>
-        <li *ngIf="logicalDisks.size == undefined">
-            <span>Size:</span>
-            N/A
+        <li class="hardware-col__list-item"
+          *ngIf="logicalDisks.size == undefined">
+            <span class="hardware-col__list-title">Size:</span>
+            <div class="hardware-col__list-text"> N/A</div>
         </li>
-        <li *ngIf="logicalDisks.free_space">
-            <span>Free Space:</span>
-            {{logicalDisks.free_space/1024/1024/1024}} GB
+        <li class="hardware-col__list-item"
+          *ngIf="logicalDisks.free_space">
+            <span class="hardware-col__list-title">Free Space:</span>
+            <div class="hardware-col__list-text">{{logicalDisks.free_space/1024/1024/1024}} GB</div>
         </li>
-        <li *ngIf="!logicalDisks.free_space">
-            <span>Free Space:</span>
-            N/A
+        <li class="hardware-col__list-item"
+          *ngIf="!logicalDisks.free_space">
+            <span class="hardware-col__list-title">Free Space:</span>
+            <div class="hardware-col__list-text">{{logicalDisks.free_space/1024/1024/1024}}N/A</div>
         </li>
     </ul>
 </div>

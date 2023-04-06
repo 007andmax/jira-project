@@ -1,17 +1,18 @@
 <div class="hardware-col">
-    <div class="col-title">
+    <div class="hardware-col-title">
         <span class="hardware-ico">
             <img
                 src="/html/assets/img/device/memory.svg"
                 alt="memory"
             >
         </span>
-        <h3>Memory</h3>
+        <div class="hardware-col__title">Memory</div>
     </div>
-    <ul class="list-unstyled">
-        <li *ngIf="memory.capacity != undefined">
-            <span>Size:</span>
-            {{memory.capacity/1024/1024}} MB RAM
+    <ul class="hardware-col__list">
+        <li class="hardware-col__list-item"
+          *ngIf="memory.capacity != undefined">
+            <span class="hardware-col__list-title">Size:</span>
+            <div class="hardware-col__list-text">{{memory.capacity/1024/1024}} MB RAM</div>
             <!-- <div>DIMM 1: 4,096 MB RAM (DDR3-1066 PC3-85— 533 MHz, DIMM)</div>
                                 <div>DIMM 1: 4,096 MB RAM (DDR3-1066 PC3-85— 533 MHz, DIMM)</div>
                                 <div>DIMM 1: 4,096 MB RAM (DDR3-1066 PC3-85— 533 MHz, DIMM)</div>
@@ -19,9 +20,10 @@
                                 <div>DIMM 1: 4,096 MB RAM (DDR3-1066 PC3-85— 533 MHz, DIMM)</div>
                                 <div>DIMM 1: 4,096 MB RAM (DDR3-1066 PC3-85— 533 MHz, DIMM)</div> -->
         </li>
-        <li *ngIf="memory.capacity == undefined">
-            <span>Size:</span>
-            N/A
+        <li class="hardware-col__list-item"
+          *ngIf="memory.capacity == undefined">
+            <span class="hardware-col__list-title">Size:</span>
+            <div class="hardware-col__list-text">{{memory.capacity/1024/1024}}   N/A</div>
         </li>
     </ul>
 </div>

@@ -1,42 +1,46 @@
 <div class="hardware-col">
-    <div class="col-title">
+    <div class="hardware-col-title">
         <span class="hardware-ico">
             <img
                 src="/html/assets/img/device/computer.svg"
                 alt="computer"
             >
         </span>
-        <h3>Computer</h3>
+        <div class="hardware-col__title">Computer</div>
     </div>
-    <ul class="list-unstyled">
-        <li>
-            <span>Manufacturer:</span>
-            {{system.manufacturer || 'N/A'}}
+    <ul class="hardware-col__list">
+        <li class="hardware-col__list-item">
+            <span class="hardware-col__list-title">Manufacturer:</span>
+            <div class="hardware-col__list-text">{{system.manufacturer || 'N/A'}}</div>
         </li>
-        <li>
-            <span>Computer Model:</span>
-            {{system.model || 'N/A'}}
+        <li class="hardware-col__list-item">
+            <span class="hardware-col__list-title">Computer Model:</span>
+            <div class="hardware-col__list-text">{{system.model || 'N/A'}}</div>
         </li>
-        <li>
-            <span>Computer Name:</span>
+        <li class="hardware-col__list-item">
+            <span class="hardware-col__list-title">Computer Name:</span>
             <input
                 type="text"
-                class="form-control label-field"
+                class="hardware-col__input --editable"
                 [(ngModel)]="deviceName"
                 (blur)="saveLabel();"
             >
         </li>
-        <li *ngIf="system.architecture != undefined && system.architecture != ''">
-            <span>System Type:</span>
-            ({{system.architecture}}) system
+        <li class="hardware-col__list-item"
+          *ngIf="system.architecture != undefined && system.architecture != ''">
+            <span class="hardware-col__list-title">System Type:</span>
+            <div class="hardware-col__list-text">
+              ({{system.architecture}}) system
+            </div>
         </li>
-        <li *ngIf="system.architecture == undefined || system.architecture == ''">
-            <span>System Type:</span>
-            N/A
+        <li class="hardware-col__list-item"
+          *ngIf="system.architecture == undefined || system.architecture == ''">
+            <span class="hardware-col__list-title">System Type:</span>
+            <div class="hardware-col__list-text"> N/A</div>
         </li>
-        <li>
-            <span>Warranty:</span>
-            {{system.warranty || 'N/A'}}
+        <li class="hardware-col__list-item">
+            <span class="hardware-col__list-title">Warranty:</span>
+            <div class="hardware-col__list-text">{{system.warranty || 'N/A'}}</div>
         </li>
     </ul>
 </div>

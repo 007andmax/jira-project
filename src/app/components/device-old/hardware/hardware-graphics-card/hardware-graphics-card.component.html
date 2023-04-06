@@ -1,33 +1,35 @@
 <div class="hardware-col">
-    <div class="col-title">
+    <div class="hardware-col-title">
         <span class="hardware-ico">
             <img
                 src="/html/assets/img/device/graphic-card.svg"
                 alt="Graphics Card"
             >
         </span>
-        <h3>Graphics Card</h3>
+        <div class="hardware-col__title">Graphics Card</div>
     </div>
-    <ul class="list-unstyled">
-        <li>
-            <span>Model:</span>
-            {{graphics.hardwareDeviceName || 'N/A'}}
+    <ul class="hardware-col__list">
+        <li class="hardware-col__list-item">
+            <span class="hardware-col__list-title">Model:</span>
+            <div class="hardware-col__list-text">{{graphics.hardwareDeviceName || 'N/A'}}</div>
         </li>
-        <li>
-            <span>Video Processor:</span>
-            N/A
+        <li class="hardware-col__list-item">
+            <span class="hardware-col__list-title">Video Processor:</span>
+            <div class="hardware-col__list-text">N/A</div>
         </li>
-        <li *ngIf="graphics.memory != undefined">
-            <span>Memory Size:</span>
-            {{graphics.memory/1024/1024}} MB VRAM
+        <li class="hardware-col__list-item"
+          *ngIf="graphics.memory != undefined">
+            <span class="hardware-col__list-title">Memory Size:</span>
+            <div class="hardware-col__list-text">{{graphics.memory/1024/1024}} MB VRAM</div>
         </li>
-        <li *ngIf="graphics.memory == undefined">
-            <span>Memory Size:</span>
-            N/A
+        <li class="hardware-col__list-item"
+             *ngIf="graphics.memory == undefined">
+            <span class="hardware-col__list-title">Memory Size:</span>
+            <div class="hardware-col__list-text">N/A</div>
         </li>
-        <li>
-            <span>Driver:</span>
-            version {{graphics.driverVersion}}
+        <li class="hardware-col__list-item">
+            <span class="hardware-col__list-title">Driver:</span>
+            <div class="hardware-col__list-text">version {{graphics.driverVersion}}</div>
         </li>
     </ul>
 </div>
