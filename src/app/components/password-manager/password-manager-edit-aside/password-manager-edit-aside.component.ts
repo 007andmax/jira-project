@@ -161,7 +161,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.tab = data;
     if (data == 'PASSWORD_HISTORY') {
       if (!this.editItem.isHistory) this.passwordManagerService.getHistory(this.editItem.id).subscribe((res: any) => {
-        console.log(res);
         this.editItem.updateHistories(res.map(item => new PasswordRecordHistory(item)));
         this.preloaderHistory = false;
       })
@@ -185,7 +184,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
           this.cd.detectChanges();
         }, 1000);
       }
-      console.log("this.editItem", this.editItem);
     })
   }
   getCodeProgress() {

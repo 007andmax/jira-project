@@ -56,7 +56,6 @@ export class FilterPasswordManager {
         this.selectedUserOrDevice = data.selectedUserOrDevice;
         this.selectedCategory = data.selectedCategory;
         this.page = 0;
-        console.log(data);
     }
     public getFilterList(reqList: Array<PasswordRecord>) {
         let list = reqList.filter((item) => {
@@ -111,108 +110,4 @@ export class FilterPasswordManager {
             }
         })
     }
-    /* public onFilter(field, reqList) {
-         let index = this.filterTop.findIndex(item => item.field === field);
-         if (index > -1) {
-             let sort = this.filterTop[index].filter;
-             if (field === 'account_type') {
-                 this.clearFilter();
-                 if (sort === '' || sort === 'DESC') {
-                     this.filterTop[index].filter = 'ASC';
-                     this.onAccountType(reqList);
-                 } else {
-                     this.filterTop[index].filter = 'DESC';
-                     reqList.reverse();
-                 }
-             }
-             if (field === 'company') {
-                 this.clearFilter();
-                 if (sort === '' || sort === 'DESC') {
-                     this.filterTop[index].filter = 'ASC';
-                     this.onFilterCompany(reqList);
-                 } else {
-                     this.filterTop[index].filter = 'DESC';
-                     reqList.reverse();
-                 }
-             }
-             if (field === 'description') {
-                 this.clearFilter();
-                 if (sort === '' || sort === 'DESC') {
-                     this.filterTop[index].filter = 'ASC';
-                     this.onFilterDescription(reqList);
-                 } else {
-                     this.filterTop[index].filter = 'DESC';
-                     reqList.reverse();
-                 }
-             }
-             if (field === 'user_password') {
-                 this.clearFilter();
-                 if (sort === '' || sort === 'DESC') {
-                     this.filterTop[index].filter = 'ASC';
-                     this.onFilterUserName(reqList);
-                 } else {
-                     this.filterTop[index].filter = 'DESC';
-                     reqList.reverse();
-                 }
-             }
-         }
-     }*/
-    /*  public onSortList(reqList) {
-          let filter = this.filterTop.find(item => item.filter !== '');
-          let sort = filter.filter;
-          if (filter.field === 'account_type') {
-  
-              if (sort === 'ASC') {
-                  this.onAccountType(reqList);
-              } else {
-                  reqList.reverse();
-              }
-          }
-          if (filter.field === 'company') {
-  
-              if (sort === 'ASC') {
-  
-                  this.onFilterCompany(reqList);
-              } else {
-  
-                  reqList.reverse();
-              }
-          }
-          if (filter.field === 'description') {
-  
-              if (sort === 'ASC') {
-  
-                  this.onFilterDescription(reqList);
-              } else {
-  
-                  reqList.reverse();
-              }
-          }
-          if (filter.field === 'user_password') {
-  
-              if (sort === 'ASC') {
-  
-                  this.onFilterUserName(reqList);
-              } else {
-  
-                  reqList.reverse();
-              }
-          }
-      }*/
-    /*  private onFilterUserName(reqList) {
-          reqList.sort((a, b) => (a.companyName.toLowerCase() > b.companyName.toLowerCase()) ?
-              1 : (b.companyName.toLowerCase() > a.companyName.toLowerCase() ? -1 : 0));
-      }
-      private onFilterCompany(reqList) {
-          reqList.sort((a, b) => (a.companyName.toLowerCase() > b.companyName.toLowerCase()) ?
-              1 : (b.companyName.toLowerCase() > a.companyName.toLowerCase() ? -1 : 0));
-      }
-      private onFilterDescription(reqList) {
-          reqList.sort((a, b) => ((a.description ? a.description : '').toLowerCase() > (b.description ? b.description : '').toLowerCase()) ?
-              1 : ((b.description ? b.description : '').toLowerCase() > (a.description ? a.description : '').toLowerCase() ? -1 : 0));
-      }
-      private onAccountType(reqList) {
-          reqList.sort((a, b) => (a.template.title > b.template.title) ?
-              1 : ((b.template.title > a.template.title) ? -1 : 0));
-      }*/
 }
