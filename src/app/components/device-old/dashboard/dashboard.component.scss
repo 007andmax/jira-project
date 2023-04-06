@@ -8,6 +8,13 @@ $graphicMedBold: 'Graphik-Medium';
 $font-body: 'Graphik-Regular';
 $graphicSemibold: 'Graphik-Semibold';
 
+// New Style
+dashboard-disk-drives,
+dashboard-services {
+  max-width: calc(50% - 8px);
+  width: 100%;
+}
+// End New Style
 
 .cmn-wrapper.dashboard {
     width: 100%;
@@ -31,17 +38,13 @@ $graphicSemibold: 'Graphik-Semibold';
 
 .dashboard-list {
     margin: 0 -8px;
-    display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     flex-direction: column;
     .dashboard-row {
-        display: -ms-flexbox;
-        display: -webkit-flex;
         display: flex;
+        justify-content: space-between;
         width: 100%;
         padding: 0 8px;
-        flex-direction: row;
         .dashboard-col {
             display: -ms-flexbox;
             display: -webkit-flex;
@@ -53,7 +56,7 @@ $graphicSemibold: 'Graphik-Semibold';
             background-color: $white-color;
             padding: 20px 24px 24px;
             margin-bottom: 16px;
-            
+
             h2 {
                 margin-bottom: 15px;
             }
@@ -73,7 +76,7 @@ $graphicSemibold: 'Graphik-Semibold';
                     font-family: $graphicMedBold;
                     font-weight: 500;
                 }
-                
+
             }
            &.col-50{
                width: 50%;
@@ -193,7 +196,7 @@ $graphicSemibold: 'Graphik-Semibold';
                                 }
                             }
                         }
-                        
+
                     }
                 }
             }
@@ -204,7 +207,7 @@ $graphicSemibold: 'Graphik-Semibold';
                 font-weight: bold;
                 text-transform: uppercase;
             }
-            
+
             .label-field:hover, .label-field:focus {
                 border: solid 1px #c4cbd5;
                 outline: 0;
@@ -215,13 +218,13 @@ $graphicSemibold: 'Graphik-Semibold';
                 background-color: #ffffff;
                 font-family: 'Graphik-Medium' !important;
             }
-            
+
             .sub-label-field:hover, .sub-label-field:focus {
                 border: solid 1px #c4cbd5;
                 outline: 0;
             }
 
-            
+
             &.disk-drive {
                 h2{
                     margin-bottom: 7px;
@@ -292,9 +295,9 @@ $graphicSemibold: 'Graphik-Semibold';
                                         background-color: #0057a8;
                                     }
                                 }
-                                
+
                             }
-                        } 
+                        }
                         &:nth-child(3){
                             .progress-circle{
                                 .value-bar{
@@ -306,7 +309,7 @@ $graphicSemibold: 'Graphik-Semibold';
                                     }
                                 }
                             }
-                        }  
+                        }
                         &:nth-child(4){
                             .progress-circle{
                                 .value-bar{
@@ -345,7 +348,7 @@ $graphicSemibold: 'Graphik-Semibold';
                         }
                     }
                 }
-                
+
               }
             }
             &.services {
@@ -482,7 +485,7 @@ $graphicSemibold: 'Graphik-Semibold';
                             display: flex;
                             flex-direction: column;
                             margin: 0;
-                           
+
                             li {
                                 display: -ms-flexbox;
                                 display: -webkit-flex;
@@ -531,7 +534,7 @@ $graphicSemibold: 'Graphik-Semibold';
                         }
                     }
                 }
-               
+
             }
             &.notes {
                 width: 100% !important;
@@ -650,7 +653,7 @@ $graphicSemibold: 'Graphik-Semibold';
                             & > .more-link {
                                 font-size: 11px;
                             }
-                            
+
                         }
                     }
                 }
@@ -664,7 +667,7 @@ $graphicSemibold: 'Graphik-Semibold';
             margin: 0 8px 16px 8px;
             width: calc(50% - 16px);
         }
-    }    
+    }
     }
 
    .load-more {

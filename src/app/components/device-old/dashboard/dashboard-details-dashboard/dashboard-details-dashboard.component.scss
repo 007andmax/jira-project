@@ -1,0 +1,108 @@
+@import "./src/assets/styles/variable";
+
+.dashboard-col {
+  padding: 20px 24px 24px;
+  margin-bottom: 16px;
+  background-color: $white;
+  border: solid 1px $gray-200;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+
+  .dashboard-list {
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 0;
+
+    &__item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 33.33%;
+      font-size: 13px;
+      font-weight: 500;
+      color: #4f5f79;
+      padding: 0 18px;
+      margin: 6px 0;
+
+      &::before {
+        width: 8px;
+        height: 8px;
+        background: url('/assets/img/device/bullet.svg') no-repeat center / contain;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+    &__input {
+      border-color: transparent;
+      background-color: $white;
+      padding: 8px 10px;
+      height: auto;
+      font-size: 14px;
+      line-height: 17px;
+      font-weight: 600;
+      color: $gray-600;
+
+      &--main-title {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1.63;
+      }
+
+      &.--editable {
+        border: 1px solid transparent;
+        border-radius: 6px;
+        padding: 7px 8px 8px;
+        outline: none;
+        width: 100%;
+
+        &::placeholder {
+          color: $gray-400;
+          font-weight: 400;
+        }
+
+        &:hover {
+          border-color: $gray-200;
+        }
+
+        &:focus {
+          border-color: transparent;
+        }
+      }
+    }
+    &__title {
+      font-size: 14px;
+      line-height: 17px;
+      font-weight: 400;
+      color: $gray-400;
+      margin-right: 2px;
+      display: inline-block;
+      vertical-align: bottom;
+      min-width: 120px;
+    }
+    &__text {
+      font-size: 14px;
+      line-height: 17px;
+      font-weight: 600;
+      color: $gray-600;
+      padding: 7px 8px 0;
+    }
+  }
+
+  /deep/ .dashboard-datepicker__wrap {
+    input {
+      border-color: transparent;
+      box-shadow: unset;
+      background-color: $white;
+      padding: 8px 10px;
+      font-size: 14px;
+      line-height: 17px;
+      font-weight: 600;
+      color: $gray-600;
+    }
+    .icon__calendar {
+      display: none;
+    }
+  }
+}
