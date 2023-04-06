@@ -2,6 +2,7 @@
 
 .products-accordion {
   position: static;
+  margin-bottom: 8px;
 }
 
 .dropdown-menu {
@@ -19,22 +20,21 @@
     border-radius: 6px;
     box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
     border: solid 1px $gray-400--old;
-    min-height: 350px;
+    min-height: 360px;
     position: absolute;
     display: none;
     padding: 0;
   }
 
   &__header {
-    padding: 20px 24px;
-    display: flex;
+    padding: 16px;
     position: sticky;
     z-index: 99;
     background: $white;
     top: 0;
-    border-bottom: 1px solid $gray-400--old;
-    box-shadow: 0 0 7px 1px $gray-500--old;
+    border-bottom: 1px solid $gray-200;
     justify-content: space-between;
+    margin-bottom: 8px;
 
     @media (max-width: 767px) {
       padding: 14px 16px;
@@ -43,82 +43,64 @@
   }
 
   &__header-title {
-    font-size: 11px;
     font-weight: 600;
-    text-transform: uppercase;
-    color: $primary-2;
+    font-size: 16px;
+    line-height: 19px;
+    color: $gray-900;
   }
 
   &__header-add-product {
-    font-size: 12px;
-    font-weight: 600;
-    color: $primary-1;
-    cursor: pointer;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    color: $gray-500;
   }
 
   &__item-title {
-    padding: 8px 24px !important;
     display: flex !important;
     align-items: center;
     justify-content: space-between;
     font-weight: 500;
   }
 
-  &__expand {
-    width: 16px;
-    height: 16px;
-    cursor: pointer;
-  }
-
   /deep/ .card {
     &.opened-card {
-      padding: 0 24px 16px 24px;
-      background-color: $gray-200--old;
-
-      @media (max-width: 767px) {
-        padding: 0 16px 14px 16px;
-      }
+      padding: 0;
 
       .select-product {
         &__item-title {
           background: transparent;
-          font-size: 13px;
-          color: $gray-800--old;
-          padding-left: 0 !important;
-          padding-right: 0 !important;
+          color: $gray-900;
+          //padding-left: 0 !important; // TODO check this style
+          //padding-right: 0 !important;
 
           @media (max-width: 767px) {
             border-color: transparent;
             font-weight: 600;
           }
         }
-
-        &__expand {
-          background-image: url("/assets/img/icons/collapse.svg");
-        }
       }
 
       .category-product {
-          padding: 11px 16px !important;
-          background: $white;
-          border-radius: 4px;
-          box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
-          margin-bottom: 4px !important;
-          border: 1px solid $white !important;
+          padding: 8px 12px;
+          background: $gray-50;
+          border-radius: 6px;
+          margin-bottom: 4px;
+          border: 1px solid $gray-200;
           display: flex;
           justify-content: space-between;
           flex-direction: column;
           align-items: flex-start;
 
-          @media (max-width: 767px) {
-            padding: 8px 16px !important;
-          }
           &__main-info {
             width: 100%;
             flex-direction: column;
           }
-          .button-add {
+          .qt-button-square {
             display: none;
+            width: 28px;
+            height: 28px;
+            flex-shrink: 0;
           }
           &:hover {
             border: solid 1px $primary-1 !important;
@@ -126,21 +108,8 @@
             display: flex;
             flex-direction: row;
             align-items: center;
-            .total-count {
-              display: none;
-            }
-            .button-add {
-              border-radius: 4px;
-              border: solid 1px $primary-1;
-              background-color: $white;
-              height: 32px;
-              display: flex;
-              align-items: center;
-              padding: 8px 12px;
-              font-size: 12px;
-              color: $primary-1;
-              font-weight: 600;
-              white-space: nowrap;
+            .qt-button-square {
+              display: inline-flex;
             }
           }
 
@@ -149,16 +118,17 @@
           }
 
           .title {
-            margin-right: 30px;
+            font-weight: 400;
             font-size: 13px;
-            font-weight: 500;
-            line-height: 20px;
+            line-height: 16px;
+            color: $gray-700;
             max-height: fit-content !important;
           }
-          .manufacture {
-            font-size: 11px;
-            color: $gray-600--old;
+          .total-count {
+            font-weight: 500;
+            font-size: 13px;
             line-height: 16px;
+            color: $gray-900;
           }
         }
     }
@@ -180,3 +150,30 @@
     display: none;
   }
  }
+
+/deep/ .product-dropdown-new-ng {
+  .item-list .card {
+    margin: 0 16px;
+    border-bottom: 1px solid $gray-200;
+
+    .btn,
+    .btn.collapsed {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 17px;
+      color: $gray-900;
+      padding: 12px;
+      border-radius: 6px;
+
+      &:active {
+        box-shadow: unset;
+      }
+    }
+  }
+}
+
+/deep/ .product-dropdown-new-ng .item-list .card .btn.collapsed {
+  &:hover {
+    background-color: $gray-50;
+  }
+}

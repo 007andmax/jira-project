@@ -6,6 +6,7 @@
   .date-picker-container {
     height: min-content;
     max-height: initial;
+    box-shadow: 0px 4px 24px rgba(16, 24, 40, 0.08), 0px 2px 4px rgba(16, 24, 40, 0.12);
 
     @media (max-width: 767px) {
       top: 50% !important;
@@ -28,4 +29,16 @@
 .btn-icon-date-picker {
     border: none;
     background-color: $white;
+}
+.detail-ticket-txt {
+  position: absolute;
+  right: 35px;
+  width: max-content;
+  display: block;
+  top: 2px;
+}
+.detail-ticket-date-picker {
+  .qt-input-block__input {
+    border-color: #D0D5DD !important;
+  }
 }

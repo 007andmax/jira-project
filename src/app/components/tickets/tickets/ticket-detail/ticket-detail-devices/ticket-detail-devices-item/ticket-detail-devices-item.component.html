@@ -1,0 +1,102 @@
+<div
+    class="ticket-detail-devices__item"
+    ngbDropdown
+    container="body"
+>
+    <div class="qt-df qt-ai-c">
+        <div
+            class="qt-df qt-ai-c qt-jc-c qt-sz-40 qt-circle ticket-detail-devices__item-icon qt-mr-8 device-type-icon"
+            [ngClass]="{'--ofline': !device.online}"
+        >
+            <div
+                [ngClass]="{'icon__computer' : device.iconName === 'workstation' || !device.iconName,
+              'icon__tablet' : device.iconName === 'device',
+            'icon__printer' : device.iconName === 'printer',
+          'icon__server' : device.iconName === 'server'}"
+                class="qt-za-16 qt-sz-16 qt-bg-contain"
+            >
+            </div>
+        </div>
+        <div>
+            <div
+                class="ticket-detail-devices__item-subtitle ellipsis"
+                [textContent]="device.getLabelForEdit()"
+            ></div>
+            <div class="ticket-detail-devices__item-text ellipsis qt-df qt-ai-c">
+                <span
+                    class="qt-mr-4"
+                    *ngIf="device.userName"
+                    [textContent]="device.userName"
+                ></span>
+                <span
+                    [ngClass]="{'logged-time-point':device.userName,
+                'qt-ml-4': device.userName}"
+                    class="logged-time"
+                    *ngIf="device.online && device.timing.idle > 0"
+                >
+                    Idle:
+                    <span *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).hours > 0">
+                        {{returnTimeFormat(device.timing.idle).hours}} hrs
+                    </span>
+                    <span *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).minutes > 0">
+                        {{returnTimeFormat(device.timing.idle).minutes}} min
+                    </span>
+                    <span *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).minutes < 1 || !device.timing.idle">0 min</span>
+                </span>
+                <span
+                    [ngClass]="{'logged-time-point':device.userName,
+                'qt-ml-4': device.userName}"
+                    class="logged-time"
+                    *ngIf="device.timing.idle == 0"
+                >
+                    <div *ngIf="device.online">
+                        Online
+                        <span [textContent]="getTimeStatus(device.timing.online)"></span>
+                    </div>
+                    <div *ngIf="!device.online">
+                        Offline
+                        <span [textContent]="getTimeStatus(device.timing.offline)"></span>
+                    </div>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div
+        class="icon__category-more qt-sz-16 qt-bg-contain action-more"
+        ngbDropdownToggle
+    ></div>
+    <div
+        ngbDropdownMenu
+        class="dropdown-menu-qt"
+    >
+        <div
+            class="qt-df qt-ai-c pointer dropdown-menu-qt-item"
+            (click)="remoteAccess('CSS')"
+        >
+            <i class="icon__remote-access-ticket qt-sz-20 qt-bg-contain qt-mr-12 qt-fs-0 qt-dib"></i>
+            Remote Access
+        </div>
+        <div
+            class="qt-df qt-ai-c pointer dropdown-menu-qt-item"
+            (click)="turnOff('reboot')"
+        >
+            <i class="icon__restart qt-sz-20 qt-bg-contain qt-mr-12 qt-fs-0 qt-dib"></i>
+            Restart
+        </div>
+        <div
+            class="qt-df qt-ai-c pointer dropdown-menu-qt-item"
+            (click)="turnOff('shutdown')"
+        >
+            <i class="icon__shutdown qt-sz-20 qt-bg-contain qt-mr-12 qt-fs-0 qt-dib"></i>
+            Shutdown
+        </div>
+        <hr>
+        <div
+            class="qt-df qt-ai-c pointer dropdown-menu-qt-item qt-color-red-600"
+            (click)="removeDevice()"
+        >
+            <i class="icon__remove qt-sz-20 qt-bg-contain qt-mr-12 qt-fs-0 qt-dib"></i>
+            Remove
+        </div>
+    </div>
+</div>

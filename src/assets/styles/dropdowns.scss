@@ -85,6 +85,10 @@
 }
 .date-picker {
   position: relative;
+  .bg-primary {
+    --bs-bg-opacity: 1;
+    color: $primary-1;
+  }
   i {
     position: absolute;
     right: 14px;
@@ -146,10 +150,18 @@
       margin-right: 8px;
     }
   }
-  .ngb-dp-day {
+  div.ngb-dp-day {
     border: none;
     outline: none;
     color: $gray-500;
+    &:hover {
+      background: radial-gradient(circle at center, $blue-light-600 15px, #fff 16px);
+      color: $white;
+
+      div {
+        color: $white;
+      }
+    }
     div {
       transition: all 0.3s;
       font-size: 14px;
@@ -160,15 +172,16 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      &:hover {
-        color: $blue-light-600;
-      }
     }
     &.hidden {
       + .ngb-dp-day .custom-day:hover::after,
       + .ngb-dp-day .custom-day.faded::after {
         width: 40px;
       }
+    }
+    .bg-primary {
+      background: radial-gradient(circle at center, $blue-light-600 15px, #fff 16px);
+      color: $white;
     }
   }
   .date-picker-actions {
@@ -437,17 +450,25 @@
     }
   }
 }
-.ngb-dp-today {
-  .custom-day {
-    background: radial-gradient(circle at center, $blue-light-600 15px, #fff 16px);
+div.ngb-dp-today {
+  .custom-day,
+  .custom-day.faded,
+  .btn-light {
+   // background: radial-gradient(circle at center, $blue-light-600 15px, #fff 16px);
     border-radius: 6px;
-    color: $white;
+  //  color: $white;
     font-size: 12px;
     line-height: 16px;
     font-weight: 500;
     display: flex;
     align-self: center;
     justify-content: center;
+  }
+  .btn-light {
+    &:hover {
+      background: radial-gradient(circle at center, $blue-light-600 15px, #fff 16px);
+      color: $white;
+    }
   }
 }
 .company-time-zone-drop-down {

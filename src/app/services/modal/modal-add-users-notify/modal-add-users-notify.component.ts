@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 import { AddAssignedUserComponent } from 'src/app/components/tickets/tickets/ticket-edit-aside/add-assigned-user/add-assigned-user.component';
 import { TicketStateService } from 'src/app/components/tickets/tickets/ticket-edit-aside/services/ticket-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -17,8 +18,10 @@ export class ModalAddUsersNotifyComponent extends AddAssignedUserComponent {
     public activeModal: NgbActiveModal,
     public ticketStateService: TicketStateService,
     private addUsersNotifyStateService: AddUsersNotifyStateService,
+    public elRef: ElementRef,
+    public ticketsListService: TicketsListService
   ) {
-    super(usersStateService, ticketStateService);
+    super(usersStateService, ticketStateService, elRef, ticketsListService);
   }
 
   isSelected(user) {
@@ -45,4 +48,5 @@ export class ModalAddUsersNotifyComponent extends AddAssignedUserComponent {
   close() {
     this.activeModal.dismiss('Cross click');
   }
+
 }

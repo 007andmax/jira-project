@@ -1,0 +1,79 @@
+@import './src/assets/styles/variable';
+@import "./src/assets/styles/mixin/dropdown";
+
+.ticket-detail-contact {
+  &__divider {
+    margin: 16px 0;
+    border-color: $gray-200;
+  }
+  &__primary-contacts-title {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: $gray-500;
+    margin-bottom: 12px
+  }
+  &__history {
+    max-height: 655px;
+    overflow-y: auto;
+    position: relative;
+    @include dropdown-scrollbar;
+
+    &-block {
+      position: relative;
+      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+      border: solid 1px $gray-200;
+      padding: 9.5px 10px;
+      margin-bottom: 8px;
+      border-radius: 8px;
+
+      &::after {
+        position: absolute;
+        content: "";
+        width: 2px;
+        height: calc(100% - 16px);
+        background-color: $blue-light-600;
+        top: 8px;
+        bottom: 8px;
+        left: 0;
+      }
+    }
+
+    .loading {
+      width: 25px;
+      height: 25px;
+      left: calc(50% - 12px);
+    }
+  }
+
+  &__history-block-title {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    color: $gray-900;
+    margin-bottom: 4px;
+  }
+
+  &__history-block-date {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: $gray-500;
+  }
+  &__icon-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background-color: $gray-100;
+    border-radius: 8px;
+  }
+}
+
+.pengind-loading {
+    top: auto;
+}
+.company-info-aside__history {
+  position: relative;
+}

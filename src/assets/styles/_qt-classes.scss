@@ -356,6 +356,10 @@ input.qt-dropdown-input {
       height: 28px;
     }
   }
+  &--with-icon {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
   &.--loading {
     color: transparent !important;
 
@@ -432,6 +436,9 @@ input.qt-dropdown-input {
         background-color: $red-600;
       }
     }
+  }
+  &.qt-button-square__afterpend {
+    border-left: unset;
   }
 
   &.--padding-md {

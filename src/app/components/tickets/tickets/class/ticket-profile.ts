@@ -8,7 +8,7 @@ import { CurrentUserCompany } from 'src/class/current-user/current-user-company'
 import { TicketProfileUpdate } from './ticket-profile-update';
 
 export class TicketProfile {
-    agent: TicketProfileAgent;
+    agent: TicketProfileAgent = null;
     assignPerformer: CurrentUser;
     assignedAt: number;
     assignedUser: CurrentUser;
@@ -56,12 +56,13 @@ export class TicketProfile {
     userCompanies: Array<string> = [];
     customStatus: string;
     isCompanyDeleted: boolean = false;
+    deviceId: string;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
                 this[key] = data[key];
             }
-            this.agent = new TicketProfileAgent(data.agent);
+            if (data.agent) this.agent = new TicketProfileAgent(data.agent);
             this.assignPerformer = new CurrentUser(data.assignPerformer);
             this.assignedUser = (data.assignedUser) ? new CurrentUser(data.assignedUser) : null;
             this.attachments = data.attachments.map(item => {
@@ -87,6 +88,16 @@ export class TicketProfile {
                 return new TicketProfileUpdate(item);
             })
         }
+    }
+    public refreshAttachments(attachments) {
+        this.attachments = [];
+        this.updates.forEach(item => {
+            if (item.attachments && item.attachments.length > 0) {
+                item.attachments.forEach(attachment => {
+                    this.attachments.push(new TicketProfileAttachment(attachment));
+                })
+            }
+        })
     }
     public setUserCompanies(data) {
         this.userCompanies = data;

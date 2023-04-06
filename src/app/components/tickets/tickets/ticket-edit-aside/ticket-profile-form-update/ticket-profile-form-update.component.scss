@@ -47,11 +47,12 @@
   }
 
   &__nav-item {
+    display: inline-flex;
+    align-items: center;
     @include body-m__sb;
     margin-right: 30px;
     color: $gray-800--old;
     cursor: pointer;
-    padding-left: 25px;
     background-repeat: no-repeat;
     background-size: 20px;
     background-position: center left;
@@ -63,6 +64,8 @@
       border: none;
       padding: 0;
       margin: 0;
+      -webkit-mask-image: unset;
+      mask-image: unset;
     }
 
     &.active {
@@ -124,6 +127,9 @@
   }
   &__create-connection-btn {
     width: fit-content;
+  }
+  /deep/ .start-end-timer .icon__time {
+    display: none;
   }
 }
 .editable-chat {

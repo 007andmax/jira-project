@@ -118,7 +118,7 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestr
     }
 
   }
-  private getItemOrger() {
+  public getItemOrger() {
     return (this.addedProductList.length - 1) >= 0 ? this.addedProductList.length - 1 : 0;
   }
   public trackByIndex(index, item) {

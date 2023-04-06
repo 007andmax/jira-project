@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NoteTemplate } from 'src/app/components/setting/ticket-settings-page/canned-responses/class/note-template';
 import { NoteService } from 'src/app/services/note/note.service';
@@ -14,6 +14,7 @@ export class TicketProfileFormUpdateNoteListComponent implements OnInit {
   noteTemplate: Array<NoteTemplate> = [];
   @Output() onSelected = new EventEmitter();
   sub: Subscription = new Subscription();
+  @Input() placement: string = "top-right";
   constructor(private noteStateService: NoteStateService,
     public cd: ChangeDetectorRef,
     private permissionsService: PermissionsService,

@@ -4,7 +4,48 @@
     [autoClose]="'outside'"
     #date="ngbDropdown"
     [placement]="placement"
+    [container]="container"
 >
+    <div *ngIf="type === 'DETAIL_TICKET_UPDATE'">
+        <i class="icn-16 icon__calendar pointer"></i>
+        <input
+            [disabled]="disabled"
+            type="text"
+            class="pointer qt-input-block__input"
+            placeholder="Select Date"
+            ngbDropdownToggle
+            id="dropdownDate"
+            [value]="geTextDate()"
+            readonly
+        >
+    </div>
+    <div
+        class="detail-ticket-date-picker"
+        *ngIf="type === 'DETAIL_TICKET'"
+    >
+        <app-dynamic-tooltip
+            [content]="'Add a due date to this task'"
+            [position]="'top'"
+            #dateTooltip
+        ></app-dynamic-tooltip>
+        <span
+            class="detail-ticket-txt"
+            [textContent]="geTextDate()"
+        ></span>
+        <i class="icn-16 icon__calendar pointer"></i>
+        <input
+            [disabled]="disabled"
+            type="text"
+            class="pointer qt-input-block__input"
+            placeholder="Select Date"
+            ngbDropdownToggle
+            id="dropdownDate"
+            [value]="geTextDate()"
+            readonly
+            (mouseenter)="dateTooltip.show($event.target)"
+            (mouseleave)="dateTooltip.hide()"
+        >
+    </div>
     <input
         *ngIf="type === 'INPUT'"
         [disabled]="disabled"
@@ -48,6 +89,7 @@
         ngbDropdownMenu
         aria-labelledby="dropdownDate"
         class="date-picker-container"
+        [ngClass]="dropdownClass"
     >
         <ngb-datepicker
             [navigation]="'select'"

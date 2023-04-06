@@ -1,0 +1,142 @@
+@import './src/assets/styles/variable';
+@import "./src/assets/styles/mixin/dropdown";
+
+.ticket-detail-contact {
+  border: 1px solid $gray-200;
+  background-color: $white;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+  border-radius: 8px;
+  height: 100%;
+
+  &__title {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    color: $gray-900;
+  }
+  &__subtitle {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: $gray-500;
+  }
+  &__card-title {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: $gray-900;
+  }
+  &__header {
+    padding: 12px 16px;
+    border-bottom: 1px solid $gray-200;
+  }
+  &__body {
+    padding: 16px;
+    max-height: calc(100% - 65px);
+    overflow: auto;
+    @include dropdown-scrollbar;
+  }
+  &__avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: $white;
+    background-size: cover !important;
+    background-position: center !important;
+    font-weight: 600;
+
+    &-title {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 17px;
+      color: $gray-900;
+    }
+  }
+
+  &__avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: $white;
+    background-size: cover !important;
+    background-position: center !important;
+    font-weight: 600;
+
+    &-title {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 17px;
+      color: $gray-900;
+    }
+  }
+
+  .qt-button.--square-md {
+    width: 32px;
+    height: 32px;
+  }
+  &-info-line {
+    margin: 16px 0;
+
+    &__label {
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 16px;
+      color: $gray-500;
+    }
+
+    &__text {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 17px;
+      color: $gray-900;
+
+      &:not(:empty) {
+        margin-top: 4px;
+      }
+    }
+  }
+
+  &__divider {
+    border-color: $gray-200;
+    margin: 16px 0;
+  }
+  &__primary-contacts-title {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: $gray-500;
+    margin-bottom: 12px;
+  }
+}
+/deep/ .ticket-detail-contact-info-line__input {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: $gray-900;
+}
+.square-avatar {
+  background-color: #7c77bc;
+  color: $white;
+  border: none;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 31px;
+}
+
+/deep/ preview-phone-mask {
+  line-height: 16px;
+
+  .ticket-detail-contact-info-line__label {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: $gray-500;
+    padding: 0;
+  }
+}

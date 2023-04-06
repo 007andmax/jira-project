@@ -12,13 +12,15 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { AppService } from 'src/app/states/app/app.service';
+import { Subscription } from 'rxjs';
+import { OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-ticket-profile-updates-product-info',
   templateUrl: './ticket-profile-updates-product-info.component.html',
   styleUrls: ['./ticket-profile-updates-product-info.component.scss']
 })
-export class TicketProfileUpdatesProductInfoComponent implements OnInit {
+export class TicketProfileUpdatesProductInfoComponent implements OnInit, OnDestroy {
   @Input() product: TicketProfileProduct;
   @Input() update: TicketProfileUpdate;
   @Output() onEdit = new EventEmitter();
@@ -26,19 +28,24 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
   changeDate: boolean = false;
   userService = [];
   listTechUsers = [];
+  sub: Subscription = new Subscription();
   constructor(public ticketsListService: TicketsListService,
-    private confirmStateService: ConfirmStateService,
-    private ticketStateService: TicketStateService,
+    public confirmStateService: ConfirmStateService,
+    public ticketStateService: TicketStateService,
     private ticketsService: TicketsService,
     private usersStateService: UsersStateService,
-    private companiesStateService: CompaniesStateService,
+    public companiesStateService: CompaniesStateService,
     private appService: AppService,
-    private modalService: NgbModal) { }
+    public modalService: NgbModal) { }
 
   ngOnInit() {
     if (!this.product.date) this.product.date = new Date().getTime();
     if (this.product.user) this.userService = [this.product.user];
-    this.listTechUsers = this.getUsersForAssign();
+    if (this.usersStateService.getAllUsers().length > 0) this.listTechUsers = this.getUsersForAssign();
+    let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
+      this.listTechUsers = this.getUsersForAssign();
+    })
+    this.sub.add(getOnUsers);
     if (this.product.date) this.setDateWithTimeOffset();
   }
   public getTotal(price, quantity) {
@@ -79,7 +86,7 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
     this.ticketsService.updateExpense(this.product.getDateForUpdate(this.update.id)).subscribe(data => {
     })
   }
-  isIOSDevice() {
+  public isIOSDevice() {
     return !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
   }
   public onChangeUser(data) {
@@ -105,6 +112,8 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
     this.confirmStateService.setConfirmAction(REMOVE_UPDATE_TICKET_PRODUCT);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to remove the item?`;
-
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

@@ -1,0 +1,45 @@
+@import './src/assets/styles/variable';
+
+.qt-input-block {
+  margin-bottom: 16px;
+
+  input:not(.qt-editable-input) {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    color: $gray-700;
+    padding: 8px 12px 8px 28px;
+  }
+
+  .report-caret-icon,
+  .icn-remove-old {
+    width: 16px;
+    height: 16px;
+    right: 12px;
+  }
+
+  &__label {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: $gray-700;
+  }
+
+  .dropdown-item {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    color: $gray-700;
+  }
+
+  &__dot {
+    width: 8px;
+    height: 8px;
+    margin: 0;
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+  }
+}

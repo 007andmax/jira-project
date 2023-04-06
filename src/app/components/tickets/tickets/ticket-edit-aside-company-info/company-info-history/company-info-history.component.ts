@@ -36,6 +36,12 @@ export class CompanyInfoHistoryComponent implements OnInit {
   ngOnInit() {
 
   }
+  public setUser(data) {
+    this.user = data;
+  }
+  public setCompany(data) {
+    this.company = data;
+  }
   public onInitGetTickets() {
     if (this.company && this.user && this.lastCompanyId !== this.company.id && this.lastUserId !== this.user.id) {
       this.lastCompanyId = this.company.id;

@@ -1,0 +1,40 @@
+<div class="cps-block">
+    <ticket-detail-profile-edit-updates-header
+        *ngIf="update.type !== 'QUICK_SUPPORT'"
+        [update]="update"
+        (onSelectUser)="onSelectUser($event)"
+    ></ticket-detail-profile-edit-updates-header>
+    <div class="cps-block__content">
+        <ticket-detail-profile-edit-updates-services
+            #selectServices
+            [update]="update"
+            *ngIf="update.type === 'SERVICE'"
+        ></ticket-detail-profile-edit-updates-services>
+        <ticket-detail-profile-edit-updates-products
+            #selectProducts
+            *ngIf="update.type === 'PRODUCT'"
+            [update]="update"
+        ></ticket-detail-profile-edit-updates-products>
+    </div>
+</div>
+<div class="ticket-detail-profile-form-update__footer qt-df jc-sb qt-ai-c">
+    <div class="qt-df ticket-edit-aside-bottom-part-users-attack"></div>
+    <div class="qt-df qt-ai-c">
+        <div
+            class="qt-button --md --gray"
+            (click)="close()"
+        >
+            <span>Cancel</span>
+        </div>
+        <div
+            class="qt-button --md qt-ml-12"
+            [ngClass]="{'--loading':isUpdate}"
+            appDisabledBtn
+            #updateBtn="disabled"
+            (onClick)="save()"
+        >
+            <span>Post</span>
+            <app-preloader-ticket *ngIf="isUpdate"></app-preloader-ticket>
+        </div>
+    </div>
+</div>

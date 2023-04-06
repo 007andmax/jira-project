@@ -1,0 +1,12 @@
+<ticket-detail-profile-updates-note-info
+    [isBlockChange]="isBlockChange"
+    [update]="update"
+    *ngIf="!editMode"
+    (onEdit)="editMode = true"
+></ticket-detail-profile-updates-note-info>
+<ticket-detail-profile-updates-note-edit
+    [idTicket]="idTicket"
+    [update]="update"
+    *ngIf="editMode"
+    (onEdit)="editMode = false"
+></ticket-detail-profile-updates-note-edit>

@@ -98,6 +98,7 @@
       height: 24px;
       margin-right: 4px;
       flex-shrink: 0;
+      background-size: contain;
     }
     &__ticket-title {
       width: 290px;
@@ -180,6 +181,17 @@
       }
     }
 
+    &__service-title {
+      font-weight: 600;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      margin-right: 8px;
+      width: 304px;
+      @media (max-width: 767px) {
+        width: auto;
+      }
+    }
     &__service-header-name {
       width: 339px;
       margin-right: 8px;
@@ -198,19 +210,6 @@
     &__service-header-total {
       margin-right: 8px;
       width: 70px;
-    }
-
-    &__service-title {
-      width: 304px;
-      font-weight: 600;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
-      margin-right: 8px;
-
-      @media (max-width: 767px) {
-        width: auto;
-      }
     }
 
     &__service-time-in,
@@ -298,13 +297,18 @@
     }
 
     &__service-tag-completed {
-      height: 20px;
       line-height: 12px;
       color: $success;
       font-size: 10px;
+      padding: 4px 6px;
       border-color: $success;
       background: $white;
-      margin-right: 32px;
+      margin-left: auto;
+      margin-right: 0 !important;
+      margin-top: 8px;
+      display: flex;
+      width: fit-content;
+      text-transform: capitalize;
 
       @media (max-width: 767px) {
         display: none;

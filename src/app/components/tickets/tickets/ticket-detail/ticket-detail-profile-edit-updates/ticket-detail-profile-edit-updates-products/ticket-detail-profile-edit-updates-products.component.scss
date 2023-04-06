@@ -1,0 +1,59 @@
+@import './src/assets/styles/variable';
+
+.product-item {
+    &:first-child {
+        margin: 16px;
+    }
+
+    &:only-of-type {
+        margin: 16px 16px 56px;
+    }
+
+    +.product-item {
+        margin: 0 16px 56px;
+        padding-top: 16px;
+        border-top: 1px solid $gray-200;
+    }
+
+
+    &__prodect-list {
+        flex-basis: 100%;
+    }
+
+    &__btn-add {
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 4px;
+        margin-left: 8px;
+        display: flex;
+        background-color: $gray-700--old;
+        align-items: center;
+        justify-content: center;
+
+        @media (max-width: 767px) {
+            display: none;
+        }
+
+        .btn-icon {
+            width: 16px;
+            height: 16px;
+        }
+    }
+
+    .qt-input-block {
+        .qt-input-prefix {
+            width: max-content;
+            white-space: nowrap;
+            background: transparent;
+            flex-shrink: 0;
+            padding: 0 14px;
+        }
+    }
+}
+
+.product-item__discount-input {
+    max-width: 128px !important;
+    min-width: 128px !important;
+}
+

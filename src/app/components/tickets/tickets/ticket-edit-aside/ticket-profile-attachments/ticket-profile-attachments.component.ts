@@ -3,17 +3,27 @@ import { TicketProfileAttachment } from '../../class/ticket-profile-attachment';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { PreviewAttachmentComponent } from '../preview-attachment/preview-attachment.component';
 import { PreviewAttachmentStateService } from '../preview-attachment/services/preview-attachment-state.service';
+import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TicketStateService } from '../services/ticket-state.service';
+import { OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-ticket-profile-attachments',
   templateUrl: './ticket-profile-attachments.component.html',
   styleUrls: ['./ticket-profile-attachments.component.scss']
 })
-export class TicketProfileAttachmentsComponent implements OnInit {
+export class TicketProfileAttachmentsComponent implements OnInit, OnDestroy {
   @Input() attachments: Array<TicketProfileAttachment> = [];
   hiddenAttachments: boolean = true;
-  constructor(private ticketsService: TicketsService,
-    private previewAttachmentStateService: PreviewAttachmentStateService) { }
+  sub: Subscription = new Subscription();
+  constructor(public ticketsService: TicketsService,
+    private previewAttachmentStateService: PreviewAttachmentStateService,
+    public modalService: NgbModal,
+    public ticketStateService: TicketStateService,
+    public confirmStateService: ConfirmStateService,) { }
+
 
   ngOnInit() { }
 
@@ -46,5 +56,7 @@ export class TicketProfileAttachmentsComponent implements OnInit {
   public trackById(index, item) {
     return item.id;
   }
-
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

@@ -19,7 +19,6 @@ import { User } from '../users/class/user';
 })
 export class HeaderComponent implements OnInit {
   currentCompany: Company;
-  toggleLeftPanel: boolean = false;
   currentUser: User;
   constructor(private usersStateService: UsersStateService,
     private ticketsStateService: TicketsStateService,
@@ -38,12 +37,6 @@ export class HeaderComponent implements OnInit {
     this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.getCurrentUser(data)
     })
-    this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
-      this.toggleLeftPanel = data;
-      if (!this.cd['destroyed']) {
-        this.cd.detectChanges();
-      }
-    })
     this.currentCompany = this.companiesStateService.getCurrentCompany();
     this.companiesStateService.getOnCurrentCompany().subscribe(data => {
       this.currentCompany = this.companiesStateService.getCurrentCompany();
@@ -51,10 +44,6 @@ export class HeaderComponent implements OnInit {
   }
   private getCurrentUser(data) {
     this.currentUser = data;
-  }
-  onToggleLeftPanel() {
-    this.toggleLeftPanel = !this.toggleLeftPanel;
-    this.leftPanelStateService.toggleLeftPanel(this.toggleLeftPanel);
   }
   goToSettings() {
     this.leftPanelStateService.goToState('myprofile-component');

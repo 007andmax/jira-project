@@ -71,9 +71,9 @@ export class TicketsListService {
     }
     if (user.id) {
       return `url(${'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
-        '')}) 0% 0% / cover no-repeat`
+        '')}) 0% 0% / contain no-repeat`
     } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
-      return `url(/file/${(user.avatar.origin.id)}.jpg) 0% 0% / cover no-repeat`;
+      return `url(/file/${(user.avatar.origin.id)}.jpg) 0% 0% / contain no-repeat`;
     } else {
       return (color) ? color : '#16a4fa';
     }
@@ -88,7 +88,7 @@ export class TicketsListService {
   }
   getAssignedUserNameForAvatar(user) {
     if (!user) return '';
-    if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}${(user.lastName) ? user.lastName[0].toUpperCase() : ''}`;
+    if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}`;
     return '';
   }
 }

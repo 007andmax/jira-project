@@ -4,14 +4,16 @@ import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { MatAutocomplete } from '@angular/material';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { TicketStateService } from '../services/ticket-state.service';
+import { TicketsListService } from '../../services/tickets-list.service';
 
 
 @Component({
   selector: 'app-add-assigned-user',
   templateUrl: './add-assigned-user.component.html',
-  styleUrls: ['./add-assigned-user.component.scss']
+  styleUrls: ['./add-assigned-user.component.scss'],
+  providers: [TicketsListService]
 })
 export class AddAssignedUserComponent implements OnInit {
 
@@ -23,7 +25,8 @@ export class AddAssignedUserComponent implements OnInit {
   @Input() selectedUsers = [];
   @Input() userList = [];
   @Input() placement = 'top-left';
-
+  @Input() type: string;
+  @Input() container: string;
   users = [];
   reqUsers = [];
   currentUsers = [];
@@ -33,6 +36,7 @@ export class AddAssignedUserComponent implements OnInit {
   @Output() onSelected = new EventEmitter<any>();
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
+  @ViewChild('assignedUserDp') assignedUserDp: NgbDropdown;
 
   /**
    * Creates an instance of the QuoteCreateContentComponent with the injected services
@@ -43,7 +47,9 @@ export class AddAssignedUserComponent implements OnInit {
    */
   public constructor(
     public usersStateService: UsersStateService,
-    public ticketStateService: TicketStateService
+    public ticketStateService: TicketStateService,
+    public elRef: ElementRef,
+    public ticketsListService: TicketsListService
   ) {
 
 
@@ -54,6 +60,12 @@ export class AddAssignedUserComponent implements OnInit {
    */
   public ngOnInit() {
     this.currentUsers = JSON.parse(JSON.stringify(this.selectedUsers));
+    this.users = JSON.parse(JSON.stringify(this.userList));
+    this.reqUsers = JSON.parse(JSON.stringify(this.userList));
+  }
+
+  public resetList(data) {
+    this.userList = data;
     this.users = JSON.parse(JSON.stringify(this.userList));
     this.reqUsers = JSON.parse(JSON.stringify(this.userList));
   }
@@ -69,7 +81,7 @@ export class AddAssignedUserComponent implements OnInit {
    * @param index - user index
    */
   public remove(index): void {
-    if (index >= 0 && this.selectedUsers.length > 1) {
+    if (index >= 0 && this.selectedUsers.length > 1 && this.type != "DETAIL-TICKET" || this.type == "DETAIL-TICKET") {
       this.selectedUsers.splice(index, 1);
       this.onSelected.emit(this.selectedUsers);
     }
@@ -89,6 +101,9 @@ export class AddAssignedUserComponent implements OnInit {
     this.userCtrl.setValue(null);
     this.userInput.nativeElement.value = '';
   }
+  isSelected(data) {
+    return this.selectedUsers.find(item => item.id === data.id);
+  }
 
   onSearchUser(event) {
     if (event.target.value.length > 0) {
@@ -100,25 +115,17 @@ export class AddAssignedUserComponent implements OnInit {
 
   getAssignedUserNameForAvatar(user) {
     if (!user) return '';
-    if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}${(user.lastName) ? user.lastName[0].toUpperCase() : ''}`;
+    if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}`;
     return '';
   }
-
-  getStyleAvatar(user) {
-    if (!(user && user.avatar)) {
-      return '#16a4fa';
-    }
-    if (user.id) {
-      return `url(${'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
-        '')}) no-repeat`
-    } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
-      return `url(/file/${(user.avatar.origin.id)}.jpg) no-repeat`;
-    } else {
-      return '#16a4fa';
-    }
-  };
   public getUserName(user) {
     return (user) ? `${user.firstName} ${user.lastName}` : '';
+  }
+  onCloseDropDown(data) {
+    if (!data && this.type == 'DETAIL_TICKET_ASSIGNED_USER') {
+      this.elRef.nativeElement.querySelector("#search-user").value = "";
+      this.users = JSON.parse(JSON.stringify(this.reqUsers));
+    }
   }
 
   /**

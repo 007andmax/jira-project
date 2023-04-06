@@ -31,6 +31,9 @@ export class LeftPanelService {
       || state === 'new-tickets-dashboard'
       || state === 'recurring-tickets')
   }
+  isTicketDetailPage(state) {
+    return (state === 'ticket-detail')
+  }
   isUsersPage(state) {
     return (state === 'new-users')
   }
@@ -74,6 +77,7 @@ export class LeftPanelService {
       state === 'new-category-documents' ||
       state === 'new-add-documents' ||
       state === 'new-edit-documents' ||
+      state === 'new-preview-documents' ||
       state === 'new-template-documents')
   }
   isReportsState(state) {

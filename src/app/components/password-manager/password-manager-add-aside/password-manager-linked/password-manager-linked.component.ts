@@ -1,7 +1,8 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Company } from 'src/app/interfaces/company/company';
 import { GadgetsService } from 'src/app/services/gadgets/gadgets.service';
+import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -35,12 +36,17 @@ export class PasswordManagerLinkedComponent implements OnInit {
   sub: Subscription = new Subscription();
   constructor(public cd: ChangeDetectorRef,
     private companiesState: CompaniesStateService,
-    private devicesStateService: DevicesStateService,
+    public devicesStateService: DevicesStateService,
     private gadgetsService: GadgetsService,
+    public ticketsService: TicketsService,
+    public elRef: ElementRef,
     private usersStateService: UsersStateService,) { }
 
   ngOnInit() {
-    if (this.devicesStateService.getAllDevices()) this.preloader = false;
+    if (this.devicesStateService.getAllDevices()) {
+      this.preloader = false;
+      if (this.selectedCompanyId) this.onSelectCompany(this.selectedCompanyId);
+    }
     this.devicesStateService.getOnDevices().subscribe(data => {
       this.preloader = false;
       if (this.selectedCompanyId) this.onSelectCompany(this.selectedCompanyId);

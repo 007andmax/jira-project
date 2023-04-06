@@ -12,6 +12,7 @@ export class TicketProfileFormService {
     quantity: number = 0;
     validate: boolean = true;
     validateQuantity: boolean = true;
+    user: any;
     constructor(data = null) {
         if (data) {
             for (const key in data) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy, Input, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { TechUsersStateService } from './services/tech-users-state.service';
 import { Subscription } from 'rxjs';
 import { RecurringTicketUser } from '../../tickets/recurring-tickets/interfaces/recurring-ticket-user';
@@ -21,12 +21,13 @@ export class TechUsersComponent implements OnInit, OnDestroy {
   public usersList: Array<TechUserItem> = [];
   public showSelect = false;
   public selectedUsers = [];
-  @Input() container: string = null;
+  @Input() container: string;
   @Input() selectedMode: string = MULTIPLE_SELECT;
   @Input() editUsers = [];
   @Input() editMode: boolean = false;
   @Input() isDisabled: boolean = false;
   @Input() type: string = RECURRING_TICEKTS;
+  @Input() placement: string = "bottom-left";
   users: Array<TechUserItem> = [];
   sub = new Subscription();
   @Output() usersChange = new EventEmitter();
@@ -39,7 +40,8 @@ export class TechUsersComponent implements OnInit, OnDestroy {
   constructor(
     private techState: TechUsersStateService,
     public cd: ChangeDetectorRef,
-    public ticketsListService: TicketsListService
+    public ticketsListService: TicketsListService,
+    private elRef: ElementRef,
   ) { }
 
   /**
@@ -102,6 +104,34 @@ export class TechUsersComponent implements OnInit, OnDestroy {
   public showSelectWrapper($event) {
     this.showSelect = !this.showSelect;
     this.stopEvent($event);
+  }
+
+  public getUserName(user) {
+    return (user) ? `${user.firstName} ${user.lastName}` : '';
+  }
+
+  getStyleAvatar(user) {
+    if (!(user && user.avatar)) {
+      return '#16a4fa';
+    }
+    if (user.id) {
+      return `url(${'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
+        '')}) contain no-repeat`
+    } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
+      return `url(/file/${(user.avatar.origin.id)}.jpg) contain no-repeat`;
+    } else {
+      return '#16a4fa';
+    }
+  };
+  onCloseDropDown(data) {
+    if (!data) {
+      this.elRef.nativeElement.querySelector("#search-user").value = "";
+      this.usersList = JSON.parse(JSON.stringify(this.users));
+    }
+  }
+
+  isSelected(data) {
+    return this.selectedUsers.find(item => item.id === data.id);
   }
 
   /**

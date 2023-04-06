@@ -87,6 +87,13 @@ export class ProductListComponent implements OnInit, OnDestroy {
       1 : ((b.description.toLowerCase() > a.description.toLowerCase()) ? -1 : 0)));
 
   }
+  public setEditItem(data) {
+    this.editItem = data;
+    let value = this.getNameOrDescription(this.editItem);
+    this.elRef.nativeElement.querySelector('#dropdownProducts').value = value;
+    if (value !== '') this.selectedItem = true;
+
+  }
 
 
   onCreateProduct() {
@@ -113,6 +120,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.products_dropDown.close();
     this.selectedProductItem.next(productItem);
     this.selectedItem = true;
+    this.elRef.nativeElement.querySelector("#search-drop-down").value = "";
   }
   togglePanel(data, event) {
     event.target.closest('.card').classList.toggle('opened-card');

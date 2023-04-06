@@ -1,0 +1,88 @@
+<div class="qt-input-block">
+    <span class="qt-input-block__label">Priority</span>
+    <div
+        ngbDropdown
+        [ngClass]="class"
+        [container]="container"
+        [ngStyle]="{'width':widthInput ? widthInput : '100%'}"
+    >
+        <div
+            *ngIf="title"
+            class="app-drop-down__title"
+            [textContent]="title"
+        ></div>
+        <mat-error
+            class="invalid-feedback"
+            *ngIf="!validate"
+            [textContent]="errorMessage"
+        >
+        </mat-error>
+        <input
+            type="text"
+            [ngStyle]="{'width': '100%', 'height': heightInput ? heightInput : '32px' }"
+            [ngClass]="{'disabled': isDisabled, '--input-error' : !validate}"
+            [disabled]="isDisabled"
+            [value]="getSelectedItemText()"
+            autocomplete="off"
+            [placeholder]="placeholder"
+            id="dropdown1"
+            class="qt-dropdown-input pointer"
+            [attr.maxlength]="maxlength"
+            (input)="onCheckAdd($event)"
+            [readonly]="!change"
+            ngbDropdownToggle
+        >
+        <span
+            class="app-drop-down__right-icon pointer"
+            *ngIf="list && !isDisabled"
+            [ngStyle]="{'bottom': heightInput ? dividePosition(heightInput) : '16px' }"
+        >
+            <i
+                *ngIf="selectedItem && !isAdd && !isBlockClear"
+                class="icn-sm icn-remove-old"
+                (click)="clearClient()"
+            ></i>
+            <i
+                *ngIf="(!selectedItem || isBlockClear) && !isAdd && !preloader"
+                class="icn-sm report-caret-icon"
+            ></i>
+            <i
+                *ngIf="isAdd"
+                (click)="addItem()"
+                class="icn-sm icn-product-save icon__active_subscription"
+            ></i>
+        </span>
+        <div
+            class="qt-input-block__dot priority-dot"
+            [ngClass]="selectedItem ? selectedItem.type.toLowerCase() : ''"
+        ></div>
+        <i
+            class="loading xs"
+            *ngIf="preloader"
+        ></i>
+        <div
+            ngbDropdownMenu
+            [ngStyle]="{'width': dropdownWidth ? dropdownWidth : '100%', 'max-height': dropdownHeight ? dropdownHeight : '192px'}"
+            aria-labelledby="dropdown1"
+            class="app-drop-down__dropdown"
+        >
+            <ng-template
+                ngFor
+                let-item
+                [ngForOf]="list"
+                let-i="index"
+            >
+                <button
+                    class="qt-df qt-ai-c"
+                    ngbDropdownItem
+                    (click)="onSelect(item)"
+                    [title]="reduceItemName(item)"
+                    [ngClass]="{'--selected':isSelected(item)}"
+                >
+                    <span class="priority-dot {{ item.type.toLowerCase() }} qt-mr-8"></span>
+                    <span [textContent]="reduceItemName(item)"></span>
+                </button>
+            </ng-template>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,164 @@
+@import "./src/assets/styles/variable";
+
+.tasks {
+  &__header {
+    padding: 12px 0;
+    border-top: 1px solid $gray-200;
+    font-size: 13px;
+    font-weight: 500;
+    color: $gray-700;
+  }
+
+  .qt-button {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+
+.tab-pane__table-row {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid $gray-200;
+  padding: 6px 0;
+
+  &.--selected {
+    background-color: $gray-50;
+    /deep/ .detail-ticket-txt {
+      color: #98A2B3 !important;
+    }
+
+    .ticket-status-table__status {
+      input {
+        background-color: $gray-50;
+
+        &::placeholder {
+          font-weight: 400;
+          color: $gray-400;
+        }
+      }
+    }
+  }
+
+  &.--completed {
+    .ticket-status-table__status:not(.--parse-status) input {
+      color: $gray-400;
+    }
+    /deep/ .detail-ticket-txt {
+      color: $gray-400;
+    }
+  }
+  /deep/ .detail-ticket-txt {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $gray-500;
+  }
+}
+
+.ticket-status-table {
+  &__status:not(.--parse-status) {
+    flex: 1;
+    margin-left: 6px;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+    color: $gray-900;
+
+    input {
+      width: 100%;
+      border-color: transparent;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  &__action {
+    display: flex;
+    align-items: center;
+  }
+}
+/deep/ .date-picker {
+  margin-right: 8px;
+}
+/deep/ .date-picker .detail-ticket-date-picker .icon__calendar {
+  right: 50%;
+  transform: translate(50%, -50%);
+}
+
+/deep/ .tab-pane__table-row .date-picker .qt-input-block__input {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  color: transparent;
+}
+
+/deep/ .tab-pane__table-cell .tech-users-container .ticket-updates__photo-people {
+  width: 28px;
+  height: 28px;
+}
+
+/deep/ .tab-pane__table-cell .tech-users-container .tech__user-icon {
+  width: 28px;
+  height: 28px;
+  border: 1px solid $gray-200;
+  background-color: $white;
+  background-image: url('/assets/img/icons/user.svg');
+  background-size: 16px 16px;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-right: 8px;
+}
+
+/deep/ .ticket-updates__delete {
+  -webkit-mask-size: 16px;
+  mask-size: 16px;
+}
+/deep/ .icon__task-pending {
+  background-size: contain;
+}
+/deep/ .icon__active {
+  background-size: contain;
+}
+/deep/ .tag__modern {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  text-transform: capitalize;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+/deep/ .tech-users-container .tech-user-body .select-wrapper {
+  width: 464px;
+  height: 360px;
+}
+/deep/ .dropdown-assign-ticket .users-list {
+  max-width: 464px;
+  max-height: 298px;
+}
+/deep/ .qt-input-search input {
+  box-shadow: unset;
+}
+/deep/ .select-wrapper .content .assign-ticket-header {
+  margin-bottom: 2px !important;
+  padding: 0 !important;
+}
+/deep/ .qt-input-search input::placeholder {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: $gray-400;
+}
+/deep/ .assign-ticket .assign-ticket-content .assign-ticket-header {
+  padding: 0;
+}
+/deep/ .ticket-updates__photo-people {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+}

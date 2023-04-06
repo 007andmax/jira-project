@@ -23,6 +23,7 @@
 
   &__content {
     flex-grow: 1;
+    position: relative;
 
     @media (max-width: 767px) {
       width: 100%;
@@ -34,9 +35,14 @@
   &__message-line {
     margin-bottom: 8px;
   }
-
+  &__author-line {
+    @media (min-width: 768px) {
+      padding-left: 0px !important;
+    }
+  }
   &__author {
     font-weight: 600;
+    font-size: 12px !important;
   }
   &__add-note {
     color: $gray-600--old;

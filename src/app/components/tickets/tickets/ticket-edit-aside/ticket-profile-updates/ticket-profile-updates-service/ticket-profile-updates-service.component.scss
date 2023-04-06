@@ -7,4 +7,15 @@
     border-radius: 50%;
     margin-right: 16px;
   }
+  &__author-line {
+    @media (min-width: 768px) {
+      padding-left: 0px !important;
+    }
+  }
+  &__author {
+    font-size: 12px !important;
+  }
+  &__content {
+    position: relative;
+  }
 }
