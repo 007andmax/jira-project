@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { HardwareService } from './../_services/hardware.service';
 import { DeviceDetailService } from './../_services/device_detail.service';
 import { first } from 'rxjs/operators';
@@ -9,6 +9,7 @@ import { CONFIGCONSTANTS } from '../config/app-constants';
 import { Router } from '@angular/router';
 import * as moment from "moment";
 import { System, Graphics, Motherboard, Bios, Processor, Display, LogicalDisk, Memory, Adapter, DeviceDetail } from './class/system';
+import { HardwareHeaderComponent } from './hardware-header/hardware-header.component';
 declare var $: any;
 @Component({
   selector: 'app-hardware',
@@ -44,10 +45,13 @@ export class HardwareComponent implements OnInit {
   _id: string = '';
   type: string = '';
   DateTimeFormat = CONFIGCONSTANTS.DateTimeFormat;
-  constructor(private hardwareService: HardwareService, private toastr: ToastrService,
+  @ViewChild('header') header: HardwareHeaderComponent;
+  constructor(private hardwareService: HardwareService,
+    private toastr: ToastrService,
     private commonHttpServices: CommonHttpServices,
     private deviceDetailService: DeviceDetailService,
     private router: Router,
+    public cd: ChangeDetectorRef,
     private excelService: ExcelService) { }
 
   ngOnInit() {
@@ -63,7 +67,8 @@ export class HardwareComponent implements OnInit {
       this.getDeviceDetail();
     } else {
       this.setData();
-      this.getPdfData();
+      this.cd.detectChanges();
+      this.header.getPdfData();
     }
 
   }
@@ -78,7 +83,8 @@ export class HardwareComponent implements OnInit {
           this.deviceDetailService.addDevice(resp);
           this.hardwareDetail = this.deviceDetailService.getDevice();
           this.setData();
-          this.getPdfData();
+          this.cd.detectChanges();
+          this.header.getPdfData();
           this.loading = false;
         },
         error => {
@@ -167,55 +173,6 @@ export class HardwareComponent implements OnInit {
 
   };
 
-  downloadCsv() {
-    let downloadCsvList = [];
-    downloadCsvList.push({ label: 'Computer', value: '' });
-    this.printSystem.forEach(element => {
-      downloadCsvList.push({ label: element[0], value: element[1] });
-    });
-    downloadCsvList.push({ label: '', value: '' });
-    downloadCsvList.push({ label: 'Motherboard', value: '' });
-    this.printMotherBoard.forEach(element => {
-      downloadCsvList.push({ label: element[0], value: element[1] })
-    });
-    downloadCsvList.push({ label: '', value: '' });
-    downloadCsvList.push({ label: 'Processor', value: '' });
-    this.printProcessor.forEach(element => {
-      downloadCsvList.push({ label: element[0], value: element[1] })
-    });
-    downloadCsvList.push({ label: '', value: '' });
-    downloadCsvList.push({ label: 'Memory', value: '' });
-    this.printMemory.forEach(element => {
-      downloadCsvList.push({ label: element[0], value: element[1] })
-    });
-    downloadCsvList.push({ label: '', value: '' });
-    downloadCsvList.push({ label: 'Network Card', value: '' });
-    this.printNetwork.forEach(element => {
-      downloadCsvList.push({ label: element[0], value: element[1] })
-    });
-    downloadCsvList.push({ label: '', value: '' });
-    downloadCsvList.push({ label: 'Graphics Card', value: '' });
-    this.printGraphic.forEach(element => {
-      downloadCsvList.push({ label: element[0], value: element[1] })
-    });
-    downloadCsvList.push({ label: '', value: '' });
-    downloadCsvList.push({ label: 'Display', value: '' });
-    this.printDisplay.forEach(element => {
-      downloadCsvList.push({ label: element[0], value: element[1] })
-    });
-    downloadCsvList.push({ label: '', value: '' });
-    downloadCsvList.push({ label: 'Hard Disk', value: '' });
-    this.printDisk.forEach(element => {
-      downloadCsvList.push({ label: element[0], value: element[1] })
-    });
-    downloadCsvList.push({ label: '', value: '' });
-    downloadCsvList.push({ label: 'Operating System', value: '' });
-    this.printOS.forEach(element => {
-      downloadCsvList.push({ label: element[0], value: element[1] })
-    });
-    let fileName = 'Hardware Detail';
-    this.excelService.generateExcel(downloadCsvList, fileName, 'hardware');
-  }
 
 
 

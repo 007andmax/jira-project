@@ -1,15 +1,29 @@
 <main class="mainSidebar">
     <div class="cmn-wrapper hardware">
         <div class="device-container">
-            <div
-                class="page-container"
-                *ngIf="loading == false"
-            >
+            <div class="page-container">
                 <!-- Page Title -->
-
-
+                <hardware-header
+                    #header
+                    [hidden]="loading"
+                    [deviceName]="deviceName"
+                    [loading]="loading"
+                    [printSystem]="printSystem"
+                    [deviceName]="deviceName"
+                    [printMotherBoard]="printMotherBoard"
+                    [printProcessor]="printProcessor"
+                    [printMemory]="printMemory"
+                    [printNetwork]="printNetwork"
+                    [printGraphic]="printGraphic"
+                    [printDisplay]="printDisplay"
+                    [printDisk]="printDisk"
+                    [printOS]="printOS"
+                ></hardware-header>
                 <!-- Page Content All update -->
-                <div class="contant-area">
+                <div
+                    class="contant-area"
+                    *ngIf="!loading"
+                >
                     <div class="hardware-list">
                         <div class="hardware-row">
                             <hardware-computer
