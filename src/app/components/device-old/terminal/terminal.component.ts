@@ -11,6 +11,10 @@ import { UserListService } from '../../users/services/user-list.service';
 import { CompaniesRealTimeService } from 'src/app/states/company/companies-real-time.service';
 import { ShellStateService } from 'src/app/states/shell/shell-state.service';
 import { command, script, commandModal, scriptModal } from './../class/device';
+import { TerminalStateService } from '../states/terminal-state.service';
+import { DELETE_COMMAND } from 'src/app/const/confirm';
+import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
+import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 
 @Component({
   selector: 'app-terminal',
@@ -62,7 +66,6 @@ export class TerminalComponent implements OnInit {
   lineNumber = [1];
   lineNumberDetail = [1];
   deleteId = '';
-  deleteTitle = '';
   command = '';
   commandList = [];
   myScriptList = [];
@@ -90,6 +93,7 @@ export class TerminalComponent implements OnInit {
   terminalHit = false;
   _id: string = '';
   type: string = '';
+
   DateTimeHistoryFormat = CONFIGCONSTANTS.DateTimeHistoryFormat;
   constructor(private terminalService: TerminalService,
     private toastr: ToastrService,
@@ -98,6 +102,8 @@ export class TerminalComponent implements OnInit {
     private userListService: UserListService,
     private companiesRealTimeService: CompaniesRealTimeService,
     private shellStateService: ShellStateService,
+    private terminalStateService: TerminalStateService,
+    private confirmStateService: ConfirmStateService,
     public cd: ChangeDetectorRef,
   ) { }
 
@@ -115,6 +121,16 @@ export class TerminalComponent implements OnInit {
     document.getElementById("terminal").style.height = window.innerHeight - document.getElementById('deviceHeader').offsetHeight - 250 + 'px';
     this.terminalHeight = document.getElementById("terminal").offsetHeight;
     this.cmdHeight = document.getElementById("editCmd").offsetHeight;
+    let onGetCmdCategoryRead = this.terminalStateService.onGetCmdCategoryRead.subscribe(data => {
+      this.getCmdCategoryRead();
+    })
+    this.sub.add(onGetCmdCategoryRead);
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === DELETE_COMMAND) this.deleteCommand();
+      }
+    })
+    this.sub.add(getConfirm);
   }
 
   getCommandList() {
@@ -188,40 +204,9 @@ export class TerminalComponent implements OnInit {
         });
   }
 
-  resetCmdModal() {
-    this.commandModal = {
-      title: '',
-      command: '',
-      category: '',
-      categoryId: '',
-      id: '',
-      type: '',
-      typeName: '',
-      description: ''
-    };
-    this.command = '';
-  }
 
-  getCmdCategory() {
-    this.loading = true;
-    this.terminalService.getCmdCategory()
-      .pipe(first())
-      .subscribe(data => {
-        this.loading = false;
-        if (isArray(this.cmdCategoryList)) {
-          this.cmdCategoryList = data;
-        }
-      },
-        error => {
-          this.loading = false;
-          const statusError = error;
-          if (statusError && statusError.meta) {
-            this.toastr.error(statusError.meta.message);
-          } else {
-            this.toastr.error('Something went wrong please try again.');
-          }
-        });
-  }
+
+
 
   getCmdCategoryRead() {
 
@@ -242,33 +227,11 @@ export class TerminalComponent implements OnInit {
         });
   }
 
-  manageCategory(template) {
-    this.cmdCategoryList = [];
-    this.getCmdCategory();
-    this.modalService.open(template, { ariaLabelledBy: 'modal-basic-title', windowClass: 'cmn-terminal-modal category-modal confirm-control', centered: true }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismiss(reason)}`;
-    });
-  }
 
-  addNewCategory() {
-    if (this.cmdCategoryList.length === 0 || (this.cmdCategoryList.length > 0 && (this.cmdCategoryList[this.cmdCategoryList.length - 1].create === undefined || this.cmdCategoryList[this.cmdCategoryList.length - 1].create === false))) {
-      this.cmdCategoryList.push({ id: '', name: '', create: true })
-    }
-  }
 
-  deleteCategory(id, index) {
-    this.terminalService.deleteCategory(id)
-      .pipe(first())
-      .subscribe(resp => {
-        this.cmdCategoryList.splice(index, 1);
-        this.toastr.success('Category Deleted Successfully');
-      },
-        error => {
-          const statusError = error;
-        });
-  }
+
+
+
 
   deleteCommand() {
     this.loading = true;
@@ -291,54 +254,7 @@ export class TerminalComponent implements OnInit {
     }
   }
 
-  createCommand() {
-    this.submitted = true;
-    if (this.form.invalid) {
-      return;
-    }
-    this.loading = true;
-    let data = {
-      title: this.commandModal.title,
-      categoryId: this.commandModal.categoryId !== undefined ? this.commandModal.categoryId : this.cmdCategoryReadList.filter(val => val.name === this.commandModal.category)[0].id,
-      command: this.commandModal.command,
-      id: this.commandModal.id,
-      type: this.commandModal.type,
-      description: this.commandModal.description
-    }
-    if (this.commandModal.id == '') {
-      delete data.id;
-      this.terminalService.createCommand(data)
-        .pipe(first())
-        .subscribe(resp => {
-          this.loading = false;
-          if (resp.id !== '') {
-            this.toastr.success('Command Created Successfully');
-            this.create = !this.create;
-            this.getCommandList();
-          }
-        },
-          error => {
-            const statusError = error;
-            this.loading = false;
-          });
-    } else {
-      this.terminalService.updateCommand(data)
-        .pipe(first())
-        .subscribe(resp => {
-          this.loading = false;
-          if (resp.id !== '') {
-            this.toastr.success('Command Updated Successfully');
-            this.create = !this.create;
-            this.getCommandList();
-          }
-        },
-          error => {
-            const statusError = error;
-            this.loading = false;
-          });
-    }
 
-  }
 
   openEditCommand(data: any, flag: string) {
     this.commandModal.title = data.title;
@@ -365,56 +281,19 @@ export class TerminalComponent implements OnInit {
     this.create = !this.create;
   }
 
-  createCategory(data) {
-    if (data.name == '') {
-      return;
-    }
-    this.terminalService.createCategory({ name: data.name })
-      .pipe(first())
-      .subscribe(resp => {
-        if (resp.id !== '') {
-          this.cmdCategoryList[this.cmdCategoryList.length - 1].create = false;
-          this.cmdCategoryList[this.cmdCategoryList.length - 1].edit = false;
-          this.toastr.success('Category Created Successfully');
-          this.getCmdCategoryRead();
-        }
-      },
-        error => {
-          const statusError = error;
-        });
-  }
-
-  updateCategory(data, index) {
-    if (data.name == '') {
-      return;
-    }
-    this.terminalService.updateCategory(data)
-      .pipe(first())
-      .subscribe(resp => {
-        if (resp.id !== '') {
-          this.cmdCategoryList[index].edit = false;
-          this.toastr.success('Category Updated Successfully');
-          this.getCmdCategoryRead();
-        }
-      },
-        error => {
-          const statusError = error;
-        });
-  }
 
 
 
 
-  openModal(template, id, title, flag) {
+
+
+  openModal(id, title, flag) {
     if (flag === 'deleteCmd') {
       this.deleteId = id;
-      this.deleteTitle = title;
     }
-    this.modalService.open(template, { ariaLabelledBy: 'modal-basic-title', windowClass: 'cmn-terminal-modal confirm-control', centered: true }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismiss(reason)}`;
-    });
+    this.confirmStateService.setConfirmAction(DELETE_COMMAND);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.message = `Are you sure you want to delete ${title} script?`;
   }
 
   private getDismiss(reason: any): string {
@@ -483,16 +362,7 @@ export class TerminalComponent implements OnInit {
     }
   }
 
-  countLineNumber() {
-    var text = $("#cmd textarea").val().toString();
-    var lines = text.split(/\r*\n/);
-    var count = lines.length;
-    this.lineNumber = [];
-    for (let index = 0; index < count; index++) {
-      this.lineNumber[index] = index + 1;
-    }
-    $('#cmd_line').scrollTop($('#cmd textarea').scrollTop());
-  }
+
 
   countLineNumberDetail() {
     var text = $("#cmd_detail textarea").val().toString();
@@ -649,12 +519,7 @@ export class TerminalComponent implements OnInit {
 
   }
 
-  openAddModal() {
-    this.resetCmdModal();
-    this.submitted = false;
-    this.create = !this.create;
-    this.showDescription = false;
-  }
+
 
   openEditModal(cmd, type) {
     this.submitted = false;
@@ -671,10 +536,7 @@ export class TerminalComponent implements OnInit {
     this.cmdHeight = document.getElementById("editCmd").offsetHeight;
   }
 
-  toggleTerminal(type, typeName) {
-    this.commandModal.type = type;
-    this.commandModal.typeName = typeName;
-  }
+
 
   toggleDetailTerminal(type, typeName) {
     this.scriptDetailModal.type = type;
@@ -701,10 +563,7 @@ export class TerminalComponent implements OnInit {
     this.scriptDetailModal.categoryId = id;
   }
 
-  setCommand(name, id) {
-    this.commandModal.category = name;
-    this.commandModal.categoryId = id;
-  }
+
 
   copyScriptToggle(data, type) {
     this.runScript = !this.runScript;

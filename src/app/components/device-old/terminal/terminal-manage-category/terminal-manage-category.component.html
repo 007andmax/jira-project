@@ -1,0 +1,94 @@
+<div class="modal-header">
+    <h2>Manage Category</h2>
+    <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="closeModal()"
+    >
+        <img
+            src="/html/assets/img/icons/close.svg"
+            alt="close"
+            title="close"
+        >
+    </button>
+</div>
+<div class="modal-body">
+    <div class="terminal-category-list">
+        <form novalidate>
+            <ul class="list-unstyled">
+                <li *ngFor="let category of cmdCategoryList; let i = index;">
+                    <input
+                        *ngIf="!category.create"
+                        type="text"
+                        class="form-input"
+                        name="cat_{{i}}"
+                        [(ngModel)]="category.name"
+                        (focus)="category.edit = true;"
+                    >
+                    <input
+                        *ngIf="category.create"
+                        type="text"
+                        class="form-input"
+                        name="cat_{{i}}"
+                        [(ngModel)]="category.name"
+                        placeholder="Write category Name"
+                    >
+                    <a
+                        *ngIf="!category.create && category.edit"
+                        href="javascript:;"
+                        class="cat-action edit-cat"
+                        data-tooltip="Edit"
+                        (click)="updateCategory(category, i)"
+                    >
+                        <img
+                            src="/html/assets/img/device/save-changes.svg"
+                            alt="save-changes"
+                            title="save-changes"
+                        >
+                    </a>
+                    <a
+                        *ngIf="category.create"
+                        href="javascript:;"
+                        class="cat-action edit-cat"
+                        data-tooltip="Add"
+                        (click)="createCategory(category)"
+                    >
+                        <img
+                            src="/html/assets/img/device/save-changes.svg"
+                            alt="save-changes"
+                            title="save-changes"
+                        >
+                    </a>
+                    <a
+                        *ngIf="!category.edit && !category.create"
+                        href="javascript:;"
+                        (click)="deleteCategory(category.id, i)"
+                        class="cat-action delete"
+                        data-tooltip="Delete"
+                    >
+                        <img
+                            src="/html/assets/img/device/remove-terminal.svg"
+                            alt="close"
+                            title="close"
+                        >
+                    </a>
+                </li>
+            </ul>
+        </form>
+    </div>
+    <div class="confirm-btn">
+        <button
+            type="button"
+            class="btn btn-small"
+            (click)="addNewCategory()"
+        >
+            <img
+                src="/html/assets/img/device/add-task.svg"
+                alt="add-task"
+                title="add-task"
+            >
+            Add New Category
+        </button>
+    </div>
+</div>

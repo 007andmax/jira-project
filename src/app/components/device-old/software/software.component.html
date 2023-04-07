@@ -22,12 +22,22 @@
                         >
                             <thead>
                                 <tr>
-                                    <!-- <th class="check-area">
-                          <div class="cmn-checkbox">
-                            <input type="checkbox" name="check_all" id="check_all" (change)="selectedRecord('all', -1);" [(ngModel)]="check_all" [value]="true"> 
-                            <label for="check_all" aria-label="checkbox"></label>
-                          </div>
-                        </th> -->
+                                    <th class="check-area">
+                                        <div class="cmn-checkbox">
+                                            <input
+                                                type="checkbox"
+                                                name="check_all"
+                                                id="check_all"
+                                                (change)="selectedRecord('all', -1);"
+                                                [(ngModel)]="check_all"
+                                                [value]="true"
+                                            >
+                                            <label
+                                                for="check_all"
+                                                aria-label="checkbox"
+                                            ></label>
+                                        </div>
+                                    </th>
                                     <th class="s-name">
                                         <span>Software Name</span>
                                     </th>
@@ -43,17 +53,27 @@
                                     <th class="c-version">
                                         <span>Current Version</span>
                                     </th>
-                                    <!-- <th class="action">&nbsp;</th> -->
+                                    <th class="action">&nbsp;</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let software of softwareList | soft: search; let i = index;">
-                                    <!-- <td class="check-area">
-                          <div class="cmn-checkbox">
-                            <input type="checkbox" name="check_{{i}}" (change)="selectedRecord('single', i);" id="check_{{i}}" [(ngModel)]="software.checked" [value]="true"/>
-                            <label for="check_{{i}}" aria-label="checkbox"></label>
-                          </div>
-                        </td> -->
+                                    <td class="check-area">
+                                        <div class="cmn-checkbox">
+                                            <input
+                                                type="checkbox"
+                                                name="check_{{i}}"
+                                                (change)="selectedRecord('single', i);"
+                                                id="check_{{i}}"
+                                                [(ngModel)]="software.checked"
+                                                [value]="true"
+                                            >
+                                            <label
+                                                for="check_{{i}}"
+                                                aria-label="checkbox"
+                                            ></label>
+                                        </div>
+                                    </td>
                                     <td class="s-name">
                                         <!-- <span class="device-pic"><img src="..//html/assets/img/device/adb-reader.png" alt="adb-reader"/></span> -->
                                         <h5>{{software.softName || 'N/A'}}</h5>
@@ -64,9 +84,18 @@
                                         {{(software.softInstalledOn | date : DateFormat) || 'N/A'}}
                                     </td>
                                     <td class="c-version">{{software.softVersion || 'N/A'}}</td>
-                                    <!-- <td class="action">
-                          <a class="remove" data-tooltip="Remove" (click)="onDeleteSoftware()"><img src="..//html/assets/img/device/remove.svg" alt="remove"/></a>
-                        </td> -->
+                                    <td class="action">
+                                        <a
+                                            class="remove"
+                                            data-tooltip="Remove"
+                                            (click)="onDeleteSoftware()"
+                                        >
+                                            <img
+                                                src="/html/assets/img/device/remove.svg"
+                                                alt="remove"
+                                            >
+                                        </a>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

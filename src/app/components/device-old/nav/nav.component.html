@@ -44,7 +44,7 @@
     <li [routerLinkActive]="['active']"><a routerLink="/device/services">Services</a></li>
     <li [routerLinkActive]="['active']"><a routerLink="/device/antivirus">Antivirus</a></li> - -->
         <li [routerLinkActive]="['active']">
-            <a>Terminal</a>
+            <a (click)="goToTerminal()">Terminal</a>
         </li>
         <!-- <li [routerLinkActive]="['active']"><a routerLink="/device/windows-update">Window Update</a></li>
     <li [routerLinkActive]="['active']"><a routerLink="/device/file-explorer">File Explorer</a></li>

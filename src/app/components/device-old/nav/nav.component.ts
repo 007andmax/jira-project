@@ -79,4 +79,8 @@ export class NavOldComponent implements OnInit {
     this.router.navigate(
       [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device-old/dashboard/${this.type}/${this._id}`]);
   }
+  goToTerminal() {
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device-old/terminal/${this.type}/${this._id}`]);
+  }
 }
