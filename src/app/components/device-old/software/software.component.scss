@@ -1,3 +1,84 @@
+@import "./src/assets/styles/variable";
+
+.software-list {
+  &__container {
+    width: 100%;
+    max-width: 1096px;
+    margin: 0 auto;
+  }
+  table {
+    border-collapse: separate;
+    border-spacing: 0 2px;
+  }
+  thead {
+    th {
+      font-size: 11px;
+      line-height: 16px;
+      font-weight: 600;
+      letter-spacing: 0;
+      color: $primary-2;
+      text-transform: uppercase;
+      padding: 8px;
+
+      &:first-child {
+        padding-left: 16px;
+      }
+      &:last-child {
+        padding-right: 16px;
+      }
+    }
+  }
+  tbody {
+    td {
+      height: 55px;
+      background-color: $white;
+      border-top: 1px solid transparent;
+      border-bottom: 1px solid transparent;
+      overflow: visible;
+      white-space: unset;
+      text-overflow: unset;
+      font-size: 13px;
+      line-height: 20px;
+      font-weight: 500;
+      letter-spacing: 0;
+      color: $primary-2;
+      padding: 0 8px 0 8px;
+
+      &:first-child {
+        border-radius: 5px 0 0 5px;
+        border-left: 1px solid transparent;
+        padding-left: 16px;
+      }
+      &:last-child {
+        border-radius: 0 5px 5px 0;
+        border-right: 1px solid transparent;
+        padding-right: 16px;
+      }
+    }
+    tr {
+      &:hover td {
+        background-color: $gray-50;
+      }
+      &.--selected td {
+        background: #f4fbff;
+        border-color: $blue-light-600;
+
+        &:first-child {
+          border-top-left-radius: 5px;
+          border-bottom-left-radius: 5px;
+        }
+        &:last-child {
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+        }
+      }
+    }
+  }
+}
+
+
+
+
 .user-list-info{
     margin-top: 8px;
     margin-bottom: 38px;

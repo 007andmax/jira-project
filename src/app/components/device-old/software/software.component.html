@@ -1,130 +1,121 @@
 <main>
-    <div class="cmn-wrapper">
-        <div class="device-container">
-            <div class="page-container software-list">
-                <!-- Page Title -->
-                <software-header
-                    #header
-                    [loading]="loading"
-                    [softwareList]="softwareList"
-                    [deviceDetail]="deviceDetail"
-                    (onSearch)="onSearch($event)"
-                ></software-header>
-                <!-- Page Content -->
-                <div class="contant-area">
-                    <div class="table-wrap">
-                        <table
-                            #dataTable
-                            datatable
-                            [dtTrigger]="dtTrigger"
-                            [dtOptions]="dtOptions"
-                            class="dataTable cmn-tab-head"
-                        >
-                            <thead>
-                                <tr>
-                                    <th class="check-area">
-                                        <div class="cmn-checkbox">
-                                            <input
-                                                type="checkbox"
-                                                name="check_all"
-                                                id="check_all"
-                                                (change)="selectedRecord('all', -1);"
-                                                [(ngModel)]="check_all"
-                                                [value]="true"
-                                            >
-                                            <label
-                                                for="check_all"
-                                                aria-label="checkbox"
-                                            ></label>
-                                        </div>
-                                    </th>
-                                    <th class="s-name">
-                                        <span>Software Name</span>
-                                    </th>
-                                    <th class="pulisher">
-                                        <span>Publisher</span>
-                                    </th>
-                                    <th class="version">
-                                        <span>Version</span>
-                                    </th>
-                                    <th class="install">
-                                        <span>Installed on</span>
-                                    </th>
-                                    <th class="c-version">
-                                        <span>Current Version</span>
-                                    </th>
-                                    <th class="action">&nbsp;</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let software of softwareList | soft: search; let i = index;">
-                                    <td class="check-area">
-                                        <div class="cmn-checkbox">
-                                            <input
-                                                type="checkbox"
-                                                name="check_{{i}}"
-                                                (change)="selectedRecord('single', i);"
-                                                id="check_{{i}}"
-                                                [(ngModel)]="software.checked"
-                                                [value]="true"
-                                            >
-                                            <label
-                                                for="check_{{i}}"
-                                                aria-label="checkbox"
-                                            ></label>
-                                        </div>
-                                    </td>
-                                    <td class="s-name">
-                                        <!-- <span class="device-pic"><img src="..//html/assets/img/device/adb-reader.png" alt="adb-reader"/></span> -->
-                                        <h5>{{software.softName || 'N/A'}}</h5>
-                                    </td>
-                                    <td class="pulisher">{{software.softPublisher || 'N/A'}}</td>
-                                    <td class="version">{{software.softVersion || 'N/A'}}</td>
-                                    <td class="install">
-                                        {{(software.softInstalledOn | date : DateFormat) || 'N/A'}}
-                                    </td>
-                                    <td class="c-version">{{software.softVersion || 'N/A'}}</td>
-                                    <td class="action">
-                                        <a
-                                            class="remove"
-                                            data-tooltip="Remove"
-                                            (click)="onDeleteSoftware()"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/remove.svg"
-                                                alt="remove"
-                                            >
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <!-- <table class="cmn-table" *ngFor="let software of softwareList; let i = index;">
-                  <tr>
-                    <td class="check-area">
-                      <div class="cmn-checkbox">
-                        <input type="checkbox" name="check_{{i}}" (change)="selectedRecord('single', i);" id="check_{{i}}" [(ngModel)]="software.checked" [value]="true"/>
-                        <label for="check_{{i}}" aria-label="checkbox"></label>
-                      </div>
-                    </td> 
-                    <td class="s-name">
-                      <span class="device-pic"><img src="..//html/assets/img/device/adb-reader.png" alt="adb-reader"/></span>
-                      <h5>{{software.softName}}</h5>
-                    </td>
-                    <td class="pulisher">{{software.softPublisher}}</td>
-                    <td class="version">{{software.softVersion || 'N/A'}}</td>
-                    <td class="install">{{(software.softInstalledOn | date : DateFormat) || 'N/A'}}</td>
-                    <td class="c-version">{{software.softVersion || 'N/A'}}</td>
-                    <td class="action">
-                      <a class="remove" data-tooltip="Remove" (click)="onDeleteSoftware()"><img src="..//html/assets/img/device/remove.svg" alt="remove"/></a>
-                    </td>
-                  </tr>
-                </table> -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <app-ticket-task></app-ticket-task>
+    <div class="cmn-wrapper software-list">
+      <div class="software-list__container">
+        <!-- Page Title -->
+        <software-header
+          #header
+          [loading]="loading"
+          [softwareList]="softwareList"
+          [deviceDetail]="deviceDetail"
+          (onSearch)="onSearch($event)"
+        ></software-header>
+        <!-- Page Content -->
+        <table
+          #dataTable
+          datatable
+          [dtTrigger]="dtTrigger"
+          [dtOptions]="dtOptions"
+          class="dataTable cmn-tab-head"
+        >
+          <thead>
+          <tr>
+            <th class="check-area">
+              <div class="cmn-checkbox">
+                <input
+                  type="checkbox"
+                  name="check_all"
+                  id="check_all"
+                  (change)="selectedRecord('all', -1);"
+                  [(ngModel)]="check_all"
+                  [value]="true"
+                >
+                <label
+                  for="check_all"
+                  aria-label="checkbox"
+                ></label>
+              </div>
+            </th>
+            <th class="s-name">
+              <span>Software Name</span>
+            </th>
+            <th class="pulisher">
+              <span>Publisher</span>
+            </th>
+            <th class="version">
+              <span>Version</span>
+            </th>
+            <th class="install">
+              <span>Installed on</span>
+            </th>
+            <th class="c-version">
+              <span>Current Version</span>
+            </th>
+            <th class="action">&nbsp;</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let software of softwareList | soft: search; let i = index;">
+            <td class="check-area">
+              <div class="cmn-checkbox">
+                <input
+                  type="checkbox"
+                  name="check_{{i}}"
+                  (change)="selectedRecord('single', i);"
+                  id="check_{{i}}"
+                  [(ngModel)]="software.checked"
+                  [value]="true"
+                >
+                <label
+                  for="check_{{i}}"
+                  aria-label="checkbox"
+                ></label>
+              </div>
+            </td>
+            <td class="s-name">
+              <!-- <span class="device-pic"><img src="..//html/assets/img/device/adb-reader.png" alt="adb-reader"/></span> -->
+              {{software.softName || 'N/A'}}
+            </td>
+            <td class="pulisher">{{software.softPublisher || 'N/A'}}</td>
+            <td class="version">{{software.softVersion || 'N/A'}}</td>
+            <td class="install">
+              {{(software.softInstalledOn | date : DateFormat) || 'N/A'}}
+            </td>
+            <td class="c-version">{{software.softVersion || 'N/A'}}</td>
+            <td class="action">
+              <a
+                class="remove pointer"
+                data-tooltip="Remove"
+                (click)="onDeleteSoftware()"
+              >
+                <span class="icon__remove qt-bg-contain qt-sz-20 qt-dib"></span>
+              </a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <!-- <table class="cmn-table" *ngFor="let software of softwareList; let i = index;">
+          <tr>
+            <td class="check-area">
+              <div class="cmn-checkbox">
+                <input type="checkbox" name="check_{{i}}" (change)="selectedRecord('single', i);" id="check_{{i}}" [(ngModel)]="software.checked" [value]="true"/>
+                <label for="check_{{i}}" aria-label="checkbox"></label>
+              </div>
+            </td>
+            <td class="s-name">
+              <span class="device-pic"><img src="..//html/assets/img/device/adb-reader.png" alt="adb-reader"/></span>
+              <h5>{{software.softName}}</h5>
+            </td>
+            <td class="pulisher">{{software.softPublisher}}</td>
+            <td class="version">{{software.softVersion || 'N/A'}}</td>
+            <td class="install">{{(software.softInstalledOn | date : DateFormat) || 'N/A'}}</td>
+            <td class="c-version">{{software.softVersion || 'N/A'}}</td>
+            <td class="action">
+              <a class="remove" data-tooltip="Remove" (click)="onDeleteSoftware()"><img src="..//html/assets/img/device/remove.svg" alt="remove"/></a>
+            </td>
+          </tr>
+        </table> -->
+      </div>
+      <app-ticket-task></app-ticket-task>
     </div>
 </main>
 <div
