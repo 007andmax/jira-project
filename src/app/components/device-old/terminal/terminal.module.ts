@@ -18,5 +18,6 @@ import { TerminalManageCategoryComponent } from './terminal-manage-category/term
         TerminalRoutingOldModule,
         NgbModule,
     ],
+    entryComponents: [TerminalManageCategoryComponent]
 })
 export class TerminalOldModule { }

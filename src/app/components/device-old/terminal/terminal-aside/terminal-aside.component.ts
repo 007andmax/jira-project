@@ -1,7 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { commandModal } from '../../class/device';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TerminalManageCategoryComponent } from '../terminal-manage-category/terminal-manage-category.component';
+import { TerminalService } from '../../_services/terminal.service';
+import { first } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'terminal-aside',
@@ -10,9 +13,8 @@ import { TerminalManageCategoryComponent } from '../terminal-manage-category/ter
 })
 export class TerminalAsideComponent implements OnInit {
   create = false;
-  submitted = false;
-  showDescription = false;
-  scriptDetail = false;
+  @Input() submitted = false;
+  @Input() showDescription = false;
   lineNumber = [1];
   commandModal: commandModal = {
     title: '',
@@ -24,101 +26,174 @@ export class TerminalAsideComponent implements OnInit {
     typeName: '',
     description: ''
   };
-  commandList = [];
-  cmdCategoryReadList = [];
+  @Input() commandList = [];
+  @Input() cmdCategoryReadList = [];
+  historyList = [];
+  his = '';
+  @ViewChild('commandFrm') form: any;
+  @Input() loading: boolean;
+  @Input() _id: string = '';
   @Input() copyToTerminal: Function;
   @Input() openEditModal: Function;
+  @Input() getCommandList: Function;
   @Input() openModal: Function;
-  constructor(private modalService: NgbModal,) { }
+  constructor(private modalService: NgbModal,
+    private toastr: ToastrService,
+    private terminalService: TerminalService,) { }
 
   ngOnInit() {
+    this.getHistory();
   }
-  /* toggleTerminal(type, typeName) {
-     this.commandModal.type = type;
-     this.commandModal.typeName = typeName;
-   }
-   openAddModal() {
-     this.resetCmdModal();
-     this.submitted = false;
-     this.create = !this.create;
-     this.showDescription = false;
-   }
-   resetCmdModal() {
-     this.commandModal = {
-       title: '',
-       command: '',
-       category: '',
-       categoryId: '',
-       id: '',
-       type: '',
-       typeName: '',
-       description: ''
-     };
-     this.command = '';
-   }
-   setCommand(name, id) {
-     this.commandModal.category = name;
-     this.commandModal.categoryId = id;
-   }
-   manageCategory() {
-     const modalRef = this.modalService.open(TerminalManageCategoryComponent, { windowClass: 'quote-send-modal page-settings', backdrop: 'static', keyboard: false });
-   }
-   countLineNumber() {
-     var text = $("#cmd textarea").val().toString();
-     var lines = text.split(/\r*\n/);
-     var count = lines.length;
-     this.lineNumber = [];
-     for (let index = 0; index < count; index++) {
-       this.lineNumber[index] = index + 1;
-     }
-     $('#cmd_line').scrollTop($('#cmd textarea').scrollTop());
-   }
-   createCommand() {
-     this.submitted = true;
-     if (this.form.invalid) {
-       return;
-     }
-     this.loading = true;
-     let data = {
-       title: this.commandModal.title,
-       categoryId: this.commandModal.categoryId !== undefined ? this.commandModal.categoryId : this.cmdCategoryReadList.filter(val => val.name === this.commandModal.category)[0].id,
-       command: this.commandModal.command,
-       id: this.commandModal.id,
-       type: this.commandModal.type,
-       description: this.commandModal.description
-     }
-     if (this.commandModal.id == '') {
-       delete data.id;
-       this.terminalService.createCommand(data)
-         .pipe(first())
-         .subscribe(resp => {
-           this.loading = false;
-           if (resp.id !== '') {
-             this.toastr.success('Command Created Successfully');
-             this.create = !this.create;
-             this.getCommandList();
-           }
-         },
-           error => {
-             const statusError = error;
-             this.loading = false;
-           });
-     } else {
-       this.terminalService.updateCommand(data)
-         .pipe(first())
-         .subscribe(resp => {
-           this.loading = false;
-           if (resp.id !== '') {
-             this.toastr.success('Command Updated Successfully');
-             this.create = !this.create;
-             this.getCommandList();
-           }
-         },
-           error => {
-             const statusError = error;
-             this.loading = false;
-           });
-     }
- 
-   }*/
+  openEditCommand(data: any, flag: string) {
+    this.commandModal.title = data.title;
+    this.commandModal.type = data.type;
+    this.commandModal.description = data.description;
+    this.commandModal.command = data.command;
+    this.lineNumber = [];
+    for (let index = 1; index <= data.command.split(/\r*\n/).length; index++) {
+      this.lineNumber.push(index);
+    }
+    if (flag === 'copy') {
+      this.commandModal.id = '';
+    } else {
+      this.commandModal.id = data.id;
+    }
+    this.commandModal.categoryId = data.categoryId;
+    if (this.commandModal.type === 'CMD') {
+      this.commandModal.typeName = 'Command Line'
+    } else if (this.commandModal.type === 'POWERSHELL') {
+      this.commandModal.typeName = 'Powershell'
+    }
+    let res = this.cmdCategoryReadList.filter(x => x.id == data.categoryId);
+    this.commandModal.category = res.length > 0 ? res[0].name : '';
+    this.create = !this.create;
+  }
+  toggleTerminal(type, typeName) {
+    this.commandModal.type = type;
+    this.commandModal.typeName = typeName;
+  }
+  openAddModal() {
+    this.resetCmdModal();
+    this.submitted = false;
+    this.create = !this.create;
+    this.showDescription = false;
+  }
+  resetCmdModal() {
+    this.commandModal = {
+      title: '',
+      command: '',
+      category: '',
+      categoryId: '',
+      id: '',
+      type: '',
+      typeName: '',
+      description: ''
+    };
+    // this.command = '';
+  }
+  getHistory() {
+    this.terminalService.getHistory(this._id)
+      .pipe(first())
+      .subscribe(data => {
+        if (Object.keys(data).length > 0) {
+          let obj = data[this._id]
+          this.his = obj;
+          let arr = obj.split('↵');
+          if (arr.length == 1) {
+            arr = obj.split(/\r*\n/);
+          }
+          let index = 0;
+          let arr1 = [];
+
+          arr.forEach((element, index) => {
+            if (Date.parse(element)) {
+              if (index !== 0) {
+                this.historyList.push(arr1);
+                arr1 = [];
+                index += 1;
+              } else {
+                index += 1;
+              }
+            }
+            arr1.push(element);
+            if (index === arr.length - 1) {
+              this.historyList.push(arr1);
+            }
+          });
+        }
+      },
+        error => {
+          const statusError = error;
+          if (statusError && statusError.meta) {
+            this.toastr.error(statusError.meta.message);
+          } else {
+            this.toastr.error('Something went wrong please try again.');
+          }
+        });
+  }
+  setCommand(name, id) {
+    this.commandModal.category = name;
+    this.commandModal.categoryId = id;
+  }
+  manageCategory() {
+    const modalRef = this.modalService.open(TerminalManageCategoryComponent, { windowClass: 'quote-send-modal page-settings', backdrop: 'static', keyboard: false });
+  }
+  countLineNumber() {
+    var text = $("#cmd textarea").val().toString();
+    var lines = text.split(/\r*\n/);
+    var count = lines.length;
+    this.lineNumber = [];
+    for (let index = 0; index < count; index++) {
+      this.lineNumber[index] = index + 1;
+    }
+    $('#cmd_line').scrollTop($('#cmd textarea').scrollTop());
+  }
+  createCommand() {
+    this.submitted = true;
+    if (this.form.invalid) {
+      return;
+    }
+    this.loading = true;
+    let data = {
+      title: this.commandModal.title,
+      categoryId: this.commandModal.categoryId !== undefined ? this.commandModal.categoryId : this.cmdCategoryReadList.filter(val => val.name === this.commandModal.category)[0].id,
+      command: this.commandModal.command,
+      id: this.commandModal.id,
+      type: this.commandModal.type,
+      description: this.commandModal.description
+    }
+    if (this.commandModal.id == '') {
+      delete data.id;
+      this.terminalService.createCommand(data)
+        .pipe(first())
+        .subscribe(resp => {
+          this.loading = false;
+          if (resp.id !== '') {
+            this.toastr.success('Command Created Successfully');
+            this.create = !this.create;
+            this.getCommandList();
+          }
+        },
+          error => {
+            const statusError = error;
+            this.loading = false;
+          });
+    } else {
+      this.terminalService.updateCommand(data)
+        .pipe(first())
+        .subscribe(resp => {
+          this.loading = false;
+          if (resp.id !== '') {
+            this.toastr.success('Command Updated Successfully');
+            this.create = !this.create;
+            this.getCommandList();
+          }
+        },
+          error => {
+            const statusError = error;
+            this.loading = false;
+          });
+    }
+
+  }
 }

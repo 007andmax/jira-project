@@ -15,6 +15,7 @@ import { TerminalStateService } from '../states/terminal-state.service';
 import { DELETE_COMMAND } from 'src/app/const/confirm';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
+import { TerminalAsideComponent } from './terminal-aside/terminal-aside.component';
 
 @Component({
   selector: 'app-terminal',
@@ -24,23 +25,12 @@ import { ConfirmComponent } from '../../shared/confirm/confirm.component';
   providers: [UserListService]
 })
 export class TerminalComponent implements OnInit {
-  create = false;
   closeResult = '';
   submitted = false;
   loading = false;
-  his = '';
   sub: Subscription = new Subscription();
-  @ViewChild('commandFrm') form: any;
-  commandModal: commandModal = {
-    title: '',
-    command: '',
-    category: '',
-    categoryId: '',
-    id: '',
-    type: '',
-    typeName: '',
-    description: ''
-  };
+
+
   myScriptModal: scriptModal = {
     category: '',
     categoryId: '',
@@ -63,7 +53,7 @@ export class TerminalComponent implements OnInit {
     description: ''
   };
   editCmd = '';
-  lineNumber = [1];
+
   lineNumberDetail = [1];
   deleteId = '';
   command = '';
@@ -72,7 +62,7 @@ export class TerminalComponent implements OnInit {
   myScriptListFilter = [];
   sharedScriptList = [];
   sharedScriptListFilter = [];
-  historyList = [];
+
   cmdCategoryList = [];
   cmdCategoryReadList = [];
   runScript = false;
@@ -84,6 +74,7 @@ export class TerminalComponent implements OnInit {
   showDescription = false;
   terminalHeight = 0;
   cmdHeight = 0;
+  @ViewChild('aside') aside: TerminalAsideComponent;
   @ViewChild('editor') editorElement: ElementRef;
   code = '';
   config = {
@@ -113,7 +104,6 @@ export class TerminalComponent implements OnInit {
     // this.socketService.initializeWebSocketConnection();
     this.getCommandList();
     this.getCmdCategoryRead();
-    this.getHistory();
     // this.socketService.subsribeToCmdShellOutput();
     $('#cmd textarea').scroll(function () {
       $('#cmd_line').scrollTop($('#cmd textarea').scrollTop());
@@ -163,46 +153,7 @@ export class TerminalComponent implements OnInit {
         });
   }
 
-  getHistory() {
-    this.terminalService.getHistory(this._id)
-      .pipe(first())
-      .subscribe(data => {
-        if (Object.keys(data).length > 0) {
-          let obj = data[this._id]
-          this.his = obj;
-          let arr = obj.split('↵');
-          if (arr.length == 1) {
-            arr = obj.split(/\r*\n/);
-          }
-          let index = 0;
-          let arr1 = [];
 
-          arr.forEach((element, index) => {
-            if (Date.parse(element)) {
-              if (index !== 0) {
-                this.historyList.push(arr1);
-                arr1 = [];
-                index += 1;
-              } else {
-                index += 1;
-              }
-            }
-            arr1.push(element);
-            if (index === arr.length - 1) {
-              this.historyList.push(arr1);
-            }
-          });
-        }
-      },
-        error => {
-          const statusError = error;
-          if (statusError && statusError.meta) {
-            this.toastr.error(statusError.meta.message);
-          } else {
-            this.toastr.error('Something went wrong please try again.');
-          }
-        });
-  }
 
 
 
@@ -215,6 +166,7 @@ export class TerminalComponent implements OnInit {
       .subscribe(data => {
         if (isArray(this.cmdCategoryReadList)) {
           this.cmdCategoryReadList = data;
+          this.cd.detectChanges();
         }
       },
         error => {
@@ -257,28 +209,7 @@ export class TerminalComponent implements OnInit {
 
 
   openEditCommand(data: any, flag: string) {
-    this.commandModal.title = data.title;
-    this.commandModal.type = data.type;
-    this.commandModal.description = data.description;
-    this.commandModal.command = data.command;
-    this.lineNumber = [];
-    for (let index = 1; index <= data.command.split(/\r*\n/).length; index++) {
-      this.lineNumber.push(index);
-    }
-    if (flag === 'copy') {
-      this.commandModal.id = '';
-    } else {
-      this.commandModal.id = data.id;
-    }
-    this.commandModal.categoryId = data.categoryId;
-    if (this.commandModal.type === 'CMD') {
-      this.commandModal.typeName = 'Command Line'
-    } else if (this.commandModal.type === 'POWERSHELL') {
-      this.commandModal.typeName = 'Powershell'
-    }
-    let res = this.cmdCategoryReadList.filter(x => x.id == data.categoryId);
-    this.commandModal.category = res.length > 0 ? res[0].name : '';
-    this.create = !this.create;
+    this.aside.openEditCommand(data, flag);
   }
 
 

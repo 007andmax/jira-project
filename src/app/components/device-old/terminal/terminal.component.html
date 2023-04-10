@@ -61,7 +61,19 @@
             </div>
         </div>
         <!-- Right Side bar -->
-        <terminal-aside></terminal-aside>
+        <terminal-aside
+            #aside
+            [submitted]="submitted"
+            [showDescription]="showDescription"
+            [commandList]="commandList"
+            [loading]="loading"
+            [_id]="_id"
+            [cmdCategoryReadList]="cmdCategoryReadList"
+            [copyToTerminal]="copyToTerminal"
+            [openEditModal]="openEditModal"
+            [getCommandList]="getCommandList"
+            [openModal]="openModal"
+        ></terminal-aside>
         <!-- Script Sidebar -->
         <aside
             class="right-sidebar script-sidebar"
@@ -541,6 +553,10 @@
 
 
 
+
+
+
+
                                         </textarea>
                                     </div>
                                     <textarea
@@ -593,6 +609,10 @@
                 </div>
             </div>
         </aside>
+
+
+
+
 
 
 
