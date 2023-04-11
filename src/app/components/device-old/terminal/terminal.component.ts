@@ -31,11 +31,7 @@ export class TerminalComponent implements OnInit {
   sub: Subscription = new Subscription();
 
 
-  myScriptModal: scriptModal = {
-    category: '',
-    categoryId: '',
-    search: ''
-  };
+
   sharedScriptModal: scriptModal = {
     category: '',
     categoryId: '',
@@ -237,24 +233,7 @@ export class TerminalComponent implements OnInit {
     }
   }
 
-  filterMyScript(category: any) {
-    if (category !== undefined) {
-      this.myScriptModal.category = category.name;
-      this.myScriptModal.categoryId = category.id;
-    } else {
-      this.myScriptModal.category = '';
-      this.myScriptModal.categoryId = '';
-    }
-    if (this.myScriptModal.search === '' && this.myScriptModal.category === '') {
-      this.myScriptListFilter = this.myScriptList;
-    } else if (this.myScriptModal.category !== '' && this.myScriptModal.search !== '') {
-      this.myScriptListFilter = this.myScriptList.filter(val => val.title.toLowerCase().includes(this.myScriptModal.search.toLowerCase()) && val.categoryId === this.myScriptModal.categoryId);
-    } else if (this.myScriptModal.search !== '' && this.myScriptModal.category === '') {
-      this.myScriptListFilter = this.myScriptList.filter(val => val.title.toLowerCase().includes(this.myScriptModal.search.toLowerCase()))
-    } else if (this.myScriptModal.search === '' && this.myScriptModal.category !== '') {
-      this.myScriptListFilter = this.myScriptList.filter(val => val.categoryId === this.myScriptModal.categoryId)
-    }
-  }
+
 
   filterSharedScript(category: any) {
     if (category !== undefined) {
@@ -281,11 +260,7 @@ export class TerminalComponent implements OnInit {
       this.myScriptListFilter = this.myScriptList;
       this.sharedScriptListFilter = this.sharedScriptList;
     }
-    this.myScriptModal = {
-      category: '',
-      categoryId: '',
-      search: ''
-    }
+
     this.sharedScriptModal = {
       category: '',
       categoryId: '',
