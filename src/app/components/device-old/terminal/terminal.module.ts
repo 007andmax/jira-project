@@ -6,10 +6,11 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TerminalAsideComponent } from './terminal-aside/terminal-aside.component';
 import { TerminalManageCategoryComponent } from './terminal-manage-category/terminal-manage-category.component';
+import { TerminalRunScriptComponent } from './terminal-run-script/terminal-run-script.component';
 
 
 @NgModule({
-    declarations: [TerminalComponent, TerminalAsideComponent, TerminalManageCategoryComponent,
+    declarations: [TerminalComponent, TerminalAsideComponent, TerminalManageCategoryComponent, TerminalRunScriptComponent,
 
     ],
     imports: [

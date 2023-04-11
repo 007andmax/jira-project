@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { commandModal } from '../../class/device';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TerminalManageCategoryComponent } from '../terminal-manage-category/terminal-manage-category.component';
@@ -33,16 +33,24 @@ export class TerminalAsideComponent implements OnInit {
   @ViewChild('commandFrm') form: any;
   @Input() loading: boolean;
   @Input() _id: string = '';
-  @Input() copyToTerminal: Function;
+
   @Input() openEditModal: Function;
   @Input() getCommandList: Function;
   @Input() openModal: Function;
+  @Output() onCopyToTerminal = new EventEmitter();
+  @Output() onOpenRunScript = new EventEmitter();
   constructor(private modalService: NgbModal,
     private toastr: ToastrService,
     private terminalService: TerminalService,) { }
 
   ngOnInit() {
     this.getHistory();
+  }
+  copyToTerminal(cmd, type, file) {
+    this.onCopyToTerminal.emit({ cmd, type, file })
+  }
+  openRunScript() {
+    this.onOpenRunScript.emit(null);
   }
   openEditCommand(data: any, flag: string) {
     this.commandModal.title = data.title;

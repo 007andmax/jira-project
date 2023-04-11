@@ -69,7 +69,8 @@
             [loading]="loading"
             [_id]="_id"
             [cmdCategoryReadList]="cmdCategoryReadList"
-            [copyToTerminal]="copyToTerminal"
+            (onCopyToTerminal)="copyToTerminal($event.cmd, $event.type, $event.file)"
+            (onOpenRunScript)="openRunScript()"
             [openEditModal]="openEditModal"
             [getCommandList]="getCommandList"
             [openModal]="openModal"
@@ -557,6 +558,9 @@
 
 
 
+
+
+
                                         </textarea>
                                     </div>
                                     <textarea
@@ -609,6 +613,9 @@
                 </div>
             </div>
         </aside>
+
+
+
 
 
 
