@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { NetworkScanCredentialsAsideComponent } from './network-scan-credentials-aside.component';
 import { NetworkScanCredentialsAddComponent } from '../network-scan-credentials-add/network-scan-credentials-add.component';
 import { NetworkScanCredentialsAsideItemComponent } from './network-scan-credentials-aside-item/network-scan-credentials-aside-item.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
     declarations: [
@@ -15,7 +16,8 @@ import { NetworkScanCredentialsAsideItemComponent } from './network-scan-credent
     imports: [
         CommonModule,
         NgbModule,
-        FormsModule
+        FormsModule,
+        InfiniteScrollModule
     ],
     exports: [NetworkScanCredentialsAsideComponent]
 })

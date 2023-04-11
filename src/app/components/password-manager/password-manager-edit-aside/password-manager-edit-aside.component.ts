@@ -15,10 +15,11 @@ import { REMOVE_RECORD } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { PasswordRecordCategories } from '../class/password-record-categories';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
+import { PasswordRecordHistory } from '../class/password-record-history';
 
 /**
  * Password manager edit aside component
@@ -32,9 +33,11 @@ import { AppStateService } from 'src/app/states/app/app-state.service';
 export class PasswordManagerEditAsideComponent implements OnInit {
   public selectedClient: any;
   public opened: boolean = false;
+  preloaderHistory: boolean = true;
   showSecretCode: boolean = false;
   isEditSecretKey: boolean = false;
   isGetSecretCode: boolean = false;
+  subSecretCode: Subscription;
   showPassword: boolean = false;
   tab: string = 'PASSWORD_DETAIL'
   categories: Array<PasswordRecordCategories> = [];
@@ -83,6 +86,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     })
     this.sub.add(getOnCompanies);
     let onEditForm = this.passwordManagerService.onEditForm.subscribe((res) => {
+      if (this.subSecretCode) this.subSecretCode.unsubscribe();
       this.editItem = new PasswordRecord(JSON.parse(JSON.stringify(res)));
       this.selectedUserAndDevices = [];
       this.usersList = [];
@@ -110,6 +114,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       this.isEditSecretKey = false;
       this.isGetSecretCode = true;
       this.showPassword = false;
+      this.preloaderHistory = true;
+      this.changeTab('PASSWORD_DETAIL');
       if (this.intervalContainer) clearInterval(this.intervalContainer);
       if (this.showSecretCode && this.editItem.otpEnable) this.getCodeRecords();
     });
@@ -128,11 +134,11 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       if (this.categoriesSelect) this.categoriesSelect.reset(this.categories);
     })
     this.sub.add(onGetCategories);
-    let onChangeRealTime = this.passwordManagerStateService.onChangeRealTime.subscribe(newChange => {
-      if (newChange.action === 'PASSWORD_RECORD_UPDATED' && this.editItem && newChange.data.id === this.editItem.id) this.editItem.updateHistories(newChange.data.histories);
-      if (!this.cd['destroyed']) this.cd.detectChanges();
-    })
-    this.sub.add(onChangeRealTime);
+    /* let onChangeRealTime = this.passwordManagerStateService.onChangeRealTime.subscribe(newChange => {
+       if (newChange.action === 'PASSWORD_RECORD_UPDATED' && this.editItem && newChange.data.id === this.editItem.id) this.editItem.updateHistories(newChange.data.histories);
+       if (!this.cd['destroyed']) this.cd.detectChanges();
+     })
+     this.sub.add(onChangeRealTime);*/
   }
   toggleSecretCode() {
     this.showSecretCode = !this.showSecretCode;
@@ -151,9 +157,18 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.editItem.setResetAuthenticationKey(true);
     this.isEditSecretKey = false;
   }
+  changeTab(data) {
+    this.tab = data;
+    if (data == 'PASSWORD_HISTORY') {
+      if (!this.editItem.isHistory) this.passwordManagerService.getHistory(this.editItem.id).subscribe((res: any) => {
+        this.editItem.updateHistories(res.map(item => new PasswordRecordHistory(item)));
+        this.preloaderHistory = false;
+      })
+    }
+  }
   getCodeRecords() {
     this.timeCount = 0;
-    this.passwordManagerService.getCodeRecords(this.editItem.id).subscribe((data: any) => {
+    this.subSecretCode = this.passwordManagerService.getCodeRecords(this.editItem.id).subscribe((data: any) => {
       this.editItem.setOtp(data.otp);
       this.editItem.setExpirationDate(data.expirationDate);
       this.isGetSecretCode = true;

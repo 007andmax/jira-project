@@ -154,17 +154,9 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     }
   }
   openTikcet(id) {
-    if (["73221c72-f87c-4519-8235-c4b57ad1cc19", "72381bff-127c-4a63-9d2e-6e952350dcbd"].find(item => item == this.companiesStateService.getCurrentCompany().id)) {
-      this.ticketStateService.setTicketRoutingId(id);
-      const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/ticket/${id}`;
-      window.open(url, '_blank');
-    } else {
-      this.ticketsStateService.onOpenTicket();
-      this.ticketsService.getTicket(id).subscribe(data => {
-        this.ticketsStateService.onEditTicket(data);
-      })
-    }
-
+    this.ticketStateService.setTicketRoutingId(id);
+    const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/ticket/${id}`;
+    window.open(url, '_blank');
   }
   goToQuoteEdit(quote) {
     this.quoteStateService.setEdit(quote);

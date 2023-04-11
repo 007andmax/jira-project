@@ -20,7 +20,8 @@ users-aside-detail-documents-item {
 .qt-page-list__body-table-container {
     position: relative;
     min-height: auto !important;
-    height: 100%;
+    height: calc(100% - 100px);
+    overflow-y: auto;
 }
 .pengind-loading {
     bottom: 20px;

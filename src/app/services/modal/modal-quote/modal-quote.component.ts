@@ -86,12 +86,12 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   public ngOnInit() {
     this.initResendMode();
     this.getAllUsers((this.data instanceof QuoteEdit || this.data instanceof QuotePreview) ? this.data.company.id : this.data.companyId);
-    this.userInput.nativeElement.onblur = (e) => {
-      if (this.matAutocomplete.isOpen) {
-        let modal = this.matAutocomplete.panel.nativeElement;
-        modal.parentNode.style.width = 'max-content';
-      }
-    }
+    /* this.userInput.nativeElement.onblur = (e) => {
+       if (this.matAutocomplete.isOpen) {
+         let modal = this.matAutocomplete.panel.nativeElement;
+         modal.parentNode.style.width = 'max-content';
+       }
+     }*/
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) this.close();
       this.showConfirm = false;
@@ -141,14 +141,13 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
    * Add user to selected
    * @param event - selected user
    */
-  public selected(event: MatAutocompleteSelectedEvent): void {
+  public selected(user): void {
     this.showError = false;
-    this.selectedUsers.push(event.option.value.primaryEmail);
-    this.usersEmails.push(event.option.value.primaryEmail);
+    this.selectedUsers.push(user.primaryEmail);
+    this.usersEmails.push(user.primaryEmail);
     this.quoteStateService.setUsersEmail(this.usersEmails);
-    // this.userInput.nativeElement.blur();
-    this.userCtrl.setValue(null);
     this.userInput.nativeElement.value = '';
+    this.userCtrl.setValue(null);
   }
 
   /**
