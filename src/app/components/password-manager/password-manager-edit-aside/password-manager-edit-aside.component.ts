@@ -333,8 +333,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   getUserName(user) {
     return `${user.firstName} ${user.lastName}`;
   }
-  getNameForAvatar(user) {
-    if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}${(user.lastName) ? user.lastName[0].toUpperCase() : ''}`;
-    return '';
+  getNameForAvatar(item) {
+    return `${item.userName[0].toUpperCase()}${item.userName[item.userName.indexOf(" ") + 1].toUpperCase()}`;
   }
 }
