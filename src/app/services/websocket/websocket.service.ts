@@ -109,7 +109,7 @@ export class WebsocketService {
     this.onConnect();
     let that = this;
     this.stompClient.onConnect = (data) => {
-      that.subsribeToKafka();
+      //   that.subsribeToKafka();
       that.subsribeToPermissions();
       that.subsribeToUsers();
       that.subsribeToDevices();
