@@ -10,6 +10,7 @@ export class DeviceDetailService {
   onGetDevice: EventEmitter<any> = new EventEmitter();
 
   public setDevice(data) {
+    this.device = data;
     this.onGetDevice.emit(data);
   }
   addDevice(product) {

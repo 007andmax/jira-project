@@ -1547,11 +1547,6 @@ body {
                         margin-right: 16px;
                         margin-bottom: 0;
                     }
-                    .device-small-dropdown {
-                        .dropdown-menu {
-                            top: 1px !important;
-                        }
-                    }
                 }
             }
             .middle-content {
@@ -1625,21 +1620,6 @@ body {
             position: relative;
             text-align: left;
             width: 100%;
-            .drop-down-select {
-                float: left;
-                width: 100%;
-                @include border-radius(4px);
-                border: solid 1px $gray-500--old;
-                background-color: $white;
-                padding: 9px 15px;
-                font-size: 13px;
-                font-weight: normal;
-                line-height: 1.54;
-                letter-spacing: normal;
-                color: $primary-2;
-                outline: none !important;
-                cursor: pointer;
-            }
             .selcted-dp {
                 height: 24px;
                 width: 24px;
@@ -1766,80 +1746,6 @@ body {
                 }
             }
         }
-
-        /***  Samll Dropdown Header ***/
-
-        .device-small-dropdown {
-            .dropdown-toggle {
-                @include border-radius(3px);
-                background: url("/assets/img/device/filter-dropdown.svg") no-repeat right 8px center $white;
-                font-size: 12px;
-                font-weight: normal;
-                font-stretch: normal;
-                font-style: normal;
-                line-height: 1.33;
-                letter-spacing: normal;
-                color: $primary-2;
-                padding: 8px 30px 8px 8px;
-                position: relative;
-                display: -webkit-flex;
-                display: flex;
-                align-items: center;
-                border: none;
-                outline: none;
-                text-transform: capitalize;
-                &::before {
-                    content: "";
-                    width: 6px;
-                    height: 6px;
-                    background-color: $warning;
-                    @include border-radius(50%);
-                    margin-right: 6px;
-                    display: inline-block;
-                    margin-top: -1px;
-                }
-                &.low {
-                    &::before {
-                        background-color: $success;
-                    }
-                }
-                &.high {
-                    &::before {
-                        background-color: $error;
-                    }
-                }
-                &::after {
-                    display: none;
-                }
-            }
-            .dropdown-menu {
-                border: none;
-                margin: 0px 0 0 0;
-                @include border-radius(3px);
-                box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
-                background-color: $white;
-                width: auto;
-                min-width: 140px;
-                top: 31px !important;
-                left: 0 !important;
-                li {
-                    padding: 0;
-                    display: block;
-                    a.dropdown-item {
-                        padding: 3px 14px;
-                        font-size: 12px;
-                        color: $primary-2;
-                        text-transform: capitalize;
-                        display: block;
-                        &:hover {
-                            background-color: $primary-1;
-                            color: $white;
-                        }
-                    }
-                }
-            }
-        }
-
         /*** File Uploader ***/
 
         .upload-box {
@@ -1954,38 +1860,6 @@ body {
                     height: 32px;
                     @include border-radius(50%);
                     overflow: hidden;
-                }
-                &.device-selected {
-                    .user-added {
-                        &::after {
-                            background: url(/assets/img/device/selected.svg) no-repeat center;
-                        }
-                    }
-                }
-                &.device-unselected {
-                    .user-added {
-                        &::after {
-                            background: url(/assets/img/device/unselected.svg) no-repeat center;
-                        }
-                    }
-                }
-                .user-added {
-                    display: inline-block;
-                    position: relative;
-                    width: 32px;
-                    height: 32px;
-                    &::after {
-                        width: 16px;
-                        height: 16px;
-                        content: "";
-                        bottom: -6px;
-                        left: 0;
-                        right: 0;
-                        margin: auto;
-                        background: url(/assets/img/device/unselected.svg) no-repeat center;
-                        position: absolute;
-                        @include border-radius(50%);
-                    }
                 }
                 .user-dp {
                     display: inline-block;
