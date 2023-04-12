@@ -79,6 +79,9 @@
         <terminal-run-script
             *ngIf="runScript"
             [runScript]="runScript"
+            [myScriptList]="myScriptList"
+            [myScriptListFilter]="myScriptListFilter"
+            [sharedScriptListFilter]="sharedScriptListFilter"
             [sharedScriptList]="sharedScriptList"
             [sharedScriptModal]="sharedScriptModal"
             [cmdCategoryReadList]="cmdCategoryReadList"
@@ -296,6 +299,9 @@
 
 
 
+
+
+
                                         </textarea>
                                     </div>
                                     <textarea
@@ -348,6 +354,9 @@
                 </div>
             </div>
         </aside>
+
+
+
 
 
 

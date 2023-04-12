@@ -35,13 +35,14 @@ export class TerminalRunScriptComponent implements OnInit {
     this.onCopyToTerminal.emit({ cmd, type, file })
   }
   filterMyScript(category: any) {
-    if (category !== undefined) {
+    if (category) {
       this.myScriptModal.category = category.name;
       this.myScriptModal.categoryId = category.id;
     } else {
       this.myScriptModal.category = '';
       this.myScriptModal.categoryId = '';
     }
+    console.log("this.myScriptList", this.myScriptList);
     if (this.myScriptModal.search === '' && this.myScriptModal.category === '') {
       this.myScriptListFilter = this.myScriptList;
     } else if (this.myScriptModal.category !== '' && this.myScriptModal.search !== '') {
@@ -50,6 +51,24 @@ export class TerminalRunScriptComponent implements OnInit {
       this.myScriptListFilter = this.myScriptList.filter(val => val.title.toLowerCase().includes(this.myScriptModal.search.toLowerCase()))
     } else if (this.myScriptModal.search === '' && this.myScriptModal.category !== '') {
       this.myScriptListFilter = this.myScriptList.filter(val => val.categoryId === this.myScriptModal.categoryId)
+    }
+  }
+  filterSharedScript(category: any) {
+    if (category) {
+      this.sharedScriptModal.category = category.name;
+      this.sharedScriptModal.categoryId = category.id;
+    } else {
+      this.sharedScriptModal.category = '';
+      this.sharedScriptModal.categoryId = '';
+    }
+    if (this.sharedScriptModal.search === '' && this.sharedScriptModal.category === '') {
+      this.sharedScriptListFilter = this.sharedScriptList;
+    } else if (this.sharedScriptModal.category !== '' && this.sharedScriptModal.search !== '') {
+      this.sharedScriptListFilter = this.sharedScriptList.filter(val => val.title.toLowerCase().includes(this.sharedScriptModal.search.toLowerCase()) && val.categoryId === this.sharedScriptModal.categoryId);
+    } else if (this.sharedScriptModal.search !== '' && this.sharedScriptModal.category === '') {
+      this.sharedScriptListFilter = this.sharedScriptList.filter(val => val.title.toLowerCase().includes(this.sharedScriptModal.search.toLowerCase()))
+    } else if (this.sharedScriptModal.search === '' && this.sharedScriptModal.category !== '') {
+      this.sharedScriptListFilter = this.sharedScriptList.filter(val => val.categoryId === this.sharedScriptModal.categoryId)
     }
   }
   viewScriptDetail(data) {

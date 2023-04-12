@@ -233,27 +233,6 @@ export class TerminalComponent implements OnInit {
     }
   }
 
-
-
-  filterSharedScript(category: any) {
-    if (category !== undefined) {
-      this.sharedScriptModal.category = category.name;
-      this.sharedScriptModal.categoryId = category.id;
-    } else {
-      this.sharedScriptModal.category = '';
-      this.sharedScriptModal.categoryId = '';
-    }
-    if (this.sharedScriptModal.search === '' && this.sharedScriptModal.category === '') {
-      this.sharedScriptListFilter = this.sharedScriptList;
-    } else if (this.sharedScriptModal.category !== '' && this.sharedScriptModal.search !== '') {
-      this.sharedScriptListFilter = this.sharedScriptList.filter(val => val.title.toLowerCase().includes(this.sharedScriptModal.search.toLowerCase()) && val.categoryId === this.sharedScriptModal.categoryId);
-    } else if (this.sharedScriptModal.search !== '' && this.sharedScriptModal.category === '') {
-      this.sharedScriptListFilter = this.sharedScriptList.filter(val => val.title.toLowerCase().includes(this.sharedScriptModal.search.toLowerCase()))
-    } else if (this.sharedScriptModal.search === '' && this.sharedScriptModal.category !== '') {
-      this.sharedScriptListFilter = this.sharedScriptList.filter(val => val.categoryId === this.sharedScriptModal.categoryId)
-    }
-  }
-
   openRunScript() {
     this.runScript = !this.runScript;
     if (this.runScript === true) {
@@ -267,9 +246,6 @@ export class TerminalComponent implements OnInit {
       search: ''
     }
   }
-
-
-
   countLineNumberDetail() {
     var text = $("#cmd_detail textarea").val().toString();
     var lines = text.split(/\r*\n/);
@@ -282,6 +258,7 @@ export class TerminalComponent implements OnInit {
   }
 
   viewScriptDetail(data) {
+    console.log("data", data);
     this.scriptDetail = !this.scriptDetail;
     this.showDescription = false;
     this.scriptDetailModal = data;
