@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
@@ -31,7 +31,7 @@ import { PasswordRecordLink } from '../class/password-record-link';
   styleUrls: ['./password-manager-edit-aside.component.scss'],
 
 })
-export class PasswordManagerEditAsideComponent implements OnInit {
+export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
   public selectedClient: any;
   public opened: boolean = false;
   showSecretCode: boolean = false;
@@ -312,6 +312,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.passwordManagerStateService.setRecordForRemove(this.editItem);
   }
   ngOnDestroy() {
+    if (this.intervalContainer) clearInterval(this.intervalContainer);
     this.sub.unsubscribe();
   }
   public trackByIndex(index, item) {
