@@ -64,7 +64,6 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
     })
     this.sub.add(geLefttFilter);
     let onChangeRealTime = this.passwordManagerStateService.onChangeRealTime.subscribe(newChange => {
-      console.log("newChange", newChange);
       if (newChange.action === 'PASSWORD_RECORD_CREATED') {
         this.list_records.push(new PasswordRecord(newChange.data));
       } else if (newChange.action === 'PASSWORD_RECORD_UPDATED') {
@@ -100,13 +99,11 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
     this.filterList();
   }
   private filterList() {
-    console.log("this.passwordManagerListService.getBlockList()", this.passwordManagerListService.getBlockList());
     if (this.passwordManagerListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;
     }
     if (this.filter.page > 0) this.showPendingPreloader = true;
-
     this.passwordManagerService.getRecords(this.filter.getDataForRequest()).subscribe((res: any) => {
       this.list_records = [...this.list_records, ...res.map(item => new PasswordRecord(item))];
       this.showPreloader = false;

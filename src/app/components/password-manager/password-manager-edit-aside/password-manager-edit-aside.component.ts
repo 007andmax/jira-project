@@ -87,9 +87,7 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
     this.sub.add(getOnCompanies);
     let onEditForm = this.passwordManagerService.onEditForm.subscribe((res) => {
       if (this.subSecretCode) this.subSecretCode.unsubscribe();
-      console.log("res", res);
       this.editItem = new PasswordRecord(JSON.parse(JSON.stringify(res)));
-      console.log("this.editItem", this.editItem);
       this.selectedUserAndDevices = [];
       this.usersList = [];
       this.devicesList = [];
@@ -187,7 +185,6 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
           this.cd.detectChanges();
         }, 1000);
       }
-      console.log("this.editItem", this.editItem);
     })
   }
   getCodeProgress() {

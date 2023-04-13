@@ -56,7 +56,6 @@ export class FilterPasswordManager {
         this.selectedUserOrDevice = data.selectedUserOrDevice;
         this.selectedCategory = data.selectedCategory;
         this.page = 0;
-        console.log(data);
     }
     public getFilterList(reqList: Array<PasswordRecord>) {
         let list = reqList.filter((item) => {
