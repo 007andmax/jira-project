@@ -99,7 +99,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       this.selectedClient = this.companiesState.getCompanies().find(item => item.id === this.editItem.companyId);
       if (!this.companiesState.isInitLightAllCompanies) this.companiesState.onInitGetLightCompanies();
       this.getDetails();
-
+      this.changeTab('PASSWORD_DETAIL');
+      this.opened = true;
       this.showSecretCode = true;
       this.isEditSecretKey = false;
       this.isGetSecretCode = true;
@@ -146,7 +147,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
           this.gadgetsList.push(new PasswordDeviceUser(item.gadgetId, `${item.gadgetName}`, 'GADGET'));
         }
       })
-      this.opened = true;
     })
   }
   toggleSecretCode() {
