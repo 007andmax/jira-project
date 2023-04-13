@@ -81,6 +81,9 @@ export class UsersTableComponent implements OnInit, OnDestroy {
       this.customSubscription.toggleIsUpdate(false);
     })
   }
+  getCompaniesNames() {
+    return this.user.customerCompaniesInfo.map(item => (this.companiesStateService.getCompanies().find(company => company.id == item.companyId).name));
+  }
   getUserIndustry() {
     let find = this.industries.find(item => item.id === this.user.userIndustryId);
     return (find) ? find.name : '';
@@ -191,6 +194,9 @@ export class UsersTableComponent implements OnInit, OnDestroy {
   }
   public trackById(index, item) {
     return item.id;
+  }
+  public trackByIndex(index, item) {
+    return index;
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

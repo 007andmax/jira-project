@@ -42,7 +42,16 @@
         *ngIf="type === TYPE_LIST_ALL_USERS || type === TYPE_LIST_MARKETING_USERS"
         (click)="showDetailUser()"
     >
-        <span>{{ getUserCompanyName() }}</span>
+        <ng-template
+            ngFor
+            let-company
+            [ngForOf]="getCompaniesNames()"
+            [ngForTrackBy]="trackByIndex"
+        >
+            <div class="qt-df qt-ai-c">
+                <div [textContent]="company"></div>
+            </div>
+        </ng-template>
     </td>
     <td
         class="users-table__company"

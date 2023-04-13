@@ -8,6 +8,7 @@ import { UserAdd } from './user-add';
 import { Tag } from 'src/app/interfaces/tag/tag';
 import { UserCustomSubscription } from './user-custom-subscription';
 import { UserDefaultSubscription } from './user-default-subscription';
+import { UserCustomerCompaniesInfo } from './user-customer-companies-info';
 
 export class UserProfile {
     id: string;
@@ -15,6 +16,7 @@ export class UserProfile {
     phoneNumbers: Array<PhoneNumber> = [new PhoneNumber('OFFICE')];
     customSubscriptions: Array<UserCustomSubscription> = [];
     defaultSubscriptions: UserDefaultSubscription = new UserDefaultSubscription();
+    customerCompaniesInfo: Array<UserCustomerCompaniesInfo> = [];
     welcomeEmail: boolean = true;
     avatar: UserAvatar;
     firstName: string;
@@ -30,6 +32,9 @@ export class UserProfile {
     constructor() {
 
     }
+    public addCustomerCompaniesInfo() {
+        this.customerCompaniesInfo.push(new UserCustomerCompaniesInfo());
+    }
     public changeDefaultSubscriptions(data) {
         this.defaultSubscriptions = data;
     }
@@ -40,6 +45,7 @@ export class UserProfile {
         this.tags = data;
     }
     public onEdit(user: User) {
+        console.log("user", user);
         this.id = user.id;
         this.role = user.role;
         if (user.phoneNumbers && user.phoneNumbers.length === 0 || !user.phoneNumbers) {
@@ -65,6 +71,7 @@ export class UserProfile {
         this.jobTitleId = user.jobTitleId;
         this.jobTypeId = user.jobTypeId;
         this.userIndustryId = user.userIndustryId;
+        this.customerCompaniesInfo = user.customerCompaniesInfo;
     }
     public editLogo(data) {
         this.avatar = data;

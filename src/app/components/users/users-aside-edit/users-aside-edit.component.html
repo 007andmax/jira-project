@@ -105,19 +105,6 @@
                     </mat-error>
                 </div>
             </div>
-            <div class="qt-input-block qt-f50">
-                <app-drop-down
-                    #jobTitleDp
-                    [title]="'Job Title'"
-                    [placeholder]="'Select Job Title'"
-                    [list]="jobTitleList"
-                    [field]="'name'"
-                    [search]="true"
-                    [change]="true"
-                    [editItem]="selectedUserTitle"
-                    (onSelectedItem)="onSelectJobTitle($event)"
-                ></app-drop-down>
-            </div>
         </div>
         <div class="qt-inputs-row">
             <div class="qt-f50">
@@ -150,22 +137,6 @@
                     rows="3"
                     [default]="3"
                 ></textarea>
-            </div>
-        </div>
-        <div class="qt-inputs-row">
-            <div class="qt-input-block">
-              <company-drop-down
-                [placeholder]="'Company'"
-                [validate]="validate.getCompany()"
-                [errorMessage]="'The company name is required'"
-                [title]="'Company'"
-                [field]="'name'"
-                [search]="true"
-                [change]="true"
-                [editItem]="selectedCompany"
-                (onSelectedItem)="onSelectCompany($event)"
-              >
-              </company-drop-down>
             </div>
         </div>
         <div class="qt-inputs-row">
@@ -236,9 +207,9 @@
             <div class="qt-w50">
                 <app-drop-down
                     #jobTypeDp
-                    [title]="'Job Type'"
+                    [title]="'User Type'"
                     [field]="'name'"
-                    [placeholder]="'Select Job Type'"
+                    [placeholder]="'Select User Type'"
                     [list]="userTypes"
                     [editItem]="selectedUserType"
                     [isBlockClear]="true"
@@ -247,111 +218,198 @@
             </div>
         </div>
         <ng-template
-          ngFor
-          let-phone
-          *ngIf="user.phoneNumbers.length > 1"
-          [ngForOf]="user.phoneNumbers"
-          [ngForTrackBy]="trackById"
-          let-i="index"
-          [ngForTrackBy]="trackByIndex"
+            ngFor
+            let-phone
+            *ngIf="user.phoneNumbers.length > 1"
+            [ngForOf]="user.phoneNumbers"
+            [ngForTrackBy]="trackById"
+            let-i="index"
+            [ngForTrackBy]="trackByIndex"
         >
-          <div
-            *ngIf="i > 0"
-            class="with-new-link qt-inputs-row"
-            ngbDropdown
-          >
             <div
-              class="qt-input-block qt-f50"
-              [ngClass]="{'--input-error':!validate.getPhoneNumber(i)}"
+                *ngIf="i > 0"
+                class="with-new-link qt-inputs-row"
+                ngbDropdown
             >
-              <div class="qt-df qt-jc-sb qt-ai-c">
-                <label class="qt-input-block__label">Additional phone</label>
-                <span
-                  class="qt-fw-600 qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info"
-                  (click)="removePhoneNumber(i)"
-                >
-                                      Remove Phone
-                                  </span>
-              </div>
-              <div class="qt-with-number-types right">
-                <input
-                  type="text"
-                  class="qt-with-number-types__input"
-                  [(ngModel)]="phone.number"
-                  (input)="onCheckPhoneNumber(i)"
-                  placeholder="Enter Primary Phone"
-                  prefix="+1"
-                  mask="(000) 000-0000 Ext: 999999||000-000-0000"
-                  [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                  [dropSpecialCharacters]="false"
-                >
                 <div
-                  class="grey-dropdown primary-phone-selector"
-                  ngbDropdown
+                    class="qt-input-block qt-f50"
+                    [ngClass]="{'--input-error':!validate.getPhoneNumber(i)}"
                 >
-                  <button
-                    class="qt-with-number-types__types-btn"
-                    [id]="'dropdownBasic' + i"
-                    ngbDropdownToggle
-                    [textContent]="phone.typeNumber"
-                  ></button>
-                  <i class="icn-sm report-caret-icon"></i>
-                  <div
-                    ngbDropdownMenu
-                    [attr.aria-labelledby]="'dropdownBasic' + i"
-                  >
-                    <ng-template
-                      ngFor
-                      let-item
-                      [ngForOf]="phoneTypes"
-                    >
-                      <button
-                        ngbDropdownItem
-                        [textContent]="item"
-                        (click)="phone.typeNumber = item.toUpperCase()"
-                      ></button>
-                    </ng-template>
-                  </div>
+                    <div class="qt-df qt-jc-sb qt-ai-c">
+                        <label class="qt-input-block__label">Additional phone</label>
+                        <span
+                            class="qt-fw-600 qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info"
+                            (click)="removePhoneNumber(i)"
+                        >
+                            Remove Phone
+                        </span>
+                    </div>
+                    <div class="qt-with-number-types right">
+                        <input
+                            type="text"
+                            class="qt-with-number-types__input"
+                            [(ngModel)]="phone.number"
+                            (input)="onCheckPhoneNumber(i)"
+                            placeholder="Enter Primary Phone"
+                            prefix="+1"
+                            mask="(000) 000-0000 Ext: 999999||000-000-0000"
+                            [specialCharacters]="['(',')',' ','-','E','x','t',':']"
+                            [dropSpecialCharacters]="false"
+                        >
+                        <div
+                            class="grey-dropdown primary-phone-selector"
+                            ngbDropdown
+                        >
+                            <button
+                                class="qt-with-number-types__types-btn"
+                                [id]="'dropdownBasic' + i"
+                                ngbDropdownToggle
+                                [textContent]="phone.typeNumber"
+                            ></button>
+                            <i class="icn-sm report-caret-icon"></i>
+                            <div
+                                ngbDropdownMenu
+                                [attr.aria-labelledby]="'dropdownBasic' + i"
+                            >
+                                <ng-template
+                                    ngFor
+                                    let-item
+                                    [ngForOf]="phoneTypes"
+                                >
+                                    <button
+                                        ngbDropdownItem
+                                        [textContent]="item"
+                                        (click)="phone.typeNumber = item.toUpperCase()"
+                                    ></button>
+                                </ng-template>
+                            </div>
+                        </div>
+                        <mat-error
+                            class="invalid-feedback"
+                            *ngIf="!validate.getPhoneNumber(i)"
+                        >
+                            Phone number is required
+                        </mat-error>
+                    </div>
                 </div>
-                <mat-error
-                  class="invalid-feedback"
-                  *ngIf="!validate.getPhoneNumber(i)"
-                >
-                  Phone number is required
-                </mat-error>
-              </div>
             </div>
-          </div>
+        </ng-template>
+        <ng-template
+            ngFor
+            let-companyInfo
+            [ngForOf]="user.customerCompaniesInfo"
+            [ngForTrackBy]="trackById"
+            let-i="index"
+            [ngForTrackBy]="trackByIndex"
+        >
+            <div class="qt-inputs-row qt-pos-rel">
+                <div class="qt-df qt-ai-c company-actions">
+                    <span
+                        class="qt-fw-600 qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info pointer"
+                        *ngIf="i == 0"
+                        (click)="addCompnay()"
+                    >
+                        + Add Company
+                    </span>
+                    <span
+                        class="qt-fw-600 qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info qt-ml-8 pointer"
+                        *ngIf="user.customerCompaniesInfo.length > 1"
+                        (click)="removeCompnay(i)"
+                    >
+                        Remove Company
+                    </span>
+                </div>
+                <div class="qt-input-block">
+                    <company-drop-down
+                        [placeholder]="'Company'"
+                        [validate]="validate.getCompany()"
+                        [errorMessage]="'The company name is required'"
+                        [title]="'Company'"
+                        [field]="'name'"
+                        [search]="true"
+                        [change]="true"
+                        [isBlockClear]="user.customerCompaniesInfo.length == 1"
+                        [editItem]="getCompany(companyInfo)"
+                        (onSelectedItem)="onSelectCompany($event,i)"
+                    >
+                    </company-drop-down>
+                </div>
+            </div>
+            <div class="qt-inputs-row">
+                <div class="qt-input-block qt-f50">
+                    <app-drop-down
+                        #jobTitleDp
+                        [title]="'Job Title'"
+                        [placeholder]="'Select Job Title'"
+                        [list]="jobTitleList"
+                        [field]="'name'"
+                        [search]="true"
+                        [change]="true"
+                        [editItem]="companyInfo.jobTitleDto"
+                        (onSelectedItem)="onSelectJobTitle($event,i)"
+                    ></app-drop-down>
+                </div>
+                <div class="qt-input-block qt-f50">
+                    <app-drop-down
+                        #jobTitleDp
+                        [title]="'Permission Role'"
+                        [placeholder]="'Select role'"
+                        [list]="userRoles"
+                        [search]="true"
+                        [change]="true"
+                        [editItem]="companyInfo.customerUserRole"
+                        (onSelectedItem)="onSelectUserRole($event,i)"
+                    ></app-drop-down>
+                </div>
+            </div>
+            <div class="qt-inputs-row">
+                <div class="qt-input-block">
+                    <label class="qt-input-block__label">Subscription</label>
+                    <user-default-subscription
+                        [mode]="MODE_EDIT_SUBSCRIPTION"
+                        [defaultSubscriptions]="companyInfo.defaultSubscriptions"
+                        (onChange)="onChangeDefaultSubscriptions($event,i)"
+                    ></user-default-subscription>
+                </div>
+            </div>
+            <div class="qt-inputs-row">
+                <div class="qt-input-block">
+                    <div class="qt-df qt-ai-c qt-mt-15">
+                        <label
+                            class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
+                            [attr.for]="'access-' + i"
+                        >
+                            <input
+                                [attr.id]="'access-' + i"
+                                type="checkbox"
+                                [(ngModel)]="companyInfo.hasAccess"
+                            >
+                            <span></span>
+                            <div class="qt-ml-8">Provide access and send an invite</div>
+                        </label>
+                    </div>
+                </div>
+            </div>
         </ng-template>
         <div class="qt-inputs-row">
-          <div class="qt-input-block">
-            <label class="qt-input-block__label">Subscription</label>
-            <user-default-subscription
-              [mode]="MODE_EDIT_SUBSCRIPTION"
-              [defaultSubscriptions]="user.defaultSubscriptions"
-              (onChange)="onChangeDefaultSubscriptions($event)"
-            ></user-default-subscription>
-          </div>
+            <div class="qt-input-block">
+                <label class="qt-input-block__label">Marketing Subscription</label>
+                <user-custom-subscription
+                    [customSubscriptions]="user.customSubscriptions"
+                    (onChange)="onChangeCustomSubscriptions($event)"
+                ></user-custom-subscription>
+            </div>
         </div>
         <div class="qt-inputs-row">
-          <div class="qt-input-block">
-            <label class="qt-input-block__label">Marketing Subscription</label>
-            <user-custom-subscription
-              [customSubscriptions]="user.customSubscriptions"
-              (onChange)="onChangeCustomSubscriptions($event)"
-            ></user-custom-subscription>
-          </div>
-        </div>
-        <div class="qt-inputs-row">
-          <div class="qt-input-block">
-            <div class="qt-input-block__label">Tags</div>
-            <app-company-tags
-              #companyTags
-              [placement]="'top'"
-              [blockUserTag]="true"
-              (tagsChange)="onChangeTags($event)"
-            ></app-company-tags>
-          </div>
+            <div class="qt-input-block">
+                <div class="qt-input-block__label">Tags</div>
+                <app-company-tags
+                    #companyTags
+                    [placement]="'top'"
+                    [blockUserTag]="true"
+                    (tagsChange)="onChangeTags($event)"
+                ></app-company-tags>
+            </div>
         </div>
     </div>
     <div class="qt-aside-modern__footer">

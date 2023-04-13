@@ -7,6 +7,7 @@ import { UserChange } from '../../components/users/class/user-change';
 import { UserFilter } from '../../components/users/class/user-filter';
 import { AppService } from '../app/app.service';
 import { MODE_USERS_LIST } from 'src/app/const/users';
+import { UserJobTitle } from 'src/app/components/users/class/user-job-title';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,7 @@ export class UsersStateService {
   filter: UserFilter = new UserFilter();
   showArchivedCompanies: boolean = false;
   isGetAllUsers: boolean = false;
+  userRoles: Array<string> = [];
   constructor(private userService: UsersService,
     private appService: AppService,
     private usersRealTimeService: UsersRealTimeService) {
@@ -73,6 +75,14 @@ export class UsersStateService {
     this.usersRealTimeService.changePermissionsUsers.subscribe(newChange => {
       if (newChange.action == "PERMISSIONS_UPDATE") this.onChangeUserPermissions.emit(newChange.data);
     });
+  }
+  public getUserRoles() {
+    return this.userRoles;
+  }
+  public onInitGetUsersRoles() {
+    this.userService.getUserRoles().subscribe((data: any) => {
+      this.userRoles = data;
+    })
   }
   public initGetAllUsers() {
     this.isGetAllUsers = true;

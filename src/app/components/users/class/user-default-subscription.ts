@@ -26,4 +26,20 @@ export class UserDefaultSubscription {
         this.ticketSubscription.enabled = false;
         this.ticketManagerSubscription.enabled = false;
     }
+    public getDataForUpdate() {
+        return {
+            "invoiceSubscription": {
+                "enabled": this.invoiceSubscription.enabled,
+                "activated": this.invoiceSubscription.activated
+            },
+            "ticketSubscription": {
+                "enabled": this.ticketSubscription.enabled,
+                "activated": this.ticketSubscription.activated
+            },
+            "ticketManagerSubscription": {
+                "enabled": this.ticketManagerSubscription.enabled,
+                "activated": this.ticketManagerSubscription.activated
+            }
+        }
+    }
 }

@@ -65,6 +65,10 @@ export class UsersService {
   public resetPrimaryContact(userId) {
     return this.http.get(this.apiUrl + '/company/resetPrimaryContact?userId=' + userId);
   }
+
+  public getUserRoles() {
+    return this.http.get(this.apiUrl + 'customer/getRoleNames');
+  }
   public checkValidPrimaryEmail(email, companyId, idUser = null) {
     return this.http.get(this.apiUrl + 'users/isEmailUnique?email=' + email + '&id=' + idUser + '&isTechUser=false&companyId=' + companyId);
   }

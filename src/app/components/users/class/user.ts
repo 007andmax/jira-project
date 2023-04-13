@@ -7,6 +7,7 @@ import { Tag } from 'src/app/interfaces/tag/tag';
 import { UserDefaultSubscription } from './user-default-subscription';
 import { UserCustomSubscription } from './user-custom-subscription';
 import { UserEmailNotifications } from './user-email-notification';
+import { UserCustomerCompaniesInfo } from './user-customer-companies-info';
 
 export class User {
     accountType: string;
@@ -48,6 +49,7 @@ export class User {
     jobTypeId: string;
     userIndustryId: string;
     userEmailNotifications: UserEmailNotifications;
+    customerCompaniesInfo: Array<UserCustomerCompaniesInfo> = [];
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -57,6 +59,7 @@ export class User {
             this.customSubscriptions = data.customSubscriptions.map(item => new UserCustomSubscription(item));
             this.userEmailNotifications = new UserEmailNotifications(data.userEmailNotifications);
             this.clientCompanies = data.clientCompanies ? data.clientCompanies : [];
+            this.customerCompaniesInfo = data.customerCompaniesInfo.map(item => new UserCustomerCompaniesInfo(item));
         }
 
     }
@@ -89,6 +92,7 @@ export class User {
         }
         this.defaultSubscriptions = new UserDefaultSubscription(data.defaultSubscriptions);
         this.customSubscriptions = data.customSubscriptions.map(item => new UserCustomSubscription(item));
+        this.customerCompaniesInfo = data.customerCompaniesInfo.map(item => new UserCustomerCompaniesInfo(item));
     }
     public changeDefaultSubscriptions(data) {
         this.defaultSubscriptions = data;
