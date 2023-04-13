@@ -20,6 +20,7 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { PasswordRecordHistory } from '../class/password-record-history';
+import { PasswordRecordLink } from '../class/password-record-link';
 
 /**
  * Password manager edit aside component
@@ -33,7 +34,6 @@ import { PasswordRecordHistory } from '../class/password-record-history';
 export class PasswordManagerEditAsideComponent implements OnInit {
   public selectedClient: any;
   public opened: boolean = false;
-  preloaderHistory: boolean = true;
   showSecretCode: boolean = false;
   isEditSecretKey: boolean = false;
   isGetSecretCode: boolean = false;
@@ -87,35 +87,23 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.sub.add(getOnCompanies);
     let onEditForm = this.passwordManagerService.onEditForm.subscribe((res) => {
       if (this.subSecretCode) this.subSecretCode.unsubscribe();
+      console.log("res", res);
       this.editItem = new PasswordRecord(JSON.parse(JSON.stringify(res)));
+      console.log("this.editItem", this.editItem);
       this.selectedUserAndDevices = [];
       this.usersList = [];
       this.devicesList = [];
       this.gadgetsList = [];
       if (!this.editItem.otpEnable) this.isEditSecretKey = true;
-      this.editItem.links.forEach(item => {
-        if (item.userId) {
-          this.selectedUserAndDevices.push(new PasswordDeviceUser(item.userId, `${item.userName}`, 'USER'));
-          this.usersList.push(new PasswordDeviceUser(item.userId, `${item.userName}`, 'USER'));
-        }
-        if (item.deviceId) {
-          this.selectedUserAndDevices.push(new PasswordDeviceUser(item.deviceId, `${item.deviceLabel}`, 'DEVICE'));
-          this.devicesList.push(new PasswordDeviceUser(item.deviceId, `${item.deviceLabel}`, 'DEVICE'));
-        }
-        if (item.gadgetId) {
-          this.selectedUserAndDevices.push(new PasswordDeviceUser(item.gadgetId, `${item.gadgetName}`, 'GADGET'));
-          this.gadgetsList.push(new PasswordDeviceUser(item.gadgetId, `${item.gadgetName}`, 'GADGET'));
-        }
-      })
+
       this.selectedClient = this.companiesState.getCompanies().find(item => item.id === this.editItem.companyId);
       if (!this.companiesState.isInitLightAllCompanies) this.companiesState.onInitGetLightCompanies();
-      this.opened = true;
+      this.getDetails();
+
       this.showSecretCode = true;
       this.isEditSecretKey = false;
       this.isGetSecretCode = true;
       this.showPassword = false;
-      this.preloaderHistory = true;
-      this.changeTab('PASSWORD_DETAIL');
       if (this.intervalContainer) clearInterval(this.intervalContainer);
       if (this.showSecretCode && this.editItem.otpEnable) this.getCodeRecords();
     });
@@ -140,6 +128,27 @@ export class PasswordManagerEditAsideComponent implements OnInit {
      })
      this.sub.add(onChangeRealTime);*/
   }
+  getDetails() {
+    this.passwordManagerService.getPasswordRecordDetail(this.editItem.id).subscribe((data: any) => {
+      this.editItem.updateHistories(data.histories.map(item => new PasswordRecordHistory(item)));
+      this.editItem.setLinks(data.links.map(item => new PasswordRecordLink(item)));
+      this.editItem.links.forEach(item => {
+        if (item.userId) {
+          this.selectedUserAndDevices.push(new PasswordDeviceUser(item.userId, `${item.userName}`, 'USER'));
+          this.usersList.push(new PasswordDeviceUser(item.userId, `${item.userName}`, 'USER'));
+        }
+        if (item.deviceId) {
+          this.selectedUserAndDevices.push(new PasswordDeviceUser(item.deviceId, `${item.deviceLabel}`, 'DEVICE'));
+          this.devicesList.push(new PasswordDeviceUser(item.deviceId, `${item.deviceLabel}`, 'DEVICE'));
+        }
+        if (item.gadgetId) {
+          this.selectedUserAndDevices.push(new PasswordDeviceUser(item.gadgetId, `${item.gadgetName}`, 'GADGET'));
+          this.gadgetsList.push(new PasswordDeviceUser(item.gadgetId, `${item.gadgetName}`, 'GADGET'));
+        }
+      })
+      this.opened = true;
+    })
+  }
   toggleSecretCode() {
     this.showSecretCode = !this.showSecretCode;
     if (this.intervalContainer) clearInterval(this.intervalContainer);
@@ -159,13 +168,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
   changeTab(data) {
     this.tab = data;
-    if (data == 'PASSWORD_HISTORY') {
-      if (!this.editItem.isHistory) this.passwordManagerService.getHistory(this.editItem.id).subscribe((res: any) => {
-        console.log(res);
-        this.editItem.updateHistories(res.map(item => new PasswordRecordHistory(item)));
-        this.preloaderHistory = false;
-      })
-    }
   }
   getCodeRecords() {
     this.timeCount = 0;
