@@ -173,8 +173,8 @@ export class PasswordManagerService {
       }));
   }
 
-  public getHistory(recordId) {
-    return this.http.get(this.apiUrl + `passwordRecords/histories/${recordId}`);
+  public getPasswordRecordDetail(recordId) {
+    return this.http.get(this.apiUrl + `passwordRecords/details/${recordId}`);
   }
 
   /**

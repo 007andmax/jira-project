@@ -104,7 +104,6 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
       return;
     }
     if (this.filter.page > 0) this.showPendingPreloader = true;
-
     this.passwordManagerService.getRecords(this.filter.getDataForRequest()).subscribe((res: any) => {
       this.list_records = [...this.list_records, ...res.map(item => new PasswordRecord(item))];
       this.showPreloader = false;

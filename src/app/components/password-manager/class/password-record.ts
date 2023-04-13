@@ -19,7 +19,7 @@ export class PasswordRecord {
     otp: string;
     expirationDate: number;
     authenticationKey: string = "";
-    ipAdres: string;
+    ip: string;
     port: string;
     otpEnable: boolean;
     timeCount: number = 0;
@@ -30,13 +30,12 @@ export class PasswordRecord {
     description: string;
     password: string;
     selected: boolean = false;
-    isHistory: boolean = false;
     resetAuthenticationKey: boolean = false;
     constructor(data) {
         this.onUpdate(data);
     }
-    public setIsHistory(data) {
-        this.isHistory = data;
+    public setLinks(data) {
+        this.links = data;
     }
     public setOtp(data) {
         this.otp = data;
@@ -106,7 +105,7 @@ export class PasswordRecord {
             data.note = this.note;
         }
         if (this.template.name === "DEVICE") {
-            data.ip = (this.ipAdres) ? this.ipAdres : null;
+            data.ip = (this.ip) ? this.ip : null;
             data.username = this.username;
             data.https = this.https;
             data.ssh = this.ssh;
@@ -149,7 +148,7 @@ export class PasswordRecord {
         this.installationKey = data.installationKey;
         this.url = data.url;
         this.code = data.code;
-        this.ipAdres = data.ipAdres;
+        this.ip = data.ip;
         this.port = data.port;
         this.https = data.https;
         this.ssh = data.ssh;
