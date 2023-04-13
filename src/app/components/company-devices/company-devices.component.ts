@@ -37,7 +37,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     public activateRoute: ActivatedRoute,
     private leftPanelStateService: LeftPanelStateService,
     private devicesRealTimeService: DevicesRealTimeService) { }
-    public resize:boolean = false;
+  public resize: boolean = false;
 
   ngOnInit() {
     document.body.querySelector(".main-container").scrollTo(0, 0);
@@ -178,22 +178,22 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnSendDeviceStatus);
 
-    this.devicesStateService.onOpenAside.subscribe((data)=>{      
+    this.devicesStateService.onOpenAside.subscribe((data) => {
       this.resize = true;
     });
-    this.devicesStateService.onCloseAside.subscribe((data)=>{      
+    this.devicesStateService.onCloseAside.subscribe((data) => {
       this.resize = false;
     });
-    
+
   }
 
   getDevice(id) {
     this.devicesService.getCompanyDevices(id).subscribe((data: any) => {
-      if (data) {
+      if (Object.keys(data).length > 0) {
         this.devices = data[id].map(item => new DeviceCompany(item, this.companyId));
         this.filter.onFilterName(this.devices);
-        this.showPreloader = false;
       }
+      this.showPreloader = false;
       if (this.devices.length > 0 && this.devicesStateService.getIsInitWebSocket()) this.sendDeviceStatusRequest(this.companyId, this.devices.filter(item => item.agentId).map(item => item.agentId));
     });
   }

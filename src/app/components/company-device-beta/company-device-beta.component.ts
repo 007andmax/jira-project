@@ -1598,11 +1598,11 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
   getAlldevicedata(id) {
     this.devices = [];
     this.devicesService.getCompanyDevices(id).subscribe((data: any) => {
-      if (data) {
+      if (Object.keys(data).length > 0) {
         this.devices = data[id].map(item => new DeviceCompany(item, this.companyId));
         this.filter.onFilterName(this.devices);
-        this.deviceSuccess = true;
       }
+      this.deviceSuccess = true;
       if (this.agentService.hasAccessToken()) this.setPreviewDataDevice();
     });
   }
