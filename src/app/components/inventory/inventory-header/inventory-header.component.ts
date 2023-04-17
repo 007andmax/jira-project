@@ -24,7 +24,6 @@ export class InventoryHeaderComponent implements OnInit {
     this.onSearch.emit(event.target.value);
   }
   onKeyUp(event) {
-    console.log("event.keyCode", event.keyCode);
     if (event.keyCode === 13) this.onSearch.emit(event.target.value);
   }
   filter(data) {

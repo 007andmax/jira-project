@@ -58,6 +58,12 @@ export class TicketDetailPasswordsDetailsComponent implements OnInit {
     this.elRef.nativeElement.querySelector("#search-passwords").value = '';
     this.isSearch = false;
   }
+  onBlurSearch(event) {
+    this.search(event);
+  }
+  onKeyUp(event) {
+    if (event.keyCode === 13) this.search(event);
+  }
   search(event) {
     this.filter.setSearch(event.target.value);
     if (event.target.value.length > 0) {
