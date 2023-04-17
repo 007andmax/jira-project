@@ -26,6 +26,7 @@ import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-t
 import { MODE_EDIT_SUBSCRIPTION, MODE_HIDE_ACTIVE } from 'src/app/const/users';
 import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-industry/class/crm-company-industry';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
+import { UserRole } from '../class/user-role';
 
 @Component({
   selector: 'users-aside-edit',
@@ -47,7 +48,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
   MODE_EDIT_SUBSCRIPTION = MODE_EDIT_SUBSCRIPTION;
   industries: Array<CrmCompanyIndustry> = [];
   idUploadFile: string;
-  userRoles: Array<string> = [];
+  userRoles: Array<UserRole> = [];
   @ViewChild('companyTags') companyTags: CompanyTagsComponent;
   @ViewChild('jobTitleDp') jobTitleDp: DropDownComponent;
   @ViewChild('jobTypeDp') jobTypeDp: DropDownComponent;
@@ -55,7 +56,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
 
   constructor(private imageCropperStateService: ImageCropperStateService,
     public ticketsListService: TicketsListService,
-    private usersStateService: UsersStateService,
+    public usersStateService: UsersStateService,
     private usersAsideService: UsersAsideService,
     private usersService: UsersService,
     private companiesStateService: CompaniesStateService,
@@ -80,7 +81,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     this.onCroppImage();
     this.userRoles = this.usersStateService.getUserRoles();
     this.usersStateService.getOpenEditAside().subscribe(data => {
-      if (this.usersStateService.getUserRoles().length == 0) this.usersStateService.onInitGetUsersRoles();
+      if (!this.usersStateService.isGetUserRole) this.usersStateService.onInitGetUsersRoles();
       this.opened = true;
       this.getJobTypeList();
       this.user.onEdit(this.usersStateService.getuserForEdit());
@@ -91,6 +92,10 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
       this.validate.addPhoneNumbers(this.user.phoneNumbers);
       console.log("this.user", this.user);
     })
+    let onGetUserRole = this.usersStateService.onGetUserRole.subscribe(data => {
+      this.userRoles = this.usersStateService.getUserRoles();
+    })
+    this.sub.add(onGetUserRole);
   }
 
   onSelectClientIndustry(item) {

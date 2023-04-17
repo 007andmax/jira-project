@@ -8,6 +8,7 @@ import { UserFilter } from '../../components/users/class/user-filter';
 import { AppService } from '../app/app.service';
 import { MODE_USERS_LIST } from 'src/app/const/users';
 import { UserJobTitle } from 'src/app/components/users/class/user-job-title';
+import { UserRole } from 'src/app/components/users/class/user-role';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,7 @@ export class UsersStateService {
   openDetailAside: EventEmitter<any> = new EventEmitter();
   closeDetailAside: EventEmitter<any> = new EventEmitter();
   onChangeUserPermissions: EventEmitter<any> = new EventEmitter();
+  onGetUserRole: EventEmitter<any> = new EventEmitter();
   userForArchive: User = null;
   usersForArchive: Array<User> = [];
   userForDeArchive: User = null;
@@ -34,7 +36,8 @@ export class UsersStateService {
   filter: UserFilter = new UserFilter();
   showArchivedCompanies: boolean = false;
   isGetAllUsers: boolean = false;
-  userRoles: Array<string> = [];
+  isGetUserRole: boolean = false;
+  userRoles: Array<UserRole> = [];
   constructor(private userService: UsersService,
     private appService: AppService,
     private usersRealTimeService: UsersRealTimeService) {
@@ -82,6 +85,8 @@ export class UsersStateService {
   public onInitGetUsersRoles() {
     this.userService.getUserRoles().subscribe((data: any) => {
       this.userRoles = data;
+      this.onGetUserRole.emit(this.userRoles);
+      this.isGetUserRole = true;
     })
   }
   public initGetAllUsers() {

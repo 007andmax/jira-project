@@ -351,10 +351,11 @@
                 </div>
                 <div class="qt-input-block qt-f50">
                     <app-drop-down
-                        #jobTitleDp
+                        *ngIf="usersStateService.isGetUserRole"
                         [title]="'Permission Role'"
                         [placeholder]="'Select role'"
                         [list]="userRoles"
+                        [field]="'name'"
                         [search]="true"
                         [change]="true"
                         [editItem]="companyInfo.customerUserRole"

@@ -67,7 +67,7 @@ export class UsersService {
   }
 
   public getUserRoles() {
-    return this.http.get(this.apiUrl + 'customer/getRoleNames');
+    return this.http.get(this.apiUrl + 'customerUser/getRoleNames');
   }
   public checkValidPrimaryEmail(email, companyId, idUser = null) {
     return this.http.get(this.apiUrl + 'users/isEmailUnique?email=' + email + '&id=' + idUser + '&isTechUser=false&companyId=' + companyId);

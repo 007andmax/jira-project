@@ -1,10 +1,11 @@
 import { UserDefaultSubscription } from "./user-default-subscription";
 import { UserJobTitle } from "./user-job-title";
+import { UserRole } from "./user-role";
 
 export class UserCustomerCompaniesInfo {
     "companyId": string;
     "jobTitleDto": UserJobTitle;
-    "customerUserRole": string;
+    "customerUserRole": UserRole;
     "defaultSubscriptions": UserDefaultSubscription;
     "hasAccess": boolean;
     constructor(data = null) {
@@ -14,8 +15,10 @@ export class UserCustomerCompaniesInfo {
             }
             this.jobTitleDto = (data.jobTitleDto && data.jobTitleDto.id) ? new UserJobTitle(data.jobTitleDto) : null;
             this.defaultSubscriptions = new UserDefaultSubscription(data.defaultSubscriptions);
+            this.customerUserRole = (data.customerUserRole && data.customerUserRole.id) ? new UserRole(data.customerUserRole) : null;
         } else {
             this.jobTitleDto = null;
+            this.customerUserRole = null;
             this.defaultSubscriptions = new UserDefaultSubscription(null);
             this.hasAccess = false;
         }
