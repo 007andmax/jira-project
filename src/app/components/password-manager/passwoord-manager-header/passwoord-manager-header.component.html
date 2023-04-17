@@ -25,8 +25,9 @@
                     <input
                         type="text"
                         placeholder="Search password"
-                        (input)="search($event)"
                         [(ngModel)]="searchText"
+                        (blur)="onBlurSearch($event)"
+                        (keyup)="onKeyUp($event)"
                     >
                     <span
                         class="search-clear icon__close-round"

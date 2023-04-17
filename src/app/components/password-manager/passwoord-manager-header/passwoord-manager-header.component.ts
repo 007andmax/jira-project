@@ -65,8 +65,12 @@ export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
   public onFilter(field) {
     this.onChangeFilterField.emit(field);
   }
-  search(event) {
+  onBlurSearch(event) {
     this.onSearch.emit(event.target.value);
+  }
+  onKeyUp(event) {
+    console.log("event.keyCode", event.keyCode);
+    if (event.keyCode === 13) this.onSearch.emit(event.target.value);
   }
   public addRecord() {
     this.passwordManagerService.showAddForm();
