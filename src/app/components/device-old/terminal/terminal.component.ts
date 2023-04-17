@@ -246,16 +246,7 @@ export class TerminalComponent implements OnInit {
       search: ''
     }
   }
-  countLineNumberDetail() {
-    var text = $("#cmd_detail textarea").val().toString();
-    var lines = text.split(/\r*\n/);
-    var count = lines.length;
-    this.lineNumberDetail = [];
-    for (let index = 0; index < count; index++) {
-      this.lineNumberDetail[index] = index + 1;
-    }
-    $('#cmd_detail_line').scrollTop($('#cmd_detail textarea').scrollTop());
-  }
+
 
   viewScriptDetail(data) {
     console.log("data", data);
@@ -354,37 +345,7 @@ export class TerminalComponent implements OnInit {
     }
   }
 
-  updateMyScript() {
-    let id = '';
-    let arr = this.cmdCategoryReadList.filter(val => val.name === this.scriptDetailModal.category);
-    if (arr.length > 0) {
-      id = arr[0].id;
-    }
-    if (id !== '') {
-      let data = {
-        title: this.scriptDetailModal.title,
-        categoryId: this.scriptDetailModal.categoryId !== undefined ? this.scriptDetailModal.categoryId : id,
-        command: this.scriptDetailModal.command,
-        id: this.scriptDetailModal.id,
-        type: this.scriptDetailModal.type,
-        description: this.scriptDetailModal.description
-      }
-      this.terminalService.updateCommand(data)
-        .pipe(first())
-        .subscribe(resp => {
-          this.loading = false;
-          if (resp.id !== '') {
-            this.toastr.success('Command Updated Successfully');
-            this.scriptDetail = !this.scriptDetail;
-            this.getCommandList();
-          }
-        },
-          error => {
-            const statusError = error;
-            this.loading = false;
-          });
-    }
-  }
+
   setHeight(flag) {
     if (flag === 'enter' && document.getElementById("editCmd").offsetHeight < 280) {
       document.getElementById("terminal").style.height = (document.getElementById("terminal").offsetHeight - 10) + "px";
@@ -421,13 +382,10 @@ export class TerminalComponent implements OnInit {
 
 
 
-  toggleDetailTerminal(type, typeName) {
-    this.scriptDetailModal.type = type;
-    this.scriptDetailModal.typeName = typeName;
-  }
+
 
   emptyScriptDetail() {
-    this.scriptDetail = !this.scriptDetail;
+    this.scriptDetail = false;
     this.scriptDetailModal = {
       title: '',
       type: '',
@@ -439,12 +397,10 @@ export class TerminalComponent implements OnInit {
       typeName: '',
       description: ''
     };
+    this.cd.detectChanges();
   }
 
-  setScriptDetail(name, id) {
-    this.scriptDetailModal.category = name;
-    this.scriptDetailModal.categoryId = id;
-  }
+
 
 
 
