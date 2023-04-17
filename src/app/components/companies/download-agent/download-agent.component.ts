@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 })
 export class DownloadAgentComponent implements OnInit {
   downloadLink: string;
+  private apiUrl = environment.apiUrl;
   constructor(private downloadAgentService: DownloadAgentService, private downloadAgentStateService: DownloadAgentStateService,
     public activeModal: NgbActiveModal, private companiesService: CompaniesService) { }
 
@@ -29,7 +30,7 @@ export class DownloadAgentComponent implements OnInit {
     this.downloadAgentService.download(this.downloadAgentStateService.getCompany().id, "", "", false).subscribe((data: any) => {
       let textArea: any = document.createElement("textarea");
       textArea.style.opacity = 0;
-      textArea.value = data.link;
+      textArea.value = `${this.apiUrl}${data.link}`;
       document.body.appendChild(textArea);
       textArea.select();
       try {
