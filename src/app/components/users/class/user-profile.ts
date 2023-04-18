@@ -106,7 +106,7 @@ export class UserProfile {
     public getRole() {
         return this.role;
     }
-    public serCompanyId(data) {
+    public setCompanyId(data) {
         this.companyId = data;
     }
     public setDesignation(data) {

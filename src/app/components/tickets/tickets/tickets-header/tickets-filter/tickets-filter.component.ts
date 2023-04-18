@@ -190,7 +190,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     } else {
       this.ticketsFilter.setCompany(item);
       this.selectedCompany = null;
-      this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.clientCompanies.find(clientCompany => clientCompany === item.id)));
+      this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === item.id)));
       //  this.filter.setCompany(item.id);
       //  this.usersStateService.onInitFilter(this.filter);
 

@@ -6,11 +6,11 @@ export class UsersTableService {
 
   constructor(private companiesStateService: CompaniesStateService) { }
 
-  getUsersCount(users, clientCompanies, showArchivedUsers) {
-    let company = this.companiesStateService.getCompanies().find(item => clientCompanies.find(clientCompany => clientCompany === item.id));
+  getUsersCount(users, customerCompaniesInfo, showArchivedUsers) {
+    let company = this.companiesStateService.getCompanies().find(item => customerCompaniesInfo.find(clientCompany => clientCompany.companyId === item.id));
     return users.filter((user) => {
       var isArchived = user.deletedAt || company.deletedAt;
-      return !isArchived && !showArchivedUsers && user.clientCompanies.find(clientCompany => clientCompany === company.id) || showArchivedUsers && isArchived && user.clientCompanies.find(clientCompany => clientCompany === company.id);
+      return !isArchived && !showArchivedUsers && user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === company.id) || showArchivedUsers && isArchived && user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === company.id);
     }).length;
   }
 }

@@ -5,6 +5,7 @@ import { Subscriptions } from 'src/app/interfaces/user/subscriptions';
 import { UserAvatar } from './user-avatar';
 import { UserProfile } from './user-profile';
 import { UserDefaultSubscriptionAdd } from './user-default-subscription-add';
+import { UserCustomerCompaniesInfoAdd } from './user-customer-companies-info-add';
 
 export class UserAdd {
   phoneNumbers: Array<PhoneNumber> = [new PhoneNumber('OFFICE')];
@@ -21,7 +22,7 @@ export class UserAdd {
   jobTitleId: string;
   jobTypeId: string;
   customSubscriptionIds: Array<string> = [];
-  defaultSubscriptions: UserDefaultSubscriptionAdd;
+  customerCompaniesInfo: Array<UserCustomerCompaniesInfoAdd> = [];
   userIndustryId: string;
   constructor(data: UserProfile) {
     if (data.phoneNumbers.length === 1 && data.phoneNumbers[0].number === '') {
@@ -30,7 +31,6 @@ export class UserAdd {
     } else {
       this.phoneNumbers = data.phoneNumbers;
     }
-    this.defaultSubscriptions = new UserDefaultSubscriptionAdd(data.defaultSubscriptions.ticketSubscription.enabled, data.defaultSubscriptions.ticketManagerSubscription.enabled, data.defaultSubscriptions.invoiceSubscription.enabled);
     this.customSubscriptionIds = data.customSubscriptions.map(item => item.id);
     this.welcomeEmail = data.welcomeEmail;
     this.avatar = data.avatar;
@@ -46,5 +46,6 @@ export class UserAdd {
     this.jobTypeId = data.jobTypeId;
     this.jobTitleId = data.jobTitleId;
     this.userIndustryId = data.userIndustryId;
+    this.customerCompaniesInfo = data.customerCompaniesInfo.filter(item => item.companyId).map(item => new UserCustomerCompaniesInfoAdd(item));
   }
 }

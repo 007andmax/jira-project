@@ -22,6 +22,7 @@ import { MODE_HIDE_ACTIVE } from 'src/app/const/users';
 import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-industry/class/crm-company-industry';
 import { Company } from 'src/app/interfaces/company/company';
 import { CompaniesService } from 'src/app/services/company/companies.service';
+import { UserRole } from '../class/user-role';
 
 @Component({
   selector: 'app-users-aside',
@@ -43,7 +44,7 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
   idUploadFile: string;
   @ViewChild('jobTypeDp') jobTypeDp: DropDownComponent;
   @ViewChild('jobTitleDp') jobTitleDp: DropDownComponent;
-  selectedCompany: Company;
+  userRoles: Array<UserRole> = [];
   sub: Subscription = new Subscription();
   constructor(private imageCropperStateService: ImageCropperStateService,
     private usersStateService: UsersStateService,
@@ -69,12 +70,19 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onGetJobTitle);
     this.onCroppImage();
+    this.userRoles = this.usersStateService.getUserRoles();
     this.usersStateService.getOpenAside().subscribe(data => {
+      if (!this.usersStateService.isGetUserRole) this.usersStateService.onInitGetUsersRoles();
       this.getJobTypeList();
       this.opened = true;
-      if (this.opened && this.companiesStateService.getCompanyRoutingId()) this.onSelectCompany(this.companiesStateService.getCompanies().find(item => item.id === this.companiesStateService.getCompanyRoutingId()));
-
+      this.addCompnay();
+      this.user.setCompanyId(this.companiesStateService.getCurrentCompany().id);
+      if (this.opened && this.companiesStateService.getCompanyRoutingId()) this.onSelectCompany(this.companiesStateService.getCompanies().find(item => item.id === this.companiesStateService.getCompanyRoutingId()), 0);
     })
+    let onGetUserRole = this.usersStateService.onGetUserRole.subscribe(data => {
+      this.userRoles = this.usersStateService.getUserRoles();
+    })
+    this.sub.add(onGetUserRole);
   }
   onSelectClientIndustry(item) {
     this.user.setUserIndustryId((item) ? item.id : null);
@@ -113,8 +121,8 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
   public onChangeTags(tags) {
     this.user.setTags(tags);
   }
-  onChangeDefaultSubscriptions(data) {
-    this.user.setDefaultSubscriptions(data);
+  onChangeDefaultSubscriptions(data, i) {
+    this.user.customerCompaniesInfo[i].changeDefaultSubscriptions(data);
   }
   onChangeCustomSubscriptions(data) {
     this.user.setCustomSubscriptions(data);
@@ -133,9 +141,18 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
   onCheckPhoneNumber(i) {
     this.validate.checkValidPhoneNumber(i, this.user.phoneNumbers[i].number);
   }
-
-  onSelectJobTitle(data) {
-    this.user.setJobTitleId(data.id);
+  addCompnay() {
+    this.user.addCustomerCompaniesInfo();
+  }
+  onSelectUserRole(data, index) {
+    this.user.customerCompaniesInfo[index].setUserRole(data);
+  }
+  removeCompnay(i) {
+    this.user.customerCompaniesInfo.splice(i, 1);
+  }
+  onSelectJobTitle(data, index) {
+    this.user.customerCompaniesInfo[index].setJobTitleDto(data);
+    // this.user.setJobTitleId(data.id);
   }
   onSelectRole(data) {
     this.user.setJobTypeId(data.id);
@@ -149,11 +166,14 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
       this.idUploadFile = data.id;
     })
   }
-  public onSelectCompany(selectClient) {
-    this.selectedCompany = selectClient;
-    this.user.serCompanyId((selectClient === null) ? null : selectClient.id);
+  public onSelectCompany(selectClient, index) {
+    if (selectClient) {
+      this.user.customerCompaniesInfo[index].companyId = selectClient.id;
+    } else {
+      this.user.customerCompaniesInfo.splice(index, 1);
+    }
     if (selectClient !== null) this.validate.setCompanyValid();
-    if (this.user.primaryEmail && this.user.primaryEmail.length > 0 && this.user.companyId) this.onCheckValidPrimaryEmail();
+    if (this.user.primaryEmail && this.user.primaryEmail.length > 0) this.onCheckValidPrimaryEmail();
 
   }
   removeLogo() {
@@ -177,7 +197,6 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
     this.opened = false;
     this.user = new UserProfile();
     this.validate = new UserValidate();
-    this.selectedCompany = null;
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
     }

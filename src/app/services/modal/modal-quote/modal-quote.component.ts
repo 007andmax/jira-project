@@ -159,10 +159,10 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     this.initialized = true;
     this.reqUsersListTechnical = userList.filter((item) => item.accountType === USER.TYPE.TECH && !item.deletedAt && item.primaryEmail !== "").sort((a, b) => (this.getFirstLastName(a).toLowerCase() > this.getFirstLastName(b).toLowerCase()) ?
       1 : ((this.getFirstLastName(b).toLowerCase() > this.getFirstLastName(a).toLowerCase()) ? -1 : 0));
-    this.reqUsersListClients = userList.filter((item) => item.accountType === USER.TYPE.CLIENT && item.clientCompanies.find(clientCompany => clientCompany === companyId) && !item.deletedAt && item.primaryEmail !== "").sort((a, b) => (this.getFirstLastName(a).toLowerCase() > this.getFirstLastName(b).toLowerCase()) ?
+    this.reqUsersListClients = userList.filter((item) => item.accountType === USER.TYPE.CLIENT && item.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === companyId) && !item.deletedAt && item.primaryEmail !== "").sort((a, b) => (this.getFirstLastName(a).toLowerCase() > this.getFirstLastName(b).toLowerCase()) ?
       1 : ((this.getFirstLastName(b).toLowerCase() > this.getFirstLastName(a).toLowerCase()) ? -1 : 0));
 
-    this.usersClients = userList.filter((item) => item.accountType === USER.TYPE.CLIENT && item.clientCompanies.find(clientCompany => clientCompany === companyId) && !item.deletedAt && item.primaryEmail !== "").sort((a, b) => (this.getFirstLastName(a).toLowerCase() > this.getFirstLastName(b).toLowerCase()) ?
+    this.usersClients = userList.filter((item) => item.accountType === USER.TYPE.CLIENT && item.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === companyId) && !item.deletedAt && item.primaryEmail !== "").sort((a, b) => (this.getFirstLastName(a).toLowerCase() > this.getFirstLastName(b).toLowerCase()) ?
       1 : ((this.getFirstLastName(b).toLowerCase() > this.getFirstLastName(a).toLowerCase()) ? -1 : 0));
     this.usersTechnical = userList.filter((item) => item.accountType === USER.TYPE.TECH && !item.deletedAt && item.primaryEmail !== "").sort((a, b) => (this.getFirstLastName(a).toLowerCase() > this.getFirstLastName(b).toLowerCase()) ?
       1 : ((this.getFirstLastName(b).toLowerCase() > this.getFirstLastName(a).toLowerCase()) ? -1 : 0));

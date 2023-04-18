@@ -168,7 +168,7 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
   }
   onSelectCompany(data) {
     this.selectedCompany = data;
-    this.user.serCompanyId(data.id);
+    this.user.setCompanyId(data.id);
     this.updateUser();
   }
   getJobDescription(val) {

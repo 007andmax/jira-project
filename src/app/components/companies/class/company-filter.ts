@@ -177,7 +177,7 @@ export class CompanyFilter {
     private getCountusers(company) {
         return this.users.filter((user) => {
             var isArchived = user.deletedAt || company.deletedAt;
-            return !isArchived && !this.showArchivedCompanies && user.clientCompanies.find(clientCompany => clientCompany === company.id) || this.showArchivedCompanies && isArchived && user.clientCompanies.find(clientCompany => clientCompany === company.id);
+            return !isArchived && !this.showArchivedCompanies && user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === company.id) || this.showArchivedCompanies && isArchived && user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === company.id);
         }).length;
     }
     private getPrimaryAddress(company) {

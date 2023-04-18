@@ -98,18 +98,12 @@
                     The email address is already occupied
                 </mat-error>
             </div>
-            <div class="qt-input-block qt-f50">
-                <app-drop-down
-                    #jobTitleDp
-                    [title]="'Job Title'"
-                    [placeholder]="'Select Job Title'"
-                    [list]="jobTitleList"
-                    [field]="'name'"
-                    [search]="true"
-                    [change]="true"
-                    (onSelectedItem)="onSelectJobTitle($event)"
-                ></app-drop-down>
-            </div>
+
+
+
+
+
+
         </div>
         <div class="qt-inputs-row">
             <div class="qt-f50">
@@ -138,22 +132,6 @@
                     [default]="3"
                     rows="3"
                 ></textarea>
-            </div>
-        </div>
-        <div class="qt-inputs-row">
-            <div class="qt-input-block">
-                <company-drop-down
-                    [placeholder]="'Company'"
-                    [validate]="validate.getCompany()"
-                    [errorMessage]="'The company name is required'"
-                    [title]="'Company'"
-                    [field]="'name'"
-                    [search]="true"
-                    [change]="true"
-                    [editItem]="selectedCompany"
-                    (onSelectedItem)="onSelectCompany($event)"
-                >
-                </company-drop-down>
             </div>
         </div>
         <div class="qt-inputs-row">
@@ -310,16 +288,101 @@
                 </div>
             </div>
         </ng-template>
-        <div class="qt-inputs-row">
-            <div class="qt-input-block">
-                <div class="qt-input-block__label">Subscription</div>
-                <user-default-subscription
-                    [mode]="MODE_HIDE_ACTIVE"
-                    [defaultSubscriptions]="user.defaultSubscriptions"
-                    (onChange)="onChangeDefaultSubscriptions($event)"
-                ></user-default-subscription>
+        <ng-template
+            ngFor
+            let-companyInfo
+            [ngForOf]="user.customerCompaniesInfo"
+            let-i="index"
+            [ngForTrackBy]="trackByIndex"
+        >
+            <div class="qt-inputs-row qt-pos-rel">
+                <div class="qt-df qt-ai-c company-actions">
+                    <span
+                        class="qt-fw-600 qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info pointer"
+                        *ngIf="i == 0"
+                        (click)="addCompnay()"
+                    >
+                        + Add Company
+                    </span>
+                    <span
+                        class="qt-fw-600 qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info qt-ml-8 pointer"
+                        *ngIf="user.customerCompaniesInfo.length > 1"
+                        (click)="removeCompnay(i)"
+                    >
+                        Remove Company
+                    </span>
+                </div>
+                <div class="qt-input-block">
+                    <company-drop-down
+                        [placeholder]="'Company'"
+                        [validate]="validate.getCompany()"
+                        [errorMessage]="'The company name is required'"
+                        [title]="'Company'"
+                        [field]="'name'"
+                        [search]="true"
+                        [change]="true"
+                        [isBlockClear]="user.customerCompaniesInfo.length == 1"
+                        (onSelectedItem)="onSelectCompany($event,i)"
+                    >
+                    </company-drop-down>
+                </div>
             </div>
-        </div>
+            <div class="qt-inputs-row">
+                <div class="qt-input-block qt-f50">
+                    <app-drop-down
+                        #jobTitleDp
+                        [title]="'Job Title'"
+                        [placeholder]="'Select Job Title'"
+                        [list]="jobTitleList"
+                        [field]="'name'"
+                        [search]="true"
+                        [change]="true"
+                        (onSelectedItem)="onSelectJobTitle($event,i)"
+                    ></app-drop-down>
+                </div>
+                <div class="qt-input-block qt-f50">
+                    <app-drop-down
+                        *ngIf="usersStateService.isGetUserRole"
+                        [title]="'Permission Role'"
+                        [placeholder]="'Select role'"
+                        [list]="userRoles"
+                        [field]="'name'"
+                        [search]="true"
+                        [change]="true"
+                        [editItem]="companyInfo.customerUserRole"
+                        (onSelectedItem)="onSelectUserRole($event,i)"
+                    ></app-drop-down>
+                </div>
+            </div>
+            <div class="qt-inputs-row">
+                <div class="qt-input-block">
+                    <label class="qt-input-block__label">Subscription</label>
+                    <user-default-subscription
+                        [mode]="MODE_EDIT_SUBSCRIPTION"
+                        [defaultSubscriptions]="companyInfo.defaultSubscriptions"
+                        (onChange)="onChangeDefaultSubscriptions($event,i)"
+                    ></user-default-subscription>
+                </div>
+            </div>
+            <div class="qt-inputs-row">
+                <div class="qt-input-block">
+                    <div class="qt-df qt-ai-c qt-mt-15">
+                        <label
+                            class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
+                            [attr.for]="'access-' + i"
+                        >
+                            <input
+                                [attr.id]="'access-' + i"
+                                type="checkbox"
+                                [(ngModel)]="companyInfo.hasAccess"
+                            >
+                            <span></span>
+                            <div class="qt-ml-8">Provide access and send an invite</div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
         <div class="qt-inputs-row">
             <div class="qt-input-block">
                 <div class="qt-input-block__label">Marketing Subscription</div>

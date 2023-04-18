@@ -3,7 +3,9 @@ export class UserCustomerCompaniesInfoAdd {
     "jobTitleDto": {
         id: string;
     }
-    "customerUserRole": string;
+    "customerUserRole": {
+        "id": string;
+    }
     "defaultSubscriptions": {
         "invoiceSubscription": {
             "enabled": false,
@@ -22,7 +24,7 @@ export class UserCustomerCompaniesInfoAdd {
     constructor(data) {
         this.companyId = data.companyId;
         if (data.jobTitleDto) this.jobTitleDto = { id: data.jobTitleDto.id };
-        if (data.customerUserRole) this.customerUserRole = data.customerUserRole;
+        if (data.customerUserRole) this.customerUserRole = { id: data.customerUserRole.id };
         this.defaultSubscriptions = data.defaultSubscriptions.getDataForUpdate();
         this.hasAccess = data.hasAccess;
 

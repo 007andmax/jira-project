@@ -1,6 +1,6 @@
 {
   "/": {
-    "target": "https://dev.quicktech.com",
+    "target": "https://4bb4-91-221-219-0.ngrok-free.app",
     "secure": false,
     "pathRewrite": {
       "^/": "",

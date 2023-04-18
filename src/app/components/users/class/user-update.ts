@@ -27,7 +27,6 @@ export class UserUpdate {
   jobDescription: string;
   jobTypeId: string;
   customSubscriptionIds: Array<string> = [];
-  defaultSubscriptions: UserDefaultSubscriptionAdd;
   customerCompaniesInfo: Array<UserCustomerCompaniesInfoAdd> = [];
   userIndustryId: string;
   constructor(data: UserProfile, user: User) {
@@ -45,16 +44,10 @@ export class UserUpdate {
       return { id: item.id }
     })
     this.customSubscriptionIds = data.customSubscriptions.map(item => item.id);
-    this.defaultSubscriptions = new UserDefaultSubscriptionAdd(data.defaultSubscriptions.ticketSubscription.enabled, data.defaultSubscriptions.ticketManagerSubscription.enabled, data.defaultSubscriptions.invoiceSubscription.enabled);
     this.firstName = data.firstName;
     this.lastName = data.lastName;
     this.primaryEmail = data.primaryEmail;
-
-
-
     this.avatar = data.avatar;
-
-
     this.designation = data.designation;
     this.companyId = data.companyId;
     this.id = user.id;

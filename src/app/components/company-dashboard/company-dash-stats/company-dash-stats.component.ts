@@ -72,7 +72,7 @@ export class CompanyDashStatsComponent implements OnInit {
     let users = data;
     this.countUsers = users.filter((user) => {
       var isArchived = user.deletedAt;
-      return !isArchived && !this.showArchivedCompanies && user.clientCompanies.find(clientCompany => clientCompany === this._id) || this.showArchivedCompanies && isArchived && user.clientCompanies.find(clientCompany => clientCompany === this._id);
+      return !isArchived && !this.showArchivedCompanies && user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this._id) || this.showArchivedCompanies && isArchived && user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this._id);
     }).length;
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();

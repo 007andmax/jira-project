@@ -93,9 +93,9 @@ export class PasswoordManagerFiltersComponent implements OnInit, OnDestroy {
       this.filter.setCompany(this.selectedCompany);
       this.onChangeCounterFilter();
       let users = this.usersStateService.getAllUsers().filter(item => {
-        let company = data.find(itemCompany => item.clientCompanies.find(clientCompany => clientCompany === itemCompany.id));
+        let company = data.find(itemCompany => item.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === itemCompany.id));
         let isArchived = item.deletedAt || !company;
-        return !isArchived && item.clientCompanies.find(clientCompany => clientCompany === this.selectedCompany.id)
+        return !isArchived && item.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.selectedCompany.id)
       });
       let devices = (this.devicesStateService.getAllDevices()[this.selectedCompany.id]) ? this.devicesStateService.getAllDevices()[this.selectedCompany.id] : [];
       users.forEach(item => {
@@ -137,9 +137,9 @@ export class PasswoordManagerFiltersComponent implements OnInit, OnDestroy {
     }
     if (data) {
       let users = this.usersStateService.getAllUsers().filter(item => {
-        let company = item.clientCompanies.find(clientCompany => clientCompany === data.id);
+        let company = item.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === data.id);
         let isArchived = item.deletedAt || !company;
-        return !isArchived && item.clientCompanies.find(clientCompany => clientCompany === data.id)
+        return !isArchived && item.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === data.id)
       });
       let devices = (this.devicesStateService.getAllDevices()[data.id]) ? this.devicesStateService.getAllDevices()[data.id] : [];
       users.forEach(item => {

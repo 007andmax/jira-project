@@ -57,14 +57,14 @@ export class UserFilter {
     public getFilterList(reqCompaniesList: Array<User>, companies: Array<Company>) {
 
         let list = reqCompaniesList.filter(item => {
-            let indexCompany = companies.findIndex(company => item.clientCompanies.some(clientCompany => clientCompany === company.id));
+            let indexCompany = companies.findIndex(company => item.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === company.id));
             let clientType: boolean = false;
             let clientIndustry: boolean = false;
 
             if (indexCompany > -1 && this.clientType === companies[indexCompany].clientType) clientType = true;
             //if (this.clientIndustry === ((companies[indexCompany].clientIndustry) ? companies[indexCompany].clientIndustry.name : '')) clientIndustry = true;
 
-            if (((this.clientType) ? clientType === true : true) && ((this.title) ? item.jobTitleId === this.title.id : true) && ((this.company) ? item.clientCompanies.find(clientCompany => clientCompany === this.company) : true) && ((this.clientIndustry) ? this.clientIndustry.id === item.userIndustryId : true) && this.isUserDefaultSubscription(item.defaultSubscriptions) && this.isUserCustomSubscription(item.customSubscriptions) && this.isUserTags(item.tags)) {
+            if (((this.clientType) ? clientType === true : true) && ((this.title) ? item.jobTitleId === this.title.id : true) && ((this.company) ? item.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.company) : true) && ((this.clientIndustry) ? this.clientIndustry.id === item.userIndustryId : true) && this.isUserDefaultSubscription(item.defaultSubscriptions) && this.isUserCustomSubscription(item.customSubscriptions) && this.isUserTags(item.tags)) {
                 return true;
             } else {
                 return false;
@@ -206,7 +206,7 @@ export class UserFilter {
     }
     private getCompanyName(user, companies) {
         if (user.company.isDefault) return '';
-        let index = companies.findIndex(item => user.clientCompanies.find(clientCompany => clientCompany === item.id));
+        let index = companies.findIndex(item => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === item.id));
         return (index > -1) ? companies[index].name : '';
     }
     private getIndustryName(user, industries) {
