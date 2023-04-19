@@ -31,7 +31,7 @@ body {
         }
         .page-wrapper {
             display: block;
-            overflow: hidden;
+            //overflow: hidden; // TODO check this style
             width: 100%;
         }
         main {
@@ -140,26 +140,26 @@ body {
 
         /*** Listing ***/
 
-        ul {
-            margin: 0px 0px 30px;
-            padding: 0;
-        }
-        ul li {
-            list-style: none;
-            margin: 0px 0px 20px;
-            padding: 0px 0px 0px 15px;
-            position: relative;
-        }
-        ul li:not(.cps-block__nav-item):before {
-            content: "";
-            width: 4px;
-            height: 4px;
-            position: absolute;
-            left: 0px;
-            top: 7px;
-            background: $primary-2;
-            @include border-radius(50%);
-        }
+        //ul { // TODO check this style
+        //    margin: 0px 0px 30px;
+        //    padding: 0;
+        //}
+        //ul li { // TODO check this style
+        //    list-style: none;
+        //    margin: 0px 0px 20px;
+        //    padding: 0px 0px 0px 15px;
+        //    position: relative;
+        //}
+        //ul li:not(.cps-block__nav-item):before { // TODO check this style
+        //    content: "";
+        //    width: 4px;
+        //    height: 4px;
+        //    position: absolute;
+        //    left: 0px;
+        //    top: 7px;
+        //    background: $primary-2;
+        //    @include border-radius(50%);
+        //}
         ul.list-unstyled li {
             margin: 0px;
             padding: 0px;
@@ -191,43 +191,43 @@ body {
 
         /*** All buttons ***/
 
-        .btn {
-            font-size: 14px;
-            font-weight: 600;
-            line-height: normal;
-            letter-spacing: normal;
-            color: $white;
-            cursor: pointer;
-            border: none;
-            outline: none;
-            background-color: $primary-1;
-            padding: 16.5px 32px;
-            @include border-radius(4px);
-            @include transition(0.4s);
-            text-align: center;
-            outline: none;
-            -o-box-shadow: none !important;
-            -webkit-box-shadow: none !important;
-            -moz-box-shadow: none !important;
-            box-shadow: none !important;
-            height: auto;
-            &.btn-primary {
-                background-color: $primary-1 !important;
-                color: $white !important;
-                &:hover {
-                    background-color: $primary-1;
-                    color: $white !important;
-                }
-            }
-            &.btn-secondary {
-                background-color: $background !important;
-                color: $gray-800--old;
-                &:hover {
-                    background-color: $background !important;
-                    color: $gray-800--old;
-                }
-            }
-        }
+        //.btn { // TODO check this style
+        //    font-size: 14px;
+        //    font-weight: 600;
+        //    line-height: normal;
+        //    letter-spacing: normal;
+        //    color: $white;
+        //    cursor: pointer;
+        //    border: none;
+        //    outline: none;
+        //    background-color: $primary-1;
+        //    padding: 16.5px 32px;
+        //    @include border-radius(4px);
+        //    @include transition(0.4s);
+        //    text-align: center;
+        //    outline: none;
+        //    -o-box-shadow: none !important;
+        //    -webkit-box-shadow: none !important;
+        //    -moz-box-shadow: none !important;
+        //    box-shadow: none !important;
+        //    height: auto;
+        //    &.btn-primary {
+        //        background-color: $primary-1 !important;
+        //        color: $white !important;
+        //        &:hover {
+        //            background-color: $primary-1;
+        //            color: $white !important;
+        //        }
+        //    }
+        //    &.btn-secondary {
+        //        background-color: $background !important;
+        //        color: $gray-800--old;
+        //        &:hover {
+        //            background-color: $background !important;
+        //            color: $gray-800--old;
+        //        }
+        //    }
+        //}
 
         /*** static link ***/
         .static-link {
@@ -246,7 +246,7 @@ body {
 
         form {
             width: 100%;
-            float: left;
+            //float: left; // TODO check this style
             .form-row {
                 float: left;
                 width: 100%;
@@ -1279,7 +1279,7 @@ body {
         }
 
         .cmn-wrapper {
-            float: left;
+            //float: left; // TODO check this style
             width: 100%;
             .page-container {
                 float: left;
@@ -2099,182 +2099,182 @@ body {
 
         /*** New Date Picker  ***/
 
-        ngb-datepicker {
-            width: 280px;
-            @include border-radius(3px);
-            -webkit-box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
-            -o-box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
-            -moz-box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
-            box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
-            background-color: $white;
-            padding: 24px 15px 15px 15px !important;
-            overflow: hidden;
-            font-size: 12px;
-            font-weight: normal;
-            font-style: normal;
-            line-height: normal;
-            letter-spacing: normal;
-            color: $gray-800--old;
-            border: 1px solid $gray-400--old !important;
-            z-index: 9;
-
-            .ngb-dp-header {
-                padding: 0;
-                margin: 0;
-                display: -ms-flexbox;
-                display: -webkit-flex;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                width: 100%;
-                ngb-datepicker-navigation {
-                    display: -ms-flexbox;
-                    display: -webkit-flex;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    width: 100%;
-                    .ngb-dp-navigation-select {
-                        select {
-                            @include app-none();
-                            border: solid 1px $gray-500--old;
-                            margin: 0 -1px;
-                            outline: none !important;
-                            background: url("/assets/img/device/selct-arrow.svg") no-repeat right 10px center;
-                            width: 90px;
-                            &:first-child {
-                                @include border-radius(4px 0 0 4px);
-                            }
-                            &:last-child {
-                                @include border-radius(0 4px 4px 0);
-                            }
-                        }
-                    }
-                }
-                // .ngb-dp-navigation-select{
-                //     display: none;
-                // }
-                .ngb-dp-arrow {
-                    margin: 0;
-                    width: 16px;
-                    height: auto;
-                    flex: auto;
-                    .btn {
-                        &.btn-link {
-                            span {
-                                display: none;
-                            }
-                            &.ngb-dp-arrow-btn {
-                                padding: 0;
-                                margin: 0;
-                                height: 16px !important;
-                                width: 16px !important;
-                                background-color: transparent;
-                                background: url(/assets/img/device/prev.svg) no-repeat left center;
-                                float: left;
-                                min-width: inherit;
-                            }
-                        }
-                    }
-                    &.right {
-                        .btn {
-                            &.btn-link {
-                                &.ngb-dp-arrow-btn {
-                                    background: url(/assets/img/device/next.svg) no-repeat right center;
-                                    float: right;
-                                    min-width: inherit;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            .ngb-dp-weekdays {
-                .ngb-dp-weekday {
-                    font-size: 10px;
-                    font-weight: 600;
-                    font-style: normal;
-                    line-height: 1;
-                    letter-spacing: normal;
-                    text-align: center;
-                    color: $gray-800--old;
-                    border-bottom: 1px solid $background;
-                    padding: 25px 5px 10px 5px;
-                    text-align: center;
-                }
-            }
-
-            .ngb-dp-months {
-                width: 100%;
-                .ngb-dp-month {
-                    width: 100%;
-                }
-            }
-            ngb-datepicker-month-view {
-                width: 100%;
-                display: table;
-                & > div {
-                    display: table-row;
-                    padding: 0 !important;
-                    .ngb-dp-weekday {
-                        height: auto;
-                        width: auto;
-                        display: table-cell;
-                    }
-                    .ngb-dp-day {
-                        height: auto;
-                        width: auto;
-                        display: table-cell;
-                        font-size: 12px;
-                        font-weight: normal;
-                        font-stretch: normal;
-                        font-style: normal;
-                        line-height: normal;
-                        letter-spacing: normal;
-                        color: $gray-800--old;
-                        text-align: center;
-                        padding: 5px 5px 5px 5px;
-                        border: none !important;
-                        outline: none !important;
-                        // &.ngb-dp-today{
-                        //     .btn-light{
-                        //         // @include border-radius(50%);
-                        //         // background-color: $primary-1;
-                        //         // color:$white;
-                        //     }
-                        // }
-                        .btn-light {
-                            height: auto;
-                            width: auto;
-                            line-height: 1 !important;
-                            font-size: 12px;
-                            font-weight: 400;
-                            font-stretch: normal;
-                            font-style: normal;
-                            line-height: normal;
-                            letter-spacing: normal;
-                            color: $gray-800--old;
-                            text-align: center;
-                            min-width: 24px;
-                            min-height: 24px;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            @include border-radius(50%);
-                            &.active {
-                                background-color: $primary-1;
-                                color: $white;
-                            }
-                        }
-                    }
-                    .ngb-dp-weekdays {
-                        padding: 0 !important;
-                        border: 0 !important;
-                        width: 100%;
-                    }
-                }
-            }
-        }
+        //ngb-datepicker { // TODO check this style
+        //    width: 280px;
+        //    @include border-radius(3px);
+        //    -webkit-box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
+        //    -o-box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
+        //    -moz-box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
+        //    box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
+        //    background-color: $white;
+        //    padding: 24px 15px 15px 15px !important;
+        //    overflow: hidden;
+        //    font-size: 12px;
+        //    font-weight: normal;
+        //    font-style: normal;
+        //    line-height: normal;
+        //    letter-spacing: normal;
+        //    color: $gray-800--old;
+        //    border: 1px solid $gray-400--old !important;
+        //    z-index: 9;
+        //
+        //    .ngb-dp-header {
+        //        padding: 0;
+        //        margin: 0;
+        //        display: -ms-flexbox;
+        //        display: -webkit-flex;
+        //        display: flex;
+        //        align-items: center;
+        //        justify-content: space-between;
+        //        width: 100%;
+        //        ngb-datepicker-navigation {
+        //            display: -ms-flexbox;
+        //            display: -webkit-flex;
+        //            display: flex;
+        //            align-items: center;
+        //            justify-content: space-between;
+        //            width: 100%;
+        //            .ngb-dp-navigation-select {
+        //                select {
+        //                    @include app-none();
+        //                    border: solid 1px $gray-500--old;
+        //                    margin: 0 -1px;
+        //                    outline: none !important;
+        //                    background: url("/assets/img/device/selct-arrow.svg") no-repeat right 10px center;
+        //                    width: 90px;
+        //                    &:first-child {
+        //                        @include border-radius(4px 0 0 4px);
+        //                    }
+        //                    &:last-child {
+        //                        @include border-radius(0 4px 4px 0);
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        // .ngb-dp-navigation-select{
+        //        //     display: none;
+        //        // }
+        //        .ngb-dp-arrow {
+        //            margin: 0;
+        //            width: 16px;
+        //            height: auto;
+        //            flex: auto;
+        //            .btn {
+        //                &.btn-link {
+        //                    span {
+        //                        display: none;
+        //                    }
+        //                    &.ngb-dp-arrow-btn {
+        //                        padding: 0;
+        //                        margin: 0;
+        //                        height: 16px !important;
+        //                        width: 16px !important;
+        //                        background-color: transparent;
+        //                        background: url(/assets/img/device/prev.svg) no-repeat left center;
+        //                        float: left;
+        //                        min-width: inherit;
+        //                    }
+        //                }
+        //            }
+        //            &.right {
+        //                .btn {
+        //                    &.btn-link {
+        //                        &.ngb-dp-arrow-btn {
+        //                            background: url(/assets/img/device/next.svg) no-repeat right center;
+        //                            float: right;
+        //                            min-width: inherit;
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //    .ngb-dp-weekdays {
+        //        .ngb-dp-weekday {
+        //            font-size: 10px;
+        //            font-weight: 600;
+        //            font-style: normal;
+        //            line-height: 1;
+        //            letter-spacing: normal;
+        //            text-align: center;
+        //            color: $gray-800--old;
+        //            border-bottom: 1px solid $background;
+        //            padding: 25px 5px 10px 5px;
+        //            text-align: center;
+        //        }
+        //    }
+        //
+        //    .ngb-dp-months {
+        //        width: 100%;
+        //        .ngb-dp-month {
+        //            width: 100%;
+        //        }
+        //    }
+        //    ngb-datepicker-month-view {
+        //        width: 100%;
+        //        display: table;
+        //        & > div {
+        //            display: table-row;
+        //            padding: 0 !important;
+        //            .ngb-dp-weekday {
+        //                height: auto;
+        //                width: auto;
+        //                display: table-cell;
+        //            }
+        //            .ngb-dp-day {
+        //                height: auto;
+        //                width: auto;
+        //                display: table-cell;
+        //                font-size: 12px;
+        //                font-weight: normal;
+        //                font-stretch: normal;
+        //                font-style: normal;
+        //                line-height: normal;
+        //                letter-spacing: normal;
+        //                color: $gray-800--old;
+        //                text-align: center;
+        //                padding: 5px 5px 5px 5px;
+        //                border: none !important;
+        //                outline: none !important;
+        //                // &.ngb-dp-today{
+        //                //     .btn-light{
+        //                //         // @include border-radius(50%);
+        //                //         // background-color: $primary-1;
+        //                //         // color:$white;
+        //                //     }
+        //                // }
+        //                .btn-light {
+        //                    height: auto;
+        //                    width: auto;
+        //                    line-height: 1 !important;
+        //                    font-size: 12px;
+        //                    font-weight: 400;
+        //                    font-stretch: normal;
+        //                    font-style: normal;
+        //                    line-height: normal;
+        //                    letter-spacing: normal;
+        //                    color: $gray-800--old;
+        //                    text-align: center;
+        //                    min-width: 24px;
+        //                    min-height: 24px;
+        //                    display: flex;
+        //                    align-items: center;
+        //                    justify-content: center;
+        //                    @include border-radius(50%);
+        //                    &.active {
+        //                        background-color: $primary-1;
+        //                        color: $white;
+        //                    }
+        //                }
+        //            }
+        //            .ngb-dp-weekdays {
+        //                padding: 0 !important;
+        //                border: 0 !important;
+        //                width: 100%;
+        //            }
+        //        }
+        //    }
+        //}
 
         /*** Modal Style ***/
         .modal {
@@ -2350,59 +2350,59 @@ body {
             }
         }
 
-        ul.dropdown-menu {
-            @include border-radius(4px);
-            -o-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-            -webkit-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-            -moz-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-            box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-            background-color: $white;
-            width: 160px;
-            right: 43% !important;
-            left: auto !important;
-            min-width: 160px;
-            top: 40px !important;
-            border: none;
-            height: auto;
-            padding: 9px 0;
-            margin: 0;
-            li {
-                display: -ms-flexbox;
-                display: -webkit-flex;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                a.dropdown-item {
-                    padding: 7px 20px;
-                    font-size: 13px;
-                    font-weight: normal;
-                    font-stretch: normal;
-                    font-style: normal;
-                    line-height: 1.54;
-                    letter-spacing: normal;
-                    color: $gray-800--old;
-                    display: -ms-flexbox;
-                    display: -webkit-flex;
-                    display: flex;
-                    flex-direction: row;
-                    align-items: center;
-                    &:focus {
-                        outline: none;
-                    }
-                    &:active,
-                    &:hover,
-                    &:focus {
-                        background-color: $gray-200--old;
-                    }
-                    img {
-                        width: auto;
-                        max-width: 20px;
-                        margin-right: 15px;
-                        margin-top: -1px;
-                    }
-                }
-            }
-        }
+        //ul.dropdown-menu { // TODO check this style
+        //    @include border-radius(4px);
+        //    -o-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
+        //    -webkit-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
+        //    -moz-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
+        //    box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
+        //    background-color: $white;
+        //    width: 160px;
+        //    right: 43% !important;
+        //    left: auto !important;
+        //    min-width: 160px;
+        //    top: 40px !important;
+        //    border: none;
+        //    height: auto;
+        //    padding: 9px 0;
+        //    margin: 0;
+        //    li {
+        //        display: -ms-flexbox;
+        //        display: -webkit-flex;
+        //        display: flex;
+        //        flex-direction: column;
+        //        align-items: center;
+        //        a.dropdown-item {
+        //            padding: 7px 20px;
+        //            font-size: 13px;
+        //            font-weight: normal;
+        //            font-stretch: normal;
+        //            font-style: normal;
+        //            line-height: 1.54;
+        //            letter-spacing: normal;
+        //            color: $gray-800--old;
+        //            display: -ms-flexbox;
+        //            display: -webkit-flex;
+        //            display: flex;
+        //            flex-direction: row;
+        //            align-items: center;
+        //            &:focus {
+        //                outline: none;
+        //            }
+        //            &:active,
+        //            &:hover,
+        //            &:focus {
+        //                background-color: $gray-200--old;
+        //            }
+        //            img {
+        //                width: auto;
+        //                max-width: 20px;
+        //                margin-right: 15px;
+        //                margin-top: -1px;
+        //            }
+        //        }
+        //    }
+        //}
 
         .btn-dowanload {
             @include border-radius(4px);
@@ -2683,13 +2683,13 @@ body {
             }
         }
 
-        .grey-dropdown .report-caret-icon,
-        .report-caret-icon {
-            position: absolute;
-            cursor: pointer;
-            top: 17px !important;
-            right: 12px;
-        }
+        //.grey-dropdown .report-caret-icon, // TODO check this style
+        //.report-caret-icon {
+        //    position: absolute;
+        //    cursor: pointer;
+        //    top: 17px !important;
+        //    right: 12px;
+        //}
 
         .grey-dropdown .report-close-icon,
         .report-close-icon {
