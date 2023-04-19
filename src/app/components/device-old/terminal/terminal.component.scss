@@ -86,18 +86,18 @@ main {
                             @include border-radius(4px);
                             padding: 11.5px 10px;
                             width: 125px;
-                            text-align: center; 
+                            text-align: center;
                             font-size: 13px;
                             position: absolute;
                             right: 8px;
                             bottom: 8px;
                         }
                     }
-                   
-                    
+
+
                 }
             }
-        } 
+        }
         .right-sidebar {
             & > div {
                 & > .btn.btn-primary {
@@ -125,7 +125,7 @@ main {
                 @media only screen and (min-width: 1601px) {
                     width: 448px;
                 }
-                
+
                     ul.nav-tabs {
                         -ms-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
                         -o-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
@@ -174,7 +174,7 @@ main {
                                                         margin: 0;
                                                         background: url("../../../../assets/img/device/more-terminal.svg")
                                                             no-repeat center;
-                                                        line-height: 1; 
+                                                        line-height: 1;
                                                     }
 
                                                     .dropdown-menu {
@@ -222,11 +222,14 @@ main {
                                                 display: flex;
                                                 align-items: center;
                                                 width: calc(100% - 50px);
-                                                img {
+                                                &__image {
                                                     margin-right: 4px;
                                                     max-width: 16px;
                                                 }
-                                                h5 {
+                                                &__title {
+                                                    font-size: 12px;
+                                                    color: $gray-700;
+                                                    line-height: 1.33;
                                                     margin: 2px 0 0;
                                                     max-width: calc(100% - 20px);
                                                 }
@@ -299,7 +302,7 @@ main {
                             }
                         }
                     }
-                
+
 
                 .modal-content {
                     &.toggle-area {
@@ -369,8 +372,8 @@ main {
                                 #cmd_line {
                                     width: 40px;
                                     border-right: solid 1px #c4cbd5;
-                                    background-color: #f3f7f9; 
-                                    list-style-type: none; 
+                                    background-color: #f3f7f9;
+                                    list-style-type: none;
                                     padding: 10px 0;
                                     margin: 0;
                                     overflow-y: auto;
@@ -388,7 +391,7 @@ main {
                                         &::before {
                                             width: 0;
                                         }
-                                    } 
+                                    }
                                 }
                                 textarea {
                                     border-radius: 0;
@@ -425,7 +428,7 @@ main {
                                     font-style: normal;
                                     line-height: 1.33;
                                     letter-spacing: normal;
-                                    color: #16a4fa; 
+                                    color: #16a4fa;
                                     font-family:$graphicMedBold;
                                     padding: 12px 15px;
                                 }
@@ -467,7 +470,7 @@ main {
                 }
 
                 & > div {
-                    
+
                         .nav-tabs {
                             padding: 18px 32px 0 32px;
                         }
@@ -636,7 +639,7 @@ main {
                                     12px center;
                             }
                         }
-                    
+
                 }
             }
             &.script-details {
@@ -751,8 +754,8 @@ main {
                         #cmd_detail_line {
                             width: 40px;
                             border-right: solid 1px #c4cbd5;
-                            background-color: #f3f7f9; 
-                            list-style-type: none; 
+                            background-color: #f3f7f9;
+                            list-style-type: none;
                             padding: 10px 0;
                             margin: 0;
                             overflow-y: auto;
@@ -769,7 +772,7 @@ main {
                                 &::before {
                                     width: 0;
                                 }
-                            } 
+                            }
                         }
                         textarea {
                             border-radius: 0;
@@ -819,7 +822,7 @@ main {
             }
         }
 
-       
+
         .cmn-tbs-content {
             &.command {
                 li {
@@ -1006,14 +1009,14 @@ body {
                         }
                     }
                 }
-                
-                
-                
-                
-                
-                
-                
-                
+
+
+
+
+
+
+
+
             }
             &.category-modal {
                 .confirm-btn {
@@ -1105,3 +1108,10 @@ body {
     }
 }
 
+.device-page-header {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.63;
+  color: $gray-900;
+  text-transform: capitalize;
+}

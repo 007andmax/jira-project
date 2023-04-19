@@ -7,7 +7,7 @@
     max-height: 586px;
     overflow: hidden;
     display: block;
-    width: 290px;
+    width: 100%;
     box-shadow: unset;
     .content {
       height: 100%;
@@ -33,12 +33,14 @@
     }
     .users-list {
       max-height: 230px;
+      max-width: 100%;
     }
   }
 }
 .tech-user-body {
   overflow: visible;
   max-height: 586px !important;
+  width: 480px;
 }
 .tech__user-icon {
   width: 24px;

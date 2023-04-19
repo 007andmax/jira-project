@@ -187,16 +187,14 @@
                                                 [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
                                                 [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
                                             ></div>
-                                            <div>
-                                              <div
-                                                class="user-item-user-name"
-                                                [textContent]="getUserName(user)"
-                                              ></div>
-                                              <span
-                                                class="user-item-user-email"
-                                                [textContent]="user.primaryEmail"
-                                              ></span>
-                                            </div>
+                                            <div
+                                              class="user-item-user-name"
+                                              [textContent]="getUserName(user)"
+                                            ></div>
+                                            <span
+                                              class="user-item-user-email"
+                                              [textContent]="user.primaryEmail"
+                                            ></span>
                                             <i
                                                 *ngIf="isSelected(user)"
                                                 class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"

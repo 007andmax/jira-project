@@ -9,6 +9,8 @@
     width: 100%;
     margin-bottom: 0;
     gap: 16px;
+    list-style-type: none;
+    padding: unset;
   }
 
   &__item {
@@ -77,4 +79,12 @@
   border: solid 1px $gray-200;
   border-radius: 8px;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+
+  &__title {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: $primary-2;
+    margin-bottom: 20px;
+  }
 }

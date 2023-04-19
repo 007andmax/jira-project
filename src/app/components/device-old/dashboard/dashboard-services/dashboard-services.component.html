@@ -1,5 +1,5 @@
 <div class="dashboard-col col-50 services">
-    <h2>Services</h2>
+    <div class="dashboard-col__title">Services</div>
     <ul class="dashboard-services__list">
         <li
           [ngClass]="{'updated': virusInfo?.isUpToDate == true, 'alert': virusInfo?.isUpToDate == false}"
@@ -12,7 +12,7 @@
                     alt="virus-protection"
                 >
             </figure>
-            <h4 class="dashboard-services__title">Virus Protection</h4>
+            <div class="dashboard-services__title">Virus Protection</div>
             <span
               *ngIf="virusInfo?.isUpToDate == true"
               class="dashboard-services__text"
@@ -34,7 +34,7 @@
                     alt="Security Update"
                 >
             </figure>
-            <h4 class="dashboard-services__title">Security Update</h4>
+            <div class="dashboard-services__title">Security Update</div>
             <span class="dashboard-services__text">7 missing Updates</span>
         </li>
         <li class="updated dashboard-services__item">
@@ -45,7 +45,7 @@
                     alt="drivers-missing"
                 >
             </figure>
-            <h4 class="dashboard-services__title">Drivers Missing</h4>
+            <div class="dashboard-services__title">Drivers Missing</div>
             <span class="dashboard-services__text">Up-to-date</span>
         </li>
     </ul>
