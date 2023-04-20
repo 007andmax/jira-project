@@ -1,0 +1,95 @@
+<div class="page-container manage-tech">
+    <div class="page-insider">
+        <div class="heading qt-df qt-ai-fs qt-jc-sb heading-tickets-status">
+            <h6 class="qt-fw-600">Customer user permissions</h6>
+            <customer-permissions-add></customer-permissions-add>
+        </div>
+        <div class="data-table-wrap mteh-data">
+            <div
+                class="loading-container"
+                *ngIf="loading"
+            >
+                <div class="loading"></div>
+            </div>
+            <div
+                class="page-container permissin-manage"
+                [hidden]="loading"
+            >
+                <div class="page-insider">
+                    <div class="cmn-area pr-area">
+                        <div class="tab-pane__table dataTable">
+                            <div
+                                class="tab-pane__table-header"
+                                *ngIf="userRoles"
+                            >
+                                <div class="tab-pane__table-row">
+                                    <div class="tab-pane__table-cell user-permissions-table__permissions">Permissions</div>
+                                    <div
+                                        class="tab-pane__table-cell user-permissions-table__role qt-pos-rel"
+                                        *ngFor="let role of userRoles; let i = index"
+                                    >
+                                        <div class="qt-df qt-jc-c">
+                                            <div class="qt-mr-16">{{ role.name }}</div>
+                                            <customer-permissions-edit
+                                                [role]="role"
+                                                [userPermissions]="userPermissions"
+                                            ></customer-permissions-edit>
+                                            <app-dynamic-tooltip
+                                                [content]="'Remove'"
+                                                [position]="'top'"
+                                                #removeTooltip
+                                            ></app-dynamic-tooltip>
+                                            <a
+                                                href="javascript:;"
+                                                (mouseenter)="removeTooltip.show($event.target)"
+                                                (mouseleave)="removeTooltip.hide()"
+                                                class="icon__remove qt-sz-16 qt-bg-contain pointer qt-fs-0"
+                                                (click)="onDeleteRole(role);"
+                                            >
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane__table-body">
+                                <ng-container *ngFor="let section of getListKeys(sections)">
+                                    <div class="tab-pane__table-row tab-pane__table-row--sm tab-pane__table-row__permissions-subheader">
+                                        <div class="tab-pane__table-cell user-permissions-table__permissions">
+                                            <div class="user-permissions-table__permissions-text">{{ section }}</div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="tab-pane__table-row"
+                                        *ngFor="let permission of sections[section]"
+                                    >
+                                        <div class="tab-pane__table-cell user-permissions-table__permissions">
+                                            <div class="user-permissions-table__permissions-text">{{ userReadable(permission) }}</div>
+                                        </div>
+                                        <div
+                                            class="tab-pane__table-cell user-permissions-table__role"
+                                            *ngFor="let role of userRoles; let i = index"
+                                        >
+                                            <label
+                                                class="qt-checkbox"
+                                                for="{{ permission }}_{{ role.id }}"
+                                            >
+                                                <input
+                                                    type="checkbox"
+                                                    id="{{ permission }}_{{ role.id }}"
+                                                    [checked]="checkRole(role,permission)"
+                                                    (click)="togglePermission(role, permission)"
+                                                >
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

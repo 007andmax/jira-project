@@ -38,6 +38,7 @@ export class UsersStateService {
   isGetAllUsers: boolean = false;
   isGetUserRole: boolean = false;
   userRoles: Array<UserRole> = [];
+  userRoleForRemove: UserRole;
   constructor(private userService: UsersService,
     private appService: AppService,
     private usersRealTimeService: UsersRealTimeService) {
@@ -81,6 +82,12 @@ export class UsersStateService {
   }
   public getUserRoles() {
     return this.userRoles;
+  }
+  public setUserRoleForRemove(data) {
+    this.userRoleForRemove = data;
+  }
+  public getUserRoleForRemove() {
+    return this.userRoleForRemove;
   }
   public onInitGetUsersRoles() {
     this.userService.getUserRoles().subscribe((data: any) => {

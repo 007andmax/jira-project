@@ -103,6 +103,14 @@
         Tech Users
     </li>
     <li
+        [ngClass]="{'--active':activePage === 'customer-permissions'}"
+        (click)="goToState('customer-permissions')"
+        *ngIf="getPermissions('VIEW_COMPANIES') && getPermissions('CREATE_COMPANIES') && getPermissions('VIEW_USERS') && getPermissions('CREATE_USERS')"
+    >
+        <div class="icon__menu--submenu icon__menu-users qt-sz-20 qt-bg-contain qt-mr-8"></div>
+        Customer user permissions
+    </li>
+    <li
         [ngClass]="{'--active':activePage === 'ticket-settings'}"
         (click)="goToState('ticket-settings')"
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TICKET_SETTINGS')"

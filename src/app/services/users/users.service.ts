@@ -61,7 +61,33 @@ export class UsersService {
   public getMessagesUser(id, page) {
     return this.http.get(this.apiUrl + `email/${id}/user?size=20&page=${page}`);
   }
-
+  public getPermissions() {
+    return this.http.get(this.apiUrl + `customerUser/permissions`);
+  }
+  public changePermission(id, data) {
+    return this.http.put(this.apiUrl + `customerUser/updateRole/${id}`, data).pipe(
+      tap(data => {
+        this.toastrService.success("The role has been successfully updated");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public addRole(name) {
+    return this.http.post(this.apiUrl + `customerUser/createRole`, { name }).pipe(
+      tap(data => {
+        this.toastrService.success("The new role has been successfully created");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public removeRole(id) {
+    return this.http.delete(this.apiUrl + `customerUser/deleteRole/${id}`).pipe(
+      tap(data => {
+        this.toastrService.success("The role has been successfully deleted");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
   public resetPrimaryContact(userId) {
     return this.http.get(this.apiUrl + '/company/resetPrimaryContact?userId=' + userId);
   }

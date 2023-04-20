@@ -105,6 +105,30 @@ export class PermissionManageService {
     ]
   };
 
+  sectionsCustomPermission = {
+    'Tickets Area': [
+      'VIEW_ALL_TICKETS',
+      'VIEW_MY_TICKETS',
+      'EDIT_OTHER_TICKETS'
+    ],
+    'Users': [
+      'VIEW_MY_PROFILE',
+      'VIEW_ALL_USERS',
+      'EDIT_USERS'
+    ],
+    Devices: ['VIEW_ALL_DEVICES',
+      'DEVICES_REMOTE_CONTROL'],
+    'Invoices': [
+      'VIEW_ALL_INVOICES'
+    ],
+    'Quotes': [
+      'VIEW_ALL_QUOTES'
+    ],
+    'Payments': [
+      'VIEW_ALL_PAYMENTS'
+    ]
+  };
+
 
   constructor(private http: HttpClient) { }
 
@@ -160,6 +184,9 @@ export class PermissionManageService {
 
   getsections() {
     return this.sections;
+  }
+  getSectionsCustomPermission() {
+    return this.sectionsCustomPermission;
   }
 
   /**

@@ -5,4 +5,10 @@ export class UserRole {
         this.id = data.id;
         this.name = data.name;
     }
+    public getDataForRequest(permissions) {
+        return {
+            name: this.name,
+            permissions: permissions
+        }
+    }
 }

@@ -19,6 +19,7 @@ import { PermissionSupportService } from './components/support/permission-suppor
 import { PermissionReportsService } from './components/reports/permission-reports.service';
 import { PermissionTechUserService } from './services/users/permission-tech-user.service';
 import { TestPermissionService } from './services/test-permission/test-permission.service';
+import { PermissionCustomerPermissionsService } from './components/setting/customer-permissions/permission-customer-permissions.service';
 
 const routes: Routes = [
 
@@ -110,6 +111,11 @@ const routes: Routes = [
     loadChildren: './components/setting/manage-tags/manage-tags.module#ManageTagsModule',
     canActivate: [PermissionManageTagsService, PermissionTechUserService]
 
+  },
+  {
+    path: ':company/setting/customer-permissions',
+    loadChildren: './components/setting/customer-permissions/customer-permissions.module#CustomerPermissionsModule',
+    canActivate: [PermissionCustomerPermissionsService, PermissionTechUserService]
   },
   {
     path: ':company/setting/products-settings',

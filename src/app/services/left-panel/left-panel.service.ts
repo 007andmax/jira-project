@@ -114,7 +114,8 @@ export class LeftPanelService {
       || state === 'ticket-settings'
       || state === 'crm-settings'
       || state === 'marketing-email'
-      || state === 'device-setting-component')
+      || state === 'device-setting-component'
+      || state === 'customer-permissions')
   }
 
   public isDevicesPage(state) {
