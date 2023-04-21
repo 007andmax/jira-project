@@ -1,31 +1,25 @@
 @import './src/assets/styles/variable';
 @import './src/assets/styles/fonts';
 
-tr:hover {
-    td {
-      background-color: $gray-100--old;
-
-    }
+.invoce-table__invoice {
+  cursor: pointer;
+}
+tr.--selected {
+  td {
+    background-color: $gray-200--old;
+    border-color: $primary-1 !important;
   }
-  .invoce-table__invoice {
-    cursor: pointer;
-  }
-  tr.--selected {
-    td {
-      background-color: $gray-200--old;
-      border-color: $primary-1 !important;
-    }
-  }
-  .pointer {
-    cursor: pointer !important;
-  }
-  .invoice-items-dropdown {
-    min-width: max-content;
-  }
-  .invoice-table__check {
-    width: 12px;
-    padding: 0px;
-  }
+}
+.pointer {
+  cursor: pointer !important;
+}
+.invoice-items-dropdown {
+  min-width: max-content;
+}
+.invoice-table__check {
+  width: 12px;
+  padding: 0;
+}
 .billable-payment-table__invoice {
   font-weight: 600;
   color: $primary-1;
