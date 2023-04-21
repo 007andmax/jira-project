@@ -33,7 +33,7 @@
                             [ngStyle]="{'background-color':scriptTyped == 'powershell' ? '#012456' : '#151b21' }"
                         >
                             <p *ngFor="let split of splitCommand">
-                                <span>{{split}}</span>
+                                <span [textContent]="split"></span>
                             </p>
                             <!-- <textarea>C:\Users\Sam\Desktop></textarea> -->
                         </div>
@@ -88,6 +88,7 @@
             (onCopyToTerminal)="copyToTerminal($event.cmd, $event.type, $event.file)"
             (onViewScriptDetail)="viewScriptDetail($event)"
             (onCloneScript)="cloneScript($event)"
+            (onClosed)="runScript = false"
         ></terminal-run-script>
         <!-- Script Details Sidebar -->
         <terminal-script-detail

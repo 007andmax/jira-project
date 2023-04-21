@@ -139,9 +139,9 @@ export class TerminalAsideComponent implements OnInit {
           }
         });
   }
-  setCommand(name, id) {
-    this.commandModal.category = name;
-    this.commandModal.categoryId = id;
+  setCommand(data) {
+    this.commandModal.category = data.name;
+    this.commandModal.categoryId = data.id;
   }
   manageCategory() {
     const modalRef = this.modalService.open(TerminalManageCategoryComponent, { windowClass: 'quote-send-modal page-settings', backdrop: 'static', keyboard: false });

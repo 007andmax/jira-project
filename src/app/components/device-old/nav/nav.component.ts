@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonHttpServices } from './../_services/common_http.service';
 import { CommonServices } from './../_services/common.service';
-import { ToastrService } from 'ngx-toastr';
-import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { User } from '../../users/class/user';
+import { Company } from 'src/app/interfaces/company/company';
 
 @Component({
   selector: 'nav-old',
@@ -14,16 +14,15 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 export class NavOldComponent implements OnInit {
 
   appTitle = 'quickHtml';
-  currentUser = '';
-  currentCompany = '';
-  imgUrl = '';
+  currentUser: User;
+  currentCompany: Company;
   deviceType = '';
   _id: string = '';
   type: string = '';
-  constructor(private commonHttpServices: CommonHttpServices,
-    private toastr: ToastrService,
+  constructor(
     public router: Router,
     public companiesStateService: CompaniesStateService,
+    private usersStateService: UsersStateService,
     public commonServices: CommonServices) { }
 
   ngOnInit() {
@@ -31,45 +30,34 @@ export class NavOldComponent implements OnInit {
     this._id = window.location.href.split('/')[window.location.href.split('/').length - 1];
     this.deviceType = this.type;
     // this.deviceType = 'printer';
-    this.getCurrentUser();
-    this.getCurrentCompany();
+    if (this.usersStateService.getCurrentUser()) this.getCurrentUser(this.usersStateService.getCurrentUser());
+    this.usersStateService.getOnGetCurrentuser().subscribe(data => {
+      this.getCurrentUser(data)
+    })
+    if (this.companiesStateService.getCurrentCompany()) this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
+    this.companiesStateService.getOnCurrentCompany().subscribe(data => {
+      this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
+    })
   }
-
-  getCurrentUser() {
-
-    this.commonHttpServices.getCurrentUser()
-      .pipe(first())
-      .subscribe(
-        resp => {
-
-          this.currentUser = (resp.firstName + ' ' + resp.lastName).trim();
-          localStorage.setItem('currentUser', this.currentUser);
-          localStorage.setItem('imId', resp.avatar === null ? '' : resp.avatar.cropped.id);
-          this.imgUrl = resp.avatar === null ? '' : `/users/${resp.id}/image.jpg?t=${resp.avatar.updatedAt}`;
-        },
-        error => {
-          this.toastr.error('Something went wrong please try again.');
-        }
-      );
+  private getCurrentUser(data) {
+    this.currentUser = data;
+    localStorage.setItem('imId', this.currentUser.avatar === null ? '' : this.currentUser.avatar.cropped.id);
   }
   goToSoftware() {
     this.router.navigate(
       [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device-old/software/${this.type}/${this._id}`]);
   }
-  getCurrentCompany() {
-
-    this.commonHttpServices.getCurrentCompany()
-      .pipe(first())
-      .subscribe(
-        resp => {
-          this.currentCompany = resp.name;
-          localStorage.setItem('currentCompanyName', this.currentCompany);
-          // localStorage.setItem('currentCompany', resp.id);
-        },
-        error => {
-          this.toastr.error('Something went wrong please try again.');
-        }
-      );
+  getCurrentCompany(data) {
+    this.currentCompany = data;
+    localStorage.setItem('currentCompanyName', this.currentCompany.name);
+  }
+  checkLogo() {
+    if (this.currentUser && this.currentUser.avatar) return `/users/${this.currentUser.id}/image.jpg?t=${this.currentUser.avatar.updatedAt}`;
+    return null;
+  }
+  public getCurrentUserName() {
+    let user = this.usersStateService.getCurrentUser();
+    return (user) ? `${user.firstName} ${user.lastName}` : '';
   }
   goToHardware() {
     this.router.navigate(

@@ -46,8 +46,22 @@
                             </div>
                         </div>
                         <div class="f-col col-70">
-                            <label for="command">Category</label>
-                            <div class="form-row">
+                            <span (click)="manageCategory();">Manage Category</span>
+                            <app-drop-down
+                                [sort]="false"
+                                [title]="'Category'"
+                                [placeholder]="'Select Category'"
+                                [editItem]="commandModal"
+                                [field]="'name'"
+                                [list]="cmdCategoryReadList"
+                                [isBlockClear]="true"
+                                [validate]="!(submitted == true && Category.errors && Category.errors.required)"
+                                (onSelectedItem)="setCommand($event)"
+                            ></app-drop-down>
+                            <div
+                                class="form-row"
+                                *ngIf="false"
+                            >
                                 <div
                                     class="grey-dropdown w-100"
                                     ngbDropdown
@@ -168,6 +182,19 @@
                                         name="command"
                                         (keyup)="countLineNumber()"
                                     >
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                                     </textarea>
                                 </div>

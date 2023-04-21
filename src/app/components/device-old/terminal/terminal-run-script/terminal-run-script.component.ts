@@ -26,6 +26,7 @@ export class TerminalRunScriptComponent implements OnInit {
   @Output() onCopyToTerminal = new EventEmitter();
   @Output() onViewScriptDetail = new EventEmitter();
   @Output() onCloneScript = new EventEmitter();
+  @Output() onClosed = new EventEmitter();
 
   constructor() { }
 
@@ -52,6 +53,9 @@ export class TerminalRunScriptComponent implements OnInit {
     } else if (this.myScriptModal.search === '' && this.myScriptModal.category !== '') {
       this.myScriptListFilter = this.myScriptList.filter(val => val.categoryId === this.myScriptModal.categoryId)
     }
+  }
+  close() {
+    this.onClosed.emit(null);
   }
   filterSharedScript(category: any) {
     if (category) {

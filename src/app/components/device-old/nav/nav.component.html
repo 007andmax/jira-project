@@ -9,12 +9,21 @@
         <span class="user-hp-dp">
             <!-- <img src="assets/images/user.jpg" alt="user" /> -->
             <img
-                [src]="imgUrl"
+                [src]="checkLogo()"
+                *ngIf="checkLogo()"
                 alt="user"
             >
+            <div
+                class="nav-header__account-info-avatar tooltip-max--content"
+                [textContent]="getCurrentUserName()[0]"
+                *ngIf="!checkLogo()"
+            ></div>
         </span>
         <div class="user-log-info">
-            <div class="user-log-info__title">{{currentUser}}</div>
+            <div
+                class="user-log-info__title"
+                [textContent]="getCurrentUserName()"
+            ></div>
             <span>logged in user</span>
         </div>
         <span class="user-status online">online</span>
@@ -23,18 +32,21 @@
 <nav>
     <ul class="list-unstyled">
         <li
+            class="pointer"
             [routerLinkActive]="['active']"
             [routerLinkActiveOptions]="{ exact: true }"
         >
             <a (click)="goToDashboard()">Dashboard</a>
         </li>
         <li
+            class="pointer"
             [routerLinkActive]="['active']"
             *ngIf="deviceType !== 'printer'"
         >
             <a (click)="goToHardware()">Hardware</a>
         </li>
         <li
+            class="pointer"
             [routerLinkActive]="['active']"
             *ngIf="deviceType !== 'printer'"
         >
@@ -43,7 +55,10 @@
         <!-- <li [routerLinkActive]="['active']"><a routerLink="/device/startup-programes">Startup Programmes</a></li>
     <li [routerLinkActive]="['active']"><a routerLink="/device/services">Services</a></li>
     <li [routerLinkActive]="['active']"><a routerLink="/device/antivirus">Antivirus</a></li> - -->
-        <li [routerLinkActive]="['active']">
+        <li
+            class="pointer"
+            [routerLinkActive]="['active']"
+        >
             <a (click)="goToTerminal()">Terminal</a>
         </li>
         <!-- <li [routerLinkActive]="['active']"><a routerLink="/device/windows-update">Window Update</a></li>

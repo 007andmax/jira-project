@@ -25,13 +25,9 @@ import { TerminalAsideComponent } from './terminal-aside/terminal-aside.componen
   providers: [UserListService]
 })
 export class TerminalComponent implements OnInit {
-  closeResult = '';
   submitted = false;
   loading = false;
   sub: Subscription = new Subscription();
-
-
-
   sharedScriptModal: scriptModal = {
     category: '',
     categoryId: '',
@@ -52,7 +48,6 @@ export class TerminalComponent implements OnInit {
 
   lineNumberDetail = [1];
   deleteId = '';
-  command = '';
   commandList = [];
   myScriptList = [];
   myScriptListFilter = [];
@@ -72,22 +67,13 @@ export class TerminalComponent implements OnInit {
   cmdHeight = 0;
   @ViewChild('aside') aside: TerminalAsideComponent;
   @ViewChild('editor') editorElement: ElementRef;
-  code = '';
-  config = {
-    lineNumbers: true,
-    lineWrapping: true,
-  };
   terminalHit = false;
   _id: string = '';
   type: string = '';
-
   DateTimeHistoryFormat = CONFIGCONSTANTS.DateTimeHistoryFormat;
   constructor(private terminalService: TerminalService,
     private toastr: ToastrService,
     private modalService: NgbModal,
-    private socketService: WebsocketService,
-    private userListService: UserListService,
-    private companiesRealTimeService: CompaniesRealTimeService,
     private shellStateService: ShellStateService,
     private terminalStateService: TerminalStateService,
     private confirmStateService: ConfirmStateService,
@@ -149,14 +135,7 @@ export class TerminalComponent implements OnInit {
         });
   }
 
-
-
-
-
-
-
   getCmdCategoryRead() {
-
     this.terminalService.getCmdCategory()
       .pipe(first())
       .subscribe(data => {
@@ -174,13 +153,6 @@ export class TerminalComponent implements OnInit {
           }
         });
   }
-
-
-
-
-
-
-
   deleteCommand() {
     this.loading = true;
     this.terminalService.deleteCommand(this.deleteId)
@@ -192,28 +164,11 @@ export class TerminalComponent implements OnInit {
       },
         error => {
           this.loading = false;
-          const statusError = error;
         });
   }
-
-  cancelCategory(flag) {
-    if (flag === 'create') {
-      this.cmdCategoryList.splice(this.cmdCategoryList.length - 1, 1);
-    }
-  }
-
-
-
   openEditCommand(data: any, flag: string) {
     this.aside.openEditCommand(data, flag);
   }
-
-
-
-
-
-
-
   openModal(id, title, flag) {
     if (flag === 'deleteCmd') {
       this.deleteId = id;
@@ -222,17 +177,6 @@ export class TerminalComponent implements OnInit {
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Are you sure you want to delete ${title} script?`;
   }
-
-  private getDismiss(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
-
   openRunScript() {
     this.runScript = !this.runScript;
     if (this.runScript === true) {
@@ -246,8 +190,6 @@ export class TerminalComponent implements OnInit {
       search: ''
     }
   }
-
-
   viewScriptDetail(data) {
     console.log("data", data);
     this.scriptDetail = !this.scriptDetail;
@@ -270,17 +212,11 @@ export class TerminalComponent implements OnInit {
     } else {
       this.scriptDetailModal.category = '';
     }
-
   }
 
   copyToTerminal(cmd, type, file) {
     if (JSON.parse(localStorage.getItem('deviceDetail_' + this._id)).online === true) {
       this.finalCommand = cmd;
-      // let arr = cmd.split(/\r*\n/)
-      // this.splitCommand[this.splitCommand.length - 1] = this.splitCommand[this.splitCommand.length - 1] + arr[0];
-      // if (arr.splice(0, 1).length > 0) {
-      //   this.splitCommand = this.splitCommand.concat(arr.splice(0, 1));
-      // }
       this.sessionId = localStorage.getItem('uuid_' + this._id);
       this.sendCommand(type, file);
     } else {
@@ -345,7 +281,6 @@ export class TerminalComponent implements OnInit {
     }
   }
 
-
   setHeight(flag) {
     if (flag === 'enter' && document.getElementById("editCmd").offsetHeight < 280) {
       document.getElementById("terminal").style.height = (document.getElementById("terminal").offsetHeight - 10) + "px";
@@ -360,10 +295,7 @@ export class TerminalComponent implements OnInit {
         document.getElementById("editCmd").style.height = this.cmdHeight + "px";
       }
     }
-
   }
-
-
 
   openEditModal(cmd, type) {
     this.submitted = false;
@@ -379,11 +311,6 @@ export class TerminalComponent implements OnInit {
     this.terminalHeight = document.getElementById("terminal").offsetHeight;
     this.cmdHeight = document.getElementById("editCmd").offsetHeight;
   }
-
-
-
-
-
   emptyScriptDetail() {
     this.scriptDetail = false;
     this.scriptDetailModal = {
@@ -399,11 +326,6 @@ export class TerminalComponent implements OnInit {
     };
     this.cd.detectChanges();
   }
-
-
-
-
-
   copyScriptToggle(data, type) {
     this.runScript = !this.runScript;
     this.scriptDetail = !this.scriptDetail;

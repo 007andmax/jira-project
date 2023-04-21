@@ -8,6 +8,7 @@ import { TerminalAsideComponent } from './terminal-aside/terminal-aside.componen
 import { TerminalManageCategoryComponent } from './terminal-manage-category/terminal-manage-category.component';
 import { TerminalRunScriptComponent } from './terminal-run-script/terminal-run-script.component';
 import { TerminalScriptDetailComponent } from './terminal-script-detail/terminal-script-detail.component';
+import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { TerminalScriptDetailComponent } from './terminal-script-detail/terminal
         FormsModule,
         TerminalRoutingOldModule,
         NgbModule,
+        DropDownModule
     ],
     entryComponents: [TerminalManageCategoryComponent]
 })
