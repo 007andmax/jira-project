@@ -56,7 +56,7 @@ export class UserFilter {
     }
     public getFilterList(reqUsersList: Array<User>, companies: Array<Company>) {
 
-        let list = reqCompaniesList.filter(item => {
+        let list = reqUsersList.filter(item => {
             let indexCompany = companies.findIndex(company => item.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === company.id));
             let clientType: boolean = false;
             let clientIndustry: boolean = false;
