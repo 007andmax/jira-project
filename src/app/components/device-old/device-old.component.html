@@ -27,10 +27,7 @@
                             alt="device"
                         >
                     </span>
-                    <div
-                        class="head-device"
-                        *ngIf="deviceDetail.online && deviceDetail.userName"
-                    >
+                    <div class="head-device">
                         <div
                             class="head-device__title"
                             [textContent]="(deviceDetail.online) ? 'Online' : 'Offline'"
