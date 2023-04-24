@@ -7,6 +7,7 @@ import { first } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { TerminalValidate } from '../class/terminal-validate';
 
 @Component({
   selector: 'terminal-aside',
@@ -36,12 +37,12 @@ export class TerminalAsideComponent implements OnInit {
   @ViewChild('commandFrm') form: any;
   @Input() loading: boolean;
   @Input() _id: string = '';
-
+  validate: TerminalValidate = new TerminalValidate();
   @Input() openEditModal: Function;
   @Input() getCommandList: Function;
-  @Input() openModal: Function;
   @Output() onCopyToTerminal = new EventEmitter();
   @Output() onOpenRunScript = new EventEmitter();
+  @Output() onOpenModal = new EventEmitter();
   @ViewChild('scriptType') scriptType: DropDownComponent;
   @ViewChild('selectCategory') selectCategory: DropDownComponent;
 
@@ -57,6 +58,9 @@ export class TerminalAsideComponent implements OnInit {
   }
   openRunScript() {
     this.onOpenRunScript.emit(null);
+  }
+  openModal(id, title, flag) {
+    this.onOpenModal.emit({ id, title, flag })
   }
   openEditCommand(data: any, flag: string) {
     this.commandModal.title = data.title;
@@ -80,6 +84,7 @@ export class TerminalAsideComponent implements OnInit {
   }
   toggleTerminal(data) {
     this.commandModal.type = data.value;
+    this.validate.resetType();
   }
   openAddModal() {
     this.resetCmdModal();
@@ -143,6 +148,7 @@ export class TerminalAsideComponent implements OnInit {
   setCommand(data) {
     this.commandModal.category = data.name;
     this.commandModal.categoryId = data.id;
+    this.validate.resetCategory();
   }
   manageCategory() {
     const modalRef = this.modalService.open(TerminalManageCategoryComponent, { windowClass: 'quote-send-modal page-settings', backdrop: 'static', keyboard: false });
@@ -159,9 +165,7 @@ export class TerminalAsideComponent implements OnInit {
   }
   createCommand() {
     this.submitted = true;
-    if (this.form.invalid) {
-      return;
-    }
+    if (!this.validate.isValidate(this.commandModal)) return;
     this.loading = true;
     let data = {
       title: this.commandModal.title,

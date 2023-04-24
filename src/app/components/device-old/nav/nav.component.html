@@ -4,7 +4,10 @@
             {{commonServices.getCharacter(currentCompany) || ''}}
         </span>
     </div>
-    <div class="qt-color-white qt-lh-154 qt-mb-12">{{currentCompany}}</div>
+    <div
+        class="qt-color-white qt-lh-154 qt-mb-12"
+        [textContent]="currentCompany.name"
+    ></div>
     <div class="user-info-hp">
         <span class="user-hp-dp">
             <!-- <img src="assets/images/user.jpg" alt="user" /> -->

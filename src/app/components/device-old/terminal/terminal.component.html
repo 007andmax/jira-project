@@ -73,7 +73,7 @@
             (onOpenRunScript)="openRunScript()"
             [openEditModal]="openEditModal"
             [getCommandList]="getCommandList"
-            [openModal]="openModal"
+            (onOpenModal)="openModal($event.id, $event.title, $event.flag)"
         ></terminal-aside>
         <!-- Script Sidebar -->
         <terminal-run-script

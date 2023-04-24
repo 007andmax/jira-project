@@ -12,7 +12,10 @@
                     </span>
                     <div class="head-device">
                         <div class="head-device__title">Device</div>
-                        <div class="head-device__name" id="head-label">
+                        <div
+                            class="head-device__name"
+                            id="head-label"
+                        >
                             {{deviceDetail.label || deviceDetail.hostName || deviceDetail.ip}}
                         </div>
                     </div>
@@ -24,9 +27,38 @@
                             alt="device"
                         >
                     </span>
-                    <div class="head-device">
-                        <div class="head-device__title">Up Time</div>
-                        <div class="head-device__name">5 hrs 5 min</div>
+                    <div
+                        class="head-device"
+                        *ngIf="deviceDetail.online && deviceDetail.userName"
+                    >
+                        <div
+                            class="head-device__title"
+                            [textContent]="(deviceDetail.online) ? 'Online' : 'Offline'"
+                        ></div>
+                        <span class="head-device__name">
+                            <span *ngIf="deviceDetail.online && returnTimeFormatUpTime(deviceDetail.timing.online).days > 0">
+                                {{returnTimeFormatUpTime(deviceDetail.timing.online).days}} day
+                            </span>
+                            <span *ngIf="deviceDetail.online && returnTimeFormatUpTime(deviceDetail.timing.online).hours > 0">
+                                {{returnTimeFormatUpTime(deviceDetail.timing.online).hours}} hrs
+                            </span>
+                            <span *ngIf="deviceDetail.online && returnTimeFormatUpTime(deviceDetail.timing.online).minutes > 0 && returnTimeFormatUpTime(deviceDetail.timing.online).days < 1">
+                                {{returnTimeFormatUpTime(deviceDetail.timing.online).minutes}} min
+                            </span>
+                            <span *ngIf="deviceDetail.online && returnTimeFormatUpTime(deviceDetail.timing.online).minutes < 1 && returnTimeFormatUpTime(deviceDetail.timing.online).hours < 1 && returnTimeFormatUpTime(deviceDetail.timing.online).days < 1">0 min</span>
+                        </span>
+                        <span class="head-device__name">
+                            <span *ngIf="!deviceDetail.online && returnTimeFormatUpTime(deviceDetail.timing.offline).days > 0">
+                                {{returnTimeFormatUpTime(deviceDetail.timing.offline).days}} day
+                            </span>
+                            <span *ngIf="!deviceDetail.online && returnTimeFormatUpTime(deviceDetail.timing.offline).hours > 0">
+                                {{returnTimeFormatUpTime(deviceDetail.timing.offline).hours}} hrs
+                            </span>
+                            <span *ngIf="!deviceDetail.online && returnTimeFormatUpTime(deviceDetail.timing.offline).minutes > 0 && returnTimeFormatUpTime(deviceDetail.timing.offline).days < 1">
+                                {{returnTimeFormatUpTime(deviceDetail.timing.offline).minutes}} min
+                            </span>
+                            <span *ngIf="!deviceDetail.online && returnTimeFormatUpTime(deviceDetail.timing.offline).minutes < 1 && returnTimeFormatUpTime(deviceDetail.timing.offline).hours < 1 && returnTimeFormatUpTime(deviceDetail.timing.offline).days < 1">0 min</span>
+                        </span>
                     </div>
                 </div>
             </div>

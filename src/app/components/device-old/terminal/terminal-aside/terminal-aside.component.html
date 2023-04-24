@@ -60,6 +60,7 @@
                                 [field]="'name'"
                                 [list]="cmdCategoryReadList"
                                 [isBlockClear]="true"
+                                [validate]="validate.getCategory()"
                                 (onSelectedItem)="setCommand($event)"
                             ></app-drop-down>
                         </div>
@@ -72,6 +73,7 @@
                                 [field]="'title'"
                                 [list]="scriptTypes"
                                 [isBlockClear]="true"
+                                [validate]="validate.getType()"
                                 (onSelectedItem)="toggleTerminal($event)"
                             ></app-drop-down>
                         </div>

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { CommonHttpServices } from './_services/common_http.service';
 import { RemoteControlService } from './_services/remoteControl.service';
@@ -16,6 +16,9 @@ import { command } from './class/device';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Subscription } from 'rxjs';
 import { CompanyDevicesRemoteAccessComponent } from '../company-devices/company-devices-remote-access/company-devices-remote-access.component';
+import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
+import { DevicesService } from 'src/app/services/devices/devices.service';
+import { Device } from '../company-devices/class/device';
 declare var $: any;
 
 @Component({
@@ -47,6 +50,9 @@ export class DeviceOldComponent implements OnInit, OnDestroy {
     private socketService: WebsocketService,
     private usersStateService: UsersStateService,
     private shellStateService: ShellStateService,
+    private devicesStateService: DevicesStateService,
+    private devicesService: DevicesService,
+    public cd: ChangeDetectorRef,
     private terminalService: TerminalService) { }
 
   openModal() {
@@ -74,6 +80,38 @@ export class DeviceOldComponent implements OnInit, OnDestroy {
     this.interval = setInterval(() => {
       this.updateTime();
     }, 1000);
+    let onInitWebSocket = this.devicesStateService.onInitWebSocket.subscribe(data => {
+      this.sendDeviceStatusRequest(localStorage.getItem('company_id'), [this._id]);
+    })
+    this.sub.add(onInitWebSocket);
+    let getOnUpdateAgentActivityStatus = this.devicesStateService.getOnUpdateAgentActivityStatus().subscribe(newChange => {
+      var isCurrentCompany = this.deviceDetail.agentId === newChange.data.agentId;
+      if (newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('Idle')) {
+        if (isCurrentCompany) {
+          if (this.deviceDetail.agentId === newChange.data.agentId) {
+            if (newChange.data.statuses.Idle) {
+              this.deviceDetail.timing.idle = this.devicesStateService.getMillisecondsFromTimeString(newChange.data.statuses.Idle);
+            } else {
+              this.deviceDetail.timing.idle = null;
+            }
+          }
+        }
+      } else if (newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('NoRestart') && newChange.data.statuses.hasOwnProperty('Online')) {
+        if (isCurrentCompany) {
+          if (this.deviceDetail.agentId === newChange.data.agentId) {
+            this.deviceDetail.timing.noRestart = this.devicesStateService.getMillisecondsFromTimeString(newChange.data.statuses.NoRestart);
+            this.deviceDetail.timing.online = this.devicesStateService.getMillisecondsFromTimeString(newChange.data.statuses.Online);
+            this.deviceDetail.timing.uptimeForOrdering = this.devicesStateService.getMillisecondsFromTimeString(newChange.data.statuses.Online);
+          }
+        }
+      }
+      this.cd.detectChanges();
+    })
+    this.sub.add(getOnUpdateAgentActivityStatus);
+  }
+  sendDeviceStatusRequest(companyId, ids) {
+    this.devicesService.sendDeviceStatusRequest(companyId, ids, ["idle", "norestart", "online"]).subscribe(data => {
+    })
   }
   updateTime() {
     this.totalSeconds++;
@@ -101,7 +139,7 @@ export class DeviceOldComponent implements OnInit, OnDestroy {
         }
         this.deviceDetailService.addDeviceList(deviceList);
         let index = deviceList.findIndex(value => value.agentId === this._id)
-        this.deviceDetail = deviceList[index];
+        this.deviceDetail = new Device(deviceList[index]);
         localStorage.setItem('deviceDetail_' + this._id, JSON.stringify(deviceList[index]))
         localStorage.setItem('company_id', deviceList[index].company_id);
         this.deviceDetailService.setDevice(JSON.stringify(deviceList[index]));
@@ -109,6 +147,19 @@ export class DeviceOldComponent implements OnInit, OnDestroy {
         error => {
           this.toastr.error('Something went wrong please try again.');
         });
+  }
+  returnTimeFormatUpTime(time) {
+    let days = 0;
+    let hours = 0;
+    let minutes = 0;
+    days = Math.floor(time / 86400000);
+    hours = Math.floor((time - (days * 86400000)) / 3600000);
+    minutes = Math.floor((time - (days * 86400000) - (hours * 3600000)) / 60000);
+    return {
+      days: days,
+      hours: hours,
+      minutes: minutes,
+    }
   }
   padNumber(value) {
     if (value == 0) {
