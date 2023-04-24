@@ -14,12 +14,10 @@ export class TerminalRunScriptComponent implements OnInit {
   @Input() sharedScriptListFilter = [];
   @Input() cmdCategoryReadList = [];
   myScriptModal: scriptModal = {
-    category: '',
     categoryId: '',
     search: ''
   };
   @Input() sharedScriptModal: scriptModal = {
-    category: '',
     categoryId: '',
     search: ''
   };
@@ -37,20 +35,18 @@ export class TerminalRunScriptComponent implements OnInit {
   }
   filterMyScript(category: any) {
     if (category) {
-      this.myScriptModal.category = category.name;
       this.myScriptModal.categoryId = category.id;
     } else {
-      this.myScriptModal.category = '';
       this.myScriptModal.categoryId = '';
     }
     console.log("this.myScriptList", this.myScriptList);
-    if (this.myScriptModal.search === '' && this.myScriptModal.category === '') {
+    if (this.myScriptModal.search === '' && !category) {
       this.myScriptListFilter = this.myScriptList;
-    } else if (this.myScriptModal.category !== '' && this.myScriptModal.search !== '') {
+    } else if (category && this.myScriptModal.search !== '') {
       this.myScriptListFilter = this.myScriptList.filter(val => val.title.toLowerCase().includes(this.myScriptModal.search.toLowerCase()) && val.categoryId === this.myScriptModal.categoryId);
-    } else if (this.myScriptModal.search !== '' && this.myScriptModal.category === '') {
+    } else if (this.myScriptModal.search !== '' && !category) {
       this.myScriptListFilter = this.myScriptList.filter(val => val.title.toLowerCase().includes(this.myScriptModal.search.toLowerCase()))
-    } else if (this.myScriptModal.search === '' && this.myScriptModal.category !== '') {
+    } else if (this.myScriptModal.search === '' && category) {
       this.myScriptListFilter = this.myScriptList.filter(val => val.categoryId === this.myScriptModal.categoryId)
     }
   }
@@ -59,19 +55,17 @@ export class TerminalRunScriptComponent implements OnInit {
   }
   filterSharedScript(category: any) {
     if (category) {
-      this.sharedScriptModal.category = category.name;
       this.sharedScriptModal.categoryId = category.id;
     } else {
-      this.sharedScriptModal.category = '';
       this.sharedScriptModal.categoryId = '';
     }
-    if (this.sharedScriptModal.search === '' && this.sharedScriptModal.category === '') {
+    if (this.sharedScriptModal.search === '' && !category) {
       this.sharedScriptListFilter = this.sharedScriptList;
-    } else if (this.sharedScriptModal.category !== '' && this.sharedScriptModal.search !== '') {
+    } else if (category && this.sharedScriptModal.search !== '') {
       this.sharedScriptListFilter = this.sharedScriptList.filter(val => val.title.toLowerCase().includes(this.sharedScriptModal.search.toLowerCase()) && val.categoryId === this.sharedScriptModal.categoryId);
-    } else if (this.sharedScriptModal.search !== '' && this.sharedScriptModal.category === '') {
+    } else if (this.sharedScriptModal.search !== '' && !category) {
       this.sharedScriptListFilter = this.sharedScriptList.filter(val => val.title.toLowerCase().includes(this.sharedScriptModal.search.toLowerCase()))
-    } else if (this.sharedScriptModal.search === '' && this.sharedScriptModal.category !== '') {
+    } else if (this.sharedScriptModal.search === '' && category) {
       this.sharedScriptListFilter = this.sharedScriptList.filter(val => val.categoryId === this.sharedScriptModal.categoryId)
     }
   }

@@ -29,7 +29,6 @@ export class TerminalComponent implements OnInit {
   loading = false;
   sub: Subscription = new Subscription();
   sharedScriptModal: scriptModal = {
-    category: '',
     categoryId: '',
     search: ''
   };
@@ -185,7 +184,6 @@ export class TerminalComponent implements OnInit {
     }
 
     this.sharedScriptModal = {
-      category: '',
       categoryId: '',
       search: ''
     }

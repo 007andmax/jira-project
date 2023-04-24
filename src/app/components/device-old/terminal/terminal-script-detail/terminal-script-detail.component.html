@@ -63,90 +63,28 @@
                         </div>
                     </div>
                     <div class="f-col col-70">
-                        <label for="command">Category</label>
-                        <div class="form-row">
-                            <div
-                                class="grey-dropdown w-100"
-                                ngbDropdown
-                            >
-                                <input
-                                    type="text"
-                                    placeholder="Select Category"
-                                    [(ngModel)]="scriptDetailModal.category"
-                                    id="category"
-                                    ngbDropdownToggle
-                                    autocomplete="off"
-                                    class="cmn-select form-input"
-                                    name="category"
-                                    #Category1="ngModel"
-                                    [disabled]="scriptDetailModal.default === true"
-                                    required
-                                    readonly
-                                    [class.validation-error]="Category1.errors && Category1.errors.required"
-                                >
-                                <img
-                                    class="icn-sm report-caret-icon"
-                                    src="./..//html/assets/img/device/selct-arrow.svg"
-                                >
-                                <div
-                                    ngbDropdownMenu
-                                    aria-labelledby="dropdownBasic1"
-                                >
-                                    <button
-                                        *ngFor="let category of cmdCategoryReadList"
-                                        ngbDropdownItem
-                                        (click)="setScriptDetail(category.name, category.id)"
-                                    >
-                                        {{category.name}}
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                        <app-drop-down
+                            #selectCategory
+                            [sort]="false"
+                            [title]="'Category'"
+                            [placeholder]="'Select Category'"
+                            [field]="'name'"
+                            [list]="cmdCategoryReadList"
+                            [isBlockClear]="true"
+                            (onSelectedItem)="setScriptDetail($event)"
+                        ></app-drop-down>
                     </div>
                     <div class="f-col col-30">
-                        <label for="command">Script Type</label>
-                        <div class="form-row">
-                            <div
-                                class="grey-dropdown w-100"
-                                ngbDropdown
-                            >
-                                <input
-                                    type="text"
-                                    placeholder="Select Script Type"
-                                    [(ngModel)]="scriptDetailModal.typeName"
-                                    id="scriptType"
-                                    ngbDropdownToggle
-                                    autocomplete="off"
-                                    class="cmn-select form-input"
-                                    name="scriptType"
-                                    #scriptType1="ngModel"
-                                    required
-                                    readonly
-                                    [class.validation-error]="scriptType1.errors && scriptType1.errors.required"
-                                >
-                                <img
-                                    class="icn-sm report-caret-icon"
-                                    src="./..//html/assets/img/device/selct-arrow.svg"
-                                >
-                                <div
-                                    ngbDropdownMenu
-                                    aria-labelledby="dropdownType2"
-                                >
-                                    <button
-                                        ngbDropdownItem
-                                        (click)="toggleDetailTerminal('CMD', 'Command Line')"
-                                    >
-                                        Command Line
-                                    </button>
-                                    <button
-                                        ngbDropdownItem
-                                        (click)="toggleDetailTerminal('POWERSHELL', 'Powershell')"
-                                    >
-                                        Powershell
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                        <app-drop-down
+                            #scriptType
+                            [sort]="false"
+                            [title]="'Script Type'"
+                            [placeholder]="'Select Script Type'"
+                            [field]="'title'"
+                            [list]="scriptTypes"
+                            [isBlockClear]="true"
+                            (onSelectedItem)="toggleDetailTerminal($event)"
+                        ></app-drop-down>
                     </div>
                     <div class="f-col col-100 cmd-description">
                         <div class="label cmn-tabs">
@@ -181,7 +119,6 @@
                                     (keyup)="countLineNumberDetail()"
                                     [disabled]="scriptDetailModal.default === true"
                                 >
-
                                 </textarea>
                             </div>
                             <textarea

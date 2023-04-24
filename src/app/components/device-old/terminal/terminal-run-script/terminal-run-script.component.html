@@ -22,47 +22,15 @@
                         <form method="POST">
                             <div class="f-row">
                                 <div class="f-col col-50">
-                                    <label for="command">Category</label>
-                                    <div class="form-row">
-                                        <div
-                                            class="grey-dropdown w-100"
-                                            ngbDropdown
-                                        >
-                                            <input
-                                                type="text"
-                                                placeholder="Select Category"
-                                                [(ngModel)]="myScriptModal.category"
-                                                id="my_category"
-                                                ngbDropdownToggle
-                                                autocomplete="off"
-                                                class="cmn-select form-input"
-                                                name="my_category"
-                                                readonly
-                                            >
-                                            <img
-                                                class="icn-sm report-caret-icon"
-                                                src="./..//html/assets/img/device/selct-arrow.svg"
-                                            >
-                                            <div
-                                                ngbDropdownMenu
-                                                aria-labelledby="dropdownBasic2"
-                                            >
-                                                <button
-                                                    ngbDropdownItem
-                                                    (click)="filterMyScript(undefined);"
-                                                >
-                                                    All Category
-                                                </button>
-                                                <button
-                                                    *ngFor="let category of cmdCategoryReadList"
-                                                    ngbDropdownItem
-                                                    (click)="filterMyScript(category);"
-                                                >
-                                                    {{category.name}}
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <app-drop-down
+                                        #selectCategory
+                                        [sort]="false"
+                                        [title]="'Category'"
+                                        [placeholder]="'Select Category'"
+                                        [field]="'name'"
+                                        [list]="cmdCategoryReadList"
+                                        (onSelectedItem)="filterMyScript($event)"
+                                    ></app-drop-down>
                                 </div>
                                 <div class="f-col col-50">
                                     <label for="command">Search Scripts</label>
@@ -139,47 +107,15 @@
                         <form method="POST">
                             <div class="f-row">
                                 <div class="f-col col-50">
-                                    <label for="command">Category</label>
-                                    <div class="form-row">
-                                        <div
-                                            class="grey-dropdown w-100"
-                                            ngbDropdown
-                                        >
-                                            <input
-                                                type="text"
-                                                placeholder="Select Category"
-                                                [(ngModel)]="sharedScriptModal.category"
-                                                id="shared_category"
-                                                ngbDropdownToggle
-                                                autocomplete="off"
-                                                class="cmn-select form-input"
-                                                name="shared_category"
-                                                readonly
-                                            >
-                                            <img
-                                                class="icn-sm report-caret-icon"
-                                                src="/html/assets/img/device/selct-arrow.svg"
-                                            >
-                                            <div
-                                                ngbDropdownMenu
-                                                aria-labelledby="dropdownBasic2"
-                                            >
-                                                <button
-                                                    ngbDropdownItem
-                                                    (click)="filterSharedScript(undefined);"
-                                                >
-                                                    All Category
-                                                </button>
-                                                <button
-                                                    *ngFor="let category of cmdCategoryReadList"
-                                                    ngbDropdownItem
-                                                    (click)="filterSharedScript(category);"
-                                                >
-                                                    {{category.name}}
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <app-drop-down
+                                        #selectCategory
+                                        [sort]="false"
+                                        [title]="'Category'"
+                                        [placeholder]="'Select Category'"
+                                        [field]="'name'"
+                                        [list]="cmdCategoryReadList"
+                                        (onSelectedItem)="filterSharedScript($event)"
+                                    ></app-drop-down>
                                 </div>
                                 <div class="f-col col-50">
                                     <label for="command">Search Scripts</label>

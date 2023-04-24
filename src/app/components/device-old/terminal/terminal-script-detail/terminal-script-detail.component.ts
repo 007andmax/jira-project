@@ -3,6 +3,7 @@ import { script } from '../../class/device';
 import { TerminalService } from '../../_services/terminal.service';
 import { first } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
+import { CompanySetting } from 'src/app/components/companies/class/company-setting';
 
 @Component({
   selector: 'terminal-script-detail',
@@ -21,6 +22,8 @@ export class TerminalScriptDetailComponent implements OnInit {
     typeName: '',
     description: ''
   };
+  scriptTypes = [new CompanySetting('Command Line', 'CMD'),
+  new CompanySetting('Powershell', 'POWERSHELL')];
   @Input() scriptDetail = false;
   @Input() loading = false;
   @Input() lineNumberDetail = [1];
@@ -39,13 +42,13 @@ export class TerminalScriptDetailComponent implements OnInit {
   emptyScriptDetail() {
     this.onEmptyScriptDetail.emit(null);
   }
-  setScriptDetail(name, id) {
-    this.scriptDetailModal.category = name;
-    this.scriptDetailModal.categoryId = id;
+  setScriptDetail(data) {
+    this.scriptDetailModal.category = data.name;
+    this.scriptDetailModal.categoryId = data.id;
   }
-  toggleDetailTerminal(type, typeName) {
-    this.scriptDetailModal.type = type;
-    this.scriptDetailModal.typeName = typeName;
+  toggleDetailTerminal(data) {
+    this.scriptDetailModal.type = data.value;
+    this.scriptDetailModal.typeName = data.title;
   }
   countLineNumberDetail() {
     var text = $("#cmd_detail textarea").val().toString();

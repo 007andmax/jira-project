@@ -15,7 +15,7 @@ export class script {
     default: boolean;
     id: string;
     category: string;
-    categoryId: string; 
+    categoryId: string;
     typeName: string;
     description: string;
 }
@@ -26,13 +26,11 @@ export class commandModal {
     command: string;
     id: string;
     category: string;
-    categoryId: string; 
-    typeName: string;
+    categoryId: string;
     description: string;
 }
 
 export class scriptModal {
-    category: string;
     categoryId: string;
     search: string;
 }

@@ -1,10 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewChildren } from '@angular/core';
 import { commandModal } from '../../class/device';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TerminalManageCategoryComponent } from '../terminal-manage-category/terminal-manage-category.component';
 import { TerminalService } from '../../_services/terminal.service';
 import { first } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
+import { CompanySetting } from 'src/app/components/companies/class/company-setting';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 
 @Component({
   selector: 'terminal-aside',
@@ -23,12 +25,13 @@ export class TerminalAsideComponent implements OnInit {
     categoryId: '',
     id: '',
     type: '',
-    typeName: '',
     description: ''
   };
   @Input() commandList = [];
   @Input() cmdCategoryReadList = [];
   historyList = [];
+  scriptTypes = [new CompanySetting('Command Line', 'CMD'),
+  new CompanySetting('Powershell', 'POWERSHELL')];
   his = '';
   @ViewChild('commandFrm') form: any;
   @Input() loading: boolean;
@@ -39,6 +42,9 @@ export class TerminalAsideComponent implements OnInit {
   @Input() openModal: Function;
   @Output() onCopyToTerminal = new EventEmitter();
   @Output() onOpenRunScript = new EventEmitter();
+  @ViewChild('scriptType') scriptType: DropDownComponent;
+  @ViewChild('selectCategory') selectCategory: DropDownComponent;
+
   constructor(private modalService: NgbModal,
     private toastr: ToastrService,
     private terminalService: TerminalService,) { }
@@ -67,18 +73,13 @@ export class TerminalAsideComponent implements OnInit {
       this.commandModal.id = data.id;
     }
     this.commandModal.categoryId = data.categoryId;
-    if (this.commandModal.type === 'CMD') {
-      this.commandModal.typeName = 'Command Line'
-    } else if (this.commandModal.type === 'POWERSHELL') {
-      this.commandModal.typeName = 'Powershell'
-    }
+    this.scriptType.selectItemWithOutChanges(this.scriptTypes.find(item => item.value == this.commandModal.type));
     let res = this.cmdCategoryReadList.filter(x => x.id == data.categoryId);
-    this.commandModal.category = res.length > 0 ? res[0].name : '';
+    if (res.length > 0) this.selectCategory.selectItemWithOutChanges(res[0]);
     this.create = !this.create;
   }
-  toggleTerminal(type, typeName) {
-    this.commandModal.type = type;
-    this.commandModal.typeName = typeName;
+  toggleTerminal(data) {
+    this.commandModal.type = data.value;
   }
   openAddModal() {
     this.resetCmdModal();
@@ -94,7 +95,6 @@ export class TerminalAsideComponent implements OnInit {
       categoryId: '',
       id: '',
       type: '',
-      typeName: '',
       description: ''
     };
     // this.command = '';
@@ -139,6 +139,7 @@ export class TerminalAsideComponent implements OnInit {
           }
         });
   }
+
   setCommand(data) {
     this.commandModal.category = data.name;
     this.commandModal.categoryId = data.id;
