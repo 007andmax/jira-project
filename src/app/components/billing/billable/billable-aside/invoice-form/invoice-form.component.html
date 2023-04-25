@@ -96,6 +96,12 @@
             (blur)="onChangeInvoiceNumber()"
             type="text"
         >
+        <span
+            class="qt-fw-600 qt-fs-12 qt-lh-133 qt-color-info pointer invoie-number"
+            (click)="getInvoiceNumber()"
+        >
+            Get an actual number
+        </span>
         <mat-error
             class="invalid-feedback"
             *ngIf="!validate.getNumber()"
@@ -107,7 +113,10 @@
         class="qt-input-block qt-mr-16 qt-w100"
         *ngIf="invoiceTaxNumber"
     >
-        <div class="qt-input-block__label" [textContent]="invoiceTaxNumber.taxIdDescription"></div>
+        <div
+            class="qt-input-block__label"
+            [textContent]="invoiceTaxNumber.taxIdDescription"
+        ></div>
         <input
             [(ngModel)]="invoiceTaxNumber.taxId"
             (blur)="onChangeTax()"

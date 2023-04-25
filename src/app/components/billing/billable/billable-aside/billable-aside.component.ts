@@ -140,6 +140,8 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
       this.unlock();
       this.activeSaveBtns();
       this.moToBillable();
+    }, err => {
+      this.activeSaveBtns();
     })
   }
   saveAndPrint() {
@@ -150,6 +152,8 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
       this.unlock();
       this.activeSaveBtns();
       this.moToBillable();
+    }, err => {
+      this.activeSaveBtns();
     })
   }
   moToBillable() {
@@ -162,6 +166,8 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
       this.unlock();
       this.activeSaveBtns();
       this.moToBillable();
+    }, err => {
+      this.activeSaveBtns();
     })
   }
   private getCompany(id) {
@@ -184,6 +190,12 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
   private getActualNumber() {
     this.billableService.getActualNumber().subscribe((data: any) => {
       this.invoiceNumber = data.number;
+      if (this.formInvoice) {
+        this.formInvoice.invoiceNumber = data.number;
+        this.formInvoice.validate.resetNumber();
+      }
+      this.cd.detectChanges();
+
     })
   }
   private getInvoiceLock(ticketsIds, getComapny = false) {
