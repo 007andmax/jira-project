@@ -32,9 +32,9 @@
                             class="terminal-box"
                             [ngStyle]="{'background-color':scriptTyped == 'powershell' ? '#012456' : '#151b21' }"
                         >
-                            <p *ngFor="let split of splitCommand">
+                            <div class="terminal-box__text" *ngFor="let split of splitCommand">
                                 <span [textContent]="split"></span>
-                            </p>
+                            </div>
                             <!-- <textarea>C:\Users\Sam\Desktop></textarea> -->
                         </div>
                         <div class="terminal-btn-row">
@@ -50,7 +50,7 @@
                             <button
                                 id="button-cmd"
                                 type="button"
-                                class="btn btn-primary"
+                                class="qt-button terminal-btn-row__button"
                                 (click)="copyToTerminalFunc(editCmd, '', false);"
                             >
                                 Run Command

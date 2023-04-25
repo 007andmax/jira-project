@@ -720,6 +720,9 @@
   &__convert-invoice {
     background-image: url("/assets/img/icons/convert-invoice.svg");
   }
+  &__command-line {
+    background-image: url("/assets/img/device/command-line.svg");
+  }
   &__approve-quote {
     background-image: url("/assets/img/icons/approve-quote.svg");
   }
@@ -728,6 +731,9 @@
   }
   &__set-privilege {
     background-image: url("/assets/img/icons/set-privilege.svg");
+  }
+  &__send-to-front {
+    background-image: url("/assets/img/device/send-to-front.svg");
   }
   &__subscribe {
     background-image: url("/assets/img/icons/subscribe.svg");
@@ -757,6 +763,9 @@
     mask-repeat: no-repeat;
     -webkit-mask-size: contain;
     mask-size: contain;
+  }
+  &__run-script {
+    background-image: url("/assets/img/device/run-script-blue.svg");
   }
   &__start {
     background-image: url("/assets/img/icons/start.svg");

@@ -19,9 +19,9 @@
             [class.opened]="create"
         >
             <div class="toggle-header">
-                <h2 class="h1">
+                <div class="modal-content__title">
                     {{commandModal.id == '' ? 'Create' : 'Edit'}} Command
-                </h2>
+                </div>
             </div>
             <div class="modal-body">
                 <form
@@ -97,9 +97,10 @@
                             <div class="form-row">
                                 <div
                                     id="cmd"
+                                    class="cmd"
                                     *ngIf="showDescription === false"
                                 >
-                                    <ul id="cmd_line">
+                                    <ul id="cmd_line" class="cmd_line">
                                         <li *ngFor="let line of lineNumber">{{line}}</li>
                                     </ul>
                                     <textarea
@@ -145,40 +146,33 @@
             <ngb-tab title="Command">
                 <ng-template ngbTabContent>
                     <div class="cmn-tbs-content command">
-                        <ul class="list-unstyled">
-                            <li *ngFor="let cmd of commandList">
+                        <ul class="list-unstyled cmn-tbs-content__lists">
+                            <li class="cmn-tbs-content__list" *ngFor="let cmd of commandList">
                                 <div class="terminal-cmd-opt">
-                                    <div class="cmd-list-left">
-                                        <img
-                                            src="/html/assets/img/device/command-line.svg"
-                                            class="cmd-list-left__image"
-                                            alt="command-line"
-                                            title="command-line"
-                                        >
+                                    <div class="cmd-list-left qt-df qt-ai-c">
+                                        <span class="icon__command-line qt-dib qt-bg-contain qt-sz-16 qt-mr-4"></span>
                                         <div class="cmd-list-left__title ellipsis">{{cmd.title}}</div>
                                     </div>
-                                    <div class="cmd-list-right">
+                                    <div class="cmd-list-right qt-df qt-ai-c qt-jc-sb">
                                         <a
                                             href="javascript:;"
-                                            class="copy"
+                                            class="device-tooltip icon__send-to-front qt-ic-c qt-pointer qt-sz-16 qt-bg-contain qt-pos-rel"
                                             data-tooltip="Run script"
                                             (click)="copyToTerminal(cmd.command, cmd.type, true);"
                                         >
-                                            Run script
                                         </a>
                                         <div
                                             class="btn-group"
                                             ngbDropdown
                                         >
-                                            <button
+                                            <div
                                                 id="button-basic"
                                                 ngbDropdownToggle
                                                 type="button"
-                                                class="dropdown-toggle"
+                                                class="dropdown-toggle qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain dropdown-toggle"
                                                 aria-controls="dropdown-basic"
                                             >
-                                                Button dropdown
-                                            </button>
+                                            </div>
                                             <ul
                                                 id="dropdown-basic"
                                                 ngbDropdownMenu
@@ -189,44 +183,24 @@
                                                 <li
                                                     role="menuitem"
                                                     ngbDropdownItem
+                                                    (click)="openEditModal(cmd, 'edit')"
                                                 >
-                                                    <a
-                                                        class="dropdown-item"
-                                                        href="javascript:void(0);"
-                                                        (click)="openEditModal(cmd, 'edit')"
-                                                    >
-                                                        <img
-                                                            src="/html/assets/img/device/edit-cmd.svg"
-                                                            alt="edit-cmd"
-                                                            title="edit-cmd"
-                                                        >
-                                                        Edit
-                                                    </a>
+                                                  <div class="icon__edit qt-bg-contain qt-sz-20 qt-mr-8"></div>
+                                                  Edit
                                                 </li>
                                                 <li
                                                     role="menuitem"
                                                     ngbDropdownItem
+                                                    (click)="openModal(cmd.id, cmd.title, 'deleteCmd')"
                                                 >
-                                                    <a
-                                                        class="dropdown-item"
-                                                        href="javascript:void(0);"
-                                                        (click)="openModal(cmd.id, cmd.title, 'deleteCmd')"
-                                                    >
-                                                        <img
-                                                            src="/html/assets/img/device/remove-terminal.svg"
-                                                            alt="delete-cmd"
-                                                            title="delete-cmd"
-                                                        >
-                                                        Delete
-                                                    </a>
+                                                  <span class="icon__remove qt-bg-contain qt-sz-20 qt-mr-8"></span>
+                                                  Delete
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="cmd-details">
-                                    <span>{{cmd.command}}</span>
-                                </div>
+                                <div class="cmd-details__text">{{cmd.command}}</div>
                             </li>
                         </ul>
                     </div>
@@ -236,11 +210,9 @@
                 <ng-template ngbTabContent>
                     <div class="cmn-tbs-content history-cmd">
                         <ul class="list-unstyled">
-                            <li *ngFor="let history of historyList">
+                            <li class="cmn-tbs-content__list" *ngFor="let history of historyList">
                                 <div class="terminal-cmd-opt">
-                                    <div class="cmd-list-left">
-                                        <h5>{{history[1]}}</h5>
-                                    </div>
+                                    <div class="cmd-list-left">{{history[1]}}</div>
                                     <div class="cmd-list-right">
                                         <span class="date">
                                             {{history[0] | date : DateTimeHistoryFormat}}
@@ -251,7 +223,7 @@
                                     class="cmd-details"
                                     *ngFor="let sub of history"
                                 >
-                                    <span>{{sub}}</span>
+                                    <span class="cmd-details__text">{{sub}}</span>
                                     >
                                 </div>
                             </li>
@@ -263,12 +235,9 @@
         <a
             href="javascript:;"
             (click)="openRunScript();"
-            class="btn btn-primary"
+            class="qt-button terminal-aside__script-lib-btn"
         >
-            <img
-                src="/html/assets/img/device/run-script-blue.svg"
-                alt="run-script"
-            >
+            <span class="icon__run-script qt-dib qt-sz-20 qt-bg-contain qt-mr-6"></span>
             Script Library
         </a>
     </div>
