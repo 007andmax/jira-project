@@ -64,7 +64,7 @@ export class CustomerPermissionsRemoveRoleComponent implements OnInit {
   }
   removeRole() {
 
-    if (this.users.find(user => user.customerCompanyInfos.find(item => item.customerUserRole.id == this.userRoleForRemove.id))) return;
+    if (this.users.find(user => user.customerCompanyInfos.find(item => item.customerUserRole.id == this.userRoleForRemove.id) ? true : false)) return;
     this.usersService.removeRole(this.userRoleForRemove.id).subscribe(data => {
       this.close();
     })
