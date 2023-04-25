@@ -40,6 +40,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   @Input() company: CompanyProfile = new CompanyProfile();
   @Input() invoiceTaxNumber: InvoiceTaxNumber;
   @Output() onGetInvoiceNumber = new EventEmitter();
+  showGetInvoiceNumber: boolean = false;
   changedSubjectTickets: Array<InvoiceProfileTicket> = [];
   formatDate: string = FORMAT_DATE_2;
   toggleDiscount: boolean = false;
