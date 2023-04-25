@@ -9,6 +9,7 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 import { DELETE_USER_ROLE } from 'src/app/const/confirm';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
+import { CustomerPermissionsRemoveRole } from './customer-permissions-remove-role/class/customer-permissions-user-role';
 
 @Component({
   selector: 'customer-permissions',
@@ -18,7 +19,10 @@ import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 export class CustomerPermissionsComponent implements OnInit, OnDestroy {
   userRoles: Array<UserRole> = [];
   userPermissions: Array<UserPermissions> = [];
+  usersForChangeRole: Array<CustomerPermissionsRemoveRole> = [];
   sections = {};
+  userRoleForRemove: UserRole;
+  showRemoveRole: boolean = false;
   sub: Subscription = new Subscription();
   constructor(private usersStateService: UsersStateService,
     private permissionManageService: PermissionManageService,
@@ -73,6 +77,13 @@ export class CustomerPermissionsComponent implements OnInit, OnDestroy {
   removeRole(id) {
     this.usersService.removeRole(id).subscribe(data => {
 
+    }, err => {
+      console.log(err);
+      if (err.status == 406) {
+        this.userRoleForRemove = this.userRoles.find(item => item.id == id);
+        this.usersForChangeRole = err.error.map(item => new CustomerPermissionsRemoveRole(item));
+        this.showRemoveRole = true;
+      }
     })
   }
   onDeleteRole(data) {

@@ -89,7 +89,12 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
+<customer-permissions-remove-role
+    *ngIf="showRemoveRole"
+    [users]="usersForChangeRole"
+    [userRoleForRemove]="userRoleForRemove"
+    (onClose)="showRemoveRole = false"
+></customer-permissions-remove-role>
