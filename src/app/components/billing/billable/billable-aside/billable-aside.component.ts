@@ -197,6 +197,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
         this.formInvoice.invoiceNumber = data.number;
         this.formInvoice.showGetInvoiceNumber = false;
         this.formInvoice.validate.resetNumber();
+        this.formInvoice.onChangeInvoiceNumber();
       }
       this.cd.detectChanges();
     })
