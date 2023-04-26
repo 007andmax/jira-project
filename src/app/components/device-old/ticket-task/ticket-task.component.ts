@@ -63,8 +63,8 @@ export class TicketTaskComponent implements OnInit, OnDestroy {
       groupFieldFilters: [{
         predicateRule: 'AND',
         fieldFilterDtos: [{
-          "path": "agent.deviceId",
-          // path: 'agent.agentId',
+          // "path": "agent.deviceId",
+          path: 'agent.agentId',
           //values: [this.deviceDetail['agentId']]
           operator: 'EQ',
           values: [this.deviceDetail['id']]

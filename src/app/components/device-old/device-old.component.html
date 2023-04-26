@@ -44,17 +44,20 @@
                             </span>
                             <span *ngIf="deviceDetail.online && returnTimeFormatUpTime(deviceDetail.timing.online).minutes < 1 && returnTimeFormatUpTime(deviceDetail.timing.online).hours < 1 && returnTimeFormatUpTime(deviceDetail.timing.online).days < 1">0 min</span>
                         </span>
-                        <span class="head-device__name">
-                            <span *ngIf="!deviceDetail.online && returnTimeFormatUpTime(deviceDetail.timing.offline).days > 0">
+                        <span
+                            class="head-device__name"
+                            *ngIf="!deviceDetail.online && deviceDetail.timing"
+                        >
+                            <span *ngIf="returnTimeFormatUpTime(deviceDetail.timing.offline).days > 0">
                                 {{returnTimeFormatUpTime(deviceDetail.timing.offline).days}} day
                             </span>
-                            <span *ngIf="!deviceDetail.online && returnTimeFormatUpTime(deviceDetail.timing.offline).hours > 0">
+                            <span *ngIf="returnTimeFormatUpTime(deviceDetail.timing.offline).hours > 0">
                                 {{returnTimeFormatUpTime(deviceDetail.timing.offline).hours}} hrs
                             </span>
-                            <span *ngIf="!deviceDetail.online && returnTimeFormatUpTime(deviceDetail.timing.offline).minutes > 0 && returnTimeFormatUpTime(deviceDetail.timing.offline).days < 1">
+                            <span *ngIf="returnTimeFormatUpTime(deviceDetail.timing.offline).minutes > 0 && returnTimeFormatUpTime(deviceDetail.timing.offline).days < 1">
                                 {{returnTimeFormatUpTime(deviceDetail.timing.offline).minutes}} min
                             </span>
-                            <span *ngIf="!deviceDetail.online && returnTimeFormatUpTime(deviceDetail.timing.offline).minutes < 1 && returnTimeFormatUpTime(deviceDetail.timing.offline).hours < 1 && returnTimeFormatUpTime(deviceDetail.timing.offline).days < 1">0 min</span>
+                            <span *ngIf="returnTimeFormatUpTime(deviceDetail.timing.offline).minutes < 1 && returnTimeFormatUpTime(deviceDetail.timing.offline).hours < 1 && returnTimeFormatUpTime(deviceDetail.timing.offline).days < 1">0 min</span>
                         </span>
                     </div>
                 </div>
