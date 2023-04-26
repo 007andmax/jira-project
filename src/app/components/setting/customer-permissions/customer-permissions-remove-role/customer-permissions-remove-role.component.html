@@ -6,8 +6,8 @@
         <div class="notifications --warning qt-mb-20 ng-star-inserted">
             <span class="icon__company-info--yellow-800 qt-sz-20 qt-mr-8 qt-fs-0"></span>
             <p class="notifications__content">
-                {{ users.length }} tech users belong to this group, you must assign
-          a different group to existing users to delete the group.
+                {{ users.length }} customer users belong to this role, you must assign
+          a different role to following users to delete the role.
             </p>
         </div>
         <div class="tech-list">
@@ -44,7 +44,10 @@
                         >
                             <div>
                                 <p>Company name</p>
-                                <p [textContent]="getCompanyName(customerCompany.companyId)"></p>
+                                <p
+                                    class="qt-fw-600"
+                                    [textContent]="getCompanyName(customerCompany.companyId)"
+                                ></p>
                             </div>
                             <div>
                                 <app-drop-down

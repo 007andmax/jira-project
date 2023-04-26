@@ -386,7 +386,7 @@
                                 [attr.id]="'access-' + i"
                                 type="checkbox"
                                 [(ngModel)]="companyInfo.hasAccess"
-                                [attr.disabled]="!companyInfo.companyId"
+                                [disabled]="!companyInfo.companyId || !companyInfo.customerUserRole"
                             >
                             <span></span>
                             <div class="qt-ml-8">Provide access and send an invite</div>
