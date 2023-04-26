@@ -97,6 +97,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     (<any>document.body.querySelector(".nav-header")).style.display = "none";
+    document.body.querySelector(".main-container").classList.add("main-container__ticket-detail-page");
     if (this.activateRoute.snapshot.params['id'] && !this.isInit) this.getTicket(this.activateRoute.snapshot.params['id']);
     let subscription = this.activateRoute.params.subscribe(params => {
       if (params['id'] && !this.isInit) this.getTicket(this.activateRoute.snapshot.params['id']);
@@ -488,6 +489,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
   }
   ngOnDestroy(): void {
+    document.body.querySelector(".main-container").classList.remove("main-container__ticket-detail-page");
     this.ticketProfile = new TicketProfile();
     this.modeSubject = 'view';
     this.modeDescription = 'view';

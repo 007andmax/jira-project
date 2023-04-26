@@ -1,10 +1,5 @@
 @import "./src/assets/styles/variable";
 
-tr:hover {
-  td {
-    background-color: $gray-100--old;
-  }
-}
 tr {
   cursor: pointer;
 }

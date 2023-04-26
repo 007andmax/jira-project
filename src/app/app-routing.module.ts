@@ -174,12 +174,12 @@ const routes: Routes = [
     loadChildren: './components/setting/commission/commission.module#CommissionModule',
     canActivate: [PermissionTechUserService]
   },
-  {
-    path: ':company/setting/deviceSetting',
-    loadChildren: './components/setting/device-setting/device-setting.module#DeviceSettingModule',
-    // canActivate: [PermissionTechUserService]
-    canActivate: [TestPermissionService]
-  },
+  /* {
+     path: ':company/setting/deviceSetting',
+     loadChildren: './components/setting/device-setting/device-setting.module#DeviceSettingModule',
+     // canActivate: [PermissionTechUserService]
+     canActivate: [TestPermissionService]
+   },*/
   {
     path: ':company/inventory/products',
     loadChildren: './components/inventory/inventory.module#InventoryModule',
@@ -282,12 +282,12 @@ const routes: Routes = [
     loadChildren: './components/tickets/tickets-dashboard/tickets-dashboard.module#TicketsDashboardModule',
     canActivate: [PermissionTechUserService]
   },
-  {
-    path: ':company/company/:id/network-scan-beta',
-    loadChildren: './components/company-network-scan-beta/company-network-scan-beta.module#CompanyNetworkScanBetaModule',
-    // canActivate: [PermissionCompanyService, PermissionTechUserService]
-    canActivate: [TestPermissionService]
-  },
+  /* {
+     path: ':company/company/:id/network-scan-beta',
+     loadChildren: './components/company-network-scan-beta/company-network-scan-beta.module#CompanyNetworkScanBetaModule',
+     // canActivate: [PermissionCompanyService, PermissionTechUserService]
+     canActivate: [TestPermissionService]
+   },*/
   {
     path: ':company/company/:id/network-scan',
     loadChildren: './components/company-network-scan/company-network-scan.module#CompanyNetworkScanModule',
@@ -298,18 +298,18 @@ const routes: Routes = [
     loadChildren: './components/company-devices/company-devices.module#CompanyDevicesModule',
     canActivate: [PermissionCompanyService, PermissionTechUserService]
   },
-  {
-    path: ':company/company/:id/devices-beta',
-    loadChildren: './components/company-device-beta/company-device-beta.module#CompanyDeviceBetaModule',
-    //canActivate: [PermissionCompanyService, PermissionTechUserService]
-    canActivate: [TestPermissionService]
-  },
-  {
-    path: ':company/devices',
-    loadChildren: './components/devices/devices.module#DevicesModule',
-    // canActivate: [PermissionTechUserService],
-    canActivate: [TestPermissionService]
-  },
+  /* {
+     path: ':company/company/:id/devices-beta',
+     loadChildren: './components/company-device-beta/company-device-beta.module#CompanyDeviceBetaModule',
+     //canActivate: [PermissionCompanyService, PermissionTechUserService]
+     canActivate: [TestPermissionService]
+   },*/
+  /* {
+     path: ':company/devices',
+     loadChildren: './components/devices/devices.module#DevicesModule',
+     // canActivate: [PermissionTechUserService],
+     canActivate: [TestPermissionService]
+   },*/
   {
     path: ':company/quickSupport',
     loadChildren: './components/support/support.module#SupportModule',

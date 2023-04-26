@@ -24,14 +24,20 @@ users-aside-detail-tickets-item {
 .qt-page-list__body-table-container {
     position: relative;
     min-height: auto !important;
-    height: 100%;
+    height: calc(100% - 40px);
+    overflow: scroll;
 }
 .pengind-loading {
-    bottom: 20px;
+    bottom: 120px;
     top: auto;
 }
 .qt-page-list__body {
-    position: relative;
+  position: relative;
+
+  .loading.pengind-loading {
+    bottom: 20px;
+    top: auto;
+  }
 }
 .no-exist-tickets {
     position: absolute;

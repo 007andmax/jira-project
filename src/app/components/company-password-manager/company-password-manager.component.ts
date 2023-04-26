@@ -23,7 +23,9 @@ export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
       this.showPreloader = true;
       this.companyId = params['id'];
       if (this.companyId) this.companiesStateService.setCompanyRoutingId(this.companyId);
-      this.getRecords();
+      this.filter.setCompany({ id: this.companyId });
+      this.filter.setSort('CATEGORY');
+      this.onScroll();
     });
     this.sub.add(subscription);
 
@@ -42,35 +44,18 @@ export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
     this.sub.add(geLefttFilter);
     let onChangeRealTime = this.passwordManagerStateService.onChangeRealTime.subscribe(newChange => {
       if (newChange.action === 'PASSWORD_RECORD_CREATED' && newChange.data.companyId === this.companiesStateService.getCompanyRoutingId()) {
-        this.recordsData.push(new PasswordRecord(newChange.data));
-        if (this.passwordManagerListService.getBlockList()) this.list_records.push(new PasswordRecord(newChange.data));
+        this.list_records.push(new PasswordRecord(newChange.data));
       } else if (newChange.action === 'PASSWORD_RECORD_UPDATED') {
-        let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
-        if (index > -1) this.recordsData[index].onUpdate(newChange.data);
         let indexList = this.list_records.findIndex(item => item.id === newChange.data.id);
         if (indexList > -1) this.list_records[indexList].onUpdate(newChange.data);
       } else if (newChange.action === 'PASSWORD_RECORD_DELETED') {
-        let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
         let indexList = this.list_records.findIndex(item => item.id === newChange.data.id);
-        if (index > -1) this.recordsData.splice(index, 1);
         if (indexList > -1) this.list_records.splice(indexList, 1);
       }
       if (!this.cd['destroyed']) this.cd.detectChanges();
     })
     this.sub.add(onChangeRealTime);
     if (this.passwordManagerStateService.getCategories().length === 0) this.passwordManagerStateService.onInit();
-  }
-
-  public getRecords() {
-    this.passwordManagerService.getCompanyRecords(this.companyId).subscribe((res: any) => {
-      this.filter.setCompany(this.companiesStateService.getCompanies().find(item => item.id == this.companyId));
-      this.recordsData = res.map(item => new PasswordRecord(item));
-      this.recordsData.sort((a, b) => (a.companyName.toLowerCase() > b.companyName.toLowerCase()) ?
-        1 : ((b.companyName.toLowerCase() > a.companyName.toLowerCase()) ? -1 : 0));
-      this.showPreloader = false;
-      this.onScroll();
-      this.cd.detectChanges();
-    });
   }
   public ngOnDestroy() {
     this.sub.unsubscribe();

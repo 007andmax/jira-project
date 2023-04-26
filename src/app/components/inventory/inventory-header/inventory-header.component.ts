@@ -20,8 +20,11 @@ export class InventoryHeaderComponent implements OnInit {
   ngOnInit() {
     if (this.appService.checkMobile()) this.toggleFilter = true;
   }
-  search() {
-    this.onSearch.emit(this.productSearchName);
+  onBlurSearch(event) {
+    this.onSearch.emit(event.target.value);
+  }
+  onKeyUp(event) {
+    if (event.keyCode === 13) this.onSearch.emit(event.target.value);
   }
   filter(data) {
     this.onFilter.emit(data);

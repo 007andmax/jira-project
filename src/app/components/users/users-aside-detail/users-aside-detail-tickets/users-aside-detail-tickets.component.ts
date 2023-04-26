@@ -102,22 +102,9 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
   }
   editTicket(id) {
     if (!this.appService.isMobile) {
-      if (["73221c72-f87c-4519-8235-c4b57ad1cc19", "72381bff-127c-4a63-9d2e-6e952350dcbd"].find(item => item == this.companiesStateService.getCurrentCompany().id)) {
-        this.ticketStateService.setTicketRoutingId(id);
-        const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/ticket/${id}`;
-        window.open(url, '_blank');
-      } else {
-        let ticket = this.tickets.find(item => item.id === id);
-        this.ticketsStateService.onOpenTicket();
-        this.ticketsService.getTicket(id).subscribe(data => {
-          data.setUserCompanies(ticket.userCompanies);
-          this.ticketsStateService.onEditTicket(data);
-          (<any>document.body.querySelector(".ticket-edit-aside")).style.zIndex = "2";
-          (<any>document.body.querySelector(".user-aside-detail-page__aside")).style.zIndex = "1";
-
-        })
-      }
-
+      this.ticketStateService.setTicketRoutingId(id);
+      const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/ticket/${id}`;
+      window.open(url, '_blank');
     } else {
       let ticket = this.tickets.find(item => item.id === id);
       this.ticketsStateService.onOpenTicket();

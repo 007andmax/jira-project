@@ -1,4 +1,7 @@
 .products-page {
+  table.qt-table-modern tbody tr:hover td {
+    background-color: $white;
+  }
 
   &__category-btn {
     width: 370px;

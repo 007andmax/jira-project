@@ -1,11 +1,5 @@
 @import './src/assets/styles/variable';
 
-tr:hover {
-  td {
-    background-color: $gray-100--old;
-
-  }
-}
 .invoce-table__invoice {
   cursor: pointer;
 }

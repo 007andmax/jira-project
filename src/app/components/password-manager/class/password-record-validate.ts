@@ -71,7 +71,7 @@ export class PasswordRecordValidate {
         if (record.template.name !== "WIFI_NETWORK" && (!record.userName || record.userName === "")) this.userName = false;
         if (record.template.name === "WIFI_NETWORK" && (!record.ssid || record.ssid === "")) this.ssid = false;
         if (record.template.name === "DEVICE" && record.ipAdres && record.ipAdres.length > 0 && !record.ipAdres.match(this.reIpAdress)) this.ipAdress = false;
-        if ((record.template.name === "DEVICE" || record.template.name === "LOCAL_USER_ACCOUNT") && selectedUserAndDevices.length === 0) this.linkTo = false;
+        if ((record.template.name === "DEVICE") && selectedUserAndDevices.length === 0) this.linkTo = false;
         if (record.authenticationKey && record.authenticationKey.length > 0 && record.authenticationKey.length < 16) this.authenticationKeyLen = false;
         if (record.authenticationKey && record.authenticationKey.length > 0 && record.authenticationKey.length >= 16 && !this.checkAuthenticationKeyBase32(record.authenticationKey)) this.authenticationKeyBase32 = false;
         return this.company && this.password && this.userName && this.ssid && this.linkTo && this.ipAdress && this.authenticationKeyLen && this.authenticationKeyBase32;
@@ -80,8 +80,8 @@ export class PasswordRecordValidate {
         if (!record.companyId) this.company = false;
         if (record.template.name !== "WIFI_NETWORK" && (!record.username || record.username === "")) this.userName = false;
         if (record.template.name === "WIFI_NETWORK" && (!record.ssid || record.ssid === "")) this.ssid = false;
-        if ((record.template.name === "DEVICE" || record.template.name === "LOCAL_USER_ACCOUNT") && selectedUserAndDevices.length === 0) this.linkTo = false;
-        if (record.template.name === "DEVICE" && record.ipAdres && record.ipAdres.length > 0 && !record.ipAdres.match(this.reIpAdress)) this.ipAdress = false;
+        if ((record.template.name === "DEVICE") && selectedUserAndDevices.length === 0) this.linkTo = false;
+        if (record.template.name === "DEVICE" && record.ip && record.ip.length > 0 && !record.ip.match(this.reIpAdress)) this.ipAdress = false;
         if (record.authenticationKey && record.authenticationKey.length > 0 && record.authenticationKey.length < 16) this.authenticationKeyLen = false;
         if (record.authenticationKey && record.authenticationKey.length > 0 && record.authenticationKey.length >= 16 && !this.checkAuthenticationKeyBase32(record.authenticationKey)) this.authenticationKeyBase32 = false;
         return this.company && this.userName && this.ssid && this.linkTo && this.ipAdress && this.authenticationKeyLen && this.authenticationKeyBase32;

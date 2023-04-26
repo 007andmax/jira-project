@@ -39,6 +39,8 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   @Input() invoiceNotes: Array<InvoiceNote> = [];
   @Input() company: CompanyProfile = new CompanyProfile();
   @Input() invoiceTaxNumber: InvoiceTaxNumber;
+  @Output() onGetInvoiceNumber = new EventEmitter();
+  showGetInvoiceNumber: boolean = false;
   changedSubjectTickets: Array<InvoiceProfileTicket> = [];
   formatDate: string = FORMAT_DATE_2;
   toggleDiscount: boolean = false;
@@ -152,6 +154,9 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
 
   public getDate(date) {
     return moment(new Date(date)).format('DD/MM/YYYY');
+  }
+  getInvoiceNumber() {
+    this.onGetInvoiceNumber.emit(null);
   }
   public onChangeInvoiceNumber() {
     let request: PartialUpdate = new PartialUpdate(null, null, this.invoiceNumber, null, null, null);

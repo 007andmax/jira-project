@@ -74,7 +74,7 @@
         </div>
         <div
             class="reports-col"
-            *ngIf="getPermissions('VIEW_PERFORMANCE_REPORT')"
+            *ngIf="getPermissions('VIEW_PERFORMANCE_REPORT') || getPermissions('VIEW_SALES_REPORT')"
         >
             <app-report-list-item
                 *ngIf="getPermissions('VIEW_PERFORMANCE_REPORT')"
@@ -84,12 +84,14 @@
                 [listStates]="getListStates('PERFORMANCE',searchText)"
             ></app-report-list-item>
             <app-report-list-item
+                *ngIf="getPermissions('VIEW_PERFORMANCE_REPORT')"
                 [img]="'/html/assets/img/icons/report-tickets.svg'"
                 [title]="'Tickets'"
                 [listTitles]="getListTitles('TICKETS',searchText)"
                 [listStates]="getListStates('TICKETS',searchText)"
             ></app-report-list-item>
             <app-report-list-item
+                *ngIf="getPermissions('VIEW_SALES_REPORT')"
                 [img]="'/html/assets/img/icons/report-tickets.svg'"
                 [title]="'Income accounts'"
                 [listTitles]="getListTitles('INCOME_ACCOUNTS',searchText)"

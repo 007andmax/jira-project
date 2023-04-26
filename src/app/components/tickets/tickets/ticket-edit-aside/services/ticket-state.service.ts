@@ -83,8 +83,10 @@ export class TicketStateService {
   }
   public getDevicesByCompany(companyID) {
     this.devicesService.getCompanyDevices(companyID).subscribe((data: any) => {
-      if (data) {
+      if (Object.keys(data).length > 0) {
         this.devices = data[companyID].map(item => new DeviceCompany(item, companyID));
+        this.devices.sort((a, b) => (a.getLabelForEdit().toLowerCase() > b.getLabelForEdit().toLowerCase()) ?
+          1 : ((b.getLabelForEdit().toLowerCase() > a.getLabelForEdit().toLowerCase()) ? -1 : 0));
         this.onGetDevices.emit(this.devices);
         if (this.devices.length > 0 && this.devicesStateService.getIsInitWebSocket()) this.sendDeviceStatusRequest(companyID, this.devices.filter(item => item.agentId).map(item => item.agentId));
       }

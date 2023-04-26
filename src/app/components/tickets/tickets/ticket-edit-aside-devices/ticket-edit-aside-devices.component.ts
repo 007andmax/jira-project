@@ -91,14 +91,14 @@ export class TicketEditAsideDevicesComponent implements OnInit, OnDestroy {
       return;
     }
     this.devicesService.getCompanyDevices(this.companyId).subscribe((data: any) => {
-      if (data) {
+      if (Object.keys(data).length > 0) {
         let devices = (data) ? data[this.companyId] : [];
         if (devices) devices.sort((a, b) => (a.hostName.toLowerCase() > b.hostName.toLowerCase()) ?
           1 : ((b.hostName.toLowerCase() > a.hostName.toLowerCase()) ? -1 : 0));
         this.devices = (devices) ? devices : [];
         this.reqDevices = (devices) ? devices : [];
-        this.showPreloader = false;
       }
+      this.showPreloader = false;
     });
   }
   onSearch(event) {
