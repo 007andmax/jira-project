@@ -97,6 +97,7 @@ export class CustomerPermissionsComponent implements OnInit, OnDestroy {
     return Object.keys(data);
   }
   ngOnDestroy(): void {
+    this.sub.unsubscribe();
     $('body').removeClass('page-settings');
   }
 }

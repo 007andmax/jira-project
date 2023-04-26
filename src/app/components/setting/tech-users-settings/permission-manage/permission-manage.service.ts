@@ -211,7 +211,7 @@ export class PermissionManageService {
    * get role names
    */
   getRoleNames() {
-    return this.http.get(`${this.apiUrl}settings/companyProfile/getRoleNames`);
+    return this.http.get(`${this.apiUrl}settings/companyProfile/getTechRoleNames`);
   }
 
   /**

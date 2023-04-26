@@ -98,12 +98,6 @@
                     The email address is already occupied
                 </mat-error>
             </div>
-
-
-
-
-
-
         </div>
         <div class="qt-inputs-row">
             <div class="qt-f50">
@@ -337,6 +331,7 @@
                         [field]="'name'"
                         [search]="true"
                         [change]="true"
+                        [isDisabled]="!companyInfo.companyId"
                         (onSelectedItem)="onSelectJobTitle($event,i)"
                     ></app-drop-down>
                 </div>
@@ -349,6 +344,7 @@
                         [field]="'name'"
                         [search]="true"
                         [change]="true"
+                        [isDisabled]="!companyInfo.companyId"
                         [editItem]="companyInfo.customerUserRole"
                         (onSelectedItem)="onSelectUserRole($event,i)"
                     ></app-drop-down>
@@ -361,6 +357,7 @@
                         [mode]="MODE_EDIT_SUBSCRIPTION"
                         [defaultSubscriptions]="companyInfo.defaultSubscriptions"
                         (onChange)="onChangeDefaultSubscriptions($event,i)"
+                        [isDisabled]="!companyInfo.companyId"
                     ></user-default-subscription>
                 </div>
             </div>
@@ -375,6 +372,7 @@
                                 [attr.id]="'access-' + i"
                                 type="checkbox"
                                 [(ngModel)]="companyInfo.hasAccess"
+                                [attr.disabled]="!companyInfo.companyId"
                             >
                             <span></span>
                             <div class="qt-ml-8">Provide access and send an invite</div>
