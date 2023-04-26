@@ -134,7 +134,7 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
     this.permissionManageService
       .getRoleNames()
       .pipe(
-        map(res => {
+        map((res: any) => {
           this.allTechRoles = res;
         })
       )
