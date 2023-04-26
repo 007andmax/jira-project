@@ -4,15 +4,10 @@
             <h2>Script Library</h2>
             <a
                 href="javascript:;"
-                class="close-btn"
+                class="qt-aside__close-modal icon__close"
                 title="Close"
                 (click)="close()"
             >
-                <img
-                    src="/html/assets/img/icons/close.svg"
-                    alt="close"
-                    title="close"
-                >
             </a>
         </div>
         <ngb-tabset>
@@ -20,36 +15,36 @@
                 <ng-template ngbTabContent>
                     <div class="cmn-tbs-content myScript">
                         <form method="POST">
-                            <div class="f-row">
-                                <div class="f-col col-50">
-                                    <app-drop-down
-                                        #selectCategory
-                                        [sort]="false"
-                                        [title]="'Category'"
-                                        [placeholder]="'Select Category'"
-                                        [field]="'name'"
-                                        [list]="cmdCategoryReadList"
-                                        (onSelectedItem)="filterMyScript($event)"
-                                    ></app-drop-down>
+                            <div class="qt-inputs-row">
+                              <div class="qt-input-block qt-f50 qt-flex-md-100">
+                                <app-drop-down
+                                  #selectCategory
+                                  [sort]="false"
+                                  [title]="'Category'"
+                                  [placeholder]="'Select Category'"
+                                  [field]="'name'"
+                                  [list]="cmdCategoryReadList"
+                                  (onSelectedItem)="filterMyScript($event)"
+                                ></app-drop-down>
+                              </div>
+                              <div class="qt-input-block qt-f50 qt-flex-md-100">
+                                <label class="qt-input-block__label" for="command">Search Scripts</label>
+                                <div class="qt-input-search">
+                                  <input
+                                    type="text"
+                                    placeholder="Search Scripts"
+                                    class="form-input script-search"
+                                    [(ngModel)]="myScriptModal.search"
+                                    (keyup)="filterMyScript(undefined)"
+                                    id="my_search"
+                                    name="my_search"
+                                  >
                                 </div>
-                                <div class="f-col col-50">
-                                    <label for="command">Search Scripts</label>
-                                    <div class="form-row">
-                                        <input
-                                            type="text"
-                                            placeholder="Search Scripts"
-                                            class="form-input script-search"
-                                            [(ngModel)]="myScriptModal.search"
-                                            (keyup)="filterMyScript(undefined)"
-                                            id="my_search"
-                                            name="my_search"
-                                        >
-                                    </div>
-                                </div>
+                              </div>
                             </div>
                         </form>
                         <ul
-                            class="list-unstyled script-list"
+                            class="list-unstyled script-list qt-mt-24"
                             *ngIf="myScriptListFilter.length > 0"
                         >
                             <li *ngFor="let script of myScriptListFilter">
@@ -105,36 +100,36 @@
                 <ng-template ngbTabContent>
                     <div class="cmn-tbs-content script-library">
                         <form method="POST">
-                            <div class="f-row">
-                                <div class="f-col col-50">
-                                    <app-drop-down
-                                        #selectCategory
-                                        [sort]="false"
-                                        [title]="'Category'"
-                                        [placeholder]="'Select Category'"
-                                        [field]="'name'"
-                                        [list]="cmdCategoryReadList"
-                                        (onSelectedItem)="filterSharedScript($event)"
-                                    ></app-drop-down>
+                            <div class="qt-inputs-row">
+                              <div class="qt-input-block qt-f50 qt-flex-md-100">
+                                <div class="qt-input-block__label">Category</div>
+                                <app-drop-down
+                                  #selectCategory
+                                  [sort]="false"
+                                  [placeholder]="'Select Category'"
+                                  [field]="'name'"
+                                  [list]="cmdCategoryReadList"
+                                  (onSelectedItem)="filterSharedScript($event)"
+                                ></app-drop-down>
+                              </div>
+                              <div class="qt-input-block qt-f50 qt-flex-md-100">
+                                <label class="qt-input-block__label">Search Scripts</label>
+                                <div class="qt-input-search">
+                                  <input
+                                    type="text"
+                                    placeholder="Search description or filename"
+                                    class="form-input script-search"
+                                    (keyup)="filterSharedScript(undefined)"
+                                    id="shared_search"
+                                    name="shared_search"
+                                    [(ngModel)]="sharedScriptModal.search"
+                                  >
                                 </div>
-                                <div class="f-col col-50">
-                                    <label for="command">Search Scripts</label>
-                                    <div class="form-row">
-                                        <input
-                                            type="text"
-                                            placeholder="Search description or filename"
-                                            class="form-input script-search"
-                                            (keyup)="filterSharedScript(undefined)"
-                                            id="shared_search"
-                                            name="shared_search"
-                                            [(ngModel)]="sharedScriptModal.search"
-                                        >
-                                    </div>
-                                </div>
+                              </div>
                             </div>
                         </form>
                         <ul
-                            class="list-unstyled script-list"
+                            class="list-unstyled script-list qt-mt-24"
                             *ngIf="sharedScriptListFilter.length > 0"
                         >
                             <li *ngFor="let shared of sharedScriptListFilter">
