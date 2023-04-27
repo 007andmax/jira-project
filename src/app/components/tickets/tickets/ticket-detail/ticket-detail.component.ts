@@ -303,6 +303,11 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   }
   onDeleteForever() {
     this.ticketsService.deleteTicket([this.ticketProfile.id]).subscribe(data => {
+      this.ticketsStateService.onChangeTypeFilter(this.usersStateService.getCurrentUser().startPage == "MY_TICKETS" ? "USERS" : this.usersStateService.getCurrentUser().startPage);
+      this.ticketsStateService.onChangeLeftPanelFilter(this.usersStateService.getCurrentUser().startPage == "MY_TICKETS" ? "USERS" : this.usersStateService.getCurrentUser().startPage);
+      this.router.navigate(
+        [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/tickets/`]);
+      this.leftPanelStateService.toggleLeftPanel(false);
     })
   }
   onMoveIntoSpam() {
