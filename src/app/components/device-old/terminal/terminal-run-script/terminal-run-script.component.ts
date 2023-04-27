@@ -39,7 +39,6 @@ export class TerminalRunScriptComponent implements OnInit {
     } else {
       this.myScriptModal.categoryId = '';
     }
-    console.log("this.myScriptList", this.myScriptList);
     if (this.myScriptModal.search === '' && !category) {
       this.myScriptListFilter = this.myScriptList;
     } else if (category && this.myScriptModal.search !== '') {

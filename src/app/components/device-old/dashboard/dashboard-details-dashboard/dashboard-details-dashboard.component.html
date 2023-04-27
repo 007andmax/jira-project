@@ -6,7 +6,6 @@
                 alt="computer"
             >
         </span>
-        <!-- <h3 (mouseenter)="showInput = true;" [ngStyle]="{'display':showInput === true ? 'none' : 'block' }">{{label}}</h3> -->
         <span class="edit-field qt-ml-4">
             <input
                 type="text"
@@ -15,7 +14,6 @@
                 (blur)="saveLabel();"
             >
         </span>
-
     </div>
     <ul class="dashboard-list">
         <li class="dashboard-list__item">
@@ -24,7 +22,6 @@
         </li>
         <li class="dashboard-list__item">
             <span class="dashboard-list__title">Warranty</span>
-            <!-- <div>{{system?.warranty || 'N/A'}}</div> -->
             <span
                 class="edit-field"
                 *ngIf="system.warrantyTime"
@@ -43,10 +40,10 @@
             <span class="dashboard-list__title">Windows Info</span>
             <div class="dashboard-list__text">{{windows_info || 'N/A'}}</div>
 
+
         </li>
         <li class="dashboard-list__item">
             <span class="dashboard-list__title">Asset Tag</span>
-            <!-- <div>{{system?.asset_tag || 'N/A'}}</div> -->
             <span
                 id="tag"
                 class="edit-field"
@@ -62,7 +59,6 @@
         </li>
         <li class="dashboard-list__item">
             <span class="dashboard-list__title">Manufacturer</span>
-            <!-- <div>{{system?.manufacturer || 'N/A'}}</div> -->
             <span
                 id="manufacture"
                 class="edit-field"
@@ -82,10 +78,6 @@
         </li>
         <li class="dashboard-list__item">
             <span class="dashboard-list__title">Install Date</span>
-            <!-- <div (click)="visible = !visible">{{(system?.install_date | date : DateFormat) || 'N/A'}}</div> -->
-            <!-- <ngb-datepicker class="dropdown-menu p-0"
-                    [class.show]="visible">
-                  </ngb-datepicker> -->
             <span
                 class="edit-field"
                 *ngIf="system.install_dateTime"
@@ -100,15 +92,8 @@
                 ></app-date-picker>
             </span>
         </li>
-        <!-- <li>
-                    <span>Warranty Date</span>
-                    <span class="edit-field">
-                      <input type="text" class="form-control sub-label-field" [(ngModel)]="system.warranty" (dateSelect)="updateDashboard('warranty')" ngbDatepicker #dWarranty="ngbDatepicker" (click)="dWarranty.toggle()">
-                    </span>
-                  </li> -->
         <li class="dashboard-list__item">
             <span class="dashboard-list__title">Computer Model</span>
-            <!-- <div>{{system?.model || 'N/A'}}</div> -->
             <span class="edit-field">
                 <input
                     type="text"
@@ -118,20 +103,8 @@
                 >
             </span>
         </li>
-        <!-- <li>
-                    <span>Site</span>
-                    <div>N/A</div>
-                  </li> -->
-        <!-- <li>
-                    <span>Bought Date</span>
-                    <span class="edit-field">
-                      <input type="text" class="form-control sub-label-field" [(ngModel)]="system.install_date" (dateSelect)="updateDashboard('install_date')" ngbDatepicker #dInstall="ngbDatepicker" (click)="dInstall.toggle()">
-                    </span>
-                  </li> -->
         <li class="dashboard-list__item">
             <span class="dashboard-list__title">System Type</span>
-            <!-- <div *ngIf="system?.architecture != undefined && system?.architecture != ''">({{system?.architecture}}) system</div>
-                    <div *ngIf="system?.architecture == undefined || system?.architecture == ''">N/A</div> -->
             <span class="edit-field">
                 <input
                     type="text"
@@ -141,14 +114,5 @@
                 >
             </span>
         </li>
-        <!-- <li>
-                    <span>Time Zone</span>
-                    <div>(UTC +08:00) Perth</div>
-                  </li> -->
-        <!-- <li>
-                    <span>Expire Date</span>
-                    <div>2019-03-12</div>
-                  </li> -->
-
     </ul>
 </div>

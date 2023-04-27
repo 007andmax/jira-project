@@ -62,13 +62,11 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
     this.sub.add(getOnOpenAside);
   }
   remoteAccess(connectionType) {
-    console.log("connectionType", connectionType);
     const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, { windowClass: 'device-send-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.connectionType = connectionType;
     modalRef.componentInstance.device = this.currentDevice;
     modalRef.componentInstance.companyId = this.currentDevice.companyId;
     modalRef.componentInstance.action = 'CONNECT_DEVICE';
-
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

@@ -52,27 +52,6 @@
                     </tr>
                 </tbody>
             </table>
-            <!-- <table class="cmn-table" *ngFor="let software of softwareList; let i = index;">
-          <tr>
-            <td class="check-area">
-              <div class="cmn-checkbox">
-                <input type="checkbox" name="check_{{i}}" (change)="selectedRecord('single', i);" id="check_{{i}}" [(ngModel)]="software.checked" [value]="true"/>
-                <label for="check_{{i}}" aria-label="checkbox"></label>
-              </div>
-            </td>
-            <td class="s-name">
-              <span class="device-pic"><img src="..//html/assets/img/device/adb-reader.png" alt="adb-reader"/></span>
-              <h5>{{software.softName}}</h5>
-            </td>
-            <td class="pulisher">{{software.softPublisher}}</td>
-            <td class="version">{{software.softVersion || 'N/A'}}</td>
-            <td class="install">{{(software.softInstalledOn | date : DateFormat) || 'N/A'}}</td>
-            <td class="c-version">{{software.softVersion || 'N/A'}}</td>
-            <td class="action">
-              <a class="remove" data-tooltip="Remove" (click)="onDeleteSoftware()"><img src="..//html/assets/img/device/remove.svg" alt="remove"/></a>
-            </td>
-          </tr>
-        </table> -->
         </div>
         <app-ticket-task></app-ticket-task>
     </div>

@@ -171,7 +171,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
           } else {
             this.system.warrantyTime = new Date().getTime();
           }
-          console.log("this.system", this.system);
           let colors = ['#0057a8', '#00d8e7', '#16a4fa', '#0CB2B2', '#485EF0'];
           let count = 0;
           this.logicalDisk.forEach(element => {

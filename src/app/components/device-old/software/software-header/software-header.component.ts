@@ -29,7 +29,6 @@ export class SoftwareHeaderComponent implements OnInit {
     window.open(this.pdfUrl, '_blank');
   }
   search(event) {
-    console.log("event", event);
     this.onSearch.emit(event.target.value)
   }
   getPdfData() {
@@ -184,7 +183,6 @@ export class SoftwareHeaderComponent implements OnInit {
   }
   downloadCsv() {
     let downloadCsvList = [];
-    console.log("this.softwareList", this.softwareList);
     this.softwareList.forEach(element => {
       downloadCsvList.push([
         element.softName.replace(',', ' ') || 'N/A',
@@ -195,12 +193,6 @@ export class SoftwareHeaderComponent implements OnInit {
       ]);
     });
     let fileName = 'Software List';
-    // const columnNames = [
-    //   {name: 'Software Name', value: 'softName'},
-    //   {name: 'Publisher', value: 'softPublisher'}, 
-    //   {name: 'Version', value: 'softVersion'}, 
-    //   {name: 'Installed on', value: 'softInstalledOn'}, 
-    //   {name: 'Current Version', value: 'currentSoftVersion'}];
     const columnNames = ['Software Name', 'Publisher', 'Version', 'Installed on', 'Current Version'];
     this.excelService.generateExcel(downloadCsvList, columnNames, fileName);
   }

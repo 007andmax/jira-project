@@ -189,7 +189,6 @@ export class TerminalComponent implements OnInit {
     }
   }
   viewScriptDetail(data) {
-    console.log("data", data);
     this.scriptDetail = !this.scriptDetail;
     this.showDescription = false;
     this.scriptDetailModal = data;
