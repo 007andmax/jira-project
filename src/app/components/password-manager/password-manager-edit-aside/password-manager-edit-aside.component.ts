@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
@@ -20,6 +20,7 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { PasswordRecordHistory } from '../class/password-record-history';
+import { PasswordRecordLink } from '../class/password-record-link';
 
 /**
  * Password manager edit aside component
@@ -30,10 +31,9 @@ import { PasswordRecordHistory } from '../class/password-record-history';
   styleUrls: ['./password-manager-edit-aside.component.scss'],
 
 })
-export class PasswordManagerEditAsideComponent implements OnInit {
+export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
   public selectedClient: any;
   public opened: boolean = false;
-  preloaderHistory: boolean = true;
   showSecretCode: boolean = false;
   isEditSecretKey: boolean = false;
   isGetSecretCode: boolean = false;
@@ -93,29 +93,16 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       this.devicesList = [];
       this.gadgetsList = [];
       if (!this.editItem.otpEnable) this.isEditSecretKey = true;
-      this.editItem.links.forEach(item => {
-        if (item.userId) {
-          this.selectedUserAndDevices.push(new PasswordDeviceUser(item.userId, `${item.userName}`, 'USER'));
-          this.usersList.push(new PasswordDeviceUser(item.userId, `${item.userName}`, 'USER'));
-        }
-        if (item.deviceId) {
-          this.selectedUserAndDevices.push(new PasswordDeviceUser(item.deviceId, `${item.deviceLabel}`, 'DEVICE'));
-          this.devicesList.push(new PasswordDeviceUser(item.deviceId, `${item.deviceLabel}`, 'DEVICE'));
-        }
-        if (item.gadgetId) {
-          this.selectedUserAndDevices.push(new PasswordDeviceUser(item.gadgetId, `${item.gadgetName}`, 'GADGET'));
-          this.gadgetsList.push(new PasswordDeviceUser(item.gadgetId, `${item.gadgetName}`, 'GADGET'));
-        }
-      })
+
       this.selectedClient = this.companiesState.getCompanies().find(item => item.id === this.editItem.companyId);
       if (!this.companiesState.isInitLightAllCompanies) this.companiesState.onInitGetLightCompanies();
+      this.getDetails();
+      this.changeTab('PASSWORD_DETAIL');
       this.opened = true;
       this.showSecretCode = true;
       this.isEditSecretKey = false;
       this.isGetSecretCode = true;
       this.showPassword = false;
-      this.preloaderHistory = true;
-      this.changeTab('PASSWORD_DETAIL');
       if (this.intervalContainer) clearInterval(this.intervalContainer);
       if (this.showSecretCode && this.editItem.otpEnable) this.getCodeRecords();
     });
@@ -140,6 +127,26 @@ export class PasswordManagerEditAsideComponent implements OnInit {
      })
      this.sub.add(onChangeRealTime);*/
   }
+  getDetails() {
+    this.passwordManagerService.getPasswordRecordDetail(this.editItem.id).subscribe((data: any) => {
+      this.editItem.updateHistories(data.histories.map(item => new PasswordRecordHistory(item)));
+      this.editItem.setLinks(data.links.map(item => new PasswordRecordLink(item)));
+      this.editItem.links.forEach(item => {
+        if (item.userId) {
+          this.selectedUserAndDevices.push(new PasswordDeviceUser(item.userId, `${item.userName}`, 'USER'));
+          this.usersList.push(new PasswordDeviceUser(item.userId, `${item.userName}`, 'USER'));
+        }
+        if (item.deviceId) {
+          this.selectedUserAndDevices.push(new PasswordDeviceUser(item.deviceId, `${item.deviceLabel}`, 'DEVICE'));
+          this.devicesList.push(new PasswordDeviceUser(item.deviceId, `${item.deviceLabel}`, 'DEVICE'));
+        }
+        if (item.gadgetId) {
+          this.selectedUserAndDevices.push(new PasswordDeviceUser(item.gadgetId, `${item.gadgetName}`, 'GADGET'));
+          this.gadgetsList.push(new PasswordDeviceUser(item.gadgetId, `${item.gadgetName}`, 'GADGET'));
+        }
+      })
+    })
+  }
   toggleSecretCode() {
     this.showSecretCode = !this.showSecretCode;
     if (this.intervalContainer) clearInterval(this.intervalContainer);
@@ -159,12 +166,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
   changeTab(data) {
     this.tab = data;
-    if (data == 'PASSWORD_HISTORY') {
-      if (!this.editItem.isHistory) this.passwordManagerService.getHistory(this.editItem.id).subscribe((res: any) => {
-        this.editItem.updateHistories(res.map(item => new PasswordRecordHistory(item)));
-        this.preloaderHistory = false;
-      })
-    }
   }
   getCodeRecords() {
     this.timeCount = 0;
@@ -308,6 +309,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.passwordManagerStateService.setRecordForRemove(this.editItem);
   }
   ngOnDestroy() {
+    if (this.intervalContainer) clearInterval(this.intervalContainer);
     this.sub.unsubscribe();
   }
   public trackByIndex(index, item) {
@@ -331,8 +333,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   getUserName(user) {
     return `${user.firstName} ${user.lastName}`;
   }
-  getNameForAvatar(user) {
-    if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}${(user.lastName) ? user.lastName[0].toUpperCase() : ''}`;
-    return '';
+  getNameForAvatar(item) {
+    return (this.getUserAvatarUrl(this.getUserById(item.userId)) == '') ? `${item.userName[0].toUpperCase()}${item.userName[item.userName.indexOf(" ") + 1].toUpperCase()}` : '';
   }
 }

@@ -12,7 +12,8 @@
                     <input
                         type="text"
                         placeholder="Search Products…"
-                        (input)="search()"
+                        (blur)="onBlurSearch($event)"
+                        (keyup)="onKeyUp($event)"
                         [(ngModel)]="productSearchName"
                     >
                 </div>
