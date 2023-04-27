@@ -112,7 +112,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     })
 
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-      if (data) {
+      if (data && this.opened) {
         if (this.confirmStateService.getConfirmAction() === DELETE_FOREVER) {
           this.onDeleteForever();
         }
