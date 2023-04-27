@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Bios, Motherboard } from '../class/system';
+import { CONFIGCONSTANTS } from '../../config/app-constants';
 
 @Component({
   selector: 'hardware-motherboard',
@@ -9,6 +10,7 @@ import { Bios, Motherboard } from '../class/system';
 export class HardwareMotherboardComponent implements OnInit {
   @Input() motherBoard: Motherboard;
   @Input() bios: Bios;
+  DateTimeFormat = CONFIGCONSTANTS.DateTimeFormat;
   constructor() { }
 
   ngOnInit() {

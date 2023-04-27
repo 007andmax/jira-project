@@ -10,6 +10,7 @@ import { DashboardDetailsDashboardComponent } from './dashboard-details-dashboar
 import { DashboardDiskDrivesComponent } from './dashboard-disk-drives/dashboard-disk-drives.component';
 import { DashboardServicesComponent } from './dashboard-services/dashboard-services.component';
 import { DashboardTagsComponent } from './dashboard-tags/dashboard-tags.component';
+import { MatSelectModule, MatChipsModule, MatIconModule, MatFormFieldModule } from '@angular/material';
 
 
 @NgModule({
@@ -21,7 +22,11 @@ import { DashboardTagsComponent } from './dashboard-tags/dashboard-tags.componen
         NgbModule,
         NgxUploaderModule,
         DashboardRoutingOldModule,
-        DatePickerModule
+        DatePickerModule,
+        MatSelectModule,
+        MatChipsModule,
+        MatIconModule,
+        MatFormFieldModule,
     ],
 })
 export class DashboardOldModule { }

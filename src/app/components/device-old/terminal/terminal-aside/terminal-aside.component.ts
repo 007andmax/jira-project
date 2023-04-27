@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { TerminalValidate } from '../class/terminal-validate';
+import { CONFIGCONSTANTS } from '../../config/app-constants';
 
 @Component({
   selector: 'terminal-aside',
@@ -15,6 +16,7 @@ import { TerminalValidate } from '../class/terminal-validate';
   styleUrls: ['./terminal-aside.component.scss']
 })
 export class TerminalAsideComponent implements OnInit {
+  DateTimeHistoryFormat = CONFIGCONSTANTS.DateTimeHistoryFormat;
   create = false;
   @Input() submitted = false;
   @Input() showDescription = false;
