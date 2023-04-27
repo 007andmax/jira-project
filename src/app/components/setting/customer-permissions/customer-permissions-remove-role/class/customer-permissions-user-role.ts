@@ -4,7 +4,7 @@ import { UserCustomerCompaniesInfo } from "src/app/components/users/class/user-c
 export class CustomerPermissionsRemoveRole {
     accountType: string;
     avatar: UserAvatar;
-    customerCompanyInfos: Array<UserCustomerCompaniesInfo> = [];
+    customerCompanyInfo: Array<UserCustomerCompaniesInfo> = [];
     email: string;
     firstName: string;
     id: string;
@@ -14,7 +14,7 @@ export class CustomerPermissionsRemoveRole {
             for (const key in data) {
                 this[key] = data[key];
             }
-            this.customerCompanyInfos = data.customerCompanyInfos.map(item => new UserCustomerCompaniesInfo(item));
+            this.customerCompanyInfo = data.customerCompanyInfo.map(item => new UserCustomerCompaniesInfo(item));
         }
     }
 }

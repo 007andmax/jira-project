@@ -32,10 +32,10 @@ export class CustomerPermissionsRemoveRoleComponent implements OnInit {
     this.sub.add(onGetUserRole);
   }
   onSelectUserRole(user, data, index) {
-    user.customerCompanyInfos[index].setUserRole(data);
+    user.customerCompanyInfo[index].setUserRole(data);
     let userForUpdate: UserProfile = new UserProfile();
     userForUpdate.onEdit(this.usersStateService.getAllUsers().find(item => item.id == user.id));
-    userForUpdate.customerCompaniesInfo = user.customerCompanyInfos;
+    userForUpdate.customerCompaniesInfo = user.customerCompanyInfo;
     this.usersService.updateUser(userForUpdate.getUserForUpdate(this.usersStateService.getAllUsers().find(item => item.id == user.id))).subscribe(data => {
       //  this.close();
     })
@@ -64,7 +64,7 @@ export class CustomerPermissionsRemoveRoleComponent implements OnInit {
   }
   removeRole() {
 
-    if (this.users.find(user => user.customerCompanyInfos.find(item => item.customerUserRole.id == this.userRoleForRemove.id) ? true : false)) return;
+    if (this.users.find(user => user.customerCompanyInfo.find(item => item.customerUserRole.id == this.userRoleForRemove.id) ? true : false)) return;
     this.usersService.removeRole(this.userRoleForRemove.id).subscribe(data => {
       this.close();
     })
