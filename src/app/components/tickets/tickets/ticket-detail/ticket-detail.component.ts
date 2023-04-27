@@ -305,8 +305,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.ticketsService.deleteTicket([this.ticketProfile.id]).subscribe(data => {
       this.ticketsStateService.onChangeTypeFilter(this.usersStateService.getCurrentUser().startPage == "MY_TICKETS" ? "USERS" : this.usersStateService.getCurrentUser().startPage);
       this.ticketsStateService.onChangeLeftPanelFilter(this.usersStateService.getCurrentUser().startPage == "MY_TICKETS" ? "USERS" : this.usersStateService.getCurrentUser().startPage);
-      this.router.navigate(
-        [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/tickets/`]);
+      this.leftPanelStateService.goToState('new-tickets');
       this.leftPanelStateService.toggleLeftPanel(false);
     })
   }
