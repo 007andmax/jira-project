@@ -2,18 +2,14 @@
     <div>Hardware</div>
     <div class="download-print">
         <a
-            (click)="printPdf();"
-            data-tooltip="Print"
-            class="qt-mr-8 pointer"
-        >
-            <img src="/html/assets/img/device/print.svg">
-        </a>
+          class="icon__print qt-dib qt-mr-6 pointer device-tooltip qt-sz-16 qt-bg-contain qt-ml-16 pointer"
+          (click)="printPdf();"
+          data-tooltip="Print"
+        ></a>
         <a
-            (click)="downloadCsv();"
-            data-tooltip="Download CSV"
-            class="pointer"
-        >
-            <img src="/html/assets/img/device/download_csv.svg">
-        </a>
+          class="icon__export-dark qt-dib qt-mr-6 pointer device-tooltip device-tooltip--width-auto qt-sz-16 qt-bg-contain qt-ml-12 pointer"
+          (click)="downloadCsv();"
+          data-tooltip="Download CSV"
+        ></a>
     </div>
 </div>
