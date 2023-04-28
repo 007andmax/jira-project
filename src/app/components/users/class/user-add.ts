@@ -27,7 +27,6 @@ export class UserAdd {
   constructor(data: UserProfile) {
     if (data.phoneNumbers.length === 1 && data.phoneNumbers[0].number === '') {
       this.phoneNumbers = [];
-
     } else {
       this.phoneNumbers = data.phoneNumbers;
     }
