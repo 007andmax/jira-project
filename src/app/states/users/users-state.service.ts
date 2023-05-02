@@ -28,7 +28,6 @@ export class UsersStateService {
   openDetailAside: EventEmitter<any> = new EventEmitter();
   closeDetailAside: EventEmitter<any> = new EventEmitter();
   onChangeUserPermissions: EventEmitter<any> = new EventEmitter();
-  onGetUserRole: EventEmitter<any> = new EventEmitter();
   userForArchive: User = null;
   usersForArchive: Array<User> = [];
   userForDeArchive: User = null;
@@ -36,13 +35,10 @@ export class UsersStateService {
   filter: UserFilter = new UserFilter();
   showArchivedCompanies: boolean = false;
   isGetAllUsers: boolean = false;
-  isGetUserRole: boolean = false;
-  userRoles: Array<UserRole> = [];
   userRoleForRemove: UserRole;
   constructor(private userService: UsersService,
     private appService: AppService,
     private usersRealTimeService: UsersRealTimeService) {
-
   }
   public onInit() {
     this.onInitGetCurrentUser();
@@ -80,22 +76,13 @@ export class UsersStateService {
       if (newChange.action == "PERMISSIONS_UPDATE") this.onChangeUserPermissions.emit(newChange.data);
     });
   }
-  public getUserRoles() {
-    return this.userRoles;
-  }
   public setUserRoleForRemove(data) {
     this.userRoleForRemove = data;
   }
   public getUserRoleForRemove() {
     return this.userRoleForRemove;
   }
-  public onInitGetUsersRoles() {
-    this.userService.getUserRoles().subscribe((data: any) => {
-      this.userRoles = data;
-      this.onGetUserRole.emit(this.userRoles);
-      this.isGetUserRole = true;
-    })
-  }
+
   public initGetAllUsers() {
     this.isGetAllUsers = true;
     this.userService.getAllusers().subscribe((data) => {

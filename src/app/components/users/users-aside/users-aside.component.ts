@@ -23,6 +23,7 @@ import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-indus
 import { Company } from 'src/app/interfaces/company/company';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { UserRole } from '../class/user-role';
+import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-role-state.service';
 
 @Component({
   selector: 'app-users-aside',
@@ -32,6 +33,7 @@ import { UserRole } from '../class/user-role';
 })
 export class UsersAsideComponent implements OnInit, OnDestroy {
 
+  @ViewChild('userRolesDP') userRolesDP: DropDownComponent;
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   public opened = false;
   user: UserProfile = new UserProfile();
@@ -55,6 +57,7 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private companiesService: CompaniesService,
     private crmStateService: CrmStateService,
+    public customerRoleStateService: CustomerRoleStateService,
     private modalService: NgbModal,) { }
 
 
@@ -70,17 +73,18 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onGetJobTitle);
     this.onCroppImage();
-    this.userRoles = this.usersStateService.getUserRoles();
+    this.userRoles = this.customerRoleStateService.getUserRoles();
     this.usersStateService.getOpenAside().subscribe(data => {
-      if (!this.usersStateService.isGetUserRole) this.usersStateService.onInitGetUsersRoles();
+      if (!this.customerRoleStateService.isGetUserRole) this.customerRoleStateService.onInitGetUsersRoles();
       this.getJobTypeList();
       this.opened = true;
       this.addCompnay();
       this.user.setCompanyId(this.companiesStateService.getCurrentCompany().id);
       if (this.opened && this.companiesStateService.getCompanyRoutingId()) this.onSelectCompany(this.companiesStateService.getCompanies().find(item => item.id === this.companiesStateService.getCompanyRoutingId()), 0);
     })
-    let onGetUserRole = this.usersStateService.onGetUserRole.subscribe(data => {
-      this.userRoles = this.usersStateService.getUserRoles();
+    let onGetUserRole = this.customerRoleStateService.onGetUserRole.subscribe(data => {
+      this.userRoles = this.customerRoleStateService.getUserRoles();
+      this.userRolesDP.reset(this.userRoles);
     })
     this.sub.add(onGetUserRole);
   }

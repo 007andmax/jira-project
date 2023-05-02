@@ -51,7 +51,8 @@
                             </div>
                             <div>
                                 <app-drop-down
-                                    *ngIf="usersStateService.isGetUserRole"
+                                    #userRolesDP
+                                    *ngIf="customerRoleStateService.isGetUserRole"
                                     [title]="'Permission Role'"
                                     [placeholder]="'Select role'"
                                     [list]="userRoles"

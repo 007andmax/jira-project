@@ -27,6 +27,7 @@ import { MODE_EDIT_SUBSCRIPTION, MODE_HIDE_ACTIVE } from 'src/app/const/users';
 import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-industry/class/crm-company-industry';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { UserRole } from '../class/user-role';
+import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-role-state.service';
 
 @Component({
   selector: 'users-aside-edit',
@@ -53,7 +54,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
   @ViewChild('jobTitleDp') jobTitleDp: DropDownComponent;
   @ViewChild('jobTypeDp') jobTypeDp: DropDownComponent;
   @ViewChild('jobIndustryDp') jobIndustryDp: DropDownComponent;
-
+  @ViewChild('userRolesDP') userRolesDP: DropDownComponent;
   constructor(private imageCropperStateService: ImageCropperStateService,
     public ticketsListService: TicketsListService,
     public usersStateService: UsersStateService,
@@ -64,6 +65,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     private tagsState: CompanyTagsStateService,
     private companySubscriptionState: CompanySubscriptionStateService,
     private crmStateService: CrmStateService,
+    public customerRoleStateService: CustomerRoleStateService,
     private companiesService: CompaniesService,
     public cd: ChangeDetectorRef) { }
 
@@ -79,9 +81,9 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onGetJobTitle);
     this.onCroppImage();
-    this.userRoles = this.usersStateService.getUserRoles();
+    this.userRoles = this.customerRoleStateService.getUserRoles();
     this.usersStateService.getOpenEditAside().subscribe(data => {
-      if (!this.usersStateService.isGetUserRole) this.usersStateService.onInitGetUsersRoles();
+      if (!this.customerRoleStateService.isGetUserRole) this.customerRoleStateService.onInitGetUsersRoles();
       this.opened = true;
       this.getJobTypeList();
       this.user.onEdit(this.usersStateService.getuserForEdit());
@@ -92,8 +94,9 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
       this.validate.addPhoneNumbers(this.user.phoneNumbers);
       console.log("this.user", this.user);
     })
-    let onGetUserRole = this.usersStateService.onGetUserRole.subscribe(data => {
-      this.userRoles = this.usersStateService.getUserRoles();
+    let onGetUserRole = this.customerRoleStateService.onGetUserRole.subscribe(data => {
+      this.userRoles = this.customerRoleStateService.getUserRoles();
+      this.userRolesDP.reset(this.userRoles);
     })
     this.sub.add(onGetUserRole);
   }

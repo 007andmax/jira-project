@@ -10,6 +10,7 @@ import { DELETE_USER_ROLE } from 'src/app/const/confirm';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { CustomerPermissionsRemoveRole } from './customer-permissions-remove-role/class/customer-permissions-user-role';
+import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-role-state.service';
 
 @Component({
   selector: 'customer-permissions',
@@ -28,6 +29,7 @@ export class CustomerPermissionsComponent implements OnInit, OnDestroy {
     private permissionManageService: PermissionManageService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
+    private customerRoleStateService: CustomerRoleStateService,
     private usersService: UsersService,) { }
 
   ngOnInit() {
@@ -35,10 +37,10 @@ export class CustomerPermissionsComponent implements OnInit, OnDestroy {
     $('body').removeClass('backMenu');
     this.sections = this.permissionManageService.getSectionsCustomPermission();
     console.log(this.getListKeys(this.sections));
-    this.userRoles = this.usersStateService.getUserRoles();
-    if (!this.usersStateService.isGetUserRole) this.usersStateService.onInitGetUsersRoles();
-    let onGetUserRole = this.usersStateService.onGetUserRole.subscribe(data => {
-      this.userRoles = this.usersStateService.getUserRoles();
+    this.userRoles = this.customerRoleStateService.getUserRoles();
+    if (!this.customerRoleStateService.isGetUserRole) this.customerRoleStateService.onInitGetUsersRoles();
+    let onGetUserRole = this.customerRoleStateService.onGetUserRole.subscribe(data => {
+      this.userRoles = this.customerRoleStateService.getUserRoles();
     })
     this.sub.add(onGetUserRole);
     this.usersService.getPermissions().subscribe((data: any) => {

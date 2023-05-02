@@ -351,7 +351,8 @@
                 </div>
                 <div class="qt-input-block qt-f50">
                     <app-drop-down
-                        *ngIf="usersStateService.isGetUserRole"
+                        #userRolesDP
+                        *ngIf="customerRoleStateService.isGetUserRole"
                         [title]="'Permission Role'"
                         [placeholder]="'Select role'"
                         [list]="userRoles"

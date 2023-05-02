@@ -33,6 +33,7 @@ import { NoteStateService } from './states/note/note-state.service';
 import { EmailTemplateStateService } from './states/email-template/email-template-state.service';
 import { GoogleAuthenticatorComponent } from './components/shared/google-authenticator/google-authenticator.component';
 import { Subscription } from 'rxjs';
+import { CustomerRoleStateService } from './states/customer-role/customer-role-state.service';
 
 
 /**
@@ -94,6 +95,7 @@ export class AppComponent implements OnInit {
     private appStateService: AppStateService,
     private crmStateService: CrmStateService,
     private marketingEmailStateService: MarketingEmailStateService,
+    private customerRoleStateService: CustomerRoleStateService,
     private noteStateService: NoteStateService,
     private supportPageCategoriesStateService: SupportPageCategoriesStateService,
     private emailTemplateStateService: EmailTemplateStateService
@@ -129,6 +131,7 @@ export class AppComponent implements OnInit {
         this.kafkaStateService.onInit();
         this.noteStateService.onInit();
         this.emailTemplateStateService.onInit();
+        this.customerRoleStateService.onInit();
         if (this.state === 'help-center') this.supportPageCategoriesStateService.onInit();
         this.websocketService.initializeWebSocketConnection();
       } else {

@@ -37,6 +37,7 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 import { NoteRealTimeService } from 'src/app/states/note/note-real-time.service';
 import { EmailTemplateRealTimeService } from 'src/app/states/email-template/email-template-real-time.service';
+import { CustomerRoleRealTimeService } from 'src/app/states/customer-role/customer-role-real-time.service';
 
 
 /**
@@ -94,6 +95,7 @@ export class WebsocketService {
     private devicesStateService: DevicesStateService,
     private noteRealTimeService: NoteRealTimeService,
     private emailTemplateRealTimeService: EmailTemplateRealTimeService,
+    private customerRoleRealTimeService: CustomerRoleRealTimeService
 
   ) {
   }
@@ -138,6 +140,7 @@ export class WebsocketService {
       that.subsribeToCustomSubscription();
       that.subsribeToNoteTemplateSubscription();
       that.subsribeToEmailNotification();
+      that.subsribeToCustomerRole();
       if (data.command === "CONNECTED") this.websocketStateService.initConnection();
       that.onInit.emit(true);
       that.isInit = true;
@@ -217,6 +220,18 @@ export class WebsocketService {
       this.stompClient.subscribe("/user/watch/companyEmailNotification", (message) => {
         var newChange = JSON.parse(message.body);
         this.emailTemplateRealTimeService.handleRealTimeChanges(newChange);
+        if (message.body) {
+        }
+      });
+    }, 3000);
+  }
+
+  private subsribeToCustomerRole() {
+
+    setTimeout(() => {
+      this.stompClient.subscribe("/user/watch/customerRole", (message) => {
+        var newChange = JSON.parse(message.body);
+        this.customerRoleRealTimeService.handleRealTimeChanges(newChange);
         if (message.body) {
         }
       });

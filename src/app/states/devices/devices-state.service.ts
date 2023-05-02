@@ -105,13 +105,14 @@ export class DevicesStateService {
   }
   getCompanyDevices(id) {
     this.devicesService.getCompanyDevices(id).subscribe((data) => {
-      Object.keys(data).forEach(key => {
-        if (data[key]) data[key] = data[key].map(item => new Device(item));
-      })
-      this.preloaderDevices = false;
-      this.setAllDevices(data);
-      this.onInitGetDevices(data);
-
+      if (data) {
+        Object.keys(data).forEach(key => {
+          if (data[key]) data[key] = data[key].map(item => new Device(item));
+        })
+        this.preloaderDevices = false;
+        this.setAllDevices(data);
+        this.onInitGetDevices(data);
+      }
     }, err => {
       this.preloaderDevices = false;
       this.setAllDevices(null);

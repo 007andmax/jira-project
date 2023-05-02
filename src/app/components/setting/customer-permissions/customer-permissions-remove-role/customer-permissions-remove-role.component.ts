@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { CustomerPermissionsRemoveRole } from './class/customer-permissions-user-role';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -6,6 +6,8 @@ import { UserRole } from 'src/app/components/users/class/user-role';
 import { Subscription } from 'rxjs';
 import { UserProfile } from 'src/app/components/users/class/user-profile';
 import { UsersService } from 'src/app/services/users/users.service';
+import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-role-state.service';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 
 @Component({
   selector: 'customer-permissions-remove-role',
@@ -16,18 +18,21 @@ export class CustomerPermissionsRemoveRoleComponent implements OnInit {
   @Input() users: Array<CustomerPermissionsRemoveRole> = [];
   @Input() userRoleForRemove: UserRole;
   @Output() onClose = new EventEmitter<any>();
+  @ViewChild('userRolesDP') userRolesDP: DropDownComponent;
   userRoles: Array<UserRole> = [];
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
     private usersService: UsersService,
+    public customerRoleStateService: CustomerRoleStateService,
     public usersStateService: UsersStateService,) { }
 
   ngOnInit() {
     console.log("users", this.users);
     console.log("userRoleForRemove", this.userRoleForRemove);
-    this.userRoles = this.usersStateService.getUserRoles();
-    let onGetUserRole = this.usersStateService.onGetUserRole.subscribe(data => {
-      this.userRoles = this.usersStateService.getUserRoles();
+    this.userRoles = this.customerRoleStateService.getUserRoles();
+    let onGetUserRole = this.customerRoleStateService.onGetUserRole.subscribe(data => {
+      this.userRoles = this.customerRoleStateService.getUserRoles();
+      this.userRolesDP.reset(this.userRoles);
     })
     this.sub.add(onGetUserRole);
   }
