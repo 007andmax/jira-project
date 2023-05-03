@@ -81,6 +81,7 @@ import { TicketDetailPasswordsItemComponent } from './ticket-detail-passwords/ti
 import { TicketDetailPasswordsDetailsComponent } from './ticket-detail-passwords/ticket-detail-passwords-details/ticket-detail-passwords-details.component';
 import { TicketDetailDevicesItemComponent } from './ticket-detail-devices/ticket-detail-devices-item/ticket-detail-devices-item.component';
 import { TicketDetailDevicesDetailsComponent } from './ticket-detail-devices/ticket-detail-devices-details/ticket-detail-devices-details.component';
+import { TicketDetailProfileFormUpdateSupportComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-support/ticket-detail-profile-form-update-support.component';
 
 
 
@@ -135,7 +136,8 @@ import { TicketDetailDevicesDetailsComponent } from './ticket-detail-devices/tic
         TicketDetailPasswordsItemComponent,
         TicketDetailPasswordsDetailsComponent,
         TicketDetailDevicesItemComponent,
-        TicketDetailDevicesDetailsComponent
+        TicketDetailDevicesDetailsComponent,
+        TicketDetailProfileFormUpdateSupportComponent
 
     ],
     imports: [
