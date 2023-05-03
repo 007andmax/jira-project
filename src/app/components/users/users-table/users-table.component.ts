@@ -25,6 +25,7 @@ import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-indus
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { Subscription } from 'rxjs';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { UserCustomerCompaniesDefaultSubscribtionAdd } from '../class/user-customer-companies-default-subscribtion-add';
 
 @Component({
   selector: 'app-users-table',
@@ -40,6 +41,7 @@ export class UsersTableComponent implements OnInit, OnDestroy {
   @Output() onSelectUser = new EventEmitter<any>();
   @Input() jobTitleList: Array<CrmCompanyJobTitle> = [];
   @Input() listCustomSubscription: Array<UserCustomSubscription> = [];
+  @Input() companyId: string;
   industries: Array<CrmCompanyIndustry> = [];
   @ViewChild('customSubscription') customSubscription: UserTableCustomSubscriptionComponent;
   companies: Array<Company> = [];
@@ -62,21 +64,19 @@ export class UsersTableComponent implements OnInit, OnDestroy {
 
 
   onChangeDefaultSubscriptions(subscriptions) {
-    this.usersService.setSubscriptions(subscriptions.id, {
-      ...new UserDefaultSubscriptionAdd(subscriptions.ticketSubscription.enabled,
+    this.usersService.setSubscriptions({
+      ...new UserCustomerCompaniesDefaultSubscribtionAdd(subscriptions.ticketSubscription.enabled,
         subscriptions.ticketManagerSubscription.enabled,
-        subscriptions.invoiceSubscription.enabled)
-      , customSubscriptionIds: this.user.customSubscriptions.map(item => item.id)
+        subscriptions.invoiceSubscription.enabled,
+        this.user.id,
+        this.companyId)
     }).subscribe(data => {
 
     })
   }
   onChangeCustomSubscriptions(data) {
-    this.usersService.setSubscriptions(this.user.defaultSubscriptions.id, {
-      ...new UserDefaultSubscriptionAdd(this.user.defaultSubscriptions.ticketSubscription.enabled,
-        this.user.defaultSubscriptions.ticketManagerSubscription.enabled,
-        this.user.defaultSubscriptions.invoiceSubscription.enabled)
-      , customSubscriptionIds: data.map(item => item.id)
+    this.usersService.setCustomSubscriptions(this.user.id, {
+      customSubscriptionIds: data.map(item => item.id)
     }).subscribe(data => {
       this.customSubscription.toggleIsUpdate(false);
     })

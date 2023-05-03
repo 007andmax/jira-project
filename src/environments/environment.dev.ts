@@ -3,8 +3,8 @@
  */
 export const environment = {
   production: true,
-  apiUrl: 'https://dev.quicktech.com/',
+  apiUrl: 'https://4bb4-91-221-219-0.ngrok-free.app/',
   apiAgent: 'https://offlineagent01.quicktech.com/',
-  realTime: 'wss://dev.quicktech.com/realtime/',
+  realTime: 'wss://4bb4-91-221-219-0.ngrok-free.app/realtime/',
   webserverDomain: 'dev.quicktech.com'
 };

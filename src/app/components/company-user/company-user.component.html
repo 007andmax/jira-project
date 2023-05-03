@@ -28,6 +28,7 @@
                         [ngForTrackBy]="trackById"
                     >
                         <app-users-table
+                            [companyId]="filter.company"
                             [type]="TYPE_LIST_COMPANY_USERS"
                             [listCustomSubscription]="listCustomSubscription"
                             [jobTitleList]="jobTitleList"

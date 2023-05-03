@@ -23,6 +23,9 @@ import { UserDefaultSubscriptionAdd } from '../class/user-default-subscription-a
 import { UserProfile } from '../class/user-profile';
 import { UserValidate } from '../class/user-validate';
 import { UsersAsideDetailTicketsComponent } from './users-aside-detail-tickets/users-aside-detail-tickets.component';
+import { UserCustomerCompaniesDefaultSubscribtionAdd } from '../class/user-customer-companies-default-subscribtion-add';
+import { UserRole } from '../class/user-role';
+import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-role-state.service';
 
 @Component({
   selector: 'users-aside-detail',
@@ -52,11 +55,13 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
     private companySubscriptionState: CompanySubscriptionStateService,
     private usersRealTimeService: UsersRealTimeService,
     private permissionsService: PermissionsService,
+    public customerRoleStateService: CustomerRoleStateService,
     private companiesStateService: CompaniesStateService,) { }
 
 
   ngOnInit() {
     let openDetailAside = this.usersStateService.openDetailAside.subscribe(data => {
+      if (!this.customerRoleStateService.isGetUserRole) this.customerRoleStateService.onInitGetUsersRoles();
       this.usersStateService.setUserForEdit(data);
       //   this.companySubscriptionState.onEditMode(this.user.subscription);
       this.user.onEdit(data);
@@ -67,7 +72,6 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
         this.ticketsDetail.onScroll();
       }
       this.validate.addPhoneNumbers(this.user.phoneNumbers);
-      this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.user.companyId);
       this.open = true;
     })
     this.sub.add(openDetailAside);
@@ -95,7 +99,6 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
       if ((data.action === 'USER_SAVED' || data.action === 'USER_ARCHIVED') && data.data.accountType !== "TECH") {
         if (this.user.id === data.data.id) {
           this.user.onEdit(data.data);
-          this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.user.companyId);
           this.usersStateService.setUserForEdit(new User(data.data));
         }
       }
@@ -103,7 +106,6 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
         data.data.forEach(user => {
           if (this.user.id === user.id) {
             this.user.onEdit(user);
-            this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.user.companyId);
             this.usersStateService.setUserForEdit(new User(data.data));
           }
         })
@@ -149,7 +151,7 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
   }
   onCheckEmail() {
     if (this.user.primaryEmail && this.user.primaryEmail.length > 0) this.validate.checkValidPrimaryEmail(this.user.primaryEmail);
-    if (this.user.primaryEmail && this.user.primaryEmail.length > 0 && this.selectedCompany) this.onCheckValidPrimaryEmail();
+    if (this.user.primaryEmail && this.user.primaryEmail.length > 0) this.onCheckValidPrimaryEmail();
   }
   onCheckPhoneNumber(i) {
     this.validate.checkValidPhoneNumber(i, this.user.phoneNumbers[i].number);
@@ -158,18 +160,13 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
     if (this.validate.isValidate(this.user)) this.updateUser();
   }
   onCheckValidPrimaryEmail() {
-    this.usersService.checkValidPrimaryEmail(this.user.primaryEmail, this.selectedCompany.id, this.user.id).subscribe((data: any) => {
+    this.usersService.checkValidPrimaryEmail(this.user.primaryEmail, this.user.customerCompaniesInfo[0].companyId, this.user.id).subscribe((data: any) => {
 
       this.validate.setExistPrimaryContactEmail(data.value);
       if (this.validate.isValidate(this.user)) this.updateUser();
 
       this.cd.detectChanges();
     })
-  }
-  onSelectCompany(data) {
-    this.selectedCompany = data;
-    this.user.setCompanyId(data.id);
-    this.updateUser();
   }
   getJobDescription(val) {
     let value = val;
@@ -205,23 +202,9 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
 
     })
   }
-  onChangeDefaultSubscriptions(data) {
-
-    this.usersService.setSubscriptions(data.id, {
-      ...new UserDefaultSubscriptionAdd(data.ticketSubscription.enabled,
-        data.ticketManagerSubscription.enabled,
-        data.invoiceSubscription.enabled)
-      , customSubscriptionIds: this.user.customSubscriptions.map(item => item.id)
-    }).subscribe(res => {
-    })
-  }
   onChangeCustomSubscriptions(data) {
-
-    this.usersService.setSubscriptions(this.user.defaultSubscriptions.id, {
-      ...new UserDefaultSubscriptionAdd(this.user.defaultSubscriptions.ticketSubscription.enabled,
-        this.user.defaultSubscriptions.ticketManagerSubscription.enabled,
-        this.user.defaultSubscriptions.invoiceSubscription.enabled)
-      , customSubscriptionIds: data.map(item => item.id)
+    this.usersService.setCustomSubscriptions(this.user.id, {
+      customSubscriptionIds: data.map(item => item.id)
     }).subscribe(res => {
     })
   }

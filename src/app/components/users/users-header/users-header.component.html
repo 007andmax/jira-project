@@ -111,6 +111,7 @@
                     <th
                         class="users-table__company pointer"
                         (click)="onFilter('company')"
+                        [ngClass]="{'users-table__company-full': type === TYPE_LIST_ALL_USERS}"
                         *ngIf="type === TYPE_LIST_ALL_USERS || type === TYPE_LIST_MARKETING_USERS"
                     >
                         Company
@@ -140,7 +141,7 @@
                     </th>
                     <th
                         class="users-table__subscription"
-                        *ngIf="type === TYPE_LIST_ALL_USERS || type === TYPE_LIST_COMPANY_USERS"
+                        *ngIf="type === TYPE_LIST_COMPANY_USERS"
                     >
                         Subscription
                     </th>

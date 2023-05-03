@@ -32,7 +32,7 @@ export class CustomerPermissionsRemoveRoleComponent implements OnInit {
     this.userRoles = this.customerRoleStateService.getUserRoles();
     let onGetUserRole = this.customerRoleStateService.onGetUserRole.subscribe(data => {
       this.userRoles = this.customerRoleStateService.getUserRoles();
-      this.userRolesDP.reset(this.userRoles);
+      if (this.userRolesDP) this.userRolesDP.reset(this.userRoles);
     })
     this.sub.add(onGetUserRole);
   }

@@ -14,6 +14,7 @@ import { UserDefaultSubscriptionAdd } from 'src/app/components/users/class/user-
 import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
 import { UserDefaultSubscription } from 'src/app/components/users/class/user-default-subscription';
 import { UserCustomSubscription } from 'src/app/components/users/class/user-custom-subscription';
+import { UserCustomerCompaniesDefaultSubscribtionAdd } from 'src/app/components/users/class/user-customer-companies-default-subscribtion-add';
 
 @Component({
   selector: 'app-ticket-edit-aside-users',
@@ -145,11 +146,12 @@ export class TicketEditAsideUsersComponent implements OnInit, OnDestroy {
   onChangeSubscriptions(field, user) {
     let subscriptions = JSON.parse(JSON.stringify(user.defaultSubscriptions));
     subscriptions[field].enabled = !subscriptions[field].enabled;
-    this.usersService.setSubscriptions(subscriptions.id, {
-      ...new UserDefaultSubscriptionAdd(subscriptions.ticketSubscription.enabled,
+    this.usersService.setSubscriptions({
+      ...new UserCustomerCompaniesDefaultSubscribtionAdd(subscriptions.ticketSubscription.enabled,
         subscriptions.ticketManagerSubscription.enabled,
-        subscriptions.invoiceSubscription.enabled)
-      , customSubscriptionIds: user.customSubscriptions.map(item => item.id)
+        subscriptions.invoiceSubscription.enabled,
+        user.id,
+        this.companyId)
     }).subscribe(data => {
 
     })

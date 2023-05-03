@@ -1,0 +1,84 @@
+<div class="user-detail-company-info qt-mb-8">
+    <div
+        class="user-detail-company-info__header qt-pos-rel pointer"
+        (click)="toggleContainer = !toggleContainer"
+    >
+        <div class="user-detail-company-info__title">
+            <i class="icn-sm icon__companies qt-bg-contain qt-sz-16 qt-mr-8"></i>
+            {{getCompanyName()}}
+        </div>
+        <i class="icn-sm report-caret-icon pointer"></i>
+    </div>
+    <div
+        class="ticket-detail-contact__body"
+        *ngIf="toggleContainer"
+    >
+        <div class="qt-inputs-row">
+            <div class="qt-input-block qt-f100">
+                <app-drop-down
+                    #jobTitleDp
+                    [title]="'Job Title'"
+                    [placeholder]="'Select Job Title'"
+                    [list]="jobTitleList"
+                    [field]="'name'"
+                    [search]="true"
+                    [change]="true"
+                    [editItem]="customerCompaniesInfo.jobTitleDto"
+                    (onSelectedItem)="onSelectJobTitle($event)"
+                ></app-drop-down>
+            </div>
+        </div>
+        <div class="qt-inputs-row">
+            <div class="qt-input-block qt-f100">
+                <app-drop-down
+                    #userRolesDP
+                    *ngIf="customerRoleStateService.isGetUserRole"
+                    [title]="'Permission Role'"
+                    [placeholder]="'Select role'"
+                    [list]="userRoles"
+                    [field]="'name'"
+                    [search]="true"
+                    [change]="true"
+                    [editItem]="customerCompaniesInfo.customerUserRole"
+                    (onSelectedItem)="onSelectUserRole($event)"
+                ></app-drop-down>
+            </div>
+        </div>
+        <div class="qt-inputs-row">
+            <div class="qt-input-block">
+                <div class="qt-df qt-jc-sb qt-ai-c">
+                    <div class="user-detail__row-info-label">Updates</div>
+                    <div
+                        class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"
+                        *ngIf="getPermissions('EDIT_USERS')"
+                    ></div>
+                </div>
+                <user-default-subscription
+                    [isDisabled]="!getPermissions('EDIT_USERS')"
+                    [mode]="MODE_EDIT_SUBSCRIPTION"
+                    [defaultSubscriptions]="customerCompaniesInfo.defaultSubscriptions"
+                    (onChange)="onChangeDefaultSubscriptions($event)"
+                ></user-default-subscription>
+            </div>
+        </div>
+        <div class="qt-inputs-row">
+            <div class="qt-input-block">
+                <div class="qt-df qt-ai-c qt-mt-15">
+                    <label
+                        class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
+                        [attr.for]="'access-' + i"
+                    >
+                        <input
+                            [attr.id]="'access-' + i"
+                            type="checkbox"
+                            [(ngModel)]="customerCompaniesInfo.hasAccess"
+                            [disabled]="!customerCompaniesInfo.customerUserRole"
+                        >
+                        <span></span>
+                        <div class="qt-ml-8">Provide access and send an invite</div>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

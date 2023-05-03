@@ -39,6 +39,7 @@
     </td>
     <td
         class="users-table__company"
+        [ngClass]="{'users-table__company-full': type === TYPE_LIST_ALL_USERS}"
         *ngIf="type === TYPE_LIST_ALL_USERS || type === TYPE_LIST_MARKETING_USERS"
         (click)="showDetailUser()"
     >
@@ -97,7 +98,7 @@
     </td>
     <td
         class="users-table__subscription"
-        *ngIf="type === TYPE_LIST_ALL_USERS || type === TYPE_LIST_COMPANY_USERS"
+        *ngIf="type === TYPE_LIST_COMPANY_USERS"
     >
         <user-table-default-subscription
             class="users-table__subscription--dropdown"
