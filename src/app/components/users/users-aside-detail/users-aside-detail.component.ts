@@ -98,7 +98,7 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
       if (!this.open) return;
       if ((data.action === 'USER_SAVED' || data.action === 'USER_ARCHIVED') && data.data.accountType !== "TECH") {
         if (this.user.id === data.data.id) {
-          this.user.onEdit(data.data);
+          this.user.onEdit(new User(data.data));
           this.usersStateService.setUserForEdit(new User(data.data));
         }
       }
@@ -210,6 +210,9 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
+  }
+  public trackById(index, item) {
+    return item.companyId;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

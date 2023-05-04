@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { UserCustomerCompaniesInfo } from '../../class/user-customer-companies-info';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CrmCompanyJobTitle } from 'src/app/components/setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
@@ -21,6 +21,7 @@ import { UserCustomerCompaniesDefaultSubscribtionAdd } from '../../class/user-cu
 export class UsersAsideDetailCompanyInfoComponent implements OnInit, OnDestroy {
   @Input() customerCompaniesInfo: UserCustomerCompaniesInfo;
   @Input() user: UserProfile = new UserProfile();
+  @Output() onUpdate = new EventEmitter<any>();
   @ViewChild('userRolesDP') userRolesDP: DropDownComponent;
   toggleContainer: boolean = false;
   MODE_EDIT_SUBSCRIPTION = MODE_EDIT_SUBSCRIPTION;
@@ -49,9 +50,11 @@ export class UsersAsideDetailCompanyInfoComponent implements OnInit, OnDestroy {
   }
   onSelectJobTitle(data) {
     this.customerCompaniesInfo.setJobTitleDto(data);
+    this.onUpdate.emit(null);
   }
   onSelectUserRole(data) {
     this.customerCompaniesInfo.setUserRole(data);
+    this.onUpdate.emit(null);
   }
   getCompanyName() {
     return this.companiesStateService.getCompanies().find(item => item.id == this.customerCompaniesInfo.companyId).name;

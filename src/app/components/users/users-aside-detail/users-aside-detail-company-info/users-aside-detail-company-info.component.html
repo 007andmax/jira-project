@@ -10,35 +10,51 @@
         <i class="icn-sm report-caret-icon pointer"></i>
     </div>
     <div
-        class="ticket-detail-contact__body"
+        class="user-detail-company-info__body"
         *ngIf="toggleContainer"
     >
         <div class="qt-inputs-row">
-            <div class="qt-input-block qt-f100">
+            <div class="qt-input-block qt-editable-dropdown qt-mb-16">
+                <div class="qt-df qt-jc-sb qt-ai-c">
+                    <label class="qt-input-block__label">Job Title</label>
+                    <div
+                        class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"
+                        *ngIf="getPermissions('EDIT_USERS')"
+                    ></div>
+                </div>
                 <app-drop-down
                     #jobTitleDp
-                    [title]="'Job Title'"
+                    class="user-detail-edit-company"
                     [placeholder]="'Select Job Title'"
                     [list]="jobTitleList"
                     [field]="'name'"
                     [search]="true"
                     [change]="true"
+                    [isDisabled]="!getPermissions('EDIT_USERS')"
                     [editItem]="customerCompaniesInfo.jobTitleDto"
                     (onSelectedItem)="onSelectJobTitle($event)"
                 ></app-drop-down>
             </div>
         </div>
         <div class="qt-inputs-row">
-            <div class="qt-input-block qt-f100">
+            <div class="qt-input-block qt-editable-dropdown qt-mb-16">
+                <div class="qt-df qt-jc-sb qt-ai-c">
+                    <label class="qt-input-block__label">Permission Role</label>
+                    <div
+                        class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"
+                        *ngIf="getPermissions('EDIT_USERS')"
+                    ></div>
+                </div>
                 <app-drop-down
                     #userRolesDP
+                    class="user-detail-edit-company"
                     *ngIf="customerRoleStateService.isGetUserRole"
-                    [title]="'Permission Role'"
                     [placeholder]="'Select role'"
                     [list]="userRoles"
                     [field]="'name'"
                     [search]="true"
                     [change]="true"
+                    [isDisabled]="!getPermissions('EDIT_USERS')"
                     [editItem]="customerCompaniesInfo.customerUserRole"
                     (onSelectedItem)="onSelectUserRole($event)"
                 ></app-drop-down>
