@@ -39,7 +39,7 @@ export class ExcelService {
     console.log("array", array);
     let str = '';
     let row = '';
-    if (type === 'software') {
+    if (type === 'software' || type === 'Software List') {
       row = 'S.No,';
 
       for (let index in headerList) {
@@ -47,12 +47,12 @@ export class ExcelService {
       }
     }
     row = row.slice(0, -1);
-    if (type === 'software') {
+    if (type === 'software' || type === 'Software List') {
       str += row + '\r\n';
     }
     for (let i = 0; i < array.length; i++) {
       let line = '';
-      if (type === 'software') [
+      if (type === 'software' || type === 'Software List') [
         line = (i + 1) + ''
       ]
       for (let index in headerList) {
