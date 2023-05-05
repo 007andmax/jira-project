@@ -23,7 +23,6 @@ import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { UploadAreaProgressComponent } from 'src/app/components/shared/upload-area/upload-area-progress/upload-area-progress.component';
 import { TicketProfileFormUpdateProductsComponent } from './ticket-profile-form-update/ticket-profile-form-update-products/ticket-profile-form-update-products.component';
 import { TicketProfileFormUpdateServicesComponent } from './ticket-profile-form-update/ticket-profile-form-update-services/ticket-profile-form-update-services.component';
-import { TicketProfileFormUpdateSupportComponent } from './ticket-profile-form-update/ticket-profile-form-update-support/ticket-profile-form-update-support.component';
 import { TicketEditAsideDevicesComponent } from '../ticket-edit-aside-devices/ticket-edit-aside-devices.component';
 import { TicketEditAsideCompanyInfoComponent } from '../ticket-edit-aside-company-info/ticket-edit-aside-company-info.component';
 import { TicketEditAsideUsersComponent } from '../ticket-edit-aside-users/ticket-edit-aside-users.component';
@@ -77,7 +76,6 @@ import { CompanyInfoHistoryModule } from '../ticket-edit-aside-company-info/comp
         TicketProfileUpdatesServiceComponent,
         TicketProfileFormUpdateProductsComponent,
         TicketProfileFormUpdateServicesComponent,
-        TicketProfileFormUpdateSupportComponent,
         TicketEditAsideDevicesComponent,
         TicketEditAsideCompanyInfoComponent,
         TicketEditAsideUsersComponent,
