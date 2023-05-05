@@ -114,7 +114,7 @@ export class UsersService {
     return this.http.put(this.apiUrl + `subscription/defaultSubscriptions`, data);
   }
   public setCustomSubscriptions(id, subscriptions) {
-    return this.http.put(this.apiUrl + `subscription/customSubscription/${id}`, subscriptions);
+    return this.http.put(this.apiUrl + `subscription/modify/customSubscription/${id}`, subscriptions);
   }
   public addCustomSubscriptions(id, usersId) {
     return this.http.put(this.apiUrl + `users/customSubscription/${id}`, usersId);

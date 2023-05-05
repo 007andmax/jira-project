@@ -11,6 +11,7 @@ export class UserFilter {
     filterTop: Array<FilterListTop> = [new FilterListTop('name', 'ASC'),
     new FilterListTop('company', ''),
     new FilterListTop('industry', ''),
+    new FilterListTop('portalAccessStatus', ''),
     new FilterListTop('primaryEmail', ''),
     new FilterListTop('contact', ''),
     new FilterListTop('tickets', '')];
@@ -130,17 +131,22 @@ export class UserFilter {
             if (field === 'company') {
                 this.clearFilter();
                 if (sort === '' || sort === 'DESC') {
-
                     this.filterTop[index].filter = 'ASC';
                     this.onFilterCompany(reqUsers, companies);
-
                 } else {
-
                     this.filterTop[index].filter = 'DESC';
                     reqUsers.reverse();
                 }
-
-
+            }
+            if (field === 'portalAccessStatus') {
+                this.clearFilter();
+                if (sort === '' || sort === 'DESC') {
+                    this.filterTop[index].filter = 'ASC';
+                    this.onFilterPortalAccessStatus(reqUsers);
+                } else {
+                    this.filterTop[index].filter = 'DESC';
+                    reqUsers.reverse();
+                }
             }
             if (field === 'industry') {
                 this.clearFilter();
@@ -239,7 +245,10 @@ export class UserFilter {
                 1 : ((next.toLowerCase() > first.toLowerCase()) ? -1 : 0)
         });
     }
-
+    private onFilterPortalAccessStatus(reqUsers) {
+        reqUsers.sort((a, b) => (a.portalAccessStatus.toLowerCase() > b.portalAccessStatus.toLowerCase()) ?
+            1 : (b.portalAccessStatus.toLowerCase() > a.portalAccessStatus.toLowerCase() ? -1 : 0));
+    }
     private onFilterPrimaryEmail(reqUsers) {
         reqUsers.sort((a, b) => (a.primaryEmail.toLowerCase() > b.primaryEmail.toLowerCase()) ?
             1 : (b.primaryEmail.toLowerCase() > a.primaryEmail.toLowerCase() ? -1 : 0));

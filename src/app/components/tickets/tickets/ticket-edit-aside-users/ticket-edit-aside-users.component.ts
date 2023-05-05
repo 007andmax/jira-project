@@ -70,17 +70,18 @@ export class TicketEditAsideUsersComponent implements OnInit, OnDestroy {
     setTimeout(() => {
 
       let stompClient = this.usersRealTimeService.changeSubscriptionsUsers.subscribe(newChange => {
-        if (newChange.action === 'SUBSCRIPTION_SAVED') {
+        if (newChange.action === 'DEFAULT_SUBSCRIPTION_SAVED') {
           const reqIndex = this.reqUsers.findIndex((item) => item.id === newChange.data.userId);
-          if (reqIndex > -1) {
-            this.reqUsers[reqIndex].changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
-            this.reqUsers[reqIndex].changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
-          }
+          if (reqIndex > -1) this.reqUsers[reqIndex].changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data));
           const userIndex = this.users.findIndex((item) => item.id === newChange.data.userId);
-          if (userIndex > -1) {
-            this.users[userIndex].changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
-            this.users[userIndex].changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
-          }
+          if (userIndex > -1) this.users[userIndex].changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data));
+          this.cd.detectChanges();
+        }
+        if (newChange.action === 'CUSTOM_SUBSCRIPTION_SAVED') {
+          const reqIndex = this.reqUsers.findIndex((item) => item.id === newChange.data.userId);
+          if (reqIndex > -1) this.reqUsers[reqIndex].changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
+          const userIndex = this.users.findIndex((item) => item.id === newChange.data.userId);
+          if (userIndex > -1) this.users[userIndex].changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
           this.cd.detectChanges();
         }
       });

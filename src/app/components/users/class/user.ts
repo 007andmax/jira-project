@@ -13,6 +13,7 @@ export class User {
     accountType: string;
     avatar: UserAvatar;
     company: UserCompany;
+    portalAccessStatus: string;
     contact: any;
     deletedAt: number;
     designation: string;

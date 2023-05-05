@@ -56,6 +56,13 @@
     </td>
     <td
         class="users-table__company"
+        (click)="showDetailUser()"
+        *ngIf="type !== TYPE_LIST_MARKETING_USERS"
+    >
+        <span>{{ user.portalAccessStatus }}</span>
+    </td>
+    <td
+        class="users-table__company"
         *ngIf="type === TYPE_LIST_COMPANY_USERS"
         (click)="showDetailUser()"
     >

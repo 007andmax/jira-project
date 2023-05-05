@@ -83,13 +83,14 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
     })
     let stompClient = this.usersRealTimeService.changeSubscriptionsUsers.subscribe(newChange => {
       if (!this.open) return;
-      if (newChange.action === 'SUBSCRIPTION_SAVED') {
-        if (this.user.id === newChange.data.userId) {
-          this.user.setDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
-          this.user.setCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
-          this.usersStateService.getuserForEdit().changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
-          this.usersStateService.getuserForEdit().changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
-        }
+      if (newChange.action === 'DEFAULT_SUBSCRIPTION_SAVED' && this.user.id === newChange.data.userId) {
+        this.user.setDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
+        this.usersStateService.getuserForEdit().changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
+        this.cd.detectChanges();
+      }
+      if (newChange.action === 'CUSTOM_SUBSCRIPTION_SAVED' && this.user.id === newChange.data.userId) {
+        this.user.setCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
+        this.usersStateService.getuserForEdit().changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
         this.cd.detectChanges();
       }
     });
@@ -123,18 +124,15 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
   }
   private onInitSubscribe() {
     setTimeout(() => {
-
       let stompClient = this.usersRealTimeService.changeSubscriptionsUsers.subscribe(newChange => {
-        if (newChange.action === 'SUBSCRIPTION_SAVED') {
-
-          if (this.user.id === newChange.data.userId) {
-            this.user.changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
-            this.user.changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
-            this.usersStateService.getuserForEdit().changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
-            this.usersStateService.getuserForEdit().changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
-
-          }
-
+        if (newChange.action === 'DEFAULT_SUBSCRIPTION_SAVED' && this.user.id === newChange.data.userId) {
+          this.user.setDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
+          this.usersStateService.getuserForEdit().changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
+          this.cd.detectChanges();
+        }
+        if (newChange.action === 'CUSTOM_SUBSCRIPTION_SAVED' && this.user.id === newChange.data.userId) {
+          this.user.setCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
+          this.usersStateService.getuserForEdit().changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
           this.cd.detectChanges();
         }
       });
