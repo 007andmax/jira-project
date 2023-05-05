@@ -1,7 +1,7 @@
 <aside class="right-sidebar script-sidebar opened">
     <div>
-        <div class="script-side-heder">
-            <h2>Script Library</h2>
+        <div class="script-side-header">
+            <div class="script-side-header__title">Script Library</div>
             <a
                 href="javascript:;"
                 class="qt-aside__close-modal icon__close"
@@ -49,47 +49,25 @@
                         >
                             <li *ngFor="let script of myScriptListFilter">
                                 <div class="script-left">
-                                    <h5>{{script.title}}</h5>
-                                    <span>{{script.command}}</span>
+                                    <div class="script-left__title">{{script.title}}</div>
+                                    <span class="script-left__text">{{script.command}}</span>
                                     <span class="clone-cat">Cloned Scripts</span>
                                 </div>
                                 <div class="script-right">
-                                    <a
-                                        href="javascript:;"
-                                        class="play-btn"
-                                        data-tooltip="Run Script"
-                                        (click)="copyToTerminal(script.command, script.type, true)"
+                                    <div
+                                      class="qt-button --square-md --gray pointer qt-mr-8 device-tooltip"
+                                      data-tooltip="Run Script"
+                                      (click)="copyToTerminal(script.command, script.type, true)"
                                     >
-                                        <img
-                                            src="/html/assets/img/device/play-script.svg"
-                                            alt="play-script"
-                                            title="play-script"
-                                        >
-                                    </a>
-                                    <!-- <a
-                      href="javascript:;"
-                      class="play-btn"
-                      data-tooltip="Clone Script"
-                      (click)="cloneScript(script.id)"
-                    >
-                      <img
-                        src="/html/assets/img/device/copy-script.svg"
-                        alt="copy-script"
-                        title="copy-script"
-                      />
-                    </a> -->
-                                    <a
-                                        href="javascript:;"
-                                        class="view-btn"
-                                        data-tooltip="View Script"
-                                        (click)="viewScriptDetail(script);"
+                                      <div class="icon__play-script qt-sz-16 qt-bg-contain "></div>
+                                    </div>
+                                    <div
+                                      class="qt-button --square-md --gray pointer qt-bg-contain device-tooltip"
+                                      data-tooltip="View Script"
+                                      (click)="viewScriptDetail(script);"
                                     >
-                                        <img
-                                            src="/html/assets/img/device/view-script.svg"
-                                            alt="view-script"
-                                            title="view-script"
-                                        >
-                                    </a>
+                                      <div class="icon__view qt-sz-16 qt-bg-contain"></div>
+                                    </div>
                                 </div>
                             </li>
                         </ul>
@@ -134,35 +112,25 @@
                         >
                             <li *ngFor="let shared of sharedScriptListFilter">
                                 <div class="script-left">
-                                    <h5>{{shared.title}}</h5>
-                                    <span>{{shared.command}}</span>
+                                    <div class="script-left__title">{{shared.title}}</div>
+                                    <span class="script-left__text">{{shared.command}}</span>
                                     <!-- <span class="clone-cat">Cloned Scripts</span> -->
                                 </div>
                                 <div class="script-right">
-                                    <a
-                                        href="javascript:;"
-                                        class="play-btn"
-                                        data-tooltip="Clone Script"
-                                        (click)="cloneScript(shared.id)"
+                                    <div
+                                      class="qt-button --square-md --gray pointer qt-mr-8 device-tooltip"
+                                      data-tooltip="Clone Script"
+                                      (click)="cloneScript(shared.id)"
                                     >
-                                        <img
-                                            src="/html/assets/img/device/copy-script.svg"
-                                            alt="copy-script"
-                                            title="copy-script"
-                                        >
-                                    </a>
-                                    <a
-                                        href="javascript:;"
-                                        class="view-btn"
-                                        data-tooltip="View Script"
-                                        (click)="viewScriptDetail(shared);"
+                                      <div class="icon__copy qt-sz-16 qt-bg-contain"></div>
+                                    </div>
+                                    <div
+                                      class="qt-button --square-md --gray pointer device-tooltip"
+                                      data-tooltip="View Script"
+                                      (click)="viewScriptDetail(shared);"
                                     >
-                                        <img
-                                            src="/html/assets/img/device/view-script.svg"
-                                            alt="view-script"
-                                            title="view-script"
-                                        >
-                                    </a>
+                                      <div class="icon__view qt-sz-16 qt-bg-contain"></div>
+                                    </div>
                                 </div>
                             </li>
                         </ul>

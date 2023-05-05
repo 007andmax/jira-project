@@ -22,11 +22,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   @ViewChild(NgbDatepicker) d: NgbDatepicker;
   url = environment.apiUrl + 'upload';
   formData: FormData;
-  files: UploadFile[] = [];
-  uploadInput: EventEmitter<UploadInput> = new EventEmitter<UploadInput>();
-  humanizeBytes: Function = humanizeBytes
   dragOver: boolean;
-  options: UploaderOptions = { concurrency: 1, maxUploads: 10, maxFileSize: 1000000 };
   show = false;
   deviceDetail: any = {};
   windows_info: string = '';
@@ -48,69 +44,19 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
   logicalDisk: any = [];
   virusInfo: any = [];
-
-
   showInput = true;
   progressClass = 'p20';
   visible = false;
-  editNote = false;
-  create = false;
   type = '';
   _id = '';
   DateFormat = CONFIGCONSTANTS.DateFormat1;
   myDateValue: Date;
-
   sub: Subscription = new Subscription();
   constructor(private hardwareService: HardwareService,
     private deviceDetailService: DeviceDetailService,
     private toastr: ToastrService) {
   }
 
-  onUploadOutput(output: UploadOutput): void {
-    if (output.type === 'allAddedToQueue') {
-      const event: UploadInput = {
-        type: 'uploadAll',
-        url: this.url,
-        method: 'POST',
-        data: { foo: 'bar' }
-      };
-      this.uploadInput.emit(event);
-    } else if (output.type === 'addedToQueue' && typeof output.file !== 'undefined') {
-      this.files.push(output.file);
-    } else if (output.type === 'uploading' && typeof output.file !== 'undefined') {
-      const index = this.files.findIndex(file => typeof output.file !== 'undefined' && file.id === output.file.id);
-      this.files[index] = output.file;
-    } else if (output.type === 'cancelled' || output.type === 'removed') {
-      this.files = this.files.filter((file: UploadFile) => file !== output.file);
-    } else if (output.type === 'dragOver') {
-      this.dragOver = true;
-    } else if (output.type === 'dragOut') {
-      this.dragOver = false;
-    } else if (output.type === 'drop') {
-      this.dragOver = false;
-    } else if (output.type === 'rejected' && typeof output.file !== 'undefined') {
-
-    }
-    // this.files = this.files.filter(file => file.progress.status !== UploadStatus.Done);
-  }
-  startUpload(): void {
-    const event: UploadInput = {
-      type: 'uploadAll',
-      url: this.url,
-      method: 'POST',
-      data: { foo: 'bar' }
-    };
-    this.uploadInput.emit(event);
-  }
-  cancelUpload(id: string): void {
-    this.uploadInput.emit({ type: 'cancel', id: id });
-  }
-  removeFile(id: string): void {
-    this.uploadInput.emit({ type: 'remove', id: id });
-  }
-  removeAllFiles(): void {
-    this.uploadInput.emit({ type: 'removeAll' });
-  }
   onChangeInstallDate(data) {
     this.system.install_date = data;
     this.system.install_dateTime = new Date(data.year, data.month - 1, data.day).getTime();
@@ -269,8 +215,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   convertToGB(value) {
     return (parseInt(value) / 1024 / 1024 / 1024).toFixed(2)
   }
-
-
 
   format(date: NgbDateStruct | null): string {
     return date ? date.day + '/' + date.month + '/' + date.year : '';
