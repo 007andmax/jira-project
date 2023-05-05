@@ -1,0 +1,113 @@
+<main class="terminal-page-area">
+    <div class="cmn-wrapper">
+        <div class="device-container">
+            <div class="page-container terminal">
+                <!-- Page Title -->
+                <div class="page-header qt-df qt-jc-sb qt-ai-c qt-mb-20">
+                    <div class="device-page-header">Terminal</div>
+                    <div class="page-header-opt">
+                        <div class="update-info">
+                            <a
+                                class="Command"
+                                [ngClass]="{'active': scriptTyped == 'cmd'}"
+                                (click)="switchTerminal('cmd')"
+                            >
+                                Command Line
+                            </a>
+                            <a
+                                class="Power"
+                                [ngClass]="{'active': scriptTyped == 'powershell'}"
+                                (click)="switchTerminal('powershell')"
+                            >
+                                Power Shell
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Page Content -->
+                <div class="contant-area">
+                    <div class="terminal-area">
+                        <div
+                            id="terminal"
+                            class="terminal-box"
+                            [ngStyle]="{'background-color':scriptTyped == 'powershell' ? '#012456' : '#151b21' }"
+                        >
+                            <div class="terminal-box__text" *ngFor="let split of splitCommand">
+                                <span [textContent]="split"></span>
+                            </div>
+                            <!-- <textarea>C:\Users\Sam\Desktop></textarea> -->
+                        </div>
+                        <div class="terminal-btn-row">
+                            <textarea
+                                id="editCmd"
+                                class="editCmd"
+                                [(ngModel)]="editCmd"
+                                rows="4"
+                                placeholder="> Enter a command"
+                                (keyup.enter)="setHeight('enter');"
+                                (keyup.backspace)="setHeight('backspace');"
+                            ></textarea>
+                            <button
+                                id="button-cmd"
+                                type="button"
+                                class="qt-button terminal-btn-row__button"
+                                (click)="copyToTerminalFunc(editCmd, '', false);"
+                            >
+                                Run Command
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Right Side bar -->
+        <terminal-aside
+            #aside
+            [submitted]="submitted"
+            [showDescription]="showDescription"
+            [commandList]="commandList"
+            [loading]="loading"
+            [_id]="_id"
+            [cmdCategoryReadList]="cmdCategoryReadList"
+            (onCopyToTerminal)="copyToTerminal($event.cmd, $event.type, $event.file)"
+            (onOpenRunScript)="openRunScript()"
+            [openEditModal]="openEditModal"
+            [getCommandList]="getCommandList"
+            (onOpenModal)="openModal($event.id, $event.title, $event.flag)"
+        ></terminal-aside>
+        <!-- Script Sidebar -->
+        <terminal-run-script
+            *ngIf="runScript"
+            [runScript]="runScript"
+            [myScriptList]="myScriptList"
+            [myScriptListFilter]="myScriptListFilter"
+            [sharedScriptListFilter]="sharedScriptListFilter"
+            [sharedScriptList]="sharedScriptList"
+            [sharedScriptModal]="sharedScriptModal"
+            [cmdCategoryReadList]="cmdCategoryReadList"
+            (onCopyToTerminal)="copyToTerminal($event.cmd, $event.type, $event.file)"
+            (onViewScriptDetail)="viewScriptDetail($event)"
+            (onCloneScript)="cloneScript($event)"
+            (onClosed)="runScript = false"
+        ></terminal-run-script>
+        <!-- Script Details Sidebar -->
+        <terminal-script-detail
+            [scriptDetail]="scriptDetail"
+            [loading]="loading"
+            [lineNumberDetail]="lineNumberDetail"
+            [showDescription]="showDescription"
+            [cmdCategoryReadList]="cmdCategoryReadList"
+            [scriptDetailModal]="scriptDetailModal"
+            [submitted]="submitted"
+            [getCommandList]="getCommandList"
+            (onEmptyScriptDetail)="emptyScriptDetail()"
+            (onCloneScript)="cloneScript($event)"
+            (onCopyScriptToggle)="copyScriptToggle($event.data, $event.type)"
+        ></terminal-script-detail>
+        <!-- Delete Confirmation -->
+    </div>
+</main>
+<div
+    class="loading"
+    *ngIf="loading"
+></div>

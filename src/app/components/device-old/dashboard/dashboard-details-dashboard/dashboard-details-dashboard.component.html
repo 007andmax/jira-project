@@ -1,0 +1,118 @@
+<div class="dashboard-col  work-group">
+    <div class="col-title qt-df qt-ai-c qt-mb-16">
+        <span class="hardware-ico">
+            <img
+                src="html/assets/img/device/computer.svg"
+                alt="computer"
+            >
+        </span>
+        <span class="edit-field qt-ml-4">
+            <input
+                type="text"
+                class="dashboard-list__input dashboard-list__input--main-title --editable"
+                [(ngModel)]="label"
+                (blur)="saveLabel();"
+            >
+        </span>
+    </div>
+    <ul class="dashboard-list">
+        <li class="dashboard-list__item">
+            <span class="dashboard-list__title">Host Name</span>
+            <div class="dashboard-list__text">{{hostName || 'N/A'}}</div>
+        </li>
+        <li class="dashboard-list__item">
+            <span class="dashboard-list__title">Warranty</span>
+            <span
+                class="edit-field"
+                *ngIf="system.warrantyTime"
+            >
+                <app-date-picker
+                    [formatDate]="formatDate"
+                    [editMode]="true"
+                    [useMinDate]="false"
+                    [editDate]="system.warrantyTime"
+                    (onChange)="changeWarranty($event)"
+                    class="dashboard-datepicker__wrap"
+                ></app-date-picker>
+            </span>
+        </li>
+        <li class="dashboard-list__item">
+            <span class="dashboard-list__title">Windows Info</span>
+            <div class="dashboard-list__text">{{windows_info || 'N/A'}}</div>
+
+
+        </li>
+        <li class="dashboard-list__item">
+            <span class="dashboard-list__title">Asset Tag</span>
+            <span
+                id="tag"
+                class="edit-field"
+                data-tooltip
+            >
+                <input
+                    type="text"
+                    class="dashboard-list__input --editable"
+                    [(ngModel)]="system.asset_tag"
+                    (blur)="updateDashboard('asset_tag')"
+                >
+            </span>
+        </li>
+        <li class="dashboard-list__item">
+            <span class="dashboard-list__title">Manufacturer</span>
+            <span
+                id="manufacture"
+                class="edit-field"
+                data-tooltip
+            >
+                <input
+                    type="text"
+                    class="dashboard-list__input --editable"
+                    [(ngModel)]="system.manufacturer"
+                    (blur)="updateDashboard('manufacturer')"
+                >
+            </span>
+        </li>
+        <li class="dashboard-list__item">
+            <span class="dashboard-list__title">IP</span>
+            <div class="dashboard-list__text">{{networkAdapters.ip_address || 'N/A'}}</div>
+        </li>
+        <li class="dashboard-list__item">
+            <span class="dashboard-list__title">Install Date</span>
+            <span
+                class="edit-field"
+                *ngIf="system.install_dateTime"
+            >
+                <app-date-picker
+                    [formatDate]="formatDate"
+                    [editMode]="true"
+                    [useMinDate]="false"
+                    [editDate]="system.install_dateTime"
+                    (onChange)="changeInstallDate($event)"
+                    class="dashboard-datepicker__wrap"
+                ></app-date-picker>
+            </span>
+        </li>
+        <li class="dashboard-list__item">
+            <span class="dashboard-list__title">Computer Model</span>
+            <span class="edit-field">
+                <input
+                    type="text"
+                    class="dashboard-list__input --editable"
+                    [(ngModel)]="system.model"
+                    (blur)="updateDashboard('model')"
+                >
+            </span>
+        </li>
+        <li class="dashboard-list__item">
+            <span class="dashboard-list__title">System Type</span>
+            <span class="edit-field">
+                <input
+                    type="text"
+                    class="dashboard-list__input --editable"
+                    [(ngModel)]="system.architecture"
+                    (blur)="updateDashboard('architecture')"
+                >
+            </span>
+        </li>
+    </ul>
+</div>

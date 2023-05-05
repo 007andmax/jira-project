@@ -79,6 +79,7 @@
             <div class="sidebar-system__info-title">Warranty</div>
             <app-date-picker
                 #datePickerWarranty
+                [container]="'body'"
                 [type]="'INPUT'"
                 [editMode]="true"
                 [editDate]="getSystemField('warranty') || getToDayDate()"
@@ -99,6 +100,7 @@
             <app-date-picker
                 [type]="'INPUT'"
                 [editMode]="true"
+                [container]="'body'"
                 [editDate]="getSystemField('install_date') || getToDayDate()"
                 [useMinDate]="false"
                 [placement]="'top-right'"

@@ -1,0 +1,29 @@
+<div class="hardware-col">
+    <div class="hardware-col-title">
+        <span class="hardware-ico">
+            <img
+                src="/html/assets/img/device/motherboard.svg"
+                alt="motherboard"
+            >
+        </span>
+        <div class="hardware-col__title">Motherboard</div>
+    </div>
+    <ul class="hardware-col__list">
+        <li class="hardware-col__list-item">
+            <span class="hardware-col__list-title">Manufacturer:</span>
+            <div class="hardware-col__list-text">{{motherBoard.manufacturer || 'N/A'}}</div>
+        </li>
+        <li class="hardware-col__list-item">
+            <span class="hardware-col__list-title">Model:</span>
+            <div class="hardware-col__list-text">{{motherBoard.serial_number || 'N/A'}}</div>
+        </li>
+        <li class="hardware-col__list-item">
+            <span class="hardware-col__list-title">BIOS Manufacture:</span>
+            <div class="hardware-col__list-text">{{bios.manufacturer || 'N/A'}}</div>
+        </li>
+        <li class="hardware-col__list-item">
+            <span class="hardware-col__list-title">BIOS Model:</span>
+            <div class="hardware-col__list-text">BIOS Date {{(bios.release_date | date : DateTimeFormat) || 'N/A'}} Version: {{bios.version || 'N/A'}}</div>
+        </li>
+    </ul>
+</div>

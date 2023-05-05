@@ -24,7 +24,7 @@
         <div class="company-device-aside__header qt-df qt-ai-c qt-jc-sb">
             <div class="qt-df qt-ai-c">
                 <div
-                    class="icon qt-sz-24 qt-mr-12"
+                    class="icon qt-sz-24 qt-mr-12 qt-bg-contain"
                     [ngClass]="{'icon__computer' : currentDevice.iconName === 'workstation' || !currentDevice.iconName,
               'icon__tablet' : currentDevice.iconName === 'device',
             'icon__printer' : currentDevice.iconName === 'printer',
@@ -52,14 +52,14 @@
                         class="qt-dropdown-menu --open-bot qt-overflow-v"
                         ngbDropdownMenu
                     >
-                        <!-- <li
-                          class="pointer"
-                          ngbDropdownItem
-                          (click)="gotiDetailDevice()"
-                      >
-                          <div class="qt-ic-c icon__go-to qt-pointer qt-sz-20 qt-mr-12"></div>
-                          Device Detail
-                      </li> -->
+                        <li
+                            class="pointer"
+                            ngbDropdownItem
+                            (click)="gotiDetailDevice()"
+                        >
+                            <div class="qt-ic-c icon__go-to qt-pointer qt-sz-20 qt-mr-12"></div>
+                            Device Detail
+                        </li>
                         <li
                             class="pointer"
                             ngbDropdownItem

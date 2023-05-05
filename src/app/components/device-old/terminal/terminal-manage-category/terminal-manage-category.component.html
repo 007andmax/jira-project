@@ -1,0 +1,73 @@
+<div class="archive-modal device-details__manage-category-popup">
+    <button
+        type="button"
+        class="close-modal"
+        aria-label="Close"
+        (click)="closeModal()"
+    >
+    </button>
+    <div class="archive-modal__body">
+        <h3 class="qt-mb-16">Manage Category</h3>
+        <div class="terminal-category-list">
+            <form novalidate>
+                <div
+                    class="qt-inputs-row qt-ai-c"
+                    *ngFor="let category of cmdCategoryList; let i = index;"
+                >
+                    <div class="qt-input-block qt-f100">
+                        <input
+                            *ngIf="!category.create"
+                            type="text"
+                            class="form-input"
+                            name="cat_{{i}}"
+                            [(ngModel)]="category.name"
+                            (focus)="category.edit = true;"
+                        >
+                        <input
+                            *ngIf="category.create"
+                            type="text"
+                            class="form-input"
+                            name="cat_{{i}}"
+                            [(ngModel)]="category.name"
+                            placeholder="Write category Name"
+                        >
+                    </div>
+                    <div class="qt-input-block qt-auto">
+                        <a
+                            *ngIf="!category.create && category.edit"
+                            href="javascript:;"
+                            class="icon__save-changes sz-20 qt-bg-contain pointer qt-dib"
+                            data-tooltip="Edit"
+                            (click)="updateCategory(category, i)"
+                        >
+                        </a>
+                        <a
+                            *ngIf="category.create"
+                            href="javascript:;"
+                            class="icon__save-changes qt-sz-20 qt-bg-contain pointer qt-dib"
+                            data-tooltip="Add"
+                            (click)="createCategory(category)"
+                        >
+                        </a>
+                        <a
+                            *ngIf="!category.edit && !category.create"
+                            href="javascript:;"
+                            (click)="deleteCategory(category.id, i)"
+                            class="icon__remove qt-sz-20 qt-bg-contain pointer qt-dib"
+                            data-tooltip="Delete"
+                        >
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <button
+            type="button"
+            class="qt-button qt-mt-20"
+            (click)="addNewCategory()"
+        >
+            <span class="icon__add--white qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
+            Add New Category
+        </button>
+    </div>
+</div>

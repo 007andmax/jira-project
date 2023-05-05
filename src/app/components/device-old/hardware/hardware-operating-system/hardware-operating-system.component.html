@@ -1,0 +1,33 @@
+<div class="hardware-col">
+    <div class="hardware-col-title">
+        <span class="hardware-ico">
+            <img
+                src="/html/assets/img/device/operating-system.svg"
+                alt="Operating System"
+            >
+        </span>
+        <div class="hardware-col__title">Operating System</div>
+    </div>
+    <ul class="hardware-col__list">
+        <li class="hardware-col__list-item">
+            <span class="hardware-col__list-title">Name:</span>
+            <div class="hardware-col__list-text">{{system.caption || 'N/A'}}</div>
+        </li>
+        <li class="hardware-col__list-item">
+            <span class="hardware-col__list-title">IP:</span>
+            <div class="hardware-col__list-text">{{networkAdapters.ip_address || 'N/A'}}</div>
+        </li>
+        <li class="hardware-col__list-item">
+            <span class="hardware-col__list-title">OS Build:</span>
+            <div class="hardware-col__list-text">{{system.version || 'N/A'}}</div>
+        </li>
+        <li class="hardware-col__list-item">
+            <span class="hardware-col__list-title">Version:</span>
+            <div class="hardware-col__list-text">{{system.release_id || 'N/A'}}</div>
+        </li>
+        <li class="hardware-col__list-item">
+            <span class="hardware-col__list-title">Service Pack:</span>
+            <div class="hardware-col__list-text">{{system.service_pack || 'N/A'}}</div>
+        </li>
+    </ul>
+</div>

@@ -68,7 +68,20 @@
         <div class="ticket-updates__ticket-info">
             <div class="ticket-updates__ticket-header qt-df">
                 <div class="ticket-updates__ticket-header-name">Product Name</div>
-                <div class="ticket-updates__ticket-header-price">Price</div>
+                <div class="ticket-updates__ticket-header-price qt-df qt-ai-c">
+                    Price
+                    <app-dynamic-tooltip
+                        [content]="'Applied discount - ' + product.discountAmount + ((product.discountType === 'PERCENT') ? '%' : ' amount')"
+                        [position]="'top'"
+                        #productTooltip
+                    ></app-dynamic-tooltip>
+                    <div
+                        class="icon__discount qt-ml-4 qt-sz-16 qt-ic-c"
+                        *ngIf="product.discountAmount"
+                        (mouseenter)="productTooltip.show($event.target)"
+                        (mouseleave)="productTooltip.hide()"
+                    ></div>
+                </div>
                 <div class="ticket-updates__ticket-header-qty">Qty</div>
                 <div class="ticket-updates__ticket-header-total">Total</div>
             </div>
@@ -76,10 +89,7 @@
                 <div class="ticket-updates__ticket-title">
                     <pre [textContent]="product.item.description"></pre>
                 </div>
-                <div
-                    class="ticket-updates__ticket-price"
-                    [textContent]="'$' + getPrice()"
-                ></div>
+                <div class="ticket-updates__ticket-price">{{'$' + getPrice()}}</div>
                 <div
                     class="ticket-updates__ticket-qty"
                     [textContent]="product.quantity"
@@ -91,49 +101,44 @@
             </div>
         </div>
         <div class="qt-df qt-ai-c qt-jc-sb qt-mt-8">
-            <div
-              class="ticket-updates__ticket-price qt-fs-0"
-            >
-              <span>Serial number - </span>
-              <span
-                [textContent]="product.serialNumber"
-              >
-              </span>
+            <div class="ticket-updates__ticket-price qt-fs-0">
+                <span>Serial number -</span>
+                <span [textContent]="product.serialNumber"></span>
             </div>
             <div class="qt-ml-16 qt-df qt-ai-c">
-              <app-tech-users
-                [isDisabled]="isBlockChange"
-                [type]="'DETAIL_TICKET'"
-                [editMode]="true"
-                [selectedMode]="'SINGLE'"
-                [editUsers]="userService"
-                [users]="listTechUsers"
-                [placement]="'top-end'"
-                (usersChange)="onChangeUser($event)"
-              ></app-tech-users>
-              <app-date-picker
-                [isDisabled]="isBlockChange"
-                [placement]="'bottom-right'"
-                [useMinDate]="false"
-                [editMode]="true"
-                [editDate]="product.date"
-                [type]="'DETAIL_TICKET_UPDATE'"
-                (onChange)="onChangeDatePicker($event)"
-              ></app-date-picker>
-              <div
-                class="qt-button qt-button--with-icon --sm --gray qt-ml-8 button-mark-complete"
-                (click)="setComplete()"
-              >
-                <i
-                  class="icon__inactive qt-bg-contain qt-mr-6 icn-16"
-                  *ngIf="product.completed"
-                ></i>
-                <i
-                  class="icon__active qt-bg-contain qt-mr-6 icn-16"
-                  *ngIf="!product.completed"
-                ></i>
-                <span [textContent]="(!product.completed) ? 'Mark Completed' : 'Mark Incomplete'"></span>
-              </div>
+                <app-tech-users
+                    [isDisabled]="isBlockChange"
+                    [type]="'DETAIL_TICKET'"
+                    [editMode]="true"
+                    [selectedMode]="'SINGLE'"
+                    [editUsers]="userService"
+                    [users]="listTechUsers"
+                    [placement]="'top-end'"
+                    (usersChange)="onChangeUser($event)"
+                ></app-tech-users>
+                <app-date-picker
+                    [isDisabled]="isBlockChange"
+                    [placement]="'bottom-right'"
+                    [useMinDate]="false"
+                    [editMode]="true"
+                    [editDate]="product.date"
+                    [type]="'DETAIL_TICKET_UPDATE'"
+                    (onChange)="onChangeDatePicker($event)"
+                ></app-date-picker>
+                <div
+                    class="qt-button qt-button--with-icon --sm --gray qt-ml-8 button-mark-complete"
+                    (click)="setComplete()"
+                >
+                    <i
+                        class="icon__inactive qt-bg-contain qt-mr-6 icn-16"
+                        *ngIf="product.completed"
+                    ></i>
+                    <i
+                        class="icon__active qt-bg-contain qt-mr-6 icn-16"
+                        *ngIf="!product.completed"
+                    ></i>
+                    <span [textContent]="(!product.completed) ? 'Mark Completed' : 'Mark Incomplete'"></span>
+                </div>
             </div>
         </div>
     </div>

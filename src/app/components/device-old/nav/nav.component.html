@@ -1,0 +1,71 @@
+<div class="header-top">
+    <div class="avn-dental">
+        <span class="av-short">
+            {{commonServices.getCharacter(currentCompany.name) || ''}}
+        </span>
+    </div>
+    <div
+        class="qt-color-white qt-lh-154 qt-mb-12"
+        [textContent]="currentCompany.name"
+    ></div>
+    <div class="user-info-hp">
+        <span class="user-hp-dp">
+            <!-- <img src="assets/images/user.jpg" alt="user" /> -->
+            <img
+                [src]="checkLogo()"
+                *ngIf="checkLogo()"
+                alt="user"
+            >
+            <div
+                class="nav-header__account-info-avatar tooltip-max--content"
+                [textContent]="getCurrentUserName()[0]"
+                *ngIf="!checkLogo()"
+            ></div>
+        </span>
+        <div class="user-log-info">
+            <div
+                class="user-log-info__title"
+                [textContent]="getCurrentUserName()"
+            ></div>
+            <span>logged in user</span>
+        </div>
+        <span class="user-status online">online</span>
+    </div>
+</div>
+<nav>
+    <ul class="list-unstyled">
+        <li
+            class="pointer"
+            [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{ exact: true }"
+        >
+            <a (click)="goToDashboard()">Dashboard</a>
+        </li>
+        <li
+            class="pointer"
+            [routerLinkActive]="['active']"
+            *ngIf="deviceType !== 'printer'"
+        >
+            <a (click)="goToHardware()">Hardware</a>
+        </li>
+        <li
+            class="pointer"
+            [routerLinkActive]="['active']"
+            *ngIf="deviceType !== 'printer'"
+        >
+            <a (click)="goToSoftware()">Software list</a>
+        </li>
+        <!-- <li [routerLinkActive]="['active']"><a routerLink="/device/startup-programes">Startup Programmes</a></li>
+    <li [routerLinkActive]="['active']"><a routerLink="/device/services">Services</a></li>
+    <li [routerLinkActive]="['active']"><a routerLink="/device/antivirus">Antivirus</a></li> - -->
+        <li
+            class="pointer"
+            [routerLinkActive]="['active']"
+        >
+            <a (click)="goToTerminal()">Terminal</a>
+        </li>
+        <!-- <li [routerLinkActive]="['active']"><a routerLink="/device/windows-update">Window Update</a></li>
+    <li [routerLinkActive]="['active']"><a routerLink="/device/file-explorer">File Explorer</a></li>
+    <li [routerLinkActive]="['active']"><a routerLink="/device/password">Passwords</a></li> -->
+    </ul>
+</nav>

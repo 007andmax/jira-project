@@ -1,0 +1,212 @@
+<aside class="right-sidebar script-sidebar opened">
+    <div>
+        <div class="script-side-heder">
+            <h2>Script Library</h2>
+            <a
+                href="javascript:;"
+                class="qt-aside__close-modal icon__close"
+                title="Close"
+                (click)="close()"
+            >
+            </a>
+        </div>
+        <ngb-tabset>
+            <ngb-tab [title]="'My Scripts (' + myScriptList.length + ')'">
+                <ng-template ngbTabContent>
+                    <div class="cmn-tbs-content myScript">
+                        <form method="POST">
+                            <div class="qt-inputs-row">
+                              <div class="qt-input-block qt-f50 qt-flex-md-100">
+                                <app-drop-down
+                                  #selectCategory
+                                  [sort]="false"
+                                  [title]="'Category'"
+                                  [placeholder]="'Select Category'"
+                                  [field]="'name'"
+                                  [list]="cmdCategoryReadList"
+                                  (onSelectedItem)="filterMyScript($event)"
+                                ></app-drop-down>
+                              </div>
+                              <div class="qt-input-block qt-f50 qt-flex-md-100">
+                                <label class="qt-input-block__label" for="command">Search Scripts</label>
+                                <div class="qt-input-search">
+                                  <input
+                                    type="text"
+                                    placeholder="Search Scripts"
+                                    class="form-input script-search"
+                                    [(ngModel)]="myScriptModal.search"
+                                    (keyup)="filterMyScript(undefined)"
+                                    id="my_search"
+                                    name="my_search"
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                        </form>
+                        <ul
+                            class="list-unstyled script-list qt-mt-24"
+                            *ngIf="myScriptListFilter.length > 0"
+                        >
+                            <li *ngFor="let script of myScriptListFilter">
+                                <div class="script-left">
+                                    <h5>{{script.title}}</h5>
+                                    <span>{{script.command}}</span>
+                                    <span class="clone-cat">Cloned Scripts</span>
+                                </div>
+                                <div class="script-right">
+                                    <a
+                                        href="javascript:;"
+                                        class="play-btn"
+                                        data-tooltip="Run Script"
+                                        (click)="copyToTerminal(script.command, script.type, true)"
+                                    >
+                                        <img
+                                            src="/html/assets/img/device/play-script.svg"
+                                            alt="play-script"
+                                            title="play-script"
+                                        >
+                                    </a>
+                                    <!-- <a
+                      href="javascript:;"
+                      class="play-btn"
+                      data-tooltip="Clone Script"
+                      (click)="cloneScript(script.id)"
+                    >
+                      <img
+                        src="/html/assets/img/device/copy-script.svg"
+                        alt="copy-script"
+                        title="copy-script"
+                      />
+                    </a> -->
+                                    <a
+                                        href="javascript:;"
+                                        class="view-btn"
+                                        data-tooltip="View Script"
+                                        (click)="viewScriptDetail(script);"
+                                    >
+                                        <img
+                                            src="/html/assets/img/device/view-script.svg"
+                                            alt="view-script"
+                                            title="view-script"
+                                        >
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab [title]="'Shared Script Library (' + sharedScriptList.length + ')'">
+                <ng-template ngbTabContent>
+                    <div class="cmn-tbs-content script-library">
+                        <form method="POST">
+                            <div class="qt-inputs-row">
+                              <div class="qt-input-block qt-f50 qt-flex-md-100">
+                                <div class="qt-input-block__label">Category</div>
+                                <app-drop-down
+                                  #selectCategory
+                                  [sort]="false"
+                                  [placeholder]="'Select Category'"
+                                  [field]="'name'"
+                                  [list]="cmdCategoryReadList"
+                                  (onSelectedItem)="filterSharedScript($event)"
+                                ></app-drop-down>
+                              </div>
+                              <div class="qt-input-block qt-f50 qt-flex-md-100">
+                                <label class="qt-input-block__label">Search Scripts</label>
+                                <div class="qt-input-search">
+                                  <input
+                                    type="text"
+                                    placeholder="Search description or filename"
+                                    class="form-input script-search"
+                                    (keyup)="filterSharedScript(undefined)"
+                                    id="shared_search"
+                                    name="shared_search"
+                                    [(ngModel)]="sharedScriptModal.search"
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                        </form>
+                        <ul
+                            class="list-unstyled script-list qt-mt-24"
+                            *ngIf="sharedScriptListFilter.length > 0"
+                        >
+                            <li *ngFor="let shared of sharedScriptListFilter">
+                                <div class="script-left">
+                                    <h5>{{shared.title}}</h5>
+                                    <span>{{shared.command}}</span>
+                                    <!-- <span class="clone-cat">Cloned Scripts</span> -->
+                                </div>
+                                <div class="script-right">
+                                    <a
+                                        href="javascript:;"
+                                        class="play-btn"
+                                        data-tooltip="Clone Script"
+                                        (click)="cloneScript(shared.id)"
+                                    >
+                                        <img
+                                            src="/html/assets/img/device/copy-script.svg"
+                                            alt="copy-script"
+                                            title="copy-script"
+                                        >
+                                    </a>
+                                    <a
+                                        href="javascript:;"
+                                        class="view-btn"
+                                        data-tooltip="View Script"
+                                        (click)="viewScriptDetail(shared);"
+                                    >
+                                        <img
+                                            src="/html/assets/img/device/view-script.svg"
+                                            alt="view-script"
+                                            title="view-script"
+                                        >
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                        <!-- <ul class="list-unstyled pagination" *ngIf="sharedScriptListFilter.length > 0">
+                <li class="next">
+                  <a href="javascript:;">
+                    <img
+                      src="/html/assets/img/device/prev-pag.svg"
+                      alt="prev"
+                      title="prev"
+                    />
+                  </a>
+                </li>
+                <li>
+                  <a href="javascript:;">1</a>
+                </li>
+                <li>
+                  <a href="javascript:;">2</a>
+                </li>
+                <li class="current">
+                  <a href="javascript:;">3</a>
+                </li>
+                <li>
+                  <a href="javascript:;">4</a>
+                </li>
+                <li>
+                  <a href="javascript:;">…</a>
+                </li>
+                <li>
+                  <a href="javascript:;">17</a>
+                </li>
+                <li class="prev">
+                  <a href="javascript:;">
+                    <img
+                      src="/html/assets/img/device/next-pag.svg"
+                      alt="next-pag"
+                      title="next-pag"
+                    />
+                  </a>
+                </li>
+              </ul> -->
+                    </div>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
+    </div>
+</aside>

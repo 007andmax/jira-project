@@ -1,0 +1,47 @@
+/*** All css files include ***/
+@import '../../../../assets/scss/device/variable';
+@import '../../../../assets/scss/device/mixin';
+@import '../../../../assets/scss/device/custom';
+
+
+
+.software-programes {
+    .page-header {
+        .selected-item {
+            a {
+                margin-left: 16px;
+                margin-top: -2px;
+            }
+        }
+    }
+    table{
+        &:last-child{
+            .action{
+                ul.dropdown-menu{
+                    bottom: 40px !important;
+                    top: auto !important;
+                }
+            }
+        }
+        .Status {
+            width: 20%;
+        }
+        .Impact {
+            width: 17%;
+        }
+        .s-name{
+            width: 29%;
+        }
+        .pulisher{
+            width: 24%;
+        }
+        .action {
+            width: 5%;
+            .more {
+                width: 15px;
+                display: inline-block;
+            }
+           
+    }
+}
+} 
