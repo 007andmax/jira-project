@@ -29,6 +29,7 @@ export class UserUpdate {
   customSubscriptionIds: Array<string> = [];
   customerCompaniesInfo: Array<UserCustomerCompaniesInfoAdd> = [];
   userIndustryId: string;
+  sendPortalInvitation: boolean;
   constructor(data: UserProfile, user: User) {
     this.phoneNumbers = data.phoneNumbers.map((item, index) => {
       if (!user.phoneNumbers || user.phoneNumbers && user.phoneNumbers.length === 0) {
@@ -56,7 +57,7 @@ export class UserUpdate {
     this.isContact = user.isContact;
     this.priority = user.priority;
     this.userEnabled = user.userEnabled;
-
+    this.sendPortalInvitation = data.sendPortalInvitation;
     this.jobDescription = data.jobDescription;
     this.jobTypeId = data.jobTypeId;
     this.userIndustryId = data.userIndustryId;

@@ -26,6 +26,7 @@ import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { Subscription } from 'rxjs';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { UserCustomerCompaniesDefaultSubscribtionAdd } from '../class/user-customer-companies-default-subscribtion-add';
+import { TechUsersService } from 'src/app/services/setting/tech-users.service';
 
 @Component({
   selector: 'app-users-table',
@@ -60,6 +61,7 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private crmStateService: CrmStateService,
     private permissionsService: PermissionsService,
+    private techUsersService: TechUsersService,
     private elRef: ElementRef) { }
 
 
@@ -80,6 +82,11 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     }).subscribe(data => {
       this.customSubscription.toggleIsUpdate(false);
     })
+  }
+  sendInvite(userEmail) {
+    this.techUsersService
+      .verifyUserEmail(userEmail)
+      .subscribe();
   }
   getCompaniesNames() {
     return this.user.customerCompaniesInfo.map(item => (this.companiesStateService.getCompanies().find(company => company.id == item.companyId) ? this.companiesStateService.getCompanies().find(company => company.id == item.companyId).name : ''));

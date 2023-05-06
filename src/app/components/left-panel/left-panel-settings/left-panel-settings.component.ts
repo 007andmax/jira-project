@@ -66,7 +66,7 @@ export class LeftPanelSettingsComponent implements OnInit {
       || state === 'crm-settings'
       || state === 'marketing-email'
       || state === 'device-setting-component'
-      || state === 'customer-permissions')
+      || state === 'customer-portal')
   }
   openPanel() {
     this.onOpenPanel.emit(null);

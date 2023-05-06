@@ -113,7 +113,7 @@ const routes: Routes = [
 
   },
   {
-    path: ':company/setting/customer-permissions',
+    path: ':company/setting/customer-portal',
     loadChildren: './components/setting/customer-permissions/customer-permissions.module#CustomerPermissionsModule',
     canActivate: [PermissionCustomerPermissionsService, PermissionTechUserService]
   },

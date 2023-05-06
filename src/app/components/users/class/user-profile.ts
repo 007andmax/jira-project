@@ -29,6 +29,7 @@ export class UserProfile {
     jobTitleId: string;
     jobTypeId: string;
     userIndustryId: string;
+    sendPortalInvitation: boolean = false;
     constructor() {
 
     }

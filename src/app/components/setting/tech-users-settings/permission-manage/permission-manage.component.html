@@ -115,6 +115,7 @@
                                 <label
                                     class="qt-checkbox"
                                     for="{{ permission }}_{{ role.id }}"
+                                    [ngClass]="{'--disabled':isPermissionDisabled(permission, role)}"
                                 >
                                     <input
                                         type="checkbox"

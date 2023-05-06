@@ -24,6 +24,7 @@ export class UserAdd {
   customSubscriptionIds: Array<string> = [];
   customerCompaniesInfo: Array<UserCustomerCompaniesInfoAdd> = [];
   userIndustryId: string;
+  sendPortalInvitation: boolean;
   constructor(data: UserProfile) {
     if (data.phoneNumbers.length === 1 && data.phoneNumbers[0].number === '') {
       this.phoneNumbers = [];
@@ -46,5 +47,6 @@ export class UserAdd {
     this.jobTitleId = data.jobTitleId;
     this.userIndustryId = data.userIndustryId;
     this.customerCompaniesInfo = data.customerCompaniesInfo.filter(item => item.companyId).map(item => new UserCustomerCompaniesInfoAdd(item));
+    this.sendPortalInvitation = data.sendPortalInvitation;
   }
 }

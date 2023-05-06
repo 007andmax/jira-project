@@ -130,7 +130,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/setting/ticket-settings`)) this.state = 'ticket-settings';
           if (window.location.href.includes(`/setting/crm-settings`)) this.state = 'crm-settings';
           if (window.location.href.includes(`/setting/marketing-email`)) this.state = 'marketing-email';
-          if (window.location.href.includes(`/setting/customer-permissions`)) this.state = 'customer-permissions';
+          if (window.location.href.includes(`/setting/customer-portal`)) this.state = 'customer-portal';
 
           if (window.location.href.includes(`/support-page`)) this.state = 'support-page';
           if (window.location.href.includes(`/users`)) this.state = 'new-users';
@@ -332,7 +332,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'device-setting-component') this.goToLink('setting/deviceSetting');
       if (this.state === 'ticket-settings') this.goToLink('setting/ticket-settings');
       if (this.state === 'marketing-email') this.goToLink('setting/marketing-email');
-      if (this.state === 'customer-permissions') this.goToLink('setting/customer-permissions');
+      if (this.state === 'customer-portal') this.goToLink('setting/customer-portal');
 
       if (this.state === 'new-users') this.goToLink('users');
       if (this.state === 'marketing') this.goToLink('marketing');

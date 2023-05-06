@@ -398,6 +398,24 @@
         </ng-template>
         <div class="qt-inputs-row">
             <div class="qt-input-block">
+                <div class="qt-df qt-ai-c qt-mt-15">
+                    <label
+                        class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
+                        for="sendPortalInvitation"
+                    >
+                        <input
+                            id="sendPortalInvitation"
+                            type="checkbox"
+                            [(ngModel)]="user.sendPortalInvitation"
+                        >
+                        <span></span>
+                        <div class="qt-ml-8">Send Invite</div>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="qt-inputs-row">
+            <div class="qt-input-block">
                 <label class="qt-input-block__label">Marketing Subscription</label>
                 <user-custom-subscription
                     [customSubscriptions]="user.customSubscriptions"
