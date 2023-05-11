@@ -278,10 +278,10 @@ export class AppComponent implements OnInit {
         this.ticketsStateService.onChangeTypeFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
         this.ticketsStateService.onChangeLeftPanelFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
         this.router.navigate(
-          [`${data.name.replaceAll(' ', '')}/tickets/`]);
+          [`${data.domain}/tickets/`]);
       }
       if (this.router.url === "/" && this.currentUser.role === "SUPER_ADMIN" && this.state == '') this.router.navigate(
-        [`${data.name.replaceAll(' ', '')}/support-page/`]);
+        [`${data.domain}/support-page/`]);
     })
     this.appService.onToggleMobileAside.subscribe(data => {
       if (data) document.querySelector("html").classList.add("--scrollLock");

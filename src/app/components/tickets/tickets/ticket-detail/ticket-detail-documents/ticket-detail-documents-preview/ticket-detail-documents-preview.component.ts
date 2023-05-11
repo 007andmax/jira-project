@@ -43,7 +43,7 @@ export class TicketDetailDocumentsPreviewComponent implements OnInit, OnDestroy 
     })
   }
   previewDocument() {
-    const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/preview/${this.document.id}`;
+    const url = `/#/${this.companiesStateService.getCurrentCompany().domain}/documents/preview/${this.document.id}`;
     window.open(url, '_blank');
   }
   close() {
@@ -57,7 +57,7 @@ export class TicketDetailDocumentsPreviewComponent implements OnInit, OnDestroy 
   }
   editDocument() {
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/edit/`, this.document.id]);
+      [`${this.companiesStateService.getCurrentCompany().domain}/documents/edit/`, this.document.id]);
   }
   exportPdf() {
     const url = `/documents/export?id=${this.document.id}`;

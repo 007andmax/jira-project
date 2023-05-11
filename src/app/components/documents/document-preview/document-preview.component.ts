@@ -65,7 +65,7 @@ export class DocumentPreviewComponent implements OnInit {
   editDocument() {
     this.leftPanelStateService.hideLeftPanel(false);
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/edit/`, this.document.id]);
+      [`${this.companiesStateService.getCurrentCompany().domain}/documents/edit/`, this.document.id]);
   }
   getLastEdit() {
     let date = new Date(this.document.updatedAt);

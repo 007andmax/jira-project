@@ -3,6 +3,7 @@ import { UserStatistic } from '../../app/components/users/class/user-statistic';
 import { CompanyLogo } from '../../app/components/companies/class/company-logo';
 import { CurrentUserWizardTracker } from './current-user-wizard-tracker';
 import { CrmCompanyJobTitle } from 'src/app/components/setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
+import { CurrentUserCustomerCompaniesInfo } from './current-user-customer-companies-info';
 
 export class CurrentUser {
     id: string = null;
@@ -46,6 +47,7 @@ export class CurrentUser {
     jobTitleId: string;
     jobTypeId: string;
     userTOTP: any;
+    customerCompaniesInfo: Array<CurrentUserCustomerCompaniesInfo> = [];
     constructor(data = null) {
         if (data) {
             for (const key in data) {

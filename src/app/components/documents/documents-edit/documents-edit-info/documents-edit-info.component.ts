@@ -43,7 +43,7 @@ export class DocumentsEditInfoComponent extends DocumentsAddInfoComponent {
   }
   goToDocumentCategory() {
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/category/`, this.categoryId]);
+      [`${this.companiesStateService.getCurrentCompany().domain}/documents/category/`, this.categoryId]);
   }
   onChangeLinked(data: Array<DocumentCompanyUser>) {
     this.documentEdit.setLinked(data.filter(item => item.type === "USER").map(item => item.id),

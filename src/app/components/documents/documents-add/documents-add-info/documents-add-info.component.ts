@@ -76,7 +76,7 @@ export class DocumentsAddInfoComponent implements OnInit {
   public goToDocumentsList() {
     if (this.companyId) {
       this.router.navigate(
-        [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.companyId, 'documents']);
+        [`${this.companiesStateService.getCurrentCompany().domain}/company/`, this.companyId, 'documents']);
     } else {
       this.leftPanelStateService.goToState('new-documents');
     }

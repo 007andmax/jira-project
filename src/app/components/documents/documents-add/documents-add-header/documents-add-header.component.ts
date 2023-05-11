@@ -58,7 +58,7 @@ export class DocumentsAddHeaderComponent implements OnInit, OnDestroy {
     this.documentsStateService.setDocumentForRemove(this.documentEdit);
   }
   previewDocument() {
-    const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/preview/${this.documentEdit.id}`;
+    const url = `/#/${this.companiesStateService.getCurrentCompany().domain}/documents/preview/${this.documentEdit.id}`;
     window.open(url, '_blank');
   }
   onToggleLeftPanel() {
@@ -76,7 +76,7 @@ export class DocumentsAddHeaderComponent implements OnInit, OnDestroy {
   }
   goToCloneDocument() {
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/add`],
+      [`${this.companiesStateService.getCurrentCompany().domain}/documents/add`],
       {
         queryParams: {
           'clone_document': this.documentEdit.id

@@ -43,7 +43,7 @@ export class LeftPanelSuperAdminCategoriesActionsComponent implements OnInit {
   }
   addArticle() {
     this.supportPageCategoriesStateService.setMode("EDIT");
-    this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/support-page`, this.category.id]);
+    this.router.navigate([`${this.companiesStateService.getCurrentCompany().domain}/support-page`, this.category.id]);
     this.cd.detectChanges();
     this.onSelectCategory.emit(this.category);
   }

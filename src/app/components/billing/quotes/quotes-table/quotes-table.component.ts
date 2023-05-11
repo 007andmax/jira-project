@@ -155,7 +155,7 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
   }
   openTikcet(id) {
     this.ticketStateService.setTicketRoutingId(id);
-    const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/ticket/${id}`;
+    const url = `/#/${this.companiesStateService.getCurrentCompany().domain}/ticket/${id}`;
     window.open(url, '_blank');
   }
   goToQuoteEdit(quote) {

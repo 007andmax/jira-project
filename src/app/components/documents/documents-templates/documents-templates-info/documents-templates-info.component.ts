@@ -42,7 +42,7 @@ export class DocumentsTemplatesInfoComponent implements OnInit, OnDestroy {
   }
   goToCloneDocument() {
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/add`],
+      [`${this.companiesStateService.getCurrentCompany().domain}/documents/add`],
       {
         queryParams: {
           'clone_document': this.document.id
@@ -58,7 +58,7 @@ export class DocumentsTemplatesInfoComponent implements OnInit, OnDestroy {
   }
   editDocument() {
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/edit/`, this.document.id]);
+      [`${this.companiesStateService.getCurrentCompany().domain}/documents/edit/`, this.document.id]);
   }
   printPdf() {
     const url = `/documents/show/${this.document.id}/pdf`;

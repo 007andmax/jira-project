@@ -56,39 +56,39 @@ export class NavComponent implements OnInit, OnDestroy {
   }
   goToDashboard() {
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/dashboard/${this.type}/${this._id}`]);
+      [`${this.companiesStateService.getCurrentCompany().domain}/device/dashboard/${this.type}/${this._id}`]);
   }
   goToHardware() {
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/hardware/${this.type}/${this._id}`]);
+      [`${this.companiesStateService.getCurrentCompany().domain}/device/hardware/${this.type}/${this._id}`]);
   }
   goToSoftware() {
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/software/${this.type}/${this._id}`]);
+      [`${this.companiesStateService.getCurrentCompany().domain}/device/software/${this.type}/${this._id}`]);
   }
   goToStartProgrames() {
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/startup/${this.type}/${this._id}`]);
+      [`${this.companiesStateService.getCurrentCompany().domain}/device/startup/${this.type}/${this._id}`]);
   }
   goToServices() {
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/service/${this.type}/${this._id}`]);
+      [`${this.companiesStateService.getCurrentCompany().domain}/device/service/${this.type}/${this._id}`]);
   }
   goToAntivirus() {
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/antivirus/${this.type}/${this._id}`]);
+      [`${this.companiesStateService.getCurrentCompany().domain}/device/antivirus/${this.type}/${this._id}`]);
   }
   goToTerminal() {
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/terminal/${this.type}/${this._id}`]);
+      [`${this.companiesStateService.getCurrentCompany().domain}/device/terminal/${this.type}/${this._id}`]);
   }
   goToWindowUpdates() {
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/windows/${this.type}/${this._id}`]);
+      [`${this.companiesStateService.getCurrentCompany().domain}/device/windows/${this.type}/${this._id}`]);
   }
   goToProcesses() {
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/processes/${this.type}/${this._id}`]);
+      [`${this.companiesStateService.getCurrentCompany().domain}/device/processes/${this.type}/${this._id}`]);
   }
   getCurrentCompany(resp) {
     this.currentCompany = resp.name;

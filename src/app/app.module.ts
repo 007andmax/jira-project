@@ -110,6 +110,9 @@ import { GoogleAuthenticatorModule } from './components/shared/google-authentica
 import { SupportPageEditCategoryModule } from './components/super-admin/shared/support-page-edit-category/support-page-edit-category.module';
 import { TestPermissionService } from './services/test-permission/test-permission.service';
 import { ModalQuoteModule } from './services/modal/modal-quote/modal-quote.module';
+import { LeftPanelCustomerPortalComponent } from './components/customer-portal/left-panel-customer-portal/left-panel-customer-portal.component';
+import { LeftPanelCustomerPortalUsersComponent } from './components/customer-portal/left-panel-customer-portal/left-panel-customer-portal-users/left-panel-customer-portal-users.component';
+import { LeftPanelCustomerPortalModule } from './components/customer-portal/left-panel.module';
 declare var $: any;
 
 /**
@@ -136,7 +139,7 @@ declare var $: any;
     InventoryCheckUseComponent,
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
-    CannedResponsesAsideComponent,
+    CannedResponsesAsideComponent
   ],
   imports: [
     BrowserModule,
@@ -188,7 +191,8 @@ declare var $: any;
     ReportSendEmailModule,
     GoogleAuthenticatorModule,
     SupportPageEditCategoryModule,
-    ModalQuoteModule
+    ModalQuoteModule,
+    LeftPanelCustomerPortalModule
   ],
   entryComponents: [
     ConfirmComponent,

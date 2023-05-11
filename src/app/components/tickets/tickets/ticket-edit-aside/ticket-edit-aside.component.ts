@@ -210,7 +210,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     if (!this.getPermissions('VIEW_COMPANIES') && this.ticketProfile.ticketSource === 'FROM_EMAIL' && !this.checkExistServicesProducts() && this.getCompany(this.ticketProfile.company.id).isUnknown) return;
     this.companiesStateService.setCompanyRoutingId(this.ticketProfile.company.id);
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.ticketProfile.company.id, 'dashboard']);
+      [`${this.companiesStateService.getCurrentCompany().domain}/company/`, this.ticketProfile.company.id, 'dashboard']);
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
