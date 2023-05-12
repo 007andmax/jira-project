@@ -56,6 +56,7 @@ export class CurrentUser {
 
                 // }
             }
+            this.customerCompaniesInfo = data.customerCompaniesInfo.map(item => new CurrentUserCustomerCompaniesInfo(item));
         }
     }
 

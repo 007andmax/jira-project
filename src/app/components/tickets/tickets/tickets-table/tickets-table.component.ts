@@ -12,6 +12,7 @@ import { AppService } from 'src/app/states/app/app.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { Router } from '@angular/router';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 
 @Component({
@@ -41,13 +42,19 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     private router: Router,
     private companiesStateService: CompaniesStateService,
     private leftPanelStateService: LeftPanelStateService,
+    private customerPortalStateService: CustomerPortalStateService,
     private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
+    if (this.customerPortalStateService.isCustomerPortal) {
+      this.ticketsFilter.setFilter(JSON.parse(JSON.stringify(this.ticketsStateService.getTicketsFilter())));
+      console.log("this.ticketsFilter", this.ticketsFilter);
+    }
     /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
     /* START */
     this.ticketsFilter.setListType(this.ticketsStateService.getListType());
     /* END */
+
     this.ticketsStateService.getOnAddTicket().subscribe(data => {
       if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter, data) && !this.tickets.find(item => item.id == data.id) && !(this.page_number == 0 && this.showPreloader)) {
         this.tickets.unshift(data);

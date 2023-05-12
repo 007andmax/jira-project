@@ -286,6 +286,10 @@ export class TicketsService {
     return this.http.post(this.apiUrl + `v2/tickets/counts`, data);
   }
   public getTickets(listType, data) {
-    return this.http.post(this.apiUrl + `v2/tickets/getTickets?listType=${listType}`, data).pipe(map((data: any) => data.map(item => new Ticket(item))));
+    let headers = new HttpHeaders();
+    if (localStorage.getItem("company_info_id")) headers = new HttpHeaders({ 'company-id': localStorage.getItem("company_info_id") });
+    console.log(localStorage.getItem("company_info_id"));
+    console.log("headers", headers);
+    return this.http.post(this.apiUrl + `v2/tickets/getTickets?listType=${listType}`, data, { headers: headers }).pipe(map((data: any) => data.map(item => new Ticket(item))));
   }
 }

@@ -20,7 +20,6 @@
         <li
             [ngClass]="{'--active': listType === 'DASHBOARD' && activePage === 'new-tickets-dashboard'}"
             class="desktop-version"
-            (click)="goToBashboard()"
         >
             <div class="qt-df qt-ai-c">
                 <i class="icon__companies qt-bg-contain qt-sz-16 qt-mr-8"></i>
@@ -29,67 +28,114 @@
             <ul>
                 <a
                     href
-                    [link]="'billing-dashboard'"
+                    [link]="getLinkSection(customerCompany.clientCompany.id,'dashboard')"
                     target="_blank"
                     appRightClickBlank
+                    *ngIf="customerCompany.customerUserRole.getPermission('VIEW_MY_TICKETS')"
                 >
                     <li
                         [ngClass]="{'--active':activePage === 'company-dashboard'}"
-                        (click)="goToCompanySection('dashboard')"
+                        (click)="setCompnayIdInfo(customerCompany.clientCompany.id);goToCompanySection(customerCompany.clientCompany.id,'dashboard')"
                     >
                         Dashboard
                     </li>
                 </a>
                 <a
                     href
-                    [link]="'billing-dashboard'"
+                    [link]="'tickets'"
                     target="_blank"
                     appRightClickBlank
+                    *ngIf="customerCompany.customerUserRole.getPermission('VIEW_MY_TICKETS')"
                 >
                     <li
                         [ngClass]="{'--active':activePage === 'company-tickets'}"
-                        (click)="goToCompanySection('tickets')"
+                        (click)="setCompnayIdInfo(customerCompany.clientCompany.id);setTypeFilter(customerCompany,'ALL')"
                     >
                         Tickets
                     </li>
                 </a>
                 <a
                     href
-                    [link]="'billing-dashboard'"
+                    [link]="'invoices'"
                     target="_blank"
                     appRightClickBlank
+                    *ngIf="customerCompany.customerUserRole.getPermission('VIEW_ALL_INVOICES')"
                 >
                     <li
                         [ngClass]="{'--active':activePage === 'company-contracts'}"
-                        (click)="goToCompanySection('contracts')"
+                        (click)="setCompnayIdInfo(customerCompany.clientCompany.id);goToState('new-billable-invoices')"
                     >
                         Invoices
                     </li>
                 </a>
                 <a
                     href
-                    [link]="'billing-dashboard'"
+                    [link]="'users'"
                     target="_blank"
                     appRightClickBlank
+                    *ngIf="customerCompany.customerUserRole.getPermission('VIEW_MY_PROFILE')"
                 >
                     <li
                         [ngClass]="{'--active':activePage === 'company-user'}"
-                        (click)="goToCompanySection('user')"
+                        (click)="setCompnayIdInfo(customerCompany.clientCompany.id);goToAllUsers(customerCompany.clientCompany.id)"
                     >
                         Users
                     </li>
                 </a>
                 <a
                     href
-                    [link]="'billing-dashboard'"
+                    [link]="getLinkSection(customerCompany.clientCompany.id,'devices')"
                     target="_blank"
                     appRightClickBlank
+                    *ngIf="customerCompany.customerUserRole.getPermission('VIEW_ALL_DEVICES')"
                 >
                     <li
                         [ngClass]="{'--active':activePage === 'company-devices'}"
-                        (click)="goToCompanySection('devices')"
+                        (click)="setCompnayIdInfo(customerCompany.clientCompany.id);goToCompanySection(customerCompany.clientCompany.id,'devices')"
                     >
                         Devices
+                    </li>
+                </a>
+                <a
+                    href
+                    [link]="'quotes'"
+                    target="_blank"
+                    appRightClickBlank
+                    *ngIf="customerCompany.customerUserRole.getPermission('VIEW_ALL_QUOTES')"
+                >
+                    <li
+                        [ngClass]="{'--active':activePage === 'company-devices'}"
+                        (click)="setCompnayIdInfo(customerCompany.clientCompany.id);goToState('quotes-component')"
+                    >
+                        Quotes
+                    </li>
+                </a>
+                <a
+                    href
+                    [link]="'contracts'"
+                    target="_blank"
+                    appRightClickBlank
+                    *ngIf="customerCompany.customerUserRole.getPermission('VIEW_ALL_CONTRACTS')"
+                >
+                    <li
+                        [ngClass]="{'--active':activePage === 'company-devices'}"
+                        (click)="setCompnayIdInfo(customerCompany.clientCompany.id);goToState('new-contracts')"
+                    >
+                        Contracts
+                    </li>
+                </a>
+                <a
+                    href
+                    [link]="'payments'"
+                    target="_blank"
+                    appRightClickBlank
+                    *ngIf="customerCompany.customerUserRole.getPermission('VIEW_ALL_PAYMENTS')"
+                >
+                    <li
+                        [ngClass]="{'--active':activePage === 'company-devices'}"
+                        (click)="setCompnayIdInfo(customerCompany.clientCompany.id);goToState('new-payments-ng2')"
+                    >
+                        Payments
                     </li>
                 </a>
             </ul>

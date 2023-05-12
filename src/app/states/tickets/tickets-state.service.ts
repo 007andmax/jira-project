@@ -8,6 +8,7 @@ import { TicketsService } from '../../services/tickets/tickets.service';
 import { TicketsCounts } from '../../components/tickets/tickets/class/tickets-counts';
 import { TicketStatus } from 'src/app/components/setting/ticket-settings-page/tickets-status/class/ticket-status';
 import { StatusColor } from 'src/app/components/tickets/class/status-color';
+import { TicketsFilter } from 'src/app/components/tickets/tickets/class/tickets-filter';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,7 @@ export class TicketsStateService {
   ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET'];
   listStatusColor: Array<StatusColor> = [];
   ticketsStatus: Array<TicketStatus> = [];
+  ticketsFilter: TicketsFilter = new TicketsFilter();
   constructor(private ticketsRealTimeService: TicketsRealTimeService,
     private ticketsService: TicketsService) { }
 
@@ -168,7 +170,11 @@ export class TicketsStateService {
   public onInitActualNumber(data) {
     this.actualNumber.emit(data);
   }
+  public getTicketsFilter() {
+    return this.ticketsFilter;
+  }
   public onInitFilter(data) {
+    this.ticketsFilter = data;
     this.filter.emit(data);
   }
   public onColorStatus(data) {

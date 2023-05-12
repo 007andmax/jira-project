@@ -9,6 +9,7 @@ import { AppService } from '../app/app.service';
 import { MODE_USERS_LIST } from 'src/app/const/users';
 import { UserJobTitle } from 'src/app/components/users/class/user-job-title';
 import { UserRole } from 'src/app/components/users/class/user-role';
+import { CustomerPortalStateService } from '../customer-portal/customer-portal-state.service';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,7 @@ export class UsersStateService {
   userRoleForRemove: UserRole;
   constructor(private userService: UsersService,
     private appService: AppService,
+    private customerPortalStateService: CustomerPortalStateService,
     private usersRealTimeService: UsersRealTimeService) {
   }
   public onInit() {
@@ -98,8 +100,10 @@ export class UsersStateService {
   }
   public onInitGetCurrentUser() {
     this.userService.getCurrentUser().subscribe((data: any) => {
+      if (data.accountType == "TECH") localStorage.removeItem("company_info_id");
+      if (data.accountType == "CLIENT") this.customerPortalStateService.setCustomerPortal(true);
       this.currentUser = new CurrentUser(data);
-      this.onInitCurrentUser(data);
+      this.onInitCurrentUser(this.currentUser);
       if (this.currentUser.role !== "SUPER_ADMIN" && !this.isGetAllUsers) this.initGetAllUsers();
     })
   }
