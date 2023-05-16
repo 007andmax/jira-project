@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 import { environment } from "../../../environments/environment";
 import { Subject } from 'rxjs';
@@ -47,7 +47,11 @@ export class DevicesService {
     return this.http.get(this.apiUrl + `devices/networkScan?companyId=${companyId}`);
   }
   public getCompanyDevices(companyId) {
-    return this.http.get(this.apiUrl + `devices?companyId=${companyId}`);
+    let headers = new HttpHeaders();
+    if (localStorage.getItem("company_info_id")) headers = new HttpHeaders({ 'company-id': localStorage.getItem("company_info_id") });
+    console.log(localStorage.getItem("company_info_id"));
+    console.log("headers", headers);
+    return this.http.get(this.apiUrl + `devices?companyId=${companyId}`, { headers: headers });
   }
   public getDeviceExtended(companyId, agentId) {
     return this.http.get(this.apiUrl + `devices/extended?companyId=${companyId}&agentId=${agentId}`);

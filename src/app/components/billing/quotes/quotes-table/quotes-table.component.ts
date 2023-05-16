@@ -20,6 +20,7 @@ import { QuotePreview } from '../class/quote-preview';
 import { QuoteSort } from '../class/quote-sort';
 import { QuoteRealTimeService } from '../quote-realtime/quote-realtime.service';
 import { QuotesListService } from './services/quotes-list.service';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-quotes-table',
@@ -48,9 +49,13 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     private toastrProgressStateService: ToastrProgressStateService,
     private companiesStateService: CompaniesStateService,
     private ticketStateService: TicketStateService,
+    private customerPortalStateService: CustomerPortalStateService,
     private quoteServices: QuoteService,) { }
 
   ngOnInit() {
+    if (this.customerPortalStateService.isCustomerPortal) {
+      this.filter.setCompanyName(this.quoteStateService.getQuotesFilter().companyName);
+    }
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.onScroll();
     let getOnInitFilter = this.quoteStateService.getOnInitFilter().subscribe(data => {

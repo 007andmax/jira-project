@@ -20,6 +20,8 @@ import { PermissionReportsService } from './components/reports/permission-report
 import { PermissionTechUserService } from './services/users/permission-tech-user.service';
 import { TestPermissionService } from './services/test-permission/test-permission.service';
 import { PermissionCustomerPermissionsService } from './components/setting/customer-permissions/permission-customer-permissions.service';
+import { PermissionPaymentsService } from './components/billing/payments/permission-payments.service';
+import { PermissionQuotesService } from './components/billing/quotes/permission-quotes.service';
 
 const routes: Routes = [
 
@@ -68,7 +70,7 @@ const routes: Routes = [
   {
     path: ':domain/quotes',
     loadChildren: './components/billing/quotes/quotes.module#QuotesModule',
-    canActivate: [PermissionTechUserService]
+    canActivate: [PermissionQuotesService, PermissionTechUserService]
 
 
   },
@@ -260,7 +262,7 @@ const routes: Routes = [
   {
     path: ':domain/payments',
     loadChildren: './components/billing/payments/payments.module#PaymentsModule',
-    canActivate: [PermissionTechUserService]
+    canActivate: [PermissionTechUserService, PermissionPaymentsService]
 
 
   },

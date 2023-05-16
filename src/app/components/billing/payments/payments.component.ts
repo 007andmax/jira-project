@@ -13,6 +13,7 @@ import { InvoicesAsidePreviewComponent } from '../invoices/invoices-aside-previe
 import { PaymentsRealTimeService } from 'src/app/states/payments/payments-real-time.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'payments',
@@ -52,9 +53,13 @@ export class PaymentsComponent implements OnInit {
     private confirmStateService: ConfirmStateService,
     private paymentsRealTimeService: PaymentsRealTimeService,
     private leftPanelStateService: LeftPanelStateService,
+    private customerPortalStateService: CustomerPortalStateService,
     private paymentsListService: PaymentsListService) { }
 
   ngOnInit() {
+    if (this.customerPortalStateService.isCustomerPortal) {
+      this.paymentsFilter.setCompany(this.paymentsStateService.getPaymentsFilter().companyName);
+    }
     this.leftPanelStateService.setBillingPage('new-payments-ng2');
     document.body.querySelector(".main-container").scrollTo(0, 0);
     if (this.companiesStateService.getCompanies().length > 0) this.onScroll();

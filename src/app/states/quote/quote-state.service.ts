@@ -1,12 +1,13 @@
 import { EventEmitter, Inject, Injectable } from '@angular/core';
 import { QuotePreview } from '../../components/billing/quotes/class/quote-preview';
+import { QuoteFilter } from 'src/app/components/billing/quotes/class/quote-filter';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuoteStateService {
-
-  filter: EventEmitter<any> = new EventEmitter();
+  filter: QuoteFilter = new QuoteFilter();
+  onFilter: EventEmitter<any> = new EventEmitter();
   onPreview: EventEmitter<any> = new EventEmitter();
   onEdit: EventEmitter<any> = new EventEmitter();
   onCopy: EventEmitter<any> = new EventEmitter();
@@ -24,6 +25,12 @@ export class QuoteStateService {
 
   ) {
 
+  }
+  public setQuotesFilter(data) {
+    this.filter = data;
+  }
+  public getQuotesFilter() {
+    return this.filter;
   }
   public setQuoteForArchive(data) {
     this.quoteForArchive = data;
@@ -164,10 +171,10 @@ export class QuoteStateService {
   }
 
   public onInitFilter(data) {
-    this.filter.emit(data);
+    this.onFilter.emit(data);
   }
   public getOnInitFilter() {
-    return this.filter;
+    return this.onFilter;
   }
 
 

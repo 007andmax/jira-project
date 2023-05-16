@@ -209,8 +209,8 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }
-  public trackById(index, item) {
-    return item.companyId;
+  public trackByIndex(index, item) {
+    return index;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

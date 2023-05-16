@@ -32,15 +32,6 @@
             </div>
         </div>
         <div
-            class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
-            (click)="changePage('SUPPORT');onOpenPanel();panelSupport.onFilter('ALL')"
-            [ngClass]="{'--active':page === 'SUPPORT' }"
-            placement="right"
-            ngbTooltip="Support"
-        >
-            <div class="app-left-panel__menu-icon --quick-support"></div>
-        </div>
-        <div
             class="app-left-panel__menu-icon-wrap app-left-panel__menu-icon-wrap-settings qt-d-md-none pointer"
             (click)="changePage('SETTINGS');onOpenPanel();onChangeState('myprofile-component')"
             [ngClass]="{'--active':page === 'SETTINGS' }"

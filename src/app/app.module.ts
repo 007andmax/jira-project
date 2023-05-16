@@ -113,6 +113,8 @@ import { ModalQuoteModule } from './services/modal/modal-quote/modal-quote.modul
 import { LeftPanelCustomerPortalComponent } from './components/customer-portal/left-panel-customer-portal/left-panel-customer-portal.component';
 import { LeftPanelCustomerPortalUsersComponent } from './components/customer-portal/left-panel-customer-portal/left-panel-customer-portal-users/left-panel-customer-portal-users.component';
 import { LeftPanelCustomerPortalModule } from './components/customer-portal/left-panel.module';
+import { PermissionPaymentsService } from './components/billing/payments/permission-payments.service';
+import { PermissionQuotesService } from './components/billing/quotes/permission-quotes.service';
 declare var $: any;
 
 /**
@@ -237,7 +239,9 @@ declare var $: any;
     PermissionReportsService,
     PermissionTechUserService,
     PermissionSuperAdminService,
-    TestPermissionService
+    TestPermissionService,
+    PermissionPaymentsService,
+    PermissionQuotesService
   ],
   bootstrap: [AppComponent]
 })

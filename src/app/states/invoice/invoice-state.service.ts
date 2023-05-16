@@ -1,5 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Invoice } from '../../components/billing/invoices/class/invoice';
+import { InvoicesFilter } from 'src/app/components/billing/invoices/class/invoices-filter';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,15 @@ export class InvoiceStateService {
   filter: EventEmitter<any> = new EventEmitter();
   openPreviewAside: EventEmitter<any> = new EventEmitter();
   invoices: Array<Invoice> = [];
+  invoicesFilter: InvoicesFilter = new InvoicesFilter();
   constructor() { }
 
+  public setInvoicesFilter(data) {
+    this.invoicesFilter = data;
+  }
+  public getInvoicesFilter() {
+    return this.invoicesFilter;
+  }
   public getInvoices() {
     return this.invoices;
   }

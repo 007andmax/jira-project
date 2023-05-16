@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Payment } from '../../components/billing/payments/class/payment';
 import { map, tap } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
@@ -30,7 +30,11 @@ export class PaymentsService {
     return this.http.put(`${this.apiUrl}payments/refund`, data);
   }
   public getPayments(data) {
-    return this.http.post(`${this.apiUrl}payments`, data).pipe(map((res: any) => res.map(item => new Payment(item))));
+    let headers = new HttpHeaders();
+    if (localStorage.getItem("company_info_id")) headers = new HttpHeaders({ 'company-id': localStorage.getItem("company_info_id") });
+    console.log(localStorage.getItem("company_info_id"));
+    console.log("headers", headers);
+    return this.http.post(`${this.apiUrl}payments`, data, { headers: headers }).pipe(map((res: any) => res.map(item => new Payment(item))));
   }
   public export(type, data) {
     return this.http.post(`${this.apiUrl}reports/payment/${type}`, data);

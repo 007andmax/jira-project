@@ -12,6 +12,7 @@ import { InvoiceRealTimeService } from 'src/app/states/invoice/invoice-real-time
 import { InvoicesAsidePreviewComponent } from './invoices-aside-preview/invoices-aside-preview.component';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toastr-progress-state.service';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-invoices',
@@ -28,7 +29,6 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   public sort: string = '';
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
-
   // showPreviewInvoice: boolean = false;
   offset: number = 40;
   public direction: string = 'ASC';
@@ -45,9 +45,13 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private leftPanelStateService: LeftPanelStateService,
     private toastrProgressStateService: ToastrProgressStateService,
+    private customerPortalStateService: CustomerPortalStateService,
     private invoicesListService: InvoicesListService) { }
 
   ngOnInit() {
+    if (this.customerPortalStateService.isCustomerPortal) {
+      this.invoicesFilter.setCompany(this.invoiceStateService.getInvoicesFilter().companyName);
+    }
     this.leftPanelStateService.setBillingPage('new-billable-invoices');
     document.body.querySelector(".main-container").scrollTo(0, 0);
     if (this.companiesStateService.getCompanies().length > 0) this.onScroll();

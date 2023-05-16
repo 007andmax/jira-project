@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
 import { Invoice } from '../../components/billing/invoices/class/invoice';
 import { CompaniesStateService } from '../../states/company/companies-state.service';
@@ -64,6 +64,10 @@ export class InvoicesService {
     return this.http.post(`${this.apiUrl}receiptArchive/resend`, { ids: invoiceIds });
   }
   public getInvoices(data) {
-    return this.http.post(`${this.apiUrl}receivable`, data).pipe(map((res: any) => res.map(item => new Invoice(item))));
+    let headers = new HttpHeaders();
+    if (localStorage.getItem("company_info_id")) headers = new HttpHeaders({ 'company-id': localStorage.getItem("company_info_id") });
+    console.log(localStorage.getItem("company_info_id"));
+    console.log("headers", headers);
+    return this.http.post(`${this.apiUrl}receivable`, data, { headers: headers }).pipe(map((res: any) => res.map(item => new Invoice(item))));
   }
 }

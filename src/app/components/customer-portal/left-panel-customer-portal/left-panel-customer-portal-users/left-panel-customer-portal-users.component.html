@@ -63,7 +63,7 @@
                 >
                     <li
                         [ngClass]="{'--active':activePage === 'company-contracts'}"
-                        (click)="setCompnayIdInfo(customerCompany.clientCompany.id);goToState('new-billable-invoices')"
+                        (click)="setCompnayIdInfo(customerCompany.clientCompany.id);setInvoiceFilter(customerCompany);"
                     >
                         Invoices
                     </li>
@@ -105,7 +105,7 @@
                 >
                     <li
                         [ngClass]="{'--active':activePage === 'company-devices'}"
-                        (click)="setCompnayIdInfo(customerCompany.clientCompany.id);goToState('quotes-component')"
+                        (click)="setCompnayIdInfo(customerCompany.clientCompany.id);setQuotesFilter(customerCompany)"
                     >
                         Quotes
                     </li>
@@ -133,7 +133,7 @@
                 >
                     <li
                         [ngClass]="{'--active':activePage === 'company-devices'}"
-                        (click)="setCompnayIdInfo(customerCompany.clientCompany.id);goToState('new-payments-ng2')"
+                        (click)="setCompnayIdInfo(customerCompany.clientCompany.id);setPaymentsFilter(customerCompany)"
                     >
                         Payments
                     </li>

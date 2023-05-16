@@ -62,7 +62,7 @@
                     ngFor
                     let-customerCompaniesInfo
                     [ngForOf]="user.customerCompaniesInfo"
-                    [ngForTrackBy]="trackById"
+                    [ngForTrackBy]="trackByIndex"
                 >
                     <users-aside-detail-company-info
                         [user]="user"
