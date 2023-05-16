@@ -1,41 +1,46 @@
 @import "./src/assets/styles/variable";
 @import "./src/assets/styles/mixin/dropdown";
 
-.select-wrapper {
-  height: 284px !important;
-  max-height: 586px;
-  overflow: hidden;
-  display: block;
-  width: 290px;
-  .content {
-    height: 100%;
-    form,
-    .assign-ticket,
-    .assign-ticket-content {
+.tech-users-container {
+  .select-wrapper {
+    height: 284px !important;
+    max-height: 586px;
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    box-shadow: unset;
+    .content {
       height: 100%;
-    }
-    .assign-ticket-header {
-      padding: 0 8px;
-      margin-bottom: 14px;
-      //margin-top: 10px; // TODO check this style
-      margin-top: 4px;
-      .form-group {
-        margin: 0;
+      form,
+      .assign-ticket,
+      .assign-ticket-content {
+        height: 100%;
+      }
+      .assign-ticket-header {
+        padding: 0 8px;
+        margin-bottom: 14px;
+        //margin-top: 10px; // TODO check this style
+        margin-top: 4px;
+        .form-group {
+          margin: 0;
+        }
+      }
+      .scroll-pane {
+        .user-list.custom-scroll {
+          padding: 0;
+        }
       }
     }
-    .scroll-pane {
-      .user-list.custom-scroll {
-        padding: 0;
-      }
+    .users-list {
+      max-height: 230px;
+      max-width: 100%;
     }
-  }
-  .users-list {
-    max-height: 230px;
   }
 }
 .tech-user-body {
   overflow: visible;
   max-height: 586px !important;
+  width: 480px;
 }
 .tech__user-icon {
   width: 24px;

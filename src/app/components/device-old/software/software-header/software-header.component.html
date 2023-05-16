@@ -1,0 +1,26 @@
+<div class="page-header qt-df qt-jc-sb qt-ai-c qt-mb-20">
+    <div class="device-page-header">Software list</div>
+    <div class="qt-df qt-ai-c qt-ml-16">
+        <div class="qt-input-search">
+            <input
+                type="search"
+                class="form-input"
+                (input)="search($event)"
+                placeholder="Search Software…"
+                autocomplete="off"
+            >
+        </div>
+        <a
+          class="icon__print qt-mr-6 pointer device-tooltip qt-sz-16 qt-bg-contain qt-ml-16 pointer"
+          (click)="printPdf();"
+          data-tooltip="Print"
+        ></a>
+        <a
+          class="icon__export-dark qt-mr-6 pointer device-tooltip device-tooltip--width-auto qt-sz-16 qt-bg-contain qt-ml-12 pointer"
+          (click)="downloadCsv();"
+          data-tooltip="Download CSV"
+        >
+
+        </a>
+    </div>
+</div>

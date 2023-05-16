@@ -2129,20 +2129,31 @@ app-quotes-item {
         position: absolute;
         width: 30px;
         height: 30px;
-        background-color:$blue-light-600;
+        background-color: $blue-light-600;
         border-radius: 50%;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
         z-index: -1;
       }
-
       &:hover {
-        z-index: 1;
+        //z-index: 1; // TODO check this style
         color: $white;
         &::after {
           background-color: transparent;
         }
+      }
+    }
+    &.faded {
+      &::before {
+        background-color: transparent;
+      }
+      &::after {
+        background-color: #e9f7ff;
+      }
+      &:hover::after {
+        background-color: #e9f7ff;
+        z-index: -2;
       }
     }
     &:hover,
@@ -2164,11 +2175,12 @@ app-quotes-item {
         z-index: -1;
       }
     }
-    &:hover {
-      z-index: 1;
+    &:not(.faded):hover {
+      //z-index: 1; // TODO check this style
       &::after {
         width: 30px;
         z-index: -2;
+        background-color: transparent;
       }
     }
   }
@@ -4386,12 +4398,6 @@ input.--input-error:hover {
   left: unset;
 }
 
-.invoices-date-filter,
-.quotes-date-filter {
-  .date-picker .icn-remove-old {
-    top: 7px;
-  }
-}
 .fr-command.fr-btn.fr-active + .fr-dropdown-menu {
   margin-left: auto !important;
 }

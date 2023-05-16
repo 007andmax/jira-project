@@ -9,7 +9,8 @@ import { AddUsersNotifyStateService } from './state/add-users-notify-state.servi
 @Component({
   selector: 'modal-add-users-notify',
   templateUrl: './modal-add-users-notify.component.html',
-  styleUrls: ['./modal-add-users-notify.component.scss']
+  styleUrls: ['./modal-add-users-notify.component.scss'],
+  providers: [TicketsListService]
 })
 export class ModalAddUsersNotifyComponent extends AddAssignedUserComponent {
 

@@ -286,8 +286,14 @@
   }
   &__company-gray {
     background-color: $gray-600--old;
+    -webkit-mask-position: center;
+    mask-position: center;
     -webkit-mask-image: url("/assets/img/icons/company-gray.svg");
     mask-image: url("/assets/img/icons/company-gray.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
   }
   &__companies {
     background-color: $gray-500;
@@ -298,7 +304,7 @@
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     -webkit-mask-size: contain;
-    mask-size: contain;;
+    mask-size: contain;
   }
   &__support-page {
     background-color: $gray-600--old;
@@ -572,6 +578,17 @@
   &__plus-white {
     background-image: url("/assets/img/icons/plus-white.svg");
   }
+  &__play-script {
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/device/play-script.svg");
+    mask-image: url("/assets/img/device/play-script.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
   &__snapshot {
     background-image: url("/assets/img/icons/snapshot.svg");
   }
@@ -720,6 +737,9 @@
   &__convert-invoice {
     background-image: url("/assets/img/icons/convert-invoice.svg");
   }
+  &__command-line {
+    background-image: url("/assets/img/device/command-line.svg");
+  }
   &__approve-quote {
     background-image: url("/assets/img/icons/approve-quote.svg");
   }
@@ -728,6 +748,9 @@
   }
   &__set-privilege {
     background-image: url("/assets/img/icons/set-privilege.svg");
+  }
+  &__send-to-front {
+    background-image: url("/assets/img/device/send-to-front.svg");
   }
   &__subscribe {
     background-image: url("/assets/img/icons/subscribe.svg");
@@ -753,6 +776,20 @@
     mask-position: center;
     -webkit-mask-image: url("/assets/img/icons/receipt.svg");
     mask-image: url("/assets/img/icons/receipt.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
+  &__run-script {
+    background-image: url("/assets/img/device/run-script-blue.svg");
+  }
+  &__save-changes {
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/device/save-changes.svg");
+    mask-image: url("/assets/img/device/save-changes.svg");
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     -webkit-mask-size: contain;

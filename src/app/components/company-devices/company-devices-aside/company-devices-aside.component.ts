@@ -67,7 +67,6 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.device = this.currentDevice;
     modalRef.componentInstance.companyId = this.currentDevice.companyId;
     modalRef.componentInstance.action = 'CONNECT_DEVICE';
-
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
@@ -77,7 +76,7 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
     localStorage.setItem('agentId', this.currentDevice.agentId);
     localStorage.setItem('type', this.currentDevice.type);
 
-    var url = `/#/${this.companiesStateService.getCurrentCompany().domain}/device/dashboard/${this.currentDevice.type}/${this.currentDevice.agentId}`;
+    var url = `/#/${this.companiesStateService.getCurrentCompany().domain}/device-old/dashboard/${this.currentDevice.type}/${this.currentDevice.agentId}`;
     window.open(url, '_blank');
   };
   turnOff(action) {

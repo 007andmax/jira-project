@@ -8,7 +8,7 @@
                     <div class="page-header-opt">
                         <div class="update-info">
                             <a
-                                class="clear"                                
+                                class="clear"
                                 (click)="clearTerminal()"
                             >
                                 Clear
@@ -42,7 +42,7 @@
                                 <span *ngIf="split != 'line'">{{split}}</span>
                                 <span *ngIf="split == 'line'" [innerHtml]="htmldata"></span>
                             </p>
-                            
+
                             <!-- <textarea>C:\Users\Sam\Desktop></textarea> -->
                         </div>
                         <div class="terminal-btn-row">
@@ -295,12 +295,12 @@
                                             </div>
                                             <!-- class="copy" -->
                                             <div class="cmd-list-right">
-                                                <a                                                    
-                                                    href="javascript:;"                                                                                                                                                                                                                  
-                                                    [ngClass]="count==i ? 'terminal-loader' : 'copy'"                                                          
+                                                <a
+                                                    href="javascript:;"
+                                                    [ngClass]="count==i ? 'terminal-loader' : 'copy'"
                                                     data-tooltip="Run script"
                                                     (click)="copyToTerminalFunc(cmd.command,i);"
-                                                >                                                 
+                                                >
                                                 </a>
                                                 <div
                                                     class="btn-group"
@@ -429,7 +429,7 @@
             [class.opened]="runScript"
         >
             <div>
-                <div class="script-side-heder">
+                <div class="script-side-header">
                     <h2>Script Library</h2>
                     <a
                         href="javascript:;"
@@ -714,7 +714,7 @@
             [class.opened]="scriptDetail"
         >
             <div>
-                <div class="script-side-heder">
+                <div class="script-side-header">
                     <h2>
                         <a
                             href="javascript:;"

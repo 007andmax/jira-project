@@ -1,0 +1,22 @@
+@import "./src/assets/styles/variable";
+
+.device-page {
+  dashboard-disk-drives,
+  dashboard-services {
+    max-width: calc(50% - 8px);
+    width: 100%;
+  }
+  .dashboard-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .device-page-header {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.63;
+    color: $gray-900;
+    text-transform: capitalize;
+    margin-bottom: 16px;
+  }
+}

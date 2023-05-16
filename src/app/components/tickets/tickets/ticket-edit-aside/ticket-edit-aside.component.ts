@@ -112,7 +112,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     })
 
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-      if (data) {
+      if (data && this.opened) {
         if (this.confirmStateService.getConfirmAction() === DELETE_FOREVER) {
           this.onDeleteForever();
         }
@@ -301,30 +301,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
   updateAndCloseMobile() {
     this.updateForm.updateAndClose();
   }
-  toggleSubject() {
-    if (this.appService.checkMobile() || !this.getPermissions('EDIT_TICKETS')) return;
-    var textCurrent = this.elRef.nativeElement.querySelector("#ticket-subject").value;
-    var textOld = this.ticketProfile.subject;
-    this.modeSubject = (this.modeSubject === 'view') ? 'edit' : 'view';
-    if (this.modeSubject === 'view' && textCurrent != textOld) {
-      this.ticketProfile.subject = textCurrent;
-      this.onChangeSubjectNote();
-    }
-  }
-  toggleNote() {
-    if (this.appService.checkMobile()) return;
-    var textCurrent = this.elRef.nativeElement.querySelector("#ticket-note").innerHTML.replace(/<\/?[^>]+>/ig, "");
-    var textOld = (this.ticketProfile.note) ? this.ticketProfile.note.replace(/<\/?[^>]+>/ig, "") : "";
-    this.modeDescription = 'view';
-    if (textCurrent != textOld) {
-      this.ticketProfile.note = this.elRef.nativeElement.querySelector("#ticket-note").innerHTML;
-      this.onChangeSubjectNote();
-    }
-  }
-  onChangeSubjectNote() {
-    this.ticketsService.changeSubjectNoteTicket(this.ticketProfile.id, this.ticketProfile.subject, this.ticketProfile.note).subscribe(data => {
-    })
-  }
+
   markAsOpen() {
     this.ticketsService.changeStatus(this.ticketProfile.id, 'IN_PROGRESS').subscribe((data: any) => {
       if (data.code == 403) {

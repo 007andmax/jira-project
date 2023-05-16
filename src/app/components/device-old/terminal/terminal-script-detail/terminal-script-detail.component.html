@@ -1,0 +1,161 @@
+<aside
+    class="right-sidebar script-sidebar script-details"
+    [class.opened]="scriptDetail"
+>
+    <div>
+        <div class="script-side-header">
+            <div class="script-side-header__title">
+                <a
+                    href="javascript:;"
+                    class="close-btn"
+                    title="Close"
+                    (click)="emptyScriptDetail()"
+                >
+                    <img
+                        src="/html/assets/img/device/back.svg"
+                        alt="close"
+                        title="close"
+                    >
+                </a>
+                Script Library
+            </div>
+            <span
+                class="clone-cat"
+                (click)="emptyScriptDetail()"
+            >
+                Cloned Scripts
+            </span>
+        </div>
+      <form method="POST" class="script-library__form">
+        <div class="qt-aside-modern__content new-companies-content__modal--content">
+          <div class="qt-inputs-row">
+            <div class="qt-input-block">
+              <div class="qt-input-block__label">Command Title</div>
+              <input
+                type="text"
+                id="title"
+                class="form-input"
+                placeholder="Command Title"
+                [(ngModel)]="scriptDetailModal.title"
+                name="title"
+                #Title1="ngModel"
+                [disabled]="scriptDetailModal.default === true"
+                required
+                [class.validation-error]="submitted == true && Title1.errors && Title1.errors.required"
+              >
+            </div>
+          </div>
+          <div class="qt-inputs-row">
+            <div class="qt-input-block">
+              <div class="qt-input-block__label">Category</div>
+              <app-drop-down
+                #selectCategory
+                [sort]="false"
+                [placeholder]="'Select Category'"
+                [field]="'name'"
+                [list]="cmdCategoryReadList"
+                [isBlockClear]="true"
+                (onSelectedItem)="setScriptDetail($event)"
+              ></app-drop-down>
+            </div>
+            <div class="qt-input-block qt-f33">
+              <app-drop-down
+                #scriptType
+                [sort]="false"
+                [title]="'Script Type'"
+                [placeholder]="'Select Script Type'"
+                [field]="'title'"
+                [list]="scriptTypes"
+                [isBlockClear]="true"
+                (onSelectedItem)="toggleDetailTerminal($event)"
+              ></app-drop-down>
+            </div>
+          </div>
+          <div class="">
+            <div class="nav nav-tabs justify-content-start">
+              <li class="nav-item">
+                <a
+                  (click)="showDescription = false"
+                  href="javascript:;"
+                  class="nav-link"
+                  [ngClass]="{'active': showDescription == false}"
+                >
+                  Command
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  (click)="showDescription = true"
+                  href="javascript:;"
+                  class="nav-link"
+                  [ngClass]="{'active': showDescription == true}"
+                >
+                  Description
+                </a>
+              </li>
+            </div>
+            <div class="form-row">
+              <div
+                id="cmd_detail"
+                *ngIf="showDescription === false"
+              >
+                <ul id="cmd_detail_line">
+                  <li *ngFor="let line of lineNumberDetail">{{line}}</li>
+                </ul>
+                <textarea
+                  wrap="off"
+                  class="form-input form-input__textarea"
+                  [(ngModel)]="scriptDetailModal.command"
+                  name="command1"
+                  (keyup)="countLineNumberDetail()"
+                  [disabled]="scriptDetailModal.default === true"
+                >
+                                  </textarea>
+              </div>
+              <textarea
+                *ngIf="showDescription === true"
+                class="form-input form-input__textarea"
+                [(ngModel)]="scriptDetailModal.description"
+                name="description1"
+                [disabled]="scriptDetailModal.default === true"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="qt-aside-modern__footer">
+          <div class="qt-df">
+            <button
+              type="button"
+              *ngIf="scriptDetailModal.default === false"
+              class="qt-button qt-mr-12"
+              (click)="updateMyScript()"
+            >
+              Save
+            </button>
+            <button
+              type="button"
+              *ngIf="scriptDetailModal.default === true"
+              class="qt-button qt-mr-12"
+              (click)="cloneScript(scriptDetailModal.id)"
+            >
+              Clone Script
+            </button>
+            <button
+              type="button"
+              class="qt-button qt-mr-12"
+              (click)="copyScriptToggle(scriptDetailModal, 'copy')"
+            >
+              Copy Script
+            </button>
+            <button
+              type="button"
+              class="qt-button --gray"
+              (click)="scriptDetail = !scriptDetail"
+            >
+              Back
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+</aside>

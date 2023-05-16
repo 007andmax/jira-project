@@ -141,7 +141,7 @@ declare var $: any;
     InventoryCheckUseComponent,
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
-    CannedResponsesAsideComponent
+    CannedResponsesAsideComponent,
   ],
   imports: [
     BrowserModule,

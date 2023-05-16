@@ -1,0 +1,46 @@
+<div class="hardware-col">
+    <div class="hardware-col-title">
+        <span class="hardware-ico">
+            <img
+                src="/html/assets/img/device/computer.svg"
+                alt="computer"
+            >
+        </span>
+        <div class="hardware-col__title">Computer</div>
+    </div>
+    <ul class="hardware-col__list">
+        <li class="hardware-col__list-item">
+            <span class="hardware-col__list-title">Manufacturer:</span>
+            <div class="hardware-col__list-text">{{system.manufacturer || 'N/A'}}</div>
+        </li>
+        <li class="hardware-col__list-item">
+            <span class="hardware-col__list-title">Computer Model:</span>
+            <div class="hardware-col__list-text">{{system.model || 'N/A'}}</div>
+        </li>
+        <li class="hardware-col__list-item">
+            <span class="hardware-col__list-title">Computer Name:</span>
+            <input
+                type="text"
+                class="hardware-col__input --editable"
+                [(ngModel)]="deviceName"
+                (blur)="saveLabel();"
+            >
+        </li>
+        <li class="hardware-col__list-item"
+          *ngIf="system.architecture != undefined && system.architecture != ''">
+            <span class="hardware-col__list-title">System Type:</span>
+            <div class="hardware-col__list-text">
+              ({{system.architecture}}) system
+            </div>
+        </li>
+        <li class="hardware-col__list-item"
+          *ngIf="system.architecture == undefined || system.architecture == ''">
+            <span class="hardware-col__list-title">System Type:</span>
+            <div class="hardware-col__list-text"> N/A</div>
+        </li>
+        <li class="hardware-col__list-item">
+            <span class="hardware-col__list-title">Warranty:</span>
+            <div class="hardware-col__list-text">{{system.warranty || 'N/A'}}</div>
+        </li>
+    </ul>
+</div>

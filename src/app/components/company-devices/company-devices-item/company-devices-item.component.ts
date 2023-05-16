@@ -55,7 +55,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     localStorage.setItem('company_id', this.companyId);
     localStorage.setItem('agentId', this.device.agentId);
     localStorage.setItem('type', this.device.type);
-    var url = `/#/${this.companiesStateService.getCurrentCompany().domain}/device/dashboard/${this.device.type}/${this.device.agentId}`;
+    var url = `/#/${this.companiesStateService.getCurrentCompany().domain}/device-old/dashboard/${this.device.type}/${this.device.agentId}`;
     window.open(url, '_blank');
   };
   remoteAccess(connectionType) {

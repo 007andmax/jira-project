@@ -1,0 +1,64 @@
+<main class="mainSidebar">
+    <div class="cmn-wrapper hardware">
+        <div class="device-container">
+            <div class="page-container">
+                <!-- Page Title -->
+                <hardware-header
+                    #header
+                    [hidden]="loading"
+                    [deviceName]="deviceName"
+                    [loading]="loading"
+                    [printSystem]="printSystem"
+                    [deviceName]="deviceName"
+                    [printMotherBoard]="printMotherBoard"
+                    [printProcessor]="printProcessor"
+                    [printMemory]="printMemory"
+                    [printNetwork]="printNetwork"
+                    [printGraphic]="printGraphic"
+                    [printDisplay]="printDisplay"
+                    [printDisk]="printDisk"
+                    [printOS]="printOS"
+                ></hardware-header>
+                <!-- Page Content All update -->
+                <div
+                    class="contant-area"
+                    *ngIf="!loading"
+                >
+                    <div class="hardware-list">
+                        <div class="hardware-row">
+                            <hardware-computer
+                                [system]="system"
+                                [deviceName]="deviceName"
+                                [_id]="_id"
+                            ></hardware-computer>
+                            <hardware-motherboard
+                                [motherBoard]="motherBoard"
+                                [bios]="bios"
+                            ></hardware-motherboard>
+                            <hardware-processor [processors]="processors"></hardware-processor>
+                            <hardware-memory [memory]="memory"></hardware-memory>
+                            <hardware-network-card
+                                [networkAdapters]="networkAdapters"
+                                [externalIp]="externalIp"
+                                [formatMacAddress]="formatMacAddress"
+                            ></hardware-network-card>
+                        </div>
+                        <div class="hardware-row">
+                            <hardware-graphics-card [graphics]="graphics"></hardware-graphics-card>
+                            <hardware-display [display]="display"></hardware-display>
+                            <hardware-hard-disk [logicalDisks]="logicalDisks"></hardware-hard-disk>
+                            <hardware-operating-system
+                                [system]="system"
+                                [networkAdapters]="networkAdapters"
+                            ></hardware-operating-system>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div
+        class="loading"
+        *ngIf="loading"
+    ></div>
+</main>

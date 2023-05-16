@@ -1,0 +1,73 @@
+<div class="cmn-wrapper">
+    <!-- Right Side bar -->
+    <aside class="right-sidebar">
+        <a
+            href="javascript:;"
+            class="panel-bar"
+            (click)="toggleTicket();"
+        >
+            <img
+                class="panel-bar__image"
+                src="/html/assets/img/device/panel-open.svg"
+                alt="Open"
+                title="Ticket"
+            >
+        </a>
+        <div>
+            <a
+                href="javascript:;"
+                class="add-btn"
+                (click)="onAddTicket();"
+            >
+                <img
+                    src="/html/assets/img/device/add.svg"
+                    alt="add"
+                >
+            </a>
+            <ngb-tabset #t="ngbTabset">
+                <ngb-tab title="Ticket">
+                    <ng-template ngbTabContent>
+                        <div class="cmn-tbs-content device-tickets">
+                            <ul class="list-unstyled">
+                                <li
+                                    *ngFor="let ticket of ticketList"
+                                    (click)="editTicket(ticket.id)"
+                                    class="pointer"
+                                >
+                                    <div class="create-by">
+                                        <span class="id">Tkt# {{ticket.number}}</span>
+                                        <span class="name">{{ticket.name}}</span>
+                                    </div>
+                                    <h5>{{ticket.subject}}</h5>
+                                    <div class="task-status-row">
+                                        <span
+                                            class="status completed"
+                                            *ngIf="ticket.status == 'COMPLETED'"
+                                        >
+                                            Completed
+                                        </span>
+                                        <span
+                                            class="status device-progress"
+                                            *ngIf="ticket.status == 'IN_PROGRESS'"
+                                        >
+                                            In Progress
+                                        </span>
+                                        <span
+                                            class="status hold"
+                                            *ngIf="ticket.status == 'ON_HOLD'"
+                                        >
+                                            On Hold
+                                        </span>
+                                        <span class="date">
+                                            {{ticket.createdAt | date : DateFormat}}
+                                        </span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+            </ngb-tabset>
+        </div>
+    </aside>
+</div>

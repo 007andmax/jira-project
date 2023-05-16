@@ -23,8 +23,8 @@
                 [ngClass]="{'active':tab === 'PRODUCT' }"
                 (click)="setTab('PRODUCT')"
             >
-              <span class="icon__products qt-sz-16 qt-mr-8 qt-dib"></span>
-              Products
+                <span class="icon__products qt-sz-16 qt-mr-8 qt-dib"></span>
+                Products
             </li>
             <li
                 class="cps-block__nav-item"
@@ -136,12 +136,6 @@
             (onUpdateMobile)="updateMobile()"
             (onAddMoreMobile)="update()"
         ></app-ticket-profile-form-update-services>
-        <app-ticket-profile-form-update-support
-            *ngIf="tab === 'QUICK_SUPPORT'"
-            (onCreateOneTimeRemoteSession)="onCreateOneTimeRemoteSession()"
-            [item]="remoteSession"
-            (onConnectRemoteAccess)="onConnectRemoteAccess($event)"
-        ></app-ticket-profile-form-update-support>
     </div>
 </div>
 <div class="qt-aside__buttons qt-jc-sb qt-ai-c">

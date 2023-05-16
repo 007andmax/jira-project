@@ -1,0 +1,60 @@
+<main>
+    <div class="cmn-wrapper software-list">
+        <div class="software-list__container">
+            <!-- Page Title -->
+            <software-header
+                #header
+                [loading]="loading"
+                [softwareList]="softwareList"
+                [deviceDetail]="deviceDetail"
+                (onSearch)="onSearch($event)"
+            ></software-header>
+            <!-- Page Content -->
+            <table
+                #dataTable
+                datatable
+                [dtTrigger]="dtTrigger"
+                [dtOptions]="dtOptions"
+                class="dataTable cmn-tab-head"
+            >
+                <thead>
+                    <tr>
+                        <th class="s-name">
+                            <span>Software Name</span>
+                        </th>
+                        <th class="pulisher">
+                            <span>Publisher</span>
+                        </th>
+                        <th class="version">
+                            <span>Version</span>
+                        </th>
+                        <th class="install">
+                            <span>Installed on</span>
+                        </th>
+                        <th class="c-version">
+                            <span>Current Version</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let software of softwareList | soft: search; let i = index;">
+                        <td class="s-name">
+                            {{software.softName || 'N/A'}}
+                        </td>
+                        <td class="pulisher">{{software.softPublisher || 'N/A'}}</td>
+                        <td class="version">{{software.softVersion || 'N/A'}}</td>
+                        <td class="install">
+                            {{(software.softInstalledOn | date : DateFormat) || 'N/A'}}
+                        </td>
+                        <td class="c-version">{{software.softVersion || 'N/A'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <app-ticket-task></app-ticket-task>
+    </div>
+</main>
+<div
+    class="loading"
+    *ngIf="loading"
+></div>

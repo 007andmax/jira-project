@@ -7,6 +7,9 @@ import { TicketsListService } from '../../services/tickets-list.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import * as moment from "moment";
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
+import { AppService } from 'src/app/states/app/app.service';
+import { TicketStateService } from '../../ticket-edit-aside/services/ticket-state.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'app-company-info-history',
@@ -31,6 +34,9 @@ export class CompanyInfoHistoryComponent implements OnInit {
     private ticketsService: TicketsService,
     private elRef: ElementRef,
     private ticketsStateService: TicketsStateService,
+    private appService: AppService,
+    private ticketStateService: TicketStateService,
+    private companiesStateService: CompaniesStateService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
@@ -67,10 +73,16 @@ export class CompanyInfoHistoryComponent implements OnInit {
 
   }
   editTicket(id) {
-    this.ticketsStateService.onOpenTicket();
-    this.ticketsService.getTicket(id).subscribe(data => {
-      this.ticketsStateService.onEditTicket(data);
-    })
+    if (!this.appService.isMobile) {
+      this.ticketStateService.setTicketRoutingId(id);
+      const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/ticket/${id}`;
+      window.open(url, '_blank');
+    } else {
+      this.ticketsStateService.onOpenTicket();
+      this.ticketsService.getTicket(id).subscribe(data => {
+        this.ticketsStateService.onEditTicket(data);
+      })
+    }
   }
   getCreateAt(createdAt) {
     let date = new Date(createdAt);

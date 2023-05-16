@@ -19,7 +19,7 @@ import { SoftwareRoutingModule } from './software-routing.module';
         DataTablesModule,
         SoftwareRoutingModule
     ],
-    exports: [SoftwarePipe]
+
 
 
 })

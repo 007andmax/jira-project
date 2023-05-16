@@ -47,6 +47,7 @@
             [invoiceNotes]="invoiceNotes"
             [invoiceTaxNumber]="invoiceTaxNumber"
             [invoiceNumber]="invoiceNumber"
+            (onGetInvoiceNumber)="getActualNumber()"
             [company]="company"
             [invoice]="invoice"
         ></app-invoice-form>

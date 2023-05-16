@@ -428,7 +428,7 @@ main {
                 &.opened {
                     right: 0;
                 }
-                .script-side-heder {
+                .script-side-header {
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
@@ -616,7 +616,7 @@ main {
                 }
             }
             &.script-details {
-                .script-side-heder {
+                .script-side-header {
                     padding: 14px 32px 14px 15px;
                     .close-btn {
                         margin-right: 8px;
@@ -687,38 +687,6 @@ main {
                         font-weight: 400;
                         text-transform: none;
                     }
-                    .script-info {
-                        display: -ms-flexbox;
-                        display: -webkit-flex;
-                        display: flex;
-                        align-items: flex-start;
-                        justify-content: space-between;
-                        flex-wrap: wrap;
-                        width: 100%;
-                        margin-bottom: 20px;
-                        .script-col {
-                            width: 25%;
-                            display: -ms-flexbox;
-                            display: -webkit-flex;
-                            display: flex;
-                            flex-direction: column;
-                            align-items: flex-start;
-                            h5 {
-                                font-size: 12px;
-                                margin-bottom: 3px;
-                                text-transform: none;
-                            }
-                            span {
-                                font-size: 12px;
-                                font-weight: normal;
-                                font-stretch: normal;
-                                font-style: normal;
-                                line-height: 1.33;
-                                letter-spacing: normal;
-                                color: $primary-2;
-                            }
-                        }
-                    }
                     #cmd_detail {
                         display: flex;
                         border-radius: 4px;
@@ -748,7 +716,6 @@ main {
                             }
                         }
                         textarea {
-                            border-radius: 0;
                             border: none;
                             height: 100%;
                         }
@@ -778,8 +745,8 @@ main {
                 &.clear {
                     margin-left: 0;
                     background: url("/assets/img/icons/hide.svg") no-repeat left 0;
-                    cursor: pointer;      
-                    margin-right: 15px;              
+                    cursor: pointer;
+                    margin-right: 15px;
                 }
                 &.Command {
                     margin-left: 0;
@@ -1087,8 +1054,8 @@ body {
     position: relative;
     border: 0.35rem solid rgba(0, 0, 0, 0.2);
     border-top-color: black;
-    animation: spin 1s infinite linear;    
-  }  
+    animation: spin 1s infinite linear;
+  }
 ngb-tabset .tab-content{
 padding: 30px 15px 40px !important;
 }
