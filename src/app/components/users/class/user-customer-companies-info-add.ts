@@ -18,6 +18,7 @@ export class UserCustomerCompaniesInfoAdd {
         }
     }
     "hasAccess": boolean;
+    isPrimaryContact: boolean;
     constructor(data) {
         console.log("data", data);
         this.companyId = data.companyId;
@@ -25,6 +26,7 @@ export class UserCustomerCompaniesInfoAdd {
         if (data.customerUserRole) this.customerUserRole = { id: data.customerUserRole.id };
         this.defaultSubscriptions = this.getDefaultSubscriptionsForUpdate(data.defaultSubscriptions);
         this.hasAccess = data.hasAccess;
+        this.isPrimaryContact = data.isPrimaryContact;
     }
     public getDefaultSubscriptionsForUpdate(data) {
         return {

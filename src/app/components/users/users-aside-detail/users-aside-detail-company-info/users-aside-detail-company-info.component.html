@@ -96,5 +96,23 @@
                 </div>
             </div>
         </div>
+        <div class="qt-inputs-row">
+            <div class="qt-input-block">
+                <div class="qt-df qt-ai-c qt-mt-15">
+                    <label
+                        class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
+                        [attr.for]="'primary-contact-' + i"
+                    >
+                        <input
+                            [attr.id]="'primary-contact-' + i"
+                            type="checkbox"
+                            [(ngModel)]="customerCompaniesInfo.isPrimaryContact"
+                        >
+                        <span></span>
+                        <div class="qt-ml-8">Set as a primary user</div>
+                    </label>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
