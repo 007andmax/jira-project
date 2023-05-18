@@ -222,9 +222,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
           this.billableTaimer.seconds--;
           this._ngZone.run(() => { this.cd.detectChanges(); });
         }, 1000);
-        // this._ngZone.run(() => { console.log('Outside Done!'); });
       });
-
       if (getComapny) this.getCompany(this.billableProfile.id);
       if (!getComapny) {
         this.showPreloader = false;

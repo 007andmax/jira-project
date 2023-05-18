@@ -33,7 +33,6 @@ export class SoftwareHeaderComponent implements OnInit {
   }
   getPdfData() {
     let pdfList = [];
-    console.log("this.softwareList", this.softwareList);
     this.softwareList.forEach(element => {
       pdfList.push([
         element.softName.replace(',', ' ') || 'N/A',
@@ -183,7 +182,6 @@ export class SoftwareHeaderComponent implements OnInit {
         });
   }
   downloadCsv() {
-    console.log("this.softwareList", this.softwareList);
     let downloadCsvList = [];
     this.softwareList.forEach(element => {
       downloadCsvList.push([
@@ -196,7 +194,6 @@ export class SoftwareHeaderComponent implements OnInit {
     });
     let fileName = 'Software List';
     const columnNames = ['Software Name', 'Publisher', 'Version', 'Installed on', 'Current Version'];
-    console.log("downloadCsvList", downloadCsvList);
     this.excelService.generateExcel(downloadCsvList, columnNames, fileName);
   }
 }

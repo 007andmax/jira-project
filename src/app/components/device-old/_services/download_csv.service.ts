@@ -18,7 +18,6 @@ export class ExcelService {
       typeArr = ['Software Name', 'Publisher', 'Version', 'Installed On', 'Current Version']
     ]
     let csvData = this.ConvertToCSV(data, typeArr, type);
-    console.log("csvData", csvData);
     let blob = new Blob(['\ufeff' + csvData], { type: 'text/csv;charset=utf-8;' });
     let dwldLink = document.createElement("a");
     let url = URL.createObjectURL(blob);
@@ -36,7 +35,6 @@ export class ExcelService {
 
   ConvertToCSV(objArray, headerList, type) {
     let array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
-    console.log("array", array);
     let str = '';
     let row = '';
     if (type === 'software' || type === 'Software List') {
@@ -56,16 +54,13 @@ export class ExcelService {
         line = (i + 1) + ''
       ]
       for (let index in headerList) {
-        console.log("index", index);
         let head = headerList[index];
-        console.log("array[i]", Array.isArray(array[i]), array[i][index]);
         if (index === '0' && type === 'hardware') {
           line += (Array.isArray(array[i]) == false) ? array[i][head] : array[i][index];
         } else {
           line += ',' + ((Array.isArray(array[i]) == false) ? array[i][head] : array[i][index]);
         }
       }
-      console.log("line", line);
       str += line + '\r\n';
     }
     return str;
