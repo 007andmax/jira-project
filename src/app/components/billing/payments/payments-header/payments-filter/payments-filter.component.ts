@@ -7,6 +7,7 @@ import { CompanySetting } from 'src/app/components/companies/class/company-setti
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-payments-filter',
@@ -23,9 +24,20 @@ export class PaymentsFilterComponent implements OnInit {
   statusTypes = [new CompanySetting('Paid', 'PAID'), new CompanySetting('Refund', 'REFUND')];
   constructor(private companiesState: CompaniesStateService,
     private elRef: ElementRef,
+    private customerPortalStateService: CustomerPortalStateService,
     private paymentsStateService: PaymentsStateService) { }
 
   ngOnInit() {
+    if (this.customerPortalStateService.isCustomerPortal && this.companiesState.getCompanies().length > 0) this.checkCompanyCustomerUser();
+    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
+      if (this.customerPortalStateService.isCustomerPortal) this.checkCompanyCustomerUser();
+    })
+    this.sub.add(getOnCompanies);
+  }
+  private checkCompanyCustomerUser() {
+    let selectedCompany = this.companiesState.getCompanies().find(item => item.id == localStorage.getItem('company_info_id'));
+    this.companyDp.selectItemWithOutChanges(selectedCompany);
+    this.companyDp.isDisabled = true;
   }
   onSelectStatus(status) {
     this.paymentsFilter.setStatus((status) ? status.value : null);

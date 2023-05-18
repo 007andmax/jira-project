@@ -8,6 +8,7 @@ import { TicketsFilter } from 'src/app/components/tickets/tickets/class/tickets-
 import { UserCustomerCompaniesInfo } from 'src/app/components/users/class/user-customer-companies-info';
 import { UserFilter } from 'src/app/components/users/class/user-filter';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
 import { PaymentsStateService } from 'src/app/states/payments/payments-state.service';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
@@ -36,6 +37,7 @@ export class LeftPanelCustomerPortalUsersComponent implements OnInit {
     public invoiceStateService: InvoiceStateService,
     private paymentsStateService: PaymentsStateService,
     private quoteStateService: QuoteStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     public router: Router,) { }
 
   ngOnInit() {
@@ -44,13 +46,10 @@ export class LeftPanelCustomerPortalUsersComponent implements OnInit {
       this.getCurrentUser(data)
     })
   }
-  public setCompnayIdInfo(data) {
-    localStorage.setItem("company_info_id", data);
-  }
   getLinkSection(companyId, section) {
     return `company/${companyId}/${section}`;
   }
-  public setTypeFilter(company, type) {
+  public setTicketsFilter(company, type) {
     this.ticketsStateService.onChangeTypeFilter(type);
     let ticketsFilter: TicketsFilter = new TicketsFilter();
     ticketsFilter.setCompany(company.clientCompany);

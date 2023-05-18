@@ -22,18 +22,19 @@ import { TestPermissionService } from './services/test-permission/test-permissio
 import { PermissionCustomerPermissionsService } from './components/setting/customer-permissions/permission-customer-permissions.service';
 import { PermissionPaymentsService } from './components/billing/payments/permission-payments.service';
 import { PermissionQuotesService } from './components/billing/quotes/permission-quotes.service';
+import { PermissionTicketsService } from './components/tickets/tickets/permission-tickets.service';
 
 const routes: Routes = [
 
   {
     path: ':domain/tickets',
     loadChildren: './components/tickets/tickets/tickets.module#TicketsModule',
-    canActivate: [PermissionTechUserService]
+    canActivate: [PermissionTicketsService, PermissionTechUserService]
   },
   {
     path: ':domain/ticket/:id',
     loadChildren: './components/tickets/tickets/ticket-detail/ticket-detail.module#TicketDetailModule',
-    canActivate: [PermissionTechUserService]
+    canActivate: [PermissionTicketsService, PermissionTechUserService]
   },
   {
     path: ':domain/support-page',
@@ -355,7 +356,10 @@ const routes: Routes = [
     //canActivate: [PermissionTechUserService]
     canActivate: [TestPermissionService]
   },
-
+  {
+    path: ':domain/default',
+    loadChildren: './components/customer-portal/customer-portal-default/customer-portal-default.module#CustomerPortalDefaultModule'
+  },
 
 ];
 

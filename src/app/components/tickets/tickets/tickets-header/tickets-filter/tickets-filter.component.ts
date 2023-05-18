@@ -18,6 +18,7 @@ import { TicketStatus } from 'src/app/components/setting/ticket-settings-page/ti
 import { TicketStatusFilter } from '../class/ticket-status-filter';
 import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-tickets-filter',
@@ -56,6 +57,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     private elRef: ElementRef,
     public cd: ChangeDetectorRef,
     public appService: AppService,
+    private customerPortalStateService: CustomerPortalStateService,
     private leftPanelService: LeftPanelService) { }
 
 
@@ -63,6 +65,11 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   ngOnInit() {
     /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
     /* START */
+    if (this.customerPortalStateService.isCustomerPortal && this.companiesState.getCompanies().length > 0) this.checkCompanyCustomerUser();
+    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
+      if (this.customerPortalStateService.isCustomerPortal) this.checkCompanyCustomerUser();
+    })
+    this.sub.add(getOnCompanies);
     this.listType = this.ticketsStateService.getListType();
     this.ticketsFilter.setListType(this.listType);
     /* END */
@@ -104,6 +111,21 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       this.ticketsStatus = data.map(item => new TicketStatusFilter(item));
     })
     this.sub.add(onGetTicketsStatus);
+  }
+  private checkCompanyCustomerUser() {
+    this.selectedCompany = this.companiesState.getCompanies().find(item => item.id == localStorage.getItem('company_info_id'));
+    this.companyDp.selectItemWithOutChanges(this.selectedCompany);
+    this.companyDp.isDisabled = true;
+  }
+  private checkUserCustomerUser() {
+    let customerCompanyInfo = this.usersStateService.getCurrentUser().customerCompaniesInfo.find(item => item.clientCompany.id === localStorage.getItem('company_info_id'));
+    console.log("customerCompanyInfo", customerCompanyInfo);
+    if (customerCompanyInfo && customerCompanyInfo.customerUserRole.getPermission('VIEW_MY_TICKETS')) {
+      let user = this.usersStateService.getAllUsers().find(item => item.id === this.usersStateService.getCurrentUser().id);
+      this.selectedUser = `${user.firstName} ${user.lastName}`;
+      this.usersDp.selectItemWithOutChanges(this.selectedUser);
+      this.usersDp.isDisabled = true;
+    }
   }
   public onClearAll() {
 
@@ -174,6 +196,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
 
   }
   onGetTechUsers(data) {
+    if (this.customerPortalStateService.isCustomerPortal) this.checkUserCustomerUser();
     this.techUsersList = data.filter(item => {
       if (item.accountType === 'TECH' && !item.deletedAt) {
         return item;

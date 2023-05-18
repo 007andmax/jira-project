@@ -107,11 +107,7 @@ export class QuoteService {
    * @param data - quote info
    */
   public getQuotes(data) {
-    let headers = new HttpHeaders();
-    if (localStorage.getItem("company_info_id")) headers = new HttpHeaders({ 'company-id': localStorage.getItem("company_info_id") });
-    console.log(localStorage.getItem("company_info_id"));
-    console.log("headers", headers);
-    return this.http.post(this.apiUrl + 'saleQuotes/search', data, { headers: headers }).pipe(
+    return this.http.post(this.apiUrl + 'saleQuotes/search', data).pipe(
       map((data: any) => data.map(item => new Quote(item))),
       catchError(this.handleError));
   }

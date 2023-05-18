@@ -56,7 +56,8 @@ export class CurrentUser {
 
                 // }
             }
-            this.customerCompaniesInfo = data.customerCompaniesInfo.map(item => new CurrentUserCustomerCompaniesInfo(item));
+            console.log("data.customerCompaniesInfo", data.customerCompaniesInfo);
+            if (data.customerCompaniesInfo) this.customerCompaniesInfo = data.customerCompaniesInfo.map(item => new CurrentUserCustomerCompaniesInfo(item));
         }
     }
 

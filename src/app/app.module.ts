@@ -115,6 +115,7 @@ import { LeftPanelCustomerPortalUsersComponent } from './components/customer-por
 import { LeftPanelCustomerPortalModule } from './components/customer-portal/left-panel.module';
 import { PermissionPaymentsService } from './components/billing/payments/permission-payments.service';
 import { PermissionQuotesService } from './components/billing/quotes/permission-quotes.service';
+import { PermissionTicketsService } from './components/tickets/tickets/permission-tickets.service';
 declare var $: any;
 
 /**
@@ -241,7 +242,8 @@ declare var $: any;
     PermissionSuperAdminService,
     TestPermissionService,
     PermissionPaymentsService,
-    PermissionQuotesService
+    PermissionQuotesService,
+    PermissionTicketsService
   ],
   bootstrap: [AppComponent]
 })

@@ -64,10 +64,6 @@ export class InvoicesService {
     return this.http.post(`${this.apiUrl}receiptArchive/resend`, { ids: invoiceIds });
   }
   public getInvoices(data) {
-    let headers = new HttpHeaders();
-    if (localStorage.getItem("company_info_id")) headers = new HttpHeaders({ 'company-id': localStorage.getItem("company_info_id") });
-    console.log(localStorage.getItem("company_info_id"));
-    console.log("headers", headers);
-    return this.http.post(`${this.apiUrl}receivable`, data, { headers: headers }).pipe(map((res: any) => res.map(item => new Invoice(item))));
+    return this.http.post(`${this.apiUrl}receivable`, data).pipe(map((res: any) => res.map(item => new Invoice(item))));
   }
 }

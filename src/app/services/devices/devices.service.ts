@@ -47,11 +47,7 @@ export class DevicesService {
     return this.http.get(this.apiUrl + `devices/networkScan?companyId=${companyId}`);
   }
   public getCompanyDevices(companyId) {
-    let headers = new HttpHeaders();
-    if (localStorage.getItem("company_info_id")) headers = new HttpHeaders({ 'company-id': localStorage.getItem("company_info_id") });
-    console.log(localStorage.getItem("company_info_id"));
-    console.log("headers", headers);
-    return this.http.get(this.apiUrl + `devices?companyId=${companyId}`, { headers: headers });
+    return this.http.get(this.apiUrl + `devices?companyId=${companyId}`);
   }
   public getDeviceExtended(companyId, agentId) {
     return this.http.get(this.apiUrl + `devices/extended?companyId=${companyId}&agentId=${agentId}`);

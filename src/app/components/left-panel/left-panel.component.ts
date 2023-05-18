@@ -98,6 +98,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/quotes`)) this.state = 'quotes-component';
           if (window.location.href.includes(`/payments`)) this.state = 'new-payments-ng2';
           if (window.location.href.includes(`/contracts`)) this.state = 'new-contracts';
+          if (window.location.href.includes(`/default`)) this.state = 'default';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`dashboard`)) this.state = 'company-dashboard';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`tickets`)) this.state = 'company-tickets';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`user`)) this.state = 'company-user';
@@ -190,6 +191,10 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/devices/reports`)) this.state == 'new-device-summary';
           if (window.location.href.includes(`/help-center`)) this.state = 'help-center';
           if (window.location.href.includes(`/device/`)) this.state = 'new-device';
+          console.log("this.stage", this.state);
+          console.log("window.location.href", window.location.href);
+          /*  this.state = 'default';
+            this.goToLink('default');*/
           if (this.state === '' && this.companiesStateService.getCurrentCompany() && this.usersStateService.getCurrentUser().role !== "SUPER_ADMIN") this.goToDefaultPage();
           this.leftPanelStateService.firstOpen(this.state);
           this.leftPanelStateService.changeState(this.state);
@@ -204,17 +209,17 @@ export class LeftPanelComponent implements OnInit {
       this.onChangeState(data);
     })
     this.leftPanelStateService.onOpenCompanyPage.subscribe(data => {
-      this.panelBilling.close();
+      if (this.panelBilling) this.panelBilling.close();
 
-      this.panelSettings.close();
-      this.panelSupport.close();
-      this.panelTickets.close();
-      this.panelUsers.close();
-      this.panelDocuments.close();
-      this.panelDevices.close();
+      if (this.panelSettings) this.panelSettings.close();
+      if (this.panelSupport) this.panelSupport.close();
+      if (this.panelTickets) this.panelTickets.close();
+      if (this.panelUsers) this.panelUsers.close();
+      if (this.panelDocuments) this.panelDocuments.close();
+      if (this.panelDevices) this.panelDevices.close();
 
-      this.panelCompanies.openPanel();
-      this.panelCompanies.togglePanel(true);
+      if (this.panelCompanies) this.panelCompanies.openPanel();
+      if (this.panelCompanies) this.panelCompanies.togglePanel(true);
     })
     this.leftPanelStateService.onChangeStateWithoutNavigate.subscribe(data => {
       this.state = data;
@@ -299,6 +304,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'new-companies') this.goToLink(`companies`);
       if (this.state === 'billing-dashboard') this.goToLink('billing-dashboard');
       if (this.state === 'new-services') this.goToLink('default-services');
+      if (this.state === 'default') this.goToLink('default');
       if (this.state === 'new-billable') this.goToLink('billable');
       if (this.state === 'new-billable-invoices') this.goToLink('invoices');
       if (this.state === 'quotes-component') this.goToLink('quotes');

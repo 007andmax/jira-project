@@ -28,28 +28,14 @@
             <ul>
                 <a
                     href
-                    [link]="getLinkSection(customerCompany.clientCompany.id,'dashboard')"
-                    target="_blank"
-                    appRightClickBlank
-                    *ngIf="customerCompany.customerUserRole.getPermission('VIEW_MY_TICKETS')"
-                >
-                    <li
-                        [ngClass]="{'--active':activePage === 'company-dashboard'}"
-                        (click)="setCompnayIdInfo(customerCompany.clientCompany.id);goToCompanySection(customerCompany.clientCompany.id,'dashboard')"
-                    >
-                        Dashboard
-                    </li>
-                </a>
-                <a
-                    href
                     [link]="'tickets'"
                     target="_blank"
                     appRightClickBlank
-                    *ngIf="customerCompany.customerUserRole.getPermission('VIEW_MY_TICKETS')"
+                    *ngIf="customerCompany.customerUserRole.getPermission('VIEW_ALL_TICKETS')"
                 >
                     <li
                         [ngClass]="{'--active':activePage === 'company-tickets'}"
-                        (click)="setCompnayIdInfo(customerCompany.clientCompany.id);setTypeFilter(customerCompany,'ALL')"
+                        (click)="customerPortalStateService.setCompnayIdInfo(customerCompany.clientCompany.id);setTicketsFilter(customerCompany,'ALL')"
                     >
                         Tickets
                     </li>
@@ -63,7 +49,7 @@
                 >
                     <li
                         [ngClass]="{'--active':activePage === 'company-contracts'}"
-                        (click)="setCompnayIdInfo(customerCompany.clientCompany.id);setInvoiceFilter(customerCompany);"
+                        (click)="customerPortalStateService.setCompnayIdInfo(customerCompany.clientCompany.id);setInvoiceFilter(customerCompany);"
                     >
                         Invoices
                     </li>
@@ -77,7 +63,7 @@
                 >
                     <li
                         [ngClass]="{'--active':activePage === 'company-user'}"
-                        (click)="setCompnayIdInfo(customerCompany.clientCompany.id);goToAllUsers(customerCompany.clientCompany.id)"
+                        (click)="customerPortalStateService.setCompnayIdInfo(customerCompany.clientCompany.id);goToAllUsers(customerCompany.clientCompany.id)"
                     >
                         Users
                     </li>
@@ -91,7 +77,7 @@
                 >
                     <li
                         [ngClass]="{'--active':activePage === 'company-devices'}"
-                        (click)="setCompnayIdInfo(customerCompany.clientCompany.id);goToCompanySection(customerCompany.clientCompany.id,'devices')"
+                        (click)="customerPortalStateService.setCompnayIdInfo(customerCompany.clientCompany.id);goToCompanySection(customerCompany.clientCompany.id,'devices')"
                     >
                         Devices
                     </li>
@@ -105,7 +91,7 @@
                 >
                     <li
                         [ngClass]="{'--active':activePage === 'company-devices'}"
-                        (click)="setCompnayIdInfo(customerCompany.clientCompany.id);setQuotesFilter(customerCompany)"
+                        (click)="customerPortalStateService.setCompnayIdInfo(customerCompany.clientCompany.id);setQuotesFilter(customerCompany)"
                     >
                         Quotes
                     </li>
@@ -119,7 +105,7 @@
                 >
                     <li
                         [ngClass]="{'--active':activePage === 'company-devices'}"
-                        (click)="setCompnayIdInfo(customerCompany.clientCompany.id);goToState('new-contracts')"
+                        (click)="customerPortalStateService.setCompnayIdInfo(customerCompany.clientCompany.id);goToState('new-contracts')"
                     >
                         Contracts
                     </li>
@@ -133,7 +119,7 @@
                 >
                     <li
                         [ngClass]="{'--active':activePage === 'company-devices'}"
-                        (click)="setCompnayIdInfo(customerCompany.clientCompany.id);setPaymentsFilter(customerCompany)"
+                        (click)="customerPortalStateService.setCompnayIdInfo(customerCompany.clientCompany.id);setPaymentsFilter(customerCompany)"
                     >
                         Payments
                     </li>

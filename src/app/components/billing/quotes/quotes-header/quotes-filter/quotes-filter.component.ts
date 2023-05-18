@@ -7,6 +7,7 @@ import { MultiDatepickerComponent } from 'src/app/components/shared/multi-datepi
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { QuoteFilter } from '../../class/quote-filter';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-quotes-filter',
@@ -27,10 +28,20 @@ export class QuotesFilterComponent implements OnInit {
   new CompanySetting('Ticketed', 'TICKETED'), new CompanySetting('Unread', 'UNREAD'),
   new CompanySetting('Billed', 'BILLED')];
   constructor(private companiesState: CompaniesStateService,
+    private customerPortalStateService: CustomerPortalStateService,
     private quoteStateService: QuoteStateService) { }
 
   ngOnInit() {
-
+    if (this.customerPortalStateService.isCustomerPortal && this.companiesState.getCompanies().length > 0) this.checkCompanyCustomerUser();
+    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
+      if (this.customerPortalStateService.isCustomerPortal) this.checkCompanyCustomerUser();
+    })
+    this.sub.add(getOnCompanies);
+  }
+  private checkCompanyCustomerUser() {
+    let selectedCompany = this.companiesState.getCompanies().find(item => item.id == localStorage.getItem('company_info_id'));
+    this.companyDp.selectItemWithOutChanges(selectedCompany);
+    this.companyDp.isDisabled = true;
   }
   onSelectStatus(status) {
     this.quotesFilter.setStatus((status) ? status.value : null);
