@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, Output, EventEmitter, ViewChild, NgZone } from '@angular/core';
 import { BillableStateService } from 'src/app/states/billable/billable-state.service';
 import { BillableService } from 'src/app/services/billable/billable.service';
 import { InvoiceNote } from '../class/invoice-note';
@@ -55,6 +55,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
     private invoiceRealTimeService: InvoiceRealTimeService,
     private leftPanelStateService: LeftPanelStateService,
     private invoicesService: InvoicesService,
+    private _ngZone: NgZone,
     private billableService: BillableService) { }
 
 
@@ -210,16 +211,20 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
   }
   private getInvoiceLockTime(id, getComapny) {
     this.billableService.getInvoiceLockTime(id).subscribe((data: any) => {
-      this.billableTaimer = new BillableTaimer(data.time);
-      this.timer = setInterval(() => {
-        if (this.billableTaimer.seconds === 0) {
-          this.billableTaimer.minutes--;
-          this.billableTaimer.seconds = 59;
-        }
-        if (this.billableTaimer.minutes === - 1) this.clearTaimer();
-        this.billableTaimer.seconds--;
-        this.cd.detectChanges();
-      }, 1000);
+      this._ngZone.runOutsideAngular(() => {
+        this.billableTaimer = new BillableTaimer(data.time);
+        this.timer = setInterval(() => {
+          if (this.billableTaimer.seconds === 0) {
+            this.billableTaimer.minutes--;
+            this.billableTaimer.seconds = 59;
+          }
+          if (this.billableTaimer.minutes === - 1) this.clearTaimer();
+          this.billableTaimer.seconds--;
+          this._ngZone.run(() => { this.cd.detectChanges(); });
+        }, 1000);
+        // this._ngZone.run(() => { console.log('Outside Done!'); });
+      });
+
       if (getComapny) this.getCompany(this.billableProfile.id);
       if (!getComapny) {
         this.showPreloader = false;
