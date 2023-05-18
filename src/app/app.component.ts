@@ -294,46 +294,46 @@ export class AppComponent implements OnInit {
             if (item.customerUserRole.getPermission('VIEW_ALL_TICKETS')) {
               this.customerPortalStateService.setCompnayIdInfo(item.clientCompany.id);
               this.setTicketsFilter(item, "ALL");
-              this.router.navigate(
-                [`${data.domain}/tickets/`]);
+
+              this.leftPanelStateService.goToState('new-tickets');
               console.log("1");
               break;
             }
             if (item.customerUserRole.getPermission('VIEW_ALL_INVOICES')) {
               this.customerPortalStateService.setCompnayIdInfo(item.clientCompany.id);
               this.setInvoiceFilter(item);
-              this.router.navigate(
-                [`${data.domain}/invoices/`]);
+              this.leftPanelStateService.goToState('new-billable-invoices');
+
               console.log("2");
               break;
             }
             if (item.customerUserRole.getPermission('VIEW_ALL_DEVICES')) {
               this.customerPortalStateService.setCompnayIdInfo(item.clientCompany.id);
-              this.router.navigate(
-                [`${this.companiesState.getCurrentCompany().domain}/company/`, item.clientCompany.id, "devices"]);
+              this.leftPanelStateService.goToState('company-devices');
+
               console.log("3");
               break;
             }
             if (item.customerUserRole.getPermission('VIEW_ALL_QUOTES')) {
               this.customerPortalStateService.setCompnayIdInfo(item.clientCompany.id);
               this.setQuotesFilter(item);
-              this.router.navigate(
-                [`${this.companiesState.getCurrentCompany().domain}/quotes/`]);
+              this.leftPanelStateService.goToState('quotes-component');
+
               console.log("4");
               break;
             }
             if (item.customerUserRole.getPermission('VIEW_ALL_PAYMENTS')) {
               this.customerPortalStateService.setCompnayIdInfo(item.clientCompany.id);
               this.setPaymentsFilter(item);
-              this.router.navigate(
-                [`${this.companiesState.getCurrentCompany().domain}/payments/`]);
+              this.leftPanelStateService.goToState('new-payments-ng2');
+
               console.log("5");
               break;
             }
             if (i + 1 == this.currentUser.customerCompaniesInfo.length) {
               console.log("6", JSON.parse(JSON.stringify(this.companiesState.getCurrentCompany().domain)));
-              this.router.navigate(
-                [`${this.companiesState.getCurrentCompany().domain}/default`]);
+              this.leftPanelStateService.goToState('default');
+
             }
           }
         } else {
