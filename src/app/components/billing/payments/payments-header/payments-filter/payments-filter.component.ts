@@ -33,6 +33,8 @@ export class PaymentsFilterComponent implements OnInit {
       if (this.customerPortalStateService.isCustomerPortal) this.checkCompanyCustomerUser();
     })
     this.sub.add(getOnCompanies);
+    let onPaymentsFilters = this.customerPortalStateService.onPaymentsFilters.subscribe(data => (this.checkCompanyCustomerUser()));
+    this.sub.add(onPaymentsFilters);
   }
   private checkCompanyCustomerUser() {
     let selectedCompany = this.companiesState.getCompanies().find(item => item.id == localStorage.getItem('company_info_id'));

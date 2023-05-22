@@ -78,6 +78,7 @@
                                                     id="{{ permission }}_{{ role.id }}"
                                                     [checked]="checkRole(role,permission)"
                                                     (click)="togglePermission(role, permission)"
+                                                    [disabled]="isPermissionDisabled(permission, role)"
                                                 >
                                                 <span></span>
                                             </label>

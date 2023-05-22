@@ -14,15 +14,9 @@ export class InvoiceStateService {
   filter: EventEmitter<any> = new EventEmitter();
   openPreviewAside: EventEmitter<any> = new EventEmitter();
   invoices: Array<Invoice> = [];
-  invoicesFilter: InvoicesFilter = new InvoicesFilter();
+
   constructor() { }
 
-  public setInvoicesFilter(data) {
-    this.invoicesFilter = data;
-  }
-  public getInvoicesFilter() {
-    return this.invoicesFilter;
-  }
   public getInvoices() {
     return this.invoices;
   }

@@ -23,6 +23,7 @@ import { UsersRealTimeService } from 'src/app/states/users/users-real-time.servi
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
 import { MarketingSubscriptionType } from '../setting/marketing-email/marketing-subscription-type/class/marketing-subscription-type';
 import { CrmCompanyIndustry } from '../setting/crm-settings/crm-company-industry/class/crm-company-industry';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-users',
@@ -59,6 +60,7 @@ export class UsersComponent implements OnInit {
     private marketingEmailService: MarketingEmailService,
     private usersRealTimeService: UsersRealTimeService,
     private marketingEmailStateService: MarketingEmailStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     private websocketService: WebsocketService) { }
 
   ngOnInit() {

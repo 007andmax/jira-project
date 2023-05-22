@@ -1,13 +1,16 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { ContractsFilter } from 'src/app/components/billing/contracts/class/contracts-filter';
 import { InvoicesFilter } from 'src/app/components/billing/invoices/class/invoices-filter';
 import { PaymentsFilter } from 'src/app/components/billing/payments/class/payments-filter';
 import { QuoteFilter } from 'src/app/components/billing/quotes/class/quote-filter';
 import { TicketsFilter } from 'src/app/components/tickets/tickets/class/tickets-filter';
 import { UserCustomerCompaniesInfo } from 'src/app/components/users/class/user-customer-companies-info';
 import { UserFilter } from 'src/app/components/users/class/user-filter';
+import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
 import { PaymentsStateService } from 'src/app/states/payments/payments-state.service';
@@ -38,6 +41,8 @@ export class LeftPanelCustomerPortalUsersComponent implements OnInit {
     private paymentsStateService: PaymentsStateService,
     private quoteStateService: QuoteStateService,
     public customerPortalStateService: CustomerPortalStateService,
+    private contractsStateService: ContractsStateService,
+    private ticketsService: TicketsService,
     public router: Router,) { }
 
   ngOnInit() {
@@ -50,27 +55,38 @@ export class LeftPanelCustomerPortalUsersComponent implements OnInit {
     return `company/${companyId}/${section}`;
   }
   public setTicketsFilter(company, type) {
-    this.ticketsStateService.onChangeTypeFilter(type);
-    let ticketsFilter: TicketsFilter = new TicketsFilter();
-    ticketsFilter.setCompany(company.clientCompany);
-    if (company.customerUserRole.getPermission('VIEW_MY_TICKETS')) ticketsFilter.setUser(this.currentUser);
-    this.ticketsStateService.onInitFilter(ticketsFilter);
+    this.ticketsStateService.setListType(type);
+    /*   let ticketsFilter: TicketsFilter = new TicketsFilter();
+       ticketsFilter.setListType(type);
+       ticketsFilter.setCompany(company.clientCompany);
+       if (company.customerUserRole.getPermission('VIEW_MY_TICKETS')) ticketsFilter.setUser(this.currentUser);*/
+    this.customerPortalStateService.setTicketsFilter(company, "ALL", this.currentUser);
+    // this.customerPortalStateService.setTicketFilters(ticketsFilter);
+    //this.ticketsStateService.onInitFilter(ticketsFilter);
     this.goToState('new-tickets');
-
+    this.ticketsService.getCount(this.customerPortalStateService.getTicketsFilter().getDataForRequest()).subscribe(data => {
+      this.ticketsStateService.onInitCount(data);
+    })
+  }
+  public getSelectedCompnayId() {
+    return localStorage.getItem("company_info_id");
   }
   public goToState(state) {
     //this.quoteStateService.goToState(state);
     this.onChangeState.emit(state);
   }
-  public goToAllUsers(id) {
-    this.goToState('new-users');
-    this.onShowAllUsers(id);
+  public setContractsFilter(company) {
+    let filter: ContractsFilter = new ContractsFilter();
+    filter.setCompany(company.clientCompany);
+    this.contractsStateService.setContractsFilter(filter);
+    this.goToState('new-contracts');
   }
-  onShowAllUsers(id) {
+  public setUsersFilter(id) {
     this.filter.setClientType(null);
     this.filter.setCompany(id);
     this.setShowArchivedCompanies(false);
     this.usersStateService.onInitFilter(this.filter);
+    this.goToState('new-users');
   }
   setShowArchivedCompanies(data) {
     this.usersStateService.setShowArchivedCompanies(data);
@@ -84,21 +100,24 @@ export class LeftPanelCustomerPortalUsersComponent implements OnInit {
     this.onOpenPanel.emit(null);
   }
   setQuotesFilter(company) {
-    let filter: QuoteFilter = new QuoteFilter();
-    filter.setCompanyName(company.clientCompany.name);
-    this.quoteStateService.setQuotesFilter(filter);
+    /*  let filter: QuoteFilter = new QuoteFilter();
+      filter.setCompanyName(company.clientCompany.name);
+      this.quoteStateService.setQuotesFilter(filter);*/
+    this.customerPortalStateService.setQuotesFilter(company);
     this.goToState('quotes-component');
   }
   setPaymentsFilter(company) {
-    let paymentsFilter: PaymentsFilter = new PaymentsFilter();
-    paymentsFilter.setCompany(company.clientCompany.name);
-    this.paymentsStateService.setPaymentsFilter(paymentsFilter);
+    /*  let paymentsFilter: PaymentsFilter = new PaymentsFilter();
+      paymentsFilter.setCompany(company.clientCompany.name);
+      this.paymentsStateService.setPaymentsFilter(paymentsFilter);*/
+    this.customerPortalStateService.setPaymentsFilter(company)
     this.goToState('new-payments-ng2');
   }
   setInvoiceFilter(company) {
-    let invoicesFilter: InvoicesFilter = new InvoicesFilter();
-    invoicesFilter.setCompany(company.clientCompany.name);
-    this.invoiceStateService.setInvoicesFilter(invoicesFilter);
+    /*  let invoicesFilter: InvoicesFilter = new InvoicesFilter();
+      invoicesFilter.setCompany(company.clientCompany.name);
+      this.invoiceStateService.setInvoicesFilter(invoicesFilter);*/
+    this.customerPortalStateService.setInvoiceFilter(company)
     this.goToState('new-billable-invoices');
   }
   private getCurrentUser(data) {

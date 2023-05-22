@@ -278,11 +278,11 @@ export class AppComponent implements OnInit {
     })
     this.companiesState.onCurrentCompany.subscribe(data => {
       if (!this.currentUser) return;
-      if (this.router.url.includes("tickets") && (this.state == "new-tickets" || this.state == '')) {
+      if (!this.customerPortalStateService.isCustomerPortal && this.router.url.includes("tickets") && (this.state == "new-tickets" || this.state == '')) {
         this.ticketsStateService.onChangeTypeFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
         this.ticketsStateService.onChangeLeftPanelFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
       }
-      if (this.router.url === "/" && this.currentUser.role !== "SUPER_ADMIN" && this.state == 'new-tickets' && this.main_page == PAGE_MAIN && !this.ticketsStateService.getListType()) {
+      if (!this.customerPortalStateService.isCustomerPortal && this.router.url === "/" && this.currentUser.role !== "SUPER_ADMIN" && this.state == 'new-tickets' && this.main_page == PAGE_MAIN && !this.ticketsStateService.getListType()) {
         this.ticketsStateService.onChangeTypeFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
         this.ticketsStateService.onChangeLeftPanelFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
       }
@@ -292,49 +292,45 @@ export class AppComponent implements OnInit {
           for (let i = 0; i < this.currentUser.customerCompaniesInfo.length; i++) {
             let item = this.currentUser.customerCompaniesInfo[i];
             if (item.customerUserRole.getPermission('VIEW_ALL_TICKETS')) {
-              this.customerPortalStateService.setCompnayIdInfo(item.clientCompany.id);
-              this.setTicketsFilter(item, "ALL");
-
+              /*   this.customerPortalStateService.setCompnayIdInfo(item.clientCompany.id);
+                 this.setTicketsFilter(item, "ALL");
+   */
               this.leftPanelStateService.goToState('new-tickets');
               console.log("1");
               break;
             }
             if (item.customerUserRole.getPermission('VIEW_ALL_INVOICES')) {
-              this.customerPortalStateService.setCompnayIdInfo(item.clientCompany.id);
-              this.setInvoiceFilter(item);
+              /*  this.customerPortalStateService.setCompnayIdInfo(item.clientCompany.id);
+                this.setInvoiceFilter(item);*/
               this.leftPanelStateService.goToState('new-billable-invoices');
 
               console.log("2");
               break;
             }
             if (item.customerUserRole.getPermission('VIEW_ALL_DEVICES')) {
-              this.customerPortalStateService.setCompnayIdInfo(item.clientCompany.id);
+              /*   this.customerPortalStateService.setCompnayIdInfo(item.clientCompany.id);*/
               this.leftPanelStateService.goToState('company-devices');
 
               console.log("3");
               break;
             }
             if (item.customerUserRole.getPermission('VIEW_ALL_QUOTES')) {
-              this.customerPortalStateService.setCompnayIdInfo(item.clientCompany.id);
-              this.setQuotesFilter(item);
+              /*  this.customerPortalStateService.setCompnayIdInfo(item.clientCompany.id);
+                this.setQuotesFilter(item);*/
               this.leftPanelStateService.goToState('quotes-component');
 
               console.log("4");
               break;
             }
             if (item.customerUserRole.getPermission('VIEW_ALL_PAYMENTS')) {
-              this.customerPortalStateService.setCompnayIdInfo(item.clientCompany.id);
-              this.setPaymentsFilter(item);
+              /* this.customerPortalStateService.setCompnayIdInfo(item.clientCompany.id);
+               this.setPaymentsFilter(item);*/
               this.leftPanelStateService.goToState('new-payments-ng2');
 
               console.log("5");
               break;
             }
-            if (i + 1 == this.currentUser.customerCompaniesInfo.length) {
-              console.log("6", JSON.parse(JSON.stringify(this.companiesState.getCurrentCompany().domain)));
-              this.leftPanelStateService.goToState('default');
-
-            }
+            if (i + 1 == this.currentUser.customerCompaniesInfo.length) this.leftPanelStateService.goToState('default');
           }
         } else {
           this.ticketsStateService.onChangeTypeFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
@@ -371,30 +367,32 @@ export class AppComponent implements OnInit {
       this.state = data;
     })
   }
-  setPaymentsFilter(company) {
-    let paymentsFilter: PaymentsFilter = new PaymentsFilter();
-    paymentsFilter.setCompany(company.clientCompany.name);
-    this.paymentsStateService.setPaymentsFilter(paymentsFilter);
-
-  }
-  public setTicketsFilter(company, type) {
-    this.ticketsStateService.onChangeTypeFilter(type);
-    let ticketsFilter: TicketsFilter = new TicketsFilter();
-    ticketsFilter.setCompany(company.clientCompany);
-    if (company.customerUserRole.getPermission('VIEW_MY_TICKETS')) ticketsFilter.setUser(this.currentUser);
-    this.ticketsStateService.onInitFilter(ticketsFilter);
-  }
-  setInvoiceFilter(company) {
-    let invoicesFilter: InvoicesFilter = new InvoicesFilter();
-    invoicesFilter.setCompany(company.clientCompany.name);
-    this.invoiceStateService.setInvoicesFilter(invoicesFilter);
-  }
-  setQuotesFilter(company) {
-    let filter: QuoteFilter = new QuoteFilter();
-    filter.setCompanyName(company.clientCompany.name);
-    this.quoteStateService.setQuotesFilter(filter);
-
-  }
+  /* setPaymentsFilter(company) {
+     let paymentsFilter: PaymentsFilter = new PaymentsFilter();
+     paymentsFilter.setCompany(company.clientCompany.name);
+     this.paymentsStateService.setPaymentsFilter(paymentsFilter);
+ 
+   }
+   public setTicketsFilter(company, type) {
+     this.ticketsStateService.onChangeTypeFilter(type);
+     let ticketsFilter: TicketsFilter = new TicketsFilter();
+     ticketsFilter.setCompany(company.clientCompany);
+     ticketsFilter.setListType(type);
+     if (company.customerUserRole.getPermission('VIEW_MY_TICKETS')) ticketsFilter.setUser(this.currentUser);
+     //this.ticketsStateService.onInitFilter(ticketsFilter);
+     this.customerPortalStateService.setTicketFilters(ticketsFilter);
+   }
+   setInvoiceFilter(company) {
+     let invoicesFilter: InvoicesFilter = new InvoicesFilter();
+     invoicesFilter.setCompany(company.clientCompany.name);
+     this.invoiceStateService.setInvoicesFilter(invoicesFilter);
+   }
+   setQuotesFilter(company) {
+     let filter: QuoteFilter = new QuoteFilter();
+     filter.setCompanyName(company.clientCompany.name);
+     this.quoteStateService.setQuotesFilter(filter);
+ 
+   }*/
   onCheckGoogleAuthenticator() {
     const modalRef = this.modalService.open(GoogleAuthenticatorComponent, { windowClass: 'quote-send-modal page-settings', backdrop: 'static', keyboard: false });
     /* let onReset = modalRef.componentInstance.onReset.subscribe(data => {

@@ -37,6 +37,8 @@ export class QuotesFilterComponent implements OnInit {
       if (this.customerPortalStateService.isCustomerPortal) this.checkCompanyCustomerUser();
     })
     this.sub.add(getOnCompanies);
+    let onQuotesFilters = this.customerPortalStateService.onQuotesFilters.subscribe(data => (this.checkCompanyCustomerUser()));
+    this.sub.add(onQuotesFilters);
   }
   private checkCompanyCustomerUser() {
     let selectedCompany = this.companiesState.getCompanies().find(item => item.id == localStorage.getItem('company_info_id'));

@@ -47,13 +47,27 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.customerPortalStateService.isCustomerPortal) {
-      this.ticketsFilter.setFilter(JSON.parse(JSON.stringify(this.ticketsStateService.getTicketsFilter())));
+      this.ticketsFilter.setListType("ALL");
+      this.ticketsFilter.setFilter(JSON.parse(JSON.stringify(this.customerPortalStateService.getTicketsFilter())));
       console.log("this.ticketsFilter", this.ticketsFilter);
+      this.onScroll();
+    } else {
+      /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
+      /* START */
+      this.ticketsFilter.setListType(this.ticketsStateService.getListType());
+      if (this.ticketsStateService.getListType()) this.onScroll();
+      /* END */
     }
-    /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
-    /* START */
-    this.ticketsFilter.setListType(this.ticketsStateService.getListType());
-    /* END */
+    let onTicketFilters = this.customerPortalStateService.onTicketFilters.subscribe(data => {
+      this.ticketsFilter.setListType("ALL");
+      this.ticketsFilter.setFilter(JSON.parse(JSON.stringify(this.customerPortalStateService.getTicketsFilter())));
+      console.log("this.ticketsFilter", this.ticketsFilter);
+      this.showPreloader = true;
+      document.body.querySelector(".main-container").scrollTo(0, 0);
+      this.setDefaultScoll();
+      this.onScroll();
+    });
+    this.sub.add(onTicketFilters);
 
     this.ticketsStateService.getOnAddTicket().subscribe(data => {
       if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter, data) && !this.tickets.find(item => item.id == data.id) && !(this.page_number == 0 && this.showPreloader)) {
@@ -82,6 +96,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     });
 
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
+      console.log("getOnInitFilter", data);
       this.ticketsFilter = data;
       this.showPreloader = true;
       document.body.querySelector(".main-container").scrollTo(0, 0);
@@ -89,7 +104,6 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       this.onScroll();
     })
     this.sub.add(getOnInitFilter);
-    if (this.ticketsStateService.getListType()) this.onScroll();
     this.ticketsStateService.getOnInitColor().subscribe(data => {
       this.listColors = data;
     })

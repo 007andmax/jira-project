@@ -70,6 +70,8 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       if (this.customerPortalStateService.isCustomerPortal) this.checkCompanyCustomerUser();
     })
     this.sub.add(getOnCompanies);
+    let onTicketFilters = this.customerPortalStateService.onTicketFilters.subscribe(data => (this.checkCompanyCustomerUser()));
+    this.sub.add(onTicketFilters);
     this.listType = this.ticketsStateService.getListType();
     this.ticketsFilter.setListType(this.listType);
     /* END */

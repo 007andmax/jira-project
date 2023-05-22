@@ -1,6 +1,6 @@
 {
   "/": {
-    "target": "https://608d-45-12-24-135.ngrok-free.app",
+    "target": "https://d9fe-45-12-24-135.ngrok-free.app",
     "secure": false,
     "pathRewrite": {
       "^/": "",

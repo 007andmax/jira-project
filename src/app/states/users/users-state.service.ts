@@ -100,9 +100,12 @@ export class UsersStateService {
   }
   public onInitGetCurrentUser() {
     this.userService.getCurrentUser().subscribe((data: any) => {
-      if (data.accountType == "TECH") localStorage.removeItem("company_info_id");
-      if (data.accountType == "CLIENT") this.customerPortalStateService.setCustomerPortal(true);
       this.currentUser = new CurrentUser(data);
+      if (data.accountType == "TECH") localStorage.removeItem("company_info_id");
+      if (data.accountType == "CLIENT") {
+        this.customerPortalStateService.setCustomerPortal(true);
+        this.customerPortalStateService.setFilters(this.currentUser);
+      }
       this.onInitCurrentUser(this.currentUser);
       if (this.currentUser.role !== "SUPER_ADMIN" && !this.isGetAllUsers) this.initGetAllUsers();
     })
