@@ -24,6 +24,7 @@ import { CrmCompanyJobTitle } from '../setting/crm-settings/crm-company-job-titl
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
 import { MarketingSubscriptionType } from '../setting/marketing-email/marketing-subscription-type/class/marketing-subscription-type';
 import { CrmCompanyIndustry } from '../setting/crm-settings/crm-company-industry/class/crm-company-industry';
+import { UserCustomerCompaniesInfo } from '../users/class/user-customer-companies-info';
 
 @Component({
   selector: 'company-user',
@@ -216,9 +217,15 @@ export class CompanyUserComponent implements OnInit {
 
         if (newChange.action === 'DEFAULT_SUBSCRIPTION_SAVED') {
           const reqIndex = this.reqUsers.findIndex((item) => item.id === newChange.data.userId);
-          if (reqIndex > -1) this.reqUsers[reqIndex].changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
+          if (reqIndex > -1) {
+            let index = this.reqUsers[reqIndex].customerCompaniesInfo.findIndex(item => item.companyId === newChange.data.companyId);
+            if (index > -1) this.reqUsers[reqIndex].customerCompaniesInfo[index] = new UserCustomerCompaniesInfo(newChange.data);
+          }
           const userIndex = this.users.findIndex((item) => item.id === newChange.data.userId);
-          if (userIndex > -1) this.users[userIndex].changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
+          if (userIndex > -1) {
+            let index = this.users[userIndex].customerCompaniesInfo.findIndex(item => item.companyId === newChange.data.companyId);
+            if (index > -1) this.users[userIndex].customerCompaniesInfo[index] = new UserCustomerCompaniesInfo(newChange.data);
+          }
           this.cd.detectChanges();
         }
         if (newChange.action === 'CUSTOM_SUBSCRIPTION_SAVED') {
@@ -256,7 +263,6 @@ export class CompanyUserComponent implements OnInit {
   private getUsersList(data) {
 
     this.reqUsers = data.filter(item => ((!this.showArchivedUsers) ? !item.deletedAt : item.deletedAt) && item.accountType !== "TECH");
-
     // this.onInirCalculate();
     this.reqUsers.sort((a, b) => ((a.firstName + a.lastName).toLowerCase() > (b.firstName + b.lastName).toLowerCase()) ?
       1 : (((b.firstName + b.lastName).toLowerCase() > (a.firstName + a.lastName).toLowerCase()) ? -1 : 0));

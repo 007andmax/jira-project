@@ -204,7 +204,7 @@ export class CompanyFilter {
                 }
             }
         }
-        return `${primaryContact.firstName} ${primaryContact.lastName}`;
+        return primaryContact ? `${primaryContact.firstName} ${primaryContact.lastName}` : '';
     }
     private getEmail(company) {
         let primaryContact;
@@ -215,6 +215,6 @@ export class CompanyFilter {
                 }
             }
         }
-        return primaryContact.primaryEmail;
+        return primaryContact ? primaryContact.primaryEmail : '';
     }
 }

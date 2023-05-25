@@ -6,6 +6,7 @@ import { UserProfile } from './user-profile';
 import { UserDefaultSubscriptionAdd } from './user-default-subscription-add';
 import { UserCustomerCompaniesInfo } from './user-customer-companies-info';
 import { UserCustomerCompaniesInfoAdd } from './user-customer-companies-info-add';
+import { UserCustomerCompaniesInfoUpdate } from './user-customer-companies-info-update';
 
 export class UserUpdate {
   phoneNumbers: Array<UserPhoneNumber>;
@@ -27,7 +28,7 @@ export class UserUpdate {
   jobDescription: string;
   jobTypeId: string;
   customSubscriptionIds: Array<string> = [];
-  customerCompaniesInfo: Array<UserCustomerCompaniesInfoAdd> = [];
+  customerCompaniesInfo: Array<UserCustomerCompaniesInfoUpdate> = [];
   userIndustryId: string;
   sendPortalInvitation: boolean;
   constructor(data: UserProfile, user: User) {
@@ -61,6 +62,6 @@ export class UserUpdate {
     this.jobDescription = data.jobDescription;
     this.jobTypeId = data.jobTypeId;
     this.userIndustryId = data.userIndustryId;
-    this.customerCompaniesInfo = data.customerCompaniesInfo.filter(item => item.companyId).map(item => new UserCustomerCompaniesInfoAdd(item));
+    this.customerCompaniesInfo = data.customerCompaniesInfo.filter(item => item.companyId).map(item => new UserCustomerCompaniesInfoUpdate(item));
   }
 }

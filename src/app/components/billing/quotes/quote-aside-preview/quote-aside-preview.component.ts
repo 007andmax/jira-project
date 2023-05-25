@@ -11,6 +11,7 @@ import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { QUOTE_MODAL_ACTION_PREVIEW } from 'src/app/const/quote';
 import { QuoteRealTimeService } from '../quote-realtime/quote-realtime.service';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-quote-aside-preview',
@@ -28,6 +29,7 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
     private quoteServices: QuoteService,
     private modalService: NgbModal,
     public cd: ChangeDetectorRef,
+    public customerPortalStateService: CustomerPortalStateService,
     private quoteRealTimeService: QuoteRealTimeService,
     private confirmStateService: ConfirmStateService) { }
 

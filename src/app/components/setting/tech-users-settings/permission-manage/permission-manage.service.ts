@@ -107,8 +107,8 @@ export class PermissionManageService {
 
   sectionsCustomPermission = {
     'Tickets Area': [
-      'VIEW_ALL_TICKETS',
       'VIEW_MY_TICKETS',
+      'VIEW_ALL_TICKETS',
       'EDIT_OTHER_TICKETS'
     ],
     'Users': [

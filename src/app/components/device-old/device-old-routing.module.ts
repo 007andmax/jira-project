@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PermissionTechUserService } from 'src/app/services/users/permission-tech-user.service';
 import { DeviceOldComponent } from './device-old.component';
+import { PermissionNoSuperAdminService } from 'src/app/services/users/permission-no-super-admin.service';
 
 
 const routes: Routes = [{
@@ -10,22 +10,22 @@ const routes: Routes = [{
         {
             path: 'dashboard/:type/:id',
             loadChildren: './dashboard/dashboard.module#DashboardOldModule',
-            canActivate: [PermissionTechUserService]
+            canActivate: [PermissionNoSuperAdminService]
         },
         {
             path: 'hardware/:type/:id',
             loadChildren: './hardware/hardware.module#HardwareOldModule',
-            canActivate: [PermissionTechUserService]
+            canActivate: [PermissionNoSuperAdminService]
         },
         {
             path: 'software/:type/:id',
             loadChildren: './software/software.module#SoftwareOldModule',
-            canActivate: [PermissionTechUserService]
+            canActivate: [PermissionNoSuperAdminService]
         },
         {
             path: 'terminal/:type/:id',
             loadChildren: './terminal/terminal.module#TerminalOldModule',
-            canActivate: [PermissionTechUserService]
+            canActivate: [PermissionNoSuperAdminService]
         },
     ]
 }];

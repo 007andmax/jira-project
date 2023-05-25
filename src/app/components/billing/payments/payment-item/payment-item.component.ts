@@ -9,6 +9,7 @@ import { PaymentsService } from 'src/app/services/payments/payments.service';
 import * as moment from "moment";
 import { DELETE_PAYMENT } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-payment-item',
@@ -28,6 +29,7 @@ export class PaymentItemComponent implements OnInit {
   constructor(private companiesStateService: CompaniesStateService,
     private modalService: NgbModal,
     private paymentsStateService: PaymentsStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     private confirmStateService: ConfirmStateService,) { }
 
   ngOnInit() {

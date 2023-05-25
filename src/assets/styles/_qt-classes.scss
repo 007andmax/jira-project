@@ -50,7 +50,8 @@
 
   &.--disabled {
     span {
-      background: $gray-500--old;
+      background: $gray-100;
+      border: 1px solid $gray-200;
     }
   }
 }

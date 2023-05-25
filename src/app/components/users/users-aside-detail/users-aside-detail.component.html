@@ -215,7 +215,7 @@
                     class="pointer"
                     [ngClass]="{'active':tab === 'passwords'}"
                     (click)="setTab('passwords')"
-                    *ngIf="getPermissions('VIEW_PASSWORD_SECTION')"
+                    *ngIf="getPermissions('VIEW_PASSWORD_SECTION') && !customerPortalStateService.isCustomerPortal"
                 >
                     Passwords
                 </span>
@@ -223,6 +223,7 @@
                     class="pointer"
                     [ngClass]="{'active':tab === 'documents'}"
                     (click)="setTab('documents')"
+                    *ngIf="!customerPortalStateService.isCustomerPortal"
                 >
                     Documents
                 </span>

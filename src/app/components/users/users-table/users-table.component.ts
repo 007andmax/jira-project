@@ -131,6 +131,9 @@ export class UsersTableComponent implements OnInit, OnDestroy {
 
     })
   }
+  getDefaultSubscriptions() {
+    return this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).defaultSubscriptions;
+  }
   edit() {
     this.usersStateService.setUserForEdit(new User(JSON.parse(JSON.stringify(this.user))));
     this.usersStateService.onOpenEditAsige();

@@ -15,6 +15,7 @@ import { UsersRealTimeService } from 'src/app/states/users/users-real-time.servi
 import { UserDefaultSubscription } from 'src/app/components/users/class/user-default-subscription';
 import { UserCustomSubscription } from 'src/app/components/users/class/user-custom-subscription';
 import { UserCustomerCompaniesDefaultSubscribtionAdd } from 'src/app/components/users/class/user-customer-companies-default-subscribtion-add';
+import { UserCustomerCompaniesInfo } from 'src/app/components/users/class/user-customer-companies-info';
 
 @Component({
   selector: 'app-ticket-edit-aside-users',
@@ -72,9 +73,15 @@ export class TicketEditAsideUsersComponent implements OnInit, OnDestroy {
       let stompClient = this.usersRealTimeService.changeSubscriptionsUsers.subscribe(newChange => {
         if (newChange.action === 'DEFAULT_SUBSCRIPTION_SAVED') {
           const reqIndex = this.reqUsers.findIndex((item) => item.id === newChange.data.userId);
-          if (reqIndex > -1) this.reqUsers[reqIndex].changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
+          if (reqIndex > -1) {
+            let index = this.reqUsers[reqIndex].customerCompaniesInfo.findIndex(item => item.companyId === newChange.data.companyId);
+            if (index > -1) this.reqUsers[reqIndex].customerCompaniesInfo[index] = new UserCustomerCompaniesInfo(newChange.data);
+          }
           const userIndex = this.users.findIndex((item) => item.id === newChange.data.userId);
-          if (userIndex > -1) this.users[userIndex].changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
+          if (userIndex > -1) {
+            let index = this.users[userIndex].customerCompaniesInfo.findIndex(item => item.companyId === newChange.data.companyId);
+            if (index > -1) this.users[userIndex].customerCompaniesInfo[index] = new UserCustomerCompaniesInfo(newChange.data);
+          }
           this.cd.detectChanges();
         }
         if (newChange.action === 'CUSTOM_SUBSCRIPTION_SAVED') {

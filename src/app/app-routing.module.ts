@@ -23,259 +23,264 @@ import { PermissionCustomerPermissionsService } from './components/setting/custo
 import { PermissionPaymentsService } from './components/billing/payments/permission-payments.service';
 import { PermissionQuotesService } from './components/billing/quotes/permission-quotes.service';
 import { PermissionTicketsService } from './components/tickets/tickets/permission-tickets.service';
+import { PermissionSuperAdminService } from './services/users/permission-super-admin.service';
+import { PermissionCompanyDevicesService } from './components/company-devices/permission-company-devices.service';
+import { PermissionNoSuperAdminService } from './services/users/permission-no-super-admin.service';
+import { PermissionClientUserService } from './services/users/permission-client-user.service';
 
 const routes: Routes = [
 
   {
     path: ':domain/tickets',
     loadChildren: './components/tickets/tickets/tickets.module#TicketsModule',
-    canActivate: [PermissionTicketsService, PermissionTechUserService]
+    canActivate: [PermissionTicketsService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/ticket/:id',
     loadChildren: './components/tickets/tickets/ticket-detail/ticket-detail.module#TicketDetailModule',
-    canActivate: [PermissionTicketsService, PermissionTechUserService]
+    canActivate: [PermissionTicketsService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/support-page',
-    loadChildren: './components/super-admin/support-page/support-page.module#SupportPageModule'
+    loadChildren: './components/super-admin/support-page/support-page.module#SupportPageModule',
+    canActivate: [PermissionSuperAdminService]
   },
   {
     path: ':domain/password-manager',
     loadChildren: './components/password-manager/password-manager.module#PasswordManagerModule',
-    canActivate: [PermissionPasswordManagerService, PermissionTechUserService]
+    canActivate: [PermissionPasswordManagerService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/company/:id/password-manager',
     loadChildren: './components/company-password-manager/company-password-manager.module#CompanyPasswordManagerModule',
-    canActivate: [PermissionCompanyService, PermissionTechUserService]
+    canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/company/:id/user',
     loadChildren: './components/company-user/company-user.module#CompanyUserModule',
-    canActivate: [PermissionCompanyService, PermissionUsersService, PermissionTechUserService]
+    canActivate: [PermissionCompanyService, PermissionUsersService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/company/:id/tickets',
     loadChildren: './components/company-tickets/company-tickets.module#CompanyTicketsModule',
-    canActivate: [PermissionCompanyService, PermissionTechUserService]
+    canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/company/:id/dashboard',
     loadChildren: './components/company-dashboard/company-dashboard.module#CompanyDashboardModule',
-    canActivate: [PermissionCompanyService, PermissionTechUserService]
+    canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/quotes',
     loadChildren: './components/billing/quotes/quotes.module#QuotesModule',
-    canActivate: [PermissionQuotesService, PermissionTechUserService]
+    canActivate: [PermissionQuotesService, PermissionNoSuperAdminService]
 
 
   },
   {
     path: ':domain/recurring-tickets',
     loadChildren: './components/tickets/recurring-tickets/recurring-tickets.module#RecurringTicketsModule',
-    canActivate: [PermissionTechUserService]
+    canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/companies',
     loadChildren: './components/companies/companies.module#CompaniesModule',
-    canActivate: [PermissionCompanyService, PermissionTechUserService]
+    canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]
 
   }, {
     path: ':domain/users',
     loadChildren: './components/users/users.module#UsersModule',
-    canActivate: [PermissionUsersService, PermissionTechUserService]
+    canActivate: [PermissionUsersService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/reports',
     loadChildren: './components/reports/reports.module#ReportsModule',
-    canActivate: [PermissionTechUserService]
+    canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/report/:id',
     loadChildren: './components/reports/item-report/item-report.module#ItemReportModule',
-    canActivate: [PermissionReportsService, PermissionTechUserService]
+    canActivate: [PermissionReportsService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/setting/myprofile',
     loadChildren: './components/setting/my-profile/my-profile.module#MyProfileModule',
-    canActivate: [PermissionTechUserService]
+    canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/setting/tags',
     loadChildren: './components/setting/manage-tags/manage-tags.module#ManageTagsModule',
-    canActivate: [PermissionManageTagsService, PermissionTechUserService]
+    canActivate: [PermissionManageTagsService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/setting/customer-portal',
     loadChildren: './components/setting/customer-permissions/customer-permissions.module#CustomerPermissionsModule',
-    canActivate: [PermissionCustomerPermissionsService, PermissionTechUserService]
+    canActivate: [PermissionCustomerPermissionsService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/setting/products-settings',
     loadChildren: './components/setting/products-settings/products-settings.module#ProductsSettingsModule',
-    canActivate: [PermissionProductsSettingsService, PermissionTechUserService]
+    canActivate: [PermissionProductsSettingsService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/setting/companyprofile',
     loadChildren: './components/setting/company-profile/company-profile.module#CompanyProfileModule',
-    canActivate: [PermissionTechUserService]
+    canActivate: [PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/setting/techUsers',
     loadChildren: './components/setting/tech-users-settings/tech-users-settings.module#TechUsersSettingsModule',
-    canActivate: [PermissionsTechUsersService, PermissionTechUserService]
+    canActivate: [PermissionsTechUsersService, PermissionNoSuperAdminService]
 
 
   },
   {
     path: ':domain/setting/emailSetting',
     loadChildren: './components/setting/email-setting/email-setting.module#EmailSettingModule',
-    canActivate: [PermissionEmailSettingService, PermissionTechUserService]
+    canActivate: [PermissionEmailSettingService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/setting/ticket-settings',
     loadChildren: './components/setting/ticket-settings-page/ticket-settings-page.module#TicketSettingsPageModule',
-    canActivate: [PermissionTicketSettingsService, PermissionTechUserService]
+    canActivate: [PermissionTicketSettingsService, PermissionNoSuperAdminService]
 
   },
   /* {
      path: ':domain/setting/permission',
      loadChildren: './components/setting/permission-manage/permission-manage.module#PermissionManageModule',
-     canActivate: [PermissionTechUserService]
+     canActivate: [PermissionNoSuperAdminService]
    },*/
   {
     path: ':domain/setting/emailTemplate',
     loadChildren: './components/setting/email-template/email-template.module#EmailTemplateModule',
-    canActivate: [PermissionEmailTemplateService, PermissionTechUserService]
+    canActivate: [PermissionEmailTemplateService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/setting/marketing-email',
     loadChildren: './components/setting/marketing-email/marketing-email.module#MarketingEmailModule',
-    canActivate: [PermissionTechUserService]
+    canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/setting/finance',
     loadChildren: './components/setting/accounting/accounting-settings.module#AccoutingSettingsModule',
-    canActivate: [PermissionAccountingSettingsService, PermissionTechUserService]
+    canActivate: [PermissionAccountingSettingsService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/setting/crm-settings',
     loadChildren: './components/setting/crm-settings/crm-settings.module#CrmSettingsModule',
-    canActivate: [PermissionCrmSettingsService, PermissionTechUserService]
+    canActivate: [PermissionCrmSettingsService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/setting/commission',
     loadChildren: './components/setting/commission/commission.module#CommissionModule',
-    canActivate: [PermissionTechUserService]
+    canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
   },
   /* {
      path: ':domain/setting/deviceSetting',
      loadChildren: './components/setting/device-setting/device-setting.module#DeviceSettingModule',
-     // canActivate: [PermissionTechUserService]
+     // canActivate: [PermissionNoSuperAdminService]
      canActivate: [TestPermissionService]
    },*/
   {
     path: ':domain/inventory/products',
     loadChildren: './components/inventory/inventory.module#InventoryModule',
-    canActivate: [PermissionTechUserService]
+    canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/documents/add',
     loadChildren: './components/documents/documents-add/documents-add.module#DocumentsAddModule',
-    canActivate: [PermissionTechUserService]
+    canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/documents/edit/:id',
     loadChildren: './components/documents/documents-edit/documents-edit.module#DocumentsEditModule',
-    canActivate: [PermissionTechUserService]
+    canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/documents/category/:id',
     loadChildren: './components/documents/documents-category/documents-category.module#DocumentsCategoryModule',
-    canActivate: [PermissionTechUserService]
+    canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/company/:id/documents',
     loadChildren: './components/companies/company-documents/company-documents.module#CompanyDocumentsModule',
-    canActivate: [PermissionCompanyService, PermissionTechUserService]
+    canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]
 
 
   },
   {
     path: ':domain/documents/preview/:id',
     loadChildren: './components/documents/document-preview/document-preview.module#DocumentPreviewModule',
-    canActivate: [PermissionTechUserService]
+    canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/company/:id/products',
     loadChildren: './components/companies/company-products/company-products.module#CompanyProductsModule',
-    canActivate: [PermissionCompanyService, PermissionTechUserService]
+    canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/billable',
     loadChildren: './components/billing/billable/billable.module#BillableModule',
-    canActivate: [PermissionBillableService, PermissionTechUserService]
+    canActivate: [PermissionBillableService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/default-services',
     loadChildren: './components/billing/default-services/default-services.module#DefaultServicesModule',
-    canActivate: [PermissionTechUserService]
+    canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/invoices',
     loadChildren: './components/billing/invoices/invoices.module#InvoicesModule',
-    canActivate: [PermissionInvoicesService, PermissionTechUserService]
+    canActivate: [PermissionInvoicesService, PermissionNoSuperAdminService]
 
 
   },
   {
     path: ':domain/billable-tickets',
     loadChildren: './components/billing/billable/billable-tickets/billable-tickets.module#BillableTicketsModule',
-    canActivate: [PermissionBillableService, PermissionTechUserService]
+    canActivate: [PermissionBillableService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/contracts',
     loadChildren: './components/billing/contracts/contracts.module#ContractsModule',
-    canActivate: [PermissionContractsService, PermissionTechUserService]
+    canActivate: [PermissionContractsService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/payments',
     loadChildren: './components/billing/payments/payments.module#PaymentsModule',
-    canActivate: [PermissionTechUserService, PermissionPaymentsService]
+    canActivate: [PermissionNoSuperAdminService, PermissionPaymentsService]
 
 
   },
   {
     path: ':domain/device',
     loadChildren: './components/device/device-root.module#DeviceModule',
-    canActivate: [TestPermissionService]
+    canActivate: [PermissionTechUserService, TestPermissionService]
   },
   {
     path: ':company/device-old',
     loadChildren: './components/device-old/device-old.module#DevicesOldModule',
-    canActivate: [TestPermissionService]
+    canActivate: [PermissionTechUserService, TestPermissionService]
   },
   {
     path: ':domain/billing-dashboard',
@@ -286,79 +291,82 @@ const routes: Routes = [
   {
     path: ':domain/company/:id/contracts',
     loadChildren: './components/companies/company-contracts/company-contracts.module#CompanyContractsModule',
-    canActivate: [PermissionContractsService, PermissionTechUserService]
+    canActivate: [PermissionContractsService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/tickets-dashboard',
     loadChildren: './components/tickets/tickets-dashboard/tickets-dashboard.module#TicketsDashboardModule',
-    canActivate: [PermissionTechUserService]
+    canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
   },
   /* {
      path: ':domain/company/:id/network-scan-beta',
      loadChildren: './components/company-network-scan-beta/company-network-scan-beta.module#CompanyNetworkScanBetaModule',
-     // canActivate: [PermissionCompanyService, PermissionTechUserService]
+     // canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]
      canActivate: [TestPermissionService]
    },*/
   {
     path: ':domain/company/:id/network-scan',
     loadChildren: './components/company-network-scan/company-network-scan.module#CompanyNetworkScanModule',
-    canActivate: [PermissionCompanyService, PermissionTechUserService]
+    canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/company/:id/devices',
     loadChildren: './components/company-devices/company-devices.module#CompanyDevicesModule',
-    canActivate: [PermissionCompanyService, PermissionTechUserService]
+    canActivate: [PermissionNoSuperAdminService, PermissionCompanyDevicesService]
   },
   /* {
      path: ':domain/company/:id/devices-beta',
      loadChildren: './components/company-device-beta/company-device-beta.module#CompanyDeviceBetaModule',
-     //canActivate: [PermissionCompanyService, PermissionTechUserService]
+     //canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]
      canActivate: [TestPermissionService]
    },*/
   /* {
      path: ':domain/devices',
      loadChildren: './components/devices/devices.module#DevicesModule',
-     // canActivate: [PermissionTechUserService],
+     // canActivate: [PermissionNoSuperAdminService],
      canActivate: [TestPermissionService]
    },*/
   {
     path: ':domain/quickSupport',
     loadChildren: './components/support/support.module#SupportModule',
-    canActivate: [PermissionSupportService, PermissionTechUserService]
+    canActivate: [PermissionSupportService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/documents/templates',
     loadChildren: './components/documents/documents-templates/documents-templates.module#DocumentsTemplatesModule',
-    canActivate: [PermissionTechUserService]
+    canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/documents',
     loadChildren: './components/documents/documents.module#DocumentsModule',
-    canActivate: [PermissionTechUserService]
+    canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/marketing',
     loadChildren: './components/marketing/marketing.module#MarketingModule',
-    canActivate: [PermissionUsersService, PermissionTechUserService]
+    canActivate: [PermissionUsersService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/help-center',
-    loadChildren: './components/super-admin-public/super-admin-public.module#SupperAdminPublicModule'
+    loadChildren: './components/super-admin-public/super-admin-public.module#SupperAdminPublicModule',
+    canActivate: [PermissionSuperAdminService]
   },
   {
     path: ':domain/help-center/:id',
-    loadChildren: './components/super-admin-public/super-admin-public-category/super-admin-public-category.module#SuperAdminPublicCategoryModule'
+    loadChildren: './components/super-admin-public/super-admin-public-category/super-admin-public-category.module#SuperAdminPublicCategoryModule',
+    canActivate: [PermissionSuperAdminService]
   },
   {
     path: ':domain/devices/reports',
     loadChildren: './components/devices/devices-report/devices-report.module#DevicesReportModule',
-    //canActivate: [PermissionTechUserService]
-    canActivate: [TestPermissionService]
+    //canActivate: [PermissionNoSuperAdminService]
+    canActivate: [PermissionTechUserService, TestPermissionService]
   },
   {
     path: ':domain/default',
-    loadChildren: './components/customer-portal/customer-portal-default/customer-portal-default.module#CustomerPortalDefaultModule'
+    loadChildren: './components/customer-portal/customer-portal-default/customer-portal-default.module#CustomerPortalDefaultModule',
+    canActivate: [PermissionClientUserService]
   },
 
 ];

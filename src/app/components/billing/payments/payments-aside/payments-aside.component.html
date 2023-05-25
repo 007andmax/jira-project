@@ -4,17 +4,18 @@
         <div class="qt-df qt-ai-c">
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__edit"
-                *ngIf="!payment.refundMethod"
+                *ngIf="!payment.refundMethod && !customerPortalStateService.isCustomerPortal"
                 (click)="showEdit()"
             ></div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__refund-payment"
-                *ngIf="!payment.refundMethod"
+                *ngIf="!payment.refundMethod && !customerPortalStateService.isCustomerPortal"
                 (click)="showRefund()"
             ></div>
             <div
                 class="qt-circle qt-bg-white qt-mr-16 header-circle-icon qt-sz-32 qt-df qt-ai-c qt-jc-c pointer"
                 (click)="deletePayment()"
+                *ngIf="!customerPortalStateService.isCustomerPortal"
             >
                 <div class="qt-sz-20 icon__remove"></div>
             </div>
@@ -123,12 +124,16 @@
 
 
 
+
+
                     <div class="payment-info__notes">
                         <div class="icon__payment-note qt-mb-5 qt-ic-c qt-sz-16"></div>
                         <div [textContent]="payment.note"></div>
                     </div>
                 </div>
             </div>
+
+
 
 
 
@@ -145,7 +150,11 @@
 
 
 
+
+
             <div class="qt-fs-16 qt-fw-600 qt-color-dark qt-mb-12 qt-lh-163">Payment for</div>
+
+
 
 
 
@@ -190,6 +199,8 @@
                     </ng-template>
                 </tbody>
             </table>
+
+
 
 
 

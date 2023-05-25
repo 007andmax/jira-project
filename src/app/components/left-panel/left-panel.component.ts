@@ -23,6 +23,7 @@ import { LeftPanelSettingsComponent } from './left-panel-settings/left-panel-set
 import { LeftPanelSupportComponent } from './left-panel-support/left-panel-support.component';
 import { LeftPanelTicketsComponent } from './left-panel-tickets/left-panel-tickets.component';
 import { LeftPanelUsersComponent } from './left-panel-users/left-panel-users.component';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 /**
  * Left panel component
@@ -68,6 +69,7 @@ export class LeftPanelComponent implements OnInit {
     public cd: ChangeDetectorRef,
     private ticketsStateService: TicketsStateService,
     private passwordManagerStateService: PasswordManagerStateService,
+    private customerPortalStateService: CustomerPortalStateService,
   ) { }
 
   /**
@@ -195,7 +197,7 @@ export class LeftPanelComponent implements OnInit {
           console.log("window.location.href", window.location.href);
           /*  this.state = 'default';
             this.goToLink('default');*/
-          if (this.state === '' && this.companiesStateService.getCurrentCompany() && this.usersStateService.getCurrentUser().role !== "SUPER_ADMIN") this.goToDefaultPage();
+          if (this.state === '' && this.companiesStateService.getCurrentCompany() && this.usersStateService.getCurrentUser().role !== "SUPER_ADMIN" && !this.customerPortalStateService.isCustomerPortal) this.goToDefaultPage();
           this.leftPanelStateService.firstOpen(this.state);
           this.leftPanelStateService.changeState(this.state);
           if (!this.cd['destroyed']) {
@@ -241,6 +243,7 @@ export class LeftPanelComponent implements OnInit {
     this.currentUser = data;
   }
   goToDefaultPage() {
+    console.log("goToDefaultPage");
     this.state = 'new-tickets';
     this.goToLink('tickets');
   }

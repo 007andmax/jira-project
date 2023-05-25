@@ -11,6 +11,7 @@ import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.servic
 import { AppService } from 'src/app/states/app/app.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toastr-progress-state.service';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 @Component({
   selector: 'app-invoices-item',
   templateUrl: './invoices-item.component.html',
@@ -31,6 +32,7 @@ export class InvoicesItemComponent implements OnInit {
     private appService: AppService,
     private permissionsService: PermissionsService,
     private toastrProgressStateService: ToastrProgressStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     private invoicesService: InvoicesService) { }
 
   ngOnInit() {
@@ -88,7 +90,7 @@ export class InvoicesItemComponent implements OnInit {
     })
   }
   onShowPreviewInvoice() {
-    if (this.getPermissions('VIEW_ACCOUNTING')) this.onPreviewInvoice.emit(this.invoice);
+    if (this.getPermissions('VIEW_ACCOUNTING') || this.customerPortalStateService.isCustomerPortal) this.onPreviewInvoice.emit(this.invoice);
   }
   rollbackInvoice() {
     if (this.toastrProgressStateService.check(this.invoice.id)) return;

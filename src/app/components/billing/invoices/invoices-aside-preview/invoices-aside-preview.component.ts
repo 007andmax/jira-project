@@ -12,6 +12,7 @@ import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
 import { Subscription } from 'rxjs';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 @Component({
   selector: 'app-invoices-aside-preview',
   templateUrl: './invoices-aside-preview.component.html',
@@ -32,6 +33,7 @@ export class InvoicesAsidePreviewComponent implements OnInit {
     private confirmStateService: ConfirmStateService,
     private invoiceStateService: InvoiceStateService,
     private permissionsService: PermissionsService,
+    public customerPortalStateService: CustomerPortalStateService,
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
@@ -42,7 +44,7 @@ export class InvoicesAsidePreviewComponent implements OnInit {
     })
     this.sub.add(getConfirm);
     let openPreviewAside = this.invoiceStateService.openPreviewAside.subscribe(data => {
-      if (!this.getPermissions('VIEW_ACCOUNTING')) return;
+      if (!this.getPermissions('VIEW_ACCOUNTING') && !this.customerPortalStateService.isCustomerPortal) return;
       this.currentCompany = this.companiesStateService.getCurrentCompany();
       this.invoiceId = data;
       this.open = true;

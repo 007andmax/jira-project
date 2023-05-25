@@ -115,6 +115,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.sub.add(onGetTicketsStatus);
   }
   private checkCompanyCustomerUser() {
+    this.ticketsFilter = this.customerPortalStateService.getTicketsFilter();
     this.selectedCompany = this.companiesState.getCompanies().find(item => item.id == localStorage.getItem('company_info_id'));
     this.companyDp.selectItemWithOutChanges(this.selectedCompany);
     this.companyDp.isDisabled = true;

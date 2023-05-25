@@ -86,6 +86,7 @@ export class CustomerPermissionsComponent implements OnInit, OnDestroy {
   }
   isPermissionDisabled(permission, role) {
     let userPermission = this.userPermissions.find(item => item.id == role.id);
+    if (!userPermission) return false;
     if (
       userPermission.permissions.indexOf('VIEW_MY_TICKETS') === -1 &&
       ["VIEW_ALL_TICKETS"].indexOf(permission) > -1

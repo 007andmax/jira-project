@@ -307,6 +307,14 @@ export class AppComponent implements OnInit {
               console.log("2");
               break;
             }
+            if (item.customerUserRole.getPermission('VIEW_MY_PROFILE')) {
+              /*  this.customerPortalStateService.setCompnayIdInfo(item.clientCompany.id);
+                this.setInvoiceFilter(item);*/
+              this.leftPanelStateService.goToState('new-users');
+
+              console.log("6");
+              break;
+            }
             if (item.customerUserRole.getPermission('VIEW_ALL_DEVICES')) {
               /*   this.customerPortalStateService.setCompnayIdInfo(item.clientCompany.id);*/
               this.leftPanelStateService.goToState('company-devices');

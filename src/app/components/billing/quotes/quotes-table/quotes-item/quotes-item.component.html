@@ -69,6 +69,7 @@
                 class="pointer"
                 ngbDropdownItem
                 (click)="resend()"
+                *ngIf="!customerPortalStateService.isCustomerPortal"
             >
                 <div class="icon__email-dark qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Resend quote
@@ -130,7 +131,7 @@
                 class="pointer"
                 ngbDropdownItem
                 (click)="archiveQuote()"
-                *ngIf="checkStatus(quote, ['UNREAD','SAVED', 'EXPIRED', 'INVOICED', 'TICKETED','CANCELED','BILLED'])"
+                *ngIf="checkStatus(quote, ['UNREAD','SAVED', 'EXPIRED', 'INVOICED', 'TICKETED','CANCELED','BILLED']) && !customerPortalStateService.isCustomerPortal"
             >
                 <div class="icon__remove qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Archive a quote
@@ -148,7 +149,7 @@
                 class="pointer"
                 ngbDropdownItem
                 (click)="goToQuoteEdit()"
-                *ngIf="checkStatus(quote, ['READ','UNREAD','SAVED', 'APPROVED', 'CANCELED', 'EXPIRED'])"
+                *ngIf="checkStatus(quote, ['READ','UNREAD','SAVED', 'APPROVED', 'CANCELED', 'EXPIRED']) && !customerPortalStateService.isCustomerPortal"
             >
                 <i class="icon__edit qt-bg-contain qt-sz-20 qt-mr-12"></i>
                 Edit a quote
@@ -157,6 +158,7 @@
                 class="pointer"
                 ngbDropdownItem
                 (click)="copy()"
+                *ngIf="!customerPortalStateService.isCustomerPortal"
             >
                 <div class="icon__copy qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Copy a quote

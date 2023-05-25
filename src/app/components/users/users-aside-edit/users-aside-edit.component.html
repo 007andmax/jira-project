@@ -397,13 +397,14 @@
                 <div class="qt-input-block qt-f50">
                     <div class="qt-df qt-ai-c qt-mt-15">
                         <label
-                            class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
+                            class="qt-checkbox receive-full-amount-check qt-mb-0 pointer --disabled"
                             [attr.for]="'primary-contact-' + i"
                         >
                             <input
                                 [attr.id]="'primary-contact-' + i"
                                 type="checkbox"
                                 [(ngModel)]="companyInfo.isPrimaryContact"
+                                disabled
                             >
                             <span></span>
                             <div class="qt-ml-8">Set as a primary user</div>

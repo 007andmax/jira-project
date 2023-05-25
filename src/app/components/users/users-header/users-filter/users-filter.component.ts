@@ -39,6 +39,8 @@ export class UsersFilterComponent implements OnInit {
       if (this.customerPortalStateService.isCustomerPortal) this.checkCompanyCustomerUser();
     })
     this.sub.add(getOnCompanies);
+    let onTicketFilters = this.customerPortalStateService.onUsersFilters.subscribe(data => (this.checkCompanyCustomerUser()));
+    this.sub.add(onTicketFilters);
     this.jobTitleList = this.crmStateService.getJobTitleList();
     let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
       this.jobTitleList = data;
@@ -63,6 +65,7 @@ export class UsersFilterComponent implements OnInit {
 
   }
   private checkCompanyCustomerUser() {
+    this.filter = this.customerPortalStateService.getUsersFilters();
     let selectedCompany = this.companiesState.getCompanies().find(item => item.id == localStorage.getItem('company_info_id'));
     this.companiesDp.selectItemWithOutChanges(selectedCompany);
     this.companiesDp.isDisabled = true;

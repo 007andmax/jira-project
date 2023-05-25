@@ -24,6 +24,7 @@ import { MarketingEmailStateService } from 'src/app/states/marketing-email/marke
 import { MarketingSubscriptionType } from '../setting/marketing-email/marketing-subscription-type/class/marketing-subscription-type';
 import { CrmCompanyIndustry } from '../setting/crm-settings/crm-company-industry/class/crm-company-industry';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { UserCustomerCompaniesInfo } from './class/user-customer-companies-info';
 
 @Component({
   selector: 'app-users',
@@ -64,10 +65,14 @@ export class UsersComponent implements OnInit {
     private websocketService: WebsocketService) { }
 
   ngOnInit() {
+    if (this.customerPortalStateService.isCustomerPortal) {
+      this.filter.setCompany(this.customerPortalStateService.getUsersFilters().company);
+    } else {
+      this.filter = this.usersStateService.getFilter();
+    }
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.usersStateService.setModeUserFilterSubscription(MODE_USERS_LIST);
     this.showArchivedUsers = JSON.parse(JSON.stringify(this.usersStateService.getShowArchivedCompanies()));
-    this.filter = this.usersStateService.getFilter();
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
       document.body.querySelector(".main-container").scrollTo(0, 0);
       if (this.showArchivedUsers != this.usersStateService.getShowArchivedCompanies()) {
@@ -88,8 +93,14 @@ export class UsersComponent implements OnInit {
         this.setFilters(data);
         this.onScroll();
       }
-    })
+    });
     this.userListService.addSubscription(geLefttFilter);
+    let onUsersFilters = this.customerPortalStateService.onUsersFilters.subscribe(data => {
+      document.body.querySelector(".main-container").scrollTo(0, 0);
+      this.setFilters(this.customerPortalStateService.getUsersFilters());
+      this.onScroll();
+    });
+    this.userListService.addSubscription(onUsersFilters);
 
     if (this.companiesStateService.getCompanies().length > 0) this.companies = this.companiesStateService.getCompanies();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
@@ -206,9 +217,15 @@ export class UsersComponent implements OnInit {
       let stompClient = this.usersRealTimeService.changeSubscriptionsUsers.subscribe(newChange => {
         if (newChange.action === 'DEFAULT_SUBSCRIPTION_SAVED') {
           const reqIndex = this.reqUsers.findIndex((item) => item.id === newChange.data.userId);
-          if (reqIndex > -1) this.reqUsers[reqIndex].changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
+          if (reqIndex > -1) {
+            let index = this.reqUsers[reqIndex].customerCompaniesInfo.findIndex(item => item.companyId === newChange.data.companyId);
+            if (index > -1) this.reqUsers[reqIndex].customerCompaniesInfo[index] = new UserCustomerCompaniesInfo(newChange.data);
+          }
           const userIndex = this.users.findIndex((item) => item.id === newChange.data.userId);
-          if (userIndex > -1) this.users[userIndex].changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
+          if (userIndex > -1) {
+            let index = this.users[userIndex].customerCompaniesInfo.findIndex(item => item.companyId === newChange.data.companyId);
+            if (index > -1) this.users[userIndex].customerCompaniesInfo[index] = new UserCustomerCompaniesInfo(newChange.data);
+          }
           this.cd.detectChanges();
         }
         if (newChange.action === 'CUSTOM_SUBSCRIPTION_SAVED') {

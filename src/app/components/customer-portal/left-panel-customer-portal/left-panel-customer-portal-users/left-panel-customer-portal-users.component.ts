@@ -82,10 +82,8 @@ export class LeftPanelCustomerPortalUsersComponent implements OnInit {
     this.goToState('new-contracts');
   }
   public setUsersFilter(id) {
-    this.filter.setClientType(null);
-    this.filter.setCompany(id);
+    this.customerPortalStateService.setUsersFilter(id);
     this.setShowArchivedCompanies(false);
-    this.usersStateService.onInitFilter(this.filter);
     this.goToState('new-users');
   }
   setShowArchivedCompanies(data) {

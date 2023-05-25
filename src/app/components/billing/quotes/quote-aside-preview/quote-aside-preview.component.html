@@ -6,12 +6,18 @@
         class="qt-aside-modern__header"
         *ngIf="!showPreloader"
     >
-        <div class="qt-aside-modern__header-title" [textContent]="'Quote#' + quote.number"></div>
+        <div
+            class="qt-aside-modern__header-title"
+            [textContent]="'Quote#' + quote.number"
+        ></div>
+
+
+
 
         <div class="qt-df qt-ai-c">
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__edit"
-                *ngIf="checkStatus(quote, ['READ','UNREAD','SAVED', 'APPROVED', 'CANCELED', 'EXPIRED'])"
+                *ngIf="checkStatus(quote, ['READ','UNREAD','SAVED', 'APPROVED', 'CANCELED', 'EXPIRED']) && !customerPortalStateService.isCustomerPortal"
                 (click)="editQuote()"
                 placement="top"
                 container="body"
@@ -23,6 +29,7 @@
                 placement="top"
                 container="body"
                 ngbTooltip="Send"
+                *ngIf="!customerPortalStateService.isCustomerPortal"
             ></div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__download-pdf"
@@ -39,11 +46,11 @@
                 container="body"
                 ngbTooltip="Archive"
             >
-              <div class="qt-sz-20 icon__remove"></div>
+                <div class="qt-sz-20 icon__remove"></div>
             </div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__convert-invoice"
-                *ngIf="checkStatus(quote, ['APPROVED'])"
+                *ngIf="checkStatus(quote, ['APPROVED']) && !customerPortalStateService.isCustomerPortal"
                 (click)="convertToInvoice()"
                 placement="top"
                 container="body"
@@ -51,7 +58,7 @@
             ></div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__convert-ticket"
-                *ngIf="checkStatus(quote, ['APPROVED'])"
+                *ngIf="checkStatus(quote, ['APPROVED']) && !customerPortalStateService.isCustomerPortal"
                 (click)="convertToTicket()"
                 placement="top"
                 container="body"

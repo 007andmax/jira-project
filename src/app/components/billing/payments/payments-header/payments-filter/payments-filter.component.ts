@@ -37,6 +37,7 @@ export class PaymentsFilterComponent implements OnInit {
     this.sub.add(onPaymentsFilters);
   }
   private checkCompanyCustomerUser() {
+    this.paymentsFilter = this.customerPortalStateService.getPaymentsFilter();
     let selectedCompany = this.companiesState.getCompanies().find(item => item.id == localStorage.getItem('company_info_id'));
     this.companyDp.selectItemWithOutChanges(selectedCompany);
     this.companyDp.isDisabled = true;

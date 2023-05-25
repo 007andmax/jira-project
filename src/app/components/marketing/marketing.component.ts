@@ -22,6 +22,7 @@ import { UserCustomSubscription } from '../users/class/user-custom-subscription'
 import { UserDefaultSubscription } from '../users/class/user-default-subscription';
 import { UserFilter } from '../users/class/user-filter';
 import { UserListService } from '../users/services/user-list.service';
+import { UserCustomerCompaniesInfo } from '../users/class/user-customer-companies-info';
 
 @Component({
   selector: 'marketing',
@@ -178,9 +179,15 @@ export class MarketingComponent implements OnInit {
       let stompClient = this.usersRealTimeService.changeSubscriptionsUsers.subscribe(newChange => {
         if (newChange.action === 'DEFAULT_SUBSCRIPTION_SAVED') {
           const reqIndex = this.reqUsers.findIndex((item) => item.id === newChange.data.userId);
-          if (reqIndex > -1) this.reqUsers[reqIndex].changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
+          if (reqIndex > -1) {
+            let index = this.reqUsers[reqIndex].customerCompaniesInfo.findIndex(item => item.companyId === newChange.data.companyId);
+            if (index > -1) this.reqUsers[reqIndex].customerCompaniesInfo[index] = new UserCustomerCompaniesInfo(newChange.data);
+          }
           const userIndex = this.users.findIndex((item) => item.id === newChange.data.userId);
-          if (userIndex > -1) this.users[userIndex].changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
+          if (userIndex > -1) {
+            let index = this.users[userIndex].customerCompaniesInfo.findIndex(item => item.companyId === newChange.data.companyId);
+            if (index > -1) this.users[userIndex].customerCompaniesInfo[index] = new UserCustomerCompaniesInfo(newChange.data);
+          }
           this.cd.detectChanges();
         }
         if (newChange.action === 'CUSTOM_SUBSCRIPTION_SAVED') {

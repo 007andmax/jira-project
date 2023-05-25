@@ -26,6 +26,8 @@ import { UsersAsideDetailTicketsComponent } from './users-aside-detail-tickets/u
 import { UserCustomerCompaniesDefaultSubscribtionAdd } from '../class/user-customer-companies-default-subscribtion-add';
 import { UserRole } from '../class/user-role';
 import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-role-state.service';
+import { UserCustomerCompaniesInfo } from '../class/user-customer-companies-info';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'users-aside-detail',
@@ -56,6 +58,7 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
     private usersRealTimeService: UsersRealTimeService,
     private permissionsService: PermissionsService,
     public customerRoleStateService: CustomerRoleStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     private companiesStateService: CompaniesStateService,) { }
 
 
@@ -84,8 +87,11 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
     let stompClient = this.usersRealTimeService.changeSubscriptionsUsers.subscribe(newChange => {
       if (!this.open) return;
       if (newChange.action === 'DEFAULT_SUBSCRIPTION_SAVED' && this.user.id === newChange.data.userId) {
-        this.user.setDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
-        this.usersStateService.getuserForEdit().changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
+        let index = this.user.customerCompaniesInfo.findIndex(item => item.companyId === newChange.data.companyId);
+        if (index > -1) {
+          this.user.customerCompaniesInfo[index] = new UserCustomerCompaniesInfo(newChange.data);
+          this.usersStateService.getuserForEdit().customerCompaniesInfo[index] = new UserCustomerCompaniesInfo(newChange.data);
+        }
         this.cd.detectChanges();
       }
       if (newChange.action === 'CUSTOM_SUBSCRIPTION_SAVED' && this.user.id === newChange.data.userId) {
@@ -114,31 +120,12 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(getChangeCompanies);
-    this.onInitSubscribe();
   }
   getLogoUrl() {
     if (this.user && this.user.avatar && this.user.avatar && this.user.avatar.base64 && !this.user.avatar.cropped) return this.user.avatar.base64;
     if (this.user && this.user.avatar && this.user.avatar.cropped && this.user.avatar.cropped.id) return `/file/${this.user.avatar.cropped.id}`;
     if (this.user && this.user.avatar && this.user.avatar.origin && this.user.avatar.origin.id) return `/file/${this.user.avatar.origin.id}`;
     return '/company/default/logo.jpg';
-  }
-  private onInitSubscribe() {
-    setTimeout(() => {
-      let stompClient = this.usersRealTimeService.changeSubscriptionsUsers.subscribe(newChange => {
-        if (newChange.action === 'DEFAULT_SUBSCRIPTION_SAVED' && this.user.id === newChange.data.userId) {
-          this.user.setDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
-          this.usersStateService.getuserForEdit().changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
-          this.cd.detectChanges();
-        }
-        if (newChange.action === 'CUSTOM_SUBSCRIPTION_SAVED' && this.user.id === newChange.data.userId) {
-          this.user.setCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
-          this.usersStateService.getuserForEdit().changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
-          this.cd.detectChanges();
-        }
-      });
-      this.sub.add(stompClient);
-
-    }, 3000);
   }
   editUser() {
     this.usersStateService.setUserForEdit(new User(JSON.parse(JSON.stringify(this.usersStateService.getuserForEdit()))));
