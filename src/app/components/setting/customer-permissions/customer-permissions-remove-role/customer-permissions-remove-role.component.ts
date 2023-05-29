@@ -27,8 +27,6 @@ export class CustomerPermissionsRemoveRoleComponent implements OnInit {
     public usersStateService: UsersStateService,) { }
 
   ngOnInit() {
-    console.log("users", this.users);
-    console.log("userRoleForRemove", this.userRoleForRemove);
     this.userRoles = this.customerRoleStateService.getUserRoles();
     let onGetUserRole = this.customerRoleStateService.onGetUserRole.subscribe(data => {
       this.userRoles = this.customerRoleStateService.getUserRoles();

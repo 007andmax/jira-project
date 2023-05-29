@@ -21,7 +21,6 @@ export class CustomerPermissionsAddComponent implements OnInit {
     this.name = '';
   }
   addRole() {
-    console.log("this.name", this.name);
     if (this.name.length > 0) {
       this.appStateService.setServerError(true);
       this.usersService.addRole(this.name).subscribe(data => {

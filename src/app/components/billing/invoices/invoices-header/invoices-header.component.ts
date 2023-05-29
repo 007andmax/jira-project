@@ -6,6 +6,7 @@ import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-s
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
 import { InvoicesFilter } from '../class/invoices-filter';
 import { InvoicesFilterComponent } from './invoices-filter/invoices-filter.component';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-invoices-header',
@@ -22,6 +23,7 @@ export class InvoicesHeaderComponent implements OnInit {
     private invoicesService: InvoicesService,
     private reportsService: ReportsService,
     public draftEmailStateService: DraftEmailStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     private invoiceStateService: InvoiceStateService) { }
 
   ngOnInit() {

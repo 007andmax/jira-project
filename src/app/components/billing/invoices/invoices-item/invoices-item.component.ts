@@ -5,7 +5,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { InvoicesService } from 'src/app/services/invoices/invoices.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmStateService } from '../../../shared/confirm/services/confirm-state.service';
-import { ARCHIVE_COMPANY, DELETE_INVOICE, ROLLBACK_INVOICE, REFUND_PAYMENTS } from 'src/app/const/confirm';
+import { ARCHIVE_COMPANY, ROLLBACK_INVOICE, REFUND_PAYMENTS } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
 import { AppService } from 'src/app/states/app/app.service';
@@ -73,12 +73,6 @@ export class InvoicesItemComponent implements OnInit {
   parsePaymentMethod(method) {
     return method.split('_').map((el) => el[0].toUpperCase() + el.slice(1).toLowerCase()).join(' ');
   };
-  deleteInvoice() {
-    this.confirmStateService.setConfirmAction(DELETE_INVOICE);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to delete invoice #${this.invoice.number} ?`;
-    this.invoiceStateService.setInvoiceForemove(this.invoice);
-  }
   resendInvoices(withPdfAttachment) {
     this.invoicesService.resendInvoices([this.invoice.id], withPdfAttachment).subscribe(data => {
 

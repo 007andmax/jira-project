@@ -80,11 +80,6 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
   downloadPdf() {
     this.quoteServices.downloadPdf(this.quote.id).subscribe((res) => this.quoteServices.downLoadFile(res, this.quote.id, this.quote.company.name, this.quote.number));
   }
-  cancelQuote() {
-    this.quoteServices.cancelQuote(this.quote.company, this.quote.id).subscribe((res) => {
-      this.close();
-    });
-  }
   convertToTicket() {
     this.quoteServices.convertToTicket(this.quote.company, this.quote.id).subscribe((res) => {
     });

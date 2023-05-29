@@ -27,6 +27,8 @@ import { Subscription } from 'rxjs';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { UserCustomerCompaniesDefaultSubscribtionAdd } from '../class/user-customer-companies-default-subscribtion-add';
 import { TechUsersService } from 'src/app/services/setting/tech-users.service';
+import { UsersCheckUseComponent } from '../users-check-use/users-check-use.component';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-users-table',
@@ -62,6 +64,7 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     private crmStateService: CrmStateService,
     private permissionsService: PermissionsService,
     private techUsersService: TechUsersService,
+    public customerPortalStateService: CustomerPortalStateService,
     private elRef: ElementRef) { }
 
 
@@ -126,8 +129,11 @@ export class UsersTableComponent implements OnInit, OnDestroy {
       return 'url(/users/default/image.jpg) 0% 0% / contain no-repeat';
     }
   };
+  isPrimaryContact() {
+    return this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).isPrimaryContact;
+  }
   resetPrimaryContact() {
-    this.usersService.resetPrimaryContact(this.user.id).subscribe(data => {
+    this.usersService.resetPrimaryContact(this.user.id, this.companyId).subscribe(data => {
 
     })
   }
@@ -157,9 +163,9 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     //this.sub.add(getOnCompanies);
   }
   delete() {
-    if (this.user.isContact) {
-      const modalRef = this.modalService.open(AlertComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-      modalRef.componentInstance.message = `You cannot archive primary contact user`;
+    if (this.user.customerCompaniesInfo.find(item => item.isPrimaryContact)) {
+      const modalRef = this.modalService.open(UsersCheckUseComponent, { windowClass: 'xs-modal user-modal', container: (this.companyId) ? "company-user" : "app-users", backdrop: 'static', keyboard: false });
+      modalRef.componentInstance.user = this.user;
       return;
     }
     if (this.usersTableService.getUsersCount(this.usersStateService.getAllUsers(), this.user.customerCompaniesInfo, this.showArchivedUsers) === 1) {

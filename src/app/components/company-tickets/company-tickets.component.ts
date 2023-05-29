@@ -88,7 +88,6 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
       document.body.querySelector(".main-container").scrollTo(0, 0);
       this.setDefaultScoll();
       this.onScroll();
-      console.log("1");
     })
     this.sub.add(getOnInitFilter);
 

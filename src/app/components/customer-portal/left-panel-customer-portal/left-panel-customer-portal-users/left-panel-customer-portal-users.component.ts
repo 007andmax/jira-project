@@ -56,13 +56,7 @@ export class LeftPanelCustomerPortalUsersComponent implements OnInit {
   }
   public setTicketsFilter(company, type) {
     this.ticketsStateService.setListType(type);
-    /*   let ticketsFilter: TicketsFilter = new TicketsFilter();
-       ticketsFilter.setListType(type);
-       ticketsFilter.setCompany(company.clientCompany);
-       if (company.customerUserRole.getPermission('VIEW_MY_TICKETS')) ticketsFilter.setUser(this.currentUser);*/
     this.customerPortalStateService.setTicketsFilter(company, "ALL", this.currentUser);
-    // this.customerPortalStateService.setTicketFilters(ticketsFilter);
-    //this.ticketsStateService.onInitFilter(ticketsFilter);
     this.goToState('new-tickets');
     this.ticketsService.getCount(this.customerPortalStateService.getTicketsFilter().getDataForRequest()).subscribe(data => {
       this.ticketsStateService.onInitCount(data);
@@ -72,7 +66,6 @@ export class LeftPanelCustomerPortalUsersComponent implements OnInit {
     return localStorage.getItem("company_info_id");
   }
   public goToState(state) {
-    //this.quoteStateService.goToState(state);
     this.onChangeState.emit(state);
   }
   public setContractsFilter(company) {
@@ -90,7 +83,6 @@ export class LeftPanelCustomerPortalUsersComponent implements OnInit {
     this.usersStateService.setShowArchivedCompanies(data);
   }
   goToCompanySection(companyId, section) {
-    console.log("goToCompanySection", companyId);
     this.router.navigate(
       [`${this.companiesStateService.getCurrentCompany().domain}/company/`, companyId, section]);
   }
@@ -98,28 +90,18 @@ export class LeftPanelCustomerPortalUsersComponent implements OnInit {
     this.onOpenPanel.emit(null);
   }
   setQuotesFilter(company) {
-    /*  let filter: QuoteFilter = new QuoteFilter();
-      filter.setCompanyName(company.clientCompany.name);
-      this.quoteStateService.setQuotesFilter(filter);*/
     this.customerPortalStateService.setQuotesFilter(company);
     this.goToState('quotes-component');
   }
   setPaymentsFilter(company) {
-    /*  let paymentsFilter: PaymentsFilter = new PaymentsFilter();
-      paymentsFilter.setCompany(company.clientCompany.name);
-      this.paymentsStateService.setPaymentsFilter(paymentsFilter);*/
     this.customerPortalStateService.setPaymentsFilter(company)
     this.goToState('new-payments-ng2');
   }
   setInvoiceFilter(company) {
-    /*  let invoicesFilter: InvoicesFilter = new InvoicesFilter();
-      invoicesFilter.setCompany(company.clientCompany.name);
-      this.invoiceStateService.setInvoicesFilter(invoicesFilter);*/
     this.customerPortalStateService.setInvoiceFilter(company)
     this.goToState('new-billable-invoices');
   }
   private getCurrentUser(data) {
     this.currentUser = data;
-    console.log("this.currentUser", this.currentUser);
   }
 }

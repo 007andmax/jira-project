@@ -88,8 +88,8 @@ export class UsersService {
         return data;
       }));
   }
-  public resetPrimaryContact(userId) {
-    return this.http.get(this.apiUrl + '/company/resetPrimaryContact?userId=' + userId);
+  public resetPrimaryContact(userId, companyId) {
+    return this.http.get(this.apiUrl + `/company/resetPrimaryContact?userId=${userId}&companyId=${companyId}`);
   }
 
   public getUserRoles() {
@@ -97,10 +97,6 @@ export class UsersService {
   }
   public checkValidPrimaryEmail(email, companyId, idUser = null) {
     return this.http.get(this.apiUrl + 'users/isEmailUnique?email=' + email + '&id=' + idUser + '&isTechUser=false&companyId=' + companyId);
-  }
-
-  public setDefaultSubscriptions(id, subscriptions) {
-    return this.http.put(this.apiUrl + `subscription/${id}`, subscriptions);
   }
   public setDefaultPage(startPage) {
     return this.http.put(this.apiUrl + `settings/userProfile/misc`, { startPage: startPage }).pipe(
@@ -116,13 +112,6 @@ export class UsersService {
   public setCustomSubscriptions(id, subscriptions) {
     return this.http.put(this.apiUrl + `subscription/modify/customSubscription/${id}`, subscriptions);
   }
-  public addCustomSubscriptions(id, usersId) {
-    return this.http.put(this.apiUrl + `users/customSubscription/${id}`, usersId);
-  }
-  public removeCustomSubscriptions(subscription_id, user_id) {
-    return this.http.delete(this.apiUrl + `users/customSubscription/${user_id}?subscriptionId=${subscription_id}`);
-  }
-
   public addUser(data) {
 
     return this.http.post(this.apiUrl + `users`, data).pipe(

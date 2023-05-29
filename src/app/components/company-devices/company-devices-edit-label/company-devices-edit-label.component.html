@@ -3,4 +3,5 @@
     class="device-table__input-name"
     [(ngModel)]="value"
     (blur)="onCheckValue()"
+    [attr.disabled]="isDisabled"
 >

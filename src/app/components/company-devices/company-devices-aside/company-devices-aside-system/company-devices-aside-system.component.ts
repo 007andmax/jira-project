@@ -6,6 +6,7 @@ import { HardwareService } from '../../../device/_services/hardware.service';
 import { DatePickerComponent } from '../../../shared/date-picker/date-picker.component';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 import { CompanyDevicesEditLabelComponent } from '../../company-devices-edit-label/company-devices-edit-label.component';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-company-devices-aside-system',
@@ -23,6 +24,7 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
   constructor(private devicesService: DevicesService,
     private devicesStateService: DevicesStateService,
     private hardwareService: HardwareService,
+    public customerPortalStateService: CustomerPortalStateService,
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {

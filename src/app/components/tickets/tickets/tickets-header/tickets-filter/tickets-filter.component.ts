@@ -39,6 +39,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   selectedUser: string = null;
   users = [];
   techUsersList = [];
+  techUsersNamesList = [];
   listsStatus = [new ItemStatus('Unassigned', 'unassigned', 'UNASSIGNED'),
   new ItemStatus('Completed', 'completed', 'CLOSED'),
   new ItemStatus('In Progress', 'inProgress', 'OPEN'),
@@ -122,7 +123,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   }
   private checkUserCustomerUser() {
     let customerCompanyInfo = this.usersStateService.getCurrentUser().customerCompaniesInfo.find(item => item.clientCompany.id === localStorage.getItem('company_info_id'));
-    console.log("customerCompanyInfo", customerCompanyInfo);
     if (customerCompanyInfo && customerCompanyInfo.customerUserRole.getPermission('VIEW_MY_TICKETS')) {
       let user = this.usersStateService.getAllUsers().find(item => item.id === this.usersStateService.getCurrentUser().id);
       this.selectedUser = `${user.firstName} ${user.lastName}`;
@@ -205,6 +205,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
         return item;
       }
     });
+    this.techUsersNamesList = this.getTechUserList();
   }
   public onSelectCompany(item) {
 

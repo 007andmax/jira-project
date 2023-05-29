@@ -35,7 +35,6 @@ export class UsersAsideDetailCompanyInfoComponent implements OnInit, OnDestroy {
     public customerRoleStateService: CustomerRoleStateService,) { }
 
   ngOnInit() {
-    console.log("customerCompaniesInfo", this.customerCompaniesInfo);
     this.jobTitleList = this.crmStateService.getJobTitleList();
     let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
       this.jobTitleList = data;

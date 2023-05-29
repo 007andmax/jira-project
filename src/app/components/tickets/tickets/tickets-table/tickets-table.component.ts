@@ -49,7 +49,6 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     if (this.customerPortalStateService.isCustomerPortal) {
       this.ticketsFilter.setListType("ALL");
       this.ticketsFilter.setFilter(JSON.parse(JSON.stringify(this.customerPortalStateService.getTicketsFilter())));
-      console.log("this.ticketsFilter", this.ticketsFilter);
       this.onScroll();
     } else {
       /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
@@ -61,7 +60,6 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     let onTicketFilters = this.customerPortalStateService.onTicketFilters.subscribe(data => {
       this.ticketsFilter.setListType("ALL");
       this.ticketsFilter.setFilter(JSON.parse(JSON.stringify(this.customerPortalStateService.getTicketsFilter())));
-      console.log("this.ticketsFilter", this.ticketsFilter);
       this.showPreloader = true;
       document.body.querySelector(".main-container").scrollTo(0, 0);
       this.setDefaultScoll();
@@ -96,7 +94,6 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     });
 
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
-      console.log("getOnInitFilter", data);
       this.ticketsFilter = data;
       this.showPreloader = true;
       document.body.querySelector(".main-container").scrollTo(0, 0);

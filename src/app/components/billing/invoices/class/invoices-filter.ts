@@ -2,7 +2,7 @@ import { Invoice } from './invoice';
 import * as moment from "moment";
 
 export class InvoicesFilter {
-    companyName: string;
+    companyId: string;
     endDate: number;
     invoiceNumber: string;
     limit: number = 40;
@@ -32,7 +32,7 @@ export class InvoicesFilter {
         let endDate = new Date(this.endDate);
         endDate.setDate(endDate.getDate() + 1);
         return {
-            companyName: this.companyName,
+            companyId: this.companyId,
             amount: (this.amount) ? this.amount : null,
             endDate: (this.endDate) ? moment(endDate).format('YYYY-MM-DD') : null,
             invoiceNumber: this.invoiceNumber,
@@ -44,7 +44,7 @@ export class InvoicesFilter {
         }
     }
     public checkAddInvoice(invoice: Invoice, companies) {
-        let company = companies.find(item => item.name === this.companyName);
+        let company = companies.find(item => item.id === this.companyId);
         if ((company) ? invoice.companyId === company.id : true
             && (this.invoiceNumber) ? invoice.ticketNumbers.includes(this.invoiceNumber) : true
                 && (this.status) ? invoice.status === this.status : true
@@ -63,8 +63,8 @@ export class InvoicesFilter {
     public setStatus(status) {
         this.status = status;
     }
-    public setCompany(data) {
-        this.companyName = data;
+    public setCompanyId(data) {
+        this.companyId = data;
     }
     public setStartDate(data) {
         this.startDate = data;

@@ -11,6 +11,7 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 import { DeviceCompanyAsideParams } from '../class/device-company-aside-params';
 import { DeviceExtended } from '../class/device-extended';
 import { CompanyDevicesRemoteAccessComponent } from '../company-devices-remote-access/company-devices-remote-access.component';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-company-devices-aside',
@@ -31,6 +32,7 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
     private permissionsService: PermissionsService,
     private confirmStateService: ConfirmStateService,
     private companiesStateService: CompaniesStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     private devicesService: DevicesService) { }
 
   ngOnInit() {

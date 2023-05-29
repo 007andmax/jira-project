@@ -92,7 +92,6 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
       this.selectedUserTitle = this.jobTitleList.find(item => item.id == this.user.jobTitleId);
       this.selectedUserIndustry = this.industries.find(item => item.id == this.user.userIndustryId);
       this.validate.addPhoneNumbers(this.user.phoneNumbers);
-      console.log("this.user", this.user);
     })
     let onGetUserRole = this.customerRoleStateService.onGetUserRole.subscribe(data => {
       this.userRoles = this.customerRoleStateService.getUserRoles();

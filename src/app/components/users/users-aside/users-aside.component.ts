@@ -126,7 +126,6 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
     this.user.setTags(tags);
   }
   onChangeDefaultSubscriptions(data, i) {
-    console.log("data", data);
     this.user.customerCompaniesInfo[i].changeDefaultSubscriptions(data);
   }
   onChangeCustomSubscriptions(data) {

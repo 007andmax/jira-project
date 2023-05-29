@@ -57,7 +57,7 @@ export class QuotesFilterComponent implements OnInit {
     this.datesDp.clearWithOutChanges();
     this.statusDp.clearWithOutChanges();
     this.quotesFilter.setStatus(null);
-    this.quotesFilter.setCompanyName(null);
+    this.quotesFilter.setCompanyId(null);
     this.quotesFilter.setStartDate(null);
     this.quotesFilter.setEndDate(null);
     this.quotesFilter.setQuoteNumber(null);
@@ -66,9 +66,9 @@ export class QuotesFilterComponent implements OnInit {
   }
   public onSelectCompany(item) {
     if (!item) {
-      this.quotesFilter.setCompanyName(null);
+      this.quotesFilter.setCompanyId(null);
     } else {
-      this.quotesFilter.setCompanyName(item.name);
+      this.quotesFilter.setCompanyId(item.id);
     }
     this.quoteStateService.onInitFilter(this.quotesFilter);
     this.onChangeCounterFilter();
@@ -91,7 +91,7 @@ export class QuotesFilterComponent implements OnInit {
   }
   public onChangeCounterFilter() {
     let count = 0;
-    if (this.quotesFilter.companyName) count++;
+    if (this.quotesFilter.companyId) count++;
     if (this.quotesFilter.endDate && this.quotesFilter.date) count++;
     if (this.quotesFilter.quoteNumber) count++;
     if (this.quotesFilter.status) count++;

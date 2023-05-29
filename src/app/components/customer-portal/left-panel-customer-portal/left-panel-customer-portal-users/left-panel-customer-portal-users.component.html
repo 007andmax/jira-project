@@ -20,6 +20,7 @@
         <li
             [ngClass]="{'--active': listType === 'DASHBOARD' && activePage === 'new-tickets-dashboard'}"
             class="desktop-version"
+            *ngIf="customerCompany.customerUserRole"
         >
             <div class="qt-df qt-ai-c">
                 <i class="icon__companies qt-bg-contain qt-sz-16 qt-mr-8"></i>

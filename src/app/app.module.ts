@@ -119,6 +119,7 @@ import { PermissionTicketsService } from './components/tickets/tickets/permissio
 import { PermissionCompanyDevicesService } from './components/company-devices/permission-company-devices.service';
 import { PermissionNoSuperAdminService } from './services/users/permission-no-super-admin.service';
 import { PermissionClientUserService } from './services/users/permission-client-user.service';
+import { UsersCheckUseComponent } from './components/users/users-check-use/users-check-use.component';
 declare var $: any;
 
 /**
@@ -143,6 +144,7 @@ declare var $: any;
     ModalEditCategoryProductComponent,
     HelpCenterInfoAsideComponent,
     InventoryCheckUseComponent,
+    UsersCheckUseComponent,
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
     CannedResponsesAsideComponent,
@@ -198,7 +200,7 @@ declare var $: any;
     GoogleAuthenticatorModule,
     SupportPageEditCategoryModule,
     ModalQuoteModule,
-    LeftPanelCustomerPortalModule
+    LeftPanelCustomerPortalModule,
   ],
   entryComponents: [
     ConfirmComponent,
@@ -217,6 +219,7 @@ declare var $: any;
     InventoryCheckUseComponent,
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
+    UsersCheckUseComponent
   ],
   providers: [
     {

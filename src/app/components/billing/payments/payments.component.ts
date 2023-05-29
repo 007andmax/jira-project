@@ -58,13 +58,12 @@ export class PaymentsComponent implements OnInit {
 
   ngOnInit() {
     if (this.customerPortalStateService.isCustomerPortal) {
-      this.paymentsFilter.setCompany(this.customerPortalStateService.getPaymentsFilter().companyName);
-      console.log("this.paymentsFilter", this.paymentsFilter);
+      this.paymentsFilter.setCompanyId(this.customerPortalStateService.getPaymentsFilter().companyId);
     }
     let onPaymentsFilters = this.customerPortalStateService.onPaymentsFilters.subscribe(data => {
       this.selectedPayments = [];
       this.selectedCompanyId = null;
-      this.paymentsFilter.setCompany(this.customerPortalStateService.getPaymentsFilter().companyName);
+      this.paymentsFilter.setCompanyId(this.customerPortalStateService.getPaymentsFilter().companyId);
       this.paymentsFilter.resetSortBy();
       this.showPreloader = true;
       document.body.querySelector(".main-container").scrollTo(0, 0);

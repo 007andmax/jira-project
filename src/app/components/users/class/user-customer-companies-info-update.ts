@@ -4,7 +4,6 @@ export class UserCustomerCompaniesInfoUpdate extends UserCustomerCompaniesInfoAd
 
     constructor(data) {
         super(data);
-        console.log("data", data);
         this.companyId = data.companyId;
         if (data.jobTitleDto) this.jobTitleDto = { id: data.jobTitleDto.id };
         if (data.customerUserRole) this.customerUserRole = { id: data.customerUserRole.id };

@@ -36,7 +36,6 @@ export class CustomerPermissionsComponent implements OnInit, OnDestroy {
     $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
     this.sections = this.permissionManageService.getSectionsCustomPermission();
-    console.log(this.getListKeys(this.sections));
     this.userRoles = this.customerRoleStateService.getUserRoles();
     if (!this.customerRoleStateService.isGetUserRole) this.customerRoleStateService.onInitGetUsersRoles();
     let onGetUserRole = this.customerRoleStateService.onGetUserRole.subscribe(data => {
@@ -65,7 +64,6 @@ export class CustomerPermissionsComponent implements OnInit, OnDestroy {
     return (this.userPermissions.find(item => item.id === role.id)) ? this.userPermissions.find(item => item.id === role.id).permissions.indexOf(permission) > -1 : false;
   }
   togglePermission(role, permission) {
-    console.log("permission", permission);
     let userPermission = this.userPermissions.find(item => item.id == role.id);
     let index = userPermission.permissions.indexOf(permission);
     if (index > -1) {
@@ -74,9 +72,7 @@ export class CustomerPermissionsComponent implements OnInit, OnDestroy {
       if (permission === "VIEW_MY_TICKETS" || permission === "VIEW_ALL_TICKETS") listPermissionsForRemove = this.customerRoleStateService.VIEW_MY_TICKETS_related_permissions;
       if (permission === "VIEW_MY_PROFILE" || permission === "VIEW_ALL_USERS") listPermissionsForRemove = this.customerRoleStateService.VIEW_MY_PROFILE_related_permissions;
       if (permission === "VIEW_ALL_DEVICES") listPermissionsForRemove = this.customerRoleStateService.VIEW_ALL_DEVICES_related_permissions;
-      console.log("listPermissionsForRemove", listPermissionsForRemove);
       userPermission.permissions = userPermission.permissions.filter(item => listPermissionsForRemove.indexOf(item) == -1);
-      console.log("userPermission.permissions", userPermission.permissions);
     } else {
       userPermission.permissions.push(permission);
     }
@@ -121,7 +117,6 @@ export class CustomerPermissionsComponent implements OnInit, OnDestroy {
     this.usersService.removeRole(id).subscribe(data => {
 
     }, err => {
-      console.log(err);
       if (err.status == 406) {
         this.userRoleForRemove = this.userRoles.find(item => item.id == id);
         this.usersForChangeRole = err.error.map(item => new CustomerPermissionsRemoveRole(item));

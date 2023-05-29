@@ -51,12 +51,8 @@ export class CurrentUser {
     constructor(data = null) {
         if (data) {
             for (const key in data) {
-                //  if (this.hasOwnProperty(key)) {
                 this[key] = data[key];
-
-                // }
             }
-            console.log("data.customerCompaniesInfo", data.customerCompaniesInfo);
             if (data.customerCompaniesInfo) this.customerCompaniesInfo = data.customerCompaniesInfo.map(item => new CurrentUserCustomerCompaniesInfo(item));
         }
     }

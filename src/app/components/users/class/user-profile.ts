@@ -46,7 +46,6 @@ export class UserProfile {
         this.tags = data;
     }
     public onEdit(user: User) {
-        console.log("user", user);
         this.id = user.id;
         this.role = user.role;
         if (user.phoneNumbers && user.phoneNumbers.length === 0 || !user.phoneNumbers) {

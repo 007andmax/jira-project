@@ -86,7 +86,7 @@
                 class="pointer"
                 ngbDropdownItem
                 (click)="convertToInvoice()"
-                *ngIf="checkStatus(quote, ['APPROVED'])"
+                *ngIf="checkStatus(quote, ['APPROVED']) && !customerPortalStateService.isCustomerPortal"
             >
                 <div class="icon__convert-invoice qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Convert to Invoice
@@ -95,7 +95,7 @@
                 class="pointer"
                 ngbDropdownItem
                 (click)="convertToTicket()"
-                *ngIf="checkStatus(quote, ['APPROVED'])"
+                *ngIf="checkStatus(quote, ['APPROVED']) && !customerPortalStateService.isCustomerPortal"
             >
                 <div class="icon__convert-ticket qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Convert to Ticket
@@ -113,7 +113,7 @@
                 class="pointer"
                 ngbDropdownItem
                 (click)="markAsRead()"
-                *ngIf="checkStatus(quote, ['UNREAD'])"
+                *ngIf="checkStatus(quote, ['UNREAD']) && !customerPortalStateService.isCustomerPortal"
             >
                 <div class="icon__mark-as-read qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Mark as Read
@@ -122,7 +122,7 @@
                 class="pointer"
                 ngbDropdownItem
                 (click)="cancelQuote()"
-                *ngIf="checkStatus(quote, ['READ','UNREAD'])"
+                *ngIf="checkStatus(quote, ['READ','UNREAD']) && !customerPortalStateService.isCustomerPortal"
             >
                 <div class="icon__uninstall qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Cancel quote
@@ -140,7 +140,7 @@
                 class="pointer"
                 ngbDropdownItem
                 (click)="convertToBillable()"
-                *ngIf="checkStatus(quote, [ 'APPROVED'])"
+                *ngIf="checkStatus(quote, [ 'APPROVED']) && !customerPortalStateService.isCustomerPortal"
             >
                 <i class="convert-to-billable-ng2 qt-bg-contain qt-sz-20 qt-mr-12"></i>
                 Convert to billable item

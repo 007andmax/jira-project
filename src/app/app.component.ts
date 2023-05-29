@@ -287,56 +287,34 @@ export class AppComponent implements OnInit {
         this.ticketsStateService.onChangeLeftPanelFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
       }
       if (this.router.url === "/" && this.currentUser.role !== "SUPER_ADMIN" && this.state == '' && this.main_page == PAGE_MAIN) {
-        console.log("this.customerPortalStateService.isCustomerPortal", this.customerPortalStateService.isCustomerPortal);
         if (this.customerPortalStateService.isCustomerPortal) {
           for (let i = 0; i < this.currentUser.customerCompaniesInfo.length; i++) {
             let item = this.currentUser.customerCompaniesInfo[i];
-            if (item.customerUserRole.getPermission('VIEW_ALL_TICKETS')) {
-              /*   this.customerPortalStateService.setCompnayIdInfo(item.clientCompany.id);
-                 this.setTicketsFilter(item, "ALL");
-   */
-              this.leftPanelStateService.goToState('new-tickets');
-              console.log("1");
-              break;
-            }
-            if (item.customerUserRole.getPermission('VIEW_ALL_INVOICES')) {
-              /*  this.customerPortalStateService.setCompnayIdInfo(item.clientCompany.id);
-                this.setInvoiceFilter(item);*/
-              this.leftPanelStateService.goToState('new-billable-invoices');
-
-              console.log("2");
-              break;
-            }
-            if (item.customerUserRole.getPermission('VIEW_MY_PROFILE')) {
-              /*  this.customerPortalStateService.setCompnayIdInfo(item.clientCompany.id);
-                this.setInvoiceFilter(item);*/
-              this.leftPanelStateService.goToState('new-users');
-
-              console.log("6");
-              break;
-            }
-            if (item.customerUserRole.getPermission('VIEW_ALL_DEVICES')) {
-              /*   this.customerPortalStateService.setCompnayIdInfo(item.clientCompany.id);*/
-              this.leftPanelStateService.goToState('company-devices');
-
-              console.log("3");
-              break;
-            }
-            if (item.customerUserRole.getPermission('VIEW_ALL_QUOTES')) {
-              /*  this.customerPortalStateService.setCompnayIdInfo(item.clientCompany.id);
-                this.setQuotesFilter(item);*/
-              this.leftPanelStateService.goToState('quotes-component');
-
-              console.log("4");
-              break;
-            }
-            if (item.customerUserRole.getPermission('VIEW_ALL_PAYMENTS')) {
-              /* this.customerPortalStateService.setCompnayIdInfo(item.clientCompany.id);
-               this.setPaymentsFilter(item);*/
-              this.leftPanelStateService.goToState('new-payments-ng2');
-
-              console.log("5");
-              break;
+            if (item.customerUserRole) {
+              if (item.customerUserRole.getPermission('VIEW_ALL_TICKETS')) {
+                this.leftPanelStateService.goToState('new-tickets');
+                break;
+              }
+              if (item.customerUserRole.getPermission('VIEW_ALL_INVOICES')) {
+                this.leftPanelStateService.goToState('new-billable-invoices');
+                break;
+              }
+              if (item.customerUserRole.getPermission('VIEW_MY_PROFILE')) {
+                this.leftPanelStateService.goToState('new-users');
+                break;
+              }
+              if (item.customerUserRole.getPermission('VIEW_ALL_DEVICES')) {
+                this.leftPanelStateService.goToState('company-devices');
+                break;
+              }
+              if (item.customerUserRole.getPermission('VIEW_ALL_QUOTES')) {
+                this.leftPanelStateService.goToState('quotes-component');
+                break;
+              }
+              if (item.customerUserRole.getPermission('VIEW_ALL_PAYMENTS')) {
+                this.leftPanelStateService.goToState('new-payments-ng2');
+                break;
+              }
             }
             if (i + 1 == this.currentUser.customerCompaniesInfo.length) this.leftPanelStateService.goToState('default');
           }
@@ -375,41 +353,8 @@ export class AppComponent implements OnInit {
       this.state = data;
     })
   }
-  /* setPaymentsFilter(company) {
-     let paymentsFilter: PaymentsFilter = new PaymentsFilter();
-     paymentsFilter.setCompany(company.clientCompany.name);
-     this.paymentsStateService.setPaymentsFilter(paymentsFilter);
- 
-   }
-   public setTicketsFilter(company, type) {
-     this.ticketsStateService.onChangeTypeFilter(type);
-     let ticketsFilter: TicketsFilter = new TicketsFilter();
-     ticketsFilter.setCompany(company.clientCompany);
-     ticketsFilter.setListType(type);
-     if (company.customerUserRole.getPermission('VIEW_MY_TICKETS')) ticketsFilter.setUser(this.currentUser);
-     //this.ticketsStateService.onInitFilter(ticketsFilter);
-     this.customerPortalStateService.setTicketFilters(ticketsFilter);
-   }
-   setInvoiceFilter(company) {
-     let invoicesFilter: InvoicesFilter = new InvoicesFilter();
-     invoicesFilter.setCompany(company.clientCompany.name);
-     this.invoiceStateService.setInvoicesFilter(invoicesFilter);
-   }
-   setQuotesFilter(company) {
-     let filter: QuoteFilter = new QuoteFilter();
-     filter.setCompanyName(company.clientCompany.name);
-     this.quoteStateService.setQuotesFilter(filter);
- 
-   }*/
   onCheckGoogleAuthenticator() {
     const modalRef = this.modalService.open(GoogleAuthenticatorComponent, { windowClass: 'quote-send-modal page-settings', backdrop: 'static', keyboard: false });
-    /* let onReset = modalRef.componentInstance.onReset.subscribe(data => {
-     })
-     let onSetQrCode = modalRef.componentInstance.onSetQrCode.subscribe(data => {
- 
-     })
-     this.sub.add(onSetQrCode);
-     this.sub.add(onReset);*/
   }
   ngDoCheck() {
     this.qtListHeaaderScroller = document.querySelector('.qt-page-list__header-thead-container');
@@ -421,7 +366,6 @@ export class AppComponent implements OnInit {
       this.qtListHeaaderScroller.addEventListener('scroll', this.qtListHeaaderScrollerScroll, false);
       this.qtListBodyScroller.addEventListener('scroll', this.qtListBodyScrollerScroll, false);
     }
-    // if ((<any>document.body.querySelector("#userback_button_container")) && (<any>document.body.querySelector("#userback_button_container")).style.display == "" && this.appService.checkMobile()) (<any>document.body.querySelector("#userback_button_container")).style.display = "none";
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
@@ -452,6 +396,4 @@ export class AppComponent implements OnInit {
     }
 
   }
-
-
 }

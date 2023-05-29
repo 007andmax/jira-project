@@ -52,7 +52,7 @@ export class InvoicesFilterComponent implements OnInit {
     this.datesDp.clearWithOutChanges();
     this.statusDp.clearWithOutChanges();
     this.invoicesFilter.setStatus(null);
-    this.invoicesFilter.setCompany(null);
+    this.invoicesFilter.setCompanyId(null);
     this.invoicesFilter.setStartDate(null);
     this.invoicesFilter.setEndDate(null);
     this.invoicesFilter.setInvoiceNumber(null);
@@ -64,9 +64,9 @@ export class InvoicesFilterComponent implements OnInit {
 
   public onSelectCompany(item) {
     if (!item) {
-      this.invoicesFilter.setCompany(null);
+      this.invoicesFilter.setCompanyId(null);
     } else {
-      this.invoicesFilter.setCompany(item.name);
+      this.invoicesFilter.setCompanyId(item.id);
     }
     this.invoiceStateService.onInitFilter(this.invoicesFilter);
     this.onChangeCounterFilter();
@@ -95,7 +95,7 @@ export class InvoicesFilterComponent implements OnInit {
   }
   public onChangeCounterFilter() {
     let count = 0;
-    if (this.invoicesFilter.companyName) count++;
+    if (this.invoicesFilter.companyId) count++;
     if (this.invoicesFilter.endDate && this.invoicesFilter.startDate) count++;
     if (this.invoicesFilter.invoiceNumber) count++;
     if (this.invoicesFilter.status) count++;

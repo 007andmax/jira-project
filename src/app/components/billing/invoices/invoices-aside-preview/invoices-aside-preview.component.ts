@@ -7,7 +7,7 @@ import * as moment from "moment";
 import { AppService } from 'src/app/states/app/app.service';
 import { ConfirmStateService } from '../../../shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DELETE_INVOICE, ROLLBACK_INVOICE, REFUND_PAYMENTS } from 'src/app/const/confirm';
+import { ROLLBACK_INVOICE, REFUND_PAYMENTS } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
 import { Subscription } from 'rxjs';
@@ -39,7 +39,7 @@ export class InvoicesAsidePreviewComponent implements OnInit {
   ngOnInit() {
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
-        if (this.confirmStateService.getConfirmAction() === DELETE_INVOICE || this.confirmStateService.getConfirmAction() === ROLLBACK_INVOICE || this.confirmStateService.getConfirmAction() === REFUND_PAYMENTS) this.close();
+        if (this.confirmStateService.getConfirmAction() === ROLLBACK_INVOICE || this.confirmStateService.getConfirmAction() === REFUND_PAYMENTS) this.close();
       }
     })
     this.sub.add(getConfirm);
@@ -89,12 +89,6 @@ export class InvoicesAsidePreviewComponent implements OnInit {
       hours = (date.getHours() > 12) ? date.getHours() - 12 : date.getHours(),
       minutes = (date.getMinutes() > 10) ? date.getMinutes() : "0" + date.getMinutes();
     return `${this.getDateTicket(this.invoiceProfile.date)} ${(hours > 10) ? hours : "0" + hours}:${minutes} ${typeTime}`;
-  }
-  deleteInvoice() {
-    this.confirmStateService.setConfirmAction(DELETE_INVOICE);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to delete invoice #${this.invoiceProfile.number} ?`;
-    this.invoiceStateService.setInvoiceForemove(this.invoiceProfile);
   }
   downloadPDF() {
     let company = this.companiesStateService.getCompanies().find(item => item.id === this.invoiceProfile.company.id);

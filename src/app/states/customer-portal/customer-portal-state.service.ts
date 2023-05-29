@@ -28,11 +28,10 @@ export class CustomerPortalStateService {
   public setFilters(currentUser) {
     for (let i = 0; i < currentUser.customerCompaniesInfo.length; i++) {
       let item = currentUser.customerCompaniesInfo[i];
+      if (item.customerUserRole == null) continue;
       if (item.customerUserRole.getPermission('VIEW_ALL_TICKETS')) {
         this.setCompnayIdInfo(item.clientCompany.id);
         this.setTicketsFilter(item, "ALL", currentUser);
-
-
       }
       if (item.customerUserRole.getPermission('VIEW_ALL_INVOICES')) {
         this.setCompnayIdInfo(item.clientCompany.id);
@@ -44,31 +43,27 @@ export class CustomerPortalStateService {
       }
       if (item.customerUserRole.getPermission('VIEW_ALL_DEVICES')) {
         this.setCompnayIdInfo(item.clientCompany.id);
-
       }
       if (item.customerUserRole.getPermission('VIEW_ALL_QUOTES')) {
         this.setCompnayIdInfo(item.clientCompany.id);
         this.setQuotesFilter(item);
-
-
       }
       if (item.customerUserRole.getPermission('VIEW_ALL_PAYMENTS')) {
         this.setCompnayIdInfo(item.clientCompany.id);
         this.setPaymentsFilter(item);
-
-
       }
+
     }
   }
   public getPaymentsFilter() {
     return this.paymentsFilter;
   }
   setPaymentsFilter(company) {
-    this.paymentsFilter.setCompany(company.clientCompany.name);
+    this.paymentsFilter.setCompanyId(company.clientCompany.id);
     this.onPaymentsFilters.emit(this.paymentsFilter);
   }
   setQuotesFilter(company) {
-    this.quotesFilter.setCompanyName(company.clientCompany.name);
+    this.quotesFilter.setCompanyId(company.clientCompany.id);
     this.onQuotesFilters.emit(this.quotesFilter);
   }
   public setUsersFilter(id) {
@@ -77,11 +72,8 @@ export class CustomerPortalStateService {
     this.onUsersFilters.emit(this.usersFilter);
   }
   setInvoiceFilter(company) {
-
-    this.invoicesFilter.setCompany(company.clientCompany.name);
+    this.invoicesFilter.setCompanyId(company.clientCompany.id);
     this.onInvoiceFilters.emit(this.invoicesFilter);
-    console.log("company", company);
-    console.log("this.invoicesFilter", this.invoicesFilter);
   }
   public setTicketsFilter(company, type, currentUser) {
     this.ticketsFilter.setCompany(company.clientCompany);

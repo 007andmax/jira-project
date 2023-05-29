@@ -30,6 +30,7 @@
                 <button
                     class="qt-btn --outline-blue qt-ml-8"
                     (click)="onShowCreateQuote()"
+                    *ngIf="!customerPortalStateService.isCustomerPortal"
                 >
                     Create Quotation
                 </button>

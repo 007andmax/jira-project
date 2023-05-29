@@ -7,7 +7,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
 import { Subscription } from 'rxjs';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
-import { DELETE_INVOICE, ROLLBACK_INVOICE, REFUND_PAYMENTS } from 'src/app/const/confirm';
+import { ROLLBACK_INVOICE, REFUND_PAYMENTS } from 'src/app/const/confirm';
 import { InvoiceRealTimeService } from 'src/app/states/invoice/invoice-real-time.service';
 import { InvoicesAsidePreviewComponent } from './invoices-aside-preview/invoices-aside-preview.component';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
@@ -50,15 +50,14 @@ export class InvoicesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.customerPortalStateService.isCustomerPortal) {
-      this.invoicesFilter.setCompany(this.customerPortalStateService.getInvoicesFilter().companyName);
+      this.invoicesFilter.setCompanyId(this.customerPortalStateService.getInvoicesFilter().companyId);
     }
-    console.log("this.invoicesFilter", this.invoicesFilter);
     let onInvoiceFilters = this.customerPortalStateService.onInvoiceFilters.subscribe(data => {
       this.invoicesFilter.onInitLeftOffset(false);
       this.invoicesFilter.resetLeftOffset();
       this.selectedInvoices = [];
       this.selectedCompanyId = null;
-      this.invoicesFilter.setCompany(this.customerPortalStateService.getInvoicesFilter().companyName);
+      this.invoicesFilter.setCompanyId(this.customerPortalStateService.getInvoicesFilter().companyId);
       this.invoicesFilter.resetSortBy();
       this.showPreloader = true;
       document.body.querySelector(".main-container").scrollTo(0, 0);
@@ -89,9 +88,6 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     this.sub.add(getOnInitFilter);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
-        if (this.confirmStateService.getConfirmAction() === DELETE_INVOICE) {
-          this.onRemoveInvoice(this.invoiceStateService.getInvoiceForRemove());
-        }
         if (this.confirmStateService.getConfirmAction() === ROLLBACK_INVOICE) {
           this.onRollbackInvoice(this.invoiceStateService.getInvoiceForRollback());
         }
@@ -224,11 +220,6 @@ export class InvoicesComponent implements OnInit, OnDestroy {
       })
     }
     this.cd.detectChanges();
-  }
-  onRemoveInvoice(invoice) {
-    this.invoicesService.remove(invoice.id).subscribe(data => {
-      // this.showPreviewInvoice = false;
-    })
   }
   getInvoices() {
     if (this.invoicesListService.getBlockList()) {

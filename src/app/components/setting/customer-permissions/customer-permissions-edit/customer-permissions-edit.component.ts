@@ -24,7 +24,6 @@ export class CustomerPermissionsEditComponent implements OnInit {
   }
 
   changeRole() {
-    console.log("this.name", this.editRole);
     if (this.editRole.name.length > 0) {
       this.usersService.changePermission(this.editRole.id, this.editRole.getDataForRequest(this.userPermissions.find(item => item.id == this.editRole.id).permissions)).subscribe(data => {
         this.close()

@@ -6,7 +6,6 @@ import { InvoicesFilter } from 'src/app/components/billing/invoices/class/invoic
   providedIn: 'root'
 })
 export class InvoiceStateService {
-  invoiceForRemove: Invoice;
   invoiceForRollback: Invoice;
   invoiceForRefund: Invoice;
   openAside: EventEmitter<any> = new EventEmitter();
@@ -38,12 +37,6 @@ export class InvoiceStateService {
   }
   public getInvoiceForRollback() {
     return this.invoiceForRollback;
-  }
-  public setInvoiceForemove(data) {
-    this.invoiceForRemove = data;
-  }
-  public getInvoiceForRemove() {
-    return this.invoiceForRemove;
   }
   public onInitFilter(data) {
     this.filter.emit(data);

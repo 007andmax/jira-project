@@ -53,7 +53,7 @@ export class PaymentsFilterComponent implements OnInit {
     this.statusDp.clearWithOutChanges();
     this.paymentsFilter.setStatus(null);
     this.paymentsFilter.setAmount(null);
-    this.paymentsFilter.setCompany(null);
+    this.paymentsFilter.setCompanyId(null);
     this.paymentsFilter.setStartDate(null);
     this.paymentsFilter.setEndDate(null);
     this.paymentsFilter.setInvoiceNumber(null);
@@ -65,9 +65,9 @@ export class PaymentsFilterComponent implements OnInit {
 
   public onSelectCompany(item) {
     if (!item) {
-      this.paymentsFilter.setCompany(null);
+      this.paymentsFilter.setCompanyId(null);
     } else {
-      this.paymentsFilter.setCompany(item.name);
+      this.paymentsFilter.setCompanyId(item.id);
     }
     this.paymentsStateService.onInitFilter(this.paymentsFilter);
     this.onChangeCounterFilter();
@@ -90,7 +90,7 @@ export class PaymentsFilterComponent implements OnInit {
   }
   public onChangeCounterFilter() {
     let count = 0;
-    if (this.paymentsFilter.companyName) count++;
+    if (this.paymentsFilter.companyId) count++;
     if (this.paymentsFilter.endDate && this.paymentsFilter.startDate) count++;
     if (this.paymentsFilter.invoiceNumber) count++;
     if (this.paymentsFilter.status) count++;
