@@ -4,6 +4,7 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { TicketProfile } from '../../class/ticket-profile';
 import { TitleListType } from '../../tickets-header/class/title-list-type';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'ticket-detail-change-priority',
@@ -17,6 +18,7 @@ export class TicketDetailChangePriorityComponent extends DropDownComponent {
   new TitleListType('Low Priority', 'LOW')];
   constructor(public elRef: ElementRef,
     public companiesStateService: CompaniesStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     public ticketsService: TicketsService) {
     super(elRef, companiesStateService);
 
@@ -27,6 +29,7 @@ export class TicketDetailChangePriorityComponent extends DropDownComponent {
     this.isBlockClear = true;
     this.sort = false;
     this.selectedItem = this.list.find(item => item.type == this.ticketProfile.priorityLevel);
+    this.isDisabled = this.customerPortalStateService.isCustomerPortal;
     if (this.class.length > 0) this.class = this.class;
     if (this.uiType) this.class.push(this.uiType);
   }

@@ -9,6 +9,7 @@
         <div
             class="qt-button qt-button--with-icon --sm --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
             ngbDropdownToggle
+            *ngIf="!customerPortalStateService.isCustomerPortal"
         >
             <span class="icon__link-agent qt-sz-16 qt-bg-contain qt-dib qt-mr-4 qt-button-icon"></span>
             Link

@@ -67,10 +67,6 @@ export class SettingService {
     return this.http.put(`${this.apiUrl}settings/userProfile/basic`, profile);
   }
 
-  public deleteAvatar(id: string) {
-    return this.http.delete(`${this.apiUrl}users/${id}/avatar`);
-  }
-
   public fileAvatar(fromData: any) {
     return this.http.post(`${this.apiUrl}file?isAvatar=true&ratio=1`, fromData);
   }
@@ -133,10 +129,6 @@ export class SettingService {
     return this.http.get(
       `${this.apiUrl}settings/userProfile/emailNotifications`
     );
-  }
-
-  removeDevice(id: string) {
-    return this.http.post(`${this.apiUrl}settings/userProfile/device`, id);
   }
 
   /**

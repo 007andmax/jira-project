@@ -8,6 +8,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TicketStateService } from '../services/ticket-state.service';
 import { OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-ticket-profile-attachments',
@@ -21,6 +22,7 @@ export class TicketProfileAttachmentsComponent implements OnInit, OnDestroy {
   constructor(public ticketsService: TicketsService,
     private previewAttachmentStateService: PreviewAttachmentStateService,
     public modalService: NgbModal,
+    public customerPortalStateService: CustomerPortalStateService,
     public ticketStateService: TicketStateService,
     public confirmStateService: ConfirmStateService,) { }
 

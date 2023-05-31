@@ -22,6 +22,7 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { TechUsersComponent } from 'src/app/components/shared/tech-users/tech-users.component';
 import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 
 
@@ -67,6 +68,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private ticketStateService: TicketStateService,
     private companiesService: CompaniesService,
+    public customerPortalStateService: CustomerPortalStateService,
     private addUsersNotifyStateService: AddUsersNotifyStateService,
     private companiesState: CompaniesStateService,) { }
 
@@ -129,9 +131,9 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     this.shareUsersList = [];
     this.elRef.nativeElement.querySelector('#add-ticket-describe-issue').innerHTML = '';
     this.opened = false;
-    this.deviceDP.clearClient();
+    if (this.deviceDP) this.deviceDP.clearClient();
     this.userDP.clearClient();
-    this.techUserDP.clearClient();
+    if (this.techUserDP) this.techUserDP.clearClient();
     this.companyDP.clearClient();
     this.uplaodFile.onClearState();
     this.appService.toggleMobileAside(false);
@@ -195,7 +197,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       this.shareUsersList.push(user);
       this.techUsersDp.resetEditMode();
     }
-    this.deviceDP.clearClient();
+    if (this.deviceDP) this.deviceDP.clearClient();
     this.userDP.clearClient();
     this.cd.detectChanges();
     this.listTechUsersForAssign = this.getListTechUsersForAssign();

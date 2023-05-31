@@ -27,6 +27,7 @@ import { ImageCropperStateService } from 'src/app/states/image-cropper/image-cro
 import { ModalImageCropperStateService } from 'src/app/services/modal/modal-image-cropper/services/modal-image-cropper-state.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 declare var google: any;
 @Component({
@@ -76,6 +77,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private crmStateService: CrmStateService,
     private imageCropperStateService: ImageCropperStateService,
     private modalImageCropperStateService: ModalImageCropperStateService,
+    private customerPortalStateService: CustomerPortalStateService,
     private companiesService: CompaniesService,
   ) {
   }
@@ -486,8 +488,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
    * delete avatar
    */
   deleteAvatar() {
-    this.settingService
-      .deleteAvatar(this.currentUser.id)
+    this.userService
+      .removeAvatar(this.currentUser.id)
       .pipe(
         map(res => {
           this.toastr.success('Avatar deleted successfully');

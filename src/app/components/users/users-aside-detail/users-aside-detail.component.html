@@ -19,6 +19,7 @@
                 placement="top"
                 container="body"
                 [ngbTooltip]="'Draft Email'"
+                *ngIf="!customerPortalStateService.isCustomerPortal"
             ></div>
             <div
                 class="icon__close qt-aside-modern__header-close"

@@ -24,7 +24,6 @@ import { TicketProfile } from '../class/ticket-profile';
 import { TicketsListService } from '../services/tickets-list.service';
 import { TicketStateService } from '../ticket-edit-aside/services/ticket-state.service';
 import { TicketsPermissionsService } from '../ticket-edit-aside/services/tickets-permissions.service';
-import { TicketEditAsideRightPanelComponent } from '../ticket-edit-aside/ticket-edit-aside-right-panel/ticket-edit-aside-right-panel.component';
 import { TicketMessageComponent } from '../ticket-edit-aside/ticket-message/ticket-message.component';
 import { TicketProfileEditFormUpdateComponent } from '../ticket-edit-aside/ticket-profile-edit-form-update/ticket-profile-edit-form-update.component';
 import { TicketProfileFormUpdateComponent } from '../ticket-edit-aside/ticket-profile-form-update/ticket-profile-form-update.component';
@@ -39,6 +38,7 @@ import { DatePickerStateService } from 'src/app/components/shared/date-picker/se
 import { TicketDetailHeaderComponent } from './ticket-detail-header/ticket-detail-header.component';
 import { TicketProfileAgent } from '../class/ticket-profile-agent';
 import { DevicesService } from 'src/app/services/devices/devices.service';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'ticket-detail',
@@ -49,7 +49,6 @@ import { DevicesService } from 'src/app/services/devices/devices.service';
 })
 export class TicketDetailComponent implements OnInit, OnDestroy {
   @ViewChild('editUpdateForm') editUpdateForm: TicketProfileEditFormUpdateComponent;
-  @ViewChild('rightPanel') rightPanel: TicketEditAsideRightPanelComponent;
   @ViewChild('ticketMessage') ticketMessage: TicketMessageComponent;
   @ViewChild('ticketProfileUpdates') ticketProfileUpdates: TicketDetailProfileUpdatesComponent;
   @ViewChild('ticketTasks') ticketTasks: TicketDetailTasksComponent;
@@ -92,6 +91,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     public websocketService: WebsocketService,
     private devicesService: DevicesService,
     private datePickerStateService: DatePickerStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     private companiesStateService: CompaniesStateService) { }
 
 
@@ -268,7 +268,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       this.ticketStateService.getDevicesByCompany(this.ticketProfile.company.id);
       if (this.ticketMessage) this.ticketMessage.reset();
       this.ticketProfileUpdates.resetShowLoadMoreUpdates();
-      this.ticketTasks.getTicketTasks(id);
+      if (this.ticketTasks) this.ticketTasks.getTicketTasks(id);
       this.onInitRealTimes();
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();

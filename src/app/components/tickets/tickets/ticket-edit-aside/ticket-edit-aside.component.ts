@@ -20,7 +20,6 @@ import { TicketChangeField } from '../class/ticket-change-field';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { TicketProfileUpdate } from '../class/ticket-profile-update';
 import { Subscription } from 'rxjs';
-import { TicketEditAsideRightPanelComponent } from './ticket-edit-aside-right-panel/ticket-edit-aside-right-panel.component';
 import { TicketMessageComponent } from './ticket-message/ticket-message.component';
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
@@ -46,7 +45,6 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
 
   @ViewChild('updateForm') updateForm: TicketProfileFormUpdateComponent;
   @ViewChild('editUpdateForm') editUpdateForm: TicketProfileEditFormUpdateComponent;
-  @ViewChild('rightPanel') rightPanel: TicketEditAsideRightPanelComponent;
   @ViewChild('ticketMessage') ticketMessage: TicketMessageComponent;
   @ViewChild('ticketProfileUpdates') ticketProfileUpdates: TicketProfileUpdatesComponent;
 
@@ -103,7 +101,6 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       if (this.appService.checkMobile()) this.appService.toggleMobileAside(true);
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
-        if (!this.rightPanel.toggleRightPanel && !this.appService.isMobile) this.rightPanel.toggleTypeOnPanel('COMPANY_INFO');
       }
     })
     this.sub.add(getOnEditTicket);
@@ -420,7 +417,6 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.showAddAssignedUser = false;
     this.showPreloader = true;
     this.listAssignedUser = [];
-    this.rightPanel.close();
     this.ticketStateService.unsubscribeTicket();
     this.ticketStateService.onTicketClosed();
     this.ticketMessage.reset();

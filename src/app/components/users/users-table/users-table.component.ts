@@ -208,6 +208,9 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     this.draftEmailStateService.addSelectedUser(this.user);
     this.draftEmailStateService.toggleAsideForAdd();
   }
+  getPermissionCustomerUser(permission) {
+    return this.currentUser.customerCompaniesInfo.find(item => item.clientCompany.id === this.customerPortalStateService.getUsersFilters().company).customerUserRole.getPermission(permission);
+  }
   public trackById(index, item) {
     return item.id;
   }

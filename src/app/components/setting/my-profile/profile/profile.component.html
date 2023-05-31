@@ -68,7 +68,10 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane__row">
+            <div
+                class="tab-pane__row"
+                *ngIf="!customerPortalStateService.isCustomerPortal"
+            >
                 <div class="tab-pane__subtitle">Mailing Address</div>
                 <div class="tab-pane-input__row">
                     <div class="qt-input-block">
@@ -85,7 +88,10 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane__row">
+            <div
+                class="tab-pane__row"
+                *ngIf="!customerPortalStateService.isCustomerPortal"
+            >
                 <div class="tab-pane__subtitle">Suite Number & Zip Code</div>
                 <div class="tab-pane-input__row">
                     <div class="qt-input-block qt-mr-24">
@@ -106,7 +112,10 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane__row">
+            <div
+                class="tab-pane__row"
+                *ngIf="!customerPortalStateService.isCustomerPortal"
+            >
                 <div class="tab-pane__subtitle">Role</div>
                 <div class="tab-pane-input__row">
                     <div class="qt-input-block">
@@ -277,7 +286,10 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane__row">
+            <div
+                class="tab-pane__row"
+                *ngIf="!customerPortalStateService.isCustomerPortal"
+            >
                 <div class="tab-pane__subtitle">About Me</div>
                 <div class="tab-pane-input__row">
                     <div class="qt-input-block">

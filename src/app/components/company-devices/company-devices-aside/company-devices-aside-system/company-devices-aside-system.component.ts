@@ -28,6 +28,10 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
+    if (!this.device.report.system) {
+      this.device.report.system.warranty = this.getToDayDate();
+      this.device.report.system.install_date = this.getToDayDate();
+    }
   }
   onChangeName(value) {
     this.devicesService.editAgentInfo(this.device.getDataForEditName((value.length > 0) ? value : this.device.hostName || this.device.ip)).subscribe(data => {

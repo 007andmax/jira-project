@@ -107,7 +107,7 @@ export class AppComponent implements OnInit {
     private noteStateService: NoteStateService,
     private supportPageCategoriesStateService: SupportPageCategoriesStateService,
     private emailTemplateStateService: EmailTemplateStateService,
-    private customerPortalStateService: CustomerPortalStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     public invoiceStateService: InvoiceStateService,
     private quoteStateService: QuoteStateService,
     private paymentsStateService: PaymentsStateService,

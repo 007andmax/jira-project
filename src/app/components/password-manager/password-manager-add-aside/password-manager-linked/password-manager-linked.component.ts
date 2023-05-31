@@ -10,6 +10,7 @@ import { PasswordDeviceUser } from '../../class/password-device-user';
 
 import { PasswordRecordAdd } from '../../class/password-record-add';
 import { PasswordRecordValidate } from '../../class/password-record-validate';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'password-manager-linked',
@@ -40,6 +41,7 @@ export class PasswordManagerLinkedComponent implements OnInit {
     private gadgetsService: GadgetsService,
     public ticketsService: TicketsService,
     public elRef: ElementRef,
+    public customerPortalStateService: CustomerPortalStateService,
     private usersStateService: UsersStateService,) { }
 
   ngOnInit() {

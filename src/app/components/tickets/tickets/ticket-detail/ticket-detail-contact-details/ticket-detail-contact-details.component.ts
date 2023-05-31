@@ -7,7 +7,6 @@ import { MapModalStateService } from 'src/app/states/map-modal/map-modal-state.s
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketProfile } from '../../class/ticket-profile';
 import { TicketsListService } from '../../services/tickets-list.service';
-import { CompanyInfoHistoryComponent } from '../../ticket-edit-aside-company-info/company-info-history/company-info-history.component';
 import { TicketDetailContactDetailsHistoryComponent } from './ticket-detail-contact-details-history/ticket-detail-contact-details-history.component';
 import * as moment from "moment";
 

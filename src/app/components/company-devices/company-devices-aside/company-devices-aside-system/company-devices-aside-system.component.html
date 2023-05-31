@@ -86,10 +86,10 @@
                 [container]="'body'"
                 [type]="'INPUT'"
                 [editMode]="true"
-                [editDate]="getSystemField('warranty') || getToDayDate()"
+                [editDate]="device.report.system.warranty"
                 [useMinDate]="false"
                 [placement]="'top-right'"
-                [isDisabled]="customerPortalStateService.isCustomerPortal"
+                [disabled]="customerPortalStateService.isCustomerPortal"
                 (onChange)="onChangeHardware(device.getDataForUpdateWarranty(parseDateFromDatePicker($event)),'warranty',parseDateFromDatePicker($event))"
             ></app-date-picker>
         </div>
@@ -106,10 +106,10 @@
                 [type]="'INPUT'"
                 [editMode]="true"
                 [container]="'body'"
-                [editDate]="getSystemField('install_date') || getToDayDate()"
+                [editDate]="device.report.system.install_date"
                 [useMinDate]="false"
                 [placement]="'top-right'"
-                [isDisabled]="customerPortalStateService.isCustomerPortal"
+                [disabled]="customerPortalStateService.isCustomerPortal"
                 (onChange)="onChangeHardware(device.getDataForUpdateInstallDate(parseDateFromDatePicker($event)),'install_date',parseDateFromDatePicker($event))"
             ></app-date-picker>
         </div>

@@ -176,7 +176,7 @@
             >
                 <li
                     class="pointer"
-                    *ngIf="!showArchivedUsers && getPermissions('EDIT_USERS')"
+                    *ngIf="!showArchivedUsers && (getPermissions('EDIT_USERS') || getPermissionCustomerUser('EDIT_USERS'))"
                     (click)="edit()"
                     ngbDropdownItem
                 >
@@ -203,7 +203,7 @@
                 </li>
                 <li
                     class="pointer"
-                    *ngIf="currentUser && currentUser.checkPermission('ARCHIVE_USERS') && !showArchivedUsers"
+                    *ngIf="currentUser && (currentUser.checkPermission('ARCHIVE_USERS') || getPermissionCustomerUser('EDIT_USERS')) && !showArchivedUsers"
                     (click)="delete()"
                     ngbDropdownItem
                 >

@@ -14,6 +14,15 @@
     <td class="company-devices-table__device-type">
         <div>
             <div
+                class="qt-ic-c qt-pointer device-type-icon qt-sz-24"
+                [ngClass]="{'icon__computer' : device.iconName === 'workstation' || !device.iconName,
+              'icon__tablet' : device.iconName === 'device',
+            'icon__printer' : device.iconName === 'printer',
+          'icon__server' : device.iconName === 'server',
+        '--ofline': !device.online }"
+                *ngIf="customerPortalStateService.isCustomerPortal"
+            ></div>
+            <div
                 ngbDropdown
                 placement="bottom-left"
                 container="body"
@@ -24,11 +33,11 @@
           'icon__server' : device.iconName === 'server',
         '--ofline': !device.online }"
                 ngbDropdownToggle
+                *ngIf="!customerPortalStateService.isCustomerPortal"
             >
                 <div
                     class="company-device-type-dropdown"
                     ngbDropdownMenu
-                    *ngIf="!customerPortalStateService.isCustomerPortal"
                 >
                     <ul class="icon-list qt-dropdown-menu --dropdown-icons device-type-dropdown">
                         <li

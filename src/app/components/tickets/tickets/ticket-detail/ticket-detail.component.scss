@@ -880,10 +880,6 @@ app-ticket-change-status {
     cursor: pointer;
 }
 
-app-ticket-edit-aside-right-panel {
-    display: flex;
-}
-
 [contenteditable="true"]:empty:before {
     content: attr(placeholder);
     pointer-events: none;

@@ -49,7 +49,7 @@ export class AddAssignedUserComponent implements OnInit {
     public usersStateService: UsersStateService,
     public ticketStateService: TicketStateService,
     public elRef: ElementRef,
-    public ticketsListService: TicketsListService
+    public ticketsListService: TicketsListService,
   ) {
 
 
