@@ -18,19 +18,31 @@
     }
 
     &__header {
-        padding: 12px 16px;
-        border: 1px solid $gray-200;
-        border-radius: 8px 8px 0px 0px;
+        padding: 12px 0;
+        border-bottom: 1px solid $gray-200;
 
-        &:only-child {
+        &:not(:only-child) {
             .report-caret-icon {
                 transform: rotate(180deg) translateY(50%);
             }
+        }
+
+        .report-caret-icon {
+          right: 0;
         }
     }
 
     &__body {
         padding: 16px;
+        background-color: $gray-50;
+
+        .qt-inputs-row:not(:last-child) {
+          margin-bottom: 16px;
+        }
+
+        /deep/ .qt-dropdown-input {
+          background-color: transparent;
+        }
     }
 
     &__avatar {

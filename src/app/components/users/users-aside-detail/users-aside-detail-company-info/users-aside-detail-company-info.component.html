@@ -14,7 +14,7 @@
         *ngIf="toggleContainer"
     >
         <div class="qt-inputs-row">
-            <div class="qt-input-block qt-editable-dropdown qt-mb-16">
+            <div class="qt-input-block qt-editable-dropdown">
                 <div class="qt-df qt-jc-sb qt-ai-c">
                     <label class="qt-input-block__label">Job Title</label>
                     <div
@@ -30,6 +30,7 @@
                     [field]="'name'"
                     [search]="true"
                     [change]="true"
+                    heightInput="34px"
                     [isDisabled]="!getPermissions('EDIT_USERS')"
                     [editItem]="customerCompaniesInfo.jobTitleDto"
                     (onSelectedItem)="onSelectJobTitle($event)"
@@ -37,7 +38,7 @@
             </div>
         </div>
         <div class="qt-inputs-row">
-            <div class="qt-input-block qt-editable-dropdown qt-mb-16">
+            <div class="qt-input-block qt-editable-dropdown">
                 <div class="qt-df qt-jc-sb qt-ai-c">
                     <label class="qt-input-block__label">Permission Role</label>
                     <div
@@ -54,6 +55,7 @@
                     [field]="'name'"
                     [search]="true"
                     [change]="true"
+                    heightInput="34px"
                     [isDisabled]="!getPermissions('EDIT_USERS')"
                     [editItem]="customerCompaniesInfo.customerUserRole"
                     (onSelectedItem)="onSelectUserRole($event)"
@@ -79,7 +81,7 @@
         </div>
         <div class="qt-inputs-row">
             <div class="qt-input-block">
-                <div class="qt-df qt-ai-c qt-mt-15">
+                <div class="qt-df qt-ai-c">
                     <label
                         class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
                         [attr.for]="'access-' + i"
@@ -98,7 +100,7 @@
         </div>
         <div class="qt-inputs-row">
             <div class="qt-input-block">
-                <div class="qt-df qt-ai-c qt-mt-15">
+                <div class="qt-df qt-ai-c">
                     <label
                         class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
                         [attr.for]="'primary-contact-' + i"
