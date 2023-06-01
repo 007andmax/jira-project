@@ -32,7 +32,7 @@
                     [link]="'tickets'"
                     target="_blank"
                     appRightClickBlank
-                    *ngIf="customerCompany.customerUserRole.getPermission('VIEW_ALL_TICKETS')"
+                    *ngIf="customerCompany.customerUserRole.getPermission('VIEW_ALL_TICKETS') || customerCompany.customerUserRole.getPermission('VIEW_ALL_TICKETS')"
                 >
                     <li
                         [ngClass]="{'--active':activePage === 'new-tickets' && customerCompany.clientCompany.id === getSelectedCompnayId()}"

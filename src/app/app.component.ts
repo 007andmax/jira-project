@@ -287,6 +287,7 @@ export class AppComponent implements OnInit {
         this.ticketsStateService.onChangeLeftPanelFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
       }
       if (this.router.url === "/" && this.currentUser.role !== "SUPER_ADMIN" && this.state == '' && this.main_page == PAGE_MAIN) {
+        console.log("this.router.url", this.router.url);
         if (this.customerPortalStateService.isCustomerPortal) {
           for (let i = 0; i < this.currentUser.customerCompaniesInfo.length; i++) {
             let item = this.currentUser.customerCompaniesInfo[i];

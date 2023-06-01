@@ -43,7 +43,7 @@
             ></div>
             <div
                 class="qt-df qt-ai-c"
-                *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
+                *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || customerPortalStateService.isCustomerPortal"
             >
                 <div
                     class="qt-button qt-button--with-icon --gray --md pointer qt-mr-8"

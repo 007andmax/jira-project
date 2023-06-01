@@ -26,6 +26,7 @@ export class CustomerPortalStateService {
     this.isCustomerPortal = data;
   }
   public setFilters(currentUser) {
+    console.log("setFilters", currentUser);
     for (let i = 0; i < currentUser.customerCompaniesInfo.length; i++) {
       let item = currentUser.customerCompaniesInfo[i];
       if (item.customerUserRole == null) continue;

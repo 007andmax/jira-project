@@ -29,7 +29,6 @@ export class TicketDetailChangePriorityComponent extends DropDownComponent {
     this.isBlockClear = true;
     this.sort = false;
     this.selectedItem = this.list.find(item => item.type == this.ticketProfile.priorityLevel);
-    this.isDisabled = this.customerPortalStateService.isCustomerPortal;
     if (this.class.length > 0) this.class = this.class;
     if (this.uiType) this.class.push(this.uiType);
   }

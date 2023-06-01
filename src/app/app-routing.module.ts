@@ -111,7 +111,7 @@ const routes: Routes = [
   {
     path: ':domain/setting/myprofile',
     loadChildren: './components/setting/my-profile/my-profile.module#MyProfileModule',
-    canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
+    canActivate: [PermissionNoSuperAdminService]
 
   },
   {
