@@ -25,7 +25,7 @@
                 *ngIf="update.type === 'NOTE' || update.type === 'SALE_QUOTE_REVIEW_NOTE'"
                 [idTicket]="ticketProfile.id"
                 [update]="update"
-                [isBlockChange]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
+                [isBlockChange]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && !(customerPortalStateService.isCustomerPortal && isAddNoteForCustomerUser())"
             >
             </ticket-detail-profile-updates-note>
             <ticket-detail-profile-updates-product

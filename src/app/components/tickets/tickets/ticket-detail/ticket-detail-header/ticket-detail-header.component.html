@@ -14,7 +14,7 @@
             {{dateTxt}}
         </div>
         <div
-            [hidden]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
+            [hidden]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && !(customerPortalStateService.isCustomerPortal && isAddNoteForCustomerUser())"
             class="qt-button qt-ml-12"
             placement="left"
             ngbTooltip="You cannot close the ticket. It contains incomplete products / services / tasks."
@@ -48,6 +48,7 @@
                 <div
                     class="qt-button qt-button--with-icon --gray --md pointer qt-mr-8"
                     (click)="addUpdate('NOTE')"
+                    *ngIf="customerPortalStateService.isCustomerPortal && isAddNoteForCustomerUser() || !customerPortalStateService.isCustomerPortal"
                 >
                     <div class="icon__chat qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
                     Chat

@@ -209,6 +209,7 @@
                     class="pointer"
                     [ngClass]="{'active':tab === 'tickets'}"
                     (click)="setTab('tickets')"
+                    *ngIf="customerPortalStateService.isCustomerPortal && getPermissionCustomerUser('VIEW_ALL_TICKETS') ||  customerPortalStateService.isCustomerPortal && getPermissionCustomerUser('VIEW_MY_TICKETS') && getPermissionCustomerUser('VIEW_MY_PROFILE') &&  usersStateService.getCurrentUser().id ==  user.id || !customerPortalStateService.isCustomerPortal"
                 >
                     Tickets
                 </span>

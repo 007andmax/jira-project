@@ -47,7 +47,7 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
   @ViewChild('ticketsDetail') ticketsDetail: UsersAsideDetailTicketsComponent;
   sub: Subscription = new Subscription();
   constructor(public ticketsListService: TicketsListService,
-    private usersStateService: UsersStateService,
+    public usersStateService: UsersStateService,
     private usersService: UsersService,
     private tagsService: TagsService,
     public cd: ChangeDetectorRef,
@@ -68,7 +68,11 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
       this.usersStateService.setUserForEdit(data);
       //   this.companySubscriptionState.onEditMode(this.user.subscription);
       this.user.onEdit(data);
-      this.tab = 'tickets';
+      if (this.customerPortalStateService.isCustomerPortal && this.getPermissionCustomerUser('VIEW_ALL_TICKETS') || this.customerPortalStateService.isCustomerPortal && this.getPermissionCustomerUser('VIEW_MY_TICKETS') && this.getPermissionCustomerUser('VIEW_MY_PROFILE') && this.usersStateService.getCurrentUser().id == this.user.id || !this.customerPortalStateService.isCustomerPortal) {
+        this.tab = 'tickets';
+      } else {
+        this.tab = 'messages';
+      }
       this.cd.detectChanges();
       if (this.ticketsDetail) {
         this.ticketsDetail.setDefaultScoll();
@@ -186,6 +190,9 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
     this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit())).subscribe(data => {
 
     })
+  }
+  getPermissionCustomerUser(permission) {
+    return this.usersStateService.getCurrentUser().customerCompaniesInfo.find(item => item.clientCompany.id === this.customerPortalStateService.getUsersFilters().company).customerUserRole.getPermission(permission);
   }
   onChangeCustomSubscriptions(data) {
     this.usersService.setCustomSubscriptions(this.user.id, {

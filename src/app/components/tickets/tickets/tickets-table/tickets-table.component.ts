@@ -122,7 +122,6 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
 
   editTicket(id) {
     if (!this.appService.isMobile) {
-      if (this.customerPortalStateService.isCustomerPortal && !this.usersStateService.getCurrentUser().customerCompaniesInfo.find(item => item.clientCompany.id === localStorage.getItem('company_info_id')).customerUserRole.getPermission('VIEW_MY_TICKETS')) return;
       this.ticketStateService.setTicketRoutingId(id);
       const url = `/#/${this.companiesStateService.getCurrentCompany().domain}/ticket/${id}`;
       window.open(url, '_blank');

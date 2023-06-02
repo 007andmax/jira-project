@@ -82,7 +82,9 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
   }
-
+  isAddNoteForCustomerUser() {
+    return this.customerPortalStateService.checkEditTicket(this.usersStateService.getCurrentUser(), this.ticketProfile.createdUserId, this.ticketProfile.companyId);
+  }
   checkClose() {
     if (this.ticketProfile.updates.length === 0) return true;
     let completeServices = true;

@@ -27,6 +27,7 @@ import { PermissionSuperAdminService } from './services/users/permission-super-a
 import { PermissionCompanyDevicesService } from './components/company-devices/permission-company-devices.service';
 import { PermissionNoSuperAdminService } from './services/users/permission-no-super-admin.service';
 import { PermissionClientUserService } from './services/users/permission-client-user.service';
+import { PermissionMyProfileService } from './components/setting/my-profile/permission-my-profile.service';
 
 const routes: Routes = [
 
@@ -111,7 +112,7 @@ const routes: Routes = [
   {
     path: ':domain/setting/myprofile',
     loadChildren: './components/setting/my-profile/my-profile.module#MyProfileModule',
-    canActivate: [PermissionNoSuperAdminService]
+    canActivate: [PermissionMyProfileService, PermissionNoSuperAdminService]
 
   },
   {

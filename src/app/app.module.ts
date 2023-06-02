@@ -120,6 +120,7 @@ import { PermissionCompanyDevicesService } from './components/company-devices/pe
 import { PermissionNoSuperAdminService } from './services/users/permission-no-super-admin.service';
 import { PermissionClientUserService } from './services/users/permission-client-user.service';
 import { UsersCheckUseComponent } from './components/users/users-check-use/users-check-use.component';
+import { PermissionMyProfileService } from './components/setting/my-profile/permission-my-profile.service';
 declare var $: any;
 
 /**
@@ -252,7 +253,8 @@ declare var $: any;
     PermissionTicketsService,
     PermissionCompanyDevicesService,
     PermissionNoSuperAdminService,
-    PermissionClientUserService
+    PermissionClientUserService,
+    PermissionMyProfileService
   ],
   bootstrap: [AppComponent]
 })

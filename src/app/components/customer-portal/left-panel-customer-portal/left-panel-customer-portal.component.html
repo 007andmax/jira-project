@@ -37,6 +37,7 @@
             [ngClass]="{'--active':page === 'SETTINGS' }"
             placement="right"
             ngbTooltip="Settings"
+            *ngIf="isShowSettingsPage()"
         >
             <div class="app-left-panel__menu-icon --settings"></div>
         </div>

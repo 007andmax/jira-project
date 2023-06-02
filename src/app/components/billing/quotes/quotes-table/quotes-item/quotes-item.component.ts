@@ -41,7 +41,7 @@ export class QuotesItemComponent implements OnInit {
     this.createdUser = this.usersStateService.getAllUsers().find(item => item.id === this.quote.createdBy);
   }
   openInvoiceTikcet() {
-    if (this.quote.status === "TICKETED") this.onTicket.emit(this.quote.ticketId);
+    if (this.quote.status === "TICKETED" && !this.customerPortalStateService.isCustomerPortal) this.onTicket.emit(this.quote.ticketId);
     if (this.quote.status === "INVOICED") this.onInvoice.emit(this.quote.invoiceId);
   }
   getNameForAvatar() {

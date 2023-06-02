@@ -5,6 +5,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { TicketProfile } from '../../class/ticket-profile';
 import { TitleListType } from '../../tickets-header/class/title-list-type';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
   selector: 'ticket-detail-change-priority',
@@ -19,6 +20,7 @@ export class TicketDetailChangePriorityComponent extends DropDownComponent {
   constructor(public elRef: ElementRef,
     public companiesStateService: CompaniesStateService,
     public customerPortalStateService: CustomerPortalStateService,
+    public usersStateService: UsersStateService,
     public ticketsService: TicketsService) {
     super(elRef, companiesStateService);
 
@@ -31,6 +33,10 @@ export class TicketDetailChangePriorityComponent extends DropDownComponent {
     this.selectedItem = this.list.find(item => item.type == this.ticketProfile.priorityLevel);
     if (this.class.length > 0) this.class = this.class;
     if (this.uiType) this.class.push(this.uiType);
+    if (this.customerPortalStateService.isCustomerPortal) this.isDisabled = !this.isAddNoteForCustomerUser();
+  }
+  isAddNoteForCustomerUser() {
+    return this.customerPortalStateService.checkEditTicket(this.usersStateService.getCurrentUser(), this.ticketProfile.createdUserId, this.ticketProfile.companyId);
   }
   onSelect(data) {
     this.isAdd = false;

@@ -46,7 +46,7 @@
                     </div>
                     <div
                         class="qt-button-square qt-button-square__afterpend pointer"
-                        *ngIf="!isBlockChange && !updatesNoteItem.editMode"
+                        *ngIf="!isBlockChange && !updatesNoteItem.editMode && !customerPortalStateService.isCustomerPortal"
                         (click)="remove()"
                         (mouseenter)="deleteTooltip.show($event.target)"
                         (mouseleave)="deleteTooltip.hide()"
