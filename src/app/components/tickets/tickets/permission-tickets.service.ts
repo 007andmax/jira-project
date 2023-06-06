@@ -20,7 +20,7 @@ export class PermissionTicketsService implements CanActivate {
         });
     }
     public getCompanyInfoPermissions(action) {
-        let compnayInfo = this.usersStateService.getCurrentUser().customerCompaniesInfo.find(item => item.clientCompany.id == localStorage.getItem("company_info_id"))
+        let compnayInfo = this.usersStateService.getCurrentUser().customerCompaniesInfo.find(item => item.companyId == localStorage.getItem("company_info_id"))
         if (this.usersStateService.getCurrentUser().accountType == "TECH") return true;
         return (compnayInfo && this.usersStateService.getCurrentUser().accountType == "CLIENT" && compnayInfo.customerUserRole.getPermission(action))
     }

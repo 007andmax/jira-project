@@ -130,7 +130,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       image: ['']
     });
     if (this.currentUser.jobTitle) this.selectedJobTitle = new CrmCompanyJobTitle(JSON.parse(JSON.stringify(this.currentUser.jobTitle)));
-    this.getAddressAutocomplete();
+    if (!this.customerPortalStateService.isCustomerPortal) this.getAddressAutocomplete();
     this.jobTitleList = this.crmStateService.getJobTitleList();
     let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
       this.jobTitleList = data;

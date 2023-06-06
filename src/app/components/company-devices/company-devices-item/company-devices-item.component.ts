@@ -27,7 +27,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
   @Output() onChangeSelect = new EventEmitter();
   constructor(private modalService: NgbModal,
     private devicesService: DevicesService,
-    private usersStateService: UsersStateService,
+    public usersStateService: UsersStateService,
     private permissionsService: PermissionsService,
     private devicesStateService: DevicesStateService,
     private confirmStateService: ConfirmStateService,

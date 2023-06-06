@@ -68,7 +68,7 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
       this.usersStateService.setUserForEdit(data);
       //   this.companySubscriptionState.onEditMode(this.user.subscription);
       this.user.onEdit(data);
-      if (this.customerPortalStateService.isCustomerPortal && this.getPermissionCustomerUser('VIEW_ALL_TICKETS') || this.customerPortalStateService.isCustomerPortal && this.getPermissionCustomerUser('VIEW_MY_TICKETS') && this.getPermissionCustomerUser('VIEW_MY_PROFILE') && this.usersStateService.getCurrentUser().id == this.user.id || !this.customerPortalStateService.isCustomerPortal) {
+      if (this.customerPortalStateService.checkShowTabTicketsAsideUserDetail(this.usersStateService.getCurrentUser(), this.user)) {
         this.tab = 'tickets';
       } else {
         this.tab = 'messages';
@@ -191,9 +191,7 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
 
     })
   }
-  getPermissionCustomerUser(permission) {
-    return this.usersStateService.getCurrentUser().customerCompaniesInfo.find(item => item.clientCompany.id === this.customerPortalStateService.getUsersFilters().company).customerUserRole.getPermission(permission);
-  }
+
   onChangeCustomSubscriptions(data) {
     this.usersService.setCustomSubscriptions(this.user.id, {
       customSubscriptionIds: data.map(item => item.id)

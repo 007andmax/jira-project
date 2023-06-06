@@ -3,6 +3,7 @@ import { UserJobTitle } from "./user-job-title";
 import { UserRole } from "./user-role";
 
 export class UserCustomerCompaniesInfo {
+    clientCompany: string;
     "companyId": string;
     "jobTitleDto": UserJobTitle;
     "customerUserRole": UserRole;

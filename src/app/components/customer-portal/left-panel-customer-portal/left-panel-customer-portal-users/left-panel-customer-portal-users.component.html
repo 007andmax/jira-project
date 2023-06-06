@@ -26,13 +26,13 @@
                 <i class="icon__companies icon__companies--white qt-bg-contain qt-sz-16 qt-mr-8"></i>
                 <div
                     class="customer-portal__menu-title"
-                    [textContent]="customerCompany.clientCompany.name"
+                    [textContent]="customerCompany.clientCompany"
                 ></div>
             </div>
             <ul class="customer-portal__menu">
                 <li
-                    [ngClass]="{'--active':activePage === 'new-tickets' && customerCompany.clientCompany.id === getSelectedCompnayId()}"
-                    (click)="customerPortalStateService.setCompnayIdInfo(customerCompany.clientCompany.id);setTicketsFilter(customerCompany,'ALL')"
+                    [ngClass]="{'--active':activePage === 'new-tickets' && customerCompany.companyId === getSelectedCompnayId()}"
+                    (click)="customerPortalStateService.setCompnayIdInfo(customerCompany.companyId);setTicketsFilter(customerCompany,'ALL')"
                     *ngIf="customerCompany.customerUserRole.getPermission('VIEW_MY_TICKETS')"
                 >
                     <a
@@ -45,8 +45,8 @@
                     </a>
                 </li>
                 <li
-                    [ngClass]="{'--active':activePage === 'new-billable-invoices' && customerCompany.clientCompany.id === getSelectedCompnayId()}"
-                    (click)="customerPortalStateService.setCompnayIdInfo(customerCompany.clientCompany.id);setInvoiceFilter(customerCompany);"
+                    [ngClass]="{'--active':activePage === 'new-billable-invoices' && customerCompany.companyId === getSelectedCompnayId()}"
+                    (click)="customerPortalStateService.setCompnayIdInfo(customerCompany.companyId);setInvoiceFilter(customerCompany);"
                     *ngIf="customerCompany.customerUserRole.getPermission('VIEW_ALL_INVOICES')"
                 >
                     <a
@@ -59,8 +59,8 @@
                     </a>
                 </li>
                 <li
-                    [ngClass]="{'--active':activePage === 'new-users' && customerCompany.clientCompany.id === getSelectedCompnayId()}"
-                    (click)="customerPortalStateService.setCompnayIdInfo(customerCompany.clientCompany.id);setUsersFilter(customerCompany.clientCompany.id)"
+                    [ngClass]="{'--active':activePage === 'new-users' && customerCompany.companyId === getSelectedCompnayId()}"
+                    (click)="customerPortalStateService.setCompnayIdInfo(customerCompany.companyId);setUsersFilter(customerCompany.companyId)"
                     *ngIf="customerCompany.customerUserRole.getPermission('VIEW_MY_PROFILE')"
                 >
                     <a
@@ -73,13 +73,13 @@
                     </a>
                 </li>
                 <li
-                    [ngClass]="{'--active':activePage === 'company-devices' && customerCompany.clientCompany.id === getSelectedCompnayId()}"
-                    (click)="customerPortalStateService.setCompnayIdInfo(customerCompany.clientCompany.id);goToCompanySection(customerCompany.clientCompany.id,'devices')"
+                    [ngClass]="{'--active':activePage === 'company-devices' && customerCompany.companyId === getSelectedCompnayId()}"
+                    (click)="customerPortalStateService.setCompnayIdInfo(customerCompany.companyId);goToCompanySection(customerCompany.companyId,'devices')"
                     *ngIf="customerCompany.customerUserRole.getPermission('VIEW_ALL_DEVICES')"
                 >
                     <a
                         href
-                        [link]="getLinkSection(customerCompany.clientCompany.id,'devices')"
+                        [link]="getLinkSection(customerCompany.companyId,'devices')"
                         target="_blank"
                         appRightClickBlank
                     >
@@ -87,8 +87,8 @@
                     </a>
                 </li>
                 <li
-                    [ngClass]="{'--active':activePage === 'quotes-component' && customerCompany.clientCompany.id === getSelectedCompnayId()}"
-                    (click)="customerPortalStateService.setCompnayIdInfo(customerCompany.clientCompany.id);setQuotesFilter(customerCompany)"
+                    [ngClass]="{'--active':activePage === 'quotes-component' && customerCompany.companyId === getSelectedCompnayId()}"
+                    (click)="customerPortalStateService.setCompnayIdInfo(customerCompany.companyId);setQuotesFilter(customerCompany)"
                     *ngIf="customerCompany.customerUserRole.getPermission('VIEW_ALL_QUOTES')"
                 >
                     <a
@@ -101,8 +101,8 @@
                     </a>
                 </li>
                 <li
-                    [ngClass]="{'--active':activePage === 'new-contracts' && customerCompany.clientCompany.id === getSelectedCompnayId()}"
-                    (click)="customerPortalStateService.setCompnayIdInfo(customerCompany.clientCompany.id);setContractsFilter(customerCompany);"
+                    [ngClass]="{'--active':activePage === 'new-contracts' && customerCompany.companyId === getSelectedCompnayId()}"
+                    (click)="customerPortalStateService.setCompnayIdInfo(customerCompany.companyId);setContractsFilter(customerCompany);"
                     *ngIf="customerCompany.customerUserRole.getPermission('VIEW_ALL_CONTRACTS')"
                 >
                     <a
@@ -115,8 +115,8 @@
                     </a>
                 </li>
                 <li
-                    [ngClass]="{'--active':activePage === 'new-payments-ng2' && customerCompany.clientCompany.id === getSelectedCompnayId()}"
-                    (click)="customerPortalStateService.setCompnayIdInfo(customerCompany.clientCompany.id);setPaymentsFilter(customerCompany)"
+                    [ngClass]="{'--active':activePage === 'new-payments-ng2' && customerCompany.companyId === getSelectedCompnayId()}"
+                    (click)="customerPortalStateService.setCompnayIdInfo(customerCompany.companyId);setPaymentsFilter(customerCompany)"
                     *ngIf="customerCompany.customerUserRole.getPermission('VIEW_ALL_PAYMENTS')"
                 >
                     <a

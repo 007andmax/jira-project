@@ -27,7 +27,7 @@ export class User {
     myTicketUpdated: any;
     online: any;
     owner: any;
-    permissions: any;
+    permissions: Array<string> = [];
     phoneNumbers: Array<any> = [];
     primaryEmail: string;
     priority: number;
@@ -59,6 +59,7 @@ export class User {
             this.customSubscriptions = data.customSubscriptions.map(item => new UserCustomSubscription(item));
             this.userEmailNotifications = new UserEmailNotifications(data.userEmailNotifications);
             this.customerCompaniesInfo = data.customerCompaniesInfo.map(item => new UserCustomerCompaniesInfo(item));
+            this.permissions = (data.permissions) ? data.permissions : [];
         }
 
     }

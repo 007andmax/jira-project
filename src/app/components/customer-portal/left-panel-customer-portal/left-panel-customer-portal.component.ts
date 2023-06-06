@@ -38,7 +38,7 @@ export class LeftPanelCustomerPortalComponent extends LeftPanelComponent {
   @ViewChild('panelSettings') panelSettings: LeftPanelSettingsComponent;
 
   public isShowSettingsPage() {
-    return this.currentUser.customerCompaniesInfo.find(item => item.customerUserRole && item.customerUserRole.getPermission('VIEW_MY_PROFILE'));
+    return this.currentUser && this.currentUser.customerCompaniesInfo.find(item => item.customerUserRole && item.customerUserRole.getPermission('VIEW_MY_PROFILE'));
   }
 
 }

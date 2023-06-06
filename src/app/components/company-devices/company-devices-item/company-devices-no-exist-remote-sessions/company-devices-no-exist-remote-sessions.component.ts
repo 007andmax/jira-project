@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { DeviceCompany } from '../../class/device-company';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-company-devices-no-exist-remote-sessions',
@@ -11,7 +12,9 @@ import { DeviceCompany } from '../../class/device-company';
 export class CompanyDevicesNoExistRemoteSessionsComponent implements OnInit {
   @Input() device: DeviceCompany;
   @Output() onRemoteAccess = new EventEmitter();
-  constructor(private permissionsService: PermissionsService, private usersStateService: UsersStateService,) { }
+  constructor(private permissionsService: PermissionsService,
+    private usersStateService: UsersStateService,
+    private customerPortalStateService: CustomerPortalStateService) { }
 
   ngOnInit() {
   }

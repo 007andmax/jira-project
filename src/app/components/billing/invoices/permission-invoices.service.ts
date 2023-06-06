@@ -20,7 +20,7 @@ export class PermissionInvoicesService implements CanActivate {
         });
     }
     public getCompanyInfoPermissions(action) {
-        let compnayInfo = this.usersStateService.getCurrentUser().customerCompaniesInfo.find(item => item.clientCompany.id == localStorage.getItem("company_info_id"))
+        let compnayInfo = this.usersStateService.getCurrentUser().customerCompaniesInfo.find(item => item.companyId == localStorage.getItem("company_info_id"))
         return (compnayInfo && this.usersStateService.getCurrentUser().accountType == "CLIENT" && compnayInfo.customerUserRole.getPermission(action))
     }
     public getPermissions(action) {

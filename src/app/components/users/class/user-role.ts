@@ -5,7 +5,7 @@ export class UserRole {
     constructor(data) {
         this.id = data.id;
         this.name = data.name;
-        this.permissions = data.permissions;
+        this.permissions = (data.permissions) ? data.permissions : [];
     }
     getPermission(action) {
         return this.permissions.indexOf(action) > -1

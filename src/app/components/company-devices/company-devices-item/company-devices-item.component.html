@@ -210,6 +210,7 @@
     </td>
     <td class="company-devices-table__connect">
         <app-company-devices-no-exist-remote-sessions
+            *ngIf="customerPortalStateService.checkRemoteAccess(usersStateService.getCurrentUser())"
             [device]="device"
             (onRemoteAccess)="remoteAccess($event)"
         ></app-company-devices-no-exist-remote-sessions>

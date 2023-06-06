@@ -55,7 +55,7 @@ export class UsersTableComponent implements OnInit, OnDestroy {
   TYPE_LIST_COMPANY_USERS = TYPE_LIST_COMPANY_USERS;
   constructor(private companiesStateService: CompaniesStateService,
     private usersService: UsersService,
-    private usersStateService: UsersStateService,
+    public usersStateService: UsersStateService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     private draftEmailStateService: DraftEmailStateService,
@@ -130,7 +130,8 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     }
   };
   isPrimaryContact() {
-    return this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).isPrimaryContact;
+    if (!this.customerPortalStateService.isCustomerPortal) return this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).isPrimaryContact;
+    if (this.customerPortalStateService.isCustomerPortal) return this.user.customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id')).isPrimaryContact;
   }
   resetPrimaryContact() {
     this.usersService.resetPrimaryContact(this.user.id, this.companyId).subscribe(data => {
@@ -209,7 +210,7 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     this.draftEmailStateService.toggleAsideForAdd();
   }
   getPermissionCustomerUser(permission) {
-    return this.currentUser.customerCompaniesInfo.find(item => item.clientCompany.id === this.customerPortalStateService.getUsersFilters().company).customerUserRole.getPermission(permission);
+    return this.currentUser.customerCompaniesInfo.find(item => item.companyId === this.customerPortalStateService.getUsersFilters().company).customerUserRole.getPermission(permission);
   }
   public trackById(index, item) {
     return item.id;

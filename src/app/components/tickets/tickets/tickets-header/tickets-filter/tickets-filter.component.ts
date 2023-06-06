@@ -122,7 +122,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.companyDp.isDisabled = true;
   }
   private checkUserCustomerUser() {
-    let customerCompanyInfo = this.usersStateService.getCurrentUser().customerCompaniesInfo.find(item => item.clientCompany.id === localStorage.getItem('company_info_id'));
+    let customerCompanyInfo = this.usersStateService.getCurrentUser().customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id'));
     if (customerCompanyInfo && customerCompanyInfo.customerUserRole.getPermission('VIEW_MY_TICKETS')) {
       let user = this.usersStateService.getAllUsers().find(item => item.id === this.usersStateService.getCurrentUser().id);
       this.selectedUser = `${user.firstName} ${user.lastName}`;

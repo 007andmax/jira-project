@@ -31,26 +31,26 @@ export class CustomerPortalStateService {
       let item = currentUser.customerCompaniesInfo[i];
       if (item.customerUserRole == null) continue;
       if (item.customerUserRole.getPermission('VIEW_ALL_TICKETS')) {
-        this.setCompnayIdInfo(item.clientCompany.id);
+        this.setCompnayIdInfo(item.companyId);
         this.setTicketsFilter(item, "ALL", currentUser);
       }
       if (item.customerUserRole.getPermission('VIEW_ALL_INVOICES')) {
-        this.setCompnayIdInfo(item.clientCompany.id);
+        this.setCompnayIdInfo(item.companyId);
         this.setInvoiceFilter(item);
       }
       if (item.customerUserRole.getPermission('VIEW_MY_PROFILE')) {
-        this.setCompnayIdInfo(item.clientCompany.id);
-        this.setUsersFilter(item);
+        this.setCompnayIdInfo(item.companyId);
+        this.setUsersFilter(item.companyId);
       }
       if (item.customerUserRole.getPermission('VIEW_ALL_DEVICES')) {
-        this.setCompnayIdInfo(item.clientCompany.id);
+        this.setCompnayIdInfo(item.companyId);
       }
       if (item.customerUserRole.getPermission('VIEW_ALL_QUOTES')) {
-        this.setCompnayIdInfo(item.clientCompany.id);
+        this.setCompnayIdInfo(item.companyId);
         this.setQuotesFilter(item);
       }
       if (item.customerUserRole.getPermission('VIEW_ALL_PAYMENTS')) {
-        this.setCompnayIdInfo(item.clientCompany.id);
+        this.setCompnayIdInfo(item.companyId);
         this.setPaymentsFilter(item);
       }
 
@@ -60,11 +60,11 @@ export class CustomerPortalStateService {
     return this.paymentsFilter;
   }
   setPaymentsFilter(company) {
-    this.paymentsFilter.setCompanyId(company.clientCompany.id);
+    this.paymentsFilter.setCompanyId(company.companyId);
     this.onPaymentsFilters.emit(this.paymentsFilter);
   }
   setQuotesFilter(company) {
-    this.quotesFilter.setCompanyId(company.clientCompany.id);
+    this.quotesFilter.setCompanyId(company.companyId);
     this.onQuotesFilters.emit(this.quotesFilter);
   }
   public setUsersFilter(id) {
@@ -73,11 +73,11 @@ export class CustomerPortalStateService {
     this.onUsersFilters.emit(this.usersFilter);
   }
   setInvoiceFilter(company) {
-    this.invoicesFilter.setCompanyId(company.clientCompany.id);
+    this.invoicesFilter.setCompanyId(company.companyId);
     this.onInvoiceFilters.emit(this.invoicesFilter);
   }
   public setTicketsFilter(company, type, currentUser) {
-    this.ticketsFilter.setCompany(company.clientCompany);
+    this.ticketsFilter.setCompany({ id: company.companyId });
     this.ticketsFilter.setListType(type);
     if (company.customerUserRole.getPermission('VIEW_MY_TICKETS') && !company.customerUserRole.getPermission('VIEW_ALL_TICKETS')) this.ticketsFilter.setUser(currentUser);
     this.onTicketFilters.emit(this.ticketsFilter);
@@ -100,15 +100,47 @@ export class CustomerPortalStateService {
   }
   public checkEditTicket(currentUser, createdUserId, companyId) {
 
-    if (currentUser.id === createdUserId && currentUser.customerCompaniesInfo.find(item => item.clientCompany.id === companyId).customerUserRole.getPermission('VIEW_MY_TICKETS')) return true;
+    if (currentUser.id === createdUserId && currentUser.customerCompaniesInfo.find(item => item.companyId === companyId).customerUserRole.getPermission('VIEW_MY_TICKETS')) return true;
 
-    if (currentUser.id !== createdUserId && currentUser.customerCompaniesInfo.find(item => item.clientCompany.id === companyId).customerUserRole.getPermission('VIEW_MY_TICKETS') &&
-      currentUser.customerCompaniesInfo.find(item => item.clientCompany.id === companyId).customerUserRole.getPermission('VIEW_ALL_TICKETS') &&
-      currentUser.customerCompaniesInfo.find(item => item.clientCompany.id === companyId).customerUserRole.getPermission('EDIT_OTHER_TICKETS')) {
-      console.log("currentUser.customerCompaniesInfo", currentUser.customerCompaniesInfo.find(item => item.clientCompany.id === companyId));
+    if (currentUser.id !== createdUserId && currentUser.customerCompaniesInfo.find(item => item.companyId === companyId).customerUserRole.getPermission('VIEW_MY_TICKETS') &&
+      currentUser.customerCompaniesInfo.find(item => item.companyId === companyId).customerUserRole.getPermission('VIEW_ALL_TICKETS') &&
+      currentUser.customerCompaniesInfo.find(item => item.companyId === companyId).customerUserRole.getPermission('EDIT_OTHER_TICKETS')) {
+      console.log("currentUser.customerCompaniesInfo", currentUser.customerCompaniesInfo.find(item => item.companyId === companyId));
       console.log("checkEditTicket - 2");
       return true;
     }
     return false;
+  }
+  getPermissionCustomerUser(currentUser, permission) {
+    return currentUser.customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id')).customerUserRole.getPermission(permission);
+  }
+  public checkShowTabTicketsAsideUserDetail(currentUser, user) {
+    if (this.isCustomerPortal && this.getPermissionCustomerUser(currentUser, 'VIEW_MY_TICKETS')
+      && this.isCustomerPortal && this.getPermissionCustomerUser(currentUser, 'VIEW_ALL_TICKETS')
+      && this.isCustomerPortal && this.getPermissionCustomerUser(currentUser, 'VIEW_ALL_USERS')
+      && this.isCustomerPortal && this.getPermissionCustomerUser(currentUser, 'VIEW_MY_PROFILE')
+      && currentUser.id != user.id || this.isCustomerPortal && this.getPermissionCustomerUser(currentUser, 'VIEW_MY_TICKETS') && this.getPermissionCustomerUser(currentUser, 'VIEW_MY_PROFILE') && currentUser.id == user.id || !this.isCustomerPortal) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  public checkEditUser(currentUser) {
+    if (this.isCustomerPortal && this.getPermissionCustomerUser(currentUser, 'VIEW_MY_TICKETS')
+      && this.isCustomerPortal && this.getPermissionCustomerUser(currentUser, 'VIEW_MY_PROFILE')
+      && this.isCustomerPortal && this.getPermissionCustomerUser(currentUser, 'EDIT_USERS')
+      || !this.isCustomerPortal) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  public checkRemoteAccess(currentUser) {
+    if (this.isCustomerPortal && this.getPermissionCustomerUser(currentUser, 'VIEW_ALL_DEVICES') &&
+      this.getPermissionCustomerUser(currentUser, 'DEVICES_REMOTE_CONTROL') || !this.isCustomerPortal) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

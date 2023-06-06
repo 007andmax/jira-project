@@ -64,7 +64,7 @@
                         <li
                             class="pointer"
                             ngbDropdownItem
-                            *ngIf="currentDevice.type !== 'workstation' && currentDevice.online && getPermissions('REMOTE_CONNECTIONS')"
+                            *ngIf="currentDevice.type !== 'workstation' && currentDevice.online && (getPermissions('REMOTE_CONNECTIONS') || customerPortalStateService.checkRemoteAccess(usersStateService.getCurrentUser()))"
                             (click)="remoteAccess('PROXY')"
                         >
                             <div class="qt-ic-c icon__quick-connect qt-pointer qt-sz-20 qt-mr-12"></div>

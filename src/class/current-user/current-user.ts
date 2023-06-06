@@ -3,7 +3,7 @@ import { UserStatistic } from '../../app/components/users/class/user-statistic';
 import { CompanyLogo } from '../../app/components/companies/class/company-logo';
 import { CurrentUserWizardTracker } from './current-user-wizard-tracker';
 import { CrmCompanyJobTitle } from 'src/app/components/setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
-import { CurrentUserCustomerCompaniesInfo } from './current-user-customer-companies-info';
+import { UserCustomerCompaniesInfo } from 'src/app/components/users/class/user-customer-companies-info';
 
 export class CurrentUser {
     id: string = null;
@@ -47,13 +47,14 @@ export class CurrentUser {
     jobTitleId: string;
     jobTypeId: string;
     userTOTP: any;
-    customerCompaniesInfo: Array<CurrentUserCustomerCompaniesInfo> = [];
+    customerCompaniesInfo: Array<UserCustomerCompaniesInfo> = [];
     constructor(data = null) {
         if (data) {
             for (const key in data) {
                 this[key] = data[key];
             }
-            if (data.customerCompaniesInfo) this.customerCompaniesInfo = data.customerCompaniesInfo.map(item => new CurrentUserCustomerCompaniesInfo(item));
+            if (data.customerCompaniesInfo) this.customerCompaniesInfo = data.customerCompaniesInfo.map(item => new UserCustomerCompaniesInfo(item));
+            this.permissions = (data.permissions) ? data.permissions : [];
         }
     }
 

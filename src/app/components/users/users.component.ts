@@ -291,6 +291,10 @@ export class UsersComponent implements OnInit {
     this.userListService.addSubscription(archiveUser);
   }
   private getUsersList(data) {
+    if (this.customerPortalStateService.isCustomerPortal) {
+      let customerCompaniesInfo = this.usersStateService.getCurrentUser().customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id'));
+      if (!(customerCompaniesInfo.customerUserRole.getPermission('VIEW_MY_PROFILE') && customerCompaniesInfo.customerUserRole.getPermission('VIEW_ALL_USERS'))) return;
+    }
     this.reqUsers = data.filter(item => ((!this.showArchivedUsers) ? !item.deletedAt : item.deletedAt) && item.accountType !== "TECH");
     this.reqUsers.sort((a, b) => ((a.firstName + a.lastName).toLowerCase() > (b.firstName + b.lastName).toLowerCase()) ?
       1 : (((b.firstName + b.lastName).toLowerCase() > (a.firstName + a.lastName).toLowerCase()) ? -1 : 0));

@@ -18,7 +18,6 @@ import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CurrentUser } from 'src/class/current-user/current-user';
-import { CurrentUserCustomerCompaniesInfo } from 'src/class/current-user/current-user-customer-companies-info';
 
 @Component({
   selector: 'left-panel-customer-portal-users',
