@@ -9,7 +9,7 @@
     <div *ngIf="type === 'DETAIL_TICKET_UPDATE'">
         <i class="icn-16 icon__calendar pointer"></i>
         <input
-            [disabled]="disabled"
+            [disabled]="isDisabled"
             type="text"
             class="pointer qt-input-block__input"
             placeholder="Select Date"

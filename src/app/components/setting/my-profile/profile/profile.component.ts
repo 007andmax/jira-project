@@ -579,13 +579,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.userProfile.signature.content = this.profileForm.value.aboutMe;
     }
     if (this.userProfile && this.userProfile.address) {
-      (this.userProfile.address.suiteNumber = this.profileForm.value.suiteNumber),
+      (this.userProfile.address.suiteNumber = this.profileForm.value.suiteNumber);
+      if (this.searchElementRef) {
         (this.userProfile.address.address = this.searchElementRef.nativeElement
           .value
           ? this.searchElementRef.nativeElement.value
-          : this.profileForm.value.mailingAddress),
-        (this.userProfile.address.aboutMe = this.profileForm.value.aboutMe),
-        (this.userProfile.address.postalCode = this.profileForm.value.postalCode);
+          : this.profileForm.value.mailingAddress);
+      } else {
+        (this.userProfile.address.address = this.profileForm.value.mailingAddress);
+      }
+      (this.userProfile.address.aboutMe = this.profileForm.value.aboutMe);
+      (this.userProfile.address.postalCode = this.profileForm.value.postalCode);
       const phoneNumbers = [];
       if (this.profileForm.value.primaryPhone) {
         const phone = { number: '', typeNumber: '', priority: 0, id: '' };

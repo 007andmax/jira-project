@@ -15,6 +15,7 @@ import { DeviceStatus } from './class/device-status';
 })
 export class DevicesStateService {
   allDevices = null;
+  isGetDevices: boolean = false;
   devicesForReboot: Array<DeviceCompany> = [];
   devicesForRemove: Array<DeviceCompany> = [];
   devicesForShutDown: Array<DeviceCompany> = [];
@@ -39,7 +40,7 @@ export class DevicesStateService {
   public onInit() {
     if (this.userStateService.getCurrentUser()) this.getCompanyDevices(this.userStateService.getCurrentUser().company.id);
     this.userStateService.getOnGetCurrentuser().subscribe(data => {
-      this.getCompanyDevices(data.company.id);
+      if (!this.isGetDevices) this.getCompanyDevices(data.company.id);
     })
     this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
       if (newChange.action === 'AGENT_ACTIVITY_STATUS') this.onInitUpdateAgentActivityStatus(newChange);
@@ -112,11 +113,13 @@ export class DevicesStateService {
         this.preloaderDevices = false;
         this.setAllDevices(data);
         this.onInitGetDevices(data);
+        this.isGetDevices = true;
       }
     }, err => {
       this.preloaderDevices = false;
       this.setAllDevices(null);
       this.onInitGetDevices(null);
+      this.isGetDevices = true;
     })
   }
   public getPreloaderDevices() {

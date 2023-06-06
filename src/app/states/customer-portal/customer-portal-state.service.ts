@@ -116,9 +116,9 @@ export class CustomerPortalStateService {
   }
   public checkShowTabTicketsAsideUserDetail(currentUser, user) {
     if (this.isCustomerPortal && this.getPermissionCustomerUser(currentUser, 'VIEW_MY_TICKETS')
-      && this.isCustomerPortal && this.getPermissionCustomerUser(currentUser, 'VIEW_ALL_TICKETS')
-      && this.isCustomerPortal && this.getPermissionCustomerUser(currentUser, 'VIEW_ALL_USERS')
-      && this.isCustomerPortal && this.getPermissionCustomerUser(currentUser, 'VIEW_MY_PROFILE')
+      && this.getPermissionCustomerUser(currentUser, 'VIEW_ALL_TICKETS')
+      && this.getPermissionCustomerUser(currentUser, 'VIEW_ALL_USERS')
+      && this.getPermissionCustomerUser(currentUser, 'VIEW_MY_PROFILE')
       && currentUser.id != user.id || this.isCustomerPortal && this.getPermissionCustomerUser(currentUser, 'VIEW_MY_TICKETS') && this.getPermissionCustomerUser(currentUser, 'VIEW_MY_PROFILE') && currentUser.id == user.id || !this.isCustomerPortal) {
       return true;
     } else {
@@ -127,8 +127,8 @@ export class CustomerPortalStateService {
   }
   public checkEditUser(currentUser) {
     if (this.isCustomerPortal && this.getPermissionCustomerUser(currentUser, 'VIEW_MY_TICKETS')
-      && this.isCustomerPortal && this.getPermissionCustomerUser(currentUser, 'VIEW_MY_PROFILE')
-      && this.isCustomerPortal && this.getPermissionCustomerUser(currentUser, 'EDIT_USERS')
+      && this.getPermissionCustomerUser(currentUser, 'VIEW_MY_PROFILE')
+      && this.getPermissionCustomerUser(currentUser, 'EDIT_USERS')
       || !this.isCustomerPortal) {
       return true;
     } else {

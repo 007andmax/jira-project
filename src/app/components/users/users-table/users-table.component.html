@@ -203,7 +203,7 @@
                 </li>
                 <li
                     class="pointer"
-                    *ngIf="currentUser && (currentUser.checkPermission('ARCHIVE_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser())) && !showArchivedUsers && !isPrimaryContact()"
+                    *ngIf="currentUser && (!customerPortalStateService.isCustomerPortal && currentUser.checkPermission('ARCHIVE_USERS') || customerPortalStateService.isCustomerPortal && customerPortalStateService.checkEditUser(usersStateService.getCurrentUser()) && !isPrimaryContact())  && !showArchivedUsers"
                     (click)="delete()"
                     ngbDropdownItem
                 >
