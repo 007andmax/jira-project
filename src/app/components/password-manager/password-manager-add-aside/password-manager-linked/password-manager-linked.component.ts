@@ -10,6 +10,8 @@ import { PasswordDeviceUser } from '../../class/password-device-user';
 
 import { PasswordRecordAdd } from '../../class/password-record-add';
 import { PasswordRecordValidate } from '../../class/password-record-validate';
+import { DevicesService } from 'src/app/services/devices/devices.service';
+import { TicketStateService } from 'src/app/components/tickets/tickets/ticket-edit-aside/services/ticket-state.service';
 
 @Component({
   selector: 'password-manager-linked',
@@ -35,11 +37,13 @@ export class PasswordManagerLinkedComponent implements OnInit {
   @Output() onSelectedItem = new EventEmitter<any>();
   sub: Subscription = new Subscription();
   constructor(public cd: ChangeDetectorRef,
-    private companiesState: CompaniesStateService,
+    public companiesState: CompaniesStateService,
     public devicesStateService: DevicesStateService,
     private gadgetsService: GadgetsService,
     public ticketsService: TicketsService,
+    public ticketStateService: TicketStateService,
     public elRef: ElementRef,
+    public devicesService: DevicesService,
     private usersStateService: UsersStateService,) { }
 
   ngOnInit() {
@@ -57,7 +61,7 @@ export class PasswordManagerLinkedComponent implements OnInit {
     })
     this.sub.add(getOnCompanies);
   }
-  private getClientsList(data) {
+  public getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
