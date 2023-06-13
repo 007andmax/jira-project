@@ -117,8 +117,8 @@ export class TicketsPermissionsService {
   }
   isUpdateModeAllowed = (ticket) => {
     if (!ticket.status) return false;
-    if (this.usersStateService.getCurrentUser() && this.usersStateService.getCurrentUser().isOwner && (ticket.assignedUser && ticket.assignedUser.id || ticket.multiAssignedUsers && ticket.multiAssignedUsers.length > 0) && this.isTicketOpen(ticket)) return true;
-    if (this.permissionsService.isAllowed('EDIT_ANOTHER_USERS_TICKET') && (ticket.assignedUser && ticket.assignedUser.id || ticket.multiAssignedUsers && ticket.multiAssignedUsers.length > 0) && this.isTicketOpen(ticket)) return true;
+    if (this.usersStateService.getCurrentUser() && (this.usersStateService.getCurrentUser().isOwner || this.usersStateService.getCurrentUser().accountType === "CLIENT") && (ticket.assignedUser && ticket.assignedUser.id || ticket.multiAssignedUsers && ticket.multiAssignedUsers.length > 0) && this.isTicketOpen(ticket)) return true;
+    if ((this.permissionsService.isAllowed('EDIT_ANOTHER_USERS_TICKET') || this.usersStateService.getCurrentUser().accountType === "CLIENT") && (ticket.assignedUser && ticket.assignedUser.id || ticket.multiAssignedUsers && ticket.multiAssignedUsers.length > 0) && this.isTicketOpen(ticket)) return true;
     let indexUser = -1;
     if (this.usersStateService.getCurrentUser() && ticket.multiAssignedUsers && ticket.multiAssignedUsers.length) {
       indexUser = ticket.multiAssignedUsers.findIndex(item => item.id == this.usersStateService.getCurrentUser().id);

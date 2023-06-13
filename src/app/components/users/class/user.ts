@@ -58,11 +58,15 @@ export class User {
             this.defaultSubscriptions = new UserDefaultSubscription(data.defaultSubscriptions);
             this.customSubscriptions = data.customSubscriptions.map(item => new UserCustomSubscription(item));
             this.userEmailNotifications = new UserEmailNotifications(data.userEmailNotifications);
-            this.customerCompaniesInfo = data.customerCompaniesInfo.map(item => new UserCustomerCompaniesInfo(item));
+            this.customerCompaniesInfo = (data.customerCompaniesInfo) ? data.customerCompaniesInfo.map(item => new UserCustomerCompaniesInfo(item)) : [];
             this.permissions = (data.permissions) ? data.permissions : [];
         }
 
     }
+    /**
+    * @description Return list for Email Notifications, if fields are true
+    * @returns {Array<string>} This is the result
+ */
     public getVisibleListUserEmailForTechusers() {
         let list = ["New Device", "New ticket", "Ticket Updated", "Ticket Closed"];
         let outList = [];
@@ -74,6 +78,10 @@ export class User {
         }
         return outList;
     }
+    /**
+   * @description Return list for Tooltips, if fields are true
+   * @returns {Array<string>} This is the result
+*/
     public getTooltipsListUserEmailForTechusers() {
         let list = ["When my account is logged in from a new device",
             "When a New Ticket created",
@@ -86,6 +94,10 @@ export class User {
         if (this.userEmailNotifications.ticketCloseNotifications) outList.push(list[3]);
         return outList;
     }
+    /**
+* @description Update data of User
+* @param {Object} data - Object of User 
+*/
     public onUpdate(data) {
         for (const key in data) {
             this[key] = data[key];
@@ -94,14 +106,18 @@ export class User {
         this.customSubscriptions = data.customSubscriptions.map(item => new UserCustomSubscription(item));
         this.customerCompaniesInfo = data.customerCompaniesInfo.map(item => new UserCustomerCompaniesInfo(item));
     }
+    /**
+  * @description Set list Default Subscriptions
+  * @param {Array<UserDefaultSubscription>} data - Array Objects Default Subscriptions 
+*/
     public changeDefaultSubscriptions(data) {
         this.defaultSubscriptions = data;
     }
+    /**
+  * @description Set list Custom Subscriptions
+  * @param {Array<UserCustomSubscription>} data - Array Objects Custom Subscriptions 
+*/
     public changeCustomSubscriptions(data) {
         this.customSubscriptions = data;
     }
-    /*  public changeSubscriptions(data) {
-          this.subscription = new UserSubscription(data.id, data.invoice, data.ticket, data.ticketManager);
-      }*/
-
 }

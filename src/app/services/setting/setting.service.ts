@@ -64,7 +64,12 @@ export class SettingService {
   }
 
   public updateProfile(profile: any) {
-    return this.http.put(`${this.apiUrl}settings/userProfile/basic`, profile);
+    return this.http.put(`${this.apiUrl}settings/userProfile/basic`, profile).pipe(
+      tap((res: any) => {
+        this.toastrService.success("Profile Updated Successfully");
+        this.appStateService.changeDetectorRef();
+        return res;
+      }));
   }
 
   public fileAvatar(fromData: any) {

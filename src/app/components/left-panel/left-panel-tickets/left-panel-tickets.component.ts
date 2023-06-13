@@ -7,6 +7,8 @@ import { TicketsCounts } from '../../tickets/tickets/class/tickets-counts';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
   selector: 'app-left-panel-tickets',
@@ -27,6 +29,8 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
     private ticketsService: TicketsService,
     public cd: ChangeDetectorRef,
     private leftPanelStateService: LeftPanelStateService,
+    public customerPortalStateService: CustomerPortalStateService,
+    private usersStateService: UsersStateService,
     private leftPanelService: LeftPanelService) { }
 
 
@@ -37,7 +41,9 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
     })
     /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
     /* START */
-    if (!this.ticketsStateService.isMoveToTickets && this.activePage !== 'help-center') this.getCounts();
+    let onGetCurrentUser = this.usersStateService.onGetCurrentUser.subscribe(data => {
+      if (!this.ticketsStateService.isMoveToTickets && this.activePage !== 'help-center' && !this.customerPortalStateService.isCustomerPortal) this.getCounts();
+    })
     if (this.ticketsStateService.isMoveToTickets) {
       this.ticketsCounts = this.ticketsStateService.getTicketsCounts();
       if (this.listType !== "DASHBOARD") this.ticketsStateService.onInitCount(this.ticketsCounts[(this.listType === 'USERS') ? 'USER' : this.listType]);
@@ -107,6 +113,7 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
 
   }
   private getCounts() {
+    console.log("getCounts");
     /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
     /* START - return last version to get counts */
     this.ticketsStateService.getCounts(this.ticketsFilter.getDataForCounts());

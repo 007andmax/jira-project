@@ -38,6 +38,7 @@ import { DevicesStateService } from 'src/app/states/devices/devices-state.servic
 import { NoteRealTimeService } from 'src/app/states/note/note-real-time.service';
 import { EmailTemplateRealTimeService } from 'src/app/states/email-template/email-template-real-time.service';
 import { CustomerRoleRealTimeService } from 'src/app/states/customer-role/customer-role-real-time.service';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 
 /**
@@ -95,7 +96,8 @@ export class WebsocketService {
     private devicesStateService: DevicesStateService,
     private noteRealTimeService: NoteRealTimeService,
     private emailTemplateRealTimeService: EmailTemplateRealTimeService,
-    private customerRoleRealTimeService: CustomerRoleRealTimeService
+    private customerRoleRealTimeService: CustomerRoleRealTimeService,
+    private customerPortalStateService: CustomerPortalStateService,
 
   ) {
   }
@@ -112,34 +114,34 @@ export class WebsocketService {
     let that = this;
     this.stompClient.onConnect = (data) => {
       //   that.subsribeToKafka();
-      that.subsribeToPermissions();
+      if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToPermissions();
       that.subsribeToUsers();
       that.subsribeToDevices();
       that.subsribeToCompany();
-      that.subsribeToPasswordRecods();
-      that.subsribeToTaxes();
-      that.subsribeToCategories();
-      that.subsribeToProducts();
+      if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToPasswordRecods();
+      if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToTaxes();
+      if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToCategories();
+      if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToProducts();
       that.subsribeToTicketActualNumber();
       that.subsribeToTickets();
-      that.subsribeToCmdShellOutput();
-      that.subsribeToBillable();
-      that.subsribeToInvoiceNumber();
-      that.subsribeToBillableCount();
+      if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToCmdShellOutput();
+      if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToBillable();
+      if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToInvoiceNumber();
+      if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToBillableCount();
       that.subsribeToInvoice();
       that.subsribeToSubmittedTicket();
       that.subsribeToPayments();
-      that.subsribeToSubmittedService();
-      that.subsribeToSubmittedServiceAgreement();
+      if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToSubmittedService();
+      if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToSubmittedServiceAgreement();
       that.subsribeToSubmittedOneTimeConnection();
       that.subsribeToLockScreen();
-      that.subsribeToTags();
-      that.subsribeToDocuments();
-      that.subsribeToDocumentsCategory();
-      that.subsribeToCrm();
-      that.subsribeToCustomSubscription();
+      if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToTags();
+      if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToDocuments();
+      if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToDocumentsCategory();
+      if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToCrm();
+      if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToCustomSubscription();
       that.subsribeToNoteTemplateSubscription();
-      that.subsribeToEmailNotification();
+      if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToEmailNotification();
       that.subsribeToCustomerRole();
       if (data.command === "CONNECTED") this.websocketStateService.initConnection();
       that.onInit.emit(true);

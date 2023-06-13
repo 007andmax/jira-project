@@ -118,6 +118,7 @@
             <div
                 class="qt-button qt-button--with-icon --sm --gray qt-ml-8 button-mark-complete"
                 (click)="setComplete()"
+                [ngClass]="{'no-pointer':isBlockChange}"
             >
                 <i
                     class="icon__inactive qt-bg-contain icn-16 qt-mr-6"

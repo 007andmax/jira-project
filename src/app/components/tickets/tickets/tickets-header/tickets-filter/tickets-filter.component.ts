@@ -71,7 +71,10 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       if (this.customerPortalStateService.isCustomerPortal) this.checkCompanyCustomerUser();
     })
     this.sub.add(getOnCompanies);
-    let onTicketFilters = this.customerPortalStateService.onTicketFilters.subscribe(data => (this.checkCompanyCustomerUser()));
+    let onTicketFilters = this.customerPortalStateService.onTicketFilters.subscribe(data => {
+      this.checkCompanyCustomerUser();
+      this.checkUserCustomerUser();
+    });
     this.sub.add(onTicketFilters);
     this.listType = this.ticketsStateService.getListType();
     this.ticketsFilter.setListType(this.listType);
@@ -123,11 +126,13 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   }
   private checkUserCustomerUser() {
     let customerCompanyInfo = this.usersStateService.getCurrentUser().customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id'));
-    if (customerCompanyInfo && customerCompanyInfo.customerUserRole.getPermission('VIEW_MY_TICKETS')) {
+    if (customerCompanyInfo && customerCompanyInfo.customerUserRole.getPermission('VIEW_MY_TICKETS') && !customerCompanyInfo.customerUserRole.getPermission('VIEW_ALL_TICKETS')) {
       let user = this.usersStateService.getAllUsers().find(item => item.id === this.usersStateService.getCurrentUser().id);
       this.selectedUser = `${user.firstName} ${user.lastName}`;
       this.usersDp.selectItemWithOutChanges(this.selectedUser);
       this.usersDp.isDisabled = true;
+    } else {
+      this.usersDp.clearWithOutChanges();
     }
   }
   public onClearAll() {

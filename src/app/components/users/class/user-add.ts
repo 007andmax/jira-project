@@ -1,10 +1,7 @@
 import { PhoneNumber } from 'src/class/phone-number';
-
 import { Subscriptions } from 'src/app/interfaces/user/subscriptions';
-
 import { UserAvatar } from './user-avatar';
 import { UserProfile } from './user-profile';
-import { UserDefaultSubscriptionAdd } from './user-default-subscription-add';
 import { UserCustomerCompaniesInfoAdd } from './user-customer-companies-info-add';
 
 export class UserAdd {

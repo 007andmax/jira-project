@@ -25,36 +25,37 @@ export class CustomerPortalStateService {
   public setCustomerPortal(data) {
     this.isCustomerPortal = data;
   }
-  public setFilters(currentUser) {
+  public setFilters(currentUser, state) {
     console.log("setFilters", currentUser);
-    for (let i = 0; i < currentUser.customerCompaniesInfo.length; i++) {
-      let item = currentUser.customerCompaniesInfo[i];
-      if (item.customerUserRole == null) continue;
-      if (item.customerUserRole.getPermission('VIEW_ALL_TICKETS')) {
-        this.setCompnayIdInfo(item.companyId);
-        this.setTicketsFilter(item, "ALL", currentUser);
-      }
-      if (item.customerUserRole.getPermission('VIEW_ALL_INVOICES')) {
-        this.setCompnayIdInfo(item.companyId);
-        this.setInvoiceFilter(item);
-      }
-      if (item.customerUserRole.getPermission('VIEW_MY_PROFILE')) {
-        this.setCompnayIdInfo(item.companyId);
-        this.setUsersFilter(item.companyId);
-      }
-      if (item.customerUserRole.getPermission('VIEW_ALL_DEVICES')) {
-        this.setCompnayIdInfo(item.companyId);
-      }
-      if (item.customerUserRole.getPermission('VIEW_ALL_QUOTES')) {
-        this.setCompnayIdInfo(item.companyId);
-        this.setQuotesFilter(item);
-      }
-      if (item.customerUserRole.getPermission('VIEW_ALL_PAYMENTS')) {
-        this.setCompnayIdInfo(item.companyId);
-        this.setPaymentsFilter(item);
-      }
 
+
+    let item = currentUser.customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id'))
+    if (item.customerUserRole == null) return;
+    if (item.customerUserRole.getPermission('VIEW_ALL_TICKETS') && state == 'new-tickets') {
+      // this.setCompnayIdInfo(item.companyId);
+      this.setTicketsFilter(item, "ALL", currentUser);
     }
+    if (item.customerUserRole.getPermission('VIEW_ALL_INVOICES') && state == 'new-billable-invoices') {
+      //  this.setCompnayIdInfo(item.companyId);
+      this.setInvoiceFilter(item);
+    }
+    if (item.customerUserRole.getPermission('VIEW_MY_PROFILE') && state == 'new-users') {
+      //  this.setCompnayIdInfo(item.companyId);
+      this.setUsersFilter(item.companyId);
+    }
+    if (item.customerUserRole.getPermission('VIEW_ALL_DEVICES') && state == 'company-devices') {
+      //   this.setCompnayIdInfo(item.companyId);
+    }
+    if (item.customerUserRole.getPermission('VIEW_ALL_QUOTES') && state == 'quotes-component') {
+      //   this.setCompnayIdInfo(item.companyId);
+      this.setQuotesFilter(item);
+    }
+    if (item.customerUserRole.getPermission('VIEW_ALL_PAYMENTS') && state == 'new-payments-ng2') {
+      //    this.setCompnayIdInfo(item.companyId);
+      this.setPaymentsFilter(item);
+    }
+
+
   }
   public getPaymentsFilter() {
     return this.paymentsFilter;
@@ -80,6 +81,7 @@ export class CustomerPortalStateService {
     this.ticketsFilter.setCompany({ id: company.companyId });
     this.ticketsFilter.setListType(type);
     if (company.customerUserRole.getPermission('VIEW_MY_TICKETS') && !company.customerUserRole.getPermission('VIEW_ALL_TICKETS')) this.ticketsFilter.setUser(currentUser);
+    if (company.customerUserRole.getPermission('VIEW_MY_TICKETS') && company.customerUserRole.getPermission('VIEW_ALL_TICKETS')) this.ticketsFilter.setUser(null);
     this.onTicketFilters.emit(this.ticketsFilter);
   }
   public setCompnayIdInfo(data) {
@@ -99,7 +101,7 @@ export class CustomerPortalStateService {
     return this.usersFilter;
   }
   public checkEditTicket(currentUser, createdUserId, companyId) {
-
+    console.log(currentUser.customerCompaniesInfo.find(item => item.companyId === companyId));
     if (currentUser.id === createdUserId && currentUser.customerCompaniesInfo.find(item => item.companyId === companyId).customerUserRole.getPermission('VIEW_MY_TICKETS')) return true;
 
     if (currentUser.id !== createdUserId && currentUser.customerCompaniesInfo.find(item => item.companyId === companyId).customerUserRole.getPermission('VIEW_MY_TICKETS') &&
@@ -125,10 +127,13 @@ export class CustomerPortalStateService {
       return false;
     }
   }
-  public checkEditUser(currentUser) {
+  public checkEditUser(currentUser, user) {
     if (this.isCustomerPortal && this.getPermissionCustomerUser(currentUser, 'VIEW_MY_TICKETS')
       && this.getPermissionCustomerUser(currentUser, 'VIEW_MY_PROFILE')
       && this.getPermissionCustomerUser(currentUser, 'EDIT_USERS')
+      && currentUser.id !== user.id
+      || this.isCustomerPortal && this.getPermissionCustomerUser(currentUser, 'VIEW_MY_PROFILE')
+      && currentUser.id === user.id
       || !this.isCustomerPortal) {
       return true;
     } else {

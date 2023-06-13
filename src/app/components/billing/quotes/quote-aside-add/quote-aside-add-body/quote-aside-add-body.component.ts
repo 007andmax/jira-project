@@ -20,6 +20,8 @@ import { InvoiceNote } from '../../../billable/class/invoice-note';
 import { QuoteAdd } from '../../class/quote-add';
 import { QuoteValdiate } from '../../class/quote-vildate';
 import { ServiceListQuoteComponent } from '../service-list-quote/service-list-quote.component';
+import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-role-state.service';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-quote-aside-add-body',
@@ -49,6 +51,7 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     private invoiceTicketsService: InvoiceTicketsService,
     private billableService: BillableService,
     private permissionsService: PermissionsService,
+    public customerPortalStateService: CustomerPortalStateService,
     private quoteServices: QuoteService,) { }
 
   ngOnInit() {
@@ -76,7 +79,7 @@ export class QuoteAsideAddBodyComponent implements OnInit {
       }
     });
     if (this.quoteStateService.getQuoteForCopy()) this.onInitCopy();
-    this.getInvoiceNote();
+    if (!this.customerPortalStateService.isCustomerPortal) this.getInvoiceNote();
     if (!this.quoteStateService.getQuoteForCopy()) this.quote.regularNote.setDefault();
     this.sub.add(getChangeCompanies);
   }

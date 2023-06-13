@@ -55,9 +55,6 @@ export class UsersAsideDetailCompanyInfoComponent implements OnInit, OnDestroy {
     this.customerCompaniesInfo.setUserRole(data);
     this.onUpdate.emit(null);
   }
-  getCompanyName() {
-    return this.companiesStateService.getCompanies().find(item => item.id == this.customerCompaniesInfo.companyId).name;
-  }
   onChangeDefaultSubscriptions(data) {
     this.usersService.setSubscriptions(
       {

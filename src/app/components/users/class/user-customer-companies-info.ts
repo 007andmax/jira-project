@@ -3,7 +3,7 @@ import { UserJobTitle } from "./user-job-title";
 import { UserRole } from "./user-role";
 
 export class UserCustomerCompaniesInfo {
-    clientCompany: string;
+    clientCompanyName: string;
     "companyId": string;
     "jobTitleDto": UserJobTitle;
     "customerUserRole": UserRole;
@@ -26,12 +26,24 @@ export class UserCustomerCompaniesInfo {
         }
 
     }
+    /**
+* @description Set list  Default Subscriptions
+* @param {Array<UserDefaultSubscription>} data - Array Objects Default Subscriptions 
+*/
     public changeDefaultSubscriptions(data) {
         this.defaultSubscriptions = data;
     }
+    /**
+* @description Set Job Title Dto
+* @param {UserJobTitle} data - Object Job Title Dto
+*/
     public setJobTitleDto(data) {
         this.jobTitleDto = data;
     }
+    /**
+* @description Set Customer User Role
+* @param {UserRole} data - Object Customer User Role
+*/
     public setUserRole(data) {
         this.customerUserRole = data;
     }

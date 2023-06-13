@@ -106,22 +106,22 @@
                 </div>
             </div>
             <div class="qt-inputs-row qt-f50">
-              <div class="qt-input-block">
-                <div class="qt-df qt-ai-c qt-mt-15 qt-mb-12">
-                  <label
-                    class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
-                    for="sendPortalInvitation"
-                  >
-                    <input
-                      id="sendPortalInvitation"
-                      type="checkbox"
-                      [(ngModel)]="user.sendPortalInvitation"
-                    >
-                    <span></span>
-                    <div class="qt-ml-8">Send Invite</div>
-                  </label>
+                <div class="qt-input-block">
+                    <div class="qt-df qt-ai-c qt-mt-15 qt-mb-12">
+                        <label
+                            class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
+                            for="sendPortalInvitation"
+                        >
+                            <input
+                                id="sendPortalInvitation"
+                                type="checkbox"
+                                [(ngModel)]="user.sendPortalInvitation"
+                            >
+                            <span></span>
+                            <div class="qt-ml-8">Send Invite</div>
+                        </label>
+                    </div>
                 </div>
-              </div>
             </div>
         </div>
         <div class="qt-inputs-row">
@@ -317,120 +317,118 @@
             let-companyInfo
             [ngForOf]="user.customerCompaniesInfo"
             let-i="index"
-            [ngForTrackBy]="trackByIndex"
         >
             <div class="qt-inputs-row-background">
-              <div class="qt-inputs-row qt-pos-rel">
-                <div class="qt-df qt-ai-c company-actions">
-                    <span
-                      class="qt-fw-600 qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info pointer"
-                      *ngIf="i == 0"
-                      (click)="addCompnay()"
-                    >
-                        + Add Company
-                    </span>
-                  <span
-                    class="qt-fw-600 qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info qt-ml-8 pointer"
-                    *ngIf="user.customerCompaniesInfo.length > 1"
-                    (click)="removeCompnay(i)"
-                  >
-                        Remove Company
-                    </span>
+                <div class="qt-inputs-row qt-pos-rel">
+                    <div class="qt-df qt-ai-c company-actions">
+                        <span
+                            class="qt-fw-600 qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info pointer"
+                            *ngIf="i == 0"
+                            (click)="addCompnay()"
+                        >
+                            + Add Company
+                        </span>
+                        <span
+                            class="qt-fw-600 qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info qt-ml-8 pointer"
+                            *ngIf="user.customerCompaniesInfo.length > 1"
+                            (click)="removeCompnay(i)"
+                        >
+                            Remove Company
+                        </span>
+                    </div>
+                    <div class="qt-input-block">
+                        <company-drop-down
+                            [placeholder]="'Company'"
+                            [validate]="validate.getCompany()"
+                            [errorMessage]="'The company name is required'"
+                            [title]="'Company'"
+                            [field]="'name'"
+                            [search]="true"
+                            [change]="true"
+                            [isBlockClear]="user.customerCompaniesInfo.length == 1"
+                            [editItem]="getCompany(companyInfo)"
+                            (onSelectedItem)="onSelectCompany($event,i)"
+                        >
+                        </company-drop-down>
+                    </div>
                 </div>
-                <div class="qt-input-block">
-                  <company-drop-down
-                    [placeholder]="'Company'"
-                    [validate]="validate.getCompany()"
-                    [errorMessage]="'The company name is required'"
-                    [title]="'Company'"
-                    [field]="'name'"
-                    [search]="true"
-                    [change]="true"
-                    [isBlockClear]="user.customerCompaniesInfo.length == 1"
-                    [editItem]="getCompany(companyInfo)"
-                    (onSelectedItem)="onSelectCompany($event,i)"
-                  >
-                  </company-drop-down>
+                <div class="qt-inputs-row">
+                    <div class="qt-input-block qt-f50">
+                        <app-drop-down
+                            #jobTitleDp
+                            [title]="'Job Title'"
+                            [placeholder]="'Select Job Title'"
+                            [list]="jobTitleList"
+                            [field]="'name'"
+                            [search]="true"
+                            [change]="true"
+                            [isDisabled]="!companyInfo.companyId"
+                            [editItem]="companyInfo.jobTitleDto"
+                            (onSelectedItem)="onSelectJobTitle($event,i)"
+                        ></app-drop-down>
+                    </div>
+                    <div class="qt-input-block qt-f50">
+                        <app-drop-down
+                            #userRolesDP
+                            *ngIf="customerRoleStateService.isGetUserRole"
+                            [title]="'Permission Role'"
+                            [placeholder]="'Select role'"
+                            [list]="userRoles"
+                            [field]="'name'"
+                            [search]="true"
+                            [change]="true"
+                            [isDisabled]="!companyInfo.companyId"
+                            [editItem]="companyInfo.customerUserRole"
+                            (onSelectedItem)="onSelectUserRole($event,i)"
+                        ></app-drop-down>
+                    </div>
                 </div>
-              </div>
-              <div class="qt-inputs-row">
-                <div class="qt-input-block qt-f50">
-                  <app-drop-down
-                    #jobTitleDp
-                    [title]="'Job Title'"
-                    [placeholder]="'Select Job Title'"
-                    [list]="jobTitleList"
-                    [field]="'name'"
-                    [search]="true"
-                    [change]="true"
-                    [isDisabled]="!companyInfo.companyId"
-                    [editItem]="companyInfo.jobTitleDto"
-                    (onSelectedItem)="onSelectJobTitle($event,i)"
-                  ></app-drop-down>
+                <div class="qt-inputs-row">
+                    <div class="qt-input-block">
+                        <label class="qt-input-block__label">Subscription</label>
+                        <user-default-subscription
+                            [mode]="MODE_EDIT_SUBSCRIPTION"
+                            [defaultSubscriptions]="companyInfo.defaultSubscriptions"
+                            (onChange)="onChangeDefaultSubscriptions($event,i)"
+                            [isDisabled]="!companyInfo.companyId"
+                        ></user-default-subscription>
+                    </div>
                 </div>
-                <div class="qt-input-block qt-f50">
-                  <app-drop-down
-                    #userRolesDP
-                    *ngIf="customerRoleStateService.isGetUserRole"
-                    [title]="'Permission Role'"
-                    [placeholder]="'Select role'"
-                    [list]="userRoles"
-                    [field]="'name'"
-                    [search]="true"
-                    [change]="true"
-                    [isDisabled]="!companyInfo.companyId"
-                    [editItem]="companyInfo.customerUserRole"
-                    (onSelectedItem)="onSelectUserRole($event,i)"
-                  ></app-drop-down>
+                <div class="qt-inputs-row">
+                    <div class="qt-input-block qt-f50">
+                        <div class="qt-df qt-ai-c">
+                            <label
+                                class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
+                                [attr.for]="'access-' + i"
+                            >
+                                <input
+                                    [attr.id]="'access-' + i"
+                                    type="checkbox"
+                                    [(ngModel)]="companyInfo.hasAccess"
+                                    [disabled]="!companyInfo.companyId || !companyInfo.customerUserRole"
+                                >
+                                <span></span>
+                                <div class="qt-ml-8">Access to the Customer portal</div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="qt-input-block qt-f50">
+                        <div class="qt-df qt-ai-c">
+                            <label
+                                class="qt-checkbox receive-full-amount-check qt-mb-0 pointer --disabled"
+                                [attr.for]="'primary-contact-' + i"
+                            >
+                                <input
+                                    [attr.id]="'primary-contact-' + i"
+                                    type="checkbox"
+                                    [(ngModel)]="companyInfo.isPrimaryContact"
+                                >
+                                <span></span>
+                                <div class="qt-ml-8">Set as a primary user</div>
+                            </label>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="qt-inputs-row">
-                <div class="qt-input-block">
-                  <label class="qt-input-block__label">Subscription</label>
-                  <user-default-subscription
-                    [mode]="MODE_EDIT_SUBSCRIPTION"
-                    [defaultSubscriptions]="companyInfo.defaultSubscriptions"
-                    (onChange)="onChangeDefaultSubscriptions($event,i)"
-                    [isDisabled]="!companyInfo.companyId"
-                  ></user-default-subscription>
-                </div>
-              </div>
-              <div class="qt-inputs-row">
-                <div class="qt-input-block qt-f50">
-                  <div class="qt-df qt-ai-c">
-                    <label
-                      class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
-                      [attr.for]="'access-' + i"
-                    >
-                      <input
-                        [attr.id]="'access-' + i"
-                        type="checkbox"
-                        [(ngModel)]="companyInfo.hasAccess"
-                        [disabled]="!companyInfo.companyId || !companyInfo.customerUserRole"
-                      >
-                      <span></span>
-                      <div class="qt-ml-8">Provide access and send an invite</div>
-                    </label>
-                  </div>
-                </div>
-                <div class="qt-input-block qt-f50">
-                  <div class="qt-df qt-ai-c">
-                    <label
-                      class="qt-checkbox receive-full-amount-check qt-mb-0 pointer --disabled"
-                      [attr.for]="'primary-contact-' + i"
-                    >
-                      <input
-                        [attr.id]="'primary-contact-' + i"
-                        type="checkbox"
-                        [(ngModel)]="companyInfo.isPrimaryContact"
-                        disabled
-                      >
-                      <span></span>
-                      <div class="qt-ml-8">Set as a primary user</div>
-                    </label>
-                  </div>
-                </div>
-              </div>
             </div>
         </ng-template>
         <div class="qt-inputs-row qt-mt-24">

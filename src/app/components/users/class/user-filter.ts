@@ -25,15 +25,44 @@ export class UserFilter {
     constructor() {
 
     }
+    /**
+* @description Set new value Default Subscriptions
+* @param {UserDefaultSubscription} data - Object Default Subscription
+*/
     public setDefaultSubscriptions(data) {
         this.defaultSubscriptions = data;
     }
+    /**
+* @description Set list Custom Subscriptions
+* @param {Array<UserCustomSubscription>} data - Array Objects Custom Subscriptions
+*/
     public setCustomSubscriptions(data) {
         this.customSubscriptions = data;
     }
+    /**
+* @description Set list Tags
+* @param {Array<CompanyTag>} data - Array Objects Tags
+*/
     public setTags(data) {
         this.tags = data;
     }
+    /**
+* @description Set new values for fields:
+* - clientType
+* - company
+* - clientIndustry
+* - title
+* - defaultSubscriptions
+* - customSubscriptions
+* - tags
+* @param {string} clientType - Value Client Type
+* @param {string} company - Value Company
+* @param {CrmCompanyIndustry} clientIndustry - Object Client Industry
+* @param {string} title - Value Title
+* @param {UserDefaultSubscription} defaultSubscriptions - Object Default Subscriptions
+* @param {Array<UserCustomSubscription>} customSubscriptions - Array Objects Custom Subscriptions
+* @param {Array<CompanyTag>} tags - Array Objects Tags
+*/
     public setLeftFilters(clientType, company, clientIndustry, title, defaultSubscriptions, customSubscriptions, tags) {
         this.clientType = clientType;
         this.company = company;

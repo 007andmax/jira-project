@@ -42,6 +42,7 @@ export class UsersStateService {
     private customerPortalStateService: CustomerPortalStateService,
     private usersRealTimeService: UsersRealTimeService) {
   }
+
   public onInit() {
     this.onInitGetCurrentUser();
     this.usersRealTimeService.changeUsersArray.subscribe(newChange => {
@@ -107,7 +108,7 @@ export class UsersStateService {
       if (data.accountType == "TECH") localStorage.removeItem("company_info_id");
       if (data.accountType == "CLIENT" && !this.customerPortalStateService.isCustomerPortal) {
         this.customerPortalStateService.setCustomerPortal(true);
-        this.customerPortalStateService.setFilters(this.currentUser);
+        //this.customerPortalStateService.setFilters(this.currentUser);
       }
       this.onInitCurrentUser(this.currentUser);
       if (this.currentUser.role !== "SUPER_ADMIN" && !this.isGetAllUsers) this.initGetAllUsers();

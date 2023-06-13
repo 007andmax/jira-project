@@ -131,13 +131,13 @@ export class AppComponent implements OnInit {
       if (data.role !== "SUPER_ADMIN") {
         this.devicesState.onInit();
         this.companiesState.onInit();
-        this.taxesStateService.onInit();
-        this.glNumberStateService.onInit();
-        this.inventoryStateService.onInit();
+        if (!this.customerPortalStateService.isCustomerPortal) this.taxesStateService.onInit();
+        if (!this.customerPortalStateService.isCustomerPortal) this.glNumberStateService.onInit();
+        if (!this.customerPortalStateService.isCustomerPortal) this.inventoryStateService.onInit();
         this.ticketsStateService.onInit();
         this.constantsStateService.onInit();
         this.tagsStateService.onInit();
-        this.documentsStateService.onInit();
+        if (!this.customerPortalStateService.isCustomerPortal) this.documentsStateService.onInit();
         this.crmStateService.onInit();
         this.marketingEmailStateService.onInit();
         this.kafkaStateService.onInit();
@@ -289,36 +289,37 @@ export class AppComponent implements OnInit {
       if (this.router.url === "/" && this.currentUser.role !== "SUPER_ADMIN" && this.state == '' && this.main_page == PAGE_MAIN) {
         console.log("this.router.url", this.router.url);
         if (this.customerPortalStateService.isCustomerPortal) {
-          for (let i = 0; i < this.currentUser.customerCompaniesInfo.length; i++) {
-            let item = this.currentUser.customerCompaniesInfo[i];
-            if (item.customerUserRole) {
-              if (item.customerUserRole.getPermission('VIEW_ALL_TICKETS')) {
-                this.leftPanelStateService.goToState('new-tickets');
-                break;
-              }
-              if (item.customerUserRole.getPermission('VIEW_ALL_INVOICES')) {
-                this.leftPanelStateService.goToState('new-billable-invoices');
-                break;
-              }
-              if (item.customerUserRole.getPermission('VIEW_MY_PROFILE')) {
-                this.leftPanelStateService.goToState('new-users');
-                break;
-              }
-              if (item.customerUserRole.getPermission('VIEW_ALL_DEVICES')) {
-                this.leftPanelStateService.goToState('company-devices');
-                break;
-              }
-              if (item.customerUserRole.getPermission('VIEW_ALL_QUOTES')) {
-                this.leftPanelStateService.goToState('quotes-component');
-                break;
-              }
-              if (item.customerUserRole.getPermission('VIEW_ALL_PAYMENTS')) {
-                this.leftPanelStateService.goToState('new-payments-ng2');
-                break;
-              }
-            }
-            if (i + 1 == this.currentUser.customerCompaniesInfo.length) this.leftPanelStateService.goToState('default');
-          }
+          this.leftPanelStateService.goToState('default');
+          /*   for (let i = 0; i < this.currentUser.customerCompaniesInfo.length; i++) {
+               let item = this.currentUser.customerCompaniesInfo[i];
+               if (item.customerUserRole) {
+                 if (item.customerUserRole.getPermission('VIEW_ALL_TICKETS')) {
+                   this.leftPanelStateService.goToState('new-tickets');
+                   break;
+                 }
+                 if (item.customerUserRole.getPermission('VIEW_ALL_INVOICES')) {
+                   this.leftPanelStateService.goToState('new-billable-invoices');
+                   break;
+                 }
+                 if (item.customerUserRole.getPermission('VIEW_MY_PROFILE')) {
+                   this.leftPanelStateService.goToState('new-users');
+                   break;
+                 }
+                 if (item.customerUserRole.getPermission('VIEW_ALL_DEVICES')) {
+                   this.leftPanelStateService.goToState('company-devices');
+                   break;
+                 }
+                 if (item.customerUserRole.getPermission('VIEW_ALL_QUOTES')) {
+                   this.leftPanelStateService.goToState('quotes-component');
+                   break;
+                 }
+                 if (item.customerUserRole.getPermission('VIEW_ALL_PAYMENTS')) {
+                   this.leftPanelStateService.goToState('new-payments-ng2');
+                   break;
+                 }
+               }
+               if (i + 1 == this.currentUser.customerCompaniesInfo.length) this.leftPanelStateService.goToState('default');
+             }*/
         } else {
           this.ticketsStateService.onChangeTypeFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
           this.ticketsStateService.onChangeLeftPanelFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);

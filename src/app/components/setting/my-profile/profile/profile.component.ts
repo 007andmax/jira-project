@@ -626,9 +626,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       .updateProfile(profileUser)
       .pipe(
         map(res => {
-          if (res) {
-            this.toastr.success('Profile Updated Successfully');
-          }
+
         })
       )
       .subscribe(

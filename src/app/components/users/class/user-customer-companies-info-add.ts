@@ -27,6 +27,10 @@ export class UserCustomerCompaniesInfoAdd {
         this.hasAccess = data.hasAccess;
         this.isPrimaryContact = data.isPrimaryContact;
     }
+    /**
+ * @description Return Object for Default Subscriptions  
+ * @returns  {Object} This is the result
+*/
     public getDefaultSubscriptionsForUpdate(data) {
         return {
             "invoiceSubscription": {

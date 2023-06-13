@@ -159,6 +159,7 @@
                     ></ticket-detail-tasks>
                     <ticket-detail-message
                         #ticketMessage
+                        *ngIf="!customerPortalStateService.isCustomerPortal"
                         (onMoveToTrash)="onMoveToTrash($event)"
                         (onRestoreFromSpam)="restoreFromSpam()"
                         (onOpenTicket)="markAsOpen()"
