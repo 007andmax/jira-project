@@ -72,18 +72,40 @@ export class UserFilter {
         this.customSubscriptions = customSubscriptions;
         this.tags = tags;
     }
+    /**
+* @description Set new value Company
+* @param  {string} data  - Object Company
+*/
     public setCompany(data) {
         this.company = data;
     }
+    /**
+* @description Set new value Title
+* @param  {string} data  - value Title 
+*/
     public setTitle(data) {
         this.title = data;
     }
+    /**
+* @description Set new value Client Type
+* @param  {string} clientType  - value Client Type 
+*/
     public setClientType(data) {
         this.clientType = data;
     }
+    /**
+* @description Return value field 'clientType'
+* @returns  {string} This is the result
+*/
     public getClientType() {
         return this.clientType;
     }
+    /**
+* @description Return sort list Users by filters
+* @param  {Array<User>} reqUsersList  - Array Objects of User
+* @param  {Array<Company>} companies  - Array Objects of Company
+* @returns  {Array<User>} This is the result
+*/
     public getFilterList(reqUsersList: Array<User>, companies: Array<Company>) {
 
         let list = reqUsersList.filter(item => {

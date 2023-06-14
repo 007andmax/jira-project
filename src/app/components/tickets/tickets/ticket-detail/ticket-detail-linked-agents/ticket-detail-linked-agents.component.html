@@ -19,6 +19,12 @@
         class="device-user"
         [ngClass]="{'has-placeholder': !selectedDevice}"
     >
+        <span
+            class="placeholder-detail-ticket"
+            *ngIf="!selectedDevice"
+        >
+            Select device
+        </span>
         <div
             class="selected-user"
             *ngIf="selectedDevice"

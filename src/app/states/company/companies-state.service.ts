@@ -11,6 +11,7 @@ import { CompanyIndustry } from 'src/app/interfaces/company/company-industry';
 import { UsersStateService } from '../users/users-state.service';
 import { WebsocketStateService } from '../websocket/websocket-state.service';
 import { CompanyAssigned } from 'src/app/components/companies/class/company-assigned';
+import { CustomerPortalStateService } from '../customer-portal/customer-portal-state.service';
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +46,7 @@ export class CompaniesStateService {
     private companiesRealTimeService: CompaniesRealTimeService,
     private usersStateService: UsersStateService,
     private websocketStateService: WebsocketStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     private websocketService: WebsocketService) {
   }
   public onInit() {
@@ -143,9 +145,9 @@ export class CompaniesStateService {
     this.companyRoutingId = data;
   }
   private initSubscriptions() {
-    this.websocketService.subsribeToGlNumber(this.currentCompany.id);
+    if (!this.customerPortalStateService.isCustomerPortal) this.websocketService.subsribeToGlNumber(this.currentCompany.id);
     this.websocketService.subsribeToQuote(this.currentCompany.id);
-    this.websocketService.subsribeToRecurringTickets(this.currentCompany.id);
+    if (!this.customerPortalStateService.isCustomerPortal) this.websocketService.subsribeToRecurringTickets(this.currentCompany.id);
     this.websocketService.subsribeToUserSubscriptions(this.currentCompany.id);
     this.isInitSubscriptions = true;
   }

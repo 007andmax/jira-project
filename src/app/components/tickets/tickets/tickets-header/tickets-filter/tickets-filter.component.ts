@@ -123,6 +123,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.selectedCompany = this.companiesState.getCompanies().find(item => item.id == localStorage.getItem('company_info_id'));
     this.companyDp.selectItemWithOutChanges(this.selectedCompany);
     this.companyDp.isDisabled = true;
+    this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.selectedCompany.id)));
   }
   private checkUserCustomerUser() {
     let customerCompanyInfo = this.usersStateService.getCurrentUser().customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id'));

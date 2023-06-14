@@ -210,11 +210,11 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   onInitRealTimes() {
     if (this.websocketService.isInit) {
       this.ticketStateService.subsribeToTicket(this.ticketProfile.id);
-      this.ticketStateService.subsribeToTicketTasks(this.ticketProfile.id);
+      if (!this.customerPortalStateService.isCustomerPortal) this.ticketStateService.subsribeToTicketTasks(this.ticketProfile.id);
     }
     let onInit = this.websocketService.onInit.subscribe(data => {
       this.ticketStateService.subsribeToTicket(this.ticketProfile.id);
-      this.ticketStateService.subsribeToTicketTasks(this.ticketProfile.id);
+      if (!this.customerPortalStateService.isCustomerPortal) this.ticketStateService.subsribeToTicketTasks(this.ticketProfile.id);
     })
     this.sub.add(onInit);
   }

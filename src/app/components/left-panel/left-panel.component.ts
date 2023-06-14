@@ -194,7 +194,6 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/help-center`)) this.state = 'help-center';
           if (window.location.href.includes(`/device/`)) this.state = 'new-device';
           if (this.state === '' && this.companiesStateService.getCurrentCompany() && this.usersStateService.getCurrentUser().role !== "SUPER_ADMIN" && !this.customerPortalStateService.isCustomerPortal) this.goToDefaultPage();
-          if (this.state !== '' && this.customerPortalStateService.isCustomerPortal) this.customerPortalStateService.setFilters(this.currentUser, this.state);
           this.leftPanelStateService.firstOpen(this.state);
           this.leftPanelStateService.changeState(this.state);
           if (!this.cd['destroyed']) {

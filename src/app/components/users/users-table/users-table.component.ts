@@ -131,7 +131,8 @@ export class UsersTableComponent implements OnInit, OnDestroy {
   };
   isPrimaryContact() {
     if (!this.customerPortalStateService.isCustomerPortal) return this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).isPrimaryContact;
-    if (this.customerPortalStateService.isCustomerPortal) return this.user.customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id')).isPrimaryContact;
+    if (this.customerPortalStateService.isCustomerPortal && this.user.customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id'))) return this.user.customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id')).isPrimaryContact;
+    return false
   }
   resetPrimaryContact() {
     this.usersService.resetPrimaryContact(this.user.id, this.companyId).subscribe(data => {
