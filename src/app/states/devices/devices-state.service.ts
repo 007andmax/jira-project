@@ -38,9 +38,21 @@ export class DevicesStateService {
     private devicesRealTimeService: DevicesRealTimeService) { }
 
   public onInit() {
-    if (this.userStateService.getCurrentUser()) this.getCompanyDevices(this.userStateService.getCurrentUser().company.id);
+    if (this.userStateService.getCurrentUser()) {
+      if (this.userStateService.getCurrentUser().accountType != "CLIENT") {
+        this.getCompanyDevices(this.userStateService.getCurrentUser().company.id);
+      } else {
+        this.isGetDevices = true;
+      }
+    }
     this.userStateService.getOnGetCurrentuser().subscribe(data => {
-      if (!this.isGetDevices) this.getCompanyDevices(data.company.id);
+      if (!this.isGetDevices) {
+        if (this.userStateService.getCurrentUser().accountType != "CLIENT") {
+          this.getCompanyDevices(data.company.id);
+        } else {
+          this.isGetDevices = true;
+        }
+      }
     })
     this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
       if (newChange.action === 'AGENT_ACTIVITY_STATUS') this.onInitUpdateAgentActivityStatus(newChange);

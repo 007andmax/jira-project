@@ -126,6 +126,11 @@ export class UserFilter {
         return list;
 
     }
+    /**
+* @description Check list tags, user have such tags. Return 'true' or 'false'
+* @param  {Array<CompanyTag>} list  - Array Objects of Tags
+* @returns  {boolean} This is the result
+*/
     public isUserTags(list) {
         let isExist = true;
 
@@ -135,6 +140,11 @@ export class UserFilter {
         })
         return isExist;
     }
+    /**
+* @description Check list Custom Subscriptions, user have such Custom Subscriptions. Return 'true' or 'false'
+* @param  {Array<UserCustomSubscription>} list  - Array Objects of UserCustomSubscription
+* @returns  {boolean} This is the result
+*/
     public isUserCustomSubscription(list) {
         let isExist = true;
 
@@ -144,6 +154,11 @@ export class UserFilter {
         })
         return isExist;
     }
+    /**
+* @description Check Default Subscription, user have such Default Subscription. Return 'true' or 'false'
+* @param  {UserDefaultSubscription} item  - Object of Default Subscription
+* @returns  {boolean} This is the result
+*/
     public isUserDefaultSubscription(item) {
         if (!this.defaultSubscriptions) return true;
         let isExist = true;
@@ -152,13 +167,23 @@ export class UserFilter {
         if (this.defaultSubscriptions.ticketSubscription.enabled && this.defaultSubscriptions.ticketSubscription.enabled !== item.ticketSubscription.enabled) isExist = false
         return isExist;
     }
+    /**
+* @description Set new value field 'clientIndustry' 
+* @param  {CrmCompanyIndustry} data  - Object of CrmCompanyIndustry
+*/
     public setClientIndustry(data) {
         this.clientIndustry = data;
     }
+    /**
+* @description Return data field 'customSubscriptions'
+* @returns  {Array<UserCustomSubscription>} This is the result
+*/
     public getCustomSubscriptions() {
         return this.customSubscriptions;
     }
-
+    /**
+   * @description Clear fields 'filter' from object 'filterTop'
+   */
     public clearFilter() {
         this.filterTop.forEach(item => item.filter = '');
     }
