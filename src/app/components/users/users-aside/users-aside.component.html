@@ -389,7 +389,7 @@
                                     [attr.id]="'access-' + i"
                                     type="checkbox"
                                     [(ngModel)]="companyInfo.hasAccess"
-                                    [attr.disabled]="!companyInfo.companyId || !companyInfo.customerUserRole"
+                                    [disabled]="!companyInfo.companyId || !companyInfo.customerUserRole"
                                 >
                                 <span></span>
                                 <div class="qt-ml-8">Access to the Customer portal</div>
@@ -443,8 +443,10 @@
                 appDisabledBtn
                 #addBtn="disabled"
                 (onClick)="onAdd()"
+                [ngClass]="{'--loading':addBtn.isBlock()}"
             >
-                Add User
+                <span>Add User</span>
+                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
             </button>
             <button
                 class="qt-button --gray"

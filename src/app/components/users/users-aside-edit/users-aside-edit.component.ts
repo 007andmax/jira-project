@@ -28,6 +28,7 @@ import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-indus
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { UserRole } from '../class/user-role';
 import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-role-state.service';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
   selector: 'users-aside-edit',
@@ -50,6 +51,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
   industries: Array<CrmCompanyIndustry> = [];
   idUploadFile: string;
   userRoles: Array<UserRole> = [];
+  @ViewChild('editBtn') editBtn: DisabledBtnDirective;
   @ViewChild('companyTags') companyTags: CompanyTagsComponent;
   @ViewChild('jobTitleDp') jobTitleDp: DropDownComponent;
   @ViewChild('jobTypeDp') jobTypeDp: DropDownComponent;
@@ -233,8 +235,12 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
 
   onSave() {
     if (!this.validate.isValidate(this.user)) return;
+    this.editBtn.setDisabled(true);
     this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit())).subscribe(data => {
+      this.editBtn.setDisabled(false);
       this.close();
+    }, err => {
+      this.editBtn.setDisabled(false);
     })
 
   }

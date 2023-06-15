@@ -90,10 +90,10 @@
                             [attr.id]="'access-' + i"
                             type="checkbox"
                             [(ngModel)]="customerCompaniesInfo.hasAccess"
-                            [disabled]="!customerCompaniesInfo.customerUserRole"
+                            disabled
                         >
                         <span></span>
-                        <div class="qt-ml-8">Provide access and send an invite</div>
+                        <div class="qt-ml-8">Access to the Customer portal</div>
                     </label>
                 </div>
             </div>
@@ -109,9 +109,10 @@
                             [attr.id]="'primary-contact-' + i"
                             type="checkbox"
                             [(ngModel)]="customerCompaniesInfo.isPrimaryContact"
+                            disabled
                         >
                         <span></span>
-                        <div class="qt-ml-8">Set as a primary user</div>
+                        <div class="qt-ml-8">Primary User</div>
                     </label>
                 </div>
             </div>

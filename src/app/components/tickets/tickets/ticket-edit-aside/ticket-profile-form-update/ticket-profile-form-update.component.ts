@@ -28,6 +28,7 @@ import { NoteStateService } from 'src/app/states/note/note-state.service';
 import { NoteService } from 'src/app/services/note/note.service';
 import { NoteTemplate } from 'src/app/components/setting/ticket-settings-page/canned-responses/class/note-template';
 import { TicketProfileFormUpdateNoteListComponent } from './ticket-profile-form-update-note-list/ticket-profile-form-update-note-list.component';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-ticket-profile-form-update',
@@ -79,6 +80,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     private companiesService: CompaniesService,
     private permissionsService: PermissionsService,
     public addUsersNotifyStateService: AddUsersNotifyStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     public ticketsListService: TicketsListService) { }
 
   ngOnInit() {

@@ -32,14 +32,14 @@
                 class="ticket-updates__ticket-item"
                 *ngIf="update.type === 'PRODUCT'"
                 [update]="update"
-                [isBlockChange]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && customerPortalStateService.isCustomerPortal"
+                [isBlockChange]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || customerPortalStateService.isCustomerPortal"
             >
             </ticket-detail-profile-updates-product>
             <ticket-detail-profile-updates-service
                 class="ticket-updates__ticket-item"
                 *ngIf="update.type === 'SERVICE'"
                 [update]="update"
-                [isBlockChange]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && customerPortalStateService.isCustomerPortal"
+                [isBlockChange]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || customerPortalStateService.isCustomerPortal"
             >
             </ticket-detail-profile-updates-service>
         </ng-template>

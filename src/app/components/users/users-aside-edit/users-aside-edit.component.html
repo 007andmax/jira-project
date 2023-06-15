@@ -105,7 +105,10 @@
                     </mat-error>
                 </div>
             </div>
-            <div class="qt-inputs-row qt-f50">
+            <div
+                class="qt-inputs-row qt-f50"
+                *ngIf="user.portalAccessStatus == 'Unauthorized' || user.portalAccessStatus == 'Invite sent'"
+            >
                 <div class="qt-input-block">
                     <div class="qt-df qt-ai-c qt-mt-15 qt-mb-12">
                         <label
@@ -422,6 +425,7 @@
                                     [attr.id]="'primary-contact-' + i"
                                     type="checkbox"
                                     [(ngModel)]="companyInfo.isPrimaryContact"
+                                    disabled
                                 >
                                 <span></span>
                                 <div class="qt-ml-8">Set as a primary user</div>
@@ -456,9 +460,13 @@
         <div class="qt-df">
             <button
                 class="qt-button qt-mr-12"
-                (click)="onSave()"
+                appDisabledBtn
+                #editBtn="disabled"
+                (onClick)="onSave()"
+                [ngClass]="{'--loading':editBtn.isBlock()}"
             >
-                Save
+                <span>Save</span>
+                <app-preloader-ticket *ngIf="editBtn.isBlock()"></app-preloader-ticket>
             </button>
             <button
                 class="qt-button --gray"

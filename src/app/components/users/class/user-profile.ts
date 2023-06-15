@@ -30,6 +30,7 @@ export class UserProfile {
     jobTypeId: string;
     userIndustryId: string;
     sendPortalInvitation: boolean = false;
+    portalAccessStatus: string;
     constructor() {
 
     }
@@ -72,6 +73,7 @@ export class UserProfile {
         this.jobTypeId = user.jobTypeId;
         this.userIndustryId = user.userIndustryId;
         this.customerCompaniesInfo = user.customerCompaniesInfo;
+        this.portalAccessStatus = user.portalAccessStatus;
     }
     public editLogo(data) {
         this.avatar = data;

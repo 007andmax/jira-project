@@ -87,6 +87,7 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
       if (this.userRolesDP) this.userRolesDP.reset(this.userRoles);
     })
     this.sub.add(onGetUserRole);
+
   }
   onSelectClientIndustry(item) {
     this.user.setUserIndustryId((item) ? item.id : null);
