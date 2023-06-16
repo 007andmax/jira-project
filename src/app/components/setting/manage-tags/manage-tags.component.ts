@@ -89,7 +89,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     this.companiesStateService.onCurrentCompany.subscribe(res => {
       this.getCurrentCompany(res);
     })
-    this.serviceAllTickets = this.tagsService.getAllTickets();
+    this.serviceAllTickets = this.tagsService.getTags();
     this.getAllTags();
     this.settingStateService.setComponentName('ManageTagsComponent');
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {

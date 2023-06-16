@@ -187,7 +187,13 @@ export class UserFilter {
     public clearFilter() {
         this.filterTop.forEach(item => item.filter = '');
     }
-
+    /**
+      * @description Sort users list by field
+      * @param  {string} field  - field for sort
+      * @param  {Array<User>} reqUsers  - user list for sort
+      * @param  {Array<Company>} companies  - company 
+      * @param  {Array<CrmCompanyIndustry>} industries  - CrmCompanyIndustry list
+      */
     public onFilter(field, reqUsers, companies, industries) {
 
         let index = this.filterTop.findIndex(item => item.field === field);
@@ -280,21 +286,42 @@ export class UserFilter {
 
         }
     }
+    /**
+     * @description Return string with phone numbers user
+     * @param  {User} user  - Object user
+     * @returns  {string} This is the result
+     */
     private getContact(user) {
         let str = '';
         if (user.phoneNumbers && user.phoneNumbers.length && user.phoneNumbers[0] && user.phoneNumbers[0].number) str += user.phoneNumbers[0].number;
         if (user.phoneNumbers && user.phoneNumbers.length && user.phoneNumbers[1] && user.phoneNumbers[1].number) str += user.phoneNumbers[1].number;
         return str;
     }
+    /**
+    * @description Return name company by companyId from User
+    * @param  {User} user  - Object user
+    * @param  {Array<Company>} companies  - Array objects Company
+    * @returns  {string} This is the result
+    */
     private getCompanyName(user, companies) {
         if (user.company.isDefault) return '';
         let index = companies.findIndex(item => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === item.id));
         return (index > -1) ? companies[index].name : '';
     }
+    /**
+   * @description Return name industri by userIndustryId from User
+   * @param  {User} user  - Object user
+   * @param  {Array<CrmCompanyIndustry>} industries  - Array objects industries
+   * @returns  {string} This is the result
+   */
     private getIndustryName(user, industries) {
         let index = industries.findIndex(item => item.id == user.userIndustryId);
         return (index > -1) ? industries[index].name : '';
     }
+    /**
+   * @description Sort user list by contact phone number
+   * @param  {Array<User>} reqUsers  - Array Object user
+   */
     private onFilterContact(reqUsers) {
         reqUsers.sort((a, b) => {
             let first = this.getContact(a);
@@ -303,6 +330,10 @@ export class UserFilter {
                 1 : ((next.toLowerCase() > first.toLowerCase()) ? -1 : 0)
         });
     }
+    /**
+   * @description Sort user list by company name
+   * @param  {Array<User>} reqUsers  - Array Object user
+   */
     private onFilterCompany(reqUsers, companies) {
         reqUsers.sort((a, b) => {
             let first = this.getCompanyName(a, companies);
@@ -310,9 +341,12 @@ export class UserFilter {
             return (first.toLowerCase() > next.toLowerCase()) ?
                 1 : ((next.toLowerCase() > first.toLowerCase()) ? -1 : 0)
         });
-
-
     }
+    /**
+   * @description Sort user list by Industry Name
+   * @param  {Array<User>} reqUsers  - Array Object user
+   * @param  {Array<CrmCompanyIndustry>} industries  - Array Object CrmCompanyIndustry
+   */
     private onFilterIndustry(reqUsers, industries) {
         reqUsers.sort((a, b) => {
             let first = this.getIndustryName(a, industries);

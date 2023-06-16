@@ -15,6 +15,7 @@ import { DevicesService } from 'src/app/services/devices/devices.service';
 import { DeviceCompany } from 'src/app/components/company-devices/class/device-company';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 import { Subscription } from 'rxjs';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +53,8 @@ export class TicketStateService {
     private ticketsService: TicketsService,
     private devicesService: DevicesService,
     private devicesStateService: DevicesStateService,
-    private websocketService: WebsocketService) {
+    private websocketService: WebsocketService,
+    public customerPortalStateService: CustomerPortalStateService,) {
     this.ticketsRealTimeService.changeTicket.subscribe(newChange => {
       this.changeUpdatesTicket.emit(newChange);
     });
@@ -189,7 +191,10 @@ export class TicketStateService {
   public getServicesList(ticketProfile) {
     this.recurringService.getServiceList(ticketProfile.company.id).subscribe((res: any) => {
       this.servicesForTicket = res;
-      this.getServiceAgreements(ticketProfile);
+      this.servicesForTicket.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+      if (!this.customerPortalStateService.isCustomerPortal) this.getServiceAgreements(ticketProfile);
+      this.servicesList.emit(this.servicesForTicket);
     })
   }
   public subsribeToTicket(id) {
@@ -214,9 +219,7 @@ export class TicketStateService {
         return el.status === 'EXPIRED' || el.status === 'TERMINATED'
       })
     })
-    this.servicesForTicket.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-    this.servicesList.emit(this.servicesForTicket);
+
   }
   public setProductForRemove(data) {
     this.productForRemove = data;

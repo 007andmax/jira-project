@@ -49,6 +49,7 @@
   }
 
   &.--disabled {
+    cursor: default;
     span {
       background: $gray-100;
       border: 1px solid $gray-200;

@@ -10,6 +10,7 @@ import * as moment from "moment";
 import { DELETE_PAYMENT } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
   selector: 'app-payment-item',
@@ -30,6 +31,7 @@ export class PaymentItemComponent implements OnInit {
     private modalService: NgbModal,
     private paymentsStateService: PaymentsStateService,
     public customerPortalStateService: CustomerPortalStateService,
+    private usersStateService: UsersStateService,
     private confirmStateService: ConfirmStateService,) { }
 
   ngOnInit() {
@@ -48,6 +50,10 @@ export class PaymentItemComponent implements OnInit {
     this.onRefundPayment.emit(this.payment);
   }
   onShowPreviewInvoice(index) {
+    if (this.usersStateService.getCurrentUser().accountType == "CLIENT") {
+      let customerCompaniesInfo = this.usersStateService.getCurrentUser().customerCompaniesInfo.find(item => item.companyId == localStorage.getItem("company_info_id"));
+      if (!customerCompaniesInfo.customerUserRole.getPermission('VIEW_ALL_PAYMENTS') || !customerCompaniesInfo.customerUserRole.getPermission('VIEW_ALL_INVOICES')) return;
+    }
     this.onPreviewInvoice.emit(this.payment.paymentData[index].invoiceId);
   }
   getInvoices() {
