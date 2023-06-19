@@ -104,6 +104,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
       if (id) this.companiesStateService.setCompanyRoutingId(id);
       let ticket_id = id;
       let company = this.companiesStateService.getCompanies().find(item => item.id === ticket_id);
+      console.log("company", company);
       this.header.filter.setTypeFilterWithoutChange("ALL");
       this.header.filter.companyDp.isDisabled = true;
       this.header.filter.companyDp.editItem = company;
