@@ -10,6 +10,10 @@ export class UserPermissions {
             }
         }
     }
+    /**
+* @description Return Object for User Permissions
+* @returns  {Object} This is the result
+*/
     public getDataForRequest() {
         return {
             name: this.name,

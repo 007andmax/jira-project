@@ -355,18 +355,34 @@ export class UserFilter {
                 1 : ((next.toLowerCase() > first.toLowerCase()) ? -1 : 0)
         });
     }
+    /**
+  * @description Sort user list by Portal Access Status
+  * @param  {Array<User>} reqUsers  - Array Object user
+  */
     private onFilterPortalAccessStatus(reqUsers) {
         reqUsers.sort((a, b) => (a.portalAccessStatus.toLowerCase() > b.portalAccessStatus.toLowerCase()) ?
             1 : (b.portalAccessStatus.toLowerCase() > a.portalAccessStatus.toLowerCase() ? -1 : 0));
     }
+    /**
+  * @description Sort user list by Primary Email
+  * @param  {Array<User>} reqUsers  - Array Object user
+  */
     private onFilterPrimaryEmail(reqUsers) {
         reqUsers.sort((a, b) => (a.primaryEmail.toLowerCase() > b.primaryEmail.toLowerCase()) ?
             1 : (b.primaryEmail.toLowerCase() > a.primaryEmail.toLowerCase() ? -1 : 0));
     }
+    /**
+  * @description Sort user list by UserStatistic Tickets Submitted
+  * @param  {Array<User>} reqUsers  - Array Object user
+  */
     private onFilterTickets(reqUsers) {
         reqUsers.sort((a, b) => ((a.userStatistic.ticketsSubmitted || 0) > (b.userStatistic.ticketsSubmitted || 0)) ?
             1 : (((b.userStatistic.ticketsSubmitted || 0) > (a.userStatistic.ticketsSubmitted || 0)) ? -1 : 0));
     }
+    /**
+  * @description Sort user list by FirstName and LastName
+  * @param  {Array<User>} reqUsers  - Array Object user
+  */
     private onFilterName(reqUsers) {
         reqUsers.sort((a, b) => ((a.firstName + a.lastName).toLowerCase() > (b.firstName + b.lastName).toLowerCase()) ?
             1 : (((b.firstName + b.lastName).toLowerCase() > (a.firstName + a.lastName).toLowerCase()) ? -1 : 0));

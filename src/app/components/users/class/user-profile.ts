@@ -34,15 +34,30 @@ export class UserProfile {
     constructor() {
 
     }
+    /**
+* @description Add new element to array ojects customerCompaniesInfo
+*/
     public addCustomerCompaniesInfo() {
         this.customerCompaniesInfo.push(new UserCustomerCompaniesInfo());
     }
+    /**
+* @description Set defaultSubscriptions
+* @param  {UserDefaultSubscription} data  - Object of Default Subscriptions
+*/
     public changeDefaultSubscriptions(data) {
         this.defaultSubscriptions = data;
     }
+    /**
+* @description Set Custom Subscriptions
+* @param  {Array<UserCustomSubscription>} data  - Array Objects of Custom Subscriptions
+*/
     public changeCustomSubscriptions(data) {
         this.customSubscriptions = data;
     }
+    /**
+* @description Set Tags
+* @param  {Array<Tag>} data  - Array Objects of tags
+*/
     public setTags(data) {
         this.tags = data;
     }
