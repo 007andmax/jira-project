@@ -263,7 +263,8 @@ export class AppComponent implements OnInit {
     })
     this.companiesState.onCurrentCompany.subscribe(data => {
       if (!this.currentUser) return;
-      if (this.router.url.includes("tickets") && (this.state == "new-tickets" || this.state == '')) {
+      if (this.router.url.includes("tickets") && !this.router.url.includes("company") && (this.state == "new-tickets" || this.state == '')) {
+        console.log("onChangeTypeFilter - onCurrentCompany");
         this.ticketsStateService.onChangeTypeFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
         this.ticketsStateService.onChangeLeftPanelFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
       }

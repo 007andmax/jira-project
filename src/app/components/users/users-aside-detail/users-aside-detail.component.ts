@@ -57,6 +57,7 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     let openDetailAside = this.usersStateService.openDetailAside.subscribe(data => {
+      this.getColors();
       this.usersStateService.setUserForEdit(data);
       //   this.companySubscriptionState.onEditMode(this.user.subscription);
       this.user.onEdit(data);
@@ -71,12 +72,6 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
       this.open = true;
     })
     this.sub.add(openDetailAside);
-    this.leftPanelService.getColors().subscribe((data: any) => {
-      let listColors = data.map(item => {
-        return new StatusColor(item.borderColor, item.textColor);
-      })
-      this.ticketsStateService.onColorStatus(listColors);
-    })
     let stompClient = this.usersRealTimeService.changeSubscriptionsUsers.subscribe(newChange => {
       if (!this.open) return;
       if (newChange.action === 'SUBSCRIPTION_SAVED') {
@@ -112,6 +107,17 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getChangeCompanies);
     this.onInitSubscribe();
+  }
+  getColors() {
+    console.log("getColors");
+    if (this.ticketsStateService.getListStatusColor().length === 0) {
+      this.leftPanelService.getColors().subscribe((data: any) => {
+        let statusColors = data.map(item => {
+          return new StatusColor(item.borderColor, item.textColor);
+        })
+        this.ticketsStateService.onColorStatus(statusColors);
+      })
+    }
   }
   getLogoUrl() {
     if (this.user && this.user.avatar && this.user.avatar && this.user.avatar.base64 && !this.user.avatar.cropped) return this.user.avatar.base64;

@@ -36,6 +36,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
   @ViewChild('header') header: TicketsHeaderComponent;
   ticketsStatus: Array<TicketStatus> = [];
   container = document.body.querySelector(".main-container");
+  isInitTickets: boolean = false;
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
     public cd: ChangeDetectorRef,
@@ -53,13 +54,17 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     this.leftPanelStateService.changeStateWithoutNavigate('company-tickets');
     this.ticketStateService.getOnTicketClosed().subscribe(data => {
       this.idEditTicket = '';
-    })
-    this.leftPanelService.getColors().subscribe((data: any) => {
-      let listColors = data.map(item => {
-        return new StatusColor(item.borderColor, item.textColor);
+    });
+    if (this.ticketsStateService.getListStatusColor().length === 0) {
+      this.leftPanelService.getColors().subscribe((data: any) => {
+        this.listColors = data.map(item => {
+          return new StatusColor(item.borderColor, item.textColor);
+        })
+        this.ticketsStateService.onColorStatus(this.listColors);
       })
-      this.ticketsStateService.onColorStatus(listColors);
-    })
+    } else {
+      this.listColors = this.ticketsStateService.getListStatusColor();
+    }
     this.ticketsStateService.getOnAddTicket().subscribe(data => {
       if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter, data) && !this.tickets.find(item => item.id == data.id) && !(this.page_number == 0 && this.showPreloader)) {
         this.tickets.unshift(data);
@@ -83,6 +88,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     });
 
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
+      console.log("getOnInitFilter");
       this.ticketsFilter = data;
       this.showPreloader = true;
       document.body.querySelector(".main-container").scrollTo(0, 0);
@@ -96,25 +102,18 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     })
 
     this.header.setTitle("All Tickets");
+    if (this.companiesStateService.getCompanies().length > 0) if (this.companiesStateService.getCompanies().length > 0 && this.activateRoute.snapshot.params['id']) this.setCompanyRoutingId(this.activateRoute.snapshot.params['id']);
+    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
+      if (this.companiesStateService.getCompanies().length > 0 && this.activateRoute.snapshot.params['id']) this.setCompanyRoutingId(this.activateRoute.snapshot.params['id']);
+    })
+    this.sub.add(getOnCompanies);
     let id = this.activateRoute.snapshot.params['id'];
     if (id) this.companiesStateService.setCompanyRoutingId(id);
     let subscription = this.activateRoute.params.subscribe(params => {
       this.showPreloader = true;
       id = params['id'];
       if (id) this.companiesStateService.setCompanyRoutingId(id);
-      let ticket_id = id;
-      let company = this.companiesStateService.getCompanies().find(item => item.id === ticket_id);
-      console.log("company", company);
-      this.header.filter.setTypeFilterWithoutChange("ALL");
-      this.header.filter.companyDp.isDisabled = true;
-      this.header.filter.companyDp.editItem = company;
-      this.header.filter.ticketsFilter.setCompany(company);
-      this.header.filter.onChangeCounterFilter();
-      this.ticketsFilter.setListType("ALL");
-      this.ticketsFilter.setCompany(company);
-      this.header.filter.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.company.id === company.id));
-      this.getCount();
-      this.onScroll();
+      if (this.companiesStateService.getCompanies().length > 0 && this.activateRoute.snapshot.params['id']) this.setCompanyRoutingId(id);
     });
     this.sub.add(subscription);
     this.ticketsStatus = this.ticketsStateService.getTicketsStatus();
@@ -128,6 +127,24 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
       this.ticketsStateService.onInitCount(data);
       this.header.setTitle("All Tickets");
     })
+  }
+  setCompanyRoutingId(id) {
+
+    if (this.isInitTickets) return;
+    this.isInitTickets = true;
+    let ticket_id = id;
+    let company = this.companiesStateService.getCompanies().find(item => item.id === ticket_id);
+    console.log("company", company);
+    this.header.filter.setTypeFilterWithoutChange("ALL");
+    this.header.filter.companyDp.isDisabled = true;
+    this.header.filter.companyDp.editItem = company;
+    this.header.filter.ticketsFilter.setCompany(company);
+    this.header.filter.onChangeCounterFilter();
+    this.ticketsFilter.setListType("ALL");
+    this.ticketsFilter.setCompany(company);
+    this.header.filter.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.company.id === company.id));
+    this.getCount();
+    this.onScroll();
   }
   editTicket(id) {
     if (!this.appService.isMobile) {

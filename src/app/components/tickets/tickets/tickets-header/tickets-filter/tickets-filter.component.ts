@@ -67,6 +67,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.ticketsFilter.setListType(this.listType);
     /* END */
     let getOnChangeTypeFilter = this.ticketsStateService.getOnChangeTypeFilter().subscribe(type => {
+      console.log("getOnChangeTypeFilter");
       this.listType = type;
       this.ticketsFilter.setListType(type);
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
@@ -84,13 +85,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       this.onGetTechUsers(data);
     })
     this.sub.add(getOnUsers);
-    this.leftPanelService.getColors().subscribe((data: any) => {
-      let listColors = data.map(item => {
-        return new StatusColor(item.borderColor, item.textColor);
-      })
-      this.ticketsStateService.onColorStatus(listColors);
-    })
-
     //    this.getCounts();
 
     let getOnUpdateCounts = this.ticketsStateService.getOnUpdateCounts().subscribe(data => {

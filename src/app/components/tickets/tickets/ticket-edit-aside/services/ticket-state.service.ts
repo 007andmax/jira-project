@@ -188,7 +188,10 @@ export class TicketStateService {
   }
   public getServicesList(ticketProfile) {
     this.recurringService.getServiceList(ticketProfile.company.id).subscribe((res: any) => {
-      this.servicesForTicket = res;
+      this.servicesForTicket = res.filter(item => item.canUseInTicket);
+      this.servicesForTicket.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+      this.servicesList.emit(this.servicesForTicket);
       this.getServiceAgreements(ticketProfile);
     })
   }
@@ -209,14 +212,10 @@ export class TicketStateService {
     this.serviceAgreementsService.getServiceAgreements().subscribe((data: any) => {
       let Agreements = data.filter((el) => el.company.id === ticketProfile.company.id)
       this.areTicketsPresented = (Agreements.length > 0) ? true : false;
-      this.servicesForTicket = this.servicesForTicket.filter(item => item.canUseInTicket);
       this.areTicketsTerminated = Agreements.every((el) => {
         return el.status === 'EXPIRED' || el.status === 'TERMINATED'
       })
     })
-    this.servicesForTicket.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-    this.servicesList.emit(this.servicesForTicket);
   }
   public setProductForRemove(data) {
     this.productForRemove = data;

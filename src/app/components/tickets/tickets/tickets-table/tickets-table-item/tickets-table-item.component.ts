@@ -74,8 +74,8 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
   getStyleStatus(name) {
     let find = this.ticketsStatus.find(item => item.name == name);
     return {
-      'border-color': (this.listColors) ? this.listColors[find.color].textColor : null,
-      'background-color': (this.listColors) ? this.listColors[find.color].borderColor : null, 'color': (this.listColors) ? this.listColors[find.color].textColor : null
+      'border-color': (this.listColors.length > 0) ? this.listColors[find.color].textColor : null,
+      'background-color': (this.listColors.length > 0) ? this.listColors[find.color].borderColor : null, 'color': (this.listColors.length > 0) ? this.listColors[find.color].textColor : null
     }
   }
   getClassType() {
