@@ -254,7 +254,6 @@ export class LeftPanelComponent implements OnInit {
     if (this.leftPanelService.isDevicesPage(data)) this.page = "DEVICES";
   }
   setDefaultTypeFilter() {
-    console.log("setDefaultTypeFilter");
     this.panelTickets.setTypeFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage)
     this.ticketsStateService.onChangeTypeFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
     this.ticketsStateService.onChangeLeftPanelFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);

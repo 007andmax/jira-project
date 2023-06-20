@@ -63,12 +63,10 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   ngOnInit() {
     /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
     /* START */
-    console.log("this.listType ngOnInit", this.ticketsStateService.getListType());
     this.listType = this.ticketsStateService.getListType();
     this.ticketsFilter.setListType(this.listType);
     /* END */
     let getOnChangeTypeFilter = this.ticketsStateService.getOnChangeTypeFilter().subscribe(type => {
-      console.log("getOnChangeTypeFilter", type);
       this.listType = type;
       this.ticketsFilter.setListType(type);
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
@@ -147,12 +145,10 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   }
 
   public setTypeFilterWithoutChange(type) {
-    console.log("setTypeFilterWithoutChange", type);
     this.listType = type;
     this.ticketsFilter.setListType(type);
   }
   public setTypeFilter(type) {
-    console.log("setTypeFilter", type);
     this.listType = type;
     this.ticketsFilter.setListType(type);
     if (!this.appService.checkMobile()) {
@@ -163,7 +159,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   }
 
   public onGetUsers(data) {
-    console.log("onGetUsers", data);
     this.users = data.filter(item => {
       if (item.accountType !== 'TECH' && !item.deletedAt) {
         return item;

@@ -109,7 +109,6 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
     this.onInitSubscribe();
   }
   getColors() {
-    console.log("getColors");
     if (this.ticketsStateService.getListStatusColor().length === 0) {
       this.leftPanelService.getColors().subscribe((data: any) => {
         let statusColors = data.map(item => {

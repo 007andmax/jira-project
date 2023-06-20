@@ -69,7 +69,6 @@ export class TicketsFilter {
         return data;
     }
     public setListType(type) {
-        console.log("setListType ticket filter", type);
         this.listType = type;
         if (this.listType === "ALL") this.onInitAll();
         if (this.listType === "UNASSIGNED") this.onInitUnassigned();
@@ -133,7 +132,6 @@ export class TicketsFilter {
         if (this.listType === "RECURRING_TICKETS_CLOSED") payload = JSON.parse(JSON.stringify(this.payloadRecurringTicketsClosed));
         if (this.listType === "COMPLETED") payload = JSON.parse(JSON.stringify(this.payloadCompleted));
         if (this.listType === "IN_PROGRESS") payload = JSON.parse(JSON.stringify(this.payloadInProgress));
-        console.log("this.listType", this.listType);
         if (this.selectedCompany) {
             payload.groupFieldFilters[0].fieldFilterDtos.push({
                 operator: "EQ",

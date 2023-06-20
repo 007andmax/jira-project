@@ -89,7 +89,6 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     });
 
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
-      console.log("getOnInitFilter", data);
       this.ticketsFilter = data;
       this.showPreloader = true;
       document.body.querySelector(".main-container").scrollTo(0, 0);
@@ -139,8 +138,6 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     this.isInitTickets = true;
     let ticket_id = id;
     let company = this.companiesStateService.getCompanies().find(item => item.id === ticket_id);
-    console.log("company", company);
-    console.log("users", this.usersStateService.getAllUsers());
     this.header.filter.setTypeFilterWithoutChange("ALL");
     this.header.filter.companyDp.isDisabled = true;
     this.header.filter.companyDp.editItem = company;

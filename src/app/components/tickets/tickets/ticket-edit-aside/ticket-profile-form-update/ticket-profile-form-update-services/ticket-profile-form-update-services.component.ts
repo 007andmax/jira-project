@@ -87,7 +87,6 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestr
     this.updateMobileBtn.setDisabled(false);
   }
   public getServices() {
-    console.log("this.servicesList ", JSON.parse(JSON.stringify(this.servicesList)));
     this.servicesList = this.ticketStateService.getServicesForTicket();
     this.areTicketsTerminated = this.ticketStateService.isTicketsTerminated();
     this.areTicketsPresented = this.ticketStateService.isTicketsPresented();
