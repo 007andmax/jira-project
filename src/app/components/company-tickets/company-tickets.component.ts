@@ -52,6 +52,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.leftPanelStateService.changeStateWithoutNavigate('company-tickets');
+    this.ticketsStateService.setListType("ALL");
     this.ticketStateService.getOnTicketClosed().subscribe(data => {
       this.idEditTicket = '';
     });
@@ -88,7 +89,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     });
 
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
-      console.log("getOnInitFilter");
+      console.log("getOnInitFilter", data);
       this.ticketsFilter = data;
       this.showPreloader = true;
       document.body.querySelector(".main-container").scrollTo(0, 0);
@@ -102,18 +103,22 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     })
 
     this.header.setTitle("All Tickets");
-    if (this.companiesStateService.getCompanies().length > 0) if (this.companiesStateService.getCompanies().length > 0 && this.activateRoute.snapshot.params['id']) this.setCompanyRoutingId(this.activateRoute.snapshot.params['id']);
+    if (this.companiesStateService.getCompanies().length > 0 && this.activateRoute.snapshot.params['id'] && this.usersStateService.getAllUsers().length > 0) this.setCompanyRoutingId(this.activateRoute.snapshot.params['id']);
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
-      if (this.companiesStateService.getCompanies().length > 0 && this.activateRoute.snapshot.params['id']) this.setCompanyRoutingId(this.activateRoute.snapshot.params['id']);
+      if (this.companiesStateService.getCompanies().length > 0 && this.activateRoute.snapshot.params['id'] && this.usersStateService.getAllUsers().length > 0) this.setCompanyRoutingId(this.activateRoute.snapshot.params['id']);
     })
     this.sub.add(getOnCompanies);
+    let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
+      if (this.companiesStateService.getCompanies().length > 0 && this.activateRoute.snapshot.params['id'] && this.usersStateService.getAllUsers().length > 0) this.setCompanyRoutingId(this.activateRoute.snapshot.params['id']);
+    })
+    this.sub.add(getOnUsers);
     let id = this.activateRoute.snapshot.params['id'];
     if (id) this.companiesStateService.setCompanyRoutingId(id);
     let subscription = this.activateRoute.params.subscribe(params => {
       this.showPreloader = true;
       id = params['id'];
       if (id) this.companiesStateService.setCompanyRoutingId(id);
-      if (this.companiesStateService.getCompanies().length > 0 && this.activateRoute.snapshot.params['id']) this.setCompanyRoutingId(id);
+      if (this.companiesStateService.getCompanies().length > 0 && this.activateRoute.snapshot.params['id'] && this.usersStateService.getAllUsers().length > 0) this.setCompanyRoutingId(this.activateRoute.snapshot.params['id']);
     });
     this.sub.add(subscription);
     this.ticketsStatus = this.ticketsStateService.getTicketsStatus();
@@ -135,6 +140,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     let ticket_id = id;
     let company = this.companiesStateService.getCompanies().find(item => item.id === ticket_id);
     console.log("company", company);
+    console.log("users", this.usersStateService.getAllUsers());
     this.header.filter.setTypeFilterWithoutChange("ALL");
     this.header.filter.companyDp.isDisabled = true;
     this.header.filter.companyDp.editItem = company;
