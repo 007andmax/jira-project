@@ -128,8 +128,8 @@ export class CustomerPortalStateService {
     }
   }
   public checkEditUser(currentUser, user) {
-    if (this.isCustomerPortal && this.getPermissionCustomerUser(currentUser, 'VIEW_MY_TICKETS')
-      && this.getPermissionCustomerUser(currentUser, 'VIEW_MY_PROFILE')
+    if (this.isCustomerPortal && this.getPermissionCustomerUser(currentUser, 'VIEW_MY_PROFILE')
+      && this.getPermissionCustomerUser(currentUser, 'VIEW_ALL_USERS')
       && this.getPermissionCustomerUser(currentUser, 'EDIT_USERS')
       && currentUser.id !== user.id
       || this.isCustomerPortal && this.getPermissionCustomerUser(currentUser, 'VIEW_MY_PROFILE')

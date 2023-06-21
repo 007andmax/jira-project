@@ -135,9 +135,9 @@ export class UserProfile {
     public setDefaultSubscriptions(data) {
         this.defaultSubscriptions = data;
     }
-    public getUserForUpdate(user: User) {
+    public getUserForUpdate(user: User, isCustomerPortal) {
 
-        return new UserUpdate(this, user);
+        return new UserUpdate(this, user, isCustomerPortal);
     }
     public getUserForAdd() {
 

@@ -29,6 +29,7 @@ import { TicketsListService } from '../../tickets/tickets/services/tickets-list.
 import { UserRole } from '../class/user-role';
 import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-role-state.service';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'users-aside-edit',
@@ -68,6 +69,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     private companySubscriptionState: CompanySubscriptionStateService,
     private crmStateService: CrmStateService,
     public customerRoleStateService: CustomerRoleStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     private companiesService: CompaniesService,
     public cd: ChangeDetectorRef) { }
 
@@ -236,7 +238,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
   onSave() {
     if (!this.validate.isValidate(this.user)) return;
     this.editBtn.setDisabled(true);
-    this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit())).subscribe(data => {
+    this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit(), this.customerPortalStateService.isCustomerPortal)).subscribe(data => {
       this.editBtn.setDisabled(false);
       this.close();
     }, err => {

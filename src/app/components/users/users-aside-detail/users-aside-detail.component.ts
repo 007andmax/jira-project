@@ -187,7 +187,7 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
   }
 
   updateUser() {
-    this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit())).subscribe(data => {
+    this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit(), this.customerPortalStateService.isCustomerPortal)).subscribe(data => {
 
     })
   }
