@@ -48,12 +48,12 @@ export class PaymentsFilterComponent implements OnInit {
     this.onChangeCounterFilter();
   }
   public onClearAll() {
-    this.companyDp.clearWithOutChanges();
+    if (!this.customerPortalStateService.isCustomerPortal) this.companyDp.clearWithOutChanges();
     this.datesDp.clearWithOutChanges();
     this.statusDp.clearWithOutChanges();
     this.paymentsFilter.setStatus(null);
     this.paymentsFilter.setAmount(null);
-    this.paymentsFilter.setCompanyId(null);
+    if (!this.customerPortalStateService.isCustomerPortal) this.paymentsFilter.setCompanyId(null);
     this.paymentsFilter.setStartDate(null);
     this.paymentsFilter.setEndDate(null);
     this.paymentsFilter.setInvoiceNumber(null);

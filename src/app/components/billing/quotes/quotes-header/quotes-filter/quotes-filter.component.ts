@@ -53,11 +53,11 @@ export class QuotesFilterComponent implements OnInit {
   }
 
   public onClearAll() {
-    this.companyDp.clearWithOutChanges();
+    if (!this.customerPortalStateService.isCustomerPortal) this.companyDp.clearWithOutChanges();
     this.datesDp.clearWithOutChanges();
     this.statusDp.clearWithOutChanges();
     this.quotesFilter.setStatus(null);
-    this.quotesFilter.setCompanyId(null);
+    if (!this.customerPortalStateService.isCustomerPortal) this.quotesFilter.setCompanyId(null);
     this.quotesFilter.setStartDate(null);
     this.quotesFilter.setEndDate(null);
     this.quotesFilter.setQuoteNumber(null);

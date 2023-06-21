@@ -12,6 +12,7 @@ import { DeviceCompanyAsideParams } from '../class/device-company-aside-params';
 import { DeviceExtended } from '../class/device-extended';
 import { CompanyDevicesRemoteAccessComponent } from '../company-devices-remote-access/company-devices-remote-access.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
   selector: 'app-company-devices-aside',
@@ -33,6 +34,7 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private companiesStateService: CompaniesStateService,
     public customerPortalStateService: CustomerPortalStateService,
+    public usersStateService: UsersStateService,
     private devicesService: DevicesService) { }
 
   ngOnInit() {
@@ -41,6 +43,7 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
         let find = this.devices.find(item => item.agentId === data.ids[0]);
         if (find) {
           this.currentDevice = find;
+          console.log("this.currentDevice", this.currentDevice);
           return;
         }
       }
@@ -57,6 +60,7 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
           } else {
             this.currentDevice = this.devices[this.devices.length - 1];
           }
+          console.log("this.currentDevice", this.currentDevice);
           this.tab = data.type;
           this.showPreloader = false;
         });
