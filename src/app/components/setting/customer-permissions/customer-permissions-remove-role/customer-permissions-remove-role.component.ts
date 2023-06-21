@@ -8,6 +8,7 @@ import { UserProfile } from 'src/app/components/users/class/user-profile';
 import { UsersService } from 'src/app/services/users/users.service';
 import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-role-state.service';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'customer-permissions-remove-role',
@@ -24,6 +25,7 @@ export class CustomerPermissionsRemoveRoleComponent implements OnInit {
   constructor(private companiesStateService: CompaniesStateService,
     private usersService: UsersService,
     public customerRoleStateService: CustomerRoleStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     public usersStateService: UsersStateService,) { }
 
   ngOnInit() {
@@ -39,7 +41,7 @@ export class CustomerPermissionsRemoveRoleComponent implements OnInit {
     let userForUpdate: UserProfile = new UserProfile();
     userForUpdate.onEdit(this.usersStateService.getAllUsers().find(item => item.id == user.id));
     userForUpdate.customerCompaniesInfo = user.customerCompanyInfo;
-    this.usersService.updateUser(userForUpdate.getUserForUpdate(this.usersStateService.getAllUsers().find(item => item.id == user.id))).subscribe(data => {
+    this.usersService.updateUser(userForUpdate.getUserForUpdate(this.usersStateService.getAllUsers().find(item => item.id == user.id), this.customerPortalStateService.isCustomerPortal)).subscribe(data => {
       //  this.close();
     })
   }
