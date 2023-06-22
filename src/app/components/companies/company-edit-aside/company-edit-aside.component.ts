@@ -258,7 +258,9 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     this.validate.checkValidPrimaryEmail(this.company.contacts[0].primaryEmail);
   }
   public onChangeSubscribe(data) {
-    data.forEach(item => this.company.contacts[0].defaultSubscriptions[item.field] = item.selected);
+    console.log("data", data);
+    let index = this.company.contacts[0].customerCompaniesInfo.findIndex(item => item.companyId == this.company.id);
+    data.forEach(item => this.company.contacts[0].customerCompaniesInfo[index].defaultSubscriptions[item.field].enabled = item.selected);
   }
   public onChangeDomain() {
     this.validate.checkValidDomain(this.company.domain);

@@ -414,7 +414,11 @@
             <div class="qt-inputs-row">
                 <div class="qt-input-block">
                     <div class="qt-input-block__label">Get Subscribe</div>
-                    <app-company-subscription (subscribeChange)="onChangeSubscribe($event)"></app-company-subscription>
+                    <app-company-subscription
+                        [companyId]="company.id"
+                        [customerCompaniesInfo]="company.contacts[0].customerCompaniesInfo"
+                        (subscribeChange)="onChangeSubscribe($event)"
+                    ></app-company-subscription>
                 </div>
             </div>
         </div>

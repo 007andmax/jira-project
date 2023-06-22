@@ -1,3 +1,4 @@
+import { UserCustomerCompaniesInfo } from "../../users/class/user-customer-companies-info";
 import { UserDefaultSubscriptionAdd } from "../../users/class/user-default-subscription-add";
 
 export class CompanyProfileContact {
@@ -5,7 +6,7 @@ export class CompanyProfileContact {
     phoneNumbers: any;
     lastName: string;
     primaryEmail: string;
-
+    customerCompaniesInfo: Array<UserCustomerCompaniesInfo> = [];
     jobTitleId: string;
     avatar: string;
     defaultSubscriptions: UserDefaultSubscriptionAdd;
