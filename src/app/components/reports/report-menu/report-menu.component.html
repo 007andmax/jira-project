@@ -227,7 +227,8 @@
                                     <button
                                         class="btn-new btn-primary-white qt-fs-0"
                                         (click)="getReportByDeviceIpSummary()"
-                                        [disabled]="deviceIpSummary.preloaderDevices"
+                                        [disabled]="deviceIpSummary.preloaderDevices || !deviceIpSummary.companyId"
+                                        [ngClass]="{'--disabled':deviceIpSummary.preloaderDevices || !deviceIpSummary.companyId}"
                                     >
                                         Get Report
                                     </button>
@@ -375,7 +376,8 @@
                                     <button
                                         class="btn-new btn-primary-white qt-fs-0"
                                         (click)="getReportByHardwareSummary()"
-                                        [disabled]="hardwareSummaryReport.preloaderDevices"
+                                        [disabled]="hardwareSummaryReport.preloaderDevices || !hardwareSummaryReport.companyId"
+                                        [ngClass]="{'--disabled':hardwareSummaryReport.preloaderDevices || !hardwareSummaryReport.companyId}"
                                     >
                                         Get Report
                                     </button>
@@ -488,7 +490,7 @@
                                             [change]="true"
                                             [placeholder]="'All devices'"
                                             [preloader]="softwareSummaryReport.preloaderDevices"
-                                            [isDisabled]="!softwareSummaryReport.companyId"
+                                            [isDisabled]="!softwareSummaryReport.companyId || softwareSummaryReport.preloaderDevices"
                                             [dropdownHeight]="'300px'"
                                             [heightInput]="'36px'"
                                             [list]="devices"
@@ -504,7 +506,7 @@
                                             [field]="'name'"
                                             [search]="true"
                                             [change]="true"
-                                            [isDisabled]="!softwareSummaryReport.companyId"
+                                            [isDisabled]="!softwareSummaryReport.companyId || softwareSummaryReport.preloaderDevices"
                                             [preloader]="softwareSummaryReport.preloaderSoft"
                                             [list]="softwareSummaryReport.soft"
                                             (onSelectedItem)="onSelectSoftware($event)"
@@ -514,6 +516,7 @@
                                         class="btn-new btn-primary-white qt-fs-0"
                                         (click)="getReportBySoftwareSummary()"
                                         [disabled]="softwareSummaryReport.preloaderDevices || !softwareSummaryReport.companyId"
+                                        [ngClass]="{'--disabled':softwareSummaryReport.preloaderDevices || !softwareSummaryReport.companyId}"
                                     >
                                         Get Report
                                     </button>

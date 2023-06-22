@@ -30,3 +30,14 @@
     line-height: inherit !important;
   }
 }
+.--disabled {
+  background-color: $gray-300 ;
+  border-color: $gray-300;
+  color: #ffffff;
+  cursor: default;
+  box-shadow: unset;
+  &:hover {
+      background: $gray-300;
+      color: #ffffff;
+  }
+}
