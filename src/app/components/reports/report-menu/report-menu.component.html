@@ -219,8 +219,8 @@
                                             [dropdownHeight]="'300px'"
                                             [heightInput]="'36px'"
                                             [list]="devices"
-                                            [isDisabled]="!deviceIpSummary.companyId || devicesStateService.getPreloaderDevices()"
-                                            [preloader]="deviceIpSummary.preloaderDevices || devicesStateService.getPreloaderDevices()"
+                                            [isDisabled]="!deviceIpSummary.companyId || deviceIpSummary.preloaderDevices"
+                                            [preloader]="deviceIpSummary.preloaderDevices || deviceIpSummary.preloaderDevices"
                                             (onSelectedItem)="onSelectDevice($event)"
                                         ></software-summary-devices-dro-down>
                                     </div>
@@ -367,8 +367,8 @@
                                             [dropdownHeight]="'300px'"
                                             [heightInput]="'36px'"
                                             [list]="devices"
-                                            [isDisabled]="!hardwareSummaryReport.companyId || devicesStateService.getPreloaderDevices()"
-                                            [preloader]="hardwareSummaryReport.preloaderDevices || devicesStateService.getPreloaderDevices()"
+                                            [isDisabled]="!hardwareSummaryReport.companyId || hardwareSummaryReport.preloaderDevices"
+                                            [preloader]="hardwareSummaryReport.preloaderDevices || hardwareSummaryReport.preloaderDevices"
                                             (onSelectedItem)="onSelectDevice($event)"
                                         ></software-summary-devices-dro-down>
                                     </div>
@@ -487,8 +487,8 @@
                                             [search]="true"
                                             [change]="true"
                                             [placeholder]="'All devices'"
-                                            [preloader]="softwareSummaryReport.preloaderDevices || devicesStateService.getPreloaderDevices()"
-                                            [isDisabled]="!softwareSummaryReport.companyId || devicesStateService.getPreloaderDevices()"
+                                            [preloader]="softwareSummaryReport.preloaderDevices"
+                                            [isDisabled]="!softwareSummaryReport.companyId"
                                             [dropdownHeight]="'300px'"
                                             [heightInput]="'36px'"
                                             [list]="devices"
@@ -513,6 +513,7 @@
                                     <button
                                         class="btn-new btn-primary-white qt-fs-0"
                                         (click)="getReportBySoftwareSummary()"
+                                        [disabled]="softwareSummaryReport.preloaderDevices || !softwareSummaryReport.companyId"
                                     >
                                         Get Report
                                     </button>

@@ -105,14 +105,6 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       if (this.deviceIpSummary.companyId) this.getDevicesByCompany(this.deviceIpSummary.companyId);
     })
     this.sub.add(getOnDevices);
-    this.softwareSummaryReport.setPreloaderDevices(this.devicesStateService.getPreloaderDevices());
-    this.hardwareSummaryReport.setPreloaderDevices(this.devicesStateService.getPreloaderDevices());
-    this.deviceIpSummary.setPreloaderDevices(this.devicesStateService.getPreloaderDevices());
-    this.devicesStateService.onGetDevices.subscribe(data => {
-      this.softwareSummaryReport.setPreloaderDevices(false);
-      this.hardwareSummaryReport.setPreloaderDevices(false);
-      this.deviceIpSummary.setPreloaderDevices(false);
-    })
     //  this.sub.add(getOnCompanies);
   }
 
@@ -125,7 +117,10 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
   }
   public getSoftByCompany(companyId) {
     this.softwareSummaryReport.setPreloaderSoft(true);
+    this.softwareSummaryReport.setPreloaderDevices(true);
+    this.hardwareSummaryReport.setPreloaderDevices(true);
     this.remoteConnectionReport.setPreloaderDevices(true);
+    this.deviceIpSummary.setPreloaderDevices(true);
     // this.deviceIpSummary.setPreloaderDevices(true);
     this.devicesService.getSoft(companyId).subscribe((resp: any) => {
       // $rootScope.softwareSummarySelectedCompany = resp;
@@ -133,6 +128,7 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.softwareSummaryReport.resetSoft();
 
       if (resp) {
+        this.devices = resp[companyId];
         resp[companyId].map((item: any) => {
           if (item.report) {
             item.report.softList.map((item) => {
@@ -155,13 +151,19 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
         this.hardwareSummaryReport.setDevices(resp[companyId]);
         this.deviceIpSummary.setDevices(resp[companyId]);
       }
+      this.hardwareSummaryReport.setPreloaderDevices(false);
+      this.softwareSummaryReport.setPreloaderDevices(false);
       this.softwareSummaryReport.setPreloaderSoft(false);
+      this.deviceIpSummary.setPreloaderDevices(false);
       //this.deviceIpSummary.setPreloaderDevices(false);
 
       this.remoteConnectionReport.setPreloaderDevices(false);
     }, err => {
       this.softwareSummaryReport.resetSoft();
       this.softwareSummaryReport.setPreloaderSoft(false);
+      this.softwareSummaryReport.setPreloaderDevices(false);
+      this.hardwareSummaryReport.setPreloaderDevices(false);
+      this.deviceIpSummary.setPreloaderDevices(false);
       // this.deviceIpSummary.setPreloaderDevices(false);
 
       this.remoteConnectionReport.setPreloaderDevices(false);
