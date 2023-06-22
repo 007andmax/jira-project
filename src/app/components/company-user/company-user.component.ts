@@ -118,10 +118,10 @@ export class CompanyUserComponent implements OnInit {
 
         const reqIndex = this.reqUsers.findIndex((item) => item.id === data.data.id);
         if (reqIndex > -1) this.reqUsers[reqIndex].onUpdate(data.data);
-        if (reqIndex === -1 && data.data.company.id === id) {
+        if (reqIndex === -1 && data.data.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === id)) {
           this.reqUsers.unshift(new User(data.data));
           this.users.unshift(new User(data.data));
-
+          this.header.count = this.header.count + 1;
 
           // this.onRelaodList();
         }
@@ -148,6 +148,7 @@ export class CompanyUserComponent implements OnInit {
         })
 
       }
+      this.cd.detectChanges();
 
     })
     this.userListService.addSubscription(getChangeCompanies);

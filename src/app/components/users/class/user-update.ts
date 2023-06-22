@@ -31,7 +31,7 @@ export class UserUpdate {
   customerCompaniesInfo: Array<UserCustomerCompaniesInfoUpdate> = [];
   userIndustryId: string;
   sendPortalInvitation: boolean;
-  constructor(data: UserProfile, user: User, isCustomerPortal) {
+  constructor(data: UserProfile, user: User) {
     this.phoneNumbers = data.phoneNumbers.map((item, index) => {
       if (!user.phoneNumbers || user.phoneNumbers && user.phoneNumbers.length === 0) {
         return new UserPhoneNumber(null, item.number, item.typeNumber, null);
@@ -62,6 +62,6 @@ export class UserUpdate {
     this.jobDescription = data.jobDescription;
     this.jobTypeId = data.jobTypeId;
     this.userIndustryId = data.userIndustryId;
-    this.customerCompaniesInfo = data.customerCompaniesInfo.filter(item => item.companyId).map(item => new UserCustomerCompaniesInfoUpdate(item, isCustomerPortal));
+    this.customerCompaniesInfo = data.customerCompaniesInfo.filter(item => item.companyId).map(item => new UserCustomerCompaniesInfoUpdate(item));
   }
 }

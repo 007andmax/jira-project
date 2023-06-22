@@ -238,7 +238,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
   onSave() {
     if (!this.validate.isValidate(this.user)) return;
     this.editBtn.setDisabled(true);
-    this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit(), this.customerPortalStateService.isCustomerPortal)).subscribe(data => {
+    this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit())).subscribe(data => {
       this.editBtn.setDisabled(false);
       this.close();
     }, err => {

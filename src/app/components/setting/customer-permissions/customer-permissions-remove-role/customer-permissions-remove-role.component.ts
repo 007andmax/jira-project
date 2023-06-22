@@ -41,7 +41,7 @@ export class CustomerPermissionsRemoveRoleComponent implements OnInit {
     let userForUpdate: UserProfile = new UserProfile();
     userForUpdate.onEdit(this.usersStateService.getAllUsers().find(item => item.id == user.id));
     userForUpdate.customerCompaniesInfo = user.customerCompanyInfo;
-    this.usersService.updateUser(userForUpdate.getUserForUpdate(this.usersStateService.getAllUsers().find(item => item.id == user.id), this.customerPortalStateService.isCustomerPortal)).subscribe(data => {
+    this.usersService.updateUser(userForUpdate.getUserForUpdate(this.usersStateService.getAllUsers().find(item => item.id == user.id))).subscribe(data => {
       //  this.close();
     })
   }
