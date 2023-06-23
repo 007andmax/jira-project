@@ -83,7 +83,7 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
     if (category.document) {
       this.selectedCategory = category;
       if (this.isShowHelpCenter) this.supportPageCategoriesStateService.setMode("EDIT");
-      this.router.navigate([`${this.companiesStateService.getCurrentCompany().domain}/support-page`, this.selectedCategory.id]);
+      this.router.navigate([`${this.companiesStateService.getCurrentCompany().techDomain}/support-page`, this.selectedCategory.id]);
       this.cd.detectChanges();
     }
   }
@@ -109,7 +109,7 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
   gotoHelpCenter() {
     this.isShowHelpCenter = true;
     this.selectedCategory = null;
-    this.router.navigate([`${this.companiesStateService.getCurrentCompany().domain}/support-page`]);
+    this.router.navigate([`${this.companiesStateService.getCurrentCompany().techDomain}/support-page`]);
     this.supportPageCategoriesStateService.toggleShowHelpCenter(true);
     this.cd.detectChanges();
   }

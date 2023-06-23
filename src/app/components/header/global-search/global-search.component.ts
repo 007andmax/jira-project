@@ -77,7 +77,7 @@ export class GlobalSearchComponent implements OnInit {
       this.companiesStateService.setCompanyRoutingId(item.id);
       // this.leftPanelStateService.goToState('company-dashboard');
       this.router.navigate(
-        [`${this.companiesStateService.getCurrentCompany().domain}/company/`, item.id, 'dashboard']);
+        [`${this.companiesStateService.getCurrentCompany().techDomain}/company/`, item.id, 'dashboard']);
 
       this.leftPanelStateService.openCompanPage();
 
@@ -85,7 +85,7 @@ export class GlobalSearchComponent implements OnInit {
     if (item.type === 'TICKETS') {
       if (!this.appService.isMobile) {
         this.ticketStateService.setTicketRoutingId(item.id);
-        const url = `/#/${this.companiesStateService.getCurrentCompany().domain}/ticket/${item.id}`;
+        const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/ticket/${item.id}`;
         window.open(url, '_blank');
       } else {
         this.ticketsStateService.onOpenTicket();

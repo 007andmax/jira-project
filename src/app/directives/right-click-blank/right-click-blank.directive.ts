@@ -14,7 +14,7 @@ export class RightClickBlankDirective {
     });
   }
   ngDoCheck() {
-    if (this.companiesStateService.getCurrentCompany()) this.eRef.nativeElement.setAttribute("href", `/#/${this.companiesStateService.getCurrentCompany().domain}/${this.link
+    if (this.companiesStateService.getCurrentCompany()) this.eRef.nativeElement.setAttribute("href", `/#/${this.companiesStateService.getCurrentCompany().techDomain}/${this.link
       }`)
   }
 }

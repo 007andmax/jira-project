@@ -184,7 +184,7 @@ export class SupportPageCategoryComponent implements OnInit {
     if (!this.isPreview && this.supportPageCategoryContent.newContent) this.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.newContent));
     if (this.isPreview) {
       this.elRef.nativeElement.querySelector(".support-page-body__preview").innerHTML = "";
-      this.elRef.nativeElement.querySelector(".support-page-body__preview").insertAdjacentHTML('afterbegin', this.supportPageCategoryContent.parseContent(`${environment.apiUrl}/#/${this.companiesStateService.getCurrentCompany().domain}/support-page`));
+      this.elRef.nativeElement.querySelector(".support-page-body__preview").insertAdjacentHTML('afterbegin', this.supportPageCategoryContent.parseContent(`${environment.apiUrl}/#/${this.companiesStateService.getCurrentCompany().techDomain}/support-page`));
       this.cd.detectChanges();
     }
   }

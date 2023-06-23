@@ -381,7 +381,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
             this.url = res.supportMailBox;
             this.cProfileForm.patchValue({
               name: res.name,
-              url: res.domain,
+              url: res.techDomain,
               suiteNumber: res.addresses.length === 0 ? '' : res.addresses[0].suiteNumber,
               address: res.addresses.length === 0 ? '' : res.addresses[0].address,
               postalCode: res.addresses.length === 0 ? '' : res.addresses[0].postalCode

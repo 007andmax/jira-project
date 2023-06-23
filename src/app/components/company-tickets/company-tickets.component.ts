@@ -131,7 +131,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
   editTicket(id) {
     if (!this.appService.isMobile) {
       this.ticketStateService.setTicketRoutingId(id);
-      const url = `/#/${this.companiesStateService.getCurrentCompany().domain}/ticket/${id}`;
+      const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/ticket/${id}`;
       window.open(url, '_blank');
     } else {
       this.idEditTicket = id;

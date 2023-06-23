@@ -23,7 +23,7 @@ export class SupportPageHelpCenterComponent implements OnInit {
   public showPreview(data) {
     if (data.document) {
       this.supportPageCategoriesStateService.setMode("PREVIEW");
-      this.router.navigate([`${this.companiesStateService.getCurrentCompany().domain}/support-page`, data.id]);
+      this.router.navigate([`${this.companiesStateService.getCurrentCompany().techDomain}/support-page`, data.id]);
     }
   }
   public trackById(index, item) {

@@ -13,7 +13,7 @@ export class CompanyDocumentsTableComponent extends DocumentsTableComponent {
       if (this.item.documentType === "DOCUMENT") this.documentsStateService.onInitGetTemplate(this.item);
       if (this.item.documentType === "TEMPLATE") {
         this.router.navigate(
-          [`${this.companiesStateService.getCurrentCompany().domain}/documents/add/`], {
+          [`${this.companiesStateService.getCurrentCompany().techDomain}/documents/add/`], {
           queryParams: {
             template: this.item.id,
             clone_document: this.item.id,
@@ -25,7 +25,7 @@ export class CompanyDocumentsTableComponent extends DocumentsTableComponent {
   }
   goToAddDocumentInCategory() {
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().domain}/documents/add`],
+      [`${this.companiesStateService.getCurrentCompany().techDomain}/documents/add`],
       {
         queryParams: {
           'id_category': this.item.categoryId
@@ -34,7 +34,7 @@ export class CompanyDocumentsTableComponent extends DocumentsTableComponent {
   }
   goToCloneDoucment() {
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().domain}/documents/add`],
+      [`${this.companiesStateService.getCurrentCompany().techDomain}/documents/add`],
       {
         queryParams: {
           'clone_document': this.item.id,

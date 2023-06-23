@@ -83,7 +83,7 @@ export class LeftPanelCustomerPortalUsersComponent implements OnInit {
   }
   goToCompanySection(companyId, section) {
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().domain}/company/`, companyId, section]);
+      [`${this.companiesStateService.getCurrentCompany().techDomain}/company/`, companyId, section]);
   }
   openPanel() {
     this.onOpenPanel.emit(null);

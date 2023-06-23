@@ -37,7 +37,7 @@ export class DocumentsTableComponent implements OnInit {
   navigateToCategory() {
     if (!this.item.isCategory) return;
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().domain}/documents/category/`, this.item.categoryId]);
+      [`${this.companiesStateService.getCurrentCompany().techDomain}/documents/category/`, this.item.categoryId]);
   }
   showTemplate() {
     if (!this.item.isCategory && this.getPermissions('VIEW_DOCUMENT')) this.documentsStateService.onInitGetTemplate(this.item);
@@ -67,7 +67,7 @@ export class DocumentsTableComponent implements OnInit {
     this.documentsStateService.editFolder(this.item);
   }
   previewDocument() {
-    const url = `/#/${this.companiesStateService.getCurrentCompany().domain}/documents/preview/${this.item.id}`;
+    const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/documents/preview/${this.item.id}`;
     window.open(url, '_blank');
   }
   public getPermissions(action) {
@@ -84,7 +84,7 @@ export class DocumentsTableComponent implements OnInit {
   }
   goToAddDocument() {
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().domain}/documents/add`],
+      [`${this.companiesStateService.getCurrentCompany().techDomain}/documents/add`],
       {
         queryParams: {
           'id_category': this.item.categoryId
@@ -93,7 +93,7 @@ export class DocumentsTableComponent implements OnInit {
   }
   goToCloneDocument() {
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().domain}/documents/add`],
+      [`${this.companiesStateService.getCurrentCompany().techDomain}/documents/add`],
       {
         queryParams: {
           'clone_document': this.item.id,
@@ -103,7 +103,7 @@ export class DocumentsTableComponent implements OnInit {
   }
   goToEditDocument() {
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().domain}/documents/edit/`, this.item.id],
+      [`${this.companiesStateService.getCurrentCompany().techDomain}/documents/edit/`, this.item.id],
       {
         queryParams: {
           companyId: this.companyId

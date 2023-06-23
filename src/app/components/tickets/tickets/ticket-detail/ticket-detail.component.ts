@@ -441,7 +441,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     if (!this.getPermissions('VIEW_COMPANIES')) return;
     this.companiesStateService.setCompanyRoutingId(this.ticketProfile.company.id);
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().domain}/company/`, this.ticketProfile.company.id, 'dashboard']);
+      [`${this.companiesStateService.getCurrentCompany().techDomain}/company/`, this.ticketProfile.company.id, 'dashboard']);
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

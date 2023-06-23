@@ -51,7 +51,7 @@ export class DocumentsTemplatesItemComponent implements OnInit {
   }
   editDocument(item) {
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().domain}/documents/edit/`, item.id]);
+      [`${this.companiesStateService.getCurrentCompany().techDomain}/documents/edit/`, item.id]);
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
@@ -67,7 +67,7 @@ export class DocumentsTemplatesItemComponent implements OnInit {
   }
   goToAddDocument() {
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().domain}/documents/add`],
+      [`${this.companiesStateService.getCurrentCompany().techDomain}/documents/add`],
       {
         queryParams: {
           'clone_document': this.item.id

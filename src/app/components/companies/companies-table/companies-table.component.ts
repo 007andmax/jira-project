@@ -113,14 +113,14 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   goToDashboard() {
     if (this.appService.checkMobile()) {
       this.router.navigate(
-        [`${this.companiesStateService.getCurrentCompany().domain}/company/`, this.company.id, 'dashboard']);
+        [`${this.companiesStateService.getCurrentCompany().techDomain}/company/`, this.company.id, 'dashboard']);
     } else {
       /* const url = this.router.serializeUrl(
          this.router.createUrlTree(
-           [`${this.companiesStateService.getCurrentCompany().domain}/company/`, this.company.id, 'dashboard'])
+           [`${this.companiesStateService.getCurrentCompany().techDomain}/company/`, this.company.id, 'dashboard'])
  
        );*/
-      const url = `/#/${this.companiesStateService.getCurrentCompany().domain}/company/${this.company.id}/dashboard`;
+      const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/company/${this.company.id}/dashboard`;
       window.open(url, '_blank');
     }
 
