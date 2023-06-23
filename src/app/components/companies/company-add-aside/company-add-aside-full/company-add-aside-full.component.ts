@@ -19,6 +19,7 @@ import { CrmCompanyServiceType } from 'src/app/components/setting/crm-settings/c
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { CrmCompanyJobTitle } from 'src/app/components/setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { CompanyProfileAddress } from '../../class/company-profile-address';
+import { MODE_EDIT_SUBSCRIPTION } from 'src/app/const/users';
 
 @Component({
   selector: 'company-add-aside-full',
@@ -41,6 +42,7 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
   jobTitleList: Array<CrmCompanyJobTitle> = [];
   listPersons: Array<ItemFilterPerson> = [];
   idUploadFile: string;
+  MODE_EDIT_SUBSCRIPTION = MODE_EDIT_SUBSCRIPTION;
   @Input() validate: CompanyValdiate = new CompanyValdiate();
   @Input() company: CompanyProfile = new CompanyProfile();
   @Input() serviceTypeDp: DropDownComponent;
@@ -216,7 +218,7 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
     this.company.paymentTerms = item.value;
   }
   public onChangeSubscribe(data) {
-    data.forEach(item => this.company.contacts[0].customerCompaniesInfo[0].defaultSubscriptions[item.field].enabled = item.selected);
+    this.company.contacts[0].customerCompaniesInfo[0].changeDefaultSubscriptions(data);
   }
   public onChangeTimeZone(data) {
     this.company.addresses[0].locale = (data) ? data.second : '';

@@ -13,6 +13,7 @@ import { CompanyAssociateModule } from '../../company-dashboard/company-dash-ass
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxMaskModule } from 'ngx-mask';
+import { UserDefaultSubscriptionModule } from '../../users/users-aside/user-default-subscription/user-default-subscription.module';
 
 
 
@@ -34,6 +35,7 @@ import { NgxMaskModule } from 'ngx-mask';
         TextAreaModule,
         NgbModule,
         NgxMaskModule.forRoot(),
+        UserDefaultSubscriptionModule
     ],
     exports: [CompanyAddAsideComponent]
 

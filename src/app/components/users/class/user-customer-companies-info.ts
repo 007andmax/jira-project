@@ -52,11 +52,11 @@ export class UserCustomerCompaniesInfo {
         }
     }
     /**
-* @description Set list  Default Subscriptions
-* @param {Array<UserDefaultSubscription>} data - Array Objects Default Subscriptions 
+* @description Set object Default Subscriptions
+* @param {UserDefaultSubscription} data - Object Default Subscriptions 
 */
     public changeDefaultSubscriptions(data) {
-        this.defaultSubscriptions = data;
+        this.defaultSubscriptions = new UserDefaultSubscription(data);
     }
     /**
 * @description Set Job Title Dto
