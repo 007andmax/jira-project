@@ -415,6 +415,7 @@
                 <div class="qt-input-block">
                     <div class="qt-input-block__label">Get Subscribe</div>
                     <app-company-subscription
+                        *ngIf="opened"
                         [companyId]="company.id"
                         [customerCompaniesInfo]="company.contacts[0].customerCompaniesInfo"
                         (subscribeChange)="onChangeSubscribe($event)"

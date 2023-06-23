@@ -191,8 +191,8 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     let getCompanyFromEdit = this.companiesStateService.getCompanyFromEdit().subscribe((data: CompanyProfile) => {
       this.company = new CompanyProfile();
       this.company.onEditMode(data);
+      console.log("this.company", this.company);
       if (this.company.addresses.length == 1) this.company.initShippingAdress();
-      if (this.company.contacts[0].defaultSubscriptions) this.companySubscriptionState.onEditMode(this.company.contacts[0].defaultSubscriptions);
       this.companyTimeZoneState.onEditMode(this.company.addresses[0].timeZone);
       let indexTerms = this.paymentTerms.findIndex(item => item.value === this.company.paymentTerms);
       if (indexTerms > -1) this.onSelectPaymentTerms(this.paymentTerms[indexTerms]);

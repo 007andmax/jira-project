@@ -31,9 +31,11 @@ export class CompanySubscriptionComponent implements OnInit, OnDestroy {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
+    console.log("this.customerCompaniesInfo", this.customerCompaniesInfo);
+    console.log("companyId", this.companyId);
     let customerCompaniesInfo = this.customerCompaniesInfo.find(item => item.companyId == this.companyId);
     console.log("customerCompaniesInfo", customerCompaniesInfo);
-    this.subscriptions.forEach(item => item.selected = customerCompaniesInfo.defaultSubscriptions[item.field].enabled);
+    if (customerCompaniesInfo) this.subscriptions.forEach(item => item.selected = customerCompaniesInfo.defaultSubscriptions[item.field].enabled);
     this.onInitClearState();
     this.onCheckEditItem();
   }

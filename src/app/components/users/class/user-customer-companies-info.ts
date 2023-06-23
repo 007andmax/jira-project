@@ -27,6 +27,31 @@ export class UserCustomerCompaniesInfo {
 
     }
     /**
+* @description Return Object for request add Copmany
+* @returns  {Object} This is the result
+*/
+    public getDataForAddRequest() {
+        return {
+            defaultSubscriptions: this.defaultSubscriptions.getDataForUpdate(),
+            isPrimaryContact: this.isPrimaryContact
+        }
+    }
+    /**
+* @description Return Object for request Update Copmany
+* @returns  {Object} This is the result
+*/
+    public getDataForUpdateRequest() {
+        return {
+            clientCompanyName: this.clientCompanyName,
+            "companyId": this.companyId,
+            "jobTitleDto": this.jobTitleDto,
+            "customerUserRole": this.customerUserRole,
+            defaultSubscriptions: this.defaultSubscriptions.getDataForUpdate(),
+            "hasAccess": this.hasAccess,
+            "isPrimaryContact": this.isPrimaryContact
+        }
+    }
+    /**
 * @description Set list  Default Subscriptions
 * @param {Array<UserDefaultSubscription>} data - Array Objects Default Subscriptions 
 */

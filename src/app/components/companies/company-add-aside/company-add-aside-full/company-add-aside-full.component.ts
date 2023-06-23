@@ -216,7 +216,7 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
     this.company.paymentTerms = item.value;
   }
   public onChangeSubscribe(data) {
-    data.forEach(item => this.company.contacts[0].defaultSubscriptions[item.field] = item.selected);
+    data.forEach(item => this.company.contacts[0].customerCompaniesInfo[0].defaultSubscriptions[item.field].enabled = item.selected);
   }
   public onChangeTimeZone(data) {
     this.company.addresses[0].locale = (data) ? data.second : '';
