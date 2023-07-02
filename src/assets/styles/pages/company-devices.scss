@@ -173,22 +173,22 @@
           max-width: 105px;
           min-width: 105px;
           padding: 12px 8px 12px 8px;
-          color: #4f5f79;
+          color: $gray-600;
           vertical-align: top;
           .agent-tag {
-            border: solid 1px #2ec866;
+            border: solid 1px $success;
             line-height: 1;
             width: fit-content;
             padding: 2px 4px;
             border-radius: 3px;
-            color: #2ec866;
-            background-color: #ffffff;
+            color: $success;
+            background-color: $white;
             letter-spacing: 0.3px;
             font-size: 8px;
             text-transform: uppercase;
             &.--offline {
-              color: #ff5263;
-              border: solid 1px #ff5263;
+              color: $error;
+              border: solid 1px $error;
             }
           }
         }
@@ -266,14 +266,14 @@
   &__aside{
     background: $white;
     position: fixed;
-    width: 480px;   
+    width: 480px;
     top: $header-height;
     right: 0;
     border-left: 1px solid $gray-400--old;
     height: calc(100vh - #{$header-height});
     z-index: 10;
     box-shadow: -8px 0 8px 0 rgba(0, 0, 0, 0.05);
-    @media screen and (min-width: 1920px) {      
+    @media screen and (min-width: 1920px) {
       width: 591px;
     }
   }
@@ -531,9 +531,9 @@
       padding: 16px;
       border-radius: 8px;
       background-color: $gray-100--old;
-      @media (max-width: 1920px) {      
+      @media (max-width: 1920px) {
         width: 175px;
-      }      
+      }
     }
     &__icon {
       width: 40px;

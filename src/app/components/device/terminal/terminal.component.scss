@@ -1053,7 +1053,7 @@ body {
     height: 16px;
     position: relative;
     border: 0.35rem solid rgba(0, 0, 0, 0.2);
-    border-top-color: black;
+    border-top-color: $gray-900;
     animation: spin 1s infinite linear;
   }
 ngb-tabset .tab-content{

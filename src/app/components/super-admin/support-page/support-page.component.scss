@@ -76,10 +76,10 @@ aside {
     height: 100%;
     border-left-width: 1px;
     border-left-style: solid;
-    border-left-color: black;
+    border-left-color: $gray-900;
     border-right-width: 1px;
     border-right-style: solid;
-    border-right-color: black;
+    border-right-color: $gray-900;
     cursor: ew-resize;
 
     -webkit-touch-callout: none;

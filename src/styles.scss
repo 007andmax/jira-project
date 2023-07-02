@@ -1735,7 +1735,7 @@ app-quotes-item {
       }
 
       .circle-avatar {
-        background-color: #7c77bc;
+        background-color: $purple-500;
         color: $white;
         border: none;
 
@@ -1905,7 +1905,7 @@ app-quotes-item {
   .companies-table {
     tr.--selected {
       td {
-        background-color: #f4fbff;
+        background-color: $gray-200;
         border-top-color: $primary-1 !important;
         border-bottom-color: $primary-1 !important;
 
@@ -2149,10 +2149,10 @@ app-quotes-item {
         background-color: transparent;
       }
       &::after {
-        background-color: #e9f7ff;
+        background-color: $gray-100;
       }
       &:hover::after {
-        background-color: #e9f7ff;
+        background-color: $gray-100;
         z-index: -2;
       }
     }
@@ -2167,7 +2167,7 @@ app-quotes-item {
         position: absolute;
         width: 62px;
         height: 30px;
-        background-color: #e9f7ff;
+        background-color: $gray-100;
         border-radius: 0;
         left: 50%;
         top: 50%;
@@ -2984,7 +2984,7 @@ ngb-typeahead-window {
 
 .invalid-feedback {
   position: absolute;
-  color: #D92D20;
+  color: $red-600;
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;
@@ -4410,7 +4410,7 @@ add-category-product {
   display: contents;
   .add-category-container {
     td {
-      background-color: #f4fbff !important;
+      background-color: $gray-200 !important;
     }
   }
 }
@@ -4494,7 +4494,7 @@ app-default-services-edit,app-inventory-edit-aside {
         content: "Taxes";
         left: 0;
         top: -28px;
-        color: #212b36;
+        color: $primary-2;
         font-size: 13px;
         line-height: 20px;
         letter-spacing: 0;

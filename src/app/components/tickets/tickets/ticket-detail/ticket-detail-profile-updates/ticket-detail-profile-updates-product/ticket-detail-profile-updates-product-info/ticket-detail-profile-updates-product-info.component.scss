@@ -86,8 +86,8 @@
       display: flex;
       align-items: center;
       padding: 0 24px 0 16px;
-      background-color: #F9FAFB;
-      border-bottom: 1px solid #EAECF0;
+      background-color: $gray-50;
+      border-bottom: 1px solid $gray-200;
     }
     &__ticket-body {
       padding: 16px 24px 16px 16px;
@@ -257,13 +257,13 @@
         font-size: 12px;
         padding: 5px 6px 5px 36px;
         font-weight: 600;
-        color: #212b36;
+        color: $primary-2;
         text-transform: unset;
         font-family: "Inter", sans-serif;
 
         pre {
             font-size: 12px;
-            margin: 0px;
+            margin: 0;
         }
     }
 
@@ -292,7 +292,7 @@
             font-weight: 500;
             font-size: 13px;
             line-height: 16px;
-            color: #667085;
+            color: $gray-500;
           }
           .icon__calendar {
             display: inline-block;

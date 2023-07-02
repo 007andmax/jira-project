@@ -701,7 +701,7 @@
     background-image: url("/assets/img/icons/folder.svg");
   }
   &__folder-active {
-    background-color: #ffffff;
+    background-color: $white;
     -webkit-mask-image: url("/assets/img/icons/folder.svg");
     mask-image: url("/assets/img/icons/folder.svg");
   }

@@ -178,14 +178,14 @@
 
       span {
         z-index: 0;
-        color: #fff;
+        color: $white;
         background: transparent;
         &::before {
           content: '';
           position: absolute;
           width: 30px;
           height: 30px;
-          background-color: #16a4fa;
+          background-color: $blue-light-600;
           border-radius: 50%;
           left: 50%;
           top: 50%;
@@ -215,7 +215,7 @@
       }
     }
     .bg-primary {
-      background: radial-gradient(circle at center, $blue-light-600 15px, #fff 16px);
+      background: radial-gradient(circle at center, $blue-light-600 15px, $white 16px);
       color: $white;
     }
   }
@@ -501,7 +501,7 @@ div.ngb-dp-today {
   }
   .btn-light {
     &:hover {
-      background: radial-gradient(circle at center, $blue-light-600 15px, #fff 16px);
+      background: radial-gradient(circle at center, $blue-light-600 15px, $white 16px);
       color: $white;
     }
   }

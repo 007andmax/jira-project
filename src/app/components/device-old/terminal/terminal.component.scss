@@ -28,7 +28,7 @@
     #cmd_detail_line {
       width: 40px;
       border-right: solid 1px $gray-300;
-      background-color: #f3f7f9;
+      background-color: $gray-100;
       list-style-type: none;
       padding: 10px 0;
       margin: 0;
@@ -87,7 +87,7 @@
   .cmn-tbs-content {
     &__list {
       padding: 8px 0;
-      border-bottom: 1px solid #e1e9f5;
+      border-bottom: 1px solid $gray-200;
       &:first-child {
         padding-top: 0;
       }
@@ -95,7 +95,7 @@
   }
   .history-cmd {
     .cmn-tbs-content__list {
-        border-bottom: 1px dotted #e1e9f5;
+        border-bottom: 1px dotted $gray-200;
     }
   }
   .cmd-details {
@@ -146,7 +146,7 @@
       font-size: 14px;
       font-weight: 600;
       line-height: 17px;
-      color: #344054;
+      color: $gray-700;
       &.active,
       &:hover {
         color: $blue-light-600;
@@ -264,7 +264,7 @@
     .cmd_line {
       width: 40px;
       border-right: solid 1px $gray-300;
-      background-color: #f3f7f9;
+      background-color: $gray-100;
       list-style-type: none;
       padding: 10px 0;
       margin: 0;
@@ -559,12 +559,12 @@
                 margin-left:10px;
                 font-size:13px;
                 &.btn-secondary{
-                  border: solid 1px #c5cdd5;
-                  background-color: #ffffff !important;
+                  border: solid 1px $gray-500--old;
+                  background-color: $white !important;
                 }
                 &.btn-remove{
-                  background-color: #ff5263;
-                  border-color:#ff5263;
+                  background-color: $error;
+                  border-color: $error;
                 }
               }
             }
@@ -602,8 +602,8 @@
               border: solid 1px $gray-200;
               background-color: $white;
               &.edit-cat{
-                background-color: #637382;
-                border-color: #637382;
+                background-color: $gray-700--old;
+                border-color: $gray-700--old;
               }
               &::before{
                 left: -14px;

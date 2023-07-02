@@ -8,11 +8,11 @@ html.no-d3-tooltip .nvtooltip .value {
   width: 100%;
 }
 .customer-ticket__report .services.border {
-  border: 1px dashed #d0edfe;
+  border: 1px dashed $blue-light-50;
   border-radius: 5px;
 }
 .customer-ticket__report .products.border {
-  border: 1px dashed #d5f4e0;
+  border: 1px dashed $green-50;
   border-radius: 5px;
 }
 .customer-ticket__report--summary, .customer-ticket__report--details-plus {
@@ -90,8 +90,8 @@ html.no-d3-tooltip .nvtooltip .value {
 .product-list-ticket {
   margin: 0 auto;
   padding: 0 15px 15px;
-  border: 1px solid #bbb;
-  box-shadow: 0px 0px 30px -8px rgba(0, 0, 0, 0.24);
+  border: 1px solid $gray-300;
+  box-shadow: 0 0 30px -8px rgba(0, 0, 0, 0.24);
   width: 940px;
   background-color: $white;
   min-height: 40px;
@@ -388,7 +388,7 @@ html.no-d3-tooltip .nvtooltip .value {
 }
 
 .run-report-content input::-webkit-input-placeholder {
-  color: #666f7f;
+  color: $gray-500;
 }
 
 .run-report-content i {
@@ -446,7 +446,7 @@ html.no-d3-tooltip .nvtooltip .value {
 }
 
 .reports-all .reports-all__column .report {
-  background-color: #fff;
+  background-color: $white;
   border-radius: 2px 3px 3px 2px;
   margin: 1px 30px 30px;
   width: 100%;
@@ -479,7 +479,7 @@ html.no-d3-tooltip .nvtooltip .value {
 .reports-all .report p:after {
   width: 44px;
   height: 2px;
-  background-color: #4ba9df;
+  background-color: $blue-light-600;
   content: '';
   position: absolute;
   bottom: -7px;
@@ -510,19 +510,19 @@ html.no-d3-tooltip .nvtooltip .value {
 }
 
 .reports-all .report ul li:hover {
-  color: #4ba9df;
+  color: $blue-light-600;
 }
 
 .reports-all .report ul li:hover:before {
-  border-color: #4ba9df;
+  border-color: $blue-light-600;
 }
 
 .reports-all .report ul li:before {
   content: '';
   width: 12px;
   height: 12px;
-  border: 2px solid #c2c5cb;
-  background-color: #ffffff;
+  border: 2px solid $gray-300;
+  background-color: $white;
   border-radius: 50%;
   position: absolute;
   left: -25px;

@@ -22,11 +22,11 @@ li.add-user {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    background-color: white;
+    background-color: $white;
   }
   tr {
     td {
-      background: #ffffff;
+      background: $white;
       padding: 0 8px 0 8px;
       height: 48px;
       border-top: 1px solid transparent;
