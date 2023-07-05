@@ -71,7 +71,7 @@
 }
 .--ofline {
     &::before {
-        background-color: $error;
+        background-color: $red-600;
     }
 }
 .logged-time {

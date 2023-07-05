@@ -74,7 +74,7 @@
                 li {
                     position: relative;
                     @include body-r;
-                    color: $primary-2;
+                    color: $gray-900;
 
                     &:not(:last-child) {
                         margin: 0 0 16px 0;
@@ -86,7 +86,7 @@
                         width: 3px;
                         height: 3px;
                         border-radius: 100%;
-                        background-color: $primary-1;
+                        background-color: $blue-light-600;
                         left: -14px;
                         top: 8px;
                     }
@@ -96,7 +96,7 @@
             &-header {
                 position: relative;
                 @include h4;
-                color: $primary-2;
+                color: $gray-900;
                 padding-bottom: 16px;
 
                 &::after {
@@ -106,7 +106,7 @@
                     left: 0;
                     right: 0;
                     height: 1px;
-                    border-bottom: dashed 1px $gray-400--old;
+                    border-bottom: dashed 1px $gray-200;
                 }
             }
         }
@@ -121,7 +121,7 @@
             height: 100%;
             overflow: auto;
             padding: 8px 0;
-            background-color: $gray-100--old;
+            background-color: $gray-25;
             width: 264px;
             position: fixed;
             left: 0;
@@ -136,7 +136,7 @@
               top: 0;
               width: 1px;
               height: 100%;
-              background-color: $gray-300--old;
+              background-color: $gray-100;
             }
             .container-categories {
               position: relative;
@@ -153,7 +153,7 @@
     margin: 0 0 8px 0;
 
     &__name {
-        color: $primary-2;
+        color: $gray-900;
         position: relative;
         display: flex;
         align-items: flex-start;
@@ -161,8 +161,8 @@
         padding: 10px 24px 10px 26px;
         border-right: 2px solid transparent;
         &.--active {
-            color: $primary-1;
-            border-color: $primary-1;
+            color: $blue-light-600;
+            border-color: $blue-light-600;
         }
 
         .icon__down-arrow {
@@ -226,7 +226,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-bottom: 1px dotted $gray-400--old;
+    border-bottom: 1px dotted $gray-200;
     padding-bottom: 24px;
 }
 
@@ -269,7 +269,7 @@
             @include сaption-l__m;
             font-stretch: normal;
             font-style: normal;
-            color: $primary-2;
+            color: $gray-900;
 
             .close {
                 position: absolute;

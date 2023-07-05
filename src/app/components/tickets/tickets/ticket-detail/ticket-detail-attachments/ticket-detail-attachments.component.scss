@@ -14,7 +14,7 @@
         width: 100%;
         display: flex;
         border-radius: 16px;
-        border: solid 1px $gray-400--old;
+        border: solid 1px $gray-200;
         background-color: $white;
         padding: 9.5px 12px;
         align-items: center;
@@ -43,7 +43,7 @@
         }
 
         &__header {
-            border-bottom: 1px solid $gray-400--old;
+            border-bottom: 1px solid $gray-200;
             margin-bottom: 14px;
             display: flex;
             justify-content: space-between;

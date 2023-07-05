@@ -27,7 +27,7 @@ body {
   display: initial;
   font-family: "Inter", sans-serif;
   @include body-m;
-  color: $gray-800--old;
+  color: $gray-600;
   background-color: $white;
 }
 html body {
@@ -69,7 +69,7 @@ body .left-panel-full {
 /* End Datepicker */
 
 .text-muted {
-  color: $gray-800--old;
+  color: $gray-600;
   font-size: 13px;
 }
 
@@ -101,7 +101,7 @@ body .left-panel-full {
     height: 40px;
     padding: 0 12px;
     font-size: 13px;
-    border: 1px solid $gray-500--old;
+    border: 1px solid $gray-300;
     border-radius: 4px;
   }
   .form-group {
@@ -118,18 +118,18 @@ body .left-panel-full {
     padding: 10px 16px;
     &.--red {
       background: $white;
-      color: $error;
+      color: $red-600;
     }
   }
   .button-verification {
     background: none;
-    color: $primary-1;
+    color: $blue-light-600;
     font-size: 16px;
     font-weight: 400;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-top: 1px solid $gray-400--old;
+    border-top: 1px solid $gray-200;
     padding: 14px 0;
     height: auto;
     width: 100%;
@@ -149,7 +149,7 @@ body .left-panel-full {
 .new-users-content__modal--content textarea::placeholder,
 .recurring-tickets-content__modal--content textarea::placeholder,
 .password-content__modal--content textarea::placeholder {
-  color: $gray-600--old;
+  color: $gray-400;
 }
 .form-control[disabled],
 .form-control[readonly],
@@ -162,29 +162,29 @@ fieldset[disabled] .form-control {
   }
 }
 .form-control::-moz-placeholder {
-  color: $gray-500--old;
+  color: $gray-300;
   opacity: 1;
 }
 
 .form-control:-ms-input-placeholder {
-  color: $gray-500--old;
+  color: $gray-300;
 }
 
 .form-control::-webkit-input-placeholder {
-  color: $gray-500--old;
+  color: $gray-300;
 }
 
 .form-control-search::-moz-placeholder {
-  color: $gray-500--old;
+  color: $gray-300;
   opacity: 1;
 }
 
 .form-control-search:-ms-input-placeholder {
-  color: $gray-500--old;
+  color: $gray-300;
 }
 
 .form-control-search::-webkit-input-placeholder {
-  color: $gray-500--old;
+  color: $gray-300;
 }
 
 .recurring-tickets-content__modal .checkbox-wrapper .with-checkbox,
@@ -255,7 +255,7 @@ html::-webkit-scrollbar {
 }
 
 .custom-scroll::-webkit-scrollbar-thumb:hover {
-  background-color: $gray-500--old;
+  background-color: $gray-300;
 }
 
 .dropdown-assign-ticket .users-list::-webkit-scrollbar-thumb {
@@ -311,7 +311,7 @@ p {
 .new-link {
   font-weight: 400;
   font-size: 12px;
-  color: $primary-1 !important;
+  color: $blue-light-600 !important;
   text-decoration: none;
   cursor: pointer;
   font-style: normal;
@@ -330,7 +330,7 @@ label {
   font-size: 14px;
   line-height: 12px;
   font-weight: 400;
-  color: $gray-800--old;
+  color: $gray-600;
   cursor: inherit;
 }
 .radio,
@@ -345,7 +345,7 @@ label {
   position: relative;
   display: inline-block;
   padding-left: 1.5rem;
-  color: $gray-800--old;
+  color: $gray-600;
   cursor: pointer;
   font-size: 14px;
   -webkit-user-select: none;
@@ -408,7 +408,7 @@ textarea {
 .new-companies-content__modal {
   .switch-link {
     @include body-m__sb;
-    color: $primary-2;
+    color: $gray-900;
   }
 
   .light-dropdown .icn-remove-old {
@@ -439,7 +439,7 @@ textarea {
       border-top-right-radius: 4px;
       border-bottom-left-radius: 0;
       border-top-left-radius: 0;
-      border-right: 1px solid $gray-500--old;
+      border-right: 1px solid $gray-300;
       border-left: none;
     }
   }
@@ -478,7 +478,7 @@ textarea {
   display: flex;
   justify-content: flex-start;
   padding: 8px 12px;
-  border: 1px dashed $gray-500--old;
+  border: 1px dashed $gray-300;
   border-radius: 6px;
 
   .text {
@@ -572,7 +572,7 @@ h6,
 .h5,
 .h6 {
   font-family: inherit;
-  color: $gray-800--old;
+  color: $gray-600;
   margin-top: revert;
   margin-bottom: revert;
   font-weight: bold;
@@ -646,13 +646,13 @@ h6,
   display: inline-block;
   width: 26px;
   height: 26px;
-  background-color: $gray-500--old;
+  background-color: $gray-300;
 }
 .avatar-36 {
   display: inline-block;
   width: 36px;
   height: 36px;
-  background-color: $gray-500--old;
+  background-color: $gray-300;
 }
 .avatar-26.remove:hover {
   background-color: #d2dae4;
@@ -730,7 +730,7 @@ h6,
   width: 100%;
   padding: 0;
   border: none;
-  background: $gray-200--old;
+  background: $gray-50;
   box-shadow: none;
   font-weight: 600;
 }
@@ -738,7 +738,7 @@ h6,
   left: 30px;
 }
 .company-report .top-product-list-ticket {
-  color: $primary-2;
+  color: $gray-900;
   border: none;
   padding: 0 15px;
 }
@@ -851,15 +851,15 @@ h6,
   font-weight: $fw-medium;
 }
 .download-agent-modal .btn {
-  background-color: $primary-1;
+  background-color: $blue-light-600;
   width: 100%;
   text-align: left;
   height: 48px;
   margin-bottom: 10px;
 }
 .download-agent-modal .btn-primary.not-active {
-  background-color: $gray-800--old;
-  border-color: $gray-800--old;
+  background-color: $gray-600;
+  border-color: $gray-600;
   cursor: default;
   pointer-events: none;
 }
@@ -868,7 +868,7 @@ h6,
   text-align: center;
   font-size: 12px;
   font-weight: $fw-medium;
-  color: $gray-600--old;
+  color: $gray-400;
   line-height: 1;
 }
 .download-agent-modal .btn span {
@@ -885,9 +885,9 @@ h6,
 /* End Download agent modal */
 .primary-default.btn {
   background-color: transparent;
-  color: $primary-1;
+  color: $blue-light-600;
   border-radius: 4px;
-  border: 1px solid $primary-1;
+  border: 1px solid $blue-light-600;
   text-align: center;
   font-size: 15px;
   font-weight: 500;

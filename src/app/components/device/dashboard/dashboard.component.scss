@@ -23,9 +23,9 @@
         top: 0;
 
         input {
-            border: solid 1px $gray-500--old;
+            border: solid 1px $gray-300;
             @include border-radius(4px);
-            color: $gray-800--old;
+            color: $gray-600;
         }
     }
 }
@@ -118,7 +118,7 @@
                         font-weight: 600;
                         line-height: 1.54;
                         letter-spacing: normal;
-                        color: $gray-800--old;
+                        color: $gray-600;
                         padding: 0 18px;
                         background: url(../../../../assets/img/device/bullet.svg) no-repeat 5px 5px;
                         margin: 6px 0;
@@ -129,7 +129,7 @@
                         flex-direction: row;
                         span{
                             font-weight: 400;
-                            color: $gray-600--old;
+                            color: $gray-400;
                             margin-right: 2px;
                             display: inline-block;
                             vertical-align: bottom;
@@ -142,7 +142,7 @@
                             font-weight: 600;
                             line-height: 1.54;
                             letter-spacing: normal;
-                            color: $gray-800--old;
+                            color: $gray-600;
                         }
 
                         span.edit-field {
@@ -178,7 +178,7 @@
                                 content: attr(data-tooltip);
                                 text-align: center;
                                 border-radius: 3px;
-                                background-color: $gray-800--old;
+                                background-color: $gray-600;
                                 font-size: 12px;
                                 font-weight: 500;
                                 font-style: normal;
@@ -208,7 +208,7 @@
                                 position: absolute;
                                 pointer-events: none;
                                 border-color: rgba(79, 95, 121, 0);
-                                border-top-color: $gray-800--old;
+                                border-top-color: $gray-600;
                                 border-width: 6px;
                                 margin-left: -78px;
                                 bottom: 32px;
@@ -229,7 +229,7 @@
                                 }
 
                                 .sub-label-field {
-                                    border: solid 1px $gray-500--old;
+                                    border: solid 1px $gray-300;
                                     outline: 0;
                                 }
                             }
@@ -247,7 +247,7 @@
             }
 
             .label-field:hover, .label-field:focus {
-                border: solid 1px $gray-500--old;
+                border: solid 1px $gray-300;
                 outline: 0;
             }
 
@@ -258,7 +258,7 @@
             }
 
             .sub-label-field:hover, .sub-label-field:focus {
-                border: solid 1px $gray-500--old;
+                border: solid 1px $gray-300;
                 outline: 0;
             }
 
@@ -318,19 +318,19 @@
                             }
 
                             &.c-drive {
-                                border-color: $success;
+                                border-color: $green-600;
                                 background-color: rgba(46, 200, 102, 0.05);
                             }
 
                             &:nth-child(1) {
                                 .progress-circle {
                                     .value-bar {
-                                        background-color: $secondary-1;
+                                        background-color: $blue-dark-800;
                                     }
 
                                     &.over50 {
                                         .first50-bar {
-                                            background-color: $secondary-1;
+                                            background-color: $blue-dark-800;
                                         }
                                     }
 
@@ -452,11 +452,11 @@
                             position: relative;
                             height: 28px;
                             @include border-radius(4px);
-                            background-color: $gray-100--old;
+                            background-color: $gray-25;
                             .tag {
                                 font-size: 12px;
                                 line-height: 1.33;
-                                color: $gray-800--old;
+                                color: $gray-600;
                             }
 
                             .tag-close {
@@ -509,7 +509,7 @@
                                 flex-direction: column;
                                 position: relative;
                                 padding-left: 15px;
-                                border-left: 1px solid $primary-1;
+                                border-left: 1px solid $blue-light-600;
                                 padding-bottom: 13px;
 
                                 .activity-name {
@@ -528,13 +528,13 @@
 
                                     .time-by {
                                         font-size: 10px;
-                                        color: $gray-600--old;
+                                        color: $gray-400;
                                     }
                                 }
 
                                 .device-added-by {
                                     font-size: 12px;
-                                    color: $gray-800--old;
+                                    color: $gray-600;
                                     line-height: 1.33;
                                 }
 
@@ -586,7 +586,7 @@
                             width: 160px;
                             @include border-radius(6px);
                             border: 1px dashed rgba(255, 185, 55, 0.4);
-                            background-color: $gray-100--old;
+                            background-color: $gray-25;
                             display: -ms-flexbox;
                             display: -webkit-flex;
                             display: flex;
@@ -598,7 +598,7 @@
                             cursor: pointer;
 
                             &:hover {
-                                border: 1px solid $warning;
+                                border: 1px solid $yellow-600;
                                 -ms-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
                                 -o-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
                                 -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
@@ -619,7 +619,7 @@
                             p {
                                 margin: 2px 0;
                                 font-size: 13px;
-                                color: $gray-800--old;
+                                color: $gray-600;
                                 height: 100px;
                             }
 
@@ -660,7 +660,7 @@
                                     .name {
                                         font-size: 12px;
                                         font-weight: 600;
-                                        color: $gray-800--old;
+                                        color: $gray-600;
 
                                     }
                                 }
@@ -677,7 +677,7 @@
                                 a {
                                     font-size: 12px;
                                     line-height: 1;
-                                    color: $gray-800--old;
+                                    color: $gray-600;
                                     border-radius: 3px;
                                     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
                                     background-color: $white;
@@ -1153,7 +1153,7 @@ ngb-tabset {
 .computerManufacturer{
     /deep/ .light-dropdown:hover{
       input{
-        border: 1px solid $gray-500--old !important;
+        border: 1px solid $gray-300 !important;
       }
       .report-caret-icon {
           display: inline-block;
@@ -1182,7 +1182,7 @@ ngb-tabset {
  .computerModel{
     /deep/ .light-dropdown:hover{
       input{
-        border: 1px solid $gray-500--old !important;
+        border: 1px solid $gray-300 !important;
       }
       .report-caret-icon {
           display: inline-block;

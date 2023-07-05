@@ -16,7 +16,7 @@
     border-radius: 4px;
     margin-left: 8px;
     display: flex;
-    background-color: $gray-700--old;
+    background-color: $gray-500;
     align-items: center;
     justify-content: center;
 
@@ -30,7 +30,7 @@
     }
   }
   &__btn-del {
-    background-color: $gray-400--old;
+    background-color: $gray-200;
   }
 }
 .product-item__discount-input {

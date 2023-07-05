@@ -8,7 +8,7 @@
   }
   &__label {
     width: 100%;
-    border: 1px dotted $gray-500--old;
+    border: 1px dotted $gray-300;
     border-radius: 4px;
     display: block;
     cursor: pointer;
@@ -23,7 +23,7 @@
     }
   }
   &__title {
-    color: $gray-800--old;
+    color: $gray-600;
 
     @media (max-width: 767px) {
       display: none;
@@ -31,7 +31,7 @@
   }
   &__link {
     text-decoration: underline;
-    color: $primary-1;
+    color: $blue-light-600;
   }
 
   &__attach-icon {
@@ -45,7 +45,7 @@
   }
 
   &__mobile-text {
-    color: $primary-2;
+    color: $gray-900;
     @include сaption-l__sb;
     display: none;
 
@@ -135,7 +135,7 @@
       margin: 0;
       margin-bottom: 0.25rem;
       .file-error {
-        color: $error;
+        color: $red-600;
       }
     }
 

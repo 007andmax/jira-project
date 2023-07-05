@@ -4,7 +4,7 @@
   &__title {
     font-size: 10px;
     font-weight: 700;
-    color: $gray-800--old;
+    color: $gray-600;
     padding: 22px 16px 16px;
     text-transform: uppercase;
   }
@@ -33,7 +33,7 @@
     &.--online {
       .users-aside__user-avatar {
         &:before {
-          background-color: $success;
+          background-color: $green-600;
         }
       }
     }
@@ -41,7 +41,7 @@
     &.--away {
       .users-aside__user-avatar {
         &:before {
-          background-color: $warning;
+          background-color: $yellow-600;
         }
       }
     }
@@ -62,7 +62,7 @@
     margin-right: 10px;
     position: relative;
     background-color: $white;
-    color: $gray-800--old;
+    color: $gray-600;
     font-size: 10px;
     font-weight: 600;
     &.--letter-avatar {
@@ -74,7 +74,7 @@
       width: 8px;
       height: 8px;
       border: solid 2px $white;
-      background-color: $gray-600--old;
+      background-color: $gray-400;
       border-radius: 50%;
       top: calc(69%);
       left: calc(78%);
@@ -87,7 +87,7 @@
   }
   &__user-email {
     line-height: 1.33;
-    color: $gray-600--old;
+    color: $gray-400;
   }
 
   &__user-menu {

@@ -18,7 +18,7 @@ main {
                     .terminal-box {
                         float: left;
                         width: 100%;
-                        background-color: $primary-2;
+                        background-color: $gray-900;
                         padding: 22px 20px;
                         font-size: 13px;
                         font-stretch: normal;
@@ -56,9 +56,9 @@ main {
                         .editCmd {
                             width: 100%;
                             @include border-radius(4px);
-                            border: solid 1px $gray-500--old;
+                            border: solid 1px $gray-300;
                             padding: 10px 14px;
-                            color: $gray-800--old !important;
+                            color: $gray-600 !important;
                             font-weight: 500;
                             height: 120px;
                             // max-height: 150px !important;
@@ -108,7 +108,7 @@ main {
             }
             &.terminal-sidebar {
                 right: 0 !important;
-                border-left: 1px solid $gray-400--old;
+                border-left: 1px solid $gray-200;
                 -ms-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
                 -o-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
                 -webkit-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
@@ -133,7 +133,7 @@ main {
                             .cmn-tbs-content {
                                 & > ul {
                                     & > li {
-                                        border-bottom: 1px dotted $gray-500--old;
+                                        border-bottom: 1px dotted $gray-300;
                                         padding: 8px 0;
                                         .terminal-cmd-opt {
                                             display: -ms-flexbox;
@@ -192,7 +192,7 @@ main {
                                                                 font-size: 13px;
                                                                 line-height: 1.54;
                                                                 letter-spacing: normal;
-                                                                color: $gray-800--old;
+                                                                color: $gray-600;
                                                                 padding: 7px 15px;
                                                                 border: none;
                                                                 img {
@@ -233,7 +233,7 @@ main {
                                 &.history-cmd {
                                     & > ul {
                                         & > li {
-                                            border-bottom: 1px dotted $gray-500--old;
+                                            border-bottom: 1px dotted $gray-300;
                                             padding: 8px 0;
                                             .terminal-cmd-opt {
                                                 margin-bottom: 0;
@@ -245,7 +245,7 @@ main {
                                                         line-height: 1.2;
                                                         letter-spacing: normal;
                                                         text-align: right;
-                                                        color: $gray-800--old;
+                                                        color: $gray-600;
                                                     }
                                                 }
                                                 .cmd-list-left {
@@ -257,7 +257,7 @@ main {
                                                     h5 {
                                                         margin: 0;
                                                         max-width: calc(100% - 20px);
-                                                        color: $gray-800--old;
+                                                        color: $gray-600;
                                                         font-size: 12px;
                                                         font-weight: 600;
                                                     }
@@ -274,7 +274,7 @@ main {
                                                     font-style: normal;
                                                     line-height: 1.33;
                                                     letter-spacing: normal;
-                                                    color: $gray-800--old;
+                                                    color: $gray-600;
                                                 }
                                             }
                                         }
@@ -291,7 +291,7 @@ main {
                         -webkit-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
                         -moz-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
                         box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-                        border: 1px solid $gray-400--old;
+                        border: 1px solid $gray-200;
                         background-color: $white;
                         @include border-radius(5px);
                         padding: 24px;
@@ -336,7 +336,7 @@ main {
                                         min-width: inherit;
                                         padding: 13px 16px;
                                         &.btn-secondary {
-                                            border: solid 1px $gray-500--old;
+                                            border: solid 1px $gray-300;
                                             background-color: $white !important;
                                         }
                                     }
@@ -345,12 +345,12 @@ main {
                             #cmd {
                                 display: flex;
                                 border-radius: 4px;
-                                border: solid 1px $gray-500--old;
+                                border: solid 1px $gray-300;
                                 height: 317px;
                                 #cmd_line {
                                     width: 40px;
-                                    border-right: solid 1px $gray-500--old;
-                                    background-color: $gray-200--old;
+                                    border-right: solid 1px $gray-300;
+                                    background-color: $gray-50;
                                     list-style-type: none;
                                     padding: 10px 0;
                                     margin: 0;
@@ -364,7 +364,7 @@ main {
                                         margin: 0;
                                         padding: 0;
                                         text-align: center;
-                                        color: $primary-2;
+                                        color: $gray-900;
                                         font-weight: 500;
                                         &::before {
                                             width: 0;
@@ -382,7 +382,7 @@ main {
                 .dropdown{
                     .dropdown-menu{
                         box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-                        border: solid 1px $gray-400--old;
+                        border: solid 1px $gray-200;
                         background-color: $white;
                         border-radius: 4px;
                         padding-top: 8px;
@@ -394,18 +394,18 @@ main {
                                 font-style: normal;
                                 line-height: 1.54;
                                 letter-spacing: normal;
-                                color: $primary-2;
+                                color: $gray-900;
                                 height: auto;
                                 &:hover{
                                     background-color: $background;
                                 }
                                 &:last-child{
-                                    border-top:1px solid  $gray-400--old;
+                                    border-top:1px solid  $gray-200;
                                     font-size: 12px;
                                     font-style: normal;
                                     line-height: 1.33;
                                     letter-spacing: normal;
-                                    color: $primary-1;
+                                    color: $blue-light-600;
                                     font-weight: 600;
                                     padding: 12px 15px;
                                 }
@@ -433,8 +433,8 @@ main {
                     align-items: center;
                     justify-content: space-between;
                     padding: 14px 32px;
-                    background-color: $gray-100--old;
-                    border-bottom: 1px solid $gray-400--old;
+                    background-color: $gray-25;
+                    border-bottom: 1px solid $gray-200;
                     h2 {
                         margin: 0;
                         font-size: 20px;
@@ -456,11 +456,11 @@ main {
                                 &.list-unstyled {
                                     &.script-list {
                                         @include border-radius(4px);
-                                        border: solid 1px $gray-400--old;
+                                        border: solid 1px $gray-200;
                                         background-color: $white;
                                         li {
                                             padding: 16px 16px 20px 16px;
-                                            border-bottom: 1px solid $gray-400--old;
+                                            border-bottom: 1px solid $gray-200;
                                             display: -webkit-flex;
                                             display: -ms-flexbox;
                                             display: flex;
@@ -486,7 +486,7 @@ main {
                                                     font-style: normal;
                                                     line-height: 1.54;
                                                     letter-spacing: normal;
-                                                    color: $gray-800--old;
+                                                    color: $gray-600;
                                                     max-width: 100%;
                                                     display: block;
                                                     white-space: nowrap;
@@ -494,15 +494,15 @@ main {
                                                     text-overflow: ellipsis;
                                                     &.clone-cat {
                                                         border-radius: 3px;
-                                                        border: solid 1px $gray-400--old;
-                                                        background-color: $gray-100--old;
+                                                        border: solid 1px $gray-200;
+                                                        background-color: $gray-25;
                                                         font-size: 10px;
                                                         font-weight: 500;
                                                         font-stretch: normal;
                                                         font-style: normal;
                                                         line-height: 1.2;
                                                         letter-spacing: normal;
-                                                        color: $gray-800--old;
+                                                        color: $gray-600;
                                                         padding: 3px 8px;
                                                         margin-top: 3px;
                                                     }
@@ -519,7 +519,7 @@ main {
                                                     width: 32px;
                                                     height: 32px;
                                                     @include border-radius(8px);
-                                                    border: solid 1px $gray-400--old;
+                                                    border: solid 1px $gray-200;
                                                     background-color: $white;
                                                     display: -webkit-flex;
                                                     display: -ms-flexbox;
@@ -537,8 +537,8 @@ main {
                                                         top: -9px;
                                                     }
                                                     &:hover {
-                                                        background-color: $gray-200--old;
-                                                        border-color: $gray-200--old;
+                                                        background-color: $gray-50;
+                                                        border-color: $gray-50;
                                                     }
                                                     img {
                                                         max-width: 16px;
@@ -557,7 +557,7 @@ main {
                                         margin: 0;
                                         width: auto;
                                         margin: 0 auto;
-                                        border: 1px solid $gray-400--old;
+                                        border: 1px solid $gray-200;
                                         float: none;
                                         li {
                                             padding: 0;
@@ -581,10 +581,10 @@ main {
                                                 line-height: 1.33;
                                                 letter-spacing: normal;
                                                 text-align: center;
-                                                color: $gray-800--old;
+                                                color: $gray-600;
                                                 border: none;
                                                 padding: 0;
-                                                border-right: solid 1px $gray-400--old;
+                                                border-right: solid 1px $gray-200;
                                                 border-bottom: none;
                                             }
                                             &:last-child {
@@ -599,7 +599,7 @@ main {
                                             }
                                             &.current {
                                                 a {
-                                                    background-color: $primary-1;
+                                                    background-color: $blue-light-600;
                                                     color: $white;
                                                 }
                                             }
@@ -623,13 +623,13 @@ main {
                     }
                     .clone-cat {
                         @include border-radius(3px);
-                        border: solid 1px $gray-400--old;
+                        border: solid 1px $gray-200;
                         background-color: $white;
                         font-size: 10px;
                         font-style: normal;
                         line-height: 1.2;
                         letter-spacing: normal;
-                        color: $gray-800--old;
+                        color: $gray-600;
                         padding: 3px 8px;
                         font-weight: 600;
                     }
@@ -663,7 +663,7 @@ main {
                                 padding: 10px 20px;
                                 font-size: 13px;
                                 &.btn-secondary {
-                                    border: solid 1px $gray-500--old;
+                                    border: solid 1px $gray-300;
                                     background-color: $white !important;
                                 }
                             }
@@ -690,12 +690,12 @@ main {
                     #cmd_detail {
                         display: flex;
                         border-radius: 4px;
-                        border: solid 1px $gray-500--old;
+                        border: solid 1px $gray-300;
                         height: 317px;
                         #cmd_detail_line {
                             width: 40px;
-                            border-right: solid 1px $gray-500--old;
-                            background-color: $gray-200--old;
+                            border-right: solid 1px $gray-300;
+                            background-color: $gray-50;
                             list-style-type: none;
                             padding: 10px 0;
                             margin: 0;
@@ -709,7 +709,7 @@ main {
                                 margin: 0;
                                 padding: 0;
                                 text-align: center;
-                                color: $primary-2;
+                                color: $gray-900;
                                 &::before {
                                     width: 0;
                                 }
@@ -736,11 +736,11 @@ main {
                 font-style: normal;
                 line-height: 1.33;
                 letter-spacing: normal;
-                color: $gray-800--old;
+                color: $gray-600;
                 padding-left: 25px;
                 min-height: 16px;
                 &:hover {
-                    color: $primary-1;
+                    color: $blue-light-600;
                 }
                 &.clear {
                     margin-left: 0;
@@ -754,7 +754,7 @@ main {
                     cursor: pointer;
                     &.active {
                         background: url("/assets/img/device/command-line-blue.svg") no-repeat left 0;
-                        color: $primary-1;
+                        color: $blue-light-600;
                     }
                 }
                 &.Power {
@@ -762,7 +762,7 @@ main {
                     cursor: pointer;
                     &.active {
                         background: url("/assets/img/device/Powershell_Blue.svg") no-repeat left 0;
-                        color: $primary-1;
+                        color: $blue-light-600;
                     }
                 }
             }
@@ -770,7 +770,7 @@ main {
         .cmn-tbs-content {
             &.command {
                 li {
-                    border-bottom: 1px dotted $gray-400--old;
+                    border-bottom: 1px dotted $gray-200;
                     padding: 7.5px 0;
                     position: relative;
                     padding-right: 15px;
@@ -778,7 +778,7 @@ main {
                 h5 {
                     margin-top: 0;
                     font-size: 12px;
-                    color: $gray-800--old;
+                    color: $gray-600;
                     line-height: 1.33;
                     margin-bottom: 3px;
                 }
@@ -789,7 +789,7 @@ main {
                     font-style: normal;
                     line-height: 1.33;
                     letter-spacing: normal;
-                    color: $gray-800--old;
+                    color: $gray-600;
                 }
                 .copy {
                     font-size: 0;
@@ -812,7 +812,7 @@ main {
                     font-size: 12px;
                     font-weight: normal;
                     line-height: 1.33;
-                    color: $gray-800--old;
+                    color: $gray-600;
                 }
             }
         }
@@ -835,7 +835,7 @@ body {
                         margin-bottom: 0;
                         .modal-header {
                             padding: 10px 16px 10px 32px;
-                            border-bottom: 1px solid $gray-400--old;
+                            border-bottom: 1px solid $gray-200;
                             display: -ms-flexbox;
                             display: -webkit-flex;
                             display: flex;
@@ -881,12 +881,12 @@ body {
                                     margin-left:10px;
                                     font-size:13px;
                                     &.btn-secondary{
-                                        border: solid 1px $gray-500--old;
+                                        border: solid 1px $gray-300;
                                         background-color: $white !important;
                                     }
                                     &.btn-remove{
-                                        background-color: $error;
-                                        border-color:$error;
+                                        background-color: $red-600;
+                                        border-color:$red-600;
                                     }
                                 }
                             }
@@ -925,11 +925,11 @@ body {
                                 align-items: center;
                                 justify-content: center;
                                 @include border-radius(4px);
-                                border: solid 1px $gray-400--old;
+                                border: solid 1px $gray-200;
                                 background-color: $white;
                                 &.edit-cat{
-                                    background-color: $gray-700--old;
-                                    border-color: $gray-700--old;
+                                    background-color: $gray-500;
+                                    border-color: $gray-500;
                                 }
                                 &::before{
                                     left: -14px;
@@ -942,8 +942,8 @@ body {
                                 }
                                 &.delete{
                                     &:hover{
-                                        background-color: $gray-200--old;
-                                        border-color:$gray-200--old;
+                                        background-color: $gray-50;
+                                        border-color:$gray-50;
                                     }
                                 }
                             }
@@ -967,8 +967,8 @@ body {
                         &.btn.btn-small {
                             margin-left: 0 !important;
                             background-color: transparent;
-                            border: 1px solid $primary-1;
-                            color: $primary-1;
+                            border: 1px solid $blue-light-600;
+                            color: $blue-light-600;
                             font-size: 12px !important;
                             padding: 9px 8px !important;
                             display: -ms-flexbox !important;
@@ -998,17 +998,17 @@ body {
             //     font-style: normal;
             //     line-height: 1.54;
             //     letter-spacing: normal;
-            //     color: $gray-800--old;
+            //     color: $gray-600;
             //     text-transform: capitalize;
             //     margin-bottom: 10px;
             //     &.active {
-            //         color: $primary-1;
+            //         color: $blue-light-600;
             //     }
             // }
             .label {
                 margin-bottom: 0;
                 padding: 0 0 10px 0;
-                color: $gray-800--old;
+                color: $gray-600;
                 display: -ms-flexbox;
                 display: -webkit-flex;
                 display: flex;
@@ -1022,12 +1022,12 @@ body {
                     font-weight: 600;
                     line-height: 1.33;
                     letter-spacing: normal;
-                    color: $gray-800--old;
+                    color: $gray-600;
                     font-weight: 600;
                     font-weight: 600;
                     &.active{
-                        color: $primary-1;
-                        border-color: $primary-1;
+                        color: $blue-light-600;
+                        border-color: $blue-light-600;
                     }
                    }
                 }
@@ -1040,7 +1040,7 @@ body {
             .dropdown-menu{
                 button.dropdown-item{
                     &:last-child{
-                        color: $primary-2;
+                        color: $gray-900;
                         font-weight: 400;
                     }
                 }

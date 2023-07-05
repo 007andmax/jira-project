@@ -45,12 +45,12 @@
             height: 40px;
             padding: 0 12px;
             font-size: 13px;
-            border: 1px solid $gray-800--old;
+            border: 1px solid $gray-600;
             border-radius: 4px;
         }
 
         textarea {
-            border: 1px solid $gray-800--old;
+            border: 1px solid $gray-600;
             border-radius: 4px;
             min-height: 80px;
             width: 100%;
@@ -62,7 +62,7 @@
 
     &-panel {
         &__subheader {
-            border-bottom: 1px solid $gray-400--old;
+            border-bottom: 1px solid $gray-200;
             display: flex;
 
             &-item {
@@ -72,7 +72,7 @@
                 border: 1px solid transparent;
 
                 &.--active {
-                    border-bottom-color: $primary-1;
+                    border-bottom-color: $blue-light-600;
                 }
             }
         }
@@ -83,7 +83,7 @@
         min-height: 40px;
         padding: 4px 4px 0;
         font-size: 13px;
-        border: 1px solid $gray-800--old;
+        border: 1px solid $gray-600;
         border-radius: 4px;
         width: 100%;
         display: flex;
@@ -95,7 +95,7 @@
     &__document-history-item {
         display: flex;
         padding: 9px 24px;
-        //border-bottom: 1px solid $gray-400--old;
+        //border-bottom: 1px solid $gray-200;
         position: relative;
 
         &::before,
@@ -110,7 +110,7 @@
             height: calc(100% - 20px);
             transform: translate(-50%, 10px);
             width: 2px;
-            background: $gray-300--old;
+            background: $gray-100;
             border-radius: 1px;
         }
 
@@ -119,8 +119,8 @@
             transform: translate(-50%, -50%);
             width: 16px;
             height: 16px;
-            background: $gray-600--old;
-            border: 5px solid $gray-200--old;
+            background: $gray-400;
+            border: 5px solid $gray-50;
             border-radius: 50%;
         }
 
@@ -148,7 +148,7 @@
             transform: translateY(9px);
             width: 100%;
             height: 1px;
-            background: $gray-400--old;
+            background: $gray-200;
         }
     }
     &__document-history-avatar {
@@ -191,7 +191,7 @@
 
             .icon__close {
                 padding: 6px;
-                background-color: $gray-200--old;
+                background-color: $gray-50;
                 border-radius: 50%;
                 background-size: 24px 24px;
                 background-position: center;
@@ -201,17 +201,17 @@
         &__title {
             font-size: 18px;
             font-weight: $fw-medium;
-            color: $primary-2;
+            color: $gray-900;
         }
 
         &__description {
-            color: $gray-800--old;
+            color: $gray-600;
         }
 
         &__card-icon {
             padding: 8px;
             border-radius: 8px;
-            background-color: $gray-200--old;
+            background-color: $gray-50;
             flex-shrink: 0;
         }
 
@@ -228,7 +228,7 @@
     height: 32px;
     display: flex;
     align-items: center;
-    background: $gray-100--old;
+    background: $gray-25;
     margin: 0 4px 4px 0;
 
     .icn-remove-old {
@@ -254,7 +254,7 @@
 }
 .header-circle-icon {
     background-size: 16px !important;
-    border: 1px solid $gray-400--old;
+    border: 1px solid $gray-200;
     background-repeat: no-repeat;
     background-position: center;
     cursor: pointer;

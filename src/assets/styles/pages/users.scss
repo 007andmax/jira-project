@@ -4,7 +4,7 @@
   th.users-table__company,
   th.users-table__contract-no,
   th.users-table__tickets {
-    color: $primary-2;
+    color: $gray-900;
   }
   .users-table {
     &__check {
@@ -24,7 +24,7 @@
         width: 40px;
         min-width: 40px;
         border-radius: 50%;
-        background-color: $secondary-3;
+        background-color: $purple-400;
         background-position: center !important;
         background-size: cover !important;
         font-size: 12px;
@@ -38,17 +38,17 @@
 
       &--user-name {
         @include body-m__m;
-        color: $primary-2;
+        color: $gray-900;
       }
 
       &--profession {
         @include body-m;
-        color: $gray-800--old;
+        color: $gray-600;
       }
     }
 
     &__company {
-      color: $gray-800--old;
+      color: $gray-600;
       width: max-content;
       min-width: 88px;
     }
@@ -57,7 +57,7 @@
       width: 216px;
       max-width: 216px;
       min-width: 216px;
-      color: $gray-800--old;
+      color: $gray-600;
     }
 
     &__subscription {
@@ -73,7 +73,7 @@
         align-items: center;
         padding: 8px 24px 8px 8px;
         font-size: 12px;
-        color: $gray-800--old;
+        color: $gray-600;
         .report-caret-icon {
           right: 6px;
           width: 10px;
@@ -87,7 +87,7 @@
       width: 80px;
       max-width: 80px;
       min-width: 80px;
-      color: $gray-800--old;
+      color: $gray-600;
     }
 
     &__email {
@@ -188,12 +188,12 @@
     }
     &__title {
       @include сaption-l__m;
-      color: $primary-1;
+      color: $blue-light-600;
       margin-bottom: 4px;
     }
     &__subtitle {
       @include сaption-l;
-      color: $gray-700--old;
+      color: $gray-500;
     }
     &__input {
       position: absolute;
@@ -267,7 +267,7 @@
   }
   .assign-ticket-content {
     .--outline-blue {
-      border-color: $primary-1;
+      border-color: $blue-light-600;
     }
   }
   .qt-input-search {
@@ -277,15 +277,15 @@
     }
     input {
       border-radius: 6px;
-      background-color: $gray-200--old;
+      background-color: $gray-50;
       padding: 10px 20px 10px 40px;
       border: none;
       height: 36px;
       font-size: 12px;
       line-height: 16px;
-      color: $primary-2;
+      color: $gray-900;
       &::placeholder {
-        color: $gray-700--old;
+        color: $gray-500;
         font-size: 12px;
         line-height: 16px;
       }
@@ -323,7 +323,7 @@
       .user-item {
         padding: 10px 16px;
         &.active {
-          background-color: $gray-200--old;
+          background-color: $gray-50;
         }
       }
       .qt-checkbox {
@@ -379,8 +379,8 @@ app-users-table {
       padding-left: 8px;
       @include сaption-l;
       margin-right: 0px;
-      color: $gray-800--old;
-      background-color: $gray-100--old;
+      color: $gray-600;
+      background-color: $gray-25;
     }
 
     .mat-chip.mat-standard-chip .mat-chip-remove::before {
@@ -405,7 +405,7 @@ app-users-table {
 
   &__editor-tab {
     display: flex;
-    color: $primary-2;
+    color: $gray-900;
     @include сaption-l__sb;
   }
 
@@ -419,15 +419,15 @@ app-users-table {
       text-align: center;
     }
     &.active {
-      color: $primary-1;
-      border-color: $primary-1;
+      color: $blue-light-600;
+      border-color: $blue-light-600;
     }
   }
 
   select#fontSelector-,
   select#fontSizeSelector- {
     background-color: $white !important;
-    border: 1px solid $gray-300--old !important;
+    border: 1px solid $gray-100 !important;
     height: 32px !important;
   }
 
@@ -439,7 +439,7 @@ app-users-table {
     min-height: 230px;
     padding: 16px 15px;
     &::placeholder {
-      color: $gray-600--old;
+      color: $gray-400;
       line-height: 1;
     }
   }
@@ -533,13 +533,13 @@ app-users-table {
     font-size: 20px;
     line-height: 1.4;
     letter-spacing: -0.5px;
-    color: $primary-2;
+    color: $gray-900;
   }
 
   &__subtitle {
     font-size: 13px;
     line-height: 1.54;
-    color: $gray-800--old;
+    color: $gray-600;
   }
 
   &__close {

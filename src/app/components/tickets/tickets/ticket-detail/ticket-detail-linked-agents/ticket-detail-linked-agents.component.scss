@@ -80,15 +80,15 @@
             align-items: center;
             padding: 0 12px;
             border-bottom: 2px solid transparent;
-            color: $gray-800--old;
+            color: $gray-600;
             font-size: 13px;
             transition: all 0.3s;
             font-weight: $fw-bold;
 
             &.active,
             &:hover {
-                color: $primary-1;
-                border-bottom: 2px solid $primary-1;
+                color: $blue-light-600;
+                border-bottom: 2px solid $blue-light-600;
             }
         }
     }
@@ -96,7 +96,7 @@
     .content {
         >div {
             .content-btn {
-                background: $primary-1;
+                background: $blue-light-600;
                 border-radius: 4px;
                 padding: 4px 15px;
                 margin: 8px 10px;
@@ -114,7 +114,7 @@
                     width: 100%;
                     outline: none;
                     font-size: 13px;
-                    border: 1px solid $gray-800--old;
+                    border: 1px solid $gray-600;
                     border-radius: 4px;
                 }
 

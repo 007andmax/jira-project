@@ -13,7 +13,7 @@
                 alt
             >
             <div
-                class="qt-fs-13 qt-color-dark qt-fw-600"
+                class="qt-fs-13 qt-color-gray-900 qt-fw-600"
                 [textContent]="currentCompany.name"
             ></div>
             <div
@@ -33,16 +33,16 @@
             </ng-container>
         </div>
         <div
-            class="qt-color-dark qt-lh-131 qt-pr-24 qt-fs-26 qt-text-upper qt-fw-600"
+            class="qt-color-gray-900 qt-lh-131 qt-pr-24 qt-fs-26 qt-text-upper qt-fw-600"
             [textContent]="'Quote#' + quote.number"
         >
         </div>
     </div>
     <div class="qt-mt-24 qt-mb-32 qt-df qt-jc-sb invoice-preview__row">
         <div class="qt-lh-154 qt-pr-12 invoice-preview__billing-address">
-            <div class="qt-fs-10 qt-color-light qt-mb-8 qt-fw-600 qt-lh-12">BILLING ADDRESS</div>
+            <div class="qt-fs-10 qt-color-gray-400 qt-mb-8 qt-fw-600 qt-lh-12">BILLING ADDRESS</div>
             <div
-                class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark"
+                class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-gray-900"
                 [textContent]="quote.billingLocationName"
             ></div>
             <div
@@ -54,9 +54,9 @@
             class="qt-lh-154 qt-pr-12 invoice-preview__shipping-address"
             *ngIf="quote.shippingLocationName || quote.shippingAddress"
         >
-            <div class="qt-fs-10 qt-color-light qt-mb-8 qt-fw-600 qt-lh-12">SHIPPING ADDRESS</div>
+            <div class="qt-fs-10 qt-color-gray-400 qt-mb-8 qt-fw-600 qt-lh-12">SHIPPING ADDRESS</div>
             <div
-                class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark"
+                class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-gray-900"
                 [textContent]="quote.shippingLocationName"
             ></div>
             <div
@@ -91,7 +91,7 @@
     <div class="invoice-preview__items">
         <div class="qt-mb-16">
             <table class="quote-aside-preview-table invoice-preview__table">
-                <thead class=" qt-lh-127 qt-color-dark">
+                <thead class=" qt-lh-127 qt-color-gray-900">
                     <tr>
                         <th class="invoice-preview__col-item">Item</th>
                         <th class="invoice-preview__col-desc">Description</th>
@@ -172,9 +172,9 @@
             </table>
         </div>
     </div>
-    <div class="qt-df qt-w100 qt-jc-sb qt-color-dark qt-fs-12 qt-fw-600 qt-mb-20 qt-lh-133">
+    <div class="qt-df qt-w100 qt-jc-sb qt-color-gray-900 qt-fs-12 qt-fw-600 qt-mb-20 qt-lh-133">
         <div class="qt-mb-20 invoice-preview-notes">
-            <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-dark qt-fw-600 qt-lh-133">Customer Note</div>
+            <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-gray-900 qt-fw-600 qt-lh-133">Customer Note</div>
             <div
                 class="qt-fs-13 qt-lh-154 note qt-fw-400"
                 *ngIf="quote.regularNote"
@@ -214,7 +214,7 @@
     </div>
     <div>
         <div>
-            <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-dark qt-fw-600 qt-lh-133">Terms & Conditions</div>
+            <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-gray-900 qt-fw-600 qt-lh-133">Terms & Conditions</div>
             <div
                 class="qt-fs-13 qt-lh-154 note"
                 *ngIf="quote.termsAndConditions"

@@ -19,12 +19,12 @@
         *ngIf="!loadingInProgress"
     >
         <div class="qt-report__body-header">
-            <div class="body-m__sb qt-color-dark">
+            <div class="body-m__sb qt-color-gray-900">
                 {{remoteConnectionReport.clientCompanyName || 'All companies'}}
             </div>
-            <h6 class="qt-fw-600 qt-color-dark">Remote Connection Report</h6>
+            <h6 class="qt-fw-600 qt-color-gray-900">Remote Connection Report</h6>
             <div
-                class="body-m qt-color-dark-light"
+                class="body-m qt-color-gray-600"
                 *ngIf="onInit && remoteConnectionReport.lines"
             >
                 <span>
@@ -39,7 +39,7 @@
                 class
                 *ngIf="onInit && remoteConnectionReport.lines"
             >
-                <div class="body-m__sb qt-color-dark">
+                <div class="body-m__sb qt-color-gray-900">
                     {{remoteConnectionReport.techCompanyName}}
                 </div>
             </div>
@@ -49,13 +49,13 @@
                 <table class="qt-report__body-table-body">
                     <thead>
                         <tr>
-                            <th class="qt-fw-600 qt-color-dark">Date</th>
-                            <th class="qt-fw-600 qt-color-dark">Device</th>
-                            <th class="qt-fw-600 qt-color-dark">Tech</th>
-                            <th class="qt-fw-600 qt-color-dark">Ticket</th>
-                            <th class="qt-fw-600 qt-color-dark">Viewer IP</th>
-                            <th class="qt-fw-600 qt-color-dark">Start time</th>
-                            <th class="qt-fw-600 qt-color-dark">Duration</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Date</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Device</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Tech</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Ticket</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Viewer IP</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Start time</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Duration</th>
                         </tr>
                     </thead>
                     <tbody class="qt-report__body-table-body">
@@ -81,7 +81,7 @@
                         <tr class="qt-report__body-row">
                             <td colspan="7">
                                 <div
-                                    class="body-l qt-color-dark qt-text-right"
+                                    class="body-l qt-color-gray-900 qt-text-right"
                                     *ngIf="onInit && remoteConnectionReport.lines"
                                 >
                                     Total Duration:
@@ -99,14 +99,14 @@
                 <table class="qt-report__body-table-body">
                     <thead>
                         <tr>
-                            <th class="qt-fw-600 qt-color-dark">Date</th>
-                            <th class="qt-fw-600 qt-color-dark">Company name</th>
-                            <th class="qt-fw-600 qt-color-dark">Device</th>
-                            <th class="qt-fw-600 qt-color-dark">Tech</th>
-                            <th class="qt-fw-600 qt-color-dark">Ticket</th>
-                            <th class="qt-fw-600 qt-color-dark">Viewer IP</th>
-                            <th class="qt-fw-600 qt-color-dark">Start time</th>
-                            <th class="qt-fw-600 qt-color-dark">Duration</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Date</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Company name</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Device</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Tech</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Ticket</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Viewer IP</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Start time</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Duration</th>
                         </tr>
                     </thead>
                     <tbody class="qt-report__body-table-body">
@@ -133,7 +133,7 @@
                         <tr class="qt-report__body-row">
                             <td colspan="8">
                                 <div
-                                    class="body-l qt-color-dark qt-text-right"
+                                    class="body-l qt-color-gray-900 qt-text-right"
                                     *ngIf="onInit && remoteConnectionReport.lines"
                                 >
                                     Total Duration:

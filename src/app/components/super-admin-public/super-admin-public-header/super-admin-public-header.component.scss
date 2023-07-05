@@ -45,7 +45,7 @@
                 letter-spacing: 0.3px;
                 color: $white;
                 padding: 2px 4px;
-                background-color: $error;
+                background-color: $red-600;
                 border-radius: 2px;
                 text-transform: uppercase;
             }
@@ -56,7 +56,7 @@
 .qt-page-list__search {
   input {
     height: 40px;
-    border: 1px solid $gray-400--old;
+    border: 1px solid $gray-200;
     min-width: 360px;
     border-radius: 6px;
   }

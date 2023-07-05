@@ -128,7 +128,7 @@
       transform: none;
       top: 10px;
       left: 18px;
-      background-color: $primary-1;
+      background-color: $blue-light-600;
       background-image: url("/assets/img/icons/collapse-arrow-white.svg");
       z-index: 3;
       box-shadow: none;
@@ -166,7 +166,7 @@
   }
 
   &__header-info {
-    color: $gray-800--old;
+    color: $gray-600;
     font-size: 13px;
   }
 
@@ -178,7 +178,7 @@
   .divider-point {
     width: 4px;
     height: 4px;
-    background-color: $gray-600--old;
+    background-color: $gray-400;
     border-radius: 50%;
     margin: 2px 6px;
     display: inline-block;
@@ -186,7 +186,7 @@
 
   &__more-users-title {
     font-size: 12px;
-    color: $primary-1;
+    color: $blue-light-600;
     margin-left: 10px;
     cursor: pointer;
   }
@@ -225,7 +225,7 @@
       content: "";
       width: 16px;
       height: 16px;
-      border: 1px solid $gray-500--old;
+      border: 1px solid $gray-300;
       background: $white;
       border-radius: 50%;
       bottom: -7px;
@@ -241,7 +241,7 @@
     margin-left: 4px;
   }
   &__users-linked-divider {
-    background: $gray-400--old;
+    background: $gray-200;
     width: 1px;
     margin: 0 16px;
   }
@@ -288,7 +288,7 @@
 
   &__ticket-description {
     font-size: 13px;
-    color: $gray-800--old;
+    color: $gray-600;
   }
 
   &__ticket-description-edit {
@@ -298,11 +298,11 @@
     #ticket-note {
       height: 76px;
       border-radius: 5px;
-      border: solid 1px $gray-600--old;
+      border: solid 1px $gray-400;
       width: 100%;
       padding: 8px 12px;
       font-size: 13px;
-      color: $gray-800--old;
+      color: $gray-600;
     }
     #ticket-note {
       min-height: 92px;
@@ -329,7 +329,7 @@
         padding: 0;
         border: none;
         line-height: 20px;
-        color: $primary-2;
+        color: $gray-900;
       }
     }
   }
@@ -337,13 +337,13 @@
   &__claimed-info {
     position: relative;
     padding: 0 32px;
-    color: $gray-800--old;
+    color: $gray-600;
     margin-bottom: 10px;
   }
 
   &__claimed-info-lines {
     position: absolute;
-    border: 1px solid $gray-400--old;
+    border: 1px solid $gray-200;
     border-left: none;
     border-right: none;
     width: calc(100% - 64px);
@@ -352,7 +352,7 @@
   }
 
   &__claimed-date {
-    border: 1px solid $gray-400--old;
+    border: 1px solid $gray-200;
     border-radius: 15px;
     padding: 2px 14px;
     z-index: 1;
@@ -375,14 +375,14 @@
     }
 
     &__header-add-task {
-      color: $primary-1;
+      color: $blue-light-600;
       font-size: 12px;
       font-weight: 600;
       cursor: pointer;
     }
 
     &__line {
-      border-bottom: 1px solid $gray-400--old;
+      border-bottom: 1px solid $gray-200;
       &:last-child {
         border-bottom: none;
       }
@@ -443,7 +443,7 @@
 .qt-modal-circle-button {
   width: 32px;
   height: 32px;
-  border: solid 1px $gray-400--old;
+  border: solid 1px $gray-200;
   background-color: $white;
   margin-left: 8px;
   border-radius: 50%;
@@ -454,7 +454,7 @@
 
 .ticket-updates {
   padding: 24px 32px;
-  background-color: $gray-100--old;
+  background-color: $gray-25;
   font-size: 13px;
 
   &__count {
@@ -482,7 +482,7 @@
     font-weight: 600;
   }
   &__add-note {
-    color: $gray-600--old;
+    color: $gray-400;
     cursor: pointer;
   }
   &__edit,
@@ -499,7 +499,7 @@
     font-size: 12px;
   }
   &__people-added {
-    color: $gray-600--old;
+    color: $gray-400;
     margin-right: 8px;
   }
 
@@ -522,7 +522,7 @@
   &__ticket-body {
     padding: 8px;
     background-color: $white;
-    border: solid 1px $gray-400--old;
+    border: solid 1px $gray-200;
   }
   &__done-status {
     width: 24px;
@@ -642,9 +642,9 @@
   &__service-tag-completed {
     height: 20px;
     line-height: 12px;
-    color: $success;
+    color: $green-600;
     font-size: 10px;
-    border-color: $success;
+    border-color: $green-600;
     background: $white;
     margin-right: 32px;
   }
@@ -657,7 +657,7 @@
   &__item {
     border-radius: 10px;
     box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-    border: dashed 1px $gray-500--old;
+    border: dashed 1px $gray-300;
     background-color: $white;
     padding: 16px;
     display: flex;
@@ -684,7 +684,7 @@
     color: $white;
     font-weight: 600;
     border-radius: 4px;
-    background-color: $primary-1;
+    background-color: $blue-light-600;
     height: 40px;
     line-height: normal;
     border: none;
@@ -708,7 +708,7 @@
   &__item-desc-text {
     font-size: 12px;
     line-height: 1.33;
-    color: $gray-800--old;
+    color: $gray-600;
     margin-top: 2px;
 
     @media (max-width: 767px) {
@@ -719,7 +719,7 @@
 
 .cps-block {
   padding: 20px 40px;
-  border-top: 1px solid $gray-100--old;
+  border-top: 1px solid $gray-25;
 
   &__header {
     margin-bottom: 20px;
@@ -742,7 +742,7 @@
     font-size: 13px;
     font-weight: 600;
     margin-right: 30px;
-    color: $gray-800--old;
+    color: $gray-600;
     cursor: pointer;
     padding-left: 25px;
     background-repeat: no-repeat;
@@ -751,14 +751,14 @@
     position: relative;
 
     &.active {
-      color: $primary-1;
+      color: $blue-light-600;
       &:before {
         content: "";
         position: absolute;
         bottom: -10px;
         height: 3px;
         width: calc(100% + 5px);
-        background: $primary-1;
+        background: $blue-light-600;
         left: 0;
         border-radius: 100px;
       }
@@ -769,7 +769,7 @@
     height: 104px;
     width: 100%;
     border-radius: 4px;
-    border: solid 1px $gray-500--old;
+    border: solid 1px $gray-300;
     padding: 16px;
   }
 }

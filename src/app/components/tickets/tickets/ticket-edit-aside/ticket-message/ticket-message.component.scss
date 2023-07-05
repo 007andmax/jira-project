@@ -11,7 +11,7 @@
     &__item {
       border-radius: 10px;
       box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-      border: dashed 1px $gray-500--old;
+      border: dashed 1px $gray-300;
       background-color: $white;
       padding: 16px;
       display: flex;
@@ -86,7 +86,7 @@
     &__item-title {
       font-size: 13px;
       line-height: 1.54;
-      color: $primary-2;
+      color: $gray-900;
 
       @media (max-width: 767px) {
         max-width: calc(100% - 50px);
@@ -103,7 +103,7 @@
     &__item-desc-text {
       font-size: 12px;
       line-height: 16px;
-      color: $primary-2;
+      color: $gray-900;
       margin-top: 2px;
     }
   }

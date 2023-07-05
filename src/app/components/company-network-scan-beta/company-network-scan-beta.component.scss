@@ -54,12 +54,12 @@ app-company-network-scan-item {
 }
 
 .network-status {
-    border: solid 1px $success;
+    border: solid 1px $green-600;
     line-height: 1;
     width: fit-content;
     padding: 2px 4px;
     border-radius: 3px;
-    color: $success;
+    color: $green-600;
     background-color: $white;
     letter-spacing: 0.3px;
     font-size: 8px;

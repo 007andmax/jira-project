@@ -8,7 +8,7 @@
     tr {
         display: block;
         padding: 12px 16px;
-        border: 1px solid $gray-300--old;
+        border: 1px solid $gray-100;
         border-radius: 12px;
         background-color: $white;
         cursor: pointer;
@@ -16,11 +16,11 @@
             margin-bottom: 16px;
         }
         &:hover {
-            border-color: $gray-500--old;
+            border-color: $gray-300;
             box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
         }
         &:hover h3 {
-            color: $primary-1;
+            color: $blue-light-600;
         }
     }
     td {
@@ -41,7 +41,7 @@
 }
 .qt-page-list__body {
     position: relative;
-    background-color: $gray-100--old;
+    background-color: $gray-25;
 }
 .messages-table__account-text {
     -webkit-user-select: text;
@@ -55,11 +55,11 @@
     flex-direction: column;
     .messages-table-user-name {
         font-size: 12px;
-        color: $primary-2;
+        color: $gray-900;
     }
     .messages-table-user-email {
         font-size: 12px;
-        color: $gray-700--old;
+        color: $gray-500;
         font-weight: 500;
     }
 }
@@ -74,7 +74,7 @@
         position: absolute;
         content: " ";
         height: 1px;
-        background: $gray-300--old;
+        background: $gray-100;
         right: 0;
         left: 0;
         bottom: 0;
@@ -84,7 +84,7 @@
 .messages-table__account-time {
     font-size: 11px;
     line-height: 16px;
-    color: $gray-600--old;
+    color: $gray-400;
     font-weight: 600;
     text-transform: uppercase;
 }
@@ -93,12 +93,12 @@ h3 {
     font-weight: 500;
     font-family: "Inter", sans-serif;
     line-height: 1.5;
-    color: $primary-2;
+    color: $gray-900;
 }
 .messages-table__account-text {
     font-size: 13px;
     font-family: "Inter", sans-serif;
-    color: $primary-2;
+    color: $gray-900;
     font-weight: 500;
 }
 .messages-table__account {
@@ -112,7 +112,7 @@ h3 {
     flex-shrink: 0;
 }
 .order-id {
-    color: $primary-1;
+    color: $blue-light-600;
     font-size: 11px;
     line-height: 16px;
     font-weight: 500;

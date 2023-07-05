@@ -17,7 +17,7 @@
       font-weight: 600;
       line-height: 1.33;
       letter-spacing: normal;
-      color: $primary-2;
+      color: $gray-900;
       margin-bottom: 20px;
   }
   #cmd_detail {
@@ -559,12 +559,12 @@
                 margin-left:10px;
                 font-size:13px;
                 &.btn-secondary{
-                  border: solid 1px $gray-500--old;
+                  border: solid 1px $gray-300;
                   background-color: $white !important;
                 }
                 &.btn-remove{
-                  background-color: $error;
-                  border-color: $error;
+                  background-color: $red-600;
+                  border-color: $red-600;
                 }
               }
             }
@@ -602,8 +602,8 @@
               border: solid 1px $gray-200;
               background-color: $white;
               &.edit-cat{
-                background-color: $gray-700--old;
-                border-color: $gray-700--old;
+                background-color: $gray-500;
+                border-color: $gray-500;
               }
               &::before{
                 left: -14px;

@@ -81,7 +81,7 @@ img.Online-Search {
   height: 32px;
   width: 32px;
   float: right;
-  color: $primary-2;
+  color: $gray-900;
 
 }
 
@@ -196,14 +196,14 @@ img.Online-Search {
 
 .device-table__input-name {
   width: 100%;
-  border: 1px solid $gray-400--old;
+  border: 1px solid $gray-200;
   border-radius: 4px;
   outline: none;
   border-color: transparent;
 
   &:hover,
   &:focus {
-    border-color: $gray-400--old;
+    border-color: $gray-200;
     outline: none;
   }
 }
@@ -322,7 +322,7 @@ span.qt-input-search:before {
   border-radius: 4px;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
   background-color: $white;
-  border: solid 1px $gray-500--old;
+  border: solid 1px $gray-300;
 }
 
 .grey-dropdown .dropdown-menu {
@@ -571,7 +571,7 @@ table.qt-table-modern tbody tr td {
 .computerModel {
   /deep/ .qt-dropdown:hover{
     input{
-      border: 1px $gray-500--old !important;
+      border: 1px $gray-300 !important;
       padding: 10px 4px!important;
       height:25px !important;
     }
@@ -605,7 +605,7 @@ table.qt-table-modern tbody tr td {
 .computerManufacture{
   /deep/ .qt-dropdown:hover{
     input{
-      border: 1px $gray-500--old !important;
+      border: 1px $gray-300 !important;
       padding: 10px 4px!important;
       height:25px !important;
     }
@@ -623,7 +623,7 @@ table.qt-table-modern tbody tr td {
 }
 
 .companydevice-beta-offline{
-  color: $error;
+  color: $red-600;
 }
 
 .companydevice-beta-online{

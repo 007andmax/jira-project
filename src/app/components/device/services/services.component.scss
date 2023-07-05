@@ -33,7 +33,7 @@
     }
     thead {
       th {
-        background-color: $gray-200--old !important;
+        background-color: $gray-50 !important;
       }
     }
   }
@@ -93,7 +93,7 @@ li.add-user {
     display: flex;
     align-items: center;
     a {
-        border: solid 1px $gray-400--old;
+        border: solid 1px $gray-200;
         background: $white;
         border-radius: 50%;
         display: flex;

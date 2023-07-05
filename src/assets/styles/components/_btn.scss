@@ -6,7 +6,7 @@
     padding-left: 16px;
     padding-right: 16px;
     @include сaption-l__sb;
-    background-color: $primary-1;
+    background-color: $blue-light-600;
     position: relative;
     display: flex;
     align-items: center;
@@ -25,27 +25,27 @@
 
     &.--outline-blue {
         background-color: $white;
-        border: solid 1px $primary-1;
-        color: $primary-1;
+        border: solid 1px $blue-light-600;
+        color: $blue-light-600;
     }
 
     &.--outline-white {
       background-color: $white;
       border: solid 1px transparent;
-      color: $primary-2;
+      color: $gray-900;
     }
 
     &.--light-blue {
       background-color: #16a4fa10;
       border: none;
-      color: $primary-1;
+      color: $blue-light-600;
     }
 
     &.--transparent {
       border: none;
       background: transparent;
       text-decoration: underline;
-      color: $primary-1;
+      color: $blue-light-600;
       padding-left: 8px;
       padding-right: 8px;
     }
@@ -60,7 +60,7 @@
 
     &.disabled {
       cursor: default;
-      background-color: $gray-400--old;
+      background-color: $gray-200;
     }
 }
 
@@ -70,12 +70,12 @@
   background-position: 10px center;
   background-size: 16px;
   background-color: $white;
-  color: $primary-2;
+  color: $gray-900;
   border: none;
   background-image: url('/assets/img/icons/filter.svg');
   &.active {
     background-color: #16a4fa10;
-    color: $primary-1;
+    color: $blue-light-600;
     padding-left: 16px;
     border: none;
     background-image: none;

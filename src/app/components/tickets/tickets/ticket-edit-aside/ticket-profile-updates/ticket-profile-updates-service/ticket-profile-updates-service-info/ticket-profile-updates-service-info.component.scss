@@ -3,7 +3,7 @@
 
 .ticket-updates {
     padding: 24px 32px;
-    background-color: $gray-100--old;
+    background-color: $gray-25;
     font-size: 13px;
 
     &__count {
@@ -30,7 +30,7 @@
         font-weight: 600;
     }
     &__add-note {
-        color: $gray-600--old;
+        color: $gray-400;
         cursor: pointer;
     }
     &__edit, &__delete{
@@ -46,7 +46,7 @@
       font-size: 12px;
     }
     &__people-added {
-      color: $gray-600--old;
+      color: $gray-400;
       margin-right: 8px;
     }
 
@@ -85,7 +85,7 @@
     &__ticket-body {
       padding: 8px;
       background-color: $white;
-      border: solid 1px $gray-400--old;
+      border: solid 1px $gray-200;
 
       @media (max-width: 767px) {
         align-items: center;
@@ -224,7 +224,7 @@
           content: "";
           left: 0;
           top: -14px;
-          color: $gray-600--old;
+          color: $gray-400;
           position: absolute;
           text-transform: uppercase;
         }
@@ -267,7 +267,7 @@
     &__service-subinfo {
       position: relative;
       @include сaption-l__sb;
-      color: $primary-2;
+      color: $gray-900;
       margin-top: 3px;
       margin-left: 28px;
       @media (max-width: 767px) {
@@ -281,7 +281,7 @@
           content: "Description";
           left: 0;
           top: -14px;
-          color: $gray-600--old;
+          color: $gray-400;
           position: absolute;
           text-transform: uppercase;
         }
@@ -298,10 +298,10 @@
 
     &__service-tag-completed {
       line-height: 12px;
-      color: $success;
+      color: $green-600;
       font-size: 10px;
       padding: 4px 6px;
-      border-color: $success;
+      border-color: $green-600;
       background: $white;
       margin-left: auto;
       margin-right: 0 !important;

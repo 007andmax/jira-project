@@ -16,7 +16,7 @@
       line-height: 16px;
       font-weight: 600;
       letter-spacing: 0;
-      color: $primary-2;
+      color: $gray-900;
       text-transform: uppercase;
       padding: 8px;
 
@@ -41,7 +41,7 @@
       line-height: 20px;
       font-weight: 500;
       letter-spacing: 0;
-      color: $primary-2;
+      color: $gray-900;
       padding: 0 8px 0 8px;
 
       &:first-child {
@@ -95,7 +95,7 @@ li.add-user {
     display: flex;
     align-items: center;
     a {
-        border: solid 1px $gray-400--old;
+        border: solid 1px $gray-200;
         background: $white;
         border-radius: 50%;
         display: flex;

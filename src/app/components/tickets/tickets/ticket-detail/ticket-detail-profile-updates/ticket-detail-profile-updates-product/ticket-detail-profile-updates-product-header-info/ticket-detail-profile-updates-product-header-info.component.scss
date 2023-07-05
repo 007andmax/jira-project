@@ -2,7 +2,7 @@
 
 .ticket-updates {
     padding: 24px 32px;
-    background-color: $gray-100--old;
+    background-color: $gray-25;
     font-size: 13px;
 
     &__count {
@@ -32,7 +32,7 @@
     }
 
     &__add-note {
-        color: $gray-600--old;
+        color: $gray-400;
         cursor: pointer;
     }
 
@@ -56,7 +56,7 @@
     }
 
     &__people-added {
-        color: $gray-600--old;
+        color: $gray-400;
         margin-right: 8px;
     }
 
@@ -105,7 +105,7 @@
     &__ticket-body {
         padding: 8px;
         background-color: $white;
-        border: solid 1px $gray-400--old;
+        border: solid 1px $gray-200;
     }
 
     &__done-status {

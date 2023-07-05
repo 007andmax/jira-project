@@ -17,7 +17,7 @@
     &__history-block {
       border-radius: 6px;
       box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.05);
-      border: solid 1px $gray-400--old;
+      border: solid 1px $gray-200;
       padding: 9px 12px;
       margin-bottom: 6px;
       // margin-left: -9px;
@@ -28,13 +28,13 @@
      font-size: 12px;
      font-weight: 600;
      line-height: 1.33;
-     color: $gray-800--old;
+     color: $gray-600;
      margin-bottom: 4px;
     }
     &__history-block-date {
      font-size: 11px;
      line-height: 1.45;
-     color: $gray-800--old;
+     color: $gray-600;
     }
 
   }

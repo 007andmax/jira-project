@@ -122,12 +122,12 @@
 
 .device-table__input-name {
   width: 100%;
-  border: 1px solid $gray-400--old;
+  border: 1px solid $gray-200;
   border-radius: 4px;
   outline: none;
   border-color: transparent;
   &:hover, &:focus {
-    border-color:$gray-400--old;
+    border-color:$gray-200;
     outline: none;
   }
 }
@@ -157,7 +157,7 @@ img.Online-Search {
   margin: -29px 0 0 605px;
   padding: 5px 8px;
   border-radius: 4px;
-  background-color: $gray-700--old;
+  background-color: $gray-500;
 }
 
 .Favourite {
@@ -178,7 +178,7 @@ img.Online-Search {
     margin: -3px 0px 0px 30px;
     padding: 2px 4px 2px 11px;
     border-radius: 4px;
-    //border: solid 1px $gray-600--old;
+    //border: solid 1px $gray-400;
     background-color: $white;
 }
 
@@ -204,7 +204,7 @@ input.mat-chip-input {
   padding: 8px 0 38px 1px;
   border-radius: 4px;
   box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-  border: solid 1px $gray-400--old;
+  border: solid 1px $gray-200;
   background-color: $white;
 }
 
@@ -236,7 +236,7 @@ input.mat-chip-input {
   background-color: $gray-200;
   border: solid 1px $background;
   @include border-radius(4px);
-  color: $primary-2;
+  color: $gray-900;
   font-size: 12px;
   margin-bottom: 6px !important;
 }
@@ -269,7 +269,7 @@ input.mat-chip-input {
   height: 32px !important;
   width: 32px !important;
   float:right !important;
-  color: $primary-2 !important;
+  color: $gray-900 !important;
 
 }
 
@@ -417,7 +417,7 @@ input.mat-chip-input {
   font-weight: 600;
   padding-left: 24px;
   padding-top: 15px;
-  color: $primary-2;
+  color: $gray-900;
 }
 
 .Name {
@@ -431,7 +431,7 @@ input.mat-chip-input {
   font-style: normal;
   line-height: 1.54;
   letter-spacing: normal;
-  color: $primary-2;
+  color: $gray-900;
   padding-left: 24px;
 }
 
@@ -459,7 +459,7 @@ input.mat-chip-input {
 .cancel{
   margin-left: 12px;
   color: $gray-500;
-  border: solid 1px $gray-500--old;
+  border: solid 1px $gray-300;
   background-color: $white;
   width: 76px;
   height: 40px;
@@ -476,7 +476,7 @@ input.mat-chip-input {
   width: 64px;
   height: 40px;
   color: $white;
-  border: solid 1px $gray-500--old;
+  border: solid 1px $gray-300;
 }
 
 ::ng-deep .modal-dialog{
@@ -639,7 +639,7 @@ span.qt-input-search:before {
     border-radius: 4px;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
     background-color: $white;
-    border: solid 1px $gray-500--old;
+    border: solid 1px $gray-300;
   }
 
   .tagfontweight{
@@ -795,7 +795,7 @@ span.qt-input-search:before {
   }
 }
 .devicetitledesc{
-  color: $gray-600--old;
+  color: $gray-400;
     line-height: 1.33;
     font-size: 12px;
     text-overflow: ellipsis;
@@ -896,7 +896,7 @@ span.qt-input-search:before {
 .computerModel {
   /deep/ .qt-dropdown:hover{
     input{
-      border: 1px $gray-500--old !important;
+      border: 1px $gray-300 !important;
       padding: 10px 4px!important;
       height:25px !important;
     }
@@ -930,7 +930,7 @@ span.qt-input-search:before {
 .computerManufacture{
   /deep/ .qt-dropdown:hover{
     input{
-      border: 1px $gray-500--old !important;
+      border: 1px $gray-300 !important;
       padding: 10px 4px!important;
       height:25px !important;
     }
@@ -948,7 +948,7 @@ span.qt-input-search:before {
 }
 
 .companydevice-beta-offline{
-  color: $error;
+  color: $red-600;
 }
 
 .companydevice-beta-online{
