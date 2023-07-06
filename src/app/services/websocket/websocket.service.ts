@@ -552,7 +552,7 @@ export class WebsocketService {
   }
   public subsribeToInvoiceCustomerUsers(clientCompId) {
     setTimeout(() => {
-      this.invoiceRealTimeService.subsribeToInvoiceCustomerUsers = this.stompClient.subscribe(`/user/watch/invoices/${clientCompId}`, (message) => {
+      this.invoiceRealTimeService.subsribeToInvoiceCustomerUsers = this.stompClient.subscribe(`/user/watch/receivableInvoice/${clientCompId}`, (message) => {
         var newChange = JSON.parse(message.body);
         this.invoiceRealTimeService.handleRealTimeChangesInvoice(newChange);
       });
