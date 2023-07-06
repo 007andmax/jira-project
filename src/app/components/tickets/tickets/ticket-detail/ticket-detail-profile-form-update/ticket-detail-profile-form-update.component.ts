@@ -59,7 +59,7 @@ export class TicketDetailProfileFormUpdateComponent extends TicketProfileFormUpd
       }
     })
     this.sub.add(onChangeAssignedUser);
-    //if (this.tab === 'NOTE' && this.noteList) this.noteList.onGetNoteList();
+    if (this.tab === 'NOTE' && this.noteList) this.noteList.onGetNoteList();
     this.ticketProfileFormUpdate.setType(this.tab);
     if (this.tab == "NOTE" && this.customerPortalStateService.isCustomerPortal) this.ticketProfileFormUpdate.setNoteType("PUBLIC");
     $("ticket-detail-profile-form-update").css({ left: $(".ticket-detail-page-content__body").offset().left - 64 });

@@ -23,6 +23,7 @@ export class TicketProfileFormUpdateNoteListComponent implements OnInit {
   ngOnInit() {
     let onUpdateActiveNotes = this.noteStateService.onUpdateActiveNotes.subscribe(data => {
       this.noteTemplate = this.noteStateService.getActiveNoteTemplate();
+      console.log("this.noteTemplate", this.noteTemplate);
       this.cd.detectChanges();
     })
     this.sub.add(onUpdateActiveNotes);
@@ -33,11 +34,14 @@ export class TicketProfileFormUpdateNoteListComponent implements OnInit {
         this.noteTemplate = data.map(item => new NoteTemplate(item));
         this.noteTemplate.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
           1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
-        this.noteStateService.setActiveNoteTemplate(this.noteTemplate);
-        this.noteStateService.setIsGetActiveNoteTemplates(true);
+        // this.noteStateService.setActiveNoteTemplate(this.noteTemplate);
+        // this.noteStateService.setIsGetActiveNoteTemplates(true);
+        console.log("this.noteTemplate", this.noteTemplate);
+        this.cd.detectChanges();
       })
     } else {
       this.noteTemplate = this.noteStateService.getActiveNoteTemplate();
+      console.log("this.noteTemplate", this.noteTemplate);
     }
   }
   onSelect(item) {

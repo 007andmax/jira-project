@@ -312,10 +312,13 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     return completeServices && completeProducts;
   }
   public setTab(data) {
+    console.log("setTab", data);
+    console.log("ticketProfile", this.ticketProfile);
     this.tab = data;
     this.ticketProfileFormUpdate.setType(data);
     this.ticketProfileFormUpdate.clearShares();
-    if (this.tab === 'NOTE' && this.noteList) this.noteList.onGetNoteList()
+    console.log("this.noteList", this.noteList);
+    if (this.tab === 'NOTE' && this.noteList && this.ticketProfile.id) this.noteList.onGetNoteList()
   }
 
   onChangeProducts(data) {
