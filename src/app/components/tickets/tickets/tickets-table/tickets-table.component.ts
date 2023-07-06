@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { WebsocketService } from 'src/app/services/websocket/websocket.service';
+import { TicketsRealTimeService } from 'src/app/states/tickets/tickets-real-time.service';
 
 
 @Component({
@@ -45,6 +47,8 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     private leftPanelStateService: LeftPanelStateService,
     private usersStateService: UsersStateService,
     private customerPortalStateService: CustomerPortalStateService,
+    private websocketService: WebsocketService,
+    private ticketsRealTimeService: TicketsRealTimeService,
     private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
@@ -52,6 +56,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       this.ticketsFilter.setListType("ALL");
       this.ticketsFilter.setFilter(JSON.parse(JSON.stringify(this.customerPortalStateService.getTicketsFilter())));
       this.onScroll();
+      this.websocketService.onInitConnectCustomerUser("new-tickets", this.customerPortalStateService.getTicketsFilter().selectedCompany.id);
     } else {
       /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
       /* START */
@@ -169,6 +174,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     this.ticketsStateService.onToggleAddTicket();
   }
   ngOnDestroy(): void {
+    if (this.customerPortalStateService.isCustomerPortal) this.ticketsRealTimeService.subsribeToTicketsCustomerUser.unsubscribe();
     this.sub.unsubscribe();
   }
   public trackById(index, item) {

@@ -11,6 +11,7 @@ export class TicketsRealTimeService {
   public changeTicketTasks: EventEmitter<any> = new EventEmitter();
   public ticketSubscription;
   public ticketTaskSubscription;
+  public subsribeToTicketsCustomerUser;
 
   /**
    * Quote real time service constructor

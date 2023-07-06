@@ -13,6 +13,7 @@ import { InvoicesAsidePreviewComponent } from './invoices-aside-preview/invoices
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toastr-progress-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 
 @Component({
   selector: 'app-invoices',
@@ -46,11 +47,13 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     private leftPanelStateService: LeftPanelStateService,
     private toastrProgressStateService: ToastrProgressStateService,
     private customerPortalStateService: CustomerPortalStateService,
+    private websocketService: WebsocketService,
     private invoicesListService: InvoicesListService) { }
 
   ngOnInit() {
     if (this.customerPortalStateService.isCustomerPortal) {
       this.invoicesFilter.setCompanyId(this.customerPortalStateService.getInvoicesFilter().companyId);
+      this.websocketService.onInitConnectCustomerUser("new-billable-invoices", this.customerPortalStateService.getInvoicesFilter().companyId);
     }
     let onInvoiceFilters = this.customerPortalStateService.onInvoiceFilters.subscribe(data => {
       this.invoicesFilter.onInitLeftOffset(false);
@@ -249,6 +252,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     this.invoices = [];
   }
   ngOnDestroy(): void {
+    if (this.customerPortalStateService.isCustomerPortal) this.invoiceRealTimeService.subsribeToInvoiceCustomerUsers.unsubscribe();
     this.sub.unsubscribe();
   }
   public trackById(index, item) {

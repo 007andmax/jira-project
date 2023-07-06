@@ -106,6 +106,33 @@ export class WebsocketService {
     if (this.usersState.getCurrentUser().role !== "SUPER_ADMIN") this.onInitConnect();
     if (this.usersState.getCurrentUser().role === "SUPER_ADMIN") this.onInitSuperAdminConnect();
   }
+  onInitConnectCustomerUser(state, clientCompId) {
+    if (this.isInit) {
+      if (state == "new-tickets") this.subsribeToTicketsCustomerUser(clientCompId);
+      if (state == "new-billable-invoices") this.subsribeToInvoiceCustomerUsers(clientCompId);
+      return;
+    }
+    this.ws = new SockJS(this.serverUrl);
+    this.stompClient = Stomp.over(this.ws);
+    this.stompClient.logRawCommunication = true;
+    this.onConnect();
+    let that = this;
+    this.stompClient.onConnect = (data) => {
+      //   that.subsribeToKafka();
+      if (state == "new-tickets") that.subsribeToTicketsCustomerUser(clientCompId);
+      if (state == "new-billable-invoices") that.subsribeToInvoiceCustomerUsers(clientCompId);
+      that.onInit.emit(true);
+      that.isInit = true;
+    }
+    this.stompClient.debug = (data) => {
+      console.log("debug", data);
+    }
+    this.stompClient.onWebSocketClose = (data) => {
+      setTimeout(() => {
+        this.onInitConnectCustomerUser(state, clientCompId);
+      }, 20000);
+    }
+  }
   onInitConnect() {
     this.ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(this.ws);
@@ -461,6 +488,19 @@ export class WebsocketService {
     }, 3000);
   }
 
+  public subsribeToTicketsCustomerUser(clientCompId) {
+
+    setTimeout(() => {
+
+      this.ticketsRealTimeService.subsribeToTicketsCustomerUser = this.stompClient.subscribe(`/user/watch/tickets/${clientCompId}`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.ticketsRealTimeService.handleRealTimeChangesTickets(newChange);
+
+      });
+
+    }, 3000);
+  }
+
   public subsribeToBillable() {
 
     setTimeout(() => {
@@ -504,6 +544,15 @@ export class WebsocketService {
   public subsribeToInvoice() {
     setTimeout(() => {
       this.stompClient.subscribe(`/user/watch/receivableInvoice`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.invoiceRealTimeService.handleRealTimeChangesInvoice(newChange);
+      });
+
+    }, 3000);
+  }
+  public subsribeToInvoiceCustomerUsers(clientCompId) {
+    setTimeout(() => {
+      this.invoiceRealTimeService.subsribeToInvoiceCustomerUsers = this.stompClient.subscribe(`/user/watch/invoices/${clientCompId}`, (message) => {
         var newChange = JSON.parse(message.body);
         this.invoiceRealTimeService.handleRealTimeChangesInvoice(newChange);
       });
