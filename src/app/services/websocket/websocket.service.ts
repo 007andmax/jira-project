@@ -297,15 +297,13 @@ export class WebsocketService {
  * @description Subscribe to quote realtime Customer Users
 */
   public subsribeToQuoteCustomerUsers(clientCompId) {
-    setTimeout(() => {
-      this.quoteRealTimeService.subsribeToQuoteCustomerUsers = this.stompClient.subscribe(`/user/watch/saleQuotes/${clientCompId}`, (message) => {
-        var newChange = JSON.parse(message.body);
-        this.quoteRealTimeService.handleRealTimeChanges(newChange);
-        if (message.body) {
+    this.quoteRealTimeService.subsribeToQuoteCustomerUsers = this.stompClient.subscribe(`/user/watch/saleQuotes/${clientCompId}`, (message) => {
+      var newChange = JSON.parse(message.body);
+      this.quoteRealTimeService.handleRealTimeChanges(newChange);
+      if (message.body) {
 
-        }
-      });
-    }, 3000);
+      }
+    });
   }
 
   /**
@@ -508,16 +506,10 @@ export class WebsocketService {
   }
 
   public subsribeToTicketsCustomerUsers(clientCompId) {
-
-    setTimeout(() => {
-
-      this.ticketsRealTimeService.subsribeToTicketsCustomerUser = this.stompClient.subscribe(`/user/watch/tickets/${clientCompId}`, (message) => {
-        var newChange = JSON.parse(message.body);
-        this.ticketsRealTimeService.handleRealTimeChangesTickets(newChange);
-
-      });
-
-    }, 3000);
+    this.ticketsRealTimeService.subsribeToTicketsCustomerUser = this.stompClient.subscribe(`/user/watch/tickets/${clientCompId}`, (message) => {
+      var newChange = JSON.parse(message.body);
+      this.ticketsRealTimeService.handleRealTimeChangesTickets(newChange);
+    });
   }
 
   public subsribeToBillable() {
@@ -570,13 +562,10 @@ export class WebsocketService {
     }, 3000);
   }
   public subsribeToInvoiceCustomerUsers(clientCompId) {
-    setTimeout(() => {
-      this.invoiceRealTimeService.subsribeToInvoiceCustomerUsers = this.stompClient.subscribe(`/user/watch/receivableInvoice/${clientCompId}`, (message) => {
-        var newChange = JSON.parse(message.body);
-        this.invoiceRealTimeService.handleRealTimeChangesInvoice(newChange);
-      });
-
-    }, 3000);
+    this.invoiceRealTimeService.subsribeToInvoiceCustomerUsers = this.stompClient.subscribe(`/user/watch/receivableInvoice/${clientCompId}`, (message) => {
+      var newChange = JSON.parse(message.body);
+      this.invoiceRealTimeService.handleRealTimeChangesInvoice(newChange);
+    });
   }
   public subsribeToSubmittedTicket() {
     setTimeout(() => {
@@ -588,11 +577,9 @@ export class WebsocketService {
     }, 3000);
   }
   public subsribeToPaymentsCustomerUsers(clientCompId) {
-    setTimeout(() => {
-      this.paymentsRealTimeService.subsribeToPaymentsCustomerUsers = this.stompClient.subscribe(`/user/watch/payments/${clientCompId}`, (message) => {
-        var newChange = JSON.parse(message.body);
-        this.paymentsRealTimeService.handleRealTimeChanges(newChange);
-      });
+    this.paymentsRealTimeService.subsribeToPaymentsCustomerUsers = this.stompClient.subscribe(`/user/watch/payments/${clientCompId}`, (message) => {
+      var newChange = JSON.parse(message.body);
+      this.paymentsRealTimeService.handleRealTimeChanges(newChange);
     });
   }
   public subsribeToPayments() {
