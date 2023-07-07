@@ -174,7 +174,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     this.ticketsStateService.onToggleAddTicket();
   }
   ngOnDestroy(): void {
-    if (this.customerPortalStateService.isCustomerPortal) this.ticketsRealTimeService.subsribeToTicketsCustomerUser.unsubscribe();
+    if (this.customerPortalStateService.isCustomerPortal && this.ticketsRealTimeService.subsribeToTicketsCustomerUser) this.ticketsRealTimeService.subsribeToTicketsCustomerUser.unsubscribe();
     this.sub.unsubscribe();
   }
   public trackById(index, item) {

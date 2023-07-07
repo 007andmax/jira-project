@@ -188,7 +188,7 @@ export class PaymentsComponent implements OnInit {
     this.payments = [];
   }
   ngOnDestroy(): void {
-    if (this.customerPortalStateService.isCustomerPortal) this.paymentsRealTimeService.subsribeToPaymentsCustomerUsers.unsubscribe();
+    if (this.customerPortalStateService.isCustomerPortal && this.paymentsRealTimeService.subsribeToPaymentsCustomerUsers) this.paymentsRealTimeService.subsribeToPaymentsCustomerUsers.unsubscribe();
     this.sub.unsubscribe();
   }
   public trackById(index, item) {

@@ -252,7 +252,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     this.invoices = [];
   }
   ngOnDestroy(): void {
-    if (this.customerPortalStateService.isCustomerPortal) this.invoiceRealTimeService.subsribeToInvoiceCustomerUsers.unsubscribe();
+    if (this.customerPortalStateService.isCustomerPortal && this.invoiceRealTimeService.subsribeToInvoiceCustomerUsers) this.invoiceRealTimeService.subsribeToInvoiceCustomerUsers.unsubscribe();
     this.sub.unsubscribe();
   }
   public trackById(index, item) {

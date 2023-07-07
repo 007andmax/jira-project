@@ -154,14 +154,14 @@ export class WebsocketService {
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToCategories();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToProducts();
       that.subsribeToTicketActualNumber();
-      that.subsribeToTickets();
+      if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToTickets();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToCmdShellOutput();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToBillable();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToInvoiceNumber();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToBillableCount();
-      that.subsribeToInvoice();
+      if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToInvoice();
       that.subsribeToSubmittedTicket();
-      that.subsribeToPayments();
+      if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToPayments();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToSubmittedService();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToSubmittedServiceAgreement();
       that.subsribeToSubmittedOneTimeConnection();

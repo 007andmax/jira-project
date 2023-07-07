@@ -226,7 +226,7 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     return item.id;
   }
   ngOnDestroy(): void {
-    if (this.customerPortalStateService.isCustomerPortal) this.quoteRealTimeService.subsribeToQuoteCustomerUsers.unsubscribe();
+    if (this.customerPortalStateService.isCustomerPortal && this.quoteRealTimeService.subsribeToQuoteCustomerUsers) this.quoteRealTimeService.subsribeToQuoteCustomerUsers.unsubscribe();
     this.sub.unsubscribe();
   }
 }
