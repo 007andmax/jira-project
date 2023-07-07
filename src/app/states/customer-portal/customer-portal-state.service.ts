@@ -101,14 +101,11 @@ export class CustomerPortalStateService {
     return this.usersFilter;
   }
   public checkEditTicket(currentUser, createdUserId, companyId) {
-    console.log(currentUser.customerCompaniesInfo.find(item => item.companyId === companyId));
     if (currentUser.id === createdUserId && currentUser.customerCompaniesInfo.find(item => item.companyId === companyId).customerUserRole.getPermission('VIEW_MY_TICKETS')) return true;
 
     if (currentUser.id !== createdUserId && currentUser.customerCompaniesInfo.find(item => item.companyId === companyId).customerUserRole.getPermission('VIEW_MY_TICKETS') &&
       currentUser.customerCompaniesInfo.find(item => item.companyId === companyId).customerUserRole.getPermission('VIEW_ALL_TICKETS') &&
       currentUser.customerCompaniesInfo.find(item => item.companyId === companyId).customerUserRole.getPermission('EDIT_OTHER_TICKETS')) {
-      console.log("currentUser.customerCompaniesInfo", currentUser.customerCompaniesInfo.find(item => item.companyId === companyId));
-      console.log("checkEditTicket - 2");
       return true;
     }
     return false;

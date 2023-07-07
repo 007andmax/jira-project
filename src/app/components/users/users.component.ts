@@ -297,12 +297,10 @@ export class UsersComponent implements OnInit {
       1 : (((b.firstName + b.lastName).toLowerCase() > (a.firstName + a.lastName).toLowerCase()) ? -1 : 0));
     if (this.customerPortalStateService.isCustomerPortal) {
       let customerCompaniesInfo = this.usersStateService.getCurrentUser().customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id'));
-      console.log("customerCompaniesInfo", customerCompaniesInfo);
       if (customerCompaniesInfo.customerUserRole.getPermission('VIEW_MY_PROFILE') && !customerCompaniesInfo.customerUserRole.getPermission('VIEW_ALL_USERS')) {
         this.reqUsers = this.reqUsers.filter(item => item.id == this.usersStateService.getCurrentUser().id);
       } else if (!(customerCompaniesInfo.customerUserRole.getPermission('VIEW_MY_PROFILE') && customerCompaniesInfo.customerUserRole.getPermission('VIEW_ALL_USERS'))) this.reqUsers = [];
     }
-    console.log("this.reqUsers", this.reqUsers);
     this.onScroll();
     this.showPreloader = false;
   }

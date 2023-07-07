@@ -126,7 +126,6 @@ export class AppComponent implements OnInit {
     this.usersStateService.onInit();
     this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.currentUser = data;
-      console.log("leftPanelStateService", this.leftPanelStateService.activePage);
       if (this.state !== '' && this.customerPortalStateService.isCustomerPortal) this.customerPortalStateService.setFilters(this.currentUser, this.state);
       if (this.currentUser.twoFactorAuthType === "GOOGLE_SECURE" && !this.currentUser.userTOTP.confirmed) this.onCheckGoogleAuthenticator();
       if (this.appService.getIsInit()) return;
@@ -289,7 +288,6 @@ export class AppComponent implements OnInit {
         this.ticketsStateService.onChangeLeftPanelFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
       }
       if (this.router.url === "/" && this.currentUser.role !== "SUPER_ADMIN" && this.state == '' && this.main_page == PAGE_MAIN) {
-        console.log("this.router.url", this.router.url);
         if (this.customerPortalStateService.isCustomerPortal) {
           this.leftPanelStateService.goToState('default');
           /*   for (let i = 0; i < this.currentUser.customerCompaniesInfo.length; i++) {

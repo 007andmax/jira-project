@@ -153,8 +153,6 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
     this.user.customerCompaniesInfo[index].setUserRole(data);
   }
   removeCompnay(i) {
-    console.log("removeCompnay", i);
-    console.log("this.user.customerCompaniesInfo", this.user.customerCompaniesInfo);
     this.user.customerCompaniesInfo.splice(i, 1);
   }
   onSelectJobTitle(data, index) {

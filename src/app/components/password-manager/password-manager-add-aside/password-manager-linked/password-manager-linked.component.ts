@@ -36,7 +36,7 @@ export class PasswordManagerLinkedComponent implements OnInit {
   @Output() onSelectedItem = new EventEmitter<any>();
   sub: Subscription = new Subscription();
   constructor(public cd: ChangeDetectorRef,
-    private companiesState: CompaniesStateService,
+    public companiesState: CompaniesStateService,
     public devicesStateService: DevicesStateService,
     private gadgetsService: GadgetsService,
     public ticketsService: TicketsService,
@@ -59,7 +59,7 @@ export class PasswordManagerLinkedComponent implements OnInit {
     })
     this.sub.add(getOnCompanies);
   }
-  private getClientsList(data) {
+  public getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }

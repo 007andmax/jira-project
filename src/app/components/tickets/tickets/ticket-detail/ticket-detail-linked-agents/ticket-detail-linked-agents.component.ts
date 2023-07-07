@@ -14,18 +14,34 @@ export class TicketDetailLinkedAgentsComponent extends PasswordManagerLinkedComp
   @Input() selectedCompanyId: string;
   @Input() ticketProfile: TicketProfile = new TicketProfile();
   selectedDevice;
+  ngOnInit() {
+    if (this.ticketProfile.agent) this.selectedDevice = JSON.parse(JSON.stringify(this.ticketProfile.agent));
+    if (this.devicesStateService.getAllDevices()) {
+      this.preloader = false;
+      if (this.selectedCompanyId) this.onSelectCompany(this.selectedCompanyId);
+    }
+    this.devicesStateService.getOnDevices().subscribe(data => {
+      this.preloader = false;
+      if (this.selectedCompanyId) this.onSelectCompany(this.selectedCompanyId);
+    })
+    if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
+    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
+      this.getClientsList(data);
+    })
+    this.sub.add(getOnCompanies);
+  }
   onSelectCompany(id) {
+    console.log("onSelectCompany", id);
     this.usersList = [];
     this.devicesList = [];
     this.gadgets = [];
     this.selectedCompanyId = null;
     if (id) {
       this.selectedCompanyId = id;
-      this.selectedDevice = JSON.parse(JSON.stringify(this.ticketProfile.agent));
       let devices = (this.devicesStateService.getAllDevices() && this.devicesStateService.getAllDevices()[id]) ? this.devicesStateService.getAllDevices()[id] : [];
       devices.forEach(item => {
         this.devicesList.push(item);
-        // if (this.ticketProfile.agent && this.ticketProfile.agent.deviceId == item.id) this.selectedDevice = item;
+        if (this.ticketProfile.agent && this.ticketProfile.agent.deviceId == item.id) this.selectedDevice = item;
       })
       this.devicesList.sort((a, b) => (this.getLabelDevice(a).toLowerCase() > this.getLabelDevice(b).toLowerCase()) ?
         1 : ((this.getLabelDevice(b).toLowerCase() > this.getLabelDevice(a).toLowerCase()) ? -1 : 0));
