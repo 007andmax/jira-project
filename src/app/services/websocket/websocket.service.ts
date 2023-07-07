@@ -108,8 +108,10 @@ export class WebsocketService {
   }
   onInitConnectCustomerUser(state, clientCompId) {
     if (this.isInit) {
-      if (state == "new-tickets") this.subsribeToTicketsCustomerUser(clientCompId);
+      if (state == "new-tickets") this.subsribeToTicketsCustomerUsers(clientCompId);
       if (state == "new-billable-invoices") this.subsribeToInvoiceCustomerUsers(clientCompId);
+      if (state == "quotes-component") this.subsribeToQuoteCustomerUsers(clientCompId);
+      if (state == "new-payments-ng2") this.subsribeToPaymentsCustomerUsers(clientCompId);
       return;
     }
     this.ws = new SockJS(this.serverUrl);
@@ -119,8 +121,10 @@ export class WebsocketService {
     let that = this;
     this.stompClient.onConnect = (data) => {
       //   that.subsribeToKafka();
-      if (state == "new-tickets") that.subsribeToTicketsCustomerUser(clientCompId);
+      if (state == "new-tickets") that.subsribeToTicketsCustomerUsers(clientCompId);
       if (state == "new-billable-invoices") that.subsribeToInvoiceCustomerUsers(clientCompId);
+      if (state == "quotes-component") this.subsribeToQuoteCustomerUsers(clientCompId);
+      if (state == "new-payments-ng2") this.subsribeToPaymentsCustomerUsers(clientCompId);
       that.onInit.emit(true);
       that.isInit = true;
     }
@@ -285,6 +289,21 @@ export class WebsocketService {
         var newChange = JSON.parse(message.body);
         this.supportPageCategoriesRealTimeService.handleRealTimeChanges(newChange);//permissions
         if (message.body) { }
+      });
+    }, 3000);
+  }
+
+  /**
+ * @description Subscribe to quote realtime Customer Users
+*/
+  public subsribeToQuoteCustomerUsers(clientCompId) {
+    setTimeout(() => {
+      this.quoteRealTimeService.subsribeToQuoteCustomerUsers = this.stompClient.subscribe(`/user/watch/saleQuotes/${clientCompId}`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.quoteRealTimeService.handleRealTimeChanges(newChange);
+        if (message.body) {
+
+        }
       });
     }, 3000);
   }
@@ -488,7 +507,7 @@ export class WebsocketService {
     }, 3000);
   }
 
-  public subsribeToTicketsCustomerUser(clientCompId) {
+  public subsribeToTicketsCustomerUsers(clientCompId) {
 
     setTimeout(() => {
 
@@ -567,6 +586,14 @@ export class WebsocketService {
       });
 
     }, 3000);
+  }
+  public subsribeToPaymentsCustomerUsers(clientCompId) {
+    setTimeout(() => {
+      this.paymentsRealTimeService.subsribeToPaymentsCustomerUsers = this.stompClient.subscribe(`/user/watch/payments/${clientCompId}`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.paymentsRealTimeService.handleRealTimeChanges(newChange);
+      });
+    });
   }
   public subsribeToPayments() {
     setTimeout(() => {

@@ -21,6 +21,7 @@ import { QuoteSort } from '../class/quote-sort';
 import { QuoteRealTimeService } from '../quote-realtime/quote-realtime.service';
 import { QuotesListService } from './services/quotes-list.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 
 @Component({
   selector: 'app-quotes-table',
@@ -50,11 +51,13 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     private companiesStateService: CompaniesStateService,
     private ticketStateService: TicketStateService,
     private customerPortalStateService: CustomerPortalStateService,
+    private websocketService: WebsocketService,
     private quoteServices: QuoteService,) { }
 
   ngOnInit() {
     if (this.customerPortalStateService.isCustomerPortal) {
       this.filter.setCompanyId(this.customerPortalStateService.getQuotesFilter().companyId);
+      this.websocketService.onInitConnectCustomerUser("quotes-component", this.customerPortalStateService.getQuotesFilter().companyId);
     }
     let onQuotesFilters = this.customerPortalStateService.onQuotesFilters.subscribe(data => {
       this.filter.setData(this.customerPortalStateService.getQuotesFilter());
@@ -223,6 +226,7 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     return item.id;
   }
   ngOnDestroy(): void {
+    if (this.customerPortalStateService.isCustomerPortal) this.quoteRealTimeService.subsribeToQuoteCustomerUsers.unsubscribe();
     this.sub.unsubscribe();
   }
 }

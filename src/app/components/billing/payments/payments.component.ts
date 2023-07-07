@@ -14,6 +14,7 @@ import { PaymentsRealTimeService } from 'src/app/states/payments/payments-real-t
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 
 @Component({
   selector: 'payments',
@@ -54,11 +55,13 @@ export class PaymentsComponent implements OnInit {
     private paymentsRealTimeService: PaymentsRealTimeService,
     private leftPanelStateService: LeftPanelStateService,
     private customerPortalStateService: CustomerPortalStateService,
+    private websocketService: WebsocketService,
     private paymentsListService: PaymentsListService) { }
 
   ngOnInit() {
     if (this.customerPortalStateService.isCustomerPortal) {
       this.paymentsFilter.setCompanyId(this.customerPortalStateService.getPaymentsFilter().companyId);
+      this.websocketService.onInitConnectCustomerUser("new-payments-ng2", this.customerPortalStateService.getPaymentsFilter().companyId);
     }
     let onPaymentsFilters = this.customerPortalStateService.onPaymentsFilters.subscribe(data => {
       this.selectedPayments = [];
@@ -185,6 +188,7 @@ export class PaymentsComponent implements OnInit {
     this.payments = [];
   }
   ngOnDestroy(): void {
+    if (this.customerPortalStateService.isCustomerPortal) this.paymentsRealTimeService.subsribeToPaymentsCustomerUsers.unsubscribe();
     this.sub.unsubscribe();
   }
   public trackById(index, item) {
