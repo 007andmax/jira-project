@@ -100,6 +100,9 @@ export class LeftPanelCustomerPortalUsersComponent implements OnInit {
     this.customerPortalStateService.setInvoiceFilter(company)
     this.goToState('new-billable-invoices');
   }
+  public trackById(index, item) {
+    return item.id;
+  }
   private getCurrentUser(data) {
     this.currentUser = data;
   }

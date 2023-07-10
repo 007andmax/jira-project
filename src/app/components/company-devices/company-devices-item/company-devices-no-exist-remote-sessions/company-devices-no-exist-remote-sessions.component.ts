@@ -14,7 +14,7 @@ export class CompanyDevicesNoExistRemoteSessionsComponent implements OnInit {
   @Output() onRemoteAccess = new EventEmitter();
   constructor(private permissionsService: PermissionsService,
     private usersStateService: UsersStateService,
-    private customerPortalStateService: CustomerPortalStateService) { }
+    public customerPortalStateService: CustomerPortalStateService) { }
 
   ngOnInit() {
   }

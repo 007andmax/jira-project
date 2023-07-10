@@ -21,7 +21,7 @@ export class MyProfileComponent implements OnInit, OnDestroy {
   @ViewChild('activityHistory') activityHistory: ActivityHistoryComponent;
   @ViewChild('tickets') tickets: TicketsMyProfileComponent;
   constructor(private settingStateService: SettingStateService,
-    private customerPortalStateService: CustomerPortalStateService,) { }
+    public customerPortalStateService: CustomerPortalStateService,) { }
 
   ngOnInit() {
     $('body').addClass('page-settings');

@@ -18,7 +18,7 @@
         [ngForTrackBy]="trackById"
     >
         <li
-            [ngClass]="{'--active': listType === 'DASHBOARD' && activePage === 'new-tickets-dashboard'}"
+            [ngClass]="{'--active': activePage === 'new-tickets-dashboard'}"
             class="desktop-version"
             *ngIf="customerCompany.customerUserRole"
         >

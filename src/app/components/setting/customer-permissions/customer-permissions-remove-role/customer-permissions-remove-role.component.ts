@@ -74,4 +74,7 @@ export class CustomerPermissionsRemoveRoleComponent implements OnInit {
       this.close();
     })
   }
+  public trackById(index, item) {
+    return item.id;
+  }
 }

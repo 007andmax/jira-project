@@ -77,7 +77,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private crmStateService: CrmStateService,
     private imageCropperStateService: ImageCropperStateService,
     private modalImageCropperStateService: ModalImageCropperStateService,
-    private customerPortalStateService: CustomerPortalStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     private companiesService: CompaniesService,
   ) {
   }

@@ -27,4 +27,7 @@ export class UsersCheckUseComponent implements OnInit {
     this.activeModal.close();
     this.confirmStateService.setConfirm(false);
   };
+  public trackById(index, item) {
+    return item.id;
+  }
 }

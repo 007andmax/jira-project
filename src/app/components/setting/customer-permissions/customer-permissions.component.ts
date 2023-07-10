@@ -24,6 +24,7 @@ export class CustomerPermissionsComponent implements OnInit, OnDestroy {
   sections = {};
   userRoleForRemove: UserRole;
   showRemoveRole: boolean = false;
+  loading: boolean = true;
   sub: Subscription = new Subscription();
   constructor(private usersStateService: UsersStateService,
     private permissionManageService: PermissionManageService,
@@ -44,6 +45,7 @@ export class CustomerPermissionsComponent implements OnInit, OnDestroy {
     this.sub.add(onGetUserRole);
     this.usersService.getPermissions().subscribe((data: any) => {
       this.userPermissions = data.map(item => new UserPermissions(item));
+      this.loading = false;
     })
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
