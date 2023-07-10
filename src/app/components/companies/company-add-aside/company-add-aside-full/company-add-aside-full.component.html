@@ -270,22 +270,24 @@
         </div>
     </div>
     <div
-        class="qt-inputs-row"
+        class="qt-inputs-row-background"
         *ngIf="company.isUseSelectedUser"
     >
-        <div class="qt-input-block qt-f100 qt-flex-md-100">
-            <app-drop-down
-                [class]="['qt-select-input-40']"
-                [placeholder]="'Select user'"
-                [list]="usersList"
-                [search]="true"
-                [change]="true"
-                [validate]="validate.getUser()"
-                [errorMessage]="'Client Type is required'"
-                [title]="'User'"
-                (onSelectedItem)="onSelectUser($event)"
-            >
-            </app-drop-down>
+        <div class="qt-inputs-row">
+            <div class="qt-input-block qt-f100 qt-flex-md-100">
+                <app-drop-down
+                    [class]="['qt-select-input-40']"
+                    [placeholder]="'Select user'"
+                    [list]="usersList"
+                    [search]="true"
+                    [change]="true"
+                    [validate]="validate.getUser()"
+                    [errorMessage]="'Client user is required'"
+                    [title]="'User'"
+                    (onSelectedItem)="onSelectUser($event)"
+                >
+                </app-drop-down>
+            </div>
         </div>
     </div>
     <div
@@ -299,10 +301,10 @@
         </div>
         <div class="qt-inputs-row">
             <div class="qt-input-block qt-f50 qt-flex-md-100 --required">
-                <div class="qt-input-block__label">
+                <div class="qt-input-block__label qt-df qt-jc-sb">
                     First Name
                     <span
-                        class="qt-fw-600 qt-fs-12 qt-lh-133 qt-color-info qt-ml-auto qt-pointer"
+                        class="qt-fw-600 qt-fs-12 qt-lh-133 qt-color-info qt-pointer"
                         (click)="company.setUseSelectedUser(true)"
                     >
                         + Add User

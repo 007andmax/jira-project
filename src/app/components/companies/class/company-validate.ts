@@ -24,6 +24,9 @@ export class CompanyValdiate {
     public getUser() {
         return this.user;
     }
+    public resetUser() {
+        this.user = true;
+    }
     public resetBillindAddress() {
         this.billindAddress = true;
     }
@@ -145,6 +148,7 @@ export class CompanyValdiate {
         if (!company.isUseSelectedUser && (!company.contacts[0].firstName || company.contacts[0].firstName.length === 0)) this.firstName = false;
         if (!company.name || company.name.length === 0) this.name = false;
         if (company.clientType === "") this.type = false;
+        if (company.isUseSelectedUser && !company.contacts[0].id) this.user = false;
         if (!company.isUseSelectedUser && (!company.contacts[0].primaryEmail || !company.contacts[0].primaryEmail.match(this.reEmail))) this.primaryContactEmail = false;
         if (!company.addresses[0].phoneNumbers[0].number || company.addresses[0].phoneNumbers[0].number.length < 14) this.phoneNumber = false;
         if (company.addresses.length === 2 && company.addresses[1].phoneNumbers[0].number.length > 0 && company.addresses[1].phoneNumbers[0].number.length < 14) this.shippingPhoneNumber = false;

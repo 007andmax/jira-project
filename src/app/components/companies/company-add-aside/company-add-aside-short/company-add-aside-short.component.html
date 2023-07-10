@@ -97,7 +97,7 @@
                 [search]="true"
                 [change]="true"
                 [validate]="validate.getUser()"
-                [errorMessage]="'Client Type is required'"
+                [errorMessage]="'Client user is required'"
                 [title]="'User'"
                 (onSelectedItem)="onSelectUser($event)"
             >
@@ -109,10 +109,10 @@
         *ngIf="!company.isUseSelectedUser"
     >
         <div class="qt-input-block qt-f50 qt-flex-md-100 --required">
-            <div class="qt-input-block__label">
+            <div class="qt-input-block__label qt-df qt-jc-sb">
                 First Name
                 <span
-                    class="qt-fw-600 qt-fs-12 qt-lh-133 qt-color-info qt-ml-auto qt-pointer"
+                    class="qt-fw-600 qt-fs-12 qt-lh-133 qt-color-info qt-pointer"
                     (click)="company.setUseSelectedUser(true)"
                 >
                     + Add User

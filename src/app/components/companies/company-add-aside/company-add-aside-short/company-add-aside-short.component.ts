@@ -52,6 +52,7 @@ export class CompanyAddAsideShortComponent implements OnInit, OnDestroy {
     if (item) {
       let indexhUser = this.users.findIndex(user => `${user.firstName} ${user.lastName}` === item);
       if (indexhUser > -1) this.company.contacts[0].setId(this.users[indexhUser].id);
+      this.validate.resetUser();
     } else {
       this.company.contacts[0].setId(null);
     }
