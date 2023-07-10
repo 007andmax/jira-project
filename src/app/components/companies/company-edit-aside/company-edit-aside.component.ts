@@ -193,7 +193,6 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     let getCompanyFromEdit = this.companiesStateService.getCompanyFromEdit().subscribe((data: CompanyProfile) => {
       this.company = new CompanyProfile();
       this.company.onEditMode(data);
-      console.log("this.company", this.company);
       if (this.company.addresses.length == 1) this.company.initShippingAdress();
       this.companyTimeZoneState.onEditMode(this.company.addresses[0].timeZone);
       let indexTerms = this.paymentTerms.findIndex(item => item.value === this.company.paymentTerms);
@@ -264,7 +263,6 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     this.validate.checkValidPrimaryEmail(this.company.contacts[0].primaryEmail);
   }
   public onChangeSubscribe(data) {
-    console.log("data", data);
     let index = this.company.contacts[0].customerCompaniesInfo.findIndex(item => item.companyId == this.company.id);
     this.company.contacts[0].customerCompaniesInfo[index].changeDefaultSubscriptions(data);
   }

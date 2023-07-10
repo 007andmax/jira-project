@@ -65,7 +65,6 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       /* END */
     }
     let onTicketFilters = this.customerPortalStateService.onTicketFilters.subscribe(data => {
-      console.log("onTicketFilters", data);
       this.ticketsFilter.setListType("ALL");
       this.ticketsFilter.setFilter(JSON.parse(JSON.stringify(this.customerPortalStateService.getTicketsFilter())));
       this.showPreloader = true;
@@ -102,7 +101,6 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     });
 
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
-      console.log("getOnInitFilter", data);
       this.ticketsFilter = data;
       this.showPreloader = true;
       document.body.querySelector(".main-container").scrollTo(0, 0);

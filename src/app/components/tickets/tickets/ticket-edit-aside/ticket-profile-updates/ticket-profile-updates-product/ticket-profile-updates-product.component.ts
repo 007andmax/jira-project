@@ -23,7 +23,6 @@ export class TicketProfileUpdatesProductComponent implements OnInit {
     public modalService: NgbModal) { }
 
   ngOnInit() {
-    console.log("isBlockChange", this.isBlockChange);
   }
   public getTotal(price, quantity) {
     return price * quantity;

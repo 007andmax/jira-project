@@ -30,7 +30,6 @@ export class CompanyDropDownComponent extends DropDownComponent {
         if (customerCompaniesInfo && customerCompaniesInfo.customerUserRole && customerCompaniesInfo.customerUserRole.getPermission('VIEW_MY_TICKETS')) return true;
         return false;
       })
-      console.log("this.list ", this.list);
     }
   }
   onOpenChange(data) {

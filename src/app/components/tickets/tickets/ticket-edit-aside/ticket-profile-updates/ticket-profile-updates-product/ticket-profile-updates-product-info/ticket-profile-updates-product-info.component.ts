@@ -47,7 +47,6 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit, OnDestr
     })
     this.sub.add(getOnUsers);
     if (this.product.date) this.setDateWithTimeOffset();
-    console.log("isBlockChange", this.isBlockChange);
   }
   public getTotal(price, quantity) {
     return (price * quantity).toFixed(2);

@@ -290,36 +290,6 @@ export class AppComponent implements OnInit {
       if (this.router.url === "/" && this.currentUser.role !== "SUPER_ADMIN" && this.state == '' && this.main_page == PAGE_MAIN) {
         if (this.customerPortalStateService.isCustomerPortal) {
           this.leftPanelStateService.goToState('default');
-          /*   for (let i = 0; i < this.currentUser.customerCompaniesInfo.length; i++) {
-               let item = this.currentUser.customerCompaniesInfo[i];
-               if (item.customerUserRole) {
-                 if (item.customerUserRole.getPermission('VIEW_ALL_TICKETS')) {
-                   this.leftPanelStateService.goToState('new-tickets');
-                   break;
-                 }
-                 if (item.customerUserRole.getPermission('VIEW_ALL_INVOICES')) {
-                   this.leftPanelStateService.goToState('new-billable-invoices');
-                   break;
-                 }
-                 if (item.customerUserRole.getPermission('VIEW_MY_PROFILE')) {
-                   this.leftPanelStateService.goToState('new-users');
-                   break;
-                 }
-                 if (item.customerUserRole.getPermission('VIEW_ALL_DEVICES')) {
-                   this.leftPanelStateService.goToState('company-devices');
-                   break;
-                 }
-                 if (item.customerUserRole.getPermission('VIEW_ALL_QUOTES')) {
-                   this.leftPanelStateService.goToState('quotes-component');
-                   break;
-                 }
-                 if (item.customerUserRole.getPermission('VIEW_ALL_PAYMENTS')) {
-                   this.leftPanelStateService.goToState('new-payments-ng2');
-                   break;
-                 }
-               }
-               if (i + 1 == this.currentUser.customerCompaniesInfo.length) this.leftPanelStateService.goToState('default');
-             }*/
         } else {
           this.ticketsStateService.onChangeTypeFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
           this.ticketsStateService.onChangeLeftPanelFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);

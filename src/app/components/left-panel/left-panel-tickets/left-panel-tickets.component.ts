@@ -113,7 +113,6 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
 
   }
   private getCounts() {
-    console.log("getCounts");
     /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
     /* START - return last version to get counts */
     this.ticketsStateService.getCounts(this.ticketsFilter.getDataForCounts());

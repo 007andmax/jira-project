@@ -26,9 +26,6 @@ export class CustomerPortalStateService {
     this.isCustomerPortal = data;
   }
   public setFilters(currentUser, state) {
-    console.log("setFilters", currentUser);
-
-
     let item = currentUser.customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id'))
     if (item.customerUserRole == null) return;
     if (item.customerUserRole.getPermission('VIEW_ALL_TICKETS') && state == 'new-tickets') {
@@ -85,7 +82,6 @@ export class CustomerPortalStateService {
     this.onTicketFilters.emit(this.ticketsFilter);
   }
   public setCompnayIdInfo(data) {
-    console.log("setCompnayIdInfo", data);
     localStorage.setItem("company_info_id", data);
   }
   public getQuotesFilter() {

@@ -63,7 +63,6 @@ export class CompanyProfile {
         this.tags = data;
     }
     public onEditMode(company: CompanyProfile) {
-        console.log("company", company);
         this.id = company.id;
         this.accountNumber = company.accountNumber;
         if (company.addresses.length == 1) {
@@ -135,7 +134,6 @@ export class CompanyProfile {
         this.associatedCompanies = company.associatedCompanies.map(item => new CompanyAssociated(item));
     }
     public getDataForUpdate() {
-        console.log("this.contacts", this.contacts);
         let contacts = JSON.parse(JSON.stringify(this.contacts.map(item => (item.getDataForRequest(false, false)))));
         let addresses = [this.addresses[0]];
         if (this.addresses.length == 2 && this.addresses[1].checkForAdd()) addresses.push(this.addresses[1]);

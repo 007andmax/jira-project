@@ -164,7 +164,6 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     this.user.addCustomerCompaniesInfo();
   }
   removeCompnay(i) {
-    console.log("removeCompnay", i);
     this.user.customerCompaniesInfo.splice(i, 1);
   }
   onChangeCustomSubscriptions(data) {

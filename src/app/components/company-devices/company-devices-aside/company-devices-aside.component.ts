@@ -43,7 +43,6 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
         let find = this.devices.find(item => item.agentId === data.ids[0]);
         if (find) {
           this.currentDevice = find;
-          console.log("this.currentDevice", this.currentDevice);
           return;
         }
       }
@@ -60,7 +59,6 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
           } else {
             this.currentDevice = this.devices[this.devices.length - 1];
           }
-          console.log("this.currentDevice", this.currentDevice);
           this.tab = data.type;
           this.showPreloader = false;
         });

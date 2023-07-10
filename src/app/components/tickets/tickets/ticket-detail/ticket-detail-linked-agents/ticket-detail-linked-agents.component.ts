@@ -31,7 +31,6 @@ export class TicketDetailLinkedAgentsComponent extends PasswordManagerLinkedComp
     this.sub.add(getOnCompanies);
   }
   onSelectCompany(id) {
-    console.log("onSelectCompany", id);
     this.usersList = [];
     this.devicesList = [];
     this.gadgets = [];
