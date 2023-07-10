@@ -39,6 +39,7 @@ export class CompanyProfile {
     associatedCompanies: Array<CompanyAssociated> = [];
     reputation?: number = 0;
     primaryContact: CompanyAndressContact;
+    isUseSelectedUser: boolean = false;
     constructor() {
         this.logo = null;
         let contact: CompanyProfileContact = new CompanyProfileContact();
@@ -47,6 +48,9 @@ export class CompanyProfile {
         this.addresses = [address];
         this.contacts = [contact];
         this.workingDays = Weeks.map((item) => new WorkDay(item.toUpperCase(), 0, 0))
+    }
+    public setUseSelectedUser(data) {
+        this.isUseSelectedUser = data;
     }
     public initShippingAdress() {
         let address: CompanyProfileAddress = new CompanyProfileAddress();
@@ -132,7 +136,7 @@ export class CompanyProfile {
     }
     public getDataForUpdate() {
         console.log("this.contacts", this.contacts);
-        let contacts = JSON.parse(JSON.stringify(this.contacts.map(item => (item.getDataForRequest(false)))));
+        let contacts = JSON.parse(JSON.stringify(this.contacts.map(item => (item.getDataForRequest(false, false)))));
         let addresses = [this.addresses[0]];
         if (this.addresses.length == 2 && this.addresses[1].checkForAdd()) addresses.push(this.addresses[1]);
         return {
@@ -162,7 +166,7 @@ export class CompanyProfile {
         }
     }
     public getDataForAdd() {
-        let contacts = JSON.parse(JSON.stringify(this.contacts.map(item => (item.getDataForRequest(true)))));
+        let contacts = JSON.parse(JSON.stringify(this.contacts.map(item => (item.getDataForRequest(true, this.isUseSelectedUser)))));
         let addresses = [this.addresses[0]];
         if (this.addresses.length == 2 && this.addresses[1].checkForAdd()) addresses.push(this.addresses[1]);
         return {

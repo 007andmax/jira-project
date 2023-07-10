@@ -269,7 +269,29 @@
             </mat-error>
         </div>
     </div>
-    <div class="qt-inputs-row-background">
+    <div
+        class="qt-inputs-row"
+        *ngIf="company.isUseSelectedUser"
+    >
+        <div class="qt-input-block qt-f100 qt-flex-md-100">
+            <app-drop-down
+                [class]="['qt-select-input-40']"
+                [placeholder]="'Select user'"
+                [list]="usersList"
+                [search]="true"
+                [change]="true"
+                [validate]="validate.getUser()"
+                [errorMessage]="'Client Type is required'"
+                [title]="'User'"
+                (onSelectedItem)="onSelectUser($event)"
+            >
+            </app-drop-down>
+        </div>
+    </div>
+    <div
+        class="qt-inputs-row-background"
+        *ngIf="!company.isUseSelectedUser"
+    >
         <div class="qt-inputs-row">
             <div class="qt-input-block">
                 <div class="qt-input-block__subtitle">Contact Detail</div>
@@ -277,7 +299,15 @@
         </div>
         <div class="qt-inputs-row">
             <div class="qt-input-block qt-f50 qt-flex-md-100 --required">
-                <div class="qt-input-block__label">First Name</div>
+                <div class="qt-input-block__label">
+                    First Name
+                    <span
+                        class="qt-fw-600 qt-fs-12 qt-lh-133 qt-color-info qt-ml-auto qt-pointer"
+                        (click)="company.setUseSelectedUser(true)"
+                    >
+                        + Add User
+                    </span>
+                </div>
                 <input
                     type="text"
                     [ngClass]="{'--input-error' : !validate.getFirstName()}"

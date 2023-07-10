@@ -42,6 +42,8 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
   jobTitleList: Array<CrmCompanyJobTitle> = [];
   listPersons: Array<ItemFilterPerson> = [];
   idUploadFile: string;
+  users = [];
+  usersList = [];
   MODE_EDIT_SUBSCRIPTION = MODE_EDIT_SUBSCRIPTION;
   @Input() validate: CompanyValdiate = new CompanyValdiate();
   @Input() company: CompanyProfile = new CompanyProfile();
@@ -78,12 +80,26 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
     this.sub.add(onGetServiceType);
     if (this.usersStateService.getAllUsers().length > 0) {
       this.getTechusers(this.usersStateService.getAllUsers());
+      this.onGetUsers(this.usersStateService.getAllUsers());
     }
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.getTechusers(data);
+      this.onGetUsers(this.usersStateService.getAllUsers());
     })
     this.sub.add(getOnUsers);
     this.onCroppImage();
+  }
+  onGetUsers(data) {
+    this.users = data.filter(item => {
+      if (item.accountType !== 'TECH' && !item.deletedAt) return item;
+    });
+    this.usersList = this.getUserList();
+  }
+  getUserList() {
+    return this.users.map(item => {
+      return `${item.firstName} ${item.lastName}`
+    }).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
+      1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
   }
   public onCroppImage() {
     let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
@@ -136,6 +152,14 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
       this.sub.add(checkCompanyName);
     } else {
       this.validate.checkValidName(this.company.name);
+    }
+  }
+  onSelectUser(item) {
+    if (item) {
+      let indexhUser = this.users.findIndex(user => `${user.firstName} ${user.lastName}` === item);
+      if (indexhUser > -1) this.company.contacts[0].setId(this.users[indexhUser].id);
+    } else {
+      this.company.contacts[0].setId(null);
     }
   }
   public onSelectCompanyTypes(type) {

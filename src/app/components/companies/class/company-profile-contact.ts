@@ -27,11 +27,17 @@ export class CompanyProfileContact {
             this.customerCompaniesInfo = [new UserCustomerCompaniesInfo()]
         }
     }
+    public setId(data) {
+        this.id = data;
+    }
     public fullVersion() {
         this.jobTitleId = null;
     }
-    public getDataForRequest(isAdd) {
+    public getDataForRequest(isAdd, isUseSelectedUser) {
         let phoneNumbers = (!this.phoneNumbers[0].number || this.phoneNumbers[0].number.length === 0) ? [] : this.phoneNumbers;
+        if (isAdd && isUseSelectedUser) return {
+            id: this.id
+        }
         return {
             firstName: this.firstName,
             phoneNumbers: phoneNumbers,
