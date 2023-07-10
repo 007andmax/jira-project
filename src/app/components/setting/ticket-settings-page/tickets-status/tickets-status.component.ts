@@ -148,6 +148,7 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
         this.statusColors = data.map(item => {
           return new StatusColor(item.borderColor, item.textColor);
         })
+        this.ticketsStateService.onColorStatus(this.statusColors);
       })
     } else {
       this.statusColors = this.ticketsStateService.getListStatusColor();

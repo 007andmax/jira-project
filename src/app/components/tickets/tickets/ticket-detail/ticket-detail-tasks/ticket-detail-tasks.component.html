@@ -52,7 +52,8 @@
                 placeholder="Enter Name Task"
                 [(ngModel)]="addTask.subject"
                 (keyup)="onKeyUp($event)"
-                maxlength="20"
+                maxlength="500"
+                minlength="1"
             >
         </div>
         <div class="tab-pane__table-cell"></div>
@@ -116,7 +117,8 @@
                 class="form-input  --editable"
                 placeholder="Enter Name Taks"
                 [(ngModel)]="item.subject"
-                maxlength="20"
+                maxlength="500"
+                minlength="1"
                 appKeyUpEnter
                 (onChange)="onEditTicketTask(item)"
                 (input)="item.onInitEdit(true)"

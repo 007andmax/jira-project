@@ -96,6 +96,9 @@ export class LeftPanelService {
       state === 'tech-service' ||
       state === 'ticket-report' ||
       state === 'service-report' ||
+      state === 'software-summary' ||
+      state === 'hardware-summary' ||
+      state === 'device-ip-summary' ||
       state === 'income-accounts')
   }
   public isSettingsPage(state) {

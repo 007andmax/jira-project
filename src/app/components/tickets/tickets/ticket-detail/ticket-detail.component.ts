@@ -393,7 +393,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   };
   getAgentName() {
     if (!this.ticketProfile.agent || !this.ticketProfile.agent.label) return '';
-    return `, Agent - ${this.ticketProfile.agent.label}`;
+    return ` - ${this.ticketProfile.agent.label}`;
   }
   getCreatAt() {
     let date = new Date(this.ticketProfile.createdAt);

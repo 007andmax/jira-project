@@ -219,15 +219,16 @@
                                             [dropdownHeight]="'300px'"
                                             [heightInput]="'36px'"
                                             [list]="devices"
-                                            [isDisabled]="!deviceIpSummary.companyId || devicesStateService.getPreloaderDevices()"
-                                            [preloader]="deviceIpSummary.preloaderDevices || devicesStateService.getPreloaderDevices()"
+                                            [isDisabled]="!deviceIpSummary.companyId || deviceIpSummary.preloaderDevices"
+                                            [preloader]="deviceIpSummary.preloaderDevices || deviceIpSummary.preloaderDevices"
                                             (onSelectedItem)="onSelectDevice($event)"
                                         ></software-summary-devices-dro-down>
                                     </div>
                                     <button
                                         class="btn-new btn-primary-white qt-fs-0"
                                         (click)="getReportByDeviceIpSummary()"
-                                        [disabled]="deviceIpSummary.preloaderDevices"
+                                        [disabled]="deviceIpSummary.preloaderDevices || !deviceIpSummary.companyId"
+                                        [ngClass]="{'--disabled':deviceIpSummary.preloaderDevices || !deviceIpSummary.companyId}"
                                     >
                                         Get Report
                                     </button>
@@ -367,15 +368,16 @@
                                             [dropdownHeight]="'300px'"
                                             [heightInput]="'36px'"
                                             [list]="devices"
-                                            [isDisabled]="!hardwareSummaryReport.companyId || devicesStateService.getPreloaderDevices()"
-                                            [preloader]="hardwareSummaryReport.preloaderDevices || devicesStateService.getPreloaderDevices()"
+                                            [isDisabled]="!hardwareSummaryReport.companyId || hardwareSummaryReport.preloaderDevices"
+                                            [preloader]="hardwareSummaryReport.preloaderDevices || hardwareSummaryReport.preloaderDevices"
                                             (onSelectedItem)="onSelectDevice($event)"
                                         ></software-summary-devices-dro-down>
                                     </div>
                                     <button
                                         class="btn-new btn-primary-white qt-fs-0"
                                         (click)="getReportByHardwareSummary()"
-                                        [disabled]="hardwareSummaryReport.preloaderDevices"
+                                        [disabled]="hardwareSummaryReport.preloaderDevices || !hardwareSummaryReport.companyId"
+                                        [ngClass]="{'--disabled':hardwareSummaryReport.preloaderDevices || !hardwareSummaryReport.companyId}"
                                     >
                                         Get Report
                                     </button>
@@ -487,8 +489,8 @@
                                             [search]="true"
                                             [change]="true"
                                             [placeholder]="'All devices'"
-                                            [preloader]="softwareSummaryReport.preloaderDevices || devicesStateService.getPreloaderDevices()"
-                                            [isDisabled]="!softwareSummaryReport.companyId || devicesStateService.getPreloaderDevices()"
+                                            [preloader]="softwareSummaryReport.preloaderDevices"
+                                            [isDisabled]="!softwareSummaryReport.companyId || softwareSummaryReport.preloaderDevices"
                                             [dropdownHeight]="'300px'"
                                             [heightInput]="'36px'"
                                             [list]="devices"
@@ -504,7 +506,7 @@
                                             [field]="'name'"
                                             [search]="true"
                                             [change]="true"
-                                            [isDisabled]="!softwareSummaryReport.companyId"
+                                            [isDisabled]="!softwareSummaryReport.companyId || softwareSummaryReport.preloaderDevices"
                                             [preloader]="softwareSummaryReport.preloaderSoft"
                                             [list]="softwareSummaryReport.soft"
                                             (onSelectedItem)="onSelectSoftware($event)"
@@ -513,6 +515,8 @@
                                     <button
                                         class="btn-new btn-primary-white qt-fs-0"
                                         (click)="getReportBySoftwareSummary()"
+                                        [disabled]="softwareSummaryReport.preloaderDevices || !softwareSummaryReport.companyId"
+                                        [ngClass]="{'--disabled':softwareSummaryReport.preloaderDevices || !softwareSummaryReport.companyId}"
                                     >
                                         Get Report
                                     </button>

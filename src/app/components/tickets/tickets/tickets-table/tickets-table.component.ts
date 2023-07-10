@@ -16,6 +16,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { TicketsRealTimeService } from 'src/app/states/tickets/tickets-real-time.service';
+import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 
 
 @Component({
@@ -43,6 +44,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private appService: AppService,
     private router: Router,
+    private leftPanelService: LeftPanelService,
     private companiesStateService: CompaniesStateService,
     private leftPanelStateService: LeftPanelStateService,
     private usersStateService: UsersStateService,
@@ -108,6 +110,17 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       this.onScroll();
     })
     this.sub.add(getOnInitFilter);
+    if (this.ticketsStateService.getListType()) this.onScroll();
+    if (this.ticketsStateService.getListStatusColor().length === 0) {
+      this.leftPanelService.getColors().subscribe((data: any) => {
+        this.listColors = data.map(item => {
+          return new StatusColor(item.borderColor, item.textColor);
+        })
+        this.ticketsStateService.onColorStatus(this.listColors);
+      })
+    } else {
+      this.listColors = this.ticketsStateService.getListStatusColor();
+    }
     this.ticketsStateService.getOnInitColor().subscribe(data => {
       this.listColors = data;
     })
