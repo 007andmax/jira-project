@@ -156,6 +156,9 @@
   &__menu {
     background-image: url("/assets/img/icons/menu.svg");
   }
+  &__memory {
+    background-image: url("/assets/img/icons/memory.svg");
+  }
   &__menu-white {
     background-image: url("/assets/img/icons/menu-white.svg");
   }
@@ -906,6 +909,9 @@
   &__download {
     background-image: url("/assets/img/icons/download.svg");
   }
+  &__display {
+    background-image: url("/assets/img/icons/display.svg");
+  }
   &__locked {
     background-image: url("/assets/img/icons/locked.svg");
   }
@@ -933,6 +939,9 @@
     mask-repeat: no-repeat;
     -webkit-mask-size: contain;
     mask-size: contain;
+  }
+  &__graphic-card {
+    background-image: url("/assets/img/icons/graphic-card.svg");
   }
   &__reset {
     background-image: url("/assets/img/icons/reset.svg");
@@ -1190,6 +1199,9 @@
   &__hosting {
     background-image: url("/assets/img/icons/hosting.svg");
   }
+  &__harddisk {
+    background-image: url("/assets/img/icons/harddisk.svg");
+  }
   &__system {
     background-image: url("/assets/img/icons/system.svg");
   }
@@ -1204,6 +1216,9 @@
   }
   &__more {
     background-image: url("/assets/img/icons/more.svg");
+  }
+  &__motherboard {
+    background-image: url("/assets/img/icons/motherboard.svg");
   }
   &__monitor {
     background-color: $gray-500;
