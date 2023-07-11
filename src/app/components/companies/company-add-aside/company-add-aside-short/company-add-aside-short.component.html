@@ -90,6 +90,12 @@
         *ngIf="company.isUseSelectedUser"
     >
         <div class="qt-input-block qt-f100 qt-flex-md-100">
+            <span
+                class="qt-fw-600 qt-fs-12 qt-lh-133 qt-color-info qt-pointer create-user-contact"
+                (click)="company.setUseSelectedUser(false)"
+            >
+                + Create user
+            </span>
             <app-drop-down
                 [class]="['qt-select-input-40']"
                 [placeholder]="'Select user'"
@@ -115,7 +121,7 @@
                     class="qt-fw-600 qt-fs-12 qt-lh-133 qt-color-info qt-pointer"
                     (click)="company.setUseSelectedUser(true)"
                 >
-                    + Add User
+                    + Select existing user
                 </span>
             </div>
             <input
