@@ -69,11 +69,13 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     if (this.customerPortalStateService.isCustomerPortal && this.companiesState.getCompanies().length > 0) this.checkCompanyCustomerUser();
     let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
       if (this.customerPortalStateService.isCustomerPortal) this.checkCompanyCustomerUser();
+      this.getCount();
     })
     this.sub.add(getOnCompanies);
     let onTicketFilters = this.customerPortalStateService.onTicketFilters.subscribe(data => {
       this.checkCompanyCustomerUser();
       this.checkUserCustomerUser();
+      //  this.getCount();
     });
     this.sub.add(onTicketFilters);
     this.listType = this.ticketsStateService.getListType();

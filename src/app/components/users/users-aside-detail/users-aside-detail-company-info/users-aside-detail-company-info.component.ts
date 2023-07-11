@@ -12,6 +12,7 @@ import { UserProfile } from '../../class/user-profile';
 import { MODE_EDIT_SUBSCRIPTION } from 'src/app/const/users';
 import { UsersService } from 'src/app/services/users/users.service';
 import { UserCustomerCompaniesDefaultSubscribtionAdd } from '../../class/user-customer-companies-default-subscribtion-add';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
   selector: 'users-aside-detail-company-info',
@@ -32,6 +33,7 @@ export class UsersAsideDetailCompanyInfoComponent implements OnInit, OnDestroy {
     private crmStateService: CrmStateService,
     private permissionsService: PermissionsService,
     private usersService: UsersService,
+    public usersStateService: UsersStateService,
     public customerRoleStateService: CustomerRoleStateService,) { }
 
   ngOnInit() {
@@ -54,6 +56,11 @@ export class UsersAsideDetailCompanyInfoComponent implements OnInit, OnDestroy {
   onSelectUserRole(data) {
     this.customerCompaniesInfo.setUserRole(data);
     this.onUpdate.emit(null);
+  }
+  onChangeHasAccess() {
+    this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit())).subscribe(data => {
+
+    })
   }
   onChangeDefaultSubscriptions(data) {
     this.usersService.setSubscriptions(

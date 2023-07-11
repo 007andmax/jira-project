@@ -131,7 +131,7 @@
                 class="pointer"
                 ngbDropdownItem
                 (click)="archiveQuote()"
-                *ngIf="checkStatus(quote, ['UNREAD','SAVED', 'EXPIRED', 'INVOICED', 'TICKETED','CANCELED','BILLED']) && !customerPortalStateService.isCustomerPortal"
+                *ngIf="checkStatus(quote, ['UNREAD','SAVED', 'EXPIRED', 'INVOICED', 'TICKETED','CANCELED','BILLED'])"
             >
                 <div class="icon__remove qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Archive a quote

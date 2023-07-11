@@ -32,6 +32,7 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
       this.device.report.system.warranty = this.getToDayDate();
       this.device.report.system.install_date = this.getToDayDate();
     }
+    console.log("customerPortalStateService", this.customerPortalStateService.isCustomerPortal);
   }
   onChangeName(value) {
     this.devicesService.editAgentInfo(this.device.getDataForEditName((value.length > 0) ? value : this.device.hostName || this.device.ip)).subscribe(data => {

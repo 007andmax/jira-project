@@ -40,7 +40,7 @@
                     >
                         <div
                             class="qt-df qt-jc-sb qt-ai-c"
-                            *ngIf="userRoleForRemove.id == customerCompany.customerUserRole.id"
+                            *ngIf="customerCompany.customerUserRole && userRoleForRemove.id == customerCompany.customerUserRole.id"
                         >
                             <div>
                                 <p>Company name</p>

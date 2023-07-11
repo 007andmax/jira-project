@@ -24,6 +24,7 @@ export class CustomerPortalStateService {
   constructor() { }
   public setCustomerPortal(data) {
     this.isCustomerPortal = data;
+    console.log("this.isCustomerPortal", this.isCustomerPortal);
   }
   public setFilters(currentUser, state) {
     let item = currentUser.customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id'))

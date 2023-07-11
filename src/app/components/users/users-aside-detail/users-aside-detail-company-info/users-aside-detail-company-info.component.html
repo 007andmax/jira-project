@@ -83,14 +83,14 @@
             <div class="qt-input-block">
                 <div class="qt-df qt-ai-c">
                     <label
-                        class="qt-checkbox receive-full-amount-check qt-mb-0 --disabled"
+                        class="qt-checkbox receive-full-amount-check qt-mb-0"
                         [attr.for]="'access-1'"
                     >
                         <input
                             [attr.id]="'access-1'"
                             type="checkbox"
                             [(ngModel)]="customerCompaniesInfo.hasAccess"
-                            disabled
+                            (change)="onChangeHasAccess()"
                         >
                         <span></span>
                         <div class="qt-ml-8">Access to the Customer portal</div>
