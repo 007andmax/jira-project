@@ -39,7 +39,7 @@ export class UsersService {
   }
 
   public getArchiveUsers() {
-    return this.http.post(this.apiUrl + 'users/filter', { isArchived: true }).pipe(
+    return this.http.post(this.apiUrl + 'users/filter', { isArchived: true, "accountType": "CLIENT" }).pipe(
       map((data: any) => data.map((item) => new User(item))));
   }
 

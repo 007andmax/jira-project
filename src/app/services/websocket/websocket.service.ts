@@ -112,6 +112,7 @@ export class WebsocketService {
       if (state == "new-billable-invoices") this.subsribeToInvoiceCustomerUsers(clientCompId);
       if (state == "quotes-component") this.subsribeToQuoteCustomerUsers(clientCompId);
       if (state == "new-payments-ng2") this.subsribeToPaymentsCustomerUsers(clientCompId);
+      if (state == "company-devices") this.subsribeToDevicesCustomerUsers(clientCompId);
       return;
     }
     this.ws = new SockJS(this.serverUrl);
@@ -125,6 +126,8 @@ export class WebsocketService {
       if (state == "new-billable-invoices") that.subsribeToInvoiceCustomerUsers(clientCompId);
       if (state == "quotes-component") this.subsribeToQuoteCustomerUsers(clientCompId);
       if (state == "new-payments-ng2") this.subsribeToPaymentsCustomerUsers(clientCompId);
+      if (state == "company-devices") this.subsribeToDevicesCustomerUsers(clientCompId);
+
       that.onInit.emit(true);
       that.isInit = true;
     }
@@ -147,7 +150,7 @@ export class WebsocketService {
       //   that.subsribeToKafka();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToPermissions();
       that.subsribeToUsers();
-      that.subsribeToDevices();
+      if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToDevices();
       that.subsribeToCompany();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToPasswordRecods();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToTaxes();
@@ -160,7 +163,6 @@ export class WebsocketService {
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToInvoiceNumber();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToBillableCount();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToInvoice();
-      that.subsribeToSubmittedTicket();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToPayments();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToSubmittedService();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToSubmittedServiceAgreement();
@@ -567,19 +569,16 @@ export class WebsocketService {
       this.invoiceRealTimeService.handleRealTimeChangesInvoice(newChange);
     });
   }
-  public subsribeToSubmittedTicket() {
-    setTimeout(() => {
-      this.stompClient.subscribe(`/user/watch/userSubmittedTicket`, (message) => {
-        var newChange = JSON.parse(message.body);
-        this.usersRealTimeService.handleRealTimeSubmittedTicket(newChange);
-      });
-
-    }, 3000);
-  }
   public subsribeToPaymentsCustomerUsers(clientCompId) {
     this.paymentsRealTimeService.subsribeToPaymentsCustomerUsers = this.stompClient.subscribe(`/user/watch/payments/${clientCompId}`, (message) => {
       var newChange = JSON.parse(message.body);
       this.paymentsRealTimeService.handleRealTimeChanges(newChange);
+    });
+  }
+  public subsribeToDevicesCustomerUsers(clientCompId) {
+    this.devicesRealTimeService.subsribeToDevicesCustomerUsers = this.stompClient.subscribe(`/user/watch/device/${clientCompId}`, (message) => {
+      var newChange = JSON.parse(message.body);
+      this.devicesRealTimeService.handleRealTimeChanges(newChange);
     });
   }
   public subsribeToPayments() {

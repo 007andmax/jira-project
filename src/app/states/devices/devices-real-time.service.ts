@@ -8,6 +8,7 @@ export class DevicesRealTimeService {
   public changeDevicesArray: EventEmitter<any> = new EventEmitter();
   public netScanArray: EventEmitter<any> = new EventEmitter();
   public oneTimeConnectionArray: EventEmitter<any> = new EventEmitter();
+  public subsribeToDevicesCustomerUsers;
 
   /**
    * Quote real time service constructor

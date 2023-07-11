@@ -4,6 +4,7 @@ import { PaymentsFilter } from 'src/app/components/billing/payments/class/paymen
 import { QuoteFilter } from 'src/app/components/billing/quotes/class/quote-filter';
 import { TicketsFilter } from 'src/app/components/tickets/tickets/class/tickets-filter';
 import { UserFilter } from 'src/app/components/users/class/user-filter';
+import { TicketsStateService } from '../tickets/tickets-state.service';
 
 @Injectable({
   providedIn: 'root',
@@ -21,12 +22,13 @@ export class CustomerPortalStateService {
   onQuotesFilters: EventEmitter<any> = new EventEmitter();
   onPaymentsFilters: EventEmitter<any> = new EventEmitter();
   onUsersFilters: EventEmitter<any> = new EventEmitter();
-  constructor() { }
+  constructor(private ticketsStateService: TicketsStateService,) { }
   public setCustomerPortal(data) {
     this.isCustomerPortal = data;
     console.log("this.isCustomerPortal", this.isCustomerPortal);
   }
   public setFilters(currentUser, state) {
+    console.log("setFilters", state);
     let item = currentUser.customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id'))
     if (item.customerUserRole == null) return;
     if (item.customerUserRole.getPermission('VIEW_ALL_TICKETS') && state == 'new-tickets') {
@@ -76,6 +78,7 @@ export class CustomerPortalStateService {
     this.onInvoiceFilters.emit(this.invoicesFilter);
   }
   public setTicketsFilter(company, type, currentUser) {
+    this.ticketsStateService.setListType(type);
     this.ticketsFilter.setCompany({ id: company.companyId });
     this.ticketsFilter.setListType(type);
     if (company.customerUserRole.getPermission('VIEW_MY_TICKETS') && !company.customerUserRole.getPermission('VIEW_ALL_TICKETS')) this.ticketsFilter.setUser(currentUser);

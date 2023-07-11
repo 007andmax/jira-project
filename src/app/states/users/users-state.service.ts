@@ -68,16 +68,6 @@ export class UsersStateService {
       }
       this.onChangeUsers.emit(new UserChange(newChange.action, newChange.data, this.allUsers));
     })
-
-    this.usersRealTimeService.changeSubmittedTicket.subscribe(newChange => {
-      if (newChange.action === 'USER_SUBMITTED_TICKET') {
-        const Index = this.allUsers.findIndex((item) => item.id === newChange.data.id);
-        var prevValue = this.allUsers[Index].userStatistic.ticketsSubmitted || 0;
-        prevValue++;
-        if (Index > -1) this.allUsers[Index].userStatistic.ticketsSubmitted = prevValue;
-      }
-      this.onChangeUsers.emit(new UserChange(newChange.action, newChange.data, this.allUsers));
-    });
     this.usersRealTimeService.changePermissionsUsers.subscribe(newChange => {
       if (newChange.action == "PERMISSIONS_UPDATE") this.onChangeUserPermissions.emit(newChange.data);
     });

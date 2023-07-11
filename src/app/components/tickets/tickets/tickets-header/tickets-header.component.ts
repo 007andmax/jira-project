@@ -6,6 +6,7 @@ import { TicketsFilterComponent } from './tickets-filter/tickets-filter.componen
 import { AppService } from 'src/app/states/app/app.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { TicketsFilter } from '../class/tickets-filter';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-tickets-header',
@@ -34,6 +35,7 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
   constructor(private ticketsStateService: TicketsStateService,
     public appService: AppService,
     private leftPanelStateService: LeftPanelStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
@@ -41,6 +43,8 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
     /* START */
     this.selectedListType = this.titleListTypes.find(item => item.type === this.ticketsStateService.getListType());
+
+    console.log("this.selectedListType", this.selectedListType);
     /* END */
     this.title = `${(this.selectedListType) ? this.selectedListType.title : ''} (${(this.count) ? this.count : 0})`;
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
