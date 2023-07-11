@@ -585,8 +585,19 @@
     background-color: $gray-500;
     -webkit-mask-position: center;
     mask-position: center;
-    -webkit-mask-image: url("/assets/img/device/play-script.svg");
-    mask-image: url("/assets/img/device/play-script.svg");
+    -webkit-mask-image: url("/assets/img/icons/play.svg");
+    mask-image: url("/assets/img/icons/play.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
+  &__power-shell {
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/power-shell.svg");
+    mask-image: url("/assets/img/icons/power-shell.svg");
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     -webkit-mask-size: contain;
@@ -1187,6 +1198,9 @@
   &__network {
     background-image: url("/assets/img/icons/network.svg");
   }
+  &__networkcard {
+    background-image: url("/assets/img/icons/networkcard.svg");
+  }
   &__software {
     background-image: url("/assets/img/icons/software.svg");
   }
@@ -1324,6 +1338,9 @@
   }
   &__office-phone-gray {
     background-image: url("/assets/img/icons/office-phone-gray.svg");
+  }
+  &__operating-system {
+    background-image: url("/assets/img/icons/operating-system.svg");
   }
   &__phone-gray {
     background-image: url("/assets/img/icons/phone-gray.svg");

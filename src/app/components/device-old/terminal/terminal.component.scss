@@ -482,10 +482,10 @@
         }
       }
       &.Power {
-        background: url("../../../../assets/img/device/power-shell.svg") no-repeat left 0;
+        background: url("../../../../assets/img/icons/power-shell.svg") no-repeat left 0;
         cursor: pointer;
         &.active {
-          background: url("../../../../assets/img/device/Powershell_Blue.svg") no-repeat left 0;
+          background: url("../../../../assets/img/icons/power-shell-blue.svg") no-repeat left 0;
           color: $blue-light-600;
         }
       }
