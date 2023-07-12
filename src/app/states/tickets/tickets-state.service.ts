@@ -85,7 +85,6 @@ export class TicketsStateService {
           this.changeFieldTicket.emit(new TicketChangeField("agent.deviceId", item, (newChange.data.deviceId) ? newChange.data.deviceId : null));
         });
       }
-      if (newChange.action === 'DISCOUNT_CHANGED') this.changeFieldTicket.emit(new TicketChangeField("discount", newChange.data.id, newChange.data.discount));
     })
     this.ticketsService.getTicketStatus().subscribe((data: any) => {
       this.ticketsStatus = data.map(item => new TicketStatus(item));
