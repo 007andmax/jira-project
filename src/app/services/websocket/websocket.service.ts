@@ -580,6 +580,7 @@ export class WebsocketService {
       var newChange = JSON.parse(message.body);
       this.devicesRealTimeService.handleRealTimeChanges(newChange);
     });
+    this.devicesStateService.initWebSocket();
   }
   public subsribeToPayments() {
     setTimeout(() => {

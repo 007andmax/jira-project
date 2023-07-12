@@ -2,6 +2,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { UserRole } from 'src/app/components/users/class/user-role';
 import { UsersService } from 'src/app/services/users/users.service';
 import { CustomerRoleRealTimeService } from './customer-role-real-time.service';
+import { UserPermissions } from 'src/app/components/users/class/user-permissions';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +11,7 @@ export class CustomerRoleStateService {
   isGetUserRole: boolean = false;
   userRoles: Array<UserRole> = [];
   onGetUserRole: EventEmitter<any> = new EventEmitter();
+  onGetUserPermissions: EventEmitter<any> = new EventEmitter();
   VIEW_MY_TICKETS_related_permissions = ["VIEW_ALL_TICKETS", "EDIT_OTHER_TICKETS"];
   VIEW_MY_PROFILE_related_permissions = ["VIEW_ALL_USERS", "EDIT_USERS"];
   VIEW_ALL_DEVICES_related_permissions = ["DEVICES_REMOTE_CONTROL"];
@@ -26,7 +28,6 @@ export class CustomerRoleStateService {
         const Index = this.userRoles.findIndex((item) => item.id === newChange.data.id);
         if (Index > -1) this.userRoles.splice(Index, 1);
       }
-
       this.onGetUserRole.emit(this.userRoles);
     })
   }

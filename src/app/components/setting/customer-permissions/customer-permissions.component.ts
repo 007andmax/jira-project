@@ -11,6 +11,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { CustomerPermissionsRemoveRole } from './customer-permissions-remove-role/class/customer-permissions-user-role';
 import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-role-state.service';
+import { CustomerRoleRealTimeService } from 'src/app/states/customer-role/customer-role-real-time.service';
 
 @Component({
   selector: 'customer-permissions',
@@ -31,6 +32,7 @@ export class CustomerPermissionsComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     private customerRoleStateService: CustomerRoleStateService,
+    private customerRoleRealTimeService: CustomerRoleRealTimeService,
     private usersService: UsersService,) { }
 
   ngOnInit() {
@@ -53,6 +55,18 @@ export class CustomerPermissionsComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+    let changeRoleArray = this.customerRoleRealTimeService.changeRoleArray.subscribe(newChange => {
+      if (newChange.action === 'CUSTOMER_ROLE_CREATED' || newChange.action === 'CUSTOMER_ROLE_UPDATED') {
+        const Index = this.userPermissions.findIndex((item) => item.id === newChange.data.id);
+        if (Index > -1) this.userPermissions[Index] = new UserPermissions(newChange.data);
+        if (Index === -1) this.userPermissions.unshift(new UserPermissions(newChange.data));
+      }
+      if (newChange.action === 'CUSTOMER_ROLE_DELETED') {
+        const Index = this.userPermissions.findIndex((item) => item.id === newChange.data.id);
+        if (Index > -1) this.userPermissions.splice(Index, 1);
+      }
+    })
+    this.sub.add(changeRoleArray);
   }
   userReadable(str: string) {
     return str
