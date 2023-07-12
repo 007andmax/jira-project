@@ -2,8 +2,6 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, O
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { environment } from 'src/environments/environment';
 
-
-declare const Codox: any;
 declare const CodeMirror: any;
 @Component({
   selector: 'app-documents-add-body',
@@ -14,7 +12,6 @@ export class DocumentsAddBodyComponent implements OnInit, OnDestroy {
   private apiUrl = environment.apiUrl;
   @Input() editorContent = "";
   public options: Object;
-  codox: any;
   editor: any;
   currentUser: any;
   froalaEditor: any;
@@ -23,7 +20,6 @@ export class DocumentsAddBodyComponent implements OnInit, OnDestroy {
   @Output() onChangeAttachments = new EventEmitter<any>();
   constructor(private usersStateService: UsersStateService,
     public cd: ChangeDetectorRef,) {
-    this.codox = new Codox()
   }
 
 
@@ -113,7 +109,6 @@ export class DocumentsAddBodyComponent implements OnInit, OnDestroy {
               "shape": "arrow"
             }
           };
-          //self.codox.init(config);
         },
         'image.uploaded': function ($img) {
           // Do something here.
