@@ -25,37 +25,25 @@ export class CustomerPortalStateService {
   constructor(private ticketsStateService: TicketsStateService,) { }
   public setCustomerPortal(data) {
     this.isCustomerPortal = data;
-    console.log("this.isCustomerPortal", this.isCustomerPortal);
   }
   public setFilters(currentUser, state) {
-    console.log("setFilters", state);
     let item = currentUser.customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id'))
     if (item.customerUserRole == null) return;
     if (item.customerUserRole.getPermission('VIEW_ALL_TICKETS') && state == 'new-tickets') {
-      // this.setCompnayIdInfo(item.companyId);
       this.setTicketsFilter(item, "ALL", currentUser);
     }
     if (item.customerUserRole.getPermission('VIEW_ALL_INVOICES') && state == 'new-billable-invoices') {
-      //  this.setCompnayIdInfo(item.companyId);
       this.setInvoiceFilter(item);
     }
     if (item.customerUserRole.getPermission('VIEW_MY_PROFILE') && state == 'new-users') {
-      //  this.setCompnayIdInfo(item.companyId);
       this.setUsersFilter(item.companyId);
     }
-    if (item.customerUserRole.getPermission('VIEW_ALL_DEVICES') && state == 'company-devices') {
-      //   this.setCompnayIdInfo(item.companyId);
-    }
     if (item.customerUserRole.getPermission('VIEW_ALL_QUOTES') && state == 'quotes-component') {
-      //   this.setCompnayIdInfo(item.companyId);
       this.setQuotesFilter(item);
     }
     if (item.customerUserRole.getPermission('VIEW_ALL_PAYMENTS') && state == 'new-payments-ng2') {
-      //    this.setCompnayIdInfo(item.companyId);
       this.setPaymentsFilter(item);
     }
-
-
   }
   public getPaymentsFilter() {
     return this.paymentsFilter;

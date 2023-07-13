@@ -54,7 +54,6 @@ export class LeftPanelCustomerPortalUsersComponent implements OnInit {
     return `company/${companyId}/${section}`;
   }
   public setTicketsFilter(company, type) {
-    console.log("setTicketsFilter", type);
     this.ticketsStateService.setListType(type);
     this.customerPortalStateService.setTicketsFilter(company, "ALL", this.currentUser);
     this.goToState('new-tickets');

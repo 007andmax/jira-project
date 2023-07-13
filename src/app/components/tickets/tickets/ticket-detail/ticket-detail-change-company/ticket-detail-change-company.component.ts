@@ -31,7 +31,6 @@ export class TicketDetailChangeCompanyComponent implements OnInit, OnDestroy {
       this.getCompanies(data);
     })
     this.sub.add(getOnCompanies);
-    console.log("getCompany(ticketProfile.company.id)", this.getCompany(this.ticketProfile.company.id));
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === CHANGE_COMPANY_TICKET) this.ticketsService.changeSubjectNoteTicket(this.ticketProfile.id, this.ticketProfile.subject, this.ticketProfile.note, this.selectedCompany.id).subscribe(data => {
@@ -47,7 +46,6 @@ export class TicketDetailChangeCompanyComponent implements OnInit, OnDestroy {
   }
   getCompanies(data) {
     this.listCompanies = data.filter(item => this.ticketProfile.userCompanies && this.ticketProfile.userCompanies.indexOf(item.id) > -1);
-    console.log("this.listCompanies", this.listCompanies);
   }
   checkExistServicesProducts() {
     return this.ticketProfile.updates.filter(item => item.type == 'PRODUCT' || item.type == 'SERVICE').length > 0;
@@ -59,7 +57,7 @@ export class TicketDetailChangeCompanyComponent implements OnInit, OnDestroy {
     this.selectedCompany = data;
     this.confirmStateService.setConfirmAction(CHANGE_COMPANY_TICKET);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to assign the following company to the ticket - '${data.name}'`;
+    modalRef.componentInstance.message = `Do you want to assign the following company to the ticket - ${data.name}`;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
