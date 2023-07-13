@@ -413,8 +413,12 @@
             </div>
             <div class="qt-inputs-row">
                 <div class="qt-input-block">
-                    <div class="qt-input-block__label">Get Subscribe</div>
-                    <app-company-subscription (subscribeChange)="onChangeSubscribe($event)"></app-company-subscription>
+                    <label class="qt-input-block__label">Get Subscribe</label>
+                    <user-default-subscription
+                        [mode]="MODE_EDIT_SUBSCRIPTION"
+                        [defaultSubscriptions]="getDefaultSubscriptions()"
+                        (onChange)="onChangeSubscribe($event)"
+                    ></user-default-subscription>
                 </div>
             </div>
         </div>

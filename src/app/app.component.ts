@@ -33,6 +33,15 @@ import { NoteStateService } from './states/note/note-state.service';
 import { EmailTemplateStateService } from './states/email-template/email-template-state.service';
 import { GoogleAuthenticatorComponent } from './components/shared/google-authenticator/google-authenticator.component';
 import { Subscription } from 'rxjs';
+import { CustomerRoleStateService } from './states/customer-role/customer-role-state.service';
+import { CustomerPortalStateService } from './states/customer-portal/customer-portal-state.service';
+import { TicketsFilter } from './components/tickets/tickets/class/tickets-filter';
+import { InvoicesFilter } from './components/billing/invoices/class/invoices-filter';
+import { InvoiceStateService } from './states/invoice/invoice-state.service';
+import { QuoteFilter } from './components/billing/quotes/class/quote-filter';
+import { QuoteStateService } from './states/quote/quote-state.service';
+import { PaymentsFilter } from './components/billing/payments/class/payments-filter';
+import { PaymentsStateService } from './states/payments/payments-state.service';
 
 
 /**
@@ -94,9 +103,14 @@ export class AppComponent implements OnInit {
     private appStateService: AppStateService,
     private crmStateService: CrmStateService,
     private marketingEmailStateService: MarketingEmailStateService,
+    private customerRoleStateService: CustomerRoleStateService,
     private noteStateService: NoteStateService,
     private supportPageCategoriesStateService: SupportPageCategoriesStateService,
-    private emailTemplateStateService: EmailTemplateStateService
+    private emailTemplateStateService: EmailTemplateStateService,
+    public customerPortalStateService: CustomerPortalStateService,
+    public invoiceStateService: InvoiceStateService,
+    private quoteStateService: QuoteStateService,
+    private paymentsStateService: PaymentsStateService,
 
   ) { }
 
@@ -112,23 +126,25 @@ export class AppComponent implements OnInit {
     this.usersStateService.onInit();
     this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.currentUser = data;
+      if (this.state !== '' && this.customerPortalStateService.isCustomerPortal) this.customerPortalStateService.setFilters(this.currentUser, this.state);
       if (this.currentUser.twoFactorAuthType === "GOOGLE_SECURE" && !this.currentUser.userTOTP.confirmed) this.onCheckGoogleAuthenticator();
       if (this.appService.getIsInit()) return;
       if (data.role !== "SUPER_ADMIN") {
         this.devicesState.onInit();
         this.companiesState.onInit();
-        this.taxesStateService.onInit();
-        this.glNumberStateService.onInit();
-        this.inventoryStateService.onInit();
+        if (!this.customerPortalStateService.isCustomerPortal) this.taxesStateService.onInit();
+        if (!this.customerPortalStateService.isCustomerPortal) this.glNumberStateService.onInit();
+        if (!this.customerPortalStateService.isCustomerPortal) this.inventoryStateService.onInit();
         this.ticketsStateService.onInit();
         this.constantsStateService.onInit();
         this.tagsStateService.onInit();
-        this.documentsStateService.onInit();
+        if (!this.customerPortalStateService.isCustomerPortal) this.documentsStateService.onInit();
         this.crmStateService.onInit();
         this.marketingEmailStateService.onInit();
         this.kafkaStateService.onInit();
         this.noteStateService.onInit();
         this.emailTemplateStateService.onInit();
+        this.customerRoleStateService.onInit();
         if (this.state === 'help-center') this.supportPageCategoriesStateService.onInit();
         this.websocketService.initializeWebSocketConnection();
       } else {
@@ -263,22 +279,26 @@ export class AppComponent implements OnInit {
     })
     this.companiesState.onCurrentCompany.subscribe(data => {
       if (!this.currentUser) return;
-      if (this.router.url.includes("tickets") && !this.router.url.includes("company") && (this.state == "new-tickets" || this.state == '')) {
+      if (!this.customerPortalStateService.isCustomerPortal && this.router.url.includes("tickets") && !this.router.url.includes("company") && (this.state == "new-tickets" || this.state == '')) {
         this.ticketsStateService.onChangeTypeFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
         this.ticketsStateService.onChangeLeftPanelFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
       }
-      if (this.router.url === "/" && this.currentUser.role !== "SUPER_ADMIN" && this.state == 'new-tickets' && this.main_page == PAGE_MAIN && !this.ticketsStateService.getListType()) {
+      if (!this.customerPortalStateService.isCustomerPortal && this.router.url === "/" && this.currentUser.role !== "SUPER_ADMIN" && this.state == 'new-tickets' && this.main_page == PAGE_MAIN && !this.ticketsStateService.getListType()) {
         this.ticketsStateService.onChangeTypeFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
         this.ticketsStateService.onChangeLeftPanelFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
       }
       if (this.router.url === "/" && this.currentUser.role !== "SUPER_ADMIN" && this.state == '' && this.main_page == PAGE_MAIN) {
-        this.ticketsStateService.onChangeTypeFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
-        this.ticketsStateService.onChangeLeftPanelFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
-        this.router.navigate(
-          [`${data.name.replaceAll(' ', '')}/tickets/`]);
+        if (this.customerPortalStateService.isCustomerPortal) {
+          this.leftPanelStateService.goToState('default');
+        } else {
+          this.ticketsStateService.onChangeTypeFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
+          this.ticketsStateService.onChangeLeftPanelFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
+          this.router.navigate(
+            [`${data.techDomain}/tickets/`]);
+        }
       }
       if (this.router.url === "/" && this.currentUser.role === "SUPER_ADMIN" && this.state == '') this.router.navigate(
-        [`${data.name.replaceAll(' ', '')}/support-page/`]);
+        [`${data.techDomain}/support-page/`]);
     })
     this.appService.onToggleMobileAside.subscribe(data => {
       if (data) document.querySelector("html").classList.add("--scrollLock");
@@ -307,13 +327,6 @@ export class AppComponent implements OnInit {
   }
   onCheckGoogleAuthenticator() {
     const modalRef = this.modalService.open(GoogleAuthenticatorComponent, { windowClass: 'quote-send-modal page-settings', backdrop: 'static', keyboard: false });
-    /* let onReset = modalRef.componentInstance.onReset.subscribe(data => {
-     })
-     let onSetQrCode = modalRef.componentInstance.onSetQrCode.subscribe(data => {
- 
-     })
-     this.sub.add(onSetQrCode);
-     this.sub.add(onReset);*/
   }
   ngDoCheck() {
     this.qtListHeaaderScroller = document.querySelector('.qt-page-list__header-thead-container');
@@ -325,7 +338,6 @@ export class AppComponent implements OnInit {
       this.qtListHeaaderScroller.addEventListener('scroll', this.qtListHeaaderScrollerScroll, false);
       this.qtListBodyScroller.addEventListener('scroll', this.qtListBodyScrollerScroll, false);
     }
-    // if ((<any>document.body.querySelector("#userback_button_container")) && (<any>document.body.querySelector("#userback_button_container")).style.display == "" && this.appService.checkMobile()) (<any>document.body.querySelector("#userback_button_container")).style.display = "none";
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
@@ -356,6 +368,4 @@ export class AppComponent implements OnInit {
     }
 
   }
-
-
 }

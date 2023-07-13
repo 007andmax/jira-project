@@ -43,9 +43,9 @@ export class PasswordManagerEditLinkedComponent implements OnInit {
   onGetList() {
     if (this.type === 'USERS') {
       let users = this.usersStateService.getAllUsers().filter(item => {
-        let company = this.companies.find(itemCompany => itemCompany.id === item.company.id);
+        let company = this.companies.find(itemCompany => item.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === itemCompany.id));
         let isArchived = item.deletedAt || !company;
-        return !isArchived && item.company.id === this.selectedClient.id
+        return !isArchived && item.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.selectedClient.id)
       });
       users.forEach(item => {
         this.list.push(new PasswordDeviceUser(item.id, `${item.firstName} ${item.lastName}`, 'USER'));

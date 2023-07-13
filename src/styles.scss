@@ -3982,16 +3982,10 @@ app-ticket-edit-aside {
   }
 }
 
-.ticket-edit-aside__body,
-app-ticket-edit-aside-company-info,
-app-ticket-edit-aside-users,
-app-ticket-edit-aside-devices {
+.ticket-edit-aside__body {
   &::-webkit-scrollbar {
     display: none;
   }
-}
-app-ticket-edit-aside-devices {
-  position: relative;
 }
 
 .draft-email-aside {

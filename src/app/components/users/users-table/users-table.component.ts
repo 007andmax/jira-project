@@ -25,6 +25,10 @@ import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-indus
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { Subscription } from 'rxjs';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { UserCustomerCompaniesDefaultSubscribtionAdd } from '../class/user-customer-companies-default-subscribtion-add';
+import { TechUsersService } from 'src/app/services/setting/tech-users.service';
+import { UsersCheckUseComponent } from '../users-check-use/users-check-use.component';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-users-table',
@@ -40,6 +44,7 @@ export class UsersTableComponent implements OnInit, OnDestroy {
   @Output() onSelectUser = new EventEmitter<any>();
   @Input() jobTitleList: Array<CrmCompanyJobTitle> = [];
   @Input() listCustomSubscription: Array<UserCustomSubscription> = [];
+  @Input() companyId: string;
   industries: Array<CrmCompanyIndustry> = [];
   @ViewChild('customSubscription') customSubscription: UserTableCustomSubscriptionComponent;
   companies: Array<Company> = [];
@@ -50,7 +55,7 @@ export class UsersTableComponent implements OnInit, OnDestroy {
   TYPE_LIST_COMPANY_USERS = TYPE_LIST_COMPANY_USERS;
   constructor(private companiesStateService: CompaniesStateService,
     private usersService: UsersService,
-    private usersStateService: UsersStateService,
+    public usersStateService: UsersStateService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     private draftEmailStateService: DraftEmailStateService,
@@ -58,28 +63,36 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private crmStateService: CrmStateService,
     private permissionsService: PermissionsService,
+    private techUsersService: TechUsersService,
+    public customerPortalStateService: CustomerPortalStateService,
     private elRef: ElementRef) { }
 
 
   onChangeDefaultSubscriptions(subscriptions) {
-    this.usersService.setSubscriptions(subscriptions.id, {
-      ...new UserDefaultSubscriptionAdd(subscriptions.ticketSubscription.enabled,
+    this.usersService.setSubscriptions({
+      ...new UserCustomerCompaniesDefaultSubscribtionAdd(subscriptions.ticketSubscription.enabled,
         subscriptions.ticketManagerSubscription.enabled,
-        subscriptions.invoiceSubscription.enabled)
-      , customSubscriptionIds: this.user.customSubscriptions.map(item => item.id)
+        subscriptions.invoiceSubscription.enabled,
+        this.user.id,
+        this.companyId)
     }).subscribe(data => {
 
     })
   }
   onChangeCustomSubscriptions(data) {
-    this.usersService.setSubscriptions(this.user.defaultSubscriptions.id, {
-      ...new UserDefaultSubscriptionAdd(this.user.defaultSubscriptions.ticketSubscription.enabled,
-        this.user.defaultSubscriptions.ticketManagerSubscription.enabled,
-        this.user.defaultSubscriptions.invoiceSubscription.enabled)
-      , customSubscriptionIds: data.map(item => item.id)
+    this.usersService.setCustomSubscriptions(this.user.id, {
+      customSubscriptionIds: data.map(item => item.id)
     }).subscribe(data => {
       this.customSubscription.toggleIsUpdate(false);
     })
+  }
+  sendInvite(userEmail) {
+    this.techUsersService
+      .verifyUserEmail(userEmail)
+      .subscribe();
+  }
+  getCompaniesNames() {
+    return this.user.customerCompaniesInfo.map(item => (this.companiesStateService.getCompanies().find(company => company.id == item.companyId) ? this.companiesStateService.getCompanies().find(company => company.id == item.companyId).name : ''));
   }
   getUserIndustry() {
     let find = this.industries.find(item => item.id === this.user.userIndustryId);
@@ -116,10 +129,18 @@ export class UsersTableComponent implements OnInit, OnDestroy {
       return 'url(/users/default/image.jpg) 0% 0% / contain no-repeat';
     }
   };
+  isPrimaryContact() {
+    if (!this.customerPortalStateService.isCustomerPortal) return this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).isPrimaryContact;
+    if (this.customerPortalStateService.isCustomerPortal && this.user.customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id'))) return this.user.customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id')).isPrimaryContact;
+    return false
+  }
   resetPrimaryContact() {
-    this.usersService.resetPrimaryContact(this.user.id).subscribe(data => {
+    this.usersService.resetPrimaryContact(this.user.id, this.companyId).subscribe(data => {
 
     })
+  }
+  getDefaultSubscriptions() {
+    return this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).defaultSubscriptions;
   }
   edit() {
     this.usersStateService.setUserForEdit(new User(JSON.parse(JSON.stringify(this.user))));
@@ -144,12 +165,12 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     //this.sub.add(getOnCompanies);
   }
   delete() {
-    if (this.user.isContact) {
-      const modalRef = this.modalService.open(AlertComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-      modalRef.componentInstance.message = `You cannot archive primary contact user`;
+    if (this.user.customerCompaniesInfo.find(item => item.isPrimaryContact)) {
+      const modalRef = this.modalService.open(UsersCheckUseComponent, { windowClass: 'xs-modal user-modal', container: (this.companyId) ? "company-user" : "app-users", backdrop: 'static', keyboard: false });
+      modalRef.componentInstance.user = this.user;
       return;
     }
-    if (this.usersTableService.getUsersCount(this.usersStateService.getAllUsers(), this.user.company.id, this.showArchivedUsers) === 1) {
+    if (this.usersTableService.getUsersCount(this.usersStateService.getAllUsers(), this.user.customerCompaniesInfo, this.showArchivedUsers) === 1) {
       const modalRef = this.modalService.open(AlertComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
       modalRef.componentInstance.message = `You cannot archive all users. At least one must remain.`;
       return;
@@ -189,8 +210,14 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     this.draftEmailStateService.addSelectedUser(this.user);
     this.draftEmailStateService.toggleAsideForAdd();
   }
+  getPermissionCustomerUser(permission) {
+    return this.currentUser.customerCompaniesInfo.find(item => item.companyId === this.customerPortalStateService.getUsersFilters().company).customerUserRole.getPermission(permission);
+  }
   public trackById(index, item) {
     return item.id;
+  }
+  public trackByIndex(index, item) {
+    return index;
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

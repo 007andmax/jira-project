@@ -1,0 +1,121 @@
+<div class="user-detail-company-info qt-mb-8">
+    <div
+        class="user-detail-company-info__header qt-pos-rel pointer"
+        (click)="toggleContainer = !toggleContainer"
+    >
+        <div class="user-detail-company-info__title">
+            <i class="icn-sm icon__companies qt-bg-contain qt-sz-16 qt-mr-8"></i>
+            {{customerCompaniesInfo.clientCompanyName}}
+        </div>
+        <i class="icn-sm report-caret-icon pointer"></i>
+    </div>
+    <div
+        class="user-detail-company-info__body"
+        *ngIf="toggleContainer"
+    >
+        <div class="qt-inputs-row">
+            <div class="qt-input-block qt-editable-dropdown">
+                <div class="qt-df qt-jc-sb qt-ai-c">
+                    <label class="qt-input-block__label">Job Title</label>
+                    <div
+                        class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"
+                        *ngIf="getPermissions('EDIT_USERS')"
+                    ></div>
+                </div>
+                <app-drop-down
+                    #jobTitleDp
+                    class="user-detail-edit-company"
+                    [placeholder]="'Select Job Title'"
+                    [list]="jobTitleList"
+                    [field]="'name'"
+                    [search]="true"
+                    [change]="true"
+                    heightInput="34px"
+                    [isDisabled]="!getPermissions('EDIT_USERS')"
+                    [editItem]="customerCompaniesInfo.jobTitleDto"
+                    (onSelectedItem)="onSelectJobTitle($event)"
+                ></app-drop-down>
+            </div>
+        </div>
+        <div class="qt-inputs-row">
+            <div class="qt-input-block qt-editable-dropdown">
+                <div class="qt-df qt-jc-sb qt-ai-c">
+                    <label class="qt-input-block__label">Permission Role</label>
+                    <div
+                        class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"
+                        *ngIf="getPermissions('EDIT_USERS')"
+                    ></div>
+                </div>
+                <app-drop-down
+                    #userRolesDP
+                    class="user-detail-edit-company"
+                    *ngIf="customerRoleStateService.isGetUserRole"
+                    [placeholder]="'Select role'"
+                    [list]="userRoles"
+                    [field]="'name'"
+                    [search]="true"
+                    [change]="true"
+                    heightInput="34px"
+                    [isDisabled]="!getPermissions('EDIT_USERS')"
+                    [editItem]="customerCompaniesInfo.customerUserRole"
+                    (onSelectedItem)="onSelectUserRole($event)"
+                ></app-drop-down>
+            </div>
+        </div>
+        <div class="qt-inputs-row">
+            <div class="qt-input-block">
+                <div class="qt-df qt-jc-sb qt-ai-c">
+                    <div class="user-detail__row-info-label">Updates</div>
+                    <div
+                        class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"
+                        *ngIf="getPermissions('EDIT_USERS')"
+                    ></div>
+                </div>
+                <user-default-subscription
+                    [isDisabled]="!getPermissions('EDIT_USERS')"
+                    [mode]="MODE_EDIT_SUBSCRIPTION"
+                    [defaultSubscriptions]="customerCompaniesInfo.defaultSubscriptions"
+                    (onChange)="onChangeDefaultSubscriptions($event)"
+                ></user-default-subscription>
+            </div>
+        </div>
+        <div class="qt-inputs-row">
+            <div class="qt-input-block">
+                <div class="qt-df qt-ai-c">
+                    <label
+                        class="qt-checkbox receive-full-amount-check qt-mb-0"
+                        [attr.for]="'access-1'"
+                    >
+                        <input
+                            [attr.id]="'access-1'"
+                            type="checkbox"
+                            [(ngModel)]="customerCompaniesInfo.hasAccess"
+                            (change)="onChangeHasAccess()"
+                        >
+                        <span></span>
+                        <div class="qt-ml-8">Access to the Customer portal</div>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="qt-inputs-row">
+            <div class="qt-input-block">
+                <div class="qt-df qt-ai-c">
+                    <label
+                        class="qt-checkbox receive-full-amount-check qt-mb-0 --disabled"
+                        [attr.for]="'primary-contact-1'"
+                    >
+                        <input
+                            [attr.id]="'primary-contact-1'"
+                            type="checkbox"
+                            [(ngModel)]="customerCompaniesInfo.isPrimaryContact"
+                            disabled
+                        >
+                        <span></span>
+                        <div class="qt-ml-8">Primary User</div>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

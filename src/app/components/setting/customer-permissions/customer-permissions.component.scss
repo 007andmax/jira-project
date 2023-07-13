@@ -1,0 +1,100 @@
+@import "./src/assets/scss/mixin";
+@import "./src/assets/scss/custom";
+@import './src/assets/styles/variable';
+@import "./src/assets/styles/fonts";
+
+.active-users-table {
+    &__user-name {
+        flex: 1 0 245px;
+        padding: 0 8px;
+    }
+
+    &__role {
+        flex: 1 1 85px;
+        padding: 0 8px;
+    }
+
+    &__last-login {
+        flex: 1 1 75px;
+        padding: 0 8px;
+        min-width: 134px;
+    }
+
+    &__authentication {
+        flex: 1 1 75px;
+        padding: 0 8px;
+    }
+
+    &__notify-for {
+        flex: 1 1 110px;
+        padding: 0 8px;
+        min-width: 204px;
+        position: relative;
+
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 4px;
+        column-gap: 4px;
+
+        &-subscription {
+            display: inline-block;
+            padding: 4px 8px 5px;
+            border-radius: 6px;
+            background-color: $gray-100;
+            color: $gray-500;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 15px;
+        }
+    }
+
+    &__action {
+        flex: 0 0 56px;
+
+        &.--sm {
+            flex: 0 0 20px;
+        }
+    }
+}
+
+.user-permissions-table {
+    &__permissions {
+        flex: 1;
+        min-width: 300px;
+        padding: 0 8px;
+    }
+
+    &__role {
+        flex: 0 1 16.6%;
+        padding: 0 8px;
+    }
+}
+
+.tab-pane__table-row__permissions-subheader {
+    background-color: $gray-25;
+
+    .user-permissions-table__permissions-text {
+        font-size: 11px;
+        line-height: 13px;
+        font-weight: 700;
+        color: $gray-500;
+    }
+}
+
+.user-permissions-table__permissions-text {
+    max-width: 500px;
+}
+
+.tab-pane__table-body {
+    .tab-pane__table-cell:not(.user-permissions-table__permissions) {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.tab-pane__table-header {
+    .tab-pane__table-row {
+        display: flex;
+        align-items: flex-start;
+    }
+}

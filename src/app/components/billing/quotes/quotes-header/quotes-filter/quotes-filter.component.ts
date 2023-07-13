@@ -7,6 +7,7 @@ import { MultiDatepickerComponent } from 'src/app/components/shared/multi-datepi
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { QuoteFilter } from '../../class/quote-filter';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-quotes-filter',
@@ -27,10 +28,23 @@ export class QuotesFilterComponent implements OnInit {
   new CompanySetting('Ticketed', 'TICKETED'), new CompanySetting('Unread', 'UNREAD'),
   new CompanySetting('Billed', 'BILLED')];
   constructor(private companiesState: CompaniesStateService,
+    private customerPortalStateService: CustomerPortalStateService,
     private quoteStateService: QuoteStateService) { }
 
   ngOnInit() {
-
+    if (this.customerPortalStateService.isCustomerPortal && this.companiesState.getCompanies().length > 0) this.checkCompanyCustomerUser();
+    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
+      if (this.customerPortalStateService.isCustomerPortal) this.checkCompanyCustomerUser();
+    })
+    this.sub.add(getOnCompanies);
+    let onQuotesFilters = this.customerPortalStateService.onQuotesFilters.subscribe(data => (this.checkCompanyCustomerUser()));
+    this.sub.add(onQuotesFilters);
+  }
+  private checkCompanyCustomerUser() {
+    this.quotesFilter = this.customerPortalStateService.getQuotesFilter();
+    let selectedCompany = this.companiesState.getCompanies().find(item => item.id == localStorage.getItem('company_info_id'));
+    this.companyDp.selectItemWithOutChanges(selectedCompany);
+    this.companyDp.isDisabled = true;
   }
   onSelectStatus(status) {
     this.quotesFilter.setStatus((status) ? status.value : null);
@@ -39,11 +53,11 @@ export class QuotesFilterComponent implements OnInit {
   }
 
   public onClearAll() {
-    this.companyDp.clearWithOutChanges();
+    if (!this.customerPortalStateService.isCustomerPortal) this.companyDp.clearWithOutChanges();
     this.datesDp.clearWithOutChanges();
     this.statusDp.clearWithOutChanges();
     this.quotesFilter.setStatus(null);
-    this.quotesFilter.setCompanyName(null);
+    if (!this.customerPortalStateService.isCustomerPortal) this.quotesFilter.setCompanyId(null);
     this.quotesFilter.setStartDate(null);
     this.quotesFilter.setEndDate(null);
     this.quotesFilter.setQuoteNumber(null);
@@ -52,9 +66,9 @@ export class QuotesFilterComponent implements OnInit {
   }
   public onSelectCompany(item) {
     if (!item) {
-      this.quotesFilter.setCompanyName(null);
+      this.quotesFilter.setCompanyId(null);
     } else {
-      this.quotesFilter.setCompanyName(item.name);
+      this.quotesFilter.setCompanyId(item.id);
     }
     this.quoteStateService.onInitFilter(this.quotesFilter);
     this.onChangeCounterFilter();
@@ -77,7 +91,7 @@ export class QuotesFilterComponent implements OnInit {
   }
   public onChangeCounterFilter() {
     let count = 0;
-    if (this.quotesFilter.companyName) count++;
+    if (this.quotesFilter.companyId) count++;
     if (this.quotesFilter.endDate && this.quotesFilter.date) count++;
     if (this.quotesFilter.quoteNumber) count++;
     if (this.quotesFilter.status) count++;

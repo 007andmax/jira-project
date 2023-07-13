@@ -1,0 +1,57 @@
+<div
+    ngbDropdown
+    #addCustomer="ngbDropdown"
+>
+    <app-dynamic-tooltip
+        [content]="'Edit'"
+        [position]="'top'"
+        #editTooltip
+    ></app-dynamic-tooltip>
+    <a
+        href="javascript:;"
+        (mouseenter)="editTooltip.show($event.target)"
+        (mouseleave)="editTooltip.hide()"
+        class="qt-dib icon__edit-gray-dark qt-sz-16 qt-bg-contain qt-mr-16 pointer qt-fs-0"
+        ngbDropdownToggle
+    >
+    </a>
+    <div
+        class="modal-content --tooltip toggle-area"
+        ngbDropdownMenu
+    >
+        <div class="modal-wrapper">
+            <div class="toggle-header">
+                <h6 class="qt-fw-600 qt-color-dark qt-mb-24">Edit Role</h6>
+            </div>
+            <div class>
+                <div class="qt-input-block qt-mb-32">
+                    <label class="qt-input-block__label">Role Name</label>
+                    <input
+                        type="text"
+                        class="form-input"
+                        [(ngModel)]="editRole.name"
+                        placeholder="Enter Role Name"
+                        minlength="1"
+                        maxlength="50"
+                    >
+                </div>
+                <div class="qt-df qt-w100">
+                    <a
+                        href="javascript:;"
+                        class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
+                        aria-label="Close"
+                        (click)="close()"
+                    >
+                        Cancel
+                    </a>
+                    <input
+                        type="button"
+                        value="Save"
+                        (click)="changeRole()"
+                        class="qt-button qt-jc-c qt-w100"
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

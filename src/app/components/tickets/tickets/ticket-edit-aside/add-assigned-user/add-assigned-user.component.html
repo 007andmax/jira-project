@@ -47,6 +47,12 @@
                 ngbDropdownToggle
             >
         </mat-chip-list>
+        <span
+            class="placeholder-detail-ticket"
+            *ngIf="type == 'DETAIL_TICKET_ASSIGNED_USER' && selectedUsers.length == 0"
+        >
+            Select user to assign
+        </span>
         <div
             class="autocomplete-user-tags"
             ngbDropdownMenu

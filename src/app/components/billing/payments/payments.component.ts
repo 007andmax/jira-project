@@ -13,6 +13,8 @@ import { InvoicesAsidePreviewComponent } from '../invoices/invoices-aside-previe
 import { PaymentsRealTimeService } from 'src/app/states/payments/payments-real-time.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 
 @Component({
   selector: 'payments',
@@ -52,9 +54,26 @@ export class PaymentsComponent implements OnInit {
     private confirmStateService: ConfirmStateService,
     private paymentsRealTimeService: PaymentsRealTimeService,
     private leftPanelStateService: LeftPanelStateService,
+    private customerPortalStateService: CustomerPortalStateService,
+    private websocketService: WebsocketService,
     private paymentsListService: PaymentsListService) { }
 
   ngOnInit() {
+    if (this.customerPortalStateService.isCustomerPortal) {
+      this.paymentsFilter.setCompanyId(this.customerPortalStateService.getPaymentsFilter().companyId);
+      this.websocketService.onInitConnectCustomerUser("new-payments-ng2", this.customerPortalStateService.getPaymentsFilter().companyId);
+    }
+    let onPaymentsFilters = this.customerPortalStateService.onPaymentsFilters.subscribe(data => {
+      this.selectedPayments = [];
+      this.selectedCompanyId = null;
+      this.paymentsFilter.setCompanyId(this.customerPortalStateService.getPaymentsFilter().companyId);
+      this.paymentsFilter.resetSortBy();
+      this.showPreloader = true;
+      document.body.querySelector(".main-container").scrollTo(0, 0);
+      this.setDefaultScoll();
+      this.onScroll();
+    });
+    this.sub.add(onPaymentsFilters);
     this.leftPanelStateService.setBillingPage('new-payments-ng2');
     document.body.querySelector(".main-container").scrollTo(0, 0);
     if (this.companiesStateService.getCompanies().length > 0) this.onScroll();
@@ -169,6 +188,7 @@ export class PaymentsComponent implements OnInit {
     this.payments = [];
   }
   ngOnDestroy(): void {
+    if (this.customerPortalStateService.isCustomerPortal && this.paymentsRealTimeService.subsribeToPaymentsCustomerUsers) this.paymentsRealTimeService.subsribeToPaymentsCustomerUsers.unsubscribe();
     this.sub.unsubscribe();
   }
   public trackById(index, item) {

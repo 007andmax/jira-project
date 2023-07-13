@@ -103,7 +103,7 @@ export class QuoteAsideEditComponent implements OnInit, OnDestroy {
     this.saveAndApproveBtn.setDisabled(true);
     this.quoteService.editQuote(quote.getDataForUpdate(false))
       .subscribe((res) => {
-        this.quoteService.approveQuote(res['company'], res['id'])
+        this.quoteService.approveQuote(res['domain'], res['id'])
           .subscribe((res) => {
             this.saveAndApproveBtn.setDisabled(false);
             this.close();

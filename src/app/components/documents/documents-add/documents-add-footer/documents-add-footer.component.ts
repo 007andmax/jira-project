@@ -111,7 +111,7 @@ export class DocumentsAddFooterComponent implements OnInit, OnDestroy {
   public goToDocumentsList() {
     if (this.companyId) {
       this.router.navigate(
-        [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.companyId, 'documents']);
+        [`${this.companiesStateService.getCurrentCompany().techDomain}/company/`, this.companyId, 'documents']);
     } else {
       this.leftPanelStateService.goToState('new-documents');
     }
@@ -134,7 +134,7 @@ export class DocumentsAddFooterComponent implements OnInit, OnDestroy {
   }
   goToDocumentCategory() {
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/category/`, this.categoryId]);
+      [`${this.companiesStateService.getCurrentCompany().techDomain}/documents/category/`, this.categoryId]);
 
   }
   public getPermissions(action) {

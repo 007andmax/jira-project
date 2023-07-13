@@ -5,6 +5,7 @@ import { ActivityHistoryComponent } from "./activity-history/activity-history.co
 import { EmailNotificationsComponent } from "./email-notifications/email-notifications.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { TicketsMyProfileComponent } from "./tickets-my-profile/tickets-my-profile.component";
+import { CustomerPortalStateService } from "src/app/states/customer-portal/customer-portal-state.service";
 declare var $: any;
 
 @Component({
@@ -19,7 +20,8 @@ export class MyProfileComponent implements OnInit, OnDestroy {
   @ViewChild('emailNotifications') emailNotifications: EmailNotificationsComponent;
   @ViewChild('activityHistory') activityHistory: ActivityHistoryComponent;
   @ViewChild('tickets') tickets: TicketsMyProfileComponent;
-  constructor(private settingStateService: SettingStateService) { }
+  constructor(private settingStateService: SettingStateService,
+    public customerPortalStateService: CustomerPortalStateService,) { }
 
   ngOnInit() {
     $('body').addClass('page-settings');

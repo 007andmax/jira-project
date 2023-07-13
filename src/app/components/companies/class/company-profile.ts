@@ -39,6 +39,7 @@ export class CompanyProfile {
     associatedCompanies: Array<CompanyAssociated> = [];
     reputation?: number = 0;
     primaryContact: CompanyAndressContact;
+    isUseSelectedUser: boolean = false;
     constructor() {
         this.logo = null;
         let contact: CompanyProfileContact = new CompanyProfileContact();
@@ -47,6 +48,9 @@ export class CompanyProfile {
         this.addresses = [address];
         this.contacts = [contact];
         this.workingDays = Weeks.map((item) => new WorkDay(item.toUpperCase(), 0, 0))
+    }
+    public setUseSelectedUser(data) {
+        this.isUseSelectedUser = data;
     }
     public initShippingAdress() {
         let address: CompanyProfileAddress = new CompanyProfileAddress();
@@ -77,7 +81,7 @@ export class CompanyProfile {
         this.agentLinkToEmail = company.agentLinkToEmail;
         this.clientIndustry = company.clientIndustry;
         this.clientType = company.clientType;
-        this.contacts = company.contacts;
+        this.contacts = company.contacts.map(item => new CompanyProfileContact(item));
         this.defaultPaymentMethod = company.defaultPaymentMethod;
         this.description = company.description;
         this.logo = company.logo;
@@ -130,7 +134,7 @@ export class CompanyProfile {
         this.associatedCompanies = company.associatedCompanies.map(item => new CompanyAssociated(item));
     }
     public getDataForUpdate() {
-        let contacts = JSON.parse(JSON.stringify(this.contacts));
+        let contacts = JSON.parse(JSON.stringify(this.contacts.map(item => (item.getDataForRequest(false, false)))));
         let addresses = [this.addresses[0]];
         if (this.addresses.length == 2 && this.addresses[1].checkForAdd()) addresses.push(this.addresses[1]);
         return {
@@ -140,10 +144,7 @@ export class CompanyProfile {
             agentLinkToEmail: this.agentLinkToEmail,
             clientIndustry: (!this.clientIndustry.name || this.clientIndustry.name.length === 0) ? {} : { name: this.clientIndustry.name },
             clientType: this.clientType,
-            contacts: contacts.map((item, index) => {
-                if (index === 0 && (!item.phoneNumbers[0].number || item.phoneNumbers[0].number.length === 0)) item.phoneNumbers = [];
-                return item;
-            }),
+            contacts: contacts,
             defaultPaymentMethod: this.defaultPaymentMethod,
             description: this.description,
             logo: this.logo,
@@ -163,7 +164,7 @@ export class CompanyProfile {
         }
     }
     public getDataForAdd() {
-        let contacts = JSON.parse(JSON.stringify(this.contacts));
+        let contacts = JSON.parse(JSON.stringify(this.contacts.map(item => (item.getDataForRequest(true, this.isUseSelectedUser)))));
         let addresses = [this.addresses[0]];
         if (this.addresses.length == 2 && this.addresses[1].checkForAdd()) addresses.push(this.addresses[1]);
         return {
@@ -173,10 +174,7 @@ export class CompanyProfile {
             agentLinkToEmail: this.agentLinkToEmail,
             clientIndustry: (!this.clientIndustry.name || this.clientIndustry.name.length === 0) ? {} : { name: this.clientIndustry.name },
             clientType: this.clientType,
-            contacts: contacts.map((item, index) => {
-                if (index === 0 && (!item.phoneNumbers[0].number || item.phoneNumbers[0].number.length === 0)) item.phoneNumbers = [];
-                return item;
-            }),
+            contacts: contacts,
             defaultPaymentMethod: this.defaultPaymentMethod,
             description: this.description,
             logo: this.logo,

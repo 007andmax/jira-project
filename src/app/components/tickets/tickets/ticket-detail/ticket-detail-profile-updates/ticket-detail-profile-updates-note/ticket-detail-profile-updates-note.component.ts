@@ -22,4 +22,5 @@ export class TicketDetailProfileUpdatesNoteComponent extends TicketProfileUpdate
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `The ticket update containing a note will become inaccessible. Continue with permanent deletion?`;
   }
+
 }

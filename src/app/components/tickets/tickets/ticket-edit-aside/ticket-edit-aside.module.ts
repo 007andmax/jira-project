@@ -10,7 +10,6 @@ import { TicketClaimInfoComponent } from './ticket-claim-info/ticket-claim-info.
 import { TicketMessageComponent } from './ticket-message/ticket-message.component';
 import { TicketProfileUpdatesComponent } from './ticket-profile-updates/ticket-profile-updates.component';
 import { TicketProfileFormUpdateComponent } from './ticket-profile-form-update/ticket-profile-form-update.component';
-import { TicketEditAsideRightPanelComponent } from './ticket-edit-aside-right-panel/ticket-edit-aside-right-panel.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatChipsModule, MatIconModule, MatSelectModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -23,9 +22,6 @@ import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { UploadAreaProgressComponent } from 'src/app/components/shared/upload-area/upload-area-progress/upload-area-progress.component';
 import { TicketProfileFormUpdateProductsComponent } from './ticket-profile-form-update/ticket-profile-form-update-products/ticket-profile-form-update-products.component';
 import { TicketProfileFormUpdateServicesComponent } from './ticket-profile-form-update/ticket-profile-form-update-services/ticket-profile-form-update-services.component';
-import { TicketEditAsideDevicesComponent } from '../ticket-edit-aside-devices/ticket-edit-aside-devices.component';
-import { TicketEditAsideCompanyInfoComponent } from '../ticket-edit-aside-company-info/ticket-edit-aside-company-info.component';
-import { TicketEditAsideUsersComponent } from '../ticket-edit-aside-users/ticket-edit-aside-users.component';
 import { TicketProfileUpdatesNoteItemComponent } from './ticket-profile-updates/ticket-profile-updates-note/ticket-profile-updates-note-item/ticket-profile-updates-note-item.component';
 import { TicketProfileUpdatesFooterComponent } from './ticket-profile-updates/ticket-profile-updates-footer/ticket-profile-updates-footer.component';
 import { TicketProfileUpdatesProductItemComponent } from './ticket-profile-updates/ticket-profile-updates-product/ticket-profile-updates-product-item/ticket-profile-updates-product-item.component';
@@ -39,7 +35,6 @@ import { DatePickerModule } from 'src/app/components/shared/date-picker/date-pic
 import { NgxMaskModule } from 'ngx-mask';
 import { PreparePhoneModule } from 'src/app/pipe/prepare-phone/prepare-phone.module';
 import { PhoneModule } from 'src/app/pipe/phone/phone.module';
-import { CompanyInfoHistoryComponent } from '../ticket-edit-aside-company-info/company-info-history/company-info-history.component';
 import { TicketProfileUpdatesNoteInfoComponent } from './ticket-profile-updates/ticket-profile-updates-note/ticket-profile-updates-note-info/ticket-profile-updates-note-info.component';
 import { TicketProfileUpdatesNoteEditComponent } from './ticket-profile-updates/ticket-profile-updates-note/ticket-profile-updates-note-edit/ticket-profile-updates-note-edit.component';
 import { TicketProfileUpdatesProductInfoComponent } from './ticket-profile-updates/ticket-profile-updates-product/ticket-profile-updates-product-info/ticket-profile-updates-product-info.component';
@@ -60,7 +55,6 @@ import { InvoiceFormTicketEditTaxesModule } from 'src/app/components/billing/bil
 import { TicketChangeStatusModule } from './ticket-change-status/ticket-change-status.module';
 import { AddAssignedUserModule } from './add-assigned-user/add-assigned-user.module';
 import { TicketProfileFormUpdateNoteListModule } from './ticket-profile-form-update/ticket-profile-form-update-note-list/ticket-profile-form-update-note-list.module';
-import { CompanyInfoHistoryModule } from '../ticket-edit-aside-company-info/company-info-history/company-info-history.module';
 
 @NgModule({
     declarations: [TicketEditAsideComponent,
@@ -70,15 +64,11 @@ import { CompanyInfoHistoryModule } from '../ticket-edit-aside-company-info/comp
         TicketMessageComponent,
         TicketProfileUpdatesComponent,
         TicketProfileFormUpdateComponent,
-        TicketEditAsideRightPanelComponent,
         TicketProfileUpdatesNoteComponent,
         TicketProfileUpdatesProductComponent,
         TicketProfileUpdatesServiceComponent,
         TicketProfileFormUpdateProductsComponent,
         TicketProfileFormUpdateServicesComponent,
-        TicketEditAsideDevicesComponent,
-        TicketEditAsideCompanyInfoComponent,
-        TicketEditAsideUsersComponent,
         TicketProfileUpdatesNoteItemComponent,
         TicketProfileUpdatesFooterComponent,
         TicketProfileUpdatesProductItemComponent,
@@ -125,8 +115,7 @@ import { CompanyInfoHistoryModule } from '../ticket-edit-aside-company-info/comp
         InvoiceFormTicketEditTaxesModule,
         TicketChangeStatusModule,
         AddAssignedUserModule,
-        TicketProfileFormUpdateNoteListModule,
-        CompanyInfoHistoryModule
+        TicketProfileFormUpdateNoteListModule
     ],
     exports: [TicketEditAsideComponent,]
 })

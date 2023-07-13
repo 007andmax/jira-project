@@ -3,7 +3,7 @@ export class DeviceExtendedReportSystem {
     asset_tag: string;
     caption: string;
     drive: string;
-    install_date: string;
+    install_date: any;
     manufacturer: string;
     model: string;
     release_id: string;
@@ -11,5 +11,5 @@ export class DeviceExtendedReportSystem {
     service_pack: string;
     type: string;
     version: string;
-    warranty: string;
+    warranty: any;
 }

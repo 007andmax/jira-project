@@ -295,7 +295,8 @@
     -webkit-mask-size: contain;
     mask-size: contain;
   }
-  &__companies {
+  &__companies,
+  &__companies--white {
     background-color: $gray-500;
     -webkit-mask-position: center;
     mask-position: center;
@@ -305,6 +306,9 @@
     mask-repeat: no-repeat;
     -webkit-mask-size: contain;
     mask-size: contain;
+  }
+  &__companies--white {
+    background-color: $white;
   }
   &__support-page {
     background-color: $gray-600--old;

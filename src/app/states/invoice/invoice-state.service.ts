@@ -1,11 +1,11 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Invoice } from '../../components/billing/invoices/class/invoice';
+import { InvoicesFilter } from 'src/app/components/billing/invoices/class/invoices-filter';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InvoiceStateService {
-  invoiceForRemove: Invoice;
   invoiceForRollback: Invoice;
   invoiceForRefund: Invoice;
   openAside: EventEmitter<any> = new EventEmitter();
@@ -13,6 +13,7 @@ export class InvoiceStateService {
   filter: EventEmitter<any> = new EventEmitter();
   openPreviewAside: EventEmitter<any> = new EventEmitter();
   invoices: Array<Invoice> = [];
+
   constructor() { }
 
   public getInvoices() {
@@ -36,12 +37,6 @@ export class InvoiceStateService {
   }
   public getInvoiceForRollback() {
     return this.invoiceForRollback;
-  }
-  public setInvoiceForemove(data) {
-    this.invoiceForRemove = data;
-  }
-  public getInvoiceForRemove() {
-    return this.invoiceForRemove;
   }
   public onInitFilter(data) {
     this.filter.emit(data);

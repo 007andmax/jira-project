@@ -69,12 +69,4 @@ export class CompanyDashInvoiceComponent implements OnInit {
       this.showPreviewInvoice = true;*/
   }
 
-  onRemoveInvoice(invoice) {
-    this.invoicesService.remove(invoice.id).subscribe(data => {
-      //  this.showPreviewInvoice = false;
-    })
-  }
-
-
-
 }

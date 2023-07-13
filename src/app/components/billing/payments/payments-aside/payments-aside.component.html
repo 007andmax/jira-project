@@ -4,19 +4,20 @@
         <div class="qt-df qt-ai-c">
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__edit"
-                *ngIf="!payment.refundMethod"
+                *ngIf="!payment.refundMethod && !customerPortalStateService.isCustomerPortal"
                 (click)="showEdit()"
             ></div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__refund-payment"
-                *ngIf="!payment.refundMethod"
+                *ngIf="!payment.refundMethod && !customerPortalStateService.isCustomerPortal"
                 (click)="showRefund()"
             ></div>
             <div
                 class="qt-circle qt-bg-white qt-mr-16 header-circle-icon qt-sz-32 qt-df qt-ai-c qt-jc-c pointer"
                 (click)="deletePayment()"
+                *ngIf="!customerPortalStateService.isCustomerPortal"
             >
-              <div class="qt-sz-20 icon__remove"></div>
+                <div class="qt-sz-20 icon__remove"></div>
             </div>
             <div
                 class="icon__close qt-sz-24 qt-pointer qt-ic-c"
@@ -72,6 +73,7 @@
                     ></div>
                     <div
                         class="qt-fs-13 qt-color-dark-light qt-lh-154"
+                        *ngIf="company.companyInfo.contacts"
                         [textContent]="company.companyInfo.contacts[0].firstName + ' ' +
               company.companyInfo.contacts[0].lastName"
                     ></div>
@@ -81,11 +83,12 @@
                     ></div>
                     <div
                         class="qt-fs-13 qt-color-dark-light qt-lh-154"
+                        *ngIf="company.companyInfo.contacts"
                         [textContent]="company.companyInfo.contacts[0].primaryEmail"
                     ></div>
                     <div
                         class="qt-fs-13 qt-color-dark-light qt-lh-154"
-                        *ngIf="company.companyInfo.contacts[0].phoneNumbers && company.companyInfo.contacts[0].phoneNumbers.length > 0"
+                        *ngIf="company.companyInfo.contacts && company.companyInfo.contacts[0].phoneNumbers && company.companyInfo.contacts[0].phoneNumbers.length > 0"
                     >
                         <preview-phone-mask [number]="company.companyInfo.contacts[0].phoneNumbers[0].number"></preview-phone-mask>
                     </div>
@@ -119,12 +122,20 @@
 
 
 
+
+
+
+
                     <div class="payment-info__notes">
                         <div class="icon__payment-note qt-mb-5 qt-ic-c qt-sz-16"></div>
                         <div [textContent]="payment.note"></div>
                     </div>
                 </div>
             </div>
+
+
+
+
 
 
 
@@ -137,7 +148,15 @@
 
 
 
+
+
+
+
             <div class="qt-fs-16 qt-fw-600 qt-color-dark qt-mb-12 qt-lh-163">Payment for</div>
+
+
+
+
 
 
 
@@ -180,6 +199,10 @@
                     </ng-template>
                 </tbody>
             </table>
+
+
+
+
 
 
 

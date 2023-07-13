@@ -11,6 +11,10 @@ export class UserCustomSubscription {
         this.activated = data.activated;
 
     }
+    /**
+  * @description Set new value field 'isExist'
+  * @param {boolean} data - New value field 'isExist'
+*/
     public setIsExist(data) {
         this.isExist = data;
     }

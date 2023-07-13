@@ -1,0 +1,134 @@
+<div
+    class="app-left-panel__menu"
+    [ngClass]="{'--active': open}"
+    (click)="open = !open;openPanel()"
+>
+    <div class="icon__collapse-arrow-white qt-sz-24 qt-mr-12 qt-d-none qt-d-md-block"></div>
+    <div class="app-left-panel__menu-title">Tickets</div>
+</div>
+<ul
+    class="app-left-panel__menu-expand"
+    [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
+    *ngIf="currentUser"
+>
+    <ng-template
+        ngFor
+        let-customerCompany
+        [ngForOf]="currentUser.customerCompaniesInfo"
+        [ngForTrackBy]="trackById"
+    >
+        <li
+            [ngClass]="{'--active': activePage === 'new-tickets-dashboard'}"
+            class="desktop-version"
+            *ngIf="customerCompany.customerUserRole"
+        >
+            <div class="qt-df qt-ai-c">
+                <i class="icon__companies icon__companies--white qt-bg-contain qt-sz-16 qt-mr-8"></i>
+                <div
+                    class="customer-portal__menu-title"
+                    [textContent]="customerCompany.clientCompanyName"
+                ></div>
+            </div>
+            <ul class="customer-portal__menu">
+                <li
+                    [ngClass]="{'--active':activePage === 'new-tickets' && customerCompany.companyId === getSelectedCompnayId()}"
+                    (click)="customerPortalStateService.setCompnayIdInfo(customerCompany.companyId);setTicketsFilter(customerCompany,'ALL')"
+                    *ngIf="customerCompany.customerUserRole.getPermission('VIEW_MY_TICKETS')"
+                >
+                    <a
+                        href
+                        [link]="'tickets'"
+                        target="_blank"
+                        appRightClickBlank
+                    >
+                        Tickets
+                    </a>
+                </li>
+                <li
+                    [ngClass]="{'--active':activePage === 'new-billable-invoices' && customerCompany.companyId === getSelectedCompnayId()}"
+                    (click)="customerPortalStateService.setCompnayIdInfo(customerCompany.companyId);setInvoiceFilter(customerCompany);"
+                    *ngIf="customerCompany.customerUserRole.getPermission('VIEW_ALL_INVOICES')"
+                >
+                    <a
+                        href
+                        [link]="'invoices'"
+                        target="_blank"
+                        appRightClickBlank
+                    >
+                        Invoices
+                    </a>
+                </li>
+                <li
+                    [ngClass]="{'--active':activePage === 'new-users' && customerCompany.companyId === getSelectedCompnayId()}"
+                    (click)="customerPortalStateService.setCompnayIdInfo(customerCompany.companyId);setUsersFilter(customerCompany.companyId)"
+                    *ngIf="customerCompany.customerUserRole.getPermission('VIEW_MY_PROFILE')"
+                >
+                    <a
+                        href
+                        [link]="'users'"
+                        target="_blank"
+                        appRightClickBlank
+                    >
+                        Users
+                    </a>
+                </li>
+                <li
+                    [ngClass]="{'--active':activePage === 'company-devices' && customerCompany.companyId === getSelectedCompnayId()}"
+                    (click)="customerPortalStateService.setCompnayIdInfo(customerCompany.companyId);goToCompanySection(customerCompany.companyId,'devices')"
+                    *ngIf="customerCompany.customerUserRole.getPermission('VIEW_ALL_DEVICES')"
+                >
+                    <a
+                        href
+                        [link]="getLinkSection(customerCompany.companyId,'devices')"
+                        target="_blank"
+                        appRightClickBlank
+                    >
+                        Devices
+                    </a>
+                </li>
+                <li
+                    [ngClass]="{'--active':activePage === 'quotes-component' && customerCompany.companyId === getSelectedCompnayId()}"
+                    (click)="customerPortalStateService.setCompnayIdInfo(customerCompany.companyId);setQuotesFilter(customerCompany)"
+                    *ngIf="customerCompany.customerUserRole.getPermission('VIEW_ALL_QUOTES')"
+                >
+                    <a
+                        href
+                        [link]="'quotes'"
+                        target="_blank"
+                        appRightClickBlank
+                    >
+                        Quotes
+                    </a>
+                </li>
+                <li
+                    [ngClass]="{'--active':activePage === 'new-contracts' && customerCompany.companyId === getSelectedCompnayId()}"
+                    (click)="customerPortalStateService.setCompnayIdInfo(customerCompany.companyId);setContractsFilter(customerCompany);"
+                    *ngIf="customerCompany.customerUserRole.getPermission('VIEW_ALL_CONTRACTS')"
+                >
+                    <a
+                        href
+                        [link]="'contracts'"
+                        target="_blank"
+                        appRightClickBlank
+                    >
+                        Contracts
+                    </a>
+                </li>
+                <li
+                    [ngClass]="{'--active':activePage === 'new-payments-ng2' && customerCompany.companyId === getSelectedCompnayId()}"
+                    (click)="customerPortalStateService.setCompnayIdInfo(customerCompany.companyId);setPaymentsFilter(customerCompany)"
+                    *ngIf="customerCompany.customerUserRole.getPermission('VIEW_ALL_PAYMENTS')"
+                >
+                    <a
+                        href
+                        [link]="'payments'"
+                        target="_blank"
+                        appRightClickBlank
+                    >
+                        Payments
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ng-template>
+</ul>

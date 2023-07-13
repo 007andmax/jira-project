@@ -9,7 +9,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 export class QuoteRealTimeService {
 
   public changeQuotesArray: EventEmitter<any> = new EventEmitter();
-
+  public subsribeToQuoteCustomerUsers;
   /**
    * Quote real time service constructor
    */

@@ -7,6 +7,7 @@ import { MultiDatepickerComponent } from 'src/app/components/shared/multi-datepi
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
 import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-invoices-filter',
@@ -23,9 +24,23 @@ export class InvoicesFilterComponent implements OnInit {
   statusTypes = [new CompanySetting('Paid invoices', 'PAID'), new CompanySetting('Unpaid invoices', 'UNPAID'), new CompanySetting('Overdue invoices', 'OVERDUE')];
   constructor(private companiesState: CompaniesStateService,
     private elRef: ElementRef,
+    private customerPortalStateService: CustomerPortalStateService,
     private invoiceStateService: InvoiceStateService) { }
 
   ngOnInit() {
+    if (this.customerPortalStateService.isCustomerPortal && this.companiesState.getCompanies().length > 0) this.checkCompanyCustomerUser();
+    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
+      if (this.customerPortalStateService.isCustomerPortal) this.checkCompanyCustomerUser();
+    })
+    this.sub.add(getOnCompanies);
+    let onTicketFilters = this.customerPortalStateService.onInvoiceFilters.subscribe(data => (this.checkCompanyCustomerUser()));
+    this.sub.add(onTicketFilters);
+  }
+  private checkCompanyCustomerUser() {
+    this.invoicesFilter = this.customerPortalStateService.getInvoicesFilter();
+    let selectedCompany = this.companiesState.getCompanies().find(item => item.id == localStorage.getItem('company_info_id'));
+    this.companyDp.selectItemWithOutChanges(selectedCompany);
+    this.companyDp.isDisabled = true;
   }
   onSelectStatus(status) {
     this.invoicesFilter.setStatus((status) ? status.value : null);
@@ -33,11 +48,11 @@ export class InvoicesFilterComponent implements OnInit {
     this.onChangeCounterFilter();
   }
   public onClearAll() {
-    this.companyDp.clearWithOutChanges();
+    if (!this.customerPortalStateService.isCustomerPortal) this.companyDp.clearWithOutChanges();
     this.datesDp.clearWithOutChanges();
     this.statusDp.clearWithOutChanges();
     this.invoicesFilter.setStatus(null);
-    this.invoicesFilter.setCompany(null);
+    if (!this.customerPortalStateService.isCustomerPortal) this.invoicesFilter.setCompanyId(null);
     this.invoicesFilter.setStartDate(null);
     this.invoicesFilter.setEndDate(null);
     this.invoicesFilter.setInvoiceNumber(null);
@@ -49,9 +64,9 @@ export class InvoicesFilterComponent implements OnInit {
 
   public onSelectCompany(item) {
     if (!item) {
-      this.invoicesFilter.setCompany(null);
+      this.invoicesFilter.setCompanyId(null);
     } else {
-      this.invoicesFilter.setCompany(item.name);
+      this.invoicesFilter.setCompanyId(item.id);
     }
     this.invoiceStateService.onInitFilter(this.invoicesFilter);
     this.onChangeCounterFilter();
@@ -80,7 +95,7 @@ export class InvoicesFilterComponent implements OnInit {
   }
   public onChangeCounterFilter() {
     let count = 0;
-    if (this.invoicesFilter.companyName) count++;
+    if (this.invoicesFilter.companyId) count++;
     if (this.invoicesFilter.endDate && this.invoicesFilter.startDate) count++;
     if (this.invoicesFilter.invoiceNumber) count++;
     if (this.invoicesFilter.status) count++;

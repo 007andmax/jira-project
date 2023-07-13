@@ -60,10 +60,11 @@
         <!-- COMPANY_SETTINGS -->
     </div>
     <div
-        class="device-user pointer company-settings-user"
+        class="device-user company-settings-user"
         *ngIf="type === 'DETAIL_TICKET' && selectedUsers.length === 1"
         id="dropdownTechuser"
         ngbDropdownToggle
+        [ngClass]="{'pointer':!isDisabled}"
     >
         <div class="user-tech-dp">
             <div
@@ -81,10 +82,11 @@
         </div>
     </div>
     <div
-        class="device-user pointer company-settings-user"
+        class="device-user company-settings-user"
         *ngIf="type === 'COMPANY_SETTINGS' && selectedUsers.length === 1"
         id="dropdownTechuser"
         ngbDropdownToggle
+        [ngClass]="{'pointer':!isDisabled}"
     >
         <div class="user-tech-dp">
             <div
@@ -188,12 +190,12 @@
                                                 [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
                                             ></div>
                                             <div
-                                              class="user-item-user-name"
-                                              [textContent]="getUserName(user)"
+                                                class="user-item-user-name"
+                                                [textContent]="getUserName(user)"
                                             ></div>
                                             <span
-                                              class="user-item-user-email"
-                                              [textContent]="user.primaryEmail"
+                                                class="user-item-user-email"
+                                                [textContent]="user.primaryEmail"
                                             ></span>
                                             <i
                                                 *ngIf="isSelected(user)"

@@ -39,6 +39,7 @@
             class="visible-users-item"
             (click)="changeType('PRIVATE')"
             ngbDropdownItem
+            *ngIf="!customerPortalStateService.isCustomerPortal"
         >
             <div class="icon__private qt-za-16 qt-sz-16 qt-bg-contain"></div>
             <p>Private</p>

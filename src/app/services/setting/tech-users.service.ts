@@ -23,7 +23,7 @@ export class TechUsersService {
 
   getRoleNames() {
     // account type
-    return this.http.get(`${this.apiUrl}settings/companyProfile/getRoleNames`);
+    return this.http.get(`${this.apiUrl}settings/companyProfile/getTechRoleNames`);
   }
 
   getUsersEmailNotifications(techUserIds) {

@@ -64,11 +64,12 @@ export class SettingService {
   }
 
   public updateProfile(profile: any) {
-    return this.http.put(`${this.apiUrl}settings/userProfile/basic`, profile);
-  }
-
-  public deleteAvatar(id: string) {
-    return this.http.delete(`${this.apiUrl}users/${id}/avatar`);
+    return this.http.put(`${this.apiUrl}settings/userProfile/basic`, profile).pipe(
+      tap((res: any) => {
+        this.toastrService.success("Profile Updated Successfully");
+        this.appStateService.changeDetectorRef();
+        return res;
+      }));
   }
 
   public fileAvatar(fromData: any) {
@@ -133,10 +134,6 @@ export class SettingService {
     return this.http.get(
       `${this.apiUrl}settings/userProfile/emailNotifications`
     );
-  }
-
-  removeDevice(id: string) {
-    return this.http.post(`${this.apiUrl}settings/userProfile/device`, id);
   }
 
   /**

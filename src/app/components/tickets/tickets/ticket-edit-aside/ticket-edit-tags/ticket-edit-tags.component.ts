@@ -7,6 +7,7 @@ import { MatChipInputEvent } from '@angular/material';
 import { TagsService } from 'src/app/services/tags/tags.service';
 import { Tag } from 'src/app/interfaces/tag/tag';
 import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-ticket-edit-tags',
@@ -42,6 +43,7 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
     private tagsState: TagsStateService,
     public tagsRealTimeService: TagsRealTimeService,
     public cd: ChangeDetectorRef,
+    public customerPortalStateService: CustomerPortalStateService,
     public elRef: ElementRef
   ) { }
 

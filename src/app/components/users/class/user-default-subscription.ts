@@ -21,9 +21,29 @@ export class UserDefaultSubscription {
         }
 
     }
+    /**
+* @description Reset values object 'invoiceSubscription'
+*/
     public clearEnabledAll() {
         this.invoiceSubscription.enabled = false;
         this.ticketSubscription.enabled = false;
         this.ticketManagerSubscription.enabled = false;
+    }
+    /**
+* @description Return Object for Default Subscriptions  
+* @returns  {Object} This is the result
+*/
+    public getDataForUpdate() {
+        return {
+            "invoiceSubscription": {
+                "enabled": this.invoiceSubscription.enabled,
+            },
+            "ticketSubscription": {
+                "enabled": this.ticketSubscription.enabled,
+            },
+            "ticketManagerSubscription": {
+                "enabled": this.ticketManagerSubscription.enabled,
+            }
+        }
     }
 }

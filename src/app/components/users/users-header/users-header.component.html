@@ -111,9 +111,18 @@
                     <th
                         class="users-table__company pointer"
                         (click)="onFilter('company')"
+                        [ngClass]="{'users-table__company-full': type === TYPE_LIST_ALL_USERS}"
                         *ngIf="type === TYPE_LIST_ALL_USERS || type === TYPE_LIST_MARKETING_USERS"
                     >
                         Company
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th
+                        class="users-table__company pointer"
+                        (click)="onFilter('portalAccessStatus')"
+                        *ngIf="type !== TYPE_LIST_MARKETING_USERS"
+                    >
+                        Portal Status
                         <span class="qt-table-modern__sorting"></span>
                     </th>
                     <th
@@ -140,7 +149,7 @@
                     </th>
                     <th
                         class="users-table__subscription"
-                        *ngIf="type === TYPE_LIST_ALL_USERS || type === TYPE_LIST_COMPANY_USERS"
+                        *ngIf="type === TYPE_LIST_COMPANY_USERS"
                     >
                         Subscription
                     </th>

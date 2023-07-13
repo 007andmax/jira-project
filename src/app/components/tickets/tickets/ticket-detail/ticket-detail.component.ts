@@ -24,7 +24,6 @@ import { TicketProfile } from '../class/ticket-profile';
 import { TicketsListService } from '../services/tickets-list.service';
 import { TicketStateService } from '../ticket-edit-aside/services/ticket-state.service';
 import { TicketsPermissionsService } from '../ticket-edit-aside/services/tickets-permissions.service';
-import { TicketEditAsideRightPanelComponent } from '../ticket-edit-aside/ticket-edit-aside-right-panel/ticket-edit-aside-right-panel.component';
 import { TicketMessageComponent } from '../ticket-edit-aside/ticket-message/ticket-message.component';
 import { TicketProfileEditFormUpdateComponent } from '../ticket-edit-aside/ticket-profile-edit-form-update/ticket-profile-edit-form-update.component';
 import { TicketProfileFormUpdateComponent } from '../ticket-edit-aside/ticket-profile-form-update/ticket-profile-form-update.component';
@@ -39,6 +38,7 @@ import { DatePickerStateService } from 'src/app/components/shared/date-picker/se
 import { TicketDetailHeaderComponent } from './ticket-detail-header/ticket-detail-header.component';
 import { TicketProfileAgent } from '../class/ticket-profile-agent';
 import { DevicesService } from 'src/app/services/devices/devices.service';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'ticket-detail',
@@ -49,7 +49,6 @@ import { DevicesService } from 'src/app/services/devices/devices.service';
 })
 export class TicketDetailComponent implements OnInit, OnDestroy {
   @ViewChild('editUpdateForm') editUpdateForm: TicketProfileEditFormUpdateComponent;
-  @ViewChild('rightPanel') rightPanel: TicketEditAsideRightPanelComponent;
   @ViewChild('ticketMessage') ticketMessage: TicketMessageComponent;
   @ViewChild('ticketProfileUpdates') ticketProfileUpdates: TicketDetailProfileUpdatesComponent;
   @ViewChild('ticketTasks') ticketTasks: TicketDetailTasksComponent;
@@ -92,6 +91,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     public websocketService: WebsocketService,
     private devicesService: DevicesService,
     private datePickerStateService: DatePickerStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     private companiesStateService: CompaniesStateService) { }
 
 
@@ -210,11 +210,11 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   onInitRealTimes() {
     if (this.websocketService.isInit) {
       this.ticketStateService.subsribeToTicket(this.ticketProfile.id);
-      this.ticketStateService.subsribeToTicketTasks(this.ticketProfile.id);
+      if (!this.customerPortalStateService.isCustomerPortal) this.ticketStateService.subsribeToTicketTasks(this.ticketProfile.id);
     }
     let onInit = this.websocketService.onInit.subscribe(data => {
       this.ticketStateService.subsribeToTicket(this.ticketProfile.id);
-      this.ticketStateService.subsribeToTicketTasks(this.ticketProfile.id);
+      if (!this.customerPortalStateService.isCustomerPortal) this.ticketStateService.subsribeToTicketTasks(this.ticketProfile.id);
     })
     this.sub.add(onInit);
   }
@@ -264,11 +264,11 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       this.updateLisUpdateUser();
       this.showPreloader = false;
       this.ticketStateService.getServicesList(this.ticketProfile);
-      if (this.ticketProfile.createdUser) this.ticketStateService.getPasswordsDocuments(this.ticketProfile.createdUser.id);
-      this.ticketStateService.getDevicesByCompany(this.ticketProfile.company.id);
+      if (this.ticketProfile.createdUser && !this.customerPortalStateService.isCustomerPortal) this.ticketStateService.getPasswordsDocuments(this.ticketProfile.createdUser.id);
+      if (!this.customerPortalStateService.isCustomerPortal) this.ticketStateService.getDevicesByCompany(this.ticketProfile.company.id);
       if (this.ticketMessage) this.ticketMessage.reset();
       this.ticketProfileUpdates.resetShowLoadMoreUpdates();
-      this.ticketTasks.getTicketTasks(id);
+      if (this.ticketTasks) this.ticketTasks.getTicketTasks(id);
       this.onInitRealTimes();
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
@@ -441,7 +441,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     if (!this.getPermissions('VIEW_COMPANIES')) return;
     this.companiesStateService.setCompanyRoutingId(this.ticketProfile.company.id);
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.ticketProfile.company.id, 'dashboard']);
+      [`${this.companiesStateService.getCurrentCompany().techDomain}/company/`, this.ticketProfile.company.id, 'dashboard']);
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

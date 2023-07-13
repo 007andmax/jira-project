@@ -9,6 +9,7 @@ export class CompanyDevicesEditLabelComponent implements OnInit {
   value: string;
   @Input() field: string;
   @Input() title: string;
+  @Input() isDisabled: boolean = false;
   showEdit: boolean = false;
   placeholder: string = '';
   @Output() onChange = new EventEmitter();

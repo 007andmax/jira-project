@@ -15,6 +15,7 @@ import { DevicesService } from 'src/app/services/devices/devices.service';
 import { DeviceCompany } from 'src/app/components/company-devices/class/device-company';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 import { Subscription } from 'rxjs';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +53,8 @@ export class TicketStateService {
     private ticketsService: TicketsService,
     private devicesService: DevicesService,
     private devicesStateService: DevicesStateService,
-    private websocketService: WebsocketService) {
+    private websocketService: WebsocketService,
+    public customerPortalStateService: CustomerPortalStateService,) {
     this.ticketsRealTimeService.changeTicket.subscribe(newChange => {
       this.changeUpdatesTicket.emit(newChange);
     });
@@ -83,7 +85,7 @@ export class TicketStateService {
   }
   public getDevicesByCompany(companyID) {
     this.devicesService.getCompanyDevices(companyID).subscribe((data: any) => {
-      if (Object.keys(data).length > 0) {
+      if (data && Object.keys(data).length > 0) {
         this.devices = data[companyID].map(item => new DeviceCompany(item, companyID));
         this.devices.sort((a, b) => (a.getLabelForEdit().toLowerCase() > b.getLabelForEdit().toLowerCase()) ?
           1 : ((b.getLabelForEdit().toLowerCase() > a.getLabelForEdit().toLowerCase()) ? -1 : 0));
@@ -191,6 +193,7 @@ export class TicketStateService {
       this.servicesForTicket = res.filter(item => item.canUseInTicket);
       this.servicesForTicket.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+      if (!this.customerPortalStateService.isCustomerPortal) this.getServiceAgreements(ticketProfile);
       this.servicesList.emit(this.servicesForTicket);
       this.getServiceAgreements(ticketProfile);
     })

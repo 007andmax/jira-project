@@ -11,6 +11,8 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 import { DeviceCompanyAsideParams } from '../class/device-company-aside-params';
 import { DeviceExtended } from '../class/device-extended';
 import { CompanyDevicesRemoteAccessComponent } from '../company-devices-remote-access/company-devices-remote-access.component';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
   selector: 'app-company-devices-aside',
@@ -31,6 +33,8 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
     private permissionsService: PermissionsService,
     private confirmStateService: ConfirmStateService,
     private companiesStateService: CompaniesStateService,
+    public customerPortalStateService: CustomerPortalStateService,
+    public usersStateService: UsersStateService,
     private devicesService: DevicesService) { }
 
   ngOnInit() {
@@ -76,7 +80,7 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
     localStorage.setItem('agentId', this.currentDevice.agentId);
     localStorage.setItem('type', this.currentDevice.type);
 
-    var url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device-old/dashboard/${this.currentDevice.type}/${this.currentDevice.agentId}`;
+    var url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/device-old/dashboard/${this.currentDevice.type}/${this.currentDevice.agentId}`;
     window.open(url, '_blank');
   };
   turnOff(action) {

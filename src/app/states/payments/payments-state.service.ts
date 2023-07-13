@@ -1,11 +1,12 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Payment } from '../../components/billing/payments/class/payment';
+import { PaymentsFilter } from 'src/app/components/billing/payments/class/payments-filter';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PaymentsStateService {
-
+  paymentsFilter: PaymentsFilter = new PaymentsFilter();
   paymentForRemove: Payment;
   paymentForRollback: Payment;
   paymentForRefund: Payment;
@@ -13,6 +14,12 @@ export class PaymentsStateService {
   payments: Array<Payment> = [];
 
   constructor() { }
+  public setPaymentsFilter(data) {
+    this.paymentsFilter = data;
+  }
+  public getPaymentsFilter() {
+    return this.paymentsFilter;
+  }
   public setPayments(data) {
     this.payments = data;
   }

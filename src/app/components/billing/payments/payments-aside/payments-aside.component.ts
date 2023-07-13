@@ -7,6 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PaymentsStateService } from 'src/app/states/payments/payments-state.service';
 import { DELETE_PAYMENT } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-payments-aside',
@@ -23,6 +24,7 @@ export class PaymentsAsideComponent implements OnInit {
   constructor(private companiesStateService: CompaniesStateService,
     private modalService: NgbModal,
     private paymentsStateService: PaymentsStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     private confirmStateService: ConfirmStateService) { }
 
   ngOnInit() {

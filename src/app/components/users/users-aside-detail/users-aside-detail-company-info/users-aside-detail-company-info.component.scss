@@ -1,0 +1,67 @@
+@import './src/assets/styles/variable';
+
+.user-detail-company-info {
+    background-color: $white;
+
+    &__title {
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 16px;
+        color: $gray-700;
+    }
+
+    &__subtitle {
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 16px;
+        color: $gray-500;
+    }
+
+    &__header {
+        padding: 12px 0;
+        border-bottom: 1px solid $gray-200;
+
+        &:not(:only-child) {
+            .report-caret-icon {
+                transform: rotate(180deg) translateY(50%);
+            }
+        }
+
+        .report-caret-icon {
+          right: 0;
+        }
+    }
+
+    &__body {
+        padding: 16px;
+        background-color: $gray-50;
+
+        .qt-inputs-row:not(:last-child) {
+          margin-bottom: 16px;
+        }
+
+        /deep/ .qt-dropdown-input {
+          background-color: transparent;
+        }
+    }
+
+    &__avatar {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        color: $white;
+        background-size: cover !important;
+        background-position: center !important;
+        font-weight: 600;
+
+        &-title {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 17px;
+            color: $gray-900;
+        }
+    }
+}

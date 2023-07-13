@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { UserDefaultSubscriptionAdd } from '../../users/class/user-default-subscription-add';
 import { CompanySubscription } from '../class/company-subscription';
 import { CompanySubscriptionStateService } from './class/company-subscription-state.service';
+import { UserCustomerCompaniesInfo } from '../../users/class/user-customer-companies-info';
 
 @Component({
   selector: 'app-company-subscription',
@@ -11,7 +12,8 @@ import { CompanySubscriptionStateService } from './class/company-subscription-st
 })
 export class CompanySubscriptionComponent implements OnInit, OnDestroy {
   sub = new Subscription();
-  @Input() editItem: UserDefaultSubscriptionAdd;
+  @Input() companyId: string;
+  @Input() customerCompaniesInfo: Array<UserCustomerCompaniesInfo> = [];
   @Output() subscribeChange = new EventEmitter();
   subscriptions: Array<CompanySubscription> = [new CompanySubscription('Ticket Updates', 'ticketSubscription'),
   new CompanySubscription('Ticket Manager', 'ticketManagerSubscription'),
@@ -29,7 +31,8 @@ export class CompanySubscriptionComponent implements OnInit, OnDestroy {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-    if (this.editItem) this.subscriptions.forEach(item => item.selected = this.editItem[item.field]);
+    let customerCompaniesInfo = this.customerCompaniesInfo.find(item => item.companyId == this.companyId);
+    if (customerCompaniesInfo) this.subscriptions.forEach(item => item.selected = customerCompaniesInfo.defaultSubscriptions[item.field].enabled);
     this.onInitClearState();
     this.onCheckEditItem();
   }

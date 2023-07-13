@@ -103,7 +103,7 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
   editTicket(id) {
     if (!this.appService.isMobile) {
       this.ticketStateService.setTicketRoutingId(id);
-      const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/ticket/${id}`;
+      const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/ticket/${id}`;
       window.open(url, '_blank');
     } else {
       let ticket = this.tickets.find(item => item.id === id);

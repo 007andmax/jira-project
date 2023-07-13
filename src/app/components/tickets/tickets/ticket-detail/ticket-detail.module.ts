@@ -73,7 +73,6 @@ import { TicketDetailPasswordsComponent } from './ticket-detail-passwords/ticket
 import { TicketDetailDevicesComponent } from './ticket-detail-devices/ticket-detail-devices.component';
 import { TicketDetailDocumentsComponent } from './ticket-detail-documents/ticket-detail-documents.component';
 import { TicketDetailContactDetailsComponent } from './ticket-detail-contact-details/ticket-detail-contact-details.component';
-import { CompanyInfoHistoryModule } from '../ticket-edit-aside-company-info/company-info-history/company-info-history.module';
 import { TicketDetailContactDetailsHistoryComponent } from './ticket-detail-contact-details/ticket-detail-contact-details-history/ticket-detail-contact-details-history.component';
 import { TicketDetailDocumentsPreviewComponent } from './ticket-detail-documents/ticket-detail-documents-preview/ticket-detail-documents-preview.component';
 import { TicketDetailDocumentsDetailsComponent } from './ticket-detail-documents/ticket-detail-documents-details/ticket-detail-documents-details.component';
@@ -174,8 +173,7 @@ import { TicketDetailProfileFormUpdateSupportComponent } from './ticket-detail-p
         TicketProfileFormUpdateNoteListModule,
         KeyUpEnterModule,
         DropDownModule,
-        CompanyDropDownModule,
-        CompanyInfoHistoryModule
+        CompanyDropDownModule
     ],
 
 

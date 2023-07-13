@@ -5,6 +5,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 })
 export class PaymentsRealTimeService {
   public changePaymentsArray: EventEmitter<any> = new EventEmitter();
+  public subsribeToPaymentsCustomerUsers;
   constructor() { }
 
   /**

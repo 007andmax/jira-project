@@ -1,7 +1,7 @@
 import * as moment from "moment";
 
 export class QuoteFilter {
-    companyName: string;
+    companyId: string;
     quoteNumber: number;
     status: string;
     date: number;
@@ -12,7 +12,7 @@ export class QuoteFilter {
 
     constructor() { }
     public setData(data) {
-        this.companyName = data.companyName;
+        this.companyId = data.companyId;
         this.quoteNumber = data.quoteNumber;
         this.status = data.status;
         this.date = data.date;
@@ -21,7 +21,7 @@ export class QuoteFilter {
         this.limit = data.limit;
     }
     public isExistFilters() {
-        return this.companyName || this.quoteNumber || this.status || this.date || this.endDate;
+        return this.companyId || this.quoteNumber || this.status || this.date || this.endDate;
     }
     public clearSortBy() {
         this.sortBy = undefined;
@@ -38,8 +38,8 @@ export class QuoteFilter {
     public setStartDate(data) {
         this.date = data;
     }
-    public setCompanyName(data) {
-        this.companyName = data;
+    public setCompanyId(data) {
+        this.companyId = data;
     }
     public setQuoteNumber(data) {
         this.quoteNumber = data;
@@ -48,7 +48,7 @@ export class QuoteFilter {
         let endDate = new Date(this.endDate);
         endDate.setDate(endDate.getDate() + 1);
         return {
-            companyName: this.companyName,
+            companyId: this.companyId,
             quoteNumber: this.quoteNumber,
             status: this.status,
             date: (this.date) ? moment(this.date).format('YYYY-MM-DD') : null,

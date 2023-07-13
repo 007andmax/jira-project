@@ -28,7 +28,7 @@ export class CompanyProfileService {
   }
 
   setDomain(data) {
-    return this.http.post(`${this.apiUrl}settings/companyProfile/setNewDomain`, { domain: data }).pipe(
+    return this.http.post(`${this.apiUrl}settings/companyProfile/setNewDomain`, { techDomain: data }).pipe(
       tap(data => {
         this.toastrService.success("The new domain value has been successfully updated");
         this.appStateService.changeDetectorRef();

@@ -337,7 +337,7 @@ export class CompanyDashDetailComponent implements OnInit {
   setTab(data) {
     this.tab = data;
     if (this.tab === 'users') {
-      this.usersList = this.usersStateService.getAllUsers().filter(item => (!item.deletedAt) && item.accountType !== "TECH" && item.company.id === this.companyDetail.id).sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
+      this.usersList = this.usersStateService.getAllUsers().filter(item => (!item.deletedAt) && item.accountType !== "TECH" && item.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.companyDetail.id)).sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
         1 : ((`${b.firstName} ${b.lastName}`.toLowerCase() > `${a.firstName} ${a.lastName}`.toLowerCase()) ? -1 : 0));
     }
   }

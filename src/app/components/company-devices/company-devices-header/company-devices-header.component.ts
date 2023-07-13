@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 import { DeviceCompany } from '../class/device-company';
 import { DeviceCompanyAsideParams } from '../class/device-company-aside-params';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-company-devices-header',
@@ -13,7 +14,8 @@ export class CompanyDevicesHeaderComponent implements OnInit {
   @Input() isOfflineDeviceSelected: boolean = false;
   @Output() onTurnOff = new EventEmitter();
   @Output() onRemoveAgents = new EventEmitter();
-  constructor(private devicesStateService: DevicesStateService,) { }
+  constructor(private devicesStateService: DevicesStateService,
+    public customerPortalStateService: CustomerPortalStateService,) { }
 
   ngOnInit() {
   }

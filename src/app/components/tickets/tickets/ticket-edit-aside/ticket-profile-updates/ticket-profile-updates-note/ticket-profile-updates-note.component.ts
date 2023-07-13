@@ -6,6 +6,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DELETE_FOREVER, REMOVE_UPDATE_TICKET } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { TicketStateService } from '../../services/ticket-state.service';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-ticket-profile-updates-note',
@@ -20,6 +22,8 @@ export class TicketProfileUpdatesNoteComponent implements OnInit {
   constructor(public ticketsListService: TicketsListService,
     public confirmStateService: ConfirmStateService,
     public ticketStateService: TicketStateService,
+    public usersStateService: UsersStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     public modalService: NgbModal,) { }
 
   ngOnInit() {

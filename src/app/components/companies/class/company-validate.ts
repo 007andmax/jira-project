@@ -9,6 +9,7 @@ export class CompanyValdiate {
     phoneNumber: boolean = true;
     shippingPhoneNumber: boolean = true;
     billindAddress: boolean = true;
+    user: boolean = true;
     rePhoneNumber = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/;
     reEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
     reDomain = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
@@ -19,6 +20,12 @@ export class CompanyValdiate {
 
     public getBillindAddress() {
         return this.billindAddress;
+    }
+    public getUser() {
+        return this.user;
+    }
+    public resetUser() {
+        this.user = true;
     }
     public resetBillindAddress() {
         this.billindAddress = true;
@@ -138,15 +145,16 @@ export class CompanyValdiate {
         }
     }
     public isValidate(company: CompanyProfile) {
-        if (!company.contacts[0].firstName || company.contacts[0].firstName.length === 0) this.firstName = false;
+        if (!company.isUseSelectedUser && (!company.contacts[0].firstName || company.contacts[0].firstName.length === 0)) this.firstName = false;
         if (!company.name || company.name.length === 0) this.name = false;
         if (company.clientType === "") this.type = false;
-        if (!company.contacts[0].primaryEmail || !company.contacts[0].primaryEmail.match(this.reEmail)) this.primaryContactEmail = false;
+        if (company.isUseSelectedUser && !company.contacts[0].id) this.user = false;
+        if (!company.isUseSelectedUser && (!company.contacts[0].primaryEmail || !company.contacts[0].primaryEmail.match(this.reEmail))) this.primaryContactEmail = false;
         if (!company.addresses[0].phoneNumbers[0].number || company.addresses[0].phoneNumbers[0].number.length < 14) this.phoneNumber = false;
         if (company.addresses.length === 2 && company.addresses[1].phoneNumbers[0].number.length > 0 && company.addresses[1].phoneNumbers[0].number.length < 14) this.shippingPhoneNumber = false;
         if (company.domain && !company.domain.match(this.reDomain)) this.domain = false;
         if (company.addresses.length > 0 && company.addresses[0].locationName != undefined && company.addresses[0].locationName.length == 0) this.billindAddress = false;
-        return this.name && this.type && this.primaryContactEmail && this.phoneNumber && this.firstName && this.domain && !this.domainIsExist && this.shippingPhoneNumber && this.billindAddress;
+        return this.name && this.type && this.primaryContactEmail && this.phoneNumber && this.firstName && this.domain && !this.domainIsExist && this.shippingPhoneNumber && this.billindAddress && this.user;
     }
 
 

@@ -1,21 +1,32 @@
 <div class="qt-input-block">
     <span class="qt-input-block__label">
         Company
-        <i
-            class="icon__help default-services-page__question-icon qt-sz-12 qt-ic-c"
-            *ngIf="ticketProfile.ticketSource === 'FROM_EMAIL' && checkExistServicesProducts() && getCompany(ticketProfile.company) && getCompany(ticketProfile.company.id).isUnknown"
-            (mouseenter)="userCompanyTooltip.show($event.target)"
-            (mouseleave)="userCompanyTooltip.hide()"
-        ></i>
         <app-dynamic-tooltip
             class="user-companies-tooltip"
-            [content]="'You must remove all Product/Services updates from the ticket before changing the company.'"
+            [content]="getTextForTooltip()"
             [position]="'bottom'"
             #userCompanyTooltip
         ></app-dynamic-tooltip>
+        <i
+            class="icon__help default-services-page__question-icon qt-sz-12 qt-ic-c"
+            (mouseenter)="userCompanyTooltip.show($event.target)"
+            (mouseleave)="userCompanyTooltip.hide()"
+        ></i>
     </span>
+    <app-drop-down
+        *ngIf="ticketProfile.ticketSource === 'FROM_EMAIL' && !checkExistServicesProducts() && getCompany(ticketProfile.company.id) && !getCompany(ticketProfile.company.id).isUnknown"
+        [class]="['qt-dropdown']"
+        [heightInput]="'32px'"
+        [field]="'name'"
+        [isBlockClear]="true"
+        [editItem]="selectedCompany"
+        [list]="listCompanies"
+        [sort]="true"
+        (onSelectedItem)="onSelectCompany($event)"
+    ></app-drop-down>
     <company-drop-down
         #companyDP
+        *ngIf="ticketProfile.ticketSource === 'FROM_EMAIL' && !checkExistServicesProducts() && getCompany(ticketProfile.company.id) && getCompany(ticketProfile.company.id).isUnknown"
         [class]="['qt-dropdown']"
         [heightInput]="'32px'"
         [placeholder]="'Select Company'"
@@ -25,7 +36,6 @@
         [change]="true"
         [editItem]="selectedCompany"
         [isBlockClear]="true"
-        [isDisabled]="!(ticketProfile.ticketSource === 'FROM_EMAIL' && !checkExistServicesProducts() && getCompany(ticketProfile.company.id) && getCompany(ticketProfile.company.id).isUnknown)"
         (onSelectedItem)="onSelectCompany($event)"
     ></company-drop-down>
 </div>

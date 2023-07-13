@@ -7,6 +7,7 @@ import { UsersHeaderModule } from './users-header/users-header.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { UsersTableModule } from './users-table/users-table.module';
 import { UsersRoutingModule } from './users-routing.module';
+import { UsersCheckUseComponent } from './users-check-use/users-check-use.component';
 
 @NgModule({
     declarations: [UsersComponent,

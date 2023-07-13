@@ -14,6 +14,15 @@
     <td class="company-devices-table__device-type">
         <div>
             <div
+                class="qt-ic-c qt-pointer device-type-icon qt-sz-24"
+                [ngClass]="{'icon__computer' : device.iconName === 'workstation' || !device.iconName,
+              'icon__tablet' : device.iconName === 'device',
+            'icon__printer' : device.iconName === 'printer',
+          'icon__server' : device.iconName === 'server',
+        '--ofline': !device.online }"
+                *ngIf="customerPortalStateService.isCustomerPortal"
+            ></div>
+            <div
                 ngbDropdown
                 placement="bottom-left"
                 container="body"
@@ -24,6 +33,7 @@
           'icon__server' : device.iconName === 'server',
         '--ofline': !device.online }"
                 ngbDropdownToggle
+                *ngIf="!customerPortalStateService.isCustomerPortal"
             >
                 <div
                     class="company-device-type-dropdown"
@@ -64,13 +74,6 @@
             <div class="qt-df qt-fd-c">
                 <div class="company-devices-table-device-name qt-fw-600 qt-df qt-ai-c">
                     <span [textContent]="getLabelForEdit()"></span>
-                    <!-- <app-company-devices-edit-label
-                        #editLabel
-                        [field]="getLabelForEdit()"
-                        [title]="'Name'"
-                        class="company-device-edit-name"
-                        (onChange)="onChangeName($event)"
-                    ></app-company-devices-edit-label> -->
                 </div>
                 <span
                     class="company-device-desc"
@@ -200,13 +203,14 @@
         <div
             class="qt-ic-c icon__go-to qt-pointer qt-sz-24 qt-bgsz-16"
             placement="top"
-            *ngIf="device.agentId"
+            *ngIf="device.agentId && !customerPortalStateService.isCustomerPortal"
             [ngbTooltip]="tipDeviceDetail"
             (click)="gotiDetailDevice()"
         ></div>
     </td>
     <td class="company-devices-table__connect">
         <app-company-devices-no-exist-remote-sessions
+            *ngIf="customerPortalStateService.checkRemoteAccess(usersStateService.getCurrentUser())"
             [device]="device"
             (onRemoteAccess)="remoteAccess($event)"
         ></app-company-devices-no-exist-remote-sessions>
@@ -221,6 +225,7 @@
             ngbDropdown
             placement="bottom-right"
             container="body"
+            *ngIf="!customerPortalStateService.isCustomerPortal"
         >
             <div
                 class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"

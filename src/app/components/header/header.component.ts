@@ -11,6 +11,7 @@ import { QuoteStateService } from '../../states/quote/quote-state.service';
 import { TicketsStateService } from '../../states/tickets/tickets-state.service';
 import { UsersStateService } from '../../states/users/users-state.service';
 import { User } from '../users/class/user';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-header',
@@ -30,6 +31,7 @@ export class HeaderComponent implements OnInit {
     private superAdminPublicStateService: SuperAdminPublicStateService,
     private companiesService: CompaniesService,
     private permissionsService: PermissionsService,
+    public customerPortalStateService: CustomerPortalStateService,
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {

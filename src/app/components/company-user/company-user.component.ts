@@ -24,6 +24,7 @@ import { CrmCompanyJobTitle } from '../setting/crm-settings/crm-company-job-titl
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
 import { MarketingSubscriptionType } from '../setting/marketing-email/marketing-subscription-type/class/marketing-subscription-type';
 import { CrmCompanyIndustry } from '../setting/crm-settings/crm-company-industry/class/crm-company-industry';
+import { UserCustomerCompaniesInfo } from '../users/class/user-customer-companies-info';
 
 @Component({
   selector: 'company-user',
@@ -117,10 +118,10 @@ export class CompanyUserComponent implements OnInit {
 
         const reqIndex = this.reqUsers.findIndex((item) => item.id === data.data.id);
         if (reqIndex > -1) this.reqUsers[reqIndex].onUpdate(data.data);
-        if (reqIndex === -1 && data.data.company.id === id) {
+        if (reqIndex === -1 && data.data.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === id)) {
           this.reqUsers.unshift(new User(data.data));
           this.users.unshift(new User(data.data));
-
+          this.header.count = this.header.count + 1;
 
           // this.onRelaodList();
         }
@@ -147,6 +148,7 @@ export class CompanyUserComponent implements OnInit {
         })
 
       }
+      this.cd.detectChanges();
 
     })
     this.userListService.addSubscription(getChangeCompanies);
@@ -214,17 +216,24 @@ export class CompanyUserComponent implements OnInit {
 
       let stompClient = this.usersRealTimeService.changeSubscriptionsUsers.subscribe(newChange => {
 
-        if (newChange.action === 'SUBSCRIPTION_SAVED') {
+        if (newChange.action === 'DEFAULT_SUBSCRIPTION_SAVED') {
           const reqIndex = this.reqUsers.findIndex((item) => item.id === newChange.data.userId);
           if (reqIndex > -1) {
-            this.reqUsers[reqIndex].changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
-            this.reqUsers[reqIndex].changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
+            let index = this.reqUsers[reqIndex].customerCompaniesInfo.findIndex(item => item.companyId === newChange.data.companyId);
+            if (index > -1) this.reqUsers[reqIndex].customerCompaniesInfo[index] = new UserCustomerCompaniesInfo(newChange.data);
           }
           const userIndex = this.users.findIndex((item) => item.id === newChange.data.userId);
           if (userIndex > -1) {
-            this.users[userIndex].changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
-            this.users[userIndex].changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
+            let index = this.users[userIndex].customerCompaniesInfo.findIndex(item => item.companyId === newChange.data.companyId);
+            if (index > -1) this.users[userIndex].customerCompaniesInfo[index] = new UserCustomerCompaniesInfo(newChange.data);
           }
+          this.cd.detectChanges();
+        }
+        if (newChange.action === 'CUSTOM_SUBSCRIPTION_SAVED') {
+          const reqIndex = this.reqUsers.findIndex((item) => item.id === newChange.data.userId);
+          if (reqIndex > -1) this.reqUsers[reqIndex].changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
+          const userIndex = this.users.findIndex((item) => item.id === newChange.data.userId);
+          if (userIndex > -1) this.users[userIndex].changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
           this.cd.detectChanges();
         }
       });
@@ -255,7 +264,6 @@ export class CompanyUserComponent implements OnInit {
   private getUsersList(data) {
 
     this.reqUsers = data.filter(item => ((!this.showArchivedUsers) ? !item.deletedAt : item.deletedAt) && item.accountType !== "TECH");
-
     // this.onInirCalculate();
     this.reqUsers.sort((a, b) => ((a.firstName + a.lastName).toLowerCase() > (b.firstName + b.lastName).toLowerCase()) ?
       1 : (((b.firstName + b.lastName).toLowerCase() > (a.firstName + a.lastName).toLowerCase()) ? -1 : 0));

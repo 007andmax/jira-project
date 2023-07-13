@@ -28,6 +28,7 @@ import { NoteStateService } from 'src/app/states/note/note-state.service';
 import { NoteService } from 'src/app/services/note/note.service';
 import { NoteTemplate } from 'src/app/components/setting/ticket-settings-page/canned-responses/class/note-template';
 import { TicketProfileFormUpdateNoteListComponent } from './ticket-profile-form-update-note-list/ticket-profile-form-update-note-list.component';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-ticket-profile-form-update',
@@ -79,6 +80,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     private companiesService: CompaniesService,
     private permissionsService: PermissionsService,
     public addUsersNotifyStateService: AddUsersNotifyStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     public ticketsListService: TicketsListService) { }
 
   ngOnInit() {
@@ -194,7 +196,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     let userList = this.usersStateService.getAllUsers().sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
       1 : ((`${b.firstName} ${b.lastName}`.toLowerCase() > `${a.firstName} ${a.lastName}`.toLowerCase()) ? -1 : 0));
     let techusers = userList.filter((item) => item.accountType === "TECH" && !item.deletedAt);
-    let clientUsers = userList.filter((item) => item.accountType === "CLIENT" && !item.deletedAt && item.company.id === this.ticketProfile.company.id);
+    let clientUsers = userList.filter((item) => item.accountType === "CLIENT" && !item.deletedAt && item.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.ticketProfile.company.id));
     return [...techusers, ...clientUsers];
   }
   updateMobile() {
@@ -313,7 +315,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     this.tab = data;
     this.ticketProfileFormUpdate.setType(data);
     this.ticketProfileFormUpdate.clearShares();
-    if (this.tab === 'NOTE' && this.noteList) this.noteList.onGetNoteList()
+    if (this.tab === 'NOTE' && this.noteList && this.ticketProfile.id) this.noteList.onGetNoteList()
   }
 
   onChangeProducts(data) {

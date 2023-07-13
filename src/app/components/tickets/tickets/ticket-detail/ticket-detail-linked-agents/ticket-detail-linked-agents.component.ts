@@ -15,12 +15,16 @@ export class TicketDetailLinkedAgentsComponent extends PasswordManagerLinkedComp
   @Input() ticketProfile: TicketProfile = new TicketProfile();
   selectedDevice;
   ngOnInit() {
-    let onGetDevices = this.ticketStateService.onGetDevices.subscribe(data => {
+    if (this.ticketProfile.agent) this.selectedDevice = JSON.parse(JSON.stringify(this.ticketProfile.agent));
+    if (this.devicesStateService.getAllDevices()) {
+      this.preloader = false;
+      if (this.selectedCompanyId) this.onSelectCompany(this.selectedCompanyId);
+    }
+    this.devicesStateService.getOnDevices().subscribe(data => {
       this.devices = data;
       this.preloader = false;
       if (this.selectedCompanyId) this.onSelectCompany(this.selectedCompanyId);
     })
-    this.sub.add(onGetDevices);
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
     let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
       this.getClientsList(data);

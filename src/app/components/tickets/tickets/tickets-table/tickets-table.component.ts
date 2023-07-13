@@ -12,6 +12,10 @@ import { AppService } from 'src/app/states/app/app.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { Router } from '@angular/router';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { WebsocketService } from 'src/app/services/websocket/websocket.service';
+import { TicketsRealTimeService } from 'src/app/states/tickets/tickets-real-time.service';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 
 
@@ -43,13 +47,35 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     private leftPanelService: LeftPanelService,
     private companiesStateService: CompaniesStateService,
     private leftPanelStateService: LeftPanelStateService,
+    private usersStateService: UsersStateService,
+    private customerPortalStateService: CustomerPortalStateService,
+    private websocketService: WebsocketService,
+    private ticketsRealTimeService: TicketsRealTimeService,
     private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
-    /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
-    /* START */
-    this.ticketsFilter.setListType(this.ticketsStateService.getListType());
-    /* END */
+    if (this.customerPortalStateService.isCustomerPortal) {
+      this.ticketsFilter.setListType("ALL");
+      this.ticketsFilter.setFilter(JSON.parse(JSON.stringify(this.customerPortalStateService.getTicketsFilter())));
+      this.onScroll();
+      this.websocketService.onInitConnectCustomerUser("new-tickets", this.customerPortalStateService.getTicketsFilter().selectedCompany.id);
+    } else {
+      /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
+      /* START */
+      this.ticketsFilter.setListType(this.ticketsStateService.getListType());
+      if (this.ticketsStateService.getListType()) this.onScroll();
+      /* END */
+    }
+    let onTicketFilters = this.customerPortalStateService.onTicketFilters.subscribe(data => {
+      this.ticketsFilter.setListType("ALL");
+      this.ticketsFilter.setFilter(JSON.parse(JSON.stringify(this.customerPortalStateService.getTicketsFilter())));
+      this.showPreloader = true;
+      document.body.querySelector(".main-container").scrollTo(0, 0);
+      this.setDefaultScoll();
+      this.onScroll();
+    });
+    this.sub.add(onTicketFilters);
+
     this.ticketsStateService.getOnAddTicket().subscribe(data => {
       if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter, data) && !this.tickets.find(item => item.id == data.id) && !(this.page_number == 0 && this.showPreloader)) {
         this.tickets.unshift(data);
@@ -113,7 +139,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
   editTicket(id) {
     if (!this.appService.isMobile) {
       this.ticketStateService.setTicketRoutingId(id);
-      const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/ticket/${id}`;
+      const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/ticket/${id}`;
       window.open(url, '_blank');
     } else {
       this.idEditTicket = id;
@@ -159,6 +185,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     this.ticketsStateService.onToggleAddTicket();
   }
   ngOnDestroy(): void {
+    if (this.customerPortalStateService.isCustomerPortal && this.ticketsRealTimeService.subsribeToTicketsCustomerUser) this.ticketsRealTimeService.subsribeToTicketsCustomerUser.unsubscribe();
     this.sub.unsubscribe();
   }
   public trackById(index, item) {

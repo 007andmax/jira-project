@@ -55,6 +55,7 @@ export class ConfirmComponent implements OnInit {
       && this.action !== 'REMOVE_TASK_TICKET'
       && this.action !== 'REMOVE_ATTACHMENT'
       && this.action !== 'DELETE_COMMAND'
+      && this.action !== 'CHANGE_COMPANY_TICKET'
       && !this.isSignaturePage()
       && !this.isSettingsPage();
   }
@@ -82,7 +83,8 @@ export class ConfirmComponent implements OnInit {
       this.action === 'DELETE_DEVICE_TYPE' ||
       this.action === 'DELETE_DEVICE_MANUFACTURE' ||
       this.action === 'DELETE_DEVICE_MODEL' ||
-      this.action === 'CLOSE_SESSION'
+      this.action === 'CLOSE_SESSION' ||
+      this.action === 'DELETE_USER_ROLE'
 
 
   }

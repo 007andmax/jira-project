@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/cor
 import { AppService } from 'src/app/states/app/app.service';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { QuotesFilterComponent } from './quotes-filter/quotes-filter.component';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 @Component({
   selector: 'app-quotes-header',
   templateUrl: './quotes-header.component.html',
@@ -14,6 +15,7 @@ export class QuotesHeaderComponent implements OnInit {
   @Output() onCreatePayment = new EventEmitter<any>();
   @Output() onSortBy = new EventEmitter<any>();
   constructor(private quoteStateService: QuoteStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     public appService: AppService,) { }
 
   ngOnInit() {

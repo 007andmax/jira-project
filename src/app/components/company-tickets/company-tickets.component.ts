@@ -117,6 +117,18 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
       this.showPreloader = true;
       id = params['id'];
       if (id) this.companiesStateService.setCompanyRoutingId(id);
+      let ticket_id = id;
+      let company = this.companiesStateService.getCompanies().find(item => item.id === ticket_id);
+      this.header.filter.setTypeFilterWithoutChange("ALL");
+      this.header.filter.companyDp.isDisabled = true;
+      this.header.filter.companyDp.editItem = company;
+      this.header.filter.ticketsFilter.setCompany(company);
+      this.header.filter.onChangeCounterFilter();
+      this.ticketsFilter.setListType("ALL");
+      this.ticketsFilter.setCompany(company);
+      this.header.filter.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === company.id)));
+      this.getCount();
+      this.onScroll();
       if (this.companiesStateService.getCompanies().length > 0 && this.activateRoute.snapshot.params['id'] && this.usersStateService.getAllUsers().length > 0) this.setCompanyRoutingId(this.activateRoute.snapshot.params['id']);
     });
     this.sub.add(subscription);
@@ -152,7 +164,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
   editTicket(id) {
     if (!this.appService.isMobile) {
       this.ticketStateService.setTicketRoutingId(id);
-      const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/ticket/${id}`;
+      const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/ticket/${id}`;
       window.open(url, '_blank');
     } else {
       this.idEditTicket = id;

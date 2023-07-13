@@ -177,7 +177,7 @@ export class CompanyFilter {
     private getCountusers(company) {
         return this.users.filter((user) => {
             var isArchived = user.deletedAt || company.deletedAt;
-            return !isArchived && !this.showArchivedCompanies && user.company.id === company.id || this.showArchivedCompanies && isArchived && user.company.id === company.id;
+            return !isArchived && !this.showArchivedCompanies && user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === company.id) || this.showArchivedCompanies && isArchived && user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === company.id);
         }).length;
     }
     private getPrimaryAddress(company) {
@@ -204,7 +204,7 @@ export class CompanyFilter {
                 }
             }
         }
-        return `${primaryContact.firstName} ${primaryContact.lastName}`;
+        return primaryContact ? `${primaryContact.firstName} ${primaryContact.lastName}` : '';
     }
     private getEmail(company) {
         let primaryContact;
@@ -215,6 +215,6 @@ export class CompanyFilter {
                 }
             }
         }
-        return primaryContact.primaryEmail;
+        return primaryContact ? primaryContact.primaryEmail : '';
     }
 }

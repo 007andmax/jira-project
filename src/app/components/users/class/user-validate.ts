@@ -81,7 +81,7 @@ export class UserValidate {
     public isValidate(user: UserProfile) {
         let phoneNumbers = true;
         if (!user.firstName || user.firstName.length < 2) this.firstName = false;
-        if (!user.companyId) this.company = false;
+        if (!user.customerCompaniesInfo[0].companyId) this.company = false;
 
         if (user.primaryEmail && user.primaryEmail.length > 0 && !user.primaryEmail.match(this.reEmail)) this.primaryContactEmail = false;
         if (user.phoneNumbers.length === 1) {

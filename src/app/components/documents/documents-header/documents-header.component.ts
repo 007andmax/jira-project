@@ -72,12 +72,12 @@ export class DocumentsHeaderComponent implements OnInit {
   goToAddDocument() {
     if (this.getPermissions('CREATE_DOCUMENT')) {
       this.router.navigate(
-        [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/add`], { queryParams: { companyId: this.companyId } });
+        [`${this.companiesStateService.getCurrentCompany().techDomain}/documents/add`], { queryParams: { companyId: this.companyId } });
     }
   }
   goToTemplates() {
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/templates`], { queryParams: { companyId: this.companyId } });
+      [`${this.companiesStateService.getCurrentCompany().techDomain}/documents/templates`], { queryParams: { companyId: this.companyId } });
   }
   onChangeCountFilter(data) {
     this.countFilter = data;

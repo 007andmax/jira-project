@@ -153,11 +153,13 @@
                         </div>
                     </div>
                     <ticket-detail-tasks
+                        *ngIf="!customerPortalStateService.isCustomerPortal"
                         #ticketTasks
                         [ticketProfile]="ticketProfile"
                     ></ticket-detail-tasks>
                     <ticket-detail-message
                         #ticketMessage
+                        *ngIf="!customerPortalStateService.isCustomerPortal"
                         (onMoveToTrash)="onMoveToTrash($event)"
                         (onRestoreFromSpam)="restoreFromSpam()"
                         (onOpenTicket)="markAsOpen()"
@@ -173,7 +175,7 @@
                     ></ticket-detail-profile-updates>
                     <ticket-detail-profile-form-update
                         (onCloseForm)="showFormUpdate = false"
-                        *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && showFormUpdate"
+                        *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && showFormUpdate || showFormUpdate && customerPortalStateService.isCustomerPortal"
                         [ticket]="ticketProfile"
                         [lisUpdateUser]="lisUpdateUser"
                         [tab]="tabFormUpdate"
@@ -236,7 +238,7 @@
             </div>
             <div
                 class="ticket-detail-page-content__sidebar-info"
-                *ngIf="!showPreloader"
+                *ngIf="!showPreloader && !customerPortalStateService.isCustomerPortal"
             >
                 <div class="ticket-detail-page-content__sidebar-info-inner">
                     <ticket-detail-contact-details
@@ -283,7 +285,10 @@
                     ></ticket-detail-devices>
                 </div>
             </div>
-            <div class="ticket-detail-page-content__sidebar-menu">
+            <div
+                class="ticket-detail-page-content__sidebar-menu"
+                *ngIf="!customerPortalStateService.isCustomerPortal"
+            >
                 <div
                     class="ticket-detail-page-content__sidebar-menu-button"
                     (click)="openDetailRigthPanel('CONTACT')"
@@ -311,11 +316,7 @@
             </div>
         </div>
     </div>
-    <!-- <app-ticket-edit-aside-right-panel
-        #rightPanel
-        [ticketProfile]="ticketProfile"
-    ></app-ticket-edit-aside-right-panel>
-    <div
+    <!-- <div
         class="qt-aside-modern__footer updata-close"
         [hidden]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
     >

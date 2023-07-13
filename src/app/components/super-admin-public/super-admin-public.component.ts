@@ -32,7 +32,7 @@ export class SuperAdminPublicComponent implements OnInit {
     }
   }
   public goToCategory(id) {
-    this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/help-center`, id]);
+    this.router.navigate([`${this.companiesStateService.getCurrentCompany().techDomain}/help-center`, id]);
   }
   public trackById(index, item) {
     return item.id;

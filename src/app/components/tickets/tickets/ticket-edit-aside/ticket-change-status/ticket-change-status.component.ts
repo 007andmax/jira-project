@@ -8,6 +8,7 @@ import { AppStateService } from 'src/app/states/app/app-state.service';
 import { TicketStatus } from 'src/app/components/setting/ticket-settings-page/tickets-status/class/ticket-status';
 import { Subscription } from 'rxjs';
 import { StatusColor } from '../../../class/status-color';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-ticket-change-status',
@@ -24,6 +25,7 @@ export class TicketChangeStatusComponent implements OnInit, OnDestroy {
   constructor(public ticketsStateService: TicketsStateService,
     public toastrService: ToastrService,
     public appStateService: AppStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     public ticketsService: TicketsService,) { }
 
 

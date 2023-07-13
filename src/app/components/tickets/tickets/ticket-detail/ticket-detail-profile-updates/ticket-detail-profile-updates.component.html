@@ -25,21 +25,21 @@
                 *ngIf="update.type === 'NOTE' || update.type === 'SALE_QUOTE_REVIEW_NOTE'"
                 [idTicket]="ticketProfile.id"
                 [update]="update"
-                [isBlockChange]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
+                [isBlockChange]="!(ticketsPermissionsService.isActionVisible('update', ticketProfile, null, null) && (customerPortalStateService.isCustomerPortal && isAddNoteForCustomerUser() || !customerPortalStateService.isCustomerPortal))"
             >
             </ticket-detail-profile-updates-note>
             <ticket-detail-profile-updates-product
                 class="ticket-updates__ticket-item"
                 *ngIf="update.type === 'PRODUCT'"
                 [update]="update"
-                [isBlockChange]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
+                [isBlockChange]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || customerPortalStateService.isCustomerPortal"
             >
             </ticket-detail-profile-updates-product>
             <ticket-detail-profile-updates-service
                 class="ticket-updates__ticket-item"
                 *ngIf="update.type === 'SERVICE'"
                 [update]="update"
-                [isBlockChange]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
+                [isBlockChange]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || customerPortalStateService.isCustomerPortal"
             >
             </ticket-detail-profile-updates-service>
         </ng-template>

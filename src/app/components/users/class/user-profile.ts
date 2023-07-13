@@ -8,6 +8,7 @@ import { UserAdd } from './user-add';
 import { Tag } from 'src/app/interfaces/tag/tag';
 import { UserCustomSubscription } from './user-custom-subscription';
 import { UserDefaultSubscription } from './user-default-subscription';
+import { UserCustomerCompaniesInfo } from './user-customer-companies-info';
 
 export class UserProfile {
     id: string;
@@ -15,6 +16,7 @@ export class UserProfile {
     phoneNumbers: Array<PhoneNumber> = [new PhoneNumber('OFFICE')];
     customSubscriptions: Array<UserCustomSubscription> = [];
     defaultSubscriptions: UserDefaultSubscription = new UserDefaultSubscription();
+    customerCompaniesInfo: Array<UserCustomerCompaniesInfo> = [];
     welcomeEmail: boolean = true;
     avatar: UserAvatar;
     firstName: string;
@@ -27,18 +29,42 @@ export class UserProfile {
     jobTitleId: string;
     jobTypeId: string;
     userIndustryId: string;
+    sendPortalInvitation: boolean = false;
+    portalAccessStatus: string;
     constructor() {
 
     }
+    /**
+* @description Add new element to array ojects customerCompaniesInfo
+*/
+    public addCustomerCompaniesInfo() {
+        this.customerCompaniesInfo.push(new UserCustomerCompaniesInfo());
+    }
+    /**
+* @description Set defaultSubscriptions
+* @param  {UserDefaultSubscription} data  - Object of Default Subscriptions
+*/
     public changeDefaultSubscriptions(data) {
         this.defaultSubscriptions = data;
     }
+    /**
+* @description Set Custom Subscriptions
+* @param  {Array<UserCustomSubscription>} data  - Array Objects of Custom Subscriptions
+*/
     public changeCustomSubscriptions(data) {
         this.customSubscriptions = data;
     }
+    /**
+* @description Set Tags
+* @param  {Array<Tag>} data  - Array Objects of tags
+*/
     public setTags(data) {
         this.tags = data;
     }
+    /**
+* @description Update data from User Object
+* @param  {User} user  - Object of User
+*/
     public onEdit(user: User) {
         this.id = user.id;
         this.role = user.role;
@@ -65,11 +91,21 @@ export class UserProfile {
         this.jobTitleId = user.jobTitleId;
         this.jobTypeId = user.jobTypeId;
         this.userIndustryId = user.userIndustryId;
+        this.customerCompaniesInfo = user.customerCompaniesInfo;
+        this.portalAccessStatus = user.portalAccessStatus;
     }
+    /**
+* @description Set avatar
+* @param  {UserAvatar} data  - Object of UserAvatar
+*/
     public editLogo(data) {
         this.avatar = data;
 
     }
+    /**
+* @description Set new values fields object avatar
+* @param  {ImageCropper} data  - Object of ImageCropper
+*/
     public setLogo(data: ImageCropper) {
 
         this.avatar = new UserAvatar();
@@ -81,36 +117,80 @@ export class UserProfile {
         this.avatar.y = data.croppedImage.imagePosition.y1;
 
     }
+    /**
+* @description Add new value to array phoneNumbers by type 'OFFICE'
+*/
     public addPhoneNumber() {
         this.phoneNumbers.push(new PhoneNumber('OFFICE'));
     }
+    /**
+* @description Set userIndustryId
+* @param  {string} data  - Value of userIndustryId
+*/
     public setUserIndustryId(data) {
         this.userIndustryId = data;
     }
+    /**
+* @description Set role
+* @param  {string} data  - Value of role
+*/
     public setRole(data) {
         this.role = data;
     }
+    /**
+* @description Set jobTitleId
+* @param  {string} data  - Value of jobTitleId
+*/
     public setJobTitleId(data) {
         this.jobTitleId = data;
     }
+    /**
+* @description Set jobTypeId
+* @param  {string} data  - Value of jobTypeId
+*/
     public setJobTypeId(data) {
         this.jobTypeId = data;
     }
+    /**
+* @description Return object of role
+* @returns  {string} This is the result
+*/
     public getRole() {
         return this.role;
     }
-    public serCompanyId(data) {
+    /**
+* @description Set companyId
+* @param  {string} data  - Value of companyId
+*/
+    public setCompanyId(data) {
         this.companyId = data;
     }
+    /**
+* @description Set designation
+* @param  {string} data  - Value of designation
+*/
     public setDesignation(data) {
         this.designation = data;
     }
+    /**
+* @description Set Custom Subscriptions
+* @param  {Array<UserCustomSubscription>} data  - Array objects of Custom Subscriptions
+*/
     public setCustomSubscriptions(data) {
         this.customSubscriptions = data;
     }
+    /**
+* @description Set Default Subscriptions
+* @param  {UserDefaultSubscription} data  - Object of Default Subscriptions
+*/
     public setDefaultSubscriptions(data) {
         this.defaultSubscriptions = data;
     }
+    /**
+* @description Return object of User Update, where get part data from User object
+* @param  {User} user  - Object of User
+* @returns  {UserUpdate} This is the result
+*/
     public getUserForUpdate(user: User) {
 
         return new UserUpdate(this, user);

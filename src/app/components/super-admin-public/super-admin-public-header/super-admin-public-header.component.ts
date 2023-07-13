@@ -20,6 +20,6 @@ export class SuperAdminPublicHeaderComponent implements OnInit {
     this.onSelectCategory.emit(data);
   }
   gotoHelpCenter() {
-    this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/help-center`]);
+    this.router.navigate([`${this.companiesStateService.getCurrentCompany().techDomain}/help-center`]);
   }
 }

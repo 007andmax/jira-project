@@ -6,6 +6,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toastr-progress-state.service';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-quotes-item',
@@ -33,13 +34,14 @@ export class QuotesItemComponent implements OnInit {
   constructor(private usersStateService: UsersStateService,
     private permissionsService: PermissionsService,
     public ticketsListService: TicketsListService,
+    public customerPortalStateService: CustomerPortalStateService,
     private toastrProgressStateService: ToastrProgressStateService) { }
 
   ngOnInit() {
     this.createdUser = this.usersStateService.getAllUsers().find(item => item.id === this.quote.createdBy);
   }
   openInvoiceTikcet() {
-    if (this.quote.status === "TICKETED") this.onTicket.emit(this.quote.ticketId);
+    if (this.quote.status === "TICKETED" && !this.customerPortalStateService.isCustomerPortal) this.onTicket.emit(this.quote.ticketId);
     if (this.quote.status === "INVOICED") this.onInvoice.emit(this.quote.invoiceId);
   }
   getNameForAvatar() {

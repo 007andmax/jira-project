@@ -5,6 +5,7 @@ import { CompaniesService } from 'src/app/services/company/companies.service';
 import { CompanyProfile } from '../../class/company-profile';
 import { CompanySetting } from '../../class/company-setting';
 import { CompanyValdiate } from '../../class/company-validate';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 var $ = require("jquery");
 
 @Component({
@@ -16,13 +17,20 @@ export class CompanyAddAsideShortComponent implements OnInit, OnDestroy {
   companyTypes = [new CompanySetting('Client', 'CLIENT'), new CompanySetting('Lead', 'LEAD'), new CompanySetting('Vendor', 'VENDOR'), new CompanySetting('Supplier', 'SUPPLIER')];
   @Input() validate: CompanyValdiate = new CompanyValdiate();
   @Input() company: CompanyProfile = new CompanyProfile();
-
   @Output() onInitFullVersion = new EventEmitter();
+  usersList = [];
+  users = [];
   sub: Subscription = new Subscription();
   constructor(private companiesService: CompaniesService,
+    private usersStateService: UsersStateService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
+    if (this.usersStateService.getAllUsers().length > 0) this.onGetUsers(this.usersStateService.getAllUsers());
+    let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
+      this.onGetUsers(this.usersStateService.getAllUsers());
+    })
+    this.sub.add(getOnUsers);
   }
   public onChangeName() {
     if (this.company.name && this.company.name.length > 0) {
@@ -39,6 +47,29 @@ export class CompanyAddAsideShortComponent implements OnInit, OnDestroy {
     } else {
       this.validate.checkValidName(this.company.name);
     }
+  }
+  onSelectUser(item) {
+    if (item) {
+      let indexhUser = this.users.findIndex(user => `${user.firstName} ${user.lastName}` === item);
+      if (indexhUser > -1) this.company.contacts[0].setId(this.users[indexhUser].id);
+      this.validate.resetUser();
+    } else {
+      this.company.contacts[0].setId(null);
+    }
+  }
+  onGetUsers(data) {
+    this.users = data.filter(item => {
+      if (item.accountType !== 'TECH' && !item.deletedAt) {
+        return item;
+      }
+    });
+    this.usersList = this.getUserList();
+  }
+  getUserList() {
+    return this.users.map(item => {
+      return `${item.firstName} ${item.lastName}`
+    }).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
+      1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
   }
   public onSelectCompanyTypes(type) {
     if (type) this.company.clientType = type.value;
