@@ -88,7 +88,7 @@
         <div
             class="qt-df qt-ai-c ticket-detail-page__dropdown-category-more"
             ngbDropdown
-            *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && (customerPortalStateService.isCustomerPortal && isAddNoteForCustomerUser() || !customerPortalStateService.isCustomerPortal)"
+            *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && !customerPortalStateService.isCustomerPortal"
         >
             <div
                 class="qt-button --square-md --gray pointer qt-ml-8"
