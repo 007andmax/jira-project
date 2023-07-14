@@ -764,7 +764,7 @@
     background-image: url("/assets/img/icons/set-privilege.svg");
   }
   &__send-to-front {
-    background-image: url("/assets/img/device/send-to-front.svg");
+    background-image: url("/assets/img/icons/send-to-front.svg");
   }
   &__subscribe {
     background-image: url("/assets/img/icons/subscribe.svg");
@@ -780,9 +780,6 @@
   }
   &__remote-access {
     background-image: url("/assets/img/icons/remote-access.svg");
-  }
-  &__restart {
-    background-image: url("/assets/img/icons/restart.svg");
   }
   &__receipt {
     background-color: $gray-500;
@@ -802,8 +799,8 @@
     background-color: $gray-500;
     -webkit-mask-position: center;
     mask-position: center;
-    -webkit-mask-image: url("/assets/img/device/save-changes.svg");
-    mask-image: url("/assets/img/device/save-changes.svg");
+    -webkit-mask-image: url("/assets/img/icons/save-changes.svg");
+    mask-image: url("/assets/img/icons/save-changes.svg");
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     -webkit-mask-size: contain;
@@ -820,6 +817,17 @@
   }
   &__shutdown {
     background-image: url("/assets/img/icons/shutdown.svg");
+  }
+  &__shutdown--white {
+    background-color: $white;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/shutdown.svg");
+    mask-image: url("/assets/img/icons/shutdown.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
   }
   &__clock-timer {
     background-image: url("/assets/img/icons/timer-counter.svg");
@@ -863,7 +871,8 @@
   &__timer-counter {
     background-image: url("/assets/img/icons/timer-counter.svg");
   }
-  &__time {
+  &__time,
+  &__time--white {
     background-color: $gray-500;
     -webkit-mask-position: center;
     mask-position: center;
@@ -873,6 +882,9 @@
     mask-repeat: no-repeat;
     -webkit-mask-size: contain;
     mask-size: contain;
+  }
+  &__time--white {
+    background-color: $white;
   }
   &__timer {
     background-color: $gray-500;
@@ -884,6 +896,9 @@
     mask-repeat: no-repeat;
     -webkit-mask-size: contain;
     mask-size: contain;
+  }
+  &__timeline {
+    background-image: url("/assets/img/icons/timeline.svg");
   }
   &__move-light {
     background-image: url("/assets/img/icons/move-light.svg");
@@ -913,6 +928,9 @@
   }
   &__print-blue {
     background-image: url("/assets/img/icons/print-blue.svg");
+  }
+  &__processor {
+    background-image: url("/assets/img/icons/processor.svg");
   }
   &__invoice-expired {
     background-image: url("/assets/img/icons/invoice-expired.svg");
@@ -960,7 +978,8 @@
   &__email-resend {
       background-image: url("/assets/img/icons/email-resend.svg");
   }
-  &__reset-gray-500 {
+  &__reset-gray-500,
+  &__reset--white {
     background-color: $gray-500;
     -webkit-mask-position: center;
     mask-position: center;
@@ -970,6 +989,9 @@
     mask-repeat: no-repeat;
     -webkit-mask-size: contain;
     mask-size: contain;
+  }
+  &__reset--white {
+    background-color: $white;
   }
   &__collapse-task {
     background-image: url("/assets/img/icons/collapse-task.svg");
@@ -1203,6 +1225,9 @@
   }
   &__software {
     background-image: url("/assets/img/icons/software.svg");
+  }
+  &__software-image {
+    background-image: url("/assets/img/icons/software-image.svg");
   }
   &__wifi {
     background-image: url("/assets/img/icons/wifi-network.svg");
