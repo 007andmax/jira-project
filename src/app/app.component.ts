@@ -126,7 +126,7 @@ export class AppComponent implements OnInit {
     this.usersStateService.onInit();
     this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.currentUser = data;
-      if (this.state !== '' && this.customerPortalStateService.isCustomerPortal) this.customerPortalStateService.setFilters(this.currentUser, this.state);
+      if (this.state !== '' && this.state !== 'default' && this.customerPortalStateService.isCustomerPortal) this.customerPortalStateService.setFilters(this.currentUser, this.state);
       if (this.currentUser.twoFactorAuthType === "GOOGLE_SECURE" && !this.currentUser.userTOTP.confirmed) this.onCheckGoogleAuthenticator();
       if (this.appService.getIsInit()) return;
       if (data.role !== "SUPER_ADMIN") {

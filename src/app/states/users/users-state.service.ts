@@ -164,6 +164,7 @@ export class UsersStateService {
   }
   public clearFilter() {
     this.filter = new UserFilter();
+    this.onFilter.emit(this.filter);
   }
   public onInitLeftPanelMarketingFilter(data) {
     this.onLeftPanelMarketingFilter.emit(data);

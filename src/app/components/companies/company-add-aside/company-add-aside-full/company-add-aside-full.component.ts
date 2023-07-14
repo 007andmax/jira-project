@@ -19,7 +19,7 @@ import { CrmCompanyServiceType } from 'src/app/components/setting/crm-settings/c
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { CrmCompanyJobTitle } from 'src/app/components/setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { CompanyProfileAddress } from '../../class/company-profile-address';
-import { MODE_EDIT_SUBSCRIPTION } from 'src/app/const/users';
+import { MODE_EDIT_SUBSCRIPTION, MODE_HIDE_ACTIVE } from 'src/app/const/users';
 
 @Component({
   selector: 'company-add-aside-full',
@@ -44,6 +44,7 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
   idUploadFile: string;
   users = [];
   usersList = [];
+  MODE_HIDE_ACTIVE = MODE_HIDE_ACTIVE;
   MODE_EDIT_SUBSCRIPTION = MODE_EDIT_SUBSCRIPTION;
   @Input() validate: CompanyValdiate = new CompanyValdiate();
   @Input() company: CompanyProfile = new CompanyProfile();

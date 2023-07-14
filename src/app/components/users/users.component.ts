@@ -70,6 +70,7 @@ export class UsersComponent implements OnInit {
     } else {
       this.filter = this.usersStateService.getFilter();
     }
+    console.log(" this.filter", this.filter);
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.usersStateService.setModeUserFilterSubscription(MODE_USERS_LIST);
     this.showArchivedUsers = JSON.parse(JSON.stringify(this.usersStateService.getShowArchivedCompanies()));
@@ -354,5 +355,6 @@ export class UsersComponent implements OnInit {
     })
     this.draftEmailStateService.resetSelectedUsers();
     this.usersStateService.clearFilter();
+    console.log("ngOnDestroy");
   }
 }

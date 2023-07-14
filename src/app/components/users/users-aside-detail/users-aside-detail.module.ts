@@ -24,6 +24,7 @@ import { TicketProfileAttachmentsModule } from '../../tickets/tickets/ticket-edi
 import { NgxMaskModule } from 'ngx-mask';
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 import { UsersAsideDetailCompanyInfoComponent } from './users-aside-detail-company-info/users-aside-detail-company-info.component';
+import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 
 @NgModule({
     declarations: [UsersAsideDetailComponent,
@@ -52,7 +53,8 @@ import { UsersAsideDetailCompanyInfoComponent } from './users-aside-detail-compa
         UserCustomSubscriptionModule,
         TicketProfileAttachmentsModule,
         NgxMaskModule.forRoot(),
-        CompanyDropDownModule
+        CompanyDropDownModule,
+        DynamicTooltipModule
     ],
     exports: [UsersAsideDetailComponent]
 

@@ -371,7 +371,7 @@
                     <div class="qt-input-block">
                         <label class="qt-input-block__label">Subscription</label>
                         <user-default-subscription
-                            [mode]="MODE_EDIT_SUBSCRIPTION"
+                            [mode]="MODE_HIDE_ACTIVE"
                             [defaultSubscriptions]="companyInfo.defaultSubscriptions"
                             (onChange)="onChangeDefaultSubscriptions($event,i)"
                             [isDisabled]="!companyInfo.companyId"
@@ -382,7 +382,10 @@
                     <div class="qt-input-block qt-f50">
                         <div class="qt-df qt-ai-c">
                             <label
-                                class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
+                                class="qt-checkbox receive-full-amount-check qt-mb-0"
+                                [ngClass]="{'pointer' : companyInfo.companyId && companyInfo.customerUserRole,
+                            'access-customer-portal': !(companyInfo.companyId && companyInfo.customerUserRole),
+                        '--disabled': !(companyInfo.companyId && companyInfo.customerUserRole)}"
                                 [attr.for]="'access-' + i"
                             >
                                 <input
@@ -392,7 +395,20 @@
                                     [disabled]="!companyInfo.companyId || !companyInfo.customerUserRole"
                                 >
                                 <span></span>
-                                <div class="qt-ml-8">Access to the Customer portal</div>
+                                <div class="qt-ml-8">
+                                    Access to the Customer portal
+                                    <i
+                                        class="icon__help default-services-page__question-icon qt-sz-12 qt-ic-c"
+                                        (mouseenter)="customerPortalTooltip.show($event.target)"
+                                        (mouseleave)="customerPortalTooltip.hide()"
+                                    ></i>
+                                </div>
+                                <app-dynamic-tooltip
+                                    class="user-companies-tooltip"
+                                    [content]="'This option can be enabled only if the permission role has been set'"
+                                    [position]="'bottom'"
+                                    #customerPortalTooltip
+                                ></app-dynamic-tooltip>
                             </label>
                         </div>
                     </div>

@@ -195,7 +195,6 @@ export class TicketStateService {
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
       if (!this.customerPortalStateService.isCustomerPortal) this.getServiceAgreements(ticketProfile);
       this.servicesList.emit(this.servicesForTicket);
-      this.getServiceAgreements(ticketProfile);
     })
   }
   public subsribeToTicket(id) {

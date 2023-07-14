@@ -118,6 +118,7 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
     }
   }
   private getTickets() {
+    console.log("getTickets user detail");
     if (this.ticketsListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;

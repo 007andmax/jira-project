@@ -17,11 +17,12 @@ export class TicketDetailLinkedAgentsComponent extends PasswordManagerLinkedComp
   ngOnInit() {
     if (this.ticketProfile.agent) this.selectedDevice = JSON.parse(JSON.stringify(this.ticketProfile.agent));
     if (this.devicesStateService.getAllDevices()) {
+      this.devices = this.devicesStateService.getAllDevices()[this.selectedCompanyId];
       this.preloader = false;
       if (this.selectedCompanyId) this.onSelectCompany(this.selectedCompanyId);
     }
     this.devicesStateService.getOnDevices().subscribe(data => {
-      this.devices = data;
+      this.devices = data[this.selectedCompanyId];
       this.preloader = false;
       if (this.selectedCompanyId) this.onSelectCompany(this.selectedCompanyId);
     })
@@ -36,6 +37,7 @@ export class TicketDetailLinkedAgentsComponent extends PasswordManagerLinkedComp
     this.devicesList = [];
     this.gadgets = [];
     this.selectedCompanyId = null;
+    console.log("this.devices", this.devices);
     if (id) {
       this.selectedCompanyId = id;
       let devices = this.devices ? this.devices : [];
@@ -45,6 +47,7 @@ export class TicketDetailLinkedAgentsComponent extends PasswordManagerLinkedComp
       })
       this.devicesList.sort((a, b) => (this.getLabelDevice(a).toLowerCase() > this.getLabelDevice(b).toLowerCase()) ?
         1 : ((this.getLabelDevice(b).toLowerCase() > this.getLabelDevice(a).toLowerCase()) ? -1 : 0));
+      console.log("this.devicesList", this.devicesList);
     }
   }
   public onSearch(event) {

@@ -67,6 +67,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       /* END */
     }
     let onTicketFilters = this.customerPortalStateService.onTicketFilters.subscribe(data => {
+      console.log("onTicketFilters");
       this.ticketsFilter.setListType("ALL");
       this.ticketsFilter.setFilter(JSON.parse(JSON.stringify(this.customerPortalStateService.getTicketsFilter())));
       this.showPreloader = true;
@@ -103,6 +104,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     });
 
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
+      console.log("getOnInitFilter");
       this.ticketsFilter = data;
       this.showPreloader = true;
       document.body.querySelector(".main-container").scrollTo(0, 0);
@@ -110,7 +112,6 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       this.onScroll();
     })
     this.sub.add(getOnInitFilter);
-    if (this.ticketsStateService.getListType()) this.onScroll();
     if (this.ticketsStateService.getListStatusColor().length === 0) {
       this.leftPanelService.getColors().subscribe((data: any) => {
         this.listColors = data.map(item => {
@@ -152,6 +153,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     }
   }
   private getTickets() {
+    console.log("getTickets");
     if (this.ticketsListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;

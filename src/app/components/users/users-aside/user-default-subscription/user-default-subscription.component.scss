@@ -95,3 +95,9 @@
     @include dropdown-checkbox-item;
   }
 }
+.user-subscription {
+  background-color: #fff;
+  &.--disabled {
+    background-color: #F9FAFB !important;
+  }
+}
