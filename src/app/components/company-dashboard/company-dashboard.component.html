@@ -39,7 +39,7 @@
                             ></app-company-dash-revenue>
                             <app-company-dash-invoice
                                 *ngIf="getPermissions('VIEW_ACCOUNTING')"
-                                [companyName]="companyName"
+                                [companyId]="company.id"
                             ></app-company-dash-invoice>
                         </div>
                         <div class="cmp-board-info-col qt-df">

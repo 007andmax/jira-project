@@ -20,7 +20,7 @@ export class CompanyDashInvoiceComponent implements OnInit {
   sub: Subscription = new Subscription();
   //showPreviewInvoice: boolean = false;
   //previewInvoice: Invoice;
-  @Input() public set companyName(val: string) {
+  @Input() public set companyId(val: string) {
     if (val !== '' && val !== null && val !== undefined) {
       this.getRecentInvoiceList(val);
     }
@@ -44,9 +44,9 @@ export class CompanyDashInvoiceComponent implements OnInit {
 
   }
 
-  getRecentInvoiceList(companyName: string) {
+  getRecentInvoiceList(companyId: string) {
     this.recentInvoiceList = [];
-    let getInvoice = this.companiesService.getRecentInvoice(companyName).subscribe((data: any) => {
+    let getInvoice = this.companiesService.getRecentInvoice(companyId).subscribe((data: any) => {
       data.forEach(element => {
         let obj = element;
         obj.dateName = moment(new Date(obj.date)).format('DD MMM YYYY');

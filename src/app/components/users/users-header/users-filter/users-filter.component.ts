@@ -62,7 +62,7 @@ export class UsersFilterComponent implements OnInit {
       this.onChangeCounterFilter();
     })
     this.sub.add(onLeftPanelMarketingFilter);
-
+    console.log("this.filter", this.filter);
   }
   private checkCompanyCustomerUser() {
     this.filter = this.customerPortalStateService.getUsersFilters();
