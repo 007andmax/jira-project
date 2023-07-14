@@ -14,6 +14,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
+import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 
 @NgModule({
     declarations: [UsersAsideEditComponent
@@ -32,7 +33,8 @@ import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.
         NgxMaskModule.forRoot(),
         CompanyDropDownModule,
         PreloaderTicketModule,
-        DisabledBtnModule
+        DisabledBtnModule,
+        DynamicTooltipModule
     ],
     exports: [UsersAsideEditComponent]
 

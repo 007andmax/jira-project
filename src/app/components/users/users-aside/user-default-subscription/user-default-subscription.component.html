@@ -9,7 +9,8 @@
         id="dropdownServices"
         ngbDropdownToggle
         [ngClass]="{'placeholder-subscription': !showPlaceholder(),
-    'no-pointer':isDisabled}"
+    'no-pointer':isDisabled,
+'--disabled':isDisabled}"
     >
         <div
             *ngIf="defaultSubscriptions.invoiceSubscription.enabled"

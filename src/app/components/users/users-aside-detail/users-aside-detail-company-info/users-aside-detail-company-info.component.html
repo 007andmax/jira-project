@@ -85,15 +85,32 @@
                     <label
                         class="qt-checkbox receive-full-amount-check qt-mb-0"
                         [attr.for]="'access-1'"
+                        [ngClass]="{'pointer' : customerCompaniesInfo.companyId && customerCompaniesInfo.customerUserRole,
+                            'access-customer-portal': !(customerCompaniesInfo.companyId && customerCompaniesInfo.customerUserRole),
+                        '--disabled': !(customerCompaniesInfo.companyId && customerCompaniesInfo.customerUserRole)}"
                     >
                         <input
                             [attr.id]="'access-1'"
                             type="checkbox"
                             [(ngModel)]="customerCompaniesInfo.hasAccess"
                             (change)="onChangeHasAccess()"
+                            [disabled]="!customerCompaniesInfo.companyId || !customerCompaniesInfo.customerUserRole"
                         >
                         <span></span>
-                        <div class="qt-ml-8">Access to the Customer portal</div>
+                        <div class="qt-ml-8">
+                            Access to the Customer portal
+                            <i
+                                class="icon__help default-services-page__question-icon qt-sz-12 qt-ic-c"
+                                (mouseenter)="customerPortalTooltip.show($event.target)"
+                                (mouseleave)="customerPortalTooltip.hide()"
+                            ></i>
+                        </div>
+                        <app-dynamic-tooltip
+                            class="user-companies-tooltip"
+                            [content]="'This option can be enabled only if the permission role has been set'"
+                            [position]="'left'"
+                            #customerPortalTooltip
+                        ></app-dynamic-tooltip>
                     </label>
                 </div>
             </div>
@@ -102,7 +119,7 @@
             <div class="qt-input-block">
                 <div class="qt-df qt-ai-c">
                     <label
-                        class="qt-checkbox receive-full-amount-check qt-mb-0 --disabled"
+                        class="qt-checkbox receive-full-amount-check qt-mb-0 --disabled access-customer-portal"
                         [attr.for]="'primary-contact-1'"
                     >
                         <input
