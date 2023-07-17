@@ -157,11 +157,18 @@
                 type="text"
                 [(ngModel)]="company.contacts[0].phoneNumbers[0].number"
                 placeholder="Enter Primary Phone"
+                (input)="onCheckPrimaryNumber()"
                 prefix="+1"
                 mask="(000) 000-0000 Ext: 999999||000-000-0000"
                 [specialCharacters]="['(',')',' ','-','E','x','t',':']"
                 [dropSpecialCharacters]="false"
             >
+            <mat-error
+                class="invalid-feedback"
+                *ngIf="!validate.getPhoneNumber()"
+            >
+                Phone number is required
+            </mat-error>
         </div>
         <div class="qt-input-block qt-f50 qt-flex-md-100 --required">
             <div class="qt-input-block__label">Primary Contact Email</div>

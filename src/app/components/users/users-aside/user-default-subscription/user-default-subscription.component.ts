@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MODE_EDIT_SUBSCRIPTION, MODE_HIDE_ACTIVE } from 'src/app/const/users';
+import { MODE_EDIT_SUBSCRIPTION, MODE_EDIT_USER_SUBSCRIPTION, MODE_HIDE_ACTIVE } from 'src/app/const/users';
 import { UserDefaultSubscription } from '../../class/user-default-subscription';
 
 @Component({
@@ -27,6 +27,7 @@ export class UserDefaultSubscriptionComponent implements OnInit {
     let subscription = JSON.parse(JSON.stringify(this.defaultSubscriptions));
     subscription[field].enabled = !subscription[field].enabled;
     subscription[field].isExist = false;
+    if (this.mode == MODE_EDIT_USER_SUBSCRIPTION) subscription[field].activated = true;
     this.onChange.emit(subscription);
   }
   isSeleted(field) {

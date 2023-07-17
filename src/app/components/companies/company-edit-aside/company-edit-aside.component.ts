@@ -29,7 +29,7 @@ import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-indus
 import { CrmCompanyServiceType } from '../../setting/crm-settings/crm-company-service-type/class/crm-company-service-type';
 import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { CompanyProfileAddress } from '../class/company-profile-address';
-import { MODE_EDIT_SUBSCRIPTION } from 'src/app/const/users';
+import { MODE_EDIT_SUBSCRIPTION, MODE_EDIT_USER_SUBSCRIPTION } from 'src/app/const/users';
 
 @Component({
   selector: 'app-company-edit-aside',
@@ -60,6 +60,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   locationIsinit: boolean = false;
   selectedJobTitle: CrmCompanyJobTitle;
   idUploadFile: string;
+  MODE_EDIT_USER_SUBSCRIPTION = MODE_EDIT_USER_SUBSCRIPTION;
   MODE_EDIT_SUBSCRIPTION = MODE_EDIT_SUBSCRIPTION;
   @ViewChild('companyTags') companyTags: CompanyTagsComponent;
   @ViewChild('addresstext') addresstext: any;

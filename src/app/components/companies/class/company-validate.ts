@@ -154,6 +154,7 @@ export class CompanyValdiate {
         if (company.addresses.length === 2 && company.addresses[1].phoneNumbers[0].number.length > 0 && company.addresses[1].phoneNumbers[0].number.length < 14) this.shippingPhoneNumber = false;
         if (company.domain && !company.domain.match(this.reDomain)) this.domain = false;
         if (company.addresses.length > 0 && company.addresses[0].locationName != undefined && company.addresses[0].locationName.length == 0) this.billindAddress = false;
+        console.log("this.primaryContactEmail", this.primaryContactEmail);
         return this.name && this.type && this.primaryContactEmail && this.phoneNumber && this.firstName && this.domain && !this.domainIsExist && this.shippingPhoneNumber && this.billindAddress && this.user;
     }
 
