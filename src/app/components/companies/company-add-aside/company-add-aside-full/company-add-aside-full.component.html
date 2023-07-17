@@ -371,11 +371,18 @@
                             *ngIf="company.contacts[0].phoneNumbers.length > 0"
                             [(ngModel)]="company.contacts[0].phoneNumbers[0].number"
                             placeholder="Enter Primary Number"
+                            (input)="onCheckPrimaryNumber()"
                             prefix="+1"
                             mask="(000) 000-0000 Ext: 999999||000-000-0000"
                             [specialCharacters]="['(',')',' ','-','E','x','t',':']"
                             [dropSpecialCharacters]="false"
                         >
+                        <mat-error
+                            class="invalid-feedback"
+                            *ngIf="!validate.getPrimaryPhoneNumber()"
+                        >
+                            Please enter a valid phone number
+                        </mat-error>
                         <div
                             class="grey-dropdown"
                             ngbDropdown

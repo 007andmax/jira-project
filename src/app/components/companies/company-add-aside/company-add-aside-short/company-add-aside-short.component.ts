@@ -49,7 +49,7 @@ export class CompanyAddAsideShortComponent implements OnInit, OnDestroy {
     }
   }
   onCheckPrimaryNumber() {
-    this.validate.checkValidPhoneNumber(this.company.contacts[0].phoneNumbers[0].number);
+    this.validate.checkValidPrimaryPhoneNumber(this.company.contacts[0].phoneNumbers[0].number);
   }
   onSelectUser(item) {
     if (item) {
