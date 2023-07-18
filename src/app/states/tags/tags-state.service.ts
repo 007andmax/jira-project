@@ -9,6 +9,8 @@ import { TagsRealTimeService } from './tags-real-time.service';
 export class TagsStateService {
   tags: Array<Tag> = [];
   onGetTags: EventEmitter<any> = new EventEmitter();
+  clearState = new EventEmitter<any>();
+  tagsFromEdit: EventEmitter<any> = new EventEmitter();
   constructor(public tagsService: TagsService,
     private tagsRealTimeService: TagsRealTimeService,) { }
 
@@ -26,7 +28,44 @@ export class TagsStateService {
       this.onGetTags.emit(this.tags);
     })
   }
+  /**
+ * @description Return Array Object of Tags
+*/
   public getTags() {
     return this.tags;
+  }
+  /**
+  * @description Set list tags
+*/
+  public setTags(data) {
+    this.tags = data;
+  }
+  /**
+  * Initializes to subscribe for clear data
+  */
+  public onInitClear() {
+    this.clearState.emit(null);
+  }
+
+  /**
+  * Get subscribe for clear data
+  */
+  public getClearState() {
+    return this.clearState
+  }
+
+  /**
+  * Initializes to subscribe for edit mode
+  */
+  public setTagsFromtEdit(data) {
+    this.tagsFromEdit.emit(data);
+
+  }
+
+  /**
+  * Get  subscribe for edit mode
+  */
+  public getTagsFromEdit() {
+    return this.tagsFromEdit;
   }
 }

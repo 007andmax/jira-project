@@ -23,7 +23,7 @@ import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { Subscription } from 'rxjs';
 import { CrmCompanyJobType } from '../../setting/crm-settings/crm-company-job-type/class/crm-company-job-type';
 import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
-import { MODE_EDIT_SUBSCRIPTION, MODE_HIDE_ACTIVE } from 'src/app/const/users';
+import { MODE_EDIT_SUBSCRIPTION, MODE_EDIT_USER_SUBSCRIPTION, MODE_HIDE_ACTIVE } from 'src/app/const/users';
 import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-industry/class/crm-company-industry';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { UserRole } from '../class/user-role';
@@ -49,6 +49,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
   userTypes: Array<CrmCompanyJobType> = [];
   sub: Subscription = new Subscription();
   MODE_EDIT_SUBSCRIPTION = MODE_EDIT_SUBSCRIPTION;
+  MODE_EDIT_USER_SUBSCRIPTION = MODE_EDIT_USER_SUBSCRIPTION;
   industries: Array<CrmCompanyIndustry> = [];
   idUploadFile: string;
   userRoles: Array<UserRole> = [];
@@ -225,8 +226,6 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
   public onSelectCompany(selectClient, index) {
     if (selectClient) {
       this.user.customerCompaniesInfo[index].companyId = selectClient.id;
-    } else {
-      this.user.customerCompaniesInfo.splice(index, 1);
     }
     //  this.user.serCompanyId((selectClient === null) ? null : selectClient.id);
     // if (selectClient !== null) this.validate.setCompanyValid();
@@ -235,6 +234,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
   }
 
   onSave() {
+    this.onCheckPhoneNumber(0);
     if (!this.validate.isValidate(this.user)) return;
     this.editBtn.setDisabled(true);
     this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit())).subscribe(data => {

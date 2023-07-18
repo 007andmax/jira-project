@@ -11,12 +11,19 @@ import { CompanyTagsListService } from 'src/app/components/companies/company-tag
 export class TicketsFilterTagsComponent extends CompanyTagsComponent {
   @Input() placement: string = 'bottom-left';
   public ngOnInit() {
-    let getTags = this.tagsService.getTags().subscribe((data) => {
-      this.tags = data;
-      this.reqTags = JSON.parse(JSON.stringify(data));
+    if (this.tagsStateService.getTags().length == 0) {
+      let getTags = this.tagsService.getTags().subscribe((data) => {
+        this.tagsStateService.setTags(data);
+        this.tags = data;
+        this.reqTags = JSON.parse(JSON.stringify(data));
+        this.sortTags();
+      })
+      this.sub.add(getTags);
+    } else {
+      this.tags = JSON.parse(JSON.stringify(this.tagsStateService.getTags()));
+      this.reqTags = JSON.parse(JSON.stringify(this.tagsStateService.getTags()));
       this.sortTags();
-    })
-    this.sub.add(getTags);
+    }
     let changeTagsArray = this.tagsRealTimeService.changeTagsArray.subscribe((data: any) => {
       if (data.action === "TAG_SAVED") {
         let index = this.tags.findIndex(item => item.id === data.data.id);

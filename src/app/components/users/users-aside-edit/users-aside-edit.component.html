@@ -222,7 +222,7 @@
                         class="invalid-feedback"
                         *ngIf="!validate.getPhoneNumber(0)"
                     >
-                        Phone number is required
+                        Please enter a valid phone number
                     </mat-error>
                 </div>
             </div>
@@ -310,7 +310,7 @@
                             class="invalid-feedback"
                             *ngIf="!validate.getPhoneNumber(i)"
                         >
-                            Phone number is required
+                            Please enter a valid phone number
                         </mat-error>
                     </div>
                 </div>
@@ -349,7 +349,7 @@
                             [field]="'name'"
                             [search]="true"
                             [change]="true"
-                            [isBlockClear]="user.customerCompaniesInfo.length == 1"
+                            [isBlockClear]="true"
                             [editItem]="getCompany(companyInfo)"
                             (onSelectedItem)="onSelectCompany($event,i)"
                         >
@@ -391,7 +391,7 @@
                     <div class="qt-input-block">
                         <label class="qt-input-block__label">Subscription</label>
                         <user-default-subscription
-                            [mode]="MODE_EDIT_SUBSCRIPTION"
+                            [mode]="MODE_EDIT_USER_SUBSCRIPTION"
                             [defaultSubscriptions]="companyInfo.defaultSubscriptions"
                             (onChange)="onChangeDefaultSubscriptions($event,i)"
                             [isDisabled]="!companyInfo.companyId"

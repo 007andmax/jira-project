@@ -4,8 +4,8 @@ import { FormControl } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { TagsService } from 'src/app/services/tags/tags.service';
 import { Tag } from 'src/app/interfaces/tag/tag';
-import { TagsStateService } from './services/tags-state.service';
 import { Subscription } from 'rxjs';
+import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 
 
 @Component({
@@ -44,10 +44,15 @@ export class TagsComponent implements OnInit, OnDestroy {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-    let getTags = this.tagsService.getTags().subscribe((data) => {
-      this.tags = data;
-    })
-    this.sub.add(getTags);
+    if (this.tagsState.getTags().length == 0) {
+      let getTags = this.tagsService.getTags().subscribe((data) => {
+        this.tags = data;
+      })
+      this.sub.add(getTags);
+    } else {
+      this.tags = JSON.parse(JSON.stringify(this.tagsState.getTags()));
+    }
+
     this.onInitClearState();
     this.onCheckEditItem();
   }

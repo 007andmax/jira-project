@@ -134,7 +134,6 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
   }
   setCompanyRoutingId(id) {
     if (this.isInitTickets) return;
-    console.log("setCompanyRoutingId", id);
     this.isInitTickets = true;
     let ticket_id = id;
     let company = this.companiesStateService.getCompanies().find(item => item.id === ticket_id);
@@ -165,7 +164,6 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     }
   }
   private getTickets() {
-    console.log("getTickets");
     if (this.ticketsListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;

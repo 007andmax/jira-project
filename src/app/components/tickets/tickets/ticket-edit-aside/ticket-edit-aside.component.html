@@ -134,6 +134,7 @@
                 </div>
             </div>
             <app-ticket-edit-tags
+                *ngIf="opened"
                 [selectedTag]="ticketProfile.tags"
                 (tagsChange)="onChangeTags($event)"
                 [hidden]="showAddAssignedUser"

@@ -118,14 +118,11 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
     }
   }
   private getTickets() {
-    console.log("getTickets user detail");
     if (this.ticketsListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;
     }
     this.ticketsFilter.setOffset(this.page_number * this.offset);
-
-
     if (this.page_number > 0) this.showPendingPreloader = true;
     this.ticketsService.getTickets(this.ticketsFilter.getListTupe(), this.ticketsFilter.getDataForRequest()).subscribe((data: Array<Ticket>) => {
       this.tickets = [...this.tickets, ...data];
@@ -135,7 +132,6 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
       this.showPreloader = false;
       this.showPendingPreloader = false;
       this.cd.detectChanges();
-
     })
   }
   public onScroll() {

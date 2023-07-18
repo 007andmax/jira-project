@@ -1,10 +1,11 @@
-import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy, ViewChild } from '@angular/core';
 import { CompanyProfile } from '../class/company-profile';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CompanyValdiate } from '../class/company-validate';
 import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/states/app/app.service';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
   selector: 'app-company-add-aside',
@@ -17,6 +18,7 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
   validate: CompanyValdiate = new CompanyValdiate();
   company: CompanyProfile = new CompanyProfile();
   sub: Subscription = new Subscription();
+  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   constructor(private companiesStateService: CompaniesStateService,
     private companiesService: CompaniesService,
     public appService: AppService,
@@ -36,8 +38,12 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
 
   onAddShort() {
     if (!this.validate.isValidate(this.company)) return;
+    this.addBtn.setDisabled(true);
     let createCompany = this.companiesService.createCompany(this.company.getDataForAdd()).subscribe(data => {
+      this.addBtn.setDisabled(false);
       this.close();
+    }, err => {
+      this.addBtn.setDisabled(false);
     })
     this.sub.add(createCompany);
   }
@@ -55,8 +61,12 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
   }
   public onAddFull() {
     if (!this.validate.isValidate(this.company)) return;
+    this.addBtn.setDisabled(true);
     let createCompany = this.companiesService.createCompany(this.company.getDataForAdd()).subscribe(data => {
+      this.addBtn.setDisabled(false);
       this.close();
+    }, err => {
+      this.addBtn.setDisabled(false);
     })
     this.sub.add(createCompany);
   }

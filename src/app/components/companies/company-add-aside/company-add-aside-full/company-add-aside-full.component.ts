@@ -138,6 +138,9 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
       this.idUploadFile = data.id;
     })
   }
+  onCheckPrimaryNumber() {
+    this.validate.checkValidPrimaryPhoneNumber(this.company.contacts[0].phoneNumbers[0].number);
+  }
   public onChangeName() {
     if (this.company.name && this.company.name.length > 0) {
       let checkCompanyName = this.companiesService.checkCompanyName("", this.company.name).subscribe((data: any) => {

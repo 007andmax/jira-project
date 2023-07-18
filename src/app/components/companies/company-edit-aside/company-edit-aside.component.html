@@ -415,7 +415,7 @@
                 <div class="qt-input-block">
                     <label class="qt-input-block__label">Get Subscribe</label>
                     <user-default-subscription
-                        [mode]="MODE_EDIT_SUBSCRIPTION"
+                        [mode]="MODE_EDIT_USER_SUBSCRIPTION"
                         [defaultSubscriptions]="getDefaultSubscriptions()"
                         (onChange)="onChangeSubscribe($event)"
                     ></user-default-subscription>
@@ -538,9 +538,13 @@
         >
             <button
                 class="qt-button qt-mr-12"
-                (click)="onUpdateFull()"
+                appDisabledBtn
+                #addBtn="disabled"
+                (onClick)="onUpdateFull()"
+                [ngClass]="{'--loading':addBtn.isBlock()}"
             >
-                Update Company
+                <span>Update Company</span>
+                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
             </button>
             <button
                 class="qt-button --gray"
@@ -561,9 +565,13 @@
             </button>
             <button
                 class="qt-button"
-                (click)="onUpdateFull()"
+                appDisabledBtn
+                #addBtn="disabled"
+                (onClick)="onUpdateFull()"
+                [ngClass]="{'--loading':addBtn.isBlock()}"
             >
-                Update Company
+                <span>Update Company</span>
+                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
             </button>
         </div>
         <div class="qt-mr-50 create-contract-container">
