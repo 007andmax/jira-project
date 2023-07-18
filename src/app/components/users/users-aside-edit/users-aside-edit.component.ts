@@ -159,7 +159,6 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     return this.companiesStateService.getCompanies().find(company => company.id == item.companyId);
   }
   onChangeDefaultSubscriptions(data, i) {
-    console.log("data", data);
     this.user.customerCompaniesInfo[i].changeDefaultSubscriptions(data);
   }
   addCompnay() {
