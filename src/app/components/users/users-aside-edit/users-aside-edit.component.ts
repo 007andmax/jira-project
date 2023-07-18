@@ -227,8 +227,6 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
   public onSelectCompany(selectClient, index) {
     if (selectClient) {
       this.user.customerCompaniesInfo[index].companyId = selectClient.id;
-    } else {
-      this.user.customerCompaniesInfo.splice(index, 1);
     }
     //  this.user.serCompanyId((selectClient === null) ? null : selectClient.id);
     // if (selectClient !== null) this.validate.setCompanyValid();

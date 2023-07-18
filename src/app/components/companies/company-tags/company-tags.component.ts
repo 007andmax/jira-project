@@ -48,7 +48,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   public constructor(
     public tagsService: TagsService,
     private tagsState: CompanyTagsStateService,
-    private tagsStateService: TagsStateService,
+    public tagsStateService: TagsStateService,
     private companiesStateService: CompaniesStateService,
     private companyTagsListService: CompanyTagsListService,
     public tagsRealTimeService: TagsRealTimeService,

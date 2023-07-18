@@ -69,7 +69,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     if (this.customerPortalStateService.isCustomerPortal && this.companiesState.getCompanies().length > 0) this.checkCompanyCustomerUser();
     let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
       if (this.customerPortalStateService.isCustomerPortal) this.checkCompanyCustomerUser();
-      this.getCount();
+      //this.getCount();
     })
     this.sub.add(getOnCompanies);
     let onTicketFilters = this.customerPortalStateService.onTicketFilters.subscribe(data => {
@@ -82,6 +82,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.ticketsFilter.setListType(this.listType);
     /* END */
     let getOnChangeTypeFilter = this.ticketsStateService.getOnChangeTypeFilter().subscribe(type => {
+      console.log("getOnChangeTypeFilter");
       this.listType = type;
       this.ticketsFilter.setListType(type);
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
@@ -89,6 +90,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnChangeTypeFilter);
     let getOnChangeTagsFilter = this.ticketsStateService.getOnChangeTagsFilter().subscribe(tags => {
+      console.log("getOnChangeTagsFilter");
       this.ticketsFilter.setTags(tags);
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
       this.getCount();
@@ -184,6 +186,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.ticketsFilter.setListType(type);
   }
   public setTypeFilter(type) {
+    console.log("setTypeFilter", type);
     this.listType = type;
     this.ticketsFilter.setListType(type);
     if (!this.appService.checkMobile()) {
@@ -307,7 +310,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   }
 
   applyFilters() {
-
+    console.log("applyFilters");
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
     if (this.listType !== 'RECURRING_TICKETS') this.getCount();
     this.onChangeCounterFilter();

@@ -84,13 +84,13 @@
                 <div class="qt-df qt-ai-c">
                     <label
                         class="qt-checkbox receive-full-amount-check qt-mb-0"
-                        [attr.for]="'access-1'"
+                        [attr.for]="'access-' + customerCompaniesInfo.companyId"
                         [ngClass]="{'pointer' : customerCompaniesInfo.companyId && customerCompaniesInfo.customerUserRole,
                             'access-customer-portal': !(customerCompaniesInfo.companyId && customerCompaniesInfo.customerUserRole),
                         '--disabled': !(customerCompaniesInfo.companyId && customerCompaniesInfo.customerUserRole)}"
                     >
                         <input
-                            [attr.id]="'access-1'"
+                            [attr.id]="'access-' + customerCompaniesInfo.companyId"
                             type="checkbox"
                             [(ngModel)]="customerCompaniesInfo.hasAccess"
                             (change)="onChangeHasAccess()"
@@ -120,10 +120,10 @@
                 <div class="qt-df qt-ai-c">
                     <label
                         class="qt-checkbox receive-full-amount-check qt-mb-0 --disabled access-customer-portal"
-                        [attr.for]="'primary-contact-1'"
+                        [attr.for]="'primary-contact-' + customerCompaniesInfo.companyId"
                     >
                         <input
-                            [attr.id]="'primary-contact-1'"
+                            [attr.id]="'primary-contact-' + customerCompaniesInfo.companyId"
                             type="checkbox"
                             [(ngModel)]="customerCompaniesInfo.isPrimaryContact"
                             disabled

@@ -5,7 +5,6 @@ import { ProductRecurringTicket } from '../interfaces/product-recurring-ticket';
 import { ForCreateProduct } from '../class/for-create-product';
 import { ForCreateService } from '../class/for-create-service';
 import { ServiceRecurringTicket } from '../interfaces/service-recurring-ticket';
-import { TagsStateService } from 'src/app/components/shared/tags/services/tags-state.service';
 import { IntervalStateService } from 'src/app/components/shared/interval/services/interval-state.service';
 import { TechUsersStateService } from 'src/app/components/shared/tech-users/services/tech-users-state.service';
 
@@ -14,12 +13,14 @@ import { ServiceErrors } from '../class/service-errors';
 import { RecurringTicket } from '../class/recurring-ticket';
 import { DatePickerStateService } from 'src/app/components/shared/date-picker/services/date-picker-state.service';
 import { DevicesRecurringTicketsStateService } from '../devices-recurring-tickets/services/devices-recurring-tickets-state.service';
+import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 
 @Injectable()
 export class RecurringTicketsService {
   sub: Subscription = new Subscription();
   clone: boolean = false;
-  constructor(private elRef: ElementRef, private tagsState: TagsStateService,
+  constructor(private elRef: ElementRef,
+    private tagsState: TagsStateService,
     private stateInterval: IntervalStateService,
     private techState: TechUsersStateService,
     private devicesState: DevicesRecurringTicketsStateService,

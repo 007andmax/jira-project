@@ -175,8 +175,6 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
   public onSelectCompany(selectClient, index) {
     if (selectClient) {
       this.user.customerCompaniesInfo[index].companyId = selectClient.id;
-    } else {
-      this.user.customerCompaniesInfo.splice(index, 1);
     }
     if (selectClient !== null) this.validate.setCompanyValid();
     if (this.user.primaryEmail && this.user.primaryEmail.length > 0) this.onCheckValidPrimaryEmail();

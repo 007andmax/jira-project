@@ -196,8 +196,8 @@
                         >
                             <i
                                 class="tag-color"
-                                [ngStyle]="{'background-color':statusColors[item.color].textColor ,
-                            'border-color': statusColors[item.color].textColor}"
+                                [ngStyle]="{'background-color':statusColors[item.color] && statusColors[item.color].textColor ,
+                            'border-color': statusColors[item.color] && statusColors[item.color].textColor}"
                             ></i>
                         </div>
                         <div
@@ -226,10 +226,10 @@
                 <div class="tab-pane__table-cell ticket-status-table__preview">
                     <div
                         class="preview-container"
-                        [ngStyle]="{'border-color':  statusColors[item.color].textColor,'background-color':statusColors[item.color].borderColor}"
+                        [ngStyle]="{'border-color':  statusColors[item.color] && statusColors[item.color].textColor,'background-color': statusColors[item.color] && statusColors[item.color].borderColor}"
                     >
                         <span
-                            [ngStyle]="{'color':  statusColors[item.color].textColor}"
+                            [ngStyle]="{'color': statusColors[item.color] && statusColors[item.color].textColor}"
                             [textContent]="parseStatus(item.name)"
                         ></span>
                     </div>
