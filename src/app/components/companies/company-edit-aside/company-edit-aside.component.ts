@@ -30,6 +30,7 @@ import { CrmCompanyServiceType } from '../../setting/crm-settings/crm-company-se
 import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { CompanyProfileAddress } from '../class/company-profile-address';
 import { MODE_EDIT_SUBSCRIPTION, MODE_EDIT_USER_SUBSCRIPTION } from 'src/app/const/users';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
   selector: 'app-company-edit-aside',
@@ -70,6 +71,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   @ViewChild('paymentMethod') paymentMethod: DropDownComponent;
   @ViewChild('serviceType') serviceType: DropDownComponent;
   @ViewChild('companyAssociate') companyAssociate: CompanyAssociateComponent;
+  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   jobTitleList: Array<CrmCompanyJobTitle> = [];
   constructor(private companiesStateService: CompaniesStateService,
     private companiesService: CompaniesService,
@@ -322,9 +324,13 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   }
   public onUpdateFull() {
     if (!this.validate.isValidate(this.company)) return;
+    this.addBtn.setDisabled(true);
     let updateCompany = this.companiesService.updateCompany(this.company.getDataForUpdate()).subscribe(data => {
+      this.addBtn.setDisabled(false);
       this.close();
       this.cd.detectChanges();
+    }, err => {
+      this.addBtn.setDisabled(false);
     })
     this.sub.add(updateCompany);
   }
