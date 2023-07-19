@@ -52,7 +52,7 @@
                     [matChipInputAddOnBlur]="addOnBlur"
                     (input)="onSearch($event)"
                     (keyup)="onKeyUp($event)"
-                    [attr.disabled]="customerPortalStateService.isCustomerPortal"
+                    [disabled]="customerPortalStateService.isCustomerPortal"
                 >
             </mat-chip-list>
         </mat-form-field>

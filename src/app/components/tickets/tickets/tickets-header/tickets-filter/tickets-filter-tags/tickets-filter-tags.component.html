@@ -29,7 +29,6 @@
                 placeholder="Select tag"
                 #userInput
                 class="pointer"
-                [formControl]="tagCtrl"
                 [matChipInputFor]="chipList"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                 [matChipInputAddOnBlur]="addOnBlur"
@@ -55,7 +54,7 @@
                 class="dropdown-item"
                 (click)="toggleItem(tag)"
                 [textContent]="tag.word"
-                   [ngClass]="{'--selected':isSelected(tag.id)}"
+                [ngClass]="{'--selected':isSelected(tag.id)}"
             >
             </button>
         </ng-template>
