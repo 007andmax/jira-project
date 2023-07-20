@@ -139,7 +139,7 @@ h3 {
     line-height: 20px;
     color: $gray-800--old;
 }
-/deep/ .attachments-message {
+::ng-deep .attachments-message {
     .attachment-component {
         padding: 0px !important;
     }

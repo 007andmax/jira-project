@@ -18,7 +18,7 @@ app-company-tags {
     //width: 32%;
     min-width: 320px;
 }
-/deep/.date-picker {
+::ng-deep.date-picker {
     overflow-x: visible;
 }
 .documents-company-filter {

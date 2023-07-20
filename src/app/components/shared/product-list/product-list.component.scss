@@ -63,7 +63,7 @@
     font-weight: 500;
   }
 
-  /deep/ .card {
+  ::ng-deep .card {
     &.opened-card {
       padding: 0;
 
@@ -151,7 +151,7 @@
   }
  }
 
-/deep/ .product-dropdown-new-ng {
+::ng-deep .product-dropdown-new-ng {
   .item-list .card {
     margin: 0 16px;
     border-bottom: 1px solid $gray-200;
@@ -172,7 +172,7 @@
   }
 }
 
-/deep/ .product-dropdown-new-ng .item-list .card .btn.collapsed {
+::ng-deep .product-dropdown-new-ng .item-list .card .btn.collapsed {
   &:hover {
     background-color: $gray-50;
   }

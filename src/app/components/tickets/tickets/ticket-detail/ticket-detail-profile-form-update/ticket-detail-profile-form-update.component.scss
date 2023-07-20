@@ -224,13 +224,13 @@
 .ticket-edit-aside-bottom-part-users-attack {
     width: 100%;
 
-    /deep/ app-add-assigned-user {
+    ::ng-deep app-add-assigned-user {
         margin-right: 5px;
         margin-top: 5px;
         width: 100%;
     }
 
-    /deep/ .ticket-edit-user-tags {
+    ::ng-deep .ticket-edit-user-tags {
         padding: 0;
     }
 
@@ -399,7 +399,7 @@
     top: 12px !important;
     position: relative;
 }
-/deep/ .ticket-detail-form-update-note-list {
+::ng-deep .ticket-detail-form-update-note-list {
     .note-list-container {
         position: relative;
         bottom: unset;
@@ -412,11 +412,11 @@
   border-top: 1px solid $gray-200;
 }
 
-/deep/ .cps-block .ticket-edit-user-tags {
+::ng-deep .cps-block .ticket-edit-user-tags {
   position: relative;
   padding: 0;
 }
-/deep/ .cps-block .ticket-edit-user-tags > span {
+::ng-deep .cps-block .ticket-edit-user-tags > span {
   position: absolute;
   left: 16px;
   top: 12px;
@@ -427,7 +427,7 @@
   z-index: 1;
 }
 
-/deep/ .cps-block .mat-chip-list-wrapper {
+::ng-deep .cps-block .mat-chip-list-wrapper {
   min-height: 48px;
   border-radius: unset !important;
   padding-left: 108px;
@@ -444,11 +444,11 @@
   }
 }
 
-/deep/ .cps-block .ticket-edit-user-tags .assigne-user-avatar {
+::ng-deep .cps-block .ticket-edit-user-tags .assigne-user-avatar {
   height: 20px;
   width: 20px;
 }
-/deep/ .cps-block__header div.ticket-edit-user-tags .selected-tag-user {
+::ng-deep .cps-block__header div.ticket-edit-user-tags .selected-tag-user {
   border: 1px solid $gray-200;
   box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
   border-radius: 6px !important;
@@ -459,10 +459,10 @@
   color: $gray-600;
   padding: 5px 8px;
 }
-/deep/ .mat-standard-chip .mat-chip-remove.mat-icon {
+::ng-deep .mat-standard-chip .mat-chip-remove.mat-icon {
   width: 14px;
 }
-/deep/ div.cps-block__visible-user {
+::ng-deep div.cps-block__visible-user {
   div.autocomplete-user-tags {
     width: 240px !important;
 
@@ -495,56 +495,56 @@
     }
   }
 }
-/deep/ div.mat-option.mat-selected:not(.mat-option-multiple):not(.mat-option-disabled) {
+::ng-deep div.mat-option.mat-selected:not(.mat-option-multiple):not(.mat-option-disabled) {
   background: $white;
 }
-/deep/ div.autocomplete-user-tags .mat-option {
+::ng-deep div.autocomplete-user-tags .mat-option {
   border-color: transparent;
   height: 36px;
   margin-bottom: 4px;
   padding: 8px;
   border-radius: 6px;
 }
-/deep/ div.autocomplete-user-tags .mat-option:hover {
+::ng-deep div.autocomplete-user-tags .mat-option:hover {
   background-color: $gray-50 !important;
 }
-/deep/ ticket-detail-profile-form-update .dropdown-menu {
+::ng-deep ticket-detail-profile-form-update .dropdown-menu {
   padding: 8px;
   max-height: 174px;
 }
-/deep/ ticket-detail-profile-form-update .cps-block__visible-user .dropdown-menu {
+::ng-deep ticket-detail-profile-form-update .cps-block__visible-user .dropdown-menu {
   max-height: 212px;
 }
-/deep/ ticket-detail-profile-form-update .cps-block__visible-user .dropdown-item {
+::ng-deep ticket-detail-profile-form-update .cps-block__visible-user .dropdown-item {
   margin-bottom: 4px;
 }
-/deep/ .ticket-detail-page-content__sidebar-preview .autocomplete-user-tags {
+::ng-deep .ticket-detail-page-content__sidebar-preview .autocomplete-user-tags {
   max-height: 292px;
   min-height: 292px;
 }
-/deep/ div.autocomplete-user-tags .mat-option .assigne-user-name {
+::ng-deep div.autocomplete-user-tags .mat-option .assigne-user-name {
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
   color: $gray-900;
   margin-right: 4px;
 }
-/deep/ div.autocomplete-user-tags .mat-option .assigne-user-email {
+::ng-deep div.autocomplete-user-tags .mat-option .assigne-user-email {
   font-weight: 400;
   font-size: 13px;
   line-height: 16px;
   color: $gray-500;
 }
-/deep/ div.autocomplete-user-tags .mat-option .assigne-user-avatar {
+::ng-deep div.autocomplete-user-tags .mat-option .assigne-user-avatar {
   width: 20px;
   height: 20px;
   margin-right: 8px;
 }
-/deep/ .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
   padding-bottom: 0;
 }
 
-/deep/ .cps-block__visible-user {
+::ng-deep .cps-block__visible-user {
   .dropdown-menu {
     width: 537px;
     border-radius: 6px;

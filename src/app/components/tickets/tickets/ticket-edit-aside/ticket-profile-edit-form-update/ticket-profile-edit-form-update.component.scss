@@ -200,13 +200,13 @@
 
 .ticket-edit-aside-bottom-part-users-attack {
     width: 100%;
-    /deep/ app-add-assigned-user {
+    ::ng-deep app-add-assigned-user {
         margin-right: 5px;
         margin-top: 5px;
         width: 100%;
     }
 
-    /deep/ .ticket-edit-user-tags {
+    ::ng-deep .ticket-edit-user-tags {
         padding: 0;
     }
 

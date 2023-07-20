@@ -26,7 +26,7 @@ pre {
         height: 4px;
     }
 }
-/deep/ .products-table__category, /deep/ .products-table__tac, /deep/ .products-table__gl {
+::ng-deep .products-table__category, ::ng-deep .products-table__tac, ::ng-deep .products-table__gl {
 
         input {
         padding: 4px 24px 4px 8px !important;
@@ -37,7 +37,7 @@ pre {
 
     }
 }
-/deep/ .products-table__tac {
+::ng-deep .products-table__tac {
     .new-taxes-area {
         margin-top: 0px !important;
     }
@@ -63,7 +63,7 @@ pre {
         }
     }
 }
-/deep/ .products-table__gl {
+::ng-deep .products-table__gl {
     input {
             &::-webkit-input-placeholder {
                 color: $gray-600--old !important;

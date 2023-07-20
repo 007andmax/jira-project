@@ -90,7 +90,7 @@
     }
   }
 
-  /deep/ .dashboard-datepicker__wrap {
+  ::ng-deep .dashboard-datepicker__wrap {
     input {
       border-color: transparent;
       box-shadow: unset;

@@ -86,7 +86,7 @@
     visibility: visible;
   }
 
-  /deep/ .date-picker input{
+  ::ng-deep .date-picker input{
     width: 146px;
 
     @media (max-width: 767px) {

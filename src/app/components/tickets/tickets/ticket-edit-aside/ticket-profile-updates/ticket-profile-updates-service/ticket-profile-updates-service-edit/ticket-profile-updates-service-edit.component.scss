@@ -160,13 +160,13 @@
     margin-bottom: -20px;
   }
 
-  /deep/ app-services-list {
+  ::ng-deep app-services-list {
     width: 234px;
     margin-right: 8px;
   }
 }
 
-/deep/ .divider-point {
+::ng-deep .divider-point {
   width: 4px;
   height: 4px;
   background-color: $gray-600--old;
@@ -193,7 +193,7 @@
     min-width: 24px;
   }
 
-  /deep/ .start-end-timer {
+  ::ng-deep .start-end-timer {
     .start, .end {
       font-size: 13px;
     }
@@ -224,7 +224,7 @@
     }
   }
 
-  /deep/ div.ticket-updates__service-duration{
+  ::ng-deep div.ticket-updates__service-duration{
     border: solid 1px $gray-500--old;
     border-radius: 3px;
     height: 40px;

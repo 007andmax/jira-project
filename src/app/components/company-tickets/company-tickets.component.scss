@@ -1,6 +1,6 @@
 @import "./src/assets/styles/variable";
 
-/deep/ .company-tickets-table {
+::ng-deep .company-tickets-table {
   th {
     white-space: nowrap;
   }
@@ -24,7 +24,7 @@ app-tickets-table-item {
   top: auto;
 }
 
-/deep/.main-container {
+::ng-deep.main-container {
   background-color: $background;
 }
 
@@ -32,7 +32,7 @@ app-tickets-table-item {
   margin-top: 32px;
 }
 
-/deep/ .company-tickets-table {
+::ng-deep .company-tickets-table {
   &__requested-by {
     max-width: 166px;
     width: 166px;
@@ -67,7 +67,7 @@ app-tickets-table-item {
 }
 
 @media (min-width: 1920px) {
-  /deep/ .company-tickets-table {
+  ::ng-deep .company-tickets-table {
     &__requested-by {
       max-width: 300px;
       width: 300px;

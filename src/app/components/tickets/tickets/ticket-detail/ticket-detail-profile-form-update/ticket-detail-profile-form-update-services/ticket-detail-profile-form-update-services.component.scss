@@ -106,7 +106,7 @@
           color: $gray-400;
         }
     }
-    /deep/ .date-picker {
+    ::ng-deep .date-picker {
       margin-right: 0;
       position: relative;
       &:before {
@@ -134,19 +134,19 @@
     }
 }
 
-/deep/ .service-item__first-line app-ticket-profile-updates-service-duration {
+::ng-deep .service-item__first-line app-ticket-profile-updates-service-duration {
   width: 50%;
 }
-/deep/ .service-item__first-line app-date-picker {
+::ng-deep .service-item__first-line app-date-picker {
   width: 50%;
 }
-/deep/ ticket-detail-profile-form-update-header {
+::ng-deep ticket-detail-profile-form-update-header {
   .qt-button {
     padding-left: 8px;
     padding-right: 8px;
   }
 }
-/deep/ app-ticket-profile-updates-service-timepicker {
+::ng-deep app-ticket-profile-updates-service-timepicker {
   width: 100%;
   .start-end-timer__label {
     width: 100%;
@@ -165,8 +165,8 @@
   }
 }
 
-/deep/ .ui-timepicker-wrapper.ui-timepicker-with-duration,
-/deep/ .ui-timepicker-wrapper.ui-timepicker-positioned-top {
+::ng-deep .ui-timepicker-wrapper.ui-timepicker-with-duration,
+::ng-deep .ui-timepicker-wrapper.ui-timepicker-positioned-top {
   width: 281px;
   min-height: 156px;
   background: $white;

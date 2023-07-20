@@ -112,14 +112,14 @@
     cursor: pointer;
 }
 
-/deep/ .left-panel-closed {
+::ng-deep .left-panel-closed {
     .left-panel-ng2 {
         left: -164px;
     }
 }
 
 // hide old left panel
-/deep/ .left-panel-full {
+::ng-deep .left-panel-full {
     /* display: none !important;*/
 }
 

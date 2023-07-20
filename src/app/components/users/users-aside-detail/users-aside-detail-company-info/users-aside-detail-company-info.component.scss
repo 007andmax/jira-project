@@ -40,7 +40,7 @@
           margin-bottom: 16px;
         }
 
-        /deep/ .qt-dropdown-input {
+        ::ng-deep .qt-dropdown-input {
           background-color: transparent;
         }
     }

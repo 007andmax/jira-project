@@ -1,14 +1,14 @@
 @import './src/assets/styles/variable';
 
-/deep/.date-picker {
+::ng-deep.date-picker {
     overflow-x: visible;
   }
 
-/deep/.report-menu .dropdown-height .dropdown-menu {
+::ng-deep.report-menu .dropdown-height .dropdown-menu {
    max-height: 190px !important;
 }
 
-/deep/.dropdown-button  {
+::ng-deep.dropdown-button  {
   button {
     outline: none;
     padding: 0 40px 0 10px;

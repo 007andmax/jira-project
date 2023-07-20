@@ -46,12 +46,12 @@
     display: block;
   }
   margin: -8px -8px 8px -8px;
-  /deep/.mat-form-field-infix {
+  ::ng-deep.mat-form-field-infix {
     overflow: auto;
     border: none;
     border-radius: 0;
   }
-  /deep/.mat-chip-list-wrapper {
+  ::ng-deep.mat-chip-list-wrapper {
     width: fit-content;
     margin: 0;
     flex-wrap: unset;

@@ -67,7 +67,7 @@
     height: 16px !important;
 }
 
-/deep/ .cps-block {
+::ng-deep .cps-block {
     .support-item-menu,
     .support-timeline-status {
         width: calc(100% - 32px);

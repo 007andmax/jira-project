@@ -3,7 +3,7 @@
 .no-valid {
     border: 1px solid $error !important;
 }
-/deep/.qt-dropdown {
+::ng-deep.qt-dropdown {
   position: relative;
   &.with-placeholder {
     height: 40px;

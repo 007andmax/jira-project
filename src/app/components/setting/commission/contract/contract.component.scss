@@ -13,12 +13,12 @@
     flex: 0 0 56px;
   }
 }
-/deep/ .block-time-contract, /deep/ .per-user-device-contract{
+::ng-deep .block-time-contract, ::ng-deep .per-user-device-contract{
   ngb-tooltip-window .tooltip-inner {
     max-width: 400px !important;
   }
 }
-/deep/ .other-contracts {
+::ng-deep .other-contracts {
   ngb-tooltip-window .tooltip-inner {
     max-width: 450px !important;
   }

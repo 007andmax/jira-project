@@ -275,7 +275,7 @@
                 right: 0;
             }
         }
-        /deep/ .input-group {
+        ::ng-deep .input-group {
           //width: 131px; // TODO check this style
           padding: 1px 12px;
           border: 1px solid $gray-200;
@@ -302,7 +302,7 @@
           }
         }
 
-        /deep/ .device-user {
+        ::ng-deep .device-user {
           margin-bottom: 0 !important;
           border: 1px solid $gray-200;
           box-shadow: 0 1px 2px rgba(16, 24, 40, .05);
@@ -329,7 +329,7 @@
     }
 }
 
-/deep/ .detail-ticket-txt {
+::ng-deep .detail-ticket-txt {
   display: none;
 }
 

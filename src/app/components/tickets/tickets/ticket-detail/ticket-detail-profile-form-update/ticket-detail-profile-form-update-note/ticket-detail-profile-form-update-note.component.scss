@@ -181,7 +181,7 @@
     color: $gray-500;
     margin-left: 2px;
   }
-  /deep/ .progress-cont {
+  ::ng-deep .progress-cont {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -316,7 +316,7 @@
   width: 12px;
   height: 12px;
 }
-///deep/ .editable-description { // TODO check this style
+//::ng-deep .editable-description { // TODO check this style
 //  border-radius: 0;
 //  border: unset;
 //}

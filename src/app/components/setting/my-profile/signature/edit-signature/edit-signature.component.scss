@@ -4,11 +4,11 @@
   width: 643px;
 }
 
-/deep/ .signature-modal .angular-editor-button[title="Insert Image"],/deep/ .signature-modal .angular-editor-toolbar-set:nth-child(11) {
+::ng-deep .signature-modal .angular-editor-button[title="Insert Image"],::ng-deep .signature-modal .angular-editor-toolbar-set:nth-child(11) {
   display: inline-block !important;
 }
 
-/deep/ .signature-modal .angular-editor .angular-editor-wrapper .angular-editor-textarea {
+::ng-deep .signature-modal .angular-editor .angular-editor-wrapper .angular-editor-textarea {
   min-height: 208px !important;
   padding: 6px 15px !important;
   max-height: 208px;

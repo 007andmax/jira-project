@@ -10,7 +10,7 @@
 
 .qt-aside-modern.recurring-tickets-content__modal .qt-aside-modern__footer {
   height: 90px;
-  /deep/.device-user {
+  ::ng-deep.device-user {
     margin-top: 5px !important;
   }
 }

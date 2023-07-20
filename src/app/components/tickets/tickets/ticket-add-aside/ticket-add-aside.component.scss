@@ -90,7 +90,7 @@
     display: flex;
   }
 
-  /deep/ #dropdownTechuser {
+  ::ng-deep #dropdownTechuser {
     max-height: 24px;
     max-width: 24px;
     border-radius: 50%;
@@ -110,7 +110,7 @@
     cursor: pointer;
   }
 
-  /deep/ .select-wrapper.dropdown-assign-ticket {
+  ::ng-deep .select-wrapper.dropdown-assign-ticket {
     right: unset;
     bottom: 45px;
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.3);

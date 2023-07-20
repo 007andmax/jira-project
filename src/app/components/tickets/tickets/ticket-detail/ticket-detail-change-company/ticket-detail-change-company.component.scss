@@ -1,6 +1,6 @@
 @import './src/assets/styles/variable';
 
-/deep/ .ticket-detail-page-content__sidebar-preview {
+::ng-deep .ticket-detail-page-content__sidebar-preview {
   .qt-input-block {
     margin-bottom: 16px;
     padding-bottom: 16px;

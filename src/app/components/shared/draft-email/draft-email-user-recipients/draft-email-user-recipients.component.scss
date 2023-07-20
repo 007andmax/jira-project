@@ -9,7 +9,7 @@
 .dropdown-recipients-body {
     cursor: pointer;
 }
-/deep/.dropdown-recipients-body .mat-chip {
+::ng-deep.dropdown-recipients-body .mat-chip {
     cursor: default;
 }
 .user-name {

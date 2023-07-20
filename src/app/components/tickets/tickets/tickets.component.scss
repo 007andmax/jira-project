@@ -1,6 +1,6 @@
 @import './src/assets/styles/variable';
 
-/deep/.main-container {
+::ng-deep.main-container {
   background-color: $background;
 }
 
@@ -11,7 +11,7 @@
 
 
 
-/deep/ .ticket-table {
+::ng-deep .ticket-table {
   //&__requested-by {
   //  max-width: 166px;
   //  width: 166px;
@@ -47,7 +47,7 @@
 }
 
 @media (min-width: 1920px) {
-  /deep/ .ticket-table {
+  ::ng-deep .ticket-table {
    // &__requested-by {
    //   max-width: 300px;
    //   width: 300px;

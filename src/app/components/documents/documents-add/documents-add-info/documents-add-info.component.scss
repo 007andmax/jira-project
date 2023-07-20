@@ -177,7 +177,7 @@
   margin: 0px 0px 0px 4px;
   cursor: pointer;
 }
-/deep/.documents-create__col {
+::ng-deep.documents-create__col {
   .show {
     opacity: 1;
   }

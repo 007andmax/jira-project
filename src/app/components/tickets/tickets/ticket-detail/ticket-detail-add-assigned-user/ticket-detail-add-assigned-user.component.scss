@@ -1,6 +1,6 @@
 @import "./src/assets/styles/variable";
 
-/deep/ .ticket-detail-page-content__sidebar-preview {
+::ng-deep .ticket-detail-page-content__sidebar-preview {
   .ticket-edit-user-tags {
     width: 100%;
     padding: 0;
@@ -52,7 +52,7 @@
     }
   }
 }
-/deep/ .assigned-user-ticket-detail {
+::ng-deep .assigned-user-ticket-detail {
  .mat-form-field-label {
   display: none !important;
  }

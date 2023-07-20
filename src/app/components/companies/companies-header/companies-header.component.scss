@@ -30,26 +30,26 @@ companies-filter {
     display: block;
   }
   margin: -8px -8px 8px -8px;
-  /deep/.mat-form-field-infix {
+  ::ng-deep.mat-form-field-infix {
     overflow: auto;
     border: none;
     border-radius: 0;
   }
-  /deep/ .mat-form-field {
+  ::ng-deep .mat-form-field {
     width: 100%;
     background: $white;
   }
-  /deep/ .mat-form-field-flex {
+  ::ng-deep .mat-form-field-flex {
     padding-left: 8px;
   }
-  /deep/ .mat-form-field-underline,
+  ::ng-deep .mat-form-field-underline,
   .mat-form-field-subscript-wrapper {
     display: none;
   }
-  /deep/ .mat-form-field-wrapper {
+  ::ng-deep .mat-form-field-wrapper {
     padding-bottom: 0;
   }
-  /deep/.mat-chip-list-wrapper {
+  ::ng-deep.mat-chip-list-wrapper {
     width: fit-content;
     margin: 0;
     flex-wrap: unset;

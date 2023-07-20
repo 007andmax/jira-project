@@ -838,13 +838,13 @@ span.qt-input-search:before {
 }
 
 
-/deep/.date-picker {
+::ng-deep.date-picker {
   .icn-calendar-light {
     display: none;
   }
 }
 
-/deep/.date-picker:hover {
+::ng-deep.date-picker:hover {
   .icn-calendar-light {
     display: inline-block;
   }
@@ -869,13 +869,13 @@ span.qt-input-search:before {
 .ads-os-name {
   width: 100%;
 }
-/deep/ .ads-os-name > input {
+::ng-deep .ads-os-name > input {
   padding: 0 0 0 15px !important;
 }
 
 .computerModel
 {
-  /deep/ .qt-dropdown{
+  ::ng-deep .qt-dropdown{
     input{
       border: 0px !important;
       padding: 10px 4px!important;
@@ -894,7 +894,7 @@ span.qt-input-search:before {
 
 
 .computerModel {
-  /deep/ .qt-dropdown:hover{
+  ::ng-deep .qt-dropdown:hover{
     input{
       border: 1px #c5cdd5 !important;
       padding: 10px 4px!important;
@@ -910,7 +910,7 @@ span.qt-input-search:before {
 }
 
 .computerManufacture{
-  /deep/ .qt-dropdown{
+  ::ng-deep .qt-dropdown{
     input{
       border: 0px !important;
       padding: 10px 4px!important;
@@ -928,7 +928,7 @@ span.qt-input-search:before {
 }
 
 .computerManufacture{
-  /deep/ .qt-dropdown:hover{
+  ::ng-deep .qt-dropdown:hover{
     input{
       border: 1px #c5cdd5 !important;
       padding: 10px 4px!important;

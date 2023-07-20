@@ -226,8 +226,8 @@
     }
 
 }
-/deep/ app-ticket-profile-updates-product,
-/deep/ app-ticket-profile-updates-service {
+::ng-deep app-ticket-profile-updates-product,
+::ng-deep app-ticket-profile-updates-service {
   .ticket-updates__update-info {
     font-size: 12px;
     @media (min-width: 768px) {

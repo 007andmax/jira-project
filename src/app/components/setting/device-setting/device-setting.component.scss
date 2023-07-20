@@ -88,7 +88,7 @@
     text-align: left !important;
 }
 .add-category-container {
-    /deep/ .add-tax-dropdown {
+    ::ng-deep .add-tax-dropdown {
         right: 0px;
         &:after {
             right: 14px;

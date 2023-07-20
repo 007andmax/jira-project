@@ -237,7 +237,7 @@
     width: 79px;
   }
 
-  /deep/ .select-product__dropdown {
+  ::ng-deep .select-product__dropdown {
     min-width: 450px;
   }
 }

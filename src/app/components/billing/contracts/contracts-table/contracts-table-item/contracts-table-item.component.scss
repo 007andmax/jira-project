@@ -11,7 +11,7 @@ tr {
     z-index: 2;
   }
 }
-/deep/.tooltip-contract-list {
+::ng-deep.tooltip-contract-list {
   .tooltip-inner {
     max-width: 300px !important;
   }

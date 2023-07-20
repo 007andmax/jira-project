@@ -53,7 +53,7 @@
   text-align: left !important;
 }
 .add-category-container {
-  /deep/ .add-tax-dropdown {
+  ::ng-deep .add-tax-dropdown {
     right: 0px;
     &:after {
       right: 14px;
@@ -88,7 +88,7 @@
 }
 add-marketing-subscription-type {
   display: contents;
-  /deep/ .add-category-container {
+  ::ng-deep .add-category-container {
     td {
       background-color: #f4fbff !important;
     }

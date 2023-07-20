@@ -61,7 +61,7 @@
   height: calc(100% - 56px);
 
   .user-detail__row-info {
-    /deep/ input {
+    ::ng-deep input {
       &:disabled {
         background-color: $white;
       }
@@ -130,7 +130,7 @@ users-aside-detail-messages {
   }
 }
 .user-detail__row-info {
-  /deep/app-company-tags {
+  ::ng-deepapp-company-tags {
     .select-wrapper {
       width: 325px;
     }

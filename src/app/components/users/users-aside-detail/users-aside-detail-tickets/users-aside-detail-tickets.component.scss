@@ -1,7 +1,7 @@
 @import "./src/assets/styles/variable";
 @import "./src/assets/styles/fonts";
 
-/deep/ .ticket-table {
+::ng-deep .ticket-table {
     th {
         white-space: nowrap;
     }

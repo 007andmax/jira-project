@@ -319,17 +319,17 @@
         }
     }
 
-    // /deep/
+    // ::ng-deep
 }
 
-/deep/ .tech-users-container .add-user {
+::ng-deep .tech-users-container .add-user {
   width: 16px;
   height: 16px;
   background: url('/assets/img/icons/assign-user-plus.svg') no-repeat center / contain;
   margin-right: 6px;
 }
 
-/deep/ .tech-users-container .device-user {
+::ng-deep .tech-users-container .device-user {
   margin-bottom: 0 !important;
   border: 1px solid $gray-200;
   box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
@@ -341,7 +341,7 @@
   padding: 5px 12px;
 }
 
-/deep/ .ticket-updates__ticket-info-container .input-group {
+::ng-deep .ticket-updates__ticket-info-container .input-group {
   //width: 134px; // TODO check this style
   padding: 1px 12px;
   border: 1px solid $gray-200;
@@ -352,13 +352,13 @@
     display: none;
   }
 }
-/deep/ app-date-picker .ticket-updates__ticket-info-container .icon__calendar {
+::ng-deep app-date-picker .ticket-updates__ticket-info-container .icon__calendar {
   display: inline-block;
   position: static;
   margin: 0;
   transform: translateY(3px);
 }
-/deep/ .ticket-updates__ticket-info-container .qt-input-block__input {
+::ng-deep .ticket-updates__ticket-info-container .qt-input-block__input {
   width: 85px;
   padding: 0;
   border: unset;
@@ -370,7 +370,7 @@
   line-height: 16px;
   color: $gray-500;
 }
-/deep/ .ticket-updates__tag-completed {
+::ng-deep .ticket-updates__tag-completed {
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;
@@ -383,7 +383,7 @@
 .ticket-updates-tag__modern-row {
   min-height: 36px;
 }
-/deep/ .ticket-updates__ticket-info-container app-date-picker .icon__calendar {
+::ng-deep .ticket-updates__ticket-info-container app-date-picker .icon__calendar {
   display: inline-block;
   position: static;
   margin: 0;

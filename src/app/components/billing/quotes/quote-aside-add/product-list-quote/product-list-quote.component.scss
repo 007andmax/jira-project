@@ -75,7 +75,7 @@
       cursor: pointer;
     }
 
-    /deep/ .card {
+    ::ng-deep .card {
       &.opened-card {
         padding: 0 24px 16px 24px;
         background-color: $background;

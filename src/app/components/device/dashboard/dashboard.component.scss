@@ -1137,7 +1137,7 @@ ngb-tabset {
 // modal-popup end
 
 .computerManufacturer{
-    /deep/ .light-dropdown {
+    ::ng-deep .light-dropdown {
         input{
             border: 0px !important;
         }
@@ -1151,7 +1151,7 @@ ngb-tabset {
 }
 
 .computerManufacturer{
-    /deep/ .light-dropdown:hover{
+    ::ng-deep .light-dropdown:hover{
       input{
         border: 1px solid #c5cdd5 !important;
       }
@@ -1166,7 +1166,7 @@ ngb-tabset {
 
 
  .computerModel{
-    /deep/ .light-dropdown {
+    ::ng-deep .light-dropdown {
         input{
             border: 0px !important;
         }
@@ -1180,7 +1180,7 @@ ngb-tabset {
  }
 
  .computerModel{
-    /deep/ .light-dropdown:hover{
+    ::ng-deep .light-dropdown:hover{
       input{
         border: 1px solid #c5cdd5 !important;
       }

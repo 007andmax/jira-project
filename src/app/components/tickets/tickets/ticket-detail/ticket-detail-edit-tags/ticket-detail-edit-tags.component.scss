@@ -7,12 +7,12 @@
     left: 56px !important;
     width: 270px;
 }
-/deep/ .ticket-tags-container {
+::ng-deep .ticket-tags-container {
   .dropdown-item {
     @include dropdown-item;
   }
 }
-/deep/ .ticket-edit-tags {
+::ng-deep .ticket-edit-tags {
     padding: 0;
 
     input.mat-chip-input {

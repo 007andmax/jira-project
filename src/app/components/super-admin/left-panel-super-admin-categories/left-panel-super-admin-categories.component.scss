@@ -26,7 +26,7 @@
         .icon__move-light {
             opacity: 1;
         }
-        /deep/.icon__category-more {
+        ::ng-deep.icon__category-more {
             opacity: 1;
         }
     }
@@ -60,7 +60,7 @@
     }
 }
 .category-item-category-body {
-    /deep/.icon__category-more {
+    ::ng-deep.icon__category-more {
         opacity: 0;
     }
 }

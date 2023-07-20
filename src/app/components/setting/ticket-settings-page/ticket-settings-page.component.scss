@@ -1,7 +1,7 @@
 @import "./src/assets/styles/variable";
 
 .page-insider {
-    /deep/ .clear-padding {
+    ::ng-deep .clear-padding {
         .tab-content {
             padding: 0px !important;
         }

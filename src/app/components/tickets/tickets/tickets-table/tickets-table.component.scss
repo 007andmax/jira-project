@@ -1,6 +1,6 @@
 @import "./src/assets/styles/variable";
 
-/deep/ .ticket-table {
+::ng-deep .ticket-table {
   th {
     white-space: nowrap;
   }

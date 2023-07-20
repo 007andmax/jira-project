@@ -127,7 +127,7 @@
     width: 794px;
     margin: 0px auto;
 }
-/deep/document-preview {
+::ng-deepdocument-preview {
     table {
         td {
             min-width: 5px;

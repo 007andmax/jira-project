@@ -20,7 +20,7 @@
         flex-direction: column;
     }
 
-    /deep/.ng-sidebar {
+    ::ng-deep.ng-sidebar {
         width: auto;
         display: flex;
     }
@@ -31,7 +31,7 @@
     //    position: relative;
     //    border-left: 1px solid $background;
     //
-    //    /deep/ .mat-form-field-label {
+    //    ::ng-deep .mat-form-field-label {
     //        padding-left: 24px;
     //        //line-height: 1.5;
     //        color: $gray-900;
@@ -40,12 +40,12 @@
     //        font-weight: 400;
     //    }
     //
-    //    /deep/ .mat-form-field-label-wrapper {
+    //    ::ng-deep .mat-form-field-label-wrapper {
     //        height: 26px;
     //        top: -21px;
     //    }
     //
-    //    /deep/ .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    //    ::ng-deep .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
     //        // line-height: 1;
     //        // padding-left: 38px;
     //        padding-left: 28px;
@@ -847,7 +847,7 @@
     }
 }
 
-/deep/ app-ticket-profile-form-update,
+::ng-deep app-ticket-profile-form-update,
 ticket-profile-edit-form-update {
     position: relative;
     flex: auto;
@@ -872,7 +872,7 @@ ticket-profile-edit-form-update {
     }
 }
 
-/deep/ .cps-block {
+::ng-deep .cps-block {
     box-shadow: 0px -5px 9px -6px rgba(0, 0, 0, 0.15);
 }
 

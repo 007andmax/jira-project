@@ -7,7 +7,7 @@
         width: 100%;
     }
 }
-/deep/ ticket-detail-linked-agents .qt-input-block  .device-user {
+::ng-deep ticket-detail-linked-agents .qt-input-block  .device-user {
   &.has-placeholder:before {
     content: unset;
   }

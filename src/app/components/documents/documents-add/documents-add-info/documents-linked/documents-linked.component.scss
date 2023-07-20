@@ -127,7 +127,7 @@
     margin: 0 0 8px 4px;
     cursor: pointer;
 }
-/deep/.documents-linkeds-body {
+::ng-deep.documents-linkeds-body {
     .mat-form-field-wrapper,
     mat-form-field {
         margin-top: 0px !important;

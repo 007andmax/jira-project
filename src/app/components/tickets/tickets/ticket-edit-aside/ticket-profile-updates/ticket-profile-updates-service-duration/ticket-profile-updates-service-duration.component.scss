@@ -55,7 +55,7 @@
   justify-content: center;
   align-items: center;
 }
-/deep/ .durationoverlay__content {
+::ng-deep .durationoverlay__content {
   max-width: 180px;
   min-width: 180px;
   border: solid 1px $gray-400--old;
@@ -176,7 +176,7 @@
   }
 }
 
-/deep/ app-ticket-profile-updates-service-duration {
+::ng-deep app-ticket-profile-updates-service-duration {
   margin-right: 8px;
   width: 105px;
   @media (max-width: 767px) {
@@ -200,7 +200,7 @@
   }
 }
 
-/deep/ duration-picker {
+::ng-deep duration-picker {
   width: 100%;
   background: $white;
   height: 40px;
@@ -217,7 +217,7 @@
   }
 }
 
-/deep/ .durationinput-group {
+::ng-deep .durationinput-group {
   .durationinput-group__bundle {
     padding: 0;
   }

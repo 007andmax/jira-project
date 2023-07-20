@@ -11,8 +11,8 @@
     padding: 8px 12px;
   }
 
-  /deep/ .report-caret-icon,
-  /deep/ .icn-remove-old {
+  ::ng-deep .report-caret-icon,
+  ::ng-deep .icn-remove-old {
     width: 16px;
     height: 16px;
     right: 12px;

@@ -211,7 +211,7 @@
     margin-right: 32px;
   }
 }
-/deep/ app-ticket-profile-updates-product-item {
+::ng-deep app-ticket-profile-updates-product-item {
   .ticket-updates__ticket-info-container {
     @media (max-width: 767px) {
       position: relative;

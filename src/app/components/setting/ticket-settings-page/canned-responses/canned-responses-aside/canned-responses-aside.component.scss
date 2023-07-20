@@ -8,7 +8,7 @@
     color: $gray-800--old;
     font-weight: 500;
 }
-/deep/ .--note-error {
+::ng-deep .--note-error {
     .angular-editor-textarea,.angular-editor-toolbar {
         border: 1px solid #ff5263 !important;
     }

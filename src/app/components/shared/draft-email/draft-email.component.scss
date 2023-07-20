@@ -1,27 +1,27 @@
 @import "./src/assets/styles/variable";
 
-/deep/ .angular-editor-button[title="Undo"],
-/deep/ .angular-editor-button[title="Redo"],
-/deep/ .angular-editor-button[title="Strikethrough"],
-/deep/ .angular-editor-button[title="Subscript"],
-/deep/ .angular-editor-button[title="Superscript"],
-/deep/ .angular-editor-button[title="Justify Full"],
-/deep/ .angular-editor-button[title="Indent"],
-/deep/ .angular-editor-button[title="Outdent"],
-/deep/ .select-heading[title="Formatting"],
-/deep/ .angular-editor-button[title="Text Color"],
-/deep/ .angular-editor-button[title="Background Color"],
-/deep/ .select-custom-style[title="Custom Style"],
-/deep/ .angular-editor-button[title="Insert Link"],
-/deep/ .angular-editor-button[title="Unlink"],
-/deep/ .angular-editor-button[title="Insert Image"],
-/deep/ .angular-editor-button[title="Insert Video"],
-/deep/ .angular-editor-button[title="Horizontal Line"],
-/deep/ .angular-editor-button[title="HTML Code"],
-/deep/ .block-label {
+::ng-deep .angular-editor-button[title="Undo"],
+::ng-deep .angular-editor-button[title="Redo"],
+::ng-deep .angular-editor-button[title="Strikethrough"],
+::ng-deep .angular-editor-button[title="Subscript"],
+::ng-deep .angular-editor-button[title="Superscript"],
+::ng-deep .angular-editor-button[title="Justify Full"],
+::ng-deep .angular-editor-button[title="Indent"],
+::ng-deep .angular-editor-button[title="Outdent"],
+::ng-deep .select-heading[title="Formatting"],
+::ng-deep .angular-editor-button[title="Text Color"],
+::ng-deep .angular-editor-button[title="Background Color"],
+::ng-deep .select-custom-style[title="Custom Style"],
+::ng-deep .angular-editor-button[title="Insert Link"],
+::ng-deep .angular-editor-button[title="Unlink"],
+::ng-deep .angular-editor-button[title="Insert Image"],
+::ng-deep .angular-editor-button[title="Insert Video"],
+::ng-deep .angular-editor-button[title="Horizontal Line"],
+::ng-deep .angular-editor-button[title="HTML Code"],
+::ng-deep .block-label {
   display: none;
 }
-/deep/ .angular-editor-toolbar-set {
+::ng-deep .angular-editor-toolbar-set {
   &:nth-child(1),
   &:nth-child(4),
   &:nth-child(6),
@@ -33,25 +33,25 @@
   }
 }
 
-/deep/ .angular-editor {
+::ng-deep .angular-editor {
   border-radius: 0px !important;
 }
 
-/deep/ .angular-editor-placeholder {
+::ng-deep .angular-editor-placeholder {
   font-size: 13px;
   padding: 16px 15px;
 }
 
-/deep/ .angular-editor-textarea {
+::ng-deep .angular-editor-textarea {
   border-color: $gray-500--old;
   padding: 16px 15px !important;
   min-height: 175px;
 }
 
-/deep/ .angular-editor-toolbar-set .fa {
+::ng-deep .angular-editor-toolbar-set .fa {
   color: $gray-800--old;
 }
-/deep/ .angular-editor-toolbar {
+::ng-deep .angular-editor-toolbar {
   padding-left: 4px !important;
   padding-right: 4px !important;
   border-bottom-left-radius: 4px;
@@ -63,7 +63,7 @@
     flex-wrap: wrap;
   }
 }
-/deep/ .draft-email-container {
+::ng-deep .draft-email-container {
   height: 100%;
   flex: 100%;
   max-height: calc(100% - 190px);

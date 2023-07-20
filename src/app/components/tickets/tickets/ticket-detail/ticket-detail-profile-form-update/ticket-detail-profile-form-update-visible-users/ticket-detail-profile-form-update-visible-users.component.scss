@@ -1,6 +1,6 @@
 @import "./src/assets/styles/variable";
 
-/deep/ .button-globe {
+::ng-deep .button-globe {
   width: 24px;
   height: 24px;
   background: $gray-100;
@@ -10,7 +10,7 @@
   justify-content: center;
 }
 
-/deep/ .visible-to-all-user-dropdown {
+::ng-deep .visible-to-all-user-dropdown {
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;

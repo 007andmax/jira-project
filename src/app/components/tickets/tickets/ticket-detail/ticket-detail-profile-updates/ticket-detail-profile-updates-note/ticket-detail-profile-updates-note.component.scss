@@ -195,7 +195,7 @@
     }
 }
 
-/deep/ ticket-detail-profile-updates-note {
+::ng-deep ticket-detail-profile-updates-note {
   &:hover {
     .ticket-updates__update-block .qt-button-square-wrap {
       display: inline-flex;

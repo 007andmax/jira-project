@@ -12,7 +12,7 @@
     display: flex !important;
 }
 
-/deep/ .ticket-edit-user-tags {
+::ng-deep .ticket-edit-user-tags {
   width: 100%;
   padding: 0 32px;
   font-size: 12px;
@@ -90,7 +90,7 @@
 
 }
 
-/deep/ .autocomplete-user-tags {
+::ng-deep .autocomplete-user-tags {
     width: 480px;
     max-height: 292px;
     border-radius: 8px;

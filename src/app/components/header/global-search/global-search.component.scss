@@ -139,10 +139,10 @@
   }
 }
 
-/deep/.invoice-number{
+::ng-deep.invoice-number{
    color: $primary-1;
 }
-/deep/.invoice-circle {
+::ng-deep.invoice-circle {
   display: block;
   width: 4px;
   height: 4px;

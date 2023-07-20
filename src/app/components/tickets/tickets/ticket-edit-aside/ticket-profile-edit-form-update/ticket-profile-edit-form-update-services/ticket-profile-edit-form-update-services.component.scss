@@ -69,7 +69,7 @@
         &.device {
             width: 243px;
             padding: 0;
-            /deep/ .dropdown-toggle {
+            ::ng-deep .dropdown-toggle {
                 width: 100%;
                 background: $white;
                 border: none;
@@ -92,7 +92,7 @@
         visibility: visible;
     }
 
-    /deep/ .date-picker input {
+    ::ng-deep .date-picker input {
         height: 40px;
         width: 146px;
         border: solid 1px $gray-500--old;

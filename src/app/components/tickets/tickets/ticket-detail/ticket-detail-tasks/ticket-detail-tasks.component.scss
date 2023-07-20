@@ -23,7 +23,7 @@
 
   &.--selected {
     background-color: $gray-50;
-    /deep/ .detail-ticket-txt {
+    ::ng-deep .detail-ticket-txt {
       color: #98A2B3 !important;
     }
 
@@ -43,11 +43,11 @@
     .ticket-status-table__status:not(.--parse-status) input {
       color: $gray-400;
     }
-    /deep/ .detail-ticket-txt {
+    ::ng-deep .detail-ticket-txt {
       color: $gray-400;
     }
   }
-  /deep/ .detail-ticket-txt {
+  ::ng-deep .detail-ticket-txt {
     font-weight: 400;
     font-size: 12px;
     line-height: 15px;
@@ -80,27 +80,27 @@
     align-items: center;
   }
 }
-/deep/ .date-picker {
+::ng-deep .date-picker {
   margin-right: 8px;
 }
-/deep/ .date-picker .detail-ticket-date-picker .icon__calendar {
+::ng-deep .date-picker .detail-ticket-date-picker .icon__calendar {
   right: 50%;
   transform: translate(50%, -50%);
 }
 
-/deep/ .tab-pane__table-row .date-picker .qt-input-block__input {
+::ng-deep .tab-pane__table-row .date-picker .qt-input-block__input {
   width: 28px;
   height: 28px;
   border-radius: 50%;
   color: transparent;
 }
 
-/deep/ .tab-pane__table-cell .tech-users-container .ticket-updates__photo-people {
+::ng-deep .tab-pane__table-cell .tech-users-container .ticket-updates__photo-people {
   width: 28px;
   height: 28px;
 }
 
-/deep/ .tab-pane__table-cell .tech-users-container .tech__user-icon {
+::ng-deep .tab-pane__table-cell .tech-users-container .tech__user-icon {
   width: 28px;
   height: 28px;
   border: 1px solid $gray-200;
@@ -112,17 +112,17 @@
   margin-right: 8px;
 }
 
-/deep/ .ticket-updates__delete {
+::ng-deep .ticket-updates__delete {
   -webkit-mask-size: 16px;
   mask-size: 16px;
 }
-/deep/ .icon__task-pending {
+::ng-deep .icon__task-pending {
   background-size: contain;
 }
-/deep/ .icon__active {
+::ng-deep .icon__active {
   background-size: contain;
 }
-/deep/ .tag__modern {
+::ng-deep .tag__modern {
   font-weight: 500;
   font-size: 12px;
   line-height: 15px;
@@ -130,31 +130,31 @@
   padding: 2px 6px;
   border-radius: 4px;
 }
-/deep/ .tech-users-container .tech-user-body .select-wrapper {
+::ng-deep .tech-users-container .tech-user-body .select-wrapper {
   width: 464px;
   height: 360px;
 }
-/deep/ .dropdown-assign-ticket .users-list {
+::ng-deep .dropdown-assign-ticket .users-list {
   max-width: 464px;
   max-height: 298px;
 }
-/deep/ .qt-input-search input {
+::ng-deep .qt-input-search input {
   box-shadow: unset;
 }
-/deep/ .select-wrapper .content .assign-ticket-header {
+::ng-deep .select-wrapper .content .assign-ticket-header {
   margin-bottom: 2px !important;
   padding: 0 !important;
 }
-/deep/ .qt-input-search input::placeholder {
+::ng-deep .qt-input-search input::placeholder {
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
     color: $gray-400;
 }
-/deep/ .assign-ticket .assign-ticket-content .assign-ticket-header {
+::ng-deep .assign-ticket .assign-ticket-content .assign-ticket-header {
   padding: 0;
 }
-/deep/ .ticket-updates__photo-people {
+::ng-deep .ticket-updates__photo-people {
   width: 28px;
   height: 28px;
   display: flex;
