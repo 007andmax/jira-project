@@ -133,7 +133,8 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       .pipe(
         map(data => {
           this.loading = false;
-          this.ticketTags = data[0].map(item => new ManageTag(item));
+          this.ticketTags = data[0].map(item => new ManageTag(item)).sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
+            1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
           this.setDefaultScoll();
           this.onScroll();
         })

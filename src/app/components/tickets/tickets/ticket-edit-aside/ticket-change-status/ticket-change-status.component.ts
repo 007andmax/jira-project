@@ -9,6 +9,7 @@ import { TicketStatus } from 'src/app/components/setting/ticket-settings-page/ti
 import { Subscription } from 'rxjs';
 import { StatusColor } from '../../../class/status-color';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 
 @Component({
   selector: 'app-ticket-change-status',
@@ -26,20 +27,28 @@ export class TicketChangeStatusComponent implements OnInit, OnDestroy {
     public toastrService: ToastrService,
     public appStateService: AppStateService,
     public customerPortalStateService: CustomerPortalStateService,
-    public ticketsService: TicketsService,) { }
+    public ticketsService: TicketsService,
+    private leftPanelService: LeftPanelService,) { }
 
 
   ngOnInit() {
-    this.ticketsStateService.getOnInitColor().subscribe(data => {
-      this.listColors = data;
-    })
+    if (this.ticketsStateService.getListStatusColor().length === 0) {
+      this.leftPanelService.getColors().subscribe((data: any) => {
+        this.listColors = data.map(item => {
+          return new StatusColor(item.borderColor, item.textColor);
+        })
+        this.ticketsStateService.onColorStatus(this.listColors);
+      })
+    } else {
+      this.listColors = this.ticketsStateService.getListStatusColor();
+    }
     this.ticketsStatus = this.ticketsStateService.getTicketsStatus();
     let onGetTicketsStatus = this.ticketsStateService.onGetTicketsStatus.subscribe(data => {
       this.ticketsStatus = data;
     })
     this.sub.add(onGetTicketsStatus);
   }
-  getStyleStatus(name) {
+  public getStyleStatus(name) {
     let find = this.ticketsStatus.find(item => item.name === name);
     return {
       'border-color': (this.listColors && find && this.listColors[find.color]) ? this.listColors[find.color].textColor : null,
