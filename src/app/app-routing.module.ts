@@ -351,12 +351,10 @@ const routes: Routes = [
   {
     path: ':domain/help-center',
     loadChildren: './components/super-admin-public/super-admin-public.module#SupperAdminPublicModule',
-    canActivate: [PermissionSuperAdminService]
   },
   {
     path: ':domain/help-center/:id',
     loadChildren: './components/super-admin-public/super-admin-public-category/super-admin-public-category.module#SuperAdminPublicCategoryModule',
-    canActivate: [PermissionSuperAdminService]
   },
   {
     path: ':domain/devices/reports',
