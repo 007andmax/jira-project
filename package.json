@@ -5,8 +5,8 @@
     "ng": "ng",
     "dev": "ng serve --live-reload false",
     "dev-front": "ng serve ",
-    "build": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build --configuration=dev --deploy-url=/html/",
-    "build-prod": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build --prod --configuration=production --deploy-url=/html/",
+    "build": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build --configuration=dev --base-href=/html/",
+    "build-prod": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build --prod --configuration=production --base-href=/html/",
     "test": "ng test",
     "lint": "ng lint",
     "compodoc": "npx compodoc -p src/tsconfig.app.json",
@@ -92,7 +92,8 @@
     "ts-loader": "^5.3.3",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
-    "typescript": "~3.5.3"
+    "typescript": "~3.5.3",
+    "webpack-dev-server": "^4.15.1"
   },
   "browser": {
     "crypto": false
