@@ -30,7 +30,6 @@ import { TicketProfileEditFormUpdateComponent } from './ticket-profile-edit-form
 import { AddUsersNotifyStateService } from 'src/app/services/modal/modal-add-users-notify/state/add-users-notify-state.service';
 import { USERS_TO_EDIT_TICKET } from 'src/app/const/add-users-notify';
 import { StatusColor } from '../../class/status-color';
-import { find } from 'rxjs-compat/operator/find';
 import { TicketProfileUpdatesComponent } from './ticket-profile-updates/ticket-profile-updates.component';
 import { Router } from '@angular/router';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
