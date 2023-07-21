@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TicketAddAsideComponent } from './ticket-add-aside.component';
-import { MatFormFieldModule } from '@angular/material';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.module';
 import { UploadAreaComponent } from 'src/app/components/shared/upload-area/upload-area.component';

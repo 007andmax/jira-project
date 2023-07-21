@@ -9,7 +9,8 @@ import { InventoryFilterComponent } from './inventory-header/inventory-filter/in
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DropDownModule } from '../shared/drop-down/drop-down.module';
 import { InventoryAddCategoryComponent } from './inventory-add-category/inventory-add-category.component';
-import { MatSelectModule, MatChipsModule } from '@angular/material';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatSelectModule } from '@angular/material/select';
 import { InventoryRoutingModule } from './inventory-routing.module';
 import { ContractsEditModule } from '../billing/contracts/contracts-edit/contracts-edit.module';
 import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-number.module';

@@ -10,7 +10,7 @@ import { InvoiceSettingsComponent } from './invoice-settings/invoice-settings.co
 import { QuotesSettingsComponent } from './quotes-settings/quotes-settings.component';
 import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgxMaskModule } from 'ngx-mask';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';

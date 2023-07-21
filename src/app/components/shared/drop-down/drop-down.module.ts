@@ -7,7 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DropDownComponent } from './drop-down.component';
 import { AppComponent } from 'src/app/app.component';
-import { MatChipsModule, MatSelectModule } from '@angular/material';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatSelectModule } from '@angular/material/select';
 @NgModule({
     declarations: [
         DropDownComponent

@@ -5,7 +5,8 @@ import { DocumentsAddHeaderModule } from '../documents-add/documents-add-header/
 import { DocumentsAddBodyModule } from '../documents-add/documents-add-body/documents-add-body.module';
 import { DocumentsAddFooterModule } from '../documents-add/documents-add-footer/documents-add-footer.module';
 import { DocumentsEditInfoComponent } from './documents-edit-info/documents-edit-info.component';
-import { MatSelectModule, MatChipsModule } from '@angular/material';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';

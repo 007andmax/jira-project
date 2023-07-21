@@ -6,7 +6,9 @@ import { PasswoordManagerFiltersComponent } from './passwoord-manager-filters/pa
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { PasswordManagerAddCategoryComponent } from '../password-manager-add-category/password-manager-add-category.component';
 import { PasswoordManagerDevicesUsersComponent } from '../passwoord-manager-devices-users/passwoord-manager-devices-users.component';
-import { MatSelectModule, MatChipsModule, MatIconModule } from '@angular/material';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { PasswordManagerAddCategoryModule } from '../password-manager-add-category/password-manager-add-category.module';

@@ -10,7 +10,8 @@ import { DatePickerModule } from 'src/app/components/shared/date-picker/date-pic
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.module';
-import { MatChipsModule, MatSelectModule } from '@angular/material';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatSelectModule } from '@angular/material/select';
 
 
 

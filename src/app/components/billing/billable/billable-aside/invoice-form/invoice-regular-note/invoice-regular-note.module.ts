@@ -5,7 +5,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InvoiceSelectNoteComponent } from '../invoice-select-note/invoice-select-note.component';
 import { InvoiceAddNoteComponent } from '../invoice-add-note/invoice-add-note.component';
 import { FormsModule } from '@angular/forms';
-import { MatSelectModule, MatChipsModule } from '@angular/material';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({

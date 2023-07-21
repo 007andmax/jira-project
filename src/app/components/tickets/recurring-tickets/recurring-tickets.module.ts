@@ -7,7 +7,9 @@ import { RecurringTicketsTableComponent } from './recurring-tickets-table/recurr
 import { RecurringTicketsEditAsideComponent } from './recurring-tickets-edit-aside/recurring-tickets-edit-aside.component';
 import { RecurringTicketsAddAsideComponent } from './recurring-tickets-add-aside/recurring-tickets-add-aside.component';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
-import { MatSelectModule, MatChipsModule, MatIconModule } from '@angular/material';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 import { DevicesRecurringTicketsComponent } from './devices-recurring-tickets/devices-recurring-tickets.component';
 import { DatePickerModule } from '../../shared/date-picker/date-picker.module';
 import { IntervalComponent } from '../../shared/interval/interval.component';

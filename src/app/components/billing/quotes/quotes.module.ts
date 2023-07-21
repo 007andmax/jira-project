@@ -18,7 +18,8 @@ import { QuotesFilterComponent } from './quotes-header/quotes-filter/quotes-filt
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { InvoiceFormEditCustomerModule } from '../billable/billable-aside/invoice-form/invoice-form-edit-customer/invoice-form-edit-customer.module';
 import { FormsModule } from '@angular/forms';
-import { MatSelectModule, MatChipsModule } from '@angular/material';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatSelectModule } from '@angular/material/select';
 import { DatePickerModule } from '../../shared/date-picker/date-picker.module';
 import { ServiceItemQuoteComponent } from './quote-aside-add/service-item-quote/service-item-quote.component';
 import { ProductItemQuoteComponent } from './quote-aside-add/product-item-quote/product-item-quote.component';

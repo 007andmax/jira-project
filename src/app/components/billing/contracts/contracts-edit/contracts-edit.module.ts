@@ -10,7 +10,8 @@ import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.
 import { DatePickerModule } from 'src/app/components/shared/date-picker/date-picker.module';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MatChipsModule, MatSelectModule } from '@angular/material';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatSelectModule } from '@angular/material/select';
 import { ContractsAsideHourlyBillingEditDefaultServiceComponent } from './contracts-aside-hourly-edit/contracts-aside-hourly-billing-edit-default-service/contracts-aside-hourly-billing-edit-default-service.component';
 import { ContractsAsideEditHourlyAddDefaultServiceComponent } from './contracts-aside-hourly-edit/contracts-aside-edit-hourly-add-default-service/contracts-aside-edit-hourly-add-default-service.component';
 import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.module';

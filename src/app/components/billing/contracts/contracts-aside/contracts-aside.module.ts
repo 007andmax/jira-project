@@ -10,7 +10,8 @@ import { ContractsAsideTopComponent } from './contracts-aside-top/contracts-asid
 import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.module';
 import { DatePickerModule } from 'src/app/components/shared/date-picker/date-picker.module';
 import { FormsModule } from '@angular/forms';
-import { MatChipsModule, MatSelectModule } from '@angular/material';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatSelectModule } from '@angular/material/select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ContractsAsideHourlyBillingDefaultServiceComponent } from './contracts-aside-hourly-billing/contracts-aside-hourly-billing-default-service/contracts-aside-hourly-billing-default-service.component';
 import { ContractsAsideEditHourlyAddDefaultServiceModule } from '../contracts-edit/contracts-aside-hourly-edit/contracts-aside-edit-hourly-add-default-service/contracts-aside-edit-hourly-add-default-service.module';
