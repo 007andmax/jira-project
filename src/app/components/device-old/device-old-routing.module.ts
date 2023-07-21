@@ -9,22 +9,22 @@ const routes: Routes = [{
     children: [
         {
             path: 'dashboard/:type/:id',
-            loadChildren: './dashboard/dashboard.module#DashboardOldModule',
+            loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardOldModule),
             canActivate: [PermissionNoSuperAdminService]
         },
         {
             path: 'hardware/:type/:id',
-            loadChildren: './hardware/hardware.module#HardwareOldModule',
+            loadChildren: () => import('./hardware/hardware.module').then(m => m.HardwareOldModule),
             canActivate: [PermissionNoSuperAdminService]
         },
         {
             path: 'software/:type/:id',
-            loadChildren: './software/software.module#SoftwareOldModule',
+            loadChildren: () => import('./software/software.module').then(m => m.SoftwareOldModule),
             canActivate: [PermissionNoSuperAdminService]
         },
         {
             path: 'terminal/:type/:id',
-            loadChildren: './terminal/terminal.module#TerminalOldModule',
+            loadChildren: () => import('./terminal/terminal.module').then(m => m.TerminalOldModule),
             canActivate: [PermissionNoSuperAdminService]
         },
     ]

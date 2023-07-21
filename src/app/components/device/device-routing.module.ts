@@ -7,42 +7,42 @@ const routes: Routes = [{
     path: '', component: DeviceComponent, children: [
         {
             path: 'dashboard/:type/:id',
-            loadChildren: './dashboard/dashboard.module#DashboardModule',
+            loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
             canActivate: [PermissionNoSuperAdminService]
         },
         {
             path: 'hardware/:type/:id',
-            loadChildren: './hardware/hardware.module#HardwareModule',
+            loadChildren: () => import('./hardware/hardware.module').then(m => m.HardwareModule),
             canActivate: [PermissionNoSuperAdminService]
         },
         {
             path: 'software/:type/:id',
-            loadChildren: './software/software.module#SoftwareModule',
+            loadChildren: () => import('./software/software.module').then(m => m.SoftwareModule),
             canActivate: [PermissionNoSuperAdminService]
         },
         {
             path: 'service/:type/:id',
-            loadChildren: './services/services.module#ServicesModule',
+            loadChildren: () => import('./services/services.module').then(m => m.ServicesModule),
             canActivate: [PermissionNoSuperAdminService]
         },
         {
             path: 'terminal/:type/:id',
-            loadChildren: './terminal/terminal.module#TerminalModule',
+            loadChildren: () => import('./terminal/terminal.module').then(m => m.TerminalModule),
             canActivate: [PermissionNoSuperAdminService]
         },
         {
             path: 'startup/:type/:id',
-            loadChildren: './startup-programes/startup-programes.module#StartupModule',
+            loadChildren: () => import('./startup-programes/startup-programes.module').then(m => m.StartupModule),
             canActivate: [PermissionNoSuperAdminService]
         },
         {
             path: 'windows/:type/:id',
-            loadChildren: './window-updates/window-updates.module#WindowUpdatesModule',
+            loadChildren: () => import('./window-updates/window-updates.module').then(m => m.WindowUpdatesModule),
             canActivate: [PermissionNoSuperAdminService]
         },
         {
             path: 'processes/:type/:id',
-            loadChildren: './processes/processes.module#ProcessesModule',
+            loadChildren: () => import('./processes/processes.module').then(m => m.ProcessesModule),
             canActivate: [PermissionNoSuperAdminService]
 
         },
