@@ -10,7 +10,7 @@ import { DefaultServicesHourlyContract } from '../../class/default-service-hourl
 })
 export class ContractsAsideHourlyBillingDefaultServiceComponent implements OnInit {
   @Input() defaultService: DefaultServicesHourlyContract;
-  @ViewChild('taxes') taxesDropDown: TaxesComponent;
+  @ViewChild('taxes', { static: true }) taxesDropDown: TaxesComponent;
   @Output() onSelectService = new EventEmitter<any>();
   constructor(private element: ElementRef) { }
 

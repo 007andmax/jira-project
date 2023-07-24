@@ -19,9 +19,9 @@ import { ContractsAsideTopComponent } from '../contracts-aside-top/contracts-asi
   styleUrls: ['./contracts-aside-hourly-billing.component.scss']
 })
 export class ContractsAsideHourlyBillingComponent implements OnInit {
-  @ViewChild('startDateDP') startDateDP: DatePickerComponent;
-  @ViewChild('reviewDateDP') reviewDateDP: DatePickerComponent;
-  @ViewChild('topContract') topContract: ContractsAsideTopComponent;
+  @ViewChild('startDateDP', { static: true }) startDateDP: DatePickerComponent;
+  @ViewChild('reviewDateDP', { static: true }) reviewDateDP: DatePickerComponent;
+  @ViewChild('topContract', { static: true }) topContract: ContractsAsideTopComponent;
   validate: ContractsHourlyValidate = new ContractsHourlyValidate();
   defaultServices: Array<DefaultServicesHourlyContract> = [];
   selectedType = new ContractsFilterType('Hourly', 'HOURLY', null);

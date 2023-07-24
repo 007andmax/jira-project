@@ -18,9 +18,7 @@ export class InvoiceFormTicketEditTaxesComponent implements OnInit, OnDestroy {
   newTax: Tax = null;
   taxForm: FormGroup;
   @Input() placeholder: string;
-  @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
-  @ViewChild('addTax') containerAddTax;
-  @ViewChild('taxesDropDown') taxesDropDown;
+  @ViewChild('taxesDropDown', { static: true }) taxesDropDown;
   @Output() taxesChange = new EventEmitter();
 
 
@@ -79,7 +77,6 @@ export class InvoiceFormTicketEditTaxesComponent implements OnInit, OnDestroy {
       Validators.max(99)]],
       isDefault: [false]
     });
-    this.containerAddTax.open();
   }
 
   /**

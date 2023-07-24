@@ -12,10 +12,10 @@ import { ContractsAsideProductServiceContractsComponent } from './contracts-asid
   styleUrls: ['./contracts-aside.component.scss']
 })
 export class ContractsAsideComponent implements OnInit {
-  @ViewChild('hourlyContract') hourlyContract: ContractsAsideHourlyBillingComponent;
-  @ViewChild('blockTimeContract') blockTimeContract: ContractsAsideBlockTimeBillingComponent;
-  @ViewChild('deviceUserContract') deviceUserContract: ContractsAsideUserDeviceBillingComponent;
-  @ViewChild('otherContract') otherContract: ContractsAsideProductServiceContractsComponent;
+  @ViewChild('hourlyContract', { static: false }) hourlyContract: ContractsAsideHourlyBillingComponent;
+  @ViewChild('blockTimeContract', { static: false }) blockTimeContract: ContractsAsideBlockTimeBillingComponent;
+  @ViewChild('deviceUserContract', { static: false }) deviceUserContract: ContractsAsideUserDeviceBillingComponent;
+  @ViewChild('otherContract', { static: false }) otherContract: ContractsAsideProductServiceContractsComponent;
   type: string = null;
   step: number = 1;
   constructor(private contractsStateService: ContractsStateService,

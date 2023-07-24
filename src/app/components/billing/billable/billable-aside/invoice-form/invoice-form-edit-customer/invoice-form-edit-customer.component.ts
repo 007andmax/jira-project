@@ -15,7 +15,7 @@ import { BillableStateService } from 'src/app/states/billable/billable-state.ser
 export class InvoiceFormEditCustomerComponent implements OnInit, OnDestroy {
   company: CompanyProfile = new CompanyProfile();
   @Input() dropDown: NgbDropdown;
-  @ViewChild('addresstext') addresstext: any;
+  @ViewChild('addresstext', { static: true }) addresstext: any;
   @Output() onUpdateCompany = new EventEmitter();
   locationIsinit: boolean = false;
   sub: Subscription = new Subscription();

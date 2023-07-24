@@ -70,8 +70,8 @@ export class AppComponent implements OnInit {
   state: string = '';
   currentUser: CurrentUser;
   sub: Subscription = new Subscription();
-  @ViewChild('contentLockScreenModal') contentLockScreenModal: ModalLockScreenComponent;
-  @ViewChild('contentSessionScreenModal') contentSessionScreenModal: ModalSessionScreenComponent;
+  @ViewChild('contentLockScreenModal', { static: true }) contentLockScreenModal: ModalLockScreenComponent;
+  @ViewChild('contentSessionScreenModal', { static: true }) contentSessionScreenModal: ModalSessionScreenComponent;
   /**
    * Creates an instance of the MainComponent with the injected services
    * @param {UpgradeModule} upgrade service

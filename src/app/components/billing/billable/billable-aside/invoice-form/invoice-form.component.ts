@@ -31,8 +31,8 @@ import { CompanyProfileAddress } from 'src/app/components/companies/class/compan
   styleUrls: ['./invoice-form.component.scss']
 })
 export class InvoiceFormComponent implements OnInit, OnDestroy {
-  @ViewChild('companyEdit') companyEdit: InvoiceFormEditCustomerComponent;
-  @ViewChild('editTicketsBtn') editTicketsBtn: DisabledBtnDirective;
+  @ViewChild('companyEdit', { static: true }) companyEdit: InvoiceFormEditCustomerComponent;
+  @ViewChild('editTicketsBtn', { static: true }) editTicketsBtn: DisabledBtnDirective;
   @Output() onUpdateInvoice = new EventEmitter();
   @Input() invoice: InvoiceLock;
   @Input() invoiceNumber: string;

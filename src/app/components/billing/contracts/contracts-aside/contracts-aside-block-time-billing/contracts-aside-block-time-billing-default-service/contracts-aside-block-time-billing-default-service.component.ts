@@ -12,7 +12,7 @@ import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component'
 export class ContractsAsideBlockTimeBillingDefaultServiceComponent implements OnInit {
   @Input() service: ContractsBlockTimeDefaultService;
   @Output() onRemove = new EventEmitter<any>();
-  @ViewChild('taxesDropDown') taxesDropDown: TaxesComponent;
+  @ViewChild('taxesDropDown', { static: true }) taxesDropDown: TaxesComponent;
   constructor(private taxesStateService: TaxesStateService,) { }
 
   ngOnInit() {

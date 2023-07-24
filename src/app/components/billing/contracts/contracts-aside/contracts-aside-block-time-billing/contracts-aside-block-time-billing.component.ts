@@ -32,11 +32,11 @@ import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component'
 })
 export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestroy {
   @Output() onClose = new EventEmitter<any>();
-  @ViewChild('customDateDP') customDateDP: DatePickerComponent;
-  @ViewChild('startDateDP') startDateDP: DatePickerComponent;
-  @ViewChild('reviewDateDP') reviewDateDP: DatePickerComponent;
-  @ViewChild('topContract') topContract: ContractsAsideTopComponent;
-  @ViewChild('taxes') taxesDP: TaxesComponent;
+  @ViewChild('customDateDP', { static: false }) customDateDP: DatePickerComponent;
+  @ViewChild('startDateDP', { static: true }) startDateDP: DatePickerComponent;
+  @ViewChild('reviewDateDP', { static: true }) reviewDateDP: DatePickerComponent;
+  @ViewChild('topContract', { static: true }) topContract: ContractsAsideTopComponent;
+  @ViewChild('taxes', { static: true }) taxesDP: TaxesComponent;
   selectedType = new ContractsFilterType('Block Time', 'BLOCK_TIME', null);
   intervals: Array<string> = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
   selectedInterval: string = 'MONTHLY';

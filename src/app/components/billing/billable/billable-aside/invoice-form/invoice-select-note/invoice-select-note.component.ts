@@ -22,7 +22,7 @@ export class InvoiceSelectNoteComponent implements OnInit, OnDestroy {
   @Input() placeholder: string = '';
   @Input() list = [];
   @Input() id: string = '';
-  @ViewChild('instance') instance: NgbTypeahead;
+  @ViewChild('instance', { static: true }) instance: NgbTypeahead;
   @Output() onSelectedItem = new EventEmitter<any>();
   @Output() onChangeInput = new EventEmitter<any>();
   @Output() onOpenDropDown = new EventEmitter<any>();

@@ -14,7 +14,7 @@ import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component'
 })
 export class InvoiceFormTicketEditProductComponent implements OnInit, OnDestroy {
   @Input() product: BillableProfileTicketProductExpense;
-  @ViewChild('taxes') taxesDropDown: TaxesComponent;
+  @ViewChild('taxes', { static: true }) taxesDropDown: TaxesComponent;
   valdiateSaleCost: boolean = true;
   taxes: Array<Tax> = [];
   sub: Subscription = new Subscription();

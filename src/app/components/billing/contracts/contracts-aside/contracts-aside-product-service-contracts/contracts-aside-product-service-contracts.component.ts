@@ -31,10 +31,10 @@ import { ContractsListService } from '../../services/contracts-list.service';
 })
 export class ContractsAsideProductServiceContractsComponent implements OnInit, OnDestroy {
   selectedType = new ContractsFilterType('Subscriptions', 'SERVICE_CONTRACT', 'OTHER');
-  @ViewChild('startDateDP') startDateDP: DatePickerComponent;
-  @ViewChild('reviewDateDP') reviewDateDP: DatePickerComponent;
-  @ViewChild('topContract') topContract: ContractsAsideTopComponent;
-  @ViewChild('customDateDP') customDateDP: DatePickerComponent;
+  @ViewChild('startDateDP', { static: true }) startDateDP: DatePickerComponent;
+  @ViewChild('reviewDateDP', { static: true }) reviewDateDP: DatePickerComponent;
+  @ViewChild('topContract', { static: true }) topContract: ContractsAsideTopComponent;
+  @ViewChild('customDateDP', { static: false }) customDateDP: DatePickerComponent;
   @Output() onClose = new EventEmitter<any>();
   contractsOther: ContractsOther = new ContractsOther();
   formatDate: string = FORMAT_DATE_2;
