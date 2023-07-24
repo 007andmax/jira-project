@@ -162,7 +162,7 @@ img.Online-Search {
 
 .Favourite {
   margin-bottom: 5px;
-  background-image: url(/assets/img/favourite-active.svg);
+  background-image: url(/assets/img/icons/rating.svg);
   background-repeat: no-repeat;
   display: inline-block;
   max-width: 100%;
@@ -250,7 +250,7 @@ input.mat-chip-input {
 }
 
 .mat-chip.mat-standard-chip .mat-chip-remove:before {
-  background: url(/assets/img/tag-close.svg) no-repeat;
+  background: url(/assets/img/icons/close.svg) no-repeat;
 }
 
 ::ng-deep .cdk-overlay-pane {
@@ -583,7 +583,7 @@ span.qt-input-search:before {
   }
   .screen-Connect {
     margin-top: 15px;
-    background-image: url(/assets/img/screenConnect.png);
+    background-image: url(/assets/img/icons/screenConnect.png);
     background-repeat: no-repeat;
     display: inline-block;
     max-width: 100%;
