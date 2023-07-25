@@ -12,7 +12,7 @@ export class DashboardSalesAnalyticsComponent implements OnInit {
   @Output() onSelectType = new EventEmitter<any>();
   @Input() chartData: Array<DashboardChartData> = [];
   type: string = "WEEKLY";
-  @ViewChild('nvd3') nvd3: any;
+  @ViewChild('nvd3', { static: true }) nvd3: any;
   options;
   data;
   listType: Array<CompanySetting> = [

@@ -13,7 +13,7 @@ export class ContractsAsideUserDeviceServiceComponent implements OnInit {
   @Input() service: ContractsUserDeviceService;
   @Output() onRemove = new EventEmitter<any>();
   @Output() onCheckName = new EventEmitter<any>();
-  @ViewChild('taxesDropDown') taxesDropDown: TaxesComponent;
+  @ViewChild('taxesDropDown', { static: true }) taxesDropDown: TaxesComponent;
   constructor(private taxesStateService: TaxesStateService,) { }
 
   ngOnInit() {

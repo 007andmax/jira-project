@@ -18,11 +18,11 @@ import { QuoteAsideAddBodyComponent } from './quote-aside-add-body/quote-aside-a
   styleUrls: ['./quote-aside-add.component.scss']
 })
 export class QuoteAsideAddComponent implements OnInit, OnDestroy {
-  @ViewChild('saveAndSendBtn') saveAndSendBtn: DisabledBtnDirective;
-  @ViewChild('saveAndContinueBtn') saveAndContinueBtn: DisabledBtnDirective;
-  @ViewChild('saveAndApproveBtn') saveAndApproveBtn: DisabledBtnDirective;
-  @ViewChild('saveAndDownloadBtn') saveAndDownloadBtn: DisabledBtnDirective;
-  @ViewChild('quoteAdd') quoteAdd: QuoteAsideAddBodyComponent;
+  @ViewChild('saveAndSendBtn', { static: true }) saveAndSendBtn: DisabledBtnDirective;
+  @ViewChild('saveAndContinueBtn', { static: true }) saveAndContinueBtn: DisabledBtnDirective;
+  @ViewChild('saveAndApproveBtn', { static: true }) saveAndApproveBtn: DisabledBtnDirective;
+  @ViewChild('saveAndDownloadBtn', { static: true }) saveAndDownloadBtn: DisabledBtnDirective;
+  @ViewChild('quoteAdd', { static: false }) quoteAdd: QuoteAsideAddBodyComponent;
   validate: QuoteValdiate = new QuoteValdiate();
   showPreview: boolean = false;
   quotePreview: QuotePreview;

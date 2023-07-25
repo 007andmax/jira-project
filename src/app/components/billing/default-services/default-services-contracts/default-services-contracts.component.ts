@@ -10,7 +10,6 @@ import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down
   styleUrls: ['./default-services-contracts.component.scss']
 })
 export class DefaultServicesContractsComponent implements OnInit {
-  @ViewChild('glNumberSelect') glNumberSelect: DropDownComponent;
   @Input() type: string = '';
   glNumbers: Array<GlNumber> = [];
   selectedGlNumber: GlNumber = null;
@@ -34,7 +33,6 @@ export class DefaultServicesContractsComponent implements OnInit {
     if (glNumber == null) {
       this.glNumberService.resetContract((this.type === 'BLOCK_TIME') ? 'blockTime' : 'serviceContract').subscribe(data => {
         this.selectedGlNumber = null;
-        this.glNumberSelect.clearWithOutChanges();
       })
     } else {
       this.glNumberService.setGlNumberContract((glNumber) ? glNumber.id : '', (this.type === 'BLOCK_TIME') ? 'blockTime' : 'serviceContract').subscribe(data => {

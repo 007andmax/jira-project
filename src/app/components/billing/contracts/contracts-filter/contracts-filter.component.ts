@@ -18,11 +18,11 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 })
 export class ContractsFilterComponent implements OnInit, OnDestroy {
   @Input() companyContracts: Company = null;
-  @ViewChild('typesDp') typesDp: DropDownComponent;
-  @ViewChild('companyDp') companyDp: CompanyDropDownComponent;
-  @ViewChild('datesDp') datesDp: MultiDatepickerComponent;
-  @ViewChild('statusDp') statusDp: DropDownComponent;
-  @ViewChild('optionsDp') optionsDp: DropDownComponent;
+  @ViewChild('typesDp', { static: true }) typesDp: DropDownComponent;
+  @ViewChild('companyDp', { static: true }) companyDp: CompanyDropDownComponent;
+  @ViewChild('datesDp', { static: true }) datesDp: MultiDatepickerComponent;
+  @ViewChild('statusDp', { static: true }) statusDp: DropDownComponent;
+  @ViewChild('optionsDp', { static: true }) optionsDp: DropDownComponent;
   public contractsFilter: ContractsFilter = new ContractsFilter();
   listsOptions = [new ContractsFilterType('Manual create billable item', 'manualCreateBillableItem', null),
   new ContractsFilterType('Automatically create invoice', 'enableInvoiceAutoCreate', null)];

@@ -19,7 +19,7 @@ export class ContractsAsideTopComponent implements OnInit {
   @Input() selectedType = new ContractsFilterType('Hourly', 'HOURLY', null);
   @Input() validateCompany: boolean = true;
   @Output() onSelectCompany = new EventEmitter<any>();
-  @ViewChild('companiesDP') companiesDP: CompanyDropDownComponent;
+  @ViewChild('companiesDP', { static: true }) companiesDP: CompanyDropDownComponent;
   sub: Subscription = new Subscription();
   constructor(private contractsStateService: ContractsStateService,
     private companiesState: CompaniesStateService,) { }

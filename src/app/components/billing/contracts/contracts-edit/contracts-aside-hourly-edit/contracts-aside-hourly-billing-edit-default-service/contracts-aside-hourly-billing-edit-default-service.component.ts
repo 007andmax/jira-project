@@ -13,7 +13,7 @@ import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component'
 export class ContractsAsideHourlyBillingEditDefaultServiceComponent implements OnInit {
   taxes: Array<Tax> = [];
   @Input() service: ContractsHourlyService;
-  @ViewChild('taxes') taxesDropDown: TaxesComponent;
+  @ViewChild('taxes', { static: true }) taxesDropDown: TaxesComponent;
   @Output() onSelectService = new EventEmitter<any>();
   constructor(private taxesStateService: TaxesStateService,) { }
 

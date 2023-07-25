@@ -8,9 +8,9 @@ import { ContractsDashboard } from '../class/contracts-dashboard';
 })
 export class ContractsDashboardComponent implements OnInit {
   @Input() contractsDashboard: ContractsDashboard = new ContractsDashboard();
-  @ViewChild('nvd3') nvd3:any;
+  @ViewChild('nvd3', { static: true }) nvd3: any;
   chartOptions: any;
-  chartColors = ["#0747a6", "#00ccff", "#cdecff","#052e6b"];
+  chartColors = ["#0747a6", "#00ccff", "#cdecff", "#052e6b"];
   data: any;
   constructor() { }
 
@@ -35,7 +35,7 @@ export class ContractsDashboardComponent implements OnInit {
         },
         showLegend: false,
         duration: 500,
-        
+
         donutRatio: '0.68'
       }
     }

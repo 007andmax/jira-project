@@ -18,7 +18,7 @@ import { DropDownComponent } from '../../../shared/drop-down/drop-down.component
   styleUrls: ['./default-services-item.component.scss']
 })
 export class DefaultServicesItemComponent implements OnInit {
-  @ViewChild('glNumberSelect') glNumberSelect: DropDownComponent;
+  @ViewChild('glNumberSelect', { static: true }) glNumberSelect: DropDownComponent;
   @Input() service: DefaultServices;
   @Output() onEditService = new EventEmitter<any>();
   glNumbers: Array<GlNumber> = [];

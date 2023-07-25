@@ -15,8 +15,8 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 export class InvoiceRevenueComponent implements OnInit {
   invoiceRevenue: InvoiceRevenue = new InvoiceRevenue();
   @Input() accountingStartDate: string;
-  @ViewChild('datesDp') datesDp: MultiDatepickerDashboardComponent;
-  @ViewChild('nvd3') nvd3: any;
+  @ViewChild('datesDp', { static: true }) datesDp: MultiDatepickerDashboardComponent;
+  @ViewChild('nvd3', { static: true }) nvd3: any;
   chartOptions: any;
   chartColors = ["#0747a6", "#00ccff", "#cdecff"];
   data: any;

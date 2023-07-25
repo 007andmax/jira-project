@@ -19,9 +19,9 @@ import { ContractsOtherProduct } from '../../contracts-aside/class/contracts-oth
 export class ContractsAsideProductServiceEditComponent implements OnInit {
   selectedType = new ContractsFilterType('Subscriptions', 'SERVICE_CONTRACT', 'OTHER');
   selectedCompany: any;
-  @ViewChild('startDateDP') startDateDP: DatePickerComponent;
-  @ViewChild('reviewDateDP') reviewDateDP: DatePickerComponent;
-  @ViewChild('customDateDP') customDateDP: DatePickerComponent;
+  @ViewChild('startDateDP', { static: true }) startDateDP: DatePickerComponent;
+  @ViewChild('reviewDateDP', { static: true }) reviewDateDP: DatePickerComponent;
+  @ViewChild('customDateDP', { static: false }) customDateDP: DatePickerComponent;
   @Output() onClose = new EventEmitter<any>();
   @Input() contractsOther: ServiceAgreement = new ServiceAgreement();
   formatDate: string = FORMAT_DATE_2;

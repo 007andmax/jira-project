@@ -11,7 +11,7 @@ import { ContractsFilterComponent } from '../contracts-filter/contracts-filter.c
 })
 export class ContractsHeaderComponent implements OnInit {
   @Input() companyContracts: Company = null;
-  @ViewChild('filter') filter: ContractsFilterComponent;
+  @ViewChild('filter', { static: true }) filter: ContractsFilterComponent;
   count = 0;
   toggleFilter: boolean = false;
   countFilter: number = 0;

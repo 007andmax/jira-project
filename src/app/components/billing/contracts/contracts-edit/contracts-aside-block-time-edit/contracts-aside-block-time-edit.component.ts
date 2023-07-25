@@ -28,8 +28,8 @@ import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component'
   styleUrls: ['./contracts-aside-block-time-edit.component.scss']
 })
 export class ContractsAsideBlockTimeEditComponent implements OnInit {
-  @ViewChild('taxes') taxesDP: TaxesComponent;
-  @ViewChild('customDateDP') customDateDP: DatePickerComponent;
+  @ViewChild('taxes', { static: true }) taxesDP: TaxesComponent;
+  @ViewChild('customDateDP', { static: false }) customDateDP: DatePickerComponent;
   selectedCompany: any;
   selectedTaxes = [];
   selectedType = new ContractsFilterType('Block Time', 'BLOCK_TIME', null);

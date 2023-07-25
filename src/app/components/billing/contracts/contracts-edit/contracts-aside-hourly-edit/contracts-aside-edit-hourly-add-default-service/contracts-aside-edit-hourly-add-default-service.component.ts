@@ -23,8 +23,8 @@ export class ContractsAsideEditHourlyAddDefaultServiceComponent implements OnIni
   validate: ContractsHourlyAddDefaultServiceValidate = new ContractsHourlyAddDefaultServiceValidate();
   defaultSelectedTax: Array<Tax> = [];
   defaultServices: Array<DefaultServicesHourlyContract> = [];
-  @ViewChild('serviceDropDown') serviceDropDown: DropDownComponent;
-  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
+  @ViewChild('serviceDropDown', { static: true }) serviceDropDown: DropDownComponent;
+  @ViewChild('addBtn', { static: true }) addBtn: DisabledBtnDirective;
   @Input() contractsHourly: ServiceAgreement;
   @Input() editMode: boolean = false;
   @Output() onClose = new EventEmitter<any>();

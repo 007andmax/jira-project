@@ -24,8 +24,8 @@ import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component'
   styleUrls: ['./contracts-aside-user-device-edit.component.scss']
 })
 export class ContractsAsideUserDeviceEditComponent implements OnInit {
-  @ViewChild('taxes') taxesDP: TaxesComponent;
-  @ViewChild('customDateDP') customDateDP: DatePickerComponent;
+  @ViewChild('taxes', { static: true }) taxesDP: TaxesComponent;
+  @ViewChild('customDateDP', { static: false }) customDateDP: DatePickerComponent;
   selectedCompany: any;
   selectedTaxes = [];
   selectedType = new ContractsFilterType('Service Contract/by device/by user', 'SERVICE_CONTRACT_DEVICE_USER', null);

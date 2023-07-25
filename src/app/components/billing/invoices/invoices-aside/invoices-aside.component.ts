@@ -38,7 +38,7 @@ export class InvoicesAsideComponent implements OnInit {
   opened: boolean = false;
   selectedPaymentMode = new CompanySetting('Cheque', 'CHEQUE');
   sub: Subscription = new Subscription();
-  @ViewChild('recordPayment') recordPayment: DisabledBtnDirective;
+  @ViewChild('recordPayment', { static: false }) recordPayment: DisabledBtnDirective;
   selectedInvoices: Array<Invoice> = [];
   @Output() onClose = new EventEmitter<any>();
   constructor(private companiesState: CompaniesStateService,

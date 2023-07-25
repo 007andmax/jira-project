@@ -16,7 +16,7 @@ import { PaymentsFilterComponent } from './payments-filter/payments-filter.compo
 })
 export class PaymentsHeaderComponent implements OnInit {
 
-  @ViewChild('filter') filter: PaymentsFilterComponent;
+  @ViewChild('filter', { static: true }) filter: PaymentsFilterComponent;
   countFilter: number = 0;
   toggleFilter: boolean = false;
   @Output() onCreatePayment = new EventEmitter<any>();

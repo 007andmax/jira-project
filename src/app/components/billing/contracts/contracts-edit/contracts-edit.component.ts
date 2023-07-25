@@ -14,11 +14,11 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
   styleUrls: ['./contracts-edit.component.scss']
 })
 export class ContractsEditComponent implements OnInit {
-  @ViewChild('hourlyContract') hourlyContract: ContractsAsideHourlyEditComponent;
-  @ViewChild('blockTimeContract') blockTimeContract: ContractsAsideBlockTimeEditComponent;
-  @ViewChild('serviceContract') serviceContract: ContractsAsideUserDeviceEditComponent;
-  @ViewChild('otherContract') otherContract: ContractsAsideProductServiceEditComponent;
-  @ViewChild('editContract') editContract: DisabledBtnDirective;
+  @ViewChild('hourlyContract', { static: false }) hourlyContract: ContractsAsideHourlyEditComponent;
+  @ViewChild('blockTimeContract', { static: false }) blockTimeContract: ContractsAsideBlockTimeEditComponent;
+  @ViewChild('serviceContract', { static: false }) serviceContract: ContractsAsideUserDeviceEditComponent;
+  @ViewChild('otherContract', { static: false }) otherContract: ContractsAsideProductServiceEditComponent;
+  @ViewChild('editContract', { static: true }) editContract: DisabledBtnDirective;
   @Input() serviceAgreement: ServiceAgreement;
   constructor(private contractsStateService: ContractsStateService,
     public cd: ChangeDetectorRef,

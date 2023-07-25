@@ -14,7 +14,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
   styleUrls: ['./invoices-header.component.scss']
 })
 export class InvoicesHeaderComponent implements OnInit {
-  @ViewChild('filter') filter: InvoicesFilterComponent;
+  @ViewChild('filter', { static: true }) filter: InvoicesFilterComponent;
   countFilter: number = 0;
   toggleFilter: boolean = false;
   @Output() onCreateInvoice = new EventEmitter<any>();

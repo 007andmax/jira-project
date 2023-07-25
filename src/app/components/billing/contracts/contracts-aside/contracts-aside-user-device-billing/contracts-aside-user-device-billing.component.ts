@@ -28,11 +28,11 @@ import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component'
   providers: [ContractsListService]
 })
 export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestroy {
-  @ViewChild('taxes') taxesDP: TaxesComponent;
-  @ViewChild('startDateDP') startDateDP: DatePickerComponent;
-  @ViewChild('reviewDateDP') reviewDateDP: DatePickerComponent;
-  @ViewChild('topContract') topContract: ContractsAsideTopComponent;
-  @ViewChild('customDateDP') customDateDP: DatePickerComponent;
+  @ViewChild('taxes', { static: true }) taxesDP: TaxesComponent;
+  @ViewChild('startDateDP', { static: true }) startDateDP: DatePickerComponent;
+  @ViewChild('reviewDateDP', { static: true }) reviewDateDP: DatePickerComponent;
+  @ViewChild('topContract', { static: true }) topContract: ContractsAsideTopComponent;
+  @ViewChild('customDateDP', { static: true }) customDateDP: DatePickerComponent;
   @Output() onClose = new EventEmitter<any>();
   selectedType = new ContractsFilterType('Service Contract/by device/by user', 'SERVICE_CONTRACT_DEVICE_USER', null);
   contractsUserDevice: ContractsUserDevice = new ContractsUserDevice();

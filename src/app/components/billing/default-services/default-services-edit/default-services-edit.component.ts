@@ -22,7 +22,7 @@ export class DefaultServicesEditComponent implements OnInit {
   validate: DefaultServiceValidate = new DefaultServiceValidate();
   service: DefaultServices;
   sub: Subscription = new Subscription();
-  @ViewChild('glNumberSelect') glNumberSelect: DropDownComponent;
+  @ViewChild('glNumberSelect', { static: false }) glNumberSelect: DropDownComponent;
   @Output() onClose = new EventEmitter<any>();
   constructor(private glNumberStateService: GlNumberStateService,
     private glNumberService: GlNumberService,

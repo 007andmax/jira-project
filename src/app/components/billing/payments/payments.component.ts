@@ -43,7 +43,6 @@ export class PaymentsComponent implements OnInit {
   // previewInvoiceId: string;
   //showPreviewInvoice: boolean = false;
   selectedPayments: Array<Payment> = [];
-  // @ViewChild('previewInvoiceAside') previewInvoiceAside: InvoicesAsidePreviewComponent;
   sub: Subscription = new Subscription();
   container = document.body.querySelector(".main-container");
   constructor(private paymentsService: PaymentsService,

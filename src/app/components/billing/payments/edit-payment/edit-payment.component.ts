@@ -30,7 +30,7 @@ export class EditPaymentComponent implements OnInit {
   formatDate: string = FORMAT_DATE_2;
   companies = [];
   selectedCompany: any = null;
-  @ViewChild('recordPayment') recordPayment: DisabledBtnDirective;
+  @ViewChild('recordPayment', { static: true }) recordPayment: DisabledBtnDirective;
   sub: Subscription = new Subscription();
   constructor(private companiesState: CompaniesStateService,
     private paymentsService: PaymentsService,) { }

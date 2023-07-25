@@ -13,7 +13,7 @@ export class RefundPaymentComponent implements OnInit {
   @Input() payment: Payment;
   @Output() onClose = new EventEmitter<any>();
   refundPayment: RefundPayment;
-  @ViewChild('refundPaymentBtn') refundPaymentBtn: DisabledBtnDirective;
+  @ViewChild('refundPaymentBtn', { static: true }) refundPaymentBtn: DisabledBtnDirective;
   constructor(private paymentsService: PaymentsService,) { }
 
   ngOnInit() {
