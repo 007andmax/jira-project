@@ -1,20 +1,11 @@
 @import "./src/assets/styles/variable";
-
-
-
-
-
-///////////
 .ticket-status-table {
-    .ticket-status-table__status {
-        .icon__company-info {
-            transform: translateY(3px);
-        }
+    .--input-error {
+        border-color: $red-600 !important;
     }
-
-    &__status {
+    &__priority {
         flex: 1 1 240px;
-
+        position: relative;
         &.--parse-status {
             padding: 7px 8px 8px;
             color: $gray-900;

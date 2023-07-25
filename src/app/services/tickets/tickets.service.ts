@@ -89,6 +89,14 @@ export class TicketsService {
         return data;
       }));
   }
+  public removeTicketPriority(id) {
+    return this.http.delete(this.apiUrl + `priorityLevel/${id}`).pipe(
+      tap(data => {
+        this.toastrService.success("Priority removed successfully");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
   public restoreFromSpam(id, value) {
     let data = { value: value };
     return this.http.put(this.apiUrl + `v2/tickets/${id}/restoreFromSpam`, data);

@@ -10,6 +10,8 @@ import { ClickOtsideDirective } from 'src/app/directives/click-otside/click-otsi
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
+import { DELETE_TICKET_PRIORITY, DELETE_TICKET_STATUS } from 'src/app/const/confirm';
+import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 
 @Component({
   selector: 'app-tickets-priority',
@@ -34,34 +36,38 @@ export class TicketsPriorityComponent implements OnInit {
     private leftPanelService: LeftPanelService,) { }
 
   ngOnInit() {
-
+    let onTicketsPriorities = this.ticketsStateService.onTicketsPriorities.subscribe(data => {
+      this.ticketsPriorities = data;
+      this.cd.detectChanges();
+    })
+    this.sub.add(onTicketsPriorities);
     if (this.ticketsStateService.getTicketsPriorities().length === 0) {
       this.ticketsService.getTicketsPriorities().subscribe((data: any) => {
         this.ticketsPriorities = data.priorityLevels.map(item => new TicketsPriority(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
           1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-        this.ticketsStateService.onSetTicketsPriorities(this.statusColors);
+        this.ticketsStateService.onSetTicketsPriorities(this.ticketsPriorities);
+        console.log("this.ticketsPriorities", this.ticketsPriorities);
       })
     } else {
       this.ticketsPriorities = this.ticketsStateService.getTicketsPriorities();
     }
     this.getColors();
-    /* let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-       if (data) {
-         if (this.confirmStateService.getConfirmAction() === DELETE_TICKET_STATUS) {
-           this.onRemoveTicketStatus(this.ticketsStateService.getTicketStatusForRemove().id);
-         }
-       }
-     })
-     this.sub.add(getConfirm);*/
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === DELETE_TICKET_PRIORITY) this.onRemoveTicketPriority(this.ticketsStateService.getTicketPriorityForRemove().id);
+      }
+    })
+    this.sub.add(getConfirm);
   }
-  onRemoveTicketStatus(id) {
-    this.ticketsService.removeTicketStatus(id).subscribe(data => {
+  onRemoveTicketPriority(id) {
+    this.ticketsService.removeTicketPriority(id).subscribe(data => {
       this.cd.detectChanges();
     })
   }
 
   toggleAddPriority(data) {
     this.showAddPriority = data;
+    this.addPriority = new TicketsPriority();
   }
   setColor(i) {
     this.addPriority.color = i;
@@ -96,37 +102,35 @@ export class TicketsPriorityComponent implements OnInit {
   }
   onSelect(event, item) {
     if (event.target.checked) {
-      this.ticketsStateService.getListTicketStatusForRemove().push(item);
+      this.ticketsStateService.getListTicketsPrioritiesForRemove().push(item);
     } else {
-      let list = this.ticketsStateService.getListTicketStatusForRemove();
+      let list = this.ticketsStateService.getListTicketsPrioritiesForRemove();
       let index = list.findIndex(item => item.id === item.id);
       if (index > -1) list.splice(index, 1);
-      this.ticketsStateService.setListTicketStatusForRemove(list);
+      this.ticketsStateService.setListTicketsPrioritiesForRemove(list);
     }
     this.cd.detectChanges();
   }
   onToggleAll(event) {
-    /*  if (event.target.checked) {
-        this.ticketsPriorities.forEach(item => {
-  
-          if (!item.selected) this.ticketsStateService.getListTicketStatusForRemove().push(item);
-          item.selected = true;
-  
-        })
-      } else {
-        this.ticketsStateService.setListTicketStatusForRemove([]);
-        this.ticketsStatus.forEach(item => (item.selected = false)); 
-      }*/
+    if (event.target.checked) {
+      this.ticketsPriorities.forEach(item => {
+        if (!item.selected) this.ticketsStateService.getListTicketsPrioritiesForRemove().push(item);
+        item.selected = true;
+      })
+    } else {
+      this.ticketsStateService.setListTicketsPrioritiesForRemove([]);
+      this.ticketsPriorities.forEach(item => (item.selected = false));
+    }
     this.cd.detectChanges();
   }
   resetEditTicketsStatus() {
     this.editTicketsStatus = null;
   }
-  removeTicketStatus(data) {
-    /* this.confirmStateService.setConfirmAction(DELETE_TICKET_STATUS);
-     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
-     modalRef.componentInstance.message = `Remove Ticket Status`;
-     this.ticketsStateService.setTicketStatusForRemove(data);*/
+  removeTicketPriority(data) {
+    this.confirmStateService.setConfirmAction(DELETE_TICKET_PRIORITY);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.message = `Remove Ticket Priority`;
+    this.ticketsStateService.setTicketPriorityForRemove(data);
   }
   getColors() {
     if (this.ticketsStateService.getListStatusColor().length === 0) {

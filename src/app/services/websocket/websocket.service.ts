@@ -168,6 +168,7 @@ export class WebsocketService {
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToSubmittedServiceAgreement();
       that.subsribeToSubmittedOneTimeConnection();
       that.subsribeToLockScreen();
+      that.subsribeToTicketPriority();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToTags();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToDocuments();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToDocumentsCategory();
@@ -634,6 +635,16 @@ export class WebsocketService {
       this.netScanSub = this.stompClient.subscribe(`/user/watch/lockScreen/${this.getCookie('LOCK_SCREEN_ID')}`, (message) => {
         var newChange = JSON.parse(message.body);
         if (newChange.action === 'LOCK_SCREEN') this.appService.showLockScreen();
+      });
+    }, 3000);
+
+  }
+
+  public subsribeToTicketPriority() {
+    setTimeout(() => {
+      this.netScanSub = this.stompClient.subscribe(`/user/watch/customPriority`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.ticketsRealTimeService.handleRealTimeChangesTicketPriority(newChange);
       });
     }, 3000);
 

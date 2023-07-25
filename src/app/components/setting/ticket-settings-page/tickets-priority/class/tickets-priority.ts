@@ -1,7 +1,7 @@
 export class TicketsPriority {
     "id": string;
-    "color": number;
-    "name": string;
+    "color": number = 0;
+    "name": string = "";
     "isDefault": boolean;
     selected: boolean = false;
     disableCreate: boolean = false;

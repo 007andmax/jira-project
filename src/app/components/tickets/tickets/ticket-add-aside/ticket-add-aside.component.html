@@ -38,14 +38,14 @@
                                 tabindex="-1"
                                 href="javascript:void(0)"
                             >
-                                <span class="priority-dot {{ item.type.toLowerCase() }}"></span>
-                                {{ item.title }}
+                                <span class="priority-dot {{ item.name.toLowerCase() }}"></span>
+                                {{ item.name }}
                             </a>
                         </li>
                     </ng-template>
                 </ul>
                 <div class="default-value">
-                    <span class="priority-dot {{ ticketAdd.priorityLevel.toLowerCase() }}"></span>
+                    <span class="priority-dot {{ ticketAdd.priorityLevel.name.toLowerCase() }}"></span>
                     {{getPriorityLevel()}}
                 </div>
             </div>
@@ -63,9 +63,9 @@
                 <span class="qt-input-block__label">Priority Level</span>
                 <app-drop-down
                     [class]="['qt-dropdown']"
-                    [field]="'title'"
+                    [field]="'name'"
                     [isBlockClear]="true"
-                    [editItem]="selectedTicketPriorities"
+                    [editItem]="ticketAdd.priorityLevel"
                     [list]="ticketPriorities"
                     (onSelectedItem)="setPriorityLevel($event)"
                     [placeholder]="'Low'"

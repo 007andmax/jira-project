@@ -11,7 +11,7 @@
                         <span></span>
                     </label>
                 </div>
-                <div class="tab-pane__table-cell ticket-status-table__status">
+                <div class="tab-pane__table-cell ticket-status-table__priority">
                     Ticket Priority
                     <ng-template
                         #tipContent
@@ -45,16 +45,14 @@
                         <span></span>
                     </label>
                 </div>
-                <div
-                    class="tab-pane__table-cell ticket-status-table__status"
-                    [ngClass]="{'--input-error' : addPriority.disableCreate}"
-                >
+                <div class="tab-pane__table-cell ticket-status-table__priority">
                     <input
                         type="text"
                         class="form-input --editable"
                         placeholder="Enter Name Priority"
                         [(ngModel)]="addPriority.name"
                         (keyup)="onKeyUp($event)"
+                        [ngClass]="{'--input-error' : addPriority.disableCreate}"
                         (input)="addPriority.checkDublicate(ticketsPriorities)"
                         maxlength="30"
                     >
@@ -113,6 +111,7 @@
                         class="icon__remove qt-sz-20 qt-bg-contain pointer"
                         (mouseenter)="removeTooltip.show($event.target)"
                         (mouseleave)="removeTooltip.hide()"
+                        (click)="toggleAddPriority(false)"
                     >
                     </div>
                 </div>
@@ -126,7 +125,6 @@
                 [class]="'.edit-priority-container-' + i"
                 (onOutSide)="onEditTicketPriority(item)"
             >
-
                 <div class="tab-pane__table-cell tab-pane__table-checkboxes">
                     <label class="qt-checkbox">
                         <input
@@ -137,10 +135,7 @@
                         <span></span>
                     </label>
                 </div>
-                <div
-                    class="tab-pane__table-cell ticket-status-table__status"
-                    [ngClass]="{'--input-error' :  item.disableUpdate  }"
-                >
+                <div class="tab-pane__table-cell ticket-status-table__priority">
                     <input
                         type="text"
                         class="form-input  --editable"
@@ -148,6 +143,7 @@
                         [(ngModel)]="item.name"
                         maxlength="30"
                         appKeyUpEnter
+                        [ngClass]="{'--input-error' :  item.disableUpdate  }"
                         (onChange)="onEditTicketPriority(item)"
                         (input)="item.onInitEdit(true);item.checkDublicateUpdate(ticketsPriorities)"
                     >
@@ -207,8 +203,7 @@
                         (mouseenter)="removeTooltip.show($event.target)"
                         (mouseleave)="removeTooltip.hide()"
                         class="icon__remove qt-sz-20 qt-bg-contain pointer"
-                        (click)="removeTicketStatus(item)"
-                        *ngIf="item.custom"
+                        (click)="removeTicketPriority(item)"
                     >
                     </div>
                 </div>

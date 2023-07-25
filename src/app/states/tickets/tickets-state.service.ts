@@ -19,6 +19,7 @@ export class TicketsStateService {
   ticketsCounts: TicketsCounts;
   isMoveToTickets: boolean = false;
   ticketStatusForRemove: TicketStatus = null;
+  ticketPriorityForRemove: TicketsPriority = null;
   listTicketStatusForRemove: Array<TicketStatus> = [];
   onTicketsPriorities: EventEmitter<any> = new EventEmitter();
   clearFormUpdate: EventEmitter<any> = new EventEmitter();
@@ -43,10 +44,23 @@ export class TicketsStateService {
   ticketsStatus: Array<TicketStatus> = [];
   ticketsFilter: TicketsFilter = new TicketsFilter();
   ticketsPriorities: Array<TicketsPriority> = [];
+  listTicketsPrioritiesForRemove: Array<TicketsPriority> = [];
   constructor(private ticketsRealTimeService: TicketsRealTimeService,
     private ticketsService: TicketsService) { }
 
   public onInit() {
+    this.ticketsRealTimeService.changeTicketPriority.subscribe(newChange => {
+      if (newChange.action === 'CUSTOM_PRIORITY_SAVED') this.ticketsPriorities.push(new TicketsPriority(newChange.data));
+      if (newChange.action === 'CUSTOM_PRIORITY_EDITED') {
+        let index = this.ticketsPriorities.findIndex(item => item.id == newChange.data.id);
+        if (index > -1) this.ticketsPriorities[index] = new TicketsPriority(newChange.data);
+      }
+      if (newChange.action === 'CUSTOM_PRIORITY_REMOVED') {
+        let index = this.ticketsPriorities.findIndex(item => item.id == newChange.data);
+        if (index > -1) this.ticketsPriorities.splice(index, 1);
+      }
+      this.onTicketsPriorities.emit(this.ticketsPriorities);
+    })
     this.ticketsRealTimeService.changeActualNumber.subscribe(newChange => {
       if (newChange.action === 'NUMBER_CHANGED' && newChange.data.type === "TICKET") {
         this.onInitActualNumber(newChange.data.numPart);
@@ -94,6 +108,12 @@ export class TicketsStateService {
       this.onGetTicketsStatus.emit(this.ticketsStatus);
     })
   }
+  public setListTicketsPrioritiesForRemove(data) {
+    this.listTicketsPrioritiesForRemove = data;
+  }
+  public getListTicketsPrioritiesForRemove() {
+    return this.listTicketsPrioritiesForRemove;
+  }
   public getTicketsPriorities() {
     return this.ticketsPriorities;
   }
@@ -109,6 +129,13 @@ export class TicketsStateService {
   public getTicketsStatus() {
     return this.ticketsStatus;
   }
+  public setTicketPriorityForRemove(data) {
+    this.ticketPriorityForRemove = data;
+  }
+  public getTicketPriorityForRemove() {
+    return this.ticketPriorityForRemove;
+  }
+
   public setTicketStatusForRemove(data) {
     this.ticketStatusForRemove = data;
   }

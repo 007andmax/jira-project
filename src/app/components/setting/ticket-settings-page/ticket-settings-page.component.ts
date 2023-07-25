@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { forkJoin, Subscription } from 'rxjs';
-import { DELETE_LIST_TICKET_STATUS } from 'src/app/const/confirm';
+import { DELETE_LIST_TICKET_PRIORITY, DELETE_LIST_TICKET_STATUS } from 'src/app/const/confirm';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { NoteStateService } from 'src/app/states/note/note-state.service';
@@ -44,9 +44,8 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
     this.settingStateService.setComponentName('InvoiceTicketsComponent');
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
-        if (this.confirmStateService.getConfirmAction() === DELETE_LIST_TICKET_STATUS) {
-          this.onRemoveTicketsStatus();
-        }
+        if (this.confirmStateService.getConfirmAction() === DELETE_LIST_TICKET_STATUS) this.onRemoveTicketsStatus();
+        if (this.confirmStateService.getConfirmAction() === DELETE_LIST_TICKET_PRIORITY) this.onRemoveTicketsPriority();
       }
     })
     this.sub.add(getConfirm);
@@ -76,6 +75,9 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
   getSelectedCount() {
     return this.ticketsStateService.getListTicketStatusForRemove().length;
   }
+  getSelectedPriorityCount() {
+    return this.ticketsStateService.getListTicketsPrioritiesForRemove().length;
+  }
   onBackMenu() {
     let body = document.getElementsByTagName("body")[0];
     body.classList.remove("backMenu"); //remove the class
@@ -92,10 +94,26 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
         }
       );
   }
+  onRemoveTicketsPriority() {
+    forkJoin(this.ticketsStateService.getListTicketsPrioritiesForRemove().map(item => this.ticketsService.removeTicketPriority(item.id)))
+      .subscribe(
+        () => {
+          this.ticketsStateService.setListTicketsPrioritiesForRemove([]);
+          this.cd.detectChanges();
+        },
+        error => {
+        }
+      );
+  }
   removeTicketsStatus() {
     this.confirmStateService.setConfirmAction(DELETE_LIST_TICKET_STATUS);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove Ticket Status`;
+  }
+  removeTicketsPriority() {
+    this.confirmStateService.setConfirmAction(DELETE_LIST_TICKET_PRIORITY);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.message = `Remove Ticket Priority`;
   }
 }
 
