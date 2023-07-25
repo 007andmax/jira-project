@@ -1,0 +1,100 @@
+@import "./src/assets/styles/variable";
+
+
+
+
+
+///////////
+.ticket-status-table {
+    .ticket-status-table__status {
+        .icon__company-info {
+            transform: translateY(3px);
+        }
+    }
+
+    &__status {
+        flex: 1 1 240px;
+
+        &.--parse-status {
+            padding: 7px 8px 8px;
+            color: $gray-900;
+        }
+    }
+
+    &__color {
+        flex: 1 1 190px;
+    }
+
+    &__preview {
+        flex: 1 1 500px;
+        padding: 0 8px;
+    }
+
+    &__action {
+        flex: 0 0 20px;
+    }
+}
+
+.tag-color {
+    position: relative;
+    display: block;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+
+    &::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background: url("/assets/img/icons/color-picker.svg") no-repeat center / contain;
+        width: 16px;
+        height: 16px;
+    }
+}
+
+.tag-color-item {
+    cursor: pointer;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+}
+
+.tag-color-container {
+    padding: 0 8px;
+}
+
+.status-container {
+    display: grid;
+    grid-template-columns: repeat(8, 24px);
+    gap: 0 8px;
+    justify-content: center;
+    padding: 4px 0;
+
+    .tag-color {
+        &::after {
+            content: none;
+        }
+
+        &.--active,
+        &:hover {
+            &::after {
+                content: "";
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                background-color: $white;
+                -webkit-mask-position: center;
+                mask-position: center;
+                -webkit-mask-image: url("/assets/img/icons/done-blue.svg");
+                mask-image: url("/assets/img/icons/done-blue.svg");
+                -webkit-mask-repeat: no-repeat;
+                mask-repeat: no-repeat;
+                -webkit-mask-size: 16px 16px;
+                mask-size: 16px 16px;
+            }
+        }
+    }
+}

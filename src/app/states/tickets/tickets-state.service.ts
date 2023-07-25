@@ -9,6 +9,7 @@ import { TicketsCounts } from '../../components/tickets/tickets/class/tickets-co
 import { TicketStatus } from 'src/app/components/setting/ticket-settings-page/tickets-status/class/ticket-status';
 import { StatusColor } from 'src/app/components/tickets/class/status-color';
 import { TicketsFilter } from 'src/app/components/tickets/tickets/class/tickets-filter';
+import { TicketsPriority } from 'src/app/components/setting/ticket-settings-page/tickets-priority/class/tickets-priority';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class TicketsStateService {
   isMoveToTickets: boolean = false;
   ticketStatusForRemove: TicketStatus = null;
   listTicketStatusForRemove: Array<TicketStatus> = [];
+  onTicketsPriorities: EventEmitter<any> = new EventEmitter();
   clearFormUpdate: EventEmitter<any> = new EventEmitter();
   actualNumber: EventEmitter<any> = new EventEmitter();
   addTicket: EventEmitter<any> = new EventEmitter();
@@ -40,6 +42,7 @@ export class TicketsStateService {
   listStatusColor: Array<StatusColor> = [];
   ticketsStatus: Array<TicketStatus> = [];
   ticketsFilter: TicketsFilter = new TicketsFilter();
+  ticketsPriorities: Array<TicketsPriority> = [];
   constructor(private ticketsRealTimeService: TicketsRealTimeService,
     private ticketsService: TicketsService) { }
 
@@ -90,6 +93,12 @@ export class TicketsStateService {
       this.ticketsStatus = data.map(item => new TicketStatus(item));
       this.onGetTicketsStatus.emit(this.ticketsStatus);
     })
+  }
+  public getTicketsPriorities() {
+    return this.ticketsPriorities;
+  }
+  public setTicketsPriorities(data) {
+    this.ticketsPriorities = data;
   }
   public getListTicketStatusForRemove() {
     return this.listTicketStatusForRemove;
@@ -179,6 +188,10 @@ export class TicketsStateService {
   public onColorStatus(data) {
     this.listStatusColor = data;
     this.colorStatus.emit(data);
+  }
+  public onSetTicketsPriorities(data) {
+    this.ticketsPriorities = data;
+    this.onTicketsPriorities.emit(data);
   }
   public onToggleAddTicket() {
     this.toggleAddTicket.emit(null);

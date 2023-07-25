@@ -13,6 +13,7 @@ import { InvoiceTicketsService } from '../accounting/accounting-settings.service
 import { CannedResponsesComponent } from './canned-responses/canned-responses.component';
 import { TicketSettingsComponent } from './ticket-settings/ticket-settings.component';
 import { TicketsStatusComponent } from './tickets-status/tickets-status.component';
+import { TicketsPriorityComponent } from './tickets-priority/tickets-priority.component';
 declare var $: any;
 @Component({
   selector: 'ticket-settings-page',
@@ -26,6 +27,7 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
   @ViewChild('ticketSettings') ticketSettings: TicketSettingsComponent;
   @ViewChild('ticketsStatus') ticketsStatus: TicketsStatusComponent;
   @ViewChild('cannedResponses') cannedResponses: CannedResponsesComponent;
+  @ViewChild('ticketPriority') ticketPriority: TicketsPriorityComponent;
   constructor(private invoiceTicketsService: InvoiceTicketsService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
@@ -57,6 +59,9 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
   }
   create() {
     this.ticketsStatus.toggleAddStatus(true);
+  }
+  createPriority() {
+    this.ticketPriority.toggleAddPriority(true);
   }
   createResponse() {
     this.noteStateService.openAddAside();

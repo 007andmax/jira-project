@@ -21,6 +21,9 @@ export class TicketsService {
   public getDashboardByServices(data) {
     return this.http.post(this.apiUrl + `dashboard/ticket/byServices`, data);
   }
+  public getTicketsPriorities() {
+    return this.http.get(this.apiUrl + `priorityLevel`);
+  }
   public getPasswordsDocuments(userId) {
     return this.http.get(this.apiUrl + `v2/tickets/previewInfo?userId=${userId}`);
   }
@@ -181,11 +184,29 @@ export class TicketsService {
         return data;
       }));
   }
+  public addPriority(name, color) {
+
+    return this.http.post(this.apiUrl + `priorityLevel`, { name: name, color: color }).pipe(
+      tap(data => {
+        this.toastrService.success("Priority created successfully");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
   public editTicketTask(data) {
 
     return this.http.put(this.apiUrl + `v2/tickets/task`, data).pipe(
       tap(data => {
         this.toastrService.success("The task has been successfully updated");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public editPriority(id, data) {
+
+    return this.http.put(this.apiUrl + `priorityLevel/${id}`, data).pipe(
+      tap(data => {
+        this.toastrService.success("Priority edited successfully");
         this.appStateService.changeDetectorRef();
         return data;
       }));

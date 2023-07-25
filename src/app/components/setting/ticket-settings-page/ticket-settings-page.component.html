@@ -45,6 +45,15 @@
                         <span _class="icon__add-grey qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
                         Create Response
                     </a>
+                    <a
+                        *ngIf="activeTab === 'ticketPriority'"
+                        href="javascript:;"
+                        class="qt-button --md --gray qt-jc-c pointer qt-ml-12"
+                        (click)="createPriority()"
+                    >
+                        <span _class="icon__add-grey qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
+                        Add priority
+                    </a>
                 </div>
             </div>
         </div>
@@ -63,6 +72,14 @@
             >
                 <ng-template ngbTabContent>
                     <tickets-status #ticketsStatus></tickets-status>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab
+                title="Ticket Priority"
+                id="ticketPriority"
+            >
+                <ng-template ngbTabContent>
+                    <app-tickets-priority #ticketPriority></app-tickets-priority>
                 </ng-template>
             </ngb-tab>
             <ngb-tab
