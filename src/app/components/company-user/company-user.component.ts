@@ -47,7 +47,7 @@ export class CompanyUserComponent implements OnInit {
   jobTitleList: Array<CrmCompanyJobTitle> = [];
   listCustomSubscription: Array<MarketingSubscriptionType> = [];
   industries: Array<CrmCompanyIndustry> = [];
-  @ViewChild('header') header: UsersHeaderComponent;
+  @ViewChild('header', { static: true }) header: UsersHeaderComponent;
   container = document.body.querySelector(".main-container");
   constructor(private usersStateService: UsersStateService,
     private userListService: UserListService,

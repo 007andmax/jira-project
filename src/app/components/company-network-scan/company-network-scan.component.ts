@@ -29,7 +29,7 @@ import { ConfirmStateService } from '../shared/confirm/services/confirm-state.se
   providers: [CompanyNetworkScanService]
 })
 export class CompanyNetworkScanComponent implements OnInit {
-  @ViewChild('btnInstallAgent') btnInstallAgent: DisabledBtnDirective;
+  @ViewChild('btnInstallAgent', { static: false }) btnInstallAgent: DisabledBtnDirective;
   devices: Array<Device> = [];
   networkScanInstallAgent: NetworkScanInstallAgent = new NetworkScanInstallAgent();
   networkScanDevices: NetworkScanDevices = new NetworkScanDevices();

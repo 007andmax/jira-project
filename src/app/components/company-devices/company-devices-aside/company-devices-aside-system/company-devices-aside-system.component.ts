@@ -14,10 +14,8 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
   styleUrls: ['./company-devices-aside-system.component.scss']
 })
 export class CompanyDevicesAsideSystemComponent implements OnInit {
-  @ViewChild('datePickerInstalledOn') datePickerInstalledOn: DatePickerComponent;
-  @ViewChild('datePickerWarranty') datePickerWarranty: DatePickerComponent;
-  @ViewChild('editLabel') editLabel: CompanyDevicesEditLabelComponent;
-
+  @ViewChild('datePickerWarranty', { static: true }) datePickerWarranty: DatePickerComponent;
+  @ViewChild('editLabel', { static: true }) editLabel: CompanyDevicesEditLabelComponent;
   @Input() device: DeviceExtended;
   toggleWindowSpecifications: boolean = false;
   toggleDeviceSpecifications: boolean = false;
@@ -72,9 +70,7 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
   getToDayDate() {
     return Date.now();
   }
-  onOpenDatePicketInstalledOn() {
-    this.datePickerInstalledOn.getDropDown().open();
-  }
+
   onOpenDatePicketWarranty() {
     this.datePickerWarranty.getDropDown().open();
   }

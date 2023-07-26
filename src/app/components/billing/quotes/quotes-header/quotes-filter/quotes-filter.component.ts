@@ -15,9 +15,9 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
   styleUrls: ['./quotes-filter.component.scss']
 })
 export class QuotesFilterComponent implements OnInit {
-  @ViewChild('companyDp') companyDp: CompanyDropDownComponent;
-  @ViewChild('statusDp') statusDp: DropDownComponent;
-  @ViewChild('datesDp') datesDp: MultiDatepickerComponent;
+  @ViewChild('companyDp', { static: true }) companyDp: CompanyDropDownComponent;
+  @ViewChild('statusDp', { static: true }) statusDp: DropDownComponent;
+  @ViewChild('datesDp', { static: true }) datesDp: MultiDatepickerComponent;
   sub: Subscription = new Subscription();
   quotesFilter: QuoteFilter = new QuoteFilter();
   @Output() changeCountFilter = new EventEmitter<any>();

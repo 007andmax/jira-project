@@ -32,7 +32,7 @@ import { ToastrService } from 'ngx-toastr';
   providers: [CompanyNetworkScanService]
 })
 export class CompanyNetworkScanBetaComponent implements OnInit, OnDestroy {
-  @ViewChild('btnInstallAgent') btnInstallAgent: DisabledBtnDirective;
+  @ViewChild('btnInstallAgent', { static: false }) btnInstallAgent: DisabledBtnDirective;
   devices: Array<Device> = [];
   networkScanInstallAgent: NetworkScanInstallAgent = new NetworkScanInstallAgent();
   networkScanDevices: NetworkScanDevices = new NetworkScanDevices();

@@ -27,8 +27,8 @@ export class CompanyAssociateComponent implements OnInit, OnDestroy {
   @Input() placement: string;
   @Input() filter: boolean = false;
   @Input() blockCreateTag: boolean = false;
-  @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
-  @ViewChild('dp') dp: any;
+  @ViewChild('userInput', { static: true }) userInput: ElementRef<HTMLInputElement>;
+  @ViewChild('dp', { static: true }) dp: any;
   @Output() companiesChange = new EventEmitter();
   /**
    * Creates an instance of the TagsComponent with the injected services

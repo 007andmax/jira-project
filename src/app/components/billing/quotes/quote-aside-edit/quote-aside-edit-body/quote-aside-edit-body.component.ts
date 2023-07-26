@@ -25,7 +25,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
   styleUrls: ['./quote-aside-edit-body.component.scss']
 })
 export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
-  @ViewChild('servicesList') servicesList: ServiceListQuoteComponent;
+  @ViewChild('servicesList', { static: false }) servicesList: ServiceListQuoteComponent;
   @Input() validate: QuoteValdiateEdit = new QuoteValdiateEdit();
   @Output() onStopPreloader = new EventEmitter();
   quoteCompany: CompanyItem;

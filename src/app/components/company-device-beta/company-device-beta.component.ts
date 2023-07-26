@@ -31,15 +31,16 @@ import { CompanyDevicesRemoteAccessComponent } from "../company-devices/company-
   styleUrls: ["./company-device-beta.component.scss"]
 })
 export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
-  @ViewChild("templatePowersell") template;
-  @ViewChild('dropdownModel') dropdownModel: DropDownComponent;
-  @ViewChild('dropdowndeviceCompany') dropdowndeviceCompany: DropDownComponent;
-  @ViewChild('dropdowndeviceTp') dropdowndeviceTp: DropDownComponent;
-  @ViewChild('dropdownManufacturer') dropdownManufacturer: DropDownComponent;
-  @ViewChild('installdatePicker') installdatePicker: DatePickerComponent;
-  @ViewChild('warrantydatePicker') warrantydatePicker: DatePickerComponent;
-  @ViewChild('dropdownManufacturersidebar') dropdownManufacturersidebar: DropDownComponent;
-  @ViewChild('dropdownModelSidebar') dropdownModelSidebar: DropDownComponent;
+  @ViewChild("templatePowersell", { static: true }) template;
+  @ViewChild('dropdownModel', { static: true }) dropdownModel: DropDownComponent;
+  @ViewChild('dropdowndeviceCompany', { static: true }) dropdowndeviceCompany: DropDownComponent;
+  @ViewChild('dropdowndeviceTp', { static: true }) dropdowndeviceTp: DropDownComponent;
+  @ViewChild('dropdownManufacturer', { static: true }) dropdownManufacturer: DropDownComponent;
+  @ViewChild('installdatePicker', { static: true }) installdatePicker: DatePickerComponent;
+  @ViewChild('warrantydatePicker', { static: true }) warrantydatePicker: DatePickerComponent;
+  @ViewChild('dropdownManufacturersidebar', { static: false }) dropdownManufacturersidebar: DropDownComponent;
+  @ViewChild('dropdownModelSidebar', { static: false }) dropdownModelSidebar: DropDownComponent;
+  @ViewChild('dropdownServices', { static: true }) selectedInput: ElementRef<HTMLInputElement>;
   selectAllDevices: boolean = false;
   assetList: any[] = [];
   assetID: any[] = [];
@@ -138,8 +139,6 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
   fileName: string = "device-summary-report";
   accountType = "CLIENT";
   templatepdf: string = "PDF_TEMPLATE";
-  @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
-
   IsUpdateInstalling: boolean = false;
   IsCurrentConfigLoading: boolean = false;
   devices: any[] = [];

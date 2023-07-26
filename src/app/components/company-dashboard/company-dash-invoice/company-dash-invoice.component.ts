@@ -25,8 +25,6 @@ export class CompanyDashInvoiceComponent implements OnInit {
       this.getRecentInvoiceList(val);
     }
   }
-  // @ViewChild('previewInvoiceAside') previewInvoiceAside: InvoicesAsidePreviewComponent;
-
   public constructor(private companiesService: CompaniesService,
     private invoiceStateService: InvoiceStateService,
     private invoicesService: InvoicesService,

@@ -22,7 +22,6 @@ export class CompanyDashContractComponent implements OnInit {
   sub: Subscription = new Subscription();
   contractsList = [];
   statistics = [];
-  @ViewChild('previewInvoiceAside') previewInvoiceAside: InvoicesAsidePreviewComponent;
   statisticsColor = ['0747a6', '00ccff', '052e6b', 'cdecff', '16A4FA', '7C77CB', '2BC7C6'];
   showContractPreview: boolean = false;
   showContractEdit: boolean = false;

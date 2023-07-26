@@ -20,7 +20,6 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
   styleUrls: ['./company-devices-item.component.scss']
 })
 export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
-  @ViewChild('editLabel') editLabel: CompanyDevicesEditLabelComponent;
   @Input() device: DeviceCompany;
   @Input() companyId: string;
   timer: any = null;

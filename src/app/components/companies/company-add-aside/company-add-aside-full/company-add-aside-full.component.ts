@@ -36,7 +36,6 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
   new CompanySetting('Credit Card', 'CREDIT_CARD'),
   new CompanySetting('Wire Transfer', 'WIRE_TRANSFER')];
   serviceTypes: Array<CrmCompanyServiceType> = [];
-  @ViewChild('addresstext') addresstext: any;
   industries: Array<CrmCompanyIndustry> = [];
   locationIsinit: boolean = false;
   jobTitleList: Array<CrmCompanyJobTitle> = [];

@@ -34,8 +34,8 @@ import { LeftPanelComponent } from '../../left-panel/left-panel.component';
 export class LeftPanelCustomerPortalComponent extends LeftPanelComponent {
 
 
-  @ViewChild('panelCompanyInfo') panelCompanyInfo: LeftPanelCustomerPortalUsersComponent;
-  @ViewChild('panelSettings') panelSettings: LeftPanelSettingsComponent;
+  @ViewChild('panelCompanyInfo', { static: true }) panelCompanyInfo: LeftPanelCustomerPortalUsersComponent;
+  @ViewChild('panelSettings', { static: true }) panelSettings: LeftPanelSettingsComponent;
 
   public isShowSettingsPage() {
     return this.currentUser && this.currentUser.customerCompaniesInfo.find(item => item.customerUserRole && item.customerUserRole.getPermission('VIEW_MY_PROFILE'));

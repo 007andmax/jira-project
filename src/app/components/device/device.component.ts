@@ -20,7 +20,7 @@ declare var $: any;
   styleUrls: ["./device.component.scss"],
 })
 export class DeviceComponent implements OnInit, OnDestroy {
-  @ViewChild("templatePowersell") template;
+  @ViewChild("templatePowersell", { static: true }) template;
 
   title = "quck-device";
   totalSeconds: any = 0;

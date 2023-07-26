@@ -45,7 +45,7 @@ export class HardwareComponent implements OnInit {
   _id: string = '';
   type: string = '';
   DateTimeFormat = CONFIGCONSTANTS.DateTimeFormat;
-  @ViewChild('header') header: HardwareHeaderComponent;
+  @ViewChild('header', { static: true }) header: HardwareHeaderComponent;
   constructor(private hardwareService: HardwareService,
     private toastr: ToastrService,
     private commonHttpServices: CommonHttpServices,

@@ -33,7 +33,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
   offset: number = 30;
   showPendingPreloader: boolean = false;
   idEditTicket: string = '';
-  @ViewChild('header') header: TicketsHeaderComponent;
+  @ViewChild('header', { static: true }) header: TicketsHeaderComponent;
   ticketsStatus: Array<TicketStatus> = [];
   container = document.body.querySelector(".main-container");
   isInitTickets: boolean = false;

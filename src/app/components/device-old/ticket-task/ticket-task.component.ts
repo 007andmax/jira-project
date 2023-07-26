@@ -23,7 +23,7 @@ declare var $: any;
 })
 export class TicketTaskComponent implements OnInit, OnDestroy {
   private tabSet: ViewContainerRef;
-  @ViewChild(NgbTabset) set content(content: ViewContainerRef) {
+  @ViewChild(NgbTabset, { static: true }) set content(content: ViewContainerRef) {
     this.tabSet = content;
   };
   DateFormat = CONFIGCONSTANTS.DateFormat;

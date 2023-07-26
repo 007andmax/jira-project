@@ -63,15 +63,14 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   idUploadFile: string;
   MODE_EDIT_USER_SUBSCRIPTION = MODE_EDIT_USER_SUBSCRIPTION;
   MODE_EDIT_SUBSCRIPTION = MODE_EDIT_SUBSCRIPTION;
-  @ViewChild('companyTags') companyTags: CompanyTagsComponent;
-  @ViewChild('addresstext') addresstext: any;
-  @ViewChild('clientType') clientType: DropDownComponent;
-  @ViewChild('jobTitleDp') jobTitleDp: DropDownComponent;
-  @ViewChild('paymentTerm') paymentTerm: DropDownComponent;
-  @ViewChild('paymentMethod') paymentMethod: DropDownComponent;
-  @ViewChild('serviceType') serviceType: DropDownComponent;
-  @ViewChild('companyAssociate') companyAssociate: CompanyAssociateComponent;
-  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
+  @ViewChild('companyTags', { static: true }) companyTags: CompanyTagsComponent;
+  @ViewChild('clientType', { static: true }) clientType: DropDownComponent;
+  @ViewChild('jobTitleDp', { static: true }) jobTitleDp: DropDownComponent;
+  @ViewChild('paymentTerm', { static: true }) paymentTerm: DropDownComponent;
+  @ViewChild('paymentMethod', { static: true }) paymentMethod: DropDownComponent;
+  @ViewChild('serviceType', { static: true }) serviceType: DropDownComponent;
+  @ViewChild('companyAssociate', { static: true }) companyAssociate: CompanyAssociateComponent;
+  @ViewChild('addBtn', { static: false }) addBtn: DisabledBtnDirective;
   jobTitleList: Array<CrmCompanyJobTitle> = [];
   constructor(private companiesStateService: CompaniesStateService,
     private companiesService: CompaniesService,

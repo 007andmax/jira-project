@@ -27,10 +27,10 @@ export class CompaniesFilterComponent implements OnInit {
   industries: Array<CrmCompanyIndustry> = [];
   listPersons: Array<ItemFilterPerson> = [];
   companyFilter: CompanyFilter = new CompanyFilter();
-  @ViewChild('typesDp') typesDp: DropDownComponent;
-  @ViewChild('personsDp') personsDp: DropDownComponent;
-  @ViewChild('industriesDp') industriesDp: DropDownComponent;
-  @ViewChild('tagsDp') tagsDp: CompanyTagsComponent;
+  @ViewChild('typesDp', { static: true }) typesDp: DropDownComponent;
+  @ViewChild('personsDp', { static: true }) personsDp: DropDownComponent;
+  @ViewChild('industriesDp', { static: true }) industriesDp: DropDownComponent;
+  @ViewChild('tagsDp', { static: true }) tagsDp: CompanyTagsComponent;
   @Output() changeCountFilter = new EventEmitter<any>();
   @Output() onClose = new EventEmitter();
   sub: Subscription = new Subscription();

@@ -19,7 +19,6 @@ import * as moment from "moment";
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-  @ViewChild(NgbDatepicker) d: NgbDatepicker;
   url = environment.apiUrl + 'upload';
   formData: FormData;
   dragOver: boolean;

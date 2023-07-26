@@ -24,7 +24,7 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
   toggleFilter: boolean = true;
   countFilter: number = 0;
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
-  @ViewChild('filter') filter: CompaniesFilterComponent;
+  @ViewChild('filter', { static: true }) filter: CompaniesFilterComponent;
   @Output() onChangeFilterField = new EventEmitter<any>();
   @Output() onSelectAllCompanies = new EventEmitter<any>();
 

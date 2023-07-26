@@ -16,7 +16,7 @@ import { NetworkScanSomeInfoForDevice } from '../class/network-scan-some-info-fo
   styleUrls: ['./company-network-scan-item.component.scss']
 })
 export class CompanyNetworkScanItemComponent implements OnInit {
-  @ViewChild('editLabel') editLabel: CompanyDevicesEditLabelComponent;
+  @ViewChild('editLabel', { static: true }) editLabel: CompanyDevicesEditLabelComponent;
   @Input() networkScanSomeInfoForDevice: NetworkScanSomeInfoForDevice;
   @Input() device: NetworkScanDevice;
   @Input() masterAgent: Device = null;

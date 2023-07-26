@@ -53,7 +53,7 @@ export class SoftwareComponent implements OnInit, OnDestroy {
   };
   _id: string = '';
   type: string = '';
-  @ViewChild('header') header: SoftwareHeaderComponent;
+  @ViewChild('header', { static: true }) header: SoftwareHeaderComponent;
   dtTrigger = new Subject();
   sub: Subscription = new Subscription();
   constructor(private softwareListService: SoftwareListService,

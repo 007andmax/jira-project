@@ -29,7 +29,7 @@ export class TerminalComponent implements OnInit, OnDestroy {
   loading = false;
   his = '';
   sub: Subscription = new Subscription();
-  @ViewChild('commandFrm') form: any;
+  @ViewChild('commandFrm', { static: true }) form: any;
   commandModal: commandModal = {
     title: '',
     command: '',
@@ -86,7 +86,6 @@ export class TerminalComponent implements OnInit, OnDestroy {
   cmdHeight = 0;
   commandShoot: boolean = false;
   count = -1;
-  @ViewChild('editor') editorElement: ElementRef;
   code = '';
   config = {
     lineNumbers: true,

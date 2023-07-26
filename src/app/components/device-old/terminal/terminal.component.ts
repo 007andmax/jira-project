@@ -64,8 +64,7 @@ export class TerminalComponent implements OnInit {
   showDescription = false;
   terminalHeight = 0;
   cmdHeight = 0;
-  @ViewChild('aside') aside: TerminalAsideComponent;
-  @ViewChild('editor') editorElement: ElementRef;
+  @ViewChild('aside', { static: true }) aside: TerminalAsideComponent;
   terminalHit = false;
   _id: string = '';
   type: string = '';

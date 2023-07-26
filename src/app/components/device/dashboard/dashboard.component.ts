@@ -27,9 +27,9 @@ import { CompaniesStateService } from "src/app/states/company/companies-state.se
   ],
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-  @ViewChild(NgbDatepicker) expire: NgbDatepicker;
-  @ViewChild('searchInput') private searchInput: ElementRef;
-  @ViewChild('Tagproducts') Tagproducts: NgbDropdown;
+  @ViewChild(NgbDatepicker, { static: false }) expire: NgbDatepicker;
+  @ViewChild('searchInput', { static: false }) private searchInput: ElementRef;
+  @ViewChild('Tagproducts', { static: false }) Tagproducts: NgbDropdown;
   DateFormat = CONFIGCONSTANTS.DateFormat1;
   DateTimeFormat = CONFIGCONSTANTS.DateTimeFormat1;
   DateFormats = CONFIGCONSTANTS.DateFormat;

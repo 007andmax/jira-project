@@ -36,8 +36,8 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   @Input() blockCreateTag: boolean = false;
   @Input() blockUserTag: boolean = false;
   @Input() isDisabled: boolean = false;
-  @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
-  @ViewChild('dp') dp: any;
+  @ViewChild('userInput', { static: true }) userInput: ElementRef<HTMLInputElement>;
+  @ViewChild('dp', { static: true }) dp: any;
   @Output() tagsChange = new EventEmitter();
   /**
    * Creates an instance of the TagsComponent with the injected services

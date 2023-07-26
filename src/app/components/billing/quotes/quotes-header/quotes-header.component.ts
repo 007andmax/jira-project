@@ -9,7 +9,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
   styleUrls: ['./quotes-header.component.scss']
 })
 export class QuotesHeaderComponent implements OnInit {
-  @ViewChild('filter') filter: QuotesFilterComponent;
+  @ViewChild('filter', { static: true }) filter: QuotesFilterComponent;
   countFilter: number = 0;
   toggleFilter: boolean = false;
   @Output() onCreatePayment = new EventEmitter<any>();

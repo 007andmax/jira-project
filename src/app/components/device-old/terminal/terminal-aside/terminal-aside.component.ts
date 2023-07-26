@@ -36,7 +36,6 @@ export class TerminalAsideComponent implements OnInit {
   scriptTypes = [new CompanySetting('Command Line', 'CMD'),
   new CompanySetting('Powershell', 'POWERSHELL')];
   his = '';
-  @ViewChild('commandFrm') form: any;
   @Input() loading: boolean;
   @Input() _id: string = '';
   validate: TerminalValidate = new TerminalValidate();
@@ -45,8 +44,9 @@ export class TerminalAsideComponent implements OnInit {
   @Output() onCopyToTerminal = new EventEmitter();
   @Output() onOpenRunScript = new EventEmitter();
   @Output() onOpenModal = new EventEmitter();
-  @ViewChild('scriptType') scriptType: DropDownComponent;
-  @ViewChild('selectCategory') selectCategory: DropDownComponent;
+  @ViewChild('commandFrm', { static: true }) form: any;
+  @ViewChild('scriptType', { static: true }) scriptType: DropDownComponent;
+  @ViewChild('selectCategory', { static: true }) selectCategory: DropDownComponent;
 
   constructor(private modalService: NgbModal,
     private toastr: ToastrService,
