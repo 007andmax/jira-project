@@ -19,20 +19,18 @@
                     <a
                         href="javascript:;"
                         class="qt-button --md --gray button-gl-number__delete qt-ml-12"
-                        *ngIf="getSelectedCount() > 0 || getSelectedPriorityCount() > 0"
+                        *ngIf="getSelectedCount() > 0"
+                        (click)="removeTicketsStatus()"
                     >
-                        <div
-                            *ngIf="getSelectedCount() > 0"
-                            class="icon__remove qt-sz-16 qt-bg-contain qt-ic-c"
-                            (click)="removeTicketsStatus()"
-                        >
-                        </div>
-                        <div
-                            *ngIf="getSelectedPriorityCount() > 0"
-                            class="icon__remove qt-sz-16 qt-bg-contain qt-ic-c"
-                            (click)="removeTicketsPriority()"
-                        >
-                        </div>
+                        <div class="icon__remove qt-sz-16 qt-bg-contain qt-ic-c"></div>
+                    </a>
+                    <a
+                        href="javascript:;"
+                        class="qt-button --md --gray button-gl-number__delete qt-ml-12"
+                        *ngIf="getSelectedPriorityCount() > 0"
+                        (click)="removeTicketsPriority()"
+                    >
+                        <div class="icon__remove qt-sz-16 qt-bg-contain qt-ic-c"></div>
                     </a>
                     <a
                         class="qt-button --md --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
@@ -49,7 +47,7 @@
                         class="qt-button --md --gray qt-jc-c pointer qt-ml-12"
                         (click)="createResponse()"
                     >
-                        <span _class="icon__add-grey qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
+                        <span class="icon__add-grey qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
                         Create Response
                     </a>
                     <a
@@ -58,7 +56,7 @@
                         class="qt-button --md --gray qt-jc-c pointer qt-ml-12"
                         (click)="createPriority()"
                     >
-                        <span _class="icon__add-grey qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
+                        <span class="icon__add-grey qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
                         Add priority
                     </a>
                 </div>

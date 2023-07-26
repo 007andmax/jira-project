@@ -24,6 +24,8 @@ import { TechUsersComponent } from 'src/app/components/shared/tech-users/tech-us
 import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { TicketsPriority } from 'src/app/components/setting/ticket-settings-page/tickets-priority/class/tickets-priority';
+import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
+import { StatusColor } from '../../class/status-color';
 
 
 
@@ -52,6 +54,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
   namesTechUsersList = [];
   shareUsersList = [];
   selectedCompanyId: string;
+  statusColors: Array<StatusColor> = [];
   listTechUsersForAssign: Array<TechUserItem> = [];
   ticketPriorities: Array<TicketsPriority> = [];
   ticketValidate: TicketValidate = new TicketValidate();
@@ -68,6 +71,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     private companiesService: CompaniesService,
     public customerPortalStateService: CustomerPortalStateService,
     private addUsersNotifyStateService: AddUsersNotifyStateService,
+    private leftPanelService: LeftPanelService,
     private companiesState: CompaniesStateService,) { }
 
 
@@ -87,7 +91,10 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       this.opened = !this.opened;
       if (this.appService.checkMobile()) this.appService.toggleMobileAside(true);
       if (this.opened && this.companiesState.getCompanyRoutingId()) this.companyDP.onSelect(this.companiesState.getCompanies().find(item => item.id === this.companiesState.getCompanyRoutingId()));
-      if (this.opened) this.getTicketPriority();
+      if (this.opened) {
+        this.getTicketPriority();
+        this.getColors();
+      }
     })
     let getOnCompanies = this.companiesState.onGetCompanies.subscribe((data) => {
       if (this.opened && this.companiesState.getCompanyRoutingId()) this.companyDP.onSelect(this.companiesState.getCompanies().find(item => item.id === this.companiesState.getCompanyRoutingId()));
@@ -96,6 +103,16 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       if (this.addUsersNotifyStateService.getAction() === USERS_TO_ADD_TICKET) this.onChangeShareUsers(data);
     })
     this.sub.add(onChangeAssignedUser);
+  }
+  getColors() {
+    if (this.ticketsStateService.getListStatusColor().length === 0) {
+      this.leftPanelService.getColors().subscribe((data: any) => {
+        this.statusColors = data.map(item => new StatusColor(item.borderColor, item.textColor))
+        this.ticketsStateService.onColorStatus(this.statusColors);
+      })
+    } else {
+      this.statusColors = this.ticketsStateService.getListStatusColor();
+    }
   }
   getTicketPriority() {
     if (this.ticketsStateService.getTicketsPriorities().length === 0) {

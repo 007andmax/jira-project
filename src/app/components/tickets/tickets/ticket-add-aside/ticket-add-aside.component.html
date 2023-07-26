@@ -38,7 +38,11 @@
                                 tabindex="-1"
                                 href="javascript:void(0)"
                             >
-                                <span class="priority-dot {{ item.name.toLowerCase() }}"></span>
+                                <span
+                                    class="priority-dot"
+                                    [ngStyle]="{'background-color':statusColors[item.color] && statusColors[item.color].textColor ,
+                            'border-color': statusColors[item.color] && statusColors[item.color].textColor}"
+                                ></span>
                                 {{ item.name }}
                             </a>
                         </li>

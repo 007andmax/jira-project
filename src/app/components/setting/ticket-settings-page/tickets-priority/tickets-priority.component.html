@@ -11,20 +11,7 @@
                         <span></span>
                     </label>
                 </div>
-                <div class="tab-pane__table-cell ticket-status-table__priority">
-                    Ticket Priority
-                    <ng-template
-                        #tipContent
-                        class="tooltip"
-                    >
-                        The maximum number of custom statuses is 10
-                    </ng-template>
-                    <span
-                        class="icon__company-info qt-sz-16 qt-ic-c qt-dib pointer"
-                        placement="top"
-                        [ngbTooltip]="tipContent"
-                    ></span>
-                </div>
+                <div class="tab-pane__table-cell ticket-status-table__priority">Ticket Priority</div>
                 <div class="tab-pane__table-cell ticket-status-table__color">Set Color</div>
                 <div class="tab-pane__table-cell ticket-status-table__action">&nbsp;</div>
             </div>
@@ -126,7 +113,10 @@
                 (onOutSide)="onEditTicketPriority(item)"
             >
                 <div class="tab-pane__table-cell tab-pane__table-checkboxes">
-                    <label class="qt-checkbox">
+                    <label
+                        class="qt-checkbox"
+                        *ngIf="!item.isDefault"
+                    >
                         <input
                             type="checkbox"
                             [(ngModel)]="item.selected"
@@ -204,6 +194,7 @@
                         (mouseleave)="removeTooltip.hide()"
                         class="icon__remove qt-sz-20 qt-bg-contain pointer"
                         (click)="removeTicketPriority(item)"
+                        *ngIf="!item.isDefault"
                     >
                     </div>
                 </div>

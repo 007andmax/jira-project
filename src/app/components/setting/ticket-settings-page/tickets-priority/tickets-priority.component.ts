@@ -114,8 +114,10 @@ export class TicketsPriorityComponent implements OnInit {
   onToggleAll(event) {
     if (event.target.checked) {
       this.ticketsPriorities.forEach(item => {
-        if (!item.selected) this.ticketsStateService.getListTicketsPrioritiesForRemove().push(item);
-        item.selected = true;
+        if (!item.isDefault) {
+          if (!item.selected) this.ticketsStateService.getListTicketsPrioritiesForRemove().push(item);
+          item.selected = true;
+        }
       })
     } else {
       this.ticketsStateService.setListTicketsPrioritiesForRemove([]);

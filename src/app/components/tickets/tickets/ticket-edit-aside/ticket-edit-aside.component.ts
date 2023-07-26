@@ -427,7 +427,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     }
   }
   getClassType() {
-    return `priority-icon ticket-edit-aside__ticket-subject-flag ${(this.ticketProfile.priorityLevel && this.ticketProfile.priorityLevel !== "MEDIUM") ? '--' + this.ticketProfile.priorityLevel.toLowerCase() : ''}`;
+    return `priority-icon ticket-edit-aside__ticket-subject-flag ${(this.ticketProfile.priorityLevel && this.ticketProfile.priorityLevel.name !== "MEDIUM") ? '--' + this.ticketProfile.priorityLevel.name.toLowerCase() : ''}`;
   }
   public trackByIndex(index, item) {
     return index;
