@@ -145,7 +145,8 @@ export class TicketsPriorityComponent implements OnInit {
     }
   }
   ngOnDestroy(): void {
-    this.ticketsStateService.setListTicketStatusForRemove([]);
+    this.ticketsStateService.setListTicketsPrioritiesForRemove([]);
+    this.ticketsPriorities.forEach(item => (item.selected = false))
     this.sub.unsubscribe();
   }
 
