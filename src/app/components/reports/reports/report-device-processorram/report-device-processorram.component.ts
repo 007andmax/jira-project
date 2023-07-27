@@ -20,7 +20,7 @@ import { DeviceProcessorRamReportFilter } from "./Class/device-processorram-repo
   styleUrls: ["./report-device-processorram.component.scss"],
 })
 export class ReportDeviceProcessorramComponent implements OnInit {
-  @ViewChild('dropdownDevice') dropdownDevice: DropDownComponent;
+  @ViewChild('dropdownDevice', { static: true }) dropdownDevice: DropDownComponent;
   clientName: string;
   companies = [];
   deviceProcessorRamList: any = [];

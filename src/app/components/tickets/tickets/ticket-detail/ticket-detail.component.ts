@@ -48,11 +48,11 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 
 })
 export class TicketDetailComponent implements OnInit, OnDestroy {
-  @ViewChild('editUpdateForm') editUpdateForm: TicketProfileEditFormUpdateComponent;
-  @ViewChild('ticketMessage') ticketMessage: TicketMessageComponent;
-  @ViewChild('ticketProfileUpdates') ticketProfileUpdates: TicketDetailProfileUpdatesComponent;
-  @ViewChild('ticketTasks') ticketTasks: TicketDetailTasksComponent;
-  @ViewChild('detailHeader') detailHeader: TicketDetailHeaderComponent;
+  @ViewChild('editUpdateForm', { static: true }) editUpdateForm: TicketProfileEditFormUpdateComponent;
+  @ViewChild('ticketMessage', { static: false }) ticketMessage: TicketMessageComponent;
+  @ViewChild('ticketProfileUpdates', { static: true }) ticketProfileUpdates: TicketDetailProfileUpdatesComponent;
+  @ViewChild('ticketTasks', { static: false }) ticketTasks: TicketDetailTasksComponent;
+  @ViewChild('detailHeader', { static: false }) detailHeader: TicketDetailHeaderComponent;
   isInit: boolean = false;
   ticketProfile: TicketProfile = new TicketProfile();
   showFormUpdate: boolean = false;

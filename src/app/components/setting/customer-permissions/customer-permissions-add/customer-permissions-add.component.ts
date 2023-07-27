@@ -9,7 +9,7 @@ import { AppStateService } from 'src/app/states/app/app-state.service';
   styleUrls: ['./customer-permissions-add.component.scss']
 })
 export class CustomerPermissionsAddComponent implements OnInit {
-  @ViewChild('addCustomer') addCustomer: NgbDropdown;
+  @ViewChild('addCustomer', { static: true }) addCustomer: NgbDropdown;
   name: string = '';
   constructor(private usersService: UsersService,
     private appStateService: AppStateService) { }

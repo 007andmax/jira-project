@@ -16,7 +16,7 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit, OnDestroy {
-  @ViewChild('products') products_dropDown: NgbDropdown;
+  @ViewChild('products', { static: true }) products_dropDown: NgbDropdown;
   @Output() selectedProductItem = new EventEmitter<any>();
   itemList: Array<CategoryProductitem> = [];
   @Input() editItem: any;

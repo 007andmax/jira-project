@@ -34,10 +34,10 @@ export class ContractComponent implements OnInit, OnDestroy {
 
   loading = true;
   sub: Subscription = new Subscription();
-  @ViewChild('commissionRate') commissionRate: ElementRef;
-  @ViewChild('commissionRateHourInput') commissionRateHourInput: ElementRef;
-  @ViewChild('commissionUserDeviceRateInput') commissionUserDeviceRateInput: ElementRef;
-  @ViewChild('commissionRateContractsInput') commissionRateContractsInput: ElementRef;
+  @ViewChild('commissionRate', { static: true }) commissionRate: ElementRef;
+  @ViewChild('commissionRateHourInput', { static: true }) commissionRateHourInput: ElementRef;
+  @ViewChild('commissionUserDeviceRateInput', { static: true }) commissionUserDeviceRateInput: ElementRef;
+  @ViewChild('commissionRateContractsInput', { static: true }) commissionRateContractsInput: ElementRef;
 
   constructor(
     private commissionService: CommissionService,

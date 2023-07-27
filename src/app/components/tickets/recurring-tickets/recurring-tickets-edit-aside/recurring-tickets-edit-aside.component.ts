@@ -40,10 +40,6 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   public ticketForEdit: RecurringTicket = null;
   public validate: Validate = new Validate();
   public listTechUsers: Array<TechUserItem> = [];
-  description: TextAreaDirective;
-  @ViewChild(TextAreaDirective) set appTextArea(directive: TextAreaDirective) {
-    this.description = directive;
-  };
 
 
   /**
@@ -122,7 +118,6 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.createService.getTechState().setUsersFromtEdit(data.assignedUsers);
     this.createService.setCronForEdit(data.cronExpression);
     this.onChangeCron(data.cronExpression);
-    // this.description.update();
     this.cd.detectChanges();
 
   }

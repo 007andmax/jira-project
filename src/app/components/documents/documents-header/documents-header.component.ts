@@ -16,7 +16,7 @@ export class DocumentsHeaderComponent implements OnInit {
   toggleFilter: boolean = false;
   countFilter: number = 0;
   activePage: string = "";
-  @ViewChild('filter') filter: DocumentsFilterComponent;
+  @ViewChild('filter', { static: true }) filter: DocumentsFilterComponent;
   @Output() onChangeFilterField = new EventEmitter<any>();
   @Output() onSelectAll = new EventEmitter<any>();
   @Output() onSearch = new EventEmitter<any>();

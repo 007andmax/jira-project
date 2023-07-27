@@ -53,10 +53,9 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     paging: false,
     info: false
   };
-  @ViewChild("tickets") tickets: ElementRef;
+  @ViewChild("tickets", { static: true }) tickets: ElementRef;
   private tabSet: ViewContainerRef;
-
-  @ViewChild(NgbTabset) set content(content: ViewContainerRef) {
+  @ViewChild(NgbTabset, { static: true }) set content(content: ViewContainerRef) {
     this.tabSet = content;
   };
   dtTrigger = new Subject();

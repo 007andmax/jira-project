@@ -18,8 +18,8 @@ import { DurationService } from './services/duration.service';
 export class DurationComponent implements OnInit, OnDestroy {
 
 
-  @ViewChild('instanceHours') instanceHours: NgbTypeahead;
-  @ViewChild('instanceMin') instanceMin: NgbTypeahead;
+  @ViewChild('instanceHours', { static: true }) instanceHours: NgbTypeahead;
+  @ViewChild('instanceMin', { static: true }) instanceMin: NgbTypeahead;
   @Output() selectedDucation = new EventEmitter<any>();
   @Input() editItem: number;
   public selectedHours;

@@ -21,7 +21,7 @@ export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
   toggleFilter: boolean = true;
   toggleSearch: boolean = false;
   countFilter: number = 0;
-  @ViewChild('filters') filters: PasswoordManagerFiltersComponent;
+  @ViewChild('filters', { static: true }) filters: PasswoordManagerFiltersComponent;
   filter: FilterPasswordManager = new FilterPasswordManager();
   @Output() onChangeFilterField = new EventEmitter<any>();
   @Output() onSelectAll = new EventEmitter<any>();

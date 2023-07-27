@@ -21,7 +21,7 @@ import { NetworkIPReportFilter } from "./Class/network-ip-report";
   styleUrls: ["./network-ip-report.component.scss"],
 })
 export class NetworkIpReportComponent implements OnInit {
-  @ViewChild('dropdownDevice') dropdownDevice: DropDownComponent;
+  @ViewChild('dropdownDevice', { static: true }) dropdownDevice: DropDownComponent;
   clientName: string;
   companies = [];
   networkipList: any = [];

@@ -19,7 +19,7 @@ var $ = require("jquery");
 export class SupportPageInfoTagsComponent implements OnInit {
   @Input() disabled: boolean;
   @Input() selectedTag: Array<string> = [];
-  @ViewChild('dp') dp: NgbDropdown;
+  @ViewChild('dp', { static: true }) dp: NgbDropdown;
   @Output() tagsChange = new EventEmitter();
   tags: Array<SupportPageInfoTag> = [];
   reqTags: Array<SupportPageInfoTag> = [];

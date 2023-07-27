@@ -27,7 +27,7 @@ export class TagsComponent implements OnInit, OnDestroy {
   tags: Array<Tag> = [];
   sub = new Subscription();
   editItem: any;
-  @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
+  @ViewChild('userInput', { static: true }) userInput: ElementRef<HTMLInputElement>;
   @Output() tagsChange = new EventEmitter();
 
   /**

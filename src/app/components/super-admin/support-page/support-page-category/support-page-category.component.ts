@@ -26,8 +26,8 @@ export class SupportPageCategoryComponent implements OnInit {
   attachments = [];
   isFirstOpen: boolean = true;
   sub: Subscription = new Subscription();
-  @ViewChild('header') header: SupportPageHeaderComponent;
-  @ViewChild('body') body: SupportPageBodyComponent;
+  @ViewChild('header', { static: true }) header: SupportPageHeaderComponent;
+  @ViewChild('body', { static: true }) body: SupportPageBodyComponent;
   constructor(public activateRoute: ActivatedRoute,
     private supportPageCategoriesService: SupportPageCategoriesService,
     private elRef: ElementRef,

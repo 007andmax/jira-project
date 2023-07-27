@@ -36,8 +36,7 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
   @Input() selectedClient = null;
   @Input() accountType: string = 'CLIENT';
   @Input() usersSelected: Array<User> = [];
-  @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
-  @ViewChild('auto') matAutocomplete: MatAutocomplete;
+  @ViewChild('userInput', { static: true }) userInput: ElementRef<HTMLInputElement>;
   @Output() onCompanyEmails = new EventEmitter<any>();
   /**
    * Creates an instance of the QuoteCreateContentComponent with the injected services

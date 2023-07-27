@@ -12,7 +12,7 @@ import { DocumentsTemplatesFilterComponent } from './documents-templates-filter/
 export class DocumentsTemplatesHeaderComponent implements OnInit {
   toggleFilter: boolean = true;
   countFilter: number = 0;
-  @ViewChild('filter') filter: DocumentsTemplatesFilterComponent;
+  @ViewChild('filter', { static: true }) filter: DocumentsTemplatesFilterComponent;
   @Output() onSearch = new EventEmitter<any>();
   sub: Subscription = new Subscription();
   searchText: string = "";

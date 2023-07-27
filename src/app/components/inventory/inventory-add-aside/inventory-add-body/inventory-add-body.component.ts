@@ -24,11 +24,10 @@ import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component'
   styleUrls: ['./inventory-add-body.component.scss']
 })
 export class InventoryAddBodyComponent implements OnInit, OnDestroy {
-  @ViewChild('addTax') containerAddTax;
-  @ViewChild('taxesDp') taxesDp: TaxesComponent;
-  @ViewChild('glNumberSelect') glNumberSelect: DropDownComponent;
-  @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
-  @ViewChild('suppliersSelect') suppliersSelect: DropDownComponent;
+  @ViewChild('taxesDp', { static: true }) taxesDp: TaxesComponent;
+  @ViewChild('glNumberSelect', { static: true }) glNumberSelect: DropDownComponent;
+  @ViewChild('categoriesSelect', { static: true }) categoriesSelect: DropDownComponent;
+  @ViewChild('suppliersSelect', { static: true }) suppliersSelect: DropDownComponent;
   @Output() onClose: EventEmitter<any> = new EventEmitter();
   @Input() class: string;
   //opened: boolean = false;

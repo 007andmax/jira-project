@@ -32,7 +32,7 @@ export class InventoryTableComponent implements OnInit {
   @Input() companies;
   @Input() glNumbers;
   @Input() taxes;
-  @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
+  @ViewChild('categoriesSelect', { static: true }) categoriesSelect: DropDownComponent;
   categories: Array<CategoryProduct> = [];
   validate: InventoryValidate = new InventoryValidate();
   sub: Subscription = new Subscription();

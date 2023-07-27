@@ -22,15 +22,16 @@ declare var $: any;
   styleUrls: ['./accounting-settings.component.scss']
 })
 export class AccountingSettingsComponent implements OnInit, OnDestroy {
-  @ViewChild('invoiceSettings') invoiceSettings: InvoiceSettingsComponent;
-  @ViewChild('quotesSettings') quotesSettings: QuotesSettingsComponent;
-  @ViewChild('accountingYear') accountingYear: AccountingYearComponent;
-  @ViewChild('taxesSettings') taxesSettings: TaxesSettingsComponent;
+  @ViewChild('invoiceSettings', { static: true }) invoiceSettings: InvoiceSettingsComponent;
+  @ViewChild('quotesSettings', { static: true }) quotesSettings: QuotesSettingsComponent;
+  @ViewChild('accountingYear', { static: true }) accountingYear: AccountingYearComponent;
+  @ViewChild('taxesSettings', { static: false }) taxesSettings: TaxesSettingsComponent;
+  @ViewChild('glNumber', { static: true }) glNumber: GlNumberSettingsComponent;
   loading = false;
   toggleAddTax: boolean = false;
   activeTab: string = "invoiceSettings";
   sub: Subscription = new Subscription();
-  @ViewChild('glNumber') glNumber: GlNumberSettingsComponent;
+
   constructor(private invoiceTicketsService: InvoiceTicketsService,
     private glNumberStateService: GlNumberStateService,
     private confirmStateService: ConfirmStateService,

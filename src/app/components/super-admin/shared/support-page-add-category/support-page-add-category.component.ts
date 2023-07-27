@@ -12,7 +12,7 @@ import { CategoryValdiate } from './class/category-validate';
 })
 export class SupportPageAddCategoryComponent implements OnInit {
   name: string = "";
-  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
+  @ViewChild('addBtn', { static: true }) addBtn: DisabledBtnDirective;
   validate: CategoryValdiate = new CategoryValdiate();
   constructor(public activeModal: NgbActiveModal, public cd: ChangeDetectorRef,
     private supportPageCategoriesService: SupportPageCategoriesService, config: NgbModalConfig,) {

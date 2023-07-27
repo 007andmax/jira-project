@@ -19,7 +19,7 @@ export class SuperAdminPublicSearchComponent implements OnInit {
   categories: Array<SupportPageCategory> = [];
   reqCategories: Array<SupportPageCategory> = [];
   @Output() onSelectCategory = new EventEmitter();
-  @ViewChild('dp') dp: NgbDropdown;
+  @ViewChild('dp', { static: true }) dp: NgbDropdown;
   constructor(private elRef: ElementRef,
     private superAdminPublicSearchListService: SuperAdminPublicSearchListService,
     private supportPageCategoriesService: SupportPageCategoriesService,

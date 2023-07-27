@@ -11,7 +11,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 })
 export class TicketsMyProfileComponent implements OnInit {
   selectedDefaulPage = new TitleListType("All", "ALL");
-  @ViewChild('intervalsDp') intervalsDp: DropDownComponent;
+  @ViewChild('intervalsDp', { static: true }) intervalsDp: DropDownComponent;
   listDefaultPages = [new TitleListType("All Tickets", "ALL"),
   new TitleListType("Unassigned Tickets", "UNASSIGNED"),
   new TitleListType("My Tickets", "MY_TICKETS"),

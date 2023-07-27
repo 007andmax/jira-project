@@ -17,7 +17,7 @@ import { DevicesStateService } from 'src/app/states/devices/devices-state.servic
 export class DevicesRecurringTicketsComponent implements OnInit, OnDestroy {
 
 
-  @ViewChild('instance') instance: NgbTypeahead;
+  @ViewChild('instance', static: true) instance: NgbTypeahead;
   @Output() selectedItem = new EventEmitter<any>();
   @Output() getAllItems = new EventEmitter<any>();
   @Input() companyId: string;

@@ -22,9 +22,8 @@ export class TaxesComponent implements OnInit, OnDestroy {
   @Input() isLabel: boolean = true;
   @Input() isAdd: boolean = true;
   @Input() placeholder: string = "Select Taxes";
-  @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
-  @ViewChild('addTax') containerAddTax;
-  @ViewChild('taxesDropDown') taxesDropDown;
+  @ViewChild('addTax', { static: false }) containerAddTax;
+  @ViewChild('taxesDropDown', { static: true }) taxesDropDown;
   @Output() taxesChange = new EventEmitter();
 
 

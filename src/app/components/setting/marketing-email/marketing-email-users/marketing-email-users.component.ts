@@ -25,7 +25,7 @@ export class MarketingEmailUsersComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   toggleShowAddUser = false;
   word: string = "";
-  @ViewChild('addUserDP') addUserDP: MarketingEmailUsersAddComponent;
+  @ViewChild('addUserDP', { static: false }) addUserDP: MarketingEmailUsersAddComponent;
   constructor(private marketingEmailStateService: MarketingEmailStateService,
     private marketingEmailService: MarketingEmailService,
     private confirmStateService: ConfirmStateService,

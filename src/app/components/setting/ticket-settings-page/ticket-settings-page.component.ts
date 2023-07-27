@@ -23,9 +23,9 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
   loading = false;
   activeTab: string = "ticketSettings";
   sub: Subscription = new Subscription();
-  @ViewChild('ticketSettings') ticketSettings: TicketSettingsComponent;
-  @ViewChild('ticketsStatus') ticketsStatus: TicketsStatusComponent;
-  @ViewChild('cannedResponses') cannedResponses: CannedResponsesComponent;
+  @ViewChild('ticketSettings', { static: true }) ticketSettings: TicketSettingsComponent;
+  @ViewChild('ticketsStatus', { static: true }) ticketsStatus: TicketsStatusComponent;
+  @ViewChild('cannedResponses', { static: true }) cannedResponses: CannedResponsesComponent;
   constructor(private invoiceTicketsService: InvoiceTicketsService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,

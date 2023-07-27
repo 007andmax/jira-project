@@ -28,10 +28,10 @@ export class PasswoordManagerFiltersComponent implements OnInit, OnDestroy {
   listDates: Array<TitleListType> = [new TitleListType('5 days', '5'), new TitleListType('15 days', '15'), new TitleListType('30 days', '30')];
   @Output() onChangeCountFilter = new EventEmitter<any>();
   selectedCompany: Company;
-  @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
-  @ViewChild('companiesSelect') companiesSelect: CompanyDropDownComponent;
-  @ViewChild('deviceUserSelect') deviceUserSelect: PasswoordManagerDevicesUsersComponent;
-  @ViewChild('dateSelect') dateSelect: DropDownComponent;
+  @ViewChild('categoriesSelect', { static: true }) categoriesSelect: DropDownComponent;
+  @ViewChild('companiesSelect', { static: true }) companiesSelect: CompanyDropDownComponent;
+  @ViewChild('deviceUserSelect', { static: true }) deviceUserSelect: PasswoordManagerDevicesUsersComponent;
+  @ViewChild('dateSelect', { static: true }) dateSelect: DropDownComponent;
   @Input() disabledCompany: boolean = false;
   @Output() onClose = new EventEmitter();
   public filter: FilterPasswordManager = new FilterPasswordManager();

@@ -40,11 +40,11 @@ export class PasswordManagerAddAsideComponent implements OnInit {
   validate: PasswordRecordValidate = new PasswordRecordValidate();
   formatDate: string = FORMAT_DATE_2;
   sub: Subscription = new Subscription();
-  @ViewChild('linked') linked: PasswordManagerLinkedComponent;
-  @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
-  @ViewChild('companiesDb') companiesDb: CompanyDropDownComponent;
-  @ViewChild('addRecord') addRecord: DisabledBtnDirective;
-  @ViewChild('datePicker') datePicker: DatePickerComponent;
+  @ViewChild('linked', { static: true }) linked: PasswordManagerLinkedComponent;
+  @ViewChild('categoriesSelect', { static: true }) categoriesSelect: DropDownComponent;
+  @ViewChild('companiesDb', { static: true }) companiesDb: CompanyDropDownComponent;
+  @ViewChild('addRecord', { static: true }) addRecord: DisabledBtnDirective;
+  @ViewChild('datePicker', { static: true }) datePicker: DatePickerComponent;
   /**
    * Creates an instance of the PasswordManagerEditAsideComponent with the injected services
     * @param {FormBuilder} fb Service to work with form

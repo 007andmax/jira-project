@@ -20,7 +20,7 @@ import { DeviceDiskSpaceReportFilter } from "./Class/device-diskspace-report";
   styleUrls: ["./report-device-diskspace.component.scss"],
 })
 export class ReportDeviceDiskspaceComponent implements OnInit {
-  @ViewChild('dropdownDevice') dropdownDevice: DropDownComponent;
+  @ViewChild('dropdownDevice', { static: true }) dropdownDevice: DropDownComponent;
   clientName: string;
   companies = [];
   deviceDiskSpaceList: any = [];

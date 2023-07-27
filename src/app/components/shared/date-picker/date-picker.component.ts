@@ -16,7 +16,7 @@ import * as moment from 'moment';
 })
 export class DatePickerComponent implements OnInit, OnDestroy {
 
-  @ViewChild('date') date_dropDown: NgbDropdown;
+  @ViewChild('date', { static: true }) date_dropDown: NgbDropdown;
   @Input() type: string = TYPE_INPUT;
   @Input() formatDate: string = FORMAT_DATE_1;
   @Input() editMode: boolean = false;

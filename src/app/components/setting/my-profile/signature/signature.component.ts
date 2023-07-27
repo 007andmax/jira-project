@@ -17,9 +17,9 @@ export class SignatureComponent implements OnInit, OnDestroy {
   content: string;
   loading: boolean = true;
   sub: Subscription = new Subscription();
-  @ViewChild('signatureDrop') signatureDrop: NgbDropdown;
-  @ViewChild('signatureEditDrop') signatureEditDrop: NgbDropdown;
-  @ViewChild('editSignature') editSignature: EditSignatureComponent;
+  @ViewChild('signatureDrop', { static: false }) signatureDrop: NgbDropdown;
+  @ViewChild('signatureEditDrop', { static: true }) signatureEditDrop: NgbDropdown;
+  @ViewChild('editSignature', { static: true }) editSignature: EditSignatureComponent;
   constructor(private signatureService: SignatureService,
     private confirmStateService: ConfirmStateService,
     private signatureStateService: SignatureStateService,

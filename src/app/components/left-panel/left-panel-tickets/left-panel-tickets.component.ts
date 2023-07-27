@@ -17,7 +17,6 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 })
 export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
   open: boolean = false;
-  @ViewChild('usersDp') usersDp: DropDownComponent;
   ticketsFilter: TicketsFilter = new TicketsFilter();
   listType: string;
   blockFilterUser: boolean = false;

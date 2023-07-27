@@ -21,7 +21,7 @@ export class TicketSettingsComponent implements OnInit {
   new CompanySetting('15 minutes', 'FIFTEEN_MINUTES')];
   timepickerTypes = [new CompanySetting('Start-End time picker', 'TIME_PICKER'),
   new CompanySetting('Duration picker', 'DURATION_PICKER')];
-  @ViewChild('intervalsDp') intervalsDp: DropDownComponent;
+  @ViewChild('intervalsDp', { static: true }) intervalsDp: DropDownComponent;
   loading = true;
   submitted = false;
   used = false;

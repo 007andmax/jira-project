@@ -25,7 +25,7 @@ export class DocumentsTemplatesComponent implements OnInit, OnDestroy {
   openCategories: boolean = false;
   showPreloader: boolean = true;
   tab = 'MY_TEMPLATES';
-  @ViewChild('header') header: DocumentsTemplatesHeaderComponent;
+  @ViewChild('header', { static: true }) header: DocumentsTemplatesHeaderComponent;
   list: Array<Document> = [];
   reqList: Array<Document> = [];
   filter: DocumentTemplateFilter = new DocumentTemplateFilter();

@@ -21,7 +21,7 @@ import { DeviceAntivirusReportFilter } from "./Class/device-antivirus-report";
   styleUrls: ["./report-device-antivirus.component.scss"],
 })
 export class ReportDeviceAntivirusComponent implements OnInit {
-  @ViewChild('dropdownDevice') dropdownDevice: DropDownComponent;
+  @ViewChild('dropdownDevice', { static: true }) dropdownDevice: DropDownComponent;
   clientName: string;
   companies = [];
   deviceAntivirusList: any = [];

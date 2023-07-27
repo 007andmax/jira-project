@@ -98,7 +98,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   shortCity = '';
   longState = '';
   shortState = '';
-  @ViewChild('search')
+  @ViewChild('search', { static: true })
   public searchElementRef: ElementRef;
   sub: Subscription = new Subscription();
   phone: string;

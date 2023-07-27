@@ -21,9 +21,7 @@ import { ApplicationByCompanyReportFilter } from "./Class/applicationbycompanyRe
   styleUrls: ["./applicationbycompany-report.component.scss"],
 })
 export class ApplicationbycompanyReportComponent implements OnInit {
-  @ViewChild('dropdownDevice') dropdownDevice: DropDownComponent;
-  // @ViewChild("templatecounterApplication") templatecounterApplication;
-
+  @ViewChild('dropdownDevice', { static: true }) dropdownDevice: DropDownComponent;
   clientName: string;
   companies = [];
   application = [];

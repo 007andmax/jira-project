@@ -36,8 +36,8 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   public show = false;
   public buttonName: any = "Show Description";
   templatesData = { subject: {}, body: {} };
-  @ViewChild("body") body: ElementRef;
-  @ViewChild("subject") subject: ElementRef;
+  @ViewChild("body", { static: false }) body: ElementRef;
+  @ViewChild("subject", { static: false }) subject: ElementRef;
 
   constructor(
     private modalService: NgbModal,

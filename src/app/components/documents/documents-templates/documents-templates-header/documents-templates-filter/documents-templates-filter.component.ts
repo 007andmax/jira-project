@@ -12,7 +12,7 @@ export class DocumentsTemplatesFilterComponent implements OnInit {
   categories: Array<any> = [];
   reducerItem: Function = (item) => `${item.name} (${item.count})`;
   documentTemplateFilter: DocumentTemplateFilter = new DocumentTemplateFilter();
-  @ViewChild('categoryDp') categoryDp: DropDownComponent;
+  @ViewChild('categoryDp', { static: true }) categoryDp: DropDownComponent;
   @Output() changeCountFilter = new EventEmitter<any>();
   constructor(public documentsStateService: DocumentsStateService,
   ) { }

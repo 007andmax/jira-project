@@ -13,7 +13,7 @@ export class CustomerPermissionsEditComponent implements OnInit {
   @Input() role: UserRole;
   @Input() userPermissions: Array<UserPermissions> = [];
   editRole: UserRole;
-  @ViewChild('addCustomer') addCustomer: NgbDropdown;
+  @ViewChild('addCustomer', { static: true }) addCustomer: NgbDropdown;
   constructor(private usersService: UsersService) { }
 
   ngOnInit() {

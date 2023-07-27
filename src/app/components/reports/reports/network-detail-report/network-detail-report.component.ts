@@ -20,7 +20,7 @@ import { DeviceNetworkDetailReportFilter } from "./Class/network-detail-report";
   styleUrls: ["./network-detail-report.component.scss"],
 })
 export class NetworkDetailReportComponent implements OnInit {
-  @ViewChild('dropdownDevice') dropdownDevice: DropDownComponent;
+  @ViewChild('dropdownDevice', { static: true }) dropdownDevice: DropDownComponent;
   clientName: string;
   companies = [];
   networkDetailList: any = [];

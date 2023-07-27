@@ -22,7 +22,7 @@ import { DeviceSummaryReportFilter } from "./Class/device-summary-report";
   styleUrls: ["./report-device-summary.component.scss"],
 })
 export class ReportDeviceSummaryComponent implements OnInit {
-  @ViewChild('dropdownDevice') dropdownDevice: DropDownComponent;
+  @ViewChild('dropdownDevice', { static: true }) dropdownDevice: DropDownComponent;
   tempararyDeviceList: any = [];
   tempararyDevice: any = [];
   deviceSummaryList: any = [];

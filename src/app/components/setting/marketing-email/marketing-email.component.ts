@@ -15,7 +15,7 @@ import { MarketingSubscriptionTypeComponent } from './marketing-subscription-typ
 export class MarketingEmailComponent implements OnInit, OnDestroy {
 
   activeTab: string = "companyIndustry";
-  @ViewChild("subscriptionType") subscriptionType: MarketingSubscriptionTypeComponent;
+  @ViewChild("subscriptionType", { static: true }) subscriptionType: MarketingSubscriptionTypeComponent;
 
   constructor(private crmStateService: CrmStateService,
     private confirmStateService: ConfirmStateService,

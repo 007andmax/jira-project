@@ -29,18 +29,18 @@ import { DevicesStateService } from 'src/app/states/devices/devices-state.servic
   styleUrls: ['./devices.component.scss']
 })
 export class DevicesComponent implements OnInit {
-  @ViewChild("templatePowersell") template;
-  @ViewChild("templateConnection") templateconnection;
-  @ViewChild("screenConnect") screenConnect;
-  @ViewChild("screenConnectAcces") screenConnectAcces;
-  @ViewChild('dropdownModel') dropdownModel: DropDownComponent;
-  @ViewChild('dropdowndeviceCompany') dropdowndeviceCompany: DropDownComponent;
-  @ViewChild('dropdowndeviceTp') dropdowndeviceTp: DropDownComponent;
-  @ViewChild('dropdownManufacturer') dropdownManufacturer: DropDownComponent;
-  @ViewChild('installdatePicker') installdatePicker: DatePickerComponent;
-  @ViewChild('warrantydatePicker') warrantydatePicker: DatePickerComponent;
-  @ViewChild('dropdownManufacturersidebar') dropdownManufacturersidebar: DropDownComponent;
-  @ViewChild('dropdownModelSidebar') dropdownModelSidebar: DropDownComponent;
+  @ViewChild("templatePowersell", { static: true }) template;
+  @ViewChild("templateConnection", { static: true }) templateconnection;
+  @ViewChild("screenConnect", { static: true }) screenConnect;
+  @ViewChild("screenConnectAcces", { static: true }) screenConnectAcces;
+  @ViewChild('dropdownModel', { static: true }) dropdownModel: DropDownComponent;
+  @ViewChild('dropdowndeviceCompany', { static: true }) dropdowndeviceCompany: DropDownComponent;
+  @ViewChild('dropdowndeviceTp', { static: true }) dropdowndeviceTp: DropDownComponent;
+  @ViewChild('dropdownManufacturer', { static: true }) dropdownManufacturer: DropDownComponent;
+  @ViewChild('installdatePicker', { static: true }) installdatePicker: DatePickerComponent;
+  @ViewChild('warrantydatePicker', { static: true }) warrantydatePicker: DatePickerComponent;
+  @ViewChild('dropdownManufacturersidebar', { static: false }) dropdownManufacturersidebar: DropDownComponent;
+  @ViewChild('dropdownModelSidebar', { stati: false }) dropdownModelSidebar: DropDownComponent;
   companyId: any;
   tagFilterValue: string = "";
   searchTag: any[] = [];

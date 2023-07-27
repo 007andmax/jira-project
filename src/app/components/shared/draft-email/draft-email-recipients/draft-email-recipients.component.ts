@@ -30,8 +30,7 @@ export class DraftEmailRecipientsComponent implements OnInit {
   toggleAllUsers: boolean = false;
   @Input() companiesSelected: Array<Company> = [];
   @Input() public data;
-  @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
-  @ViewChild('auto') matAutocomplete: MatAutocomplete;
+  @ViewChild('userInput', { static: true }) userInput: ElementRef<HTMLInputElement>;
   @Output() onCompanyEmails = new EventEmitter<any>();
   /**
    * Creates an instance of the QuoteCreateContentComponent with the injected services

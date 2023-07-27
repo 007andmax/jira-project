@@ -11,7 +11,7 @@ import { SINGLE_SELECT } from 'src/app/const/users';
   providers: [TicketsListService]
 })
 export class CompanyTechUsersComponent extends TechUsersComponent {
-  @ViewChild('dp') dp: NgbDropdown;
+  @ViewChild('dp', { static: true }) dp: NgbDropdown;
   outSelectedUsers = [];
   ngOnInit() {
     if (this.editMode) {

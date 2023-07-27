@@ -22,8 +22,8 @@ import { SoftwareSummaryReportFilter } from "./Class/software-summary-report1-fi
   styleUrls: ["./software-summary-report1.component.scss"],
 })
 export class SoftwareSummaryReport1Component implements OnInit {
-  @ViewChild('dropdownDevice') dropdownDevice: DropDownComponent;
-  @ViewChild('dropdownSoftware') dropdownSoftware: DropDownComponent;
+  @ViewChild('dropdownDevice', { static: true }) dropdownDevice: DropDownComponent;
+  @ViewChild('dropdownSoftware', { static: true }) dropdownSoftware: DropDownComponent;
   tempararyDeviceList: any = [];
   tempararySoftwareList: any = [];
   softwareReportList: any = [];

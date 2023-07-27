@@ -25,7 +25,6 @@ import { TaxesComponent } from '../../shared/taxes/taxes.component';
   styleUrls: ['./inventory-edit-aside.component.scss']
 })
 export class InventoryEditAsideComponent implements OnInit, OnDestroy {
-  description: TextAreaDirective;
   opened: boolean = false;
   inventory: InventoryItem = new InventoryItem();
   glNumbers: Array<GlNumber> = [];
@@ -36,14 +35,10 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
   categories: Array<CategoryProduct> = [];
   validate: InventoryValidate = new InventoryValidate();
   editSupplier: Company = null;
-  @ViewChild('addTax') containerAddTax;
-  @ViewChild('taxesDp') taxesDp: TaxesComponent;
-  @ViewChild('glNumberSelect') glNumberSelect: DropDownComponent;
-  @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
-  @ViewChild('suppliersSelect') suppliersSelect: DropDownComponent;
-  @ViewChild(TextAreaDirective) set appTextArea(directive: TextAreaDirective) {
-    this.description = directive;
-  };
+  @ViewChild('taxesDp', { static: true }) taxesDp: TaxesComponent;
+  @ViewChild('glNumberSelect', { static: true }) glNumberSelect: DropDownComponent;
+  @ViewChild('categoriesSelect', { static: true }) categoriesSelect: DropDownComponent;
+  @ViewChild('suppliersSelect', { static: true }) suppliersSelect: DropDownComponent;
   selectedItem: any;
   constructor(private inventoryStateService: InventoryStateService,
     private taxesStateService: TaxesStateService,

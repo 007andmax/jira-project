@@ -32,13 +32,13 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
   styleUrls: ['./ticket-add-aside.component.scss']
 })
 export class TicketAddAsideComponent implements OnInit, OnDestroy {
-  @ViewChild('userDP') userDP: DropDownComponent;
-  @ViewChild('techUserDP') techUserDP: DropDownComponent;
-  @ViewChild('deviceDP') deviceDP: DropDownComponent;
-  @ViewChild('companyDP') companyDP: CompanyDropDownComponent;
-  @ViewChild('uplaodFile') uplaodFile: UploadAreaComponent;
-  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
-  @ViewChild('techUsersDp') techUsersDp: TechUsersComponent;
+  @ViewChild('userDP', { static: true }) userDP: DropDownComponent;
+  @ViewChild('techUserDP', { static: false }) techUserDP: DropDownComponent;
+  @ViewChild('deviceDP', { static: true }) deviceDP: DropDownComponent;
+  @ViewChild('companyDP', { static: true }) companyDP: CompanyDropDownComponent;
+  @ViewChild('uplaodFile', { static: true }) uplaodFile: UploadAreaComponent;
+  @ViewChild('addBtn', { static: true }) addBtn: DisabledBtnDirective;
+  @ViewChild('techUsersDp', { static: false }) techUsersDp: TechUsersComponent;
   actualNumber: string = '';
   opened = false;
   isAdd = false;

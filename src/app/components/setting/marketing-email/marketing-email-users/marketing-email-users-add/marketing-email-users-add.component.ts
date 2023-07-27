@@ -12,8 +12,6 @@ import { MarketingSubscriptionType } from '../../marketing-subscription-type/cla
   templateUrl: './marketing-email-users-add.component.html',
   styleUrls: ['./marketing-email-users-add.component.scss'],
   providers: [UserListService],
-
-
 })
 export class MarketingEmailUsersAddComponent implements OnInit {
   opened: boolean = false;
@@ -22,7 +20,7 @@ export class MarketingEmailUsersAddComponent implements OnInit {
   search: string = "";
   @Output() onClose: EventEmitter<any> = new EventEmitter();
   @Input() marketingSubscription: MarketingSubscriptionType;
-  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
+  @ViewChild('addBtn', { static: true }) addBtn: DisabledBtnDirective;
   public page_number: number = 0;
   public infiniteScrollDisabled = false;
 

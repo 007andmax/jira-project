@@ -22,7 +22,7 @@ import { ReportValidate } from '../../class/report-validate';
 })
 export class DeviceIpSummaryDeviceReportComponent implements OnInit {
 
-  @ViewChild('dropdownDevice') dropdownDevice: DropDownComponent;
+  @ViewChild('dropdownDevice', { static: true }) dropdownDevice: DropDownComponent;
   loadingInProgress: boolean = false;
   onInit: boolean = false;
   company: any;

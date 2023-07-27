@@ -21,7 +21,7 @@ import { DeviceWarrantyReportFilter } from "./Class/device-warranty-report";
   styleUrls: ["./report-device-warranty.component.scss"],
 })
 export class ReportDeviceWarrantyComponent implements OnInit {
-  @ViewChild('dropdownDevice') dropdownDevice: DropDownComponent;
+  @ViewChild('dropdownDevice', { static: false }) dropdownDevice: DropDownComponent;
   clientName: string;
   companies = [];
   deviceWarrantyList: any = [];

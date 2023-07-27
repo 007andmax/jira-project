@@ -40,17 +40,17 @@ export class LeftPanelComponent implements OnInit {
   state: string = '';
   page: string = '';
   showMobTab = false;
-  @ViewChild('panelBilling') panelBilling: LeftPanelBillingComponent;
-  @ViewChild('panelCompanies') panelCompanies: LeftPanelCompaniesComponent;
-  @ViewChild('panelSettings') panelSettings: LeftPanelSettingsComponent;
-  @ViewChild('panelDocuments') panelDocuments: LeftPanelDocumentsComponent;
-  @ViewChild('panelSupport') panelSupport: LeftPanelSupportComponent;
-  @ViewChild('panelTickets') panelTickets: LeftPanelTicketsComponent;
-  @ViewChild('panelUsers') panelUsers: LeftPanelUsersComponent;
-  @ViewChild('panelDevices') panelDevices: LeftPanelDevicesComponent;
-  @ViewChild('panelInventory') panelInventory: LeftPanelInventoryComponent;
-  @ViewChild('panelMarketing') panelMarketing: LeftPanelMarketingComponent;
-  @ViewChild('panelPasswordManager') panelPasswordManager: LeftPanelPasswordManagerComponent;
+  @ViewChild('panelBilling', { static: true }) panelBilling: LeftPanelBillingComponent;
+  @ViewChild('panelCompanies', { static: false }) panelCompanies: LeftPanelCompaniesComponent;
+  @ViewChild('panelSettings', { static: true }) panelSettings: LeftPanelSettingsComponent;
+  @ViewChild('panelDocuments', { static: true }) panelDocuments: LeftPanelDocumentsComponent;
+  @ViewChild('panelSupport', { static: false }) panelSupport: LeftPanelSupportComponent;
+  @ViewChild('panelTickets', { static: true }) panelTickets: LeftPanelTicketsComponent;
+  @ViewChild('panelUsers', { static: false }) panelUsers: LeftPanelUsersComponent;
+  @ViewChild('panelDevices', { static: true }) panelDevices: LeftPanelDevicesComponent;
+  @ViewChild('panelInventory', { static: true }) panelInventory: LeftPanelInventoryComponent;
+  @ViewChild('panelMarketing', { static: false }) panelMarketing: LeftPanelMarketingComponent;
+  @ViewChild('panelPasswordManager', { static: false }) panelPasswordManager: LeftPanelPasswordManagerComponent;
 
 
   /**

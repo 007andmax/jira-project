@@ -16,10 +16,10 @@ import { CrmCompanyServiceTypeComponent } from './crm-company-service-type/crm-c
 })
 export class CrmSettingsComponent implements OnInit, OnDestroy {
   activeTab: string = "companyIndustry";
-  @ViewChild("industry") industry: CrmCompanyIndustryComponent;
-  @ViewChild("jobTitle") jobTitle: CrmCompanyJobTitleComponent;
-  @ViewChild("serviceType") serviceType: CrmCompanyServiceTypeComponent;
-  @ViewChild("jobType") jobType: CrmCompanyJobTypeComponent;
+  @ViewChild("industry", { static: true }) industry: CrmCompanyIndustryComponent;
+  @ViewChild("jobTitle", { static: true }) jobTitle: CrmCompanyJobTitleComponent;
+  @ViewChild("serviceType", { static: true }) serviceType: CrmCompanyServiceTypeComponent;
+  @ViewChild("jobType", { static: true }) jobType: CrmCompanyJobTypeComponent;
   constructor(private crmStateService: CrmStateService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal) { }

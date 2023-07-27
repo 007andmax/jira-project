@@ -26,7 +26,7 @@ import { TicketStateService } from '../../tickets/tickets/ticket-edit-aside/serv
   providers: [TicketsListService]
 })
 export class GlobalSearchComponent implements OnInit {
-  @ViewChild('globalSearch') globalSearch: NgbDropdown;
+  @ViewChild('globalSearch', { static: true }) globalSearch: NgbDropdown;
   selectedType: string = 'TICKETS';
   list: Array<GlobalSearchResult> = [];
   indexNoAvatar: number = 0;

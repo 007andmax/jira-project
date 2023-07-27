@@ -15,7 +15,7 @@ export class InventoryFilterComponent implements OnInit {
   sub: Subscription = new Subscription();
   listActive: Array<TitleListType> = [new TitleListType('Active products', 'ACTIVE'), new TitleListType('Inactive products', 'NO_ACTIVE')];
   selectedActive = new TitleListType('Active products', 'ACTIVE');
-  @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
+  @ViewChild('categoriesSelect', { static: true }) categoriesSelect: DropDownComponent;
   constructor(private inventoryStateService: InventoryStateService,) { }
   ngOnInit() {
     if (this.inventoryStateService.getSortCategoty()) this.categoriesSelect.selectItemWithOutChanges(this.inventoryStateService.getSortCategoty());

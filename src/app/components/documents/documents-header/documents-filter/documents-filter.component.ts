@@ -18,10 +18,10 @@ import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down
 export class DocumentsFilterComponent implements OnInit {
   formatDate: string = FORMAT_DATE_2;
   defaultDate: number = new Date().getTime();
-  @ViewChild('companyDp') companyDp: DropDownComponent;
-  @ViewChild('usersDp') usersDp: TechUsersListReportComponent;
-  @ViewChild('datesDp') datesDp: MultiDatepickerComponent;
-  @ViewChild('tagsDp') tagsDp: CompanyTagsComponent;
+  @ViewChild('companyDp', { static: true }) companyDp: DropDownComponent;
+  @ViewChild('usersDp', { static: true }) usersDp: TechUsersListReportComponent;
+  @ViewChild('datesDp', { static: true }) datesDp: MultiDatepickerComponent;
+  @ViewChild('tagsDp', { static: true }) tagsDp: CompanyTagsComponent;
   sub: Subscription = new Subscription();
   documentsFilter: DocumentFilter = new DocumentFilter();
   @Output() changeCountFilter = new EventEmitter<any>();
