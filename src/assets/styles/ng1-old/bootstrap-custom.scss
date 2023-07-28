@@ -76,7 +76,7 @@ h1 {
 
 mark {
   background: #ff0;
-  color: $primary-2;
+  color: $gray-900;
 }
 
 small {
@@ -340,7 +340,7 @@ p {
   margin: 0 0 10px;
 }
 .text-muted {
-  color: $gray-800--old;
+  color: $gray-600;
   font-size: 13px;
 }
 
@@ -697,7 +697,7 @@ a.btn {
 
 .btn-default {
   color: #333;
-  background-color: #fff;
+  background-color: $white;
   border-color: #ccc;
   &:hover {
     color: #333;
@@ -706,55 +706,55 @@ a.btn {
   }
 }
 .btn-primary {
-  color: #fff;
+  color: $white;
   background-color: #337ab7;
   border-color: #2e6da4;
 
   &:hover {
-    color: #fff;
+    color: $white;
     background-color: #286090;
     border-color: #204d74;
   }
 }
 .btn-success {
-  background-color: #2ec866;
-  border-color: #2ec866;
+  background-color: $green-600;
+  border-color: $green-600;
 
   &:hover {
-    color: #fff;
+    color: $white;
     background-color: #449d44;
     border-color: #398439;
   }
 }
 .btn-info {
-  color: #fff;
+  color: $white;
   background-color: #5bc0de;
   border-color: #46b8da;
 
   &:hover {
-    color: #fff;
+    color: $white;
     background-color: #31b0d5;
     border-color: #269abc;
   }
 }
 .btn-warning {
-  color: #fff;
+  color: $white;
   background-color: #f0ad4e;
   border-color: #eea236;
 
   &:hover {
-    color: #fff;
+    color: $white;
     background-color: #ec971f;
     border-color: #d58512;
   }
 }
 .btn-danger {
-  color: #fff;
+  color: $white;
   background-color: #d9534f;
   border-color: #d43f3a;
 
   &:hover {
-    color: #fff;
+    color: $white;
     background-color: #c9302c;
     border-color: #ac2925;
   }
@@ -869,7 +869,7 @@ input[type="button"] {
       &:hover,
       &:focus {
         color: #555;
-        background-color: #fff;
+        background-color: $white;
         border: 1px solid #ddd;
         border-bottom-color: transparent;
         cursor: default;
@@ -911,7 +911,7 @@ input[type="button"] {
   height: 100%;
   font-size: 12px;
   line-height: 20px;
-  color: #fff;
+  color: $white;
   text-align: center;
   background-color: #337ab7;
   box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
@@ -930,7 +930,7 @@ input[type="button"] {
   font-weight: bold;
   line-height: 1;
   color: #000;
-  text-shadow: 0 1px 0 #fff;
+  text-shadow: 0 1px 0 $white;
 
   &:hover,
   &:focus {
@@ -980,7 +980,7 @@ button.close {
 }
 .modal-content {
   position: relative;
-  background-color: #fff;
+  background-color: $white;
   border: 1px solid rgba(0,0,0,.2);
   border-radius: 6px;
   box-shadow: 0 3px 9px rgba(0,0,0,.5);
@@ -1109,7 +1109,7 @@ button.close {
 .tooltip-inner {
   max-width: 200px;
   padding: 3px 8px;
-  color: #fff;
+  color: $white;
   text-align: center;
   background-color: #000;
   border-radius: 4px;

@@ -6,7 +6,7 @@
 }
 .qt-aside-modern__content {
     padding: 0 !important;
-    background-color: $gray-100--old;
+    background-color: $gray-25;
     height: 100% !important;
 }
 .message-full-user {
@@ -14,14 +14,14 @@
     margin-right: 14px;
     .message-full-user-name {
         font-size: 13px;
-        color: $primary-2;
+        color: $gray-900;
         font-weight: 600;
         margin-right: 4px;
         flex-shrink: 0;
     }
     .message-full-user-email {
         font-size: 13px;
-        color: $gray-700--old;
+        color: $gray-500;
         font-weight: 400;
     }
 }
@@ -37,7 +37,7 @@
 }
 .message-full__account-date {
     font-size: 11px;
-    color: $gray-600--old;
+    color: $gray-400;
     text-transform: uppercase;
 }
 .message-full__account-data {
@@ -50,12 +50,12 @@ h3 {
     font-size: 20px;
     font-weight: 600;
     line-height: 28px;
-    color: $primary-2;
+    color: $gray-900;
     margin-bottom: 8px;
 }
 .message-full__account-text {
     font-size: 13px;
-    color: $primary-2;
+    color: $gray-900;
 }
 .message-full__account {
     &::after {
@@ -63,7 +63,7 @@ h3 {
     }
 }
 .message-full__account-header {
-    color: $secondary-1;
+    color: $blue-dark-800;
     display: inline-block;
     background-color: rgba(7, 71, 166, 0.06);
     padding: 5px 6px;
@@ -77,7 +77,7 @@ h3 {
     width: 24px;
     min-width: 24px;
     border-radius: 50%;
-    background-color: $secondary-3;
+    background-color: $purple-400;
     background-position: center !important;
     background-size: cover !important;
     font-size: 12px;
@@ -90,12 +90,12 @@ h3 {
 }
 .users-table__name--user-name {
     font-size: 12px;
-    color: $primary-2;
+    color: $gray-900;
     font-weight: 500;
 }
 .users-table__name--email {
     font-size: 12px;
-    color: $gray-700--old;
+    color: $gray-500;
     font-weight: 400;
 }
 .message-full-to-list-item {
@@ -119,7 +119,7 @@ h3 {
         margin: 0 25px 0 0;
         font-size: 12px;
         line-height: 16px;
-        color: $gray-700--old;
+        color: $gray-500;
     }
 }
 .message-full-to-list-item-info {
@@ -129,7 +129,7 @@ h3 {
 }
 .message-full-body {
     border-radius: 12px;
-    border: solid 1px $gray-300--old;
+    border: solid 1px $gray-100;
     margin: 24px;
     padding: 16px;
     background-color: $white;
@@ -137,7 +137,7 @@ h3 {
 .messages-table__account-text {
     font-size: 14px;
     line-height: 20px;
-    color: $gray-800--old;
+    color: $gray-600;
 }
 /deep/ .attachments-message {
     .attachment-component {
@@ -146,7 +146,7 @@ h3 {
 }
 .toggle-all-users {
     text-align: right;
-    color: $primary-1;
+    color: $blue-light-600;
     cursor: pointer;
     font-size: 12px;
 }

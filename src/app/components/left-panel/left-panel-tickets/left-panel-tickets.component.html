@@ -23,7 +23,7 @@
         class="qt-jc-sb"
     >
         <div>My Tickets</div>
-        <div class="qt-color-light qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('USER')}}</div>
+        <div class="qt-color-gray-400 qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('USER')}}</div>
     </li>
     <li
         [ngClass]="{'--active': listType === 'ALL' && activePage === 'new-tickets'}"
@@ -31,7 +31,7 @@
         class="qt-jc-sb"
     >
         <div>All Tickets</div>
-        <div class="qt-color-light qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('ALL')}}</div>
+        <div class="qt-color-gray-400 qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('ALL')}}</div>
     </li>
     <li
         [ngClass]="{'--active': listType === 'UNASSIGNED' && activePage === 'new-tickets'}"
@@ -39,7 +39,7 @@
         class="qt-jc-sb"
     >
         Unassigned
-        <div class="qt-color-light qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('UNASSIGNED')}}</div>
+        <div class="qt-color-gray-400 qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('UNASSIGNED')}}</div>
     </li>
     <li
         [ngClass]="{'--active': listType === 'OPEN' && activePage === 'new-tickets'}"
@@ -47,7 +47,7 @@
         class="qt-jc-sb"
     >
         <div>Open</div>
-        <div class="qt-color-light qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('OPEN')}}</div>
+        <div class="qt-color-gray-400 qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('OPEN')}}</div>
     </li>
     <li
         [ngClass]="{'--active': listType === 'CLOSED' && activePage === 'new-tickets'}"
@@ -55,7 +55,7 @@
         class="qt-jc-sb"
     >
         <div>Closed</div>
-        <div class="qt-color-light qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('CLOSED')}}</div>
+        <div class="qt-color-gray-400 qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('CLOSED')}}</div>
     </li>
     <li
         [ngClass]="{'--active': listType === 'ON_HOLD' && activePage === 'new-tickets'}"
@@ -63,7 +63,7 @@
         class="qt-jc-sb"
     >
         <div>On Hold</div>
-        <div class="qt-color-light qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('ON_HOLD')}}</div>
+        <div class="qt-color-gray-400 qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('ON_HOLD')}}</div>
     </li>
     <li
         [ngClass]="{'--active': listType === 'TRASH' && activePage === 'new-tickets'}"
@@ -71,7 +71,7 @@
         class="qt-jc-sb"
     >
         <div>Trash</div>
-        <div class="qt-color-light qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('TRASH')}}</div>
+        <div class="qt-color-gray-400 qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('TRASH')}}</div>
     </li>
     <li
         [ngClass]="{'--active': listType === 'SPAM' && activePage === 'new-tickets'}"
@@ -79,7 +79,7 @@
         class="qt-jc-sb"
     >
         <div>Spam</div>
-        <div class="qt-color-light qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('SPAM')}}</div>
+        <div class="qt-color-gray-400 qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('SPAM')}}</div>
     </li>
     <li
         [ngClass]="{'--active': listType === 'RECURRING_TICKETS' && activePage === 'recurring-tickets'}"
@@ -94,7 +94,7 @@
         class="desktop-version qt-jc-sb"
     >
         <div>Recurring tickets Open</div>
-        <div class="qt-color-light qt-ml-6 app-left-panel__menu-expand-count">
+        <div class="qt-color-gray-400 qt-ml-6 app-left-panel__menu-expand-count">
             {{getCountByField('RECURRING_TICKETS_OPEN')}}
         </div>
     </li>
@@ -104,7 +104,7 @@
         class="desktop-version qt-jc-sb"
     >
         <div>Recurring tickets Closed</div>
-        <div class="qt-color-light qt-ml-6 app-left-panel__menu-expand-count">
+        <div class="qt-color-gray-400 qt-ml-6 app-left-panel__menu-expand-count">
             {{getCountByField('RECURRING_TICKETS_CLOSED')}}
         </div>
     </li>

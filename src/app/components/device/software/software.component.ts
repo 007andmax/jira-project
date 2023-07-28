@@ -234,7 +234,7 @@ export class SoftwareComponent implements OnInit, OnDestroy {
       font-style: normal;
       line-height: 1.33;
       letter-spacing: normal;
-      color: $gray-800--old;
+      color: $gray-600;
       background-color: #f3f7f9;
     }
     h1,

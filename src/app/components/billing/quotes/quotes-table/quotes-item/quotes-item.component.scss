@@ -1,29 +1,29 @@
 @import './src/assets/styles/variable';
 
 .approved {
-  color: $success;
-  border-color: $success;
+  color: $green-600;
+  border-color: $green-600;
 }
 .archived,
 .canceled,
 .expired {
-  color: $error;
-  border-color: $error;
+  color: $red-600;
+  border-color: $red-600;
 }
 .invoiced,
 .ticketed {
-  color: $primary-1;
-  border-color: $primary-1;
+  color: $blue-light-600;
+  border-color: $blue-light-600;
 }
 .read {
-  color: $secondary-3;
-  border-color: $secondary-3;
+  color: $purple-400;
+  border-color: $purple-400;
 }
 .saved {
-  color: $gray-800--old;
-  border-color: $gray-800--old;
+  color: $gray-600;
+  border-color: $gray-600;
 }
 .unread {
-  color: $warning;
-  border-color: $warning;
+  color: $yellow-600;
+  border-color: $yellow-600;
 }

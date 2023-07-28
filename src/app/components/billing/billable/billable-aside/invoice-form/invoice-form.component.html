@@ -29,7 +29,7 @@
             ></invoice-change-address>
         </div>
         <div
-            class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark"
+            class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-gray-900"
             [textContent]="company.addresses[0].locationName"
         ></div>
         <div
@@ -72,7 +72,7 @@
                 ></i>
             </div>
             <div
-                class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark"
+                class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-gray-900"
                 [textContent]="company.addresses[1].locationName"
             ></div>
             <div
@@ -229,7 +229,7 @@
         ></app-invoice-regular-note>
     </div>
     <div>
-        <div class="invoice-total qt-color-dark">
+        <div class="invoice-total qt-color-gray-900">
             <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-15">
                 <div>Sub Total</div>
                 <div [textContent]="(invoice.invoiceDataDto.productsSum + invoice.invoiceDataDto.servicesSum ) |

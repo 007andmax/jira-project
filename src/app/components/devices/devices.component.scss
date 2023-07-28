@@ -7,15 +7,15 @@
   background: url(/html/assets/img/search-ico.svg) no-repeat 12px center;
   font-size: 12px;
   line-height: 1.67;
-  background-color: #ffffff;
+  background-color: $white;
   width: 500px;
 }
 
 .device-beta-search {
   height: 32px;
   border-radius: 4px;
-  border: solid 1px #edf2f6;
-  background-color: #f8f9fa;
+  border: solid 1px $background;
+  background-color: $gray-100;
   margin: 0 25px 0 27px;
 }
 
@@ -29,7 +29,7 @@
 
 .company-device-hover-devices:hover {
   td {
-    background-color: #f9fafb;
+    background-color: $gray-100;
     .company-devices-table__ip-address-text,
     .company-devices-table__ip-windows-text {
       opacity: 0;
@@ -49,7 +49,7 @@
       display: flex;
     }
     input.name-text-input {
-      background-color: #f9fafb;
+      background-color: $gray-50;
     }
   }
 }
@@ -74,11 +74,11 @@
 }
 
 .restart-modal .modal-footer .btn-danger {
-  background-color: #ff0000;
+  background-color: $red-600;
 }
 
 .restart-modal .modal-footer .btn-secondary {
-  color: #4f5f79;
+  color: $gray-500;
 }
 
 .company-devices-beta-remote-modal {
@@ -104,7 +104,7 @@
     height: 66px;
   }
   .connect-icon {
-    background-image: url(/assets/img/quicktech-connect.svg);
+    background-image: url(/assets/img/icons/quicktech-connect.svg);
     width: 66px;
     min-width: 66px;
     height: 66px;
@@ -122,12 +122,12 @@
 
 .device-table__input-name {
   width: 100%;
-  border: 1px solid #dfe3e8;
+  border: 1px solid $gray-200;
   border-radius: 4px;
   outline: none;
   border-color: transparent;
   &:hover, &:focus {
-    border-color:#dfe3e8;
+    border-color:$gray-200;
     outline: none;
   }
 }
@@ -140,7 +140,7 @@
   padding: 4px 4px 4px 11px;
   @include border-radius(4px);
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
-  background-color: #fff;
+  background-color: $white;
 }
 
 img.Online-Search {
@@ -157,12 +157,12 @@ img.Online-Search {
   margin: -29px 0 0 605px;
   padding: 5px 8px;
   border-radius: 4px;
-  background-color: #637382;
+  background-color: $gray-500;
 }
 
 .Favourite {
   margin-bottom: 5px;
-  background-image: url(/assets/img/favourite-active.svg);
+  background-image: url(/assets/img/icons/rating.svg);
   background-repeat: no-repeat;
   display: inline-block;
   max-width: 100%;
@@ -178,8 +178,8 @@ img.Online-Search {
     margin: -3px 0px 0px 30px;
     padding: 2px 4px 2px 11px;
     border-radius: 4px;
-    //border: solid 1px #919eab;
-    background-color: #fff;
+    //border: solid 1px $gray-400;
+    background-color: $white;
 }
 
 .example-chip-list {
@@ -204,8 +204,8 @@ input.mat-chip-input {
   padding: 8px 0 38px 1px;
   border-radius: 4px;
   box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-  border: solid 1px #dfe3e8;
-  background-color: #fff;
+  border: solid 1px $gray-200;
+  background-color: $white;
 }
 
 .SubRectangle{
@@ -213,13 +213,13 @@ input.mat-chip-input {
   height: 32px;
   margin: 0 1px 0 0;
   padding: 6px 15px 4px;
-  background-color: #fff;
+  background-color: $white;
   font-size: 12px;
 }
 
 ::ng-deep .cdk-overlay-container .mat-autocomplete-panel .mat-option:hover {
-  background-color: #edf2f6;
-  color:#000;
+  background-color: $background;
+  color:$gray-900;
 }
 
 ::ng-deep .mat-autocomplete-panel.extended {
@@ -233,16 +233,16 @@ input.mat-chip-input {
   padding-bottom: 7px;
   padding-right: 7px;
   padding-left: 12px;
-  background-color: #f8f9fa;
-  border: solid 1px #edf2f6;
+  background-color: $gray-200;
+  border: solid 1px $background;
   @include border-radius(4px);
-  color: #212b36;
+  color: $gray-900;
   font-size: 12px;
   margin-bottom: 6px !important;
 }
 
 .mat-standard-chip .mat-chip-remove.mat-icon {
-  color:#000;
+  color:$gray-900;
   height: 16px;
   width: 16px;
   object-fit: contain;
@@ -250,7 +250,7 @@ input.mat-chip-input {
 }
 
 .mat-chip.mat-standard-chip .mat-chip-remove:before {
-  background: url(/assets/img/tag-close.svg) no-repeat;
+  background: url(/assets/img/icons/close.svg) no-repeat;
 }
 
 ::ng-deep .cdk-overlay-pane {
@@ -269,48 +269,48 @@ input.mat-chip-input {
   height: 32px !important;
   width: 32px !important;
   float:right !important;
-  color: #212b36 !important;
+  color: $gray-900 !important;
 
 }
 
 .opt-icon.Company.Name {
-  background-image: url(/assets/img/auto/office-account.svg);
+  background-image: url(/assets/img/icons/companies.svg);
   background-repeat: no-repeat;
 }
 .opt-icon.Software {
-  background-image: url(/assets/img/auto/software.svg);
+  background-image: url(/assets/img/icons/software-gray.svg);
   background-repeat: no-repeat;
 }
 .opt-icon.Asset.Tag, .opt-icon.Tag {
-  background-image: url(/assets/img/auto/tag.svg);
+  background-image: url(/assets/img/icons/tag-light-gray.svg);
   background-repeat: no-repeat;
 }
 .opt-icon.Manufacturer {
-  background-image: url(/assets/img/auto/manufacturer.svg);
+  background-image: url(/assets/img/icons/manufacturer.svg);
   background-repeat: no-repeat;
 }
 
 .opt-icon.Asset.Name, .opt-icon.Asset.Title {
-  background-image: url(/assets/img/auto/devices.svg);
+  background-image: url(/assets/img/icons/monitor.svg);
   background-repeat: no-repeat;
 }
 
 .opt-icon.OS {
-  background-image: url(/assets/img/auto/os.svg);
+  background-image: url(/assets/img/icons/os.svg);
   background-repeat: no-repeat;
 }
 
 .opt-icon.OS.Version {
-  background-image: url(/assets/img/auto/os-version.svg);
+  background-image: url(/assets/img/icons/os-version.svg);
   background-repeat: no-repeat;
 }
 .opt-icon.Model {
-  background-image: url(/assets/img/auto/model.svg);
+  background-image: url(/assets/img/icons/model.svg);
   background-repeat: no-repeat;
 }
 
 .opt-icon.CPU {
-  background-image: url(/assets/img/auto/cpu.svg);
+  background-image: url(/assets/img/icons/cpu.svg);
   background-repeat: no-repeat;
 }
 
@@ -381,7 +381,7 @@ input.mat-chip-input {
   -webkit-box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.03);
   -moz-box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.03);
   box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.03);
-  background-color: #edf2f6;
+  background-color: $background;
   padding: 20px;
   align-items: center;
   p {
@@ -417,7 +417,7 @@ input.mat-chip-input {
   font-weight: 600;
   padding-left: 24px;
   padding-top: 15px;
-  color: #212b36;
+  color: $gray-900;
 }
 
 .Name {
@@ -431,7 +431,7 @@ input.mat-chip-input {
   font-style: normal;
   line-height: 1.54;
   letter-spacing: normal;
-  color: #212b36;
+  color: $gray-900;
   padding-left: 24px;
 }
 
@@ -441,8 +441,8 @@ input.mat-chip-input {
   margin: 8px 0 0;
   padding: 10px 201px 10px 16px;
   border-radius: 4px;
-  border: solid 1px #c4cbd5;
-  background-color: #fff;
+  border: solid 1px $gray-300;
+  background-color: $white;
 
 }
 
@@ -458,25 +458,25 @@ input.mat-chip-input {
 
 .cancel{
   margin-left: 12px;
-  color: #4f5f79;
-  border: solid 1px #c5cdd5;
-  background-color: white;
+  color: $gray-500;
+  border: solid 1px $gray-300;
+  background-color: $white;
   width: 76px;
   height: 40px;
   border-radius: 6px;
-  background-color: #fff;
+  background-color: $white;
 
 }
 
 .save{
   padding: 1px 16px;
   border-radius: 4px;
-  border-color: #2e6da4;
-  background-color: #16a4fa;
+  border-color: $blue-light-800;
+  background-color: $blue-light-600;
   width: 64px;
   height: 40px;
-  color: #fff;
-  border: solid 1px #c5cdd5;
+  color: $white;
+  border: solid 1px $gray-300;
 }
 
 ::ng-deep .modal-dialog{
@@ -490,8 +490,8 @@ input.mat-chip-input {
   padding: 10px;
   border-radius: 4px;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
-  background-color: #fff;
-  color:#364656;
+  background-color: $white;
+  color: $gray-700;
   font-size: 12px;
 }
 
@@ -551,7 +551,7 @@ span.qt-input-search:before {
         .dropdown-toggle {
           height: 32px;
           border: none;
-          background-color: white;
+          background-color: $white;
         }
         .default-value {
           top: 0;
@@ -583,7 +583,7 @@ span.qt-input-search:before {
   }
   .screen-Connect {
     margin-top: 15px;
-    background-image: url(/assets/img/screenConnect.png);
+    background-image: url(/assets/img/icons/screenConnect.png);
     background-repeat: no-repeat;
     display: inline-block;
     max-width: 100%;
@@ -638,8 +638,8 @@ span.qt-input-search:before {
     padding: 4px 4px 4px 11px;
     border-radius: 4px;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
-    background-color: #ffffff;
-    border: solid 1px #c5cdd5;
+    background-color: $white;
+    border: solid 1px $gray-300;
   }
 
   .tagfontweight{
@@ -677,11 +677,11 @@ span.qt-input-search:before {
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
-      background-color: white;
+      background-color: $white;
     }
     tr {
       td {
-        background: #ffffff;
+        background: $white;
         padding: 0 8px 0 8px;
         height: 48px;
         border-top: 1px solid transparent;
@@ -753,7 +753,7 @@ span.qt-input-search:before {
     width: 16px;
     height: 16px;
     border: 0.35rem solid rgba(0, 0, 0, 0.2);
-    border-top-color: black;
+    border-top-color: $gray-900;
     animation: spin 1s infinite linear;
     margin-right: 8px
   }
@@ -795,7 +795,7 @@ span.qt-input-search:before {
   }
 }
 .devicetitledesc{
-  color: #919eab;
+  color: $gray-400;
     line-height: 1.33;
     font-size: 12px;
     text-overflow: ellipsis;
@@ -896,7 +896,7 @@ span.qt-input-search:before {
 .computerModel {
   /deep/ .qt-dropdown:hover{
     input{
-      border: 1px #c5cdd5 !important;
+      border: 1px $gray-300 !important;
       padding: 10px 4px!important;
       height:25px !important;
     }
@@ -930,7 +930,7 @@ span.qt-input-search:before {
 .computerManufacture{
   /deep/ .qt-dropdown:hover{
     input{
-      border: 1px #c5cdd5 !important;
+      border: 1px $gray-300 !important;
       padding: 10px 4px!important;
       height:25px !important;
     }
@@ -948,9 +948,9 @@ span.qt-input-search:before {
 }
 
 .companydevice-beta-offline{
-  color:#ff5263;
+  color: $red-600;
 }
 
 .companydevice-beta-online{
-  color: #2ec866;
+  color: $green-600;
 }

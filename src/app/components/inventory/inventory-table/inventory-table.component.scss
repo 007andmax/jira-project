@@ -32,7 +32,7 @@ pre {
         padding: 4px 24px 4px 8px !important;
         border: unset !important;
         &:hover {
-            background: $gray-200--old;
+            background: $gray-50;
         }
 
     }
@@ -47,7 +47,7 @@ pre {
         width: 100%;
         padding: 4px 8px;
         &:hover {
-            background: $gray-200--old;
+            background: $gray-50;
         }
         &:not(.--input-error) {
             border: unset !important;
@@ -59,14 +59,14 @@ pre {
     width: 100%;
     input {
         &::-webkit-input-placeholder {
-                color: $gray-600--old;
+                color: $gray-400;
         }
     }
 }
 /deep/ .products-table__gl {
     input {
             &::-webkit-input-placeholder {
-                color: $gray-600--old !important;
+                color: $gray-400 !important;
             }
         }
 }

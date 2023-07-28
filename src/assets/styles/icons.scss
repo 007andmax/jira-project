@@ -23,8 +23,8 @@
 .export-ng2 {
   background: url("/assets/img/icons/export-blue.svg");
 }
-.convert-to-billable-ng2 {
-  background: url("/assets/img/icons/billable.svg");
+.convert-to-billable {
+  background-image: url("/assets/img/icons/billable.svg");
 }
 .no-valid-label {
   background: url("/assets/img/icons/update.svg") no-repeat;
@@ -102,7 +102,7 @@
     background-image: url("/assets/img/icons/done-circle-green.svg");
   }
   &__user {
-    background-color: $gray-600--old;
+    background-color: $gray-400;
     -webkit-mask-image: url("/assets/img/icons/user.svg");
     mask-image: url("/assets/img/icons/user.svg");
     -webkit-mask-repeat: no-repeat;
@@ -155,6 +155,9 @@
   }
   &__menu {
     background-image: url("/assets/img/icons/menu.svg");
+  }
+  &__memory {
+    background-image: url("/assets/img/icons/memory.svg");
   }
   &__menu-white {
     background-image: url("/assets/img/icons/menu-white.svg");
@@ -267,7 +270,7 @@
     background-color: $gray-600;
   }
   &__tickets-gray {
-    background-color: $gray-600--old;
+    background-color: $gray-400;
     -webkit-mask-image: url("/assets/img/icons/tickets-gray.svg");
     mask-image: url("/assets/img/icons/tickets-gray.svg");
   }
@@ -279,13 +282,13 @@
     mask-image: url("/assets/img/icons-left-sidebar/devices.svg");
   }
   &__password-manager-gray {
-    background-color: $gray-600--old;
+    background-color: $gray-400;
     -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-password-manager.svg");
     mask-image: url("/assets/img/icons-left-sidebar/menu-password-manager.svg");
     // background-image: url("/assets/img/icons/password-manager-gray.svg");
   }
   &__company-gray {
-    background-color: $gray-600--old;
+    background-color: $gray-400;
     -webkit-mask-position: center;
     mask-position: center;
     -webkit-mask-image: url("/assets/img/icons/company-gray.svg");
@@ -311,22 +314,22 @@
     background-color: $white;
   }
   &__support-page {
-    background-color: $gray-600--old;
+    background-color: $gray-400;
     -webkit-mask-image: url("/assets/img/icons/support-page.svg");
     mask-image: url("/assets/img/icons/support-page.svg");
   }
   &__category-closed {
-    background-color: $gray-600--old;
+    background-color: $gray-400;
     -webkit-mask-image: url("/assets/img/icons/category-closed.svg");
     mask-image: url("/assets/img/icons/category-closed.svg");
   }
   &__add-sub-category {
-    background-color: $gray-700--old;
+    background-color: $gray-500;
     -webkit-mask-image: url("/assets/img/icons/support-page-add-sub-category.svg");
     mask-image: url("/assets/img/icons/support-page-add-sub-category.svg");
   }
   &__add-article {
-    background-color: $gray-700--old;
+    background-color: $gray-500;
     -webkit-mask-image: url("/assets/img/icons/support-page-add-article.svg");
     mask-image: url("/assets/img/icons/support-page-add-article.svg");
   }
@@ -337,22 +340,22 @@
     background-image: url("/assets/img/icons/road-map.svg");
   }
   &__draft-content {
-    background-color: $gray-700--old;
+    background-color: $gray-500;
     -webkit-mask-image: url("/assets/img/icons/draft.svg");
     mask-image: url("/assets/img/icons/draft.svg");
   }
   &__save-support-tag {
-    background-color: $gray-700--old;
+    background-color: $gray-500;
     -webkit-mask-image: url("/assets/img/icons/save-support-tag.svg");
     mask-image: url("/assets/img/icons/save-support-tag.svg");
   }
   &__edit-category {
-    background-color: $gray-700--old;
+    background-color: $gray-500;
     -webkit-mask-image: url("/assets/img/icons/support-page-edit-category.svg");
     mask-image: url("/assets/img/icons/support-page-edit-category.svg");
   }
   &__category-more {
-    background-color: $gray-600--old;
+    background-color: $gray-400;
     -webkit-mask-image: url("/assets/img/icons/category-more.svg");
     mask-image: url("/assets/img/icons/category-more.svg");
     -webkit-mask-repeat: no-repeat;
@@ -586,8 +589,19 @@
     background-color: $gray-500;
     -webkit-mask-position: center;
     mask-position: center;
-    -webkit-mask-image: url("/assets/img/device/play-script.svg");
-    mask-image: url("/assets/img/device/play-script.svg");
+    -webkit-mask-image: url("/assets/img/icons/play.svg");
+    mask-image: url("/assets/img/icons/play.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
+  &__power-shell {
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/power-shell.svg");
+    mask-image: url("/assets/img/icons/power-shell.svg");
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     -webkit-mask-size: contain;
@@ -705,7 +719,7 @@
     background-image: url("/assets/img/icons/folder.svg");
   }
   &__folder-active {
-    background-color: #ffffff;
+    background-color: $white;
     -webkit-mask-image: url("/assets/img/icons/folder.svg");
     mask-image: url("/assets/img/icons/folder.svg");
   }
@@ -742,7 +756,7 @@
     background-image: url("/assets/img/icons/convert-invoice.svg");
   }
   &__command-line {
-    background-image: url("/assets/img/device/command-line.svg");
+    background-image: url("/assets/img/icons/command-line.svg");
   }
   &__approve-quote {
     background-image: url("/assets/img/icons/approve-quote.svg");
@@ -754,7 +768,7 @@
     background-image: url("/assets/img/icons/set-privilege.svg");
   }
   &__send-to-front {
-    background-image: url("/assets/img/device/send-to-front.svg");
+    background-image: url("/assets/img/icons/send-to-front.svg");
   }
   &__subscribe {
     background-image: url("/assets/img/icons/subscribe.svg");
@@ -771,9 +785,6 @@
   &__remote-access {
     background-image: url("/assets/img/icons/remote-access.svg");
   }
-  &__restart {
-    background-image: url("/assets/img/icons/restart.svg");
-  }
   &__receipt {
     background-color: $gray-500;
     -webkit-mask-position: center;
@@ -786,14 +797,14 @@
     mask-size: contain;
   }
   &__run-script {
-    background-image: url("/assets/img/device/run-script-blue.svg");
+    background-image: url("/assets/img/icons/run-script-white.svg");
   }
   &__save-changes {
     background-color: $gray-500;
     -webkit-mask-position: center;
     mask-position: center;
-    -webkit-mask-image: url("/assets/img/device/save-changes.svg");
-    mask-image: url("/assets/img/device/save-changes.svg");
+    -webkit-mask-image: url("/assets/img/icons/save-changes.svg");
+    mask-image: url("/assets/img/icons/save-changes.svg");
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     -webkit-mask-size: contain;
@@ -811,11 +822,19 @@
   &__shutdown {
     background-image: url("/assets/img/icons/shutdown.svg");
   }
+  &__shutdown--white {
+    background-color: $white;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/shutdown.svg");
+    mask-image: url("/assets/img/icons/shutdown.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
   &__clock-timer {
     background-image: url("/assets/img/icons/timer-counter.svg");
-  }
-  &__add {
-    background-image: url("/assets/img/device/add.svg");
   }
   &__secure {
     background-image: url("/assets/img/icons/secure.svg");
@@ -856,7 +875,8 @@
   &__timer-counter {
     background-image: url("/assets/img/icons/timer-counter.svg");
   }
-  &__time {
+  &__time,
+  &__time--white {
     background-color: $gray-500;
     -webkit-mask-position: center;
     mask-position: center;
@@ -866,6 +886,9 @@
     mask-repeat: no-repeat;
     -webkit-mask-size: contain;
     mask-size: contain;
+  }
+  &__time--white {
+    background-color: $white;
   }
   &__timer {
     background-color: $gray-500;
@@ -877,6 +900,9 @@
     mask-repeat: no-repeat;
     -webkit-mask-size: contain;
     mask-size: contain;
+  }
+  &__timeline {
+    background-image: url("/assets/img/icons/timeline.svg");
   }
   &__move-light {
     background-image: url("/assets/img/icons/move-light.svg");
@@ -907,11 +933,17 @@
   &__print-blue {
     background-image: url("/assets/img/icons/print-blue.svg");
   }
+  &__processor {
+    background-image: url("/assets/img/icons/processor.svg");
+  }
   &__invoice-expired {
     background-image: url("/assets/img/icons/invoice-expired.svg");
   }
   &__download {
     background-image: url("/assets/img/icons/download.svg");
+  }
+  &__display {
+    background-image: url("/assets/img/icons/display.svg");
   }
   &__locked {
     background-image: url("/assets/img/icons/locked.svg");
@@ -941,13 +973,17 @@
     -webkit-mask-size: contain;
     mask-size: contain;
   }
+  &__graphic-card {
+    background-image: url("/assets/img/icons/graphic-card.svg");
+  }
   &__reset {
     background-image: url("/assets/img/icons/reset.svg");
   }
   &__email-resend {
       background-image: url("/assets/img/icons/email-resend.svg");
   }
-  &__reset-gray-500 {
+  &__reset-gray-500,
+  &__reset--white {
     background-color: $gray-500;
     -webkit-mask-position: center;
     mask-position: center;
@@ -957,6 +993,9 @@
     mask-repeat: no-repeat;
     -webkit-mask-size: contain;
     mask-size: contain;
+  }
+  &__reset--white {
+    background-color: $white;
   }
   &__collapse-task {
     background-image: url("/assets/img/icons/collapse-task.svg");
@@ -969,7 +1008,7 @@
   }
   &__edit-gray,
   &__edit-gray-dark {
-    background-color: $gray-600--old;
+    background-color: $gray-400;
     -webkit-mask-position: center;
     mask-position: center;
     -webkit-mask-image: url("/assets/img/icons/edit-gray.svg");
@@ -981,7 +1020,7 @@
   }
 
   &__edit-gray-dark {
-    background-color: $gray-700--old;
+    background-color: $gray-500;
   }
 
   &__expand-redactor {
@@ -997,7 +1036,7 @@
     background-image: url("/assets/img/icons/connection.svg");
   }
   &__connection-green {
-    background-color: $success;
+    background-color: $green-600;
     -webkit-mask-position: center;
     mask-position: center;
     -webkit-mask-image: url("/assets/img/icons/connection.svg");
@@ -1014,7 +1053,7 @@
     background-image: url("/assets/img/icons/rename.svg");
   }
   &__payment-history {
-    background-image: url("/assets/img/icons/payment_history.svg");
+    background-image: url("/assets/img/icons/payment-history.svg");
   }
   &__mark-as-read {
     background-image: url("/assets/img/icons/password-show-old.svg");
@@ -1124,6 +1163,17 @@
   &__computer {
     background-image: url("/assets/img/icons/computer.svg");
   }
+  &__computer-white {
+    background-color: $white;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/computer.svg");
+    mask-image: url("/assets/img/icons/computer.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
   &__create-template {
     background-image: url("/assets/img/icons/create-template.svg");
   }
@@ -1174,8 +1224,14 @@
   &__network {
     background-image: url("/assets/img/icons/network.svg");
   }
+  &__networkcard {
+    background-image: url("/assets/img/icons/networkcard.svg");
+  }
   &__software {
     background-image: url("/assets/img/icons/software.svg");
+  }
+  &__software-image {
+    background-image: url("/assets/img/icons/software-image.svg");
   }
   &__wifi {
     background-image: url("/assets/img/icons/wifi-network.svg");
@@ -1185,6 +1241,9 @@
   }
   &__hosting {
     background-image: url("/assets/img/icons/hosting.svg");
+  }
+  &__harddisk {
+    background-image: url("/assets/img/icons/harddisk.svg");
   }
   &__system {
     background-image: url("/assets/img/icons/system.svg");
@@ -1201,6 +1260,9 @@
   &__more {
     background-image: url("/assets/img/icons/more.svg");
   }
+  &__motherboard {
+    background-image: url("/assets/img/icons/motherboard.svg");
+  }
   &__monitor {
     background-color: $gray-500;
     -webkit-mask-position: center;
@@ -1213,7 +1275,7 @@
     mask-size: contain;
   }
   &__monitor-green {
-    background-color: $success;
+    background-color: $green-600;
     -webkit-mask-position: center;
     mask-position: center;
     -webkit-mask-image: url("/assets/img/icons/monitor.svg");
@@ -1263,6 +1325,17 @@
     -webkit-mask-size: contain;
     mask-size: contain;
   }
+  &__arrow-back {
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/arrow-back.svg");
+    mask-image: url("/assets/img/icons/arrow-back.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
   &__phone-gray-500 {
     background-color: $gray-500;
     -webkit-mask-position: center;
@@ -1294,6 +1367,9 @@
   }
   &__office-phone-gray {
     background-image: url("/assets/img/icons/office-phone-gray.svg");
+  }
+  &__operating-system {
+    background-image: url("/assets/img/icons/operating-system.svg");
   }
   &__phone-gray {
     background-image: url("/assets/img/icons/phone-gray.svg");
@@ -1357,6 +1433,9 @@
   &__computer-green {
     background-image: url("/assets/img/icons/computer-green.svg");
   }
+  &__computer-blue {
+    background-image: url("/assets/img/icons/computer-blue.svg");
+  }
   &__update {
     background-image: url("/assets/img/icons/update.svg");
   }
@@ -1408,13 +1487,13 @@
       top: -2px;
       right: -2px;
       border: solid 2px $white;
-      background-color: $success;
+      background-color: $green-600;
       border-radius: 50%;
     }
   }
   &.--offline {
     &::before {
-      background-color: $error;
+      background-color: $red-600;
     }
   }
 }
@@ -1445,21 +1524,21 @@
     background-image: url("/assets/img/icons/high-priority.svg");
 
     @media (max-width: 767px) {
-      background: $error;
+      background: $red-600;
     }
   }
   &.--medium {
     background-image: url("/assets/img/icons/medium-priority.svg");
 
     @media (max-width: 767px) {
-      background: $warning;
+      background: $yellow-600;
     }
   }
   &.--low {
     background-image: url("/assets/img/icons/low-priority.svg");
 
     @media (max-width: 767px) {
-      background: $success;
+      background: $green-600;
     }
   }
 }

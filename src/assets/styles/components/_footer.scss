@@ -32,11 +32,11 @@
 
       &.--active,
       &:hover {
-        border-color: $primary-1;
+        border-color: $blue-light-600;
       }
       &.--active {
         span {
-          background-color: $primary-1;
+          background-color: $blue-light-600;
         }
       }
     }

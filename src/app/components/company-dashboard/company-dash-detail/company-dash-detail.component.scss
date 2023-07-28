@@ -5,7 +5,7 @@
         padding: 9px 10px 9px 0;
         width: 100%;
         border-radius: 4px;
-        border: solid 1px $gray-500--old;
+        border: solid 1px $gray-300;
         line-height: 1.54;
         letter-spacing: normal;
         height: auto;
@@ -21,8 +21,8 @@
         }
 
         &:disabled {
-            background-color: $gray-200--old;
-            border: 1px solid $gray-200--old;
+            background-color: $gray-50;
+            border: 1px solid $gray-50;
         }
     }
     .item {
@@ -38,17 +38,17 @@
         font-style: normal;
         line-height: 1.4;
         letter-spacing: normal;
-        color: $gray-800--old;
+        color: $gray-600;
         display: -webkit-box;
         display: flex;
         -webkit-box-align: center;
         align-items: center;
         &:hover {
-            color: $primary-2;
+            color: $gray-900;
             background-color: $background;
         }
         &.active {
-            color: $primary-2;
+            color: $gray-900;
             background-color: $background;
         }
     }
@@ -62,7 +62,7 @@
             margin: 0;
             justify-content: center;
             position: relative;
-            background-color: $primary-2;
+            background-color: $gray-900;
             height: 56px;
             align-items: center;
         }
@@ -134,14 +134,14 @@
     display: none;
     align-items: center;
     padding: 12px 0;
-    border-bottom: 1px solid $gray-300--old;
+    border-bottom: 1px solid $gray-100;
     @media (max-width: 767px) {
         display: flex;
     }
     span {
         font-size: 12px;
         font-weight: 600;
-        color: $primary-2;
+        color: $gray-900;
         margin: 0 16px 0 0;
         line-height: 16px;
         @media (max-width: 767px) {
@@ -153,7 +153,7 @@
         }
     }
     .active {
-        color: $primary-1;
+        color: $turquoise-600;
         position: relative;
         &::after {
             content: " ";
@@ -162,7 +162,7 @@
             left: 0;
             right: 0;
             height: 2px;
-            background-color: $primary-1;
+            background-color: $turquoise-600;
         }
     }
 }
@@ -188,7 +188,7 @@
         width: 40px;
         min-width: 40px;
         border-radius: 50%;
-        background-color: $secondary-3;
+        background-color: $purple-400;
         font-size: 12px;
         display: flex;
         align-items: center;
@@ -198,13 +198,13 @@
         font-weight: 600;
     }
     .users-table__name--user-name {
-        color: $primary-2;
+        color: $gray-900;
         font-size: 13px;
         line-height: 20px;
         font-weight: 500;
     }
     .users-table__name--profession {
-        color: $gray-700--old;
+        color: $gray-500;
         font-size: 12px;
         line-height: 20px;
         font-weight: 400;
@@ -212,7 +212,7 @@
     .email-container {
         height: 40px;
         padding: 12px;
-        background-color: $gray-200--old;
+        background-color: $gray-50;
         border-radius: 50%;
     }
 }

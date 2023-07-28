@@ -79,10 +79,7 @@
                     class="add-btn"
                     (click)="openAddModal();"
                 >
-                    <img
-                        src="/html/assets/img/device/add.svg"
-                        alt="add"
-                    >
+                  <span class="icon__add--white qt-sz-16 qt-bg-contain qt-dib"></span>
                 </a>
                 <!-- Modal Add New Command -->
                 <div
@@ -139,7 +136,7 @@
                                             >
                                             <img
                                                 class="icn-sm report-caret-icon"
-                                                src="./..//html/assets/img/device/selct-arrow.svg"
+                                                src="/html/assets/img/icons/save-changes.svg"
                                             >
                                             <div
                                                 ngbDropdownMenu
@@ -185,7 +182,7 @@
                                             >
                                             <img
                                                 class="icn-sm report-caret-icon"
-                                                src="./..//html/assets/img/device/selct-arrow.svg"
+                                                src="/html/assets/img/icons/save-changes.svg"
                                             >
                                             <div
                                                 ngbDropdownMenu
@@ -287,7 +284,7 @@
                                         <div class="terminal-cmd-opt">
                                             <div class="cmd-list-left">
                                                 <img
-                                                    src="/html/assets/img/device/command-line.svg"
+                                                    src="/html/assets/img/icons/command-line.svg"
                                                     alt="command-line"
                                                     title="command-line"
                                                 >
@@ -332,23 +329,13 @@
                                                                 (click)="openEditModal(cmd, 'edit')"
                                                             >
                                                                 <img
-                                                                    src="/html/assets/img/device/edit-cmd.svg"
+                                                                    src="/html/assets/img/icons/edit-12.svg"
                                                                     alt="edit-cmd"
                                                                     title="edit-cmd"
                                                                 >
                                                                 Edit
                                                             </a>
                                                         </li>
-                                                        <!-- <li role="menuitem" ngbDropdownItem>
-                            <a class="dropdown-item" href="javascript:void(0);" (click)="cloneScript(cmd.id)">
-                              <img
-                                src="/html/assets/img/device/copy-script.svg"
-                                alt="clone-cmd"
-                                title="clone-cmd"
-                              />
-                              Clone</a
-                            >
-                          </li> -->
                                                         <li
                                                             role="menuitem"
                                                             ngbDropdownItem
@@ -359,7 +346,7 @@
                                                                 (click)="openModal(template, cmd.id, cmd.title, 'deleteCmd')"
                                                             >
                                                                 <img
-                                                                    src="/html/assets/img/device/remove-terminal.svg"
+                                                                    src="/html/assets/img/icons/remove.svg"
                                                                     alt="delete-cmd"
                                                                     title="delete-cmd"
                                                                 >
@@ -416,7 +403,7 @@
                     class="btn btn-primary"
                 >
                     <img
-                        src="/html/assets/img/device/run-script-blue.svg"
+                        src="/html/assets/img/icons/run-script-white.svg"
                         alt="run-script"
                     >
                     Script Library
@@ -470,7 +457,7 @@
                                                     >
                                                     <img
                                                         class="icn-sm report-caret-icon"
-                                                        src="./..//html/assets/img/device/selct-arrow.svg"
+                                                        src="/html/assets/img/icons/save-changes.svg"
                                                     >
                                                     <div
                                                         ngbDropdownMenu
@@ -527,23 +514,11 @@
                                                 (click)="copyToTerminalFunc(script.command,-1)"
                                             >
                                                 <img
-                                                    src="/html/assets/img/device/play-script.svg"
+                                                    src="/html/assets/img/icons/play.svg"
                                                     alt="play-script"
                                                     title="play-script"
                                                 >
                                             </a>
-                                            <!-- <a
-                      href="javascript:;"
-                      class="play-btn"
-                      data-tooltip="Clone Script"
-                      (click)="cloneScript(script.id)"
-                    >
-                      <img
-                        src="/html/assets/img/device/copy-script.svg"
-                        alt="copy-script"
-                        title="copy-script"
-                      />
-                    </a> -->
                                             <a
                                                 href="javascript:;"
                                                 class="view-btn"
@@ -551,7 +526,7 @@
                                                 (click)="viewScriptDetail(script);"
                                             >
                                                 <img
-                                                    src="/html/assets/img/device/view-script.svg"
+                                                    src="/html/assets/img/icons/view.svg"
                                                     alt="view-script"
                                                     title="view-script"
                                                 >
@@ -587,7 +562,7 @@
                                                     >
                                                     <img
                                                         class="icn-sm report-caret-icon"
-                                                        src="./..//html/assets/img/device/selct-arrow.svg"
+                                                        src="/html/assets/img/icons/save-changes.svg"
                                                     >
                                                     <div
                                                         ngbDropdownMenu
@@ -639,15 +614,11 @@
                                         <div class="script-right">
                                             <a
                                                 href="javascript:;"
-                                                class="play-btn"
+                                                class="qt-button --square-md --gray pointer qt-mr-8 device-tooltip"
                                                 data-tooltip="Clone Script"
                                                 (click)="cloneScript(shared.id)"
                                             >
-                                                <img
-                                                    src="/html/assets/img/device/copy-script.svg"
-                                                    alt="copy-script"
-                                                    title="copy-script"
-                                                >
+                                                <span class="icon__copy qt-sz-16 qt-bg-contain"></span>
                                             </a>
                                             <a
                                                 href="javascript:;"
@@ -656,7 +627,7 @@
                                                 (click)="viewScriptDetail(shared);"
                                             >
                                                 <img
-                                                    src="/html/assets/img/device/view-script.svg"
+                                                    src="/html/assets/img/icons/view.svg"
                                                     alt="view-script"
                                                     title="view-script"
                                                 >
@@ -722,11 +693,7 @@
                             title="Close"
                             (click)="emptyScriptDetail()"
                         >
-                            <img
-                                src="/html/assets/img/device/back.svg"
-                                alt="close"
-                                title="close"
-                            >
+                           <span class="icon__arrow-back qt-ic-c qt-sz-24 qt-va-m qt-dib"></span>
                         </a>
                         Script Library
                     </h2>
@@ -797,7 +764,7 @@
                                         >
                                         <img
                                             class="icn-sm report-caret-icon"
-                                            src="./..//html/assets/img/device/selct-arrow.svg"
+                                            src="/html/assets/img/icons/save-changes.svg"
                                         >
                                         <div
                                             ngbDropdownMenu
@@ -837,7 +804,7 @@
                                         >
                                         <img
                                             class="icn-sm report-caret-icon"
-                                            src="./..//html/assets/img/device/selct-arrow.svg"
+                                            src="/html/assets/img/icons/save-changes.svg"
                                         >
                                         <div
                                             ngbDropdownMenu
@@ -1053,7 +1020,7 @@
                                     (click)="updateCategory(category, i)"
                                 >
                                     <img
-                                        src="/html/assets/img/device/save-changes.svg"
+                                        src="/html/assets/img/icons/save-changes.svg"
                                         alt="save-changes"
                                         title="save-changes"
                                     >
@@ -1066,7 +1033,7 @@
                                     (click)="createCategory(category)"
                                 >
                                     <img
-                                        src="/html/assets/img/device/save-changes.svg"
+                                        src="/html/assets/img/icons/save-changes.svg"
                                         alt="save-changes"
                                         title="save-changes"
                                     >
@@ -1079,7 +1046,7 @@
                                     data-tooltip="Delete"
                                 >
                                     <img
-                                        src="/html/assets/img/device/remove-terminal.svg"
+                                        src="/html/assets/img/icons/remove.svg"
                                         alt="close"
                                         title="close"
                                     >
@@ -1108,11 +1075,7 @@
                         class="btn btn-small"
                         (click)="addNewCategory()"
                     >
-                        <img
-                            src="/html/assets/img/device/add-task.svg"
-                            alt="add-task"
-                            title="add-task"
-                        >
+                        <span class="icon__add--white qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
                         Add New Category
                     </button>
                 </div>

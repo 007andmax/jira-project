@@ -1,9 +1,9 @@
 @import "./src/assets/styles/variable";
 .user-name {
-min-width: 50px;
-overflow: hidden;
-text-overflow: ellipsis;
-white-space: nowrap;
+    min-width: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .user-email {
     min-width: 50px;
@@ -15,12 +15,12 @@ white-space: nowrap;
     font-size: 14px;
     transition: all 0.3s;
     &:hover {
-        color: #ffffff;
+        color: $white;
     }
 }
 .mat-autocomplete-panel {
-    padding: 0px;
+    padding: 0;
     &::-webkit-scrollbar-thumb {
-        background-color: $primary-1;
+        background-color: $blue-light-600;
     }
 }

@@ -4,8 +4,8 @@ tr {
   cursor: pointer;
   &:hover {
     td {
-      background: $gray-200--old;
-      border-color: $primary-1;
+      background: $gray-50;
+      border-color: $blue-light-600;
     }
   }
 }
@@ -13,7 +13,7 @@ tr {
   > div {
     @media (min-width: 768px) {
       background: #f4fbff;
-      border-color: $primary-1;
+      border-color: $blue-light-600;
     }
   }
 }

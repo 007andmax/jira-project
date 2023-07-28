@@ -77,7 +77,7 @@
   left: 14px;
 }
 .add-tax-dropdown input::placeholder{
-  color: $gray-600--old;
+  color: $gray-400;
   font-size: 13px;
   font-weight: 500;
   letter-spacing: .5px;
@@ -116,7 +116,7 @@
   }
 
   .btn {
-    background-color: $primary-1;
+    background-color: $blue-light-600;
     width: 100%;
     text-align: left;
     height: 48px;
@@ -124,13 +124,13 @@
   }
 
   .btn-primary.not-active {
-    background-color: $gray-800--old;
-    border-color: $gray-800--old;
+    background-color: $gray-600;
+    border-color: $gray-600;
     cursor: default;
     pointer-events: none;
   }
   .primary-default.btn:hover {
-      background-color: $primary-1;
+      background-color: $blue-light-600;
       color: $white;
     }
 }
@@ -150,7 +150,7 @@
 }
 .textarea.email-text-block,
 .textarea.quote-text-block {
-  border: 1px solid $gray-500--old;
+  border: 1px solid $gray-300;
   width: 100%;
   min-height: 273px;
   outline: none;
@@ -160,7 +160,7 @@
 }
 .textarea.email-text-block::placeholder,
 .textarea.quote-text-block::placeholder {
-  color: $gray-500--old;
+  color: $gray-300;
 }
 
 .email-text-block textarea,
@@ -169,7 +169,7 @@
   width: 100%;
   border: none;
   font-size: 13px;
-  color: $gray-800--old;
+  color: $gray-600;
   outline: none;
   padding: 8px 0;
   border-bottom: 1px solid $background;
@@ -198,7 +198,7 @@
 
 .email-text-block textarea::placeholder,
 .quote-text-block textarea::placeholder {
-  color: $gray-600--old;
+  color: $gray-400;
 }
 
 .location .form-group,

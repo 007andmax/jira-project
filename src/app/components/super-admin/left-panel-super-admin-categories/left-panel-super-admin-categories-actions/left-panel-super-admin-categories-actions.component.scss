@@ -13,14 +13,14 @@
         transition: background-color .3s ease-in-out;
         cursor: pointer;
         &:hover {
-          background-color: $gray-200--old;
+          background-color: $gray-50;
         }
     }
 }
 span {
     font-family: "Inter", sans-serif;
     font-size: 14px;
-    color: $primary-2;
+    color: $gray-900;
     position: relative;
     &::after {
         content: " ";

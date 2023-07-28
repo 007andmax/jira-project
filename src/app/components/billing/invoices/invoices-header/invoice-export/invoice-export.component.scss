@@ -3,7 +3,7 @@
 
 .qt-report__control-panel-btn {
     position: relative;
-    background-color: #ffffff;
+    background-color: $white;
     .mask-dp {
         position: absolute;
         width: 36px;
@@ -17,13 +17,13 @@
     align-items: center;
     padding: 0 20px;
     transition: all 0.3s;
-    color: $primary-2;
+    color: $gray-900;
     font-size: 13px;
     line-height: 20px;
     font-weight: 500;
     &:hover {
-        color: #ffffff;
-        background: #16a4fa;
+        color: $white;
+        background: $blue-light-600;
     }
 }
 

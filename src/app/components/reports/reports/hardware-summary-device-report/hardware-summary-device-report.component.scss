@@ -4,15 +4,15 @@
 
 .run-report-content {
     border-bottom: none !important;
-    margin-top: 0px !important;
+    margin-top: 0 !important;
     padding-left: 24px !important;
     display: flex;
     justify-content: center;
-    background-color: white;
+    background-color: $white;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
     height: 60px;
     padding-top: 11px;
-    border-left: 1px solid #edf0f2;
+    border-left: 1px solid $gray-100;
 }
 
 .report-menu {
@@ -31,12 +31,12 @@
 .qt-btn {
     &.--outline-blue {
         height: 40px !important;
-        background-color: #ffffff !important;
+        background-color: $white !important;
         margin-right: 260px !important;
     }
 
     &.--outline-white {
-        background-color: #edf2f6 !important;
+        background-color: $background !important;
     }
 }
 
@@ -86,7 +86,7 @@
         .device {
             width: 13% !important;
             padding: 0 18px 0 18px;
-            background-color: white;
+            background-color: $white;
             height: 40px;
         }
 
@@ -117,12 +117,12 @@
 
         .serialnumber {
             width: 18% !important;
-            padding: 0px;
+            padding: 0;
         }
 
         thead {
             th {
-                background-color: #f4f6f8 !important;
+                background-color: $gray-50 !important;
             }
         }
     }

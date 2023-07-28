@@ -92,25 +92,6 @@
             </div>
         </div>
         <div class="qt-inputs-row">
-            <div class="qt-input-block">
-                <div class="qt-input-block__label">Description</div>
-                <textarea
-                    appTextArea
-                    [limit]="160"
-                    id="inventory-description"
-                    placeholder="Write Product Description"
-                    (input)="onChangeDescription($event)"
-                    (onPast)="onPastDescription($event)"
-                ></textarea>
-                <mat-error
-                    class="invalid-feedback"
-                    *ngIf="!validate.getDescription()"
-                >
-                    Description is required
-                </mat-error>
-            </div>
-        </div>
-        <div class="qt-inputs-row">
             <div class="qt-f33 qt-input-block qt-w-md-50 --required">
                 <div class="qt-input-block__label">Cost</div>
                 <input

@@ -15,7 +15,7 @@
     min-height: 32px;
 
     span {
-        color: $primary-2;
+        color: $gray-900;
         font-size: 13px;
         line-height: 20px;
     }
@@ -41,7 +41,7 @@
         line-height: 20px;
 
         &::placeholder {
-          color: $gray-600--old;
+          color: $gray-400;
         }
     }
 }

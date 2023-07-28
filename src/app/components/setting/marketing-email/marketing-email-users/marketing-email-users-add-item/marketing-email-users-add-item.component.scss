@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .default-user-avatar span {
-    color: #fff;
+    color: $white;
 }

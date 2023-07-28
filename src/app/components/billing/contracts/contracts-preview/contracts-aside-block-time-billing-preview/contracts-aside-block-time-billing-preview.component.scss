@@ -3,8 +3,8 @@
 .contract-time-users {
     mat-chip {
       border-radius: 16px !important;
-      border: solid 1px $gray-400--old;
-      background-color: $gray-200--old;
+      border: solid 1px $gray-200;
+      background-color: $gray-50;
       padding: 4px;
       height: 32px;
 
@@ -28,7 +28,7 @@
 
       .assigne-user-name {
         line-height: 1.33;
-        color: $gray-800--old;
+        color: $gray-600;
         font-size: 12px;
         margin-right: 4px;
         opacity: 1;

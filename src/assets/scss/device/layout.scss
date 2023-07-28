@@ -39,7 +39,7 @@
   ol li {
     counter-increment: av-counter;
     list-style: none;
-    color: $primary-2;
+    color: $gray-900;
     margin: 0px 0px 20px;
     padding: 0px 0px 0px 20px;
     position: relative;
@@ -47,7 +47,7 @@
   ol li:before {
     content: counter(av-counter) ".";
     counter-increment: none;
-    color: $primary-2;
+    color: $gray-900;
     position: absolute;
     left: 0px;
     top: 0px;
@@ -59,7 +59,7 @@
     font-weight: 500;
     line-height: 16px;
     letter-spacing: 0;
-    color: $primary-1;
+    color: $blue-light-600;
     text-decoration: none;
     &:hover {
       opacity: .8;
@@ -86,7 +86,7 @@
 
   header {
     position: fixed;
-    background-color: $primary-2;
+    background-color: $gray-900;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -145,7 +145,7 @@
               font-weight: 400;
               line-height: 1.2;
               letter-spacing: normal;
-              color: $gray-600--old;
+              color: $gray-400;
               width: 100%;
             }
             &__name {
@@ -165,7 +165,7 @@
         justify-content: flex-start;
         align-items: center;
         a {
-          background-color: $primary-1;
+          background-color: $blue-light-600;
           border-radius: 4px;
           margin-left: 8px;
           transition: all 0.4s ease;
@@ -198,10 +198,10 @@
       }
       .head-btn-info {
         &.btn-refresh {
-          background-color: $success;
+          background-color: $green-600;
         }
         &.btn-shutDown {
-          background-color: $error;
+          background-color: $red-600;
         }
       }
     }
@@ -244,6 +244,8 @@
             margin-right: 4px;
             position: absolute;
             left: 7px;
+            width: 24px;
+            height: 24px;
           }
         }
         &:nth-last-child(2) {
@@ -260,7 +262,7 @@
     left: 0;
     width: 216px;
     z-index: 2;
-    background-color: $primary-2;
+    background-color: $gray-900;
     top: 0;
     bottom: 0;
     height: 100%;
@@ -309,8 +311,8 @@
           &:hover,
           &.active {
             a {
-              background-color: $gray-800--old;
-              border-color: $primary-1;
+              background-color: $gray-600;
+              border-color: $blue-light-600;
               font-weight: 600;
             }
           }
@@ -340,7 +342,7 @@
           align-items: center;
           width: 40px;
           height: 40px;
-          border: solid 1px $primary-1;
+          border: solid 1px $blue-light-600;
           border-radius: 50%;
           font-size: 11px;
           font-weight: 600;
@@ -400,7 +402,7 @@
         font-style: normal;
         line-height: 1.2;
         letter-spacing: normal;
-        color: $gray-600--old;
+        color: $gray-400;
       }
     }
 
@@ -416,7 +418,7 @@
       text-indent: 5000px;
       overflow: hidden;
       &.online {
-        background-color: $success;
+        background-color: $green-600;
       }
     }
   }
@@ -526,7 +528,7 @@
       }
       &.device-progress {
         background-color: rgba(22, 164, 250, 0.2);
-        color: $primary-1;
+        color: $blue-light-600;
         min-width: 70px;
       }
     }
@@ -539,7 +541,7 @@
       font-style: normal;
       line-height: 1.33;
       letter-spacing: normal;
-      color: $gray-800--old;
+      color: $gray-600;
       .id {
         font-size: 10px;
         font-weight: 500;
@@ -547,7 +549,7 @@
         font-style: normal;
         line-height: 1.2;
         letter-spacing: normal;
-        color: $gray-600--old;
+        color: $gray-400;
       }
       .name {
         &::before {
@@ -555,7 +557,7 @@
           display: inline-block;
           width: 4px;
           height: 4px;
-          background-color: $gray-600--old;
+          background-color: $gray-400;
           border-radius: 50%;
           vertical-align: middle;
           margin: 0 8px;
@@ -570,9 +572,9 @@
       font-style: normal;
       line-height: 1.2;
       letter-spacing: normal;
-      color: $gray-800--old;
+      color: $gray-600;
       &:hover {
-        color: $primary-1;
+        color: $blue-light-600;
       }
     }
 
@@ -587,11 +589,11 @@
             left: -30px;
             content: "";
             position: absolute;
-            background: url("../../../assets/img/device/task-pending.svg") no-repeat center;
+            background: url("../../../assets/img/icons/task-pending.svg") no-repeat center;
           }
           &.complete {
             &::before {
-              background: url("../../../assets/img/device/task-completed.svg") no-repeat center;
+              background: url("../../../assets/img/icons/task-completed.svg") no-repeat center;
             }
           }
           h5 {
@@ -640,13 +642,13 @@
     width: 32px;
     height: 32px;
     border-radius: 4px;
-    background-color: $primary-1;
+    background-color: $blue-light-600;
     z-index: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     &:hover {
-      background-color: $primary-1;
+      background-color: $blue-light-600;
     }
   }
 
@@ -676,15 +678,15 @@
         font-size: 12px;
         line-height: normal;
         letter-spacing: normal;
-        color: $gray-800--old;
+        color: $gray-600;
         display: block;
         text-transform: capitalize;
         transition: all 0.4s ease;
         font-weight: 600;
         &:hover,
         &.active {
-          border-color: $primary-1;
-          color: $primary-1;
+          border-color: $blue-light-600;
+          color: $blue-light-600;
 
           &:after {
             position: absolute;
@@ -728,7 +730,7 @@
       text-align: center;
       width: 85px;
       border-radius: 3px;
-      background-color: $gray-800--old;
+      background-color: $gray-600;
       font-size: 12px;
       font-weight: 500;
       font-style: normal;
@@ -754,7 +756,7 @@
       position: absolute;
       pointer-events: none;
       border-color: rgba(79, 95, 121, 0);
-      border-top-color: $gray-800--old;
+      border-top-color: $gray-600;
       border-width: 6px;
       margin-left: -6px;
       bottom: 14px;
@@ -796,7 +798,7 @@
       font-style: normal;
       line-height: normal;
       letter-spacing: normal;
-      color: $primary-2;
+      color: $gray-900;
       font-weight: 600;
     }
     td {
@@ -875,13 +877,13 @@
     font-weight: 600;
     line-height: 1.33;
     letter-spacing: normal;
-    color: $primary-1;
+    color: $blue-light-600;
     text-align: center;
     min-width: 134px;
     transition: all 0.4s ease;
     &:hover {
-      background-color: $primary-1;
-      border-color: $primary-1;
+      background-color: $blue-light-600;
+      border-color: $blue-light-600;
       color: $white;
     }
   }
@@ -946,7 +948,7 @@
   }
 
   .validation-error {
-    border: 1px solid $error;
+    border: 1px solid $red-600;
   }
 
   // Datatable design
@@ -964,7 +966,7 @@
     border-bottom-right-radius: 5px;
   }
   table.dataTable tbody tr td {
-    border-bottom: 2px solid $gray-200--old;
+    border-bottom: 2px solid $gray-50;
   }
 
   table.dataTable thead tr th.sorting_desc,

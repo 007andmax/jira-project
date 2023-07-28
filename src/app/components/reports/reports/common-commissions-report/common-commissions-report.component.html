@@ -21,14 +21,14 @@
             <div class="customer-ticket__report">
                 <div class="qt-report__body-header">
                     <div
-                        class="body-m__sb qt-color-dark"
+                        class="body-m__sb qt-color-gray-900"
                         *ngIf="onInit"
                     >
                         {{ selectedCompany && selectedCompany.name || 'All companies' }}
                     </div>
-                    <h6 class="qt-fw-600 qt-color-dark">Commissions Report</h6>
+                    <h6 class="qt-fw-600 qt-color-gray-900">Commissions Report</h6>
                     <div
-                        class="body-m qt-color-dark-light"
+                        class="body-m qt-color-gray-600"
                         *ngIf="onInit"
                     >
                         <span>
@@ -40,7 +40,7 @@
                         </span>
                     </div>
                     <div
-                        class="body-m__sb qt-color-dark"
+                        class="body-m__sb qt-color-gray-900"
                         *ngIf="onInit"
                     >
                         {{ currentCompany.name }}
@@ -104,10 +104,10 @@
                 >
                     <thead>
                         <tr>
-                            <th class="qt-fw-600 qt-color-dark">Client</th>
-                            <th class="qt-fw-600 qt-color-dark">Contracts</th>
-                            <th class="qt-fw-600 qt-color-dark">Total sales</th>
-                            <th class="qt-fw-600 qt-color-dark">Commissions</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Client</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Contracts</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Total sales</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Commissions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -128,14 +128,14 @@
                             </tr>
                         </ng-template>
                         <tr class="qt-report__body-row">
-                            <td class="body-l__sb qt-color-dark">Total</td>
-                            <td class="body-l__sb qt-color-dark">
+                            <td class="body-l__sb qt-color-gray-900">Total</td>
+                            <td class="body-l__sb qt-color-gray-900">
                                 {{ commonCommissionsReport.servicesSum | toFixed : 2 }}
                             </td>
-                            <td class="body-l__sb qt-color-dark">
+                            <td class="body-l__sb qt-color-gray-900">
                                 {{ commonCommissionsReport.totalSum | toFixed : 2 }}
                             </td>
-                            <td class="body-l__sb qt-color-dark2">
+                            <td class="body-l__sb qt-color-gray-9002">
                                 {{ commonCommissionsReport.totalCommissionSum | toFixed : 2 }}
                             </td>
                         </tr>

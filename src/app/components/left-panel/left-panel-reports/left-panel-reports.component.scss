@@ -13,7 +13,7 @@
 }
 
 .report-menu-item {
-    margin: 0 0px 16px 0;
+    margin: 0 0 16px 0;
 
     .report-menu-item-header {
         display: flex;
@@ -68,14 +68,14 @@
 
         h3 {
             font-size: 16px;
-        color: $white;
+            color: $white;
             font-weight: 500;
         }
     }
 
     .active {
-        color: #16a4fa;
-        background-color: #171e26;
+        color: $blue-light-600;
+        background-color: $gray-900;
     }
 
     span {
