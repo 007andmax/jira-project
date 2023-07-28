@@ -1,5 +1,6 @@
 <div
     class="qt-aside-modern users-page__aside"
+    [ngStyle]="{'z-index':opened ? '6' : '5'}"
     [hidden]="!opened"
 >
     <div class="qt-aside-modern__header">
@@ -78,7 +79,7 @@
                 </div>
             </div>
         </div>
-        <div class="qt-inputs-row">
+        <div class="qt-inputs-row qt-ai-fe">
             <div class="qt-input-block qt-f50">
                 <div
                     class="qt-input-block"
@@ -105,18 +106,26 @@
                     </mat-error>
                 </div>
             </div>
-            <div class="qt-input-block qt-f50">
-                <app-drop-down
-                    #jobTitleDp
-                    [title]="'Job Title'"
-                    [placeholder]="'Select Job Title'"
-                    [list]="jobTitleList"
-                    [field]="'name'"
-                    [search]="true"
-                    [change]="true"
-                    [editItem]="selectedUserTitle"
-                    (onSelectedItem)="onSelectJobTitle($event)"
-                ></app-drop-down>
+            <div
+                class="qt-inputs-row qt-f50"
+                *ngIf="user.portalAccessStatus == 'Unauthorized' || user.portalAccessStatus == 'Invite sent'"
+            >
+                <div class="qt-input-block">
+                    <div class="qt-df qt-ai-c qt-mt-15 qt-mb-12">
+                        <label
+                            class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
+                            for="sendPortalInvitation"
+                        >
+                            <input
+                                id="sendPortalInvitation"
+                                type="checkbox"
+                                [(ngModel)]="user.sendPortalInvitation"
+                            >
+                            <span></span>
+                            <div class="qt-ml-8">Send Invite to Customer Portal</div>
+                        </label>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="qt-inputs-row">
@@ -150,22 +159,6 @@
                     rows="3"
                     [default]="3"
                 ></textarea>
-            </div>
-        </div>
-        <div class="qt-inputs-row">
-            <div class="qt-input-block">
-              <company-drop-down
-                [placeholder]="'Company'"
-                [validate]="validate.getCompany()"
-                [errorMessage]="'The company name is required'"
-                [title]="'Company'"
-                [field]="'name'"
-                [search]="true"
-                [change]="true"
-                [editItem]="selectedCompany"
-                (onSelectedItem)="onSelectCompany($event)"
-              >
-              </company-drop-down>
             </div>
         </div>
         <div class="qt-inputs-row">
@@ -229,16 +222,16 @@
                         class="invalid-feedback"
                         *ngIf="!validate.getPhoneNumber(0)"
                     >
-                        Phone number is required
+                        Please enter a valid phone number
                     </mat-error>
                 </div>
             </div>
             <div class="qt-w50">
                 <app-drop-down
                     #jobTypeDp
-                    [title]="'Job Type'"
+                    [title]="'User Type'"
                     [field]="'name'"
-                    [placeholder]="'Select Job Type'"
+                    [placeholder]="'Select User Type'"
                     [list]="userTypes"
                     [editItem]="selectedUserType"
                     [isBlockClear]="true"
@@ -247,120 +240,250 @@
             </div>
         </div>
         <ng-template
-          ngFor
-          let-phone
-          *ngIf="user.phoneNumbers.length > 1"
-          [ngForOf]="user.phoneNumbers"
-          [ngForTrackBy]="trackById"
-          let-i="index"
-          [ngForTrackBy]="trackByIndex"
+            ngFor
+            let-phone
+            *ngIf="user.phoneNumbers.length > 1"
+            [ngForOf]="user.phoneNumbers"
+            [ngForTrackBy]="trackById"
+            let-i="index"
+            [ngForTrackBy]="trackByIndex"
         >
-          <div
-            *ngIf="i > 0"
-            class="with-new-link qt-inputs-row"
-            ngbDropdown
-          >
             <div
-              class="qt-input-block qt-f50"
-              [ngClass]="{'--input-error':!validate.getPhoneNumber(i)}"
+                *ngIf="i > 0"
+                class="with-new-link qt-inputs-row"
+                ngbDropdown
             >
-              <div class="qt-df qt-jc-sb qt-ai-c">
-                <label class="qt-input-block__label">Additional phone</label>
-                <span
-                  class="qt-fw-600 qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info"
-                  (click)="removePhoneNumber(i)"
-                >
-                                      Remove Phone
-                                  </span>
-              </div>
-              <div class="qt-with-number-types right">
-                <input
-                  type="text"
-                  class="qt-with-number-types__input"
-                  [(ngModel)]="phone.number"
-                  (input)="onCheckPhoneNumber(i)"
-                  placeholder="Enter Primary Phone"
-                  prefix="+1"
-                  mask="(000) 000-0000 Ext: 999999||000-000-0000"
-                  [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                  [dropSpecialCharacters]="false"
-                >
                 <div
-                  class="grey-dropdown primary-phone-selector"
-                  ngbDropdown
+                    class="qt-input-block qt-f50"
+                    [ngClass]="{'--input-error':!validate.getPhoneNumber(i)}"
                 >
-                  <button
-                    class="qt-with-number-types__types-btn"
-                    [id]="'dropdownBasic' + i"
-                    ngbDropdownToggle
-                    [textContent]="phone.typeNumber"
-                  ></button>
-                  <i class="icn-sm report-caret-icon"></i>
-                  <div
-                    ngbDropdownMenu
-                    [attr.aria-labelledby]="'dropdownBasic' + i"
-                  >
-                    <ng-template
-                      ngFor
-                      let-item
-                      [ngForOf]="phoneTypes"
-                    >
-                      <button
-                        ngbDropdownItem
-                        [textContent]="item"
-                        (click)="phone.typeNumber = item.toUpperCase()"
-                      ></button>
-                    </ng-template>
-                  </div>
+                    <div class="qt-df qt-jc-sb qt-ai-c">
+                        <label class="qt-input-block__label">Additional phone</label>
+                        <span
+                            class="qt-fw-600 qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info"
+                            (click)="removePhoneNumber(i)"
+                        >
+                            Remove Phone
+                        </span>
+                    </div>
+                    <div class="qt-with-number-types right">
+                        <input
+                            type="text"
+                            class="qt-with-number-types__input"
+                            [(ngModel)]="phone.number"
+                            (input)="onCheckPhoneNumber(i)"
+                            placeholder="Enter Primary Phone"
+                            prefix="+1"
+                            mask="(000) 000-0000 Ext: 999999||000-000-0000"
+                            [specialCharacters]="['(',')',' ','-','E','x','t',':']"
+                            [dropSpecialCharacters]="false"
+                        >
+                        <div
+                            class="grey-dropdown primary-phone-selector"
+                            ngbDropdown
+                        >
+                            <button
+                                class="qt-with-number-types__types-btn"
+                                [id]="'dropdownBasic' + i"
+                                ngbDropdownToggle
+                                [textContent]="phone.typeNumber"
+                            ></button>
+                            <i class="icn-sm report-caret-icon"></i>
+                            <div
+                                ngbDropdownMenu
+                                [attr.aria-labelledby]="'dropdownBasic' + i"
+                            >
+                                <ng-template
+                                    ngFor
+                                    let-item
+                                    [ngForOf]="phoneTypes"
+                                >
+                                    <button
+                                        ngbDropdownItem
+                                        [textContent]="item"
+                                        (click)="phone.typeNumber = item.toUpperCase()"
+                                    ></button>
+                                </ng-template>
+                            </div>
+                        </div>
+                        <mat-error
+                            class="invalid-feedback"
+                            *ngIf="!validate.getPhoneNumber(i)"
+                        >
+                            Please enter a valid phone number
+                        </mat-error>
+                    </div>
                 </div>
-                <mat-error
-                  class="invalid-feedback"
-                  *ngIf="!validate.getPhoneNumber(i)"
-                >
-                  Phone number is required
-                </mat-error>
-              </div>
             </div>
-          </div>
         </ng-template>
-        <div class="qt-inputs-row">
-          <div class="qt-input-block">
-            <label class="qt-input-block__label">Subscription</label>
-            <user-default-subscription
-              [mode]="MODE_EDIT_SUBSCRIPTION"
-              [defaultSubscriptions]="user.defaultSubscriptions"
-              (onChange)="onChangeDefaultSubscriptions($event)"
-            ></user-default-subscription>
-          </div>
+        <ng-template
+            ngFor
+            let-companyInfo
+            [ngForOf]="user.customerCompaniesInfo"
+            let-i="index"
+        >
+            <div class="qt-inputs-row-background">
+                <div class="qt-inputs-row qt-pos-rel">
+                    <div class="qt-df qt-ai-c company-actions">
+                        <span
+                            class="qt-fw-600 qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info pointer"
+                            *ngIf="i == 0"
+                            (click)="addCompnay()"
+                        >
+                            + Add Company
+                        </span>
+                        <span
+                            class="qt-fw-600 qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info qt-ml-8 pointer"
+                            *ngIf="user.customerCompaniesInfo.length > 1"
+                            (click)="removeCompnay(i)"
+                        >
+                            Remove Company
+                        </span>
+                    </div>
+                    <div class="qt-input-block">
+                        <company-drop-down
+                            [placeholder]="'Company'"
+                            [validate]="validate.getCompany()"
+                            [errorMessage]="'The company name is required'"
+                            [title]="'Company'"
+                            [field]="'name'"
+                            [search]="true"
+                            [change]="true"
+                            [isBlockClear]="true"
+                            [editItem]="getCompany(companyInfo)"
+                            (onSelectedItem)="onSelectCompany($event,i)"
+                        >
+                        </company-drop-down>
+                    </div>
+                </div>
+                <div class="qt-inputs-row">
+                    <div class="qt-input-block qt-f50">
+                        <app-drop-down
+                            #jobTitleDp
+                            [title]="'Job Title'"
+                            [placeholder]="'Select Job Title'"
+                            [list]="jobTitleList"
+                            [field]="'name'"
+                            [search]="true"
+                            [change]="true"
+                            [isDisabled]="!companyInfo.companyId"
+                            [editItem]="companyInfo.jobTitleDto"
+                            (onSelectedItem)="onSelectJobTitle($event,i)"
+                        ></app-drop-down>
+                    </div>
+                    <div class="qt-input-block qt-f50">
+                        <app-drop-down
+                            #userRolesDP
+                            *ngIf="customerRoleStateService.isGetUserRole"
+                            [title]="'Permission Role'"
+                            [placeholder]="'Select role'"
+                            [list]="userRoles"
+                            [field]="'name'"
+                            [search]="true"
+                            [change]="true"
+                            [isDisabled]="!companyInfo.companyId"
+                            [editItem]="companyInfo.customerUserRole"
+                            (onSelectedItem)="onSelectUserRole($event,i)"
+                        ></app-drop-down>
+                    </div>
+                </div>
+                <div class="qt-inputs-row">
+                    <div class="qt-input-block">
+                        <label class="qt-input-block__label">Subscription</label>
+                        <user-default-subscription
+                            [mode]="MODE_EDIT_USER_SUBSCRIPTION"
+                            [defaultSubscriptions]="companyInfo.defaultSubscriptions"
+                            (onChange)="onChangeDefaultSubscriptions($event,i)"
+                            [isDisabled]="!companyInfo.companyId"
+                        ></user-default-subscription>
+                    </div>
+                </div>
+                <div class="qt-inputs-row">
+                    <div class="qt-input-block qt-f50">
+                        <div class="qt-df qt-ai-c">
+                            <label
+                                class="qt-checkbox receive-full-amount-check qt-mb-0"
+                                [attr.for]="'access-' + i"
+                                [ngClass]="{'pointer' : companyInfo.companyId && companyInfo.customerUserRole,
+                            'access-customer-portal': !(companyInfo.companyId && companyInfo.customerUserRole),
+                        '--disabled': !(companyInfo.companyId && companyInfo.customerUserRole)}"
+                            >
+                                <input
+                                    [attr.id]="'access-' + i"
+                                    type="checkbox"
+                                    [(ngModel)]="companyInfo.hasAccess"
+                                    [disabled]="!companyInfo.companyId || !companyInfo.customerUserRole"
+                                >
+                                <span></span>
+                                <div class="qt-ml-8">
+                                    Access to the Customer portal
+                                    <i
+                                        class="icon__help default-services-page__question-icon qt-sz-12 qt-ic-c"
+                                        (mouseenter)="customerPortalTooltip.show($event.target)"
+                                        (mouseleave)="customerPortalTooltip.hide()"
+                                    ></i>
+                                </div>
+                                <app-dynamic-tooltip
+                                    class="user-companies-tooltip"
+                                    [content]="'This option can be enabled only if the permission role has been set'"
+                                    [position]="'bottom'"
+                                    #customerPortalTooltip
+                                ></app-dynamic-tooltip>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="qt-input-block qt-f50">
+                        <div class="qt-df qt-ai-c">
+                            <label
+                                class="qt-checkbox receive-full-amount-check qt-mb-0 pointer --disabled"
+                                [attr.for]="'primary-contact-' + i"
+                            >
+                                <input
+                                    [attr.id]="'primary-contact-' + i"
+                                    type="checkbox"
+                                    [(ngModel)]="companyInfo.isPrimaryContact"
+                                    disabled
+                                >
+                                <span></span>
+                                <div class="qt-ml-8">Set as a primary user</div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <div class="qt-inputs-row qt-mt-24">
+            <div class="qt-input-block">
+                <label class="qt-input-block__label">Marketing Subscription</label>
+                <user-custom-subscription
+                    [customSubscriptions]="user.customSubscriptions"
+                    (onChange)="onChangeCustomSubscriptions($event)"
+                ></user-custom-subscription>
+            </div>
         </div>
         <div class="qt-inputs-row">
-          <div class="qt-input-block">
-            <label class="qt-input-block__label">Marketing Subscription</label>
-            <user-custom-subscription
-              [customSubscriptions]="user.customSubscriptions"
-              (onChange)="onChangeCustomSubscriptions($event)"
-            ></user-custom-subscription>
-          </div>
-        </div>
-        <div class="qt-inputs-row">
-          <div class="qt-input-block">
-            <div class="qt-input-block__label">Tags</div>
-            <app-company-tags
-              #companyTags
-              [placement]="'top'"
-              [blockUserTag]="true"
-              (tagsChange)="onChangeTags($event)"
-            ></app-company-tags>
-          </div>
+            <div class="qt-input-block">
+                <div class="qt-input-block__label">Tags</div>
+                <app-company-tags
+                    #companyTags
+                    [placement]="'top'"
+                    [blockUserTag]="true"
+                    (tagsChange)="onChangeTags($event)"
+                ></app-company-tags>
+            </div>
         </div>
     </div>
     <div class="qt-aside-modern__footer">
         <div class="qt-df">
             <button
                 class="qt-button qt-mr-12"
-                (click)="onSave()"
+                appDisabledBtn
+                #editBtn="disabled"
+                (onClick)="onSave()"
+                [ngClass]="{'--loading':editBtn.isBlock()}"
             >
-                Save
+                <span>Save</span>
+                <app-preloader-ticket *ngIf="editBtn.isBlock()"></app-preloader-ticket>
             </button>
             <button
                 class="qt-button --gray"

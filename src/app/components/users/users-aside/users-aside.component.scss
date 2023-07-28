@@ -19,3 +19,12 @@
 #upload-file {
     display: none !important;
 }
+.company-actions {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 999;
+}
+.access-customer-portal {
+    cursor: default;
+}

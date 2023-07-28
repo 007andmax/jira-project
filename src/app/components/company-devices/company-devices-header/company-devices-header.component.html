@@ -1,41 +1,51 @@
 <div class="qt-page-list__header-title-line">
-  <div class="qt-page-list__header-title-line--left">
-    <h6 class="qt-page-list__header-title qt-mb-16" [textContent]="'All Devices (' + devices.length + ')'"></h6>
-  </div>
+    <div class="qt-page-list__header-title-line--left">
+        <h6
+            class="qt-page-list__header-title qt-mb-16"
+            [textContent]="'All Devices (' + devices.length + ')'"
+        ></h6>
+    </div>
+    <div class="qt-page-list__header-title-line--rigth">
+        <div
+            class="company-devices-page__list-header-buttons"
+            *ngIf="getCountSelected() > 0"
+        >
+            <div [textContent]="getCountSelected() + ' Devices Selected'"></div>
+            <div
+                class="qt-ml-16 qt-fw-600 qt-df qt-color-info qt-ai-c qt-pointer"
+                *ngIf="!isOfflineDeviceSelected && !customerPortalStateService.isCustomerPortal"
+                (click)="turnOff('reboot')"
+            >
+                <div class="icon__restart-blue qt-sz-16 qt-ic-c qt-mr-6"></div>
+                <div>Restart</div>
+            </div>
+            <div
+                class="qt-ml-16 qt-fw-600 qt-df qt-color-info qt-ai-c qt-pointer"
+                *ngIf="!isOfflineDeviceSelected && !customerPortalStateService.isCustomerPortal"
+                (click)="turnOff('shutdown')"
+            >
+                <div class="icon__shutdown-blue qt-sz-16 qt-ic-c qt-mr-6"></div>
+                <div>Shutdown</div>
+            </div>
+            <div
+                class="qt-ml-16 qt-fw-600 qt-df qt-color-info qt-ai-c qt-pointer"
+                (click)="removeAgents()"
+                *ngIf="!customerPortalStateService.isCustomerPortal"
+            >
+                <div class="icon__remove--blue-light-600 qt-sz-16 qt-ic-c qt-mr-6"></div>
+                <div>Remove Agent</div>
+            </div>
+            <div
+                class="qt-ml-16 qt-fw-600 qt-df qt-color-info qt-ai-c qt-pointer"
+                (click)="openSidebar()"
+            >
+                <div class="icon__sidebar-blue qt-sz-16 qt-ic-c qt-mr-6"></div>
+                <div>Sidebar</div>
+            </div>
+        </div>
+    </div>
 
-  <div class="qt-page-list__header-title-line--rigth">
-    <div class="company-devices-page__list-header-buttons" *ngIf="getCountSelected() > 0">
-      <div [textContent]="getCountSelected() + ' Devices Selected'"></div>
-      <div
-          class="qt-ml-16 qt-fw-600 qt-df qt-color-info qt-ai-c qt-pointer"
-          *ngIf="!isOfflineDeviceSelected"
-          (click)="turnOff('reboot')"
-      >
-      <div class="icon__restart-blue qt-sz-16 qt-ic-c qt-mr-6"></div>
-      <div>Restart</div>
-    </div>
-    <div
-      class="qt-ml-16 qt-fw-600 qt-df qt-color-info qt-ai-c qt-pointer"
-      *ngIf="!isOfflineDeviceSelected"
-      (click)="turnOff('shutdown')"
-    >
-      <div class="icon__shutdown-blue qt-sz-16 qt-ic-c qt-mr-6"></div>
-      <div>Shutdown</div>
-    </div>
-    <div
-      class="qt-ml-16 qt-fw-600 qt-df qt-color-info qt-ai-c qt-pointer"
-      (click)="removeAgents()"
-    >
-      <div class="icon__remove--blue-light-600 qt-sz-16 qt-ic-c qt-mr-6"></div>
-      <div>Remove Agent</div>
-    </div>
-    <div
-      class="qt-ml-16 qt-fw-600 qt-df qt-color-info qt-ai-c qt-pointer"
-      (click)="openSidebar()"
-    >
-      <div class="icon__sidebar-blue qt-sz-16 qt-ic-c qt-mr-6"></div>
-      <div>Sidebar</div>
-    </div>
-  </div>
+
+
+
 </div>
-

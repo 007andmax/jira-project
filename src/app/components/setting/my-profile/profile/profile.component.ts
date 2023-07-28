@@ -27,6 +27,7 @@ import { ImageCropperStateService } from 'src/app/states/image-cropper/image-cro
 import { ModalImageCropperStateService } from 'src/app/services/modal/modal-image-cropper/services/modal-image-cropper-state.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 declare var google: any;
 @Component({
@@ -76,6 +77,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private crmStateService: CrmStateService,
     private imageCropperStateService: ImageCropperStateService,
     private modalImageCropperStateService: ModalImageCropperStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     private companiesService: CompaniesService,
   ) {
   }
@@ -128,7 +130,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       image: ['']
     });
     if (this.currentUser.jobTitle) this.selectedJobTitle = new CrmCompanyJobTitle(JSON.parse(JSON.stringify(this.currentUser.jobTitle)));
-    this.getAddressAutocomplete();
+    if (!this.customerPortalStateService.isCustomerPortal) this.getAddressAutocomplete();
     this.jobTitleList = this.crmStateService.getJobTitleList();
     let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
       this.jobTitleList = data;
@@ -486,8 +488,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
    * delete avatar
    */
   deleteAvatar() {
-    this.settingService
-      .deleteAvatar(this.currentUser.id)
+    this.userService
+      .removeAvatar(this.currentUser.id)
       .pipe(
         map(res => {
           this.toastr.success('Avatar deleted successfully');
@@ -577,13 +579,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.userProfile.signature.content = this.profileForm.value.aboutMe;
     }
     if (this.userProfile && this.userProfile.address) {
-      (this.userProfile.address.suiteNumber = this.profileForm.value.suiteNumber),
+      (this.userProfile.address.suiteNumber = this.profileForm.value.suiteNumber);
+      if (this.searchElementRef) {
         (this.userProfile.address.address = this.searchElementRef.nativeElement
           .value
           ? this.searchElementRef.nativeElement.value
-          : this.profileForm.value.mailingAddress),
-        (this.userProfile.address.aboutMe = this.profileForm.value.aboutMe),
-        (this.userProfile.address.postalCode = this.profileForm.value.postalCode);
+          : this.profileForm.value.mailingAddress);
+      } else {
+        (this.userProfile.address.address = this.profileForm.value.mailingAddress);
+      }
+      (this.userProfile.address.aboutMe = this.profileForm.value.aboutMe);
+      (this.userProfile.address.postalCode = this.profileForm.value.postalCode);
       const phoneNumbers = [];
       if (this.profileForm.value.primaryPhone) {
         const phone = { number: '', typeNumber: '', priority: 0, id: '' };
@@ -620,9 +626,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       .updateProfile(profileUser)
       .pipe(
         map(res => {
-          if (res) {
-            this.toastr.success('Profile Updated Successfully');
-          }
+
         })
       )
       .subscribe(

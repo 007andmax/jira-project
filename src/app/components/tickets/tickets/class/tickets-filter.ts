@@ -132,7 +132,6 @@ export class TicketsFilter {
         if (this.listType === "RECURRING_TICKETS_CLOSED") payload = JSON.parse(JSON.stringify(this.payloadRecurringTicketsClosed));
         if (this.listType === "COMPLETED") payload = JSON.parse(JSON.stringify(this.payloadCompleted));
         if (this.listType === "IN_PROGRESS") payload = JSON.parse(JSON.stringify(this.payloadInProgress));
-
         if (this.selectedCompany) {
             payload.groupFieldFilters[0].fieldFilterDtos.push({
                 operator: "EQ",
@@ -297,24 +296,33 @@ export class TicketsFilter {
             excludeTrashSpam: true,
             groupFieldFilters: [
                 {
-                    fieldFilterDtos: [
+                    "fieldFilterDtos": [
                         {
-                            path: "status",
-                            operator: "NOT_EQ",
-                            values: [
-                                "COMPLETED"
-                            ]
-                        },
-                        {
-                            path: "ticketSource",
-                            operator: "NOT_EQ",
-                            values: [
+                            "path": "ticketSource",
+                            "operator": "NOT_EQ",
+                            "values": [
                                 "FROM_RECURRING_TICKET"
                             ]
                         }
                     ]
+                },
+                {
+                    "fieldFilterDtos": [
+                        {
+                            "path": "status",
+                            "operator": "NOT_EQ",
+                            "values": [
+                                "COMPLETED"
+                            ]
+                        },
+                        {
+                            "path": "status",
+                            "operator": "NULL"
+                        }
+                    ],
+                    "predicateRule": "OR"
                 }
-            ]
+            ],
         }
     }
     private getCustomOpenPayLoad() {

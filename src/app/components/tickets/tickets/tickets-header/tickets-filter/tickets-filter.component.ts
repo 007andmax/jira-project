@@ -18,6 +18,7 @@ import { TicketStatus } from 'src/app/components/setting/ticket-settings-page/ti
 import { TicketStatusFilter } from '../class/ticket-status-filter';
 import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-tickets-filter',
@@ -38,6 +39,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   selectedUser: string = null;
   users = [];
   techUsersList = [];
+  techUsersNamesList = [];
   listsStatus = [new ItemStatus('Unassigned', 'unassigned', 'UNASSIGNED'),
   new ItemStatus('Completed', 'completed', 'CLOSED'),
   new ItemStatus('In Progress', 'inProgress', 'OPEN'),
@@ -56,6 +58,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     private elRef: ElementRef,
     public cd: ChangeDetectorRef,
     public appService: AppService,
+    private customerPortalStateService: CustomerPortalStateService,
     private leftPanelService: LeftPanelService) { }
 
 
@@ -63,6 +66,18 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   ngOnInit() {
     /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
     /* START */
+    if (this.customerPortalStateService.isCustomerPortal && this.companiesState.getCompanies().length > 0) this.checkCompanyCustomerUser();
+    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
+      if (this.customerPortalStateService.isCustomerPortal) this.checkCompanyCustomerUser();
+      //this.getCount();
+    })
+    this.sub.add(getOnCompanies);
+    let onTicketFilters = this.customerPortalStateService.onTicketFilters.subscribe(data => {
+      this.checkCompanyCustomerUser();
+      this.checkUserCustomerUser();
+      //  this.getCount();
+    });
+    this.sub.add(onTicketFilters);
     this.listType = this.ticketsStateService.getListType();
     this.ticketsFilter.setListType(this.listType);
     /* END */
@@ -84,13 +99,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       this.onGetTechUsers(data);
     })
     this.sub.add(getOnUsers);
-    this.leftPanelService.getColors().subscribe((data: any) => {
-      let listColors = data.map(item => {
-        return new StatusColor(item.borderColor, item.textColor);
-      })
-      this.ticketsStateService.onColorStatus(listColors);
-    })
-
     //    this.getCounts();
 
     let getOnUpdateCounts = this.ticketsStateService.getOnUpdateCounts().subscribe(data => {
@@ -104,6 +112,24 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       this.ticketsStatus = data.map(item => new TicketStatusFilter(item));
     })
     this.sub.add(onGetTicketsStatus);
+  }
+  private checkCompanyCustomerUser() {
+    this.ticketsFilter = this.customerPortalStateService.getTicketsFilter();
+    this.selectedCompany = this.companiesState.getCompanies().find(item => item.id == localStorage.getItem('company_info_id'));
+    this.companyDp.selectItemWithOutChanges(this.selectedCompany);
+    this.companyDp.isDisabled = true;
+    this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.selectedCompany.id)));
+  }
+  private checkUserCustomerUser() {
+    let customerCompanyInfo = this.usersStateService.getCurrentUser().customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id'));
+    if (customerCompanyInfo && customerCompanyInfo.customerUserRole.getPermission('VIEW_MY_TICKETS') && !customerCompanyInfo.customerUserRole.getPermission('VIEW_ALL_TICKETS')) {
+      let user = this.usersStateService.getAllUsers().find(item => item.id === this.usersStateService.getCurrentUser().id);
+      this.selectedUser = `${user.firstName} ${user.lastName}`;
+      this.usersDp.selectItemWithOutChanges(this.selectedUser);
+      this.usersDp.isDisabled = true;
+    } else {
+      this.usersDp.clearWithOutChanges();
+    }
   }
   public onClearAll() {
 
@@ -162,7 +188,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
       if (type !== 'RECURRING_TICKETS') this.getCount();
     }
-
   }
 
   public onGetUsers(data) {
@@ -174,11 +199,13 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
 
   }
   onGetTechUsers(data) {
+    if (this.customerPortalStateService.isCustomerPortal) this.checkUserCustomerUser();
     this.techUsersList = data.filter(item => {
       if (item.accountType === 'TECH' && !item.deletedAt) {
         return item;
       }
     });
+    this.techUsersNamesList = this.getTechUserList();
   }
   public onSelectCompany(item) {
 
@@ -190,7 +217,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     } else {
       this.ticketsFilter.setCompany(item);
       this.selectedCompany = null;
-      this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.company.id === item.id));
+      this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === item.id)));
       //  this.filter.setCompany(item.id);
       //  this.usersStateService.onInitFilter(this.filter);
 
@@ -277,7 +304,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   }
 
   applyFilters() {
-
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
     if (this.listType !== 'RECURRING_TICKETS') this.getCount();
     this.onChangeCounterFilter();

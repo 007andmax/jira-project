@@ -9,10 +9,10 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 export class PermissionTechUserService implements CanActivate {
   constructor(private usersStateService: UsersStateService) { }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
-    if (this.usersStateService.getCurrentUser()) return this.usersStateService.getCurrentUser().role !== "SUPER_ADMIN";
+    if (this.usersStateService.getCurrentUser()) return this.usersStateService.getCurrentUser().accountType === "TECH";
     return new Promise((resolve, reject) => {
       this.usersStateService.getOnGetCurrentuser().subscribe(data => {
-        if (this.usersStateService.getCurrentUser().role !== "SUPER_ADMIN") {
+        if (this.usersStateService.getCurrentUser().accountType === "TECH") {
           resolve(true);
         } else {
           resolve(false);

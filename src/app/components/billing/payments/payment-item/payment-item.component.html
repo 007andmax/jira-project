@@ -78,7 +78,7 @@
                 class="pointer"
                 ngbDropdownItem
                 (click)="showEditPayment()"
-                *ngIf="!payment.refundMethod"
+                *ngIf="!payment.refundMethod && !customerPortalStateService.isCustomerPortal"
             >
                 <div class="icon__edit qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Edit payment
@@ -87,7 +87,7 @@
                 class="pointer"
                 ngbDropdownItem
                 (click)="showRefundPayment()"
-                *ngIf="!payment.refundMethod"
+                *ngIf="!payment.refundMethod && !customerPortalStateService.isCustomerPortal"
             >
                 <div class="icon__refund-payment qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Refund payment
@@ -96,6 +96,7 @@
                 class="pointer"
                 ngbDropdownItem
                 (click)="deletePayment()"
+                *ngIf="!customerPortalStateService.isCustomerPortal"
             >
                 <div class="icon__remove qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Delete payment

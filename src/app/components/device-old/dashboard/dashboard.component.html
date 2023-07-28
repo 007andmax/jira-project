@@ -71,16 +71,9 @@
                 >
                     <div class="col-title">
                         <h2>Notes</h2>
-                        <a
-                            href="#javascript:;"
-                            class="static-link disabled"
-                            (click)="create=create"
-                        >
-                            +Add Notes
-                        </a>
                     </div>
                     <ul class="list-unstyled">
-                        <li (click)="editNote=!editNote">
+                        <li>
                             <a
                                 href="javascript:;"
                                 class="attashmnets"
@@ -117,7 +110,7 @@
                                 </div>
                             </div>
                         </li>
-                        <li (click)="editNote=!editNote">
+                        <li>
                             <h5>System Credentials</h5>
                             <p>
                                 Duis aute irure dolor in reprehenderit in voluptate velit ess…
@@ -145,7 +138,7 @@
                                 </div>
                             </div>
                         </li>
-                        <li (click)="editNote=!editNote">
+                        <li>
                             <h5>System Credentials</h5>
                             <p>
                                 Duis aute irure dolor in reprehenderit in voluptate velit ess…
@@ -173,7 +166,7 @@
                                 </div>
                             </div>
                         </li>
-                        <li (click)="editNote=!editNote">
+                        <li>
                             <h5>System Credentials</h5>
                             <p>
                                 Duis aute irure dolor in reprehenderit in voluptate velit ess…
@@ -201,7 +194,7 @@
                                 </div>
                             </div>
                         </li>
-                        <li (click)="editNote=!editNote">
+                        <li>
                             <h5>System Credentials</h5>
                             <p>
                                 Duis aute irure dolor in reprehenderit in voluptate velit ess…
@@ -229,7 +222,7 @@
                                 </div>
                             </div>
                         </li>
-                        <li (click)="editNote=!editNote">
+                        <li>
                             <h5>System Credentials</h5>
                             <p>
                                 Duis aute irure dolor in reprehenderit in voluptate velit ess…
@@ -260,272 +253,6 @@
                     </ul>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- sidebar popup Task -->
-    <div
-        class="sidebar-popup note"
-        [class.opened]="create"
-    >
-        <!-- header -->
-        <div class="sidebar-header">
-            <div class="sidebar-title">
-                <div class="h1">Create Note</div>
-            </div>
-            <a
-                class="close"
-                href="javascript:;"
-                (click)="create=!create"
-            >
-                <img
-                    src="/html/assets/img/icons/close.svg"
-                    alt="close"
-                >
-            </a>
-        </div>
-        <div class="middle-content">
-            <form method="POST">
-                <div class="f-row">
-                    <div class="f-col col-100">
-                        <label>Note Subject</label>
-                        <div class="form-row">
-                            <input
-                                type="text"
-                                placeholder="Write Ticket subject"
-                                class="form-input"
-                            >
-                        </div>
-                    </div>
-                    <div class="f-col col-100">
-                        <label>Description</label>
-                        <div class="form-row">
-                            <textarea
-                                class="form-input"
-                                placeholder="Write Description here…"
-                            ></textarea>
-                        </div>
-                    </div>
-                    <div class="f-col col-100">
-                        <label>Add Tags</label>
-                        <div class="form-row">
-                            <input
-                                type="text"
-                                class="form-input"
-                                placeholder="Start typing tags. Hit tab, comma, or return to complete."
-                            >
-                        </div>
-                    </div>
-                    <div class="f-col col-100">
-                        <!-- File Uploader -->
-                        <div class="upload-box">
-                            <div class="upload-box-content">
-                                <div
-                                    class="drop-container"
-                                    ngFileDrop
-                                    [options]="options"
-                                    (uploadOutput)="onUploadOutput($event)"
-                                    [uploadInput]="uploadInput"
-                                >
-                                    <p>
-                                        <img
-                                            src="/html/assets/img/device/attachment.svg"
-                                            alt="attach"
-                                        >
-                                        <span>Drag your file here or</span>
-                                        <label class="upload-button">
-                                            <input
-                                                type="file"
-                                                ngFileSelect
-                                                [options]="options"
-                                                (uploadOutput)="onUploadOutput($event)"
-                                                [uploadInput]="uploadInput"
-                                                multiple
-                                            >
-                                            Upload manually
-                                        </label>
-                                    </p>
-                                </div>
-                                <div class="upload-item">
-                                    <div
-                                        class="add-file-raw"
-                                        style="display: none;"
-                                    >
-                                        <a
-                                            href="javascript:;"
-                                            class="add-files"
-                                            title="Add Files"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/addmore.svg"
-                                                alt="Add More"
-                                            >
-                                        </a>
-                                    </div>
-                                    <div
-                                        class="upload-item-content"
-                                        *ngFor="let f of files; let i = index;"
-                                    >
-                                        <span class="f-name">{{ f.name }}</span>
-                                        <i
-                                            class="ionicon ion-close-round"
-                                            (click)="cancelUpload(f.id)"
-                                            title="Close Tag"
-                                        ></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End of File Uploader -->
-                    </div>
-                </div>
-                <div class="btn-row">
-                    <input
-                        type="submit"
-                        value="Create Note"
-                        class="btn btn-primary"
-                    >
-                    <a
-                        href="javascrip:;"
-                        class="btn btn-secondary"
-                        (click)="create=!create"
-                    >
-                        Cancel
-                    </a>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div
-        class="sidebar-popup note"
-        [class.opened]="editNote"
-    >
-        <!-- header -->
-        <div class="sidebar-header">
-            <div class="sidebar-title">
-                <div class="h1">Edit Note</div>
-            </div>
-            <a
-                class="close"
-                href="javascript:;"
-                (click)="editNote=!editNote"
-            >
-                <img
-                    src="/html/assets/img/icons/close.svg"
-                    alt="close"
-                >
-            </a>
-        </div>
-        <div class="middle-content">
-            <form method="POST">
-                <div class="f-row">
-                    <div class="f-col col-100">
-                        <label>Note Subject</label>
-                        <div class="form-row">
-                            <input
-                                type="text"
-                                value="Driver Install guide"
-                                class="form-input"
-                            >
-                        </div>
-                    </div>
-                    <div class="f-col col-100">
-                        <label>Description</label>
-                        <div class="form-row">
-                            <textarea
-                                class="form-input"
-                                value="There are many variations of passages of Lorem Ipsum available, but themajority have suffered alteration in some form, by injected humour."
-                            >
-                            </textarea>
-                        </div>
-                    </div>
-                    <div class="f-col col-100">
-                        <label>Add Tags</label>
-                        <div class="form-row">
-                            <input
-                                type="text"
-                                class="form-input"
-                                placeholder="Start typing tags. Hit tab, comma, or return to complete."
-                            >
-                        </div>
-                    </div>
-                    <div class="f-col col-100">
-                        <!-- File Uploader -->
-                        <div class="upload-box">
-                            <div class="upload-box-content">
-                                <div
-                                    class="drop-container"
-                                    ngFileDrop
-                                    [options]="options"
-                                    (uploadOutput)="onUploadOutput($event)"
-                                    [uploadInput]="uploadInput"
-                                >
-                                    <p>
-                                        <img
-                                            src="/html/assets/img/device/attachment.svg"
-                                            alt="attach"
-                                        >
-                                        <span>Drag your file here or</span>
-                                        <label class="upload-button">
-                                            <input
-                                                type="file"
-                                                ngFileSelect
-                                                [options]="options"
-                                                (uploadOutput)="onUploadOutput($event)"
-                                                [uploadInput]="uploadInput"
-                                                multiple
-                                            >
-                                            Upload manually
-                                        </label>
-                                    </p>
-                                </div>
-                                <div class="upload-item">
-                                    <div
-                                        class="add-file-raw"
-                                        style="display: none;"
-                                    >
-                                        <a
-                                            href="javascript:;"
-                                            class="add-files"
-                                            title="Add Files"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/addmore.svg"
-                                                alt="Add More"
-                                            >
-                                        </a>
-                                    </div>
-                                    <div
-                                        class="upload-item-content"
-                                        *ngFor="let f of files; let i = index;"
-                                    >
-                                        <span class="f-name">{{ f.name }}</span>
-                                        <i
-                                            class="ionicon ion-close-round"
-                                            (click)="cancelUpload(f.id)"
-                                            title="Close Tag"
-                                        ></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End of File Uploader -->
-                    </div>
-                </div>
-                <div class="btn-row">
-                    <input
-                        type="submit"
-                        value="Edit Note"
-                        class="btn btn-primary"
-                    >
-                    <a
-                        href="javascrip:;"
-                        class="btn btn-secondary"
-                        (click)="editNote=!editNote"
-                    >
-                        Cancel
-                    </a>
-                </div>
-            </form>
         </div>
     </div>
 </main>

@@ -24,6 +24,7 @@ import { User } from '../../users/class/user';
 import { PermissionManageComponent } from './permission-manage/permission-manage.component';
 import { TechUsersReassignComponent } from './tech-users-reassign/tech-users-reassign.component';
 import { TitleListType } from '../../tickets/tickets/tickets-header/class/title-list-type';
+import { UsersService } from 'src/app/services/users/users.service';
 declare var $;
 
 @Component({
@@ -79,7 +80,8 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
     private permissionsService: PermissionsService,
     private modalService: NgbModal,
     private companiesService: CompaniesService,
-    private usersRealTimeService: UsersRealTimeService
+    private usersRealTimeService: UsersRealTimeService,
+    private usersService: UsersService
   ) {
 
     if (this.companiesStateService.getCurrentCompany()) this.currentCompany(this.companiesStateService.getCurrentCompany());
@@ -189,7 +191,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
       if (this.edit) {
         if (!data) this.companiesService.removeAttachment(this.idUploadFile).subscribe(res => {
         });
-        if (data && this.selectedTechUser.avatar) this.settingService.deleteAvatar(this.selectedTechUser.id).subscribe(res => {
+        if (data && this.selectedTechUser.avatar) this.usersService.removeAvatar(this.selectedTechUser.id).subscribe(res => {
           this.selectedTechUser.avatar = null;
           this.cropIt();
         });
@@ -607,7 +609,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
       return;
     }
 
-    this.settingService.deleteAvatar(id).subscribe(
+    this.usersService.removeAvatar(id).subscribe(
       res => {
         this.toastr.success('Avatar Deleted Successfully');
 

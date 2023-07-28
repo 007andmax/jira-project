@@ -29,6 +29,7 @@ import { CompaniesService } from 'src/app/services/company/companies.service';
 import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { TitleListType } from '../../tickets/tickets/tickets-header/class/title-list-type';
 import { WORK_HOURS } from 'src/app/const/time';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 declare var google: any;
 declare var $: any;
@@ -119,6 +120,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     private imageCropperStateService: ImageCropperStateService,
     private modalImageCropperStateService: ModalImageCropperStateService,
     private companiesService: CompaniesService,
+    private customerPortalStateService: CustomerPortalStateService,
     private ngZone: NgZone
   ) { }
 
@@ -379,7 +381,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
             this.url = res.supportMailBox;
             this.cProfileForm.patchValue({
               name: res.name,
-              url: res.domain,
+              url: res.techDomain,
               suiteNumber: res.addresses.length === 0 ? '' : res.addresses[0].suiteNumber,
               address: res.addresses.length === 0 ? '' : res.addresses[0].address,
               postalCode: res.addresses.length === 0 ? '' : res.addresses[0].postalCode

@@ -11,6 +11,7 @@
         <div
             class="qt-button qt-button--with-icon --sm --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
             ngbDropdownToggle
+            *ngIf="!customerPortalStateService.isCustomerPortal"
         >
             <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-4 qt-button-icon"></span>
             Add
@@ -51,6 +52,7 @@
                     [matChipInputAddOnBlur]="addOnBlur"
                     (input)="onSearch($event)"
                     (keyup)="onKeyUp($event)"
+                    [disabled]="customerPortalStateService.isCustomerPortal"
                 >
             </mat-chip-list>
         </mat-form-field>

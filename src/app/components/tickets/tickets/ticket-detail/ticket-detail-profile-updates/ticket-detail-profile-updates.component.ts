@@ -28,4 +28,7 @@ export class TicketDetailProfileUpdatesComponent extends TicketProfileUpdatesCom
     })
     this.sub.add(getConfirm);
   }
+  isAddNoteForCustomerUser() {
+    return this.customerPortalStateService.checkEditTicket(this.usersStateService.getCurrentUser(), this.ticketProfile.createdUserId, this.ticketProfile.companyId);
+  }
 }

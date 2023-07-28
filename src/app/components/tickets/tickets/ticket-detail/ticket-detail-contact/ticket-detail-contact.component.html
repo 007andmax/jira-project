@@ -29,7 +29,7 @@
             <i class="icon__companies qt-bg-contain qt-sz-16 qt-mr-8"></i>
             <div
                 class="ticket-detail-contact__subtitle"
-                [textContent]="getCompanyUser().name"
+                [textContent]="getCompanyUser() ? getCompanyUser().name : ''"
             ></div>
         </div>
         <div

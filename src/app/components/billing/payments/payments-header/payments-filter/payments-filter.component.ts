@@ -7,6 +7,7 @@ import { CompanySetting } from 'src/app/components/companies/class/company-setti
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-payments-filter',
@@ -23,9 +24,23 @@ export class PaymentsFilterComponent implements OnInit {
   statusTypes = [new CompanySetting('Paid', 'PAID'), new CompanySetting('Refund', 'REFUND')];
   constructor(private companiesState: CompaniesStateService,
     private elRef: ElementRef,
+    private customerPortalStateService: CustomerPortalStateService,
     private paymentsStateService: PaymentsStateService) { }
 
   ngOnInit() {
+    if (this.customerPortalStateService.isCustomerPortal && this.companiesState.getCompanies().length > 0) this.checkCompanyCustomerUser();
+    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
+      if (this.customerPortalStateService.isCustomerPortal) this.checkCompanyCustomerUser();
+    })
+    this.sub.add(getOnCompanies);
+    let onPaymentsFilters = this.customerPortalStateService.onPaymentsFilters.subscribe(data => (this.checkCompanyCustomerUser()));
+    this.sub.add(onPaymentsFilters);
+  }
+  private checkCompanyCustomerUser() {
+    this.paymentsFilter = this.customerPortalStateService.getPaymentsFilter();
+    let selectedCompany = this.companiesState.getCompanies().find(item => item.id == localStorage.getItem('company_info_id'));
+    this.companyDp.selectItemWithOutChanges(selectedCompany);
+    this.companyDp.isDisabled = true;
   }
   onSelectStatus(status) {
     this.paymentsFilter.setStatus((status) ? status.value : null);
@@ -33,12 +48,12 @@ export class PaymentsFilterComponent implements OnInit {
     this.onChangeCounterFilter();
   }
   public onClearAll() {
-    this.companyDp.clearWithOutChanges();
+    if (!this.customerPortalStateService.isCustomerPortal) this.companyDp.clearWithOutChanges();
     this.datesDp.clearWithOutChanges();
     this.statusDp.clearWithOutChanges();
     this.paymentsFilter.setStatus(null);
     this.paymentsFilter.setAmount(null);
-    this.paymentsFilter.setCompany(null);
+    if (!this.customerPortalStateService.isCustomerPortal) this.paymentsFilter.setCompanyId(null);
     this.paymentsFilter.setStartDate(null);
     this.paymentsFilter.setEndDate(null);
     this.paymentsFilter.setInvoiceNumber(null);
@@ -50,9 +65,9 @@ export class PaymentsFilterComponent implements OnInit {
 
   public onSelectCompany(item) {
     if (!item) {
-      this.paymentsFilter.setCompany(null);
+      this.paymentsFilter.setCompanyId(null);
     } else {
-      this.paymentsFilter.setCompany(item.name);
+      this.paymentsFilter.setCompanyId(item.id);
     }
     this.paymentsStateService.onInitFilter(this.paymentsFilter);
     this.onChangeCounterFilter();
@@ -75,7 +90,7 @@ export class PaymentsFilterComponent implements OnInit {
   }
   public onChangeCounterFilter() {
     let count = 0;
-    if (this.paymentsFilter.companyName) count++;
+    if (this.paymentsFilter.companyId) count++;
     if (this.paymentsFilter.endDate && this.paymentsFilter.startDate) count++;
     if (this.paymentsFilter.invoiceNumber) count++;
     if (this.paymentsFilter.status) count++;

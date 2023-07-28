@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } fro
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { environment } from 'src/environments/environment';
 
-declare const Codox: any;
 declare const CodeMirror: any;
 @Component({
   selector: 'support-page-body',
@@ -14,7 +13,6 @@ export class SupportPageBodyComponent implements OnInit {
   private apiUrl = environment.apiUrl;
   @Input() editorContent = "";
   public options: Object;
-  codox: any;
   editor: any;
   currentUser: any;
   froalaEditor: any;
@@ -23,7 +21,6 @@ export class SupportPageBodyComponent implements OnInit {
   @Output() onChangeAttachments = new EventEmitter<any>();
   constructor(private usersStateService: UsersStateService,
     public cd: ChangeDetectorRef,) {
-    this.codox = new Codox()
   }
   ngOnInit() {
     this.currentUser = this.usersStateService.getCurrentUser();
@@ -90,7 +87,6 @@ export class SupportPageBodyComponent implements OnInit {
               "shape": "arrow"
             }
           };
-          //self.codox.init(config);
         },
         'image.uploaded': function ($img) {
           // Do something here.

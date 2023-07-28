@@ -25,7 +25,6 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   removable = true;
   addOnBlur = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  tagCtrl = new FormControl();
   @Input() selectedTag: Array<CompanyTag> = [];
   tags: Array<CompanyTag> = [];
   reqTags: Array<CompanyTag> = [];
@@ -48,7 +47,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   public constructor(
     public tagsService: TagsService,
     private tagsState: CompanyTagsStateService,
-    private tagsStateService: TagsStateService,
+    public tagsStateService: TagsStateService,
     private companiesStateService: CompaniesStateService,
     private companyTagsListService: CompanyTagsListService,
     public tagsRealTimeService: TagsRealTimeService,
@@ -193,7 +192,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
           if (input) {
             input.value = '';
           }
-          this.tagCtrl.setValue(null);
+          this.userInput.nativeElement.value = '';
           this.searchName = "";
           this.dp.close();
           return;
@@ -210,7 +209,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
           if (input) {
             input.value = '';
           }
-          this.tagCtrl.setValue(null);
+          this.userInput.nativeElement.value = '';
           this.searchName = "";
         });
         this.sub.add(setTags);
@@ -250,7 +249,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
       this.tags = this.reqTags;
     }
     this.tagsChange.emit(this.selectedTag);
-    this.tagCtrl.setValue(null);
+    this.userInput.nativeElement.value = '';
 
     if (this.searchName.length > 0) {
       this.searchName = "";

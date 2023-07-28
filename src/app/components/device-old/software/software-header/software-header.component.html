@@ -11,18 +11,16 @@
             >
         </div>
         <a
-            (click)="printPdf();"
-            data-tooltip="Print"
-            class="qt-ml-16 pointer"
-        >
-            <img src="/html/assets/img/device/print.svg">
-        </a>
+          class="icon__print qt-mr-6 pointer device-tooltip qt-sz-16 qt-bg-contain qt-ml-16 pointer"
+          (click)="printPdf();"
+          data-tooltip="Print"
+        ></a>
         <a
-            (click)="downloadCsv();"
-            data-tooltip="Download CSV"
-            class="qt-ml-12 pointer"
+          class="icon__export-dark qt-mr-6 pointer device-tooltip device-tooltip--width-auto qt-sz-16 qt-bg-contain qt-ml-12 pointer"
+          (click)="downloadCsv();"
+          data-tooltip="Download CSV"
         >
-            <img src="/html/assets/img/device/download_csv.svg">
+
         </a>
     </div>
 </div>

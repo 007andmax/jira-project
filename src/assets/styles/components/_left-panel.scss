@@ -396,6 +396,19 @@
       color: $primary-2;
     }
   }
+  .customer-portal__menu {
+    border-left: 1px solid $gray-700;
+    margin: 20px 0 0 9px;
+    padding-left: 20px;
+
+    a {
+      color: $gray-300;
+    }
+  }
+  .customer-portal__menu-title {
+    font-size: 14px;
+    color: $white;
+  }
 
   &__menu-expand-count {
     font-size: 12px;

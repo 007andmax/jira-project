@@ -34,13 +34,11 @@
                         <th class="c-version">
                             <span>Current Version</span>
                         </th>
-                        <th class="action">&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let software of softwareList | soft: search; let i = index;">
                         <td class="s-name">
-                            <!-- <span class="device-pic"><img src="..//html/assets/img/device/adb-reader.png" alt="adb-reader"/></span> -->
                             {{software.softName || 'N/A'}}
                         </td>
                         <td class="pulisher">{{software.softPublisher || 'N/A'}}</td>

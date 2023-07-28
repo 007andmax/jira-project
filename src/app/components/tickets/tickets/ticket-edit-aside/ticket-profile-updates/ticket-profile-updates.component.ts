@@ -7,6 +7,8 @@ import { REMOVE_UPDATE_TICKET, REMOVE_UPDATE_TICKET_SERVICE, REMOVE_UPDATE_TICKE
 import { TicketStateService } from '../services/ticket-state.service';
 import { Subscription } from 'rxjs';
 import { TicketsPermissionsService } from '../services/tickets-permissions.service';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 
 @Component({
@@ -26,6 +28,8 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
     public confirmStateService: ConfirmStateService,
     private ticketStateService: TicketStateService,
     public cd: ChangeDetectorRef,
+    public usersStateService: UsersStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     public ticketsPermissionsService: TicketsPermissionsService,) { }
   ngOnInit() {
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {

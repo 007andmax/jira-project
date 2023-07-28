@@ -23,6 +23,7 @@ import { LeftPanelSettingsComponent } from './left-panel-settings/left-panel-set
 import { LeftPanelSupportComponent } from './left-panel-support/left-panel-support.component';
 import { LeftPanelTicketsComponent } from './left-panel-tickets/left-panel-tickets.component';
 import { LeftPanelUsersComponent } from './left-panel-users/left-panel-users.component';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 /**
  * Left panel component
@@ -68,6 +69,7 @@ export class LeftPanelComponent implements OnInit {
     public cd: ChangeDetectorRef,
     private ticketsStateService: TicketsStateService,
     private passwordManagerStateService: PasswordManagerStateService,
+    private customerPortalStateService: CustomerPortalStateService,
   ) { }
 
   /**
@@ -98,6 +100,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/quotes`)) this.state = 'quotes-component';
           if (window.location.href.includes(`/payments`)) this.state = 'new-payments-ng2';
           if (window.location.href.includes(`/contracts`)) this.state = 'new-contracts';
+          if (window.location.href.includes(`/default`)) this.state = 'default';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`dashboard`)) this.state = 'company-dashboard';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`tickets`)) this.state = 'company-tickets';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`user`)) this.state = 'company-user';
@@ -130,6 +133,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/setting/ticket-settings`)) this.state = 'ticket-settings';
           if (window.location.href.includes(`/setting/crm-settings`)) this.state = 'crm-settings';
           if (window.location.href.includes(`/setting/marketing-email`)) this.state = 'marketing-email';
+          if (window.location.href.includes(`/setting/customer-portal`)) this.state = 'customer-portal';
 
           if (window.location.href.includes(`/support-page`)) this.state = 'support-page';
           if (window.location.href.includes(`/users`)) this.state = 'new-users';
@@ -189,7 +193,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/devices/reports`)) this.state == 'new-device-summary';
           if (window.location.href.includes(`/help-center`)) this.state = 'help-center';
           if (window.location.href.includes(`/device/`)) this.state = 'new-device';
-          if (this.state === '' && this.companiesStateService.getCurrentCompany() && this.usersStateService.getCurrentUser().role !== "SUPER_ADMIN") this.goToDefaultPage();
+          if (this.state === '' && this.companiesStateService.getCurrentCompany() && this.usersStateService.getCurrentUser().role !== "SUPER_ADMIN" && !this.customerPortalStateService.isCustomerPortal) this.goToDefaultPage();
           this.leftPanelStateService.firstOpen(this.state);
           this.leftPanelStateService.changeState(this.state);
           if (!this.cd['destroyed']) {
@@ -203,17 +207,17 @@ export class LeftPanelComponent implements OnInit {
       this.onChangeState(data);
     })
     this.leftPanelStateService.onOpenCompanyPage.subscribe(data => {
-      this.panelBilling.close();
+      if (this.panelBilling) this.panelBilling.close();
 
-      this.panelSettings.close();
-      this.panelSupport.close();
-      this.panelTickets.close();
-      this.panelUsers.close();
-      this.panelDocuments.close();
-      this.panelDevices.close();
+      if (this.panelSettings) this.panelSettings.close();
+      if (this.panelSupport) this.panelSupport.close();
+      if (this.panelTickets) this.panelTickets.close();
+      if (this.panelUsers) this.panelUsers.close();
+      if (this.panelDocuments) this.panelDocuments.close();
+      if (this.panelDevices) this.panelDevices.close();
 
-      this.panelCompanies.openPanel();
-      this.panelCompanies.togglePanel(true);
+      if (this.panelCompanies) this.panelCompanies.openPanel();
+      if (this.panelCompanies) this.panelCompanies.togglePanel(true);
     })
     this.leftPanelStateService.onChangeStateWithoutNavigate.subscribe(data => {
       this.state = data;
@@ -290,7 +294,7 @@ export class LeftPanelComponent implements OnInit {
     window.location.hash = '';
   }
   public goToLink(url) {
-    this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/${url}`]);
+    this.router.navigate([`${this.companiesStateService.getCurrentCompany().techDomain}/${url}`]);
   }
   onChangeState(data) {
     if (this.state !== data) {
@@ -298,6 +302,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'new-companies') this.goToLink(`companies`);
       if (this.state === 'billing-dashboard') this.goToLink('billing-dashboard');
       if (this.state === 'new-services') this.goToLink('default-services');
+      if (this.state === 'default') this.goToLink('default');
       if (this.state === 'new-billable') this.goToLink('billable');
       if (this.state === 'new-billable-invoices') this.goToLink('invoices');
       if (this.state === 'quotes-component') this.goToLink('quotes');
@@ -331,6 +336,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'device-setting-component') this.goToLink('setting/deviceSetting');
       if (this.state === 'ticket-settings') this.goToLink('setting/ticket-settings');
       if (this.state === 'marketing-email') this.goToLink('setting/marketing-email');
+      if (this.state === 'customer-portal') this.goToLink('setting/customer-portal');
 
       if (this.state === 'new-users') this.goToLink('users');
       if (this.state === 'marketing') this.goToLink('marketing');

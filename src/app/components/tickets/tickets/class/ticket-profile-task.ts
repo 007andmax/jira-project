@@ -1,4 +1,5 @@
 import { CurrentUser } from "src/class/current-user/current-user";
+import * as moment from "moment";
 
 export class TicketProfileTask {
     "id": string;
@@ -14,6 +15,9 @@ export class TicketProfileTask {
             for (const key in data) {
                 this[key] = data[key];
             }
+        } else {
+            let date = new Date();
+            this.setDate(moment(date).format('YYYY/MM/DD'));
         }
 
     }

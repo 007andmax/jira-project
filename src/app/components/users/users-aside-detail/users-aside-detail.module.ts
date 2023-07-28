@@ -23,6 +23,8 @@ import { UsersAsideDetailMessagesFullBodyComponent } from './users-aside-detail-
 import { TicketProfileAttachmentsModule } from '../../tickets/tickets/ticket-edit-aside/ticket-profile-attachments/ticket-profile-attachments.module';
 import { NgxMaskModule } from 'ngx-mask';
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
+import { UsersAsideDetailCompanyInfoComponent } from './users-aside-detail-company-info/users-aside-detail-company-info.component';
+import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 
 @NgModule({
     declarations: [UsersAsideDetailComponent,
@@ -33,7 +35,8 @@ import { CompanyDropDownModule } from '../../shared/company-drop-down/company-dr
         UsersAsideDetailDocumentsItemComponent,
         UsersAsideDetailPasswordsItemComponent,
         UsersAsideDetailMessagesComponent,
-        UsersAsideDetailMessagesFullBodyComponent
+        UsersAsideDetailMessagesFullBodyComponent,
+        UsersAsideDetailCompanyInfoComponent
     ],
     imports: [
         CommonModule,
@@ -50,7 +53,8 @@ import { CompanyDropDownModule } from '../../shared/company-drop-down/company-dr
         UserCustomSubscriptionModule,
         TicketProfileAttachmentsModule,
         NgxMaskModule.forRoot(),
-        CompanyDropDownModule
+        CompanyDropDownModule,
+        DynamicTooltipModule
     ],
     exports: [UsersAsideDetailComponent]
 

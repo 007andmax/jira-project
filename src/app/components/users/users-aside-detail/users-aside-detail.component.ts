@@ -23,6 +23,11 @@ import { UserDefaultSubscriptionAdd } from '../class/user-default-subscription-a
 import { UserProfile } from '../class/user-profile';
 import { UserValidate } from '../class/user-validate';
 import { UsersAsideDetailTicketsComponent } from './users-aside-detail-tickets/users-aside-detail-tickets.component';
+import { UserCustomerCompaniesDefaultSubscribtionAdd } from '../class/user-customer-companies-default-subscribtion-add';
+import { UserRole } from '../class/user-role';
+import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-role-state.service';
+import { UserCustomerCompaniesInfo } from '../class/user-customer-companies-info';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'users-aside-detail',
@@ -42,7 +47,7 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
   @ViewChild('ticketsDetail') ticketsDetail: UsersAsideDetailTicketsComponent;
   sub: Subscription = new Subscription();
   constructor(public ticketsListService: TicketsListService,
-    private usersStateService: UsersStateService,
+    public usersStateService: UsersStateService,
     private usersService: UsersService,
     private tagsService: TagsService,
     public cd: ChangeDetectorRef,
@@ -52,40 +57,45 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
     private companySubscriptionState: CompanySubscriptionStateService,
     private usersRealTimeService: UsersRealTimeService,
     private permissionsService: PermissionsService,
+    public customerRoleStateService: CustomerRoleStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     private companiesStateService: CompaniesStateService,) { }
 
 
   ngOnInit() {
     let openDetailAside = this.usersStateService.openDetailAside.subscribe(data => {
+      if (!this.customerRoleStateService.isGetUserRole) this.customerRoleStateService.onInitGetUsersRoles();
+      this.getColors();
       this.usersStateService.setUserForEdit(data);
       //   this.companySubscriptionState.onEditMode(this.user.subscription);
       this.user.onEdit(data);
-      this.tab = 'tickets';
+      if (this.customerPortalStateService.checkShowTabTicketsAsideUserDetail(this.usersStateService.getCurrentUser(), this.user)) {
+        this.tab = 'tickets';
+      } else {
+        this.tab = 'messages';
+      }
       this.cd.detectChanges();
       if (this.ticketsDetail) {
         this.ticketsDetail.setDefaultScoll();
         this.ticketsDetail.onScroll();
       }
       this.validate.addPhoneNumbers(this.user.phoneNumbers);
-      this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.user.companyId);
       this.open = true;
     })
     this.sub.add(openDetailAside);
-    this.leftPanelService.getColors().subscribe((data: any) => {
-      let listColors = data.map(item => {
-        return new StatusColor(item.borderColor, item.textColor);
-      })
-      this.ticketsStateService.onColorStatus(listColors);
-    })
     let stompClient = this.usersRealTimeService.changeSubscriptionsUsers.subscribe(newChange => {
       if (!this.open) return;
-      if (newChange.action === 'SUBSCRIPTION_SAVED') {
-        if (this.user.id === newChange.data.userId) {
-          this.user.setDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
-          this.user.setCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
-          this.usersStateService.getuserForEdit().changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
-          this.usersStateService.getuserForEdit().changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
+      if (newChange.action === 'DEFAULT_SUBSCRIPTION_SAVED' && this.user.id === newChange.data.userId) {
+        let index = this.user.customerCompaniesInfo.findIndex(item => item.companyId === newChange.data.companyId);
+        if (index > -1) {
+          this.user.customerCompaniesInfo[index] = new UserCustomerCompaniesInfo(newChange.data);
+          this.usersStateService.getuserForEdit().customerCompaniesInfo[index] = new UserCustomerCompaniesInfo(newChange.data);
         }
+        this.cd.detectChanges();
+      }
+      if (newChange.action === 'CUSTOM_SUBSCRIPTION_SAVED' && this.user.id === newChange.data.userId) {
+        this.user.setCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
+        this.usersStateService.getuserForEdit().changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
         this.cd.detectChanges();
       }
     });
@@ -94,8 +104,7 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
       if (!this.open) return;
       if ((data.action === 'USER_SAVED' || data.action === 'USER_ARCHIVED') && data.data.accountType !== "TECH") {
         if (this.user.id === data.data.id) {
-          this.user.onEdit(data.data);
-          this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.user.companyId);
+          this.user.onEdit(new User(data.data));
           this.usersStateService.setUserForEdit(new User(data.data));
         }
       }
@@ -103,7 +112,6 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
         data.data.forEach(user => {
           if (this.user.id === user.id) {
             this.user.onEdit(user);
-            this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.user.companyId);
             this.usersStateService.setUserForEdit(new User(data.data));
           }
         })
@@ -111,34 +119,22 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(getChangeCompanies);
-    this.onInitSubscribe();
+  }
+  getColors() {
+    if (this.ticketsStateService.getListStatusColor().length === 0) {
+      this.leftPanelService.getColors().subscribe((data: any) => {
+        let statusColors = data.map(item => {
+          return new StatusColor(item.borderColor, item.textColor);
+        })
+        this.ticketsStateService.onColorStatus(statusColors);
+      })
+    }
   }
   getLogoUrl() {
     if (this.user && this.user.avatar && this.user.avatar && this.user.avatar.base64 && !this.user.avatar.cropped) return this.user.avatar.base64;
     if (this.user && this.user.avatar && this.user.avatar.cropped && this.user.avatar.cropped.id) return `/file/${this.user.avatar.cropped.id}`;
     if (this.user && this.user.avatar && this.user.avatar.origin && this.user.avatar.origin.id) return `/file/${this.user.avatar.origin.id}`;
     return '/company/default/logo.jpg';
-  }
-  private onInitSubscribe() {
-    setTimeout(() => {
-
-      let stompClient = this.usersRealTimeService.changeSubscriptionsUsers.subscribe(newChange => {
-        if (newChange.action === 'SUBSCRIPTION_SAVED') {
-
-          if (this.user.id === newChange.data.userId) {
-            this.user.changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
-            this.user.changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
-            this.usersStateService.getuserForEdit().changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
-            this.usersStateService.getuserForEdit().changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
-
-          }
-
-          this.cd.detectChanges();
-        }
-      });
-      this.sub.add(stompClient);
-
-    }, 3000);
   }
   editUser() {
     this.usersStateService.setUserForEdit(new User(JSON.parse(JSON.stringify(this.usersStateService.getuserForEdit()))));
@@ -149,7 +145,7 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
   }
   onCheckEmail() {
     if (this.user.primaryEmail && this.user.primaryEmail.length > 0) this.validate.checkValidPrimaryEmail(this.user.primaryEmail);
-    if (this.user.primaryEmail && this.user.primaryEmail.length > 0 && this.selectedCompany) this.onCheckValidPrimaryEmail();
+    if (this.user.primaryEmail && this.user.primaryEmail.length > 0) this.onCheckValidPrimaryEmail();
   }
   onCheckPhoneNumber(i) {
     this.validate.checkValidPhoneNumber(i, this.user.phoneNumbers[i].number);
@@ -158,18 +154,13 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
     if (this.validate.isValidate(this.user)) this.updateUser();
   }
   onCheckValidPrimaryEmail() {
-    this.usersService.checkValidPrimaryEmail(this.user.primaryEmail, this.selectedCompany.id, this.user.id).subscribe((data: any) => {
+    this.usersService.checkValidPrimaryEmail(this.user.primaryEmail, this.user.customerCompaniesInfo[0].companyId, this.user.id).subscribe((data: any) => {
 
       this.validate.setExistPrimaryContactEmail(data.value);
       if (this.validate.isValidate(this.user)) this.updateUser();
 
       this.cd.detectChanges();
     })
-  }
-  onSelectCompany(data) {
-    this.selectedCompany = data;
-    this.user.serCompanyId(data.id);
-    this.updateUser();
   }
   getJobDescription(val) {
     let value = val;
@@ -205,28 +196,18 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
 
     })
   }
-  onChangeDefaultSubscriptions(data) {
 
-    this.usersService.setSubscriptions(data.id, {
-      ...new UserDefaultSubscriptionAdd(data.ticketSubscription.enabled,
-        data.ticketManagerSubscription.enabled,
-        data.invoiceSubscription.enabled)
-      , customSubscriptionIds: this.user.customSubscriptions.map(item => item.id)
-    }).subscribe(res => {
-    })
-  }
   onChangeCustomSubscriptions(data) {
-
-    this.usersService.setSubscriptions(this.user.defaultSubscriptions.id, {
-      ...new UserDefaultSubscriptionAdd(this.user.defaultSubscriptions.ticketSubscription.enabled,
-        this.user.defaultSubscriptions.ticketManagerSubscription.enabled,
-        this.user.defaultSubscriptions.invoiceSubscription.enabled)
-      , customSubscriptionIds: data.map(item => item.id)
+    this.usersService.setCustomSubscriptions(this.user.id, {
+      customSubscriptionIds: data.map(item => item.id)
     }).subscribe(res => {
     })
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
+  }
+  public trackByIndex(index, item) {
+    return index;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

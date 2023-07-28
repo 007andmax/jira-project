@@ -14,6 +14,8 @@ import { ConfirmStateService } from '../shared/confirm/services/confirm-state.se
 import { DeviceCompany } from './class/device-company';
 import { CompanyDeviceFilter } from './class/device-company-filter';
 import { DeviceRemoteSessions } from './class/device-remote-sessions';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 
 @Component({
   selector: 'app-company-devices',
@@ -36,6 +38,8 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     public activateRoute: ActivatedRoute,
     private leftPanelStateService: LeftPanelStateService,
+    private customerPortalStateService: CustomerPortalStateService,
+    private websocketService: WebsocketService,
     private devicesRealTimeService: DevicesRealTimeService) { }
   public resize: boolean = false;
 
@@ -44,6 +48,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     this.leftPanelStateService.changeStateWithoutNavigate('company-devices');
     let id = this.activateRoute.snapshot.params['id'];
     if (id) {
+      if (this.customerPortalStateService.isCustomerPortal) this.websocketService.onInitConnectCustomerUser("company-devices", id);
       this.companyId = id;
       this.getDevice(id);
       this.companiesStateService.setCompanyRoutingId(id);
@@ -52,6 +57,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
 
       if (params['id'] && id != params['id']) {
         id = params['id'];
+        if (this.customerPortalStateService.isCustomerPortal) this.websocketService.onInitConnectCustomerUser("company-devices", id);
         this.companiesStateService.setCompanyRoutingId(id);
         this.companyId = id;
         this.getDevice(id);
@@ -243,6 +249,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     return item.id;
   }
   ngOnDestroy(): void {
+    if (this.customerPortalStateService.isCustomerPortal && this.devicesRealTimeService.subsribeToDevicesCustomerUsers) this.devicesRealTimeService.subsribeToDevicesCustomerUsers.unsubscribe();
     this.companiesStateService.setCompanyRoutingId(null);
     this.sub.unsubscribe();
   }

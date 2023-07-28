@@ -10,10 +10,28 @@ import { TicketProfile } from '../../class/ticket-profile';
   styleUrls: ['./ticket-detail-linked-agents.component.scss']
 })
 export class TicketDetailLinkedAgentsComponent extends PasswordManagerLinkedComponent {
-
+  devices = [];
   @Input() selectedCompanyId: string;
   @Input() ticketProfile: TicketProfile = new TicketProfile();
   selectedDevice;
+  ngOnInit() {
+    if (this.ticketProfile.agent) this.selectedDevice = JSON.parse(JSON.stringify(this.ticketProfile.agent));
+    if (this.devicesStateService.getAllDevices()) {
+      this.devices = this.devicesStateService.getAllDevices()[this.selectedCompanyId];
+      this.preloader = false;
+      if (this.selectedCompanyId) this.onSelectCompany(this.selectedCompanyId);
+    }
+    this.devicesStateService.getOnDevices().subscribe(data => {
+      this.devices = data[this.selectedCompanyId];
+      this.preloader = false;
+      if (this.selectedCompanyId) this.onSelectCompany(this.selectedCompanyId);
+    })
+    if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
+    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
+      this.getClientsList(data);
+    })
+    this.sub.add(getOnCompanies);
+  }
   onSelectCompany(id) {
     this.usersList = [];
     this.devicesList = [];
@@ -21,7 +39,7 @@ export class TicketDetailLinkedAgentsComponent extends PasswordManagerLinkedComp
     this.selectedCompanyId = null;
     if (id) {
       this.selectedCompanyId = id;
-      let devices = (this.devicesStateService.getAllDevices() && this.devicesStateService.getAllDevices()[id]) ? this.devicesStateService.getAllDevices()[id] : [];
+      let devices = this.devices ? this.devices : [];
       devices.forEach(item => {
         this.devicesList.push(item);
         if (this.ticketProfile.agent && this.ticketProfile.agent.deviceId == item.id) this.selectedDevice = item;
@@ -31,7 +49,7 @@ export class TicketDetailLinkedAgentsComponent extends PasswordManagerLinkedComp
     }
   }
   public onSearch(event) {
-    this.devicesList = this.devicesStateService.getAllDevices()[this.selectedCompanyId].filter(item => this.getLabelDevice(item).toLowerCase().includes(event.target.value.toLowerCase()))
+    this.devicesList = this.devices.filter(item => this.getLabelDevice(item).toLowerCase().includes(event.target.value.toLowerCase()))
       .sort((a, b) => (this.getLabelDevice(a).toLowerCase() > this.getLabelDevice(b).toLowerCase()) ?
         1 : ((this.getLabelDevice(b).toLowerCase() > this.getLabelDevice(a).toLowerCase()) ? -1 : 0));
     this.cd.detectChanges();
@@ -55,7 +73,7 @@ export class TicketDetailLinkedAgentsComponent extends PasswordManagerLinkedComp
   onCloseDropDown(data) {
     if (!data) {
       this.elRef.nativeElement.querySelector("#search-user").value = "";
-      this.devicesList = this.devicesStateService.getAllDevices()[this.selectedCompanyId].sort((a, b) => (`${a.name}`.toLowerCase() > `${b.name}`.toLowerCase()) ?
+      this.devicesList = this.devices.sort((a, b) => (`${a.name}`.toLowerCase() > `${b.name}`.toLowerCase()) ?
         1 : ((`${b.name}`.toLowerCase() > `${a.name}`.toLowerCase()) ? -1 : 0));
     }
   }

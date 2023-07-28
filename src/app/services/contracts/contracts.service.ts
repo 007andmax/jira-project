@@ -72,4 +72,7 @@ export class ContractsService {
   public getServiceAgreements() {
     return this.http.get(this.apiUrl + 'serviceAgreements').pipe(map((data: any) => data.map(item => new ContractItem(item))));
   }
+  public getServiceAgreementsByCompany(id) {
+    return this.http.get(this.apiUrl + `serviceAgreements?companyId=${id}`).pipe(map((data: any) => data.map(item => new ContractItem(item))));
+  }
 }

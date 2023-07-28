@@ -17,6 +17,7 @@ import { InvoiceNote } from '../../../billable/class/invoice-note';
 import { QuoteEdit } from '../../class/quote-edit';
 import { QuoteValdiateEdit } from '../../class/quote-vildate-edit';
 import { ServiceListQuoteComponent } from '../../quote-aside-add/service-list-quote/service-list-quote.component';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-quote-aside-edit-body',
@@ -44,6 +45,7 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
     private invoiceTicketsService: InvoiceTicketsService,
     public cd: ChangeDetectorRef,
     private permissionsService: PermissionsService,
+    public customerPortalStateService: CustomerPortalStateService,
     private quoteServices: QuoteService,) { }
 
   ngOnInit() {
@@ -67,7 +69,7 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
         }
       }
     });
-    this.getInvoiceNote();
+    if (!this.customerPortalStateService.isCustomerPortal) this.getInvoiceNote();
     this.sub.add(getChangeCompanies);
     let getOnEdit = this.quoteStateService.getOnEdit().subscribe(quote => {
       this.quoteServices.getQuote(quote.id).subscribe((data) => {

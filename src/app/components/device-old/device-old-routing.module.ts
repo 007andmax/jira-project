@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PermissionTechUserService } from 'src/app/services/users/permission-tech-user.service';
 import { DeviceOldComponent } from './device-old.component';
+import { PermissionNoSuperAdminService } from 'src/app/services/users/permission-no-super-admin.service';
 
 
 const routes: Routes = [{
@@ -10,52 +10,22 @@ const routes: Routes = [{
         {
             path: 'dashboard/:type/:id',
             loadChildren: './dashboard/dashboard.module#DashboardOldModule',
-            canActivate: [PermissionTechUserService]
+            canActivate: [PermissionNoSuperAdminService]
         },
         {
             path: 'hardware/:type/:id',
             loadChildren: './hardware/hardware.module#HardwareOldModule',
-            canActivate: [PermissionTechUserService]
+            canActivate: [PermissionNoSuperAdminService]
         },
         {
             path: 'software/:type/:id',
             loadChildren: './software/software.module#SoftwareOldModule',
-            canActivate: [PermissionTechUserService]
-        },
-        {
-            path: 'service',
-            loadChildren: './services/services.module#ServicesOldModule',
-            canActivate: [PermissionTechUserService]
-        },
-        {
-            path: 'antivirus',
-            loadChildren: './antivirus/antivirus.module#AntivirusOldModule',
-            canActivate: [PermissionTechUserService]
+            canActivate: [PermissionNoSuperAdminService]
         },
         {
             path: 'terminal/:type/:id',
             loadChildren: './terminal/terminal.module#TerminalOldModule',
-            canActivate: [PermissionTechUserService]
-        },
-        {
-            path: 'password',
-            loadChildren: './password/password.module#PasswordOldModule',
-            canActivate: [PermissionTechUserService]
-        },
-        {
-            path: 'window',
-            loadChildren: './windows-update/windows-update.module#WindowsOldModule',
-            canActivate: [PermissionTechUserService]
-        },
-        {
-            path: 'startup',
-            loadChildren: './startup-programes/startup-programes.module#StartupOldModule',
-            canActivate: [PermissionTechUserService]
-        },
-        {
-            path: 'file',
-            loadChildren: './file-explorer/file-explorer.module#FileOldModule',
-            canActivate: [PermissionTechUserService]
+            canActivate: [PermissionNoSuperAdminService]
         },
     ]
 }];

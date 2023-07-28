@@ -24,6 +24,13 @@ export class CompanyDropDownComponent extends DropDownComponent {
   }
   public getClientsList(data) {
     this.reset(data);
+    if (this.customerPortalStateService.isCustomerPortal) {
+      this.list = this.list.filter(item => {
+        let customerCompaniesInfo = this.usersStateService.getCurrentUser().customerCompaniesInfo.find(customerCompaniesInfo => customerCompaniesInfo.companyId === item.id);
+        if (customerCompaniesInfo && customerCompaniesInfo.customerUserRole && customerCompaniesInfo.customerUserRole.getPermission('VIEW_MY_TICKETS')) return true;
+        return false;
+      })
+    }
   }
   onOpenChange(data) {
     if (data && !this.companiesStateService.isInitLightAllCompanies && this.clientType == undefined) this.companiesStateService.onInitGetLightCompanies();

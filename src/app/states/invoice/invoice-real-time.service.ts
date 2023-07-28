@@ -6,6 +6,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 export class InvoiceRealTimeService {
   public changeInvoice: EventEmitter<any> = new EventEmitter();
   public changeNumber: EventEmitter<any> = new EventEmitter();
+  public subsribeToInvoiceCustomerUsers;
   constructor() { }
 
   public handleRealTimeChangesNumber(newChange) {

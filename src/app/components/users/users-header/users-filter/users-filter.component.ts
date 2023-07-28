@@ -10,6 +10,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
 import { UserFilter } from '../../class/user-filter';
 import { UsersFilterSubscriptionsComponent } from './users-filter-subscriptions/users-filter-subscriptions.component';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-users-filter',
@@ -29,9 +30,17 @@ export class UsersFilterComponent implements OnInit {
   @Output() changeCountFilter = new EventEmitter<any>();
   constructor(private companiesState: CompaniesStateService,
     private crmStateService: CrmStateService,
+    private customerPortalStateService: CustomerPortalStateService,
     private usersStateService: UsersStateService,) { }
 
   ngOnInit() {
+    if (this.customerPortalStateService.isCustomerPortal && this.companiesState.getCompanies().length > 0) this.checkCompanyCustomerUser();
+    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
+      if (this.customerPortalStateService.isCustomerPortal) this.checkCompanyCustomerUser();
+    })
+    this.sub.add(getOnCompanies);
+    let onTicketFilters = this.customerPortalStateService.onUsersFilters.subscribe(data => (this.checkCompanyCustomerUser()));
+    this.sub.add(onTicketFilters);
     this.jobTitleList = this.crmStateService.getJobTitleList();
     let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
       this.jobTitleList = data;
@@ -53,7 +62,12 @@ export class UsersFilterComponent implements OnInit {
       this.onChangeCounterFilter();
     })
     this.sub.add(onLeftPanelMarketingFilter);
-
+  }
+  private checkCompanyCustomerUser() {
+    this.filter = this.customerPortalStateService.getUsersFilters();
+    let selectedCompany = this.companiesState.getCompanies().find(item => item.id == localStorage.getItem('company_info_id'));
+    this.companiesDp.selectItemWithOutChanges(selectedCompany);
+    this.companiesDp.isDisabled = true;
   }
   public onChangeTags(data) {
     this.filter.setTags(data);

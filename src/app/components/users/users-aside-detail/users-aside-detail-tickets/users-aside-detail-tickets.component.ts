@@ -103,7 +103,7 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
   editTicket(id) {
     if (!this.appService.isMobile) {
       this.ticketStateService.setTicketRoutingId(id);
-      const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/ticket/${id}`;
+      const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/ticket/${id}`;
       window.open(url, '_blank');
     } else {
       let ticket = this.tickets.find(item => item.id === id);
@@ -123,8 +123,6 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
       return;
     }
     this.ticketsFilter.setOffset(this.page_number * this.offset);
-
-
     if (this.page_number > 0) this.showPendingPreloader = true;
     this.ticketsService.getTickets(this.ticketsFilter.getListTupe(), this.ticketsFilter.getDataForRequest()).subscribe((data: Array<Ticket>) => {
       this.tickets = [...this.tickets, ...data];
@@ -134,7 +132,6 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
       this.showPreloader = false;
       this.showPendingPreloader = false;
       this.cd.detectChanges();
-
     })
   }
   public onScroll() {

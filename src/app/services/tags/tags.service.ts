@@ -23,9 +23,6 @@ export class TagsService {
     private appStateService: AppStateService
 
   ) { }
-  getAllTickets() {
-    return this.http.get(`${this.apiUrl}tags/getAll`);
-  }
 
   saveAllowingCreateCustomTags(value) {
     return this.http.put(`${this.apiUrl}settings/companyProfile/allowUsersCreateTags?allow=${value}`, {});

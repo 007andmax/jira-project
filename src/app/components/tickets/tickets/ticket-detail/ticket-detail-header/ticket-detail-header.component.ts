@@ -13,6 +13,7 @@ import { TicketProfile } from '../../class/ticket-profile';
 import { TicketsListService } from '../../services/tickets-list.service';
 import { TicketStateService } from '../../ticket-edit-aside/services/ticket-state.service';
 import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tickets-permissions.service';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'ticket-detail-header',
@@ -44,6 +45,7 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     public ticketsService: TicketsService,
     private ticketStateService: TicketStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     public ticketsListService: TicketsListService,) { }
 
 
@@ -80,7 +82,9 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
   }
-
+  isAddNoteForCustomerUser() {
+    return this.customerPortalStateService.checkEditTicket(this.usersStateService.getCurrentUser(), this.ticketProfile.createdUserId, this.ticketProfile.companyId);
+  }
   checkClose() {
     if (this.ticketProfile.updates.length === 0) return true;
     let completeServices = true;

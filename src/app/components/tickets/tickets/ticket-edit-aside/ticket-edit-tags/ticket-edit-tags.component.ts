@@ -2,11 +2,12 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitt
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { TagsStateService } from 'src/app/components/shared/tags/services/tags-state.service';
 import { MatChipInputEvent } from '@angular/material';
 import { TagsService } from 'src/app/services/tags/tags.service';
 import { Tag } from 'src/app/interfaces/tag/tag';
 import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 
 @Component({
   selector: 'app-ticket-edit-tags',
@@ -42,6 +43,7 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
     private tagsState: TagsStateService,
     public tagsRealTimeService: TagsRealTimeService,
     public cd: ChangeDetectorRef,
+    public customerPortalStateService: CustomerPortalStateService,
     public elRef: ElementRef
   ) { }
 
@@ -49,12 +51,20 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-    let getTags = this.tagsService.getTags().subscribe((data) => {
-      this.tags = data;
-      this.reqTags = JSON.parse(JSON.stringify(data));
+    if (this.tagsState.getTags().length == 0) {
+      let getTags = this.tagsService.getTags().subscribe((data) => {
+        this.tagsState.setTags(data);
+        this.tags = data;
+        this.reqTags = JSON.parse(JSON.stringify(data));
+        this.sortTags();
+      })
+      this.sub.add(getTags);
+    } else {
+      this.tags = this.tagsState.getTags();
+      this.reqTags = JSON.parse(JSON.stringify(this.tagsState.getTags()));
       this.sortTags();
-    })
-    this.sub.add(getTags);
+    }
+
     let changeTagsArray = this.tagsRealTimeService.changeTagsArray.subscribe((data: any) => {
       if (data.action === "TAG_SAVED" && Array.isArray(data.data)) data.data.forEach(element => this.updateTagByRealTimes(element));
       if (data.action === "TAG_SAVED" && !Array.isArray(data.data)) this.updateTagByRealTimes(data.data);

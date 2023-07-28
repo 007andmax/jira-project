@@ -88,7 +88,7 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestr
   }
   public getServices() {
     this.servicesList = this.ticketStateService.getServicesForTicket();
-    this.areTicketsPresented = this.ticketStateService.isTicketsTerminated();
+    this.areTicketsTerminated = this.ticketStateService.isTicketsTerminated();
     this.areTicketsPresented = this.ticketStateService.isTicketsPresented();
   }
 

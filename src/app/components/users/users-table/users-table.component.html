@@ -35,14 +35,42 @@
                     [textContent]="getJobTitle()"
                 ></div>
             </div>
+            <div
+                class="icon__mark-as-master qt-bg-contain qt-sz-20 qt-ml-12"
+                *ngIf="type == TYPE_LIST_COMPANY_USERS && isPrimaryContact()"
+                (mouseenter)="addTooltip.show($event.target)"
+                (mouseleave)="addTooltip.hide()"
+            ></div>
+            <app-dynamic-tooltip
+                [content]="'Primary Contact'"
+                [position]="'top'"
+                #addTooltip
+            ></app-dynamic-tooltip>
         </div>
     </td>
     <td
         class="users-table__company"
+        [ngClass]="{'users-table__company-full': type === TYPE_LIST_ALL_USERS}"
         *ngIf="type === TYPE_LIST_ALL_USERS || type === TYPE_LIST_MARKETING_USERS"
         (click)="showDetailUser()"
     >
-        <span>{{ getUserCompanyName() }}</span>
+        <ng-template
+            ngFor
+            let-company
+            [ngForOf]="getCompaniesNames()"
+            [ngForTrackBy]="trackByIndex"
+        >
+            <div class="qt-df qt-ai-c">
+                <div [textContent]="company"></div>
+            </div>
+        </ng-template>
+    </td>
+    <td
+        class="users-table__company"
+        (click)="showDetailUser()"
+        *ngIf="type !== TYPE_LIST_MARKETING_USERS"
+    >
+        <span>{{ user.portalAccessStatus }}</span>
     </td>
     <td
         class="users-table__company"
@@ -88,12 +116,12 @@
     </td>
     <td
         class="users-table__subscription"
-        *ngIf="type === TYPE_LIST_ALL_USERS || type === TYPE_LIST_COMPANY_USERS"
+        *ngIf="type === TYPE_LIST_COMPANY_USERS"
     >
         <user-table-default-subscription
             class="users-table__subscription--dropdown"
             (onChangeDefault)="onChangeDefaultSubscriptions($event)"
-            [defaultSubscriptions]="user.defaultSubscriptions"
+            [defaultSubscriptions]="getDefaultSubscriptions()"
         >
         </user-table-default-subscription>
     </td>
@@ -124,7 +152,7 @@
         ></app-dynamic-tooltip>
         <div
             class="icon__email-dark qt-sz-16 pointer"
-            *ngIf="!showArchivedUsers"
+            *ngIf="!showArchivedUsers && !customerPortalStateService.isCustomerPortal"
             (click)="showAsideForDraftEmail()"
             (mouseenter)="draftEmailTooltip.show($event.target)"
             (mouseleave)="draftEmailTooltip.hide()"
@@ -148,7 +176,7 @@
             >
                 <li
                     class="pointer"
-                    *ngIf="!showArchivedUsers && getPermissions('EDIT_USERS')"
+                    *ngIf="!showArchivedUsers && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user))"
                     (click)="edit()"
                     ngbDropdownItem
                 >
@@ -157,7 +185,16 @@
                 </li>
                 <li
                     class="pointer"
-                    *ngIf="!user.isContact"
+                    *ngIf="!showArchivedUsers && getPermissions('EDIT_USERS') && type !== TYPE_LIST_MARKETING_USERS && (user.portalAccessStatus == 'Unauthorized' || user.portalAccessStatus == 'Invite sent')"
+                    (click)="sendInvite(user.primaryEmail)"
+                    ngbDropdownItem
+                >
+                    <div class="icon__email-resend qt-sz-20 qt-bg-contain pointer qt-mr-10"></div>
+                    Send Invite
+                </li>
+                <li
+                    class="pointer"
+                    *ngIf="type == TYPE_LIST_COMPANY_USERS && !isPrimaryContact()"
                     (click)="resetPrimaryContact()"
                     ngbDropdownItem
                 >
@@ -166,8 +203,9 @@
                 </li>
                 <li
                     class="pointer"
-                    *ngIf="currentUser && currentUser.checkPermission('ARCHIVE_USERS') && !showArchivedUsers"
+                    *ngIf="currentUser && (!customerPortalStateService.isCustomerPortal && currentUser.checkPermission('ARCHIVE_USERS') ||  customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user) && !isPrimaryContact())  && !showArchivedUsers"
                     (click)="delete()"
+                    ngbDropdownItem
                 >
                     <div class="icon__remove qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Archive
@@ -176,6 +214,7 @@
                     class="pointer"
                     *ngIf="currentUser && currentUser.checkPermission('ARCHIVE_USERS') && showArchivedUsers"
                     (click)="restore()"
+                    ngbDropdownItem
                 >
                     <div class="icon__archive qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Restore

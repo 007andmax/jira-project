@@ -109,7 +109,7 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
   }
   editTicket(id) {
     this.ticketStateService.setTicketRoutingId(id);
-    const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/ticket/${id}`;
+    const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/ticket/${id}`;
     window.open(url, '_blank');
   }
   setSelectedTickets(listIds) {

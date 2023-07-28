@@ -281,38 +281,6 @@
     margin-bottom: 24px;
   }
 
-  &__ticket-subject {
-    @include h4__sb;
-    margin-bottom: 10px;
-
-    @media (max-width: 767px) {
-      display: none;
-    }
-  }
-
-  &__ticket-subject-edit {
-    font-size: 22px;
-    height: 48px;
-    font-weight: 600;
-    margin-left: -12px;
-    margin-right: -12px;
-    span {
-      padding: 8px 14px 8px 12px;
-      border: solid 1px $gray-600--old;
-      border-top-left-radius: 5px;
-      border-bottom-left-radius: 5px;
-      border-right: none;
-      color: $gray-600--old;
-    }
-    input {
-      padding: 8px 14px;
-      border: solid 1px $gray-600--old;
-      flex-grow: 1;
-      border-top-right-radius: 5px;
-      border-bottom-right-radius: 5px;
-    }
-  }
-
   &__ticket-subject-flag {
     margin-right: 6px;
     margin-left: -22px;
@@ -837,10 +805,6 @@ ticket-profile-edit-form-update {
 
 app-ticket-change-status {
   cursor: pointer;
-}
-
-app-ticket-edit-aside-right-panel {
-  display: flex;
 }
 [contenteditable="true"]:empty:before {
   content: attr(placeholder);

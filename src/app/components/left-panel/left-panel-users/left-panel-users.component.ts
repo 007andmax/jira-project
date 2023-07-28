@@ -73,7 +73,6 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     this.filter.setClientType(null);
     this.setShowArchivedCompanies(false);
     this.usersStateService.onInitFilter(this.filter);
-
   }
   onShowArchived() {
     this.filter.setClientType(null);

@@ -12,6 +12,7 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 import { DeviceCompanyAsideParams } from '../class/device-company-aside-params';
 import { CompanyDevicesEditLabelComponent } from '../company-devices-edit-label/company-devices-edit-label.component';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-company-devices-item',
@@ -26,11 +27,12 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
   @Output() onChangeSelect = new EventEmitter();
   constructor(private modalService: NgbModal,
     private devicesService: DevicesService,
-    private usersStateService: UsersStateService,
+    public usersStateService: UsersStateService,
     private permissionsService: PermissionsService,
     private devicesStateService: DevicesStateService,
     private confirmStateService: ConfirmStateService,
     private companiesStateService: CompaniesStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
@@ -55,7 +57,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     localStorage.setItem('company_id', this.companyId);
     localStorage.setItem('agentId', this.device.agentId);
     localStorage.setItem('type', this.device.type);
-    var url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device-old/dashboard/${this.device.type}/${this.device.agentId}`;
+    var url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/device-old/dashboard/${this.device.type}/${this.device.agentId}`;
     window.open(url, '_blank');
   };
   remoteAccess(connectionType) {
@@ -97,14 +99,6 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
   }
   setMasterAgent() {
     this.devicesService.markDeviceAsMaster(this.device.companyId, this.device.agentId).subscribe(data => {
-    })
-  }
-  onChangeName(data) {
-    this.devicesService.editAgentInfo(this.device.getDataForEditLabel((data.length > 0) ? data : this.device.hostName || this.device.ip)).subscribe(res => {
-      this.device.setLabel((data.length > 0) ? data : null);
-      this.devicesStateService.updateLabelIcon(this.device);
-      this.editLabel.setValue((data.length > 0) ? data : this.device.hostName || this.device.ip);
-      this.cd.detectChanges();
     })
   }
   returnTimeFormatUpTime(time) {

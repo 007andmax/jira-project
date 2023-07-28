@@ -8,16 +8,20 @@ import { UsersStateService } from "src/app/states/users/users-state.service";
 export class PermissionUsersService implements CanActivate {
     constructor(private permissionsService: PermissionsService, private usersStateService: UsersStateService) { }
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
-        if (this.usersStateService.getCurrentUser()) return this.getPermissions('VIEW_USERS');
+        if (this.usersStateService.getCurrentUser()) return this.getPermissions('VIEW_USERS') || this.getCompanyInfoPermissions('VIEW_MY_PROFILE');
         return new Promise((resolve, reject) => {
             this.usersStateService.getOnGetCurrentuser().subscribe(data => {
-                if (this.getPermissions('VIEW_USERS')) {
+                if (this.getPermissions('VIEW_USERS') || this.getCompanyInfoPermissions('VIEW_MY_PROFILE')) {
                     resolve(true);
                 } else {
                     resolve(false);
                 }
             })
         });
+    }
+    public getCompanyInfoPermissions(action) {
+        let compnayInfo = this.usersStateService.getCurrentUser().customerCompaniesInfo.find(item => item.companyId == localStorage.getItem("company_info_id"))
+        return (compnayInfo && this.usersStateService.getCurrentUser().accountType == "CLIENT" && compnayInfo.customerUserRole.getPermission(action))
     }
     public getPermissions(action) {
         return this.permissionsService.isAllowed(action)

@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 import { ContractsRealTimeService } from 'src/app/states/contracts/contracts-real-time.service';
 import { ContractsListService } from '../services/contracts-list.service';
 import { Company } from 'src/app/interfaces/company/company';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-contracts-table',
@@ -30,6 +31,7 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private contractsRealTimeService: ContractsRealTimeService,
     private contractsListService: ContractsListService,
+    private customerPortalStateService: CustomerPortalStateService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
@@ -92,14 +94,16 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
   }
 
   getServiceAgreements(companies) {
-    this.contractsService.getServiceAgreements().subscribe(data => {
+    if (this.customerPortalStateService.isCustomerPortal) this.companyContracts = companies.find(item => item.id === localStorage.getItem('company_info_id'));
+    let subscribe = (this.companyContracts) ? this.contractsService.getServiceAgreementsByCompany(this.companyContracts.id) : this.contractsService.getServiceAgreements();
+    subscribe.subscribe(data => {
       let showNotificationReview = false;
       this.reqList = data.map(contact => {
         let company = companies.find(item => item.id === contact.company.id);
         contact.company.name = company.name;
         return contact;
       });
-      if (this.companyContracts) this.reqList = this.reqList.filter(item => item.company.id === this.companyContracts.id);
+      //  if (this.companyContracts) this.reqList = this.reqList.filter(item => item.company.id === this.companyContracts.id);
       this.reqList.forEach(item => {
         if (!showNotificationReview) showNotificationReview = this.contractsListService.isShowNotificationReview(item.reviewDate);
       })

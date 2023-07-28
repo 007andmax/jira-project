@@ -19,6 +19,7 @@ import { CrmCompanyServiceType } from 'src/app/components/setting/crm-settings/c
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { CrmCompanyJobTitle } from 'src/app/components/setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { CompanyProfileAddress } from '../../class/company-profile-address';
+import { MODE_EDIT_SUBSCRIPTION, MODE_HIDE_ACTIVE } from 'src/app/const/users';
 
 @Component({
   selector: 'company-add-aside-full',
@@ -41,6 +42,10 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
   jobTitleList: Array<CrmCompanyJobTitle> = [];
   listPersons: Array<ItemFilterPerson> = [];
   idUploadFile: string;
+  users = [];
+  usersList = [];
+  MODE_HIDE_ACTIVE = MODE_HIDE_ACTIVE;
+  MODE_EDIT_SUBSCRIPTION = MODE_EDIT_SUBSCRIPTION;
   @Input() validate: CompanyValdiate = new CompanyValdiate();
   @Input() company: CompanyProfile = new CompanyProfile();
   @Input() serviceTypeDp: DropDownComponent;
@@ -76,12 +81,26 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
     this.sub.add(onGetServiceType);
     if (this.usersStateService.getAllUsers().length > 0) {
       this.getTechusers(this.usersStateService.getAllUsers());
+      this.onGetUsers(this.usersStateService.getAllUsers());
     }
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.getTechusers(data);
+      this.onGetUsers(this.usersStateService.getAllUsers());
     })
     this.sub.add(getOnUsers);
     this.onCroppImage();
+  }
+  onGetUsers(data) {
+    this.users = data.filter(item => {
+      if (item.accountType !== 'TECH' && !item.deletedAt) return item;
+    });
+    this.usersList = this.getUserList();
+  }
+  getUserList() {
+    return this.users.map(item => {
+      return `${item.firstName} ${item.lastName}`
+    }).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
+      1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
   }
   public onCroppImage() {
     let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
@@ -119,6 +138,9 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
       this.idUploadFile = data.id;
     })
   }
+  onCheckPrimaryNumber() {
+    this.validate.checkValidPrimaryPhoneNumber(this.company.contacts[0].phoneNumbers[0].number);
+  }
   public onChangeName() {
     if (this.company.name && this.company.name.length > 0) {
       let checkCompanyName = this.companiesService.checkCompanyName("", this.company.name).subscribe((data: any) => {
@@ -134,6 +156,15 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
       this.sub.add(checkCompanyName);
     } else {
       this.validate.checkValidName(this.company.name);
+    }
+  }
+  onSelectUser(item) {
+    if (item) {
+      let indexhUser = this.users.findIndex(user => `${user.firstName} ${user.lastName}` === item);
+      if (indexhUser > -1) this.company.contacts[0].setId(this.users[indexhUser].id);
+      this.validate.resetUser();
+    } else {
+      this.company.contacts[0].setId(null);
     }
   }
   public onSelectCompanyTypes(type) {
@@ -216,7 +247,7 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
     this.company.paymentTerms = item.value;
   }
   public onChangeSubscribe(data) {
-    data.forEach(item => this.company.contacts[0].defaultSubscriptions[item.field] = item.selected);
+    this.company.contacts[0].customerCompaniesInfo[0].changeDefaultSubscriptions(data);
   }
   public onChangeTimeZone(data) {
     this.company.addresses[0].locale = (data) ? data.second : '';

@@ -19,6 +19,7 @@
                 placement="top"
                 container="body"
                 [ngbTooltip]="'Draft Email'"
+                *ngIf="!customerPortalStateService.isCustomerPortal"
             ></div>
             <div
                 class="icon__close qt-aside-modern__header-close"
@@ -58,28 +59,20 @@
             </div>
             <hr class="user-detail-aside__divider">
             <div class="user-detail__row-info">
-                <div class="qt-input-block qt-editable-dropdown qt-mb-16">
-                    <label class="qt-input-block__label">Company</label>
-                    <div
-                        class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"
-                        *ngIf="getPermissions('EDIT_USERS')"
-                    ></div>
-                    <company-drop-down
-                        class="user-detail-edit-company"
-                        [placeholder]="'Company'"
-                        [field]="'name'"
-                        [search]="true"
-                        [change]="true"
-                        [heightInput]="'32px'"
-                        [editItem]="selectedCompany"
-                        [isBlockClear]="true"
-                        [isDisabled]="!getPermissions('EDIT_USERS')"
-                        (onSelectedItem)="onSelectCompany($event)"
-                    >
-                    </company-drop-down>
-                </div>
+                <ng-template
+                    ngFor
+                    let-customerCompaniesInfo
+                    [ngForOf]="user.customerCompaniesInfo"
+                    [ngForTrackBy]="trackByIndex"
+                >
+                    <users-aside-detail-company-info
+                        [user]="user"
+                        [customerCompaniesInfo]="customerCompaniesInfo"
+                        (onUpdate)="updateUser()"
+                    ></users-aside-detail-company-info>
+                </ng-template>
                 <div
-                    class="qt-input-block qt-mb-16"
+                    class="qt-input-block qt-mb-16 qt-mt-24"
                     [ngClass]="{'--input-error':!validate.getPrimaryContactEmail() || !validate.getExistPrimaryContactEmail()}"
                 >
                     <label class="qt-input-block__label">Email Address</label>
@@ -140,21 +133,6 @@
             </div>
             <hr class="user-detail-aside__divider">
             <div class="user-detail__row-info">
-                <div class="user-detail__row-info-line user-detail-aside-subscription">
-                    <div class="qt-df qt-jc-sb qt-ai-c">
-                        <div class="user-detail__row-info-label">Updates</div>
-                        <div
-                            class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"
-                            *ngIf="getPermissions('EDIT_USERS')"
-                        ></div>
-                    </div>
-                    <user-default-subscription
-                        [isDisabled]="!getPermissions('EDIT_USERS')"
-                        [mode]="MODE_EDIT_SUBSCRIPTION"
-                        [defaultSubscriptions]="user.defaultSubscriptions"
-                        (onChange)="onChangeDefaultSubscriptions($event)"
-                    ></user-default-subscription>
-                </div>
                 <div class="user-detail__row-info-line user-detail-aside-subscription">
                     <div class="qt-df qt-jc-sb qt-ai-c">
                         <div class="user-detail__row-info-label">Marketing</div>
@@ -231,6 +209,7 @@
                     class="pointer"
                     [ngClass]="{'active':tab === 'tickets'}"
                     (click)="setTab('tickets')"
+                    *ngIf="customerPortalStateService.checkShowTabTicketsAsideUserDetail( usersStateService.getCurrentUser(),  user)"
                 >
                     Tickets
                 </span>
@@ -238,7 +217,7 @@
                     class="pointer"
                     [ngClass]="{'active':tab === 'passwords'}"
                     (click)="setTab('passwords')"
-                    *ngIf="getPermissions('VIEW_PASSWORD_SECTION')"
+                    *ngIf="getPermissions('VIEW_PASSWORD_SECTION') && !customerPortalStateService.isCustomerPortal"
                 >
                     Passwords
                 </span>
@@ -246,6 +225,7 @@
                     class="pointer"
                     [ngClass]="{'active':tab === 'documents'}"
                     (click)="setTab('documents')"
+                    *ngIf="!customerPortalStateService.isCustomerPortal"
                 >
                     Documents
                 </span>

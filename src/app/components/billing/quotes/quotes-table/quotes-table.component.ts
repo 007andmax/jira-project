@@ -20,6 +20,8 @@ import { QuotePreview } from '../class/quote-preview';
 import { QuoteSort } from '../class/quote-sort';
 import { QuoteRealTimeService } from '../quote-realtime/quote-realtime.service';
 import { QuotesListService } from './services/quotes-list.service';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 
 @Component({
   selector: 'app-quotes-table',
@@ -48,9 +50,24 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     private toastrProgressStateService: ToastrProgressStateService,
     private companiesStateService: CompaniesStateService,
     private ticketStateService: TicketStateService,
+    private customerPortalStateService: CustomerPortalStateService,
+    private websocketService: WebsocketService,
     private quoteServices: QuoteService,) { }
 
   ngOnInit() {
+    if (this.customerPortalStateService.isCustomerPortal) {
+      this.filter.setCompanyId(this.customerPortalStateService.getQuotesFilter().companyId);
+      this.websocketService.onInitConnectCustomerUser("quotes-component", this.customerPortalStateService.getQuotesFilter().companyId);
+    }
+    let onQuotesFilters = this.customerPortalStateService.onQuotesFilters.subscribe(data => {
+      this.filter.setData(this.customerPortalStateService.getQuotesFilter());
+      this.filter.clearSortBy();
+      this.showPreloader = true;
+      document.body.querySelector(".main-container").scrollTo(0, 0);
+      this.setDefaultScoll();
+      this.onScroll();
+    });
+    this.sub.add(onQuotesFilters);
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.onScroll();
     let getOnInitFilter = this.quoteStateService.getOnInitFilter().subscribe(data => {
@@ -155,7 +172,7 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
   }
   openTikcet(id) {
     this.ticketStateService.setTicketRoutingId(id);
-    const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/ticket/${id}`;
+    const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/ticket/${id}`;
     window.open(url, '_blank');
   }
   goToQuoteEdit(quote) {
@@ -209,6 +226,7 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     return item.id;
   }
   ngOnDestroy(): void {
+    if (this.customerPortalStateService.isCustomerPortal && this.quoteRealTimeService.subsribeToQuoteCustomerUsers) this.quoteRealTimeService.subsribeToQuoteCustomerUsers.unsubscribe();
     this.sub.unsubscribe();
   }
 }

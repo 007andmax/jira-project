@@ -7,11 +7,13 @@ import { Tag } from 'src/app/interfaces/tag/tag';
 import { UserDefaultSubscription } from './user-default-subscription';
 import { UserCustomSubscription } from './user-custom-subscription';
 import { UserEmailNotifications } from './user-email-notification';
+import { UserCustomerCompaniesInfo } from './user-customer-companies-info';
 
 export class User {
     accountType: string;
     avatar: UserAvatar;
     company: UserCompany;
+    portalAccessStatus: string;
     contact: any;
     deletedAt: number;
     designation: string;
@@ -25,7 +27,7 @@ export class User {
     myTicketUpdated: any;
     online: any;
     owner: any;
-    permissions: any;
+    permissions: Array<string> = [];
     phoneNumbers: Array<any> = [];
     primaryEmail: string;
     priority: number;
@@ -47,6 +49,7 @@ export class User {
     jobTypeId: string;
     userIndustryId: string;
     userEmailNotifications: UserEmailNotifications;
+    customerCompaniesInfo: Array<UserCustomerCompaniesInfo> = [];
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -55,9 +58,15 @@ export class User {
             this.defaultSubscriptions = new UserDefaultSubscription(data.defaultSubscriptions);
             this.customSubscriptions = data.customSubscriptions.map(item => new UserCustomSubscription(item));
             this.userEmailNotifications = new UserEmailNotifications(data.userEmailNotifications);
+            this.customerCompaniesInfo = (data.customerCompaniesInfo) ? data.customerCompaniesInfo.map(item => new UserCustomerCompaniesInfo(item)) : [];
+            this.permissions = (data.permissions) ? data.permissions : [];
         }
 
     }
+    /**
+    * @description Return list for Email Notifications, if fields are true
+    * @returns {Array<string>} This is the result
+ */
     public getVisibleListUserEmailForTechusers() {
         let list = ["New Device", "New ticket", "Ticket Updated", "Ticket Closed"];
         let outList = [];
@@ -69,6 +78,10 @@ export class User {
         }
         return outList;
     }
+    /**
+   * @description Return list for Tooltips, if fields are true
+   * @returns {Array<string>} This is the result
+*/
     public getTooltipsListUserEmailForTechusers() {
         let list = ["When my account is logged in from a new device",
             "When a New Ticket created",
@@ -81,21 +94,30 @@ export class User {
         if (this.userEmailNotifications.ticketCloseNotifications) outList.push(list[3]);
         return outList;
     }
+    /**
+* @description Update data of User
+* @param {Object} data - Object of User 
+*/
     public onUpdate(data) {
         for (const key in data) {
             this[key] = data[key];
         }
         this.defaultSubscriptions = new UserDefaultSubscription(data.defaultSubscriptions);
         this.customSubscriptions = data.customSubscriptions.map(item => new UserCustomSubscription(item));
+        this.customerCompaniesInfo = data.customerCompaniesInfo.map(item => new UserCustomerCompaniesInfo(item));
     }
+    /**
+  * @description Set list Default Subscriptions
+  * @param {Array<UserDefaultSubscription>} data - Array Objects Default Subscriptions 
+*/
     public changeDefaultSubscriptions(data) {
         this.defaultSubscriptions = data;
     }
+    /**
+  * @description Set list Custom Subscriptions
+  * @param {Array<UserCustomSubscription>} data - Array Objects Custom Subscriptions 
+*/
     public changeCustomSubscriptions(data) {
         this.customSubscriptions = data;
     }
-    /*  public changeSubscriptions(data) {
-          this.subscription = new UserSubscription(data.id, data.invoice, data.ticket, data.ticketManager);
-      }*/
-
 }

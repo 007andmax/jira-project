@@ -13,6 +13,9 @@ import { CompanyAssociateModule } from '../../company-dashboard/company-dash-ass
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxMaskModule } from 'ngx-mask';
+import { UserDefaultSubscriptionModule } from '../../users/users-aside/user-default-subscription/user-default-subscription.module';
+import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
+import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 
 
 
@@ -34,6 +37,9 @@ import { NgxMaskModule } from 'ngx-mask';
         TextAreaModule,
         NgbModule,
         NgxMaskModule.forRoot(),
+        UserDefaultSubscriptionModule,
+        DisabledBtnModule,
+        PreloaderTicketModule
     ],
     exports: [CompanyAddAsideComponent]
 

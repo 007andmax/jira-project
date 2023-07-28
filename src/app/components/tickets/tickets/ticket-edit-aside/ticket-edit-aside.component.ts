@@ -20,7 +20,6 @@ import { TicketChangeField } from '../class/ticket-change-field';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { TicketProfileUpdate } from '../class/ticket-profile-update';
 import { Subscription } from 'rxjs';
-import { TicketEditAsideRightPanelComponent } from './ticket-edit-aside-right-panel/ticket-edit-aside-right-panel.component';
 import { TicketMessageComponent } from './ticket-message/ticket-message.component';
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
@@ -46,7 +45,6 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
 
   @ViewChild('updateForm') updateForm: TicketProfileFormUpdateComponent;
   @ViewChild('editUpdateForm') editUpdateForm: TicketProfileEditFormUpdateComponent;
-  @ViewChild('rightPanel') rightPanel: TicketEditAsideRightPanelComponent;
   @ViewChild('ticketMessage') ticketMessage: TicketMessageComponent;
   @ViewChild('ticketProfileUpdates') ticketProfileUpdates: TicketProfileUpdatesComponent;
 
@@ -103,7 +101,6 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       if (this.appService.checkMobile()) this.appService.toggleMobileAside(true);
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
-        if (!this.rightPanel.toggleRightPanel && !this.appService.isMobile) this.rightPanel.toggleTypeOnPanel('COMPANY_INFO');
       }
     })
     this.sub.add(getOnEditTicket);
@@ -210,7 +207,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     if (!this.getPermissions('VIEW_COMPANIES') && this.ticketProfile.ticketSource === 'FROM_EMAIL' && !this.checkExistServicesProducts() && this.getCompany(this.ticketProfile.company.id).isUnknown) return;
     this.companiesStateService.setCompanyRoutingId(this.ticketProfile.company.id);
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.ticketProfile.company.id, 'dashboard']);
+      [`${this.companiesStateService.getCurrentCompany().techDomain}/company/`, this.ticketProfile.company.id, 'dashboard']);
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
@@ -301,30 +298,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
   updateAndCloseMobile() {
     this.updateForm.updateAndClose();
   }
-  toggleSubject() {
-    if (this.appService.checkMobile() || !this.getPermissions('EDIT_TICKETS')) return;
-    var textCurrent = this.elRef.nativeElement.querySelector("#ticket-subject").value;
-    var textOld = this.ticketProfile.subject;
-    this.modeSubject = (this.modeSubject === 'view') ? 'edit' : 'view';
-    if (this.modeSubject === 'view' && textCurrent != textOld) {
-      this.ticketProfile.subject = textCurrent;
-      this.onChangeSubjectNote();
-    }
-  }
-  toggleNote() {
-    if (this.appService.checkMobile()) return;
-    var textCurrent = this.elRef.nativeElement.querySelector("#ticket-note").innerHTML.replace(/<\/?[^>]+>/ig, "");
-    var textOld = (this.ticketProfile.note) ? this.ticketProfile.note.replace(/<\/?[^>]+>/ig, "") : "";
-    this.modeDescription = 'view';
-    if (textCurrent != textOld) {
-      this.ticketProfile.note = this.elRef.nativeElement.querySelector("#ticket-note").innerHTML;
-      this.onChangeSubjectNote();
-    }
-  }
-  onChangeSubjectNote() {
-    this.ticketsService.changeSubjectNoteTicket(this.ticketProfile.id, this.ticketProfile.subject, this.ticketProfile.note).subscribe(data => {
-    })
-  }
+
   markAsOpen() {
     this.ticketsService.changeStatus(this.ticketProfile.id, 'IN_PROGRESS').subscribe((data: any) => {
       if (data.code == 403) {
@@ -443,7 +417,6 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.showAddAssignedUser = false;
     this.showPreloader = true;
     this.listAssignedUser = [];
-    this.rightPanel.close();
     this.ticketStateService.unsubscribeTicket();
     this.ticketStateService.onTicketClosed();
     this.ticketMessage.reset();

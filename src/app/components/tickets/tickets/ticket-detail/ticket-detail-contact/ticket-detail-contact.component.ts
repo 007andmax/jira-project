@@ -29,7 +29,7 @@ export class TicketDetailContactComponent implements OnInit, OnDestroy {
     return (this.ticketProfile.createdUser) ? this.usersStateService.getAllUsers().find(user => user.id === this.ticketProfile.createdUser.id) : null;
   }
   getCompanyUser() {
-    return this.companiesStateService.getCompanies().find(item => item.id === this.usersStateService.getAllUsers().find(user => user.id === this.ticketProfile.createdUser.id).company.id);
+    return this.companiesStateService.getCompanies().find(item => this.usersStateService.getAllUsers().find(user => user.id === this.ticketProfile.createdUser.id).customerCompaniesInfo.some(clientCompany => clientCompany.companyId === item.id));
   }
   getPhoneNumbers() {
     return this.usersStateService.getAllUsers().find(user => user.id === this.ticketProfile.createdUser.id).phoneNumbers;

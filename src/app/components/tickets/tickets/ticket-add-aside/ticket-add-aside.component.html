@@ -147,7 +147,10 @@
                 ></app-drop-down>
             </div>
         </div>
-        <div class="qt-inputs-row">
+        <div
+            class="qt-inputs-row"
+            *ngIf="!customerPortalStateService.isCustomerPortal"
+        >
             <div class="qt-input-block qt-f50 qt-flex-md-100">
                 <span class="qt-input-block__label">Assign To</span>
                 <app-drop-down

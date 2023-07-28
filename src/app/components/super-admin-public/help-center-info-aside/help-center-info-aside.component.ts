@@ -21,7 +21,7 @@ export class HelpCenterInfoAsideComponent implements OnInit {
     this.opened = false;
   }
   gotiHelpCenter() {
-    var url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/help-center`;
+    var url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/help-center`;
     window.open(url, '_blank');
   };
 }

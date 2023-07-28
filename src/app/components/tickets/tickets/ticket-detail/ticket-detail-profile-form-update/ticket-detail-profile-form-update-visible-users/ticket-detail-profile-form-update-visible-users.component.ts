@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'ticket-detail-profile-form-update-visible-users',
@@ -8,9 +9,10 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class TicketDetailProfileFormUpdateVisibleUsersComponent implements OnInit {
   type: string = "PRIVATE";
   @Output() onChangeType = new EventEmitter();
-  constructor() { }
+  constructor(public customerPortalStateService: CustomerPortalStateService,) { }
 
   ngOnInit() {
+    if (this.customerPortalStateService.isCustomerPortal) this.type = "PUBLIC";
   }
   getText() {
     if (this.type === "PUBLIC") return "Visible to All users";

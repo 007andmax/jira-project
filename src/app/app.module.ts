@@ -110,6 +110,17 @@ import { GoogleAuthenticatorModule } from './components/shared/google-authentica
 import { SupportPageEditCategoryModule } from './components/super-admin/shared/support-page-edit-category/support-page-edit-category.module';
 import { TestPermissionService } from './services/test-permission/test-permission.service';
 import { ModalQuoteModule } from './services/modal/modal-quote/modal-quote.module';
+import { LeftPanelCustomerPortalComponent } from './components/customer-portal/left-panel-customer-portal/left-panel-customer-portal.component';
+import { LeftPanelCustomerPortalUsersComponent } from './components/customer-portal/left-panel-customer-portal/left-panel-customer-portal-users/left-panel-customer-portal-users.component';
+import { LeftPanelCustomerPortalModule } from './components/customer-portal/left-panel.module';
+import { PermissionPaymentsService } from './components/billing/payments/permission-payments.service';
+import { PermissionQuotesService } from './components/billing/quotes/permission-quotes.service';
+import { PermissionTicketsService } from './components/tickets/tickets/permission-tickets.service';
+import { PermissionCompanyDevicesService } from './components/company-devices/permission-company-devices.service';
+import { PermissionNoSuperAdminService } from './services/users/permission-no-super-admin.service';
+import { PermissionClientUserService } from './services/users/permission-client-user.service';
+import { UsersCheckUseComponent } from './components/users/users-check-use/users-check-use.component';
+import { PermissionMyProfileService } from './components/setting/my-profile/permission-my-profile.service';
 declare var $: any;
 
 /**
@@ -134,6 +145,7 @@ declare var $: any;
     ModalEditCategoryProductComponent,
     HelpCenterInfoAsideComponent,
     InventoryCheckUseComponent,
+    UsersCheckUseComponent,
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
     CannedResponsesAsideComponent,
@@ -188,7 +200,8 @@ declare var $: any;
     ReportSendEmailModule,
     GoogleAuthenticatorModule,
     SupportPageEditCategoryModule,
-    ModalQuoteModule
+    ModalQuoteModule,
+    LeftPanelCustomerPortalModule,
   ],
   entryComponents: [
     ConfirmComponent,
@@ -207,6 +220,7 @@ declare var $: any;
     InventoryCheckUseComponent,
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
+    UsersCheckUseComponent
   ],
   providers: [
     {
@@ -233,7 +247,14 @@ declare var $: any;
     PermissionReportsService,
     PermissionTechUserService,
     PermissionSuperAdminService,
-    TestPermissionService
+    TestPermissionService,
+    PermissionPaymentsService,
+    PermissionQuotesService,
+    PermissionTicketsService,
+    PermissionCompanyDevicesService,
+    PermissionNoSuperAdminService,
+    PermissionClientUserService,
+    PermissionMyProfileService
   ],
   bootstrap: [AppComponent]
 })

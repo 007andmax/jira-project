@@ -64,12 +64,12 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
   }
   goToCompanySection(section) {
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.companyId, section]);
+      [`${this.companiesStateService.getCurrentCompany().techDomain}/company/`, this.companyId, section]);
   }
   goToCompanyDocumentsCategory(id) {
 
     this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.companyId, 'documents'], {
+      [`${this.companiesStateService.getCurrentCompany().techDomain}/company/`, this.companyId, 'documents'], {
       queryParams: {
         categoryId: id,
       }

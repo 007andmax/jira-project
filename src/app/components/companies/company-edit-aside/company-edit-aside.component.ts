@@ -29,6 +29,8 @@ import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-indus
 import { CrmCompanyServiceType } from '../../setting/crm-settings/crm-company-service-type/class/crm-company-service-type';
 import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { CompanyProfileAddress } from '../class/company-profile-address';
+import { MODE_EDIT_SUBSCRIPTION, MODE_EDIT_USER_SUBSCRIPTION } from 'src/app/const/users';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
   selector: 'app-company-edit-aside',
@@ -59,6 +61,8 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   locationIsinit: boolean = false;
   selectedJobTitle: CrmCompanyJobTitle;
   idUploadFile: string;
+  MODE_EDIT_USER_SUBSCRIPTION = MODE_EDIT_USER_SUBSCRIPTION;
+  MODE_EDIT_SUBSCRIPTION = MODE_EDIT_SUBSCRIPTION;
   @ViewChild('companyTags') companyTags: CompanyTagsComponent;
   @ViewChild('addresstext') addresstext: any;
   @ViewChild('clientType') clientType: DropDownComponent;
@@ -67,6 +71,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   @ViewChild('paymentMethod') paymentMethod: DropDownComponent;
   @ViewChild('serviceType') serviceType: DropDownComponent;
   @ViewChild('companyAssociate') companyAssociate: CompanyAssociateComponent;
+  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   jobTitleList: Array<CrmCompanyJobTitle> = [];
   constructor(private companiesStateService: CompaniesStateService,
     private companiesService: CompaniesService,
@@ -192,7 +197,6 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
       this.company = new CompanyProfile();
       this.company.onEditMode(data);
       if (this.company.addresses.length == 1) this.company.initShippingAdress();
-      if (this.company.contacts[0].defaultSubscriptions) this.companySubscriptionState.onEditMode(this.company.contacts[0].defaultSubscriptions);
       this.companyTimeZoneState.onEditMode(this.company.addresses[0].timeZone);
       let indexTerms = this.paymentTerms.findIndex(item => item.value === this.company.paymentTerms);
       if (indexTerms > -1) this.onSelectPaymentTerms(this.paymentTerms[indexTerms]);
@@ -245,6 +249,10 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   public onSelectServiceTypes(item) {
     this.company.serviceType = (item) ? item.name : null;
   }
+  public getDefaultSubscriptions() {
+    let customerCompaniesInfo = this.company.contacts[0].customerCompaniesInfo.find(item => item.companyId == this.company.id);
+    return customerCompaniesInfo.defaultSubscriptions;
+  }
   onCheckEmail() {
     if (this.company.contacts[0].primaryEmail && this.company.contacts[0].primaryEmail.length > 0) this.onCheckValidPrimaryEmail();
   }
@@ -258,7 +266,8 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     this.validate.checkValidPrimaryEmail(this.company.contacts[0].primaryEmail);
   }
   public onChangeSubscribe(data) {
-    data.forEach(item => this.company.contacts[0].defaultSubscriptions[item.field] = item.selected);
+    let index = this.company.contacts[0].customerCompaniesInfo.findIndex(item => item.companyId == this.company.id);
+    this.company.contacts[0].customerCompaniesInfo[index].changeDefaultSubscriptions(data);
   }
   public onChangeDomain() {
     this.validate.checkValidDomain(this.company.domain);
@@ -315,9 +324,13 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   }
   public onUpdateFull() {
     if (!this.validate.isValidate(this.company)) return;
+    this.addBtn.setDisabled(true);
     let updateCompany = this.companiesService.updateCompany(this.company.getDataForUpdate()).subscribe(data => {
+      this.addBtn.setDisabled(false);
       this.close();
       this.cd.detectChanges();
+    }, err => {
+      this.addBtn.setDisabled(false);
     })
     this.sub.add(updateCompany);
   }

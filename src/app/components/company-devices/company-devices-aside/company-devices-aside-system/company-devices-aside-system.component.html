@@ -17,6 +17,7 @@
                     #editLabel
                     [field]="getLabelForEdit()"
                     [title]="'Name'"
+                    [isDisabled]="customerPortalStateService.isCustomerPortal"
                     class="company-device-edit-name"
                     (onChange)="onChangeName($event)"
                 ></app-company-devices-edit-label>
@@ -29,6 +30,7 @@
                     [field]="getSystemField('asset_tag') || ''"
                     [title]="'Asset Tag'"
                     class="company-device-edit-name"
+                    [isDisabled]="customerPortalStateService.isCustomerPortal"
                     (onChange)="onChangeHardware(device.getDataForUpdateAssetTag($event),'asset_tag',$event)"
                 ></app-company-devices-edit-label>
             </div>
@@ -40,6 +42,7 @@
                     [field]="getSystemField('manufacturer') || ''"
                     [title]="'Manufacturer'"
                     class="company-device-edit-name"
+                    [isDisabled]="customerPortalStateService.isCustomerPortal"
                     (onChange)="onChangeHardware(device.getDataForUpdateManufacturer($event),'manufacturer',$event)"
                 ></app-company-devices-edit-label>
             </div>
@@ -58,6 +61,7 @@
                     [field]="getSystemField('model') || ''"
                     [title]="'Model'"
                     class="company-device-edit-name"
+                    [isDisabled]="customerPortalStateService.isCustomerPortal"
                     (onChange)="onChangeHardware(device.getDataForUpdateModel($event),'model',$event)"
                 ></app-company-devices-edit-label>
             </div>
@@ -82,9 +86,10 @@
                 [container]="'body'"
                 [type]="'INPUT'"
                 [editMode]="true"
-                [editDate]="getSystemField('warranty') || getToDayDate()"
+                [editDate]="device.report.system.warranty"
                 [useMinDate]="false"
                 [placement]="'top-right'"
+                [disabled]="customerPortalStateService.isCustomerPortal"
                 (onChange)="onChangeHardware(device.getDataForUpdateWarranty(parseDateFromDatePicker($event)),'warranty',parseDateFromDatePicker($event))"
             ></app-date-picker>
         </div>
@@ -101,9 +106,10 @@
                 [type]="'INPUT'"
                 [editMode]="true"
                 [container]="'body'"
-                [editDate]="getSystemField('install_date') || getToDayDate()"
+                [editDate]="device.report.system.install_date"
                 [useMinDate]="false"
                 [placement]="'top-right'"
+                [disabled]="customerPortalStateService.isCustomerPortal"
                 (onChange)="onChangeHardware(device.getDataForUpdateInstallDate(parseDateFromDatePicker($event)),'install_date',parseDateFromDatePicker($event))"
             ></app-date-picker>
         </div>
@@ -114,6 +120,7 @@
                     [field]="getSystemField('architecture') || ''"
                     [title]="'Architecture'"
                     class="company-device-edit-name"
+                    [isDisabled]="customerPortalStateService.isCustomerPortal"
                     (onChange)="onChangeHardware(device.getDataForUpdateArchitecture($event),'architecture',$event)"
                 ></app-company-devices-edit-label>
             </div>

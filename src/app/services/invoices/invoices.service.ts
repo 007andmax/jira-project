@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
 import { Invoice } from '../../components/billing/invoices/class/invoice';
 import { CompaniesStateService } from '../../states/company/companies-state.service';
@@ -54,14 +54,8 @@ export class InvoicesService {
   public export(type, data) {
     return this.http.post(`${this.apiUrl}reports/invoice/${type}`, data);
   }
-  public remove(invoiceId) {
-    return this.http.delete(`${this.apiUrl}invoice/delete?invoiceId=${invoiceId}`, {});
-  }
   public markAsRead(invoiceId) {
     return this.http.post(`${this.apiUrl}invoice/${invoiceId}/markAsRead`, {});
-  }
-  public resendArchiveInvoices(invoiceIds) {
-    return this.http.post(`${this.apiUrl}receiptArchive/resend`, { ids: invoiceIds });
   }
   public getInvoices(data) {
     return this.http.post(`${this.apiUrl}receivable`, data).pipe(map((res: any) => res.map(item => new Invoice(item))));

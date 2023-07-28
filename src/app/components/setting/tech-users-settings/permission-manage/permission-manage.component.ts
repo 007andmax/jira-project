@@ -18,7 +18,7 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
   selectedRole: string;
   loading = true;
   isNewRoleCreating = false; // see on old code
-  allTechRoles: any;
+  allTechRoles = [];
   roles: any;
   techCompany: any;
   currentUser: any;
@@ -134,7 +134,7 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
     this.permissionManageService
       .getRoleNames()
       .pipe(
-        map(res => {
+        map((res: any) => {
           this.allTechRoles = res;
         })
       )
@@ -469,7 +469,8 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
    */
   changeUsersRole(user, value) {
     user.techRole = value;
-    user.avatar.cropped = null;
+    if (user.avatar) user.avatar.cropped = null;
+    user.companyId = user.company.id;
     this.permissionManageService.save(user).subscribe(res => {
       this.toastrService.success('Role Changed Successfully');
       const userIndex = this.usersToShift.findIndex(el => el.id === user.id);

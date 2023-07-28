@@ -1,0 +1,89 @@
+<div class="qt-aside-modern qt-aside-modern--page-settings users-page__aside ng-star-inserted role-dlt --lg">
+    <div class="qt-aside-modern__header">
+        <div class="qt-aside-modern__header-title">Delete Role?</div>
+    </div>
+    <div class="middle-content qt-aside-modern__content">
+        <div class="notifications --warning qt-mb-20 ng-star-inserted">
+            <span class="icon__company-info--yellow-800 qt-sz-20 qt-mr-8 qt-fs-0"></span>
+            <p class="notifications__content">
+                {{ users.length }} customer users belong to this role, you must assign
+          a different role to following users to delete the role.
+            </p>
+        </div>
+        <div class="tech-list">
+            <div class="users-list custom-scroll">
+                <div
+                    *ngFor="let user of users"
+                    class="user-item"
+                >
+                    <div class="dropdown-link">
+                        <div class="default-user-avatar avatar-background-color-odd">
+                            <div
+                                class="users-table__name--avatar"
+                                [ngStyle]="{'background':  getUserAvatarUrl(user)}"
+                                [textContent]="getNameForAvatar(user)"
+                            ></div>
+                        </div>
+                        <div class="qt-f-1 ellipsis">
+                            <div class="user-item__name qt-fw-600 qt-color-gray-900 ellipsis">
+                                {{ user.firstName + " " + user.lastName }}
+                            </div>
+                            <div class="user-item__email qt-color-gray-500 qt-mt-2 ellipsis">{{ user.email }}</div>
+                        </div>
+                    </div>
+                    <ng-template
+                        ngFor
+                        let-customerCompany
+                        let-i="index"
+                        [ngForOf]="user.customerCompanyInfo"
+                        [ngForTrackBy]="trackById"
+                    >
+                        <div
+                            class="qt-df qt-jc-sb qt-ai-c"
+                            *ngIf="customerCompany.customerUserRole && userRoleForRemove.id == customerCompany.customerUserRole.id"
+                        >
+                            <div>
+                                <p>Company name</p>
+                                <p
+                                    class="qt-fw-600"
+                                    [textContent]="getCompanyName(customerCompany.companyId)"
+                                ></p>
+                            </div>
+                            <div>
+                                <app-drop-down
+                                    #userRolesDP
+                                    *ngIf="customerRoleStateService.isGetUserRole"
+                                    [title]="'Permission Role'"
+                                    [placeholder]="'Select role'"
+                                    [list]="userRoles"
+                                    [field]="'name'"
+                                    [search]="true"
+                                    [change]="true"
+                                    [isBlockClear]="true"
+                                    [editItem]="customerCompany.customerUserRole"
+                                    (onSelectedItem)="onSelectUserRole(user,$event,i)"
+                                ></app-drop-down>
+                            </div>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="qt-aside-modern__footer qt-df">
+        <a
+            href="javascrip:;"
+            class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
+            (click)="close()"
+        >
+            Cancel
+        </a>
+        <a
+            href="javascrip:;"
+            (click)="removeRole()"
+            class="qt-button qt-jc-c qt-w100"
+        >
+            Delete Role
+        </a>
+    </div>
+</div>

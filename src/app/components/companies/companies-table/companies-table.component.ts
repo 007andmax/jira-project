@@ -113,14 +113,14 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   goToDashboard() {
     if (this.appService.checkMobile()) {
       this.router.navigate(
-        [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.company.id, 'dashboard']);
+        [`${this.companiesStateService.getCurrentCompany().techDomain}/company/`, this.company.id, 'dashboard']);
     } else {
       /* const url = this.router.serializeUrl(
          this.router.createUrlTree(
-           [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.company.id, 'dashboard'])
+           [`${this.companiesStateService.getCurrentCompany().techDomain}/company/`, this.company.id, 'dashboard'])
  
        );*/
-      const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/${this.company.id}/dashboard`;
+      const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/company/${this.company.id}/dashboard`;
       window.open(url, '_blank');
     }
 
@@ -158,7 +158,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     let users = data;
     this.countUsers = users.filter((user) => {
       var isArchived = user.deletedAt || this.company.deletedAt;
-      return !isArchived && !this.showArchivedCompanies && user.company.id === this.company.id || this.showArchivedCompanies && isArchived && user.company.id === this.company.id;
+      return !isArchived && !this.showArchivedCompanies && user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.company.id) || this.showArchivedCompanies && isArchived && user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.company.id);
     }).length;
   }
 

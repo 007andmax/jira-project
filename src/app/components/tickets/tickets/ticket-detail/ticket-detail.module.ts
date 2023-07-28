@@ -51,7 +51,6 @@ import { TicketDetailProfileFormUpdateNoteComponent } from './ticket-detail-prof
 import { TicketDetailProfileFormUpdateServicesComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component';
 import { TicketDetailProfileFormUpdateHeaderComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-header/ticket-detail-profile-form-update-header.component';
 import { TicketDetailProfileFormUpdateProductsComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-products/ticket-detail-profile-form-update-products.component';
-import { TicketDetailProfileFormUpdateSupportComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-support/ticket-detail-profile-form-update-support.component';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 import { TicketDetailClaimInfoComponent } from './ticket-detail-claim-info/ticket-detail-claim-info.component';
 import { TicketDetailInfoStatusComponent } from './ticket-detail-info-status/ticket-detail-info-status.component';
@@ -74,7 +73,6 @@ import { TicketDetailPasswordsComponent } from './ticket-detail-passwords/ticket
 import { TicketDetailDevicesComponent } from './ticket-detail-devices/ticket-detail-devices.component';
 import { TicketDetailDocumentsComponent } from './ticket-detail-documents/ticket-detail-documents.component';
 import { TicketDetailContactDetailsComponent } from './ticket-detail-contact-details/ticket-detail-contact-details.component';
-import { CompanyInfoHistoryModule } from '../ticket-edit-aside-company-info/company-info-history/company-info-history.module';
 import { TicketDetailContactDetailsHistoryComponent } from './ticket-detail-contact-details/ticket-detail-contact-details-history/ticket-detail-contact-details-history.component';
 import { TicketDetailDocumentsPreviewComponent } from './ticket-detail-documents/ticket-detail-documents-preview/ticket-detail-documents-preview.component';
 import { TicketDetailDocumentsDetailsComponent } from './ticket-detail-documents/ticket-detail-documents-details/ticket-detail-documents-details.component';
@@ -82,6 +80,7 @@ import { TicketDetailPasswordsItemComponent } from './ticket-detail-passwords/ti
 import { TicketDetailPasswordsDetailsComponent } from './ticket-detail-passwords/ticket-detail-passwords-details/ticket-detail-passwords-details.component';
 import { TicketDetailDevicesItemComponent } from './ticket-detail-devices/ticket-detail-devices-item/ticket-detail-devices-item.component';
 import { TicketDetailDevicesDetailsComponent } from './ticket-detail-devices/ticket-detail-devices-details/ticket-detail-devices-details.component';
+import { TicketDetailProfileFormUpdateSupportComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-support/ticket-detail-profile-form-update-support.component';
 
 
 
@@ -111,7 +110,6 @@ import { TicketDetailDevicesDetailsComponent } from './ticket-detail-devices/tic
         TicketDetailProfileFormUpdateServicesComponent,
         TicketDetailProfileFormUpdateHeaderComponent,
         TicketDetailProfileFormUpdateProductsComponent,
-        TicketDetailProfileFormUpdateSupportComponent,
         TicketDetailClaimInfoComponent,
         TicketDetailInfoStatusComponent,
         TicketDetailChangeStatusComponent,
@@ -137,7 +135,8 @@ import { TicketDetailDevicesDetailsComponent } from './ticket-detail-devices/tic
         TicketDetailPasswordsItemComponent,
         TicketDetailPasswordsDetailsComponent,
         TicketDetailDevicesItemComponent,
-        TicketDetailDevicesDetailsComponent
+        TicketDetailDevicesDetailsComponent,
+        TicketDetailProfileFormUpdateSupportComponent
 
     ],
     imports: [
@@ -174,8 +173,7 @@ import { TicketDetailDevicesDetailsComponent } from './ticket-detail-devices/tic
         TicketProfileFormUpdateNoteListModule,
         KeyUpEnterModule,
         DropDownModule,
-        CompanyDropDownModule,
-        CompanyInfoHistoryModule
+        CompanyDropDownModule
     ],
 
 

@@ -15,6 +15,7 @@ import { DeviceStatus } from './class/device-status';
 })
 export class DevicesStateService {
   allDevices = null;
+  isGetDevices: boolean = false;
   devicesForReboot: Array<DeviceCompany> = [];
   devicesForRemove: Array<DeviceCompany> = [];
   devicesForShutDown: Array<DeviceCompany> = [];
@@ -37,9 +38,21 @@ export class DevicesStateService {
     private devicesRealTimeService: DevicesRealTimeService) { }
 
   public onInit() {
-    if (this.userStateService.getCurrentUser()) this.getCompanyDevices(this.userStateService.getCurrentUser().company.id);
+    if (this.userStateService.getCurrentUser()) {
+      if (this.userStateService.getCurrentUser().accountType != "CLIENT") {
+        this.getCompanyDevices(this.userStateService.getCurrentUser().company.id);
+      } else {
+        this.isGetDevices = true;
+      }
+    }
     this.userStateService.getOnGetCurrentuser().subscribe(data => {
-      this.getCompanyDevices(data.company.id);
+      if (!this.isGetDevices) {
+        if (this.userStateService.getCurrentUser().accountType != "CLIENT") {
+          this.getCompanyDevices(data.company.id);
+        } else {
+          this.isGetDevices = true;
+        }
+      }
     })
     this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
       if (newChange.action === 'AGENT_ACTIVITY_STATUS') this.onInitUpdateAgentActivityStatus(newChange);
@@ -105,17 +118,20 @@ export class DevicesStateService {
   }
   getCompanyDevices(id) {
     this.devicesService.getCompanyDevices(id).subscribe((data) => {
-      Object.keys(data).forEach(key => {
-        if (data[key]) data[key] = data[key].map(item => new Device(item));
-      })
-      this.preloaderDevices = false;
-      this.setAllDevices(data);
-      this.onInitGetDevices(data);
-
+      if (data) {
+        Object.keys(data).forEach(key => {
+          if (data[key]) data[key] = data[key].map(item => new Device(item));
+        })
+        this.preloaderDevices = false;
+        this.setAllDevices(data);
+        this.onInitGetDevices(data);
+        this.isGetDevices = true;
+      }
     }, err => {
       this.preloaderDevices = false;
       this.setAllDevices(null);
       this.onInitGetDevices(null);
+      this.isGetDevices = true;
     })
   }
   public getPreloaderDevices() {

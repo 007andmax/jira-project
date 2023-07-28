@@ -89,11 +89,11 @@ export class SuperAdminPublicDetailComponent implements OnInit {
   selectCategory(data) {
     if (data.document) {
       this.selectedCategory = data;
-      this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/help-center`, data.id]);
+      this.router.navigate([`${this.companiesStateService.getCurrentCompany().techDomain}/help-center`, data.id]);
     }
   }
   gotoHelpCenter() {
-    this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/help-center`]);
+    this.router.navigate([`${this.companiesStateService.getCurrentCompany().techDomain}/help-center`]);
   }
   public initPreviewMode() {
     this.supportPageCategoriesStateService.showPreview(this.selectedCategory);
@@ -104,14 +104,14 @@ export class SuperAdminPublicDetailComponent implements OnInit {
       this.supportPageCategoriesStateService.toggleShowHelpCenter(false);
       this.supportPageCategoryContent.setTags(content.tags);
       this.elRef.nativeElement.querySelector(".topic-detail-page__body-content #content").innerHTML = "";
-      this.elRef.nativeElement.querySelector(".topic-detail-page__body-content #content").insertAdjacentHTML('afterbegin', this.supportPageCategoryContent.parseContent(`${environment.apiUrl}/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/help-center`));
+      this.elRef.nativeElement.querySelector(".topic-detail-page__body-content #content").insertAdjacentHTML('afterbegin', this.supportPageCategoryContent.parseContent(`${environment.apiUrl}/#/${this.companiesStateService.getCurrentCompany().techDomain}/help-center`));
       document.body.querySelector(".main-container").scrollTo(0, 0);
     })
   }
   showPreview(data) {
     if (data.document) {
       this.selectedCategory = data;
-      this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/help-center`, data.id]);
+      this.router.navigate([`${this.companiesStateService.getCurrentCompany().techDomain}/help-center`, data.id]);
     }
   }
   public trackById(index, item) {

@@ -48,9 +48,10 @@ export class TicketDetailProfileFormUpdateComponent extends TicketProfileFormUpd
       if (this.remoteSession) this.removeSession();
     })
     this.sub.add(getOnEditTicket);
-    this.ticketStateService.onSetTabUpdate.subscribe(data => {
+    let onSetTabUpdate = this.ticketStateService.onSetTabUpdate.subscribe(data => {
       this.setTab(data);
     })
+    this.sub.add(onSetTabUpdate);
     let onChangeAssignedUser = this.addUsersNotifyStateService.onChangeAssignedUser.subscribe(data => {
       if (this.addUsersNotifyStateService.getAction() === USERS_TO_ADD_UPDATE) {
         this.ticketProfileFormUpdate.clearShares();
@@ -60,6 +61,7 @@ export class TicketDetailProfileFormUpdateComponent extends TicketProfileFormUpd
     this.sub.add(onChangeAssignedUser);
     if (this.tab === 'NOTE' && this.noteList) this.noteList.onGetNoteList();
     this.ticketProfileFormUpdate.setType(this.tab);
+    if (this.tab == "NOTE" && this.customerPortalStateService.isCustomerPortal) this.ticketProfileFormUpdate.setNoteType("PUBLIC");
     $("ticket-detail-profile-form-update").css({ left: $(".ticket-detail-page-content__body").offset().left - 64 });
     window.addEventListener('resize', this.resize);
   }

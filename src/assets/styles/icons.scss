@@ -286,10 +286,17 @@
   }
   &__company-gray {
     background-color: $gray-600--old;
+    -webkit-mask-position: center;
+    mask-position: center;
     -webkit-mask-image: url("/assets/img/icons/company-gray.svg");
     mask-image: url("/assets/img/icons/company-gray.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
   }
-  &__companies {
+  &__companies,
+  &__companies--white {
     background-color: $gray-500;
     -webkit-mask-position: center;
     mask-position: center;
@@ -298,7 +305,10 @@
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     -webkit-mask-size: contain;
-    mask-size: contain;;
+    mask-size: contain;
+  }
+  &__companies--white {
+    background-color: $white;
   }
   &__support-page {
     background-color: $gray-600--old;
@@ -571,6 +581,17 @@
   }
   &__plus-white {
     background-image: url("/assets/img/icons/plus-white.svg");
+  }
+  &__play-script {
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/device/play-script.svg");
+    mask-image: url("/assets/img/device/play-script.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
   }
   &__snapshot {
     background-image: url("/assets/img/icons/snapshot.svg");

@@ -31,7 +31,7 @@
         [placeholder]="'Select Tech User'"
         [change]="false"
         [class]="['qt-dropdown']"
-        [list]="getTechUserList()"
+        [list]="techUsersNamesList"
         (onSelectedItem)="onSelectTechUser($event)"
     ></app-drop-down>
     <app-drop-down

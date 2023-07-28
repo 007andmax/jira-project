@@ -12,6 +12,9 @@ import { UserCustomSubscriptionModule } from '../users-aside/user-custom-subscri
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxMaskModule } from 'ngx-mask';
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
+import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
+import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
+import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 
 @NgModule({
     declarations: [UsersAsideEditComponent
@@ -28,7 +31,10 @@ import { CompanyDropDownModule } from '../../shared/company-drop-down/company-dr
         UserCustomSubscriptionModule,
         NgbModule,
         NgxMaskModule.forRoot(),
-        CompanyDropDownModule
+        CompanyDropDownModule,
+        PreloaderTicketModule,
+        DisabledBtnModule,
+        DynamicTooltipModule
     ],
     exports: [UsersAsideEditComponent]
 

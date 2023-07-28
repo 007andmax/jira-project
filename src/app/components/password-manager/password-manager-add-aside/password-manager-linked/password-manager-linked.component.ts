@@ -10,6 +10,9 @@ import { PasswordDeviceUser } from '../../class/password-device-user';
 
 import { PasswordRecordAdd } from '../../class/password-record-add';
 import { PasswordRecordValidate } from '../../class/password-record-validate';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { TicketStateService } from 'src/app/components/tickets/tickets/ticket-edit-aside/services/ticket-state.service';
+import { DevicesService } from 'src/app/services/devices/devices.service';
 
 @Component({
   selector: 'password-manager-linked',
@@ -35,11 +38,14 @@ export class PasswordManagerLinkedComponent implements OnInit {
   @Output() onSelectedItem = new EventEmitter<any>();
   sub: Subscription = new Subscription();
   constructor(public cd: ChangeDetectorRef,
-    private companiesState: CompaniesStateService,
+    public companiesState: CompaniesStateService,
     public devicesStateService: DevicesStateService,
     private gadgetsService: GadgetsService,
     public ticketsService: TicketsService,
+    public ticketStateService: TicketStateService,
     public elRef: ElementRef,
+    public customerPortalStateService: CustomerPortalStateService,
+    public devicesService: DevicesService,
     private usersStateService: UsersStateService,) { }
 
   ngOnInit() {
@@ -57,7 +63,7 @@ export class PasswordManagerLinkedComponent implements OnInit {
     })
     this.sub.add(getOnCompanies);
   }
-  private getClientsList(data) {
+  public getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
@@ -70,9 +76,9 @@ export class PasswordManagerLinkedComponent implements OnInit {
     if (id) {
       this.selectedCompanyId = id;
       let users = this.usersStateService.getAllUsers().filter(item => {
-        let company = this.companies.find(itemCompany => itemCompany.id === item.company.id);
+        let company = this.companies.find(itemCompany => item.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === itemCompany.id));
         let isArchived = item.deletedAt || !company;
-        return !isArchived && item.company.id === id
+        return !isArchived && item.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === id)
       });
       users.forEach(item => {
         this.usersList.push(new PasswordDeviceUser(item.id, `${item.firstName} ${item.lastName}`, 'USER'));

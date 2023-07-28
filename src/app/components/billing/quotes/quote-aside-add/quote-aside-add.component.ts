@@ -106,8 +106,8 @@ export class QuoteAsideAddComponent implements OnInit, OnDestroy {
     if (!this.quoteAdd.getValidate().isValidate(quote)) return;
     this.saveAndApproveBtn.setDisabled(true);
     this.quoteService.createQuote(quote.getDataForCreate(false), false)
-      .subscribe((res) => {
-        this.quoteService.approveQuote(res['company'], res['id'])
+      .subscribe((res: any) => {
+        this.quoteService.approveQuote(res.company, res.id)
           .subscribe((res) => {
             this.saveAndApproveBtn.setDisabled(false);
             this.close();

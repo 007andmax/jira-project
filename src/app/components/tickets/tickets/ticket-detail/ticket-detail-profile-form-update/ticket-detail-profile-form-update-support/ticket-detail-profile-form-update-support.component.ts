@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { TicketProfileFormUpdateSupportComponent } from '../../../ticket-edit-aside/ticket-profile-form-update/ticket-profile-form-update-support/ticket-profile-form-update-support.component';
-
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { SupportItemComponent } from 'src/app/components/support/support-item/support-item.component';
 @Component({
-  selector: 'ticket-detail-profile-form-update-support',
-  templateUrl: './ticket-detail-profile-form-update-support.component.html',
-  styleUrls: ['./ticket-detail-profile-form-update-support.component.scss']
+    selector: 'ticket-detail-profile-form-update-support',
+    templateUrl: './ticket-detail-profile-form-update-support.component.html',
+    styleUrls: ['./ticket-detail-profile-form-update-support.component.scss']
 })
-export class TicketDetailProfileFormUpdateSupportComponent extends TicketProfileFormUpdateSupportComponent {
-
-
+export class TicketDetailProfileFormUpdateSupportComponent extends SupportItemComponent {
+    @Output() onCreateOneTimeRemoteSession = new EventEmitter();
+    public create() {
+        this.onCreateOneTimeRemoteSession.emit(null);
+    }
 }

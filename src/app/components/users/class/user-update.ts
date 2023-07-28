@@ -4,6 +4,9 @@ import { UserAvatar } from './user-avatar';
 import { User } from './user';
 import { UserProfile } from './user-profile';
 import { UserDefaultSubscriptionAdd } from './user-default-subscription-add';
+import { UserCustomerCompaniesInfo } from './user-customer-companies-info';
+import { UserCustomerCompaniesInfoAdd } from './user-customer-companies-info-add';
+import { UserCustomerCompaniesInfoUpdate } from './user-customer-companies-info-update';
 
 export class UserUpdate {
   phoneNumbers: Array<UserPhoneNumber>;
@@ -23,11 +26,11 @@ export class UserUpdate {
   userEnabled: boolean;
   tags: Array<any> = [];
   jobDescription: string;
-  jobTitleId: string;
   jobTypeId: string;
   customSubscriptionIds: Array<string> = [];
-  defaultSubscriptions: UserDefaultSubscriptionAdd;
+  customerCompaniesInfo: Array<UserCustomerCompaniesInfoUpdate> = [];
   userIndustryId: string;
+  sendPortalInvitation: boolean;
   constructor(data: UserProfile, user: User) {
     this.phoneNumbers = data.phoneNumbers.map((item, index) => {
       if (!user.phoneNumbers || user.phoneNumbers && user.phoneNumbers.length === 0) {
@@ -38,29 +41,27 @@ export class UserUpdate {
       }
     });
     if (this.phoneNumbers.length === 1 && this.phoneNumbers[0].number === "") this.phoneNumbers = [];
-    this.defaultSubscriptions = new UserDefaultSubscriptionAdd(data.defaultSubscriptions.ticketSubscription.enabled, data.defaultSubscriptions.ticketManagerSubscription.enabled, data.defaultSubscriptions.invoiceSubscription.enabled);
-    this.customSubscriptionIds = data.customSubscriptions.map(item => item.id);
-
     this.welcomeEmail = data.welcomeEmail;
-    this.avatar = data.avatar;
+    this.tags = data.tags.map(item => {
+      return { id: item.id }
+    })
+    this.customSubscriptionIds = data.customSubscriptions.map(item => item.id);
     this.firstName = data.firstName;
     this.lastName = data.lastName;
     this.primaryEmail = data.primaryEmail;
+    this.avatar = data.avatar;
     this.designation = data.designation;
     this.companyId = data.companyId;
-
     this.id = user.id;
     this.accountType = user.accountType;
     this.deletedAt = user.deletedAt;
     this.isContact = user.isContact;
     this.priority = user.priority;
     this.userEnabled = user.userEnabled;
-    this.tags = data.tags.map(item => {
-      return { id: item.id }
-    })
+    this.sendPortalInvitation = data.sendPortalInvitation;
     this.jobDescription = data.jobDescription;
-    this.jobTitleId = data.jobTitleId;
     this.jobTypeId = data.jobTypeId;
     this.userIndustryId = data.userIndustryId;
+    this.customerCompaniesInfo = data.customerCompaniesInfo.filter(item => item.companyId).map(item => new UserCustomerCompaniesInfoUpdate(item));
   }
 }

@@ -7,7 +7,6 @@ import { MapModalStateService } from 'src/app/states/map-modal/map-modal-state.s
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketProfile } from '../../class/ticket-profile';
 import { TicketsListService } from '../../services/tickets-list.service';
-import { CompanyInfoHistoryComponent } from '../../ticket-edit-aside-company-info/company-info-history/company-info-history.component';
 import { TicketDetailContactDetailsHistoryComponent } from './ticket-detail-contact-details-history/ticket-detail-contact-details-history.component';
 import * as moment from "moment";
 
@@ -121,7 +120,7 @@ export class TicketDetailContactDetailsComponent implements OnInit, OnDestroy {
     return (this.ticketProfile.createdUser) ? this.usersStateService.getAllUsers().find(user => user.id === this.ticketProfile.createdUser.id) : null;
   }
   getCompanyUser() {
-    return this.companiesStateService.getCompanies().find(item => item.id === this.usersStateService.getAllUsers().find(user => user.id === this.ticketProfile.createdUser.id).company.id);
+    return this.companiesStateService.getCompanies().find(item => this.usersStateService.getAllUsers().find(user => user.id === this.ticketProfile.createdUser.id).customerCompaniesInfo.some(clientCompany => clientCompany.companyId === item.id));
   }
   onShowMap() {
     this.mapModalStateService.onSohwMap({

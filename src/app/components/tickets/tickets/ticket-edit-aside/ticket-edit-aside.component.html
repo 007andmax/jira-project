@@ -126,11 +126,7 @@
                         ngbTooltip="Settings"
                     ></app-ticket-profile-actions>
                 </div>
-                <div
-                    class="ticket-edit-aside__header-subject"
-                    [hidden]="modeSubject === 'edit'"
-                    (click)="toggleSubject()"
-                >
+                <div class="ticket-edit-aside__header-subject">
                     <span [ngClass]="getClassType()"></span>
                     <span [textContent]="'Tkt# ' + ticketProfile.number"></span>
                     <span>-</span>
@@ -138,6 +134,7 @@
                 </div>
             </div>
             <app-ticket-edit-tags
+                *ngIf="opened"
                 [selectedTag]="ticketProfile.tags"
                 (tagsChange)="onChangeTags($event)"
                 [hidden]="showAddAssignedUser"
@@ -151,43 +148,9 @@
                 *ngIf="showAddAssignedUser"
             ></app-add-assigned-user>
             <div class="ticket-edit-aside__ticket-text">
-                <div
-                    class="ticket-edit-aside__ticket-subject"
-                    [hidden]="modeSubject === 'edit'"
-                    (click)="toggleSubject()"
-                >
-                    <span [ngClass]="getClassType()"></span>
-                    <span [textContent]="'Tkt# ' + ticketProfile.number"></span>
-                    <span>-</span>
-                    <span [textContent]="ticketProfile.subject"></span>
-                </div>
-                <div
-                    class="ticket-edit-aside__ticket-subject-edit qt-df qt-ai-c"
-                    [hidden]="modeSubject === 'view'"
-                    appClickOtside
-                    [init]="modeSubject === 'edit'"
-                    [class]="'.ticket-edit-aside__ticket-text'"
-                    (onOutSide)="toggleSubject()"
-                >
-                    <span [textContent]="'Tkt# ' + ticketProfile.number"></span>
-                    <input
-                        id="ticket-subject"
-                        [value]="ticketProfile.subject"
-                        [readonly]="appService.checkMobile()"
-                    >
-                </div>
-                <div
-                    class="ticket-edit-aside__ticket-description-edit"
-                    appClickOtside
-                    [init]="modeDescription === 'edit'"
-                    [class]="'.ticket-edit-aside__ticket-text'"
-                    (onOutSide)="toggleNote()"
-                >
+                <div class="ticket-edit-aside__ticket-description-edit">
                     <div
                         class="form-control editor"
-                        [ngClass]="{'no-edit-note':!getPermissions('EDIT_TICKETS')}"
-                        (blur)="modeDescription = 'edit'"
-                        [attr.contenteditable]="!appService.checkMobile() && getPermissions('EDIT_TICKETS')"
                         id="ticket-note"
                         placeholder="Enter description here"
                     ></div>
@@ -228,10 +191,6 @@
             ></ticket-profile-edit-form-update>
         </div>
     </div>
-    <app-ticket-edit-aside-right-panel
-        #rightPanel
-        [ticketProfile]="ticketProfile"
-    ></app-ticket-edit-aside-right-panel>
     <div
         class="qt-aside-modern__footer updata-close"
         [hidden]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"

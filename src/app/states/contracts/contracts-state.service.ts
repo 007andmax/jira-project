@@ -3,13 +3,14 @@ import { ContractItem } from '../../components/billing/contracts/class/contract-
 import { ServiceAgreement } from '../../components/billing/contracts/class/service-agreement';
 import { DefaultServices } from '../../components/billing/default-services/class/default-service';
 import { Company } from '../../interfaces/company/company';
- 
+import { ContractsFilter } from 'src/app/components/billing/contracts/class/contracts-filter';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ContractsStateService {
-  contractForDelete:ContractItem;
-  contractForCopy:ServiceAgreement;
+  contractForDelete: ContractItem;
+  contractForCopy: ServiceAgreement;
   defaultServices: Array<DefaultServices> = [];
   onFilter: EventEmitter<any> = new EventEmitter();
   onShowNotificationReview: EventEmitter<any> = new EventEmitter();
@@ -23,13 +24,19 @@ export class ContractsStateService {
   onDefaultServices: EventEmitter<any> = new EventEmitter();
   onConfirm: EventEmitter<any> = new EventEmitter();
   productList = [];
+  filterContracts: ContractsFilter = new ContractsFilter();
   constructor() { }
 
-
-  public showNotificationReview () {
+  public getContractsFilter() {
+    return this.filterContracts;
+  }
+  public setContractsFilter(data) {
+    this.filterContracts = data;
+  }
+  public showNotificationReview() {
     this.onShowNotificationReview.emit(null);
   }
-  public getOnShowNotificationReview () {
+  public getOnShowNotificationReview() {
     return this.onShowNotificationReview;
   }
   public getContractForCopy() {
@@ -108,10 +115,10 @@ export class ContractsStateService {
   public getSort() {
     return this.onSort;
   }
-  public setProductsList (data) {
+  public setProductsList(data) {
     this.productList = data;
   }
-  public getProductsList () {
+  public getProductsList() {
     return this.productList;
   }
 }

@@ -12,7 +12,11 @@
             class="icon__private qt-za-16 qt-sz-16 qt-bg-contain"
         ></i>
     </div>
-    <span [textContent]="getText()"></span>
+    <span
+        class="pointer"
+        [textContent]="getText()"
+        ngbDropdownToggle
+    ></span>
     <i
         class="icon__down-arrow qt-za-16 qt-sz-16 qt-bg-contain qt-ml-4 pointer"
         ngbDropdownToggle
@@ -39,6 +43,7 @@
             class="visible-users-item"
             (click)="changeType('PRIVATE')"
             ngbDropdownItem
+            *ngIf="!customerPortalStateService.isCustomerPortal"
         >
             <div class="icon__private qt-za-16 qt-sz-16 qt-bg-contain"></div>
             <p>Private</p>

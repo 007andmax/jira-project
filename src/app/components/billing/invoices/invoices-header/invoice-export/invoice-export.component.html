@@ -5,6 +5,7 @@
         container="body"
         ngbTooltip="Email"
         (click)="sendEmail()"
+        *ngIf="!customerPortalStateService.isCustomerPortal"
     >
     </div>
     <div

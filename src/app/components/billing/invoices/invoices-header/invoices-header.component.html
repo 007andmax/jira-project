@@ -35,18 +35,13 @@
                 <button
                     class="qt-btn --outline-blue qt-ml-8"
                     (click)="onShowCreateInvoice()"
+                    *ngIf="!customerPortalStateService.isCustomerPortal"
                 >
                     Record Payment
                 </button>
             </div>
         </div>
     </div>
-
-
-
-
-
-
     <div class="qt-page-list__header-filters">
         <app-invoices-filter
             class="qt-w100"
@@ -55,12 +50,6 @@
             [hidden]="toggleFilter"
         ></app-invoices-filter>
     </div>
-
-
-
-
-
-
     <div class="qt-page-list__header-thead-container">
         <table class="qt-table-modern qt-page-list__header-thead">
             <thead>

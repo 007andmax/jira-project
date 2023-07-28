@@ -1,5 +1,5 @@
 <div class="nav-header__left-side">
-    <app-global-search></app-global-search>
+    <app-global-search *ngIf="!customerPortalStateService.isCustomerPortal"></app-global-search>
 </div>
 <div class="nav-header__rigth-side">
     <div ngbDropdown>
@@ -12,6 +12,7 @@
                 ngbTooltip="Quick Create"
             ></div>
             <div
+                *ngIf="!customerPortalStateService.isCustomerPortal"
                 class="icon__help-center qt-bg-contain qt-sz-18 pointer qt-mr-24"
                 (click)="showHelpCanterAside()"
             ></div>
