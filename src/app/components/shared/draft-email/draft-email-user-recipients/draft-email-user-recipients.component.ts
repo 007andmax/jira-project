@@ -23,8 +23,6 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   userCtrl = new FormControl();
   selectedUsers = [];
-  showError = false;
-  showErrorClient = false;
   userEmails = [];
   userList = [];
   reqUsersList = [];
@@ -33,6 +31,7 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
   usersTechnical = [];
   reqUsersListClients = [];
   reqUsersListTechnical = [];
+  @Input() validate = true;
   @Input() selectedClient = null;
   @Input() accountType: string = 'CLIENT';
   @Input() usersSelected: Array<User> = [];
@@ -127,8 +126,6 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
    * @param event - selected user
    */
   public selected(company): void {
-
-    this.showError = false;
     this.selectedUsers.push(company.primaryEmail);
     this.userEmails.push(company.primaryEmail);
     this.onCompanyEmails.emit(this.userEmails);
@@ -152,25 +149,9 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
 
   }
   onKeyUp(event) {
-    if (event.keyCode === 13) {
-      const input = event.target.input;
-      const value = event.target.value;
-      if ((value || '').trim()) {
-        this.selectedUsers.push(value.trim());
-        this.userEmails.push(value.trim());
-        this.onCompanyEmails.emit(this.userEmails);
-        this.userList = this.reqUsersList;
-
-        this.usersClients = JSON.parse(JSON.stringify(this.reqUsersListClients));
-        this.usersTechnical = JSON.parse(JSON.stringify(this.reqUsersListTechnical));
-      }
-      if (input) {
-        input.value = '';
-      }
-      this.userCtrl.setValue(null);
-    }
-
+    if (event.keyCode === 13) this.onAdd(event);
   }
+
   public onAdd(event) {
     const input = event.target.input;
     const value = event.target.value;
@@ -191,6 +172,4 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
   public trackByIndex(index, item) {
     return index;
   }
-
-
 }

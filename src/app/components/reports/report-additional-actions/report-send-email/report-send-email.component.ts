@@ -63,12 +63,9 @@ export class ReportSendEmailComponent extends DraftEmailComponent {
     })
   }
 
-
-
-
-
   onChangeCompanyEmails(data) {
     this.draftReport.setEmails(data);
+    this.validateReport.resetEmail();
   }
 
   onSend() {

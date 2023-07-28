@@ -28,6 +28,7 @@ export class DraftEmailRecipientsComponent implements OnInit {
   companyList = [];
   reqCompanyList = [];
   toggleAllUsers: boolean = false;
+  @Input() validate = true;
   @Input() companiesSelected: Array<Company> = [];
   @Input() public data;
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
@@ -148,21 +149,7 @@ export class DraftEmailRecipientsComponent implements OnInit {
     this.companyCtrl.setValue(null);
   }
   onKeyUp(event) {
-    if (event.keyCode === 13) {
-      const input = event.target.input;
-      const value = event.target.value;
-      if ((value || '').trim()) {
-        this.selectedCompanies.push(value.trim());
-        this.companyEmails.push(value.trim());
-        this.onCompanyEmails.emit(this.companyEmails);
-        this.companyList = this.reqCompanyList;
-
-      }
-      if (input) {
-        input.value = '';
-      }
-      this.companyCtrl.setValue(null);
-    }
+    if (event.keyCode === 13) this.onAdd(event);
   }
   getFirstLastName(user) {
     return `${user.firstName} ${user.lastName}`;
@@ -170,6 +157,4 @@ export class DraftEmailRecipientsComponent implements OnInit {
   public trackByIndex(index, item) {
     return index;
   }
-
-
 }

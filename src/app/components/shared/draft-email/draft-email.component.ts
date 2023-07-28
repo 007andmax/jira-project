@@ -127,6 +127,7 @@ export class DraftEmailComponent implements OnInit {
 
   onChangeCompanyEmails(data) {
     this.draftEmail.setRecipients(data);
+    this.validate.resetEmail();
   }
   public onFileDropped(files: Array<any>) {
     this.uplaodFile.onFileDropped(files);

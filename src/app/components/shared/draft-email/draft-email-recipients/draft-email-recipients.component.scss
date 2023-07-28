@@ -30,3 +30,14 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+.--input-error {
+    position: relative;
+
+    input {
+        border: solid 1px $red-600 !important;
+    }
+}
+
+.invalid-feedback {
+    bottom: 0px !important;
+}
