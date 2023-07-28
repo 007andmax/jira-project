@@ -77,13 +77,14 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
     })
   }
   private setUserList(data) {
-    let users = data.filter(item => ((this.selectedClient == null && this.accountType != null) ? item.accountType == this.accountType && !item.deletedAt : false) || ((this.accountType != null) ? item.accountType === this.accountType : true) && ((this.selectedClient !== null) ? (item.accountType === 'TECH' || item.company.id === this.selectedClient.id) : true) && !item.deletedAt).filter(item => item.primaryEmail !== '').sort((a, b) => (a.primaryEmail.toLowerCase() > b.primaryEmail.toLowerCase()) ?
-      1 : ((b.primaryEmail.toLowerCase() > a.primaryEmail.toLowerCase()) ? -1 : 0));
+    let users = data.filter(item => ((this.selectedClient) ? item.customerCompaniesInfo && item.customerCompaniesInfo.find(company => company.companyId == this.selectedClient.id) : true) &&
+      ((this.accountType) ? item.accountType == this.accountType : true) &&
+      !item.deletedAt).filter(item => item.primaryEmail !== '').sort((a, b) => (a.primaryEmail.toLowerCase() > b.primaryEmail.toLowerCase()) ?
+        1 : ((b.primaryEmail.toLowerCase() > a.primaryEmail.toLowerCase()) ? -1 : 0));
     this.reqUsersListTechnical = users.filter((item) => item.accountType === USER.TYPE.TECH && !item.deletedAt && item.primaryEmail !== "").sort((a, b) => (this.getFirstLastName(a).toLowerCase() > this.getFirstLastName(b).toLowerCase()) ?
       1 : ((this.getFirstLastName(b).toLowerCase() > this.getFirstLastName(a).toLowerCase()) ? -1 : 0));
     this.reqUsersListClients = users.filter((item) => item.accountType === USER.TYPE.CLIENT && !item.deletedAt && item.primaryEmail !== "").sort((a, b) => (this.getFirstLastName(a).toLowerCase() > this.getFirstLastName(b).toLowerCase()) ?
       1 : ((this.getFirstLastName(b).toLowerCase() > this.getFirstLastName(a).toLowerCase()) ? -1 : 0));
-
     this.usersClients = users.filter((item) => item.accountType === USER.TYPE.CLIENT && !item.deletedAt && item.primaryEmail !== "").sort((a, b) => (this.getFirstLastName(a).toLowerCase() > this.getFirstLastName(b).toLowerCase()) ?
       1 : ((this.getFirstLastName(b).toLowerCase() > this.getFirstLastName(a).toLowerCase()) ? -1 : 0));
     this.usersTechnical = users.filter((item) => item.accountType === USER.TYPE.TECH && !item.deletedAt && item.primaryEmail !== "").sort((a, b) => (this.getFirstLastName(a).toLowerCase() > this.getFirstLastName(b).toLowerCase()) ?

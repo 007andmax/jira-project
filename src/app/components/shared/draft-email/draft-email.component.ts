@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef, Input } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef, Input, OnDestroy } from '@angular/core';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 import { DraftEmail } from './class/draft-email';
 import { FilesInfo } from './class/files-Info';
@@ -20,7 +20,7 @@ import { PaymentsStateService } from 'src/app/states/payments/payments-state.ser
   templateUrl: './draft-email.component.html',
   styleUrls: ['./draft-email.component.scss']
 })
-export class DraftEmailComponent implements OnInit {
+export class DraftEmailComponent implements OnInit, OnDestroy {
   messageContent: string = '';
   messageHTML: string = '';
   opened = false;
@@ -122,7 +122,7 @@ export class DraftEmailComponent implements OnInit {
     this.uploadFiles = [];
     this.filesInfo = new FilesInfo();
     this.action = null;
-
+    this.validate = new DraftEmailValidate();
   }
 
   onChangeCompanyEmails(data) {
@@ -249,5 +249,8 @@ export class DraftEmailComponent implements OnInit {
 
   trackByIndex(index, item) {
     return index;
+  }
+  ngOnDestroy(): void {
+    this.validate = new DraftEmailValidate();
   }
 }
