@@ -22,12 +22,12 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
 })
 export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestroy {
   isUpdate: boolean = false;
-  @ViewChild('updateMobileBtn') updateMobileBtn: DisabledBtnDirective;
-  @ViewChild('addMoreMobileBtn') addMoreMobileBtn: DisabledBtnDirective;
-  @ViewChild('durationPicker') durationPicker: TicketProfileUpdatesServiceDurationComponent;
-  @ViewChild('timePicker') timePicker: TicketProfileUpdatesServiceTimepickerComponent;
-  @ViewChild('serviceDP') serviceDP: ServicesListComponent;
-  @ViewChild('datePicker') datePicker: DatePickerComponent;
+  @ViewChild('updateMobileBtn', { static: false }) updateMobileBtn: DisabledBtnDirective;
+  @ViewChild('addMoreMobileBtn', { static: false }) addMoreMobileBtn: DisabledBtnDirective;
+  @ViewChild('durationPicker', { static: false }) durationPicker: TicketProfileUpdatesServiceDurationComponent;
+  @ViewChild('timePicker', { static: false }) timePicker: TicketProfileUpdatesServiceTimepickerComponent;
+  @ViewChild('serviceDP', { static: false }) serviceDP: ServicesListComponent;
+  @ViewChild('datePicker', { static: false }) datePicker: DatePickerComponent;
   @Output() onUpdateMobile = new EventEmitter();
   @Output() onAddMoreMobile = new EventEmitter();
   @Input() ticketProfile: TicketProfile = new TicketProfile();

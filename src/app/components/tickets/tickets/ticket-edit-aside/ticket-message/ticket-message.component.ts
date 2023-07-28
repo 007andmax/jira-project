@@ -17,9 +17,8 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
   providers: [TicketsPermissionsService]
 })
 export class TicketMessageComponent implements OnInit {
-  @ViewChild('claimTicketBtn') claimTicketBtn: DisabledBtnDirective;
-  @ViewChild('markAsOpenBillableBtn') markAsOpenBillableBtn: DisabledBtnDirective;
-  @ViewChild('markAsOpenBtn') markAsOpenBtn: DisabledBtnDirective;
+  @ViewChild('claimTicketBtn', { static: false }) claimTicketBtn: DisabledBtnDirective;
+  @ViewChild('markAsOpenBillableBtn', { static: false }) markAsOpenBillableBtn: DisabledBtnDirective;
   @Input() ticketProfile: TicketProfile = new TicketProfile();
   @Output() onClaimTicket = new EventEmitter();
   @Output() onOpenTicket = new EventEmitter();
@@ -58,7 +57,6 @@ export class TicketMessageComponent implements OnInit {
   markAsOpen() {
     this.isMarkAsOpen = true;
     if (this.markAsOpenBillableBtn) this.markAsOpenBillableBtn.setDisabled(true);
-    if (this.markAsOpenBtn) this.markAsOpenBtn.setDisabled(true);
     this.onOpenTicket.emit(null);
   }
   deleteForever() {

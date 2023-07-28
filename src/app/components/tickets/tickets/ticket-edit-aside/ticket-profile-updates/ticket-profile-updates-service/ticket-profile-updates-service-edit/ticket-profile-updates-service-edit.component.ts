@@ -20,7 +20,7 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 export class TicketProfileUpdatesServiceEditComponent implements OnInit {
   @Input() service: TicketProfileService;
   @Input() update: TicketProfileUpdate;
-  @ViewChild('editTimePicker') editTimePicker: TicketProfileUpdatesServiceTimepickerComponent;
+  @ViewChild('editTimePicker', { static: true }) editTimePicker: TicketProfileUpdatesServiceTimepickerComponent;
   @Output() onEdit = new EventEmitter();
   currentCompany = null;
   minutes: number = 0;

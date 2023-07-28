@@ -18,8 +18,8 @@ import { TicketProfileUpdatesServiceTimepickerComponent } from '../../ticket-pro
 export class TicketProfileEditFormUpdateServicesComponent implements OnInit {
   @Input() service: TicketProfileService;
   @Input() updateId: string;
-  @ViewChild('updateMobileBtn') updateMobileBtn: DisabledBtnDirective;
-  @ViewChild('editTimePicker') editTimePicker: TicketProfileUpdatesServiceTimepickerComponent;
+  @ViewChild('updateMobileBtn', { static: true }) updateMobileBtn: DisabledBtnDirective;
+  @ViewChild('editTimePicker', { static: false }) editTimePicker: TicketProfileUpdatesServiceTimepickerComponent;
   @Output() onClose = new EventEmitter();
   validate: boolean = true;
   validateQuantity: boolean = true;

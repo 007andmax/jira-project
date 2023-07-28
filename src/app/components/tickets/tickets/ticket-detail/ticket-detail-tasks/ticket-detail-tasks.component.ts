@@ -26,7 +26,7 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
   addTask: TicketProfileTask = new TicketProfileTask();
   listTechUsers = [];
   sub: Subscription = new Subscription();
-  @ViewChild('addTaskBtn') addTaskBtn: ClickOtsideDirective;
+  @ViewChild('addTaskBtn', { static: false }) addTaskBtn: ClickOtsideDirective;
   @Input() ticketProfile: TicketProfile = new TicketProfile();
   constructor(private ticketsService: TicketsService,
     private ticketStateService: TicketStateService,

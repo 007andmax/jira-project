@@ -16,7 +16,7 @@ import { TicketProfileFormUpdate } from '../../../ticket-edit-aside/class/ticket
 })
 export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
   @Input() ticketProfile: TicketProfile = new TicketProfile();
-  @ViewChild('addAssignedUser') addAssignedUser: AddAssignedUserComponent;
+  @ViewChild('addAssignedUser', { static: true }) addAssignedUser: AddAssignedUserComponent;
   @Input() ticketProfileFormUpdate: TicketProfileFormUpdate = new TicketProfileFormUpdate();
   @Input() currentUser: CurrentUser;
   @Input() tab: string;

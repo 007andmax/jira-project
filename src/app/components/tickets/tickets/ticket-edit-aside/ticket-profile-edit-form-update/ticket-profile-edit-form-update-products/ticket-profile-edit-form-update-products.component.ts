@@ -14,7 +14,7 @@ import { TicketsListService } from '../../../services/tickets-list.service';
 export class TicketProfileEditFormUpdateProductsComponent implements OnInit {
   @Input() product: TicketProfileProduct;
   @Input() updateId: string;
-  @ViewChild('updateMobileBtn') updateMobileBtn: DisabledBtnDirective;
+  @ViewChild('updateMobileBtn', { static: true }) updateMobileBtn: DisabledBtnDirective;
   @Output() onClose = new EventEmitter();
   isUpdate: boolean = false;
   editProduct: TicketProfileProduct;

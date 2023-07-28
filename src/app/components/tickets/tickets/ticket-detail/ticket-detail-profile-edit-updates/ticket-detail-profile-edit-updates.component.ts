@@ -12,9 +12,9 @@ import { TicketDetailProfileEditUpdatesServicesComponent } from './ticket-detail
   styleUrls: ['./ticket-detail-profile-edit-updates.component.scss']
 })
 export class TicketDetailProfileEditUpdatesComponent implements OnInit {
-  @ViewChild('updateBtn') updateBtn: DisabledBtnDirective;
-  @ViewChild('selectServices') selectServices: TicketDetailProfileEditUpdatesServicesComponent;
-  @ViewChild('selectProducts') selectProducts: TicketDetailProfileEditUpdatesProductsComponent;
+  @ViewChild('updateBtn', { static: true }) updateBtn: DisabledBtnDirective;
+  @ViewChild('selectServices', { static: false }) selectServices: TicketDetailProfileEditUpdatesServicesComponent;
+  @ViewChild('selectProducts', { static: false }) selectProducts: TicketDetailProfileEditUpdatesProductsComponent;
 
   @Output() onCloseForm = new EventEmitter();
   update: TicketProfileUpdate;

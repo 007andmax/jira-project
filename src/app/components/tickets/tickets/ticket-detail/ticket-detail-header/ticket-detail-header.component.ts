@@ -28,7 +28,7 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
   @Output() onMoveToSpam = new EventEmitter();
   @Output() onMoveToTrash = new EventEmitter();
   @Output() onToggleRigthPanel = new EventEmitter();
-  @ViewChild('update_closeBtn') update_closeBtn: DisabledBtnDirective;
+  @ViewChild('update_closeBtn', { static: true }) update_closeBtn: DisabledBtnDirective;
   isUpdateAndClose: boolean = false;
   currentUser: CurrentUser;
   dateTxt: string = "";

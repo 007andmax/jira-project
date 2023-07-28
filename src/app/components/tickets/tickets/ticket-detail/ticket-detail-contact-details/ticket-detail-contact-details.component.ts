@@ -18,7 +18,7 @@ import * as moment from "moment";
 })
 export class TicketDetailContactDetailsComponent implements OnInit, OnDestroy {
   @Input() ticketProfile: TicketProfile = new TicketProfile();
-  @ViewChild('companyHistory') companyHistory: TicketDetailContactDetailsHistoryComponent;
+  @ViewChild('companyHistory', { static: true }) companyHistory: TicketDetailContactDetailsHistoryComponent;
   @Output() onClose = new EventEmitter<any>();
   company: Company;
   primaryContact: any;

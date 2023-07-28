@@ -42,10 +42,10 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 })
 export class TicketEditAsideComponent implements OnInit, OnDestroy {
 
-  @ViewChild('updateForm') updateForm: TicketProfileFormUpdateComponent;
-  @ViewChild('editUpdateForm') editUpdateForm: TicketProfileEditFormUpdateComponent;
-  @ViewChild('ticketMessage') ticketMessage: TicketMessageComponent;
-  @ViewChild('ticketProfileUpdates') ticketProfileUpdates: TicketProfileUpdatesComponent;
+  @ViewChild('updateForm', { static: true }) updateForm: TicketProfileFormUpdateComponent;
+  @ViewChild('editUpdateForm', { static: true }) editUpdateForm: TicketProfileEditFormUpdateComponent;
+  @ViewChild('ticketMessage', { static: true }) ticketMessage: TicketMessageComponent;
+  @ViewChild('ticketProfileUpdates', { static: true }) ticketProfileUpdates: TicketProfileUpdatesComponent;
 
   ticketProfile: TicketProfile = new TicketProfile();
   opened = false;

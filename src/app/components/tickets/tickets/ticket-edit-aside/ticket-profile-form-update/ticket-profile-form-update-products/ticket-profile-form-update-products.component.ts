@@ -17,9 +17,9 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
 })
 export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestroy {
   isUpdate: boolean = false;
-  @ViewChild('updateMobileBtn') updateMobileBtn: DisabledBtnDirective;
-  @ViewChild('addMoreMobileBtn') addMoreMobileBtn: DisabledBtnDirective;
-  @ViewChild('productDP') productDP: ProductListComponent;
+  @ViewChild('updateMobileBtn', { static: true }) updateMobileBtn: DisabledBtnDirective;
+  @ViewChild('addMoreMobileBtn', { static: true }) addMoreMobileBtn: DisabledBtnDirective;
+  @ViewChild('productDP', { static: true }) productDP: ProductListComponent;
   @Output() onUpdateMobile = new EventEmitter();
   @Output() onAddMoreMobile = new EventEmitter();
   addedProductList = [];

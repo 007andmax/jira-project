@@ -40,13 +40,13 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
   ticketProfile: TicketProfile = new TicketProfile();
   ticketProfileFormUpdate: TicketProfileFormUpdate = new TicketProfileFormUpdate();
-  @ViewChild('selectProducts') selectProducts: TicketProfileFormUpdateProductsComponent;
-  @ViewChild('update_closeBtn') update_closeBtn: DisabledBtnDirective;
-  @ViewChild('updateBtn') updateBtn: DisabledBtnDirective;
-  @ViewChild('addMoreMobileBtn') addMoreMobileBtn: DisabledBtnDirective;
-  @ViewChild('updateMobileBtn') updateMobileBtn: DisabledBtnDirective;
-  @ViewChild('selectServices') selectServices: TicketProfileFormUpdateServicesComponent;
-  @ViewChild('noteList') noteList: TicketProfileFormUpdateNoteListComponent;
+  @ViewChild('selectProducts', { static: false }) selectProducts: TicketProfileFormUpdateProductsComponent;
+  @ViewChild('update_closeBtn', { static: false }) update_closeBtn: DisabledBtnDirective;
+  @ViewChild('updateBtn', { static: false }) updateBtn: DisabledBtnDirective;
+  @ViewChild('addMoreMobileBtn', { static: true }) addMoreMobileBtn: DisabledBtnDirective;
+  @ViewChild('updateMobileBtn', { static: true }) updateMobileBtn: DisabledBtnDirective;
+  @ViewChild('selectServices', { static: false }) selectServices: TicketProfileFormUpdateServicesComponent;
+  @ViewChild('noteList', { static: false }) noteList: TicketProfileFormUpdateNoteListComponent;
   @Input() lisUpdateUser: Array<CurrentUser> = [];
   @Input() set ticket(value) {
     this.ticketProfile = value;

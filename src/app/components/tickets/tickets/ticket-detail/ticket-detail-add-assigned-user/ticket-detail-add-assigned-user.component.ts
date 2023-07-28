@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 })
 export class TicketDetailAddAssignedUserComponent implements OnInit, OnDestroy {
   @Input() listAssignedUser: Array<CurrentUser> = [];
-  @ViewChild("assignedUser") assignedUser: AddAssignedUserComponent;
+  @ViewChild("assignedUser", { static: true }) assignedUser: AddAssignedUserComponent;
   @Output() onSelectAssignedUser = new EventEmitter<any>();
   userList: Array<User> = [];
   sub: Subscription = new Subscription();
