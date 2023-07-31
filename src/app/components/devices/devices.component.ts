@@ -40,7 +40,8 @@ export class DevicesComponent implements OnInit {
   @ViewChild('installdatePicker', { static: true }) installdatePicker: DatePickerComponent;
   @ViewChild('warrantydatePicker', { static: true }) warrantydatePicker: DatePickerComponent;
   @ViewChild('dropdownManufacturersidebar', { static: false }) dropdownManufacturersidebar: DropDownComponent;
-  @ViewChild('dropdownModelSidebar', { stati: false }) dropdownModelSidebar: DropDownComponent;
+  @ViewChild('dropdownModelSidebar', { static: false }) dropdownModelSidebar: DropDownComponent;
+  @ViewChild('dropdownServices', { static: true }) selectedInput: ElementRef<HTMLInputElement>;
   companyId: any;
   tagFilterValue: string = "";
   searchTag: any[] = [];
@@ -141,8 +142,6 @@ export class DevicesComponent implements OnInit {
   System: any = undefined;
   serialnumber: string = "";
   templatepdf: string = "PDF_TEMPLATE";
-  @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
-
   IsUpdateInstalling: boolean = false;
   IsCurrentConfigLoading: boolean = false;
   searchTagName: any;

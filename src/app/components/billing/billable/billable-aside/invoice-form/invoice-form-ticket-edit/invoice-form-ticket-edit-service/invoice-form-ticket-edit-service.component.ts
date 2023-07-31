@@ -14,7 +14,7 @@ import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component'
   styleUrls: ['./invoice-form-ticket-edit-service.component.scss']
 })
 export class InvoiceFormTicketEditServiceComponent implements OnInit {
-  @ViewChild('taxes') taxesDropDown: TaxesComponent;
+  @ViewChild('taxes', { static: true }) taxesDropDown: TaxesComponent;
   @Input() service: BillableProfileTicketServiceExpense;
   minutes: number = 0;
   hours: number = 0;

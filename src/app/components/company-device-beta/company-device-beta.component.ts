@@ -14,7 +14,6 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import * as _ from "lodash";
 import { v4 as uuidv4 } from 'uuid';
 import { DropDownComponent } from "../shared/drop-down/drop-down.component";
-import { element } from "@angular/core/src/render3";
 import { DatePickerComponent } from "../shared/date-picker/date-picker.component";
 import { CommonHttpServices } from "../device/_services/common_http.service";
 import { ExcelService } from "../device/_services/download_csv.service";

@@ -13,7 +13,6 @@ import { ShellStateService } from 'src/app/states/shell/shell-state.service';
 import { command, script, commandModal, scriptModal } from './../class/device';
 import { AgentService } from 'src/app/services/agent/agent.service';
 import { KafkaStateService } from 'src/app/states/kafka/kafka-state.service';
-import { element } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-terminal',
