@@ -18,11 +18,11 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
   styleUrls: ['./users-filter.component.scss']
 })
 export class UsersFilterComponent implements OnInit {
-  @ViewChild('titlesDp') titlesDp: DropDownComponent;
-  @ViewChild('companiesDp') companiesDp: DropDownComponent;
-  @ViewChild('industriesDp') industriesDp: DropDownComponent;
-  @ViewChild('subscriptionDp') subscriptionDp: UsersFilterSubscriptionsComponent;
-  @ViewChild('tagsDp') tagsDp: CompanyTagsComponent;
+  @ViewChild('titlesDp', { static: true }) titlesDp: DropDownComponent;
+  @ViewChild('companiesDp', { static: true }) companiesDp: DropDownComponent;
+  @ViewChild('industriesDp', { static: true }) industriesDp: DropDownComponent;
+  @ViewChild('subscriptionDp', { static: true }) subscriptionDp: UsersFilterSubscriptionsComponent;
+  @ViewChild('tagsDp', { static: true }) tagsDp: CompanyTagsComponent;
   industries: Array<CrmCompanyIndustry> = [];
   jobTitleList: Array<CrmCompanyJobTitle> = [];
   public filter: UserFilter = new UserFilter();

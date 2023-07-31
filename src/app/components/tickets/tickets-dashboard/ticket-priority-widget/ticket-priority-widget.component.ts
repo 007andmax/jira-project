@@ -8,7 +8,7 @@ import { DashboardTicketsStats } from '../class/dashboard-tickets-stats';
 })
 export class TicketPriorityWidgetComponent implements OnInit {
   @Input() dashboardTicketsStats: DashboardTicketsStats = new DashboardTicketsStats();
-  @ViewChild('nvd3') nvd3: any;
+  @ViewChild('nvd3', { static: true }) nvd3: any;
   chartOptions: any;
   chartColors = ["#0646a4", "#00ccff", '#2bc7c6'];
   data: any;

@@ -7,7 +7,7 @@ import { DashboardTicketsStats } from '../class/dashboard-tickets-stats';
   styleUrls: ['./recurring-ticket-widget.component.scss']
 })
 export class RecurringTicketWidgetComponent implements OnInit {
-  @ViewChild('nvd3') nvd3: any;
+  @ViewChild('nvd3', { static: true }) nvd3: any;
   @Input() dashboardTicketsStats: DashboardTicketsStats = new DashboardTicketsStats();
   chartOptions: any;
   chartColors = ["#0646a4", "#00ccff", '#2bc7c6'];

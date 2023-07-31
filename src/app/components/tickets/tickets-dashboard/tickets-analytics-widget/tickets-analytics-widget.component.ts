@@ -13,7 +13,7 @@ export class TicketsAnalyticsWidgetComponent implements OnInit {
   @Output() onTicketsAnalyticsReady = new EventEmitter<any>();
   isReady: boolean = false;
   type: string = "WEEKLY";
-  @ViewChild('nvd3') nvd3: any;
+  @ViewChild('nvd3', { static: true }) nvd3: any;
   options;
   data;
   dashboard: DashboardTickets;

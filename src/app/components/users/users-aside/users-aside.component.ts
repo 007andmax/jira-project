@@ -33,8 +33,10 @@ import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-
 })
 export class UsersAsideComponent implements OnInit, OnDestroy {
 
-  @ViewChild('userRolesDP') userRolesDP: DropDownComponent;
-  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
+  @ViewChild('userRolesDP', { static: false }) userRolesDP: DropDownComponent;
+  @ViewChild('addBtn', { static: false }) addBtn: DisabledBtnDirective;
+  @ViewChild('jobTypeDp', { static: false }) jobTypeDp: DropDownComponent;
+  @ViewChild('jobTitleDp', { static: false }) jobTitleDp: DropDownComponent;
   public opened = false;
   user: UserProfile = new UserProfile();
   jobTitleList: Array<CrmCompanyJobTitle> = [];
@@ -45,8 +47,6 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
   phoneTypes = ['Office', 'Mobile', 'Fax'];
   industries: Array<CrmCompanyIndustry> = [];
   idUploadFile: string;
-  @ViewChild('jobTypeDp') jobTypeDp: DropDownComponent;
-  @ViewChild('jobTitleDp') jobTitleDp: DropDownComponent;
   userRoles: Array<UserRole> = [];
   sub: Subscription = new Subscription();
   constructor(private imageCropperStateService: ImageCropperStateService,

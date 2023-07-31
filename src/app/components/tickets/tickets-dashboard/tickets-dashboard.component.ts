@@ -15,9 +15,9 @@ import { TicketsAnalyticsWidgetComponent } from './tickets-analytics-widget/tick
   styleUrls: ['./tickets-dashboard.component.scss']
 })
 export class TicketsDashboardComponent implements OnInit {
-  @ViewChild('ticketPriority') ticketPriority: TicketPriorityWidgetComponent;
-  @ViewChild('recurringTicket') recurringTicket: RecurringTicketWidgetComponent;
-  @ViewChild('ticketsAnalytics') ticketsAnalytics: TicketsAnalyticsWidgetComponent;
+  @ViewChild('ticketPriority', { static: true }) ticketPriority: TicketPriorityWidgetComponent;
+  @ViewChild('recurringTicket', { static: true }) recurringTicket: RecurringTicketWidgetComponent;
+  @ViewChild('ticketsAnalytics', { static: true }) ticketsAnalytics: TicketsAnalyticsWidgetComponent;
   showPreloader: boolean = true;
   accountingStartDate: string;
   dashboard: DashboardTickets;

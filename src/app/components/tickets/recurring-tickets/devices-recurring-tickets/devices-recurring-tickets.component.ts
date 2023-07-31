@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { merge, Observable, Subject, Subscription } from "rxjs";
-import { ISubscription } from "rxjs/Subscription";
 import { debounceTime, distinctUntilChanged, filter, map } from "rxjs/operators";
 import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
 import { FormGroup } from "@angular/forms";
@@ -17,13 +16,13 @@ import { DevicesStateService } from 'src/app/states/devices/devices-state.servic
 export class DevicesRecurringTicketsComponent implements OnInit, OnDestroy {
 
 
-  @ViewChild('instance', static: true) instance: NgbTypeahead;
+  @ViewChild('instance', { static: true }) instance: NgbTypeahead;
   @Output() selectedItem = new EventEmitter<any>();
   @Output() getAllItems = new EventEmitter<any>();
   @Input() companyId: string;
   @Input() editItem: any;
   public selectedDevice;
-  public subGetDevicesList: ISubscription;
+  public subGetDevicesList: Subscription;
   public devicesList: any;
   preloader: boolean = true;
   focus$ = new Subject<string>();

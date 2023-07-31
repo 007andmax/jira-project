@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { AppService } from 'src/app/states/app/app.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { DocumentsFilterComponent } from './documents-filter/documents-filter.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'documents-header',

@@ -44,7 +44,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   _users: Array<User> = [];
   @Input() count: number = 0;
   @Input() type: string;
-  @ViewChild('filter') filter: UsersFilterComponent;
+  @ViewChild('filter', { static: true }) filter: UsersFilterComponent;
   userFilter: UserFilter = new UserFilter();
   sub: Subscription = new Subscription();
   countFilter: number = 0;

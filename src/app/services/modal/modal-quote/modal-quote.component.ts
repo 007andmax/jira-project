@@ -56,8 +56,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   @Input() public data;
   @Input() public action;
 
-  @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
-  @ViewChild('auto') matAutocomplete: MatAutocomplete;
+  @ViewChild('userInput', { static: true }) userInput: ElementRef<HTMLInputElement>;
 
   /**
    * Creates an instance of the QuoteCreateContentComponent with the injected services

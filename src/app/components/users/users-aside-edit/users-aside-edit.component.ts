@@ -53,12 +53,12 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
   industries: Array<CrmCompanyIndustry> = [];
   idUploadFile: string;
   userRoles: Array<UserRole> = [];
-  @ViewChild('editBtn') editBtn: DisabledBtnDirective;
-  @ViewChild('companyTags') companyTags: CompanyTagsComponent;
-  @ViewChild('jobTitleDp') jobTitleDp: DropDownComponent;
-  @ViewChild('jobTypeDp') jobTypeDp: DropDownComponent;
-  @ViewChild('jobIndustryDp') jobIndustryDp: DropDownComponent;
-  @ViewChild('userRolesDP') userRolesDP: DropDownComponent;
+  @ViewChild('editBtn', { static: true }) editBtn: DisabledBtnDirective;
+  @ViewChild('companyTags', { static: true }) companyTags: CompanyTagsComponent;
+  @ViewChild('jobTitleDp', { static: false }) jobTitleDp: DropDownComponent;
+  @ViewChild('jobTypeDp', { static: true }) jobTypeDp: DropDownComponent;
+  @ViewChild('jobIndustryDp', { static: true }) jobIndustryDp: DropDownComponent;
+  @ViewChild('userRolesDP', { static: false }) userRolesDP: DropDownComponent;
   constructor(private imageCropperStateService: ImageCropperStateService,
     public ticketsListService: TicketsListService,
     public usersStateService: UsersStateService,

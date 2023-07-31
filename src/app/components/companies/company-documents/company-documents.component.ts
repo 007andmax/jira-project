@@ -11,7 +11,7 @@ import { DocumentsComponent } from '../../documents/documents.component';
 })
 export class CompanyDocumentsComponent extends DocumentsComponent {
   companyId: string;
-  @ViewChild('header') header: DocumentsHeaderComponent;
+  @ViewChild('header', { static: true }) header: DocumentsHeaderComponent;
 
   ngOnInit() {
     document.body.querySelector(".main-container").scrollTo(0, 0);

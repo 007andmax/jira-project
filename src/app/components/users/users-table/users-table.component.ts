@@ -46,7 +46,7 @@ export class UsersTableComponent implements OnInit, OnDestroy {
   @Input() listCustomSubscription: Array<UserCustomSubscription> = [];
   @Input() companyId: string;
   industries: Array<CrmCompanyIndustry> = [];
-  @ViewChild('customSubscription') customSubscription: UserTableCustomSubscriptionComponent;
+  @ViewChild('customSubscription', { static: false }) customSubscription: UserTableCustomSubscriptionComponent;
   companies: Array<Company> = [];
   currentUser: CurrentUser = new CurrentUser();
   sub: Subscription = new Subscription();

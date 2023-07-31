@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, OnDestroy } from '@angular/core';
 import { merge, Observable, Subject, Subscription } from "rxjs";
-import { ISubscription } from "rxjs/Subscription";
 import { debounceTime, distinctUntilChanged, filter, map } from "rxjs/operators";
 import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
 import { FormGroup } from "@angular/forms";
@@ -24,7 +23,7 @@ export class DurationComponent implements OnInit, OnDestroy {
   @Input() editItem: number;
   public selectedHours;
   public selectedMin;
-  public subGetDevicesList: ISubscription;
+  public subGetDevicesList: Subscription;
   public hoursList: any = HOURS;
   public minList: any = MINUTES;
   duration: Duration = new Duration();

@@ -28,7 +28,7 @@ export class AddUserToSubscribeComponent implements OnInit {
   showPreloader: boolean = true;
   isAddNewSubscription: boolean = false;
   @Input() users: Array<User> = [];
-  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
+  @ViewChild('addBtn', { static: false }) addBtn: DisabledBtnDirective;
   sub: Subscription = new Subscription();
   constructor(private marketingEmailService: MarketingEmailService,
     private marketingEmailRealTimeService: MarketingEmailRealTimeService,

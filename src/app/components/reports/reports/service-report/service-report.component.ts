@@ -9,7 +9,6 @@ import { ServiceReports } from '../../class/service-reports';
 import { ServiceReportsItem } from '../../class/service-reports-item';
 import { ReportsStateService } from 'src/app/states/reports/reports-state.service';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
-import { isEmbeddedView } from '@angular/core/src/view/util';
 
 @Component({
   selector: 'app-service-report',

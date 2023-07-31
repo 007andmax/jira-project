@@ -31,8 +31,8 @@ export class UsersFilterSubscriptionsComponent implements OnInit {
   addOnBlur = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   tagCtrl = new FormControl();
-  @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
-  @ViewChild('dp') dp: any;
+  @ViewChild('userInput', { static: true }) userInput: ElementRef<HTMLInputElement>;
+  @ViewChild('dp', { static: true }) dp: any;
   @Output() tagsChange = new EventEmitter();
   sub: Subscription = new Subscription();
   constructor(private marketingEmailStateService: MarketingEmailStateService,) { }

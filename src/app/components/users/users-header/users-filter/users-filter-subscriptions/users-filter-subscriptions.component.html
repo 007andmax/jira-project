@@ -8,48 +8,6 @@
             #chipList
             aria-label="Fruit selection"
         >
-            <!-- <mat-chip
-                *ngIf="defaultSubscriptions.invoiceSubscription.enabled"
-                [selectable]="selectable"
-                [removable]="removable"
-                (removed)="updateDefault('invoiceSubscription')"
-            >
-                Invoice Updates
-                <mat-icon
-                    matChipRemove
-                    *ngIf="removable"
-                >
-                    cancel
-                </mat-icon>
-            </mat-chip>
-            <mat-chip
-                *ngIf="defaultSubscriptions.ticketSubscription.enabled"
-                [selectable]="selectable"
-                [removable]="removable"
-                (removed)="updateDefault('ticketSubscription')"
-            >
-                Ticket Updates
-                <mat-icon
-                    matChipRemove
-                    *ngIf="removable"
-                >
-                    cancel
-                </mat-icon>
-            </mat-chip>
-            <mat-chip
-                *ngIf="defaultSubscriptions.ticketManagerSubscription.enabled"
-                [selectable]="selectable"
-                [removable]="removable"
-                (removed)="updateDefault('ticketManagerSubscription')"
-            >
-                Ticket Manager
-                <mat-icon
-                    matChipRemove
-                    *ngIf="removable"
-                >
-                    cancel
-                </mat-icon>
-            </mat-chip> -->
             <mat-chip
                 *ngFor="let subscription of selectedSubscriptions; let i = index"
                 [selectable]="selectable"

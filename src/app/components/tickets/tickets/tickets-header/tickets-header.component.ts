@@ -14,7 +14,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
   styleUrls: ['./tickets-header.component.scss']
 })
 export class TicketsHeaderComponent implements OnInit, OnDestroy {
-  @ViewChild('filter') filter: TicketsFilterComponent;
+  @ViewChild('filter', { static: true }) filter: TicketsFilterComponent;
   ticketsFilter: TicketsFilter = new TicketsFilter();
   titleListTypes: Array<TitleListType> = [new TitleListType('All Tickets', 'ALL'),
   new TitleListType('Unassigned', 'UNASSIGNED'),

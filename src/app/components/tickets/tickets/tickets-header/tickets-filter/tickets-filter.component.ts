@@ -26,11 +26,11 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
   styleUrls: ['./tickets-filter.component.scss']
 })
 export class TicketsFilterComponent implements OnInit, OnDestroy {
-  @ViewChild('usersDp') usersDp: DropDownComponent;
-  @ViewChild('companyDp') companyDp: CompanyDropDownComponent;
-  @ViewChild('techUsersDp') techUsersDp: DropDownComponent;
-  @ViewChild('statusDp') statusDp: DropDownComponent;
-  @ViewChild('tagsDp') tagsDp: TicketsFilterTagsComponent;
+  @ViewChild('usersDp', { static: true }) usersDp: DropDownComponent;
+  @ViewChild('companyDp', { static: true }) companyDp: CompanyDropDownComponent;
+  @ViewChild('techUsersDp', { static: true }) techUsersDp: DropDownComponent;
+  @ViewChild('statusDp', { static: true }) statusDp: DropDownComponent;
+  @ViewChild('tagsDp', { static: true }) tagsDp: TicketsFilterTagsComponent;
   public ticketsFilter: TicketsFilter = new TicketsFilter();
   listType: string = "USERS";
   public selectedCompany: Company = null;
