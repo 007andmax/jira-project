@@ -8,7 +8,7 @@
     left: 76px;
     top: 0;
     z-index: 992;
-    background: $primary-2;
+    background: $gray-900;
     overflow-x: scroll;
     transition: left 300ms;
 
@@ -91,19 +91,19 @@
     border-radius: 50%;
 
     &.--red {
-        border-color: $error;
+        border-color: $red-600;
     }
 
     &.--green {
-        border-color: $success;
+        border-color: $green-600;
     }
 
     &.--blue {
-        border-color: $primary-1;
+        border-color: $blue-light-600;
     }
 
     &.--yellow {
-        border-color: $warning;
+        border-color: $yellow-600;
     }
 }
 
@@ -124,14 +124,14 @@
 }
 
 .active {
-    background: $gray-800--old;
-    color: $primary-1;
-    border-left: 2px solid $primary-1;
+    background: $gray-700;
+    color: $blue-light-600;
+    border-left: 2px solid $blue-light-600;
 }
 
 .category-item {
     &:hover {
-        color: $primary-1;
+        color: $blue-light-600;
     }
 }
 
