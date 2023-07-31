@@ -22,7 +22,7 @@ export class TicketsService {
     return this.http.post(this.apiUrl + `dashboard/ticket/byServices`, data);
   }
   public getTicketsPriorities() {
-    return this.http.get(this.apiUrl + `priorityLevel`);
+    return this.http.get(this.apiUrl + `priorityLevel?page=0&size=100`);
   }
   public getPasswordsDocuments(userId) {
     return this.http.get(this.apiUrl + `v2/tickets/previewInfo?userId=${userId}`);
