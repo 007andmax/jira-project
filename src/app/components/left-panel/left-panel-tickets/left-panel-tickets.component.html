@@ -109,3 +109,27 @@
         </div>
     </li>
 </ul>
+<hr>
+<ul class="app-left-panel__menu-expand menu-expand-show">
+    <ng-template
+        ngFor
+        let-filter
+        [ngForOf]="globalFilters"
+        [ngForTrackBy]="trackById"
+    >
+        <li
+            [ngClass]="{'--active': false}"
+            class="desktop-version"
+            (click)="setGlobalFilter(filter)"
+        >
+            <div [textContent]="filter.name"></div>
+            <i
+                class="icon__globe qt-bg-contain qt-sz-14 pointer qt-ml-auto"
+                container="body"
+                placement="top"
+                ngbTooltip="Global Filter"
+                *ngIf="filter.global"
+            ></i>
+        </li>
+    </ng-template>
+</ul>

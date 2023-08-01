@@ -24,6 +24,10 @@ export class TicketsService {
   public getPasswordsDocuments(userId) {
     return this.http.get(this.apiUrl + `v2/tickets/previewInfo?userId=${userId}`);
   }
+
+  public getFilters() {
+    return this.http.get(this.apiUrl + `ticket/filters/all?page=0&size=10`);
+  }
   public getDashboardByTech(startDate, endDate) {
     return this.http.get(this.apiUrl + `dashboard/ticket/counters?startDate=${startDate}&endDate=${endDate}`);
   }

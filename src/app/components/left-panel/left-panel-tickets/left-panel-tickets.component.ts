@@ -9,6 +9,7 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { TicketGlobalFilter } from '../../tickets/tickets/class/ticket-global-filter';
 
 @Component({
   selector: 'app-left-panel-tickets',
@@ -22,6 +23,7 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
   listType: string;
   blockFilterUser: boolean = false;
   ticketsCounts: TicketsCounts;
+  globalFilters: Array<TicketGlobalFilter> = [];
   @Input() activePage: string = "";
   @Output() onChangeState = new EventEmitter();
   @Output() onOpenPanel = new EventEmitter();
@@ -71,11 +73,17 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
       if (this.leftPanelService.isTicketsPage(data)) this.open = true;
     })
+    this.ticketsService.getFilters().subscribe((data: any) => {
+      this.globalFilters = data.ticketFilteringDtos.map(item => new TicketGlobalFilter(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+    })
   }
   public close() {
     this.open = false;
   }
-
+  setGlobalFilter(filter) {
+    this.ticketsStateService.onChangeGlobalFilter(filter);
+  }
   openPanel() {
     this.onOpenPanel.emit(null);
   }

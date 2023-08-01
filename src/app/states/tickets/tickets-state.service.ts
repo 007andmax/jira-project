@@ -35,6 +35,7 @@ export class TicketsStateService {
   typeFilter: EventEmitter<any> = new EventEmitter();
   tagsFilter: EventEmitter<any> = new EventEmitter();
   onGetTicketsStatus: EventEmitter<any> = new EventEmitter();
+  onInitGlobalFilter: EventEmitter<any> = new EventEmitter();
   leftPanelFilter: EventEmitter<any> = new EventEmitter();
   ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET'];
   listStatusColor: Array<StatusColor> = [];
@@ -90,6 +91,9 @@ export class TicketsStateService {
       this.ticketsStatus = data.map(item => new TicketStatus(item));
       this.onGetTicketsStatus.emit(this.ticketsStatus);
     })
+  }
+  public onChangeGlobalFilter(data) {
+    this.onInitGlobalFilter.emit(data);
   }
   public getListTicketStatusForRemove() {
     return this.listTicketStatusForRemove;

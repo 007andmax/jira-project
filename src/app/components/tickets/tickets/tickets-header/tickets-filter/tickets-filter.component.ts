@@ -19,6 +19,10 @@ import { TicketStatusFilter } from '../class/ticket-status-filter';
 import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { TicketGlobalFilter } from '../../class/ticket-global-filter';
+import { TagsStateService } from 'src/app/states/tags/tags-state.service';
+import { CompanyTag } from 'src/app/components/companies/company-tags/class/company-tag';
+import { User } from 'src/app/components/users/class/user';
 
 @Component({
   selector: 'app-tickets-filter',
@@ -59,6 +63,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     public appService: AppService,
     private customerPortalStateService: CustomerPortalStateService,
+    public tagsStateService: TagsStateService,
     private leftPanelService: LeftPanelService) { }
 
 
@@ -112,6 +117,34 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       this.ticketsStatus = data.map(item => new TicketStatusFilter(item));
     })
     this.sub.add(onGetTicketsStatus);
+    this.ticketsStateService.onInitGlobalFilter.subscribe((data: TicketGlobalFilter) => {
+      console.log("data", data);
+
+      this.selectedCompany = this.companiesState.getCompanies().find(item => item.id == data.clientCompanyId);
+      this.companyDp.selectItemWithOutChanges(this.companiesState.getCompanies().find(item => item.id == data.clientCompanyId));
+      this.ticketsFilter.setCompany(this.companiesState.getCompanies().find(item => item.id == data.clientCompanyId));
+
+
+      let createdUser: User = this.usersStateService.getAllUsers().find(item => data.createdUserId == item.id);
+      if (createdUser) {
+        this.selectedUser = `${createdUser.firstName} ${createdUser.lastName}`;
+        this.usersDp.selectItemWithOutChanges(this.selectedUser);
+        this.ticketsFilter.setUser(createdUser);
+      }
+      let techUser: User = this.usersStateService.getAllUsers().find(item => data.assignedUsersIds.some(userId => userId == item.id));
+      if (techUser) {
+        this.selectedTechUser = `${techUser.firstName} ${techUser.lastName}`;
+        this.techUsersDp.selectItemWithOutChanges(this.selectedTechUser);
+        this.ticketsFilter.setTechUser(techUser);
+      }
+      let tags = this.tagsStateService.getTags().filter(item => data.tagIds.some(tagId => tagId == item.id)).map(item => new CompanyTag(item));
+      this.tagsDp.selectedTag = tags;
+      this.ticketsFilter.setTags(tags);
+
+      this.ticketsStateService.onInitFilter(this.ticketsFilter);
+      this.getCount();
+      this.onChangeCounterFilter();
+    })
   }
   private checkCompanyCustomerUser() {
     this.ticketsFilter = this.customerPortalStateService.getTicketsFilter();
