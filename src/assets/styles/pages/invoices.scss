@@ -632,6 +632,9 @@ app-invoices-item,app-payment-item {
     background-color: $white;
   }
 
+  .amount-received-invalid-feedback {
+    bottom: -36px;
+  }
 }
 
 .user-aside-detail-page__aside {
