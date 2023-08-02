@@ -83,6 +83,7 @@
             <div class="sidebar-system__info-title">Warranty</div>
             <app-date-picker
                 #datePickerWarranty
+                [dropdownClass]="['date-picker']"
                 [container]="'body'"
                 [type]="'INPUT'"
                 [editMode]="true"
@@ -105,6 +106,7 @@
             <app-date-picker
                 [type]="'INPUT'"
                 [editMode]="true"
+                [dropdownClass]="['date-picker']"
                 [container]="'body'"
                 [editDate]="device.report.system.install_date"
                 [useMinDate]="false"
