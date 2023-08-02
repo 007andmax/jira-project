@@ -10,6 +10,11 @@ import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketGlobalFilter } from '../../tickets/tickets/class/ticket-global-filter';
+import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
+import { DELETE_GLOBAL_FILTER } from 'src/app/const/confirm';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmComponent } from '../../shared/confirm/confirm.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-left-panel-tickets',
@@ -24,6 +29,7 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
   blockFilterUser: boolean = false;
   ticketsCounts: TicketsCounts;
   globalFilters: Array<TicketGlobalFilter> = [];
+  sub: Subscription = new Subscription();
   @Input() activePage: string = "";
   @Output() onChangeState = new EventEmitter();
   @Output() onOpenPanel = new EventEmitter();
@@ -106,7 +112,6 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
     //this.quoteStateService.goToState(state);
     this.onChangeState.emit(state);
   }
-
   getCountByField(field) {
     return (this.ticketsCounts) ? this.ticketsCounts[field] : 0;
   }
@@ -139,5 +144,6 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
     /* START */
     if (!this.ticketsStateService.isMoveToTickets) this.ticketsStateService.onChangeTypeFilter("USERS");
     /* END */
+    this.sub.unsubscribe();
   }
 }

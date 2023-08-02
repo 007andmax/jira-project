@@ -9,6 +9,8 @@ import { MatSelectModule, MatChipsModule, MatIconModule } from '@angular/materia
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-down/company-drop-down.module';
 import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.module';
+import { TicketsFilterInfoComponent } from './tickets-filter-info/tickets-filter-info.component';
+import { TicketsFilterEditComponent } from './tickets-filter-edit/tickets-filter-edit.component';
 
 
 
@@ -16,7 +18,8 @@ import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.mo
     declarations: [
         TicketsHeaderComponent,
         TicketsFilterComponent,
-        TicketsFilterTagsComponent
+        TicketsFilterTagsComponent,
+        TicketsFilterInfoComponent
     ],
     imports: [
         CommonModule,

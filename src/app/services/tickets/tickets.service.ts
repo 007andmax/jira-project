@@ -24,7 +24,14 @@ export class TicketsService {
   public getPasswordsDocuments(userId) {
     return this.http.get(this.apiUrl + `v2/tickets/previewInfo?userId=${userId}`);
   }
-
+  public deleteGlobalFilter(id) {
+    return this.http.delete(this.apiUrl + `ticket/filters/${id}`).pipe(
+      tap(data => {
+        this.toastrService.success("The filter has been successfully deleted");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
   public getFilters() {
     return this.http.get(this.apiUrl + `ticket/filters/all?page=0&size=10`);
   }

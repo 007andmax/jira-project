@@ -9,6 +9,7 @@ import { TicketsCounts } from '../../components/tickets/tickets/class/tickets-co
 import { TicketStatus } from 'src/app/components/setting/ticket-settings-page/tickets-status/class/ticket-status';
 import { StatusColor } from 'src/app/components/tickets/class/status-color';
 import { TicketsFilter } from 'src/app/components/tickets/tickets/class/tickets-filter';
+import { TicketGlobalFilter } from 'src/app/components/tickets/tickets/class/ticket-global-filter';
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +42,7 @@ export class TicketsStateService {
   listStatusColor: Array<StatusColor> = [];
   ticketsStatus: Array<TicketStatus> = [];
   ticketsFilter: TicketsFilter = new TicketsFilter();
+  globalFilterForRemove: TicketGlobalFilter = null;
   constructor(private ticketsRealTimeService: TicketsRealTimeService,
     private ticketsService: TicketsService) { }
 
@@ -91,6 +93,12 @@ export class TicketsStateService {
       this.ticketsStatus = data.map(item => new TicketStatus(item));
       this.onGetTicketsStatus.emit(this.ticketsStatus);
     })
+  }
+  public setGlobalFilterForRemove(data) {
+    this.globalFilterForRemove = data;
+  }
+  public getGlobalFilterForRemove() {
+    return this.globalFilterForRemove;
   }
   public onChangeGlobalFilter(data) {
     this.onInitGlobalFilter.emit(data);

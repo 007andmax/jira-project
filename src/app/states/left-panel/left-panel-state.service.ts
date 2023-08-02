@@ -1,5 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { LeftPanelCompaniesFilter } from '../../components/left-panel/left-panel-companies/class/left-panel-companies-filter';
+import { TicketGlobalFilter } from 'src/app/components/tickets/tickets/class/ticket-global-filter';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,6 @@ export class LeftPanelStateService {
   onSearchItemAdded: EventEmitter<any> = new EventEmitter();
   onSearchCompanyChange: EventEmitter<any> = new EventEmitter();
   onPageActive: EventEmitter<any> = new EventEmitter();
-
   constructor() { }
 
   public clearFilter() {

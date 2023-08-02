@@ -1,0 +1,15 @@
+<div>
+    <h3>All tickets</h3>
+    <span
+        *ngIf="globalFilter"
+        [textContent]="globalFilter.name"
+    ></span>
+    <div
+        class="icon__edit-gray-dark qt-sz-20 qt-bg-contain pointer"
+        (click)="editFilter()"
+    ></div>
+    <div
+        class="icon__remove qt-sz-20 qt-bg-contain pointer"
+        (click)="removeFilter()"
+    ></div>
+</div>
