@@ -393,8 +393,8 @@ input.qt-dropdown-input {
 
 
   &.--outline {
-    color: $turquoise-600;
-    border: 1px solid $turquoise-600;
+    color: $blue-light-600;
+    border: 1px solid $blue-light-600;
     background-color: $white;
   }
 
@@ -1320,7 +1320,7 @@ input.qt-dropdown-input {
   color: $gray-400;
 }
 .qt-color-info {
-  color: $turquoise-600;
+  color: $blue-light-600;
 }
 .qt-color-white {
   color: $white;
@@ -1332,7 +1332,7 @@ input.qt-dropdown-input {
   color: $sky-blue-800;
 }
 .qt-bg-info {
-  background-color: $turquoise-600;
+  background-color: $blue-light-600;
 }
 .qt-bg-white {
   background-color: $white;
@@ -1447,7 +1447,7 @@ input.qt-dropdown-input {
 
 /* Checked */
 .qt-radio input[type="radio"]:checked + label:before {
-  border: 1px solid $turquoise-600;
+  border: 1px solid $blue-light-600;
 }
 
 .qt-radio input[type="radio"]:checked + label:after {
@@ -1459,7 +1459,7 @@ input.qt-dropdown-input {
   left: 5px;
   top: 5px;
   border-radius: 50%;
-  background: $turquoise-600;
+  background: $blue-light-600;
 }
 
 .qt-gray-table {
@@ -1586,8 +1586,8 @@ input.qt-dropdown-input {
   border-radius: 4px;
   font-weight: 600;
   &.--outline {
-    color: $turquoise-600;
-    border: solid 1px $turquoise-600;
+    color: $blue-light-600;
+    border: solid 1px $blue-light-600;
     background-color: $white;
   }
   &.--small {
@@ -1693,7 +1693,7 @@ input.qt-dropdown-input {
   }
   &.--blue {
     &::before {
-      border: 2px solid $turquoise-600;
+      border: 2px solid $blue-light-600;
       border-top: 2px solid $sky-blue-600;
     }
   }

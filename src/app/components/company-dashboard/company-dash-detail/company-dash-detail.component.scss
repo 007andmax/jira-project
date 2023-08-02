@@ -153,7 +153,7 @@
         }
     }
     .active {
-        color: $turquoise-600;
+        color: $blue-light-600;
         position: relative;
         &::after {
             content: " ";
@@ -162,7 +162,7 @@
             left: 0;
             right: 0;
             height: 2px;
-            background-color: $turquoise-600;
+            background-color: $blue-light-600;
         }
     }
 }
