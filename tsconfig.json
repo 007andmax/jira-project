@@ -5,13 +5,13 @@
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
-    "module": "esNext",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
     "downlevelIteration": true,
-    "target": "es2015",
+    "target": "ES6",
+    "module": "esNext",
     "types": [
       "node"
     ],
