@@ -5,7 +5,6 @@
             (click)="close()"
         ></div>
         <div class="content-filters-header__title pointer">Filters</div>
-        <div class="content-filters-header__title pointer">Apply</div>
     </div>
     <company-drop-down
         class="search-company"
@@ -50,6 +49,20 @@
         [placement]="appService.checkMobile() ? 'top-left' : 'bottom-left'"
         (tagsChange)="onChangeTags($event)"
     ></app-tickets-filter-tags>
+    <div class="qt-df">
+        <button
+            class="qt-button --gray qt-mr-12"
+            (click)="saveFilter()"
+        >
+            Save filter
+        </button>
+        <button
+            class="qt-button"
+            (click)="applyFilters()"
+        >
+            Apply
+        </button>
+    </div>
     <div class="qt-aside-modern__footer">
         <div class="qt-df qt-w100">
             <button

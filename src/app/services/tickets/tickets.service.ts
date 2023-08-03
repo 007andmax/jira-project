@@ -32,6 +32,22 @@ export class TicketsService {
         return data;
       }));
   }
+  public editGlobalFilter(id, data) {
+    return this.http.put(this.apiUrl + `ticket/filters/${id}`, data).pipe(
+      tap(data => {
+        this.toastrService.success("The filter has been successfully saved");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public addGlobalFilter(data) {
+    return this.http.post(this.apiUrl + `ticket/filters`, data).pipe(
+      tap(data => {
+        this.toastrService.success("The filter has been successfully saved");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
   public getFilters() {
     return this.http.get(this.apiUrl + `ticket/filters/all?page=0&size=10`);
   }

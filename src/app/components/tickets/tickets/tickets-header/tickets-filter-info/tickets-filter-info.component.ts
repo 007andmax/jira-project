@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { TicketGlobalFilter } from '../../class/ticket-global-filter';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { DELETE_GLOBAL_FILTER } from 'src/app/const/confirm';
@@ -7,7 +7,7 @@ import { ConfirmStateService } from 'src/app/components/shared/confirm/services/
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
-import { TicketsFilterEditComponent } from '../tickets-filter-edit/tickets-filter-edit.component';
+import { TicketsFilterSaveComponent } from '../tickets-filter-save/tickets-filter-save.component';
 
 @Component({
   selector: 'tickets-filter-info',
@@ -15,6 +15,7 @@ import { TicketsFilterEditComponent } from '../tickets-filter-edit/tickets-filte
   styleUrls: ['./tickets-filter-info.component.scss']
 })
 export class TicketsFilterInfoComponent implements OnInit, OnDestroy {
+  @Input() title: string;
   sub: Subscription = new Subscription();
   globalFilter: TicketGlobalFilter;
   constructor(private ticketsStateService: TicketsStateService,
@@ -39,7 +40,7 @@ export class TicketsFilterInfoComponent implements OnInit, OnDestroy {
     })
   }
   editFilter() {
-    const modalRef = this.modalService.open(TicketsFilterEditComponent, { windowClass: 'xs-modal user-modal', container: "app-tickets", backdrop: 'static', keyboard: false });
+    const modalRef = this.modalService.open(TicketsFilterSaveComponent, { windowClass: 'xs-modal user-modal', container: "app-tickets", backdrop: 'static', keyboard: false });
     modalRef.componentInstance.globalFilter = this.globalFilter;
   }
   removeFilter() {

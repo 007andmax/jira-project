@@ -13,8 +13,8 @@
                             <div class="qt-input-block__label">Save Filter view as</div>
                             <input
                                 type="text"
-                                minlength="2"
-                                (blur)="onChangeFistname()"
+                                minlength="1"
+                                maxlength="50"
                                 [(ngModel)]="globalFilter.name"
                                 placeholder="Text Tickets i have raised"
                             >
@@ -23,25 +23,31 @@
                     <div class="qt-inputs-row">
                         <div class="qt-input-block qt-f100">
                             <div class="qt-input-block__label">Visible to</div>
-                            <label class="radio-container">
+                            <label
+                                class="radio-container"
+                                for="global-filter-1"
+                            >
                                 Just me
                                 <input
                                     type="radio"
                                     [(ngModel)]="globalFilter.global"
-                                    value="false"
-                                    (change)="setActiveTab('daily', $event)"
-                                    name="recurring-interval"
+                                    [value]="false"
+                                    name="global-filter"
+                                    id="global-filter-1"
                                 >
                                 <span class="radio-mark"></span>
                             </label>
-                            <label class="radio-container">
+                            <label
+                                class="radio-container"
+                                for="global-filter-2"
+                            >
                                 All Tech users
                                 <input
                                     type="radio"
                                     [(ngModel)]="globalFilter.global"
-                                    value="true"
-                                    (change)="setActiveTab('daily', $event)"
-                                    name="recurring-interval"
+                                    [value]="true"
+                                    name="global-filter"
+                                    id="global-filter-2"
                                 >
                                 <span class="radio-mark"></span>
                             </label>
@@ -61,7 +67,7 @@
             </button>
             <button
                 class="btn-new btn-primary"
-                (click)=approveConfirm()
+                (click)=save()
             >
                 Save
             </button>

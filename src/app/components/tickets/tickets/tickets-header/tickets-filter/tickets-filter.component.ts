@@ -23,6 +23,8 @@ import { TicketGlobalFilter } from '../../class/ticket-global-filter';
 import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 import { CompanyTag } from 'src/app/components/companies/company-tags/class/company-tag';
 import { User } from 'src/app/components/users/class/user';
+import { TicketsFilterSaveComponent } from '../tickets-filter-save/tickets-filter-save.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-tickets-filter',
@@ -36,6 +38,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   @ViewChild('statusDp') statusDp: DropDownComponent;
   @ViewChild('tagsDp') tagsDp: TicketsFilterTagsComponent;
   public ticketsFilter: TicketsFilter = new TicketsFilter();
+  globalFilter: TicketGlobalFilter = new TicketGlobalFilter();
   listType: string = "USERS";
   public selectedCompany: Company = null;
   selectedTechUser: string = null;
@@ -58,8 +61,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     private companiesState: CompaniesStateService,
     private ticketsService: TicketsService,
     private usersStateService: UsersStateService,
-    private companiesService: CompaniesService,
-    private elRef: ElementRef,
+    private modalService: NgbModal,
     public cd: ChangeDetectorRef,
     public appService: AppService,
     private customerPortalStateService: CustomerPortalStateService,
@@ -119,11 +121,12 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.sub.add(onGetTicketsStatus);
     this.ticketsStateService.onInitGlobalFilter.subscribe((data: TicketGlobalFilter) => {
       console.log("data", data);
-
+      this.globalFilter = data;
       this.selectedCompany = this.companiesState.getCompanies().find(item => item.id == data.clientCompanyId);
-      this.companyDp.selectItemWithOutChanges(this.companiesState.getCompanies().find(item => item.id == data.clientCompanyId));
-      this.ticketsFilter.setCompany(this.companiesState.getCompanies().find(item => item.id == data.clientCompanyId));
-
+      if (this.selectedCompany) {
+        this.companyDp.selectItemWithOutChanges(this.companiesState.getCompanies().find(item => item.id == data.clientCompanyId));
+        this.ticketsFilter.setCompany(this.companiesState.getCompanies().find(item => item.id == data.clientCompanyId));
+      }
 
       let createdUser: User = this.usersStateService.getAllUsers().find(item => data.createdUserId == item.id);
       if (createdUser) {
@@ -137,9 +140,24 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
         this.techUsersDp.selectItemWithOutChanges(this.selectedTechUser);
         this.ticketsFilter.setTechUser(techUser);
       }
+      let status = this.ticketsStatus.find(item => item.id == data.statusId);
+      if (status) {
+        this.statusDp.selectItemWithOutChanges(status);
+        this.ticketsFilter.setStatus(status.name);
+        let findStatus = this.listsStatus.find(status => status.title === status.title);
+        if (findStatus) {
+          this.ticketsFilter.setCustomStatus(false);
+          this.setTypeFilterWithoutChange(findStatus.status);
+        } else {
+          this.ticketsFilter.setCustomStatus(true);
+          this.setTypeFilterWithoutChange("OPEN");
+        }
+      }
       let tags = this.tagsStateService.getTags().filter(item => data.tagIds.some(tagId => tagId == item.id)).map(item => new CompanyTag(item));
-      this.tagsDp.selectedTag = tags;
-      this.ticketsFilter.setTags(tags);
+      if (tags.length > 0) {
+        this.tagsDp.selectedTag = tags;
+        this.ticketsFilter.setTags(tags);
+      }
 
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
       this.getCount();
@@ -209,7 +227,10 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   close() {
     this.onClose.emit(null);
   }
-
+  saveFilter() {
+    const modalRef = this.modalService.open(TicketsFilterSaveComponent, { windowClass: 'xs-modal user-modal', container: "app-tickets", backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.globalFilter = this.globalFilter;
+  }
   public setTypeFilterWithoutChange(type) {
     this.listType = type;
     this.ticketsFilter.setListType(type);
@@ -247,7 +268,9 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     if (!item) {
       this.ticketsFilter.setCompany(null);
       this.users = [];
+      this.globalFilter.setClientCompanyId(null);
     } else {
+      this.globalFilter.setClientCompanyId(item.id);
       this.ticketsFilter.setCompany(item);
       this.selectedCompany = null;
       this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === item.id)));
@@ -266,13 +289,17 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
 
     if (!item) {
       this.ticketsFilter.setTechUser(null);
+      this.globalFilter.setAssignedUsersIds([]);
     } else {
       this.selectedTechUser = null;
 
       //  this.filter.setCompany(item.id);
       //  this.usersStateService.onInitFilter(this.filter);
       let indexTechUser = this.techUsersList.findIndex(user => `${user.firstName} ${user.lastName}` === item);
-      if (indexTechUser > -1) this.ticketsFilter.setTechUser(this.techUsersList[indexTechUser]);
+      if (indexTechUser > -1) {
+        this.ticketsFilter.setTechUser(this.techUsersList[indexTechUser]);
+        this.globalFilter.setAssignedUsersIds([this.techUsersList[indexTechUser].id]);
+      }
 
     }
     if (!this.appService.checkMobile()) {
@@ -288,8 +315,10 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       this.setTypeFilter("ALL");
       this.ticketsFilter.setStatus(null);
       this.ticketsFilter.setCustomStatus(false);
+      this.globalFilter.setStatusId(null);
     } else {
       this.ticketsFilter.setStatus(item.name);
+      this.globalFilter.setStatusId(item.id);
       let findStatus = this.listsStatus.find(status => status.title === item.title);
       if (findStatus) {
         this.ticketsFilter.setCustomStatus(false);
@@ -307,13 +336,17 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
 
     if (!item) {
       this.ticketsFilter.setUser(null);
+      this.globalFilter.setCreatedUserId(null);
     } else {
       this.selectedUser = null;
 
       //  this.filter.setCompany(item.id);
       //  this.usersStateService.onInitFilter(this.filter);
       let indexhUser = this.users.findIndex(user => `${user.firstName} ${user.lastName}` === item);
-      if (indexhUser > -1) this.ticketsFilter.setUser(this.users[indexhUser]);
+      if (indexhUser > -1) {
+        this.ticketsFilter.setUser(this.users[indexhUser]);
+        this.globalFilter.setCreatedUserId(this.users[indexhUser].id);
+      }
 
     }
 
@@ -328,6 +361,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   onChangeTags(tags) {
     //   this.ticketsStateService.onChangeTagsFilter(tags);
     this.ticketsFilter.setTags(tags);
+    this.globalFilter.setTagIds(tags.map(item => (item.id)));
     if (!this.appService.checkMobile()) {
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
       this.getCount();

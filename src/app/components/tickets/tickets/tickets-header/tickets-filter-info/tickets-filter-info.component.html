@@ -1,5 +1,5 @@
 <div>
-    <h3>All tickets</h3>
+    <h3 [textContent]="title"></h3>
     <span
         *ngIf="globalFilter"
         [textContent]="globalFilter.name"
@@ -7,9 +7,15 @@
     <div
         class="icon__edit-gray-dark qt-sz-20 qt-bg-contain pointer"
         (click)="editFilter()"
+        container="body"
+        placement="top"
+        ngbTooltip="Edit"
     ></div>
     <div
         class="icon__remove qt-sz-20 qt-bg-contain pointer"
         (click)="removeFilter()"
+        container="body"
+        placement="top"
+        ngbTooltip="Delete"
     ></div>
 </div>

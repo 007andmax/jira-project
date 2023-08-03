@@ -30,6 +30,7 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   count = 0;
   toggleFilter: boolean = true;
+  toggleInfoFilter: boolean = false;
   countFilter: number = 0;
   selectedListType: TitleListType = new TitleListType('My Tickets', 'USERS');
   constructor(private ticketsStateService: TicketsStateService,
@@ -64,6 +65,9 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
       this.onSetCount();
     }
     /* END */
+    this.ticketsStateService.onInitGlobalFilter.subscribe((data) => {
+      this.toggleInfoFilter = true;
+    })
   }
 
   toggleMobileLeftPanel() {

@@ -121,7 +121,7 @@ import { PermissionNoSuperAdminService } from './services/users/permission-no-su
 import { PermissionClientUserService } from './services/users/permission-client-user.service';
 import { UsersCheckUseComponent } from './components/users/users-check-use/users-check-use.component';
 import { PermissionMyProfileService } from './components/setting/my-profile/permission-my-profile.service';
-import { TicketsFilterEditComponent } from './components/tickets/tickets/tickets-header/tickets-filter-edit/tickets-filter-edit.component';
+import { TicketsFilterSaveComponent } from './components/tickets/tickets/tickets-header/tickets-filter-save/tickets-filter-save.component';
 declare var $: any;
 
 /**
@@ -150,7 +150,7 @@ declare var $: any;
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
     CannedResponsesAsideComponent,
-    TicketsFilterEditComponent
+    TicketsFilterSaveComponent
   ],
   imports: [
     BrowserModule,
@@ -223,7 +223,7 @@ declare var $: any;
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
     UsersCheckUseComponent,
-    TicketsFilterEditComponent
+    TicketsFilterSaveComponent
   ],
   providers: [
     {
