@@ -126,6 +126,10 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       if (this.selectedCompany) {
         this.companyDp.selectItemWithOutChanges(this.companiesState.getCompanies().find(item => item.id == data.clientCompanyId));
         this.ticketsFilter.setCompany(this.companiesState.getCompanies().find(item => item.id == data.clientCompanyId));
+      } else {
+        this.selectedCompany = null;
+        this.ticketsFilter.setCompany(null);
+        this.users = [];
       }
 
       let createdUser: User = this.usersStateService.getAllUsers().find(item => data.createdUserId == item.id);
@@ -133,12 +137,18 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
         this.selectedUser = `${createdUser.firstName} ${createdUser.lastName}`;
         this.usersDp.selectItemWithOutChanges(this.selectedUser);
         this.ticketsFilter.setUser(createdUser);
+      } else {
+        this.ticketsFilter.setUser(null);
+        this.selectedUser = null;
       }
       let techUser: User = this.usersStateService.getAllUsers().find(item => data.assignedUsersIds.some(userId => userId == item.id));
       if (techUser) {
         this.selectedTechUser = `${techUser.firstName} ${techUser.lastName}`;
         this.techUsersDp.selectItemWithOutChanges(this.selectedTechUser);
         this.ticketsFilter.setTechUser(techUser);
+      } else {
+        this.ticketsFilter.setTechUser(null);
+        this.selectedTechUser = null;
       }
       let status = this.ticketsStatus.find(item => item.id == data.statusId);
       if (status) {
@@ -152,11 +162,17 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
           this.ticketsFilter.setCustomStatus(true);
           this.setTypeFilterWithoutChange("OPEN");
         }
+      } else {
+        this.setTypeFilterWithoutChange("ALL");
+        this.ticketsFilter.setStatus(null);
+        this.ticketsFilter.setCustomStatus(false);
       }
       let tags = this.tagsStateService.getTags().filter(item => data.tagIds.some(tagId => tagId == item.id)).map(item => new CompanyTag(item));
       if (tags.length > 0) {
         this.tagsDp.selectedTag = tags;
         this.ticketsFilter.setTags(tags);
+      } else {
+        this.tagsDp.clearWithOutChanges();
       }
 
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
