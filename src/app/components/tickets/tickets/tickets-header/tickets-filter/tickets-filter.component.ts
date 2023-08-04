@@ -119,7 +119,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       this.ticketsStatus = data.map(item => new TicketStatusFilter(item));
     })
     this.sub.add(onGetTicketsStatus);
-    this.ticketsStateService.onInitGlobalFilter.subscribe((data: TicketGlobalFilter) => {
+    let onInitGlobalFilter = this.ticketsStateService.onInitGlobalFilter.subscribe((data: TicketGlobalFilter) => {
       console.log("data", data);
       this.globalFilter = data;
       this.selectedCompany = this.companiesState.getCompanies().find(item => item.id == data.clientCompanyId);
@@ -163,6 +163,14 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       this.getCount();
       this.onChangeCounterFilter();
     })
+    this.sub.add(onInitGlobalFilter);
+    let onGetGlobalFilters = this.ticketsStateService.onGetGlobalFilters.subscribe(data => {
+      if (!data.find(item => item.id == this.globalFilter.id)) {
+        this.globalFilter = new TicketGlobalFilter();
+        this.onClearAll();
+      }
+    })
+    this.sub.add(onGetGlobalFilters);
   }
   private checkCompanyCustomerUser() {
     this.ticketsFilter = this.customerPortalStateService.getTicketsFilter();
@@ -278,12 +286,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       //  this.usersStateService.onInitFilter(this.filter);
 
     }
-
-    if (!this.appService.checkMobile()) {
-      this.ticketsStateService.onInitFilter(this.ticketsFilter);
-      this.getCount();
-      this.onChangeCounterFilter();
-    }
   }
   public onSelectTechUser(item) {
 
@@ -300,19 +302,12 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
         this.ticketsFilter.setTechUser(this.techUsersList[indexTechUser]);
         this.globalFilter.setAssignedUsersIds([this.techUsersList[indexTechUser].id]);
       }
-
     }
-    if (!this.appService.checkMobile()) {
-      this.ticketsStateService.onInitFilter(this.ticketsFilter);
-      this.getCount();
-      this.onChangeCounterFilter();
-    }
-
   }
 
   public onSelectStatus(item) {
     if (!item) {
-      this.setTypeFilter("ALL");
+      this.setTypeFilterWithoutChange("ALL");
       this.ticketsFilter.setStatus(null);
       this.ticketsFilter.setCustomStatus(false);
       this.globalFilter.setStatusId(null);
@@ -322,15 +317,12 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       let findStatus = this.listsStatus.find(status => status.title === item.title);
       if (findStatus) {
         this.ticketsFilter.setCustomStatus(false);
-        this.setTypeFilter(findStatus.status);
+        this.setTypeFilterWithoutChange(findStatus.status);
       } else {
         this.ticketsFilter.setCustomStatus(true);
-        this.setTypeFilter("OPEN");
+        this.setTypeFilterWithoutChange("OPEN");
       }
-
     }
-    this.onChangeCounterFilter();
-    this.ticketsStateService.onChangeLeftPanelFilter(this.listType);
   }
   public onSelectUser(item) {
 
@@ -347,27 +339,14 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
         this.ticketsFilter.setUser(this.users[indexhUser]);
         this.globalFilter.setCreatedUserId(this.users[indexhUser].id);
       }
-
-    }
-
-    if (!this.blockFilterUser && !this.appService.checkMobile()) {
-      this.ticketsStateService.onInitFilter(this.ticketsFilter);
-      this.getCount();
     }
     this.blockFilterUser = false;
-    if (!this.appService.checkMobile()) this.onChangeCounterFilter();
   }
 
   onChangeTags(tags) {
     //   this.ticketsStateService.onChangeTagsFilter(tags);
     this.ticketsFilter.setTags(tags);
     this.globalFilter.setTagIds(tags.map(item => (item.id)));
-    if (!this.appService.checkMobile()) {
-      this.ticketsStateService.onInitFilter(this.ticketsFilter);
-      this.getCount();
-      this.onChangeCounterFilter();
-    }
-
   }
 
   applyFilters() {

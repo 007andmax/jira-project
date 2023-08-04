@@ -119,10 +119,12 @@
     >
         <li
             [ngClass]="{'--active': false}"
-            class="desktop-version"
-            (click)="setGlobalFilter(filter)"
+            class="desktop-version filter-item"
         >
-            <div [textContent]="filter.name"></div>
+            <div
+                [textContent]="filter.name"
+                (click)="setGlobalFilter(filter)"
+            ></div>
             <i
                 class="icon__globe qt-bg-contain qt-sz-14 pointer qt-ml-auto"
                 container="body"
@@ -130,6 +132,31 @@
                 ngbTooltip="Global Filter"
                 *ngIf="filter.global"
             ></i>
+            <div
+                class="qt-ml-auto"
+                ngbDropdown
+                [placement]="'bottom-right'"
+            >
+                <div
+                    class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain actions-filter"
+                    id="dropdownBasic1"
+                    ngbDropdownToggle
+                ></div>
+                <ul
+                    class="qt-dropdown-menu"
+                    ngbDropdownMenu
+                    aria-labelledby="dropdownBasic1"
+                >
+                    <li
+                        class="pointer"
+                        (click)="removeFilter(filter)"
+                        ngbDropdownItem
+                    >
+                        <div class="icon__remove qt-sz-20 qt-bg-contain pointer"></div>
+                        Delete
+                    </li>
+                </ul>
+            </div>
         </li>
     </ng-template>
 </ul>

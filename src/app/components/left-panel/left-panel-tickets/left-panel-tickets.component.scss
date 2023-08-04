@@ -128,3 +128,13 @@
 .category-name {
   color: $white;
 }
+.actions-filter {
+  display: none;
+}
+.filter-item {
+  &:hover {
+    .actions-filter {
+      display: block;
+    }
+  }
+}

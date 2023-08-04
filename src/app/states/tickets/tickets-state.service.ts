@@ -37,10 +37,12 @@ export class TicketsStateService {
   tagsFilter: EventEmitter<any> = new EventEmitter();
   onGetTicketsStatus: EventEmitter<any> = new EventEmitter();
   onInitGlobalFilter: EventEmitter<any> = new EventEmitter();
+  onGetGlobalFilters: EventEmitter<any> = new EventEmitter();
   leftPanelFilter: EventEmitter<any> = new EventEmitter();
   ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET'];
   listStatusColor: Array<StatusColor> = [];
   ticketsStatus: Array<TicketStatus> = [];
+  globalFilters: Array<TicketGlobalFilter> = [];
   ticketsFilter: TicketsFilter = new TicketsFilter();
   globalFilterForRemove: TicketGlobalFilter = null;
   constructor(private ticketsRealTimeService: TicketsRealTimeService,
@@ -93,6 +95,29 @@ export class TicketsStateService {
       this.ticketsStatus = data.map(item => new TicketStatus(item));
       this.onGetTicketsStatus.emit(this.ticketsStatus);
     })
+    this.ticketsRealTimeService.changeTicketFilters.subscribe(newChange => {
+      if (newChange.action === 'TICKET_FILTER_SAVED') {
+        this.globalFilters.push(new TicketGlobalFilter(newChange.data))
+        this.onGetGlobalFilters.emit(this.globalFilters);
+      }
+      if (newChange.action === 'TICKET_FILTER_EDITED') {
+        let index = this.globalFilters.findIndex(item => item.id === newChange.data.id);
+        if (index > -1) this.globalFilters[index] = new TicketGlobalFilter(newChange.data);
+        this.onGetGlobalFilters.emit(this.globalFilters);
+      }
+      if (newChange.action === 'TICKET_FILTER_REMOVED') {
+        let index = this.globalFilters.findIndex(item => item.id === newChange.data);
+        this.globalFilters.splice(index, 1);
+        this.onGetGlobalFilters.emit(this.globalFilters);
+      }
+    })
+  }
+  public getGlobalFilters() {
+    return this.globalFilters;
+  }
+  public setGlobalFilters(data) {
+    this.globalFilters = data;
+    this.onGetGlobalFilters.emit(this.globalFilters);
   }
   public setGlobalFilterForRemove(data) {
     this.globalFilterForRemove = data;

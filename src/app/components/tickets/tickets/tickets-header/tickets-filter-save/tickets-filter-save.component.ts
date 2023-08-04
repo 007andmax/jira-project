@@ -12,12 +12,14 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 export class TicketsFilterSaveComponent implements OnInit {
 
   @Input() globalFilter: TicketGlobalFilter;
+  oldName: string;
   constructor(public activeModal: NgbActiveModal,
     private confirmStateService: ConfirmStateService,
     private ticketsService: TicketsService,) { }
 
   ngOnInit() {
     console.log("globalFilter", this.globalFilter);
+    this.oldName = JSON.parse(JSON.stringify(this.globalFilter.name));
   }
   cancelConfirm() {
     this.activeModal.close();
@@ -30,11 +32,16 @@ export class TicketsFilterSaveComponent implements OnInit {
         this.cancelConfirm();
       })
     } else {
-      this.ticketsService.editGlobalFilter(this.globalFilter.id, this.globalFilter.getDataForRequest()).subscribe(data => {
-        this.cancelConfirm();
-      })
+      if (this.oldName !== this.globalFilter.name) {
+        this.ticketsService.addGlobalFilter(this.globalFilter.getDataForRequest()).subscribe(data => {
+          this.cancelConfirm();
+        })
+      } else {
+        this.ticketsService.editGlobalFilter(this.globalFilter.id, this.globalFilter.getDataForRequest()).subscribe(data => {
+          this.cancelConfirm();
+        })
+      }
     }
-
   }
 
 }

@@ -15,6 +15,7 @@ import { DELETE_GLOBAL_FILTER } from 'src/app/const/confirm';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { Subscription } from 'rxjs';
+import { TicketsFilterSaveComponent } from '../../tickets/tickets/tickets-header/tickets-filter-save/tickets-filter-save.component';
 
 @Component({
   selector: 'app-left-panel-tickets',
@@ -30,6 +31,7 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
   ticketsCounts: TicketsCounts;
   globalFilters: Array<TicketGlobalFilter> = [];
   sub: Subscription = new Subscription();
+  isGetGlobalFilters: boolean = false;
   @Input() activePage: string = "";
   @Output() onChangeState = new EventEmitter();
   @Output() onOpenPanel = new EventEmitter();
@@ -39,6 +41,8 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
     private leftPanelStateService: LeftPanelStateService,
     public customerPortalStateService: CustomerPortalStateService,
     private usersStateService: UsersStateService,
+    private modalService: NgbModal,
+    private confirmStateService: ConfirmStateService,
     private leftPanelService: LeftPanelService) { }
 
 
@@ -75,13 +79,36 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
     })
     this.leftPanelStateService.onChangeState.subscribe(state => {
       if (!this.leftPanelService.isTicketsPage(state)) this.open = false
+      if (this.leftPanelService.isTicketsPage(state) && !this.isGetGlobalFilters) this.getGLobalFilters();
     })
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
-      if (this.leftPanelService.isTicketsPage(data)) this.open = true;
+      if (this.leftPanelService.isTicketsPage(data)) {
+        this.open = true;
+        if (!this.isGetGlobalFilters) this.getGLobalFilters();
+      }
     })
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === DELETE_GLOBAL_FILTER) this.onDeleteGlobalFilter(this.ticketsStateService.getGlobalFilterForRemove());
+      }
+    })
+    this.sub.add(getConfirm);
+    let onGetGlobalFilters = this.ticketsStateService.onGetGlobalFilters.subscribe(data => {
+      this.globalFilters = data;
+    })
+    this.sub.add(onGetGlobalFilters);
+  }
+  private getGLobalFilters() {
+    this.isGetGlobalFilters = true;
     this.ticketsService.getFilters().subscribe((data: any) => {
       this.globalFilters = data.ticketFilteringDtos.map(item => new TicketGlobalFilter(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+      this.ticketsStateService.setGlobalFilters(this.globalFilters);
+    })
+  }
+  public onDeleteGlobalFilter(filter) {
+    this.ticketsService.deleteGlobalFilter(filter.id).subscribe(data => {
+
     })
   }
   public close() {
@@ -138,6 +165,11 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
   }
   public trackByIndex(index, item) {
     return index;
+  }
+  removeFilter(filter) {
+    this.confirmStateService.setConfirmAction(DELETE_GLOBAL_FILTER);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    this.ticketsStateService.setGlobalFilterForRemove(filter);
   }
   ngOnDestroy(): void {
     /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
