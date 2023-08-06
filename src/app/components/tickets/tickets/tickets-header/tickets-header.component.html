@@ -31,18 +31,29 @@
                 >
                     Clear all
                 </button>
+                <!--  TODO Check Mobile Style -->
+<!--                <button-->
+<!--                    class="qt-btn filter-button qt-mr-8 qt-df"-->
+<!--                    [ngClass]="{'active':toggleFilter,-->
+<!--                'is-exist-filters':isExistFilters()}"-->
+<!--                    (click)="onToggleFilter(!toggleFilter)"-->
+<!--                >-->
+<!--                    <span [textContent]="getTextCountFilters()"></span>-->
+<!--                </button>-->
                 <button
-                    class="qt-btn filter-button qt-mr-8 qt-df"
-                    [ngClass]="{'active':toggleFilter,
-                'is-exist-filters':isExistFilters()}"
-                    (click)="onToggleFilter(!toggleFilter)"
+                  class="qt-button --gray --md filter-button qt-mr-8 qt-df"
+                  [ngClass]="{'active':toggleFilter,
+                  'is-exist-filters':isExistFilters()}"
+                  (click)="onToggleFilter(!toggleFilter)"
                 >
-                    <span [textContent]="getTextCountFilters()"></span>
+                  <span class="icon__filter qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
+                  <span [textContent]="getTextCountFilters()"></span>
                 </button>
                 <button
-                    class="qt-btn --outline-blue qt-d-md-none"
+                    class="qt-button --md qt-d-md-none"
                     (click)="onAddTicket()"
                 >
+                    <span class="icon__add--white qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
                     Add ticket
                 </button>
                 <div class="icon__search-white qt-sz-24 qt-bg-contain qt-ml-6 pointer"></div>

@@ -1,7 +1,7 @@
 @import "./src/assets/styles/variable";
 
 .left-panel-ng2__content--filters {
-  display: flex;
+  //display: flex; // TODO check this style
   app-select-search {
     margin-right: 8px;
     &:last-child {
@@ -20,15 +20,15 @@
     }
 
     &::before {
-      color: $gray-900;
-      font-weight: 600;
-      line-height: 20px;
+      color: $gray-500;
+      font-size: 13px;
+      font-weight: 500;
     }
   }
 
   .search-company {
-    width: 34%;
-    margin-right: 8px;
+    //width: 34%;
+    //margin-right: 8px;  // TODO check this style
     @media (max-width: 767px) {
       width: 100%;
     }
@@ -41,8 +41,8 @@
   }
 
   .search-users {
-    width: 23%;
-    margin-right: 8px;
+    //width: 23%;
+    //margin-right: 8px; // TODO check this style
 
     @media (max-width: 767px) {
       width: 100%;
@@ -56,8 +56,8 @@
   }
 
   .search-tech-users {
-    width: 23%;
-    margin-right: 8px;
+    //width: 23%;
+    //margin-right: 8px;  // TODO check this style
 
     @media (max-width: 767px) {
       width: 100%;
@@ -71,8 +71,8 @@
   }
 
   .search-status {
-    width: 20%;
-    margin-right: 8px;
+    //width: 20%;
+    //margin-right: 8px;  // TODO check this style
 
     @media (max-width: 767px) {
       width: 100%;
@@ -111,4 +111,11 @@
     overflow-x: hidden;
     overflow-y: auto;
   }
+}
+
+/deep/ .qt-page-list__header-title {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: $gray-900;
 }
