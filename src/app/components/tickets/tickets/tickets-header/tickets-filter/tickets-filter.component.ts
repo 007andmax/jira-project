@@ -254,6 +254,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   saveFilter() {
     const modalRef = this.modalService.open(TicketsFilterSaveComponent, { windowClass: 'xs-modal user-modal', container: "app-tickets", backdrop: 'static', keyboard: false });
     modalRef.componentInstance.globalFilter = this.globalFilter;
+    this.cd.detectChanges();
   }
   public setTypeFilterWithoutChange(type) {
     this.listType = type;

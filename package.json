@@ -39,7 +39,7 @@
     "@types/hammerjs": "^2.0.36",
     "@types/jquery": "^3.3.33",
     "angular-datatables": "^8.0.0",
-    "angular-froala-wysiwyg": "^4.0.2",
+    "angular-froala-wysiwyg": "4.0.2",
     "bootstrap": "^4.4.1",
     "canvg": "^3.0.6",
     "core-js": "^2.5.4",
@@ -94,7 +94,7 @@
     "ts-loader": "^5.3.3",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
-    "typescript": "~3.1.1"
+    "typescript": "3.1.8"
   },
   "browser": {
     "crypto": false

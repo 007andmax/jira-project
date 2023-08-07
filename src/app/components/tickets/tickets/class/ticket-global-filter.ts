@@ -1,7 +1,7 @@
 export class TicketGlobalFilter {
     "id": string;
     "statusId": string;
-    "name": string;
+    "name": string = "";
     "global": boolean = false;
     "clientCompanyId": string;
     "createdUserId": string;

@@ -118,7 +118,7 @@
         [ngForTrackBy]="trackById"
     >
         <li
-            [ngClass]="{'--active': false}"
+            [ngClass]="{'--active': selectedGlobalFilter.id == filter.id}"
             class="desktop-version filter-item"
         >
             <div

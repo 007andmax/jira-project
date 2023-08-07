@@ -29,6 +29,7 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
   listType: string;
   blockFilterUser: boolean = false;
   ticketsCounts: TicketsCounts;
+  selectedGlobalFilter: TicketGlobalFilter = new TicketGlobalFilter();
   globalFilters: Array<TicketGlobalFilter> = [];
   sub: Subscription = new Subscription();
   isGetGlobalFilters: boolean = false;
@@ -115,6 +116,7 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
     this.open = false;
   }
   setGlobalFilter(filter) {
+    this.selectedGlobalFilter = filter;
     this.ticketsStateService.onChangeGlobalFilter(filter);
   }
   openPanel() {

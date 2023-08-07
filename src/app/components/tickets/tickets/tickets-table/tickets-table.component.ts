@@ -37,6 +37,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
   showPendingPreloader: boolean = false;
   idEditTicket: string = '';
   ticketsStatus: Array<TicketStatus> = [];
+  toggleFilter: boolean = false;
   container = document.body.querySelector(".main-container");
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
@@ -133,6 +134,13 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       this.ticketsStatus = data;
     })
     this.sub.add(onGetTicketsStatus);
+    let onToggleFilter = this.ticketsStateService.onToggleFilter.subscribe(data => {
+      this.toggleFilter = data;
+    })
+    this.sub.add(onToggleFilter);
+  }
+  onToggleFilter(data) {
+    this.ticketsStateService.changeToggleFilter(data);
   }
 
   editTicket(id) {
