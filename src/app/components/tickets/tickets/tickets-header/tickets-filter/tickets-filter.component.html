@@ -15,7 +15,7 @@
                 [ngForOf]="ticketsStatus"
                 [ngForTrackBy]="trackById"
             >
-                <div class="qt-df">
+                <div class="qt-df content-filters-checkbox">
                     <label
                         class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
                         [attr.for]="'status-' + status.id"
@@ -33,7 +33,7 @@
                         ></div>
                     </label>
                     <span
-                        class="qt-ml-auto"
+                        class="qt-ml-auto content-filters-checkbox__count"
                         [textContent]="status.count"
                     ></span>
                 </div>

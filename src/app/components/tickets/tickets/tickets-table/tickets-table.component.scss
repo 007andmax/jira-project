@@ -94,6 +94,31 @@ app-tickets-table-item {
       padding: 12px 16px;
       height: calc(100% - 57px);
       overflow: auto;
+
+      .qt-input-block__label {
+        font-size: 14px;
+        font-weight: 500;
+        color: $gray-700;
+        margin-top: 3px;
+        margin-bottom: 20px;
+      }
+
+      .content-filters-checkbox {
+        color: $gray-700;
+
+        &__count {
+          border-radius: 24px;
+          padding: 2px 8px;
+          background-color: $gray-100;
+          color: $gray-700;
+          font-size: 12px;
+          font-weight: 600;
+        }
+      }
+
+      .content-filters-checkbox:not(:last-child) {
+        margin-bottom: 20px;
+      }
     }
     &__footer {
       padding: 10px 16px;
