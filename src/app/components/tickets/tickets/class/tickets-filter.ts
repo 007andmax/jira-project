@@ -75,6 +75,49 @@ export class TicketsFilter {
         ticketStatus.forEach(item => {
             let status = (item.custom) ? item.title : item.title.toLocaleUpperCase().replace(" ", "_");
             data[status] = this.getFilterStatusPayload(status);
+            if (this.selectedCompany) {
+                data[status].groupFieldFilters[0].fieldFilterDtos.push({
+                    operator: "EQ",
+                    path: "company.id",
+                    values: [this.selectedCompany.id]
+                });
+                data[status].groupFieldFilters[0].predicateRule = "AND";
+            }
+            if (this.selectedTechUser) {
+                data[status].groupFieldFilters.push({
+                    fieldFilterDtos: [{
+                        operator: "EQ",
+                        path: "assignedUser.id",
+                        values: [this.selectedTechUser.id]
+                    },
+                    {
+                        path: "multiAssignedUsers.id",
+                        operator: "IN",
+                        values: [
+                            this.selectedTechUser.id
+                        ]
+                    }],
+                    predicateRule: "OR"
+                })
+            }
+            if (this.selectedUser) {
+                data[status].groupFieldFilters[0].fieldFilterDtos.push({
+                    operator: "EQ",
+                    path: "createdUser.id",
+                    values: [this.selectedUser.id]
+                });
+                data[status].groupFieldFilters[0].predicateRule = "AND";
+            }
+            if (this.tags.length > 0) {
+                data[status].groupFieldFilters[0].fieldFilterDtos.push({
+                    operator: "IN",
+                    path: "tags.id",
+                    values: this.tags.map(item => {
+                        return item.id;
+                    })
+                });
+                data[status].groupFieldFilters[0].predicateRule = "AND";
+            }
         });
         return data;
     }

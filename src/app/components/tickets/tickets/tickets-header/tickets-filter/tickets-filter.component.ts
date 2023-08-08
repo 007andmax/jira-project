@@ -354,7 +354,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
         this.setTypeFilterWithoutChange("OPEN");
       }
       this.ticketsStatus.forEach(status => {
-        if (status.id == item.id) status.selected = false;
+        if (status.id != item.id) status.selected = false;
       })
     }
   }
@@ -388,6 +388,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     if (this.listType !== 'RECURRING_TICKETS') this.getCount();
     this.onChangeCounterFilter();
     this.close();
+    this.getCountsStatus();
   }
   getTechUserList() {
     return this.techUsersList.map(item => {
