@@ -1,5 +1,6 @@
 import { Company } from 'src/app/interfaces/company/company';
 import { User } from '../../../users/class/user';
+import { TicketStatusFilter } from '../tickets-header/class/ticket-status-filter';
 
 export class TicketsFilter {
     listType: string = "USERS";
@@ -66,6 +67,15 @@ export class TicketsFilter {
         data.RECURRING_TICKETS_CLOSED["offset"] = 0;
         data.RECURRING_TICKETS_OPEN["offset"] = 0;
         data.USER["offset"] = 0;
+        return data;
+    }
+    public getDataForStatusCounts(ticketStatus: Array<TicketStatusFilter>) {
+        let data = {
+        }
+        ticketStatus.forEach(item => {
+            let status = (item.custom) ? item.title : item.title.toLocaleUpperCase().replace(" ", "_");
+            data[status] = this.getFilterStatusPayload(status);
+        });
         return data;
     }
     public setListType(type) {
@@ -323,6 +333,31 @@ export class TicketsFilter {
                     "predicateRule": "OR"
                 }
             ],
+        }
+    }
+    public getFilterStatusPayload(status) {
+        return {
+            excludeTrashSpam: true,
+            groupFieldFilters: [
+                {
+                    fieldFilterDtos: [
+                        {
+                            operator: "EQ",
+                            path: "status",
+                            values: [
+                                status
+                            ]
+                        },
+                        {
+                            path: "ticketSource",
+                            operator: "NOT_EQ",
+                            values: [
+                                "FROM_RECURRING_TICKET"
+                            ]
+                        }
+                    ]
+                }
+            ]
         }
     }
     private getCustomOpenPayLoad() {

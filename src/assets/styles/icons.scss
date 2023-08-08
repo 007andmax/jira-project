@@ -860,6 +860,17 @@
     -webkit-mask-size: contain;
     mask-size: contain;
   }
+  &__filter-lines {
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/filter-lines.svg");
+    mask-image: url("/assets/img/icons/filter-lines.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
   &__add--white {
     background-color: $white;
   }

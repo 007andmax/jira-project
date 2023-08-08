@@ -1,0 +1,8 @@
+@import "./src/assets/styles/variable";
+
+.tickets-filter-info__separator{
+    width: 1px;
+    height: 24px;
+    background-color: $gray-200;
+    margin: 0 12px;
+}

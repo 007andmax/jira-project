@@ -4,12 +4,7 @@
             class="icon__menu-white qt-sz-24 qt-bg-contain qt-ml-6 pointer"
             (click)="toggleMobileLeftPanel()"
         ></div>
-        <div class="qt-page-list__header-title-line--left">
-            <h6
-                class="qt-page-list__header-title"
-                [textContent]="title"
-            ></h6>
-        </div>
+        <tickets-filter-info [title]="title"></tickets-filter-info>
         <div class="qt-page-list__header-title-line--rigth">
             <div class="qt-df qt-ai-c">
                 <span
@@ -31,23 +26,23 @@
                 >
                     Clear all
                 </button>
-                <!--  TODO Check Mobile Style -->
-<!--                <button-->
-<!--                    class="qt-btn filter-button qt-mr-8 qt-df"-->
-<!--                    [ngClass]="{'active':toggleFilter,-->
-<!--                'is-exist-filters':isExistFilters()}"-->
-<!--                    (click)="onToggleFilter(!toggleFilter)"-->
-<!--                >-->
-<!--                    <span [textContent]="getTextCountFilters()"></span>-->
-<!--                </button>-->
+                <!-- TODO Check Mobile Style -->
+                <!-- <button -->
+                <!-- class="qt-btn filter-button qt-mr-8 qt-df" -->
+                <!-- [ngClass]="{'active':toggleFilter, -->
+                <!-- 'is-exist-filters':isExistFilters()}" -->
+                <!-- (click)="onToggleFilter(!toggleFilter)" -->
+                <!-- > -->
+                <!-- <span [textContent]="getTextCountFilters()"></span> -->
+                <!-- </button> -->
                 <button
-                  class="qt-button --gray --md filter-button qt-mr-8 qt-df"
-                  [ngClass]="{'active':toggleFilter,
+                    class="qt-button --gray --md filter-button qt-mr-8 qt-df"
+                    [ngClass]="{'active':toggleFilter,
                   'is-exist-filters':isExistFilters()}"
-                  (click)="onToggleFilter(!toggleFilter)"
+                    (click)="onToggleFilter(!toggleFilter)"
                 >
-                  <span class="icon__filter qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
-                  <span [textContent]="getTextCountFilters()"></span>
+                    <span class="icon__filter qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
+                    <span [textContent]="getTextCountFilters()"></span>
                 </button>
                 <button
                     class="qt-button --md qt-d-md-none"
@@ -62,6 +57,7 @@
     </div>
     <div class="qt-page-list__header-filters">
         <app-tickets-filter
+            *ngIf="appService.checkMobile()"
             class="qt-w100"
             #filter
             (changeCountFilter)="onChangeCountFilter($event)"
@@ -69,18 +65,18 @@
             (onClose)="onToggleFilter(false)"
         ></app-tickets-filter>
     </div>
-<!--    <div class="qt-page-list__header-thead-container">-->
-<!--        <div class="qt-table-modern qt-page-list__header-thead">-->
-<!--            <div class="qt-page-list__header-thead__row">-->
-<!--                <div class="ticket-table__requested-by">Requested By</div>-->
-<!--                <div class="ticket-table__subject">Subject</div>-->
-<!--                <div class="ticket-table__company">Company</div>-->
-<!--                <div class="ticket-table__assignee">Assignee</div>-->
-<!--                <div class="ticket-table__status">Status</div>-->
-<!--                <div class="ticket-table__created-date">Created Date</div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
+    <!-- <div class="qt-page-list__header-thead-container"> -->
+    <!-- <div class="qt-table-modern qt-page-list__header-thead"> -->
+    <!-- <div class="qt-page-list__header-thead__row"> -->
+    <!-- <div class="ticket-table__requested-by">Requested By</div> -->
+    <!-- <div class="ticket-table__subject">Subject</div> -->
+    <!-- <div class="ticket-table__company">Company</div> -->
+    <!-- <div class="ticket-table__assignee">Assignee</div> -->
+    <!-- <div class="ticket-table__status">Status</div> -->
+    <!-- <div class="ticket-table__created-date">Created Date</div> -->
+    <!-- </div> -->
+    <!-- </div> -->
+    <!-- </div> -->
 </div>
 <div
     class="list-filters"

@@ -115,12 +115,14 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnUpdateCounts);
     this.ticketsStatus = this.ticketsStateService.getTicketsStatus().map(item => new TicketStatusFilter(item));
+    if (this.ticketsStatus.length > 0) this.getCountsStatus();
     let onGetTicketsStatus = this.ticketsStateService.onGetTicketsStatus.subscribe(data => {
       this.ticketsStatus = data.map(item => new TicketStatusFilter(item));
+      this.getCountsStatus();
     })
     this.sub.add(onGetTicketsStatus);
     let onInitGlobalFilter = this.ticketsStateService.onInitGlobalFilter.subscribe((data: TicketGlobalFilter) => {
-      console.log("data", data);
+      console.log("onInitGlobalFilter", data);
       this.globalFilter = data;
       this.selectedCompany = this.companiesState.getCompanies().find(item => item.id == data.clientCompanyId);
       if (this.selectedCompany) {
@@ -187,6 +189,15 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(onGetGlobalFilters);
+  }
+  private getCountsStatus() {
+    this.ticketsService.getCounts(this.ticketsFilter.getDataForStatusCounts(this.ticketsStatus)).subscribe(counts => {
+      console.log("counts", counts);
+      for (const key in counts) {
+        let index = this.ticketsStatus.findIndex(item => item.name == key);
+        if (index > -1) this.ticketsStatus[index].setCount(counts[key])
+      }
+    })
   }
   private checkCompanyCustomerUser() {
     this.ticketsFilter = this.customerPortalStateService.getTicketsFilter();
@@ -322,13 +333,16 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     }
   }
 
-  public onSelectStatus(item) {
-    if (!item) {
+  public onSelectStatus(item, event) {
+    console.log("onSelectStatus", item);
+    if (!event.target.checked) {
+      item.selected = false;
       this.setTypeFilterWithoutChange("ALL");
       this.ticketsFilter.setStatus(null);
       this.ticketsFilter.setCustomStatus(false);
       this.globalFilter.setStatusId(null);
     } else {
+      item.selected = true;
       this.ticketsFilter.setStatus(item.name);
       this.globalFilter.setStatusId(item.id);
       let findStatus = this.listsStatus.find(status => status.title === item.title);
@@ -339,6 +353,9 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
         this.ticketsFilter.setCustomStatus(true);
         this.setTypeFilterWithoutChange("OPEN");
       }
+      this.ticketsStatus.forEach(status => {
+        if (status.id == item.id) status.selected = false;
+      })
     }
   }
   public onSelectUser(item) {

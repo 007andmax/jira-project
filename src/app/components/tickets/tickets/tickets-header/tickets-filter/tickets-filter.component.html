@@ -6,6 +6,40 @@
         ></div>
         <div class="content-filters-header__title pointer">Filters</div>
     </div>
+    <div class="qt-inputs-row --required">
+        <div class="qt-input-block">
+            <label class="qt-input-block__label">Status</label>
+            <ng-template
+                ngFor
+                let-status
+                [ngForOf]="ticketsStatus"
+                [ngForTrackBy]="trackById"
+            >
+                <div class="qt-df">
+                    <label
+                        class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
+                        [attr.for]="'status-' + status.id"
+                    >
+                        <input
+                            [attr.id]="'status-' + status.id"
+                            type="checkbox"
+                            [(ngModel)]="status.selected"
+                            (change)="onSelectStatus(status,$event)"
+                        >
+                        <span></span>
+                        <div
+                            class="qt-ml-8"
+                            [textContent]="status.title"
+                        ></div>
+                    </label>
+                    <span
+                        class="qt-ml-auto"
+                        [textContent]="status.count"
+                    ></span>
+                </div>
+            </ng-template>
+        </div>
+    </div>
     <company-drop-down
         class="search-company"
         #companyDp
@@ -50,36 +84,35 @@
         (tagsChange)="onChangeTags($event)"
     ></app-tickets-filter-tags>
 </div>
-
 <div class="aside-filters-content__footer">
-  <div class="qt-df">
-    <button
-      class="qt-button --gray qt-mr-12 qt-w100 qt-jc-c"
-      (click)="saveFilter()"
-    >
-      Save filter
-    </button>
-    <button
-      class="qt-button qt-w100 qt-jc-c"
-      (click)="applyFilters()"
-    >
-      Apply
-    </button>
-  </div>
-  <div class="qt-aside-modern__footer">
-    <div class="qt-df qt-w100">
-      <button
-        class="qt-button --gray qt-mr-12 qt-w100 qt-jc-c"
-        (click)="onClearAll()"
-      >
-        Clear All
-      </button>
-      <button
-        class="qt-button qt-w100 qt-jc-c"
-        (click)="applyFilters()"
-      >
-        Apply Filters
-      </button>
+    <div class="qt-df">
+        <button
+            class="qt-button --gray qt-mr-12 qt-w100 qt-jc-c"
+            (click)="saveFilter()"
+        >
+            Save filter
+        </button>
+        <button
+            class="qt-button qt-w100 qt-jc-c"
+            (click)="applyFilters()"
+        >
+            Apply
+        </button>
     </div>
-  </div>
+    <div class="qt-aside-modern__footer">
+        <div class="qt-df qt-w100">
+            <button
+                class="qt-button --gray qt-mr-12 qt-w100 qt-jc-c"
+                (click)="onClearAll()"
+            >
+                Clear All
+            </button>
+            <button
+                class="qt-button qt-w100 qt-jc-c"
+                (click)="applyFilters()"
+            >
+                Apply Filters
+            </button>
+        </div>
+    </div>
 </div>

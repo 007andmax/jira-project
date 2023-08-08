@@ -59,6 +59,7 @@
     <div
         class="aside-filters"
         [hidden]="!toggleFilter"
+        *ngIf="!appService.checkMobile()"
     >
         <div class="aside-filters-header qt-df qt-ai-c qt-jc-sb">
             <div class="aside-filters-header__title">Filters</div>
