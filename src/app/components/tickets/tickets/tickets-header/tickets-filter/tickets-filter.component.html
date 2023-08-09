@@ -7,6 +7,7 @@
         <div class="content-filters-header__title pointer">Filters</div>
     </div>
     <tickets-filter-status
+        *ngIf="ticketsStatus.length > 0"
         #filterStatus
         [ticketsStatus]="ticketsStatus"
         (onSelectStatus)="onSelectStatus($event.item, $event.event)"

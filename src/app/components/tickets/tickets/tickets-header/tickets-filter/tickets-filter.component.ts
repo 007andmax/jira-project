@@ -116,10 +116,10 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(getOnUpdateCounts);
-    this.ticketsStatus = this.ticketsStateService.getTicketsStatus().map(item => new TicketStatusFilter(item));
+    this.getTicketsStatus();
     if (this.ticketsStatus.length > 0) this.getCountsStatus();
     let onGetTicketsStatus = this.ticketsStateService.onGetTicketsStatus.subscribe(data => {
-      this.ticketsStatus = data.map(item => new TicketStatusFilter(item));
+      this.getTicketsStatus();
       this.getCountsStatus();
     })
     this.sub.add(onGetTicketsStatus);
@@ -131,6 +131,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
         this.companyDp.selectItemWithOutChanges(this.companiesState.getCompanies().find(item => item.id == data.clientCompanyId));
         this.ticketsFilter.setCompany(this.companiesState.getCompanies().find(item => item.id == data.clientCompanyId));
       } else {
+        this.companyDp.clearWithOutChanges();
         this.selectedCompany = null;
         this.ticketsFilter.setCompany(null);
         this.users = [];
@@ -142,6 +143,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
         this.usersDp.selectItemWithOutChanges(this.selectedUser);
         this.ticketsFilter.setUser(createdUser);
       } else {
+        this.usersDp.clearWithOutChanges();
         this.ticketsFilter.setUser(null);
         this.selectedUser = null;
       }
@@ -151,6 +153,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
         this.techUsersDp.selectItemWithOutChanges(this.selectedTechUser);
         this.ticketsFilter.setTechUser(techUser);
       } else {
+        this.techUsersDp.clearWithOutChanges();
         this.ticketsFilter.setTechUser(null);
         this.selectedTechUser = null;
       }
@@ -168,7 +171,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
           this.setTypeFilterWithoutChange("OPEN");
         }
       } else {
-        this.setTypeFilterWithoutChange("ALL");
         this.ticketsFilter.setStatus(null);
         this.ticketsFilter.setCustomStatus(false);
       }
@@ -177,9 +179,11 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
         this.tagsDp.selectedTag = tags;
         this.ticketsFilter.setTags(tags);
       } else {
+        this.ticketsFilter.setTags([]);
         this.tagsDp.clearWithOutChanges();
       }
-
+      this.setTypeFilterWithoutChange("ALL");
+      console.log("this.ticketsFilter 1", this.ticketsFilter);
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
       this.getCount();
       this.onChangeCounterFilter();
@@ -193,6 +197,10 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onGetGlobalFilters);
   }
+  private getTicketsStatus() {
+    this.ticketsStatus = this.ticketsStateService.getTicketsStatus().map(item => new TicketStatusFilter(item)).sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
+      1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
+  }
   private getCountsStatus() {
     this.ticketsService.getCounts(this.ticketsFilter.getDataForStatusCounts(this.ticketsStatus)).subscribe(counts => {
       console.log("counts", counts);
@@ -200,7 +208,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
         let index = this.ticketsStatus.findIndex(item => item.name == key);
         if (index > -1) this.ticketsStatus[index].setCount(counts[key])
       }
-      this.filterStatus.shortVersion = this.ticketsStatus.length > 5;
     })
   }
   private checkCompanyCustomerUser() {
@@ -388,8 +395,10 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   }
 
   applyFilters() {
+    this.setTypeFilterWithoutChange("ALL");
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
     if (this.listType !== 'RECURRING_TICKETS') this.getCount();
+    this.ticketsStateService.onChangeLeftPanelFilter("ALL");
     this.onChangeCounterFilter();
     this.close();
     this.getCountsStatus();

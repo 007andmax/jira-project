@@ -7,6 +7,7 @@ import { AppService } from 'src/app/states/app/app.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { TicketsFilter } from '../class/tickets-filter';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { TicketGlobalFilter } from '../class/ticket-global-filter';
 
 @Component({
   selector: 'app-tickets-header',
@@ -48,7 +49,8 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
       this.ticketsFilter.setFilter(data);
       this.selectedListType = this.titleListTypes.find(item => item.type === data.listType);
-      if (this.selectedListType) this.title = `${this.selectedListType.title} (${(this.count) ? this.count : 0})`
+      if (this.selectedListType) this.title = `${this.selectedListType.title} (${(this.count) ? this.count : 0})`;
+      this.onChangeCounterFilter();
     })
     this.sub.add(getOnInitFilter);
     this.ticketsStateService.getOnInitCount().subscribe(data => {
@@ -69,7 +71,13 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onToggleFilter);
   }
-
+  public onChangeCounterFilter() {
+    this.countFilter = 0;
+    if (this.ticketsFilter.selectedCompany) this.countFilter++;
+    if (this.ticketsFilter.selectedTechUser) this.countFilter++;
+    if (this.ticketsFilter.selectedUser) this.countFilter++;
+    if (this.ticketsFilter.selectedStatus) this.countFilter++;
+  }
   toggleMobileLeftPanel() {
     this.leftPanelStateService.toggleMobileLeftPanel(true);
     this.appService.toggleMobileAside(true);
@@ -94,7 +102,8 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     this.filter.applyFilters();
   }
   clearAll() {
-    this.filter.onClearAll();
+    if (this.filter) this.filter.onClearAll();
+    this.ticketsStateService.onChangeGlobalFilter(new TicketGlobalFilter());
   }
   getTextCountFilters() {
     return `Filters${(this.countFilter > 0) ? ' (' + this.countFilter + ')' : ''}`;

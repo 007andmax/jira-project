@@ -13,7 +13,7 @@ export class TicketsFilterStatusComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
+    this.shortVersion = this.ticketsStatus.length > 5;
   }
   selectStatus(item, event) {
     this.onSelectStatus.emit({ item, event })

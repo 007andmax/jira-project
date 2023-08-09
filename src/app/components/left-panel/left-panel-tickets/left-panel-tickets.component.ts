@@ -118,7 +118,9 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
   setGlobalFilter(filter) {
     console.log("setGlobalFilter", filter);
     this.selectedGlobalFilter = filter;
+    this.ticketsStateService.onChangeLeftPanelFilter("ALL");
     this.ticketsStateService.onChangeGlobalFilter(filter);
+    this.ticketsStateService.changeToggleFilter(true);
   }
   openPanel() {
     this.onOpenPanel.emit(null);
