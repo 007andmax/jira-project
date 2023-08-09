@@ -118,4 +118,8 @@
   font-weight: 600;
   letter-spacing: 0;
   color: $gray-900;
+
+  @media (max-width: 767px) {
+    color: $white;
+  }
 }

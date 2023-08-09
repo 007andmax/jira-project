@@ -335,7 +335,7 @@
       top: 100%;
     }
   }
-  &__menu-expand li {
+  &__menu-expand li:not(.dropdown-item) {
     display: flex;
     padding: 0;
     cursor: pointer;
@@ -430,6 +430,10 @@
     left: -100%;
     width: 100%;
     transition: .3s ease-in all;
+  }
+
+  hr {
+    border-top: 1px solid $gray-700;
   }
 }
 

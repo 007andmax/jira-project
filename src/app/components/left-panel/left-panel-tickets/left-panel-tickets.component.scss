@@ -129,12 +129,10 @@
   color: $white;
 }
 .actions-filter {
-  display: none;
+
 }
 .filter-item {
-  &:hover {
-    .actions-filter {
-      display: block;
-    }
-  }
+  display: flex;
+  justify-content: space-between;
 }
+

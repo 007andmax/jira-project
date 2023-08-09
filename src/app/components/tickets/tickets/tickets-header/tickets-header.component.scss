@@ -22,6 +22,7 @@
     width: 24px;
     background-position: center;
     padding: 0;
+    border-color: transparent;
   }
   span {
     @media (max-width: 767px) {
@@ -86,12 +87,16 @@
 }
 
 .qt-page-list__header.--sticky {
-  margin: 0;
-  padding: 10px 32px;
-  background-color: $gray-50;
-  border-bottom: 1px solid $gray-200;
+  @media (min-width: 768px) {
+    margin: 0;
+    padding: 10px 32px;
+    background-color: $gray-50;
+    border-bottom: 1px solid $gray-200;
+  }
 }
 
 .qt-page-list__header-filters {
-  display: none;
+  @media (min-width: 768px) {
+    display: none;
+  }
 }

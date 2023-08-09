@@ -860,7 +860,8 @@
     -webkit-mask-size: contain;
     mask-size: contain;
   }
-  &__filter-lines {
+  &__filter-lines,
+  &__filter-lines--gray-300 {
     background-color: $gray-500;
     -webkit-mask-position: center;
     mask-position: center;
@@ -870,6 +871,9 @@
     mask-repeat: no-repeat;
     -webkit-mask-size: contain;
     mask-size: contain;
+  }
+  &__filter-lines--gray-300 {
+    background-color: $gray-300;
   }
   &__add--white {
     background-color: $white;

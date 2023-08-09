@@ -10,5 +10,7 @@
 
 .qt-page-list {
   padding: 0;
-  background-color: $white;
+  @media (min-width: 768px) {
+    background-color: $white;
+  }
 }
