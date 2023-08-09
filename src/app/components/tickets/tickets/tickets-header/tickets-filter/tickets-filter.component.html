@@ -6,40 +6,11 @@
         ></div>
         <div class="content-filters-header__title pointer">Filters</div>
     </div>
-    <div class="qt-inputs-row --required">
-        <div class="qt-input-block">
-            <label class="qt-input-block__label">Status</label>
-            <ng-template
-                ngFor
-                let-status
-                [ngForOf]="ticketsStatus"
-                [ngForTrackBy]="trackById"
-            >
-                <div class="qt-df content-filters-checkbox">
-                    <label
-                        class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
-                        [attr.for]="'status-' + status.id"
-                    >
-                        <input
-                            [attr.id]="'status-' + status.id"
-                            type="checkbox"
-                            [(ngModel)]="status.selected"
-                            (change)="onSelectStatus(status,$event)"
-                        >
-                        <span></span>
-                        <div
-                            class="qt-ml-8"
-                            [textContent]="status.title"
-                        ></div>
-                    </label>
-                    <span
-                        class="qt-ml-auto content-filters-checkbox__count"
-                        [textContent]="status.count"
-                    ></span>
-                </div>
-            </ng-template>
-        </div>
-    </div>
+    <tickets-filter-status
+        #filterStatus
+        [ticketsStatus]="ticketsStatus"
+        (onSelectStatus)="onSelectStatus($event.item, $event.event)"
+    ></tickets-filter-status>
     <company-drop-down
         class="search-company"
         #companyDp
@@ -67,16 +38,6 @@
         [class]="['qt-dropdown']"
         [list]="techUsersNamesList"
         (onSelectedItem)="onSelectTechUser($event)"
-    ></app-drop-down>
-    <app-drop-down
-        class="search-status"
-        #statusDp
-        [placeholder]="'Select by Status'"
-        [change]="false"
-        [class]="['qt-dropdown']"
-        [list]="ticketsStatus"
-        [field]="'title'"
-        (onSelectedItem)="onSelectStatus($event)"
     ></app-drop-down>
     <app-tickets-filter-tags
         #tagsDp

@@ -7,11 +7,13 @@ import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-do
 import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.module';
 import { TicketsFilterComponent } from './tickets-filter.component';
 import { TicketsFilterTagsComponent } from './tickets-filter-tags/tickets-filter-tags.component';
+import { TicketsFilterStatusComponent } from './tickets-filter-status/tickets-filter-status.component';
 
 @NgModule({
     declarations: [
         TicketsFilterComponent,
-        TicketsFilterTagsComponent
+        TicketsFilterTagsComponent,
+        TicketsFilterStatusComponent
     ],
     imports: [
         CommonModule,

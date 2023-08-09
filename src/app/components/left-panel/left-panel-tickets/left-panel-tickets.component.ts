@@ -142,6 +142,10 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
     //this.quoteStateService.goToState(state);
     this.onChangeState.emit(state);
   }
+  blockClick(event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
   getCountByField(field) {
     return (this.ticketsCounts) ? this.ticketsCounts[field] : 0;
   }

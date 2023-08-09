@@ -25,6 +25,7 @@ import { CompanyTag } from 'src/app/components/companies/company-tags/class/comp
 import { User } from 'src/app/components/users/class/user';
 import { TicketsFilterSaveComponent } from '../tickets-filter-save/tickets-filter-save.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TicketsFilterStatusComponent } from './tickets-filter-status/tickets-filter-status.component';
 
 @Component({
   selector: 'app-tickets-filter',
@@ -37,6 +38,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   @ViewChild('techUsersDp') techUsersDp: DropDownComponent;
   @ViewChild('statusDp') statusDp: DropDownComponent;
   @ViewChild('tagsDp') tagsDp: TicketsFilterTagsComponent;
+  @ViewChild('filterStatus') filterStatus: TicketsFilterStatusComponent;
   public ticketsFilter: TicketsFilter = new TicketsFilter();
   globalFilter: TicketGlobalFilter = new TicketGlobalFilter();
   listType: string = "USERS";
@@ -153,8 +155,9 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
         this.selectedTechUser = null;
       }
       let status = this.ticketsStatus.find(item => item.id == data.statusId);
+      this.ticketsStatus.forEach(item => item.selected = false);
       if (status) {
-        this.statusDp.selectItemWithOutChanges(status);
+        status.selected = true;
         this.ticketsFilter.setStatus(status.name);
         let findStatus = this.listsStatus.find(status => status.title === status.title);
         if (findStatus) {
@@ -197,6 +200,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
         let index = this.ticketsStatus.findIndex(item => item.name == key);
         if (index > -1) this.ticketsStatus[index].setCount(counts[key])
       }
+      this.filterStatus.shortVersion = this.ticketsStatus.length > 5;
     })
   }
   private checkCompanyCustomerUser() {
@@ -231,7 +235,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.usersDp.clearWithOutChanges();
     if (!this.companyDp.isDisabled) this.companyDp.clearWithOutChanges();
     this.techUsersDp.clearWithOutChanges();
-    this.statusDp.clearWithOutChanges();
+    if (this.statusDp) this.statusDp.clearWithOutChanges();
     this.tagsDp.clearWithOutChanges();
     this.ticketsFilter.setCustomStatus(false);
     //  this.listType = "ALL";

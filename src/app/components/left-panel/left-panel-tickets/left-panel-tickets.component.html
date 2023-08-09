@@ -120,11 +120,9 @@
         <li
             [ngClass]="{'--active': selectedGlobalFilter.id == filter.id}"
             class="desktop-version filter-item"
+            (click)="setGlobalFilter(filter)"
         >
-            <div
-                [textContent]="filter.name"
-                (click)="setGlobalFilter(filter)"
-            ></div>
+            <div [textContent]="filter.name"></div>
             <i
                 class="icon__globe qt-bg-contain qt-sz-14 pointer qt-ml-auto"
                 container="body"
@@ -136,6 +134,7 @@
                 class="qt-ml-auto"
                 ngbDropdown
                 [placement]="'bottom-right'"
+                (click)="blockClick($event)"
             >
                 <div
                     class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain actions-filter"
