@@ -42,7 +42,7 @@
     ></app-drop-down>
     <app-tickets-filter-tags
         #tagsDp
-        [placement]="appService.checkMobile() ? 'top-left' : 'bottom-left'"
+        [placement]="'top-left'"
         (tagsChange)="onChangeTags($event)"
     ></app-tickets-filter-tags>
 </div>

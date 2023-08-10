@@ -36,9 +36,8 @@
         </ng-template>
         <span
             class="qt-fw-600 qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info pointer count-ticket-status"
-            *ngIf="shortVersion"
-            [textContent]="'+ ' +(ticketsStatus.length - 5) + ' more'"
-            (click)="shortVersion = false"
+            [textContent]="(shortVersion ? '+ ' +(ticketsStatus.length - 5) + ' more' : 'Less')"
+            (click)="shortVersion = !shortVersion"
         ></span>
     </div>
 </div>
