@@ -6,6 +6,7 @@ import { TicketsHeaderModule } from '../tickets/tickets/tickets-header/tickets-h
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { TicketsTableItemModule } from '../tickets/tickets/tickets-table/tickets-table-item/tickets-table-item.module';
 import { PreviewAttachmentModule } from '../tickets/tickets/ticket-edit-aside/preview-attachment/preview-attachment.module';
+import { TicketsFilterModule } from '../tickets/tickets/tickets-header/tickets-filter/tickets-filter.module';
 
 
 
@@ -19,7 +20,8 @@ import { PreviewAttachmentModule } from '../tickets/tickets/ticket-edit-aside/pr
         TicketsHeaderModule,
         InfiniteScrollModule,
         TicketsTableItemModule,
-        PreviewAttachmentModule
+        PreviewAttachmentModule,
+        TicketsFilterModule
 
     ],
 

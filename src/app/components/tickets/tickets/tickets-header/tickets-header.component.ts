@@ -103,7 +103,9 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
   }
   clearAll() {
     if (this.filter) this.filter.onClearAll();
-    this.ticketsStateService.onChangeGlobalFilter(new TicketGlobalFilter());
+    let ticketGlobalFilter = new TicketGlobalFilter();
+    if (this.ticketsFilter.isDisbledCompany) ticketGlobalFilter.setClientCompanyId(this.ticketsFilter.selectedCompany.id);
+    this.ticketsStateService.onChangeGlobalFilter(ticketGlobalFilter);
   }
   getTextCountFilters() {
     return `Filters${(this.countFilter > 0) ? ' (' + this.countFilter + ')' : ''}`;

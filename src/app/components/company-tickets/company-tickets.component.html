@@ -40,5 +40,25 @@
             ></div>
         </div>
     </div>
+    <div
+        class="aside-filters"
+        [hidden]="!toggleFilter"
+    >
+        <div class="aside-filters-header qt-df qt-ai-c qt-jc-sb">
+            <div class="aside-filters-header__title">Filters</div>
+            <div
+                class="qt-button --square-md --gray pointer"
+                (click)="onToggleFilter(false)"
+            >
+                <div class="icon__close qt-bg-contain qt-sz-16 pointer"></div>
+            </div>
+        </div>
+        <div class="aside-filters-content">
+            <app-tickets-filter
+                class="qt-w100"
+                #filter
+            ></app-tickets-filter>
+        </div>
+    </div>
 </div>
 <!-- <app-ticket-add-aside></app-ticket-add-aside> -->

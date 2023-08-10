@@ -117,10 +117,9 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnUpdateCounts);
     this.getTicketsStatus();
-    if (this.ticketsStatus.length > 0) this.getCountsStatus();
     let onGetTicketsStatus = this.ticketsStateService.onGetTicketsStatus.subscribe(data => {
       this.getTicketsStatus();
-      this.getCountsStatus();
+      if (this.globalFilter.id) this.getCountsStatus();
     })
     this.sub.add(onGetTicketsStatus);
     let onInitGlobalFilter = this.ticketsStateService.onInitGlobalFilter.subscribe((data: TicketGlobalFilter) => {
@@ -187,6 +186,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
       this.getCount();
       this.onChangeCounterFilter();
+      if (this.ticketsStatus.length > 0) this.getCountsStatus();
     })
     this.sub.add(onInitGlobalFilter);
     let onGetGlobalFilters = this.ticketsStateService.onGetGlobalFilters.subscribe(data => {
@@ -215,6 +215,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.selectedCompany = this.companiesState.getCompanies().find(item => item.id == localStorage.getItem('company_info_id'));
     this.companyDp.selectItemWithOutChanges(this.selectedCompany);
     this.companyDp.isDisabled = true;
+    this.ticketsFilter.isDisbledCompany = true;
     this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.selectedCompany.id)));
   }
   private checkUserCustomerUser() {
@@ -230,7 +231,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   }
   public onClearAll() {
 
-    if (!this.companyDp.isDisabled) this.ticketsFilter.setCompany(null);
+    if (!this.ticketsFilter.isDisbledCompany) this.ticketsFilter.setCompany(null);
     this.ticketsFilter.setTechUser(null);
     this.ticketsFilter.setUser(null);
     if (this.ticketsFilter.selectedStatus) {
@@ -240,7 +241,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.ticketsFilter.setStatus(null);
     this.ticketsFilter.setTags([]);
     this.usersDp.clearWithOutChanges();
-    if (!this.companyDp.isDisabled) this.companyDp.clearWithOutChanges();
+    if (!this.ticketsFilter.isDisbledCompany) this.companyDp.clearWithOutChanges();
     this.techUsersDp.clearWithOutChanges();
     if (this.statusDp) this.statusDp.clearWithOutChanges();
     this.tagsDp.clearWithOutChanges();

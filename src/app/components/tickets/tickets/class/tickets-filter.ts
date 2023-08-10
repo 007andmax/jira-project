@@ -23,6 +23,7 @@ export class TicketsFilter {
     selectedUser: User = null;
     selectedStatus: string = null;
     customStatus: boolean = false;
+    isDisbledCompany: boolean = false;
     constructor() {
         this.onInitUser();
     }
@@ -210,6 +211,17 @@ export class TicketsFilter {
                 predicateRule: "OR"
             })
 
+        }
+        if (this.selectedStatus) {
+
+            payload.groupFieldFilters[0].fieldFilterDtos.push({
+                operator: "EQ",
+                path: "status",
+                values: [
+                    this.selectedStatus
+                ]
+            });
+            payload.groupFieldFilters[0].predicateRule = "AND";
         }
         if (this.selectedUser) {
 
