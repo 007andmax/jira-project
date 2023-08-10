@@ -1,7 +1,6 @@
 @import "./src/assets/styles/variable";
 
 .left-panel-ng2__content--filters {
-  //display: flex; // TODO check this style
   app-select-search {
     margin-right: 8px;
     &:last-child {
@@ -27,8 +26,6 @@
   }
 
   .search-company {
-    //width: 34%;
-    //margin-right: 8px;  // TODO check this style
     @media (max-width: 767px) {
       width: 100%;
     }
@@ -41,9 +38,6 @@
   }
 
   .search-users {
-    //width: 23%;
-    //margin-right: 8px; // TODO check this style
-
     @media (max-width: 767px) {
       width: 100%;
     }
@@ -56,9 +50,6 @@
   }
 
   .search-tech-users {
-    //width: 23%;
-    //margin-right: 8px;  // TODO check this style
-
     @media (max-width: 767px) {
       width: 100%;
     }
@@ -70,10 +61,13 @@
     }
   }
 
-  .search-status {
-    //width: 20%;
-    //margin-right: 8px;  // TODO check this style
+  tickets-filter-status {
+    @media (max-width: 767px) {
+      width: 100%;
+    }
+  }
 
+  .search-status {
     @media (max-width: 767px) {
       width: 100%;
     }
