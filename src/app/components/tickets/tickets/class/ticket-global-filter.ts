@@ -17,18 +17,21 @@ export class TicketGlobalFilter {
     }
     /**
 * @description Return Object for Ticket Global 
+* @param {boolean} isAdd - If need return Object for Add need 'true' if for edit need 'false'
 * @returns  {Object} This is the result
 */
-    public getDataForRequest() {
-        return {
-            "clientCompanyId": this.clientCompanyId,
-            "statusId": this.statusId,
-            "name": this.name,
-            "global": this.global,
-            "createdUserId": this.createdUserId,
-            "tagIds": this.tagIds,
-            "assignedUsersIds": this.assignedUsersIds
-        }
+    public getDataForRequest(isAdd) {
+        let data: any = {
+            name: this.name,
+            global: this.global
+        };
+        if (this.clientCompanyId) data.clientCompanyId = this.clientCompanyId;
+        if (this.statusId) data.statusId = this.statusId;
+        if (this.createdUserId) data.createdUserId = this.createdUserId;
+        if (isAdd && this.tagIds.length > 0) data.tagIds = this.tagIds;
+        if (!isAdd) data.tagIds = this.tagIds;
+        if (this.assignedUsersIds) data.assignedUsersIds = this.assignedUsersIds;
+        return data
     }
     public setClientCompanyId(data) {
         this.clientCompanyId = data;

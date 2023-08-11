@@ -302,7 +302,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
         return item;
       }
     });
-
   }
   onGetTechUsers(data) {
     if (this.customerPortalStateService.isCustomerPortal) this.checkUserCustomerUser();

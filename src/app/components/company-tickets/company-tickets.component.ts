@@ -157,7 +157,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     this.ticketsFilter.isDisbledCompany = true;
     this.header.ticketsFilter = this.ticketsFilter;
     this.header.onChangeCounterFilter();
-    this.filter.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.company.id === company.id));
+    this.filter.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.find(companyInfo => companyInfo.companyId == company.id)));
     this.getCount();
     this.onScroll();
   }

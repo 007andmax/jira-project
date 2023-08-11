@@ -28,16 +28,16 @@ export class TicketsFilterSaveComponent implements OnInit {
   save() {
     if (this.globalFilter.name.length == 0) return;
     if (!this.globalFilter.id) {
-      this.ticketsService.addGlobalFilter(this.globalFilter.getDataForRequest()).subscribe(data => {
+      this.ticketsService.addGlobalFilter(this.globalFilter.getDataForRequest(true)).subscribe(data => {
         this.cancelConfirm();
       })
     } else {
       if (this.oldName !== this.globalFilter.name) {
-        this.ticketsService.addGlobalFilter(this.globalFilter.getDataForRequest()).subscribe(data => {
+        this.ticketsService.addGlobalFilter(this.globalFilter.getDataForRequest(true)).subscribe(data => {
           this.cancelConfirm();
         })
       } else {
-        this.ticketsService.editGlobalFilter(this.globalFilter.id, this.globalFilter.getDataForRequest()).subscribe(data => {
+        this.ticketsService.editGlobalFilter(this.globalFilter.id, this.globalFilter.getDataForRequest(false)).subscribe(data => {
           this.cancelConfirm();
         })
       }
