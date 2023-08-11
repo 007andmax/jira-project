@@ -72,7 +72,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       this.ticketsFilter.setFilter(JSON.parse(JSON.stringify(this.customerPortalStateService.getTicketsFilter())));
       this.showPreloader = true;
       document.body.querySelector(".main-container").scrollTo(0, 0);
-      console.log("this.ticketsFilter", this.ticketsFilter);
+      console.log("onTicketFilters", this.ticketsFilter);
       this.setDefaultScoll();
       this.onScroll();
     });
@@ -105,9 +105,9 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     });
 
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
-      console.log("this.ticketsFilter", this.ticketsFilter);
       this.ticketsFilter = data;
       this.showPreloader = true;
+      console.log("getOnInitFilter ", JSON.parse(JSON.stringify(this.ticketsFilter)));
       document.body.querySelector(".main-container").scrollTo(0, 0);
       this.setDefaultScoll();
       this.onScroll();
@@ -169,7 +169,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     this.ticketsFilter.setOffset(this.page_number * this.offset);
     this.ticketsFilter.setSize(30);
     //this.ticketsFilter.onSetSizeAll();
-
+    console.log("this.ticketsFilter.getListTupe()", this.ticketsFilter.getListTupe());
     if (this.page_number > 0) this.showPendingPreloader = true;
     this.ticketsService.getTickets(this.ticketsFilter.getListTupe(), this.ticketsFilter.getDataForRequest()).subscribe((data: Array<Ticket>) => {
       this.tickets = [...this.tickets, ...data];

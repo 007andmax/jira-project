@@ -93,12 +93,14 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     let getOnChangeTypeFilter = this.ticketsStateService.getOnChangeTypeFilter().subscribe(type => {
       this.listType = type;
       this.ticketsFilter.setListType(type);
+      console.log("getOnChangeTypeFilter", this.listType);
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
       if (type !== 'RECURRING_TICKETS') this.getCount();
     })
     this.sub.add(getOnChangeTypeFilter);
     let getOnChangeTagsFilter = this.ticketsStateService.getOnChangeTagsFilter().subscribe(tags => {
       this.ticketsFilter.setTags(tags);
+      console.log("getOnChangeTagsFilter", this.ticketsFilter);
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
       this.getCount();
     });
@@ -192,7 +194,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     let onGetGlobalFilters = this.ticketsStateService.onGetGlobalFilters.subscribe(data => {
       if (!data.find(item => item.id == this.globalFilter.id)) {
         this.globalFilter = new TicketGlobalFilter();
-        this.onClearAll();
+        if (this.ticketsFilter.checkUse()) this.onClearAll();
       }
     })
     this.sub.add(onGetGlobalFilters);
@@ -248,6 +250,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.ticketsFilter.setCustomStatus(false);
     //  this.listType = "ALL";
     // this.ticketsFilter.setListType("ALL");
+    console.log("onClearAll", this.ticketsFilter)
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
     this.onChangeCounterFilter();
     if (this.listType !== 'RECURRING_TICKETS') this.getCount();
@@ -287,6 +290,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.listType = type;
     this.ticketsFilter.setListType(type);
     if (!this.appService.checkMobile()) {
+      console.log("setTypeFilter 3", this.ticketsFilter);
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
       if (type !== 'RECURRING_TICKETS') this.getCount();
     }
@@ -397,6 +401,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
 
   applyFilters() {
     this.setTypeFilterWithoutChange("ALL");
+    console.log("applyFilters", this.ticketsFilter);
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
     if (this.listType !== 'RECURRING_TICKETS') this.getCount();
     this.ticketsStateService.onChangeLeftPanelFilter("ALL");

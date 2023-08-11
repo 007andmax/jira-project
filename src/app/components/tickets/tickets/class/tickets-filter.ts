@@ -27,6 +27,9 @@ export class TicketsFilter {
     constructor() {
         this.onInitUser();
     }
+    public checkUse() {
+        return this.selectedCompany && this.selectedTechUser && this.selectedUser && this.selectedStatus && this.tags.length > 0;
+    }
     public setCustomStatus(data) {
         this.customStatus = data;
     }
@@ -123,6 +126,7 @@ export class TicketsFilter {
         return data;
     }
     public setListType(type) {
+        console.log("setListType", type);
         this.listType = type;
         if (this.listType === "ALL") this.onInitAll();
         if (this.listType === "UNASSIGNED") this.onInitUnassigned();
