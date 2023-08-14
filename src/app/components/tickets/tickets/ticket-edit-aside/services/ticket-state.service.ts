@@ -16,6 +16,7 @@ import { DevicesStateService } from 'src/app/states/devices/devices-state.servic
 import { Subscription } from 'rxjs';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +55,7 @@ export class TicketStateService {
     private devicesService: DevicesService,
     private devicesStateService: DevicesStateService,
     private websocketService: WebsocketService,
+    private permissionsService: PermissionsService,
     public customerPortalStateService: CustomerPortalStateService,) {
     this.ticketsRealTimeService.changeTicket.subscribe(newChange => {
       this.changeUpdatesTicket.emit(newChange);
@@ -193,7 +195,7 @@ export class TicketStateService {
       this.servicesForTicket = res.filter(item => item.canUseInTicket);
       this.servicesForTicket.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-      if (!this.customerPortalStateService.isCustomerPortal) this.getServiceAgreements(ticketProfile);
+      if (!this.customerPortalStateService.isCustomerPortal && this.permissionsService.isAllowed("VIEW_SERVICE_AGREEMENTS")) this.getServiceAgreements(ticketProfile);
       this.servicesList.emit(this.servicesForTicket);
     })
   }

@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
 import { TicketProfileUpdatesServiceTimepickerComponent } from '../../ticket-profile-updates/ticket-profile-updates-service-timepicker/ticket-profile-updates-service-timepicker.component';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 
 @Component({
@@ -39,6 +40,7 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestr
   sub: Subscription = new Subscription();
   constructor(
     private elRef: ElementRef,
+    private permissionsService: PermissionsService,
     private ticketsStateService: TicketsStateService,
     public companiesStateService: CompaniesStateService,
     public ticketStateService: TicketStateService) { }
@@ -191,6 +193,9 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestr
   }
   public trackByIndex(index, item) {
     return index;
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

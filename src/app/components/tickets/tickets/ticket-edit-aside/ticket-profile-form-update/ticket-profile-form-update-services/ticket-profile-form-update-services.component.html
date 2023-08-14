@@ -1,6 +1,6 @@
 <div
     class="cps-block__service-block"
-    *ngIf="areTicketsPresented && !areTicketsTerminated || !areTicketsPresented"
+    *ngIf="(areTicketsPresented && !areTicketsTerminated || !areTicketsPresented) && getPermissions('VIEW_SERVICE_AGREEMENTS')"
 >
     <ng-template
         class="assigned-ticket-user"
@@ -13,26 +13,26 @@
         <div class="service-item">
             <div class="service-item__first-line qt-df relative">
                 <div class="service-item__input device">
-                  <app-services-list
-                    class=""
-                    [ngClass]="{'--input-error':!service.validate}"
-                    [type]="'TICKET'"
-                    [editItem]="service.item"
-                    [itemList]="servicesList"
-                    (selectedServicesItem)="onSelectService($event,i)"
-                  ></app-services-list>
-                  <mat-error
-                    class="invalid-feedback --pos-static"
-                    *ngIf="!service.validate"
-                  >
-                    The Service is required
-                  </mat-error>
-                  <mat-error
-                    class="invalid-feedback --pos-static"
-                    *ngIf="!service.validateQuantity"
-                  >
-                    You have to set any time value
-                  </mat-error>
+                    <app-services-list
+                        class
+                        [ngClass]="{'--input-error':!service.validate}"
+                        [type]="'TICKET'"
+                        [editItem]="service.item"
+                        [itemList]="servicesList"
+                        (selectedServicesItem)="onSelectService($event,i)"
+                    ></app-services-list>
+                    <mat-error
+                        class="invalid-feedback --pos-static"
+                        *ngIf="!service.validate"
+                    >
+                        The Service is required
+                    </mat-error>
+                    <mat-error
+                        class="invalid-feedback --pos-static"
+                        *ngIf="!service.validateQuantity"
+                    >
+                        You have to set any time value
+                    </mat-error>
                 </div>
                 <app-ticket-profile-updates-service-timepicker
                     *ngIf="currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'"
@@ -87,18 +87,18 @@
     <div class="service-item">
         <div class="service-item__first-line qt-df qt-fw-wrap-md qt-jc-sb-md relative">
             <div class="service-item__input device">
-              <app-services-list
-                #serviceDP
-                [ngClass]="{'--input-error':!currentService.validate}"
-                [itemList]="servicesList"
-                (selectedServicesItem)="selectService($event)"
-              ></app-services-list>
-              <mat-error
-                class="invalid-feedback --pos-static"
-                *ngIf="!currentService.validate"
-              >
-                The Service is required
-              </mat-error>
+                <app-services-list
+                    #serviceDP
+                    [ngClass]="{'--input-error':!currentService.validate}"
+                    [itemList]="servicesList"
+                    (selectedServicesItem)="selectService($event)"
+                ></app-services-list>
+                <mat-error
+                    class="invalid-feedback --pos-static"
+                    *ngIf="!currentService.validate"
+                >
+                    The Service is required
+                </mat-error>
             </div>
             <app-ticket-profile-updates-service-timepicker
                 #timePicker
@@ -178,4 +178,7 @@
 </div>
 <p *ngIf="areTicketsPresented && areTicketsTerminated">
     Your contacts are expired/terminated. Please recreate them in order to use contract's services or remove them in order to use default services
+</p>
+<p *ngIf="!getPermissions('VIEW_SERVICE_AGREEMENTS')">
+    You cannot add a service due to disabled permission - "View service agreements". Contact the owner of the tech company to get more info
 </p>

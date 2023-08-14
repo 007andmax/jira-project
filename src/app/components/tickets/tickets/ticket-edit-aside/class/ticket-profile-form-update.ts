@@ -55,13 +55,11 @@ export class TicketProfileFormUpdate {
         }
     }
     public getDataForUpdateService() {
-        this.services.forEach(item => (item.user = { id: this.techUser.id }));
         return {
-            services: this.services,
+            services: this.services.map(item => item.getDateForRequest(this.techUser)),
             type: this.type,
             shares: this.shares,
             ticket: this.ticket,
-
         }
     }
     public clearShares() {

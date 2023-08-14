@@ -173,12 +173,13 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       this.ticketAdd.createdUser.setCompanyId(item.id);
       this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === item.id)));
       this.onGetDevices(this.devicesStateService.getAllDevices()[item.id]);
-      let list = this.users.filter(item => item.defaultSubscriptions && item.defaultSubscriptions.ticketManagerSubscription.enabled);
+      let list = this.users.filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === item.id).defaultSubscriptions.ticketManagerSubscription.enabled);
       list = list.map(item => {
         let user = new TechUserItem(item);
         return user;
       });
       this.shareUsersList = list;
+      console.log("s.shareUsersList", this.shareUsersList);
       this.techUsersDp.resetEditMode();
       this.ticketValidate.resetCompany();
     } else {
