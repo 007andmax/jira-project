@@ -19,6 +19,7 @@ import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service
 })
 export class TicketDetailChangePriorityComponent extends DropDownComponent {
   @Input() ticketProfile: TicketProfile = new TicketProfile();
+  selectedPriority: TicketsPriority;
   statusColors: Array<StatusColor> = [];
   list: Array<TicketsPriority> = [];
   constructor(public elRef: ElementRef,
@@ -37,6 +38,7 @@ export class TicketDetailChangePriorityComponent extends DropDownComponent {
     this.field = 'name';
     this.isBlockClear = true;
     this.sort = false;
+    this.selectedItem = this.ticketProfile.priorityLevel;
     if (this.class.length > 0) this.class = this.class;
     if (this.uiType) this.class.push(this.uiType);
     this.isDisabled = !(this.ticketsPermissionsService.isActionVisible('update', this.ticketProfile, null, null) && (this.customerPortalStateService.isCustomerPortal && this.isAddNoteForCustomerUser() || !this.customerPortalStateService.isCustomerPortal));
@@ -45,11 +47,9 @@ export class TicketDetailChangePriorityComponent extends DropDownComponent {
         this.list = data.priorityLevels.map(item => new TicketsPriority(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
           1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
         this.ticketsStateService.onSetTicketsPriorities(this.list);
-        this.selectedItem = this.list.find(item => item.id == this.ticketProfile.priorityLevel.id);
       })
     } else {
       this.list = this.ticketsStateService.getTicketsPriorities();
-      this.selectedItem = this.list.find(item => item.id == this.ticketProfile.priorityLevel.id);
     }
     if (this.ticketsStateService.getListStatusColor().length === 0) {
       this.leftPanelService.getColors().subscribe((data: any) => {
