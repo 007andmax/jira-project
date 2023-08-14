@@ -1,5 +1,4 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { ServiceAgreementsService } from 'src/app/services/service-agreements/service-agreements.service';
 import { RecurringService } from 'src/app/services/recurring/recurring.service';
 import { TicketProfileUpdate } from '../../class/ticket-profile-update';
 import { TicketProfileService } from '../../class/ticket-profile-service';
@@ -16,6 +15,7 @@ import { DeviceCompany } from 'src/app/components/company-devices/class/device-c
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 import { Subscription } from 'rxjs';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { ContractsService } from 'src/app/services/contracts/contracts.service';
 
 @Injectable({
   providedIn: 'root'
@@ -47,7 +47,7 @@ export class TicketStateService {
   onGetDevices: EventEmitter<any> = new EventEmitter();
   devices: Array<DeviceCompany> = [];
   sub: Subscription = new Subscription();
-  constructor(private serviceAgreementsService: ServiceAgreementsService,
+  constructor(private contractsService: ContractsService,
     private recurringService: RecurringService,
     private ticketsRealTimeService: TicketsRealTimeService,
     private ticketsService: TicketsService,
@@ -211,8 +211,8 @@ export class TicketStateService {
   }
 
   private getServiceAgreements(ticketProfile) {
-    this.serviceAgreementsService.getServiceAgreements().subscribe((data: any) => {
-      let Agreements = data.filter((el) => el.company.id === ticketProfile.company.id)
+    this.contractsService.getServiceAgreementsByCompany(ticketProfile.company.id).subscribe((data: any) => {
+      let Agreements = data;
       this.areTicketsPresented = (Agreements.length > 0) ? true : false;
       this.areTicketsTerminated = Agreements.every((el) => {
         return el.status === 'EXPIRED' || el.status === 'TERMINATED'

@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter, ElementRef, OnDestroy } from '@angular/core';
-import { ServiceAgreementsService } from 'src/app/services/service-agreements/service-agreements.service';
 import { TicketProfile } from '../../../class/ticket-profile';
 import { RecurringService } from 'src/app/services/recurring/recurring.service';
 import { TicketProfileFormService } from '../../class/ticket-profile-form-service';
@@ -38,8 +37,7 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestr
   currentCompany = null;
   currentService: TicketProfileFormService = new TicketProfileFormService();
   sub: Subscription = new Subscription();
-  constructor(private serviceAgreementsService: ServiceAgreementsService,
-    private recurringService: RecurringService,
+  constructor(
     private elRef: ElementRef,
     private ticketsStateService: TicketsStateService,
     public companiesStateService: CompaniesStateService,
