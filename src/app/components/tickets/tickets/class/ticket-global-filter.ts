@@ -8,6 +8,7 @@ export class TicketGlobalFilter {
     "tagIds": Array<string> = [];
     "status": any;
     "assignedUsersIds": Array<string> = [];
+    modified: boolean;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
