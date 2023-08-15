@@ -31,6 +31,7 @@ export class InvoicesFilter {
     public getFIlter() {
         let endDate = new Date(this.endDate);
         endDate.setDate(endDate.getDate() + 1);
+        console.log("this.offset", this.offset);
         return {
             companyId: this.companyId,
             amount: (this.amount) ? this.amount : null,
