@@ -171,4 +171,15 @@
             </div>
         </li>
     </ng-template>
+    <div
+        *ngIf="showLoadMoreUpdates && globalFilters.length > 0"
+        class="button-loader"
+        (click)="getGLobalFilters()"
+    >
+        <span *ngIf="!showPreloaderGlobalFilters">Load More Updates</span>
+        <span
+            *ngIf="showPreloaderGlobalFilters"
+            class="loading"
+        ></span>
+    </div>
 </ul>

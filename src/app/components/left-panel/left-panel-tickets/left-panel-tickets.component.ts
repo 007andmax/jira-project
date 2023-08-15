@@ -33,6 +33,9 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
   globalFilters: Array<TicketGlobalFilter> = [];
   sub: Subscription = new Subscription();
   isGetGlobalFilters: boolean = false;
+  showPreloaderGlobalFilters: boolean = false;
+  showLoadMoreUpdates = false;
+  pageGlobalFilter: number = 0;
   @Input() activePage: string = "";
   @Output() onChangeState = new EventEmitter();
   @Output() onOpenPanel = new EventEmitter();
@@ -101,10 +104,14 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
   }
   private getGLobalFilters() {
     this.isGetGlobalFilters = true;
-    this.ticketsService.getFilters().subscribe((data: any) => {
-      this.globalFilters = data.ticketFilteringDtos.map(item => new TicketGlobalFilter(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+    this.showPreloaderGlobalFilters = true;
+    this.ticketsService.getFilters(this.pageGlobalFilter).subscribe((data: any) => {
+      this.globalFilters = [...this.globalFilters, ...data.ticketFilteringDtos.map(item => new TicketGlobalFilter(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0))];
       this.ticketsStateService.setGlobalFilters(this.globalFilters);
+      this.pageGlobalFilter++;
+      this.showPreloaderGlobalFilters = false;
+      if (data.totalElements > this.globalFilters.length) this.showLoadMoreUpdates = true;
     })
   }
   public onDeleteGlobalFilter(filter) {
@@ -185,6 +192,7 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
     /* START */
     if (!this.ticketsStateService.isMoveToTickets) this.ticketsStateService.onChangeTypeFilter("USERS");
     /* END */
+    this.pageGlobalFilter = 0;
     this.sub.unsubscribe();
   }
 }

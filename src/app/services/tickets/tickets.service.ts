@@ -48,8 +48,8 @@ export class TicketsService {
         return data;
       }));
   }
-  public getFilters() {
-    return this.http.get(this.apiUrl + `ticket/filters/all?page=0&size=10`);
+  public getFilters(page) {
+    return this.http.get(this.apiUrl + `ticket/filters/all?page=${page}&size=10`);
   }
   public getDashboardByTech(startDate, endDate) {
     return this.http.get(this.apiUrl + `dashboard/ticket/counters?startDate=${startDate}&endDate=${endDate}`);
