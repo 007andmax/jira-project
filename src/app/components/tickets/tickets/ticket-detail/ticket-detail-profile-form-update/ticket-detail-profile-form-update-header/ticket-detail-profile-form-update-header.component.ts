@@ -37,6 +37,12 @@ export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
     this.listTechUsers = this.getUsersForUpdate("PRIVATE");
     if (this.tab == "SERVICE" || this.tab == "PRODUCT") this.ticketProfileFormUpdate.setTechUser(this.currentUser);
   }
+  isShowAssignedUser() {
+    if (this.tab == "SERVICE") {
+      return this.ticketStateService.isShowAddService();
+    }
+    return true;
+  }
   isSelected(data) {
     return this.ticketProfileFormUpdate.getTechUser().id === data.id;
   }

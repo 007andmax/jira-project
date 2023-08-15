@@ -67,6 +67,7 @@
     </div>
     <app-add-assigned-user
         #addAssignedUser
+        *ngIf="isShowAssignedUser()"
         [type]="'DETAIL-TICKET'"
         [userList]="usersForUpdate"
         [selectedUsers]="selectedUsers"
