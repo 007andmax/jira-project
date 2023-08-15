@@ -1,6 +1,6 @@
 <div
     class="cps-block__service-block"
-    *ngIf="(areTicketsPresented && !areTicketsTerminated || !areTicketsPresented) && getPermissions('VIEW_SERVICE_AGREEMENTS')"
+    *ngIf="ticketStateService.isShowAddService()"
 >
     <ng-template
         class="assigned-ticket-user"

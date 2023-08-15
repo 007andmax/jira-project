@@ -162,9 +162,9 @@ export class UserFilter {
         if (!this.defaultSubscriptions) return true;
         let isExist = false;
         customerCompaniesInfo.forEach(item => {
-            if (this.defaultSubscriptions.invoiceSubscription.enabled && this.defaultSubscriptions.invoiceSubscription.enabled === item.invoiceSubscription.enabled) isExist = true;
-            if (this.defaultSubscriptions.ticketManagerSubscription.enabled && this.defaultSubscriptions.ticketManagerSubscription.enabled === item.ticketManagerSubscription.enabled) isExist = true;
-            if (this.defaultSubscriptions.ticketSubscription.enabled && this.defaultSubscriptions.ticketSubscription.enabled === item.ticketSubscription.enabled) isExist = true;
+            if (this.defaultSubscriptions.invoiceSubscription.enabled && item.invoiceSubscription && this.defaultSubscriptions.invoiceSubscription.enabled === item.invoiceSubscription.enabled) isExist = true;
+            if (this.defaultSubscriptions.ticketManagerSubscription.enabled && item.ticketManagerSubscription && this.defaultSubscriptions.ticketManagerSubscription.enabled === item.ticketManagerSubscription.enabled) isExist = true;
+            if (this.defaultSubscriptions.ticketSubscription.enabled && item.ticketSubscription && this.defaultSubscriptions.ticketSubscription.enabled === item.ticketSubscription.enabled) isExist = true;
         })
         return isExist;
     }

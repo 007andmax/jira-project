@@ -221,6 +221,9 @@ export class TicketStateService {
       })
     })
   }
+  public isShowAddService() {
+    return (this.areTicketsPresented && !this.areTicketsTerminated || !this.areTicketsPresented) && this.permissionsService.isAllowed("VIEW_SERVICE_AGREEMENTS");
+  }
   public setProductForRemove(data) {
     this.productForRemove = data;
   }
