@@ -24,7 +24,6 @@
             ></div>
             <div
                 ngbDropdown
-                placement="bottom-left"
                 container="body"
                 class="qt-ic-c qt-pointer device-type-icon qt-sz-24"
                 [ngClass]="{'icon__computer' : device.iconName === 'workstation' || !device.iconName,
@@ -223,7 +222,6 @@
         <div
             class="company-devices-table__menu-body"
             ngbDropdown
-            placement="bottom-right"
             container="body"
             *ngIf="!customerPortalStateService.isCustomerPortal"
         >

@@ -210,9 +210,16 @@
                             let-i="index"
                             [ngForTrackBy]="trackByIndex"
                         >
+                            <app-dynamic-tooltip
+                                [content]="user.firstName + ' ' + user.lastName"
+                                [position]="'top'"
+                                #userTooltip
+                            ></app-dynamic-tooltip>
                             <div
                                 class="assigned-ticket-user__item"
                                 *ngIf="user.accountType === 'CLIENT'"
+                                (mouseenter)="userTooltip.show($event.target)"
+                                (mouseleave)="userTooltip.hide()"
                             >
                                 <div *ngIf="user.avatar">
                                     <img
@@ -247,9 +254,16 @@
                             let-i="index"
                             [ngForTrackBy]="trackByIndex"
                         >
+                            <app-dynamic-tooltip
+                                [content]="user.firstName + ' ' + user.lastName"
+                                [position]="'top'"
+                                #userTooltip
+                            ></app-dynamic-tooltip>
                             <div
                                 class="assigned-ticket-user__item"
                                 *ngIf="user.accountType === 'TECH'"
+                                (mouseenter)="userTooltip.show($event.target)"
+                                (mouseleave)="userTooltip.hide()"
                             >
                                 <div *ngIf="user.avatar">
                                     <img
