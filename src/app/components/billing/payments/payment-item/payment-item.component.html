@@ -11,10 +11,10 @@
             [ngForTrackBy]="trackById"
             let-i="index"
         >
-            <p
+            <span
                 [textContent]="invoice.invoiceNumber"
                 (click)="onShowPreviewInvoice(i)"
-            ></p>
+            ></span>
         </ng-template>
     </td>
     <td

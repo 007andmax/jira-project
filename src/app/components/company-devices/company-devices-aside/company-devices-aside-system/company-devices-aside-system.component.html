@@ -79,10 +79,11 @@
                 (click)="toggleWindowSpecifications = !toggleWindowSpecifications"
             ></div>
         </div>
-        <div class="sidebar-system__info warranty-info">
+        <div class="sidebar-system__info warranty-info date-picker">
             <div class="sidebar-system__info-title">Warranty</div>
             <app-date-picker
                 #datePickerWarranty
+                [dropdownClass]="['date-picker']"
                 [container]="'body'"
                 [type]="'INPUT'"
                 [editMode]="true"
@@ -100,11 +101,12 @@
                 [textContent]="chackDefaultValue(getWindowsInfo())"
             ></div>
         </div>
-        <div class="sidebar-system__info installed-info">
+        <div class="sidebar-system__info installed-info date-picker">
             <div class="sidebar-system__info-title">Installed on</div>
             <app-date-picker
                 [type]="'INPUT'"
                 [editMode]="true"
+                [dropdownClass]="['date-picker']"
                 [container]="'body'"
                 [editDate]="device.report.system.install_date"
                 [useMinDate]="false"
