@@ -152,5 +152,7 @@
     right: -28px;
     left: unset;
     top: calc(50% - 10px);
+    border: .25rem solid rgba(208,213,221,.2);
+    border-top-color: $gray-300;
   }
 }
