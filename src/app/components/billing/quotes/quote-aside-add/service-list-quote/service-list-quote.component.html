@@ -4,6 +4,18 @@
     placement="bottom-left"
 >
     <button
+        *ngIf="isDisabled"
+        class="qt-btn --outline --small --disabled"
+        id="dropdownBasic2"
+        ngbDropdownToggle
+        placement="top"
+        ngbTooltip="Your contacts are expired/terminated. Please recreate them in order to use contract's services or remove them in order to use default services"
+        [disabled]="true"
+    >
+        + Add Service
+    </button>
+    <button
+        *ngIf="!isDisabled"
         class="qt-btn --outline --small"
         id="dropdownBasic2"
         ngbDropdownToggle

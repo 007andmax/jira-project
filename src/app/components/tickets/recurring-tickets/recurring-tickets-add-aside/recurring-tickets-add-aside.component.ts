@@ -15,6 +15,7 @@ import { DevicesRecurringTicketsStateService } from '../devices-recurring-ticket
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TechUserItem } from '../../../shared/tech-users/class/tech-user-item';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
+import { ContractsService } from 'src/app/services/contracts/contracts.service';
 
 @Component({
   selector: 'app-recurring-tickets-add-aside',
@@ -37,7 +38,8 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   public validate: Validate = new Validate();
   copy: boolean = false;
   formatDate: string = FORMAT_DATE_2;
-
+  areTicketsPresented: boolean = false;
+  areTicketsTerminated: boolean = false;
   /**
    * Creates an instance of the RecurringTicketsAddAsideComponent with the injected services
    * @param {ProductService} productService Service to work with products
@@ -58,6 +60,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     public createService: RecurringTicketsService,
     private devicesRecurringTicketsStateService: DevicesRecurringTicketsStateService,
     private usersStateService: UsersStateService,
+    private contractsService: ContractsService,
   ) {
   }
 
@@ -259,7 +262,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
       this.recurringState.setClient(selectClient);
       this.onCheckListServices();
       this.getCompanyDevices();
-
+      this.getServiceAgreements(this.selectedClient.id);
     }
     if (this.services[0] instanceof ForCreateService) {
 
@@ -281,7 +284,15 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
 
   }
-
+  private getServiceAgreements(id) {
+    this.contractsService.getServiceAgreementsByCompany(id).subscribe((data: any) => {
+      let Agreements = data;
+      this.areTicketsPresented = (Agreements.length > 0) ? true : false;
+      this.areTicketsTerminated = Agreements.every((el) => {
+        return el.status === 'EXPIRED' || el.status === 'TERMINATED'
+      })
+    })
+  }
   /**
  * Subscribe to show ticker
  */

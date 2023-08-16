@@ -18,6 +18,7 @@ import { QuoteEdit } from '../../class/quote-edit';
 import { QuoteValdiateEdit } from '../../class/quote-vildate-edit';
 import { ServiceListQuoteComponent } from '../../quote-aside-add/service-list-quote/service-list-quote.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { ContractsService } from 'src/app/services/contracts/contracts.service';
 
 @Component({
   selector: 'app-quote-aside-edit-body',
@@ -35,6 +36,8 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
   quote: QuoteEdit;
   changeGlobalNote: boolean = false;
   companies = [];
+  areTicketsPresented: boolean = false;
+  areTicketsTerminated: boolean = false;
   sub: Subscription = new Subscription();
   constructor(private quoteStateService: QuoteStateService,
     private companiesState: CompaniesStateService,
@@ -46,6 +49,7 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private permissionsService: PermissionsService,
     public customerPortalStateService: CustomerPortalStateService,
+    private contractsService: ContractsService,
     private quoteServices: QuoteService,) { }
 
   ngOnInit() {
@@ -82,9 +86,19 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
         this.servicesList.getServicesList();
         this.onStopPreloader.emit(null);
         this.elRef.nativeElement.querySelector("#description-global-note").value = this.quote.termsAndConditions;
+        this.getServiceAgreements(this.quote.company.id);
       })
     })
     this.sub.add(getOnEdit);
+  }
+  private getServiceAgreements(id) {
+    this.contractsService.getServiceAgreementsByCompany(id).subscribe((data: any) => {
+      let Agreements = data;
+      this.areTicketsPresented = (Agreements.length > 0) ? true : false;
+      this.areTicketsTerminated = Agreements.every((el) => {
+        return el.status === 'EXPIRED' || el.status === 'TERMINATED'
+      })
+    })
   }
   public resetQuote() {
     this.quote = null;

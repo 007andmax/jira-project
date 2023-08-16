@@ -1,3 +1,5 @@
+@import "./src/assets/styles/variable";
+
 .add-service-container {
     position: relative;
 }
@@ -9,4 +11,9 @@
   li {
     width: 100%;
   }
+}
+.--disabled {
+  background: $gray-300 !important;
+  color: $white;
+  border-color: $gray-300 !important;
 }

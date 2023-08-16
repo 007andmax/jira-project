@@ -18,6 +18,7 @@ import { DevicesRecurringTicketsStateService } from '../devices-recurring-ticket
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TextAreaDirective } from 'src/app/directives/text-area/text-area.directive';
 import { TechUserItem } from 'src/app/components/shared/tech-users/class/tech-user-item';
+import { ContractsService } from 'src/app/services/contracts/contracts.service';
 
 @Component({
   selector: 'app-recurring-tickets-edit-aside',
@@ -41,6 +42,8 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   public validate: Validate = new Validate();
   public listTechUsers: Array<TechUserItem> = [];
   description: TextAreaDirective;
+  areTicketsPresented: boolean = false;
+  areTicketsTerminated: boolean = false;
   @ViewChild(TextAreaDirective) set appTextArea(directive: TextAreaDirective) {
     this.description = directive;
   };
@@ -63,7 +66,8 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     private devicesService: DevicesRecurringTicketsStateService,
     private recurringState: RecurringTicketsStateService,
     public createService: RecurringTicketsService,
-    private usersStateService: UsersStateService
+    private usersStateService: UsersStateService,
+    private contractsService: ContractsService,
   ) {
   }
 
@@ -122,6 +126,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.createService.getTechState().setUsersFromtEdit(data.assignedUsers);
     this.createService.setCronForEdit(data.cronExpression);
     this.onChangeCron(data.cronExpression);
+    this.getServiceAgreements(data.company.id);
     // this.description.update();
     this.cd.detectChanges();
 
@@ -156,7 +161,15 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
 
     this.recurringState.getCreateTicket().setDescription(value);
   }
-
+  private getServiceAgreements(id) {
+    this.contractsService.getServiceAgreementsByCompany(id).subscribe((data: any) => {
+      let Agreements = data;
+      this.areTicketsPresented = (Agreements.length > 0) ? true : false;
+      this.areTicketsTerminated = Agreements.every((el) => {
+        return el.status === 'EXPIRED' || el.status === 'TERMINATED'
+      })
+    })
+  }
   /**
   * Subscribe to change description
   * @param event - description event
@@ -241,6 +254,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
       this.recurringState.setClient(selectClient);
       this.onCheckListServices();
       this.getCompanyDevices();
+      this.getServiceAgreements(this.selectedClient.id);
     }
     if (this.services[0] instanceof ForCreateService) {
 
