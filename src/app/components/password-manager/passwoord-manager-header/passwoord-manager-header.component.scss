@@ -20,28 +20,28 @@
     /deep/.mat-form-field-infix {
         overflow: auto;
         border: none;
-        border-radius: 0px;
+        border-radius: 0;
         min-height: 40px;
         padding-left: 6px;
     }
     /deep/.mat-chip-list-wrapper {
         width: fit-content;
-        margin: 0px;
+        margin: 0;
         flex-wrap: unset;
         .mat-standard-chip {
-            margin: 0px 8px 0px 0px;
+            margin: 0 8px 0 0;
             padding: 4px 6px 3px 8px;
         }
     }
     /deep/.mat-form-field {
         width: 100%;
-        background: #fff;
+        background: $white;
     }
     /deep/.mat-form-field-underline {
         display: none;
     }
     /deep/ .mat-form-field-appearance-legacy .mat-form-field-wrapper {
-        padding: 0px;
+        padding: 0;
     }
 }
 .is-exist-filters {
@@ -57,7 +57,7 @@
         right: 0;
         width: 8px;
         height: 8px;
-        background-color: $error;
+        background-color: $red-600;
         border-radius: 10px;
     }
 }

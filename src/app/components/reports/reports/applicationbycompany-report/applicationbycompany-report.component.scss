@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .table-wrap {
   table {
     width: 100%;
@@ -9,7 +11,7 @@
     .application{
       width: 40% !important;
       padding: 0 18px 0 18px;
-      background-color: white;
+      background-color: $white;
       height: 40px;
     }
     .version {
@@ -21,7 +23,7 @@
     }
     thead {
       th {
-        background-color: #f4f6f8 !important;
+        background-color: $gray-600 !important;
       }
     }
   }
@@ -29,7 +31,7 @@
 
 .device-header {
   text-align: center;
-  padding: 75px 0px 10px 0px;
+  padding: 75px 0 10px 0;
   h6 {
     font-size: 12px !important;
   }
@@ -39,15 +41,15 @@
   td {
     overflow: hidden;
     text-overflow: ellipsis;
-    background-color: white;
+    background-color: $white;
   }
   tr {
     td {
-      background: #ffffff;
+      background: $white;
       padding: 0 8px 0 8px;
       height: 48px;
-      border-top: 1px solid #eaeaea;
-      border-bottom: 1px solid #eaeaea;
+      border-top: 1px solid $gray-200;
+      border-bottom: 1px solid $gray-200;
       vertical-align: middle;
       &:last-child {
         border-top-right-radius: 5px;
@@ -68,16 +70,16 @@
 .qt-btn {
   &.--outline-blue {
     height: 40px !important;
-    background-color: #ffffff !important;
+    background-color: $white !important;
     margin-right: 260px !important;
   }
   &.--outline-white {
-    background-color: #edf2f6 !important;
+    background-color: $background !important;
   }
 }
 
 .product-report-btn {
-  border-radius: 0px !important;
+  border-radius: 0 !important;
 }
 
 .summaryemail {
@@ -110,11 +112,11 @@
   padding-left: 24px !important;
   display: flex;
   justify-content: center;
-  background-color: white;
+  background-color: $white;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
   height: 60px;
   padding-top: 11px;
-  border-left: 1px solid #edf0f2;
+  border-left: 1px solid $gray-100;
 }
 .report-menu {
   display: flex;
@@ -139,14 +141,14 @@
   &__row-title {
     font-size: 12px;
     line-height: 1.33;
-    color: #364656;
+    color: $gray-700;
     font-family: Graphik-Medium, sans-serif;
     margin-bottom: 2px;
   }
 }
 
 .report-applicationbycompany-table{
-  background-color: #f4f6f8 !important;
+  background-color: $gray-600 !important;
 }
 
 .tablepadding{

@@ -31,21 +31,21 @@
     font-size: 18px;
     margin-bottom: 4px;
     line-height: 1.56;
-    color: $primary-2;
+    color: $gray-900;
   }
   &__empty-content-subtitle {
     font-size: 14px;
     margin-bottom: 48px;
     line-height: 1.43;
-    color: $gray-800--old;
+    color: $gray-600;
     text-align: center;
   }
   &__empty-content-or-divider {
     height: 32px;
     width: 32px;
     margin-bottom: 12px;
-    background-color: $gray-200--old;
-    color: $gray-800--old;
+    background-color: $gray-50;
+    color: $gray-600;
     text-transform: uppercase;
     font-size: 10px;
     display: flex;
@@ -112,13 +112,13 @@
     }
     &__title {
       font-weight: 600;
-      color: $primary-2;
+      color: $gray-900;
       font-size: 16px;
       line-height: 1.63;
     }
     &__text, &__text-cred {
       font-size: 13px;
-      color: $gray-800--old;
+      color: $gray-600;
       width: 155px;
       text-align: center;
       line-height: 1.54;
@@ -145,7 +145,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: $gray-800--old;
+      color: $gray-600;
       font-size: 13px;
       font-weight: 600;
       border-radius: 50%;
@@ -162,9 +162,9 @@
 
     th {
       height: 40px;
-      background: $gray-100--old;
+      background: $gray-25;
       font-size: 11px;
-      color: $primary-2;
+      color: $gray-900;
       text-transform: uppercase;
       text-align: left;
       padding: 0 8px;
@@ -183,8 +183,8 @@
       text-align: left;
       background: $white;
       font-size: 13px;
-      color: $gray-800--old;
-      border-top: 1px solid $gray-300--old;
+      color: $gray-600;
+      border-top: 1px solid $gray-100;
     }
 
     td.network-scan-table, th.network-scan-table {
@@ -251,7 +251,7 @@
     tr {
       &.--checked {
         td {
-          background-color: $gray-200--old;
+          background-color: $gray-50;
         }
       }
     }
@@ -260,7 +260,7 @@
       border-radius: 50%;
       height: 24px;
       width: 24px;
-      border: 1px solid $gray-400--old;
+      border: 1px solid $gray-200;
       background-color: $white;
       background-size: 12px;
       background-repeat: no-repeat;
@@ -279,7 +279,7 @@
     background: $white;
     width: 592px;
     position: fixed;
-    border-left: 1px solid $gray-400--old;
+    border-left: 1px solid $gray-200;
     height: calc(100vh - #{$header-height});
     right: 0;
     top: $header-height;
@@ -288,8 +288,8 @@
 
     .aside-header {
       height: 56px;
-      background-color: $gray-100--old;
-      border-bottom: 1px solid $gray-400--old;
+      background-color: $gray-25;
+      border-bottom: 1px solid $gray-200;
       .icon__close {
         background-size: cover;
       }
@@ -301,7 +301,7 @@
     }
 
     .credential-block {
-      border: 1px solid $gray-400--old;
+      border: 1px solid $gray-200;
       border-radius: 6px;
       display: flex;
       justify-content: space-between;
@@ -315,14 +315,14 @@
         background-size: 16px;
         background-repeat: no-repeat;
         background-position: center;
-        border: 1px solid $gray-400--old;
+        border: 1px solid $gray-200;
         border-radius: 8px;
         margin-left: 8px;
         cursor: pointer;
       }
       &__username {
         font-size: 13px;
-        color: $gray-800--old;
+        color: $gray-600;
         line-height: 1.54;
       }
       &__pass {
@@ -331,11 +331,11 @@
       &__username, &__pass {
         height: 24px;
         padding: 0 5px;
-        border: 1px solid $gray-400--old;
+        border: 1px solid $gray-200;
         border-radius: 4px;
         border-color: transparent;
         &:hover, &:focus {
-          border-color: $gray-400--old;
+          border-color: $gray-200;
           outline: none;
         }
       }

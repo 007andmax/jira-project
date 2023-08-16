@@ -11,36 +11,37 @@
     </div>
     <div class="qt-aside-modern__content new-companies-content__modal--content">
         <div class="qt-inputs-row">
-          <div
-            class="qt-input-block"
-            [ngClass]="{'--input-error':!validateReport.getSubject()}"
-          >
-            <div class="qt-input-block__label">Subject</div>
-            <input
-              [(ngModel)]="draftReport.subject"
-              type="text"
-              maxlength="250"
-              placeholder="Write Subject line"
-              (input)="validateReport.resetSubject()"
+            <div
+                class="qt-input-block"
+                [ngClass]="{'--input-error':!validateReport.getSubject()}"
             >
-            <mat-error
-              class="invalid-feedback"
-              *ngIf="!validateReport.getSubject()"
-            >
-              Subject is required
-            </mat-error>
-          </div>
+                <div class="qt-input-block__label">Subject</div>
+                <input
+                    [(ngModel)]="draftReport.subject"
+                    type="text"
+                    maxlength="250"
+                    placeholder="Write Subject line"
+                    (input)="validateReport.resetSubject()"
+                >
+                <mat-error
+                    class="invalid-feedback"
+                    *ngIf="!validateReport.getSubject()"
+                >
+                    Subject is required
+                </mat-error>
+            </div>
         </div>
         <div class="qt-inputs-row draft-email-sidebar__select-users-container">
-           <div class="qt-input-block">
-             <div class="qt-input-block__label">Add Recipient</div>
-             <draft-email-user-recipients
-               [usersSelected]="usersSelected"
-               [selectedClient]="selectedClient"
-               [accountType]="accountType"
-               (onCompanyEmails)="onChangeCompanyEmails($event)"
-             ></draft-email-user-recipients>
-           </div>
+            <div class="qt-input-block">
+                <div class="qt-input-block__label">Add Recipient</div>
+                <draft-email-user-recipients
+                    [usersSelected]="usersSelected"
+                    [selectedClient]="selectedClient"
+                    [accountType]="accountType"
+                    [validate]="validateReport.getEmail()"
+                    (onCompanyEmails)="onChangeCompanyEmails($event)"
+                ></draft-email-user-recipients>
+            </div>
         </div>
         <div class="draft-email-container">
             <div class="qt-w100 draft-email-sidebar__editor-tab">

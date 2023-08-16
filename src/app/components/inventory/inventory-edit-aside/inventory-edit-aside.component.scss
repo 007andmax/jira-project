@@ -25,7 +25,7 @@
 }
 #inventory-description[placeholder]:empty:before {
     content: attr(placeholder);
-    color: $gray-600--old;
+    color: $gray-400;
 }
 .qt-checkbox {
     width: auto;

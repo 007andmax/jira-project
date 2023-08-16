@@ -63,7 +63,7 @@
     overflow: auto;
 }
 aside {
-    background-color: $gray-200--old;
+    background-color: $gray-50;
 }
 .resize-handle--x {
     -webkit-flex: 0 0 auto;
@@ -76,10 +76,10 @@ aside {
     height: 100%;
     border-left-width: 1px;
     border-left-style: solid;
-    border-left-color: black;
+    border-left-color: $gray-900;
     border-right-width: 1px;
     border-right-style: solid;
-    border-right-color: black;
+    border-right-color: $gray-900;
     cursor: ew-resize;
 
     -webkit-touch-callout: none;
@@ -98,7 +98,7 @@ aside {
         height: 100vh;
         width: 2px;
         margin-top: -18px / 2;
-        border-left-color: $gray-300--old;
+        border-left-color: $gray-100;
         border-left-width: 1px;
         border-left-style: solid;
     }
@@ -106,7 +106,7 @@ aside {
 .app-left-panel-super-admin-categories {
     display: block;
     min-width: 234px;
-    background-color: $gray-200--old;
+    background-color: $gray-50;
     color: $white;
     transition: width 300ms;
 }
@@ -133,7 +133,7 @@ aside {
     support-page-info {
         width: 290px;
         padding: 20px;
-        background-color: $gray-200--old;
+        background-color: $gray-50;
         height: 100%;
         overflow: auto;
     }
@@ -205,7 +205,7 @@ aside {
         li {
             position: relative;
             @include body-r;
-            color: $primary-2;
+            color: $gray-900;
             &:not(:last-child) {
               margin: 0 0 16px 0;
             }
@@ -216,7 +216,7 @@ aside {
 .support-page-body-category__header {
   position: relative;
   @include h4;
-  color: $primary-2;
+  color: $gray-900;
   padding-bottom: 16px;
   &::after {
     content: "";
@@ -225,7 +225,7 @@ aside {
     left: 0;
     right: 0;
     height: 1px;
-    border-bottom: dashed 1px $gray-400--old;
+    border-bottom: dashed 1px $gray-200;
   }
 }
 .category-item-category__name-text {
@@ -238,7 +238,7 @@ aside {
     width: 3px;
     height: 3px;
     border-radius: 100%;
-    background-color: $primary-1;
+    background-color: $blue-light-600;
     left: 2px;
     top: 9px;
   }

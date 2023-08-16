@@ -21,16 +21,16 @@
     >
         <div class="qt-report__body-header">
             <div
-                class="body-m__sb qt-color-dark"
+                class="body-m__sb qt-color-gray-900"
                 [textContent]="(selectedClient) ? selectedClient.name : 'All companies'"
             ></div>
-            <h6 class="qt-fw-600 qt-color-dark">Tax Report</h6>
+            <h6 class="qt-fw-600 qt-color-gray-900">Tax Report</h6>
             <div
                 class
                 *ngIf="taxes.lines.length > 0"
             >
                 <div
-                    class="body-m__sb qt-color-dark"
+                    class="body-m__sb qt-color-gray-900"
                     [textContent]="taxes.techCompanyName"
                 ></div>
             </div>

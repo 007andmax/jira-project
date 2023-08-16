@@ -6,7 +6,7 @@
                 <div class="hp-device-info">
                     <span class="device-icn">
                         <img
-                            [attr.src]="deviceType === 'printer' ? '/html/assets/img/device/Device_printer.svg' : '/html/assets/img/device/device.svg'"
+                            [attr.src]="deviceType === 'printer' ? '/html/assets/img/icons/print.svg' : '/html/assets/img/icons/computer.svg'"
                             alt="device"
                         >
                     </span>
@@ -22,10 +22,7 @@
                 </div>
                 <div class="hp-device-info">
                     <span class="device-icn">
-                        <img
-                            src="/html/assets/img/device/uptime.svg"
-                            alt="device"
-                        >
+                        <span class="icon__time--white qt-bg-contain qt-sz-16"></span>
                     </span>
                     <div class="head-device">
                         <div
@@ -75,41 +72,31 @@
                     (click)="sendCommand('r')"
                     class="head-btn-info btn-refresh"
                 >
-                    <img
-                        src="/html/assets/img/device/restart.svg"
-                        alt="restart"
-                    >
+                  <span class="icon__reset--white qt-sz-20 qt-dib"></span>
                 </a>
                 <a
                     href="javascript:;"
                     (click)="sendCommand('s')"
                     class="head-btn-info btn-shutDown"
                 >
-                    <img
-                        src="/html/assets/img/device/shutdown.svg"
-                        alt="shutdown"
-                    >
+                  <span class="icon__shutdown--white qt-sz-20 qt-dib"></span>
                 </a>
             </div>
         </div>
         <div class="head-counter">
             <div class="sub-head-counter pointer">
-                <img
-                    src="/html/assets/img/device/restart.svg"
-                    alt="Play"
-                    (click)="restartTimerControl()"
-                >
+              <span class="icon__reset--white qt-sz-24 qt-dib"></span>
             </div>
             <div class="sub-head-counter pointer">
                 <img
-                    [attr.src]="interval && !playTimer ? '/html/assets/img/device/play.svg' : '/html/assets/img/device/pause.svg'"
+                    [attr.src]="interval && !playTimer ? '/html/assets/img/icons/play-circle.svg' : '/html/assets/img/icons/pause.svg'"
                     alt="Play"
                     (click)="timerControl()"
                 >
             </div>
             <div class="sub-head-counter">
                 <img
-                    src="/html/assets/img/device/counter.svg"
+                    src="/html/assets/img/icons/timer-counter.svg"
                     alt="Print"
                 >
                 <span id="counter">

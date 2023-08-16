@@ -45,21 +45,21 @@
       //width: -moz-max-content;
       //width: max-content;
       font-weight: $fw-medium;
-      color: $primary-2;
+      color: $gray-900;
     }
 
     &__category {
       width: 144px;
       max-width: 144px;
       min-width: 144px;
-      color: $gray-800--old;
+      color: $gray-600;
     }
 
     &__menu {
       width: 62px;
       max-width: 62px;
       min-width: 62px;
-      color: $gray-800--old;
+      color: $gray-600;
     }
 
     &__menu {
@@ -74,7 +74,7 @@
       width: 92px;
       max-width: 92px;
       min-width: 92px;
-      color: $gray-800--old;
+      color: $gray-600;
     }
 
     &__sale-price,
@@ -84,20 +84,20 @@
       width: 120px;
       max-width: 120px;
       min-width: 120px;
-      color: $gray-800--old;
+      color: $gray-600;
     }
     &__cost {
       width: 78px;
       max-width: 78px;
       min-width: 78px;
-      color: $gray-800--old;
+      color: $gray-600;
       position: relative;
     }
     &__sale-price {
       width: 92px;
       max-width: 92px;
       min-width: 92px;
-      color: $gray-800--old;
+      color: $gray-600;
     }
   }
 
@@ -109,7 +109,7 @@
     &__tac,
     &__ilc,
     &__gl {
-      color: $primary-2;
+      color: $gray-900;
     }
   }
 

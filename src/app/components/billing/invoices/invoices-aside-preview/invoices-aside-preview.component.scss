@@ -4,7 +4,7 @@
     white-space: pre-line;
 }
 .not-completed-status {
-    background: $error !important;
+    background: $red-600 !important;
 }
 pre {
     margin: unset;

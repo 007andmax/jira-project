@@ -11,7 +11,7 @@
   background-position: 10px center;
   background-size: 16px;
   background-color: $white;
-  color: $primary-2;
+  color: $gray-900;
   border: none;
   background-image: url("../../../../../assets/img/icons/filter.svg");
   @media (max-width: 767px) {
@@ -29,7 +29,7 @@
     }
   }
   &.active {
-    color: $primary-1;
+    color: $blue-light-600;
     background-color: #16a4fa10;
     border: none;
     background-image: url(../../../../../assets/img/icons/filter-active.svg);
@@ -76,7 +76,7 @@
     right: 0;
     width: 8px;
     height: 8px;
-    background-color: $error;
+    background-color: $red-600;
     border-radius: 10px;
   }
 }

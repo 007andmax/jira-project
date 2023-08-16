@@ -1,5 +1,5 @@
 <div class="product-list-report product-list list-of-product">
-    <h6 class="report-title qt-fw-600 qt-color-dark">List of products sold</h6>
+    <h6 class="report-title qt-fw-600 qt-color-gray-900">List of products sold</h6>
     <div>
         <app-report-menu
             [report]="'company-roducts-report'"
@@ -28,17 +28,17 @@
             *ngIf="!loadingInProgress"
         >
             <div class="qt-report__body-header">
-                <h6 class="qt-fw-600 qt-color-dark">List of products sold</h6>
-                <div class="body-m__sb qt-color-dark">
+                <h6 class="qt-fw-600 qt-color-gray-900">List of products sold</h6>
+                <div class="body-m__sb qt-color-gray-900">
                     {{productsCompanyReport.clientCompanyName}}
                 </div>
-                <div class="body-m qt-color-dark-light">
+                <div class="body-m qt-color-gray-600">
                     <span>{{productsCompanyReport.startDate}}</span>
                     -
                     <span>{{productsCompanyReport.endDate}}</span>
                 </div>
                 <div *ngIf="productsCompanyReport.lines.length > 0">
-                    <div class="body-m__sb qt-color-dark">
+                    <div class="body-m__sb qt-color-gray-900">
                         {{ productsCompanyReport.techCompanyName }}
                     </div>
                 </div>

@@ -1,11 +1,11 @@
 @import "./src/assets/styles/variable";
 
 .active {
-    color: $success;
+    color: $green-600;
     background-color: rgba(46, 200, 102, 0.08);
 }
 .no-active {
-    color: $error;
+    color: $red-600;
     background-color: rgba(255, 82, 99, 0.08) !important;
 }
 .list-custom-subscriptions {
@@ -41,7 +41,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: $gray-200--old;
+    background-color: $gray-50;
 }
 .select-wrapper {
     max-height: 400px;
@@ -68,8 +68,8 @@
             font-weight: bold;
             &.active,
             &:hover {
-                color: $primary-1;
-                border-bottom: 2px solid $primary-1;
+                color: $blue-light-600;
+                border-bottom: 2px solid $blue-light-600;
             }
         }
     }

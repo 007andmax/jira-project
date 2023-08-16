@@ -20,14 +20,14 @@
         <div class>
             <div class="qt-report__body-header">
                 <div
-                    class="body-m__sb qt-color-dark"
+                    class="body-m__sb qt-color-gray-900"
                     *ngIf="onInit"
                 >
                     {{ selectedCompany && selectedCompany.name || 'All companies' }}
                 </div>
-                <h6 class="qt-fw-600 qt-color-dark">Commissions Report</h6>
+                <h6 class="qt-fw-600 qt-color-gray-900">Commissions Report</h6>
                 <div
-                    class="body-m qt-color-dark-light"
+                    class="body-m qt-color-gray-600"
                     *ngIf="onInit"
                 >
                     <span>
@@ -39,7 +39,7 @@
                     </span>
                 </div>
                 <div
-                    class="body-m__sb qt-color-dark"
+                    class="body-m__sb qt-color-gray-900"
                     *ngIf="onInit"
                 >
                     {{ currentCompany.name }}
@@ -51,11 +51,11 @@
             >
                 <thead>
                     <tr>
-                        <th class="qt-fw-600 qt-color-dark">Client</th>
-                        <th class="qt-fw-600 qt-color-dark">Product Price</th>
-                        <th class="qt-fw-600 qt-color-dark">Total Sales</th>
-                        <th class="qt-fw-600 qt-color-dark">Commission Rate</th>
-                        <th class="qt-fw-600 qt-color-dark2">Commission</th>
+                        <th class="qt-fw-600 qt-color-gray-900">Client</th>
+                        <th class="qt-fw-600 qt-color-gray-900">Product Price</th>
+                        <th class="qt-fw-600 qt-color-gray-900">Total Sales</th>
+                        <th class="qt-fw-600 qt-color-gray-900">Commission Rate</th>
+                        <th class="qt-fw-600 qt-color-gray-9002">Commission</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -67,7 +67,7 @@
                         [ngForTrackBy]="trackByIndex"
                     >
                         <tr class="qt-report__body-row">
-                            <td class="body-l qt-color-dark">{{ company.companyName }}</td>
+                            <td class="body-l qt-color-gray-900">{{ company.companyName }}</td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -109,13 +109,13 @@
                 <table class="qt-report__body-table-body">
                     <thead>
                         <tr>
-                            <th class="qt-fw-600 qt-color-dark">Product</th>
-                            <th class="qt-fw-600 qt-color-dark">Product Groups</th>
-                            <th class="qt-fw-600 qt-color-dark">Client</th>
-                            <th class="qt-fw-600 qt-color-dark">Product Price</th>
-                            <th class="qt-fw-600 qt-color-dark">Total Sales</th>
-                            <th class="qt-fw-600 qt-color-dark">Commission Rate</th>
-                            <th class="qt-fw-600 qt-color-dark">Commission</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Product</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Product Groups</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Client</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Product Price</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Total Sales</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Commission Rate</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Commission</th>
                         </tr>
                     </thead>
                     <tbody>

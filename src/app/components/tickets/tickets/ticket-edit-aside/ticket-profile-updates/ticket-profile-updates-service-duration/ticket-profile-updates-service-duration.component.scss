@@ -58,7 +58,7 @@
 /deep/ .durationoverlay__content {
   max-width: 180px;
   min-width: 180px;
-  border: solid 1px $gray-400--old;
+  border: solid 1px $gray-200;
   border-radius: 4px;
   opacity: 0;
   position: relative;
@@ -99,10 +99,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      border-bottom: solid 1px $gray-400--old;
+      border-bottom: solid 1px $gray-200;
 
       @media (max-width: 767px) {
-        color: $primary-2;
+        color: $gray-900;
         content: "Hour";
         background: transparent;
         transform: translateX(-25%);
@@ -124,9 +124,9 @@
     width: 34px;
     height: 32px;
     border-radius: 6px;
-    color: $primary-2;
+    color: $gray-900;
     &:hover {
-      color: $primary-1;
+      color: $blue-light-600;
     }
   }
 
@@ -136,8 +136,8 @@
   }
 
   .duration-picker__item--selected {
-    border: 1px solid $primary-1;
-    color: $primary-1;
+    border: 1px solid $blue-light-600;
+    color: $blue-light-600;
     font-weight: 600;
   }
 
@@ -171,7 +171,7 @@
       border-radius: 50%;
     }
     &:first-child {
-      border-right: solid 1px $gray-400--old;
+      border-right: solid 1px $gray-200;
     }
   }
 }
@@ -191,7 +191,7 @@
       content: "Duration picker";
       left: 0;
       top: -28px;
-      color: $primary-2;
+      color: $gray-900;
       font-size: 13px;
       line-height: 20px;
       letter-spacing: 0;
@@ -205,14 +205,14 @@
   background: $white;
   height: 40px;
   border-radius: 3px;
-  border: solid 1px $gray-500--old;
+  border: solid 1px $gray-300;
   padding: 0px 12px;
   display: flex;
   align-items: center;
 
   input {
     font-size: 13px !important;
-    color: $gray-800--old !important;
+    color: $gray-600 !important;
     height: 40px !important;
   }
 }
@@ -246,14 +246,14 @@
     height: 40px;
     border: none;
     font-weight: 600;
-    background: $primary-1;
+    background: $blue-light-600;
     color: $white;
     width: 100%;
     text-align: center;
   }
 }
 .--input-error-validate {
-  border: solid 1px $warning !important;
+  border: solid 1px $yellow-600 !important;
 }
 .app-drop-down__dropdown {
   width: max-content;

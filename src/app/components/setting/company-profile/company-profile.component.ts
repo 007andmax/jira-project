@@ -446,7 +446,12 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   }
   checkValidateDomain() {
     var regex = /^[a-zA-Z\d\-]+$/;
-
+    this.cProfileForm.get(
+      'url'
+    ).setValue(
+      this.cProfileForm.get(
+        'url'
+      ).value.toLowerCase());
     if (!regex.test(this.cProfileForm.get(
       'url'
     ).value)) this.cProfileForm.get(

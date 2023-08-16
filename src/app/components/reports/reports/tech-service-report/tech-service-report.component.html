@@ -20,9 +20,9 @@
         <div class="customer-ticket">
             <div class="customer-ticket__report">
                 <div class="qt-report__body-header">
-                    <h6 class="qt-fw-600 qt-color-dark">Tech Service report</h6>
+                    <h6 class="qt-fw-600 qt-color-gray-900">Tech Service report</h6>
                     <div
-                        class="body-m qt-color-dark-light"
+                        class="body-m qt-color-gray-600"
                         *ngIf="onInit"
                     >
                         <span>
@@ -34,7 +34,7 @@
                         </span>
                     </div>
                     <div
-                        class="body-m qt-color-dark-light"
+                        class="body-m qt-color-gray-600"
                         *ngIf="techUser && onInit"
                     >
                         {{'Tech User : ' + ((techUser) ? techUser.firstName + ' ' + techUser.lastName : '')}}
@@ -46,12 +46,12 @@
                 >
                     <thead>
                         <tr>
-                            <th class="qt-fw-600 qt-color-dark">Date</th>
-                            <th class="qt-fw-600 qt-color-dark">Ticket</th>
-                            <th class="qt-fw-600 qt-color-dark">Company</th>
-                            <th class="qt-fw-600 qt-color-dark">User</th>
-                            <th class="qt-fw-600 qt-color-dark">Service</th>
-                            <th class="qt-fw-600 qt-color-dark">Time</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Date</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Ticket</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Company</th>
+                            <th class="qt-fw-600 qt-color-gray-900">User</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Service</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Time</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -74,7 +74,7 @@
                         <tr class="qt-report__body-row">
                             <td
                                 colspan="6"
-                                class="body-l qt-color-dark qt-text-right"
+                                class="body-l qt-color-gray-900 qt-text-right"
                             >
                                 {{'Total Hours ' + getDuration(techService.totalQuantity)}}
                             </td>

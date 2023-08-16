@@ -15,7 +15,7 @@
         border-radius: 4px;
         margin-left: 8px;
         display: flex;
-        background-color: $gray-700--old;
+        background-color: $gray-500;
         align-items: center;
         justify-content: center;
 
@@ -30,7 +30,7 @@
     }
 
     &__btn-del {
-        background-color: $gray-400--old;
+        background-color: $gray-200;
     }
 
     &__input {
@@ -55,13 +55,13 @@
                 content: "Service";
                 left: 0;
                 top: -28px;
-                color: $primary-2;
+                color: $gray-900;
                 @include body-m__sb;
             }
         }
 
         &::placeholder {
-            color: $gray-600--old;
+            color: $gray-400;
         }
         &.description {
             width: 100%;
@@ -95,7 +95,7 @@
     /deep/ .date-picker input {
         height: 40px;
         width: 146px;
-        border: solid 1px $gray-500--old;
+        border: solid 1px $gray-300;
         border-radius: 4px;
         padding: 10px 12px;
         background: $white;

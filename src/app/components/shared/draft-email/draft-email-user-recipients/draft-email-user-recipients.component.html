@@ -7,6 +7,7 @@
     <div
         class="dropdown-recipients-body"
         ngbDropdownToggle
+        [ngClass]="{'--input-error':!validate}"
     >
         <mat-form-field>
             <mat-chip-list
@@ -39,10 +40,17 @@
                     [matChipInputAddOnBlur]="addOnBlur"
                     (input)="onSearch($event)"
                     (keyup)="onKeyUp($event)"
+                    (blur)="onAdd($event)"
                 >
             </mat-chip-list>
         </mat-form-field>
     </div>
+    <mat-error
+        class="invalid-feedback"
+        *ngIf="!validate"
+    >
+        At least one email address must be added
+    </mat-error>
     <div
         class="dropdown-menu unique-down"
         ngbDropdownMenu
@@ -58,7 +66,7 @@
                 ngbDropdownItem
                 class="dropdown-item"
                 (click)="selected(user)"
-                 [ngClass]="{'--selected':isSelected(user.primaryEmail)}"
+                [ngClass]="{'--selected':isSelected(user.primaryEmail)}"
             >
                 <span class="user-name">{{getFirstLastName(user)}}</span>
                 <span class="user-email qt-ml-8">{{user.primaryEmail}}</span>
@@ -74,15 +82,13 @@
                 ngbDropdownItem
                 class="dropdown-item"
                 (click)="selected(user)"
-                 [ngClass]="{'--selected' : isSelected(user.primaryEmail)}"
+                [ngClass]="{'--selected' : isSelected(user.primaryEmail)}"
             >
                 <span class="user-name">{{getFirstLastName(user)}}</span>
                 <span class="user-email qt-ml-8">{{user.primaryEmail}}</span>
             </button>
         </ng-template>
     </div>
-    <p *ngIf="showError">at least 1 user</p>
-    <p *ngIf="showErrorClient">please choose Client</p>
     <p
         class="toggle-all-users"
         [textContent]="'Show all ' + selectedUsers.length + ' emails'"

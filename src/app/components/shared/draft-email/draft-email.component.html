@@ -38,11 +38,13 @@
                 <app-draft-email-recipients
                     [companiesSelected]="companiesSelected"
                     *ngIf="action === 'COMPANIES'"
+                    [validate]="validate.getEmail()"
                     (onCompanyEmails)="onChangeCompanyEmails($event)"
                 ></app-draft-email-recipients>
                 <draft-email-user-recipients
                     [usersSelected]="usersSelected"
                     *ngIf="action === 'USERS'"
+                    [validate]="validate.getEmail()"
                     (onCompanyEmails)="onChangeCompanyEmails($event)"
                 ></draft-email-user-recipients>
             </div>

@@ -19,15 +19,15 @@
     >
         <div>
             <div class="qt-report__body-header">
-                <h6 class="qt-fw-600 qt-color-dark">Accounting report</h6>
+                <h6 class="qt-fw-600 qt-color-gray-900">Accounting report</h6>
                 <div
-                    class="body-m__sb qt-color-dark"
+                    class="body-m__sb qt-color-gray-900"
                     *ngIf="onInit"
                 >
                     {{ company.name }}
                 </div>
                 <div
-                    class="body-m qt-color-dark-light"
+                    class="body-m qt-color-gray-600"
                     *ngIf="onInit"
                 >
                     <span>
@@ -45,11 +45,11 @@
             >
                 <thead>
                     <tr>
-                        <th class="qt-fw-600 qt-color-dark">Date</th>
-                        <th class="qt-fw-600 qt-color-dark">Transaction Type</th>
-                        <th class="qt-fw-600 qt-color-dark">Source</th>
-                        <th class="qt-fw-600 qt-color-dark">Reference</th>
-                        <th class="qt-fw-600 qt-color-dark">Amount</th>
+                        <th class="qt-fw-600 qt-color-gray-900">Date</th>
+                        <th class="qt-fw-600 qt-color-gray-900">Transaction Type</th>
+                        <th class="qt-fw-600 qt-color-gray-900">Source</th>
+                        <th class="qt-fw-600 qt-color-gray-900">Reference</th>
+                        <th class="qt-fw-600 qt-color-gray-900">Amount</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -73,14 +73,14 @@
                     </ng-template>
                     <tr class="qt-report__body-row">
                         <td colspan="5">
-                            <div class="body-l qt-color-dark qt-text-right">
+                            <div class="body-l qt-color-gray-900 qt-text-right">
                                 {{'Total Payments: ' + (accountingReport.paymentsAmount | currency)}}
                             </div>
                         </td>
                     </tr>
                     <tr class="qt-report__body-row">
                         <td colspan="5">
-                            <div class="body-l qt-color-dark qt-text-right">
+                            <div class="body-l qt-color-gray-900 qt-text-right">
                                 {{'Total Invoices: ' + (accountingReport.invoicesTotalSum | currency)}}
                             </div>
                         </td>

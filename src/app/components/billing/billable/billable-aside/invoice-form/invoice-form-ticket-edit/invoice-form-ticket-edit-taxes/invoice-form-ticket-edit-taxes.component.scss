@@ -8,7 +8,7 @@
     position: absolute;
     top: -16px;
     right: 18px;
-    color: $primary-1;
+    color: $blue-light-600;
     cursor: pointer;
   }
   .new-tax {
@@ -17,7 +17,7 @@
 
   .tax-title {
     font-size: 15px;
-    color: $primary-2;
+    color: $gray-900;
     margin-bottom: 10px;
     font-weight: 700;
   }
@@ -27,7 +27,7 @@
 
     .control-label {
       top: -13px !important;
-      color: $error;
+      color: $red-600;
       font-weight: 400;
     }
     .new-tax {
@@ -53,7 +53,7 @@
         height: 40px;
         padding: 0 12px;
         font-size: 13px;
-        border: 1px solid $gray-500--old;
+        border: 1px solid $gray-300;
         border-radius: 4px;
         margin-bottom: 17px;
         color: rgb(64, 75, 95);
@@ -63,7 +63,7 @@
         font-size: 13px;
         margin-bottom: 11px;
         font-weight: 600;
-        color: $gray-800--old;
+        color: $gray-600;
       }
   }
 
@@ -92,7 +92,7 @@
         display: flex;
         position: relative;
         button {
-          color: $gray-800--old;
+          color: $gray-600;
         }
     }
   }
@@ -105,7 +105,7 @@
 .cancel-tax-item, .cancel-tax-item:hover {
   width: auto !important;
   background-color: $background !important;
-  color: $gray-800--old !important
+  color: $gray-600 !important
 }
 
 label.checkbox {

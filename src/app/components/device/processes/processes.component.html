@@ -22,20 +22,20 @@
                           (click)="printPdf();"
                           data-tooltip="Print"
                       >
-                          <img src="/html/assets/img/device/print.svg">
+                          <img src="/html/assets/img/icons/print.svg">
                       </a>
                       <a
                           (click)="downloadCsv();"
                           data-tooltip="Download CSV"
                       >
-                          <img src="/html/assets/img/device/download_csv.svg">
+                          <img src="/html/assets/img/icons/download.svg">
                       </a>
                   </div>
               </div>
               <!-- Page Content -->
               <div class="contant-area">
                   <div class="table-wrap">
-                      <table                         
+                      <table
                           class="dataTable cmn-tab-head"
                       >
                           <thead>
@@ -108,7 +108,7 @@
                                   <td class="disk">{{process.DiskMB}}</td>
                                   <td class="network">{{process.Network}}</td>
                                   <td class="action">
-                                    <img src="assets/img/icons/stop.svg" (click)="stopProcesses(process)">                                    
+                                    <img src="assets/img/icons/stop.svg" (click)="stopProcesses(process)">
                                   </td>
                               </tr>
                           </tbody>

@@ -112,7 +112,8 @@ export class PasswordManagerAddAsideComponent implements OnInit {
   onChangeDatePicker(data) {
     this.passwordRecordAdd.setExpiryDate(moment(new Date(data.year, data.month - 1, data.day)).format('YYYY/MM/DD'));
   }
-  onChangeAuthenticationKey() {
+  onChangeAuthenticationKey(event) {
+    this.passwordRecordAdd.authenticationKey = event.target.value.toUpperCase();
     this.validate.resetAuthenticationKeyLen();
     this.validate.resetAuthenticationKeyBase32();
   }

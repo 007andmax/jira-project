@@ -1,21 +1,23 @@
+@import './src/assets/styles/variable';
+
 .active {
-    background: #3e4b61;
-    color: #16a4fa;
-    border-left: 2px solid #16a4fa;
+    background: $gray-700;
+    color: $blue-light-600;
+    border-left: 2px solid $blue-light-600;
 }
 
 .category-name {
-    color: white;
+    color: $white;
 }
 
 .category-item {
     &:hover {
-        color: #16a4fa;
+        color: $blue-light-600;
     }
 }
 
 .devices-categories {
-    padding-left: 10px !important;    
+    padding-left: 10px !important;
   }
 
 li.child-menu {
@@ -93,7 +95,7 @@ li.child-menu {
     background-image: url(/assets/img/icons/remove.svg);
     background-repeat: no-repeat;
     justify-content: center;
-    align-items: center;    
+    align-items: center;
     background-position: center;
 }
 

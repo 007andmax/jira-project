@@ -2,7 +2,7 @@
 
 .toggle-all-users {
     text-align: right;
-    color: $primary-1;
+    color: $blue-light-600;
     cursor: pointer;
     font-size: 12px;
 }
@@ -27,4 +27,13 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+.--input-error {
+    position: relative;
+    input {
+        border: solid 1px $red-600 !important;
+    }
+}
+.invalid-feedback {
+    bottom: 0px !important;
 }

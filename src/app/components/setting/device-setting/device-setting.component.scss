@@ -110,10 +110,10 @@
         padding: 2px 2px 2px 8px;
         outline: none;
         font-weight: 500;
-        color: $primary-2;
+        color: $gray-900;
         &:hover,
         &:focus {
-            border-color: $gray-600--old;
+            border-color: $gray-400;
         }
         &::placeholder {
             font-weight: 400;

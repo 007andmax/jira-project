@@ -1,13 +1,13 @@
 @import './src/assets/styles/variable';
 
 .active {
-    background: $gray-800--old;
-     color: $primary-1;
-    border-left: 2px solid $primary-1;
+    background: $gray-600;
+     color: $blue-light-600;
+    border-left: 2px solid $blue-light-600;
 }
 .category-item {
     &:hover {
-        color: $primary-1;
+        color: $blue-light-600;
     }
 }
 .category-name  {
@@ -16,7 +16,7 @@
 .categories {
   padding: 0px;
   li {
-    color: $gray-600--old;
+    color: $gray-400;
   }
 }
 .--active-category-document {
@@ -46,7 +46,7 @@ _menu-info {
     .empty-logo {
       width: 24px;
       height: 24px;
-      border: 1px solid $gray-800--old;
+      border: 1px solid $gray-600;
       border-radius: 100%;
       display: flex;
       justify-content: center;

@@ -114,12 +114,12 @@
   height: 32px;
   background-color: $white;
   &::placeholder {
-    color: $gray-600--old;
+    color: $gray-400;
   }
 }
 .--gray {
   .qt-select {
-    background-color: $gray-200--old;
+    background-color: $gray-50;
   }
 }
 

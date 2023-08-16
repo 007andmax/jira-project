@@ -40,14 +40,14 @@
     &.updated{
       figure{
         &::after{
-          background: url('/assets/img/device/updated.svg') no-repeat center;
+          background: url('/assets/img/icons/updated.svg') no-repeat center;
         }
       }
     }
     &.alert{
       figure{
         &::after{
-          background: url('/assets/img/device/alert.svg') no-repeat center;
+          background: url('/assets/img/icons/alert.svg') no-repeat center;
         }
       }
     }
@@ -84,7 +84,7 @@
     font-size: 18px;
     font-weight: 600;
     line-height: 1.4;
-    color: $primary-2;
+    color: $gray-900;
     margin-bottom: 20px;
   }
 }

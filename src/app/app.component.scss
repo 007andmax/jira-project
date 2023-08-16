@@ -14,7 +14,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: $primary-2;
+    background-color: $gray-900;
     color: $white;
     transition: width 300ms;
 }
@@ -108,7 +108,7 @@
 //}
 
 aside {
-    background-color: $gray-200--old;
+    background-color: $gray-50;
 }
 
 .resize-handle--x {
@@ -147,7 +147,7 @@ aside {
         height: 100vh;
         width: 3px;
         margin-top: -18px / 2;
-        //border-left-color: $gray-300--old;
+        //border-left-color: $gray-100;
         border-left-color: transparent;
         border-left-width: 2px;
         border-left-style: solid;

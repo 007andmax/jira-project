@@ -30,12 +30,12 @@
     background-position: 10px center;
     background-size: 16px;
     background-color: $white;
-    color: $primary-2;
+    color: $gray-900;
     border: none;
     background-image: url(/assets/img/icons/filter.svg);
     &.active {
       background-color: #16a4fa10;
-      color: $primary-1;
+      color: $blue-light-600;
       padding-left: 16px;
       border: none;
       background-image: none;
@@ -93,7 +93,7 @@
     // select contract type
     .contract-type-aside-content {
       padding: 32px;
-      background-color: $gray-100--old;
+      background-color: $gray-25;
     }
     .contract-type-select {
       border-radius: 6px;
@@ -107,13 +107,13 @@
       cursor: pointer;
 
       &.--selected {
-        border-color: $primary-1;
+        border-color: $blue-light-600;
       }
 
       &__title {
         font-size: 13px;
         line-height: 1.54;
-        color: $gray-800--old;
+        color: $gray-600;
         font-weight: 600;
         margin-bottom: 4px;
       }
@@ -121,7 +121,7 @@
       &__text {
         font-size: 13px;
         line-height: 1.54;
-        color: $gray-800--old;
+        color: $gray-600;
       }
 
       &__radio {
@@ -358,18 +358,18 @@
       list-style: none;
       padding-left: 0;
       display: flex;
-      border-bottom: 1px solid $gray-400--old;
+      border-bottom: 1px solid $gray-200;
 
       li {
         font-size: 13px;
-        color: $gray-800--old;
+        color: $gray-600;
         font-weight: 600;
         padding-bottom: 5px;
         border-bottom: 3px solid transparent;
         margin-right: 16px;
         &.--selected {
-          color: $primary-1;
-          border-color: $primary-1;
+          color: $blue-light-600;
+          border-color: $blue-light-600;
         }
         cursor: pointer;
         &:last-child {
@@ -479,12 +479,12 @@
     // start user device billing
 
     .contract-tipe-info {
-      border: 1px dotted $gray-500--old;
+      border: 1px dotted $gray-300;
       height: 32px;
       width: 696px;
       font-size: 12px;
       line-height: 1.33;
-      color: $gray-800--old;
+      color: $gray-600;
       border-radius: 6px;
       margin-top: 12px;
     }
@@ -537,10 +537,10 @@ app-contracts-filter {
   width: 35%;
   margin-right: 8px;
   input {
-    color: $primary-2;
+    color: $gray-900;
   }
   input::placeholder {
-    color: $gray-800--old;
+    color: $gray-600;
     font-size: 12px;
   }
 }
@@ -549,19 +549,19 @@ app-contracts-filter {
   width: 21%;
 
   input {
-    color: $primary-2;
+    color: $gray-900;
   }
   input::placeholder {
-    color: $gray-800--old;
+    color: $gray-600;
     font-size: 12px;
   }
 }
 .contracts-number-filter {
   width: 21%;
   margin-right: 8px;
-  color: $primary-2;
+  color: $gray-900;
   &::placeholder {
-    color: $gray-800--old;
+    color: $gray-600;
     font-size: 12px;
   }
 }
@@ -570,10 +570,10 @@ app-contracts-filter {
   width: 23%;
   margin-right: 8px;
   input {
-    color: $primary-2;
+    color: $gray-900;
   }
   input::placeholder {
-    color: $gray-800--old;
+    color: $gray-600;
     font-size: 12px;
   }
   .date-picker {
@@ -661,7 +661,7 @@ line-height: 1.54;
   align-items: self-start;
     font-family: "Inter",sans-serif;
       box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-      border: solid 1px $gray-400--old;
+      border: solid 1px $gray-200;
   &__button {
     font-weight: 600;
     border: 1px solid $white;
@@ -676,7 +676,7 @@ line-height: 1.54;
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: $warning;
+    background-color: $yellow-600;
     z-index: 9999;
     height: 3px;
   }

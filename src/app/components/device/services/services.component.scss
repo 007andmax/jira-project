@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .table-wrap {
   table {
     width: 100%;
@@ -5,33 +7,33 @@
     .s-name {
       width: 35% !important;
       padding: 0 18px 0 18px;
-      background-color: white;
+      background-color: $white;
       height: 40px;
     }
     .description {
       width: 50% !important;
-      padding: 0px;
+      padding: 0;
       white-space: pre-line;
     }
     .status {
       width: 10% !important;
-      padding: 0px;
+      padding: 0;
     }
     .starttype{
       width: 7% !important;
-      padding: 0px;
+      padding: 0;
     }
     .accountName{
       width: 22% !important;
-      padding: 0px;
+      padding: 0;
     }
     .action{
       width:5% !important;
-      padding: 0px;
+      padding: 0;
     }
     thead {
       th {
-        background-color: #f4f6f8 !important;
+        background-color: $gray-50 !important;
       }
     }
   }
@@ -61,11 +63,11 @@ li.add-user {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    background-color: white;
+    background-color: $white;
   }
   tr {
     td {
-      background: #ffffff;
+      background: $white;
       padding: 0 8px 0 8px;
       height: 48px;
       border-top: 1px solid transparent;
@@ -91,8 +93,8 @@ li.add-user {
     display: flex;
     align-items: center;
     a {
-        border: solid 1px #dfe3e8;
-        background: #fff;
+        border: solid 1px $gray-200;
+        background: $white;
         border-radius: 50%;
         display: flex;
         justify-content: center;
@@ -109,14 +111,14 @@ li.add-user {
         text-align: center;
         width: 70px;
         border-radius: 3px;
-        background-color: #4f5f79;
+        background-color: $gray-700;
         font-size: 12px;
         font-weight: 500;
         font-style: normal;
         font-stretch: normal;
         line-height: 1.33;
         letter-spacing: normal;
-        color: #ffffff;
+        color: $white;
         left: -22px;
         top: -40px;
         visibility: hidden;
@@ -140,7 +142,7 @@ li.add-user {
         position: absolute;
         pointer-events: none;
         border-color: rgba(79, 95, 121, 0);
-        border-top-color: #4f5f79;
+        border-top-color: $gray-700;
         border-width: 6px;
         margin-left: -6px;
         bottom: 25px;
@@ -158,7 +160,7 @@ li.add-user {
             background: url(/assets/img/search-ico.svg) no-repeat 12px center;
             font-size: 12px;
             line-height: 1.67;
-            background-color: #ffffff;
+            background-color: $white;
             width: 200px;
         }
     }
@@ -174,7 +176,7 @@ li.add-user {
   height: 16px;
   position: absolute;
   border: 0.35rem solid rgba(0, 0, 0, 0.2);
-  border-top-color: black;
+  border-top-color: $gray-900;
   animation: spin 1s infinite linear;
   margin-right: 8px
 }
@@ -194,15 +196,15 @@ li.add-user {
   margin: 4px 32px 607px 250px;
   padding: 20px 24px 24px;
   box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-  border: solid 1px #dfe3e8;
-  background-color: #fff;
+  border: solid 1px $gray-300;
+  background-color: $white;
 }
 
 .offlineImg{
   width: 50px;
   height: 50px;
   margin-left: 140px;
-  background-image: url(/assets/img/device/offline.svg);
+  background-image: url(/assets/img/icons/offline.svg);
 }
 
 .device-offline{

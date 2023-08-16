@@ -8,7 +8,7 @@
   position: absolute;
   top: -16px;
   right: 18px;
-  color: $primary-1;
+  color: $turquoise-600;
   cursor: pointer;
   @include сaption-l__sb;
 }
@@ -18,7 +18,7 @@
 
 .tax-title {
   font-size: 15px;
-  color: $primary-2;
+  color: $gray-900;
   margin-bottom: 16px;
   font-weight: 600;
 }
@@ -28,7 +28,7 @@
 
   .control-label {
     top: -13px !important;
-    color: $error;
+    color: $red-600;
   }
   .new-tax {
     overflow: visible;
@@ -53,7 +53,7 @@
       margin-bottom: 11px;
       font-weight: 600;
 
-      color: $gray-800--old;
+      color: $gray-600;
     }
 
     .control-label {
@@ -73,7 +73,7 @@
 .new-taxes-area {
   .dropdown-item {
     button {
-      color: $gray-800--old;
+      color: $gray-600;
     }
   }
 }
@@ -114,7 +114,7 @@
 .cancel-tax-item:hover {
   width: auto !important;
   background-color: $background !important;
-  color: $gray-800--old !important;
+  color: $gray-600 !important;
 }
 .add-tax-container {
   @media (max-width: 767px) {
