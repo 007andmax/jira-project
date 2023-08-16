@@ -39,7 +39,9 @@
                     [placement]="'bottom-left'"
                     [editMode]="true"
                     [editDate]="today"
-                    [useMinDate]="false"New Quote
+                    [useMinDate]="false"
+                    New
+                    Quote
                     [useMaxDate]="true"
                     (onChange)="onChangeDate($event)"
                 ></app-date-picker>
@@ -63,7 +65,7 @@
                         class="invalid-feedback amount-received-invalid-feedback"
                         *ngIf="!validate.getAmountReceived()"
                     >
-                        You must use the entire amount. $ {{getUnUsedAmountReceived()}} left unused
+                        You must use the entire amount. ${{getUnUsedAmountReceived()}} left unused
                     </mat-error>
                 </div>
                 <!-- <div class="qt-df qt-ai-c qt-mt-10">
