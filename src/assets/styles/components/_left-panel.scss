@@ -103,6 +103,7 @@
       }
     }
     &-menu {
+      height: calc(100% - 50px);
       width: 100%;
       margin: 0;
       @media (min-width: 768px) {
@@ -310,8 +311,10 @@
       padding: 0;
     }
     @media (max-width: 767px) {
-      height: calc(100% - 88px);
       overflow: auto;
+    }
+    & + hr {
+      display: none;
     }
     &.top-menu {
       opacity: 0;
