@@ -139,7 +139,7 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
     if (this.user.primaryEmail && this.user.primaryEmail.length > 0 && this.user.companyId) this.onCheckValidPrimaryEmail();
   }
   onCheckValidPrimaryEmail() {
-    this.usersService.checkValidPrimaryEmail(this.user.primaryEmail, this.user.companyId).subscribe((data: any) => {
+    this.usersService.checkValidPrimaryEmail(this.user.primaryEmail, this.companiesStateService.getCurrentCompany().id).subscribe((data: any) => {
       this.validate.setExistPrimaryContactEmail(data.value);
       this.cd.detectChanges();
     })
