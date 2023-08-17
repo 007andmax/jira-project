@@ -101,6 +101,10 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
       this.globalFilters = data;
     })
     this.sub.add(onGetGlobalFilters);
+    let onInitGlobalFilter = this.ticketsStateService.onInitGlobalFilter.subscribe((data: TicketGlobalFilter) => {
+      this.selectedGlobalFilter = data;
+    });
+    this.sub.add(onInitGlobalFilter);
   }
   public clearSelectedGlobalFilter() {
     this.selectedGlobalFilter = new TicketGlobalFilter();
