@@ -182,7 +182,8 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
       this.getCount();
       this.onChangeCounterFilter();
-      if (this.ticketsStatus.length > 0) this.getCountsStatus();
+      if (this.ticketsStatus.length > 0 && this.globalFilter.isUseFilters()) this.getCountsStatus();
+      if (this.ticketsStatus.length > 0 && !this.globalFilter.isUseFilters()) this.clearCountsStatus();
     })
     this.sub.add(onInitGlobalFilter);
     let onGetGlobalFilters = this.ticketsStateService.onGetGlobalFilters.subscribe(data => {
@@ -192,6 +193,9 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(onGetGlobalFilters);
+  }
+  private clearCountsStatus() {
+    this.ticketsStatus.forEach(item => item.setCount(0));
   }
   private getTicketsStatus() {
     this.ticketsStatus = this.ticketsStateService.getTicketsStatus().map(item => new TicketStatusFilter(item)).sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?

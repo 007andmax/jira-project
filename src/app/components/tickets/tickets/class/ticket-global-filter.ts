@@ -49,4 +49,7 @@ export class TicketGlobalFilter {
     public setTagIds(data) {
         this.tagIds = data;
     }
+    public isUseFilters() {
+        return this.clientCompanyId && this.createdUserId && this.assignedUsersIds.length > 0 && this.statusId && this.tagIds.length > 0;
+    }
 }
