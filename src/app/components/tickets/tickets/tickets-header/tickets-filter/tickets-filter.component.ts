@@ -126,38 +126,31 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.sub.add(onGetTicketsStatus);
     let onInitGlobalFilter = this.ticketsStateService.onInitGlobalFilter.subscribe((data: TicketGlobalFilter) => {
       console.log("onInitGlobalFilter", data);
-      this.globalFilter = data;
+      this.globalFilter = new TicketGlobalFilter(JSON.parse(JSON.stringify(data)));
       this.selectedCompany = this.companiesState.getCompanies().find(item => item.id == data.clientCompanyId);
       if (this.selectedCompany) {
         this.companyDp.selectItemWithOutChanges(this.companiesState.getCompanies().find(item => item.id == data.clientCompanyId));
-        this.ticketsFilter.setCompany(this.companiesState.getCompanies().find(item => item.id == data.clientCompanyId));
-        this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === data.clientCompanyId)));
+        this.onSelectCompany(this.companiesState.getCompanies().find(item => item.id == data.clientCompanyId));
       } else {
         this.companyDp.clearWithOutChanges();
-        this.selectedCompany = null;
-        this.ticketsFilter.setCompany(null);
-        this.users = [];
+        this.onSelectCompany(null);
       }
 
       let createdUser: User = this.usersStateService.getAllUsers().find(item => data.createdUserId == item.id);
       if (createdUser) {
-        this.selectedUser = `${createdUser.firstName} ${createdUser.lastName}`;
-        this.usersDp.selectItemWithOutChanges(this.selectedUser);
-        this.ticketsFilter.setUser(createdUser);
+        this.usersDp.selectItemWithOutChanges(`${createdUser.firstName} ${createdUser.lastName}`);
+        this.onSelectUser(`${createdUser.firstName} ${createdUser.lastName}`);
       } else {
         this.usersDp.clearWithOutChanges();
-        this.ticketsFilter.setUser(null);
-        this.selectedUser = null;
+        this.onSelectUser(null);
       }
       let techUser: User = this.usersStateService.getAllUsers().find(item => data.assignedUsersIds.some(userId => userId == item.id));
       if (techUser) {
-        this.selectedTechUser = `${techUser.firstName} ${techUser.lastName}`;
-        this.techUsersDp.selectItemWithOutChanges(this.selectedTechUser);
-        this.ticketsFilter.setTechUser(techUser);
+        this.techUsersDp.selectItemWithOutChanges(`${techUser.firstName} ${techUser.lastName}`);
+        this.onSelectTechUser(`${techUser.firstName} ${techUser.lastName}`);
       } else {
         this.techUsersDp.clearWithOutChanges();
-        this.ticketsFilter.setTechUser(null);
-        this.selectedTechUser = null;
+        this.onSelectTechUser(null);
       }
       let status = this.ticketsStatus.find(item => item.id == data.statusId);
       this.ticketsStatus.forEach(item => item.selected = false);
@@ -179,9 +172,9 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       let tags = this.tagsStateService.getTags().filter(item => data.tagIds.some(tagId => tagId == item.id)).map(item => new CompanyTag(item));
       if (tags.length > 0) {
         this.tagsDp.selectedTag = tags;
-        this.ticketsFilter.setTags(tags);
+        this.onChangeTags(tags);
       } else {
-        this.ticketsFilter.setTags([]);
+        this.onChangeTags([]);
         this.tagsDp.clearWithOutChanges();
       }
       this.setTypeFilterWithoutChange("ALL");
