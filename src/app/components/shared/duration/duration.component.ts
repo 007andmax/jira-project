@@ -50,8 +50,9 @@ export class DurationComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
     this.minList = [];
-    for (let i = 0; i < 60; i + 5) {
+    for (let i = 0; i < 60;) {
       this.minList.push({ name: (i < 10) ? `0${i}` : i, value: i })
+      i += 5;
     }
     this.onInitClearState();
     this.onCheckEditItem();
