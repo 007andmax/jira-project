@@ -106,7 +106,7 @@ app-tickets-table-item {
   background-color: $white;
   position: sticky;
   top: 58px;
-  height: calc(100vh - 128px);
+  height: calc(100vh - 128px - 45px);
   transition: .3s ease-in-out width;
   border-left: 1px solid $gray-200;
 
@@ -257,7 +257,7 @@ app-tickets-table-item {
   background-color: $white;
   position: sticky;
   top: 58px;
-  height: calc(100vh - 128px);
+  height: calc(100vh - 128px - 45px);
   transition: .3s ease-in-out width;
   border-left: 1px solid $gray-200;
 }
