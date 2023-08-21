@@ -14,6 +14,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UploadAreaModule } from 'src/app/components/shared/upload-area/upload-area.module';
 import { TechUsersModule } from 'src/app/components/shared/tech-users/tech-users.module';
 import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-down/company-drop-down.module';
+import { DynamicTooltipModule } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.module';
 
 
 
@@ -32,7 +33,8 @@ import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-do
         UploadAreaProgressModule,
         NgbModule,
         UploadAreaModule,
-        CompanyDropDownModule
+        CompanyDropDownModule,
+        DynamicTooltipModule
     ],
     exports: [TicketAddAsideComponent]
 })

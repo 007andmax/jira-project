@@ -1,7 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { TicketsRealTimeService } from './tickets-real-time.service';
 import { TicketProfile } from '../../components/tickets/tickets/class/ticket-profile';
-import { ServiceAgreementsService } from '../../services/service-agreements/service-agreements.service';
 import { TicketChangeField } from '../../components/tickets/tickets/class/ticket-change-field';
 import { WebsocketService } from '../../services/websocket/websocket.service';
 import { TicketsService } from '../../services/tickets/tickets.service';

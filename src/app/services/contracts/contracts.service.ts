@@ -70,9 +70,9 @@ export class ContractsService {
     return this.http.get(this.apiUrl + `/serviceAgreements/validateCrossingDates?companyId=${companyId}&startDate=${startDate}&endDate=${endDate + ((agreementId) ? '&agreementId=' + agreementId : '')}`);
   }
   public getServiceAgreements() {
-    return this.http.get(this.apiUrl + 'serviceAgreements').pipe(map((data: any) => data.map(item => new ContractItem(item))));
+    return this.http.post(this.apiUrl + 'serviceAgreements/filtered', {}).pipe(map((data: any) => data.map(item => new ContractItem(item))));
   }
   public getServiceAgreementsByCompany(id) {
-    return this.http.get(this.apiUrl + `serviceAgreements?companyId=${id}`).pipe(map((data: any) => data.map(item => new ContractItem(item))));
+    return this.http.post(this.apiUrl + `serviceAgreements/filtered`, { companyId: id }).pipe(map((data: any) => data.map(item => new ContractItem(item))));
   }
 }

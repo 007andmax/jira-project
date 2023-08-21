@@ -1,32 +1,32 @@
 <div class="qt-pos-rel">
     <div class="company-info">
         <div class="qt-inputs-row">
-          <div class="qt-input-block qt-f50">
-            <app-drop-down
-              #companyDp
-              [title]="'Company Name'"
-              [placeholder]="'Select Company'"
-              [list]="companies"
-              [editItem]="quoteCompany"
-              [validate]="validate.getCompany()"
-              [errorMessage]="'Company is required'"
-              [field]="'name'"
-              [search]="true"
-              [change]="true"
-              (onSelectedItem)="onSelectCompany($event)"
-            >
-            </app-drop-down>
-          </div>
+            <div class="qt-input-block qt-f50">
+                <app-drop-down
+                    #companyDp
+                    [title]="'Company Name'"
+                    [placeholder]="'Select Company'"
+                    [list]="companies"
+                    [editItem]="quoteCompany"
+                    [validate]="validate.getCompany()"
+                    [errorMessage]="'Company is required'"
+                    [field]="'name'"
+                    [search]="true"
+                    [change]="true"
+                    (onSelectedItem)="onSelectCompany($event)"
+                >
+                </app-drop-down>
+            </div>
         </div>
         <div class="qt-inputs-row">
             <div class="qt-input-block qt-f50">
-              <textarea
-                class="qt-input-block__textarea qt-mt-8 qt-w100"
-                [(ngModel)]="quote.description"
-                placeholder="Quote description in short words"
-                appTextArea
-                maxlength="255"
-              ></textarea>
+                <textarea
+                    class="qt-input-block__textarea qt-mt-8 qt-w100"
+                    [(ngModel)]="quote.description"
+                    placeholder="Quote description in short words"
+                    appTextArea
+                    maxlength="255"
+                ></textarea>
             </div>
         </div>
     </div>
@@ -239,6 +239,7 @@
                 ></app-product-list-quote>
                 <app-service-list-quote
                     #servicesList
+                    [isDisabled]="areTicketsPresented && areTicketsTerminated"
                     [quoteCompany]="quoteCompany"
                     (onSelect)="onAddService($event)"
                     [services]="services"

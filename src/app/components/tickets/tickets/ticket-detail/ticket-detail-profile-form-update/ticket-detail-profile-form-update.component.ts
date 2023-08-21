@@ -69,7 +69,17 @@ export class TicketDetailProfileFormUpdateComponent extends TicketProfileFormUpd
     $("ticket-detail-profile-form-update").css({ left: $(".ticket-detail-page-content__body").offset().left - 64 });
   }
 
-
+  public isShowAddUpdate() {
+    if (this.tab !== 'QUICK_SUPPORT') {
+      if (this.tab == 'SERVICE') {
+        return this.ticketStateService.isShowAddService();
+      } else {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  }
   onUpdateTicket(data) {
     this.updateBtn.setDisabled(true);
     this.isUpdate = true;

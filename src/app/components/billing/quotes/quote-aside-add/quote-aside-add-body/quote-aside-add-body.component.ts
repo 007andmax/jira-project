@@ -22,6 +22,7 @@ import { QuoteValdiate } from '../../class/quote-vildate';
 import { ServiceListQuoteComponent } from '../service-list-quote/service-list-quote.component';
 import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-role-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { ContractsService } from 'src/app/services/contracts/contracts.service';
 
 @Component({
   selector: 'app-quote-aside-add-body',
@@ -40,6 +41,8 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   changeGlobalNote: boolean = false;
   termsAndConditions: string;
   companies = [];
+  areTicketsPresented: boolean = false;
+  areTicketsTerminated: boolean = false;
   services: Array<Service> = [];
   sub: Subscription = new Subscription();
   constructor(private companiesState: CompaniesStateService,
@@ -52,6 +55,7 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     private billableService: BillableService,
     private permissionsService: PermissionsService,
     public customerPortalStateService: CustomerPortalStateService,
+    private contractsService: ContractsService,
     private quoteServices: QuoteService,) { }
 
   ngOnInit() {
@@ -109,9 +113,20 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   getServicesList() {
     this.quoteServices.getServiceList(this.quoteCompany.id).subscribe((res: any) => {
       this.services = res;
+      this.getServiceAgreements(this.quoteCompany.id);
       this.onCheckValidateServicesByCompany();
     });
   }
+  private getServiceAgreements(id) {
+    this.contractsService.getServiceAgreementsByCompany(id).subscribe((data: any) => {
+      let Agreements = data;
+      this.areTicketsPresented = (Agreements.length > 0) ? true : false;
+      this.areTicketsTerminated = Agreements.every((el) => {
+        return el.status === 'EXPIRED' || el.status === 'TERMINATED'
+      })
+    })
+  }
+
   public onCheckValidateServicesByCompany() {
     this.quote.checkValidateServicesByCompany(this.services);
     this.cd.detectChanges();

@@ -202,12 +202,13 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       this.ticketAdd.createdUser.setCompanyId(item.id);
       this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === item.id)));
       this.onGetDevices(this.devicesStateService.getAllDevices()[item.id]);
-      let list = this.users.filter(item => item.defaultSubscriptions && item.defaultSubscriptions.ticketManagerSubscription.enabled);
+      let list = this.users.filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === item.id).defaultSubscriptions.ticketManagerSubscription.enabled);
       list = list.map(item => {
         let user = new TechUserItem(item);
         return user;
       });
       this.shareUsersList = list;
+      console.log("s.shareUsersList", this.shareUsersList);
       this.techUsersDp.resetEditMode();
       this.ticketValidate.resetCompany();
     } else {
@@ -234,7 +235,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
   onSelectUser(item) {
     let shareUser = this.shareUsersList.find(item => item.id === this.ticketAdd.createdUser.id);
     if (item) {
-      if (!(shareUser && shareUser.defaultSubscriptions && shareUser.defaultSubscriptions.ticketManagerSubscription.enabled) && this.ticketAdd.createdUser.id) this.removeShareUser(this.ticketAdd.createdUser.id);
+      if (!(shareUser && shareUser.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.selectedCompanyId).ticketManagerSubscription.enabled) && this.ticketAdd.createdUser.id) this.removeShareUser(this.ticketAdd.createdUser.id);
       let indexhUser = this.users.findIndex(user => `${user.firstName} ${user.lastName}` === item);
       if (indexhUser > -1) this.ticketAdd.createdUser.setUserData(this.users[indexhUser]);
       let findSharedUser = this.shareUsersList.find(item => item.id === this.users[indexhUser].id);
@@ -242,7 +243,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       this.ticketValidate.resetClientUser();
       this.techUsersDp.resetEditMode();
     } else {
-      if (!(shareUser && shareUser.defaultSubscriptions && shareUser.defaultSubscriptions.ticketManagerSubscription.enabled)) this.removeShareUser(this.ticketAdd.createdUser.id);
+      if (!(shareUser && shareUser.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.selectedCompanyId).ticketManagerSubscription.enabled)) this.removeShareUser(this.ticketAdd.createdUser.id);
       this.ticketAdd.createdUser.clearUserData();
     }
     this.listTechUsersForAssign = this.getListTechUsersForAssign();
