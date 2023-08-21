@@ -66,7 +66,7 @@
         }
 
         &.active {
-            color: $turquoise-600;
+            color: $blue-light-600;
 
             @media (max-width: 767px) {
                 color: $white;
@@ -79,7 +79,7 @@
                 bottom: -10px;
                 height: 3px;
                 width: calc(100% + 5px);
-                background: $turquoise-600;
+                background: $blue-light-600;
                 left: 0;
                 border-radius: 100px;
 

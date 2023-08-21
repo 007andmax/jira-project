@@ -424,6 +424,7 @@
                     type="text"
                     [ngClass]="{'--input-error' : !validate.getPrimaryContactEmail()}"
                     (input)="onChangePrimaryEmail()"
+                    (blur)="onCheckEmail()"
                     [(ngModel)]="company.contacts[0].primaryEmail"
                     placeholder="Primary Email Address"
                 >

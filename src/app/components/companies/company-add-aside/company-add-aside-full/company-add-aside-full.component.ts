@@ -20,6 +20,7 @@ import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down
 import { CrmCompanyJobTitle } from 'src/app/components/setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { CompanyProfileAddress } from '../../class/company-profile-address';
 import { MODE_EDIT_SUBSCRIPTION, MODE_HIDE_ACTIVE } from 'src/app/const/users';
+import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
   selector: 'company-add-aside-full',
@@ -56,6 +57,8 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private companiesService: CompaniesService,
     private crmStateService: CrmStateService,
+    private usersService: UsersService,
+    private companiesStateService: CompaniesStateService,
     private modalImageCropperStateService: ModalImageCropperStateService) { }
 
   ngOnInit() {
@@ -207,6 +210,15 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
 
       this.invokeEvent(place, event, index);
     });
+  }
+  onCheckEmail() {
+    if (this.company.contacts[0].primaryEmail && this.company.contacts[0].primaryEmail.length > 0) this.onCheckValidPrimaryEmail();
+  }
+  onCheckValidPrimaryEmail() {
+    this.usersService.checkValidPrimaryEmail(this.company.contacts[0].primaryEmail, this.companiesStateService.getCurrentCompany().id).subscribe((data: any) => {
+      this.validate.setExistPrimaryContactEmail(data.value);
+      this.cd.detectChanges();
+    })
   }
   invokeEvent(place: any, event, index) {
     this.company.addresses[index].locationLat = place.geometry.location.lat();

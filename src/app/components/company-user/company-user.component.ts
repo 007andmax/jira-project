@@ -117,7 +117,14 @@ export class CompanyUserComponent implements OnInit {
       if (data.action === 'USER_SAVED' || data.action === 'USER_ARCHIVED') {
 
         const reqIndex = this.reqUsers.findIndex((item) => item.id === data.data.id);
-        if (reqIndex > -1) this.reqUsers[reqIndex].onUpdate(data.data);
+        if (reqIndex > -1) {
+          if (!data.data.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === id)) {
+            this.reqUsers.splice(reqIndex, 1);
+          } else {
+            this.reqUsers[reqIndex].onUpdate(data.data);
+          }
+        }
+        console.log("this.reqUsers[reqIndex]", this.reqUsers[reqIndex]);
         if (reqIndex === -1 && data.data.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === id)) {
           this.reqUsers.unshift(new User(data.data));
           this.users.unshift(new User(data.data));
@@ -126,8 +133,13 @@ export class CompanyUserComponent implements OnInit {
           // this.onRelaodList();
         }
         const userIndex = this.users.findIndex((item) => item.id === data.data.id);
-        if (userIndex > -1) this.users[userIndex].onUpdate(data.data);
-
+        if (userIndex > -1) {
+          if (!data.data.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === id)) {
+            this.users.splice(userIndex, 1);
+          } else {
+            this.users[userIndex].onUpdate(data.data);
+          }
+        }
         if (!this.showArchivedUsers && data.action === 'USER_ARCHIVED') {
           const userIndex = this.users.findIndex((item) => item.id === data.data.id);
           if (userIndex > -1) this.users.splice(userIndex, 1);

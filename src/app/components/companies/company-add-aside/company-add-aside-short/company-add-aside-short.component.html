@@ -177,6 +177,7 @@
                 [ngClass]="{'--input-error' : !validate.getPrimaryContactEmail()}"
                 [(ngModel)]="company.contacts[0].primaryEmail"
                 (input)="onChangePrimaryEmail()"
+                (blur)="onCheckEmail()"
                 placeholder="Primary Email Address"
             >
             <mat-error

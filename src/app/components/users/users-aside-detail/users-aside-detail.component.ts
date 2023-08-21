@@ -154,7 +154,7 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
     if (this.validate.isValidate(this.user)) this.updateUser();
   }
   onCheckValidPrimaryEmail() {
-    this.usersService.checkValidPrimaryEmail(this.user.primaryEmail, this.user.customerCompaniesInfo[0].companyId, this.user.id).subscribe((data: any) => {
+    this.usersService.checkValidPrimaryEmail(this.user.primaryEmail, this.companiesStateService.getCurrentCompany().id, this.user.id).subscribe((data: any) => {
 
       this.validate.setExistPrimaryContactEmail(data.value);
       if (this.validate.isValidate(this.user)) this.updateUser();

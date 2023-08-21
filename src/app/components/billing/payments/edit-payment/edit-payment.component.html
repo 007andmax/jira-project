@@ -52,10 +52,10 @@
                         appToFixed
                     >
                     <mat-error
-                        class="qt-tooltip-error"
+                        class="invalid-feedback amount-received-invalid-feedback"
                         *ngIf="!validate.getAmountReceived()"
                     >
-                        You must use the entire amount. $ {{getUnUsedAmountReceived()}} left unused
+                        You must use the entire amount. ${{getUnUsedAmountReceived()}} left unused
                     </mat-error>
                 </div>
             </div>
