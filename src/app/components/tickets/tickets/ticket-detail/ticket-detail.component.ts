@@ -129,6 +129,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     });
     this.sub.add(getConfirm);
     this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
+      console.log("getOnUpdateTicket");
       let ticket = new Ticket(data);
       if (this.ticketProfile.id === ticket.id) {
         this.ticketProfile.update(data);

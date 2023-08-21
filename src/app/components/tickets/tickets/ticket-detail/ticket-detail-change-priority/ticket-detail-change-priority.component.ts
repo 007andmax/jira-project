@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnInit } from '@angular/core';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -29,6 +29,7 @@ export class TicketDetailChangePriorityComponent extends DropDownComponent {
     public usersStateService: UsersStateService,
     private ticketsStateService: TicketsStateService,
     private leftPanelService: LeftPanelService,
+    public cd: ChangeDetectorRef,
     public ticketsService: TicketsService) {
     super(elRef, companiesStateService, usersStateService, customerPortalStateService);
 
@@ -59,6 +60,10 @@ export class TicketDetailChangePriorityComponent extends DropDownComponent {
     } else {
       this.statusColors = this.ticketsStateService.getListStatusColor();
     }
+    let getOnUpdateTicket = this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
+      this.isDisabled = !(this.ticketsPermissionsService.isActionVisible('update', this.ticketProfile, null, null) && (this.customerPortalStateService.isCustomerPortal && this.isAddNoteForCustomerUser() || !this.customerPortalStateService.isCustomerPortal));
+      this.cd.detectChanges();
+    })
   }
   isAddNoteForCustomerUser() {
     return this.customerPortalStateService.checkEditTicket(this.usersStateService.getCurrentUser(), this.ticketProfile.createdUserId, this.ticketProfile.companyId);
