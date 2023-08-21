@@ -3,6 +3,7 @@ export class TicketStatus {
     custom: boolean;
     id: string;
     name: string = "";
+    count: number = 0;
     isInitEdit: boolean = false;
     selected: boolean = false;
     disableCreate: boolean = false;
@@ -14,6 +15,9 @@ export class TicketStatus {
             }
 
         }
+    }
+    public setCount(data) {
+        this.count = data;
     }
     checkDublicate(list) {
         var duplicate = list.filter((item) => {

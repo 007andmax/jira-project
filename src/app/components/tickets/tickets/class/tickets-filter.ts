@@ -1,5 +1,6 @@
 import { Company } from 'src/app/interfaces/company/company';
 import { User } from '../../../users/class/user';
+import { TicketStatusFilter } from '../tickets-header/class/ticket-status-filter';
 
 export class TicketsFilter {
     listType: string = "USERS";
@@ -22,8 +23,12 @@ export class TicketsFilter {
     selectedUser: User = null;
     selectedStatus: string = null;
     customStatus: boolean = false;
+    isDisbledCompany: boolean = false;
     constructor() {
         this.onInitUser();
+    }
+    public checkUse() {
+        return this.selectedCompany && this.selectedTechUser && this.selectedUser && this.selectedStatus && this.tags.length > 0;
     }
     public setCustomStatus(data) {
         this.customStatus = data;
@@ -68,7 +73,60 @@ export class TicketsFilter {
         data.USER["offset"] = 0;
         return data;
     }
+    public getDataForStatusCounts(ticketStatus: Array<TicketStatusFilter>) {
+        let data = {
+        }
+        ticketStatus.forEach(item => {
+            let status = (item.custom) ? item.title : item.title.toLocaleUpperCase().replace(" ", "_");
+            data[status] = this.getFilterStatusPayload(status);
+            if (this.selectedCompany) {
+                data[status].groupFieldFilters[0].fieldFilterDtos.push({
+                    operator: "EQ",
+                    path: "company.id",
+                    values: [this.selectedCompany.id]
+                });
+                data[status].groupFieldFilters[0].predicateRule = "AND";
+            }
+            if (this.selectedTechUser) {
+                data[status].groupFieldFilters.push({
+                    fieldFilterDtos: [{
+                        operator: "EQ",
+                        path: "assignedUser.id",
+                        values: [this.selectedTechUser.id]
+                    },
+                    {
+                        path: "multiAssignedUsers.id",
+                        operator: "IN",
+                        values: [
+                            this.selectedTechUser.id
+                        ]
+                    }],
+                    predicateRule: "OR"
+                })
+            }
+            if (this.selectedUser) {
+                data[status].groupFieldFilters[0].fieldFilterDtos.push({
+                    operator: "EQ",
+                    path: "createdUser.id",
+                    values: [this.selectedUser.id]
+                });
+                data[status].groupFieldFilters[0].predicateRule = "AND";
+            }
+            if (this.tags.length > 0) {
+                data[status].groupFieldFilters[0].fieldFilterDtos.push({
+                    operator: "IN",
+                    path: "tags.id",
+                    values: this.tags.map(item => {
+                        return item.id;
+                    })
+                });
+                data[status].groupFieldFilters[0].predicateRule = "AND";
+            }
+        });
+        return data;
+    }
     public setListType(type) {
+        console.log("setListType", type);
         this.listType = type;
         if (this.listType === "ALL") this.onInitAll();
         if (this.listType === "UNASSIGNED") this.onInitUnassigned();
@@ -157,6 +215,17 @@ export class TicketsFilter {
                 predicateRule: "OR"
             })
 
+        }
+        if (this.selectedStatus) {
+
+            payload.groupFieldFilters[0].fieldFilterDtos.push({
+                operator: "EQ",
+                path: "status",
+                values: [
+                    this.selectedStatus
+                ]
+            });
+            payload.groupFieldFilters[0].predicateRule = "AND";
         }
         if (this.selectedUser) {
 
@@ -323,6 +392,31 @@ export class TicketsFilter {
                     "predicateRule": "OR"
                 }
             ],
+        }
+    }
+    public getFilterStatusPayload(status) {
+        return {
+            excludeTrashSpam: true,
+            groupFieldFilters: [
+                {
+                    fieldFilterDtos: [
+                        {
+                            operator: "EQ",
+                            path: "status",
+                            values: [
+                                status
+                            ]
+                        },
+                        {
+                            path: "ticketSource",
+                            operator: "NOT_EQ",
+                            values: [
+                                "FROM_RECURRING_TICKET"
+                            ]
+                        }
+                    ]
+                }
+            ]
         }
     }
     private getCustomOpenPayLoad() {

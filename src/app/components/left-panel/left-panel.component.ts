@@ -395,6 +395,7 @@ export class LeftPanelComponent implements OnInit {
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
+      this.panelTickets.clearSelectedGlobalFilter();
     }
   }
   public getCurrentUserName() {

@@ -103,6 +103,7 @@
       }
     }
     &-menu {
+      height: calc(100% - 50px);
       width: 100%;
       margin: 0;
       @media (min-width: 768px) {
@@ -310,8 +311,10 @@
       padding: 0;
     }
     @media (max-width: 767px) {
-      height: calc(100% - 88px);
       overflow: auto;
+    }
+    & + hr {
+      display: none;
     }
     &.top-menu {
       opacity: 0;
@@ -335,7 +338,7 @@
       top: 100%;
     }
   }
-  &__menu-expand li {
+  &__menu-expand li:not(.dropdown-item) {
     display: flex;
     padding: 0;
     cursor: pointer;
@@ -430,6 +433,10 @@
     left: -100%;
     width: 100%;
     transition: .3s ease-in all;
+  }
+
+  hr {
+    border-top: 1px solid $gray-700;
   }
 }
 

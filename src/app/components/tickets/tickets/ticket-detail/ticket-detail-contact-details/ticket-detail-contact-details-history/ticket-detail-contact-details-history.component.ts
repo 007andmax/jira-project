@@ -90,7 +90,7 @@ export class TicketDetailContactDetailsHistoryComponent implements OnInit {
     return moment(date).format('DD MMM YYYY')
   }
   public getTickets() {
-
+    console.log("getTickets 1");
     if (this.ticketsListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;

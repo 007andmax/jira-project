@@ -37,17 +37,15 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
   showPendingPreloader: boolean = false;
   idEditTicket: string = '';
   ticketsStatus: Array<TicketStatus> = [];
+  toggleFilter: boolean = false;
   container = document.body.querySelector(".main-container");
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
     private ticketStateService: TicketStateService,
     public cd: ChangeDetectorRef,
-    private appService: AppService,
-    private router: Router,
+    public appService: AppService,
     private leftPanelService: LeftPanelService,
     private companiesStateService: CompaniesStateService,
-    private leftPanelStateService: LeftPanelStateService,
-    private usersStateService: UsersStateService,
     private customerPortalStateService: CustomerPortalStateService,
     private websocketService: WebsocketService,
     private ticketsRealTimeService: TicketsRealTimeService,
@@ -62,15 +60,19 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     } else {
       /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
       /* START */
-      this.ticketsFilter.setListType(this.ticketsStateService.getListType());
-      if (this.ticketsStateService.getListType()) this.onScroll();
+      if (this.ticketsStateService.getListType()) {
+        this.ticketsFilter.setListType(this.ticketsStateService.getListType());
+        this.onScroll();
+      }
       /* END */
     }
     let onTicketFilters = this.customerPortalStateService.onTicketFilters.subscribe(data => {
+
       this.ticketsFilter.setListType("ALL");
       this.ticketsFilter.setFilter(JSON.parse(JSON.stringify(this.customerPortalStateService.getTicketsFilter())));
       this.showPreloader = true;
       document.body.querySelector(".main-container").scrollTo(0, 0);
+      console.log("onTicketFilters", this.ticketsFilter);
       this.setDefaultScoll();
       this.onScroll();
     });
@@ -105,6 +107,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
       this.ticketsFilter = data;
       this.showPreloader = true;
+      console.log("getOnInitFilter ", JSON.parse(JSON.stringify(this.ticketsFilter)));
       document.body.querySelector(".main-container").scrollTo(0, 0);
       this.setDefaultScoll();
       this.onScroll();
@@ -133,6 +136,13 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       this.ticketsStatus = data;
     })
     this.sub.add(onGetTicketsStatus);
+    let onToggleFilter = this.ticketsStateService.onToggleFilter.subscribe(data => {
+      this.toggleFilter = data;
+    })
+    this.sub.add(onToggleFilter);
+  }
+  onToggleFilter(data) {
+    this.ticketsStateService.changeToggleFilter(data);
   }
 
   editTicket(id) {
@@ -151,6 +161,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     }
   }
   private getTickets() {
+    console.log("getTickets 2");
     if (this.ticketsListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;
@@ -158,7 +169,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     this.ticketsFilter.setOffset(this.page_number * this.offset);
     this.ticketsFilter.setSize(30);
     //this.ticketsFilter.onSetSizeAll();
-
+    console.log("this.ticketsFilter.getListTupe()", this.ticketsFilter.getListTupe());
     if (this.page_number > 0) this.showPendingPreloader = true;
     this.ticketsService.getTickets(this.ticketsFilter.getListTupe(), this.ticketsFilter.getDataForRequest()).subscribe((data: Array<Ticket>) => {
       this.tickets = [...this.tickets, ...data];

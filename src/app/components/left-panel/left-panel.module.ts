@@ -15,6 +15,7 @@ import { LeftPanelCompanyComponent } from './left-panel-company/left-panel-compa
 import { LeftPanelMarketingComponent } from './left-panel-marketing/left-panel-marketing.component';
 import { RightClickBlankModule } from 'src/app/directives/right-click-blank/right-click-blank.module';
 import { LeftPanelDevicesComponent } from './left-panel-devices/left-panel-devices.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     declarations: [LeftPanelComponent,
@@ -35,7 +36,8 @@ import { LeftPanelDevicesComponent } from './left-panel-devices/left-panel-devic
     ],
     imports: [
         CommonModule,
-        RightClickBlankModule
+        RightClickBlankModule,
+        NgbModule
 
     ],
     exports: [LeftPanelComponent]

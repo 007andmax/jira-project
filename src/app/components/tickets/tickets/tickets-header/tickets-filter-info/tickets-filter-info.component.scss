@@ -1,0 +1,14 @@
+@import "./src/assets/styles/variable";
+
+.tickets-filter-info__separator{
+    width: 1px;
+    height: 16px;
+    background-color: $gray-200;
+    margin: 0 12px;
+}
+
+.tickets-filter-info__text {
+  font-size: 14px;
+  font-weight: 500;
+  color: $gray-900;
+}

@@ -1,69 +1,80 @@
-<!-- <div class="qt-page-list__body"> -->
-<!-- <div class="qt-page-list__body-table-container" [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}"> -->
-<!-- <table class="qt-page-list__body-tbody qt-table-modern ticket-table"> -->
-<!-- <tbody -->
-<!-- infiniteScroll -->
-<!-- [infiniteScrollDistance]="2" -->
-<!-- [infiniteScrollThrottle]="15" -->
-<!-- [infiniteScrollDisabled]="infiniteScrollDisabled" -->
-<!-- (scrolled)="onScroll()" -->
-<!-- > -->
-<!-- <ng-template -->
-<!-- ngFor -->
-<!-- let-ticket -->
-<!-- [ngForOf]="tickets" -->
-<!-- [ngForTrackBy]="trackById" -->
-<!-- > -->
-<!-- <app-tickets-table-item [selected]="idEditTicket === ticket.id" (click)="editTicket(ticket.id)" [listColors]="listColors" [statusColor]="statusColor"  [setTicket]="ticket"></app-tickets-table-item> -->
-<!-- </ng-template> -->
-<!-- </tbody> -->
-<!-- </table> -->
-<!-- <div class="loading pengind-loading" *ngIf="showPendingPreloader"></div> -->
-<!-- <div class="loading" *ngIf="showPreloader"></div> -->
-<!-- </div> -->
-<!-- </div> -->
-<div class="qt-page-list__body">
-    <div
-        class="qt-page-list__body-table-container"
-        [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}"
-    >
-        <div class="qt-page-list__body-tbody qt-table-modern ticket-table">
-            <div
-                infiniteScroll
-                [infiniteScrollContainer]="container"
-                [infiniteScrollDistance]="2"
-                [infiniteScrollThrottle]="30"
-                [infiniteScrollDisabled]="infiniteScrollDisabled"
-                (scrolled)="onScroll()"
-                class="tbody"
-            >
-                <ng-template
-                    ngFor
-                    let-ticket
-                    [ngForOf]="tickets"
-                    [ngForTrackBy]="trackById"
-                >
-                    <app-tickets-table-item
-                        [selected]="idEditTicket === ticket.id"
-                        (click)="editTicket(ticket.id)"
-                        [listColors]="listColors"
-                        [ticketsStatus]="ticketsStatus"
-                        [setTicket]="ticket"
-                    ></app-tickets-table-item>
-                </ng-template>
+<div class="qt-page-list__container">
+    <div class="qt-page-list__body">
+        <div class="qt-page-list__header-thead-container">
+            <div class="qt-table-modern qt-page-list__header-thead">
+                <div class="qt-page-list__header-thead__row">
+                    <div class="ticket-table__requested-by">Requested By</div>
+                    <div class="ticket-table__subject">Subject</div>
+                    <div class="ticket-table__company">Company</div>
+                    <div class="ticket-table__assignee">Assignee</div>
+                    <div class="ticket-table__status">Status</div>
+                    <div class="ticket-table__created-date">Created Date</div>
+                </div>
             </div>
         </div>
         <div
-            class="loading pengind-loading"
-            *ngIf="showPendingPreloader"
-        ></div>
+            class="qt-page-list__body-table-container"
+            [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}"
+        >
+            <div class="qt-page-list__body-tbody qt-table-modern ticket-table">
+                <div
+                    infiniteScroll
+                    [infiniteScrollContainer]="container"
+                    [infiniteScrollDistance]="2"
+                    [infiniteScrollThrottle]="30"
+                    [infiniteScrollDisabled]="infiniteScrollDisabled"
+                    (scrolled)="onScroll()"
+                    class="tbody"
+                >
+                    <ng-template
+                        ngFor
+                        let-ticket
+                        [ngForOf]="tickets"
+                        [ngForTrackBy]="trackById"
+                    >
+                        <app-tickets-table-item
+                            [selected]="idEditTicket === ticket.id"
+                            (click)="editTicket(ticket.id)"
+                            [listColors]="listColors"
+                            [ticketsStatus]="ticketsStatus"
+                            [setTicket]="ticket"
+                        ></app-tickets-table-item>
+                    </ng-template>
+                </div>
+            </div>
+            <div
+                class="loading pengind-loading"
+                *ngIf="showPendingPreloader"
+            ></div>
+            <div
+                class="loading"
+                *ngIf="showPreloader"
+            ></div>
+        </div>
         <div
-            class="loading"
-            *ngIf="showPreloader"
+            class="mobile-action-btn"
+            (click)="onAddTicket()"
         ></div>
     </div>
     <div
-        class="mobile-action-btn"
-        (click)="onAddTicket()"
-    ></div>
+        class="aside-filters"
+        [hidden]="!toggleFilter"
+        *ngIf="!appService.checkMobile()"
+    >
+        <div class="aside-filters-header qt-df qt-ai-c qt-jc-sb">
+            <div class="aside-filters-header__title">Filters</div>
+            <div
+                class="qt-button --square-md --gray pointer"
+                (click)="onToggleFilter(false)"
+            >
+                <div class="icon__close qt-bg-contain qt-sz-16 pointer"></div>
+            </div>
+        </div>
+        <div class="aside-filters-content">
+            <app-tickets-filter
+                class="qt-w100"
+                #filter
+            ></app-tickets-filter>
+        </div>
+    </div>
 </div>

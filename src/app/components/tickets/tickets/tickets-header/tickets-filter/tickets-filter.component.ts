@@ -19,6 +19,13 @@ import { TicketStatusFilter } from '../class/ticket-status-filter';
 import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { TicketGlobalFilter } from '../../class/ticket-global-filter';
+import { TagsStateService } from 'src/app/states/tags/tags-state.service';
+import { CompanyTag } from 'src/app/components/companies/company-tags/class/company-tag';
+import { User } from 'src/app/components/users/class/user';
+import { TicketsFilterSaveComponent } from '../tickets-filter-save/tickets-filter-save.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TicketsFilterStatusComponent } from './tickets-filter-status/tickets-filter-status.component';
 
 @Component({
   selector: 'app-tickets-filter',
@@ -31,7 +38,9 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   @ViewChild('techUsersDp') techUsersDp: DropDownComponent;
   @ViewChild('statusDp') statusDp: DropDownComponent;
   @ViewChild('tagsDp') tagsDp: TicketsFilterTagsComponent;
+  @ViewChild('filterStatus') filterStatus: TicketsFilterStatusComponent;
   public ticketsFilter: TicketsFilter = new TicketsFilter();
+  globalFilter: TicketGlobalFilter = new TicketGlobalFilter();
   listType: string = "USERS";
   public selectedCompany: Company = null;
   selectedTechUser: string = null;
@@ -54,11 +63,11 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     private companiesState: CompaniesStateService,
     private ticketsService: TicketsService,
     private usersStateService: UsersStateService,
-    private companiesService: CompaniesService,
-    private elRef: ElementRef,
+    private modalService: NgbModal,
     public cd: ChangeDetectorRef,
     public appService: AppService,
     private customerPortalStateService: CustomerPortalStateService,
+    public tagsStateService: TagsStateService,
     private leftPanelService: LeftPanelService) { }
 
 
@@ -84,12 +93,14 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     let getOnChangeTypeFilter = this.ticketsStateService.getOnChangeTypeFilter().subscribe(type => {
       this.listType = type;
       this.ticketsFilter.setListType(type);
+      console.log("getOnChangeTypeFilter", this.listType);
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
       if (type !== 'RECURRING_TICKETS') this.getCount();
     })
     this.sub.add(getOnChangeTypeFilter);
     let getOnChangeTagsFilter = this.ticketsStateService.getOnChangeTagsFilter().subscribe(tags => {
       this.ticketsFilter.setTags(tags);
+      console.log("getOnChangeTagsFilter", this.ticketsFilter);
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
       this.getCount();
     });
@@ -107,17 +118,104 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(getOnUpdateCounts);
-    this.ticketsStatus = this.ticketsStateService.getTicketsStatus().map(item => new TicketStatusFilter(item));
+    this.getTicketsStatus();
     let onGetTicketsStatus = this.ticketsStateService.onGetTicketsStatus.subscribe(data => {
-      this.ticketsStatus = data.map(item => new TicketStatusFilter(item));
+      this.getTicketsStatus();
+      if (this.globalFilter.id) this.getCountsStatus();
     })
     this.sub.add(onGetTicketsStatus);
+    let onInitGlobalFilter = this.ticketsStateService.onInitGlobalFilter.subscribe((data: TicketGlobalFilter) => {
+      console.log("onInitGlobalFilter", data);
+      this.globalFilter = new TicketGlobalFilter(JSON.parse(JSON.stringify(data)));
+      this.selectedCompany = this.companiesState.getCompanies().find(item => item.id == data.clientCompanyId);
+      if (this.selectedCompany) {
+        this.companyDp.selectItemWithOutChanges(this.companiesState.getCompanies().find(item => item.id == data.clientCompanyId));
+        this.onSelectCompany(this.companiesState.getCompanies().find(item => item.id == data.clientCompanyId));
+      } else {
+        this.companyDp.clearWithOutChanges();
+        this.onSelectCompany(null);
+      }
+
+      let createdUser: User = this.usersStateService.getAllUsers().find(item => data.createdUserId == item.id);
+      if (createdUser) {
+        this.usersDp.selectItemWithOutChanges(`${createdUser.firstName} ${createdUser.lastName}`);
+        this.onSelectUser(`${createdUser.firstName} ${createdUser.lastName}`);
+      } else {
+        this.usersDp.clearWithOutChanges();
+        this.onSelectUser(null);
+      }
+      let techUser: User = this.usersStateService.getAllUsers().find(item => data.assignedUsersIds.some(userId => userId == item.id));
+      if (techUser) {
+        this.techUsersDp.selectItemWithOutChanges(`${techUser.firstName} ${techUser.lastName}`);
+        this.onSelectTechUser(`${techUser.firstName} ${techUser.lastName}`);
+      } else {
+        this.techUsersDp.clearWithOutChanges();
+        this.onSelectTechUser(null);
+      }
+      let status = this.ticketsStatus.find(item => item.id == data.statusId);
+      this.ticketsStatus.forEach(item => item.selected = false);
+      if (status) {
+        status.selected = true;
+        this.ticketsFilter.setStatus(status.name);
+        let findStatus = this.listsStatus.find(status => status.title === status.title);
+        if (findStatus) {
+          this.ticketsFilter.setCustomStatus(false);
+          this.setTypeFilterWithoutChange(findStatus.status);
+        } else {
+          this.ticketsFilter.setCustomStatus(true);
+          this.setTypeFilterWithoutChange("OPEN");
+        }
+      } else {
+        this.ticketsFilter.setStatus(null);
+        this.ticketsFilter.setCustomStatus(false);
+      }
+      let tags = this.tagsStateService.getTags().filter(item => data.tagIds.some(tagId => tagId == item.id)).map(item => new CompanyTag(item));
+      if (tags.length > 0) {
+        this.tagsDp.selectedTag = tags;
+        this.onChangeTags(tags);
+      } else {
+        this.onChangeTags([]);
+        this.tagsDp.clearWithOutChanges();
+      }
+      this.setTypeFilterWithoutChange("ALL");
+      console.log("this.ticketsFilter 1", this.ticketsFilter);
+      this.ticketsStateService.onInitFilter(this.ticketsFilter);
+      this.getCount();
+      this.onChangeCounterFilter();
+      if (this.ticketsStatus.length > 0 && this.globalFilter.isUseFilters()) this.getCountsStatus();
+      if (this.ticketsStatus.length > 0 && !this.globalFilter.isUseFilters()) this.clearCountsStatus();
+    })
+    this.sub.add(onInitGlobalFilter);
+    let onGetGlobalFilters = this.ticketsStateService.onGetGlobalFilters.subscribe(data => {
+      if (!data.find(item => item.id == this.globalFilter.id)) {
+        this.globalFilter = new TicketGlobalFilter();
+        if (this.ticketsFilter.checkUse()) this.onClearAll();
+      }
+    })
+    this.sub.add(onGetGlobalFilters);
+  }
+  private clearCountsStatus() {
+    this.ticketsStatus.forEach(item => item.setCount(0));
+  }
+  private getTicketsStatus() {
+    this.ticketsStatus = this.ticketsStateService.getTicketsStatus().map(item => new TicketStatusFilter(item)).sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
+      1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
+  }
+  private getCountsStatus() {
+    this.ticketsService.getCounts(this.ticketsFilter.getDataForStatusCounts(this.ticketsStatus)).subscribe(counts => {
+      console.log("counts", counts);
+      for (const key in counts) {
+        let index = this.ticketsStatus.findIndex(item => item.name == key);
+        if (index > -1) this.ticketsStatus[index].setCount(counts[key])
+      }
+    })
   }
   private checkCompanyCustomerUser() {
     this.ticketsFilter = this.customerPortalStateService.getTicketsFilter();
     this.selectedCompany = this.companiesState.getCompanies().find(item => item.id == localStorage.getItem('company_info_id'));
     this.companyDp.selectItemWithOutChanges(this.selectedCompany);
     this.companyDp.isDisabled = true;
+    this.ticketsFilter.isDisbledCompany = true;
     this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.selectedCompany.id)));
   }
   private checkUserCustomerUser() {
@@ -133,7 +231,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   }
   public onClearAll() {
 
-    if (!this.companyDp.isDisabled) this.ticketsFilter.setCompany(null);
+    if (!this.ticketsFilter.isDisbledCompany) this.ticketsFilter.setCompany(null);
     this.ticketsFilter.setTechUser(null);
     this.ticketsFilter.setUser(null);
     if (this.ticketsFilter.selectedStatus) {
@@ -143,13 +241,14 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.ticketsFilter.setStatus(null);
     this.ticketsFilter.setTags([]);
     this.usersDp.clearWithOutChanges();
-    if (!this.companyDp.isDisabled) this.companyDp.clearWithOutChanges();
+    if (!this.ticketsFilter.isDisbledCompany) this.companyDp.clearWithOutChanges();
     this.techUsersDp.clearWithOutChanges();
-    this.statusDp.clearWithOutChanges();
+    if (this.statusDp) this.statusDp.clearWithOutChanges();
     this.tagsDp.clearWithOutChanges();
     this.ticketsFilter.setCustomStatus(false);
     //  this.listType = "ALL";
     // this.ticketsFilter.setListType("ALL");
+    console.log("onClearAll", this.ticketsFilter)
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
     this.onChangeCounterFilter();
     if (this.listType !== 'RECURRING_TICKETS') this.getCount();
@@ -176,7 +275,11 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   close() {
     this.onClose.emit(null);
   }
-
+  saveFilter() {
+    const modalRef = this.modalService.open(TicketsFilterSaveComponent, { windowClass: 'xs-modal user-modal', container: "app-tickets", backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.globalFilter = new TicketGlobalFilter(JSON.parse(JSON.stringify(this.globalFilter)));
+    this.cd.detectChanges();
+  }
   public setTypeFilterWithoutChange(type) {
     this.listType = type;
     this.ticketsFilter.setListType(type);
@@ -185,6 +288,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.listType = type;
     this.ticketsFilter.setListType(type);
     if (!this.appService.checkMobile()) {
+      console.log("setTypeFilter 3", this.ticketsFilter);
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
       if (type !== 'RECURRING_TICKETS') this.getCount();
     }
@@ -196,7 +300,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
         return item;
       }
     });
-
   }
   onGetTechUsers(data) {
     if (this.customerPortalStateService.isCustomerPortal) this.checkUserCustomerUser();
@@ -214,7 +317,9 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     if (!item) {
       this.ticketsFilter.setCompany(null);
       this.users = [];
+      this.globalFilter.setClientCompanyId(null);
     } else {
+      this.globalFilter.setClientCompanyId(item.id);
       this.ticketsFilter.setCompany(item);
       this.selectedCompany = null;
       this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === item.id)));
@@ -222,92 +327,84 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       //  this.usersStateService.onInitFilter(this.filter);
 
     }
-
-    if (!this.appService.checkMobile()) {
-      this.ticketsStateService.onInitFilter(this.ticketsFilter);
-      this.getCount();
-      this.onChangeCounterFilter();
-    }
   }
   public onSelectTechUser(item) {
 
     if (!item) {
       this.ticketsFilter.setTechUser(null);
+      this.globalFilter.setAssignedUsersIds([]);
     } else {
       this.selectedTechUser = null;
 
       //  this.filter.setCompany(item.id);
       //  this.usersStateService.onInitFilter(this.filter);
       let indexTechUser = this.techUsersList.findIndex(user => `${user.firstName} ${user.lastName}` === item);
-      if (indexTechUser > -1) this.ticketsFilter.setTechUser(this.techUsersList[indexTechUser]);
-
+      if (indexTechUser > -1) {
+        this.ticketsFilter.setTechUser(this.techUsersList[indexTechUser]);
+        this.globalFilter.setAssignedUsersIds([this.techUsersList[indexTechUser].id]);
+      }
     }
-    if (!this.appService.checkMobile()) {
-      this.ticketsStateService.onInitFilter(this.ticketsFilter);
-      this.getCount();
-      this.onChangeCounterFilter();
-    }
-
   }
 
-  public onSelectStatus(item) {
-    if (!item) {
-      this.setTypeFilter("ALL");
+  public onSelectStatus(item, event) {
+    console.log("onSelectStatus", item);
+    if (!event.target.checked) {
+      item.selected = false;
+      this.setTypeFilterWithoutChange("ALL");
       this.ticketsFilter.setStatus(null);
       this.ticketsFilter.setCustomStatus(false);
+      this.globalFilter.setStatusId(null);
     } else {
+      item.selected = true;
       this.ticketsFilter.setStatus(item.name);
+      this.globalFilter.setStatusId(item.id);
       let findStatus = this.listsStatus.find(status => status.title === item.title);
       if (findStatus) {
         this.ticketsFilter.setCustomStatus(false);
-        this.setTypeFilter(findStatus.status);
+        this.setTypeFilterWithoutChange(findStatus.status);
       } else {
         this.ticketsFilter.setCustomStatus(true);
-        this.setTypeFilter("OPEN");
+        this.setTypeFilterWithoutChange("OPEN");
       }
-
+      this.ticketsStatus.forEach(status => {
+        if (status.id != item.id) status.selected = false;
+      })
     }
-    this.onChangeCounterFilter();
-    this.ticketsStateService.onChangeLeftPanelFilter(this.listType);
   }
   public onSelectUser(item) {
 
     if (!item) {
       this.ticketsFilter.setUser(null);
+      this.globalFilter.setCreatedUserId(null);
     } else {
       this.selectedUser = null;
 
       //  this.filter.setCompany(item.id);
       //  this.usersStateService.onInitFilter(this.filter);
       let indexhUser = this.users.findIndex(user => `${user.firstName} ${user.lastName}` === item);
-      if (indexhUser > -1) this.ticketsFilter.setUser(this.users[indexhUser]);
-
-    }
-
-    if (!this.blockFilterUser && !this.appService.checkMobile()) {
-      this.ticketsStateService.onInitFilter(this.ticketsFilter);
-      this.getCount();
+      if (indexhUser > -1) {
+        this.ticketsFilter.setUser(this.users[indexhUser]);
+        this.globalFilter.setCreatedUserId(this.users[indexhUser].id);
+      }
     }
     this.blockFilterUser = false;
-    if (!this.appService.checkMobile()) this.onChangeCounterFilter();
   }
 
   onChangeTags(tags) {
     //   this.ticketsStateService.onChangeTagsFilter(tags);
     this.ticketsFilter.setTags(tags);
-    if (!this.appService.checkMobile()) {
-      this.ticketsStateService.onInitFilter(this.ticketsFilter);
-      this.getCount();
-      this.onChangeCounterFilter();
-    }
-
+    this.globalFilter.setTagIds(tags.map(item => (item.id)));
   }
 
   applyFilters() {
+    this.setTypeFilterWithoutChange("ALL");
+    console.log("applyFilters", this.ticketsFilter);
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
     if (this.listType !== 'RECURRING_TICKETS') this.getCount();
+    this.ticketsStateService.onChangeLeftPanelFilter("ALL");
     this.onChangeCounterFilter();
     this.close();
+    this.getCountsStatus();
   }
   getTechUserList() {
     return this.techUsersList.map(item => {

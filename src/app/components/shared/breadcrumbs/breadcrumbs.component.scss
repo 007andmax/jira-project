@@ -14,22 +14,29 @@
     align-items: stretch;
 
     span {
-      color: #aebdcc;
+      font-size: 14px;
+      font-weight: 400;
+      color: $gray-500;
       line-height: 15px;
     }
 
     &.breadcrumbs-path {
       span {
-        color: $gray-400;
+        font-weight: 500;
+        color: $gray-900;
       }
     }
 
     .breadcrumb-separator {
-      margin-left: 10px;
-      margin-right: 10px;
-      width: 15px;
-      transform: rotate(90deg);
-      background-image: url(/assets/img/icons-left-sidebar/dropdown-arrow-down.svg);
+      &:before {
+        font-size: 14px;
+        font-weight: 400;
+        color: $gray-500;
+        content: "/";
+        margin-left: 8px;
+        margin-right: 8px;
+        line-height: 15px;
+      }
     }
   }
 }

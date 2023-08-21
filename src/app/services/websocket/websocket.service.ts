@@ -157,6 +157,7 @@ export class WebsocketService {
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToCategories();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToProducts();
       that.subsribeToTicketActualNumber();
+      that.subsribeToTicketsFilters();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToTickets();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToCmdShellOutput();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToBillable();
@@ -501,6 +502,18 @@ export class WebsocketService {
       this.stompClient.subscribe(`/user/watch/tickets`, (message) => {
         var newChange = JSON.parse(message.body);
         this.ticketsRealTimeService.handleRealTimeChangesTickets(newChange);
+
+      });
+
+    }, 3000);
+  }
+  public subsribeToTicketsFilters() {
+
+    setTimeout(() => {
+
+      this.stompClient.subscribe(`/user/watch/ticketFilters`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.ticketsRealTimeService.handleRealTimeChangesTicketFilters(newChange);
 
       });
 
