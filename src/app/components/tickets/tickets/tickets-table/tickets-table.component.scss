@@ -247,6 +247,16 @@ app-tickets-table-item {
 
   .ticket-table__company {
     font-weight: 500;
+    position: relative;
+    width: 100%;
+
+    .ellipsis {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 8px;
+      width: calc(100% - 16px);
+    }
   }
 
   .tag__modern {
@@ -263,6 +273,7 @@ app-tickets-table-item {
     .ellipsis {
       position: static;
       transform: unset;
+      width: calc(412px - 16px);
     }
   }
 
@@ -280,6 +291,9 @@ app-tickets-table-item {
 
     &.--high {
       background-color: $red-600;
+    }
+    &.--medium {
+      background-color: $yellow-600;
     }
   }
 }
