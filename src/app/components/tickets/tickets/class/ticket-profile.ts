@@ -6,6 +6,7 @@ import { TicketProfileAgent } from './ticket-profile-agent';
 import { TicketProfileAttachment } from './ticket-profile-attachment';
 import { CurrentUserCompany } from 'src/class/current-user/current-user-company';
 import { TicketProfileUpdate } from './ticket-profile-update';
+import { TicketsPriority } from 'src/app/components/setting/ticket-settings-page/tickets-priority/class/tickets-priority';
 
 export class TicketProfile {
     agent: TicketProfileAgent = null;
@@ -37,7 +38,7 @@ export class TicketProfile {
     number: string;
     order: boolean;
     previewNote: string;
-    priorityLevel: string;
+    priorityLevel: TicketsPriority;
     reassigned: boolean;
     reportedAsSpamAt: any;
     sharedToCurrentUserAt: any;
@@ -87,6 +88,7 @@ export class TicketProfile {
             this.updates = data.updates.map(item => {
                 return new TicketProfileUpdate(item);
             })
+            this.priorityLevel = new TicketsPriority(data.priorityLevel);
         }
     }
     public refreshAttachments(attachments) {

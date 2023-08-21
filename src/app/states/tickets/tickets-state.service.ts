@@ -10,6 +10,7 @@ import { TicketStatus } from 'src/app/components/setting/ticket-settings-page/ti
 import { StatusColor } from 'src/app/components/tickets/class/status-color';
 import { TicketsFilter } from 'src/app/components/tickets/tickets/class/tickets-filter';
 import { TicketGlobalFilter } from 'src/app/components/tickets/tickets/class/ticket-global-filter';
+import { TicketsPriority } from 'src/app/components/setting/ticket-settings-page/tickets-priority/class/tickets-priority';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,9 @@ export class TicketsStateService {
   ticketsCounts: TicketsCounts;
   isMoveToTickets: boolean = false;
   ticketStatusForRemove: TicketStatus = null;
+  ticketPriorityForRemove: TicketsPriority = null;
   listTicketStatusForRemove: Array<TicketStatus> = [];
+  onTicketsPriorities: EventEmitter<any> = new EventEmitter();
   clearFormUpdate: EventEmitter<any> = new EventEmitter();
   actualNumber: EventEmitter<any> = new EventEmitter();
   addTicket: EventEmitter<any> = new EventEmitter();
@@ -46,10 +49,24 @@ export class TicketsStateService {
   globalFilters: Array<TicketGlobalFilter> = [];
   ticketsFilter: TicketsFilter = new TicketsFilter();
   globalFilterForRemove: TicketGlobalFilter = null;
+  ticketsPriorities: Array<TicketsPriority> = [];
+  listTicketsPrioritiesForRemove: Array<TicketsPriority> = [];
   constructor(private ticketsRealTimeService: TicketsRealTimeService,
     private ticketsService: TicketsService) { }
 
   public onInit() {
+    this.ticketsRealTimeService.changeTicketPriority.subscribe(newChange => {
+      if (newChange.action === 'CUSTOM_PRIORITY_SAVED') this.ticketsPriorities.push(new TicketsPriority(newChange.data));
+      if (newChange.action === 'CUSTOM_PRIORITY_EDITED') {
+        let index = this.ticketsPriorities.findIndex(item => item.id == newChange.data.id);
+        if (index > -1) this.ticketsPriorities[index] = new TicketsPriority(newChange.data);
+      }
+      if (newChange.action === 'CUSTOM_PRIORITY_REMOVED') {
+        let index = this.ticketsPriorities.findIndex(item => item.id == newChange.data);
+        if (index > -1) this.ticketsPriorities.splice(index, 1);
+      }
+      this.onTicketsPriorities.emit(this.ticketsPriorities);
+    })
     this.ticketsRealTimeService.changeActualNumber.subscribe(newChange => {
       if (newChange.action === 'NUMBER_CHANGED' && newChange.data.type === "TICKET") {
         this.onInitActualNumber(newChange.data.numPart);
@@ -132,6 +149,18 @@ export class TicketsStateService {
   public onChangeGlobalFilter(data) {
     this.onInitGlobalFilter.emit(data);
   }
+  public setListTicketsPrioritiesForRemove(data) {
+    this.listTicketsPrioritiesForRemove = data;
+  }
+  public getListTicketsPrioritiesForRemove() {
+    return this.listTicketsPrioritiesForRemove;
+  }
+  public getTicketsPriorities() {
+    return this.ticketsPriorities;
+  }
+  public setTicketsPriorities(data) {
+    this.ticketsPriorities = data;
+  }
   public getListTicketStatusForRemove() {
     return this.listTicketStatusForRemove;
   }
@@ -141,6 +170,13 @@ export class TicketsStateService {
   public getTicketsStatus() {
     return this.ticketsStatus;
   }
+  public setTicketPriorityForRemove(data) {
+    this.ticketPriorityForRemove = data;
+  }
+  public getTicketPriorityForRemove() {
+    return this.ticketPriorityForRemove;
+  }
+
   public setTicketStatusForRemove(data) {
     this.ticketStatusForRemove = data;
   }
@@ -220,6 +256,10 @@ export class TicketsStateService {
   public onColorStatus(data) {
     this.listStatusColor = data;
     this.colorStatus.emit(data);
+  }
+  public onSetTicketsPriorities(data) {
+    this.ticketsPriorities = data;
+    this.onTicketsPriorities.emit(data);
   }
   public onToggleAddTicket() {
     this.toggleAddTicket.emit(null);

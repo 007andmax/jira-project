@@ -79,7 +79,7 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
     }
   }
   getClassType() {
-    return `priority-icon ${(this.ticket.priorityLevel && this.ticket.priorityLevel !== "MEDIUM") ? '--' + this.ticket.priorityLevel.toLowerCase() : ''}`;
+    return `priority-icon ${(this.ticket.priorityLevel && this.ticket.priorityLevel.name !== "MEDIUM") ? '--' + this.ticket.priorityLevel.name.toLowerCase() : ''}`;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

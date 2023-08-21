@@ -459,7 +459,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     return this.companiesStateService.getCompanies().find(item => item.id === id);
   }
   getClassType() {
-    return `priority-icon ticket-edit-aside__ticket-subject-flag ${(this.ticketProfile.priorityLevel && this.ticketProfile.priorityLevel !== "MEDIUM") ? '--' + this.ticketProfile.priorityLevel.toLowerCase() : ''}`;
+    return `priority-icon ticket-edit-aside__ticket-subject-flag ${(this.ticketProfile.priorityLevel && this.ticketProfile.priorityLevel.name !== "MEDIUM") ? '--' + this.ticketProfile.priorityLevel.name.toLowerCase() : ''}`;
   }
   claimTicket() {
     let currentUser = this.usersStateService.getCurrentUser();
