@@ -93,14 +93,12 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     let getOnChangeTypeFilter = this.ticketsStateService.getOnChangeTypeFilter().subscribe(type => {
       this.listType = type;
       this.ticketsFilter.setListType(type);
-      console.log("getOnChangeTypeFilter", this.listType);
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
       if (type !== 'RECURRING_TICKETS') this.getCount();
     })
     this.sub.add(getOnChangeTypeFilter);
     let getOnChangeTagsFilter = this.ticketsStateService.getOnChangeTagsFilter().subscribe(tags => {
       this.ticketsFilter.setTags(tags);
-      console.log("getOnChangeTagsFilter", this.ticketsFilter);
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
       this.getCount();
     });
@@ -125,7 +123,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onGetTicketsStatus);
     let onInitGlobalFilter = this.ticketsStateService.onInitGlobalFilter.subscribe((data: TicketGlobalFilter) => {
-      console.log("onInitGlobalFilter", data);
       this.globalFilter = new TicketGlobalFilter(JSON.parse(JSON.stringify(data)));
       this.selectedCompany = this.companiesState.getCompanies().find(item => item.id == data.clientCompanyId);
       if (this.selectedCompany) {
@@ -178,7 +175,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
         this.tagsDp.clearWithOutChanges();
       }
       this.setTypeFilterWithoutChange("ALL");
-      console.log("this.ticketsFilter 1", this.ticketsFilter);
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
       this.getCount();
       this.onChangeCounterFilter();
@@ -203,7 +199,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   }
   private getCountsStatus() {
     this.ticketsService.getCounts(this.ticketsFilter.getDataForStatusCounts(this.ticketsStatus)).subscribe(counts => {
-      console.log("counts", counts);
       for (const key in counts) {
         let index = this.ticketsStatus.findIndex(item => item.name == key);
         if (index > -1) this.ticketsStatus[index].setCount(counts[key])
@@ -246,9 +241,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     if (this.statusDp) this.statusDp.clearWithOutChanges();
     this.tagsDp.clearWithOutChanges();
     this.ticketsFilter.setCustomStatus(false);
-    //  this.listType = "ALL";
-    // this.ticketsFilter.setListType("ALL");
-    console.log("onClearAll", this.ticketsFilter)
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
     this.onChangeCounterFilter();
     if (this.listType !== 'RECURRING_TICKETS') this.getCount();
@@ -288,7 +280,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.listType = type;
     this.ticketsFilter.setListType(type);
     if (!this.appService.checkMobile()) {
-      console.log("setTypeFilter 3", this.ticketsFilter);
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
       if (type !== 'RECURRING_TICKETS') this.getCount();
     }
@@ -311,7 +302,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.techUsersNamesList = this.getTechUserList();
   }
   public onSelectCompany(item) {
-
     this.blockFilterUser = true;
     this.usersDp.clearClient();
     if (!item) {
@@ -323,21 +313,14 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       this.ticketsFilter.setCompany(item);
       this.selectedCompany = null;
       this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === item.id)));
-      //  this.filter.setCompany(item.id);
-      //  this.usersStateService.onInitFilter(this.filter);
-
     }
   }
   public onSelectTechUser(item) {
-
     if (!item) {
       this.ticketsFilter.setTechUser(null);
       this.globalFilter.setAssignedUsersIds([]);
     } else {
       this.selectedTechUser = null;
-
-      //  this.filter.setCompany(item.id);
-      //  this.usersStateService.onInitFilter(this.filter);
       let indexTechUser = this.techUsersList.findIndex(user => `${user.firstName} ${user.lastName}` === item);
       if (indexTechUser > -1) {
         this.ticketsFilter.setTechUser(this.techUsersList[indexTechUser]);
@@ -347,7 +330,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   }
 
   public onSelectStatus(item, event) {
-    console.log("onSelectStatus", item);
     if (!event.target.checked) {
       item.selected = false;
       this.setTypeFilterWithoutChange("ALL");
@@ -372,15 +354,11 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     }
   }
   public onSelectUser(item) {
-
     if (!item) {
       this.ticketsFilter.setUser(null);
       this.globalFilter.setCreatedUserId(null);
     } else {
       this.selectedUser = null;
-
-      //  this.filter.setCompany(item.id);
-      //  this.usersStateService.onInitFilter(this.filter);
       let indexhUser = this.users.findIndex(user => `${user.firstName} ${user.lastName}` === item);
       if (indexhUser > -1) {
         this.ticketsFilter.setUser(this.users[indexhUser]);
@@ -391,14 +369,12 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   }
 
   onChangeTags(tags) {
-    //   this.ticketsStateService.onChangeTagsFilter(tags);
     this.ticketsFilter.setTags(tags);
     this.globalFilter.setTagIds(tags.map(item => (item.id)));
   }
 
   applyFilters() {
     this.setTypeFilterWithoutChange("ALL");
-    console.log("applyFilters", this.ticketsFilter);
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
     if (this.listType !== 'RECURRING_TICKETS') this.getCount();
     this.ticketsStateService.onChangeLeftPanelFilter("ALL");

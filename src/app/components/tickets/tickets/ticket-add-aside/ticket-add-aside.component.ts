@@ -208,7 +208,6 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
         return user;
       });
       this.shareUsersList = list;
-      console.log("s.shareUsersList", this.shareUsersList);
       this.techUsersDp.resetEditMode();
       this.ticketValidate.resetCompany();
     } else {

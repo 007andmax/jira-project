@@ -46,7 +46,6 @@ export class TicketsPriorityComponent implements OnInit {
         this.ticketsPriorities = data.priorityLevels.map(item => new TicketsPriority(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
           1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
         this.ticketsStateService.onSetTicketsPriorities(this.ticketsPriorities);
-        console.log("this.ticketsPriorities", this.ticketsPriorities);
       })
     } else {
       this.ticketsPriorities = this.ticketsStateService.getTicketsPriorities();

@@ -18,7 +18,6 @@ export class TicketsFilterSaveComponent implements OnInit {
     private ticketsService: TicketsService,) { }
 
   ngOnInit() {
-    console.log("globalFilter", this.globalFilter);
     this.oldName = JSON.parse(JSON.stringify(this.globalFilter.name));
   }
   cancelConfirm() {

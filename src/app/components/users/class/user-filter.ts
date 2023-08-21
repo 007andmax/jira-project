@@ -166,9 +166,6 @@ export class UserFilter {
             if (this.defaultSubscriptions.ticketManagerSubscription.enabled && item.defaultSubscriptions && this.defaultSubscriptions.ticketManagerSubscription.enabled === item.defaultSubscriptions.ticketManagerSubscription.enabled) isExist = true;
             if (this.defaultSubscriptions.ticketSubscription.enabled && item.defaultSubscriptions && this.defaultSubscriptions.ticketSubscription.enabled === item.defaultSubscriptions.ticketSubscription.enabled) isExist = true;
         })
-        console.log("this.defaultSubscriptions", this.defaultSubscriptions);
-        console.log("customerCompaniesInfo", customerCompaniesInfo);
-        console.log("isExist", isExist);
         return isExist;
     }
     /**

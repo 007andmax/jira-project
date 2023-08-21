@@ -126,7 +126,6 @@ export class TicketsFilter {
         return data;
     }
     public setListType(type) {
-        console.log("setListType", type);
         this.listType = type;
         if (this.listType === "ALL") this.onInitAll();
         if (this.listType === "UNASSIGNED") this.onInitUnassigned();

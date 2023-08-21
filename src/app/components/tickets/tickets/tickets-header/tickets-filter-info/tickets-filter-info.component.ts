@@ -14,7 +14,6 @@ export class TicketsFilterInfoComponent implements OnInit {
 
   ngOnInit() {
     let onInitGlobalFilter = this.ticketsStateService.onInitGlobalFilter.subscribe((data: TicketGlobalFilter) => {
-      console.log("data", data);
       this.globalFilter = data;
     });
   }

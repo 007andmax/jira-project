@@ -15,6 +15,9 @@ export class TicketsFilterStatusComponent implements OnInit {
   ngOnInit() {
     this.shortVersion = this.ticketsStatus.length > 5;
   }
+  public trackById(index, item) {
+    return item.id;
+  }
   selectStatus(item, event) {
     this.onSelectStatus.emit({ item, event })
   }

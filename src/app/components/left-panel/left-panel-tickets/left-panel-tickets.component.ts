@@ -109,7 +109,7 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
   public clearSelectedGlobalFilter() {
     this.selectedGlobalFilter = new TicketGlobalFilter();
   }
-  private getGLobalFilters() {
+  public getGLobalFilters() {
     this.isGetGlobalFilters = true;
     this.showPreloaderGlobalFilters = true;
     this.ticketsService.getFilters(this.pageGlobalFilter).subscribe((data: any) => {
@@ -134,7 +134,6 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
     this.open = false;
   }
   setGlobalFilter(filter) {
-    console.log("setGlobalFilter", filter);
     this.selectedGlobalFilter = filter;
     this.ticketsStateService.onChangeLeftPanelFilter("ALL");
     this.ticketsStateService.onChangeGlobalFilter(filter);
@@ -189,6 +188,9 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
   onChangeTags(tags) {
     this.ticketsStateService.onChangeTagsFilter(tags);
 
+  }
+  public trackById(index, item) {
+    return item.id;
   }
   public trackByIndex(index, item) {
     return index;
