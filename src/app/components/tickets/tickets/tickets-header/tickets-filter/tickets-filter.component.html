@@ -49,6 +49,7 @@
 <div class="aside-filters-content__footer">
     <div class="qt-df">
         <button
+            *ngIf="!customerPortalStateService.isCustomerPortal"
             class="qt-button --gray qt-mr-12 qt-w100 qt-jc-c"
             (click)="saveFilter()"
         >

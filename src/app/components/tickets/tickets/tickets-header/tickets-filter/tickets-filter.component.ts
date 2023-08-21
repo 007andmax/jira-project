@@ -66,7 +66,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     public cd: ChangeDetectorRef,
     public appService: AppService,
-    private customerPortalStateService: CustomerPortalStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     public tagsStateService: TagsStateService,
     private leftPanelService: LeftPanelService) { }
 

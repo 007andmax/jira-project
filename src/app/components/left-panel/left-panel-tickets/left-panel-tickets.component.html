@@ -110,7 +110,10 @@
     </li>
 </ul>
 <hr>
-<ul class="app-left-panel__menu-expand menu-expand-show">
+<ul
+    class="app-left-panel__menu-expand menu-expand-show"
+    *ngIf="!customerPortalStateService.isCustomerPortal"
+>
     <li class="qt-mt-12 name-custom-filter">
         <span class="icon__filter-lines--gray-300 qt-sz-16 qt-bg-contain qt-dib qt-mr-4"></span>
         Custom Filters

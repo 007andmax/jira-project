@@ -83,12 +83,12 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
     })
     this.leftPanelStateService.onChangeState.subscribe(state => {
       if (!this.leftPanelService.isTicketsPage(state)) this.open = false
-      if (this.leftPanelService.isTicketsPage(state) && !this.isGetGlobalFilters) this.getGLobalFilters();
+      if (this.leftPanelService.isTicketsPage(state) && !this.isGetGlobalFilters && !this.customerPortalStateService.isCustomerPortal) this.getGLobalFilters();
     })
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
       if (this.leftPanelService.isTicketsPage(data)) {
         this.open = true;
-        if (!this.isGetGlobalFilters) this.getGLobalFilters();
+        if (!this.isGetGlobalFilters && !this.customerPortalStateService.isCustomerPortal) this.getGLobalFilters();
       }
     })
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
