@@ -281,9 +281,6 @@
                             ></i>
                         </div>
                     </div>
-
-
-
                     <div class="qt-inputs-row">
                         <div class="qt-input-block">
                             <div class="qt-input-block__label">Description</div>
@@ -371,6 +368,7 @@
             </div>
             <div class="save-template">
                 <app-tech-users
+                    [placement]="'top-right'"
                     [users]="listTechUsers"
                     (usersChange)="onChangeTechUsers($event)"
                 ></app-tech-users>
