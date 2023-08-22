@@ -108,7 +108,8 @@ export class WebsocketService {
   }
   onInitConnectCustomerUser(state, clientCompId) {
     if (this.isInit) {
-      if (state == "new-tickets") this.subsribeToTicketsCustomerUsers(clientCompId);
+      console.log("state", state);
+      if (state == "new-tickets" || state == "ticket-detail") this.subsribeToTicketsCustomerUsers(clientCompId);
       if (state == "new-billable-invoices") this.subsribeToInvoiceCustomerUsers(clientCompId);
       if (state == "quotes-component") this.subsribeToQuoteCustomerUsers(clientCompId);
       if (state == "new-payments-ng2") this.subsribeToPaymentsCustomerUsers(clientCompId);
@@ -122,7 +123,8 @@ export class WebsocketService {
     let that = this;
     this.stompClient.onConnect = (data) => {
       //   that.subsribeToKafka();
-      if (state == "new-tickets") that.subsribeToTicketsCustomerUsers(clientCompId);
+      console.log("state", state);
+      if (state == "new-tickets" || state == "ticket-detail") that.subsribeToTicketsCustomerUsers(clientCompId);
       if (state == "new-billable-invoices") that.subsribeToInvoiceCustomerUsers(clientCompId);
       if (state == "quotes-component") this.subsribeToQuoteCustomerUsers(clientCompId);
       if (state == "new-payments-ng2") this.subsribeToPaymentsCustomerUsers(clientCompId);
@@ -157,7 +159,7 @@ export class WebsocketService {
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToCategories();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToProducts();
       that.subsribeToTicketActualNumber();
-      that.subsribeToTicketsFilters();
+      if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToTicketsFilters();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToTickets();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToCmdShellOutput();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToBillable();
