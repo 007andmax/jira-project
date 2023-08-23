@@ -249,14 +249,6 @@ app-tickets-table-item {
     font-weight: 500;
     position: relative;
     width: 100%;
-
-    .ellipsis {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      left: 8px;
-      width: calc(100% - 16px);
-    }
   }
 
   .tag__modern {

@@ -34,7 +34,7 @@
                     {{tag.word}}
                     <mat-icon
                         matChipRemove
-                        *ngIf="removable"
+                        *ngIf="removable && !customerPortalStateService.isCustomerPortal"
                     >
                         cancel
                     </mat-icon>
@@ -52,7 +52,7 @@
                     [matChipInputAddOnBlur]="addOnBlur"
                     (input)="onSearch($event)"
                     (keyup)="onKeyUp($event)"
-                    [disabled]="customerPortalStateService.isCustomerPortal"
+                    *ngIf="!customerPortalStateService.isCustomerPortal"
                 >
             </mat-chip-list>
         </mat-form-field>
