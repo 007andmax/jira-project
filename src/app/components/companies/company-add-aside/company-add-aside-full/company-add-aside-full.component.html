@@ -323,16 +323,18 @@
                 </div>
                 <input
                     type="text"
+                    minlength="2"
+                    maxlength="30"
                     [ngClass]="{'--input-error' : !validate.getFirstName()}"
                     (input)="onChangeFirstName()"
                     [(ngModel)]="company.contacts[0].firstName"
                     placeholder="Enter First Name"
                 >
                 <mat-error
-                    class="invalid-feedback"
+                    class="invalid-feedback first-name-invalid"
                     *ngIf="!validate.getFirstName()"
                 >
-                    First name is required
+                    First name must be a minimum of 2 characters long
                 </mat-error>
             </div>
             <div class="qt-input-block qt-f50 qt-flex-md-100">

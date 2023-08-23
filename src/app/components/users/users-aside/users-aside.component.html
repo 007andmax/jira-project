@@ -53,15 +53,16 @@
                 <input
                     type="text"
                     minlength="2"
+                    maxlength="30"
                     (blur)="onChangeFistname()"
                     [(ngModel)]="user.firstName"
                     placeholder="Enter First Name"
                 >
                 <mat-error
-                    class="invalid-feedback"
+                    class="invalid-feedback first-name-invalid"
                     *ngIf="!validate.getFirstName()"
                 >
-                    Please enter first name
+                    First name must be a minimum of 2 characters long
                 </mat-error>
             </div>
             <div class="qt-input-block qt-f50">
