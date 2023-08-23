@@ -85,12 +85,10 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
       if (!this.isGetGlobalFilters && !this.customerPortalStateService.isCustomerPortal) this.getGLobalFilters();
     })
     this.leftPanelStateService.onChangeState.subscribe(state => {
-      console.log("onChangeState");
       if (!this.leftPanelService.isTicketsPage(state)) this.open = false
       if (this.leftPanelService.isTicketsPage(state) && !this.isGetGlobalFilters && !this.customerPortalStateService.isCustomerPortal && this.usersStateService.getCurrentUser()) this.getGLobalFilters();
     })
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
-      console.log("onFirstOpen");
       if (this.leftPanelService.isTicketsPage(data)) {
         this.open = true;
       }
@@ -116,7 +114,6 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
   public getGLobalFilters() {
     this.isGetGlobalFilters = true;
     this.showPreloaderGlobalFilters = true;
-    console.log("customerPortalStateService.isCustomerPortal", this.customerPortalStateService.isCustomerPortal);
     this.ticketsService.getFilters(this.pageGlobalFilter).subscribe((data: any) => {
       this.globalFilters = [...this.globalFilters, ...data.ticketFilteringDtos.map(item => new TicketGlobalFilter(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0))];

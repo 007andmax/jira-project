@@ -108,7 +108,6 @@ export class WebsocketService {
   }
   onInitConnectCustomerUser(state, clientCompId) {
     if (this.isInit) {
-      console.log("state", state);
       if (state == "new-tickets" || state == "ticket-detail") this.subsribeToTicketsCustomerUsers(clientCompId);
       if (state == "new-billable-invoices") this.subsribeToInvoiceCustomerUsers(clientCompId);
       if (state == "quotes-component") this.subsribeToQuoteCustomerUsers(clientCompId);
@@ -123,13 +122,11 @@ export class WebsocketService {
     let that = this;
     this.stompClient.onConnect = (data) => {
       //   that.subsribeToKafka();
-      console.log("state", state);
       if (state == "new-tickets" || state == "ticket-detail") that.subsribeToTicketsCustomerUsers(clientCompId);
       if (state == "new-billable-invoices") that.subsribeToInvoiceCustomerUsers(clientCompId);
       if (state == "quotes-component") this.subsribeToQuoteCustomerUsers(clientCompId);
       if (state == "new-payments-ng2") this.subsribeToPaymentsCustomerUsers(clientCompId);
       if (state == "company-devices") this.subsribeToDevicesCustomerUsers(clientCompId);
-
       that.onInit.emit(true);
       that.isInit = true;
     }

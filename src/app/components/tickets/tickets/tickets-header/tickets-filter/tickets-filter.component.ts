@@ -299,9 +299,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
         return item;
       }
     });
-    console.log("this.techUsersList", this.techUsersList);
     this.techUsersNamesList = this.getTechUserList();
-    console.log("this.techUsersNamesList", this.techUsersNamesList);
   }
   public onSelectCompany(item) {
     this.blockFilterUser = true;

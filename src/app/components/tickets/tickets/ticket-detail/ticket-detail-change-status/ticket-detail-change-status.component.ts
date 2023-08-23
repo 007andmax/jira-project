@@ -24,7 +24,6 @@ export class TicketDetailChangeStatusComponent extends TicketChangeStatusCompone
     })
     this.sub.add(onGetTicketsStatus);
     let getOnUpdateTicket = this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
-      console.log("getOnUpdateTicket");
       this.setList();
       this.cd.detectChanges();
     })
