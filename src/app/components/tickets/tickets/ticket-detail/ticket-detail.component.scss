@@ -951,8 +951,8 @@ app-ticket-change-status {
     background-color: $gray-50;
     @media (hover:none) and (min-width: 767px), (pointer:coarse) and (min-width: 767px) {
       position: fixed; // TODO check add style for fix height
-      width: 100%;
       overflow: auto;
+      width: calc(100% - 72px);
     }
 
     &-main {
@@ -962,6 +962,18 @@ app-ticket-change-status {
       align-items: flex-start;
       height: 100%;
       margin: 0 auto;
+
+      &.--hide-sidebar-info {
+        width: 1626px;
+
+        .ticket-detail-page-content__sidebar-info {
+          display: none;
+        }
+
+        .ticket-detail-page-content__body {
+          width: 100%;
+        }
+      }
     }
 
     &__body {
