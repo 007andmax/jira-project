@@ -1029,6 +1029,7 @@ app-ticket-change-status {
     &__sidebar-preview {
       background-color: $white;
       width: 310px;
+      min-width: 310px;
       padding: 16px;
       overflow-x: hidden;
       overflow-y: auto;
