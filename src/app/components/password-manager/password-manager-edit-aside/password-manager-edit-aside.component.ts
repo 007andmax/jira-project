@@ -21,6 +21,8 @@ import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { PasswordRecordHistory } from '../class/password-record-history';
 import { PasswordRecordLink } from '../class/password-record-link';
+import { DevicesService } from 'src/app/services/devices/devices.service';
+import { Device } from '../../company-devices/class/device';
 
 /**
  * Password manager edit aside component
@@ -40,6 +42,7 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
   subSecretCode: Subscription;
   showPassword: boolean = false;
   tab: string = 'PASSWORD_DETAIL'
+  devices = [];
   categories: Array<PasswordRecordCategories> = [];
   public editItem: PasswordRecord = null;
   timeCount: number = 0;
@@ -73,6 +76,7 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
     private usersStateService: UsersStateService,
     private elRef: ElementRef,
     private toastrService: ToastrService,
+    public devicesService: DevicesService,
     private appStateService: AppStateService
   ) { }
 
@@ -147,6 +151,16 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
       })
     })
   }
+  getDevices() {
+    if (this.devices.length == 0) {
+      this.devicesService.getCompanyDevices(this.selectedClient.id).subscribe((data: any) => {
+        this.devices = (data[this.selectedClient.id]) ? JSON.parse(JSON.stringify(data[this.selectedClient.id])).map(item => new Device(item)) : [];
+        this.passwordManagerStateService.setDevices(this.devices);
+      });
+    } else {
+      this.passwordManagerStateService.setDevices(this.devices);
+    }
+  }
   toggleSecretCode() {
     this.showSecretCode = !this.showSecretCode;
     if (this.intervalContainer) clearInterval(this.intervalContainer);
@@ -166,6 +180,7 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
   }
   changeTab(data) {
     this.tab = data;
+    if (this.tab === 'LINKED_DEVICES') this.getDevices();
   }
   getCodeRecords() {
     this.timeCount = 0;

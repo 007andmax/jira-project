@@ -11,6 +11,7 @@ export class PasswordManagerStateService {
   recordForRemove: PasswordRecord = null;
   selectedCategory: PasswordRecordCategories;
   onFilterByCategory: EventEmitter<any> = new EventEmitter();
+  onGetDevices: EventEmitter<any> = new EventEmitter();
   onFilter: EventEmitter<any> = new EventEmitter();
   onGetCategories: EventEmitter<any> = new EventEmitter();
   categories: Array<PasswordRecordCategories> = [];
@@ -30,6 +31,9 @@ export class PasswordManagerStateService {
   }
   public getSelectedCategory() {
     return this.selectedCategory;
+  }
+  public setDevices(data) {
+    this.onGetDevices.emit(data);
   }
   public setFilterByCategory(data) {
     this.selectedCategory = data;
