@@ -7,6 +7,7 @@ import { FormGroup } from "@angular/forms";
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { DevicesRecurringTicketsStateService } from './services/devices-recurring-tickets-state.service';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
+import { Device } from 'src/app/components/company-devices/class/device';
 
 
 @Component({
@@ -48,11 +49,7 @@ export class DevicesRecurringTicketsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getCLientsList();
     this.onInitClearState();
-    if (this.devicesStateService.getAllDevices()) this.preloader = false;
-    this.devicesStateService.getOnDevices().subscribe(data => {
-      this.preloader = false;
-      if (this.companyId) this.getDevices();
-    })
+    if (this.companyId) this.getDevices();
   }
 
   /**
@@ -76,23 +73,21 @@ export class DevicesRecurringTicketsComponent implements OnInit, OnDestroy {
   }
 
   getDevices() {
-    if (this.devicesStateService.getAllDevices() && this.devicesStateService.getAllDevices()[this.companyId]) {
-      this.devicesList = this.devicesStateService.getAllDevices()[this.companyId].map((item) => {
+    this.devicesService.getCompanyDevices(this.companyId).subscribe((data: any) => {
+      this.preloader = false;
+      this.devicesList = (data[this.companyId]) ? JSON.parse(JSON.stringify(data[this.companyId])).map((item) => {
         item.name = item.hostName;
         return item;
-      });
-    } else {
-      this.devicesList = [];
-    }
-    this.devicesList = (this.devicesList.length === 0) ? null : this.devicesList;
-    if (!this.devicesList) this.clearDevices();
-    if (this.editItem && this.devicesList) {
-      let index: number = this.devicesList.findIndex(item => item.id === this.editItem.deviceId);
-      if (index > (-1)) {
-        this.selectedDevice = this.devicesList[index];
+      }) : null;
+      if (!this.devicesList) this.clearDevices();
+      if (this.editItem && this.devicesList) {
+        let index: number = this.devicesList.findIndex(item => item.id === this.editItem.deviceId);
+        if (index > (-1)) {
+          this.selectedDevice = this.devicesList[index];
+        }
       }
-    }
-    this.getAllItems.emit(this.devicesList);
+      this.getAllItems.emit(this.devicesList);
+    });
   }
 
   /**

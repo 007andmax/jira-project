@@ -13,6 +13,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { TicketStateService } from 'src/app/components/tickets/tickets/ticket-edit-aside/services/ticket-state.service';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { Device } from 'src/app/components/company-devices/class/device';
+import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 
 @Component({
   selector: 'password-manager-linked',
@@ -44,6 +45,7 @@ export class PasswordManagerLinkedComponent implements OnInit {
     public ticketsService: TicketsService,
     public ticketStateService: TicketStateService,
     public elRef: ElementRef,
+    public devicesStateService: DevicesStateService,
     public customerPortalStateService: CustomerPortalStateService,
     public devicesService: DevicesService,
     private usersStateService: UsersStateService,) { }

@@ -148,8 +148,8 @@
                                 [dropdownHeight]="'300px'"
                                 [heightInput]="'36px'"
                                 [list]="devices"
-                                [isDisabled]="!remoteConnectionReport.companyId || devicesStateService.getPreloaderDevices()"
-                                [preloader]="remoteConnectionReport.preloaderDevices || devicesStateService.getPreloaderDevices()"
+                                [isDisabled]="!remoteConnectionReport.companyId || remoteConnectionReport.preloaderDevices"
+                                [preloader]="remoteConnectionReport.preloaderDevices"
                                 (onSelectedItem)="onSelectDevice($event)"
                             ></software-summary-devices-dro-down>
                         </div>
@@ -167,7 +167,8 @@
                         <button
                             class="btn-new btn-primary-white qt-fs-0"
                             (click)="getReportByRemoteConnectionReport()"
-                            [disabled]="remoteConnectionReport.preloaderDevices"
+                            [disabled]="remoteConnectionReport.preloaderDevices || !remoteConnectionReport.companyId"
+                            [ngClass]="{'--disabled':remoteConnectionReport.preloaderDevices || !remoteConnectionReport.companyId}"
                         >
                             Get
                 Report
