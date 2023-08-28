@@ -24,7 +24,6 @@ export class DevicesRecurringTicketsComponent implements OnInit, OnDestroy {
   @Input() companyId: string;
   @Input() editItem: any;
   public selectedDevice;
-  public subGetDevicesList: ISubscription;
   public devicesList: any;
   preloader: boolean = true;
   focus$ = new Subject<string>();
@@ -67,12 +66,15 @@ export class DevicesRecurringTicketsComponent implements OnInit, OnDestroy {
    * Get devices list
    */
   private getCLientsList() {
-    this.subGetDevicesList = this.devicesRecurringTicketsStateService.devicesCompany.subscribe((res: any) => {
+    let subGetDevicesList = this.devicesRecurringTicketsStateService.devicesCompany.subscribe((res: any) => {
+      this.companyId = res;
       this.getDevices();
     })
+    this.sub.add(subGetDevicesList);
   }
 
   getDevices() {
+    console.log("companyId", this.companyId);
     this.devicesService.getCompanyDevices(this.companyId).subscribe((data: any) => {
       this.preloader = false;
       this.devicesList = (data[this.companyId]) ? JSON.parse(JSON.stringify(data[this.companyId])).map((item) => {

@@ -113,10 +113,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.ticketForEdit = data;
     this.techUsers = data.assignedUsers;
     this.selectClient(data.company);
-    this.devicesService.onInitHangle(data.company.id);
-    this.selectedClient = data.company;
     this.createService.getStateDatePicker().onInitEditMode(data.startDate);
-
     this.products = (data.products.length > 0) ? this.createService.getProductsForEdit(data.products) : [new ForCreateProduct()];
     this.services = (data.services.length > 0) ? this.createService.getServicesForEdit(data.services, data.serviceErrors) : [new ForCreateService()];
     this.createService.setTagsForEdit(data.tags);
@@ -126,7 +123,6 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.createService.getTechState().setUsersFromtEdit(data.assignedUsers);
     this.createService.setCronForEdit(data.cronExpression);
     this.onChangeCron(data.cronExpression);
-    this.getServiceAgreements(data.company.id);
     // this.description.update();
     this.cd.detectChanges();
 

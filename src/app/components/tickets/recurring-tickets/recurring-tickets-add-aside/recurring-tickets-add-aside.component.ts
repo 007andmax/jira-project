@@ -212,8 +212,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     * Get company devices
     */
   private getCompanyDevices() {
-    let company = this.recurringState.getClient();
-    company && this.devicesRecurringTicketsStateService.onInitHangle(company.id);
+    this.devicesRecurringTicketsStateService.onInitHangle(this.selectedClient.id);
   }
 
   /**
@@ -250,9 +249,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   public selectClient(selectClient) {
     this.validate.resetCompany();
     if (selectClient == null) {
-
       this.recurringState.getCreateTicket().setCompany(null);
-
       this.selectedClient = null;
       this.recurringState.setClient(selectClient);
 

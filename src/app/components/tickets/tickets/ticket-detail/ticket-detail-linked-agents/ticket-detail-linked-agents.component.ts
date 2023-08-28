@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { PasswordDeviceUser } from 'src/app/components/password-manager/class/password-device-user';
 import { PasswordManagerLinkedComponent } from 'src/app/components/password-manager/password-manager-add-aside/password-manager-linked/password-manager-linked.component';
 import { TicketProfile } from '../../class/ticket-profile';
+import { Device } from 'src/app/components/company-devices/class/device';
 
 @Component({
   selector: 'ticket-detail-linked-agents',
@@ -16,21 +17,21 @@ export class TicketDetailLinkedAgentsComponent extends PasswordManagerLinkedComp
   selectedDevice;
   ngOnInit() {
     if (this.ticketProfile.agent) this.selectedDevice = JSON.parse(JSON.stringify(this.ticketProfile.agent));
-    if (this.devicesStateService.getAllDevices()) {
-      this.devices = this.devicesStateService.getAllDevices()[this.selectedCompanyId];
-      this.preloader = false;
-      if (this.selectedCompanyId) this.onSelectCompany(this.selectedCompanyId);
-    }
-    this.devicesStateService.getOnDevices().subscribe(data => {
-      this.devices = data[this.selectedCompanyId];
-      this.preloader = false;
-      if (this.selectedCompanyId) this.onSelectCompany(this.selectedCompanyId);
+    if (this.ticketStateService.getDevices().length > 0) this.getDevicesCompany(this.ticketStateService.getDevices());
+    let onGetDevices = this.ticketStateService.onGetDevices.subscribe(data => {
+      this.getDevicesCompany(this.ticketStateService.getDevices());
     })
+    this.sub.add(onGetDevices);
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
     let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
       this.getClientsList(data);
     })
     this.sub.add(getOnCompanies);
+  }
+  getDevicesCompany(data) {
+    this.devices = data;
+    this.preloader = false;
+    if (this.selectedCompanyId) this.onSelectCompany(this.selectedCompanyId);
   }
   onSelectCompany(id) {
     this.usersList = [];
