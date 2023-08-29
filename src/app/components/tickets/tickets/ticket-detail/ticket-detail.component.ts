@@ -141,7 +141,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     })
     this.ticketsStateService.getOnChangeFieldTicket().subscribe((data: TicketChangeField) => {
       if (this.ticketProfile.id === data.id) {
-        if (data.field === "agent.deviceId") this.getDevices(data);
+        if (data.field === "agent.deviceId") this.setAgent(data);
       }
       this.cd.detectChanges();
 
@@ -192,12 +192,10 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onEditUpdateByForm);
   }
-  getDevices(data: TicketChangeField) {
-    this.devicesService.getCompanyDevices(this.ticketProfile.company.id).subscribe((res: any) => {
-      let device = (res[this.ticketProfile.company.id]) ? JSON.parse(JSON.stringify(res[this.ticketProfile.company.id])).map(item => new Device(item)).find(item => item.agentId === data.value || item.id === data.value) : null;
-      if (device) this.ticketProfile.agent = new TicketProfileAgent(device);
-      if (!device) this.ticketProfile.agent = null;
-    });
+  setAgent(data: TicketChangeField) {
+    let device = this.ticketStateService.getDevices().find(item => item.agentId === data.value || item.id === data.value);
+    if (device) this.ticketProfile.agent = new TicketProfileAgent(device);
+    if (!device) this.ticketProfile.agent = null;
   }
   onViewDocument(data) {
     this.ticketStateService.setDocumentForPreview(data);

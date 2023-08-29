@@ -19,6 +19,7 @@ export class PasswordManagerEditLinkedComponent implements OnInit, OnDestroy {
   @Input() selectedUserAndDevices: Array<PasswordDeviceUser> = [];
   @Input() selectedClient: Company;
   showSelect = false;
+  @Input() devices = [];
   @Input() type: string;
   @Input() title: string;
   @Input() placeholder: string;
@@ -38,11 +39,16 @@ export class PasswordManagerEditLinkedComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    let onGetDevices = this.passwordManagerStateService.onGetDevices.subscribe(data => {
-      let devices = data;
+    if (this.type == "DEVICES" && this.passwordManagerStateService.checkIsGetDevices() || this.type != "DEVICES") {
       this.preloader = false;
       this.list = [];
-      this.onGetList(devices);
+      this.onGetList(this.devices);
+    }
+    let onGetDevices = this.passwordManagerStateService.onGetDevices.subscribe(data => {
+      this.devices = data;
+      this.preloader = false;
+      this.list = [];
+      this.onGetList(this.devices);
     })
     this.sub.add(onGetDevices);
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());

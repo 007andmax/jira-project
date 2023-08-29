@@ -47,6 +47,7 @@
             <div class="qt-f33 qt-input-block qt-w-md-100">
                 <div class="qt-input-block__label">Device Name</div>
                 <app-devices-recurring-tickets
+                    #deviceDp
                     class="light-dropdown"
                     [editItem]="(ticketForEdit) ? ticketForEdit.agent : null"
                     [companyId]="(selectedClient) ? selectedClient.id : null"

@@ -15,10 +15,17 @@ export class FilterPasswordManager {
     selectedDate: TitleListType;
     selectedUserOrDevice: PasswordDeviceUser;
     selectedCategory: PasswordRecordCategories;
+    preloaderDevices: boolean = false;
     page: number = 0;
     limit: number = 30;
     constructor() {
 
+    }
+    public setPreloaderDevices(data) {
+        this.preloaderDevices = data;
+    }
+    public getPreloaderDevices() {
+        return this.preloaderDevices;
     }
     public getDataForRequest() {
         let sortOrder = this.filterTop.find(item => item.filter != '');

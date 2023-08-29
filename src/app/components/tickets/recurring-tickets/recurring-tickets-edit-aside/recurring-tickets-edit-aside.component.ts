@@ -19,6 +19,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TextAreaDirective } from 'src/app/directives/text-area/text-area.directive';
 import { TechUserItem } from 'src/app/components/shared/tech-users/class/tech-user-item';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
+import { DevicesRecurringTicketsComponent } from '../devices-recurring-tickets/devices-recurring-tickets.component';
 
 @Component({
   selector: 'app-recurring-tickets-edit-aside',
@@ -47,7 +48,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   @ViewChild(TextAreaDirective) set appTextArea(directive: TextAreaDirective) {
     this.description = directive;
   };
-
+  @ViewChild('deviceDp') deviceDp: DevicesRecurringTicketsComponent;
 
   /**
    * Creates an instance of the RecurringTicketsAddAsideComponent with the injected services
@@ -240,6 +241,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
 */
   public selectClient(selectClient) {
     this.validate.resetCompany();
+    if (this.deviceDp) this.deviceDp.clearDevices();
     if (selectClient == null) {
       this.recurringState.getCreateTicket().setCompany(null);
       this.selectedClient = null;

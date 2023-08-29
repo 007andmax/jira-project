@@ -25,7 +25,7 @@ export class DevicesRecurringTicketsComponent implements OnInit, OnDestroy {
   @Input() editItem: any;
   public selectedDevice;
   public devicesList: any;
-  preloader: boolean = true;
+  preloader: boolean = false;
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
   sub = new Subscription();
@@ -75,6 +75,8 @@ export class DevicesRecurringTicketsComponent implements OnInit, OnDestroy {
 
   getDevices() {
     console.log("companyId", this.companyId);
+    this.preloader = true;
+    this.selectedDevice = null;
     this.devicesService.getCompanyDevices(this.companyId).subscribe((data: any) => {
       this.preloader = false;
       this.devicesList = (data[this.companyId]) ? JSON.parse(JSON.stringify(data[this.companyId])).map((item) => {
@@ -127,6 +129,7 @@ export class DevicesRecurringTicketsComponent implements OnInit, OnDestroy {
    * clear client input
    */
   public clearDevices() {
+    this.devicesList = null;
     this.selectedItem.emit(null);
     this.selectedDevice = null;
   }

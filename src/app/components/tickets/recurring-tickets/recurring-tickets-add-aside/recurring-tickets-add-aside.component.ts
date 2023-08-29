@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy, ViewChild } from '@angular/core';
 import { Subscription } from "rxjs";
 import { ProductService } from 'src/app/services/product/product.service';
 import { ForCreateProduct } from '../class/for-create-product';
@@ -16,6 +16,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TechUserItem } from '../../../shared/tech-users/class/tech-user-item';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
+import { DevicesRecurringTicketsComponent } from '../devices-recurring-tickets/devices-recurring-tickets.component';
 
 @Component({
   selector: 'app-recurring-tickets-add-aside',
@@ -40,6 +41,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   formatDate: string = FORMAT_DATE_2;
   areTicketsPresented: boolean = false;
   areTicketsTerminated: boolean = false;
+  @ViewChild('deviceDp') deviceDp: DevicesRecurringTicketsComponent;
   /**
    * Creates an instance of the RecurringTicketsAddAsideComponent with the injected services
    * @param {ProductService} productService Service to work with products
@@ -248,6 +250,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
  */
   public selectClient(selectClient) {
     this.validate.resetCompany();
+    this.deviceDp.clearDevices();
     if (selectClient == null) {
       this.recurringState.getCreateTicket().setCompany(null);
       this.selectedClient = null;

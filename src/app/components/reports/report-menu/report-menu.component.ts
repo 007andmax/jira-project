@@ -34,6 +34,7 @@ import { TechTicketReport } from '../class/tech-ticket-report';
 import { Subscription } from 'rxjs';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { PaymentsReport } from '../reports/payments-report/class/payments-report';
+import { SoftwareSummaryDevicesDroDownComponent } from '../reports/software-summary-report/software-summary-devices-dro-down/software-summary-devices-dro-down.component';
 
 
 @Component({
@@ -78,6 +79,8 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
   @Output() onSelectedClient = new EventEmitter<any>();
   @ViewChild('durationsTechSaleDP') durationsTechSaleDP: DropDownComponent;
   @ViewChild('dp') datePicker: any;
+  @ViewChild('dpDevices') dpDevices: SoftwareSummaryDevicesDroDownComponent;
+
   constructor(private reportsService: ReportsService,
     private reportsStateService: ReportsStateService,
     private productService: ProductService,
@@ -248,6 +251,7 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       if (this.serviceReport.startDate === '' && this.serviceReport.endDate === '') this.serviceReport.setDatesByCompany(this.selectedClient);
       this.validate.resetCompany();
     }
+    if (this.dpDevices) this.dpDevices.clearWithOutChanges();
     this.onSelectedClient.emit(this.selectedClient);
   }
   toggleDetailsByProducts(data) {

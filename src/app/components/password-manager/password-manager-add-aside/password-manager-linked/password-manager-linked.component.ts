@@ -80,6 +80,7 @@ export class PasswordManagerLinkedComponent implements OnInit {
     this.gadgets = [];
     this.selectedCompanyId = null;
     if (id) {
+      console.log("onSelectCompany", id);
       this.selectedCompanyId = id;
       let users = this.usersStateService.getAllUsers().filter(item => {
         let company = this.companies.find(itemCompany => item.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === itemCompany.id));
@@ -93,6 +94,8 @@ export class PasswordManagerLinkedComponent implements OnInit {
         1 : ((`${b.name}`.toLowerCase() > `${a.name}`.toLowerCase()) ? -1 : 0));
       this.getDevices();
       if (!this.isInitGetGadgets) this.getGadgets();
+    } else {
+      this.preloader = false;
     }
     this.validate.resetCompany();
   }
