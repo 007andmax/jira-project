@@ -299,3 +299,9 @@ app-tickets-table-item {
 /deep/ .qt-table-modern .ticket-table__company {
   max-width: 300px;
 }
+
+/deep/ .qt-table-modern .ticket-table__subject {
+  @media (max-width: 1600px) {
+    max-width: calc(345px - 16px);
+  }
+}
