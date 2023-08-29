@@ -54,6 +54,12 @@ app-tickets-table-item {
 .qt-page-list__container {
   display: flex;
 }
+/deep/ .filter-button.--gray:focus {
+  background-color: $white;
+}
+/deep/ .filter-button.active:focus {
+  background-color: #16a4fa10;
+}
 
 /deep/ .aside-filters {
   width: 320px;
@@ -184,6 +190,7 @@ app-tickets-table-item {
 }
 
 .qt-page-list__body {
+  flex: 1;
   @media (min-width: 768px) {
     padding: 0 32px;
   }
@@ -288,4 +295,8 @@ app-tickets-table-item {
       background-color: $yellow-600;
     }
   }
+}
+
+/deep/ .qt-table-modern .ticket-table__company {
+  max-width: 300px;
 }
