@@ -295,10 +295,12 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
   }
   onGetDevices() {
+    this.ticketAdd.setPreloaderDevices(true);
     this.devicesService.getCompanyDevices(this.selectedCompanyId).subscribe((data: any) => {
       this.devices = (data[this.selectedCompanyId]) ? JSON.parse(JSON.stringify(data[this.selectedCompanyId])).map(item => new Device(item)) : [];
       this.devices.sort((a, b) => (a.hostName.toLowerCase() > b.hostName.toLowerCase()) ?
         1 : ((b.hostName.toLowerCase() > a.hostName.toLowerCase()) ? -1 : 0));
+      this.ticketAdd.setPreloaderDevices(false);
     });
   }
   onGetUsers(data) {

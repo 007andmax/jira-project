@@ -251,6 +251,9 @@ export class TicketStateService {
   public isTicketsTerminated() {
     return this.areTicketsTerminated;
   }
+  public setDevices(data) {
+    this.devices = data;
+  }
   public getOnGetServicesList() {
     return this.servicesList;
   }

@@ -14,6 +14,7 @@ import { ModalAgentLinkComponent } from 'src/app/services/modal/modal-agent-link
 import { AppService } from 'src/app/states/app/app.service';
 import { Device } from 'src/app/components/company-devices/class/device';
 import { DevicesService } from 'src/app/services/devices/devices.service';
+import { TicketStateService } from '../services/ticket-state.service';
 
 @Component({
   selector: 'app-ticket-profile-actions',
@@ -37,6 +38,7 @@ export class TicketProfileActionsComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private devicesService: DevicesService,
     public appService: AppService,
+    private ticketStateService: TicketStateService
   ) { }
 
 
@@ -58,6 +60,7 @@ export class TicketProfileActionsComponent implements OnInit, OnDestroy {
     this.sub.add(getConfirm);
     this.devicesService.getCompanyDevices(this.ticketProfile.company.id).subscribe((res: any) => {
       this.devices = (res[this.ticketProfile.company.id]) ? JSON.parse(JSON.stringify(res[this.ticketProfile.company.id])).map(item => new Device(item)) : [];
+      this.ticketStateService.setDevices(this.devices);
     });
   }
   showAgentLink() {

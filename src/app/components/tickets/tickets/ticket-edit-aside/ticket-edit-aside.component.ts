@@ -146,9 +146,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.ticketsStateService.getOnChangeFieldTicket().subscribe((data: TicketChangeField) => {
       if (this.opened) {
         if (this.ticketProfile.id === data.id) {
-          if (data.field === "agent.deviceId") {
-            this.getDevices(data);
-          }
+          if (data.field === "agent.deviceId") this.setAgent(data);
           this.ticketProfile[data.field] = data.value;
         }
         this.cd.detectChanges();
@@ -194,12 +192,10 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       this.openedMobileEditUpdate = true;
     })
   }
-  getDevices(data: TicketChangeField) {
-    this.devicesService.getCompanyDevices(this.ticketProfile.company.id).subscribe((res: any) => {
-      let device = (res[this.ticketProfile.company.id]) ? JSON.parse(JSON.stringify(res[this.ticketProfile.company.id])).map(item => new Device(item)).find(item => item.agentId === data.value || item.id === data.value) : null;
-      if (device) this.ticketProfile.agent = new TicketProfileAgent(device);
-      if (!device) this.ticketProfile.agent = null;
-    });
+  setAgent(data: TicketChangeField) {
+    let device = this.ticketStateService.getDevices().find(item => item.agentId === data.value || item.id === data.value);
+    if (device) this.ticketProfile.agent = new TicketProfileAgent(device);
+    if (!device) this.ticketProfile.agent = null;
   }
   showTooltipCompany(userCompanyTooltip, $event) {
     if (this.ticketProfile.ticketSource === 'FROM_EMAIL' && this.checkExistServicesProducts() && this.getCompany(this.ticketProfile.company.id) && this.getCompany(this.ticketProfile.company.id).isUnknown) userCompanyTooltip.show($event.target)

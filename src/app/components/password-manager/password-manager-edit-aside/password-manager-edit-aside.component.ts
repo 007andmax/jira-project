@@ -96,6 +96,8 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
       this.usersList = [];
       this.devicesList = [];
       this.gadgetsList = [];
+      this.devices = [];
+      this.passwordManagerStateService.setDevices(this.devices)
       if (!this.editItem.otpEnable) this.isEditSecretKey = true;
 
       this.selectedClient = this.companiesState.getCompanies().find(item => item.id === this.editItem.companyId);
