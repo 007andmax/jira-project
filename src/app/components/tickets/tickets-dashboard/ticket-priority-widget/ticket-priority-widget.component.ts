@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { DashboardTicketsStats } from '../class/dashboard-tickets-stats';
+import { TicketsPriority } from 'src/app/components/setting/ticket-settings-page/tickets-priority/class/tickets-priority';
 
 @Component({
   selector: 'app-ticket-priority-widget',
@@ -9,6 +10,7 @@ import { DashboardTicketsStats } from '../class/dashboard-tickets-stats';
 export class TicketPriorityWidgetComponent implements OnInit {
   @Input() dashboardTicketsStats: DashboardTicketsStats = new DashboardTicketsStats();
   @ViewChild('nvd3') nvd3: any;
+  @Input() ticketsPriorities: Array<TicketsPriority> = [];
   chartOptions: any;
   chartColors = ["#0646a4", "#00ccff", '#2bc7c6'];
   data: any;

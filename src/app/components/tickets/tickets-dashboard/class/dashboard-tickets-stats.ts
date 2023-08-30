@@ -1,4 +1,5 @@
 import * as moment from 'moment';
+import { TicketsPriority } from 'src/app/components/setting/ticket-settings-page/tickets-priority/class/tickets-priority';
 
 export class DashboardTicketsStats {
     startDate: string;
@@ -13,6 +14,7 @@ export class DashboardTicketsStats {
     RECURRING_TICKETS_CLOSED: number;
     RECURRING_TICKETS_OPEN: number;
     UNASSIGNED: number;
+    counts: any = {};
     constructor() {
         let startDate = new Date();
         let endDate = new Date();
@@ -49,11 +51,16 @@ export class DashboardTicketsStats {
             this.endDate = moment(endDate).format('YYYY-MM-DD');
         }
     }
-    public setData(data) {
+    public setData(data, ticketsPriorities: Array<TicketsPriority>) {
         this.CLOSED = data.CLOSED;
-        this.HIGH = data.HIGH;
-        this.LOW = data.LOW;
-        this.MEDIUM = data.MEDIUM;
+        this.counts = data;
+        ticketsPriorities.forEach(item => {
+            let priority = item.name.toLocaleUpperCase().replace(" ", "_");
+            this.counts[priority] = data[priority];
+        });
+        /*  this.HIGH = data.HIGH;
+          this.LOW = data.LOW;
+          this.MEDIUM = data.MEDIUM;*/
         this.ON_HOLD = data.ON_HOLD;
         this.OPEN = data.OPEN;
         this.RECURRING_TICKETS = data.RECURRING_TICKETS;
@@ -61,7 +68,40 @@ export class DashboardTicketsStats {
         this.RECURRING_TICKETS_OPEN = data.RECURRING_TICKETS_OPEN;
         this.UNASSIGNED = data.UNASSIGNED;
     }
-
+    public getDataForPriorityCounts(ticketsPriorities: Array<TicketsPriority>) {
+        let data = {
+        }
+        ticketsPriorities.forEach(item => {
+            let priority = item.name.toLocaleUpperCase().replace(" ", "_");
+            data[priority] = this.getPriorityLevalPayload(item.id)
+        });
+        return data;
+    }
+    public getPriorityLevalPayload(id) {
+        return {
+            "excludeTrashSpam": true,
+            "groupFieldFilters": [
+                {
+                    "fieldFilterDtos": [
+                        {
+                            "path": "priorityLevel.id",
+                            "operator": "EQ",
+                            "values": [
+                                id
+                            ]
+                        },
+                        {
+                            "path": "ticketSource",
+                            "operator": "NOT_EQ",
+                            "values": [
+                                "FROM_RECURRING_TICKET"
+                            ]
+                        },
+                    ]
+                }
+            ]
+        }
+    }
     public getDataForRequest() {
         return {
             "CLOSED": {

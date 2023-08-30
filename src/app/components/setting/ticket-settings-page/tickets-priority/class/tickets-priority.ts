@@ -14,6 +14,9 @@ export class TicketsPriority {
             }
         }
     }
+    public getNameForCounts() {
+        return this.name.toLocaleUpperCase().replace(" ", "_");
+    }
     checkDublicate(list) {
         var duplicate = list.filter((item) => {
             return item.name.toLowerCase() === this.name.toLowerCase();

@@ -8,6 +8,7 @@ import { DashboardTicketsStats } from './class/dashboard-tickets-stats';
 import { RecurringTicketWidgetComponent } from './recurring-ticket-widget/recurring-ticket-widget.component';
 import { TicketPriorityWidgetComponent } from './ticket-priority-widget/ticket-priority-widget.component';
 import { TicketsAnalyticsWidgetComponent } from './tickets-analytics-widget/tickets-analytics-widget.component';
+import { TicketsPriority } from '../../setting/ticket-settings-page/tickets-priority/class/tickets-priority';
 
 @Component({
   selector: 'tickets-dashboard',
@@ -28,6 +29,7 @@ export class TicketsDashboardComponent implements OnInit {
   techTicketsIsReady: boolean = false;
   ticketsAnalyticsReady: boolean = false;
   ticketsBillableHoursIsReady: boolean = false;
+  ticketsPriorities: Array<TicketsPriority> = [];
   constructor(
     public cd: ChangeDetectorRef,
     private ticketsStateService: TicketsStateService,
@@ -35,7 +37,18 @@ export class TicketsDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.ticketsStateService.onChangeLeftPanelFilter("DASHBOARD");
-    this.getCounts();
+    if (this.ticketsStateService.getTicketsPriorities().length === 0) {
+      this.ticketsService.getTicketsPriorities().subscribe((data: any) => {
+        this.ticketsPriorities = data.priorityLevels.map(item => new TicketsPriority(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+          1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+        this.ticketsStateService.onSetTicketsPriorities(this.ticketsPriorities);
+        this.getCounts();
+      })
+    } else {
+      this.ticketsPriorities = this.ticketsStateService.getTicketsPriorities();
+      this.getCounts();
+    }
+
   }
   onSelectInterval(item) {
     this.currentInterval = item;
@@ -43,8 +56,9 @@ export class TicketsDashboardComponent implements OnInit {
     this.getCounts();
   }
   private getCounts() {
-    this.ticketsService.getCounts(this.dashboardTicketsStats.getDataForRequest()).subscribe(data => {
-      this.dashboardTicketsStats.setData(data);
+    this.ticketsService.getCounts(this.dashboardTicketsStats.getDataForPriorityCounts(this.ticketsPriorities)).subscribe(data => {
+      this.dashboardTicketsStats.setData(data, this.ticketsPriorities);
+      console.log("this.dashboardTicketsStats", this.dashboardTicketsStats);
       this.countIsReady = true;
       this.onCheckREadyState();
       this.cd.detectChanges();
