@@ -26,7 +26,8 @@
             <div class="contract-dashboard-chart-card__footer-item">
                 <div class="contract-dashboard-chart-card__footer-item-title-block">
                     <div
-                        style="background-color: #0747a6;"
+                        [ngStyle]="{'background-color':statusColors[priority.color].textColor ,
+                            'border-color': statusColors[priority.color].textColor}"
                         class="contract-dashboard-chart-card__footer-item-box"
                     ></div>
                     <div>
