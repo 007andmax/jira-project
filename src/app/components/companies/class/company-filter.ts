@@ -1,6 +1,7 @@
 import { CompanyIndustry } from "src/app/interfaces/company/company-industry";
 import { Tag } from "src/app/interfaces/tag/tag";
 import { CompanyFilterTop } from "./company-filter-top";
+import { CompanyDeviceCount } from "./company-device-count";
 
 export class CompanyFilter {
     clientType: string;
@@ -8,7 +9,7 @@ export class CompanyFilter {
     tags: Array<Tag> = [];
     techUser: string;
     isArchived: boolean;
-    devices = [];
+    devices: Array<CompanyDeviceCount> = [];
     users = [];
     showArchivedCompanies: boolean = false;
     filter: Array<CompanyFilterTop> = [
@@ -150,8 +151,8 @@ export class CompanyFilter {
             1 : ((this.getCountusers(b) > this.getCountusers(a)) ? -1 : 0));
     }
     private onFilterDevices(list) {
-        list.sort((a, b) => (((this.devices[a.id]) ? this.devices[a.id].length : 0) > ((this.devices[b.id]) ? this.devices[b.id].length : 0)) ?
-            1 : ((((this.devices[b.id]) ? this.devices[b.id].length : 0) > ((this.devices[a.id]) ? this.devices[a.id].length : 0)) ? -1 : 0));
+        list.sort((a, b) => (((this.devices.find(item => item.companyId == a.id)) ? this.devices.find(item => item.companyId == a.id).count : 0) > ((this.devices.find(item => item.companyId == b.id)) ? this.devices.find(item => item.companyId == b.id).count : 0) ?
+            1 : ((this.devices.find(item => item.companyId == b.id)) ? this.devices.find(item => item.companyId == b.id).count : 0) > ((this.devices.find(item => item.companyId == a.id)) ? this.devices.find(item => item.companyId == a.id).count : 0) ? -1 : 0));
     }
     private onFilterName(list) {
         list.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
