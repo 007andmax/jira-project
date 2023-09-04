@@ -103,6 +103,10 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       if (this.addUsersNotifyStateService.getAction() === USERS_TO_ADD_TICKET) this.onChangeShareUsers(data);
     })
     this.sub.add(onChangeAssignedUser);
+    let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
+      if (this.selectedCompanyId == newChange.data.clientCompanyId) this.devicesStateService.changeDevice(this.devices, newChange);
+    })
+    this.sub.add(onDeviceUninstalled);
   }
   getColors() {
     if (this.ticketsStateService.getListStatusColor().length === 0) {

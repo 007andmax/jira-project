@@ -57,6 +57,10 @@ export class PasswordManagerLinkedComponent implements OnInit {
       this.getClientsList(data);
     })
     this.sub.add(getOnCompanies);
+    let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
+      if (this.selectedCompanyId == newChange.data.clientCompanyId) this.devicesStateService.changeDevice(this.devicesList, newChange);
+    })
+    this.sub.add(onDeviceUninstalled);
   }
   getDevices() {
     this.devicesService.getCompanyDevices(this.selectedCompanyId).subscribe((data: any) => {

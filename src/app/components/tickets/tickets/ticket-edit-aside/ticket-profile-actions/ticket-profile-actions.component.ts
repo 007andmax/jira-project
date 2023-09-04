@@ -62,6 +62,10 @@ export class TicketProfileActionsComponent implements OnInit, OnDestroy {
       this.devices = (res[this.ticketProfile.company.id]) ? JSON.parse(JSON.stringify(res[this.ticketProfile.company.id])).map(item => new Device(item)) : [];
       this.ticketStateService.setDevices(this.devices);
     });
+    let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
+      if (this.ticketProfile.company.id == newChange.data.clientCompanyId) this.devicesStateService.changeDevice(this.devices, newChange);
+    })
+    this.sub.add(onDeviceUninstalled);
   }
   showAgentLink() {
     if (!this.appService.checkMobile()) return;

@@ -71,7 +71,10 @@ export class CompanyNetworkScanComponent implements OnInit {
       this.websocketService.subsribeToNetScan(this.companyId);
     });
     this.sub.add(subscription);
-
+    let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
+      if (id == newChange.data.clientCompanyId) this.devicesStateService.changeDevice(this.devices, newChange);
+    })
+    this.sub.add(onDeviceUninstalled);
     let getOnChangeInfoForDevice = this.devicesStateService.getOnChangeInfoForDevice().subscribe(data => {
       if (!this.masterAgent || data.masterAgentId != this.masterAgent.agentId) {
         this.selectAllDevices = false;

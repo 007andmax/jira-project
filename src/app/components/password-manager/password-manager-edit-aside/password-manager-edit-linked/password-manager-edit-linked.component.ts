@@ -35,6 +35,7 @@ export class PasswordManagerEditLinkedComponent implements OnInit, OnDestroy {
     public devicesService: DevicesService,
     private companiesState: CompaniesStateService,
     private passwordManagerStateService: PasswordManagerStateService,
+    public devicesStateService: DevicesStateService,
   ) { }
 
 
@@ -52,6 +53,10 @@ export class PasswordManagerEditLinkedComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onGetDevices);
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
+    let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
+      if (this.selectedClient.id == newChange.data.clientCompanyId) this.devicesStateService.changeDevice(this.list, newChange);
+    })
+    this.sub.add(onDeviceUninstalled);
   }
   onGetList(devices) {
     if (this.type === 'USERS') {

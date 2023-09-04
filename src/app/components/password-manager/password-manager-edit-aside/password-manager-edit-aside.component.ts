@@ -23,6 +23,7 @@ import { PasswordRecordHistory } from '../class/password-record-history';
 import { PasswordRecordLink } from '../class/password-record-link';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { Device } from '../../company-devices/class/device';
+import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 
 /**
  * Password manager edit aside component
@@ -77,7 +78,8 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
     private elRef: ElementRef,
     private toastrService: ToastrService,
     public devicesService: DevicesService,
-    private appStateService: AppStateService
+    private appStateService: AppStateService,
+    public devicesStateService: DevicesStateService,
   ) { }
 
   /**
@@ -127,6 +129,10 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
       if (this.categoriesSelect) this.categoriesSelect.reset(this.categories);
     })
     this.sub.add(onGetCategories);
+    let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
+      if (this.selectedClient.id == newChange.data.clientCompanyId) this.devicesStateService.changeDevice(this.devicesList, newChange);
+    })
+    this.sub.add(onDeviceUninstalled);
     /* let onChangeRealTime = this.passwordManagerStateService.onChangeRealTime.subscribe(newChange => {
        if (newChange.action === 'PASSWORD_RECORD_UPDATED' && this.editItem && newChange.data.id === this.editItem.id) this.editItem.updateHistories(newChange.data.histories);
        if (!this.cd['destroyed']) this.cd.detectChanges();

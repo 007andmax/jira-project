@@ -49,6 +49,10 @@ export class DevicesRecurringTicketsComponent implements OnInit, OnDestroy {
     this.getCLientsList();
     this.onInitClearState();
     if (this.companyId) this.getDevices();
+    let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
+      if (this.companyId == newChange.data.clientCompanyId) this.devicesStateService.changeDevice(this.devicesList, newChange);
+    })
+    this.sub.add(onDeviceUninstalled);
   }
 
   /**

@@ -64,7 +64,10 @@ export class PasswoordManagerFiltersComponent implements OnInit, OnDestroy {
     this.passwordManagerStateService.onFilterByCategory.subscribe((data) => {
       this.categoriesSelect.onSelect(data);
     })
-
+    let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
+      if (this.selectedCompany.id == newChange.data.clientCompanyId) this.devicesStateService.changeDevice(this.devicesUsers, newChange);
+    })
+    this.sub.add(onDeviceUninstalled);
   }
   public onClearAll() {
     this.filter.setCategory(null);

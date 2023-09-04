@@ -21,6 +21,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { DatePickerComponent } from '../shared/date-picker/date-picker.component';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
+import { Device } from '../company-devices/class/device';
+import { DevicesService } from 'src/app/services/devices/devices.service';
 
 
 @Component({
@@ -142,7 +144,7 @@ export class DevicesComponent implements OnInit {
   serialnumber: string = "";
   templatepdf: string = "PDF_TEMPLATE";
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
-
+  clientCompanyGuid: string;
   IsUpdateInstalling: boolean = false;
   IsCurrentConfigLoading: boolean = false;
   searchTagName: any;
@@ -191,7 +193,7 @@ export class DevicesComponent implements OnInit {
   deviceIPAddress: string;
   deviceMacAddress: string;
   deviceRemotePort: string;
-  deviceSuccess: boolean;
+  deviceSuccess: boolean = true;
   sub: Subscription = new Subscription();
   constructor(
     private leftPanelStateService: LeftPanelStateService,
@@ -207,18 +209,13 @@ export class DevicesComponent implements OnInit {
     private excelService: ExcelService,
     private companiesState: CompaniesStateService,
     public draftEmailStateService: DraftEmailStateService,
-    private devicesStateService: DevicesStateService
+    private devicesStateService: DevicesStateService,
+    private devicesService: DevicesService,
   ) { }
 
   ngOnInit() {
     // this.companiesState.onInit();
     //this.devicesStateService.onInit();
-
-    if (this.devicesStateService.getAllDevices()) this.getTempData(this.devicesStateService.getAllDevices());
-    let getOnDevices = this.devicesStateService.getOnDevices().subscribe(data => {
-      this.getTempData(data);
-    });
-    this.sub.add(getOnDevices);
     this.clientName = "All Companies";
     this.leftPanelStateService.changeStateWithoutNavigate('new-devices');
 
@@ -268,7 +265,10 @@ export class DevicesComponent implements OnInit {
       this.add(undefined);
     })
     this.sub.add(onSearchCompanyChange);
-
+    let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
+      if (this.clientCompanyGuid == newChange.data.clientCompanyId) this.devicesStateService.changeDevice(this.devices, newChange);
+    })
+    this.sub.add(onDeviceUninstalled);
 
     let onCurrentConfig = this.kafkaStateService.onCurrentConfig.subscribe((resp) => {
       if (resp.length > 0) {
@@ -351,13 +351,6 @@ export class DevicesComponent implements OnInit {
       data.Criteria = [];
     }
     this.agentService.searchDeviceWithTag(data).subscribe((resp) => {
-      if (!this.deviceSuccess) {
-        this.getTempData(this.devicesStateService.getAllDevices());
-        setTimeout(() => {
-          this.searchDeviceTag(data);
-        }, 300);
-        return;
-      }
       if (resp.length > 0) this.getAlldevicedata(resp[0].CompanyGuid);
       this.onFilter('CompanyName');
       this.showPreloader = false;
@@ -2003,6 +1996,14 @@ export class DevicesComponent implements OnInit {
 
   getAlldevicedata(id) {
     if (id) {
+      this.clientCompanyGuid = id;
+      this.devicesService.getCompanyDevices(id).subscribe((data: any) => {
+        if (Object.keys(data).length > 0) {
+          this.devices = data[id].map(item => new Device(item));
+        } else {
+          this.devices = [];
+        }
+      });
       this.tempDevices.forEach(item => {
         if (item[id].length) {
           item[id].forEach(data => {
@@ -2011,12 +2012,6 @@ export class DevicesComponent implements OnInit {
         }
       })
     }
-  }
-
-  getTempData(data) {
-    this.tempDevices = [];
-    this.deviceSuccess = true;
-    this.tempDevices.push(data);
   }
 
   getDevices(assetList) {
