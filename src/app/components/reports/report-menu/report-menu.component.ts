@@ -97,6 +97,13 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.isDisabledCompany = true;
     }
     if (this.report === 'byCustomers') this.isDisabledCompany = true;
+    let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
+      if (this.selectedClient && this.selectedClient.id == newChange.data.clientCompanyId) {
+        this.devicesStateService.changeDevice(this.devices, newChange);
+        if (this.dpDevices) this.dpDevices.reset(this.devices);
+      }
+    })
+    this.sub.add(onDeviceUninstalled);
     //  this.sub.add(getOnCompanies);
   }
   getSelectedClientName() {

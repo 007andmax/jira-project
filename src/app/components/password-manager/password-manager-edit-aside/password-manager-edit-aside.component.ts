@@ -130,7 +130,7 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onGetCategories);
     let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
-      if (this.selectedClient.id == newChange.data.clientCompanyId) this.devicesStateService.changeDevice(this.devicesList, newChange);
+      if (this.selectedClient && this.selectedClient.id == newChange.data.clientCompanyId) this.devicesStateService.changeDevice(this.devicesList, newChange);
     })
     this.sub.add(onDeviceUninstalled);
     /* let onChangeRealTime = this.passwordManagerStateService.onChangeRealTime.subscribe(newChange => {
