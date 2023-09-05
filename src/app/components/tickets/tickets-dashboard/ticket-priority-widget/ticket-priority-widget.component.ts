@@ -45,7 +45,6 @@ export class TicketPriorityWidgetComponent implements OnInit {
         y: (d: any) => { return d.value; },
         showLabels: false,
         color: (d: any, i: any) => {
-          console.log("d", d);
           let priority = this.ticketsPriorities.find(item => item.name == d.label);
           return this.statusColors[priority.color].textColor
         },
@@ -81,6 +80,9 @@ export class TicketPriorityWidgetComponent implements OnInit {
   public updateDataChart() {
     this.setDataForChart();
     if (this.nvd3.char) this.nvd3.chart.update();
+  }
+  public trackById(index, item) {
+    return item.id;
   }
   getTotal() {
     return this.ticketsPriorities.reduce((partialSum, a) => partialSum + this.dashboardTicketsStats.counts[a.getNameForCounts()], 0);

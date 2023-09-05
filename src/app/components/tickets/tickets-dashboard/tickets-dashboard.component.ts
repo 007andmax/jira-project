@@ -58,7 +58,6 @@ export class TicketsDashboardComponent implements OnInit {
   private getCounts() {
     this.ticketsService.getCounts(this.dashboardTicketsStats.getDataForPriorityCounts(this.ticketsPriorities)).subscribe(data => {
       this.dashboardTicketsStats.setData(data, this.ticketsPriorities);
-      console.log("this.dashboardTicketsStats", this.dashboardTicketsStats);
       this.countIsReady = true;
       this.onCheckREadyState();
       this.cd.detectChanges();

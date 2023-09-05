@@ -66,7 +66,6 @@ export class CompanyDashStatsComponent implements OnInit {
   }
   getDeviceCount(id) {
     this.devicesService.getCountByCompany([id]).subscribe(data => {
-      console.log("data", data);
       this.countDevices = data[0].count;
     })
   }

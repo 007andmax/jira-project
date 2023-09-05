@@ -78,7 +78,6 @@ export class DevicesRecurringTicketsComponent implements OnInit, OnDestroy {
   }
 
   getDevices() {
-    console.log("companyId", this.companyId);
     this.preloader = true;
     this.selectedDevice = null;
     this.devicesService.getCompanyDevices(this.companyId).subscribe((data: any) => {
