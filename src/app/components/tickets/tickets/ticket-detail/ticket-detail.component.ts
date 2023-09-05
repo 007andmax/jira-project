@@ -58,6 +58,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   showFormUpdate: boolean = false;
   showEditUpdate: boolean = false;
   toggleRigthPanel: boolean = true;
+  toggleRigthPanelContainer: boolean = true;
   tabFormUpdate: string;
   openedMobileEditUpdate = false;
   modeSubject = 'view';
@@ -205,7 +206,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   }
   onShowMore(data) {
     this.typeRigthDetailAside = data;
-    this.toggleRigthPanel = true;
+    this.toggleRigthPanel = false;
   }
   onInitRealTimes() {
     if (this.websocketService.isInit) {
@@ -236,7 +237,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.toggleRigthPanel = true;
   }
   onToggleRigthPanel(data) {
-    this.toggleRigthPanel = !this.toggleRigthPanel;
+    this.toggleRigthPanelContainer = !this.toggleRigthPanelContainer;
   }
   markAsOpen() {
     this.ticketsService.changeStatus(this.ticketProfile.id, 'IN_PROGRESS').subscribe((data: any) => {
