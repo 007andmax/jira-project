@@ -14,6 +14,7 @@ export class TicketPriorityWidgetComponent implements OnInit {
   @Input() dashboardTicketsStats: DashboardTicketsStats = new DashboardTicketsStats();
   @ViewChild('nvd3') nvd3: any;
   @Input() ticketsPriorities: Array<TicketsPriority> = [];
+  toggleAllPriorities: boolean = false;
   statusColors: Array<StatusColor> = [];
   chartOptions: any;
   chartColors = ["#0646a4", "#00ccff", '#2bc7c6'];

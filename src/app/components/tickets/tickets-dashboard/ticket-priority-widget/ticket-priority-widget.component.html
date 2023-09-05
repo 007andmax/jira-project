@@ -20,10 +20,14 @@
         <ng-template
             ngFor
             let-priority
+            let-i="index"
             [ngForOf]="ticketsPriorities"
             [ngForTrackBy]="trackById"
         >
-            <div class="contract-dashboard-chart-card__footer-item">
+            <div
+                class="contract-dashboard-chart-card__footer-item"
+                *ngIf="toggleAllPriorities ? true : i < 4"
+            >
                 <div class="contract-dashboard-chart-card__footer-item-title-block">
                     <div
                         [ngStyle]="{'background-color':statusColors[priority.color].textColor ,
@@ -43,6 +47,10 @@
                 </div>
             </div>
         </ng-template>
+
+
+
+
         <!-- <div class="contract-dashboard-chart-card__footer-item">
             <div class="contract-dashboard-chart-card__footer-item-title-block">
                 <div
@@ -88,5 +96,12 @@
                 </div>
             </div>
         </div> -->
+    </div>
+    <div
+        *ngIf="ticketsPriorities.length > 0"
+        class="button-loader"
+        (click)="toggleAllPriorities = !toggleAllPriorities"
+    >
+        <span [textContent]="toggleAllPriorities ? 'hide' : 'Load more'"></span>
     </div>
 </div>
