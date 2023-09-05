@@ -34,6 +34,9 @@ import { find } from 'rxjs-compat/operator/find';
 import { TicketProfileUpdatesComponent } from './ticket-profile-updates/ticket-profile-updates.component';
 import { Router } from '@angular/router';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { DevicesService } from 'src/app/services/devices/devices.service';
+import { Device } from 'src/app/components/company-devices/class/device';
+import { TicketProfileAgent } from '../class/ticket-profile-agent';
 @Component({
   selector: 'app-ticket-edit-aside',
   templateUrl: './ticket-edit-aside.component.html',
@@ -75,6 +78,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     public appService: AppService,
     private router: Router,
     private permissionsService: PermissionsService,
+    private devicesService: DevicesService,
     private devicesStateService: DevicesStateService,
     private addUsersNotifyStateService: AddUsersNotifyStateService,
     private companiesStateService: CompaniesStateService) { }
@@ -142,10 +146,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.ticketsStateService.getOnChangeFieldTicket().subscribe((data: TicketChangeField) => {
       if (this.opened) {
         if (this.ticketProfile.id === data.id) {
-          if (data.field === "agent.deviceId") {
-            let device = this.devicesStateService.getAllDevices()[this.ticketProfile.company.id].find(item => item.agentId === data.value || item.id === data.value);
-            this.ticketProfile.agent.label = device.label;
-          }
+          if (data.field === "agent.deviceId") this.setAgent(data);
           this.ticketProfile[data.field] = data.value;
         }
         this.cd.detectChanges();
@@ -190,6 +191,11 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.ticketStateService.onEditUpdate.subscribe(data => {
       this.openedMobileEditUpdate = true;
     })
+  }
+  setAgent(data: TicketChangeField) {
+    let device = this.ticketStateService.getDevices().find(item => item.agentId === data.value || item.id === data.value);
+    if (device) this.ticketProfile.agent = new TicketProfileAgent(device);
+    if (!device) this.ticketProfile.agent = null;
   }
   showTooltipCompany(userCompanyTooltip, $event) {
     if (this.ticketProfile.ticketSource === 'FROM_EMAIL' && this.checkExistServicesProducts() && this.getCompany(this.ticketProfile.company.id) && this.getCompany(this.ticketProfile.company.id).isUnknown) userCompanyTooltip.show($event.target)

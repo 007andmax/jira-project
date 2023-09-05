@@ -1,20 +1,25 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Company } from 'src/app/interfaces/quote/company';
 import { GadgetsService } from 'src/app/services/gadgets/gadgets.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { PasswordDeviceUser } from '../../class/password-device-user';
+import { Device } from 'src/app/components/company-devices/class/device';
+import { DevicesService } from 'src/app/services/devices/devices.service';
+import { PasswordManagerStateService } from 'src/app/states/password-manager/password-manager-state.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-password-manager-edit-linked',
   templateUrl: './password-manager-edit-linked.component.html',
   styleUrls: ['./password-manager-edit-linked.component.scss']
 })
-export class PasswordManagerEditLinkedComponent implements OnInit {
+export class PasswordManagerEditLinkedComponent implements OnInit, OnDestroy {
   @Input() selectedUserAndDevices: Array<PasswordDeviceUser> = [];
   @Input() selectedClient: Company;
   showSelect = false;
+  @Input() devices = [];
   @Input() type: string;
   @Input() title: string;
   @Input() placeholder: string;
@@ -23,24 +28,37 @@ export class PasswordManagerEditLinkedComponent implements OnInit {
   @Output() onChange = new EventEmitter<any>();
   companies: Array<Company> = [];
   isInitGetGadgets: boolean = false;
+  sub: Subscription = new Subscription();
   constructor(private usersStateService: UsersStateService,
     public cd: ChangeDetectorRef,
     private gadgetsService: GadgetsService,
+    public devicesService: DevicesService,
     private companiesState: CompaniesStateService,
-    private devicesStateService: DevicesStateService) { }
+    private passwordManagerStateService: PasswordManagerStateService,
+    public devicesStateService: DevicesStateService,
+  ) { }
+
 
   ngOnInit() {
-    if (this.devicesStateService.getAllDevices()) this.preloader = false;
-    this.devicesStateService.getOnDevices().subscribe(data => {
+    if (this.type == "DEVICES" && this.passwordManagerStateService.checkIsGetDevices() || this.type != "DEVICES") {
       this.preloader = false;
       this.list = [];
-      this.onGetList();
+      this.onGetList(this.devices);
+    }
+    let onGetDevices = this.passwordManagerStateService.onGetDevices.subscribe(data => {
+      this.devices = data;
+      this.preloader = false;
+      this.list = [];
+      this.onGetList(this.devices);
     })
+    this.sub.add(onGetDevices);
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
-    this.list = [];
-    this.onGetList();
+    let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
+      if (this.selectedClient.id == newChange.data.clientCompanyId) this.devicesStateService.changeDevice(this.list, newChange);
+    })
+    this.sub.add(onDeviceUninstalled);
   }
-  onGetList() {
+  onGetList(devices) {
     if (this.type === 'USERS') {
       let users = this.usersStateService.getAllUsers().filter(item => {
         let company = this.companies.find(itemCompany => item.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === itemCompany.id));
@@ -52,7 +70,6 @@ export class PasswordManagerEditLinkedComponent implements OnInit {
       })
     }
     if (this.type === 'DEVICES') {
-      let devices = (this.devicesStateService.getAllDevices()[this.selectedClient.id]) ? this.devicesStateService.getAllDevices()[this.selectedClient.id] : [];
       devices.forEach(item => {
         this.list.push(new PasswordDeviceUser(item.id, this.getLabelDevice(item), 'DEVICE'));
       })
@@ -104,6 +121,9 @@ export class PasswordManagerEditLinkedComponent implements OnInit {
       this.selectedUserAndDevices.push(newItem);
     }
     this.onChange.emit(this.selectedUserAndDevices);
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
   public trackByIndex(index, item) {
     return index;

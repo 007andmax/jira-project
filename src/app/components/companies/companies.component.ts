@@ -17,6 +17,8 @@ import { DraftEmailStateService } from '../../states/draft-email/draft-email-sta
 import { CompanyFilter } from './class/company-filter';
 import { CompanyItem } from './class/company-item';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { DevicesService } from 'src/app/services/devices/devices.service';
+import { CompanyDeviceCount } from './class/company-device-count';
 
 @Component({
   selector: 'app-companies',
@@ -34,6 +36,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   showArchivedCompanies: boolean = false;
   sub: Subscription = new Subscription();
   left_filter: string;
+  devicesCounts: Array<CompanyDeviceCount> = [];
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
   container = document.body.querySelector(".main-container");
   constructor(private companiesService: CompaniesService,
@@ -46,11 +49,14 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     private leftPanelStateService: LeftPanelStateService,
     private draftEmailStateService: DraftEmailStateService,
     private permissionsService: PermissionsService,
+    private devicesService: DevicesService,
     public cd: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
     document.body.querySelector(".main-container").scrollTo(0, 0);
+    this.devicesCounts = this.companiesStateService.getDevicesCounts();
+    this.companyFilter.setDevices(this.devicesCounts);
     this.left_filter = this.leftPanelStateService.getFilter();
     if (this.companiesStateService.getCompanies().length > 0 && !this.left_filter) this.getClientsList(this.companiesStateService.getCompanies());
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
@@ -78,12 +84,6 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
-    if (this.devicesState.getAllDevices()) this.companyFilter.setDevices(this.devicesState.getAllDevices());
-    let getOnDevices = this.devicesState.getOnDevices().subscribe((data) => {
-      this.companyFilter.setDevices(data);
-
-    })
-    this.sub.add(getOnDevices);
     if (this.usersStateService.getAllUsers().length > 0) this.companyFilter.setUsers(this.usersStateService.getAllUsers());
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.companyFilter.setUsers(data);
@@ -125,6 +125,14 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getChangeCompanies);
   }
+  getDevicesCounts(ids) {
+    this.devicesService.getCountByCompany(ids).subscribe((data: any) => {
+      console.log("data", data);
+      this.devicesCounts = data;
+      this.companyFilter.setDevices(this.devicesCounts);
+      this.companiesStateService.setDevicesCounts(data);
+    })
+  }
   onFilter(data) {
     this.companyFilter.onFilter(data, this.reqCompaniesList);
     this.page_number = 0;
@@ -157,7 +165,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   }
   private getClientsList(data) {
     this.reqCompaniesList = data.filter(item => item.accountType === 'CLIENT' && ((!this.showArchivedCompanies) ? !item.deletedAt : item.deletedAt));
-
+    if (this.devicesCounts.length == 0) this.getDevicesCounts(this.reqCompaniesList.map(item => item.id));
     this.onInirCalculate();
     this.reqCompaniesList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
@@ -168,6 +176,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   private getClientsListByFilter() {
     this.companiesService.getCompaniesListByFilter(this.companyFilter.getDataForFilter()).subscribe((data: any) => {
       this.reqCompaniesList = data;
+      if (this.devicesCounts.length == 0) this.getDevicesCounts(this.reqCompaniesList.map(item => item.id));
       this.onInirCalculate();
       this.reqCompaniesList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));

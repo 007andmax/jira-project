@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { TicketProfile } from 'src/app/components/tickets/tickets/class/ticket-profile';
 import { TicketsService } from '../../tickets/tickets.service';
+import { DevicesService } from '../../devices/devices.service';
+import { Device } from 'src/app/components/company-devices/class/device';
 
 @Component({
   selector: 'modal-agent-link',
@@ -17,6 +19,7 @@ export class ModalAgentLinkComponent implements OnInit {
 
   ngOnInit() {
   }
+
   changeLinkedAgent(id) {
     this.ticketsService.linkedAgentToTicket(this.ticketProfile.id, id).subscribe(res => {
       this.close();

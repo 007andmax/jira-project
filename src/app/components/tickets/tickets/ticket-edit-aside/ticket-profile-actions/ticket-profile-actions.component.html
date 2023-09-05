@@ -29,7 +29,7 @@
             <li
                 class="dropdown-submenu left-align linked-agent-dropdown"
                 (click)="showAgentLink()"
-                *ngIf="ticketProfile.company && !ticketProfile.company.default && getDevicesByCompany() && isDeviceToLink()"
+                *ngIf="ticketProfile.company && !ticketProfile.company.default && devices && isDeviceToLink()"
             >
                 <a
                     tabindex="-1"
@@ -42,12 +42,12 @@
                 </a>
                 <ul
                     class="dropdown-submenu-wrapper dropdown-menu"
-                    *ngIf="!appService.checkMobile() && getDevicesByCompany().length > 0"
+                    *ngIf="!appService.checkMobile() && devices.length > 0"
                 >
                     <ng-template
                         ngFor
                         let-agent
-                        [ngForOf]="getDevicesByCompany()"
+                        [ngForOf]="devices"
                     >
                         <li
                             (click)="changeLinkedAgent(agent.id)"

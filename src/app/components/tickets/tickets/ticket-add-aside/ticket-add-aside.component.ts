@@ -26,6 +26,8 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { TicketsPriority } from 'src/app/components/setting/ticket-settings-page/tickets-priority/class/tickets-priority';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { StatusColor } from '../../class/status-color';
+import { DevicesService } from 'src/app/services/devices/devices.service';
+import { Device } from 'src/app/components/company-devices/class/device';
 
 
 
@@ -72,14 +74,12 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     public customerPortalStateService: CustomerPortalStateService,
     private addUsersNotifyStateService: AddUsersNotifyStateService,
     private leftPanelService: LeftPanelService,
+    private devicesService: DevicesService,
     private companiesState: CompaniesStateService,) { }
 
 
   ngOnInit() {
-    let getOnDevices = this.devicesStateService.getOnDevices().subscribe((data) => {
-      if (this.selectedCompanyId) this.onGetDevices(this.devicesStateService.getAllDevices()[this.selectedCompanyId]);
-    })
-    this.sub.add(getOnDevices);
+    if (this.selectedCompanyId) this.onGetDevices();
     this.ticketsStateService.getOnActualNumber().subscribe(data => {
       this.actualNumber = data;
     })
@@ -103,6 +103,10 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       if (this.addUsersNotifyStateService.getAction() === USERS_TO_ADD_TICKET) this.onChangeShareUsers(data);
     })
     this.sub.add(onChangeAssignedUser);
+    let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
+      if (this.selectedCompanyId == newChange.data.clientCompanyId) this.devicesStateService.changeDevice(this.devices, newChange);
+    })
+    this.sub.add(onDeviceUninstalled);
   }
   getColors() {
     if (this.ticketsStateService.getListStatusColor().length === 0) {
@@ -201,7 +205,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       this.selectedCompanyId = item.id;
       this.ticketAdd.createdUser.setCompanyId(item.id);
       this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === item.id)));
-      this.onGetDevices(this.devicesStateService.getAllDevices()[item.id]);
+      this.onGetDevices();
       let list = this.users.filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === item.id).defaultSubscriptions.ticketManagerSubscription.enabled);
       list = list.map(item => {
         let user = new TechUserItem(item);
@@ -294,10 +298,14 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     }).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
       1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
   }
-  onGetDevices(data) {
-    this.devices = ((data) ? data : []).sort((a, b) => (a.hostName.toLowerCase() > b.hostName.toLowerCase()) ?
-      1 : ((b.hostName.toLowerCase() > a.hostName.toLowerCase()) ? -1 : 0));
-
+  onGetDevices() {
+    this.ticketAdd.setPreloaderDevices(true);
+    this.devicesService.getCompanyDevices(this.selectedCompanyId).subscribe((data: any) => {
+      this.devices = (data[this.selectedCompanyId]) ? JSON.parse(JSON.stringify(data[this.selectedCompanyId])).map(item => new Device(item)) : [];
+      this.devices.sort((a, b) => (a.hostName.toLowerCase() > b.hostName.toLowerCase()) ?
+        1 : ((b.hostName.toLowerCase() > a.hostName.toLowerCase()) ? -1 : 0));
+      this.ticketAdd.setPreloaderDevices(false);
+    });
   }
   onGetUsers(data) {
     this.users = data.filter(item => {

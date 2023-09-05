@@ -65,35 +65,19 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
 
     });
     this.sub.add(subscription);
+    let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
+      if (id == newChange.data.clientCompanyId) {
+        this.devicesStateService.changeDevice(this.devices, newChange);
+        this.filter.onCurrentFilter(this.devices);
+        this.cd.detectChanges();
+        this.showPreloader = false;
+      }
+    })
+    this.sub.add(onDeviceUninstalled);
     let onInitWebSocket = this.devicesStateService.onInitWebSocket.subscribe(data => {
       if (this.companyId) this.sendDeviceStatusRequest(this.companyId, this.devices.filter(item => item.agentId).map(item => item.agentId));
     })
     this.sub.add(onInitWebSocket);
-    let getOnDevices = this.devicesStateService.getOnDevices().subscribe(data => {
-      //  if (this.devices.length === 0 && data[this.companyId]) this.sendDeviceStatusRequest(this.companyId, data[this.companyId].filter(item => item.agentId).map(item => item.agentId));
-      if (!data[this.companyId] && this.devices.length === 0) return;
-
-      if (data[this.companyId].length > this.devices.length) {
-        data[this.companyId].forEach(item => {
-          let find = this.devices.find(device => device.id === item.id);
-          if (!find) this.devices.push(new DeviceCompany(item, this.companyId));
-        });
-      } else if (data[this.companyId].length < this.devices.length) {
-        this.devices.forEach((item, index) => {
-          let findIndex = data[this.companyId].findIndex(device => device.id === item.id);
-          if (findIndex === -1) this.devices.splice(index, 1);
-        })
-      } else if (data[this.companyId].length === this.devices.length) {
-        this.devices.forEach(item => {
-          let findIndex = data[this.companyId].findIndex(device => device.id === item.id);
-          if (findIndex > -1) item.update(data[this.companyId][findIndex]);
-        })
-      }
-      this.filter.onCurrentFilter(this.devices);
-      this.cd.detectChanges();
-      this.showPreloader = false;
-    })
-    this.sub.add(getOnDevices);
     let getOnClosedRemoveConnecion = this.devicesStateService.getOnClosedRemoveConnecion().subscribe(data => {
       this.devices.forEach(item => {
         let findIndex = item.remoteSessions.findIndex(remoteSession => remoteSession.id === data);

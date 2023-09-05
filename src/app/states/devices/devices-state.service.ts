@@ -14,18 +14,17 @@ import { DeviceStatus } from './class/device-status';
   providedIn: 'root'
 })
 export class DevicesStateService {
-  allDevices = null;
   isGetDevices: boolean = false;
   devicesForReboot: Array<DeviceCompany> = [];
   devicesForRemove: Array<DeviceCompany> = [];
   devicesForShutDown: Array<DeviceCompany> = [];
   onUpdateAgentActivityStatus: EventEmitter<any> = new EventEmitter();
-  onGetDevices: EventEmitter<any> = new EventEmitter();
   onResetDeviceTiming: EventEmitter<any> = new EventEmitter();
   onOpenAside: EventEmitter<any> = new EventEmitter();
   onCloseAside: EventEmitter<any> = new EventEmitter();
   onRemoveConnecion: EventEmitter<any> = new EventEmitter();
   onChangeInfoForDevice: EventEmitter<any> = new EventEmitter();
+  onChangeDevice: EventEmitter<any> = new EventEmitter();
   onClosedRemoveConnecion: EventEmitter<any> = new EventEmitter();
   onSendDeviceStatus: EventEmitter<any> = new EventEmitter();
   onLaunchRemoteApp: EventEmitter<any> = new EventEmitter();
@@ -38,75 +37,60 @@ export class DevicesStateService {
     private devicesRealTimeService: DevicesRealTimeService) { }
 
   public onInit() {
-    if (this.userStateService.getCurrentUser()) {
-      if (this.userStateService.getCurrentUser().accountType != "CLIENT") {
-        this.getCompanyDevices(this.userStateService.getCurrentUser().company.id);
-      } else {
-        this.isGetDevices = true;
-      }
-    }
-    this.userStateService.getOnGetCurrentuser().subscribe(data => {
-      if (!this.isGetDevices) {
-        if (this.userStateService.getCurrentUser().accountType != "CLIENT") {
-          this.getCompanyDevices(data.company.id);
-        } else {
-          this.isGetDevices = true;
-        }
-      }
-    })
     this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
       if (newChange.action === 'AGENT_ACTIVITY_STATUS') this.onInitUpdateAgentActivityStatus(newChange);
-      if (!this.allDevices) return;
-      if (newChange.action === 'SOME_INFO_FOR_DEVICES') {
-        if (this.allDevices[newChange.data.clientCompanyId]) this.allDevices[newChange.data.clientCompanyId].forEach(item => {
-          if (item.agentId === newChange.data.masterAgentId) item.master = true;
-          if (item.agentId !== newChange.data.masterAgentId) item.master = false;
-        });
-        this.onChangeInfoForDevice.emit(newChange.data);
-      }
-      if (newChange.action === 'DEVICE_UNINSTALLED') {
-        let deviceIndex = this.allDevices[newChange.data.clientCompanyId].findIndex(item => item.id === newChange.data.value);
-        if (deviceIndex > -1) this.allDevices[newChange.data.clientCompanyId].splice(deviceIndex, 1);
-      }
-      if (newChange.action === 'DEVICE_ONLINE') {
-        let deviceIndex = this.allDevices[newChange.data.clientCompanyId].findIndex(item => item.id === newChange.data.value);
-        if (deviceIndex > -1) {
-          this.allDevices[newChange.data.clientCompanyId][deviceIndex].online = true;
-          this.allDevices[newChange.data.clientCompanyId][deviceIndex].userName = newChange.data.userName;
-          this.onResetDeviceTiming.emit({ id: newChange.data.value, online: true });
-        }
-      }
-      if (newChange.action === 'DEVICE_OFFLINE') {
-        let deviceIndex = this.allDevices[newChange.data.clientCompanyId].findIndex(item => item.id === newChange.data.value);
-        if (deviceIndex > -1) {
-          this.allDevices[newChange.data.clientCompanyId][deviceIndex].online = false;
-          var now = new Date();
-          var utc_now = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds());
-          this.allDevices[newChange.data.clientCompanyId][deviceIndex].offlineAt = utc_now.toString();
-          this.allDevices[newChange.data.clientCompanyId][deviceIndex].userName = newChange.data.userName;
-          this.onResetDeviceTiming.emit({ id: newChange.data.value, online: false });
-        }
-      }
-      if (newChange.action === 'REMOTE_CONNECTION' && newChange.data.status === 'online') {
-        this.onInitLaunchRemoteApp(newChange.data.id);
-      }
-      if (newChange.action === 'REMOTE_CONNECTION' && newChange.data.status === 'offline') {
-        this.closedRemoveConnecion(newChange.data.id);
-      }
-      if (newChange.action === 'DEVICE_INSTALLED') {
-        let parsedData = JSON.parse(newChange.data.value);
-        parsedData.device.userName = newChange.data.userName;
-        if (!this.allDevices[newChange.data.clientCompanyId]) {
-          let companyId = newChange.data.clientCompanyId;
-          this.allDevices[companyId] = [];
-          this.allDevices[companyId].push(new Device(parsedData.device));
-        } else {
-          this.allDevices[newChange.data.clientCompanyId].push(new Device(parsedData.device));
-        }
-        this.onSendDeviceStatus.emit(new DeviceStatus(newChange.data.clientCompanyId, [parsedData.device.agentId], ["idle", "norestart", "online"]));
-      }
-      this.onInitGetDevices(this.allDevices);
+      if (newChange.action === 'SOME_INFO_FOR_DEVICES') this.onChangeDevice.emit(newChange);
+      if (newChange.action === 'DEVICE_UNINSTALLED') this.onChangeDevice.emit(newChange);
+      if (newChange.action === 'DEVICE_ONLINE') this.onChangeDevice.emit(newChange);
+      if (newChange.action === 'DEVICE_OFFLINE') this.onChangeDevice.emit(newChange);
+      if (newChange.action === 'REMOTE_CONNECTION' && newChange.data.status === 'online') this.onInitLaunchRemoteApp(newChange.data.id);
+      if (newChange.action === 'REMOTE_CONNECTION' && newChange.data.status === 'offline') this.closedRemoveConnecion(newChange.data.id);
+      if (newChange.action === 'DEVICE_INSTALLED') this.onChangeDevice.emit(newChange);
     })
+  }
+  public changeDevice(allDevices, newChange) {
+    if (newChange.action === 'DEVICE_UNINSTALLED') {
+      let deviceIndex = allDevices.findIndex(item => item.id === newChange.data.value);
+      if (deviceIndex > -1) allDevices.splice(deviceIndex, 1);
+    }
+    if (newChange.action === 'SOME_INFO_FOR_DEVICES') {
+      if (allDevices) allDevices.forEach(item => {
+        if (item.agentId === newChange.data.masterAgentId) item.master = true;
+        if (item.agentId !== newChange.data.masterAgentId) item.master = false;
+      });
+      this.onChangeInfoForDevice.emit(newChange.data);
+    }
+    if (newChange.action === 'DEVICE_ONLINE') {
+      let deviceIndex = allDevices.findIndex(item => item.id === newChange.data.value);
+      if (deviceIndex > -1) {
+        allDevices[deviceIndex].online = true;
+        allDevices[deviceIndex].userName = newChange.data.userName;
+        this.onResetDeviceTiming.emit({ id: newChange.data.value, online: true });
+      }
+    }
+    if (newChange.action === 'DEVICE_OFFLINE') {
+      let deviceIndex = allDevices.findIndex(item => item.id === newChange.data.value);
+      if (deviceIndex > -1) {
+        allDevices[deviceIndex].online = false;
+        var now = new Date();
+        var utc_now = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds());
+        allDevices[deviceIndex].offlineAt = utc_now.toString();
+        allDevices[deviceIndex].userName = newChange.data.userName;
+        this.onResetDeviceTiming.emit({ id: newChange.data.value, online: false });
+      }
+    }
+    if (newChange.action === 'DEVICE_INSTALLED') {
+      let parsedData = JSON.parse(newChange.data.value);
+      parsedData.device.userName = newChange.data.userName;
+      if (!allDevices) {
+        let companyId = newChange.data.clientCompanyId;
+        allDevices[companyId] = [];
+        allDevices[companyId].push(new Device(parsedData.device));
+      } else {
+        allDevices.push(new Device(parsedData.device));
+      }
+      this.onSendDeviceStatus.emit(new DeviceStatus(newChange.data.clientCompanyId, [parsedData.device.agentId], ["idle", "norestart", "online"]));
+    }
   }
   public initWebSocket() {
     this.isInitWebSocket = true;
@@ -116,32 +100,8 @@ export class DevicesStateService {
   public getIsInitWebSocket() {
     return this.isInitWebSocket;
   }
-  getCompanyDevices(id) {
-    this.devicesService.getCompanyDevices(id).subscribe((data) => {
-      if (data) {
-        Object.keys(data).forEach(key => {
-          if (data[key]) data[key] = data[key].map(item => new Device(item));
-        })
-        this.preloaderDevices = false;
-        this.setAllDevices(data);
-        this.onInitGetDevices(data);
-        this.isGetDevices = true;
-      }
-    }, err => {
-      this.preloaderDevices = false;
-      this.setAllDevices(null);
-      this.onInitGetDevices(null);
-      this.isGetDevices = true;
-    })
-  }
   public getPreloaderDevices() {
     return this.preloaderDevices;
-  }
-  public setLabel(companyId, id, label) {
-    this.allDevices[companyId].forEach(element => {
-      if (element.id === id) element.label = label;
-    });
-    this.onInitGetDevices(this.allDevices);
   }
   public getOnSendDeviceStatus() {
     return this.onSendDeviceStatus;
@@ -154,20 +114,6 @@ export class DevicesStateService {
   }
   public getOnUpdateAgentActivityStatus() {
     return this.onUpdateAgentActivityStatus;
-  }
-  getCompanyIdByAgentId(value) {
-    if (value) {
-      return Object.keys(this.allDevices).find((key) => {
-        if (key !== 'staticCopy' && this.allDevices[key]) {
-          for (var i = 0; i < this.allDevices[key].length; i++) {
-            if (this.allDevices[key][i].agentId === value) {
-              return true;
-            }
-          }
-        }
-
-      });
-    }
   }
   getMillisecondsFromTimeString(timeString) {
     var splittedArray = timeString.split(':');
@@ -209,11 +155,6 @@ export class DevicesStateService {
   public setDevicesForReboot(data) {
     this.devicesForReboot = data;
   }
-  public updateLabelIcon(device: DeviceCompany) {
-    let index = this.allDevices[device.companyId].findIndex(item => item.id === device.id);
-    this.allDevices[device.companyId][index].label = device.label;
-    this.allDevices[device.companyId][index].iconName = device.iconName;
-  }
   public onInitLaunchRemoteApp(sessionId) {
     this.onLaunchRemoteApp.emit(sessionId);
   }
@@ -225,17 +166,5 @@ export class DevicesStateService {
   }
   public getOnRemoveConnection() {
     return this.onRemoveConnecion;
-  }
-  public setAllDevices(data) {
-    this.allDevices = data;
-  }
-  public onInitGetDevices(data) {
-    this.onGetDevices.emit(data);
-  }
-  public getOnDevices() {
-    return this.onGetDevices;
-  }
-  public getAllDevices() {
-    return this.allDevices;
   }
 }

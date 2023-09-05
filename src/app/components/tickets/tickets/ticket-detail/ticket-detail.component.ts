@@ -39,6 +39,7 @@ import { TicketDetailHeaderComponent } from './ticket-detail-header/ticket-detai
 import { TicketProfileAgent } from '../class/ticket-profile-agent';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { Device } from 'src/app/components/company-devices/class/device';
 
 @Component({
   selector: 'ticket-detail',
@@ -141,12 +142,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     })
     this.ticketsStateService.getOnChangeFieldTicket().subscribe((data: TicketChangeField) => {
       if (this.ticketProfile.id === data.id) {
-        if (data.field === "agent.deviceId") {
-          let device = this.devicesStateService.getAllDevices()[this.ticketProfile.company.id].find(item => item.agentId === data.value || item.id === data.value);
-          if (device) this.ticketProfile.agent = new TicketProfileAgent(device);
-          if (!device) this.ticketProfile.agent = null;
-        }
-        this.ticketProfile[data.field] = data.value;
+        if (data.field === "agent.deviceId") this.setAgent(data);
       }
       this.cd.detectChanges();
 
@@ -196,6 +192,11 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       this.showEditUpdate = true;
     })
     this.sub.add(onEditUpdateByForm);
+  }
+  setAgent(data: TicketChangeField) {
+    let device = this.ticketStateService.getDevices().find(item => item.agentId === data.value || item.id === data.value);
+    if (device) this.ticketProfile.agent = new TicketProfileAgent(device);
+    if (!device) this.ticketProfile.agent = null;
   }
   onViewDocument(data) {
     this.ticketStateService.setDocumentForPreview(data);

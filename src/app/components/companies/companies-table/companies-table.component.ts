@@ -20,6 +20,7 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { Router } from '@angular/router';
 import { CompanyItem } from '../class/company-item';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { CompanyDeviceCount } from '../class/company-device-count';
 
 @Component({
   selector: 'app-companies-table',
@@ -29,6 +30,7 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 export class CompaniesTableComponent implements OnInit, OnDestroy {
   @Input() company: CompanyItem;
   @Input() public showArchivedCompanies: boolean = false;
+  @Input() devicesCounts: Array<CompanyDeviceCount> = [];
   public primaryContact: CompanyAndressContact;
   public primaryAddress: CompanyAndress;
   public primaryPhone: any;
@@ -57,12 +59,6 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
       this.onGetUsersCount(data);
     })
     this.sub.add(getOnUsers);
-    if (this.devicesState.getAllDevices()) this.onGetDevicesCount(this.devicesState.getAllDevices());
-    let getOnDevices = this.devicesState.getOnDevices().subscribe((data) => {
-      this.showArchivedCompanies = false;
-      this.onGetDevicesCount(data);
-    })
-    this.sub.add(getOnDevices);
     this.IS_MOBILE = this.appService.checkMobile();
     let getOnMobile = this.appService.getOnMobile().subscribe(data => {
       this.IS_MOBILE = data;
@@ -98,7 +94,11 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
       } else {
         this.location = '';
       }
+      this.devicesCounts
     }
+  }
+  getDeviceCount() {
+    return this.devicesCounts.find(item => item.companyId === this.company.id) ? this.devicesCounts.find(item => item.companyId === this.company.id).count : 0;
   }
   checkLogo() {
     return (this.company && this.company.logo && this.company.logo.cropped && this.company.logo.cropped.id || this.company && this.company.logo && this.company.logo.origin && this.company.logo.origin.id)
@@ -149,10 +149,6 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to archive ${this.company.name}? All related users and service agreements will be archived and all agents will be uninstalled.`;
     this.companiesStateService.setCompnayForArchive(this.company);
-  }
-  private onGetDevicesCount(data) {
-    let devices = data;
-    this.countDevices = (devices && devices[this.company.id]) ? devices[this.company.id].length : 0;
   }
   private onGetUsersCount(data) {
     let users = data;

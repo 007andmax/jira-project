@@ -3,14 +3,14 @@
     [ngClass]="{'--selected':company.selected}"
 >
     <div class="companies-table__check">
-      <label class="qt-checkbox pointer">
-        <input
-          type="checkbox"
-          [(ngModel)]="company.selected"
-          (change)="onSelectCompany($event)"
-        >
-        <span></span>
-      </label>
+        <label class="qt-checkbox pointer">
+            <input
+                type="checkbox"
+                [(ngModel)]="company.selected"
+                (change)="onSelectCompany($event)"
+            >
+            <span></span>
+        </label>
     </div>
     <div
         class="companies-table__name pointer"
@@ -123,7 +123,7 @@
             [link]="getCompanyDashboardLink()"
             target="_blank"
             appRightClickBlank
-            [textContent]="countDevices"
+            [textContent]="getDeviceCount()"
         >
         </a>
     </div>

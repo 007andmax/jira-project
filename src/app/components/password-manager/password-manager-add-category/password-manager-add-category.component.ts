@@ -1,9 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { PasswordManagerService } from 'src/app/services/password-manager/password-manager.service';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
 import { PasswordManagerStateService } from 'src/app/states/password-manager/password-manager-state.service';
 import { PasswordRecordCategories } from '../class/password-record-categories';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
   selector: 'app-password-manager-add-category',
@@ -12,6 +13,7 @@ import { PasswordRecordCategories } from '../class/password-record-categories';
 })
 export class PasswordManagerAddCategoryComponent implements OnInit {
   @Output() onClose: EventEmitter<any> = new EventEmitter();
+  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   name: string = "";
   categories: Array<PasswordRecordCategories> = [];
   disableCreateCategory: boolean = false;
@@ -41,7 +43,9 @@ export class PasswordManagerAddCategoryComponent implements OnInit {
       this.disableCreateCategory = true;
       return;
     };
+    this.addBtn.setDisabled(true);
     this.passwordManagerService.addCategories(this.name).subscribe(data => {
+      this.addBtn.setDisabled(false);
       this.close();
     })
   }

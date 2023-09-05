@@ -13,7 +13,14 @@ export class TicketAdd {
     shares: Array<TicketShareUser> = [];
     subject: string = '';
     ticketAssignTo: User;
+    preloaderDevices: boolean = false;
     constructor() { }
+    public getPreloaderDevices() {
+        return this.preloaderDevices;
+    }
+    public setPreloaderDevices(data) {
+        this.preloaderDevices = data;
+    }
     public clearAssignedUser() {
         this.assignedUser = null;
     }

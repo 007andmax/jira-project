@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 import { ActivatedRoute } from '@angular/router';
+import { DevicesService } from 'src/app/services/devices/devices.service';
 
 @Component({
   selector: 'app-company-dash-stats',
@@ -43,6 +44,7 @@ export class CompanyDashStatsComponent implements OnInit {
     private usersStateService: UsersStateService,
     private devicesState: DevicesStateService,
     public activateRoute: ActivatedRoute,
+    private devicesService: DevicesService,
     public cd: ChangeDetectorRef
   ) { }
 
@@ -50,8 +52,8 @@ export class CompanyDashStatsComponent implements OnInit {
     this._id = this.activateRoute.snapshot.params['id'];
     let subscription = this.activateRoute.params.subscribe(params => {
       this._id = params['id'];
+      this.getDeviceCount(this._id);
       if (this.usersStateService.getAllUsers().length > 0) this.onGetUsersCount(this.usersStateService.getAllUsers());
-      if (this.devicesState.getAllDevices()) this.onGetDevicesCount(this.devicesState.getAllDevices());
     });
     this.sub.add(subscription);
     if (this.usersStateService.getAllUsers().length > 0) this.onGetUsersCount(this.usersStateService.getAllUsers());
@@ -60,14 +62,14 @@ export class CompanyDashStatsComponent implements OnInit {
       this.onGetUsersCount(data);
     })
     this.sub.add(getOnUsers);
-    if (this.devicesState.getAllDevices()) this.onGetDevicesCount(this.devicesState.getAllDevices());
-    let getOnDevices = this.devicesState.getOnDevices().subscribe((data) => {
-      this.showArchivedCompanies = false;
-      this.onGetDevicesCount(data);
-    })
-    this.sub.add(getOnDevices);
-  }
 
+  }
+  getDeviceCount(id) {
+    this.devicesService.getCountByCompany([id]).subscribe(data => {
+      console.log("data", data);
+      this.countDevices = data[0].count;
+    })
+  }
   private onGetUsersCount(data) {
     let users = data;
     this.countUsers = users.filter((user) => {
@@ -78,15 +80,4 @@ export class CompanyDashStatsComponent implements OnInit {
       this.cd.detectChanges();
     }
   }
-
-  private onGetDevicesCount(data) {
-    let devices = data;
-    this.countDevices = (devices && devices[this._id]) ? devices[this._id].length : 0;
-    if (!this.cd['destroyed']) {
-      this.cd.detectChanges();
-    }
-  }
-
-
-
 }
