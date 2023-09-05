@@ -205,7 +205,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   }
   onShowMore(data) {
     this.typeRigthDetailAside = data;
-    this.toggleRigthPanel = false;
+    this.toggleRigthPanel = true;
   }
   onInitRealTimes() {
     if (this.websocketService.isInit) {
