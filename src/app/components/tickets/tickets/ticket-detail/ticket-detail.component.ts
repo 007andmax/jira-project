@@ -443,6 +443,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.companiesStateService.setCompanyRoutingId(this.ticketProfile.company.id);
     this.router.navigate(
       [`${this.companiesStateService.getCurrentCompany().techDomain}/company/`, this.ticketProfile.company.id, 'dashboard']);
+    this.leftPanelStateService.toggleLeftPanel(false);
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
