@@ -1,4 +1,4 @@
-<div class="contract-dashboard-chart-card qt-mr-16">
+<div class="contract-dashboard-chart-card contract-dashboard-chart-card__open-ticket-priority qt-mr-16">
     <div class="contract-dashboard-chart-card__header">
         <div class="contract-dashboard-chart-card__header-title">Open Ticket Priority</div>
     </div>
@@ -99,9 +99,9 @@
     </div>
     <div
         *ngIf="ticketsPriorities.length > 0"
-        class="button-loader"
+        class="button-loader qt-df qt-jc-c qt-mt-4 qt-mb-16"
         (click)="toggleAllPriorities = !toggleAllPriorities"
     >
-        <span [textContent]="toggleAllPriorities ? 'hide' : 'Load more'"></span>
+        <span class="qt-dib qt-button" [textContent]="toggleAllPriorities ? 'hide' : 'more'"></span>
     </div>
 </div>

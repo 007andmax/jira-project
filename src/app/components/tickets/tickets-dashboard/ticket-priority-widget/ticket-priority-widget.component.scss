@@ -1,0 +1,11 @@
+.contract-dashboard-chart-card__open-ticket-priority {
+  .contract-dashboard-chart-card__footer {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 8px 4px;
+  }
+  .contract-dashboard-chart-card__footer-item {
+    max-width: calc(25% - 4px);
+    width: 100%;
+  }
+}
