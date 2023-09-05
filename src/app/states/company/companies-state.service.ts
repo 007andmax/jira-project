@@ -20,6 +20,7 @@ export class CompaniesStateService {
   allCompanies = [];
   lightAllCompanies = [];
   lightClientsCompanies = [];
+  devicesCounts = [];
   isInitLightAllCompanies: boolean = false;
   isInitLightClientsCompanies: boolean = false;
   onLightCompanies: EventEmitter<any> = new EventEmitter();
@@ -93,6 +94,12 @@ export class CompaniesStateService {
         this.initSubscriptions();
       }
     })
+  }
+  public getDevicesCounts() {
+    return this.devicesCounts;
+  }
+  public setDevicesCounts(data) {
+    this.devicesCounts = data;
   }
   public getCompanyIdForassignedDocumentCategory() {
     return this.companyIdForassignedDocumentCategory;

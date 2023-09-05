@@ -55,6 +55,8 @@ export class CompaniesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     document.body.querySelector(".main-container").scrollTo(0, 0);
+    this.devicesCounts = this.companiesStateService.getDevicesCounts();
+    this.companyFilter.setDevices(this.devicesCounts);
     this.left_filter = this.leftPanelStateService.getFilter();
     if (this.companiesStateService.getCompanies().length > 0 && !this.left_filter) this.getClientsList(this.companiesStateService.getCompanies());
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
@@ -128,6 +130,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       console.log("data", data);
       this.devicesCounts = data;
       this.companyFilter.setDevices(this.devicesCounts);
+      this.companiesStateService.setDevicesCounts(data);
     })
   }
   onFilter(data) {
