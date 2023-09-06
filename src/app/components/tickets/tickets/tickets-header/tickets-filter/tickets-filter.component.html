@@ -40,6 +40,17 @@
         [list]="techUsersNamesList"
         (onSelectedItem)="onSelectTechUser($event)"
     ></app-drop-down>
+    <app-drop-down
+        class="search-priority"
+        #priorityDp
+        [placeholder]="'Select'"
+        [change]="true"
+        [search]="true"
+        [class]="['qt-dropdown']"
+        [field]="'name'"
+        [list]="ticketPriorities"
+        (onSelectedItem)="onSelectPriority($event)"
+    ></app-drop-down>
     <app-tickets-filter-tags
         #tagsDp
         [placement]="'top-left'"

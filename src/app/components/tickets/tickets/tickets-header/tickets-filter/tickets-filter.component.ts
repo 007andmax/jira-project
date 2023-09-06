@@ -26,6 +26,7 @@ import { User } from 'src/app/components/users/class/user';
 import { TicketsFilterSaveComponent } from '../tickets-filter-save/tickets-filter-save.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TicketsFilterStatusComponent } from './tickets-filter-status/tickets-filter-status.component';
+import { TicketsPriority } from 'src/app/components/setting/ticket-settings-page/tickets-priority/class/tickets-priority';
 
 @Component({
   selector: 'app-tickets-filter',
@@ -37,6 +38,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   @ViewChild('companyDp') companyDp: CompanyDropDownComponent;
   @ViewChild('techUsersDp') techUsersDp: DropDownComponent;
   @ViewChild('statusDp') statusDp: DropDownComponent;
+  @ViewChild('priorityDp') priorityDp: DropDownComponent;
   @ViewChild('tagsDp') tagsDp: TicketsFilterTagsComponent;
   @ViewChild('filterStatus') filterStatus: TicketsFilterStatusComponent;
   public ticketsFilter: TicketsFilter = new TicketsFilter();
@@ -44,6 +46,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   listType: string = "USERS";
   public selectedCompany: Company = null;
   selectedTechUser: string = null;
+
   selectedStatus: string = null;
   selectedUser: string = null;
   users = [];
@@ -53,6 +56,8 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   new ItemStatus('Completed', 'completed', 'CLOSED'),
   new ItemStatus('In Progress', 'inProgress', 'OPEN'),
   new ItemStatus('On Hold', 'onHold', 'ON_HOLD')];
+
+  ticketPriorities: Array<TicketsPriority> = [];
   ticketsStatus: Array<TicketStatusFilter> = [];
   blockFilterUser: boolean = false;
   ticketsCounts: TicketsCounts;
@@ -117,6 +122,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnUpdateCounts);
     this.getTicketsStatus();
+    this.getTicketPriority();
     let onGetTicketsStatus = this.ticketsStateService.onGetTicketsStatus.subscribe(data => {
       this.getTicketsStatus();
       if (this.globalFilter.id) this.getCountsStatus();
@@ -174,6 +180,15 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
         this.onChangeTags([]);
         this.tagsDp.clearWithOutChanges();
       }
+      let priorityLevel = this.ticketPriorities.find(item => data.priorityIds.some(priorityId => priorityId == item.id));
+      if (priorityLevel) {
+        this.priorityDp.selectedItem = priorityLevel;
+        this.onSelectPriority(priorityLevel);
+      } else {
+        this.onSelectPriority(null);
+        this.priorityDp.clearWithOutChanges();
+      }
+
       this.setTypeFilterWithoutChange("ALL");
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
       this.getCount();
@@ -204,6 +219,19 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
         if (index > -1) this.ticketsStatus[index].setCount(counts[key])
       }
     })
+  }
+  getTicketPriority() {
+    if (this.ticketsStateService.getTicketsPriorities().length === 0) {
+      this.ticketsService.getTicketsPriorities().subscribe((data: any) => {
+        this.ticketPriorities = data.priorityLevels.map(item => new TicketsPriority(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+          1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+        this.ticketsStateService.onSetTicketsPriorities(this.ticketPriorities);
+        this.priorityDp.reset(this.ticketPriorities);
+      })
+    } else {
+      this.ticketPriorities = this.ticketsStateService.getTicketsPriorities();
+      this.priorityDp.reset(this.ticketPriorities);
+    }
   }
   private checkCompanyCustomerUser() {
     this.ticketsFilter = this.customerPortalStateService.getTicketsFilter();
@@ -254,6 +282,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     if (this.ticketsFilter.selectedTechUser) count++;
     if (this.ticketsFilter.selectedUser) count++;
     if (this.ticketsFilter.selectedStatus) count++;
+    if (this.ticketsFilter.selectedPriorityLevel) count++;
     this.changeCountFilter.emit(count);
   }
   private getCount() {
@@ -329,6 +358,15 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     }
   }
 
+  public onSelectPriority(item) {
+    if (!item) {
+      this.ticketsFilter.setPriorityLevel(null);
+      this.globalFilter.setPriorityIds([]);
+    } else {
+      this.ticketsFilter.setPriorityLevel(item);
+      this.globalFilter.setPriorityIds([item.id]);
+    }
+  }
   public onSelectStatus(item, event) {
     if (!event.target.checked) {
       item.selected = false;

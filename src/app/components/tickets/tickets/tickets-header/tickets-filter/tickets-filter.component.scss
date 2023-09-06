@@ -12,6 +12,7 @@
   .search-tech-users,
   .search-status,
   .search-company,
+  .search-priority,
   .light-dropdown.dropdown,
   app-tickets-filter-tags {
     @media (max-width: 767px) {
@@ -57,6 +58,17 @@
     &::before {
       @media (max-width: 767px) {
         content: "Tech Team";
+      }
+    }
+  }
+  .search-priority {
+    @media (max-width: 767px) {
+      width: 100%;
+    }
+
+    &::before {
+      @media (max-width: 767px) {
+        content: "Priority";
       }
     }
   }

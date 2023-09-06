@@ -1,6 +1,7 @@
 import { Company } from 'src/app/interfaces/company/company';
 import { User } from '../../../users/class/user';
 import { TicketStatusFilter } from '../tickets-header/class/ticket-status-filter';
+import { TicketsPriority } from 'src/app/components/setting/ticket-settings-page/tickets-priority/class/tickets-priority';
 
 export class TicketsFilter {
     listType: string = "USERS";
@@ -18,6 +19,7 @@ export class TicketsFilter {
     payloadCompleted = null;
     payloadInProgress = null;
     tags = [];
+    selectedPriorityLevel: TicketsPriority = null;
     selectedCompany: Company = null;
     selectedTechUser: User = null;
     selectedUser: User = null;
@@ -28,10 +30,13 @@ export class TicketsFilter {
         this.onInitUser();
     }
     public checkUse() {
-        return this.selectedCompany && this.selectedTechUser && this.selectedUser && this.selectedStatus && this.tags.length > 0;
+        return this.selectedCompany && this.selectedTechUser && this.selectedUser && this.selectedStatus && this.selectedPriorityLevel && this.tags.length > 0;
     }
     public setCustomStatus(data) {
         this.customStatus = data;
+    }
+    public setPriorityLevel(data) {
+        this.selectedPriorityLevel = data;
     }
     public setFilter(data) {
         this.tags = data.tags;
@@ -39,6 +44,7 @@ export class TicketsFilter {
         this.selectedTechUser = data.selectedTechUser;
         this.selectedUser = data.selectedUser;
         this.selectedStatus = data.selectedStatus;
+        this.selectedPriorityLevel = data.selectedPriorityLevel;
     }
     public setStatus(data) {
         this.selectedStatus = data;
@@ -242,6 +248,14 @@ export class TicketsFilter {
                 values: this.tags.map(item => {
                     return item.id;
                 })
+            });
+            payload.groupFieldFilters[0].predicateRule = "AND";
+        }
+        if (this.selectedPriorityLevel) {
+            payload.groupFieldFilters[0].fieldFilterDtos.push({
+                operator: "IN",
+                path: "priorityLevel.id",
+                values: [this.selectedPriorityLevel.id]
             });
             payload.groupFieldFilters[0].predicateRule = "AND";
         }

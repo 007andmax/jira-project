@@ -8,6 +8,7 @@ export class TicketGlobalFilter {
     "tagIds": Array<string> = [];
     "status": any;
     "assignedUsersIds": Array<string> = [];
+    priorityIds: Array<string> = [];
     modified: boolean;
     constructor(data = null) {
         if (data) {
@@ -32,6 +33,7 @@ export class TicketGlobalFilter {
         if (isAdd && this.tagIds.length > 0) data.tagIds = this.tagIds;
         if (!isAdd) data.tagIds = this.tagIds;
         if (this.assignedUsersIds) data.assignedUsersIds = this.assignedUsersIds;
+        if (this.priorityIds) data.priorityIds = this.priorityIds;
         return data
     }
     public setClientCompanyId(data) {
@@ -49,7 +51,10 @@ export class TicketGlobalFilter {
     public setTagIds(data) {
         this.tagIds = data;
     }
+    public setPriorityIds(data) {
+        this.priorityIds = data;
+    }
     public isUseFilters() {
-        return this.clientCompanyId || this.createdUserId || this.assignedUsersIds.length > 0 || this.statusId || this.tagIds.length > 0;
+        return this.clientCompanyId || this.createdUserId || this.assignedUsersIds.length > 0 || this.statusId || this.tagIds.length > 0 || this.priorityIds.length > 0;
     }
 }
