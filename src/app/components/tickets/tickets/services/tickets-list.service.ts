@@ -45,18 +45,18 @@ export class TicketsListService {
     let selectedCompany = true,
       selectedTechUser = true,
       selectedUser = true;
-    if (ticketsFilter.selectedCompany) {
-      selectedCompany = (ticketsFilter.selectedCompany.id === ticket.companyId);
+    if (ticketsFilter.selectedCompanies.length > 0) {
+      selectedCompany = (ticketsFilter.selectedCompanies.some(item => item.id === ticket.companyId));
     }
 
-    if (ticketsFilter.selectedTechUser) {
-      let assignedUser: boolean = (ticketsFilter.selectedTechUser.id === ticket.assignedUserId);
-      let multiAssignedUser = (ticket.multiAssignedUsers || []).find(item => item.id === ticketsFilter.selectedTechUser.id);
+    if (ticketsFilter.selectedTechUser.length > 0) {
+      let assignedUser: boolean = (ticketsFilter.selectedTechUser.find(item => item.id === ticket.assignedUserId) ? true : false);
+      let multiAssignedUser = (ticket.multiAssignedUsers || []).find(item => ticketsFilter.selectedTechUser.some(techUser => techUser.id == item.id));
       selectedTechUser = (assignedUser && !multiAssignedUser);
     }
 
-    if (ticketsFilter.selectedUser) {
-      selectedUser = (ticketsFilter.selectedUser.id === ticket.createdUserId);
+    if (ticketsFilter.selectedUsers.length > 0) {
+      selectedUser = (ticketsFilter.selectedUsers.find(item => item.id === ticket.createdUserId) ? true : false);
     }
     return selectedCompany && selectedTechUser && selectedUser;
 

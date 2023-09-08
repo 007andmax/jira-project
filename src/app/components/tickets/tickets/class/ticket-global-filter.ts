@@ -3,8 +3,8 @@ export class TicketGlobalFilter {
     "statusId": string;
     "name": string = "";
     "global": boolean = false;
-    "clientCompanyId": string;
-    "createdUserId": string;
+    "clientCompanyIds": Array<string> = [];
+    "createdUserIds": Array<string> = [];
     "tagIds": Array<string> = [];
     "status": any;
     "assignedUsersIds": Array<string> = [];
@@ -27,20 +27,20 @@ export class TicketGlobalFilter {
             name: this.name,
             global: this.global
         };
-        if (this.clientCompanyId) data.clientCompanyId = this.clientCompanyId;
+        if (this.clientCompanyIds.length > 0) data.clientCompanyIds = this.clientCompanyIds;
         if (this.statusId) data.statusId = this.statusId;
-        if (this.createdUserId) data.createdUserId = this.createdUserId;
+        if (this.createdUserIds.length > 0) data.createdUserIds = this.createdUserIds;
         if (isAdd && this.tagIds.length > 0) data.tagIds = this.tagIds;
         if (!isAdd) data.tagIds = this.tagIds;
-        if (this.assignedUsersIds) data.assignedUsersIds = this.assignedUsersIds;
-        if (this.priorityIds) data.priorityIds = this.priorityIds;
+        if (this.assignedUsersIds.length > 0) data.assignedUsersIds = this.assignedUsersIds;
+        if (this.priorityIds.length > 0) data.priorityIds = this.priorityIds;
         return data
     }
-    public setClientCompanyId(data) {
-        this.clientCompanyId = data;
+    public setClientCompaies(data) {
+        this.clientCompanyIds = data;
     }
-    public setCreatedUserId(data) {
-        this.createdUserId = data;
+    public setCreatedUserIds(data) {
+        this.createdUserIds = data;
     }
     public setAssignedUsersIds(data) {
         this.assignedUsersIds = data;
@@ -55,6 +55,6 @@ export class TicketGlobalFilter {
         this.priorityIds = data;
     }
     public isUseFilters() {
-        return this.clientCompanyId || this.createdUserId || this.assignedUsersIds.length > 0 || this.statusId || this.tagIds.length > 0 || this.priorityIds.length > 0;
+        return this.clientCompanyIds.length > 0 || this.createdUserIds.length > 0 || this.assignedUsersIds.length > 0 || this.statusId || this.tagIds.length > 0 || this.priorityIds.length > 0;
     }
 }

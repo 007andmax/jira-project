@@ -12,7 +12,7 @@
         [ticketsStatus]="ticketsStatus"
         (onSelectStatus)="onSelectStatus($event.item, $event.event)"
     ></tickets-filter-status>
-    <company-drop-down
+    <!-- <company-drop-down
         class="search-company"
         #companyDp
         [placeholder]="'Select Company'"
@@ -21,8 +21,41 @@
         [class]="['qt-dropdown']"
         [field]="'name'"
         (onSelectedItem)="onSelectCompany($event)"
-    ></company-drop-down>
-    <app-drop-down
+    ></company-drop-down> -->
+    <tickets-filter-companies-drop-down
+        #companyDp
+        [clientType]="'CLIENT'"
+        [placeholder]="'Select Company'"
+        [placement]="'top-left'"
+        [field]="'name'"
+        (filterChange)="onSelectCompany($event)"
+    >
+    </tickets-filter-companies-drop-down>
+    <tickets-filter-drop-down
+        #usersDp
+        [placeholder]="'Select User'"
+        [placement]="'top-left'"
+        [list]="getUserList()"
+        (filterChange)="onSelectUser($event)"
+    ></tickets-filter-drop-down>
+    <tickets-filter-drop-down
+        #techUsersDp
+        [placeholder]="'Select Tech User'"
+        [placement]="'top-left'"
+        [list]="techUsersNamesList"
+        (filterChange)="onSelectTechUser($event)"
+    >
+    </tickets-filter-drop-down>
+    <tickets-filter-drop-down
+        #priorityDp
+        [placeholder]="'Select proirity'"
+        [placement]="'top-left'"
+        [field]="'name'"
+        [list]="ticketPriorities"
+        (filterChange)="onSelectPriority($event)"
+    >
+    </tickets-filter-drop-down>
+    <!-- <app-drop-down
         class="search-users"
         #usersDp
         [placeholder]="'Select User'"
@@ -30,7 +63,7 @@
         [class]="['qt-dropdown']"
         [list]="getUserList()"
         (onSelectedItem)="onSelectUser($event)"
-    ></app-drop-down>
+    ></app-drop-down> 
     <app-drop-down
         class="search-tech-users"
         #techUsersDp
@@ -50,7 +83,7 @@
         [field]="'name'"
         [list]="ticketPriorities"
         (onSelectedItem)="onSelectPriority($event)"
-    ></app-drop-down>
+    ></app-drop-down> -->
     <app-tickets-filter-tags
         #tagsDp
         [placement]="'top-left'"

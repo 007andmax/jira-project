@@ -24,7 +24,7 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
   ticketsFilter: TicketsFilter = new TicketsFilter();
   @Input() set setUser(value) {
     this.user = value;
-    this.ticketsFilter.setUser(this.user);
+    this.ticketsFilter.setUsers([this.user]);
   };
   showPreloader: boolean = true;
   public infiniteScrollDisabled = true;

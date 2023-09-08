@@ -73,9 +73,9 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
   }
   public onChangeCounterFilter() {
     this.countFilter = 0;
-    if (this.ticketsFilter.selectedCompany) this.countFilter++;
+    if (this.ticketsFilter.selectedCompanies.length > 0) this.countFilter++;
     if (this.ticketsFilter.selectedTechUser) this.countFilter++;
-    if (this.ticketsFilter.selectedUser) this.countFilter++;
+    if (this.ticketsFilter.selectedUsers.length > 0) this.countFilter++;
     if (this.ticketsFilter.selectedStatus) this.countFilter++;
   }
   toggleMobileLeftPanel() {
@@ -89,9 +89,9 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     }
   }
   isExistFilters() {
-    return this.ticketsFilter.selectedCompany ||
+    return this.ticketsFilter.selectedCompanies.length > 0 ||
       this.ticketsFilter.selectedTechUser ||
-      this.ticketsFilter.selectedUser ||
+      this.ticketsFilter.selectedUsers.length > 0 ||
       this.ticketsFilter.selectedStatus ||
       this.ticketsFilter.tags.length > 0
   }
@@ -104,7 +104,7 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
   clearAll() {
     if (this.filter) this.filter.onClearAll();
     let ticketGlobalFilter = new TicketGlobalFilter();
-    if (this.ticketsFilter.isDisbledCompany) ticketGlobalFilter.setClientCompanyId(this.ticketsFilter.selectedCompany.id);
+    if (this.ticketsFilter.isDisbledCompany) ticketGlobalFilter.setClientCompaies(this.ticketsFilter.selectedCompanies.map(item => item.id));
     this.ticketsStateService.onChangeGlobalFilter(ticketGlobalFilter);
   }
   getTextCountFilters() {

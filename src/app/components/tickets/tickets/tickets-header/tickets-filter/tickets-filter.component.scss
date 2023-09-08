@@ -102,6 +102,12 @@
       }
     }
   }
+  /deep/tickets-filter-drop-down .mat-form-field {
+    width: 100%;
+  }
+  /deep/tickets-filter-companies-drop-down .mat-form-field {
+    width: 100%;
+  }
 
   @media (max-width: 767px) {
     align-items: flex-start;

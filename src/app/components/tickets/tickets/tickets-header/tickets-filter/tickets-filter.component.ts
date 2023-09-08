@@ -27,6 +27,8 @@ import { TicketsFilterSaveComponent } from '../tickets-filter-save/tickets-filte
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TicketsFilterStatusComponent } from './tickets-filter-status/tickets-filter-status.component';
 import { TicketsPriority } from 'src/app/components/setting/ticket-settings-page/tickets-priority/class/tickets-priority';
+import { TicketsFilterDropDownComponent } from './tickets-filter-drop-down/tickets-filter-drop-down.component';
+import { TicketsFilterCompaniesDropDownComponent } from './tickets-filter-companies-drop-down/tickets-filter-companies-drop-down.component';
 
 @Component({
   selector: 'app-tickets-filter',
@@ -34,11 +36,11 @@ import { TicketsPriority } from 'src/app/components/setting/ticket-settings-page
   styleUrls: ['./tickets-filter.component.scss']
 })
 export class TicketsFilterComponent implements OnInit, OnDestroy {
-  @ViewChild('usersDp') usersDp: DropDownComponent;
-  @ViewChild('companyDp') companyDp: CompanyDropDownComponent;
-  @ViewChild('techUsersDp') techUsersDp: DropDownComponent;
+  @ViewChild('usersDp') usersDp: TicketsFilterDropDownComponent;
+  @ViewChild('companyDp') companyDp: TicketsFilterCompaniesDropDownComponent;
+  @ViewChild('techUsersDp') techUsersDp: TicketsFilterDropDownComponent;
   @ViewChild('statusDp') statusDp: DropDownComponent;
-  @ViewChild('priorityDp') priorityDp: DropDownComponent;
+  @ViewChild('priorityDp') priorityDp: TicketsFilterDropDownComponent;
   @ViewChild('tagsDp') tagsDp: TicketsFilterTagsComponent;
   @ViewChild('filterStatus') filterStatus: TicketsFilterStatusComponent;
   public ticketsFilter: TicketsFilter = new TicketsFilter();
@@ -46,7 +48,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   listType: string = "USERS";
   public selectedCompany: Company = null;
   selectedTechUser: string = null;
-
   selectedStatus: string = null;
   selectedUser: string = null;
   users = [];
@@ -59,7 +60,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
 
   ticketPriorities: Array<TicketsPriority> = [];
   ticketsStatus: Array<TicketStatusFilter> = [];
-  blockFilterUser: boolean = false;
   ticketsCounts: TicketsCounts;
   sub: Subscription = new Subscription();
   @Output() onClose = new EventEmitter();
@@ -108,9 +108,13 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       this.getCount();
     });
     this.sub.add(getOnChangeTagsFilter);
-    if (this.usersStateService.getAllUsers().length > 0) this.onGetTechUsers(this.usersStateService.getAllUsers());
+    if (this.usersStateService.getAllUsers().length > 0) {
+      this.onGetTechUsers(this.usersStateService.getAllUsers());
+      this.onGetUsers();
+    }
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.onGetTechUsers(data);
+      this.onGetUsers();
     })
     this.sub.add(getOnUsers);
     //    this.getCounts();
@@ -130,30 +134,31 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.sub.add(onGetTicketsStatus);
     let onInitGlobalFilter = this.ticketsStateService.onInitGlobalFilter.subscribe((data: TicketGlobalFilter) => {
       this.globalFilter = new TicketGlobalFilter(JSON.parse(JSON.stringify(data)));
-      this.selectedCompany = this.companiesState.getCompanies().find(item => item.id == data.clientCompanyId);
-      if (this.selectedCompany) {
-        this.companyDp.selectItemWithOutChanges(this.companiesState.getCompanies().find(item => item.id == data.clientCompanyId));
-        this.onSelectCompany(this.companiesState.getCompanies().find(item => item.id == data.clientCompanyId));
+      console.log("this.globalFilter", this.globalFilter);
+      let selectedCompanies: Array<Company> = this.companiesState.getCompanies().filter(item => data.clientCompanyIds.some(companyId => companyId == item.id));
+      if (selectedCompanies.length > 0) {
+        this.companyDp.selectedItems = selectedCompanies;
+        this.onSelectCompany(selectedCompanies);
       } else {
         this.companyDp.clearWithOutChanges();
-        this.onSelectCompany(null);
+        this.onSelectCompany([]);
       }
 
-      let createdUser: User = this.usersStateService.getAllUsers().find(item => data.createdUserId == item.id);
-      if (createdUser) {
-        this.usersDp.selectItemWithOutChanges(`${createdUser.firstName} ${createdUser.lastName}`);
-        this.onSelectUser(`${createdUser.firstName} ${createdUser.lastName}`);
+      let createdUser: Array<User> = this.usersStateService.getAllUsers().filter(item => data.createdUserIds.some(userId => userId == item.id));
+      if (createdUser.length > 0) {
+        this.usersDp.selectedTag = createdUser.map(item => `${item.firstName} ${item.lastName}`);
+        this.onSelectUser(createdUser.map(item => `${item.firstName} ${item.lastName}`));
       } else {
         this.usersDp.clearWithOutChanges();
-        this.onSelectUser(null);
+        this.onSelectUser([]);
       }
-      let techUser: User = this.usersStateService.getAllUsers().find(item => data.assignedUsersIds.some(userId => userId == item.id));
-      if (techUser) {
-        this.techUsersDp.selectItemWithOutChanges(`${techUser.firstName} ${techUser.lastName}`);
-        this.onSelectTechUser(`${techUser.firstName} ${techUser.lastName}`);
+      let techUser: Array<User> = this.usersStateService.getAllUsers().filter(item => data.assignedUsersIds.some(userId => userId == item.id));
+      if (techUser.length > 0) {
+        this.techUsersDp.selectedTag = techUser.map(item => `${item.firstName} ${item.lastName}`);
+        this.onSelectTechUser(techUser.map(item => `${item.firstName} ${item.lastName}`));
       } else {
         this.techUsersDp.clearWithOutChanges();
-        this.onSelectTechUser(null);
+        this.onSelectTechUser([]);
       }
       let status = this.ticketsStatus.find(item => item.id == data.statusId);
       this.ticketsStatus.forEach(item => item.selected = false);
@@ -180,12 +185,12 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
         this.onChangeTags([]);
         this.tagsDp.clearWithOutChanges();
       }
-      let priorityLevel = this.ticketPriorities.find(item => data.priorityIds.some(priorityId => priorityId == item.id));
-      if (priorityLevel) {
-        this.priorityDp.selectedItem = priorityLevel;
+      let priorityLevel = this.ticketPriorities.filter(item => data.priorityIds.some(priorityId => priorityId == item.id));
+      if (priorityLevel.length > 0) {
+        this.priorityDp.selectedTag = priorityLevel;
         this.onSelectPriority(priorityLevel);
       } else {
-        this.onSelectPriority(null);
+        this.onSelectPriority([]);
         this.priorityDp.clearWithOutChanges();
       }
 
@@ -204,6 +209,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(onGetGlobalFilters);
+
   }
   private clearCountsStatus() {
     this.ticketsStatus.forEach(item => item.setCount(0));
@@ -226,11 +232,11 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
         this.ticketPriorities = data.priorityLevels.map(item => new TicketsPriority(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
           1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
         this.ticketsStateService.onSetTicketsPriorities(this.ticketPriorities);
-        this.priorityDp.reset(this.ticketPriorities);
+        this.priorityDp.list = this.ticketPriorities;
       })
     } else {
       this.ticketPriorities = this.ticketsStateService.getTicketsPriorities();
-      this.priorityDp.reset(this.ticketPriorities);
+      this.priorityDp.list = this.ticketPriorities;
     }
   }
   private checkCompanyCustomerUser() {
@@ -239,14 +245,14 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.companyDp.selectItemWithOutChanges(this.selectedCompany);
     this.companyDp.isDisabled = true;
     this.ticketsFilter.isDisbledCompany = true;
-    this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.selectedCompany.id)));
+    this.onGetUsers();
   }
   private checkUserCustomerUser() {
     let customerCompanyInfo = this.usersStateService.getCurrentUser().customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id'));
     if (customerCompanyInfo && customerCompanyInfo.customerUserRole.getPermission('VIEW_MY_TICKETS') && !customerCompanyInfo.customerUserRole.getPermission('VIEW_ALL_TICKETS')) {
-      let user = this.usersStateService.getAllUsers().find(item => item.id === this.usersStateService.getCurrentUser().id);
-      this.selectedUser = `${user.firstName} ${user.lastName}`;
-      this.usersDp.selectItemWithOutChanges(this.selectedUser);
+      let users = this.usersStateService.getAllUsers().filter(item => item.id === this.usersStateService.getCurrentUser().id);
+      this.usersDp.selectedTag = users.map(item => `${item.firstName} ${item.lastName}`);
+      this.onSelectUser(users.map(item => `${item.firstName} ${item.lastName}`));
       this.usersDp.isDisabled = true;
     } else {
       this.usersDp.clearWithOutChanges();
@@ -254,9 +260,9 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   }
   public onClearAll() {
 
-    if (!this.ticketsFilter.isDisbledCompany) this.ticketsFilter.setCompany(null);
-    this.ticketsFilter.setTechUser(null);
-    this.ticketsFilter.setUser(null);
+    if (!this.ticketsFilter.isDisbledCompany) this.ticketsFilter.setCompanies([]);
+    this.ticketsFilter.setTechUsers([]);
+    this.ticketsFilter.setUsers([]);
     if (this.ticketsFilter.selectedStatus) {
       this.listType = "ALL";
       this.ticketsFilter.setListType("ALL");
@@ -278,11 +284,11 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
 
   public onChangeCounterFilter() {
     let count = 0;
-    if (this.ticketsFilter.selectedCompany) count++;
-    if (this.ticketsFilter.selectedTechUser) count++;
-    if (this.ticketsFilter.selectedUser) count++;
+    if (this.ticketsFilter.selectedCompanies.length > 0) count++;
+    if (this.ticketsFilter.selectedTechUser.length > 0) count++;
+    if (this.ticketsFilter.selectedUsers.length > 0) count++;
     if (this.ticketsFilter.selectedStatus) count++;
-    if (this.ticketsFilter.selectedPriorityLevel) count++;
+    if (this.ticketsFilter.selectedPriorityLevels.length > 0) count++;
     this.changeCountFilter.emit(count);
   }
   private getCount() {
@@ -314,12 +320,12 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     }
   }
 
-  public onGetUsers(data) {
-    this.users = data.filter(item => {
-      if (item.accountType !== 'TECH' && !item.deletedAt) {
-        return item;
-      }
-    });
+  public onGetUsers() {
+    this.users = this.usersStateService.getAllUsers().filter(user => {
+      return user.accountType !== 'TECH' && !user.deletedAt && user.customerCompaniesInfo.some(item => {
+        return this.companiesState.getCompanies().some(company => company.accountType === "CLIENT" && !company.deletedAt && company.id == item.companyId);
+      })
+    })
   }
   onGetTechUsers(data) {
     if (this.customerPortalStateService.isCustomerPortal) this.checkUserCustomerUser();
@@ -330,42 +336,19 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     });
     this.techUsersNamesList = this.getTechUserList();
   }
-  public onSelectCompany(item) {
-    this.blockFilterUser = true;
-    this.usersDp.clearClient();
-    if (!item) {
-      this.ticketsFilter.setCompany(null);
-      this.users = [];
-      this.globalFilter.setClientCompanyId(null);
-    } else {
-      this.globalFilter.setClientCompanyId(item.id);
-      this.ticketsFilter.setCompany(item);
-      this.selectedCompany = null;
-      this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === item.id)));
-    }
+  public onSelectCompany(items) {
+    this.ticketsFilter.setCompanies(items);
+    this.globalFilter.setClientCompaies(items.map(item => (item.id)));
   }
   public onSelectTechUser(item) {
-    if (!item) {
-      this.ticketsFilter.setTechUser(null);
-      this.globalFilter.setAssignedUsersIds([]);
-    } else {
-      this.selectedTechUser = null;
-      let indexTechUser = this.techUsersList.findIndex(user => `${user.firstName} ${user.lastName}` === item);
-      if (indexTechUser > -1) {
-        this.ticketsFilter.setTechUser(this.techUsersList[indexTechUser]);
-        this.globalFilter.setAssignedUsersIds([this.techUsersList[indexTechUser].id]);
-      }
-    }
+    let users = this.techUsersList.filter(user => item.some(userName => userName == `${user.firstName} ${user.lastName}`));
+    this.ticketsFilter.setTechUsers(users);
+    this.globalFilter.setAssignedUsersIds(users.map(item => item.id));
   }
 
   public onSelectPriority(item) {
-    if (!item) {
-      this.ticketsFilter.setPriorityLevel(null);
-      this.globalFilter.setPriorityIds([]);
-    } else {
-      this.ticketsFilter.setPriorityLevel(item);
-      this.globalFilter.setPriorityIds([item.id]);
-    }
+    this.ticketsFilter.setPriorityLevels(item);
+    this.globalFilter.setPriorityIds(item.map(item => item.id));
   }
   public onSelectStatus(item, event) {
     if (!event.target.checked) {
@@ -392,18 +375,9 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     }
   }
   public onSelectUser(item) {
-    if (!item) {
-      this.ticketsFilter.setUser(null);
-      this.globalFilter.setCreatedUserId(null);
-    } else {
-      this.selectedUser = null;
-      let indexhUser = this.users.findIndex(user => `${user.firstName} ${user.lastName}` === item);
-      if (indexhUser > -1) {
-        this.ticketsFilter.setUser(this.users[indexhUser]);
-        this.globalFilter.setCreatedUserId(this.users[indexhUser].id);
-      }
-    }
-    this.blockFilterUser = false;
+    let users = this.users.filter(user => item.some(userName => userName == `${user.firstName} ${user.lastName}`));
+    this.ticketsFilter.setUsers(users);
+    this.globalFilter.setCreatedUserIds(users.map(item => item.id));
   }
 
   onChangeTags(tags) {

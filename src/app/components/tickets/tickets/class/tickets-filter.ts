@@ -19,10 +19,10 @@ export class TicketsFilter {
     payloadCompleted = null;
     payloadInProgress = null;
     tags = [];
-    selectedPriorityLevel: TicketsPriority = null;
-    selectedCompany: Company = null;
-    selectedTechUser: User = null;
-    selectedUser: User = null;
+    selectedPriorityLevels: Array<TicketsPriority> = [];
+    selectedCompanies: Array<Company> = [];
+    selectedTechUser: Array<User> = [];
+    selectedUsers: Array<User> = [];
     selectedStatus: string = null;
     customStatus: boolean = false;
     isDisbledCompany: boolean = false;
@@ -30,21 +30,21 @@ export class TicketsFilter {
         this.onInitUser();
     }
     public checkUse() {
-        return this.selectedCompany && this.selectedTechUser && this.selectedUser && this.selectedStatus && this.selectedPriorityLevel && this.tags.length > 0;
+        return this.selectedCompanies.length > 0 && this.selectedTechUser.length > 0 && this.selectedUsers.length > 0 && this.selectedStatus && this.selectedPriorityLevels.length > 0 && this.tags.length > 0;
     }
     public setCustomStatus(data) {
         this.customStatus = data;
     }
-    public setPriorityLevel(data) {
-        this.selectedPriorityLevel = data;
+    public setPriorityLevels(data) {
+        this.selectedPriorityLevels = data;
     }
     public setFilter(data) {
         this.tags = data.tags;
-        this.selectedCompany = data.selectedCompany;
+        this.selectedCompanies = data.selectedCompanies;
         this.selectedTechUser = data.selectedTechUser;
-        this.selectedUser = data.selectedUser;
+        this.selectedUsers = data.selectedUsers;
         this.selectedStatus = data.selectedStatus;
-        this.selectedPriorityLevel = data.selectedPriorityLevel;
+        this.selectedPriorityLevels = data.selectedPriorityLevels;
     }
     public setStatus(data) {
         this.selectedStatus = data;
@@ -52,14 +52,14 @@ export class TicketsFilter {
     public setTags(data) {
         this.tags = data;
     }
-    public setCompany(data) {
-        this.selectedCompany = data;
+    public setCompanies(data) {
+        this.selectedCompanies = data;
     }
-    public setTechUser(data) {
+    public setTechUsers(data) {
         this.selectedTechUser = data;
     }
-    public setUser(data) {
-        this.selectedUser = data;
+    public setUsers(data) {
+        this.selectedUsers = data;
     }
     public getDataForCounts() {
         let data = {
@@ -85,36 +85,34 @@ export class TicketsFilter {
         ticketStatus.forEach(item => {
             let status = (item.custom) ? item.title : item.title.toLocaleUpperCase().replace(" ", "_");
             data[status] = this.getFilterStatusPayload(status);
-            if (this.selectedCompany) {
+            if (this.selectedCompanies.length > 0) {
                 data[status].groupFieldFilters[0].fieldFilterDtos.push({
                     operator: "EQ",
                     path: "company.id",
-                    values: [this.selectedCompany.id]
+                    values: this.selectedCompanies.map(item => item.id)
                 });
                 data[status].groupFieldFilters[0].predicateRule = "AND";
             }
-            if (this.selectedTechUser) {
+            if (this.selectedTechUser.length > 0) {
                 data[status].groupFieldFilters.push({
                     fieldFilterDtos: [{
                         operator: "EQ",
                         path: "assignedUser.id",
-                        values: [this.selectedTechUser.id]
+                        values: this.selectedTechUser.map(item => item.id)
                     },
                     {
                         path: "multiAssignedUsers.id",
                         operator: "IN",
-                        values: [
-                            this.selectedTechUser.id
-                        ]
+                        values: this.selectedTechUser.map(item => item.id)
                     }],
                     predicateRule: "OR"
                 })
             }
-            if (this.selectedUser) {
+            if (this.selectedUsers.length > 0) {
                 data[status].groupFieldFilters[0].fieldFilterDtos.push({
                     operator: "EQ",
                     path: "createdUser.id",
-                    values: [this.selectedUser.id]
+                    values: this.selectedUsers.map(item => item.id)
                 });
                 data[status].groupFieldFilters[0].predicateRule = "AND";
             }
@@ -195,51 +193,40 @@ export class TicketsFilter {
         if (this.listType === "RECURRING_TICKETS_CLOSED") payload = JSON.parse(JSON.stringify(this.payloadRecurringTicketsClosed));
         if (this.listType === "COMPLETED") payload = JSON.parse(JSON.stringify(this.payloadCompleted));
         if (this.listType === "IN_PROGRESS") payload = JSON.parse(JSON.stringify(this.payloadInProgress));
-        if (this.selectedCompany) {
+        if (this.selectedCompanies.length > 0) {
             payload.groupFieldFilters[0].fieldFilterDtos.push({
-                operator: "EQ",
+                "operator": "IN",
                 path: "company.id",
-                values: [this.selectedCompany.id]
+                values: this.selectedCompanies.map(item => item.id)
             });
-            payload.groupFieldFilters[0].predicateRule = "AND";
+
         }
-        if (this.selectedTechUser) {
-            payload.groupFieldFilters.push({
-                fieldFilterDtos: [{
-                    operator: "EQ",
-                    path: "assignedUser.id",
-                    values: [this.selectedTechUser.id]
-                },
-                {
-                    path: "multiAssignedUsers.id",
-                    operator: "IN",
-                    values: [
-                        this.selectedTechUser.id
-                    ]
-                }],
-                predicateRule: "OR"
-            })
+        if (this.selectedTechUser.length > 0) {
+            payload.groupFieldFilters[0].fieldFilterDtos.push({
+                "path": "multiAssignedUsers.id",
+                "operator": "IN",
+                "values": this.selectedTechUser.map(item => item.id)
+            });
 
         }
         if (this.selectedStatus) {
 
             payload.groupFieldFilters[0].fieldFilterDtos.push({
-                operator: "EQ",
-                path: "status",
-                values: [
+                "path": "status",
+                "operator": "IN",
+                "values": [
                     this.selectedStatus
                 ]
             });
-            payload.groupFieldFilters[0].predicateRule = "AND";
         }
-        if (this.selectedUser) {
+        if (this.selectedUsers.length > 0) {
 
             payload.groupFieldFilters[0].fieldFilterDtos.push({
-                operator: "EQ",
-                path: "createdUser.id",
-                values: [this.selectedUser.id]
+                "operator": "IN",
+                "path": "assignedUser.id",
+                "values": this.selectedUsers.map(item => item.id)
+
             });
-            payload.groupFieldFilters[0].predicateRule = "AND";
         }
         if (this.tags.length > 0) {
             payload.groupFieldFilters[0].fieldFilterDtos.push({
@@ -249,16 +236,17 @@ export class TicketsFilter {
                     return item.id;
                 })
             });
-            payload.groupFieldFilters[0].predicateRule = "AND";
+
         }
-        if (this.selectedPriorityLevel) {
+        if (this.selectedPriorityLevels.length > 0) {
             payload.groupFieldFilters[0].fieldFilterDtos.push({
                 operator: "IN",
                 path: "priorityLevel.id",
-                values: [this.selectedPriorityLevel.id]
+                values: this.selectedPriorityLevels.map(item => item.id)
             });
-            payload.groupFieldFilters[0].predicateRule = "AND";
+
         }
+        payload.groupFieldFilters[0].predicateRule = (this.selectedUsers.length > 1 || this.selectedTechUser.length > 1 || this.tags.length > 1 || this.selectedPriorityLevels.length > 1) ? "OR" : "AND";
         return payload;
     }
 

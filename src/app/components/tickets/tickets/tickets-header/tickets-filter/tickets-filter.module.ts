@@ -8,12 +8,16 @@ import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.mo
 import { TicketsFilterComponent } from './tickets-filter.component';
 import { TicketsFilterTagsComponent } from './tickets-filter-tags/tickets-filter-tags.component';
 import { TicketsFilterStatusComponent } from './tickets-filter-status/tickets-filter-status.component';
+import { TicketsFilterDropDownComponent } from './tickets-filter-drop-down/tickets-filter-drop-down.component';
+import { TicketsFilterCompaniesDropDownComponent } from './tickets-filter-companies-drop-down/tickets-filter-companies-drop-down.component';
 
 @NgModule({
     declarations: [
         TicketsFilterComponent,
         TicketsFilterTagsComponent,
-        TicketsFilterStatusComponent
+        TicketsFilterStatusComponent,
+        TicketsFilterDropDownComponent,
+        TicketsFilterCompaniesDropDownComponent
     ],
     imports: [
         CommonModule,

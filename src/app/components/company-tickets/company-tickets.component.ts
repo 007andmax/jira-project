@@ -150,14 +150,14 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     this.filter.setTypeFilterWithoutChange("ALL");
     this.filter.companyDp.isDisabled = true;
     this.filter.companyDp.editItem = company;
-    this.filter.ticketsFilter.setCompany(company);
+    this.filter.ticketsFilter.setCompanies([company]);
     this.filter.onChangeCounterFilter();
     this.ticketsFilter.setListType("ALL");
-    this.ticketsFilter.setCompany(company);
+    this.ticketsFilter.setCompanies([company]);
     this.ticketsFilter.isDisbledCompany = true;
     this.header.ticketsFilter = this.ticketsFilter;
     this.header.onChangeCounterFilter();
-    this.filter.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.find(companyInfo => companyInfo.companyId == company.id)));
+    this.filter.onGetUsers();
     this.getCount();
     this.onScroll();
   }
