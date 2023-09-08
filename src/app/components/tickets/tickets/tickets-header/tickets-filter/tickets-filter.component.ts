@@ -53,6 +53,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   users = [];
   techUsersList = [];
   techUsersNamesList = [];
+  clientsUsersNamesList = [];
   listsStatus = [new ItemStatus('Unassigned', 'unassigned', 'UNASSIGNED'),
   new ItemStatus('Completed', 'completed', 'CLOSED'),
   new ItemStatus('In Progress', 'inProgress', 'OPEN'),
@@ -326,6 +327,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
         return this.companiesState.getCompanies().some(company => company.accountType === "CLIENT" && !company.deletedAt && company.id == item.companyId);
       })
     })
+    this.clientsUsersNamesList = this.getUserList();
   }
   onGetTechUsers(data) {
     if (this.customerPortalStateService.isCustomerPortal) this.checkUserCustomerUser();

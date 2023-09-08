@@ -193,8 +193,13 @@ export class TicketsFilter {
         if (this.listType === "RECURRING_TICKETS_CLOSED") payload = JSON.parse(JSON.stringify(this.payloadRecurringTicketsClosed));
         if (this.listType === "COMPLETED") payload = JSON.parse(JSON.stringify(this.payloadCompleted));
         if (this.listType === "IN_PROGRESS") payload = JSON.parse(JSON.stringify(this.payloadInProgress));
+        payload.groupFieldFilters[0].predicateRule = "AND";
+        if (this.selectedCompanies.length > 0 || this.selectedUsers.length > 0 || this.selectedTechUser.length > 0 || this.tags.length > 0 || this.selectedPriorityLevels.length > 0 || this.selectedStatus) {
+            payload.groupFieldFilters.push({ fieldFilterDtos: [], predicateRule: "" });
+            payload.groupFieldFilters[1].predicateRule = (this.selectedCompanies.length > 1 || this.selectedUsers.length > 1 || this.selectedTechUser.length > 1 || this.tags.length > 1 || this.selectedPriorityLevels.length > 1) ? "OR" : "AND";
+        }
         if (this.selectedCompanies.length > 0) {
-            payload.groupFieldFilters[0].fieldFilterDtos.push({
+            payload.groupFieldFilters[1].fieldFilterDtos.push({
                 "operator": "IN",
                 path: "company.id",
                 values: this.selectedCompanies.map(item => item.id)
@@ -202,7 +207,7 @@ export class TicketsFilter {
 
         }
         if (this.selectedTechUser.length > 0) {
-            payload.groupFieldFilters[0].fieldFilterDtos.push({
+            payload.groupFieldFilters[1].fieldFilterDtos.push({
                 "path": "multiAssignedUsers.id",
                 "operator": "IN",
                 "values": this.selectedTechUser.map(item => item.id)
@@ -211,7 +216,7 @@ export class TicketsFilter {
         }
         if (this.selectedStatus) {
 
-            payload.groupFieldFilters[0].fieldFilterDtos.push({
+            payload.groupFieldFilters[1].fieldFilterDtos.push({
                 "path": "status",
                 "operator": "IN",
                 "values": [
@@ -221,7 +226,7 @@ export class TicketsFilter {
         }
         if (this.selectedUsers.length > 0) {
 
-            payload.groupFieldFilters[0].fieldFilterDtos.push({
+            payload.groupFieldFilters[1].fieldFilterDtos.push({
                 "operator": "IN",
                 "path": "assignedUser.id",
                 "values": this.selectedUsers.map(item => item.id)
@@ -229,7 +234,7 @@ export class TicketsFilter {
             });
         }
         if (this.tags.length > 0) {
-            payload.groupFieldFilters[0].fieldFilterDtos.push({
+            payload.groupFieldFilters[1].fieldFilterDtos.push({
                 operator: "IN",
                 path: "tags.id",
                 values: this.tags.map(item => {
@@ -239,14 +244,13 @@ export class TicketsFilter {
 
         }
         if (this.selectedPriorityLevels.length > 0) {
-            payload.groupFieldFilters[0].fieldFilterDtos.push({
+            payload.groupFieldFilters[1].fieldFilterDtos.push({
                 operator: "IN",
                 path: "priorityLevel.id",
                 values: this.selectedPriorityLevels.map(item => item.id)
             });
 
         }
-        payload.groupFieldFilters[0].predicateRule = (this.selectedUsers.length > 1 || this.selectedTechUser.length > 1 || this.tags.length > 1 || this.selectedPriorityLevels.length > 1) ? "OR" : "AND";
         return payload;
     }
 
