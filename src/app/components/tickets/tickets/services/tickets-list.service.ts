@@ -49,9 +49,9 @@ export class TicketsListService {
       selectedCompany = (ticketsFilter.selectedCompanies.some(item => item.id === ticket.companyId));
     }
 
-    if (ticketsFilter.selectedTechUser.length > 0) {
-      let assignedUser: boolean = (ticketsFilter.selectedTechUser.find(item => item.id === ticket.assignedUserId) ? true : false);
-      let multiAssignedUser = (ticket.multiAssignedUsers || []).find(item => ticketsFilter.selectedTechUser.some(techUser => techUser.id == item.id));
+    if (ticketsFilter.selectedTechUsers.length > 0) {
+      let assignedUser: boolean = (ticketsFilter.selectedTechUsers.find(item => item.id === ticket.assignedUserId) ? true : false);
+      let multiAssignedUser = (ticket.multiAssignedUsers || []).find(item => ticketsFilter.selectedTechUsers.some(techUser => techUser.id == item.id));
       selectedTechUser = (assignedUser && !multiAssignedUser);
     }
 

@@ -21,7 +21,7 @@ export class TicketsFilter {
     tags = [];
     selectedPriorityLevels: Array<TicketsPriority> = [];
     selectedCompanies: Array<Company> = [];
-    selectedTechUser: Array<User> = [];
+    selectedTechUsers: Array<User> = [];
     selectedUsers: Array<User> = [];
     selectedStatus: string = null;
     customStatus: boolean = false;
@@ -30,7 +30,7 @@ export class TicketsFilter {
         this.onInitUser();
     }
     public checkUse() {
-        return this.selectedCompanies.length > 0 && this.selectedTechUser.length > 0 && this.selectedUsers.length > 0 && this.selectedStatus && this.selectedPriorityLevels.length > 0 && this.tags.length > 0;
+        return this.selectedCompanies.length > 0 && this.selectedTechUsers.length > 0 && this.selectedUsers.length > 0 && this.selectedStatus && this.selectedPriorityLevels.length > 0 && this.tags.length > 0;
     }
     public setCustomStatus(data) {
         this.customStatus = data;
@@ -41,7 +41,7 @@ export class TicketsFilter {
     public setFilter(data) {
         this.tags = data.tags;
         this.selectedCompanies = data.selectedCompanies;
-        this.selectedTechUser = data.selectedTechUser;
+        this.selectedTechUsers = data.selectedTechUsers;
         this.selectedUsers = data.selectedUsers;
         this.selectedStatus = data.selectedStatus;
         this.selectedPriorityLevels = data.selectedPriorityLevels;
@@ -56,7 +56,7 @@ export class TicketsFilter {
         this.selectedCompanies = data;
     }
     public setTechUsers(data) {
-        this.selectedTechUser = data;
+        this.selectedTechUsers = data;
     }
     public setUsers(data) {
         this.selectedUsers = data;
@@ -93,17 +93,17 @@ export class TicketsFilter {
                 });
                 data[status].groupFieldFilters[0].predicateRule = "AND";
             }
-            if (this.selectedTechUser.length > 0) {
+            if (this.selectedTechUsers.length > 0) {
                 data[status].groupFieldFilters.push({
                     fieldFilterDtos: [{
                         operator: "EQ",
                         path: "assignedUser.id",
-                        values: this.selectedTechUser.map(item => item.id)
+                        values: this.selectedTechUsers.map(item => item.id)
                     },
                     {
                         path: "multiAssignedUsers.id",
                         operator: "IN",
-                        values: this.selectedTechUser.map(item => item.id)
+                        values: this.selectedTechUsers.map(item => item.id)
                     }],
                     predicateRule: "OR"
                 })
@@ -194,9 +194,9 @@ export class TicketsFilter {
         if (this.listType === "COMPLETED") payload = JSON.parse(JSON.stringify(this.payloadCompleted));
         if (this.listType === "IN_PROGRESS") payload = JSON.parse(JSON.stringify(this.payloadInProgress));
         payload.groupFieldFilters[0].predicateRule = "AND";
-        if (this.selectedCompanies.length > 0 || this.selectedUsers.length > 0 || this.selectedTechUser.length > 0 || this.tags.length > 0 || this.selectedPriorityLevels.length > 0 || this.selectedStatus) {
+        if (this.selectedCompanies.length > 0 || this.selectedUsers.length > 0 || this.selectedTechUsers.length > 0 || this.tags.length > 0 || this.selectedPriorityLevels.length > 0 || this.selectedStatus) {
             payload.groupFieldFilters.push({ fieldFilterDtos: [], predicateRule: "" });
-            payload.groupFieldFilters[1].predicateRule = (this.selectedCompanies.length > 1 || this.selectedUsers.length > 1 || this.selectedTechUser.length > 1 || this.tags.length > 1 || this.selectedPriorityLevels.length > 1) ? "OR" : "AND";
+            payload.groupFieldFilters[1].predicateRule = (this.selectedCompanies.length > 1 || this.selectedUsers.length > 1 || this.selectedTechUsers.length > 1 || this.tags.length > 1 || this.selectedPriorityLevels.length > 1) ? "OR" : "AND";
         }
         if (this.selectedCompanies.length > 0) {
             payload.groupFieldFilters[1].fieldFilterDtos.push({
@@ -206,11 +206,11 @@ export class TicketsFilter {
             });
 
         }
-        if (this.selectedTechUser.length > 0) {
+        if (this.selectedTechUsers.length > 0) {
             payload.groupFieldFilters[1].fieldFilterDtos.push({
                 "path": "multiAssignedUsers.id",
                 "operator": "IN",
-                "values": this.selectedTechUser.map(item => item.id)
+                "values": this.selectedTechUsers.map(item => item.id)
             });
 
         }

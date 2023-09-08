@@ -74,7 +74,7 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
   public onChangeCounterFilter() {
     this.countFilter = 0;
     if (this.ticketsFilter.selectedCompanies.length > 0) this.countFilter++;
-    if (this.ticketsFilter.selectedTechUser) this.countFilter++;
+    if (this.ticketsFilter.selectedTechUsers.length > 0) this.countFilter++;
     if (this.ticketsFilter.selectedUsers.length > 0) this.countFilter++;
     if (this.ticketsFilter.selectedStatus) this.countFilter++;
   }
@@ -90,7 +90,7 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
   }
   isExistFilters() {
     return this.ticketsFilter.selectedCompanies.length > 0 ||
-      this.ticketsFilter.selectedTechUser ||
+      this.ticketsFilter.selectedTechUsers.length > 0 ||
       this.ticketsFilter.selectedUsers.length > 0 ||
       this.ticketsFilter.selectedStatus ||
       this.ticketsFilter.tags.length > 0

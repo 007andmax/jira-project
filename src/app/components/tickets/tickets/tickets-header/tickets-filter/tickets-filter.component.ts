@@ -286,7 +286,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   public onChangeCounterFilter() {
     let count = 0;
     if (this.ticketsFilter.selectedCompanies.length > 0) count++;
-    if (this.ticketsFilter.selectedTechUser.length > 0) count++;
+    if (this.ticketsFilter.selectedTechUsers.length > 0) count++;
     if (this.ticketsFilter.selectedUsers.length > 0) count++;
     if (this.ticketsFilter.selectedStatus) count++;
     if (this.ticketsFilter.selectedPriorityLevels.length > 0) count++;
