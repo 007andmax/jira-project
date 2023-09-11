@@ -3,12 +3,37 @@
         <div class="qt-page-list__header-thead-container">
             <div class="qt-table-modern qt-page-list__header-thead">
                 <div class="qt-page-list__header-thead__row">
-                    <div class="ticket-table__requested-by">Requested By</div>
-                    <div class="ticket-table__subject">Subject</div>
-                    <div class="ticket-table__company">Company</div>
+                    <div
+                        class="ticket-table__requested-by"
+                        (click)="onFilter('created')"
+                    >
+                        Requested By
+                    </div>
+                    <div
+                        class="ticket-table__subject"
+                        (click)="onFilter('subject')"
+                    >
+                        Subject
+                    </div>
+                    <div
+                        class="ticket-table__company"
+                        (click)="onFilter('company')"
+                    >
+                        Company
+                    </div>
                     <div class="ticket-table__assignee">Assignee</div>
-                    <div class="ticket-table__status">Status</div>
-                    <div class="ticket-table__created-date">Created Date</div>
+                    <div
+                        class="ticket-table__status"
+                        (click)="onFilter('status')"
+                    >
+                        Status
+                    </div>
+                    <div
+                        class="ticket-table__created-date"
+                        (click)="onFilter('created_date')"
+                    >
+                        Created Date
+                    </div>
                 </div>
             </div>
         </div>

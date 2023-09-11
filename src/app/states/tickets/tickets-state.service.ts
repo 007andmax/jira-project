@@ -42,6 +42,7 @@ export class TicketsStateService {
   onGetGlobalFilters: EventEmitter<any> = new EventEmitter();
   leftPanelFilter: EventEmitter<any> = new EventEmitter();
   onToggleFilter: EventEmitter<any> = new EventEmitter();
+  onChangeFilterField: EventEmitter<any> = new EventEmitter();
   ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET'];
   listStatusColor: Array<StatusColor> = [];
   ticketsStatus: Array<TicketStatus> = [];
@@ -128,6 +129,9 @@ export class TicketsStateService {
         this.onGetGlobalFilters.emit(this.globalFilters);
       }
     })
+  }
+  public changeFilterField(data) {
+    this.onChangeFilterField.emit(data);
   }
   public changeToggleFilter(data) {
     this.onToggleFilter.emit(data);

@@ -2,10 +2,12 @@ import { Company } from 'src/app/interfaces/company/company';
 import { User } from '../../../users/class/user';
 import { TicketStatusFilter } from '../tickets-header/class/ticket-status-filter';
 import { TicketsPriority } from 'src/app/components/setting/ticket-settings-page/tickets-priority/class/tickets-priority';
+import { CompanyFilterTop } from 'src/app/components/companies/class/company-filter-top';
 
 export class TicketsFilter {
     listType: string = "USERS";
     title: string = "All Tickets";
+    sortBy: string = null;
     payloadAll = null;
     payloadUnassigned = null;
     payloadOpen = null;
@@ -26,6 +28,12 @@ export class TicketsFilter {
     selectedStatus: Array<TicketStatusFilter> = [];
     customStatus: boolean = false;
     isDisbledCompany: boolean = false;
+    filter: Array<CompanyFilterTop> = [
+        new CompanyFilterTop('company', ''),
+        new CompanyFilterTop('created', ''),
+        new CompanyFilterTop('subject', ''),
+        new CompanyFilterTop('status', ''),
+        new CompanyFilterTop('created_date', '')];
     constructor() {
         this.onInitUser();
     }
@@ -60,6 +68,68 @@ export class TicketsFilter {
     }
     public setUsers(data) {
         this.selectedUsers = data;
+    }
+    onFilter(field) {
+        let index = this.filter.findIndex(item => item.field === field);
+        if (index > -1) {
+            let sort = this.filter[index].filter;
+            if (field === 'created') {
+                this.clearFilter();
+                if (sort === '' || sort === 'DESC') {
+                    this.filter[index].filter = 'ASC';
+                    this.sortBy = 'CREATED_BY_ASC';
+                } else {
+                    this.filter[index].filter = 'DESC';
+                    this.sortBy = 'CREATED_BY_DESC';
+                }
+            }
+            if (field === 'subject') {
+                this.clearFilter();
+                if (sort === '' || sort === 'DESC') {
+                    this.filter[index].filter = 'ASC';
+                    this.sortBy = 'SUBJECT_ASC';
+
+                } else {
+                    this.filter[index].filter = 'DESC';
+                    this.sortBy = 'SUBJECT_DESC';
+                }
+            }
+            if (field === 'company') {
+                this.clearFilter();
+                if (sort === '' || sort === 'DESC') {
+                    this.filter[index].filter = 'ASC';
+                    this.sortBy = 'COMPANY_NAME_ASC';
+                } else {
+                    this.filter[index].filter = 'DESC';
+                    this.sortBy = 'COMPANY_NAME_DESC';
+                }
+            }
+            if (field === 'status') {
+                this.clearFilter();
+                if (sort === '' || sort === 'DESC') {
+                    this.filter[index].filter = 'ASC';
+                    this.sortBy = 'STATUS_ASC';
+                } else {
+                    this.filter[index].filter = 'DESC';
+                    this.sortBy = 'STATUS_DESC';
+
+                }
+            }
+            if (field === 'created_date') {
+                this.clearFilter();
+                if (sort === '' || sort === 'DESC') {
+                    this.filter[index].filter = 'ASC';
+                    this.sortBy = 'CREATED_DATE_ASC';
+
+                } else {
+                    this.filter[index].filter = 'DESC';
+                    this.sortBy = 'CREATED_DATE_DESC';
+                }
+            }
+        }
+    }
+    private clearFilter() {
+        this.filter.forEach(item => item.filter = '');
     }
     public getDataForCounts() {
         let data = {
@@ -249,6 +319,7 @@ export class TicketsFilter {
             });
 
         }
+        if (this.sortBy) payload.sortBy = this.sortBy;
         return payload;
     }
 

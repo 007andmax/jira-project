@@ -141,7 +141,9 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
   onToggleFilter(data) {
     this.ticketsStateService.changeToggleFilter(data);
   }
-
+  onFilter(data) {
+    this.ticketsStateService.changeFilterField(data);
+  }
   editTicket(id) {
     if (!this.appService.isMobile) {
       this.ticketStateService.setTicketRoutingId(id);

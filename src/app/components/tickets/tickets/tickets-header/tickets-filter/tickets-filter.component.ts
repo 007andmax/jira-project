@@ -212,7 +212,11 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(onGetGlobalFilters);
-
+    let onChangeFilterField = this.ticketsStateService.onChangeFilterField.subscribe(data => {
+      this.ticketsFilter.onFilter(data);
+      this.applyFilters();
+    })
+    this.sub.add(onChangeFilterField);
   }
   private clearCountsStatus() {
     this.ticketsStatus.forEach(item => item.setCount(0));
