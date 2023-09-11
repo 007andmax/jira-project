@@ -1,6 +1,6 @@
 export class TicketGlobalFilter {
     "id": string;
-    "statusId": string;
+    "statusIds": Array<string> = [];
     "name": string = "";
     "global": boolean = false;
     "clientCompanyIds": Array<string> = [];
@@ -28,7 +28,7 @@ export class TicketGlobalFilter {
             global: this.global
         };
         if (this.clientCompanyIds.length > 0) data.clientCompanyIds = this.clientCompanyIds;
-        if (this.statusId) data.statusId = this.statusId;
+        if (this.statusIds.length > 0) data.statusIds = this.statusIds;
         if (this.createdUserIds.length > 0) data.createdUserIds = this.createdUserIds;
         if (isAdd && this.tagIds.length > 0) data.tagIds = this.tagIds;
         if (!isAdd) data.tagIds = this.tagIds;
@@ -45,8 +45,8 @@ export class TicketGlobalFilter {
     public setAssignedUsersIds(data) {
         this.assignedUsersIds = data;
     }
-    public setStatusId(data) {
-        this.statusId = data;
+    public setStatusIds(data) {
+        this.statusIds = data;
     }
     public setTagIds(data) {
         this.tagIds = data;
@@ -55,6 +55,6 @@ export class TicketGlobalFilter {
         this.priorityIds = data;
     }
     public isUseFilters() {
-        return this.clientCompanyIds.length > 0 || this.createdUserIds.length > 0 || this.assignedUsersIds.length > 0 || this.statusId || this.tagIds.length > 0 || this.priorityIds.length > 0;
+        return this.clientCompanyIds.length > 0 || this.createdUserIds.length > 0 || this.assignedUsersIds.length > 0 || this.statusIds.length > 0 || this.tagIds.length > 0 || this.priorityIds.length > 0;
     }
 }

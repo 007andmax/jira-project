@@ -23,14 +23,14 @@ export class TicketsFilter {
     selectedCompanies: Array<Company> = [];
     selectedTechUsers: Array<User> = [];
     selectedUsers: Array<User> = [];
-    selectedStatus: string = null;
+    selectedStatus: Array<TicketStatusFilter> = [];
     customStatus: boolean = false;
     isDisbledCompany: boolean = false;
     constructor() {
         this.onInitUser();
     }
     public checkUse() {
-        return this.selectedCompanies.length > 0 && this.selectedTechUsers.length > 0 && this.selectedUsers.length > 0 && this.selectedStatus && this.selectedPriorityLevels.length > 0 && this.tags.length > 0;
+        return this.selectedCompanies.length > 0 && this.selectedTechUsers.length > 0 && this.selectedUsers.length > 0 && this.selectedStatus.length > 0 && this.selectedPriorityLevels.length > 0 && this.tags.length > 0;
     }
     public setCustomStatus(data) {
         this.customStatus = data;
@@ -194,9 +194,9 @@ export class TicketsFilter {
         if (this.listType === "COMPLETED") payload = JSON.parse(JSON.stringify(this.payloadCompleted));
         if (this.listType === "IN_PROGRESS") payload = JSON.parse(JSON.stringify(this.payloadInProgress));
         payload.groupFieldFilters[0].predicateRule = "AND";
-        if (this.selectedCompanies.length > 0 || this.selectedUsers.length > 0 || this.selectedTechUsers.length > 0 || this.tags.length > 0 || this.selectedPriorityLevels.length > 0 || this.selectedStatus) {
+        if (this.selectedCompanies.length > 0 || this.selectedUsers.length > 0 || this.selectedTechUsers.length > 0 || this.tags.length > 0 || this.selectedPriorityLevels.length > 0 || this.selectedStatus.length > 0) {
             payload.groupFieldFilters.push({ fieldFilterDtos: [], predicateRule: "" });
-            payload.groupFieldFilters[1].predicateRule = (this.selectedCompanies.length > 1 || this.selectedUsers.length > 1 || this.selectedTechUsers.length > 1 || this.tags.length > 1 || this.selectedPriorityLevels.length > 1) ? "OR" : "AND";
+            payload.groupFieldFilters[1].predicateRule = (this.selectedStatus.length > 1 || this.selectedCompanies.length > 1 || this.selectedUsers.length > 1 || this.selectedTechUsers.length > 1 || this.tags.length > 1 || this.selectedPriorityLevels.length > 1) ? "OR" : "AND";
         }
         if (this.selectedCompanies.length > 0) {
             payload.groupFieldFilters[1].fieldFilterDtos.push({
@@ -214,14 +214,12 @@ export class TicketsFilter {
             });
 
         }
-        if (this.selectedStatus) {
+        if (this.selectedStatus.length > 0) {
 
             payload.groupFieldFilters[1].fieldFilterDtos.push({
                 "path": "status",
                 "operator": "IN",
-                "values": [
-                    this.selectedStatus
-                ]
+                "values": this.selectedStatus.map(item => item.name)
             });
         }
         if (this.selectedUsers.length > 0) {
@@ -433,9 +431,7 @@ export class TicketsFilter {
                         {
                             operator: "EQ",
                             path: "status",
-                            values: [
-                                this.selectedStatus
-                            ]
+                            values: this.selectedStatus.map(item => item.name)
                         },
                         {
                             path: "ticketSource",

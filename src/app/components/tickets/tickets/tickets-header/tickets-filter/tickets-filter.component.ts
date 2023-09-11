@@ -161,12 +161,13 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
         this.techUsersDp.clearWithOutChanges();
         this.onSelectTechUser([]);
       }
-      let status = this.ticketsStatus.find(item => item.id == data.statusId);
+      let status = this.ticketsStatus.filter(item => data.statusIds.some(statusId => statusId == item.id));
       this.ticketsStatus.forEach(item => item.selected = false);
-      if (status) {
-        status.selected = true;
-        this.ticketsFilter.setStatus(status.name);
-        let findStatus = this.listsStatus.find(status => status.title === status.title);
+      if (status.length > 0) {
+        status.forEach(item => item.selected = true);
+        this.ticketsFilter.setStatus(status);
+        this.globalFilter.setStatusIds(status.map(item => item.id));
+        let findStatus = this.listsStatus.find(statusElemt => status.some(item => item.title === statusElemt.title));
         if (findStatus) {
           this.ticketsFilter.setCustomStatus(false);
           this.setTypeFilterWithoutChange(findStatus.status);
@@ -175,7 +176,8 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
           this.setTypeFilterWithoutChange("OPEN");
         }
       } else {
-        this.ticketsFilter.setStatus(null);
+        this.ticketsFilter.setStatus([]);
+        this.globalFilter.setStatusIds([]);
         this.ticketsFilter.setCustomStatus(false);
       }
       let tags = this.tagsStateService.getTags().filter(item => data.tagIds.some(tagId => tagId == item.id)).map(item => new CompanyTag(item));
@@ -264,7 +266,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     if (!this.ticketsFilter.isDisbledCompany) this.ticketsFilter.setCompanies([]);
     this.ticketsFilter.setTechUsers([]);
     this.ticketsFilter.setUsers([]);
-    if (this.ticketsFilter.selectedStatus) {
+    if (this.ticketsFilter.selectedStatus.length > 0) {
       this.listType = "ALL";
       this.ticketsFilter.setListType("ALL");
     }
@@ -288,7 +290,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     if (this.ticketsFilter.selectedCompanies.length > 0) count++;
     if (this.ticketsFilter.selectedTechUsers.length > 0) count++;
     if (this.ticketsFilter.selectedUsers.length > 0) count++;
-    if (this.ticketsFilter.selectedStatus) count++;
+    if (this.ticketsFilter.selectedStatus.length > 0) count++;
     if (this.ticketsFilter.selectedPriorityLevels.length > 0) count++;
     this.changeCountFilter.emit(count);
   }
@@ -355,15 +357,15 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   public onSelectStatus(item, event) {
     if (!event.target.checked) {
       item.selected = false;
-      this.setTypeFilterWithoutChange("ALL");
-      this.ticketsFilter.setStatus(null);
-      this.ticketsFilter.setCustomStatus(false);
-      this.globalFilter.setStatusId(null);
     } else {
       item.selected = true;
-      this.ticketsFilter.setStatus(item.name);
-      this.globalFilter.setStatusId(item.id);
-      let findStatus = this.listsStatus.find(status => status.title === item.title);
+    }
+    this.ticketsFilter.setStatus(this.ticketsStatus.filter(status => status.selected));
+    this.globalFilter.setStatusIds(this.ticketsStatus.filter(status => status.selected).map(item => item.id));
+    if (this.ticketsStatus.filter(status => status.selected).length > 1) {
+      this.setTypeFilterWithoutChange("ALL");
+    } else {
+      let findStatus = this.listsStatus.find(status => this.ticketsStatus.filter(status => status.selected).some(item => item.title === status.title));
       if (findStatus) {
         this.ticketsFilter.setCustomStatus(false);
         this.setTypeFilterWithoutChange(findStatus.status);
@@ -371,9 +373,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
         this.ticketsFilter.setCustomStatus(true);
         this.setTypeFilterWithoutChange("OPEN");
       }
-      this.ticketsStatus.forEach(status => {
-        if (status.id != item.id) status.selected = false;
-      })
     }
   }
   public onSelectUser(item) {
@@ -388,6 +387,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   }
 
   applyFilters() {
+    console.log("this.ticketsFilter", this.ticketsFilter);
     this.setTypeFilterWithoutChange("ALL");
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
     if (this.listType !== 'RECURRING_TICKETS') this.getCount();

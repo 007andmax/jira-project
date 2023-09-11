@@ -76,7 +76,7 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     if (this.ticketsFilter.selectedCompanies.length > 0) this.countFilter++;
     if (this.ticketsFilter.selectedTechUsers.length > 0) this.countFilter++;
     if (this.ticketsFilter.selectedUsers.length > 0) this.countFilter++;
-    if (this.ticketsFilter.selectedStatus) this.countFilter++;
+    if (this.ticketsFilter.selectedStatus.length > 0) this.countFilter++;
   }
   toggleMobileLeftPanel() {
     this.leftPanelStateService.toggleMobileLeftPanel(true);
@@ -92,11 +92,11 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     return this.ticketsFilter.selectedCompanies.length > 0 ||
       this.ticketsFilter.selectedTechUsers.length > 0 ||
       this.ticketsFilter.selectedUsers.length > 0 ||
-      this.ticketsFilter.selectedStatus ||
+      this.ticketsFilter.selectedStatus.length > 0 ||
       this.ticketsFilter.tags.length > 0
   }
   getStatus(selectedStatus) {
-    return selectedStatus.toLowerCase();
+    return selectedStatus.join().toLowerCase();
   }
   refreshFilters() {
     this.filter.applyFilters();
