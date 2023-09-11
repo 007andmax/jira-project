@@ -1,17 +1,17 @@
 <div
-    class="global-search"
+    class="global-search qt-pt-16"
     ngbDropdown
     [autoClose]="'outside'"
     #globalSearch="ngbDropdown"
 >
-    <p class="title-filter qt-mb-10">Ticket</p>
+    <p class="title-filter qt-mb-8">Ticket</p>
     <div ngbDropdownAnchor>
         <span class="qt-input-search">
             <input
                 id="global-search"
                 type="text"
                 class="global-search__input"
-                placeholder="Search..."
+                placeholder="Search by tickets"
                 autocomplete="new-password"
                 [(ngModel)]="word"
                 (input)="onSearch()"

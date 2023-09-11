@@ -22,29 +22,35 @@
         [field]="'name'"
         (onSelectedItem)="onSelectCompany($event)"
     ></company-drop-down> -->
+    <tickets-filter-search
+        [ticketsFilter]="ticketsFilter"
+        (changeTypeFilter)="setTypeSearchFilterWithoutChange($event)"
+    ></tickets-filter-search>
     <tickets-filter-companies-drop-down
+        class="qt-mb-16"
         #companyDp
         [clientType]="'CLIENT'"
-        [placeholder]="'Select Company'"
+        [placeholder]="'Company'"
         [placement]="'top-left'"
         [field]="'name'"
         (filterChange)="onSelectCompany($event)"
     >
     </tickets-filter-companies-drop-down>
-    <tickets-filter-search
-        [ticketsFilter]="ticketsFilter"
-        (changeTypeFilter)="setTypeSearchFilterWithoutChange($event)"
-    ></tickets-filter-search>
+    <app-tickets-filter-tags
+        #tagsDp
+        [placement]="'top-left'"
+        (tagsChange)="onChangeTags($event)"
+    ></app-tickets-filter-tags>
     <tickets-filter-drop-down
         #usersDp
-        [placeholder]="'Select User'"
+        [placeholder]="'User'"
         [placement]="'top-left'"
         [list]="clientsUsersNamesList"
         (filterChange)="onSelectUser($event)"
     ></tickets-filter-drop-down>
     <tickets-filter-drop-down
         #techUsersDp
-        [placeholder]="'Select Tech User'"
+        [placeholder]="'Tech User'"
         [placement]="'top-left'"
         [list]="techUsersNamesList"
         (filterChange)="onSelectTechUser($event)"
@@ -52,7 +58,7 @@
     </tickets-filter-drop-down>
     <tickets-filter-drop-down
         #priorityDp
-        [placeholder]="'Select proirity'"
+        [placeholder]="'Priority'"
         [placement]="'top-left'"
         [field]="'name'"
         [list]="ticketPriorities"
@@ -88,11 +94,10 @@
         [list]="ticketPriorities"
         (onSelectedItem)="onSelectPriority($event)"
     ></app-drop-down> -->
-    <app-tickets-filter-tags
-        #tagsDp
-        [placement]="'top-left'"
-        (tagsChange)="onChangeTags($event)"
-    ></app-tickets-filter-tags>
+
+
+
+
 </div>
 <div class="aside-filters-content__footer">
     <div class="qt-df">
