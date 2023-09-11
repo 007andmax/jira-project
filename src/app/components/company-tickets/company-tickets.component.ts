@@ -136,6 +136,9 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
   onToggleFilter(data) {
     this.ticketsStateService.changeToggleFilter(data);
   }
+  onFilter(data) {
+    this.ticketsStateService.changeFilterField(data);
+  }
   private getCount() {
     this.ticketsService.getCount(this.ticketsFilter.getDataForRequest()).subscribe(data => {
       this.ticketsStateService.onInitCount(data);

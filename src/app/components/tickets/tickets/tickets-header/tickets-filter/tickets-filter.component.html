@@ -31,6 +31,10 @@
         (filterChange)="onSelectCompany($event)"
     >
     </tickets-filter-companies-drop-down>
+    <tickets-filter-search
+        [ticketsFilter]="ticketsFilter"
+        (changeTypeFilter)="setTypeSearchFilterWithoutChange($event)"
+    ></tickets-filter-search>
     <tickets-filter-drop-down
         #usersDp
         [placeholder]="'Select User'"

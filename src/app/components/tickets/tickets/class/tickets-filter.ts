@@ -34,6 +34,7 @@ export class TicketsFilter {
         new CompanyFilterTop('subject', ''),
         new CompanyFilterTop('status', ''),
         new CompanyFilterTop('created_date', '')];
+    searchText = "";
     constructor() {
         this.onInitUser();
     }
@@ -45,6 +46,9 @@ export class TicketsFilter {
     }
     public setPriorityLevels(data) {
         this.selectedPriorityLevels = data;
+    }
+    public setSearchText(data) {
+        this.searchText = data;
     }
     public setFilter(data) {
         this.tags = data.tags;
@@ -320,6 +324,7 @@ export class TicketsFilter {
 
         }
         if (this.sortBy) payload.sortBy = this.sortBy;
+        if (this.searchText.length > 0) payload.searchText = this.searchText;
         return payload;
     }
 

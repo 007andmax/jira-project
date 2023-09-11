@@ -10,6 +10,7 @@ import { TicketsFilterTagsComponent } from './tickets-filter-tags/tickets-filter
 import { TicketsFilterStatusComponent } from './tickets-filter-status/tickets-filter-status.component';
 import { TicketsFilterDropDownComponent } from './tickets-filter-drop-down/tickets-filter-drop-down.component';
 import { TicketsFilterCompaniesDropDownComponent } from './tickets-filter-companies-drop-down/tickets-filter-companies-drop-down.component';
+import { TicketsFilterSearchComponent } from './tickets-filter-search/tickets-filter-search.component';
 
 @NgModule({
     declarations: [
@@ -17,7 +18,8 @@ import { TicketsFilterCompaniesDropDownComponent } from './tickets-filter-compan
         TicketsFilterTagsComponent,
         TicketsFilterStatusComponent,
         TicketsFilterDropDownComponent,
-        TicketsFilterCompaniesDropDownComponent
+        TicketsFilterCompaniesDropDownComponent,
+        TicketsFilterSearchComponent
     ],
     imports: [
         CommonModule,

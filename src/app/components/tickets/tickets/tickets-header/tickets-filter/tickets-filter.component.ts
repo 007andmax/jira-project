@@ -389,7 +389,10 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.ticketsFilter.setTags(tags);
     this.globalFilter.setTagIds(tags.map(item => (item.id)));
   }
-
+  setTypeSearchFilterWithoutChange(data) {
+    this.setTypeFilterWithoutChange(data);
+    this.ticketsStateService.onChangeLeftPanelFilter(data);
+  }
   applyFilters() {
     console.log("this.ticketsFilter", this.ticketsFilter);
     this.setTypeFilterWithoutChange("ALL");
