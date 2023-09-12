@@ -25,6 +25,7 @@ export class DevicesStateService {
   onRemoveConnecion: EventEmitter<any> = new EventEmitter();
   onChangeInfoForDevice: EventEmitter<any> = new EventEmitter();
   onChangeDevice: EventEmitter<any> = new EventEmitter();
+  onChangeDeviceCount: EventEmitter<any> = new EventEmitter();
   onClosedRemoveConnecion: EventEmitter<any> = new EventEmitter();
   onSendDeviceStatus: EventEmitter<any> = new EventEmitter();
   onLaunchRemoteApp: EventEmitter<any> = new EventEmitter();
@@ -46,6 +47,7 @@ export class DevicesStateService {
       if (newChange.action === 'REMOTE_CONNECTION' && newChange.data.status === 'online') this.onInitLaunchRemoteApp(newChange.data.id);
       if (newChange.action === 'REMOTE_CONNECTION' && newChange.data.status === 'offline') this.closedRemoveConnecion(newChange.data.id);
       if (newChange.action === 'DEVICE_INSTALLED') this.onChangeDevice.emit(newChange);
+      if (newChange.action === 'DEVICE_COUNT') this.onChangeDeviceCount.emit(newChange);
     })
   }
   public changeDevice(allDevices, newChange) {

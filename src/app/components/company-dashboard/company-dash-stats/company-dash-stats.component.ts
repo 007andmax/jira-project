@@ -45,7 +45,7 @@ export class CompanyDashStatsComponent implements OnInit {
     private devicesState: DevicesStateService,
     public activateRoute: ActivatedRoute,
     private devicesService: DevicesService,
-    public cd: ChangeDetectorRef
+    public cd: ChangeDetectorRef,
   ) { }
 
   public ngOnInit() {
@@ -62,7 +62,10 @@ export class CompanyDashStatsComponent implements OnInit {
       this.onGetUsersCount(data);
     })
     this.sub.add(getOnUsers);
-
+    let onChangeDeviceCount = this.devicesState.onChangeDeviceCount.subscribe(data => {
+      if (this._id == data.data.companyId) this.countDevices = data.data.count;
+    });
+    this.sub.add(onChangeDeviceCount);
   }
   getDeviceCount(id) {
     this.devicesService.getCountByCompany([id]).subscribe(data => {
