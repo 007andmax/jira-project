@@ -8,7 +8,7 @@ export class TicketProfileFormUpdate {
     type: string = "NOTE";
     shares = [];
     ticket: any;
-    attachments: any = [];
+    attachFileIds: any = [];
     products: Array<TicketProfileFormProduct> = [];
     services: Array<TicketProfileFormService> = [];
     techUser: User;
@@ -31,7 +31,7 @@ export class TicketProfileFormUpdate {
             type: "NOTE",
             shares: this.shares,
             ticket: this.ticket,
-            attachments: this.attachments
+            attachFileIds: this.attachFileIds
         }
     }
     public getDataForUpdateNote() {
@@ -41,7 +41,7 @@ export class TicketProfileFormUpdate {
             type: this.type,
             shares: this.shares,
             ticket: this.ticket,
-            attachments: this.attachments
+            attachFileIds: this.attachFileIds
         }
     }
     public getDataForUpdateProduct() {
@@ -89,13 +89,13 @@ export class TicketProfileFormUpdate {
         this.ticket = { id: id };
     }
     public addFile(id) {
-        this.attachments.push({ file: { id: id } });
+        this.attachFileIds.push(id);
     }
     public removeFile(index) {
-        this.attachments.splice(index, 1);
+        this.attachFileIds.splice(index, 1);
     }
     public clearAttachments() {
-        this.attachments = [];
+        this.attachFileIds = [];
     }
     public setProducts(data) {
         this.products = data;

@@ -403,7 +403,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
   deleteFile(index: number) {
-    this.companiesService.removeAttachment(this.ticketProfileFormUpdate.attachments[index].file.id).subscribe(data => {
+    this.companiesService.removeAttachment(this.ticketProfileFormUpdate.attachFileIds[index]).subscribe(data => {
 
     })
     this.files.splice(index, 1);
@@ -415,9 +415,9 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     })
   }
   removeAllAttachments() {
-    if (this.ticketProfileFormUpdate.attachments.length > 0) {
+    if (this.ticketProfileFormUpdate.attachFileIds.length > 0) {
       forkJoin(
-        this.ticketProfileFormUpdate.attachments.map(item => this.companiesService.removeAttachment(item.file.id))
+        this.ticketProfileFormUpdate.attachFileIds.map(item => this.companiesService.removeAttachment(item))
       ).subscribe(result => {
 
       });
