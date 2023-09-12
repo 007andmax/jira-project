@@ -95,7 +95,7 @@ export class TicketDetailProfileFormUpdateNoteComponent implements OnInit {
     return true;
   }
   deleteFile(index: number) {
-    this.companiesService.removeAttachment(this.ticketProfileFormUpdate.attachments[index].file.id).subscribe(data => {
+    this.companiesService.removeAttachment(this.ticketProfileFormUpdate.attachFileIds[index]).subscribe(data => {
 
     })
     this.files.splice(index, 1);
