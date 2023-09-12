@@ -30,13 +30,14 @@ export class TicketsFilterSearchComponent implements OnInit {
   }
   onSearch() {
     if (this.word.length == 0) {
+      this.ticketsFilter.setSearchText("");
       this.list = [];
       return;
     }
     this.changeTypeFilter.emit("ALL");
     this.ticketsFilter.setSearchText(this.word);
     this.ticketsService.getTickets(this.ticketsFilter.getListTupe(), this.ticketsFilter.getDataForRequest()).subscribe((data: Array<Ticket>) => {
-      this.list = [...this.list, ...data];
+      this.list = data;
       this.onShowDropDown();
     })
   }
@@ -46,5 +47,6 @@ export class TicketsFilterSearchComponent implements OnInit {
   clearWord() {
     this.word = "";
     this.list = [];
+    this.ticketsFilter.setSearchText("");
   }
 }

@@ -299,8 +299,9 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.changeCountFilter.emit(count);
   }
   private getCount() {
-    this.ticketsService.getCount(this.ticketsFilter.getDataForRequest()).subscribe(data => {
-      this.ticketsStateService.onInitCount(data);
+    this.ticketsFilter.setSearchText("");
+    this.ticketsService.getCount(this.ticketsFilter.getDataForRequest()).subscribe(res => {
+      this.ticketsStateService.onInitCount(res);
     })
   }
   getCountByField(field) {
@@ -396,6 +397,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   applyFilters() {
     console.log("this.ticketsFilter", this.ticketsFilter);
     this.setTypeFilterWithoutChange("ALL");
+    this.ticketsFilter.setSearchText("");
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
     if (this.listType !== 'RECURRING_TICKETS') this.getCount();
     this.ticketsStateService.onChangeLeftPanelFilter("ALL");
