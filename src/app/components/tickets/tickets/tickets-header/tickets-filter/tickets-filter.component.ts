@@ -300,7 +300,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   }
   private getCount() {
     this.ticketsFilter.setSearchText("");
-    this.ticketsService.getCount(this.ticketsFilter.getDataForRequest()).subscribe(res => {
+    this.ticketsService.getCount(this.ticketsFilter.getDataForRequestTwo()).subscribe(res => {
       this.ticketsStateService.onInitCount(res);
     })
   }

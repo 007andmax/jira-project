@@ -160,12 +160,14 @@ export class TicketsFilter {
             let status = (item.custom) ? item.title : item.title.toLocaleUpperCase().replace(" ", "_");
             data[status] = this.getFilterStatusPayload(status);
             if (this.selectedCompanies.length > 0) {
-                data[status].groupFieldFilters[0].fieldFilterDtos.push({
-                    operator: "EQ",
-                    path: "company.id",
-                    values: this.selectedCompanies.map(item => item.id)
-                });
-                data[status].groupFieldFilters[0].predicateRule = "AND";
+                data[status].groupFieldFilters.push({
+                    fieldFilterDtos: [{
+                        operator: "EQ",
+                        path: "company.id",
+                        values: this.selectedCompanies.map(item => item.id)
+                    }],
+
+                })
             }
             if (this.selectedTechUsers.length > 0) {
                 data[status].groupFieldFilters.push({
@@ -173,32 +175,39 @@ export class TicketsFilter {
                         operator: "EQ",
                         path: "assignedUser.id",
                         values: this.selectedTechUsers.map(item => item.id)
-                    },
-                    {
+                    }],
+
+                })
+                data[status].groupFieldFilters.push({
+                    fieldFilterDtos: [{
                         path: "multiAssignedUsers.id",
                         operator: "IN",
                         values: this.selectedTechUsers.map(item => item.id)
                     }],
-                    predicateRule: "OR"
+
                 })
             }
             if (this.selectedUsers.length > 0) {
-                data[status].groupFieldFilters[0].fieldFilterDtos.push({
-                    operator: "EQ",
-                    path: "createdUser.id",
-                    values: this.selectedUsers.map(item => item.id)
-                });
-                data[status].groupFieldFilters[0].predicateRule = "AND";
+                data[status].groupFieldFilters.push({
+                    fieldFilterDtos: [{
+                        operator: "EQ",
+                        path: "createdUser.id",
+                        values: this.selectedUsers.map(item => item.id)
+                    }],
+
+                })
             }
             if (this.tags.length > 0) {
-                data[status].groupFieldFilters[0].fieldFilterDtos.push({
-                    operator: "IN",
-                    path: "tags.id",
-                    values: this.tags.map(item => {
-                        return item.id;
-                    })
-                });
-                data[status].groupFieldFilters[0].predicateRule = "AND";
+                data[status].groupFieldFilters.push({
+                    fieldFilterDtos: [{
+                        operator: "IN",
+                        path: "tags.id",
+                        values: this.tags.map(item => {
+                            return item.id;
+                        })
+                    }],
+
+                })
             }
         });
         return data;
@@ -322,6 +331,84 @@ export class TicketsFilter {
                 values: this.selectedPriorityLevels.map(item => item.id)
             });
 
+        }
+        if (this.sortBy) payload.sortBy = this.sortBy;
+        if (this.searchText.length > 0) payload.searchText = this.searchText;
+        return payload;
+    }
+    public getDataForRequestTwo() {
+        let payload = null;
+        if (this.listType === "ALL") payload = JSON.parse(JSON.stringify(this.payloadAll));
+        if (this.listType === "UNASSIGNED") payload = JSON.parse(JSON.stringify(this.payloadUnassigned));
+        if (this.listType === "OPEN") payload = JSON.parse(JSON.stringify(this.payloadOpen));
+        if (this.listType === "CLOSED") payload = JSON.parse(JSON.stringify(this.payloadClosed));
+        if (this.listType === "ON_HOLD") payload = JSON.parse(JSON.stringify(this.payloadOnhold));
+        if (this.listType === "TRASH") payload = JSON.parse(JSON.stringify(this.payloadTrash));
+        if (this.listType === "SPAM") payload = JSON.parse(JSON.stringify(this.payloadSpam));
+        if (this.listType === "USERS") payload = JSON.parse(JSON.stringify(this.payloadUser));
+        if (this.listType === "RECURRING_TICKETS_OPEN") payload = JSON.parse(JSON.stringify(this.payloadRecurringTicketsOpen));
+        if (this.listType === "RECURRING_TICKETS_CLOSED") payload = JSON.parse(JSON.stringify(this.payloadRecurringTicketsClosed));
+        if (this.listType === "COMPLETED") payload = JSON.parse(JSON.stringify(this.payloadCompleted));
+        if (this.listType === "IN_PROGRESS") payload = JSON.parse(JSON.stringify(this.payloadInProgress));
+        payload.groupFieldFilters[0].predicateRule = "AND";
+        /*  if (this.selectedCompanies.length > 0 || this.selectedUsers.length > 0 || this.selectedTechUsers.length > 0 || this.tags.length > 0 || this.selectedPriorityLevels.length > 0 || this.selectedStatus.length > 0) {
+              payload.groupFieldFilters.push({ fieldFilterDtos: [], predicateRule: "" });
+              payload.groupFieldFilters[1].predicateRule = (this.selectedStatus.length > 1 || this.selectedCompanies.length > 1 || this.selectedUsers.length > 1 || this.selectedTechUsers.length > 1 || this.tags.length > 1 || this.selectedPriorityLevels.length > 1) ? "OR" : "AND";
+          }*/
+        if (this.selectedCompanies.length > 0) {
+            payload.groupFieldFilters.push({
+                fieldFilterDtos: [{
+                    "operator": "IN",
+                    path: "company.id",
+                    values: this.selectedCompanies.map(item => item.id)
+                }]
+            })
+        }
+        if (this.selectedTechUsers.length > 0) {
+            payload.groupFieldFilters.push({
+                fieldFilterDtos: [{
+                    "path": "multiAssignedUsers.id",
+                    "operator": "IN",
+                    "values": this.selectedTechUsers.map(item => item.id)
+                }]
+            })
+        }
+        if (this.selectedStatus.length > 0) {
+            payload.groupFieldFilters.push({
+                fieldFilterDtos: [{
+                    "path": "status",
+                    "operator": "IN",
+                    "values": this.selectedStatus.map(item => item.name)
+                }]
+            })
+        }
+        if (this.selectedUsers.length > 0) {
+            payload.groupFieldFilters.push({
+                fieldFilterDtos: [{
+                    "operator": "IN",
+                    "path": "assignedUser.id",
+                    "values": this.selectedUsers.map(item => item.id)
+
+                }]
+            })
+        }
+        if (this.tags.length > 0) {
+            payload.groupFieldFilters.push({
+                fieldFilterDtos: [{
+                    operator: "IN",
+                    path: "tags.id",
+                    values: this.tags.map(item => item.id)
+                }]
+            })
+        }
+        if (this.selectedPriorityLevels.length > 0) {
+            payload.groupFieldFilters.push({
+                fieldFilterDtos: [{
+                    operator: "IN",
+                    path: "priorityLevel.id",
+                    values: this.selectedPriorityLevels.map(item => item.id)
+                }]
+            })
         }
         if (this.sortBy) payload.sortBy = this.sortBy;
         if (this.searchText.length > 0) payload.searchText = this.searchText;
