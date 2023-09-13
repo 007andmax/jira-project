@@ -158,11 +158,11 @@ export class TicketsFilter {
         }
         ticketStatus.forEach(item => {
             let status = (item.custom) ? item.title : item.title.toLocaleUpperCase().replace(" ", "_");
-            data[status] = this.getFilterStatusPayload(status);
+            data[status] = this.getFilterStatusPayload(item);
             if (this.selectedCompanies.length > 0) {
                 data[status].groupFieldFilters.push({
                     fieldFilterDtos: [{
-                        operator: "EQ",
+                        operator: "IN",
                         path: "company.id",
                         values: this.selectedCompanies.map(item => item.id)
                     }],
@@ -172,7 +172,7 @@ export class TicketsFilter {
             if (this.selectedTechUsers.length > 0) {
                 data[status].groupFieldFilters.push({
                     fieldFilterDtos: [{
-                        operator: "EQ",
+                        operator: "IN",
                         path: "assignedUser.id",
                         values: this.selectedTechUsers.map(item => item.id)
                     }],
@@ -190,7 +190,7 @@ export class TicketsFilter {
             if (this.selectedUsers.length > 0) {
                 data[status].groupFieldFilters.push({
                     fieldFilterDtos: [{
-                        operator: "EQ",
+                        operator: "IN",
                         path: "createdUser.id",
                         values: this.selectedUsers.map(item => item.id)
                     }],
@@ -374,13 +374,25 @@ export class TicketsFilter {
             })
         }
         if (this.selectedStatus.length > 0) {
-            payload.groupFieldFilters.push({
-                fieldFilterDtos: [{
-                    "path": "status",
-                    "operator": "IN",
-                    "values": this.selectedStatus.map(item => item.name)
-                }]
-            })
+            if (this.selectedStatus.filter(item => !item.custom).length > 0) {
+                payload.groupFieldFilters.push({
+                    fieldFilterDtos: [{
+                        "path": "status",
+                        "operator": "IN",
+                        "values": this.selectedStatus.filter(item => !item.custom).map(item => item.name.toLocaleUpperCase().replace(" ", "_"))
+                    }]
+                })
+            }
+            if (this.selectedStatus.filter(item => item.custom).length > 0) {
+                payload.groupFieldFilters.push({
+                    fieldFilterDtos: [{
+                        "path": "customStatus.id",
+                        "operator": "IN",
+                        "values": this.selectedStatus.filter(item => item.custom).map(item => item.id)
+                    }]
+                })
+            }
+
         }
         if (this.selectedUsers.length > 0) {
             payload.groupFieldFilters.push({
@@ -560,19 +572,13 @@ export class TicketsFilter {
             ],
         }
     }
-    public getFilterStatusPayload(status) {
+    public getFilterStatusPayload(item) {
+        let status = (item.custom) ? item.id : item.title.toLocaleUpperCase().replace(" ", "_");
         return {
             excludeTrashSpam: true,
             groupFieldFilters: [
                 {
                     fieldFilterDtos: [
-                        {
-                            operator: "EQ",
-                            path: "status",
-                            values: [
-                                status
-                            ]
-                        },
                         {
                             path: "ticketSource",
                             operator: "NOT_EQ",
@@ -580,7 +586,18 @@ export class TicketsFilter {
                                 "FROM_RECURRING_TICKET"
                             ]
                         }
-                    ]
+                    ],
+                },
+                {
+                    fieldFilterDtos: [
+                        {
+                            operator: "IN",
+                            path: (!item.custom) ? "status" : "customStatus.id",
+                            values: [
+                                status
+                            ]
+                        },
+                    ],
                 }
             ]
         }

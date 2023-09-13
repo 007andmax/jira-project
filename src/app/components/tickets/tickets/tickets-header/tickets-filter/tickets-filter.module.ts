@@ -11,6 +11,7 @@ import { TicketsFilterStatusComponent } from './tickets-filter-status/tickets-fi
 import { TicketsFilterDropDownComponent } from './tickets-filter-drop-down/tickets-filter-drop-down.component';
 import { TicketsFilterCompaniesDropDownComponent } from './tickets-filter-companies-drop-down/tickets-filter-companies-drop-down.component';
 import { TicketsFilterSearchComponent } from './tickets-filter-search/tickets-filter-search.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
     declarations: [
@@ -30,7 +31,8 @@ import { TicketsFilterSearchComponent } from './tickets-filter-search/tickets-fi
         FormsModule,
         ReactiveFormsModule,
         CompanyDropDownModule,
-        DropDownModule
+        DropDownModule,
+        InfiniteScrollModule
     ],
     exports: [TicketsFilterComponent]
 

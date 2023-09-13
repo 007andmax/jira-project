@@ -8,7 +8,7 @@
     <div ngbDropdownAnchor>
         <span class="qt-input-search">
             <input
-                id="global-search"
+                id="dropdownTickets"
                 type="text"
                 class="global-search__input"
                 placeholder="Search by tickets"
@@ -27,7 +27,7 @@
     </div>
     <div
         ngbDropdownMenu
-        aria-labelledby="dropdownProducts"
+        aria-labelledby="dropdownTickets"
         class="global-search__dropdown"
     >
         <div
@@ -36,7 +36,19 @@
         >
             <p>No data available yet</p>
         </div>
-        <div *ngIf="list.length > 0">
+        <div
+            class="content"
+            #content
+            (click)="$event.preventDefault()"
+            infiniteScroll
+            [infiniteScrollContainer]="content"
+            [infiniteScrollDistance]="2"
+            [infiniteScrollThrottle]="50"
+            [infiniteScrollDisabled]="infiniteScrollDisabled"
+            [fromRoot]="true"
+            (scrolled)="onScroll()"
+            *ngIf="list.length > 0"
+        >
             <ng-template
                 ngFor
                 let-item
@@ -60,6 +72,10 @@
                     </div>
                 </div>
             </ng-template>
+            <div
+                class="loading pengind-loading"
+                *ngIf="showPreloader"
+            ></div>
         </div>
     </div>
 </div>
