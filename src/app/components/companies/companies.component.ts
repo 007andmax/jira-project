@@ -124,12 +124,19 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getChangeCompanies);
+    let onChangeDevicesCount = this.companiesStateService.onChangeDevicesCount.subscribe(data => {
+      this.devicesCounts = data;
+      this.companyFilter.setDevices(data);
+      this.cd.detectChanges();
+    })
+    this.sub.add(onChangeDevicesCount);
   }
   getDevicesCounts(ids) {
     this.devicesService.getCountByCompany(ids).subscribe((data: any) => {
-      this.devicesCounts = data;
+      console.log("data", data);
+      this.devicesCounts = data.map(item => new CompanyDeviceCount(item));
       this.companyFilter.setDevices(this.devicesCounts);
-      this.companiesStateService.setDevicesCounts(data);
+      this.companiesStateService.setDevicesCounts(data.map(item => new CompanyDeviceCount(item)));
     })
   }
   onFilter(data) {

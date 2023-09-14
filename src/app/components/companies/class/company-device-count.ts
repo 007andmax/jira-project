@@ -5,4 +5,7 @@ export class CompanyDeviceCount {
         this.companyId = data.companyId;
         this.count = data.count;
     }
+    public setCount(data) {
+        this.count = data;
+    }
 }
