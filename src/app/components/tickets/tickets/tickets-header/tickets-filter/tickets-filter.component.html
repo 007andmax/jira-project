@@ -50,6 +50,7 @@
         [search]="true"
         [sort]="false"
         [class]="['qt-dropdown']"
+        [dropdownHeight]="'initial'"
         [field]="'title'"
         [placeholder]="'Select'"
         (onSelectedItem)="onSelectCustomDateRange($event)"
@@ -90,7 +91,7 @@
         [class]="['qt-dropdown']"
         [list]="getUserList()"
         (onSelectedItem)="onSelectUser($event)"
-    ></app-drop-down> 
+    ></app-drop-down>
     <app-drop-down
         class="search-tech-users"
         #techUsersDp
