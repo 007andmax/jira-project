@@ -42,6 +42,18 @@
         [placement]="'top-left'"
         (tagsChange)="onChangeTags($event)"
     ></app-tickets-filter-tags>
+    <tickets-filter-created-drop-down
+        #datesDp
+        class="qt-pt-16"
+        [title]="'Created'"
+        [change]="true"
+        [search]="true"
+        [class]="['qt-dropdown']"
+        [field]="'title'"
+        [placeholder]="'Select'"
+        (onSelectedItem)="onSelectCustomDateRange($event)"
+        (selectedDate)="onSelectDates($event)"
+    ></tickets-filter-created-drop-down>
     <tickets-filter-drop-down
         #usersDp
         [title]="'User'"

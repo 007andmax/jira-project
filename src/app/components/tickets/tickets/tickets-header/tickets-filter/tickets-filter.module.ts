@@ -12,6 +12,7 @@ import { TicketsFilterDropDownComponent } from './tickets-filter-drop-down/ticke
 import { TicketsFilterCompaniesDropDownComponent } from './tickets-filter-companies-drop-down/tickets-filter-companies-drop-down.component';
 import { TicketsFilterSearchComponent } from './tickets-filter-search/tickets-filter-search.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { TicketsFilterCreatedDropDownComponent } from './tickets-filter-created-drop-down/tickets-filter-created-drop-down.component';
 
 @NgModule({
     declarations: [
@@ -20,7 +21,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
         TicketsFilterStatusComponent,
         TicketsFilterDropDownComponent,
         TicketsFilterCompaniesDropDownComponent,
-        TicketsFilterSearchComponent
+        TicketsFilterSearchComponent,
+        TicketsFilterCreatedDropDownComponent
     ],
     imports: [
         CommonModule,

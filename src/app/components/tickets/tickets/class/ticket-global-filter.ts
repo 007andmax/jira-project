@@ -10,6 +10,9 @@ export class TicketGlobalFilter {
     "assignedUsersIds": Array<string> = [];
     priorityIds: Array<string> = [];
     modified: boolean;
+    customDateRange: string = null;
+    startDate: string = null;
+    endDate: string = null;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -34,7 +37,20 @@ export class TicketGlobalFilter {
         if (!isAdd) data.tagIds = this.tagIds;
         if (this.assignedUsersIds.length > 0) data.assignedUsersIds = this.assignedUsersIds;
         if (this.priorityIds.length > 0) data.priorityIds = this.priorityIds;
+        if (this.customDateRange) data.customDateRange = this.customDateRange;
+        if (this.startDate) data.startDate = this.startDate;
+        if (this.endDate) data.endDate = this.endDate;
         return data
+    }
+    public setStartDate(data) {
+        this.startDate = data;
+    }
+    public setEndDate(data) {
+        this.endDate = data;
+    }
+    public clearDates() {
+        this.startDate = null;
+        this.endDate = null;
     }
     public setClientCompaies(data) {
         this.clientCompanyIds = data;
@@ -44,6 +60,9 @@ export class TicketGlobalFilter {
     }
     public setAssignedUsersIds(data) {
         this.assignedUsersIds = data;
+    }
+    public setCustomDateRange(data) {
+        this.customDateRange = data;
     }
     public setStatusIds(data) {
         this.statusIds = data;
@@ -55,6 +74,6 @@ export class TicketGlobalFilter {
         this.priorityIds = data;
     }
     public isUseFilters() {
-        return this.clientCompanyIds.length > 0 || this.createdUserIds.length > 0 || this.assignedUsersIds.length > 0 || this.statusIds.length > 0 || this.tagIds.length > 0 || this.priorityIds.length > 0;
+        return this.clientCompanyIds.length > 0 || this.createdUserIds.length > 0 || this.assignedUsersIds.length > 0 || this.statusIds.length > 0 || this.tagIds.length > 0 || this.priorityIds.length > 0 || this.customDateRange || this.startDate || this.endDate;
     }
 }

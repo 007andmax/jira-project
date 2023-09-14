@@ -35,11 +35,24 @@ export class TicketsFilter {
         new CompanyFilterTop('status', ''),
         new CompanyFilterTop('created_date', '')];
     searchText = "";
+    customDateRange: string = null;
+    startDate: string = null;
+    endDate: string = null;
     constructor() {
         this.onInitUser();
     }
     public checkUse() {
         return this.selectedCompanies.length > 0 && this.selectedTechUsers.length > 0 && this.selectedUsers.length > 0 && this.selectedStatus.length > 0 && this.selectedPriorityLevels.length > 0 && this.tags.length > 0;
+    }
+    public clearDates() {
+        this.startDate = null;
+        this.endDate = null;
+    }
+    public setStartDate(data) {
+        this.startDate = data;
+    }
+    public setEndDate(data) {
+        this.endDate = data;
     }
     public setCustomStatus(data) {
         this.customStatus = data;
@@ -63,6 +76,9 @@ export class TicketsFilter {
     }
     public setTags(data) {
         this.tags = data;
+    }
+    public setCustomDateRange(data) {
+        this.customDateRange = data;
     }
     public setCompanies(data) {
         this.selectedCompanies = data;
@@ -435,6 +451,11 @@ export class TicketsFilter {
         }
         if (this.sortBy) payload.sortBy = this.sortBy;
         if (this.searchText.length > 0) payload.searchText = this.searchText;
+        if (this.customDateRange) payload.customDateRange = this.customDateRange;
+        if (this.startDate && this.endDate) {
+            payload.startDate = this.startDate;
+            payload.endDate = this.endDate;
+        }
         return payload;
     }
 

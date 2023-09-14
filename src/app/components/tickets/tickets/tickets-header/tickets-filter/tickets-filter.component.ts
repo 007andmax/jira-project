@@ -29,6 +29,9 @@ import { TicketsFilterStatusComponent } from './tickets-filter-status/tickets-fi
 import { TicketsPriority } from 'src/app/components/setting/ticket-settings-page/tickets-priority/class/tickets-priority';
 import { TicketsFilterDropDownComponent } from './tickets-filter-drop-down/tickets-filter-drop-down.component';
 import { TicketsFilterCompaniesDropDownComponent } from './tickets-filter-companies-drop-down/tickets-filter-companies-drop-down.component';
+import * as moment from "moment";
+import { TicketsFilterCreatedDropDownComponent } from './tickets-filter-created-drop-down/tickets-filter-created-drop-down.component';
+import { TitleListType } from '../class/title-list-type';
 
 @Component({
   selector: 'app-tickets-filter',
@@ -43,6 +46,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   @ViewChild('priorityDp') priorityDp: TicketsFilterDropDownComponent;
   @ViewChild('tagsDp') tagsDp: TicketsFilterTagsComponent;
   @ViewChild('filterStatus') filterStatus: TicketsFilterStatusComponent;
+  @ViewChild('datesDp') datesDp: TicketsFilterCreatedDropDownComponent;
   public ticketsFilter: TicketsFilter = new TicketsFilter();
   globalFilter: TicketGlobalFilter = new TicketGlobalFilter();
   listType: string = "USERS";
@@ -196,7 +200,14 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
         this.onSelectPriority([]);
         this.priorityDp.clearWithOutChanges();
       }
-
+      if (data.customDateRange) {
+        this.onSelectCustomDateRange(data.customDateRange);
+        this.datesDp.selectItemWithOutChanges(this.datesDp.list.find(item => item.type == data.customDateRange));
+      }
+      if (data.startDate && data.endDate) {
+        this.onSelectDates({ start: data.startDate, end: data.endDate });
+        this.datesDp.selectItemWithOutChanges(new TitleListType('Custom Date range', 'CUSTOM'));
+      }
       this.setTypeFilterWithoutChange("ALL");
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
       this.getCount();
@@ -270,6 +281,9 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     if (!this.ticketsFilter.isDisbledCompany) this.ticketsFilter.setCompanies([]);
     this.ticketsFilter.setTechUsers([]);
     this.ticketsFilter.setUsers([]);
+    this.ticketsFilter.clearDates();
+    this.ticketsFilter.setCustomDateRange(null);
+    this.datesDp.clearWithOutChanges();
     if (this.ticketsFilter.selectedStatus.length > 0) {
       this.listType = "ALL";
       this.ticketsFilter.setListType("ALL");
@@ -296,6 +310,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     if (this.ticketsFilter.selectedUsers.length > 0) count++;
     if (this.ticketsFilter.selectedStatus.length > 0) count++;
     if (this.ticketsFilter.selectedPriorityLevels.length > 0) count++;
+    if (this.ticketsFilter.customDateRange || this.ticketsFilter.startDate && this.ticketsFilter.endDate) count++;
     this.changeCountFilter.emit(count);
   }
   private getCount() {
@@ -344,6 +359,27 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       }
     });
     this.techUsersNamesList = this.getTechUserList();
+  }
+  public onSelectDates(value) {
+    console.log("value", value);
+    if (value.start !== '' && value.end !== '') {
+      this.ticketsFilter.setStartDate(moment(new Date(value.start)).format('YYYY-MM-DD'));
+      this.ticketsFilter.setEndDate(moment(new Date(value.end)).format('YYYY-MM-DD'));
+      this.globalFilter.setStartDate(moment(new Date(value.start)).format('YYYY-MM-DD'));
+      this.globalFilter.setEndDate(moment(new Date(value.end)).format('YYYY-MM-DD'));
+
+      this.ticketsFilter.setCustomDateRange(null);
+      this.globalFilter.setCustomDateRange(null);
+    } else {
+      this.ticketsFilter.clearDates()
+      this.globalFilter.clearDates();
+    }
+  }
+  public onSelectCustomDateRange(data) {
+    this.ticketsFilter.setCustomDateRange(data);
+    this.globalFilter.setCustomDateRange(data);
+    this.ticketsFilter.clearDates()
+    this.globalFilter.clearDates();
   }
   public onSelectCompany(items) {
     this.ticketsFilter.setCompanies(items);
