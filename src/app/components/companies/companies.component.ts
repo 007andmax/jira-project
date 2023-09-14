@@ -133,7 +133,6 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   }
   getDevicesCounts(ids) {
     this.devicesService.getCountByCompany(ids).subscribe((data: any) => {
-      console.log("data", data);
       this.devicesCounts = data.map(item => new CompanyDeviceCount(item));
       this.companyFilter.setDevices(this.devicesCounts);
       this.companiesStateService.setDevicesCounts(data.map(item => new CompanyDeviceCount(item)));
