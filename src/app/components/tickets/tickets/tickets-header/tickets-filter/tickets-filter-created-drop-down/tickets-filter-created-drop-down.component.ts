@@ -41,6 +41,7 @@ export class TicketsFilterCreatedDropDownComponent extends DropDownComponent {
     } else {
       this.dp.close();
       this.onSelectedItem.emit(data.type);
+      this.selectedDateModel = '';
     }
   }
   /**
@@ -98,5 +99,24 @@ export class TicketsFilterCreatedDropDownComponent extends DropDownComponent {
   */
   isHovered(date: NgbDate) {
     return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
+  }
+
+  getSelectedItemText() {
+    if (this.selectedDateModel != '') return this.selectedDateModel;
+    return (this.selectedItem) ? this.selectedItem[this.field] : "";
+  }
+
+  public clearWithOutChanges() {
+    this.isAdd = false;
+    this.selectedItem = null;
+    this.selectedDateModel = '';
+  }
+  clearClient() {
+    this.isAdd = false;
+    this.selectedItem = null;
+    this.selectedDateModel = '';
+    this.elRef.nativeElement.querySelector("#dropdown1").value = "";
+    this.list = JSON.parse(JSON.stringify(this.reqList));
+    this.onSelectedItem.emit(null);
   }
 }
