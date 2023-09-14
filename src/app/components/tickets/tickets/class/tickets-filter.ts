@@ -276,11 +276,11 @@ export class TicketsFilter {
         if (this.listType === "RECURRING_TICKETS_CLOSED") payload = JSON.parse(JSON.stringify(this.payloadRecurringTicketsClosed));
         if (this.listType === "COMPLETED") payload = JSON.parse(JSON.stringify(this.payloadCompleted));
         if (this.listType === "IN_PROGRESS") payload = JSON.parse(JSON.stringify(this.payloadInProgress));
-        payload.groupFieldFilters[0].predicateRule = "AND";
-        if (this.selectedCompanies.length > 0 || this.selectedUsers.length > 0 || this.selectedTechUsers.length > 0 || this.tags.length > 0 || this.selectedPriorityLevels.length > 0 || this.selectedStatus.length > 0) {
-            payload.groupFieldFilters.push({ fieldFilterDtos: [], predicateRule: "" });
-            payload.groupFieldFilters[1].predicateRule = (this.selectedStatus.length > 1 || this.selectedCompanies.length > 1 || this.selectedUsers.length > 1 || this.selectedTechUsers.length > 1 || this.tags.length > 1 || this.selectedPriorityLevels.length > 1) ? "OR" : "AND";
-        }
+
+        /*  if (this.selectedCompanies.length > 0 || this.selectedUsers.length > 0 || this.selectedTechUsers.length > 0 || this.tags.length > 0 || this.selectedPriorityLevels.length > 0 || this.selectedStatus.length > 0) {
+              payload.groupFieldFilters.push({ fieldFilterDtos: [], predicateRule: "" });
+              payload.groupFieldFilters[1].predicateRule = (this.selectedStatus.length > 1 || this.selectedCompanies.length > 1 || this.selectedUsers.length > 1 || this.selectedTechUsers.length > 1 || this.tags.length > 1 || this.selectedPriorityLevels.length > 1) ? "OR" : "AND";
+          }*/
         if (this.selectedCompanies.length > 0) {
             payload.groupFieldFilters[1].fieldFilterDtos.push({
                 "operator": "IN",
@@ -290,6 +290,11 @@ export class TicketsFilter {
 
         }
         if (this.selectedTechUsers.length > 0) {
+            payload.groupFieldFilters[1].fieldFilterDtos.push({
+                operator: "IN",
+                path: "assignedUser.id",
+                values: this.selectedTechUsers.map(item => item.id)
+            });
             payload.groupFieldFilters[1].fieldFilterDtos.push({
                 "path": "multiAssignedUsers.id",
                 "operator": "IN",
@@ -309,7 +314,7 @@ export class TicketsFilter {
 
             payload.groupFieldFilters[1].fieldFilterDtos.push({
                 "operator": "IN",
-                "path": "assignedUser.id",
+                "path": "createdUser.id",
                 "values": this.selectedUsers.map(item => item.id)
 
             });
@@ -350,7 +355,6 @@ export class TicketsFilter {
         if (this.listType === "RECURRING_TICKETS_CLOSED") payload = JSON.parse(JSON.stringify(this.payloadRecurringTicketsClosed));
         if (this.listType === "COMPLETED") payload = JSON.parse(JSON.stringify(this.payloadCompleted));
         if (this.listType === "IN_PROGRESS") payload = JSON.parse(JSON.stringify(this.payloadInProgress));
-        payload.groupFieldFilters[0].predicateRule = "AND";
         /*  if (this.selectedCompanies.length > 0 || this.selectedUsers.length > 0 || this.selectedTechUsers.length > 0 || this.tags.length > 0 || this.selectedPriorityLevels.length > 0 || this.selectedStatus.length > 0) {
               payload.groupFieldFilters.push({ fieldFilterDtos: [], predicateRule: "" });
               payload.groupFieldFilters[1].predicateRule = (this.selectedStatus.length > 1 || this.selectedCompanies.length > 1 || this.selectedUsers.length > 1 || this.selectedTechUsers.length > 1 || this.tags.length > 1 || this.selectedPriorityLevels.length > 1) ? "OR" : "AND";
@@ -365,6 +369,13 @@ export class TicketsFilter {
             })
         }
         if (this.selectedTechUsers.length > 0) {
+            payload.groupFieldFilters.push({
+                fieldFilterDtos: [{
+                    "path": "assignedUser.id",
+                    "operator": "IN",
+                    "values": this.selectedTechUsers.map(item => item.id)
+                }]
+            })
             payload.groupFieldFilters.push({
                 fieldFilterDtos: [{
                     "path": "multiAssignedUsers.id",
@@ -398,7 +409,7 @@ export class TicketsFilter {
             payload.groupFieldFilters.push({
                 fieldFilterDtos: [{
                     "operator": "IN",
-                    "path": "assignedUser.id",
+                    "path": "createdUser.id",
                     "values": this.selectedUsers.map(item => item.id)
 
                 }]

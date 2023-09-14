@@ -13,6 +13,7 @@ export class TicketsFilterDropDownComponent extends CompanyTagsComponent {
   @Input() field: string = null;
   @Input() list: Array<any> = [];
   @Input() reducerItem: Function = (item) => (this.field) ? item[this.field] : item;
+  @Input() title = '';
   @Input() placeholder = '';
   @Output() filterChange = new EventEmitter();
   @Input() selectedTag: Array<any> = [];

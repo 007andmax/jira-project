@@ -30,7 +30,8 @@
         class="qt-mb-16"
         #companyDp
         [clientType]="'CLIENT'"
-        [placeholder]="'Company'"
+        [title]="'Company'"
+        [placeholder]="'Select company'"
         [placement]="'top-left'"
         [field]="'name'"
         (filterChange)="onSelectCompany($event)"
@@ -43,14 +44,16 @@
     ></app-tickets-filter-tags>
     <tickets-filter-drop-down
         #usersDp
-        [placeholder]="'User'"
+        [title]="'User'"
+        [placeholder]="'Select user'"
         [placement]="'top-left'"
         [list]="clientsUsersNamesList"
         (filterChange)="onSelectUser($event)"
     ></tickets-filter-drop-down>
     <tickets-filter-drop-down
         #techUsersDp
-        [placeholder]="'Tech User'"
+        [placeholder]="'Select tech user'"
+        [title]="'Tech User'"
         [placement]="'top-left'"
         [list]="techUsersNamesList"
         (filterChange)="onSelectTechUser($event)"
@@ -58,7 +61,8 @@
     </tickets-filter-drop-down>
     <tickets-filter-drop-down
         #priorityDp
-        [placeholder]="'Priority'"
+        [title]="'Priority'"
+        [placeholder]="'Select priority'"
         [placement]="'top-left'"
         [field]="'name'"
         [list]="ticketPriorities"
@@ -94,10 +98,6 @@
         [list]="ticketPriorities"
         (onSelectedItem)="onSelectPriority($event)"
     ></app-drop-down> -->
-
-
-
-
 </div>
 <div class="aside-filters-content__footer">
     <div class="qt-df">

@@ -6,7 +6,7 @@
 >
     <p
         class="title-filter qt-mb-8"
-        [textContent]="placeholder"
+        [textContent]="title"
     ></p>
     <mat-form-field ngbDropdownAnchor>
         <mat-chip-list
@@ -30,7 +30,7 @@
             <input
                 id="dropdownServices"
                 ngbDropdownToggle
-                placeholder="Select"
+                [placeholder]="placeholder"
                 #userInput
                 class="pointer"
                 [matChipInputFor]="chipList"

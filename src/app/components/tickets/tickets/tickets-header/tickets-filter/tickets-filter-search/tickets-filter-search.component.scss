@@ -143,4 +143,8 @@
     height: 25px !important;
     min-height: auto !important;
     left: calc(50% - 12px) !important;
+    top: unset !important;
+    bottom: 20px;
+    position: relative !important;
+    margin-top: 40px;
 }

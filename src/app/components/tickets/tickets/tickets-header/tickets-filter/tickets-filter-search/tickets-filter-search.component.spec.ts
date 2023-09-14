@@ -8,9 +8,9 @@ describe('TicketsFilterSearchComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TicketsFilterSearchComponent ]
+      declarations: [TicketsFilterSearchComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
