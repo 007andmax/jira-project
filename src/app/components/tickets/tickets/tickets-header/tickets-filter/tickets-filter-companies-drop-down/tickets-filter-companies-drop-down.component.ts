@@ -38,6 +38,11 @@ export class TicketsFilterCompaniesDropDownComponent extends CompanyDropDownComp
       this.searchName = "";
     }
   }
+  public clearWithOutChanges() {
+    this.isAdd = false;
+    this.selectedItem = null;
+    this.selectedItems = [];
+  }
   onSearch(event) {
     this.list = this.reqList.filter(item => ((this.field) ? item[this.field] : item).toLowerCase().includes(event.target.value));
   }

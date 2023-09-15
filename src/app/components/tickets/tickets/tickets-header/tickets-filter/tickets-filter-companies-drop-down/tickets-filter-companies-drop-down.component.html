@@ -39,6 +39,7 @@
                 [matChipInputAddOnBlur]="addOnBlur"
                 autocomplete="off"
                 (input)="onSearch($event)"
+                [disabled]="isDisabled"
             >
         </mat-chip-list>
     </mat-form-field>

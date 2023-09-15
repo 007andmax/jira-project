@@ -140,7 +140,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     this.ticketsStateService.changeFilterField(data);
   }
   private getCount() {
-    this.ticketsService.getCount(this.ticketsFilter.getDataForRequest()).subscribe(data => {
+    this.ticketsService.getCount(this.ticketsFilter.getDataForRequestTwo()).subscribe(data => {
       this.ticketsStateService.onInitCount(data);
       this.header.setTitle("All Tickets");
     })
@@ -152,7 +152,8 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     let company = this.companiesStateService.getCompanies().find(item => item.id === ticket_id);
     this.filter.setTypeFilterWithoutChange("ALL");
     this.filter.companyDp.isDisabled = true;
-    this.filter.companyDp.editItem = company;
+    this.filter.companyDp.selectedItems = [company];
+    this.filter.companyDp.removable = false;
     this.filter.ticketsFilter.setCompanies([company]);
     this.filter.onChangeCounterFilter();
     this.ticketsFilter.setListType("ALL");
@@ -189,7 +190,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
 
 
     if (this.page_number > 0) this.showPendingPreloader = true;
-    this.ticketsService.getTickets(this.ticketsFilter.getListTupe(), this.ticketsFilter.getDataForRequest()).subscribe((data: Array<Ticket>) => {
+    this.ticketsService.getTickets(this.ticketsFilter.getListTupe(), this.ticketsFilter.getDataForRequestTwo()).subscribe((data: Array<Ticket>) => {
       this.tickets = [...this.tickets, ...data];
       this.infiniteScrollDisabled = false;
       if (data.length < this.offset) this.ticketsListService.setBlockList(true);

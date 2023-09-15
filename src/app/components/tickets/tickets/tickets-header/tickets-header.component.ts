@@ -77,6 +77,8 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     if (this.ticketsFilter.selectedTechUsers.length > 0) this.countFilter++;
     if (this.ticketsFilter.selectedUsers.length > 0) this.countFilter++;
     if (this.ticketsFilter.selectedStatus.length > 0) this.countFilter++;
+    if (this.ticketsFilter.selectedPriorityLevels.length > 0) this.countFilter++;
+    if (this.ticketsFilter.customDateRange || this.ticketsFilter.startDate && this.ticketsFilter.endDate) this.countFilter++;
   }
   toggleMobileLeftPanel() {
     this.leftPanelStateService.toggleMobileLeftPanel(true);

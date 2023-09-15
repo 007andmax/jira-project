@@ -70,6 +70,9 @@ export class TicketsFilter {
         this.selectedUsers = data.selectedUsers;
         this.selectedStatus = data.selectedStatus;
         this.selectedPriorityLevels = data.selectedPriorityLevels;
+        this.customDateRange = data.customDateRange;
+        this.startDate = data.startDate;
+        this.endDate = data.endDate;
     }
     public setStatus(data) {
         this.selectedStatus = data;

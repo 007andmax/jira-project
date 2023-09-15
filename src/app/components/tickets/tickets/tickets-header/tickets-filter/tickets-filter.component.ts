@@ -209,6 +209,8 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
         this.datesDp.changeSelectedDateModel(data.startDate, data.endDate);
       } else {
         this.datesDp.clearWithOutChanges();
+        this.ticketsFilter.clearDates();
+        this.ticketsFilter.setCustomDateRange(null);
       }
       this.setTypeFilterWithoutChange("ALL");
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
@@ -298,6 +300,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     if (this.statusDp) this.statusDp.clearWithOutChanges();
     this.tagsDp.clearWithOutChanges();
     this.ticketsFilter.setCustomStatus(false);
+    console.log("this.ticketsFilter", this.ticketsFilter);
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
     this.onChangeCounterFilter();
     if (this.listType !== 'RECURRING_TICKETS') this.getCount();
