@@ -203,10 +203,12 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       if (data.customDateRange) {
         this.onSelectCustomDateRange(data.customDateRange);
         this.datesDp.selectItemWithOutChanges(this.datesDp.list.find(item => item.type == data.customDateRange));
-      }
-      if (data.startDate && data.endDate) {
+      } else if (data.startDate && data.endDate) {
         this.onSelectDates({ start: data.startDate, end: data.endDate });
         this.datesDp.selectItemWithOutChanges(new TitleListType('Custom Date range', 'CUSTOM'));
+        this.datesDp.changeSelectedDateModel(data.startDate, data.endDate);
+      } else {
+        this.datesDp.clearWithOutChanges();
       }
       this.setTypeFilterWithoutChange("ALL");
       this.ticketsStateService.onInitFilter(this.ticketsFilter);

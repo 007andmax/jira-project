@@ -187,20 +187,18 @@ export class TicketsFilter {
             }
             if (this.selectedTechUsers.length > 0) {
                 data[status].groupFieldFilters.push({
-                    fieldFilterDtos: [{
-                        operator: "IN",
-                        path: "assignedUser.id",
-                        values: this.selectedTechUsers.map(item => item.id)
-                    }],
-
+                    fieldFilterDtos: [],
+                    predicateRule: "OR"
+                });
+                data[status].groupFieldFilters[data[status].groupFieldFilters.length - 1].fieldFilterDtos.push({
+                    "path": "assignedUser.id",
+                    "operator": "IN",
+                    "values": this.selectedTechUsers.map(item => item.id)
                 })
-                data[status].groupFieldFilters.push({
-                    fieldFilterDtos: [{
-                        path: "multiAssignedUsers.id",
-                        operator: "IN",
-                        values: this.selectedTechUsers.map(item => item.id)
-                    }],
-
+                data[status].groupFieldFilters[data[status].groupFieldFilters.length - 1].fieldFilterDtos.push({
+                    "path": "multiAssignedUsers.id",
+                    "operator": "IN",
+                    "values": this.selectedTechUsers.map(item => item.id)
                 })
             }
             if (this.selectedUsers.length > 0) {
@@ -306,17 +304,20 @@ export class TicketsFilter {
 
         }
         if (this.selectedTechUsers.length > 0) {
-            payload.groupFieldFilters[1].fieldFilterDtos.push({
-                operator: "IN",
-                path: "assignedUser.id",
-                values: this.selectedTechUsers.map(item => item.id)
+            payload.groupFieldFilters.push({
+                fieldFilterDtos: [],
+                predicateRule: "OR"
             });
-            payload.groupFieldFilters[1].fieldFilterDtos.push({
+            payload.groupFieldFilters[payload.groupFieldFilters.length - 1].fieldFilterDtos.push({
+                "path": "assignedUser.id",
+                "operator": "IN",
+                "values": this.selectedTechUsers.map(item => item.id)
+            })
+            payload.groupFieldFilters[payload.groupFieldFilters.length - 1].fieldFilterDtos.push({
                 "path": "multiAssignedUsers.id",
                 "operator": "IN",
                 "values": this.selectedTechUsers.map(item => item.id)
-            });
-
+            })
         }
         if (this.selectedStatus.length > 0) {
 
@@ -386,40 +387,39 @@ export class TicketsFilter {
         }
         if (this.selectedTechUsers.length > 0) {
             payload.groupFieldFilters.push({
-                fieldFilterDtos: [{
-                    "path": "assignedUser.id",
-                    "operator": "IN",
-                    "values": this.selectedTechUsers.map(item => item.id)
-                }]
+                fieldFilterDtos: [],
+                predicateRule: "OR"
+            });
+            payload.groupFieldFilters[payload.groupFieldFilters.length - 1].fieldFilterDtos.push({
+                "path": "assignedUser.id",
+                "operator": "IN",
+                "values": this.selectedTechUsers.map(item => item.id)
             })
-            payload.groupFieldFilters.push({
-                fieldFilterDtos: [{
-                    "path": "multiAssignedUsers.id",
-                    "operator": "IN",
-                    "values": this.selectedTechUsers.map(item => item.id)
-                }]
+            payload.groupFieldFilters[payload.groupFieldFilters.length - 1].fieldFilterDtos.push({
+                "path": "multiAssignedUsers.id",
+                "operator": "IN",
+                "values": this.selectedTechUsers.map(item => item.id)
             })
         }
         if (this.selectedStatus.length > 0) {
+            payload.groupFieldFilters.push({
+                fieldFilterDtos: [],
+                predicateRule: "OR"
+            });
             if (this.selectedStatus.filter(item => !item.custom).length > 0) {
-                payload.groupFieldFilters.push({
-                    fieldFilterDtos: [{
-                        "path": "status",
-                        "operator": "IN",
-                        "values": this.selectedStatus.filter(item => !item.custom).map(item => item.name.toLocaleUpperCase().replace(" ", "_"))
-                    }]
+                payload.groupFieldFilters[payload.groupFieldFilters.length - 1].fieldFilterDtos.push({
+                    "path": "status",
+                    "operator": "IN",
+                    "values": this.selectedStatus.filter(item => !item.custom).map(item => item.name.toLocaleUpperCase().replace(" ", "_"))
                 })
             }
             if (this.selectedStatus.filter(item => item.custom).length > 0) {
-                payload.groupFieldFilters.push({
-                    fieldFilterDtos: [{
-                        "path": "customStatus.id",
-                        "operator": "IN",
-                        "values": this.selectedStatus.filter(item => item.custom).map(item => item.id)
-                    }]
+                payload.groupFieldFilters[payload.groupFieldFilters.length - 1].fieldFilterDtos.push({
+                    "path": "customStatus.id",
+                    "operator": "IN",
+                    "values": this.selectedStatus.filter(item => item.custom).map(item => item.id)
                 })
             }
-
         }
         if (this.selectedUsers.length > 0) {
             payload.groupFieldFilters.push({

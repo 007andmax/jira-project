@@ -68,15 +68,19 @@ export class TicketsFilterCreatedDropDownComponent extends DropDownComponent {
     }
   }
   public setSelectedDateModel(start, end) {
+    console.log("start", start);
     if (start && end) {
 
       const startDate = new Date(this.dateService.getDateFromBootstrap(start));
       const endDate = new Date(this.dateService.getDateFromBootstrap(end));
-
-      this.selectedDateModel = `${this.dateService.getInvoiceDate(startDate)} - ${this.dateService.getInvoiceDate(endDate)}`;
+      this.changeSelectedDateModel(startDate, endDate);
     } else {
       this.selectedDateModel = '';
     }
+  }
+
+  public changeSelectedDateModel(start, end) {
+    this.selectedDateModel = `${this.dateService.getInvoiceDate(start)} - ${this.dateService.getInvoiceDate(end)}`;
   }
   /**
   * check type for range
