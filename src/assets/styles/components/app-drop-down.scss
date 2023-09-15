@@ -60,7 +60,7 @@ company-drop-down {
   }
 
   &__dropdown {
-    button {
+    button:not(.ngb-dp-arrow-btn) {
       @include dropdown-item;
     }
 
