@@ -218,11 +218,18 @@ export class TicketsFilter {
                     fieldFilterDtos: [{
                         operator: "IN",
                         path: "tags.id",
-                        values: this.tags.map(item => {
-                            return item.id;
-                        })
+                        values: this.tags.map(item => item.id)
                     }],
 
+                })
+            }
+            if (this.selectedPriorityLevels.length > 0) {
+                data[status].groupFieldFilters.push({
+                    fieldFilterDtos: [{
+                        operator: "IN",
+                        path: "priorityLevel.id",
+                        values: this.selectedPriorityLevels.map(item => item.id)
+                    }]
                 })
             }
             if (this.customDateRange) data[status].customDateRange = this.customDateRange;

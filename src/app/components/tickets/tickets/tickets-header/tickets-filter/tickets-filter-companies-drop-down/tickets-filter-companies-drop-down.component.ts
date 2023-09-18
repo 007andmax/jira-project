@@ -19,7 +19,7 @@ export class TicketsFilterCompaniesDropDownComponent extends CompanyDropDownComp
   @Output() filterChange = new EventEmitter<any>();
 
   /**
-* @description Remove element from selectedItems object
+* @description Remove element from selectedItems Array
 * @param {number} index - index of remove element
 */
   public remove(index): void {
@@ -57,7 +57,8 @@ export class TicketsFilterCompaniesDropDownComponent extends CompanyDropDownComp
     this.selectedItems = [];
   }
   /**
-* @description Clear selectedItem and selectedItems without Output event
+* @description Filter list by field value
+* @param {Object} event - Object from input
 */
   onSearch(event) {
     this.list = this.reqList.filter(item => ((this.field) ? item[this.field] : item).toLowerCase().includes(event.target.value));

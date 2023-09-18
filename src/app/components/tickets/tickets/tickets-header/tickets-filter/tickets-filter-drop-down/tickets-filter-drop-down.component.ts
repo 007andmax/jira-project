@@ -19,12 +19,14 @@ export class TicketsFilterDropDownComponent extends CompanyTagsComponent {
   @Input() selectedTag: Array<any> = [];
   reqList: Array<any> = [];
   public ngOnInit() {
-
-
   }
   ngDoCheck() {
     if (this.reqList.length === 0) this.reqList = JSON.parse(JSON.stringify(this.list));
   }
+  /**
+* @description Toogle selected element and clear input
+* @param {Object} newItem - selected element
+*/
   public toggleItem(newItem) {
     let findIndex = this.selectedTag.findIndex(item => (this.field) ? item[this.field] == newItem[this.field] : item == newItem);
     if (findIndex > -1) {
@@ -41,8 +43,11 @@ export class TicketsFilterDropDownComponent extends CompanyTagsComponent {
       this.setDefaultScoll();
       this.onScroll();
     }
-
   }
+  /**
+ * @description Remove element from selectedTag Array
+ * @param {number} index - index of remove element
+ */
   public remove(index): void {
     if (index >= 0) {
       this.selectedTag.splice(index, 1);
@@ -50,12 +55,26 @@ export class TicketsFilterDropDownComponent extends CompanyTagsComponent {
       this.cd.detectChanges();
     }
   }
+
+  /**
+* @description Filter list by field value
+* @param {Object} event - Object from input
+*/
   onSearch(event) {
     this.list = this.reqList.filter(item => ((this.field) ? item[this.field] : item).toLowerCase().includes(event.target.value));
   }
+  /**
+* @description Check if element dropdown added in selectedItems
+* @param {Object} newItem - selected element
+*/
   isSelected(data) {
     return this.selectedTag.find(item => (this.field) ? item[this.field] == data[this.field] : item == data);
   }
+  /**
+* @description Return function with structure how need display values in dropdown
+* @param {Object} item - selected element
+* @returns {Function} This is the result
+*/
   reduceItemName(item) {
     return this.reducerItem(item);
   }

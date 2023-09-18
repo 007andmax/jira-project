@@ -133,11 +133,18 @@ export class TicketsFilterCreatedDropDownComponent extends DropDownComponent {
     return (this.selectedItem) ? this.selectedItem[this.field] : "";
   }
 
+  /**
+ * @description Clear selectedItem and selectedDateModel without Output event
+ */
   public clearWithOutChanges() {
     this.isAdd = false;
     this.selectedItem = null;
     this.selectedDateModel = '';
   }
+
+  /**
+* @description Clear selectedItem and selectedDateModel and input
+*/
   clearClient() {
     this.isAdd = false;
     this.selectedItem = null;
