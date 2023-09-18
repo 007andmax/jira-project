@@ -140,7 +140,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     this.ticketsStateService.changeFilterField(data);
   }
   private getCount() {
-    this.ticketsService.getCount(this.ticketsFilter.getDataForRequestTwo()).subscribe(data => {
+    this.ticketsService.getCount(this.ticketsFilter.getDataForRequest()).subscribe(data => {
       this.ticketsStateService.onInitCount(data);
       this.header.setTitle("All Tickets");
     })
@@ -187,10 +187,8 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     }
     this.ticketsFilter.setOffset(this.page_number * this.offset);
     this.ticketsFilter.setSize(30);
-
-
     if (this.page_number > 0) this.showPendingPreloader = true;
-    this.ticketsService.getTickets(this.ticketsFilter.getListTupe(), this.ticketsFilter.getDataForRequestTwo()).subscribe((data: Array<Ticket>) => {
+    this.ticketsService.getTickets(this.ticketsFilter.getListTupe(), this.ticketsFilter.getDataForRequest()).subscribe((data: Array<Ticket>) => {
       this.tickets = [...this.tickets, ...data];
       this.infiniteScrollDisabled = false;
       if (data.length < this.offset) this.ticketsListService.setBlockList(true);
@@ -200,8 +198,6 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
-
-
     })
   }
   public onScroll() {

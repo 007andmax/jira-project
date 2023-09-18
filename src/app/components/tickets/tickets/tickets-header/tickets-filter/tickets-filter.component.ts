@@ -62,7 +62,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   new ItemStatus('Completed', 'completed', 'CLOSED'),
   new ItemStatus('In Progress', 'inProgress', 'OPEN'),
   new ItemStatus('On Hold', 'onHold', 'ON_HOLD')];
-
   ticketPriorities: Array<TicketsPriority> = [];
   ticketsStatus: Array<TicketStatusFilter> = [];
   ticketsCounts: TicketsCounts;
@@ -77,8 +76,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     public appService: AppService,
     public customerPortalStateService: CustomerPortalStateService,
-    public tagsStateService: TagsStateService,
-    private leftPanelService: LeftPanelService) { }
+    public tagsStateService: TagsStateService) { }
 
 
 
@@ -88,13 +86,11 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     if (this.customerPortalStateService.isCustomerPortal && this.companiesState.getCompanies().length > 0) this.checkCompanyCustomerUser();
     let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
       if (this.customerPortalStateService.isCustomerPortal) this.checkCompanyCustomerUser();
-      //this.getCount();
     })
     this.sub.add(getOnCompanies);
     let onTicketFilters = this.customerPortalStateService.onTicketFilters.subscribe(data => {
       this.checkCompanyCustomerUser();
       this.checkUserCustomerUser();
-      //  this.getCount();
     });
     this.sub.add(onTicketFilters);
     this.listType = this.ticketsStateService.getListType();
@@ -122,8 +118,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       this.onGetUsers();
     })
     this.sub.add(getOnUsers);
-    //    this.getCounts();
-
     let getOnUpdateCounts = this.ticketsStateService.getOnUpdateCounts().subscribe(data => {
       this.ticketsCounts = new TicketsCounts(data);
       this.ticketsStateService.onInitCount(this.ticketsCounts[(this.listType === 'USERS') ? 'USER' : this.listType]);
@@ -320,7 +314,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   }
   private getCount() {
     this.ticketsFilter.setSearchText("");
-    this.ticketsService.getCount(this.ticketsFilter.getDataForRequestTwo()).subscribe(res => {
+    this.ticketsService.getCount(this.ticketsFilter.getDataForRequest()).subscribe(res => {
       this.ticketsStateService.onInitCount(res);
     })
   }
@@ -372,7 +366,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       this.ticketsFilter.setEndDate(moment(new Date(value.end)).format('YYYY-MM-DD'));
       this.globalFilter.setStartDate(moment(new Date(value.start)).format('YYYY-MM-DD'));
       this.globalFilter.setEndDate(moment(new Date(value.end)).format('YYYY-MM-DD'));
-
       this.ticketsFilter.setCustomDateRange(null);
       this.globalFilter.setCustomDateRange(null);
     } else {

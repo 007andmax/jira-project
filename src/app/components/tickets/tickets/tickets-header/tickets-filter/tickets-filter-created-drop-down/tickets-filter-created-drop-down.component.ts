@@ -14,6 +14,7 @@ import { DateService } from 'src/app/services/date/date.service';
 })
 export class TicketsFilterCreatedDropDownComponent extends DropDownComponent {
   @ViewChild('dp') dp: NgbDropdown;
+  @Input() placement: string;
   @Input() list = [new TitleListType('Custom Date range', 'CUSTOM'),
   new TitleListType('Today', 'TODAY'),
   new TitleListType('Yesterday', 'YESTERDAY'),
@@ -33,6 +34,10 @@ export class TicketsFilterCreatedDropDownComponent extends DropDownComponent {
     super(elRef, companiesStateService, usersStateService, customerPortalStateService);
   }
 
+  /**
+* @description Set selected element and check it's 'CUSTOM' oprion or not
+* @param {Object} data - selected element
+*/
   onSelect(data) {
     this.isAdd = false;
     this.selectedItem = data;
@@ -44,10 +49,11 @@ export class TicketsFilterCreatedDropDownComponent extends DropDownComponent {
       this.selectedDateModel = '';
     }
   }
+
   /**
-   * check type for hover
-   * @param date - date for select
-   */
+* @description Set selected dates from datepicker
+* @param {NgbDate} date - Object datepicker
+*/
   onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
       this.fromDate = date;
@@ -67,6 +73,12 @@ export class TicketsFilterCreatedDropDownComponent extends DropDownComponent {
       this.dp.close();
     }
   }
+
+  /**
+* @description Changed selected date from datepicker
+* @param {NgbDate} start - Object start from datepicker
+* @param {NgbDate} end - Object end from datepicker
+*/
   public setSelectedDateModel(start, end) {
     console.log("start", start);
     if (start && end) {
@@ -79,32 +91,43 @@ export class TicketsFilterCreatedDropDownComponent extends DropDownComponent {
     }
   }
 
+  /**
+* @description Set new value selectedDateModel
+* @param {Date} start - Object of Date
+* @param {Date} end - Object of Date
+*/
   public changeSelectedDateModel(start, end) {
     this.selectedDateModel = `${this.dateService.getInvoiceDate(start)} - ${this.dateService.getInvoiceDate(end)}`;
   }
+
   /**
-  * check type for range
-  * @param date - date range for check
-  */
+* @description Check date is range
+* @param {NgbDate} date - Object of NgbDate
+*/
   public isRange(date: NgbDate) {
     return date.equals(this.fromDate) || date.equals(this.toDate) || this.isInside(date) || this.isHovered(date);
   }
   /**
-  * check is inside
-  * @param date - date range for check
-  */
+ * @description Check date is inside
+ * @param {NgbDate} date - Object of NgbDate
+ */
   public isInside(date: NgbDate) {
     return date.after(this.fromDate) && date.before(this.toDate);
   }
 
   /**
-  * check type for hover
-  * @param date - date range for check
-  */
+ * @description Check date is hover
+ * @param {NgbDate} date - Object of NgbDate
+ */
   isHovered(date: NgbDate) {
     return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
   }
 
+  /**
+ * @description Return selected element from dropdown or datepicker
+ * @param {NgbDate} date - Object of NgbDate
+ * @returns  {String} This is the result
+ */
   getSelectedItemText() {
     if (this.selectedDateModel != '') return this.selectedDateModel;
     return (this.selectedItem) ? this.selectedItem[this.field] : "";

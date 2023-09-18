@@ -46,11 +46,6 @@ export class TicketsFilterSearchComponent implements OnInit {
     this.ticketsFilter.setSearchText(this.word);
     this.setDefaultScoll();
     this.onScroll();
-
-    /*  this.ticketsService.getTickets(this.ticketsFilter.getListTupe(), this.ticketsFilter.getDataForRequest()).subscribe((data: Array<Ticket>) => {
-        this.list = data;
-        this.onShowDropDown();
-      })*/
   }
   private getTickets() {
     console.log("this.ticketsListService.getBlockList()", this.ticketsListService.getBlockList());
@@ -60,7 +55,7 @@ export class TicketsFilterSearchComponent implements OnInit {
     }
     this.ticketsFilter.setSize(30);
     if (this.page_number > 0) this.showPreloader = true;
-    this.ticketsService.getTickets(this.ticketsFilter.getListTupe(), this.ticketsFilter.getDataForRequestTwo()).subscribe((data: Array<Ticket>) => {
+    this.ticketsService.getTickets(this.ticketsFilter.getListTupe(), this.ticketsFilter.getDataForRequest()).subscribe((data: Array<Ticket>) => {
       this.list = [...this.list, ...data];
       this.infiniteScrollDisabled = false;
       if (data.length < this.offset) this.ticketsListService.setBlockList(true);

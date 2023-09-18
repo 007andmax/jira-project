@@ -12,16 +12,6 @@
         [ticketsStatus]="ticketsStatus"
         (onSelectStatus)="onSelectStatus($event.item, $event.event)"
     ></tickets-filter-status>
-    <!-- <company-drop-down
-        class="search-company"
-        #companyDp
-        [placeholder]="'Select Company'"
-        [change]="true"
-        [search]="true"
-        [class]="['qt-dropdown']"
-        [field]="'name'"
-        (onSelectedItem)="onSelectCompany($event)"
-    ></company-drop-down> -->
     <tickets-filter-search
         [ticketsFilter]="ticketsFilter"
         (changeTypeFilter)="setTypeSearchFilterWithoutChange($event)"
@@ -51,6 +41,7 @@
         [sort]="false"
         [class]="['qt-dropdown']"
         [container]="'body'"
+        [placement]="'bottom-right'"
         [dropdownHeight]="'initial'"
         [field]="'title'"
         [placeholder]="'Select'"
@@ -84,35 +75,6 @@
         (filterChange)="onSelectPriority($event)"
     >
     </tickets-filter-drop-down>
-    <!-- <app-drop-down
-        class="search-users"
-        #usersDp
-        [placeholder]="'Select User'"
-        [change]="false"
-        [class]="['qt-dropdown']"
-        [list]="getUserList()"
-        (onSelectedItem)="onSelectUser($event)"
-    ></app-drop-down>
-    <app-drop-down
-        class="search-tech-users"
-        #techUsersDp
-        [placeholder]="'Select Tech User'"
-        [change]="false"
-        [class]="['qt-dropdown']"
-        [list]="techUsersNamesList"
-        (onSelectedItem)="onSelectTechUser($event)"
-    ></app-drop-down>
-    <app-drop-down
-        class="search-priority"
-        #priorityDp
-        [placeholder]="'Select'"
-        [change]="true"
-        [search]="true"
-        [class]="['qt-dropdown']"
-        [field]="'name'"
-        [list]="ticketPriorities"
-        (onSelectedItem)="onSelectPriority($event)"
-    ></app-drop-down> -->
 </div>
 <div class="aside-filters-content__footer">
     <div class="qt-df">

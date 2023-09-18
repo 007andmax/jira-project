@@ -42,7 +42,7 @@ export class TicketsFilter {
         this.onInitUser();
     }
     public checkUse() {
-        return this.selectedCompanies.length > 0 && this.selectedTechUsers.length > 0 && this.selectedUsers.length > 0 && this.selectedStatus.length > 0 && this.selectedPriorityLevels.length > 0 && this.tags.length > 0;
+        return this.selectedCompanies.length > 0 && (this.customDateRange || this.startDate && this.endDate) && this.selectedTechUsers.length > 0 && this.selectedUsers.length > 0 && this.selectedStatus.length > 0 && this.selectedPriorityLevels.length > 0 && this.tags.length > 0;
     }
     public clearDates() {
         this.startDate = null;
@@ -190,19 +190,18 @@ export class TicketsFilter {
             }
             if (this.selectedTechUsers.length > 0) {
                 data[status].groupFieldFilters.push({
-                    fieldFilterDtos: [],
+                    fieldFilterDtos: [{
+                        "path": "assignedUser.id",
+                        "operator": "IN",
+                        "values": this.selectedTechUsers.map(item => item.id)
+                    },
+                    {
+                        "path": "multiAssignedUsers.id",
+                        "operator": "IN",
+                        "values": this.selectedTechUsers.map(item => item.id)
+                    }],
                     predicateRule: "OR"
                 });
-                data[status].groupFieldFilters[data[status].groupFieldFilters.length - 1].fieldFilterDtos.push({
-                    "path": "assignedUser.id",
-                    "operator": "IN",
-                    "values": this.selectedTechUsers.map(item => item.id)
-                })
-                data[status].groupFieldFilters[data[status].groupFieldFilters.length - 1].fieldFilterDtos.push({
-                    "path": "multiAssignedUsers.id",
-                    "operator": "IN",
-                    "values": this.selectedTechUsers.map(item => item.id)
-                })
             }
             if (this.selectedUsers.length > 0) {
                 data[status].groupFieldFilters.push({
@@ -225,6 +224,11 @@ export class TicketsFilter {
                     }],
 
                 })
+            }
+            if (this.customDateRange) data[status].customDateRange = this.customDateRange;
+            if (this.startDate && this.endDate) {
+                data[status].startDate = this.startDate;
+                data[status].endDate = this.endDate;
             }
         });
         return data;
@@ -293,92 +297,6 @@ export class TicketsFilter {
         if (this.listType === "RECURRING_TICKETS_CLOSED") payload = JSON.parse(JSON.stringify(this.payloadRecurringTicketsClosed));
         if (this.listType === "COMPLETED") payload = JSON.parse(JSON.stringify(this.payloadCompleted));
         if (this.listType === "IN_PROGRESS") payload = JSON.parse(JSON.stringify(this.payloadInProgress));
-
-        /*  if (this.selectedCompanies.length > 0 || this.selectedUsers.length > 0 || this.selectedTechUsers.length > 0 || this.tags.length > 0 || this.selectedPriorityLevels.length > 0 || this.selectedStatus.length > 0) {
-              payload.groupFieldFilters.push({ fieldFilterDtos: [], predicateRule: "" });
-              payload.groupFieldFilters[1].predicateRule = (this.selectedStatus.length > 1 || this.selectedCompanies.length > 1 || this.selectedUsers.length > 1 || this.selectedTechUsers.length > 1 || this.tags.length > 1 || this.selectedPriorityLevels.length > 1) ? "OR" : "AND";
-          }*/
-        if (this.selectedCompanies.length > 0) {
-            payload.groupFieldFilters[1].fieldFilterDtos.push({
-                "operator": "IN",
-                path: "company.id",
-                values: this.selectedCompanies.map(item => item.id)
-            });
-
-        }
-        if (this.selectedTechUsers.length > 0) {
-            payload.groupFieldFilters.push({
-                fieldFilterDtos: [],
-                predicateRule: "OR"
-            });
-            payload.groupFieldFilters[payload.groupFieldFilters.length - 1].fieldFilterDtos.push({
-                "path": "assignedUser.id",
-                "operator": "IN",
-                "values": this.selectedTechUsers.map(item => item.id)
-            })
-            payload.groupFieldFilters[payload.groupFieldFilters.length - 1].fieldFilterDtos.push({
-                "path": "multiAssignedUsers.id",
-                "operator": "IN",
-                "values": this.selectedTechUsers.map(item => item.id)
-            })
-        }
-        if (this.selectedStatus.length > 0) {
-
-            payload.groupFieldFilters[1].fieldFilterDtos.push({
-                "path": "status",
-                "operator": "IN",
-                "values": this.selectedStatus.map(item => item.name)
-            });
-        }
-        if (this.selectedUsers.length > 0) {
-
-            payload.groupFieldFilters[1].fieldFilterDtos.push({
-                "operator": "IN",
-                "path": "createdUser.id",
-                "values": this.selectedUsers.map(item => item.id)
-
-            });
-        }
-        if (this.tags.length > 0) {
-            payload.groupFieldFilters[1].fieldFilterDtos.push({
-                operator: "IN",
-                path: "tags.id",
-                values: this.tags.map(item => {
-                    return item.id;
-                })
-            });
-
-        }
-        if (this.selectedPriorityLevels.length > 0) {
-            payload.groupFieldFilters[1].fieldFilterDtos.push({
-                operator: "IN",
-                path: "priorityLevel.id",
-                values: this.selectedPriorityLevels.map(item => item.id)
-            });
-
-        }
-        if (this.sortBy) payload.sortBy = this.sortBy;
-        if (this.searchText.length > 0) payload.searchText = this.searchText;
-        return payload;
-    }
-    public getDataForRequestTwo() {
-        let payload = null;
-        if (this.listType === "ALL") payload = JSON.parse(JSON.stringify(this.payloadAll));
-        if (this.listType === "UNASSIGNED") payload = JSON.parse(JSON.stringify(this.payloadUnassigned));
-        if (this.listType === "OPEN") payload = JSON.parse(JSON.stringify(this.payloadOpen));
-        if (this.listType === "CLOSED") payload = JSON.parse(JSON.stringify(this.payloadClosed));
-        if (this.listType === "ON_HOLD") payload = JSON.parse(JSON.stringify(this.payloadOnhold));
-        if (this.listType === "TRASH") payload = JSON.parse(JSON.stringify(this.payloadTrash));
-        if (this.listType === "SPAM") payload = JSON.parse(JSON.stringify(this.payloadSpam));
-        if (this.listType === "USERS") payload = JSON.parse(JSON.stringify(this.payloadUser));
-        if (this.listType === "RECURRING_TICKETS_OPEN") payload = JSON.parse(JSON.stringify(this.payloadRecurringTicketsOpen));
-        if (this.listType === "RECURRING_TICKETS_CLOSED") payload = JSON.parse(JSON.stringify(this.payloadRecurringTicketsClosed));
-        if (this.listType === "COMPLETED") payload = JSON.parse(JSON.stringify(this.payloadCompleted));
-        if (this.listType === "IN_PROGRESS") payload = JSON.parse(JSON.stringify(this.payloadInProgress));
-        /*  if (this.selectedCompanies.length > 0 || this.selectedUsers.length > 0 || this.selectedTechUsers.length > 0 || this.tags.length > 0 || this.selectedPriorityLevels.length > 0 || this.selectedStatus.length > 0) {
-              payload.groupFieldFilters.push({ fieldFilterDtos: [], predicateRule: "" });
-              payload.groupFieldFilters[1].predicateRule = (this.selectedStatus.length > 1 || this.selectedCompanies.length > 1 || this.selectedUsers.length > 1 || this.selectedTechUsers.length > 1 || this.tags.length > 1 || this.selectedPriorityLevels.length > 1) ? "OR" : "AND";
-          }*/
         if (this.selectedCompanies.length > 0) {
             payload.groupFieldFilters.push({
                 fieldFilterDtos: [{
@@ -390,39 +308,35 @@ export class TicketsFilter {
         }
         if (this.selectedTechUsers.length > 0) {
             payload.groupFieldFilters.push({
-                fieldFilterDtos: [],
+                fieldFilterDtos: [{
+                    "path": "assignedUser.id",
+                    "operator": "IN",
+                    "values": this.selectedTechUsers.map(item => item.id)
+                },
+                {
+                    "path": "multiAssignedUsers.id",
+                    "operator": "IN",
+                    "values": this.selectedTechUsers.map(item => item.id)
+                }],
                 predicateRule: "OR"
             });
-            payload.groupFieldFilters[payload.groupFieldFilters.length - 1].fieldFilterDtos.push({
-                "path": "assignedUser.id",
-                "operator": "IN",
-                "values": this.selectedTechUsers.map(item => item.id)
-            })
-            payload.groupFieldFilters[payload.groupFieldFilters.length - 1].fieldFilterDtos.push({
-                "path": "multiAssignedUsers.id",
-                "operator": "IN",
-                "values": this.selectedTechUsers.map(item => item.id)
-            })
         }
         if (this.selectedStatus.length > 0) {
+            let fieldFilterDtos = [];
+            if (this.selectedStatus.filter(item => !item.custom).length > 0) fieldFilterDtos.push({
+                "path": "status",
+                "operator": "IN",
+                "values": this.selectedStatus.filter(item => !item.custom).map(item => item.name.toLocaleUpperCase().replace(" ", "_"))
+            })
+            if (this.selectedStatus.filter(item => item.custom).length > 0) fieldFilterDtos.push({
+                "path": "customStatus.id",
+                "operator": "IN",
+                "values": this.selectedStatus.filter(item => item.custom).map(item => item.id)
+            })
             payload.groupFieldFilters.push({
-                fieldFilterDtos: [],
+                fieldFilterDtos: fieldFilterDtos,
                 predicateRule: "OR"
             });
-            if (this.selectedStatus.filter(item => !item.custom).length > 0) {
-                payload.groupFieldFilters[payload.groupFieldFilters.length - 1].fieldFilterDtos.push({
-                    "path": "status",
-                    "operator": "IN",
-                    "values": this.selectedStatus.filter(item => !item.custom).map(item => item.name.toLocaleUpperCase().replace(" ", "_"))
-                })
-            }
-            if (this.selectedStatus.filter(item => item.custom).length > 0) {
-                payload.groupFieldFilters[payload.groupFieldFilters.length - 1].fieldFilterDtos.push({
-                    "path": "customStatus.id",
-                    "operator": "IN",
-                    "values": this.selectedStatus.filter(item => item.custom).map(item => item.id)
-                })
-            }
         }
         if (this.selectedUsers.length > 0) {
             payload.groupFieldFilters.push({

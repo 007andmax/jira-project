@@ -1,8 +1,8 @@
 <div
     ngbDropdown
     [ngClass]="class"
+    [placement]="placement"
     [container]="container"
-    [ngStyle]="{'width':widthInput ? widthInput : '100%'}"
     #dp="ngbDropdown"
 >
     <div
@@ -87,7 +87,10 @@
                 </span>
             </ng-template>
         </div>
-        <div *ngIf="!selectedItem || selectedItem.type != 'CUSTOM'">
+        <div
+            *ngIf="!selectedItem || selectedItem.type != 'CUSTOM'"
+            [ngStyle]="{'min-width': '265px'}"
+        >
             <ng-template
                 ngFor
                 let-item

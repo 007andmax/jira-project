@@ -17,12 +17,22 @@ export class TicketsFilterCompaniesDropDownComponent extends CompanyDropDownComp
   @Input() placement: string = 'bottom-left';
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @Output() filterChange = new EventEmitter<any>();
+
+  /**
+* @description Remove element from selectedItems object
+* @param {number} index - index of remove element
+*/
   public remove(index): void {
     if (index >= 0) {
       this.selectedItems.splice(index, 1);
       this.filterChange.emit(this.selectedItems);
     }
   }
+
+  /**
+* @description Toogle selected element and clear input
+* @param {Object} newItem - selected element
+*/
   public toggleItem(newItem) {
     let findIndex = this.selectedItems.findIndex(item => (this.field) ? item[this.field] == newItem[this.field] : item == newItem);
     if (findIndex > -1) {
@@ -38,14 +48,25 @@ export class TicketsFilterCompaniesDropDownComponent extends CompanyDropDownComp
       this.searchName = "";
     }
   }
+  /**
+* @description Clear selectedItem and selectedItems without Output event
+*/
   public clearWithOutChanges() {
     this.isAdd = false;
     this.selectedItem = null;
     this.selectedItems = [];
   }
+  /**
+* @description Clear selectedItem and selectedItems without Output event
+*/
   onSearch(event) {
     this.list = this.reqList.filter(item => ((this.field) ? item[this.field] : item).toLowerCase().includes(event.target.value));
   }
+
+  /**
+* @description Check if element dropdown added in selectedItems
+* @param {Object} newItem - selected element
+*/
   isSelected(data) {
     return this.selectedItems.find(item => (this.field) ? item[this.field] == data[this.field] : item == data);
   }

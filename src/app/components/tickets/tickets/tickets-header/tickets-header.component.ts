@@ -95,7 +95,10 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
       this.ticketsFilter.selectedTechUsers.length > 0 ||
       this.ticketsFilter.selectedUsers.length > 0 ||
       this.ticketsFilter.selectedStatus.length > 0 ||
-      this.ticketsFilter.tags.length > 0
+      this.ticketsFilter.tags.length > 0 ||
+      this.ticketsFilter.selectedPriorityLevels.length > 0 ||
+      this.ticketsFilter.customDateRange ||
+      this.ticketsFilter.startDate && this.ticketsFilter.endDate
   }
   getStatus(selectedStatus) {
     return selectedStatus.join().toLowerCase();
