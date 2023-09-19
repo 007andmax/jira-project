@@ -42,7 +42,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   @ViewChild('usersDp') usersDp: TicketsFilterDropDownComponent;
   @ViewChild('companyDp') companyDp: TicketsFilterCompaniesDropDownComponent;
   @ViewChild('techUsersDp') techUsersDp: TicketsFilterDropDownComponent;
-  @ViewChild('statusDp') statusDp: DropDownComponent;
   @ViewChild('priorityDp') priorityDp: TicketsFilterDropDownComponent;
   @ViewChild('tagsDp') tagsDp: TicketsFilterTagsComponent;
   @ViewChild('filterStatus') filterStatus: TicketsFilterStatusComponent;
@@ -291,7 +290,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.usersDp.clearWithOutChanges();
     if (!this.ticketsFilter.isDisbledCompany) this.companyDp.clearWithOutChanges();
     this.techUsersDp.clearWithOutChanges();
-    if (this.statusDp) this.statusDp.clearWithOutChanges();
     this.tagsDp.clearWithOutChanges();
     this.ticketsFilter.setCustomStatus(false);
     console.log("this.ticketsFilter", this.ticketsFilter);

@@ -71,4 +71,8 @@ export class TicketsFilterCompaniesDropDownComponent extends CompanyDropDownComp
   isSelected(data) {
     return this.selectedItems.find(item => (this.field) ? item[this.field] == data[this.field] : item == data);
   }
+
+  public trackById(index, item) {
+    return item.id;
+  }
 }

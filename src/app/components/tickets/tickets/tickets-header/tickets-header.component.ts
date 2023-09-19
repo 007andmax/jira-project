@@ -132,6 +132,9 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
   onAddTicket() {
     this.ticketsStateService.onToggleAddTicket();
   }
+  public trackById(index, item) {
+    return item.id;
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

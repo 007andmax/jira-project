@@ -85,4 +85,7 @@ export class TicketsFilterSearchComponent implements OnInit {
     this.list = [];
     this.ticketsFilter.setSearchText("");
   }
+  public trackById(index, item) {
+    return item.id;
+  }
 }
