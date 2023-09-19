@@ -48,7 +48,6 @@ export class TicketsFilterSearchComponent implements OnInit {
     this.onScroll();
   }
   private getTickets() {
-    console.log("this.ticketsListService.getBlockList()", this.ticketsListService.getBlockList());
     if (this.ticketsListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;
@@ -67,7 +66,6 @@ export class TicketsFilterSearchComponent implements OnInit {
     })
   }
   public onScroll() {
-    console.log("onScroll");
     this.infiniteScrollDisabled = true;
     this.getTickets();
   }

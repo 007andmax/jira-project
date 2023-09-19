@@ -133,7 +133,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.sub.add(onGetTicketsStatus);
     let onInitGlobalFilter = this.ticketsStateService.onInitGlobalFilter.subscribe((data: TicketGlobalFilter) => {
       this.globalFilter = new TicketGlobalFilter(JSON.parse(JSON.stringify(data)));
-      console.log("this.globalFilter", this.globalFilter);
       let selectedCompanies: Array<Company> = this.companiesState.getCompanies().filter(item => data.clientCompanyIds.some(companyId => companyId == item.id));
       if (selectedCompanies.length > 0) {
         this.companyDp.selectedItems = selectedCompanies;
@@ -293,7 +292,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.techUsersDp.clearWithOutChanges();
     this.tagsDp.clearWithOutChanges();
     this.ticketsFilter.setCustomStatus(false);
-    console.log("this.ticketsFilter", this.ticketsFilter);
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
     this.onChangeCounterFilter();
     if (this.listType !== 'RECURRING_TICKETS') this.getCount();
@@ -359,7 +357,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.techUsersNamesList = this.getTechUserList();
   }
   public onSelectDates(value) {
-    console.log("value", value);
     if (value.start !== '' && value.end !== '') {
       this.ticketsFilter.setStartDate(moment(new Date(value.start)).format('YYYY-MM-DD'));
       this.ticketsFilter.setEndDate(moment(new Date(value.end)).format('YYYY-MM-DD'));
@@ -428,7 +425,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.ticketsStateService.onChangeLeftPanelFilter(data);
   }
   applyFilters() {
-    console.log("this.ticketsFilter", this.ticketsFilter);
     if (!this.ticketsFilter.sortBy) this.setTypeFilterWithoutChange("ALL");
     this.ticketsFilter.setSearchText("");
     this.ticketsStateService.onInitFilter(this.ticketsFilter);

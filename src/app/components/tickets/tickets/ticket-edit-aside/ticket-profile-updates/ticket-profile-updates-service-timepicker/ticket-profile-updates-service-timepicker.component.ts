@@ -61,7 +61,6 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
       this.timePickerStart.on('selectTime', (data) => {
         this.changeStart();
         let startDate = new Date(this.timePickerStart.timepicker('getTime'));
-        console.log("startDate", startDate);
         if (this.editMode) {
           let editStartDate = new Date(this.start);
           startDate.setFullYear(editStartDate.getFullYear());

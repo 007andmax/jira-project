@@ -104,7 +104,6 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
 
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
       this.ticketsFilter = data;
-      console.log("this.ticketsFilter", this.ticketsFilter);
       this.showPreloader = true;
       document.body.querySelector(".main-container").scrollTo(0, 0);
       this.setDefaultScoll();

@@ -80,9 +80,7 @@ export class TicketsFilterCreatedDropDownComponent extends DropDownComponent {
 * @param {NgbDate} end - Object end from datepicker
 */
   public setSelectedDateModel(start, end) {
-    console.log("start", start);
     if (start && end) {
-
       const startDate = new Date(this.dateService.getDateFromBootstrap(start));
       const endDate = new Date(this.dateService.getDateFromBootstrap(end));
       this.changeSelectedDateModel(startDate, endDate);
