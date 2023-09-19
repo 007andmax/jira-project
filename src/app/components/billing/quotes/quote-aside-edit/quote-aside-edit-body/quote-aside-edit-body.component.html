@@ -3,34 +3,34 @@
     *ngIf="quote"
 >
     <div class="company-info">
-      <div class="qt-inputs-row">
-        <div class="qt-input-block qt-f50">
-            <app-drop-down
-                #companyDp
-                [title]="'Company Name'"
-                [placeholder]="'Select Company'"
-                [list]="companies"
-                [validate]="validate.getCompany()"
-                [errorMessage]="'Company is required'"
-                [editItem]="quoteCompany"
-                [field]="'name'"
-                [search]="true"
-                [change]="true"
-                [isDisabled]="true"
-            ></app-drop-down>
+        <div class="qt-inputs-row">
+            <div class="qt-input-block qt-f50">
+                <app-drop-down
+                    #companyDp
+                    [title]="'Company Name'"
+                    [placeholder]="'Select Company'"
+                    [list]="companies"
+                    [validate]="validate.getCompany()"
+                    [errorMessage]="'Company is required'"
+                    [editItem]="quoteCompany"
+                    [field]="'name'"
+                    [search]="true"
+                    [change]="true"
+                    [isDisabled]="true"
+                ></app-drop-down>
+            </div>
         </div>
-      </div>
-      <div class="qt-inputs-row">
-        <div class="qt-input-block qt-f50">
-          <textarea
-            class="qt-input-block__textarea qt-mt-8 qt-w100"
-            [(ngModel)]="quote.description"
-            placeholder="Quote description in short words"
-            appTextArea
-            maxlength="255"
-          ></textarea>
+        <div class="qt-inputs-row">
+            <div class="qt-input-block qt-f50">
+                <textarea
+                    class="qt-input-block__textarea qt-mt-8 qt-w100"
+                    [(ngModel)]="quote.description"
+                    placeholder="Quote description in short words"
+                    appTextArea
+                    maxlength="255"
+                ></textarea>
+            </div>
         </div>
-      </div>
     </div>
     <div
         class="qt-df address-block"
@@ -277,6 +277,7 @@
                 ></app-product-list-quote>
                 <app-service-list-quote
                     #servicesList
+                    [isDisabled]="areTicketsPresented && areTicketsTerminated"
                     [quoteCompany]="quoteCompany"
                     (onSelect)="onAddService($event)"
                 ></app-service-list-quote>

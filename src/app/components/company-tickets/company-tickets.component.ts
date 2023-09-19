@@ -15,6 +15,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TicketStatus } from '../setting/ticket-settings-page/tickets-status/class/ticket-status';
 import { StatusColor } from '../tickets/class/status-color';
 import { AppService } from 'src/app/states/app/app.service';
+import { TicketsFilterComponent } from '../tickets/tickets/tickets-header/tickets-filter/tickets-filter.component';
 
 @Component({
   selector: 'company-tickets',
@@ -34,9 +35,11 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
   showPendingPreloader: boolean = false;
   idEditTicket: string = '';
   @ViewChild('header') header: TicketsHeaderComponent;
+  @ViewChild('filter') filter: TicketsFilterComponent;
   ticketsStatus: Array<TicketStatus> = [];
   container = document.body.querySelector(".main-container");
   isInitTickets: boolean = false;
+  toggleFilter: boolean = false;
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
     public cd: ChangeDetectorRef,
@@ -125,6 +128,13 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
       this.ticketsStatus = data;
     })
     this.sub.add(onGetTicketsStatus);
+    let onToggleFilter = this.ticketsStateService.onToggleFilter.subscribe(data => {
+      this.toggleFilter = data;
+    })
+    this.sub.add(onToggleFilter);
+  }
+  onToggleFilter(data) {
+    this.ticketsStateService.changeToggleFilter(data);
   }
   private getCount() {
     this.ticketsService.getCount(this.ticketsFilter.getDataForRequest()).subscribe(data => {
@@ -137,14 +147,17 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     this.isInitTickets = true;
     let ticket_id = id;
     let company = this.companiesStateService.getCompanies().find(item => item.id === ticket_id);
-    this.header.filter.setTypeFilterWithoutChange("ALL");
-    this.header.filter.companyDp.isDisabled = true;
-    this.header.filter.companyDp.editItem = company;
-    this.header.filter.ticketsFilter.setCompany(company);
-    this.header.filter.onChangeCounterFilter();
+    this.filter.setTypeFilterWithoutChange("ALL");
+    this.filter.companyDp.isDisabled = true;
+    this.filter.companyDp.editItem = company;
+    this.filter.ticketsFilter.setCompany(company);
+    this.filter.onChangeCounterFilter();
     this.ticketsFilter.setListType("ALL");
     this.ticketsFilter.setCompany(company);
-    this.header.filter.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.company.id === company.id));
+    this.ticketsFilter.isDisbledCompany = true;
+    this.header.ticketsFilter = this.ticketsFilter;
+    this.header.onChangeCounterFilter();
+    this.filter.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.find(companyInfo => companyInfo.companyId == company.id)));
     this.getCount();
     this.onScroll();
   }

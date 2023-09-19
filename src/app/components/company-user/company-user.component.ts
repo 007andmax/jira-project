@@ -59,10 +59,8 @@ export class CompanyUserComponent implements OnInit {
     private crmStateService: CrmStateService,
     private draftEmailStateService: DraftEmailStateService,
     private leftPanelStateService: LeftPanelStateService,
-    private marketingEmailService: MarketingEmailService,
     private usersRealTimeService: UsersRealTimeService,
-    private marketingEmailStateService: MarketingEmailStateService,
-    private websocketService: WebsocketService) { }
+    private marketingEmailStateService: MarketingEmailStateService) { }
 
   ngOnInit() {
     document.body.querySelector(".main-container").scrollTo(0, 0);
@@ -76,8 +74,6 @@ export class CompanyUserComponent implements OnInit {
       if (id) this.companiesStateService.setCompanyRoutingId(id);
       this.onInitFilters(id);
     });
-
-
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
       this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions, data.tags);
       this.selectAll = false;
@@ -86,10 +82,8 @@ export class CompanyUserComponent implements OnInit {
       this.onScroll();
     })
     this.userListService.addSubscription(geLefttFilter);
-
     if (this.companiesStateService.getCompanies().length > 0) this.companies = this.companiesStateService.getCompanies();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
-
       this.companies = data;
     })
     this.userListService.addSubscription(getOnCompanies);
@@ -98,7 +92,6 @@ export class CompanyUserComponent implements OnInit {
       this.getUsersList(data);
     })
     this.userListService.addSubscription(getOnUsers);
-
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === ARCHIVE_USER) {
@@ -107,15 +100,11 @@ export class CompanyUserComponent implements OnInit {
         if (this.confirmStateService.getConfirmAction() === DEARCHIVE_USER) {
           this.onDeArchiveUser(this.usersStateService.getUserForDeArchive().id);
         }
-
       }
     })
     this.userListService.addSubscription(getConfirm);
-
     let getChangeCompanies = this.usersStateService.getChangeUsers().subscribe((data: UserChange) => {
-
       if (data.action === 'USER_SAVED' || data.action === 'USER_ARCHIVED') {
-
         const reqIndex = this.reqUsers.findIndex((item) => item.id === data.data.id);
         if (reqIndex > -1) {
           if (!data.data.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === id)) {
@@ -124,13 +113,10 @@ export class CompanyUserComponent implements OnInit {
             this.reqUsers[reqIndex].onUpdate(data.data);
           }
         }
-        console.log("this.reqUsers[reqIndex]", this.reqUsers[reqIndex]);
         if (reqIndex === -1 && data.data.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === id)) {
           this.reqUsers.unshift(new User(data.data));
           this.users.unshift(new User(data.data));
           this.header.count = this.header.count + 1;
-
-          // this.onRelaodList();
         }
         const userIndex = this.users.findIndex((item) => item.id === data.data.id);
         if (userIndex > -1) {
@@ -145,10 +131,7 @@ export class CompanyUserComponent implements OnInit {
           if (userIndex > -1) this.users.splice(userIndex, 1);
         }
       }
-
-
       if (data.action === 'USERS_DEARCHIVED') {
-
         data.data.forEach(user => {
           const reqIndex = this.reqUsers.findIndex((item) => item.id === user.id);
           if (reqIndex > -1) this.reqUsers[reqIndex].onUpdate(user);
@@ -158,10 +141,8 @@ export class CompanyUserComponent implements OnInit {
             if (userIndex > -1) this.users.splice(userIndex, 1);
           }
         })
-
       }
       this.cd.detectChanges();
-
     })
     this.userListService.addSubscription(getChangeCompanies);
     this.jobTitleList = this.crmStateService.getJobTitleList();

@@ -36,7 +36,6 @@ export class ServiceReportComponent implements OnInit {
     private companiesStateService: CompaniesStateService,
     private usersStateService: UsersStateService,
     private reportsStateService: ReportsStateService,
-    private devicesStateService: DevicesStateService,
     private ticketReportStateService: TicketReportStateService) { }
 
   ngOnInit() {
@@ -173,14 +172,6 @@ export class ServiceReportComponent implements OnInit {
     };
     this.drawChart(top);
   }
-  public getDeviceName(data) {
-    if (!this.selectedClient) return "";
-    let list = this.devicesStateService.getAllDevices()[this.selectedClient.id];
-    if (!list) return "";
-    let find = list.find(item => item.id === data);
-    return (find) ? find.hostName : "";
-  }
-
 
   drawChart(data) {
     document.documentElement.classList.remove('no-d3-tooltip');

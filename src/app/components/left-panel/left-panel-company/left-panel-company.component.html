@@ -158,7 +158,7 @@
             Contracts
         </li>
     </a>
-    <li [ngClass]="{'--active':activePage === 'company-documents'}">
+
         <a
             class="clear-link-style"
             href
@@ -166,24 +166,26 @@
             target="_blank"
             appRightClickBlank
         >
+          <li [ngClass]="{'--active':activePage === 'company-documents'}">
             <span
                 class="documents-name-link"
                 (click)="goToCompanySection('documents')"
             >
                 Documents
             </span>
-        </a>
-        <div
-            class="qt-ml-auto qt-sz-20"
-            (click)="toogleCategoriesDocuments = !toogleCategoriesDocuments"
-            *ngIf="assignedDocumentCategories.length > 0"
-        >
-            <i
+            <div
+              class="qt-ml-auto qt-sz-20"
+              (click)="toogleCategoriesDocuments = !toogleCategoriesDocuments"
+              *ngIf="assignedDocumentCategories.length > 0"
+            >
+              <i
                 class="icn-sm report-caret-icon"
                 [ngClass]="{'show-categories-documents':toogleCategoriesDocuments}"
-            ></i>
-        </div>
-    </li>
+              ></i>
+            </div>
+          </li>
+        </a>
+
     <ul
         class="categories"
         *ngIf="toogleCategoriesDocuments"

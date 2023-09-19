@@ -7,6 +7,7 @@ import { TicketProfile } from '../../../class/ticket-profile';
 import { TicketsListService } from '../../../services/tickets-list.service';
 import { AddAssignedUserComponent } from '../../../ticket-edit-aside/add-assigned-user/add-assigned-user.component';
 import { TicketProfileFormUpdate } from '../../../ticket-edit-aside/class/ticket-profile-form-update';
+import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-state.service';
 
 @Component({
   selector: 'ticket-detail-profile-form-update-header',
@@ -26,6 +27,7 @@ export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
   selectedUsers: Array<CurrentUser> = [];
   listTechUsers: Array<User> = [];
   constructor(public ticketsListService: TicketsListService,
+    public ticketStateService: TicketStateService,
     public usersStateService: UsersStateService,) { }
 
 
@@ -34,6 +36,12 @@ export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
     this.usersForUpdate = this.getUsersForUpdate(this.ticketProfileFormUpdate.noteType);
     this.listTechUsers = this.getUsersForUpdate("PRIVATE");
     if (this.tab == "SERVICE" || this.tab == "PRODUCT") this.ticketProfileFormUpdate.setTechUser(this.currentUser);
+  }
+  isShowAssignedUser() {
+    if (this.tab == "SERVICE") {
+      return this.ticketStateService.isShowAddService();
+    }
+    return true;
   }
   isSelected(data) {
     return this.ticketProfileFormUpdate.getTechUser().id === data.id;

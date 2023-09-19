@@ -12,6 +12,8 @@ import { UsersStateService } from '../users/users-state.service';
 import { WebsocketStateService } from '../websocket/websocket-state.service';
 import { CompanyAssigned } from 'src/app/components/companies/class/company-assigned';
 import { CustomerPortalStateService } from '../customer-portal/customer-portal-state.service';
+import { DevicesStateService } from '../devices/devices-state.service';
+import { CompanyDeviceCount } from 'src/app/components/companies/class/company-device-count';
 
 @Injectable({
   providedIn: 'root'
@@ -20,11 +22,13 @@ export class CompaniesStateService {
   allCompanies = [];
   lightAllCompanies = [];
   lightClientsCompanies = [];
+  devicesCounts: Array<CompanyDeviceCount> = [];
   isInitLightAllCompanies: boolean = false;
   isInitLightClientsCompanies: boolean = false;
   onLightCompanies: EventEmitter<any> = new EventEmitter();
   onLightClientsCompanies: EventEmitter<any> = new EventEmitter();
   onChangeSelectedCompanyId: EventEmitter<any> = new EventEmitter();
+  onChangeDevicesCount: EventEmitter<any> = new EventEmitter();
   onGetCompanies: EventEmitter<any> = new EventEmitter();
   onChangeCompanies: EventEmitter<CompanyUpdate> = new EventEmitter();
   showAsideForAdd: EventEmitter<any> = new EventEmitter();
@@ -47,6 +51,7 @@ export class CompaniesStateService {
     private usersStateService: UsersStateService,
     private websocketStateService: WebsocketStateService,
     public customerPortalStateService: CustomerPortalStateService,
+    private devicesStateService: DevicesStateService,
     private websocketService: WebsocketService) {
   }
   public onInit() {
@@ -93,6 +98,21 @@ export class CompaniesStateService {
         this.initSubscriptions();
       }
     })
+    this.devicesStateService.onChangeDeviceCount.subscribe(data => {
+      let index = this.devicesCounts.findIndex(item => item.companyId === data.data.companyId);
+      if (index > -1) {
+        this.devicesCounts[index].setCount(data.data.count);
+      } else {
+        this.devicesCounts.push(new CompanyDeviceCount(data.data));
+      }
+      this.onChangeDevicesCount.emit(this.devicesCounts);
+    })
+  }
+  public getDevicesCounts() {
+    return this.devicesCounts;
+  }
+  public setDevicesCounts(data) {
+    this.devicesCounts = data;
   }
   public getCompanyIdForassignedDocumentCategory() {
     return this.companyIdForassignedDocumentCategory;

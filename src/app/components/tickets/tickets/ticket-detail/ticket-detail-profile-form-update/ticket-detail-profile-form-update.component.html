@@ -78,7 +78,7 @@
             appDisabledBtn
             #updateBtn="disabled"
             (onClick)="update()"
-            *ngIf="tab !== 'QUICK_SUPPORT'"
+            *ngIf="isShowAddUpdate()"
         >
             <span>Post</span>
             <app-preloader-ticket *ngIf="isUpdate"></app-preloader-ticket>

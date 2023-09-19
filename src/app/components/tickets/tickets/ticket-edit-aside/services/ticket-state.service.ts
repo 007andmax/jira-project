@@ -1,5 +1,4 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { ServiceAgreementsService } from 'src/app/services/service-agreements/service-agreements.service';
 import { RecurringService } from 'src/app/services/recurring/recurring.service';
 import { TicketProfileUpdate } from '../../class/ticket-profile-update';
 import { TicketProfileService } from '../../class/ticket-profile-service';
@@ -16,6 +15,8 @@ import { DeviceCompany } from 'src/app/components/company-devices/class/device-c
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 import { Subscription } from 'rxjs';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { ContractsService } from 'src/app/services/contracts/contracts.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Injectable({
   providedIn: 'root'
@@ -47,13 +48,14 @@ export class TicketStateService {
   onGetDevices: EventEmitter<any> = new EventEmitter();
   devices: Array<DeviceCompany> = [];
   sub: Subscription = new Subscription();
-  constructor(private serviceAgreementsService: ServiceAgreementsService,
+  constructor(private contractsService: ContractsService,
     private recurringService: RecurringService,
     private ticketsRealTimeService: TicketsRealTimeService,
     private ticketsService: TicketsService,
     private devicesService: DevicesService,
     private devicesStateService: DevicesStateService,
     private websocketService: WebsocketService,
+    private permissionsService: PermissionsService,
     public customerPortalStateService: CustomerPortalStateService,) {
     this.ticketsRealTimeService.changeTicket.subscribe(newChange => {
       this.changeUpdatesTicket.emit(newChange);
@@ -93,6 +95,13 @@ export class TicketStateService {
         if (this.devices.length > 0 && this.devicesStateService.getIsInitWebSocket()) this.sendDeviceStatusRequest(companyID, this.devices.filter(item => item.agentId).map(item => item.agentId));
       }
     });
+    let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
+      if (companyID == newChange.data.clientCompanyId) {
+        this.devicesStateService.changeDevice(this.devices, newChange);
+        this.onGetDevices.emit(this.devices);
+      }
+    })
+    this.sub.add(onDeviceUninstalled);
     let onInitWebSocket = this.devicesStateService.onInitWebSocket.subscribe(data => {
       if (this.devices.length > 0 && this.devicesStateService.getIsInitWebSocket()) this.sendDeviceStatusRequest(companyID, this.devices.filter(item => item.agentId).map(item => item.agentId));
     })
@@ -193,7 +202,7 @@ export class TicketStateService {
       this.servicesForTicket = res.filter(item => item.canUseInTicket);
       this.servicesForTicket.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-      if (!this.customerPortalStateService.isCustomerPortal) this.getServiceAgreements(ticketProfile);
+      if (!this.customerPortalStateService.isCustomerPortal && this.permissionsService.isAllowed("VIEW_SERVICE_AGREEMENTS")) this.getServiceAgreements(ticketProfile);
       this.servicesList.emit(this.servicesForTicket);
     })
   }
@@ -211,13 +220,16 @@ export class TicketStateService {
   }
 
   private getServiceAgreements(ticketProfile) {
-    this.serviceAgreementsService.getServiceAgreements().subscribe((data: any) => {
-      let Agreements = data.filter((el) => el.company.id === ticketProfile.company.id)
+    this.contractsService.getServiceAgreementsByCompany(ticketProfile.company.id).subscribe((data: any) => {
+      let Agreements = data;
       this.areTicketsPresented = (Agreements.length > 0) ? true : false;
       this.areTicketsTerminated = Agreements.every((el) => {
         return el.status === 'EXPIRED' || el.status === 'TERMINATED'
       })
     })
+  }
+  public isShowAddService() {
+    return (this.areTicketsPresented && !this.areTicketsTerminated || !this.areTicketsPresented) && this.permissionsService.isAllowed("VIEW_SERVICE_AGREEMENTS");
   }
   public setProductForRemove(data) {
     this.productForRemove = data;
@@ -245,6 +257,9 @@ export class TicketStateService {
   }
   public isTicketsTerminated() {
     return this.areTicketsTerminated;
+  }
+  public setDevices(data) {
+    this.devices = data;
   }
   public getOnGetServicesList() {
     return this.servicesList;

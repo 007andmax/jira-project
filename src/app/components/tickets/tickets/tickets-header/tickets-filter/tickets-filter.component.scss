@@ -1,7 +1,6 @@
 @import "./src/assets/styles/variable";
 
 .left-panel-ng2__content--filters {
-  display: flex;
   app-select-search {
     margin-right: 8px;
     &:last-child {
@@ -20,15 +19,13 @@
     }
 
     &::before {
-      color: $gray-900;
-      font-weight: 600;
-      line-height: 20px;
+      color: $gray-500;
+      font-size: 13px;
+      font-weight: 500;
     }
   }
 
   .search-company {
-    width: 34%;
-    margin-right: 8px;
     @media (max-width: 767px) {
       width: 100%;
     }
@@ -41,9 +38,6 @@
   }
 
   .search-users {
-    width: 23%;
-    margin-right: 8px;
-
     @media (max-width: 767px) {
       width: 100%;
     }
@@ -56,9 +50,6 @@
   }
 
   .search-tech-users {
-    width: 23%;
-    margin-right: 8px;
-
     @media (max-width: 767px) {
       width: 100%;
     }
@@ -70,10 +61,13 @@
     }
   }
 
-  .search-status {
-    width: 20%;
-    margin-right: 8px;
+  tickets-filter-status {
+    @media (max-width: 767px) {
+      width: 100%;
+    }
+  }
 
+  .search-status {
     @media (max-width: 767px) {
       width: 100%;
     }
@@ -110,5 +104,16 @@
     width: 100%;
     overflow-x: hidden;
     overflow-y: auto;
+  }
+}
+
+/deep/ .qt-page-list__header-title {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: $gray-900;
+
+  @media (max-width: 767px) {
+    color: $white;
   }
 }

@@ -12,6 +12,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { ModalAgentLinkComponent } from 'src/app/services/modal/modal-agent-link/modal-agent-link.component';
 import { AppService } from 'src/app/states/app/app.service';
+import { Device } from 'src/app/components/company-devices/class/device';
+import { DevicesService } from 'src/app/services/devices/devices.service';
+import { TicketStateService } from '../services/ticket-state.service';
 
 @Component({
   selector: 'app-ticket-profile-actions',
@@ -22,6 +25,7 @@ import { AppService } from 'src/app/states/app/app.service';
 export class TicketProfileActionsComponent implements OnInit, OnDestroy {
   @Output() onClaimTicket = new EventEmitter();
   @Input() ticketProfile: TicketProfile = new TicketProfile();
+  devices: Array<Device> = [];
   currentUser: CurrentUser;
   movedWay: boolean = false;
   sub = new Subscription();
@@ -32,7 +36,9 @@ export class TicketProfileActionsComponent implements OnInit, OnDestroy {
     private usersStateService: UsersStateService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
+    private devicesService: DevicesService,
     public appService: AppService,
+    private ticketStateService: TicketStateService
   ) { }
 
 
@@ -52,13 +58,20 @@ export class TicketProfileActionsComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+    this.devicesService.getCompanyDevices(this.ticketProfile.company.id).subscribe((res: any) => {
+      this.devices = (res[this.ticketProfile.company.id]) ? JSON.parse(JSON.stringify(res[this.ticketProfile.company.id])).map(item => new Device(item)) : [];
+      this.ticketStateService.setDevices(this.devices);
+    });
+    let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
+      if (this.ticketProfile.company.id == newChange.data.clientCompanyId) this.devicesStateService.changeDevice(this.devices, newChange);
+    })
+    this.sub.add(onDeviceUninstalled);
   }
   showAgentLink() {
     if (!this.appService.checkMobile()) return;
     const modalRef = this.modalService.open(ModalAgentLinkComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.devices = this.getDevicesByCompany();
     modalRef.componentInstance.ticketProfile = this.ticketProfile;
-
+    modalRef.componentInstance.devices = this.devices;
   }
   onMoveToTrash() {
     this.ticketsService.trashTicket(this.ticketProfile.id, this.movedWay).subscribe(res => {
@@ -74,13 +87,9 @@ export class TicketProfileActionsComponent implements OnInit, OnDestroy {
       })
     }
   }
-  getDevicesByCompany() {
-    let find = (this.devicesStateService.getAllDevices()) ? this.devicesStateService.getAllDevices()[this.ticketProfile.company.id] : false;
-    return (find) ? find : []
-  }
   isDeviceToLink() {
     if (!this.ticketProfile.agent || !this.ticketProfile.agent.deviceId) return true;
-    return this.getDevicesByCompany().filter((agent) => agent.id !== this.ticketProfile.agent.deviceId).length;
+    return this.devices.filter((agent) => agent.id !== this.ticketProfile.agent.deviceId).length;
   };
 
   claimTicket() {

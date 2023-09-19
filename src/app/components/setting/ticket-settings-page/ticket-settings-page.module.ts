@@ -13,6 +13,7 @@ import { Onlynumber } from 'src/app/helpers/Onlynumber';
 import { CannedResponsesComponent } from './canned-responses/canned-responses.component';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
+import { TicketsPriorityComponent } from './tickets-priority/tickets-priority.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.m
         TicketSettingsComponent,
         TicketsStatusComponent,
         Onlynumber,
-        CannedResponsesComponent
+        CannedResponsesComponent,
+        TicketsPriorityComponent
     ],
     imports: [
         CommonModule,

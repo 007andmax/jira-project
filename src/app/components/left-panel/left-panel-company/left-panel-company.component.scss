@@ -24,7 +24,7 @@
   color: $white !important;
 }
 .show-categories-documents {
-  transform: rotate(180deg);
+  transform: rotate(180deg) translateY(10px);
 }
 _menu-info {
   display: flex;
@@ -68,7 +68,6 @@ _menu-info {
   position: relative;
   display: block;
   padding: 0px !important;
-  margin: 0px 20px 0px 0px;
 }
 .documents-name-link {
     display: flex;

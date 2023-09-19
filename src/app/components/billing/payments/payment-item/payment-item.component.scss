@@ -27,4 +27,8 @@ tr.--selected {
   p {
     @include body-m;
   }
+
+  span {
+    display: block;
+  }
 }

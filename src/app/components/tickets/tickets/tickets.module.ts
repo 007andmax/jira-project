@@ -9,6 +9,7 @@ import { TicketsTableItemModule } from './tickets-table/tickets-table-item/ticke
 import { TicketsRoutingModule } from './tickets-routing.module';
 import { ServicesListModule } from '../../shared/services-list/services-list.module';
 import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
+import { TicketsFilterModule } from './tickets-header/tickets-filter/tickets-filter.module';
 
 
 
@@ -25,8 +26,8 @@ import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
         InfiniteScrollModule,
         TicketsTableItemModule,
         TicketsRoutingModule,
-        ServicesListModule
-
+        ServicesListModule,
+        TicketsFilterModule
     ],
 
 

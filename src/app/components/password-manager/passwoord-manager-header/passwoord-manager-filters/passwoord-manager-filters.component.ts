@@ -13,6 +13,8 @@ import { FilterPasswordManager } from '../../class/filter-password-manager';
 import { PasswordDeviceUser } from '../../class/password-device-user';
 import { PasswordRecordCategories } from '../../class/password-record-categories';
 import { PasswoordManagerDevicesUsersComponent } from '../../passwoord-manager-devices-users/passwoord-manager-devices-users.component';
+import { DevicesService } from 'src/app/services/devices/devices.service';
+import { Device } from 'src/app/components/company-devices/class/device';
 
 @Component({
   selector: 'app-passwoord-manager-filters',
@@ -42,6 +44,7 @@ export class PasswoordManagerFiltersComponent implements OnInit, OnDestroy {
     private usersStateService: UsersStateService,
     public appService: AppService,
     public cd: ChangeDetectorRef,
+    private devicesService: DevicesService,
     public devicesStateService: DevicesStateService) { }
 
 
@@ -61,9 +64,10 @@ export class PasswoordManagerFiltersComponent implements OnInit, OnDestroy {
     this.passwordManagerStateService.onFilterByCategory.subscribe((data) => {
       this.categoriesSelect.onSelect(data);
     })
-    this.devicesStateService.getOnDevices().subscribe(data => {
-      this.cd.detectChanges();
+    let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
+      if (this.selectedCompany.id == newChange.data.clientCompanyId) this.devicesStateService.changeDevice(this.devicesUsers, newChange);
     })
+    this.sub.add(onDeviceUninstalled);
   }
   public onClearAll() {
     this.filter.setCategory(null);
@@ -97,15 +101,22 @@ export class PasswoordManagerFiltersComponent implements OnInit, OnDestroy {
         let isArchived = item.deletedAt || !company;
         return !isArchived && item.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.selectedCompany.id)
       });
-      let devices = (this.devicesStateService.getAllDevices()[this.selectedCompany.id]) ? this.devicesStateService.getAllDevices()[this.selectedCompany.id] : [];
       users.forEach(item => {
         this.devicesUsers.push(new PasswordDeviceUser(item.id, `${item.firstName} ${item.lastName}`, 'USER'));
       })
+      this.getDevices();
+    }
+  }
+  getDevices() {
+    this.filter.setPreloaderDevices(true);
+    this.devicesService.getCompanyDevices(this.selectedCompany.id).subscribe((data: any) => {
+      let devices = (data[this.selectedCompany.id]) ? JSON.parse(JSON.stringify(data[this.selectedCompany.id])).map(item => new Device(item)) : [];
       devices.forEach(item => {
         this.devicesUsers.push(new PasswordDeviceUser(item.id, this.getLabelDevice(item), 'DEVICE'));
       })
       this.disabledDevicesUsers = false;
-    }
+      this.filter.setPreloaderDevices(false);
+    });
   }
   selectDate(data) {
     this.filter.setDate(data);
@@ -143,14 +154,10 @@ export class PasswoordManagerFiltersComponent implements OnInit, OnDestroy {
         let isArchived = item.deletedAt || !company;
         return !isArchived && item.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === data.id)
       });
-      let devices = (this.devicesStateService.getAllDevices()[data.id]) ? this.devicesStateService.getAllDevices()[data.id] : [];
       users.forEach(item => {
         this.devicesUsers.push(new PasswordDeviceUser(item.id, `${item.firstName} ${item.lastName}`, 'USER'));
       })
-      devices.forEach(item => {
-        this.devicesUsers.push(new PasswordDeviceUser(item.id, this.getLabelDevice(item), 'DEVICE'));
-      })
-      this.disabledDevicesUsers = false;
+      this.getDevices();
     } else {
       this.devicesUsers = [];
       this.disabledDevicesUsers = true;

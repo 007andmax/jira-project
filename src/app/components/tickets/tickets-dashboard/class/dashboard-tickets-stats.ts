@@ -1,4 +1,5 @@
 import * as moment from 'moment';
+import { TicketsPriority } from 'src/app/components/setting/ticket-settings-page/tickets-priority/class/tickets-priority';
 
 export class DashboardTicketsStats {
     startDate: string;
@@ -13,6 +14,7 @@ export class DashboardTicketsStats {
     RECURRING_TICKETS_CLOSED: number;
     RECURRING_TICKETS_OPEN: number;
     UNASSIGNED: number;
+    counts: any = {};
     constructor() {
         let startDate = new Date();
         let endDate = new Date();
@@ -49,11 +51,16 @@ export class DashboardTicketsStats {
             this.endDate = moment(endDate).format('YYYY-MM-DD');
         }
     }
-    public setData(data) {
+    public setData(data, ticketsPriorities: Array<TicketsPriority>) {
         this.CLOSED = data.CLOSED;
-        this.HIGH = data.HIGH;
-        this.LOW = data.LOW;
-        this.MEDIUM = data.MEDIUM;
+        this.counts = data;
+        ticketsPriorities.forEach(item => {
+            let priority = item.name.toLocaleUpperCase().replace(" ", "_");
+            this.counts[priority] = data[priority];
+        });
+        /*  this.HIGH = data.HIGH;
+          this.LOW = data.LOW;
+          this.MEDIUM = data.MEDIUM;*/
         this.ON_HOLD = data.ON_HOLD;
         this.OPEN = data.OPEN;
         this.RECURRING_TICKETS = data.RECURRING_TICKETS;
@@ -61,7 +68,284 @@ export class DashboardTicketsStats {
         this.RECURRING_TICKETS_OPEN = data.RECURRING_TICKETS_OPEN;
         this.UNASSIGNED = data.UNASSIGNED;
     }
-
+    public getDataForPriorityCounts(ticketsPriorities: Array<TicketsPriority>) {
+        let data = {
+            "CLOSED": {
+                "excludeTrashSpam": true,
+                "groupFieldFilters": [
+                    {
+                        "fieldFilterDtos": [
+                            {
+                                "path": "status",
+                                "operator": "EQ",
+                                "values": [
+                                    "COMPLETED"
+                                ]
+                            },
+                            {
+                                "path": "ticketSource",
+                                "operator": "NOT_EQ",
+                                "values": [
+                                    "FROM_RECURRING_TICKET"
+                                ]
+                            },
+                            {
+                                "path": "closedAt",
+                                "operator": "GT",
+                                "values": [
+                                    this.startDate
+                                ]
+                            },
+                            {
+                                "path": "closedAt",
+                                "operator": "LT",
+                                "values": [
+                                    this.endDate
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "ON_HOLD": {
+                "excludeTrashSpam": true,
+                "groupFieldFilters": [
+                    {
+                        "fieldFilterDtos": [
+                            {
+                                "path": "status",
+                                "operator": "EQ",
+                                "values": [
+                                    "ON_HOLD"
+                                ]
+                            },
+                            {
+                                "path": "createdAt",
+                                "operator": "GT",
+                                "values": [
+                                    this.startDate
+                                ]
+                            },
+                            {
+                                "path": "createdAt",
+                                "operator": "LT",
+                                "values": [
+                                    this.endDate
+                                ]
+                            },
+                            {
+                                "path": "ticketSource",
+                                "operator": "NOT_EQ",
+                                "values": [
+                                    "FROM_RECURRING_TICKET"
+                                ]
+                            },
+                        ]
+                    }
+                ]
+            },
+            "OPEN": {
+                "excludeTrashSpam": true,
+                "groupFieldFilters": [
+                    {
+                        "fieldFilterDtos": [
+                            {
+                                "operator": "EQ",
+                                "path": "status",
+                                "values": [
+                                    "IN_PROGRESS"
+                                ]
+                            },
+                            {
+                                "path": "createdAt",
+                                "operator": "GT",
+                                "values": [
+                                    this.startDate
+                                ]
+                            },
+                            {
+                                "path": "createdAt",
+                                "operator": "LT",
+                                "values": [
+                                    this.endDate
+                                ]
+                            },
+                            {
+                                "path": "ticketSource",
+                                "operator": "NOT_EQ",
+                                "values": [
+                                    "FROM_RECURRING_TICKET"
+                                ]
+                            },
+                        ]
+                    }
+                ]
+            },
+            "RECURRING_TICKETS": {
+                "excludeTrashSpam": true,
+                "groupFieldFilters": [
+                    {
+                        "fieldFilterDtos": [
+                            {
+                                "path": "ticketSource",
+                                "operator": "EQ",
+                                "values": [
+                                    "FROM_RECURRING_TICKET"
+                                ]
+                            },
+                            {
+                                "path": "createdAt",
+                                "operator": "GT",
+                                "values": [
+                                    this.startDate
+                                ]
+                            },
+                            {
+                                "path": "createdAt",
+                                "operator": "LT",
+                                "values": [
+                                    this.endDate
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "offset": 0
+            },
+            "UNASSIGNED": {
+                "excludeTrashSpam": true,
+                "groupFieldFilters": [
+                    {
+                        "fieldFilterDtos": [
+                            {
+                                "path": "status",
+                                "operator": "NULL"
+                            },
+                            {
+                                "path": "createdAt",
+                                "operator": "GT",
+                                "values": [
+                                    this.startDate
+                                ]
+                            },
+                            {
+                                "path": "createdAt",
+                                "operator": "LT",
+                                "values": [
+                                    this.endDate
+                                ]
+                            },
+                            {
+                                "path": "ticketSource",
+                                "operator": "NOT_EQ",
+                                "values": [
+                                    "FROM_RECURRING_TICKET"
+                                ]
+                            },
+                        ]
+                    },
+                    {
+                        "fieldFilterDtos": [
+                            {
+                                "path": "reportedAsSpamAt",
+                                "operator": "NULL"
+                            },
+                            {
+                                "path": "markedAsSpamAt",
+                                "operator": "NULL"
+                            },
+                            {
+                                "path": "trash",
+                                "operator": "EQ",
+                                "values": [
+                                    false
+                                ]
+                            },
+                        ],
+                        "predicateRule": "OR"
+                    }
+                ]
+            },
+            "RECURRING_TICKETS_CLOSED": {
+                "excludeTrashSpam": true,
+                "groupFieldFilters": [
+                    {
+                        "fieldFilterDtos": [
+                            {
+                                "path": "status",
+                                "operator": "EQ",
+                                "values": [
+                                    "COMPLETED"
+                                ]
+                            },
+                            {
+                                "path": "ticketSource",
+                                "operator": "EQ",
+                                "values": [
+                                    "FROM_RECURRING_TICKET"
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "offset": 0
+            },
+            "RECURRING_TICKETS_OPEN": {
+                "excludeTrashSpam": true,
+                "groupFieldFilters": [
+                    {
+                        "fieldFilterDtos": [
+                            {
+                                "path": "status",
+                                "operator": "NOT_EQ",
+                                "values": [
+                                    "COMPLETED"
+                                ]
+                            },
+                            {
+                                "path": "ticketSource",
+                                "operator": "EQ",
+                                "values": [
+                                    "FROM_RECURRING_TICKET"
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "offset": 0
+            },
+        }
+        ticketsPriorities.forEach(item => {
+            let priority = item.name.toLocaleUpperCase().replace(" ", "_");
+            data[priority] = this.getPriorityLevalPayload(item.id)
+        });
+        return data;
+    }
+    public getPriorityLevalPayload(id) {
+        return {
+            "excludeTrashSpam": true,
+            "groupFieldFilters": [
+                {
+                    "fieldFilterDtos": [
+                        {
+                            "path": "priorityLevel.id",
+                            "operator": "EQ",
+                            "values": [
+                                id
+                            ]
+                        },
+                        {
+                            "path": "ticketSource",
+                            "operator": "NOT_EQ",
+                            "values": [
+                                "FROM_RECURRING_TICKET"
+                            ]
+                        },
+                    ]
+                }
+            ]
+        }
+    }
     public getDataForRequest() {
         return {
             "CLOSED": {

@@ -23,6 +23,11 @@ export class TicketDetailChangeStatusComponent extends TicketChangeStatusCompone
       this.setList();
     })
     this.sub.add(onGetTicketsStatus);
+    let getOnUpdateTicket = this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
+      this.setList();
+      this.cd.detectChanges();
+    })
+    this.sub.add(getOnUpdateTicket);
   }
   setList() {
     this.list = [];

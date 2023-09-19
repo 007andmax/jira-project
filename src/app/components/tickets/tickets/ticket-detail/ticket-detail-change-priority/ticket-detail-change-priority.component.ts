@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnInit } from '@angular/core';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -7,6 +7,10 @@ import { TitleListType } from '../../tickets-header/class/title-list-type';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tickets-permissions.service';
+import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
+import { TicketsPriority } from 'src/app/components/setting/ticket-settings-page/tickets-priority/class/tickets-priority';
+import { StatusColor } from '../../../class/status-color';
+import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 
 @Component({
   selector: 'ticket-detail-change-priority',
@@ -15,27 +19,52 @@ import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tick
 })
 export class TicketDetailChangePriorityComponent extends DropDownComponent {
   @Input() ticketProfile: TicketProfile = new TicketProfile();
-  list: Array<TitleListType> = [new TitleListType('High Priority', 'HIGH'),
-  new TitleListType('Medium Priority', 'MEDIUM'),
-  new TitleListType('Low Priority', 'LOW')];
+  selectedPriority: TicketsPriority;
+  statusColors: Array<StatusColor> = [];
+  list: Array<TicketsPriority> = [];
   constructor(public elRef: ElementRef,
     public ticketsPermissionsService: TicketsPermissionsService,
     public companiesStateService: CompaniesStateService,
     public customerPortalStateService: CustomerPortalStateService,
     public usersStateService: UsersStateService,
+    private ticketsStateService: TicketsStateService,
+    private leftPanelService: LeftPanelService,
+    public cd: ChangeDetectorRef,
     public ticketsService: TicketsService) {
     super(elRef, companiesStateService, usersStateService, customerPortalStateService);
 
   }
   ngOnInit() {
     this.class = ['qt-dropdown'];
-    this.field = 'title';
+    this.field = 'name';
     this.isBlockClear = true;
     this.sort = false;
-    this.selectedItem = this.list.find(item => item.type == this.ticketProfile.priorityLevel);
+    this.selectedItem = this.ticketProfile.priorityLevel;
     if (this.class.length > 0) this.class = this.class;
     if (this.uiType) this.class.push(this.uiType);
     this.isDisabled = !(this.ticketsPermissionsService.isActionVisible('update', this.ticketProfile, null, null) && (this.customerPortalStateService.isCustomerPortal && this.isAddNoteForCustomerUser() || !this.customerPortalStateService.isCustomerPortal));
+    if (this.ticketsStateService.getTicketsPriorities().length === 0) {
+      this.ticketsService.getTicketsPriorities().subscribe((data: any) => {
+        this.list = data.priorityLevels.map(item => new TicketsPriority(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+          1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+        this.ticketsStateService.onSetTicketsPriorities(this.list);
+      })
+    } else {
+      this.list = this.ticketsStateService.getTicketsPriorities();
+    }
+    if (this.ticketsStateService.getListStatusColor().length === 0) {
+      this.leftPanelService.getColors().subscribe((data: any) => {
+        this.statusColors = data.map(item => new StatusColor(item.borderColor, item.textColor))
+        this.ticketsStateService.onColorStatus(this.statusColors);
+      })
+    } else {
+      this.statusColors = this.ticketsStateService.getListStatusColor();
+    }
+    let getOnUpdateTicket = this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
+      this.isDisabled = !(this.ticketsPermissionsService.isActionVisible('update', this.ticketProfile, null, null) && (this.customerPortalStateService.isCustomerPortal && this.isAddNoteForCustomerUser() || !this.customerPortalStateService.isCustomerPortal));
+      this.selectedItem = this.ticketProfile.priorityLevel;
+      this.cd.detectChanges();
+    })
   }
   isAddNoteForCustomerUser() {
     return this.customerPortalStateService.checkEditTicket(this.usersStateService.getCurrentUser(), this.ticketProfile.createdUserId, this.ticketProfile.companyId);
@@ -47,7 +76,7 @@ export class TicketDetailChangePriorityComponent extends DropDownComponent {
       "ids": [
         this.ticketProfile.id
       ],
-      "value": data.type
+      "value": data.id
     }, this.ticketProfile.number).subscribe(res => {
 
     })

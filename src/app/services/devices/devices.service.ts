@@ -36,7 +36,9 @@ export class DevicesService {
   public runScanDevices(companyId) {
     return this.http.get(this.apiUrl + `devices/refreshNetworkScan?companyId=${companyId}`);
   }
-
+  public getCountByCompany(ids) {
+    return this.http.post(this.apiUrl + `devices/count`, { companies: ids });
+  }
   public remoteInstall(data) {
     return this.http.post(this.apiUrl + `devices/remoteInstall`, data);
   }

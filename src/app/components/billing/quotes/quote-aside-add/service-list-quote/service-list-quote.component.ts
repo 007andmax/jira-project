@@ -10,6 +10,7 @@ import { QuoteService } from 'src/app/services/quote/quote.service';
 export class ServiceListQuoteComponent implements OnInit {
   @Input() quoteCompany: any;
   @Input() services: Array<Service> = [];
+  @Input() isDisabled: boolean = false;
   @Output() onSelect = new EventEmitter<any>();
   constructor(private quoteServices: QuoteService) { }
 

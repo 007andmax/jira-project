@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter, ElementRef, OnDestroy } from '@angular/core';
-import { ServiceAgreementsService } from 'src/app/services/service-agreements/service-agreements.service';
 import { TicketProfile } from '../../../class/ticket-profile';
 import { RecurringService } from 'src/app/services/recurring/recurring.service';
 import { TicketProfileFormService } from '../../class/ticket-profile-form-service';
@@ -13,6 +12,7 @@ import { Subscription } from 'rxjs';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
 import { TicketProfileUpdatesServiceTimepickerComponent } from '../../ticket-profile-updates/ticket-profile-updates-service-timepicker/ticket-profile-updates-service-timepicker.component';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 
 @Component({
@@ -38,9 +38,9 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestr
   currentCompany = null;
   currentService: TicketProfileFormService = new TicketProfileFormService();
   sub: Subscription = new Subscription();
-  constructor(private serviceAgreementsService: ServiceAgreementsService,
-    private recurringService: RecurringService,
+  constructor(
     private elRef: ElementRef,
+    private permissionsService: PermissionsService,
     private ticketsStateService: TicketsStateService,
     public companiesStateService: CompaniesStateService,
     public ticketStateService: TicketStateService) { }
@@ -193,6 +193,9 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestr
   }
   public trackByIndex(index, item) {
     return index;
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

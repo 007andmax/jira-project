@@ -109,3 +109,80 @@
         </div>
     </li>
 </ul>
+<hr>
+<ul
+    class="app-left-panel__menu-expand menu-expand-show"
+    *ngIf="!customerPortalStateService.isCustomerPortal"
+>
+    <li class="qt-mt-12 name-custom-filter">
+        <span class="icon__filter-lines--gray-300 qt-sz-16 qt-bg-contain qt-dib qt-mr-4"></span>
+        Custom Filters
+    </li>
+    <ng-template
+        ngFor
+        let-filter
+        [ngForOf]="globalFilters"
+        [ngForTrackBy]="trackById"
+    >
+        <li
+            [ngClass]="{'--active': selectedGlobalFilter.id == filter.id}"
+            class="desktop-version filter-item"
+            (click)="setGlobalFilter(filter)"
+        >
+            <div [textContent]="filter.name"></div>
+            <div class="qt-df qt-ai-c">
+                <i
+                    class="icon__exclamation qt-bg-contain qt-sz-16 pointer qt-ml-4 qt-mr-6"
+                    container="body"
+                    placement="top"
+                    ngbTooltip="Some parameters of the filter have been deleted"
+                    *ngIf="filter.modified"
+                ></i>
+                <i
+                    class="icon__globe qt-bg-contain qt-sz-16 pointer qt-ml-4 qt-mr-6"
+                    container="body"
+                    placement="top"
+                    ngbTooltip="Global Filter"
+                    *ngIf="filter.global"
+                ></i>
+                <div
+                    class="qt-ml-auto"
+                    ngbDropdown
+                    [placement]="'bottom-right'"
+                    (click)="blockClick($event)"
+                >
+                    <div
+                        class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain actions-filter"
+                        id="dropdownBasic1"
+                        ngbDropdownToggle
+                    ></div>
+                    <ul
+                        class="qt-dropdown-menu"
+                        ngbDropdownMenu
+                        aria-labelledby="dropdownBasic1"
+                    >
+                        <li
+                            class="pointer"
+                            (click)="removeFilter(filter)"
+                            ngbDropdownItem
+                        >
+                            <div class="icon__remove qt-sz-20 qt-mr-12 qt-bg-contain pointer"></div>
+                            Delete
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+    </ng-template>
+    <div
+        *ngIf="showLoadMoreUpdates && globalFilters.length > 0"
+        class="button-loader"
+        (click)="getGLobalFilters()"
+    >
+        <span *ngIf="!showPreloaderGlobalFilters">+ Load more</span>
+        <span
+            *ngIf="showPreloaderGlobalFilters"
+            class="loading"
+        ></span>
+    </div>
+</ul>

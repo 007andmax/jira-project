@@ -56,7 +56,6 @@ export class AppComponent implements OnInit {
   showPreloader: boolean = true;
   isUsersInit: boolean = false;
   isCompaniesInit: boolean = false;
-  isDevicesInit: boolean = false;
   qtListHeaaderScroller;
   qtListBodyScroller;
   toggleLeftPanel: boolean = false;
@@ -212,17 +211,8 @@ export class AppComponent implements OnInit {
         }
       });
     })
-
-    //  this.userService.getCurrentUser();
-
-
     this.appService.onCheckMobile();
     window.addEventListener('resize', this.appService.onCheckMobile);
-
-    this.devicesState.getOnDevices().subscribe(data => {
-      this.isDevicesInit = true;
-      this.onCheckInitAll();
-    })
     this.usersStateService.getOnUsers().subscribe(data => {
       this.isUsersInit = true;
       this.onCheckInitAll();

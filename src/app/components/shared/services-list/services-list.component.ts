@@ -13,6 +13,7 @@ import { TYPE_QUOTE, TYPE_TICKET } from 'src/app/const/services';
 })
 export class ServicesListComponent implements OnInit {
   @ViewChild('products') products_dropDown: NgbDropdown;
+  @Input() isDisabled: boolean = false;
   @Input() editItem: any;
   @Input() itemList: any;
   @Output() serviceList: any;

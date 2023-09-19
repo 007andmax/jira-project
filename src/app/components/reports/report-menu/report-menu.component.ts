@@ -34,6 +34,7 @@ import { TechTicketReport } from '../class/tech-ticket-report';
 import { Subscription } from 'rxjs';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { PaymentsReport } from '../reports/payments-report/class/payments-report';
+import { SoftwareSummaryDevicesDroDownComponent } from '../reports/software-summary-report/software-summary-devices-dro-down/software-summary-devices-dro-down.component';
 
 
 @Component({
@@ -70,16 +71,16 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
   yearToDate = false;
   validate: ReportValidate = new ReportValidate();
   isDisabledCompany: boolean = false;
-  allDevices = [];
   devices = [];
   sub: Subscription = new Subscription();
   @Input() report = "";
   @Output() getReport = new EventEmitter<any>();
   @Output() onRequest = new EventEmitter<any>();
   @Output() onSelectedClient = new EventEmitter<any>();
-
   @ViewChild('durationsTechSaleDP') durationsTechSaleDP: DropDownComponent;
   @ViewChild('dp') datePicker: any;
+  @ViewChild('dpDevices') dpDevices: SoftwareSummaryDevicesDroDownComponent;
+
   constructor(private reportsService: ReportsService,
     private reportsStateService: ReportsStateService,
     private productService: ProductService,
@@ -96,21 +97,14 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.isDisabledCompany = true;
     }
     if (this.report === 'byCustomers') this.isDisabledCompany = true;
-    if (this.devicesStateService.getAllDevices()) this.allDevices = this.devicesStateService.getAllDevices();
-    let getOnDevices = this.devicesStateService.getOnDevices().subscribe((data) => {
-      this.allDevices = data;
-      if (this.selectedClient) this.getDevicesByCompany(this.selectedClient.id);
-      if (this.softwareSummaryReport.companyId) this.getDevicesByCompany(this.softwareSummaryReport.companyId);
-      if (this.hardwareSummaryReport.companyId) this.getDevicesByCompany(this.hardwareSummaryReport.companyId);
-      if (this.deviceIpSummary.companyId) this.getDevicesByCompany(this.deviceIpSummary.companyId);
+    let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
+      if (this.selectedClient && this.selectedClient.id == newChange.data.clientCompanyId) {
+        this.devicesStateService.changeDevice(this.devices, newChange);
+        if (this.dpDevices) this.dpDevices.reset(this.devices);
+      }
     })
-    this.sub.add(getOnDevices);
+    this.sub.add(onDeviceUninstalled);
     //  this.sub.add(getOnCompanies);
-  }
-
-  public getDevicesByCompany(companyId) {
-    this.devices = (this.devicesStateService.getAllDevices()[companyId]) ? this.devicesStateService.getAllDevices()[companyId] : [];
-
   }
   getSelectedClientName() {
     return (this.selectedClient) ? this.selectedClient.name.toLowerCase().split(' ').join('-') : '';
@@ -156,7 +150,6 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.softwareSummaryReport.setPreloaderSoft(false);
       this.deviceIpSummary.setPreloaderDevices(false);
       //this.deviceIpSummary.setPreloaderDevices(false);
-
       this.remoteConnectionReport.setPreloaderDevices(false);
     }, err => {
       this.softwareSummaryReport.resetSoft();
@@ -165,7 +158,6 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.hardwareSummaryReport.setPreloaderDevices(false);
       this.deviceIpSummary.setPreloaderDevices(false);
       // this.deviceIpSummary.setPreloaderDevices(false);
-
       this.remoteConnectionReport.setPreloaderDevices(false);
     })
   }
@@ -246,7 +238,6 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.deviceIpSummary.setCompanyId(null);
       this.remoteConnectionReport.setCompanyId(null);
       this.techService.setCompanyId(null);
-      this.getDevicesByCompany(null);
       this.softwareSummaryReport.resetSoft();
     } else {
       this.selectedClient = selectClient;
@@ -263,11 +254,11 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.hardwareSummaryReport.setCompanyId(selectClient.id);
       this.deviceIpSummary.setCompanyId(selectClient.id);
       this.remoteConnectionReport.setCompanyId(selectClient.id);
-      if (this.report !== 'software-summary' && this.report !== 'hardware-summary' && this.report !== 'device-ip-summary') this.getDevicesByCompany(selectClient.id);
-      if (this.report === 'software-summary' || this.report === 'software-summary-device' || this.report === 'hardware-summary' || this.report === 'hardware-summary-device' || this.report === 'device-ip-summary' || this.report === 'device-ip-summary-device') this.getSoftByCompany(selectClient.id);
+      if (this.report === 'software-summary' || this.report === 'software-summary-device' || this.report === 'hardware-summary' || this.report === 'hardware-summary-device' || this.report === 'device-ip-summary' || this.report === 'device-ip-summary-device' || this.report === 'remote-access') this.getSoftByCompany(selectClient.id);
       if (this.serviceReport.startDate === '' && this.serviceReport.endDate === '') this.serviceReport.setDatesByCompany(this.selectedClient);
       this.validate.resetCompany();
     }
+    if (this.dpDevices) this.dpDevices.clearWithOutChanges();
     this.onSelectedClient.emit(this.selectedClient);
   }
   toggleDetailsByProducts(data) {

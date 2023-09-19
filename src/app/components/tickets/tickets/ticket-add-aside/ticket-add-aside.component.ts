@@ -23,6 +23,11 @@ import { CompaniesService } from 'src/app/services/company/companies.service';
 import { TechUsersComponent } from 'src/app/components/shared/tech-users/tech-users.component';
 import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { TicketsPriority } from 'src/app/components/setting/ticket-settings-page/tickets-priority/class/tickets-priority';
+import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
+import { StatusColor } from '../../class/status-color';
+import { DevicesService } from 'src/app/services/devices/devices.service';
+import { Device } from 'src/app/components/company-devices/class/device';
 
 
 
@@ -51,11 +56,9 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
   namesTechUsersList = [];
   shareUsersList = [];
   selectedCompanyId: string;
+  statusColors: Array<StatusColor> = [];
   listTechUsersForAssign: Array<TechUserItem> = [];
-  selectedTicketPriorities: TitleListType = new TitleListType('Medium Priority', 'MEDIUM');
-  ticketPriorities: Array<TitleListType> = [new TitleListType('Low Priority', 'LOW'),
-  new TitleListType('Medium Priority', 'MEDIUM'),
-  new TitleListType('High Priority', 'HIGH')];
+  ticketPriorities: Array<TicketsPriority> = [];
   ticketValidate: TicketValidate = new TicketValidate();
   sub: Subscription = new Subscription();
   constructor(private ticketsStateService: TicketsStateService,
@@ -70,14 +73,13 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     private companiesService: CompaniesService,
     public customerPortalStateService: CustomerPortalStateService,
     private addUsersNotifyStateService: AddUsersNotifyStateService,
+    private leftPanelService: LeftPanelService,
+    private devicesService: DevicesService,
     private companiesState: CompaniesStateService,) { }
 
 
   ngOnInit() {
-    let getOnDevices = this.devicesStateService.getOnDevices().subscribe((data) => {
-      if (this.selectedCompanyId) this.onGetDevices(this.devicesStateService.getAllDevices()[this.selectedCompanyId]);
-    })
-    this.sub.add(getOnDevices);
+    if (this.selectedCompanyId) this.onGetDevices();
     this.ticketsStateService.getOnActualNumber().subscribe(data => {
       this.actualNumber = data;
     })
@@ -89,6 +91,10 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       this.opened = !this.opened;
       if (this.appService.checkMobile()) this.appService.toggleMobileAside(true);
       if (this.opened && this.companiesState.getCompanyRoutingId()) this.companyDP.onSelect(this.companiesState.getCompanies().find(item => item.id === this.companiesState.getCompanyRoutingId()));
+      if (this.opened) {
+        this.getTicketPriority();
+        this.getColors();
+      }
     })
     let getOnCompanies = this.companiesState.onGetCompanies.subscribe((data) => {
       if (this.opened && this.companiesState.getCompanyRoutingId()) this.companyDP.onSelect(this.companiesState.getCompanies().find(item => item.id === this.companiesState.getCompanyRoutingId()));
@@ -97,6 +103,33 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       if (this.addUsersNotifyStateService.getAction() === USERS_TO_ADD_TICKET) this.onChangeShareUsers(data);
     })
     this.sub.add(onChangeAssignedUser);
+    let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
+      if (this.selectedCompanyId == newChange.data.clientCompanyId) this.devicesStateService.changeDevice(this.devices, newChange);
+    })
+    this.sub.add(onDeviceUninstalled);
+  }
+  getColors() {
+    if (this.ticketsStateService.getListStatusColor().length === 0) {
+      this.leftPanelService.getColors().subscribe((data: any) => {
+        this.statusColors = data.map(item => new StatusColor(item.borderColor, item.textColor))
+        this.ticketsStateService.onColorStatus(this.statusColors);
+      })
+    } else {
+      this.statusColors = this.ticketsStateService.getListStatusColor();
+    }
+  }
+  getTicketPriority() {
+    if (this.ticketsStateService.getTicketsPriorities().length === 0) {
+      this.ticketsService.getTicketsPriorities().subscribe((data: any) => {
+        this.ticketPriorities = data.priorityLevels.map(item => new TicketsPriority(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+          1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+        this.ticketsStateService.onSetTicketsPriorities(this.ticketPriorities);
+        this.ticketAdd.priorityLevel = this.ticketPriorities.find(item => item.name == "MEDIUM");
+      })
+    } else {
+      this.ticketPriorities = this.ticketsStateService.getTicketsPriorities();
+      this.ticketAdd.priorityLevel = this.ticketPriorities.find(item => item.name == "MEDIUM");
+    }
   }
   onAddAssignedUser() {
     const modalRef = this.modalService.open(ModalAddUsersNotifyComponent, { windowClass: 'quote-send-modal-users-to-notify', backdrop: 'static', keyboard: false });
@@ -108,7 +141,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     if (this.ticketValidate.isValidate(this.ticketAdd)) {
       this.ticketAdd.onAddSharedUsers(this.shareUsersList);
       this.addBtn.setDisabled(true);
-      this.ticketsService.addTicket(this.ticketAdd).subscribe(data => {
+      this.ticketsService.addTicket(this.ticketAdd.getDataForRequest()).subscribe(data => {
         this.addBtn.setDisabled(false);
         this.ticketAdd.setAttachFileIds(null);
         this.closed();
@@ -141,8 +174,8 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
 
   }
   getPriorityLevel() {
-    let fid = this.ticketPriorities.find(item => item.type === this.ticketAdd.priorityLevel);
-    return `${(fid) ? fid.title : ''}`
+    let fid = this.ticketPriorities.find(item => item.id === this.ticketAdd.priorityLevel.id);
+    return `${(fid) ? fid.name : ''}`
   }
   onGetTechUsers(data) {
     this.techUsersList = data.filter(item => {
@@ -172,8 +205,8 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       this.selectedCompanyId = item.id;
       this.ticketAdd.createdUser.setCompanyId(item.id);
       this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === item.id)));
-      this.onGetDevices(this.devicesStateService.getAllDevices()[item.id]);
-      let list = this.users.filter(item => item.defaultSubscriptions && item.defaultSubscriptions.ticketManagerSubscription.enabled);
+      this.onGetDevices();
+      let list = this.users.filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === item.id).defaultSubscriptions.ticketManagerSubscription.enabled);
       list = list.map(item => {
         let user = new TechUserItem(item);
         return user;
@@ -205,7 +238,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
   onSelectUser(item) {
     let shareUser = this.shareUsersList.find(item => item.id === this.ticketAdd.createdUser.id);
     if (item) {
-      if (!(shareUser && shareUser.defaultSubscriptions && shareUser.defaultSubscriptions.ticketManagerSubscription.enabled) && this.ticketAdd.createdUser.id) this.removeShareUser(this.ticketAdd.createdUser.id);
+      if (!(shareUser && shareUser.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.selectedCompanyId).ticketManagerSubscription.enabled) && this.ticketAdd.createdUser.id) this.removeShareUser(this.ticketAdd.createdUser.id);
       let indexhUser = this.users.findIndex(user => `${user.firstName} ${user.lastName}` === item);
       if (indexhUser > -1) this.ticketAdd.createdUser.setUserData(this.users[indexhUser]);
       let findSharedUser = this.shareUsersList.find(item => item.id === this.users[indexhUser].id);
@@ -213,7 +246,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       this.ticketValidate.resetClientUser();
       this.techUsersDp.resetEditMode();
     } else {
-      if (!(shareUser && shareUser.defaultSubscriptions && shareUser.defaultSubscriptions.ticketManagerSubscription.enabled)) this.removeShareUser(this.ticketAdd.createdUser.id);
+      if (!(shareUser && shareUser.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.selectedCompanyId).ticketManagerSubscription.enabled)) this.removeShareUser(this.ticketAdd.createdUser.id);
       this.ticketAdd.createdUser.clearUserData();
     }
     this.listTechUsersForAssign = this.getListTechUsersForAssign();
@@ -244,8 +277,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     }
   }
   setPriorityLevel(item) {
-    this.ticketAdd.priorityLevel = item.type;
-    this.selectedTicketPriorities = item;
+    this.ticketAdd.priorityLevel = item;
   }
   removeShareUser(id) {
     let index = this.shareUsersList.findIndex(shareUser => shareUser.id === id);
@@ -266,10 +298,14 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     }).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
       1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
   }
-  onGetDevices(data) {
-    this.devices = ((data) ? data : []).sort((a, b) => (a.hostName.toLowerCase() > b.hostName.toLowerCase()) ?
-      1 : ((b.hostName.toLowerCase() > a.hostName.toLowerCase()) ? -1 : 0));
-
+  onGetDevices() {
+    this.ticketAdd.setPreloaderDevices(true);
+    this.devicesService.getCompanyDevices(this.selectedCompanyId).subscribe((data: any) => {
+      this.devices = (data[this.selectedCompanyId]) ? JSON.parse(JSON.stringify(data[this.selectedCompanyId])).map(item => new Device(item)) : [];
+      this.devices.sort((a, b) => (a.hostName.toLowerCase() > b.hostName.toLowerCase()) ?
+        1 : ((b.hostName.toLowerCase() > a.hostName.toLowerCase()) ? -1 : 0));
+      this.ticketAdd.setPreloaderDevices(false);
+    });
   }
   onGetUsers(data) {
     this.users = data.filter(item => {

@@ -120,6 +120,7 @@
                         ngbTooltip="Assign"
                     ></div>
                     <app-ticket-profile-actions
+                        *ngIf="opened"
                         (onClaimTicket)="claimTicket()"
                         [ticketProfile]="ticketProfile"
                         placement="top"

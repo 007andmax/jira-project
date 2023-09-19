@@ -18,6 +18,8 @@ import { DevicesRecurringTicketsStateService } from '../devices-recurring-ticket
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TextAreaDirective } from 'src/app/directives/text-area/text-area.directive';
 import { TechUserItem } from 'src/app/components/shared/tech-users/class/tech-user-item';
+import { ContractsService } from 'src/app/services/contracts/contracts.service';
+import { DevicesRecurringTicketsComponent } from '../devices-recurring-tickets/devices-recurring-tickets.component';
 
 @Component({
   selector: 'app-recurring-tickets-edit-aside',
@@ -41,10 +43,12 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   public validate: Validate = new Validate();
   public listTechUsers: Array<TechUserItem> = [];
   description: TextAreaDirective;
+  areTicketsPresented: boolean = false;
+  areTicketsTerminated: boolean = false;
   @ViewChild(TextAreaDirective) set appTextArea(directive: TextAreaDirective) {
     this.description = directive;
   };
-
+  @ViewChild('deviceDp') deviceDp: DevicesRecurringTicketsComponent;
 
   /**
    * Creates an instance of the RecurringTicketsAddAsideComponent with the injected services
@@ -63,7 +67,8 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     private devicesService: DevicesRecurringTicketsStateService,
     private recurringState: RecurringTicketsStateService,
     public createService: RecurringTicketsService,
-    private usersStateService: UsersStateService
+    private usersStateService: UsersStateService,
+    private contractsService: ContractsService,
   ) {
   }
 
@@ -109,10 +114,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.ticketForEdit = data;
     this.techUsers = data.assignedUsers;
     this.selectClient(data.company);
-    this.devicesService.onInitHangle(data.company.id);
-    this.selectedClient = data.company;
     this.createService.getStateDatePicker().onInitEditMode(data.startDate);
-
     this.products = (data.products.length > 0) ? this.createService.getProductsForEdit(data.products) : [new ForCreateProduct()];
     this.services = (data.services.length > 0) ? this.createService.getServicesForEdit(data.services, data.serviceErrors) : [new ForCreateService()];
     this.createService.setTagsForEdit(data.tags);
@@ -156,7 +158,15 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
 
     this.recurringState.getCreateTicket().setDescription(value);
   }
-
+  private getServiceAgreements(id) {
+    this.contractsService.getServiceAgreementsByCompany(id).subscribe((data: any) => {
+      let Agreements = data;
+      this.areTicketsPresented = (Agreements.length > 0) ? true : false;
+      this.areTicketsTerminated = Agreements.every((el) => {
+        return el.status === 'EXPIRED' || el.status === 'TERMINATED'
+      })
+    })
+  }
   /**
   * Subscribe to change description
   * @param event - description event
@@ -231,6 +241,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
 */
   public selectClient(selectClient) {
     this.validate.resetCompany();
+    if (this.deviceDp) this.deviceDp.clearDevices();
     if (selectClient == null) {
       this.recurringState.getCreateTicket().setCompany(null);
       this.selectedClient = null;
@@ -241,6 +252,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
       this.recurringState.setClient(selectClient);
       this.onCheckListServices();
       this.getCompanyDevices();
+      this.getServiceAgreements(this.selectedClient.id);
     }
     if (this.services[0] instanceof ForCreateService) {
 

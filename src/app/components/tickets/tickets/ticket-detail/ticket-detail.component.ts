@@ -39,6 +39,7 @@ import { TicketDetailHeaderComponent } from './ticket-detail-header/ticket-detai
 import { TicketProfileAgent } from '../class/ticket-profile-agent';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { Device } from 'src/app/components/company-devices/class/device';
 
 @Component({
   selector: 'ticket-detail',
@@ -58,6 +59,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   showFormUpdate: boolean = false;
   showEditUpdate: boolean = false;
   toggleRigthPanel: boolean = true;
+  toggleRigthPanelContainer: boolean = true;
   tabFormUpdate: string;
   openedMobileEditUpdate = false;
   modeSubject = 'view';
@@ -140,12 +142,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     })
     this.ticketsStateService.getOnChangeFieldTicket().subscribe((data: TicketChangeField) => {
       if (this.ticketProfile.id === data.id) {
-        if (data.field === "agent.deviceId") {
-          let device = this.devicesStateService.getAllDevices()[this.ticketProfile.company.id].find(item => item.agentId === data.value || item.id === data.value);
-          if (device) this.ticketProfile.agent = new TicketProfileAgent(device);
-          if (!device) this.ticketProfile.agent = null;
-        }
-        this.ticketProfile[data.field] = data.value;
+        if (data.field === "agent.deviceId") this.setAgent(data);
       }
       this.cd.detectChanges();
 
@@ -196,6 +193,11 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onEditUpdateByForm);
   }
+  setAgent(data: TicketChangeField) {
+    let device = this.ticketStateService.getDevices().find(item => item.agentId === data.value || item.id === data.value);
+    if (device) this.ticketProfile.agent = new TicketProfileAgent(device);
+    if (!device) this.ticketProfile.agent = null;
+  }
   onViewDocument(data) {
     this.ticketStateService.setDocumentForPreview(data);
     this.typeRigthDetailAside = 'DOCUMENT_PREVIEW';
@@ -236,7 +238,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.toggleRigthPanel = true;
   }
   onToggleRigthPanel(data) {
-    this.toggleRigthPanel = !this.toggleRigthPanel;
+    this.toggleRigthPanelContainer = !this.toggleRigthPanelContainer;
   }
   markAsOpen() {
     this.ticketsService.changeStatus(this.ticketProfile.id, 'IN_PROGRESS').subscribe((data: any) => {
@@ -266,6 +268,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       this.ticketStateService.getServicesList(this.ticketProfile);
       if (this.ticketProfile.createdUser && !this.customerPortalStateService.isCustomerPortal) this.ticketStateService.getPasswordsDocuments(this.ticketProfile.createdUser.id);
       if (!this.customerPortalStateService.isCustomerPortal) this.ticketStateService.getDevicesByCompany(this.ticketProfile.company.id);
+      if (this.customerPortalStateService.isCustomerPortal) this.websocketService.onInitConnectCustomerUser("ticket-detail", this.ticketProfile.company.id);
       if (this.ticketMessage) this.ticketMessage.reset();
       this.ticketProfileUpdates.resetShowLoadMoreUpdates();
       if (this.ticketTasks) this.ticketTasks.getTicketTasks(id);
@@ -442,6 +445,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.companiesStateService.setCompanyRoutingId(this.ticketProfile.company.id);
     this.router.navigate(
       [`${this.companiesStateService.getCurrentCompany().techDomain}/company/`, this.ticketProfile.company.id, 'dashboard']);
+    this.leftPanelStateService.toggleLeftPanel(false);
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
@@ -459,7 +463,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     return this.companiesStateService.getCompanies().find(item => item.id === id);
   }
   getClassType() {
-    return `priority-icon ticket-edit-aside__ticket-subject-flag ${(this.ticketProfile.priorityLevel && this.ticketProfile.priorityLevel !== "MEDIUM") ? '--' + this.ticketProfile.priorityLevel.toLowerCase() : ''}`;
+    return `priority-icon ticket-edit-aside__ticket-subject-flag ${(this.ticketProfile.priorityLevel && this.ticketProfile.priorityLevel.name !== "MEDIUM") ? '--' + this.ticketProfile.priorityLevel.name.toLowerCase() : ''}`;
   }
   claimTicket() {
     let currentUser = this.usersStateService.getCurrentUser();

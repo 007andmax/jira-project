@@ -26,7 +26,10 @@
         class="ticket-detail-page-content"
         [hidden]="showPreloader"
     >
-        <div class="ticket-detail-page-content-main">
+        <div
+            class="ticket-detail-page-content-main"
+            [ngClass]="{'--hide-sidebar-info':!toggleRigthPanelContainer}"
+        >
             <div class="ticket-detail-page-content__body">
                 <div class="ticket-detail-page-content__body-inner">
                     <ticket-detail-info-status [ticketProfile]="ticketProfile"></ticket-detail-info-status>
@@ -240,7 +243,10 @@
                 class="ticket-detail-page-content__sidebar-info"
                 *ngIf="!showPreloader && !customerPortalStateService.isCustomerPortal"
             >
-                <div class="ticket-detail-page-content__sidebar-info-inner">
+                <div
+                    class="ticket-detail-page-content__sidebar-info-inner"
+                    *ngIf="toggleRigthPanelContainer"
+                >
                     <ticket-detail-contact-details
                         *ngIf="typeRigthDetailAside == 'CONTACT'"
                         [ticketProfile]="ticketProfile"
@@ -260,6 +266,10 @@
                         (onViewDocument)="onViewDocument($event)"
                         (onShowMore)="onShowMore('DOCUMENT')"
                     ></ticket-detail-documents>
+                    <ticket-detail-devices
+                        *ngIf="toggleRigthPanel"
+                        (onShowMore)="onShowMore('DEVICES')"
+                    ></ticket-detail-devices>
                     <ticket-detail-documents-preview
                         [document]="ticketStateService.getDocumentForPreview()"
                         *ngIf="ticketStateService.getDocumentForPreview()"
@@ -279,10 +289,6 @@
                         *ngIf="typeRigthDetailAside == 'DEVICES'"
                         (onClose)="onCloseDetails()"
                     ></ticket-detail-devices-details>
-                    <ticket-detail-devices
-                        *ngIf="toggleRigthPanel"
-                        (onShowMore)="onShowMore('DEVICES')"
-                    ></ticket-detail-devices>
                 </div>
             </div>
             <div
