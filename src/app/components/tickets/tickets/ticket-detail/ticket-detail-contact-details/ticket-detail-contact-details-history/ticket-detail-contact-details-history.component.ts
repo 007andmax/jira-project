@@ -55,8 +55,8 @@ export class TicketDetailContactDetailsHistoryComponent implements OnInit {
     } else {
       return;
     }
-    this.ticketsFilter.setCompany(this.company);
-    this.ticketsFilter.setUser(this.user);
+    this.ticketsFilter.setCompanies([this.company]);
+    this.ticketsFilter.setUsers([this.user]);
     this.showPreloader = true;
     this.elRef.nativeElement.querySelector('.company-info-aside__history').scrollTo(0, 0);
     this.setDefaultScoll();

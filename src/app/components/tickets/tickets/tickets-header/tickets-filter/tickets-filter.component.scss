@@ -12,6 +12,7 @@
   .search-tech-users,
   .search-status,
   .search-company,
+  .search-priority,
   .light-dropdown.dropdown,
   app-tickets-filter-tags {
     @media (max-width: 767px) {
@@ -60,6 +61,17 @@
       }
     }
   }
+  .search-priority {
+    @media (max-width: 767px) {
+      width: 100%;
+    }
+
+    &::before {
+      @media (max-width: 767px) {
+        content: "Priority";
+      }
+    }
+  }
 
   tickets-filter-status {
     @media (max-width: 767px) {
@@ -89,6 +101,12 @@
         content: "Tags";
       }
     }
+  }
+  /deep/tickets-filter-drop-down .mat-form-field {
+    width: 100%;
+  }
+  /deep/tickets-filter-companies-drop-down .mat-form-field {
+    width: 100%;
   }
 
   @media (max-width: 767px) {

@@ -1,0 +1,15 @@
+@import "./src/assets/styles/variable";
+
+.dropdown-menu {
+    margin-top: 6px;
+    width: 100%;
+}
+
+.title-filter {
+    color: $gray-500;
+    font-size: 13px;
+    font-weight: 500;
+}
+.light-dropdown {
+    padding-top: 16px !important;
+}

@@ -73,10 +73,12 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
   }
   public onChangeCounterFilter() {
     this.countFilter = 0;
-    if (this.ticketsFilter.selectedCompany) this.countFilter++;
-    if (this.ticketsFilter.selectedTechUser) this.countFilter++;
-    if (this.ticketsFilter.selectedUser) this.countFilter++;
-    if (this.ticketsFilter.selectedStatus) this.countFilter++;
+    if (this.ticketsFilter.selectedCompanies.length > 0) this.countFilter++;
+    if (this.ticketsFilter.selectedTechUsers.length > 0) this.countFilter++;
+    if (this.ticketsFilter.selectedUsers.length > 0) this.countFilter++;
+    if (this.ticketsFilter.selectedStatus.length > 0) this.countFilter++;
+    if (this.ticketsFilter.selectedPriorityLevels.length > 0) this.countFilter++;
+    if (this.ticketsFilter.customDateRange || this.ticketsFilter.startDate && this.ticketsFilter.endDate) this.countFilter++;
   }
   toggleMobileLeftPanel() {
     this.leftPanelStateService.toggleMobileLeftPanel(true);
@@ -89,14 +91,17 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     }
   }
   isExistFilters() {
-    return this.ticketsFilter.selectedCompany ||
-      this.ticketsFilter.selectedTechUser ||
-      this.ticketsFilter.selectedUser ||
-      this.ticketsFilter.selectedStatus ||
-      this.ticketsFilter.tags.length > 0
+    return this.ticketsFilter.selectedCompanies.length > 0 ||
+      this.ticketsFilter.selectedTechUsers.length > 0 ||
+      this.ticketsFilter.selectedUsers.length > 0 ||
+      this.ticketsFilter.selectedStatus.length > 0 ||
+      this.ticketsFilter.tags.length > 0 ||
+      this.ticketsFilter.selectedPriorityLevels.length > 0 ||
+      this.ticketsFilter.customDateRange ||
+      this.ticketsFilter.startDate && this.ticketsFilter.endDate
   }
   getStatus(selectedStatus) {
-    return selectedStatus.toLowerCase();
+    return selectedStatus.join().toLowerCase();
   }
   refreshFilters() {
     this.filter.applyFilters();
@@ -104,7 +109,7 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
   clearAll() {
     if (this.filter) this.filter.onClearAll();
     let ticketGlobalFilter = new TicketGlobalFilter();
-    if (this.ticketsFilter.isDisbledCompany) ticketGlobalFilter.setClientCompanyId(this.ticketsFilter.selectedCompany.id);
+    if (this.ticketsFilter.isDisbledCompany) ticketGlobalFilter.setClientCompaies(this.ticketsFilter.selectedCompanies.map(item => item.id));
     this.ticketsStateService.onChangeGlobalFilter(ticketGlobalFilter);
   }
   getTextCountFilters() {

@@ -26,6 +26,12 @@ import { User } from 'src/app/components/users/class/user';
 import { TicketsFilterSaveComponent } from '../tickets-filter-save/tickets-filter-save.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TicketsFilterStatusComponent } from './tickets-filter-status/tickets-filter-status.component';
+import { TicketsPriority } from 'src/app/components/setting/ticket-settings-page/tickets-priority/class/tickets-priority';
+import { TicketsFilterDropDownComponent } from './tickets-filter-drop-down/tickets-filter-drop-down.component';
+import { TicketsFilterCompaniesDropDownComponent } from './tickets-filter-companies-drop-down/tickets-filter-companies-drop-down.component';
+import * as moment from "moment";
+import { TicketsFilterCreatedDropDownComponent } from './tickets-filter-created-drop-down/tickets-filter-created-drop-down.component';
+import { TitleListType } from '../class/title-list-type';
 
 @Component({
   selector: 'app-tickets-filter',
@@ -33,12 +39,14 @@ import { TicketsFilterStatusComponent } from './tickets-filter-status/tickets-fi
   styleUrls: ['./tickets-filter.component.scss']
 })
 export class TicketsFilterComponent implements OnInit, OnDestroy {
-  @ViewChild('usersDp') usersDp: DropDownComponent;
-  @ViewChild('companyDp') companyDp: CompanyDropDownComponent;
-  @ViewChild('techUsersDp') techUsersDp: DropDownComponent;
+  @ViewChild('usersDp') usersDp: TicketsFilterDropDownComponent;
+  @ViewChild('companyDp') companyDp: TicketsFilterCompaniesDropDownComponent;
+  @ViewChild('techUsersDp') techUsersDp: TicketsFilterDropDownComponent;
   @ViewChild('statusDp') statusDp: DropDownComponent;
+  @ViewChild('priorityDp') priorityDp: TicketsFilterDropDownComponent;
   @ViewChild('tagsDp') tagsDp: TicketsFilterTagsComponent;
   @ViewChild('filterStatus') filterStatus: TicketsFilterStatusComponent;
+  @ViewChild('datesDp') datesDp: TicketsFilterCreatedDropDownComponent;
   public ticketsFilter: TicketsFilter = new TicketsFilter();
   globalFilter: TicketGlobalFilter = new TicketGlobalFilter();
   listType: string = "USERS";
@@ -49,12 +57,13 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   users = [];
   techUsersList = [];
   techUsersNamesList = [];
+  clientsUsersNamesList = [];
   listsStatus = [new ItemStatus('Unassigned', 'unassigned', 'UNASSIGNED'),
   new ItemStatus('Completed', 'completed', 'CLOSED'),
   new ItemStatus('In Progress', 'inProgress', 'OPEN'),
   new ItemStatus('On Hold', 'onHold', 'ON_HOLD')];
+  ticketPriorities: Array<TicketsPriority> = [];
   ticketsStatus: Array<TicketStatusFilter> = [];
-  blockFilterUser: boolean = false;
   ticketsCounts: TicketsCounts;
   sub: Subscription = new Subscription();
   @Output() onClose = new EventEmitter();
@@ -67,8 +76,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     public appService: AppService,
     public customerPortalStateService: CustomerPortalStateService,
-    public tagsStateService: TagsStateService,
-    private leftPanelService: LeftPanelService) { }
+    public tagsStateService: TagsStateService) { }
 
 
 
@@ -78,13 +86,11 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     if (this.customerPortalStateService.isCustomerPortal && this.companiesState.getCompanies().length > 0) this.checkCompanyCustomerUser();
     let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
       if (this.customerPortalStateService.isCustomerPortal) this.checkCompanyCustomerUser();
-      //this.getCount();
     })
     this.sub.add(getOnCompanies);
     let onTicketFilters = this.customerPortalStateService.onTicketFilters.subscribe(data => {
       this.checkCompanyCustomerUser();
       this.checkUserCustomerUser();
-      //  this.getCount();
     });
     this.sub.add(onTicketFilters);
     this.listType = this.ticketsStateService.getListType();
@@ -103,13 +109,15 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       this.getCount();
     });
     this.sub.add(getOnChangeTagsFilter);
-    if (this.usersStateService.getAllUsers().length > 0) this.onGetTechUsers(this.usersStateService.getAllUsers());
+    if (this.usersStateService.getAllUsers().length > 0) {
+      this.onGetTechUsers(this.usersStateService.getAllUsers());
+      this.onGetUsers();
+    }
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.onGetTechUsers(data);
+      this.onGetUsers();
     })
     this.sub.add(getOnUsers);
-    //    this.getCounts();
-
     let getOnUpdateCounts = this.ticketsStateService.getOnUpdateCounts().subscribe(data => {
       this.ticketsCounts = new TicketsCounts(data);
       this.ticketsStateService.onInitCount(this.ticketsCounts[(this.listType === 'USERS') ? 'USER' : this.listType]);
@@ -117,6 +125,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnUpdateCounts);
     this.getTicketsStatus();
+    this.getTicketPriority();
     let onGetTicketsStatus = this.ticketsStateService.onGetTicketsStatus.subscribe(data => {
       this.getTicketsStatus();
       if (this.globalFilter.id) this.getCountsStatus();
@@ -124,37 +133,39 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.sub.add(onGetTicketsStatus);
     let onInitGlobalFilter = this.ticketsStateService.onInitGlobalFilter.subscribe((data: TicketGlobalFilter) => {
       this.globalFilter = new TicketGlobalFilter(JSON.parse(JSON.stringify(data)));
-      this.selectedCompany = this.companiesState.getCompanies().find(item => item.id == data.clientCompanyId);
-      if (this.selectedCompany) {
-        this.companyDp.selectItemWithOutChanges(this.companiesState.getCompanies().find(item => item.id == data.clientCompanyId));
-        this.onSelectCompany(this.companiesState.getCompanies().find(item => item.id == data.clientCompanyId));
+      console.log("this.globalFilter", this.globalFilter);
+      let selectedCompanies: Array<Company> = this.companiesState.getCompanies().filter(item => data.clientCompanyIds.some(companyId => companyId == item.id));
+      if (selectedCompanies.length > 0) {
+        this.companyDp.selectedItems = selectedCompanies;
+        this.onSelectCompany(selectedCompanies);
       } else {
         this.companyDp.clearWithOutChanges();
-        this.onSelectCompany(null);
+        this.onSelectCompany([]);
       }
 
-      let createdUser: User = this.usersStateService.getAllUsers().find(item => data.createdUserId == item.id);
-      if (createdUser) {
-        this.usersDp.selectItemWithOutChanges(`${createdUser.firstName} ${createdUser.lastName}`);
-        this.onSelectUser(`${createdUser.firstName} ${createdUser.lastName}`);
+      let createdUser: Array<User> = this.usersStateService.getAllUsers().filter(item => data.createdUserIds.some(userId => userId == item.id));
+      if (createdUser.length > 0) {
+        this.usersDp.selectedTag = createdUser.map(item => `${item.firstName} ${item.lastName}`);
+        this.onSelectUser(createdUser.map(item => `${item.firstName} ${item.lastName}`));
       } else {
         this.usersDp.clearWithOutChanges();
-        this.onSelectUser(null);
+        this.onSelectUser([]);
       }
-      let techUser: User = this.usersStateService.getAllUsers().find(item => data.assignedUsersIds.some(userId => userId == item.id));
-      if (techUser) {
-        this.techUsersDp.selectItemWithOutChanges(`${techUser.firstName} ${techUser.lastName}`);
-        this.onSelectTechUser(`${techUser.firstName} ${techUser.lastName}`);
+      let techUser: Array<User> = this.usersStateService.getAllUsers().filter(item => data.assignedUsersIds.some(userId => userId == item.id));
+      if (techUser.length > 0) {
+        this.techUsersDp.selectedTag = techUser.map(item => `${item.firstName} ${item.lastName}`);
+        this.onSelectTechUser(techUser.map(item => `${item.firstName} ${item.lastName}`));
       } else {
         this.techUsersDp.clearWithOutChanges();
-        this.onSelectTechUser(null);
+        this.onSelectTechUser([]);
       }
-      let status = this.ticketsStatus.find(item => item.id == data.statusId);
+      let status = this.ticketsStatus.filter(item => data.statusIds.some(statusId => statusId == item.id));
       this.ticketsStatus.forEach(item => item.selected = false);
-      if (status) {
-        status.selected = true;
-        this.ticketsFilter.setStatus(status.name);
-        let findStatus = this.listsStatus.find(status => status.title === status.title);
+      if (status.length > 0) {
+        status.forEach(item => item.selected = true);
+        this.ticketsFilter.setStatus(status);
+        this.globalFilter.setStatusIds(status.map(item => item.id));
+        let findStatus = this.listsStatus.find(statusElemt => status.some(item => item.title === statusElemt.title));
         if (findStatus) {
           this.ticketsFilter.setCustomStatus(false);
           this.setTypeFilterWithoutChange(findStatus.status);
@@ -163,7 +174,8 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
           this.setTypeFilterWithoutChange("OPEN");
         }
       } else {
-        this.ticketsFilter.setStatus(null);
+        this.ticketsFilter.setStatus([]);
+        this.globalFilter.setStatusIds([]);
         this.ticketsFilter.setCustomStatus(false);
       }
       let tags = this.tagsStateService.getTags().filter(item => data.tagIds.some(tagId => tagId == item.id)).map(item => new CompanyTag(item));
@@ -173,6 +185,26 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       } else {
         this.onChangeTags([]);
         this.tagsDp.clearWithOutChanges();
+      }
+      let priorityLevel = this.ticketPriorities.filter(item => data.priorityIds.some(priorityId => priorityId == item.id));
+      if (priorityLevel.length > 0) {
+        this.priorityDp.selectedTag = priorityLevel;
+        this.onSelectPriority(priorityLevel);
+      } else {
+        this.onSelectPriority([]);
+        this.priorityDp.clearWithOutChanges();
+      }
+      if (data.customDateRange) {
+        this.onSelectCustomDateRange(data.customDateRange);
+        this.datesDp.selectItemWithOutChanges(this.datesDp.list.find(item => item.type == data.customDateRange));
+      } else if (data.startDate && data.endDate) {
+        this.onSelectDates({ start: data.startDate, end: data.endDate });
+        this.datesDp.selectItemWithOutChanges(new TitleListType('Custom Date range', 'CUSTOM'));
+        this.datesDp.changeSelectedDateModel(data.startDate, data.endDate);
+      } else {
+        this.datesDp.clearWithOutChanges();
+        this.ticketsFilter.clearDates();
+        this.ticketsFilter.setCustomDateRange(null);
       }
       this.setTypeFilterWithoutChange("ALL");
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
@@ -189,6 +221,11 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(onGetGlobalFilters);
+    let onChangeFilterField = this.ticketsStateService.onChangeFilterField.subscribe(data => {
+      this.ticketsFilter.onFilter(data);
+      this.applyFilters();
+    })
+    this.sub.add(onChangeFilterField);
   }
   private clearCountsStatus() {
     this.ticketsStatus.forEach(item => item.setCount(0));
@@ -205,20 +242,33 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       }
     })
   }
+  getTicketPriority() {
+    if (this.ticketsStateService.getTicketsPriorities().length === 0) {
+      this.ticketsService.getTicketsPriorities().subscribe((data: any) => {
+        this.ticketPriorities = data.priorityLevels.map(item => new TicketsPriority(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+          1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+        this.ticketsStateService.onSetTicketsPriorities(this.ticketPriorities);
+        this.priorityDp.list = this.ticketPriorities;
+      })
+    } else {
+      this.ticketPriorities = this.ticketsStateService.getTicketsPriorities();
+      this.priorityDp.list = this.ticketPriorities;
+    }
+  }
   private checkCompanyCustomerUser() {
     this.ticketsFilter = this.customerPortalStateService.getTicketsFilter();
     this.selectedCompany = this.companiesState.getCompanies().find(item => item.id == localStorage.getItem('company_info_id'));
     this.companyDp.selectItemWithOutChanges(this.selectedCompany);
     this.companyDp.isDisabled = true;
     this.ticketsFilter.isDisbledCompany = true;
-    this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.selectedCompany.id)));
+    this.onGetUsers();
   }
   private checkUserCustomerUser() {
     let customerCompanyInfo = this.usersStateService.getCurrentUser().customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id'));
     if (customerCompanyInfo && customerCompanyInfo.customerUserRole.getPermission('VIEW_MY_TICKETS') && !customerCompanyInfo.customerUserRole.getPermission('VIEW_ALL_TICKETS')) {
-      let user = this.usersStateService.getAllUsers().find(item => item.id === this.usersStateService.getCurrentUser().id);
-      this.selectedUser = `${user.firstName} ${user.lastName}`;
-      this.usersDp.selectItemWithOutChanges(this.selectedUser);
+      let users = this.usersStateService.getAllUsers().filter(item => item.id === this.usersStateService.getCurrentUser().id);
+      this.usersDp.selectedTag = users.map(item => `${item.firstName} ${item.lastName}`);
+      this.onSelectUser(users.map(item => `${item.firstName} ${item.lastName}`));
       this.usersDp.isDisabled = true;
     } else {
       this.usersDp.clearWithOutChanges();
@@ -226,10 +276,13 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   }
   public onClearAll() {
 
-    if (!this.ticketsFilter.isDisbledCompany) this.ticketsFilter.setCompany(null);
-    this.ticketsFilter.setTechUser(null);
-    this.ticketsFilter.setUser(null);
-    if (this.ticketsFilter.selectedStatus) {
+    if (!this.ticketsFilter.isDisbledCompany) this.ticketsFilter.setCompanies([]);
+    this.ticketsFilter.setTechUsers([]);
+    this.ticketsFilter.setUsers([]);
+    this.ticketsFilter.clearDates();
+    this.ticketsFilter.setCustomDateRange(null);
+    this.datesDp.clearWithOutChanges();
+    if (this.ticketsFilter.selectedStatus.length > 0) {
       this.listType = "ALL";
       this.ticketsFilter.setListType("ALL");
     }
@@ -241,6 +294,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     if (this.statusDp) this.statusDp.clearWithOutChanges();
     this.tagsDp.clearWithOutChanges();
     this.ticketsFilter.setCustomStatus(false);
+    console.log("this.ticketsFilter", this.ticketsFilter);
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
     this.onChangeCounterFilter();
     if (this.listType !== 'RECURRING_TICKETS') this.getCount();
@@ -250,15 +304,18 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
 
   public onChangeCounterFilter() {
     let count = 0;
-    if (this.ticketsFilter.selectedCompany) count++;
-    if (this.ticketsFilter.selectedTechUser) count++;
-    if (this.ticketsFilter.selectedUser) count++;
-    if (this.ticketsFilter.selectedStatus) count++;
+    if (this.ticketsFilter.selectedCompanies.length > 0) count++;
+    if (this.ticketsFilter.selectedTechUsers.length > 0) count++;
+    if (this.ticketsFilter.selectedUsers.length > 0) count++;
+    if (this.ticketsFilter.selectedStatus.length > 0) count++;
+    if (this.ticketsFilter.selectedPriorityLevels.length > 0) count++;
+    if (this.ticketsFilter.customDateRange || this.ticketsFilter.startDate && this.ticketsFilter.endDate) count++;
     this.changeCountFilter.emit(count);
   }
   private getCount() {
-    this.ticketsService.getCount(this.ticketsFilter.getDataForRequest()).subscribe(data => {
-      this.ticketsStateService.onInitCount(data);
+    this.ticketsFilter.setSearchText("");
+    this.ticketsService.getCount(this.ticketsFilter.getDataForRequest()).subscribe(res => {
+      this.ticketsStateService.onInitCount(res);
     })
   }
   getCountByField(field) {
@@ -285,12 +342,13 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     }
   }
 
-  public onGetUsers(data) {
-    this.users = data.filter(item => {
-      if (item.accountType !== 'TECH' && !item.deletedAt) {
-        return item;
-      }
-    });
+  public onGetUsers() {
+    this.users = this.usersStateService.getAllUsers().filter(user => {
+      return user.accountType !== 'TECH' && !user.deletedAt && user.customerCompaniesInfo.some(item => {
+        return this.companiesState.getCompanies().some(company => company.accountType === "CLIENT" && !company.deletedAt && company.id == item.companyId);
+      })
+    })
+    this.clientsUsersNamesList = this.getUserList();
   }
   onGetTechUsers(data) {
     if (this.customerPortalStateService.isCustomerPortal) this.checkUserCustomerUser();
@@ -301,46 +359,52 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     });
     this.techUsersNamesList = this.getTechUserList();
   }
-  public onSelectCompany(item) {
-    this.blockFilterUser = true;
-    this.usersDp.clearClient();
-    if (!item) {
-      this.ticketsFilter.setCompany(null);
-      this.users = [];
-      this.globalFilter.setClientCompanyId(null);
+  public onSelectDates(value) {
+    console.log("value", value);
+    if (value.start !== '' && value.end !== '') {
+      this.ticketsFilter.setStartDate(moment(new Date(value.start)).format('YYYY-MM-DD'));
+      this.ticketsFilter.setEndDate(moment(new Date(value.end)).format('YYYY-MM-DD'));
+      this.globalFilter.setStartDate(moment(new Date(value.start)).format('YYYY-MM-DD'));
+      this.globalFilter.setEndDate(moment(new Date(value.end)).format('YYYY-MM-DD'));
+      this.ticketsFilter.setCustomDateRange(null);
+      this.globalFilter.setCustomDateRange(null);
     } else {
-      this.globalFilter.setClientCompanyId(item.id);
-      this.ticketsFilter.setCompany(item);
-      this.selectedCompany = null;
-      this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === item.id)));
+      this.ticketsFilter.clearDates()
+      this.globalFilter.clearDates();
     }
+  }
+  public onSelectCustomDateRange(data) {
+    this.ticketsFilter.setCustomDateRange(data);
+    this.globalFilter.setCustomDateRange(data);
+    this.ticketsFilter.clearDates()
+    this.globalFilter.clearDates();
+  }
+  public onSelectCompany(items) {
+    this.ticketsFilter.setCompanies(items);
+    this.globalFilter.setClientCompaies(items.map(item => (item.id)));
   }
   public onSelectTechUser(item) {
-    if (!item) {
-      this.ticketsFilter.setTechUser(null);
-      this.globalFilter.setAssignedUsersIds([]);
-    } else {
-      this.selectedTechUser = null;
-      let indexTechUser = this.techUsersList.findIndex(user => `${user.firstName} ${user.lastName}` === item);
-      if (indexTechUser > -1) {
-        this.ticketsFilter.setTechUser(this.techUsersList[indexTechUser]);
-        this.globalFilter.setAssignedUsersIds([this.techUsersList[indexTechUser].id]);
-      }
-    }
+    let users = this.techUsersList.filter(user => item.some(userName => userName == `${user.firstName} ${user.lastName}`));
+    this.ticketsFilter.setTechUsers(users);
+    this.globalFilter.setAssignedUsersIds(users.map(item => item.id));
   }
 
+  public onSelectPriority(item) {
+    this.ticketsFilter.setPriorityLevels(item);
+    this.globalFilter.setPriorityIds(item.map(item => item.id));
+  }
   public onSelectStatus(item, event) {
     if (!event.target.checked) {
       item.selected = false;
-      this.setTypeFilterWithoutChange("ALL");
-      this.ticketsFilter.setStatus(null);
-      this.ticketsFilter.setCustomStatus(false);
-      this.globalFilter.setStatusId(null);
     } else {
       item.selected = true;
-      this.ticketsFilter.setStatus(item.name);
-      this.globalFilter.setStatusId(item.id);
-      let findStatus = this.listsStatus.find(status => status.title === item.title);
+    }
+    this.ticketsFilter.setStatus(this.ticketsStatus.filter(status => status.selected));
+    this.globalFilter.setStatusIds(this.ticketsStatus.filter(status => status.selected).map(item => item.id));
+    if (this.ticketsStatus.filter(status => status.selected).length > 1) {
+      this.setTypeFilterWithoutChange("ALL");
+    } else {
+      let findStatus = this.listsStatus.find(status => this.ticketsStatus.filter(status => status.selected).some(item => item.title === status.title));
       if (findStatus) {
         this.ticketsFilter.setCustomStatus(false);
         this.setTypeFilterWithoutChange(findStatus.status);
@@ -348,33 +412,26 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
         this.ticketsFilter.setCustomStatus(true);
         this.setTypeFilterWithoutChange("OPEN");
       }
-      this.ticketsStatus.forEach(status => {
-        if (status.id != item.id) status.selected = false;
-      })
     }
   }
   public onSelectUser(item) {
-    if (!item) {
-      this.ticketsFilter.setUser(null);
-      this.globalFilter.setCreatedUserId(null);
-    } else {
-      this.selectedUser = null;
-      let indexhUser = this.users.findIndex(user => `${user.firstName} ${user.lastName}` === item);
-      if (indexhUser > -1) {
-        this.ticketsFilter.setUser(this.users[indexhUser]);
-        this.globalFilter.setCreatedUserId(this.users[indexhUser].id);
-      }
-    }
-    this.blockFilterUser = false;
+    let users = this.users.filter(user => item.some(userName => userName == `${user.firstName} ${user.lastName}`));
+    this.ticketsFilter.setUsers(users);
+    this.globalFilter.setCreatedUserIds(users.map(item => item.id));
   }
 
   onChangeTags(tags) {
     this.ticketsFilter.setTags(tags);
     this.globalFilter.setTagIds(tags.map(item => (item.id)));
   }
-
+  setTypeSearchFilterWithoutChange(data) {
+    this.setTypeFilterWithoutChange(data);
+    this.ticketsStateService.onChangeLeftPanelFilter(data);
+  }
   applyFilters() {
+    console.log("this.ticketsFilter", this.ticketsFilter);
     this.setTypeFilterWithoutChange("ALL");
+    this.ticketsFilter.setSearchText("");
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
     if (this.listType !== 'RECURRING_TICKETS') this.getCount();
     this.ticketsStateService.onChangeLeftPanelFilter("ALL");

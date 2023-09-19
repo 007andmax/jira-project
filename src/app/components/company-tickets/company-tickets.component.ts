@@ -136,6 +136,9 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
   onToggleFilter(data) {
     this.ticketsStateService.changeToggleFilter(data);
   }
+  onFilter(data) {
+    this.ticketsStateService.changeFilterField(data);
+  }
   private getCount() {
     this.ticketsService.getCount(this.ticketsFilter.getDataForRequest()).subscribe(data => {
       this.ticketsStateService.onInitCount(data);
@@ -149,15 +152,16 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     let company = this.companiesStateService.getCompanies().find(item => item.id === ticket_id);
     this.filter.setTypeFilterWithoutChange("ALL");
     this.filter.companyDp.isDisabled = true;
-    this.filter.companyDp.editItem = company;
-    this.filter.ticketsFilter.setCompany(company);
+    this.filter.companyDp.selectedItems = [company];
+    this.filter.companyDp.removable = false;
+    this.filter.ticketsFilter.setCompanies([company]);
     this.filter.onChangeCounterFilter();
     this.ticketsFilter.setListType("ALL");
-    this.ticketsFilter.setCompany(company);
+    this.ticketsFilter.setCompanies([company]);
     this.ticketsFilter.isDisbledCompany = true;
     this.header.ticketsFilter = this.ticketsFilter;
     this.header.onChangeCounterFilter();
-    this.filter.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.find(companyInfo => companyInfo.companyId == company.id)));
+    this.filter.onGetUsers();
     this.getCount();
     this.onScroll();
   }
@@ -183,8 +187,6 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     }
     this.ticketsFilter.setOffset(this.page_number * this.offset);
     this.ticketsFilter.setSize(30);
-
-
     if (this.page_number > 0) this.showPendingPreloader = true;
     this.ticketsService.getTickets(this.ticketsFilter.getListTupe(), this.ticketsFilter.getDataForRequest()).subscribe((data: Array<Ticket>) => {
       this.tickets = [...this.tickets, ...data];
@@ -196,8 +198,6 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
-
-
     })
   }
   public onScroll() {

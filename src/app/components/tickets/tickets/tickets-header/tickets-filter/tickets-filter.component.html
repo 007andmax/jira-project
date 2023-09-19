@@ -12,39 +12,69 @@
         [ticketsStatus]="ticketsStatus"
         (onSelectStatus)="onSelectStatus($event.item, $event.event)"
     ></tickets-filter-status>
-    <company-drop-down
-        class="search-company"
+    <tickets-filter-search
+        [ticketsFilter]="ticketsFilter"
+        (changeTypeFilter)="setTypeSearchFilterWithoutChange($event)"
+    ></tickets-filter-search>
+    <tickets-filter-companies-drop-down
+        class="qt-mb-16"
         #companyDp
-        [placeholder]="'Select Company'"
-        [change]="true"
-        [search]="true"
-        [class]="['qt-dropdown']"
+        [clientType]="'CLIENT'"
+        [title]="'Company'"
+        [placeholder]="'Select company'"
+        [placement]="'top-left'"
         [field]="'name'"
-        (onSelectedItem)="onSelectCompany($event)"
-    ></company-drop-down>
-    <app-drop-down
-        class="search-users"
-        #usersDp
-        [placeholder]="'Select User'"
-        [change]="false"
-        [class]="['qt-dropdown']"
-        [list]="getUserList()"
-        (onSelectedItem)="onSelectUser($event)"
-    ></app-drop-down>
-    <app-drop-down
-        class="search-tech-users"
-        #techUsersDp
-        [placeholder]="'Select Tech User'"
-        [change]="false"
-        [class]="['qt-dropdown']"
-        [list]="techUsersNamesList"
-        (onSelectedItem)="onSelectTechUser($event)"
-    ></app-drop-down>
+        (filterChange)="onSelectCompany($event)"
+    >
+    </tickets-filter-companies-drop-down>
     <app-tickets-filter-tags
         #tagsDp
         [placement]="'top-left'"
         (tagsChange)="onChangeTags($event)"
     ></app-tickets-filter-tags>
+    <tickets-filter-created-drop-down
+        #datesDp
+        class="qt-pt-16"
+        [title]="'Created'"
+        [change]="true"
+        [search]="true"
+        [sort]="false"
+        [class]="['qt-dropdown']"
+        [container]="'body'"
+        [placement]="'bottom-right'"
+        [dropdownHeight]="'initial'"
+        [field]="'title'"
+        [placeholder]="'Select'"
+        (onSelectedItem)="onSelectCustomDateRange($event)"
+        (selectedDate)="onSelectDates($event)"
+    ></tickets-filter-created-drop-down>
+    <tickets-filter-drop-down
+        #usersDp
+        [title]="'User'"
+        [placeholder]="'Select user'"
+        [placement]="'top-left'"
+        [list]="clientsUsersNamesList"
+        (filterChange)="onSelectUser($event)"
+    ></tickets-filter-drop-down>
+    <tickets-filter-drop-down
+        #techUsersDp
+        [placeholder]="'Select tech user'"
+        [title]="'Tech User'"
+        [placement]="'top-left'"
+        [list]="techUsersNamesList"
+        (filterChange)="onSelectTechUser($event)"
+    >
+    </tickets-filter-drop-down>
+    <tickets-filter-drop-down
+        #priorityDp
+        [title]="'Priority'"
+        [placeholder]="'Select priority'"
+        [placement]="'top-left'"
+        [field]="'name'"
+        [list]="ticketPriorities"
+        (filterChange)="onSelectPriority($event)"
+    >
+    </tickets-filter-drop-down>
 </div>
 <div class="aside-filters-content__footer">
     <div class="qt-df">

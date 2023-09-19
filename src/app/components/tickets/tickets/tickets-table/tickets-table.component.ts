@@ -56,7 +56,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       this.ticketsFilter.setListType("ALL");
       this.ticketsFilter.setFilter(JSON.parse(JSON.stringify(this.customerPortalStateService.getTicketsFilter())));
       this.onScroll();
-      this.websocketService.onInitConnectCustomerUser("new-tickets", this.customerPortalStateService.getTicketsFilter().selectedCompany.id);
+      this.websocketService.onInitConnectCustomerUser("new-tickets", this.customerPortalStateService.getTicketsFilter().selectedCompanies[0].id);
     } else {
       /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
       /* START */
@@ -104,6 +104,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
 
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
       this.ticketsFilter = data;
+      console.log("this.ticketsFilter", this.ticketsFilter);
       this.showPreloader = true;
       document.body.querySelector(".main-container").scrollTo(0, 0);
       this.setDefaultScoll();
@@ -141,7 +142,9 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
   onToggleFilter(data) {
     this.ticketsStateService.changeToggleFilter(data);
   }
-
+  onFilter(data) {
+    this.ticketsStateService.changeFilterField(data);
+  }
   editTicket(id) {
     if (!this.appService.isMobile) {
       this.ticketStateService.setTicketRoutingId(id);

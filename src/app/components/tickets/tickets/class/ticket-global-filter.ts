@@ -1,14 +1,18 @@
 export class TicketGlobalFilter {
     "id": string;
-    "statusId": string;
+    "statusIds": Array<string> = [];
     "name": string = "";
     "global": boolean = false;
-    "clientCompanyId": string;
-    "createdUserId": string;
+    "clientCompanyIds": Array<string> = [];
+    "createdUserIds": Array<string> = [];
     "tagIds": Array<string> = [];
     "status": any;
     "assignedUsersIds": Array<string> = [];
+    priorityIds: Array<string> = [];
     modified: boolean;
+    customDateRange: string = null;
+    startDate: string = null;
+    endDate: string = null;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -26,30 +30,50 @@ export class TicketGlobalFilter {
             name: this.name,
             global: this.global
         };
-        if (this.clientCompanyId) data.clientCompanyId = this.clientCompanyId;
-        if (this.statusId) data.statusId = this.statusId;
-        if (this.createdUserId) data.createdUserId = this.createdUserId;
+        if (this.clientCompanyIds.length > 0) data.clientCompanyIds = this.clientCompanyIds;
+        if (this.statusIds.length > 0) data.statusIds = this.statusIds;
+        if (this.createdUserIds.length > 0) data.createdUserIds = this.createdUserIds;
         if (isAdd && this.tagIds.length > 0) data.tagIds = this.tagIds;
         if (!isAdd) data.tagIds = this.tagIds;
-        if (this.assignedUsersIds) data.assignedUsersIds = this.assignedUsersIds;
+        if (this.assignedUsersIds.length > 0) data.assignedUsersIds = this.assignedUsersIds;
+        if (this.priorityIds.length > 0) data.priorityIds = this.priorityIds;
+        if (this.customDateRange) data.customDateRange = this.customDateRange;
+        if (this.startDate) data.startDate = this.startDate;
+        if (this.endDate) data.endDate = this.endDate;
         return data
     }
-    public setClientCompanyId(data) {
-        this.clientCompanyId = data;
+    public setStartDate(data) {
+        this.startDate = data;
     }
-    public setCreatedUserId(data) {
-        this.createdUserId = data;
+    public setEndDate(data) {
+        this.endDate = data;
+    }
+    public clearDates() {
+        this.startDate = null;
+        this.endDate = null;
+    }
+    public setClientCompaies(data) {
+        this.clientCompanyIds = data;
+    }
+    public setCreatedUserIds(data) {
+        this.createdUserIds = data;
     }
     public setAssignedUsersIds(data) {
         this.assignedUsersIds = data;
     }
-    public setStatusId(data) {
-        this.statusId = data;
+    public setCustomDateRange(data) {
+        this.customDateRange = data;
+    }
+    public setStatusIds(data) {
+        this.statusIds = data;
     }
     public setTagIds(data) {
         this.tagIds = data;
     }
+    public setPriorityIds(data) {
+        this.priorityIds = data;
+    }
     public isUseFilters() {
-        return this.clientCompanyId || this.createdUserId || this.assignedUsersIds.length > 0 || this.statusId || this.tagIds.length > 0;
+        return this.clientCompanyIds.length > 0 || this.createdUserIds.length > 0 || this.assignedUsersIds.length > 0 || this.statusIds.length > 0 || this.tagIds.length > 0 || this.priorityIds.length > 0 || this.customDateRange || this.startDate || this.endDate;
     }
 }
