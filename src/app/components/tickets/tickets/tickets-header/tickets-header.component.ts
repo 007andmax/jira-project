@@ -101,7 +101,7 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
       this.ticketsFilter.startDate && this.ticketsFilter.endDate
   }
   getStatus(selectedStatus) {
-    return selectedStatus.join().toLowerCase();
+    return selectedStatus.toLowerCase();
   }
   refreshFilters() {
     this.filter.applyFilters();

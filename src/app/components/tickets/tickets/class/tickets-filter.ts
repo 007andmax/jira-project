@@ -42,7 +42,7 @@ export class TicketsFilter {
         this.onInitUser();
     }
     public checkUse() {
-        return this.selectedCompanies.length > 0 && (this.customDateRange || this.startDate && this.endDate) && this.selectedTechUsers.length > 0 && this.selectedUsers.length > 0 && this.selectedStatus.length > 0 && this.selectedPriorityLevels.length > 0 && this.tags.length > 0;
+        return this.selectedCompanies.length > 0 || (this.customDateRange || this.startDate && this.endDate) || this.selectedTechUsers.length > 0 || this.selectedUsers.length > 0 || this.selectedStatus.length > 0 || this.selectedPriorityLevels.length > 0 || this.tags.length > 0;
     }
     public clearDates() {
         this.startDate = null;
@@ -91,6 +91,9 @@ export class TicketsFilter {
     }
     public setUsers(data) {
         this.selectedUsers = data;
+    }
+    public setSortBy(data) {
+        this.sortBy = data;
     }
     onFilter(field) {
         let index = this.filter.findIndex(item => item.field === field);
