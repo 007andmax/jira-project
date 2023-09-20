@@ -72,6 +72,12 @@ export class TicketsFilterCompaniesDropDownComponent extends CompanyDropDownComp
     return this.selectedItems.find(item => (this.field) ? item[this.field] == data[this.field] : item == data);
   }
 
+  /**
+* @description Track list by "id" field, retrun field "id"
+* @param {Number} index - selected 
+* @param {Object} item - Object for use tracking
+* @returns {String} This is the result
+*/
   public trackById(index, item) {
     return item.id;
   }

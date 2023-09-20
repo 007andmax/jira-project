@@ -226,13 +226,22 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onChangeFilterField);
   }
+  /**
+* @description Reset count status list
+*/
   private clearCountsStatus() {
     this.ticketsStatus.forEach(item => item.setCount(0));
   }
+  /**
+* @description Get list status and sort
+*/
   private getTicketsStatus() {
     this.ticketsStatus = this.ticketsStateService.getTicketsStatus().map(item => new TicketStatusFilter(item)).sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
       1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
   }
+  /**
+* @description Init request to get counts 
+*/
   private getCountsStatus() {
     this.ticketsService.getCounts(this.ticketsFilter.getDataForStatusCounts(this.ticketsStatus)).subscribe(counts => {
       for (const key in counts) {
@@ -241,6 +250,9 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       }
     })
   }
+  /**
+* @description Init request to get priorites list
+*/
   getTicketPriority() {
     if (this.ticketsStateService.getTicketsPriorities().length === 0) {
       this.ticketsService.getTicketsPriorities().subscribe((data: any) => {
@@ -254,6 +266,9 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       this.priorityDp.list = this.ticketPriorities;
     }
   }
+  /**
+* @description Get filters tickets and disabled company dropdown
+*/
   private checkCompanyCustomerUser() {
     this.ticketsFilter = this.customerPortalStateService.getTicketsFilter();
     this.selectedCompany = this.companiesState.getCompanies().find(item => item.id == localStorage.getItem('company_info_id'));
@@ -262,6 +277,9 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.ticketsFilter.isDisbledCompany = true;
     this.onGetUsers();
   }
+  /**
+* @description Check if use customer use and disable user dropdown
+*/
   private checkUserCustomerUser() {
     let customerCompanyInfo = this.usersStateService.getCurrentUser().customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id'));
     if (customerCompanyInfo && customerCompanyInfo.customerUserRole.getPermission('VIEW_MY_TICKETS') && !customerCompanyInfo.customerUserRole.getPermission('VIEW_ALL_TICKETS')) {
@@ -273,6 +291,9 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       this.usersDp.clearWithOutChanges();
     }
   }
+  /**
+* @description Clear all dropdown and "ticketsFilter"
+*/
   public onClearAll() {
 
     if (!this.ticketsFilter.isDisbledCompany) this.ticketsFilter.setCompanies([]);
@@ -298,7 +319,9 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.ticketsStateService.onChangeLeftPanelFilter(this.listType);
     if (this.appService.checkMobile()) this.close();
   }
-
+  /**
+  * @description Check which filters use, and update count by Output event
+  */
   public onChangeCounterFilter() {
     let count = 0;
     if (this.ticketsFilter.selectedCompanies.length > 0) count++;
@@ -309,27 +332,41 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     if (this.ticketsFilter.customDateRange || this.ticketsFilter.startDate && this.ticketsFilter.endDate) count++;
     this.changeCountFilter.emit(count);
   }
+  /**
+  * @description Init get request count tickets
+  */
   private getCount() {
     this.ticketsFilter.setSearchText("");
     this.ticketsService.getCount(this.ticketsFilter.getDataForRequest()).subscribe(res => {
       this.ticketsStateService.onInitCount(res);
     })
   }
-  getCountByField(field) {
-    return (this.ticketsCounts) ? this.ticketsCounts[field] : 0;
-  }
+  /**
+  * @description Hide tickets filters aside
+  */
   close() {
     this.onClose.emit(null);
   }
+  /**
+ * @description Show modal show add / edit Global filter
+ */
   saveFilter() {
     const modalRef = this.modalService.open(TicketsFilterSaveComponent, { windowClass: 'xs-modal user-modal', container: "app-tickets", backdrop: 'static', keyboard: false });
     modalRef.componentInstance.globalFilter = new TicketGlobalFilter(JSON.parse(JSON.stringify(this.globalFilter)));
     this.cd.detectChanges();
   }
+  /**
+ * @description Set new value "listType" without Output event
+ * @param {String} type - new value listType
+ */
   public setTypeFilterWithoutChange(type) {
     this.listType = type;
     this.ticketsFilter.setListType(type);
   }
+  /**
+* @description Set new value "listType"
+* @param {String} type - new value listType
+*/
   public setTypeFilter(type) {
     this.listType = type;
     this.ticketsFilter.setListType(type);
@@ -339,6 +376,9 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+* @description Get filter users from global list
+*/
   public onGetUsers() {
     this.users = this.usersStateService.getAllUsers().filter(user => {
       return user.accountType !== 'TECH' && !user.deletedAt && user.customerCompaniesInfo.some(item => {
@@ -347,6 +387,10 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     })
     this.clientsUsersNamesList = this.getUserList();
   }
+  /**
+* @description Get filter tech users from global list
+* @param {Array} data - List of Objects User
+*/
   onGetTechUsers(data) {
     if (this.customerPortalStateService.isCustomerPortal) this.checkUserCustomerUser();
     this.techUsersList = data.filter(item => {
@@ -356,6 +400,10 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     });
     this.techUsersNamesList = this.getTechUserList();
   }
+  /**
+* @description Set new values dates from datepicker
+* @param {Object} value - new value dates
+*/
   public onSelectDates(value) {
     if (value.start !== '' && value.end !== '') {
       this.ticketsFilter.setStartDate(moment(new Date(value.start)).format('YYYY-MM-DD'));
@@ -369,26 +417,46 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       this.globalFilter.clearDates();
     }
   }
+  /**
+* @description Set new values "customDateRange"
+* @param {String} data - new value "customDateRange"
+*/
   public onSelectCustomDateRange(data) {
     this.ticketsFilter.setCustomDateRange(data);
     this.globalFilter.setCustomDateRange(data);
     this.ticketsFilter.clearDates()
     this.globalFilter.clearDates();
   }
+  /**
+* @description Set new values companies
+* @param {Array} items - new value Array of Object Companies
+*/
   public onSelectCompany(items) {
     this.ticketsFilter.setCompanies(items);
     this.globalFilter.setClientCompaies(items.map(item => (item.id)));
   }
+  /**
+* @description Set new values tech users
+* @param {Array} items - new value Array of Object Users
+*/
   public onSelectTechUser(item) {
     let users = this.techUsersList.filter(user => item.some(userName => userName == `${user.firstName} ${user.lastName}`));
     this.ticketsFilter.setTechUsers(users);
     this.globalFilter.setAssignedUsersIds(users.map(item => item.id));
   }
-
+  /**
+ * @description Set new values priorities
+ * @param {Array} item - new value Array of Object Priority
+ */
   public onSelectPriority(item) {
     this.ticketsFilter.setPriorityLevels(item);
     this.globalFilter.setPriorityIds(item.map(item => item.id));
   }
+  /**
+* @description Set new values status
+* @param {Array} item - new value Array of Object Status
+* @param {Object} event - Object from input
+*/
   public onSelectStatus(item, event) {
     if (!event.target.checked) {
       item.selected = false;
@@ -410,20 +478,34 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       }
     }
   }
+  /**
+* @description Set new values users
+* @param {Array} item - new value Array of Object Users
+*/
   public onSelectUser(item) {
     let users = this.users.filter(user => item.some(userName => userName == `${user.firstName} ${user.lastName}`));
     this.ticketsFilter.setUsers(users);
     this.globalFilter.setCreatedUserIds(users.map(item => item.id));
   }
-
+  /**
+  * @description Set new values tags
+  * @param {Array} tags - new value Array of Object Tags
+  */
   onChangeTags(tags) {
     this.ticketsFilter.setTags(tags);
     this.globalFilter.setTagIds(tags.map(item => (item.id)));
   }
+  /**
+  * @description Set new value "listType" without Output event
+  * @param {String} data - new value
+  */
   setTypeSearchFilterWithoutChange(data) {
     this.setTypeFilterWithoutChange(data);
     this.ticketsStateService.onChangeLeftPanelFilter(data);
   }
+  /**
+ * @description Apply ticket filters
+ */
   applyFilters() {
     if (!this.ticketsFilter.sortBy) this.setTypeFilterWithoutChange("ALL");
     this.ticketsFilter.setSearchText("");
@@ -434,12 +516,18 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.close();
     this.getCountsStatus();
   }
+  /**
+ * @description Get sort list tech users
+ */
   getTechUserList() {
     return this.techUsersList.map(item => {
       return `${item.firstName} ${item.lastName}`
     }).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
       1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
   }
+  /**
+ * @description Get sort list users
+ */
   getUserList() {
     return this.users.map(item => {
       return `${item.firstName} ${item.lastName}`
@@ -450,6 +538,12 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
+  /**
+* @description Track list by index, retrun index
+* @param {Number} index - selected 
+* @param {Object} item - Object for use tracking
+* @returns {Number} This is the result
+*/
   public trackByIndex(index, item) {
     return index;
   }
