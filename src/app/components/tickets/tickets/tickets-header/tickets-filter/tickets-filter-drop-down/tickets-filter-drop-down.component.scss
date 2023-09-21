@@ -12,3 +12,9 @@
 .light-dropdown {
     padding-top: 16px !important;
 }
+.clip-text {
+    max-width: 230px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}

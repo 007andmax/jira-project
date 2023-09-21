@@ -13,13 +13,30 @@
             #chipList
             aria-label="Fruit selection"
         >
+            <app-dynamic-tooltip
+                [position]="'top'"
+                #productTooltip
+            ></app-dynamic-tooltip>
             <mat-chip
                 *ngFor="let tag of selectedTag; let i = index"
                 [selectable]="selectable"
                 [removable]="removable"
                 (removed)="remove(i)"
             >
-                {{reduceItemName(tag)}}
+                <div
+                    class="clip-text"
+                    *ngIf="reduceItemName(tag).length >= 30"
+                    (mouseenter)="productTooltip.setContent(reduceItemName(tag));productTooltip.show($event.target)"
+                    (mouseleave)="productTooltip.hide()"
+                >
+                    {{reduceItemName(tag)}}
+                </div>
+                <div
+                    class="clip-text"
+                    *ngIf="reduceItemName(tag).length < 30"
+                >
+                    {{reduceItemName(tag)}}
+                </div>
                 <mat-icon
                     matChipRemove
                     *ngIf="removable"

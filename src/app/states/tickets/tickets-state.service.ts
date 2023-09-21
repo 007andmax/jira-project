@@ -115,7 +115,7 @@ export class TicketsStateService {
     })
     this.ticketsRealTimeService.changeTicketFilters.subscribe(newChange => {
       if (newChange.action === 'TICKET_FILTER_SAVED') {
-        this.globalFilters.push(new TicketGlobalFilter(newChange.data))
+        this.globalFilters.unshift(new TicketGlobalFilter(newChange.data))
         this.onGetGlobalFilters.emit(this.globalFilters);
       }
       if (newChange.action === 'TICKET_FILTER_EDITED') {
@@ -128,6 +128,7 @@ export class TicketsStateService {
         this.globalFilters.splice(index, 1);
         this.onGetGlobalFilters.emit(this.globalFilters);
       }
+
     })
   }
   public changeFilterField(data) {

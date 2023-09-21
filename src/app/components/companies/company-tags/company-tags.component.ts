@@ -9,6 +9,7 @@ import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 import { CompanyTagsListService } from './services/company-tags-list.service';
 import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
 import { CompanyTag } from './class/company-tag';
+import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 
 @Component({
   selector: 'app-company-tags',
@@ -52,7 +53,8 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     private companyTagsListService: CompanyTagsListService,
     public tagsRealTimeService: TagsRealTimeService,
     private elRef: ElementRef,
-    public cd: ChangeDetectorRef
+    public cd: ChangeDetectorRef,
+    public ticketsListService: TicketsListService,
   ) { }
 
   /**

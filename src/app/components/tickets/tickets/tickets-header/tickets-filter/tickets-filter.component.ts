@@ -144,16 +144,16 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
 
       let createdUser: Array<User> = this.usersStateService.getAllUsers().filter(item => data.createdUserIds.some(userId => userId == item.id));
       if (createdUser.length > 0) {
-        this.usersDp.selectedTag = createdUser.map(item => `${item.firstName} ${item.lastName}`);
-        this.onSelectUser(createdUser.map(item => `${item.firstName} ${item.lastName}`));
+        this.usersDp.selectedTag = createdUser;
+        this.onSelectUser(createdUser);
       } else {
         this.usersDp.clearWithOutChanges();
         this.onSelectUser([]);
       }
       let techUser: Array<User> = this.usersStateService.getAllUsers().filter(item => data.assignedUsersIds.some(userId => userId == item.id));
       if (techUser.length > 0) {
-        this.techUsersDp.selectedTag = techUser.map(item => `${item.firstName} ${item.lastName}`);
-        this.onSelectTechUser(techUser.map(item => `${item.firstName} ${item.lastName}`));
+        this.techUsersDp.selectedTag = techUser;
+        this.onSelectTechUser(techUser);
       } else {
         this.techUsersDp.clearWithOutChanges();
         this.onSelectTechUser([]);
@@ -284,8 +284,8 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     let customerCompanyInfo = this.usersStateService.getCurrentUser().customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id'));
     if (customerCompanyInfo && customerCompanyInfo.customerUserRole.getPermission('VIEW_MY_TICKETS') && !customerCompanyInfo.customerUserRole.getPermission('VIEW_ALL_TICKETS')) {
       let users = this.usersStateService.getAllUsers().filter(item => item.id === this.usersStateService.getCurrentUser().id);
-      this.usersDp.selectedTag = users.map(item => `${item.firstName} ${item.lastName}`);
-      this.onSelectUser(users.map(item => `${item.firstName} ${item.lastName}`));
+      this.usersDp.selectedTag = users;
+      this.onSelectUser(users);
       this.usersDp.isDisabled = true;
     } else {
       this.usersDp.clearWithOutChanges();
@@ -439,10 +439,9 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
 * @description Set new values tech users
 * @param {Array} items - new value Array of Object Users
 */
-  public onSelectTechUser(item) {
-    let users = this.techUsersList.filter(user => item.some(userName => userName == `${user.firstName} ${user.lastName}`));
-    this.ticketsFilter.setTechUsers(users);
-    this.globalFilter.setAssignedUsersIds(users.map(item => item.id));
+  public onSelectTechUser(items) {
+    this.ticketsFilter.setTechUsers(items);
+    this.globalFilter.setAssignedUsersIds(items.map(item => item.id));
   }
   /**
  * @description Set new values priorities
@@ -483,9 +482,8 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
 * @param {Array} item - new value Array of Object Users
 */
   public onSelectUser(item) {
-    let users = this.users.filter(user => item.some(userName => userName == `${user.firstName} ${user.lastName}`));
-    this.ticketsFilter.setUsers(users);
-    this.globalFilter.setCreatedUserIds(users.map(item => item.id));
+    this.ticketsFilter.setUsers(item);
+    this.globalFilter.setCreatedUserIds(item.map(item => item.id));
   }
   /**
   * @description Set new values tags

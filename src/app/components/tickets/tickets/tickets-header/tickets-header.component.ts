@@ -81,6 +81,7 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     if (this.ticketsFilter.selectedUsers.length > 0) this.countFilter++;
     if (this.ticketsFilter.selectedStatus.length > 0) this.countFilter++;
     if (this.ticketsFilter.selectedPriorityLevels.length > 0) this.countFilter++;
+    if (this.ticketsFilter.tags.length > 0) this.countFilter++;
     if (this.ticketsFilter.customDateRange || this.ticketsFilter.startDate && this.ticketsFilter.endDate) this.countFilter++;
   }
   /**
