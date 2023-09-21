@@ -42,37 +42,80 @@ export class TicketGlobalFilter {
         if (this.endDate) data.endDate = this.endDate;
         return data
     }
+    /**
+* @description Set new value "startDate"
+* @param {String} data - new value "startDate"
+*/
     public setStartDate(data) {
         this.startDate = data;
     }
+    /**
+* @description Set new value "endDate"
+* @param {String} data - new value "endDate"
+*/
     public setEndDate(data) {
         this.endDate = data;
     }
+    /**
+* @description Clear values "startDate" "endDate"
+*/
     public clearDates() {
         this.startDate = null;
         this.endDate = null;
     }
+    /**
+* @description Set new value "clientCompanyIds"
+* @param {Array<string>} data - Array of String
+*/
     public setClientCompaies(data) {
         this.clientCompanyIds = data;
     }
+    /**
+* @description Set new value "createdUserIds"
+* @param {Array<string>} data - Array of String
+*/
     public setCreatedUserIds(data) {
         this.createdUserIds = data;
     }
+    /**
+* @description Set new value "assignedUsersIds"
+* @param {Array<string>} data - Array of String
+*/
     public setAssignedUsersIds(data) {
         this.assignedUsersIds = data;
     }
+    /**
+* @description Set new value "customDateRange"
+* @param {String} data - new value "customDateRange"
+*/
     public setCustomDateRange(data) {
         this.customDateRange = data;
     }
+    /**
+* @description Set new value "statusIds"
+* @param {Array<string>} data - Array of String
+*/
     public setStatusIds(data) {
         this.statusIds = data;
     }
+    /**
+* @description Set new value "tagIds"
+* @param {Array<string>} data - Array of String
+*/
     public setTagIds(data) {
         this.tagIds = data;
     }
+    /**
+* @description Set new value "priorityIds"
+* @param {Array<string>} data - Array of String
+*/
     public setPriorityIds(data) {
         this.priorityIds = data;
     }
+    /**
+* @description Return True if use one of filters
+* @returns  {Boolean} This is the result
+*/
     public isUseFilters() {
         return this.clientCompanyIds.length > 0 || this.createdUserIds.length > 0 || this.assignedUsersIds.length > 0 || this.statusIds.length > 0 || this.tagIds.length > 0 || this.priorityIds.length > 0 || this.customDateRange || this.startDate || this.endDate;
     }

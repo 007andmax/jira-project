@@ -15,7 +15,7 @@ import { TicketsListService } from '../../tickets/tickets/services/tickets-list.
   selector: 'app-company-tags',
   templateUrl: './company-tags.component.html',
   styleUrls: ['./company-tags.component.scss'],
-  providers: [CompanyTagsListService]
+  providers: [CompanyTagsListService, TicketsListService]
 })
 export class CompanyTagsComponent implements OnInit, OnDestroy {
   page: number = 0;
