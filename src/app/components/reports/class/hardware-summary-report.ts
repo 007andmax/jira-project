@@ -11,6 +11,7 @@ export class HardwareSummaryReport {
     hardwareSummaryWithWarrenty = true;
     hardwareSummaryWithSerialNumber = true;
     list = [];
+    date = new Date();
     constructor(data = null) {
         if (data) {
             this.companyId = data.companyId;

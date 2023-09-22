@@ -306,7 +306,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       this.listType = "ALL";
       this.ticketsFilter.setListType("ALL");
     }
-    this.ticketsFilter.setStatus(null);
+    this.ticketsFilter.setStatus([]);
     this.ticketsFilter.setTags([]);
     this.usersDp.clearWithOutChanges();
     if (!this.ticketsFilter.isDisbledCompany) this.companyDp.clearWithOutChanges();
