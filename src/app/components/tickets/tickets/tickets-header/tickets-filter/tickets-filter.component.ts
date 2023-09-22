@@ -97,8 +97,16 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     /* END */
     let getOnChangeTypeFilter = this.ticketsStateService.getOnChangeTypeFilter().subscribe(type => {
       this.listType = type;
+      this.ticketsFilter = new TicketsFilter();
+      this.datesDp.clearWithOutChanges();
+      this.usersDp.clearWithOutChanges();
+      if (!this.ticketsFilter.isDisbledCompany) this.companyDp.clearWithOutChanges();
+      this.techUsersDp.clearWithOutChanges();
+      this.tagsDp.clearWithOutChanges();
+      this.priorityDp.clearWithOutChanges();
       this.ticketsFilter.setSortBy(null);
       this.ticketsFilter.setListType(type);
+      this.ticketsStatus.forEach(item => item.selected = false);
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
       if (type !== 'RECURRING_TICKETS') this.getCount();
     })
@@ -213,13 +221,13 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       if (this.ticketsStatus.length > 0 && !this.globalFilter.isUseFilters()) this.clearCountsStatus();
     })
     this.sub.add(onInitGlobalFilter);
-    let onGetGlobalFilters = this.ticketsStateService.onGetGlobalFilters.subscribe(data => {
-      if (!data.find(item => item.id == this.globalFilter.id)) {
-        this.globalFilter = new TicketGlobalFilter();
-        if (this.ticketsFilter.checkUse()) this.onClearAll();
-      }
-    })
-    this.sub.add(onGetGlobalFilters);
+    /* let onGetGlobalFilters = this.ticketsStateService.onGetGlobalFilters.subscribe(data => {
+       if (!data.find(item => item.id == this.globalFilter.id)) {
+         this.globalFilter = new TicketGlobalFilter();
+         if (this.ticketsFilter.checkUse()) this.onClearAll();
+       }
+     })
+     this.sub.add(onGetGlobalFilters);*/
     let onChangeFilterField = this.ticketsStateService.onChangeFilterField.subscribe(data => {
       this.ticketsFilter.onFilter(data);
       this.applyFilters();
