@@ -91,6 +91,10 @@
                     class="assigne-user-name"
                     [textContent]="reduceItemName(item)"
                 ></div>
+                <div
+                    *ngIf="isSelected(item)"
+                    class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain filter-users-check"
+                ></div>
             </div>
         </ng-template>
     </div>

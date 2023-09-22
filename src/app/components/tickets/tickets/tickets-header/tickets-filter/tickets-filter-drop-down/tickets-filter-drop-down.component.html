@@ -69,14 +69,20 @@
             [ngForOf]="list"
             [ngForTrackBy]="trackById"
         >
-            <button
-                ngbDropdownItem
-                class="dropdown-item"
-                (click)="toggleItem(item)"
-                [textContent]="reduceItemName(item)"
-                [ngClass]="{'--selected':isSelected(item)}"
-            >
-            </button>
+            <div class="qt-pos-rel">
+                <button
+                    ngbDropdownItem
+                    class="dropdown-item"
+                    (click)="toggleItem(item)"
+                    [textContent]="reduceItemName(item)"
+                    [ngClass]="{'--selected':isSelected(item)}"
+                >
+                </button>
+                <div
+                    *ngIf="isSelected(item)"
+                    class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain filter-check"
+                ></div>
+            </div>
         </ng-template>
     </div>
 </div>

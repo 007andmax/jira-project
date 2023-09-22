@@ -32,6 +32,7 @@ import { TicketsFilterCompaniesDropDownComponent } from './tickets-filter-compan
 import * as moment from "moment";
 import { TicketsFilterCreatedDropDownComponent } from './tickets-filter-created-drop-down/tickets-filter-created-drop-down.component';
 import { TitleListType } from '../class/title-list-type';
+import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 
 @Component({
   selector: 'app-tickets-filter',
@@ -55,8 +56,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   selectedUser: string = null;
   users = [];
   techUsersList = [];
-  techUsersNamesList = [];
-  clientsUsersNamesList = [];
   listsStatus = [new ItemStatus('Unassigned', 'unassigned', 'UNASSIGNED'),
   new ItemStatus('Completed', 'completed', 'CLOSED'),
   new ItemStatus('In Progress', 'inProgress', 'OPEN'),
@@ -75,6 +74,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     public appService: AppService,
     public customerPortalStateService: CustomerPortalStateService,
+    private leftPanelStateService: LeftPanelStateService,
     public tagsStateService: TagsStateService) { }
 
 
@@ -351,7 +351,8 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
  * @description Show modal show add / edit Global filter
  */
   saveFilter() {
-    const modalRef = this.modalService.open(TicketsFilterSaveComponent, { windowClass: 'xs-modal user-modal', container: "app-tickets", backdrop: 'static', keyboard: false });
+    const conrainer = (this.leftPanelStateService.activePage == "new-tickets") ? "app-tickets" : "company-tickets";
+    const modalRef = this.modalService.open(TicketsFilterSaveComponent, { windowClass: 'xs-modal user-modal', container: conrainer, backdrop: 'static', keyboard: false });
     modalRef.componentInstance.globalFilter = new TicketGlobalFilter(JSON.parse(JSON.stringify(this.globalFilter)));
     this.cd.detectChanges();
   }
@@ -384,8 +385,8 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       return user.accountType !== 'TECH' && !user.deletedAt && user.customerCompaniesInfo.some(item => {
         return this.companiesState.getCompanies().some(company => company.accountType === "CLIENT" && !company.deletedAt && company.id == item.companyId);
       })
-    })
-    this.clientsUsersNamesList = this.getUserList();
+    }).sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
+      1 : ((`${b.firstName} ${b.lastName}`.toLowerCase() > `${a.firstName} ${a.lastName}`.toLowerCase()) ? -1 : 0));
   }
   /**
 * @description Get filter tech users from global list
@@ -397,8 +398,8 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       if (item.accountType === 'TECH' && !item.deletedAt) {
         return item;
       }
-    });
-    this.techUsersNamesList = this.getTechUserList();
+    }).sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
+      1 : ((`${b.firstName} ${b.lastName}`.toLowerCase() > `${a.firstName} ${a.lastName}`.toLowerCase()) ? -1 : 0));
   }
   /**
 * @description Set new values dates from datepicker
@@ -513,24 +514,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.onChangeCounterFilter();
     this.close();
     this.getCountsStatus();
-  }
-  /**
- * @description Get sort list tech users
- */
-  getTechUserList() {
-    return this.techUsersList.map(item => {
-      return `${item.firstName} ${item.lastName}`
-    }).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
-      1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
-  }
-  /**
- * @description Get sort list users
- */
-  getUserList() {
-    return this.users.map(item => {
-      return `${item.firstName} ${item.lastName}`
-    }).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
-      1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
   }
 
   ngOnDestroy(): void {

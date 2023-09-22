@@ -66,14 +66,20 @@
             [ngForOf]="tags"
             [ngForTrackBy]="trackById"
         >
-            <button
-                ngbDropdownItem
-                class="dropdown-item"
-                (click)="toggleItem(tag)"
-                [textContent]="tag.word"
-                [ngClass]="{'--selected':isSelected(tag.id)}"
-            >
-            </button>
+            <div class="qt-pos-rel">
+                <button
+                    ngbDropdownItem
+                    class="dropdown-item"
+                    (click)="toggleItem(tag)"
+                    [textContent]="tag.word"
+                    [ngClass]="{'--selected':isSelected(tag.id)}"
+                >
+                </button>
+                <div
+                    *ngIf="isSelected(tag.id)"
+                    class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain filter-tags-check"
+                ></div>
+            </div>
         </ng-template>
     </div>
 </div>
