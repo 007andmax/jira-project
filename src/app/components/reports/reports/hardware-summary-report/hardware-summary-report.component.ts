@@ -15,7 +15,7 @@ export class HardwareSummaryReportComponent implements OnInit {
   company: any;
   hardwareSummaryReport: HardwareSummaryReport = new HardwareSummaryReport();
   constructor(public cd: ChangeDetectorRef,
-    private companiesStateService: CompaniesStateService) { }
+    public companiesStateService: CompaniesStateService) { }
   ngOnInit() {
   }
   public getReport(data) {

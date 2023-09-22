@@ -21,13 +21,18 @@
             *ngIf="onInit"
         >
             <div class="qt-report__body-header">
-                <div class="body-m__sb qt-color-gray-900">Airdrie Choice Dental</div>
+                <div
+                    class="body-m__sb qt-color-gray-900"
+                    [textContent]="(company) ? company.name : 'All companies'"
+                ></div>
                 <h6 class="qt-fw-600 qt-color-gray-900">Software Summary Report</h6>
                 <div class="body-m qt-color-gray-600">
                     As on
           {{getDateForHeader(softwareSummaryReport.date)}}
                 </div>
-                <div class="body-m__sb qt-color-gray-900">Tech company: {{company.name}}</div>
+                <div class="body-m__sb qt-color-gray-900">
+                    Tech company: {{companiesStateService.getCurrentCompany().name}}
+                </div>
             </div>
             <table class="qt-report__body-table-body">
                 <thead>
