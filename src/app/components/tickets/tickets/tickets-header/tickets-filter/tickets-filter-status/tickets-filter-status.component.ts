@@ -15,9 +15,20 @@ export class TicketsFilterStatusComponent implements OnInit {
   ngOnInit() {
     this.shortVersion = this.ticketsStatus.length > 5;
   }
+  /**
+* @description Track list by "id" field, retrun field "id"
+* @param {Number} index - selected 
+* @param {Object} item - Object for use tracking
+* @returns {String} This is the result
+*/
   public trackById(index, item) {
     return item.id;
   }
+  /**
+* @description Init Output event selected status
+* @param {TicketStatusFilter} item - selected item
+* @param {Object} event - Object from input 
+*/
   selectStatus(item, event) {
     this.onSelectStatus.emit({ item, event })
   }

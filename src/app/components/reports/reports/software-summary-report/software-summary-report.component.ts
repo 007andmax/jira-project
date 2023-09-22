@@ -14,7 +14,7 @@ export class SoftwareSummaryReportComponent implements OnInit {
   company: any;
   softwareSummaryReport: SoftwareSummaryReport = new SoftwareSummaryReport();
   constructor(public cd: ChangeDetectorRef,
-    private companiesStateService: CompaniesStateService) { }
+    public companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
 

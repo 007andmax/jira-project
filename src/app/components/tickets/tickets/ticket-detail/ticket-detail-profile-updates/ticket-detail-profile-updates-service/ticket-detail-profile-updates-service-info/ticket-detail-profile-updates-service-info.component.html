@@ -116,19 +116,20 @@
                 (onChange)="onChangeDatePicker($event)"
             ></app-date-picker>
             <div
-                class="qt-button qt-button--with-icon --sm --gray qt-ml-8 button-mark-complete"
+                class="qt-button qt-button--with-icon --sm --gray qt-ml-8"
                 (click)="setComplete()"
-                [ngClass]="{'no-pointer':isBlockChange}"
+                [ngClass]="{'no-pointer':isBlockChange,
+                'button-mark-complete': service.completed}"
             >
                 <i
-                    class="icon__inactive qt-bg-contain icn-16 qt-mr-6"
+                    class="icon__task-pending --done qt-bg-contain icn-16 qt-mr-6"
                     *ngIf="service.completed"
                 ></i>
                 <i
                     class="icon__active qt-bg-contain icn-16 qt-mr-6"
                     *ngIf="!service.completed"
                 ></i>
-                <span [textContent]="(!service.completed) ? 'Mark Completed' : 'Mark Incomplete'"></span>
+                <span [textContent]="(!service.completed) ? 'Mark completed' : 'Сompleted'"></span>
             </div>
         </div>
     </div>

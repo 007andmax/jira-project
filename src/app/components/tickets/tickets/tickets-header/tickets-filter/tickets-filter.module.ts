@@ -13,6 +13,8 @@ import { TicketsFilterCompaniesDropDownComponent } from './tickets-filter-compan
 import { TicketsFilterSearchComponent } from './tickets-filter-search/tickets-filter-search.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { TicketsFilterCreatedDropDownComponent } from './tickets-filter-created-drop-down/tickets-filter-created-drop-down.component';
+import { DynamicTooltipModule } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.module';
+import { TicketsFilterUsersDropDownComponent } from './tickets-filter-users-drop-down/tickets-filter-users-drop-down.component';
 
 @NgModule({
     declarations: [
@@ -22,7 +24,8 @@ import { TicketsFilterCreatedDropDownComponent } from './tickets-filter-created-
         TicketsFilterDropDownComponent,
         TicketsFilterCompaniesDropDownComponent,
         TicketsFilterSearchComponent,
-        TicketsFilterCreatedDropDownComponent
+        TicketsFilterCreatedDropDownComponent,
+        TicketsFilterUsersDropDownComponent
     ],
     imports: [
         CommonModule,
@@ -34,7 +37,8 @@ import { TicketsFilterCreatedDropDownComponent } from './tickets-filter-created-
         ReactiveFormsModule,
         CompanyDropDownModule,
         DropDownModule,
-        InfiniteScrollModule
+        InfiniteScrollModule,
+        DynamicTooltipModule
     ],
     exports: [TicketsFilterComponent]
 

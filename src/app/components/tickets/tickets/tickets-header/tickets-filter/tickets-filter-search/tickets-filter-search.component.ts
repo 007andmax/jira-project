@@ -31,11 +31,18 @@ export class TicketsFilterSearchComponent implements OnInit {
 
   ngOnInit() {
   }
+  /**
+* @description Set id seleted ticket and routing to ticket details page
+* @param {Ticket} item - Object of Ticket
+*/
   selectTicket(item) {
     this.ticketStateService.setTicketRoutingId(item.id);
     const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/ticket/${item.id}`;
     window.open(url, '_blank');
   }
+  /**
+* @description Preparation to get ticket by name
+*/
   onSearch() {
     if (this.word.length == 0) {
       this.ticketsFilter.setSearchText("");
@@ -47,6 +54,9 @@ export class TicketsFilterSearchComponent implements OnInit {
     this.setDefaultScoll();
     this.onScroll();
   }
+  /**
+* @description Init request to get filter list tickets
+*/
   private getTickets() {
     if (this.ticketsListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
@@ -65,24 +75,42 @@ export class TicketsFilterSearchComponent implements OnInit {
       this.cd.detectChanges();
     })
   }
+  /**
+* @description Init logic to scroll list ticket
+*/
   public onScroll() {
     this.infiniteScrollDisabled = true;
     this.getTickets();
   }
+  /**
+* @description Init request to get filter list tickets
+*/
   public setDefaultScoll() {
     this.page_number = 0;
     this.ticketsListService.setBlockList(false);
     this.list = [];
 
   }
+  /**
+* @description Show dropdown
+*/
   onShowDropDown() {
     if (this.word.length > 0) this.globalSearch.open();
   }
+  /**
+* @description Clear values "word" and "list"
+*/
   clearWord() {
     this.word = "";
     this.list = [];
     this.ticketsFilter.setSearchText("");
   }
+  /**
+ * @description Track list by "id" field, retrun field "id"
+ * @param {Number} index - selected 
+ * @param {Object} item - Object for use tracking
+ * @returns {String} This is the result
+ */
   public trackById(index, item) {
     return item.id;
   }

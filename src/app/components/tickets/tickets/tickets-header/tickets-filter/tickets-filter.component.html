@@ -48,23 +48,22 @@
         (onSelectedItem)="onSelectCustomDateRange($event)"
         (selectedDate)="onSelectDates($event)"
     ></tickets-filter-created-drop-down>
-    <tickets-filter-drop-down
+    <tickets-filter-users-drop-down
         #usersDp
         [title]="'User'"
         [placeholder]="'Select user'"
         [placement]="'top-left'"
-        [list]="clientsUsersNamesList"
+        [list]="users"
         (filterChange)="onSelectUser($event)"
-    ></tickets-filter-drop-down>
-    <tickets-filter-drop-down
+    ></tickets-filter-users-drop-down>
+    <tickets-filter-users-drop-down
         #techUsersDp
         [placeholder]="'Select tech user'"
         [title]="'Tech User'"
         [placement]="'top-left'"
-        [list]="techUsersNamesList"
+        [list]="techUsersList"
         (filterChange)="onSelectTechUser($event)"
-    >
-    </tickets-filter-drop-down>
+    ></tickets-filter-users-drop-down>
     <tickets-filter-drop-down
         #priorityDp
         [title]="'Priority'"

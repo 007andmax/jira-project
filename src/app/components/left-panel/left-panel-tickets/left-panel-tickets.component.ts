@@ -101,12 +101,17 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
     this.sub.add(getConfirm);
     let onGetGlobalFilters = this.ticketsStateService.onGetGlobalFilters.subscribe(data => {
       this.globalFilters = data;
+      this.cd.detectChanges();
     })
     this.sub.add(onGetGlobalFilters);
     let onInitGlobalFilter = this.ticketsStateService.onInitGlobalFilter.subscribe((data: TicketGlobalFilter) => {
       this.selectedGlobalFilter = data;
     });
     this.sub.add(onInitGlobalFilter);
+    let getOnChangeTypeFilter = this.ticketsStateService.getOnChangeTypeFilter().subscribe(type => {
+      this.clearSelectedGlobalFilter();
+    })
+    this.sub.add(getOnChangeTypeFilter);
   }
   public clearSelectedGlobalFilter() {
     this.selectedGlobalFilter = new TicketGlobalFilter();
