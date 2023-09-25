@@ -44,9 +44,20 @@ export class TicketProfileProduct {
             if (!this.item.taxes) this.item.taxes = [];
         }
     }
+    /**
+  * @description Set new value "user"
+  * @param {CurrentUser} data - Object of CurrentUser
+  */
     public setUser(data) {
         this.user = data;
     }
+    /**
+ * @description Set new value "date"
+ * @param {Number} day - day from DatePicker
+ * @param {Number} month - month from DatePicker
+ * @param {Number} year - year from DatePicker
+ * @param {Number} timeOffset - time offset from Current Tech Company
+ */
     public setDate(day, month, year, timeOffset) {
         let current = new Date();
         if (day !== current.getDate() || current.getMonth() !== (month - 1)) {
@@ -59,9 +70,18 @@ export class TicketProfileProduct {
             this.date = finalDate.getTime();
         }
     }
+    /**
+  * @description Set new value "completed"
+  * @param {Boolean} data - new value "completed"
+  */
     public setCompleted(data) {
         this.completed = data;
     }
+    /**
+  * @description Return object for update ticket updates
+  * @param {String} id - id ticket updates
+  * @returns  {Object} This is the result
+  */
     public getDateForUpdate(id) {
         let user = (!this.user) ? { id: "" } : this.user;
         return {
@@ -79,10 +99,19 @@ export class TicketProfileProduct {
             ticketUpdateId: id
         }
     }
+    /**
+ * @description Set new value "item" and "itemOrder"
+ * @param {Product} data - Obejct of Product
+ * @param {Number} index - new value "itemOrder"
+ */
     public setData(data, index) {
         this.item = data;
         this.itemOrder = index;
     }
+    /**
+ * @description Set new value "item.taxes"
+ * @param {Product} data - Array Objects of Taxes
+ */
     public setTexes(data) {
         this.item.taxes = data;
     }
