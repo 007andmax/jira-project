@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ChangeDetectorRef, OnChanges, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectorRef, OnChanges, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { REMOVE_RECORD } from 'src/app/const/confirm';
@@ -10,6 +10,7 @@ import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { PasswordRecord } from '../class/password-record';
 import { PasswordRecordCategories } from '../class/password-record-categories';
+import { Subscription } from 'rxjs';
 
 /**
  * Password manager data table component
@@ -20,11 +21,12 @@ import { PasswordRecordCategories } from '../class/password-record-categories';
   styleUrls: ['./password-manager-table.component.scss'],
 
 })
-export class PasswordManagerTableComponent implements OnInit {
+export class PasswordManagerTableComponent implements OnInit, OnDestroy {
   @Input() item: PasswordRecord;
   @Output() onSelectRecord = new EventEmitter<any>();
   togglePassword: boolean = false;
   categories: Array<PasswordRecordCategories> = [];
+  sub: Subscription = new Subscription();
   constructor(private permissionsService: PermissionsService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
@@ -39,6 +41,11 @@ export class PasswordManagerTableComponent implements OnInit {
     this.passwordManagerStateService.onGetCategories.subscribe((data: Array<PasswordRecordCategories>) => {
       this.categories = data;
     })
+    let onChangePassword = this.passwordManagerStateService.onChangePassword.subscribe(data => {
+      if (data.id == this.item.id) this.item.setPassword(data.password);
+      this.cd.detectChanges();
+    })
+    this.sub.add(onChangePassword);
   }
   selectRecord(event) {
     this.onSelectRecord.emit(this.item);
@@ -93,5 +100,8 @@ export class PasswordManagerTableComponent implements OnInit {
     let expired = new Date(this.item.expiredDate).getTime();
     let day = (expired - current) / 86400000;
     return `${Math.round(day)} days to expire`;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }
