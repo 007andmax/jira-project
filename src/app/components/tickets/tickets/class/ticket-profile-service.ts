@@ -40,9 +40,20 @@ export class TicketProfileService {
             }
         }
     }
+    /**
+ * @description Set new value "user"
+ * @param {CurrentUser} data - Object of Current User
+ */
     public setUser(data) {
         this.user = data;
     }
+    /**
+* @description Set new value "date"
+* @param {Number} day - day from DatePicker
+* @param {Number} month - month from DatePicker
+* @param {Number} year - year from DatePicker
+* @param {Number} timeOffset - time offset from Current Tech Company
+*/
     public setDate(day, month, year, timeOffset) {
         let current = new Date();
         if (day !== current.getDate() || current.getMonth() !== (month - 1)) {
@@ -55,24 +66,50 @@ export class TicketProfileService {
             this.date = finalDate.getTime();
         }
     }
+    /**
+* @description Set new value "completed"
+* @param {Number} day - day from DatePicker
+* @param {Number} month - month from DatePicker
+* @param {Number} year - year from DatePicker
+*/
     public setComplated(day, month, year) {
         let current = new Date();
         let dateDP = new Date(year, month - 1, day);
         if (current.getDate() === dateDP.getDate() && current.getMonth() === dateDP.getMonth() || dateDP.getTime() < current.getTime()) this.completed = true;
         if (dateDP.getTime() > current.getTime()) this.completed = false;
     }
+    /**
+* @description Set new value "durationStart"
+* @param {Number} data - new value "durationStart"
+*/
     public setDurationStart(data) {
         this.durationStart = data;
     }
+    /**
+* @description Set new value "durationEnd"
+* @param {Number} data - new value "durationEnd"
+*/
     public setDurationEnd(data) {
         this.durationEnd = data;
     }
+    /**
+* @description Set new value "quantity"
+* @param {Number} data - new value "quantity"
+*/
     public setQuantity(data) {
         this.quantity = data;
     }
+    /**
+* @description Set new value "billableQuantity"
+* @param {Number} data - new value "billableQuantity"
+*/
     public setBillableQuantity(data) {
         this.billableQuantity = data;
     }
+    /**
+* @description Set new value "completed"
+* @param {Boolean} data - new value "completed"
+*/
     public setCompleted(data) {
         this.completed = data;
     }
