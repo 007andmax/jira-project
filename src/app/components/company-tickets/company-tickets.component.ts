@@ -155,6 +155,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     this.filter.companyDp.selectedItems = [company];
     this.filter.companyDp.removable = false;
     this.filter.ticketsFilter.setCompanies([company]);
+    this.filter.globalFilter.setClientCompaies([company.id]);
     this.filter.onChangeCounterFilter();
     this.ticketsFilter.setListType("ALL");
     this.ticketsFilter.setCompanies([company]);
