@@ -5,6 +5,7 @@ import { ReportListItemComponent } from './report-list-item/report-list-item.com
 import { ReportsRoutingModule } from './reports-routing.module';
 import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
 import { ReportListItemModule } from './report-list-item/report-list-item.module';
+import { DetailedContractReportComponent } from './reports/detailed-contract-report/detailed-contract-report.component';
 
 
 @NgModule({

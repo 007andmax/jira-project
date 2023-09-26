@@ -188,6 +188,78 @@
             ></div>
         </div>
     </div>
+    <div *ngIf="report === 'byDetailedContract'">
+        <div class="qt-report__header qt-df qt-ai-fs">
+            <div class="qt-report__header-content qt-df qt-ai-c qt-jc-sb">
+                <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
+                    <div
+                        class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c"
+                        [ngClass]="className"
+                    >
+                        <div class="qt-report__dropdown qt-report__dropdown-xl qt-mr-8">
+                            <company-drop-down
+                                [placeholder]="'Select Company'"
+                                [dropdownHeight]="'192px'"
+                                [heightInput]="'36px'"
+                                [validate]="validate.getCompany()"
+                                [errorMessage]="'Please select the company name'"
+                                [field]="'name'"
+                                [search]="true"
+                                [change]="true"
+                                (onSelectedItem)="selectClient($event)"
+                            ></company-drop-down>
+                        </div>
+                        <div class="qt-report__dropdown qt-input-block qt-mr-8">
+                            <contract-detail-drop-down
+                                #durationsTechSaleDP
+                                [placeholder]="'No interval'"
+                                [list]="detailContractReport.agreements"
+                                [isDisabled]="detailContractReport.isDisabledAgreements"
+                                [dropdownHeight]="'192px'"
+                                [heightInput]="'36px'"
+                                [sort]="false"
+                                [isBlockClear]="true"
+                                (onSelectedItem)="onSelectAgreements($event)"
+                            ></contract-detail-drop-down>
+                        </div>
+                        <div class="qt-report__dropdown qt-mr-8">
+                            <contract-detail-intervals-drop-down
+                                #dpDevices
+                                [field]="'title'"
+                                [sort]="true"
+                                [search]="true"
+                                [change]="true"
+                                [placeholder]="'All devices'"
+                                [dropdownHeight]="'300px'"
+                                [heightInput]="'36px'"
+                                [list]="detailContractReport.intervals"
+                                [isDisabled]="detailContractReport.isDisabledAgreements"
+                                (onSelectedItem)="onSelectInterval($event)"
+                            ></contract-detail-intervals-drop-down>
+                        </div>
+                        <button
+                            class="btn-new btn-primary-white qt-fs-0"
+                            (click)="getReportByDetailedContractsReport()"
+                            [disabled]="detailContractReport.isDisabledAgreements || !detailContractReport.selectedAgreement"
+                            [ngClass]="{'--disabled':detailContractReport.isDisabledAgreements || !detailContractReport.selectedAgreement}"
+                        >
+                            Get
+                Report
+                        </button>
+                    </div>
+                </div>
+                <app-report-additional-actions
+                    [orientation]="'LANDSCAPE'"
+                    [report]="'remote-access'"
+                    [fileName]="'remote-access-report'"
+                ></app-report-additional-actions>
+            </div>
+            <div
+                class="qt-report__control-panel-btn-close pointer icon__close"
+                (click)="back()"
+            ></div>
+        </div>
+    </div>
     <div *ngIf="report === 'device-ip-summary' || report === 'device-ip-summary-device'">
         <div class="qt-report__header">
             <div class="qt-df qt-ai-fs">

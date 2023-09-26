@@ -15,7 +15,7 @@ export class PermissionReportsService implements CanActivate {
                 this.getPermissions("VIEW_REMOTE_ACCESS_REPORT") ||
                 this.getPermissions("VIEW_TAXES_REPORT") ||
                 this.getPermissions("VIEW_DEVICES_REPORTS"))) return false;
-            if ((route.params.id === "byProducts" || route.params.id === "byCustomers" || route.params.id === "common-commissions" || route.params.id === "detailed-commissions" || route.params.id === "income-accounts") && this.getPermissions('VIEW_SALES_REPORT')) return true;
+            if ((route.params.id === "byProducts" || route.params.id === "byCustomers" || route.params.id === "common-commissions" || route.params.id === "detailed-commissions" || route.params.id === "income-accounts" || route.params.id === "byDetailedContract") && this.getPermissions('VIEW_SALES_REPORT')) return true;
             if ((route.params.id === "accounts-receivable" || route.params.id === "accounting-report" || route.params.id === "payments-report") && this.getPermissions('VIEW_FINANCIAL_REPORT')) return true;
             if ((route.params.id === "tech-sales" || route.params.id === "tech-ticket" || route.params.id === "tech-service" || route.params.id === "ticket-report" || route.params.id === "service-report") && this.getPermissions('VIEW_PERFORMANCE_REPORT')) return true;
             if ((route.params.id === "remote-access") && this.getPermissions('VIEW_REMOTE_ACCESS_REPORT')) return true;
@@ -32,7 +32,7 @@ export class PermissionReportsService implements CanActivate {
                     this.getPermissions("VIEW_REMOTE_ACCESS_REPORT") ||
                     this.getPermissions("VIEW_TAXES_REPORT") ||
                     this.getPermissions("VIEW_DEVICES_REPORTS"))) resolve(false);
-                if ((route.params.id === "byProducts" || route.params.id === "byCustomers" || route.params.id === "common-commissions" || route.params.id === "detailed-commissions" || route.params.id === "income-accounts") && this.getPermissions('VIEW_SALES_REPORT')) resolve(true);
+                if ((route.params.id === "byProducts" || route.params.id === "byCustomers" || route.params.id === "common-commissions" || route.params.id === "detailed-commissions" || route.params.id === "income-accounts" || route.params.id === "byDetailedContract") && this.getPermissions('VIEW_SALES_REPORT')) resolve(true);
                 if ((route.params.id === "accounts-receivable" || route.params.id === "accounting-report" || route.params.id === "payments-report") && this.getPermissions('VIEW_FINANCIAL_REPORT')) resolve(true);
                 if ((route.params.id === "tech-sales" || route.params.id === "tech-ticket" || route.params.id === "tech-service" || route.params.id === "ticket-report" || route.params.id === "service-report") && this.getPermissions('VIEW_PERFORMANCE_REPORT')) resolve(true);
                 if ((route.params.id === "remote-access") && this.getPermissions('VIEW_REMOTE_ACCESS_REPORT')) resolve(true);

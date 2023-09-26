@@ -35,6 +35,9 @@ import { Subscription } from 'rxjs';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { PaymentsReport } from '../reports/payments-report/class/payments-report';
 import { SoftwareSummaryDevicesDroDownComponent } from '../reports/software-summary-report/software-summary-devices-dro-down/software-summary-devices-dro-down.component';
+import { DetailContractreport } from '../class/detail-contract-report';
+import { ContractsService } from 'src/app/services/contracts/contracts.service';
+import { DetailContractInterval } from '../class/detail-contract-interval';
 
 
 @Component({
@@ -52,6 +55,7 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
   accountingReport: AccountingReport = new AccountingReport();
   accountsReceivable: AccountsReceivable = new AccountsReceivable();
   productSalesReport: ProductSalesReport = new ProductSalesReport();
+  detailContractReport: DetailContractreport = new DetailContractreport();
   productsCompanyReport: ProductCompanyReport = new ProductCompanyReport();
   customerSalesReport: CustomerSalesReport = new CustomerSalesReport();
   detailedCommissionsReport: DetailedCommissionsReport = new DetailedCommissionsReport();
@@ -86,6 +90,7 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     private productService: ProductService,
     public devicesStateService: DevicesStateService,
     private devicesService: DevicesService,
+    private contractsService: ContractsService,
     private companiesStateService: CompaniesStateService,
     private leftPanelStateService: LeftPanelStateService,
     private ticketReportStateService: TicketReportStateService) { }
@@ -164,6 +169,19 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
   onSelectTypeTechSale(data) {
     this.techSalesReport.setType(data);
   }
+  onSelectAgreements(data) {
+    this.detailContractReport.setSelectedAgreement(data);
+    if (data) {
+      this.contractsService.getIntervals(data.id).subscribe(res => {
+        let list: Array<DetailContractInterval> = [];
+        for (const key in res) list.push(new DetailContractInterval(key, res[key].startDate, res[key].endDate));
+        this.detailContractReport.setIntervals(list);
+      })
+    }
+  }
+  onSelectInterval(data) {
+    this.detailContractReport.setInterval(data.title);
+  }
   onSelectDurationTechSale(data) {
     this.techSalesReport.setDuration(data);
     this.techSalesReport.resetDates();
@@ -238,9 +256,11 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.deviceIpSummary.setCompanyId(null);
       this.remoteConnectionReport.setCompanyId(null);
       this.techService.setCompanyId(null);
+      this.detailContractReport.setCompanyId(null);
       this.softwareSummaryReport.resetSoft();
     } else {
       this.selectedClient = selectClient;
+      this.detailContractReport.setCompanyId(selectClient.id);
       this.accountingReport.setCompanyId(selectClient.id);
       this.glNumber.setClientCompanyId(selectClient.id);
       this.accountsReceivable.setClientCompanyId(selectClient.id);
@@ -254,12 +274,19 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.hardwareSummaryReport.setCompanyId(selectClient.id);
       this.deviceIpSummary.setCompanyId(selectClient.id);
       this.remoteConnectionReport.setCompanyId(selectClient.id);
+      if (this.report === "byDetailedContract") this.getAgreements();
       if (this.report === 'software-summary' || this.report === 'software-summary-device' || this.report === 'hardware-summary' || this.report === 'hardware-summary-device' || this.report === 'device-ip-summary' || this.report === 'device-ip-summary-device' || this.report === 'remote-access') this.getSoftByCompany(selectClient.id);
       if (this.serviceReport.startDate === '' && this.serviceReport.endDate === '') this.serviceReport.setDatesByCompany(this.selectedClient);
       this.validate.resetCompany();
     }
     if (this.dpDevices) this.dpDevices.clearWithOutChanges();
     this.onSelectedClient.emit(this.selectedClient);
+  }
+  getAgreements() {
+    this.contractsService.getServiceAgreementsByCompanyForReport(this.detailContractReport.companyId).subscribe(data => {
+      this.detailContractReport.setAgreements(data);
+      this.detailContractReport.setIsDisabledAgreements(false);
+    })
   }
   toggleDetailsByProducts(data) {
     this.detailedCommissionsReport.setDetailsByProducts(data);
@@ -334,6 +361,16 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.techSalesReport.setDataFromRequest(data);
       this.setDatareport(this.techSalesReport)
       this.reportsStateService.onChangeExportCSV(new ExportCSV('reports/sales/byTechSold', this.techSalesReport.getForRequest(), 'Report_by_tech_sold'));
+
+    });
+  }
+  getReportByDetailedContractsReport() {
+    if (!this.validate.isValidateDetailedContracts(this.detailContractReport.selectedAgreement)) return;
+    this.onRequest.emit(true);
+    this.reportsService.getReportByDetailedContracts(this.detailContractReport.getForRequest()).subscribe((data: any) => {
+      this.detailContractReport.setDataFromRequest(data);
+      this.setDatareport(this.detailContractReport)
+      //  this.reportsStateService.onChangeExportCSV(new ExportCSV('reports/remoteAccess', this.remoteConnectionReport.getForRequest(), 'Report_by_remote_access'));
 
     });
   }

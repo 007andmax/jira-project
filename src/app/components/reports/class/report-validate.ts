@@ -3,6 +3,7 @@ export class ReportValidate {
     monthlyDetailed: boolean = true;
     company: boolean = true;
     techUser: boolean = true;
+    agreement: boolean = true;
     constructor() { }
     public getDates() {
         return this.dates;
@@ -90,6 +91,10 @@ export class ReportValidate {
     public isValidateRemoteConnection(start, end) {
         if (start === '' && end === '') this.dates = false;
         return this.dates;
+    }
+    public isValidateDetailedContracts(agreement) {
+        if (!agreement) this.agreement = false;
+        return this.agreement;
     }
     public isValidateSoftwareSummary(company) {
 
