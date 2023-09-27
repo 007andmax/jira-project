@@ -13,7 +13,9 @@ export class ContractDetailIntervalsDropDownComponent extends DropDownComponent 
   getSelectedItemText() {
     return (this.selectedItem) ? this.reduceItemName(this.selectedItem) : "";
   }
-
+  onCheckAdd(event) {
+    if (this.search) this.list = this.reqList.filter(item => this.reduceItemName(item).toLowerCase().includes(event.target.value.toLowerCase()))
+  }
   reduceItemName(item: DetailContractInterval) {
     return `interval #${item.title} ${moment(new Date(item.startDate)).format('YYYY.MM.DD')} - ${moment(new Date(item.endDate)).format('YYYY.MM.DD')}`;
   }

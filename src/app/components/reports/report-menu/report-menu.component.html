@@ -212,13 +212,15 @@
                         <div class="qt-report__dropdown qt-input-block qt-mr-8">
                             <contract-detail-drop-down
                                 #durationsTechSaleDP
-                                [placeholder]="'No interval'"
+                                [placeholder]="'Select contract'"
                                 [list]="detailContractReport.agreements"
                                 [isDisabled]="detailContractReport.isDisabledAgreements"
                                 [dropdownHeight]="'192px'"
+                                [dropdownWidth]="'500px'"
                                 [heightInput]="'36px'"
+                                [search]="true"
+                                [change]="true"
                                 [sort]="false"
-                                [isBlockClear]="true"
                                 (onSelectedItem)="onSelectAgreements($event)"
                             ></contract-detail-drop-down>
                         </div>
@@ -229,7 +231,8 @@
                                 [sort]="true"
                                 [search]="true"
                                 [change]="true"
-                                [placeholder]="'All devices'"
+                                [placeholder]="'Select interval'"
+                                [dropdownWidth]="'500px'"
                                 [dropdownHeight]="'300px'"
                                 [heightInput]="'36px'"
                                 [list]="detailContractReport.intervals"

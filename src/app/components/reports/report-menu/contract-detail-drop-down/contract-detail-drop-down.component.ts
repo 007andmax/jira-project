@@ -16,6 +16,9 @@ export class ContractDetailDropDownComponent extends DropDownComponent {
     DEVICE: '/by device',
     USER: '/by user',
   };
+  onCheckAdd(event) {
+    if (this.search) this.list = this.reqList.filter(item => this.reduceItemName(item).toLowerCase().includes(event.target.value.toLowerCase()))
+  }
   getSelectedItemText() {
     return (this.selectedItem) ? this.reduceItemName(this.selectedItem) : "";
   }
