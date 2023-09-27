@@ -65,7 +65,7 @@
                 </div>
                 <table
                     class="qt-report__body-table-body qt-mb-10"
-                    *ngIf="item.serviceExpenses.BLOCK_TIME.length > 0 && onInit"
+                    *ngIf="(item.serviceExpenses.BLOCK_TIME.length > 0 || item.serviceExpenses.PARTIAL.length > 0) && onInit"
                 >
                     <thead>
                         <tr>
@@ -121,7 +121,7 @@
                 </div>
                 <table
                     class="qt-report__body-table-body"
-                    *ngIf="item.serviceExpenses.EXCEEDING.length > 0 && onInit"
+                    *ngIf="(item.serviceExpenses.EXCEEDING.length > 0 || item.serviceExpenses.PARTIAL.length > 0) && onInit"
                 >
                     <thead>
                         <tr>

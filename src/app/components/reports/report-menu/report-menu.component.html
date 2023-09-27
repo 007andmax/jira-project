@@ -211,7 +211,7 @@
                         </div>
                         <div class="qt-report__dropdown qt-input-block qt-mr-8">
                             <contract-detail-drop-down
-                                #durationsTechSaleDP
+                                #contractDetailDp
                                 [placeholder]="'Select contract'"
                                 [list]="detailContractReport.agreements"
                                 [isDisabled]="detailContractReport.isDisabledAgreements"
@@ -226,17 +226,17 @@
                         </div>
                         <div class="qt-report__dropdown qt-mr-8">
                             <contract-detail-intervals-drop-down
-                                #dpDevices
+                                #dpInterval
                                 [field]="'title'"
                                 [sort]="true"
                                 [search]="true"
                                 [change]="true"
                                 [placeholder]="'Select interval'"
-                                [dropdownWidth]="'500px'"
+                                [dropdownWidth]="'350px'"
                                 [dropdownHeight]="'300px'"
                                 [heightInput]="'36px'"
                                 [list]="detailContractReport.intervals"
-                                [isDisabled]="detailContractReport.isDisabledAgreements"
+                                [isDisabled]="detailContractReport.isDisabledIntervals"
                                 (onSelectedItem)="onSelectInterval($event)"
                             ></contract-detail-intervals-drop-down>
                         </div>

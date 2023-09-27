@@ -8,8 +8,9 @@ export class DetailContractreport {
     agreements: Array<ContractItem> = [];
     intervals: Array<DetailContractInterval> = [];
     isDisabledAgreements: boolean = true;
+    isDisabledIntervals: boolean = true;
     selectedAgreement: ContractItem = null;
-
+    intervalAgreement: string;
     interval: string;
     blockRate: number;
     description: string;
@@ -31,6 +32,9 @@ export class DetailContractreport {
     public setIsDisabledAgreements(data) {
         this.isDisabledAgreements = data;
     }
+    public setIsDisabledIntervals(data) {
+        this.isDisabledIntervals = data;
+    }
     public setAgreements(data) {
         this.agreements = data;
     }
@@ -40,13 +44,13 @@ export class DetailContractreport {
     public setIntervals(data) {
         this.intervals = data;
     }
-    public setInterval(data) {
-        this.interval = data;
+    public setIntervalAgreement(data) {
+        this.intervalAgreement = data;
     }
     public getForRequest() {
         let data: any = {};
         data.agreementId = this.selectedAgreement.id;
-        if (this.interval) data.interval = this.interval;
+        if (this.intervalAgreement) data.interval = this.intervalAgreement;
         return data;
     }
 }

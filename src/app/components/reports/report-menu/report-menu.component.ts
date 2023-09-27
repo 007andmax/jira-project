@@ -38,6 +38,8 @@ import { SoftwareSummaryDevicesDroDownComponent } from '../reports/software-summ
 import { DetailContractreport } from '../class/detail-contract-report';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { DetailContractInterval } from '../class/detail-contract-interval';
+import { ContractDetailDropDownComponent } from './contract-detail-drop-down/contract-detail-drop-down.component';
+import { ContractDetailIntervalsDropDownComponent } from './contract-detail-intervals-drop-down/contract-detail-intervals-drop-down.component';
 
 
 @Component({
@@ -84,6 +86,8 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
   @ViewChild('durationsTechSaleDP') durationsTechSaleDP: DropDownComponent;
   @ViewChild('dp') datePicker: any;
   @ViewChild('dpDevices') dpDevices: SoftwareSummaryDevicesDroDownComponent;
+  @ViewChild('contractDetailDp') contractDetailDp: ContractDetailDropDownComponent;
+  @ViewChild('dpInterval') dpInterval: ContractDetailIntervalsDropDownComponent;
 
   constructor(private reportsService: ReportsService,
     private reportsStateService: ReportsStateService,
@@ -170,17 +174,23 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     this.techSalesReport.setType(data);
   }
   onSelectAgreements(data) {
+    this.detailContractReport.setIntervalAgreement(null);
     this.detailContractReport.setSelectedAgreement(data);
     if (data) {
       this.contractsService.getIntervals(data.id).subscribe(res => {
         let list: Array<DetailContractInterval> = [];
         for (const key in res) list.push(new DetailContractInterval(key, res[key].startDate, res[key].endDate));
         this.detailContractReport.setIntervals(list);
+        this.detailContractReport.setIsDisabledIntervals(false);
       })
+    } else {
+      this.detailContractReport.setIsDisabledIntervals(true);
+      this.dpInterval.clearWithOutChanges();
     }
   }
   onSelectInterval(data) {
-    this.detailContractReport.setInterval(data.title);
+    console.log("onSelectInterval", data);
+    this.detailContractReport.setIntervalAgreement(data.title);
   }
   onSelectDurationTechSale(data) {
     this.techSalesReport.setDuration(data);
@@ -279,6 +289,10 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       if (this.serviceReport.startDate === '' && this.serviceReport.endDate === '') this.serviceReport.setDatesByCompany(this.selectedClient);
       this.validate.resetCompany();
     }
+    this.detailContractReport.setIsDisabledIntervals(true);
+    this.detailContractReport.setIsDisabledAgreements(true);
+    if (this.contractDetailDp) this.contractDetailDp.clearWithOutChanges();
+    if (this.dpInterval) this.dpInterval.clearWithOutChanges();
     if (this.dpDevices) this.dpDevices.clearWithOutChanges();
     this.onSelectedClient.emit(this.selectedClient);
   }
