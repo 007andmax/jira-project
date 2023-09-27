@@ -1,7 +1,6 @@
 <div>
     <app-report-menu
         [report]="'byDetailedContract'"
-        (onSelectedClient)="onSelectedClient($event)"
         (onRequest)="onRequest($event)"
         (getReport)="getReport($event)"
     ></app-report-menu>
@@ -63,6 +62,13 @@
                         </span>
                     </div>
                 </div>
+                <div class="services-header">Block time services</div>
+                <div
+                    class="service-no-services"
+                    *ngIf="(item.serviceExpenses.BLOCK_TIME.length === 0 || item.serviceExpenses.PARTIAL.length === 0)"
+                >
+                    No services yet
+                </div>
                 <table
                     class="qt-report__body-table-body qt-mb-10"
                     *ngIf="(item.serviceExpenses.BLOCK_TIME.length > 0 || item.serviceExpenses.PARTIAL.length > 0) && onInit"
@@ -84,7 +90,7 @@
                             [ngForTrackBy]="trackByIndex"
                         >
                             <tr class="qt-report__body-row">
-                                <td class="body-l qt-color-gray-900">{{ service.getParseDate() }}</td>
+                                <td>{{ service.getParseDate() }}</td>
                                 <td>tkt# {{ service.ticketNumber }}</td>
                                 <td>{{service.user}}</td>
                                 <td>{{service.name}}</td>
@@ -111,6 +117,13 @@
                         </ng-template>
                     </tbody>
                 </table>
+                <div class="services-header">Exceeding services</div>
+                <div
+                    class="service-no-services"
+                    *ngIf="(item.serviceExpenses.EXCEEDING.length === 0 || item.serviceExpenses.PARTIAL.length === 0)"
+                >
+                    No services yet
+                </div>
                 <div class="qt-df qt-jc-sb exceeding-header">
                     <span>
                         Rate exceeding block time - {{detailContractReport.rateExceeding | currency}}
@@ -140,7 +153,7 @@
                             [ngForTrackBy]="trackByIndex"
                         >
                             <tr class="qt-report__body-row">
-                                <td class="body-l qt-color-gray-900">{{ service.getParseDate() }}</td>
+                                <td>{{ service.getParseDate() }}</td>
                                 <td>tkt# {{ service.ticketNumber }}</td>
                                 <td>{{service.user}}</td>
                                 <td>{{service.name}}</td>
@@ -156,12 +169,51 @@
                             [ngForTrackBy]="trackByIndex"
                         >
                             <tr class="qt-report__body-row">
-                                <td class="body-l qt-color-gray-900">{{ service.getParseDate() }}</td>
+                                <td>{{ service.getParseDate() }}</td>
                                 <td>tkt# {{ service.ticketNumber }}</td>
                                 <td>{{service.user}}</td>
                                 <td>{{service.name}}</td>
                                 <td>
                                     {{service.getDuration(service.exceedingQuantity)}}
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </tbody>
+                </table>
+                <div class="services-header">Default services</div>
+                <div
+                    class="service-no-services"
+                    *ngIf="item.serviceExpenses.DEFAULT.length === 0"
+                >
+                    No services yet
+                </div>
+                <table
+                    class="qt-report__body-table-body"
+                    *ngIf="item.serviceExpenses.DEFAULT.length > 0 && onInit"
+                >
+                    <thead>
+                        <tr>
+                            <th class="qt-fw-600 qt-color-gray-900">Date</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Ticket</th>
+                            <th class="qt-fw-600 qt-color-gray-900">User</th>
+                            <th class="qt-fw-600 qt-color-gray-9002">Service</th>
+                            <th class="qt-fw-600 qt-color-gray-9002">Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-template
+                            ngFor
+                            let-service
+                            [ngForOf]="item.serviceExpenses.DEFAULT"
+                            [ngForTrackBy]="trackByIndex"
+                        >
+                            <tr class="qt-report__body-row">
+                                <td>{{ service.getParseDate() }}</td>
+                                <td>tkt# {{ service.ticketNumber }}</td>
+                                <td>{{service.user}}</td>
+                                <td>{{service.name}}</td>
+                                <td>
+                                    {{service.getDuration(service.quantity)}}
                                 </td>
                             </tr>
                         </ng-template>

@@ -291,6 +291,7 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     }
     this.detailContractReport.setIsDisabledIntervals(true);
     this.detailContractReport.setIsDisabledAgreements(true);
+    this.detailContractReport.setSelectedAgreement(null);
     if (this.contractDetailDp) this.contractDetailDp.clearWithOutChanges();
     if (this.dpInterval) this.dpInterval.clearWithOutChanges();
     if (this.dpDevices) this.dpDevices.clearWithOutChanges();

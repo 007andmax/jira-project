@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DetailContractreport } from '../../class/detail-contract-report';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'detailed-contract-report',
@@ -11,12 +12,10 @@ export class DetailedContractReportComponent implements OnInit {
   onInit: boolean = false;
   selectedClient = null;
   detailContractReport: DetailContractreport = new DetailContractreport();
-  constructor(public cd: ChangeDetectorRef) { }
+  constructor(public cd: ChangeDetectorRef,
+    private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
-  }
-  onSelectedClient(client) {
-    this.selectedClient = client;
   }
   public onRequest(data) {
     this.loadingInProgress = data;
@@ -24,7 +23,7 @@ export class DetailedContractReportComponent implements OnInit {
   }
   public getReport(data) {
     this.detailContractReport = data;
-    //  this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.detailedCommissionsReport.companyId);
+    this.selectedClient = this.companiesStateService.getCompanies().find(item => item.id === this.detailContractReport.companyId);
     //  this.techUser = this.usersStateService.getAllUsers().find(item => item.id === this.techService.techUserId);
     this.onInit = true;
   }
