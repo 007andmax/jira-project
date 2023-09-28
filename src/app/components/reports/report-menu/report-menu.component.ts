@@ -173,6 +173,10 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
   onSelectTypeTechSale(data) {
     this.techSalesReport.setType(data);
   }
+  /**
+* @description Init request to get Intervals for dropdown
+* @param {Object} data - Object of ContractItem
+*/
   onSelectAgreements(data) {
     this.detailContractReport.setIntervalAgreement(null);
     this.detailContractReport.setSelectedAgreement(data);
@@ -188,9 +192,13 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.dpInterval.clearWithOutChanges();
     }
   }
+  /**
+* @description Set new value of Interval
+* @param {Object} data - Object of DetailContractInterval
+*/
   onSelectInterval(data) {
     console.log("onSelectInterval", data);
-    this.detailContractReport.setIntervalAgreement(data.title);
+    this.detailContractReport.setIntervalAgreement((data) ? data.title : null);
   }
   onSelectDurationTechSale(data) {
     this.techSalesReport.setDuration(data);
@@ -250,6 +258,10 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     this.isDisabledCompany = (data === 'Summary') ? true : false;
     if (data === 'Summary') this.validate.resetCompany();
   }
+  /**
+* @description Set new value selected company from dropdown
+* @param {Object} selectClient - Object Company
+*/
   public selectClient(selectClient) {
     if (selectClient == null) {
       this.accountsReceivable.setClientCompanyId(null);

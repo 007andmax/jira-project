@@ -23,6 +23,7 @@ export class DetailedContractReportComponent implements OnInit {
   }
   public getReport(data) {
     this.detailContractReport = data;
+    console.log("data", data);
     this.selectedClient = this.companiesStateService.getCompanies().find(item => item.id === this.detailContractReport.companyId);
     //  this.techUser = this.usersStateService.getAllUsers().find(item => item.id === this.techService.techUserId);
     this.onInit = true;

@@ -62,7 +62,10 @@ export class DropDownComponent implements OnInit {
     if (this.sort) this.list.sort((a, b) => (this.field) ? a[this.field].localeCompare(b[this.field]) : a.localeCompare(b));
     this.reqList = JSON.parse(JSON.stringify(this.list));
   }
-
+  /**
+  * @description Check if use "search", will filter list items by 'field'. If 'field' no exist filter will by Array String. If search element doesn't exist, will init logic to show icon for add
+  * @param {Object} event - Object from input
+ */
   onCheckAdd(event) {
     if (this.search) this.list = this.reqList.filter(item => (this.field) ? item[this.field].toLowerCase().includes(event.target.value.toLowerCase()) : item.toLowerCase().includes(event.target.value.toLowerCase()))
     let index = this.list.findIndex(item => (this.field) ? item[this.field] === event.target.value : item === event.target.value);

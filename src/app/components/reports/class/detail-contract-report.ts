@@ -5,6 +5,8 @@ import * as moment from "moment";
 
 export class DetailContractreport {
     companyId: string;
+    companyName: string;
+    type: string;
     agreements: Array<ContractItem> = [];
     intervals: Array<DetailContractInterval> = [];
     isDisabledAgreements: boolean = true;
@@ -22,9 +24,23 @@ export class DetailContractreport {
         this.description = data.description;
         this.prepaidServiceExpenseDto = data.prepaidServiceExpenseDto.map(item => new PrepaidServiceExpenseDto(item));
         this.rateExceeding = data.rateExceeding;
+        this.companyName = data.companyName;
+        this.type = data.type;
     }
-    public getMonthInterval(date) {
-        return moment(new Date(date)).format('MMMM');
+    public getParseType() {
+        return this.type.replace("_", " ").toLocaleLowerCase()
+    }
+    public getParseIntervalAgreement() {
+        return Number(this.intervalAgreement) + 1;
+    }
+    public getDuration(quantity) {
+        var timeInMinutes = quantity * 60,
+            hours = Math.floor(timeInMinutes / 60),
+            minutes = Math.round(timeInMinutes - (hours * 60));
+        return `${(hours < 10) ? '0' + hours : hours} : ${(minutes < 10) ? '0' + minutes : minutes}`
+    }
+    public getDateInterval(date) {
+        return moment(new Date(date)).format('DD MMM YYYY');
     }
     public setCompanyId(data) {
         this.companyId = data;
