@@ -115,6 +115,10 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     this.sub.add(onDeviceUninstalled);
     //  this.sub.add(getOnCompanies);
   }
+  /**
+   * @description Return parse company name
+   * @returns {String} This is the result
+  */
   getSelectedClientName() {
     return (this.selectedClient) ? this.selectedClient.name.toLowerCase().split(' ').join('-') : '';
   }
@@ -391,6 +395,9 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
 
     });
   }
+  /**
+   * @description Init request to get detail contract report
+  */
   getReportByDetailedContractsReport() {
     if (!this.validate.isValidateDetailedContracts(this.detailContractReport.selectedAgreement)) return;
     this.onRequest.emit(true);

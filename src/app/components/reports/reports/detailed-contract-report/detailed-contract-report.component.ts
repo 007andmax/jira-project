@@ -17,10 +17,18 @@ export class DetailedContractReportComponent implements OnInit {
 
   ngOnInit() {
   }
+  /**
+   * @description Set new value "loadingInProgress" when progress request to get report
+   * @param {Boolean} data - new value 
+  */
   public onRequest(data) {
     this.loadingInProgress = data;
     this.cd.detectChanges();
   }
+  /**
+   * @description Set response from request to get report
+   * @param {DetailContractreport} data - Object of DetailContractreport
+  */
   public getReport(data) {
     this.detailContractReport = data;
     console.log("data", data);
