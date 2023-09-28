@@ -131,7 +131,7 @@
                         Rate exceeding block time - {{detailContractReport.rateExceeding | currency}}
                     </span>
                     <span>
-                        Number of hours used in exceeding rate - {{item.quantityExceeding}} hr
+                        Number of hours used in exceeding rate - {{detailContractReport.getDuration(item.quantityExceeding)}} hr
                     </span>
                 </div>
                 <table
