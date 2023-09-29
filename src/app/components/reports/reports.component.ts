@@ -16,7 +16,6 @@ export class ReportsComponent implements OnInit {
   reportList: Array<{ type: string; name: string; address: string }> = [
     { type: "SALES", name: "Product sales report", address: "byProducts" },
     { type: "SALES", name: "Customer sales report", address: "byCustomers" },
-    { type: "SALES", name: "Detailed contract report", address: "byDetailedContract" },
     { type: "TAXES", name: "Tax report", address: "byTaxes" },
     {
       type: "COMMISSIONS",
@@ -57,6 +56,7 @@ export class ReportsComponent implements OnInit {
     },
     { type: "TICKETS", name: "Tickets report", address: "ticket-report" },
     { type: "TICKETS", name: "Service report", address: "service-report" },
+    { type: "TICKETS", name: "Detailed contract report", address: "byDetailedContract" },
     {
       type: "INCOME_ACCOUNTS",
       name: "Income account report",

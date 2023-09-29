@@ -22,8 +22,7 @@ export class LeftPanelReportsComponent implements OnInit {
 
   ngOnInit() {
     this.list.push(new ReportsLeftMenuItem("icon__sales", "SALES", [new ReportsLeftMenuItemReport('Product sales report', 'byProducts'),
-    new ReportsLeftMenuItemReport('Customer sales report', 'byCustomers'),
-    new ReportsLeftMenuItemReport('Detailed contract report', 'byDetailedContract')], 'VIEW_SALES_REPORT'));
+    new ReportsLeftMenuItemReport('Customer sales report', 'byCustomers')], 'VIEW_SALES_REPORT'));
     this.list.push(new ReportsLeftMenuItem("icon__taxes", "TAXES", [new ReportsLeftMenuItemReport('Tax report', 'byTaxes')], 'VIEW_TAXES_REPORT'));
     this.list.push(new ReportsLeftMenuItem("icon__commision", "COMMISSIONS", [new ReportsLeftMenuItemReport('Common report', 'common-commissions'),
     new ReportsLeftMenuItemReport('Detailed report', 'detailed-commissions')], 'VIEW_SALES_REPORT'));
@@ -38,7 +37,8 @@ export class LeftPanelReportsComponent implements OnInit {
     new ReportsLeftMenuItemReport('Tech ticket report', 'tech-ticket'),
     new ReportsLeftMenuItemReport('Tech service report', 'tech-service')], 'VIEW_PERFORMANCE_REPORT'));
     this.list.push(new ReportsLeftMenuItem("icon__tickets", "TICKETS", [new ReportsLeftMenuItemReport('Tickets report', 'ticket-report'),
-    new ReportsLeftMenuItemReport('Service report', 'service-report')], 'VIEW_PERFORMANCE_REPORT'));
+    new ReportsLeftMenuItemReport('Service report', 'service-report'),
+    new ReportsLeftMenuItemReport('Detailed contract report', 'byDetailedContract')], 'VIEW_PERFORMANCE_REPORT'));
     this.list.push(new ReportsLeftMenuItem("icon__income", "INCOME ACCOUNTS", [new ReportsLeftMenuItemReport('Income account report', 'income-accounts')], 'VIEW_SALES_REPORT'));
 
   }
