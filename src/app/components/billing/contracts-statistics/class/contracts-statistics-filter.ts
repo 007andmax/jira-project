@@ -1,4 +1,5 @@
 import { FilterListTop } from "src/class/list/filter-list-top";
+import { ContractStatisticsItem } from "./contracts-statistics-item";
 
 export class ContractStatisticsFilter {
     filterTop: Array<FilterListTop> = [new FilterListTop('company-name', ''),
@@ -11,13 +12,11 @@ export class ContractStatisticsFilter {
     new FilterListTop('billable-hours', '')];
 
     /**
-     * @description Sort users list by field
+     * @description Sort contracts list by field
      * @param  {string} field  - field for sort
-     * @param  {Array<User>} reqUsers  - user list for sort
-     * @param  {Array<Company>} companies  - company 
-     * @param  {Array<CrmCompanyIndustry>} industries  - CrmCompanyIndustry list
+     * @param  {Array<ContractStatisticsItem>} reqContracts  - contracts list for sort
      */
-    public onFilter(field, reqUsers) {
+    public onFilter(field, reqContracts) {
 
         let index = this.filterTop.findIndex(item => item.field === field);
         if (index > -1) {
@@ -26,10 +25,10 @@ export class ContractStatisticsFilter {
                 this.clearFilter();
                 if (sort === '' || sort === 'DESC') {
                     this.filterTop[index].filter = 'ASC';
-                    this.onFilterCompanyName(reqUsers);
+                    this.onFilterCompanyName(reqContracts);
                 } else {
                     this.filterTop[index].filter = 'DESC';
-                    reqUsers.reverse();
+                    reqContracts.reverse();
                 }
 
             }
@@ -37,20 +36,20 @@ export class ContractStatisticsFilter {
                 this.clearFilter();
                 if (sort === '' || sort === 'DESC') {
                     this.filterTop[index].filter = 'ASC';
-                    this.onFilterType(reqUsers);
+                    this.onFilterType(reqContracts);
                 } else {
                     this.filterTop[index].filter = 'DESC';
-                    reqUsers.reverse();
+                    reqContracts.reverse();
                 }
             }
             if (field === 'description') {
                 this.clearFilter();
                 if (sort === '' || sort === 'DESC') {
                     this.filterTop[index].filter = 'ASC';
-                    this.onFilterDescription(reqUsers);
+                    this.onFilterDescription(reqContracts);
                 } else {
                     this.filterTop[index].filter = 'DESC';
-                    reqUsers.reverse();
+                    reqContracts.reverse();
                 }
             }
             if (field === 'purchased') {
@@ -58,12 +57,12 @@ export class ContractStatisticsFilter {
                 if (sort === '' || sort === 'DESC') {
 
                     this.filterTop[index].filter = 'ASC';
-                    this.onFilterPurchased(reqUsers);
+                    this.onFilterPurchased(reqContracts);
 
                 } else {
 
                     this.filterTop[index].filter = 'DESC';
-                    reqUsers.reverse();
+                    reqContracts.reverse();
                 }
 
 
@@ -72,10 +71,10 @@ export class ContractStatisticsFilter {
                 this.clearFilter();
                 if (sort === '' || sort === 'DESC') {
                     this.filterTop[index].filter = 'ASC';
-                    this.onFilterUsedHours(reqUsers);
+                    this.onFilterUsedHours(reqContracts);
                 } else {
                     this.filterTop[index].filter = 'DESC';
-                    reqUsers.reverse();
+                    reqContracts.reverse();
                 }
 
 
@@ -86,10 +85,10 @@ export class ContractStatisticsFilter {
                 this.clearFilter();
                 if (sort === '' || sort === 'DESC') {
                     this.filterTop[index].filter = 'ASC';
-                    this.onFilterLeftHours(reqUsers);
+                    this.onFilterLeftHours(reqContracts);
                 } else {
                     this.filterTop[index].filter = 'DESC';
-                    reqUsers.reverse();
+                    reqContracts.reverse();
                 }
 
 
@@ -98,10 +97,10 @@ export class ContractStatisticsFilter {
                 this.clearFilter();
                 if (sort === '' || sort === 'DESC') {
                     this.filterTop[index].filter = 'ASC';
-                    this.onFilterExceedingHours(reqUsers);
+                    this.onFilterExceedingHours(reqContracts);
                 } else {
                     this.filterTop[index].filter = 'DESC';
-                    reqUsers.reverse();
+                    reqContracts.reverse();
                 }
 
 
@@ -110,10 +109,10 @@ export class ContractStatisticsFilter {
                 this.clearFilter();
                 if (sort === '' || sort === 'DESC') {
                     this.filterTop[index].filter = 'ASC';
-                    this.onFilterBillableHours(reqUsers);
+                    this.onFilterBillableHours(reqContracts);
                 } else {
                     this.filterTop[index].filter = 'DESC';
-                    reqUsers.reverse();
+                    reqContracts.reverse();
                 }
 
 
@@ -128,68 +127,68 @@ export class ContractStatisticsFilter {
         this.filterTop.forEach(item => item.filter = '');
     }
     /**
-  * @description Sort user list by FirstName and LastName
-  * @param  {Array<User>} reqUsers  - Array Object user
+  * @description Sort contracts list by companyName
+  * @param  {Array<ContractStatisticsItem>} reqContracts  - Array Object contract
   */
-    private onFilterCompanyName(reqUsers) {
-        reqUsers.sort((a, b) => (a.companyName.toLowerCase() > b.companyName.toLowerCase()) ?
+    private onFilterCompanyName(reqContracts) {
+        reqContracts.sort((a, b) => (a.companyName.toLowerCase() > b.companyName.toLowerCase()) ?
             1 : ((b.companyName.toLowerCase() > a.companyName.toLowerCase()) ? -1 : 0));
     }
     /**
- * @description Sort user list by FirstName and LastName
- * @param  {Array<User>} reqUsers  - Array Object user
+ * @description Sort contracts list by type
+ * @param  {Array<ContractStatisticsItem>} reqContracts  - Array Object contract
  */
-    private onFilterType(reqUsers) {
-        reqUsers.sort((a, b) => (a.type.toLowerCase() > b.type.toLowerCase()) ?
+    private onFilterType(reqContracts) {
+        reqContracts.sort((a, b) => (a.type.toLowerCase() > b.type.toLowerCase()) ?
             1 : ((b.type.toLowerCase() > a.type.toLowerCase()) ? -1 : 0));
     }
 
     /**
- * @description Sort user list by FirstName and LastName
- * @param  {Array<User>} reqUsers  - Array Object user
- */
-    private onFilterDescription(reqUsers) {
-        reqUsers.sort((a, b) => (a.description.toLowerCase() > b.description.toLowerCase()) ?
+  * @description Sort contracts list by description
+  * @param  {Array<ContractStatisticsItem>} reqContracts  - Array Object contract
+  */
+    private onFilterDescription(reqContracts) {
+        reqContracts.sort((a, b) => (a.description.toLowerCase() > b.description.toLowerCase()) ?
             1 : ((b.description.toLowerCase() > a.description.toLowerCase()) ? -1 : 0));
     }
     /**
-    * @description Sort user list by FirstName and LastName
-    * @param  {Array<User>} reqUsers  - Array Object user
-    */
-    private onFilterPurchased(reqUsers) {
-        reqUsers.sort((a, b) => (a.quantity > b.quantity) ?
+ * @description Sort contracts list by quantity
+ * @param  {Array<ContractStatisticsItem>} reqContracts  - Array Object contract
+ */
+    private onFilterPurchased(reqContracts) {
+        reqContracts.sort((a, b) => (a.quantity > b.quantity) ?
             1 : ((b.quantity > a.quantity) ? -1 : 0));
     }
     /**
-   * @description Sort user list by FirstName and LastName
-   * @param  {Array<User>} reqUsers  - Array Object user
-   */
-    private onFilterUsedHours(reqUsers) {
-        reqUsers.sort((a, b) => (a.quantityUsed > b.quantityUsed) ?
+  * @description Sort contracts list by quantityUsed
+  * @param  {Array<ContractStatisticsItem>} reqContracts  - Array Object contract
+  */
+    private onFilterUsedHours(reqContracts) {
+        reqContracts.sort((a, b) => (a.quantityUsed > b.quantityUsed) ?
             1 : ((b.quantityUsed > a.quantityUsed) ? -1 : 0));
     }
     /**
-      * @description Sort user list by FirstName and LastName
-      * @param  {Array<User>} reqUsers  - Array Object user
-      */
-    private onFilterLeftHours(reqUsers) {
-        reqUsers.sort((a, b) => (a.quantityLeft > b.quantityLeft) ?
+   * @description Sort contracts list by quantityLeft
+   * @param  {Array<ContractStatisticsItem>} reqContracts  - Array Object contract
+   */
+    private onFilterLeftHours(reqContracts) {
+        reqContracts.sort((a, b) => (a.quantityLeft > b.quantityLeft) ?
             1 : ((b.quantityLeft > a.quantityLeft) ? -1 : 0));
     }
     /**
-    * @description Sort user list by FirstName and LastName
-    * @param  {Array<User>} reqUsers  - Array Object user
+    * @description Sort contracts list by quantityExceeding
+    * @param  {Array<ContractStatisticsItem>} reqContracts  - Array Object contract
     */
-    private onFilterExceedingHours(reqUsers) {
-        reqUsers.sort((a, b) => (a.quantityExceeding > b.quantityExceeding) ?
+    private onFilterExceedingHours(reqContracts) {
+        reqContracts.sort((a, b) => (a.quantityExceeding > b.quantityExceeding) ?
             1 : ((b.quantityExceeding > a.quantityExceeding) ? -1 : 0));
     }
     /**
-  * @description Sort user list by FirstName and LastName
-  * @param  {Array<User>} reqUsers  - Array Object user
-  */
-    private onFilterBillableHours(reqUsers) {
-        reqUsers.sort((a, b) => (a.otherQuantity > b.otherQuantity) ?
+    * @description Sort contracts list by otherQuantity
+    * @param  {Array<ContractStatisticsItem>} reqContracts  - Array Object contract
+    */
+    private onFilterBillableHours(reqContracts) {
+        reqContracts.sort((a, b) => (a.otherQuantity > b.otherQuantity) ?
             1 : ((b.otherQuantity > a.otherQuantity) ? -1 : 0));
     }
 

@@ -19,6 +19,9 @@ export class ContractsStatisticsTableComponent implements OnInit {
   ngOnInit() {
     this.getStatistics();
   }
+  /**
+  * @description Init request to get contracts list statistics
+  */
   private getStatistics() {
     this.contractsService.getStatistics().subscribe((data: Array<ContractStatisticsItem>) => {
       this.list = data.map(item => new ContractStatisticsItem(item));
@@ -26,9 +29,11 @@ export class ContractsStatisticsTableComponent implements OnInit {
       this.cd.detectChanges();
     })
   }
+  /**
+  * @description Init logic to sort list contracts
+  * @param  {String} field  - value of field
+  */
   public onFilter(field) {
     this.filter.onFilter(field, this.list)
-
   }
-
 }
