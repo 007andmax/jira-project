@@ -368,7 +368,7 @@ const routes: Routes = [
     canActivate: [PermissionClientUserService]
   },
   {
-    path: ':domain/contracts-statistics',
+    path: ':domain/contract-statistics',
     loadChildren: './components/billing/contracts-statistics/contracts-statistics.module#ContractsStatisticsModule',
     canActivate: [PermissionNoSuperAdminService]
   },

@@ -23,6 +23,6 @@ export class ContractStatisticsItem {
         return `${(hours < 10) ? '0' + hours : hours} : ${(minutes < 10) ? '0' + minutes : minutes}`
     }
     public getParseTypeAndInterval() {
-        return `${this.type} ${this.interval}`.replace("_", " ").toLocaleLowerCase()
+        return `${this.type} - ${this.interval}`.replace("_", " ").toLocaleLowerCase()
     }
 }

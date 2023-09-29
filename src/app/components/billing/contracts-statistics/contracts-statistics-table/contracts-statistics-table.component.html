@@ -5,50 +5,55 @@
                 <div class="qt-page-list__header-thead__row">
                     <div
                         class="ticket-table__requested-by pointer"
-                        (click)="onFilter('created')"
+                        (click)="onFilter('company-name')"
                     >
                         Customer company name
                         <span class="qt-table-modern__sorting"></span>
                     </div>
                     <div
                         class="ticket-table__requested-by pointer"
-                        (click)="onFilter('subject')"
+                        (click)="onFilter('type')"
                     >
                         Contract type
                         <span class="qt-table-modern__sorting"></span>
                     </div>
                     <div
                         class="ticket-table__company pointer"
-                        (click)="onFilter('company')"
+                        (click)="onFilter('description')"
                     >
                         Contract description
                         <span class="qt-table-modern__sorting"></span>
                     </div>
-                    <div class="ticket-table__assignee">Purchased hours</div>
+                    <div
+                        class="ticket-table__assignee pointer"
+                        (click)="onFilter('purchased')"
+                    >
+                        Purchased hours
+                    </div>
                     <div
                         class="ticket-table__status pointer"
-                        (click)="onFilter('status')"
+                        (click)="onFilter('used-hours')"
                     >
                         Block-time used hours
                         <span class="qt-table-modern__sorting"></span>
                     </div>
                     <div
                         class="ticket-table__created-date pointer"
-                        (click)="onFilter('created_date')"
+                        (click)="onFilter('left-hours')"
                     >
                         Block-time hours left
                         <span class="qt-table-modern__sorting"></span>
                     </div>
                     <div
                         class="ticket-table__created-date pointer"
-                        (click)="onFilter('created_date')"
+                        (click)="onFilter('exceeding-hours')"
                     >
                         Exceeding hours
                         <span class="qt-table-modern__sorting"></span>
                     </div>
                     <div
                         class="ticket-table__created-date pointer"
-                        (click)="onFilter('created_date')"
+                        (click)="onFilter('billable-hours')"
                     >
                         Other billable hours
                         <span class="qt-table-modern__sorting"></span>
