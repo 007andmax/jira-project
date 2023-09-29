@@ -1,0 +1,49 @@
+<div class="qt-table-modern__row">
+    <div class="ticket-table__requested-by">
+        <div
+            [textContent]="contract.companyName"
+            class="ellipsis"
+        ></div>
+    </div>
+    <div
+        class="ticket-table__requested-by type-interval"
+        [textContent]="contract.getParseTypeAndInterval()"
+    >
+    </div>
+    <div class="ticket-table__company">
+        <div
+            [textContent]="contract.description"
+            class="ellipsis"
+        ></div>
+    </div>
+    <div class="ticket-table__assignee">
+        <div
+            [textContent]="contract.getDuration(contract.quantity)"
+            class="ellipsis"
+        ></div>
+    </div>
+    <div class="ticket-table__status">
+        <div
+            [textContent]="contract.getDuration(contract.quantityUsed)"
+            class="ellipsis"
+        ></div>
+    </div>
+    <div class="ticket-table__created-date">
+        <div
+            [textContent]="contract.getDuration(contract.quantityLeft)"
+            class="ellipsis"
+        ></div>
+    </div>
+    <div class="ticket-table__created-date">
+        <div
+            [textContent]="contract.getDuration(contract.quantityExceeding)"
+            class="ellipsis"
+        ></div>
+    </div>
+    <div class="ticket-table__created-date">
+        <div
+            [textContent]="contract.getDuration(contract.otherQuantity)"
+            class="ellipsis"
+        ></div>
+    </div>
+</div>

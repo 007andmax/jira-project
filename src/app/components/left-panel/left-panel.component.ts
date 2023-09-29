@@ -135,6 +135,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/setting/marketing-email`)) this.state = 'marketing-email';
           if (window.location.href.includes(`/setting/customer-portal`)) this.state = 'customer-portal';
 
+          if (window.location.href.includes(`/contracts-statistics`)) this.state = 'contracts-statistics';
           if (window.location.href.includes(`/support-page`)) this.state = 'support-page';
           if (window.location.href.includes(`/users`)) this.state = 'new-users';
           if (!window.location.href.includes(`/setting/marketing-email`) && window.location.href.includes(`/marketing`)) this.state = 'marketing';
@@ -299,6 +300,7 @@ export class LeftPanelComponent implements OnInit {
   onChangeState(data) {
     if (this.state !== data) {
       this.state = data;
+      if (this.state === 'contracts-statistics') this.goToLink(`contracts-statistics`);
       if (this.state === 'new-companies') this.goToLink(`companies`);
       if (this.state === 'billing-dashboard') this.goToLink('billing-dashboard');
       if (this.state === 'new-services') this.goToLink('default-services');

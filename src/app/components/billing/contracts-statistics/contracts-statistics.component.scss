@@ -1,0 +1,35 @@
+@import './src/assets/styles/variable';
+
+/deep/.main-container {
+    background-color: $background;
+}
+
+.ticket-fileupload {
+    margin-top: 32px;
+}
+
+.qt-page-list {
+    padding: 0;
+
+    @media (min-width: 768px) {
+        background-color: $white;
+    }
+}
+/deep/ .qt-page-list__header-title {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0;
+    color: $gray-900;
+
+    @media (max-width: 767px) {
+        color: $white;
+    }
+}
+.qt-page-list__header.--sticky {
+    @media (min-width: 768px) {
+        margin: 0;
+        padding: 15px 32px;
+        background-color: $gray-50;
+        border-bottom: 1px solid $gray-200;
+    }
+}
