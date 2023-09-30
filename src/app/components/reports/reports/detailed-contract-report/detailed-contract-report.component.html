@@ -48,7 +48,7 @@
                         </span>
                     </div>
                     <div class="qt-df detailed-contract-report__header-item">
-                        <span class="detailed-contract-report__header-item-right">
+                        <span class="detailed-contract-report__header-item-left">
                             Interval No.{{detailContractReport.intervalAgreement ? detailContractReport.getParseIntervalAgreement() + i : i + 1}} - {{detailContractReport.getDateInterval(item.startDate)}} - {{detailContractReport.getDateInterval(item.endDate)}}
                         </span>
                         <span class="detailed-contract-report__header-item-right">
@@ -59,7 +59,7 @@
                         <span class="detailed-contract-report__header-item-left ">
                             Block rate - {{detailContractReport.blockRate | currency}}
                         </span>
-                        <span class="detailed-contract-report__header-item-left ellipsis">
+                        <span class="detailed-contract-report__header-item-right ellipsis">
                             Number of hours used - {{detailContractReport.getDuration(item.quantity - item.quantityLeft)}}
                         </span>
                     </div>
