@@ -179,6 +179,10 @@ export class UserProfile {
 
         return new UserUpdate(this, user);
     }
+    /**
+* @description Return object of User Add, where get part data from User object
+* @returns  {UserAdd} This is the result
+*/
     public getUserForAdd() {
 
         return new UserAdd(this);
