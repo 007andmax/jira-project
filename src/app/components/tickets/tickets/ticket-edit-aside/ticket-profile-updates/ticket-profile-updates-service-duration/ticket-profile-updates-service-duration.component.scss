@@ -148,28 +148,6 @@
     position: relative;
     max-width: 300px;
     align-items: center;
-    &:before {
-      content: "";
-      background-image: url("/assets/img/icons/up-arrow.svg");
-      background-size: cover;
-      top: 6px;
-      position: absolute;
-      width: 16px;
-      height: 16px;
-      box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
-      border-radius: 50%;
-    }
-    &:after {
-      content: "";
-      background-image: url("/assets/img/icons/down-arrow.svg");
-      background-size: cover;
-      bottom: 6px;
-      position: absolute;
-      width: 16px;
-      height: 16px;
-      box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
-      border-radius: 50%;
-    }
     &:first-child {
       border-right: solid 1px $gray-200;
     }
@@ -267,4 +245,28 @@
   @include input;
   height: 100%;
   padding: 10px;
+}
+.arrow-up {
+  content: "";
+  background-image: url(/assets/img/icons/up-arrow.svg);
+  background-size: cover;
+  top: 6px;
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  display: block;
+}
+.arrow-down {
+  content: "";
+  display: block;
+  background-image: url(/assets/img/icons/down-arrow.svg);
+  background-size: cover;
+  bottom: 6px;
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 50%
 }
