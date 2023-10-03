@@ -11,41 +11,80 @@ export class UserValidate {
     rePhoneNumber = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/;
 
     constructor() { }
+
+    /**
+ * @description Check, if index of Array "phoneNumbers" > 0, when init logic add new elements to Array "phoneNumber"
+ * @param  {Array<boolean>} phoneNumbers  - Array of Boolean
+ */
     public addPhoneNumbers(phoneNumbers) {
         phoneNumbers.forEach((element, index) => {
             if (index > 0) this.addPhoneNumber();
         });
     }
+    /**
+* @description Remove element from "phoneNumber" by index
+* @param  {Number} i  - index for remove
+*/
     public removePhoneNumber(i) {
         this.phoneNumber.splice(i);
     }
+    /**
+* @description Init logic add new element to array "phoneNumber"
+*/
     public addPhoneNumber() {
         this.phoneNumber.push(true);
     }
+    /**
+* @description Return value of "company"
+* @returns {boolean} This is the result
+*/
     public getCompany() {
         return this.company;
     }
+    /**
+* @description Reset value of "company"
+*/
     public setCompanyValid() {
         this.company = true;
     }
+    /**
+* @description Return value of "firstName"
+* @returns {boolean} This is the result
+*/
     public getFirstName() {
         return this.firstName;
     }
+    /**
+* @description Return value of "primaryContactEmail"
+* @returns {boolean} This is the result
+*/
     public getPrimaryContactEmail() {
         return this.primaryContactEmail;
     }
+    /**
+* @description Return value of element "phoneNumber"  by index
+* @param  {Number} i  - index element
+* @returns {boolean} This is the result
+*/
     public getPhoneNumber(i) {
         return this.phoneNumber[i];
     }
-
+    /**
+    * @description Check valid field "firstname"
+    * @param  {string} firstname  - value First Name
+    */
     public checkValidFirstName(firstname) {
         if (!firstname || firstname.length < 2) {
             this.firstName = false;
         } else {
             this.firstName = true;
         }
-
     }
+    /**
+    * @description Check valid phone number
+    * @param  {number} i  - index "phoneNumber"
+    * @param  {string} number  - value of phone number
+    */
     public checkValidPhoneNumber(i, number) {
         if (this.phoneNumber.length === 1) {
             if (number.length > 0 && number.length < 14) { this.phoneNumber[i] = false; } else {
@@ -59,22 +98,30 @@ export class UserValidate {
             }
         }
     }
-
+    /**
+    * @description Return value of "existPrimaryContactEmail"
+    * @returns {boolean} This is the result
+    */
     public getExistPrimaryContactEmail() {
         return this.existPrimaryContactEmail;
     }
+    /**
+    * @description Set new value of "existPrimaryContactEmail"
+    * @param  {boolean} data  - new value
+    */
     public setExistPrimaryContactEmail(data) {
         this.existPrimaryContactEmail = data;
     }
-
+    /**
+    * @description Check valid "primaryEmail"
+    * @param  {string} primaryEmail  - value of "primaryEmail"
+    */
     public checkValidPrimaryEmail(primaryEmail) {
         if (!primaryEmail || !primaryEmail.match(this.reEmail)) {
             this.primaryContactEmail = false;
         } else {
             this.primaryContactEmail = true;
         }
-
-
     }
 
 
