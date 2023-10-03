@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from "@angular/router";
+import { NavigationEnd, Router } from "@angular/router";
 import { Company } from 'src/app/interfaces/company/company';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
@@ -40,6 +40,7 @@ export class LeftPanelComponent implements OnInit {
   state: string = '';
   page: string = '';
   showMobTab = false;
+  isInitPopStateNaviate: boolean = false;
   @ViewChild('panelBilling') panelBilling: LeftPanelBillingComponent;
   @ViewChild('panelCompanies') panelCompanies: LeftPanelCompaniesComponent;
   @ViewChild('panelSettings') panelSettings: LeftPanelSettingsComponent;
@@ -90,8 +91,12 @@ export class LeftPanelComponent implements OnInit {
     });
 
     this.router.events
-      .subscribe((event) => {
-        if (this.state === '') {
+      .subscribe((event: any) => {
+        console.log("this.state", this.state);
+        console.log("event", event);
+        console.log("instanceof", event instanceof NavigationEnd);
+        if (event.navigationTrigger === "popstate") this.isInitPopStateNaviate = true;
+        if (this.state === '' || (event instanceof NavigationEnd && this.isInitPopStateNaviate)) {
           if (window.location.href.includes(`/companies`)) this.state = 'new-companies';
           if (window.location.href.includes(`/billing-dashboard`)) this.state = 'billing-dashboard';
           if (window.location.href.includes(`/default-services`)) this.state = 'new-services';
@@ -198,8 +203,10 @@ export class LeftPanelComponent implements OnInit {
           this.leftPanelStateService.changeState(this.state);
           if (!this.cd['destroyed']) {
             this.cd.detectChanges();
-            this.updatePage(this.state);
           }
+          this.updatePage(this.state);
+          if (this.isInitPopStateNaviate) this.leftPanelStateService.toggleLeftPanel(false);
+          this.isInitPopStateNaviate = false;
         }
       });
 
@@ -243,6 +250,7 @@ export class LeftPanelComponent implements OnInit {
     this.goToLink('tickets');
   }
   updatePage(data) {
+    console.log("updatePage", data);
     if (this.leftPanelService.isSupportPage(data)) this.page = "SUPPORT";
     if (this.leftPanelService.isTicketsPage(data)) this.page = "TICKETS";
     if (this.leftPanelService.isTicketDetailPage(data)) this.page = "TICKET-DETAIL";
