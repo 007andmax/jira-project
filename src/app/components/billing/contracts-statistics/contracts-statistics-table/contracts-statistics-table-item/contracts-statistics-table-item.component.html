@@ -2,13 +2,15 @@
     <div class="ticket-table__requested-by">
         <div
             [textContent]="contract.companyName"
-            class="ellipsis"
+            class="ellipsis ticket-table__requested-by-inner"
         ></div>
     </div>
     <div
-        class="ticket-table__requested-by type-interval"
-        [textContent]="contract.getParseTypeAndInterval()"
+        class="ticket-table__сontract-type type-interval"
     >
+      <div class="ticket-table__сontract-type-inner ellipsis"
+           [textContent]="contract.getParseTypeAndInterval()"
+      ></div>
     </div>
     <div class="ticket-table__company">
         <div

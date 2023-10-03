@@ -198,13 +198,23 @@ table.qt-table-modern {
     &__requested-by {
       flex: 1 0 166px;
 
-      .ellipsis {
+      .ticket-table__requested-by-inner {
         width: calc(166px - 66px);
+        flex: 1;
       }
 
       @media (max-width: 767px) {
         flex: 1 0 60%;
         order: 1;
+      }
+    }
+
+    &__сontract-type {
+      flex: 1 0 166px;
+
+      &-inner {
+        width: calc(166px - 66px);
+        flex: 1;
       }
     }
 
