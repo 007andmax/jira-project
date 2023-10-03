@@ -249,7 +249,8 @@ table.qt-table-modern {
       }
     }
 
-    &__company {
+    &__company,
+    &__contract-description {
       flex: 1 0 148px;
       min-width: 0;
 
