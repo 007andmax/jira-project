@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { User } from './class/user';
 import { UsersStateService } from '../../states/users/users-state.service';
 import { UserListService } from './services/user-list.service';
@@ -25,14 +25,16 @@ import { MarketingSubscriptionType } from '../setting/marketing-email/marketing-
 import { CrmCompanyIndustry } from '../setting/crm-settings/crm-company-industry/class/crm-company-industry';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { UserCustomerCompaniesInfo } from './class/user-customer-companies-info';
+import { NavigationEnd, Router } from '@angular/router';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
-  providers: [UserListService]
+  providers: [UserListService],
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, OnDestroy {
   idDetailUser: string = '';
   users: Array<User> = [];
   companies: Array<Company> = [];
@@ -61,10 +63,21 @@ export class UsersComponent implements OnInit {
     private usersRealTimeService: UsersRealTimeService,
     private marketingEmailStateService: MarketingEmailStateService,
     public customerPortalStateService: CustomerPortalStateService,
-    private ref: ChangeDetectorRef,) {
+    private ref: ChangeDetectorRef,
+    private router: Router,
+    private appStateService: AppStateService,
+  ) {
+    let routerSub = router.events.subscribe((val) => {
+      console.log("val", val);
+      if (val instanceof NavigationEnd && !this.cd['destroyed']) this.appStateService.changeDetectorRef();
+    })
+    this.sub.add(routerSub);
   }
-
+  ngAfterViewInit() {
+    console.log("ngAfterViewInit");
+  }
   ngOnInit() {
+    console.log("ngOnInit");
     if (this.customerPortalStateService.isCustomerPortal) {
       this.filter.setCompany(this.customerPortalStateService.getUsersFilters().company);
     } else {
@@ -350,6 +363,7 @@ export class UsersComponent implements OnInit {
     return item.id;
   }
   ngOnDestroy(): void {
+    console.log("ngOnDestroy");
     this.userListService.onUnsubscribe();
     this.selectAll = false;
     this.users.forEach(item => {
@@ -360,5 +374,6 @@ export class UsersComponent implements OnInit {
     })
     this.draftEmailStateService.resetSelectedUsers();
     this.usersStateService.clearFilter();
+    this.sub.unsubscribe();
   }
 }
