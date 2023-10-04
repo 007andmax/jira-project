@@ -14,17 +14,17 @@
     id="product-list-ticket-data"
 >
     <div
-        class="qt-report__product-list"
+        class="qt-report__product-list detailed-contract__product-list"
         *ngIf="!loadingInProgress"
     >
         <div
-            class="body-m__sb qt-color-gray-900 company-header"
+            class="body-m__sb qt-color-gray-900 company-header detailed-contract__company-header"
             *ngIf="onInit"
         >
             Client company - {{ detailContractReport.companyName}}
         </div>
         <div
-            class="body-m__sb qt-color-gray-900 company-header"
+            class="body-m__sb qt-color-gray-900 company-header detailed-contract__company-header"
             *ngIf="onInit"
         >
             <span class="type-contract">{{detailContractReport.getParseType()}}</span>
@@ -56,7 +56,7 @@
                         </span>
                     </div>
                     <div class="qt-df detailed-contract-report__header-item">
-                        <span class="detailed-contract-report__header-item-left ">
+                        <span class="detailed-contract-report__header-item-left">
                             Block rate - {{detailContractReport.blockRate | currency}}
                         </span>
                         <span class="detailed-contract-report__header-item-right ellipsis">
