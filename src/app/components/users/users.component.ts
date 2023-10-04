@@ -67,11 +67,11 @@ export class UsersComponent implements OnInit, OnDestroy {
     private router: Router,
     private appStateService: AppStateService,
   ) {
-    let routerSub = router.events.subscribe((val) => {
-      console.log("val", val);
-      if (val instanceof NavigationEnd && !this.cd['destroyed']) this.appStateService.changeDetectorRef();
-    })
-    this.sub.add(routerSub);
+    /* let routerSub = router.events.subscribe((val) => {
+       console.log("val", val);
+       if (val instanceof NavigationEnd && !this.cd['destroyed']) this.appStateService.changeDetectorRef();
+     })
+     this.sub.add(routerSub);*/
   }
   ngAfterViewInit() {
     console.log("ngAfterViewInit");
