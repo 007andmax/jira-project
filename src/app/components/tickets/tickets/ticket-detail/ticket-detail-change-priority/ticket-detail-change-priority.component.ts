@@ -31,7 +31,7 @@ export class TicketDetailChangePriorityComponent extends DropDownComponent {
     private leftPanelService: LeftPanelService,
     public cd: ChangeDetectorRef,
     public ticketsService: TicketsService) {
-    super(elRef, companiesStateService, usersStateService, customerPortalStateService);
+    super(elRef, companiesStateService, usersStateService, customerPortalStateService, cd);
 
   }
   ngOnInit() {

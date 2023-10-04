@@ -58,11 +58,11 @@ export class UsersComponent implements OnInit {
     public cd: ChangeDetectorRef,
     private draftEmailStateService: DraftEmailStateService,
     private crmStateService: CrmStateService,
-    private marketingEmailService: MarketingEmailService,
     private usersRealTimeService: UsersRealTimeService,
     private marketingEmailStateService: MarketingEmailStateService,
     public customerPortalStateService: CustomerPortalStateService,
-    private websocketService: WebsocketService) { }
+    private ref: ChangeDetectorRef,) {
+  }
 
   ngOnInit() {
     if (this.customerPortalStateService.isCustomerPortal) {
@@ -73,6 +73,7 @@ export class UsersComponent implements OnInit {
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.usersStateService.setModeUserFilterSubscription(MODE_USERS_LIST);
     this.showArchivedUsers = JSON.parse(JSON.stringify(this.usersStateService.getShowArchivedCompanies()));
+    this.cd.detectChanges();
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
       document.body.querySelector(".main-container").scrollTo(0, 0);
       if (this.showArchivedUsers != this.usersStateService.getShowArchivedCompanies()) {
@@ -80,6 +81,7 @@ export class UsersComponent implements OnInit {
         this.filter.setClientType(null);
         this.showPreloader = true;
         this.users = [];
+        this.cd.detectChanges();
         if (this.showArchivedUsers) {
           this.usersService.getArchiveUsers().subscribe(res => {
             this.setFilters(data);
@@ -303,6 +305,7 @@ export class UsersComponent implements OnInit {
     }
     this.onScroll();
     this.showPreloader = false;
+    this.cd.detectChanges();
   }
   public onScroll() {
     this.infiniteScrollDisabled = true;
@@ -319,6 +322,7 @@ export class UsersComponent implements OnInit {
   private getUsers() {
     if (this.userListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
+      this.cd.detectChanges();
       return;
     }
     this.page_number += 1;
@@ -334,11 +338,13 @@ export class UsersComponent implements OnInit {
     if (this.selectAll) this.users.forEach(item => item.selected = true);
     this.infiniteScrollDisabled = false;
     if ((this.page_number * 30) > listFilter.length) this.userListService.setBlockList(true);
+    this.cd.detectChanges();
   }
   public setDefaultScoll() {
     this.page_number = 0;
     this.userListService.setBlockList(false);
     this.users = [];
+    this.cd.detectChanges();
   }
   public trackById(index, item) {
     return item.id;

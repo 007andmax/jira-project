@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy, ElementRef, Input, ChangeDetectorRef } from '@angular/core';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { Subscription } from 'rxjs';
 import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
@@ -8,7 +8,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 @Component({
   selector: 'app-tech-users-list-report',
   templateUrl: './tech-users-list-report.component.html',
-  styleUrls: ['./tech-users-list-report.component.scss']
+  styleUrls: ['./tech-users-list-report.component.scss'],
 })
 export class TechUsersListReportComponent extends DropDownComponent {
   sub: Subscription = new Subscription();
@@ -18,8 +18,9 @@ export class TechUsersListReportComponent extends DropDownComponent {
     public elRef: ElementRef,
     public companiesStateService: CompaniesStateService,
     public usersStateService: UsersStateService,
-    public customerPortalStateService: CustomerPortalStateService) {
-    super(elRef, companiesStateService, usersStateService, customerPortalStateService);
+    public customerPortalStateService: CustomerPortalStateService,
+    public ref: ChangeDetectorRef) {
+    super(elRef, companiesStateService, usersStateService, customerPortalStateService, ref);
   }
 
   ngOnInit() {

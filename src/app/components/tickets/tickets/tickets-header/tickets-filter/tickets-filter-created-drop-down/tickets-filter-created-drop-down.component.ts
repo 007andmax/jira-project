@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { TitleListType } from '../../class/title-list-type';
 import { NgbDate, NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
@@ -30,8 +30,9 @@ export class TicketsFilterCreatedDropDownComponent extends DropDownComponent {
     public companiesStateService: CompaniesStateService,
     public usersStateService: UsersStateService,
     public customerPortalStateService: CustomerPortalStateService,
-    private dateService: DateService) {
-    super(elRef, companiesStateService, usersStateService, customerPortalStateService);
+    private dateService: DateService,
+    public ref: ChangeDetectorRef) {
+    super(elRef, companiesStateService, usersStateService, customerPortalStateService, ref);
   }
 
   /**

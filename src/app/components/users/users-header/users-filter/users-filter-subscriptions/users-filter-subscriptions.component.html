@@ -2,6 +2,7 @@
     class="qt-w100 --required filter-tags-body"
     ngbDropdown
     #dp="ngbDropdown"
+    (openChange)="openChange($event)"
 >
     <mat-form-field ngbDropdownAnchor>
         <mat-chip-list
