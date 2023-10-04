@@ -121,7 +121,7 @@ export class DetailContractreport {
     public getForRequest() {
         let data: any = {};
         data.agreementId = this.selectedAgreement.id;
-        if (this.intervalAgreement) data.interval = this.intervalAgreement;
+        if (this.intervalAgreement) data.intervals = [Number(this.intervalAgreement)];
         return data;
     }
 }
