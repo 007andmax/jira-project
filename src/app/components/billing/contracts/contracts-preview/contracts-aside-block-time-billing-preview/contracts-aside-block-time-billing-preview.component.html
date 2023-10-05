@@ -146,6 +146,45 @@
                 </tbody>
             </table>
         </div>
+        <div class="qt-df qt-mb-16 qt-mt-16 qt-mb-16">
+            <div class="qt-df">
+                <div
+                    class="qt-toggle  qt-mr-8"
+                    [ngClass]="{'--on':contractsBlockTime.maxRolloverHours}"
+                >
+                    <div class="qt-toggle__circle"></div>
+                </div>
+                <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-gray-600">
+                    Enable Time Rollover of unused hours for following month
+                </div>
+            </div>
+            <div
+                class="qt-df qt-ai-c"
+                *ngIf="contractsBlockTime.maxRolloverHours"
+            >
+                <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-gray-600 qt-mr-8">Max roll over hours:</div>
+                <div class="qt-input-block max-roll-over-input">
+                    <input
+                        [value]="contractsBlockTime.maxRolloverHours"
+                        type="text"
+                        readonly
+                    >
+                </div>
+            </div>
+        </div>
+        <div class="qt-df qt-jc-sb qt-ai-c">
+            <div class="qt-df">
+                <div
+                    class="qt-toggle  qt-mr-8"
+                    [ngClass]="{'--on':contractsBlockTime.shares.length > 0}"
+                >
+                    <div class="qt-toggle__circle"></div>
+                </div>
+                <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-gray-600">
+                    Notify to Agents/User when block time has been used
+                </div>
+            </div>
+        </div>
     </div>
     <div class="qt-df qt-mb-16 qt-mt-24">
         <div
@@ -218,47 +257,6 @@
                 </ng-template>
             </tbody>
         </table>
-    </div>
-    <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">
-    <div class="qt-df qt-mb-16 qt-mt-24">
-        <div class="qt-df">
-            <div
-                class="qt-toggle  qt-mr-8"
-                [ngClass]="{'--on':contractsBlockTime.maxRolloverHours}"
-            >
-                <div class="qt-toggle__circle"></div>
-            </div>
-            <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-gray-600">
-                Enable Time Rollover of unused hours for following month
-            </div>
-        </div>
-        <div
-            class="qt-df qt-ai-c"
-            *ngIf="contractsBlockTime.maxRolloverHours"
-        >
-            <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-gray-600 qt-mr-8">Max roll over hours:</div>
-            <div class="qt-input-block max-roll-over-input">
-                <input
-                    [value]="contractsBlockTime.maxRolloverHours"
-                    type="text"
-                    readonly
-                >
-            </div>
-        </div>
-    </div>
-    <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">
-    <div class="qt-df qt-jc-sb qt-ai-c qt-mb-16">
-        <div class="qt-df">
-            <div
-                class="qt-toggle  qt-mr-8"
-                [ngClass]="{'--on':contractsBlockTime.shares.length > 0}"
-            >
-                <div class="qt-toggle__circle"></div>
-            </div>
-            <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-gray-600">
-                Notify to Agents/User when block time has been used
-            </div>
-        </div>
     </div>
     <div
         class="ticket-edit-user-tags contract-time-users"
