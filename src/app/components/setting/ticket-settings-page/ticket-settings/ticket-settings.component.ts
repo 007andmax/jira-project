@@ -99,20 +99,20 @@ export class TicketSettingsComponent implements OnInit {
   }
 
   resetListIntervals(timepickerType) {
+    console.log("timepickerType", timepickerType);
     if (timepickerType == "DURATION_PICKER") {
       this.intervals = [
         new CompanySetting('5 minutes', 'FIVE_MINUTES'),
         new CompanySetting('10 minutes', 'TEN_MINUTES'),
         new CompanySetting('15 minutes', 'FIFTEEN_MINUTES')];
-      this.intervalsDp.reset(this.intervals);
     } else {
       this.intervals = [
         new CompanySetting('1 minute', 'ONE_MINUTE'),
         new CompanySetting('5 minutes', 'FIVE_MINUTES'),
         new CompanySetting('10 minutes', 'TEN_MINUTES'),
         new CompanySetting('15 minutes', 'FIFTEEN_MINUTES')];
-      this.intervalsDp.reset(this.intervals);
     }
+    if (this.intervalsDp) this.intervalsDp.reset(this.intervals);
   }
 
   /**
