@@ -1,0 +1,116 @@
+@import './src/assets/styles/variable';
+
+.qt-report__body-header,
+.company-header {
+    max-width: 1384px;
+}
+.qt-report__body-header,.company-header {
+    margin: 0 auto 10px auto;
+}
+.qt-report__body-header {
+  & + .detailed-contract-report__head-title {
+    margin-top: 16px;
+  }
+}
+.company-header {
+    text-align: center;
+}
+.services-header {
+    max-width: 1384px;
+    margin: 0 auto 10px auto;
+    text-align: center;
+}
+.service-no-services {
+    max-width: 1384px;
+    margin: 0 auto 10px auto;
+    text-align: center;
+}
+.type-contract {
+    text-transform: capitalize;
+}
+
+.detailed-contract-report {
+  &__header-item {
+    gap: 32px;
+
+    span {
+      text-align: left;
+    }
+
+    &-left {
+      max-width: 268px;
+      width: 100%;
+    }
+  }
+
+  &__head-title {
+    margin-top: 28px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+
+    + .detailed-contract-report__service-no-services,
+    + .detailed-contract-report__exceeding-header-wrap {
+      margin-top: -10px;
+    }
+  }
+
+  &__service-no-services {
+    text-align: left;
+    margin-bottom: 0;
+  }
+
+  &__exceeding-header {
+    gap: 32px;
+    width: 100%;
+    margin: 10px 0;
+
+    &-left {
+      max-width: 268px;
+      width: 100%;
+    }
+  }
+  &__exceeding-header-wrap {
+    max-width: 1384px;
+    margin: 0 auto;
+  }
+}
+.detailed-contract-report {
+  &__column-one {
+    width: 21%;
+  }
+  &__column-two {
+    width: 23%;
+  }
+  &__column-three {
+    width: 23%;
+  }
+  &__column-four {
+    width: 23%;
+  }
+  &__column-five {
+    width: 10%;
+  }
+}
+.detailed-contract-report-item {
+  &:not(:last-child) .detailed-contract-report-item__line {
+    padding-bottom: 40px;
+    max-width: 1384px;
+    margin: 0 auto 40px;
+    border-bottom: 1px solid $gray-400;
+  }
+
+  &:first-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border: unset;
+
+    .detailed-contract-report-item__line {
+      border: unset;
+    }
+  }
+
+  &:last-child  {
+    padding-bottom: 40px;
+  }
+}

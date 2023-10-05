@@ -11,13 +11,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatSelectModule, MatChipsModule } from '@angular/material';
 import { ReportAdditionalActionsModule } from '../report-additional-actions/report-additional-actions.module';
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
+import { ContractDetailDropDownComponent } from './contract-detail-drop-down/contract-detail-drop-down.component';
+import { ContractDetailIntervalsDropDownComponent } from './contract-detail-intervals-drop-down/contract-detail-intervals-drop-down.component';
 
 
 
 
 @NgModule({
     declarations: [ReportMenuComponent,
-        SoftwareSummaryDevicesDroDownComponent
+        SoftwareSummaryDevicesDroDownComponent,
+        ContractDetailDropDownComponent,
+        ContractDetailIntervalsDropDownComponent
     ],
     imports: [
         CommonModule,

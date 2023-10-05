@@ -1,0 +1,251 @@
+<div>
+    <app-report-menu
+        [report]="'byDetailedContract'"
+        (onRequest)="onRequest($event)"
+        (getReport)="getReport($event)"
+    ></app-report-menu>
+</div>
+<div
+    class="loading"
+    *ngIf="loadingInProgress"
+></div>
+<div
+    class="qt-report__body"
+    id="product-list-ticket-data"
+>
+    <div
+        class="qt-report__product-list detailed-contract__product-list"
+        *ngIf="!loadingInProgress"
+    >
+        <div
+            class="body-m__sb qt-color-gray-900 company-header detailed-contract__company-header"
+            *ngIf="onInit"
+        >
+            Client company - {{ detailContractReport.companyName}}
+        </div>
+        <div
+            class="body-m__sb qt-color-gray-900 company-header detailed-contract__company-header"
+            *ngIf="onInit"
+        >
+            <span class="type-contract">{{detailContractReport.getParseType()}}</span>
+            - {{detailContractReport.description}}
+        </div>
+        <ng-template
+            ngFor
+            let-item
+            let-i="index"
+            [ngForOf]="detailContractReport.prepaidServiceExpenseDto"
+            [ngForTrackBy]="trackById"
+        >
+            <div class="detailed-contract-report-item qt-mb-20">
+                <div class="qt-report__body-header">
+                    <div class="qt-df detailed-contract-report__header-item">
+                        <span class="detailed-contract-report__header-item-left ellipsis">
+                            Interval - {{detailContractReport.interval}}
+                        </span>
+                        <span class="detailed-contract-report__header-item-right">
+                            Included block time hours - {{detailContractReport.getDuration(item.quantity)}}
+                        </span>
+                    </div>
+                    <div class="qt-df detailed-contract-report__header-item">
+                        <span class="detailed-contract-report__header-item-left">
+                            Interval No.{{detailContractReport.intervalAgreement ? detailContractReport.getParseIntervalAgreement() + i : i + 1}} - {{detailContractReport.getDateInterval(item.startDate)}} - {{detailContractReport.getDateInterval(item.endDate)}}
+                        </span>
+                        <span class="detailed-contract-report__header-item-right">
+                            Number of hours left - {{detailContractReport.getDuration(item.quantityLeft)}}
+                        </span>
+                    </div>
+                    <div class="qt-df detailed-contract-report__header-item">
+                        <span class="detailed-contract-report__header-item-left">
+                            Block rate - {{detailContractReport.blockRate | currency}}
+                        </span>
+                        <span class="detailed-contract-report__header-item-right ellipsis">
+                            Number of hours used - {{detailContractReport.getDuration(item.quantity - item.quantityLeft)}}
+                        </span>
+                    </div>
+                </div>
+                <div class="services-header detailed-contract-report__head-title">Block time services</div>
+                <div
+                    class="service-no-services detailed-contract-report__service-no-services"
+                    *ngIf="(item.serviceExpenses.BLOCK_TIME.length === 0 && item.serviceExpenses.PARTIAL.length === 0)"
+                >
+                    No services yet
+                </div>
+                <table
+                    class="qt-report__body-table-body qt-mb-10"
+                    *ngIf="(item.serviceExpenses.BLOCK_TIME.length > 0 || item.serviceExpenses.PARTIAL.length > 0) && onInit"
+                >
+                    <colgroup>
+                        <col class="detailed-contract-report__column-one">
+                        <col class="detailed-contract-report__column-two">
+                        <col class="detailed-contract-report__column-three">
+                        <col class="detailed-contract-report__column-four">
+                        <col class="detailed-contract-report__column-five">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th class="qt-fw-600 qt-color-gray-900">Date</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Ticket</th>
+                            <th class="qt-fw-600 qt-color-gray-900">User</th>
+                            <th class="qt-fw-600 qt-color-gray-9002">Service</th>
+                            <th class="qt-fw-600 qt-color-gray-9002">Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-template
+                            ngFor
+                            let-service
+                            [ngForOf]="item.serviceExpenses.BLOCK_TIME"
+                            [ngForTrackBy]="trackByIndex"
+                        >
+                            <tr class="qt-report__body-row">
+                                <td>{{ service.getParseDate() }}</td>
+                                <td>tkt# {{ service.ticketNumber }}</td>
+                                <td>{{service.user}}</td>
+                                <td>{{service.name}}</td>
+                                <td>
+                                    {{service.getDuration(service.quantity)}}
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template
+                            ngFor
+                            let-service
+                            [ngForOf]="item.serviceExpenses.PARTIAL"
+                            [ngForTrackBy]="trackByIndex"
+                        >
+                            <tr class="qt-report__body-row">
+                                <td>{{ service.getParseDate() }}</td>
+                                <td>tkt# {{ service.ticketNumber }}</td>
+                                <td>{{service.user}}</td>
+                                <td>{{service.name}}</td>
+                                <td>
+                                    {{service.getDurationParticalForBlockTime()}}
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </tbody>
+                </table>
+                <div class="services-header detailed-contract-report__head-title">Exceeding services</div>
+                <div
+                    class="service-no-services detailed-contract-report__service-no-services"
+                    *ngIf="(item.serviceExpenses.EXCEEDING.length === 0 && item.serviceExpenses.PARTIAL.length === 0)"
+                >
+                    No services yet
+                </div>
+                <div class="detailed-contract-report__exceeding-header-wrap">
+                    <div class="qt-df exceeding-header detailed-contract-report__exceeding-header">
+                        <span class="exceeding-header detailed-contract-report__exceeding-header-left ellipsis">
+                            Rate exceeding block time - {{detailContractReport.rateExceeding | currency}}
+                        </span>
+                        <span>
+                            Number of hours used in exceeding rate - {{detailContractReport.getDuration(item.quantityExceeding)}} hr
+                        </span>
+                    </div>
+                </div>
+                <table
+                    class="qt-report__body-table-body"
+                    *ngIf="(item.serviceExpenses.EXCEEDING.length > 0 || item.serviceExpenses.PARTIAL.length > 0) && onInit"
+                >
+                    <colgroup>
+                        <col class="detailed-contract-report__column-one">
+                        <col class="detailed-contract-report__column-two">
+                        <col class="detailed-contract-report__column-three">
+                        <col class="detailed-contract-report__column-four">
+                        <col class="detailed-contract-report__column-five">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th class="qt-fw-600 qt-color-gray-900">Date</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Ticket</th>
+                            <th class="qt-fw-600 qt-color-gray-900">User</th>
+                            <th class="qt-fw-600 qt-color-gray-9002">Service</th>
+                            <th class="qt-fw-600 qt-color-gray-9002">Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-template
+                            ngFor
+                            let-service
+                            [ngForOf]="item.serviceExpenses.EXCEEDING"
+                            [ngForTrackBy]="trackByIndex"
+                        >
+                            <tr class="qt-report__body-row">
+                                <td>{{ service.getParseDate() }}</td>
+                                <td>tkt# {{ service.ticketNumber }}</td>
+                                <td>{{service.user}}</td>
+                                <td>{{service.name}}</td>
+                                <td>
+                                    {{service.getDuration(service.quantity)}}
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template
+                            ngFor
+                            let-service
+                            [ngForOf]="item.serviceExpenses.PARTIAL"
+                            [ngForTrackBy]="trackByIndex"
+                        >
+                            <tr class="qt-report__body-row">
+                                <td>{{ service.getParseDate() }}</td>
+                                <td>tkt# {{ service.ticketNumber }}</td>
+                                <td>{{service.user}}</td>
+                                <td>{{service.name}}</td>
+                                <td>
+                                    {{service.getDuration(service.exceedingQuantity)}}
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </tbody>
+                </table>
+                <div class="services-header detailed-contract-report__head-title">Default services</div>
+                <div
+                    class="service-no-services detailed-contract-report__service-no-services"
+                    *ngIf="item.serviceExpenses.DEFAULT.length === 0"
+                >
+                    No services yet
+                </div>
+                <table
+                    class="qt-report__body-table-body"
+                    *ngIf="item.serviceExpenses.DEFAULT.length > 0 && onInit"
+                >
+                    <colgroup>
+                        <col class="detailed-contract-report__column-one">
+                        <col class="detailed-contract-report__column-two">
+                        <col class="detailed-contract-report__column-three">
+                        <col class="detailed-contract-report__column-four">
+                        <col class="detailed-contract-report__column-five">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th class="qt-fw-600 qt-color-gray-900">Date</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Ticket</th>
+                            <th class="qt-fw-600 qt-color-gray-900">User</th>
+                            <th class="qt-fw-600 qt-color-gray-9002">Service</th>
+                            <th class="qt-fw-600 qt-color-gray-9002">Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-template
+                            ngFor
+                            let-service
+                            [ngForOf]="item.serviceExpenses.DEFAULT"
+                            [ngForTrackBy]="trackByIndex"
+                        >
+                            <tr class="qt-report__body-row">
+                                <td>{{ service.getParseDate() }}</td>
+                                <td>tkt# {{ service.ticketNumber }}</td>
+                                <td>{{service.user}}</td>
+                                <td>{{service.name}}</td>
+                                <td>
+                                    {{service.getDuration(service.quantity)}}
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </tbody>
+                </table>
+                <div class="detailed-contract-report-item__line"></div>
+            </div>
+        </ng-template>
+    </div>
+</div>

@@ -58,6 +58,9 @@ export class ContractsService {
         return data;
       }));
   }
+  public getIntervals(id) {
+    return this.http.get(this.apiUrl + `reports/serviceAgreements/intervals/${id}`);
+  }
   public updateContract(data) {
     return this.http.put(this.apiUrl + `serviceAgreements`, data).pipe(
       tap(data => {
@@ -79,6 +82,13 @@ export class ContractsService {
     return this.http.post(this.apiUrl + `serviceAgreements/filtered`, {
       companyId: id, "offset": 0,
       "pageSize": 2000,
+    }).pipe(map((data: any) => data.map(item => new ContractItem(item))));
+  }
+  public getServiceAgreementsByCompanyForReport(id) {
+    return this.http.post(this.apiUrl + `serviceAgreements/filtered`, {
+      companyId: id, "offset": 0,
+      "pageSize": 2000,
+      "forReport": true
     }).pipe(map((data: any) => data.map(item => new ContractItem(item))));
   }
 }
