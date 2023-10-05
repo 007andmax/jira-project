@@ -64,6 +64,7 @@ export class LeftPanelService {
       || state === 'new-billable-invoices'
       || state === 'quotes-component'
       || state === 'new-payments-ng2'
+      || state == 'contract-statistics'
       || state === 'new-contracts')
   }
   isInventoryState(state) {

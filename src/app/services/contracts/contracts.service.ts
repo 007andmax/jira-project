@@ -31,6 +31,9 @@ export class ContractsService {
         return data;
       }));
   }
+  public getStatistics() {
+    return this.http.get(this.apiUrl + `reports/serviceAgreements/currentIntervalStatistics`)
+  }
   public delete(id) {
     return this.http.delete(this.apiUrl + `serviceAgreements/${id}`, {}).pipe(
       tap(data => {
