@@ -19,6 +19,18 @@ export class DetailContractreport {
     prepaidServiceExpenseDto: Array<PrepaidServiceExpenseDto> = [];
     rateExceeding: number;
 
+    constructor(data = null) {
+        if (data) {
+            for (const key in data) {
+                this[key] = data[key];
+            }
+            this.agreements = data.agreements.map(item => new ContractItem(item));
+            this.intervals = data.intervals.map(item => new DetailContractInterval(item.title, item.startDate, item.endDate));
+            this.selectedAgreement = new ContractItem(data.selectedAgreement);
+            this.prepaidServiceExpenseDto = data.prepaidServiceExpenseDto.map(item => new PrepaidServiceExpenseDto(item));
+        }
+    }
+
     /**
    * @description Set new values fields from request to get report
    * @param {Object} data - new value fields
@@ -43,8 +55,8 @@ export class DetailContractreport {
    * @description Return parse field "intervalAgreement"
    * @returns {Number} This is the result
   */
-    public getParseIntervalAgreement() {
-        return Number(this.intervalAgreement) + 1;
+    public getParseIntervalAgreement(i) {
+        return this.intervalAgreement[i] + 1;
     }
     /**
   * @description Return parse field "duration" 
