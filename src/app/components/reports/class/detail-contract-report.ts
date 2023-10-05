@@ -12,7 +12,7 @@ export class DetailContractreport {
     isDisabledAgreements: boolean = true;
     isDisabledIntervals: boolean = true;
     selectedAgreement: ContractItem = null;
-    intervalAgreement: string;
+    intervalAgreement: Array<number> = [];
     interval: string;
     blockRate: number;
     description: string;
@@ -121,7 +121,7 @@ export class DetailContractreport {
     public getForRequest() {
         let data: any = {};
         data.agreementId = this.selectedAgreement.id;
-        if (this.intervalAgreement) data.intervals = [Number(this.intervalAgreement)];
+        if (this.intervalAgreement.length > 0) data.intervals = this.intervalAgreement;
         return data;
     }
 }

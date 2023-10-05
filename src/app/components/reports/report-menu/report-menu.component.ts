@@ -202,7 +202,7 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
 */
   onSelectInterval(data) {
     console.log("onSelectInterval", data);
-    this.detailContractReport.setIntervalAgreement((data) ? data.title : null);
+    this.detailContractReport.setIntervalAgreement(data.map(item => Number(item.title)));
   }
   onSelectDurationTechSale(data) {
     this.techSalesReport.setDuration(data);

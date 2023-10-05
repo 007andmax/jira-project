@@ -3,6 +3,7 @@
     [ngClass]="class"
     [container]="container"
     [ngStyle]="{'width':widthInput ? widthInput : '100%'}"
+    [autoClose]="'outside'"
 >
     <div
         *ngIf="title"
@@ -60,19 +61,34 @@
         aria-labelledby="dropdown1"
         class="app-drop-down__dropdown"
     >
-        <ng-template
-            ngFor
-            let-item
-            [ngForOf]="list"
-            let-i="index"
+        <div
+            class="content"
+            (click)="$event.preventDefault()"
         >
-            <button
-                ngbDropdownItem
-                [textContent]="reduceItemName(item)"
-                (click)="onSelect(item)"
-                [title]="reduceItemName(item)"
-                [ngClass]="{'--selected':isSelected(item)}"
-            ></button>
-        </ng-template>
+            <ng-template
+                ngFor
+                let-item
+                [ngForOf]="list"
+                let-i="index"
+            >
+                <div
+                    class="dropdown-item"
+                    (click)="onSelect(item)"
+                >
+                    <label
+                        class="qt-checkbox pointer"
+                        [ngClass]="{'--selected':isSelected(item)}"
+                    >
+                        <input
+                            type="checkbox"
+                            [checked]="isSelected(item)"
+                            readonly
+                        >
+                        <span></span>
+                        <div [textContent]="reduceItemName(item)"></div>
+                    </label>
+                </div>
+            </ng-template>
+        </div>
     </div>
 </div>

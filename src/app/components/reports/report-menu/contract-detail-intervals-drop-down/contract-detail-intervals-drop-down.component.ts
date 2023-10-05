@@ -9,13 +9,13 @@ import * as moment from "moment";
   styleUrls: ['./contract-detail-intervals-drop-down.component.scss']
 })
 export class ContractDetailIntervalsDropDownComponent extends DropDownComponent {
-
+  selectedItems = [];
   /**
    * @description Return String value seleted item for input
    * @returns  {Object} This is the result
   */
   getSelectedItemText() {
-    return (this.selectedItem) ? this.reduceItemName(this.selectedItem) : "";
+    return this.selectedItems.map(item => `Interval No.${Number(item.title) + 1}`).join(", ");
   }
   /**
 * @description Check if use "search", will filter list items by 'reduceItemName'. 
@@ -31,5 +31,20 @@ export class ContractDetailIntervalsDropDownComponent extends DropDownComponent 
      */
   reduceItemName(item: DetailContractInterval) {
     return `Interval No.${Number(item.title) + 1} - ${moment(new Date(item.startDate)).format('DD MMM YYYY')} - ${moment(new Date(item.endDate)).format('DD MMM YYYY')}`;
+  }
+
+  onSelect(data) {
+    this.isAdd = false;
+    let index = this.selectedItems.findIndex(item => item.title == data.title);
+    if (index > -1) {
+      this.selectedItems.splice(index, 1);
+    } else {
+      this.selectedItems.push(data);
+    }
+    this.onSelectedItem.emit(this.selectedItems);
+  }
+
+  public isSelected(item) {
+    return this.selectedItems.find(selectedItem => selectedItem.title === item.title);
   }
 }

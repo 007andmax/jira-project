@@ -1,4 +1,5 @@
-@import "./src/assets/styles/variable";
+@import './src/assets/styles/variable';
+@import "./src/assets/styles/mixin/dropdown";
 
 .disabled {
     background: $gray-50;
@@ -13,4 +14,13 @@
     background-size: 15px;
     background-position: center;
     background-repeat: no-repeat;
+}
+.dropdown-item {
+    @include dropdown-checkbox-item;
+}
+.content {
+    display: block !important;
+    width: 350px !important;
+    position: unset !important;
+    margin-right: 0px !important;
 }
