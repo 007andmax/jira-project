@@ -36,4 +36,8 @@ export class ContractsStatisticsTableComponent implements OnInit {
   public onFilter(field) {
     this.filter.onFilter(field, this.list)
   }
+
+  public trackById(index, item) {
+    return item.id;
+  }
 }

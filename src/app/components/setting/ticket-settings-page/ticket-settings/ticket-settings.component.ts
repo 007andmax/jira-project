@@ -99,7 +99,6 @@ export class TicketSettingsComponent implements OnInit {
   }
 
   resetListIntervals(timepickerType) {
-    console.log("timepickerType", timepickerType);
     if (timepickerType == "DURATION_PICKER") {
       this.intervals = [
         new CompanySetting('5 minutes', 'FIVE_MINUTES'),

@@ -92,9 +92,6 @@ export class LeftPanelComponent implements OnInit {
 
     this.router.events
       .subscribe((event: any) => {
-        console.log("this.state", this.state);
-        console.log("event", event);
-        console.log("instanceof", event instanceof NavigationEnd);
         if (event.navigationTrigger === "popstate") this.isInitPopStateNaviate = true;
         if (this.state === '' || (event instanceof NavigationEnd && this.isInitPopStateNaviate)) {
           if (window.location.href.includes(`/companies`)) this.state = 'new-companies';
@@ -252,7 +249,6 @@ export class LeftPanelComponent implements OnInit {
     this.goToLink('tickets');
   }
   updatePage(data) {
-    console.log("updatePage", data);
     if (this.leftPanelService.isSupportPage(data)) this.page = "SUPPORT";
     if (this.leftPanelService.isTicketsPage(data)) this.page = "TICKETS";
     if (this.leftPanelService.isTicketDetailPage(data)) this.page = "TICKET-DETAIL";
