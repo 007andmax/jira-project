@@ -13,7 +13,7 @@ import { USER } from 'src/app/const/users';
   styleUrls: ['./draft-email-user-recipients.component.scss']
 })
 export class DraftEmailUserRecipientsComponent implements OnInit {
-
+  reEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
   visible = true;
   selectable = true;
   removable = true;
@@ -156,7 +156,8 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
   public onAdd(event) {
     const input = event.target.input;
     const value = event.target.value;
-    if ((value || '').trim()) {
+    console.log(value.match(this.reEmail));
+    if ((value || '').trim() && value.match(this.reEmail)) {
       this.selectedUsers.push(value.trim());
       this.userEmails.push(value.trim());
       this.onCompanyEmails.emit(this.userEmails);

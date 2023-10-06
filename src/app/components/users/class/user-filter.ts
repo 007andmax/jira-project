@@ -116,7 +116,7 @@ export class UserFilter {
             if (indexCompany > -1 && this.clientType === companies[indexCompany].clientType) clientType = true;
             //if (this.clientIndustry === ((companies[indexCompany].clientIndustry) ? companies[indexCompany].clientIndustry.name : '')) clientIndustry = true;
 
-            if (((this.clientType) ? clientType === true : true) && ((this.title) ? item.jobTitleId === this.title.id : true) && ((this.company) ? item.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.company) : true) && ((this.clientIndustry) ? this.clientIndustry.id === item.userIndustryId : true) && this.isUserDefaultSubscription(item.customerCompaniesInfo) && this.isUserCustomSubscription(item.customSubscriptions) && this.isUserTags(item.tags)) {
+            if (((this.clientType) ? clientType === true : true) && ((this.title) ? item.customerCompaniesInfo.some(clientCompany => clientCompany.jobTitleDto && clientCompany.jobTitleDto.id == this.title.id) : true) && ((this.company) ? item.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.company) : true) && ((this.clientIndustry) ? this.clientIndustry.id === item.userIndustryId : true) && this.isUserDefaultSubscription(item.customerCompaniesInfo) && this.isUserCustomSubscription(item.customSubscriptions) && this.isUserTags(item.tags)) {
                 return true;
             } else {
                 return false;

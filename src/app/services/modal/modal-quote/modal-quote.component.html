@@ -59,6 +59,7 @@
                             [matChipInputAddOnBlur]="addOnBlur"
                             (input)="onSearch($event)"
                             (keyup)="keyup($event)"
+                            (blur)="onAdd($event)"
                         >
                     </mat-chip-list>
                     <div
@@ -88,6 +89,7 @@
                             <span class="user-email qt-ml-8">{{user.primaryEmail}}</span>
                         </mat-option>
                     </div>
+
 
 
 
