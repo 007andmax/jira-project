@@ -370,7 +370,7 @@ const routes: Routes = [
   {
     path: ':domain/contract-statistics',
     loadChildren: './components/billing/contracts-statistics/contracts-statistics.module#ContractsStatisticsModule',
-    canActivate: [PermissionNoSuperAdminService]
+    canActivate: [PermissionContractsService, PermissionNoSuperAdminService]
   },
 ];
 
