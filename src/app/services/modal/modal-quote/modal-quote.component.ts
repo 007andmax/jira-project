@@ -252,15 +252,20 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   public onAdd(e) {
     const input = e.target;
     const value = e.target.value;
+    console.log("value", value);
+    console.log("value.match(this.reEmail)", value.match(this.reEmail))
     if (value.length > 0 && value.match(this.reEmail)) {
       this.selectedUsers.push(value);
       this.usersEmails.push(value);
       this.quoteStateService.setUsersEmail(this.usersEmails);
       input.value = '';
       this.userCtrl.setValue(null);
+      this.usersClients = JSON.parse(JSON.stringify(this.reqUsersListClients));
+      this.usersTechnical = JSON.parse(JSON.stringify(this.reqUsersListTechnical));
     }
-    this.usersClients = JSON.parse(JSON.stringify(this.reqUsersListClients));
-    this.usersTechnical = JSON.parse(JSON.stringify(this.reqUsersListTechnical));
+    if (input) {
+      input.value = '';
+    }
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

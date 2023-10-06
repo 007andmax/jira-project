@@ -12,7 +12,7 @@ import { Company } from 'src/app/interfaces/company/company';
   styleUrls: ['./draft-email-recipients.component.scss']
 })
 export class DraftEmailRecipientsComponent implements OnInit {
-
+  reEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
   visible = true;
   selectable = true;
   removable = true;
@@ -137,7 +137,7 @@ export class DraftEmailRecipientsComponent implements OnInit {
   public onAdd(event) {
     const input = event.target.input;
     const value = event.target.value;
-    if ((value || '').trim()) {
+    if ((value || '').trim() && value.match(this.reEmail)) {
       this.selectedCompanies.push(value.trim());
       this.companyEmails.push(value.trim());
       this.onCompanyEmails.emit(this.companyEmails);
