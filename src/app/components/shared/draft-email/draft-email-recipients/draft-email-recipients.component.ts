@@ -141,7 +141,7 @@ export class DraftEmailRecipientsComponent implements OnInit {
       this.selectedCompanies.push(value.trim());
       this.companyEmails.push(value.trim());
       this.onCompanyEmails.emit(this.companyEmails);
-      this.companyList = this.reqCompanyList;
+      this.companyList = JSON.parse(JSON.stringify(this.reqCompanyList));
     }
     if (input) {
       input.value = '';

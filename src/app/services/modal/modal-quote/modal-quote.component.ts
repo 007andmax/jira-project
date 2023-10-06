@@ -148,6 +148,8 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     this.quoteStateService.setUsersEmail(this.usersEmails);
     this.userInput.nativeElement.value = '';
     this.userCtrl.setValue(null);
+    this.usersClients = JSON.parse(JSON.stringify(this.reqUsersListClients));
+    this.usersTechnical = JSON.parse(JSON.stringify(this.reqUsersListTechnical));
   }
 
   /**
