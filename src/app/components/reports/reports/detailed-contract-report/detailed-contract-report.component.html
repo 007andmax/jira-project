@@ -40,28 +40,16 @@
             <div class="detailed-contract-report-item qt-mb-20">
                 <div class="qt-report__body-header">
                     <div class="qt-df detailed-contract-report__header-item">
-                        <span class="detailed-contract-report__header-item-left ellipsis">
-                            Interval - {{detailContractReport.interval}}
-                        </span>
-                        <span class="detailed-contract-report__header-item-right">
-                            Included block time hours - {{detailContractReport.getDuration(item.quantity)}}
-                        </span>
+                        <span class="detailed-contract-report__header-item-left ellipsis">Interval - {{detailContractReport.interval}}</span>
+                        <span class="detailed-contract-report__header-item-right">Included block time hours - {{detailContractReport.getDuration(item.quantity)}}</span>
                     </div>
                     <div class="qt-df detailed-contract-report__header-item">
-                        <span class="detailed-contract-report__header-item-left">
-                            Interval No.{{detailContractReport.intervalAgreement.length > 0 ? detailContractReport.getParseIntervalAgreement(i) + i : i + 1}} - {{detailContractReport.getDateInterval(item.startDate)}} - {{detailContractReport.getDateInterval(item.endDate)}}
-                        </span>
-                        <span class="detailed-contract-report__header-item-right">
-                            Number of hours left - {{detailContractReport.getDuration(item.quantityLeft)}}
-                        </span>
+                        <span class="detailed-contract-report__header-item-left">Interval No.{{detailContractReport.intervalAgreement.length > 0 ? detailContractReport.getParseIntervalAgreement(i) + i : i + 1}} - {{detailContractReport.getDateInterval(item.startDate)}} - {{detailContractReport.getDateInterval(item.endDate)}}</span>
+                        <span class="detailed-contract-report__header-item-right">Number of hours left - {{detailContractReport.getDuration(item.quantityLeft)}}</span>
                     </div>
                     <div class="qt-df detailed-contract-report__header-item">
-                        <span class="detailed-contract-report__header-item-left">
-                            Block rate - {{detailContractReport.blockRate | currency}}
-                        </span>
-                        <span class="detailed-contract-report__header-item-right ellipsis">
-                            Number of hours used - {{detailContractReport.getDuration(item.quantity - item.quantityLeft)}}
-                        </span>
+                        <span class="detailed-contract-report__header-item-left">Block rate - {{detailContractReport.blockRate | currency}}</span>
+                        <span class="detailed-contract-report__header-item-right ellipsis">Number of hours used - {{detailContractReport.getDuration(item.quantity - item.quantityLeft)}}</span>
                     </div>
                 </div>
                 <div class="services-header detailed-contract-report__head-title">Block time services</div>
@@ -128,12 +116,8 @@
                 </div>
                 <div class="detailed-contract-report__exceeding-header-wrap">
                     <div class="qt-df exceeding-header detailed-contract-report__exceeding-header">
-                        <span class="exceeding-header detailed-contract-report__exceeding-header-left ellipsis">
-                            Rate exceeding block time - {{detailContractReport.rateExceeding | currency}}
-                        </span>
-                        <span>
-                            Number of hours used in exceeding rate - {{detailContractReport.getDuration(item.quantityExceeding)}} hr
-                        </span>
+                        <span class="exceeding-header detailed-contract-report__exceeding-header-left ellipsis">Rate exceeding block time - {{detailContractReport.rateExceeding | currency}}</span>
+                        <span>Number of hours used in exceeding rate - {{detailContractReport.getDuration(item.quantityExceeding)}} hr</span>
                     </div>
                 </div>
                 <table
