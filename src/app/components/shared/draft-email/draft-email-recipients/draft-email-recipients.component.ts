@@ -125,14 +125,15 @@ export class DraftEmailRecipientsComponent implements OnInit {
     //  this.userInput.nativeElement.blur();
     this.userInput.nativeElement.value = '';
     this.companyCtrl.setValue(null);
-    this.companyList = this.reqCompanyList;
-
-    /*   this.userInput.nativeElement.value = '';
-       this.companyList = this.reqCompanyList;*/
   }
 
   onSearch(event) {
     this.companyList = this.reqCompanyList.filter(item => this.getFirstLastName(item.companyInfo.contacts[0]).toLocaleLowerCase().includes(event.target.value) || item.companyInfo.contacts[0].primaryEmail.includes(event.target.value));
+  }
+  public onToggleDropDown(data) {
+    if (!data) {
+      this.companyList = JSON.parse(JSON.stringify(this.reqCompanyList));
+    }
   }
   public onAdd(event) {
     const input = event.target.input;
@@ -141,7 +142,6 @@ export class DraftEmailRecipientsComponent implements OnInit {
       this.selectedCompanies.push(value.trim());
       this.companyEmails.push(value.trim());
       this.onCompanyEmails.emit(this.companyEmails);
-      this.companyList = JSON.parse(JSON.stringify(this.reqCompanyList));
     }
     if (input) {
       input.value = '';

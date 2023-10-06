@@ -129,10 +129,6 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
     //  this.userInput.nativeElement.blur();
     this.userInput.nativeElement.value = '';
     this.userCtrl.setValue(null);
-
-    console.log("this.reqUsersListClients", this.reqUsersListClients);
-    this.usersClients = JSON.parse(JSON.stringify(this.reqUsersListClients));
-    this.usersTechnical = JSON.parse(JSON.stringify(this.reqUsersListTechnical));
   }
 
   onSearch(event) {
@@ -143,7 +139,12 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
   onKeyUp(event) {
     if (event.keyCode === 13) this.onAdd(event);
   }
-
+  public onToggleDropDown(data) {
+    if (!data) {
+      this.usersClients = JSON.parse(JSON.stringify(this.reqUsersListClients));
+      this.usersTechnical = JSON.parse(JSON.stringify(this.reqUsersListTechnical));
+    }
+  }
   public onAdd(event) {
     const input = event.target.input;
     const value = event.target.value;
@@ -153,8 +154,6 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
       this.userEmails.push(value.trim());
       this.onCompanyEmails.emit(this.userEmails);
       console.log("this.reqUsersListClients", this.reqUsersListClients);
-      this.usersClients = JSON.parse(JSON.stringify(this.reqUsersListClients));
-      this.usersTechnical = JSON.parse(JSON.stringify(this.reqUsersListTechnical));
     }
     if (input) {
       input.value = '';
