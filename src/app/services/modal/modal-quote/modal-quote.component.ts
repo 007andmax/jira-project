@@ -258,8 +258,6 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   public onAdd(e) {
     const input = e.target;
     const value = e.target.value;
-    console.log("value", value);
-    console.log("value.match(this.reEmail)", value.match(this.reEmail))
     if (value.length > 0 && value.match(this.reEmail)) {
       this.selectedUsers.push(value);
       this.usersEmails.push(value);

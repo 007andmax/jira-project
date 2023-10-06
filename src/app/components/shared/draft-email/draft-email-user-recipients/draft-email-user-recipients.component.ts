@@ -148,12 +148,10 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
   public onAdd(event) {
     const input = event.target.input;
     const value = event.target.value;
-    console.log(value.match(this.reEmail));
     if ((value || '').trim() && value.match(this.reEmail)) {
       this.selectedUsers.push(value.trim());
       this.userEmails.push(value.trim());
       this.onCompanyEmails.emit(this.userEmails);
-      console.log("this.reqUsersListClients", this.reqUsersListClients);
     }
     if (input) {
       input.value = '';
