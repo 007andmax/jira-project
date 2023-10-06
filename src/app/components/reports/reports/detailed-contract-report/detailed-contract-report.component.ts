@@ -30,7 +30,7 @@ export class DetailedContractReportComponent implements OnInit {
    * @param {DetailContractreport} data - Object of DetailContractreport
   */
   public getReport(data) {
-    this.detailContractReport = data;
+    this.detailContractReport = new DetailContractreport(JSON.parse(JSON.stringify(data)));
     this.selectedClient = this.companiesStateService.getCompanies().find(item => item.id === this.detailContractReport.companyId);
     this.onInit = true;
   }

@@ -182,12 +182,14 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
 * @param {Object} data - Object of ContractItem
 */
   onSelectAgreements(data) {
-    this.detailContractReport.setIntervalAgreement(null);
+    this.detailContractReport.setIntervalAgreement([]);
     this.detailContractReport.setSelectedAgreement(data);
     if (data) {
       this.contractsService.getIntervals(data.id).subscribe(res => {
         let list: Array<DetailContractInterval> = [];
-        for (const key in res) list.push(new DetailContractInterval(key, res[key].startDate, res[key].endDate));
+        for (const key in res) list.push(new DetailContractInterval(Number(key), res[key].startDate, res[key].endDate));
+        list.sort((a, b) => a.title - b.title);
+        console.log("list", list);
         this.detailContractReport.setIntervals(list);
         this.detailContractReport.setIsDisabledIntervals(false);
       })
@@ -201,7 +203,7 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
 * @param {Object} data - Object of DetailContractInterval
 */
   onSelectInterval(data) {
-    this.detailContractReport.setIntervalAgreement(data.map(item => Number(item.title)));
+    this.detailContractReport.setIntervalAgreement(data.map(item => item.title));
   }
   onSelectDurationTechSale(data) {
     this.techSalesReport.setDuration(data);

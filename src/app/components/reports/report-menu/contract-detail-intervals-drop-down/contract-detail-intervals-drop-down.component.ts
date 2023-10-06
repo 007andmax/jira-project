@@ -15,7 +15,7 @@ export class ContractDetailIntervalsDropDownComponent extends DropDownComponent 
    * @returns  {Object} This is the result
   */
   getSelectedItemText() {
-    return this.selectedItems.map(item => `Interval No.${Number(item.title) + 1}`).join(", ");
+    return this.selectedItems.map(item => `Interval No.${item.title + 1}`).join(", ");
   }
   /**
 * @description Check if use "search", will filter list items by 'reduceItemName'. 
@@ -30,7 +30,7 @@ export class ContractDetailIntervalsDropDownComponent extends DropDownComponent 
       * @returns {String} This is the result
      */
   reduceItemName(item: DetailContractInterval) {
-    return `Interval No.${Number(item.title) + 1} - ${moment(new Date(item.startDate)).format('DD MMM YYYY')} - ${moment(new Date(item.endDate)).format('DD MMM YYYY')}`;
+    return `Interval No.${item.title + 1} - ${moment(new Date(item.startDate)).format('DD MMM YYYY')} - ${moment(new Date(item.endDate)).format('DD MMM YYYY')}`;
   }
 
   onSelect(data) {

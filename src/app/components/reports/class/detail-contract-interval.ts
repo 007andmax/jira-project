@@ -1,5 +1,5 @@
 export class DetailContractInterval {
-    title: string;
+    title: number;
     startDate: number;
     endDate: number;
     constructor(title, startDate, endDate) {
