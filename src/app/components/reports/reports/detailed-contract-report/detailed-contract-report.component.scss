@@ -76,23 +76,24 @@
     margin: 0 auto;
   }
 }
-.detailed-contract-report {
-  &__column-one {
+.detailed-contract-report__column {
+  &-date {
     width: 21%;
   }
-  &__column-two {
+  &__ticket {
     width: 23%;
   }
-  &__column-three {
+  &__user {
     width: 23%;
   }
-  &__column-four {
+  &__service {
     width: 23%;
   }
-  &__column-five {
+  &__time {
     width: 10%;
   }
 }
+
 .detailed-contract-report-item {
   &:not(:last-child) .detailed-contract-report-item__line {
     padding-bottom: 40px;

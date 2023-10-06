@@ -75,20 +75,13 @@
                     class="qt-report__body-table-body qt-mb-10"
                     *ngIf="(item.serviceExpenses.BLOCK_TIME.length > 0 || item.serviceExpenses.PARTIAL.length > 0) && onInit"
                 >
-                    <colgroup>
-                        <col class="detailed-contract-report__column-one">
-                        <col class="detailed-contract-report__column-two">
-                        <col class="detailed-contract-report__column-three">
-                        <col class="detailed-contract-report__column-four">
-                        <col class="detailed-contract-report__column-five">
-                    </colgroup>
                     <thead>
                         <tr>
-                            <th class="qt-fw-600 qt-color-gray-900">Date</th>
-                            <th class="qt-fw-600 qt-color-gray-900">Ticket</th>
-                            <th class="qt-fw-600 qt-color-gray-900">User</th>
-                            <th class="qt-fw-600 qt-color-gray-9002">Service</th>
-                            <th class="qt-fw-600 qt-color-gray-9002">Time</th>
+                            <th class="qt-fw-600 qt-color-gray-900 detailed-contract-report__column-date">Date</th>
+                            <th class="qt-fw-600 qt-color-gray-900 detailed-contract-report__column-ticket">Ticket</th>
+                            <th class="qt-fw-600 qt-color-gray-900 detailed-contract-report__column-user">User</th>
+                            <th class="qt-fw-600 qt-color-gray-900 detailed-contract-report__column-service">Service</th>
+                            <th class="qt-fw-600 qt-color-gray-900 detailed-contract-report__column-time">Time</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -99,11 +92,11 @@
                             [ngForTrackBy]="trackByIndex"
                         >
                             <tr class="qt-report__body-row">
-                                <td>{{ service.getParseDate() }}</td>
-                                <td>tkt# {{ service.ticketNumber }}</td>
-                                <td>{{service.user}}</td>
-                                <td>{{service.name}}</td>
-                                <td>
+                                <td class="detailed-contract-report__column-date">{{ service.getParseDate() }}</td>
+                                <td class="detailed-contract-report__column-ticket">tkt# {{ service.ticketNumber }}</td>
+                                <td class="detailed-contract-report__column-user">{{service.user}}</td>
+                                <td class="detailed-contract-report__column-service">{{service.name}}</td>
+                                <td class="detailed-contract-report__column-time">
                                     {{service.getDuration(service.quantity)}}
                                 </td>
                             </tr>
@@ -115,11 +108,11 @@
                             [ngForTrackBy]="trackByIndex"
                         >
                             <tr class="qt-report__body-row">
-                                <td>{{ service.getParseDate() }}</td>
-                                <td>tkt# {{ service.ticketNumber }}</td>
-                                <td>{{service.user}}</td>
-                                <td>{{service.name}}</td>
-                                <td>
+                                <td class="detailed-contract-report__column-date">{{ service.getParseDate() }}</td>
+                                <td class="detailed-contract-report__column-ticket">tkt# {{ service.ticketNumber }}</td>
+                                <td class="detailed-contract-report__column-user">{{service.user}}</td>
+                                <td class="detailed-contract-report__column-service">{{service.name}}</td>
+                                <td class="detailed-contract-report__column-time">
                                     {{service.getDurationParticalForBlockTime()}}
                                 </td>
                             </tr>
@@ -147,20 +140,13 @@
                     class="qt-report__body-table-body"
                     *ngIf="(item.serviceExpenses.EXCEEDING.length > 0 || item.serviceExpenses.PARTIAL.length > 0) && onInit"
                 >
-                    <colgroup>
-                        <col class="detailed-contract-report__column-one">
-                        <col class="detailed-contract-report__column-two">
-                        <col class="detailed-contract-report__column-three">
-                        <col class="detailed-contract-report__column-four">
-                        <col class="detailed-contract-report__column-five">
-                    </colgroup>
                     <thead>
                         <tr>
-                            <th class="qt-fw-600 qt-color-gray-900">Date</th>
-                            <th class="qt-fw-600 qt-color-gray-900">Ticket</th>
-                            <th class="qt-fw-600 qt-color-gray-900">User</th>
-                            <th class="qt-fw-600 qt-color-gray-9002">Service</th>
-                            <th class="qt-fw-600 qt-color-gray-9002">Time</th>
+                            <th class="qt-fw-600 qt-color-gray-900 detailed-contract-report__column-date">Date</th>
+                            <th class="qt-fw-600 qt-color-gray-900 detailed-contract-report__column-ticket">Ticket</th>
+                            <th class="qt-fw-600 qt-color-gray-900 detailed-contract-report__column-user">User</th>
+                            <th class="qt-fw-600 qt-color-gray-900 detailed-contract-report__column-service">Service</th>
+                            <th class="qt-fw-600 qt-color-gray-900 detailed-contract-report__column-time">Time</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -171,11 +157,11 @@
                             [ngForTrackBy]="trackByIndex"
                         >
                             <tr class="qt-report__body-row">
-                                <td>{{ service.getParseDate() }}</td>
-                                <td>tkt# {{ service.ticketNumber }}</td>
-                                <td>{{service.user}}</td>
-                                <td>{{service.name}}</td>
-                                <td>
+                                <td class="detailed-contract-report__column-date">{{ service.getParseDate() }}</td>
+                                <td class="detailed-contract-report__column-ticket">tkt# {{ service.ticketNumber }}</td>
+                                <td class="detailed-contract-report__column-user">{{service.user}}</td>
+                                <td class="detailed-contract-report__column-service">{{service.name}}</td>
+                                <td class="detailed-contract-report__column-time">
                                     {{service.getDuration(service.quantity)}}
                                 </td>
                             </tr>
@@ -187,11 +173,11 @@
                             [ngForTrackBy]="trackByIndex"
                         >
                             <tr class="qt-report__body-row">
-                                <td>{{ service.getParseDate() }}</td>
-                                <td>tkt# {{ service.ticketNumber }}</td>
-                                <td>{{service.user}}</td>
-                                <td>{{service.name}}</td>
-                                <td>
+                                <td class="detailed-contract-report__column-date">{{ service.getParseDate() }}</td>
+                                <td class="detailed-contract-report__column-ticket">tkt# {{ service.ticketNumber }}</td>
+                                <td class="detailed-contract-report__column-user">{{service.user}}</td>
+                                <td class="detailed-contract-report__column-service">{{service.name}}</td>
+                                <td class="detailed-contract-report__column-time">
                                     {{service.getDuration(service.exceedingQuantity)}}
                                 </td>
                             </tr>
@@ -209,20 +195,13 @@
                     class="qt-report__body-table-body"
                     *ngIf="item.serviceExpenses.DEFAULT.length > 0 && onInit"
                 >
-                    <colgroup>
-                        <col class="detailed-contract-report__column-one">
-                        <col class="detailed-contract-report__column-two">
-                        <col class="detailed-contract-report__column-three">
-                        <col class="detailed-contract-report__column-four">
-                        <col class="detailed-contract-report__column-five">
-                    </colgroup>
                     <thead>
                         <tr>
-                            <th class="qt-fw-600 qt-color-gray-900">Date</th>
-                            <th class="qt-fw-600 qt-color-gray-900">Ticket</th>
-                            <th class="qt-fw-600 qt-color-gray-900">User</th>
-                            <th class="qt-fw-600 qt-color-gray-9002">Service</th>
-                            <th class="qt-fw-600 qt-color-gray-9002">Time</th>
+                            <th class="qt-fw-600 qt-color-gray-900 detailed-contract-report__column-date">Date</th>
+                            <th class="qt-fw-600 qt-color-gray-900 detailed-contract-report__column-ticket">Ticket</th>
+                            <th class="qt-fw-600 qt-color-gray-900 detailed-contract-report__column-user">User</th>
+                            <th class="qt-fw-600 qt-color-gray-900 detailed-contract-report__column-service">Service</th>
+                            <th class="qt-fw-600 qt-color-gray-900 detailed-contract-report__column-time">Time</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -233,11 +212,11 @@
                             [ngForTrackBy]="trackByIndex"
                         >
                             <tr class="qt-report__body-row">
-                                <td>{{ service.getParseDate() }}</td>
-                                <td>tkt# {{ service.ticketNumber }}</td>
-                                <td>{{service.user}}</td>
-                                <td>{{service.name}}</td>
-                                <td>
+                                <td class="detailed-contract-report__column-date">{{ service.getParseDate() }}</td>
+                                <td class="detailed-contract-report__column-ticket">tkt# {{ service.ticketNumber }}</td>
+                                <td class="detailed-contract-report__column-user">{{service.user}}</td>
+                                <td class="detailed-contract-report__column-service">{{service.name}}</td>
+                                <td class="detailed-contract-report__column-time">
                                     {{service.getDuration(service.quantity)}}
                                 </td>
                             </tr>
