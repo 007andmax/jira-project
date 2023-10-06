@@ -189,7 +189,6 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
         let list: Array<DetailContractInterval> = [];
         for (const key in res) list.push(new DetailContractInterval(Number(key), res[key].startDate, res[key].endDate));
         list.sort((a, b) => a.title - b.title);
-        console.log("list", list);
         this.detailContractReport.setIntervals(list);
         this.detailContractReport.setIsDisabledIntervals(false);
       })
