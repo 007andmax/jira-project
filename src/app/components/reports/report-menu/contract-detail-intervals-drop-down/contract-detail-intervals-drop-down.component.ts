@@ -47,4 +47,9 @@ export class ContractDetailIntervalsDropDownComponent extends DropDownComponent 
   public isSelected(item) {
     return this.selectedItems.find(selectedItem => selectedItem.title === item.title);
   }
+
+  public clearWithOutChanges() {
+    this.isAdd = false;
+    this.selectedItems = [];
+  }
 }
