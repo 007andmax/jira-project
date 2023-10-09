@@ -62,7 +62,7 @@ export class UsersFilterSubscriptionsComponent implements OnInit {
       1 : (b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0));
     this.subscriptions = subscriptions.map(item => new UsersFilterSubscriptionsItem(item.id, item.type, item.name));
     this.reqSubscriptions = subscriptions.map(item => new UsersFilterSubscriptionsItem(item.id, item.type, item.name));
-    this.ref.markForCheck();
+    this.ref.detectChanges();
   }
   onSearch(event) {
     this.subscriptions = this.reqSubscriptions.filter(item => item.name.toLowerCase().includes(event.target.value.toLowerCase()));

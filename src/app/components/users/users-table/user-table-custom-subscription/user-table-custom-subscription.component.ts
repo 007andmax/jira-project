@@ -1,24 +1,26 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UserCustomSubscription } from '../../class/user-custom-subscription';
 import { UserDefaultSubscription } from '../../class/user-default-subscription';
 
 @Component({
   selector: 'user-table-custom-subscription',
   templateUrl: './user-table-custom-subscription.component.html',
-  styleUrls: ['./user-table-custom-subscription.component.scss']
+  styleUrls: ['./user-table-custom-subscription.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserTableCustomSubscriptionComponent implements OnInit {
   @Input() customSubscriptions: Array<UserCustomSubscription> = [];
   @Output() onChangeCustom = new EventEmitter();
   @Input() listCustomSubscription: Array<UserCustomSubscription> = [];
   isUpdate: boolean = false;
-  constructor() { }
+  constructor(private ref: ChangeDetectorRef,) { }
 
   ngOnInit() {
 
   }
   toggleIsUpdate(data) {
     this.isUpdate = data;
+    this.ref.markForCheck();
   }
   selected(item) {
     if (this.isUpdate) return;
@@ -33,6 +35,7 @@ export class UserTableCustomSubscriptionComponent implements OnInit {
       this.onChangeCustom.emit(customSubscriptions);
     }
     this.isUpdate = true;
+    this.ref.detectChanges();
   }
   isSeleted(subscription) {
     return this.customSubscriptions.find(item => item.id === subscription.id);

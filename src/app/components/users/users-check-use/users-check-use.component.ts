@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { User } from '../class/user';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
@@ -7,12 +7,14 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'users-check-use',
   templateUrl: './users-check-use.component.html',
-  styleUrls: ['./users-check-use.component.scss']
+  styleUrls: ['./users-check-use.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersCheckUseComponent implements OnInit {
   @Input() user: User;
   constructor(private companiesStateService: CompaniesStateService,
     private confirmStateService: ConfirmStateService,
+    private ref: ChangeDetectorRef,
     public activeModal: NgbActiveModal,) { }
 
   ngOnInit() {
@@ -26,6 +28,7 @@ export class UsersCheckUseComponent implements OnInit {
   cancelConfirm() {
     this.activeModal.close();
     this.confirmStateService.setConfirm(false);
+    this.ref.detectChanges();
   };
   public trackById(index, item) {
     return item.id;

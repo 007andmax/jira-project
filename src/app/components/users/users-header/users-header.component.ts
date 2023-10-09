@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { USERS } from 'src/app/const/emails';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
@@ -25,13 +25,12 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { AppService } from 'src/app/states/app/app.service';
 
 
-
-
 @Component({
   selector: 'app-users-header',
   templateUrl: './users-header.component.html',
   styleUrls: ['./users-header.component.scss'],
-  providers: [UsersHeaderService]
+  providers: [UsersHeaderService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersHeaderComponent implements OnInit, OnDestroy {
   @Output() onChangeFilterField = new EventEmitter<any>();
@@ -55,13 +54,12 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   TYPE_LIST_COMPANY_USERS = TYPE_LIST_COMPANY_USERS;
   constructor(private usersStateService: UsersStateService,
     private draftEmailStateService: DraftEmailStateService,
-    private companiesStateService: CompaniesStateService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
-    private usersService: UsersService,
     public appService: AppService,
     private marketingEmailService: MarketingEmailService,
     private permissionsService: PermissionsService,
+    private ref: ChangeDetectorRef,
     private usersHeaderService: UsersHeaderService) {
   }
 
@@ -80,6 +78,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
     this.currentUser = this.usersStateService.getCurrentUser();
+    this.ref.markForCheck();
   }
   public showAsideForDraftEmail() {
     this.draftEmailStateService.setAction(USERS);
@@ -91,6 +90,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
       this.draftEmailStateService.setSelectedUser(this.reqUsers.filter(item => item.selected));
     }
     this.draftEmailStateService.toggleAsideForAdd();
+    this.ref.markForCheck();
   }
   delete() {
 
@@ -104,6 +104,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
       modalRef.componentInstance.message = `Do you want to archive users?`;
     }
     this.usersStateService.setUsersForArchive(this._users.filter(item => item.selected));
+    this.ref.markForCheck();
   }
 
   isExistArchiveUser() {
@@ -115,16 +116,19 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   showAddToSubscription() {
     const modalRef = this.modalService.open(AddUserToSubscribeComponent, { windowClass: 'xs-modal modal-dialog__save-to-subscription', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.users = this.reqUsers.filter(item => item.selected);
+    this.ref.markForCheck();
   }
   toggleAllUser(data) {
     this.selectAll = true;
     this.onSelectAllUser.emit(data);
+    this.ref.detectChanges();
   }
   getSelectedCount() {
     return this.reqUsers.filter(item => item.selected).length;
   }
   public onFilter(field) {
     this.onChangeFilterField.emit(field);
+    this.ref.detectChanges();
   }
   clearAll() {
     this.filter.onClearAll();
@@ -139,6 +143,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     this.confirmStateService.setConfirmAction(MULTI_DELETE_USER_FROM_SUBSCRIPTION);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove subscription`;
+    this.ref.markForCheck();
   }
   onRemoveUsersFromSubscription() {
     let users = this.reqUsers.filter(item => item.selected);
@@ -156,6 +161,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   }
   onChangeCountFilter(data) {
     this.countFilter = data;
+    this.ref.markForCheck();
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
