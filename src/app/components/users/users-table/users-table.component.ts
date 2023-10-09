@@ -164,6 +164,10 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     this.currentUser = this.usersStateService.getCurrentUser();
     this.cd.markForCheck();
     //this.sub.add(getOnCompanies);
+    this.usersStateService.onSelectAll.subscribe(data => {
+      this.user.selected = data;
+      this.cd.markForCheck();
+    })
   }
   delete() {
     if (this.user.customerCompaniesInfo.find(item => item.isPrimaryContact)) {

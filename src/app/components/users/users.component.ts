@@ -257,20 +257,20 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
   onSelectAllUser(event) {
     if (event.target.checked) {
+      this.usersStateService.initSelectAllusers(true);
       this.selectAll = true;
       this.users.forEach(item => {
         item.selected = true;
       })
-
       this.draftEmailStateService.resetSelectedUsers();
       this.filter.getFilterList(this.reqUsers, this.companies).forEach(item => {
         this.reqUsers.find(user => user.id === item.id).selected = true;
       })
-
       this.reqUsers.forEach(user => {
         if (user.selected) this.draftEmailStateService.addSelectedUser(user);
       })
     } else {
+      this.usersStateService.initSelectAllusers(false);
       this.selectAll = false;
       this.users.forEach(item => {
         item.selected = false;
@@ -280,10 +280,12 @@ export class UsersComponent implements OnInit, OnDestroy {
       })
       this.draftEmailStateService.resetSelectedUsers();
     }
+    this.cd.detectChanges();
   }
   onSelectUser(user) {
     this.reqUsers.find(item => item.id === user.id).selected = user.selected;
     this.selectAll = (this.filter.getFilterList(this.reqUsers, this.companies).find(item => !item.selected)) ? false : true;
+    this.cd.detectChanges();
   }
   private onDeArchiveUser(id) {
     let Dearchiveusers = this.usersService.onDeArchiveUsers(id).subscribe(data => {
