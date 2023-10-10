@@ -161,6 +161,7 @@ export class UsersComponent implements OnInit, OnDestroy {
         if (!this.showArchivedUsers && data.action === 'USER_ARCHIVED') {
           const userIndex = this.users.findIndex((item) => item.id === data.data.id);
           if (userIndex > -1) this.users.splice(userIndex, 1);
+          if (reqIndex > -1) this.reqUsers[userIndex].selected = false;
         }
       }
 
