@@ -38,7 +38,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   @Input() set users(value: Array<User>) {
     this._users = value;
   }
-  @Input() reqUsers: Array<User> = [];
+  reqUsers: Array<User> = [];
   @Input() selectAll: boolean = false;
   _users: Array<User> = [];
   @Input() count: number = 0;
@@ -78,6 +78,10 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
     this.currentUser = this.usersStateService.getCurrentUser();
+    this.ref.markForCheck();
+  }
+  public setReqUsers(data) {
+    this.reqUsers = data;
     this.ref.markForCheck();
   }
   public showAsideForDraftEmail() {

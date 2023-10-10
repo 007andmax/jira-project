@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy, OnDestroy, ViewChild } from '@angular/core';
 import { User } from './class/user';
 import { UsersStateService } from '../../states/users/users-state.service';
 import { UserListService } from './services/user-list.service';
@@ -27,6 +27,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { UserCustomerCompaniesInfo } from './class/user-customer-companies-info';
 import { NavigationEnd, Router } from '@angular/router';
 import { AppStateService } from 'src/app/states/app/app-state.service';
+import { UsersHeaderComponent } from './users-header/users-header.component';
 
 @Component({
   selector: 'app-users',
@@ -35,6 +36,7 @@ import { AppStateService } from 'src/app/states/app/app-state.service';
   providers: [UserListService],
 })
 export class UsersComponent implements OnInit, OnDestroy {
+  @ViewChild('header') header: UsersHeaderComponent;
   idDetailUser: string = '';
   users: Array<User> = [];
   companies: Array<Company> = [];
@@ -184,6 +186,7 @@ export class UsersComponent implements OnInit, OnDestroy {
         this.reqUsers[reqIndex].userStatistic.ticketsSubmitted = prevValue;
         if (Index > -1) this.users[Index].userStatistic.ticketsSubmitted = prevValue;
       }
+      this.header.setReqUsers(this.reqUsers);
       this.cd.detectChanges();
     })
     this.userListService.addSubscription(getChangeCompanies);
@@ -211,6 +214,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions, data.tags);
     this.selectAll = false;
     this.reqUsers.forEach(item => item.selected = false);
+    this.header.setReqUsers(this.reqUsers);
     this.setDefaultScoll();
   }
   private onArchiveUsers(ids) {
@@ -250,6 +254,7 @@ export class UsersComponent implements OnInit, OnDestroy {
           if (userIndex > -1) this.users[userIndex].changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
           this.cd.detectChanges();
         }
+        this.header.setReqUsers(this.reqUsers);
       });
       this.userListService.addSubscription(stompClient);
 
@@ -280,11 +285,13 @@ export class UsersComponent implements OnInit, OnDestroy {
       })
       this.draftEmailStateService.resetSelectedUsers();
     }
+    this.header.setReqUsers(this.reqUsers);
     this.cd.detectChanges();
   }
   onSelectUser(user) {
     this.reqUsers.find(item => item.id === user.id).selected = user.selected;
     this.selectAll = (this.filter.getFilterList(this.reqUsers, this.companies).find(item => !item.selected)) ? false : true;
+    this.header.setReqUsers(this.reqUsers);
     this.cd.detectChanges();
   }
   private onDeArchiveUser(id) {
@@ -308,7 +315,6 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.userListService.addSubscription(archiveUser);
   }
   private getUsersList(data) {
-
     this.reqUsers = data.filter(item => ((!this.showArchivedUsers) ? !item.deletedAt : item.deletedAt) && item.accountType !== "TECH");
     this.reqUsers.sort((a, b) => ((a.firstName + a.lastName).toLowerCase() > (b.firstName + b.lastName).toLowerCase()) ?
       1 : (((b.firstName + b.lastName).toLowerCase() > (a.firstName + a.lastName).toLowerCase()) ? -1 : 0));
@@ -320,6 +326,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     }
     this.onScroll();
     this.showPreloader = false;
+    this.header.setReqUsers(this.reqUsers);
     this.cd.detectChanges();
   }
   public onScroll() {
@@ -374,6 +381,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.reqUsers.forEach(item => {
       item.selected = false;
     })
+    this.header.setReqUsers(this.reqUsers);
     this.draftEmailStateService.resetSelectedUsers();
     this.usersStateService.clearFilter();
     this.sub.unsubscribe();
