@@ -24,4 +24,5 @@ export interface Company {
     status: string;
     techLeadId: string;
     type: any;
+    isExample: boolean;
 }
