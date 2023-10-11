@@ -31,20 +31,32 @@
 .app-left-panel__menu {
     padding: 0 8px;
 }
-.--active {
-    background-color: #171e26;
-    border-radius: 8px;
-    .icon__support-page {
-        background-color: $white;
-    }
-}
-.app-left-panel__menu-icon {
+.app-left-panel__menu-icon-wrap {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 40px;
     min-width: 40px;
     height: 36px;
+    margin: 8px 7px 8px;
     opacity: 1;
     background-color: unset;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &:hover,
+    &.--active {
+      background-color: $gray-700;
+
+      .app-left-panel__menu-icon {
+        background-color: $white;
+      }
+    }
+
+  .app-left-panel__menu-icon {
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
 }

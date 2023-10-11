@@ -22,17 +22,20 @@ tr {
 /deep/ .qt-table-modern__row {
     @media (min-width: 768px) {
         position: relative;
+        height: auto;
         min-height: 56px;
         border: unset;
         margin-bottom: 0;
     }
 
     &>div {
+        cursor: unset;
         @media (min-width: 768px) {
             padding-top: 15px;
             padding-bottom: 15px;
             border-bottom: 1px solid $gray-200;
             font-size: 14px;
+            word-break: break-word;
 
             &:first-child {
                 padding-left: 25px;
@@ -57,7 +60,6 @@ tr {
     }
 
     .ticket-table__company {
-        font-weight: 500;
         position: relative;
         width: 100%;
     }
@@ -105,4 +107,29 @@ tr {
             background-color: $yellow-600;
         }
     }
+}
+
+.ticket-table {
+  &__requested-by {
+    flex: 1 1 320px;
+  }
+  &__subject {
+    flex: 1 1 180px;
+    white-space: pre-line;
+  }
+  &__created-clients,
+  &__created-techs,
+  &__created-devices {
+    width: 70px;
+    flex-shrink: 0;
+  }
+  &__created-status {
+    flex: 0 1 140px;
+  }
+  &__assignee {
+    max-width: 100%;
+    flex: 0 1 200px;
+    overflow: unset;
+    word-break: break-word;
+  }
 }

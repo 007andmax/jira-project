@@ -2,7 +2,7 @@
 
 .qt-page-list__header-thead-container {
     position: sticky;
-    top: 57px;
+    top: 56px;
     z-index: 1;
     background-color: $white;
     padding-top: 32px;
@@ -17,6 +17,7 @@
     background-color: $gray-50;
 
     &>div {
+        cursor: unset;
         padding-top: 15px;
         padding-bottom: 15px;
         font-weight: 500;
@@ -32,4 +33,26 @@
             padding-right: 25px;
         }
     }
+}
+
+.ticket-table {
+  &__requested-by {
+    flex: 1 1 320px;
+  }
+  &__subject {
+    flex: 1 1 180px;
+  }
+  &__created-clients,
+  &__created-techs,
+  &__created-devices {
+    width: 70px;
+    flex-shrink: 0;
+  }
+  &__created-status {
+    flex: 0 1 140px;
+  }
+  &__assignee {
+    max-width: 100%;
+    flex: 0 1 200px;
+  }
 }

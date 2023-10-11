@@ -39,6 +39,9 @@ super-admin-companies-item {
 .qt-page-list__container {
     display: flex;
 }
+.qt-page-list__body {
+  min-width: 1376px;
+}
 
 /deep/ .qt-table-modern .ticket-table__company {
     max-width: 300px;
