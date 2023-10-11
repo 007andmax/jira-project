@@ -1,0 +1,65 @@
+@import './src/assets/styles/variable';
+
+.ticket-fileupload {
+    margin-top: 32px;
+}
+
+.qt-page-list {
+    padding: 0;
+
+    @media (min-width: 768px) {
+        background-color: $white;
+    }
+}
+
+
+@import "./src/assets/styles/variable";
+
+/deep/ .ticket-table {
+    th {
+        white-space: nowrap;
+    }
+
+    td {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}
+
+super-admin-companies-item {
+    display: contents;
+}
+
+.pengind-loading {
+    bottom: 20px;
+    top: auto;
+}
+
+.qt-page-list__container {
+    display: flex;
+}
+
+/deep/ .qt-table-modern .ticket-table__company {
+    max-width: 300px;
+}
+.qt-page-list__header.--sticky {
+    display: flex;
+    @media (min-width: 768px) {
+        margin: 0;
+        height: 56px;
+        padding: 0px 32px;
+        background-color: $gray-50;
+        border-bottom: 1px solid $gray-200;
+    }
+}
+/deep/ .qt-page-list__header-title {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0;
+    color: $gray-900;
+
+    @media (max-width: 767px) {
+        color: $white;
+    }
+}

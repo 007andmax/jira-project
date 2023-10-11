@@ -1,0 +1,40 @@
+<div class="qt-page-list__header-thead-container">
+    <div class="qt-table-modern qt-page-list__header-thead">
+        <div class="qt-page-list__header-thead__row">
+            <div class="ticket-table__requested-by">Tech Company Name</div>
+            <div
+                class="ticket-table__subject pointer"
+                (click)="onFilter('COMPANY_NAME')"
+            >
+                Name
+                <span class="qt-table-modern__sorting"></span>
+            </div>
+            <div class="ticket-table__company">Email Address</div>
+            <div class="ticket-table__assignee">Phone number</div>
+            <div
+                class="ticket-table__status pointer"
+                (click)="onFilter('SUBDOMAIN')"
+            >
+                Sub Domain
+                <span class="qt-table-modern__sorting"></span>
+            </div>
+            <div
+                class="ticket-table__created-date pointer"
+                (click)="onFilter('CREATED_DATE')"
+            >
+                Created Date
+                <span class="qt-table-modern__sorting"></span>
+            </div>
+            <div
+                class="ticket-table__created-date pointer"
+                (click)="onFilter('STATUS')"
+            >
+                Status
+                <span class="qt-table-modern__sorting"></span>
+            </div>
+            <div class="ticket-table__created-date">Clients</div>
+            <div class="ticket-table__created-date">Techs</div>
+            <div class="ticket-table__created-date">Devices</div>
+        </div>
+    </div>
+</div>
