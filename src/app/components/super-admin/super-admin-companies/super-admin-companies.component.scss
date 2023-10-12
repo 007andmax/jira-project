@@ -66,3 +66,75 @@ super-admin-companies-item {
         color: $white;
     }
 }
+.container-page {
+    height: 100%;
+    overflow: hidden;
+    background-color: $white;
+}
+
+// Flexbox setup.
+.container-page {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-align-content: stretch;
+    -ms-flex-line-pack: stretch;
+    align-content: stretch;
+    -webkit-align-items: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+
+    &>aside {
+        -webkit-order: 0;
+        -ms-flex-order: 0;
+        width: 238px;
+        order: 0;
+        -webkit-flex: 0 0 auto;
+        -ms-flex: 0 0 auto;
+        flex: 0 0 auto;
+        -webkit-align-self: auto;
+        -ms-flex-item-align: auto;
+        align-self: auto;
+        height: 100vh;
+
+        &::-webkit-scrollbar {
+            width: 5px;
+        }
+    }
+
+    &>main {
+        -webkit-order: 0;
+        -ms-flex-order: 0;
+        order: 0;
+        -webkit-flex: 1 1 auto;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        -webkit-align-self: auto;
+        -ms-flex-item-align: auto;
+        align-self: auto;
+    }
+}
+
+.container-page>aside,
+.container-page>main {
+    overflow: auto;
+}
+aside {
+    background-color: $gray-50;
+}
+.app-left-panel-super-admin-categories {
+    display: block;
+    min-width: 234px;
+    background-color: $gray-50;
+    color: $white;
+    transition: width 300ms;
+}

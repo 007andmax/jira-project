@@ -6,6 +6,7 @@ import { SuperAdminCompaniesHeaderComponent } from './super-admin-companies-head
 import { SuperAdminCompaniesItemComponent } from './super-admin-companies-item/super-admin-companies-item.component';
 import { SuperAdminCompaniesRoutingModule } from './super-admin-companies-routing.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { LeftPanelSuperAdminCompaniesComponent } from '../left-panel-super-admin-companies/left-panel-super-admin-companies.component';
 
 
 
@@ -13,7 +14,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 @NgModule({
     declarations: [SuperAdminCompaniesComponent,
         SuperAdminCompaniesHeaderComponent,
-        SuperAdminCompaniesItemComponent
+        SuperAdminCompaniesItemComponent,
+        LeftPanelSuperAdminCompaniesComponent
     ],
     imports: [
         CommonModule,

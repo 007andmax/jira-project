@@ -3,7 +3,7 @@ import { CompanyFilterTop } from "src/app/components/companies/class/company-fil
 export class SuperAdminCompanyFilters {
     "offset": number = 0;
     "size": number = 30;
-    "sortBy": string = "CREATED_DATE_DESC"
+    "sortBy": string = "COMPANY_NAME_ASC"
     filter: Array<CompanyFilterTop> = [
         new CompanyFilterTop('CREATED_DATE', 'DESC'),
         new CompanyFilterTop('COMPANY_NAME', ''),
