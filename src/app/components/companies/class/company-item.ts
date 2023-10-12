@@ -26,6 +26,7 @@ export class CompanyItem implements Company {
     techLeadId: string;
     type: any;
     selected: boolean = false;
+    isExample: boolean = false;
     constructor(data = null) {
         if (data) {
             for (const key in data) {

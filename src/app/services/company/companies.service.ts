@@ -88,6 +88,14 @@ export class CompaniesService {
         return data;
       }));
   }
+  public archiveExampleCompany() {
+    return this.http.delete(this.apiUrl + 'company/removeExampleCompany').pipe(
+      tap(data => {
+        this.toastrService.success("The company has been successfully archived");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
 
   public getClientsByTags(tags) {
 
