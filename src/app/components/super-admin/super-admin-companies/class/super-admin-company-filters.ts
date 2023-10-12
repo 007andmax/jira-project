@@ -5,8 +5,8 @@ export class SuperAdminCompanyFilters {
     "size": number = 30;
     "sortBy": string = "COMPANY_NAME_ASC"
     filter: Array<CompanyFilterTop> = [
-        new CompanyFilterTop('CREATED_DATE', 'DESC'),
-        new CompanyFilterTop('COMPANY_NAME', ''),
+        new CompanyFilterTop('CREATED_DATE', ''),
+        new CompanyFilterTop('COMPANY_NAME', 'ASC'),
         new CompanyFilterTop('SUBDOMAIN', ''),
         new CompanyFilterTop('STATUS', '')];
 
