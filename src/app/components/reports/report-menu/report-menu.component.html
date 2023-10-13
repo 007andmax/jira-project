@@ -197,7 +197,7 @@
                         [ngClass]="className"
                     >
                         <div class="qt-report__dropdown qt-report__dropdown-xl qt-mr-8">
-                            <company-drop-down
+                            <contract-company-drop-down
                                 [placeholder]="'Select Company'"
                                 [dropdownHeight]="'192px'"
                                 [heightInput]="'36px'"
@@ -207,7 +207,7 @@
                                 [search]="true"
                                 [change]="true"
                                 (onSelectedItem)="selectClient($event)"
-                            ></company-drop-down>
+                            ></contract-company-drop-down>
                         </div>
                         <div class="qt-report__dropdown qt-input-block qt-mr-8">
                             <contract-detail-drop-down

@@ -13,6 +13,7 @@ import { ReportAdditionalActionsModule } from '../report-additional-actions/repo
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 import { ContractDetailDropDownComponent } from './contract-detail-drop-down/contract-detail-drop-down.component';
 import { ContractDetailIntervalsDropDownComponent } from './contract-detail-intervals-drop-down/contract-detail-intervals-drop-down.component';
+import { ContractCompanyDropDownComponent } from './contract-company-drop-down/contract-company-drop-down.component';
 
 
 
@@ -21,7 +22,8 @@ import { ContractDetailIntervalsDropDownComponent } from './contract-detail-inte
     declarations: [ReportMenuComponent,
         SoftwareSummaryDevicesDroDownComponent,
         ContractDetailDropDownComponent,
-        ContractDetailIntervalsDropDownComponent
+        ContractDetailIntervalsDropDownComponent,
+        ContractCompanyDropDownComponent
     ],
     imports: [
         CommonModule,

@@ -58,6 +58,9 @@ export class CompaniesService {
       isArchived: false
     });
   }
+  public getContractCompanies() {
+    return this.http.get(this.apiUrl + 'company/forContractReport');
+  }
 
   public getCompaniesListByFilter(data) {
     return this.http.post(this.apiUrl + 'company/clients', data);
