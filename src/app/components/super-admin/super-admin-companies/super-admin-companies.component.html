@@ -3,6 +3,10 @@
         <left-panel-super-admin-companies class="app-left-panel-super-admin-categories"></left-panel-super-admin-companies>
         <hr>
     </aside>
+    <div
+        class="resize-handle--x"
+        data-target="aside"
+    ></div>
     <main>
         <div class="qt-page-list page-list-ticket">
             <div class="qt-page-list__header --sticky">
@@ -13,7 +17,6 @@
                 </div>
                 <div class="qt-page-list__header-filters"></div>
             </div>
-
             <div class="qt-page-list__container">
                 <div class="qt-page-list__body">
                     <super-admin-companies-header (onChangeFilterField)="onFilter($event)"></super-admin-companies-header>

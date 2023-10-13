@@ -138,3 +138,41 @@ aside {
     color: $white;
     transition: width 300ms;
 }
+.resize-handle--x {
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+
+    position: relative;
+    box-sizing: border-box;
+    width: 2px;
+    height: 100%;
+    border-left-width: 1px;
+    border-left-style: solid;
+    border-left-color: $gray-900;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: $gray-900;
+    cursor: ew-resize;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    &:before {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        right: 100%;
+        height: 100vh;
+        width: 2px;
+        margin-top: -18px / 2;
+        border-left-color: $gray-100;
+        border-left-width: 1px;
+        border-left-style: solid;
+    }
+}
