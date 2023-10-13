@@ -85,7 +85,7 @@ export class LeftPanelService {
     return (state === 'new-reports' ||
       state === 'byProducts' ||
       state === 'byCustomers' ||
-      state === 'byDetailedContract' ||
+      state === 'block-time-report' ||
       state === 'byTaxes' ||
       state === 'common-commissions' ||
       state === 'detailed-commissions' ||

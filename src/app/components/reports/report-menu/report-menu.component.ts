@@ -300,7 +300,7 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.hardwareSummaryReport.setCompanyId(selectClient.id);
       this.deviceIpSummary.setCompanyId(selectClient.id);
       this.remoteConnectionReport.setCompanyId(selectClient.id);
-      if (this.report === "byDetailedContract") this.getAgreements();
+      if (this.report === "block-time-report") this.getAgreements();
       if (this.report === 'software-summary' || this.report === 'software-summary-device' || this.report === 'hardware-summary' || this.report === 'hardware-summary-device' || this.report === 'device-ip-summary' || this.report === 'device-ip-summary-device' || this.report === 'remote-access') this.getSoftByCompany(selectClient.id);
       if (this.serviceReport.startDate === '' && this.serviceReport.endDate === '') this.serviceReport.setDatesByCompany(this.selectedClient);
       this.validate.resetCompany();

@@ -38,7 +38,7 @@ export class LeftPanelReportsComponent implements OnInit {
     new ReportsLeftMenuItemReport('Tech service report', 'tech-service')], 'VIEW_PERFORMANCE_REPORT'));
     this.list.push(new ReportsLeftMenuItem("icon__tickets", "TICKETS", [new ReportsLeftMenuItemReport('Tickets report', 'ticket-report'),
     new ReportsLeftMenuItemReport('Service report', 'service-report'),
-    new ReportsLeftMenuItemReport('Detailed contract report', 'byDetailedContract')], 'VIEW_PERFORMANCE_REPORT'));
+    new ReportsLeftMenuItemReport('Block time report', 'block-time-report')], 'VIEW_PERFORMANCE_REPORT'));
     this.list.push(new ReportsLeftMenuItem("icon__income", "INCOME ACCOUNTS", [new ReportsLeftMenuItemReport('Income account report', 'income-accounts')], 'VIEW_SALES_REPORT'));
 
   }

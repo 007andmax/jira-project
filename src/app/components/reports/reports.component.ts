@@ -56,7 +56,7 @@ export class ReportsComponent implements OnInit {
     },
     { type: "TICKETS", name: "Tickets report", address: "ticket-report" },
     { type: "TICKETS", name: "Service report", address: "service-report" },
-    { type: "TICKETS", name: "Detailed contract report", address: "byDetailedContract" },
+    { type: "TICKETS", name: "Block time report", address: "block-time-report" },
     {
       type: "INCOME_ACCOUNTS",
       name: "Income account report",

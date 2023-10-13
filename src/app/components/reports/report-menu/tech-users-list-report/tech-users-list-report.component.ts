@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { CompaniesService } from 'src/app/services/company/companies.service';
 
 @Component({
   selector: 'app-tech-users-list-report',
@@ -18,8 +19,9 @@ export class TechUsersListReportComponent extends DropDownComponent {
     public elRef: ElementRef,
     public companiesStateService: CompaniesStateService,
     public usersStateService: UsersStateService,
-    public customerPortalStateService: CustomerPortalStateService) {
-    super(elRef, companiesStateService, usersStateService, customerPortalStateService);
+    public customerPortalStateService: CustomerPortalStateService,
+    public companiesService: CompaniesService) {
+    super(elRef, companiesStateService, usersStateService, customerPortalStateService, companiesService);
   }
 
   ngOnInit() {
