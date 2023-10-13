@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ElementRef } from '@angular/core';
+import { CompaniesService } from 'src/app/services/company/companies.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -45,7 +46,8 @@ export class DropDownComponent implements OnInit {
   constructor(public elRef: ElementRef,
     public companiesStateService: CompaniesStateService,
     public usersStateService: UsersStateService,
-    public customerPortalStateService: CustomerPortalStateService,) { }
+    public customerPortalStateService: CustomerPortalStateService,
+    public companiesService: CompaniesService,) { }
 
   ngOnInit() {
     if (this.class.length > 0) this.class = this.class;

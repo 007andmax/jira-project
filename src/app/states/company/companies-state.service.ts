@@ -20,15 +20,12 @@ import { CompanyDeviceCount } from 'src/app/components/companies/class/company-d
 })
 export class CompaniesStateService {
   allCompanies = [];
-  contractCompanies = [];
   lightAllCompanies = [];
   lightClientsCompanies = [];
   devicesCounts: Array<CompanyDeviceCount> = [];
   isInitLightAllCompanies: boolean = false;
-  isInitContractCompanies: boolean = false;
   isInitLightClientsCompanies: boolean = false;
   onLightCompanies: EventEmitter<any> = new EventEmitter();
-  onContractCompanies: EventEmitter<any> = new EventEmitter();
   onLightClientsCompanies: EventEmitter<any> = new EventEmitter();
   onChangeSelectedCompanyId: EventEmitter<any> = new EventEmitter();
   onChangeDevicesCount: EventEmitter<any> = new EventEmitter();
@@ -143,16 +140,6 @@ export class CompaniesStateService {
       this.onLightCompanies.emit(this.lightAllCompanies);
       this.isInitLightAllCompanies = true;
     })
-  }
-  public onInitGetContractCompanies() {
-    this.companiesService.getContractCompanies().subscribe((data: any) => {
-      this.contractCompanies = data;
-      this.onContractCompanies.emit(this.contractCompanies);
-      this.isInitContractCompanies = true;
-    })
-  }
-  public getContractCompanies() {
-    return this.contractCompanies;
   }
   public getLightCompanies() {
     return this.lightAllCompanies;

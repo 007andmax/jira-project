@@ -11,18 +11,11 @@ export class ContractCompanyDropDownComponent extends DropDownComponent {
   ngOnInit() {
     if (this.class.length > 0) this.class = this.class;
     if (this.uiType) this.class.push(this.uiType);
-    if (this.companiesStateService.isInitContractCompanies && this.clientType == undefined) this.getClientsList(this.companiesStateService.getContractCompanies());
-
-    this.companiesStateService.onContractCompanies.subscribe((data) => {
-      if (this.clientType == undefined) this.getClientsList(data);
+    this.companiesService.getContractCompanies().subscribe((data: any) => {
+      this.getClientsList(data);
     })
-
-
   }
   public getClientsList(data) {
     this.reset(data);
-  }
-  onOpenChange(data) {
-    if (data && !this.companiesStateService.isInitContractCompanies && this.clientType == undefined) this.companiesStateService.onInitGetContractCompanies();
   }
 }
