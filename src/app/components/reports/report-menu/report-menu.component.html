@@ -296,8 +296,8 @@
                                             [dropdownHeight]="'300px'"
                                             [heightInput]="'36px'"
                                             [list]="devices"
-                                            [isDisabled]="!deviceIpSummary.companyId || deviceIpSummary.preloaderDevices"
-                                            [preloader]="deviceIpSummary.preloaderDevices || deviceIpSummary.preloaderDevices"
+                                            [isDisabled]="!deviceIpSummary.companyId || deviceIpSummary.preloaderDevices || devices.length == 0"
+                                            [preloader]="deviceIpSummary.preloaderDevices"
                                             (onSelectedItem)="onSelectDevice($event)"
                                         ></software-summary-devices-dro-down>
                                     </div>
@@ -446,8 +446,8 @@
                                             [dropdownHeight]="'300px'"
                                             [heightInput]="'36px'"
                                             [list]="devices"
-                                            [isDisabled]="!hardwareSummaryReport.companyId || hardwareSummaryReport.preloaderDevices"
-                                            [preloader]="hardwareSummaryReport.preloaderDevices || hardwareSummaryReport.preloaderDevices"
+                                            [isDisabled]="!hardwareSummaryReport.companyId || hardwareSummaryReport.preloaderDevices || devices.length == 0"
+                                            [preloader]="hardwareSummaryReport.preloaderDevices"
                                             (onSelectedItem)="onSelectDevice($event)"
                                         ></software-summary-devices-dro-down>
                                     </div>
@@ -569,7 +569,7 @@
                                             [change]="true"
                                             [placeholder]="'All devices'"
                                             [preloader]="softwareSummaryReport.preloaderDevices"
-                                            [isDisabled]="!softwareSummaryReport.companyId || softwareSummaryReport.preloaderDevices"
+                                            [isDisabled]="!softwareSummaryReport.companyId || softwareSummaryReport.preloaderDevices || devices.length == 0"
                                             [dropdownHeight]="'300px'"
                                             [heightInput]="'36px'"
                                             [list]="devices"
@@ -585,7 +585,7 @@
                                             [field]="'name'"
                                             [search]="true"
                                             [change]="true"
-                                            [isDisabled]="!softwareSummaryReport.companyId || softwareSummaryReport.preloaderDevices"
+                                            [isDisabled]="!softwareSummaryReport.companyId || softwareSummaryReport.preloaderDevices || softwareSummaryReport.soft.length == 0"
                                             [preloader]="softwareSummaryReport.preloaderSoft"
                                             [list]="softwareSummaryReport.soft"
                                             (onSelectedItem)="onSelectSoftware($event)"
