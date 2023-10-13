@@ -168,8 +168,8 @@
                         <button
                             class="btn-new btn-primary-white qt-fs-0"
                             (click)="getReportByRemoteConnectionReport()"
-                            [disabled]="remoteConnectionReport.preloaderDevices || !remoteConnectionReport.companyId"
-                            [ngClass]="{'--disabled':remoteConnectionReport.preloaderDevices || !remoteConnectionReport.companyId}"
+                            [disabled]="remoteConnectionReport.preloaderDevices || !remoteConnectionReport.companyId || !remoteConnectionReport.deviceId"
+                            [ngClass]="{'--disabled':remoteConnectionReport.preloaderDevices || !remoteConnectionReport.companyId || !remoteConnectionReport.deviceId}"
                         >
                             Get
                 Report
@@ -304,8 +304,8 @@
                                     <button
                                         class="btn-new btn-primary-white qt-fs-0"
                                         (click)="getReportByDeviceIpSummary()"
-                                        [disabled]="deviceIpSummary.preloaderDevices || !deviceIpSummary.companyId"
-                                        [ngClass]="{'--disabled':deviceIpSummary.preloaderDevices || !deviceIpSummary.companyId}"
+                                        [disabled]="deviceIpSummary.preloaderDevices || !deviceIpSummary.companyId || !deviceIpSummary.deviceId"
+                                        [ngClass]="{'--disabled':deviceIpSummary.preloaderDevices || !deviceIpSummary.companyId || !deviceIpSummary.deviceId}"
                                     >
                                         Get Report
                                     </button>
@@ -454,8 +454,8 @@
                                     <button
                                         class="btn-new btn-primary-white qt-fs-0"
                                         (click)="getReportByHardwareSummary()"
-                                        [disabled]="hardwareSummaryReport.preloaderDevices || !hardwareSummaryReport.companyId"
-                                        [ngClass]="{'--disabled':hardwareSummaryReport.preloaderDevices || !hardwareSummaryReport.companyId}"
+                                        [disabled]="hardwareSummaryReport.preloaderDevices || !hardwareSummaryReport.companyId || !hardwareSummaryReport.deviceId"
+                                        [ngClass]="{'--disabled':hardwareSummaryReport.preloaderDevices || !hardwareSummaryReport.companyId || !hardwareSummaryReport.deviceId}"
                                     >
                                         Get Report
                                     </button>
