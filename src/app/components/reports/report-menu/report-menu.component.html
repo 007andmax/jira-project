@@ -149,7 +149,7 @@
                                 [dropdownHeight]="'300px'"
                                 [heightInput]="'36px'"
                                 [list]="devices"
-                                [isDisabled]="!remoteConnectionReport.companyId || remoteConnectionReport.preloaderDevices"
+                                [isDisabled]="!remoteConnectionReport.companyId || remoteConnectionReport.preloaderDevices || devices.length == 0"
                                 [preloader]="remoteConnectionReport.preloaderDevices"
                                 (onSelectedItem)="onSelectDevice($event)"
                             ></software-summary-devices-dro-down>
