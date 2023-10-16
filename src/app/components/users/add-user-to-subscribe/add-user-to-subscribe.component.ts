@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { forkJoin, of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -16,7 +16,8 @@ import { User } from '../class/user';
 @Component({
   selector: 'add-user-to-subscribe',
   templateUrl: './add-user-to-subscribe.component.html',
-  styleUrls: ['./add-user-to-subscribe.component.scss']
+  styleUrls: ['./add-user-to-subscribe.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddUserToSubscribeComponent implements OnInit {
   MODE_ADD_BY_MODAL = MODE_ADD_BY_MODAL;
@@ -54,8 +55,9 @@ export class AddUserToSubscribeComponent implements OnInit {
     let onGetListCustomSubscription = this.marketingEmailStateService.onGetListCustomSubscription.subscribe(data => {
       this.marketingSubscriptionList = JSON.parse(JSON.stringify(data)).map(item => new MarketingSubscriptionType(item, null));;
       this.showPreloader = false;
-      this.cd.detectChanges();
+      this.cd.markForCheck();
     })
+    this.cd.markForCheck();
     this.sub.add(onGetListCustomSubscription);
   }
   onRemoveSubscription(id) {
@@ -73,6 +75,7 @@ export class AddUserToSubscribeComponent implements OnInit {
           item.onInitEdit(false);
           if (event) event.target.blur();
           this.selectedForEditSubscription = null;
+          this.cd.markForCheck();
         })
     }
   }
@@ -80,9 +83,11 @@ export class AddUserToSubscribeComponent implements OnInit {
     this.isEditMode = data;
     this.selectedSubscriptions = [];
     this.editSubscription(null);
+    this.cd.markForCheck();
   }
   editSubscription(item) {
     this.selectedForEditSubscription = item;
+    this.cd.markForCheck();
   }
   isSelectedForEdit(item) {
     if (!this.selectedForEditSubscription) return false;
@@ -95,16 +100,18 @@ export class AddUserToSubscribeComponent implements OnInit {
     let index = this.selectedSubscriptions.findIndex(subscription => subscription.id === item.id);
     if (index > -1) this.selectedSubscriptions.splice(index, 1);
     if (index === -1) this.selectedSubscriptions.push(item);
+    this.cd.markForCheck();
   }
   removeSubscription(item) {
     this.confirmStateService.setConfirmAction(DELETE_SUBSCRIPTION_TYPE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove Subscription`;
     this.marketingEmailStateService.setSubscriptionTypeForRemove(item);
+    this.cd.checkNoChanges();
   }
   close() {
     this.activeModal.close();
-
+    this.cd.markForCheck();
   }
   onAddedSubscription(data) {
     let subscription = new MarketingSubscriptionType(data, null);
@@ -125,6 +132,7 @@ export class AddUserToSubscribeComponent implements OnInit {
     if (this.showAdd) {
       this.isAddNewSubscription = true;
       this.addBtn.setDisabled(true);
+      this.cd.markForCheck();
       return;
     }
     let checkEdit = this.marketingSubscriptionList.find(item => item.isInitEdit);
