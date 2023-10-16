@@ -11,7 +11,6 @@ import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop
   styleUrls: ['./contracts-aside-top.component.scss']
 })
 export class ContractsAsideTopComponent implements OnInit {
-  companies = [];
   listsTypes = [new ContractsFilterType('Hourly', 'HOURLY', null),
   new ContractsFilterType('Block Time', 'BLOCK_TIME', null),
   new ContractsFilterType('Service Contract/by device/by user', 'SERVICE_CONTRACT_DEVICE', null),
@@ -25,17 +24,15 @@ export class ContractsAsideTopComponent implements OnInit {
     private companiesState: CompaniesStateService,) { }
 
   ngOnInit() {
-    if (this.companiesState.getLightClientsCompanies().length > 0) this.getClientsList(this.companiesState.getLightClientsCompanies());
-    if (this.companiesState.getLightClientsCompanies().length == 0) this.companiesState.onInitGetLightCompanies();
+    if (this.companiesState.getLightClientsCompanies().length > 0 && this.companiesState.getCompanyRoutingId()) this.getClientsList(this.companiesState.getLightClientsCompanies());
+    if (this.companiesState.getLightClientsCompanies().length == 0 && this.companiesState.getCompanyRoutingId()) this.companiesState.onInitGetLightClietnsCompanies();
     let getOnCompanies = this.companiesState.onLightClientsCompanies.subscribe((data) => {
-      this.getClientsList(data);
+      this.companiesDP.onSelect(data.find(item => item.id === this.companiesState.getCompanyRoutingId()));
     })
     this.sub.add(getOnCompanies);
   }
   getClientsList(data) {
-    this.companies = data;
-    if (this.companiesState.getCompanyRoutingId()) this.companiesDP.onSelect(this.companies.find(item => item.id === this.companiesState.getCompanyRoutingId()));
-
+    this.companiesDP.onSelect(data.find(item => item.id === this.companiesState.getCompanyRoutingId()));
   }
   onSelectType(data) {
     this.contractsStateService.setType(data);

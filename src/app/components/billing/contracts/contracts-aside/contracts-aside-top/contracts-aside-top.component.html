@@ -4,7 +4,6 @@
             #companiesDP
             [title]="'Company Name'"
             [placeholder]="'Select Company'"
-            [list]="companies"
             [validate]="validateCompany"
             [errorMessage]="'Company is required'"
             [clientType]="'CLIENT'"
@@ -25,6 +24,4 @@
             (onSelectedItem)="onSelectType($event)"
         ></app-drop-down>
     </div>
-
-
 </div>
