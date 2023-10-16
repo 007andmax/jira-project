@@ -47,6 +47,12 @@
     width: 70px;
     flex-shrink: 0;
   }
+  &__created-techs {
+    width: 80px;
+  }
+  &__created-clients {
+    width: 85px;
+  }
   &__created-status {
     flex: 0 1 140px;
   }

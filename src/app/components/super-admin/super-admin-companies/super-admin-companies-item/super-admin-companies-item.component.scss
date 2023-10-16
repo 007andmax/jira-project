@@ -126,6 +126,12 @@ tr {
   &__created-status {
     flex: 0 1 140px;
   }
+   &__created-techs {
+       width: 80px;
+   }
+   &__created-clients {
+       width: 85px;
+   }
   &__assignee {
     max-width: 100%;
     flex: 0 1 200px;
