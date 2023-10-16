@@ -594,8 +594,8 @@
                                     <button
                                         class="btn-new btn-primary-white qt-fs-0"
                                         (click)="getReportBySoftwareSummary()"
-                                        [disabled]="softwareSummaryReport.preloaderDevices || !softwareSummaryReport.companyId"
-                                        [ngClass]="{'--disabled':softwareSummaryReport.preloaderDevices || !softwareSummaryReport.companyId}"
+                                        [disabled]="softwareSummaryReport.preloaderDevices || !softwareSummaryReport.companyId || !softwareSummaryReport.deviceId"
+                                        [ngClass]="{'--disabled':softwareSummaryReport.preloaderDevices || !softwareSummaryReport.companyId || !softwareSummaryReport.deviceId}"
                                     >
                                         Get Report
                                     </button>
