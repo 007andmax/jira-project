@@ -135,8 +135,9 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.softwareSummaryReport.resetSoft();
 
       if (resp) {
-        this.devices = resp[companyId];
-        resp[companyId].map((item: any) => {
+        console.log("resp", resp);
+        this.devices = resp[companyId] || [];
+        this.devices.map((item: any) => {
           if (item.report) {
             item.report.softList.map((item) => {
               item.softName && this.softwareSummaryReport.addSoft({ name: item.softName, type: 'soft' });
@@ -164,6 +165,7 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.deviceIpSummary.setPreloaderDevices(false);
       //this.deviceIpSummary.setPreloaderDevices(false);
       this.remoteConnectionReport.setPreloaderDevices(false);
+      console.log("this.deviceIpSummary", this.deviceIpSummary);
     }, err => {
       this.softwareSummaryReport.resetSoft();
       this.softwareSummaryReport.setPreloaderSoft(false);
