@@ -42,12 +42,19 @@ export class CompanyUsersDropDownComponent extends DropDownComponent {
       this.onGetUsers(data);
     })
   }
+  public isSelected(item) {
+    return this.selectedItem && this.selectedItem.id == item.id;
+  }
+  getSelectedItemText() {
+    return (this.selectedItem) ? this.getUserName(this.selectedItem) : "";
+  }
   onGetUsers(data) {
     this.reqList = data.filter(item => {
       if (item.accountType !== 'TECH' && !item.deletedAt) {
         return item;
       }
-    });
+    }).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
+      1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0))
     this.list = JSON.parse(JSON.stringify(this.reqList));
   }
   /**

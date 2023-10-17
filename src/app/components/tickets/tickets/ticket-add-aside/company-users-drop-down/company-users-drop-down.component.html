@@ -71,7 +71,7 @@
                     ngbDropdownItem
                     (click)="onSelect(item)"
                     [ngClass]="{'--selected':isSelected(item)}"
-                    class="qt-df user-container"
+                    class="qt-df user-container pointer"
                 >
                     <div
                         class="assigne-user-avatar qt-mr-12"
@@ -92,6 +92,10 @@
                             [textContent]="item.primaryEmail"
                         ></div>
                     </div>
+                    <i
+                        class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
+                        *ngIf="isSelected(item)"
+                    ></i>
                 </div>
             </ng-template>
         </div>

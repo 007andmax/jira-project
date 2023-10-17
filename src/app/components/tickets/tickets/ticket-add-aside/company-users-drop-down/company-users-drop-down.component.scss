@@ -25,4 +25,13 @@
   .user-container {
     align-items: self-start;
     padding: 6px 8px;
+    position: relative;
+  }
+  .--selected {
+    background: rgba(0, 0, 0, .04);
+  }
+  .icon__assign-user-check {
+    top: calc(50% - 10px);
+    position: absolute;
+    right: 8px;
   }
