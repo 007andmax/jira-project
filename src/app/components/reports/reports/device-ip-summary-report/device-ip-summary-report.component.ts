@@ -19,7 +19,7 @@ export class DeviceIpSummaryReportComponent implements OnInit {
   deviceIpSummary: DeviceIpSummary = new DeviceIpSummary();
   constructor(public cd: ChangeDetectorRef,
     private domSanitizer: DomSanitizer,
-    private companiesStateService: CompaniesStateService) { }
+    public companiesStateService: CompaniesStateService) { }
   ngOnInit() {
   }
   public getReport(data) {

@@ -20,10 +20,16 @@ export class TicketsFilterSaveComponent implements OnInit {
   ngOnInit() {
     this.oldName = JSON.parse(JSON.stringify(this.globalFilter.name));
   }
+  /**
+* @description Confirm and close modal
+*/
   cancelConfirm() {
     this.activeModal.close();
     this.confirmStateService.setConfirm(false);
   };
+  /**
+* @description Init request to add / edit global filter
+*/
   save() {
     if (this.globalFilter.name.length == 0) return;
     if (!this.globalFilter.id) {

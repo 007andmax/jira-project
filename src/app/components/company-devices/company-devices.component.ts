@@ -41,7 +41,6 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     private customerPortalStateService: CustomerPortalStateService,
     private websocketService: WebsocketService,
     private devicesRealTimeService: DevicesRealTimeService) { }
-  public resize: boolean = false;
 
   ngOnInit() {
     document.body.querySelector(".main-container").scrollTo(0, 0);
@@ -167,14 +166,6 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       })
     })
     this.sub.add(getOnSendDeviceStatus);
-
-    this.devicesStateService.onOpenAside.subscribe((data) => {
-      this.resize = true;
-    });
-    this.devicesStateService.onCloseAside.subscribe((data) => {
-      this.resize = false;
-    });
-
   }
 
   getDevice(id) {

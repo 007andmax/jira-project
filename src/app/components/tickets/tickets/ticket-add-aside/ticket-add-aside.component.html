@@ -178,6 +178,8 @@
                     [class]="['qt-dropdown']"
                     [field]="'hostName'"
                     [list]="devices"
+                    [search]="true"
+                    [change]="true"
                     [preloader]="ticketAdd.getPreloaderDevices()"
                     [isDisabled]="!selectedCompanyId || ticketAdd.getPreloaderDevices()"
                     [placeholder]="'Select device'"

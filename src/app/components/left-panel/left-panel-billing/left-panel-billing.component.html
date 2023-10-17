@@ -104,4 +104,18 @@
             Contracts
         </li>
     </a>
+    <a
+        href
+        [link]="'contract-statistics'"
+        target="_blank"
+        appRightClickBlank
+    >
+        <li
+            [ngClass]="{'--active':activePage === 'contract-statistics'}"
+            (click)="goToState('contract-statistics')"
+            *ngIf="getPermissions('VIEW_SERVICE_AGREEMENTS')"
+        >
+            Contract statistics
+        </li>
+    </a>
 </ul>

@@ -1,0 +1,84 @@
+<div class="qt-page-list__container">
+    <div class="qt-page-list__body">
+        <div class="qt-page-list__header-thead-container">
+            <div class="qt-table-modern qt-page-list__header-thead">
+                <div class="qt-page-list__header-thead__row">
+                    <div
+                        class="ticket-table__requested-by pointer"
+                        (click)="onFilter('company-name')"
+                    >
+                        Company name
+                        <span class="qt-table-modern__sorting"></span>
+                    </div>
+                    <div
+                        class="ticket-table__сontract-type pointer"
+                        (click)="onFilter('type')"
+                    >
+                        Contract type
+                        <span class="qt-table-modern__sorting"></span>
+                    </div>
+                    <div
+                        class="ticket-table__contract-description pointer"
+                        (click)="onFilter('description')"
+                    >
+                        Contract description
+                        <span class="qt-table-modern__sorting"></span>
+                    </div>
+                    <div
+                        class="ticket-table__assignee pointer"
+                        (click)="onFilter('purchased')"
+                    >
+                        Purchased hours
+                        <span class="qt-table-modern__sorting"></span>
+                    </div>
+                    <div
+                        class="ticket-table__status pointer"
+                        (click)="onFilter('used-hours')"
+                    >
+                        Block-time used hours
+                        <span class="qt-table-modern__sorting"></span>
+                    </div>
+                    <div
+                        class="ticket-table__created-date pointer"
+                        (click)="onFilter('left-hours')"
+                    >
+                        Block-time hours left
+                        <span class="qt-table-modern__sorting"></span>
+                    </div>
+                    <div
+                        class="ticket-table__created-date pointer"
+                        (click)="onFilter('exceeding-hours')"
+                    >
+                        Exceeding hours
+                        <span class="qt-table-modern__sorting"></span>
+                    </div>
+                    <div
+                        class="ticket-table__created-date pointer"
+                        (click)="onFilter('billable-hours')"
+                    >
+                        Other billable hours
+                        <span class="qt-table-modern__sorting"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="qt-page-list__body-table-container">
+            <div class="qt-page-list__body-tbody qt-table-modern ticket-table">
+                <div class="tbody">
+                    <ng-template
+                        ngFor
+                        let-item
+                        [ngForOf]="list"
+                        [ngForTrackBy]="trackById"
+                    >
+                        <contracts-statistics-table-item [contract]="item"></contracts-statistics-table-item>
+                    </ng-template>
+                </div>
+            </div>
+            <div
+                class="loading"
+                *ngIf="showPreloader"
+            ></div>
+        </div>
+    </div>
+</div>

@@ -109,3 +109,12 @@
   font-weight: 600;
   color: #ffffff;
 }
+
+.ticket-detail-page__management-block {
+  @media (max-width: 2048px) {
+    position: fixed;
+    top: 12px;
+    right: 16px;
+    z-index: 3;
+  }
+}

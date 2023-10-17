@@ -1,8 +1,12 @@
 @import "./src/assets/styles/mixin/dropdown";
 
 app-drop-down,
+contract-detail-drop-down,
+contract-detail-intervals-drop-down,
+tickets-filter-created-drop-down,
 gl-numbers-drop-down,
-company-drop-down {
+company-drop-down,
+contract-company-drop-down {
   input {
     height: 40px;
     width: 100%;
@@ -59,7 +63,7 @@ company-drop-down {
   }
 
   &__dropdown {
-    button {
+    button:not(.ngb-dp-arrow-btn) {
       @include dropdown-item;
     }
 

@@ -58,6 +58,9 @@ export class CompaniesService {
       isArchived: false
     });
   }
+  public getContractCompanies() {
+    return this.http.get(this.apiUrl + 'company/forContractReport');
+  }
 
   public getCompaniesListByFilter(data) {
     return this.http.post(this.apiUrl + 'company/clients', data);
@@ -82,6 +85,14 @@ export class CompaniesService {
 
   public archiveCompany(id) {
     return this.http.get(this.apiUrl + 'company/archive/' + id).pipe(
+      tap(data => {
+        this.toastrService.success("The company has been successfully archived");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public archiveExampleCompany() {
+    return this.http.delete(this.apiUrl + 'company/removeExampleCompany').pipe(
       tap(data => {
         this.toastrService.success("The company has been successfully archived");
         this.appStateService.changeDetectorRef();

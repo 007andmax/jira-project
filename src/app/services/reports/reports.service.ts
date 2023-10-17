@@ -83,13 +83,16 @@ export class ReportsService {
   public getReportByTechSale(data) {
     return this.http.post(this.apiUrl + `reports/sales/byTechSold`, data);
   }
+  public getReportByDetailedContracts(data) {
+    return this.http.post(this.apiUrl + `reports/serviceAgreements`, data);
+  }
   public getReportByTechTicket(data) {
     return this.http.post(this.apiUrl + `reports/techTickets`, data);
   }
   public getReportByService(data) {
     return this.http.post(this.apiUrl + `customerReport/expenses`, data);
   }
-  public sendMessage(data) {        
+  public sendMessage(data) {
     return this.http.post(this.apiUrl + `reports/email`, data);
   }
   public sendCustomerMessage(data) {

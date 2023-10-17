@@ -101,9 +101,11 @@
   }
   .dropdown-menu {
     max-height: initial;
-    ngb-datepicker {
-      border: unset;
-    }
+  }
+  ngb-datepicker {
+    border: unset;
+    position: relative;
+    z-index: 1;
   }
   .ngb-dp-month {
     &:first-child .ngb-dp-week,

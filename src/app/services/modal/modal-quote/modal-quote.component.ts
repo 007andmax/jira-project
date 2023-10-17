@@ -29,7 +29,7 @@ import { QuotePreview } from 'src/app/components/billing/quotes/class/quote-prev
 })
 export class ModalQuoteComponent implements OnInit, OnDestroy {
 
-
+  reEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
   visible = true;
   selectable = true;
   removable = true;
@@ -247,20 +247,29 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     return `${user.firstName} ${user.lastName}`;
   }
   public keyup(e) {
-    if (e.keyCode === 13) {
-      const input = e.target;
-      const value = e.target.value;
-      if (value.length > 0) {
-        this.selectedUsers.push(value);
-        this.usersEmails.push(value);
-        this.quoteStateService.setUsersEmail(this.usersEmails);
-        input.value = '';
-        this.userCtrl.setValue(null);
-      }
+    if (e.keyCode === 13) this.onAdd(e);
+  }
+  public onToggleDropDown(data) {
+    if (!data) {
       this.usersClients = JSON.parse(JSON.stringify(this.reqUsersListClients));
       this.usersTechnical = JSON.parse(JSON.stringify(this.reqUsersListTechnical));
     }
   }
+  public onAdd(e) {
+    const input = e.target;
+    const value = e.target.value;
+    if (value.length > 0 && value.match(this.reEmail)) {
+      this.selectedUsers.push(value);
+      this.usersEmails.push(value);
+      this.quoteStateService.setUsersEmail(this.usersEmails);
+      input.value = '';
+      this.userCtrl.setValue(null);
+    }
+    if (input) {
+      input.value = '';
+    }
+  }
+
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

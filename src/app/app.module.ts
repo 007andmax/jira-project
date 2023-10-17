@@ -122,6 +122,9 @@ import { PermissionClientUserService } from './services/users/permission-client-
 import { UsersCheckUseComponent } from './components/users/users-check-use/users-check-use.component';
 import { PermissionMyProfileService } from './components/setting/my-profile/permission-my-profile.service';
 import { TicketsFilterSaveComponent } from './components/tickets/tickets/tickets-header/tickets-filter-save/tickets-filter-save.component';
+import { ContractsStatisticsComponent } from './components/billing/contracts-statistics/contracts-statistics.component';
+import { ContractsStatisticsTableComponent } from './components/billing/contracts-statistics/contracts-statistics-table/contracts-statistics-table.component';
+import { ContractsStatisticsTableItemComponent } from './components/billing/contracts-statistics/contracts-statistics-table/contracts-statistics-table-item/contracts-statistics-table-item.component';
 declare var $: any;
 
 /**

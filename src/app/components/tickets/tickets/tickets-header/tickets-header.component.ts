@@ -71,61 +71,123 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onToggleFilter);
   }
+  /**
+* @description Update value "countFilter" by which filters is use
+*/
   public onChangeCounterFilter() {
     this.countFilter = 0;
-    if (this.ticketsFilter.selectedCompany) this.countFilter++;
-    if (this.ticketsFilter.selectedTechUser) this.countFilter++;
-    if (this.ticketsFilter.selectedUser) this.countFilter++;
-    if (this.ticketsFilter.selectedStatus) this.countFilter++;
+    if (this.ticketsFilter.selectedCompanies.length > 0) this.countFilter++;
+    if (this.ticketsFilter.selectedTechUsers.length > 0) this.countFilter++;
+    if (this.ticketsFilter.selectedUsers.length > 0) this.countFilter++;
+    if (this.ticketsFilter.selectedStatus.length > 0) this.countFilter++;
+    if (this.ticketsFilter.selectedPriorityLevels.length > 0) this.countFilter++;
+    if (this.ticketsFilter.tags.length > 0) this.countFilter++;
+    if (this.ticketsFilter.customDateRange || this.ticketsFilter.startDate && this.ticketsFilter.endDate) this.countFilter++;
   }
+  /**
+* @description Toggle mobile left panel
+*/
   toggleMobileLeftPanel() {
     this.leftPanelStateService.toggleMobileLeftPanel(true);
     this.appService.toggleMobileAside(true);
   }
+  /**
+* @description Set new value "title" by which List Tupe is use
+*/
   onSetCount() {
     this.title = `${(this.selectedListType) ? this.selectedListType.title : ''} (${(this.count) ? this.count : 0})`;
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
     }
   }
+  /**
+* @description Return true if user any filter
+* @returns {Boolean} This is the result
+*/
   isExistFilters() {
-    return this.ticketsFilter.selectedCompany ||
-      this.ticketsFilter.selectedTechUser ||
-      this.ticketsFilter.selectedUser ||
-      this.ticketsFilter.selectedStatus ||
-      this.ticketsFilter.tags.length > 0
+    return this.ticketsFilter.selectedCompanies.length > 0 ||
+      this.ticketsFilter.selectedTechUsers.length > 0 ||
+      this.ticketsFilter.selectedUsers.length > 0 ||
+      this.ticketsFilter.selectedStatus.length > 0 ||
+      this.ticketsFilter.tags.length > 0 ||
+      this.ticketsFilter.selectedPriorityLevels.length > 0 ||
+      this.ticketsFilter.customDateRange ||
+      this.ticketsFilter.startDate && this.ticketsFilter.endDate
   }
+  /**
+* @description Return selected Status by toLowerCase
+* @param {String} selectedStatus - selected status
+* @returns {String} This is the result
+*/
   getStatus(selectedStatus) {
     return selectedStatus.toLowerCase();
   }
+  /**
+* @description Apply ticket filters
+*/
   refreshFilters() {
     this.filter.applyFilters();
   }
+  /**
+* @description Clear all filters and global filter
+*/
   clearAll() {
     if (this.filter) this.filter.onClearAll();
     let ticketGlobalFilter = new TicketGlobalFilter();
-    if (this.ticketsFilter.isDisbledCompany) ticketGlobalFilter.setClientCompanyId(this.ticketsFilter.selectedCompany.id);
+    if (this.ticketsFilter.isDisbledCompany) ticketGlobalFilter.setClientCompaies(this.ticketsFilter.selectedCompanies.map(item => item.id));
     this.ticketsStateService.onChangeGlobalFilter(ticketGlobalFilter);
   }
+  /**
+* @description Return text 'Filter' + countFilter
+* @returns {String} This is the result
+*/
   getTextCountFilters() {
     return `Filters${(this.countFilter > 0) ? ' (' + this.countFilter + ')' : ''}`;
   }
+  /**
+* @description Set new value countFilter
+* @param {String} data - new value countFilter
+*/
   onChangeCountFilter(data) {
     this.countFilter = data;
   }
+  /**
+* @description Set new value title
+* @param {String} title - new value Title
+*/
   public setTitle(title) {
     this.title = `${title} (${(this.count) ? this.count : 0})`;
   }
+  /**
+* @description Return user firstName + lastName
+* @returns {String} This is the result
+*/
   getUserName(user) {
     return `${user.firstName} ${user.lastName}`;
   }
+  /**
+* @description Toogle displat filters
+* @param {Boolean} data - new value toggleFilter
+*/
   onToggleFilter(data) {
     if (this.appService.checkMobile()) this.appService.toggleMobileAside(data);
     this.toggleFilter = data;
     this.ticketsStateService.changeToggleFilter(this.toggleFilter);
   }
+  /**
+* @description Show aside to add ticket
+*/
   onAddTicket() {
     this.ticketsStateService.onToggleAddTicket();
+  }
+  /**
+* @description Track list by "id" field, retrun field "id"
+* @param {Number} index - selected 
+* @param {Object} item - Object for use tracking
+* @returns {String} This is the result
+*/
+  public trackById(index, item) {
+    return item.id;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

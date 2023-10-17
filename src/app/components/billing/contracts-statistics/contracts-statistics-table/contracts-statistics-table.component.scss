@@ -1,0 +1,433 @@
+@import "./src/assets/styles/variable";
+
+/deep/ .ticket-table {
+    th {
+        white-space: nowrap;
+    }
+
+    td {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}
+
+.priority-icon {
+    margin-left: 8px;
+}
+
+app-tickets-table-item {
+    display: contents;
+}
+
+.pengind-loading {
+    bottom: 20px;
+    top: auto;
+}
+
+.mobile-action-btn {
+    display: none;
+    width: 48px;
+    height: 48px;
+    background: $blue-light-600 url('/assets/img/icons/add-product.svg') 16px 16px no-repeat;
+    box-shadow: 0 8px 16px 0 rgba(22, 164, 250, 0.2);
+    position: fixed;
+    right: 16px;
+    bottom: 100px;
+    border-radius: 50%;
+    cursor: pointer;
+
+    @media (max-width: 767px) {
+        display: block;
+    }
+}
+
+.qt-page-list__header-thead-container {
+    position: sticky;
+    top: 57px;
+    z-index: 1;
+    background-color: $white;
+    padding-top: 32px;
+
+    .qt-page-list__header-thead {
+        border: 1px solid $gray-200;
+        border-radius: 8px 8px 0 0;
+        overflow: hidden;
+    }
+}
+
+.qt-page-list__container {
+    display: flex;
+}
+
+/deep/ .filter-button.--gray:focus {
+    background-color: $white;
+}
+
+/deep/ .filter-button.active:focus {
+    background-color: #16a4fa10;
+}
+
+/deep/ .aside-filters {
+    width: 320px;
+    flex-shrink: 0;
+    background-color: $white;
+    position: sticky;
+    top: 58px;
+    height: calc(100vh - 128px);
+    transition: .3s ease-in-out width;
+    border-left: 1px solid $gray-200;
+
+    &-header {
+        padding: 12px 16px;
+        border-bottom: 1px solid $gray-200;
+
+        &__title {
+            font-size: 16px;
+            font-weight: 600;
+            color: $gray-900 ;
+        }
+
+        .qt-button {
+            width: 32px;
+            height: 32px
+        }
+    }
+
+    app-tickets-filter {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &-content {
+        height: calc(100% - 57px);
+
+        &__main {
+            display: flex;
+            flex-direction: column;
+            padding: 12px 16px;
+            height: calc(100% - 57px);
+            overflow: auto;
+
+            .qt-input-block__label {
+                font-size: 14px;
+                font-weight: 500;
+                color: $gray-700;
+                margin-top: 3px;
+                margin-bottom: 20px;
+            }
+
+            .content-filters-checkbox {
+                color: $gray-700;
+
+                &__count {
+                    border-radius: 24px;
+                    padding: 2px 8px;
+                    background-color: $gray-100;
+                    color: $gray-700;
+                    font-size: 12px;
+                    font-weight: 600;
+                }
+            }
+
+            .content-filters-checkbox:not(:last-child) {
+                margin-bottom: 20px;
+            }
+        }
+
+        &__footer {
+            padding: 10px 16px;
+            border-top: 1px solid $gray-200;
+        }
+    }
+
+    .content-filters-header {
+        display: none;
+    }
+
+    app-tickets-filter-tags .mat-form-field {
+        width: 100%;
+    }
+
+    // Start
+    .search-users,
+    .search-tech-users,
+    .search-status,
+    .search-company,
+    .light-dropdown.dropdown {
+        margin-bottom: 16px;
+
+        &::before {
+            color: $gray-900;
+            font-weight: 600;
+            line-height: 20px;
+        }
+    }
+
+    .qt-dropdown,
+    .light-dropdown {
+        padding-top: 8px;
+    }
+
+    .search-company {
+        &::before {
+            content: "Company";
+        }
+    }
+
+    .search-users {
+        &::before {
+            content: "User";
+        }
+    }
+
+    .search-tech-users {
+        &::before {
+            content: "Tech Team";
+        }
+    }
+
+    .search-status {
+        &::before {
+            content: "Status";
+        }
+    }
+
+    app-tickets-filter-tags {
+        &::before {
+            content: "Tags";
+        }
+    }
+}
+
+.qt-page-list__body {
+    @media (min-width: 768px) {
+        padding: 0 32px;
+    }
+}
+
+.qt-page-list__header-thead__row {
+    background-color: $gray-50;
+
+    &>div {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        font-weight: 500;
+        font-size: 14px;
+        text-transform: unset;
+        color: $gray-500;
+
+        &:first-child {
+            padding-left: 25px;
+        }
+
+        &:last-child {
+            padding-right: 25px;
+        }
+    }
+}
+
+/deep/ .qt-table-modern__row {
+    @media (min-width: 768px) {
+        position: relative;
+        min-height: 56px;
+        border: unset;
+        margin-bottom: 0;
+    }
+
+    &>div {
+        @media (min-width: 768px) {
+            padding-top: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid $gray-200;
+            font-size: 14px;
+
+            &:first-child {
+                padding-left: 25px;
+                border-left: 1px solid $gray-200;
+                border-radius: 0;
+            }
+
+            &:last-child {
+                padding-right: 25px;
+                border-right: 1px solid $gray-200;
+                border-radius: 0;
+            }
+        }
+    }
+
+    &:hover {
+        border: unset;
+
+        &>div {
+            background-color: $blue-dark-25;
+        }
+    }
+
+    .ticket-table__company {
+        font-weight: 500;
+        position: relative;
+        width: 100%;
+    }
+
+    .tag__modern {
+        font-size: 12px;
+        line-height: 14px;
+        font-weight: 500;
+        padding: 4px 8px;
+        text-transform: unset;
+    }
+
+    .ticket-table__subject {
+        position: static;
+
+        .ellipsis {
+            position: static;
+            transform: unset;
+            width: calc(412px - 16px);
+        }
+    }
+
+    span.priority-icon {
+        position: absolute;
+        top: 0;
+        left: 1px;
+        width: 3px;
+        height: 100%;
+
+        @media (max-width: 767px) {
+            left: -1px;
+            border-radius: 8px 0 0 8px;
+        }
+
+        &.--high {
+            background-color: $red-600;
+        }
+
+        &.--medium {
+            background-color: $yellow-600;
+        }
+    }
+}
+
+/deep/ .qt-table-modern .ticket-table__contract-description {
+    max-width: 300px;
+}
+
+/deep/ .qt-table-modern .ticket-table__subject {
+    @media (max-width: 1600px) {
+        max-width: calc(345px - 16px);
+    }
+}
+//@import "../../../../../assets/styles/variable";
+@import "./src/assets/styles/variable";
+
+.tickets-list-search {
+  margin-right: 8px;
+}
+
+.filter-button {
+  //padding-left: 30px; // TODO check this style
+  //background-repeat: no-repeat;
+  //background-position: 10px center;
+  //background-size: 16px;
+  //background-color: $white;
+  //color: $gray-900;
+  //border: none;
+  //background-image: url("../../../../../assets/img/icons/filter.svg");
+  @media (max-width: 767px) {
+    background-image: url("/assets/img/icons/filter-white.svg");
+    background-color: transparent;
+    background-size: 24px;
+    height: 24px;
+    width: 24px;
+    background-position: center;
+    padding: 0;
+    border-color: transparent;
+  }
+  span {
+    @media (max-width: 767px) {
+      display: none;
+    }
+  }
+  &.active {
+    color: $blue-light-600;
+    background-color: #16a4fa10;
+    border-color: transparent;
+    //background-image: url(../../../../../assets/img/icons/filter-active.svg);
+
+    .icon__filter {
+      background-color: $blue-light-600;
+    }
+  }
+}
+.icon__search-white {
+  @media (max-width: 767px) {
+    display: none;
+  }
+}
+.list-filters {
+  display: none;
+  @media (max-width: 767px) {
+    display: block;
+  }
+  margin: -8px -8px 8px -8px;
+  /deep/.mat-form-field-infix {
+    overflow: auto;
+    border: none;
+    border-radius: 0;
+  }
+  /deep/.mat-chip-list-wrapper {
+    width: fit-content;
+    margin: 0;
+    flex-wrap: unset;
+    .mat-standard-chip {
+      margin: 0 8px 0 0;
+    }
+  }
+}
+.status {
+  text-transform: capitalize;
+}
+.is-exist-filters {
+  position: relative;
+  &::before {
+    @media (max-width: 767px) {
+      display: block;
+    }
+    display: none;
+    content: " ";
+    position: absolute;
+    top: 1px;
+    right: 0;
+    width: 8px;
+    height: 8px;
+    background-color: $red-600;
+    border-radius: 10px;
+  }
+}
+
+.qt-page-list__header-filters {
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+.left-panel-ng2__content--filters {
+
+    @media (max-width: 767px) {
+        align-items: flex-start;
+        max-height: calc(100vh - 74px);
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: $white;
+        padding: 16px;
+        padding-top: 72px;
+        flex-direction: column;
+        width: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+}

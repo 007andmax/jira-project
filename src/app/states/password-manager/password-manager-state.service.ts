@@ -17,7 +17,7 @@ export class PasswordManagerStateService {
   onGetCategories: EventEmitter<any> = new EventEmitter();
   categories: Array<PasswordRecordCategories> = [];
   public onChangeRealTime: EventEmitter<any> = new EventEmitter();
-
+  onChangePassword: EventEmitter<any> = new EventEmitter();
   constructor(private passwordManagerService: PasswordManagerService) { }
 
   public onInit() {
@@ -29,6 +29,9 @@ export class PasswordManagerStateService {
       if (newChange.action === 'PASSWORD_CATEGORY_CREATED') newChange.data.forEach(element => this.categories.push(new PasswordRecordCategories(element)));
       this.onGetCategories.emit(this.categories);
     })
+  }
+  public changePassword(data) {
+    this.onChangePassword.emit(data);
   }
   public getSelectedCategory() {
     return this.selectedCategory;

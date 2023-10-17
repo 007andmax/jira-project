@@ -76,7 +76,8 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === ARCHIVE_COMPANY) {
-          this.onArchiveCompany(this.companiesStateService.getCompanytForArchive().id);
+          if (!this.companiesStateService.getCompanytForArchive().isExample) this.onArchiveCompany(this.companiesStateService.getCompanytForArchive().id);
+          if (this.companiesStateService.getCompanytForArchive().isExample) this.onArchiveExampleCompany(this.companiesStateService.getCompanytForArchive().id);
         }
         if (this.confirmStateService.getConfirmAction() === DEARCHIVE_COMPANY) {
           this.onDeArchiveCompany(this.companiesStateService.getCompanyFortDeArchive().id);
@@ -226,6 +227,13 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   }
   public onArchiveCompany(id) {
     let archiveCompany = this.companiesService.archiveCompany(id).subscribe(data => {
+      let index = this.CompaniesList.findIndex(item => item.id === id);
+      if (index > -1) this.CompaniesList.splice(index, 1);
+    })
+    this.sub.add(archiveCompany);
+  }
+  public onArchiveExampleCompany(id) {
+    let archiveCompany = this.companiesService.archiveExampleCompany().subscribe(data => {
       let index = this.CompaniesList.findIndex(item => item.id === id);
       if (index > -1) this.CompaniesList.splice(index, 1);
     })

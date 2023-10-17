@@ -80,50 +80,75 @@
 </div>
 <div
     class="list-filters"
-    *ngIf="ticketsFilter.selectedCompany ||
-    ticketsFilter.selectedTechUser ||
-    ticketsFilter.selectedUser ||
-    ticketsFilter.selectedStatus ||
+    *ngIf="ticketsFilter.selectedCompanies.length > 0 ||
+    ticketsFilter.selectedTechUsers.length > 0 ||
+    ticketsFilter.selectedUsers.length > 0 ||
+    ticketsFilter.selectedStatus.length > 0 ||
     ticketsFilter.tags.length > 0"
 >
     <mat-form-field>
         <mat-chip-list aria-label="Fruit selection">
-            <mat-chip
-                *ngIf="ticketsFilter.selectedCompany"
-                (removed)="filter.companyDp.clearClient();refreshFilters()"
+            <ng-template
+                ngFor
+                let-item
+                [ngForOf]="ticketsFilter.selectedCompanies"
+                [ngForTrackBy]="trackById"
             >
-                {{ticketsFilter.selectedCompany.name}}
-                <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
-            <mat-chip
-                *ngIf="ticketsFilter.selectedTechUser"
-                (removed)="filter.techUsersDp.clearClient();refreshFilters()"
+                <mat-chip (removed)="filter.companyDp.clearClient();refreshFilters()">
+                    {{item.name}}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+            </ng-template>
+            <ng-template
+                ngFor
+                let-item
+                let-i="index"
+                [ngForOf]="ticketsFilter.selectedTechUsers"
+                [ngForTrackBy]="trackById"
             >
-                {{getUserName(ticketsFilter.selectedTechUser)}}
-                <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
-            <mat-chip
-                *ngIf="ticketsFilter.selectedUser"
-                (removed)="filter.usersDp.clearClient();refreshFilters()"
+                <mat-chip (removed)="filter.techUsersDp.remove(i);refreshFilters()">
+                    {{getUserName(item)}}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+            </ng-template>
+            <ng-template
+                ngFor
+                let-item
+                let-i="index"
+                [ngForOf]="ticketsFilter.selectedUsers"
+                [ngForTrackBy]="trackById"
             >
-                {{getUserName(ticketsFilter.selectedUser)}}
-                <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
-            <mat-chip
-                *ngIf="ticketsFilter.selectedStatus"
-                (removed)="filter.statusDp.clearClient();refreshFilters()"
-                class="status"
+                <mat-chip (removed)="filter.usersDp.remove(i);refreshFilters()">
+                    {{getUserName(item)}}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+            </ng-template>
+            <ng-template
+                ngFor
+                let-item
+                [ngForOf]="ticketsFilter.selectedStatus"
+                [ngForTrackBy]="trackById"
             >
-                {{getStatus(ticketsFilter.selectedStatus)}}
-                <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
-            <mat-chip
-                *ngFor="let tag of ticketsFilter.tags; let i = index"
-                (removed)="filter.tagsDp.remove(i);refreshFilters()"
+                <mat-chip
+                    (removed)="refreshFilters()"
+                    class="status"
+                >
+                    {{getStatus(item.name)}}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+            </ng-template>
+            <ng-template
+                ngFor
+                let-item
+                let-i="index"
+                [ngForOf]="ticketsFilter.tags"
+                [ngForTrackBy]="trackById"
             >
-                {{tag.word}}
-                <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
+                <mat-chip (removed)="filter.tagsDp.remove(i);refreshFilters()">
+                    {{item.word}}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+            </ng-template>
         </mat-chip-list>
     </mat-form-field>
 </div>

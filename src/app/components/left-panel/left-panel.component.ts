@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from "@angular/router";
+import { NavigationEnd, Router } from "@angular/router";
 import { Company } from 'src/app/interfaces/company/company';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
@@ -40,6 +40,7 @@ export class LeftPanelComponent implements OnInit {
   state: string = '';
   page: string = '';
   showMobTab = false;
+  isInitPopStateNaviate: boolean = false;
   @ViewChild('panelBilling') panelBilling: LeftPanelBillingComponent;
   @ViewChild('panelCompanies') panelCompanies: LeftPanelCompaniesComponent;
   @ViewChild('panelSettings') panelSettings: LeftPanelSettingsComponent;
@@ -90,8 +91,9 @@ export class LeftPanelComponent implements OnInit {
     });
 
     this.router.events
-      .subscribe((event) => {
-        if (this.state === '') {
+      .subscribe((event: any) => {
+        if (event.navigationTrigger === "popstate") this.isInitPopStateNaviate = true;
+        if (this.state === '' || (event instanceof NavigationEnd && this.isInitPopStateNaviate)) {
           if (window.location.href.includes(`/companies`)) this.state = 'new-companies';
           if (window.location.href.includes(`/billing-dashboard`)) this.state = 'billing-dashboard';
           if (window.location.href.includes(`/default-services`)) this.state = 'new-services';
@@ -135,6 +137,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/setting/marketing-email`)) this.state = 'marketing-email';
           if (window.location.href.includes(`/setting/customer-portal`)) this.state = 'customer-portal';
 
+          if (window.location.href.includes(`/contract-statistics`)) this.state = 'contract-statistics';
           if (window.location.href.includes(`/support-page`)) this.state = 'support-page';
           if (window.location.href.includes(`/users`)) this.state = 'new-users';
           if (!window.location.href.includes(`/setting/marketing-email`) && window.location.href.includes(`/marketing`)) this.state = 'marketing';
@@ -160,6 +163,7 @@ export class LeftPanelComponent implements OnInit {
 
           if (window.location.href.includes(`/report/byProducts`)) this.state = 'byProducts';
           if (window.location.href.includes(`/report/byCustomers`)) this.state = 'byCustomers';
+          if (window.location.href.includes(`/report/block-time-report`)) this.state = 'block-time-report';
           if (window.location.href.includes(`/report/byTaxes`)) this.state = 'byTaxes';
           if (window.location.href.includes(`/report/common-commissions`)) this.state = 'common-commissions';
           if (window.location.href.includes(`/report/detailed-commissions`)) this.state = 'detailed-commissions';
@@ -198,8 +202,10 @@ export class LeftPanelComponent implements OnInit {
           this.leftPanelStateService.changeState(this.state);
           if (!this.cd['destroyed']) {
             this.cd.detectChanges();
-            this.updatePage(this.state);
           }
+          this.updatePage(this.state);
+          if (this.isInitPopStateNaviate) this.leftPanelStateService.toggleLeftPanel(false);
+          this.isInitPopStateNaviate = false;
         }
       });
 
@@ -299,6 +305,7 @@ export class LeftPanelComponent implements OnInit {
   onChangeState(data) {
     if (this.state !== data) {
       this.state = data;
+      if (this.state === 'contract-statistics') this.goToLink(`contract-statistics`);
       if (this.state === 'new-companies') this.goToLink(`companies`);
       if (this.state === 'billing-dashboard') this.goToLink('billing-dashboard');
       if (this.state === 'new-services') this.goToLink('default-services');
@@ -360,6 +367,7 @@ export class LeftPanelComponent implements OnInit {
 
       if (this.state === 'byProducts' ||
         this.state === 'byCustomers' ||
+        this.state === 'block-time-report' ||
         this.state === 'byTaxes' ||
         this.state === 'common-commissions' ||
         this.state === 'detailed-commissions' ||

@@ -67,10 +67,10 @@ export class CustomerPortalStateService {
   }
   public setTicketsFilter(company, type, currentUser) {
     this.ticketsStateService.setListType(type);
-    this.ticketsFilter.setCompany({ id: company.companyId });
+    this.ticketsFilter.setCompanies([{ id: company.companyId }]);
     this.ticketsFilter.setListType(type);
-    if (company.customerUserRole.getPermission('VIEW_MY_TICKETS') && !company.customerUserRole.getPermission('VIEW_ALL_TICKETS')) this.ticketsFilter.setUser(currentUser);
-    if (company.customerUserRole.getPermission('VIEW_MY_TICKETS') && company.customerUserRole.getPermission('VIEW_ALL_TICKETS')) this.ticketsFilter.setUser(null);
+    if (company.customerUserRole.getPermission('VIEW_MY_TICKETS') && !company.customerUserRole.getPermission('VIEW_ALL_TICKETS')) this.ticketsFilter.setUsers([currentUser]);
+    if (company.customerUserRole.getPermission('VIEW_MY_TICKETS') && company.customerUserRole.getPermission('VIEW_ALL_TICKETS')) this.ticketsFilter.setUsers([]);
     this.onTicketFilters.emit(this.ticketsFilter);
   }
   public setCompnayIdInfo(data) {

@@ -3,6 +3,7 @@
     ngbDropdown
     #products="ngbDropdown"
     [ngClass]="{'hide-all-user':!toggleAllUsers}"
+    (openChange)="onToggleDropDown($event)"
 >
     <div
         class="dropdown-recipients-body"
