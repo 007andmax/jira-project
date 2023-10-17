@@ -1,0 +1,57 @@
+<div
+    [ngClass]="{'--selected': selected}"
+    class="qt-table-modern__row"
+>
+    <div
+        class="ticket-table__requested-by"
+        [textContent]="company.name"
+    >
+    </div>
+    <div
+        class="--strong ticket-table__subject"
+        [textContent]="company.ownerName"
+    >
+    </div>
+    <div
+        class="ticket-table__company"
+        [textContent]="company.ownerEmail"
+    >
+    </div>
+    <div class="ticket-table__assignee">
+        <div>
+            <ng-template
+                ngFor
+                let-phone
+                [ngForOf]="company.phoneNumbers"
+                [ngForTrackBy]="trackById"
+            >
+                <p [textContent]="phone"></p>
+            </ng-template>
+        </div>
+    </div>
+    <div
+        class="ticket-table__status"
+        [textContent]="company.subdomain"
+    >
+    </div>
+    <div
+        class="ticket-table__created-date"
+        [textContent]="getCreateAt()"
+    ></div>
+    <div
+        class="ticket-table__created-status"
+        [textContent]="company.status"
+    ></div>
+    <div
+        class="ticket-table__created-clients"
+        [textContent]="company.clientCompanies"
+    ></div>
+    <div
+        class="ticket-table__created-techs"
+        [textContent]="company.techUsers"
+    ></div>
+    <div
+        class="ticket-table__created-devices"
+        [textContent]="company.devices"
+    ></div>
+</div>

@@ -47,6 +47,11 @@ const routes: Routes = [
     canActivate: [PermissionSuperAdminService]
   },
   {
+    path: ':domain/tech-companies',
+    loadChildren: './components/super-admin/super-admin-companies/super-admin-companies.module#SuperAdminCompaniesModule',
+    canActivate: [PermissionSuperAdminService]
+  },
+  {
     path: ':domain/password-manager',
     loadChildren: './components/password-manager/password-manager.module#PasswordManagerModule',
     canActivate: [PermissionPasswordManagerService, PermissionNoSuperAdminService]

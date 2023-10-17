@@ -125,6 +125,9 @@ import { TicketsFilterSaveComponent } from './components/tickets/tickets/tickets
 import { ContractsStatisticsComponent } from './components/billing/contracts-statistics/contracts-statistics.component';
 import { ContractsStatisticsTableComponent } from './components/billing/contracts-statistics/contracts-statistics-table/contracts-statistics-table.component';
 import { ContractsStatisticsTableItemComponent } from './components/billing/contracts-statistics/contracts-statistics-table/contracts-statistics-table-item/contracts-statistics-table-item.component';
+import { SuperAdminCompaniesComponent } from './components/super-admin/super-admin-companies/super-admin-companies.component';
+import { SuperAdminCompaniesHeaderComponent } from './components/super-admin/super-admin-companies/super-admin-companies-header/super-admin-companies-header.component';
+import { SuperAdminCompaniesItemComponent } from './components/super-admin/super-admin-companies/super-admin-companies-item/super-admin-companies-item.component';
 declare var $: any;
 
 /**
@@ -153,7 +156,7 @@ declare var $: any;
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
     CannedResponsesAsideComponent,
-    TicketsFilterSaveComponent
+    TicketsFilterSaveComponent,
   ],
   imports: [
     BrowserModule,
