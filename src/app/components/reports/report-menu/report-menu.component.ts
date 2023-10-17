@@ -128,14 +128,9 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     this.hardwareSummaryReport.setPreloaderDevices(true);
     this.remoteConnectionReport.setPreloaderDevices(true);
     this.deviceIpSummary.setPreloaderDevices(true);
-    // this.deviceIpSummary.setPreloaderDevices(true);
     this.devicesService.getSoft(companyId).subscribe((resp: any) => {
-      // $rootScope.softwareSummarySelectedCompany = resp;
-
       this.softwareSummaryReport.resetSoft();
-
       if (resp) {
-        console.log("resp", resp);
         this.devices = resp[companyId] || [];
         this.devices.map((item: any) => {
           if (item.report) {
@@ -152,8 +147,6 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
         this.softwareSummaryReport.resetSoft();
         for (var key in obj) {
           this.softwareSummaryReport.addSoft(obj[key]);
-          /* this.softwareSummaryReport.soft.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-             1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));*/
         }
         this.softwareSummaryReport.setDevices(resp[companyId]);
         this.hardwareSummaryReport.setDevices(resp[companyId]);
@@ -163,16 +156,13 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.softwareSummaryReport.setPreloaderDevices(false);
       this.softwareSummaryReport.setPreloaderSoft(false);
       this.deviceIpSummary.setPreloaderDevices(false);
-      //this.deviceIpSummary.setPreloaderDevices(false);
       this.remoteConnectionReport.setPreloaderDevices(false);
-      console.log("this.deviceIpSummary", this.deviceIpSummary);
     }, err => {
       this.softwareSummaryReport.resetSoft();
       this.softwareSummaryReport.setPreloaderSoft(false);
       this.softwareSummaryReport.setPreloaderDevices(false);
       this.hardwareSummaryReport.setPreloaderDevices(false);
       this.deviceIpSummary.setPreloaderDevices(false);
-      // this.deviceIpSummary.setPreloaderDevices(false);
       this.remoteConnectionReport.setPreloaderDevices(false);
     })
   }
@@ -454,10 +444,7 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     this.reportsStateService.onChangeExportCSV(new ExportCSV('reports/sales/byCustomers', this.productSalesReport.getForRequest(), 'Sales_report_by_customer'));
   }
   getReportCompanyProducts() {
-    // if (!this.validate.isValidateProduct(this.productSalesReport.startDate, this.productSalesReport.endDate, this.productSalesReport.companyId, this.productSalesReport.type)) return;
-
     this.productsCompanyReport.setCompanyId(this.companiesStateService.getCompanyRoutingId());
-
     this.selectedClient = this.companiesStateService.getCompanies().find(item => item.id === this.productsCompanyReport.companyId);
     if (this.productsCompanyReport.startDate === '' && this.productsCompanyReport.endDate === '') this.productsCompanyReport.setDatesByCompany(this.selectedClient);
     this.onSelectedClient.emit(this.selectedClient);
@@ -472,14 +459,10 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     this.onRequest.emit(true);
     this.reportsService.getReportByProduct(this.productSalesReport.getForRequest()).subscribe(data => this.setDatareport(data));
     this.reportsStateService.onChangeExportCSV(new ExportCSV('reports/sales/byProducts', this.productSalesReport.getForRequest(), 'Sales_report_by_products'));
-
   }
   getReportByGlNumber() {
-
     if (!this.validate.isValidate(this.glNumber.monthlyDetailed, this.yearToDate, this.glNumber.startDate, this.glNumber.endDate)) return;
-
     this.onRequest.emit(true);
-
     if (this.yearToDate) {
       this.reportsService.getAccountingStartDate().subscribe((res: any) => {
         this.glNumber.setStartDate(moment(res.accountingStartDate).format('YYYY/MM/DD'));
@@ -490,62 +473,42 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       if (this.glNumber.getMonthlyDetailed()) this.glNumber.setDatesForMonthly();
       this.reportsService.getReportByGlNumber(this.glNumber.getForRequest()).subscribe(data => this.setDatareport(data));
     }
-
-
   }
 
   getReportByTechService() {
-
     if (!this.validate.isValidateTechService(this.techService.startDate, this.glNumber.endDate)) return;
-
     this.onRequest.emit(true);
-
-
-
     this.reportsService.getReportByTechService(this.techService.getForRequest()).subscribe((data: any) => {
       this.techService.setList(data.lines);
       this.techService.setTotalQuantity(data.totalQuantity);
       this.setDatareport(this.techService)
     });
-
-
   }
   getReportDetailedCommissions() {
     if (!this.validate.isValidateDetailedCommissions(this.detailedCommissionsReport.userId)) return;
-
     this.onRequest.emit(true);
-
     if (!this.detailedCommissionsReport.startDate && !this.detailedCommissionsReport.endDate) {
       this.detailedCommissionsReport.setStartDate(moment(this.companiesStateService.getCurrentCompany().createdAt).format('YYYY/MM/DD'))
       this.detailedCommissionsReport.setEndDate(moment(new Date()).format('YYYY/MM/DD'))
-
     }
-
     this.reportsService.getReportDetailedCommissions(this.detailedCommissionsReport.getForRequest()).subscribe((data: any) => {
       this.detailedCommissionsReport.setData(data);
       this.setDatareport(this.detailedCommissionsReport)
     });
-
   }
   getReportCommonCommissions() {
     if (!this.validate.isValidateCommonCommissions(this.commonCommissionsReport.userId)) return;
-
     this.onRequest.emit(true);
-
     if (!this.commonCommissionsReport.startDate && !this.commonCommissionsReport.endDate) {
       this.commonCommissionsReport.setStartDate(moment(this.companiesStateService.getCurrentCompany().createdAt).format('YYYY/MM/DD'))
       this.commonCommissionsReport.setEndDate(moment(new Date()).format('YYYY/MM/DD'))
-
     }
-
     this.reportsService.getReportDetailedCommissions(this.commonCommissionsReport.getForRequest()).subscribe((data: any) => {
       this.commonCommissionsReport.setData(data);
       this.setDatareport(this.commonCommissionsReport)
     });
-
   }
   private setDatareport(data) {
-
     if (this.report === 'income-accounts') {
       this.glNumber.setResponse(data);
       this.reportsStateService.onChangeGlNumber(this.glNumber);
@@ -554,8 +517,6 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.serviceReport.setData(data);
       this.reportsStateService.onChangeServiceReport(this.serviceReport.getDataObject());
     }
-
-
     this.getReport.emit(data);
     this.loadingInProgress = false;
     this.onRequest.emit(false);

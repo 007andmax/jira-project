@@ -16,4 +16,7 @@ export class SuperAdminCompaniesItemComponent implements OnInit {
   getCreateAt() {
     return moment(new Date(this.company.createdAt)).format('DD/MM/YYYY');
   }
+  public trackById(index, item) {
+    return item.id;
+  }
 }
