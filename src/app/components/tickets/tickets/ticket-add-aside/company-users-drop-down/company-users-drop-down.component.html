@@ -1,0 +1,99 @@
+<div
+    ngbDropdown
+    [ngClass]="class"
+    [container]="container"
+    [ngStyle]="{'width':widthInput ? widthInput : '100%'}"
+>
+    <div
+        *ngIf="title"
+        class="app-drop-down__title"
+        [textContent]="title"
+    ></div>
+    <mat-error
+        class="invalid-feedback mat-error"
+        *ngIf="!validate"
+        [textContent]="errorMessage"
+    >
+    </mat-error>
+    <form>
+        <input
+            type="text"
+            class="pointer"
+            [ngStyle]="{'width': '100%', 'height': heightInput ? heightInput : '40px' }"
+            [ngClass]="{'disabled': isDisabled, '--input-error' : !validate}"
+            [disabled]="isDisabled"
+            [value]="getSelectedItemText()"
+            autocomplete="off"
+            [placeholder]="placeholder"
+            id="dropdown1"
+            [attr.maxlength]="maxlength"
+            (input)="onCheckAdd($event)"
+            [readonly]="!change"
+            ngbDropdownToggle
+        >
+        <span
+            class="app-drop-down__right-icon pointer"
+            *ngIf="list && !isDisabled"
+            [ngStyle]="{'bottom': heightInput ? dividePosition(heightInput) : '20px' }"
+        >
+            <i
+                *ngIf="selectedItem && !isAdd && !isBlockClear"
+                class="icn-sm icn-remove-old"
+                (click)="clearClient()"
+            ></i>
+            <i
+                *ngIf="(!selectedItem || isBlockClear) && !isAdd && !preloader"
+                class="icn-sm report-caret-icon"
+            ></i>
+            <i
+                *ngIf="isAdd"
+                (click)="addItem()"
+                class="icn-sm icn-product-save icon__active_subscription"
+            ></i>
+        </span>
+        <i
+            class="loading xs"
+            *ngIf="preloader"
+        ></i>
+        <div
+            ngbDropdownMenu
+            [ngStyle]="{'width': dropdownWidth ? dropdownWidth : '100%', 'max-height': dropdownHeight ? dropdownHeight : '192px'}"
+            aria-labelledby="dropdown1"
+            class="app-drop-down__dropdown"
+        >
+            <ng-template
+                ngFor
+                let-item
+                [ngForOf]="list"
+                let-i="index"
+            >
+                <div
+                    ngbDropdownItem
+                    (click)="onSelect(item)"
+                    [ngClass]="{'--selected':isSelected(item)}"
+                    class="qt-df user-container"
+                >
+                    <div
+                        class="assigne-user-avatar qt-mr-12"
+                        [textContent]="ticketsListService.getAssignedUserNameForAvatar(item)"
+                        [ngStyle]="{'background': ticketsListService.getStyleAvatar(item)}"
+                    ></div>
+                    <div>
+                        <div
+                            class="user-name"
+                            [textContent]="getUserName(item)"
+                        ></div>
+                        <div
+                            class="user-description"
+                            [textContent]="getCompanyName(item)"
+                        ></div>
+                        <div
+                            class="user-description"
+                            [textContent]="item.primaryEmail"
+                        ></div>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+    </form>
+</div>
