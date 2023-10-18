@@ -1,12 +1,12 @@
 <div class="header-top">
     <div class="avn-dental">
         <span class="av-short">
-            {{commonServices.getCharacter(currentCompany.name) || ''}}
+            {{currentCompany  && commonServices.getCharacter(currentCompany.name) || ''}}
         </span>
     </div>
     <div
         class="qt-color-white qt-lh-154 qt-mb-12"
-        [textContent]="currentCompany.name"
+        [textContent]="currentCompany ? currentCompany.name : ''"
     ></div>
     <div class="user-info-hp">
         <span class="user-hp-dp">

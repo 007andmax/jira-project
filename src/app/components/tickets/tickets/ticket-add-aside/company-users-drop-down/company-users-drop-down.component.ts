@@ -23,21 +23,7 @@ export class CompanyUsersDropDownComponent extends DropDownComponent {
     public ticketsListService: TicketsListService,) {
     super(elRef, companiesStateService, usersStateService, customerPortalStateService, companiesService);
   }
-
-  @Input() clientType: string;
   ngOnInit() {
-    /*  if (this.class.length > 0) this.class = this.class;
-      if (this.uiType) this.class.push(this.uiType);
-      if (this.companiesStateService.isInitLightAllCompanies && this.clientType == undefined) this.getClientsList(this.companiesStateService.getLightCompanies());
-      if (this.companiesStateService.isInitLightClientsCompanies && this.clientType) this.getClientsList(this.companiesStateService.getLightClientsCompanies());
-  
-      this.companiesStateService.onLightCompanies.subscribe((data) => {
-        if (this.clientType == undefined) this.getClientsList(data);
-      })
-      this.companiesStateService.onLightClientsCompanies.subscribe((data) => {
-        if (this.clientType != undefined) this.getClientsList(data);
-      })
-  */
     if (this.usersStateService.getAllUsers().length > 0) this.onGetUsers(this.usersStateService.getAllUsers());
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.onGetUsers(data);
@@ -78,20 +64,6 @@ export class CompanyUsersDropDownComponent extends DropDownComponent {
     this.selectedItem = data;
     this.selectedCustomerCompany = customerCompany;
     this.onSelectedItem.emit({ user: data, customerCompany: customerCompany });
-  }
-  public getClientsList(data) {
-    this.reset(data);
-    if (this.customerPortalStateService.isCustomerPortal) {
-      this.list = this.list.filter(item => {
-        let customerCompaniesInfo = this.usersStateService.getCurrentUser().customerCompaniesInfo.find(customerCompaniesInfo => customerCompaniesInfo.companyId === item.id);
-        if (customerCompaniesInfo && customerCompaniesInfo.customerUserRole && customerCompaniesInfo.customerUserRole.getPermission('VIEW_MY_TICKETS')) return true;
-        return false;
-      })
-    }
-  }
-  onOpenChange(data) {
-    if (data && !this.companiesStateService.isInitLightAllCompanies && this.clientType == undefined) this.companiesStateService.onInitGetLightCompanies();
-    if (data && !this.companiesStateService.isInitLightClientsCompanies && this.clientType != undefined) this.companiesStateService.onInitGetLightClietnsCompanies();
   }
   getUserName(item) {
     return `${item.firstName} ${item.lastName}`;

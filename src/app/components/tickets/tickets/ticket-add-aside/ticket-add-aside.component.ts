@@ -242,7 +242,6 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       this.ticketValidate.resetClientUser();
       this.techUsersDp.resetEditMode();
     } else {
-      if (!(shareUser && shareUser.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.selectedCompanyId).ticketManagerSubscription.enabled)) this.removeShareUser(this.ticketAdd.createdUser.id);
       this.ticketAdd.createdUser.clearUserData();
       this.onSelectCompany(null);
     }
