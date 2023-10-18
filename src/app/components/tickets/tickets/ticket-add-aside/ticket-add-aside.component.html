@@ -136,7 +136,7 @@
                     [search]="true"
                     [change]="true"
                     [sort]="false"
-                    (onSelectedItem)="onSelectUser($event)"
+                    (onSelectedItem)="onSelectUser($event.user,$event.customerCompany)"
                 ></company-users-drop-down>
             </div>
         </div>

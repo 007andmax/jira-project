@@ -67,36 +67,43 @@
                 [ngForOf]="list"
                 let-i="index"
             >
-                <div
-                    ngbDropdownItem
-                    (click)="onSelect(item)"
-                    [ngClass]="{'--selected':isSelected(item)}"
-                    class="qt-df user-container pointer"
+                <ng-template
+                    ngFor
+                    let-customerCompany
+                    [ngForOf]="item.customerCompaniesInfo"
+                    let-i="index"
                 >
                     <div
-                        class="assigne-user-avatar qt-mr-12"
-                        [textContent]="ticketsListService.getAssignedUserNameForAvatar(item)"
-                        [ngStyle]="{'background': ticketsListService.getStyleAvatar(item)}"
-                    ></div>
-                    <div>
+                        ngbDropdownItem
+                        (click)="onSelectUser(item,customerCompany)"
+                        [ngClass]="{'--selected':isSelectedUser(item,customerCompany)}"
+                        class="qt-df user-container pointer"
+                    >
                         <div
-                            class="user-name"
-                            [textContent]="getUserName(item)"
+                            class="assigne-user-avatar qt-mr-12"
+                            [textContent]="ticketsListService.getAssignedUserNameForAvatar(item)"
+                            [ngStyle]="{'background': ticketsListService.getStyleAvatar(item)}"
                         ></div>
-                        <div
-                            class="user-description"
-                            [textContent]="getCompanyName(item)"
-                        ></div>
-                        <div
-                            class="user-description"
-                            [textContent]="item.primaryEmail"
-                        ></div>
+                        <div>
+                            <div
+                                class="user-name"
+                                [textContent]="getUserName(item)"
+                            ></div>
+                            <div
+                                class="user-description"
+                                [textContent]="customerCompany.clientCompanyName"
+                            ></div>
+                            <div
+                                class="user-description"
+                                [textContent]="item.primaryEmail"
+                            ></div>
+                        </div>
+                        <i
+                            class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
+                            *ngIf="isSelectedUser(item,customerCompany)"
+                        ></i>
                     </div>
-                    <i
-                        class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
-                        *ngIf="isSelected(item)"
-                    ></i>
-                </div>
+                </ng-template>
             </ng-template>
         </div>
     </form>

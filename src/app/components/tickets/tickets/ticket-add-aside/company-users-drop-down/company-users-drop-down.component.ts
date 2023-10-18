@@ -5,6 +5,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { UserCustomerCompaniesInfo } from 'src/app/components/users/class/user-customer-companies-info';
 
 @Component({
   selector: 'company-users-drop-down',
@@ -13,7 +14,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
   providers: [TicketsListService],
 })
 export class CompanyUsersDropDownComponent extends DropDownComponent {
-
+  selectedCustomerCompany: UserCustomerCompaniesInfo;
   constructor(public elRef: ElementRef,
     public companiesStateService: CompaniesStateService,
     public usersStateService: UsersStateService,
@@ -42,20 +43,28 @@ export class CompanyUsersDropDownComponent extends DropDownComponent {
       this.onGetUsers(data);
     })
   }
-  public isSelected(item) {
-    return this.selectedItem && this.selectedItem.id == item.id;
+  public isSelectedUser(item, customerCompany) {
+    return this.selectedItem && this.selectedCustomerCompany && this.selectedItem.id == item.id && this.selectedCustomerCompany.companyId == customerCompany.companyId;
   }
   getSelectedItemText() {
     return (this.selectedItem) ? this.getUserName(this.selectedItem) : "";
   }
   onGetUsers(data) {
     this.reqList = data.filter(item => {
-      if (item.accountType !== 'TECH' && !item.deletedAt) {
-        return item;
-      }
-    }).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
-      1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0))
+      if (item.accountType !== 'TECH' && !item.deletedAt) return true;
+    });
+    this.reqList.sort((a, b) => (this.getUserName(a).toLowerCase() > this.getUserName(b).toLowerCase()) ?
+      1 : ((this.getUserName(b).toLowerCase() > this.getUserName(a).toLowerCase()) ? -1 : 0));
+    console.log("this.reqList", this.reqList);
     this.list = JSON.parse(JSON.stringify(this.reqList));
+  }
+  clearClient() {
+    this.isAdd = false;
+    this.selectedItem = null;
+    this.selectedCustomerCompany = null;
+    this.elRef.nativeElement.querySelector("#dropdown1").value = "";
+    this.list = JSON.parse(JSON.stringify(this.reqList));
+    this.onSelectedItem.emit({ user: null, customerCompany: null });
   }
   /**
  * @description Check if use "search", will filter list items by 'field'. If 'field' no exist filter will by Array String. If search element doesn't exist, will init logic to show icon for add
@@ -63,6 +72,12 @@ export class CompanyUsersDropDownComponent extends DropDownComponent {
 */
   onCheckAdd(event) {
     this.list = this.reqList.filter(item => this.getUserName(item).toLowerCase().toLowerCase().includes(event.target.value.toLowerCase()) || item.customerCompaniesInfo.some(customerCompany => customerCompany.clientCompanyName.toLowerCase().includes(event.target.value.toLowerCase())));
+  }
+  onSelectUser(data, customerCompany) {
+    this.isAdd = false;
+    this.selectedItem = data;
+    this.selectedCustomerCompany = customerCompany;
+    this.onSelectedItem.emit({ user: data, customerCompany: customerCompany });
   }
   public getClientsList(data) {
     this.reset(data);

@@ -29,6 +29,7 @@
   }
   .--selected {
     background: rgba(0, 0, 0, .04);
+    border-radius: 8px;
   }
   .icon__assign-user-check {
     top: calc(50% - 10px);
