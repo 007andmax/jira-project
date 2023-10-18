@@ -127,9 +127,10 @@
         <div class="qt-inputs-row">
             <div class="qt-input-block qt-f100 qt-flex-md-100">
                 <company-users-drop-down
-                    [title]="'Company'"
+                    #userDP
+                    [title]="'User'"
                     [class]="['qt-dropdown']"
-                    [placeholder]="'Select Company'"
+                    [placeholder]="'Select User'"
                     [validate]="ticketValidate.getCompany()"
                     [errorMessage]="'Company is required'"
                     [field]="'name'"
