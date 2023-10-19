@@ -6,6 +6,7 @@ import { CompaniesService } from 'src/app/services/company/companies.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { UserCustomerCompaniesInfo } from 'src/app/components/users/class/user-customer-companies-info';
+import { Companyiser } from './class/company-user';
 
 @Component({
   selector: 'company-users-drop-down',
@@ -38,18 +39,18 @@ export class CompanyUsersDropDownComponent extends DropDownComponent {
   onGetUsers(data) {
     this.reqList = data.filter(item => {
       if (item.accountType !== 'TECH' && !item.deletedAt) return true;
-    });
+    }).map(item => new Companyiser(item));
     this.reqList.sort((a, b) => (this.getUserName(a).toLowerCase() > this.getUserName(b).toLowerCase()) ?
       1 : ((this.getUserName(b).toLowerCase() > this.getUserName(a).toLowerCase()) ? -1 : 0));
     console.log("this.reqList", this.reqList);
-    this.list = JSON.parse(JSON.stringify(this.reqList));
+    this.list = JSON.parse(JSON.stringify(this.reqList)).map(item => new Companyiser(item));
   }
   clearClient() {
     this.isAdd = false;
     this.selectedItem = null;
     this.selectedCustomerCompany = null;
     this.elRef.nativeElement.querySelector("#dropdown1").value = "";
-    this.list = JSON.parse(JSON.stringify(this.reqList));
+    this.list = JSON.parse(JSON.stringify(this.reqList)).map(item => new Companyiser(item));
     this.onSelectedItem.emit({ user: null, customerCompany: null });
   }
   /**
@@ -57,7 +58,15 @@ export class CompanyUsersDropDownComponent extends DropDownComponent {
  * @param {Object} event - Object from input
 */
   onCheckAdd(event) {
-    this.list = this.reqList.filter(item => this.getUserName(item).toLowerCase().toLowerCase().includes(event.target.value.toLowerCase()) || item.customerCompaniesInfo.some(customerCompany => customerCompany.clientCompanyName.toLowerCase().includes(event.target.value.toLowerCase())));
+    this.list = this.reqList.filter(item => {
+      if (this.getUserName(item).toLowerCase().toLowerCase().includes(event.target.value.toLowerCase())) {
+        return true;
+      } else if (item.customerCompaniesInfo.some(customerCompany => customerCompany.clientCompanyName.toLowerCase().includes(event.target.value.toLowerCase()))) {
+        item.setSearchByCompany(item.customerCompaniesInfo.find(customerCompany => customerCompany.clientCompanyName.toLowerCase().includes(event.target.value.toLowerCase())));
+        return true;
+      }
+      return false;
+    });
   }
   onSelectUser(data, customerCompany) {
     this.isAdd = false;
