@@ -50,6 +50,7 @@ export class CompanyUsersDropDownComponent extends DropDownComponent {
     this.selectedItem = null;
     this.selectedCustomerCompany = null;
     this.elRef.nativeElement.querySelector("#dropdown1").value = "";
+    this.reqList.forEach(item => item.setSearchByCompany(null));
     this.list = JSON.parse(JSON.stringify(this.reqList)).map(item => new Companyiser(item));
     this.onSelectedItem.emit({ user: null, customerCompany: null });
   }
@@ -60,11 +61,13 @@ export class CompanyUsersDropDownComponent extends DropDownComponent {
   onCheckAdd(event) {
     this.list = this.reqList.filter(item => {
       if (this.getUserName(item).toLowerCase().toLowerCase().includes(event.target.value.toLowerCase())) {
+        item.setSearchByCompany(null);
         return true;
       } else if (item.customerCompaniesInfo.some(customerCompany => customerCompany.clientCompanyName.toLowerCase().includes(event.target.value.toLowerCase()))) {
         item.setSearchByCompany(item.customerCompaniesInfo.find(customerCompany => customerCompany.clientCompanyName.toLowerCase().includes(event.target.value.toLowerCase())));
         return true;
       }
+      item.setSearchByCompany(null);
       return false;
     });
   }
