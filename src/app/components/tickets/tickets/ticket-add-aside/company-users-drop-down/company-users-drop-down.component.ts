@@ -6,7 +6,7 @@ import { CompaniesService } from 'src/app/services/company/companies.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { UserCustomerCompaniesInfo } from 'src/app/components/users/class/user-customer-companies-info';
-import { Companyiser } from './class/company-user';
+import { CompanyUser } from './class/company-user';
 
 @Component({
   selector: 'company-users-drop-down',
@@ -30,28 +30,43 @@ export class CompanyUsersDropDownComponent extends DropDownComponent {
       this.onGetUsers(data);
     })
   }
+  /**
+ * @description Check if item is selected
+ * @param {CompanyUser} Companyiser - Object from CompanyUser
+ * @param {UserCustomerCompaniesInfo} customerCompany - Object from UserCustomerCompaniesInfo
+*/
   public isSelectedUser(item, customerCompany) {
     return this.selectedItem && this.selectedCustomerCompany && this.selectedItem.id == item.id && this.selectedCustomerCompany.companyId == customerCompany.companyId;
   }
+  /**
+ * @description Return text selected element
+ * @returns {String} This is the result
+*/
   getSelectedItemText() {
     return (this.selectedItem) ? this.getUserName(this.selectedItem) : "";
   }
+  /**
+ * @description Init logic to get user list from global request
+*/
   onGetUsers(data) {
     this.reqList = data.filter(item => {
       if (item.accountType !== 'TECH' && !item.deletedAt) return true;
-    }).map(item => new Companyiser(item));
+    }).map(item => new CompanyUser(item));
     this.reqList.sort((a, b) => (this.getUserName(a).toLowerCase() > this.getUserName(b).toLowerCase()) ?
       1 : ((this.getUserName(b).toLowerCase() > this.getUserName(a).toLowerCase()) ? -1 : 0));
     console.log("this.reqList", this.reqList);
-    this.list = JSON.parse(JSON.stringify(this.reqList)).map(item => new Companyiser(item));
+    this.list = JSON.parse(JSON.stringify(this.reqList)).map(item => new CompanyUser(item));
   }
+  /**
+ * @description Clear selected fileds, input and reset list
+*/
   clearClient() {
     this.isAdd = false;
     this.selectedItem = null;
     this.selectedCustomerCompany = null;
     this.elRef.nativeElement.querySelector("#dropdown1").value = "";
     this.reqList.forEach(item => item.setSearchByCompany(null));
-    this.list = JSON.parse(JSON.stringify(this.reqList)).map(item => new Companyiser(item));
+    this.list = JSON.parse(JSON.stringify(this.reqList)).map(item => new CompanyUser(item));
     this.onSelectedItem.emit({ user: null, customerCompany: null });
   }
   /**
@@ -71,15 +86,28 @@ export class CompanyUsersDropDownComponent extends DropDownComponent {
       return false;
     });
   }
+  /**
+ * @description Set new value selected element and init Output Event
+ * @param {Object} data - Object selected element
+ * @param {UserCustomerCompaniesInfo} customerCompany - Object of UserCustomerCompaniesInfo
+*/
   onSelectUser(data, customerCompany) {
     this.isAdd = false;
     this.selectedItem = data;
     this.selectedCustomerCompany = customerCompany;
     this.onSelectedItem.emit({ user: data, customerCompany: customerCompany });
   }
+  /**
+* @description Return parse First and Last name user
+* @param {Object} data - Object of User
+*/
   getUserName(item) {
     return `${item.firstName} ${item.lastName}`;
   }
+  /**
+* @description Return parse text list companies of user
+* @param {Object} data - Object of User
+*/
   getCompanyName(item) {
     return item.customerCompaniesInfo.map(customerCompany => customerCompany.clientCompanyName).join(",");
   }
