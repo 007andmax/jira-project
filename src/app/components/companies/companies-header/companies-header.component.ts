@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 import { CompanyCalculateCount } from '../class/company-calculate-count';
@@ -17,7 +17,8 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 @Component({
   selector: 'app-companies-header',
   templateUrl: './companies-header.component.html',
-  styleUrls: ['./companies-header.component.scss']
+  styleUrls: ['./companies-header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CompaniesHeaderComponent implements OnInit, OnDestroy {
 
@@ -37,6 +38,7 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
     private leftPanelStateService: LeftPanelStateService,
     private confirmStateService: ConfirmStateService,
     private usersStateService: UsersStateService,
+    public cd: ChangeDetectorRef,
     private companiesState: CompaniesStateService) { }
 
   ngOnInit() {
@@ -44,14 +46,18 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
     this.calculateCount = this.companiesState.getCalculateCount();
     let getOnCalculateCount = this.companiesState.getOnCalculateCount().subscribe((data) => {
       this.calculateCount = data;
+      this.cd.markForCheck();
     })
     this.sub.add(getOnCalculateCount);
+    this.cd.markForCheck();
   }
   toggleAllCompanies(event) {
     this.onSelectAllCompanies.emit(event.target.checked);
+    this.cd.detectChanges();
   }
   clearAllSelectedCompanies() {
     this.onSelectAllCompanies.emit(false);
+    this.cd.detectChanges();
   }
   public getCountSelected() {
     return this.draftEmailStateService.getSelectedCompanies().length;
@@ -59,16 +65,19 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
   public showAsideForDraftEmail() {
     this.draftEmailStateService.setAction(COMPANIES);
     this.draftEmailStateService.toggleAsideForAdd();
+    this.cd.detectChanges();
   }
   archive() {
     this.confirmStateService.setConfirmAction(ARCHIVE_COMPANY);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to archive ${this.draftEmailStateService.getSelectedCompanies()[0].name}? All related users and service agreements will be archived and all agents will be uninstalled.`;
     this.companiesStateService.setCompnayForArchive(this.draftEmailStateService.getSelectedCompanies()[0]);
+    this.cd.detectChanges();
   }
   toggleMobileLeftPanel() {
     this.leftPanelStateService.toggleMobileLeftPanel(true);
     this.appService.toggleMobileAside(true);
+    this.cd.detectChanges();
   }
   isExistFilters() {
     return this.filter.companyFilter.clientType ||
@@ -79,18 +88,22 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
   onToggleFilter(data) {
     if (this.appService.checkMobile()) this.appService.toggleMobileAside(data);
     this.toggleFilter = data;
+    this.cd.markForCheck();
   }
   getClientType(clientType) {
     return clientType.toLowerCase();
   }
   clearAll() {
     this.filter.onClearAll();
+    this.cd.detectChanges();
   }
   onChangeCountFilter(data) {
     this.countFilter = data;
+    this.cd.markForCheck();
   }
   refreshFilters() {
     this.filter.applyFilters();
+    this.cd.detectChanges();
   }
   getUserName(id) {
     let user = this.usersStateService.getAllUsers().find(item => item.id == id);
@@ -98,12 +111,14 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
   }
   public showAsideForAdd() {
     this.companiesStateService.toggleAsideForAdd();
+    this.cd.detectChanges();
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }
   onFilter(data) {
     this.onChangeFilterField.emit(data);
+    this.cd.detectChanges();
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

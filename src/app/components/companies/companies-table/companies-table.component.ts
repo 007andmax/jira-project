@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Company } from 'src/app/interfaces/company/company';
 import { CompanyAndressContact } from 'src/app/interfaces/company/company-address-contact';
 import { CompanyAndress } from 'src/app/interfaces/company/company-address';
@@ -25,7 +25,8 @@ import { CompanyDeviceCount } from '../class/company-device-count';
 @Component({
   selector: 'app-companies-table',
   templateUrl: './companies-table.component.html',
-  styleUrls: ['./companies-table.component.scss']
+  styleUrls: ['./companies-table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CompaniesTableComponent implements OnInit, OnDestroy {
   @Input() company: CompanyItem;
@@ -48,6 +49,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     private downloadAgentStateService: DownloadAgentStateService,
     private appService: AppService,
     private router: Router,
+    public cd: ChangeDetectorRef,
     private draftEmailStateService: DraftEmailStateService,
     private permissionsService: PermissionsService,
     private elRef: ElementRef) { }
@@ -57,11 +59,14 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.showArchivedCompanies = false;
       this.onGetUsersCount(data);
+      this.cd.markForCheck();
     })
     this.sub.add(getOnUsers);
     this.IS_MOBILE = this.appService.checkMobile();
+    this.cd.markForCheck();
     let getOnMobile = this.appService.getOnMobile().subscribe(data => {
       this.IS_MOBILE = data;
+      this.cd.markForCheck();
     })
     this.sub.add(getOnMobile);
   }
@@ -115,15 +120,10 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
       this.router.navigate(
         [`${this.companiesStateService.getCurrentCompany().techDomain}/company/`, this.company.id, 'dashboard']);
     } else {
-      /* const url = this.router.serializeUrl(
-         this.router.createUrlTree(
-           [`${this.companiesStateService.getCurrentCompany().techDomain}/company/`, this.company.id, 'dashboard'])
- 
-       );*/
       const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/company/${this.company.id}/dashboard`;
       window.open(url, '_blank');
     }
-
+    this.cd.detectChanges();
   }
   getCompanyLogoUrl() {
     if (this.company && this.company.logo && this.company.logo && this.company.logo.base64 && !this.company.logo.cropped) return this.company.logo.base64;
@@ -137,10 +137,12 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   downloadAgent() {
     this.downloadAgentStateService.setCompnay(this.company);
     const modalRef = this.modalService.open(DownloadAgentComponent, { windowClass: 'download-modal', backdrop: 'static', keyboard: false });
+    this.cd.detectChanges();
   }
   edit() {
     let getCompany = this.companiesService.getCompany(this.company.id).subscribe((data: CompanyProfile) => {
       this.companiesStateService.setEditCompany(data);
+      this.cd.detectChanges();
     })
     this.sub.add(getCompany);
   }
@@ -149,6 +151,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to archive ${this.company.name}? All related users and service agreements will be archived and all agents will be uninstalled.`;
     this.companiesStateService.setCompnayForArchive(this.company);
+    this.cd.detectChanges();
   }
   private onGetUsersCount(data) {
     let users = data;
@@ -156,6 +159,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
       var isArchived = user.deletedAt || this.company.deletedAt;
       return !isArchived && !this.showArchivedCompanies && user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.company.id) || this.showArchivedCompanies && isArchived && user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.company.id);
     }).length;
+    this.cd.markForCheck();
   }
 
   onSelectCompany(event) {
@@ -166,12 +170,14 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
       let index = list.findIndex(item => item.id === this.company.id);
       if (index > -1) this.draftEmailStateService.removeSelectedCompany(index);
     }
+    this.cd.detectChanges();
   }
   onRestore() {
     this.confirmStateService.setConfirmAction(DEARCHIVE_COMPANY);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to restore ${this.company.name}?`;
     this.companiesStateService.setCompnayForDeArchive(this.company);
+    this.cd.detectChanges();
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

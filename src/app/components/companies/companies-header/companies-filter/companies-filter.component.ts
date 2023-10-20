@@ -96,7 +96,6 @@ export class CompaniesFilterComponent implements OnInit {
     this.cd.detectChanges();
   }
   applyFilters() {
-
     this.companiesStateService.onInitFilter(this.companyFilter);
     this.onChangeCounterFilter();
     this.close();
