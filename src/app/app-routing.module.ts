@@ -286,7 +286,7 @@ const routes: Routes = [
   {
     path: ':company/device-old',
     loadChildren: './components/device-old/device-old.module#DevicesOldModule',
-    canActivate: [PermissionTechUserService, TestPermissionService]
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':domain/billing-dashboard',
