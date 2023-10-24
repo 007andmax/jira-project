@@ -125,6 +125,23 @@
             </div>
         </div>
         <div class="qt-inputs-row">
+            <div class="qt-input-block qt-f100 qt-flex-md-100">
+                <company-users-drop-down
+                    #userDP
+                    [title]="'User'"
+                    [class]="['qt-dropdown']"
+                    [placeholder]="'Select User'"
+                    [validate]="ticketValidate.getCompany()"
+                    [errorMessage]="'Company is required'"
+                    [field]="'name'"
+                    [search]="true"
+                    [change]="true"
+                    [sort]="false"
+                    (onSelectedItem)="onSelectUser($event.user,$event.customerCompany)"
+                ></company-users-drop-down>
+            </div>
+        </div>
+        <!-- <div class="qt-inputs-row">
             <div class="qt-input-block qt-f50 qt-flex-md-100">
                 <company-drop-down
                     #companyDP
@@ -154,7 +171,7 @@
                     (onSelectedItem)="onSelectUser($event)"
                 ></app-drop-down>
             </div>
-        </div>
+        </div> -->
         <div
             class="qt-inputs-row"
             *ngIf="!customerPortalStateService.isCustomerPortal"
