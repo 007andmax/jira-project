@@ -12,6 +12,7 @@ export class PermissionReportsService implements CanActivate {
             if (!(this.getPermissions("VIEW_SALES_REPORT") ||
                 this.getPermissions("VIEW_FINANCIAL_REPORT") ||
                 this.getPermissions("VIEW_PERFORMANCE_REPORT") ||
+                this.getPermissions("VIEW_TICKET_REPORT") ||
                 this.getPermissions("VIEW_REMOTE_ACCESS_REPORT") ||
                 this.getPermissions("VIEW_TAXES_REPORT") ||
                 this.getPermissions("VIEW_DEVICES_REPORTS"))) return false;
@@ -29,6 +30,7 @@ export class PermissionReportsService implements CanActivate {
                 if (!(this.getPermissions("VIEW_SALES_REPORT") ||
                     this.getPermissions("VIEW_FINANCIAL_REPORT") ||
                     this.getPermissions("VIEW_PERFORMANCE_REPORT") ||
+                    this.getPermissions("VIEW_TICKET_REPORT") ||
                     this.getPermissions("VIEW_REMOTE_ACCESS_REPORT") ||
                     this.getPermissions("VIEW_TAXES_REPORT") ||
                     this.getPermissions("VIEW_DEVICES_REPORTS"))) resolve(false);

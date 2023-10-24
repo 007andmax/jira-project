@@ -74,7 +74,7 @@
         </div>
         <div
             class="reports-col"
-            *ngIf="getPermissions('VIEW_PERFORMANCE_REPORT') || getPermissions('VIEW_SALES_REPORT')"
+            *ngIf="getPermissions('VIEW_PERFORMANCE_REPORT') || getPermissions('VIEW_SALES_REPORT') || getPermissions('VIEW_TICKET_REPORT')"
         >
             <app-report-list-item
                 *ngIf="getPermissions('VIEW_PERFORMANCE_REPORT')"
