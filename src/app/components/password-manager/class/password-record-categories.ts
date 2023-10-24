@@ -3,7 +3,7 @@ import { PASSWORD_RECORD_TYPES } from "src/app/const/password-record-types";
 export class PasswordRecordCategories {
     id: string;
     name: string;
-    title: string;
+    title: string = '';
     default: boolean;
     constructor(data = null) {
         if (data) {
