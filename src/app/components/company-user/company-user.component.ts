@@ -78,6 +78,7 @@ export class CompanyUserComponent implements OnInit {
       this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions, data.tags);
       this.selectAll = false;
       this.reqUsers.forEach(item => item.selected = false);
+      this.header.setReqUsers(this.reqUsers);
       this.setDefaultScoll();
       this.onScroll();
     })
@@ -142,6 +143,7 @@ export class CompanyUserComponent implements OnInit {
           }
         })
       }
+      this.header.setReqUsers(this.reqUsers);
       this.cd.detectChanges();
     })
     this.userListService.addSubscription(getChangeCompanies);
@@ -176,6 +178,7 @@ export class CompanyUserComponent implements OnInit {
   }
   onSelectAllUser(event) {
     if (event.target.checked) {
+      this.usersStateService.initSelectAllusers(true);
       this.selectAll = true;
       this.users.forEach(item => {
         item.selected = true;
@@ -190,6 +193,7 @@ export class CompanyUserComponent implements OnInit {
         if (user.selected) this.draftEmailStateService.addSelectedUser(user);
       })
     } else {
+      this.usersStateService.initSelectAllusers(false);
       this.selectAll = false;
       this.users.forEach(item => {
         item.selected = false;
@@ -199,10 +203,14 @@ export class CompanyUserComponent implements OnInit {
       })
       this.draftEmailStateService.resetSelectedUsers();
     }
+    this.header.setReqUsers(this.reqUsers);
+    this.cd.detectChanges();
   }
   onSelectUser(user) {
     this.reqUsers.find(item => item.id === user.id).selected = user.selected;
     this.selectAll = (this.filter.getFilterList(this.reqUsers, this.companies).find(item => !item.selected)) ? false : true;
+    this.header.setReqUsers(this.reqUsers);
+    this.cd.detectChanges();
   }
   private onInitSubscribe() {
     setTimeout(() => {
@@ -229,6 +237,8 @@ export class CompanyUserComponent implements OnInit {
           if (userIndex > -1) this.users[userIndex].changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
           this.cd.detectChanges();
         }
+        this.header.setReqUsers(this.reqUsers);
+        this.cd.detectChanges();
       });
       this.userListService.addSubscription(stompClient);
 
@@ -294,7 +304,7 @@ export class CompanyUserComponent implements OnInit {
     this.users = [...this.users, ...usersList.map(item => new User(JSON.parse(JSON.stringify(item))))];
     this.infiniteScrollDisabled = false;
     if ((this.page_number * 30) > listFilter.length) this.userListService.setBlockList(true);
-
+    this.cd.detectChanges();
 
   }
   public setDefaultScoll() {
@@ -313,6 +323,7 @@ export class CompanyUserComponent implements OnInit {
     this.reqUsers.forEach(item => {
       item.selected = false;
     })
+    this.header.setReqUsers(this.reqUsers);
     this.draftEmailStateService.resetSelectedUsers();
     this.usersStateService.clearFilter();
     this.companiesStateService.setCompanyRoutingId(null);
