@@ -195,7 +195,6 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     });
   }
   onSelectCompany(item) {
-    console.log("item", item);
     if (item) {
       this.selectedCompanyId = item.id;
       this.ticketAdd.createdUser.setCompanyId(item.id);
@@ -207,7 +206,6 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
         return user;
       });
       this.shareUsersList = list;
-      console.log("this.shareUsersList", this.shareUsersList);
       this.techUsersDp.resetEditMode();
       this.ticketValidate.resetCompany();
     } else {

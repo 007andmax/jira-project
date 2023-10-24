@@ -54,7 +54,6 @@ export class CompanyUsersDropDownComponent extends DropDownComponent {
     }).map(item => new CompanyUser(item));
     this.reqList.sort((a, b) => (this.getUserName(a).toLowerCase() > this.getUserName(b).toLowerCase()) ?
       1 : ((this.getUserName(b).toLowerCase() > this.getUserName(a).toLowerCase()) ? -1 : 0));
-    console.log("this.reqList", this.reqList);
     this.list = JSON.parse(JSON.stringify(this.reqList)).map(item => new CompanyUser(item));
   }
   /**

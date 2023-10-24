@@ -120,8 +120,6 @@
                     placeholder="Describe Issue here…"
                     (input)="onChangeNote($event)"
                 ></div>
-                <!-- <textarea id="add-ticket-describe-issue" class="qt-input-block__textarea" appTextArea [limit]="250"
-                    placeholder="Describe Issue here…" (input)="onChangeNote($event)" (onPast)="onPastNote($event)"></textarea> -->
             </div>
         </div>
         <div class="qt-inputs-row">
@@ -141,37 +139,6 @@
                 ></company-users-drop-down>
             </div>
         </div>
-        <!-- <div class="qt-inputs-row">
-            <div class="qt-input-block qt-f50 qt-flex-md-100">
-                <company-drop-down
-                    #companyDP
-                    [title]="'Company'"
-                    [class]="['qt-dropdown']"
-                    [placeholder]="'Select Company'"
-                    [validate]="ticketValidate.getCompany()"
-                    [errorMessage]="'Company is required'"
-                    [clientType]="'CLIENT'"
-                    [field]="'name'"
-                    [search]="true"
-                    [change]="true"
-                    (onSelectedItem)="onSelectCompany($event)"
-                ></company-drop-down>
-            </div>
-            <div class="qt-input-block qt-f50 qt-flex-md-100">
-                <app-drop-down
-                    #userDP
-                    [title]="'User'"
-                    [class]="['qt-dropdown']"
-                    [placeholder]="'Select User'"
-                    [list]="usersList"
-                    [validate]="ticketValidate.getClientUser()"
-                    [errorMessage]="'Client User is required'"
-                    [search]="true"
-                    [change]="true"
-                    (onSelectedItem)="onSelectUser($event)"
-                ></app-drop-down>
-            </div>
-        </div> -->
         <div
             class="qt-inputs-row"
             *ngIf="!customerPortalStateService.isCustomerPortal"
