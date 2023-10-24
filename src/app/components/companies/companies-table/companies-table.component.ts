@@ -32,6 +32,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   @Input() company: CompanyItem;
   @Input() public showArchivedCompanies: boolean = false;
   @Input() devicesCounts: Array<CompanyDeviceCount> = [];
+  @Output() onSelectCompany = new EventEmitter<any>();
   public primaryContact: CompanyAndressContact;
   public primaryAddress: CompanyAndress;
   public primaryPhone: any;
@@ -162,7 +163,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     this.cd.markForCheck();
   }
 
-  onSelectCompany(event) {
+  selectCompany(event) {
     if (event.target.checked) {
       this.draftEmailStateService.addSelectedCompany(this.company);
     } else {
@@ -170,6 +171,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
       let index = list.findIndex(item => item.id === this.company.id);
       if (index > -1) this.draftEmailStateService.removeSelectedCompany(index);
     }
+    this.onSelectCompany.emit(this.company);
     this.cd.detectChanges();
   }
   onRestore() {

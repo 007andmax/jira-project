@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Input } from '@angular/core';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 import { CompanyCalculateCount } from '../class/company-calculate-count';
@@ -13,6 +13,7 @@ import { AppService } from 'src/app/states/app/app.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { CompanyItem } from '../class/company-item';
 
 @Component({
   selector: 'app-companies-header',
@@ -21,10 +22,11 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CompaniesHeaderComponent implements OnInit, OnDestroy {
-
+  reqCompaniesList: Array<CompanyItem> = [];
   toggleFilter: boolean = true;
   countFilter: number = 0;
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
+  @Input() selectAll: boolean = false;
   @ViewChild('filter') filter: CompaniesFilterComponent;
   @Output() onChangeFilterField = new EventEmitter<any>();
   @Output() onSelectAllCompanies = new EventEmitter<any>();
@@ -51,16 +53,22 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
     this.sub.add(getOnCalculateCount);
     this.cd.markForCheck();
   }
+  public setReqCompaniesList(data) {
+    this.reqCompaniesList = data;
+    this.cd.markForCheck();
+  }
   toggleAllCompanies(event) {
+    this.selectAll = event.target.checked;
     this.onSelectAllCompanies.emit(event.target.checked);
     this.cd.detectChanges();
   }
   clearAllSelectedCompanies() {
+    this.selectAll = false;
     this.onSelectAllCompanies.emit(false);
     this.cd.detectChanges();
   }
   public getCountSelected() {
-    return this.draftEmailStateService.getSelectedCompanies().length;
+    return this.reqCompaniesList.filter(item => item.selected).length;
   }
   public showAsideForDraftEmail() {
     this.draftEmailStateService.setAction(COMPANIES);
