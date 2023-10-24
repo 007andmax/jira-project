@@ -1,0 +1,62 @@
+<div class="container-page">
+    <aside>
+        <left-panel-super-admin-companies class="app-left-panel-super-admin-categories"></left-panel-super-admin-companies>
+        <hr>
+    </aside>
+    <div
+        class="resize-handle--x"
+        data-target="aside"
+    ></div>
+    <main>
+        <div class="qt-page-list page-list-ticket">
+            <div class="qt-page-list__header --sticky">
+                <div class="qt-page-list__header-title-line">
+                    <div class="qt-page-list__header-title-line--left">
+                        <h6 class="qt-page-list__header-title">Tech Companies</h6>
+                    </div>
+                </div>
+                <div class="qt-page-list__header-filters"></div>
+            </div>
+            <div class="qt-page-list__container">
+                <div class="qt-page-list__body">
+                    <super-admin-companies-header (onChangeFilterField)="onFilter($event)"></super-admin-companies-header>
+                    <div class="qt-page-list__body">
+                        <div
+                            class="qt-page-list__body-table-container"
+                            [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}"
+                        >
+                            <div class="qt-page-list__body-tbody qt-table-modern ticket-table">
+                                <div
+                                    infiniteScroll
+                                    [infiniteScrollContainer]="container"
+                                    [infiniteScrollDistance]="2"
+                                    [infiniteScrollThrottle]="30"
+                                    [infiniteScrollDisabled]="infiniteScrollDisabled"
+                                    (scrolled)="onScroll()"
+                                    class="tbody"
+                                >
+                                    <ng-template
+                                        ngFor
+                                        let-company
+                                        [ngForOf]="companies"
+                                        [ngForTrackBy]="trackById"
+                                    >
+                                        <super-admin-companies-item [company]="company"></super-admin-companies-item>
+                                    </ng-template>
+                                </div>
+                            </div>
+                            <div
+                                class="loading pengind-loading"
+                                *ngIf="showPendingPreloader"
+                            ></div>
+                            <div
+                                class="loading"
+                                *ngIf="showPreloader"
+                            ></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

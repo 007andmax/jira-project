@@ -74,7 +74,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onDeviceUninstalled);
     let onInitWebSocket = this.devicesStateService.onInitWebSocket.subscribe(data => {
-      if (this.companyId) this.sendDeviceStatusRequest(this.companyId, this.devices.filter(item => item.agentId).map(item => item.agentId));
+      if (this.companyId && this.devices.length > 0) this.sendDeviceStatusRequest(this.companyId, this.devices.filter(item => item.agentId).map(item => item.agentId));
     })
     this.sub.add(onInitWebSocket);
     let getOnClosedRemoveConnecion = this.devicesStateService.getOnClosedRemoveConnecion().subscribe(data => {
@@ -162,7 +162,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnResetDeviceTiming);
     let getOnSendDeviceStatus = this.devicesStateService.getOnSendDeviceStatus().subscribe((data: DeviceStatus) => {
-      if (this.companyId === data.companyId && this.devicesStateService.getIsInitWebSocket()) this.devicesService.sendDeviceStatusRequest(data.companyId, data.agentIds, data.actions).subscribe(res => {
+      if (this.companyId === data.companyId && this.devicesStateService.getIsInitWebSocket() && this.devices.length > 0) this.devicesService.sendDeviceStatusRequest(data.companyId, data.agentIds, data.actions).subscribe(res => {
       })
     })
     this.sub.add(getOnSendDeviceStatus);
