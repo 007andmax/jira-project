@@ -7,7 +7,7 @@ import { Memory } from '../class/system';
   styleUrls: ['./hardware-memory.component.scss']
 })
 export class HardwareMemoryComponent implements OnInit {
-  @Input() memory: Memory;
+  @Input() memory: Array<Memory> = [];
   constructor() { }
 
   ngOnInit() {

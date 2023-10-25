@@ -40,10 +40,7 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
-    /* if (this.customerPortalStateService.isCustomerPortal) {
-       this.filter.companyDp.isDisabled = true;
-       this.ticketsFilter.isDisbledCompany = true;
-     }*/
+    if (this.customerPortalStateService.isCustomerPortal) this.ticketsFilter.isDisbledCompany = true;
     if (this.appService.checkMobile()) this.toggleFilter = false;
     /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
     /* START */
@@ -80,13 +77,18 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
 */
   public onChangeCounterFilter() {
     this.countFilter = 0;
-    if (this.ticketsFilter.selectedCompanies.length > 0) this.countFilter++;
+    if (this.ticketsFilter.selectedCompanies.length > 0 && !this.ticketsFilter.isDisbledCompany) {
+      this.countFilter++;
+      console.log("1");
+    }
     if (this.ticketsFilter.selectedTechUsers.length > 0) this.countFilter++;
     if (this.ticketsFilter.selectedUsers.length > 0) this.countFilter++;
     if (this.ticketsFilter.selectedStatus.length > 0) this.countFilter++;
     if (this.ticketsFilter.selectedPriorityLevels.length > 0) this.countFilter++;
     if (this.ticketsFilter.tags.length > 0) this.countFilter++;
     if (this.ticketsFilter.customDateRange || this.ticketsFilter.startDate && this.ticketsFilter.endDate) this.countFilter++;
+    console.log("this.ticketsFilter", this.ticketsFilter);
+    console.log("this.countFilter", this.countFilter);
   }
   /**
 * @description Toggle mobile left panel
