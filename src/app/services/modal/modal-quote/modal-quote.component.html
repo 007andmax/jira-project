@@ -22,6 +22,7 @@
             class="qt-inputs-row"
             ngbDropdown
             container="body"
+            (openChange)="onToggleDropDown($event)"
         >
             <div class="qt-input-block email-selects">
                 <div class="qt-input-block__label">Recipient Email Address</div>
@@ -59,6 +60,7 @@
                             [matChipInputAddOnBlur]="addOnBlur"
                             (input)="onSearch($event)"
                             (keyup)="keyup($event)"
+                            (blur)="onAdd($event)"
                         >
                     </mat-chip-list>
                     <div
@@ -88,6 +90,11 @@
                             <span class="user-email qt-ml-8">{{user.primaryEmail}}</span>
                         </mat-option>
                     </div>
+
+
+
+
+
 
 
 

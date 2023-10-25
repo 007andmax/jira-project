@@ -12,7 +12,7 @@ import { Company } from 'src/app/interfaces/company/company';
   styleUrls: ['./draft-email-recipients.component.scss']
 })
 export class DraftEmailRecipientsComponent implements OnInit {
-
+  reEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
   visible = true;
   selectable = true;
   removable = true;
@@ -125,23 +125,23 @@ export class DraftEmailRecipientsComponent implements OnInit {
     //  this.userInput.nativeElement.blur();
     this.userInput.nativeElement.value = '';
     this.companyCtrl.setValue(null);
-    this.companyList = this.reqCompanyList;
-
-    /*   this.userInput.nativeElement.value = '';
-       this.companyList = this.reqCompanyList;*/
   }
 
   onSearch(event) {
     this.companyList = this.reqCompanyList.filter(item => this.getFirstLastName(item.companyInfo.contacts[0]).toLocaleLowerCase().includes(event.target.value) || item.companyInfo.contacts[0].primaryEmail.includes(event.target.value));
   }
+  public onToggleDropDown(data) {
+    if (!data) {
+      this.companyList = JSON.parse(JSON.stringify(this.reqCompanyList));
+    }
+  }
   public onAdd(event) {
     const input = event.target.input;
     const value = event.target.value;
-    if ((value || '').trim()) {
+    if ((value || '').trim() && value.match(this.reEmail)) {
       this.selectedCompanies.push(value.trim());
       this.companyEmails.push(value.trim());
       this.onCompanyEmails.emit(this.companyEmails);
-      this.companyList = this.reqCompanyList;
     }
     if (input) {
       input.value = '';

@@ -11,6 +11,7 @@ import { TicketsStateService } from 'src/app/states/tickets/tickets-state.servic
 import { TicketsPriority } from 'src/app/components/setting/ticket-settings-page/tickets-priority/class/tickets-priority';
 import { StatusColor } from '../../../class/status-color';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
+import { CompaniesService } from 'src/app/services/company/companies.service';
 
 @Component({
   selector: 'ticket-detail-change-priority',
@@ -30,8 +31,9 @@ export class TicketDetailChangePriorityComponent extends DropDownComponent {
     private ticketsStateService: TicketsStateService,
     private leftPanelService: LeftPanelService,
     public cd: ChangeDetectorRef,
-    public ticketsService: TicketsService) {
-    super(elRef, companiesStateService, usersStateService, customerPortalStateService, cd);
+    public ticketsService: TicketsService,
+    public companiesService: CompaniesService) {
+    super(elRef, companiesStateService, usersStateService, customerPortalStateService, companiesService, cd);
 
   }
   ngOnInit() {

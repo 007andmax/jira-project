@@ -35,6 +35,11 @@ import { Subscription } from 'rxjs';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { PaymentsReport } from '../reports/payments-report/class/payments-report';
 import { SoftwareSummaryDevicesDroDownComponent } from '../reports/software-summary-report/software-summary-devices-dro-down/software-summary-devices-dro-down.component';
+import { DetailContractreport } from '../class/detail-contract-report';
+import { ContractsService } from 'src/app/services/contracts/contracts.service';
+import { DetailContractInterval } from '../class/detail-contract-interval';
+import { ContractDetailDropDownComponent } from './contract-detail-drop-down/contract-detail-drop-down.component';
+import { ContractDetailIntervalsDropDownComponent } from './contract-detail-intervals-drop-down/contract-detail-intervals-drop-down.component';
 
 
 @Component({
@@ -52,6 +57,7 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
   accountingReport: AccountingReport = new AccountingReport();
   accountsReceivable: AccountsReceivable = new AccountsReceivable();
   productSalesReport: ProductSalesReport = new ProductSalesReport();
+  detailContractReport: DetailContractreport = new DetailContractreport();
   productsCompanyReport: ProductCompanyReport = new ProductCompanyReport();
   customerSalesReport: CustomerSalesReport = new CustomerSalesReport();
   detailedCommissionsReport: DetailedCommissionsReport = new DetailedCommissionsReport();
@@ -80,12 +86,15 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
   @ViewChild('durationsTechSaleDP') durationsTechSaleDP: DropDownComponent;
   @ViewChild('dp') datePicker: any;
   @ViewChild('dpDevices') dpDevices: SoftwareSummaryDevicesDroDownComponent;
+  @ViewChild('contractDetailDp') contractDetailDp: ContractDetailDropDownComponent;
+  @ViewChild('dpInterval') dpInterval: ContractDetailIntervalsDropDownComponent;
 
   constructor(private reportsService: ReportsService,
     private reportsStateService: ReportsStateService,
     private productService: ProductService,
     public devicesStateService: DevicesStateService,
     private devicesService: DevicesService,
+    private contractsService: ContractsService,
     private companiesStateService: CompaniesStateService,
     private leftPanelStateService: LeftPanelStateService,
     private ticketReportStateService: TicketReportStateService) { }
@@ -106,6 +115,10 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     this.sub.add(onDeviceUninstalled);
     //  this.sub.add(getOnCompanies);
   }
+  /**
+   * @description Return parse company name
+   * @returns {String} This is the result
+  */
   getSelectedClientName() {
     return (this.selectedClient) ? this.selectedClient.name.toLowerCase().split(' ').join('-') : '';
   }
@@ -115,15 +128,11 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     this.hardwareSummaryReport.setPreloaderDevices(true);
     this.remoteConnectionReport.setPreloaderDevices(true);
     this.deviceIpSummary.setPreloaderDevices(true);
-    // this.deviceIpSummary.setPreloaderDevices(true);
     this.devicesService.getSoft(companyId).subscribe((resp: any) => {
-      // $rootScope.softwareSummarySelectedCompany = resp;
-
       this.softwareSummaryReport.resetSoft();
-
       if (resp) {
-        this.devices = resp[companyId];
-        resp[companyId].map((item: any) => {
+        this.devices = resp[companyId] || [];
+        this.devices.map((item: any) => {
           if (item.report) {
             item.report.softList.map((item) => {
               item.softName && this.softwareSummaryReport.addSoft({ name: item.softName, type: 'soft' });
@@ -138,8 +147,6 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
         this.softwareSummaryReport.resetSoft();
         for (var key in obj) {
           this.softwareSummaryReport.addSoft(obj[key]);
-          /* this.softwareSummaryReport.soft.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-             1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));*/
         }
         this.softwareSummaryReport.setDevices(resp[companyId]);
         this.hardwareSummaryReport.setDevices(resp[companyId]);
@@ -149,7 +156,6 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.softwareSummaryReport.setPreloaderDevices(false);
       this.softwareSummaryReport.setPreloaderSoft(false);
       this.deviceIpSummary.setPreloaderDevices(false);
-      //this.deviceIpSummary.setPreloaderDevices(false);
       this.remoteConnectionReport.setPreloaderDevices(false);
     }, err => {
       this.softwareSummaryReport.resetSoft();
@@ -157,12 +163,38 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.softwareSummaryReport.setPreloaderDevices(false);
       this.hardwareSummaryReport.setPreloaderDevices(false);
       this.deviceIpSummary.setPreloaderDevices(false);
-      // this.deviceIpSummary.setPreloaderDevices(false);
       this.remoteConnectionReport.setPreloaderDevices(false);
     })
   }
   onSelectTypeTechSale(data) {
     this.techSalesReport.setType(data);
+  }
+  /**
+* @description Init request to get Intervals for dropdown
+* @param {Object} data - Object of ContractItem
+*/
+  onSelectAgreements(data) {
+    this.detailContractReport.setIntervalAgreement([]);
+    this.detailContractReport.setSelectedAgreement(data);
+    if (data) {
+      this.contractsService.getIntervals(data.id).subscribe(res => {
+        let list: Array<DetailContractInterval> = [];
+        for (const key in res) list.push(new DetailContractInterval(Number(key), res[key].startDate, res[key].endDate));
+        list.sort((a, b) => a.title - b.title);
+        this.detailContractReport.setIntervals(list);
+        this.detailContractReport.setIsDisabledIntervals(false);
+      })
+    } else {
+      this.detailContractReport.setIsDisabledIntervals(true);
+      this.dpInterval.clearWithOutChanges();
+    }
+  }
+  /**
+* @description Set new value of Interval
+* @param {Object} data - Object of DetailContractInterval
+*/
+  onSelectInterval(data) {
+    this.detailContractReport.setIntervalAgreement(data.map(item => item.title));
   }
   onSelectDurationTechSale(data) {
     this.techSalesReport.setDuration(data);
@@ -222,6 +254,10 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     this.isDisabledCompany = (data === 'Summary') ? true : false;
     if (data === 'Summary') this.validate.resetCompany();
   }
+  /**
+* @description Set new value selected company from dropdown
+* @param {Object} selectClient - Object Company
+*/
   public selectClient(selectClient) {
     if (selectClient == null) {
       this.accountsReceivable.setClientCompanyId(null);
@@ -238,9 +274,11 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.deviceIpSummary.setCompanyId(null);
       this.remoteConnectionReport.setCompanyId(null);
       this.techService.setCompanyId(null);
+      this.detailContractReport.setCompanyId(null);
       this.softwareSummaryReport.resetSoft();
     } else {
       this.selectedClient = selectClient;
+      this.detailContractReport.setCompanyId(selectClient.id);
       this.accountingReport.setCompanyId(selectClient.id);
       this.glNumber.setClientCompanyId(selectClient.id);
       this.accountsReceivable.setClientCompanyId(selectClient.id);
@@ -254,12 +292,24 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.hardwareSummaryReport.setCompanyId(selectClient.id);
       this.deviceIpSummary.setCompanyId(selectClient.id);
       this.remoteConnectionReport.setCompanyId(selectClient.id);
+      if (this.report === "block-time-report") this.getAgreements();
       if (this.report === 'software-summary' || this.report === 'software-summary-device' || this.report === 'hardware-summary' || this.report === 'hardware-summary-device' || this.report === 'device-ip-summary' || this.report === 'device-ip-summary-device' || this.report === 'remote-access') this.getSoftByCompany(selectClient.id);
       if (this.serviceReport.startDate === '' && this.serviceReport.endDate === '') this.serviceReport.setDatesByCompany(this.selectedClient);
       this.validate.resetCompany();
     }
+    this.detailContractReport.setIsDisabledIntervals(true);
+    this.detailContractReport.setIsDisabledAgreements(true);
+    this.detailContractReport.setSelectedAgreement(null);
+    if (this.contractDetailDp) this.contractDetailDp.clearWithOutChanges();
+    if (this.dpInterval) this.dpInterval.clearWithOutChanges();
     if (this.dpDevices) this.dpDevices.clearWithOutChanges();
     this.onSelectedClient.emit(this.selectedClient);
+  }
+  getAgreements() {
+    this.contractsService.getServiceAgreementsByCompanyForReport(this.detailContractReport.companyId).subscribe(data => {
+      this.detailContractReport.setAgreements(data);
+      this.detailContractReport.setIsDisabledAgreements(false);
+    })
   }
   toggleDetailsByProducts(data) {
     this.detailedCommissionsReport.setDetailsByProducts(data);
@@ -337,6 +387,19 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
 
     });
   }
+  /**
+   * @description Init request to get detail contract report
+  */
+  getReportByDetailedContractsReport() {
+    if (!this.validate.isValidateDetailedContracts(this.detailContractReport.selectedAgreement)) return;
+    this.onRequest.emit(true);
+    this.reportsService.getReportByDetailedContracts(this.detailContractReport.getForRequest()).subscribe((data: any) => {
+      this.detailContractReport.setDataFromRequest(data);
+      this.setDatareport(this.detailContractReport)
+      //  this.reportsStateService.onChangeExportCSV(new ExportCSV('reports/remoteAccess', this.remoteConnectionReport.getForRequest(), 'Report_by_remote_access'));
+
+    });
+  }
   getReportByRemoteConnectionReport() {
     if (!this.validate.isValidateRemoteConnection(this.remoteConnectionReport.startDate, this.remoteConnectionReport.endDate)) return;
     this.onRequest.emit(true);
@@ -381,10 +444,7 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     this.reportsStateService.onChangeExportCSV(new ExportCSV('reports/sales/byCustomers', this.productSalesReport.getForRequest(), 'Sales_report_by_customer'));
   }
   getReportCompanyProducts() {
-    // if (!this.validate.isValidateProduct(this.productSalesReport.startDate, this.productSalesReport.endDate, this.productSalesReport.companyId, this.productSalesReport.type)) return;
-
     this.productsCompanyReport.setCompanyId(this.companiesStateService.getCompanyRoutingId());
-
     this.selectedClient = this.companiesStateService.getCompanies().find(item => item.id === this.productsCompanyReport.companyId);
     if (this.productsCompanyReport.startDate === '' && this.productsCompanyReport.endDate === '') this.productsCompanyReport.setDatesByCompany(this.selectedClient);
     this.onSelectedClient.emit(this.selectedClient);
@@ -399,14 +459,10 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     this.onRequest.emit(true);
     this.reportsService.getReportByProduct(this.productSalesReport.getForRequest()).subscribe(data => this.setDatareport(data));
     this.reportsStateService.onChangeExportCSV(new ExportCSV('reports/sales/byProducts', this.productSalesReport.getForRequest(), 'Sales_report_by_products'));
-
   }
   getReportByGlNumber() {
-
     if (!this.validate.isValidate(this.glNumber.monthlyDetailed, this.yearToDate, this.glNumber.startDate, this.glNumber.endDate)) return;
-
     this.onRequest.emit(true);
-
     if (this.yearToDate) {
       this.reportsService.getAccountingStartDate().subscribe((res: any) => {
         this.glNumber.setStartDate(moment(res.accountingStartDate).format('YYYY/MM/DD'));
@@ -417,62 +473,42 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       if (this.glNumber.getMonthlyDetailed()) this.glNumber.setDatesForMonthly();
       this.reportsService.getReportByGlNumber(this.glNumber.getForRequest()).subscribe(data => this.setDatareport(data));
     }
-
-
   }
 
   getReportByTechService() {
-
     if (!this.validate.isValidateTechService(this.techService.startDate, this.glNumber.endDate)) return;
-
     this.onRequest.emit(true);
-
-
-
     this.reportsService.getReportByTechService(this.techService.getForRequest()).subscribe((data: any) => {
       this.techService.setList(data.lines);
       this.techService.setTotalQuantity(data.totalQuantity);
       this.setDatareport(this.techService)
     });
-
-
   }
   getReportDetailedCommissions() {
     if (!this.validate.isValidateDetailedCommissions(this.detailedCommissionsReport.userId)) return;
-
     this.onRequest.emit(true);
-
     if (!this.detailedCommissionsReport.startDate && !this.detailedCommissionsReport.endDate) {
       this.detailedCommissionsReport.setStartDate(moment(this.companiesStateService.getCurrentCompany().createdAt).format('YYYY/MM/DD'))
       this.detailedCommissionsReport.setEndDate(moment(new Date()).format('YYYY/MM/DD'))
-
     }
-
     this.reportsService.getReportDetailedCommissions(this.detailedCommissionsReport.getForRequest()).subscribe((data: any) => {
       this.detailedCommissionsReport.setData(data);
       this.setDatareport(this.detailedCommissionsReport)
     });
-
   }
   getReportCommonCommissions() {
     if (!this.validate.isValidateCommonCommissions(this.commonCommissionsReport.userId)) return;
-
     this.onRequest.emit(true);
-
     if (!this.commonCommissionsReport.startDate && !this.commonCommissionsReport.endDate) {
       this.commonCommissionsReport.setStartDate(moment(this.companiesStateService.getCurrentCompany().createdAt).format('YYYY/MM/DD'))
       this.commonCommissionsReport.setEndDate(moment(new Date()).format('YYYY/MM/DD'))
-
     }
-
     this.reportsService.getReportDetailedCommissions(this.commonCommissionsReport.getForRequest()).subscribe((data: any) => {
       this.commonCommissionsReport.setData(data);
       this.setDatareport(this.commonCommissionsReport)
     });
-
   }
   private setDatareport(data) {
-
     if (this.report === 'income-accounts') {
       this.glNumber.setResponse(data);
       this.reportsStateService.onChangeGlNumber(this.glNumber);
@@ -481,8 +517,6 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.serviceReport.setData(data);
       this.reportsStateService.onChangeServiceReport(this.serviceReport.getDataObject());
     }
-
-
     this.getReport.emit(data);
     this.loadingInProgress = false;
     this.onRequest.emit(false);

@@ -24,12 +24,24 @@ export class ContractItem {
 
         }
     }
+    /**
+  * @description Return parse field "startDate"
+  * @returns {Number} This is the result
+ */
     public getStartDateByMilliseconds() {
         return new Date(this.startDate).getTime();
     }
+    /**
+ * @description Return parse field "reviewDate"
+ * @returns {Number} This is the result
+*/
     public getReviewDateByMilliseconds() {
         return new Date(this.reviewDate).getTime();
     }
+    /**
+ * @description Return parse field "endDate"
+ * @returns {Number} This is the result
+*/
     public getEndDateByMilliseconds() {
         return new Date(this.endDate).getTime();
     }

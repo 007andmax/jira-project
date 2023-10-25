@@ -76,7 +76,7 @@ export class PasswordManagerAddAsideComponent implements OnInit {
   ngOnInit() {
     let onAddForm = this.passwordManagerService.onAddForm.subscribe((res) => {
       this.passwordRecordAdd = new PasswordRecordAdd();
-      this.passwordRecordAdd.setType(this.categories.find(item => item.name === "OFFICE_365_ACCOUNT"));
+      //  this.passwordRecordAdd.setType(this.categories.find(item => item.name === "OFFICE_365_ACCOUNT"));
       let current = new Date();
       current.setFullYear(current.getFullYear() + 1);
       this.passwordRecordAdd.setExpiryDate(moment(current).format('YYYY/MM/DD'));
@@ -106,8 +106,9 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     this.linked.onSelectCompany((data) ? data.id : null);
   }
   selectType(data) {
-    this.passwordRecordAdd.setType(data);
-    if (data.UPPERCASE !== 'DEVICE' && data.UPPERCASE !== 'LOCAL_USER_ACCOUNT') this.validate.resetLinkTo();
+    this.passwordRecordAdd.setType((data) ? data : new PasswordRecordCategories());
+    if (data) this.validate.resetTemplate();
+    if (data && data.UPPERCASE !== 'DEVICE' && data.UPPERCASE !== 'LOCAL_USER_ACCOUNT') this.validate.resetLinkTo();
   }
   onChangeDatePicker(data) {
     this.passwordRecordAdd.setExpiryDate(moment(new Date(data.year, data.month - 1, data.day)).format('YYYY/MM/DD'));

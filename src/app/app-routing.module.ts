@@ -47,6 +47,11 @@ const routes: Routes = [
     canActivate: [PermissionSuperAdminService]
   },
   {
+    path: ':domain/tech-companies',
+    loadChildren: './components/super-admin/super-admin-companies/super-admin-companies.module#SuperAdminCompaniesModule',
+    canActivate: [PermissionSuperAdminService]
+  },
+  {
     path: ':domain/password-manager',
     loadChildren: './components/password-manager/password-manager.module#PasswordManagerModule',
     canActivate: [PermissionPasswordManagerService, PermissionNoSuperAdminService]
@@ -281,7 +286,7 @@ const routes: Routes = [
   {
     path: ':company/device-old',
     loadChildren: './components/device-old/device-old.module#DevicesOldModule',
-    canActivate: [PermissionTechUserService, TestPermissionService]
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':domain/billing-dashboard',
@@ -367,7 +372,11 @@ const routes: Routes = [
     loadChildren: './components/customer-portal/customer-portal-default/customer-portal-default.module#CustomerPortalDefaultModule',
     canActivate: [PermissionClientUserService]
   },
-
+  {
+    path: ':domain/contract-statistics',
+    loadChildren: './components/billing/contracts-statistics/contracts-statistics.module#ContractsStatisticsModule',
+    canActivate: [PermissionContractsService, PermissionNoSuperAdminService]
+  },
 ];
 
 /**

@@ -30,7 +30,8 @@ export class InvoiceRegularNoteComponent implements OnInit {
       this.elRef.nativeElement.querySelector("#description-regular-note").value = this.selectedNote.line1;
       if (this.selectedNote.id === "") this.selectedNote = null;
     }
-    this.regularNotes = this.invoiceNotes.filter(item => item.noteType === "REGULAR");
+    this.regularNotes = this.invoiceNotes.filter(item => item.noteType === "REGULAR").sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
+      1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0))
   }
   getLenRegularNotes() {
     return this.invoiceNotes.filter(item => item.noteType === "REGULAR").length;
@@ -108,7 +109,8 @@ export class InvoiceRegularNoteComponent implements OnInit {
   getInvoiceNote() {
     this.billableService.getInvoiceNote().subscribe(data => {
       this.invoiceNotes = data;
-      this.regularNotes = this.invoiceNotes.filter(item => item.noteType === "REGULAR");
+      this.regularNotes = this.invoiceNotes.filter(item => item.noteType === "REGULAR").sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
+        1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
     })
   }
 }

@@ -58,6 +58,9 @@ export class PasswordRecord {
     public setType(data) {
         this.template = data;
     }
+    public getTemplateForDropdDwon() {
+        return this.template.id ? this.template : null;
+    }
     public getExpiryDateByTime() {
         return new Date(this.expiredDate).getTime();
     }

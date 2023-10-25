@@ -96,3 +96,11 @@
     }
   }
 }
+.invoice-select-note {
+/deep/ .dropdown-menu {
+    max-height:192px;
+    height: auto;
+    overflow: auto;
+    min-width:100%;
+  }
+}
