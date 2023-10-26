@@ -470,7 +470,8 @@ export class TicketsFilter {
                     fieldFilterDtos: [
                         {
                             path: "status",
-                            operator: "NULL"
+                            "operator": "IN",
+                            values: ["UNASSIGNED"]
                         }
                     ]
                 },
@@ -523,7 +524,8 @@ export class TicketsFilter {
                         },
                         {
                             "path": "status",
-                            "operator": "NULL"
+                            "operator": "IN",
+                            values: ["UNASSIGNED"]
                         }
                     ],
                     "predicateRule": "OR"

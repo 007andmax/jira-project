@@ -15,12 +15,14 @@ import { UploadAreaModule } from 'src/app/components/shared/upload-area/upload-a
 import { TechUsersModule } from 'src/app/components/shared/tech-users/tech-users.module';
 import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-down/company-drop-down.module';
 import { DynamicTooltipModule } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.module';
+import { CompanyUsersDropDownComponent } from './company-users-drop-down/company-users-drop-down.component';
 
 
 
 @NgModule({
     declarations: [TicketAddAsideComponent,
-        DndDirective
+        DndDirective,
+        CompanyUsersDropDownComponent
     ],
     imports: [
         CommonModule,

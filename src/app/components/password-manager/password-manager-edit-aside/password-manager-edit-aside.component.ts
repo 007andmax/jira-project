@@ -236,8 +236,9 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
     this.validate.resetCompany();
   }
   selectType(data) {
-    this.editItem.setType(data);
-    if (data.name !== 'DEVICE' && data.name !== 'LOCAL_USER_ACCOUNT') this.validate.resetLinkTo();
+    this.editItem.setType((data) ? data : new PasswordRecordCategories());
+    if (data) this.validate.resetTemplate();
+    if (data && data.name !== 'DEVICE' && data.name !== 'LOCAL_USER_ACCOUNT') this.validate.resetLinkTo();
   }
   onChangeExpiryDate(data) {
     this.editItem.setExpiryDate(moment(new Date(data.year, data.month - 1, data.day)).format('YYYY/MM/DD'));
