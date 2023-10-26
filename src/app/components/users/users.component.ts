@@ -69,17 +69,8 @@ export class UsersComponent implements OnInit, OnDestroy {
     private router: Router,
     private appStateService: AppStateService,
   ) {
-    /* let routerSub = router.events.subscribe((val) => {
-       console.log("val", val);
-       if (val instanceof NavigationEnd && !this.cd['destroyed']) this.appStateService.changeDetectorRef();
-     })
-     this.sub.add(routerSub);*/
-  }
-  ngAfterViewInit() {
-    console.log("ngAfterViewInit");
   }
   ngOnInit() {
-    console.log("ngOnInit");
     if (this.customerPortalStateService.isCustomerPortal) {
       this.filter.setCompany(this.customerPortalStateService.getUsersFilters().company);
     } else {
@@ -373,7 +364,6 @@ export class UsersComponent implements OnInit, OnDestroy {
     return item.id;
   }
   ngOnDestroy(): void {
-    console.log("ngOnDestroy");
     this.userListService.onUnsubscribe();
     this.selectAll = false;
     this.users.forEach(item => {
