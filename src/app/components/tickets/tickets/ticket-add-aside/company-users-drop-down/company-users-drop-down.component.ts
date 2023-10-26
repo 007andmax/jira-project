@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnInit } from '@angular/core';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { TicketsListService } from '../../services/tickets-list.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -21,8 +21,9 @@ export class CompanyUsersDropDownComponent extends DropDownComponent {
     public usersStateService: UsersStateService,
     public customerPortalStateService: CustomerPortalStateService,
     public companiesService: CompaniesService,
-    public ticketsListService: TicketsListService,) {
-    super(elRef, companiesStateService, usersStateService, customerPortalStateService, companiesService);
+    public ticketsListService: TicketsListService,
+    public cd: ChangeDetectorRef,) {
+    super(elRef, companiesStateService, usersStateService, customerPortalStateService, companiesService, cd);
   }
   ngOnInit() {
     if (this.usersStateService.getAllUsers().length > 0) this.onGetUsers(this.usersStateService.getAllUsers());

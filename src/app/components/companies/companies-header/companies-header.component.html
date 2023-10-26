@@ -1,14 +1,14 @@
 <div class="qt-page-list__header --sticky">
     <div class="qt-page-list__header-title-line qt-mb-16">
         <div class="qt-page-list__header-title-line--left">
-          <div
-            _ngcontent-otb-c83
-            class="icon__menu-white qt-sz-24 qt-bg-contain qt-ml-6 pointer qt-d-none qt-d-md-block"
-            (click)="toggleMobileLeftPanel()"
-          ></div>
-          <h6 class="qt-page-list__header-title">
-            All Companies ({{calculateCount.getCurrent()}})
-          </h6>
+            <div
+                _ngcontent-otb-c83
+                class="icon__menu-white qt-sz-24 qt-bg-contain qt-ml-6 pointer qt-d-none qt-d-md-block"
+                (click)="toggleMobileLeftPanel()"
+            ></div>
+            <h6 class="qt-page-list__header-title">
+                All Companies ({{calculateCount.getCurrent()}})
+            </h6>
         </div>
         <div class="qt-page-list__header-title-line--rigth">
             <div
@@ -115,6 +115,7 @@
                             <input
                                 type="checkbox"
                                 class="ng-untouched ng-pristine ng-valid"
+                                [(ngModel)]="selectAll"
                                 (change)="toggleAllCompanies($event)"
                             >
                             <span></span>

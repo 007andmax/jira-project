@@ -2,54 +2,13 @@
     class="qt-w100 --required filter-tags-body"
     ngbDropdown
     #dp="ngbDropdown"
+    (openChange)="openChange($event)"
 >
     <mat-form-field ngbDropdownAnchor>
         <mat-chip-list
             #chipList
             aria-label="Fruit selection"
         >
-            <!-- <mat-chip
-                *ngIf="defaultSubscriptions.invoiceSubscription.enabled"
-                [selectable]="selectable"
-                [removable]="removable"
-                (removed)="updateDefault('invoiceSubscription')"
-            >
-                Invoice Updates
-                <mat-icon
-                    matChipRemove
-                    *ngIf="removable"
-                >
-                    cancel
-                </mat-icon>
-            </mat-chip>
-            <mat-chip
-                *ngIf="defaultSubscriptions.ticketSubscription.enabled"
-                [selectable]="selectable"
-                [removable]="removable"
-                (removed)="updateDefault('ticketSubscription')"
-            >
-                Ticket Updates
-                <mat-icon
-                    matChipRemove
-                    *ngIf="removable"
-                >
-                    cancel
-                </mat-icon>
-            </mat-chip>
-            <mat-chip
-                *ngIf="defaultSubscriptions.ticketManagerSubscription.enabled"
-                [selectable]="selectable"
-                [removable]="removable"
-                (removed)="updateDefault('ticketManagerSubscription')"
-            >
-                Ticket Manager
-                <mat-icon
-                    matChipRemove
-                    *ngIf="removable"
-                >
-                    cancel
-                </mat-icon>
-            </mat-chip> -->
             <mat-chip
                 *ngFor="let subscription of selectedSubscriptions; let i = index"
                 [selectable]="selectable"
@@ -86,57 +45,6 @@
         (click)="$event.preventDefault()"
     >
         <div class="content">
-            <!-- <div
-                (click)="updateDefault('invoiceSubscription')"
-                class="company-tag-item"
-                [ngClass]="{'is-hover':isSeletedDefault('invoiceSubscription')}"
-            >
-                <label class="qt-checkbox pointer">
-                    <input
-                        type="checkbox"
-                        [checked]="isSeletedDefault('invoiceSubscription')"
-                        readonly
-                    >
-                    <span></span>
-                    <div class="text-content">
-                        <div class="name">Invoice Updates</div>
-                    </div>
-                </label>
-            </div>
-            <div
-                (click)="updateDefault('ticketSubscription')"
-                class="company-tag-item"
-                [ngClass]="{'is-hover':isSeletedDefault('ticketSubscription')}"
-            >
-                <label class="qt-checkbox pointer">
-                    <input
-                        type="checkbox"
-                        [checked]="isSeletedDefault('ticketSubscription')"
-                        readonly
-                    >
-                    <span></span>
-                    <div class="text-content">
-                        <div class="name">Ticket Updates</div>
-                    </div>
-                </label>
-            </div>
-            <div
-                (click)="updateDefault('ticketManagerSubscription')"
-                class="company-tag-item"
-                [ngClass]="{'is-hover':isSeletedDefault('ticketManagerSubscription')}"
-            >
-                <label class="qt-checkbox pointer">
-                    <input
-                        type="checkbox"
-                        [checked]="isSeletedDefault('ticketManagerSubscription')"
-                        readonly
-                    >
-                    <span></span>
-                    <div class="text-content">
-                        <div class="name">Ticket Manager</div>
-                    </div>
-                </label>
-            </div> -->
             <ng-template
                 ngFor
                 let-subscription

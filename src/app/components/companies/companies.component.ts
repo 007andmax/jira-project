@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { CompaniesService } from '../../services/company/companies.service';
 import { CompaniesListService } from './services/companies-list.service';
 import { UsersService } from '../../services/users/users.service';
@@ -19,6 +19,7 @@ import { CompanyItem } from './class/company-item';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { CompanyDeviceCount } from './class/company-device-count';
+import { CompaniesHeaderComponent } from './companies-header/companies-header.component';
 
 @Component({
   selector: 'app-companies',
@@ -27,6 +28,7 @@ import { CompanyDeviceCount } from './class/company-device-count';
   providers: [CompaniesListService]
 })
 export class CompaniesComponent implements OnInit, OnDestroy {
+  @ViewChild('header') header: CompaniesHeaderComponent;
   CompaniesList: Array<CompanyItem> = [];
   reqCompaniesList: Array<CompanyItem> = [];
   showPreloader: boolean = true;
@@ -123,6 +125,8 @@ export class CompaniesComponent implements OnInit, OnDestroy {
           if (companyIndex > -1) this.CompaniesList.splice(companyIndex, 1);
         }
       }
+      this.header.setReqCompaniesList(this.reqCompaniesList);
+      this.cd.detectChanges();
     })
     this.sub.add(getChangeCompanies);
     let onChangeDevicesCount = this.companiesStateService.onChangeDevicesCount.subscribe(data => {
@@ -138,6 +142,12 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       this.companyFilter.setDevices(this.devicesCounts);
       this.companiesStateService.setDevicesCounts(data.map(item => new CompanyDeviceCount(item)));
     })
+  }
+  onSelectCompany(company) {
+    this.reqCompaniesList.find(item => item.id === company.id).selected = company.selected;
+    this.header.selectAll = (this.reqCompaniesList.find(item => !item.selected)) ? false : true;
+    this.header.setReqCompaniesList(this.reqCompaniesList);
+    this.cd.detectChanges();
   }
   onFilter(data) {
     this.companyFilter.onFilter(data, this.reqCompaniesList);

@@ -1,5 +1,5 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { MarketingSubscriptionType } from 'src/app/components/setting/marketing-email/marketing-subscription-type/class/marketing-subscription-type';
@@ -14,7 +14,8 @@ import { UsersFilterSubscriptionsItem } from './class/users-filter-subscriptions
 @Component({
   selector: 'users-filter-subscriptions',
   templateUrl: './users-filter-subscriptions.component.html',
-  styleUrls: ['./users-filter-subscriptions.component.scss']
+  styleUrls: ['./users-filter-subscriptions.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersFilterSubscriptionsComponent implements OnInit {
   defaultSubscriptions: UserDefaultSubscription = new UserDefaultSubscription();
@@ -35,7 +36,9 @@ export class UsersFilterSubscriptionsComponent implements OnInit {
   @ViewChild('dp') dp: any;
   @Output() tagsChange = new EventEmitter();
   sub: Subscription = new Subscription();
-  constructor(private marketingEmailStateService: MarketingEmailStateService,) { }
+  constructor(private marketingEmailStateService: MarketingEmailStateService,
+    private ref: ChangeDetectorRef) {
+  }
 
   ngOnInit() {
     this.listCustomSubscriptions = this.marketingEmailStateService.getListCustomSubscription();
@@ -59,10 +62,11 @@ export class UsersFilterSubscriptionsComponent implements OnInit {
       1 : (b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0));
     this.subscriptions = subscriptions.map(item => new UsersFilterSubscriptionsItem(item.id, item.type, item.name));
     this.reqSubscriptions = subscriptions.map(item => new UsersFilterSubscriptionsItem(item.id, item.type, item.name));
-
+    this.ref.detectChanges();
   }
   onSearch(event) {
     this.subscriptions = this.reqSubscriptions.filter(item => item.name.toLowerCase().includes(event.target.value.toLowerCase()));
+    this.ref.markForCheck();
   }
   public clearWithOutChanges() {
     this.tagCtrl.setValue(null);
@@ -71,12 +75,14 @@ export class UsersFilterSubscriptionsComponent implements OnInit {
     this.defaultSubscriptions.clearEnabledAll();
     this.customSubscriptions = [];
     this.subscriptions = this.reqSubscriptions.filter(item => item.name.toLowerCase().includes(""));
+    this.ref.markForCheck();
   }
   public clearCustomSubscription() {
     this.tagCtrl.setValue(null);
     this.selectedSubscriptions = this.selectedSubscriptions.filter(item => item.type === USER_SUBSCRIPTION_TYPE_DEFAULT);
     this.customSubscriptions = [];
     this.subscriptions = this.reqSubscriptions.filter(item => item.name.toLowerCase().includes(""));
+    this.ref.markForCheck();
   }
   updateDefault(field, subscription) {
     let index = this.selectedSubscriptions.findIndex(custom => custom.id === subscription.id);
@@ -90,7 +96,7 @@ export class UsersFilterSubscriptionsComponent implements OnInit {
     } else {
       this.onChangeDefault.emit(this.defaultSubscriptions);
     }
-
+    this.ref.detectChanges();
   }
   updateCustom(item, subscription) {
     let indexSubscription = this.selectedSubscriptions.findIndex(custom => custom.id === subscription.id);
@@ -105,13 +111,14 @@ export class UsersFilterSubscriptionsComponent implements OnInit {
       this.customSubscriptions.push(item);
       this.onChangeCustom.emit(this.customSubscriptions);
     }
-
+    this.ref.detectChanges();
   }
   toggleSubscription(item) {
     this.tagCtrl.setValue(null);
     this.subscriptions = this.reqSubscriptions.filter(item => item.name.toLowerCase().includes(""));
     if (item.type === USER_SUBSCRIPTION_TYPE_DEFAULT) this.updateDefault(item.id, item);
     if (item.type === USER_SUBSCRIPTION_TYPE_CUSTOM) this.updateCustom(this.listCustomSubscriptions.find(subscription => subscription.id === item.id), item);
+    this.ref.markForCheck();
   }
   isSelected(subscription) {
     return this.selectedSubscriptions.find(item => item.id === subscription.id);
@@ -121,6 +128,9 @@ export class UsersFilterSubscriptionsComponent implements OnInit {
   }
   isSeletedCustom(subscription) {
     return this.customSubscriptions.find(item => item.id === subscription.id);
+  }
+  openChange(data) {
+    this.ref.markForCheck();
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
