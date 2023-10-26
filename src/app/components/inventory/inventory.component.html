@@ -27,6 +27,12 @@
                         ></app-inventory-table>
                     </ng-template>
                     <div
+                        class="no-exist-elements"
+                        *ngIf="!showPreloader && inventoryList.length == 0"
+                    >
+                        We couldn't find any results
+                    </div>
+                    <div
                         class="loading"
                         *ngIf="showPreloader"
                     ></div>

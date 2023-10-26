@@ -304,3 +304,6 @@ app-tickets-table-item {
 /deep/ .qt-table-modern .ticket-table__company {
   max-width: 300px;
 }
+.qt-page-list__body-table-container {
+  position: relative;
+}
