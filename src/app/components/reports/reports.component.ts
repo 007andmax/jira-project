@@ -34,7 +34,7 @@ export class ReportsComponent implements OnInit {
     },
     {
       type: "FINANCIAL",
-      name: "Customer Transaction History",
+      name: "Customer transaction history",
       address: "customer-transaction-history",
     },
     {
