@@ -40,6 +40,7 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
+    if (this.customerPortalStateService.isCustomerPortal) this.ticketsFilter.isDisbledCompany = true;
     if (this.appService.checkMobile()) this.toggleFilter = false;
     /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
     /* START */
@@ -76,13 +77,18 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
 */
   public onChangeCounterFilter() {
     this.countFilter = 0;
-    if (this.ticketsFilter.selectedCompanies.length > 0) this.countFilter++;
+    if (this.ticketsFilter.selectedCompanies.length > 0 && !this.ticketsFilter.isDisbledCompany) {
+      this.countFilter++;
+      console.log("1");
+    }
     if (this.ticketsFilter.selectedTechUsers.length > 0) this.countFilter++;
     if (this.ticketsFilter.selectedUsers.length > 0) this.countFilter++;
     if (this.ticketsFilter.selectedStatus.length > 0) this.countFilter++;
     if (this.ticketsFilter.selectedPriorityLevels.length > 0) this.countFilter++;
     if (this.ticketsFilter.tags.length > 0) this.countFilter++;
     if (this.ticketsFilter.customDateRange || this.ticketsFilter.startDate && this.ticketsFilter.endDate) this.countFilter++;
+    console.log("this.ticketsFilter", this.ticketsFilter);
+    console.log("this.countFilter", this.countFilter);
   }
   /**
 * @description Toggle mobile left panel
@@ -135,6 +141,7 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     if (this.filter) this.filter.onClearAll();
     let ticketGlobalFilter = new TicketGlobalFilter();
     if (this.ticketsFilter.isDisbledCompany) ticketGlobalFilter.setClientCompaies(this.ticketsFilter.selectedCompanies.map(item => item.id));
+    console.log("this.ticketsFilter", this.ticketsFilter);
     this.ticketsStateService.onChangeGlobalFilter(ticketGlobalFilter);
   }
   /**
@@ -150,6 +157,7 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
 */
   onChangeCountFilter(data) {
     this.countFilter = data;
+    console.log("this.countFilter", this.countFilter);
   }
   /**
 * @description Set new value title

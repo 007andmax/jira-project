@@ -12,5 +12,7 @@ export class HardwareHardDiskComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  parseDB(data) {
+    return (data / 1024 / 1024 / 1024).toFixed(1)
+  }
 }

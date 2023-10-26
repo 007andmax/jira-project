@@ -851,7 +851,7 @@
             ></div>
         </div>
     </div>
-    <div *ngIf="report === 'accounting-report'">
+    <div *ngIf="report === 'customer-transaction-history'">
         <div class="qt-report__header qt-df qt-ai-fs">
             <div class="qt-report__header-content qt-df qt-ai-c qt-jc-sb">
                 <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
@@ -889,10 +889,10 @@
                     </div>
                 </div>
                 <app-report-additional-actions
-                    [report]="'accounting-report'"
+                    [report]="'customer-transaction-history'"
                     [accountType]="'TECH'"
                     [template]="'CUSTOMER_REPORT'"
-                    [fileName]="'accounting-report-report'"
+                    [fileName]="'customer-transaction-history-report'"
                 ></app-report-additional-actions>
             </div>
             <div

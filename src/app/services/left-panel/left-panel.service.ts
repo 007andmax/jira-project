@@ -90,7 +90,7 @@ export class LeftPanelService {
       state === 'common-commissions' ||
       state === 'detailed-commissions' ||
       state === 'accounts-receivable' ||
-      state === 'accounting-report' ||
+      state === 'customer-transaction-history' ||
       state === 'payments-report' ||
       state === 'remote-access' ||
       state === 'tech-sales' ||

@@ -6,19 +6,19 @@
         <div class="hardware-col__title">Memory</div>
     </div>
     <ul class="hardware-col__list">
-        <li
-            class="hardware-col__list-item"
-            *ngIf="memory.capacity != undefined"
-        >
+        <li class="hardware-col__list-item">
             <span class="hardware-col__list-title">Size:</span>
-            <div class="hardware-col__list-text">{{memory.capacity/1024/1024}} MB RAM</div>
-        </li>
-        <li
-            class="hardware-col__list-item"
-            *ngIf="memory.capacity == undefined"
-        >
-            <span class="hardware-col__list-title">Size:</span>
-            <div class="hardware-col__list-text">{{memory.capacity/1024/1024}}   N/A</div>
+            <div class="hardware-col__list-text">
+                <ng-template
+                    ngFor
+                    let-item
+                    [ngForOf]="memory"
+                >
+                    <p *ngIf="item.capacity != undefined">
+                        {{item.deviceLocator}} - {{item.capacity/1024/1024}} MB RAM
+                    </p>
+                </ng-template>
+            </div>
         </li>
     </ul>
 </div>
