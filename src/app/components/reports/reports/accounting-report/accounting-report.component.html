@@ -1,6 +1,6 @@
 <div>
     <app-report-menu
-        [report]="'accounting-report'"
+        [report]="'customer-transaction-history'"
         (onRequest)="onRequest($event)"
         (getReport)="getReport($event)"
     ></app-report-menu>
@@ -19,7 +19,7 @@
     >
         <div>
             <div class="qt-report__body-header">
-                <h6 class="qt-fw-600 qt-color-gray-900">Accounting report</h6>
+                <h6 class="qt-fw-600 qt-color-gray-900">Customer Transaction History</h6>
                 <div
                     class="body-m__sb qt-color-gray-900"
                     *ngIf="onInit"
