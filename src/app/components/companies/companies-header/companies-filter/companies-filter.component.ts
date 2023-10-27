@@ -47,7 +47,7 @@ export class CompaniesFilterComponent implements OnInit {
     this.cd.detectChanges();
     let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
       this.industries = data;
-      this.cd.checkNoChanges();
+      this.cd.markForCheck();
     })
     this.sub.add(onGetIndustry);
     if (this.usersStateService.getAllUsers().length > 0) {
