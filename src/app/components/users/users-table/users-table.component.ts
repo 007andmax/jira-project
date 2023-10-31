@@ -133,7 +133,7 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     }
   };
   isPrimaryContact() {
-    if (!this.customerPortalStateService.isCustomerPortal) return this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).isPrimaryContact;
+    if (!this.customerPortalStateService.isCustomerPortal && this.companyId) return this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).isPrimaryContact;
     if (this.customerPortalStateService.isCustomerPortal && this.user.customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id'))) return this.user.customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id')).isPrimaryContact;
     return false
   }
@@ -143,7 +143,7 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     })
   }
   getDefaultSubscriptions() {
-    return this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).defaultSubscriptions;
+    return (this.companyId) ? this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).defaultSubscriptions : new UserDefaultSubscription(null);
   }
   edit() {
     this.usersStateService.setUserForEdit(new User(JSON.parse(JSON.stringify(this.user))));
@@ -151,6 +151,7 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     this.cd.markForCheck();
   }
   ngOnInit() {
+    console.log("type", this.type);
     this.industries = this.crmStateService.getIndustryList();
     let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
       this.industries = data;

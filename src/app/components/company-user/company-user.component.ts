@@ -317,9 +317,7 @@ export class CompanyUserComponent implements OnInit {
   }
   ngOnDestroy(): void {
     this.userListService.onUnsubscribe();
-    this.users.forEach(item => {
-      item.selected = false;
-    })
+    this.users = [];
     this.reqUsers.forEach(item => {
       item.selected = false;
     })
