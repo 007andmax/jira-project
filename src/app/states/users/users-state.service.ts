@@ -73,6 +73,15 @@ export class UsersStateService {
       if (newChange.action == "PERMISSIONS_UPDATE") this.onChangeUserPermissions.emit(newChange.data);
     });
   }
+  public getUserAvatarUrl(user) {
+    if (!(user && user.avatar)) return '';
+    if (user.id) {
+      return `url(${'/users/' + user.id + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
+        '')}) 0% 0% / contain no-repeat`
+    } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
+      return `url(/file/${(user.avatar.origin.id)}.jpg) 0% 0% / contain no-repeat`;
+    }
+  };
   public initSelectAllusers(data) {
     this.onSelectAll.emit(data);
   }

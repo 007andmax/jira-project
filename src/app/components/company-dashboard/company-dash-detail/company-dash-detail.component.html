@@ -5,7 +5,7 @@
     ></div>
     <div class="profile-cmp-board qt-df">
         <img
-            [src]="getCompanyLogoUrl()"
+            [src]="companiesStateService.getCompanyLogoUrl(companyDetail)"
             class="profile-cmp-board__image"
             alt
             *ngIf="checkLogo()"
@@ -89,7 +89,7 @@
                     <div class="qt-df qt-ai-c qt-jc-sb qt-w100">
                         <div
                             class="users-table__name--avatar"
-                            [ngStyle]="{'background':  getUserAvatarUrl(user)}"
+                            [ngStyle]="{'background':  usersStateService.getUserAvatarUrl(user)}"
                             [textContent]="getNameForAvatar(user)"
                         ></div>
                         <div class="users-table__name-wrap">

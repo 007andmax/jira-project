@@ -22,7 +22,7 @@
         <div class="qt-df qt-ai-c">
             <div
                 class="users-table__name--avatar"
-                [ngStyle]="{'background':  getUserAvatarUrl()}"
+                [ngStyle]="{'background':  usersStateService.getUserAvatarUrl(user)}"
                 [textContent]="getNameForAvatar()"
             ></div>
             <div>

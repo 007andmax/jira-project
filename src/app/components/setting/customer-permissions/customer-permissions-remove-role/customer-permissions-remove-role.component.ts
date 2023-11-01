@@ -45,18 +45,6 @@ export class CustomerPermissionsRemoveRoleComponent implements OnInit {
       //  this.close();
     })
   }
-  getUserAvatarUrl(user) {
-    if (!(user && user.avatar)) return '';
-
-    if (user.id) {
-      return `url(${'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
-        '')}) 0% 0% / contain no-repeat`
-    } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
-      return `url(/file/${(user.avatar.origin.id)}.jpg) 0% 0% / contain no-repeat`;
-    } else {
-      return 'url(/users/default/image.jpg) 0% 0% / contain no-repeat';
-    }
-  };
   getNameForAvatar(user) {
     if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}${(user.lastName) ? user.lastName[0].toUpperCase() : ''}`;
     return '';

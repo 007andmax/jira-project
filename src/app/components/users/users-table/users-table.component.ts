@@ -120,18 +120,6 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     let index = this.companies.findIndex(item => item.id === this.user.company.id);
     return (index > -1) ? this.companies[index].name : '';
   }
-  getUserAvatarUrl() {
-    if (!(this.user && this.user.avatar)) return '';
-
-    if (this.user.id) {
-      return `url(${'/users/' + (this.user.id || 'default') + '/image' + (this.user.avatar ? '.jpg?t=' + this.user.avatar.updatedAt :
-        '')}) 0% 0% / contain no-repeat`
-    } else if (this.user.avatar && this.user.avatar.origin && this.user.avatar.origin.id) {
-      return `url(/file/${(this.user.avatar.origin.id)}.jpg) 0% 0% / contain no-repeat`;
-    } else {
-      return 'url(/users/default/image.jpg) 0% 0% / contain no-repeat';
-    }
-  };
   isPrimaryContact() {
     if (!this.customerPortalStateService.isCustomerPortal) return this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).isPrimaryContact;
     if (this.customerPortalStateService.isCustomerPortal && this.user.customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id'))) return this.user.customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id')).isPrimaryContact;

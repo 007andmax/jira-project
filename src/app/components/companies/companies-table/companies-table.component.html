@@ -29,7 +29,7 @@
                     [ngClass]="{'with-logo': checkLogo()}"
                 >
                     <img
-                        [src]="getCompanyLogoUrl()"
+                        [src]="companiesStateService.getCompanyLogoUrl(company)"
                         alt
                         *ngIf="checkLogo()"
                     >

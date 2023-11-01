@@ -14,7 +14,7 @@ export class UsersAsideDetailMessagesFullBodyComponent implements OnInit {
   message: UserMessage;
   toggleAllUsers: boolean = false;
 
-  constructor(private usersStateService: UsersStateService,
+  constructor(public usersStateService: UsersStateService,
     private sanitized: DomSanitizer,) { }
 
   ngOnInit() {
@@ -28,18 +28,6 @@ export class UsersAsideDetailMessagesFullBodyComponent implements OnInit {
   getCountUsers() {
     return (this.message) ? this.message.recipientsFromSystem.length + this.message.otherRecipients.length : '';
   }
-  getUserAvatarUrl(user) {
-    if (!(user && user.avatar)) return '';
-
-    if (user.id) {
-      return `url(${'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
-        '')}) 0% 0% / contain no-repeat`
-    } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
-      return `url(/file/${(user.avatar.origin.id)}.jpg) 0% 0% / contain no-repeat`;
-    } else {
-      return 'url(/users/default/image.jpg) 0% 0% / contain no-repeat';
-    }
-  };
   getUserName(user) {
     return `${user.firstName} ${user.lastName}`;
   }

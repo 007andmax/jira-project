@@ -20,7 +20,7 @@
                         <div class="default-user-avatar avatar-background-color-odd">
                             <div
                                 class="users-table__name--avatar"
-                                [ngStyle]="{'background':  getUserAvatarUrl(user)}"
+                                [ngStyle]="{'background':  usersStateService.getUserAvatarUrl(user)}"
                                 [textContent]="getNameForAvatar(user)"
                             ></div>
                         </div>
