@@ -1,5 +1,6 @@
 <div
     ngbDropdown
+    #dp="ngbDropdown"
     [ngClass]="class"
     [container]="container"
     [ngStyle]="{'width':widthInput ? widthInput : '100%'}"
@@ -28,8 +29,9 @@
             id="dropdown1"
             [attr.maxlength]="maxlength"
             (input)="onCheckAdd($event)"
+            (focus)="onFocus($event)"
             [readonly]="!change"
-            ngbDropdownToggle
+            ngbDropdownAnchor
         >
         <span
             class="app-drop-down__right-icon pointer"

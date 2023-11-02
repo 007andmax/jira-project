@@ -1,5 +1,6 @@
 <div
     ngbDropdown
+    #dp="ngbDropdown"
     [ngClass]="class"
     [container]="container"
     [ngStyle]="{'width':widthInput ? widthInput : '100%'}"
@@ -15,64 +16,65 @@
         [textContent]="errorMessage"
     >
     </mat-error>
-  <input
-    type="text"
-    [ngStyle]="{'width': '100%', 'height': heightInput ? heightInput : '40px' }"
-    [ngClass]="{'disabled': isDisabled, '--input-error' : !validate}"
-    [disabled]="isDisabled"
-    [value]="getSelectedItemText()"
-    autocomplete="off"
-    [placeholder]="placeholder"
-    id="dropdown1"
-    class="qt-dropdown-input"
-    [attr.maxlength]="maxlength"
-    (input)="onCheckAdd($event)"
-    [readonly]="!change"
-    ngbDropdownToggle
-  >
-  <span
-    class="app-drop-down__right-icon pointer"
-    *ngIf="list && !isDisabled"
-    [ngStyle]="{'bottom': heightInput ? dividePosition(heightInput) : '20px' }"
-  >
-            <i
-              *ngIf="selectedItem && !isAdd && !isBlockClear"
-              class="icn-sm icn-remove-old"
-              (click)="clearClient()"
-            ></i>
-            <i
-              *ngIf="(!selectedItem || isBlockClear) && !isAdd && !preloader"
-              class="icn-sm report-caret-icon"
-            ></i>
-            <i
-              *ngIf="isAdd"
-              (click)="addItem()"
-              class="icn-sm icn-product-save icon__active_subscription"
-            ></i>
-        </span>
-  <i
-    class="loading xs"
-    *ngIf="preloader"
-  ></i>
-  <div
-    ngbDropdownMenu
-    [ngStyle]="{'width': dropdownWidth ? dropdownWidth : '100%', 'max-height': dropdownHeight ? dropdownHeight : '192px'}"
-    aria-labelledby="dropdown1"
-    class="app-drop-down__dropdown"
-  >
-    <ng-template
-      ngFor
-      let-item
-      [ngForOf]="list"
-      let-i="index"
+    <input
+        type="text"
+        [ngStyle]="{'width': '100%', 'height': heightInput ? heightInput : '40px' }"
+        [ngClass]="{'disabled': isDisabled, '--input-error' : !validate}"
+        [disabled]="isDisabled"
+        [value]="getSelectedItemText()"
+        autocomplete="off"
+        [placeholder]="placeholder"
+        id="dropdown1"
+        class="qt-dropdown-input"
+        [attr.maxlength]="maxlength"
+        (input)="onCheckAdd($event)"
+        (focus)="onFocus($event)"
+        [readonly]="!change"
+        ngbDropdownAnchor
     >
-      <button
-        ngbDropdownItem
-        [textContent]="reduceItemName(item)"
-        (click)="onSelect(item)"
-        [title]="reduceItemName(item)"
-        [ngClass]="{'--selected':isSelected(item)}"
-      ></button>
-    </ng-template>
-  </div>
+    <span
+        class="app-drop-down__right-icon pointer"
+        *ngIf="list && !isDisabled"
+        [ngStyle]="{'bottom': heightInput ? dividePosition(heightInput) : '20px' }"
+    >
+        <i
+            *ngIf="selectedItem && !isAdd && !isBlockClear"
+            class="icn-sm icn-remove-old"
+            (click)="clearClient()"
+        ></i>
+        <i
+            *ngIf="(!selectedItem || isBlockClear) && !isAdd && !preloader"
+            class="icn-sm report-caret-icon"
+        ></i>
+        <i
+            *ngIf="isAdd"
+            (click)="addItem()"
+            class="icn-sm icn-product-save icon__active_subscription"
+        ></i>
+    </span>
+    <i
+        class="loading xs"
+        *ngIf="preloader"
+    ></i>
+    <div
+        ngbDropdownMenu
+        [ngStyle]="{'width': dropdownWidth ? dropdownWidth : '100%', 'max-height': dropdownHeight ? dropdownHeight : '192px'}"
+        aria-labelledby="dropdown1"
+        class="app-drop-down__dropdown"
+    >
+        <ng-template
+            ngFor
+            let-item
+            [ngForOf]="list"
+            let-i="index"
+        >
+            <button
+                ngbDropdownItem
+                [textContent]="reduceItemName(item)"
+                (click)="onSelect(item)"
+                [title]="reduceItemName(item)"
+                [ngClass]="{'--selected':isSelected(item)}"
+            ></button>
+        </ng-template>
+    </div>
 </div>
