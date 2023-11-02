@@ -56,6 +56,7 @@ export class CompanyAddAsideShortComponent implements OnInit, OnDestroy {
     this.validate.checkValidPrimaryPhoneNumber(this.company.contacts[0].phoneNumbers[0].number);
   }
   onSelectUser(item) {
+    console.log("item", item);
     if (item) {
       let indexhUser = this.users.findIndex(user => `${user.firstName} ${user.lastName}` === item);
       if (indexhUser > -1) this.company.contacts[0].setId(this.users[indexhUser].id);
