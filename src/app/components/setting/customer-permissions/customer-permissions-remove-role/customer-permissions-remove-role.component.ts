@@ -45,10 +45,6 @@ export class CustomerPermissionsRemoveRoleComponent implements OnInit {
       //  this.close();
     })
   }
-  getNameForAvatar(user) {
-    if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}${(user.lastName) ? user.lastName[0].toUpperCase() : ''}`;
-    return '';
-  }
   getCompanyName(companyId) {
     return this.companiesStateService.getCompanies().find(item => item.id === companyId).name;
   }

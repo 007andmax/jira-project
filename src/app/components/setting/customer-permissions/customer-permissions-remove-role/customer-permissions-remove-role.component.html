@@ -21,7 +21,7 @@
                             <div
                                 class="users-table__name--avatar"
                                 [ngStyle]="{'background':  usersStateService.getUserAvatarUrl(user)}"
-                                [textContent]="getNameForAvatar(user)"
+                                [textContent]="usersStateService.getNameForAvatar(user)"
                             ></div>
                         </div>
                         <div class="qt-f-1 ellipsis">

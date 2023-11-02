@@ -31,10 +31,6 @@ export class UsersAsideDetailMessagesFullBodyComponent implements OnInit {
   getUserName(user) {
     return `${user.firstName} ${user.lastName}`;
   }
-  getNameForAvatar(user) {
-    if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}${(user.lastName) ? user.lastName[0].toUpperCase() : ''}`;
-    return '';
-  }
   public getDate(date) {
     return moment(new Date(date)).format('DD MMM');
   }

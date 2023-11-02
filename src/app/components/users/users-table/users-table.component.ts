@@ -104,10 +104,6 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     let find = this.jobTitleList.find(item => item.id === this.user.jobTitleId);
     return (find) ? find.name : '';
   }
-  getNameForAvatar() {
-    if (!this.user.avatar) return `${(this.user.firstName) ? this.user.firstName[0].toUpperCase() : ''}${(this.user.lastName) ? this.user.lastName[0].toUpperCase() : ''}`;
-    return '';
-  }
   getUserName() {
     return `${this.user.firstName} ${this.user.lastName}`;
   }

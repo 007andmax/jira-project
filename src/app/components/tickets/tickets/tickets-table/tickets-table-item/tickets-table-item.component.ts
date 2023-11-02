@@ -30,7 +30,7 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
   indexNoAvatar: number = 0;
   listColorNoAvatar = ['#0cdeaa', '#16a4fa', '#7c77cb', '#ffb937'];
   sub: Subscription = new Subscription();
-  constructor(private usersStateService: UsersStateService,
+  constructor(public usersStateService: UsersStateService,
     public ticketsListService: TicketsListService,
     private companiesStateService: CompaniesStateService) { }
 
@@ -45,12 +45,6 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
   }
   public getUserName(user) {
     return (user) ? `${user.firstName} ${user.lastName}` : '';
-  }
-
-  getNameForAvatar() {
-    if (!this.requestedUser) return '';
-    if (!this.requestedUser.avatar) return `${(this.requestedUser.firstName) ? this.requestedUser.firstName[0].toUpperCase() : ''}${(this.requestedUser.lastName) ? this.requestedUser.lastName[0].toUpperCase() : ''}`;
-    return '';
   }
   getCreateAt() {
     let date = new Date(this.ticket.createdAt);

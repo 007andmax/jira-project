@@ -22,11 +22,6 @@ export class LeftPanelSuperAdminComponent implements OnInit {
 
   ngOnInit() {
   }
-  getNameForAvatar() {
-    if (!this.usersStateService.getCurrentUser()) return '';
-    if (!this.usersStateService.getCurrentUser().avatar) return `${(this.usersStateService.getCurrentUser().firstName) ? this.usersStateService.getCurrentUser().firstName[0].toUpperCase() : ''}`;
-    return '';
-  }
   getFullUserName() {
     if (!this.usersStateService.getCurrentUser()) return '';
     return `${this.usersStateService.getCurrentUser().firstName} ${this.usersStateService.getCurrentUser().lastName

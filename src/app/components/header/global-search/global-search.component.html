@@ -63,7 +63,7 @@
                 <div
                     class="global-search__user-avatar"
                     *ngIf="selectedType === 'USERS'"
-                    [textContent]="getNameForAvatar(listItem)"
+                    [textContent]="usersStateService.getNameForAvatar(getUserById(listItem.id))"
                     [ngStyle]="{'background': ticketsListService.getStyleAvatar(getUserById(listItem.id),listColorNoAvatar[indexNoAvatar]) }"
                 >
                 </div>

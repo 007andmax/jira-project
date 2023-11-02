@@ -345,10 +345,6 @@ export class CompanyDashDetailComponent implements OnInit {
     let find = this.jobTitleList.find(item => item.id === user.jobTitleId);
     return (find) ? find.name : "";
   }
-  getNameForAvatar(user) {
-    if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}${(user.lastName) ? user.lastName[0].toUpperCase() : ''}`;
-    return '';
-  }
   getUserName(user) {
     return `${user.firstName} ${user.lastName}`;
   }
