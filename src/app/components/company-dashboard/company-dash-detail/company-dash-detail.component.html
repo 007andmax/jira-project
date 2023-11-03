@@ -151,6 +151,9 @@
             <span class="qt-fs-13 qt-fw-600">
                 {{companyDetailing.billingLocationName}}
             </span>
+            <span class="qt-fs-13 qt-fw-600">
+                Postal Code - {{companyDetailing?.addresses[0]?.postalCode}}
+            </span>
             <a href="tel:{{companyDetailing?.addresses[0]?.phoneNumbers[0]?.number}}">
                 <preview-phone-mask
                     *ngIf="companyDetailing?.addresses[0]?.phoneNumbers[0]?.number"

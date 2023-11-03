@@ -73,11 +73,21 @@
         <span>{{ user.portalAccessStatus }}</span>
     </td>
     <td
-        class="users-table__company"
+        class="users-table__company ellipsis"
         *ngIf="type === TYPE_LIST_COMPANY_USERS"
         (click)="showDetailUser()"
     >
-        <span>{{ user.primaryEmail }}</span>
+        <app-dynamic-tooltip
+            [content]="user.primaryEmail"
+            [position]="'top'"
+            #emailTooltip
+        ></app-dynamic-tooltip>
+        <span
+            (mouseenter)="emailTooltip.show($event.target)"
+            (mouseleave)="emailTooltip.hide()"
+        >
+            {{ user.primaryEmail }}
+        </span>
     </td>
     <td
         class="users-table__company"

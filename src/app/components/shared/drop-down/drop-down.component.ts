@@ -36,7 +36,7 @@ export class DropDownComponent implements OnInit {
   @Input() maxlength: number = null;
   @Input() isDisabled: boolean = false;
   @Input() reducerItem: Function = (item) => (this.field) ? item[this.field] : item;
-
+  @Input() reducerSelectedItem: Function = () => (this.field) ? (this.selectedItem) ? this.selectedItem[this.field] : "" : this.selectedItem;
   @Input() list = [];
   @Input() placeholder = '';
 
@@ -98,7 +98,7 @@ export class DropDownComponent implements OnInit {
     this.ref.detectChanges();
   }
   getSelectedItemText() {
-    return (this.field) ? (this.selectedItem) ? this.selectedItem[this.field] : "" : this.selectedItem;
+    return this.reducerSelectedItem(this.selectedItem);
   }
   public selectItemWithOutChanges(data) {
     this.isAdd = false;
