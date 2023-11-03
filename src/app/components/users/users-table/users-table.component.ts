@@ -135,7 +135,6 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     this.cd.markForCheck();
   }
   ngOnInit() {
-    console.log("type", this.type);
     this.industries = this.crmStateService.getIndustryList();
     let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
       this.industries = data;

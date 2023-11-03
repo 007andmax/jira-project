@@ -84,7 +84,6 @@ export class DropDownComponent implements OnInit {
   }
   public onFocus(event) {
     if (!this.dp.isOpen()) this.dp.open();
-    console.log("this.dp", this.dp);
   }
   public addNewItem(data) {
     this.reqList.push(data);

@@ -64,7 +64,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
   public onFocus(event) {
     if (!this.products_dropDown.isOpen()) this.products_dropDown.open();
-    console.log("this.products_dropDown", this.products_dropDown);
   }
   public onUpdateList() {
     this.itemList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?

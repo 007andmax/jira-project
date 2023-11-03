@@ -40,7 +40,6 @@ export class ServicesListComponent implements OnInit {
   }
   public onFocus(event) {
     if (!this.products_dropDown.isOpen()) this.products_dropDown.open();
-    console.log("this.products_dropDown", this.products_dropDown);
   }
   onSearch(event) {
     this.searchName = (event.target.value.length > 0) ? event.target.value : null
