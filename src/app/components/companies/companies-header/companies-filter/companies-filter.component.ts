@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ItemFilterPerson } from 'src/app/components/left-panel/left-panel-companies/class/item-filter-person';
 import { CrmCompanyIndustry } from 'src/app/components/setting/crm-settings/crm-company-industry/class/crm-company-industry';
@@ -16,7 +16,8 @@ import { CompanyTagsComponent } from '../../company-tags/company-tags.component'
 @Component({
   selector: 'companies-filter',
   templateUrl: './companies-filter.component.html',
-  styleUrls: ['./companies-filter.component.scss']
+  styleUrls: ['./companies-filter.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CompaniesFilterComponent implements OnInit {
   companyTypes = [new CompanySetting('Client', 'CLIENT'),
@@ -38,12 +39,15 @@ export class CompaniesFilterComponent implements OnInit {
     private leftPanelStateService: LeftPanelStateService,
     public appService: AppService,
     private crmStateService: CrmStateService,
+    public cd: ChangeDetectorRef,
     private usersStateService: UsersStateService) { }
 
   ngOnInit() {
     this.industries = this.crmStateService.getIndustryList();
+    this.cd.detectChanges();
     let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
       this.industries = data;
+      this.cd.markForCheck();
     })
     this.sub.add(onGetIndustry);
     if (this.usersStateService.getAllUsers().length > 0) {
@@ -69,6 +73,7 @@ export class CompaniesFilterComponent implements OnInit {
           1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
       }
     })
+    this.cd.detectChanges();
   }
 
   public onClearAll() {
@@ -84,15 +89,17 @@ export class CompaniesFilterComponent implements OnInit {
     this.companiesStateService.onInitFilter(this.companyFilter);
     this.onChangeCounterFilter();
     if (this.appService.checkMobile()) this.close();
+    this.cd.detectChanges();
   }
   close() {
     this.onClose.emit(null);
+    this.cd.detectChanges();
   }
   applyFilters() {
-
     this.companiesStateService.onInitFilter(this.companyFilter);
     this.onChangeCounterFilter();
     this.close();
+    this.cd.detectChanges();
   }
   public onSelectTechLead(data) {
     this.companyFilter.setTechUser((data) ? data.id : null);
@@ -100,6 +107,7 @@ export class CompaniesFilterComponent implements OnInit {
       this.companiesStateService.onInitFilter(this.companyFilter);
       this.onChangeCounterFilter();
     }
+    this.cd.markForCheck();
   }
   public onSelectType(data) {
     this.companyFilter.setClientType((data) ? data.value : null);
@@ -107,6 +115,7 @@ export class CompaniesFilterComponent implements OnInit {
       this.companiesStateService.onInitFilter(this.companyFilter);
       this.onChangeCounterFilter();
     }
+    this.cd.markForCheck();
   }
   public onSelectClientIndustry(data) {
     this.companyFilter.setClientIndustry((data) ? data : null);
@@ -114,6 +123,7 @@ export class CompaniesFilterComponent implements OnInit {
       this.companiesStateService.onInitFilter(this.companyFilter);
       this.onChangeCounterFilter();
     }
+    this.cd.markForCheck();
   }
   public onChangeTags(data) {
     this.companyFilter.setTags(data);
@@ -121,6 +131,7 @@ export class CompaniesFilterComponent implements OnInit {
       this.companiesStateService.onInitFilter(this.companyFilter);
       this.onChangeCounterFilter();
     }
+    this.cd.markForCheck();
   }
   public onChangeCounterFilter() {
     let count = 0;
@@ -130,5 +141,6 @@ export class CompaniesFilterComponent implements OnInit {
     if (this.companyFilter.techUser) count++;
 
     this.changeCountFilter.emit(count);
+    this.cd.detectChanges();
   }
 }

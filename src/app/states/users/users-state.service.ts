@@ -26,6 +26,7 @@ export class UsersStateService {
   openAside: EventEmitter<any> = new EventEmitter();
   openEditAside: EventEmitter<any> = new EventEmitter();
   openMessageAside: EventEmitter<any> = new EventEmitter();
+  onSelectAll: EventEmitter<any> = new EventEmitter();
   openDetailAside: EventEmitter<any> = new EventEmitter();
   closeDetailAside: EventEmitter<any> = new EventEmitter();
   onChangeUserPermissions: EventEmitter<any> = new EventEmitter();
@@ -71,6 +72,9 @@ export class UsersStateService {
     this.usersRealTimeService.changePermissionsUsers.subscribe(newChange => {
       if (newChange.action == "PERMISSIONS_UPDATE") this.onChangeUserPermissions.emit(newChange.data);
     });
+  }
+  public initSelectAllusers(data) {
+    this.onSelectAll.emit(data);
   }
   public setUserRoleForRemove(data) {
     this.userRoleForRemove = data;

@@ -1,8 +1,8 @@
 <!-- for show filters add class "show" for app-left-panel -->
 <div class="qt-page-list users-page">
     <app-users-header
+        #header
         [count]="count"
-        [reqUsers]="reqUsers"
         [selectAll]="selectAll"
         (onChangeFilterField)="onFilter($event)"
         [users]="users"

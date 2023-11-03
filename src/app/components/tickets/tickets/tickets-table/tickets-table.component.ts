@@ -55,6 +55,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     if (this.customerPortalStateService.isCustomerPortal) {
       this.ticketsFilter.setListType("ALL");
       this.ticketsFilter.setFilter(JSON.parse(JSON.stringify(this.customerPortalStateService.getTicketsFilter())));
+      this.ticketsFilter.isDisbledCompany = true;
       this.onScroll();
       this.websocketService.onInitConnectCustomerUser("new-tickets", this.customerPortalStateService.getTicketsFilter().selectedCompanies[0].id);
     } else {

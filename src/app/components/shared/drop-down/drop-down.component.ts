@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
@@ -7,7 +7,8 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 @Component({
   selector: 'app-drop-down',
   templateUrl: './drop-down.component.html',
-  styleUrls: ['./drop-down.component.scss']
+  styleUrls: ['./drop-down.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DropDownComponent implements OnInit {
   selectedItem = null;
@@ -47,12 +48,13 @@ export class DropDownComponent implements OnInit {
     public companiesStateService: CompaniesStateService,
     public usersStateService: UsersStateService,
     public customerPortalStateService: CustomerPortalStateService,
-    public companiesService: CompaniesService,) { }
+    public companiesService: CompaniesService,
+    public ref: ChangeDetectorRef) { }
 
   ngOnInit() {
     if (this.class.length > 0) this.class = this.class;
     if (this.uiType) this.class.push(this.uiType);
-
+    this.ref.markForCheck();
   }
   ngDoCheck() {
     if (this.sort) this.list.sort((a, b) => (this.field) ? a[this.field].localeCompare(b[this.field]) : a.localeCompare(b));
@@ -63,6 +65,7 @@ export class DropDownComponent implements OnInit {
     this.list = data;
     if (this.sort) this.list.sort((a, b) => (this.field) ? a[this.field].localeCompare(b[this.field]) : a.localeCompare(b));
     this.reqList = JSON.parse(JSON.stringify(this.list));
+    this.ref.markForCheck();
   }
   /**
   * @description Check if use "search", will filter list items by 'field'. If 'field' no exist filter will by Array String. If search element doesn't exist, will init logic to show icon for add
@@ -76,15 +79,18 @@ export class DropDownComponent implements OnInit {
     } else {
       this.isAdd = false;
     }
+    this.ref.markForCheck();
   }
   public addNewItem(data) {
     this.reqList.push(data);
     if (this.sort) this.reqList.sort((a, b) => (this.field) ? a[this.field].localeCompare(b[this.field]) : a.localeCompare(b));
+    this.ref.markForCheck();
   }
   addItem() {
     this.onAddItem.emit(this.getInputText());
     this.isAdd = false;
     this.list = JSON.parse(JSON.stringify(this.reqList));
+    this.ref.detectChanges();
   }
   getSelectedItemText() {
     return (this.field) ? (this.selectedItem) ? this.selectedItem[this.field] : "" : this.selectedItem;
@@ -92,11 +98,13 @@ export class DropDownComponent implements OnInit {
   public selectItemWithOutChanges(data) {
     this.isAdd = false;
     this.selectedItem = data;
+    this.ref.markForCheck();
   }
   onSelect(data) {
     this.isAdd = false;
     this.selectedItem = data;
     this.onSelectedItem.emit(data);
+    this.ref.detectChanges();
   }
   clearClient() {
     this.isAdd = false;
@@ -104,6 +112,7 @@ export class DropDownComponent implements OnInit {
     this.elRef.nativeElement.querySelector("#dropdown1").value = "";
     this.list = JSON.parse(JSON.stringify(this.reqList));
     this.onSelectedItem.emit(null);
+    this.ref.detectChanges();
   }
   public getInputText() {
     return this.elRef.nativeElement.querySelector("#dropdown1").value;
@@ -111,6 +120,7 @@ export class DropDownComponent implements OnInit {
   public clearWithOutChanges() {
     this.isAdd = false;
     this.selectedItem = null;
+    this.ref.markForCheck();
   }
 
   dividePosition(position) {

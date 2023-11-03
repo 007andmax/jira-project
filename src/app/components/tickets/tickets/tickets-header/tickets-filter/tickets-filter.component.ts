@@ -50,7 +50,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   public ticketsFilter: TicketsFilter = new TicketsFilter();
   globalFilter: TicketGlobalFilter = new TicketGlobalFilter();
   listType: string = "USERS";
-  public selectedCompany: Company = null;
   selectedTechUser: string = null;
   selectedStatus: string = null;
   selectedUser: string = null;
@@ -145,7 +144,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       if (selectedCompanies.length > 0) {
         this.companyDp.selectedItems = selectedCompanies;
         this.onSelectCompany(selectedCompanies);
-      } else {
+      } else if (!this.ticketsFilter.isDisbledCompany) {
         this.companyDp.clearWithOutChanges();
         this.onSelectCompany([]);
       }
@@ -279,10 +278,12 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
 */
   private checkCompanyCustomerUser() {
     this.ticketsFilter = this.customerPortalStateService.getTicketsFilter();
-    this.selectedCompany = this.companiesState.getCompanies().find(item => item.id == localStorage.getItem('company_info_id'));
-    this.companyDp.selectItemWithOutChanges(this.selectedCompany);
+    let selectedCompanies = [this.companiesState.getCompanies().find(item => item.id == localStorage.getItem('company_info_id'))];
+    this.companyDp.selectItemsWithOutChanges(selectedCompanies);
     this.companyDp.isDisabled = true;
+    this.companyDp.setRemovable(false);
     this.ticketsFilter.isDisbledCompany = true;
+    this.onChangeCounterFilter();
     this.onGetUsers();
   }
   /**

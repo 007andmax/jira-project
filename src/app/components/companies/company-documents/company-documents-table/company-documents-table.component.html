@@ -54,6 +54,7 @@
             [placement]="'bottom-right'"
         >
             <div
+                *ngIf="!item.isCategory && (getPermissions('EDIT_DOCUMENT') || getPermissions('CREATE_DOCUMENT') || getPermissions('VIEW_DOCUMENT') || getPermissions('DELETE_DOCUMENT')) || item.isCategory"
                 class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"
                 id="dropdownBasic1"
                 ngbDropdownToggle
@@ -110,6 +111,7 @@
                     class="pointer"
                     ngbDropdownItem
                     (click)="printPdf()"
+                    *ngIf="getPermissions('VIEW_DOCUMENT')"
                 >
                     <div class="icon__print qt-sz-20 qt-bg-contain qt-mr-12"></div>
                     Print
@@ -118,6 +120,7 @@
                     class="pointer"
                     ngbDropdownItem
                     (click)="exportPdf()"
+                    *ngIf="getPermissions('VIEW_DOCUMENT')"
                 >
                     <div class="icon__download-pdf qt-sz-20 qt-bg-contain qt-mr-12"></div>
                     Export PDF
@@ -126,6 +129,7 @@
                     class="pointer"
                     ngbDropdownItem
                     (click)="previewDocument()"
+                    *ngIf="getPermissions('VIEW_DOCUMENT')"
                 >
                     <div class="icon__go-to qt-sz-20 qt-bg-contain qt-mr-12"></div>
                     Open in new tab

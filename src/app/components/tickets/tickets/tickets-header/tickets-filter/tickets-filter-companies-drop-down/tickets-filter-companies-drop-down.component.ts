@@ -28,6 +28,13 @@ export class TicketsFilterCompaniesDropDownComponent extends CompanyDropDownComp
       this.filterChange.emit(this.selectedItems);
     }
   }
+  /**
+  * @description Set new value filed 'removable'
+  * @param {boolean} data - new value of 'removable'
+  */
+  public setRemovable(data) {
+    this.removable = data;
+  }
 
   /**
 * @description Toogle selected element and clear input
@@ -70,6 +77,11 @@ export class TicketsFilterCompaniesDropDownComponent extends CompanyDropDownComp
 */
   isSelected(data) {
     return this.selectedItems.find(item => (this.field) ? item[this.field] == data[this.field] : item == data);
+  }
+
+  public selectItemsWithOutChanges(data) {
+    this.isAdd = false;
+    this.selectedItems = data;
   }
 
   /**
