@@ -14,7 +14,7 @@
             <div class="logo-upload qt-df">
                 <img
                     *ngIf="company.logo"
-                    [src]="getCompanyLogoUrl()"
+                    [src]="companiesStateService.getCompanyLogoUrl(company)"
                     (click)="onChangeAvatar()"
                 >
                 <i

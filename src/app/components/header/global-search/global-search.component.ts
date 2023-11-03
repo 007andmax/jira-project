@@ -37,7 +37,7 @@ export class GlobalSearchComponent implements OnInit {
     private invoiceStateService: InvoiceStateService,
     private defaultServicesStateService: DefaultServicesStateService,
     private defaultServicesService: DefaultServicesService,
-    private usersStateService: UsersStateService,
+    public usersStateService: UsersStateService,
     private productService: ProductService,
     private router: Router,
     public companiesStateService: CompaniesStateService,
@@ -115,11 +115,6 @@ export class GlobalSearchComponent implements OnInit {
   }
   getUserById(id) {
     return this.usersStateService.getAllUsers().find(userItem => userItem.id === id);
-  }
-  getNameForAvatar(item) {
-    let user = this.getUserById(item.id);
-    if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}${(user.lastName) ? user.lastName[0].toUpperCase() : ''}`;
-    return '';
   }
   clearWord() {
     this.word = "";

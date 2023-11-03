@@ -74,6 +74,12 @@
                     </tbody>
                 </table>
                 <div
+                    class="no-exist-elements"
+                    *ngIf="!showPreloader && tickets.length == 0"
+                >
+                    We couldn't find any results
+                </div>
+                <div
                     class="loading pengind-loading"
                     *ngIf="showPendingPreloader"
                 ></div>

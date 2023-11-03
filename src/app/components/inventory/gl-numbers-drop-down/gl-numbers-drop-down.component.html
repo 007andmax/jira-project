@@ -3,6 +3,7 @@
     [ngClass]="class"
     [container]="container"
     [ngStyle]="{'width':widthInput ? widthInput : '100%'}"
+    #dp="ngbDropdown"
 >
     <div
         *ngIf="title"
@@ -27,8 +28,9 @@
         class="qt-dropdown-input"
         [attr.maxlength]="maxlength"
         (input)="onCheckAdd($event)"
+        (focus)="onFocus($event)"
         [readonly]="!change"
-        ngbDropdownToggle
+        ngbDropdownAnchor
     >
     <span
         class="app-drop-down__right-icon pointer"

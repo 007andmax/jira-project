@@ -15,6 +15,7 @@ import { CompanyUser } from './class/company-user';
   providers: [TicketsListService],
 })
 export class CompanyUsersDropDownComponent extends DropDownComponent {
+
   selectedCustomerCompany: UserCustomerCompaniesInfo;
   constructor(public elRef: ElementRef,
     public companiesStateService: CompaniesStateService,

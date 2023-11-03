@@ -30,14 +30,17 @@
                     </ng-template>
                 </tbody>
             </table>
-
-
-
         </div>
         <div
             class="loading"
             *ngIf="showPreloader"
         ></div>
+        <div
+            class="no-exist-elements"
+            *ngIf="!showPreloader && payments.length == 0"
+        >
+            We couldn't find any results
+        </div>
         <div
             class="loading pengind-loading"
             *ngIf="showPendingPreloader"

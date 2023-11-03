@@ -37,3 +37,8 @@ tr {
   max-width: 434px;
   min-width: 434px;
 }
+.user-primary-email {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

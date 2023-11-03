@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
@@ -12,7 +13,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 })
 export class DropDownComponent implements OnInit {
   selectedItem = null;
-
+  @ViewChild('dp') dp: NgbDropdown;
   @Input() dropdownWidth: string = null;
   @Input() dropdownHeight: string = null;
 
@@ -35,7 +36,7 @@ export class DropDownComponent implements OnInit {
   @Input() maxlength: number = null;
   @Input() isDisabled: boolean = false;
   @Input() reducerItem: Function = (item) => (this.field) ? item[this.field] : item;
-
+  @Input() reducerSelectedItem: Function = () => (this.field) ? (this.selectedItem) ? this.selectedItem[this.field] : "" : this.selectedItem;
   @Input() list = [];
   @Input() placeholder = '';
 
@@ -81,6 +82,10 @@ export class DropDownComponent implements OnInit {
     }
     this.ref.markForCheck();
   }
+  public onFocus(event) {
+    if (!this.dp.isOpen()) this.dp.open();
+    console.log("this.dp", this.dp);
+  }
   public addNewItem(data) {
     this.reqList.push(data);
     if (this.sort) this.reqList.sort((a, b) => (this.field) ? a[this.field].localeCompare(b[this.field]) : a.localeCompare(b));
@@ -93,7 +98,7 @@ export class DropDownComponent implements OnInit {
     this.ref.detectChanges();
   }
   getSelectedItemText() {
-    return (this.field) ? (this.selectedItem) ? this.selectedItem[this.field] : "" : this.selectedItem;
+    return this.reducerSelectedItem(this.selectedItem);
   }
   public selectItemWithOutChanges(data) {
     this.isAdd = false;

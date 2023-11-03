@@ -73,6 +73,20 @@ export class UsersStateService {
       if (newChange.action == "PERMISSIONS_UPDATE") this.onChangeUserPermissions.emit(newChange.data);
     });
   }
+  public getUserAvatarUrl(user) {
+    if (!(user && user.avatar)) return '';
+    if (user.id) {
+      return `url(/users/${user.id}/image${(user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
+        '')}) 0% 0% / contain no-repeat`
+    } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
+      return `url(/file/${(user.avatar.origin.id)}.jpg) 0% 0% / contain no-repeat`;
+    }
+  };
+  getNameForAvatar(createdUser) {
+    if (!createdUser) return '';
+    if (!createdUser.avatar) return `${(createdUser.firstName) ? createdUser.firstName[0].toUpperCase() : ''}${(createdUser.lastName) ? createdUser.lastName[0].toUpperCase() : ''}`;
+    return '';
+  }
   public initSelectAllusers(data) {
     this.onSelectAll.emit(data);
   }

@@ -6,8 +6,8 @@
         <div class="qt-df qt-ai-c ticket-table__requested-by-inner">
             <div
                 class="qt-table-modern__circle-avatar"
-                [ngClass]="!getNameForAvatar().length ? 'transparent-text' : ''"
-                [textContent]="getNameForAvatar()"
+                [ngClass]="!usersStateService.getNameForAvatar(requestedUser).length ? 'transparent-text' : ''"
+                [textContent]="usersStateService.getNameForAvatar(requestedUser)"
                 [ngStyle]="{'background': ticketsListService.getStyleAvatar(requestedUser,listColorNoAvatar[indexNoAvatar]) }"
             ></div>
             <div

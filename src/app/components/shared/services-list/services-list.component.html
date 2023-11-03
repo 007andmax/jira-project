@@ -12,8 +12,9 @@
         (input)="onSearch($event)"
         id="dropdownServices"
         autocomplete="new-password"
-        ngbDropdownToggle
+        (focus)="onFocus($event)"
         [disabled]="isDisabled"
+        ngbDropdownAnchor
     >
     <i class="icn-sm report-caret-icon"></i>
     <div

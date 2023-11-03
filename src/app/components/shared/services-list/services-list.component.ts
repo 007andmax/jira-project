@@ -38,7 +38,10 @@ export class ServicesListComponent implements OnInit {
     if (this.editItem && this.type === TYPE_QUOTE) this.elRef.nativeElement.querySelector('#dropdownServices').value = this.getNameOrDescription(this.editItem);
     if (this.editItem && this.type === TYPE_TICKET) this.elRef.nativeElement.querySelector('#dropdownServices').value = this.getNameOrDescription(this.editItem);
   }
-
+  public onFocus(event) {
+    if (!this.products_dropDown.isOpen()) this.products_dropDown.open();
+    console.log("this.products_dropDown", this.products_dropDown);
+  }
   onSearch(event) {
     this.searchName = (event.target.value.length > 0) ? event.target.value : null
   }

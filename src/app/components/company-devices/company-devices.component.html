@@ -78,10 +78,10 @@
                 *ngIf="showPreloader"
             ></div>
             <div
-                class="no-exist-devices"
-                *ngIf="!showPreloader && devices.length === 0"
+                class="no-exist-elements"
+                *ngIf="!showPreloader && devices.length == 0"
             >
-                No devices installed
+                We couldn't find any results
             </div>
         </div>
     </div>
