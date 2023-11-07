@@ -1,11 +1,6 @@
 <div class="qt-page-list__header --sticky">
     <div class="qt-page-list__header-title-line qt-mb-16">
         <div class="qt-page-list__header-title-line--left">
-            <div
-                _ngcontent-otb-c83
-                class="icon__menu-white qt-sz-24 qt-bg-contain qt-ml-6 pointer qt-d-none qt-d-md-block"
-                (click)="toggleMobileLeftPanel()"
-            ></div>
             <h6 class="qt-page-list__header-title">
                 All Companies ({{calculateCount.getCurrent()}})
             </h6>
@@ -53,7 +48,7 @@
                 <button
                     class="qt-btn --transparent"
                     (click)="clearAll()"
-                    *ngIf="countFilter > 0 && !appService.checkMobile()"
+                    *ngIf="countFilter > 0"
                 >
                     Clear All
                 </button>
@@ -65,7 +60,7 @@
                 >
                     <span
                         class="filter-counter qt-circle qt-sz-18 qt-ff-sb qt-fs-10 qt-color-white qt-bg-info qt-mr-8 qt-df qt-ai-c qt-jc-c"
-                        *ngIf="countFilter > 0 && !appService.checkMobile()"
+                        *ngIf="countFilter > 0"
                         [textContent]="countFilter"
                     ></span>
                     <span class="qt-d-md-none">Filters</span>

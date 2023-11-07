@@ -534,10 +534,7 @@
         </div>
     </div>
     <div class="qt-aside-modern__footer">
-        <div
-            class="qt-df"
-            *ngIf="!appService.checkMobile()"
-        >
+        <div class="qt-df">
             <button
                 class="qt-button qt-mr-12"
                 appDisabledBtn
@@ -553,27 +550,6 @@
                 (click)="close()"
             >
                 Cancel
-            </button>
-        </div>
-        <div
-            class="qt-df"
-            *ngIf="appService.checkMobile()"
-        >
-            <button
-                class="qt-button --gray"
-                (click)="close()"
-            >
-                Cancel
-            </button>
-            <button
-                class="qt-button"
-                appDisabledBtn
-                #addBtn="disabled"
-                (onClick)="onUpdateFull()"
-                [ngClass]="{'--loading':addBtn.isBlock()}"
-            >
-                <span>Update Company</span>
-                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
             </button>
         </div>
         <div class="qt-mr-50 create-contract-container">

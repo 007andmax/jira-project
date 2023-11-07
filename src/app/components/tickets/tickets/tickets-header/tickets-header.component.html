@@ -1,9 +1,5 @@
 <div class="qt-page-list__header --sticky">
     <div class="qt-page-list__header-title-line">
-        <div
-            class="icon__menu-white qt-sz-24 qt-bg-contain qt-ml-6 pointer"
-            (click)="toggleMobileLeftPanel()"
-        ></div>
         <tickets-filter-info [title]="title"></tickets-filter-info>
         <div class="qt-page-list__header-title-line--rigth">
             <div class="qt-df qt-ai-c">
@@ -22,7 +18,7 @@
                 <button
                     class="qt-btn --transparent qt-mr-8"
                     (click)="clearAll()"
-                    *ngIf="countFilter > 0 && !appService.checkMobile()"
+                    *ngIf="countFilter > 0"
                 >
                     Clear all
                 </button>
@@ -55,28 +51,7 @@
             </div>
         </div>
     </div>
-    <div class="qt-page-list__header-filters">
-        <app-tickets-filter
-            *ngIf="appService.checkMobile()"
-            class="qt-w100"
-            #filter
-            (changeCountFilter)="onChangeCountFilter($event)"
-            [hidden]="!toggleFilter"
-            (onClose)="onToggleFilter(false)"
-        ></app-tickets-filter>
-    </div>
-    <!-- <div class="qt-page-list__header-thead-container"> -->
-    <!-- <div class="qt-table-modern qt-page-list__header-thead"> -->
-    <!-- <div class="qt-page-list__header-thead__row"> -->
-    <!-- <div class="ticket-table__requested-by">Requested By</div> -->
-    <!-- <div class="ticket-table__subject">Subject</div> -->
-    <!-- <div class="ticket-table__company">Company</div> -->
-    <!-- <div class="ticket-table__assignee">Assignee</div> -->
-    <!-- <div class="ticket-table__status">Status</div> -->
-    <!-- <div class="ticket-table__created-date">Created Date</div> -->
-    <!-- </div> -->
-    <!-- </div> -->
-    <!-- </div> -->
+    <div class="qt-page-list__header-filters"></div>
 </div>
 <div
     class="list-filters"

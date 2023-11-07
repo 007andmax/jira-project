@@ -43,7 +43,6 @@ export class DocumentsHeaderComponent implements OnInit {
    * Initializes Password manager header. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-    if (this.appService.checkMobile()) this.toggleFilter = true;
     this.activePage = this.leftPanelStateService.activePage;
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
       this.activePage = data;

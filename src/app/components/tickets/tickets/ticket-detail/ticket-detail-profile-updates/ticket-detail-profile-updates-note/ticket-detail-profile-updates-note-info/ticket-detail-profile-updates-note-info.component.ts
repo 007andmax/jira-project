@@ -26,10 +26,6 @@ export class TicketDetailProfileUpdatesNoteInfoComponent implements OnInit {
     this.note = (this.update) ? this.getHtml(this.update.note) : '';
   }
   public edit() {
-    if (this.appService.checkMobile()) {
-      this.ticketStateService.setEditUpdate({ updateId: this.update.id, update: this.update, type: this.update.type });
-      return;
-    }
     this.onEdit.emit(null);
   }
   public getHtml(value) {

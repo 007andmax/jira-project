@@ -64,7 +64,6 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    if (this.appService.checkMobile()) this.toggleFilter = true;
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
       this.userFilter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions, data.tags);
     })

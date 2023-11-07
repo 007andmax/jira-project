@@ -19,7 +19,6 @@ export class ContractsHeaderComponent implements OnInit {
     public appService: AppService) { }
 
   ngOnInit() {
-    if (this.appService.checkMobile()) this.toggleFilter = true;
   }
   public showCreate() {
     this.contractsStateService.toggleCreate(true);

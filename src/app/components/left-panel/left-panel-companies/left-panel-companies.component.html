@@ -127,5 +127,5 @@
     [selectedCompany]="selectedCompany"
     (onChangeState)="goToState($event)"
     [activePage]="activePage"
-    *ngIf="selectedCompany && !appService.checkMobile()"
+    *ngIf="selectedCompany"
 ></app-left-panel-company>

@@ -50,7 +50,6 @@ import 'froala-editor/js/third_party/image_tui.min';
 import 'froala-editor/js/third_party/spell_checker.min';
 import 'froala-editor/js/third_party/embedly.min';
 import { CommonModule } from '@angular/common';
-import { TicketEditAsideModule } from './components/tickets/tickets/ticket-edit-aside/ticket-edit-aside.module';
 import { LeftPanelModule } from './components/left-panel/left-panel.module';
 import { CompanyAddAsideModule } from './components/companies/company-add-aside/company-add-aside.module';
 import { DraftEmailModule } from './components/shared/draft-email/draft-email.module';
@@ -179,7 +178,6 @@ declare var $: any;
     }),
     BrowserAnimationsModule,
     AngularEditorModule,
-    TicketEditAsideModule,
     LeftPanelModule,
     CompanyAddAsideModule,
     DraftEmailModule,

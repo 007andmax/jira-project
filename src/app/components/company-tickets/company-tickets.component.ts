@@ -167,19 +167,9 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     this.onScroll();
   }
   editTicket(id) {
-    if (!this.appService.isMobile) {
-      this.ticketStateService.setTicketRoutingId(id);
-      const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/ticket/${id}`;
-      window.open(url, '_blank');
-    } else {
-      this.idEditTicket = id;
-      let ticket = this.tickets.find(item => item.id === id);
-      this.ticketsStateService.onOpenTicket();
-      this.ticketsService.getTicket(id).subscribe(data => {
-        data.setUserCompanies(ticket.userCompanies);
-        this.ticketsStateService.onEditTicket(data);
-      })
-    }
+    this.ticketStateService.setTicketRoutingId(id);
+    const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/ticket/${id}`;
+    window.open(url, '_blank');
   }
   private getTickets() {
     if (this.ticketsListService.getBlockList()) {

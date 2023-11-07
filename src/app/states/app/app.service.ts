@@ -4,10 +4,7 @@ import * as $ from 'jquery';
   providedIn: 'root'
 })
 export class AppService {
-  isMobile: boolean = false;
   isInit: boolean = false;
-  onMobile: EventEmitter<any> = new EventEmitter();
-  onToggleMobileAside: EventEmitter<any> = new EventEmitter();
   init: EventEmitter<any> = new EventEmitter();
   onLockScreen: EventEmitter<any> = new EventEmitter();
   onSessionScreen: EventEmitter<any> = new EventEmitter();
@@ -16,9 +13,6 @@ export class AppService {
     this.isInit = true;
     this.init.emit(null);
 
-  }
-  public toggleMobileAside(data) {
-    this.onToggleMobileAside.emit(data);
   }
   public showSessionScreen(data) {
     this.onSessionScreen.emit(data);
@@ -31,17 +25,6 @@ export class AppService {
   }
   public getIsInit() {
     return this.isInit;
-  }
-  public checkMobile() {
-    return this.isMobile;
-  }
-  public getOnMobile() {
-    return this.onMobile;
-  }
-
-  public setMobile(data) {
-    this.isMobile = data;
-    this.onMobile.emit(data);
   }
   public downloadByUrl(url, fileName) {
     let isChrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
@@ -120,14 +103,6 @@ export class AppService {
       e.initEvent('click', true, true);
       link.dispatchEvent(e);
       return true;
-    }
-  }
-
-  public onCheckMobile = () => {
-    if (document.documentElement.clientWidth <= 768 && !this.checkMobile()) {
-      this.setMobile(true);
-    } else if (document.documentElement.clientWidth > 768 && this.checkMobile()) {
-      this.setMobile(false);
     }
   }
 }

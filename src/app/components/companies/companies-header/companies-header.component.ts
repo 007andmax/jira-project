@@ -44,7 +44,6 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
     private companiesState: CompaniesStateService) { }
 
   ngOnInit() {
-    if (this.appService.checkMobile()) this.toggleFilter = false;
     this.calculateCount = this.companiesState.getCalculateCount();
     let getOnCalculateCount = this.companiesState.getOnCalculateCount().subscribe((data) => {
       this.calculateCount = data;
@@ -82,11 +81,6 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
     this.companiesStateService.setCompnayForArchive(this.draftEmailStateService.getSelectedCompanies()[0]);
     this.cd.detectChanges();
   }
-  toggleMobileLeftPanel() {
-    this.leftPanelStateService.toggleMobileLeftPanel(true);
-    this.appService.toggleMobileAside(true);
-    this.cd.detectChanges();
-  }
   isExistFilters() {
     return this.filter.companyFilter.clientType ||
       this.filter.companyFilter.clientIndustry ||
@@ -94,7 +88,6 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
       this.filter.companyFilter.techUser
   }
   onToggleFilter(data) {
-    if (this.appService.checkMobile()) this.appService.toggleMobileAside(data);
     this.toggleFilter = data;
     this.cd.markForCheck();
   }
