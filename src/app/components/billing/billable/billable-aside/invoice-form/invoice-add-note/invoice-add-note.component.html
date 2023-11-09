@@ -1,39 +1,44 @@
 <div class="qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24 qt-pos-rel">
     <div class="qt-popup-arrow --bottom"></div>
     <div class="qt-mb-20 qt-fw-600 qt-fs-15 qt-lh-133">Add Saved Note</div>
-    <div class="qt-mb-16">
+    <div class="qt-mb-16 --required">
         <div class="qt-input-block qt-lh-154">
             <mat-error
-                class="qt-tooltip-error"
+                class="invalid-feedback"
                 *ngIf="!validate.getTitle()"
             >
-                Subject is required
+                Title is required
             </mat-error>
             <label>Note Subject</label>
             <input
-                [ngClass]="{'--input-error':!validate.getTitle()}"
+                minlength="1"
+                maxlength="30"
+                (input)="validate.resetTitle();"
+                [ngClass]="{'--input-error' : !validate.getTitle()}"
                 type="text"
                 [(ngModel)]="createNote.title"
-                (blur)="validate.checkValidTitle(createNote.title)"
                 placeholder="Write Note Subject"
             >
         </div>
     </div>
-    <div class="qt-mb-24">
+    <div class="qt-mb-24 --required">
         <div class="qt-input-block qt-text-area-block">
             <mat-error
-                class="qt-tooltip-error"
-                *ngIf="!validate.getLine1()"
+                class="invalid-feedback"
+                *ngIf="!validate.getContent()"
             >
                 Description is required
             </mat-error>
             <label class="qt-lh-154">Note Description</label>
             <textarea
-                [ngClass]="{'--input-error':!validate.getLine1()}"
                 class="qt-input-block__textarea"
-                [(ngModel)]="createNote.line1"
-                (blur)="validate.checkValidLine1(createNote.line1)"
-                placeholder="Write Note Description"
+                [(ngModel)]="createNote.content"
+                placeholder="Write your note description"
+                (input)="validate.resetContent();"
+                [ngClass]="{'--input-error' : !validate.getContent()}"
+                row="8"
+                minlength="1"
+                maxlength="500"
             ></textarea>
         </div>
     </div>

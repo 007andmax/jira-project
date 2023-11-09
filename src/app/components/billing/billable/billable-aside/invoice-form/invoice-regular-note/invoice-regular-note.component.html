@@ -30,7 +30,7 @@
                 [placeholder]="'Select Saved Notes'"
                 [class]="['light-dropdown']"
                 [field]="'title'"
-                [list]="regularNotes"
+                [list]="invoiceNotes"
                 [valid]="validNote"
                 (onChangeInput)="onCheckUpdateTitleNote($event)"
                 (onSelectedItem)="onSelectNotes($event)"
@@ -46,7 +46,6 @@
                 ngbTooltip="Add Note"
                 id="dropdownAddNote"
                 ngbDropdownToggle
-                *ngIf="getLenRegularNotes() < 5"
             >
                 <div
                     class="billable-popup-add-note"

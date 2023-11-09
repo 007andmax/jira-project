@@ -66,7 +66,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.onSetEditTickets();
-    this.globalNote = this.invoiceNotes.filter(item => item.noteType === "GLOBAL")[0];
+    // this.globalNote = this.invoiceNotes.filter(item => item.noteType === "GLOBAL")[0];
     if (this.billableStateService.getGlobalNote()) this.globalNote = this.billableStateService.getGlobalNote();
     this.currentCompany = this.companiesStateService.getCurrentCompany();
     if (this.invoice.invoiceDataDto.termsAndConditions) this.elRef.nativeElement.querySelector("#description-global-note").value = this.invoice.invoiceDataDto.termsAndConditions;
@@ -146,7 +146,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
         id: this.globalNote.id,
         line1: this.elRef.nativeElement.querySelector("#description-global-note").value,
         line2: "",
-        noteType: this.globalNote.noteType,
+        // noteType: this.globalNote.noteType,
         title: this.globalNote.title
       })
     })

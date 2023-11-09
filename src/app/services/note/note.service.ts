@@ -21,14 +21,6 @@ export class NoteService {
   ) { }
 
   /**
-   * Create new note
-   * @param data - new note data
-   */
-  public createNote(data) {
-    return this.http.post(`${this.apiUrl}invoice/createInvoiceNote?createRegular=${data[0].noteType === "REGULAR"}`, data);
-  }
-
-  /**
    * Update note
    * @param id - id of note
    * @param data - note data for updated note

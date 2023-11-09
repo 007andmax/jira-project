@@ -1,0 +1,70 @@
+<div
+    class="qt-aside-modern qt-aside-modern--page-settings sidebar-popup tmp-edit --sm opened"
+    *ngIf="toggleAdd"
+>
+    <div class="qt-aside-modern__header">
+        <div class="qt-aside-modern__header-title">Added Custom note</div>
+    </div>
+    <div class="qt-aside-modern__content --required">
+        <div class="qt-input-block qt-input-line ">
+            <label class="qt-input-block__label">Title</label>
+            <input
+                class="qt-input-block__input"
+                type="text"
+                placeholder="Write Title"
+                [(ngModel)]="customeNote.title"
+                minlength="1"
+                maxlength="30"
+                (input)="validate.resetTitle();"
+                [ngClass]="{'--input-error' : !validate.getTitle()}"
+            >
+            <mat-error
+                class="invalid-feedback"
+                *ngIf="!validate.getTitle()"
+            >
+                Title is required
+            </mat-error>
+        </div>
+
+        <div class="qt-input-block qt-input-line --required">
+            <label
+                class="qt-input-block__label"
+                for="myEditor"
+            >
+                Note description
+            </label>
+            <textarea
+                class="qt-input-block__textarea"
+                row="8"
+                minlength="1"
+                maxlength="500"
+                [(ngModel)]="customeNote.content"
+                placeholder="Write your note description"
+                (input)="validate.resetContent();"
+                [ngClass]="{'--input-error' : !validate.getContent()}"
+            ></textarea>
+            <mat-error
+                class="invalid-feedback"
+                *ngIf="!validate.getContent()"
+            >
+                Description is required
+            </mat-error>
+        </div>
+    </div>
+    <div class="qt-aside-modern__footer">
+        <div class="qt-df qt-w100">
+            <button
+                class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
+                (click)="close()"
+            >
+                Cancel
+            </button>
+            <button
+                class="qt-button qt-jc-c qt-w100"
+                (click)="add()"
+            >
+                Save
+            </button>
+        </div>
+    </div>
+</div>

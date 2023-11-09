@@ -84,7 +84,7 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     });
     if (this.quoteStateService.getQuoteForCopy()) this.onInitCopy();
     if (!this.customerPortalStateService.isCustomerPortal) this.getInvoiceNote();
-    if (!this.quoteStateService.getQuoteForCopy()) this.quote.regularNote.setDefault();
+    if (!this.quoteStateService.getQuoteForCopy()) this.quote.regularNote = new InvoiceNote();
     this.sub.add(getChangeCompanies);
   }
   onInitCopy() {
@@ -133,7 +133,7 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   }
   private getInvoiceNote() {
     this.billableService.getInvoiceNote().subscribe(data => {
-      if (this.quoteStateService.getQuoteForCopy() && this.quote.regularNote && this.quote.regularNote.line1.length > 0) {
+      if (this.quoteStateService.getQuoteForCopy() && this.quote.regularNote && this.quote.regularNote.title.length > 0) {
         let find = data.find(item => item.id === this.quote.regularNote.id);
         if (!find) this.quote.regularNote.id = "";
         this.billableStateService.setRegulatNote(this.quote.regularNote);
