@@ -49,7 +49,8 @@ export class InvoiceRegularNoteComponent implements OnInit {
       this.validNote = false;
       return;
     };
-    this.noteService.updateNote({ "title": this.selectedNote.title, "line1": this.elRef.nativeElement.querySelector("#description-regular-note").value, "line2": "" }, this.selectedNote.id).subscribe(data => {
+    this.selectedNote.content = this.elRef.nativeElement.querySelector("#description-regular-note").value;
+    this.billableService.editNote(this.selectedNote.id, this.selectedNote.getDataForAdd()).subscribe(data => {
       this.changeRegularNote = false;
       this.billableStateService.setRegulatNote({
         id: this.selectedNote.id,

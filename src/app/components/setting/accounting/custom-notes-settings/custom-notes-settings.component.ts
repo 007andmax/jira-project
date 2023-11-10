@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
 import { InvoiceNote } from 'src/app/components/billing/billable/class/invoice-note';
+import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
+import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
+import { DELETE_NOTE } from 'src/app/const/confirm';
 import { BillableService } from 'src/app/services/billable/billable.service';
 import { BillableStateService } from 'src/app/states/billable/billable-state.service';
 
@@ -8,17 +13,35 @@ import { BillableStateService } from 'src/app/states/billable/billable-state.ser
   templateUrl: './custom-notes-settings.component.html',
   styleUrls: ['./custom-notes-settings.component.scss']
 })
-export class CustomNotesSettingsComponent implements OnInit {
+export class CustomNotesSettingsComponent implements OnInit, OnDestroy {
   invoiceNotes: Array<InvoiceNote> = [];
   showPreloader: boolean = true;
+  sub: Subscription = new Subscription();
   constructor(private billableService: BillableService,
-    private billableStateService: BillableStateService) { }
+    private billableStateService: BillableStateService,
+    private confirmStateService: ConfirmStateService,
+    private modalService: NgbModal) { }
+
 
   ngOnInit() {
     this.billableService.getInvoiceNote().subscribe(data => {
       this.invoiceNotes = data.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
         1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
       this.showPreloader = false;
+    })
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === DELETE_NOTE) {
+          this.onRemoveNote();
+        }
+      }
+    })
+    this.sub.add(getConfirm);
+  }
+  onRemoveNote() {
+    this.billableService.deleteNote(this.billableStateService.getNoteForRemove().id).subscribe(data => {
+      let index = this.invoiceNotes.findIndex(item => item.id == this.billableStateService.getNoteForRemove().id);
+      this.invoiceNotes.splice(index, 1);
     })
   }
   addNote(data) {
@@ -33,5 +56,13 @@ export class CustomNotesSettingsComponent implements OnInit {
   editNote(data) {
     this.billableStateService.editNote(data);
   }
-
+  deleteNote(item) {
+    this.confirmStateService.setConfirmAction(DELETE_NOTE);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.message = `Remove Custom note`;
+    this.billableStateService.setNoteForRemove(item);
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

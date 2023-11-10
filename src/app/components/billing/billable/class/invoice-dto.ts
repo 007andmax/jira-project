@@ -28,7 +28,7 @@ export class InvoiceDto {
     number: string;
     phoneNumbers: Array<UserPhoneNumber> = [];
     productsSum: number;
-    regularNote: any;
+    note: any;
     senderAddress: string;
     senderUser: User;
     servicesSum: number;

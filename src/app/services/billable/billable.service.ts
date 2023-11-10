@@ -69,7 +69,7 @@ export class BillableService {
       }, err => {
         this.toastrService.error("The error has occurred, please check your entries");
         this.appStateService.changeDetectorRef();
-        return data;
+        return err;
       }));
   }
   public editNote(id, data) {
@@ -81,7 +81,19 @@ export class BillableService {
       }, err => {
         this.toastrService.error("The error has occurred, please check your entries");
         this.appStateService.changeDetectorRef();
+        return err;
+      }));
+  }
+  public deleteNote(id) {
+    return this.http.delete(this.apiUrl + `invoice/notes/${id}`).pipe(
+      tap(data => {
+        this.toastrService.success("The custom note has been successfully deleted");
+        this.appStateService.changeDetectorRef();
         return data;
+      }, err => {
+        this.toastrService.error("The error has occurred, please check your entries");
+        this.appStateService.changeDetectorRef();
+        return err;
       }));
   }
   public getTaxNumber() {

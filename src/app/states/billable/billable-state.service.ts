@@ -10,6 +10,7 @@ export class BillableStateService {
   selectedNote: InvoiceNote = null;
   globalNote: InvoiceNote = null;
   lockedTicketForRemove: string = null;
+  noteForRemove: InvoiceNote;
   create: EventEmitter<any> = new EventEmitter();
   preview: EventEmitter<any> = new EventEmitter();
   editCustomer: EventEmitter<any> = new EventEmitter();
@@ -17,6 +18,12 @@ export class BillableStateService {
   onAddNote: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
+  public setNoteForRemove(data) {
+    this.noteForRemove = data;
+  }
+  public getNoteForRemove() {
+    return this.noteForRemove;
+  }
   public initAddNote() {
     this.onAddNote.emit(null);
   }

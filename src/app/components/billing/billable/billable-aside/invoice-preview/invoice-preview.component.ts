@@ -19,13 +19,11 @@ export class InvoicePreviewComponent implements OnInit {
   @Input() invoiceTaxNumber: InvoiceTaxNumber;
   opened: boolean = false;
   sub: Subscription = new Subscription();
-  selectedNote: InvoiceNote = null;
   currentCompany: any;
   constructor(private billableStateService: BillableStateService,
     public companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
-    this.selectedNote = this.billableStateService.getRegularNote();
     this.currentCompany = this.companiesStateService.getCurrentCompany();
   }
   getCurrentCompanyPhone() {
