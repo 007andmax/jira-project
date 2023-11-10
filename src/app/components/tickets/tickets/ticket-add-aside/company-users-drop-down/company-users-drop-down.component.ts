@@ -45,7 +45,7 @@ export class CompanyUsersDropDownComponent extends DropDownComponent {
  * @returns {String} This is the result
 */
   getSelectedItemText() {
-    return (this.selectedItem) ? this.getUserName(this.selectedItem) : "";
+    return (this.selectedItem) ? `${this.getUserName(this.selectedItem)} - ${this.selectedCustomerCompany.clientCompanyName}` : "";
   }
   /**
  * @description Init logic to get user list from global request

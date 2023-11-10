@@ -304,8 +304,8 @@
                                     <button
                                         class="btn-new btn-primary-white qt-fs-0"
                                         (click)="getReportByDeviceIpSummary()"
-                                        [disabled]="deviceIpSummary.preloaderDevices || !deviceIpSummary.companyId || !deviceIpSummary.deviceId"
-                                        [ngClass]="{'--disabled':deviceIpSummary.preloaderDevices || !deviceIpSummary.companyId || !deviceIpSummary.deviceId}"
+                                        [disabled]="deviceIpSummary.preloaderDevices || !deviceIpSummary.companyId"
+                                        [ngClass]="{'--disabled':deviceIpSummary.preloaderDevices || !deviceIpSummary.companyId}"
                                     >
                                         Get Report
                                     </button>
@@ -454,8 +454,8 @@
                                     <button
                                         class="btn-new btn-primary-white qt-fs-0"
                                         (click)="getReportByHardwareSummary()"
-                                        [disabled]="hardwareSummaryReport.preloaderDevices || !hardwareSummaryReport.companyId || !hardwareSummaryReport.deviceId"
-                                        [ngClass]="{'--disabled':hardwareSummaryReport.preloaderDevices || !hardwareSummaryReport.companyId || !hardwareSummaryReport.deviceId}"
+                                        [disabled]="hardwareSummaryReport.preloaderDevices || !hardwareSummaryReport.companyId"
+                                        [ngClass]="{'--disabled':hardwareSummaryReport.preloaderDevices || !hardwareSummaryReport.companyId}"
                                     >
                                         Get Report
                                     </button>
@@ -594,8 +594,8 @@
                                     <button
                                         class="btn-new btn-primary-white qt-fs-0"
                                         (click)="getReportBySoftwareSummary()"
-                                        [disabled]="softwareSummaryReport.preloaderDevices || !softwareSummaryReport.companyId || !softwareSummaryReport.deviceId"
-                                        [ngClass]="{'--disabled':softwareSummaryReport.preloaderDevices || !softwareSummaryReport.companyId || !softwareSummaryReport.deviceId}"
+                                        [disabled]="softwareSummaryReport.preloaderDevices || !softwareSummaryReport.companyId"
+                                        [ngClass]="{'--disabled':softwareSummaryReport.preloaderDevices || !softwareSummaryReport.companyId}"
                                     >
                                         Get Report
                                     </button>
