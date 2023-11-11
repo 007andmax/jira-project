@@ -8,7 +8,7 @@
     @include flexbox;
     flex-direction: column;
     background-color: $background;
-    min-height: 550px;
+    min-height: calc(100vh - 109px);
     padding: 16px;
     width: 100%;
 

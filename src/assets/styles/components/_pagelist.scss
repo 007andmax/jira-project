@@ -163,7 +163,7 @@
     }
   }
   &__body-table-container {
-    min-height: 100vh;
+    min-height: calc(100vh - 110px - 64px - 80px); // Min Height For Ticket Table
     @media (hover:none) and (min-width: 767px), (pointer:coarse) and (min-width: 767px) {
       min-height: 100%;
     }
