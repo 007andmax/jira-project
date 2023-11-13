@@ -34,7 +34,7 @@ export class QuoteEdit extends QuotePreview {
             recipients: this.recipients,
             message: this.message,
             subject: this.subject,
-            regularNote: this.regularNote,
+            note: this.note,
             sendNotification: notification,
             billTo: this.billTo,
             shipTo: this.shipTo
@@ -57,7 +57,7 @@ export class QuoteEdit extends QuotePreview {
             products: this.products,
             services: this.services,
             termsAndConditions: this.termsAndConditions,
-            regularNote: this.regularNote,
+            note: this.note,
             message: this.message,
             billingAddress: this.billingAddress,
             shippingAddress: this.shippingAddress,
@@ -96,7 +96,7 @@ export class QuoteEdit extends QuotePreview {
         }
     }
     public setRegulatNote(data) {
-        this.regularNote = new InvoiceNote(data);
+        this.note = data;
     }
     public addProduct(item) {
         this.products.push(new QuoteProduct({ ...item, discountType: "PERCENT", itemOrder: 0, quantity: 1, markup: this.getMarkups(item) }));

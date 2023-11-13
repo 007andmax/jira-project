@@ -78,7 +78,7 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
     let getOnEdit = this.quoteStateService.getOnEdit().subscribe(quote => {
       this.quoteServices.getQuote(quote.id).subscribe((data) => {
         this.quote = new QuoteEdit(data);
-        // if (this.quote.regularNote && this.quote.regularNote.line1.length > 0) this.billableStateService.setRegulatNote(this.quote.regularNote);
+        if (this.quote.note && this.quote.note.length > 0) this.billableStateService.setRegulatNote(new InvoiceNote({ content: this.quote.note }));
         this.quoteCompany = new CompanyItem(JSON.parse(JSON.stringify(this.companiesState.getCompanies().find(item => item.id === this.quote.company.id))));
         // this.quote.setBillTo(this.quoteCompany.companyInfo.addresses[0].id);
         //if (this.quoteCompany.companyInfo.addresses.length == 2) this.quote.setShipTo(this.quoteCompany.companyInfo.addresses[1].id);
@@ -160,7 +160,7 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
     return totalTaxes;
   }
   public updateInvoiceData(request) {
-    this.quote.setRegulatNote(request.regularInvoiceNote);
+    this.quote.setRegulatNote(request.note);
     this.validate.resetValidate();
   }
   public onChangeQuoteNumber(data) {

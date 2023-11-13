@@ -117,6 +117,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
     this.isUnlock = true;
     this.billableService.unlock(this.invoice.lockId).subscribe(data => {
       this.billableStateService.setGlobalNote(null);
+      this.billableStateService.setRegulatNote(null);
       this.opened = false;
       this.isInit = false;
       this.showPreloader = true;
