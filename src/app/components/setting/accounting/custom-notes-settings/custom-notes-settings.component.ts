@@ -7,6 +7,7 @@ import { ConfirmStateService } from 'src/app/components/shared/confirm/services/
 import { DELETE_NOTE } from 'src/app/const/confirm';
 import { BillableService } from 'src/app/services/billable/billable.service';
 import { BillableStateService } from 'src/app/states/billable/billable-state.service';
+import { CustomNoteFilter } from './class/custom-note-filter';
 
 @Component({
   selector: 'custom-notes-settings',
@@ -16,6 +17,7 @@ import { BillableStateService } from 'src/app/states/billable/billable-state.ser
 export class CustomNotesSettingsComponent implements OnInit, OnDestroy {
   invoiceNotes: Array<InvoiceNote> = [];
   showPreloader: boolean = true;
+  filter: CustomNoteFilter = new CustomNoteFilter();
   sub: Subscription = new Subscription();
   constructor(private billableService: BillableService,
     private billableStateService: BillableStateService,
@@ -37,6 +39,9 @@ export class CustomNotesSettingsComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+  }
+  onFilter(field) {
+    this.filter.onFilter(field, this.invoiceNotes);
   }
   onRemoveNote() {
     this.billableService.deleteNote(this.billableStateService.getNoteForRemove().id).subscribe(data => {

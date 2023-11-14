@@ -1,4 +1,7 @@
-<div class="cmn-area">
+<div
+    class="cmn-area"
+    *ngIf="!showPreloader"
+>
     <div
         class="tab-pane__table"
         [ngClass]="{'cleat-height-dataTable':!showPreloader}"
@@ -7,7 +10,7 @@
             <div class="tab-pane__table-row">
                 <div
                     class="tab-pane__table-cell crm-settings-company-industry-table__industry-type pointer"
-                    (click)="onFilter('name')"
+                    (click)="onFilter('title')"
                 >
                     Title
                     <div class="qt-table-modern__sorting--new"></div>
@@ -59,11 +62,13 @@
                 </div>
             </div>
         </div>
-        <div
-            class="loading"
-            *ngIf="showPreloader"
-        ></div>
     </div>
 </div>
 <add-custom-notes-settings (onAddNote)="addNote($event)"></add-custom-notes-settings>
 <edit-custom-notes-settings (onEditNote)="updateNote($event)"></edit-custom-notes-settings>
+<div
+    class="loading-container"
+    *ngIf="showPreloader"
+>
+    <div class="loading"></div>
+</div>

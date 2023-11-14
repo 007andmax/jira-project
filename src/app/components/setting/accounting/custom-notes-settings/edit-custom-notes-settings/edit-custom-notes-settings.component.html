@@ -3,9 +3,9 @@
     *ngIf="toggleEdit"
 >
     <div class="qt-aside-modern__header">
-        <div class="qt-aside-modern__header-title">Added Custom note</div>
+        <div class="qt-aside-modern__header-title">Edit Custom note</div>
     </div>
-    <div class="qt-aside-modern__content --required">
+    <div class="qt-aside-modern__content">
         <div class="qt-input-block qt-input-line ">
             <label class="qt-input-block__label">Title</label>
             <input
@@ -14,7 +14,7 @@
                 placeholder="Write Title"
                 [(ngModel)]="customeNote.title"
                 minlength="1"
-                maxlength="30"
+                maxlength="100"
                 (input)="validate.resetTitle();"
                 [ngClass]="{'--input-error' : !validate.getTitle()}"
             >
@@ -25,8 +25,7 @@
                 Title is required
             </mat-error>
         </div>
-
-        <div class="qt-input-block qt-input-line --required">
+        <div class="qt-input-block qt-input-line">
             <label
                 class="qt-input-block__label"
                 for="myEditor"
@@ -41,7 +40,7 @@
                 [(ngModel)]="customeNote.content"
                 placeholder="Write your note description"
                 (input)="validate.resetContent();"
-                [ngClass]="{'--input-error' : !validate.getContent()}"
+                [ngClass]="{'--error' : !validate.getContent()}"
             ></textarea>
             <mat-error
                 class="invalid-feedback"
