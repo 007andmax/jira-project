@@ -12,7 +12,7 @@
             <label>Note Subject</label>
             <input
                 minlength="1"
-                maxlength="30"
+                maxlength="100"
                 (input)="validate.resetTitle();"
                 [ngClass]="{'--input-error' : !validate.getTitle()}"
                 type="text"
@@ -35,7 +35,7 @@
                 [(ngModel)]="createNote.content"
                 placeholder="Write your note description"
                 (input)="validate.resetContent();"
-                [ngClass]="{'--input-error' : !validate.getContent()}"
+                [ngClass]="{'--error' : !validate.getContent()}"
                 row="8"
                 minlength="1"
                 maxlength="500"
