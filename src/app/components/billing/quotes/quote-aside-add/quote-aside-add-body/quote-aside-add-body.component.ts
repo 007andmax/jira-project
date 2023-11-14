@@ -169,7 +169,7 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     return totalTaxes;
   }
   public updateInvoiceData(request) {
-    this.quote.setRegulatNote(request.regularInvoiceNote);
+    this.quote.setRegulatNote(request.note);
     this.validate.resetValidate();
   }
   selectProduct(data) {
