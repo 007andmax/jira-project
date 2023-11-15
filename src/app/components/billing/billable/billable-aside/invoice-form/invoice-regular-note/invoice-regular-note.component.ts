@@ -4,6 +4,7 @@ import { PartialUpdate } from '../class/partial-update';
 import { NoteService } from 'src/app/services/note/note.service';
 import { BillableService } from 'src/app/services/billable/billable.service';
 import { BillableStateService } from 'src/app/states/billable/billable-state.service';
+import { ValidateNote } from 'src/app/components/setting/accounting/custom-notes-settings/class/validate-note';
 
 @Component({
   selector: 'app-invoice-regular-note',
@@ -13,7 +14,7 @@ import { BillableStateService } from 'src/app/states/billable/billable-state.ser
 export class InvoiceRegularNoteComponent implements OnInit {
   @Input() invoiceNotes: Array<InvoiceNote> = [];
   @Output() onUpdateInvoiceData = new EventEmitter();
-  validNote: boolean = true;
+  validate: ValidateNote = new ValidateNote();
   selectedNote: InvoiceNote = null;
   toogleCustomerNote: boolean = false;
   changeRegularNote: boolean = false;
@@ -31,7 +32,7 @@ export class InvoiceRegularNoteComponent implements OnInit {
   }
   onCheckUpdateTitleNote(data) {
     if (this.selectedNote) {
-      this.validNote = true;
+      this.validate.resetTitle();
       this.changeRegularNote = true;
       this.selectedNote.title = data;
     }
@@ -44,11 +45,8 @@ export class InvoiceRegularNoteComponent implements OnInit {
     if (this.selectedNote) this.changeRegularNote = true;
   }
   onUpdateRegularNote() {
-    if (this.selectedNote.title.length == 0) {
-      this.validNote = false;
-      return;
-    };
     this.selectedNote.content = this.elRef.nativeElement.querySelector("#description-regular-note").value;
+    if (!this.validate.isValidate(this.selectedNote)) return;
     console.log("onUpdateRegularNote");
     this.billableService.editNote(this.selectedNote.id, this.selectedNote.getDataForAdd()).subscribe(data => {
       this.changeRegularNote = false;
@@ -60,6 +58,7 @@ export class InvoiceRegularNoteComponent implements OnInit {
     })
   }
   onChangeDescriptionNote() {
+    this.validate.resetContent();
     let request: PartialUpdate = new PartialUpdate(null, null, null, this.selectedNote.content, null, null);
     this.onUpdateInvoiceData.emit(request);
     this.billableStateService.setRegulatNote(this.selectedNote);
@@ -80,13 +79,14 @@ export class InvoiceRegularNoteComponent implements OnInit {
       this.onUpdateInvoiceData.emit(request);
       this.billableStateService.setRegulatNote(selectedNote);
     }
+    this.validate.resetContent();
 
   }
   onSelectNotes(data) {
     this.selectedNote = data;
     this.changeRegularNote = false;
+    this.validate = new ValidateNote();
     if (this.selectedNote) {
-      this.validNote = true;
       let request: PartialUpdate = new PartialUpdate(null, null, null, this.selectedNote.content, null, null);
       this.onUpdateInvoiceData.emit(request);
       this.elRef.nativeElement.querySelector("#description-regular-note").value = this.selectedNote.content;

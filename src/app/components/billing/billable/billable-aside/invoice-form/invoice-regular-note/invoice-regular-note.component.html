@@ -14,11 +14,12 @@
     </div>
     <div>
         <div
-            class="qt-mb-16 qt-input-block"
+            class="qt-input-block"
             *ngIf="toogleCustomerNote"
             ngbDropdown
             [autoClose]="'inside'"
             #addNoteDd="ngbDropdown"
+            [ngClass]="{'qt-mb-16':validate.getTitle(),'qt-mb-30':!validate.getTitle()}"
         >
             <div class="qt-df qt-input-block--horizontal">
                 <app-invoice-select-note
@@ -27,7 +28,7 @@
                     [class]="['light-dropdown']"
                     [field]="'title'"
                     [list]="invoiceNotes"
-                    [valid]="validNote"
+                    [valid]="validate.getTitle()"
                     [maxlength]="100"
                     (onChangeInput)="onCheckUpdateTitleNote($event)"
                     (onSelectedItem)="onSelectNotes($event)"
@@ -59,17 +60,26 @@
                 </div>
             </div>
         </div>
-        <textarea
-            (input)="onCheckUpdateDescriptionNote()"
-            (blur)="onChangeRegularNote()"
-            class="summary-info__textarea qt-input-block__textarea"
-            placeholder="Type your custom note here"
-            name
-            id="description-regular-note"
-            appTextArea
-            maxlength="250"
-            cols="30"
-            rows="1"
-        ></textarea>
+        <div class="qt-input-block qt-input-line">
+            <textarea
+                (input)="onCheckUpdateDescriptionNote()"
+                (blur)="onChangeRegularNote()"
+                class="summary-info__textarea qt-input-block__textarea"
+                placeholder="Type your custom note here"
+                name
+                id="description-regular-note"
+                appTextArea
+                maxlength="250"
+                cols="30"
+                rows="1"
+                [ngClass]="{'--error' : !validate.getContent()}"
+            ></textarea>
+            <mat-error
+                class="invalid-feedback"
+                *ngIf="!validate.getContent()"
+            >
+                Description is required
+            </mat-error>
+        </div>
     </div>
 </div>
