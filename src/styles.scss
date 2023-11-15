@@ -2501,8 +2501,6 @@ app-quotes-item {
   }
 }
 
-@import "./assets/styles/mobile.scss";
-
 @import "./assets/styles/dropdowns.scss";
 @import "./assets/styles/icons.scss";
 
@@ -2587,8 +2585,6 @@ ngb-typeahead-window {
   position: static;
   margin-top: 8px;
 }
-
-// @import './assets/styles/mobile.scss';
 
 /*** All css files include ***/
 @import "./src/assets/styles/variable";
