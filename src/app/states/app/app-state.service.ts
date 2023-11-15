@@ -6,6 +6,8 @@ import { EventEmitter, Injectable } from '@angular/core';
 export class AppStateService {
   onChangeDetectorRef: EventEmitter<any> = new EventEmitter();
   isServerError: boolean = false;
+  isCustomeError: boolean = false;
+  customeError: string;
   constructor() { }
 
   public changeDetectorRef() {
@@ -13,5 +15,9 @@ export class AppStateService {
   }
   public setServerError(data) {
     this.isServerError = data;
+  }
+  public setCustomeError(data, error = null) {
+    this.customeError = error;
+    this.isCustomeError = data;
   }
 }

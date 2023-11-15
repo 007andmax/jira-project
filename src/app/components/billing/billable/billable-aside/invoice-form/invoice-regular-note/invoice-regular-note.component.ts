@@ -49,6 +49,7 @@ export class InvoiceRegularNoteComponent implements OnInit {
       return;
     };
     this.selectedNote.content = this.elRef.nativeElement.querySelector("#description-regular-note").value;
+    console.log("onUpdateRegularNote");
     this.billableService.editNote(this.selectedNote.id, this.selectedNote.getDataForAdd()).subscribe(data => {
       this.changeRegularNote = false;
       this.billableStateService.setRegulatNote(new InvoiceNote({

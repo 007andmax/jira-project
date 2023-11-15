@@ -73,15 +73,13 @@ export class BillableService {
       }));
   }
   public editNote(id, data) {
+    this.appStateService.setCustomeError(true, "The error has occurred, please check your entries");
     return this.http.put(this.apiUrl + `invoice/notes/${id}`, data).pipe(
       tap(data => {
+        this.appStateService.setCustomeError(false);
         this.toastrService.success("The custom note has been successfully updated");
         this.appStateService.changeDetectorRef();
         return data;
-      }, err => {
-        this.toastrService.error("The error has occurred, please check your entries");
-        this.appStateService.changeDetectorRef();
-        return err;
       }));
   }
   public deleteNote(id) {
