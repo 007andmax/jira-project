@@ -36,6 +36,7 @@ export class InventoryComponent implements OnInit {
   taxes: Array<Tax> = [];
   showEdit = false;
   serviceAgreement: ServiceAgreement;
+  container = document.body.querySelector(".main-container");
   constructor(private productService: ProductService,
     private inventoryListService: InventoryListService,
     private companiesStateService: CompaniesStateService,
@@ -159,6 +160,7 @@ export class InventoryComponent implements OnInit {
     });
   }
   getProducts() {
+    console.log("getProducts", this.inventoryListService.getBlockList());
     if (this.inventoryListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;
@@ -175,6 +177,7 @@ export class InventoryComponent implements OnInit {
     }
     this.inventoryList = [...this.inventoryList, ...inventoryList];
     this.infiniteScrollDisabled = false;
+    console.log("listFilter", listFilter.length);
     if ((this.page_number * 30) > listFilter.length) this.inventoryListService.setBlockList(true);
     this.cd.detectChanges();
   }
