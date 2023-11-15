@@ -160,14 +160,12 @@ export class InventoryComponent implements OnInit {
     });
   }
   getProducts() {
-    console.log("getProducts", this.inventoryListService.getBlockList());
     if (this.inventoryListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;
     }
     this.page_number += 1;
     let listFilter = this.filter.getFilterList(this.reqInventoryList);
-    // listFilter = listFilter.filter(item => (this.productSearchName.length > 0) ? (item.description.toLowerCase().includes(this.productSearchName.toLowerCase()) || item.ilc && item.ilc.toLowerCase().includes(this.productSearchName.toLowerCase()) || item.isFindGlNumber(this.productSearchName) || item.manufacture && item.manufacture.toLowerCase().includes(this.productSearchName.toLowerCase())) : true);
     this.filter.onFilter(listFilter, this.companies, this.glNumbers);
     let start = (this.page_number - 1) * 30;
     let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
@@ -177,7 +175,6 @@ export class InventoryComponent implements OnInit {
     }
     this.inventoryList = [...this.inventoryList, ...inventoryList];
     this.infiniteScrollDisabled = false;
-    console.log("listFilter", listFilter.length);
     if ((this.page_number * 30) > listFilter.length) this.inventoryListService.setBlockList(true);
     this.cd.detectChanges();
   }
