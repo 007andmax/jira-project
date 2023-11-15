@@ -28,6 +28,7 @@
                     [field]="'title'"
                     [list]="invoiceNotes"
                     [valid]="validNote"
+                    [maxlength]="100"
                     (onChangeInput)="onCheckUpdateTitleNote($event)"
                     (onSelectedItem)="onSelectNotes($event)"
                 ></app-invoice-select-note>
@@ -35,6 +36,8 @@
                     class="qt-square-btn --done qt-ml-8"
                     (click)="onUpdateRegularNote()"
                     *ngIf="changeRegularNote"
+                    placement="top"
+                    ngbTooltip="Edit Note"
                 ></div>
                 <div
                     class="qt-square-btn --add qt-ml-8"

@@ -25,9 +25,8 @@ export class InvoiceRegularNoteComponent implements OnInit {
   ngOnInit() {
     this.selectedNote = this.billableStateService.getRegularNote();
     if (this.selectedNote) {
-      this.toogleCustomerNote = true;
       this.elRef.nativeElement.querySelector("#description-regular-note").value = this.selectedNote.content;
-      if (this.selectedNote.id === "") this.selectedNote = null;
+      if (!this.selectedNote.id) this.selectedNote = null;
     }
   }
   onCheckUpdateTitleNote(data) {
