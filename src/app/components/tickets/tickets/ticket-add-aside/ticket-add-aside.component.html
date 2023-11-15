@@ -123,7 +123,7 @@
             </div>
         </div>
         <div class="qt-inputs-row">
-            <div class="qt-input-block qt-f100 qt-flex-md-100">
+            <div class="qt-input-block qt-f100">
                 <company-users-drop-down
                     #userDP
                     [title]="'User'"
@@ -144,7 +144,7 @@
             class="qt-inputs-row"
             *ngIf="!customerPortalStateService.isCustomerPortal"
         >
-            <div class="qt-input-block qt-f50 qt-flex-md-100">
+            <div class="qt-input-block qt-f50">
                 <span class="qt-input-block__label">Assign To</span>
                 <app-drop-down
                     #techUserDP
@@ -156,7 +156,7 @@
                     [placeholder]="'Select User to assign'"
                 ></app-drop-down>
             </div>
-            <div class="qt-input-block qt-f50 qt-flex-md-100">
+            <div class="qt-input-block qt-f50">
                 <span class="qt-input-block__label">Device</span>
                 <app-drop-down
                     #deviceDP

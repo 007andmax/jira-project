@@ -32,10 +32,6 @@
         align-items: center;
         justify-content: center;
 
-        @media (max-width: 767px) {
-            display: none;
-        }
-
         .btn-icon {
             width: 16px;
             height: 16px;
@@ -48,35 +44,6 @@
     }
 
     &__input {
-        //position: relative; // TODO check this style
-        //height: 40px;
-        //margin-right: 8px;
-        //padding: 10px 12px;
-        //flex-grow: 1;
-        //outline: none;
-
-        @media (max-width: 767px) {
-            margin-right: 0;
-            margin-top: 42px;
-        }
-
-        @media (max-width: 767px) {
-            &::after {
-                position: absolute;
-                content: "Service";
-                left: 0;
-                top: -28px;
-                color: $gray-900;
-                font-size: 13px;
-                line-height: 20px;
-                letter-spacing: 0;
-                font-weight: 600;
-            }
-        }
-
-        //&::placeholder {
-        //  color: $gray-400;
-        //}
         &.description {
             width: 100%;
         }

@@ -264,33 +264,6 @@ html {
     }
   }
 }
-app-ticket-add-aside {
-  .qt-dropdown {
-    .icn-remove-old {
-      @media (max-width: 767px) {
-        top: calc(50% - 15px) !important;
-        right: 0;
-      }
-    }
-    .app-drop-down__right-icon {
-      @media (max-width: 767px) {
-        right: 0;
-      }
-      .icn-remove-old {
-        @media (max-width: 767px) {
-          right: 12px;
-        }
-      }
-    }
-  }
-  app-select-search {
-    .qt-dropdown .icn-remove-old {
-      @media (max-width: 767px) {
-        right: 12px;
-      }
-    }
-  }
-}
 .mat-form-field {
   font-family: "Inter", sans-serif;
   @include body-m;
@@ -447,10 +420,6 @@ company-associate {
       height: 30px;
       border-color: transparent;
       box-shadow: unset;
-
-      @media (max-width: 767px) {
-        height: 34px;
-      }
     }
   }
   .hidde-label {
@@ -752,10 +721,6 @@ documents-edit-info {
   }
   &__body {
     margin-bottom: 50px;
-
-    @media (max-width: 767px) {
-      margin-bottom: 32px;
-    }
     h3 {
       font-weight: 600;
       font-size: 20px;
@@ -770,10 +735,6 @@ documents-edit-info {
       line-height: 1.54;
       max-width: 398px;
       color: $gray-500;
-
-      @media (max-width: 767px) {
-        margin-top: 8px;
-      }
     }
   }
   &__footer {
@@ -787,23 +748,9 @@ documents-edit-info {
       margin-right: 16px;
       background-color: $red-600;
 
-      @media (max-width: 767px) {
-        margin-right: 8px;
-      }
-
       &:hover {
         background-color: darken($red-600, 10%);
       }
-    }
-  }
-}
-.archive-modal {
-  @media (max-width: 767px) {
-    padding: 16px;
-  }
-  .archive-modal__body h3:before {
-    @media (max-width: 767px) {
-      display: none;
     }
   }
 }
@@ -1015,46 +962,12 @@ app-quotes-item {
 }
 
 .quote-send-modal-users-to-notify {
-  .modal-dialog {
-    @media (max-width: 767px) {
-      margin: 0;
-      transform: translate(-50%, -50%) !important;
-      max-width: 360px;
-      max-height: 552px;
-      height: 100%;
-    }
-  }
-
-  .modal-content {
-    @media (max-width: 767px) {
-      height: 100%;
-      border: none;
-    }
-  }
-
   .users-to-notify {
-    @media (max-width: 767px) {
-      height: 100%;
-    }
-
     .qt-modal__header {
       padding: 16px 16px 8px;
-
-      @media (max-width: 767px) {
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: 100%;
-        max-width: 360px;
-        z-index: 1;
-      }
     }
     .qt-modal__body {
       padding: 0 16px 16px;
-
-      @media (max-width: 767px) {
-        padding: 0;
-      }
     }
   }
 
@@ -1063,9 +976,6 @@ app-quotes-item {
       &-item {
         display: flex;
         align-items: center;
-        @media (max-width: 767px) {
-          padding: 0 16px;
-        }
       }
 
       &-avatar {
@@ -1120,11 +1030,6 @@ app-quotes-item {
         margin-bottom: 0;
       }
 
-      label {
-        @media (max-width: 767px) {
-          margin-bottom: 0;
-        }
-      }
       &.qt-modal__body-content {
         input {
           background-color: $gray-50;
@@ -1149,46 +1054,15 @@ app-quotes-item {
     }
     .qt-modal__body {
       height: calc(100% - 70px);
-
-      @media (max-width: 767px) {
-        padding-top: 90px;
-      }
-    }
-    .qt-modal__body-content {
-      @media (max-width: 767px) {
-        position: fixed;
-        top: 42px;
-        left: 0;
-        max-width: 360px;
-        padding: 8px 16px;
-        width: 100%;
-        z-index: 1;
-        margin: 0;
-        background: $white;
-      }
     }
     .email-selects {
       overflow: auto;
       margin-bottom: 0 !important;
       height: calc(100% - 116px);
-
-      @media (max-width: 767px) {
-        height: 100%;
-      }
     }
     .qt-modal__footer {
       padding: 16px 0;
       justify-content: space-between;
-
-      @media (max-width: 767px) {
-        position: fixed;
-        max-width: 360px;
-        width: 100%;
-        bottom: 0;
-        left: 0;
-        padding: 16px;
-        background-color: $white;
-      }
 
       .qt-button {
         max-width: calc(100% - 8px);
@@ -1369,10 +1243,6 @@ app-quotes-item {
       height: 16px;
       background-size: cover;
       right: 7px;
-
-      @media (max-width: 767px) {
-        right: 15px;
-      }
     }
     .dropdown-menu {
       min-width: 80px;
@@ -1395,160 +1265,6 @@ app-quotes-item {
     align-items: flex-start;
   }
 
-  &.qt-page-list {
-    @media (max-width: 767px) {
-      padding: 0;
-    }
-  }
-
-  companies-filter {
-    @media (max-width: 767px) {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      max-height: calc(100vh - 70px);
-      padding: 70px 16px 50px;
-      height: 100%;
-      background: $white;
-      overflow: auto;
-    }
-  }
-
-  .filter-category {
-    @media (max-width: 767px) {
-      position: relative;
-      width: 100% !important;
-      margin-bottom: 16px;
-      margin-right: 0;
-    }
-
-    form,
-    .mat-form-field-wrapper {
-      @media (max-width: 767px) {
-        margin-top: 8px;
-      }
-    }
-    input:not(.mat-chip-input) {
-      @media (max-width: 767px) {
-        height: 40px !important;
-        color: $gray-900;
-      }
-    }
-
-    .app-drop-down__right-icon {
-      @media (max-width: 767px) {
-        transform: translateY(calc(50% - 2px));
-      }
-    }
-
-    &.tags {
-      > div::before {
-        @media (max-width: 767px) {
-          content: "Tags";
-          color: $gray-900;
-          font-weight: 600;
-          line-height: 20px;
-        }
-      }
-    }
-  }
-
-  app-drop-down.filter-category,gl-numbers-drop-down.filter-category,company-drop-down.filter-category {
-    > div::before {
-      @media (max-width: 767px) {
-        content: "Category";
-        color: $gray-900;
-        font-weight: 600;
-        line-height: 20px;
-      }
-    }
-
-    &.type {
-      > div::before {
-        @media (max-width: 767px) {
-          content: "Type";
-        }
-      }
-    }
-
-    &.sales-person {
-      > div::before {
-        @media (max-width: 767px) {
-          content: "Sales person";
-        }
-      }
-    }
-
-    &.industry {
-      > div::before {
-        @media (max-width: 767px) {
-          content: "Industry";
-        }
-      }
-    }
-  }
-
-  .qt-page-list__header {
-    @media (max-width: 767px) {
-      margin: 0;
-    }
-
-    .btn-filter {
-      @media (max-width: 767px) {
-        background-image: url("/assets/img/icons/filter-white.svg");
-        background-color: transparent;
-        background-size: 24px;
-        height: 24px;
-        width: 24px;
-        background-position: center;
-        padding: 0;
-      }
-    }
-
-    .qt-page-list__search {
-      @media (max-width: 767px) {
-        display: none;
-        z-index: 3;
-        position: fixed;
-        left: 0;
-        width: 100%;
-        top: 0;
-        background: $gray-900;
-        padding: 10px 16px;
-        margin-left: 0;
-      }
-
-      &.--open {
-        @media (max-width: 767px) {
-          display: flex;
-        }
-      }
-    }
-
-    .qt-page-list__header-title {
-      @media (max-width: 767px) {
-        color: $white;
-        font-size: 16px;
-        line-height: 24px;
-        letter-spacing: 0;
-        font-weight: 600;
-      }
-    }
-
-    .new-companies-content__header {
-      @media (max-width: 767px) {
-        margin: 0;
-      }
-    }
-  }
-
-  .qt-table-modern__row--lg {
-    @media (max-width: 767px) {
-      padding: 12px 16px;
-    }
-  }
-
   .new-companies-content__header-buttons {
     display: flex;
     padding: 8px 16px;
@@ -1559,33 +1275,6 @@ app-quotes-item {
     color: $gray-600;
     line-height: 1.33;
 
-    @media (max-width: 767px) {
-      position: fixed;
-      top: 0;
-      left: 0;
-      display: block;
-      width: 100%;
-      border-radius: 0;
-      z-index: 3;
-      padding: 0;
-    }
-    &-top,
-    &-bottom {
-      @media (max-width: 767px) {
-        display: flex;
-        align-items: center;
-        padding: 16px;
-      }
-    }
-    &-top {
-      @media (max-width: 767px) {
-        height: 56px;
-        background-color: $gray-900;
-        color: $white;
-        font-size: 13px;
-        line-height: 20px;
-      }
-    }
     &-bottom {
       height: 40px;
       background-color: $white;
@@ -1593,9 +1282,6 @@ app-quotes-item {
       display: none;
       font-size: 12px;
       line-height: 16px;
-      @media (max-width: 767px) {
-        display: flex;
-      }
     }
   }
 
@@ -1634,10 +1320,6 @@ app-quotes-item {
         color: $gray-400;
         padding: 9px 10px 9px 36px;
         top: 10px;
-
-        @media (max-width: 767px) {
-          top: 12px;
-        }
       }
       .mat-form-field-infix {
         min-height: 36px !important;
@@ -1650,10 +1332,6 @@ app-quotes-item {
           width: 16px;
           height: 16px;
           background: url("/assets/img/icons/tag.svg");
-
-          @media (max-width: 767px) {
-            top: 11px;
-          }
         }
       }
       .mat-form-field-appearance-legacy .mat-form-field-infix {
@@ -1714,25 +1392,11 @@ app-quotes-item {
   }
 
   .companies-table {
-    &.--selected {
-      @media only screen and (max-width: 768px) {
-        padding-top: 40px;
-      }
-    }
-
     &__check {
       flex: 0 0 48px;
-
-      @media only screen and (max-width: 768px) {
-        flex: 0 0 30px;
-      }
     }
     &__name {
       flex: 2 1 290px;
-
-      @media only screen and (max-width: 768px) {
-        max-width: calc(100% - 30px);
-      }
 
       .circle-avatar {
         background-color: $purple-500;
@@ -1747,14 +1411,6 @@ app-quotes-item {
       p {
         font-weight: 500;
         color: $gray-900;
-
-        @media only screen and (max-width: 768px) {
-          font-size: 16px;
-          line-height: 20px;
-          font-weight: 600;
-          max-height: 42px;
-          overflow: hidden;
-        }
       }
     }
     &__address {
@@ -1830,12 +1486,6 @@ app-quotes-item {
       .phone {
         @include body-m;
         color: $gray-400;
-        @media (max-width: 767px) {
-          max-width: 190px;
-          overflow: hidden;
-          text-overflow: inherit;
-          white-space: nowrap;
-        }
       }
     }
     &__email-address {
@@ -1888,14 +1538,6 @@ app-quotes-item {
         background-position: right;
       }
     }
-    @media (max-width: 767px) {
-      &__download-btn,
-      &__email-address,
-      &__address,
-      &__menu {
-        display: none;
-      }
-    }
   }
 
   app-companies-table {
@@ -1917,10 +1559,6 @@ app-quotes-item {
           border-right-color: $blue-light-600 !important;
         }
       }
-    }
-
-    @media (max-width: 767px) {
-      padding-bottom: 48px;
     }
   }
 }
@@ -2218,34 +1856,10 @@ app-quotes-item {
     }
   }
 }
-.add-category-aside-add-record {
-  @media (max-width: 767px) {
-    position: fixed;
-    background: rgba(16, 24, 39, 0.4);
-    transition: opacity 0.15s linear;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 2;
-  }
-}
 .page-list-ticket .qt-aside-modern__footer,
 .password-page .qt-aside-modern__footer,
 .companies-page .qt-aside-modern__footer {
   display: none;
-
-  @media (max-width: 767px) {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    width: 100%;
-    padding: 16px;
-    background: $white;
-  }
 }
 .new-users-content__modal--content {
   app-user-table-subscription {
@@ -2433,13 +2047,6 @@ app-quotes-item {
     top: calc(50% - 4px) !important;
     right: 11px;
   }
-  .company-time-zone-drop-down {
-    .report-caret-icon {
-      @media (max-width: 767px) {
-        right: 15px;
-      }
-    }
-  }
 
   .user-subscription {
     background: $white;
@@ -2473,10 +2080,6 @@ app-quotes-item {
 
       input {
         border: none;
-
-        @media (max-width: 767px) {
-          height: 40px !important;
-        }
       }
     }
     .mat-form-field-infix {
@@ -2500,10 +2103,6 @@ app-quotes-item {
 
     .mat-form-field-label {
       top: 10px;
-
-      @media (max-width: 767px) {
-        top: 11px;
-      }
     }
   }
   company-associate {
@@ -2696,9 +2295,6 @@ app-quotes-item {
 }
 
 .left-panel-ng2 {
-  @media (max-width: 414px) {
-    margin-bottom: 110px;
-  }
   [class*="left-panel-ng2__content"] {
     margin-bottom: 20px;
   }
@@ -2721,9 +2317,6 @@ app-quotes-item {
   &__content {
     color: $white;
     margin-top: $header-height;
-    @media (max-width: 414px) {
-      margin-top: 0;
-    }
     .list-item,
     .types-item {
       font-weight: 400;
@@ -3027,13 +2620,6 @@ ngb-typeahead-window {
   display: inline-block;
 }
 //  ticket edit aside
-.ticket-updates__service-tag-completed { // TODO check this style
-  @media (max-width: 767px) {
-    display: flex;
-    width: fit-content;
-    margin: 0;
-  }
-}
 app-ticket-profile-updates-note {
   .ticket-updates__author-line {
     width: 100%;
@@ -3102,22 +2688,12 @@ app-ticket-profile-updates-note {
   font-size: 14px;
   line-height: 17px;
   color: $gray-900;
-
-  @media (max-width: 767px) {
-    font-size: 12px;
-    line-height: 16px;
-  }
 }
 .ticket-updates__add-note { // TODO move to component ?
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
   color: $gray-500;
-
-  @media (max-width: 767px) {
-    font-size: 13px;
-    line-height: 24px;
-  }
 }
 .ticket-updates__update-info {
     font-weight: 400;
@@ -3171,17 +2747,6 @@ app-ticket-profile-updates-note {
   font-weight: 600;
 }
 
-.service-item {
-  @media (max-width: 767px) {
-    margin-bottom: 20px;
-  }
-  &:last-child {
-    @media (max-width: 767px) {
-      margin-bottom: 0;
-    }
-  }
-}
-
 .ticket-updates__date-icon {
   width: 24px !important;
   height: 24px !important;
@@ -3210,42 +2775,6 @@ app-ticket-profile-updates-service-timepicker {
   display: flex;
   flex-direction: column;
 
-  @media (max-width: 767px) {
-    margin-top: 42px;
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .start-end-timer {
-    @media (max-width: 767px) {
-      position: relative;
-      width: 100%;
-      justify-content: space-between;
-    }
-
-    &::before,
-    &::after {
-      @media (max-width: 767px) {
-        position: absolute;
-        content: "Time In";
-        left: 0;
-        top: -28px;
-        color: $gray-900;
-        font-size: 13px;
-        line-height: 20px;
-        letter-spacing: 0;
-        font-weight: 600;
-      }
-    }
-
-    &::after {
-      @media (max-width: 767px) {
-        content: "Time Out";
-        left: calc(50% + 8px);
-      }
-    }
-  }
-
   .time {
     .start,
     .end {
@@ -3265,95 +2794,6 @@ app-ticket-profile-updates-service-timepicker {
     }
     .end::after {
       content: "Time Out";
-    }
-  }
-}
-
-app-ticket-profile-form-update,
-ticket-profile-edit-form-update {
-  app-date-picker {
-    @media (max-width: 767px) {
-      width: 100%;
-      margin-top: 42px;
-    }
-
-    .input-group {
-      @media (max-width: 767px) {
-        width: 100%;
-        position: relative;
-      }
-
-      @media (max-width: 767px) {
-        &::after {
-          position: absolute;
-          content: "Service Date";
-          left: 0;
-          top: -28px;
-          color: $gray-900;
-          font-size: 13px;
-          line-height: 20px;
-          letter-spacing: 0;
-          font-weight: 600;
-        }
-      }
-    }
-  }
-
-  .editable-description {
-    @media (max-width: 767px) {
-      margin-top: 56px;
-      overflow: unset;
-    }
-
-    textarea {
-      @media (max-width: 767px) {
-        border-radius: 4px;
-      }
-    }
-
-    &::after {
-      @media (max-width: 767px) {
-        position: absolute;
-        content: "Description";
-        left: 0;
-        top: -28px;
-        color: $gray-900;
-        font-size: 13px;
-        line-height: 20px;
-        letter-spacing: 0;
-        font-weight: 600;
-      }
-    }
-  }
-
-  .service-item:last-child {
-    @media (max-width: 767px) {
-      margin-bottom: 16px;
-    }
-  }
-}
-
-app-ticket-profile-form-update {
-  app-ticket-profile-updates-service-duration {
-    @media (max-width: 767px) {
-      position: relative;
-      width: 100%;
-      margin-right: 0;
-      margin-top: 42px;
-    }
-
-    &::after {
-      @media (max-width: 767px) {
-        position: absolute;
-        content: "Duration picker";
-        left: 0;
-        top: -28px;
-        color: $gray-900;
-        font-size: 13px;
-        line-height: 20px;
-        letter-spacing: 0;
-        font-weight: 600;
-      }
     }
   }
 }
@@ -3432,18 +2872,11 @@ app-ticket-profile-form-update {
   &:after {
     @include product-item-input;
     content: "$";
-    left: unset;
     right: 22px;
     font-size: 13px;
     transform: translateY(0px);
     left: 39px;
     font-weight: 500;
-
-    @media (max-width: 767px) {
-      font-size: 14px;
-      transform: unset;
-      left: 14px;
-    }
   }
   input {
     padding-left: 47px !important;
@@ -3476,18 +2909,11 @@ app-ticket-profile-form-update {
   &:after {
     @include product-item-input;
     content: "$";
-    left: unset;
     right: 22px;
     font-size: 13px;
     transform: translateY(0px);
     left: 41px;
     font-weight: 500;
-
-    @media (max-width: 767px) {
-      font-size: 14px;
-      transform: unset;
-      left: 14px;
-    }
   }
   input {
     padding-left: 49px !important;
@@ -3511,22 +2937,12 @@ app-ticket-profile-form-update {
     transform: translateY(0px);
     right: 20px;
     font-weight: 500;
-
-    @media (max-width: 767px) {
-      font-size: 13px;
-      transform: unset;
-      left: 14px;
-    }
   }
   input {
     padding-left: 65px !important;
     padding-right: 32px !important;
     text-align: right;
     width: 100%;
-
-    @media (max-width: 767px) {
-      text-align: left;
-    }
   }
 }
 
@@ -3540,22 +2956,6 @@ app-ticket-profile-form-update {
     border-bottom: 1px solid $gray-200;
     padding-bottom: 16px;
     margin-bottom: 16px;
-    @media (max-width: 767px) {
-      flex-wrap: wrap;
-    }
-  }
-
-  &__author-line {
-    @media (max-width: 767px) {
-      width: calc(100% - 32px);
-      padding-left: 44px;
-    }
-  }
-
-  app-date-picker {
-    @media (max-width: 767px) {
-      margin-left: auto;
-    }
   }
 }
 
@@ -3600,174 +3000,10 @@ app-ticket-edit-aside {
     z-index: 30;
     .cps-block__content {
       min-height: 106px;
-
-      @media (max-width: 767px) {
-        padding: 0 16px;
-      }
-
-      .product-item__cost-input,
-      .product-item__price-input {
-        input {
-          @media (max-width: 767px) {
-            padding-left: 23px !important;
-          }
-        }
-      }
-
-      .product-item__discount-input {
-        input {
-          @media (max-width: 767px) {
-            padding-left: 27px !important;
-          }
-        }
-      }
-      .start-end-timer .start,
-      .start-end-timer .end {
-        @media (max-width: 767px) {
-          width: 100%;
-        }
-      }
-      .start-end-timer__label:first-child {
-        @media (max-width: 767px) {
-          margin-right: 8px;
-        }
-      }
-      label {
-        @media (max-width: 767px) {
-          //margin-top: 42px; // TODO check this style
-          width: 100%;
-          max-width: 100%;
-          margin-right: 0;
-          position: relative;
-        }
-
-        .icon__time {
-          @media (max-width: 767px) {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            right: 14px;
-          }
-        }
-
-        &::before {
-          @media (max-width: 767px) {
-            left: 0;
-            top: -28px;
-            color: $gray-900;
-            font-size: 13px;
-            line-height: 20px;
-            letter-spacing: 0;
-            font-weight: 600;
-          }
-        }
-
-        input {
-          @media (max-width: 767px) {
-            padding: 10px 14px !important;
-          }
-        }
-
-        .product-item__cost-input {
-          &::after {
-            @media (max-width: 767px) {
-              left: unset;
-              right: 16px;
-            }
-          }
-        }
-
-        .product-item__price-input {
-          &::after {
-            @media (max-width: 767px) {
-              left: unset;
-              right: 16px;
-            }
-          }
-        }
-
-        .product-item__discount-input {
-          &::after {
-            @media (max-width: 767px) {
-              right: 16px;
-            }
-          }
-        }
-      }
-
-      .cps-block__products-block label {
-        @media (max-width: 767px) {
-          margin-top: 42px;
-        }
-      }
-
-      .product-dropdown-new-ng {
-        @media (max-width: 767px) {
-          margin-top: 42px;
-        }
-
-        &::after {
-          @media (max-width: 767px) {
-            position: absolute;
-            content: "Product";
-            left: 0;
-            top: -28px;
-            color: $gray-900;
-            font-size: 13px;
-            line-height: 20px;
-            letter-spacing: 0;
-            font-weight: 600;
-          }
-        }
-      }
-
-      .product-item__cost-input,
-      .product-item__qty-input,
-      .product-item__price-input,
-      .product-item__discount-input {
-        @media (max-width: 767px) {
-          max-width: calc(50% - 8px);
-        }
-      }
-    }
-
-    .qt-aside__buttons { // TODO check this style
-      @media (max-width: 767px) {
-        padding: 0 16px;
-        position: relative;
-        margin-top: 28px;
-      }
-
-      &::after {
-        @media (max-width: 767px) {
-          content: "Add Users to notify";
-          position: absolute;
-          left: 16px;
-          top: -28px;
-          color: $gray-900;
-          font-size: 13px;
-          line-height: 20px;
-          letter-spacing: 0;
-          font-weight: 600;
-        }
-      }
     }
 
     .qt-aside-modern__footer {
       display: none;
-
-      @media (max-width: 767px) {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 16px;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background: $white;
-        z-index: 1;
-      }
     }
 
     .qt-aside__close-modal {
@@ -3777,16 +3013,6 @@ app-ticket-edit-aside {
       left: 26px;
       transform: translate(-50%, -50%);
       display: none;
-
-      @media (max-width: 767px) {
-        display: block;
-      }
-    }
-
-    .cps-block__chat-block {
-      @media (max-width: 767px) {
-        margin-bottom: 16px;
-      }
     }
   }
   app-date-picker {
@@ -3802,10 +3028,6 @@ app-ticket-edit-aside {
   .dropdown-menu-qt {
     .show-mobile {
       display: none;
-
-      @media (max-width: 767px) {
-        display: flex;
-      }
     }
   }
 
@@ -3815,12 +3037,6 @@ app-ticket-edit-aside {
 
     + app-ticket-profile-updates-footer .ticket-updates__update-info {
       margin-top: 8px;
-    }
-
-    .ticket-updates__delete {
-      @media (max-width: 767px) {
-        display: none;
-      }
     }
   }
 
@@ -3834,63 +3050,12 @@ app-ticket-edit-aside {
   }
 }
 
-.new-companies-content__modal {
-  .qt-aside-modern__header {
-    @media (max-width: 767px) {
-      position: relative;
-    }
-  }
-
-  .qt-aside-modern__header-close {
-    @media (max-width: 767px) {
-      position: absolute;
-      background-image: url("/assets/img/icons/close-light.svg");
-      top: 50%;
-      left: 26px;
-      padding: 0;
-      transform: translate(-50%, -50%);
-    }
-  }
-
-  .create-product {
-    .label-name {
-      @media (max-width: 767px) {
-        color: $gray-900;
-      }
-    }
-  }
-
-  .editable-description {
-    @media (max-width: 767px) {
-      min-height: 80px;
-    }
-  }
-
-  .qt-aside-modern__footer {
-    .qt-button {
-      @media (max-width: 767px) {
-        margin: 0;
-      }
-      &.--gray {
-        @media (max-width: 767px) {
-          margin-right: 12px;
-        }
-      }
-    }
-  }
-}
-
 .dropdown-menu.services-container.show {
   min-width: 100%;
 }
 
 .ticket-updates__content {
   flex-grow: 1;
-
-  @media (max-width: 767px) {
-    width: 100%;
-    margin-top: -26px;
-  }
 }
 
 .tooltip {
@@ -3942,14 +3107,6 @@ app-ticket-edit-aside {
   display: flex;
   height: calc(100% - #{$header-height});
 
-  @media (max-width: 767px) {
-    width: 100%;
-    height: 100%;
-    padding-bottom: 52px;
-    overflow: auto;
-    top: 0;
-  }
-
   app-date-picker,
   app-tech-users {
     height: 24px;
@@ -3958,27 +3115,6 @@ app-ticket-edit-aside {
   .editable-description {
     overflow-y: unset;
     overflow-x: unset;
-  }
-}
-
-.ticket-edit-aside {
-  app-ticket-edit-tags {
-    .tag-icon {
-      @media (max-width: 767px) {
-        display: none;
-      }
-    }
-    input {
-      @media (max-width: 767px) {
-        z-index: -1;
-        visibility: hidden;
-      }
-    }
-    .mat-form-field-label-wrapper {
-      @media (max-width: 767px) {
-        display: none;
-      }
-    }
   }
 }
 
@@ -4236,10 +3372,6 @@ input.--input-error:hover {
   .mat-form-field {
     background: $white;
     border-radius: 6px;
-
-    @media (max-width: 767px) {
-      width: 100%;
-    }
   }
   .mat-form-field-wrapper {
     padding: 0;
@@ -4303,17 +3435,6 @@ input.--input-error:hover {
   }
   .icon__search-white {
     display: none;
-
-    @media (max-width: 767px) {
-      display: block;
-    }
-  }
-  .left-panel-ng2__content--filters {
-    .qt-dropdown {
-      @media (max-width: 767px) {
-        padding-top: 8px;
-      }
-    }
   }
 }
 
@@ -4395,11 +3516,6 @@ input.--input-error:hover {
 .fr-command.fr-btn.fr-active + .fr-dropdown-menu {
   margin-left: auto !important;
 }
-#userback_button_container {
-  @media (max-width: 767px) {
-    display: none !important;
-  }
-}
 add-category-product {
   display: contents;
   .add-category-container {
@@ -4475,40 +3591,6 @@ app-default-services-edit,app-inventory-edit-aside {
   z-index: 999;
 }
 
-.ticket-edit-aside {
-  .qt-taxes-multiselect {
-    @media (max-width: 767px) {
-      position: relative;
-      width: 100%;
-      margin: 42px 0 0;
-    }
-    &::after {
-      @media (max-width: 767px) {
-        position: absolute;
-        content: "Taxes";
-        left: 0;
-        top: -28px;
-        color: $gray-900;
-        font-size: 13px;
-        line-height: 20px;
-        letter-spacing: 0;
-        font-weight: 600;
-      }
-    }
-  }
-  .product-item {
-    .product-item__price-input {
-      @media (max-width: 767px) {
-        max-width: 100%;
-      }
-    }
-    .product-item__discount-input {
-      @media (max-width: 767px) {
-        max-width: 100% !important;
-      }
-    }
-  }
-}
 .no-exist-elements {
   position: absolute;
   left: 50%;

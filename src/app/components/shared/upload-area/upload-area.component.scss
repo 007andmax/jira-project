@@ -10,24 +10,15 @@
     width: 100%;
     border: 1px dotted $gray-300;
     border-radius: 4px;
-    display: block;
     cursor: pointer;
     padding: 24px;
     font-size: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    @media (max-width: 767px) {
-      padding: 16px;
-    }
   }
   &__title {
     color: $gray-600;
-
-    @media (max-width: 767px) {
-      display: none;
-    }
   }
   &__link {
     text-decoration: underline;
@@ -38,23 +29,12 @@
     margin-right: 8px;
     width: 24px;
     height: 24px;
-
-    @media (max-width: 767px) {
-      display: none;
-    }
   }
 
   &__mobile-text {
     color: $gray-900;
     @include сaption-l__sb;
     display: none;
-
-    @media (max-width: 767px) {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-    }
   }
 }
 

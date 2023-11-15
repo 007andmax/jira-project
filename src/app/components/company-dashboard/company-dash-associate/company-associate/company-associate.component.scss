@@ -17,9 +17,6 @@
         }
     }
     .select-wrapper {
-        @media (max-width: 767px) {
-            width: 100% !important;
-        }
         .company-tag-item {
           @include dropdown-checkbox-item;
         }

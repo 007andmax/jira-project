@@ -437,12 +437,6 @@
       min-width: 132px;
       max-width: 132px;
       font-weight: 600;
-
-      @media (max-width: 767px) {
-        font-size: 13px;
-        line-height: 20px;
-        width: 100%;
-      }
     }
     &__info-text {
       font-size: 12px;

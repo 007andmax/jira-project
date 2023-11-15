@@ -1550,34 +1550,13 @@
   background-size: contain;
   display: inline-block;
 
-  @media (max-width: 767px) {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 5px;
-    height: 100%;
-    border-radius: 8px 0 0 8px;
-  }
-
   &.--high {
     background-image: url("/assets/img/icons/high-priority.svg");
-
-    @media (max-width: 767px) {
-      background: $red-600;
-    }
   }
   &.--medium {
     background-image: url("/assets/img/icons/medium-priority.svg");
-
-    @media (max-width: 767px) {
-      background: $yellow-600;
-    }
   }
   &.--low {
     background-image: url("/assets/img/icons/low-priority.svg");
-
-    @media (max-width: 767px) {
-      background: $green-600;
-    }
   }
 }

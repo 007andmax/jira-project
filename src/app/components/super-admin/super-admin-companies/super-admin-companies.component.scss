@@ -6,10 +6,7 @@
 
 .qt-page-list {
     padding: 0;
-
-    @media (min-width: 768px) {
-        background-color: $white;
-    }
+    background-color: $white;
 }
 
 
@@ -48,23 +45,17 @@ super-admin-companies-item {
 }
 .qt-page-list__header.--sticky {
     display: flex;
-    @media (min-width: 768px) {
-        margin: 0;
-        height: 56px;
-        padding: 0px 32px;
-        background-color: $gray-50;
-        border-bottom: 1px solid $gray-200;
-    }
+    margin: 0;
+    height: 56px;
+    padding: 0px 32px;
+    background-color: $gray-50;
+    border-bottom: 1px solid $gray-200;
 }
 /deep/ .qt-page-list__header-title {
     font-size: 16px;
     font-weight: 600;
     letter-spacing: 0;
     color: $gray-900;
-
-    @media (max-width: 767px) {
-        color: $white;
-    }
 }
 .container-page {
     height: 100%;

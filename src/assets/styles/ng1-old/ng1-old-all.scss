@@ -356,11 +356,6 @@
     height: calc(100% - 64px);
   }
 
-  @media (max-width: 767px) {
-    padding-top: 0;
-    background-color: $background;
-  }
-
   &__ticket-detail-page {
     height: 100vh;
   }

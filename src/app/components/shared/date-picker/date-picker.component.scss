@@ -6,22 +6,11 @@
   .date-picker-container {
     height: min-content;
     max-height: initial;
-    box-shadow: 0px 4px 24px rgba(16, 24, 40, 0.08), 0px 2px 4px rgba(16, 24, 40, 0.12);
-
-    @media (max-width: 767px) {
-      top: 50% !important;
-      bottom: unset !important;
-      left: 50% !important;
-      right: unset !important;
-      transform: translate(-50%, -50%) !important;
-      position: fixed !important;
-      z-index: 4;
-    }
+    box-shadow: 0 4px 24px rgba(16, 24, 40, 0.08), 0 2px 4px rgba(16, 24, 40, 0.12);
   }
   .icon__assign-date {
     width: 20px;
     height: 20px;
-    // background-color: $red-600;
   }
 .hidden-icon {
  visibility: hidden;

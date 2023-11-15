@@ -5,44 +5,18 @@
     padding: 20px 40px;
     border-top: 1px solid $gray-25;
 
-    @media (max-width: 767px) {
-        padding: 0;
-        border: none;
-    }
-
-    &__header {
-        @media (max-width: 767px) {
-            position: relative;
-            height: 56px;
-            background-color: $gray-900;
-            padding: 0 18px;
-            margin-bottom: 4px;
-        }
-    }
-
     &__photo {
         width: 28px;
         height: 28px;
         border-radius: 50%;
         background-size: cover !important;
         background-position: center !important;
-
-        @media (max-width: 767px) {
-            display: none;
-        }
     }
 
     &__nav {
         padding: 0;
         display: flex;
         list-style: none;
-
-        @media (max-width: 767px) {
-            width: 100%;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 0;
-        }
     }
 
     &__nav-item {
@@ -56,22 +30,8 @@
         background-position: center left;
         position: relative;
 
-        @media (max-width: 767px) {
-            @include body-l__sb;
-            background: none;
-            display: none;
-            border: none;
-            padding: 0;
-            margin: 0;
-        }
-
         &.active {
             color: $blue-light-600;
-
-            @media (max-width: 767px) {
-                color: $white;
-                display: block;
-            }
 
             &:before {
                 content: "";
@@ -82,10 +42,6 @@
                 background: $blue-light-600;
                 left: 0;
                 border-radius: 100px;
-
-                @media (max-width: 767px) {
-                    display: none;
-                }
             }
         }
     }

@@ -235,10 +235,6 @@
     align-items: flex-start;
     border-bottom: none;
 
-    @media (max-width: 767px) {
-        padding: 16px;
-    }
-
     .small-title {
         width: 100%;
         align-items: center;

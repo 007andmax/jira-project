@@ -1,10 +1,5 @@
 @import "./src/assets/styles/variable";
 
-.qt-d-none {
-    @media (min-width: 768px) {
-        display: none !important;
-    }
-}
 .qt-table-modern__circle-avatar {
     width: 32px;
     height: 32px;
