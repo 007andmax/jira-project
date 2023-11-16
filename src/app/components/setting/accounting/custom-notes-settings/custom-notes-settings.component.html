@@ -1,0 +1,74 @@
+<div
+    class="cmn-area"
+    *ngIf="!showPreloader"
+>
+    <div
+        class="tab-pane__table"
+        [ngClass]="{'cleat-height-dataTable':!showPreloader}"
+    >
+        <div class="tab-pane__table-header">
+            <div class="tab-pane__table-row">
+                <div
+                    class="tab-pane__table-cell crm-settings-company-industry-table__industry-type pointer"
+                    (click)="onFilter('title')"
+                >
+                    Title
+                    <div class="qt-table-modern__sorting--new"></div>
+                </div>
+                <div class="tab-pane__table-cell crm-settings-company-industry-table__action"></div>
+            </div>
+        </div>
+        <div
+            class="tab-pane__table-body"
+            *ngIf="!showPreloader"
+        >
+            <div
+                class="tab-pane__table-row"
+                *ngFor="let item of invoiceNotes; let i = index"
+            >
+                <div
+                    class="tab-pane__table-cell crm-settings-company-industry-table__industry-type"
+                    [textContent]="item.title"
+                >
+                </div>
+                <div class="tab-pane__table-cell crm-settings-company-industry-table__action">
+                    <div class="qt-df qt-ai-c">
+                        <app-dynamic-tooltip
+                            [content]="'Edit'"
+                            [position]="'top'"
+                            #editTooltip
+                        ></app-dynamic-tooltip>
+                        <div
+                            (mouseenter)="editTooltip.show($event.target)"
+                            (mouseleave)="editTooltip.hide()"
+                            class="icon__edit-gray-dark qt-sz-20 qt-bg-contain pointer qt-mr-8"
+                            (click)="editNote(item)"
+                        >
+                        </div>
+                        <app-dynamic-tooltip
+                            [content]="'Remove'"
+                            [position]="'top'"
+                            #removeTooltip
+                        ></app-dynamic-tooltip>
+                        <div
+                            data-tooltip="Remove"
+                            class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                            (click)="deleteNote(item)"
+                            (mouseenter)="removeTooltip.show($event.target)"
+                            (mouseleave)="removeTooltip.hide()"
+                        >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<add-custom-notes-settings (onAddNote)="addNote($event)"></add-custom-notes-settings>
+<edit-custom-notes-settings (onEditNote)="updateNote($event)"></edit-custom-notes-settings>
+<div
+    class="loading-container"
+    *ngIf="showPreloader"
+>
+    <div class="loading"></div>
+</div>

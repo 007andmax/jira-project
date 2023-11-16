@@ -10,22 +10,37 @@ export class BillableStateService {
   selectedNote: InvoiceNote = null;
   globalNote: InvoiceNote = null;
   lockedTicketForRemove: string = null;
+  noteForRemove: InvoiceNote;
   create: EventEmitter<any> = new EventEmitter();
   preview: EventEmitter<any> = new EventEmitter();
   editCustomer: EventEmitter<any> = new EventEmitter();
+  onEditNote: EventEmitter<any> = new EventEmitter();
+  onAddNote: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
+  public setNoteForRemove(data) {
+    this.noteForRemove = data;
+  }
+  public getNoteForRemove() {
+    return this.noteForRemove;
+  }
+  public initAddNote() {
+    this.onAddNote.emit(null);
+  }
+  public editNote(data) {
+    this.onEditNote.emit(data);
+  }
   public setRegulatNote(selectedNote) {
     this.selectedNote = selectedNote;
   }
-  public getRegularNote () {
+  public getRegularNote() {
     return this.selectedNote;
   }
 
   public setGlobalNote(globalNote) {
     this.globalNote = globalNote;
   }
-  public getGlobalNote () {
+  public getGlobalNote() {
     return this.globalNote;
   }
   public getLockedTicketForRemove() {

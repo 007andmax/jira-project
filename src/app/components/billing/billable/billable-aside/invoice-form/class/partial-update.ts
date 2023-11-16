@@ -2,14 +2,14 @@ export class PartialUpdate {
     date: string;
     dueDate: string;
     invoiceNumber: string;
-    regularInvoiceNote: any;
+    note: string;
     taxId: any;
-    expensesToUpdate:any;
-    constructor(date,dueDate,invoiceNumber,regularInvoiceNote,taxId,expensesToUpdate) {
+    expensesToUpdate: any;
+    constructor(date, dueDate, invoiceNumber, note, taxId, expensesToUpdate) {
         this.date = date;
         this.dueDate = dueDate;
         this.invoiceNumber = invoiceNumber;
-        this.regularInvoiceNote = regularInvoiceNote;
+        this.note = note;
         this.taxId = taxId;
         this.expensesToUpdate = expensesToUpdate;
     }

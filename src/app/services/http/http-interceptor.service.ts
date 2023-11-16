@@ -39,6 +39,12 @@ export class HttpInterceptorService implements HttpInterceptor {
               return;
             }
           }
+          if (this.appStateService.isCustomeError) {
+            this.toastrService.error(this.appStateService.customeError);
+            this.appStateService.setCustomeError(false);
+            this.appStateService.changeDetectorRef();
+            return;
+          }
           if (this.appStateService.isServerError) {
             this.toastrService.error(err.error.message, "Server error");
             this.appStateService.setServerError(false);
