@@ -17,13 +17,13 @@
             ></app-company-dash-detail>
             <div
                 class="cmp-dboard-col right-stasticsbar qt-df"
-                *ngIf="company && (company.clientType === 'VENDOR' || company.clientType === 'SUPPLIER') && !appService.checkMobile()"
+                *ngIf="company && (company.clientType === 'VENDOR' || company.clientType === 'SUPPLIER')"
             >
                 <company-dash-associate [company]="company"></company-dash-associate>
             </div>
             <div
                 class="cmp-dboard-col right-stasticsbar qt-df"
-                *ngIf="company && company.clientType !== 'VENDOR' && company.clientType !== 'SUPPLIER' && !appService.checkMobile()"
+                *ngIf="company && company.clientType !== 'VENDOR' && company.clientType !== 'SUPPLIER'"
             >
                 <app-company-dash-stats
                     [totalTickets]="totalTickets"

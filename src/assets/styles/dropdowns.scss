@@ -295,11 +295,6 @@
           font-weight: 600;
           text-align: left;
           position: relative;
-          @media (max-width: 767px) {
-            border-bottom: 1px solid $gray-200;
-            font-weight: 400;
-            padding: 8px 16px !important;
-          }
           &.collapsed {
             background-color: $white;
             color: $gray-900;
@@ -311,11 +306,6 @@
           &:hover {
             background-color: $blue-light-600;
             color: $white;
-
-            @media (max-width: 767px) {
-              background-color: $white;
-              color: $gray-900;
-            }
           }
         }
       }

@@ -16,19 +16,10 @@
         background-size: cover !important;
         border-radius: 50%;
         margin-right: 16px;
-
-        @media (max-width: 767px) {
-            margin-right: 8px;
-        }
     }
 
     &__content {
         flex-grow: 1;
-
-        @media (max-width: 767px) {
-            width: 100%;
-            margin-top: -28px;
-        }
     }
 
     &__author-line,
@@ -215,36 +206,5 @@
       font-size: 12px;
       line-height: 15px;
       color: $green-700;
-    }
-}
-
-/deep/ app-ticket-profile-updates-product-item {
-    .ticket-updates__ticket-info-container {
-        @media (max-width: 767px) {
-            position: relative;
-            margin: 0;
-        }
-    }
-
-    .ticket-updates__ticket-info-container {
-        .dropdown {
-            &:nth-child(2) {
-                @media (max-width: 767px) {
-                    top: -30px !important;
-                }
-            }
-        }
-    }
-
-    &:nth-child(2) {
-        .ticket-updates__ticket-info-container {
-            .dropdown {
-                &:nth-child(2) {
-                    @media (max-width: 767px) {
-                        top: -41px !important;
-                    }
-                }
-            }
-        }
     }
 }

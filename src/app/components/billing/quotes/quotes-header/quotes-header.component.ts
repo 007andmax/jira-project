@@ -19,7 +19,6 @@ export class QuotesHeaderComponent implements OnInit {
     public appService: AppService,) { }
 
   ngOnInit() {
-    if (this.appService.checkMobile()) this.toggleFilter = true;
   }
   sortBy(data) {
     this.onSortBy.emit(data);

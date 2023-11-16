@@ -1,9 +1,5 @@
 <div class="qt-page-list__header --sticky">
     <div class="qt-page-list__header-title-line qt-mb-16">
-        <div
-            class="icon__menu-white qt-sz-24 qt-bg-contain qt-ml-6 pointer"
-            (click)="toggleMobileLeftPanel()"
-        ></div>
         <div class="qt-page-list__header-title-line--left">
             <h6
                 class="qt-page-list__header-title"
@@ -46,19 +42,15 @@
                         *ngIf="countFilter > 0"
                         [textContent]="countFilter"
                     ></span>
-                    <span class="qt-d-md-none">Filters</span>
+                    <span>Filters</span>
                 </button>
                 <button
-                    class="qt-btn --outline-blue qt-ml-8 qt-d-md-none"
+                    class="qt-btn --outline-blue qt-ml-8"
                     *ngIf="getPermissions('CREATE_PASSWORD')"
                     (click)="addRecord()"
                 >
                     Create Password
                 </button>
-                <div
-                    class="icon__search-white qt-sz-24 qt-bg-contain qt-ml-16 pointer qt-d-none qt-d-md-block"
-                    (click)="toggleSearch  = true"
-                ></div>
             </div>
         </div>
     </div>

@@ -33,9 +33,6 @@
 .select-wrapper {
   width: 100%;
   @include dropdown-content;
-  @media (max-width: 767px) {
-    width: 100%;
-  }
   .tab-wrapper {
     display: flex;
     padding: 0 20px;

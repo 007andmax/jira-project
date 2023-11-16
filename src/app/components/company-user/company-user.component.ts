@@ -173,9 +173,6 @@ export class CompanyUserComponent implements OnInit {
     this.filter.setLeftFilters(null, id, null, null, null, [], []);
     this.cd.detectChanges();
   }
-  showMobileFilter() {
-    document.body.querySelector('app-left-panel-users').classList.add('show');
-  }
   onSelectAllUser(event) {
     if (event.target.checked) {
       this.usersStateService.initSelectAllusers(true);

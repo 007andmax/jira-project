@@ -13,9 +13,6 @@
 }
 .list-filters {
     display: none;
-    @media (max-width: 767px) {
-        display: block;
-    }
     margin: -8px -8px 8px -8px;
     /deep/.mat-form-field-infix {
         overflow: auto;
@@ -47,9 +44,6 @@
 .is-exist-filters {
     position: relative;
     &::before {
-        @media (max-width: 767px) {
-            display: block;
-        }
         display: none;
         content: " ";
         position: absolute;
@@ -61,26 +55,11 @@
         border-radius: 10px;
     }
 }
-.filter-counter {
-    @media (max-width: 767px) {
-        display: none;
-    }
-}
 .closed-search {
     position: fixed;
     top: 18px;
     left: 10px;
     z-index: 999;
-}
-.qt-page-list__search {
-    @media (max-width: 767px) {
-        padding: 10px 16px 10px 46px !important;
-    }
-    &::before {
-        @media (max-width: 767px) {
-            left: 40px !important;
-        }
-    }
 }
 .password-table__menu {
     flex: 0 0 38px !important;

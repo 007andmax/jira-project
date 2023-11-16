@@ -39,7 +39,6 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   public location: string = '';
   public countUsers: number = 0;
   public countDevices: number = 0;
-  IS_MOBILE: boolean = false;
   sub: Subscription = new Subscription();
   constructor(private usersStateService: UsersStateService,
     public companiesStateService: CompaniesStateService,
@@ -63,13 +62,6 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
       this.cd.markForCheck();
     })
     this.sub.add(getOnUsers);
-    this.IS_MOBILE = this.appService.checkMobile();
-    this.cd.markForCheck();
-    let getOnMobile = this.appService.getOnMobile().subscribe(data => {
-      this.IS_MOBILE = data;
-      this.cd.markForCheck();
-    })
-    this.sub.add(getOnMobile);
   }
   ngDoCheck() {
     if (this.company) {
@@ -117,13 +109,8 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     return `company/${this.company.id}/dashboard`;
   }
   goToDashboard() {
-    if (this.appService.checkMobile()) {
-      this.router.navigate(
-        [`${this.companiesStateService.getCurrentCompany().techDomain}/company/`, this.company.id, 'dashboard']);
-    } else {
-      const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/company/${this.company.id}/dashboard`;
-      window.open(url, '_blank');
-    }
+    const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/company/${this.company.id}/dashboard`;
+    window.open(url, '_blank');
     this.cd.detectChanges();
   }
   getUserName() {

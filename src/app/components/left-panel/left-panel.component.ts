@@ -291,11 +291,6 @@ export class LeftPanelComponent implements OnInit {
       this.cd.detectChanges();
     }
   }
-  onToggleMobileLeftPanel() {
-    this.leftPanelStateService.toggleMobileLeftPanel(false);
-    this.appService.toggleMobileAside(false);
-    this.cd.detectChanges();
-  }
   public logOut() {
     window.location.href = '/logout';
     window.location.hash = '';

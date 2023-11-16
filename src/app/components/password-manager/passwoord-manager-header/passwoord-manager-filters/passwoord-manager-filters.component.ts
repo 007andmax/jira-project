@@ -82,7 +82,6 @@ export class PasswoordManagerFiltersComponent implements OnInit, OnDestroy {
     this.disabledDevicesUsers = false;
     this.selectedCompany = null;
     this.onChangeCounterFilter();
-    if (this.appService.checkMobile()) this.close();
   }
   applyFilters() {
 
@@ -120,34 +119,26 @@ export class PasswoordManagerFiltersComponent implements OnInit, OnDestroy {
   }
   selectDate(data) {
     this.filter.setDate(data);
-    if (!this.appService.checkMobile()) {
-      this.passwordManagerStateService.onInitFilter(this.filter);
-      this.onChangeCounterFilter();
-    }
+    this.passwordManagerStateService.onInitFilter(this.filter);
+    this.onChangeCounterFilter();
   }
   selectDeviceUser(data) {
     this.filter.setDeviceUser(data);
-    if (!this.appService.checkMobile()) {
-      this.passwordManagerStateService.onInitFilter(this.filter);
-      this.onChangeCounterFilter();
-    }
+    this.passwordManagerStateService.onInitFilter(this.filter);
+    this.onChangeCounterFilter();
   }
   onSelectCategory(data) {
     this.filter.setCategory(data);
-    if (!this.appService.checkMobile()) {
-      this.passwordManagerStateService.onInitFilter(this.filter);
-      this.onChangeCounterFilter();
-    }
+    this.passwordManagerStateService.onInitFilter(this.filter);
+    this.onChangeCounterFilter();
   }
   selectCompany(data) {
     this.selectedCompany = data;
     this.filter.setDeviceUser(null);
     this.filter.setCompany(data);
     this.deviceUserSelect.clearWithOutChanges();
-    if (!this.appService.checkMobile()) {
-      this.passwordManagerStateService.onInitFilter(this.filter);
-      this.onChangeCounterFilter();
-    }
+    this.passwordManagerStateService.onInitFilter(this.filter);
+    this.onChangeCounterFilter();
     if (data) {
       let users = this.usersStateService.getAllUsers().filter(item => {
         let company = item.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === data.id);

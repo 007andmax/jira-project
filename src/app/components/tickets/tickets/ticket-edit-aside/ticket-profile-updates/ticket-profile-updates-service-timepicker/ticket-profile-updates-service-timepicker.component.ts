@@ -48,7 +48,7 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
         'minTime': '12:00am',
         'timeFormat': 'g:ia',
         'step': this.step,
-        'orientation': this.appService.checkMobile() ? 'bl' : 'l'
+        'orientation': 'l'
 
       });
       this.timePickerEnd.timepicker({
@@ -56,7 +56,7 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
         'minTime': '12:00am',
         'timeFormat': 'g:ia',
         'step': this.step,
-        'orientation': this.appService.checkMobile() ? 'bl' : 'l'
+        'orientation': 'l'
       });
       this.timePickerStart.on('selectTime', (data) => {
         this.changeStart();

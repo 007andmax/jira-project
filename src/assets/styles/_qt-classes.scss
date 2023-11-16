@@ -86,10 +86,6 @@ input.qt-dropdown-input {
   column-gap: 16px;
   row-gap: 16px;
   margin-bottom: 24px;
-  @media (max-width: 767px) {
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
   &:empty:not(.qt-inputs-row__divider) {
     margin-bottom: 0;
   }
@@ -114,17 +110,6 @@ input.qt-dropdown-input {
   }
   input {
     width: 100%;
-  }
-
-  .qt-w-md-50 {
-    @media (max-width: 767px) {
-      max-width: calc(50% - 8px);
-    }
-  }
-  .qt-flex-md-100 {
-    @media (max-width: 767px) {
-      flex: 100%;
-    }
   }
 
   &-background {
@@ -1703,25 +1688,5 @@ input.qt-dropdown-input {
   }
   100% {
     transform: rotate(360deg);
-  }
-}
-
-
-
-@media (max-width: 767px) {
-  .qt-d-md-none {
-    display: none !important;
-  }
-  .qt-d-md-block {
-    display: block !important;
-  }
-  .qt-d-md-flex {
-    display: flex !important;
-  }
-  .qt-fw-wrap-md {
-    flex-wrap: wrap;
-  }
-  .qt-jc-sb-md {
-    justify-content: space-between;
   }
 }

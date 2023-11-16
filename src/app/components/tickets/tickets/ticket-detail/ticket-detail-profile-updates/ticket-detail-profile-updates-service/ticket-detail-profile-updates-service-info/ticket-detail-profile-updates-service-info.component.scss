@@ -68,14 +68,6 @@
     &__ticket-info-container {
         width: 100%;
         max-width: calc(100% - 52px);
-
-        .dropdown {
-            @media (max-width: 767px) {
-                position: absolute;
-                top: 0;
-                right: 0;
-            }
-        }
     }
 
     &__ticket-info {
@@ -183,13 +175,6 @@
 
     &__ticket-data {
         display: flex;
-
-        @media (max-width: 767px) {
-            width: 100%;
-            margin-top: 20px;
-            padding-left: 28px;
-            order: 1;
-        }
     }
 
     &__ticket-header-name {
@@ -230,10 +215,6 @@
         overflow: hidden;
         white-space: nowrap;
         margin-right: 8px;
-
-        @media (max-width: 767px) {
-            width: auto;
-        }
     }
 
     &__service-time-in,
@@ -243,50 +224,8 @@
 
         &::after {
             @include label-l__sb;
-
-            @media (max-width: 767px) {
-                content: "";
-                left: 0;
-                top: -14px;
-                color: $gray-400;
-                position: absolute;
-                text-transform: uppercase;
-            }
         }
     }
-
-    //&__service-time-in { // TODO check this style
-    //    width: 70px;
-    //    margin-right: 8px;
-    //
-    //    &::after {
-    //        @media (max-width: 767px) {
-    //            content: "Time In";
-    //        }
-    //    }
-    //}
-    //
-    //&__service-time-out {
-    //    width: 70px;
-    //    margin-right: 8px;
-    //
-    //    &::after {
-    //        @media (max-width: 767px) {
-    //            content: "Time OUT";
-    //        }
-    //    }
-    //}
-    //
-    //&__service-duration {
-    //    width: 70px;
-    //    margin-right: 8px;
-    //
-    //    &::after {
-    //        @media (max-width: 767px) {
-    //            content: "Duration";
-    //        }
-    //    }
-    //}
 
     &__service-subinfo {
         pre:not(:empty) {
@@ -313,10 +252,6 @@
         border-color: $green-600;
         background: $white;
         margin-right: 32px;
-
-        @media (max-width: 767px) {
-            display: none;
-        }
     }
 
     // /deep/
@@ -342,7 +277,6 @@
 }
 
 /deep/ .ticket-updates__ticket-info-container .input-group {
-  //width: 134px; // TODO check this style
   padding: 1px 12px;
   border: 1px solid $gray-200;
   border-radius: 6px;

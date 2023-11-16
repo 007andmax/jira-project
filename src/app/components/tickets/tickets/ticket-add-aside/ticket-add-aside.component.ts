@@ -88,7 +88,6 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     })
     this.ticketsStateService.getToggleAddTicket().subscribe(data => {
       this.opened = !this.opened;
-      if (this.appService.checkMobile()) this.appService.toggleMobileAside(true);
       if (this.opened) {
         this.getTicketPriority();
         this.getColors();
@@ -163,7 +162,6 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     this.userDP.clearClient();
     if (this.techUserDP) this.techUserDP.clearClient();
     this.uplaodFile.onClearState();
-    this.appService.toggleMobileAside(false);
     this.cd.detectChanges();
 
   }

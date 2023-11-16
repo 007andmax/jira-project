@@ -24,7 +24,7 @@
         </div>
     </div>
     <div class="qt-inputs-row">
-        <div class="qt-input-block qt-f50 qt-flex-md-100">
+        <div class="qt-input-block qt-f50">
             <app-drop-down
                 [class]="['qt-select-input-40']"
                 [placeholder]="'Select Company Type'"
@@ -39,7 +39,7 @@
             >
             </app-drop-down>
         </div>
-        <div class="qt-input-block qt-f50 qt-flex-md-100">
+        <div class="qt-input-block qt-f50">
             <div class="qt-input-block__label">Phone Number</div>
             <input
                 type="text"
@@ -89,7 +89,7 @@
         class="qt-inputs-row"
         *ngIf="company.isUseSelectedUser"
     >
-        <div class="qt-input-block qt-f100 qt-flex-md-100">
+        <div class="qt-input-block qt-f100">
             <span
                 class="qt-fw-600 qt-fs-12 qt-lh-133 qt-color-info qt-pointer create-user-contact"
                 (click)="company.setUseSelectedUser(false)"
@@ -116,7 +116,7 @@
         class="qt-inputs-row"
         *ngIf="!company.isUseSelectedUser"
     >
-        <div class="qt-input-block qt-f50 qt-flex-md-100 --required">
+        <div class="qt-input-block qt-f50 --required">
             <div class="qt-input-block__label qt-df qt-jc-sb">
                 First Name
                 <span
@@ -142,7 +142,7 @@
                 First name must be a minimum of 2 characters long
             </mat-error>
         </div>
-        <div class="qt-input-block qt-f50 qt-flex-md-100">
+        <div class="qt-input-block qt-f50">
             <div class="qt-input-block__label">Last Name</div>
             <input
                 type="text"
@@ -155,7 +155,7 @@
         class="qt-inputs-row"
         *ngIf="!company.isUseSelectedUser"
     >
-        <div class="qt-input-block qt-f50 qt-flex-md-100 --required">
+        <div class="qt-input-block qt-f50 --required">
             <div class="qt-input-block__label">Primary Number</div>
             <input
                 type="text"
@@ -174,7 +174,7 @@
                 Please enter a valid phone number
             </mat-error>
         </div>
-        <div class="qt-input-block qt-f50 qt-flex-md-100 --required">
+        <div class="qt-input-block qt-f50 --required">
             <div class="qt-input-block__label">Primary Contact Email</div>
             <input
                 type="text"

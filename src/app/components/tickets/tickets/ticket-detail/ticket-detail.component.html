@@ -53,7 +53,6 @@
                                 id="ticket-subject"
                                 class="--editable ticket-detail-page-title__input"
                                 [value]="ticketProfile.subject"
-                                [readonly]="appService.checkMobile()"
                             >
                         </div>
                     </div>
@@ -147,7 +146,7 @@
                                         class="ticket-detail-page__editor pointer"
                                         [ngClass]="{'no-edit-note':!getPermissions('EDIT_TICKETS')}"
                                         (blur)="modeDescription = 'edit'"
-                                        [attr.contenteditable]="!appService.checkMobile() && getPermissions('EDIT_TICKETS')"
+                                        [attr.contenteditable]="getPermissions('EDIT_TICKETS')"
                                         id="ticket-note"
                                         placeholder="Enter description here"
                                     ></div>
@@ -187,21 +186,6 @@
                         (onCloseForm)="showEditUpdate = false"
                         *ngIf="showEditUpdate"
                     ></ticket-detail-profile-edit-updates>
-                    <!-- <app-ticket-edit-tags
-                [selectedTag]="ticketProfile.tags"
-                (tagsChange)="onChangeTags($event)"
-                [hidden]="showAddAssignedUser"
-            ></app-ticket-edit-tags> -->
-                    <!-- <app-ticket-profile-attachments [attachments]="ticketProfile.attachments"></app-ticket-profile-attachments>
-
-            <ticket-profile-edit-form-update
-                [ngClass]="{'--open':openedMobileEditUpdate}"
-                (onClosed)="openedMobileEditUpdate = false"
-                [hidden]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || !appService.checkMobile()"
-                #editUpdateForm
-                [ticket]="ticketProfile"
-                [lisUpdateUser]="lisUpdateUser"
-            ></ticket-profile-edit-form-update> -->
                 </div>
             </div>
             <div
@@ -322,20 +306,4 @@
             </div>
         </div>
     </div>
-    <!-- <div
-        class="qt-aside-modern__footer updata-close"
-        [hidden]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
-    >
-        <button
-            class="qt-button"
-            (click)="updateAndCloseMobile()"
-        >
-            <span>Update & Close</span>
-        </button>
-    </div>
-    <div
-        class="mobile-action-btn"
-        (click)="showModalAddUpdate()"
-        [hidden]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
-    ></div> -->
 </div>

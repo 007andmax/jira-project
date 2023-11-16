@@ -47,9 +47,7 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   openPanel() {
     this.onOpenPanel.emit(null);
   }
-  closeMobileFilter() {
-    document.body.querySelector('app-left-panel-users').classList.remove('show');
-  }
+
   public goToState() {
     this.onChangeState.emit('new-users');
   }

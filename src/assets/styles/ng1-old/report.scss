@@ -182,7 +182,7 @@ html.no-d3-tooltip .nvtooltip .value {
   }
   .qt-report__body {
     @media (min-width: 1448px) {
-      height: calc(100vh - 211px);
+      min-height: calc(100vh - 211px);
     }
     &-row {
       border-bottom: 1px solid $gray-100;

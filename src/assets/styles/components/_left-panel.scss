@@ -6,51 +6,15 @@
   height: 100%;
   width: auto;
   z-index: 1050;
-  @media (max-width: 767px) {
-    position: fixed;
-  }
   top: 0;
   left: 0;
   background-color: $gray-800;
   color: $white;
 
-  .header-mobile-close {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: $gray-700;
-  }
   &__header {
     display: flex;
     justify-content: space-between;
     padding: 24px;
-    &-mobile {
-      @media (max-width: 767px) {
-        position: fixed;
-        left: -100%;
-        top: 0;
-        width: 100%;
-        z-index: 1;
-        padding: 16px;
-        background-color: $gray-900;
-        margin-bottom: 16px;
-        transition: left ease-in 300ms;
-      }
-      .icon__quicktech-logo-mini {
-        @media (max-width: 767px) {
-          margin: 0;
-        }
-      }
-    }
-
-    @media (max-width: 767px) {
-      align-items: center;
-      flex-wrap: wrap;
-      padding: 16px;
-    }
   }
 
   .app-left-panel__menu-info {
@@ -92,37 +56,14 @@
     &-icon {
       display: flex;
       flex-direction: column;
-      background-color: $gray-800;
+      background-color: $gray-900;
       flex-shrink: 0;
-      @media (max-width: 767px) {
-        width: 100%;
-        padding-top: 88px;
-      }
-      @media (min-width: 768px) {
-        background-color: $gray-900;
-      }
     }
     &-menu {
       height: calc(100% - 50px);
       width: 100%;
-      margin: 0;
       overflow-x: clip;
-      @media (min-width: 768px) {
-        margin: 24px 16px 0 8px;
-      }
-      @media (max-width: 767px) {
-        position: fixed;
-        top: 0;
-        left: -100%;
-        background-color: $gray-800;
-        transition: .3s ease-in left;
-      }
-      &.--open {
-        @media (max-width: 767px) {
-          left: 0;
-          z-index: 1;
-        }
-      }
+      margin: 24px 16px 0 8px;
     }
     &::-webkit-scrollbar-thumb {
       background: transparent;
@@ -159,32 +100,19 @@
   &__menu {
     display: flex;
     align-items: center;
+    height: 40px;
     cursor: default;
-
-    @media (max-width: 767px) {
-      padding: 24px 16px;
-      margin-bottom: 16px;
-      background-color: $gray-900;
-    }
-
-    @media (min-width: 768px) {
-      height: 40px;
-    }
   }
 
   &__menu-title {
-    font-size: 18px;
     font-weight: 500;
-    line-height: 22px;
     font-stretch: normal;
     color: $white;
     white-space: nowrap;
-    @media (min-width: 768px) {
-      font-size: 16px;
-      line-height: 19px;
-      margin-bottom: 16px;
-      margin-left: 8px;
-    }
+    font-size: 16px;
+    line-height: 19px;
+    margin-bottom: 16px;
+    margin-left: 8px;
   }
 
   &__menu-text {
@@ -195,23 +123,14 @@
   }
   &__menu-icon {
     &-wrap {
-      width: calc(100% - 32px);
       border-radius: 8px;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
-      margin: 0 16px 8px;
       flex-shrink: 0;
-      @media (max-width: 767px) {
-        padding: 12px 16px;
-        background-color: $gray-700
-      }
-      @media (min-width: 768px) {
-        margin: 0 12px 8px;
-        width: 40px;
-        height: 40px;
-        justify-content: center;
-      }
+      margin: 0 12px 8px;
+      width: 40px;
+      height: 40px;
+      justify-content: center;
 
       &-settings {
         margin-top: auto;
@@ -306,14 +225,9 @@
 
   &__menu-expand {
     list-style: none;
-    padding: 0 16px;
     margin-bottom: 0;
-    @media (min-width: 768px) {
-      padding: 0;
-    }
-    @media (max-width: 767px) {
-      overflow: auto;
-    }
+    padding: 0;
+
     & + hr:not(.app-left-panel__ticket-menu-line) {
       display: none;
     }
@@ -341,31 +255,16 @@
   }
   &__menu-expand li:not(.dropdown-item) {
     display: flex;
-    padding: 0;
     cursor: pointer;
     font-weight: 500;
-    font-size: 14px;
-    line-height: 17px;
     color: $gray-300;
     align-items: center;
     position: relative;
-    &:not(:last-child) {
-      @media (min-width: 768px) {
-        margin-bottom: 4px;
-      }
-    }
-    @media (max-width: 767px) {
-      font-weight: 500;
-      height: 48px;
-      border-bottom: 1px solid $gray-700;
-    }
-    @media (min-width: 768px) {
-      margin-bottom: 8px;
-      padding: 6px 8px;
-      border-radius: 6px;
-      font-size: 13px;
-      line-height: 16px;
-    }
+    margin-bottom: 8px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 16px;
     a {
       color: $white;
       position: absolute;
@@ -379,20 +278,14 @@
       padding-right: 24px;
     }
     &.--active {
-      @media (min-width: 768px) {
-        color: $white;
-        background-color: $gray-700;
-        margin-left: 8px;
-      }
+      color: $white;
+      background-color: $gray-700;
+      margin-left: 8px;
       a {
-        @media (min-width: 768px) {
-          color: $white;
-        }
+        color: $white;
       }
       .icon__menu--submenu {
-        @media (min-width: 768px) {
-          background-color: $white;
-        }
+        background-color: $white;
       }
     }
 
@@ -418,24 +311,14 @@
     font-size: 12px;
     line-height: 15px;
     color: $white;
-    padding: 4px 8px;
     background-color: $gray-700;
     border-radius: 22px;
-    @media (min-width: 768px) {
-      padding: 2px 4px;
-    }
+    padding: 2px 4px;
   }
 
   &__menu-expand.icon-list li {
     justify-content: flex-start;
   }
-
-  @media (max-width: 767px) {
-    left: -100%;
-    width: 100%;
-    transition: .3s ease-in all;
-  }
-
   hr {
     border-top: 1px solid $gray-700;
   }
@@ -501,29 +384,11 @@
 }
 
 .app-left-panel.--open {
-  @media (max-width: 767px) {
-    left: 0;
-  }
   .app-left-panel__header-mobile {
     left: 0;
   }
 }
 
-//.app-left-panel__menu.--active {
-//  .app-left-panel {
-//    &__menu-icon {
-//      opacity: 1;
-//    }
-//    &__menu-title {
-//      color: $white;
-//      @extend %body-r-m;
-//    }
-//    &__menu-arrow {
-//      transform: rotate(180deg);
-//      filter: brightness(3);
-//    }
-//  }
-//}
 .app-left-panel__menu-icon-wrap {
   &.--active,
   &:hover {

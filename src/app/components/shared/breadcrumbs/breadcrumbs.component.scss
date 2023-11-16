@@ -6,9 +6,6 @@
   padding-left: 24px;
   align-items: center;
   background-color: $background;
-  @media (max-width: 767px) {
-    display: none;
-  }
   div {
     display: flex;
     align-items: stretch;

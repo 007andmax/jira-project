@@ -13,41 +13,35 @@ tr {
 
 .--selected {
     >div {
-        @media (min-width: 768px) {
-            background: #f4fbff;
-            border-color: $blue-light-600;
-        }
+      background: #f4fbff;
+      border-color: $blue-light-600;
     }
 }
 /deep/ .qt-table-modern__row {
-    @media (min-width: 768px) {
-        position: relative;
-        height: auto;
-        min-height: 56px;
-        border: unset;
-        margin-bottom: 0;
-    }
+    position: relative;
+    height: auto;
+    min-height: 56px;
+    border: unset;
+    margin-bottom: 0;
 
     &>div {
         cursor: unset;
-        @media (min-width: 768px) {
-            padding-top: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid $gray-200;
-            font-size: 14px;
-            word-break: break-word;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid $gray-200;
+        font-size: 14px;
+        word-break: break-word;
 
-            &:first-child {
-                padding-left: 25px;
-                border-left: 1px solid $gray-200;
-                border-radius: 0;
-            }
+        &:first-child {
+          padding-left: 25px;
+          border-left: 1px solid $gray-200;
+          border-radius: 0;
+        }
 
-            &:last-child {
-                padding-right: 25px;
-                border-right: 1px solid $gray-200;
-                border-radius: 0;
-            }
+        &:last-child {
+          padding-right: 25px;
+          border-right: 1px solid $gray-200;
+          border-radius: 0;
         }
     }
 
@@ -93,11 +87,6 @@ tr {
         left: 1px;
         width: 3px;
         height: 100%;
-
-        @media (max-width: 767px) {
-            left: -1px;
-            border-radius: 8px 0 0 8px;
-        }
 
         &.--high {
             background-color: $red-600;

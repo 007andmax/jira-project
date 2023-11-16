@@ -3,7 +3,7 @@
     [ngClass]="class"
 >
     <div class="qt-inputs-row">
-        <div class="qt-input-block qt-f50 qt-flex-md-100 --required">
+        <div class="qt-input-block qt-f50 --required">
             <div class="qt-input-block__label">Item Number</div>
             <input
                 type="text"
@@ -20,7 +20,7 @@
                 This number is already occupied
             </mat-error>
         </div>
-        <div class="qt-input-block qt-f50 qt-flex-md-100 --required">
+        <div class="qt-input-block qt-f50 --required">
             <div class="qt-input-block__label">ILC Number</div>
             <input
                 type="text"
@@ -79,7 +79,7 @@
         </div>
     </div>
     <div class="qt-inputs-row">
-        <div class="qt-f33 qt-input-block qt-w-md-50 --required">
+        <div class="qt-f33 qt-input-block --required">
             <div class="qt-input-block__label">Cost</div>
             <input
                 class="qt-input-40 inventory-add-body__input"
@@ -100,7 +100,7 @@
                 Cost cannot be higher than Price
             </mat-error>
         </div>
-        <div class="qt-f33 qt-input-block qt-w-md-50 --required">
+        <div class="qt-f33 qt-input-block --required">
             <div class="qt-input-block__label">Markup %</div>
             <input
                 class="qt-input-40 inventory-add-body__input"
@@ -112,7 +112,7 @@
                 placeholder="Enter Markup"
             >
         </div>
-        <div class="qt-f33 qt-input-block qt-flex-md-100 --required">
+        <div class="qt-f33 qt-input-block --required">
             <div class="qt-input-block__label">Price</div>
             <input
                 class="qt-input-40 inventory-add-body__input"
@@ -136,7 +136,7 @@
         </div>
     </div>
     <div class="qt-inputs-row">
-        <div class="qt-flex-md-100">
+        <div>
             <app-taxes
                 #taxesDp
                 [selectedTax]="defaultSelectedTax"

@@ -3,9 +3,6 @@
 .breadcrumbs {
     display: flex;
     align-items: center;
-    @media (max-width: 767px) {
-        display: none;
-    }
     > div:last-child {
       span {
         color: $gray-500;

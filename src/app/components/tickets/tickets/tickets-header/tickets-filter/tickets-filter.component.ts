@@ -326,7 +326,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.onChangeCounterFilter();
     if (this.listType !== 'RECURRING_TICKETS') this.getCount();
     this.ticketsStateService.onChangeLeftPanelFilter(this.listType);
-    if (this.appService.checkMobile()) this.close();
   }
   /**
   * @description Check which filters use, and update count by Output event
@@ -380,10 +379,8 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   public setTypeFilter(type) {
     this.listType = type;
     this.ticketsFilter.setListType(type);
-    if (!this.appService.checkMobile()) {
-      this.ticketsStateService.onInitFilter(this.ticketsFilter);
-      if (type !== 'RECURRING_TICKETS') this.getCount();
-    }
+    this.ticketsStateService.onInitFilter(this.ticketsFilter);
+    if (type !== 'RECURRING_TICKETS') this.getCount();
   }
 
   /**

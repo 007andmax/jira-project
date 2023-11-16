@@ -9,157 +9,14 @@
   position: fixed;
   top: $header-height;
   right: 0;
-  //height: calc(100vh - #{$header-height}); // TODO check this style
   height: calc(100% - #{$header-height});
   z-index: 5;
-
-  @media (max-width: 767px) {
-    width: 100%;
-    top: 0;
-    height: 100%;
-    border: none;
-    padding-bottom: 128px;
-  }
   &.users-page__aside {
     .qt-aside-modern__content {
       padding: 16px 32px;
     }
   }
-  &.password-edit-aside {
-    .qt-aside-modern__header {
-      @media (max-width: 767px) {
-        position: relative;
-      }
-    }
 
-    .password-edit-aside__body {
-      > div {
-        @media (max-width: 767px) {
-          padding: 16px 16px 0;
-        }
-      }
-      .password-history-body {
-        @media (max-width: 767px) {
-          padding: 0;
-        }
-      }
-    }
-
-    .header-circle-icon {
-      @media (max-width: 767px) {
-        left: 16px;
-        margin-right: 0;
-        border: none;
-        background: transparent;
-      }
-      .icon__remove {
-        @media (max-width: 767px) {
-          width: 20px;
-          height: 20px;
-          background-color: $red-600;
-        }
-      }
-    }
-
-    .password-edit-aside__info {
-      @media (max-width: 767px) {
-        flex-wrap: wrap;
-      }
-
-      input,
-      textarea {
-        @media (max-width: 767px) {
-          width: 100%;
-          border: solid 1px $gray-300;
-          margin-top: 8px;
-        }
-      }
-      .date-picker {
-        @media (max-width: 767px) {
-          margin-top: 8px;
-        }
-
-        input {
-          @media (max-width: 767px) {
-            margin-top: 0;
-          }
-        }
-      }
-      input {
-        @media (max-width: 767px) {
-          height: 40px !important;
-        }
-      }
-
-      textarea {
-        @media (max-width: 767px) {
-          height: 80px;
-        }
-      }
-
-      app-date-picker {
-        @media (max-width: 767px) {
-          width: 100%;
-        }
-
-        .date-picker {
-          @media (max-width: 767px) {
-            width: 100%;
-          }
-        }
-      }
-    }
-
-    .password-edit-aside__info-password {
-      @media (max-width: 767px) {
-        align-items: flex-end;
-      }
-
-      .password-edit-aside__info-title {
-        @media (max-width: 767px) {
-          margin-bottom: 8px;
-        }
-      }
-
-      input {
-        @media (max-width: 767px) {
-          margin: 0;
-        }
-      }
-
-      .password-edit-aside__info-title {
-        @media (max-width: 767px) {
-          width: 100%;
-          max-width: 100%;
-        }
-      }
-
-      .icon__hide {
-        @media (max-width: 767px) {
-          border-radius: 0;
-          border-right: transparent;
-        }
-      }
-
-      .icon__copy {
-        @media (max-width: 767px) {
-          border-radius: 0 4px 4px 0;
-        }
-      }
-    }
-  }
-
-  &.password-edit-aside,
-  &.draft-email-aside {
-    .qt-aside-modern__header-close {
-      @media (max-width: 767px) {
-        position: absolute;
-        left: 16px;
-        background-size: 20px;
-        background-image: url("/assets/img/icons/close-light.svg");
-      }
-    }
-  }
   &.draft-email-aside {
     .qt-aside-modern__content {
       display: flex;
@@ -168,10 +25,6 @@
   }
   &.--large {
     width: 642px;
-
-    @media (max-width: 767px) {
-      width: 100%;
-    }
   }
 
   &.--x-large {
@@ -187,31 +40,11 @@
     justify-content: space-between;
     padding-left: 32px;
     padding-right: 16px;
-
-    @media (max-width: 767px) {
-      position: relative;
-      background-color: $gray-900;
-    }
-
-    &-info {
-      @media (max-width: 767px) {
-        width: 100%;
-        justify-content: center;
-        order: 1;
-      }
-    }
   }
 
   &__header-title {
     @include h5__sb;
     color: $gray-900;
-
-    @media (max-width: 767px) {
-      color: $white;
-      @include body-l__sb;
-      flex: 1;
-      text-align: center;
-    }
   }
 
   &__header-close {
@@ -221,10 +54,6 @@
     background-position: center;
     background-repeat: no-repeat;
     cursor: pointer;
-
-    @media (max-width: 767px) {
-      padding: 16px;
-    }
   }
 
   &__content {
@@ -232,11 +61,6 @@
     overflow: auto;
     overflow-x: hidden;
     height: calc(100% - 127px);
-
-    @media (max-width: 767px) {
-      padding: 16px;
-      height: 100%;
-    }
 
     &.--no-footer {
       height: calc(100% - 67px);
@@ -252,44 +76,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    @media (max-width: 767px) {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: $white;
-      padding: 16px;
-      z-index: 1;
-    }
-
-    > div {
-      @media (max-width: 767px) {
-        width: 100%;
-      }
-    }
-
-    .qt-button {
-      @media (max-width: 767px) {
-        width: 100%;
-        justify-content: center;
-        margin: 0;
-      }
-
-      &.--gray {
-        @media (max-width: 767px) {
-          order: -1;
-          margin-right: 12px;
-        }
-      }
-    }
-  }
-  &.qt-aside-modern--page-settings {
-    .qt-aside__title {
-      @media (max-width: 767px) {
-        margin: 0 8px;
-      }
-    }
   }
 }
 
@@ -310,24 +96,11 @@
     height: 20px;
     background-size: contain;
     cursor: pointer;
-
-    @media (max-width: 767px) {
-      position: absolute;
-      top: 50%;
-      left: 26px;
-      transform: translate(-50%, -50%);
-    }
   }
 
   &__title {
     color: $gray-900;
     @include h5__sb;
-
-    @media (max-width: 767px) {
-      color: $white;
-      @include body-l__sb;
-      flex-shrink: 0;
-    }
   }
 
   &__body {

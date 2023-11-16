@@ -15,11 +15,6 @@
         -moz-appearance: none;
         outline: none;
 
-        @media (max-width: 767px) {
-            text-align: left;
-            padding-left: 14px;
-        }
-
         &:disabled {
             background-color: $gray-50;
             border: 1px solid $gray-50;
@@ -58,64 +53,17 @@
     &.modal-title {
         margin: 10px 0 24px 32px;
         padding: 0;
-        @media (max-width: 767px) {
-            margin: 0;
-            justify-content: center;
-            position: relative;
-            background-color: $gray-900;
-            height: 56px;
-            align-items: center;
-        }
         .h1 {
             font-size: 20px;
             line-height: 28px;
             letter-spacing: 0;
-            @media (max-width: 767px) {
-                margin-top: 4px;
-                font-size: 16px;
-                font-weight: 600;
-                line-height: 24px;
-                color: $white;
-            }
         }
         .close {
             top: 5px;
-
-            @media (max-width: 767px) {
-                background-image: url(/assets/img/icons/close-light.svg);
-                position: absolute;
-                top: 50%;
-                left: 26px;
-                transform: translate(-50%, -50%);
-                width: 24px;
-                height: 24px;
-                background-size: contain;
-                cursor: pointer;
-            }
         }
     }
     .footer-area-modal {
         margin-top: 64px;
-        @media (max-width: 767px) {
-            margin-top: 36px;
-        }
-    }
-}
-.download-agent {
-    @media (max-width: 767px) {
-        display: none;
-    }
-}
-.collapse-arrow {
-    @media (max-width: 767px) {
-        width: 36px;
-        height: 36px;
-        transform: none;
-        top: 10px;
-        left: 18px;
-        background-color: $white;
-        background-image: url("/assets/img/icons/collapse-arrow.svg");
-        z-index: 3;
     }
 }
 .profile-cmp-board {
@@ -135,19 +83,12 @@
     align-items: center;
     padding: 12px 0;
     border-bottom: 1px solid $gray-100;
-    @media (max-width: 767px) {
-        display: flex;
-    }
     span {
         font-size: 12px;
         font-weight: 600;
         color: $gray-900;
         margin: 0 16px 0 0;
         line-height: 16px;
-        @media (max-width: 767px) {
-            width: 100%;
-            text-align: center;
-        }
         &:last-child {
             margin: 0;
         }
