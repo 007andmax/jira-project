@@ -42,7 +42,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   IS_MOBILE: boolean = false;
   sub: Subscription = new Subscription();
   constructor(private usersStateService: UsersStateService,
-    private companiesStateService: CompaniesStateService,
+    public companiesStateService: CompaniesStateService,
     private devicesState: DevicesStateService,
     private modalService: NgbModal,
     private confirmStateService: ConfirmStateService,
@@ -125,12 +125,6 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
       window.open(url, '_blank');
     }
     this.cd.detectChanges();
-  }
-  getCompanyLogoUrl() {
-    if (this.company && this.company.logo && this.company.logo && this.company.logo.base64 && !this.company.logo.cropped) return this.company.logo.base64;
-    if (this.company && this.company.logo && this.company.logo.cropped && this.company.logo.cropped.id) return `/file/${this.company.logo.cropped.id}`;
-    if (this.company && this.company.logo && this.company.logo.origin && this.company.logo.origin.id) return `/file/${this.company.logo.origin.id}`;
-    return '/company/default/logo.jpg';
   }
   getUserName() {
     return (this.primaryContact) ? `${this.primaryContact.firstName} ${this.primaryContact.lastName}` : '';

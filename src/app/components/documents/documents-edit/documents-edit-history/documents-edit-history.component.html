@@ -9,7 +9,7 @@
             <div
                 class="documents-create__document-history-avatar"
                 [ngStyle]="{'background':  getUserAvatarUrl(getUserById(item.userId))}"
-                [textContent]="getNameForAvatar(getUserById(item.userId))"
+                [textContent]="usersStateService.getNameForAvatar(getUserById(item.userId))"
             ></div>
             <div class="history-user-info">
                 <p

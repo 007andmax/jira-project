@@ -24,7 +24,7 @@ export class DocumentsEditCategoryComponent implements OnInit, OnDestroy {
   reqCompanies: Array<Company> = [];
   selectedCompanies: Array<Company> = [];
   sub: Subscription = new Subscription();
-  constructor(private companiesStateService: CompaniesStateService,
+  constructor(public companiesStateService: CompaniesStateService,
     private documentsService: DocumentsService,
     private toastrService: ToastrService,
     private appStateService: AppStateService,
@@ -78,12 +78,6 @@ export class DocumentsEditCategoryComponent implements OnInit, OnDestroy {
         });
       }
     }
-  }
-  getCompanyLogoUrl(company) {
-    if (company && company.logo && company.logo && company.logo.base64 && !company.logo.cropped) return company.logo.base64;
-    if (company && company.logo && company.logo.cropped && company.logo.cropped.id) return `/file/${company.logo.cropped.id}`;
-    if (company && company.logo && company.logo.origin && company.logo.origin.id) return `/file/${company.logo.origin.id}`;
-    return '/company/default/logo.jpg';
   }
   onSave() {
     this.addBtn.setDisabled(true);

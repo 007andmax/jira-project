@@ -82,12 +82,6 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
   checkLogo() {
     return (this.selectedCompany && this.selectedCompany.logo && this.selectedCompany.logo.cropped && this.selectedCompany.logo.cropped.id || this.selectedCompany && this.selectedCompany.logo && this.selectedCompany.logo.origin && this.selectedCompany.logo.origin.id)
   }
-  getCompanyLogoUrl() {
-    if (this.selectedCompany && this.selectedCompany.logo && this.selectedCompany.logo && this.selectedCompany.logo.base64 && !this.selectedCompany.logo.cropped) return this.selectedCompany.logo.base64;
-    if (this.selectedCompany && this.selectedCompany.logo && this.selectedCompany.logo.cropped && this.selectedCompany.logo.cropped.id) return `/file/${this.selectedCompany.logo.cropped.id}`;
-    if (this.selectedCompany && this.selectedCompany.logo && this.selectedCompany.logo.origin && this.selectedCompany.logo.origin.id) return `/file/${this.selectedCompany.logo.origin.id}`;
-    return '/company/default/logo.jpg';
-  }
 
   public goToState(state) {
     this.onChangeState.emit(state);

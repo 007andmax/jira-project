@@ -22,7 +22,7 @@ export class InvoicePreviewComponent implements OnInit {
   selectedNote: InvoiceNote = null;
   currentCompany: any;
   constructor(private billableStateService: BillableStateService,
-    private companiesStateService: CompaniesStateService) { }
+    public companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
     this.selectedNote = this.billableStateService.getRegularNote();
@@ -33,12 +33,6 @@ export class InvoicePreviewComponent implements OnInit {
   }
   getContactsPhone() {
     return (this.company.contacts[0].phoneNumbers && this.company.contacts[0].phoneNumbers.length > 0) ? this.company.contacts[0].phoneNumbers[0].number : ''
-  }
-  getCompanyLogoUrl() {
-    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo && this.currentCompany.logo.base64 && !this.currentCompany.logo.cropped) return this.currentCompany.logo.base64;
-    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.cropped && this.currentCompany.logo.cropped.id) return `/file/${this.currentCompany.logo.cropped.id}`;
-    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.origin && this.currentCompany.logo.origin.id) return `/file/${this.currentCompany.logo.origin.id}`;
-    return '/company/default/logo.jpg';
   }
   getDuration(input) {
     let timeInMinutes = input * 60,

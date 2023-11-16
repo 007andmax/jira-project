@@ -34,7 +34,7 @@ export class InvoicesAsidePreviewComponent implements OnInit {
     private invoiceStateService: InvoiceStateService,
     private permissionsService: PermissionsService,
     public customerPortalStateService: CustomerPortalStateService,
-    private companiesStateService: CompaniesStateService) { }
+    public companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
@@ -116,12 +116,7 @@ export class InvoicesAsidePreviewComponent implements OnInit {
       minutes = Math.round(timeInMinutes - (hours * 60));
     return (hours >= 10 ? hours : '0' + hours) + ':' + (minutes >= 10 ? minutes : '0' + minutes) + ' hr(s)';
   }
-  getCompanyLogoUrl() {
-    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo && this.currentCompany.logo.base64 && !this.currentCompany.logo.cropped) return this.currentCompany.logo.base64;
-    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.cropped && this.currentCompany.logo.cropped.id) return `/file/${this.currentCompany.logo.cropped.id}`;
-    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.origin && this.currentCompany.logo.origin.id) return `/file/${this.currentCompany.logo.origin.id}`;
-    return '/company/default/logo.jpg';
-  }
+
   close() {
     this.onClose.emit(null);
     this.showPreloader = true;

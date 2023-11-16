@@ -74,7 +74,7 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private passwordManagerStateService: PasswordManagerStateService,
     private companiesState: CompaniesStateService,
-    private usersStateService: UsersStateService,
+    public usersStateService: UsersStateService,
     private elRef: ElementRef,
     private toastrService: ToastrService,
     public devicesService: DevicesService,
@@ -340,18 +340,6 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
   public trackByIndex(index, item) {
     return index;
   }
-  getUserAvatarUrl(user) {
-    if (!(user && user.avatar)) return '';
-
-    if (user.id) {
-      return `url(${'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
-        '')}) 0% 0% / cover no-repeat`
-    } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
-      return `url(/file/${(user.avatar.origin.id)}.jpg) 0% 0% / cover no-repeat`;
-    } else {
-      return 'url(/users/default/image.jpg) 0% 0% / cover no-repeat';
-    }
-  };
   getUserById(userId) {
     return this.usersStateService.getAllUsers().find(item => item.id === userId);
   }
@@ -359,6 +347,6 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
     return `${user.firstName} ${user.lastName}`;
   }
   getNameForAvatar(item) {
-    return (this.getUserAvatarUrl(this.getUserById(item.userId)) == '') ? `${item.userName[0].toUpperCase()}${item.userName[item.userName.indexOf(" ") + 1].toUpperCase()}` : '';
+    return (this.usersStateService.getUserAvatarUrl(this.getUserById(item.userId)) == '') ? `${item.userName[0].toUpperCase()}${item.userName[item.userName.indexOf(" ") + 1].toUpperCase()}` : '';
   }
 }

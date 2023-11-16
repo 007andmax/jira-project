@@ -39,6 +39,12 @@
                 </tbody>
             </table>
             <div
+                class="no-exist-elements"
+                *ngIf="!showPreloader && users.length == 0"
+            >
+                We couldn't find any results
+            </div>
+            <div
                 class="loading"
                 *ngIf="showPreloader"
             ></div>

@@ -15,6 +15,7 @@ import { CompanyUser } from './class/company-user';
   providers: [TicketsListService],
 })
 export class CompanyUsersDropDownComponent extends DropDownComponent {
+
   selectedCustomerCompany: UserCustomerCompaniesInfo;
   constructor(public elRef: ElementRef,
     public companiesStateService: CompaniesStateService,
@@ -44,7 +45,7 @@ export class CompanyUsersDropDownComponent extends DropDownComponent {
  * @returns {String} This is the result
 */
   getSelectedItemText() {
-    return (this.selectedItem) ? this.getUserName(this.selectedItem) : "";
+    return (this.selectedItem) ? `${this.getUserName(this.selectedItem)} - ${this.selectedCustomerCompany.clientCompanyName}` : "";
   }
   /**
  * @description Init logic to get user list from global request

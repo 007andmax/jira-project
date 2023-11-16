@@ -21,7 +21,7 @@ export class PaymentsAsideComponent implements OnInit {
   @Output() onRefundPayment = new EventEmitter<any>();
   currentCompany: any;
   company: any;
-  constructor(private companiesStateService: CompaniesStateService,
+  constructor(public companiesStateService: CompaniesStateService,
     private modalService: NgbModal,
     private paymentsStateService: PaymentsStateService,
     public customerPortalStateService: CustomerPortalStateService,
@@ -46,12 +46,6 @@ export class PaymentsAsideComponent implements OnInit {
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to remove the payment?`;
     this.paymentsStateService.setPaymentForemove(this.payment);
-  }
-  getCompanyLogoUrl() {
-    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo && this.currentCompany.logo.base64 && !this.currentCompany.logo.cropped) return this.currentCompany.logo.base64;
-    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.cropped && this.currentCompany.logo.cropped.id) return `/file/${this.currentCompany.logo.cropped.id}`;
-    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.origin && this.currentCompany.logo.origin.id) return `/file/${this.currentCompany.logo.origin.id}`;
-    return '/company/default/logo.jpg';
   }
   parsePaymentMethod(method) {
     return method.split('_').map((el) => el[0].toUpperCase() + el.slice(1).toLowerCase()).join(' ');

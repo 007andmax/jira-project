@@ -4,7 +4,7 @@
         [ngClass]="{'with-logo': checkLogo()}"
     >
         <img
-            [src]="getCompanyLogoUrl()"
+            [src]="companiesStateService.getCompanyLogoUrl(selectedCompany)"
             alt
             *ngIf="checkLogo()"
         >
@@ -159,14 +159,15 @@
         </li>
     </a>
 
-        <a
-            class="clear-link-style"
-            href
-            [link]="getLinkSection('documents')"
-            target="_blank"
-            appRightClickBlank
-        >
-          <li [ngClass]="{'--active':activePage === 'company-documents'}">
+
+    <a
+        class="clear-link-style"
+        href
+        [link]="getLinkSection('documents')"
+        target="_blank"
+        appRightClickBlank
+    >
+        <li [ngClass]="{'--active':activePage === 'company-documents'}">
             <span
                 class="documents-name-link"
                 (click)="goToCompanySection('documents')"
@@ -174,17 +175,18 @@
                 Documents
             </span>
             <div
-              class="qt-ml-auto qt-sz-20"
-              (click)="toogleCategoriesDocuments = !toogleCategoriesDocuments"
-              *ngIf="assignedDocumentCategories.length > 0"
+                class="qt-ml-auto qt-sz-20"
+                (click)="toogleCategoriesDocuments = !toogleCategoriesDocuments"
+                *ngIf="assignedDocumentCategories.length > 0"
             >
-              <i
-                class="icn-sm report-caret-icon"
-                [ngClass]="{'show-categories-documents':toogleCategoriesDocuments}"
-              ></i>
+                <i
+                    class="icn-sm report-caret-icon"
+                    [ngClass]="{'show-categories-documents':toogleCategoriesDocuments}"
+                ></i>
             </div>
-          </li>
-        </a>
+        </li>
+    </a>
+
 
     <ul
         class="categories"

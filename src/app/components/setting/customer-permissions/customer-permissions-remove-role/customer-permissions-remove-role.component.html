@@ -20,8 +20,8 @@
                         <div class="default-user-avatar avatar-background-color-odd">
                             <div
                                 class="users-table__name--avatar"
-                                [ngStyle]="{'background':  getUserAvatarUrl(user)}"
-                                [textContent]="getNameForAvatar(user)"
+                                [ngStyle]="{'background':  usersStateService.getUserAvatarUrl(user)}"
+                                [textContent]="usersStateService.getNameForAvatar(user)"
                             ></div>
                         </div>
                         <div class="qt-f-1 ellipsis">

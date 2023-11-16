@@ -5,7 +5,7 @@
     ></div>
     <div class="profile-cmp-board qt-df">
         <img
-            [src]="getCompanyLogoUrl()"
+            [src]="companiesStateService.getCompanyLogoUrl(companyDetail)"
             class="profile-cmp-board__image"
             alt
             *ngIf="checkLogo()"
@@ -89,8 +89,8 @@
                     <div class="qt-df qt-ai-c qt-jc-sb qt-w100">
                         <div
                             class="users-table__name--avatar"
-                            [ngStyle]="{'background':  getUserAvatarUrl(user)}"
-                            [textContent]="getNameForAvatar(user)"
+                            [ngStyle]="{'background':  usersStateService.getUserAvatarUrl(user)}"
+                            [textContent]="usersStateService.getNameForAvatar(user)"
                         ></div>
                         <div class="users-table__name-wrap">
                             <div
@@ -158,6 +158,9 @@
                 ></preview-phone-mask>
             </a>
             <address>{{companyDetailing.addresses_name}}</address>
+            <span class="qt-fs-13 qt-mb-8 dfn qt-color-gray-900">
+                Postal Code - {{companyDetailing?.addresses[0]?.postalCode}}
+            </span>
             <a
                 (click)="openMap(content,companyDetailing.addresses[0])"
                 class="btn btn-outline"
@@ -186,6 +189,9 @@
             <address>
                 {{companyDetailing.shipping_addresses_name}}
             </address>
+            <span class="qt-fs-13 qt-mb-8 dfn qt-color-gray-900">
+                Postal Code - {{companyDetailing?.addresses[1]?.postalCode}}
+            </span>
             <a
                 (click)="openMap(content,companyDetailing.addresses.length > 1 ? companyDetailing.addresses[1] : null)"
                 class="btn btn-outline"

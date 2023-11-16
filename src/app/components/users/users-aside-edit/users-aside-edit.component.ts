@@ -177,7 +177,6 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     if (this.user && this.user.avatar && this.user.avatar && this.user.avatar.base64 && !this.user.avatar.cropped) return this.user.avatar.base64;
     if (this.user && this.user.avatar && this.user.avatar.cropped && this.user.avatar.cropped.id) return `/file/${this.user.avatar.cropped.id}`;
     if (this.user && this.user.avatar && this.user.avatar.origin && this.user.avatar.origin.id) return `/file/${this.user.avatar.origin.id}`;
-    return '/company/default/logo.jpg';
   }
   getUserType() {
     if (this.user.role === 'USER') return 'Standar User';

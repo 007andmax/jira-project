@@ -27,7 +27,7 @@ export class TicketDetailContactDetailsComponent implements OnInit, OnDestroy {
   location: string;
   companyOpen: string = 'Close';
   sub: Subscription = new Subscription();
-  constructor(private companiesStateService: CompaniesStateService,
+  constructor(public companiesStateService: CompaniesStateService,
     private mapModalStateService: MapModalStateService,
     public ticketsListService: TicketsListService,
     private usersStateService: UsersStateService) { }
@@ -142,12 +142,6 @@ export class TicketDetailContactDetailsComponent implements OnInit, OnDestroy {
   }
   checkLogo(company) {
     return (company && company.logo && company.logo.cropped && company.logo.cropped.id || company && company.logo && company.logo.origin && company.logo.origin.id)
-  }
-  getCompanyLogoUrl(company) {
-    if (company && company.logo && company.logo && company.logo.base64 && !company.logo.cropped) return company.logo.base64;
-    if (company && company.logo && company.logo.cropped && company.logo.cropped.id) return `/file/${company.logo.cropped.id}`;
-    if (company && company.logo && company.logo.origin && company.logo.origin.id) return `/file/${company.logo.origin.id}`;
-    return '/company/default/logo.jpg';
   }
   close() {
     this.onClose.emit(null);

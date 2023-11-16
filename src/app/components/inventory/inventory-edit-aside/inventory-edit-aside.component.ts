@@ -172,6 +172,10 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
     return `${result["glNumber"]} - ${(result["description"] && result["description"].length > 0) ? result["description"]
       : "No description"}`;
   };
+  formatterSeletedGLNumber = (result) => {
+    return result ? `${result["glNumber"]} - ${(result["description"] && result["description"].length > 0) ? result["description"]
+      : "No description"}` : "";
+  };
   private roundingMarkup(markup) {
     return (!this.isInteger(markup)) ? Math.ceil(markup * 10) / 10 : markup;
   }

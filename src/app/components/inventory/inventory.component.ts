@@ -36,6 +36,7 @@ export class InventoryComponent implements OnInit {
   taxes: Array<Tax> = [];
   showEdit = false;
   serviceAgreement: ServiceAgreement;
+  container = document.body.querySelector(".main-container");
   constructor(private productService: ProductService,
     private inventoryListService: InventoryListService,
     private companiesStateService: CompaniesStateService,
@@ -165,7 +166,6 @@ export class InventoryComponent implements OnInit {
     }
     this.page_number += 1;
     let listFilter = this.filter.getFilterList(this.reqInventoryList);
-    // listFilter = listFilter.filter(item => (this.productSearchName.length > 0) ? (item.description.toLowerCase().includes(this.productSearchName.toLowerCase()) || item.ilc && item.ilc.toLowerCase().includes(this.productSearchName.toLowerCase()) || item.isFindGlNumber(this.productSearchName) || item.manufacture && item.manufacture.toLowerCase().includes(this.productSearchName.toLowerCase())) : true);
     this.filter.onFilter(listFilter, this.companies, this.glNumbers);
     let start = (this.page_number - 1) * 30;
     let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;

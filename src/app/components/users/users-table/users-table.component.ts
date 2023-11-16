@@ -104,10 +104,6 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     let find = this.jobTitleList.find(item => item.id === this.user.jobTitleId);
     return (find) ? find.name : '';
   }
-  getNameForAvatar() {
-    if (!this.user.avatar) return `${(this.user.firstName) ? this.user.firstName[0].toUpperCase() : ''}${(this.user.lastName) ? this.user.lastName[0].toUpperCase() : ''}`;
-    return '';
-  }
   getUserName() {
     return `${this.user.firstName} ${this.user.lastName}`;
   }
@@ -120,18 +116,6 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     let index = this.companies.findIndex(item => item.id === this.user.company.id);
     return (index > -1) ? this.companies[index].name : '';
   }
-  getUserAvatarUrl() {
-    if (!(this.user && this.user.avatar)) return '';
-
-    if (this.user.id) {
-      return `url(${'/users/' + (this.user.id || 'default') + '/image' + (this.user.avatar ? '.jpg?t=' + this.user.avatar.updatedAt :
-        '')}) 0% 0% / contain no-repeat`
-    } else if (this.user.avatar && this.user.avatar.origin && this.user.avatar.origin.id) {
-      return `url(/file/${(this.user.avatar.origin.id)}.jpg) 0% 0% / contain no-repeat`;
-    } else {
-      return 'url(/users/default/image.jpg) 0% 0% / contain no-repeat';
-    }
-  };
   isPrimaryContact() {
     if (!this.customerPortalStateService.isCustomerPortal && this.companyId) return this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).isPrimaryContact;
     if (this.customerPortalStateService.isCustomerPortal && this.user.customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id'))) return this.user.customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id')).isPrimaryContact;
@@ -151,7 +135,6 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     this.cd.markForCheck();
   }
   ngOnInit() {
-    console.log("type", this.type);
     this.industries = this.crmStateService.getIndustryList();
     let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
       this.industries = data;
