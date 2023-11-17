@@ -27,7 +27,6 @@ export class TextAreaDirective implements OnInit {
     this.element.nativeElement.parentNode.style.position = 'relative';
   }
   ngDoCheck() {
-
     if (this.element.nativeElement.value === "") {
       this.element.nativeElement.setAttribute("rows", (this.default) ? this.default : 1);
     } else {
