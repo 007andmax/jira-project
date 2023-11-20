@@ -269,7 +269,7 @@
                             <table class="invoice-preview__table">
                                 <thead class=" qt-lh-127">
                                     <tr>
-                                        <th class="invoice-preview__col-item">Item</th>
+                                        <th class="invoice-preview__col-item service-date">Item</th>
                                         <th class="invoice-preview__col-desc">Description</th>
                                         <th class="invoice-preview__col-price">Unit Price</th>
                                         <th class="invoice-preview__col-qty">Quantity</th>
@@ -285,10 +285,14 @@
                                         [ngForTrackBy]="trackById"
                                     >
                                         <tr>
-                                            <td
-                                                class="invoice-preview__col-item"
-                                                [textContent]="service.item.name"
-                                            ></td>
+                                            <td class="invoice-preview__col-item service-date">
+                                                <span [textContent]="service.item.name"></span>
+                                                <br>
+                                                <span
+                                                    class="qt-fs-10 qt-color-gray-500"
+                                                    [textContent]="'Service date - ' + getDate(service.date)"
+                                                ></span>
+                                            </td>
                                             <td class="invoice-preview__col-desc">
                                                 <pre [textContent]="service.description"></pre>
                                             </td>

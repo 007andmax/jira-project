@@ -28,7 +28,7 @@
         <thead>
             <tr>
                 <th></th>
-                <th class="invoice-item__col-item  qt-fw-600">Item</th>
+                <th class="invoice-item__col-item  qt-fw-600 service-date">Item</th>
                 <th class="invoice-item__col-desc  qt-fw-600">Description</th>
                 <th class="invoice-item__col-price qt-fw-600">Unit Price</th>
                 <th class="invoice-item__col-quentity qt-fw-600">Quantity</th>
@@ -46,10 +46,13 @@
             >
                 <tr>
                     <td></td>
-                    <td class="invoice-item__col-item">
+                    <td class="invoice-item__col-item service-date">
                         <span [textContent]="service.item.name"></span>
                         <br>
-                        <span [textContent]="'Service date - ' + getDateService(service.date)"></span>
+                        <span
+                            class="qt-fs-10 qt-color-gray-500"
+                            [textContent]="'Service date - ' + getDateService(service.date)"
+                        ></span>
                     </td>
                     <td class="invoice-item__col-desc">
                         <pre [textContent]="service.description"></pre>
