@@ -127,7 +127,7 @@
                     <thead>
                         <tr>
                             <th class="qt-fw-600 qt-color-gray-900">Ticket Number</th>
-                            <th class="qt-fw-600 qt-color-gray-900">Date / Time</th>
+                            <th class="qt-fw-600 qt-color-gray-900">Date / Time of ther service</th>
                             <th class="qt-fw-600 qt-color-gray-900">User</th>
                             <th class="qt-fw-600 qt-color-gray-900">Tech User</th>
                             <th class="qt-fw-600 qt-color-gray-900">DESCRIPTION</th>
@@ -147,7 +147,7 @@
                             <tr class="qt-report__body-row">
                                 <td>{{ticket.ticketNumber}}</td>
                                 <td>
-                                    {{ parseDateTicket(ticket.ticketDate) }}
+                                    {{ parseDateTicket(ticket.expenseDate) }}
                                 </td>
                                 <td>{{ getUserName(ticket.serviceUser) }}</td>
                                 <td>

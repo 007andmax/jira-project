@@ -46,14 +46,14 @@
             >
                 <tr>
                     <td></td>
-                    <td
-                        class="invoice-item__col-item"
-                        [textContent]="service.item.name"
-                    ></td>
-                    <td
-                        class="invoice-item__col-desc"
-                        [textContent]="service.description"
-                    ></td>
+                    <td class="invoice-item__col-item">
+                        <span [textContent]="service.item.name"></span>
+                        <br>
+                        <span [textContent]="'Service date - ' + getDateService(service.date)"></span>
+                    </td>
+                    <td class="invoice-item__col-desc">
+                        <pre [textContent]="service.description"></pre>
+                    </td>
                     <td
                         class="invoice-item__col-price"
                         [textContent]="service.item.rate | currency"

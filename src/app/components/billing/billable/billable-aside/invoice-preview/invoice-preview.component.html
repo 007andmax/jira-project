@@ -141,10 +141,9 @@
                                         class="invoice-preview__col-item"
                                         [textContent]="service.item.name"
                                     ></td>
-                                    <td
-                                        class="invoice-preview__col-desc"
-                                        [textContent]="service.description"
-                                    ></td>
+                                    <td class="invoice-preview__col-desc">
+                                        <pre [textContent]="service.description"></pre>
+                                    </td>
                                     <td
                                         class="invoice-preview__col-price"
                                         [textContent]="service.item.rate | currency"

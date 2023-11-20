@@ -21,6 +21,9 @@ export class InvoiceFormTicketInfoComponent implements OnInit {
   public getDate(date) {
     return moment(new Date(date)).format('DD/MM/YYYY');
   }
+  public getDateService(date) {
+    return moment(new Date(date)).format('DD MMM YYYY');
+  }
   getDuration(input) {
     let timeInMinutes = input * 60,
       hours = Math.floor(timeInMinutes / 60),
