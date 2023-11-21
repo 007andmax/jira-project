@@ -155,6 +155,7 @@
   .invoce-table__menu {
     width: 28px;
     min-width: 28px;
+    max-width: 28px;
     padding-left: 0;
     padding-right: 0;
 
@@ -433,7 +434,8 @@ app-invoices-item,app-payment-item {
     &__table {
       width: 100%;
       border-collapse: separate;
-      border-spacing: 0px;
+      border-spacing: 0;
+      table-layout: fixed;
 
       th, td {
         border-bottom: solid 1px $gray-200;
@@ -443,18 +445,18 @@ app-invoices-item,app-payment-item {
         }
       }
       th {
-        padding: 0 12px;
+        padding: 0 8px;
         font-size: 11px;
         font-weight: 600;
         height: 32px;
       }
       td {
-        font-size: 14px;
+        font-size: 12px;
         line-height: 17px;
         font-weight: 400;
         color: $gray-900;
         height: 40px;
-        padding: 10px;
+        padding: 10px 8px;
         vertical-align: middle;
       }
     }

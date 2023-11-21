@@ -303,7 +303,8 @@ app-invoice-preview {
     &__table {
       width: 100%;
       border-collapse: separate;
-      border-spacing: 0px;
+      border-spacing: 0;
+      table-layout: fixed;
 
       th, td {
         border-bottom: solid 1px $gray-200;
@@ -313,14 +314,14 @@ app-invoice-preview {
         }
       }
       th {
-        padding: 0 12px;
+        padding: 0 8px;
         font-size: 11px;
         font-weight: 600;
         height: 32px;
       }
       td {
         font-size: 12px;
-        padding: 10px 12px;
+        padding: 10px 8px;
         height: 40px;
         vertical-align: middle;
       }
