@@ -100,9 +100,7 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    width: -webkit-max-content;
-    width: -moz-max-content;
-    width: max-content;
+    width: 100%;
   }
 
   .invoce-table__invoice {
