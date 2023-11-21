@@ -19,9 +19,6 @@ export class InvoiceFormTicketInfoComponent implements OnInit {
     this.onDelete.emit(null);
   }
   public getDate(date) {
-    return moment(new Date(date)).format('DD/MM/YYYY');
-  }
-  public getDateService(date) {
     return moment(new Date(date)).format('DD MMM YYYY');
   }
   getDuration(input) {
