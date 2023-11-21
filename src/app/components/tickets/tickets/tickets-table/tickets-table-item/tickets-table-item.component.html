@@ -68,7 +68,7 @@
                 [ngbTooltip]="tipContent"
                 [container]="'body'"
                 *ngIf="ticket.multiAssignedUsers.length > 5"
-                [ngStyle]="{'left': getStyleNetAvatar(ticket.multiAssignedUsers.length)}"
+                [ngStyle]="{'left': getStyleNetAvatar(5)}"
             >
                 <span [textContent]="'+' + (ticket.multiAssignedUsers.length - 5)"></span>
             </div>
