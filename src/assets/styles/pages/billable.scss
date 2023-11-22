@@ -125,7 +125,9 @@
       &__table {
         width: 100%;
         border-collapse: separate;
-        border-spacing: 0px;
+        border-spacing: 0;
+        table-layout: fixed;
+
         th, td {
           background-color: $gray-25;
           border: solid 1px $gray-200;

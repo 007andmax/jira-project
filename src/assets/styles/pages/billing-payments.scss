@@ -93,36 +93,52 @@
 
   .billable-payment-table__reference {
     width: 150px;
+    min-width: 150px;
+    max-width: 150px;
   }
 
   .billable-payment-table__date {
     width: 109px;
+    min-width: 109px;
+    max-width: 109px;
   }
   .billable-payment-table__invoice {
     width: 91px;
+    min-width: 109px;
+    max-width: 109px;
   }
   .billable-payment-table__company {
-      width: max-content;
+      width: 100% ;
   }
 
   .billable-payment-table__payment-mode {
     width: 150px;
+    min-width: 150px;
+    max-width: 150px;
   }
 
   .billable-payment-table__payment {
     width: 100px;
+    min-width: 100px;
+    max-width: 100px;
   }
 
   .billable-payment-table__amount {
     width: 110px;
+    min-width: 110px;
+    max-width: 110px;
   }
 
   .billable-payment-table__status {
     width: 90px;
+    min-width: 90px;
+    max-width: 90px;
   }
 
   .billable-payment-table__menu {
     width: 28px;
+    min-width: 28px;
+    max-width: 28px;
     padding: 0 !important;
     .icon__more {
       height: 100%;
