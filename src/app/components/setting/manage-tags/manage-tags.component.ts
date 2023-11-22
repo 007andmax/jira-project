@@ -27,7 +27,7 @@ declare var $: any;
   selector: "app-manage-tags",
   templateUrl: "./manage-tags.component.html",
   styleUrls: ["./manage-tags.component.scss"],
-  providers: [ManageTagsListService]
+  providers: [ManageTagsListService],
 })
 export class ManageTagsComponent implements OnDestroy, OnInit {
   searchTag = "";
@@ -59,6 +59,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
   @ViewChild(NgbTabset) set content(content: ViewContainerRef) {
     this.tabSet = content;
   };
+  container = document.body.querySelector(".main-container");
   dtTrigger = new Subject();
   sub: Subscription = new Subscription();
   constructor(

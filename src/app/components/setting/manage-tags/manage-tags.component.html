@@ -2,17 +2,17 @@
     <div class="page-insider manage-tags">
         <div class="heading qt-df qt-ai-fs qt-jc-sb">
             <h5 class="qt-fw-600">Manage Tags</h5>
-            <div class="qt-df qt-ml-12 heading-serach qt-pos-rel">                
-                    <span class="qt-input-search">
-                        <input
-                            type="search"
-                            class="qt-input-search"
-                            [(ngModel)]="searchTag"
-                            name="searchTag"
-                            placeholder="Search Tags"
-                            (input)="onSearch()"
-                        >
-                    </span>                
+            <div class="qt-df qt-ml-12 heading-serach qt-pos-rel">
+                <span class="qt-input-search">
+                    <input
+                        type="search"
+                        class="qt-input-search"
+                        [(ngModel)]="searchTag"
+                        name="searchTag"
+                        placeholder="Search Tags"
+                        (input)="onSearch()"
+                    >
+                </span>
                 <a
                     href="javascript:;"
                     class="qt-button --md --gray qt-jc-c pointer qt-ml-12"
@@ -83,6 +83,7 @@
                                 <div
                                     class="tab-pane__table-body"
                                     infiniteScroll
+                                    [infiniteScrollContainer]="container"
                                     [infiniteScrollDistance]="2"
                                     [infiniteScrollThrottle]="50"
                                     [infiniteScrollDisabled]="infiniteScrollDisabled"
