@@ -180,11 +180,11 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     this.getTags();
   }
   getTags() {
-    this.showPendingPreloader = true;
     if (this.manageTagsListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;
     }
+    this.showPendingPreloader = true;
     this.tagsService.searchManageTag(this.page, this.searchTag).subscribe((data: any) => {
       this.companyTags = [...this.companyTags, ...data.commonTagViews].map(item => new ManageTag(item));
       this.reqcompanyTags = [...this.reqcompanyTags, ...JSON.parse(JSON.stringify(data.commonTagViews))].map(item => new ManageTag(item));
