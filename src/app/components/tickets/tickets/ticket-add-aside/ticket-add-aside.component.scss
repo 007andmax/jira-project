@@ -86,6 +86,7 @@
 
 .assigned-users-list {
   display: flex;
+  flex-wrap: wrap;
 
   .default-user-avatar {
     width: 24px;
@@ -143,6 +144,8 @@
 }
 .assigned-users-type {
   display: flex;
+  flex-wrap: wrap;
+  gap: 10px 2px;
 }
 #add-ticket-describe-issue {
   height: auto;

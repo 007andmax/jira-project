@@ -19,7 +19,7 @@ export class InvoiceFormTicketInfoComponent implements OnInit {
     this.onDelete.emit(null);
   }
   public getDate(date) {
-    return moment(new Date(date)).format('DD/MM/YYYY');
+    return moment(new Date(date)).format('DD MMM YYYY');
   }
   getDuration(input) {
     let timeInMinutes = input * 60,

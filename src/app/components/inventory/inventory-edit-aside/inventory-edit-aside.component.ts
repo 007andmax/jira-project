@@ -192,9 +192,9 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
     this.inventory.sale_str = value.toFixed(2);
     this.inventory.markup = this.getMarkups();
   }
-  public onPastDescription(value) {
+  public onPastDescription(event) {
     this.validate.resetDescription();
-    this.inventory.description = value;
+    this.inventory.description = event.target.value;
   }
   onTaxesChange(data) {
     this.inventory.taxIds = data.map(item => {

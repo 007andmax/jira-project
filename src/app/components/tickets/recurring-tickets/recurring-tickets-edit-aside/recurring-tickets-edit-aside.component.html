@@ -130,23 +130,23 @@
                         class="qt-inputs-row"
                         [ngClass]="(product.noValid) ? 'no-valid-product' : ''"
                     >
-                        <div class="qt-input-block">
-                            <div class="qt-input-block__label">Search Product</div>
-                            <app-product-list
-                                [type]="'RECURRING-TICKET'"
-                                [editItem]="product"
-                                (selectedProductItem)="selectProduct($event,i)"
-                            ></app-product-list>
-                            <div
-                                class="qt-input-block--icon qt-f33"
-                                *ngIf="products.length > 1"
-                            >
-                                <i
-                                    class="icon__remove icn-16"
-                                    (click)="removeProduct(i)"
-                                ></i>
-                            </div>
-                        </div>
+                      <div class="qt-input-block">
+                          <div class="qt-input-block__label">Search Product</div>
+                          <app-product-list
+                              [type]="'RECURRING-TICKET'"
+                              [editItem]="product"
+                              (selectedProductItem)="selectProduct($event,i)"
+                          ></app-product-list>
+                      </div>
+                      <div
+                        class="qt-input-block--icon qt-f33"
+                        *ngIf="products.length > 1"
+                      >
+                        <i
+                          class="icon__remove icn-16"
+                          (click)="removeProduct(i)"
+                        ></i>
+                      </div>
                     </div>
                     <div class="qt-inputs-row">
                         <div class="qt-f33 qt-input-block">
