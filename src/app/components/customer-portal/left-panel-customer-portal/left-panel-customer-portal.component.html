@@ -2,37 +2,9 @@
     <div class="app-left-panel__body-icon">
         <div class="qt-df qt-jc-sb qt-ai-c app-left-panel__header-mobile qt-df qt-jc-fs">
             <div class="icon__quicktech-logo-mini qt-sz-40 qt-bg-contain qt-ml-auto qt-mr-auto qt-mt-16 qt-mb-16"></div>
-            <div class="app-left-panel__systems-info qt-df qt-ai-c qt-ml-16 qt-d-none">
-                <img
-                    [src]="checkLogo()"
-                    class="app-left-panel__systems-info-avatar qt-sz-32 qt-circle"
-                    alt
-                    *ngIf="checkLogo()"
-                >
-                <div
-                    class="app-left-panel__systems-info-avatar qt-sz-32 qt-circle qt-df qt-ai-c qt-jc-c"
-                    style="background-color: #7A5AF8; color: #fff"
-                    *ngIf="!checkLogo()"
-                    [textContent]="getShortCompanyName()"
-                >
-                </div>
-                <div class="qt-ml-6">
-                    <div class="app-left-panel__systems-info-header">{{getCurrentUserName()}}</div>
-                    <div class="app-left-panel__systems-info-name qt-color-gray-400 qt-fs-12">
-                        <div class="app-left-panel__systems-info-circle"></div>
-                        {{ (currentCompany) ? currentCompany.name : ''}}
-                    </div>
-                </div>
-            </div>
-            <div class="header-mobile-close qt-d-none qt-d-md-flex pointer qt-ml-auto">
-                <div
-                    class="icon__close-white qt-sz-20 qt-bg-contain"
-                    (click)="onToggleMobileLeftPanel()"
-                ></div>
-            </div>
         </div>
         <div
-            class="app-left-panel__menu-icon-wrap app-left-panel__menu-icon-wrap-settings qt-d-md-none pointer"
+            class="app-left-panel__menu-icon-wrap app-left-panel__menu-icon-wrap-settings pointer"
             (click)="changePage('SETTINGS');onOpenPanel();onChangeState('myprofile-component')"
             [ngClass]="{'--active':page === 'SETTINGS' }"
             placement="right"
@@ -41,21 +13,13 @@
         >
             <div class="app-left-panel__menu-icon --settings"></div>
         </div>
-        <div
-            class="app-left-panel__menu-icon-wrap qt-d-none qt-d-md-flex pointer"
-            (click)="logOut()"
-        >
-            <div class="app-left-panel__menu-icon --logout"></div>
-            <div class="app-left-panel__menu-text qt-ml-12 qt-mr-12 qt-d-none qt-d-md-block">Logout</div>
-            <div class="icon__arrow-right-gray-400 qt-sz-16 qt-bg-contain qt-ml-auto qt-d-none qt-d-md-block"></div>
-        </div>
     </div>
     <div
         class="app-left-panel__body-menu"
         [ngClass]="{'--open':showMobTab}"
     >
         <div
-            class="app-left-panel__header-resize-btn qt-d-md-none"
+            class="app-left-panel__header-resize-btn"
             (click)="onToggleLeftPanel()"
         ></div>
         <left-panel-customer-portal-users
@@ -63,14 +27,12 @@
             (onOpenPanel)="onOpenPanel()"
             (onChangeState)="onChangeState($event)"
             [activePage]="state"
-            class="qt-d-md-none"
         ></left-panel-customer-portal-users>
         <!-- <app-left-panel-settings
             #panelSettings
             (onOpenPanel)="onOpenPanel()"
             (onChangeState)="onChangeState($event)"
             [activePage]="state"
-            class="qt-d-md-none"
             [hidden]="page !== 'SETTINGS'"
         ></app-left-panel-settings> -->
     </div>

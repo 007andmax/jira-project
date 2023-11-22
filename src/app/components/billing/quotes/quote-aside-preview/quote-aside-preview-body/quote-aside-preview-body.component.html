@@ -177,8 +177,8 @@
             <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-gray-900 qt-fw-600 qt-lh-133">Customer Note</div>
             <div
                 class="qt-fs-13 qt-lh-154 note qt-fw-400"
-                *ngIf="quote.regularNote"
-                [textContent]="(quote.regularNote && quote.regularNote.line1) ? quote.regularNote.line1 : ''"
+                *ngIf="quote.note"
+                [textContent]="quote.note ? quote.note : ''"
             ></div>
         </div>
         <div class="invoice-preview__total-block">

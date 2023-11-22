@@ -2,17 +2,10 @@
 
 companies-filter {
   display: contents;
-
-  @media (max-width: 767px) {
-    display: block;
-  }
 }
 .is-exist-filters {
   position: relative;
   &::before {
-    @media (max-width: 767px) {
-      display: block;
-    }
     display: none;
     content: " ";
     position: absolute;
@@ -26,9 +19,6 @@ companies-filter {
 }
 .list-filters {
   display: none;
-  @media (max-width: 767px) {
-    display: block;
-  }
   margin: -8px -8px 8px -8px;
   /deep/.mat-form-field-infix {
     overflow: auto;

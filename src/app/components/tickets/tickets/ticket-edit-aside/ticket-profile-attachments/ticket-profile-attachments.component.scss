@@ -3,23 +3,10 @@
 .attachment-component {
   padding: 0 32px;
 
-  @media (max-width: 767px) {
-    padding: 0 16px;
-  }
-
   .attached-files-container {
     display: flex;
     flex-wrap: wrap;
     margin-top: -8px;
-
-    @media (max-width: 767px) {
-      display: flex !important;
-    }
-    &:not(:empty) {
-      @media (max-width: 767px) {
-        margin-bottom: 20px;
-      }
-    }
   }
 
   .attachment-item {
@@ -50,11 +37,6 @@
       justify-content: space-between;
       align-items: center;
       padding-bottom: 14px;
-
-      @media (max-width: 767px) {
-        border: none;
-        margin-bottom: 12px;
-      }
     }
 
     &__count-items {
@@ -74,10 +56,6 @@
       background-position: center;
       background-repeat: no-repeat;
       background-image: url("/assets/img/icons/download.svg");
-
-      @media (max-width: 767px) {
-        display: none;
-      }
     }
 
     &__type {

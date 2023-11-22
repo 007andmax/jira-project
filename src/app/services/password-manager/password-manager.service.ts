@@ -25,7 +25,6 @@ export class PasswordManagerService {
   public deleteItem: EventEmitter<any> = new EventEmitter();
   public deleteItemEditForm: EventEmitter<any> = new EventEmitter();
   public onToggleFilter: EventEmitter<any> = new EventEmitter();
-  public mobileCategory: EventEmitter<any> = new EventEmitter();
   public newRecordsisAdd: EventEmitter<any> = new EventEmitter();
   public onSort: EventEmitter<any> = new EventEmitter();
 
@@ -307,13 +306,6 @@ export class PasswordManagerService {
    */
   public toggleFilters(val) {
     this.onToggleFilter.emit(val);
-  }
-
-  /**
-   * Set mobile category
-   */
-  public setMobileCategory() {
-    this.mobileCategory.emit();
   }
 
 }

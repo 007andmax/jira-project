@@ -229,8 +229,8 @@
                 <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-gray-900 qt-fw-600 qt-lh-133">Customer Note</div>
                 <div
                     class="qt-fs-13 qt-lh-154 note qt-fw-400"
-                    *ngIf="selectedNote"
-                    [textContent]="selectedNote.line1"
+                    *ngIf="invoice.invoiceDataDto.note"
+                    [textContent]="invoice.invoiceDataDto.note"
                 ></div>
             </div>
             <div class="invoice-preview__total-block">

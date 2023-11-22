@@ -18,11 +18,12 @@ width: 100%;
 max-width: unset;
 }
 
-.outsideheader{
+.outsideheader {
   padding: 30px;
   background-color:#edf2f6;
   padding-right: 17px;
   padding-left: 16px;
+  min-height: calc(100vh - 124px);
 }
 
 .reports-all{

@@ -1,12 +1,22 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TicketProfileUpdatesServiceItemComponent } from '../../../../ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service/ticket-profile-updates-service-item/ticket-profile-updates-service-item.component';
+import { TicketProfileService } from '../../../../class/ticket-profile-service';
+import { TicketProfileUpdate } from '../../../../class/ticket-profile-update';
 
 @Component({
   selector: 'ticket-detail-profile-updates-service-item',
   templateUrl: './ticket-detail-profile-updates-service-item.component.html',
   styleUrls: ['./ticket-detail-profile-updates-service-item.component.scss']
 })
-export class TicketDetailProfileUpdatesServiceItemComponent extends TicketProfileUpdatesServiceItemComponent {
+export class TicketDetailProfileUpdatesServiceItemComponent implements OnInit {
   @Input() showCompleteLabel: boolean = false;
   @Input() index: number;
+  @Input() service: TicketProfileService;
+  @Input() update: TicketProfileUpdate;
+  @Input() isBlockChange: boolean;
+  editMode: boolean = false;
+
+  constructor() { }
+
+  ngOnInit() {
+  }
 }

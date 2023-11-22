@@ -170,10 +170,6 @@ export class MarketingComponent implements OnInit {
   setIdDetailUser(data) {
     this.idDetailUser = data;
   }
-  showMobileFilter() {
-    document.body.querySelector('app-left-panel-users').classList.add('show');
-    this.cd.markForCheck();
-  }
   private onInitSubscribe() {
     setTimeout(() => {
       let stompClient = this.usersRealTimeService.changeSubscriptionsUsers.subscribe(newChange => {

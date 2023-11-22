@@ -81,7 +81,6 @@ export class PasswordManagerAddAsideComponent implements OnInit {
       current.setFullYear(current.getFullYear() + 1);
       this.passwordRecordAdd.setExpiryDate(moment(current).format('YYYY/MM/DD'));
       this.opened = true;
-      if (this.appService.checkMobile()) this.appService.toggleMobileAside(true);
       if (this.opened && this.companiesState.getCompanyRoutingId()) this.selectCompany(this.companiesState.getCompanies().find(item => item.id === this.companiesState.getCompanyRoutingId()));
       this.datePicker.reset();
     });
@@ -140,7 +139,6 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     this.selectedUserAndDevices = [];
     this.linked.onClosed();
     this.showAddCategory = false;
-    this.appService.toggleMobileAside(false);
     this.selectedCompany = null;
     this.companiesDb.clearWithOutChanges();
     this.datePicker.reset();

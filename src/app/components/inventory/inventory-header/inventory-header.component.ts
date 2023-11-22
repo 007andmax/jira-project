@@ -20,7 +20,6 @@ export class InventoryHeaderComponent implements OnInit {
     public appService: AppService) { }
 
   ngOnInit() {
-    if (this.appService.checkMobile()) this.toggleFilter = true;
     this.cd.markForCheck();
   }
   onBlurSearch(event) {

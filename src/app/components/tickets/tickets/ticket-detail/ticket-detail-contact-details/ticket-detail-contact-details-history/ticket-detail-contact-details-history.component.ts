@@ -73,16 +73,9 @@ export class TicketDetailContactDetailsHistoryComponent implements OnInit {
 
   }
   editTicket(id) {
-    if (!this.appService.isMobile) {
-      this.ticketStateService.setTicketRoutingId(id);
-      const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/ticket/${id}`;
-      window.open(url, '_blank');
-    } else {
-      this.ticketsStateService.onOpenTicket();
-      this.ticketsService.getTicket(id).subscribe(data => {
-        this.ticketsStateService.onEditTicket(data);
-      })
-    }
+    this.ticketStateService.setTicketRoutingId(id);
+    const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/ticket/${id}`;
+    window.open(url, '_blank');
   }
   getCreateAt(createdAt) {
     let date = new Date(createdAt);

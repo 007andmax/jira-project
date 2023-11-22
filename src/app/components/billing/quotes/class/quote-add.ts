@@ -16,7 +16,7 @@ export class QuoteAdd {
     products: Array<QuoteAddProduct> = [];
     services: Array<QuoteAddService> = [];
     recipients: Array<string> = [];
-    regularNote: InvoiceNote = new InvoiceNote();
+    note: string;
     requestPayment: boolean;
     sendNotification: boolean;
     subject: string;
@@ -48,7 +48,7 @@ export class QuoteAdd {
         this.purchaseOrder = quote.purchaseOrder;
         this.products = quote.products.map(item => new QuoteAddProduct("PERCENT", item, item.itemOrder, item.quantity, this.getMarkups(item)));
         this.services = quote.services.map(item => new QuoteAddService(item.description, "PERCENT", item, item.itemOrder, item.quantity));
-        this.regularNote = quote.regularNote;
+        this.note = quote.note;
         this.requestPayment = quote.requestPayment;
         this.validUntil = quote.validUntil;
     }
@@ -79,7 +79,7 @@ export class QuoteAdd {
             recipients: this.recipients,
             message: this.message,
             subject: this.subject,
-            regularNote: this.regularNote,
+            note: this.note,
             sendNotification: notification,
             billTo: this.billTo,
             shipTo: this.shipTo
@@ -102,7 +102,7 @@ export class QuoteAdd {
             products: this.products.map(item => new QuoteProduct({ ...item, ...item.item })),
             services: this.services.map(item => new QuoteService({ ...item, ...item.item })),
             termsAndConditions: termsAndConditions,
-            regularNote: this.regularNote,
+            note: this.note,
             message: this.message,
             billingAddress: company.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode,
             shippingAddress: (company.companyInfo.addresses.length == 2) ? company.companyInfo.addresses[1].addressWithSuitNumberAndPostalCode : null,
@@ -111,7 +111,7 @@ export class QuoteAdd {
         }
     }
     public setRegulatNote(data) {
-        this.regularNote = new InvoiceNote(data);
+        this.note = data;
     }
     public addProduct(item) {
         this.products.push(new QuoteAddProduct("PERCENT", item, 0, 1, this.getMarkups(item)))

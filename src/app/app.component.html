@@ -10,13 +10,13 @@
             [hidden]="!(currentUser && currentUser.role !== 'SUPER_ADMIN' && state !== 'help-center' && currentUser.accountType == 'TECH')"
             class="app-left-panel"
             [ngStyle]="{'display' : !hideleLeftPanel ? 'block' : 'none'}"
-            [ngClass]="{'--mini':toggleLeftPanel,'--open':toggMobileleLeftPanel}"
+            [ngClass]="{'--mini':toggleLeftPanel}"
         ></app-left-panel>
         <left-panel-customer-portal
             [hidden]="!(currentUser && currentUser.role !== 'SUPER_ADMIN' && state !== 'help-center' && currentUser.accountType == 'CLIENT')"
             class="app-left-panel"
             [ngStyle]="{'display' : !hideleLeftPanel ? 'block' : 'none'}"
-            [ngClass]="{'--mini':toggleLeftPanel,'--open':toggMobileleLeftPanel}"
+            [ngClass]="{'--mini':toggleLeftPanel}"
         ></left-panel-customer-portal>
         <hr>
     </aside>
@@ -28,7 +28,7 @@
         [hidden]="!(currentUser && currentUser.role === 'SUPER_ADMIN')"
         class="app-left-panel-super-admin"
         [ngStyle]="{'display' : !hideleLeftPanel ? 'block' : 'none'}"
-        [ngClass]="{'--mini':toggleLeftPanel,'--open':toggMobileleLeftPanel}"
+        [ngClass]="{'--mini':toggleLeftPanel}"
     ></left-panel-super-admin>
     <main>
         <app-header
@@ -89,7 +89,6 @@
                         <app-invoices-aside-preview></app-invoices-aside-preview>
                         <router-outlet></router-outlet>
                         <users-aside-detail></users-aside-detail>
-                        <app-ticket-edit-aside></app-ticket-edit-aside>
                         <canned-responses-aside></canned-responses-aside>
                         <app-invoices-aside></app-invoices-aside>
                         <app-inventory-add-aside></app-inventory-add-aside>

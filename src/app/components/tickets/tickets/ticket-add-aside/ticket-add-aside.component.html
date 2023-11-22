@@ -123,7 +123,7 @@
             </div>
         </div>
         <div class="qt-inputs-row">
-            <div class="qt-input-block qt-f100 qt-flex-md-100">
+            <div class="qt-input-block qt-f100">
                 <company-users-drop-down
                     #userDP
                     [title]="'User'"
@@ -144,7 +144,7 @@
             class="qt-inputs-row"
             *ngIf="!customerPortalStateService.isCustomerPortal"
         >
-            <div class="qt-input-block qt-f50 qt-flex-md-100">
+            <div class="qt-input-block qt-f50">
                 <span class="qt-input-block__label">Assign To</span>
                 <app-drop-down
                     #techUserDP
@@ -156,7 +156,7 @@
                     [placeholder]="'Select User to assign'"
                 ></app-drop-down>
             </div>
-            <div class="qt-input-block qt-f50 qt-flex-md-100">
+            <div class="qt-input-block qt-f50">
                 <span class="qt-input-block__label">Device</span>
                 <app-drop-down
                     #deviceDP
@@ -180,16 +180,8 @@
         <div class="users-to-notify">
             <div class="users-to-notify__title">Add users to notify them ticket update</div>
             <div class="save-template">
-                <div
-                    class="device-user pointer"
-                    id="dropdownTechuser"
-                    *ngIf="appService.checkMobile()"
-                    (click)="onAddAssignedUser()"
-                >
-                </div>
                 <app-tech-users
                     #techUsersDp
-                    *ngIf="!appService.checkMobile()"
                     [users]="listTechUsersForAssign"
                     [editMode]="true"
                     [editUsers]="shareUsersList"
@@ -295,7 +287,6 @@
                 appDisabledBtn
                 #addBtn="disabled"
                 (onClick)="add()"
-                *ngIf="!appService.checkMobile()"
             >
                 <span *ngIf="!addBtn.isBlock()">Create Ticket</span>
                 <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
@@ -305,16 +296,6 @@
                 (click)="closed()"
             >
                 Cancel
-            </button>
-            <button
-                class="qt-button qt-ml-12"
-                appDisabledBtn
-                #addBtn="disabled"
-                (onClick)="add()"
-                *ngIf="appService.checkMobile()"
-            >
-                <span *ngIf="!addBtn.isBlock()">Create Ticket</span>
-                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
             </button>
         </div>
     </div>

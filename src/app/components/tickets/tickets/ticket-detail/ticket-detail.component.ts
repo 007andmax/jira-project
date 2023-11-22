@@ -24,10 +24,6 @@ import { TicketProfile } from '../class/ticket-profile';
 import { TicketsListService } from '../services/tickets-list.service';
 import { TicketStateService } from '../ticket-edit-aside/services/ticket-state.service';
 import { TicketsPermissionsService } from '../ticket-edit-aside/services/tickets-permissions.service';
-import { TicketMessageComponent } from '../ticket-edit-aside/ticket-message/ticket-message.component';
-import { TicketProfileEditFormUpdateComponent } from '../ticket-edit-aside/ticket-profile-edit-form-update/ticket-profile-edit-form-update.component';
-import { TicketProfileFormUpdateComponent } from '../ticket-edit-aside/ticket-profile-form-update/ticket-profile-form-update.component';
-import { TicketProfileUpdatesComponent } from '../ticket-edit-aside/ticket-profile-updates/ticket-profile-updates.component';
 import * as moment from "moment";
 import { TicketDetailProfileUpdatesComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates.component';
 import { TicketDetailTasksComponent } from './ticket-detail-tasks/ticket-detail-tasks.component';
@@ -40,6 +36,7 @@ import { TicketProfileAgent } from '../class/ticket-profile-agent';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { Device } from 'src/app/components/company-devices/class/device';
+import { TicketDetailMessageComponent } from './ticket-detail-message/ticket-detail-message.component';
 
 @Component({
   selector: 'ticket-detail',
@@ -49,8 +46,7 @@ import { Device } from 'src/app/components/company-devices/class/device';
 
 })
 export class TicketDetailComponent implements OnInit, OnDestroy {
-  @ViewChild('editUpdateForm') editUpdateForm: TicketProfileEditFormUpdateComponent;
-  @ViewChild('ticketMessage') ticketMessage: TicketMessageComponent;
+  @ViewChild('ticketMessage') ticketMessage: TicketDetailMessageComponent;
   @ViewChild('ticketProfileUpdates') ticketProfileUpdates: TicketDetailProfileUpdatesComponent;
   @ViewChild('ticketTasks') ticketTasks: TicketDetailTasksComponent;
   @ViewChild('detailHeader') detailHeader: TicketDetailHeaderComponent;
@@ -61,7 +57,6 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   toggleRigthPanel: boolean = true;
   toggleRigthPanelContainer: boolean = true;
   tabFormUpdate: string;
-  openedMobileEditUpdate = false;
   modeSubject = 'view';
   modeDescription = 'view';
   showAddAssignedUser = false;
@@ -183,11 +178,6 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(onChangeAssignedUser);
-
-    this.ticketStateService.onEditUpdate.subscribe(data => {
-      this.openedMobileEditUpdate = true;
-    })
-
     let onEditUpdateByForm = this.ticketStateService.onEditUpdateByForm.subscribe(data => {
       this.showEditUpdate = true;
     })
@@ -322,7 +312,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     }
   }
   toggleSubject() {
-    if (this.appService.checkMobile() || !this.getPermissions('EDIT_TICKETS')) return;
+    if (!this.getPermissions('EDIT_TICKETS')) return;
     var textCurrent = this.elRef.nativeElement.querySelector("#ticket-subject").value;
     var textOld = this.ticketProfile.subject;
     this.modeSubject = (this.modeSubject === 'view') ? 'edit' : 'view';
@@ -332,7 +322,6 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     }
   }
   toggleNote() {
-    if (this.appService.checkMobile()) return;
     var textCurrent = this.elRef.nativeElement.querySelector("#ticket-note").innerHTML.replace(/<\/?[^>]+>/ig, "");
     var textOld = (this.ticketProfile.note) ? this.ticketProfile.note.replace(/<\/?[^>]+>/ig, "") : "";
     this.modeDescription = 'view';
@@ -350,7 +339,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     return `${this.ticketProfile.createdUser.firstName} ${this.ticketProfile.createdUser.lastName}`
   }
   showDetailUser() {
-    if (this.appService.checkMobile() || !this.getPermissions('VIEW_USERS')) return;
+    if (!this.getPermissions('VIEW_USERS')) return;
     let user = this.usersStateService.getAllUsers().find(item => item.id === this.ticketProfile.createdUser.id);
     this.usersStateService.showDetailUser(user);
     (<any>document.body.querySelector(".ticket-edit-aside")).style.zIndex = "1";
@@ -506,7 +495,6 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.listAssignedUser = [];
     this.ticketStateService.unsubscribeTicket();
     this.ticketStateService.onTicketClosed();
-    this.appService.toggleMobileAside(false);
     this.ticketProfileUpdates.resetShowLoadMoreUpdates();
     this.ticketStateService.sub.unsubscribe();
     (<any>document.body.querySelector(".nav-header")).style.display = "flex";

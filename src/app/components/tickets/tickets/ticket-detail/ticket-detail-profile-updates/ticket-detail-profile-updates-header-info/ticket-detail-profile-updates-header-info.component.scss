@@ -48,11 +48,6 @@
 
     &__update-info {
         font-size: 12px;
-
-        @media (max-width: 767px) {
-            flex-wrap: wrap;
-            //margin-left: -42px;
-        }
     }
 
     &__people-added {
@@ -63,17 +58,8 @@
     &__photo-row {
         display: flex;
 
-        @media (max-width: 767px) {
-            margin-top: 8px;
-            flex: 100%;
-        }
-
         .tag__modern-row {
             display: none;
-
-            @media (max-width: 767px) {
-                display: block;
-            }
         }
     }
 
@@ -84,12 +70,6 @@
         border-radius: 50%;
         background-position: center;
         background-size: cover;
-
-        &:last-child {
-            @media (max-width: 767px) {
-                margin-right: 8px;
-            }
-        }
     }
 
     &__ticket-info-container {

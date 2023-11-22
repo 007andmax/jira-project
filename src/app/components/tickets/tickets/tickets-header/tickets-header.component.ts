@@ -41,7 +41,6 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.customerPortalStateService.isCustomerPortal) this.ticketsFilter.isDisbledCompany = true;
-    if (this.appService.checkMobile()) this.toggleFilter = false;
     /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
     /* START */
     this.selectedListType = this.titleListTypes.find(item => item.type === this.ticketsStateService.getListType());
@@ -84,13 +83,6 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     if (this.ticketsFilter.selectedPriorityLevels.length > 0) this.countFilter++;
     if (this.ticketsFilter.tags.length > 0) this.countFilter++;
     if (this.ticketsFilter.customDateRange || this.ticketsFilter.startDate && this.ticketsFilter.endDate) this.countFilter++;
-  }
-  /**
-* @description Toggle mobile left panel
-*/
-  toggleMobileLeftPanel() {
-    this.leftPanelStateService.toggleMobileLeftPanel(true);
-    this.appService.toggleMobileAside(true);
   }
   /**
 * @description Set new value "title" by which List Tupe is use
@@ -171,7 +163,6 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
 * @param {Boolean} data - new value toggleFilter
 */
   onToggleFilter(data) {
-    if (this.appService.checkMobile()) this.appService.toggleMobileAside(data);
     this.toggleFilter = data;
     this.ticketsStateService.changeToggleFilter(this.toggleFilter);
   }

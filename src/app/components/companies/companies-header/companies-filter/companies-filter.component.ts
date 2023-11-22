@@ -61,7 +61,6 @@ export class CompaniesFilterComponent implements OnInit {
     this.sub.add(getOnUsers);
     let onChangeFilter = this.leftPanelStateService.onChangeFilter.subscribe(data => {
       this.typesDp.onSelect(this.companyTypes.find(item => item.value === data));
-      if (this.appService.checkMobile()) this.applyFilters();
     })
     this.sub.add(onChangeFilter);
   }
@@ -88,7 +87,6 @@ export class CompaniesFilterComponent implements OnInit {
     this.companyFilter.setTags([]);
     this.companiesStateService.onInitFilter(this.companyFilter);
     this.onChangeCounterFilter();
-    if (this.appService.checkMobile()) this.close();
     this.cd.detectChanges();
   }
   close() {
@@ -103,34 +101,26 @@ export class CompaniesFilterComponent implements OnInit {
   }
   public onSelectTechLead(data) {
     this.companyFilter.setTechUser((data) ? data.id : null);
-    if (!this.appService.checkMobile()) {
-      this.companiesStateService.onInitFilter(this.companyFilter);
-      this.onChangeCounterFilter();
-    }
+    this.companiesStateService.onInitFilter(this.companyFilter);
+    this.onChangeCounterFilter();
     this.cd.markForCheck();
   }
   public onSelectType(data) {
     this.companyFilter.setClientType((data) ? data.value : null);
-    if (!this.appService.checkMobile()) {
-      this.companiesStateService.onInitFilter(this.companyFilter);
-      this.onChangeCounterFilter();
-    }
+    this.companiesStateService.onInitFilter(this.companyFilter);
+    this.onChangeCounterFilter();
     this.cd.markForCheck();
   }
   public onSelectClientIndustry(data) {
     this.companyFilter.setClientIndustry((data) ? data : null);
-    if (!this.appService.checkMobile()) {
-      this.companiesStateService.onInitFilter(this.companyFilter);
-      this.onChangeCounterFilter();
-    }
+    this.companiesStateService.onInitFilter(this.companyFilter);
+    this.onChangeCounterFilter();
     this.cd.markForCheck();
   }
   public onChangeTags(data) {
     this.companyFilter.setTags(data);
-    if (!this.appService.checkMobile()) {
-      this.companiesStateService.onInitFilter(this.companyFilter);
-      this.onChangeCounterFilter();
-    }
+    this.companiesStateService.onInitFilter(this.companyFilter);
+    this.onChangeCounterFilter();
     this.cd.markForCheck();
   }
   public onChangeCounterFilter() {

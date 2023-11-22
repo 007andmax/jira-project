@@ -3,16 +3,41 @@ import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.comp
 import { REMOVE_UPDATE_TICKET_DETAIL, REMOVE_UPDATE_TICKET_DETAIL_PRODUCT } from 'src/app/const/confirm';
 import { TicketProfileProduct } from '../../../class/ticket-profile-product';
 import { TicketProfileUpdate } from '../../../class/ticket-profile-update';
-import { TicketProfileUpdatesProductComponent } from '../../../ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-product/ticket-profile-updates-product.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
+import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
+import { TicketsListService } from '../../../services/tickets-list.service';
+import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-state.service';
 
 @Component({
   selector: 'ticket-detail-profile-updates-product',
   templateUrl: './ticket-detail-profile-updates-product.component.html',
   styleUrls: ['./ticket-detail-profile-updates-product.component.scss']
 })
-export class TicketDetailProfileUpdatesProductComponent extends TicketProfileUpdatesProductComponent {
-
+export class TicketDetailProfileUpdatesProductComponent implements OnInit {
   classActions: string = '';
+  @Input() update: TicketProfileUpdate;
+  @Input() isBlockChange: boolean;
+  constructor(public ticketsListService: TicketsListService,
+    public confirmStateService: ConfirmStateService,
+    public ticketStateService: TicketStateService,
+    public modalService: NgbModal) { }
+
+  ngOnInit() {
+  }
+  public getTotal(price, quantity) {
+    return price * quantity;
+  }
+  public getDate(date) {
+    return moment(new Date(date)).format('DD MMM YYYY');
+  }
+  public trackByIndex(index, item) {
+    return index;
+  }
+  public trackById(index, item) {
+    return item.id;
+  }
+
   isIOSDevice() {
     return !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
   }

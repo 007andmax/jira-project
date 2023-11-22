@@ -65,11 +65,6 @@ export class LeftPanelCompaniesComponent implements OnInit {
     if (this.companiesState.getCompanyRoutingId() && this.companiesState.getCompanies().length > 0) this.selectedCompany = this.companiesState.getCompanies().find(item => item.id === this.companiesState.getCompanyRoutingId());
     if (!this.companiesState.getCompanyRoutingId() && this.companiesState.getCompanies().length > 0) this.selectedCompany = null;
   }
-
-
-  closeMobileFilter() {
-    document.body.querySelector('app-left-panel-companies').classList.remove('show');
-  }
   toggleFilter(event) {
     event.target.parentNode.classList.toggle('show-filter');
   }

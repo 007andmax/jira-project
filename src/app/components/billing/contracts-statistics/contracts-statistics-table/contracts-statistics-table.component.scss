@@ -36,10 +36,6 @@ app-tickets-table-item {
     bottom: 100px;
     border-radius: 50%;
     cursor: pointer;
-
-    @media (max-width: 767px) {
-        display: block;
-    }
 }
 
 .qt-page-list__header-thead-container {
@@ -202,9 +198,7 @@ app-tickets-table-item {
 }
 
 .qt-page-list__body {
-    @media (min-width: 768px) {
-        padding: 0 32px;
-    }
+    padding: 0 32px;
 }
 
 .qt-page-list__header-thead__row {
@@ -229,31 +223,27 @@ app-tickets-table-item {
 }
 
 /deep/ .qt-table-modern__row {
-    @media (min-width: 768px) {
-        position: relative;
-        min-height: 56px;
-        border: unset;
-        margin-bottom: 0;
-    }
+    position: relative;
+    min-height: 56px;
+    border: unset;
+    margin-bottom: 0;
 
-    &>div {
-        @media (min-width: 768px) {
-            padding-top: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid $gray-200;
-            font-size: 14px;
+    & > div {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid $gray-200;
+        font-size: 14px;
 
-            &:first-child {
-                padding-left: 25px;
-                border-left: 1px solid $gray-200;
-                border-radius: 0;
-            }
+        &:first-child {
+          padding-left: 25px;
+          border-left: 1px solid $gray-200;
+          border-radius: 0;
+        }
 
-            &:last-child {
-                padding-right: 25px;
-                border-right: 1px solid $gray-200;
-                border-radius: 0;
-            }
+        &:last-child {
+          padding-right: 25px;
+          border-right: 1px solid $gray-200;
+          border-radius: 0;
         }
     }
 
@@ -296,11 +286,6 @@ app-tickets-table-item {
         width: 3px;
         height: 100%;
 
-        @media (max-width: 767px) {
-            left: -1px;
-            border-radius: 8px 0 0 8px;
-        }
-
         &.--high {
             background-color: $red-600;
         }
@@ -328,50 +313,18 @@ app-tickets-table-item {
 }
 
 .filter-button {
-  //padding-left: 30px; // TODO check this style
-  //background-repeat: no-repeat;
-  //background-position: 10px center;
-  //background-size: 16px;
-  //background-color: $white;
-  //color: $gray-900;
-  //border: none;
-  //background-image: url("../../../../../assets/img/icons/filter.svg");
-  @media (max-width: 767px) {
-    background-image: url("/assets/img/icons/filter-white.svg");
-    background-color: transparent;
-    background-size: 24px;
-    height: 24px;
-    width: 24px;
-    background-position: center;
-    padding: 0;
-    border-color: transparent;
-  }
-  span {
-    @media (max-width: 767px) {
-      display: none;
-    }
-  }
   &.active {
     color: $blue-light-600;
     background-color: #16a4fa10;
     border-color: transparent;
-    //background-image: url(../../../../../assets/img/icons/filter-active.svg);
 
     .icon__filter {
       background-color: $blue-light-600;
     }
   }
 }
-.icon__search-white {
-  @media (max-width: 767px) {
-    display: none;
-  }
-}
 .list-filters {
   display: none;
-  @media (max-width: 767px) {
-    display: block;
-  }
   margin: -8px -8px 8px -8px;
   /deep/.mat-form-field-infix {
     overflow: auto;
@@ -393,9 +346,6 @@ app-tickets-table-item {
 .is-exist-filters {
   position: relative;
   &::before {
-    @media (max-width: 767px) {
-      display: block;
-    }
     display: none;
     content: " ";
     position: absolute;
@@ -409,25 +359,5 @@ app-tickets-table-item {
 }
 
 .qt-page-list__header-filters {
-  @media (min-width: 768px) {
-    display: none;
-  }
-}
-
-.left-panel-ng2__content--filters {
-
-    @media (max-width: 767px) {
-        align-items: flex-start;
-        max-height: calc(100vh - 74px);
-        height: 100%;
-        top: 0;
-        left: 0;
-        background-color: $white;
-        padding: 16px;
-        padding-top: 72px;
-        flex-direction: column;
-        width: 100%;
-        overflow-x: hidden;
-        overflow-y: auto;
-    }
+  display: none;
 }

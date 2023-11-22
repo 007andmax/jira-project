@@ -18,6 +18,9 @@ import { TaxesSettingsComponent } from './taxes/taxes.component';
 import { TaxesAddComponent } from './taxes/taxes-add/taxes-add.component';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
+import { CustomNotesSettingsComponent } from './custom-notes-settings/custom-notes-settings.component';
+import { AddCustomNotesSettingsComponent } from './custom-notes-settings/add-custom-notes-settings/add-custom-notes-settings.component';
+import { EditCustomNotesSettingsComponent } from './custom-notes-settings/edit-custom-notes-settings/edit-custom-notes-settings.component';
 
 
 
@@ -31,6 +34,9 @@ import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.m
         QuotesSettingsComponent,
         TaxesSettingsComponent,
         TaxesAddComponent,
+        CustomNotesSettingsComponent,
+        AddCustomNotesSettingsComponent,
+        EditCustomNotesSettingsComponent,
     ],
     imports: [
         CommonModule,

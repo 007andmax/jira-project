@@ -15,10 +15,6 @@
   .search-priority,
   .light-dropdown.dropdown,
   app-tickets-filter-tags {
-    @media (max-width: 767px) {
-      margin-bottom: 16px;
-    }
-
     &::before {
       color: $gray-500;
       font-size: 13px;
@@ -26,82 +22,6 @@
     }
   }
 
-  .search-company {
-    @media (max-width: 767px) {
-      width: 100%;
-    }
-
-    &::before {
-      @media (max-width: 767px) {
-        content: "Company";
-      }
-    }
-  }
-
-  .search-users {
-    @media (max-width: 767px) {
-      width: 100%;
-    }
-
-    &::before {
-      @media (max-width: 767px) {
-        content: "User";
-      }
-    }
-  }
-
-  .search-tech-users {
-    @media (max-width: 767px) {
-      width: 100%;
-    }
-
-    &::before {
-      @media (max-width: 767px) {
-        content: "Tech Team";
-      }
-    }
-  }
-  .search-priority {
-    @media (max-width: 767px) {
-      width: 100%;
-    }
-
-    &::before {
-      @media (max-width: 767px) {
-        content: "Priority";
-      }
-    }
-  }
-
-  tickets-filter-status {
-    @media (max-width: 767px) {
-      width: 100%;
-    }
-  }
-
-  .search-status {
-    @media (max-width: 767px) {
-      width: 100%;
-    }
-
-    &::before {
-      @media (max-width: 767px) {
-        content: "Status";
-      }
-    }
-  }
-
-  app-tickets-filter-tags {
-    @media (max-width: 767px) {
-      width: 100%;
-    }
-
-    &::before {
-      @media (max-width: 767px) {
-        content: "Tags";
-      }
-    }
-  }
   /deep/tickets-filter-drop-down .mat-form-field {
     width: 100%;
   }
@@ -111,21 +31,6 @@
   /deep/tickets-filter-companies-drop-down .mat-form-field {
     width: 100%;
   }
-
-  @media (max-width: 767px) {
-    align-items: flex-start;
-    max-height: calc(100vh - 74px);
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: $white;
-    padding: 16px;
-    padding-top: 72px;
-    flex-direction: column;
-    width: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
 }
 
 /deep/ .qt-page-list__header-title {
@@ -133,8 +38,4 @@
   font-weight: 600;
   letter-spacing: 0;
   color: $gray-900;
-
-  @media (max-width: 767px) {
-    color: $white;
-  }
 }

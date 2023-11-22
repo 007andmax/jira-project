@@ -8,28 +8,9 @@
     @include flexbox;
     flex-direction: column;
     background-color: $background;
-    min-height: 550px;
+    min-height: calc(100vh - 109px);
     padding: 16px;
     width: 100%;
-
-    @media (max-width: 767px) {
-        position: fixed;
-        height: 100%;
-        top: 0;
-        left: 0;
-        padding: 0;
-        background-color: $white;
-        overflow: auto;
-        z-index: 3;
-    }
-
-    .collapse-arrow {
-        @media (max-width: 767px) {
-            background-color: $blue-light-600 !important;
-            background-image: url("/assets/img/icons/collapse-arrow-white.svg") !important;
-            border: none;
-        }
-    }
 
     .cmp-dboard-container {
         max-width: 1130px;
@@ -124,9 +105,6 @@
         @include transition(0.4s);
         text-align: center;
         height: auto;
-        @media only screen and (max-width: 576px) {
-            @include border-radius(0);
-        }
         &.btn-primary {
             background-color: $blue-light-600;
             color: $white;
@@ -170,11 +148,6 @@
     .light-dropdown .icn-remove-old {
         top: calc(50% - 7px) !important;
         right: 4px;
-
-        @media (max-width: 767px) {
-            top: calc(50% - 15px) !important;
-            right: 13px;
-        }
     }
 
     /*** Form elements ***/
@@ -187,9 +160,6 @@
             float: left;
             width: 100%;
             margin: 0 0 25px 0;
-            @media only screen and (max-width: 576px) {
-                margin-bottom: 12px;
-            }
         }
         label,
         .form-label {
@@ -338,21 +308,12 @@
             padding: 0 8px;
             &.col-50 {
                 width: 50%;
-                @media only screen and (max-width: 576px) {
-                    width: 100%;
-                }
             }
             &.col-100 {
                 width: 100%;
-                @media only screen and (max-width: 576px) {
-                    width: 100%;
-                }
             }
             &.col-33 {
                 width: 33.33%;
-                @media only screen and (max-width: 576px) {
-                    width: 100%;
-                }
             }
         }
     }
@@ -371,20 +332,10 @@
 
         .collapse-arrow {
             display: none;
-            @media (max-width: 767px) {
-                display: block;
-            }
         }
         .cmp-dboard-col {
             flex-direction: column;
             margin: 0 8px;
-            @media (max-width: 767px) {
-                margin: 0;
-                height: 100%;
-                overflow-x: hidden;
-                overflow-y: auto;
-                padding-top: 16px;
-            }
             &.m-0 {
                 margin: 0;
             }
@@ -405,7 +356,6 @@
                     @include box-shadow(0, 1px, 3px, 0 rgba(0, 0, 0, 0.1));
                     @include border-radius(50%);
                     font-size: 18px;
-                    font-weight: 500;
                     font-weight: 600;
                     font-style: normal;
                     line-height: 1.44;
@@ -415,17 +365,10 @@
                 }
             }
             &.left-profilebar {
-                // width: 344px;
                 padding-bottom: 70px;
                 position: relative;
                 max-width: 30%;
                 width: 30%;
-                @media (max-width: 767px) {
-                    max-width: 100%;
-                    width: 100%;
-                    padding: 0;
-                    border-radius: 0;
-                }
                 .profile-cmp-board {
                     width: 100%;
                     flex-direction: column;
@@ -433,10 +376,6 @@
                     justify-content: center;
                     border-bottom: 1px dotted $gray-200;
                     padding-bottom: 24px;
-
-                    @media (max-width: 767px) {
-                        padding: 0 16px 24px 16px;
-                    }
                     .small-title {
                         font-size: 11px;
                         font-weight: 600;
@@ -444,11 +383,6 @@
                         letter-spacing: normal;
                         color: $gray-400;
                         margin-bottom: 4px;
-
-                        @media (max-width: 767px) {
-                            font-size: 12px;
-                            line-height: 16px;
-                        }
                     }
 
                     &.other-info {
@@ -456,9 +390,6 @@
                         flex-direction: column;
                         align-items: flex-start;
                         justify-content: flex-start;
-                        @media (max-width: 767px) {
-                            padding: 16px;
-                        }
                         .other-info-col {
                             width: 100%;
                             flex-direction: column;
@@ -509,9 +440,6 @@
                     &.primary-contact {
                         padding: 16px 0;
                         align-items: flex-start;
-                        @media (max-width: 767px) {
-                            padding: 16px;
-                        }
                         .small-title {
                             margin-bottom: 12px;
                             text-transform: uppercase;
@@ -554,12 +482,6 @@
                                     line-height: 16px;
                                     margin: 1px 0;
                                 }
-                                .h5 {
-                                    @media (max-width: 767px) {
-                                        @include сaption-l__sb;
-                                        color: $gray-900;
-                                    }
-                                }
                             }
                         }
                     }
@@ -567,9 +489,6 @@
                         padding: 16px 0;
                         align-items: flex-start;
                         border-bottom: none;
-                        @media (max-width: 767px) {
-                            padding: 16px;
-                        }
                         .small-title {
                             width: 100%;
                             align-items: center;
@@ -624,21 +543,10 @@
                         left: 16px;
                         right: 16px;
                     }
-                    @media (max-width: 767px) {
-                        position: static;
-                        width: 100%;
-                        padding: 0 16px 16px;
-                    }
                     .btn {
                         margin: 0 4px;
                         width: 144px;
                         padding: 11px 5px;
-                        @media (max-width: 540px) {
-                            width: 100%;
-                            font-size: 13px;
-                            line-height: 20px;
-                            border-radius: 4px;
-                        }
                         img {
                             @media only screen and (max-width: 1439px) {
                                 display: none;
@@ -656,9 +564,6 @@
                     h4 {
                         margin: 0;
                         font-weight: 400;
-                        @media (max-width: 767px) {
-                            font-weight: 600;
-                        }
                     }
                     a {
                         font-size: 13px;
@@ -667,9 +572,6 @@
                         letter-spacing: normal;
                         text-align: center;
                         color: $gray-600;
-                        @media (max-width: 767px) {
-                            color: $gray-500;
-                        }
                     }
                 }
 
@@ -744,7 +646,6 @@
                                     line-height: 1.54;
                                     letter-spacing: normal;
                                     color: $gray-400;
-                                    // white-space: nowrap;
                                 }
                             }
                             &:last-child {
@@ -1632,9 +1533,6 @@
                 padding-left: 25px;
                 font-size: 13px;
                 color: $gray-600;
-                @media (max-width: 767px) {
-                    font-weight: 600;
-                }
                 &::after {
                     position: absolute;
                     left: 0;
@@ -1644,9 +1542,6 @@
                     background-size: 16px;
                     height: 16px;
                     width: 17px;
-                    @media (max-width: 767px) {
-                        top: -1px;
-                    }
                 }
             }
             input:checked + label::after {
@@ -1662,13 +1557,6 @@
             background-color: $white;
             border: none;
             top: 40%;
-            @media (max-width: 767px) {
-                width: calc(100% - 32px);
-                transform: translate(-50%, -50%);
-                left: 50%;
-                top: 50%;
-                margin: 0;
-            }
             .modal-content {
                 background-color: $white;
                 @include opacity(1);
@@ -1699,9 +1587,6 @@
                 .modal-body {
                     padding: 16px 32px 32px;
                     flex-direction: column;
-                    @media (max-width: 767px) {
-                        padding: 16px;
-                    }
                     h5 {
                         margin: 0 0 16px 0;
                         font-size: 13px;
@@ -1773,19 +1658,12 @@
                             margin-bottom: 28px;
                             &.list-unstyled {
                                 display: block;
-                                @media only screen and (max-width: 576px) {
-                                    margin-bottom: 20px;
-                                }
                                 li {
                                     -webkit-display: flex;
                                     display: flex;
                                     align-items: center;
                                     flex-direction: row;
                                     margin-bottom: 16px !important;
-                                    @media only screen and (max-width: 576px) {
-                                        flex-direction: column;
-                                        align-items: flex-start;
-                                    }
                                     &:last-child {
                                         margin-bottom: 0 !important;
                                     }
@@ -1794,30 +1672,16 @@
                                         &.cmn-checkbox {
                                             width: 173px;
                                             padding-right: 15px;
-                                            @media only screen and (max-width: 576px) {
-                                                margin-bottom: 15px;
-                                                width: 100%;
-                                            }
                                         }
                                         &.time-zone {
                                             display: inline-block;
                                             vertical-align: middle;
-                                            @media only screen and (max-width: 576px) {
-                                                //display: block;
-                                                width: 100%;
-                                                display: flex;
-                                                justify-content: space-between;
-                                            }
                                             .tl-col {
                                                 display: inline-block;
                                                 vertical-align: middle;
                                                 width: 110px;
                                                 margin-right: 55px;
                                                 position: relative;
-                                                @media only screen and (max-width: 576px) {
-                                                    width: calc(50% - 4px);
-                                                    margin-right: 0;
-                                                }
                                                 select.form-input {
                                                     padding: 9px 10px;
                                                     width: 100%;
@@ -1855,15 +1719,6 @@
                                                     top: 0;
                                                     bottom: 0;
                                                     margin: auto;
-
-                                                    @media (max-width: 767px) {
-                                                        display: none;
-                                                    }
-                                                }
-                                                .dropdown-menu {
-                                                    @media (max-width: 767px) {
-                                                        min-width: 100%;
-                                                    }
                                                 }
                                             }
                                         }
@@ -1892,10 +1747,6 @@
                                 letter-spacing: normal;
                                 color: $gray-600;
                                 padding: 12px 24px;
-                                @media (max-width: 767px) {
-                                    width: 100%;
-                                    margin-left: 0;
-                                }
                             }
                             &.btn-primary {
                                 font-size: 13px;
@@ -1911,9 +1762,6 @@
                                 background-color: $blue-light-600;
                                 color: $white;
                                 border-color: $blue-light-600;
-                                @media (max-width: 767px) {
-                                    width: 100%;
-                                }
                             }
                         }
                     }
@@ -1944,12 +1792,6 @@
                 right: 0;
                 margin-left: auto;
                 margin-right: auto;
-                @media (max-width: 767px) {
-                    width: 100%;
-                    height: 100vh;
-                    left: 50%;
-                    margin: 0;
-                }
                 .modal-content {
                     height: 100%;
                     overflow: hidden;
@@ -1960,15 +1802,6 @@
                     .close {
                         right: 16px;
                         top: 13px;
-
-                        @media (max-width: 767px) {
-                            background-image: url("/assets/img/icons/close-light.svg");
-                            left: 16px;
-                            width: 20px;
-                            height: 20px;
-                            background-size: 20px;
-                            top: 16px;
-                        }
                     }
                     .modal-body {
                         height: 100%;
@@ -1979,86 +1812,11 @@
                             font-weight: 600;
                             line-height: 1.4;
                             letter-spacing: 0;
-
-                            @media (max-width: 767px) {
-                                text-align: center;
-                                font-size: 16px;
-                                line-height: 24px;
-                                color: $white;
-                                padding: 16px 13px;
-                                background: $gray-900;
-                                font-weight: 600;
-                            }
                         }
                         iframe {
                             width: 100%;
                             height: 100%;
                         }
-                    }
-                }
-            }
-        }
-    }
-
-    &.edit-hours {
-        .modal-dialog {
-            @media (max-width: 767px) {
-                width: 100%;
-                border-radius: 0;
-            }
-            .modal-content {
-                @media (max-width: 767px) {
-                    height: 100vh;
-                    overflow: auto;
-                }
-                .modal-body {
-                    @media (max-width: 767px) {
-                        padding: 70px 16px 58px;
-                    }
-                    &.company-dashboard-add-tag {
-                        @media (max-width: 767px) {
-                            padding: 32px 16px 16px;
-                        }
-                    }
-                }
-                .modal-header {
-                    @media (max-width: 767px) {
-                        position: fixed;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        z-index: 1;
-                        padding: 16px;
-                        background: $gray-900;
-                        justify-content: center;
-                        border: none;
-                    }
-                    h1 {
-                        @media (max-width: 767px) {
-                            font-size: 16px;
-                            line-height: 24px;
-                            color: $white;
-                        }
-                    }
-                    .close {
-                        @media (max-width: 767px) {
-                            position: absolute;
-                            top: 20px;
-                            left: 16px;
-                            background-size: 20px;
-                            background-image: url("/assets/img/icons/close-light.svg");
-                        }
-                    }
-                }
-                .footer-area-modal {
-                    @media (max-width: 767px) {
-                        position: fixed;
-                        bottom: 0;
-                        left: 0;
-                        width: 100%;
-                        padding: 16px;
-                        background: $white;
-                        z-index: 1;
                     }
                 }
             }

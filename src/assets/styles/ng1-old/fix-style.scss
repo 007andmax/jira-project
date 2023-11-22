@@ -7,10 +7,6 @@ html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   font-size: 16px;
-
-  @media (max-width: 767px) {
-    min-width: unset;
-  }
 }
 *:before,
 *:after,
@@ -87,10 +83,6 @@ body .left-panel-full {
   .modal-dialog {
     width: 360px;
     margin-left: -180px;
-
-    @media (max-width: 767px) {
-      margin: 0;
-    }
   }
   .modal-content {
     box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
@@ -411,20 +403,9 @@ textarea {
     color: $gray-900;
   }
 
-  .light-dropdown .icn-remove-old {
-
-    @media (max-width: 767px) {
-      top: calc(50% - 15px) !important;
-      right: 12px !important;
-    }
-  }
 
   .app-drop-down__right-icon {
     right: 0;
-
-    @media (max-width: 767px) {
-      right: 0;
-    }
   }
 
   .with-number-types {
@@ -447,13 +428,6 @@ textarea {
   .mat-chip-list-wrapper .mat-standard-chip,
   .mat-chip-list-wrapper input.mat-input-element {
     margin: 2px;
-  }
-  app-company-time-zone {
-    .icn-remove-old {
-      @media (max-width: 767px) {
-        transform: translate(-6px, 0px);
-      }
-    }
   }
 }
 
@@ -520,26 +494,6 @@ textarea {
   left: 50%;
   margin-left: -251px;
   z-index: 1050;
-
-  @media (max-width: 767px) {
-    width: calc(100% - 32px);
-    transform: translate(-50%, -50%) !important;
-    margin: 0;
-  }
-
-  .archive-modal__footer {
-    button {
-      @media (max-width: 767px) {
-        width: 100%;
-      }
-    }
-    .btn-new.btn-primary {
-      @media (max-width: 767px) {
-        margin: 0 0 0 8px;
-        order: 1;
-      }
-    }
-  }
 }
 
 .password-content__modal--content {
@@ -824,11 +778,6 @@ h6,
     top: 24px;
     background-size: cover;
     z-index: 1;
-
-    @media (max-width: 767px) {
-      top: 16px;
-      right: 16px;
-    }
   }
   .disabled {
     &:hover {

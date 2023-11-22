@@ -1,20 +1,5 @@
 @import './src/assets/styles/variable';
 
-.create-contract {
-    @media (max-width: 767px) {
-        display: none;
-    }
-}
-.qt-aside-modern__footer > div {
-    @media (max-width: 767px) {
-        width: 100%;
-    }
-}
-.create-contract-container {
-    @media (max-width: 767px) {
-        display: none;
-    }
-}
 .new-link {
     display: flex;
     align-items: center;
@@ -34,10 +19,6 @@
     width: calc(100% + 16px);
     margin-left: -17px;
     margin-top: 24px;
-
-    //>[class*="col-md-"] {
-    //    margin-top: 20px;
-    //}
 
     .billing-divider {
 

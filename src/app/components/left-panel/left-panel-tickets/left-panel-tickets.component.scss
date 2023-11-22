@@ -21,47 +21,10 @@
     display: none;
     width: 0;
   }
-  @media (max-width: 414px) {
-    width: 100vw;
-    left: 0;
-    transition: all 0.3s;
-    top: 100%;
-    &.show {
-      top: 0;
-    }
-  }
-}
-
-.left-panel-ng2 {
-  @media (max-width: 414px) {
-    .center-category {
-      padding: 0 0 50px !important;
-    }
-
-    .left-panel-filter {
-      width: 100%;
-      padding: 20px 20px 0;
-      margin: 0;
-    }
-
-    .mob-version {
-      display: block;
-    }
-
-    .desktop-version {
-      display: none;
-    }
-  }
 }
 
 .mob-version {
   display: none;
-}
-
-.desktop-version {
-  @media (max-width: 767px) {
-    display: none;
-  }
 }
 
 .header-filter-icon {

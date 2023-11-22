@@ -84,7 +84,6 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     });
     if (this.quoteStateService.getQuoteForCopy()) this.onInitCopy();
     if (!this.customerPortalStateService.isCustomerPortal) this.getInvoiceNote();
-    if (!this.quoteStateService.getQuoteForCopy()) this.quote.regularNote.setDefault();
     this.sub.add(getChangeCompanies);
   }
   onInitCopy() {
@@ -133,10 +132,8 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   }
   private getInvoiceNote() {
     this.billableService.getInvoiceNote().subscribe(data => {
-      if (this.quoteStateService.getQuoteForCopy() && this.quote.regularNote && this.quote.regularNote.line1.length > 0) {
-        let find = data.find(item => item.id === this.quote.regularNote.id);
-        if (!find) this.quote.regularNote.id = "";
-        this.billableStateService.setRegulatNote(this.quote.regularNote);
+      if (this.quoteStateService.getQuoteForCopy() && this.quote.note && this.quote.note.length > 0) {
+        this.billableStateService.setRegulatNote(new InvoiceNote({ content: this.quote.note }));
       }
       this.notes = data;
     })
@@ -172,7 +169,7 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     return totalTaxes;
   }
   public updateInvoiceData(request) {
-    this.quote.setRegulatNote(request.regularInvoiceNote);
+    this.quote.setRegulatNote(request.note);
     this.validate.resetValidate();
   }
   selectProduct(data) {

@@ -32,7 +32,6 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
     this.version = 'short';
     this.company = new CompanyProfile();
     this.validate = new CompanyValdiate();
-    if (this.appService.checkMobile()) this.appService.toggleMobileAside(false);
     this.cd.detectChanges();
   }
 
@@ -50,7 +49,6 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
   public onShowAside() {
     let getShowAsideForAdd = this.companiesStateService.getShowAsideForAdd().subscribe(() => {
       this.opened = true;
-      if (this.appService.checkMobile()) this.appService.toggleMobileAside(true);
     })
     this.sub.add(getShowAsideForAdd);
   }

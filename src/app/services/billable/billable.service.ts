@@ -58,7 +58,41 @@ export class BillableService {
     return this.http.post(this.apiUrl + `invoice/partialUpdate/${lockId}`, data);
   }
   public getInvoiceNote() {
-    return this.http.get(this.apiUrl + `invoice/invoiceNote/getAll`).pipe(map((data: any) => data.map(item => new InvoiceNote(item))));
+    return this.http.get(this.apiUrl + `invoice/notes`).pipe(map((data: any) => data.map(item => new InvoiceNote(item))));
+  }
+  public addNote(data) {
+    return this.http.post(this.apiUrl + `invoice/notes`, data).pipe(
+      tap(data => {
+        this.toastrService.success("The new custom note has been successfully created");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }, err => {
+        this.toastrService.error("The error has occurred, please check your entries");
+        this.appStateService.changeDetectorRef();
+        return err;
+      }));
+  }
+  public editNote(id, data) {
+    this.appStateService.setCustomeError(true, "The error has occurred, please check your entries");
+    return this.http.put(this.apiUrl + `invoice/notes/${id}`, data).pipe(
+      tap(data => {
+        this.appStateService.setCustomeError(false);
+        this.toastrService.success("The custom note has been successfully updated");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public deleteNote(id) {
+    return this.http.delete(this.apiUrl + `invoice/notes/${id}`).pipe(
+      tap(data => {
+        this.toastrService.success("The custom note has been successfully deleted");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }, err => {
+        this.toastrService.error("The error has occurred, please check your entries");
+        this.appStateService.changeDetectorRef();
+        return err;
+      }));
   }
   public getTaxNumber() {
     return this.http.get(this.apiUrl + `settings/emailPages/taxNumber`).pipe(map((data: any) => new InvoiceTaxNumber(data)));

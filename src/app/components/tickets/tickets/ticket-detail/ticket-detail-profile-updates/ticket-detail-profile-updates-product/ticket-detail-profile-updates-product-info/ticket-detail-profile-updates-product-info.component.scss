@@ -6,10 +6,6 @@
     background-color: $gray-25;
     font-size: 13px;
 
-    @media (max-width: 767px) {
-        padding: 16px;
-    }
-
     &__count {
         font-weight: 600;
     }
@@ -246,10 +242,6 @@
         background: $white;
         padding: 4px 6px;
         text-transform: unset;
-
-        @media (max-width: 767px) {
-            margin: 10px 0px 0px 0px;
-        }
     }
 
     &__serial-number {
@@ -268,15 +260,7 @@
     }
 
     &__ticket-info-container {
-        .dropdown {
-            @media (max-width: 767px) {
-                position: absolute;
-                top: 0;
-                right: 0;
-            }
-        }
         /deep/ .input-group {
-          //width: 131px; // TODO check this style
           padding: 1px 12px;
           border: 1px solid $gray-200;
           border-radius: 6px;
@@ -320,12 +304,6 @@
             margin-right: 6px;
           }
         }
-    }
-}
-
-.show-desktop {
-    @media (max-width: 767px) {
-        display: none;
     }
 }
 
