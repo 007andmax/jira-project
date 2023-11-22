@@ -64,6 +64,7 @@
                     <div
                         class="cmn-area"
                         [hidden]="loading"
+                        [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}"
                     >
                         <div class="dataTable">
                             <div class="tab-pane__body">
@@ -196,6 +197,10 @@
                                     </ng-template>
                                 </div>
                             </div>
+                            <div
+                                class="loading pengind-loading"
+                                *ngIf="showPendingPreloader"
+                            ></div>
                         </div>
                     </div>
                 </ng-template>

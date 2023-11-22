@@ -59,6 +59,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
   @ViewChild(NgbTabset) set content(content: ViewContainerRef) {
     this.tabSet = content;
   };
+  showPendingPreloader = false;
   container = document.body.querySelector(".main-container");
   dtTrigger = new Subject();
   sub: Subscription = new Subscription();
@@ -179,6 +180,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     this.getTags();
   }
   getTags() {
+    this.showPendingPreloader = true;
     if (this.manageTagsListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;
@@ -190,6 +192,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       this.infiniteScrollDisabled = false;
       if (this.reqcompanyTags.length === data.totalElements) this.manageTagsListService.setBlockList(true);
       this.loading = false;
+      this.showPendingPreloader = false;
     })
   }
 
