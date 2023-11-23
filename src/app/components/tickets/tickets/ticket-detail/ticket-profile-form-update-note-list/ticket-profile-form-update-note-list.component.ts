@@ -23,7 +23,6 @@ export class TicketProfileFormUpdateNoteListComponent implements OnInit {
   ngOnInit() {
     let onUpdateActiveNotes = this.noteStateService.onUpdateActiveNotes.subscribe(data => {
       this.noteTemplate = this.noteStateService.getActiveNoteTemplate();
-      console.log("this.noteTemplate", this.noteTemplate);
       this.cd.detectChanges();
     })
     this.sub.add(onUpdateActiveNotes);
