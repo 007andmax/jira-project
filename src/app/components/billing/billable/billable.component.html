@@ -10,7 +10,7 @@
             <div class="qt-page-list__header-title-line--rigth">
                 <button
                     *ngIf="getPermissions('CREATE_INVOICE')"
-                    class="qt-btn --outline-blue qt-mr-8 btn-invoice-all"
+                    class="qt-button --gray --md qt-mr-8 btn-invoice-all"
                     [disabled]="!isExistSelected()"
                     appDisabledBtn
                     #saveAndDownloadBtn="disabled"
