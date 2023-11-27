@@ -104,6 +104,11 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     this.selectedTag = [];
     this.cd.markForCheck();
   }
+  public checkRemoveTag(index) {
+    if (this.selectedTag[index].defaultTag === 'USER_TAG' && this.blockUserTag) return false;
+    if (this.companyId && this.selectedTag[index].companyId == this.companyId && !this.isRemoveCompanySelectedTag) return false;
+    return true;
+  }
 
   /**
   * Subscribe for clear data
@@ -245,8 +250,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
    */
   public remove(index): void {
     if (index >= 0) {
-      if (this.selectedTag[index].defaultTag === 'USER_TAG' && this.blockUserTag) return;
-      if (this.companyId && this.selectedTag[index].companyId == this.companyId && !this.isRemoveCompanySelectedTag) return;
+      if (!this.checkRemoveTag(index)) return;
       this.selectedTag.splice(index, 1);
       this.tagsChange.emit(this.selectedTag);
       this.cd.detectChanges();
