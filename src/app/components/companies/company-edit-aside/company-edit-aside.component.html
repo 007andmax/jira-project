@@ -502,6 +502,8 @@
                 <div class="qt-input-block__label">Tags</div>
                 <app-company-tags
                     #companyTags
+                    [companyId]="company.id"
+                    [isRemoveCompanySelectedTag]="false"
                     (tagsChange)="onChangeTags($event)"
                 ></app-company-tags>
             </div>

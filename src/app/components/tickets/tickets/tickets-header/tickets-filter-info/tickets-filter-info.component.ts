@@ -16,6 +16,9 @@ export class TicketsFilterInfoComponent implements OnInit {
     let onInitGlobalFilter = this.ticketsStateService.onInitGlobalFilter.subscribe((data: TicketGlobalFilter) => {
       this.globalFilter = data;
     });
+    let getOnChangeTypeFilter = this.ticketsStateService.getOnChangeTypeFilter().subscribe(type => {
+      this.globalFilter = new TicketGlobalFilter();
+    })
   }
 
 }

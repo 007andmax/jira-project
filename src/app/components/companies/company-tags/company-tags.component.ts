@@ -31,12 +31,14 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   tags: Array<CompanyTag> = [];
   reqTags: Array<CompanyTag> = [];
   sub = new Subscription();
+  @Input() companyId: string;
   @Input() editItems: Array<string>;
   @Input() placement: string;
   @Input() showLabel: boolean = true;
   @Input() filter: boolean = false;
   @Input() blockCreateTag: boolean = false;
   @Input() blockUserTag: boolean = false;
+  @Input() isRemoveCompanySelectedTag: boolean = true;
   @Input() isDisabled: boolean = false;
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('dp') dp: any;
@@ -244,6 +246,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   public remove(index): void {
     if (index >= 0) {
       if (this.selectedTag[index].defaultTag === 'USER_TAG' && this.blockUserTag) return;
+      if (this.companyId && this.selectedTag[index].companyId == this.companyId && !this.isRemoveCompanySelectedTag) return;
       this.selectedTag.splice(index, 1);
       this.tagsChange.emit(this.selectedTag);
       this.cd.detectChanges();
