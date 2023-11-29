@@ -79,9 +79,7 @@ export class TicketDetailProfileEditUpdatesProductsComponent implements OnInit, 
 
   }
   public onValidateSaleCostProduct(i) {
-
     if (Number(this.addedProductList[i].item.sale) > Number(this.addedProductList[i].item.cost)) this.addedProductList[i].valdiateSaleCost = true;
-
   }
 
   public getItemOrger() {
