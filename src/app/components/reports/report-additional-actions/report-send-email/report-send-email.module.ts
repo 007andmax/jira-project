@@ -9,6 +9,7 @@ import { PreloaderTicketModule } from 'src/app/components/shared/preloader-ticke
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { ReportSendEmailComponent } from './report-send-email.component';
 import { MatChipsModule, MatSelectModule } from '@angular/material';
+import { DndModule } from 'src/app/directives/dnd/dnd.module';
 
 
 
@@ -25,6 +26,7 @@ import { MatChipsModule, MatSelectModule } from '@angular/material';
         FormsModule,
         MatSelectModule,
         MatChipsModule,
+        DndModule
     ],
     exports: [ReportSendEmailComponent]
 })
