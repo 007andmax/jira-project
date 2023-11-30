@@ -23,11 +23,13 @@ export class TicketProfileFormProduct {
             this.discountType = data.discountType;
             this.completed = data.completed;
             this.valdiateSaleCost = data.valdiateSaleCost;
-            this.taxes = data.taxes;
+            this.taxes = [...data.this.taxes, ...this.item.taxes];
+            console.log("this.taxes", this.taxes);
         }
     }
     public getDataForAdd() {
-        let item = JSON.parse(JSON.stringify(this.item));
+        let item = {};
+        for (const key in this.item) if (this.item[key] && key !== "taxes") item[key] = this.item[key];
         let taxes = this.taxes.map(item => ({
             id: item.id,
             name: item.name,
@@ -50,6 +52,7 @@ export class TicketProfileFormProduct {
     public setData(data, index) {
         this.item = new TicketProfileFormItemProduct(data);
         this.itemOrder = index;
+        this.taxes = [...this.item.taxes];
     }
     public setItemOrder(data) {
         this.itemOrder = data;
