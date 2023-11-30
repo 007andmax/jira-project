@@ -88,7 +88,6 @@
                 <app-invoice-form-ticket-edit-taxes
                     class="qt-taxes-multiselect qt-w100"
                     #taxesDropDown
-                    [selectedTax]="product.taxes"
                     [placeholder]="(product.taxes && product.taxes.length === 0) ? 'No taxes' : null"
                     (taxesChange)="onTaxesChange($event)"
                 ></app-invoice-form-ticket-edit-taxes>

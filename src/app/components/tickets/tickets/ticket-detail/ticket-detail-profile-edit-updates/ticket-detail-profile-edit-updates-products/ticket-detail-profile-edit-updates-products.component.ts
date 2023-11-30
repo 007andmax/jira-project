@@ -9,6 +9,9 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { ProductService } from 'src/app/services/product/product.service';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
+import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
+import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
+import { InvoiceFormTicketEditTaxesComponent } from 'src/app/components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
 
 @Component({
   selector: 'ticket-detail-profile-edit-updates-products',
@@ -17,6 +20,8 @@ import { TicketsStateService } from 'src/app/states/tickets/tickets-state.servic
 })
 export class TicketDetailProfileEditUpdatesProductsComponent implements OnInit, OnDestroy {
   isUpdate: boolean = false;
+
+  @ViewChild('taxesDropDown') taxesDropDown: InvoiceFormTicketEditTaxesComponent;
   @ViewChild('updateMobileBtn') updateMobileBtn: DisabledBtnDirective;
   @ViewChild('addMoreMobileBtn') addMoreMobileBtn: DisabledBtnDirective;
   @ViewChild('productDP') productDP: ProductListComponent;
@@ -29,6 +34,7 @@ export class TicketDetailProfileEditUpdatesProductsComponent implements OnInit, 
     private inventoryStateService: InventoryStateService,
     public cd: ChangeDetectorRef,
     private permissionsService: PermissionsService,
+    private taxesStateService: TaxesStateService,
     private ticketsStateService: TicketsStateService) { }
 
 
@@ -114,6 +120,27 @@ export class TicketDetailProfileEditUpdatesProductsComponent implements OnInit, 
   product: TicketProfileProduct = new TicketProfileProduct();
   ngOnInit() {
     this.product = new TicketProfileProduct(this.update.products[0]);
+    if (this.taxesStateService.getTaxes().length > 0) this.onSetEditTaxes(this.taxesStateService.getTaxes());
+    let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
+      this.onSetEditTaxes(data);
+    })
+    this.sub.add(getOnTaxess);
+  }
+  onSetEditTaxes(list) {
+    let notFindTax = [];
+    let taxes = list.filter(item => {
+      let index = this.product.taxes.findIndex(tax => tax.name === item.name && tax.rate === item.rate);
+      return (index > -1) ? true : false;
+    })
+    this.product.taxes.forEach(item => {
+      let index = list.findIndex(tax => tax.name === item.name && tax.rate === item.rate);
+      if (index === -1) {
+        this.taxesDropDown.addTax(item);
+        notFindTax.push(item);
+      }
+    });
+    taxes = [...taxes, ...notFindTax];
+    this.taxesDropDown.setEditItems(taxes);
   }
   public selectProduct(item, taxesDropDown) {
     if (item) {
