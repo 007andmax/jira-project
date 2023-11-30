@@ -38,6 +38,7 @@ export class TicketProfileService {
             for (const key in data) {
                 this[key] = data[key];
             }
+            this.taxes = this.item.taxes;
         }
     }
     /**
@@ -150,6 +151,7 @@ export class TicketProfileService {
                 item: this.item,
                 quantity: this.quantity,
                 user: user,
+                taxes: this.taxes
             },
             ticketUpdateId: id
         }

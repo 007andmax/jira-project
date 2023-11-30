@@ -95,6 +95,7 @@ export class TicketProfileProduct {
                 quantity: this.quantity,
                 serialNumber: this.serialNumber,
                 user: user,
+                taxes: this.taxes
             },
             ticketUpdateId: id
         }
@@ -113,7 +114,7 @@ export class TicketProfileProduct {
  * @param {Product} data - Array Objects of Taxes
  */
     public setTexes(data) {
-        this.item.taxes = data;
+        this.taxes = data;
     }
 
 }
