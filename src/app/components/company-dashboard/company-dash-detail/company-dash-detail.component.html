@@ -287,7 +287,17 @@
             *ngIf="companyDetailing?.description !== undefined && companyDetailing?.description !== null && companyDetailing?.description !== ''"
         >
             <div class="small-title">Notes</div>
-            <p class="notes-text">{{companyDetailing.description}}</p>
+            <textarea
+                class="qt-editable-input ng-untouched ng-pristine ng-valid"
+                appTextArea
+                placeholder="Write note for company"
+                [(ngModel)]="companyDetailing.description"
+                (blur)="onChangeNote($event)"
+                [minHeight]="150"
+                [maxLines]="50"
+                cols="2"
+                rows="1"
+            ></textarea>
         </div>
     </div>
     <div
