@@ -85,7 +85,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
    */
   public ngOnInit() {
     this.initResendMode();
-    this.subject = JSON.parse(JSON.stringify(this.data.description));
+    this.subject = this.data.description ? JSON.parse(JSON.stringify(this.data.description)) : "";
     this.getAllUsers((this.data instanceof QuoteEdit || this.data instanceof QuotePreview) ? this.data.company.id : this.data.companyId);
     /* this.userInput.nativeElement.onblur = (e) => {
        if (this.matAutocomplete.isOpen) {
