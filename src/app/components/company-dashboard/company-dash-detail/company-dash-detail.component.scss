@@ -188,3 +188,11 @@ address {
 .dfn {
     font-style: italic;
 }
+.compamy-name-charter {
+    color: $gray-900 !important;
+}
+.qt-editable-input {
+    &:focus {
+        border-color: $gray-200;
+    }
+}
