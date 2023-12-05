@@ -15,13 +15,9 @@ export class TicketDetailProfileFormUpdateVisibleUsersComponent implements OnIni
   ngOnInit() {
     if (this.customerPortalStateService.isCustomerPortal) this.type = "PUBLIC";
   }
-  getText() {
-    if (this.type === "PUBLIC") return "Make this chat Public";
-    if (this.type === "PRIVATE") return "Make this chat Private";
-  }
   changeType(data) {
     this.toggleType = data;
     this.type = (data) ? "PRIVATE" : "PUBLIC";
-    this.onChangeType.emit(data);
+    this.onChangeType.emit(this.type);
   }
 }
