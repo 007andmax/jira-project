@@ -338,6 +338,8 @@
             [selectedTag]="companyDetail.tags"
             [placement]="'top'"
             [isDisabled]="!getPermissions('EDIT_COMPANIES')"
+            [companyId]="companyDetail.id"
+            [isRemoveCompanySelectedTag]="false"
             (tagsChange)="onChangeTags($event)"
         ></app-company-tags>
     </div>
