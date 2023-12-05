@@ -154,6 +154,7 @@ export class UsersComponent implements OnInit, OnDestroy {
           if (userIndex > -1) this.users.splice(userIndex, 1);
           if (reqIndex > -1) this.reqUsers[userIndex].selected = false;
         }
+        console.log("data.data", this.users[userIndex]);
       }
 
 
@@ -178,6 +179,7 @@ export class UsersComponent implements OnInit, OnDestroy {
         this.reqUsers[reqIndex].userStatistic.ticketsSubmitted = prevValue;
         if (Index > -1) this.users[Index].userStatistic.ticketsSubmitted = prevValue;
       }
+      this.users = [...this.users.map(item => new User(item))];
       this.header.setReqUsers(this.reqUsers);
       this.cd.detectChanges();
     })

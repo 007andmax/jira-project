@@ -94,7 +94,9 @@ export class UsersTableComponent implements OnInit, OnDestroy {
       .subscribe();
   }
   getCompaniesNames() {
-    return this.user.customerCompaniesInfo.map(item => (this.companiesStateService.getCompanies().find(company => company.id == item.companyId) ? this.companiesStateService.getCompanies().find(company => company.id == item.companyId).name : ''));
+    return this.user.customerCompaniesInfo.map(item => (this.companiesStateService.getCompanies().find(company => company.id == item.companyId) ? this.companiesStateService.getCompanies().find(company => company.id == item.companyId).name : '')).
+      sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
+        1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
   }
   getUserIndustry() {
     let find = this.industries.find(item => item.id === this.user.userIndustryId);

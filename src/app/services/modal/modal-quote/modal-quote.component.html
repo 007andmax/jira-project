@@ -116,6 +116,9 @@
 
 
 
+
+
+
                     <!-- <mat-autocomplete
                         ngbDropdownMenu
                         aria-labelledby="dropdownServices"
@@ -158,9 +161,10 @@
                     placeholder="Write message here…"
                     [(ngModel)]="message"
                     appTextArea
-                    [maxLines]="10"
+                    [default]="5"
+                    [maxLines]="100"
                     cols="5"
-                    rows="1"
+                    rows="5"
                     (ngModelChange)="setMessage($event)"
                 ></textarea>
             </div>
