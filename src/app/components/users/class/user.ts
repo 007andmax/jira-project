@@ -57,7 +57,10 @@ export class User {
             this.customSubscriptions = data.customSubscriptions.map(item => new UserCustomSubscription(item));
             this.userEmailNotifications = new UserEmailNotifications(data.userEmailNotifications);
             this.customerCompaniesInfo = (data.customerCompaniesInfo) ? data.customerCompaniesInfo.map(item => new UserCustomerCompaniesInfo(item)) : [];
+            this.customerCompaniesInfo.sort((a, b) => (a.clientCompanyName.toLowerCase() > b.clientCompanyName.toLowerCase()) ?
+                1 : ((b.clientCompanyName.toLowerCase() > a.clientCompanyName.toLowerCase()) ? -1 : 0))
             this.permissions = (data.permissions) ? data.permissions : [];
+
         }
 
     }
@@ -102,6 +105,8 @@ export class User {
         }
         this.customSubscriptions = data.customSubscriptions.map(item => new UserCustomSubscription(item));
         this.customerCompaniesInfo = data.customerCompaniesInfo.map(item => new UserCustomerCompaniesInfo(item));
+        this.customerCompaniesInfo.sort((a, b) => (a.clientCompanyName.toLowerCase() > b.clientCompanyName.toLowerCase()) ?
+            1 : ((b.clientCompanyName.toLowerCase() > a.clientCompanyName.toLowerCase()) ? -1 : 0))
     }
     /**
   * @description Set list Custom Subscriptions
