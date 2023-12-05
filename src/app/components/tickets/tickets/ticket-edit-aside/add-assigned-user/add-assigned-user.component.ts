@@ -99,7 +99,6 @@ export class AddAssignedUserComponent implements OnInit {
     }
     this.userInput.nativeElement.blur();
     this.userCtrl.setValue(null);
-    console.log("this.userInput", this.userInput);
     this.userInput.nativeElement.value = '';
     if (this.type == 'DETAIL-TICKET') {
       this.users = JSON.parse(JSON.stringify(this.reqUsers));

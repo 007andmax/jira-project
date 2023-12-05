@@ -28,12 +28,10 @@ export class TextAreaDirective implements OnInit {
     this.element.nativeElement.parentNode.style.position = 'relative';
   }
   ngDoCheck() {
-    console.log("ngDoCheck", this.element.nativeElement.value);
     if (this.element.nativeElement.value === "") {
       this.element.nativeElement.setAttribute("rows", (this.default) ? this.default : 1);
     } else {
       this.lines = this.getNumberOfLines(this.element.nativeElement.value);
-      console.log("this.lines", this.lines);
       if (this.lines <= this.maxLines) {
         this.element.nativeElement.setAttribute("rows", (this.default && this.default > this.lines) ? this.default : this.lines);
       } else {
@@ -47,8 +45,6 @@ export class TextAreaDirective implements OnInit {
     if (this.lineHeight) {
       let lineHeight = parseInt($('.qt-editable-input').css('lineHeight'));
       var vs = this.element.nativeElement.scrollHeight > this.element.nativeElement.clientHeight;
-      console.log("vs", vs);
-      console.log("Math.ceil(this.element.nativeElement.scrollHeight / lineHeight)", Math.ceil(this.element.nativeElement.scrollHeight / lineHeight));
       return vs ? Math.ceil(this.element.nativeElement.scrollHeight / lineHeight) : this.lines;
     }
     if (str) {

@@ -154,7 +154,6 @@ export class UsersComponent implements OnInit, OnDestroy {
           if (userIndex > -1) this.users.splice(userIndex, 1);
           if (reqIndex > -1) this.reqUsers[userIndex].selected = false;
         }
-        console.log("data.data", this.users[userIndex]);
       }
 
 
