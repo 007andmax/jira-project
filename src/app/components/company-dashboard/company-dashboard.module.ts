@@ -22,6 +22,7 @@ import { PhoneModule } from 'src/app/pipe/phone/phone.module';
 import { PreparePhoneModule } from 'src/app/pipe/prepare-phone/prepare-phone.module';
 import { CompanyDashboardRoutingModule } from './company-dashboard-routing.module';
 import { PreviewPhoneMaskModule } from '../shared/preview-phone-mask/preview-phone-mask.module';
+import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 
 
 
@@ -51,7 +52,8 @@ import { PreviewPhoneMaskModule } from '../shared/preview-phone-mask/preview-pho
         ContractsEditModule,
         PhoneModule,
         PreparePhoneModule,
-        PreviewPhoneMaskModule
+        PreviewPhoneMaskModule,
+        TextAreaModule
 
     ],
 
