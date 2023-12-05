@@ -12,12 +12,18 @@
             class="icon__private qt-za-16 qt-sz-16 qt-bg-contain"
         ></i>
     </div>
+    <div
+        class="qt-toggle qt-mr-8"
+        [ngClass]="{'--on':toggleType}"
+        (click)="changeType(!toggleType)"
+    >
+        <div class="qt-toggle__circle"></div>
+    </div>
     <span
         class="pointer"
         [textContent]="getText()"
-        ngbDropdownToggle
     ></span>
-    <i
+    <!-- <i
         class="icon__down-arrow qt-za-16 qt-sz-16 qt-bg-contain qt-ml-4 pointer"
         ngbDropdownToggle
     ></i>
@@ -53,5 +59,5 @@
                 class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
             ></i>
         </div>
-    </div>
+    </div> -->
 </div>
