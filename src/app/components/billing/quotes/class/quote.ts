@@ -35,6 +35,6 @@ export class Quote {
         }
     }
     public parseRecipients() {
-        return this.recipients.join(",");
+        return this.recipients.join("<br/>");
     }
 }
