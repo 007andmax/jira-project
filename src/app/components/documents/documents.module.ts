@@ -11,6 +11,7 @@ import { DocumentsEditCategoryItemComponent } from './documents-edit-category/do
 import { FormsModule } from '@angular/forms';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from '../shared/preloader-ticket/preloader-ticket.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     declarations: [DocumentsComponent,
@@ -26,10 +27,8 @@ import { PreloaderTicketModule } from '../shared/preloader-ticket/preloader-tick
         DocumentsRoutingModule,
         FormsModule,
         DisabledBtnModule,
-        PreloaderTicketModule
+        PreloaderTicketModule,
+        NgbModule,
     ],
-
-
-
 })
 export class DocumentsModule { }
