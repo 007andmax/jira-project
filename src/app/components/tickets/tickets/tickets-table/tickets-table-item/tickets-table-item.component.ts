@@ -72,6 +72,9 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
       'background-color': (this.listColors.length > 0) ? this.listColors[find.color].borderColor : null, 'color': (this.listColors.length > 0) ? this.listColors[find.color].textColor : null
     }
   }
+  getStyleNetAvatar(i) {
+    return `${12 * i}px`;
+  }
   getClassType() {
     return `priority-icon ${(this.ticket.priorityLevel && this.ticket.priorityLevel.name === "MEDIUM") ? '--' + this.ticket.priorityLevel.name.toLowerCase() : ''}`;
   }

@@ -36,7 +36,7 @@ export class InvoiceProfileTicket {
     public getDateForUpdate() {
         let productExpenses = [];
         this.productExpenses.forEach(item => {
-            let taxes = item.taxes.map(tax => {
+            let taxes = item.item.taxes.map(tax => {
                 return { id: tax.id };
             });
             productExpenses.push({
@@ -58,7 +58,7 @@ export class InvoiceProfileTicket {
 
         let serviceExpenses = [];
         this.serviceExpenses.forEach(item => {
-            let taxes = item.taxes.map(tax => {
+            let taxes = item.item.taxes.map(tax => {
                 return { id: tax.id };
             });
             serviceExpenses.push({

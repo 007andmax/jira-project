@@ -1,4 +1,5 @@
 import { UserDefaultSubscription } from "./user-default-subscription";
+import { UserDefaultSubscriptionItem } from "./user-default-subscription-item";
 import { UserJobTitle } from "./user-job-title";
 import { UserRole } from "./user-role";
 
@@ -25,6 +26,14 @@ export class UserCustomerCompaniesInfo {
             this.hasAccess = false;
         }
 
+    }
+    public setDefaultSubscriptionsForAddUser() {
+        this.defaultSubscriptions.invoiceSubscription = new UserDefaultSubscriptionItem({ enabled: false, activated: true, });
+        this.defaultSubscriptions.ticketSubscription = new UserDefaultSubscriptionItem({ enabled: true, activated: true, });
+        this.defaultSubscriptions.ticketManagerSubscription = new UserDefaultSubscriptionItem({ enabled: false, activated: true, });
+        this.defaultSubscriptions.invoiceSubscription.setIsExist(false);
+        this.defaultSubscriptions.ticketSubscription.setIsExist(false);
+        this.defaultSubscriptions.ticketManagerSubscription.setIsExist(false);
     }
     /**
 * @description Return Object for request add Copmany

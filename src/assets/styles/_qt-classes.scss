@@ -355,7 +355,7 @@ input.qt-dropdown-input {
       left: calc(50% - 9px);
     }
   }
-  &:not(.--gray) {
+  &:not(.--gray):not(.--outline) {
     &:hover {
       color: $white;
     }

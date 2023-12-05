@@ -160,9 +160,9 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
     this.inventory.description = event.target.value;
 
   }
-  public onPastDescription(value) {
+  public onPastDescription(event) {
     this.validate.resetDescription();
-    this.inventory.description = value;
+    this.inventory.description = event.target.value;;
   }
   onTaxesChange(data) {
     this.inventory.taxIds = data.map(item => {

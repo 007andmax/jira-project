@@ -45,20 +45,58 @@
         class="ticket-table__assignee"
         *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length > 0"
     >
-        <div class="qt-df">
+        <div class="qt-df multi-assign-user-container">
             <ng-template
                 ngFor
                 let-user
+                let-i="index"
                 [ngForOf]="ticket.multiAssignedUsers"
                 [ngForTrackBy]="trackById"
             >
                 <div
-                    class="qt-table-modern__circle-avatar"
+                    class="qt-table-modern__circle-avatar multi-assign-user"
+                    *ngIf="i < 5"
                     [textContent]="getAssignedUserNameForAvatar(user)"
-                    [ngStyle]="{'background': ticketsListService.getStyleAvatar(user,listColorNoAvatar[indexNoAvatar]) }"
+                    [ngStyle]="{'background': ticketsListService.getStyleAvatar(user,listColorNoAvatar[indexNoAvatar]) ,
+                'left': getStyleNetAvatar(i)}"
+                    [ngbTooltip]="user.firstName + ' ' + user.lastName"
+                    [container]="'body'"
                 ></div>
             </ng-template>
+            <div
+                class="more-users qt-table-modern__circle-avatar"
+                [ngbTooltip]="tipContent"
+                [container]="'body'"
+                *ngIf="ticket.multiAssignedUsers.length > 5"
+                [ngStyle]="{'left': getStyleNetAvatar(5)}"
+            >
+                <span [textContent]="'+' + (ticket.multiAssignedUsers.length - 5)"></span>
+            </div>
         </div>
+        <ng-template #tipContent>
+            <ng-template
+                ngFor
+                let-user
+                let-i="index"
+                [ngForOf]="ticket.multiAssignedUsers"
+                [ngForTrackBy]="trackById"
+            >
+                <div
+                    class="qt-df qt-ai-c qt-mb-8"
+                    *ngIf="i >= 5"
+                >
+                    <div
+                        class="tooltip__circle-avatar"
+                        [textContent]="getAssignedUserNameForAvatar(user)"
+                        [ngStyle]="{'background': ticketsListService.getStyleAvatar(user,listColorNoAvatar[indexNoAvatar]) }"
+                    ></div>
+                    <span
+                        class="qt-ml-8"
+                        [textContent]="user.firstName + ' ' + user.lastName"
+                    ></span>
+                </div>
+            </ng-template>
+        </ng-template>
     </div>
     <div
         class="ticket-table__assignee"
@@ -74,7 +112,10 @@
                 [textContent]="getAssignedUserNameForAvatar(assignedUser)"
                 [ngStyle]="{'background': ticketsListService.getStyleAvatar(assignedUser,listColorNoAvatar[indexNoAvatar])}"
             ></div>
-            <div [textContent]="getUserName(assignedUser)"></div>
+            <div
+                class="ellipsis"
+                [textContent]="getUserName(assignedUser)"
+            ></div>
         </div>
     </div>
     <div class="ticket-table__status">

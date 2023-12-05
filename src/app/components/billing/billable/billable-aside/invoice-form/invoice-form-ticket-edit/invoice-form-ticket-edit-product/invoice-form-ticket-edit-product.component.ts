@@ -33,10 +33,10 @@ export class InvoiceFormTicketEditProductComponent implements OnInit, OnDestroy 
   onSetEditTaxes() {
     let notFindTax = [];
     let taxes = this.taxes.filter(item => {
-      let index = this.product.taxes.findIndex(tax => tax.name === item.name && tax.rate === item.rate);
+      let index = this.product.item.taxes.findIndex(tax => tax.name === item.name && tax.rate === item.rate);
       return (index > -1) ? true : false;
     })
-    this.product.taxes.forEach(item => {
+    this.product.item.taxes.forEach(item => {
       let index = this.taxes.findIndex(tax => tax.name === item.name && tax.rate === item.rate);
       if (index === -1) {
         this.taxesDropDown.addTax(item);
@@ -47,7 +47,7 @@ export class InvoiceFormTicketEditProductComponent implements OnInit, OnDestroy 
     this.taxesDropDown.setEditItems(taxes);
   }
   onTaxesChange(data) {
-    this.product.taxes = data;
+    this.product.item.taxes = data;
   }
   onValidateSaleCost() {
     if (this.product.item.sale > this.product.item.cost) this.valdiateSaleCost = true;

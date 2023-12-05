@@ -1545,18 +1545,19 @@
 }
 
 .priority-icon {
-  width: 14px;
-  height: 14px;
-  background-size: contain;
-  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
 
   &.--high {
-    background-image: url("/assets/img/icons/high-priority.svg");
+    background-color: $red-600;
   }
   &.--medium {
-    background-image: url("/assets/img/icons/medium-priority.svg");
+    background-color: $yellow-600;
   }
   &.--low {
-    background-image: url("/assets/img/icons/low-priority.svg");
+    background-color: $green-600;
   }
 }

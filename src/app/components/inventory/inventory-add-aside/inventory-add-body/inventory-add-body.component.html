@@ -64,10 +64,11 @@
                 <textarea
                     appTextArea
                     [limit]="160"
+                    [default]="5"
                     id="inventory-description"
                     placeholder="Write Product Description"
                     (input)="onChangeDescription($event)"
-                    (onPast)="onPastDescription($event)"
+                    (paste)="onPastDescription($event)"
                 ></textarea>
             </div>
             <mat-error
