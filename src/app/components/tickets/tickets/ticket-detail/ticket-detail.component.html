@@ -254,6 +254,11 @@
                         *ngIf="toggleRigthPanel"
                         (onShowMore)="onShowMore('DEVICES')"
                     ></ticket-detail-devices>
+                    <ticket-detail-tickets
+                        *ngIf="toggleRigthPanel"
+                        [ticketProfile]="ticketProfile"
+                        (onShowMore)="onShowMore('TICKETS')"
+                    ></ticket-detail-tickets>
                     <ticket-detail-documents-preview
                         [document]="ticketStateService.getDocumentForPreview()"
                         *ngIf="ticketStateService.getDocumentForPreview()"
@@ -273,6 +278,11 @@
                         *ngIf="typeRigthDetailAside == 'DEVICES'"
                         (onClose)="onCloseDetails()"
                     ></ticket-detail-devices-details>
+                    <ticket-detail-tickets-details
+                        [ticketProfile]="ticketProfile"
+                        *ngIf="typeRigthDetailAside == 'TICKETS'"
+                        (onClose)="onCloseDetails()"
+                    ></ticket-detail-tickets-details>
                 </div>
             </div>
             <div
@@ -302,6 +312,12 @@
                     (click)="openDetailRigthPanel('DOCUMENT')"
                 >
                     <div class="icon__documents qt-sz-20 qt-bg-contain"></div>
+                </div>
+                <div
+                    class="ticket-detail-page-content__sidebar-menu-button"
+                    (click)="openDetailRigthPanel('TICKETS')"
+                >
+                    <div class="icon__tickets-detail-contact qt-sz-20 qt-bg-contain"></div>
                 </div>
             </div>
         </div>

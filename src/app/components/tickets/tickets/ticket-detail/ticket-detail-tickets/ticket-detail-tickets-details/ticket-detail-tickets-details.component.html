@@ -1,0 +1,64 @@
+<div class="ticket-detail-tickets ticket-detail-contact__full">
+    <div class="ticket-detail-tickets__header qt-df qt-ai-c qt-jc-sb">
+        <div class="ticket-detail-tickets__title">Tickets</div>
+        <div
+            class="qt-button --square-md --gray pointer"
+            (click)="close()"
+        >
+            <div class="icon__close qt-bg-contain qt-sz-16 pointer"></div>
+        </div>
+    </div>
+    <div
+        class="ticket-detail-tickets__body"
+        [ngStyle]="{'height': (showPendingPreloader) ? 'calc(100% - 200px)' : 'calc(100% - 124px)'}"
+    >
+        <div
+            class="company-info-aside__history ticket-detail-tickets__history"
+            infiniteScroll
+            [infiniteScrollDistance]="2"
+            [infiniteScrollThrottle]="15"
+            [infiniteScrollDisabled]="infiniteScrollDisabled"
+            [scrollWindow]="false"
+            (scrolled)="onScroll()"
+            [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}"
+        >
+            <ng-template
+                ngFor
+                let-ticket
+                [ngForOf]="tickets"
+                [ngForTrackBy]="trackById"
+            >
+                <div
+                    class="ticket-detail-tickets__history-block"
+                    (click)="editTicket(ticket.id)"
+                >
+                    <div class="qt-df qt-ai-fs">
+                        <div class="ticket-detail-tickets__icon-wrap qt-dif qt-jc-c qt-ai-c qt-mr-8">
+                            <i class="icon__tickets-detail-contact qt-bg-contain qt-sz-20 qt-dib"></i>
+                        </div>
+                        <div>
+                            <div
+                                class="ticket-detail-tickets__history-block-title"
+                                [textContent]="ticket.subject"
+                            >
+                            </div>
+                            <div
+                                class="ticket-detail-tickets__history-block-date"
+                                [textContent]="'Tkt# ' + ticket.number + ' · ' + getCreateAt(ticket.createdAt)"
+                            >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            <div
+                class="loading"
+                *ngIf="showPreloader"
+            ></div>
+            <div
+                class="loading pengind-loading"
+                *ngIf="showPendingPreloader"
+            ></div>
+        </div>
+    </div>
+</div>
