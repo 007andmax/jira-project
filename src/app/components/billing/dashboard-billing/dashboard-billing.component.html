@@ -72,12 +72,14 @@
                 <app-top-dashboard
                     [title]="'Top Customer Sale'"
                     [list]="topDashboard.top5InvoicesSum"
+                    [tooltip]="'Represents the total amount of created invoices for a certain company from the accounting date to the current day inclusive.'"
                 ></app-top-dashboard>
             </div>
             <div class="contract-info-list qt-mr-16">
                 <app-top-dashboard
                     [title]="'Top Outstanding Customer'"
                     [list]="topDashboard.top5OutstandingInvoicesSum"
+                    [tooltip]="'Represents the unpaid amount of created invoices for a certain company from the accounting date to the current day inclusive.'"
                 ></app-top-dashboard>
             </div>
             <div class="contract-info-list">
