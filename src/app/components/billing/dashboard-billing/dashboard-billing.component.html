@@ -26,13 +26,13 @@
                 [title]="'Total Sales'"
                 [total]="dashboard.totalSales | currency"
                 [class]="'icon__total-sales'"
-                [tooltip]="'Represents the total amount of all created invoices from the accounting date up to and including the current day'"
+                [tooltip]="'Represents the total amount of all created invoices from the accounting date to the current day inclusive.'"
             ></app-dashboard-stats>
             <app-dashboard-stats
                 [title]="'Unpaid Invoices'"
                 [total]="dashboard.totalCustomerDebt | currency"
                 [class]="'icon__unpaid-invoice'"
-                [tooltip]="'Represents the unpaid amount of all created invoices since the registration of the technical company'"
+                [tooltip]="'Represents the unpaid amount of all created invoices since the registration of the technical company to the current day inclusive.'"
             ></app-dashboard-stats>
             <app-dashboard-stats
                 [title]="'Unbilled Amount'"
@@ -44,7 +44,7 @@
                 [title]="'Total Quotes'"
                 [total]="dashboard.saleQuotesPossibleRevenue | currency"
                 [class]="'icon__quotes'"
-                [tooltip]="'Represents the potential income for all quotas since the creation of the technical company until now. Only quotas in which the current status is one of the listed are taken into account: SAVED, READ, APPROVED, UNREAD.'"
+                [tooltip]="'Represents the potential income for all quotas since the creation of the technical company to the current day inclusive. Only quotes with the following statuses are taken into account: SAVED, READ, APPROVED, UNREAD.'"
             ></app-dashboard-stats>
         </div>
         <app-dashboard-sales-analytics
