@@ -54,7 +54,7 @@ export class QuoteService implements Service {
             rate: this.rate,
             serviceAgreement: this.serviceAgreement,
             serviceContractServiceAgreement: this.serviceContractServiceAgreement,
-            taxes: this.taxes,
+            taxes: undefined,
             updatedAt: this.updatedAt,
             versionedId: this.versionedId
         }
@@ -63,7 +63,8 @@ export class QuoteService implements Service {
             discountType: this.discountType,
             item: service,
             itemOrder: this.itemOrder,
-            quantity: this.quantity
+            quantity: this.quantity,
+            taxes: this.taxes,
         }
     }
 
