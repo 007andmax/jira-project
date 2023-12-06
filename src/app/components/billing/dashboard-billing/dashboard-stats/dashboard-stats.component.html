@@ -4,6 +4,7 @@
         placement="top"
         container="body"
         [ngbTooltip]="tooltip"
+        [tooltipClass]="customTooltipClass ? 'billing-dashboard-ttoltip' : null"
         *ngIf="tooltip"
     ></i>
     <div class="contract-info-card__container">

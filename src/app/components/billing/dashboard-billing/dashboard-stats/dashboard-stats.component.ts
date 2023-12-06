@@ -10,6 +10,7 @@ export class DashboardStatsComponent implements OnInit {
   @Input() total;
   @Input() title: string;
   @Input() tooltip: string;
+  @Input() customTooltipClass: boolean = false;
   constructor() { }
 
   ngOnInit() {
