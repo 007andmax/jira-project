@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TicketsFilter } from '../../../class/tickets-filter';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { Ticket } from '../../../../class/ticket';
@@ -23,14 +23,17 @@ export class TicketDetailTicketsDetailsComponent implements OnInit {
   public page_number: number = 0;
   tickets: Array<Ticket> = [];
   offset: number = 15;
+  container: string;
   showPendingPreloader: boolean = false;
   @Output() onClose = new EventEmitter<any>();
   constructor(private ticketsService: TicketsService,
     public cd: ChangeDetectorRef,
+    private elRef: ElementRef,
     private ticketStateService: TicketStateService,
     private companiesStateService: CompaniesStateService,
     private ticketsListService: TicketsListService,) { }
   ngOnInit(): void {
+    this.container = this.elRef.nativeElement.querySelector(".ticket-detail-tickets__body");
     this.onScroll();
   }
 

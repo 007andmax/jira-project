@@ -36,7 +36,6 @@
 
     &__body {
         padding: 16px;
-        max-height: calc(100% - 65px);
         overflow: auto;
         @include dropdown-scrollbar;
     }
@@ -54,11 +53,7 @@
     }
 
     &__history {
-        max-height: 655px;
-        overflow-y: auto;
         position: relative;
-        @include dropdown-scrollbar;
-
         &-block {
             position: relative;
             box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
@@ -66,6 +61,7 @@
             padding: 9.5px 10px;
             margin-bottom: 8px;
             border-radius: 8px;
+            cursor: pointer;
 
             &::after {
                 position: absolute;
@@ -113,6 +109,10 @@
     left: calc(50% - 12px);
 }
 .pengind-loading {
+    width: 25px;
+    height: 25px;
+    top: calc(50% - 12px);
+    left: calc(50% - 12px);
     top: auto;
 }
 

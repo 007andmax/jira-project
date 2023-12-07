@@ -4,6 +4,8 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { Ticket } from '../../../class/ticket';
 import { TicketProfile } from '../../class/ticket-profile';
 import { TicketsFilter } from '../../class/tickets-filter';
+import { TicketStateService } from '../../ticket-edit-aside/services/ticket-state.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'ticket-detail-tickets',
@@ -17,6 +19,8 @@ export class TicketDetailTicketsComponent implements OnInit {
   ticketsFilter: TicketsFilter = new TicketsFilter();
   tickets: Array<Ticket> = [];
   constructor(private ticketsService: TicketsService,
+    private ticketStateService: TicketStateService,
+    private companiesStateService: CompaniesStateService,
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -28,6 +32,11 @@ export class TicketDetailTicketsComponent implements OnInit {
       this.tickets = data;
       this.cd.detectChanges();
     })
+  }
+  editTicket(id) {
+    this.ticketStateService.setTicketRoutingId(id);
+    const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/ticket/${id}`;
+    window.open(url, '_blank');
   }
   showMore() {
     this.onShowMore.emit(null);
