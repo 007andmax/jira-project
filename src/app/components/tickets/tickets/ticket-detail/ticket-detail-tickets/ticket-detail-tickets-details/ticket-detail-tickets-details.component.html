@@ -10,16 +10,15 @@
     </div>
     <div
         class="ticket-detail-tickets__body"
-        [ngStyle]="{'height': (showPendingPreloader) ? 'calc(100% - 124px)' : 'calc(100% - 65px)'}"
+        [ngStyle]="{'height': (showPendingPreloader) ? 'calc(100% - 140px)' : 'calc(100% - 65px)'}"
     >
         <div
-            class="company-info-aside__history ticket-detail-tickets__history"
+            class="ticket-detail-tickets__history"
             infiniteScroll
             [infiniteScrollContainer]="container"
             [infiniteScrollDistance]="2"
-            [infiniteScrollThrottle]="15"
+            [infiniteScrollThrottle]="50"
             [infiniteScrollDisabled]="infiniteScrollDisabled"
-            [scrollWindow]="false"
             (scrolled)="onScroll()"
         >
             <ng-template

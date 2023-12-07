@@ -35,8 +35,9 @@
     }
 
     &__body {
-        padding: 16px;
+        padding: 0 16px 16px;
         overflow: auto;
+        height: calc(100% - 124px);
         @include dropdown-scrollbar;
     }
     &__divider {
@@ -53,7 +54,6 @@
     }
 
     &__history {
-        position: relative;
         &-block {
             position: relative;
             box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
@@ -74,10 +74,7 @@
                 left: 0;
             }
         }
-
-        .loading {
-            left: calc(50% - 12px);
-        }
+ 
     }
 
     &__history-block-title {
@@ -105,17 +102,7 @@
         border-radius: 8px;
     }
 }
-.loading {
-    left: calc(50% - 12px);
-}
 .pengind-loading {
-    width: 25px;
-    height: 25px;
-    top: calc(50% - 12px);
-    left: calc(50% - 12px);
+    bottom: 30px;
     top: auto;
-}
-
-.company-info-aside__history {
-    position: relative;
 }
