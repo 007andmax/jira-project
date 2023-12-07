@@ -21,7 +21,7 @@ export class TicketDetailTicketsComponent implements OnInit {
 
   ngOnInit() {
     this.ticketsFilter.setListType("ALL");
-    this.ticketsFilter.setOffset(3);
+    this.ticketsFilter.setOffset(0);
     this.ticketsFilter.setSize(3);
     this.ticketsFilter.setCompanies([this.ticketProfile.company]);
     this.ticketsService.getTickets(this.ticketsFilter.getListTupe(), this.ticketsFilter.getDataForRequest()).subscribe((data: Array<Ticket>) => {
