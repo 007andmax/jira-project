@@ -80,7 +80,48 @@
                     [value]="user"
                     (click)="selected(user)"
                 >
-                    <div class="assigne-user-item">
+                    <ng-template
+                        ngFor
+                        let-customerCompany
+                        [ngForOf]="user.customerCompaniesInfo"
+                        let-i="index"
+                    >
+                        <div
+                            ngbDropdownItem
+                            (click)="onSelectUser(user,customerCompany)"
+                            [ngClass]="{'--selected':isSelectedUser(user,customerCompany)}"
+                            class="qt-df user-container pointer"
+                            *ngIf="!user.searchByCompany || user.searchByCompany && user.searchByCompany.companyId == customerCompany.companyId"
+                        >
+                            <div
+                                class="assigne-user-avatar qt-mr-12"
+                                [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+                                [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
+                            ></div>
+                            <div>
+                                <div
+                                    class="user-name"
+                                    [textContent]="getUserName(user)"
+                                ></div>
+                                <div
+                                    class="user-description"
+                                    [textContent]="customerCompany.clientCompanyName"
+                                ></div>
+                            </div>
+                            <i
+                                class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
+                                *ngIf="isSelectedUser(user,customerCompany)"
+                            ></i>
+                        </div>
+                    </ng-template>
+
+
+
+
+                    <div
+                        class="assigne-user-item"
+                        *ngIf="false"
+                    >
                         <div
                             class="assigne-user-avatar"
                             [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"

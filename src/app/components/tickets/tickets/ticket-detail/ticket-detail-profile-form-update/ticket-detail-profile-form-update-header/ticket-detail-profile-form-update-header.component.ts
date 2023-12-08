@@ -8,6 +8,7 @@ import { TicketsListService } from '../../../services/tickets-list.service';
 import { AddAssignedUserComponent } from '../../../ticket-edit-aside/add-assigned-user/add-assigned-user.component';
 import { TicketProfileFormUpdate } from '../../../ticket-edit-aside/class/ticket-profile-form-update';
 import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-state.service';
+import { AddAssignedUserNoteComponent } from './add-assigned-user-note/add-assigned-user-note.component';
 
 @Component({
   selector: 'ticket-detail-profile-form-update-header',
@@ -17,7 +18,7 @@ import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-s
 })
 export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
   @Input() ticketProfile: TicketProfile = new TicketProfile();
-  @ViewChild('addAssignedUser') addAssignedUser: AddAssignedUserComponent;
+  @ViewChild('addAssignedUser') addAssignedUser: AddAssignedUserNoteComponent;
   @Input() ticketProfileFormUpdate: TicketProfileFormUpdate = new TicketProfileFormUpdate();
   @Input() currentUser: CurrentUser;
   @Input() tab: string;

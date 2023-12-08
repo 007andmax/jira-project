@@ -1,0 +1,131 @@
+<div class="add-assigned-user-note">
+    <span>Notify to All:</span>
+    <mat-form-field
+        ngbDropdown
+        [autoClose]="'outside'"
+        [placement]="placement"
+        #assignedUserDp="ngbDropdown"
+        [container]="container"
+        (openChange)="onCloseDropDown($event)"
+    >
+        <mat-chip-list
+            #chipList
+            aria-label="Fruit selection"
+            ngbDropdownAnchor
+        >
+            <mat-chip
+                class="selected-tag-user"
+                *ngFor="let user of selectedUsers; let i = index"
+                [selectable]="selectable"
+                [removable]="removable"
+                (removed)="remove(i)"
+            >
+                <div class="assigne-user-item">
+                    <div
+                        class="assigne-user-avatar"
+                        [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+                        [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
+                    ></div>
+                    <div [textContent]="getUserName(user)"></div>
+                    <mat-icon
+                        matChipRemove
+                        *ngIf="removable"
+                    >
+                        cancel
+                    </mat-icon>
+                </div>
+            </mat-chip>
+            <input
+                #userInput
+                class="pointer"
+                [formControl]="userCtrl"
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (input)="onSearchUser($event)"
+                id="dropdown"
+                ngbDropdownToggle
+            >
+        </mat-chip-list>
+        <div
+            ngbDropdownMenu
+            aria-labelledby="dropdown"
+            class="app-drop-down__dropdown"
+        >
+            <ng-template
+                ngFor
+                let-user
+                [ngForOf]="users"
+                let-i="index"
+            >
+                <ng-container *ngIf="user.accountType == 'CLIENT'">
+                    <ng-template
+                        ngFor
+                        let-customerCompany
+                        [ngForOf]="user.customerCompaniesInfo"
+                        let-i="index"
+                    >
+                        <div
+                            ngbDropdownItem
+                            (click)="selected(user)"
+                            [ngClass]="{'--selected':isSelected(user)}"
+                            class="qt-df user-container pointer"
+                            *ngIf="type == 'PUBLIC' && customerCompany.companyId == compayId"
+                        >
+                            <div
+                                class="assigne-user-avatar qt-mr-12"
+                                [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+                                [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
+                            ></div>
+                            <div>
+                                <div
+                                    class="user-name"
+                                    [textContent]="getUserName(user)"
+                                ></div>
+                                <div
+                                    class="user-description"
+                                    [textContent]="customerCompany.clientCompanyName"
+                                ></div>
+                                <div
+                                    class="user-description"
+                                    [textContent]="user.primaryEmail"
+                                ></div>
+                            </div>
+                            <i
+                                class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
+                                *ngIf="isSelected(user,customerCompany)"
+                            ></i>
+                        </div>
+                    </ng-template>
+                </ng-container>
+                <ng-container *ngIf="user.accountType == 'TECH'">
+                    <div
+                        ngbDropdownItem
+                        (click)="selected(user)"
+                        [ngClass]="{'--selected':isSelected(user)}"
+                        class="qt-df user-container pointer"
+                    >
+                        <div
+                            class="assigne-user-avatar qt-mr-12"
+                            [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+                            [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
+                        ></div>
+                        <div>
+                            <div
+                                class="user-name"
+                                [textContent]="getUserName(user)"
+                            ></div>
+                            <div
+                                class="user-description"
+                                [textContent]="user.primaryEmail"
+                            ></div>
+                        </div>
+                        <i
+                            class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
+                            *ngIf="isSelected(user,customerCompany)"
+                        ></i>
+                    </div>
+                </ng-container>
+            </ng-template>
+        </div>
+    </mat-form-field>
+</div>
