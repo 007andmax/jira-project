@@ -98,7 +98,10 @@ export class InvoicesAsidePreviewComponent implements OnInit {
     var wnd = window.open('/invoice/show/' + this.invoiceProfile.id + '/pdf');
     wnd.print();
   }
-
+  getServiceTaxes(service) {
+    if (service.taxesForSingleItem.length > 0) return this.getSelectedTaxes(service.taxesForSingleItem);
+    if (service.taxesForSingleItem.length == 0) return this.getSelectedTaxes(service.item.taxes || []);
+  }
   public getDateTicket(date) {
     return moment(new Date(date)).format('DD/MM/YYYY');
   }
