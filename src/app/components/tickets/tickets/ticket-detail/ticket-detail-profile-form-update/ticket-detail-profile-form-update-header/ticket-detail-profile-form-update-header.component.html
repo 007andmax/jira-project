@@ -65,12 +65,12 @@
             Add Product
         </div>
     </div>
-    <app-add-assigned-user
+    <add-assigned-user-note
         #addAssignedUser
         *ngIf="isShowAssignedUser()"
-        [type]="'DETAIL-TICKET'"
+        [type]="ticketProfileFormUpdate.noteType"
         [userList]="usersForUpdate"
         [selectedUsers]="selectedUsers"
         (onSelected)="onSelectUpdateUser($event)"
-    ></app-add-assigned-user>
+    ></add-assigned-user-note>
 </div>

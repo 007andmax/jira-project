@@ -3,7 +3,7 @@ import { TicketProfileFormProduct } from './ticket-profile-form-product';
 import { TicketProfileFormService } from './ticket-profile-form-service';
 
 export class TicketProfileFormUpdate {
-    noteType: string = "PRIVATE";
+    noteType: string = "PUBLIC";
     note: string = "";
     type: string = "NOTE";
     shares = [];
