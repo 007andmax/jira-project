@@ -19,6 +19,7 @@ export class TaxesComponent implements OnInit, OnDestroy {
   editItem: any;
   newTax: Tax = null;
   taxForm: FormGroup;
+  @Input() isDisabled: boolean = false;
   @Input() isLabel: boolean = true;
   @Input() isAdd: boolean = true;
   @Input() placeholder: string = "Select Taxes";
