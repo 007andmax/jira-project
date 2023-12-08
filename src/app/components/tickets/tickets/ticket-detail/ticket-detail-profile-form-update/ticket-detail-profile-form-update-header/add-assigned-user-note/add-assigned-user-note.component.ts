@@ -27,6 +27,7 @@ export class AddAssignedUserNoteComponent implements OnInit {
   @Input() placement = 'top-left';
   @Input() type: string;
   @Input() container: string;
+  @Input() compayId: string;
   users = [];
   reqUsers = [];
   currentUsers = [];
@@ -110,21 +111,7 @@ export class AddAssignedUserNoteComponent implements OnInit {
 
   onSearchUser(event) {
     if (event.target.value.length > 0) {
-      this.users = this.reqUsers.filter(item => {
-        if (item.accountType == "CLIENT") {
-          if (this.getUserName(item).toLowerCase().toLowerCase().includes(event.target.value.toLowerCase())) {
-            item.setSearchByCompany(null);
-            return true;
-          } else if (item.customerCompaniesInfo.some(customerCompany => customerCompany.clientCompanyName.toLowerCase().includes(event.target.value.toLowerCase()))) {
-            item.setSearchByCompany(item.customerCompaniesInfo.find(customerCompany => customerCompany.clientCompanyName.toLowerCase().includes(event.target.value.toLowerCase())));
-            return true;
-          }
-          item.setSearchByCompany(null);
-        } else {
-          return (`${item.firstName} ${item.lastName}`).toLowerCase().includes(event.target.value.toLowerCase());
-        }
-        return false;
-      });
+      this.users = this.reqUsers.filter(item => (`${item.firstName} ${item.lastName}`).toLowerCase().includes(event.target.value.toLowerCase()));
     } else {
       this.users = JSON.parse(JSON.stringify(this.reqUsers)).map(item => new CompanyUser(item));
     }

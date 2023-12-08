@@ -69,7 +69,7 @@
                             (click)="selected(user)"
                             [ngClass]="{'--selected':isSelected(user)}"
                             class="qt-df user-container pointer"
-                            *ngIf="type == 'PUBLIC' && (!user.searchByCompany || user.searchByCompany && user.searchByCompany.companyId == customerCompany.companyId)"
+                            *ngIf="type == 'PUBLIC' && customerCompany.companyId == compayId"
                         >
                             <div
                                 class="assigne-user-avatar qt-mr-12"
@@ -113,6 +113,10 @@
                             <div
                                 class="user-name"
                                 [textContent]="getUserName(user)"
+                            ></div>
+                            <div
+                                class="user-description"
+                                [textContent]="user.primaryEmail"
                             ></div>
                         </div>
                         <i
