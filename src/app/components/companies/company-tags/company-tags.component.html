@@ -18,6 +18,10 @@
                 [removable]="!isDisabled"
                 (removed)="remove(i)"
                 [ngClass]="{'no-remove':!checkRemoveTag(i)}"
+                placement="top"
+                container="body"
+                ngbTooltip="This is a default tag. You cannot remove it."
+                [disableTooltip]="checkRemoveTag(i)"
             >
                 {{tag.word}}
                 <mat-icon
