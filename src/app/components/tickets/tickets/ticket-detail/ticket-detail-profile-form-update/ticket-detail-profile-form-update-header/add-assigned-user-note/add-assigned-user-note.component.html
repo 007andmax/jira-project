@@ -4,6 +4,7 @@
         ngbDropdown
         [autoClose]="'outside'"
         [placement]="placement"
+        [container]="'body'"
         #assignedUserDp="ngbDropdown"
         [container]="container"
         (openChange)="onCloseDropDown($event)"
@@ -49,7 +50,7 @@
         <div
             ngbDropdownMenu
             aria-labelledby="dropdown"
-            class="app-drop-down__dropdown"
+            class="app-drop-down__dropdown add-assigned-user-note-db"
         >
             <ng-template
                 ngFor
