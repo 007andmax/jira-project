@@ -44,5 +44,7 @@ export class TicketDetailTicketsComponent implements OnInit {
   getCreateAt(createdAt) {
     return moment(new Date(createdAt)).format('DD MMM YYYY')
   }
-
+  public trackById(index, item) {
+    return item.id;
+  }
 }
