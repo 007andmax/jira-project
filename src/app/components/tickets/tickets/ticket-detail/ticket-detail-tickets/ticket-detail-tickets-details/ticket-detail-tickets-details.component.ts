@@ -46,10 +46,6 @@ export class TicketDetailTicketsDetailsComponent implements OnInit {
   public onScroll() {
     this.infiniteScrollDisabled = true;
     this.getTickets();
-
-  }
-  onBlurSearch(event) {
-    this.search(event);
   }
   onKeyUp(event) {
     if (event.keyCode === 13) this.search(event);
