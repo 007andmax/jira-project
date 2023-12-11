@@ -8,9 +8,22 @@
             <div class="icon__close qt-bg-contain qt-sz-16 pointer"></div>
         </div>
     </div>
+    <div class="qt-input-search qt-mt-16 qt-mb-16 qt-ml-16 qt-mr-16">
+        <input
+            id="search-tickets"
+            placeholder="Search tickets"
+            (blur)="onBlurSearch($event)"
+            (keyup)="onKeyUp($event)"
+        >
+        <span
+            *ngIf="isSearch"
+            (click)="clearSearch()"
+            class="search-clear icon__close-round"
+        ></span>
+    </div>
     <div
         class="ticket-detail-tickets__body"
-        [ngStyle]="{'height': (showPendingPreloader) ? 'calc(100% - 140px)' : 'calc(100% - 65px)'}"
+        [ngStyle]="{'height': (showPendingPreloader) ? 'calc(100% - 200px)' : 'calc(100% - 124px)'}"
     >
         <div
             class="ticket-detail-tickets__history"

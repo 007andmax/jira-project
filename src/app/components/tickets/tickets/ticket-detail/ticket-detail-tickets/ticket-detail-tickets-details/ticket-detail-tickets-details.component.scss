@@ -106,3 +106,11 @@
     bottom: 30px;
     top: auto;
 }
+.search-clear {
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    right: 12px;
+    top: calc(50% - 6px);
+    cursor: pointer;
+}

@@ -25,6 +25,7 @@ export class TicketDetailTicketsDetailsComponent implements OnInit {
   offset: number = 15;
   container: string;
   showPendingPreloader: boolean = false;
+  isSearch: boolean = false;
   @Output() onClose = new EventEmitter<any>();
   constructor(private ticketsService: TicketsService,
     public cd: ChangeDetectorRef,
@@ -46,6 +47,30 @@ export class TicketDetailTicketsDetailsComponent implements OnInit {
     this.infiniteScrollDisabled = true;
     this.getTickets();
 
+  }
+  onBlurSearch(event) {
+    this.search(event);
+  }
+  onKeyUp(event) {
+    if (event.keyCode === 13) this.search(event);
+  }
+  clearSearch() {
+    this.ticketsFilter.setSearchText("");
+    this.showPreloader = true;
+    this.setDefaultScoll();
+    this.onScroll();
+    this.elRef.nativeElement.querySelector("#search-tickets").value = '';
+    this.isSearch = false;
+  }
+  search(event) {
+    this.ticketsFilter.setSearchText(event.target.value);
+    if (event.target.value.length > 0) {
+      this.isSearch = true;
+    } else {
+      this.isSearch = false;
+    }
+    this.setDefaultScoll();
+    this.onScroll();
   }
   editTicket(id) {
     this.ticketStateService.setTicketRoutingId(id);
