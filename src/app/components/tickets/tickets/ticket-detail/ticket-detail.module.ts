@@ -83,6 +83,8 @@ import { TicketDetailDevicesDetailsComponent } from './ticket-detail-devices/tic
 import { TicketDetailProfileFormUpdateSupportComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-support/ticket-detail-profile-form-update-support.component';
 import { DndModule } from 'src/app/directives/dnd/dnd.module';
 import { AddAssignedUserNoteComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-header/add-assigned-user-note/add-assigned-user-note.component';
+import { TicketDetailTicketsDetailsComponent } from './ticket-detail-tickets/ticket-detail-tickets-details/ticket-detail-tickets-details.component';
+import { TicketDetailTicketsComponent } from './ticket-detail-tickets/ticket-detail-tickets.component';
 
 
 
@@ -139,7 +141,9 @@ import { AddAssignedUserNoteComponent } from './ticket-detail-profile-form-updat
         TicketDetailDevicesItemComponent,
         TicketDetailDevicesDetailsComponent,
         TicketDetailProfileFormUpdateSupportComponent,
-        AddAssignedUserNoteComponent
+        AddAssignedUserNoteComponent,
+        TicketDetailTicketsDetailsComponent,
+        TicketDetailTicketsComponent
 
     ],
     imports: [
