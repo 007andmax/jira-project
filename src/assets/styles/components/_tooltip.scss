@@ -137,3 +137,8 @@ ngb-tooltip-window {
     position: relative;
   }
 }
+.company-tags-default-tooltip {
+  .tooltip-inner {
+    max-width: 160px;
+  }
+}
