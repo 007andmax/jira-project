@@ -60,20 +60,17 @@ export class AddAssignedUserComponent implements OnInit {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-    console.log("this.type", this.type);
     this.currentUsers = JSON.parse(JSON.stringify(this.selectedUsers));
     this.users = JSON.parse(JSON.stringify(this.userList));
     if (this.type == "DETAIL-TICKET") this.users = JSON.parse(JSON.stringify(this.userList)).map(item => new CompanyUser(item));
     this.reqUsers = JSON.parse(JSON.stringify(this.userList));
     if (this.type == "DETAIL-TICKET") this.reqUsers = JSON.parse(JSON.stringify(this.userList)).map(item => new CompanyUser(item));
-    console.log("this.users", this.users);
   }
 
   public resetList(data) {
     this.userList = data;
     this.users = JSON.parse(JSON.stringify(this.userList)).map(item => new CompanyUser(item));
     this.reqUsers = JSON.parse(JSON.stringify(this.userList)).map(item => new CompanyUser(item));
-    console.log("this.users", this.users);
   }
 
   @HostListener('document:click', ['$event'])

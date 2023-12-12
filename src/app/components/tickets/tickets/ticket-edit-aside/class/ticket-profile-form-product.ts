@@ -24,7 +24,6 @@ export class TicketProfileFormProduct {
             this.completed = data.completed;
             this.valdiateSaleCost = data.valdiateSaleCost;
             this.taxes = [...data.this.taxes, ...this.item.taxes];
-            console.log("this.taxes", this.taxes);
         }
     }
     public getDataForAdd() {

@@ -59,18 +59,15 @@ export class AddAssignedUserNoteComponent implements OnInit {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-    console.log("this.type", this.type);
     this.currentUsers = JSON.parse(JSON.stringify(this.selectedUsers));
     this.users = JSON.parse(JSON.stringify(this.userList)).map(item => new CompanyUser(item));
     this.reqUsers = JSON.parse(JSON.stringify(this.userList)).map(item => new CompanyUser(item));
-    console.log("this.users", this.users);
   }
 
   public resetList(data) {
     this.userList = data;
     this.users = JSON.parse(JSON.stringify(this.userList)).map(item => new CompanyUser(item));
     this.reqUsers = JSON.parse(JSON.stringify(this.userList)).map(item => new CompanyUser(item));
-    console.log("this.users", this.users);
   }
 
   @HostListener('document:click', ['$event'])
@@ -100,7 +97,6 @@ export class AddAssignedUserNoteComponent implements OnInit {
     }
     this.userInput.nativeElement.blur();
     this.userCtrl.setValue(null);
-    console.log("this.userInput", this.userInput);
     this.userInput.nativeElement.value = '';
     this.users = JSON.parse(JSON.stringify(this.reqUsers)).map(item => new CompanyUser(item));
     this.userInput.nativeElement.focus();
