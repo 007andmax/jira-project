@@ -172,6 +172,10 @@
                         (click)="toggleQuoteMessage = !toggleQuoteMessage"
                     ></div>
                 </div>
+                <span
+                    class="qt-ml-29"
+                    [textContent]="'Sent to - ' + quote.parseRecipients()"
+                ></span>
                 <div class="quote-message">
                     <div [textContent]="quote.message"></div>
                 </div>
@@ -185,6 +189,10 @@
                         let-item
                         [ngForOf]="quote.reviewNotes"
                     >
+                        <span
+                            class="qt-ml-29"
+                            [textContent]="item.getTextSentFrom()"
+                        ></span>
                         <div class="quote-message-list-item">
                             <div [textContent]="item.note"></div>
                         </div>

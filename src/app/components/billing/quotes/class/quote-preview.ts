@@ -2,6 +2,7 @@ import { CompanyProfile } from '../../../companies/class/company-profile';
 import { InvoiceNote } from '../../billable/class/invoice-note';
 import { Quote } from './quote'
 import { QuoteProduct } from './quote-product';
+import { QuoteReviewNotes } from './quote-review-note';
 import { QuoteService } from './quote-service';
 
 export class QuotePreview extends Quote {
@@ -25,6 +26,7 @@ export class QuotePreview extends Quote {
             }
             this.products = data.products.map(item => new QuoteProduct(item));
             this.services = data.services.map(item => new QuoteService(item));
+            this.reviewNotes = data.reviewNotes.map(item => new QuoteReviewNotes(item));
             if (this.company.addresses) {
                 let billing = (this.company.addresses.find(item => item.isPrimary)) ? JSON.parse(JSON.stringify(this.company.addresses.find(item => item.isPrimary))) : null;
                 let shipping = (this.company.addresses.find(item => !item.isPrimary)) ? JSON.parse(JSON.stringify(this.company.addresses.find(item => !item.isPrimary))) : null;
@@ -45,6 +47,9 @@ export class QuotePreview extends Quote {
     }
     public setBillingLocationName(data) {
         this.billingLocationName = data;
+    }
+    public parseRecipients() {
+        return this.recipients.join(",");
     }
     public getDataForUpdate(notification) {
         return {

@@ -10,7 +10,7 @@
                 <div>
                     <span
                         class="ticket-updates__author"
-                        [textContent]="ticketsListService.getUserName(update.user)"
+                        [textContent]="update.user ? ticketsListService.getUserName(update.user) : update.performerEmail"
                     ></span>
                     <span class="ticket-updates__add-note">
                         added a {{update.noteType === 'PRIVATE' ? 'private' : 'public'}} note
