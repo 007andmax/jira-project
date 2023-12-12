@@ -397,7 +397,13 @@ export class CompanyDashDetailComponent implements OnInit {
       this.cd.detectChanges();
     }
   }
+  public onChangeNote(event) {
+    this.companyDetail.description = event.target.value;
+    this.companiesService.updateCompany(this.companyDetail.getDataForUpdate()).subscribe(data => {
 
+      this.cd.detectChanges();
+    })
+  }
   public onChangeTags(tags) {
     this.companyDetail.tags = tags;
     this.companiesService.updateCompany(this.companyDetail.getDataForUpdate()).subscribe(data => {

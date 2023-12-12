@@ -17,6 +17,7 @@
                 [selectable]="selectable"
                 [removable]="!isDisabled"
                 (removed)="remove(i)"
+                [ngClass]="{'no-remove':!checkRemoveTag(i)}"
             >
                 {{tag.word}}
                 <mat-icon

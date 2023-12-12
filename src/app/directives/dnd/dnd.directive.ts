@@ -4,15 +4,19 @@ import {
   Input,
   EventEmitter,
   HostBinding,
-  HostListener
+  HostListener,
+  OnInit
 } from '@angular/core';
 
 @Directive({
   selector: '[appDnd]'
 })
-export class DndDirective {
+export class DndDirective implements OnInit {
   @HostBinding('class.fileover') fileOver: boolean;
   @Output() fileDropped = new EventEmitter<any>();
+
+  ngOnInit() {
+  }
 
   // Dragover listener
   @HostListener('dragover', ['$event']) onDragOver(evt) {

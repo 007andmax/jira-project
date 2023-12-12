@@ -1,0 +1,49 @@
+<div class="ticket-detail-tickets ticket-detail-contact__full">
+    <div
+        class="ticket-detail-tickets__header qt-pos-rel pointer"
+        (click)="toggleContainer = !toggleContainer"
+    >
+        <div class="ticket-detail-tickets__title">Tickets</div>
+        <i class="icn-sm report-caret-icon pointer"></i>
+    </div>
+    <div
+        class="ticket-detail-tickets__body"
+        *ngIf="toggleContainer"
+    >
+        <ng-template
+            ngFor
+            let-ticket
+            [ngForOf]="tickets"
+            [ngForTrackBy]="trackById"
+        >
+            <div
+                class="ticket-detail-tickets__history-block"
+                (click)="editTicket(ticket.id)"
+            >
+                <div class="qt-df qt-ai-fs">
+                    <div class="ticket-detail-tickets__icon-wrap qt-dif qt-jc-c qt-ai-c qt-mr-8">
+                        <i class="icon__tickets-detail-contact qt-bg-contain qt-sz-20 qt-dib"></i>
+                    </div>
+                    <div>
+                        <div
+                            class="ticket-detail-tickets__history-block-title"
+                            [textContent]="ticket.subject"
+                        >
+                        </div>
+                        <div
+                            class="ticket-detail-tickets__history-block-date"
+                            [textContent]="'Tkt# ' + ticket.number + ' · ' + getCreateAt(ticket.createdAt)"
+                        >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <button
+            class="qt-button --gray --sm qt-w100 qt-jc-c"
+            (click)="showMore()"
+        >
+            View All
+        </button>
+    </div>
+</div>

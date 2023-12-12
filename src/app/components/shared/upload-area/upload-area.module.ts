@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UploadAreaComponent } from './upload-area.component';
 import { UploadAreaProgressModule } from './upload-area-progress/upload-area-progress.module';
+import { DndModule } from 'src/app/directives/dnd/dnd.module';
 
 
 
@@ -11,7 +12,8 @@ import { UploadAreaProgressModule } from './upload-area-progress/upload-area-pro
     ],
     imports: [
         CommonModule,
-        UploadAreaProgressModule
+        UploadAreaProgressModule,
+        DndModule
     ],
     exports: [UploadAreaComponent]
 

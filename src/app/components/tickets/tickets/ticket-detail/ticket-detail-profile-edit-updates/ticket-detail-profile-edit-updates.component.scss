@@ -188,7 +188,7 @@
 .ticket-edit-aside-bottom-part-users-attack {
     width: 100%;
 
-    /deep/ app-add-assigned-user {
+    /deep/ app-add-assigned-user,/deep/ add-assigned-user-note {
         margin-right: 5px;
         margin-top: 5px;
         width: 100%;
@@ -458,8 +458,7 @@
                 flex: 100%;
             }
 
-            .icon__globe,
-            .icon__private {
+            .icon__globe{
                 width: 20px;
                 height: 20px;
                 margin-right: 12px;

@@ -26,21 +26,27 @@
                 [title]="'Total Sales'"
                 [total]="dashboard.totalSales | currency"
                 [class]="'icon__total-sales'"
+                [tooltip]="'Represents the total amount of all created invoices from the accounting date to the current day inclusive.'"
             ></app-dashboard-stats>
             <app-dashboard-stats
                 [title]="'Unpaid Invoices'"
                 [total]="dashboard.totalCustomerDebt | currency"
                 [class]="'icon__unpaid-invoice'"
+                [tooltip]="'Represents the unpaid amount of all created invoices since the registration of the technical company to the current day inclusive.'"
             ></app-dashboard-stats>
             <app-dashboard-stats
                 [title]="'Unbilled Amount'"
                 [total]="dashboard.totalBillable | currency"
                 [class]="'icon__unbilled-amount'"
+                [tooltip]="'Represents the total amount of products/services in tickets for which an invoice has not been created since the creation of the technical company. The current day is not taken into account.'"
+                [customTooltipClass]="true"
             ></app-dashboard-stats>
             <app-dashboard-stats
                 [title]="'Total Quotes'"
                 [total]="dashboard.saleQuotesPossibleRevenue | currency"
                 [class]="'icon__quotes'"
+                [tooltip]="'Represents the potential income for all quotas since the creation of the technical company to the current day inclusive. Only quotes with the following statuses are taken into account: SAVED, READ, APPROVED, UNREAD.'"
+                [customTooltipClass]="true"
             ></app-dashboard-stats>
         </div>
         <app-dashboard-sales-analytics
@@ -68,12 +74,14 @@
                 <app-top-dashboard
                     [title]="'Top Customer Sale'"
                     [list]="topDashboard.top5InvoicesSum"
+                    [tooltip]="'Represents the total amount of created invoices for a certain company from the accounting date to the current day inclusive.'"
                 ></app-top-dashboard>
             </div>
             <div class="contract-info-list qt-mr-16">
                 <app-top-dashboard
                     [title]="'Top Outstanding Customer'"
                     [list]="topDashboard.top5OutstandingInvoicesSum"
+                    [tooltip]="'Represents the unpaid amount of created invoices for a certain company from the accounting date to the current day inclusive.'"
                 ></app-top-dashboard>
             </div>
             <div class="contract-info-list">

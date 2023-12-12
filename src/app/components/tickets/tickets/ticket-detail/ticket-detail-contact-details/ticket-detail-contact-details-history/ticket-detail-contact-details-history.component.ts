@@ -78,9 +78,7 @@ export class TicketDetailContactDetailsHistoryComponent implements OnInit {
     window.open(url, '_blank');
   }
   getCreateAt(createdAt) {
-    let date = new Date(createdAt);
-
-    return moment(date).format('DD MMM YYYY')
+    return moment(new Date(createdAt)).format('DD MMM YYYY')
   }
   public getTickets() {
     if (this.ticketsListService.getBlockList()) {

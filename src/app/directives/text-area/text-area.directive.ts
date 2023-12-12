@@ -1,5 +1,5 @@
 import { Directive, OnInit, ElementRef, Injectable, Input, ChangeDetectorRef, OnChanges, SimpleChanges, AfterContentChecked, Output, EventEmitter, OnDestroy } from '@angular/core';
-
+var $ = require("jquery");
 @Directive({
   selector: '[appTextArea]'
 })
@@ -8,6 +8,7 @@ export class TextAreaDirective implements OnInit {
   cloned: HTMLTextAreaElement;
   lines: number = 1;
   height: number = 0;
+  @Input() lineHeight = false;
   @Input() limit;
   @Input() default;
   @Input() minHeight;
@@ -41,6 +42,11 @@ export class TextAreaDirective implements OnInit {
   }
 
   private getNumberOfLines(str) {
+    if (this.lineHeight) {
+      let lineHeight = parseInt($('.qt-editable-input').css('lineHeight'));
+      var vs = this.element.nativeElement.scrollHeight > this.element.nativeElement.clientHeight;
+      return vs ? Math.ceil(this.element.nativeElement.scrollHeight / lineHeight) : this.lines;
+    }
     if (str) {
       return str.split(/\r\n|\r|\n/).length;
     }

@@ -57,11 +57,11 @@
         <ng-template
             ngFor
             let-company
-            [ngForOf]="getCompaniesNames()"
+            [ngForOf]="user.customerCompaniesInfo"
             [ngForTrackBy]="trackByIndex"
         >
             <div class="qt-df qt-ai-c">
-                <div [textContent]="company"></div>
+                <div [textContent]="company.clientCompanyName"></div>
             </div>
         </ng-template>
     </td>

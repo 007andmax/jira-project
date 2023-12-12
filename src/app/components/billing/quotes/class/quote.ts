@@ -34,4 +34,7 @@ export class Quote {
             if (shipping) this.company.addresses.push(shipping);
         }
     }
+    public parseRecipients() {
+        return this.recipients.join("<br/>");
+    }
 }

@@ -35,7 +35,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   removable = true;
   addOnBlur = true;
   message: string;
-  subject: string;
+  @Input() subject: string;
   focus = false;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   userCtrl = new FormControl();
@@ -85,6 +85,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
    */
   public ngOnInit() {
     this.initResendMode();
+    if (this.action === QUOTE_MODAL_ACTION_ADD) this.subject = this.data.description ? JSON.parse(JSON.stringify(this.data.description)) : "";
     this.getAllUsers((this.data instanceof QuoteEdit || this.data instanceof QuotePreview) ? this.data.company.id : this.data.companyId);
     /* this.userInput.nativeElement.onblur = (e) => {
        if (this.matAutocomplete.isOpen) {

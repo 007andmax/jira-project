@@ -9,7 +9,6 @@ import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.
 import { PreloaderTicketModule } from 'src/app/components/shared/preloader-ticket/preloader-ticket.module';
 import { UploadAreaProgressComponent } from 'src/app/components/shared/upload-area/upload-area-progress/upload-area-progress.component';
 import { UploadAreaProgressModule } from 'src/app/components/shared/upload-area/upload-area-progress/upload-area-progress.module';
-import { DndDirective } from 'src/app/directives/dnd.directive';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UploadAreaModule } from 'src/app/components/shared/upload-area/upload-area.module';
 import { TechUsersModule } from 'src/app/components/shared/tech-users/tech-users.module';
@@ -21,8 +20,7 @@ import { CompanyUsersDropDownModule } from './company-users-drop-down/company-us
 
 
 @NgModule({
-    declarations: [TicketAddAsideComponent,
-        DndDirective
+    declarations: [TicketAddAsideComponent
     ],
     imports: [
         CommonModule,

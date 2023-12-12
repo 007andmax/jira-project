@@ -17,6 +17,10 @@
         class="quotes-table__description"
         [textContent]="quote.description"
     ></td>
+    <td
+        class="quotes-table__recipients"
+        [innerHtml]="quote.parseRecipients()"
+    ></td>
     <td class="quotes-table__create-by">
         <div class="qt-df qt-ai-c">
             <div
