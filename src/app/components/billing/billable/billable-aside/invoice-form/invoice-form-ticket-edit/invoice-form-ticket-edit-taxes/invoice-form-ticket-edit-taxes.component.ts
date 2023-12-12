@@ -35,6 +35,7 @@ export class InvoiceFormTicketEditTaxesComponent implements OnInit, OnDestroy {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
+    console.log("selectedTax", this.selectedTax);
     if (this.taxesStateService.getTaxes().length > 0) this.taxes = [...this.taxes, ...this.taxesStateService.getTaxes()];
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
       this.taxes = [...this.taxes, ...data];
@@ -111,8 +112,7 @@ export class InvoiceFormTicketEditTaxesComponent implements OnInit, OnDestroy {
     this.taxesChange.emit(this.selectedTax);
   }
   public checkTaxIsSelected(tax) {
-    const find = this.selectedTax.find(item => item.id === tax.id);
-    return (find) ? true : false;
+    return this.selectedTax.some(item => item.id === tax.id);
   }
 
   /**
