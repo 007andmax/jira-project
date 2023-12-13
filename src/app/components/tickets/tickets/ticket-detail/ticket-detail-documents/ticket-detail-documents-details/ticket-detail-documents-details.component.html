@@ -21,6 +21,16 @@
         ></span>
     </div>
     <div class="ticket-detail-documents__body">
+        <div
+            class="no-find-documents"
+            *ngIf="documents.length == 0 && !showPreloader"
+        >
+            <div class="no-find-documents-avatar">
+                <div class="icon__documents qt-sz-24 qt-bg-contain"></div>
+            </div>
+            <h4 class="qt-mt-16">No Documents Found</h4>
+            <span>Try using another word</span>
+        </div>
         <ng-template
             ngFor
             let-document

@@ -21,6 +21,16 @@
         ></span>
     </div>
     <div class="ticket-detail-devices__body">
+        <div
+            class="no-find-devices"
+            *ngIf="devices.length == 0 && isSearch"
+        >
+            <div class="no-find-devices-avatar">
+                <div class="icon__devices-computer qt-sz-24 qt-bg-contain"></div>
+            </div>
+            <h4 class="qt-mt-16">No Devices Found</h4>
+            <span>Try using another word</span>
+        </div>
         <ng-template
             ngFor
             let-item
