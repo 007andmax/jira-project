@@ -28,7 +28,7 @@ export class TicketProfileFormProduct {
     }
     public getDataForAdd() {
         let item = {};
-        for (const key in this.item) if (this.item[key] && key !== "taxes") item[key] = this.item[key];
+        for (const key in this.item) if (this.item[key] != null && this.item[key] != undefined && key !== "taxes") item[key] = this.item[key];
         let taxes = this.taxes.map(item => ({
             id: item.id,
             name: item.name,
