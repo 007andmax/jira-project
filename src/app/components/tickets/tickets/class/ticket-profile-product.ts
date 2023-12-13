@@ -85,7 +85,7 @@ export class TicketProfileProduct {
     public getDateForUpdate(id) {
         let user = (!this.user) ? { id: "" } : this.user;
         let item = {};
-        for (const key in this.item) if (this.item[key] && key !== "taxes") item[key] = this.item[key];
+        for (const key in this.item) if (this.item[key] != null && this.item[key] != undefined && key !== "taxes") item[key] = this.item[key];
         return {
             productExpense: {
                 completed: this.completed,
