@@ -10,6 +10,7 @@ export class TicketProfileUpdate {
     id: string;
     note: string;
     notifyTicketCreator: boolean;
+    performerEmail: string;
     products: Array<TicketProfileProduct> = [];
     services: Array<TicketProfileService> = [];
     shares: Array<TicketProfileShare> = [];
@@ -40,11 +41,11 @@ export class TicketProfileUpdate {
         this.unread = data.unread;
         this.updateSource = data.updateSource;
         this.updatedAt = data.updatedAt;
-        this.user = new CurrentUser(data.user);
+        if (data.user) this.user = new CurrentUser(data.user);
         this.noteType = data.noteType;
         if (this.services.length > 0) this.userUpdate = new CurrentUser(this.services[0].user);
         if (this.products.length > 0) this.userUpdate = new CurrentUser(this.products[0].user);
-
+        this.performerEmail = data.performerEmail;
     }
     public setUserUpdate(data) {
         this.userUpdate = data;

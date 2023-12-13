@@ -405,7 +405,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   }
   private updateLisUpdateUser() {
     this.lisUpdateUser = [];
-    this.lisUpdateUser = this.ticketProfile.updates.map(item => item.user);
+    this.lisUpdateUser = this.ticketProfile.updates.filter(item => item.user).map(item => item.user);
     this.lisUpdateUser = [...this.listAssignedUser, ...this.lisUpdateUser]
     this.lisUpdateUser = this.lisUpdateUser.filter((item, index) => this.lisUpdateUser.findIndex(user => user.id === item.id) === index);
     if (this.ticketProfile.createdUser) {
