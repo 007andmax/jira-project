@@ -22,6 +22,7 @@ export class Quote {
     createdBy: string;
     invoiceId: string;
     ticketId: string;
+    selected: boolean = false;
     constructor(data = null) {
         if (data) {
             for (const key in data) {

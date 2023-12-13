@@ -18,6 +18,7 @@ export class QuotesItemComponent implements OnInit {
   createdUser: User;
   @Input() quote: Quote;
   @Output() onResend = new EventEmitter<any>();
+  @Output() onSelected = new EventEmitter<any>();
   @Output() onConvertToBillable = new EventEmitter<any>();
   @Output() onConvertToInvoice = new EventEmitter<any>();
   @Output() onConvertToTicket = new EventEmitter<any>();
@@ -109,6 +110,9 @@ export class QuotesItemComponent implements OnInit {
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
+  }
+  selectQuote(event) {
+    this.onSelected.emit(this.quote);
   }
   public getStatusText(status) {
     return status.toLowerCase()

@@ -1,4 +1,20 @@
 <tr>
+    <td class="quotes-table__check">
+        <div class="qt-df">
+            <label
+                class="qt-checkbox"
+                [attr.for]="'quote-' + quote.id"
+            >
+                <input
+                    [attr.id]="'quote-' + quote.id"
+                    [(ngModel)]="quote.selected"
+                    type="checkbox"
+                    (change)="selectQuote($event)"
+                >
+                <span></span>
+            </label>
+        </div>
+    </td>
     <td
         class="quotes-table__date"
         [textContent]="getDate(quote.date)"
