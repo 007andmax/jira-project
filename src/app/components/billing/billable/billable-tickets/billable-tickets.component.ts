@@ -5,7 +5,7 @@ import * as moment from "moment";
 import { CompanyFilterTop } from '../../../companies/class/company-filter-top';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
-import { REMOVE_TICKET_BILLABLE } from 'src/app/const/confirm';
+import { REMOVE_TICKETS_BILLABLE, REMOVE_TICKET_BILLABLE } from 'src/app/const/confirm';
 import { ConfirmStateService } from '../../../shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
@@ -33,6 +33,7 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
   new CompanyFilterTop('sum', '')];
   currentUser;
   ticketForRemove: BillableProfileTicket = null;
+  ticketsForRemove: Array<BillableProfileTicket> = [];
   isCurrentCompanyAddressEmpty: boolean = true;
   sub: Subscription = new Subscription();
   constructor(private billableStateService: BillableStateService,
@@ -72,6 +73,14 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
             this.billableProfile.tickets.splice(index, 1);
           })
         }
+        if (this.confirmStateService.getConfirmAction() === REMOVE_TICKETS_BILLABLE) {
+          this.ticketsService.deleteTicket(this.ticketsForRemove.map(item => item.id)).subscribe(data => {
+            this.ticketsForRemove.forEach(ticket => {
+              let index = this.billableProfile.tickets.findIndex(item => item.id === ticket.id);
+              this.billableProfile.tickets.splice(index, 1);
+            })
+          })
+        }
       }
     })
     this.sub.add(getConfirm);
@@ -107,6 +116,10 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
     this.leftPanelStateService.goToState('company-profile-component');
 
   }
+  getSelectedCount() {
+    if (this.billableProfile.tickets.filter(item => item.selected).find(item => !item.isOrder)) return 0
+    return this.billableProfile.tickets.filter(item => item.selected).length;
+  }
   editTicket(id) {
     this.ticketStateService.setTicketRoutingId(id);
     const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/ticket/${id}`;
@@ -121,6 +134,12 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
         item.selected = false;
       }
     })
+  }
+  deleteSelectedTickets() {
+    this.confirmStateService.setConfirmAction(REMOVE_TICKETS_BILLABLE);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.message = `Do you want to delete selected tickets?`;
+    this.ticketsForRemove = this.billableProfile.tickets.filter(item => item.selected);
   }
   onCreateInvoice() {
     let listIds = [];
