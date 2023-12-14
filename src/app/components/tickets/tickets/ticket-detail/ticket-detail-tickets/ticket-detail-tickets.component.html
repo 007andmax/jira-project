@@ -35,6 +35,7 @@
                             [textContent]="'Tkt# ' + ticket.number + ' · ' + getCreateAt(ticket.createdAt)"
                         >
                         </div>
+                        <ticket-detail-tickets-status [ticketProfile]="ticket"></ticket-detail-tickets-status>
                     </div>
                 </div>
             </div>
