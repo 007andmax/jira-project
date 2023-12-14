@@ -65,7 +65,6 @@ export class TicketDetailProfileFormUpdateProductsComponent implements OnInit, O
   }
   public onChangeCost(val) {
     let value = Number(val.target.value);
-    console.log("onChangeCost", value);
     this.currentProduct.item.cost = value;
     this.currentProduct.item.cost_str = value.toFixed(2);
   }
@@ -92,7 +91,6 @@ export class TicketDetailProfileFormUpdateProductsComponent implements OnInit, O
       taxesDropDown.selectedTax = [];
     }
     this.currentProduct.valdiateSaleCost = true;
-    console.log("this.currentProduct", this.currentProduct);
   }
   public onTaxesChange(item) {
     this.currentProduct.setTexes(item);

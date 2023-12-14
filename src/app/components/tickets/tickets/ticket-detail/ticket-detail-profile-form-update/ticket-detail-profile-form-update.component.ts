@@ -240,7 +240,6 @@ export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy
 
   onChangeProducts(data) {
     this.ticketProfileFormUpdate.setProducts(data);
-    console.log("this.ticketProfileFormUpdate", this.ticketProfileFormUpdate);
   }
   onChangeServices(data) {
     this.ticketProfileFormUpdate.setServices(data);
