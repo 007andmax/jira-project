@@ -62,12 +62,12 @@
                     <span>Filters</span>
                 </button>
                 <button
-                    class="qt-btn --outline-white qt-mr-8"
+                    class="qt-button --gray --md qt-mr-8"
                     uib-tooltip="Draft email"
                     tooltip-placement="top"
                     (click)="showAsideForDraftEmail()"
                 >
-                    <i class="icon__email-dark qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"></i>
+                    <span class="icon__email qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
                     Send email
                 </button>
                 <button
@@ -80,7 +80,7 @@
                 </button>
                 <button
                     *ngIf="getPermissions('CREATE_COMPANIES')"
-                    class="btn-new btn-primary-white qt-fs-0"
+                    class="qt-button --md --gray qt-fs-0"
                     (click)="showAsideForAdd()"
                 >
                     Add Company

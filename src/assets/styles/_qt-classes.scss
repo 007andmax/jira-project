@@ -496,7 +496,9 @@ input.qt-dropdown-input {
     }
   }
 }
-
+button.qt-button.--gray:focus {
+  background: $white;
+}
 .qt-popup-arrow {
   left: 20px;
   background: $white;
