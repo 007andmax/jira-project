@@ -38,4 +38,8 @@ export class Quote {
     public parseRecipients() {
         return this.recipients.join("<br/>");
     }
+    public checkStatus(statusForShowingArray) {
+        const elems = statusForShowingArray.filter((item) => item.toLowerCase() === this.status.toLowerCase());
+        return elems.length > 0;
+    }
 }

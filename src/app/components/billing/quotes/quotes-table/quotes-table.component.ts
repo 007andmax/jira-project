@@ -114,7 +114,7 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     if (event.target.checked) {
       this.selectAll = true;
       this.quotes.forEach(item => {
-        item.selected = true;
+        if (item.checkStatus(['UNREAD', 'SAVED', 'EXPIRED', 'INVOICED', 'TICKETED', 'CANCELED', 'BILLED'])) item.selected = true;
       })
     } else {
       this.selectAll = false;
@@ -209,12 +209,12 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
   }
   onArchiveQuotes() {
     let quotes = this.quoteStateService.getQuotesForArchive();
-    /* this.quoteServices.archiveQuote(quote.company, quote.id).subscribe((res) => {
-     });*/
+    this.quoteServices.archiveQuote(quotes.map(item => item.id)).subscribe((res) => {
+    });
   }
   onArchiveQuote() {
     let quote = this.quoteStateService.getQuoteForArchive();
-    this.quoteServices.archiveQuote(quote.company, quote.id).subscribe((res) => {
+    this.quoteServices.archiveQuote([quote.id]).subscribe((res) => {
     });
   }
   archiveQuote(item) {

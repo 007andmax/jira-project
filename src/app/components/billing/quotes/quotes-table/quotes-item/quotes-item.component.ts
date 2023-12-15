@@ -104,10 +104,6 @@ export class QuotesItemComponent implements OnInit {
     if (this.toastrProgressStateService.check(this.quote.id)) return;
     this.onResend.emit(this.quote);
   }
-  public checkStatus(quote, statusForShowingArray) {
-    const elems = statusForShowingArray.filter((item) => item.toLowerCase() === quote.status.toLowerCase());
-    return elems.length > 0;
-  }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }
