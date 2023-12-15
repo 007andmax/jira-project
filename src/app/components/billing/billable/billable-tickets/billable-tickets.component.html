@@ -43,7 +43,7 @@
                 <div class="qt-df qt-ai-c">
                     <div
                         class="company-devices-page__list-header-buttons"
-                        *ngIf="getSelectedCount() > 0"
+                        *ngIf="getSelectedCount() > 0 && !isInitMultyRemove"
                     >
                         <div [textContent]="getSelectedCount() + ' Ticket Selected'"></div>
                         <div

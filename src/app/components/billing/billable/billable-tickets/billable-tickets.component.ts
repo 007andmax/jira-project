@@ -19,6 +19,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { TicketStateService } from 'src/app/components/tickets/tickets/ticket-edit-aside/services/ticket-state.service';
+import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toastr-progress-state.service';
 
 @Component({
   selector: 'billable-tickets',
@@ -32,6 +33,7 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
   new CompanyFilterTop('subject', ''),
   new CompanyFilterTop('sum', '')];
   currentUser;
+  isInitMultyRemove: boolean = false;
   ticketForRemove: BillableProfileTicket = null;
   ticketsForRemove: Array<BillableProfileTicket> = [];
   isCurrentCompanyAddressEmpty: boolean = true;
@@ -49,6 +51,7 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
     private appStateService: AppStateService,
     private permissionsService: PermissionsService,
     private ticketStateService: TicketStateService,
+    private toastrProgressStateService: ToastrProgressStateService,
     public cd: ChangeDetectorRef,) { }
 
 
@@ -74,11 +77,18 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
           })
         }
         if (this.confirmStateService.getConfirmAction() === REMOVE_TICKETS_BILLABLE) {
+          this.isInitMultyRemove = true;
+          this.toastrProgressStateService.onInit(this.ticketsForRemove[0].id);
           this.ticketsService.deleteTicket(this.ticketsForRemove.map(item => item.id)).subscribe(data => {
+            this.toastrProgressStateService.clear(this.ticketsForRemove[0].id);
             this.ticketsForRemove.forEach(ticket => {
               let index = this.billableProfile.tickets.findIndex(item => item.id === ticket.id);
               this.billableProfile.tickets.splice(index, 1);
+              this.isInitMultyRemove = false;
             })
+          }, err => {
+            this.toastrProgressStateService.clear(this.ticketsForRemove[0].id);
+            this.isInitMultyRemove = false;
           })
         }
       }
