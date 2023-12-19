@@ -24,9 +24,28 @@
                 [ngbTooltip]="tipContent"
             ></div>
         </ng-template>
+        <ng-template
+            ngFor
+            let-recipient
+            [ngForOf]="otherRecipients"
+            let-i="index"
+            [ngForTrackBy]="trackByIndex"
+        >
+            <ng-template #tipContent>
+                <div [textContent]="recipient"></div>
+                <div>Unregistered user</div>
+            </ng-template>
+            <div
+                class="ticket-updates__photo-people"
+                [textContent]="recipient[0]"
+                [ngStyle]="{'background': ticketsListService.getStyleAvatar(null)}"
+                placement="top"
+                [ngbTooltip]="tipContent"
+            ></div>
+        </ng-template>
     </div>
     <span
         class="ticket-updates__people-added"
-        [textContent]="' ' + shares.length + ' people added to this update'"
+        [textContent]="' ' + (shares.length + otherRecipients.length) + ' people added to this update'"
     ></span>
 </div>

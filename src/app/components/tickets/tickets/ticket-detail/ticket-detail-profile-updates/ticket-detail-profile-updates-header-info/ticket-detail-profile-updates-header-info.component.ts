@@ -10,6 +10,7 @@ import * as moment from "moment";
 })
 export class TicketDetailProfileUpdatesHeaderInfoComponent implements OnInit {
 
+  @Input() otherRecipients: Array<string> = [];
   @Input() shares: Array<TicketProfileShare> = [];
   @Input() date: number = 0;
   constructor(public ticketsListService: TicketsListService) { }

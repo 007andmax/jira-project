@@ -6,10 +6,8 @@ import { TicketProfileShare } from './ticket-profile-share';
 export class TicketProfileUpdate {
     attachments: [];
     createdAt: number;
-    createdByEmail: string;
     id: string;
     note: string;
-    notifyTicketCreator: boolean;
     performerEmail: string;
     products: Array<TicketProfileProduct> = [];
     services: Array<TicketProfileService> = [];
@@ -21,13 +19,12 @@ export class TicketProfileUpdate {
     user: CurrentUser;
     userUpdate: CurrentUser;
     noteType: string;
+    otherRecipients: Array<string> = [];
     constructor(data) {
         this.attachments = data.attachments;
         this.createdAt = data.createdAt;
-        this.createdByEmail = data.createdByEmail;
         this.id = data.id;
         this.note = data.note;
-        this.notifyTicketCreator = data.notifyTicketCreator;
         this.products = data.products.map(item => {
             return new TicketProfileProduct(item);
         })
@@ -46,6 +43,7 @@ export class TicketProfileUpdate {
         if (this.services.length > 0) this.userUpdate = new CurrentUser(this.services[0].user);
         if (this.products.length > 0) this.userUpdate = new CurrentUser(this.products[0].user);
         this.performerEmail = data.performerEmail;
+        this.otherRecipients = data.otherRecipients;
     }
     public setUserUpdate(data) {
         this.userUpdate = data;
