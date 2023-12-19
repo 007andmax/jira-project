@@ -76,6 +76,7 @@ export class AddAssignedUserNoteComponent implements OnInit {
         user.setIsCustomEmail(true);
         user.setRecipient(event.target.value);
         this.selectedUsers.push(user);
+        this.onSelected.emit(this.selectedUsers);
         this.resetInput();
       }
     }
