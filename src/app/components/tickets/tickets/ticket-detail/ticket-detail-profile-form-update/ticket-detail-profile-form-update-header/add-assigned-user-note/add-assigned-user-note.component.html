@@ -13,6 +13,7 @@
             #chipList
             aria-label="Fruit selection"
             ngbDropdownAnchor
+            [ngClass]="{'--input-error':!validate.getEmail()}"
         >
             <mat-chip
                 class="selected-tag-user"
@@ -24,10 +25,24 @@
                 <div class="assigne-user-item">
                     <div
                         class="assigne-user-avatar"
+                        *ngIf="!user.isCustomEmail"
                         [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
                         [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
                     ></div>
-                    <div [textContent]="getUserName(user)"></div>
+                    <div
+                        class="assigne-user-avatar"
+                        *ngIf="user.isCustomEmail"
+                        [textContent]="user.recipient[0]"
+                        [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
+                    ></div>
+                    <div
+                        *ngIf="!user.isCustomEmail"
+                        [textContent]="getUserName(user)"
+                    ></div>
+                    <div
+                        *ngIf="user.isCustomEmail"
+                        [textContent]="user.recipient"
+                    ></div>
                     <mat-icon
                         matChipRemove
                         *ngIf="removable"
@@ -43,9 +58,16 @@
                 [matChipInputFor]="chipList"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                 (input)="onSearchUser($event)"
+                (keyup)="onKeyUp($event)"
                 id="dropdown"
                 ngbDropdownToggle
             >
+            <mat-error
+                class="invalid-feedback"
+                *ngIf="!validate.getEmail()"
+            >
+                Please enter a valid email address
+            </mat-error>
         </mat-chip-list>
         <div
             ngbDropdownMenu

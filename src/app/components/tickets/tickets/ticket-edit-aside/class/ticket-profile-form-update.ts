@@ -12,6 +12,7 @@ export class TicketProfileFormUpdate {
     products: Array<TicketProfileFormProduct> = [];
     services: Array<TicketProfileFormService> = [];
     techUser: User;
+    otherRecipients = [];
     constructor() { }
     public setNoteType(data) {
         this.noteType = data;
@@ -41,7 +42,8 @@ export class TicketProfileFormUpdate {
             type: this.type,
             shares: this.shares,
             ticket: this.ticket,
-            attachFileIds: this.attachFileIds
+            attachFileIds: this.attachFileIds,
+            "otherRecipients": this.otherRecipients
         }
     }
     public getDataForUpdateProduct() {
@@ -105,7 +107,8 @@ export class TicketProfileFormUpdate {
     }
     public setShares(users) {
         this.shares = [];
-        users.forEach(item => (this.shares.push({ user: { id: item.id } })));
+        this.shares = users.filter(item => !item.isCustomEmail).map(item => ({ user: { id: item.id } }));
+        this.otherRecipients = users.filter(item => item.isCustomEmail).map(item => item.recipient);
     }
     public toggleShares(user) {
         let findIndex = this.shares.findIndex(item => item.user.id === user.id);
