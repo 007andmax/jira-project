@@ -17,6 +17,13 @@ export class TicketDetailProfileUpdatesHeaderInfoComponent implements OnInit {
 
   ngOnInit() {
   }
+  getStyleNetAvatar(i) {
+    return `${12 * i}px`;
+  }
+  getStyleShareText(i) {
+    // if (i <= 0) return `8px`;
+    return `${(12 * i) + 20}px`;
+  }
   public getDate() {
     return `${moment(new Date(this.date)).format('DD MMM YYYY')} at ${moment(new Date(this.date)).format('hh:mm A')}`;
   }

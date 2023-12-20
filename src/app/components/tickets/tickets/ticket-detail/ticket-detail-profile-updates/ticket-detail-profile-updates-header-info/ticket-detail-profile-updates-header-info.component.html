@@ -4,7 +4,7 @@
         [textContent]="getDate()"
     ></span>
     <span class="divider-line"></span>
-    <div class="ticket-updates__photo-row">
+    <div class="ticket-updates__photo-row multi-assign-user-container">
         <ng-template
             ngFor
             let-share
@@ -17,9 +17,9 @@
                 <div [textContent]="((share.user.accountType === 'TECH') ? 'Tech' : 'Client') + ' user'"></div>
             </ng-template>
             <div
-                class="ticket-updates__photo-people"
+                class="ticket-updates__photo-people multi-assign-user"
                 [textContent]="ticketsListService.getAssignedUserNameForAvatar(share.user)"
-                [ngStyle]="{'background': ticketsListService.getStyleAvatar(share.user)}"
+                [ngStyle]="{'background': ticketsListService.getStyleAvatar(share.user),'left': getStyleNetAvatar(i)}"
                 placement="top"
                 [ngbTooltip]="tipContent"
             ></div>
@@ -36,9 +36,9 @@
                 <div>Unregistered user</div>
             </ng-template>
             <div
-                class="ticket-updates__photo-people"
+                class="ticket-updates__photo-people multi-assign-user"
                 [textContent]="recipient[0]"
-                [ngStyle]="{'background': ticketsListService.getStyleAvatar(null)}"
+                [ngStyle]="{'background': ticketsListService.getStyleAvatar(null),'left': getStyleNetAvatar(shares.length + i)}"
                 placement="top"
                 [ngbTooltip]="tipContent"
             ></div>
@@ -46,6 +46,7 @@
     </div>
     <span
         class="ticket-updates__people-added"
+        [ngStyle]="{ 'margin-left': getStyleShareText(shares.length + otherRecipients.length)}"
         [textContent]="' ' + (shares.length + otherRecipients.length) + ' people added to this update'"
     ></span>
 </div>

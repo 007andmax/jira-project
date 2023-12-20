@@ -3,34 +3,20 @@ import { CurrentUserCompany } from 'src/class/current-user/current-user-company'
 import { Service } from 'src/app/interfaces/service/service';
 
 export class TicketProfileService {
-    billable: boolean;
-    billableQuantity: number;
-    commissionRate: number;
     completed: boolean;
     createdAt: number;
     date: number;
-    deletedAt: number;
     description: string;
     discountAmount: number;
-    discountSum: number;
     discountType: string;
     durationEnd: number;
     durationStart: number;
-    editedExpense: boolean;
     id: string;
-    isServiceExpense: boolean;
     item: Service;
-    itemCompany: CurrentUserCompany;
     itemOrder: number;
-    price: number;
     quantity: number;
-    serviceAgreementIdForOtherContracts: string;
-    serviceExpense: boolean;
     sum: number;
-    taxSum: number;
     taxes: any;
-    totalSum: number;
-    updatedAt: number;
     user: CurrentUser;
     validateQuantity: boolean = true;
     constructor(data = null) {
@@ -99,13 +85,6 @@ export class TicketProfileService {
 */
     public setQuantity(data) {
         this.quantity = data;
-    }
-    /**
-* @description Set new value "billableQuantity"
-* @param {Number} data - new value "billableQuantity"
-*/
-    public setBillableQuantity(data) {
-        this.billableQuantity = data;
     }
     /**
 * @description Set new value "completed"
