@@ -21,7 +21,6 @@ export class TicketDetailProfileUpdatesHeaderInfoComponent implements OnInit {
     return `${12 * i}px`;
   }
   getStyleShareText(i) {
-    // if (i <= 0) return `8px`;
     return `${(12 * i) + 20}px`;
   }
   public getDate() {

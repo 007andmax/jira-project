@@ -21,6 +21,7 @@
                 [textContent]="ticketsListService.getAssignedUserNameForAvatar(share.user)"
                 [ngStyle]="{'background': ticketsListService.getStyleAvatar(share.user),'left': getStyleNetAvatar(i)}"
                 placement="top"
+                container="body"
                 [ngbTooltip]="tipContent"
             ></div>
         </ng-template>
@@ -40,6 +41,7 @@
                 [textContent]="recipient[0]"
                 [ngStyle]="{'background': ticketsListService.getStyleAvatar(null),'left': getStyleNetAvatar(shares.length + i)}"
                 placement="top"
+                container="body"
                 [ngbTooltip]="tipContent"
             ></div>
         </ng-template>

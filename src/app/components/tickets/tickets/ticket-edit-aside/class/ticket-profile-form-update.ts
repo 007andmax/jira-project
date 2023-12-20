@@ -43,7 +43,7 @@ export class TicketProfileFormUpdate {
             shares: this.shares,
             ticket: this.ticket,
             attachFileIds: this.attachFileIds,
-            "otherRecipients": this.otherRecipients
+            otherRecipients: this.otherRecipients
         }
     }
     public getDataForUpdateProduct() {
@@ -53,7 +53,7 @@ export class TicketProfileFormUpdate {
             type: this.type,
             shares: this.shares,
             ticket: this.ticket,
-
+            otherRecipients: this.otherRecipients
         }
     }
     public getDataForUpdateService() {
@@ -62,6 +62,7 @@ export class TicketProfileFormUpdate {
             type: this.type,
             shares: this.shares,
             ticket: this.ticket,
+            otherRecipients: this.otherRecipients
         }
     }
     public clearShares() {

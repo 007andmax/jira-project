@@ -4,7 +4,6 @@ import { Service } from 'src/app/interfaces/service/service';
 
 export class TicketProfileService {
     completed: boolean;
-    createdAt: number;
     date: number;
     description: string;
     discountAmount: number;
@@ -15,7 +14,6 @@ export class TicketProfileService {
     item: Service;
     itemOrder: number;
     quantity: number;
-    sum: number;
     taxes: any;
     user: CurrentUser;
     validateQuantity: boolean = true;

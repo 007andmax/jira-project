@@ -4,7 +4,6 @@ import { CurrentUser } from 'src/class/current-user/current-user';
 import * as moment from "moment";
 export class TicketProfileProduct {
     completed: boolean;
-    createdAt: number;
     date: number;
     description: string;
     discountAmount: number;
@@ -14,7 +13,6 @@ export class TicketProfileProduct {
     itemOrder: number;
     price: number;
     quantity: number;
-    sum: number;
     taxes: any;
     user: CurrentUser;
     serialNumber: string;

@@ -4,7 +4,7 @@
         [textContent]="getDate()"
     ></span>
     <span class="divider-line"></span>
-    <div class="ticket-updates__photo-row">
+    <div class="ticket-updates__photo-row multi-assign-user-container">
         <ng-template
             ngFor
             let-share
@@ -17,17 +17,39 @@
                 <div [textContent]="((share.user.accountType === 'TECH') ? 'Tech' : 'Client') + ' user'"></div>
             </ng-template>
             <div
-                class="ticket-updates__photo-people"
+                class="ticket-updates__photo-people multi-assign-user"
                 [textContent]="ticketsListService.getAssignedUserNameForAvatar(share.user)"
-                [ngStyle]="{'background': ticketsListService.getStyleAvatar(share.user)}"
+                [ngStyle]="{'background': ticketsListService.getStyleAvatar(share.user),'left': getStyleNetAvatar(i)}"
                 placement="top"
+                container="body"
+                [ngbTooltip]="tipContent"
+            ></div>
+        </ng-template>
+        <ng-template
+            ngFor
+            let-recipient
+            [ngForOf]="otherRecipients"
+            let-i="index"
+            [ngForTrackBy]="trackByIndex"
+        >
+            <ng-template #tipContent>
+                <div [textContent]="recipient"></div>
+                <div>Unregistered user</div>
+            </ng-template>
+            <div
+                class="ticket-updates__photo-people multi-assign-user"
+                [textContent]="recipient[0]"
+                [ngStyle]="{'background': ticketsListService.getStyleAvatar(null),'left': getStyleNetAvatar(shares.length + i)}"
+                placement="top"
+                container="body"
                 [ngbTooltip]="tipContent"
             ></div>
         </ng-template>
     </div>
     <span
         class="ticket-updates__people-added"
-        [textContent]="' ' + shares.length + ' people added to this update'"
+        [ngStyle]="{ 'margin-left': getStyleShareText(shares.length + otherRecipients.length)}"
+        [textContent]="' ' + (shares.length + otherRecipients.length) + ' people added to this update'"
     ></span>
     <span class="divider-line"></span>
     <div class="icn-16 icon__calendar pointer qt-mr-8"></div>
