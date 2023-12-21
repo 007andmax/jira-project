@@ -41,4 +41,9 @@
         *ngIf="!product.completed && product.date"
         [textContent]="'Due date - ' + getDateProduct(product.date)"
     ></span>
+    <span
+        class="ticket-updates__service-tag-completed"
+        *ngIf="!product.completed && !product.date"
+        [textContent]="'Due date - No date yet'"
+    ></span>
 </div>

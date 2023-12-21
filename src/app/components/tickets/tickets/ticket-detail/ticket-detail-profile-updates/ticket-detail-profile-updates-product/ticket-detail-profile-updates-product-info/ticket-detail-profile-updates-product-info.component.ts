@@ -26,6 +26,7 @@ export class TicketDetailProfileUpdatesProductInfoComponent implements OnInit, O
   @Input() update: TicketProfileUpdate;
   @Output() onEdit = new EventEmitter();
   @Input() isBlockChange: boolean;
+  date: number = 0;
   changeDate: boolean = false;
   userService = [];
   listTechUsers = [];
@@ -40,7 +41,8 @@ export class TicketDetailProfileUpdatesProductInfoComponent implements OnInit, O
     public modalService: NgbModal) { }
 
   ngOnInit() {
-    if (!this.product.date) this.product.date = new Date().getTime();
+    this.date = this.product.date;
+    if (!this.product.date) this.date = new Date().getTime();
     if (this.product.user) this.userService = [this.product.user];
     if (this.usersStateService.getAllUsers().length > 0) this.listTechUsers = this.getUsersForAssign();
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
@@ -92,6 +94,7 @@ export class TicketDetailProfileUpdatesProductInfoComponent implements OnInit, O
   public onChangeDatePicker(data) {
 
     this.product.setDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.date = this.product.date;
     this.updateProduct();
     this.changeDate = true;
   }

@@ -26,19 +26,24 @@
         </ng-template>
     </div>
     <span
-      class="ticket-updates__people-added"
-      [textContent]="' ' + shares.length + ' people added to this update'"
+        class="ticket-updates__people-added"
+        [textContent]="' ' + shares.length + ' people added to this update'"
     ></span>
     <span class="divider-line"></span>
     <div class="icn-16 icon__calendar pointer qt-mr-8"></div>
     <span
-      class="ticket-updates__service-tag-completed --completed"
-      *ngIf="service.completed"
-      [textContent]="'Completed on ' + getDateService(service.date)"
+        class="ticket-updates__service-tag-completed --completed"
+        *ngIf="service.completed"
+        [textContent]="'Completed on ' + getDateService(service.date)"
     ></span>
     <span
-      class="ticket-updates__service-tag-completed"
-      *ngIf="!service.completed && service.date"
-      [textContent]="'Due date - ' + getDateService(service.date)"
+        class="ticket-updates__service-tag-completed"
+        *ngIf="!service.completed && service.date"
+        [textContent]="'Due date - ' + getDateService(service.date)"
+    ></span>
+    <span
+        class="ticket-updates__service-tag-completed"
+        *ngIf="!service.completed && !service.date"
+        [textContent]="'Due date - No date yet'"
     ></span>
 </div>

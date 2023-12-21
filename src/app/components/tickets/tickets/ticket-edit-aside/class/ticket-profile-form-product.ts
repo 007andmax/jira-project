@@ -42,7 +42,8 @@ export class TicketProfileFormProduct {
             discountAmount: this.discountAmount,
             discountType: this.discountType,
             completed: this.completed,
-            taxes: taxes
+            taxes: taxes,
+            date: new Date().getTime()
         }
     }
     public setTexes(data) {
