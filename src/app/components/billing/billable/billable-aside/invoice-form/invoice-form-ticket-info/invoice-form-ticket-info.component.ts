@@ -28,6 +28,10 @@ export class InvoiceFormTicketInfoComponent implements OnInit {
     return (hours >= 10 ? hours : '0' + hours) + ':' + (minutes >= 10 ? minutes : '0' + minutes) + ' hr(s)';
 
   }
+  getServiceTaxes(service) {
+    if (service.taxesForSingleItem.length > 0) return this.getSelectedTaxes(service.taxesForSingleItem);
+    if (service.taxesForSingleItem.length == 0) return this.getSelectedTaxes(service.item.taxes || []);
+  }
   getSelectedTaxes(taxes) {
     return taxes.map(item => {
       return `${item.name} ${item.rate}%`;
