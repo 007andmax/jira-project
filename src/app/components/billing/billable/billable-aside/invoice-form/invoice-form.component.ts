@@ -89,7 +89,6 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getChangeCompanies);
-    console.log("invoice", this.invoice);
   }
   selectAddress(index, newAddress) {
     this.company.addresses[index] = new CompanyProfileAddress(newAddress);
