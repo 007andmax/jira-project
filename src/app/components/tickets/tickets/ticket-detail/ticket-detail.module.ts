@@ -85,6 +85,7 @@ import { DndModule } from 'src/app/directives/dnd/dnd.module';
 import { AddAssignedUserNoteComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-header/add-assigned-user-note/add-assigned-user-note.component';
 import { TicketDetailTicketsDetailsComponent } from './ticket-detail-tickets/ticket-detail-tickets-details/ticket-detail-tickets-details.component';
 import { TicketDetailTicketsComponent } from './ticket-detail-tickets/ticket-detail-tickets.component';
+import { TicketDetailTicketsStatusComponent } from './ticket-detail-tickets/ticket-detail-tickets-status/ticket-detail-tickets-status.component';
 
 
 
@@ -143,7 +144,8 @@ import { TicketDetailTicketsComponent } from './ticket-detail-tickets/ticket-det
         TicketDetailProfileFormUpdateSupportComponent,
         AddAssignedUserNoteComponent,
         TicketDetailTicketsDetailsComponent,
-        TicketDetailTicketsComponent
+        TicketDetailTicketsComponent,
+        TicketDetailTicketsStatusComponent
 
     ],
     imports: [

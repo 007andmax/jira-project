@@ -149,7 +149,7 @@
 <div class="invoice-items">
     <div class="qt-df qt-jc-fe qt-mb-10 qt-pr-30 qt-pl-30">
         <button
-            class="billing-aside-edit-mode"
+            class="qt-button --gray --sm"
             *ngIf="!editMode"
             (click)="editMode = true"
         >
@@ -216,10 +216,10 @@
             *ngIf="!toggleDiscount"
         >
             <div
-                class="info-button-sm qt-fw-600"
+                class="qt-button --gray qt-jc-c --sm"
                 (click)="toggleDiscount = !toggleDiscount"
             >
-                <div class="icon__discount qt-mr-4 qt-sz-16 qt-ic-c"></div>
+                <div class="icon__discount--gray-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></div>
                 Apply Discount
             </div>
         </div>

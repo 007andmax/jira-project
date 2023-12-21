@@ -19,11 +19,15 @@ export class QuoteAddProduct {
         this.markup = markup;
     }
     public getDataForCreate() {
+        let taxes = JSON.parse(JSON.stringify(this.item.taxes));
+        let item = {};
+        for (const key in this.item) if (this.item[key] && key !== "taxes") item[key] = this.item[key];
         return {
             discountType: this.discountType,
-            item: this.item,
+            item: item,
             itemOrder: this.itemOrder,
-            quantity: this.quantity
+            quantity: this.quantity,
+            taxes: taxes
         }
     }
     public checkSaleCost() {

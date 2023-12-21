@@ -38,6 +38,7 @@ export class TicketProfileService {
             for (const key in data) {
                 this[key] = data[key];
             }
+            this.taxes = this.item.taxes;
         }
     }
     /**
@@ -137,6 +138,8 @@ export class TicketProfileService {
     }
     public getDateForUpdate(id) {
         let user = (!this.user) ? { id: "" } : this.user;
+        let item = {};
+        for (const key in this.item) if (this.item[key] && key !== "taxes") item[key] = this.item[key];
         return {
             serviceExpense: {
                 completed: this.completed,
@@ -147,9 +150,10 @@ export class TicketProfileService {
                 durationEnd: this.durationEnd,
                 durationStart: this.durationStart,
                 id: this.id,
-                item: this.item,
+                item: item,
                 quantity: this.quantity,
                 user: user,
+                taxes: this.taxes
             },
             ticketUpdateId: id
         }

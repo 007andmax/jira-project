@@ -44,7 +44,7 @@
                 *ngIf="getPermissions('CREATE_INVOICE')"
             >
                 <button
-                    class="qt-btn --outline-blue"
+                    class="qt-button --gray --md"
                     [disabled]="!isCurrentCompanyAddressEmpty"
                     (click)="onCreateInvoice()"
                 >

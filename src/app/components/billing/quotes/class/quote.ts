@@ -32,6 +32,7 @@ export class Quote {
             this.company.addresses = [];
             if (billing) this.company.addresses = [billing];
             if (shipping) this.company.addresses.push(shipping);
+            this.reviewNotes = data.reviewNotes.map(item => new QuoteReviewNotes(item));
         }
     }
     public parseRecipients() {

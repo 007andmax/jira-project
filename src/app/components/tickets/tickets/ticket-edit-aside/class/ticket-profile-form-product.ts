@@ -1,5 +1,6 @@
 import { Product } from 'src/app/interfaces/product/product';
 import { TicketProfileFormItemProduct } from './ticket-profile-form-item-product';
+import { Tax } from 'src/class/taxes/tax';
 
 export class TicketProfileFormProduct {
     item: TicketProfileFormItemProduct = new TicketProfileFormItemProduct();
@@ -10,6 +11,7 @@ export class TicketProfileFormProduct {
     discountType: string = "PERCENT";
     completed: boolean = true;
     valdiateSaleCost: boolean = true;
+    taxes: Array<Tax> = [];
     user: any;
     constructor(data = null) {
         if (data) {
@@ -21,11 +23,13 @@ export class TicketProfileFormProduct {
             this.discountType = data.discountType;
             this.completed = data.completed;
             this.valdiateSaleCost = data.valdiateSaleCost;
+            this.taxes = [...data.this.taxes, ...this.item.taxes];
         }
     }
     public getDataForAdd() {
-        let item = JSON.parse(JSON.stringify(this.item));
-        item.taxes = item.taxes.map(item => ({
+        let item = {};
+        for (const key in this.item) if (this.item[key] != null && this.item[key] != undefined && key !== "taxes") item[key] = this.item[key];
+        let taxes = this.taxes.map(item => ({
             id: item.id,
             name: item.name,
             rate: item.rate,
@@ -38,14 +42,16 @@ export class TicketProfileFormProduct {
             discountAmount: this.discountAmount,
             discountType: this.discountType,
             completed: this.completed,
+            taxes: taxes
         }
     }
     public setTexes(data) {
-        this.item.taxes = data;
+        this.taxes = data;
     }
     public setData(data, index) {
         this.item = new TicketProfileFormItemProduct(data);
         this.itemOrder = index;
+        this.taxes = [...this.item.taxes];
     }
     public setItemOrder(data) {
         this.itemOrder = data;

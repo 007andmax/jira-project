@@ -65,6 +65,7 @@ export class TicketDetailTicketsDetailsComponent implements OnInit {
     } else {
       this.isSearch = false;
     }
+    this.showPreloader = true;
     this.setDefaultScoll();
     this.onScroll();
   }

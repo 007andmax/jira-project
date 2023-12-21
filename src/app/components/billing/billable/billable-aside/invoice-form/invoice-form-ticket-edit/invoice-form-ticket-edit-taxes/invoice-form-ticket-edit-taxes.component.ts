@@ -111,8 +111,7 @@ export class InvoiceFormTicketEditTaxesComponent implements OnInit, OnDestroy {
     this.taxesChange.emit(this.selectedTax);
   }
   public checkTaxIsSelected(tax) {
-    const find = this.selectedTax.find(item => item.id === tax.id);
-    return (find) ? true : false;
+    return this.selectedTax.some(item => item.id === tax.id);
   }
 
   /**

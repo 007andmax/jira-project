@@ -73,7 +73,7 @@
                     ></td>
                     <td
                         class="invoice-item__col-tax"
-                        [innerHTML]="getSelectedTaxes(service.item.taxes || [])"
+                        [innerHTML]="getSelectedTaxes(service.taxes || [])"
                     ></td>
                     <td
                         class="invoice-item__col-amount"
@@ -125,7 +125,7 @@
                     ></td>
                     <td
                         class="invoice-item__col-tax"
-                        [innerHTML]="getSelectedTaxes(product.item.taxes || [])"
+                        [innerHTML]="getSelectedTaxes(product.taxes || [])"
                     ></td>
                     <td
                         class="invoice-item__col-amount"

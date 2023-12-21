@@ -141,6 +141,7 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     this.showAddCategory = false;
     this.selectedCompany = null;
     this.companiesDb.clearWithOutChanges();
+    this.categoriesSelect.clearWithOutChanges();
     this.datePicker.reset();
     this.elRef.nativeElement.querySelector("#description-create-password").value = "";
   }

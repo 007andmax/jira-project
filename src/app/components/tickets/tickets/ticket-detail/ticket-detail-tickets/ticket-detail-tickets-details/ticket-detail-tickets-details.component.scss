@@ -114,3 +114,28 @@
     top: calc(50% - 6px);
     cursor: pointer;
 }
+.no-find-tickets-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    border: 1px solid $gray-200;
+    margin: 0px auto;
+}
+.no-find-tickets {
+    margin: 16px 0px 0px 0px;
+    text-align: center;
+    h4 {
+        font-size: 14px;
+        font-weight: 600;
+        color: $gray-900;
+        line-height: 20px;
+    }
+    span {
+        font-size: 14px;
+        font-weight: 400;
+        color: $gray-500;
+    }
+}

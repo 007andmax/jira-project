@@ -33,6 +33,16 @@
             [infiniteScrollDisabled]="infiniteScrollDisabled"
             (scrolled)="onScroll()"
         >
+            <div
+                class="no-find-tickets"
+                *ngIf="tickets.length == 0 && !showPreloader"
+            >
+                <div class="no-find-tickets-avatar">
+                    <div class="icon__tickets-detail-contact qt-sz-24 qt-bg-contain"></div>
+                </div>
+                <h4 class="qt-mt-16">No Tickets Found</h4>
+                <span>Try using another word</span>
+            </div>
             <ng-template
                 ngFor
                 let-ticket
@@ -58,6 +68,7 @@
                                 [textContent]="'Tkt# ' + ticket.number + ' · ' + getCreateAt(ticket.createdAt)"
                             >
                             </div>
+                            <ticket-detail-tickets-status [ticketProfile]="ticket"></ticket-detail-tickets-status>
                         </div>
                     </div>
                 </div>

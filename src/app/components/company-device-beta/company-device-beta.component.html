@@ -56,26 +56,26 @@
                 </div>
                 <span>
                     <button
-                        class="qt-btn --outline-blue"
+                        class="qt-button --gray --md"
                         (click)="getAddDevice()"
                     >
                         Add Device
                     </button>
                 </span>
                 <button
-                    class="qt-btn --outline-white qt-ml-8 dm"
+                    class="qt-button --gray --md qt-ml-8 dm"
                     (click)="sendEmail()"
                 >
                     <span class="d-email"></span>
                 </button>
                 <button
-                    class="qt-btn --outline-white qt-ml-8 dm"
+                    class="qt-button --gray --md qt-ml-8 dm"
                     (click)="printPdf()"
                 >
                     <span class="d-print"></span>
                 </button>
                 <button
-                    class="qt-btn --outline-white qt-ml-8 dm"
+                    class="qt-button --gray --md qt-ml-8 dm"
                     (click)="downloadCsv()"
                 >
                     <span class="d-exportdark"></span>
@@ -967,7 +967,7 @@
                         <div class="sidebar-updates__tab-title qt-ff-sb">UPDATES</div>
                         <div *ngIf="getSecurityCountSelected() > 1">
                             <button
-                                class="qt-btn --outline-blue qt-mr-8"
+                                class="qt-button --gray --md qt-mr-8"
                                 (click)="InstallUpdate()"
                                 [disabled]="IsUpdateInstalling"
                             >

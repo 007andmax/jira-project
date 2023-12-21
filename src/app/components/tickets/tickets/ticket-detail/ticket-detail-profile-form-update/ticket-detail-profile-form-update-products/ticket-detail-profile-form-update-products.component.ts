@@ -146,7 +146,7 @@ export class TicketDetailProfileFormUpdateProductsComponent implements OnInit, O
   clearForm(taxesDropDown) {
     this.currentProduct = new TicketProfileFormProduct(JSON.parse(JSON.stringify(this.addedProductList[0])));
     this.productDP.setEditItem(this.currentProduct.item);
-    taxesDropDown.setEditItems(this.currentProduct.item.taxes);
+    taxesDropDown.setEditItems(this.currentProduct.taxes);
     this.addedProductList = [];
   }
 }
