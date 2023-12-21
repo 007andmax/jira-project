@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { REMOVE_UPDATE_TICKET_DETAIL_PRODUCT } from 'src/app/const/confirm';
 import { TicketProfileProduct } from '../../../../class/ticket-profile-product';
@@ -13,6 +13,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketsListService } from '../../../../services/tickets-list.service';
 import { TicketStateService } from '../../../../ticket-edit-aside/services/ticket-state.service';
+import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
 
 @Component({
   selector: 'ticket-detail-profile-updates-product-info',
@@ -26,7 +27,7 @@ export class TicketDetailProfileUpdatesProductInfoComponent implements OnInit, O
   @Input() update: TicketProfileUpdate;
   @Output() onEdit = new EventEmitter();
   @Input() isBlockChange: boolean;
-  date: number = 0;
+  @ViewChild('dpDate') dpDate: DatePickerComponent;
   changeDate: boolean = false;
   userService = [];
   listTechUsers = [];
@@ -41,8 +42,11 @@ export class TicketDetailProfileUpdatesProductInfoComponent implements OnInit, O
     public modalService: NgbModal) { }
 
   ngOnInit() {
-    this.date = this.product.date;
-    if (!this.product.date) this.date = new Date().getTime();
+    console.log("this.product", this.product);
+    if (this.product.date) {
+      this.dpDate.editDate = this.product.date;
+      this.dpDate.setEditDate(this.product.date);
+    }
     if (this.product.user) this.userService = [this.product.user];
     if (this.usersStateService.getAllUsers().length > 0) this.listTechUsers = this.getUsersForAssign();
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
@@ -92,9 +96,7 @@ export class TicketDetailProfileUpdatesProductInfoComponent implements OnInit, O
     this.updateProduct();
   }
   public onChangeDatePicker(data) {
-
     this.product.setDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-    this.date = this.product.date;
     this.updateProduct();
     this.changeDate = true;
   }

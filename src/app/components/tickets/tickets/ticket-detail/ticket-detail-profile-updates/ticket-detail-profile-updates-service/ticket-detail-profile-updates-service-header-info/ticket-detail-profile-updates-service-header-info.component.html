@@ -33,7 +33,7 @@
     <div class="icn-16 icon__calendar pointer qt-mr-8"></div>
     <span
         class="ticket-updates__service-tag-completed --completed"
-        *ngIf="service.completed"
+        *ngIf="service.completed && service.date"
         [textContent]="'Completed on ' + getDateService(service.date)"
     ></span>
     <span
@@ -43,7 +43,7 @@
     ></span>
     <span
         class="ticket-updates__service-tag-completed"
-        *ngIf="!service.completed && !service.date"
+        *ngIf="!service.date"
         [textContent]="'Due date - No date yet'"
     ></span>
 </div>
