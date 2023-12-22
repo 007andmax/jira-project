@@ -42,7 +42,6 @@ export class TicketDetailProfileUpdatesProductInfoComponent implements OnInit, O
     public modalService: NgbModal) { }
 
   ngOnInit() {
-    console.log("this.product", this.product);
     if (this.product.date) {
       this.dpDate.editDate = this.product.date;
       this.dpDate.setEditDate(this.product.date);

@@ -67,7 +67,6 @@ export class AddAssignedUserNoteComponent implements OnInit {
     this.reqUsers = JSON.parse(JSON.stringify(this.userList)).map(item => new CompanyUserNote(item));
   }
   onKeyUp(event) {
-    console.log("event.keyCode", event.keyCode);
     if (event.target.value.length == 0) this.validate.resetEmail();
     if (event.keyCode === 13) {
       this.validate.checkEmail(event.target.value);

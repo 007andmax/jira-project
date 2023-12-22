@@ -29,7 +29,6 @@ export class TicketDetailProfileUpdatesNoteComponent implements OnInit {
     public modalService: NgbModal,) { }
 
   ngOnInit() {
-    console.log("update", this.update.attachments);
   }
   public isIOSDevice() {
     return !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
@@ -49,5 +48,8 @@ export class TicketDetailProfileUpdatesNoteComponent implements OnInit {
     const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+  }
+  public trackById(index, item) {
+    return item.id;
   }
 }
