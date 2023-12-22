@@ -15,6 +15,7 @@ export class QuoteStateService {
   onInvoice: EventEmitter<any> = new EventEmitter();
   quoteForCopy: QuotePreview;
   quoteForArchive: QuotePreview;
+  quotesForArchive: Array<QuotePreview>;
   public handleSendMode: EventEmitter<any> = new EventEmitter();
   public handleSendModeList: EventEmitter<any> = new EventEmitter();
   public handleSendModePreview: EventEmitter<any> = new EventEmitter();
@@ -35,8 +36,14 @@ export class QuoteStateService {
   public setQuoteForArchive(data) {
     this.quoteForArchive = data;
   }
+  public setQuotesForArchive(data) {
+    this.quotesForArchive = data;
+  }
   public getQuoteForArchive() {
     return this.quoteForArchive;
+  }
+  public getQuotesForArchive() {
+    return this.quotesForArchive;
   }
   public getOnInvoice() {
     return this.onInvoice;
