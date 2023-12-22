@@ -18,6 +18,7 @@
                 <ticket-detail-profile-updates-product-header-info
                     *ngIf="update.products.length > 0"
                     [date]="update.createdAt"
+                    [otherRecipients]="update.otherRecipients"
                     [shares]="update.shares"
                     [product]="update.products[0]"
                 ></ticket-detail-profile-updates-product-header-info>
