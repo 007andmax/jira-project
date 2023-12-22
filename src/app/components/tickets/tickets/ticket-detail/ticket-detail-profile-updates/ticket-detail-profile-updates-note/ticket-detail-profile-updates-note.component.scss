@@ -202,3 +202,32 @@
     }
   }
 }
+.preview-attachment {
+    img {
+    max-width: 100px;
+    max-height: 100px;
+    }
+}
+.single-file {
+    display: flex;
+    padding: 8px;
+    justify-content: space-between;
+    align-items: center;
+    border: solid 1px $gray-200;
+    margin: 4px;
+    position: relative;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    color: $gray-900;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+    border-radius: 6px;
+}
+
+.size {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: $gray-500;
+    margin-left: 2px;
+}
