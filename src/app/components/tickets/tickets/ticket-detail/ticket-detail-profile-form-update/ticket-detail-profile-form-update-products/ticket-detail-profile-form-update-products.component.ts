@@ -7,6 +7,7 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { ProductService } from 'src/app/services/product/product.service';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'ticket-detail-profile-form-update-products',
@@ -26,6 +27,7 @@ export class TicketDetailProfileFormUpdateProductsComponent implements OnInit, O
   constructor(private productService: ProductService,
     private inventoryStateService: InventoryStateService,
     public cd: ChangeDetectorRef,
+    public companiesStateService: CompaniesStateService,
     private permissionsService: PermissionsService,
     private ticketsStateService: TicketsStateService) { }
 
@@ -33,9 +35,15 @@ export class TicketDetailProfileFormUpdateProductsComponent implements OnInit, O
   ngOnInit() {
     this.ticketsStateService.getOnClearFormUpdate().subscribe(data => {
       this.addedProductList = [];
-      this.currentProduct = new TicketProfileFormProduct();
+      this.initCurrentProduct();
       this.productDP.clear();
     })
+    this.initCurrentProduct();
+  }
+  initCurrentProduct() {
+    this.currentProduct = new TicketProfileFormProduct();
+    let currentDate = new Date();
+    this.currentProduct.setDate(currentDate.getDate(), currentDate.getMonth() + 1, currentDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
   }
   initUpdateMobile() {
     this.isUpdate = true;
@@ -87,7 +95,7 @@ export class TicketDetailProfileFormUpdateProductsComponent implements OnInit, O
       taxesDropDown.selectedTax = item.taxes;
     }
     if (!item) {
-      this.currentProduct = new TicketProfileFormProduct();
+      this.initCurrentProduct();
       taxesDropDown.selectedTax = [];
     }
     this.currentProduct.valdiateSaleCost = true;
@@ -97,7 +105,7 @@ export class TicketDetailProfileFormUpdateProductsComponent implements OnInit, O
   }
   public addProduct() {
     this.addedProductList.push(new TicketProfileFormProduct(JSON.parse(JSON.stringify(this.currentProduct))));
-    this.currentProduct = new TicketProfileFormProduct();
+    this.initCurrentProduct();
     this.productDP.clear();
   }
   public removeProduct(i) {

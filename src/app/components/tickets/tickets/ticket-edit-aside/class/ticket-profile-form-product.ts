@@ -13,6 +13,7 @@ export class TicketProfileFormProduct {
     valdiateSaleCost: boolean = true;
     taxes: Array<Tax> = [];
     user: any;
+    date: number = new Date().getTime();
     constructor(data = null) {
         if (data) {
             this.item = new TicketProfileFormItemProduct(data.item);
@@ -42,7 +43,8 @@ export class TicketProfileFormProduct {
             discountAmount: this.discountAmount,
             discountType: this.discountType,
             completed: this.completed,
-            taxes: taxes
+            taxes: taxes,
+            date: this.date
         }
     }
     public setTexes(data) {
@@ -52,6 +54,19 @@ export class TicketProfileFormProduct {
         this.item = new TicketProfileFormItemProduct(data);
         this.itemOrder = index;
         this.taxes = [...this.item.taxes];
+    }
+    public setDate(day, month, year, timeOffset) {
+        let current = new Date();
+
+        if (day !== current.getDate() || current.getMonth() !== (month - 1)) {
+            let dateDatePicker = new Date(year, month - 1, day).getTime(); // timestamp from calendar
+            let finalDate = new Date(dateDatePicker - (current.getTimezoneOffset() * 60000/* dont touch*/) - timeOffset /* timezone.timeOffset */);
+            this.date = finalDate.getTime();
+        } else {
+            let currentTime = new Date(current.getFullYear(), current.getMonth(), current.getDate()).getTime();
+            let finalDate = new Date(currentTime - (current.getTimezoneOffset() * 60000) - timeOffset);
+            this.date = finalDate.getTime();
+        }
     }
     public setItemOrder(data) {
         this.itemOrder = data;

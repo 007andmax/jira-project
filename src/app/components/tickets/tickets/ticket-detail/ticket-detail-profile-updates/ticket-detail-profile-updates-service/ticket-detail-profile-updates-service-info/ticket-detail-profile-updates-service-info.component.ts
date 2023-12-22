@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { REMOVE_UPDATE_TICKET, REMOVE_UPDATE_TICKET_DETAIL_SERVICE } from 'src/app/const/confirm';
 import { TicketProfileService } from '../../../../class/ticket-profile-service';
@@ -13,6 +13,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketsListService } from '../../../../services/tickets-list.service';
 import { TicketStateService } from '../../../../ticket-edit-aside/services/ticket-state.service';
+import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
 
 @Component({
   selector: 'ticket-detail-profile-updates-service-info',
@@ -26,6 +27,7 @@ export class TicketDetailProfileUpdatesServiceInfoComponent implements OnInit, O
   @Input() service: TicketProfileService;
   @Output() onEdit = new EventEmitter();
   @Input() isBlockChange: boolean;
+  @ViewChild('dpDate') dpDate: DatePickerComponent;
   changeDate: boolean = false;
   userService = [];
   listTechUsers = [];
@@ -39,6 +41,10 @@ export class TicketDetailProfileUpdatesServiceInfoComponent implements OnInit, O
     private appService: AppService,
     public modalService: NgbModal) { }
   ngOnInit() {
+    if (this.service.date) {
+      this.dpDate.editDate = this.service.date;
+      this.dpDate.setEditDate(this.service.date);
+    }
     if (this.service.user) this.userService = [this.service.user];
     if (this.usersStateService.getAllUsers().length > 0) this.listTechUsers = this.getUsersForAssign();
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
@@ -82,7 +88,6 @@ export class TicketDetailProfileUpdatesServiceInfoComponent implements OnInit, O
     this.updateService();
   }
   public onChangeDatePicker(data) {
-    let date = new Date(data.year, data.month - 1, data.day);
     this.service.setDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.updateService();
     this.changeDate = true;
