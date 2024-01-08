@@ -93,7 +93,7 @@
             <div class="qt-input-block__label">Domain Name</div>
             <input
                 type="text"
-                [ngClass]="{'--input-error' : !validate.getDomain()}"
+                [ngClass]="{'--input-error' : !validate.getDomain() || validate.getDomainIsExist() || !validate.getDomainValid()}"
                 [(ngModel)]="company.domain"
                 (blur)="onChangeDomain()"
                 placeholder="example.com"
@@ -102,7 +102,19 @@
                 class="invalid-feedback"
                 *ngIf="!validate.getDomain()"
             >
+                Domain is required
+            </mat-error>
+            <mat-error
+                class="invalid-feedback"
+                *ngIf="!validate.getDomainValid()"
+            >
                 Please enter a valid domain
+            </mat-error>
+            <mat-error
+                class="invalid-feedback"
+                *ngIf="validate.getDomainIsExist()"
+            >
+                This company domain already occupied
             </mat-error>
         </div>
     </div>

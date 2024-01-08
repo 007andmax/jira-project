@@ -87,7 +87,7 @@ export class CompanyAddAsideShortComponent implements OnInit, OnDestroy {
   }
   public onChangeDomain() {
     this.validate.checkValidDomain(this.company.domain);
-    if (this.validate.getDomain()) {
+    if (this.validate.getDomain() && this.validate.getDomainValid()) {
       this.companiesService.checkCompanyDomain('', this.company.domain).subscribe((data: any) => {
         if (data.value) {
           this.validate.resetDomain();
