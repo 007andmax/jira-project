@@ -190,6 +190,7 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
     this.company.clientIndustry.name = (item) ? item.name : null;
   }
   public onChangeDomain() {
+    this.validate.resetDomainIsExist();
     this.validate.checkValidDomain(this.company.domain);
     if (this.validate.getDomain() && this.validate.getDomainValid()) {
       this.companiesService.checkCompanyDomain('', this.company.domain).subscribe((data: any) => {
