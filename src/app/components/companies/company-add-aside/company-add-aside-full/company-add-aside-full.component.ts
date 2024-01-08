@@ -38,6 +38,7 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
   new CompanySetting('Wire Transfer', 'WIRE_TRANSFER')];
   serviceTypes: Array<CrmCompanyServiceType> = [];
   @ViewChild('addresstext') addresstext: any;
+  @ViewChild('companyTypeDp') companyTypeDp: DropDownComponent;
   industries: Array<CrmCompanyIndustry> = [];
   locationIsinit: boolean = false;
   jobTitleList: Array<CrmCompanyJobTitle> = [];
@@ -91,6 +92,7 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
       this.onGetUsers(this.usersStateService.getAllUsers());
     })
     this.sub.add(getOnUsers);
+    if (this.company.clientType) this.companyTypeDp.selectItemWithOutChanges(this.companyTypes.find(item => item.value == this.company.clientType));
     this.onCroppImage();
   }
   onGetUsers(data) {

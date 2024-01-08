@@ -60,6 +60,7 @@
     <div class="qt-inputs-row">
         <div class="qt-input-block qt-f50">
             <app-drop-down
+                #companyTypeDp
                 [class]="['qt-select-input-40']"
                 [placeholder]="'Select Company Type'"
                 [field]="'title'"
@@ -286,18 +287,20 @@
                 >
                     + Create user
                 </span>
-                <app-drop-down
+                <company-users-drop-down
                     [class]="['qt-select-input-40']"
                     [placeholder]="'Select user'"
-                    [list]="usersList"
+                    [field]="'name'"
+                    [dropdownHeight]="'345px'"
                     [search]="true"
                     [change]="true"
+                    [sort]="false"
                     [validate]="validate.getUser()"
                     [errorMessage]="'Client user is required'"
                     [title]="'User'"
-                    (onSelectedItem)="onSelectUser($event)"
+                    (onSelectedItem)="onSelectUser($event.user)"
                 >
-                </app-drop-down>
+                </company-users-drop-down>
             </div>
         </div>
     </div>
