@@ -21,6 +21,7 @@ import { CrmCompanyJobTitle } from 'src/app/components/setting/crm-settings/crm-
 import { CompanyProfileAddress } from '../../class/company-profile-address';
 import { MODE_EDIT_SUBSCRIPTION, MODE_HIDE_ACTIVE } from 'src/app/const/users';
 import { UsersService } from 'src/app/services/users/users.service';
+import { CompanyUsersDropDownComponent } from 'src/app/components/tickets/tickets/ticket-add-aside/company-users-drop-down/company-users-drop-down.component';
 
 @Component({
   selector: 'company-add-aside-full',
@@ -39,6 +40,7 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
   serviceTypes: Array<CrmCompanyServiceType> = [];
   @ViewChild('addresstext') addresstext: any;
   @ViewChild('companyTypeDp') companyTypeDp: DropDownComponent;
+  @ViewChild('userDp') userDp: CompanyUsersDropDownComponent;
   industries: Array<CrmCompanyIndustry> = [];
   locationIsinit: boolean = false;
   jobTitleList: Array<CrmCompanyJobTitle> = [];
@@ -93,6 +95,10 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnUsers);
     if (this.company.clientType) this.companyTypeDp.selectItemWithOutChanges(this.companyTypes.find(item => item.value == this.company.clientType));
+    if (this.company.contacts[0].id) {
+      let user = this.users.find(item => item.id == this.company.contacts[0].id);
+      if (user) this.userDp.selectItemWithOutChanges({ user: user, customerCompany: user.customerCompaniesInfo[0] });
+    }
     this.onCroppImage();
   }
   onGetUsers(data) {

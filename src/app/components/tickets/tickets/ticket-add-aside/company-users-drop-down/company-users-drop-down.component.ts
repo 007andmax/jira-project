@@ -87,6 +87,12 @@ export class CompanyUsersDropDownComponent extends DropDownComponent {
       return false;
     });
   }
+  public selectItemWithOutChanges(data) {
+    this.isAdd = false;
+    this.selectedItem = data.user;
+    this.selectedCustomerCompany = data.customerCompany;
+    this.ref.markForCheck();
+  }
   /**
  * @description Set new value selected element and init Output Event
  * @param {Object} data - Object selected element

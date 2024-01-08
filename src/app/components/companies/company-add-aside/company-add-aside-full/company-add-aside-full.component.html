@@ -272,7 +272,7 @@
     </div>
     <div
         class="qt-inputs-row-background"
-        *ngIf="company.isUseSelectedUser"
+        [hidden]="!company.isUseSelectedUser"
     >
         <div class="qt-inputs-row">
             <div class="qt-input-block">
@@ -288,6 +288,7 @@
                     + Create user
                 </span>
                 <company-users-drop-down
+                    #userDp
                     [class]="['qt-select-input-40']"
                     [placeholder]="'Select user'"
                     [field]="'name'"
