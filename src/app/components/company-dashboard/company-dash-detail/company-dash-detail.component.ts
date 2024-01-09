@@ -384,6 +384,7 @@ export class CompanyDashDetailComponent implements OnInit {
           if (day.toLowerCase() === element.dayOfWeek.toLowerCase() && this.getTimeFormat(element.startTime) == moment(new Date()).format('A') && this.timeFormat(element.endTime) - 1 == current) {
             this.closingSoon = true;
           }
+          console.log("element", element);
         }
       });
       let arr = this.workingDays.filter(val => val.dayOfWeek.toLowerCase() === day.toLowerCase())
@@ -437,14 +438,16 @@ export class CompanyDashDetailComponent implements OnInit {
 
   timeFormatter(time) {
     if (time && time > 0) {
+      console.log("time", time);
       var seconds = time > 43200 ? time - 43200 : time;
       var hours = Math.floor(seconds / 3600);
+      console.log("hours", hours);
       var hoursToReturn = hours.toString().length > 1 ? hours : '0' + hours;
       var minutes = Math.floor((seconds - (hours * 3600)) / 60);
       var minutesToreturn = minutes.toString().length > 1 ? minutes : '0' + minutes;
       return hoursToReturn + ':' + minutesToreturn;
     } else {
-      return "12:00";
+      return "00:00";
     }
   }
 
