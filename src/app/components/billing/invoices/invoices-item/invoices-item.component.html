@@ -112,7 +112,7 @@
                 <li
                     class="pointer"
                     ngbDropdownItem
-                    *ngIf="invoice.paidOn && !customerPortalStateService.isCustomerPortal"
+                    *ngIf="invoice.paidOn && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')"
                     (click)="refundPayments()"
                 >
                     <div class="icon__restart qt-bg-contain qt-sz-20 qt-mr-12"></div>
@@ -121,7 +121,7 @@
                 <li
                     class="pointer"
                     ngbDropdownItem
-                    *ngIf="!invoice.paidOn && !customerPortalStateService.isCustomerPortal"
+                    *ngIf="!invoice.paidOn && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')"
                     (click)="rollbackInvoice()"
                 >
                     <div class="icon__remove qt-bg-contain qt-sz-20 qt-mr-12"></div>

@@ -52,7 +52,7 @@
             ></div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon qt-df qt-ai-c qt-jc-c"
-                *ngIf="!invoiceProfile.paidOn && !customerPortalStateService.isCustomerPortal"
+                *ngIf="!invoiceProfile.paidOn && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')"
                 (click)="rollbackInvoice()"
                 placement="top"
                 ngbTooltip="Rollback"
@@ -62,7 +62,7 @@
             </div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__restart"
-                *ngIf="invoiceProfile.paidOn && !customerPortalStateService.isCustomerPortal"
+                *ngIf="invoiceProfile.paidOn && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')"
                 (click)="refundPayments()"
                 placement="top"
                 ngbTooltip="Refund payment"

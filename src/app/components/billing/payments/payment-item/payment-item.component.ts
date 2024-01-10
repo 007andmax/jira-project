@@ -11,6 +11,7 @@ import { DELETE_PAYMENT } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-payment-item',
@@ -32,6 +33,7 @@ export class PaymentItemComponent implements OnInit {
     private paymentsStateService: PaymentsStateService,
     public customerPortalStateService: CustomerPortalStateService,
     private usersStateService: UsersStateService,
+    private permissionsService: PermissionsService,
     private confirmStateService: ConfirmStateService,) { }
 
   ngOnInit() {
@@ -72,6 +74,9 @@ export class PaymentItemComponent implements OnInit {
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to remove the payment?`;
     this.paymentsStateService.setPaymentForemove(this.payment);
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   public trackById(index, item) {
     return item.id;
