@@ -4,8 +4,11 @@
     padding: 0px;
     
 }
-.rollback-invoice {
+/deep/.rollback-invoice {
+    width: 504px;
+    padding: 32px;
     .archive-modal__body {
+        margin-bottom: 32px;
         h3 {
             font-size: 18px;
             color: $gray-900;
@@ -14,5 +17,8 @@
             font-size: 14px;
             color: $gray-500;
         }
+    }
+    .btn-primary {
+        margin-right: 0px;
     }
 }
