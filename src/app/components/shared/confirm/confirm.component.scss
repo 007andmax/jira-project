@@ -1,4 +1,18 @@
+@import './src/assets/styles/variable';
+
 .modal-body {
     padding: 0px;
     
+}
+.rollback-invoice {
+    .archive-modal__body {
+        h3 {
+            font-size: 18px;
+            color: $gray-900;
+        }
+        p {
+            font-size: 14px;
+            color: $gray-500;
+        }
+    }
 }

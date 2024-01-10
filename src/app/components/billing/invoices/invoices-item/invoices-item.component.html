@@ -89,7 +89,7 @@
                     (click)="resendInvoices(true)"
                     *ngIf="!customerPortalStateService.isCustomerPortal"
                 >
-                    <div class="icon__email-dark qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                    <div class="icon__resend-pdf qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Resend with PDF
                 </li>
                 <li
@@ -115,7 +115,7 @@
                     *ngIf="invoice.paidOn && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')"
                     (click)="refundPayments()"
                 >
-                    <div class="icon__restart qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                    <div class="icon__refund-payment qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Refund Payments
                 </li>
                 <li
@@ -124,7 +124,7 @@
                     *ngIf="!invoice.paidOn && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')"
                     (click)="rollbackInvoice()"
                 >
-                    <div class="icon__remove qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                    <div class="icon__rool-back qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Rollback
                 </li>
                 <li

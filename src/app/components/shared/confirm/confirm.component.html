@@ -311,6 +311,32 @@
     </div>
 </div>
 <div
+    class="archive-modal rollback-invoice"
+    *ngIf="action === 'ROLLBACK_INVOICE'"
+>
+    <div
+        class="archive-modal__body"
+        [innerHtml]="message"
+    >
+    </div>
+    <div class="archive-modal__footer">
+        <div class="qt-df">
+            <button
+                class="btn-new disabled qt-w100"
+                (click)=cancelConfirm()
+            >
+                Cancel
+            </button>
+            <button
+                class="btn-new btn-primary qt-ml-12 qt-w100"
+                (click)=approveConfirm()
+            >
+                Yes, I am sure
+            </button>
+        </div>
+    </div>
+</div>
+<div
     class="archive-modal"
     *ngIf="isDefault()"
 >
