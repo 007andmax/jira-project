@@ -72,7 +72,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   @ViewChild('companyAssociate', { static: true }) companyAssociate: CompanyAssociateComponent;
   @ViewChild('addBtn', { static: false }) addBtn: DisabledBtnDirective;
   jobTitleList: Array<CrmCompanyJobTitle> = [];
-  constructor(private companiesStateService: CompaniesStateService,
+  constructor(public companiesStateService: CompaniesStateService,
     private companiesService: CompaniesService,
     private usersStateService: UsersStateService,
     private modalService: NgbModal,
@@ -256,7 +256,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     if (this.company.contacts[0].primaryEmail && this.company.contacts[0].primaryEmail.length > 0) this.onCheckValidPrimaryEmail();
   }
   onCheckValidPrimaryEmail() {
-    this.usersService.checkValidPrimaryEmail(this.company.contacts[0].primaryEmail, this.company.id, this.company.contacts[0].id).subscribe((data: any) => {
+    this.usersService.checkValidPrimaryEmail(this.company.contacts[0].primaryEmail, this.companiesStateService.getCurrentCompany().id, this.company.contacts[0].id).subscribe((data: any) => {
       this.validate.setExistPrimaryContactEmail(data.value);
       this.cd.detectChanges();
     })
@@ -401,12 +401,6 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     editValue = editValue.toLowerCase();
     editValue = `${value[0]}${editValue}`;
     return editValue;
-  }
-  getCompanyLogoUrl() {
-    if (this.company && this.company.logo && this.company.logo && this.company.logo.base64 && !this.company.logo.cropped) return this.company.logo.base64;
-    if (this.company && this.company.logo && this.company.logo.cropped && this.company.logo.cropped.id) return `/file/${this.company.logo.cropped.id}`;
-    if (this.company && this.company.logo && this.company.logo.origin && this.company.logo.origin.id) return `/file/${this.company.logo.origin.id}`;
-    return '/company/default/logo.jpg';
   }
   downloadCompanyLogo() {
     return new Promise((resolve, reject) => {

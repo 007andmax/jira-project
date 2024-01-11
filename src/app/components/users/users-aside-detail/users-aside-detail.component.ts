@@ -134,7 +134,6 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
     if (this.user && this.user.avatar && this.user.avatar && this.user.avatar.base64 && !this.user.avatar.cropped) return this.user.avatar.base64;
     if (this.user && this.user.avatar && this.user.avatar.cropped && this.user.avatar.cropped.id) return `/file/${this.user.avatar.cropped.id}`;
     if (this.user && this.user.avatar && this.user.avatar.origin && this.user.avatar.origin.id) return `/file/${this.user.avatar.origin.id}`;
-    return '/company/default/logo.jpg';
   }
   editUser() {
     this.usersStateService.setUserForEdit(new User(JSON.parse(JSON.stringify(this.usersStateService.getuserForEdit()))));
@@ -154,7 +153,7 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
     if (this.validate.isValidate(this.user)) this.updateUser();
   }
   onCheckValidPrimaryEmail() {
-    this.usersService.checkValidPrimaryEmail(this.user.primaryEmail, this.user.customerCompaniesInfo[0].companyId, this.user.id).subscribe((data: any) => {
+    this.usersService.checkValidPrimaryEmail(this.user.primaryEmail, this.companiesStateService.getCurrentCompany().id, this.user.id).subscribe((data: any) => {
 
       this.validate.setExistPrimaryContactEmail(data.value);
       if (this.validate.isValidate(this.user)) this.updateUser();

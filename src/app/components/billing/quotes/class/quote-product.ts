@@ -65,14 +65,15 @@ export class QuoteProduct implements Product {
             manufacture: this.manufacture,
             description: this.description,
             billable: this.billable,
-            taxes: this.taxes,
             oldVersion: this.oldVersion,
+            taxes: undefined
         }
         return {
             discountType: this.discountType,
             item: product,
             itemOrder: this.itemOrder,
-            quantity: this.quantity
+            quantity: this.quantity,
+            taxes: this.taxes,
         }
     }
 }

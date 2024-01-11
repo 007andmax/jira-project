@@ -40,15 +40,12 @@
     border-radius: 16px !important;
     align-items: center;
     padding: 4px 8px 4px 4px;
-    border: solid 1px $gray-400--old;
-    background-color: $gray-200--old;
+    border: solid 1px $gray-200;
+    background-color: $gray-50;
   }
 
  .mat-standard-chip:focus {
     box-shadow: none;
-//     border: solid 1px $primary-1;
-//     background-color: $gray-200--old;
-//     color: $primary-1;
   }
 
   .assigne-user-item {

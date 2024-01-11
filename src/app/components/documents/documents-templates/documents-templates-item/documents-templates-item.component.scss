@@ -15,7 +15,7 @@
     //transition: border .3s ease-in;
 
     &:hover {
-        border-color: $primary-1;
+        border-color: $blue-light-600;
     }
 
     .qt-button {
@@ -26,14 +26,14 @@
     &__icon {
         padding: 8px;
         border-radius: 8px;
-        background-color: $gray-200--old;
+        background-color: $gray-50;
         display: inline-block;
     }
 
     &__title {
         flex: 1;
         @include h6__m;
-        color: $primary-2;
+        color: $gray-900;
         margin-top: 12px;
         margin-bottom: 16px;
         max-height: 50px;
@@ -47,12 +47,12 @@
         margin-left: 8px;
         margin-right: 4px;
         font-weight: $fw-medium;
-        color: $gray-700--old;
+        color: $gray-500;
     }
 
     &__description {
         @include body-m;
-        color: $gray-700--old;
+        color: $gray-500;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;

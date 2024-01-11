@@ -1,3 +1,4 @@
+import { TicketsPriority } from '../../setting/ticket-settings-page/tickets-priority/class/tickets-priority';
 import { MultiAssignedUsers } from './multi-assigned-users';
 
 export class Ticket {
@@ -13,7 +14,7 @@ export class Ticket {
     multiAssignedUsers: Array<MultiAssignedUsers>;
     number: string;
     previewNote: string;
-    priorityLevel: string;
+    priorityLevel: TicketsPriority;
     reportedAsSpamAt: number;
     sourceName: string;
     spamMarkerId: string;
@@ -41,7 +42,7 @@ export class Ticket {
         }) : [];
         this.number = data.number;
         this.previewNote = data.previewNote;
-        this.priorityLevel = data.priorityLevel;
+        this.priorityLevel = new TicketsPriority(data.priorityLevel);
         this.reportedAsSpamAt = data.reportedAsSpamAt;
         this.sourceName = data.sourceName;
         this.spamMarkerId = data.spamMarkerId;

@@ -75,7 +75,7 @@
     }
     td.quotes-table__number {
       font-weight: $fw-medium;
-      color: $primary-1;
+      color: $blue-light-600;
       padding-top: 14px;
     }
 
@@ -83,6 +83,13 @@
       max-width: 160px;
       min-width: 160px;
       width: 160px;
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+    &__recipients {
+      max-width: 190px;
+      min-width: 190px;
+      width: 190px;
       padding-left: 8px;
       padding-right: 8px;
     }
@@ -149,7 +156,7 @@
     }
 
     .billable-popup-add-note {
-      min-height: 322px !important;
+      min-height: 364px !important;
       overflow: hidden;
       top: unset !important;
       bottom: 85px !important;
@@ -166,7 +173,7 @@
     }
 
     .company-info {
-      border-bottom: 1px solid $gray-400--old;
+      border-bottom: 1px solid $gray-200;
       margin-left: -30px;
       margin-right: -30px;
       padding-left: 30px;
@@ -283,7 +290,7 @@
     }
 
     .terms-n-conditions {
-      background: $gray-100--old;
+      background: $gray-25;
       margin-left: -30px;
       margin-right: -30px;
       &__textarea {
@@ -334,7 +341,7 @@
       font-style: normal;
       line-height: 1.54;
       letter-spacing: normal;
-      color: $gray-600--old;
+      color: $gray-400;
       font-weight: 400;
       position: absolute;
       left: 14px;
@@ -350,8 +357,8 @@
     .mat-chip.mat-primary {
       height: 32px;
       margin: 2px;
-      background-color: $gray-100--old;
-      color: $gray-800--old;
+      background-color: $gray-25;
+      color: $gray-600;
     }
     .mat-chip-remove.mat-icon {
       width: 18px;
@@ -375,7 +382,7 @@
   width: 460px !important;
   max-height: 174px !important;
   hr {
-    border-top: 4px solid $primary-1;
+    border-top: 4px solid $blue-light-600;
   }
   .modal-quote-user-item {
 
@@ -388,13 +395,13 @@
     }
   }
   .mat-option {
-    color: $primary-2;
+    color: $gray-900;
     font-size: 13px;
     height: 32px;
     padding: 6px 15px;
     &:hover {
       background-color: $background !important;
-      color: $primary-2;
+      color: $gray-900;
     }
   }
 }

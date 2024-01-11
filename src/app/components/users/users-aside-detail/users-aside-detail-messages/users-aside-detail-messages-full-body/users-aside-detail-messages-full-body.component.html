@@ -54,8 +54,8 @@
                             <div class="qt-df qt-ai-c">
                                 <div
                                     class="users-table__name--avatar"
-                                    [ngStyle]="{'background':  getUserAvatarUrl(user)}"
-                                    [textContent]="getNameForAvatar(user)"
+                                    [ngStyle]="{'background':  usersStateService.getUserAvatarUrl(user)}"
+                                    [textContent]="usersStateService.getNameForAvatar(user)"
                                 ></div>
                                 <div class="message-full-to-list-item-info">
                                     <span

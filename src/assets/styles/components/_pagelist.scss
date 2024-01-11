@@ -7,56 +7,9 @@
   min-width: fit-content;
   min-width: -moz-fit-content;
 
-  @media (max-width: 767px) {
-    padding: 8px 0;
-  }
-
   &.page-list-ticket {
-    @media (max-width: 767px) {
-      padding: 0;
-    }
-    app-select-search {
-      .qt-dropdown .report-caret-icon {
-        @media (max-width: 767px) {
-          top: calc(50% + 2px) !important;
-        }
-      }
-    }
     .icon__menu-white {
       display: none;
-
-      @media (max-width: 767px) {
-        display: block;
-      }
-    }
-
-    app-tickets-filter {
-      @media (max-width: 767px) {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: $white;
-      }
-
-      .qt-button {
-        @media (max-width: 767px) {
-          width: 100%;
-          justify-content: center;
-        }
-      }
-    }
-    .qt-page-list__body-tbody {
-      @media (max-width: 767px) {
-        padding-bottom: 48px;
-      }
-    }
-  }
-
-  &.password-page {
-    @media (max-width: 767px) {
-      padding: 0;
     }
   }
 
@@ -66,38 +19,17 @@
     width: 100%;
     z-index: 1;
 
-    @media (max-width: 767px) {
-      z-index: 3;
-    }
     &.--sticky {
       position: sticky;
-      //top: $header-height;
       top: 0;
       padding-top: 24px;
       margin-top: -24px;
-
-      @media (max-width: 767px) {
-        position: fixed;
-        top: 0;
-        left: 0;
-        background: $primary-2;
-        padding: 16px 16px;
-        margin-bottom: 8px;
-        margin-top: 0;
-        width: calc(100%);
-      }
     }
   }
 
   &__header-title {
     @include h6__sb;
-    color: $primary-2;
-
-    @media (max-width: 767px) {
-      color: $white;
-      @include body-l__sb;
-      margin: 0 auto;
-    }
+    color: $gray-900;
   }
 
   &__header-title-line {
@@ -109,15 +41,6 @@
       display: flex;
       align-items: center;
     }
-    &--left {
-      @media (max-width: 767px) {
-        width: 100%;
-      }
-    }
-
-    @media (max-width: 767px) {
-      margin-bottom: 0;
-    }
   }
 
   &__header-filters {
@@ -126,24 +49,8 @@
     width: 100%;
     align-items: center;
 
-    @media (max-width: 767px) {
-      margin-top: 0;
-    }
-
     .content-filters-header {
       display: none;
-
-      @media (max-width: 767px) {
-        background: $primary-2;
-        width: 100%;
-        position: fixed;
-        top: 0;
-        left: 0;
-        display: flex;
-        align-items: center;
-        padding: 16px 20px;
-        z-index: 1;
-      }
 
       &__title {
         margin: 0 auto;
@@ -157,20 +64,10 @@
   &__body-table-container {
     width: 100%;
   }
-  &__header-thead-container {
-    @media (max-width: 767px) {
-      display: none;
-    }
-  }
   &__body-table-container {
-    min-height: 100vh;
+    min-height: calc(100vh - 110px - 64px - 80px); // Min Height For Ticket Table
     @media (hover:none) and (min-width: 767px), (pointer:coarse) and (min-width: 767px) {
       min-height: 100%;
-    }
-
-    @media (max-width: 767px) {
-      height: 100%;
-      min-height: auto;
     }
     &.--height-unset {
       min-height: unset;
@@ -183,11 +80,6 @@
   &__header-thead,
   &__body-tbody {
     min-width: 1064px;
-
-    @media (max-width: 767px) {
-     min-width: 100%;
-     width: 100%;
-    }
   }
 
   &__back-button {
@@ -232,7 +124,7 @@
       outline: none;
       position: relative;
       &::placeholder {
-        color: $gray-600--old;
+        color: $gray-400;
         opacity: 1;
       }
     }

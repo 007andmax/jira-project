@@ -108,7 +108,7 @@ export class WebsocketService {
   }
   onInitConnectCustomerUser(state, clientCompId) {
     if (this.isInit) {
-      if (state == "new-tickets") this.subsribeToTicketsCustomerUsers(clientCompId);
+      if (state == "new-tickets" || state == "ticket-detail") this.subsribeToTicketsCustomerUsers(clientCompId);
       if (state == "new-billable-invoices") this.subsribeToInvoiceCustomerUsers(clientCompId);
       if (state == "quotes-component") this.subsribeToQuoteCustomerUsers(clientCompId);
       if (state == "new-payments-ng2") this.subsribeToPaymentsCustomerUsers(clientCompId);
@@ -122,12 +122,11 @@ export class WebsocketService {
     let that = this;
     this.stompClient.onConnect = (data) => {
       //   that.subsribeToKafka();
-      if (state == "new-tickets") that.subsribeToTicketsCustomerUsers(clientCompId);
+      if (state == "new-tickets" || state == "ticket-detail") that.subsribeToTicketsCustomerUsers(clientCompId);
       if (state == "new-billable-invoices") that.subsribeToInvoiceCustomerUsers(clientCompId);
       if (state == "quotes-component") this.subsribeToQuoteCustomerUsers(clientCompId);
       if (state == "new-payments-ng2") this.subsribeToPaymentsCustomerUsers(clientCompId);
       if (state == "company-devices") this.subsribeToDevicesCustomerUsers(clientCompId);
-
       that.onInit.emit(true);
       that.isInit = true;
     }
@@ -157,6 +156,7 @@ export class WebsocketService {
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToCategories();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToProducts();
       that.subsribeToTicketActualNumber();
+      if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToTicketsFilters();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToTickets();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToCmdShellOutput();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToBillable();
@@ -168,6 +168,7 @@ export class WebsocketService {
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToSubmittedServiceAgreement();
       that.subsribeToSubmittedOneTimeConnection();
       that.subsribeToLockScreen();
+      that.subsribeToTicketPriority();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToTags();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToDocuments();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToDocumentsCategory();
@@ -506,6 +507,18 @@ export class WebsocketService {
 
     }, 3000);
   }
+  public subsribeToTicketsFilters() {
+
+    setTimeout(() => {
+
+      this.stompClient.subscribe(`/user/watch/ticketFilters`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.ticketsRealTimeService.handleRealTimeChangesTicketFilters(newChange);
+
+      });
+
+    }, 3000);
+  }
 
   public subsribeToTicketsCustomerUsers(clientCompId) {
     this.ticketsRealTimeService.subsribeToTicketsCustomerUser = this.stompClient.subscribe(`/user/watch/tickets/${clientCompId}`, (message) => {
@@ -634,6 +647,16 @@ export class WebsocketService {
       this.netScanSub = this.stompClient.subscribe(`/user/watch/lockScreen/${this.getCookie('LOCK_SCREEN_ID')}`, (message) => {
         var newChange = JSON.parse(message.body);
         if (newChange.action === 'LOCK_SCREEN') this.appService.showLockScreen();
+      });
+    }, 3000);
+
+  }
+
+  public subsribeToTicketPriority() {
+    setTimeout(() => {
+      this.netScanSub = this.stompClient.subscribe(`/user/watch/customPriority`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.ticketsRealTimeService.handleRealTimeChangesTicketPriority(newChange);
       });
     }, 3000);
 

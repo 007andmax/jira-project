@@ -21,8 +21,38 @@ export class TicketsService {
   public getDashboardByServices(data) {
     return this.http.post(this.apiUrl + `dashboard/ticket/byServices`, data);
   }
+  public getTicketsPriorities() {
+    return this.http.get(this.apiUrl + `priorityLevel?page=0&size=100`);
+  }
   public getPasswordsDocuments(userId) {
     return this.http.get(this.apiUrl + `v2/tickets/previewInfo?userId=${userId}`);
+  }
+  public deleteGlobalFilter(id) {
+    return this.http.delete(this.apiUrl + `ticket/filters/${id}`).pipe(
+      tap(data => {
+        this.toastrService.success("The filter has been successfully deleted");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public editGlobalFilter(id, data) {
+    return this.http.put(this.apiUrl + `ticket/filters/${id}`, data).pipe(
+      tap(data => {
+        this.toastrService.success("The filter has been successfully saved");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public addGlobalFilter(data) {
+    return this.http.post(this.apiUrl + `ticket/filters`, data).pipe(
+      tap(data => {
+        this.toastrService.success("The filter has been successfully saved");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public getFilters(page) {
+    return this.http.get(this.apiUrl + `ticket/filters/all?page=${page}&size=10`);
   }
   public getDashboardByTech(startDate, endDate) {
     return this.http.get(this.apiUrl + `dashboard/ticket/counters?startDate=${startDate}&endDate=${endDate}`);
@@ -82,6 +112,14 @@ export class TicketsService {
     return this.http.delete(this.apiUrl + `ticket/status/${ticket_id}`).pipe(
       tap(data => {
         this.toastrService.success("Status removed successfully");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public removeTicketPriority(id) {
+    return this.http.delete(this.apiUrl + `priorityLevel/${id}`).pipe(
+      tap(data => {
+        this.toastrService.success("Priority removed successfully");
         this.appStateService.changeDetectorRef();
         return data;
       }));
@@ -181,11 +219,29 @@ export class TicketsService {
         return data;
       }));
   }
+  public addPriority(name, color) {
+
+    return this.http.post(this.apiUrl + `priorityLevel`, { name: name, color: color }).pipe(
+      tap(data => {
+        this.toastrService.success("Priority created successfully");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
   public editTicketTask(data) {
 
     return this.http.put(this.apiUrl + `v2/tickets/task`, data).pipe(
       tap(data => {
         this.toastrService.success("The task has been successfully updated");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public editPriority(id, data) {
+
+    return this.http.put(this.apiUrl + `priorityLevel/${id}`, data).pipe(
+      tap(data => {
+        this.toastrService.success("Priority edited successfully");
         this.appStateService.changeDetectorRef();
         return data;
       }));

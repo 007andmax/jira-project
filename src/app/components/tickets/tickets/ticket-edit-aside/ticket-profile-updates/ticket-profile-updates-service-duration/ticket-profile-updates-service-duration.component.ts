@@ -51,16 +51,18 @@ export class TicketProfileUpdatesServiceDurationComponent implements OnInit {
             }
         } else {
             if ((value - 1 * this.step) < 0) {
-                if (this.step == 1) value = 59;
-                if (this.step == 5) value = 55;
-                if (this.step == 10) value = 50;
-                if (this.step == 15) value = 45;
-
+                value = this.getLastValueForMinutes();
             } else {
                 value -= 1 * this.step;
             }
         }
         this.setDisplayMinutes(value);
+    }
+    getLastValueForMinutes() {
+        if (this.step == 1) return 59;
+        if (this.step == 5) return 55;
+        if (this.step == 10) return 50;
+        if (this.step == 15) return 45;
     }
     public ngOnInit() {
         this.setDisplayHours(0);
@@ -114,6 +116,38 @@ export class TicketProfileUpdatesServiceDurationComponent implements OnInit {
     }
     getParseDate() {
         return `${(this.date.getHours() < 10) ? "0" + this.date.getHours() : this.date.getHours()}:${(this.date.getMinutes() < 10) ? "0" + this.date.getMinutes() : this.date.getMinutes()}`
+    }
+    setNextMinutes() {
+        let index = this.minutes.findIndex(item => item.selected);
+        if (this.minutes[index].value + this.step > 59) {
+            this.setDisplayMinutes(0);
+        } else {
+            this.setDisplayMinutes(this.minutes[index].value + this.step);
+        }
+    }
+    setNextHour() {
+        let index = this.hours.findIndex(item => item.selected);
+        if (this.hours[index].value + 1 > 23) {
+            this.setDisplayHours(0);
+        } else {
+            this.setDisplayHours(this.hours[index].value + 1);
+        }
+    }
+    setPreviewHour() {
+        let index = this.hours.findIndex(item => item.selected);
+        if (this.hours[index].value - 1 < 0) {
+            this.setDisplayHours(23);
+        } else {
+            this.setDisplayHours(this.hours[index].value - 1);
+        }
+    }
+    setPreviewMinutes() {
+        let index = this.minutes.findIndex(item => item.selected);
+        if (this.minutes[index].value - this.step < 0) {
+            this.setDisplayMinutes(this.getLastValueForMinutes());
+        } else {
+            this.setDisplayMinutes(this.minutes[index].value - this.step);
+        }
     }
     setHours(i) {
         this.hours.forEach(item => item.selected = false);

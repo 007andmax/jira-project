@@ -37,7 +37,7 @@ export class GlobalSearchComponent implements OnInit {
     private invoiceStateService: InvoiceStateService,
     private defaultServicesStateService: DefaultServicesStateService,
     private defaultServicesService: DefaultServicesService,
-    private usersStateService: UsersStateService,
+    public usersStateService: UsersStateService,
     private productService: ProductService,
     private router: Router,
     public companiesStateService: CompaniesStateService,
@@ -83,16 +83,9 @@ export class GlobalSearchComponent implements OnInit {
 
     }
     if (item.type === 'TICKETS') {
-      if (!this.appService.isMobile) {
-        this.ticketStateService.setTicketRoutingId(item.id);
-        const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/ticket/${item.id}`;
-        window.open(url, '_blank');
-      } else {
-        this.ticketsStateService.onOpenTicket();
-        this.ticketsService.getTicket(item.id).subscribe(data => {
-          this.ticketsStateService.onEditTicket(data);
-        })
-      }
+      this.ticketStateService.setTicketRoutingId(item.id);
+      const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/ticket/${item.id}`;
+      window.open(url, '_blank');
     }
     if (item.type === 'USERS') {
       let user = this.getUserById(item.id);
@@ -115,11 +108,6 @@ export class GlobalSearchComponent implements OnInit {
   }
   getUserById(id) {
     return this.usersStateService.getAllUsers().find(userItem => userItem.id === id);
-  }
-  getNameForAvatar(item) {
-    let user = this.getUserById(item.id);
-    if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}${(user.lastName) ? user.lastName[0].toUpperCase() : ''}`;
-    return '';
   }
   clearWord() {
     this.word = "";

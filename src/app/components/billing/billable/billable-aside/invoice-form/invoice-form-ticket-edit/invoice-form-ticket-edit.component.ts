@@ -23,7 +23,7 @@ export class InvoiceFormTicketEditComponent implements OnInit {
     this.ticket.setNewSubject(JSON.parse(JSON.stringify(this.ticket.subject)));
   }
   public getDate(date) {
-    return moment(new Date(date)).format('DD/MM/YYYY');
+    return moment(new Date(date)).format('DD MMM YYYY');
   }
   onChangeSubject() {
     this.ticket.setChangeSubject(this.ticket.newSubject !== this.ticket.subject);

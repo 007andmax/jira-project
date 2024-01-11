@@ -56,7 +56,7 @@
       width: 4px;
     }
     &::-webkit-scrollbar-thumb {
-      background-color: $gray-500--old;
+      background-color: $gray-300;
     }
   }
 
@@ -79,21 +79,21 @@
       list-style: none;
       padding: 0;
       display: flex;
-      color: $gray-800--old;
+      color: $gray-600;
       justify-content: center;
       border-bottom: 2px solid transparent;
       flex-grow: 1;
      font-weight: 600;
       &.--active {
-        border-color: $primary-1;
-        color: $primary-1;
+        border-color: $blue-light-600;
+        color: $blue-light-600;
       }
     }
   }
 
   &__menu-item {
     min-height: 56px;
-    border-bottom: 1px solid $gray-300--old;
+    border-bottom: 1px solid $gray-100;
     display: flex;
     align-items: center;
     padding: 5px 15px;
@@ -107,7 +107,7 @@
     cursor: pointer;
     font-size: 13px;
     line-height: 1.54;
-    color: $primary-2;
+    color: $gray-900;
    font-weight: 600;
   }
 
@@ -116,7 +116,7 @@
     cursor: pointer;
     font-size: 12px;
     line-height: 1.33;
-    color: $gray-800--old;
+    color: $gray-600;
   }
 
   &__user-avatar{
@@ -140,7 +140,7 @@
 }
 
 ::ng-deep.invoice-number{
-   color: $primary-1;
+   color: $blue-light-600;
 }
 ::ng-deep.invoice-circle {
   display: block;
@@ -148,5 +148,5 @@
   height: 4px;
   margin: 5px 8px 0px 8px;
   border-radius: 10px;
-  background-color: $gray-500--old;
+  background-color: $gray-300;
 }

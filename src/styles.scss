@@ -107,11 +107,11 @@ h6,
 
 .btn-new.btn-primary-white {
   background: $white;
-  color: $primary-1;
-  border: 1px solid $primary-1;
+  color: $blue-light-600;
+  border: 1px solid $blue-light-600;
   @include сaption-l__m;
   &:hover {
-    background: $primary-1;
+    background: $blue-light-600;
     color: $white;
   }
 }
@@ -132,7 +132,7 @@ h6,
     width: 16px;
     background-color: $white;
     border-radius: 50%;
-    border: 1px solid $gray-500--old;
+    border: 1px solid $gray-300;
     transition: all 0.3s;
     &:after {
       content: "";
@@ -144,7 +144,7 @@ h6,
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: $primary-1;
+      background: $blue-light-600;
     }
   }
   input {
@@ -153,7 +153,7 @@ h6,
     cursor: pointer;
     height: 0 !important;
     &:checked ~ .radio-mark {
-      border: 1px solid $primary-1;
+      border: 1px solid $blue-light-600;
     }
     &:checked ~ .radio-mark:after {
       opacity: 1;
@@ -238,13 +238,13 @@ html {
         margin: 0;
         width: 100%;
         border: 0;
-        background-color: $gray-800--old;
-        color: $gray-600--old;
+        background-color: $gray-600;
+        color: $gray-400;
         border: none;
         border-radius: 3px;
         &::placeholder {
           opacity: 1;
-          color: $gray-600--old;
+          color: $gray-400;
         }
       }
       .report-caret-icon {
@@ -261,33 +261,6 @@ html {
   app-select-search {
     > div {
       padding: 0 !important;
-    }
-  }
-}
-app-ticket-add-aside {
-  .qt-dropdown {
-    .icn-remove-old {
-      @media (max-width: 767px) {
-        top: calc(50% - 15px) !important;
-        right: 0;
-      }
-    }
-    .app-drop-down__right-icon {
-      @media (max-width: 767px) {
-        right: 0;
-      }
-      .icn-remove-old {
-        @media (max-width: 767px) {
-          right: 12px;
-        }
-      }
-    }
-  }
-  app-select-search {
-    .qt-dropdown .icn-remove-old {
-      @media (max-width: 767px) {
-        right: 12px;
-      }
     }
   }
 }
@@ -320,13 +293,13 @@ app-ticket-add-aside {
   }
   .ngx-editor {
     border-radius: 4px !important;
-    border: solid 1px $gray-500--old;
+    border: solid 1px $gray-300;
     .ngx-editor-grippie {
       display: none;
     }
     .ngx-toolbar {
       border: none !important;
-      border-top: solid 1px $gray-500--old;
+      border-top: solid 1px $gray-300;
       padding: 0 !important;
       height: 64px !important;
       background: transparent !important;
@@ -367,7 +340,7 @@ app-ticket-add-aside {
       }
       i {
         position: static !important;
-        color: $gray-800--old;
+        color: $gray-600;
       }
     }
     .ngx-editor-textarea {
@@ -383,7 +356,7 @@ app-ticket-add-aside {
       font-size: 13px !important;
       padding: 24px !important;
       line-height: 1.54;
-      color: $gray-600--old;
+      color: $gray-400;
     }
     .ngx-toolbar-set {
       background-color: transparent !important;
@@ -412,7 +385,7 @@ app-ticket-add-aside {
     align-items: center;
     font-size: 12px;
     padding: 3px 8px;
-    background: $gray-100--old;
+    background: $gray-25;
     border: 1px solid $background;
     border-radius: 3px;
     margin: 2px 4px 2px 0;
@@ -447,10 +420,6 @@ company-associate {
       height: 30px;
       border-color: transparent;
       box-shadow: unset;
-
-      @media (max-width: 767px) {
-        height: 34px;
-      }
     }
   }
   .hidde-label {
@@ -500,7 +469,7 @@ documents-filter {
       z-index: 1;
       padding-top: 5px;
       padding-bottom: 5px;
-      color: $primary-2;
+      color: $gray-900;
       @include сaption-l;
     }
   }
@@ -528,8 +497,8 @@ documents-edit-info {
       transition: all 0.3s;
       &:hover,
       &.active {
-        border-color: $primary-1;
-        color: $primary-1;
+        border-color: $blue-light-600;
+        color: $blue-light-600;
       }
     }
   }
@@ -560,7 +529,7 @@ documents-edit-info {
         padding: 12px 10px 10px 36px;
         font-size: 13px;
         font-weight: 400;
-        color: $gray-600--old;
+        color: $gray-400;
       }
       .mat-form-field-infix {
         border: 1px solid $gray-200;
@@ -752,15 +721,11 @@ documents-edit-info {
   }
   &__body {
     margin-bottom: 50px;
-
-    @media (max-width: 767px) {
-      margin-bottom: 32px;
-    }
     h3 {
       font-weight: 600;
       font-size: 20px;
       line-height: 1.4;
-      color: $primary-2;
+      color: $gray-900;
       position: relative;
       margin-right: 26px;
     }
@@ -769,11 +734,7 @@ documents-edit-info {
       font-size: 13px;
       line-height: 1.54;
       max-width: 398px;
-      color: $gray-700--old;
-
-      @media (max-width: 767px) {
-        margin-top: 8px;
-      }
+      color: $gray-500;
     }
   }
   &__footer {
@@ -785,25 +746,11 @@ documents-edit-info {
     .btn-primary {
       border: none;
       margin-right: 16px;
-      background-color: $error;
-
-      @media (max-width: 767px) {
-        margin-right: 8px;
-      }
+      background-color: $red-600;
 
       &:hover {
-        background-color: darken($error, 10%);
+        background-color: darken($red-600, 10%);
       }
-    }
-  }
-}
-.archive-modal {
-  @media (max-width: 767px) {
-    padding: 16px;
-  }
-  .archive-modal__body h3:before {
-    @media (max-width: 767px) {
-      display: none;
     }
   }
 }
@@ -811,7 +758,7 @@ documents-edit-info {
   padding: 9px 15px 9px 5px;
   border-radius: 3px !important;
   border: 1px solid $background;
-  color: $primary-2;
+  color: $gray-900;
   text-transform: none;
   position: relative;
   display: flex;
@@ -821,7 +768,7 @@ documents-edit-info {
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
-  background-color: $gray-100--old;
+  background-color: $gray-25;
   float: left;
   cursor: inherit;
   .mat-chip-remove {
@@ -849,7 +796,7 @@ ngb-typeahead-window {
   }
 }
 .has-error {
-  border-color: $error;
+  border-color: $red-600;
 }
 .device-user.has-placeholder {
   position: relative;
@@ -860,7 +807,7 @@ ngb-typeahead-window {
     top: 50%;
     transform: translateY(-50%);
     font-size: 13px;
-    color: $gray-600--old;
+    color: $gray-400;
     width: auto;
   }
 }
@@ -869,7 +816,7 @@ ngb-typeahead-window {
   right: 15px;
   top: 6px;
   font-size: 13px;
-  color: $error;
+  color: $red-600;
 }
 .left-panel-full-wrapper .loading {
   top: 10px;
@@ -877,8 +824,8 @@ ngb-typeahead-window {
   left: auto;
   width: 20px;
   height: 20px;
-  border: 0.1rem solid $gray-800--old;
-  border-top-color: $gray-600--old;
+  border: 0.1rem solid $gray-600;
+  border-top-color: $gray-400;
 }
 .left-panel-closed {
   .quotes__header {
@@ -921,7 +868,7 @@ app-quotes-item {
   }
   input {
     font-size: 13px;
-    border: 1px solid $gray-500--old;
+    border: 1px solid $gray-300;
     border-radius: 3px;
     padding: 0 12px;
     height: 40px;
@@ -932,7 +879,7 @@ app-quotes-item {
     }
     &::placeholder {
       opacity: 1;
-      color: $gray-600--old;
+      color: $gray-400;
     }
   }
   .report-caret-icon {
@@ -941,7 +888,7 @@ app-quotes-item {
   textarea {
     font-size: 13px;
     &::placeholder {
-      color: $gray-600--old;
+      color: $gray-400;
     }
     &:focus {
       outline: none;
@@ -952,7 +899,7 @@ app-quotes-item {
   overflow-y: scroll;
   overflow-x: hidden;
   max-height: 134px;
-  border: 1px solid $gray-500--old;
+  border: 1px solid $gray-300;
   border-radius: 4px;
   display: flex;
   textarea {
@@ -974,7 +921,7 @@ app-quotes-item {
 .new-companies-content,
 .password-content {
   padding: 21px 24px;
-  background: $gray-200--old;
+  background: $gray-50;
   position: relative;
   min-height: calc(100vh - 86px);
 }
@@ -994,7 +941,7 @@ app-quotes-item {
       line-height: 20px;
       letter-spacing: 0;
       font-weight: 600;
-      color: $primary-2;
+      color: $gray-900;
       max-width: 240px;
       width: 100%;
       margin: 0;
@@ -1015,46 +962,12 @@ app-quotes-item {
 }
 
 .quote-send-modal-users-to-notify {
-  .modal-dialog {
-    @media (max-width: 767px) {
-      margin: 0;
-      transform: translate(-50%, -50%) !important;
-      max-width: 360px;
-      max-height: 552px;
-      height: 100%;
-    }
-  }
-
-  .modal-content {
-    @media (max-width: 767px) {
-      height: 100%;
-      border: none;
-    }
-  }
-
   .users-to-notify {
-    @media (max-width: 767px) {
-      height: 100%;
-    }
-
     .qt-modal__header {
       padding: 16px 16px 8px;
-
-      @media (max-width: 767px) {
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: 100%;
-        max-width: 360px;
-        z-index: 1;
-      }
     }
     .qt-modal__body {
       padding: 0 16px 16px;
-
-      @media (max-width: 767px) {
-        padding: 0;
-      }
     }
   }
 
@@ -1063,9 +976,6 @@ app-quotes-item {
       &-item {
         display: flex;
         align-items: center;
-        @media (max-width: 767px) {
-          padding: 0 16px;
-        }
       }
 
       &-avatar {
@@ -1105,33 +1015,28 @@ app-quotes-item {
       .assigne-user-name {
         line-height: 20px;
         font-weight: 500;
-        color: $primary-2;
+        color: $gray-900;
       }
       .assigne-user-email {
         @include сaption-l;
-        color: $gray-700--old;
+        color: $gray-500;
       }
     }
 
     .qt-input-block {
       > div {
-        border-bottom: 1px solid $gray-400--old;
+        border-bottom: 1px solid $gray-200;
         padding: 9px 0;
         margin-bottom: 0;
       }
 
-      label {
-        @media (max-width: 767px) {
-          margin-bottom: 0;
-        }
-      }
       &.qt-modal__body-content {
         input {
-          background-color: $gray-200--old;
+          background-color: $gray-50;
           padding-left: 34px;
           border: none;
           &::placeholder {
-            color: $gray-600--old;
+            color: $gray-400;
           }
         }
 
@@ -1149,46 +1054,15 @@ app-quotes-item {
     }
     .qt-modal__body {
       height: calc(100% - 70px);
-
-      @media (max-width: 767px) {
-        padding-top: 90px;
-      }
-    }
-    .qt-modal__body-content {
-      @media (max-width: 767px) {
-        position: fixed;
-        top: 42px;
-        left: 0;
-        max-width: 360px;
-        padding: 8px 16px;
-        width: 100%;
-        z-index: 1;
-        margin: 0;
-        background: $white;
-      }
     }
     .email-selects {
       overflow: auto;
       margin-bottom: 0 !important;
       height: calc(100% - 116px);
-
-      @media (max-width: 767px) {
-        height: 100%;
-      }
     }
     .qt-modal__footer {
       padding: 16px 0;
       justify-content: space-between;
-
-      @media (max-width: 767px) {
-        position: fixed;
-        max-width: 360px;
-        width: 100%;
-        bottom: 0;
-        left: 0;
-        padding: 16px;
-        background-color: $white;
-      }
 
       .qt-button {
         max-width: calc(100% - 8px);
@@ -1213,8 +1087,8 @@ app-quotes-item {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: $success;
-  border: 1px solid $success;
+  background: $green-600;
+  border: 1px solid $green-600;
   border-radius: 4px;
   width: 40px;
   height: 40px;
@@ -1224,7 +1098,7 @@ app-quotes-item {
   transition: all 0.3s;
 }
 .plus-btn:hover {
-  background: $success;
+  background: $green-600;
 }
 .products-content__list--header div,
 .new-companies-content__list--header div,
@@ -1234,7 +1108,7 @@ app-quotes-item {
   text-transform: uppercase;
   font-size: 11px;
   font-weight: 600;
-  color: $primary-2;
+  color: $gray-900;
 }
 .products-content__list--header,
 .new-companies-content__list--header,
@@ -1262,7 +1136,7 @@ app-quotes-item {
       cursor: pointer;
       font-size: 12px;
       padding: 3px 30px 3px 10px;
-      background: $gray-100--old;
+      background: $gray-25;
       border: 1px solid $background;
       border-radius: 3px;
       min-height: 32px;
@@ -1334,7 +1208,7 @@ app-quotes-item {
   &.right {
     .dropdown {
       .types-btn {
-        border: 1px solid $gray-500--old;
+        border: 1px solid $gray-300;
         border-left: none;
         border-bottom-right-radius: 4px;
         border-top-right-radius: 4px;
@@ -1354,11 +1228,11 @@ app-quotes-item {
     .types-btn {
       width: 100%;
       height: 100%;
-      border: 1px solid $gray-500--old;
+      border: 1px solid $gray-300;
       border-right: none;
       border-bottom-left-radius: 4px;
       border-top-left-radius: 4px;
-      color: $gray-800--old;
+      color: $gray-600;
       padding: 0 12px;
       font-size: 12px;
       text-align: left;
@@ -1369,10 +1243,6 @@ app-quotes-item {
       height: 16px;
       background-size: cover;
       right: 7px;
-
-      @media (max-width: 767px) {
-        right: 15px;
-      }
     }
     .dropdown-menu {
       min-width: 80px;
@@ -1395,160 +1265,6 @@ app-quotes-item {
     align-items: flex-start;
   }
 
-  &.qt-page-list {
-    @media (max-width: 767px) {
-      padding: 0;
-    }
-  }
-
-  companies-filter {
-    @media (max-width: 767px) {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      max-height: calc(100vh - 70px);
-      padding: 70px 16px 50px;
-      height: 100%;
-      background: $white;
-      overflow: auto;
-    }
-  }
-
-  .filter-category {
-    @media (max-width: 767px) {
-      position: relative;
-      width: 100% !important;
-      margin-bottom: 16px;
-      margin-right: 0;
-    }
-
-    form,
-    .mat-form-field-wrapper {
-      @media (max-width: 767px) {
-        margin-top: 8px;
-      }
-    }
-    input:not(.mat-chip-input) {
-      @media (max-width: 767px) {
-        height: 40px !important;
-        color: $primary-2;
-      }
-    }
-
-    .app-drop-down__right-icon {
-      @media (max-width: 767px) {
-        transform: translateY(calc(50% - 2px));
-      }
-    }
-
-    &.tags {
-      > div::before {
-        @media (max-width: 767px) {
-          content: "Tags";
-          color: $primary-2;
-          font-weight: 600;
-          line-height: 20px;
-        }
-      }
-    }
-  }
-
-  app-drop-down.filter-category,gl-numbers-drop-down.filter-category,company-drop-down.filter-category {
-    > div::before {
-      @media (max-width: 767px) {
-        content: "Category";
-        color: $primary-2;
-        font-weight: 600;
-        line-height: 20px;
-      }
-    }
-
-    &.type {
-      > div::before {
-        @media (max-width: 767px) {
-          content: "Type";
-        }
-      }
-    }
-
-    &.sales-person {
-      > div::before {
-        @media (max-width: 767px) {
-          content: "Sales person";
-        }
-      }
-    }
-
-    &.industry {
-      > div::before {
-        @media (max-width: 767px) {
-          content: "Industry";
-        }
-      }
-    }
-  }
-
-  .qt-page-list__header {
-    @media (max-width: 767px) {
-      margin: 0;
-    }
-
-    .btn-filter {
-      @media (max-width: 767px) {
-        background-image: url("/assets/img/icons/filter-white.svg");
-        background-color: transparent;
-        background-size: 24px;
-        height: 24px;
-        width: 24px;
-        background-position: center;
-        padding: 0;
-      }
-    }
-
-    .qt-page-list__search {
-      @media (max-width: 767px) {
-        display: none;
-        z-index: 3;
-        position: fixed;
-        left: 0;
-        width: 100%;
-        top: 0;
-        background: $primary-2;
-        padding: 10px 16px;
-        margin-left: 0;
-      }
-
-      &.--open {
-        @media (max-width: 767px) {
-          display: flex;
-        }
-      }
-    }
-
-    .qt-page-list__header-title {
-      @media (max-width: 767px) {
-        color: $white;
-        font-size: 16px;
-        line-height: 24px;
-        letter-spacing: 0;
-        font-weight: 600;
-      }
-    }
-
-    .new-companies-content__header {
-      @media (max-width: 767px) {
-        margin: 0;
-      }
-    }
-  }
-
-  .qt-table-modern__row--lg {
-    @media (max-width: 767px) {
-      padding: 12px 16px;
-    }
-  }
-
   .new-companies-content__header-buttons {
     display: flex;
     padding: 8px 16px;
@@ -1556,46 +1272,16 @@ app-quotes-item {
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
     background-color: $white;
     font-size: 12px;
-    color: $gray-800--old;
+    color: $gray-600;
     line-height: 1.33;
 
-    @media (max-width: 767px) {
-      position: fixed;
-      top: 0;
-      left: 0;
-      display: block;
-      width: 100%;
-      border-radius: 0;
-      z-index: 3;
-      padding: 0;
-    }
-    &-top,
-    &-bottom {
-      @media (max-width: 767px) {
-        display: flex;
-        align-items: center;
-        padding: 16px;
-      }
-    }
-    &-top {
-      @media (max-width: 767px) {
-        height: 56px;
-        background-color: $primary-2;
-        color: $white;
-        font-size: 13px;
-        line-height: 20px;
-      }
-    }
     &-bottom {
       height: 40px;
       background-color: $white;
-      color: $primary-1;
+      color: $blue-light-600;
       display: none;
       font-size: 12px;
       line-height: 16px;
-      @media (max-width: 767px) {
-        display: flex;
-      }
     }
   }
 
@@ -1621,7 +1307,7 @@ app-quotes-item {
       .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
         width: 100%;
         transform: none;
-        color: $gray-800--old;
+        color: $gray-600;
       }
 
       .mat-form-field-appearance-legacy .mat-form-field-underline,
@@ -1631,13 +1317,9 @@ app-quotes-item {
 
       .mat-form-field-appearance-legacy .mat-form-field-label {
         @include body-m;
-        color: $gray-600--old;
+        color: $gray-400;
         padding: 9px 10px 9px 36px;
         top: 10px;
-
-        @media (max-width: 767px) {
-          top: 12px;
-        }
       }
       .mat-form-field-infix {
         min-height: 36px !important;
@@ -1650,10 +1332,6 @@ app-quotes-item {
           width: 16px;
           height: 16px;
           background: url("/assets/img/icons/tag.svg");
-
-          @media (max-width: 767px) {
-            top: 11px;
-          }
         }
       }
       .mat-form-field-appearance-legacy .mat-form-field-infix {
@@ -1685,7 +1363,7 @@ app-quotes-item {
         z-index: 1;
         padding-top: 5px;
         padding-bottom: 5px;
-        color: $primary-2;
+        color: $gray-900;
         @include сaption-l;
       }
     }
@@ -1709,33 +1387,19 @@ app-quotes-item {
   .qt-table-modern th {
     padding: 8px;
     @include сaption-m__sb;
-    color: $primary-2;
+    color: $gray-900;
     text-transform: uppercase;
   }
 
   .companies-table {
-    &.--selected {
-      @media only screen and (max-width: 768px) {
-        padding-top: 40px;
-      }
-    }
-
     &__check {
       flex: 0 0 48px;
-
-      @media only screen and (max-width: 768px) {
-        flex: 0 0 30px;
-      }
     }
     &__name {
       flex: 2 1 290px;
 
-      @media only screen and (max-width: 768px) {
-        max-width: calc(100% - 30px);
-      }
-
       .circle-avatar {
-        background-color: #7c77bc;
+        background-color: $purple-500;
         color: $white;
         border: none;
 
@@ -1746,15 +1410,7 @@ app-quotes-item {
 
       p {
         font-weight: 500;
-        color: $primary-2;
-
-        @media only screen and (max-width: 768px) {
-          font-size: 16px;
-          line-height: 20px;
-          font-weight: 600;
-          max-height: 42px;
-          overflow: hidden;
-        }
+        color: $gray-900;
       }
     }
     &__address {
@@ -1801,7 +1457,7 @@ app-quotes-item {
       .name {
         position: relative;
         @include body-m__m;
-        color: $primary-2;
+        color: $gray-900;
 
         @media screen and (max-width: 767px) {
           margin-right: 4px;
@@ -1821,7 +1477,7 @@ app-quotes-item {
             transform: translateY(-50%);
             width: 4px;
             height: 4px;
-            background: $gray-600--old;
+            background: $gray-400;
             border-radius: 50%;
           }
         }
@@ -1829,13 +1485,7 @@ app-quotes-item {
 
       .phone {
         @include body-m;
-        color: $gray-600--old;
-        @media (max-width: 767px) {
-          max-width: 190px;
-          overflow: hidden;
-          text-overflow: inherit;
-          white-space: nowrap;
-        }
+        color: $gray-400;
       }
     }
     &__email-address {
@@ -1888,14 +1538,6 @@ app-quotes-item {
         background-position: right;
       }
     }
-    @media (max-width: 767px) {
-      &__download-btn,
-      &__email-address,
-      &__address,
-      &__menu {
-        display: none;
-      }
-    }
   }
 
   app-companies-table {
@@ -1905,22 +1547,18 @@ app-quotes-item {
   .companies-table {
     tr.--selected {
       td {
-        background-color: #f4fbff;
-        border-top-color: $primary-1 !important;
-        border-bottom-color: $primary-1 !important;
+        background-color: $gray-200;
+        border-top-color: $blue-light-600 !important;
+        border-bottom-color: $blue-light-600 !important;
 
         &:first-child {
-          border-left-color: $primary-1 !important;
+          border-left-color: $blue-light-600 !important;
         }
 
         &:last-child {
-          border-right-color: $primary-1 !important;
+          border-right-color: $blue-light-600 !important;
         }
       }
-    }
-
-    @media (max-width: 767px) {
-      padding-bottom: 48px;
     }
   }
 }
@@ -1977,7 +1615,7 @@ app-quotes-item {
     .no-valid-service,
     .no-valid-product {
       input {
-        border: 1px solid $error;
+        border: 1px solid $red-600;
       }
     }
     .editable-description {
@@ -2008,7 +1646,7 @@ app-quotes-item {
       &:before {
         content: "";
         position: absolute;
-        background: $gray-800--old;
+        background: $gray-600;
         width: 100%;
         height: 1px;
         bottom: 0;
@@ -2037,8 +1675,8 @@ app-quotes-item {
           background-size: contain;
         }
         &.active-tab {
-          color: $primary-1;
-          border-bottom: 2px solid $primary-1;
+          color: $blue-light-600;
+          border-bottom: 2px solid $blue-light-600;
           .tab-product {
             background: url("./assets/img/icons/products-blue.svg");
             background-size: contain;
@@ -2057,9 +1695,9 @@ app-quotes-item {
         display: flex;
         justify-content: space-between;
         padding: 15px 25px;
-        border-bottom: 1px solid $gray-500--old;
+        border-bottom: 1px solid $gray-300;
         .radio-container {
-          color: $gray-800--old;
+          color: $gray-600;
         }
       }
       &__content {
@@ -2104,7 +1742,7 @@ app-quotes-item {
 .date-picker {
   .ngb-dp-month-name {
     background: $white;
-    color: $primary-2;
+    color: $gray-900;
     font-size: 16px;
     font-weight: 500;
   }
@@ -2149,17 +1787,17 @@ app-quotes-item {
         background-color: transparent;
       }
       &::after {
-        background-color: #e9f7ff;
+        background-color: $gray-100;
       }
       &:hover::after {
-        background-color: #e9f7ff;
+        background-color: $gray-100;
         z-index: -2;
       }
     }
     &:hover,
     &.faded {
       position: relative;
-      color: $primary-2;
+      color: $gray-900;
       background: transparent;
       z-index: -1;
       &::after { // TODO check this style
@@ -2167,7 +1805,7 @@ app-quotes-item {
         position: absolute;
         width: 62px;
         height: 30px;
-        background-color: #e9f7ff;
+        background-color: $gray-100;
         border-radius: 0;
         left: 50%;
         top: 50%;
@@ -2201,7 +1839,7 @@ app-quotes-item {
     border-radius: 6px;
     .outside {
       opacity: 1;
-      color: $gray-600--old;
+      color: $gray-400;
     }
   }
   .ngb-dp-months {
@@ -2214,38 +1852,14 @@ app-quotes-item {
       transform: translateX(-50%);
       height: 1px;
       width: calc(100% - 16px);
-      background-color: $gray-400--old;
+      background-color: $gray-200;
     }
-  }
-}
-.add-category-aside-add-record {
-  @media (max-width: 767px) {
-    position: fixed;
-    background: rgba(16, 24, 39, 0.4);
-    transition: opacity 0.15s linear;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 2;
   }
 }
 .page-list-ticket .qt-aside-modern__footer,
 .password-page .qt-aside-modern__footer,
 .companies-page .qt-aside-modern__footer {
   display: none;
-
-  @media (max-width: 767px) {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    width: 100%;
-    padding: 16px;
-    background: $white;
-  }
 }
 .new-users-content__modal--content {
   app-user-table-subscription {
@@ -2255,7 +1869,7 @@ app-quotes-item {
         height: 40px;
         padding: 0 3px;
         font-size: 13px;
-        border: 1px solid $gray-500--old;
+        border: 1px solid $gray-300;
         border-radius: 4px;
         align-items: center;
         cursor: pointer;
@@ -2282,7 +1896,7 @@ app-quotes-item {
 
     li {
       font-weight: 500;
-      color: $primary-2;
+      color: $gray-900;
       margin-bottom: 20px;
 
       &:last-child {
@@ -2325,7 +1939,7 @@ app-quotes-item {
         bottom: -22px;
         font-weight: 400;
         font-size: 11px;
-        color: $gray-600--old;
+        color: $gray-400;
       }
     }
     .details-divider {
@@ -2334,9 +1948,9 @@ app-quotes-item {
         position: absolute;
         width: 113%;
         left: -35px;
-        border-top: 1px solid $gray-200--old;
+        border-top: 1px solid $gray-50;
         padding: 16px 0 0 50px;
-        color: $gray-600--old;
+        color: $gray-400;
         font-size: 12px;
         font-weight: 600;
       }
@@ -2383,23 +1997,23 @@ app-quotes-item {
     left: 100px;
   }
   .info-block {
-    background: $gray-400--old;
+    background: $gray-200;
     font-size: 12px;
-    color: $primary-2;
+    color: $gray-900;
     width: 83%;
     margin: 0 15px;
     &:before {
       content: "";
       background: transparent;
-      color: $primary-2;
-      border: 1px solid $primary-2;
+      color: $gray-900;
+      border: 1px solid $gray-900;
       top: 50%;
       transform: translateY(-50%);
     }
     &:after {
       position: absolute;
       content: "i";
-      color: $primary-2;
+      color: $gray-900;
       left: 25px;
       top: 50%;
       transform: translateY(-50%);
@@ -2432,13 +2046,6 @@ app-quotes-item {
     position: absolute;
     top: calc(50% - 4px) !important;
     right: 11px;
-  }
-  .company-time-zone-drop-down {
-    .report-caret-icon {
-      @media (max-width: 767px) {
-        right: 15px;
-      }
-    }
   }
 
   .user-subscription {
@@ -2473,10 +2080,6 @@ app-quotes-item {
 
       input {
         border: none;
-
-        @media (max-width: 767px) {
-          height: 40px !important;
-        }
       }
     }
     .mat-form-field-infix {
@@ -2500,10 +2103,6 @@ app-quotes-item {
 
     .mat-form-field-label {
       top: 10px;
-
-      @media (max-width: 767px) {
-        top: 11px;
-      }
     }
   }
   company-associate {
@@ -2552,16 +2151,16 @@ app-quotes-item {
       outline: none;
       padding: 7px 16px;
       font-weight: 500;
-      color: $primary-2;
+      color: $gray-900;
 
       &:hover,
       &:focus {
-        border-color: $gray-600--old;
+        border-color: $gray-400;
       }
 
       &::placeholder {
         font-weight: 400;
-        color: $gray-600--old;
+        color: $gray-400;
       }
     }
   }
@@ -2572,13 +2171,13 @@ app-quotes-item {
   .mat-autocomplete-panel {
     width: 255px;
     &::-webkit-scrollbar-thumb {
-      background-color: $primary-1;
+      background-color: $blue-light-600;
     }
     .mat-option {
       font-size: 14px;
       transition: all 0.3s;
       &:hover {
-        background-color: $primary-1;
+        background-color: $blue-light-600;
         color: $white;
       }
     }
@@ -2595,7 +2194,7 @@ app-quotes-item {
     font-size: 14px;
     &::placeholder {
       font-size: 14px;
-      color: $gray-500--old;
+      color: $gray-300;
     }
   }
   .mat-form-field-should-float {
@@ -2603,19 +2202,19 @@ app-quotes-item {
       font-size: 14px;
       top: 23px;
       text-transform: uppercase;
-      color: $gray-600--old;
+      color: $gray-400;
     }
   }
   .mat-focused {
     .mat-form-field-underline {
-      background-color: $primary-1;
+      background-color: $blue-light-600;
       .mat-form-field-ripple {
         display: none;
       }
     }
   }
   .mat-form-field-underline {
-    background-color: $gray-400--old;
+    background-color: $gray-200;
   }
   .mat-form-field {
     font-size: 16px;
@@ -2631,7 +2230,7 @@ app-quotes-item {
     top: 33px;
     left: 0;
     padding: 0;
-    color: $gray-600--old;
+    color: $gray-400;
     font-size: 13px;
     text-transform: capitalize;
     letter-spacing: 0;
@@ -2675,8 +2274,8 @@ app-quotes-item {
       cursor: pointer;
       &:hover,
       &.active {
-        background: $gray-800--old;
-        border-left: 2px solid $primary-1;
+        background: $gray-600;
+        border-left: 2px solid $blue-light-600;
       }
     }
     &--lists {
@@ -2696,9 +2295,6 @@ app-quotes-item {
 }
 
 .left-panel-ng2 {
-  @media (max-width: 414px) {
-    margin-bottom: 110px;
-  }
   [class*="left-panel-ng2__content"] {
     margin-bottom: 20px;
   }
@@ -2714,16 +2310,13 @@ app-quotes-item {
     font-weight: 300;
     position: fixed;
     width: 240px;
-    background: $primary-2;
+    background: $gray-900;
     top: 0;
     z-index: 2;
   }
   &__content {
     color: $white;
     margin-top: $header-height;
-    @media (max-width: 414px) {
-      margin-top: 0;
-    }
     .list-item,
     .types-item {
       font-weight: 400;
@@ -2733,8 +2326,8 @@ app-quotes-item {
       cursor: pointer;
       &:hover,
       &.active {
-        background: $gray-800--old;
-        border-left: 2px solid $primary-1;
+        background: $gray-600;
+        border-left: 2px solid $blue-light-600;
       }
     }
     &--lists {
@@ -2792,31 +2385,31 @@ app-quotes-item {
             margin: 0;
             width: 100%;
             border: 0;
-            background-color: $gray-800--old;
-            color: $gray-600--old;
+            background-color: $gray-600;
+            color: $gray-400;
             border: none;
             border-radius: 3px;
             &::placeholder {
               opacity: 1;
-              color: $gray-600--old;
+              color: $gray-400;
             }
           }
           .resent-block {
             width: 100%;
             padding: 10px 0;
-            color: $gray-600--old;
+            color: $gray-400;
             font-size: 13px;
             &__header {
               font-size: 12px;
               text-transform: uppercase;
               margin: 0;
-              color: $gray-600--old;
+              color: $gray-400;
             }
             &__content {
               p {
                 cursor: pointer;
                 transition: all 0.3s;
-                color: $primary-1;
+                color: $blue-light-600;
                 &:hover {
                   color: $white;
                 }
@@ -2857,7 +2450,7 @@ app-quotes-item {
   th,
   td {
     padding: 15px 8px;
-    border-bottom: 1px solid $gray-400--old;
+    border-bottom: 1px solid $gray-200;
     &:first-child {
       padding-left: 15px;
     }
@@ -2873,13 +2466,13 @@ app-quotes-item {
       text-transform: none;
       th {
         font-weight: 500;
-        background: $gray-200--old;
+        background: $gray-50;
         padding: 20px 8px;
       }
     }
     th,
     td {
-      border-bottom: 1px solid $gray-200--old;
+      border-bottom: 1px solid $gray-50;
     }
   }
 }
@@ -2907,8 +2500,6 @@ app-quotes-item {
     margin: 0;
   }
 }
-
-@import "./assets/styles/mobile.scss";
 
 @import "./assets/styles/dropdowns.scss";
 @import "./assets/styles/icons.scss";
@@ -2938,7 +2529,7 @@ ngb-typeahead-window {
 }
 
 .has-error {
-  border-color: $error;
+  border-color: $red-600;
 }
 
 .avoid-clicks {
@@ -2969,7 +2560,7 @@ ngb-typeahead-window {
   right: 15px;
   top: 6px;
   font-size: 13px;
-  color: $error;
+  color: $red-600;
 }
 
 .left-panel-full-wrapper .loading {
@@ -2978,13 +2569,13 @@ ngb-typeahead-window {
   left: auto;
   width: 20px;
   height: 20px;
-  border: 0.1rem solid $gray-800--old;
-  border-top-color: $gray-600--old;
+  border: 0.1rem solid $gray-600;
+  border-top-color: $gray-400;
 }
 
 .invalid-feedback {
   position: absolute;
-  color: #D92D20;
+  color: $red-600;
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;
@@ -2994,8 +2585,6 @@ ngb-typeahead-window {
   position: static;
   margin-top: 8px;
 }
-
-// @import './assets/styles/mobile.scss';
 
 /*** All css files include ***/
 @import "./src/assets/styles/variable";
@@ -3014,7 +2603,7 @@ ngb-typeahead-window {
 .divider-point {
   width: 4px;
   height: 4px;
-  background-color: $gray-600--old;
+  background-color: $gray-400;
   border-radius: 50%;
   margin: 2px 6px;
   display: inline-block;
@@ -3027,13 +2616,6 @@ ngb-typeahead-window {
   display: inline-block;
 }
 //  ticket edit aside
-.ticket-updates__service-tag-completed { // TODO check this style
-  @media (max-width: 767px) {
-    display: flex;
-    width: fit-content;
-    margin: 0;
-  }
-}
 app-ticket-profile-updates-note {
   .ticket-updates__author-line {
     width: 100%;
@@ -3068,7 +2650,7 @@ app-ticket-profile-updates-note {
       margin-right: 8px;
     }
     a {
-      //color: $gray-800--old;
+      //color: $gray-600;
       color: inherit;
     }
     //&:hover {
@@ -3102,22 +2684,12 @@ app-ticket-profile-updates-note {
   font-size: 14px;
   line-height: 17px;
   color: $gray-900;
-
-  @media (max-width: 767px) {
-    font-size: 12px;
-    line-height: 16px;
-  }
 }
 .ticket-updates__add-note { // TODO move to component ?
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
   color: $gray-500;
-
-  @media (max-width: 767px) {
-    font-size: 13px;
-    line-height: 24px;
-  }
 }
 .ticket-updates__update-info {
     font-weight: 400;
@@ -3171,17 +2743,6 @@ app-ticket-profile-updates-note {
   font-weight: 600;
 }
 
-.service-item {
-  @media (max-width: 767px) {
-    margin-bottom: 20px;
-  }
-  &:last-child {
-    @media (max-width: 767px) {
-      margin-bottom: 0;
-    }
-  }
-}
-
 .ticket-updates__date-icon {
   width: 24px !important;
   height: 24px !important;
@@ -3210,49 +2771,13 @@ app-ticket-profile-updates-service-timepicker {
   display: flex;
   flex-direction: column;
 
-  @media (max-width: 767px) {
-    margin-top: 42px;
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .start-end-timer {
-    @media (max-width: 767px) {
-      position: relative;
-      width: 100%;
-      justify-content: space-between;
-    }
-
-    &::before,
-    &::after {
-      @media (max-width: 767px) {
-        position: absolute;
-        content: "Time In";
-        left: 0;
-        top: -28px;
-        color: $primary-2;
-        font-size: 13px;
-        line-height: 20px;
-        letter-spacing: 0;
-        font-weight: 600;
-      }
-    }
-
-    &::after {
-      @media (max-width: 767px) {
-        content: "Time Out";
-        left: calc(50% + 8px);
-      }
-    }
-  }
-
   .time {
     .start,
     .end {
       &::before {
         left: 0;
         top: -28px;
-        color: $primary-2;
+        color: $gray-900;
         font-size: 13px;
         line-height: 20px;
         letter-spacing: 0;
@@ -3269,95 +2794,6 @@ app-ticket-profile-updates-service-timepicker {
   }
 }
 
-app-ticket-profile-form-update,
-ticket-profile-edit-form-update {
-  app-date-picker {
-    @media (max-width: 767px) {
-      width: 100%;
-      margin-top: 42px;
-    }
-
-    .input-group {
-      @media (max-width: 767px) {
-        width: 100%;
-        position: relative;
-      }
-
-      @media (max-width: 767px) {
-        &::after {
-          position: absolute;
-          content: "Service Date";
-          left: 0;
-          top: -28px;
-          color: $primary-2;
-          font-size: 13px;
-          line-height: 20px;
-          letter-spacing: 0;
-          font-weight: 600;
-        }
-      }
-    }
-  }
-
-  .editable-description {
-    @media (max-width: 767px) {
-      margin-top: 56px;
-      overflow: unset;
-    }
-
-    textarea {
-      @media (max-width: 767px) {
-        border-radius: 4px;
-      }
-    }
-
-    &::after {
-      @media (max-width: 767px) {
-        position: absolute;
-        content: "Description";
-        left: 0;
-        top: -28px;
-        color: $primary-2;
-        font-size: 13px;
-        line-height: 20px;
-        letter-spacing: 0;
-        font-weight: 600;
-      }
-    }
-  }
-
-  .service-item:last-child {
-    @media (max-width: 767px) {
-      margin-bottom: 16px;
-    }
-  }
-}
-
-app-ticket-profile-form-update {
-  app-ticket-profile-updates-service-duration {
-    @media (max-width: 767px) {
-      position: relative;
-      width: 100%;
-      margin-right: 0;
-      margin-top: 42px;
-    }
-
-    &::after {
-      @media (max-width: 767px) {
-        position: absolute;
-        content: "Duration picker";
-        left: 0;
-        top: -28px;
-        color: $primary-2;
-        font-size: 13px;
-        line-height: 20px;
-        letter-spacing: 0;
-        font-weight: 600;
-      }
-    }
-  }
-}
-
 .ticket-updates__ticket-photo {
   min-width: 32px;
 }
@@ -3366,9 +2802,9 @@ app-ticket-profile-form-update {
   height: 40px;
   font-size: 13px;
   border-radius: 3px;
-  border: solid 1px $gray-500--old;
+  border: solid 1px $gray-300;
   background-color: $white;
-  color: $gray-800--old;
+  color: $gray-600;
   padding: 10px 12px;
 }
 
@@ -3432,18 +2868,11 @@ app-ticket-profile-form-update {
   &:after {
     @include product-item-input;
     content: "$";
-    left: unset;
     right: 22px;
     font-size: 13px;
     transform: translateY(0px);
     left: 39px;
     font-weight: 500;
-
-    @media (max-width: 767px) {
-      font-size: 14px;
-      transform: unset;
-      left: 14px;
-    }
   }
   input {
     padding-left: 47px !important;
@@ -3476,18 +2905,11 @@ app-ticket-profile-form-update {
   &:after {
     @include product-item-input;
     content: "$";
-    left: unset;
     right: 22px;
     font-size: 13px;
     transform: translateY(0px);
     left: 41px;
     font-weight: 500;
-
-    @media (max-width: 767px) {
-      font-size: 14px;
-      transform: unset;
-      left: 14px;
-    }
   }
   input {
     padding-left: 49px !important;
@@ -3511,22 +2933,12 @@ app-ticket-profile-form-update {
     transform: translateY(0px);
     right: 20px;
     font-weight: 500;
-
-    @media (max-width: 767px) {
-      font-size: 13px;
-      transform: unset;
-      left: 14px;
-    }
   }
   input {
     padding-left: 65px !important;
     padding-right: 32px !important;
     text-align: right;
     width: 100%;
-
-    @media (max-width: 767px) {
-      text-align: left;
-    }
   }
 }
 
@@ -3537,25 +2949,9 @@ app-ticket-profile-form-update {
 .ticket-updates { // TODO check this style
   &__update-block {
     position: relative;
-    border-bottom: 1px solid $gray-400--old;
+    border-bottom: 1px solid $gray-200;
     padding-bottom: 16px;
     margin-bottom: 16px;
-    @media (max-width: 767px) {
-      flex-wrap: wrap;
-    }
-  }
-
-  &__author-line {
-    @media (max-width: 767px) {
-      width: calc(100% - 32px);
-      padding-left: 44px;
-    }
-  }
-
-  app-date-picker {
-    @media (max-width: 767px) {
-      margin-left: auto;
-    }
   }
 }
 
@@ -3600,174 +2996,10 @@ app-ticket-edit-aside {
     z-index: 30;
     .cps-block__content {
       min-height: 106px;
-
-      @media (max-width: 767px) {
-        padding: 0 16px;
-      }
-
-      .product-item__cost-input,
-      .product-item__price-input {
-        input {
-          @media (max-width: 767px) {
-            padding-left: 23px !important;
-          }
-        }
-      }
-
-      .product-item__discount-input {
-        input {
-          @media (max-width: 767px) {
-            padding-left: 27px !important;
-          }
-        }
-      }
-      .start-end-timer .start,
-      .start-end-timer .end {
-        @media (max-width: 767px) {
-          width: 100%;
-        }
-      }
-      .start-end-timer__label:first-child {
-        @media (max-width: 767px) {
-          margin-right: 8px;
-        }
-      }
-      label {
-        @media (max-width: 767px) {
-          //margin-top: 42px; // TODO check this style
-          width: 100%;
-          max-width: 100%;
-          margin-right: 0;
-          position: relative;
-        }
-
-        .icon__time {
-          @media (max-width: 767px) {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            right: 14px;
-          }
-        }
-
-        &::before {
-          @media (max-width: 767px) {
-            left: 0;
-            top: -28px;
-            color: $primary-2;
-            font-size: 13px;
-            line-height: 20px;
-            letter-spacing: 0;
-            font-weight: 600;
-          }
-        }
-
-        input {
-          @media (max-width: 767px) {
-            padding: 10px 14px !important;
-          }
-        }
-
-        .product-item__cost-input {
-          &::after {
-            @media (max-width: 767px) {
-              left: unset;
-              right: 16px;
-            }
-          }
-        }
-
-        .product-item__price-input {
-          &::after {
-            @media (max-width: 767px) {
-              left: unset;
-              right: 16px;
-            }
-          }
-        }
-
-        .product-item__discount-input {
-          &::after {
-            @media (max-width: 767px) {
-              right: 16px;
-            }
-          }
-        }
-      }
-
-      .cps-block__products-block label {
-        @media (max-width: 767px) {
-          margin-top: 42px;
-        }
-      }
-
-      .product-dropdown-new-ng {
-        @media (max-width: 767px) {
-          margin-top: 42px;
-        }
-
-        &::after {
-          @media (max-width: 767px) {
-            position: absolute;
-            content: "Product";
-            left: 0;
-            top: -28px;
-            color: $primary-2;
-            font-size: 13px;
-            line-height: 20px;
-            letter-spacing: 0;
-            font-weight: 600;
-          }
-        }
-      }
-
-      .product-item__cost-input,
-      .product-item__qty-input,
-      .product-item__price-input,
-      .product-item__discount-input {
-        @media (max-width: 767px) {
-          max-width: calc(50% - 8px);
-        }
-      }
-    }
-
-    .qt-aside__buttons { // TODO check this style
-      @media (max-width: 767px) {
-        padding: 0 16px;
-        position: relative;
-        margin-top: 28px;
-      }
-
-      &::after {
-        @media (max-width: 767px) {
-          content: "Add Users to notify";
-          position: absolute;
-          left: 16px;
-          top: -28px;
-          color: $primary-2;
-          font-size: 13px;
-          line-height: 20px;
-          letter-spacing: 0;
-          font-weight: 600;
-        }
-      }
     }
 
     .qt-aside-modern__footer {
       display: none;
-
-      @media (max-width: 767px) {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 16px;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background: $white;
-        z-index: 1;
-      }
     }
 
     .qt-aside__close-modal {
@@ -3777,16 +3009,6 @@ app-ticket-edit-aside {
       left: 26px;
       transform: translate(-50%, -50%);
       display: none;
-
-      @media (max-width: 767px) {
-        display: block;
-      }
-    }
-
-    .cps-block__chat-block {
-      @media (max-width: 767px) {
-        margin-bottom: 16px;
-      }
     }
   }
   app-date-picker {
@@ -3802,10 +3024,6 @@ app-ticket-edit-aside {
   .dropdown-menu-qt {
     .show-mobile {
       display: none;
-
-      @media (max-width: 767px) {
-        display: flex;
-      }
     }
   }
 
@@ -3815,12 +3033,6 @@ app-ticket-edit-aside {
 
     + app-ticket-profile-updates-footer .ticket-updates__update-info {
       margin-top: 8px;
-    }
-
-    .ticket-updates__delete {
-      @media (max-width: 767px) {
-        display: none;
-      }
     }
   }
 
@@ -3834,63 +3046,12 @@ app-ticket-edit-aside {
   }
 }
 
-.new-companies-content__modal {
-  .qt-aside-modern__header {
-    @media (max-width: 767px) {
-      position: relative;
-    }
-  }
-
-  .qt-aside-modern__header-close {
-    @media (max-width: 767px) {
-      position: absolute;
-      background-image: url("/assets/img/icons/close-light.svg");
-      top: 50%;
-      left: 26px;
-      padding: 0;
-      transform: translate(-50%, -50%);
-    }
-  }
-
-  .create-product {
-    .label-name {
-      @media (max-width: 767px) {
-        color: $primary-2;
-      }
-    }
-  }
-
-  .editable-description {
-    @media (max-width: 767px) {
-      min-height: 80px;
-    }
-  }
-
-  .qt-aside-modern__footer {
-    .qt-button {
-      @media (max-width: 767px) {
-        margin: 0;
-      }
-      &.--gray {
-        @media (max-width: 767px) {
-          margin-right: 12px;
-        }
-      }
-    }
-  }
-}
-
 .dropdown-menu.services-container.show {
   min-width: 100%;
 }
 
 .ticket-updates__content {
   flex-grow: 1;
-
-  @media (max-width: 767px) {
-    width: 100%;
-    margin-top: -26px;
-  }
 }
 
 .tooltip {
@@ -3926,7 +3087,7 @@ app-ticket-edit-aside {
   background-color: $white;
   position: fixed;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
-  border: solid 1px $gray-400--old;
+  border: solid 1px $gray-200;
   border-radius: 50%;
   transform: translate(-14px, 30px);
   cursor: pointer;
@@ -3942,14 +3103,6 @@ app-ticket-edit-aside {
   display: flex;
   height: calc(100% - #{$header-height});
 
-  @media (max-width: 767px) {
-    width: 100%;
-    height: 100%;
-    padding-bottom: 52px;
-    overflow: auto;
-    top: 0;
-  }
-
   app-date-picker,
   app-tech-users {
     height: 24px;
@@ -3958,27 +3111,6 @@ app-ticket-edit-aside {
   .editable-description {
     overflow-y: unset;
     overflow-x: unset;
-  }
-}
-
-.ticket-edit-aside {
-  app-ticket-edit-tags {
-    .tag-icon {
-      @media (max-width: 767px) {
-        display: none;
-      }
-    }
-    input {
-      @media (max-width: 767px) {
-        z-index: -1;
-        visibility: hidden;
-      }
-    }
-    .mat-form-field-label-wrapper {
-      @media (max-width: 767px) {
-        display: none;
-      }
-    }
   }
 }
 
@@ -4006,7 +3138,7 @@ app-ticket-edit-aside {
     padding: 26px 24px;
     border-radius: 5px;
     overflow: auto;
-    border: solid 1px $gray-400--old;
+    border: solid 1px $gray-200;
     height: calc(100vh - 300px);
     max-height: 290px;
     box-shadow: 0px 2px 20px 10px #0000000e;
@@ -4044,9 +3176,9 @@ app-ticket-edit-aside {
   }
 
   .btn-second {
-    color: $primary-1;
+    color: $blue-light-600;
     background: $white;
-    border: 1px solid $primary-1;
+    border: 1px solid $blue-light-600;
   }
 
   .new-taxes-area .dropdown-item button {
@@ -4079,7 +3211,7 @@ app-ticket-edit-aside {
   transform: rotate(45deg);
   left: 15px;
   bottom: 42px;
-  border: solid 1px $gray-400--old;
+  border: solid 1px $gray-200;
   border-left: none;
   border-top: none;
 }
@@ -4115,7 +3247,7 @@ app-ticket-edit-aside {
   border-radius: 3px;
   max-width: 250px;
   position: absolute;
-  background-color: $error;
+  background-color: $red-600;
   padding: 8px;
   color: $white;
   font-size: 12px;
@@ -4130,7 +3262,7 @@ app-ticket-edit-aside {
     top: -3px;
     left: 12px;
     transform: rotate(45deg);
-    background-color: $error;
+    background-color: $red-600;
     width: 7px;
     height: 7px;
   }
@@ -4236,10 +3368,6 @@ input.--input-error:hover {
   .mat-form-field {
     background: $white;
     border-radius: 6px;
-
-    @media (max-width: 767px) {
-      width: 100%;
-    }
   }
   .mat-form-field-wrapper {
     padding: 0;
@@ -4291,7 +3419,7 @@ input.--input-error:hover {
     padding: 12px 10px 10px 12px;
     font-size: 13px;
     @include body-m;
-    color: $gray-600--old;
+    color: $gray-400;
   }
   .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
     display: none;
@@ -4303,17 +3431,6 @@ input.--input-error:hover {
   }
   .icon__search-white {
     display: none;
-
-    @media (max-width: 767px) {
-      display: block;
-    }
-  }
-  .left-panel-ng2__content--filters {
-    .qt-dropdown {
-      @media (max-width: 767px) {
-        padding-top: 8px;
-      }
-    }
   }
 }
 
@@ -4395,16 +3512,11 @@ input.--input-error:hover {
 .fr-command.fr-btn.fr-active + .fr-dropdown-menu {
   margin-left: auto !important;
 }
-#userback_button_container {
-  @media (max-width: 767px) {
-    display: none !important;
-  }
-}
 add-category-product {
   display: contents;
   .add-category-container {
     td {
-      background-color: #f4fbff !important;
+      background-color: $gray-200 !important;
     }
   }
 }
@@ -4414,7 +3526,7 @@ add-category-product {
     font-size: 16px;
     line-height: 19px;
     font-weight: 600;
-    color: $primary-2;
+    color: $gray-900;
   }
   .modal-body {
     padding: 0;
@@ -4423,7 +3535,7 @@ add-category-product {
     border: unset;
   }
   label {
-    color: $gray-600--old;
+    color: $gray-400;
     font-size: 13px;
     line-height: 16px;
     font-weight: 500;
@@ -4438,7 +3550,7 @@ add-category-product {
     line-height: 17px;
     height: 36px;
     .disabled {
-      color: $gray-700--old;
+      color: $gray-500;
     }
     .btn-primary {
       font-weight: 600;
@@ -4446,8 +3558,8 @@ add-category-product {
   }
   input {
     border-radius: 8px;
-    border-color: $gray-400--old;
-    color: $primary-2;
+    border-color: $gray-200;
+    color: $gray-900;
   }
   .qt-input-block {
     mat-error {
@@ -4475,38 +3587,9 @@ app-default-services-edit,app-inventory-edit-aside {
   z-index: 999;
 }
 
-.ticket-edit-aside {
-  .qt-taxes-multiselect {
-    @media (max-width: 767px) {
-      position: relative;
-      width: 100%;
-      margin: 42px 0 0;
-    }
-    &::after {
-      @media (max-width: 767px) {
-        position: absolute;
-        content: "Taxes";
-        left: 0;
-        top: -28px;
-        color: #212b36;
-        font-size: 13px;
-        line-height: 20px;
-        letter-spacing: 0;
-        font-weight: 600;
-      }
-    }
-  }
-  .product-item {
-    .product-item__price-input {
-      @media (max-width: 767px) {
-        max-width: 100%;
-      }
-    }
-    .product-item__discount-input {
-      @media (max-width: 767px) {
-        max-width: 100% !important;
-      }
-    }
-  }
+.no-exist-elements {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
-

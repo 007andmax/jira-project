@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { TicketStateService } from 'src/app/components/tickets/tickets/ticket-edit-aside/services/ticket-state.service';
-import { ARCHIVE_QUOTE } from 'src/app/const/confirm';
+import { ARCHIVE_QUOTE, ARCHIVE_QUOTES } from 'src/app/const/confirm';
 import { QUOTE_MODAL_ACTION_LIST } from 'src/app/const/quote';
 import { ModalQuoteComponent } from 'src/app/services/modal/modal-quote/modal-quote.component';
 import { QuoteService } from 'src/app/services/quote/quote.service';
@@ -33,6 +33,7 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
   filter: QuoteFilter = new QuoteFilter();
   sort: QuoteSort = new QuoteSort();
   quotes: Array<Quote> = [];
+  selectAll: boolean = false;
   showPendingPreloader: boolean = false;
   showPreloader: boolean = true;
   public page_number: number = 0;
@@ -81,13 +82,13 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     this.sub.add(getOnInitFilter);
     let changeQuotesArray = this.quoteRealTimeService.changeQuotesArray.subscribe((newChange) => {
       if (newChange.action === 'SALE_QUOTE_CREATED') {
-        return this.quotes.unshift(newChange.data);
+        return this.quotes.unshift(new Quote(newChange.data));
       } else {
         const elemIndex = this.quotes.findIndex((item) => item.id === newChange.data.id);
         if (!this.filter.isExistFilters() && (newChange.data.status === 'ARCHIVED' || newChange.data.status === 'TICKETED' || newChange.data.status === 'INVOICED' || newChange.data.status === 'BILLED')) {
           this.quotes.splice(elemIndex, 1);
         } else {
-          this.quotes[elemIndex] = newChange.data;
+          this.quotes[elemIndex] = new Quote(newChange.data);
 
         }
       }
@@ -104,9 +105,24 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === ARCHIVE_QUOTE) this.onArchiveQuote();
+        if (this.confirmStateService.getConfirmAction() === ARCHIVE_QUOTES) this.onArchiveQuotes();
       }
     })
     this.sub.add(getConfirm);
+  }
+  onSelectAllQuotes(event) {
+    if (event.target.checked) {
+      this.selectAll = true;
+      this.quotes.forEach(item => {
+        if (item.checkStatus(['UNREAD', 'SAVED', 'EXPIRED', 'INVOICED', 'TICKETED', 'CANCELED', 'BILLED'])) item.selected = true;
+      })
+    } else {
+      this.selectAll = false;
+      this.quotes.forEach(item => {
+        item.selected = false;
+      })
+    }
+    this.cd.detectChanges();
   }
   onInvoice(invoiceId) {
     this.quoteStateService.setInvoice(invoiceId);
@@ -122,6 +138,12 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     this.page_number = 0;
     this.quotesListService.setBlockList(false);
     this.quotes = [];
+  }
+  onSelected(quote) {
+    this.quotes.find(item => item.id === quote.id).selected = quote.selected;
+    this.selectAll = (this.quotes.find(item => !item.selected)) ? false : true;
+    this.quotes = [...this.quotes.map(item => new Quote(item))];
+    this.cd.detectChanges();
   }
   getQuotes() {
     if (this.quotesListService.getBlockList()) {
@@ -185,9 +207,14 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
       this.toastrProgressStateService.clear(quote.id);
     });
   }
+  onArchiveQuotes() {
+    let quotes = this.quoteStateService.getQuotesForArchive();
+    this.quoteServices.archiveQuote(quotes.map(item => item.id)).subscribe((res) => {
+    });
+  }
   onArchiveQuote() {
     let quote = this.quoteStateService.getQuoteForArchive();
-    this.quoteServices.archiveQuote(quote.company, quote.id).subscribe((res) => {
+    this.quoteServices.archiveQuote([quote.id]).subscribe((res) => {
     });
   }
   archiveQuote(item) {

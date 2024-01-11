@@ -56,11 +56,9 @@ export class AppComponent implements OnInit {
   showPreloader: boolean = true;
   isUsersInit: boolean = false;
   isCompaniesInit: boolean = false;
-  isDevicesInit: boolean = false;
   qtListHeaaderScroller;
   qtListBodyScroller;
   toggleLeftPanel: boolean = false;
-  toggMobileleLeftPanel: boolean = false;
   hideleLeftPanel: boolean = false;
   showSessionScreen: boolean = false;
   showLockScreen: boolean = false;
@@ -212,17 +210,6 @@ export class AppComponent implements OnInit {
         }
       });
     })
-
-    //  this.userService.getCurrentUser();
-
-
-    this.appService.onCheckMobile();
-    window.addEventListener('resize', this.appService.onCheckMobile);
-
-    this.devicesState.getOnDevices().subscribe(data => {
-      this.isDevicesInit = true;
-      this.onCheckInitAll();
-    })
     this.usersStateService.getOnUsers().subscribe(data => {
       this.isUsersInit = true;
       this.onCheckInitAll();
@@ -233,16 +220,12 @@ export class AppComponent implements OnInit {
 
     })
     this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
-      if (!this.appService.isMobile && this.state !== 'help-center') {
+      if (this.state !== 'help-center') {
         if (data) $("#aside-left-panel").width("");
         if (!data && localStorage.getItem("width-left-aside") && Math.ceil($("#aside-left-panel").width()) == (64 || 280)) $("#aside-left-panel").outerWidth(localStorage.getItem("width-left-aside"));
         if (!data && !localStorage.getItem("width-left-aside")) $("#aside-left-panel").outerWidth(280);
       }
       this.toggleLeftPanel = data;
-      this.cd.detectChanges();
-    })
-    this.leftPanelStateService.onToggleMobileLeftPanel.subscribe(data => {
-      this.toggMobileleLeftPanel = data;
       this.cd.detectChanges();
     })
     this.leftPanelStateService.onHideLeftPanel.subscribe(data => {
@@ -300,10 +283,6 @@ export class AppComponent implements OnInit {
       if (this.router.url === "/" && this.currentUser.role === "SUPER_ADMIN" && this.state == '') this.router.navigate(
         [`${data.techDomain}/support-page/`]);
     })
-    this.appService.onToggleMobileAside.subscribe(data => {
-      if (data) document.querySelector("html").classList.add("--scrollLock");
-      if (!data) document.querySelector("html").classList.remove("--scrollLock");
-    })
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
       this.state = data;
       if (this.state === "ticket-detail") {
@@ -316,7 +295,7 @@ export class AppComponent implements OnInit {
           localStorage.setItem("width-left-aside", "280");
         }
         if (!localStorage.getItem("width-left-aside")) $("#aside-left-panel").outerWidth(280);
-        if (this.appService.isMobile || (this.currentUser && this.currentUser.role === "SUPER_ADMIN") || this.state === 'help-center') {
+        if ((this.currentUser && this.currentUser.role === "SUPER_ADMIN") || this.state === 'help-center') {
           $("#aside-left-panel").width("auto");
         }
       }

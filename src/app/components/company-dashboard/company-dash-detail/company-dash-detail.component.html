@@ -5,7 +5,7 @@
     ></div>
     <div class="profile-cmp-board qt-df">
         <img
-            [src]="getCompanyLogoUrl()"
+            [src]="companiesStateService.getCompanyLogoUrl(companyDetail)"
             class="profile-cmp-board__image"
             alt
             *ngIf="checkLogo()"
@@ -14,7 +14,7 @@
             class="cmp-profile-dp qt-df"
             *ngIf="!checkLogo()"
         >
-            <figure class="qt-dflex">{{getCharacter(companyDetailing.name)}}</figure>
+            <figure class="qt-df qt-ai-c qt-jc-c compamy-name-charter">{{getCharacter(companyDetailing.name)}}</figure>
         </div>
         <div class="cmp-profile-user qt-df">
             <h4>{{companyDetailing.name}}</h4>
@@ -30,14 +30,14 @@
                 <img
                     *ngFor="let item of arrayOne(selectedRating); let i = index;"
                     class="pointer"
-                    src="html/assets/img/company-details/rating-filled.svg"
+                    src="html/assets/img/icons/rating-filled.svg"
                     alt="rating"
                     (click)="changeRating(i, 'selected')"
                 >
                 <img
                     *ngFor="let item of arrayOne(unSelectedRating); let i = index;"
                     class="pointer"
-                    src="html/assets/img/company-details/rating.svg"
+                    src="html/assets/img/icons/rating.svg"
                     alt="rating"
                     (click)="changeRating(i, 'unselected')"
                 >
@@ -89,8 +89,8 @@
                     <div class="qt-df qt-ai-c qt-jc-sb qt-w100">
                         <div
                             class="users-table__name--avatar"
-                            [ngStyle]="{'background':  getUserAvatarUrl(user)}"
-                            [textContent]="getNameForAvatar(user)"
+                            [ngStyle]="{'background':  usersStateService.getUserAvatarUrl(user)}"
+                            [textContent]="usersStateService.getNameForAvatar(user)"
                         ></div>
                         <div class="users-table__name-wrap">
                             <div
@@ -158,12 +158,15 @@
                 ></preview-phone-mask>
             </a>
             <address>{{companyDetailing.addresses_name}}</address>
+            <span class="qt-fs-13 qt-mb-8 dfn qt-color-gray-900">
+                {{companyDetailing?.addresses[0]?.postalCode}}
+            </span>
             <a
                 (click)="openMap(content,companyDetailing.addresses[0])"
                 class="btn btn-outline"
             >
                 <img
-                    src="html/assets/img/company-details/location.svg"
+                    src="html/assets/img/icons/map-pin-blue.svg"
                     alt="location"
                 >
                 Get Direction
@@ -186,12 +189,15 @@
             <address>
                 {{companyDetailing.shipping_addresses_name}}
             </address>
+            <span class="qt-fs-13 qt-mb-8 dfn qt-color-gray-900">
+                {{companyDetailing?.addresses[1]?.postalCode}}
+            </span>
             <a
                 (click)="openMap(content,companyDetailing.addresses.length > 1 ? companyDetailing.addresses[1] : null)"
                 class="btn btn-outline"
             >
                 <img
-                    src="html/assets/img/company-details/location.svg"
+                    src="html/assets/img/icons/map-pin-blue.svg"
                     alt="location"
                 >
                 Get Direction
@@ -253,7 +259,7 @@
                             >
                                 <img
                                     class="qt-mr-4"
-                                    src="html/assets/img/company-details/edit-blue.svg"
+                                    src="html/assets/img/icons/edit-blue.svg"
                                     alt="user"
                                 >
                                 Edit Suggestions
@@ -276,12 +282,21 @@
             <div class="small-title">Industry</div>
             <p>{{companyDetailing.clientIndustry}}</p>
         </div>
-        <div
-            class="other-info-col qt-df"
-            *ngIf="companyDetailing?.description !== undefined && companyDetailing?.description !== null && companyDetailing?.description !== ''"
-        >
+        <div class="other-info-col qt-df">
             <div class="small-title">Notes</div>
-            <p>{{companyDetailing.description}}</p>
+            <textarea
+                class="qt-editable-input ng-untouched ng-pristine ng-valid"
+                appTextArea
+                placeholder="Write note here..."
+                [(ngModel)]="companyDetailing.description"
+                (blur)="onChangeNote($event)"
+                [minHeight]="50"
+                [maxLines]="50"
+                [lineHeight]="true"
+                maxlength="1000"
+                cols="2"
+                rows="1"
+            ></textarea>
         </div>
     </div>
     <div
@@ -290,7 +305,7 @@
     >
         <div class="small-title">Primary Contact</div>
         <div class="contact-info qt-df">
-            <figure class="qt-dflex no-user-init uppercase">
+            <figure class="qt-dflex no-user-init uppercase qt-df qt-ai-c qt-jc-c">
                 {{getCharacter(companyDetailing?.primaryContact.firstName)}}
             </figure>
             <div class="primary-contact-info qt-df">
@@ -323,6 +338,8 @@
             [selectedTag]="companyDetail.tags"
             [placement]="'top'"
             [isDisabled]="!getPermissions('EDIT_COMPANIES')"
+            [companyId]="companyDetail.id"
+            [isRemoveCompanySelectedTag]="false"
             (tagsChange)="onChangeTags($event)"
         ></app-company-tags>
     </div>
@@ -336,7 +353,7 @@
             class="btn btn-outline download-agent"
         >
             <img
-                src="html/assets/img/company-details/download.svg"
+                src="html/assets/img/icons/download.svg"
                 alt="download"
             >
             Download Agent

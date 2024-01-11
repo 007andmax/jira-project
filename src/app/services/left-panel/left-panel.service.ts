@@ -64,6 +64,7 @@ export class LeftPanelService {
       || state === 'new-billable-invoices'
       || state === 'quotes-component'
       || state === 'new-payments-ng2'
+      || state == 'contract-statistics'
       || state === 'new-contracts')
   }
   isInventoryState(state) {
@@ -84,11 +85,12 @@ export class LeftPanelService {
     return (state === 'new-reports' ||
       state === 'byProducts' ||
       state === 'byCustomers' ||
+      state === 'block-time-report' ||
       state === 'byTaxes' ||
       state === 'common-commissions' ||
       state === 'detailed-commissions' ||
       state === 'accounts-receivable' ||
-      state === 'accounting-report' ||
+      state === 'customer-transaction-history' ||
       state === 'payments-report' ||
       state === 'remote-access' ||
       state === 'tech-sales' ||

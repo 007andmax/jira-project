@@ -18,6 +18,7 @@ export class QuotesItemComponent implements OnInit {
   createdUser: User;
   @Input() quote: Quote;
   @Output() onResend = new EventEmitter<any>();
+  @Output() onSelected = new EventEmitter<any>();
   @Output() onConvertToBillable = new EventEmitter<any>();
   @Output() onConvertToInvoice = new EventEmitter<any>();
   @Output() onConvertToTicket = new EventEmitter<any>();
@@ -31,7 +32,7 @@ export class QuotesItemComponent implements OnInit {
   @Output() onCopy = new EventEmitter<any>();
   @Output() onTicket = new EventEmitter<any>();
   @Output() onInvoice = new EventEmitter<any>();
-  constructor(private usersStateService: UsersStateService,
+  constructor(public usersStateService: UsersStateService,
     private permissionsService: PermissionsService,
     public ticketsListService: TicketsListService,
     public customerPortalStateService: CustomerPortalStateService,
@@ -43,11 +44,6 @@ export class QuotesItemComponent implements OnInit {
   openInvoiceTikcet() {
     if (this.quote.status === "TICKETED" && !this.customerPortalStateService.isCustomerPortal) this.onTicket.emit(this.quote.ticketId);
     if (this.quote.status === "INVOICED") this.onInvoice.emit(this.quote.invoiceId);
-  }
-  getNameForAvatar() {
-    if (!this.createdUser) return '';
-    if (!this.createdUser.avatar) return `${(this.createdUser.firstName) ? this.createdUser.firstName[0].toUpperCase() : ''}${(this.createdUser.lastName) ? this.createdUser.lastName[0].toUpperCase() : ''}`;
-    return '';
   }
   public getUserName(user) {
     return (user) ? `${user.firstName} ${user.lastName}` : '';
@@ -108,12 +104,11 @@ export class QuotesItemComponent implements OnInit {
     if (this.toastrProgressStateService.check(this.quote.id)) return;
     this.onResend.emit(this.quote);
   }
-  public checkStatus(quote, statusForShowingArray) {
-    const elems = statusForShowingArray.filter((item) => item.toLowerCase() === quote.status.toLowerCase());
-    return elems.length > 0;
-  }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
+  }
+  selectQuote(event) {
+    this.onSelected.emit(this.quote);
   }
   public getStatusText(status) {
     return status.toLowerCase()

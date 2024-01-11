@@ -3,12 +3,9 @@
 .breadcrumbs {
     display: flex;
     align-items: center;
-    @media (max-width: 767px) {
-        display: none;
-    }
     > div:last-child {
       span {
-        color: $gray-700--old;
+        color: $gray-500;
       }
     }
     div {
@@ -16,13 +13,13 @@
         align-items: stretch;
 
         span {
-            color: $gray-600--old;
+            color: $gray-400;
             line-height: 15px;
         }
 
         &.breadcrumbs-path {
             span {
-                color: $gray-600--old;
+                color: $gray-400;
             }
         }
 
@@ -31,7 +28,7 @@
           margin-right: 3px;
           font-size: 17px;
           line-height: 1;
-          color: $gray-600--old;
+          color: $gray-400;
         }
     }
 }

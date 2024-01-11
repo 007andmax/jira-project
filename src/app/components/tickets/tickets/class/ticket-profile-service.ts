@@ -3,34 +3,18 @@ import { CurrentUserCompany } from 'src/class/current-user/current-user-company'
 import { Service } from 'src/app/interfaces/service/service';
 
 export class TicketProfileService {
-    billable: boolean;
-    billableQuantity: number;
-    commissionRate: number;
     completed: boolean;
-    createdAt: number;
     date: number;
-    deletedAt: number;
     description: string;
     discountAmount: number;
-    discountSum: number;
     discountType: string;
     durationEnd: number;
     durationStart: number;
-    editedExpense: boolean;
     id: string;
-    isServiceExpense: boolean;
     item: Service;
-    itemCompany: CurrentUserCompany;
     itemOrder: number;
-    price: number;
     quantity: number;
-    serviceAgreementIdForOtherContracts: string;
-    serviceExpense: boolean;
-    sum: number;
-    taxSum: number;
     taxes: any;
-    totalSum: number;
-    updatedAt: number;
     user: CurrentUser;
     validateQuantity: boolean = true;
     constructor(data = null) {
@@ -38,11 +22,23 @@ export class TicketProfileService {
             for (const key in data) {
                 this[key] = data[key];
             }
+            this.taxes = this.item.taxes;
         }
     }
+    /**
+ * @description Set new value "user"
+ * @param {CurrentUser} data - Object of Current User
+ */
     public setUser(data) {
         this.user = data;
     }
+    /**
+* @description Set new value "date"
+* @param {Number} day - day from DatePicker
+* @param {Number} month - month from DatePicker
+* @param {Number} year - year from DatePicker
+* @param {Number} timeOffset - time offset from Current Tech Company
+*/
     public setDate(day, month, year, timeOffset) {
         let current = new Date();
         if (day !== current.getDate() || current.getMonth() !== (month - 1)) {
@@ -55,24 +51,43 @@ export class TicketProfileService {
             this.date = finalDate.getTime();
         }
     }
+    /**
+* @description Set new value "completed"
+* @param {Number} day - day from DatePicker
+* @param {Number} month - month from DatePicker
+* @param {Number} year - year from DatePicker
+*/
     public setComplated(day, month, year) {
         let current = new Date();
         let dateDP = new Date(year, month - 1, day);
         if (current.getDate() === dateDP.getDate() && current.getMonth() === dateDP.getMonth() || dateDP.getTime() < current.getTime()) this.completed = true;
         if (dateDP.getTime() > current.getTime()) this.completed = false;
     }
+    /**
+* @description Set new value "durationStart"
+* @param {Number} data - new value "durationStart"
+*/
     public setDurationStart(data) {
         this.durationStart = data;
     }
+    /**
+* @description Set new value "durationEnd"
+* @param {Number} data - new value "durationEnd"
+*/
     public setDurationEnd(data) {
         this.durationEnd = data;
     }
+    /**
+* @description Set new value "quantity"
+* @param {Number} data - new value "quantity"
+*/
     public setQuantity(data) {
         this.quantity = data;
     }
-    public setBillableQuantity(data) {
-        this.billableQuantity = data;
-    }
+    /**
+* @description Set new value "completed"
+* @param {Boolean} data - new value "completed"
+*/
     public setCompleted(data) {
         this.completed = data;
     }
@@ -100,6 +115,8 @@ export class TicketProfileService {
     }
     public getDateForUpdate(id) {
         let user = (!this.user) ? { id: "" } : this.user;
+        let item = {};
+        for (const key in this.item) if (this.item[key] && key !== "taxes") item[key] = this.item[key];
         return {
             serviceExpense: {
                 completed: this.completed,
@@ -110,9 +127,10 @@ export class TicketProfileService {
                 durationEnd: this.durationEnd,
                 durationStart: this.durationStart,
                 id: this.id,
-                item: this.item,
+                item: item,
                 quantity: this.quantity,
                 user: user,
+                taxes: this.taxes
             },
             ticketUpdateId: id
         }

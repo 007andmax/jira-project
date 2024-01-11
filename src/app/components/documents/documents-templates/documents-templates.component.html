@@ -34,10 +34,10 @@
             *ngIf="showPreloader"
         ></div>
         <div
-            class="no-exist-templates"
-            *ngIf="!showPreloader && list.length === 0"
+            class="no-exist-elements"
+            *ngIf="!showPreloader && list.length == 0"
         >
-            No templates
+            We couldn't find any results
         </div>
         <div
             class

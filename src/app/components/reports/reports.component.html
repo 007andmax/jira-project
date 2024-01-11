@@ -23,10 +23,7 @@
 </div>
 <div class="outsideheader">
     <div class="reports-all">
-        <div
-            class="reports-col"
-            *ngIf="getPermissions('VIEW_SALES_REPORT') || getPermissions('VIEW_TAXES_REPORT')"
-        >
+        <div class="reports-col">
             <app-report-list-item
                 *ngIf="getPermissions('VIEW_SALES_REPORT')"
                 [img]="'/html/assets/img/icons/Report-sales.svg'"
@@ -72,10 +69,7 @@
                 [listStates]="getListStates('DEVICES',searchText)"
             ></app-report-list-item>
         </div>
-        <div
-            class="reports-col"
-            *ngIf="getPermissions('VIEW_PERFORMANCE_REPORT') || getPermissions('VIEW_SALES_REPORT')"
-        >
+        <div class="reports-col">
             <app-report-list-item
                 *ngIf="getPermissions('VIEW_PERFORMANCE_REPORT')"
                 [img]="'/html/assets/img/icons/Report-Perforrmance.svg'"
@@ -84,7 +78,7 @@
                 [listStates]="getListStates('PERFORMANCE',searchText)"
             ></app-report-list-item>
             <app-report-list-item
-                *ngIf="getPermissions('VIEW_PERFORMANCE_REPORT')"
+                *ngIf="getPermissions('VIEW_TICKET_REPORT')"
                 [img]="'/html/assets/img/icons/report-tickets.svg'"
                 [title]="'Tickets'"
                 [listTitles]="getListTitles('TICKETS',searchText)"

@@ -26,7 +26,10 @@
         class="ticket-detail-page-content"
         [hidden]="showPreloader"
     >
-        <div class="ticket-detail-page-content-main">
+        <div
+            class="ticket-detail-page-content-main"
+            [ngClass]="{'--hide-sidebar-info':!toggleRigthPanelContainer}"
+        >
             <div class="ticket-detail-page-content__body">
                 <div class="ticket-detail-page-content__body-inner">
                     <ticket-detail-info-status [ticketProfile]="ticketProfile"></ticket-detail-info-status>
@@ -50,7 +53,6 @@
                                 id="ticket-subject"
                                 class="--editable ticket-detail-page-title__input"
                                 [value]="ticketProfile.subject"
-                                [readonly]="appService.checkMobile()"
                             >
                         </div>
                     </div>
@@ -77,7 +79,7 @@
                                                 (click)="showDetailUser()"
                                             ></span>
                                             <span
-                                                *ngIf="!checkExistUser()"
+                                                *ngIf="checkArchivedUser()"
                                                 class="qt-color-red-600"
                                             >
                                                 (archived)
@@ -110,7 +112,7 @@
                             </div>
                         </div>
                         <div class="qt-df qt-ai-fs qt-mt-24 qt-mb-24">
-                            <div class="ticket-detail-page__desc-icon qt-mr-16">
+                            <div class="ticket-detail-page__desc-icon qt-mr-16 qt-fs-0">
                                 <span
                                     class="icon__email qt-sz-16 qt-dib"
                                     *ngIf="ticketProfile.ticketSource === 'FROM_EMAIL'"
@@ -144,7 +146,7 @@
                                         class="ticket-detail-page__editor pointer"
                                         [ngClass]="{'no-edit-note':!getPermissions('EDIT_TICKETS')}"
                                         (blur)="modeDescription = 'edit'"
-                                        [attr.contenteditable]="!appService.checkMobile() && getPermissions('EDIT_TICKETS')"
+                                        [attr.contenteditable]="getPermissions('EDIT_TICKETS')"
                                         id="ticket-note"
                                         placeholder="Enter description here"
                                     ></div>
@@ -184,21 +186,6 @@
                         (onCloseForm)="showEditUpdate = false"
                         *ngIf="showEditUpdate"
                     ></ticket-detail-profile-edit-updates>
-                    <!-- <app-ticket-edit-tags
-                [selectedTag]="ticketProfile.tags"
-                (tagsChange)="onChangeTags($event)"
-                [hidden]="showAddAssignedUser"
-            ></app-ticket-edit-tags> -->
-                    <!-- <app-ticket-profile-attachments [attachments]="ticketProfile.attachments"></app-ticket-profile-attachments>
-
-            <ticket-profile-edit-form-update
-                [ngClass]="{'--open':openedMobileEditUpdate}"
-                (onClosed)="openedMobileEditUpdate = false"
-                [hidden]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || !appService.checkMobile()"
-                #editUpdateForm
-                [ticket]="ticketProfile"
-                [lisUpdateUser]="lisUpdateUser"
-            ></ticket-profile-edit-form-update> -->
                 </div>
             </div>
             <div
@@ -240,7 +227,10 @@
                 class="ticket-detail-page-content__sidebar-info"
                 *ngIf="!showPreloader && !customerPortalStateService.isCustomerPortal"
             >
-                <div class="ticket-detail-page-content__sidebar-info-inner">
+                <div
+                    class="ticket-detail-page-content__sidebar-info-inner"
+                    *ngIf="toggleRigthPanelContainer"
+                >
                     <ticket-detail-contact-details
                         *ngIf="typeRigthDetailAside == 'CONTACT'"
                         [ticketProfile]="ticketProfile"
@@ -260,6 +250,15 @@
                         (onViewDocument)="onViewDocument($event)"
                         (onShowMore)="onShowMore('DOCUMENT')"
                     ></ticket-detail-documents>
+                    <ticket-detail-devices
+                        *ngIf="toggleRigthPanel"
+                        (onShowMore)="onShowMore('DEVICES')"
+                    ></ticket-detail-devices>
+                    <ticket-detail-tickets
+                        *ngIf="toggleRigthPanel"
+                        [ticketProfile]="ticketProfile"
+                        (onShowMore)="onShowMore('TICKETS')"
+                    ></ticket-detail-tickets>
                     <ticket-detail-documents-preview
                         [document]="ticketStateService.getDocumentForPreview()"
                         *ngIf="ticketStateService.getDocumentForPreview()"
@@ -279,10 +278,11 @@
                         *ngIf="typeRigthDetailAside == 'DEVICES'"
                         (onClose)="onCloseDetails()"
                     ></ticket-detail-devices-details>
-                    <ticket-detail-devices
-                        *ngIf="toggleRigthPanel"
-                        (onShowMore)="onShowMore('DEVICES')"
-                    ></ticket-detail-devices>
+                    <ticket-detail-tickets-details
+                        [ticketProfile]="ticketProfile"
+                        *ngIf="typeRigthDetailAside == 'TICKETS'"
+                        (onClose)="onCloseDetails()"
+                    ></ticket-detail-tickets-details>
                 </div>
             </div>
             <div
@@ -313,23 +313,13 @@
                 >
                     <div class="icon__documents qt-sz-20 qt-bg-contain"></div>
                 </div>
+                <div
+                    class="ticket-detail-page-content__sidebar-menu-button"
+                    (click)="openDetailRigthPanel('TICKETS')"
+                >
+                    <div class="icon__tickets-detail-contact qt-sz-20 qt-bg-contain"></div>
+                </div>
             </div>
         </div>
     </div>
-    <!-- <div
-        class="qt-aside-modern__footer updata-close"
-        [hidden]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
-    >
-        <button
-            class="qt-button"
-            (click)="updateAndCloseMobile()"
-        >
-            <span>Update & Close</span>
-        </button>
-    </div>
-    <div
-        class="mobile-action-btn"
-        (click)="showModalAddUpdate()"
-        [hidden]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
-    ></div> -->
 </div>

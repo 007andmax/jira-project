@@ -4,7 +4,7 @@
     white-space: pre-line;
 }
 .not-completed-status {
-    background: $error !important;
+    background: $red-600 !important;
 }
 pre {
     margin: unset;
@@ -15,4 +15,7 @@ pre {
     border: unset;
     border-radius: unset;
     font-family: unset;
+}
+.service-date {
+    width: 162px;
 }

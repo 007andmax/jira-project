@@ -6,7 +6,7 @@
     [selectedType]="selectedType"
   ></app-contracts-aside-top>
   <div class="qt-inputs-row qt-mt-24">
-    <div class="qt-input-block qt-f50 qt-flex-md-100">
+    <div class="qt-input-block qt-f50">
       <div class="qt-inputs-row">
         <div class="qt-input-block qt-f50">
           <div class="qt-input-block__label">Start Date</div>
@@ -19,7 +19,7 @@
             (onChange)="onChangeStartDate($event)"
           ></app-date-picker>
         </div>
-        <div class="qt-input-block qt-f50 qt-flex-md-100">
+        <div class="qt-input-block qt-f50">
           <div class="qt-input-block__label">Review Date</div>
           <app-date-picker
             #reviewDateDP
@@ -52,7 +52,7 @@
     </div>
   </div>
   <div class="qt-inputs-row qt-inputs-row__divider"></div>
-  <div class="qt-mb-16 qt-fw-600 qt-fs-15 qt-lh-147 qt-color-dark">
+  <div class="qt-mb-16 qt-fw-600 qt-fs-15 qt-lh-147 qt-color-gray-900">
     Check this services you want for this customer
   </div>
   <table
@@ -137,7 +137,7 @@
     (onClose)="showAddService = false"
   ></app-contracts-aside-edit-hourly-add-default-service>
   <button
-    class="qt-mb-24 qt-btn --outline --small"
+    class="qt-button --gray --sm qt-mb-24"
     (click)="showAddService = true"
     *ngIf="!showAddService"
   >

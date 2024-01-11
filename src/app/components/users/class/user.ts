@@ -36,7 +36,6 @@ export class User {
     secondaryEmail: any;
     startPage: any;
     status: any;
-    defaultSubscriptions: UserDefaultSubscription;
     customSubscriptions: Array<UserCustomSubscription>;
     techRole: any;
     twoFactorAuthType: string;
@@ -55,11 +54,13 @@ export class User {
             for (const key in data) {
                 this[key] = data[key];
             }
-            this.defaultSubscriptions = new UserDefaultSubscription(data.defaultSubscriptions);
             this.customSubscriptions = data.customSubscriptions.map(item => new UserCustomSubscription(item));
             this.userEmailNotifications = new UserEmailNotifications(data.userEmailNotifications);
             this.customerCompaniesInfo = (data.customerCompaniesInfo) ? data.customerCompaniesInfo.map(item => new UserCustomerCompaniesInfo(item)) : [];
+            this.customerCompaniesInfo.sort((a, b) => (a.clientCompanyName.toLowerCase() > b.clientCompanyName.toLowerCase()) ?
+                1 : ((b.clientCompanyName.toLowerCase() > a.clientCompanyName.toLowerCase()) ? -1 : 0))
             this.permissions = (data.permissions) ? data.permissions : [];
+
         }
 
     }
@@ -102,16 +103,10 @@ export class User {
         for (const key in data) {
             this[key] = data[key];
         }
-        this.defaultSubscriptions = new UserDefaultSubscription(data.defaultSubscriptions);
         this.customSubscriptions = data.customSubscriptions.map(item => new UserCustomSubscription(item));
         this.customerCompaniesInfo = data.customerCompaniesInfo.map(item => new UserCustomerCompaniesInfo(item));
-    }
-    /**
-  * @description Set list Default Subscriptions
-  * @param {Array<UserDefaultSubscription>} data - Array Objects Default Subscriptions 
-*/
-    public changeDefaultSubscriptions(data) {
-        this.defaultSubscriptions = data;
+        this.customerCompaniesInfo.sort((a, b) => (a.clientCompanyName.toLowerCase() > b.clientCompanyName.toLowerCase()) ?
+            1 : ((b.clientCompanyName.toLowerCase() > a.clientCompanyName.toLowerCase()) ? -1 : 0))
     }
     /**
   * @description Set list Custom Subscriptions

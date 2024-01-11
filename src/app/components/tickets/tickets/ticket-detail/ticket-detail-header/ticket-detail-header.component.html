@@ -8,7 +8,7 @@
             <span [textContent]="'Tkt #' + ticketProfile.number"></span>
         </div>
     </div>
-    <div class="qt-df qt-ai-c qt-pos-rel">
+    <div class="qt-df qt-ai-c qt-pos-rel ticket-detail-page__management-block">
         <div class="qt-button qt-button-timer --gray qt-ml-12">
             <span class="icon__timer qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon qt-fs-0"></span>
             {{dateTxt}}
@@ -76,13 +76,13 @@
                     <div class="icon__quick-support-strip qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
                     Quick Support
                 </div>
-                <div
+                <!-- <div
                     class="qt-button qt-button--with-icon --gray --md pointer qt-mr-8"
                     *ngIf="!customerPortalStateService.isCustomerPortal"
                 >
                     <div class="icon__merge qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
                     Merge Ticket
-                </div>
+                </div> -->
             </div>
         </div>
         <div

@@ -3,14 +3,14 @@
     [ngClass]="{'--selected':company.selected}"
 >
     <div class="companies-table__check">
-      <label class="qt-checkbox pointer">
-        <input
-          type="checkbox"
-          [(ngModel)]="company.selected"
-          (change)="onSelectCompany($event)"
-        >
-        <span></span>
-      </label>
+        <label class="qt-checkbox pointer">
+            <input
+                type="checkbox"
+                [(ngModel)]="company.selected"
+                (change)="selectCompany($event)"
+            >
+            <span></span>
+        </label>
     </div>
     <div
         class="companies-table__name pointer"
@@ -29,7 +29,7 @@
                     [ngClass]="{'with-logo': checkLogo()}"
                 >
                     <img
-                        [src]="getCompanyLogoUrl()"
+                        [src]="companiesStateService.getCompanyLogoUrl(company)"
                         alt
                         *ngIf="checkLogo()"
                     >
@@ -43,7 +43,6 @@
                         class="qt-fw-500"
                         [textContent]="company.name"
                     ></p>
-                    <p class="qt-d-none">979-431-8937</p>
                 </div>
             </div>
         </a>
@@ -123,7 +122,7 @@
             [link]="getCompanyDashboardLink()"
             target="_blank"
             appRightClickBlank
-            [textContent]="countDevices"
+            [textContent]="getDeviceCount()"
         >
         </a>
     </div>
@@ -194,7 +193,7 @@
                     *ngIf="getPermissions('ARCHIVE_COMPANIES')"
                 >
                     <i class="qt-sz-20 qt-mr-12 qt-bg-contain icon__archive"></i>
-                    Archive
+                    {{company.isExample ? 'Delete' : 'Archive'}}
                 </button>
             </div>
         </div>

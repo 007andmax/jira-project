@@ -1,0 +1,169 @@
+@import './src/assets/styles/variable';
+
+.ticket-fileupload {
+    margin-top: 32px;
+}
+
+.qt-page-list {
+    padding: 0;
+    background-color: $white;
+}
+
+
+@import "./src/assets/styles/variable";
+
+/deep/ .ticket-table {
+    th {
+        white-space: nowrap;
+    }
+
+    td {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}
+
+super-admin-companies-item {
+    display: contents;
+}
+
+.pengind-loading {
+    bottom: 20px;
+    top: auto;
+}
+
+.qt-page-list__container {
+    display: flex;
+}
+.qt-page-list__body {
+  min-width: 1376px;
+}
+
+/deep/ .qt-table-modern .ticket-table__company {
+    max-width: 300px;
+}
+.qt-page-list__header.--sticky {
+    display: flex;
+    margin: 0;
+    height: 56px;
+    padding: 0px 32px;
+    background-color: $gray-50;
+    border-bottom: 1px solid $gray-200;
+}
+/deep/ .qt-page-list__header-title {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0;
+    color: $gray-900;
+}
+.container-page {
+    height: 100%;
+    overflow: hidden;
+    background-color: $white;
+}
+
+// Flexbox setup.
+.container-page {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-align-content: stretch;
+    -ms-flex-line-pack: stretch;
+    align-content: stretch;
+    -webkit-align-items: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+
+    &>aside {
+        -webkit-order: 0;
+        -ms-flex-order: 0;
+        width: 238px;
+        order: 0;
+        -webkit-flex: 0 0 auto;
+        -ms-flex: 0 0 auto;
+        flex: 0 0 auto;
+        -webkit-align-self: auto;
+        -ms-flex-item-align: auto;
+        align-self: auto;
+        height: 100vh;
+
+        &::-webkit-scrollbar {
+            width: 5px;
+        }
+    }
+
+    &>main {
+        -webkit-order: 0;
+        -ms-flex-order: 0;
+        order: 0;
+        -webkit-flex: 1 1 auto;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        -webkit-align-self: auto;
+        -ms-flex-item-align: auto;
+        align-self: auto;
+    }
+}
+
+.container-page>aside,
+.container-page>main {
+    overflow: auto;
+}
+aside {
+    background-color: $gray-50;
+}
+.app-left-panel-super-admin-categories {
+    display: block;
+    min-width: 234px;
+    background-color: $gray-50;
+    color: $white;
+    transition: width 300ms;
+}
+.resize-handle--x {
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+
+    position: relative;
+    box-sizing: border-box;
+    width: 2px;
+    height: 100%;
+    border-left-width: 1px;
+    border-left-style: solid;
+    border-left-color: $gray-900;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: $gray-900;
+    cursor: ew-resize;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    &:before {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        right: 100%;
+        height: 100vh;
+        width: 2px;
+        margin-top: -18px / 2;
+        border-left-color: $gray-100;
+        border-left-width: 1px;
+        border-left-style: solid;
+    }
+}

@@ -37,17 +37,15 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
   showPendingPreloader: boolean = false;
   idEditTicket: string = '';
   ticketsStatus: Array<TicketStatus> = [];
+  toggleFilter: boolean = false;
   container = document.body.querySelector(".main-container");
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
     private ticketStateService: TicketStateService,
     public cd: ChangeDetectorRef,
-    private appService: AppService,
-    private router: Router,
+    public appService: AppService,
     private leftPanelService: LeftPanelService,
     private companiesStateService: CompaniesStateService,
-    private leftPanelStateService: LeftPanelStateService,
-    private usersStateService: UsersStateService,
     private customerPortalStateService: CustomerPortalStateService,
     private websocketService: WebsocketService,
     private ticketsRealTimeService: TicketsRealTimeService,
@@ -57,13 +55,16 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     if (this.customerPortalStateService.isCustomerPortal) {
       this.ticketsFilter.setListType("ALL");
       this.ticketsFilter.setFilter(JSON.parse(JSON.stringify(this.customerPortalStateService.getTicketsFilter())));
+      this.ticketsFilter.isDisbledCompany = true;
       this.onScroll();
-      this.websocketService.onInitConnectCustomerUser("new-tickets", this.customerPortalStateService.getTicketsFilter().selectedCompany.id);
+      this.websocketService.onInitConnectCustomerUser("new-tickets", this.customerPortalStateService.getTicketsFilter().selectedCompanies[0].id);
     } else {
       /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
       /* START */
-      this.ticketsFilter.setListType(this.ticketsStateService.getListType());
-      if (this.ticketsStateService.getListType()) this.onScroll();
+      if (this.ticketsStateService.getListType()) {
+        this.ticketsFilter.setListType(this.ticketsStateService.getListType());
+        this.onScroll();
+      }
       /* END */
     }
     let onTicketFilters = this.customerPortalStateService.onTicketFilters.subscribe(data => {
@@ -133,22 +134,21 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       this.ticketsStatus = data;
     })
     this.sub.add(onGetTicketsStatus);
+    let onToggleFilter = this.ticketsStateService.onToggleFilter.subscribe(data => {
+      this.toggleFilter = data;
+    })
+    this.sub.add(onToggleFilter);
   }
-
+  onToggleFilter(data) {
+    this.ticketsStateService.changeToggleFilter(data);
+  }
+  onFilter(data) {
+    this.ticketsStateService.changeFilterField(data);
+  }
   editTicket(id) {
-    if (!this.appService.isMobile) {
-      this.ticketStateService.setTicketRoutingId(id);
-      const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/ticket/${id}`;
-      window.open(url, '_blank');
-    } else {
-      this.idEditTicket = id;
-      let ticket = this.tickets.find(item => item.id === id);
-      this.ticketsStateService.onOpenTicket();
-      this.ticketsService.getTicket(id).subscribe(data => {
-        data.setUserCompanies(ticket.userCompanies);
-        this.ticketsStateService.onEditTicket(data);
-      })
-    }
+    this.ticketStateService.setTicketRoutingId(id);
+    const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/ticket/${id}`;
+    window.open(url, '_blank');
   }
   private getTickets() {
     if (this.ticketsListService.getBlockList()) {
@@ -157,8 +157,6 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     }
     this.ticketsFilter.setOffset(this.page_number * this.offset);
     this.ticketsFilter.setSize(30);
-    //this.ticketsFilter.onSetSizeAll();
-
     if (this.page_number > 0) this.showPendingPreloader = true;
     this.ticketsService.getTickets(this.ticketsFilter.getListTupe(), this.ticketsFilter.getDataForRequest()).subscribe((data: Array<Ticket>) => {
       this.tickets = [...this.tickets, ...data];

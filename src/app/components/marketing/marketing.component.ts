@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { forkJoin, Subscription } from 'rxjs';
 import { ARCHIVE_USER, DEARCHIVE_USER, ARCHIVE_USERS } from 'src/app/const/confirm';
 import { MODE_MARKETING_USERS_LIST, TYPE_LIST_MARKETING_USERS } from 'src/app/const/users';
@@ -23,6 +23,7 @@ import { UserDefaultSubscription } from '../users/class/user-default-subscriptio
 import { UserFilter } from '../users/class/user-filter';
 import { UserListService } from '../users/services/user-list.service';
 import { UserCustomerCompaniesInfo } from '../users/class/user-customer-companies-info';
+import { UsersHeaderComponent } from '../users/users-header/users-header.component';
 
 @Component({
   selector: 'marketing',
@@ -31,6 +32,7 @@ import { UserCustomerCompaniesInfo } from '../users/class/user-customer-companie
   providers: [UserListService]
 })
 export class MarketingComponent implements OnInit {
+  @ViewChild('header') header: UsersHeaderComponent;
   idDetailUser: string = '';
   users: Array<User> = [];
   companies: Array<Company> = [];
@@ -69,6 +71,7 @@ export class MarketingComponent implements OnInit {
       this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions, data.tags);
       this.selectAll = false;
       this.reqUsers.forEach(item => item.selected = false);
+      this.header.setReqUsers(this.reqUsers);
       this.setDefaultScoll();
       this.onScroll();
     })
@@ -76,6 +79,7 @@ export class MarketingComponent implements OnInit {
     if (this.companiesStateService.getCompanies().length > 0) this.companies = this.companiesStateService.getCompanies();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = data;
+      this.cd.markForCheck();
     })
     this.userListService.addSubscription(getOnCompanies);
     if (this.usersStateService.getAllUsers().length > 0) this.getUsersList(this.usersStateService.getAllUsers());
@@ -97,11 +101,8 @@ export class MarketingComponent implements OnInit {
       }
     })
     this.userListService.addSubscription(getConfirm);
-
     let getChangeCompanies = this.usersStateService.getChangeUsers().subscribe((data: UserChange) => {
-
       if ((data.action === 'USER_SAVED' || data.action === 'USER_ARCHIVED') && data.data.accountType !== "TECH") {
-
         const reqIndex = this.reqUsers.findIndex((item) => item.id === data.data.id);
         if (reqIndex > -1) this.reqUsers[reqIndex].onUpdate(data.data);
         if (reqIndex === -1) {
@@ -116,16 +117,11 @@ export class MarketingComponent implements OnInit {
           if (userIndex > -1) this.users.splice(userIndex, 1);
         }
       }
-
-
       if (data.action === 'USERS_DEARCHIVED' && data.data.accountType !== "TECH") {
-
         data.data.forEach(user => {
           const reqIndex = this.reqUsers.findIndex((item) => item.id === user.id);
           if (reqIndex > -1) this.reqUsers[reqIndex].onUpdate(user);
-
         })
-
       }
       if (data.action === 'USER_SUBMITTED_TICKET' && data.data.accountType !== "TECH") {
         const reqIndex = this.reqUsers.findIndex((item) => item.id === data.data.id);
@@ -135,6 +131,8 @@ export class MarketingComponent implements OnInit {
         this.reqUsers[reqIndex].userStatistic.ticketsSubmitted = prevValue;
         if (Index > -1) this.users[Index].userStatistic.ticketsSubmitted = prevValue;
       }
+      this.users = [...this.users.map(item => new User(item))];
+      this.header.setReqUsers(this.reqUsers);
       this.cd.detectChanges();
     })
     this.userListService.addSubscription(getChangeCompanies);
@@ -145,19 +143,22 @@ export class MarketingComponent implements OnInit {
     this.jobTitleList = this.crmStateService.getJobTitleList();
     let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
       this.jobTitleList = data;
+      this.cd.markForCheck();
     })
     this.sub.add(onGetJobTitle);
     this.listCustomSubscription = this.marketingEmailStateService.getListCustomSubscription();
     let onGetListCustomSubscription = this.marketingEmailStateService.onGetListCustomSubscription.subscribe(data => {
       this.listCustomSubscription = data;
+      this.cd.markForCheck();
     })
     this.sub.add(onGetListCustomSubscription);
-
     this.industries = this.crmStateService.getIndustryList();
     let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
       this.industries = data;
+      this.cd.markForCheck();
     })
     this.sub.add(onGetIndustry);
+    this.cd.markForCheck();
   }
 
   private onArchiveUsers(ids) {
@@ -170,12 +171,8 @@ export class MarketingComponent implements OnInit {
   setIdDetailUser(data) {
     this.idDetailUser = data;
   }
-  showMobileFilter() {
-    document.body.querySelector('app-left-panel-users').classList.add('show');
-  }
   private onInitSubscribe() {
     setTimeout(() => {
-
       let stompClient = this.usersRealTimeService.changeSubscriptionsUsers.subscribe(newChange => {
         if (newChange.action === 'DEFAULT_SUBSCRIPTION_SAVED') {
           const reqIndex = this.reqUsers.findIndex((item) => item.id === newChange.data.userId);
@@ -197,6 +194,7 @@ export class MarketingComponent implements OnInit {
           if (userIndex > -1) this.users[userIndex].changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
           this.cd.detectChanges();
         }
+        this.header.setReqUsers(this.reqUsers);
       });
       this.userListService.addSubscription(stompClient);
 
@@ -204,20 +202,18 @@ export class MarketingComponent implements OnInit {
   }
   onSelectAllUser(event) {
     if (event.target.checked) {
+      this.usersStateService.initSelectAllusers(true);
       this.selectAll = true;
-      this.users.forEach(item => {
-        item.selected = true;
-      })
-
+      this.users.forEach(item => item.selected = true);
       this.draftEmailStateService.resetSelectedUsers();
       this.filter.getFilterList(this.reqUsers, this.companies).forEach(item => {
         this.reqUsers.find(user => user.id === item.id).selected = true;
       })
-
       this.reqUsers.forEach(user => {
         if (user.selected) this.draftEmailStateService.addSelectedUser(user);
       })
     } else {
+      this.usersStateService.initSelectAllusers(false);
       this.selectAll = false;
       this.users.forEach(item => {
         item.selected = false;
@@ -227,38 +223,37 @@ export class MarketingComponent implements OnInit {
       })
       this.draftEmailStateService.resetSelectedUsers();
     }
+    this.header.setReqUsers(this.reqUsers);
+    this.cd.detectChanges();
   }
   onSelectUser(user) {
     this.reqUsers.find(item => item.id === user.id).selected = user.selected;
     this.selectAll = (this.filter.getFilterList(this.reqUsers, this.companies).find(item => !item.selected)) ? false : true;
+    this.header.setReqUsers(this.reqUsers);
+    this.cd.detectChanges();
   }
   private onDeArchiveUser(id) {
     let Dearchiveusers = this.usersService.onDeArchiveUsers(id).subscribe(data => {
-
-
     })
     this.userListService.addSubscription(Dearchiveusers);
   }
   private onArchiveUser(id) {
-
     let archiveUser = this.usersService.onArchiveUsers(id).subscribe(data => {
       if (this.filter.getClientType()) {
         let index = this.users.findIndex(item => item.id === id);
         if (index > -1) this.users.splice(index, 1);
+        this.cd.markForCheck();
       }
-
     })
     this.userListService.addSubscription(archiveUser);
   }
   private getUsersList(data) {
-
     this.reqUsers = data.filter(item => !item.deletedAt && item.accountType !== "TECH");
-
-    // this.onInirCalculate();
     this.reqUsers.sort((a, b) => ((a.firstName + a.lastName).toLowerCase() > (b.firstName + b.lastName).toLowerCase()) ?
       1 : (((b.firstName + b.lastName).toLowerCase() > (a.firstName + a.lastName).toLowerCase()) ? -1 : 0));
     this.onScroll();
     this.showPreloader = false;
+    this.cd.markForCheck();
   }
   public onScroll() {
     this.infiniteScrollDisabled = true;
@@ -279,9 +274,7 @@ export class MarketingComponent implements OnInit {
     }
     this.page_number += 1;
     let listFilter = this.filter.getFilterList(this.reqUsers, this.companies);
-
     this.count = listFilter.length;
-
     let start = (this.page_number - 1) * 30;
     let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
     let usersList = [];
@@ -291,9 +284,9 @@ export class MarketingComponent implements OnInit {
     this.users = [...this.users, ...usersList.map(item => new User(JSON.parse(JSON.stringify(item))))];
     if (this.selectAll) this.users.forEach(item => item.selected = true);
     this.infiniteScrollDisabled = false;
+    this.header.setReqUsers(this.reqUsers);
     if ((this.page_number * 30) > listFilter.length) this.userListService.setBlockList(true);
-
-
+    this.cd.detectChanges();
   }
   public setDefaultScoll() {
     this.page_number = 0;
@@ -312,6 +305,7 @@ export class MarketingComponent implements OnInit {
     this.reqUsers.forEach(item => {
       item.selected = false;
     })
+    this.header.setReqUsers(this.reqUsers);
     this.draftEmailStateService.resetSelectedUsers();
     this.usersStateService.clearFilter();
   }

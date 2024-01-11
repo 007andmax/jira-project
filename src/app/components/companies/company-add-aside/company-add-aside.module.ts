@@ -17,6 +17,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { UserDefaultSubscriptionModule } from '../../users/users-aside/user-default-subscription/user-default-subscription.module';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
+import { CompanyUsersDropDownModule } from '../../tickets/tickets/ticket-add-aside/company-users-drop-down/company-users-drop-down.module';
 
 
 
@@ -40,7 +41,8 @@ import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-t
         NgxMaskModule.forRoot(),
         UserDefaultSubscriptionModule,
         DisabledBtnModule,
-        PreloaderTicketModule
+        PreloaderTicketModule,
+        CompanyUsersDropDownModule
     ],
     exports: [CompanyAddAsideComponent]
 

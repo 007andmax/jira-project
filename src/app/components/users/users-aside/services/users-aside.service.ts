@@ -1,15 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-@Injectable( )
+@Injectable()
 export class UsersAsideService {
-  sub:Subscription = new Subscription();
+  sub: Subscription = new Subscription();
   constructor() { }
-  public addSubscription (data) {
+  /**
+    * @description Add new element to Array "sub"
+    * @param  {Observable} data  - value of "Observable"
+    */
+  public addSubscription(data) {
     this.sub.add(data);
-   
+
   }
-  public onUnsubscribe () {
+  /**
+  * @description Init logic unsubscribe field "sub"
+  */
+  public onUnsubscribe() {
     this.sub.unsubscribe();
   }
 }

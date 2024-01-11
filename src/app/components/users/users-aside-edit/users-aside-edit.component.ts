@@ -177,7 +177,6 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     if (this.user && this.user.avatar && this.user.avatar && this.user.avatar.base64 && !this.user.avatar.cropped) return this.user.avatar.base64;
     if (this.user && this.user.avatar && this.user.avatar.cropped && this.user.avatar.cropped.id) return `/file/${this.user.avatar.cropped.id}`;
     if (this.user && this.user.avatar && this.user.avatar.origin && this.user.avatar.origin.id) return `/file/${this.user.avatar.origin.id}`;
-    return '/company/default/logo.jpg';
   }
   getUserType() {
     if (this.user.role === 'USER') return 'Standar User';
@@ -193,7 +192,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     if (this.user.primaryEmail && this.user.primaryEmail.length > 0 && this.user.companyId) this.onCheckValidPrimaryEmail();
   }
   onCheckValidPrimaryEmail() {
-    this.usersService.checkValidPrimaryEmail(this.user.primaryEmail, this.user.companyId, this.usersStateService.getuserForEdit().id).subscribe((data: any) => {
+    this.usersService.checkValidPrimaryEmail(this.user.primaryEmail, this.companiesStateService.getCurrentCompany().id, this.usersStateService.getuserForEdit().id).subscribe((data: any) => {
 
       this.validate.setExistPrimaryContactEmail(data.value);
       this.cd.detectChanges();

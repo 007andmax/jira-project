@@ -10,7 +10,7 @@
             ></app-product-list>
         </div>
         <div>
-            <div class="qt-df qt-jc-sb-md qt-mb-8">
+            <div class="qt-df qt-mb-8">
                 <label class="qt-input-block qt-w100 qt-mr-8">
                     <span class="qt-df">
                         <span class="qt-input-prefix">Cost</span>
@@ -63,7 +63,7 @@
                     </span>
                 </label>
             </div>
-            <div class="qt-df qt-jc-sb-md">
+            <div class="qt-df">
                 <label class="qt-input-block qt-w100 qt-mr-8">
                     <div class="qt-df">
                         <span class="qt-input-prefix">Serial No.</span>
@@ -71,6 +71,7 @@
                             class="qt-input-block__input serial-num qt-input-prepend"
                             [(ngModel)]="product.serialNumber"
                             type="text"
+                            maxlength="100"
                         >
                     </div>
                 </label>
@@ -87,8 +88,7 @@
                 <app-invoice-form-ticket-edit-taxes
                     class="qt-taxes-multiselect qt-w100"
                     #taxesDropDown
-                    [selectedTax]="product.item.taxes"
-                    [placeholder]="(product.item.taxes && product.item.taxes.length === 0) ? 'No taxes' : null"
+                    [placeholder]="(product.taxes && product.taxes.length === 0) ? 'No taxes' : null"
                     (taxesChange)="onTaxesChange($event)"
                 ></app-invoice-form-ticket-edit-taxes>
             </div>

@@ -8,8 +8,8 @@ import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.mo
 import { PreloaderTicketModule } from 'src/app/components/shared/preloader-ticket/preloader-ticket.module';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { ReportSendEmailComponent } from './report-send-email.component';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatSelectModule } from '@angular/material/select';
+import { MatChipsModule, MatSelectModule } from '@angular/material';
+import { DndModule } from 'src/app/directives/dnd/dnd.module';
 
 
 
@@ -26,6 +26,7 @@ import { MatSelectModule } from '@angular/material/select';
         FormsModule,
         MatSelectModule,
         MatChipsModule,
+        DndModule
     ],
     exports: [ReportSendEmailComponent]
 })

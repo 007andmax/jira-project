@@ -48,6 +48,11 @@ export class DurationComponent implements OnInit, OnDestroy {
    * Initializes select client. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
+    this.minList = [];
+    for (let i = 0; i < 60;) {
+      this.minList.push({ name: (i < 10) ? `0${i}` : i, value: i })
+      i += 5;
+    }
     this.onInitClearState();
     this.onCheckEditItem();
   }

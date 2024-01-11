@@ -285,11 +285,11 @@ export class CompanyDashDetailComponent implements OnInit {
     private downloadAgentStateService: DownloadAgentStateService,
     private modalService: NgbModal,
     private tagsState: CompanyTagsStateService,
-    private companiesStateService: CompaniesStateService,
+    public companiesStateService: CompaniesStateService,
     private sanitizer: DomSanitizer,
     public activateRoute: ActivatedRoute,
     private leftPanelStateService: LeftPanelStateService,
-    private usersStateService: UsersStateService,
+    public usersStateService: UsersStateService,
     public appService: AppService,
     private draftEmailStateService: DraftEmailStateService,
     private crmStateService: CrmStateService,
@@ -345,22 +345,6 @@ export class CompanyDashDetailComponent implements OnInit {
     let find = this.jobTitleList.find(item => item.id === user.jobTitleId);
     return (find) ? find.name : "";
   }
-  getUserAvatarUrl(user) {
-    if (!(user && user.avatar)) return '';
-
-    if (user.id) {
-      return `url(${'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
-        '')}) 0% 0% / cover no-repeat`
-    } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
-      return `url(/file/${(user.avatar.origin.id)}.jpg) 0% 0% / cover no-repeat`;
-    } else {
-      return 'url(/users/default/image.jpg) 0% 0% / cover no-repeat';
-    }
-  };
-  getNameForAvatar(user) {
-    if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}${(user.lastName) ? user.lastName[0].toUpperCase() : ''}`;
-    return '';
-  }
   getUserName(user) {
     return `${user.firstName} ${user.lastName}`;
   }
@@ -413,7 +397,13 @@ export class CompanyDashDetailComponent implements OnInit {
       this.cd.detectChanges();
     }
   }
+  public onChangeNote(event) {
+    this.companyDetail.description = event.target.value;
+    this.companiesService.updateCompany(this.companyDetail.getDataForUpdate()).subscribe(data => {
 
+      this.cd.detectChanges();
+    })
+  }
   public onChangeTags(tags) {
     this.companyDetail.tags = tags;
     this.companiesService.updateCompany(this.companyDetail.getDataForUpdate()).subscribe(data => {
@@ -528,12 +518,7 @@ export class CompanyDashDetailComponent implements OnInit {
   checkLogo() {
     return (this.companyDetail && this.companyDetail.logo && this.companyDetail.logo.cropped && this.companyDetail.logo.cropped.id || this.companyDetail && this.companyDetail.logo && this.companyDetail.logo.origin && this.companyDetail.logo.origin.id)
   }
-  getCompanyLogoUrl() {
-    if (this.companyDetail && this.companyDetail.logo && this.companyDetail.logo && this.companyDetail.logo.base64 && !this.companyDetail.logo.cropped) return this.companyDetail.logo.base64;
-    if (this.companyDetail && this.companyDetail.logo && this.companyDetail.logo.cropped && this.companyDetail.logo.cropped.id) return `/file/${this.companyDetail.logo.cropped.id}`;
-    if (this.companyDetail && this.companyDetail.logo && this.companyDetail.logo.origin && this.companyDetail.logo.origin.id) return `/file/${this.companyDetail.logo.origin.id}`;
-    return '/company/default/logo.jpg';
-  }
+
   saveCompany() {
     let savecompany = this.companiesService.editWoringHours(this.companyDetail.getDataForUpdate()).subscribe((data: any) => {
       let msg = 'Working hours updated successfully';

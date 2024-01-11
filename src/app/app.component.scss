@@ -14,7 +14,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: $primary-2;
+    background-color: $gray-900;
     color: $white;
     transition: width 300ms;
 }
@@ -31,13 +31,7 @@
 .clear-margin-left {
     margin-left: 0 !important;
 }
-//.main-page-container {
-//    //height: 100vh;
-//    overflow: hidden;
-//    //background-color: $white;
-//}
 
-// Flexbox setup.
 .main-page-container {
     display: flex;
     flex-direction: row;
@@ -64,7 +58,6 @@
         order: 0;
         flex: 0 0 auto;
         align-self: auto;
-        //height: 100vh; // TODO check this style
         height: 100%;
         width: 64px;
         transition: width 300ms;
@@ -79,13 +72,6 @@
         order: 0;
         flex: 1 1 auto;
         align-self: auto;
-
-        //@media (min-width: 768px) {
-        //  min-width: calc(1280px + 280px);
-        //}
-        @media (max-width: 767px) {
-          width: 100%;
-        }
     }
 
   &.--help-center,
@@ -102,13 +88,8 @@
   }
 }
 
-//.main-page-container>aside,
-//.main-page-container>main {
-//    overflow: auto;
-//}
-
 aside {
-    background-color: $gray-200--old;
+    background-color: $gray-50;
 }
 
 .resize-handle--x {
@@ -133,21 +114,15 @@ aside {
     -ms-user-select: none;
     user-select: none;
 
-    @media (max-width: 767px) {
-      display: none;
-    }
-
     &:before {
         content: "";
         position: absolute;
         z-index: 1;
-        //top: 50%;
         top: 0;
         right: 100%;
         height: 100vh;
         width: 3px;
         margin-top: -18px / 2;
-        //border-left-color: $gray-300--old;
         border-left-color: transparent;
         border-left-width: 2px;
         border-left-style: solid;

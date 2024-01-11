@@ -115,3 +115,30 @@ ngb-tooltip-window {
       width: max-content;
     }
 }
+.tooltip__circle-avatar {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
+  border-radius: 50%;
+  background-position: center !important;
+  background-size: cover !important;
+  margin-right: 8px;
+  color: $white;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  font-size: 10px;
+  font-weight: 700;
+
+  &.transparent-text:before {
+    content: ".";
+    color: transparent;
+    position: relative;
+  }
+}
+.company-tags-default-tooltip {
+  .tooltip-inner {
+    max-width: 160px;
+  }
+}

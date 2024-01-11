@@ -102,7 +102,10 @@
                         </label>
                     </div>
                 </div>
-                <div class="tab-pane__row">
+                <div
+                    class="tab-pane__row"
+                    *ngIf="!loading"
+                >
                     <div class="tab-pane__subtitle">Interval</div>
                     <div class="tab-pane-input__row">
                         <label class="qt-input-block">

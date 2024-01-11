@@ -2,7 +2,7 @@
 
 .ticket-updates {
     padding: 24px 32px;
-    background-color: $gray-100--old;
+    background-color: $gray-25;
     font-size: 13px;
 
     &__count {
@@ -27,18 +27,12 @@
         margin-bottom: 8px;
     }
 
-    //&__message-line {
-    //  @media (max-width: 767px) {
-    //    margin-left: -42px;
-    //  }
-    //}
-
     &__author {
         font-weight: 600;
     }
 
     &__add-note {
-        color: $gray-600--old;
+        color: $gray-400;
         cursor: pointer;
     }
 
@@ -58,7 +52,7 @@
     }
 
     &__people-added {
-        color: $gray-600--old;
+        color: $gray-400;
         margin-right: 8px;
     }
 
@@ -84,7 +78,7 @@
     &__ticket-body {
         padding: 8px;
         background-color: $white;
-        border: solid 1px $gray-400--old;
+        border: solid 1px $gray-200;
     }
 
     &__done-status {
@@ -211,9 +205,9 @@
     &__service-tag-completed {
         height: 20px;
         line-height: 12px;
-        color: $success;
+        color: $green-600;
         font-size: 10px;
-        border-color: $success;
+        border-color: $green-600;
         background: $white;
         margin-right: 32px;
     }
@@ -228,4 +222,17 @@
     font-size: 14px;
     line-height: 20px;
     color: $gray-900;
+    word-break: break-word;
+
+    /deep/ span {
+      word-break: break-word;
+    }
+
+    /deep/ table {
+      width: 787px !important;
+
+      span {
+        white-space: break-spaces;
+      }
+    }
 }

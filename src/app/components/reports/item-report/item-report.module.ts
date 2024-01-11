@@ -41,6 +41,7 @@ import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { ReportSendEmailModule } from '../report-additional-actions/report-send-email/report-send-email.module';
 import { HardwareSummaryDeviceReportComponent } from '../reports/hardware-summary-device-report/hardware-summary-device-report.component';
 import { DeviceIpSummaryDeviceReportComponent } from '../reports/device-ip-summary-device-report/device-ip-summary-device-report.component';
+import { DetailedContractReportComponent } from '../reports/detailed-contract-report/detailed-contract-report.component';
 
 @NgModule({
     declarations: [ItemReportComponent,
@@ -74,7 +75,8 @@ import { DeviceIpSummaryDeviceReportComponent } from '../reports/device-ip-summa
         ReportDeviceDeploymentwarrantyComponent,
         ReportDeviceProcessorramComponent,
         ReportDeviceDiskspaceComponent,
-        ApplicationbycompanyReportComponent
+        ApplicationbycompanyReportComponent,
+        DetailedContractReportComponent
     ],
     imports: [
         CommonModule,

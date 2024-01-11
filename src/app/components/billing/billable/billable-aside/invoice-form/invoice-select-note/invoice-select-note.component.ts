@@ -15,10 +15,9 @@ export class InvoiceSelectNoteComponent implements OnInit, OnDestroy {
 
   @Input() field: string = null;
   change: boolean = true;
-
+  @Input() maxlength: number = null;
   @Input() class: string = null;
   @Input() editItem: any = null;
-  @Input() maxlength: number = null;
   @Input() placeholder: string = '';
   @Input() list = [];
   @Input() id: string = '';

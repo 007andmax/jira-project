@@ -102,4 +102,23 @@ export class TicketProfileFormService {
         this.quantity = data;
         this.setValidateQuantity(true);
     }
+    public getDateForRequest(techUser) {
+        return {
+            completed: this.completed,
+            date: this.date,
+            description: this.description,
+            discountType: this.discountType,
+            durationEnd: this.durationEnd,
+            durationStart: this.durationStart,
+            item: {
+                "versionedId": this.item.versionedId
+            },
+            itemOrder: this.itemOrder,
+            quantity: this.quantity,
+            user: {
+                id: techUser.id
+            },
+            taxes: this.item.taxes
+        }
+    }
 }

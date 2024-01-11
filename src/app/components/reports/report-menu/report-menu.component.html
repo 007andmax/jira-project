@@ -29,7 +29,7 @@
                             ></app-multi-datepicker>
                         </div>
                         <button
-                            class="btn-new btn-primary-white qt-fs-0"
+                            class="qt-button --md --gray qt-fs-0"
                             (click)="getReportByTechTicketReport()"
                         >
                             Get
@@ -90,7 +90,7 @@
                             ></app-multi-datepicker>
                         </div>
                         <button
-                            class="btn-new btn-primary-white qt-fs-0"
+                            class="qt-button --md --gray qt-fs-0"
                             (click)="getReportByTechSaleReport()"
                         >
                             Get
@@ -141,6 +141,7 @@
                         </div>
                         <div class="qt-report__dropdown qt-mr-8">
                             <software-summary-devices-dro-down
+                                #dpDevices
                                 [sort]="true"
                                 [search]="true"
                                 [change]="true"
@@ -148,8 +149,8 @@
                                 [dropdownHeight]="'300px'"
                                 [heightInput]="'36px'"
                                 [list]="devices"
-                                [isDisabled]="!remoteConnectionReport.companyId || devicesStateService.getPreloaderDevices()"
-                                [preloader]="remoteConnectionReport.preloaderDevices || devicesStateService.getPreloaderDevices()"
+                                [isDisabled]="!remoteConnectionReport.companyId || remoteConnectionReport.preloaderDevices || devices.length == 0"
+                                [preloader]="remoteConnectionReport.preloaderDevices"
                                 (onSelectedItem)="onSelectDevice($event)"
                             ></software-summary-devices-dro-down>
                         </div>
@@ -165,9 +166,10 @@
                             ></app-tech-users-list-report>
                         </div>
                         <button
-                            class="btn-new btn-primary-white qt-fs-0"
+                            class="qt-button --md --gray qt-fs-0"
                             (click)="getReportByRemoteConnectionReport()"
-                            [disabled]="remoteConnectionReport.preloaderDevices"
+                            [disabled]="remoteConnectionReport.preloaderDevices || !remoteConnectionReport.companyId || !remoteConnectionReport.deviceId"
+                            [ngClass]="{'--disabled':remoteConnectionReport.preloaderDevices || !remoteConnectionReport.companyId || !remoteConnectionReport.deviceId}"
                         >
                             Get
                 Report
@@ -178,6 +180,80 @@
                     [orientation]="'LANDSCAPE'"
                     [report]="'remote-access'"
                     [fileName]="'remote-access-report'"
+                ></app-report-additional-actions>
+            </div>
+            <div
+                class="qt-report__control-panel-btn-close pointer icon__close"
+                (click)="back()"
+            ></div>
+        </div>
+    </div>
+    <div *ngIf="report === 'block-time-report'">
+        <div class="qt-report__header qt-df qt-ai-fs">
+            <div class="qt-report__header-content qt-df qt-ai-c qt-jc-sb">
+                <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
+                    <div
+                        class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c"
+                        [ngClass]="className"
+                    >
+                        <div class="qt-report__dropdown qt-report__dropdown-xl qt-mr-8">
+                            <contract-company-drop-down
+                                [placeholder]="'Select Company'"
+                                [dropdownHeight]="'192px'"
+                                [heightInput]="'36px'"
+                                [validate]="validate.getCompany()"
+                                [errorMessage]="'Please select the company name'"
+                                [field]="'name'"
+                                [search]="true"
+                                [change]="true"
+                                (onSelectedItem)="selectClient($event)"
+                            ></contract-company-drop-down>
+                        </div>
+                        <div class="qt-report__dropdown qt-input-block qt-mr-8">
+                            <contract-detail-drop-down
+                                #contractDetailDp
+                                [placeholder]="'Select contract'"
+                                [list]="detailContractReport.agreements"
+                                [isDisabled]="detailContractReport.isDisabledAgreements"
+                                [dropdownHeight]="'192px'"
+                                [dropdownWidth]="'500px'"
+                                [heightInput]="'36px'"
+                                [search]="true"
+                                [change]="true"
+                                [sort]="false"
+                                (onSelectedItem)="onSelectAgreements($event)"
+                            ></contract-detail-drop-down>
+                        </div>
+                        <div class="qt-report__dropdown qt-mr-8">
+                            <contract-detail-intervals-drop-down
+                                #dpInterval
+                                [sort]="false"
+                                [search]="true"
+                                [change]="true"
+                                [placeholder]="'Select interval'"
+                                [dropdownWidth]="'375px'"
+                                [dropdownHeight]="'300px'"
+                                [heightInput]="'36px'"
+                                [list]="detailContractReport.intervals"
+                                [isDisabled]="detailContractReport.isDisabledIntervals"
+                                (onSelectedItem)="onSelectInterval($event)"
+                            ></contract-detail-intervals-drop-down>
+                        </div>
+                        <button
+                            class="qt-button --md --gray qt-fs-0"
+                            (click)="getReportByDetailedContractsReport()"
+                            [disabled]="detailContractReport.isDisabledAgreements || !detailContractReport.selectedAgreement"
+                            [ngClass]="{'--disabled':detailContractReport.isDisabledAgreements || !detailContractReport.selectedAgreement}"
+                        >
+                            Get
+                Report
+                        </button>
+                    </div>
+                </div>
+                <app-report-additional-actions
+                    [orientation]="'LANDSCAPE'"
+                    [report]="'block-time-report'"
+                    [fileName]="'detailed-contract-report'"
                 ></app-report-additional-actions>
             </div>
             <div
@@ -212,6 +288,7 @@
                                     </div>
                                     <div class="qt-report__dropdown qt-mr-8">
                                         <software-summary-devices-dro-down
+                                            #dpDevices
                                             [sort]="true"
                                             [search]="true"
                                             [change]="true"
@@ -219,13 +296,13 @@
                                             [dropdownHeight]="'300px'"
                                             [heightInput]="'36px'"
                                             [list]="devices"
-                                            [isDisabled]="!deviceIpSummary.companyId || deviceIpSummary.preloaderDevices"
-                                            [preloader]="deviceIpSummary.preloaderDevices || deviceIpSummary.preloaderDevices"
+                                            [isDisabled]="!deviceIpSummary.companyId || deviceIpSummary.preloaderDevices || devices.length == 0"
+                                            [preloader]="deviceIpSummary.preloaderDevices"
                                             (onSelectedItem)="onSelectDevice($event)"
                                         ></software-summary-devices-dro-down>
                                     </div>
                                     <button
-                                        class="btn-new btn-primary-white qt-fs-0"
+                                        class="qt-button --md --gray qt-fs-0"
                                         (click)="getReportByDeviceIpSummary()"
                                         [disabled]="deviceIpSummary.preloaderDevices || !deviceIpSummary.companyId"
                                         [ngClass]="{'--disabled':deviceIpSummary.preloaderDevices || !deviceIpSummary.companyId}"
@@ -361,6 +438,7 @@
                                     </div>
                                     <div class="fqt-report__dropdown qt-mr-8">
                                         <software-summary-devices-dro-down
+                                            #dpDevices
                                             [sort]="true"
                                             [search]="true"
                                             [change]="true"
@@ -368,13 +446,13 @@
                                             [dropdownHeight]="'300px'"
                                             [heightInput]="'36px'"
                                             [list]="devices"
-                                            [isDisabled]="!hardwareSummaryReport.companyId || hardwareSummaryReport.preloaderDevices"
-                                            [preloader]="hardwareSummaryReport.preloaderDevices || hardwareSummaryReport.preloaderDevices"
+                                            [isDisabled]="!hardwareSummaryReport.companyId || hardwareSummaryReport.preloaderDevices || devices.length == 0"
+                                            [preloader]="hardwareSummaryReport.preloaderDevices"
                                             (onSelectedItem)="onSelectDevice($event)"
                                         ></software-summary-devices-dro-down>
                                     </div>
                                     <button
-                                        class="btn-new btn-primary-white qt-fs-0"
+                                        class="qt-button --md --gray qt-fs-0"
                                         (click)="getReportByHardwareSummary()"
                                         [disabled]="hardwareSummaryReport.preloaderDevices || !hardwareSummaryReport.companyId"
                                         [ngClass]="{'--disabled':hardwareSummaryReport.preloaderDevices || !hardwareSummaryReport.companyId}"
@@ -485,12 +563,13 @@
                                     </div>
                                     <div class="qt-report__dropdown qt-mr-8">
                                         <software-summary-devices-dro-down
+                                            #dpDevices
                                             [sort]="true"
                                             [search]="true"
                                             [change]="true"
                                             [placeholder]="'All devices'"
                                             [preloader]="softwareSummaryReport.preloaderDevices"
-                                            [isDisabled]="!softwareSummaryReport.companyId || softwareSummaryReport.preloaderDevices"
+                                            [isDisabled]="!softwareSummaryReport.companyId || softwareSummaryReport.preloaderDevices || devices.length == 0"
                                             [dropdownHeight]="'300px'"
                                             [heightInput]="'36px'"
                                             [list]="devices"
@@ -506,14 +585,14 @@
                                             [field]="'name'"
                                             [search]="true"
                                             [change]="true"
-                                            [isDisabled]="!softwareSummaryReport.companyId || softwareSummaryReport.preloaderDevices"
+                                            [isDisabled]="!softwareSummaryReport.companyId || softwareSummaryReport.preloaderDevices || softwareSummaryReport.soft.length == 0"
                                             [preloader]="softwareSummaryReport.preloaderSoft"
                                             [list]="softwareSummaryReport.soft"
                                             (onSelectedItem)="onSelectSoftware($event)"
                                         ></app-drop-down>
                                     </div>
                                     <button
-                                        class="btn-new btn-primary-white qt-fs-0"
+                                        class="qt-button --md --gray qt-fs-0"
                                         (click)="getReportBySoftwareSummary()"
                                         [disabled]="softwareSummaryReport.preloaderDevices || !softwareSummaryReport.companyId"
                                         [ngClass]="{'--disabled':softwareSummaryReport.preloaderDevices || !softwareSummaryReport.companyId}"
@@ -630,7 +709,7 @@
                                 ></app-multi-datepicker>
                             </div>
                             <button
-                                class="btn-new btn-primary-white qt-fs-0"
+                                class="qt-button --md --gray qt-fs-0"
                                 (click)="getReportCommonCommissions()"
                             >
                                 Get
@@ -670,7 +749,7 @@
                                 ></app-multi-datepicker>
                             </div>
                             <button
-                                class="btn-new btn-primary-white qt-fs-0"
+                                class="qt-button --md --gray qt-fs-0"
                                 (click)="getReportPayments()"
                             >
                                 Get
@@ -728,7 +807,7 @@
                                 ></app-multi-datepicker>
                             </div>
                             <button
-                                class="btn-new btn-primary-white qt-fs-0"
+                                class="qt-button --md --gray qt-fs-0"
                                 (click)="getReportDetailedCommissions()"
                             >
                                 Get
@@ -772,7 +851,7 @@
             ></div>
         </div>
     </div>
-    <div *ngIf="report === 'accounting-report'">
+    <div *ngIf="report === 'customer-transaction-history'">
         <div class="qt-report__header qt-df qt-ai-fs">
             <div class="qt-report__header-content qt-df qt-ai-c qt-jc-sb">
                 <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
@@ -801,7 +880,7 @@
                             ></app-multi-datepicker>
                         </div>
                         <button
-                            class="btn-new btn-primary-white qt-fs-0"
+                            class="qt-button --md --gray qt-fs-0"
                             (click)="getReportByAccounting()"
                         >
                             Get
@@ -810,10 +889,10 @@
                     </div>
                 </div>
                 <app-report-additional-actions
-                    [report]="'accounting-report'"
+                    [report]="'customer-transaction-history'"
                     [accountType]="'TECH'"
                     [template]="'CUSTOMER_REPORT'"
-                    [fileName]="'accounting-report-report'"
+                    [fileName]="'customer-transaction-history-report'"
                 ></app-report-additional-actions>
             </div>
             <div
@@ -872,7 +951,7 @@
                             </div>
                         </div>
                         <button
-                            class="btn-new btn-primary-white qt-fs-0"
+                            class="qt-button --md --gray qt-fs-0"
                             (click)="getReportByTechService()"
                         >
                             Get
@@ -932,7 +1011,7 @@
                             ></company-drop-down>
                         </div>
                         <button
-                            class="btn-new btn-primary-white qt-fs-0"
+                            class="qt-button --md --gray qt-fs-0"
                             (click)="getReportByGlNumber()"
                         >
                             Get
@@ -998,7 +1077,7 @@
                             </div>
                         </div>
                         <button
-                            class="btn-new btn-primary-white qt-fs-0"
+                            class="qt-button --md --gray qt-fs-0"
                             (click)="getReportByTaxes()"
                         >
                             Get
@@ -1036,7 +1115,7 @@
                             ></company-drop-down>
                         </div>
                         <button
-                            class="btn-new btn-primary-white qt-fs-0"
+                            class="qt-button --md --gray qt-fs-0"
                             (click)="getReportByAccountsReceivable()"
                         >
                             Get
@@ -1122,7 +1201,7 @@
                                     </div>
                                 </div>
                                 <button
-                                    class="btn-new btn-primary-white qt-fs-0"
+                                    class="qt-button --md --gray qt-fs-0"
                                     (click)="getReportByProducts()"
                                 >
                                     Get
@@ -1207,7 +1286,7 @@
                                         </div>
                                     </div>
                                     <button
-                                        class="btn-new btn-primary-white qt-fs-0"
+                                        class="qt-button --md --gray qt-fs-0"
                                         (click)="getReportByCustomers()"
                                     >
                                         Get
@@ -1271,7 +1350,7 @@
                                 ></app-drop-down>
                             </div>
                             <button
-                                class="btn-new btn-primary-white qt-fs-0"
+                                class="qt-button --md --gray qt-fs-0"
                                 (click)="getReportByTickets()"
                             >
                                 Get
@@ -1322,7 +1401,7 @@
                                 ></app-multi-datepicker>
                             </div>
                             <button
-                                class="btn-new btn-primary-white qt-fs-0"
+                                class="qt-button --md --gray qt-fs-0"
                                 (click)="getReportByService()"
                             >
                                 Get
@@ -1391,7 +1470,7 @@
                                 ></app-multi-datepicker>
                             </div>
                             <button
-                                class="btn-new btn-primary-white qt-fs-0"
+                                class="qt-button --md --gray qt-fs-0"
                                 (click)="getReportCompanyProducts()"
                             >
                                 Get

@@ -20,7 +20,7 @@ tr {
   cursor: pointer;
 }
 .users-table__name--profession {
-  color: $gray-600--old;
+  color: $gray-400;
 }
 .users-table__company {
   width: 178px;
@@ -36,4 +36,9 @@ tr {
   width: 434px;
   max-width: 434px;
   min-width: 434px;
+}
+.user-primary-email {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

@@ -1,8 +1,8 @@
 <!-- for show filters add class "show" for app-left-panel -->
 <div class="qt-page-list users-page">
     <app-users-header
+        #header
         [count]="count"
-        [reqUsers]="reqUsers"
         [selectAll]="selectAll"
         (onChangeFilterField)="onFilter($event)"
         [users]="users"
@@ -38,6 +38,12 @@
                     </ng-template>
                 </tbody>
             </table>
+            <div
+                class="no-exist-elements"
+                *ngIf="!showPreloader && users.length == 0"
+            >
+                We couldn't find any results
+            </div>
             <div
                 class="loading"
                 *ngIf="showPreloader"

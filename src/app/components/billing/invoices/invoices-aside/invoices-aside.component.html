@@ -39,7 +39,9 @@
                     [placement]="'bottom-left'"
                     [editMode]="true"
                     [editDate]="today"
-                    [useMinDate]="false"New Quote
+                    [useMinDate]="false"
+                    New
+                    Quote
                     [useMaxDate]="true"
                     (onChange)="onChangeDate($event)"
                 ></app-date-picker>
@@ -60,10 +62,10 @@
                         appToFixed
                     >
                     <mat-error
-                        class="qt-tooltip-error"
+                        class="invalid-feedback amount-received-invalid-feedback"
                         *ngIf="!validate.getAmountReceived()"
                     >
-                        You must use the entire amount. $ {{getUnUsedAmountReceived()}} left unused
+                        You must use the entire amount. ${{getUnUsedAmountReceived()}} left unused
                     </mat-error>
                 </div>
                 <!-- <div class="qt-df qt-ai-c qt-mt-10">
@@ -101,7 +103,7 @@
         </div>
         <div class="qt-pl-32 qt-pr-32">
             <div class="qt-df qt-jc-sb qt-mb-12 qt-ai-c">
-                <div class="qt-fs-16 qt-fw-600 qt-color-dark qt-lh-163">Unpaid Invoices</div>
+                <div class="qt-fs-16 qt-fw-600 qt-color-gray-900 qt-lh-163">Unpaid Invoices</div>
                 <div
                     class="qt-fs-12 qt-fw-600 qt-color-info qt-lh-133 pointer"
                     *ngIf="checkShowClearAmounts()"
@@ -238,7 +240,7 @@
                 </div>
             </div>
             <div>
-                <div class="invoice-total qt-color-dark">
+                <div class="invoice-total qt-color-gray-900">
                     <!-- <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12">
                         <div>Sub Total</div>
                         <div [textContent]="getSubtotal() | currency"></div>
@@ -269,7 +271,6 @@
                 <span *ngIf="!recordPayment.isBlock()">Record Payment</span>
                 <app-preloader-ticket *ngIf="recordPayment.isBlock()"></app-preloader-ticket>
             </button>
-            <!-- <button class="qt-button qt-mr-12">Record Payment by CC</button> -->
             <button
                 class="qt-button --gray"
                 (click)="close()"

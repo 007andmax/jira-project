@@ -34,8 +34,8 @@ export class ReportsComponent implements OnInit {
     },
     {
       type: "FINANCIAL",
-      name: "Accounting report",
-      address: "accounting-report",
+      name: "Customer transaction history",
+      address: "customer-transaction-history",
     },
     {
       type: "FINANCIAL",
@@ -56,6 +56,7 @@ export class ReportsComponent implements OnInit {
     },
     { type: "TICKETS", name: "Tickets report", address: "ticket-report" },
     { type: "TICKETS", name: "Service report", address: "service-report" },
+    { type: "TICKETS", name: "Block time report", address: "block-time-report" },
     {
       type: "INCOME_ACCOUNTS",
       name: "Income account report",

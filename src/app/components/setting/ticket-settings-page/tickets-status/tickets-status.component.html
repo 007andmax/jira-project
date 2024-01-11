@@ -71,12 +71,10 @@
                         class="form-row tag-color-container"
                         ngbDropdown
                     >
-                        <div
-                            id="dropdownBasic1"
-                            ngbDropdownToggle
-                        >
+                        <div id="dropdownBasic1">
                             <i
-                                class="tag-color"
+                                class="tag-color pointer"
+                                ngbDropdownToggle
                                 [ngStyle]="{'background-color':statusColors[addStatus.color].textColor ,
                             'border-color': statusColors[addStatus.color].textColor}"
                             ></i>
@@ -189,13 +187,10 @@
                         class="form-row tag-color-container"
                         ngbDropdown
                     >
-                        <div
-                            id="dropdownBasic1"
-                            ngbDropdownToggle
-                            class="pointer"
-                        >
+                        <div id="dropdownBasic1">
                             <i
-                                class="tag-color"
+                                class="tag-color pointer"
+                                ngbDropdownToggle
                                 [ngStyle]="{'background-color':statusColors[item.color] && statusColors[item.color].textColor ,
                             'border-color': statusColors[item.color] && statusColors[item.color].textColor}"
                             ></i>

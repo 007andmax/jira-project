@@ -1,4 +1,23 @@
 <tr>
+    <td class="quotes-table__check">
+        <div
+            class="qt-df"
+            *ngIf="quote.checkStatus(['UNREAD','SAVED', 'EXPIRED', 'INVOICED', 'TICKETED','CANCELED','BILLED'])"
+        >
+            <label
+                class="qt-checkbox"
+                [attr.for]="'quote-' + quote.id"
+            >
+                <input
+                    [attr.id]="'quote-' + quote.id"
+                    [(ngModel)]="quote.selected"
+                    type="checkbox"
+                    (change)="selectQuote($event)"
+                >
+                <span></span>
+            </label>
+        </div>
+    </td>
     <td
         class="quotes-table__date"
         [textContent]="getDate(quote.date)"
@@ -17,12 +36,16 @@
         class="quotes-table__description"
         [textContent]="quote.description"
     ></td>
+    <td
+        class="quotes-table__recipients"
+        [innerHtml]="quote.parseRecipients()"
+    ></td>
     <td class="quotes-table__create-by">
         <div class="qt-df qt-ai-c">
             <div
                 class="qt-table-modern__circle-avatar"
-                [ngClass]="!getNameForAvatar().length ? 'transparent-text' : ''"
-                [textContent]="getNameForAvatar()"
+                [ngClass]="!usersStateService.getNameForAvatar(createdUser).length ? 'transparent-text' : ''"
+                [textContent]="usersStateService.getNameForAvatar(createdUser)"
                 [ngStyle]="{'background': ticketsListService.getStyleAvatar(createdUser) }"
             ></div>
             <div
@@ -86,7 +109,7 @@
                 class="pointer"
                 ngbDropdownItem
                 (click)="convertToInvoice()"
-                *ngIf="checkStatus(quote, ['APPROVED']) && !customerPortalStateService.isCustomerPortal"
+                *ngIf="quote.checkStatus(['APPROVED']) && !customerPortalStateService.isCustomerPortal"
             >
                 <div class="icon__convert-invoice qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Convert to Invoice
@@ -95,7 +118,7 @@
                 class="pointer"
                 ngbDropdownItem
                 (click)="convertToTicket()"
-                *ngIf="checkStatus(quote, ['APPROVED']) && !customerPortalStateService.isCustomerPortal"
+                *ngIf="quote.checkStatus(['APPROVED']) && !customerPortalStateService.isCustomerPortal"
             >
                 <div class="icon__convert-ticket qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Convert to Ticket
@@ -104,7 +127,7 @@
                 class="pointer"
                 ngbDropdownItem
                 (click)="approveQuote()"
-                *ngIf="checkStatus(quote, ['SAVED', 'READ', 'EXPIRED', 'UNREAD'])"
+                *ngIf="quote.checkStatus(['SAVED', 'READ', 'EXPIRED', 'UNREAD'])"
             >
                 <div class="icon__approve-quote qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Approve a quote
@@ -113,7 +136,7 @@
                 class="pointer"
                 ngbDropdownItem
                 (click)="markAsRead()"
-                *ngIf="checkStatus(quote, ['UNREAD']) && !customerPortalStateService.isCustomerPortal"
+                *ngIf="quote.checkStatus(['UNREAD']) && !customerPortalStateService.isCustomerPortal"
             >
                 <div class="icon__mark-as-read qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Mark as Read
@@ -122,7 +145,7 @@
                 class="pointer"
                 ngbDropdownItem
                 (click)="cancelQuote()"
-                *ngIf="checkStatus(quote, ['READ','UNREAD']) && !customerPortalStateService.isCustomerPortal"
+                *ngIf="quote.checkStatus(['READ','UNREAD']) && !customerPortalStateService.isCustomerPortal"
             >
                 <div class="icon__uninstall qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Cancel quote
@@ -131,7 +154,7 @@
                 class="pointer"
                 ngbDropdownItem
                 (click)="archiveQuote()"
-                *ngIf="checkStatus(quote, ['UNREAD','SAVED', 'EXPIRED', 'INVOICED', 'TICKETED','CANCELED','BILLED'])"
+                *ngIf="quote.checkStatus(['UNREAD','SAVED', 'EXPIRED', 'INVOICED', 'TICKETED','CANCELED','BILLED'])"
             >
                 <div class="icon__remove qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Archive a quote
@@ -140,16 +163,16 @@
                 class="pointer"
                 ngbDropdownItem
                 (click)="convertToBillable()"
-                *ngIf="checkStatus(quote, [ 'APPROVED']) && !customerPortalStateService.isCustomerPortal"
+                *ngIf="quote.checkStatus([ 'APPROVED']) && !customerPortalStateService.isCustomerPortal"
             >
-                <i class="convert-to-billable-ng2 qt-bg-contain qt-sz-20 qt-mr-12"></i>
+                <i class="convert-to-billable qt-bg-contain qt-sz-20 qt-mr-12"></i>
                 Convert to billable item
             </li>
             <li
                 class="pointer"
                 ngbDropdownItem
                 (click)="goToQuoteEdit()"
-                *ngIf="checkStatus(quote, ['READ','UNREAD','SAVED', 'APPROVED', 'CANCELED', 'EXPIRED']) && !customerPortalStateService.isCustomerPortal"
+                *ngIf="quote.checkStatus(['READ','UNREAD','SAVED', 'APPROVED', 'CANCELED', 'EXPIRED']) && !customerPortalStateService.isCustomerPortal"
             >
                 <i class="icon__edit qt-bg-contain qt-sz-20 qt-mr-12"></i>
                 Edit a quote

@@ -1,6 +1,6 @@
 <div
     class="cps-block__service-block"
-    *ngIf="areTicketsPresented && !areTicketsTerminated || !areTicketsPresented"
+    *ngIf="ticketStateService.isShowAddService()"
 >
     <ng-template
         class="assigned-ticket-user"
@@ -104,7 +104,7 @@
                     The Service is required
                 </mat-error>
             </div>
-            <div class="qt-df qt-fw-wrap-md qt-jc-sb-md ticket-timepicker-time-in-out">
+            <div class="qt-df ticket-timepicker-time-in-out">
                 <app-ticket-profile-updates-service-timepicker
                     #timePicker
                     [validate]="currentService.validateQuantity"
@@ -159,4 +159,7 @@
 </div>
 <p *ngIf="areTicketsPresented && areTicketsTerminated">
     Your contacts are expired/terminated. Please recreate them in order to use contract's services or remove them in order to use default services
+</p>
+<p *ngIf="!getPermissions('VIEW_SERVICE_AGREEMENTS')">
+    You cannot add a service due to disabled permission - "View service agreements". Contact the owner of the tech company to get more info
 </p>

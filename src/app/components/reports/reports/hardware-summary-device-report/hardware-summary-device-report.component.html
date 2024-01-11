@@ -25,8 +25,8 @@
                     (onSelectedItem)="onSelectDevice($event)"
                 ></app-drop-down>
             </div>
-            <button class="qt-btn --outline-blue qt-ml-8">Get Report</button>
-            <button class="qt-btn --outline-white qt-ml-8">
+            <button class="qt-button --gray --md qt-ml-8">Get Report</button>
+            <button class="qt-button --gray --md qt-ml-8">
                 <i
                     class="
           icon__email-dark
@@ -36,12 +36,12 @@
                 ></i>
             </button>
             <button
-                class="qt-btn --outline-white qt-ml-8"
+                class="qt-button --gray --md qt-ml-8"
                 (click)="printPdf()"
             >
                 <i class="icon__print qt-sz-16 qt-bg-contain qt-mr-8 summaryprint"></i>
             </button>
-            <button class="qt-btn --outline-white qt-ml-8">
+            <button class="qt-button --gray --md qt-ml-8">
                 <i
                     class="
           icon__download
@@ -141,8 +141,8 @@
             class="qt-report__body-header"
             *ngIf="onInit"
         >
-            <div class="body-m-sb qt-color-dark">{{company.name || 'All companies'}}</div>
-            <h6 class="qt-fw-600 qt-color-dark">Hardware Summary Report</h6>
+            <div class="body-m-sb qt-color-gray-900">{{company.name || 'All companies'}}</div>
+            <h6 class="qt-fw-600 qt-color-gray-900">Hardware Summary Report</h6>
         </div>
         <table
             class="qt-report__body-table-body"
@@ -151,43 +151,43 @@
             <thead>
                 <tr>
                     <th
-                        class="qt-fw-600 qt-color-dark"
+                        class="qt-fw-600 qt-color-gray-900"
                         *ngIf="hardwareSummaryReport.hardwareSummaryWithDevice"
                     >
                         Device
                     </th>
                     <th
-                        class="qt-fw-600 qt-color-dark"
+                        class="qt-fw-600 qt-color-gray-900"
                         *ngIf="hardwareSummaryReport.hardwareSummaryWithOperationSystem"
                     >
                         Operating System
                     </th>
                     <th
-                        class="qt-fw-600 qt-color-dark"
+                        class="qt-fw-600 qt-color-gray-900"
                         *ngIf="hardwareSummaryReport.hardwareSummaryWithCpu"
                     >
                         CPU
                     </th>
                     <th
-                        class="qt-fw-600 qt-color-dark"
+                        class="qt-fw-600 qt-color-gray-900"
                         *ngIf="hardwareSummaryReport.hardwareSummaryWithRam"
                     >
                         RAM
                     </th>
                     <th
-                        class="qt-fw-600 qt-color-dark"
+                        class="qt-fw-600 qt-color-gray-900"
                         *ngIf="hardwareSummaryReport.hardwareSummaryWithDisk"
                     >
                         DISK
                     </th>
                     <th
-                        class="qt-fw-600 qt-color-dark"
+                        class="qt-fw-600 qt-color-gray-900"
                         *ngIf="hardwareSummaryReport.hardwareSummaryWithWarrenty"
                     >
                         WARRANTY
                     </th>
                     <th
-                        class="qt-fw-600 qt-color-dark"
+                        class="qt-fw-600 qt-color-gray-900"
                         *ngIf="hardwareSummaryReport.hardwareSummaryWithSerialNumber"
                     >
                         Serial Number

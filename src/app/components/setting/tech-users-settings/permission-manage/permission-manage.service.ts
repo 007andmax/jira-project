@@ -76,7 +76,8 @@ export class PermissionManageService {
       'VIEW_PERFORMANCE_REPORT',
       'VIEW_REMOTE_ACCESS_REPORT',
       'VIEW_TAXES_REPORT',
-      'VIEW_DEVICES_REPORTS'
+      'VIEW_DEVICES_REPORTS',
+      'VIEW_TICKET_REPORT'
     ],
     Settings: [
       'VIEW_COMPANY_PROFILE_SETTINGS',

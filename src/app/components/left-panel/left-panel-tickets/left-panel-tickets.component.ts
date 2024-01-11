@@ -9,6 +9,13 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { TicketGlobalFilter } from '../../tickets/tickets/class/ticket-global-filter';
+import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
+import { DELETE_GLOBAL_FILTER } from 'src/app/const/confirm';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmComponent } from '../../shared/confirm/confirm.component';
+import { Subscription } from 'rxjs';
+import { TicketsFilterSaveComponent } from '../../tickets/tickets/tickets-header/tickets-filter-save/tickets-filter-save.component';
 
 @Component({
   selector: 'app-left-panel-tickets',
@@ -21,6 +28,13 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
   listType: string;
   blockFilterUser: boolean = false;
   ticketsCounts: TicketsCounts;
+  selectedGlobalFilter: TicketGlobalFilter = new TicketGlobalFilter();
+  globalFilters: Array<TicketGlobalFilter> = [];
+  sub: Subscription = new Subscription();
+  isGetGlobalFilters: boolean = false;
+  showPreloaderGlobalFilters: boolean = false;
+  showLoadMoreUpdates = false;
+  pageGlobalFilter: number = 0;
   @Input() activePage: string = "";
   @Output() onChangeState = new EventEmitter();
   @Output() onOpenPanel = new EventEmitter();
@@ -30,6 +44,8 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
     private leftPanelStateService: LeftPanelStateService,
     public customerPortalStateService: CustomerPortalStateService,
     private usersStateService: UsersStateService,
+    private modalService: NgbModal,
+    private confirmStateService: ConfirmStateService,
     private leftPanelService: LeftPanelService) { }
 
 
@@ -64,17 +80,71 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
     this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       if (data) this.open = false;
     })
+    this.usersStateService.getOnGetCurrentuser().subscribe(data => {
+      if (!this.isGetGlobalFilters && !this.customerPortalStateService.isCustomerPortal) this.getGLobalFilters();
+    })
     this.leftPanelStateService.onChangeState.subscribe(state => {
       if (!this.leftPanelService.isTicketsPage(state)) this.open = false
+      if (this.leftPanelService.isTicketsPage(state) && !this.isGetGlobalFilters && !this.customerPortalStateService.isCustomerPortal && this.usersStateService.getCurrentUser()) this.getGLobalFilters();
     })
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
-      if (this.leftPanelService.isTicketsPage(data)) this.open = true;
+      if (this.leftPanelService.isTicketsPage(data)) {
+        this.open = true;
+      }
+    })
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === DELETE_GLOBAL_FILTER) this.onDeleteGlobalFilter(this.ticketsStateService.getGlobalFilterForRemove());
+      }
+    })
+    this.sub.add(getConfirm);
+    let onGetGlobalFilters = this.ticketsStateService.onGetGlobalFilters.subscribe(data => {
+      this.globalFilters = data;
+      this.cd.detectChanges();
+    })
+    this.sub.add(onGetGlobalFilters);
+    let onInitGlobalFilter = this.ticketsStateService.onInitGlobalFilter.subscribe((data: TicketGlobalFilter) => {
+      this.selectedGlobalFilter = data;
+    });
+    this.sub.add(onInitGlobalFilter);
+    let getOnChangeTypeFilter = this.ticketsStateService.getOnChangeTypeFilter().subscribe(type => {
+      this.clearSelectedGlobalFilter();
+    })
+    this.sub.add(getOnChangeTypeFilter);
+  }
+  public clearSelectedGlobalFilter() {
+    this.selectedGlobalFilter = new TicketGlobalFilter();
+  }
+  public getGLobalFilters() {
+    this.isGetGlobalFilters = true;
+    this.showPreloaderGlobalFilters = true;
+    this.ticketsService.getFilters(this.pageGlobalFilter).subscribe((data: any) => {
+      this.globalFilters = [...this.globalFilters, ...data.ticketFilteringDtos.map(item => new TicketGlobalFilter(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0))];
+      this.ticketsStateService.setGlobalFilters(this.globalFilters);
+      this.pageGlobalFilter++;
+      this.showPreloaderGlobalFilters = false;
+      if (data.totalElements > this.globalFilters.length) {
+        this.showLoadMoreUpdates = true;
+      } else {
+        this.showLoadMoreUpdates = false;
+      }
+    })
+  }
+  public onDeleteGlobalFilter(filter) {
+    this.ticketsService.deleteGlobalFilter(filter.id).subscribe(data => {
+
     })
   }
   public close() {
     this.open = false;
   }
-
+  setGlobalFilter(filter) {
+    this.selectedGlobalFilter = filter;
+    this.ticketsStateService.onChangeLeftPanelFilter("ALL");
+    this.ticketsStateService.onChangeGlobalFilter(filter);
+    this.ticketsStateService.changeToggleFilter(true);
+  }
   openPanel() {
     this.onOpenPanel.emit(null);
   }
@@ -97,7 +167,10 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
     //this.quoteStateService.goToState(state);
     this.onChangeState.emit(state);
   }
-
+  blockClick(event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
   getCountByField(field) {
     return (this.ticketsCounts) ? this.ticketsCounts[field] : 0;
   }
@@ -122,13 +195,23 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
     this.ticketsStateService.onChangeTagsFilter(tags);
 
   }
+  public trackById(index, item) {
+    return item.id;
+  }
   public trackByIndex(index, item) {
     return index;
+  }
+  removeFilter(filter) {
+    this.confirmStateService.setConfirmAction(DELETE_GLOBAL_FILTER);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    this.ticketsStateService.setGlobalFilterForRemove(filter);
   }
   ngOnDestroy(): void {
     /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
     /* START */
     if (!this.ticketsStateService.isMoveToTickets) this.ticketsStateService.onChangeTypeFilter("USERS");
     /* END */
+    this.pageGlobalFilter = 0;
+    this.sub.unsubscribe();
   }
 }

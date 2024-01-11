@@ -11,14 +11,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-down/company-drop-down.module';
 import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.module';
-
-
+import { TicketsFilterModule } from './tickets-filter/tickets-filter.module';
+import { TicketsFilterInfoComponent } from './tickets-filter-info/tickets-filter-info.component';
 
 @NgModule({
     declarations: [
         TicketsHeaderComponent,
-        TicketsFilterComponent,
-        TicketsFilterTagsComponent
+        TicketsFilterInfoComponent
     ],
     imports: [
         CommonModule,
@@ -29,7 +28,8 @@ import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.mo
         FormsModule,
         ReactiveFormsModule,
         CompanyDropDownModule,
-        DropDownModule
+        DropDownModule,
+        TicketsFilterModule
     ],
     exports: [TicketsHeaderComponent]
 

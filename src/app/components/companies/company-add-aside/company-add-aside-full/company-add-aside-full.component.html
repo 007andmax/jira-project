@@ -58,7 +58,7 @@
         </div>
     </div>
     <div class="qt-inputs-row">
-        <div class="qt-input-block qt-f50 qt-flex-md-100">
+        <div class="qt-input-block qt-f50">
             <app-drop-down
                 [class]="['qt-select-input-40']"
                 [placeholder]="'Select Company Type'"
@@ -73,7 +73,7 @@
             >
             </app-drop-down>
         </div>
-        <div class="qt-input-block qt-f50 qt-flex-md-100">
+        <div class="qt-input-block qt-f50">
             <app-drop-down
                 [class]="['qt-select-input-40']"
                 [placeholder]="'Select Industry'"
@@ -141,7 +141,7 @@
         </div>
     </div>
     <div class="qt-inputs-row">
-        <div class="qt-input-block qt-f33 qt-flex-md-100">
+        <div class="qt-input-block qt-f33">
             <div class="qt-input-block__label">Suite No.</div>
             <input
                 type="text"
@@ -149,7 +149,7 @@
                 placeholder="Enter Suite Number"
             >
         </div>
-        <div class="qt-input-block qt-f33 qt-flex-md-100">
+        <div class="qt-input-block qt-f33">
             <div class="qt-input-block__label">Zip</div>
             <input
                 type="text"
@@ -157,7 +157,7 @@
                 placeholder="Enter Zip"
             >
         </div>
-        <div class="qt-input-block qt-f33 qt-flex-md-100 --required">
+        <div class="qt-input-block qt-f33 --required">
             <div class="qt-input-block__label">Phone Number</div>
             <input
                 type="text"
@@ -228,7 +228,7 @@
         </div>
     </div>
     <div class="qt-inputs-row">
-        <div class="qt-input-block qt-f50 qt-flex-md-100">
+        <div class="qt-input-block qt-f50">
             <div class="qt-input-block__label">Suite No.</div>
             <input
                 type="text"
@@ -237,7 +237,7 @@
                 [disabled]="company.addresses[1].sameAsBilling"
             >
         </div>
-        <div class="qt-input-block qt-f50 qt-flex-md-100">
+        <div class="qt-input-block qt-f50">
             <div class="qt-input-block__label">Zip</div>
             <input
                 type="text"
@@ -246,7 +246,7 @@
                 [disabled]="company.addresses[1].sameAsBilling"
             >
         </div>
-        <div class="qt-input-block qt-f50 qt-flex-md-100 --required">
+        <div class="qt-input-block qt-f50 --required">
             <div class="qt-input-block__label">Phone Number</div>
             <input
                 type="text"
@@ -279,7 +279,7 @@
             </div>
         </div>
         <div class="qt-inputs-row">
-            <div class="qt-input-block qt-f100 qt-flex-md-100">
+            <div class="qt-input-block qt-f100">
                 <span
                     class="qt-fw-600 qt-fs-12 qt-lh-133 qt-color-info qt-pointer create-user-contact"
                     (click)="company.setUseSelectedUser(false)"
@@ -311,7 +311,7 @@
             </div>
         </div>
         <div class="qt-inputs-row">
-            <div class="qt-input-block qt-f50 qt-flex-md-100 --required">
+            <div class="qt-input-block qt-f50 --required">
                 <div class="qt-input-block__label qt-df qt-jc-sb">
                     First Name
                     <span
@@ -323,19 +323,21 @@
                 </div>
                 <input
                     type="text"
+                    minlength="2"
+                    maxlength="30"
                     [ngClass]="{'--input-error' : !validate.getFirstName()}"
                     (input)="onChangeFirstName()"
                     [(ngModel)]="company.contacts[0].firstName"
                     placeholder="Enter First Name"
                 >
                 <mat-error
-                    class="invalid-feedback"
+                    class="invalid-feedback first-name-invalid"
                     *ngIf="!validate.getFirstName()"
                 >
-                    First name is required
+                    First name must be a minimum of 2 characters long
                 </mat-error>
             </div>
-            <div class="qt-input-block qt-f50 qt-flex-md-100">
+            <div class="qt-input-block qt-f50">
                 <div class="qt-input-block">Last Name</div>
                 <input
                     type="text"
@@ -345,7 +347,7 @@
             </div>
         </div>
         <div class="qt-inputs-row">
-            <div class="qt-input-block qt-f50 qt-flex-md-100">
+            <div class="qt-input-block qt-f50">
                 <app-drop-down
                     #role
                     [class]="['qt-select-input-40']"
@@ -361,7 +363,7 @@
                 >
                 </app-drop-down>
             </div>
-            <div class="qt-input-block qt-f50 qt-flex-md-100">
+            <div class="qt-input-block qt-f50">
                 <div class="qt-input-block">
                     <div class="qt-input-block__label">Primary Phone Number</div>
                     <div class="qt-with-number-types">
@@ -418,12 +420,13 @@
             </div>
         </div>
         <div class="qt-inputs-row">
-            <div class="qt-input-block qt-f50 qt-flex-md-100 --required">
+            <div class="qt-input-block qt-f50 --required">
                 <div class="qt-input-block__label">Primary Contact Email</div>
                 <input
                     type="text"
                     [ngClass]="{'--input-error' : !validate.getPrimaryContactEmail()}"
                     (input)="onChangePrimaryEmail()"
+                    (blur)="onCheckEmail()"
                     [(ngModel)]="company.contacts[0].primaryEmail"
                     placeholder="Primary Email Address"
                 >
@@ -452,10 +455,10 @@
         </div>
     </div>
     <div class="qt-inputs-row">
-        <div class="qt-input-block qt-f50 qt-flex-md-100">
+        <div class="qt-input-block qt-f50">
             <app-company-time-zone (selectedOffsetItem)="onChangeTimeZone($event)"></app-company-time-zone>
         </div>
-        <div class="qt-input-block qt-f50 qt-flex-md-100">
+        <div class="qt-input-block qt-f50">
             <app-drop-down
                 [class]="['qt-select-input-40']"
                 [placeholder]="'Select Payment Terms'"
@@ -470,7 +473,7 @@
         </div>
     </div>
     <div class="qt-inputs-row">
-        <div class="qt-input-block qt-f50 qt-flex-md-100">
+        <div class="qt-input-block qt-f50">
             <app-drop-down
                 [class]="['qt-select-input-40']"
                 [placeholder]="'Select Payment Method'"
@@ -483,7 +486,7 @@
             >
             </app-drop-down>
         </div>
-        <div class="qt-input-block qt-f50 qt-flex-md-100">
+        <div class="qt-input-block qt-f50">
             <app-drop-down
                 #serviceTypeDp
                 [class]="['qt-select-input-40']"
@@ -499,7 +502,7 @@
         </div>
     </div>
     <div class="qt-inputs-row">
-        <div class="qt-input-block qt-f50 qt-flex-md-100">
+        <div class="qt-input-block qt-f50">
             <app-drop-down
                 [class]="['qt-select-input-40']"
                 [placeholder]="'Select Sales Person'"

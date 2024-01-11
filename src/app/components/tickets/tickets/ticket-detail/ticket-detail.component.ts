@@ -24,10 +24,6 @@ import { TicketProfile } from '../class/ticket-profile';
 import { TicketsListService } from '../services/tickets-list.service';
 import { TicketStateService } from '../ticket-edit-aside/services/ticket-state.service';
 import { TicketsPermissionsService } from '../ticket-edit-aside/services/tickets-permissions.service';
-import { TicketMessageComponent } from '../ticket-edit-aside/ticket-message/ticket-message.component';
-import { TicketProfileEditFormUpdateComponent } from '../ticket-edit-aside/ticket-profile-edit-form-update/ticket-profile-edit-form-update.component';
-import { TicketProfileFormUpdateComponent } from '../ticket-edit-aside/ticket-profile-form-update/ticket-profile-form-update.component';
-import { TicketProfileUpdatesComponent } from '../ticket-edit-aside/ticket-profile-updates/ticket-profile-updates.component';
 import * as moment from "moment";
 import { TicketDetailProfileUpdatesComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates.component';
 import { TicketDetailTasksComponent } from './ticket-detail-tasks/ticket-detail-tasks.component';
@@ -39,6 +35,8 @@ import { TicketDetailHeaderComponent } from './ticket-detail-header/ticket-detai
 import { TicketProfileAgent } from '../class/ticket-profile-agent';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { Device } from 'src/app/components/company-devices/class/device';
+import { TicketDetailMessageComponent } from './ticket-detail-message/ticket-detail-message.component';
 
 @Component({
   selector: 'ticket-detail',
@@ -58,8 +56,8 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   showFormUpdate: boolean = false;
   showEditUpdate: boolean = false;
   toggleRigthPanel: boolean = true;
+  toggleRigthPanelContainer: boolean = true;
   tabFormUpdate: string;
-  openedMobileEditUpdate = false;
   modeSubject = 'view';
   modeDescription = 'view';
   showAddAssignedUser = false;
@@ -140,12 +138,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     })
     this.ticketsStateService.getOnChangeFieldTicket().subscribe((data: TicketChangeField) => {
       if (this.ticketProfile.id === data.id) {
-        if (data.field === "agent.deviceId") {
-          let device = this.devicesStateService.getAllDevices()[this.ticketProfile.company.id].find(item => item.agentId === data.value || item.id === data.value);
-          if (device) this.ticketProfile.agent = new TicketProfileAgent(device);
-          if (!device) this.ticketProfile.agent = null;
-        }
-        this.ticketProfile[data.field] = data.value;
+        if (data.field === "agent.deviceId") this.setAgent(data);
       }
       this.cd.detectChanges();
 
@@ -186,15 +179,15 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(onChangeAssignedUser);
-
-    this.ticketStateService.onEditUpdate.subscribe(data => {
-      this.openedMobileEditUpdate = true;
-    })
-
     let onEditUpdateByForm = this.ticketStateService.onEditUpdateByForm.subscribe(data => {
       this.showEditUpdate = true;
     })
     this.sub.add(onEditUpdateByForm);
+  }
+  setAgent(data: TicketChangeField) {
+    let device = this.ticketStateService.getDevices().find(item => item.agentId === data.value || item.id === data.value);
+    if (device) this.ticketProfile.agent = new TicketProfileAgent(device);
+    if (!device) this.ticketProfile.agent = null;
   }
   onViewDocument(data) {
     this.ticketStateService.setDocumentForPreview(data);
@@ -236,7 +229,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.toggleRigthPanel = true;
   }
   onToggleRigthPanel(data) {
-    this.toggleRigthPanel = !this.toggleRigthPanel;
+    this.toggleRigthPanelContainer = !this.toggleRigthPanelContainer;
   }
   markAsOpen() {
     this.ticketsService.changeStatus(this.ticketProfile.id, 'IN_PROGRESS').subscribe((data: any) => {
@@ -266,6 +259,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       this.ticketStateService.getServicesList(this.ticketProfile);
       if (this.ticketProfile.createdUser && !this.customerPortalStateService.isCustomerPortal) this.ticketStateService.getPasswordsDocuments(this.ticketProfile.createdUser.id);
       if (!this.customerPortalStateService.isCustomerPortal) this.ticketStateService.getDevicesByCompany(this.ticketProfile.company.id);
+      if (this.customerPortalStateService.isCustomerPortal) this.websocketService.onInitConnectCustomerUser("ticket-detail", this.ticketProfile.company.id);
       if (this.ticketMessage) this.ticketMessage.reset();
       this.ticketProfileUpdates.resetShowLoadMoreUpdates();
       if (this.ticketTasks) this.ticketTasks.getTicketTasks(id);
@@ -319,7 +313,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     }
   }
   toggleSubject() {
-    if (this.appService.checkMobile() || !this.getPermissions('EDIT_TICKETS')) return;
+    if (!this.getPermissions('EDIT_TICKETS')) return;
     var textCurrent = this.elRef.nativeElement.querySelector("#ticket-subject").value;
     var textOld = this.ticketProfile.subject;
     this.modeSubject = (this.modeSubject === 'view') ? 'edit' : 'view';
@@ -329,7 +323,6 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     }
   }
   toggleNote() {
-    if (this.appService.checkMobile()) return;
     var textCurrent = this.elRef.nativeElement.querySelector("#ticket-note").innerHTML.replace(/<\/?[^>]+>/ig, "");
     var textOld = (this.ticketProfile.note) ? this.ticketProfile.note.replace(/<\/?[^>]+>/ig, "") : "";
     this.modeDescription = 'view';
@@ -347,7 +340,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     return `${this.ticketProfile.createdUser.firstName} ${this.ticketProfile.createdUser.lastName}`
   }
   showDetailUser() {
-    if (this.appService.checkMobile() || !this.getPermissions('VIEW_USERS')) return;
+    if (!this.getPermissions('VIEW_USERS')) return;
     let user = this.usersStateService.getAllUsers().find(item => item.id === this.ticketProfile.createdUser.id);
     this.usersStateService.showDetailUser(user);
     (<any>document.body.querySelector(".ticket-edit-aside")).style.zIndex = "1";
@@ -413,7 +406,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   }
   private updateLisUpdateUser() {
     this.lisUpdateUser = [];
-    this.lisUpdateUser = this.ticketProfile.updates.map(item => item.user);
+    this.lisUpdateUser = this.ticketProfile.updates.filter(item => item.user).map(item => item.user);
     this.lisUpdateUser = [...this.listAssignedUser, ...this.lisUpdateUser]
     this.lisUpdateUser = this.lisUpdateUser.filter((item, index) => this.lisUpdateUser.findIndex(user => user.id === item.id) === index);
     if (this.ticketProfile.createdUser) {
@@ -442,12 +435,13 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.companiesStateService.setCompanyRoutingId(this.ticketProfile.company.id);
     this.router.navigate(
       [`${this.companiesStateService.getCurrentCompany().techDomain}/company/`, this.ticketProfile.company.id, 'dashboard']);
+    this.leftPanelStateService.toggleLeftPanel(false);
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }
-  checkExistUser() {
-    return (this.ticketProfile.createdUser) ? this.usersStateService.getAllUsers().find(user => user.id === this.ticketProfile.createdUser.id) : null;
+  checkArchivedUser() {
+    return (this.ticketProfile.createdUser) ? this.usersStateService.getAllUsers().length > 0 && !this.usersStateService.getAllUsers().find(user => user.id === this.ticketProfile.createdUser.id) : false;
   }
   checkExistServicesProducts() {
     return this.ticketProfile.updates.filter(item => item.type == 'PRODUCT' || item.type == 'SERVICE').length > 0;
@@ -459,7 +453,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     return this.companiesStateService.getCompanies().find(item => item.id === id);
   }
   getClassType() {
-    return `priority-icon ticket-edit-aside__ticket-subject-flag ${(this.ticketProfile.priorityLevel && this.ticketProfile.priorityLevel !== "MEDIUM") ? '--' + this.ticketProfile.priorityLevel.toLowerCase() : ''}`;
+    return `priority-icon ticket-edit-aside__ticket-subject-flag ${(this.ticketProfile.priorityLevel && this.ticketProfile.priorityLevel.name !== "MEDIUM") ? '--' + this.ticketProfile.priorityLevel.name.toLowerCase() : ''}`;
   }
   claimTicket() {
     let currentUser = this.usersStateService.getCurrentUser();
@@ -502,7 +496,6 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.listAssignedUser = [];
     this.ticketStateService.unsubscribeTicket();
     this.ticketStateService.onTicketClosed();
-    this.appService.toggleMobileAside(false);
     this.ticketProfileUpdates.resetShowLoadMoreUpdates();
     this.ticketStateService.sub.unsubscribe();
     (<any>document.body.querySelector(".nav-header")).style.display = "flex";

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { forkJoin, of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -16,7 +16,8 @@ import { User } from '../class/user';
 @Component({
   selector: 'add-user-to-subscribe',
   templateUrl: './add-user-to-subscribe.component.html',
-  styleUrls: ['./add-user-to-subscribe.component.scss']
+  styleUrls: ['./add-user-to-subscribe.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddUserToSubscribeComponent implements OnInit {
   MODE_ADD_BY_MODAL = MODE_ADD_BY_MODAL;
@@ -54,16 +55,26 @@ export class AddUserToSubscribeComponent implements OnInit {
     let onGetListCustomSubscription = this.marketingEmailStateService.onGetListCustomSubscription.subscribe(data => {
       this.marketingSubscriptionList = JSON.parse(JSON.stringify(data)).map(item => new MarketingSubscriptionType(item, null));;
       this.showPreloader = false;
-      this.cd.detectChanges();
+      this.cd.markForCheck();
     })
+    this.cd.markForCheck();
     this.sub.add(onGetListCustomSubscription);
   }
+  /**
+  * @description Init request to remove subscription type
+  * @param  {String} id  - id subscription
+  */
   onRemoveSubscription(id) {
     this.marketingEmailService.removeSubscriptionType(id).subscribe(data => {
       this.marketingEmailStateService.setListSubscriptionTypeForRemove([]);
       this.cd.detectChanges();
     })
   }
+  /**
+ * @description Init request to edit subscription type
+ * @param  {MarketingSubscriptionType} item  - Object of MarketingSubscriptionType
+ * @param  {Object} event  - Object from input
+ */
   onEditSubscription(item, event) {
     if (item.isInitEdit) {
       if (item.length === 0 || item.disableUpdate) return;
@@ -73,39 +84,75 @@ export class AddUserToSubscribeComponent implements OnInit {
           item.onInitEdit(false);
           if (event) event.target.blur();
           this.selectedForEditSubscription = null;
+          this.cd.markForCheck();
         })
     }
   }
+  /**
+ * @description Toggle edit mode
+ * @param  {Boolean} data  - new value isEditMode
+ */
   toggleEditMode(data) {
     this.isEditMode = data;
     this.selectedSubscriptions = [];
     this.editSubscription(null);
+    this.cd.markForCheck();
   }
+  /**
+ * @description Set new value "selectedForEditSubscription"
+ * @param  {MarketingSubscriptionType} item  - new value of MarketingSubscriptionType
+ */
   editSubscription(item) {
     this.selectedForEditSubscription = item;
+    this.cd.markForCheck();
   }
+  /**
+ * @description Check if selected item is select for edit
+ * @param  {MarketingSubscriptionType} item  - Object of MarketingSubscriptionType
+ */
   isSelectedForEdit(item) {
     if (!this.selectedForEditSubscription) return false;
     return this.selectedForEditSubscription.id === item.id;
   }
+  /**
+ * @description Check if item exist in "selectedSubscriptions"
+ * @param  {MarketingSubscriptionType} item  - Object of MarketingSubscriptionType
+ */
   isSelected(item) {
     return this.selectedSubscriptions.find(subscription => subscription.id == item.id);
   }
+  /**
+ * @description Toogle new element MarketingSubscriptionType in Array "selectedSubscriptions"
+ * @param  {MarketingSubscriptionType} item  - Object of MarketingSubscriptionType
+ */
   onSelectSubscription(item) {
     let index = this.selectedSubscriptions.findIndex(subscription => subscription.id === item.id);
     if (index > -1) this.selectedSubscriptions.splice(index, 1);
     if (index === -1) this.selectedSubscriptions.push(item);
+    this.cd.markForCheck();
   }
+  /**
+* @description Init logic show modal for remove Subscription type
+* @param  {MarketingSubscriptionType} item  - Object of MarketingSubscriptionType
+*/
   removeSubscription(item) {
     this.confirmStateService.setConfirmAction(DELETE_SUBSCRIPTION_TYPE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove Subscription`;
     this.marketingEmailStateService.setSubscriptionTypeForRemove(item);
+    this.cd.checkNoChanges();
   }
+  /**
+* @description Closed modal
+*/
   close() {
     this.activeModal.close();
-
+    this.cd.markForCheck();
   }
+  /**
+* @description Init logic added new Subscription type
+* @param  {MarketingSubscriptionType} data  - Object of MarketingSubscriptionType
+*/
   onAddedSubscription(data) {
     let subscription = new MarketingSubscriptionType(data, null);
     if (this.isAddNewSubscription) {
@@ -115,8 +162,10 @@ export class AddUserToSubscribeComponent implements OnInit {
       this.isAddNewSubscription = false;
     }
   }
+  /**
+* @description Init reuqest to add user to subscription
+*/
   save() {
-
     let subscriptions = [];
     this.selectedSubscriptions.forEach(subscription => {
       let users = this.users.filter(user => !user.customSubscriptions.find(customSubscription => customSubscription.id === subscription.id))
@@ -125,6 +174,7 @@ export class AddUserToSubscribeComponent implements OnInit {
     if (this.showAdd) {
       this.isAddNewSubscription = true;
       this.addBtn.setDisabled(true);
+      this.cd.markForCheck();
       return;
     }
     let checkEdit = this.marketingSubscriptionList.find(item => item.isInitEdit);

@@ -69,7 +69,7 @@
     </div>
   </div>
   <div class="qt-inputs-row-background">
-      <div class="qt-fs-15 qt-fw-600 qt-lh-147 qt-color-dark qt-mb-20">
+      <div class="qt-fs-15 qt-fw-600 qt-lh-147 qt-color-gray-900 qt-mb-20">
           Select how you bill your customer. Managed Services will be added to Service time
       </div>
       <ul class="product-bill-customer-select-nav qt-mb-16">
@@ -145,14 +145,14 @@
           </table>
       </div>
       <button
-          class="qt-btn --outline --small"
+          class="qt-button --gray --sm"
           (click)="addProduct()"
           *ngIf="type === 'PRODUCTS'"
       >
           + Add Product
       </button>
       <button
-          class="qt-btn --outline --small"
+          class="qt-button --gray --sm"
           (click)="addService()"
           *ngIf="type === 'SERVICES'"
       >
@@ -171,7 +171,7 @@
       >
         <div class="qt-toggle__circle"></div>
       </div>
-      <div class="qt-fs-13 qt-ff-gm qt-lh-154 qt-color-dark-light">Custom Billing Date</div>
+      <div class="qt-fs-13 qt-ff-gm qt-lh-154 qt-color-gray-600">Custom Billing Date</div>
     </div>
     <div
       class="notify-to-agents-assign-icon qt-df qt-ai-c qt-input-block"
@@ -203,7 +203,7 @@
               >
                   Warning, This will disable the automatic creation of a billable item for this contract. It must be manually created.
               </ng-template>
-              <div class="qt-fs-13 qt-ff-gm qt-lh-154 qt-color-dark-light qt-df qt-ai-c">
+              <div class="qt-fs-13 qt-ff-gm qt-lh-154 qt-color-gray-600 qt-df qt-ai-c">
                   Manual create billable item
                   <span class="icon__automatically-create-invoice qt-bg-contain qt-dib qt-sz-20 qt-ml-8"></span>
                   <span
@@ -231,7 +231,7 @@
               >
                   This option can be enabled only if the Manual create billable item option is disabled
               </ng-template>
-              <div class="qt-fs-13 qt-ff-gm qt-lh-154 qt-color-dark-light qt-df qt-ai-c">
+              <div class="qt-fs-13 qt-ff-gm qt-lh-154 qt-color-gray-600 qt-df qt-ai-c">
                   Automatically create and send invoice
                   <span class="icon__manual-create-billable qt-bg-contain qt-dib qt-sz-20 qt-ml-8"></span>
                   <span
@@ -245,7 +245,7 @@
   </div>
   <div class="qt-pt-16 qt-pb-32">
       <div class="qt-df qt-jc-fe">
-          <div class="contract-total qt-color-dark">
+          <div class="contract-total qt-color-gray-900">
               <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
                   <div>Start Date</div>
                   <div [textContent]="parsedateForTotal(contractsOther.startDate)"></div>

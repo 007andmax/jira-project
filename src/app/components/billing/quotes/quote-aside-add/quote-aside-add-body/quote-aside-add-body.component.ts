@@ -22,6 +22,7 @@ import { QuoteValdiate } from '../../class/quote-vildate';
 import { ServiceListQuoteComponent } from '../service-list-quote/service-list-quote.component';
 import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-role-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { ContractsService } from 'src/app/services/contracts/contracts.service';
 
 @Component({
   selector: 'app-quote-aside-add-body',
@@ -40,6 +41,8 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   changeGlobalNote: boolean = false;
   termsAndConditions: string;
   companies = [];
+  areTicketsPresented: boolean = false;
+  areTicketsTerminated: boolean = false;
   services: Array<Service> = [];
   sub: Subscription = new Subscription();
   constructor(private companiesState: CompaniesStateService,
@@ -52,6 +55,7 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     private billableService: BillableService,
     private permissionsService: PermissionsService,
     public customerPortalStateService: CustomerPortalStateService,
+    private contractsService: ContractsService,
     private quoteServices: QuoteService,) { }
 
   ngOnInit() {
@@ -80,7 +84,6 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     });
     if (this.quoteStateService.getQuoteForCopy()) this.onInitCopy();
     if (!this.customerPortalStateService.isCustomerPortal) this.getInvoiceNote();
-    if (!this.quoteStateService.getQuoteForCopy()) this.quote.regularNote.setDefault();
     this.sub.add(getChangeCompanies);
   }
   onInitCopy() {
@@ -109,19 +112,28 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   getServicesList() {
     this.quoteServices.getServiceList(this.quoteCompany.id).subscribe((res: any) => {
       this.services = res;
+      this.getServiceAgreements(this.quoteCompany.id);
       this.onCheckValidateServicesByCompany();
     });
   }
+  private getServiceAgreements(id) {
+    this.contractsService.getServiceAgreementsByCompany(id).subscribe((data: any) => {
+      let Agreements = data;
+      this.areTicketsPresented = (Agreements.length > 0) ? true : false;
+      this.areTicketsTerminated = Agreements.every((el) => {
+        return el.status === 'EXPIRED' || el.status === 'TERMINATED'
+      })
+    })
+  }
+
   public onCheckValidateServicesByCompany() {
     this.quote.checkValidateServicesByCompany(this.services);
     this.cd.detectChanges();
   }
   private getInvoiceNote() {
     this.billableService.getInvoiceNote().subscribe(data => {
-      if (this.quoteStateService.getQuoteForCopy() && this.quote.regularNote && this.quote.regularNote.line1.length > 0) {
-        let find = data.find(item => item.id === this.quote.regularNote.id);
-        if (!find) this.quote.regularNote.id = "";
-        this.billableStateService.setRegulatNote(this.quote.regularNote);
+      if (this.quoteStateService.getQuoteForCopy() && this.quote.note && this.quote.note.length > 0) {
+        this.billableStateService.setRegulatNote(new InvoiceNote({ content: this.quote.note }));
       }
       this.notes = data;
     })
@@ -157,7 +169,7 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     return totalTaxes;
   }
   public updateInvoiceData(request) {
-    this.quote.setRegulatNote(request.regularInvoiceNote);
+    this.quote.setRegulatNote(request.note);
     this.validate.resetValidate();
   }
   selectProduct(data) {

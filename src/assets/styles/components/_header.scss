@@ -9,13 +9,6 @@
   align-items: center;
   justify-content: space-between;
 
-  @media (max-width: 767px) {
-    position: fixed;
-    right: -150%;
-    opacity: 0;
-    z-index: -1;
-  }
-
   &.--full-width {
     width: calc(100% - #{$left-panel-mini-width});
   }
@@ -36,7 +29,7 @@
     margin-right: 16px;
     width: 36px;
     height: 35px;
-    background-color: $primary-1;
+    background-color: $blue-light-600;
     border-radius: 50%;
     cursor: pointer;
     background-position: center;
@@ -60,7 +53,7 @@
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        background-color: $error;
+        background-color: $red-600;
         right: 1px;
         top: -1px;
         border: 2px solid $white;
@@ -98,7 +91,7 @@
   }
 
   //&__account-info-company-name {
-  //  color: $gray-800--old;
+  //  color: $gray-600;
   //  font-size: 13px;
   //  line-height: 1.54;
   //  margin-bottom: 2px;
@@ -108,7 +101,7 @@
   //}
 
   //&__account-info-user-name {
-  //  color: $gray-600--old;
+  //  color: $gray-400;
   //  font-size: 12px;
   //  line-height: 1.33;
   //  text-align: right;
@@ -120,7 +113,7 @@
   //    width: 6px;
   //    height: 6px;
   //    border-radius: 50%;
-  //    background-color: $success;
+  //    background-color: $green-600;
   //    left: -10px;
   //    top: calc(50% - 3px);
   //  }

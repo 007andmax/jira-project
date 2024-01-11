@@ -195,9 +195,9 @@ export class QuoteService {
    * @param company - company info
    * @param quote_id - quote id
    */
-  public archiveQuote(company, quote_id) {
+  public archiveQuote(quote_ids) {
     return this.http.post(this.apiUrl +
-      `saleQuotes/archiveQuote?companyId=${company.id}`, [quote_id]
+      `saleQuotes/archiveQuote`, quote_ids
     ).pipe(
       tap(data => {
         this.toastrService.success("The quote has been successfully archived");

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { CompaniesService } from '../../services/company/companies.service';
 import { CompaniesListService } from './services/companies-list.service';
 import { UsersService } from '../../services/users/users.service';
@@ -17,6 +17,9 @@ import { DraftEmailStateService } from '../../states/draft-email/draft-email-sta
 import { CompanyFilter } from './class/company-filter';
 import { CompanyItem } from './class/company-item';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { DevicesService } from 'src/app/services/devices/devices.service';
+import { CompanyDeviceCount } from './class/company-device-count';
+import { CompaniesHeaderComponent } from './companies-header/companies-header.component';
 
 @Component({
   selector: 'app-companies',
@@ -25,6 +28,7 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
   providers: [CompaniesListService]
 })
 export class CompaniesComponent implements OnInit, OnDestroy {
+  @ViewChild('header') header: CompaniesHeaderComponent;
   CompaniesList: Array<CompanyItem> = [];
   reqCompaniesList: Array<CompanyItem> = [];
   showPreloader: boolean = true;
@@ -34,6 +38,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   showArchivedCompanies: boolean = false;
   sub: Subscription = new Subscription();
   left_filter: string;
+  devicesCounts: Array<CompanyDeviceCount> = [];
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
   container = document.body.querySelector(".main-container");
   constructor(private companiesService: CompaniesService,
@@ -46,11 +51,14 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     private leftPanelStateService: LeftPanelStateService,
     private draftEmailStateService: DraftEmailStateService,
     private permissionsService: PermissionsService,
+    private devicesService: DevicesService,
     public cd: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
     document.body.querySelector(".main-container").scrollTo(0, 0);
+    this.devicesCounts = this.companiesStateService.getDevicesCounts();
+    this.companyFilter.setDevices(this.devicesCounts);
     this.left_filter = this.leftPanelStateService.getFilter();
     if (this.companiesStateService.getCompanies().length > 0 && !this.left_filter) this.getClientsList(this.companiesStateService.getCompanies());
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
@@ -70,7 +78,8 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === ARCHIVE_COMPANY) {
-          this.onArchiveCompany(this.companiesStateService.getCompanytForArchive().id);
+          if (!this.companiesStateService.getCompanytForArchive().isExample) this.onArchiveCompany(this.companiesStateService.getCompanytForArchive().id);
+          if (this.companiesStateService.getCompanytForArchive().isExample) this.onArchiveExampleCompany(this.companiesStateService.getCompanytForArchive().id);
         }
         if (this.confirmStateService.getConfirmAction() === DEARCHIVE_COMPANY) {
           this.onDeArchiveCompany(this.companiesStateService.getCompanyFortDeArchive().id);
@@ -78,12 +87,6 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
-    if (this.devicesState.getAllDevices()) this.companyFilter.setDevices(this.devicesState.getAllDevices());
-    let getOnDevices = this.devicesState.getOnDevices().subscribe((data) => {
-      this.companyFilter.setDevices(data);
-
-    })
-    this.sub.add(getOnDevices);
     if (this.usersStateService.getAllUsers().length > 0) this.companyFilter.setUsers(this.usersStateService.getAllUsers());
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.companyFilter.setUsers(data);
@@ -122,8 +125,29 @@ export class CompaniesComponent implements OnInit, OnDestroy {
           if (companyIndex > -1) this.CompaniesList.splice(companyIndex, 1);
         }
       }
+      this.header.setReqCompaniesList(this.reqCompaniesList);
+      this.cd.detectChanges();
     })
     this.sub.add(getChangeCompanies);
+    let onChangeDevicesCount = this.companiesStateService.onChangeDevicesCount.subscribe(data => {
+      this.devicesCounts = data;
+      this.companyFilter.setDevices(data);
+      this.cd.detectChanges();
+    })
+    this.sub.add(onChangeDevicesCount);
+  }
+  getDevicesCounts(ids) {
+    this.devicesService.getCountByCompany(ids).subscribe((data: any) => {
+      this.devicesCounts = data.map(item => new CompanyDeviceCount(item));
+      this.companyFilter.setDevices(this.devicesCounts);
+      this.companiesStateService.setDevicesCounts(data.map(item => new CompanyDeviceCount(item)));
+    })
+  }
+  onSelectCompany(company) {
+    this.reqCompaniesList.find(item => item.id === company.id).selected = company.selected;
+    this.header.selectAll = (this.reqCompaniesList.find(item => !item.selected)) ? false : true;
+    this.header.setReqCompaniesList(this.reqCompaniesList);
+    this.cd.detectChanges();
   }
   onFilter(data) {
     this.companyFilter.onFilter(data, this.reqCompaniesList);
@@ -157,7 +181,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   }
   private getClientsList(data) {
     this.reqCompaniesList = data.filter(item => item.accountType === 'CLIENT' && ((!this.showArchivedCompanies) ? !item.deletedAt : item.deletedAt));
-
+    if (this.devicesCounts.length == 0) this.getDevicesCounts(this.reqCompaniesList.map(item => item.id));
     this.onInirCalculate();
     this.reqCompaniesList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
@@ -168,6 +192,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   private getClientsListByFilter() {
     this.companiesService.getCompaniesListByFilter(this.companyFilter.getDataForFilter()).subscribe((data: any) => {
       this.reqCompaniesList = data;
+      if (this.devicesCounts.length == 0) this.getDevicesCounts(this.reqCompaniesList.map(item => item.id));
       this.onInirCalculate();
       this.reqCompaniesList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
@@ -212,6 +237,13 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   }
   public onArchiveCompany(id) {
     let archiveCompany = this.companiesService.archiveCompany(id).subscribe(data => {
+      let index = this.CompaniesList.findIndex(item => item.id === id);
+      if (index > -1) this.CompaniesList.splice(index, 1);
+    })
+    this.sub.add(archiveCompany);
+  }
+  public onArchiveExampleCompany(id) {
+    let archiveCompany = this.companiesService.archiveExampleCompany().subscribe(data => {
       let index = this.CompaniesList.findIndex(item => item.id === id);
       if (index > -1) this.CompaniesList.splice(index, 1);
     })

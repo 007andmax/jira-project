@@ -4,7 +4,16 @@ import { TicketProfileService } from '../../../tickets/tickets/class/ticket-prof
 
 export class BillableProfileTicketServiceExpense extends TicketProfileService {
     ticketUpdate: any;
-
+    taxesForSingleItem: Array<Tax>;
+    sum: number;
+    constructor(data = null) {
+        super(data);
+        if (data) {
+            for (const key in data) {
+                this[key] = data[key];
+            }
+        }
+    }
     public calculateQuantity() {
         let durationEnd = JSON.parse(JSON.stringify(this.durationEnd));
         if (this.durationStart - this.durationEnd > 0) durationEnd = this.durationEnd + 24 * 3600000;

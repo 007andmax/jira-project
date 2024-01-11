@@ -18,8 +18,9 @@
         [ngClass]="{'--input-error' : !validate}"
         placeholder="Search or Add product"
         (input)="onSearch($event)"
+        (focus)="onFocus($event)"
         id="dropdownProducts"
-        ngbDropdownToggle
+        ngbDropdownAnchor
     >
     <span *ngIf="itemList">
         <i

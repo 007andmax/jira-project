@@ -19,13 +19,11 @@ export class InvoicePreviewComponent implements OnInit {
   @Input() invoiceTaxNumber: InvoiceTaxNumber;
   opened: boolean = false;
   sub: Subscription = new Subscription();
-  selectedNote: InvoiceNote = null;
   currentCompany: any;
   constructor(private billableStateService: BillableStateService,
-    private companiesStateService: CompaniesStateService) { }
+    public companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
-    this.selectedNote = this.billableStateService.getRegularNote();
     this.currentCompany = this.companiesStateService.getCurrentCompany();
   }
   getCurrentCompanyPhone() {
@@ -34,17 +32,15 @@ export class InvoicePreviewComponent implements OnInit {
   getContactsPhone() {
     return (this.company.contacts[0].phoneNumbers && this.company.contacts[0].phoneNumbers.length > 0) ? this.company.contacts[0].phoneNumbers[0].number : ''
   }
-  getCompanyLogoUrl() {
-    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo && this.currentCompany.logo.base64 && !this.currentCompany.logo.cropped) return this.currentCompany.logo.base64;
-    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.cropped && this.currentCompany.logo.cropped.id) return `/file/${this.currentCompany.logo.cropped.id}`;
-    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.origin && this.currentCompany.logo.origin.id) return `/file/${this.currentCompany.logo.origin.id}`;
-    return '/company/default/logo.jpg';
-  }
   getDuration(input) {
     let timeInMinutes = input * 60,
       hours = Math.floor(timeInMinutes / 60),
       minutes = Math.round(timeInMinutes - (hours * 60));
     return (hours >= 10 ? hours : '0' + hours) + ':' + (minutes >= 10 ? minutes : '0' + minutes) + ' hr(s)';
+  }
+  getServiceTaxes(service) {
+    if (service.taxesForSingleItem.length > 0) return this.getSelectedTaxes(service.taxesForSingleItem);
+    if (service.taxesForSingleItem.length == 0) return this.getSelectedTaxes(service.item.taxes || []);
   }
   getSelectedTaxes(taxes) {
     return taxes.map(item => {
@@ -53,9 +49,6 @@ export class InvoicePreviewComponent implements OnInit {
   }
   public getDate(date) {
     return moment(new Date(date)).format('DD MMM YYYY');
-  }
-  public getDateTicket(date) {
-    return moment(new Date(date)).format('DD/MM/YYYY');
   }
   public trackByIndex(index, item) {
     return index;

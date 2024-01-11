@@ -18,9 +18,9 @@
         *ngIf="!loadingInProgress"
     >
         <div class="qt-report__body-header">
-            <h6 class="qt-fw-600 qt-color-dark">Tickets Report</h6>
+            <h6 class="qt-fw-600 qt-color-gray-900">Tickets Report</h6>
             <div
-                class="body-m qt-color-dark-light"
+                class="body-m qt-color-gray-600"
                 *ngIf="ticketsReport.startDate !== '' && ticketsReport.endDate !== ''"
             >
                 <span>
@@ -32,7 +32,7 @@
                 </span>
             </div>
             <div
-                class="body-m qt-color-dark-light"
+                class="body-m qt-color-gray-600"
                 *ngIf="techUser && onInit"
             >
                 {{'Tech User : ' + ((techUser) ? techUser.firstName + ' ' + techUser.lastName : '')}}
@@ -44,12 +44,12 @@
         >
             <thead>
                 <tr>
-                    <th class="qt-fw-600 qt-color-dark ticket-report__col-company-name">Company Name</th>
-                    <th class="qt-fw-600 qt-color-dark">By web</th>
-                    <th class="qt-fw-600 qt-color-dark">By agent</th>
-                    <th class="qt-fw-600 qt-color-dark">By email</th>
-                    <th class="qt-fw-600 qt-color-dark">Closed</th>
-                    <th class="qt-fw-600 qt-color-dark">Total created</th>
+                    <th class="qt-fw-600 qt-color-gray-900 ticket-report__col-company-name">Company Name</th>
+                    <th class="qt-fw-600 qt-color-gray-900">By web</th>
+                    <th class="qt-fw-600 qt-color-gray-900">By agent</th>
+                    <th class="qt-fw-600 qt-color-gray-900">By email</th>
+                    <th class="qt-fw-600 qt-color-gray-900">Closed</th>
+                    <th class="qt-fw-600 qt-color-gray-900">Total created</th>
                 </tr>
             </thead>
             <tbody>

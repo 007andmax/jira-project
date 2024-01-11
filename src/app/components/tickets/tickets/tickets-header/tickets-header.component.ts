@@ -7,6 +7,7 @@ import { AppService } from 'src/app/states/app/app.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { TicketsFilter } from '../class/tickets-filter';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { TicketGlobalFilter } from '../class/ticket-global-filter';
 
 @Component({
   selector: 'app-tickets-header',
@@ -29,7 +30,7 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
   title: string = 'My Tickets';
   sub: Subscription = new Subscription();
   count = 0;
-  toggleFilter: boolean = true;
+  toggleFilter: boolean = false;
   countFilter: number = 0;
   selectedListType: TitleListType = new TitleListType('My Tickets', 'USERS');
   constructor(private ticketsStateService: TicketsStateService,
@@ -39,7 +40,7 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
-    if (this.appService.checkMobile()) this.toggleFilter = false;
+    if (this.customerPortalStateService.isCustomerPortal) this.ticketsFilter.isDisbledCompany = true;
     /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
     /* START */
     this.selectedListType = this.titleListTypes.find(item => item.type === this.ticketsStateService.getListType());
@@ -48,7 +49,8 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
       this.ticketsFilter.setFilter(data);
       this.selectedListType = this.titleListTypes.find(item => item.type === data.listType);
-      if (this.selectedListType) this.title = `${this.selectedListType.title} (${(this.count) ? this.count : 0})`
+      if (this.selectedListType) this.title = `${this.selectedListType.title} (${(this.count) ? this.count : 0})`;
+      this.onChangeCounterFilter();
     })
     this.sub.add(getOnInitFilter);
     this.ticketsStateService.getOnInitCount().subscribe(data => {
@@ -64,52 +66,120 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
       this.onSetCount();
     }
     /* END */
+    let onToggleFilter = this.ticketsStateService.onToggleFilter.subscribe(data => {
+      this.toggleFilter = data;
+    })
+    this.sub.add(onToggleFilter);
   }
-
-  toggleMobileLeftPanel() {
-    this.leftPanelStateService.toggleMobileLeftPanel(true);
-    this.appService.toggleMobileAside(true);
+  /**
+* @description Update value "countFilter" by which filters is use
+*/
+  public onChangeCounterFilter() {
+    this.countFilter = 0;
+    if (this.ticketsFilter.selectedCompanies.length > 0 && !this.ticketsFilter.isDisbledCompany) this.countFilter++;
+    if (this.ticketsFilter.selectedTechUsers.length > 0) this.countFilter++;
+    if (this.ticketsFilter.selectedUsers.length > 0) this.countFilter++;
+    if (this.ticketsFilter.selectedStatus.length > 0) this.countFilter++;
+    if (this.ticketsFilter.selectedPriorityLevels.length > 0) this.countFilter++;
+    if (this.ticketsFilter.tags.length > 0) this.countFilter++;
+    if (this.ticketsFilter.customDateRange || this.ticketsFilter.startDate && this.ticketsFilter.endDate) this.countFilter++;
   }
+  /**
+* @description Set new value "title" by which List Tupe is use
+*/
   onSetCount() {
     this.title = `${(this.selectedListType) ? this.selectedListType.title : ''} (${(this.count) ? this.count : 0})`;
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
     }
   }
+  /**
+* @description Return true if user any filter
+* @returns {Boolean} This is the result
+*/
   isExistFilters() {
-    return this.ticketsFilter.selectedCompany ||
-      this.ticketsFilter.selectedTechUser ||
-      this.ticketsFilter.selectedUser ||
-      this.ticketsFilter.selectedStatus ||
-      this.ticketsFilter.tags.length > 0
+    return this.ticketsFilter.selectedCompanies.length > 0 ||
+      this.ticketsFilter.selectedTechUsers.length > 0 ||
+      this.ticketsFilter.selectedUsers.length > 0 ||
+      this.ticketsFilter.selectedStatus.length > 0 ||
+      this.ticketsFilter.tags.length > 0 ||
+      this.ticketsFilter.selectedPriorityLevels.length > 0 ||
+      this.ticketsFilter.customDateRange ||
+      this.ticketsFilter.startDate && this.ticketsFilter.endDate
   }
+  /**
+* @description Return selected Status by toLowerCase
+* @param {String} selectedStatus - selected status
+* @returns {String} This is the result
+*/
   getStatus(selectedStatus) {
     return selectedStatus.toLowerCase();
   }
+  /**
+* @description Apply ticket filters
+*/
   refreshFilters() {
     this.filter.applyFilters();
   }
+  /**
+* @description Clear all filters and global filter
+*/
   clearAll() {
-    this.filter.onClearAll();
+    if (this.filter) this.filter.onClearAll();
+    let ticketGlobalFilter = new TicketGlobalFilter();
+    if (this.ticketsFilter.isDisbledCompany) ticketGlobalFilter.setClientCompaies(this.ticketsFilter.selectedCompanies.map(item => item.id));
+    this.ticketsStateService.onChangeGlobalFilter(ticketGlobalFilter);
   }
+  /**
+* @description Return text 'Filter' + countFilter
+* @returns {String} This is the result
+*/
   getTextCountFilters() {
     return `Filters${(this.countFilter > 0) ? ' (' + this.countFilter + ')' : ''}`;
   }
+  /**
+* @description Set new value countFilter
+* @param {String} data - new value countFilter
+*/
   onChangeCountFilter(data) {
     this.countFilter = data;
   }
+  /**
+* @description Set new value title
+* @param {String} title - new value Title
+*/
   public setTitle(title) {
     this.title = `${title} (${(this.count) ? this.count : 0})`;
   }
+  /**
+* @description Return user firstName + lastName
+* @returns {String} This is the result
+*/
   getUserName(user) {
     return `${user.firstName} ${user.lastName}`;
   }
+  /**
+* @description Toogle displat filters
+* @param {Boolean} data - new value toggleFilter
+*/
   onToggleFilter(data) {
-    if (this.appService.checkMobile()) this.appService.toggleMobileAside(data);
     this.toggleFilter = data;
+    this.ticketsStateService.changeToggleFilter(this.toggleFilter);
   }
+  /**
+* @description Show aside to add ticket
+*/
   onAddTicket() {
     this.ticketsStateService.onToggleAddTicket();
+  }
+  /**
+* @description Track list by "id" field, retrun field "id"
+* @param {Number} index - selected 
+* @param {Object} item - Object for use tracking
+* @returns {String} This is the result
+*/
+  public trackById(index, item) {
+    return item.id;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

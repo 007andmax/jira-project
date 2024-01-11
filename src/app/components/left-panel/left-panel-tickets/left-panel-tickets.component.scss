@@ -8,7 +8,7 @@
   left: 76px;
   top: 0;
   z-index: 992;
-  background: $primary-2;
+  background: $gray-900;
   overflow-x: scroll;
   transition: left 300ms;
 
@@ -21,47 +21,10 @@
     display: none;
     width: 0;
   }
-  @media (max-width: 414px) {
-    width: 100vw;
-    left: 0;
-    transition: all 0.3s;
-    top: 100%;
-    &.show {
-      top: 0;
-    }
-  }
-}
-
-.left-panel-ng2 {
-  @media (max-width: 414px) {
-    .center-category {
-      padding: 0 0 50px !important;
-    }
-
-    .left-panel-filter {
-      width: 100%;
-      padding: 20px 20px 0;
-      margin: 0;
-    }
-
-    .mob-version {
-      display: block;
-    }
-
-    .desktop-version {
-      display: none;
-    }
-  }
 }
 
 .mob-version {
   display: none;
-}
-
-.desktop-version {
-  @media (max-width: 767px) {
-    display: none;
-  }
 }
 
 .header-filter-icon {
@@ -87,16 +50,16 @@
   border: 2px solid;
   border-radius: 50%;
   &.--red {
-    border-color: $error;
+    border-color: $red-600;
   }
   &.--green {
-    border-color: $success;
+    border-color: $green-600;
   }
   &.--blue {
-    border-color: $primary-1;
+    border-color: $blue-light-600;
   }
   &.--yellow {
-    border-color: $warning;
+    border-color: $yellow-600;
   }
 }
 
@@ -116,15 +79,44 @@
   /* display: none !important;*/
 }
 .active {
-  background: $gray-800--old;
-  color: $primary-1;
-  border-left: 2px solid $primary-1;
+  background: $gray-600;
+  color: $blue-light-600;
+  border-left: 2px solid $blue-light-600;
 }
 .category-item {
   &:hover {
-    color: $primary-1;
+    color: $blue-light-600;
   }
 }
 .category-name {
   color: $white;
+}
+.actions-filter {
+
+}
+.filter-item {
+  display: flex;
+  justify-content: space-between;
+}
+.name-custom-filter {
+  text-transform: uppercase;
+  cursor: default !important;
+}
+.button-loader {
+  position: relative;
+  width: fit-content;
+  text-decoration: underline;
+  cursor: pointer;
+  margin: 20px auto 0px auto;
+  font-weight: 600;
+
+  .loading {
+    width: 20px;
+    height: 20px;
+    right: -28px;
+    left: unset;
+    top: calc(50% - 10px);
+    border: .25rem solid rgba(208,213,221,.2);
+    border-top-color: $gray-300;
+  }
 }

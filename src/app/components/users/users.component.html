@@ -1,9 +1,9 @@
 <!-- for show filters add class "show" for app-left-panel -->
 <div class="qt-page-list users-page">
     <app-users-header
+        #header
         [type]="TYPE_LIST_ALL_USERS"
         [count]="count"
-        [reqUsers]="reqUsers"
         [selectAll]="selectAll"
         (onChangeFilterField)="onFilter($event)"
         [users]="users"
@@ -43,6 +43,12 @@
                 class="loading"
                 *ngIf="showPreloader"
             ></div>
+            <div
+                class="no-exist-elements"
+                *ngIf="!showPreloader && users.length == 0"
+            >
+                We couldn't find any results
+            </div>
         </div>
     </div>
 </div>

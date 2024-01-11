@@ -1,13 +1,15 @@
+@import './src/assets/styles/variable';
+
 .get-codes {
-    margin: 20px auto 0px auto;
+    margin: 20px auto 0 auto;
     text-align: center;
     cursor: pointer;
     font-weight: 500;
-    color: #16a4fa;
+    color: $blue-light-600;
 }
 ul {
     list-style-type: none;
-    padding: 0px;
+    padding: 0;
     li {
         text-align: center;
     }

@@ -25,7 +25,7 @@ export class HardwareComponent implements OnInit {
   bios: Bios;
   display: Display;
   logicalDisks: LogicalDisk;
-  memory: Memory;
+  memory: Array<Memory> = [];
   networkAdapters: Adapter;
   processors: Processor;
   deviceName: string = '';
@@ -103,7 +103,7 @@ export class HardwareComponent implements OnInit {
     this.display = this.hardwareDetail['reports'][0].monitors[0] || {};
     this.logicalDisks = this.hardwareDetail['reports'][0].logicalDisks.filter(value => value.is_system === true)[0] || {};
     this.processors = this.hardwareDetail['reports'][0].processors[0] || {};
-    this.memory = this.hardwareDetail['reports'][0].ram.slots[0] || {};
+    this.memory = this.hardwareDetail['reports'][0].ram.slots || {};
     this.networkAdapters = this.hardwareDetail['reports'][0].networkAdapters.filter(value => value.ip_enabled === true)[0] || {};
     this.externalIp = this.hardwareDetail['reports'][0].externalIp || {};
 
@@ -126,7 +126,7 @@ export class HardwareComponent implements OnInit {
       ['Socket & Cache(s)', 'N/A']
     ];
     this.printMemory = [
-      ['Memory', this.memory['capacity'] != undefined ? (this.memory['capacity'] / 1024 / 1024) + ' MB RAM' : 'N/A']
+      ['Memory', this.memory[0]['capacity'] != undefined ? (this.memory[0]['capacity'] / 1024 / 1024) + ' MB RAM' : 'N/A']
     ];
     this.printNetwork = [
       ['Model(s)', this.networkAdapters['description'] || 'N/A'],

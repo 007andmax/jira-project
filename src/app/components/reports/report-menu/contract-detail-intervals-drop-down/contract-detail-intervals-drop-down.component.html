@@ -1,0 +1,94 @@
+<div
+    ngbDropdown
+    [ngClass]="class"
+    [container]="container"
+    [ngStyle]="{'width':widthInput ? widthInput : '100%'}"
+    [autoClose]="'outside'"
+>
+    <div
+        *ngIf="title"
+        class="app-drop-down__title"
+        [textContent]="title"
+    ></div>
+    <mat-error
+        class="invalid-feedback"
+        *ngIf="!validate"
+        [textContent]="errorMessage"
+    >
+    </mat-error>
+    <input
+        type="text"
+        [ngStyle]="{'width': '100%', 'height': heightInput ? heightInput : '40px' }"
+        [ngClass]="{'disabled': isDisabled, '--input-error' : !validate}"
+        [disabled]="isDisabled"
+        [value]="getSelectedItemText()"
+        autocomplete="off"
+        [placeholder]="placeholder"
+        id="dropdown1"
+        class="qt-dropdown-input"
+        [attr.maxlength]="maxlength"
+        (input)="onCheckAdd($event)"
+        [readonly]="!change"
+        ngbDropdownToggle
+    >
+    <span
+        class="app-drop-down__right-icon pointer"
+        *ngIf="list && !isDisabled"
+        [ngStyle]="{'bottom': heightInput ? dividePosition(heightInput) : '20px' }"
+    >
+        <i
+            *ngIf="selectedItem && !isAdd && !isBlockClear"
+            class="icn-sm icn-remove-old"
+            (click)="clearClient()"
+        ></i>
+        <i
+            *ngIf="(!selectedItem || isBlockClear) && !isAdd && !preloader"
+            class="icn-sm report-caret-icon"
+        ></i>
+        <i
+            *ngIf="isAdd"
+            (click)="addItem()"
+            class="icn-sm icn-product-save icon__active_subscription"
+        ></i>
+    </span>
+    <i
+        class="loading xs"
+        *ngIf="preloader"
+    ></i>
+    <div
+        ngbDropdownMenu
+        [ngStyle]="{'width': dropdownWidth ? dropdownWidth : '100%', 'max-height': dropdownHeight ? dropdownHeight : '192px'}"
+        aria-labelledby="dropdown1"
+        class="app-drop-down__dropdown"
+    >
+        <div
+            class="content"
+            (click)="$event.preventDefault()"
+        >
+            <ng-template
+                ngFor
+                let-item
+                [ngForOf]="list"
+                let-i="index"
+            >
+                <div
+                    class="dropdown-item"
+                    (click)="onSelect(item)"
+                >
+                    <label
+                        class="qt-checkbox pointer"
+                        [ngClass]="{'--selected':isSelected(item)}"
+                    >
+                        <input
+                            type="checkbox"
+                            [checked]="isSelected(item)"
+                            readonly
+                        >
+                        <span></span>
+                        <div [textContent]="reduceItemName(item)"></div>
+                    </label>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

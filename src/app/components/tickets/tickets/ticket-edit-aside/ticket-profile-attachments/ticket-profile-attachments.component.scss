@@ -3,23 +3,10 @@
 .attachment-component {
   padding: 0 32px;
 
-  @media (max-width: 767px) {
-    padding: 0 16px;
-  }
-
   .attached-files-container {
     display: flex;
     flex-wrap: wrap;
     margin-top: -8px;
-
-    @media (max-width: 767px) {
-      display: flex !important;
-    }
-    &:not(:empty) {
-      @media (max-width: 767px) {
-        margin-bottom: 20px;
-      }
-    }
   }
 
   .attachment-item {
@@ -28,7 +15,7 @@
     margin-right: 8px;
     height: 30px;
     border-radius: 16px;
-    border: solid 1px $gray-400--old;
+    border: solid 1px $gray-200;
     background-color: $white;
     padding: 5px 13px 5px 5px;
     align-items: center;
@@ -44,40 +31,31 @@
     }
 
     &__header {
-      border-bottom: 1px solid $gray-400--old;
+      border-bottom: 1px solid $gray-200;
       margin-bottom: 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding-bottom: 14px;
-
-      @media (max-width: 767px) {
-        border: none;
-        margin-bottom: 12px;
-      }
     }
 
     &__count-items {
       text-transform: uppercase;
       font-weight: 600;
       font-size: 10px;
-      color: $primary-2;
+      color: $gray-900;
       line-height: 12px;
     }
 
     &__show-hide-btn {
       width: 32px;
       height: 32px;
-      border: solid 1px $gray-400--old;
+      border: solid 1px $gray-200;
       background-color: $white;
       border-radius: 50%;
       background-position: center;
       background-repeat: no-repeat;
       background-image: url("/assets/img/icons/download.svg");
-
-      @media (max-width: 767px) {
-        display: none;
-      }
     }
 
     &__type {
@@ -110,8 +88,8 @@
     }
 
     &:hover {
-      border: solid 1px $primary-1;
-      background-color: $gray-200--old;
+      border: solid 1px $blue-light-600;
+      background-color: $gray-50;
       .attachment-item {
         &__download {
           display: block;
@@ -122,14 +100,14 @@
     &.text\/plain {
       .attachment-item {
         &__type {
-          background: $gray-600--old;
+          background: $gray-400;
         }
       }
     }
     &.image\/png {
       .attachment-item {
         &__type {
-          background: $secondary-4;
+          background: $turquoise-600;
         }
       }
     }
@@ -137,28 +115,28 @@
     &.image\/jpeg {
       .attachment-item {
         &__type {
-          background: $secondary-3;
+          background: $purple-400;
         }
       }
     }
     &.application\/pdf {
       .attachment-item {
         &__type {
-          background: $error;
+          background: $red-600;
         }
       }
     }
     &.archive\/zip {
       .attachment-item {
         &__type {
-          background: $error;
+          background: $red-600;
         }
       }
     }
     &.image\/bmp {
       .attachment-item {
         &__type {
-          background: $secondary-3;
+          background: $purple-400;
         }
       }
     }

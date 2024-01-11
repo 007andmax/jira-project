@@ -1,0 +1,81 @@
+<div
+    class="global-search qt-pt-16"
+    ngbDropdown
+    [autoClose]="'outside'"
+    #globalSearch="ngbDropdown"
+>
+    <p class="title-filter qt-mb-8">Ticket</p>
+    <div ngbDropdownAnchor>
+        <span class="qt-input-search">
+            <input
+                id="dropdownTickets"
+                type="text"
+                class="global-search__input"
+                placeholder="Search by tickets"
+                autocomplete="new-password"
+                [(ngModel)]="word"
+                (input)="onSearch()"
+                (click)="onShowDropDown()"
+                [ngModelOptions]="{ standalone: true }"
+            >
+            <span
+                class="global-search__close icon__close-round"
+                *ngIf="word.length > 0"
+                (click)="clearWord()"
+            ></span>
+        </span>
+    </div>
+    <div
+        ngbDropdownMenu
+        aria-labelledby="dropdownTickets"
+        class="global-search__dropdown"
+    >
+        <div
+            class="global-search__no-data-available"
+            *ngIf="list.length === 0"
+        >
+            <p>No data available yet</p>
+        </div>
+        <div
+            class="content"
+            #content
+            (click)="$event.preventDefault()"
+            infiniteScroll
+            [infiniteScrollContainer]="content"
+            [infiniteScrollDistance]="2"
+            [infiniteScrollThrottle]="50"
+            [infiniteScrollDisabled]="infiniteScrollDisabled"
+            [fromRoot]="true"
+            (scrolled)="onScroll()"
+            *ngIf="list.length > 0"
+        >
+            <ng-template
+                ngFor
+                let-item
+                [ngForOf]="list"
+                [ngForTrackBy]="trackById"
+            >
+                <div
+                    class="global-search__menu-item"
+                    (click)="selectTicket(item)"
+                >
+                    <div class="icon__ticket-filter qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                    <div>
+                        <div
+                            class="global-search__menu-item-title"
+                            [textContent]="item.subject"
+                        ></div>
+                        <div
+                            class="global-search__menu-item-subtitle"
+                            [textContent]="'Tkt #' + item.number"
+                        ></div>
+                    </div>
+                </div>
+            </ng-template>
+            <div
+                class="loading pengind-loading"
+                *ngIf="showPreloader"
+            ></div>
+        </div>
+    </div>
+</div>

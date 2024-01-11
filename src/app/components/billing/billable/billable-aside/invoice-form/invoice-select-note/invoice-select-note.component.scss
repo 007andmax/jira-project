@@ -1,20 +1,20 @@
 @import './src/assets/styles/variable';
 
 .no-valid {
-    border: 1px solid $error !important;
+    border: 1px solid $red-600 !important;
 }
 ::ng-deep.qt-dropdown {
   position: relative;
   &.with-placeholder {
     height: 40px;
     border-radius: 3px;
-    border: 1px solid $gray-500--old;
+    border: 1px solid $gray-300;
     .placeholder {
       position: absolute;
       left: 12px;
       top: 50%;
       transform: translateY(-50%);
-      color: $gray-600--old;
+      color: $gray-400;
       font-size: 13px;
     }
     .selected {
@@ -58,10 +58,10 @@
       overflow: hidden;
       text-overflow: ellipsis;
       transition: all .3s;
-      color: $gray-800--old;
+      color: $gray-600;
       &:hover {
         color: $white;
-        background: $primary-1;
+        background: $blue-light-600;
       }
     }
   }
@@ -69,11 +69,11 @@
      height: 40px;
      padding: 10px 14px;
      border-radius: 4px;
-     border: solid 1px $gray-500--old;
+     border: solid 1px $gray-300;
      background-color: $white;
      width: 100%;
      &:placeholder {
-        color: $gray-600--old;
+        color: $gray-400;
      }
   }
   .icn-remove-old,
@@ -94,5 +94,13 @@
         margin-right: 10px;
       }
     }
+  }
+}
+.invoice-select-note {
+/deep/ .dropdown-menu {
+    max-height:192px;
+    height: auto;
+    overflow: auto;
+    min-width:100%;
   }
 }

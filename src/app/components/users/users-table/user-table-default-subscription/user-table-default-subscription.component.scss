@@ -1,11 +1,11 @@
 @import "./src/assets/styles/variable";
 
 .active {
-    color: $success;
+    color: $green-600;
     background-color: rgba(46, 200, 102, 0.08);
 }
 .no-active {
-    color: $error;
+    color: $red-600;
     background-color: rgba(255, 82, 99, 0.08);
 }
 .filter-tags-body {
@@ -22,12 +22,12 @@
         }
 
         .name {
-            color: $gray-800--old;
+            color: $gray-600;
         }
 
         .description {
             margin-top: 6px;
-            color: $gray-700--old;
+            color: $gray-500;
             font-size: 12px;
         }
 
@@ -36,9 +36,6 @@
         }
     }
     .select-wrapper {
-        @media (max-width: 767px) {
-            width: 100% !important;
-        }
         .content {
             height: 100%;
 
@@ -84,8 +81,8 @@
             font-weight: bold;
             &.active,
             &:hover {
-                color: $primary-1;
-                border-bottom: 2px solid $primary-1;
+                color: $blue-light-600;
+                border-bottom: 2px solid $blue-light-600;
             }
         }
     }
@@ -155,5 +152,5 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: $gray-200--old;
+    background-color: $gray-50;
 }

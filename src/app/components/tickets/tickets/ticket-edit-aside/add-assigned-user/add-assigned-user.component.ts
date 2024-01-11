@@ -7,6 +7,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { NgbActiveModal, NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { TicketStateService } from '../services/ticket-state.service';
 import { TicketsListService } from '../../services/tickets-list.service';
+import { CompanyUser } from '../../ticket-add-aside/company-users-drop-down/class/company-user';
 
 
 @Component({
@@ -60,13 +61,15 @@ export class AddAssignedUserComponent implements OnInit {
   public ngOnInit() {
     this.currentUsers = JSON.parse(JSON.stringify(this.selectedUsers));
     this.users = JSON.parse(JSON.stringify(this.userList));
+    if (this.type == "DETAIL-TICKET") this.users = JSON.parse(JSON.stringify(this.userList)).map(item => new CompanyUser(item));
     this.reqUsers = JSON.parse(JSON.stringify(this.userList));
+    if (this.type == "DETAIL-TICKET") this.reqUsers = JSON.parse(JSON.stringify(this.userList)).map(item => new CompanyUser(item));
   }
 
   public resetList(data) {
     this.userList = data;
-    this.users = JSON.parse(JSON.stringify(this.userList));
-    this.reqUsers = JSON.parse(JSON.stringify(this.userList));
+    this.users = JSON.parse(JSON.stringify(this.userList)).map(item => new CompanyUser(item));
+    this.reqUsers = JSON.parse(JSON.stringify(this.userList)).map(item => new CompanyUser(item));
   }
 
   @HostListener('document:click', ['$event'])
@@ -99,6 +102,11 @@ export class AddAssignedUserComponent implements OnInit {
     this.userInput.nativeElement.blur();
     this.userCtrl.setValue(null);
     this.userInput.nativeElement.value = '';
+    if (this.type == 'DETAIL-TICKET') {
+      this.users = JSON.parse(JSON.stringify(this.reqUsers));
+      this.userInput.nativeElement.focus();
+    }
+
   }
   isSelected(data) {
     return this.selectedUsers.find(item => item.id === data.id);

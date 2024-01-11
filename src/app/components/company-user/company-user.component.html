@@ -6,7 +6,6 @@
         [count]="count"
         (onChangeFilterField)="onFilter($event)"
         [users]="users"
-        [reqUsers]="reqUsers"
         [selectAll]="selectAll"
         (onSelectAllUser)="onSelectAllUser($event)"
     ></app-users-header>
@@ -43,6 +42,12 @@
                 class="loading"
                 *ngIf="showPreloader"
             ></div>
+            <div
+                class="no-exist-elements"
+                *ngIf="!showPreloader && users.length == 0"
+            >
+                We couldn't find any results
+            </div>
         </div>
     </div>
 </div>

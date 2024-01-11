@@ -159,9 +159,9 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
     this.inventory.description = event.target.value;
 
   }
-  public onPastDescription(value) {
+  public onPastDescription(event) {
     this.validate.resetDescription();
-    this.inventory.description = value;
+    this.inventory.description = event.target.value;;
   }
   onTaxesChange(data) {
     this.inventory.taxIds = data.map(item => {
@@ -211,6 +211,10 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
   formatterGLNumber = (result) => {
     return `${result["glNumber"]} - ${(result["description"] && result["description"].length > 0) ? result["description"]
       : "No description"}`;
+  };
+  formatterSeletedGLNumber = (result) => {
+    return result ? `${result["glNumber"]} - ${(result["description"] && result["description"].length > 0) ? result["description"]
+      : "No description"}` : "";
   };
   ngOnDestroy(): void {
     this.sub.unsubscribe();

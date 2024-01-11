@@ -15,7 +15,6 @@ export class UserProfile {
     role: string = 'USER';
     phoneNumbers: Array<PhoneNumber> = [new PhoneNumber('OFFICE')];
     customSubscriptions: Array<UserCustomSubscription> = [];
-    defaultSubscriptions: UserDefaultSubscription = new UserDefaultSubscription();
     customerCompaniesInfo: Array<UserCustomerCompaniesInfo> = [];
     welcomeEmail: boolean = true;
     avatar: UserAvatar;
@@ -39,13 +38,6 @@ export class UserProfile {
 */
     public addCustomerCompaniesInfo() {
         this.customerCompaniesInfo.push(new UserCustomerCompaniesInfo());
-    }
-    /**
-* @description Set defaultSubscriptions
-* @param  {UserDefaultSubscription} data  - Object of Default Subscriptions
-*/
-    public changeDefaultSubscriptions(data) {
-        this.defaultSubscriptions = data;
     }
     /**
 * @description Set Custom Subscriptions
@@ -77,7 +69,6 @@ export class UserProfile {
                 return new PhoneNumber(item.typeNumber, number);
             })
         }
-        this.defaultSubscriptions = new UserDefaultSubscription(user.defaultSubscriptions);
         this.customSubscriptions = user.customSubscriptions.map(item => new UserCustomSubscription(item));
         this.welcomeEmail = user.isEmailVerified;
         this.avatar = user.avatar;
@@ -180,13 +171,6 @@ export class UserProfile {
         this.customSubscriptions = data;
     }
     /**
-* @description Set Default Subscriptions
-* @param  {UserDefaultSubscription} data  - Object of Default Subscriptions
-*/
-    public setDefaultSubscriptions(data) {
-        this.defaultSubscriptions = data;
-    }
-    /**
 * @description Return object of User Update, where get part data from User object
 * @param  {User} user  - Object of User
 * @returns  {UserUpdate} This is the result
@@ -195,6 +179,10 @@ export class UserProfile {
 
         return new UserUpdate(this, user);
     }
+    /**
+* @description Return object of User Add, where get part data from User object
+* @returns  {UserAdd} This is the result
+*/
     public getUserForAdd() {
 
         return new UserAdd(this);

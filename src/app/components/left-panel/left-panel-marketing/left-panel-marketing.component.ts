@@ -69,9 +69,6 @@ export class LeftPanelMarketingComponent implements OnInit {
   openPanel() {
     this.onOpenPanel.emit(null);
   }
-  closeMobileFilter() {
-    document.body.querySelector('app-left-panel-users').classList.remove('show');
-  }
   public goToState() {
     this.onChangeState.emit('marketing');
   }

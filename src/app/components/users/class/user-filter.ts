@@ -116,7 +116,7 @@ export class UserFilter {
             if (indexCompany > -1 && this.clientType === companies[indexCompany].clientType) clientType = true;
             //if (this.clientIndustry === ((companies[indexCompany].clientIndustry) ? companies[indexCompany].clientIndustry.name : '')) clientIndustry = true;
 
-            if (((this.clientType) ? clientType === true : true) && ((this.title) ? item.jobTitleId === this.title.id : true) && ((this.company) ? item.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.company) : true) && ((this.clientIndustry) ? this.clientIndustry.id === item.userIndustryId : true) && this.isUserDefaultSubscription(item.defaultSubscriptions) && this.isUserCustomSubscription(item.customSubscriptions) && this.isUserTags(item.tags)) {
+            if (((this.clientType) ? clientType === true : true) && ((this.title) ? item.customerCompaniesInfo.some(clientCompany => clientCompany.jobTitleDto && clientCompany.jobTitleDto.id == this.title.id) : true) && ((this.company) ? item.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.company) : true) && ((this.clientIndustry) ? this.clientIndustry.id === item.userIndustryId : true) && this.isUserDefaultSubscription(item.customerCompaniesInfo) && this.isUserCustomSubscription(item.customSubscriptions) && this.isUserTags(item.tags)) {
                 return true;
             } else {
                 return false;
@@ -147,7 +147,6 @@ export class UserFilter {
 */
     public isUserCustomSubscription(list) {
         let isExist = true;
-
         this.customSubscriptions.forEach(subscription => {
             let find = list.find(subscriptionUser => subscriptionUser.id === subscription.id);
             if (!find) isExist = false;
@@ -159,12 +158,14 @@ export class UserFilter {
 * @param  {UserDefaultSubscription} item  - Object of Default Subscription
 * @returns  {boolean} This is the result
 */
-    public isUserDefaultSubscription(item) {
+    public isUserDefaultSubscription(customerCompaniesInfo) {
         if (!this.defaultSubscriptions) return true;
-        let isExist = true;
-        if (this.defaultSubscriptions.invoiceSubscription.enabled && this.defaultSubscriptions.invoiceSubscription.enabled !== item.invoiceSubscription.enabled) isExist = false;
-        if (this.defaultSubscriptions.ticketManagerSubscription.enabled && this.defaultSubscriptions.ticketManagerSubscription.enabled !== item.ticketManagerSubscription.enabled) isExist = false;
-        if (this.defaultSubscriptions.ticketSubscription.enabled && this.defaultSubscriptions.ticketSubscription.enabled !== item.ticketSubscription.enabled) isExist = false
+        let isExist = false;
+        customerCompaniesInfo.forEach(item => {
+            if (this.defaultSubscriptions.invoiceSubscription.enabled && item.defaultSubscriptions && this.defaultSubscriptions.invoiceSubscription.enabled === item.defaultSubscriptions.invoiceSubscription.enabled) isExist = true;
+            if (this.defaultSubscriptions.ticketManagerSubscription.enabled && item.defaultSubscriptions && this.defaultSubscriptions.ticketManagerSubscription.enabled === item.defaultSubscriptions.ticketManagerSubscription.enabled) isExist = true;
+            if (this.defaultSubscriptions.ticketSubscription.enabled && item.defaultSubscriptions && this.defaultSubscriptions.ticketSubscription.enabled === item.defaultSubscriptions.ticketSubscription.enabled) isExist = true;
+        })
         return isExist;
     }
     /**

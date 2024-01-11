@@ -9,6 +9,8 @@ export class TicketsRealTimeService {
   public changeTickets: EventEmitter<any> = new EventEmitter();
   public changeTicket: EventEmitter<any> = new EventEmitter();
   public changeTicketTasks: EventEmitter<any> = new EventEmitter();
+  public changeTicketFilters: EventEmitter<any> = new EventEmitter();
+  public changeTicketPriority: EventEmitter<any> = new EventEmitter();
   public ticketSubscription;
   public ticketTaskSubscription;
   public subsribeToTicketsCustomerUser;
@@ -33,6 +35,12 @@ export class TicketsRealTimeService {
   }
   public handleRealTimeChangesTicketTasks(newChange) {
     this.changeTicketTasks.emit(newChange);
+  }
+  public handleRealTimeChangesTicketFilters(newChange) {
+    this.changeTicketFilters.emit(newChange);
+  }
+  public handleRealTimeChangesTicketPriority(newChange) {
+    this.changeTicketPriority.emit(newChange);
   }
   public unsubscribeTicket() {
     if (this.ticketSubscription) this.ticketSubscription.unsubscribe();

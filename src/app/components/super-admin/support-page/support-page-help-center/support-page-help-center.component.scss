@@ -26,7 +26,7 @@
     support-page-info {
         width: 290px;
         padding: 20px;
-        background-color: $gray-200--old;
+        background-color: $gray-50;
         height: 100%;
         overflow: auto;
     }
@@ -110,7 +110,7 @@
         li {
             position: relative;
             @include body-r;
-            color: $primary-2;
+            color: $gray-900;
 
             &:not(:last-child) {
                 margin: 0 0 16px 0;
@@ -122,7 +122,7 @@
 .support-page-body-category__header {
     position: relative;
     @include h4;
-    color: $primary-2;
+    color: $gray-900;
     padding-bottom: 16px;
 
     &::after {
@@ -132,7 +132,7 @@
         left: 0;
         right: 0;
         height: 1px;
-        border-bottom: dashed 1px $gray-400--old;
+        border-bottom: dashed 1px $gray-200;
     }
 }
 .category-item-category__name-text {
@@ -146,7 +146,7 @@
         width: 3px;
         height: 3px;
         border-radius: 100%;
-        background-color: $primary-1;
+        background-color: $blue-light-600;
         left: 2px;
         top: 9px;
     }

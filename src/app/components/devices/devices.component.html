@@ -80,24 +80,24 @@
                     </button>
                 </span>
                 <button
-                    class="qt-btn --outline-white qt-ml-8"
+                    class="qt-button --gray --md qt-ml-8"
                     (click)="sendEmail()"
                 >
                     <span class="d-email"></span>
                 </button>
                 <button
-                    class="qt-btn --outline-white qt-ml-8"
+                    class="qt-button --gray --md qt-ml-8"
                     (click)="printPdf()"
                 >
                     <span class="d-print"></span>
                 </button>
                 <button
-                    class="qt-btn --outline-white qt-ml-8"
+                    class="qt-button --gray --md qt-ml-8"
                     (click)="downloadCsv()"
                 >
                     <span class="d-exportdark"></span>
                 </button>
-                <button class="qt-btn --outline-white qt-ml-8">
+                <button class="qt-button --gray --md qt-ml-8">
                     <a
                         href="javascript:;"
                         (click)="showScreenConnect(screenConnect)"
@@ -136,7 +136,7 @@
                                     *ngIf="!isOfflineDeviceSelected"
                                     (click)="sendCommandHeader('r')"
                                 >
-                                    <div class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                    <div class="icon__reset qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                     Restart
                                 </li>
                                 <li
@@ -665,7 +665,7 @@
                                 ngbDropdownItem
                                 (click)="sendCommand('r', assetData.ID)"
                             >
-                                <div class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                <div class="icon__reset qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                 Restart
                             </li>
                             <li
@@ -1002,7 +1002,7 @@
                         <div class="sidebar-updates__tab-title qt-ff-sb">UPDATES</div>
                         <div *ngIf="getSecurityCountSelected() > 1">
                             <button
-                                class="qt-btn --outline-blue qt-mr-8 qt-d-md-none"
+                                class="qt-button --gray --md qt-mr-8"
                                 (click)="InstallUpdate()"
                                 [disabled]="IsUpdateInstalling"
                             >
@@ -1917,7 +1917,7 @@
                 <li>
                     <span class="remote-ico">
                         <img
-                            src="/html/assets/img/device/quicktech-connect.svg"
+                            src="/html/assets/img/icons/quicktech-connect.svg"
                             alt="quicktech-connect"
                         >
                     </span>
@@ -1978,7 +1978,7 @@
                 <li>
                     <span class="remote-ico">
                         <img
-                            src="/html/assets/img/device/quicktech-connect.svg"
+                            src="/html/assets/img/icons/quicktech-connect.svg"
                             alt="quicktech-connect"
                         >
                     </span>

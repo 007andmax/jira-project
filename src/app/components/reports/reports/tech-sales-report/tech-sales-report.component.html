@@ -19,9 +19,9 @@
     >
         <div class>
             <div class="qt-report__body-header">
-                <h6 class="qt-fw-600 qt-color-dark">Tech Sales Report</h6>
+                <h6 class="qt-fw-600 qt-color-gray-900">Tech Sales Report</h6>
                 <div
-                    class="body-m qt-color-dark-light"
+                    class="body-m qt-color-gray-600"
                     *ngIf="techSalesReport.startDate !== '' && techSalesReport.endDate !== ''"
                 >
                     <span>
@@ -39,17 +39,17 @@
             >
                 <thead>
                     <tr>
-                        <th class="qt-fw-600 qt-color-dark ng-star-inserted">Tech User</th>
+                        <th class="qt-fw-600 qt-color-gray-900 ng-star-inserted">Tech User</th>
                         <th
                             style="width: 130px;"
-                            class="qt-fw-600 qt-color-dark ng-star-inserted"
+                            class="qt-fw-600 qt-color-gray-900 ng-star-inserted"
                             *ngIf="techSalesReport.selectedType.type =='BILLED_TIME'"
                         >
                             Billed Time
                         </th>
                         <th
                             style="width: 130px;"
-                            class="qt-fw-600 qt-color-dark ng-star-inserted"
+                            class="qt-fw-600 qt-color-gray-900 ng-star-inserted"
                             *ngIf="techSalesReport.selectedType.type =='PRODUCT_SOLD'"
                         >
                             Products Sold

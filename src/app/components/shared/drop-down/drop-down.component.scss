@@ -1,10 +1,10 @@
 @import "./src/assets/styles/variable";
 
 .disabled {
-  background: $gray-200--old;
-  color: $gray-600--old;
+  background: $gray-50;
+  color: $gray-400;
   &::placeholder {
-    color: $gray-600--old;
+    color: $gray-400;
   }
 }
 .icon__active_subscription {

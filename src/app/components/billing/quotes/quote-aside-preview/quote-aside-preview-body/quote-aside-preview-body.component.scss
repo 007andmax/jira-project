@@ -2,8 +2,8 @@
 
 .quote-aside-preview-table {
   th {
-    border-top: solid 1px $gray-400--old;
-    background-color: $gray-100--old;
+    border-top: solid 1px $gray-200;
+    background-color: $gray-25;
   }
 }
 pre {
@@ -15,4 +15,7 @@ pre {
   border: unset;
   border-radius: unset;
   font-family: unset;
+}
+.note {
+  white-space: pre-line;
 }

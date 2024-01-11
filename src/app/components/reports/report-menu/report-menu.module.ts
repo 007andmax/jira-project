@@ -12,13 +12,19 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
 import { ReportAdditionalActionsModule } from '../report-additional-actions/report-additional-actions.module';
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
+import { ContractDetailDropDownComponent } from './contract-detail-drop-down/contract-detail-drop-down.component';
+import { ContractDetailIntervalsDropDownComponent } from './contract-detail-intervals-drop-down/contract-detail-intervals-drop-down.component';
+import { ContractCompanyDropDownComponent } from './contract-company-drop-down/contract-company-drop-down.component';
 
 
 
 
 @NgModule({
     declarations: [ReportMenuComponent,
-        SoftwareSummaryDevicesDroDownComponent
+        SoftwareSummaryDevicesDroDownComponent,
+        ContractDetailDropDownComponent,
+        ContractDetailIntervalsDropDownComponent,
+        ContractCompanyDropDownComponent
     ],
     imports: [
         CommonModule,

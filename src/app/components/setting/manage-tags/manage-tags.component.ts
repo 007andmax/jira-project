@@ -27,7 +27,7 @@ declare var $: any;
   selector: "app-manage-tags",
   templateUrl: "./manage-tags.component.html",
   styleUrls: ["./manage-tags.component.scss"],
-  providers: [ManageTagsListService]
+  providers: [ManageTagsListService],
 })
 export class ManageTagsComponent implements OnDestroy, OnInit {
   searchTag = "";
@@ -58,6 +58,8 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
   @ViewChild(NgbTabset, { static: true }) set content(content: ViewContainerRef) {
     this.tabSet = content;
   };
+  showPendingPreloader = false;
+  container = document.body.querySelector(".main-container");
   dtTrigger = new Subject();
   sub: Subscription = new Subscription();
   constructor(
@@ -181,6 +183,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       this.infiniteScrollDisabled = false;
       return;
     }
+    this.showPendingPreloader = true;
     this.tagsService.searchManageTag(this.page, this.searchTag).subscribe((data: any) => {
       this.companyTags = [...this.companyTags, ...data.commonTagViews].map(item => new ManageTag(item));
       this.reqcompanyTags = [...this.reqcompanyTags, ...JSON.parse(JSON.stringify(data.commonTagViews))].map(item => new ManageTag(item));
@@ -188,6 +191,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       this.infiniteScrollDisabled = false;
       if (this.reqcompanyTags.length === data.totalElements) this.manageTagsListService.setBlockList(true);
       this.loading = false;
+      this.showPendingPreloader = false;
     })
   }
 

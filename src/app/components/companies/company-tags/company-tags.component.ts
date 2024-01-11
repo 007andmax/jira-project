@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, Input, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { CompanyTagsStateService } from './states/company-tags-state.service';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { FormControl } from '@angular/forms';
@@ -9,12 +9,14 @@ import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 import { CompanyTagsListService } from './services/company-tags-list.service';
 import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
 import { CompanyTag } from './class/company-tag';
+import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 
 @Component({
   selector: 'app-company-tags',
   templateUrl: './company-tags.component.html',
   styleUrls: ['./company-tags.component.scss'],
-  providers: [CompanyTagsListService]
+  providers: [CompanyTagsListService, TicketsListService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CompanyTagsComponent implements OnInit, OnDestroy {
   page: number = 0;
@@ -29,12 +31,14 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   tags: Array<CompanyTag> = [];
   reqTags: Array<CompanyTag> = [];
   sub = new Subscription();
+  @Input() companyId: string;
   @Input() editItems: Array<string>;
   @Input() placement: string;
   @Input() showLabel: boolean = true;
   @Input() filter: boolean = false;
   @Input() blockCreateTag: boolean = false;
   @Input() blockUserTag: boolean = false;
+  @Input() isRemoveCompanySelectedTag: boolean = true;
   @Input() isDisabled: boolean = false;
   @ViewChild('userInput', { static: true }) userInput: ElementRef<HTMLInputElement>;
   @ViewChild('dp', { static: true }) dp: any;
@@ -52,7 +56,8 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     private companyTagsListService: CompanyTagsListService,
     public tagsRealTimeService: TagsRealTimeService,
     private elRef: ElementRef,
-    public cd: ChangeDetectorRef
+    public cd: ChangeDetectorRef,
+    public ticketsListService: TicketsListService,
   ) { }
 
   /**
@@ -82,8 +87,10 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     })
     let getTagsFromEdit = this.tagsState.getTagsFromEdit().subscribe((data) => {
       this.selectedTag = data;
+      this.cd.markForCheck();
     });
     this.sub.add(getTagsFromEdit);
+    this.cd.markForCheck();
   }
   public setEditItems(data) {
     this.editItems = data;
@@ -91,10 +98,16 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
       let find = this.tags.find(tag => tag.id === item);
       if (find) this.selectedTag.push(find);
     })
+    this.cd.markForCheck();
   }
   public clearWithOutChanges() {
-
     this.selectedTag = [];
+    this.cd.markForCheck();
+  }
+  public checkRemoveTag(index) {
+    if (this.selectedTag[index].defaultTag === 'USER_TAG' && this.blockUserTag) return false;
+    if (this.companyId && this.selectedTag[index].companyId == this.companyId && !this.isRemoveCompanySelectedTag) return false;
+    return true;
   }
 
   /**
@@ -109,6 +122,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     this.companyTagsListService.setBlockList(false);
     this.tags = [];
     this.reqTags = [];
+    this.cd.markForCheck();
   }
   public onScroll(searchName = null) {
 
@@ -136,7 +150,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
         this.companyTagsListService.setBlockList(false);
       }
       this.showPreloader = false;
-      this.cd.detectChanges();
+      this.cd.markForCheck();
     })
   }
   openChange(open) {
@@ -155,6 +169,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
       this.tags[indexSelected].isHover = true;
       let isScrolledIntoView = this.isScrolledIntoView(this.elRef.nativeElement.querySelector(`#tag-${this.tags[indexSelected].id}`));
       if (!isScrolledIntoView) this.elRef.nativeElement.querySelector('.content').scrollTop = ((indexSelected < 8) ? 0 : indexSelected * 32);
+      this.cd.markForCheck();
       return;
     }
     if (event.keyCode === 38) {
@@ -168,6 +183,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
       this.tags[indexSelected].isHover = true;
       let isScrolledIntoView = this.isScrolledIntoView(this.elRef.nativeElement.querySelector(`#tag-${this.tags[indexSelected].id}`));
       if (!isScrolledIntoView) this.elRef.nativeElement.querySelector('.content').scrollTop = ((indexSelected < 8) ? 0 : indexSelected * 32);
+      this.cd.markForCheck();
       return;
     }
     if (event.keyCode === 13) {
@@ -178,6 +194,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
           this.searchName = "";
           this.selectedTag.push(this.tags[indexSelected]);
           this.tagsChange.emit(this.selectedTag);
+          this.cd.detectChanges();
         }
         return;
       }
@@ -195,6 +212,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
           this.userInput.nativeElement.value = '';
           this.searchName = "";
           this.dp.close();
+          this.cd.detectChanges();
           return;
         }
         let tag: any = {
@@ -211,6 +229,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
           }
           this.userInput.nativeElement.value = '';
           this.searchName = "";
+          this.cd.detectChanges();
         });
         this.sub.add(setTags);
       }
@@ -231,7 +250,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
    */
   public remove(index): void {
     if (index >= 0) {
-      if (this.selectedTag[index].defaultTag === 'USER_TAG' && this.blockUserTag) return;
+      if (!this.checkRemoveTag(index)) return;
       this.selectedTag.splice(index, 1);
       this.tagsChange.emit(this.selectedTag);
       this.cd.detectChanges();
@@ -261,6 +280,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
 
   public setSelectedTag(data) {
     this.selectedTag = data;
+    this.cd.markForCheck();
   }
 
   /**
@@ -270,6 +290,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     this.selectedTag = [];
     this.tags = this.reqTags;
     this.tagsChange.emit(this.selectedTag);
+    this.cd.detectChanges();
   }
 
   public trackById(index, item) {

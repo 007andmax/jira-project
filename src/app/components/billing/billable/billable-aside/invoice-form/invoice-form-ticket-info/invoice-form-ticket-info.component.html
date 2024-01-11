@@ -28,7 +28,7 @@
         <thead>
             <tr>
                 <th></th>
-                <th class="invoice-item__col-item  qt-fw-600">Item</th>
+                <th class="invoice-item__col-item  qt-fw-600 service-date">Item</th>
                 <th class="invoice-item__col-desc  qt-fw-600">Description</th>
                 <th class="invoice-item__col-price qt-fw-600">Unit Price</th>
                 <th class="invoice-item__col-quentity qt-fw-600">Quantity</th>
@@ -46,14 +46,17 @@
             >
                 <tr>
                     <td></td>
-                    <td
-                        class="invoice-item__col-item"
-                        [textContent]="service.item.name"
-                    ></td>
-                    <td
-                        class="invoice-item__col-desc"
-                        [textContent]="service.description"
-                    ></td>
+                    <td class="invoice-item__col-item service-date">
+                        <span [textContent]="service.item.name"></span>
+                        <br>
+                        <span
+                            class="qt-fs-10 qt-color-gray-500"
+                            [textContent]="'Service date - ' + getDate(service.date)"
+                        ></span>
+                    </td>
+                    <td class="invoice-item__col-desc">
+                        <pre [textContent]="service.description"></pre>
+                    </td>
                     <td
                         class="invoice-item__col-price"
                         [textContent]="service.item.rate | currency"
@@ -70,7 +73,7 @@
                     ></td>
                     <td
                         class="invoice-item__col-tax"
-                        [innerHTML]="getSelectedTaxes(service.taxes)"
+                        [innerHTML]="getServiceTaxes(service)"
                     ></td>
                     <td
                         class="invoice-item__col-amount"
@@ -122,7 +125,7 @@
                     ></td>
                     <td
                         class="invoice-item__col-tax"
-                        [innerHTML]="getSelectedTaxes(product.taxes)"
+                        [innerHTML]="getSelectedTaxes(product.taxes || [])"
                     ></td>
                     <td
                         class="invoice-item__col-amount"

@@ -76,12 +76,11 @@ export class PasswordManagerAddAsideComponent implements OnInit {
   ngOnInit() {
     let onAddForm = this.passwordManagerService.onAddForm.subscribe((res) => {
       this.passwordRecordAdd = new PasswordRecordAdd();
-      this.passwordRecordAdd.setType(this.categories.find(item => item.name === "OFFICE_365_ACCOUNT"));
+      //  this.passwordRecordAdd.setType(this.categories.find(item => item.name === "OFFICE_365_ACCOUNT"));
       let current = new Date();
       current.setFullYear(current.getFullYear() + 1);
       this.passwordRecordAdd.setExpiryDate(moment(current).format('YYYY/MM/DD'));
       this.opened = true;
-      if (this.appService.checkMobile()) this.appService.toggleMobileAside(true);
       if (this.opened && this.companiesState.getCompanyRoutingId()) this.selectCompany(this.companiesState.getCompanies().find(item => item.id === this.companiesState.getCompanyRoutingId()));
       this.datePicker.reset();
     });
@@ -106,13 +105,15 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     this.linked.onSelectCompany((data) ? data.id : null);
   }
   selectType(data) {
-    this.passwordRecordAdd.setType(data);
-    if (data.UPPERCASE !== 'DEVICE' && data.UPPERCASE !== 'LOCAL_USER_ACCOUNT') this.validate.resetLinkTo();
+    this.passwordRecordAdd.setType((data) ? data : new PasswordRecordCategories());
+    if (data) this.validate.resetTemplate();
+    if (data && data.UPPERCASE !== 'DEVICE' && data.UPPERCASE !== 'LOCAL_USER_ACCOUNT') this.validate.resetLinkTo();
   }
   onChangeDatePicker(data) {
     this.passwordRecordAdd.setExpiryDate(moment(new Date(data.year, data.month - 1, data.day)).format('YYYY/MM/DD'));
   }
-  onChangeAuthenticationKey() {
+  onChangeAuthenticationKey(event) {
+    this.passwordRecordAdd.authenticationKey = event.target.value.toUpperCase();
     this.validate.resetAuthenticationKeyLen();
     this.validate.resetAuthenticationKeyBase32();
   }
@@ -138,9 +139,9 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     this.selectedUserAndDevices = [];
     this.linked.onClosed();
     this.showAddCategory = false;
-    this.appService.toggleMobileAside(false);
     this.selectedCompany = null;
     this.companiesDb.clearWithOutChanges();
+    this.categoriesSelect.clearWithOutChanges();
     this.datePicker.reset();
     this.elRef.nativeElement.querySelector("#description-create-password").value = "";
   }

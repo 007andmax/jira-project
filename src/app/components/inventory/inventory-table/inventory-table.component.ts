@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { InventoryItem } from '../class/inventory-item';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
@@ -20,7 +20,8 @@ import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 @Component({
   selector: 'app-inventory-table',
   templateUrl: './inventory-table.component.html',
-  styleUrls: ['./inventory-table.component.scss']
+  styleUrls: ['./inventory-table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InventoryTableComponent implements OnInit {
   inventory: InventoryItem;
@@ -28,6 +29,7 @@ export class InventoryTableComponent implements OnInit {
     this.inventory = value;
     this.elRef.nativeElement.querySelector(".inventory-description-textarea").value = this.inventory.description;
     this.inventory.markup = this.getMarkups();
+    this.cd.markForCheck();
   };
   @Input() companies;
   @Input() glNumbers;
@@ -44,21 +46,25 @@ export class InventoryTableComponent implements OnInit {
     private modalService: NgbModal,
     private elRef: ElementRef,
     private quoteStateService: QuoteStateService,
-    private glNumberService: GlNumberService
+    private glNumberService: GlNumberService,
+    public cd: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
     if (this.glNumberStateService.getGLNumbers().length > 0) this.glNumbers = this.sortGlNumbers(this.glNumberStateService.getGLNumbers());
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
       this.glNumbers = this.sortGlNumbers(data);
+      this.cd.markForCheck();
     })
     this.sub.add(getOnGlNumbers);
     if (this.inventoryStateService.getCategories().length > 0) this.categories = this.inventoryStateService.getCategories();
     let getOnCategries = this.inventoryStateService.getOnCategries().subscribe((data) => {
       this.categories = data;
       if (this.categoriesSelect) this.categoriesSelect.reset(this.categories);
+      this.cd.detectChanges();
     })
     this.sub.add(getOnCategries);
+    this.cd.markForCheck();
   }
   private sortGlNumbers(data) {
     return data.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
@@ -67,15 +73,18 @@ export class InventoryTableComponent implements OnInit {
   onChangeDescription(event) {
     this.inventory.description = event.target.value;
     this.inventory.setIsEdit(true);
+    this.cd.markForCheck();
   }
   edit() {
     this.inventoryStateService.setEditInventory(this.inventory);
+    this.cd.detectChanges();
   }
   delete() {
     this.confirmStateService.setConfirmAction(DELETE_PRODUCT);
     const modalRef = this.modalService.open(InventoryCheckUseComponent, { windowClass: 'xs-modal user-modal', container: "app-inventory", backdrop: 'static', keyboard: false });
     modalRef.componentInstance.inventory = this.inventory;
     this.inventoryStateService.setProductForDelete(this.inventory);
+    this.cd.detectChanges();
   }
   public getGlNumberName() {
     let glNumber = this.inventory.glNumber;
@@ -109,7 +118,7 @@ export class InventoryTableComponent implements OnInit {
       this.validate.checkPriceCost(this.inventory.sale, this.inventory.cost);
       this.inventory.setIsEdit(true);
     }
-
+    this.cd.markForCheck();
   }
   onCheckILC(event) {
     if (event.target.value != this.inventory.ilc) {
@@ -124,7 +133,7 @@ export class InventoryTableComponent implements OnInit {
         }
       })
     }
-
+    this.cd.markForCheck();
   }
   setActive(data) {
     this.inventory.setActive(data);
@@ -136,18 +145,21 @@ export class InventoryTableComponent implements OnInit {
       this.validate.checkPriceCost(this.inventory.sale, this.inventory.cost);
       this.save();
     }
+    this.cd.markForCheck();
   }
   onBlurCost() {
     if (this.inventory.isEdit) {
       this.validate.checkPriceCost(this.inventory.sale, this.inventory.cost);
       this.save();
     }
+    this.cd.markForCheck();
   }
   onBlurSale() {
     if (this.inventory.isEdit) {
       this.validate.checkPriceCost(this.inventory.sale, this.inventory.cost);
       this.save();
     }
+    this.cd.markForCheck();
   }
   changeSales(val) {
     let value = Number(val);
@@ -156,13 +168,14 @@ export class InventoryTableComponent implements OnInit {
       this.inventory.markup = this.getMarkups();
       this.inventory.setIsEdit(true);
     }
+    this.cd.markForCheck();
   }
   save() {
     if (!this.validate.isValidate(this.inventory) || !this.inventory.isEdit) return;
     // this.inventory.description = this.elRef.nativeElement.querySelector('#inventory-description').innerHTML;
     this.inventory.setIsEdit(false);
     this.productService.editProduct(this.inventory.getForEdit()).subscribe(data => {
-
+      this.cd.markForCheck();
     })
   }
   glDropDownItemName = (result: string) => {
@@ -174,6 +187,7 @@ export class InventoryTableComponent implements OnInit {
       this.inventory.glNumber = res;
       this.inventory.setIsEdit(true);
       this.save();
+      this.cd.markForCheck();
     })
   }
   onSelectGlNumbers(data) {
@@ -181,6 +195,7 @@ export class InventoryTableComponent implements OnInit {
     if (!data) this.inventory.glNumber = null;
     this.inventory.setIsEdit(true);
     this.save();
+    this.cd.markForCheck();
   }
   onAddCategory(data) {
     this.productService.addCategory(data, null).subscribe((data: any) => {
@@ -188,6 +203,7 @@ export class InventoryTableComponent implements OnInit {
       this.validate.resetCategory();
       this.inventory.setIsEdit(true);
       this.save();
+      this.cd.markForCheck();
     })
   }
   onSelectCategory(data) {
@@ -195,6 +211,7 @@ export class InventoryTableComponent implements OnInit {
     this.validate.resetCategory();
     this.inventory.setIsEdit(true);
     this.save();
+    this.cd.markForCheck();
   }
   onCheckManufacture(event) {
     if (event.target.value != this.inventory.manufacture) {
@@ -207,6 +224,7 @@ export class InventoryTableComponent implements OnInit {
         } else {
           this.save();
         }
+        this.cd.markForCheck();
       })
     }
 
@@ -220,18 +238,21 @@ export class InventoryTableComponent implements OnInit {
       this.onChangeMarkup(event.target.value);
       this.save();
       event.target.blur();
+      this.cd.markForCheck();
     }
   }
   onEnterManufacture(event) {
     if (event.keyCode === 13) {
       this.onCheckManufacture(event);
       event.target.blur();
+      this.cd.markForCheck();
     }
   }
   onBlurDescription(event) {
     if (this.inventory.isEdit) {
       this.onChangeDescription(event);
       this.save();
+      this.cd.markForCheck();
     }
   }
   onEnterDescription(event) {
@@ -240,6 +261,7 @@ export class InventoryTableComponent implements OnInit {
       this.onChangeDescription(event);
       this.save();
       event.target.blur();
+      this.cd.markForCheck();
     }
   }
   onChangeMarkup(val) {
@@ -248,6 +270,7 @@ export class InventoryTableComponent implements OnInit {
       this.inventory.sale = Number(this.quoteStateService.roundToTwo((value * this.inventory.cost / 100 + this.inventory.cost)));
       this.inventory.markup = this.roundingMarkup(value);
       this.inventory.setIsEdit(true);
+      this.cd.markForCheck();
     }
   }
   private roundingMarkup(markup) {
@@ -261,12 +284,14 @@ export class InventoryTableComponent implements OnInit {
       this.onChangeCost(event.target.value);
       this.save();
       event.target.blur();
+      this.cd.markForCheck();
     }
   }
   onEnterILC(event) {
     if (event.keyCode === 13) {
       this.onCheckILC(event);
       event.target.blur();
+      this.cd.markForCheck();
     }
   }
   onEnterSale(event) {
@@ -274,6 +299,7 @@ export class InventoryTableComponent implements OnInit {
       this.changeSales(event.target.value);
       this.save();
       event.target.blur();
+      this.cd.markForCheck();
     }
   }
   public getPermissions(action) {

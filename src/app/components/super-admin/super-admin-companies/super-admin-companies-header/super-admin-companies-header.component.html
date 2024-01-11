@@ -1,0 +1,54 @@
+<div class="qt-page-list__header-thead-container">
+    <div class="qt-table-modern qt-page-list__header-thead">
+        <div class="qt-page-list__header-thead__row">
+            <div
+                class="ticket-table__requested-by pointer"
+                (click)="onFilter('COMPANY_NAME')"
+            >
+                Tech Company Name
+                <span class="qt-table-modern__sorting"></span>
+            </div>
+            <div class="ticket-table__subject">Owner's name</div>
+            <div class="ticket-table__company">Email Address</div>
+            <div class="ticket-table__assignee">Phone number</div>
+            <div
+                class="ticket-table__status pointer"
+                (click)="onFilter('SUBDOMAIN')"
+            >
+                Sub Domain
+                <span class="qt-table-modern__sorting"></span>
+            </div>
+            <div
+                class="ticket-table__created-date pointer"
+                (click)="onFilter('CREATED_DATE')"
+            >
+                Created Date
+                <span class="qt-table-modern__sorting"></span>
+            </div>
+            <div
+                class="ticket-table__created-status pointer"
+                (click)="onFilter('STATUS')"
+            >
+                Status
+                <span class="qt-table-modern__sorting"></span>
+            </div>
+            <div class="ticket-table__created-clients">
+                Clients
+                <span
+                    class="icon__help qt-dib qt-sz-12 qt-ic-c qt-ml-8"
+                    placement="top"
+                    ngbTooltip="Active client companies"
+                ></span>
+            </div>
+            <div class="ticket-table__created-techs">
+                Techs
+                <span
+                    class="icon__help qt-dib qt-sz-12 qt-ic-c qt-ml-8"
+                    placement="top"
+                    ngbTooltip="Active tech users"
+                ></span>
+            </div>
+            <div class="ticket-table__created-devices">Devices</div>
+        </div>
+    </div>
+</div>

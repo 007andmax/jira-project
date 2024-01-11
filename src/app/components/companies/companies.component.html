@@ -1,5 +1,6 @@
 <div class="qt-page-list companies-page">
     <app-companies-header
+        #header
         (onChangeFilterField)="onFilter($event)"
         (onSelectAllCompanies)="onSelectAllCompanies($event)"
     ></app-companies-header>
@@ -27,12 +28,20 @@
                         <app-companies-table
                             [showArchivedCompanies]="showArchivedCompanies"
                             [company]="company"
+                            [devicesCounts]="devicesCounts"
+                            (onSelectCompany)="onSelectCompany($event)"
                         ></app-companies-table>
                     </ng-template>
                     <div
                         class="loading"
                         *ngIf="showPreloader"
                     ></div>
+                    <div
+                        class="no-exist-elements"
+                        *ngIf="!showPreloader && CompaniesList.length == 0"
+                    >
+                        We couldn't find any results
+                    </div>
                 </div>
             </div>
         </div>

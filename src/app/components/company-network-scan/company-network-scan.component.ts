@@ -60,26 +60,21 @@ export class CompanyNetworkScanComponent implements OnInit {
   ngOnInit() {
     this.leftPanelStateService.changeStateWithoutNavigate('company-network-scan');
     let id = this.activateRoute.snapshot.params['id'];
-    if (id) this.companiesStateService.setCompanyRoutingId(id);
+    if (id) {
+      this.companiesStateService.setCompanyRoutingId(id);
+      this.getDevices(id);
+    }
     let subscription = this.activateRoute.params.subscribe(params => {
       id = params['id'];
       if (id) this.companiesStateService.setCompanyRoutingId(id);
       this.companyId = id;
       this.websocketService.subsribeToNetScan(this.companyId);
-      this.getDevices();
     });
     this.sub.add(subscription);
-    let getOnDevices = this.devicesStateService.getOnDevices().subscribe(data => {
-      this.devices = (data[this.companyId]) ? JSON.parse(JSON.stringify(data[this.companyId])).map(item => new Device(item)) : [];
-      this.companyNetworkScanService.onFilterName(this.devices);
-      if (this.devices.length > 0 && !this.isGetDevices) this.getSomeInfoForDevices().then(result => {
-        this.findMasterAgent();
-        if (this.getPermissions('NETWORK_SCAN_CLIENTS') && this.masterAgent.online) this.runScanDevices();
-      });
-      this.cd.detectChanges();
-      this.showPreloader = false;
+    let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
+      if (id == newChange.data.clientCompanyId) this.devicesStateService.changeDevice(this.devices, newChange);
     })
-    this.sub.add(getOnDevices);
+    this.sub.add(onDeviceUninstalled);
     let getOnChangeInfoForDevice = this.devicesStateService.getOnChangeInfoForDevice().subscribe(data => {
       if (!this.masterAgent || data.masterAgentId != this.masterAgent.agentId) {
         this.selectAllDevices = false;
@@ -143,17 +138,17 @@ export class CompanyNetworkScanComponent implements OnInit {
     })
     this.sub.add(getConfirm);
   }
-  getDevices() {
-    if (this.devicesStateService.getAllDevices()) {
-      this.devices = (this.devicesStateService.getAllDevices()[this.companyId]) ? JSON.parse(JSON.stringify(this.devicesStateService.getAllDevices()[this.companyId])).map(item => new Device(item)) : [];
+  getDevices(id) {
+    this.devicesService.getCompanyDevices(id).subscribe((data: any) => {
+      this.devices = (data[this.companyId]) ? JSON.parse(JSON.stringify(data[this.companyId])).map(item => new Device(item)) : [];
       this.companyNetworkScanService.onFilterName(this.devices);
-      if (this.devices.length > 0) this.getSomeInfoForDevices().then(result => {
+      if (this.devices.length > 0 && !this.isGetDevices) this.getSomeInfoForDevices().then(result => {
         this.findMasterAgent();
         if (this.getPermissions('NETWORK_SCAN_CLIENTS') && this.masterAgent.online) this.runScanDevices();
       });
-      this.showPreloader = false;
       this.cd.detectChanges();
-    }
+      this.showPreloader = false;
+    });
   }
   checkCanInstallAgent() {
     return this.checkSelected() && this.networkScanInstallAgent.getCredential();

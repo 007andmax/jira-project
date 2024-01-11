@@ -43,21 +43,21 @@
 
   tr:hover {
     td {
-      background-color: $gray-100--old;
+      background-color: $gray-25;
 
     }
   }
   tr.--selected {
     td {
-      background-color: $gray-200--old;
-      border-color: $primary-1 !important;
+      background-color: $gray-50;
+      border-color: $blue-light-600 !important;
     }
   }
 
     tbody {
       .billable-item-table {
         &__ticket {
-          color: $primary-1;
+          color: $blue-light-600;
           font-weight: 600;
         }
     }
@@ -94,7 +94,7 @@
 .billing-page {
   &__aside{
     .invoice-items {
-      color: $primary-2;
+      color: $gray-900;
       border-radius: 4px;
     }
     .invoice-item  {
@@ -102,14 +102,14 @@
         border-top-left-radius: 4px;
         border-top-right-radius: 4px;
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-        border: solid 1px $gray-400--old;
+        border: solid 1px $gray-200;
         background-color: $white;
         padding-top: 7px;
         padding-bottom: 7px;
       }
 
       &__number {
-        background-color: $gray-700--old;
+        background-color: $gray-500;
         line-height: 1.2;
       }
 
@@ -125,10 +125,12 @@
       &__table {
         width: 100%;
         border-collapse: separate;
-        border-spacing: 0px;
+        border-spacing: 0;
+        table-layout: fixed;
+
         th, td {
-          background-color: $gray-100--old;
-          border: solid 1px $gray-400--old;
+          background-color: $gray-25;
+          border: solid 1px $gray-200;
           border-left: none;
           height: 36px;
           padding: 0 12px;
@@ -145,7 +147,7 @@
             }
           }
           &:nth-child(2) {
-            border-left: solid 1px $gray-400--old;
+            border-left: solid 1px $gray-200;
           }
         }
 
@@ -220,16 +222,16 @@
       align-items: center;
       height: 28px;
       border-radius: 4px;
-      border: solid 1px $primary-1;
+      border: solid 1px $blue-light-600;
       background-color: $white;
       padding: 0 8px;
       width: fit-content;
-      color: $primary-1;
+      color: $blue-light-600;
       cursor: pointer;
     }
 
     .terms-n-conditions {
-      background-color: $gray-100--old;
+      background-color: $gray-25;
 
       &__textarea  {
         width: 541px;
@@ -242,7 +244,7 @@
     }
   }
   .address-block {
-    border-bottom: 1px solid $gray-400--old;
+    border-bottom: 1px solid $gray-200;
     &__horisontal-divider {
       position: absolute;
       right: 50%;
@@ -252,7 +254,7 @@
       margin-bottom: 30px;
       width: 1px;
       border: none;
-      border-left: 1px solid $gray-400--old;
+      border-left: 1px solid $gray-200;
     }
   }
 
@@ -270,7 +272,7 @@ app-invoice-preview {
 
   .invoice-info {
     border-radius: 4px;
-    border: solid 1px $primary-1;
+    border: solid 1px $blue-light-600;
     background-color: rgba(22, 164, 250, 0.05);
   }
 
@@ -284,7 +286,7 @@ app-invoice-preview {
       max-height: 70px;
     }
     .company-info {
-      border-bottom: 1px solid $gray-400--old;
+      border-bottom: 1px solid $gray-200;
     }
 
     .invoice-info-value {
@@ -295,32 +297,33 @@ app-invoice-preview {
     }
 
     &__item-header {
-      border: solid 1px $gray-400--old;
-      background-color: $gray-100--old;
+      border: solid 1px $gray-200;
+      background-color: $gray-25;
       height: 32px;
     }
 
     &__table {
       width: 100%;
       border-collapse: separate;
-      border-spacing: 0px;
+      border-spacing: 0;
+      table-layout: fixed;
 
       th, td {
-        border-bottom: solid 1px $gray-400--old;
-        border-left: solid 1px $gray-400--old;
+        border-bottom: solid 1px $gray-200;
+        border-left: solid 1px $gray-200;
         &:last-child {
-          border-right: solid 1px $gray-400--old;
+          border-right: solid 1px $gray-200;
         }
       }
       th {
-        padding: 0 12px;
+        padding: 0 8px;
         font-size: 11px;
         font-weight: 600;
         height: 32px;
       }
       td {
         font-size: 12px;
-        padding: 10px 12px;
+        padding: 10px 8px;
         height: 40px;
         vertical-align: middle;
       }
@@ -328,7 +331,7 @@ app-invoice-preview {
 
     &__item-header-number {
       color: $white;
-      background-color: $gray-700--old;
+      background-color: $gray-500;
       margin-left: -13px;
       height: 20px;
       line-height: 20px;
@@ -336,7 +339,7 @@ app-invoice-preview {
     }
 
     &__item-header-date {
-      width: 102px;
+      width: 110px;
     }
 
     &__col-item {
@@ -376,7 +379,7 @@ app-invoice-preview {
     }
 
     &__total-price {
-      background-color: $gray-100--old;
+      background-color: $gray-25;
       height: 40px;
     }
   }
@@ -411,11 +414,11 @@ app-invoice-form {
       width: 100%;
     height: 40px;
     border-radius: 4px;
-    border: solid 1px $gray-500--old;
+    border: solid 1px $gray-300;
     background-color: $white;
     font-size: 13px;
     line-height: 1.54;
-    color: $gray-800--old;
+    color: $gray-600;
     }
   }
 
@@ -438,24 +441,17 @@ app-invoice-form-ticket-edit-service,app-invoice-form-ticket-edit-product {
   display: contents;
 }
 
-.billing-aside-edit-mode {
-  color: $primary-1;
-  border: 1px solid $primary-1;
-  background-color: $white;
-  border-radius: 4px;
-}
-
 .billing-aside-save-mode {
   border-radius: 4px;
-  background-color: $primary-1;
+  background-color: $blue-light-600;
   color: $white;
-  border: 1px solid $primary-1;
+  border: 1px solid $blue-light-600;
 }
 
 .billing-aside-cancel-mode {
   border-radius: 4px;
-  color: $gray-800--old;
-  border: solid 1px $gray-500--old;
+  color: $gray-600;
+  border: solid 1px $gray-300;
   background-color: $white;
 }
 .contracts-page__aside {
@@ -544,7 +540,7 @@ app-invoice-form-ticket-edit-service,app-invoice-form-ticket-edit-product {
       padding-right: 6px;
       text-align: right;
       font-size: 12px;
-      color: $primary-2;
+      color: $gray-900;
       margin-bottom: 8px;
     }
   }
@@ -628,9 +624,9 @@ app-invoice-form-ticket-edit-service,app-invoice-form-ticket-edit-product {
           border: none;
         }
         &:hover {
-          background: $gray-100--old;
+          background: $gray-25;
           button {
-            color: $gray-800--old;
+            color: $gray-600;
           }
         }
       }

@@ -3,15 +3,16 @@ import { TicketProfileFormProduct } from './ticket-profile-form-product';
 import { TicketProfileFormService } from './ticket-profile-form-service';
 
 export class TicketProfileFormUpdate {
-    noteType: string = "PRIVATE";
+    noteType: string = "PUBLIC";
     note: string = "";
     type: string = "NOTE";
     shares = [];
     ticket: any;
-    attachments: any = [];
+    attachFileIds: any = [];
     products: Array<TicketProfileFormProduct> = [];
     services: Array<TicketProfileFormService> = [];
     techUser: User;
+    otherRecipients = [];
     constructor() { }
     public setNoteType(data) {
         this.noteType = data;
@@ -31,7 +32,7 @@ export class TicketProfileFormUpdate {
             type: "NOTE",
             shares: this.shares,
             ticket: this.ticket,
-            attachments: this.attachments
+            attachFileIds: this.attachFileIds
         }
     }
     public getDataForUpdateNote() {
@@ -41,7 +42,8 @@ export class TicketProfileFormUpdate {
             type: this.type,
             shares: this.shares,
             ticket: this.ticket,
-            attachments: this.attachments
+            attachFileIds: this.attachFileIds,
+            otherRecipients: this.otherRecipients
         }
     }
     public getDataForUpdateProduct() {
@@ -51,17 +53,16 @@ export class TicketProfileFormUpdate {
             type: this.type,
             shares: this.shares,
             ticket: this.ticket,
-
+            otherRecipients: this.otherRecipients
         }
     }
     public getDataForUpdateService() {
-        this.services.forEach(item => (item.user = { id: this.techUser.id }));
         return {
-            services: this.services,
+            services: this.services.map(item => item.getDateForRequest(this.techUser)),
             type: this.type,
             shares: this.shares,
             ticket: this.ticket,
-
+            otherRecipients: this.otherRecipients
         }
     }
     public clearShares() {
@@ -91,13 +92,13 @@ export class TicketProfileFormUpdate {
         this.ticket = { id: id };
     }
     public addFile(id) {
-        this.attachments.push({ file: { id: id } });
+        this.attachFileIds.push(id);
     }
     public removeFile(index) {
-        this.attachments.splice(index, 1);
+        this.attachFileIds.splice(index, 1);
     }
     public clearAttachments() {
-        this.attachments = [];
+        this.attachFileIds = [];
     }
     public setProducts(data) {
         this.products = data;
@@ -107,7 +108,8 @@ export class TicketProfileFormUpdate {
     }
     public setShares(users) {
         this.shares = [];
-        users.forEach(item => (this.shares.push({ user: { id: item.id } })));
+        this.shares = users.filter(item => !item.isCustomEmail).map(item => ({ user: { id: item.id } }));
+        this.otherRecipients = users.filter(item => item.isCustomEmail).map(item => item.recipient);
     }
     public toggleShares(user) {
         let findIndex = this.shares.findIndex(item => item.user.id === user.id);

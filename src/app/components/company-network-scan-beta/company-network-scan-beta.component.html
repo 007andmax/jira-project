@@ -1,6 +1,6 @@
 <div class="network-scan-page">
     <div class="network-scan-page__content">
-        <h6 class="qt-fw-600 qt-color-dark qt-mb-24">Network scan beta</h6>
+        <h6 class="qt-fw-600 qt-color-gray-900 qt-mb-24">Network scan beta</h6>
         <app-company-network-scan-no-exist-devices
             *ngIf="!showPreloader && assetList.length === 0"
             [companyId]="companyId"
@@ -244,6 +244,7 @@
 
 
 
+
             </tbody>
             <div
                 class="loading"
@@ -253,7 +254,7 @@
                 class="no-devices"
                 *ngIf="noExistDevices"
             >
-                <p>No Devices</p>
+                <p>We couldn't find any results</p>
             </div>
             <div
                 class="no-devices"

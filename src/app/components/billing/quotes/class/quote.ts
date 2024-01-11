@@ -22,6 +22,7 @@ export class Quote {
     createdBy: string;
     invoiceId: string;
     ticketId: string;
+    selected: boolean = false;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -32,6 +33,14 @@ export class Quote {
             this.company.addresses = [];
             if (billing) this.company.addresses = [billing];
             if (shipping) this.company.addresses.push(shipping);
+            this.reviewNotes = data.reviewNotes.map(item => new QuoteReviewNotes(item));
         }
+    }
+    public parseRecipients() {
+        return this.recipients.join("<br/>");
+    }
+    public checkStatus(statusForShowingArray) {
+        const elems = statusForShowingArray.filter((item) => item.toLowerCase() === this.status.toLowerCase());
+        return elems.length > 0;
     }
 }

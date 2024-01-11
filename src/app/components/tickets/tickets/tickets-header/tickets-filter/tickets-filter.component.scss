@@ -1,7 +1,6 @@
 @import "./src/assets/styles/variable";
 
 .left-panel-ng2__content--filters {
-  display: flex;
   app-select-search {
     margin-right: 8px;
     &:last-child {
@@ -13,102 +12,30 @@
   .search-tech-users,
   .search-status,
   .search-company,
+  .search-priority,
   .light-dropdown.dropdown,
   app-tickets-filter-tags {
-    @media (max-width: 767px) {
-      margin-bottom: 16px;
-    }
-
     &::before {
-      color: $primary-2;
-      font-weight: 600;
-      line-height: 20px;
+      color: $gray-500;
+      font-size: 13px;
+      font-weight: 500;
     }
   }
 
-  .search-company {
-    width: 34%;
-    margin-right: 8px;
-    @media (max-width: 767px) {
-      width: 100%;
-    }
-
-    &::before {
-      @media (max-width: 767px) {
-        content: "Company";
-      }
-    }
-  }
-
-  .search-users {
-    width: 23%;
-    margin-right: 8px;
-
-    @media (max-width: 767px) {
-      width: 100%;
-    }
-
-    &::before {
-      @media (max-width: 767px) {
-        content: "User";
-      }
-    }
-  }
-
-  .search-tech-users {
-    width: 23%;
-    margin-right: 8px;
-
-    @media (max-width: 767px) {
-      width: 100%;
-    }
-
-    &::before {
-      @media (max-width: 767px) {
-        content: "Tech Team";
-      }
-    }
-  }
-
-  .search-status {
-    width: 20%;
-    margin-right: 8px;
-
-    @media (max-width: 767px) {
-      width: 100%;
-    }
-
-    &::before {
-      @media (max-width: 767px) {
-        content: "Status";
-      }
-    }
-  }
-
-  app-tickets-filter-tags {
-    @media (max-width: 767px) {
-      width: 100%;
-    }
-
-    &::before {
-      @media (max-width: 767px) {
-        content: "Tags";
-      }
-    }
-  }
-
-  @media (max-width: 767px) {
-    align-items: flex-start;
-    max-height: calc(100vh - 74px);
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: $white;
-    padding: 16px;
-    padding-top: 72px;
-    flex-direction: column;
+  /deep/tickets-filter-drop-down .mat-form-field {
     width: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
   }
+  /deep/tickets-filter-users-drop-down .mat-form-field {
+    width: 100%;
+  }
+  /deep/tickets-filter-companies-drop-down .mat-form-field {
+    width: 100%;
+  }
+}
+
+/deep/ .qt-page-list__header-title {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: $gray-900;
 }

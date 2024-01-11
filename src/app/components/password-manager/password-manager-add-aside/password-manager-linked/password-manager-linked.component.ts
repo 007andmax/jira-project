@@ -4,7 +4,6 @@ import { Company } from 'src/app/interfaces/company/company';
 import { GadgetsService } from 'src/app/services/gadgets/gadgets.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
-import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { PasswordDeviceUser } from '../../class/password-device-user';
 
@@ -13,6 +12,8 @@ import { PasswordRecordValidate } from '../../class/password-record-validate';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { TicketStateService } from 'src/app/components/tickets/tickets/ticket-edit-aside/services/ticket-state.service';
 import { DevicesService } from 'src/app/services/devices/devices.service';
+import { Device } from 'src/app/components/company-devices/class/device';
+import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 
 @Component({
   selector: 'password-manager-linked',
@@ -31,44 +32,53 @@ export class PasswordManagerLinkedComponent implements OnInit {
   public usersList = [];
   public gadgets = [];
   public newGadgets: any;
+  devices = [];
   selectedCompanyId: string;
   companies: Array<Company> = [];
-  preloader: boolean = true;
+  preloader: boolean = false;
   isInitGetGadgets: boolean = false;
   @Output() onSelectedItem = new EventEmitter<any>();
   sub: Subscription = new Subscription();
   constructor(public cd: ChangeDetectorRef,
     public companiesState: CompaniesStateService,
-    public devicesStateService: DevicesStateService,
     private gadgetsService: GadgetsService,
     public ticketsService: TicketsService,
     public ticketStateService: TicketStateService,
     public elRef: ElementRef,
+    public devicesStateService: DevicesStateService,
     public customerPortalStateService: CustomerPortalStateService,
     public devicesService: DevicesService,
     private usersStateService: UsersStateService,) { }
 
   ngOnInit() {
-    if (this.devicesStateService.getAllDevices()) {
-      this.preloader = false;
-      if (this.selectedCompanyId) this.onSelectCompany(this.selectedCompanyId);
-    }
-    this.devicesStateService.getOnDevices().subscribe(data => {
-      this.preloader = false;
-      if (this.selectedCompanyId) this.onSelectCompany(this.selectedCompanyId);
-    })
+    if (this.selectedCompanyId) this.onSelectCompany(this.selectedCompanyId);
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
     let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
       this.getClientsList(data);
     })
     this.sub.add(getOnCompanies);
+    let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
+      if (this.selectedCompanyId == newChange.data.clientCompanyId) this.devicesStateService.changeDevice(this.devicesList, newChange);
+    })
+    this.sub.add(onDeviceUninstalled);
+  }
+  getDevices() {
+    this.devicesService.getCompanyDevices(this.selectedCompanyId).subscribe((data: any) => {
+      let devices = (data[this.selectedCompanyId]) ? JSON.parse(JSON.stringify(data[this.selectedCompanyId])).map(item => new Device(item)) : [];
+      devices.forEach(item => {
+        this.devicesList.push(new PasswordDeviceUser(item.id, this.getLabelDevice(item), 'DEVICE'));
+      })
+      this.devicesList.sort((a, b) => (`${a.name}`.toLowerCase() > `${b.name}`.toLowerCase()) ?
+        1 : ((`${b.name}`.toLowerCase() > `${a.name}`.toLowerCase()) ? -1 : 0));
+      this.preloader = false;
+    });
   }
   public getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
   onSelectCompany(id) {
-
+    this.preloader = true;
     this.usersList = [];
     this.devicesList = [];
     this.gadgets = [];
@@ -85,13 +95,10 @@ export class PasswordManagerLinkedComponent implements OnInit {
       })
       this.usersList.sort((a, b) => (`${a.name}`.toLowerCase() > `${b.name}`.toLowerCase()) ?
         1 : ((`${b.name}`.toLowerCase() > `${a.name}`.toLowerCase()) ? -1 : 0));
-      let devices = (this.devicesStateService.getAllDevices() && this.devicesStateService.getAllDevices()[id]) ? this.devicesStateService.getAllDevices()[id] : [];
-      devices.forEach(item => {
-        this.devicesList.push(new PasswordDeviceUser(item.id, this.getLabelDevice(item), 'DEVICE'));
-      })
-      this.devicesList.sort((a, b) => (`${a.name}`.toLowerCase() > `${b.name}`.toLowerCase()) ?
-        1 : ((`${b.name}`.toLowerCase() > `${a.name}`.toLowerCase()) ? -1 : 0));
+      this.getDevices();
       if (!this.isInitGetGadgets) this.getGadgets();
+    } else {
+      this.preloader = false;
     }
     this.validate.resetCompany();
   }

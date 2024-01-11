@@ -32,7 +32,7 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private marketingEmailStateService: MarketingEmailStateService,
     private marketingEmailRealTimeService: MarketingEmailRealTimeService,
-    private usersStateService: UsersStateService,
+    public usersStateService: UsersStateService,
     private toastrService: ToastrService,
     private appStateService: AppStateService,
     public cd: ChangeDetectorRef,) { }
@@ -84,18 +84,6 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
     }
     return count;
   }
-  getUserAvatarUrl(user) {
-    if (!(user && user.avatar)) return null;
-
-    if (user.id) {
-      return `url(${'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
-        '')}) 0% 0% / cover no-repeat`
-    } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
-      return `url(/file/${(user.avatar.origin.id)}.jpg) 0% 0% / cover no-repeat`;
-    } else {
-      return 'url(/users/default/image.jpg) 0% 0% / cover no-repeat';
-    }
-  };
   onEditSubscription(item, event) {
     if (item.isInitEdit) {
       if (item.length === 0 || item.disableUpdate || item.isInitRequest) return;

@@ -8,6 +8,7 @@
             <table class="qt-page-list__body-tbody qt-table-modern products-table">
                 <tbody
                     infiniteScroll
+                    [infiniteScrollContainer]="container"
                     [infiniteScrollDistance]="2"
                     [infiniteScrollThrottle]="50"
                     [infiniteScrollDisabled]="infiniteScrollDisabled"
@@ -26,6 +27,12 @@
                             [item]="inventory"
                         ></app-inventory-table>
                     </ng-template>
+                    <div
+                        class="no-exist-elements"
+                        *ngIf="!showPreloader && inventoryList.length == 0"
+                    >
+                        We couldn't find any results
+                    </div>
                     <div
                         class="loading"
                         *ngIf="showPreloader"

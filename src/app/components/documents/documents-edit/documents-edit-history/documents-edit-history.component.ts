@@ -17,7 +17,7 @@ export class DocumentsEditHistoryComponent implements OnInit {
   list: Array<DocumentHistory> = []
   page: number = 0;
   constructor(private documentsService: DocumentsService,
-    private usersStateService: UsersStateService,) { }
+    public usersStateService: UsersStateService,) { }
 
   ngOnInit() {
     this.getHistory();
@@ -38,18 +38,12 @@ export class DocumentsEditHistoryComponent implements OnInit {
   getUserAvatarUrl(user) {
     if (!(user && user.avatar)) return '#7c77bc';
     if (user.id) {
-      return `#7c77bc url(${'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
+      return `#7c77bc url(/users/${user.id}/image${(user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
         '')}) 0% 0% / cover no-repeat`
     } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
       return `#7c77bc url(/file/${(user.avatar.origin.id)}.jpg) 0% 0% / cover no-repeat`;
-    } else {
-      return '#7c77bc url(/users/default/image.jpg) 0% 0% / cover no-repeat';
     }
   };
-  getNameForAvatar(user) {
-    if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}${(user.lastName) ? user.lastName[0].toUpperCase() : ''}`;
-    return '';
-  }
   parseDate(item) {
     return `${item.historyType === "OPEN" ? 'Opened' : 'Edited'} on ${moment(item.actionDate).format('DD MMM YYYY')}`
   }

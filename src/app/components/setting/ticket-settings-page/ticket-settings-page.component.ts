@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { forkJoin, Subscription } from 'rxjs';
-import { DELETE_LIST_TICKET_STATUS } from 'src/app/const/confirm';
+import { DELETE_LIST_TICKET_PRIORITY, DELETE_LIST_TICKET_STATUS } from 'src/app/const/confirm';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { NoteStateService } from 'src/app/states/note/note-state.service';
@@ -13,6 +13,7 @@ import { InvoiceTicketsService } from '../accounting/accounting-settings.service
 import { CannedResponsesComponent } from './canned-responses/canned-responses.component';
 import { TicketSettingsComponent } from './ticket-settings/ticket-settings.component';
 import { TicketsStatusComponent } from './tickets-status/tickets-status.component';
+import { TicketsPriorityComponent } from './tickets-priority/tickets-priority.component';
 declare var $: any;
 @Component({
   selector: 'ticket-settings-page',
@@ -26,6 +27,7 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
   @ViewChild('ticketSettings', { static: true }) ticketSettings: TicketSettingsComponent;
   @ViewChild('ticketsStatus', { static: true }) ticketsStatus: TicketsStatusComponent;
   @ViewChild('cannedResponses', { static: true }) cannedResponses: CannedResponsesComponent;
+  @ViewChild('ticketPriority', { static: true }) ticketPriority: TicketsPriorityComponent;
   constructor(private invoiceTicketsService: InvoiceTicketsService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
@@ -42,9 +44,8 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
     this.settingStateService.setComponentName('InvoiceTicketsComponent');
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
-        if (this.confirmStateService.getConfirmAction() === DELETE_LIST_TICKET_STATUS) {
-          this.onRemoveTicketsStatus();
-        }
+        if (this.confirmStateService.getConfirmAction() === DELETE_LIST_TICKET_STATUS) this.onRemoveTicketsStatus();
+        if (this.confirmStateService.getConfirmAction() === DELETE_LIST_TICKET_PRIORITY) this.onRemoveTicketsPriority();
       }
     })
     this.sub.add(getConfirm);
@@ -58,6 +59,9 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
   create() {
     this.ticketsStatus.toggleAddStatus(true);
   }
+  createPriority() {
+    this.ticketPriority.toggleAddPriority(true);
+  }
   createResponse() {
     this.noteStateService.openAddAside();
   }
@@ -70,6 +74,9 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
   }
   getSelectedCount() {
     return this.ticketsStateService.getListTicketStatusForRemove().length;
+  }
+  getSelectedPriorityCount() {
+    return this.ticketsStateService.getListTicketsPrioritiesForRemove().length;
   }
   onBackMenu() {
     let body = document.getElementsByTagName("body")[0];
@@ -87,10 +94,26 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
         }
       );
   }
+  onRemoveTicketsPriority() {
+    forkJoin(this.ticketsStateService.getListTicketsPrioritiesForRemove().map(item => this.ticketsService.removeTicketPriority(item.id)))
+      .subscribe(
+        () => {
+          this.ticketsStateService.setListTicketsPrioritiesForRemove([]);
+          this.cd.detectChanges();
+        },
+        error => {
+        }
+      );
+  }
   removeTicketsStatus() {
     this.confirmStateService.setConfirmAction(DELETE_LIST_TICKET_STATUS);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove Ticket Status`;
+  }
+  removeTicketsPriority() {
+    this.confirmStateService.setConfirmAction(DELETE_LIST_TICKET_PRIORITY);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.message = `Remove Ticket Priority`;
   }
 }
 

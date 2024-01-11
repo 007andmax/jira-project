@@ -598,7 +598,7 @@ export class HardwareComponent implements OnInit, OnDestroy {
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
                   <tr>
-                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: $primary-2;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Computer</th>
+                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: $gray-900;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Computer</th>
                   </tr>
               </thead>
               <tbody>`;
@@ -622,7 +622,7 @@ export class HardwareComponent implements OnInit, OnDestroy {
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
                   <tr>
-                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: $primary-2;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Motherboard</th>
+                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: $gray-900;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Motherboard</th>
                   </tr>
               </thead>
               <tbody>`;
@@ -646,7 +646,7 @@ export class HardwareComponent implements OnInit, OnDestroy {
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
                   <tr>
-                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: $primary-2;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Processor</th>
+                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: $gray-900;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Processor</th>
                   </tr>
               </thead>
               <tbody>`;
@@ -718,7 +718,7 @@ export class HardwareComponent implements OnInit, OnDestroy {
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
                   <tr>
-                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: $primary-2;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Network Card</th>
+                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: $gray-900;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Network Card</th>
                   </tr>
               </thead>
               <tbody>`;
@@ -742,7 +742,7 @@ export class HardwareComponent implements OnInit, OnDestroy {
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
                   <tr>
-                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: $primary-2;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Graphics Card</th>
+                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: $gray-900;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Graphics Card</th>
                   </tr>
               </thead>
               <tbody>`;
@@ -766,7 +766,7 @@ export class HardwareComponent implements OnInit, OnDestroy {
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
                   <tr>
-                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: $primary-2;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Display</th>
+                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: $gray-900;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Display</th>
                   </tr>
               </thead>
               <tbody>`;
@@ -790,7 +790,7 @@ export class HardwareComponent implements OnInit, OnDestroy {
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
                   <tr>
-                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: $primary-2;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Hard Disk</th>
+                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: $gray-900;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Hard Disk</th>
                   </tr>
               </thead>
               <tbody>`;

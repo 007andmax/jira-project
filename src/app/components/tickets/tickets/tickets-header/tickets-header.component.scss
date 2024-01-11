@@ -6,45 +6,18 @@
 }
 
 .filter-button {
-  padding-left: 30px;
-  background-repeat: no-repeat;
-  background-position: 10px center;
-  background-size: 16px;
-  background-color: $white;
-  color: $primary-2;
-  border: none;
-  background-image: url("../../../../../assets/img/icons/filter.svg");
-  @media (max-width: 767px) {
-    background-image: url("/assets/img/icons/filter-white.svg");
-    background-color: transparent;
-    background-size: 24px;
-    height: 24px;
-    width: 24px;
-    background-position: center;
-    padding: 0;
-  }
-  span {
-    @media (max-width: 767px) {
-      display: none;
-    }
-  }
   &.active {
-    color: $primary-1;
+    color: $blue-light-600;
     background-color: #16a4fa10;
-    border: none;
-    background-image: url(../../../../../assets/img/icons/filter-active.svg);
-  }
-}
-.icon__search-white {
-  @media (max-width: 767px) {
-    display: none;
+    border-color: transparent;
+
+    .icon__filter {
+      background-color: $blue-light-600;
+    }
   }
 }
 .list-filters {
   display: none;
-  @media (max-width: 767px) {
-    display: block;
-  }
   margin: -8px -8px 8px -8px;
   ::ng-deep.mat-form-field-infix {
     overflow: auto;
@@ -66,9 +39,6 @@
 .is-exist-filters {
   position: relative;
   &::before {
-    @media (max-width: 767px) {
-      display: block;
-    }
     display: none;
     content: " ";
     position: absolute;
@@ -76,7 +46,18 @@
     right: 0;
     width: 8px;
     height: 8px;
-    background-color: $error;
+    background-color: $red-600;
     border-radius: 10px;
   }
+}
+
+.qt-page-list__header.--sticky {
+    margin: 0;
+    padding: 10px 32px;
+    background-color: $gray-50;
+    border-bottom: 1px solid $gray-200;
+}
+
+.qt-page-list__header-filters {
+    display: none;
 }

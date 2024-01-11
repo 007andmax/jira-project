@@ -2,6 +2,7 @@ import { LogicalDisk } from './../../../device/hardware/class/system';
 import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { HardwareSummaryReport } from '../../class/hardware-summary-report';
+import * as moment from "moment";
 
 @Component({
   selector: 'hardware-summary-report',
@@ -15,7 +16,7 @@ export class HardwareSummaryReportComponent implements OnInit {
   company: any;
   hardwareSummaryReport: HardwareSummaryReport = new HardwareSummaryReport();
   constructor(public cd: ChangeDetectorRef,
-    private companiesStateService: CompaniesStateService) { }
+    public companiesStateService: CompaniesStateService) { }
   ngOnInit() {
   }
   public getReport(data) {
@@ -51,9 +52,10 @@ export class HardwareSummaryReportComponent implements OnInit {
       return Math.floor(size / 1073741824) + 'GB'
     }
   };
+  public getDateForHeader(data) {
+    return moment(data).format('DD MMM YYYY');
+  }
   public trackByIndex(index, item) {
     return index;
   }
-
-
 }

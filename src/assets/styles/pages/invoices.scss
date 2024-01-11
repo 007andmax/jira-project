@@ -15,10 +15,10 @@
     width: 35%;
     margin-right: 8px;
     input {
-      color: $primary-2;
+      color: $gray-900;
     }
     input::placeholder {
-      color: $gray-800--old;
+      color: $gray-600;
       font-size: 12px;
     }
   }
@@ -27,19 +27,19 @@
     width: 21%;
     margin-right: 8px;
     input {
-      color: $primary-2;
+      color: $gray-900;
     }
     input::placeholder {
-      color: $gray-800--old;
+      color: $gray-600;
       font-size: 12px;
     }
   }
   .invoices-number-filter {
     width: 21%;
     margin-right: 8px;
-    color: $primary-2;
+    color: $gray-900;
     &::placeholder {
-      color: $gray-800--old;
+      color: $gray-600;
       font-size: 12px;
     }
   }
@@ -47,10 +47,10 @@
   .invoices-date-filter {
     width: 23%;
     input {
-      color: $primary-2;
+      color: $gray-900;
     }
     input::placeholder {
-      color: $gray-800--old;
+      color: $gray-600;
       font-size: 12px;
     }
     .date-picker {
@@ -74,7 +74,7 @@
 
   .filters-icon {
     background-color: $white;
-    border: solid 1px $gray-400--old;
+    border: solid 1px $gray-200;
     background-size: auto;
     min-width: 32px;
   }
@@ -100,9 +100,7 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    width: -webkit-max-content;
-    width: -moz-max-content;
-    width: max-content;
+    width: 100%;
   }
 
   .invoce-table__invoice {
@@ -113,7 +111,7 @@
   }
   td.invoce-table__invoice {
    font-weight: $fw-medium;
-    color: $primary-1;
+    color: $blue-light-600;
   }
 
   .invoce-table__status {
@@ -155,6 +153,7 @@
   .invoce-table__menu {
     width: 28px;
     min-width: 28px;
+    max-width: 28px;
     padding-left: 0;
     padding-right: 0;
 
@@ -166,12 +165,12 @@
   }
 
   .total-divider {
-    border-top: 1px solid $gray-400--old;
+    border-top: 1px solid $gray-200;
   }
 
   &__aside {
     .address-block {
-      border-bottom: 1px solid $gray-400--old;
+      border-bottom: 1px solid $gray-200;
     }
 
     .receive-full-amount-check {
@@ -182,7 +181,7 @@
       width: 100%;
       border-spacing: 0;
       border-collapse: initial;
-      color: $primary-2;
+      color: $gray-900;
 
       .payment-input {
         @include input;
@@ -190,10 +189,10 @@
       }
 
       th {
-        border: solid 1px $gray-400--old;
+        border: solid 1px $gray-200;
         border-right: none;
         border-bottom: none;
-        background-color: $gray-100--old;
+        background-color: $gray-25;
         height: 36px;
         font-size: 11px;
         padding: 0 12px;
@@ -203,7 +202,7 @@
         }
         &:last-child {
           border-top-right-radius: 4px;
-          border-right: solid 1px $gray-400--old;
+          border-right: solid 1px $gray-200;
         }
       }
       tr {
@@ -228,7 +227,7 @@
         }
       }
       td {
-        border: solid 1px $gray-400--old;
+        border: solid 1px $gray-200;
         height: 36px;
         padding: 0 12px;
         border-right: none;
@@ -238,7 +237,7 @@
         font-weight: 400;
         color: $gray-900;
         &:last-child {
-          border-right: solid 1px $gray-400--old;
+          border-right: solid 1px $gray-200;
         }
         &.unpaid-table__payment {
           padding: 0;
@@ -248,7 +247,7 @@
       tr {
         &:last-child {
           td {
-            border-bottom: solid 1px $gray-400--old;
+            border-bottom: solid 1px $gray-200;
 
             &:first-child {
               border-bottom-left-radius: 4px;
@@ -313,13 +312,13 @@
     background-position: 10px center;
     background-size: 16px;
     background-color: $white;
-    color: $primary-2;
+    color: $gray-900;
     border: none;
     background-image: url(/assets/img/icons/filter.svg);
 
     &.active {
       background-color: #16a4fa10;
-      color: $primary-1;
+      color: $blue-light-600;
       padding-left: 16px;
       border: none;
       background-image: none;
@@ -386,7 +385,7 @@ app-invoices-item,app-payment-item {
 
   .header-circle-icon {
     background-size: 16px !important;
-    border: 1px solid $gray-400--old;
+    border: 1px solid $gray-200;
     background-repeat: no-repeat;
     background-position: center;
     cursor: pointer;
@@ -414,7 +413,7 @@ app-invoices-item,app-payment-item {
       max-height: 70px;
     }
     .company-info {
-      border-bottom: 1px solid $gray-400--old;
+      border-bottom: 1px solid $gray-200;
     }
 
     .invoice-info-value {
@@ -425,43 +424,44 @@ app-invoices-item,app-payment-item {
     }
 
     &__item-header {
-      border: solid 1px $gray-400--old;
-      background-color: $gray-100--old;
+      border: solid 1px $gray-200;
+      background-color: $gray-25;
       height: 32px;
     }
 
     &__table {
       width: 100%;
       border-collapse: separate;
-      border-spacing: 0px;
+      border-spacing: 0;
+      table-layout: fixed;
 
       th, td {
-        border-bottom: solid 1px $gray-400--old;
-        border-left: solid 1px $gray-400--old;
+        border-bottom: solid 1px $gray-200;
+        border-left: solid 1px $gray-200;
         &:last-child {
-          border-right: solid 1px $gray-400--old;
+          border-right: solid 1px $gray-200;
         }
       }
       th {
-        padding: 0 12px;
+        padding: 0 8px;
         font-size: 11px;
         font-weight: 600;
         height: 32px;
       }
       td {
-        font-size: 14px;
+        font-size: 12px;
         line-height: 17px;
         font-weight: 400;
         color: $gray-900;
         height: 40px;
-        padding: 10px;
+        padding: 10px 8px;
         vertical-align: middle;
       }
     }
 
     &__item-header-number {
       color: $white;
-      background-color: $gray-700--old;
+      background-color: $gray-500;
       margin-left: -13px;
       height: 20px;
       line-height: 20px;
@@ -514,7 +514,7 @@ app-invoices-item,app-payment-item {
     }
 
     &__total-price {
-      background-color: $gray-100--old;
+      background-color: $gray-25;
       height: 40px;
     }
 
@@ -550,7 +550,7 @@ app-invoices-item,app-payment-item {
 
   .invoice-status-timeline {
     border-radius: 6px;
-    border: solid 1px $gray-400--old;
+    border: solid 1px $gray-200;
     background-color: $white;
     height: 121px;
     max-height: 121px;
@@ -566,7 +566,7 @@ app-invoices-item,app-payment-item {
 
     &__line {
       width: 100%;
-      border-top: 1px solid $gray-400--old;
+      border-top: 1px solid $gray-200;
       display: flex;
       justify-content: space-between;
       padding-left: 16px;
@@ -576,7 +576,7 @@ app-invoices-item,app-payment-item {
 
     &__line-point {
       border-radius: 50%;
-      background: $success;
+      background: $green-600;
       width: 8px;
       height: 8px;
       position: relative;
@@ -605,7 +605,7 @@ app-invoices-item,app-payment-item {
     width: 40px;
     height: 40px;
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.05);
-    border: solid 1px $gray-400--old;
+    border: solid 1px $gray-200;
     background-color: $white;
     border-radius: 50%;
     position: relative;
@@ -620,18 +620,21 @@ app-invoices-item,app-payment-item {
       height: 4px;
       background: $white;
       transform: rotate(45deg);
-      border-left: 1px solid $gray-400--old;
-      border-top: 1px solid $gray-400--old;
+      border-left: 1px solid $gray-200;
+      border-top: 1px solid $gray-200;
     }
   }
 
 
   .invoice-aside-info-block {
     border-radius: 10px;
-    border: dotted 1px $gray-500--old;
+    border: dotted 1px $gray-300;
     background-color: $white;
   }
 
+  .amount-received-invalid-feedback {
+    bottom: -36px;
+  }
 }
 
 .user-aside-detail-page__aside {
@@ -654,8 +657,8 @@ app-invoices-item,app-payment-item {
       th {
         padding: 8px;
         @include label-l__sb;
-        color: $primary-2;
-        background: $gray-100--old;
+        color: $gray-900;
+        background: $gray-25;
         text-transform: uppercase;
         &:first-child {
           padding-left: 16px;
@@ -672,8 +675,8 @@ app-invoices-item,app-payment-item {
        padding: 10px 8px;
        font-size: 12px;
        line-height: 16px;
-       color: $primary-2;
-       border-bottom: 1px solid $gray-300--old;
+       color: $gray-900;
+       border-bottom: 1px solid $gray-100;
      }
     }
   }
@@ -691,7 +694,7 @@ app-invoices-item,app-payment-item {
         right: 0;
         height: 1px;
         width: 100%;
-        background: $gray-300--old;
+        background: $gray-100;
       }
 
       &:first-child {
@@ -720,7 +723,7 @@ app-invoices-item,app-payment-item {
       td {
         font-size: 13px;
         line-height: 20px;
-        color: $primary-2;
+        color: $gray-900;
         font-weight: 500;
       }
       &:last-child {
@@ -775,7 +778,7 @@ app-invoices-item,app-payment-item {
           right: 0;
           height: 1px;
           width: 100%;
-          background: $gray-300--old;
+          background: $gray-100;
         }
         &:first-child {
           &::after {
@@ -837,7 +840,7 @@ app-invoices-item,app-payment-item {
 .messages-table__account {
   padding: 16px;
   &-header {
-    color: $secondary-1;
+    color: $blue-dark-800;
     display: inline-block;
     background-color: rgba(7,71,166,.06);
     padding: 5px 6px;
@@ -848,10 +851,10 @@ app-invoices-item,app-payment-item {
   }
   &-data {
     font-weight: 500;
-    color: $primary-2;
+    color: $gray-900;
     margin: 12px 0 4px;
   }
   &-text {
-    color: $primary-2;
+    color: $gray-900;
   }
 }

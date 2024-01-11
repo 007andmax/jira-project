@@ -13,7 +13,7 @@ import { USER } from 'src/app/const/users';
   styleUrls: ['./draft-email-user-recipients.component.scss']
 })
 export class DraftEmailUserRecipientsComponent implements OnInit {
-
+  reEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
   visible = true;
   selectable = true;
   removable = true;
@@ -23,16 +23,14 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   userCtrl = new FormControl();
   selectedUsers = [];
-  showError = false;
-  showErrorClient = false;
   userEmails = [];
-  userList = [];
   reqUsersList = [];
   toggleAllUsers: boolean = false;
   usersClients = [];
   usersTechnical = [];
   reqUsersListClients = [];
   reqUsersListTechnical = [];
+  @Input() validate = true;
   @Input() selectedClient = null;
   @Input() accountType: string = 'CLIENT';
   @Input() usersSelected: Array<User> = [];
@@ -77,13 +75,14 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
     })
   }
   private setUserList(data) {
-    let users = data.filter(item => ((this.selectedClient == null && this.accountType != null) ? item.accountType == this.accountType && !item.deletedAt : false) || ((this.accountType != null) ? item.accountType === this.accountType : true) && ((this.selectedClient !== null) ? (item.accountType === 'TECH' || item.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.selectedClient.id)) : true) && !item.deletedAt).filter(item => item.primaryEmail !== '').sort((a, b) => (a.primaryEmail.toLowerCase() > b.primaryEmail.toLowerCase()) ?
-      1 : ((b.primaryEmail.toLowerCase() > a.primaryEmail.toLowerCase()) ? -1 : 0));
+    let users = data.filter(item => ((this.selectedClient) ? item.customerCompaniesInfo && item.customerCompaniesInfo.find(company => company.companyId == this.selectedClient.id) : true) &&
+      ((this.accountType) ? item.accountType == this.accountType : true) &&
+      !item.deletedAt).filter(item => item.primaryEmail !== '').sort((a, b) => (a.primaryEmail.toLowerCase() > b.primaryEmail.toLowerCase()) ?
+        1 : ((b.primaryEmail.toLowerCase() > a.primaryEmail.toLowerCase()) ? -1 : 0));
     this.reqUsersListTechnical = users.filter((item) => item.accountType === USER.TYPE.TECH && !item.deletedAt && item.primaryEmail !== "").sort((a, b) => (this.getFirstLastName(a).toLowerCase() > this.getFirstLastName(b).toLowerCase()) ?
       1 : ((this.getFirstLastName(b).toLowerCase() > this.getFirstLastName(a).toLowerCase()) ? -1 : 0));
     this.reqUsersListClients = users.filter((item) => item.accountType === USER.TYPE.CLIENT && !item.deletedAt && item.primaryEmail !== "").sort((a, b) => (this.getFirstLastName(a).toLowerCase() > this.getFirstLastName(b).toLowerCase()) ?
       1 : ((this.getFirstLastName(b).toLowerCase() > this.getFirstLastName(a).toLowerCase()) ? -1 : 0));
-
     this.usersClients = users.filter((item) => item.accountType === USER.TYPE.CLIENT && !item.deletedAt && item.primaryEmail !== "").sort((a, b) => (this.getFirstLastName(a).toLowerCase() > this.getFirstLastName(b).toLowerCase()) ?
       1 : ((this.getFirstLastName(b).toLowerCase() > this.getFirstLastName(a).toLowerCase()) ? -1 : 0));
     this.usersTechnical = users.filter((item) => item.accountType === USER.TYPE.TECH && !item.deletedAt && item.primaryEmail !== "").sort((a, b) => (this.getFirstLastName(a).toLowerCase() > this.getFirstLastName(b).toLowerCase()) ?
@@ -92,9 +91,6 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
 
     this.reqUsersList = data.filter(item => ((this.selectedClient == null && this.accountType != null) ? item.accountType == this.accountType && !item.deletedAt : false) || ((this.accountType != null) ? item.accountType === this.accountType : true) && ((this.selectedClient !== null) ? (item.accountType === 'TECH' || item.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.selectedClient.id)) : true) && !item.deletedAt).filter(item => item.primaryEmail !== '').sort((a, b) => (a.primaryEmail.toLowerCase() > b.primaryEmail.toLowerCase()) ?
       1 : ((b.primaryEmail.toLowerCase() > a.primaryEmail.toLowerCase()) ? -1 : 0));
-    this.userList = data.filter(item => ((this.selectedClient == null && this.accountType != null) ? item.accountType == this.accountType && !item.deletedAt : false) || ((this.accountType != null) ? item.accountType === this.accountType : true) && ((this.selectedClient !== null) ? (item.accountType === 'TECH' || item.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.selectedClient.id)) : true) && !item.deletedA).filter(item => item.primaryEmail !== '').sort((a, b) => (a.primaryEmail.toLowerCase() > b.primaryEmail.toLowerCase()) ?
-      1 : ((b.primaryEmail.toLowerCase() > a.primaryEmail.toLowerCase()) ? -1 : 0));
-
 
     this.usersSelected.forEach(item => {
       if (item.primaryEmail !== '') {
@@ -126,61 +122,35 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
    * @param event - selected user
    */
   public selected(company): void {
-
-    this.showError = false;
     this.selectedUsers.push(company.primaryEmail);
     this.userEmails.push(company.primaryEmail);
     this.onCompanyEmails.emit(this.userEmails);
     //  this.userInput.nativeElement.blur();
     this.userInput.nativeElement.value = '';
     this.userCtrl.setValue(null);
-    this.userList = this.reqUsersList;
-
-    this.usersClients = JSON.parse(JSON.stringify(this.reqUsersListClients));
-    this.usersTechnical = JSON.parse(JSON.stringify(this.reqUsersListTechnical));
-
-    /*   this.userInput.nativeElement.value = '';
-       this.userList = this.requserList;*/
   }
 
   onSearch(event) {
-    // this.userList = this.reqUsersList.filter(item => item.primaryEmail.includes(event.target.value));
-
     this.usersClients = this.reqUsersListClients.filter(item => this.getFirstLastName(item).toLocaleLowerCase().includes(event.target.value.toLocaleLowerCase()) || item.primaryEmail.includes(event.target.value.toLocaleLowerCase()));
     this.usersTechnical = this.reqUsersListTechnical.filter(item => this.getFirstLastName(item).toLocaleLowerCase().includes(event.target.value.toLocaleLowerCase()) || item.primaryEmail.includes(event.target.value.toLocaleLowerCase()));
 
   }
   onKeyUp(event) {
-    if (event.keyCode === 13) {
-      const input = event.target.input;
-      const value = event.target.value;
-      if ((value || '').trim()) {
-        this.selectedUsers.push(value.trim());
-        this.userEmails.push(value.trim());
-        this.onCompanyEmails.emit(this.userEmails);
-        this.userList = this.reqUsersList;
-
-        this.usersClients = JSON.parse(JSON.stringify(this.reqUsersListClients));
-        this.usersTechnical = JSON.parse(JSON.stringify(this.reqUsersListTechnical));
-      }
-      if (input) {
-        input.value = '';
-      }
-      this.userCtrl.setValue(null);
+    if (event.keyCode === 13) this.onAdd(event);
+  }
+  public onToggleDropDown(data) {
+    if (!data) {
+      this.usersClients = JSON.parse(JSON.stringify(this.reqUsersListClients));
+      this.usersTechnical = JSON.parse(JSON.stringify(this.reqUsersListTechnical));
     }
-
   }
   public onAdd(event) {
     const input = event.target.input;
     const value = event.target.value;
-    if ((value || '').trim()) {
+    if ((value || '').trim() && value.match(this.reEmail)) {
       this.selectedUsers.push(value.trim());
       this.userEmails.push(value.trim());
       this.onCompanyEmails.emit(this.userEmails);
-      this.userList = this.reqUsersList;
-
-      this.usersClients = JSON.parse(JSON.stringify(this.reqUsersListClients));
-      this.usersTechnical = JSON.parse(JSON.stringify(this.reqUsersListTechnical));
     }
     if (input) {
       input.value = '';
@@ -190,6 +160,4 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
   public trackByIndex(index, item) {
     return index;
   }
-
-
 }

@@ -1,6 +1,6 @@
 .--sticky {
-  margin-top: 0px !important;
-  padding: 24px 24px 0px 24px !important;
+  margin-top: 0 !important;
+  padding: 24px 24px 0 24px !important;
 }
 .search-clear {
   width: 12px;
@@ -18,11 +18,12 @@ width: 100%;
 max-width: unset;
 }
 
-.outsideheader{
+.outsideheader {
   padding: 30px;
   background-color:#edf2f6;
   padding-right: 17px;
   padding-left: 16px;
+  min-height: calc(100vh - 124px);
 }
 
 .reports-all{

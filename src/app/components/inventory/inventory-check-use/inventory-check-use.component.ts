@@ -10,6 +10,7 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { InventoryItem } from '../class/inventory-item';
 import { InventoryAgreement } from './class/inventory-agreement';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
   selector: 'inventory-check-use',
@@ -30,6 +31,7 @@ export class InventoryCheckUseComponent implements OnInit, OnDestroy {
     private companiesStateService: CompaniesStateService,
     public ticketsListService: TicketsListService,
     private confirmStateService: ConfirmStateService,
+    public usersStateService: UsersStateService,
     public activeModal: NgbActiveModal,
     private productService: ProductService) { }
 

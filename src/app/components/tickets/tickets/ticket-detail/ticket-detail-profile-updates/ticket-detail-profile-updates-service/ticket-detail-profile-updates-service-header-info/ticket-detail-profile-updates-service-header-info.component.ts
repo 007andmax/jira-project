@@ -10,13 +10,19 @@ import * as moment from "moment";
   styleUrls: ['./ticket-detail-profile-updates-service-header-info.component.scss']
 })
 export class TicketDetailProfileUpdatesServiceHeaderInfoComponent implements OnInit {
-
+  @Input() otherRecipients: Array<string> = [];
   @Input() service: TicketProfileService;
   @Input() shares: Array<TicketProfileShare> = [];
   @Input() date: number = 0;
   constructor(public ticketsListService: TicketsListService) { }
 
   ngOnInit() {
+  }
+  getStyleNetAvatar(i) {
+    return `${12 * i}px`;
+  }
+  getStyleShareText(i) {
+    return `${(12 * i) + 20}px`;
   }
   public getDate() {
     return `${moment(new Date(this.date)).format('DD MMM YYYY')} at ${moment(new Date(this.date)).format('hh:mm A')}`;

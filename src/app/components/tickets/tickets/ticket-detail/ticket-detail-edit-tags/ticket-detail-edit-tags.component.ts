@@ -1,14 +1,148 @@
-import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
-import { TicketEditTagsComponent } from '../../ticket-edit-aside/ticket-edit-tags/ticket-edit-tags.component';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { ENTER, COMMA } from '@angular/cdk/keycodes';
+import { FormControl } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { Tag } from 'src/app/interfaces/tag/tag';
+import { TagsService } from 'src/app/services/tags/tags.service';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
+import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 
 @Component({
   selector: 'ticket-detail-edit-tags',
   templateUrl: './ticket-detail-edit-tags.component.html',
   styleUrls: ['./ticket-detail-edit-tags.component.scss']
 })
-export class TicketDetailEditTagsComponent extends TicketEditTagsComponent {
-
+export class TicketDetailEditTagsComponent implements OnInit, OnDestroy {
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  focus = false;
+  isResend = false;
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  tagCtrl = new FormControl();
+  @Input() selectedTag = [];
+  tags: Array<Tag> = [];
+  reqTags: Array<Tag> = [];
+  sub = new Subscription();
+  editItem: any;
+  init: boolean = false;
+  isChangeInput: boolean = false;
+  @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
+  @Output() tagsChange = new EventEmitter();
+  @ViewChild('tagsDp') tagsDp: any;
   @Output() tagsRemove = new EventEmitter();
+  /**
+   * Creates an instance of the TagsComponent with the injected services
+   * @param {TagsService} tagsService Service to work with tags
+   * @param {TagsStateService} tagsState to work with tags state
+   */
+  public constructor(
+    public tagsService: TagsService,
+    private tagsState: TagsStateService,
+    public tagsRealTimeService: TagsRealTimeService,
+    public cd: ChangeDetectorRef,
+    public customerPortalStateService: CustomerPortalStateService,
+    public elRef: ElementRef
+  ) { }
+
+  /**
+  * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
+  */
+  public ngOnInit() {
+    if (this.tagsState.getTags().length == 0) {
+      let getTags = this.tagsService.getTags().subscribe((data) => {
+        this.tagsState.setTags(data);
+        this.tags = data;
+        this.reqTags = JSON.parse(JSON.stringify(data));
+        this.sortTags();
+      })
+      this.sub.add(getTags);
+    } else {
+      this.tags = this.tagsState.getTags();
+      this.reqTags = JSON.parse(JSON.stringify(this.tagsState.getTags()));
+      this.sortTags();
+    }
+
+    let changeTagsArray = this.tagsRealTimeService.changeTagsArray.subscribe((data: any) => {
+      if (data.action === "TAG_SAVED" && Array.isArray(data.data)) data.data.forEach(element => this.updateTagByRealTimes(element));
+      if (data.action === "TAG_SAVED" && !Array.isArray(data.data)) this.updateTagByRealTimes(data.data);
+      if (data.action === "TAG_REMOVED") {
+        let index = this.tags.findIndex(item => item.id === data.data);
+        let indexreqTags = this.reqTags.findIndex(item => item.id === data.data);
+        if (index > -1) this.tags.splice(index, 1);
+        if (indexreqTags > -1) this.reqTags.splice(index, 1);
+      }
+      this.sortTags();
+      this.cd.detectChanges();
+    })
+    this.sub.add(changeTagsArray);
+    this.onInitClearState();
+    this.onCheckEditItem();
+  }
+  updateTagByRealTimes(data) {
+    let index = this.tags.findIndex(item => item.id === data.id);
+    let indexreqTags = this.reqTags.findIndex(item => item.id === data.id);
+    if (index > -1) {
+      this.tags[index] = data;
+    } else {
+      this.tags.push(data);
+    }
+    if (indexreqTags > -1) {
+      this.reqTags[index] = data;
+    } else {
+      this.reqTags.push(data);
+    }
+  }
+  sortTags() {
+    this.tags = this.tags.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
+      1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
+    this.reqTags = this.reqTags.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
+      1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
+  }
+  /**
+  * Subscribe for edit mode
+  */
+  private onCheckEditItem() {
+    let getTagsFromEdit = this.tagsState.getTagsFromEdit().subscribe((data) => {
+      this.selectedTag = data;
+    });
+    this.sub.add(getTagsFromEdit);
+  }
+
+  /**
+  * Subscribe for clear data
+  */
+  private onInitClearState() {
+    let getClearState = this.tagsState.getClearState().subscribe(() => this.close());
+    this.sub.add(getClearState);
+  }
+
+  public isSelected(id) {
+    return this.selectedTag.find(item => item.id === id);
+  }
+
+  onSearch(event) {
+    this.isChangeInput = (event.target.value.length > 0) ? true : false;
+    this.tags = this.reqTags.filter(item => item.word.includes(event.target.value));
+  }
+
+  /**
+   * Close tags list
+   */
+  public close() {
+    this.selectedTag = [];
+  }
+
+  public trackById(index, item) {
+    return item.id;
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
   public selected(tag): void {
     // this.init = true;
     let find = this.selectedTag.find(item => item.id === tag.id);

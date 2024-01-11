@@ -11,8 +11,8 @@
             ></app-dynamic-tooltip>
             <div
                 class="qt-table-modern__circle-avatar pointer"
-                [ngClass]="!getNameForAvatar().length ? 'transparent-text' : ''"
-                [textContent]="getNameForAvatar()"
+                [ngClass]="!usersStateService.getNameForAvatar(usersStateService.getCurrentUser()).length ? 'transparent-text' : ''"
+                [textContent]="usersStateService.getNameForAvatar(usersStateService.getCurrentUser())"
                 [ngStyle]="{'background': ticketsListService.getStyleAvatar(usersStateService.getCurrentUser(),'#7C77CB') }"
                 id="dropdownSupperUser"
                 ngbDropdownToggle
@@ -35,9 +35,20 @@
     </div>
 </div>
 <div class="app-left-panel__body">
-    <div class="app-left-panel__menu ">
-        <div class="app-left-panel__menu-icon --active">
-            <div class="icon__support-page qt-sz-20"></div>
+    <div>
+        <div
+            class="app-left-panel__menu-icon-wrap"
+            [ngClass]="{'--active':state === 'support-page' }"
+            (click)="onChangeState('support-page');"
+        >
+            <div class="app-left-panel__menu-icon icon__support-page qt-sz-20"></div>
+        </div>
+        <div
+            class="app-left-panel__menu-icon-wrap"
+            (click)="onChangeState('tech-companies');"
+            [ngClass]="{'--active':state === 'tech-companies' }"
+        >
+            <div class="app-left-panel__menu-icon icon__menu-company qt-sz-20"></div>
         </div>
     </div>
 </div>

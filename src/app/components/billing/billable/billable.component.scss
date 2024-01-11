@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 app-billable-item {
     display: contents;
 }
@@ -6,13 +8,10 @@ app-billable-item {
     width: 45px;
 }
 .--outline-blue[disabled] {
-    border: solid 1px #96d4fa;
-    color: #96d4fa;
+    border: solid 1px $blue-light-300;
+    color: $blue-light-300;
 }
 .billable-table__menu {
     padding-right: 16px;
     width: 55px;
-}
-.btn-invoice-all {
-    width: 94px;
 }

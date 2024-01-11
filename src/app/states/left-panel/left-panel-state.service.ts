@@ -1,5 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { LeftPanelCompaniesFilter } from '../../components/left-panel/left-panel-companies/class/left-panel-companies-filter';
+import { TicketGlobalFilter } from 'src/app/components/tickets/tickets/class/ticket-global-filter';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,6 @@ export class LeftPanelStateService {
   onDocumentsPage: EventEmitter<any> = new EventEmitter();
   onOpenCompanyPage: EventEmitter<any> = new EventEmitter();
   onToggleLeftPanel: EventEmitter<any> = new EventEmitter();
-  onToggleMobileLeftPanel: EventEmitter<any> = new EventEmitter();
   onHideLeftPanel: EventEmitter<any> = new EventEmitter();
   onGoToState: EventEmitter<any> = new EventEmitter();
   onChangeState: EventEmitter<any> = new EventEmitter();
@@ -23,7 +23,6 @@ export class LeftPanelStateService {
   onSearchItemAdded: EventEmitter<any> = new EventEmitter();
   onSearchCompanyChange: EventEmitter<any> = new EventEmitter();
   onPageActive: EventEmitter<any> = new EventEmitter();
-
   constructor() { }
 
   public clearFilter() {
@@ -31,9 +30,6 @@ export class LeftPanelStateService {
   }
   public getFilter() {
     return this.filter;
-  }
-  toggleMobileLeftPanel(data) {
-    this.onToggleMobileLeftPanel.emit(data);
   }
   public firstOpen(data) {
     this.activePage = data;

@@ -17,6 +17,9 @@ export class DynamicTooltipComponent implements OnInit {
   ngOnInit() {
 
   }
+  public setContent(data) {
+    this.content = data;
+  }
   public show(target) {
     if (this.disableTooltip) return;
     let tooltip = this.elRef.nativeElement.querySelector('#tooltip');

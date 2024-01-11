@@ -135,11 +135,13 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
   }
   onCheckEmail() {
 
-    if (this.user.primaryEmail && this.user.primaryEmail.length > 0) this.validate.checkValidPrimaryEmail(this.user.primaryEmail);
-    if (this.user.primaryEmail && this.user.primaryEmail.length > 0 && this.user.companyId) this.onCheckValidPrimaryEmail();
+    if (this.user.primaryEmail && this.user.primaryEmail.length > 0) {
+      this.validate.checkValidPrimaryEmail(this.user.primaryEmail);
+      if (this.validate.getPrimaryContactEmail()) this.onCheckValidPrimaryEmail();
+    }
   }
   onCheckValidPrimaryEmail() {
-    this.usersService.checkValidPrimaryEmail(this.user.primaryEmail, this.user.companyId).subscribe((data: any) => {
+    this.usersService.checkValidPrimaryEmail(this.user.primaryEmail, this.companiesStateService.getCurrentCompany().id).subscribe((data: any) => {
       this.validate.setExistPrimaryContactEmail(data.value);
       this.cd.detectChanges();
     })
@@ -149,6 +151,7 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
   }
   addCompnay() {
     this.user.addCustomerCompaniesInfo();
+    this.user.customerCompaniesInfo[this.user.customerCompaniesInfo.length - 1].setDefaultSubscriptionsForAddUser();
   }
   onSelectUserRole(data, index) {
     this.user.customerCompaniesInfo[index].setUserRole(data);

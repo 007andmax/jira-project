@@ -15,6 +15,8 @@ import { QuotesSettingsComponent } from './quotes-settings/quotes-settings.compo
 import { AccountingYearComponent } from './accounting-year/accounting-year.component';
 import { TaxesSettingsComponent } from './taxes/taxes.component';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { CustomNotesSettingsComponent } from './custom-notes-settings/custom-notes-settings.component';
+import { BillableStateService } from 'src/app/states/billable/billable-state.service';
 declare var $: any;
 @Component({
   selector: 'app-accounting-settings',
@@ -27,6 +29,7 @@ export class AccountingSettingsComponent implements OnInit, OnDestroy {
   @ViewChild('accountingYear', { static: true }) accountingYear: AccountingYearComponent;
   @ViewChild('taxesSettings', { static: false }) taxesSettings: TaxesSettingsComponent;
   @ViewChild('glNumber', { static: true }) glNumber: GlNumberSettingsComponent;
+  @ViewChild('customNotes', { static: true }) customNotes: CustomNotesSettingsComponent;
   loading = false;
   toggleAddTax: boolean = false;
   activeTab: string = "invoiceSettings";
@@ -39,6 +42,7 @@ export class AccountingSettingsComponent implements OnInit, OnDestroy {
     private glNumberService: GlNumberService,
     public cd: ChangeDetectorRef,
     private permissionsService: PermissionsService,
+    public billableStateService: BillableStateService,
     private settingStateService: SettingStateService) { }
 
   ngOnInit() {
@@ -77,6 +81,9 @@ export class AccountingSettingsComponent implements OnInit, OnDestroy {
         error => {
         }
       );
+  }
+  addCustomeNote() {
+    this.billableStateService.initAddNote();
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

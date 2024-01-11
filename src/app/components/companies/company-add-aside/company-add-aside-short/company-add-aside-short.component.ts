@@ -6,6 +6,8 @@ import { CompanyProfile } from '../../class/company-profile';
 import { CompanySetting } from '../../class/company-setting';
 import { CompanyValdiate } from '../../class/company-validate';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { UsersService } from 'src/app/services/users/users.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 var $ = require("jquery");
 
 @Component({
@@ -23,6 +25,8 @@ export class CompanyAddAsideShortComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   constructor(private companiesService: CompaniesService,
     private usersStateService: UsersStateService,
+    private usersService: UsersService,
+    private companiesStateService: CompaniesStateService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
@@ -95,6 +99,15 @@ export class CompanyAddAsideShortComponent implements OnInit, OnDestroy {
         this.cd.detectChanges();
       })
     }
+  }
+  onCheckEmail() {
+    if (this.company.contacts[0].primaryEmail && this.company.contacts[0].primaryEmail.length > 0) this.onCheckValidPrimaryEmail();
+  }
+  onCheckValidPrimaryEmail() {
+    this.usersService.checkValidPrimaryEmail(this.company.contacts[0].primaryEmail, this.companiesStateService.getCurrentCompany().id).subscribe((data: any) => {
+      this.validate.setExistPrimaryContactEmail(data.value);
+      this.cd.detectChanges();
+    })
   }
   public onChangeFirstName() {
     this.validate.checkValidFirstname(this.company.contacts[0].firstName);

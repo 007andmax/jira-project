@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ChangeDetectorRef, Output, EventEmitter, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ChangeDetectorRef, Output, EventEmitter, ViewChild, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { User } from '../class/user';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Company } from 'src/app/interfaces/company/company';
@@ -34,7 +34,8 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
   selector: 'app-users-table',
   templateUrl: './users-table.component.html',
   styleUrls: ['./users-table.component.scss'],
-  providers: [UsersTableService]
+  providers: [UsersTableService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersTableComponent implements OnInit, OnDestroy {
   @Input() selected: boolean = false;
@@ -84,6 +85,7 @@ export class UsersTableComponent implements OnInit, OnDestroy {
       customSubscriptionIds: data.map(item => item.id)
     }).subscribe(data => {
       this.customSubscription.toggleIsUpdate(false);
+      this.cd.markForCheck();
     })
   }
   sendInvite(userEmail) {
@@ -92,7 +94,9 @@ export class UsersTableComponent implements OnInit, OnDestroy {
       .subscribe();
   }
   getCompaniesNames() {
-    return this.user.customerCompaniesInfo.map(item => (this.companiesStateService.getCompanies().find(company => company.id == item.companyId) ? this.companiesStateService.getCompanies().find(company => company.id == item.companyId).name : ''));
+    return this.user.customerCompaniesInfo.map(item => (this.companiesStateService.getCompanies().find(company => company.id == item.companyId) ? this.companiesStateService.getCompanies().find(company => company.id == item.companyId).name : '')).
+      sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
+        1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
   }
   getUserIndustry() {
     let find = this.industries.find(item => item.id === this.user.userIndustryId);
@@ -102,35 +106,20 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     let find = this.jobTitleList.find(item => item.id === this.user.jobTitleId);
     return (find) ? find.name : '';
   }
-  getNameForAvatar() {
-    if (!this.user.avatar) return `${(this.user.firstName) ? this.user.firstName[0].toUpperCase() : ''}${(this.user.lastName) ? this.user.lastName[0].toUpperCase() : ''}`;
-    return '';
-  }
   getUserName() {
     return `${this.user.firstName} ${this.user.lastName}`;
   }
   showDetailUser() {
     this.usersStateService.showDetailUser(this.user);
+    this.cd.markForCheck();
   }
   getUserCompanyName() {
     if (this.user.company.isDefault) return '';
     let index = this.companies.findIndex(item => item.id === this.user.company.id);
     return (index > -1) ? this.companies[index].name : '';
   }
-  getUserAvatarUrl() {
-    if (!(this.user && this.user.avatar)) return '';
-
-    if (this.user.id) {
-      return `url(${'/users/' + (this.user.id || 'default') + '/image' + (this.user.avatar ? '.jpg?t=' + this.user.avatar.updatedAt :
-        '')}) 0% 0% / contain no-repeat`
-    } else if (this.user.avatar && this.user.avatar.origin && this.user.avatar.origin.id) {
-      return `url(/file/${(this.user.avatar.origin.id)}.jpg) 0% 0% / contain no-repeat`;
-    } else {
-      return 'url(/users/default/image.jpg) 0% 0% / contain no-repeat';
-    }
-  };
   isPrimaryContact() {
-    if (!this.customerPortalStateService.isCustomerPortal) return this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).isPrimaryContact;
+    if (!this.customerPortalStateService.isCustomerPortal && this.companyId) return this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).isPrimaryContact;
     if (this.customerPortalStateService.isCustomerPortal && this.user.customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id'))) return this.user.customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id')).isPrimaryContact;
     return false
   }
@@ -140,11 +129,12 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     })
   }
   getDefaultSubscriptions() {
-    return this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).defaultSubscriptions;
+    return (this.companyId) ? this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).defaultSubscriptions : new UserDefaultSubscription(null);
   }
   edit() {
     this.usersStateService.setUserForEdit(new User(JSON.parse(JSON.stringify(this.user))));
     this.usersStateService.onOpenEditAsige();
+    this.cd.markForCheck();
   }
   ngOnInit() {
     this.industries = this.crmStateService.getIndustryList();
@@ -153,47 +143,49 @@ export class UsersTableComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(onGetIndustry);
-
-
     if (this.companiesStateService.getCompanies().length > 0) this.companies = this.companiesStateService.getCompanies();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = data;
-
     })
     this.currentUser = this.usersStateService.getCurrentUser();
-
+    this.cd.markForCheck();
     //this.sub.add(getOnCompanies);
+    this.usersStateService.onSelectAll.subscribe(data => {
+      this.user.selected = data;
+      this.cd.markForCheck();
+    })
   }
   delete() {
     if (this.user.customerCompaniesInfo.find(item => item.isPrimaryContact)) {
       const modalRef = this.modalService.open(UsersCheckUseComponent, { windowClass: 'xs-modal user-modal', container: (this.companyId) ? "company-user" : "app-users", backdrop: 'static', keyboard: false });
       modalRef.componentInstance.user = this.user;
+      this.cd.markForCheck();
       return;
     }
     if (this.usersTableService.getUsersCount(this.usersStateService.getAllUsers(), this.user.customerCompaniesInfo, this.showArchivedUsers) === 1) {
       const modalRef = this.modalService.open(AlertComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
       modalRef.componentInstance.message = `You cannot archive all users. At least one must remain.`;
+      this.cd.markForCheck();
       return;
     }
     this.confirmStateService.setConfirmAction(ARCHIVE_USER);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-
     modalRef.componentInstance.message = `Do you want to archive ${this.user.firstName + ' ' + this.user.lastName}`;
     this.usersStateService.setUserForArchive(this.user);
+    this.cd.markForCheck();
   }
   showUserDetails() {
-
     this.elRef.nativeElement.querySelector('.new-users-content__list--item').classList.toggle('show-details');
+    this.cd.markForCheck();
   }
   restore() {
     this.confirmStateService.setConfirmAction(DEARCHIVE_USER);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-
     modalRef.componentInstance.message = `Do you want to restore ${this.user.firstName + ' ' + this.user.lastName}`;
     this.usersStateService.setUserForDeArchive(this.user);
+    this.cd.markForCheck();
   }
   selectUser(event) {
-
     if (event.target.checked) {
       this.draftEmailStateService.addSelectedUser(this.user);
     } else {
@@ -209,6 +201,7 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     this.draftEmailStateService.resetSelectedUsers();
     this.draftEmailStateService.addSelectedUser(this.user);
     this.draftEmailStateService.toggleAsideForAdd();
+    this.cd.markForCheck();
   }
   getPermissionCustomerUser(permission) {
     return this.currentUser.customerCompaniesInfo.find(item => item.companyId === this.customerPortalStateService.getUsersFilters().company).customerUserRole.getPermission(permission);

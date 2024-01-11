@@ -29,7 +29,6 @@ export class PaymentsHeaderComponent implements OnInit {
     public draftEmailStateService: DraftEmailStateService) { }
 
   ngOnInit() {
-    if (this.appService.checkMobile()) this.toggleFilter = true;
   }
   export(type) {
     return new Promise((resolve, reject) => {

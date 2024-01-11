@@ -15,7 +15,7 @@
                 [ngClass]="{'with-logo': checkLogo(getCompanyUser())}"
             >
                 <img
-                    [src]="getCompanyLogoUrl(getCompanyUser())"
+                    [src]="companiesStateService.getCompanyLogoUrl(getCompanyUser())"
                     alt
                     *ngIf="checkLogo(getCompanyUser())"
                 >
@@ -131,6 +131,7 @@
             ></ticket-detail-contact-details-history>
         </div>
     </div>
+
 
 
 

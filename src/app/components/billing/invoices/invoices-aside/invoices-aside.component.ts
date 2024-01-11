@@ -86,11 +86,11 @@ export class InvoicesAsideComponent implements OnInit {
     })
     if (this.invoices[index].selected && sumPayment < this.amountReceived) {
       let paymentAmount = (this.amountReceived - sumPayment) - (this.invoices[index].totalSum - this.invoices[index].paidSum);
-      this.invoices[index].setPaymentAmount((paymentAmount > 0) ? (this.invoices[index].totalSum - this.invoices[index].paidSum) : (this.amountReceived - sumPayment));
+      this.invoices[index].setPaymentAmount(parseFloat(((((paymentAmount > 0) ? (this.invoices[index].totalSum - this.invoices[index].paidSum) : (this.amountReceived - sumPayment)) * 100) / 100).toFixed(2)));
     }
     if (!this.isChangeAmountReceived) {
       if (this.invoices[index].selected) {
-        this.invoices[index].setPaymentAmount((this.invoices[index].totalSum - this.invoices[index].paidSum));
+        this.invoices[index].setPaymentAmount(parseFloat((((this.invoices[index].totalSum - this.invoices[index].paidSum) * 100) / 100).toFixed(2)));
       }
       this.amountReceived = this.invoices.reduce((a, b) => {
         if (b.selected) return a + (b.totalSum - b.paidSum);
@@ -168,9 +168,9 @@ export class InvoicesAsideComponent implements OnInit {
       if (item.paymentAmount === 0) {
         if (sumPayment < this.amountReceived) {
           let paymentAmount = (this.amountReceived - sumPayment) - (item.totalSum - item.paidSum);
-          item.setPaymentAmount((paymentAmount > 0) ? (item.totalSum - item.paidSum) : (this.amountReceived - sumPayment));
+          item.setPaymentAmount(parseFloat(((((paymentAmount > 0) ? (item.totalSum - item.paidSum) : (this.amountReceived - sumPayment)) * 100) / 100).toFixed(2)));
         }
-        if (!this.isChangeAmountReceived) item.setPaymentAmount((item.totalSum - item.paidSum));
+        if (!this.isChangeAmountReceived) item.setPaymentAmount(parseFloat((((item.totalSum - item.paidSum) * 100) / 100).toFixed(2)));
       }
     })
     if (!this.isChangeAmountReceived) this.amountReceived = this.invoices.reduce((a, b) => {

@@ -8,7 +8,7 @@
     left: 76px;
     top: 0;
     z-index: 992;
-    background: $primary-2;
+    background: $gray-900;
     overflow-x: scroll;
     transition: left 300ms;
 
@@ -22,49 +22,10 @@
         display: none;
         width: 0;
     }
-
-    @media (max-width: 414px) {
-        width: 100vw;
-        left: 0;
-        transition: all 0.3s;
-        top: 100%;
-
-        &.show {
-            top: 0;
-        }
-    }
-}
-
-.left-panel-ng2 {
-    @media (max-width: 414px) {
-        .center-category {
-            padding: 0 0 50px !important;
-        }
-
-        .left-panel-filter {
-            width: 100%;
-            padding: 20px 20px 0;
-            margin: 0;
-        }
-
-        .mob-version {
-            display: block;
-        }
-
-        .desktop-version {
-            display: none;
-        }
-    }
 }
 
 .mob-version {
     display: none;
-}
-
-.desktop-version {
-    @media (max-width: 767px) {
-        display: none;
-    }
 }
 
 .header-filter-icon {
@@ -75,7 +36,7 @@
 }
 
 .ticket-statuses {
-    padding: 0px 24px;
+    padding: 0 24px;
     font-size: 12px;
 }
 
@@ -91,19 +52,19 @@
     border-radius: 50%;
 
     &.--red {
-        border-color: $error;
+        border-color: $red-600;
     }
 
     &.--green {
-        border-color: $success;
+        border-color: $green-600;
     }
 
     &.--blue {
-        border-color: $primary-1;
+        border-color: $blue-light-600;
     }
 
     &.--yellow {
-        border-color: $warning;
+        border-color: $yellow-600;
     }
 }
 
@@ -124,14 +85,14 @@
 }
 
 .active {
-    background: $gray-800--old;
-    color: $primary-1;
-    border-left: 2px solid $primary-1;
+    background: $gray-700;
+    color: $blue-light-600;
+    border-left: 2px solid $blue-light-600;
 }
 
 .category-item {
     &:hover {
-        color: $primary-1;
+        color: $blue-light-600;
     }
 }
 

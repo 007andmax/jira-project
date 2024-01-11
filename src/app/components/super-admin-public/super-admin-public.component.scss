@@ -73,7 +73,7 @@
         li {
           position: relative;
           @include body-r;
-          color: $primary-2;
+          color: $gray-900;
           &:not(:last-child) {
             margin: 0 0 16px 0;
           }
@@ -82,7 +82,7 @@
       &-header {
         position: relative;
         @include h4;
-        color: $primary-2;
+        color: $gray-900;
         padding-bottom: 16px;
         &::after {
           content: "";
@@ -91,7 +91,7 @@
           left: 0;
           right: 0;
           height: 1px;
-          border-bottom: dashed 1px $gray-400--old;
+          border-bottom: dashed 1px $gray-200;
         }
       }
     }
@@ -101,7 +101,7 @@
 .qt-page-list__search {
   input {
     height: 40px;
-    border: 1px solid $gray-400--old;
+    border: 1px solid $gray-200;
     min-width: 360px;
     border-radius: 6px;
   }
@@ -122,8 +122,8 @@
       height: 100vh;
       overflow: auto;
       padding: 8px 0;
-      background-color: $gray-100--old;
-      border-right: 1px solid $gray-300--old;
+      background-color: $gray-25;
+      border-right: 1px solid $gray-100;
     }
   }
 }
@@ -132,7 +132,7 @@
   display: flex;
   align-items: center;
   &__name {
-    color: $primary-2;
+    color: $gray-900;
     position: relative;
     display: flex;
     align-items: center;
@@ -141,8 +141,8 @@
     border-right: 2px solid transparent;
     cursor: pointer;
     &.--active {
-      color: $primary-1;
-      border-color: $primary-1;
+      color: $blue-light-600;
+      border-color: $blue-light-600;
     }
     .icon__down-arrow {
       position: absolute;
@@ -180,7 +180,7 @@
     width: 3px;
     height: 3px;
     border-radius: 50%;
-    background-color: $primary-1;
+    background-color: $blue-light-600;
     left: 2px;
     top: 9px;
   }

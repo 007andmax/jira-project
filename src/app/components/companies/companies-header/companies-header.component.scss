@@ -2,17 +2,10 @@
 
 companies-filter {
   display: contents;
-
-  @media (max-width: 767px) {
-    display: block;
-  }
 }
 .is-exist-filters {
   position: relative;
   &::before {
-    @media (max-width: 767px) {
-      display: block;
-    }
     display: none;
     content: " ";
     position: absolute;
@@ -20,15 +13,12 @@ companies-filter {
     right: 0;
     width: 8px;
     height: 8px;
-    background-color: $error;
+    background-color: $red-600;
     border-radius: 10px;
   }
 }
 .list-filters {
   display: none;
-  @media (max-width: 767px) {
-    display: block;
-  }
   margin: -8px -8px 8px -8px;
   ::ng-deep.mat-form-field-infix {
     overflow: auto;

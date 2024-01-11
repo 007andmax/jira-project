@@ -48,7 +48,7 @@ import { TicketDetailHeaderComponent } from './ticket-detail-header/ticket-detai
 import { TicketDetailProfileFormUpdateComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update.component';
 import { AddAssignedUserModule } from '../ticket-edit-aside/add-assigned-user/add-assigned-user.module';
 import { TicketDetailProfileFormUpdateVisibleUsersComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-visible-users/ticket-detail-profile-form-update-visible-users.component';
-import { TicketProfileFormUpdateNoteListModule } from '../ticket-edit-aside/ticket-profile-form-update/ticket-profile-form-update-note-list/ticket-profile-form-update-note-list.module';
+import { TicketProfileFormUpdateNoteListModule } from './ticket-profile-form-update-note-list/ticket-profile-form-update-note-list.module';
 import { TicketDetailProfileFormUpdateNoteComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-note/ticket-detail-profile-form-update-note.component';
 import { TicketDetailProfileFormUpdateServicesComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component';
 import { TicketDetailProfileFormUpdateHeaderComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-header/ticket-detail-profile-form-update-header.component';
@@ -83,6 +83,11 @@ import { TicketDetailPasswordsDetailsComponent } from './ticket-detail-passwords
 import { TicketDetailDevicesItemComponent } from './ticket-detail-devices/ticket-detail-devices-item/ticket-detail-devices-item.component';
 import { TicketDetailDevicesDetailsComponent } from './ticket-detail-devices/ticket-detail-devices-details/ticket-detail-devices-details.component';
 import { TicketDetailProfileFormUpdateSupportComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-support/ticket-detail-profile-form-update-support.component';
+import { DndModule } from 'src/app/directives/dnd/dnd.module';
+import { AddAssignedUserNoteComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-header/add-assigned-user-note/add-assigned-user-note.component';
+import { TicketDetailTicketsDetailsComponent } from './ticket-detail-tickets/ticket-detail-tickets-details/ticket-detail-tickets-details.component';
+import { TicketDetailTicketsComponent } from './ticket-detail-tickets/ticket-detail-tickets.component';
+import { TicketDetailTicketsStatusComponent } from './ticket-detail-tickets/ticket-detail-tickets-status/ticket-detail-tickets-status.component';
 
 
 
@@ -138,7 +143,11 @@ import { TicketDetailProfileFormUpdateSupportComponent } from './ticket-detail-p
         TicketDetailPasswordsDetailsComponent,
         TicketDetailDevicesItemComponent,
         TicketDetailDevicesDetailsComponent,
-        TicketDetailProfileFormUpdateSupportComponent
+        TicketDetailProfileFormUpdateSupportComponent,
+        AddAssignedUserNoteComponent,
+        TicketDetailTicketsDetailsComponent,
+        TicketDetailTicketsComponent,
+        TicketDetailTicketsStatusComponent
 
     ],
     imports: [
@@ -175,7 +184,8 @@ import { TicketDetailProfileFormUpdateSupportComponent } from './ticket-detail-p
         TicketProfileFormUpdateNoteListModule,
         KeyUpEnterModule,
         DropDownModule,
-        CompanyDropDownModule
+        CompanyDropDownModule,
+        DndModule
     ],
 
 

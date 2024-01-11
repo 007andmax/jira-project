@@ -6,9 +6,7 @@
             (onTurnOff)="onTurnOff($event)"
             (onRemoveAgents)="onRemoveAgents()"
         ></app-company-devices-header>
-
-
-        <div class="qt-page-list__header-thead-container" [ngClass]="{'Resize': resize}">
+        <div class="qt-page-list__header-thead-container">
             <table class="qt-table-modern qt-page-list__header-thead">
                 <thead>
                     <tr>
@@ -55,11 +53,9 @@
             </table>
         </div>
     </div>
-
-
     <div class="qt-df qt-fd-c qt-jc-sb">
         <div class="qt-page-list__body">
-            <div class="qt-page-list__body-table-container" [ngClass]="{'Resize': resize}">
+            <div class="qt-page-list__body-table-container">
                 <table class="qt-page-list__body-tbody qt-table-modern company-devices-table">
                     <tbody>
                         <ng-template
@@ -82,10 +78,10 @@
                 *ngIf="showPreloader"
             ></div>
             <div
-                class="no-exist-devices"
-                *ngIf="!showPreloader && devices.length === 0"
+                class="no-exist-elements"
+                *ngIf="!showPreloader && devices.length == 0"
             >
-                No devices installed
+                We couldn't find any results
             </div>
         </div>
     </div>

@@ -188,7 +188,10 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
     this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = this.getClientsList(data);
     });
-
+    let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
+      if (id == newChange.data.clientCompanyId) this.devicesStateService.changeDevice(this.devices, newChange);
+    })
+    this.sub.add(onDeviceUninstalled);
 
     let company = this.companiesStateService.getCurrentCompany();
     if (company) {

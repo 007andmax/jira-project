@@ -2,9 +2,10 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from '../../../environments/environment';
 import { Subject } from "rxjs";
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
+import { SuperAdminCompany } from 'src/app/components/super-admin/super-admin-companies/class/super-admin-company';
 
 /**
  * Companies service to work with endpoints
@@ -58,6 +59,9 @@ export class CompaniesService {
       isArchived: false
     });
   }
+  public getContractCompanies() {
+    return this.http.get(this.apiUrl + 'company/forContractReport');
+  }
 
   public getCompaniesListByFilter(data) {
     return this.http.post(this.apiUrl + 'company/clients', data);
@@ -71,6 +75,9 @@ export class CompaniesService {
   public getCompany(id) {
     return this.http.get(this.apiUrl + `company/${id}/data`);
   }
+  public getSuperAdminCompanies(data) {
+    return this.http.post(this.apiUrl + `support/companies`, data).pipe(map((data: any) => data.map(item => new SuperAdminCompany(item))));
+  }
 
   public checkCompanyName(id, name) {
     return this.http.get(this.apiUrl + `company/isCompanyNameUnique?id=${id}&name=${name}`);
@@ -82,6 +89,14 @@ export class CompaniesService {
 
   public archiveCompany(id) {
     return this.http.get(this.apiUrl + 'company/archive/' + id).pipe(
+      tap(data => {
+        this.toastrService.success("The company has been successfully archived");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public archiveExampleCompany() {
+    return this.http.delete(this.apiUrl + 'company/removeExampleCompany').pipe(
       tap(data => {
         this.toastrService.success("The company has been successfully archived");
         this.appStateService.changeDetectorRef();

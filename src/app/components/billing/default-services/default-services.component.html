@@ -6,7 +6,7 @@
             </div>
             <div class="qt-page-list__header-title-line--rigth">
                 <button
-                    class="qt-btn --outline-blue"
+                    class="qt-button --gray --md"
                     (click)="onShowAddAside()"
                     *ngIf="getPermissions('MANAGE_SERVICES')"
                 >
@@ -61,6 +61,7 @@
                                 class="icon__help default-services-page__question-icon qt-sz-12 qt-ic-c"
                                 placement="top"
                                 [ngbTooltip]="tipContent"
+                                container="body"
                             ></span>
                             <span class="qt-table-modern__sorting"></span>
                         </th>
@@ -89,6 +90,12 @@
                     </ng-template>
                 </tbody>
             </table>
+            <div
+                class="no-exist-elements"
+                *ngIf="!showPreloader && list.length == 0"
+            >
+                We couldn't find any results
+            </div>
             <div
                 class="loading"
                 *ngIf="showPreloader"

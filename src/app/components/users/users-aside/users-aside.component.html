@@ -53,15 +53,16 @@
                 <input
                     type="text"
                     minlength="2"
+                    maxlength="30"
                     (blur)="onChangeFistname()"
                     [(ngModel)]="user.firstName"
                     placeholder="Enter First Name"
                 >
                 <mat-error
-                    class="invalid-feedback"
+                    class="invalid-feedback first-name-invalid"
                     *ngIf="!validate.getFirstName()"
                 >
-                    Please enter first name
+                    First name must be a minimum of 2 characters long
                 </mat-error>
             </div>
             <div class="qt-input-block qt-f50">
@@ -97,22 +98,6 @@
                 >
                     The email address is already occupied
                 </mat-error>
-            </div>
-            <div class="qt-input-block qt-f50">
-                <div class="qt-df qt-ai-c qt-mt-15 qt-mb-12">
-                    <label
-                        class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
-                        for="sendPortalInvitation"
-                    >
-                        <input
-                            id="sendPortalInvitation"
-                            type="checkbox"
-                            [(ngModel)]="user.sendPortalInvitation"
-                        >
-                        <span></span>
-                        <div class="qt-ml-8">Send Invite to Customer Portal</div>
-                    </label>
-                </div>
             </div>
         </div>
         <div class="qt-inputs-row">
@@ -378,7 +363,7 @@
                         ></user-default-subscription>
                     </div>
                 </div>
-                <div class="qt-inputs-row">
+                <div class="qt-inputs-row qt-mb-12">
                     <div class="qt-input-block qt-f50">
                         <div class="qt-df qt-ai-c">
                             <label
@@ -428,6 +413,27 @@
                                 >
                                 <span></span>
                                 <div class="qt-ml-8">Set as a primary user</div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="qt-inputs-row"
+                    *ngIf="i == 0"
+                >
+                    <div class="qt-input-block qt-f50">
+                        <div class="qt-df qt-ai-c qt-mt-15 qt-mb-12">
+                            <label
+                                class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
+                                for="sendPortalInvitation"
+                            >
+                                <input
+                                    id="sendPortalInvitation"
+                                    type="checkbox"
+                                    [(ngModel)]="user.sendPortalInvitation"
+                                >
+                                <span></span>
+                                <div class="qt-ml-8">Send Invite to Customer Portal</div>
                             </label>
                         </div>
                     </div>

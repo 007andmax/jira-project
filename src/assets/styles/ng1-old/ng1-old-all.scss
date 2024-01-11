@@ -24,7 +24,7 @@
   position: absolute;
   width: 2px;
   height: 2px;
-  background: $primary-2;
+  background: $gray-900;
   left:0;
   top:0;
   border-radius: 2px;
@@ -341,7 +341,7 @@
 }
 
 .green-checkmark {
-  color: $success;
+  color: $green-600;
   display: inline-block;
 }
 
@@ -354,11 +354,6 @@
   overflow-x: clip;
   @media (hover:none) and (min-width: 767px), (pointer:coarse) and (min-width: 767px) {
     height: calc(100% - 64px);
-  }
-
-  @media (max-width: 767px) {
-    padding-top: 0;
-    background-color: $background;
   }
 
   &__ticket-detail-page {
@@ -472,7 +467,7 @@
 .btn.btn-new.btn-primary,
 .btn-new.btn-primary {
   color: $white;
-  background: $primary-1;
+  background: $blue-light-600;
 }
 
 .btn.btn-new.btn-primary:hover,
@@ -480,14 +475,14 @@
 .btn.btn-new.btn-primary:active,
 .btn-new.btn-primary:active {
   color: $white;
-  background: $secondary-1;
+  background: $blue-dark-800;
 }
 
 .btn.btn-new.btn-success,
 .btn-new.btn-success {
   color: $white;
-  background: $success;
-  border: 1px solid $success;
+  background: $green-600;
+  border: 1px solid $green-600;
 }
 
 .btn.btn-new.btn-success:hover,
@@ -495,7 +490,7 @@
 .btn.btn-new.btn-success:active,
 .btn-new.btn-success:active {
   color: $white;
-  background: $success;
+  background: $green-600;
 }
 
 .btn.btn-new.disabled,
@@ -503,8 +498,8 @@
 .btn.btn-new.default,
 .btn-new.default {
   background: $white;
-  color: $gray-800--old;
-  border: 1px solid $gray-500--old;
+  color: $gray-600;
+  border: 1px solid $gray-300;
 }
 
 .btn.btn-new.disabled:hover,
@@ -515,7 +510,7 @@
 .btn-new.disabled:active,
 .btn.btn-new.default:active,
 .btn-new.default:active {
-  background: $gray-500--old;
+  background: $gray-300;
 }
 
 .btn.btn-new.default:hover,
@@ -523,7 +518,7 @@
 .btn.btn-new.default:hover,
 .btn-new.default:hover {
   color: $white;
-  background: $gray-500--old;
+  background: $gray-300;
 }
 
 .dropdown-assign-ticket.fixed-assign .users-list .user-item {
@@ -557,7 +552,7 @@
   border: none;
   height: 40px;
   padding: 10px 10px 10px 38px;
-  background: $gray-100--old;
+  background: $gray-25;
   font-size: 13px;
 }
 
@@ -580,7 +575,7 @@
   top: calc(50% - 25px);
   left: calc(50% - 25px);
   border: 0.35rem solid rgba(0, 0, 0, 0.2);
-  border-top-color: $primary-2;
+  border-top-color: $gray-900;
   animation: spin 1s infinite linear;
 }
 
@@ -590,8 +585,8 @@
   left: auto;
   width: 20px;
   height: 20px;
-  border: 0.1rem solid $gray-800--old;
-  border-top-color: $gray-600--old;
+  border: 0.1rem solid $gray-600;
+  border-top-color: $gray-400;
 }
 .recurring-tickets-content__modal--content .loading.xs {
   top: -3px;
@@ -664,8 +659,8 @@
   background-color: #3D7BA7;
   border-color: #3D7BA7; }
 .btn-success {
-  background-color: $success;
-  border-color: $success; }
+  background-color: $green-600;
+  border-color: $green-600; }
 .btn-success:hover, .btn-success:focus, .btn-success.focus, .btn-success:active, .btn-success.active {
   background-color: #668C4D;
   border-color: #668C4D; }

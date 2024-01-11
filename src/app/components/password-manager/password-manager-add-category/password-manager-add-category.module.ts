@@ -4,6 +4,8 @@ import { PasswordManagerAddCategoryComponent } from '../password-manager-add-cat
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
+import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
+import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 
 
 @NgModule({
@@ -14,6 +16,8 @@ import { FormsModule } from '@angular/forms';
         MatSelectModule,
         MatChipsModule,
         FormsModule,
+        DisabledBtnModule,
+        PreloaderTicketModule
     ],
     exports: [PasswordManagerAddCategoryComponent]
 

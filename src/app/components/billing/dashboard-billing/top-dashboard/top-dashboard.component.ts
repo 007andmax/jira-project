@@ -9,6 +9,7 @@ import { TopDashboardSum } from '../class/top-dashboard-sum';
 export class TopDashboardComponent implements OnInit {
   @Input() title: string;
   @Input() list: Array<TopDashboardSum> = [];
+  @Input() tooltip: string;
   constructor() { }
 
   ngOnInit() {

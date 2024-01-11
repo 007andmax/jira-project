@@ -55,8 +55,8 @@ export class TicketDetailContactDetailsHistoryComponent implements OnInit {
     } else {
       return;
     }
-    this.ticketsFilter.setCompany(this.company);
-    this.ticketsFilter.setUser(this.user);
+    this.ticketsFilter.setCompanies([this.company]);
+    this.ticketsFilter.setUsers([this.user]);
     this.showPreloader = true;
     this.elRef.nativeElement.querySelector('.company-info-aside__history').scrollTo(0, 0);
     this.setDefaultScoll();
@@ -73,24 +73,14 @@ export class TicketDetailContactDetailsHistoryComponent implements OnInit {
 
   }
   editTicket(id) {
-    if (!this.appService.isMobile) {
-      this.ticketStateService.setTicketRoutingId(id);
-      const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/ticket/${id}`;
-      window.open(url, '_blank');
-    } else {
-      this.ticketsStateService.onOpenTicket();
-      this.ticketsService.getTicket(id).subscribe(data => {
-        this.ticketsStateService.onEditTicket(data);
-      })
-    }
+    this.ticketStateService.setTicketRoutingId(id);
+    const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/ticket/${id}`;
+    window.open(url, '_blank');
   }
   getCreateAt(createdAt) {
-    let date = new Date(createdAt);
-
-    return moment(date).format('DD MMM YYYY')
+    return moment(new Date(createdAt)).format('DD MMM YYYY')
   }
   public getTickets() {
-
     if (this.ticketsListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;

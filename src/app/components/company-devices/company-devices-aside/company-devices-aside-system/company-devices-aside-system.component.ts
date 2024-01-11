@@ -36,7 +36,6 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
       this.device.setLabel((value.length > 0) ? value : null);
       this.editLabel.setValue((value.length > 0) ? value : this.device.hostName || this.device.ip);
       this.cd.detectChanges();
-      this.devicesStateService.setLabel(this.device.companyId, this.device.id, value);
     })
   }
   getLabelForEdit() {

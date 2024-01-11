@@ -4,22 +4,14 @@
     padding: 0 32px;
     margin-top: 20px;
 
-    @media (max-width: 767px) {
-        padding: 0 16px;
-    }
-
     &__item {
         border-radius: 10px;
         box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-        border: dashed 1px $gray-500--old;
+        border: dashed 1px $gray-300;
         background-color: $white;
         padding: 16px;
         display: flex;
         margin-bottom: 16px;
-
-        @media (max-width: 767px) {
-            flex-wrap: wrap;
-        }
 
         .qt-button {
             position: relative;
@@ -27,11 +19,6 @@
             align-items: center;
             justify-content: center;
             margin-left: 16px;
-
-            @media (max-width: 767px) {
-                margin-left: 50px;
-                margin-top: 16px;
-            }
 
             app-preloader-ticket {
                 position: absolute;
@@ -42,37 +29,16 @@
             display: block;
             position: relative;
 
-            @media (max-width: 767px) {
-                display: flex;
-                align-items: center;
-                flex-wrap: wrap;
-            }
-
             .ticket-notify__item-icon {
                 position: absolute;
                 top: 50%;
                 left: 16px;
                 transform: translateY(-50%);
-
-                @media (max-width: 767px) {
-                    position: static;
-                    transform: none;
-                }
             }
 
             .ticket-notify__item-title,
             .ticket-notify__item-desc {
                 padding-left: 50px;
-
-                @media (max-width: 767px) {
-                    padding-left: 0;
-                }
-            }
-
-            .ticket-notify__item-desc {
-                @media (max-width: 767px) {
-                    margin-top: 12px;
-                }
             }
         }
     }
@@ -88,12 +54,8 @@
     &__item-title {
         font-size: 13px;
         line-height: 1.54;
-        color: $primary-2;
+        color: $gray-900;
         flex: 1;
-
-        @media (max-width: 767px) {
-            max-width: calc(100% - 50px);
-        }
     }
 
     &__item-desc-icon {
@@ -106,7 +68,7 @@
     &__item-desc-text {
         font-size: 12px;
         line-height: 16px;
-        color: $primary-2;
+        color: $gray-900;
         margin-top: 2px;
     }
 }

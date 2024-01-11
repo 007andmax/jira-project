@@ -38,14 +38,22 @@
                                 tabindex="-1"
                                 href="javascript:void(0)"
                             >
-                                <span class="priority-dot {{ item.type.toLowerCase() }}"></span>
-                                {{ item.title }}
+                                <div
+                                    class="qt-input-block__dot priority-dot"
+                                    [ngStyle]="{'background-color':  statusColors[item.color] && statusColors[item.color].textColor ,
+                            'border-color':  statusColors[item.color] && statusColors[item.color].textColor}"
+                                ></div>
+                                {{ item.name }}
                             </a>
                         </li>
                     </ng-template>
                 </ul>
                 <div class="default-value">
-                    <span class="priority-dot {{ ticketAdd.priorityLevel.toLowerCase() }}"></span>
+                    <div
+                        class="qt-input-block__dot priority-dot"
+                        [ngStyle]="{'background-color':ticketAdd.priorityLevel && statusColors[ticketAdd.priorityLevel.color] && statusColors[ticketAdd.priorityLevel.color].textColor ,
+                            'border-color': ticketAdd.priorityLevel &&  statusColors[ticketAdd.priorityLevel.color] && statusColors[ticketAdd.priorityLevel.color].textColor}"
+                    ></div>
                     {{getPriorityLevel()}}
                 </div>
             </div>
@@ -63,9 +71,9 @@
                 <span class="qt-input-block__label">Priority Level</span>
                 <app-drop-down
                     [class]="['qt-dropdown']"
-                    [field]="'title'"
+                    [field]="'name'"
                     [isBlockClear]="true"
-                    [editItem]="selectedTicketPriorities"
+                    [editItem]="ticketAdd.priorityLevel"
                     [list]="ticketPriorities"
                     (onSelectedItem)="setPriorityLevel($event)"
                     [placeholder]="'Low'"
@@ -112,46 +120,31 @@
                     placeholder="Describe Issue here…"
                     (input)="onChangeNote($event)"
                 ></div>
-                <!-- <textarea id="add-ticket-describe-issue" class="qt-input-block__textarea" appTextArea [limit]="250"
-                    placeholder="Describe Issue here…" (input)="onChangeNote($event)" (onPast)="onPastNote($event)"></textarea> -->
             </div>
         </div>
         <div class="qt-inputs-row">
-            <div class="qt-input-block qt-f50 qt-flex-md-100">
-                <company-drop-down
-                    #companyDP
-                    [title]="'Company'"
-                    [class]="['qt-dropdown']"
-                    [placeholder]="'Select Company'"
-                    [validate]="ticketValidate.getCompany()"
-                    [errorMessage]="'Company is required'"
-                    [clientType]="'CLIENT'"
-                    [field]="'name'"
-                    [search]="true"
-                    [change]="true"
-                    (onSelectedItem)="onSelectCompany($event)"
-                ></company-drop-down>
-            </div>
-            <div class="qt-input-block qt-f50 qt-flex-md-100">
-                <app-drop-down
+            <div class="qt-input-block qt-f100">
+                <company-users-drop-down
                     #userDP
                     [title]="'User'"
                     [class]="['qt-dropdown']"
                     [placeholder]="'Select User'"
-                    [list]="usersList"
-                    [validate]="ticketValidate.getClientUser()"
-                    [errorMessage]="'Client User is required'"
+                    [validate]="ticketValidate.getCompany()"
+                    [errorMessage]="'Company is required'"
+                    [field]="'name'"
+                    [dropdownHeight]="'345px'"
                     [search]="true"
                     [change]="true"
-                    (onSelectedItem)="onSelectUser($event)"
-                ></app-drop-down>
+                    [sort]="false"
+                    (onSelectedItem)="onSelectUser($event.user,$event.customerCompany)"
+                ></company-users-drop-down>
             </div>
         </div>
         <div
             class="qt-inputs-row"
             *ngIf="!customerPortalStateService.isCustomerPortal"
         >
-            <div class="qt-input-block qt-f50 qt-flex-md-100">
+            <div class="qt-input-block qt-f50">
                 <span class="qt-input-block__label">Assign To</span>
                 <app-drop-down
                     #techUserDP
@@ -163,15 +156,17 @@
                     [placeholder]="'Select User to assign'"
                 ></app-drop-down>
             </div>
-            <div class="qt-input-block qt-f50 qt-flex-md-100">
+            <div class="qt-input-block qt-f50">
                 <span class="qt-input-block__label">Device</span>
                 <app-drop-down
                     #deviceDP
                     [class]="['qt-dropdown']"
                     [field]="'hostName'"
                     [list]="devices"
-                    [preloader]="devicesStateService.getPreloaderDevices()"
-                    [isDisabled]="devicesStateService.getPreloaderDevices()"
+                    [search]="true"
+                    [change]="true"
+                    [preloader]="ticketAdd.getPreloaderDevices()"
+                    [isDisabled]="!selectedCompanyId || ticketAdd.getPreloaderDevices()"
                     [placeholder]="'Select device'"
                     (onSelectedItem)="onSelectDevice($event)"
                 ></app-drop-down>
@@ -185,16 +180,8 @@
         <div class="users-to-notify">
             <div class="users-to-notify__title">Add users to notify them ticket update</div>
             <div class="save-template">
-                <div
-                    class="device-user pointer"
-                    id="dropdownTechuser"
-                    *ngIf="appService.checkMobile()"
-                    (click)="onAddAssignedUser()"
-                >
-                </div>
                 <app-tech-users
                     #techUsersDp
-                    *ngIf="!appService.checkMobile()"
                     [users]="listTechUsersForAssign"
                     [editMode]="true"
                     [editUsers]="shareUsersList"
@@ -210,9 +197,16 @@
                             let-i="index"
                             [ngForTrackBy]="trackByIndex"
                         >
+                            <app-dynamic-tooltip
+                                [content]="user.firstName + ' ' + user.lastName"
+                                [position]="'top'"
+                                #userTooltip
+                            ></app-dynamic-tooltip>
                             <div
                                 class="assigned-ticket-user__item"
                                 *ngIf="user.accountType === 'CLIENT'"
+                                (mouseenter)="userTooltip.show($event.target)"
+                                (mouseleave)="userTooltip.hide()"
                             >
                                 <div *ngIf="user.avatar">
                                     <img
@@ -247,9 +241,16 @@
                             let-i="index"
                             [ngForTrackBy]="trackByIndex"
                         >
+                            <app-dynamic-tooltip
+                                [content]="user.firstName + ' ' + user.lastName"
+                                [position]="'top'"
+                                #userTooltip
+                            ></app-dynamic-tooltip>
                             <div
                                 class="assigned-ticket-user__item"
                                 *ngIf="user.accountType === 'TECH'"
+                                (mouseenter)="userTooltip.show($event.target)"
+                                (mouseleave)="userTooltip.hide()"
                             >
                                 <div *ngIf="user.avatar">
                                     <img
@@ -286,7 +287,6 @@
                 appDisabledBtn
                 #addBtn="disabled"
                 (onClick)="add()"
-                *ngIf="!appService.checkMobile()"
             >
                 <span *ngIf="!addBtn.isBlock()">Create Ticket</span>
                 <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
@@ -296,16 +296,6 @@
                 (click)="closed()"
             >
                 Cancel
-            </button>
-            <button
-                class="qt-button qt-ml-12"
-                appDisabledBtn
-                #addBtn="disabled"
-                (onClick)="add()"
-                *ngIf="appService.checkMobile()"
-            >
-                <span *ngIf="!addBtn.isBlock()">Create Ticket</span>
-                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
             </button>
         </div>
     </div>

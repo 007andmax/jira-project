@@ -103,7 +103,7 @@
 }
 
 .nvd3 line.nv-boxplot-median {
-  stroke: $primary-2;
+  stroke: $gray-900;
 }
 
 .nv-boxplot-tick:hover {
@@ -385,7 +385,7 @@ svg.nvd3-svg {
 
 .nvd3 .missingValuesline line {
   fill: none;
-  stroke: $primary-2;
+  stroke: $gray-900;
   stroke-width: 1;
   stroke-opacity: 1;
   stroke-dasharray: 5, 5;
@@ -657,4 +657,7 @@ Interactive Layer
     height: 100%;
     padding: 0;
     width: 980px;
+}
+.customer-ticket__header {
+    max-width: 800px !important;
 }

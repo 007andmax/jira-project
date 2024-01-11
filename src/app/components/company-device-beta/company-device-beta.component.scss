@@ -9,15 +9,15 @@
   background: url(/html/assets/img/search-ico.svg) no-repeat 12px center;
   font-size: 12px;
   line-height: 1.67;
-  background-color: #ffffff;
+  background-color: $white;
   width: 500px;
 }
 
 .device-beta-search {
   height: 32px;
   border-radius: 4px;
-  border: solid 1px #edf2f6;
-  background-color: #f8f9fa;
+  border: solid 1px $background;
+  background-color: $gray-50;
   margin: 0 25px 0 27px;
 }
 
@@ -28,7 +28,7 @@
   padding: 4px 4px 4px 11px;
   @include border-radius(4px);
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
-  background-color: #fff;
+  background-color: $white;
 }
 
 img.Online-Search {
@@ -44,7 +44,7 @@ img.Online-Search {
   margin: -3px 0px 0px 30px;
   padding: 2px 4px 2px 11px;
   border-radius: 4px;
-  background-color: #fff;
+  background-color: $white;
 }
 
 .SearchRectangletag {
@@ -53,7 +53,7 @@ img.Online-Search {
   margin: -3px 0px 0px -49px;
   padding: 2px 4px 2px 11px;
   border-radius: 4px;
-  background-color: #fff;
+  background-color: $white;
 }
 
 .example-chip-list {
@@ -65,7 +65,7 @@ img.Online-Search {
   height: 32px;
   margin: 0 1px 0 0;
   padding: 6px 15px 4px;
-  background-color: #fff;
+  background-color: $white;
   font-size: 12px;
 }
 
@@ -81,7 +81,7 @@ img.Online-Search {
   height: 32px;
   width: 32px;
   float: right;
-  color: #212b36;
+  color: $gray-900;
 
 }
 
@@ -95,7 +95,7 @@ img.Online-Search {
 
 .company-device-beta-hover:hover {
   td {
-    background-color: #f9fafb;
+    background-color: $gray-50;
 
     .company-devices-table__ip-address-text,
     .company-devices-table__ip-windows-text {
@@ -118,7 +118,7 @@ img.Online-Search {
     }
 
     input.name-text-input {
-      background-color: #f9fafb;
+      background-color: $gray-50;
     }
   }
 }
@@ -143,11 +143,11 @@ img.Online-Search {
 }
 
 .restart-modal .modal-footer .btn-danger {
-  background-color: #ff0000;
+  background-color: $red-600;
 }
 
 .restart-modal .modal-footer .btn-secondary {
-  color: #4f5f79;
+  color: $gray-600;
 }
 
 .company-devices-beta-remote-modal {
@@ -176,7 +176,7 @@ img.Online-Search {
   }
 
   .connect-icon {
-    background-image: url(/assets/img/quicktech-connect.svg);
+    background-image: url(/assets/img/icons/quicktech-connect.svg);
     width: 66px;
     min-width: 66px;
     height: 66px;
@@ -190,20 +190,20 @@ img.Online-Search {
   float: none;
 
   .loader {
-    margin: 0px 0px 0px 20px;
+    margin: 0 0 0 20px;
   }
 }
 
 .device-table__input-name {
   width: 100%;
-  border: 1px solid #dfe3e8;
+  border: 1px solid $gray-200;
   border-radius: 4px;
   outline: none;
   border-color: transparent;
 
   &:hover,
   &:focus {
-    border-color: #dfe3e8;
+    border-color: $gray-200;
     outline: none;
   }
 }
@@ -213,7 +213,7 @@ img.Online-Search {
 }
 
 input.mat-chip-input {
-  margin: 1px 0px 0px 15px;
+  margin: 1px 0 0 15px;
   flex: 1 0 150px;
   height: 38px;
   font-size: 12px;
@@ -226,49 +226,49 @@ input.mat-chip-input {
 }
 
 .opt-icon.Company.Name {
-  background-image: url(/assets/img/auto/office-account.svg);
+  background-image: url(/assets/img/icons/companies.svg);
   background-repeat: no-repeat;
 }
 
 .opt-icon.Software {
-  background-image: url(/assets/img/auto/software.svg);
+  background-image: url(/assets/img/icons/software-gray.svg);
   background-repeat: no-repeat;
 }
 
 .opt-icon.Asset.Tag,
 .opt-icon.Tag {
-  background-image: url(/assets/img/auto/tag.svg);
+  background-image: url(/assets/img/icons/tag-light-gray.svg);
   background-repeat: no-repeat;
 }
 
 .opt-icon.Manufacturer {
-  background-image: url(/assets/img/auto/manufacturer.svg);
+  background-image: url(/assets/img/icons/manufacturer.svg);
   background-repeat: no-repeat;
 }
 
 .opt-icon.Asset.Name,
 .opt-icon.Asset.Title {
-  background-image: url(/assets/img/auto/devices.svg);
+  background-image: url(/assets/img/icons/monitor.svg);
   background-repeat: no-repeat;
 }
 
 .opt-icon.OS {
-  background-image: url(/assets/img/auto/os.svg);
+  background-image: url(/assets/img/icons/os.svg);
   background-repeat: no-repeat;
 }
 
 .opt-icon.OS.Version {
-  background-image: url(/assets/img/auto/os-version.svg);
+  background-image: url(/assets/img/icons/os-version.svg);
   background-repeat: no-repeat;
 }
 
 .opt-icon.Model {
-  background-image: url(/assets/img/auto/model.svg);
+  background-image: url(/assets/img/icons/model.svg);
   background-repeat: no-repeat;
 }
 
 .opt-icon.CPU {
-  background-image: url(/assets/img/auto/cpu.svg);
+  background-image: url(/assets/img/icons/cpu.svg);
   background-repeat: no-repeat;
 }
 
@@ -321,12 +321,12 @@ span.qt-input-search:before {
   padding: 3px 4px 4px 11px;
   border-radius: 4px;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
-  background-color: #ffffff;
-  border: solid 1px #c5cdd5;
+  background-color: $white;
+  border: solid 1px $gray-300;
 }
 
 .grey-dropdown .dropdown-menu {
-  background: #ffffff;
+  background: $white;
   width: 100%;
   max-height: 190px;
   position: absolute;
@@ -363,11 +363,11 @@ table.qt-table-modern tbody tr td {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    background-color: white;
+    background-color: $white;
   }
   tr {
     td {
-      background: #ffffff;
+      background: $white;
       padding: 0 8px 0 8px;
       height: 48px;
       border-top: 1px solid transparent;
@@ -437,7 +437,7 @@ table.qt-table-modern tbody tr td {
   width: 16px;
   height: 16px;
   border: 0.35rem solid rgba(0, 0, 0, 0.2);
-  border-top-color: black;
+  border-top-color: $gray-900;
   animation: spin 1s infinite linear;
   margin-right: 8px
 }
@@ -481,8 +481,8 @@ table.qt-table-modern tbody tr td {
   padding: 10px;
   border-radius: 4px;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
-  background-color: #fff;
-  color:#364656;
+  background-color: $white;
+  color: $gray-700;
   font-size: 12px;
 }
 
@@ -497,7 +497,7 @@ table.qt-table-modern tbody tr td {
   background-position: center;
 }
 
-.d-print{
+.d-print {
   background-image: url(/assets/img/icons/print.svg);
   background-repeat: no-repeat;
   display: inline-block;
@@ -543,7 +543,7 @@ table.qt-table-modern tbody tr td {
 
 .qt-btn {
   &.--outline-gray {
-    background-color: #f4f6f8 !important;
+    background-color: $gray-100 !important;
     top:28px;
   }
 }
@@ -552,7 +552,7 @@ table.qt-table-modern tbody tr td {
 {
   ::ng-deep .qt-dropdown{
     input{
-      border: 0px !important;
+      border: 0 !important;
       padding: 10px 4px!important;
       height:25px !important;
     }
@@ -571,7 +571,7 @@ table.qt-table-modern tbody tr td {
 .computerModel {
   ::ng-deep .qt-dropdown:hover{
     input{
-      border: 1px #c5cdd5 !important;
+      border: 1px $gray-300 !important;
       padding: 10px 4px!important;
       height:25px !important;
     }
@@ -605,7 +605,7 @@ table.qt-table-modern tbody tr td {
 .computerManufacture{
   ::ng-deep .qt-dropdown:hover{
     input{
-      border: 1px #c5cdd5 !important;
+      border: 1px $gray-300 !important;
       padding: 10px 4px!important;
       height:25px !important;
     }
@@ -623,11 +623,11 @@ table.qt-table-modern tbody tr td {
 }
 
 .companydevice-beta-offline{
-  color:#ff5263;
+  color: $red-600;
 }
 
 .companydevice-beta-online{
-  color: #2ec866;
+  color: $green-600;
 }
 
 

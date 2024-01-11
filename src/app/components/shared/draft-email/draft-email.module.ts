@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from '../preloader-ticket/preloader-ticket.module';
 import { UploadAreaModule } from '../upload-area/upload-area.module';
+import { DndModule } from 'src/app/directives/dnd/dnd.module';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { UploadAreaModule } from '../upload-area/upload-area.module';
         DisabledBtnModule,
         PreloaderTicketModule,
         UploadAreaModule,
+        DndModule
     ],
     exports: [DraftEmailComponent]
 

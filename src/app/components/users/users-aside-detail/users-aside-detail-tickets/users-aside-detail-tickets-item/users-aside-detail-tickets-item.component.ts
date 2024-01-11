@@ -43,7 +43,7 @@ export class UsersAsideDetailTicketsItemComponent implements OnInit {
     }
   }
   getClassType() {
-    return `priority-icon ${(this.ticket.priorityLevel && this.ticket.priorityLevel !== "MEDIUM") ? '--' + this.ticket.priorityLevel.toLowerCase() : ''}`;
+    return `priority-icon ${(this.ticket.priorityLevel && this.ticket.priorityLevel.name !== "MEDIUM") ? '--' + this.ticket.priorityLevel.name.toLowerCase() : ''}`;
   }
   public trackById(index, item) {
     return item.id;

@@ -23,7 +23,7 @@
     <div class="qt-aside-modern__footer">
         <div class="qt-df">
             <button
-                *ngIf="version === 'short' && !appService.checkMobile()"
+                *ngIf="version === 'short'"
                 class="qt-button qt-mr-12"
                 appDisabledBtn
                 #addBtn="disabled"
@@ -34,7 +34,7 @@
                 <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
             </button>
             <button
-                *ngIf="version === 'full' && !appService.checkMobile()"
+                *ngIf="version === 'full'"
                 class="qt-button qt-mr-12"
                 appDisabledBtn
                 #addBtn="disabled"
@@ -49,28 +49,6 @@
                 (click)="close()"
             >
                 Cancel
-            </button>
-            <button
-                *ngIf="version === 'short' && appService.checkMobile()"
-                class="qt-button  "
-                appDisabledBtn
-                #addBtn="disabled"
-                (onClick)="onAddShort()"
-                [ngClass]="{'--loading':addBtn.isBlock()}"
-            >
-                <span>Save Company</span>
-                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
-            </button>
-            <button
-                *ngIf="version === 'full' && appService.checkMobile()"
-                class="qt-button  "
-                appDisabledBtn
-                #addBtn="disabled"
-                (onClick)="onAddFull()"
-                [ngClass]="{'--loading':addBtn.isBlock()}"
-            >
-                <span>Save Company</span>
-                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
             </button>
         </div>
     </div>

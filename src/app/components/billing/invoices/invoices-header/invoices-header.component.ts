@@ -27,7 +27,6 @@ export class InvoicesHeaderComponent implements OnInit {
     private invoiceStateService: InvoiceStateService) { }
 
   ngOnInit() {
-    if (this.appService.checkMobile()) this.toggleFilter = true;
   }
   export(type) {
     return new Promise((resolve, reject) => {

@@ -4,16 +4,35 @@ tr {
   cursor: pointer;
   &:hover {
     td {
-      background: $gray-200--old;
-      border-color: $primary-1;
+      background: $gray-50;
+      border-color: $blue-light-600;
     }
   }
 }
 .--selected {
   > div {
-    @media (min-width: 768px) {
-      background: #f4fbff;
-      border-color: $primary-1;
-    }
+    background: #f4fbff;
+    border-color: $blue-light-600;
+  }
+}
+.multi-assign-user {
+  position: absolute;
+  top: -12px;
+}
+.multi-assign-user-container {
+  position: relative;
+}
+.more-users {
+  position: absolute;
+  top: -12px;
+  background: $gray-100;
+  color: $gray-600;
+  font-size: 12px;
+  font-weight: 600;
+}
+.ticket-table__assignee {
+  overflow: unset;
+  .ellipsis {
+    max-width: 120px;
   }
 }

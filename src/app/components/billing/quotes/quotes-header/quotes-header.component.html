@@ -15,6 +15,19 @@
                 >
                     Clear All
                 </button>
+                <div
+                    class="company-devices-page__list-header-buttons"
+                    *ngIf="getSelectedCount() > 0"
+                >
+                    <div [textContent]="getSelectedCount() + ' Quotes Selected'"></div>
+                    <div
+                        class="qt-ml-20 qt-fw-500 qt-df qt-ai-c qt-color-info qt-ai-c qt-pointer"
+                        (click)="delete()"
+                    >
+                        <div class="icon__archive-blue qt-sz-16 qt-ic-c qt-mr-6"></div>
+                        <div class="qt-lh-1">Archive Quote</div>
+                    </div>
+                </div>
                 <button
                     class="qt-btn btn-filter qt-ml-8"
                     [ngClass]="{'active':!toggleFilter}"
@@ -28,7 +41,7 @@
                     Filters
                 </button>
                 <button
-                    class="qt-btn --outline-blue qt-ml-8"
+                    class="qt-button --gray --md qt-ml-8"
                     (click)="onShowCreateQuote()"
                     *ngIf="!customerPortalStateService.isCustomerPortal"
                 >
@@ -49,6 +62,22 @@
         <table class="qt-table-modern qt-page-list__header-thead">
             <thead>
                 <tr>
+                    <th class="quotes-table__check">
+                        <div class="qt-df">
+                            <label
+                                class="qt-checkbox"
+                                for="all-quotes"
+                            >
+                                <input
+                                    id="all-quotes"
+                                    [(ngModel)]="selectAll"
+                                    (change)="toggleAllQuotes($event)"
+                                    type="checkbox"
+                                >
+                                <span></span>
+                            </label>
+                        </div>
+                    </th>
                     <th
                         class="quotes-table__date pointer"
                         (click)="sortBy('date')"
@@ -73,6 +102,7 @@
                         Description
                         <span class="qt-table-modern__sorting"></span>
                     </th>
+                    <th class="quotes-table__recipients">Recipients</th>
                     <th class="quotes-table__create-by">Created By</th>
                     <th class="quotes-table__status">Status</th>
                     <th

@@ -8,10 +8,6 @@
 .dropdown-menu {
   min-height: 350px;
   width: 100%;
-
-  @media (max-width: 767px) {
-    min-height: 389px;
-  }
 }
 
 
@@ -19,7 +15,7 @@
   &__dropdown {
     border-radius: 6px;
     box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-    border: solid 1px $gray-400--old;
+    border: solid 1px $gray-200;
     min-height: 360px;
     position: absolute;
     display: none;
@@ -35,11 +31,6 @@
     border-bottom: 1px solid $gray-200;
     justify-content: space-between;
     margin-bottom: 8px;
-
-    @media (max-width: 767px) {
-      padding: 14px 16px;
-      box-shadow: 0 0 5px 1px rgba(197, 205, 213, .37);
-    }
   }
 
   &__header-title {
@@ -71,13 +62,6 @@
         &__item-title {
           background: transparent;
           color: $gray-900;
-          //padding-left: 0 !important; // TODO check this style
-          //padding-right: 0 !important;
-
-          @media (max-width: 767px) {
-            border-color: transparent;
-            font-weight: 600;
-          }
         }
       }
 
@@ -103,8 +87,8 @@
             flex-shrink: 0;
           }
           &:hover {
-            border: solid 1px $primary-1 !important;
-            background-color: $gray-200--old;
+            border: solid 1px $blue-light-600 !important;
+            background-color: $gray-50;
             display: flex;
             flex-direction: row;
             align-items: center;

@@ -1,13 +1,13 @@
 @import './src/assets/styles/variable';
 
 .active {
-    background: $gray-800--old;
-     color: $primary-1;
-    border-left: 2px solid $primary-1;
+    background: $gray-600;
+    color: $blue-light-600;
+    border-left: 2px solid $blue-light-600;
 }
 .category-item {
     &:hover {
-        color: $primary-1;
+        color: $blue-light-600;
     }
 }
 .category-name  {

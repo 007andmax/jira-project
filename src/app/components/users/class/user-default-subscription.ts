@@ -12,11 +12,11 @@ export class UserDefaultSubscription {
             this.ticketSubscription = new UserDefaultSubscriptionItem(data.ticketSubscription);
             this.ticketManagerSubscription = new UserDefaultSubscriptionItem(data.ticketManagerSubscription);
         } else {
-            this.invoiceSubscription = new UserDefaultSubscriptionItem({ enabled: false, activated: true, });
+            this.invoiceSubscription = new UserDefaultSubscriptionItem({ enabled: true, activated: true, });
             this.invoiceSubscription.setIsExist(false);
             this.ticketSubscription = new UserDefaultSubscriptionItem({ enabled: true, activated: true, });
             this.ticketSubscription.setIsExist(false);
-            this.ticketManagerSubscription = new UserDefaultSubscriptionItem({ enabled: false, activated: true, });
+            this.ticketManagerSubscription = new UserDefaultSubscriptionItem({ enabled: true, activated: true, });
             this.ticketManagerSubscription.setIsExist(false);
         }
 

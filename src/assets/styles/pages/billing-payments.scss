@@ -11,7 +11,7 @@
   }
   .header-circle-icon {
     background-size: 16px !important;
-    border: 1px solid $gray-400--old;
+    border: 1px solid $gray-200;
     background-repeat: no-repeat;
     background-position: center;
     cursor: pointer;
@@ -29,7 +29,7 @@
   }
 
   &__payment-info {
-    border-right: 1px solid $gray-400--old;
+    border-right: 1px solid $gray-200;
     width: 300px;
     min-width: 300px;
   }
@@ -39,21 +39,21 @@
      font-weight: 600;
       font-size: 13px;
       width: 142px;
-      color: $primary-2;
+      color: $gray-900;
     }
     &__value {
       font-size: 13px;
       line-height: 1.54;
-      color: $primary-2;
+      color: $gray-900;
     }
   }
 
   .payment-info__notes {
     border-radius: 6px;
-    border: dashed 1px $gray-500--old;
+    border: dashed 1px $gray-300;
     font-size: 13px;
     line-height: 1.54;
-    color: $primary-2;
+    color: $gray-900;
     padding: 12px 16px;
     min-height: 129px;
     width: 100%;
@@ -65,64 +65,80 @@
     width: 100%;
     th, td {
       height: 40px;
-      border-bottom: solid 1px $gray-400--old;
+      border-bottom: solid 1px $gray-200;
       padding: 0 14px;
       font-size: 13px;
       line-height: 1.54;
-      color: $primary-2;
+      color: $gray-900;
       text-align: left;
       width: 25%;
       &:last-child {
-        border-right: solid 1px $gray-400--old;
+        border-right: solid 1px $gray-200;
       }
       &:first-child {
-        border-left: solid 1px $gray-400--old;
+        border-left: solid 1px $gray-200;
       }
     }
     th {
-      border-top: solid 1px $gray-400--old;
-      background-color: $gray-100--old;
+      border-top: solid 1px $gray-200;
+      background-color: $gray-25;
      font-weight: 600;
     }
 
     td.payment-table__number {
-      color: $primary-1;
+      color: $blue-light-600;
      font-weight: 600;
     }
   }
 
   .billable-payment-table__reference {
     width: 150px;
+    min-width: 150px;
+    max-width: 150px;
   }
 
   .billable-payment-table__date {
     width: 109px;
+    min-width: 109px;
+    max-width: 109px;
   }
   .billable-payment-table__invoice {
     width: 91px;
+    min-width: 109px;
+    max-width: 109px;
   }
   .billable-payment-table__company {
-      width: max-content;
+      width: 100% ;
   }
 
   .billable-payment-table__payment-mode {
     width: 150px;
+    min-width: 150px;
+    max-width: 150px;
   }
 
   .billable-payment-table__payment {
     width: 100px;
+    min-width: 100px;
+    max-width: 100px;
   }
 
   .billable-payment-table__amount {
     width: 110px;
+    min-width: 110px;
+    max-width: 110px;
   }
 
   .billable-payment-table__status {
     width: 90px;
+    min-width: 90px;
+    max-width: 90px;
   }
 
   .billable-payment-table__menu {
     width: 28px;
+    min-width: 28px;
+    max-width: 28px;
     padding: 0 !important;
     .icon__more {
       height: 100%;

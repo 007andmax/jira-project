@@ -141,7 +141,7 @@ export class CompanyValdiate {
     }
 
     public checkValidFirstname(firstName) {
-        if (!firstName || firstName.length === 0) {
+        if (!firstName || firstName.length < 2) {
             this.firstName = false;
         } else {
             this.firstName = true;
@@ -155,7 +155,7 @@ export class CompanyValdiate {
         }
     }
     public isValidate(company: CompanyProfile) {
-        if (!company.isUseSelectedUser && (!company.contacts[0].firstName || company.contacts[0].firstName.length === 0)) this.firstName = false;
+        if (!company.isUseSelectedUser && (!company.contacts[0].firstName || company.contacts[0].firstName.length < 2)) this.firstName = false;
         if (!company.name || company.name.length === 0) this.name = false;
         if (company.clientType === "") this.type = false;
         if (company.isUseSelectedUser && !company.contacts[0].id) this.user = false;

@@ -20,10 +20,13 @@
             class="qt-report__body-header"
             *ngIf="onInit"
         >
-            <div class="body-m-sb qt-color-dark">{{company.name || 'All companies'}}</div>
-            <h6 class="qt-fw-600 qt-color-dark">Software Summary Report</h6>
-            <div class="body-m qt-color-dark-light">
-                {{getDateForHeader(deviceIpSummary.date)}}
+            <div class="body-m-sb qt-color-gray-900">{{company.name || 'All companies'}}</div>
+            <h6 class="qt-fw-600 qt-color-gray-900">Software Summary Report</h6>
+            <div class="body-m qt-color-gray-600">
+                As at {{getDateForHeader(deviceIpSummary.date)}}
+            </div>
+            <div class="body-m__sb qt-color-gray-900">
+                Tech company: {{companiesStateService.getCurrentCompany().name}}
             </div>
         </div>
         <table
@@ -33,61 +36,61 @@
             <thead>
                 <tr>
                     <th
-                        class="qt-fw-600 qt-color-dark"
+                        class="qt-fw-600 qt-color-gray-900"
                         *ngIf="deviceIpSummary.deviceIpSummaryWithDevice"
                     >
                         Device
                     </th>
                     <th
-                        class="qt-fw-600 qt-color-dark"
+                        class="qt-fw-600 qt-color-gray-900"
                         *ngIf="deviceIpSummary.deviceIpSummaryWithNetworkName"
                     >
                         Network Name
                     </th>
                     <th
-                        class="qt-fw-600 qt-color-dark"
+                        class="qt-fw-600 qt-color-gray-900"
                         *ngIf="deviceIpSummary.deviceIpSummaryWithLinkSpeed"
                     >
                         Link Speed
                     </th>
                     <th
-                        class="qt-fw-600 qt-color-dark"
+                        class="qt-fw-600 qt-color-gray-900"
                         *ngIf="deviceIpSummary.deviceIpSummaryWithDhcp"
                     >
                         DHCP
                     </th>
                     <th
-                        class="qt-fw-600 qt-color-dark"
+                        class="qt-fw-600 qt-color-gray-900"
                         *ngIf="deviceIpSummary.deviceIpSummaryWithIpAddress"
                     >
                         IP Address
                     </th>
                     <th
-                        class="qt-fw-600 qt-color-dark"
+                        class="qt-fw-600 qt-color-gray-900"
                         *ngIf="deviceIpSummary.deviceIpSummaryWithSubnet"
                     >
                         Subnet
                     </th>
                     <th
-                        class="qt-fw-600 qt-color-dark"
+                        class="qt-fw-600 qt-color-gray-900"
                         *ngIf="deviceIpSummary.deviceIpSummaryWithGateway"
                     >
                         Gateway
                     </th>
                     <th
-                        class="qt-fw-600 qt-color-dark"
+                        class="qt-fw-600 qt-color-gray-900"
                         *ngIf="deviceIpSummary.deviceIpSummaryWithDns1"
                     >
                         DNS 1
                     </th>
                     <th
-                        class="qt-fw-600 qt-color-dark"
+                        class="qt-fw-600 qt-color-gray-900"
                         *ngIf="deviceIpSummary.deviceIpSummaryWithDns2"
                     >
                         DNS 2
                     </th>
                     <th
-                        class="qt-fw-600 qt-color-dark"
+                        class="qt-fw-600 qt-color-gray-900"
                         *ngIf="deviceIpSummary.deviceIpSummaryWithWanIp"
                     >
                         WAN IP

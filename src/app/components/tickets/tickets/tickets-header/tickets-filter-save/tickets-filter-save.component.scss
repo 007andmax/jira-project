@@ -1,0 +1,91 @@
+@import './src/assets/styles/variable';
+@import "./src/assets/styles/fonts";
+
+.modal-body {
+    padding: 0;
+
+    p {
+        @include body-r;
+    }
+}
+
+.no-exist-agreements {
+    &__info {
+        @include body-r;
+        color: $gray-700;
+    }
+}
+
+.contract-container-agreements {
+  .radio-container {
+    padding-left: 26px;
+    font-size: 14px;
+    font-weight: 400;
+    color: $gray-900;
+    height: 17px;
+    margin-top: 16px;
+
+    .radio-mark {
+      top: 0;
+    }
+  }
+}
+
+.preloader-container {
+    padding: 32px;
+    position: relative;
+}
+
+.archive-modal__body {
+    margin-bottom: 0 !important;
+}
+
+.info-product {
+    padding: 16px;
+    border-radius: 8px;
+    background-color: $gray-200;
+    margin: 16px 0 0 0;
+
+    h3 {
+        @include body-r__m;
+        color: $gray-900;
+    }
+
+    span {
+        @include сaption-l;
+        color: $gray-600;
+    }
+}
+
+pre {
+    margin: unset;
+    font-size: unset;
+    line-height: unset;
+    color: unset;
+    background-color: unset;
+    border: unset;
+    border-radius: unset;
+    font-family: unset;
+}
+
+
+.tickets-edit-filter-modal {
+  padding: 32px;
+  .archive-modal__title {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .qt-button {
+    background-color: $blue-light-600;
+    color: $white;
+
+    &.--gray {
+      background-color: transparent;
+      color: $gray-500;
+      border: 1px solid $gray-200;
+    }
+  }
+  .archive-modal__footer {
+    margin: 32px 0 0 0;
+  }
+}

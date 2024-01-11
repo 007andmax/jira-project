@@ -1,57 +1,14 @@
 <div
     class="qt-df qt-ai-c visible-to-all-user-dropdown"
     ngbDropdown
+    *ngIf="!customerPortalStateService.isCustomerPortal"
 >
-    <div class="button-globe qt-mr-8">
-        <i
-            *ngIf="type == 'PUBLIC'"
-            class="icon__globe qt-za-16 qt-sz-16 qt-bg-contain"
-        ></i>
-        <i
-            *ngIf="type == 'PRIVATE'"
-            class="icon__private qt-za-16 qt-sz-16 qt-bg-contain"
-        ></i>
-    </div>
-    <span
-        class="pointer"
-        [textContent]="getText()"
-        ngbDropdownToggle
-    ></span>
-    <i
-        class="icon__down-arrow qt-za-16 qt-sz-16 qt-bg-contain qt-ml-4 pointer"
-        ngbDropdownToggle
-    ></i>
     <div
-        class="autocomplete-user-tags"
-        ngbDropdownMenu
-        aria-labelledby="dropdown"
+        class="qt-toggle qt-mr-8"
+        [ngClass]="{'--on':toggleType}"
+        (click)="changeType(!toggleType)"
     >
-        <div
-            class="visible-users-item"
-            (click)="changeType('PUBLIC')"
-            ngbDropdownItem
-        >
-            <div class="icon__globe qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"></div>
-            <p>Public</p>
-            <span>Visible to all users</span>
-            <i
-                *ngIf="type == 'PUBLIC'"
-                class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
-            ></i>
-        </div>
-        <div
-            class="visible-users-item"
-            (click)="changeType('PRIVATE')"
-            ngbDropdownItem
-            *ngIf="!customerPortalStateService.isCustomerPortal"
-        >
-            <div class="icon__private qt-za-16 qt-sz-16 qt-bg-contain"></div>
-            <p>Private</p>
-            <span>Visible to tech users only</span>
-            <i
-                *ngIf="type == 'PRIVATE'"
-                class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
-            ></i>
-        </div>
+        <div class="qt-toggle__circle"></div>
     </div>
+    <span>Make this chat Private</span>
 </div>

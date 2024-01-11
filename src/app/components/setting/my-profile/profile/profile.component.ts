@@ -94,7 +94,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
      * init form validation and declaration
      */
     const emailPattern =
-      '[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,63}';
+      /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
     this.profileForm = this.formBuilder.group({
       userName: [
         this.currentUser.firstName,

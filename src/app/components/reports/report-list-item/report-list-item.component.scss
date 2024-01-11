@@ -27,7 +27,7 @@
 .d-hardware{
   display: inline-block;
   max-width: 100%;
-  background-image: url(/assets/img/device/hardware.svg);
+  background-image: url(/assets/img/icons/hardware.svg);
   background-repeat: no-repeat;
   width: 24px;
   height: 24px;
@@ -37,7 +37,7 @@
 .d-network{
   display: inline-block;
   max-width: 100%;
-  background-image: url(/assets/img/device/network.svg);
+  background-image: url(/assets/img/icons/network-24.svg);
   background-repeat: no-repeat;
   width: 24px;
   height: 24px;
@@ -47,7 +47,7 @@
 .d-software{
   display: inline-block;
   max-width: 100%;
-  background-image: url(/assets/img/device/software.svg);
+  background-image: url(/assets/img/icons/software-image.svg);
   background-repeat: no-repeat;
   width: 24px;
   height: 24px;
@@ -132,4 +132,8 @@
   width: 24px;
   height: 24px;
   background-position: center;
+}
+.content-report {
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

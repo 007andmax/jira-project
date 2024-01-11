@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .table-wrap {
   table {
     width: 100%;
@@ -5,46 +7,46 @@
     .pid {
       width: 15% !important;
       padding: 0 18px 0 18px;
-      background-color: white;
+      background-color: $white;
       height: 40px;
     }
     .name {
       width: 33% !important;
-      padding: 0px;
+      padding: 0;
       white-space: pre-line;
     }
     .cpu {
       width: 10% !important;
-      padding: 0px;
+      padding: 0;
     }
     .ram{
       width: 8% !important;
-      padding: 0px;
+      padding: 0;
     }
     .memory{
       width: 10% !important;
-      padding: 0px;
+      padding: 0;
     }
     .disk{
       width: 10% !important;
-      padding: 0px;
+      padding: 0;
     }
     .network{
       width: 10% !important;
-      padding: 0px;
+      padding: 0;
     }
     .action{
       width: 9% !important;
-      padding: 0px;
+      padding: 0;
     }
     thead {
       th {
-        background-color: #f4f6f8 !important;
+        background-color: $gray-50 !important;
       }
     }
     tbody{
       td{
-      background-color: white !important;
+      background-color: $white !important;
       }
     }
   }
@@ -54,8 +56,8 @@
   display: flex;
   align-items: center;
   a {
-      border: solid 1px #dfe3e8;
-      background: #fff;
+      border: solid 1px $gray-200;
+      background: $white;
       border-radius: 50%;
       display: flex;
       justify-content: center;
@@ -72,14 +74,14 @@
       text-align: center;
       width: 70px;
       border-radius: 3px;
-      background-color: #4f5f79;
+      background-color: $gray-600;
       font-size: 12px;
       font-weight: 500;
       font-style: normal;
       font-stretch: normal;
       line-height: 1.33;
       letter-spacing: normal;
-      color: #ffffff;
+      color: $white;
       left: -22px;
       top: -40px;
       visibility: hidden;
@@ -103,7 +105,7 @@
       position: absolute;
       pointer-events: none;
       border-color: rgba(79, 95, 121, 0);
-      border-top-color: #4f5f79;
+      border-top-color: $gray-600;
       border-width: 6px;
       margin-left: -6px;
       bottom: 25px;
@@ -121,10 +123,10 @@
           background: url(/assets/img/search-ico.svg) no-repeat 12px center;
           font-size: 12px;
           line-height: 1.67;
-          background-color: #ffffff;
+          background-color: $white;
           width: 200px;
       }
-  }  
+  }
 }
 
 .main-processname{
@@ -137,15 +139,15 @@
   margin: 4px 32px 607px 250px;
   padding: 20px 24px 24px;
   box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-  border: solid 1px #dfe3e8;
-  background-color: #fff;
+  border: solid 1px $gray-200;
+  background-color: $white;
 }
 
 .offlineImg{
   width: 50px;
   height: 50px;
   margin-left: 140px;
-  background-image: url(/assets/img/device/offline.svg);
+  background-image: url(/assets/img/icons/offline.svg);
 }
 
 .device-offline{

@@ -52,7 +52,6 @@ import 'froala-editor/js/third_party/image_tui.min';
 import 'froala-editor/js/third_party/spell_checker.min';
 import 'froala-editor/js/third_party/embedly.min';
 import { CommonModule } from '@angular/common';
-import { TicketEditAsideModule } from './components/tickets/tickets/ticket-edit-aside/ticket-edit-aside.module';
 import { LeftPanelModule } from './components/left-panel/left-panel.module';
 import { CompanyAddAsideModule } from './components/companies/company-add-aside/company-add-aside.module';
 import { DraftEmailModule } from './components/shared/draft-email/draft-email.module';
@@ -123,6 +122,13 @@ import { PermissionNoSuperAdminService } from './services/users/permission-no-su
 import { PermissionClientUserService } from './services/users/permission-client-user.service';
 import { UsersCheckUseComponent } from './components/users/users-check-use/users-check-use.component';
 import { PermissionMyProfileService } from './components/setting/my-profile/permission-my-profile.service';
+import { TicketsFilterSaveComponent } from './components/tickets/tickets/tickets-header/tickets-filter-save/tickets-filter-save.component';
+import { ContractsStatisticsComponent } from './components/billing/contracts-statistics/contracts-statistics.component';
+import { ContractsStatisticsTableComponent } from './components/billing/contracts-statistics/contracts-statistics-table/contracts-statistics-table.component';
+import { ContractsStatisticsTableItemComponent } from './components/billing/contracts-statistics/contracts-statistics-table/contracts-statistics-table-item/contracts-statistics-table-item.component';
+import { SuperAdminCompaniesComponent } from './components/super-admin/super-admin-companies/super-admin-companies.component';
+import { SuperAdminCompaniesHeaderComponent } from './components/super-admin/super-admin-companies/super-admin-companies-header/super-admin-companies-header.component';
+import { SuperAdminCompaniesItemComponent } from './components/super-admin/super-admin-companies/super-admin-companies-item/super-admin-companies-item.component';
 declare var $: any;
 
 /**
@@ -151,6 +157,7 @@ declare var $: any;
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
     CannedResponsesAsideComponent,
+    TicketsFilterSaveComponent,
   ],
   imports: [
     BrowserModule,
@@ -173,7 +180,6 @@ declare var $: any;
     }),
     BrowserAnimationsModule,
     AngularEditorModule,
-    TicketEditAsideModule,
     LeftPanelModule,
     CompanyAddAsideModule,
     DraftEmailModule,
@@ -222,7 +228,8 @@ declare var $: any;
     InventoryCheckUseComponent,
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
-    UsersCheckUseComponent
+    UsersCheckUseComponent,
+    TicketsFilterSaveComponent
   ],
   providers: [
     {

@@ -1,0 +1,199 @@
+<div class="cmn-area ticket-status-table">
+    <div class="tab-pane__table dataTable">
+        <div class="tab-pane__table-header">
+            <div class="tab-pane__table-row">
+                <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+                    <label class="qt-checkbox">
+                        <input
+                            type="checkbox"
+                            (change)="onToggleAll($event)"
+                        >
+                        <span></span>
+                    </label>
+                </div>
+                <div class="tab-pane__table-cell ticket-status-table__priority">Ticket Priority</div>
+                <div class="tab-pane__table-cell ticket-status-table__color">Set Color</div>
+                <div class="tab-pane__table-cell ticket-status-table__action">&nbsp;</div>
+            </div>
+        </div>
+        <div class="tab-pane__table-body">
+            <div
+                *ngIf="showAddPriority"
+                class="add-priority-container tab-pane__table-row --selected"
+                appClickOtside
+                #addPriorityBtn="click"
+                [init]="true"
+                [class]="'.add-priority-container'"
+                (onOutSide)="onAddTicketPriority()"
+            >
+                <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+                    <label class="qt-checkbox">
+                        <input type="checkbox">
+                        <span></span>
+                    </label>
+                </div>
+                <div class="tab-pane__table-cell ticket-status-table__priority">
+                    <input
+                        type="text"
+                        class="form-input --editable"
+                        placeholder="Enter Name Priority"
+                        [(ngModel)]="addPriority.name"
+                        (keyup)="onKeyUp($event)"
+                        [ngClass]="{'--input-error' : addPriority.disableCreate}"
+                        (input)="addPriority.checkDublicate(ticketsPriorities)"
+                        maxlength="30"
+                    >
+                    <mat-error
+                        class="qt-tooltip-error"
+                        *ngIf="addPriority.disableCreate"
+                    >
+                        This Ticket Priority is already occupied
+                    </mat-error>
+                </div>
+                <div class="tab-pane__table-cell ticket-status-table__color">
+                    <div
+                        class="form-row tag-color-container"
+                        ngbDropdown
+                    >
+                        <div id="dropdownBasic1">
+                            <i
+                                class="tag-color pointer"
+                                ngbDropdownToggle
+                                [ngStyle]="{'background-color':statusColors[addPriority.color].textColor ,
+                            'border-color': statusColors[addPriority.color].textColor}"
+                            ></i>
+                        </div>
+                        <div
+                            ngbDropdownMenu
+                            class="status-container-db"
+                            aria-labelledby="dropdownBasic1"
+                        >
+                            <div class="status-container">
+                                <div
+                                    class="tag-color-item"
+                                    *ngFor="let tagColor of statusColors; let i = index"
+                                    (click)="setColor(i)"
+                                    ngbDropdownItem
+                                >
+                                    <i
+                                        class="tag-color"
+                                        [ngClass]="{'--active':addPriority.color == i}"
+                                        [ngStyle]="{'background-color':tagColor.textColor ,
+                            'border-color': tagColor.textColor}"
+                                    ></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane__table-cell ticket-status-table__action">
+                    <app-dynamic-tooltip
+                        [content]="'Remove'"
+                        [position]="'top'"
+                        #removeTooltip
+                    ></app-dynamic-tooltip>
+                    <div
+                        class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                        (mouseenter)="removeTooltip.show($event.target)"
+                        (mouseleave)="removeTooltip.hide()"
+                        (click)="toggleAddPriority(false)"
+                    >
+                    </div>
+                </div>
+            </div>
+            <div
+                class="tab-pane__table-row"
+                *ngFor="let item of ticketsPriorities; let i = index"
+                appClickOtside
+                [init]="item.isInitEdit"
+                [ngClass]="['edit-priority-container-' + i,item.selected ? '--selected' : '']"
+                [class]="'.edit-priority-container-' + i"
+                (onOutSide)="onEditTicketPriority(item)"
+            >
+                <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+                    <label
+                        class="qt-checkbox"
+                        *ngIf="!item.isDefault"
+                    >
+                        <input
+                            type="checkbox"
+                            [(ngModel)]="item.selected"
+                            (change)="onSelect($event,item)"
+                        >
+                        <span></span>
+                    </label>
+                </div>
+                <div class="tab-pane__table-cell ticket-status-table__priority">
+                    <input
+                        type="text"
+                        class="form-input  --editable"
+                        placeholder="Enter Name Status"
+                        [(ngModel)]="item.name"
+                        maxlength="30"
+                        appKeyUpEnter
+                        [ngClass]="{'--input-error' :  item.disableUpdate  }"
+                        (onChange)="onEditTicketPriority(item)"
+                        (input)="item.onInitEdit(true);item.checkDublicateUpdate(ticketsPriorities)"
+                    >
+                    <mat-error
+                        class="qt-tooltip-error"
+                        *ngIf="item.disableUpdate"
+                    >
+                        This Ticket Priority is already occupied
+                    </mat-error>
+                </div>
+                <div class="tab-pane__table-cell ticket-status-table__color">
+                    <div
+                        class="form-row tag-color-container"
+                        ngbDropdown
+                    >
+                        <div id="dropdownBasic1">
+                            <i
+                                class="tag-color pointer"
+                                ngbDropdownToggle
+                                [ngStyle]="{'background-color':statusColors[item.color] && statusColors[item.color].textColor ,
+                            'border-color': statusColors[item.color] && statusColors[item.color].textColor}"
+                            ></i>
+                        </div>
+                        <div
+                            ngbDropdownMenu
+                            class="status-container-db"
+                            aria-labelledby="dropdownBasic1"
+                        >
+                            <div class="status-container">
+                                <div
+                                    class="tag-color-item"
+                                    *ngFor="let tagColor of statusColors; let i = index"
+                                    (click)="editColor(i,item)"
+                                    ngbDropdownItem
+                                >
+                                    <i
+                                        class="tag-color"
+                                        [ngClass]="{'--active':item.color == i}"
+                                        [ngStyle]="{'background-color':tagColor.textColor ,
+                            'border-color': tagColor.textColor}"
+                                    ></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane__table-cell ticket-status-table__action">
+                    <app-dynamic-tooltip
+                        [content]="'Remove'"
+                        [position]="'top'"
+                        #removeTooltip
+                    ></app-dynamic-tooltip>
+                    <div
+                        (mouseenter)="removeTooltip.show($event.target)"
+                        (mouseleave)="removeTooltip.hide()"
+                        class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                        (click)="removeTicketPriority(item)"
+                        *ngIf="!item.isDefault"
+                    >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

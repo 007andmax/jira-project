@@ -13,7 +13,7 @@ export class QuoteAsidePreviewBodyComponent implements OnInit {
   @Input() quote: QuotePreview;
   currentCompany: any;
   quoteCompany: Company;
-  constructor(private companiesStateService: CompaniesStateService) { }
+  constructor(public companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
     this.currentCompany = this.companiesStateService.getCurrentCompany();
@@ -38,12 +38,6 @@ export class QuoteAsidePreviewBodyComponent implements OnInit {
     return taxes.map(item => {
       return `${item.name} ${item.rate}%`;
     }).join("<br>");
-  }
-  getCompanyLogoUrl() {
-    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo && this.currentCompany.logo.base64 && !this.currentCompany.logo.cropped) return this.currentCompany.logo.base64;
-    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.cropped && this.currentCompany.logo.cropped.id) return `/file/${this.currentCompany.logo.cropped.id}`;
-    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.origin && this.currentCompany.logo.origin.id) return `/file/${this.currentCompany.logo.origin.id}`;
-    return '/company/default/logo.jpg';
   }
   public trackById(index, item) {
     return item.versionedId.id;

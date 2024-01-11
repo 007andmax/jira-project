@@ -26,6 +26,7 @@ export class UsersStateService {
   openAside: EventEmitter<any> = new EventEmitter();
   openEditAside: EventEmitter<any> = new EventEmitter();
   openMessageAside: EventEmitter<any> = new EventEmitter();
+  onSelectAll: EventEmitter<any> = new EventEmitter();
   openDetailAside: EventEmitter<any> = new EventEmitter();
   closeDetailAside: EventEmitter<any> = new EventEmitter();
   onChangeUserPermissions: EventEmitter<any> = new EventEmitter();
@@ -71,6 +72,23 @@ export class UsersStateService {
     this.usersRealTimeService.changePermissionsUsers.subscribe(newChange => {
       if (newChange.action == "PERMISSIONS_UPDATE") this.onChangeUserPermissions.emit(newChange.data);
     });
+  }
+  public getUserAvatarUrl(user) {
+    if (!(user && user.avatar)) return '';
+    if (user.id) {
+      return `url(/users/${user.id}/image${(user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
+        '')}) 0% 0% / contain no-repeat`
+    } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
+      return `url(/file/${(user.avatar.origin.id)}.jpg) 0% 0% / contain no-repeat`;
+    }
+  };
+  getNameForAvatar(createdUser) {
+    if (!createdUser) return '';
+    if (!createdUser.avatar) return `${(createdUser.firstName) ? createdUser.firstName[0].toUpperCase() : ''}${(createdUser.lastName) ? createdUser.lastName[0].toUpperCase() : ''}`;
+    return '';
+  }
+  public initSelectAllusers(data) {
+    this.onSelectAll.emit(data);
   }
   public setUserRoleForRemove(data) {
     this.userRoleForRemove = data;

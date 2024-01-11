@@ -6,7 +6,7 @@
     flex-shrink: 0;
 }
 .category-item-category .toggle-category {
-    background-color: $gray-700--old;
+    background-color: $gray-500;
 }
 .category-item-category {
     display: flex;
@@ -38,19 +38,19 @@
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        background-color: $gray-500--old;
+        background-color: $gray-300;
     }
     .status-published {
-        background-color: $success;
+        background-color: $green-600;
     }
     .status-draft {
-        background-color: $gray-500--old;
+        background-color: $gray-300;
     }
     span {
         padding-left: 7px;
         font-family: "Inter", sans-serif;
         font-size: 14px;
-        color: $primary-2;
+        color: $gray-900;
         position: relative;
         flex: 1;
         white-space: nowrap;

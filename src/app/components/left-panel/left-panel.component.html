@@ -1,74 +1,11 @@
-<!-- <div class="app-left-panel__header qt-d-none qt-d-md-flex">
-    <div class="icon__quicktech-logo-mini qt-sz-40 qt-bg-contain"></div>
-    <div
-        class="app-left-panel__header-resize-btn qt-d-md-none"
-        (click)="onToggleLeftPanel()"
-    ></div>
-    <div
-        class="icon__close-white qt-sz-20 qt-bg-contain qt-d-none qt-d-md-block pointer"
-        (click)="onToggleMobileLeftPanel()"
-    ></div>
-    <div class="app-left-panel__systems-info">
-        <div
-            class="app-left-panel__systems-info-avatar"
-            style="color: #24a6a5"
-            [ngStyle]="{'background':  getCompanyLogoUrl()}"
-            *ngIf="checkLogo()"
-        >
-        </div>
-        <div
-            class="app-left-panel__systems-info-avatar"
-            style="background-color: #e6ffff; color: #24a6a5"
-            *ngIf="!checkLogo()"
-            [textContent]="getShortCompanyName()"
-        >
-        </div>
-        <div>
-            <div class="app-left-panel__systems-info-header">
-                {{ (currentCompany) ? currentCompany.name : ''}}
-            </div>
-            <div class="app-left-panel__systems-info-name">
-                <div class="app-left-panel__systems-info-circle"></div>
-                {{getCurrentUserName()}}
-            </div>
-        </div>
-    </div>
-</div> -->
 <div class="app-left-panel__body">
     <div class="app-left-panel__body-icon">
         <div class="qt-df qt-jc-sb qt-ai-c app-left-panel__header-mobile qt-df qt-jc-fs">
             <div class="icon__quicktech-logo-mini qt-sz-40 qt-bg-contain qt-ml-auto qt-mr-auto qt-mt-16 qt-mb-16"></div>
-            <div class="app-left-panel__systems-info qt-df qt-ai-c qt-ml-16 qt-d-none">
-                <img
-                    [src]="checkLogo()"
-                    class="app-left-panel__systems-info-avatar qt-sz-32 qt-circle"
-                    alt
-                    *ngIf="checkLogo()"
-                >
-                <div
-                    class="app-left-panel__systems-info-avatar qt-sz-32 qt-circle qt-df qt-ai-c qt-jc-c"
-                    style="background-color: #7A5AF8; color: #fff"
-                    *ngIf="!checkLogo()"
-                    [textContent]="getShortCompanyName()"
-                >
-                </div>
-                <div class="qt-ml-6">
-                    <div class="app-left-panel__systems-info-header">{{getCurrentUserName()}}</div>
-                    <div class="app-left-panel__systems-info-name qt-color-gray-400 qt-fs-12">
-                        <div class="app-left-panel__systems-info-circle"></div>
-                        {{ (currentCompany) ? currentCompany.name : ''}}
-                    </div>
-                </div>
-            </div>
-            <div class="header-mobile-close qt-d-none qt-d-md-flex pointer qt-ml-auto">
-                <div
-                    class="icon__close-white qt-sz-20 qt-bg-contain"
-                    (click)="onToggleMobileLeftPanel()"
-                ></div>
-            </div>
         </div>
         <div
-            class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
+            *ngIf="getPermissions('ALLOW_QUICK_CONNECT')"
+            class="app-left-panel__menu-icon-wrap pointer"
             (click)="changePage('SUPPORT');onOpenPanel();panelSupport.onFilter('ALL')"
             [ngClass]="{'--active':page === 'SUPPORT' }"
             placement="right"
@@ -84,11 +21,10 @@
             ngbTooltip="Tickets"
         >
             <div class="app-left-panel__menu-icon --tickets"></div>
-            <div class="app-left-panel__menu-text qt-ml-12 qt-mr-12 qt-d-none qt-d-md-block">Tickets</div>
-            <div class="icon__arrow-right-gray-400 qt-sz-16 qt-bg-contain qt-ml-auto qt-d-none qt-d-md-block"></div>
         </div>
         <div
-            class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
+            *ngIf="getPermissions('VIEW_USERS')"
+            class="app-left-panel__menu-icon-wrap pointer"
             (click)="changePage('USERS');onOpenPanel();panelUsers.goToAll()"
             [ngClass]="{'--active':page === 'USERS' }"
             placement="right"
@@ -97,7 +33,8 @@
             <div class="app-left-panel__menu-icon --users"></div>
         </div>
         <div
-            class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
+            *ngIf="getPermissions('VIEW_USERS')"
+            class="app-left-panel__menu-icon-wrap pointer"
             (click)="changePage('MARKETING');onOpenPanel();panelMarketing.goToAll()"
             [ngClass]="{'--active':page === 'MARKETING' }"
             placement="right"
@@ -106,6 +43,7 @@
             <div class="app-left-panel__menu-icon --marketing"></div>
         </div>
         <div
+            *ngIf="getPermissions('VIEW_COMPANIES')"
             class="app-left-panel__menu-icon-wrap pointer"
             (click)="changePage('COMPANIES');onOpenPanel();panelCompanies.onShowAll()"
             [ngClass]="{'--active':page === 'COMPANIES' }"
@@ -113,11 +51,9 @@
             ngbTooltip="Companies"
         >
             <div class="app-left-panel__menu-icon --companies"></div>
-            <div class="app-left-panel__menu-text qt-ml-12 qt-mr-12 qt-d-none qt-d-md-block">Companies</div>
-            <div class="icon__arrow-right-gray-400 qt-sz-16 qt-bg-contain qt-ml-auto qt-d-none qt-d-md-block"></div>
         </div>
         <div
-            class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
+            class="app-left-panel__menu-icon-wrap pointer"
             (click)="changePage('BILLING');onOpenPanel();onChangeState('billing-dashboard')"
             [ngClass]="{'--active':page === 'BILLING' }"
             placement="right"
@@ -126,7 +62,7 @@
             <div class="app-left-panel__menu-icon --billing"></div>
         </div>
         <div
-            class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
+            class="app-left-panel__menu-icon-wrap pointer"
             (click)="changePage('INVENTORY');onOpenPanel();panelInventory.goToAll()"
             [ngClass]="{'--active':page === 'INVENTORY' }"
             placement="right"
@@ -135,6 +71,7 @@
             <div class="app-left-panel__menu-icon --products"></div>
         </div>
         <div
+            *ngIf="getPermissions('VIEW_PASSWORD_SECTION')"
             class="app-left-panel__menu-icon-wrap pointer"
             (click)="changePage('PASSWORD_MANAGER');onOpenPanel();panelPasswordManager.goToAll()"
             [ngClass]="{'--active':page === 'PASSWORD_MANAGER' }"
@@ -142,11 +79,9 @@
             ngbTooltip="Password Manager"
         >
             <div class="app-left-panel__menu-icon --password-manager"></div>
-            <div class="app-left-panel__menu-text qt-ml-12 qt-mr-12 qt-d-none qt-d-md-block">Password Manager</div>
-            <div class="icon__arrow-right-gray-400 qt-sz-16 qt-bg-contain qt-ml-auto qt-d-none qt-d-md-block"></div>
         </div>
         <div
-            class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
+            class="app-left-panel__menu-icon-wrap pointer"
             (click)="changePage('DOCUMENTS');onOpenPanel();onChangeState('new-documents')"
             [ngClass]="{'--active':page === 'DOCUMENTS' }"
             placement="right"
@@ -155,7 +90,7 @@
             <div class="app-left-panel__menu-icon --documents"></div>
         </div>
         <!-- <div
-            class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
+            class="app-left-panel__menu-icon-wrap pointer"
             (click)="changePage('DEVICES');onOpenPanel();panelDevices.goToAll()"
             [ngClass]="{'--active':page === 'DEVICES' }"
             placement="right"
@@ -165,7 +100,8 @@
             <div class="app-left-panel__menu-icon --devices"></div>
         </div> -->
         <div
-            class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
+            *ngIf="getAccessReports()"
+            class="app-left-panel__menu-icon-wrap pointer"
             (click)="changePage('REPORTS');onChangeState('new-reports')"
             [ngClass]="{'--active':page === 'REPORTS' }"
             placement="right"
@@ -174,7 +110,7 @@
             <div class="app-left-panel__menu-icon --reports"></div>
         </div>
         <div
-            class="app-left-panel__menu-icon-wrap app-left-panel__menu-icon-wrap-settings qt-d-md-none pointer"
+            class="app-left-panel__menu-icon-wrap app-left-panel__menu-icon-wrap-settings pointer"
             (click)="changePage('SETTINGS');onOpenPanel();onChangeState('myprofile-component')"
             [ngClass]="{'--active':page === 'SETTINGS' }"
             placement="right"
@@ -182,21 +118,13 @@
         >
             <div class="app-left-panel__menu-icon --settings"></div>
         </div>
-        <div
-            class="app-left-panel__menu-icon-wrap qt-d-none qt-d-md-flex pointer"
-            (click)="logOut()"
-        >
-            <div class="app-left-panel__menu-icon --logout"></div>
-            <div class="app-left-panel__menu-text qt-ml-12 qt-mr-12 qt-d-none qt-d-md-block">Logout</div>
-            <div class="icon__arrow-right-gray-400 qt-sz-16 qt-bg-contain qt-ml-auto qt-d-none qt-d-md-block"></div>
-        </div>
     </div>
     <div
         class="app-left-panel__body-menu"
         [ngClass]="{'--open':showMobTab}"
     >
         <div
-            class="app-left-panel__header-resize-btn qt-d-md-none"
+            class="app-left-panel__header-resize-btn"
             (click)="onToggleLeftPanel()"
         ></div>
         <app-left-panel-support
@@ -205,7 +133,6 @@
             (onOpenPanel)="onOpenPanel()"
             (onChangeState)="onChangeState($event)"
             [activePage]="state"
-            class="qt-d-md-none"
             [hidden]="page !== 'SUPPORT'"
         ></app-left-panel-support>
         <app-left-panel-tickets
@@ -221,7 +148,6 @@
             (onOpenPanel)="onOpenPanel()"
             (onChangeState)="onChangeState($event)"
             [activePage]="state"
-            class="qt-d-md-none"
             [hidden]="page !== 'USERS'"
         ></app-left-panel-users>
         <left-panel-marketing
@@ -230,7 +156,6 @@
             (onOpenPanel)="onOpenPanel()"
             (onChangeState)="onChangeState($event)"
             [activePage]="state"
-            class="qt-d-md-none"
             [hidden]="page !== 'MARKETING'"
         ></left-panel-marketing>
         <app-left-panel-companies
@@ -246,14 +171,12 @@
             (onOpenPanel)="onOpenPanel()"
             (onChangeState)="onChangeState($event)"
             [activePage]="state"
-            class="qt-d-md-none"
             [hidden]="page !== 'BILLING'"
         ></app-left-panel-billing>
         <app-left-panel-inventory
             #panelInventory
             [activePage]="state"
             (onChangeState)="onChangeState($event)"
-            class="qt-d-md-none"
             [hidden]="page !== 'INVENTORY'"
         ></app-left-panel-inventory>
         <app-left-panel-password-manager
@@ -269,7 +192,6 @@
             (onOpenPanel)="onOpenPanel()"
             (onChangeState)="onChangeState($event)"
             [activePage]="state"
-            class="qt-d-md-none"
             [hidden]="page !== 'DOCUMENTS'"
         ></app-left-panel-documents>
         <app-left-panel-devices
@@ -277,7 +199,6 @@
             (onOpenPanel)="onOpenPanel()"
             (onChangeState)="onChangeState($event)"
             [activePage]="state"
-            class="qt-d-md-none"
             [hidden]="page !== 'DEVICES'"
         >
         </app-left-panel-devices>
@@ -285,7 +206,6 @@
             *ngIf="getAccessReports()"
             [activePage]="state"
             (onChangeState)="onChangeState($event)"
-            class="qt-d-md-none"
             [hidden]="page !== 'REPORTS'"
         ></app-left-panel-reports>
         <app-left-panel-settings
@@ -293,7 +213,6 @@
             (onOpenPanel)="onOpenPanel()"
             (onChangeState)="onChangeState($event)"
             [activePage]="state"
-            class="qt-d-md-none"
             [hidden]="page !== 'SETTINGS'"
         ></app-left-panel-settings>
     </div>

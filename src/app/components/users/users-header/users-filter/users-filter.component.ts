@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CompanyTagsComponent } from 'src/app/components/companies/company-tags/company-tags.component';
 import { CrmCompanyIndustry } from 'src/app/components/setting/crm-settings/crm-company-industry/class/crm-company-industry';
@@ -15,7 +15,8 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 @Component({
   selector: 'app-users-filter',
   templateUrl: './users-filter.component.html',
-  styleUrls: ['./users-filter.component.scss']
+  styleUrls: ['./users-filter.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersFilterComponent implements OnInit {
   @ViewChild('titlesDp', { static: true }) titlesDp: DropDownComponent;
@@ -31,7 +32,8 @@ export class UsersFilterComponent implements OnInit {
   constructor(private companiesState: CompaniesStateService,
     private crmStateService: CrmStateService,
     private customerPortalStateService: CustomerPortalStateService,
-    private usersStateService: UsersStateService,) { }
+    private usersStateService: UsersStateService,
+    private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
     if (this.customerPortalStateService.isCustomerPortal && this.companiesState.getCompanies().length > 0) this.checkCompanyCustomerUser();
@@ -45,11 +47,13 @@ export class UsersFilterComponent implements OnInit {
     let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
       this.jobTitleList = data;
       if (this.titlesDp) this.titlesDp.reset(this.jobTitleList);
+      this.ref.markForCheck();
     })
     this.sub.add(onGetJobTitle);
     this.industries = this.crmStateService.getIndustryList();
     let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
       this.industries = data;
+      this.ref.markForCheck();
     })
     this.sub.add(onGetIndustry);
     let onLeftPanelMarketingFilter = this.usersStateService.onLeftPanelMarketingFilter.subscribe((data) => {
@@ -60,6 +64,7 @@ export class UsersFilterComponent implements OnInit {
         this.filter.setCustomSubscriptions([data]);
       }
       this.onChangeCounterFilter();
+      this.ref.markForCheck();
     })
     this.sub.add(onLeftPanelMarketingFilter);
   }
@@ -68,6 +73,7 @@ export class UsersFilterComponent implements OnInit {
     let selectedCompany = this.companiesState.getCompanies().find(item => item.id == localStorage.getItem('company_info_id'));
     this.companiesDp.selectItemWithOutChanges(selectedCompany);
     this.companiesDp.isDisabled = true;
+    this.ref.markForCheck();
   }
   public onChangeTags(data) {
     this.filter.setTags(data);
@@ -144,5 +150,6 @@ export class UsersFilterComponent implements OnInit {
     if (this.filter.defaultSubscriptions || this.filter.customSubscriptions.length > 0) count++;
     if (this.filter.tags.length > 0) count++;
     this.changeCountFilter.emit(count);
+    this.ref.detectChanges();
   }
 }

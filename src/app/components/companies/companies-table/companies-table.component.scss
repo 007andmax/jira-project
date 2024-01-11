@@ -5,8 +5,8 @@
 }
 .--selected {
   td {
-    background: $gray-100--old;
-    border-color: $primary-1;
+    background: $gray-25;
+    border-color: $blue-light-600;
   }
 }
 .link-style {
@@ -14,10 +14,4 @@
   height: 100%;
   display: flex;
   align-items: center;
-}
-.mobile__primary-contact {
-  @media screen and (max-width: 767px) {
-      display: flex;
-      align-items: center;
-    }
 }

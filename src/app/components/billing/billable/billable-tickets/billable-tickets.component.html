@@ -39,17 +39,30 @@
                     [textContent]="billableProfile.name"
                 ></h6>
             </div>
-            <div
-                class="qt-page-list__header-title-line--rigth"
-                *ngIf="getPermissions('CREATE_INVOICE')"
-            >
-                <button
-                    class="qt-btn --outline-blue"
-                    [disabled]="!isCurrentCompanyAddressEmpty"
-                    (click)="onCreateInvoice()"
-                >
-                    Create Invoice
-                </button>
+            <div class="qt-page-list__header-title-line--rigth">
+                <div class="qt-df qt-ai-c">
+                    <div
+                        class="company-devices-page__list-header-buttons"
+                        *ngIf="getSelectedCount() > 0 && !isInitMultyRemove"
+                    >
+                        <div [textContent]="getSelectedCount() + ' Ticket Selected'"></div>
+                        <div
+                            class="qt-ml-20 qt-fw-500 qt-df qt-ai-c qt-color-info qt-ai-c qt-pointer"
+                            (click)="deleteSelectedTickets()"
+                        >
+                            <div class="icon__archive-blue qt-sz-16 qt-ic-c qt-mr-6"></div>
+                            <div class="qt-lh-1">Delete</div>
+                        </div>
+                    </div>
+                    <button
+                        *ngIf="getPermissions('CREATE_INVOICE')"
+                        class="qt-button --gray --md"
+                        [disabled]="!isCurrentCompanyAddressEmpty"
+                        (click)="onCreateInvoice()"
+                    >
+                        Create Invoice
+                    </button>
+                </div>
             </div>
         </div>
         <div class="qt-page-list__header-thead-container">
@@ -137,6 +150,7 @@
                                 <div
                                     class="icon__locked qt-sz-16"
                                     placement="top"
+                                    container="body"
                                     ngbTooltip="Is being used by other user"
                                 ></div>
                             </td>

@@ -56,26 +56,26 @@
                 </div>
                 <span>
                     <button
-                        class="qt-btn --outline-blue"
+                        class="qt-button --gray --md"
                         (click)="getAddDevice()"
                     >
                         Add Device
                     </button>
                 </span>
                 <button
-                    class="qt-btn --outline-white qt-ml-8 dm"
+                    class="qt-button --gray --md qt-ml-8 dm"
                     (click)="sendEmail()"
                 >
                     <span class="d-email"></span>
                 </button>
                 <button
-                    class="qt-btn --outline-white qt-ml-8 dm"
+                    class="qt-button --gray --md qt-ml-8 dm"
                     (click)="printPdf()"
                 >
                     <span class="d-print"></span>
                 </button>
                 <button
-                    class="qt-btn --outline-white qt-ml-8 dm"
+                    class="qt-button --gray --md qt-ml-8 dm"
                     (click)="downloadCsv()"
                 >
                     <span class="d-exportdark"></span>
@@ -110,7 +110,7 @@
                                     *ngIf="!isOfflineDeviceSelected"
                                     (click)="sendCommandHeader('r')"
                                 >
-                                    <div class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                    <div class="icon__reset qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                     Restart
                                 </li>
                                 <li
@@ -472,7 +472,7 @@
                                         ngbDropdownItem
                                         (click)="sendCommand('r', asset.ID)"
                                     >
-                                        <div class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                        <div class="icon__reset qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                         Restart
                                     </li>
                                     <li
@@ -510,7 +510,7 @@
                                         (click)="sendCommand('ira', asset.ID)"
                                         ngbDropdownItem
                                     >
-                                        <div class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                        <div class="icon__reset qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                         Install Remote Agent
                                     </li>
                                     <li
@@ -630,7 +630,7 @@
                                 ngbDropdownItem
                                 (click)="sendCommand('r', assetData.ID)"
                             >
-                                <div class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                <div class="icon__reset qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                 Restart
                             </li>
                             <li
@@ -967,7 +967,7 @@
                         <div class="sidebar-updates__tab-title qt-ff-sb">UPDATES</div>
                         <div *ngIf="getSecurityCountSelected() > 1">
                             <button
-                                class="qt-btn --outline-blue qt-mr-8 qt-d-md-none"
+                                class="qt-button --gray --md qt-mr-8"
                                 (click)="InstallUpdate()"
                                 [disabled]="IsUpdateInstalling"
                             >

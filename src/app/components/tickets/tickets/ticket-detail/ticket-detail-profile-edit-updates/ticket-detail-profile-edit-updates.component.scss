@@ -4,14 +4,6 @@
 .cps-block {
     &__header {
         margin-bottom: 20px;
-
-        @media (max-width: 767px) {
-            position: relative;
-            height: 56px;
-            background-color: $primary-2;
-            padding: 0 18px;
-            margin-bottom: 4px;
-        }
     }
 
     &__photo {
@@ -21,29 +13,18 @@
         background-size: cover !important;
         background-position: center !important;
         margin-right: 18px;
-
-        @media (max-width: 767px) {
-            display: none;
-        }
     }
 
     &__nav {
         padding: 0;
         display: flex;
         list-style: none;
-
-        @media (max-width: 767px) {
-            width: 100%;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 0;
-        }
     }
 
     &__nav-item {
         @include body-m__sb;
         margin-right: 30px;
-        color: $gray-800--old;
+        color: $gray-600;
         cursor: pointer;
         padding-left: 25px;
         background-repeat: no-repeat;
@@ -51,22 +32,8 @@
         background-position: center left;
         position: relative;
 
-        @media (max-width: 767px) {
-            @include body-l__sb;
-            background: none;
-            display: none;
-            border: none;
-            padding: 0;
-            margin: 0;
-        }
-
         &.active {
-            color: $primary-1;
-
-            @media (max-width: 767px) {
-                color: $white;
-                display: block;
-            }
+            color: $blue-light-600;
 
             &:before {
                 content: "";
@@ -74,13 +41,9 @@
                 bottom: -10px;
                 height: 3px;
                 width: calc(100% + 5px);
-                background: $primary-1;
+                background: $blue-light-600;
                 left: 0;
                 border-radius: 100px;
-
-                @media (max-width: 767px) {
-                    display: none;
-                }
             }
         }
     }
@@ -101,7 +64,7 @@
 
         &::placeholder {
             opacity: 1;
-            color: $gray-600--old;
+            color: $gray-400;
         }
     }
 
@@ -112,15 +75,15 @@
     &__support-message {
         width: 100%;
         font-size: 12px;
-        color: $primary-2;
+        color: $gray-900;
         line-height: 1.33;
-        border: 1px solid #fff1d6;
+        border: 1px solid $yellow-50;
         height: 24px;
         margin-top: 8px;
         display: flex;
         align-items: center;
         border-radius: 4px;
-        background-color: $gray-100--old;
+        background-color: $gray-25;
         padding: 4px 10px;
     }
 
@@ -136,7 +99,7 @@
 .ticket-edit-aside {
     &__more-users-title {
         font-size: 12px;
-        color: $primary-1;
+        color: $blue-light-600;
         margin-left: 10px;
         cursor: pointer;
     }
@@ -193,7 +156,7 @@
             content: "";
             width: 16px;
             height: 16px;
-            border: 1px solid $gray-500--old;
+            border: 1px solid $gray-300;
             background: $white;
             border-radius: 50%;
             bottom: -7px;
@@ -212,7 +175,7 @@
     }
 
     &__users-linked-divider {
-        background: $gray-400--old;
+        background: $gray-200;
         width: 1px;
         margin: 0 16px;
     }
@@ -225,7 +188,7 @@
 .ticket-edit-aside-bottom-part-users-attack {
     width: 100%;
 
-    ::ng-deep app-add-assigned-user {
+    ::ng-deep app-add-assigned-user,::ng-deep add-assigned-user-note {
         margin-right: 5px;
         margin-top: 5px;
         width: 100%;
@@ -246,7 +209,7 @@
         padding: 0.5rem;
         justify-content: space-between;
         align-items: center;
-        border: dashed 1px #979797;
+        border: dashed 1px $gray-400;
         margin-bottom: 1rem;
         position: relative;
 
@@ -262,19 +225,19 @@
         .name {
             font-size: 14px;
             font-weight: 500;
-            color: #353f4a;
+            color: $gray-700;
             margin: 0;
         }
 
         .size {
             font-size: 12px;
             font-weight: 500;
-            color: #a4a4a4;
+            color: $gray-400;
             margin: 0;
             margin-bottom: 0.25rem;
 
             .file-error {
-                color: $error;
+                color: $red-600;
             }
         }
 
@@ -495,8 +458,7 @@
                 flex: 100%;
             }
 
-            .icon__globe,
-            .icon__private {
+            .icon__globe{
                 width: 20px;
                 height: 20px;
                 margin-right: 12px;
@@ -597,6 +559,6 @@
   position: sticky;
   bottom: 0;
   left: 0;
-  background: #ffffff;
+  background: $white;
   z-index: 3;
 }

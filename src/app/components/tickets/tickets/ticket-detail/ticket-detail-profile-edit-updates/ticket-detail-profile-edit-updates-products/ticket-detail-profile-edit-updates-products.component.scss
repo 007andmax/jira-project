@@ -27,13 +27,9 @@
         border-radius: 4px;
         margin-left: 8px;
         display: flex;
-        background-color: $gray-700--old;
+        background-color: $gray-500;
         align-items: center;
         justify-content: center;
-
-        @media (max-width: 767px) {
-            display: none;
-        }
 
         .btn-icon {
             width: 16px;

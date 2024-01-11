@@ -18,14 +18,10 @@
             #selectServices
             [ticketProfile]="ticketProfile"
             *ngIf="tab === 'SERVICE'"
-            (onUpdateMobile)="updateMobile()"
-            (onAddMoreMobile)="update()"
         ></ticket-detail-profile-form-update-services>
         <ticket-detail-profile-form-update-products
             #selectProducts
             *ngIf="tab === 'PRODUCT'"
-            (onUpdateMobile)="updateMobile()"
-            (onAddMoreMobile)="update()"
         ></ticket-detail-profile-form-update-products>
         <ticket-detail-profile-form-update-support
             *ngIf="tab === 'QUICK_SUPPORT'"
@@ -78,7 +74,7 @@
             appDisabledBtn
             #updateBtn="disabled"
             (onClick)="update()"
-            *ngIf="tab !== 'QUICK_SUPPORT'"
+            *ngIf="isShowAddUpdate()"
         >
             <span>Post</span>
             <app-preloader-ticket *ngIf="isUpdate"></app-preloader-ticket>

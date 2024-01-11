@@ -11,7 +11,7 @@
     </div>
     <div class="qt-aside-modern__content new-companies-content__modal--content advanced">
         <div class="qt-inputs-row">
-            <div class="qt-input-block qt-f50 qt-flex-md-100">
+            <div class="qt-input-block qt-f50">
                 <div class="qt-input-block__label">Item Number</div>
                 <input
                     type="text"
@@ -20,7 +20,7 @@
                     placeholder="Enter Item Number"
                 >
             </div>
-            <div class="qt-input-block qt-f50 qt-flex-md-100">
+            <div class="qt-input-block qt-f50">
                 <div class="qt-input-block__label">ILC Number</div>
                 <input
                     type="text"
@@ -47,6 +47,7 @@
                     [search]="true"
                     [change]="true"
                     [field]="'glNumber'"
+                    [reducerSelectedItem]="formatterSeletedGLNumber"
                     [reducerItem]="formatterGLNumber"
                     [placeholder]="'Select GL'"
                     [editItem]="inventory.glNumber"
@@ -61,10 +62,11 @@
                 <textarea
                     appTextArea
                     [limit]="160"
+                    [default]="5"
                     id="inventory-description"
                     placeholder="Write Product Description"
                     (input)="onChangeDescription($event)"
-                    (onPast)="onPastDescription($event)"
+                    (paste)="onPastDescription($event)"
                 ></textarea>
                 <mat-error
                     class="invalid-feedback"
@@ -92,26 +94,7 @@
             </div>
         </div>
         <div class="qt-inputs-row">
-            <div class="qt-input-block">
-                <div class="qt-input-block__label">Description</div>
-                <textarea
-                    appTextArea
-                    [limit]="160"
-                    id="inventory-description"
-                    placeholder="Write Product Description"
-                    (input)="onChangeDescription($event)"
-                    (onPast)="onPastDescription($event)"
-                ></textarea>
-                <mat-error
-                    class="invalid-feedback"
-                    *ngIf="!validate.getDescription()"
-                >
-                    Description is required
-                </mat-error>
-            </div>
-        </div>
-        <div class="qt-inputs-row">
-            <div class="qt-f33 qt-input-block qt-w-md-50 --required">
+            <div class="qt-f33 qt-input-block --required">
                 <div class="qt-input-block__label">Cost</div>
                 <input
                     type="text"
@@ -131,7 +114,7 @@
                     Cost cannot be higher than Price
                 </mat-error>
             </div>
-            <div class="qt-f33 qt-input-block qt-w-md-50 --required">
+            <div class="qt-f33 qt-input-block --required">
                 <div class="qt-input-block__label">Markup %</div>
                 <input
                     type="text"
@@ -142,7 +125,7 @@
                     placeholder="Enter Cost"
                 >
             </div>
-            <div class="qt-f33 qt-input-block qt-flex-md-100 --required">
+            <div class="qt-f33 qt-input-block --required">
                 <div class="qt-input-block__label">Price</div>
                 <input
                     type="text"
@@ -164,7 +147,7 @@
             </div>
         </div>
         <div class="qt-inputs-row">
-            <div class="qt-flex-md-100">
+            <div>
                 <app-taxes
                     #taxesDp
                     (taxesChange)="onTaxesChange($event)"

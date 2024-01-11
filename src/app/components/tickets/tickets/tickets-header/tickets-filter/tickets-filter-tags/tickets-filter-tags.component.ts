@@ -52,15 +52,26 @@ export class TicketsFilterTagsComponent extends CompanyTagsComponent {
     this.onInitClearState();
     this.onCheckEditItem();
   }
+  /**
+* @description Sort tags and reqTags list by "word" field
+*/
   sortTags() {
     this.tags = this.tags.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
       1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
     this.reqTags = this.reqTags.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
       1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
   }
+  /**
+* @description Filter list by field value
+* @param {Object} event - Object from input
+*/
   onSearch(event) {
     this.tags = this.reqTags.filter(item => item.word.toLowerCase().includes(event.target.value));
   }
+  /**
+* @description Check if element dropdown added in selectedTag
+* @param {String} id - selected id element
+*/
   isSelected(id) {
     return this.selectedTag.find(item => item.id == id);
   }

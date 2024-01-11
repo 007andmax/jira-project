@@ -3,34 +3,34 @@
     *ngIf="quote"
 >
     <div class="company-info">
-      <div class="qt-inputs-row">
-        <div class="qt-input-block qt-f50">
-            <app-drop-down
-                #companyDp
-                [title]="'Company Name'"
-                [placeholder]="'Select Company'"
-                [list]="companies"
-                [validate]="validate.getCompany()"
-                [errorMessage]="'Company is required'"
-                [editItem]="quoteCompany"
-                [field]="'name'"
-                [search]="true"
-                [change]="true"
-                [isDisabled]="true"
-            ></app-drop-down>
+        <div class="qt-inputs-row">
+            <div class="qt-input-block qt-f50">
+                <app-drop-down
+                    #companyDp
+                    [title]="'Company Name'"
+                    [placeholder]="'Select Company'"
+                    [list]="companies"
+                    [validate]="validate.getCompany()"
+                    [errorMessage]="'Company is required'"
+                    [editItem]="quoteCompany"
+                    [field]="'name'"
+                    [search]="true"
+                    [change]="true"
+                    [isDisabled]="true"
+                ></app-drop-down>
+            </div>
         </div>
-      </div>
-      <div class="qt-inputs-row">
-        <div class="qt-input-block qt-f50">
-          <textarea
-            class="qt-input-block__textarea qt-mt-8 qt-w100"
-            [(ngModel)]="quote.description"
-            placeholder="Quote description in short words"
-            appTextArea
-            maxlength="255"
-          ></textarea>
+        <div class="qt-inputs-row">
+            <div class="qt-input-block qt-f50">
+                <textarea
+                    class="qt-input-block__textarea qt-mt-8 qt-w100"
+                    [(ngModel)]="quote.description"
+                    placeholder="Quote description in short words"
+                    appTextArea
+                    maxlength="255"
+                ></textarea>
+            </div>
         </div>
-      </div>
     </div>
     <div
         class="qt-df address-block"
@@ -67,7 +67,7 @@
                 ></quote-aside-add-change-address>
             </div>
             <div
-                class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark"
+                class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-gray-900"
                 [textContent]="quote.billingLocationName"
             ></div>
             <div
@@ -110,7 +110,7 @@
                     ></i>
                 </div>
                 <div
-                    class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark"
+                    class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-gray-900"
                     [textContent]="quote.shippingLocationName"
                 ></div>
                 <div
@@ -177,7 +177,7 @@
     </div>
     <div class="qt-mb-16 new-quote-table-container">
         <table class="new-quote-table qt-gray-table --last-icon">
-            <thead class=" qt-lh-127 qt-color-dark">
+            <thead class=" qt-lh-127 qt-color-gray-900">
                 <tr>
                     <th class="new-quote-table__col-item">Item</th>
                     <th class="new-quote-table__col-desc">Description</th>
@@ -277,6 +277,7 @@
                 ></app-product-list-quote>
                 <app-service-list-quote
                     #servicesList
+                    [isDisabled]="areTicketsPresented && areTicketsTerminated"
                     [quoteCompany]="quoteCompany"
                     (onSelect)="onAddService($event)"
                 ></app-service-list-quote>
@@ -288,7 +289,7 @@
             ></app-invoice-regular-note>
         </div>
         <div>
-            <div class="quote-total qt-color-dark">
+            <div class="quote-total qt-color-gray-900">
                 <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12">
                     <div>Sub Total Services</div>
                     <div [textContent]="getSubTotalServices() | currency"></div>

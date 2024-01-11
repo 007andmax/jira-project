@@ -21,6 +21,9 @@ import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { PasswordRecordHistory } from '../class/password-record-history';
 import { PasswordRecordLink } from '../class/password-record-link';
+import { DevicesService } from 'src/app/services/devices/devices.service';
+import { Device } from '../../company-devices/class/device';
+import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 
 /**
  * Password manager edit aside component
@@ -40,6 +43,7 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
   subSecretCode: Subscription;
   showPassword: boolean = false;
   tab: string = 'PASSWORD_DETAIL'
+  devices = [];
   categories: Array<PasswordRecordCategories> = [];
   public editItem: PasswordRecord = null;
   timeCount: number = 0;
@@ -70,10 +74,12 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private passwordManagerStateService: PasswordManagerStateService,
     private companiesState: CompaniesStateService,
-    private usersStateService: UsersStateService,
+    public usersStateService: UsersStateService,
     private elRef: ElementRef,
     private toastrService: ToastrService,
-    private appStateService: AppStateService
+    public devicesService: DevicesService,
+    private appStateService: AppStateService,
+    public devicesStateService: DevicesStateService,
   ) { }
 
   /**
@@ -92,6 +98,8 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
       this.usersList = [];
       this.devicesList = [];
       this.gadgetsList = [];
+      this.devices = [];
+      this.passwordManagerStateService.setDevices(this.devices)
       if (!this.editItem.otpEnable) this.isEditSecretKey = true;
 
       this.selectedClient = this.companiesState.getCompanies().find(item => item.id === this.editItem.companyId);
@@ -121,6 +129,10 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
       if (this.categoriesSelect) this.categoriesSelect.reset(this.categories);
     })
     this.sub.add(onGetCategories);
+    let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
+      if (this.selectedClient && this.selectedClient.id == newChange.data.clientCompanyId) this.devicesStateService.changeDevice(this.devicesList, newChange);
+    })
+    this.sub.add(onDeviceUninstalled);
     /* let onChangeRealTime = this.passwordManagerStateService.onChangeRealTime.subscribe(newChange => {
        if (newChange.action === 'PASSWORD_RECORD_UPDATED' && this.editItem && newChange.data.id === this.editItem.id) this.editItem.updateHistories(newChange.data.histories);
        if (!this.cd['destroyed']) this.cd.detectChanges();
@@ -147,6 +159,16 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
       })
     })
   }
+  getDevices() {
+    if (this.devices.length == 0) {
+      this.devicesService.getCompanyDevices(this.selectedClient.id).subscribe((data: any) => {
+        this.devices = (data[this.selectedClient.id]) ? JSON.parse(JSON.stringify(data[this.selectedClient.id])).map(item => new Device(item)) : [];
+        this.passwordManagerStateService.setDevices(this.devices);
+      });
+    } else {
+      this.passwordManagerStateService.setDevices(this.devices);
+    }
+  }
   toggleSecretCode() {
     this.showSecretCode = !this.showSecretCode;
     if (this.intervalContainer) clearInterval(this.intervalContainer);
@@ -166,6 +188,7 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
   }
   changeTab(data) {
     this.tab = data;
+    if (this.tab === 'LINKED_DEVICES') this.getDevices();
   }
   getCodeRecords() {
     this.timeCount = 0;
@@ -213,8 +236,9 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
     this.validate.resetCompany();
   }
   selectType(data) {
-    this.editItem.setType(data);
-    if (data.name !== 'DEVICE' && data.name !== 'LOCAL_USER_ACCOUNT') this.validate.resetLinkTo();
+    this.editItem.setType((data) ? data : new PasswordRecordCategories());
+    if (data) this.validate.resetTemplate();
+    if (data && data.name !== 'DEVICE' && data.name !== 'LOCAL_USER_ACCOUNT') this.validate.resetLinkTo();
   }
   onChangeExpiryDate(data) {
     this.editItem.setExpiryDate(moment(new Date(data.year, data.month - 1, data.day)).format('YYYY/MM/DD'));
@@ -268,6 +292,7 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
     this.saveRecord.setDisabled(true);
     this.passwordManagerService.editRecord(this.editItem.getDataForEdit(this.selectedUserAndDevices))
       .subscribe((res) => {
+        this.passwordManagerStateService.changePassword(this.editItem);
         this.saveRecord.setDisabled(false);
         this.close();
       }, err => {
@@ -315,18 +340,6 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
   public trackByIndex(index, item) {
     return index;
   }
-  getUserAvatarUrl(user) {
-    if (!(user && user.avatar)) return '';
-
-    if (user.id) {
-      return `url(${'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
-        '')}) 0% 0% / cover no-repeat`
-    } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
-      return `url(/file/${(user.avatar.origin.id)}.jpg) 0% 0% / cover no-repeat`;
-    } else {
-      return 'url(/users/default/image.jpg) 0% 0% / cover no-repeat';
-    }
-  };
   getUserById(userId) {
     return this.usersStateService.getAllUsers().find(item => item.id === userId);
   }
@@ -334,6 +347,6 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
     return `${user.firstName} ${user.lastName}`;
   }
   getNameForAvatar(item) {
-    return (this.getUserAvatarUrl(this.getUserById(item.userId)) == '') ? `${item.userName[0].toUpperCase()}${item.userName[item.userName.indexOf(" ") + 1].toUpperCase()}` : '';
+    return (this.usersStateService.getUserAvatarUrl(this.getUserById(item.userId)) == '') ? `${item.userName[0].toUpperCase()}${item.userName[item.userName.indexOf(" ") + 1].toUpperCase()}` : '';
   }
 }

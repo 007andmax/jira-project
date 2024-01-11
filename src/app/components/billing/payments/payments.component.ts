@@ -35,7 +35,7 @@ export class PaymentsComponent implements OnInit {
   showDetailsPayment: boolean = false;
   showRefundPayment: boolean = false;
   showEditPayment: boolean = false;
-  offset: number = 20;
+  offset: number = 40;
   public direction: string = 'ASC';
   detailsPayment: Payment;
   refundPayment: Payment;

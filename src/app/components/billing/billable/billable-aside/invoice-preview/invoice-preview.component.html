@@ -1,5 +1,5 @@
 <div class="qt-pl-30 qt-pr-30 qt-pt-24 qt-pb-50">
-    <div class="invoice-info qt-mr-20 qt-ml-20 qt-fs-13 qt-pl-12 qt-pr-12 qt-pt-8 qt-pb-8 qt-color-dark qt-mb-24 qt-df qt-ai-c">
+    <div class="invoice-info qt-mr-20 qt-ml-20 qt-fs-13 qt-pl-12 qt-pr-12 qt-pt-8 qt-pb-8 qt-color-gray-900 qt-mb-24 qt-df qt-ai-c">
         <div
             class="icon__company-info qt-sz-24 qt-ic-c qt-mr-4 qt-mb-0"
             style="margin-bottom: 0;"
@@ -11,11 +11,11 @@
             <div class="qt-lh-154">
                 <img
                     class="company-logo qt-mb-8"
-                    [src]="getCompanyLogoUrl()"
+                    [src]="companiesStateService.getCompanyLogoUrl(currentCompany)"
                     alt
                 >
                 <div
-                    class="qt-fs-13 qt-color-dark qt-fw-600"
+                    class="qt-fs-13 qt-color-gray-900 qt-fw-600"
                     [textContent]="currentCompany.name"
                 ></div>
                 <div
@@ -30,16 +30,16 @@
                 </div>
             </div>
             <div
-                class="qt-color-dark qt-lh-131 qt-pr-24 qt-fs-26 qt-text-upper qt-fw-600"
+                class="qt-color-gray-900 qt-lh-131 qt-pr-24 qt-fs-26 qt-text-upper qt-fw-600"
                 [textContent]="'Invoice#' + invoiceNumber"
             >
             </div>
         </div>
         <div class="qt-mt-24 qt-mb-32 qt-df qt-jc-sb">
             <div class="qt-lh-154 qt-pr-12 invoice-preview__billing-address">
-                <div class="qt-fs-10 qt-color-light qt-mb-8 qt-fw-600 qt-lh-12">BILLING ADDRESS</div>
+                <div class="qt-fs-10 qt-color-gray-400 qt-mb-8 qt-fw-600 qt-lh-12">BILLING ADDRESS</div>
                 <div
-                    class="qt-fs-13 qt-color-dark qt-fw-600"
+                    class="qt-fs-13 qt-color-gray-900 qt-fw-600"
                     [textContent]="company.addresses[0].locationName"
                 ></div>
                 <div
@@ -51,9 +51,9 @@
                 class="qt-lh-154 qt-pr-12 invoice-preview__shipping-address"
                 *ngIf="company.addresses.length == 2"
             >
-                <div class="qt-fs-10 qt-color-light qt-mb-8 qt-fw-600 qt-lh-12">SHIPPING ADDRESS</div>
+                <div class="qt-fs-10 qt-color-gray-400 qt-mb-8 qt-fw-600 qt-lh-12">SHIPPING ADDRESS</div>
                 <div
-                    class="qt-fs-13 qt-color-dark qt-fw-600"
+                    class="qt-fs-13 qt-color-gray-900 qt-fw-600"
                     [textContent]="company.addresses[1].locationName"
                 ></div>
                 <div
@@ -107,11 +107,11 @@
                 [ngForTrackBy]="trackByIndex"
             >
                 <div class="qt-mb-16">
-                    <div class="invoice-preview__item-header qt-color-dark qt-df qt-pt-8 qt-pb-8 qt-pl-12 qt-pr-12 qt-ai-c">
+                    <div class="invoice-preview__item-header qt-color-gray-900 qt-df qt-pt-8 qt-pb-8 qt-pl-12 qt-pr-12 qt-ai-c">
                         <div class="invoice-preview__item-header-number qt-fs-10 qt-fw-600 qt-mr-16 qt-lh-12">#Ticket {{ticket.number}}</div>
                         <div class="invoice-preview__item-header-date qt-fs-12 qt-mr-12 qt-lh-133">
                             <span class="qt-fs-11 qt-mr-4 qt-fw-600 qt-lh-127">Date</span>
-                            {{getDateTicket(ticket.closedAt)}}
+                            {{getDate(ticket.closedAt)}}
                         </div>
                         <div class="qt-fs-12 qt-lh-133">
                             <span class="qt-fs-11 qt-mr-4 qt-fw-600 qt-lh-127">Subject:</span>
@@ -121,7 +121,7 @@
                     <table class="invoice-preview__table">
                         <thead class=" qt-lh-127">
                             <tr>
-                                <th class="invoice-preview__col-item">Item</th>
+                                <th class="invoice-preview__col-item service-date">Item</th>
                                 <th class="invoice-preview__col-desc">Description</th>
                                 <th class="invoice-preview__col-price">Unit Price</th>
                                 <th class="invoice-preview__col-qty">Quantity</th>
@@ -137,14 +137,17 @@
                                 [ngForTrackBy]="trackById"
                             >
                                 <tr>
-                                    <td
-                                        class="invoice-preview__col-item"
-                                        [textContent]="service.item.name"
-                                    ></td>
-                                    <td
-                                        class="invoice-preview__col-desc"
-                                        [textContent]="service.description"
-                                    ></td>
+                                    <td class="invoice-preview__col-item service-date">
+                                        <span [textContent]="service.item.name"></span>
+                                        <br>
+                                        <span
+                                            class="qt-fs-10 qt-color-gray-500 invoice-preview__col-item-date"
+                                            [textContent]="'Service date - ' + getDate(service.date)"
+                                        ></span>
+                                    </td>
+                                    <td class="invoice-preview__col-desc">
+                                        <pre [textContent]="service.description"></pre>
+                                    </td>
                                     <td
                                         class="invoice-preview__col-price"
                                         [textContent]="service.item.rate | currency"
@@ -161,7 +164,7 @@
                                     ></td>
                                     <td
                                         class="invoice-preview__col-tax"
-                                        [innerHTML]="getSelectedTaxes(service.taxes)"
+                                        [innerHTML]="getServiceTaxes(service)"
                                     ></td>
                                     <td
                                         class="invoice-preview__col-amount"
@@ -224,13 +227,13 @@
                 </div>
             </ng-template>
         </div>
-        <div class="qt-df qt-w100 qt-jc-sb qt-color-dark qt-fs-12 qt-fw-600 qt-mb-20 qt-lh-133">
+        <div class="qt-df qt-w100 qt-jc-sb qt-color-gray-900 qt-fs-12 qt-fw-600 qt-mb-20 qt-lh-133">
             <div class="qt-mb-20 invoice-preview-notes">
-                <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-dark qt-fw-600 qt-lh-133">Customer Note</div>
+                <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-gray-900 qt-fw-600 qt-lh-133">Customer Note</div>
                 <div
                     class="qt-fs-13 qt-lh-154 note qt-fw-400"
-                    *ngIf="selectedNote"
-                    [textContent]="selectedNote.line1"
+                    *ngIf="invoice.invoiceDataDto.note"
+                    [textContent]="invoice.invoiceDataDto.note"
                 ></div>
             </div>
             <div class="invoice-preview__total-block">
@@ -271,7 +274,7 @@
         </div>
         <div>
             <div>
-                <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-dark qt-fw-600 qt-lh-133">Terms & Conditions</div>
+                <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-gray-900 qt-fw-600 qt-lh-133">Terms & Conditions</div>
                 <div
                     class="qt-fs-13 qt-lh-154 note"
                     *ngIf="invoice.invoiceDataDto.termsAndConditions"

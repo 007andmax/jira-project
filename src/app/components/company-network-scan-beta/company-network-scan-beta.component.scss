@@ -26,14 +26,14 @@ app-company-network-scan-item {
 }
 
 .online-device{
-    color: #000000;
+    color: $gray-900;
 }
 
 .sub-label-field {
     border-width: 0;
     &:hover,
     &:focus {
-        border: solid 1px #c4cbd5;
+        border: solid 1px $gray-300;
         border-width: 1px;
         outline: 0;
     }
@@ -54,14 +54,14 @@ app-company-network-scan-item {
 }
 
 .network-status {
-    border: solid 1px $success;
+    border: solid 1px $green-600;
     line-height: 1;
     width: fit-content;
     padding: 2px 4px;
     border-radius: 3px;
-    color: $success;
+    color: $green-600;
     background-color: $white;
     letter-spacing: 0.3px;
     font-size: 8px;
-    text-transform: uppercase;    
+    text-transform: uppercase;
   }

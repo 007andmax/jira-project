@@ -3,10 +3,12 @@
     ngbDropdown
     #products="ngbDropdown"
     [ngClass]="{'hide-all-user':!toggleAllUsers}"
+    (openChange)="onToggleDropDown($event)"
 >
     <div
         class="dropdown-recipients-body"
         ngbDropdownToggle
+        [ngClass]="{'--input-error':!validate}"
     >
         <mat-form-field>
             <mat-chip-list
@@ -39,10 +41,17 @@
                     [matChipInputAddOnBlur]="addOnBlur"
                     (input)="onSearch($event)"
                     (keyup)="onKeyUp($event)"
+                    (blur)="onAdd($event)"
                 >
             </mat-chip-list>
         </mat-form-field>
     </div>
+    <mat-error
+        class="invalid-feedback"
+        *ngIf="!validate"
+    >
+        At least one email address must be added
+    </mat-error>
     <div
         class="dropdown-menu unique-down"
         ngbDropdownMenu

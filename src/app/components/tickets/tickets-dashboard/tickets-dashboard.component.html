@@ -8,7 +8,7 @@
         [hidden]="showPreloader"
     >
         <div class="qt-df qt-ai-c qt-jc-sb qt-mb-16">
-            <h6 class="qt-fw-600 qt-color-dark">Dashboard</h6>
+            <h6 class="qt-fw-600 qt-color-gray-900">Dashboard</h6>
             <div
                 class="list-type"
                 ngbDropdown
@@ -75,6 +75,7 @@
         <div class="qt-df qt-jc-sb qt-mb-16">
             <app-ticket-priority-widget
                 #ticketPriority
+                [ticketsPriorities]="ticketsPriorities"
                 [dashboardTicketsStats]="dashboardTicketsStats"
             ></app-ticket-priority-widget>
             <app-recurring-ticket-widget

@@ -28,7 +28,6 @@
             id="dropdown1"
             class="qt-dropdown-input pointer"
             [attr.maxlength]="maxlength"
-            (input)="onCheckAdd($event)"
             [readonly]="!change"
             ngbDropdownToggle
         >
@@ -54,7 +53,8 @@
         </span>
         <div
             class="qt-input-block__dot priority-dot"
-            [ngClass]="selectedItem ? selectedItem.type.toLowerCase() : ''"
+            [ngStyle]="{'background-color':selectedItem && statusColors[selectedItem.color] && statusColors[selectedItem.color].textColor ,
+                            'border-color': selectedItem &&  statusColors[selectedItem.color] && statusColors[selectedItem.color].textColor}"
         ></div>
         <i
             class="loading xs"
@@ -79,8 +79,12 @@
                     [title]="reduceItemName(item)"
                     [ngClass]="{'--selected':isSelected(item)}"
                 >
-                    <span class="priority-dot {{ item.type.toLowerCase() }} qt-mr-8"></span>
-                    <span [textContent]="reduceItemName(item)"></span>
+                    <span
+                        class="priority-dot qt-mr-8"
+                        [ngStyle]="{'background-color':statusColors[item.color] && statusColors[item.color].textColor ,
+                            'border-color': statusColors[item.color] && statusColors[item.color].textColor}"
+                    ></span>
+                    <span [textContent]="item.name"></span>
                 </button>
             </ng-template>
         </div>

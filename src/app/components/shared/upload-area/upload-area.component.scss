@@ -8,53 +8,33 @@
   }
   &__label {
     width: 100%;
-    border: 1px dotted $gray-500--old;
+    border: 1px dotted $gray-300;
     border-radius: 4px;
-    display: block;
     cursor: pointer;
     padding: 24px;
     font-size: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    @media (max-width: 767px) {
-      padding: 16px;
-    }
   }
   &__title {
-    color: $gray-800--old;
-
-    @media (max-width: 767px) {
-      display: none;
-    }
+    color: $gray-600;
   }
   &__link {
     text-decoration: underline;
-    color: $primary-1;
+    color: $blue-light-600;
   }
 
   &__attach-icon {
     margin-right: 8px;
     width: 24px;
     height: 24px;
-
-    @media (max-width: 767px) {
-      display: none;
-    }
   }
 
   &__mobile-text {
-    color: $primary-2;
+    color: $gray-900;
     @include сaption-l__sb;
     display: none;
-
-    @media (max-width: 767px) {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-    }
   }
 }
 
@@ -135,7 +115,7 @@
       margin: 0;
       margin-bottom: 0.25rem;
       .file-error {
-        color: $error;
+        color: $red-600;
       }
     }
 
