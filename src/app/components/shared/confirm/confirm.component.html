@@ -54,129 +54,101 @@
     </div>
 </div>
 <div
-    class="remove-user-dialog"
+    class="archive-modal"
     *ngIf="action === 'ARCHIVE_USER'"
 >
-    <div
-        class="remove-user-dialog__close qt-sz-16 icon__close"
-        (click)=closeModal()
-    ></div>
-    <div class="remove-user-dialog__body">
-        <div class="remove-user-dialog__title qt-fw-600 qt-mb-5">Archive User</div>
-        <div
-            class="remove-user-dialog__subtitle"
-            [textContent]="message"
-        ></div>
+    <div class="archive-modal__body">
+        <h3>Archive User</h3>
+        <p [textContent]="message"></p>
     </div>
-    <div class="remove-user-dialog__footer">
+    <div class="archive-modal__footer">
         <div class="qt-df qt-jc-fe">
             <button
-                class="qt-button --red qt-mr-12"
-                (click)=approveConfirm()
-            >
-                Yes, I am sure
-            </button>
-            <button
-                class="qt-button --gray"
+                class="btn-new disabled"
                 (click)=cancelConfirm()
             >
                 Cancel
+            </button>
+            <button
+                class="btn-new btn-primary"
+                (click)=approveConfirm()
+            >
+                Yes, I am sure
             </button>
         </div>
     </div>
 </div>
 <div
-    class="remove-user-dialog"
+    class="archive-modal"
     *ngIf="action === 'CHANGE_COMPANY_TICKET'"
 >
-    <div
-        class="remove-user-dialog__close qt-sz-16 icon__close"
-        (click)=closeModal()
-    ></div>
-    <div class="remove-user-dialog__body">
-        <div class="remove-user-dialog__title qt-fw-600 qt-mb-5">Reassign Company</div>
-        <div
-            class="remove-user-dialog__subtitle"
-            [textContent]="message"
-        ></div>
+    <div class="archive-modal__body">
+        <h3>Reassign Company</h3>
+        <p [textContent]="message"></p>
     </div>
-    <div class="remove-user-dialog__footer">
+    <div class="archive-modal__footer">
         <div class="qt-df qt-jc-fe">
             <button
-                class="qt-button --red qt-mr-12"
-                (click)=approveConfirm()
-            >
-                Yes, I am sure
-            </button>
-            <button
-                class="qt-button --gray"
+                class="btn-new disabled"
                 (click)=cancelConfirm()
             >
                 Cancel
+            </button>
+            <button
+                class="btn-new btn-primary"
+                (click)=approveConfirm()
+            >
+                Yes, I am sure
             </button>
         </div>
     </div>
 </div>
 <div
-    class="remove-user-dialog"
+    class="archive-modal"
     *ngIf="action === 'REMOVE_TASK_TICKET'"
 >
-    <div
-        class="remove-user-dialog__close qt-sz-16 icon__close"
-        (click)=closeModal()
-    ></div>
-    <div class="remove-user-dialog__body">
-        <div class="remove-user-dialog__title qt-fw-600 qt-mb-5">Delete Task</div>
-        <div
-            class="remove-user-dialog__subtitle"
-            [textContent]="message"
-        ></div>
+    <div class="archive-modal__body">
+        <h3>Delete Task</h3>
+        <p [textContent]="message"></p>
     </div>
-    <div class="remove-user-dialog__footer">
+    <div class="archive-modal__footer">
         <div class="qt-df qt-jc-fe">
             <button
-                class="qt-button --red qt-mr-12"
-                (click)=approveConfirm()
-            >
-                Yes, I am sure
-            </button>
-            <button
-                class="qt-button --gray"
+                class="btn-new disabled"
                 (click)=cancelConfirm()
             >
                 Cancel
+            </button>
+            <button
+                class="btn-new btn-primary"
+                (click)=approveConfirm()
+            >
+                Yes, I am sure
             </button>
         </div>
     </div>
 </div>
 <div
-    class="remove-user-dialog"
+    class="archive-modal"
     *ngIf="action === 'REMOVE_ATTACHMENT'"
 >
-    <div
-        class="remove-user-dialog__close qt-sz-16 icon__close"
-        (click)=closeModal()
-    ></div>
-    <div class="remove-user-dialog__body">
-        <div class="remove-user-dialog__title qt-fw-600 qt-mb-5">Delete Attachment</div>
-        <div
-            class="remove-user-dialog__subtitle"
-            [textContent]="message"
-        ></div>
+    <div class="archive-modal__body">
+        <h3>Delete Attachment</h3>
+        <p [textContent]="message"></p>
     </div>
-    <div class="remove-user-dialog__footer">
+    <div class="archive-modal__footer">
         <div class="qt-df qt-jc-fe">
             <button
-                class="qt-button --red qt-mr-12"
-                (click)=approveConfirm()
-            >
-                Yes, I am sure
-            </button>
-            <button
-                class="qt-button --gray"
+                class="btn-new disabled"
                 (click)=cancelConfirm()
             >
                 Cancel
+            </button>
+            <button
+                class="btn-new btn-primary"
+                (click)=approveConfirm()
+            >
+                Yes, I am sure
             </button>
         </div>
     </div>
