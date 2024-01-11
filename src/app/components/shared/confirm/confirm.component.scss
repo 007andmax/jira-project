@@ -4,7 +4,7 @@
     padding: 0px;
     
 }
-/deep/.rollback-invoice {
+/deep/.archive-modal {
     width: 504px;
     padding: 32px;
     .archive-modal__body {
@@ -26,10 +26,12 @@
         }
         .btn-new {
             border-radius: 6px;
+            width: 100%;
         }
     }
     .btn-primary {
         margin-right: 0px;
         font-size: 14px;
+        margin-left: 12px;
     }
 }

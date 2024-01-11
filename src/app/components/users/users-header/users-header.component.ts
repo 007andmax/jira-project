@@ -144,7 +144,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   }
   removeUsersFromSubscription() {
     this.confirmStateService.setConfirmAction(MULTI_DELETE_USER_FROM_SUBSCRIPTION);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove subscription`;
     this.ref.markForCheck();
   }

@@ -118,7 +118,7 @@ export class CrmCompanyServiceTypeComponent implements OnInit, OnDestroy {
   }
   remove(item) {
     this.confirmStateService.setConfirmAction(DELETE_CRM_SERVICE_TYPE);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove Service Type`;
     this.crmStateService.setServiceTypeForRemove(item);
   }

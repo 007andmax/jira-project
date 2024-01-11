@@ -76,7 +76,7 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
   }
   archive() {
     this.confirmStateService.setConfirmAction(ARCHIVE_COMPANY);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to archive ${this.draftEmailStateService.getSelectedCompanies()[0].name}? All related users and service agreements will be archived and all agents will be uninstalled.`;
     this.companiesStateService.setCompnayForArchive(this.draftEmailStateService.getSelectedCompanies()[0]);
     this.cd.detectChanges();
