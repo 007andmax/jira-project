@@ -20,8 +20,12 @@ export class CompanyFilter {
         new CompanyFilterTop('tickets', ''),
         new CompanyFilterTop('devices', ''),
         new CompanyFilterTop('users', '')];
+    search: string;
     constructor() {
 
+    }
+    public setSearch(data) {
+        this.search = data;
     }
     public setDevices(data) {
         this.devices = data;

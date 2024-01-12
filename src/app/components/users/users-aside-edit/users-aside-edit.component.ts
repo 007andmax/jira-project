@@ -163,6 +163,8 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
   }
   addCompnay() {
     this.user.addCustomerCompaniesInfo();
+    this.cd.detectChanges();
+    console.log("this.user.customerCompaniesInfo[this.user.customerCompaniesInfo.length - 1]", this.user.customerCompaniesInfo[this.user.customerCompaniesInfo.length - 1]);
   }
   removeCompnay(i) {
     this.user.customerCompaniesInfo.splice(i, 1);

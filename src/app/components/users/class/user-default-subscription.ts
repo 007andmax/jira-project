@@ -1,3 +1,4 @@
+import { MODE_EDIT_SUBSCRIPTION, MODE_HIDE_ACTIVE } from "src/app/const/users";
 import { UserDefaultSubscriptionItem } from "./user-default-subscription-item";
 
 export class UserDefaultSubscription {
@@ -5,6 +6,7 @@ export class UserDefaultSubscription {
     invoiceSubscription: UserDefaultSubscriptionItem;
     ticketSubscription: UserDefaultSubscriptionItem;
     ticketManagerSubscription: UserDefaultSubscriptionItem;
+    mode: string = MODE_EDIT_SUBSCRIPTION;
     constructor(data = null) {
         if (data) {
             this.id = data.id;
@@ -20,6 +22,9 @@ export class UserDefaultSubscription {
             this.ticketManagerSubscription.setIsExist(false);
         }
 
+    }
+    public setMode(data) {
+        this.mode = data;
     }
     /**
 * @description Reset values object 'invoiceSubscription'

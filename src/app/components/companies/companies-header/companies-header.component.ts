@@ -30,7 +30,8 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
   @ViewChild('filter') filter: CompaniesFilterComponent;
   @Output() onChangeFilterField = new EventEmitter<any>();
   @Output() onSelectAllCompanies = new EventEmitter<any>();
-
+  @Output() onSearch = new EventEmitter<any>();
+  searchText: string = "";
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
     private draftEmailStateService: DraftEmailStateService,
@@ -51,6 +52,12 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnCalculateCount);
     this.cd.markForCheck();
+  }
+  onBlurSearch(event) {
+    this.onSearch.emit(event.target.value);
+  }
+  onKeyUp(event) {
+    if (event.keyCode === 13) this.onSearch.emit(event.target.value);
   }
   public setReqCompaniesList(data) {
     this.reqCompaniesList = data;

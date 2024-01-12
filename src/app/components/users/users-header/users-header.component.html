@@ -8,6 +8,21 @@
         </div>
         <div class="qt-page-list__header-title-line--rigth">
             <div class="qt-df qt-ai-c">
+                <div class="qt-input-search qt-ml-8">
+                    <!-- *ngIf="getSelectedCount() === 0" -->
+                    <input
+                        type="text"
+                        placeholder="Search user"
+                        [(ngModel)]="searchText"
+                        (blur)="onBlurSearch($event)"
+                        (keyup)="onKeyUp($event)"
+                    >
+                    <span
+                        class="search-clear icon__close-round"
+                        *ngIf="searchText.length > 0"
+                        (click)="clearSearch()"
+                    ></span>
+                </div>
                 <button
                     class="qt-btn --transparent"
                     (click)="clearAll()"

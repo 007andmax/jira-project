@@ -151,7 +151,6 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
   }
   addCompnay() {
     this.user.addCustomerCompaniesInfo();
-    this.user.customerCompaniesInfo[this.user.customerCompaniesInfo.length - 1].setDefaultSubscriptionsForAddUser();
   }
   onSelectUserRole(data, index) {
     this.user.customerCompaniesInfo[index].setUserRole(data);

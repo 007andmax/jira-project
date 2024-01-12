@@ -136,6 +136,12 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onChangeDevicesCount);
   }
+  onSearch(value) {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
+    this.companyFilter.setSearch((value !== "") ? value : null);
+    this.setDefaultScoll();
+    this.onScroll();
+  }
   getDevicesCounts(ids) {
     this.devicesService.getCountByCompany(ids).subscribe((data: any) => {
       this.devicesCounts = data.map(item => new CompanyDeviceCount(item));
