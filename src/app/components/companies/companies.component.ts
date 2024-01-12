@@ -28,7 +28,7 @@ import { CompaniesHeaderComponent } from './companies-header/companies-header.co
   providers: [CompaniesListService]
 })
 export class CompaniesComponent implements OnInit, OnDestroy {
-  @ViewChild('header') header: CompaniesHeaderComponent;
+  @ViewChild('header', { static: true }) header: CompaniesHeaderComponent;
   CompaniesList: Array<CompanyItem> = [];
   reqCompaniesList: Array<CompanyItem> = [];
   showPreloader: boolean = true;

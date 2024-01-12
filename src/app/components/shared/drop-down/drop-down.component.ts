@@ -13,7 +13,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 })
 export class DropDownComponent implements OnInit {
   selectedItem = null;
-  @ViewChild('dp') dp: NgbDropdown;
+  @ViewChild('dp', { static: true }) dp: NgbDropdown;
   @Input() dropdownWidth: string = null;
   @Input() dropdownHeight: string = null;
 

@@ -14,7 +14,7 @@ import { CompaniesService } from 'src/app/services/company/companies.service';
   styleUrls: ['./tickets-filter-created-drop-down.component.scss']
 })
 export class TicketsFilterCreatedDropDownComponent extends DropDownComponent {
-  @ViewChild('dp') dp: NgbDropdown;
+  @ViewChild('dp', { static: true }) dp: NgbDropdown;
   @Input() placement: string;
   @Input() list = [new TitleListType('Custom Date range', 'CUSTOM'),
   new TitleListType('Today', 'TODAY'),

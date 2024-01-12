@@ -21,12 +21,10 @@ import { TicketProfileUpdatesServiceTimepickerComponent } from '../../../ticket-
 })
 export class TicketDetailProfileEditUpdatesServicesComponent implements OnInit, OnDestroy {
   isUpdate: boolean = false;
-  @ViewChild('updateMobileBtn') updateMobileBtn: DisabledBtnDirective;
-  @ViewChild('addMoreMobileBtn') addMoreMobileBtn: DisabledBtnDirective;
-  @ViewChild('durationPicker') durationPicker: TicketProfileUpdatesServiceDurationComponent;
-  @ViewChild('timePicker') timePicker: TicketProfileUpdatesServiceTimepickerComponent;
-  @ViewChild('serviceDP') serviceDP: ServicesListComponent;
-  @ViewChild('datePicker') datePicker: DatePickerComponent;
+  @ViewChild('durationPicker', { static: false }) durationPicker: TicketProfileUpdatesServiceDurationComponent;
+  @ViewChild('timePicker', { static: false }) timePicker: TicketProfileUpdatesServiceTimepickerComponent;
+  @ViewChild('serviceDP', { static: false }) serviceDP: ServicesListComponent;
+  @ViewChild('datePicker', { static: false }) datePicker: DatePickerComponent;
   @Output() onUpdateMobile = new EventEmitter();
   @Output() onAddMoreMobile = new EventEmitter();
   @Input() ticketProfile: TicketProfile = new TicketProfile();
@@ -48,8 +46,6 @@ export class TicketDetailProfileEditUpdatesServicesComponent implements OnInit, 
     public ticketStateService: TicketStateService) { }
   initUpdateMobile() {
     this.isUpdate = true;
-    this.updateMobileBtn.setDisabled(true);
-    this.addMoreMobileBtn.setDisabled(true);
   }
   updateMobile() {
     this.onUpdateMobile.emit(null);
@@ -59,8 +55,6 @@ export class TicketDetailProfileEditUpdatesServicesComponent implements OnInit, 
   }
   public complateUpdateMobile() {
     this.isUpdate = false;
-    this.addMoreMobileBtn.setDisabled(false);
-    this.updateMobileBtn.setDisabled(false);
   }
   public getServices() {
     this.servicesList = this.ticketStateService.getServicesForTicket();

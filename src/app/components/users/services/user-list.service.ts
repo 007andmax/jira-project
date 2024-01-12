@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Observable } from 'rxjs-compat';
 
 @Injectable()
 export class UserListService {

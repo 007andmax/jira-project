@@ -21,10 +21,8 @@ import { InvoiceFormTicketEditTaxesComponent } from 'src/app/components/billing/
 export class TicketDetailProfileEditUpdatesProductsComponent implements OnInit, OnDestroy {
   isUpdate: boolean = false;
 
-  @ViewChild('taxesDropDown') taxesDropDown: InvoiceFormTicketEditTaxesComponent;
-  @ViewChild('updateMobileBtn') updateMobileBtn: DisabledBtnDirective;
-  @ViewChild('addMoreMobileBtn') addMoreMobileBtn: DisabledBtnDirective;
-  @ViewChild('productDP') productDP: ProductListComponent;
+  @ViewChild('taxesDropDown', { static: true }) taxesDropDown: InvoiceFormTicketEditTaxesComponent;
+  @ViewChild('productDP', { static: true }) productDP: ProductListComponent;
   @Output() onUpdateMobile = new EventEmitter();
   @Output() onAddMoreMobile = new EventEmitter();
   addedProductList = [];
@@ -40,8 +38,6 @@ export class TicketDetailProfileEditUpdatesProductsComponent implements OnInit, 
 
   initUpdateMobile() {
     this.isUpdate = true;
-    this.updateMobileBtn.setDisabled(true);
-    this.addMoreMobileBtn.setDisabled(true);
   }
   updateMobile() {
     this.onUpdateMobile.emit(null);
@@ -51,8 +47,6 @@ export class TicketDetailProfileEditUpdatesProductsComponent implements OnInit, 
   }
   public complateUpdateMobile() {
     this.isUpdate = false;
-    this.addMoreMobileBtn.setDisabled(false);
-    this.updateMobileBtn.setDisabled(false);
   }
   public onChangeSaleProduct(val, index) {
     let value = Number(val.target.value);

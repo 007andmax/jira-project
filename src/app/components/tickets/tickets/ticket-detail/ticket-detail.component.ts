@@ -46,8 +46,7 @@ import { TicketDetailMessageComponent } from './ticket-detail-message/ticket-det
 
 })
 export class TicketDetailComponent implements OnInit, OnDestroy {
-  @ViewChild('editUpdateForm', { static: true }) editUpdateForm: TicketProfileEditFormUpdateComponent;
-  @ViewChild('ticketMessage', { static: false }) ticketMessage: TicketMessageComponent;
+  @ViewChild('ticketMessage', { static: false }) ticketMessage: TicketDetailMessageComponent;
   @ViewChild('ticketProfileUpdates', { static: true }) ticketProfileUpdates: TicketDetailProfileUpdatesComponent;
   @ViewChild('ticketTasks', { static: false }) ticketTasks: TicketDetailTasksComponent;
   @ViewChild('detailHeader', { static: false }) detailHeader: TicketDetailHeaderComponent;

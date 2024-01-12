@@ -19,7 +19,7 @@ export class TicketsFilterSearchComponent implements OnInit {
   showPreloader: boolean = true;
   public infiniteScrollDisabled = true;
   @Input() ticketsFilter: TicketsFilter = new TicketsFilter();
-  @ViewChild('globalSearch') globalSearch: NgbDropdown;
+  @ViewChild('globalSearch', { static: true }) globalSearch: NgbDropdown;
   @Output() changeTypeFilter = new EventEmitter();
   word: string = "";
   list: Array<Ticket> = [];

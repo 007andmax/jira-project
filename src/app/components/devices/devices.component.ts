@@ -144,7 +144,6 @@ export class DevicesComponent implements OnInit {
   System: any = undefined;
   serialnumber: string = "";
   templatepdf: string = "PDF_TEMPLATE";
-  @ViewChild('dropdownServices', { static: true }) selectedInput: ElementRef<HTMLInputElement>;
   clientCompanyGuid: string;
   IsUpdateInstalling: boolean = false;
   IsCurrentConfigLoading: boolean = false;

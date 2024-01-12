@@ -32,7 +32,7 @@ import { UsersHeaderComponent } from '../users/users-header/users-header.compone
   providers: [UserListService]
 })
 export class MarketingComponent implements OnInit {
-  @ViewChild('header') header: UsersHeaderComponent;
+  @ViewChild('header', { static: true }) header: UsersHeaderComponent;
   idDetailUser: string = '';
   users: Array<User> = [];
   companies: Array<Company> = [];

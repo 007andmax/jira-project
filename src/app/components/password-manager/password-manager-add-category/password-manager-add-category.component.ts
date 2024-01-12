@@ -13,7 +13,7 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
 })
 export class PasswordManagerAddCategoryComponent implements OnInit {
   @Output() onClose: EventEmitter<any> = new EventEmitter();
-  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
+  @ViewChild('addBtn', { static: true }) addBtn: DisabledBtnDirective;
   name: string = "";
   categories: Array<PasswordRecordCategories> = [];
   disableCreateCategory: boolean = false;

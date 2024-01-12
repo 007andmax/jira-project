@@ -27,7 +27,7 @@ export class TicketDetailProfileUpdatesProductInfoComponent implements OnInit, O
   @Input() update: TicketProfileUpdate;
   @Output() onEdit = new EventEmitter();
   @Input() isBlockChange: boolean;
-  @ViewChild('dpDate') dpDate: DatePickerComponent;
+  @ViewChild('dpDate', { static: true }) dpDate: DatePickerComponent;
   changeDate: boolean = false;
   userService = [];
   listTechUsers = [];

@@ -36,7 +36,7 @@ import { UsersHeaderComponent } from './users-header/users-header.component';
   providers: [UserListService],
 })
 export class UsersComponent implements OnInit, OnDestroy {
-  @ViewChild('header') header: UsersHeaderComponent;
+  @ViewChild('header', { static: true }) header: UsersHeaderComponent;
   idDetailUser: string = '';
   users: Array<User> = [];
   companies: Array<Company> = [];

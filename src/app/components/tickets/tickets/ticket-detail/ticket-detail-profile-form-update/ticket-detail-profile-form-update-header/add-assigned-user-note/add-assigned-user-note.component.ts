@@ -37,9 +37,8 @@ export class AddAssignedUserNoteComponent implements OnInit {
   sub: Subscription = new Subscription();
   @Output() hidden = new EventEmitter<any>();
   @Output() onSelected = new EventEmitter<any>();
-  @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
-  @ViewChild('auto') matAutocomplete: MatAutocomplete;
-  @ViewChild('assignedUserDp') assignedUserDp: NgbDropdown;
+  @ViewChild('userInput', { static: true }) userInput: ElementRef<HTMLInputElement>;
+  @ViewChild('assignedUserDp', { static: true }) assignedUserDp: NgbDropdown;
 
   /**
    * Creates an instance of the QuoteCreateContentComponent with the injected services

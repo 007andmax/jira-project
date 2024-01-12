@@ -40,7 +40,7 @@ export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy
   @ViewChild('updateBtn', { static: false }) updateBtn: DisabledBtnDirective;
   @ViewChild('addMoreMobileBtn', { static: false }) addMoreMobileBtn: DisabledBtnDirective;
   @ViewChild('updateMobileBtn', { static: false }) updateMobileBtn: DisabledBtnDirective;
-  @ViewChild('noteList') noteList: TicketProfileFormUpdateNoteListComponent;
+  @ViewChild('noteList', { static: true }) noteList: TicketProfileFormUpdateNoteListComponent;
   @Input() lisUpdateUser: Array<CurrentUser> = [];
   @Input() set ticket(value) {
     this.ticketProfile = value;
@@ -60,9 +60,9 @@ export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy
   currentUser: CurrentUser;
   sub: Subscription = new Subscription();
 
-  @ViewChild('selectNote') selectNote: TicketDetailProfileFormUpdateNoteComponent;
-  @ViewChild('selectServices') selectServices: TicketDetailProfileFormUpdateServicesComponent;
-  @ViewChild('selectProducts') selectProducts: TicketDetailProfileFormUpdateProductsComponent;
+  @ViewChild('selectNote', { static: false }) selectNote: TicketDetailProfileFormUpdateNoteComponent;
+  @ViewChild('selectServices', { static: false }) selectServices: TicketDetailProfileFormUpdateServicesComponent;
+  @ViewChild('selectProducts', { static: false }) selectProducts: TicketDetailProfileFormUpdateProductsComponent;
   @Output() onCloseForm = new EventEmitter();
   constructor(public ticketsStateService: TicketsStateService,
     public cd: ChangeDetectorRef,

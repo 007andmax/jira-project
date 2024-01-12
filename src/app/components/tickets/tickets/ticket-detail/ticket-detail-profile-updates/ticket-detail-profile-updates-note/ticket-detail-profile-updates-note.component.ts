@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChildren } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewChildren } from '@angular/core';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { REMOVE_UPDATE_TICKET_DETAIL } from 'src/app/const/confirm';
 import { TicketDetailProfileUpdatesNoteItemComponent } from './ticket-detail-profile-updates-note-item/ticket-detail-profile-updates-note-item.component';
@@ -16,7 +16,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./ticket-detail-profile-updates-note.component.scss']
 })
 export class TicketDetailProfileUpdatesNoteComponent implements OnInit {
-  @ViewChildren("updatesNoteItem") updatesNoteItem: TicketDetailProfileUpdatesNoteItemComponent;
+  @ViewChild("updatesNoteItem", { static: true }) updatesNoteItem: TicketDetailProfileUpdatesNoteItemComponent;
   @Input() update: TicketProfileUpdate;
   @Output() onRemove = new EventEmitter();
   @Input() idTicket: string;

@@ -16,11 +16,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 })
 export class TicketDetailProfileFormUpdateProductsComponent implements OnInit, OnDestroy {
   isUpdate: boolean = false;
-  @ViewChild('updateMobileBtn') updateMobileBtn: DisabledBtnDirective;
-  @ViewChild('addMoreMobileBtn') addMoreMobileBtn: DisabledBtnDirective;
-  @ViewChild('productDP') productDP: ProductListComponent;
-  @Output() onUpdateMobile = new EventEmitter();
-  @Output() onAddMoreMobile = new EventEmitter();
+  @ViewChild('productDP', { static: true }) productDP: ProductListComponent;
   addedProductList = [];
   currentProduct: TicketProfileFormProduct = new TicketProfileFormProduct();
   sub: Subscription = new Subscription();
@@ -47,19 +43,9 @@ export class TicketDetailProfileFormUpdateProductsComponent implements OnInit, O
   }
   initUpdateMobile() {
     this.isUpdate = true;
-    this.updateMobileBtn.setDisabled(true);
-    this.addMoreMobileBtn.setDisabled(true);
-  }
-  updateMobile() {
-    this.onUpdateMobile.emit(null);
-  }
-  addMoreMobile() {
-    this.onAddMoreMobile.emit(null);
   }
   public complateUpdateMobile() {
     this.isUpdate = false;
-    this.addMoreMobileBtn.setDisabled(false);
-    this.updateMobileBtn.setDisabled(false);
   }
   public onChangeSaleProduct(val, index) {
     let value = Number(val.target.value);

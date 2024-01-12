@@ -29,9 +29,9 @@ export class TicketDetailEditTagsComponent implements OnInit, OnDestroy {
   editItem: any;
   init: boolean = false;
   isChangeInput: boolean = false;
-  @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
+  @ViewChild('userInput', { static: false }) userInput: ElementRef<HTMLInputElement>;
   @Output() tagsChange = new EventEmitter();
-  @ViewChild('tagsDp') tagsDp: any;
+  @ViewChild('tagsDp', { static: true }) tagsDp: any;
   @Output() tagsRemove = new EventEmitter();
   /**
    * Creates an instance of the TagsComponent with the injected services

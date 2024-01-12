@@ -26,7 +26,7 @@ export class TicketsPriorityComponent implements OnInit {
   statusColors: Array<StatusColor> = [];
   editTicketsStatus: TicketStatus;
   sort = "ASC";
-  @ViewChild('addPriorityBtn') addPriorityBtn: ClickOtsideDirective;
+  @ViewChild('addPriorityBtn', { static: false }) addPriorityBtn: ClickOtsideDirective;
   sub: Subscription = new Subscription();
   constructor(private ticketsStateService: TicketsStateService,
     private ticketsService: TicketsService,

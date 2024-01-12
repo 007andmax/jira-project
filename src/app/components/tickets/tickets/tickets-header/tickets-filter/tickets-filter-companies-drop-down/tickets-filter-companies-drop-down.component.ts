@@ -15,7 +15,7 @@ export class TicketsFilterCompaniesDropDownComponent extends CompanyDropDownComp
   separatorKeysCodes: number[] = [ENTER, COMMA];
   searchName: string = "";
   @Input() placement: string = 'bottom-left';
-  @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
+  @ViewChild('userInput', { static: true }) userInput: ElementRef<HTMLInputElement>;
   @Output() filterChange = new EventEmitter<any>();
 
   /**
