@@ -17,6 +17,7 @@
                     </span>
                     <ticket-detail-profile-updates-header-info
                         [date]="update.createdAt"
+                        [otherRecipients]="update.otherRecipients"
                         [shares]="update.shares"
                     ></ticket-detail-profile-updates-header-info>
                 </div>
@@ -70,6 +71,49 @@
                 [idTicket]="idTicket"
                 [update]="update"
             ></ticket-detail-profile-updates-note-item>
+        </div>
+        <div class="qt-df qt-ai-c">
+            <ng-template
+                ngFor
+                let-attachment
+                [ngForOf]="update.attachments"
+                [ngForTrackBy]="trackById"
+            >
+                <div
+                    class="preview-attachment qt-mr-8"
+                    *ngIf="attachment.file.contentType === 'image/jpg' || attachment.file.contentType === 'image/png' || attachment.file.contentType === 'image/jpeg'"
+                >
+                    <img [src]="'/file/' + attachment.file.id">
+                </div>
+            </ng-template>
+        </div>
+        <div>
+            <ng-template
+                ngFor
+                let-attachment
+                [ngForOf]="update.attachments"
+                [ngForTrackBy]="trackById"
+            >
+                <div class="single-file">
+                    <div class="info qt-df qt-ai-c">
+                        <div class="name">{{ attachment.file?.name }}</div>
+                        <div class="size">
+                            ({{ formatBytes(attachment.file?.size,2) }})
+                        </div>
+                    </div>
+                </div>
+                <!-- <ng-template #tipContent>
+                    <div [textContent]="attachment.file.name"></div>
+                    <div [textContent]="attachment.file.name.contentType"></div>
+                </ng-template>
+                <div
+                    class="qt-sz-36 attachment-item__icon qt-circle qt-mr-8 qt-df qt-ai-c qt-jc-c qt-fs-0"
+                    placement="top"
+                    [ngbTooltip]="tipContent"
+                >
+                    <div class="icon__attachments qt-sz-16"></div>
+                </div> -->
+            </ng-template>
         </div>
     </div>
 </div>

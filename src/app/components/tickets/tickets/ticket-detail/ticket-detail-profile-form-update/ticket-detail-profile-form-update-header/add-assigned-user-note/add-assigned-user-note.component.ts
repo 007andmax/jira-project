@@ -9,6 +9,8 @@ import { UserCustomerCompaniesInfo } from 'src/app/components/users/class/user-c
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CompanyUser } from '../../../../ticket-add-aside/company-users-drop-down/class/company-user';
 import { TicketStateService } from '../../../../ticket-edit-aside/services/ticket-state.service';
+import { CompanyUserNote } from './class/company-user-note';
+import { UserNoteValidate } from './class/user-note-validate';
 
 @Component({
   selector: 'add-assigned-user-note',
@@ -22,6 +24,7 @@ export class AddAssignedUserNoteComponent implements OnInit {
   addOnBlur = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   userCtrl = new FormControl();
+  validate: UserNoteValidate = new UserNoteValidate();
   @Input() selectedUsers = [];
   @Input() userList = [];
   @Input() placement = 'top-left';
@@ -60,14 +63,28 @@ export class AddAssignedUserNoteComponent implements OnInit {
    */
   public ngOnInit() {
     this.currentUsers = JSON.parse(JSON.stringify(this.selectedUsers));
-    this.users = JSON.parse(JSON.stringify(this.userList)).map(item => new CompanyUser(item));
-    this.reqUsers = JSON.parse(JSON.stringify(this.userList)).map(item => new CompanyUser(item));
+    this.users = JSON.parse(JSON.stringify(this.userList)).map(item => new CompanyUserNote(item));
+    this.reqUsers = JSON.parse(JSON.stringify(this.userList)).map(item => new CompanyUserNote(item));
+  }
+  onKeyUp(event) {
+    if (event.target.value.length == 0) this.validate.resetEmail();
+    if (event.keyCode === 13) {
+      this.validate.checkEmail(event.target.value);
+      if (this.validate.getEmail()) {
+        let user = new CompanyUserNote();
+        user.setIsCustomEmail(true);
+        user.setRecipient(event.target.value);
+        this.selectedUsers.push(user);
+        this.onSelected.emit(this.selectedUsers);
+        this.resetInput();
+      }
+    }
   }
 
   public resetList(data) {
     this.userList = data;
-    this.users = JSON.parse(JSON.stringify(this.userList)).map(item => new CompanyUser(item));
-    this.reqUsers = JSON.parse(JSON.stringify(this.userList)).map(item => new CompanyUser(item));
+    this.users = JSON.parse(JSON.stringify(this.userList)).map(item => new CompanyUserNote(item));
+    this.reqUsers = JSON.parse(JSON.stringify(this.userList)).map(item => new CompanyUserNote(item));
   }
 
   @HostListener('document:click', ['$event'])
@@ -95,10 +112,12 @@ export class AddAssignedUserNoteComponent implements OnInit {
       this.selectedUsers.push(data);
       this.onSelected.emit(this.selectedUsers);
     }
-    this.userInput.nativeElement.blur();
+    this.resetInput();
+  }
+  resetInput() {
     this.userCtrl.setValue(null);
     this.userInput.nativeElement.value = '';
-    this.users = JSON.parse(JSON.stringify(this.reqUsers)).map(item => new CompanyUser(item));
+    this.users = JSON.parse(JSON.stringify(this.reqUsers)).map(item => new CompanyUserNote(item));
     this.userInput.nativeElement.focus();
   }
   isSelected(data) {
@@ -109,7 +128,7 @@ export class AddAssignedUserNoteComponent implements OnInit {
     if (event.target.value.length > 0) {
       this.users = this.reqUsers.filter(item => (`${item.firstName} ${item.lastName}`).toLowerCase().includes(event.target.value.toLowerCase()));
     } else {
-      this.users = JSON.parse(JSON.stringify(this.reqUsers)).map(item => new CompanyUser(item));
+      this.users = JSON.parse(JSON.stringify(this.reqUsers)).map(item => new CompanyUserNote(item));
     }
   }
 
@@ -124,7 +143,7 @@ export class AddAssignedUserNoteComponent implements OnInit {
   onCloseDropDown(data) {
     if (!data && this.type == 'DETAIL_TICKET_ASSIGNED_USER') {
       this.elRef.nativeElement.querySelector("#search-user").value = "";
-      this.users = JSON.parse(JSON.stringify(this.reqUsers)).map(item => new CompanyUser(item));
+      this.users = JSON.parse(JSON.stringify(this.reqUsers)).map(item => new CompanyUserNote(item));
     }
   }
 

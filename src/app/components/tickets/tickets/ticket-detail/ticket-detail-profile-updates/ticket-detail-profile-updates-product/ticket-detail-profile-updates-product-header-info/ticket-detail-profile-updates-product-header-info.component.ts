@@ -10,12 +10,19 @@ import { TicketProfileProduct } from '../../../../class/ticket-profile-product';
   styleUrls: ['./ticket-detail-profile-updates-product-header-info.component.scss']
 })
 export class TicketDetailProfileUpdatesProductHeaderInfoComponent implements OnInit {
+  @Input() otherRecipients: Array<string> = [];
   @Input() product: TicketProfileProduct;
   @Input() shares: Array<TicketProfileShare> = [];
   @Input() date: number = 0;
   constructor(public ticketsListService: TicketsListService) { }
 
   ngOnInit() {
+  }
+  getStyleNetAvatar(i) {
+    return `${12 * i}px`;
+  }
+  getStyleShareText(i) {
+    return `${(12 * i) + 20}px`;
   }
   public getDate() {
     return `${moment(new Date(this.date)).format('DD MMM YYYY')} at ${moment(new Date(this.date)).format('hh:mm A')}`;

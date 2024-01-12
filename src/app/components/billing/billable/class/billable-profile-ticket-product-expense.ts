@@ -4,4 +4,5 @@ import { TicketProfileProduct } from '../../../tickets/tickets/class/ticket-prof
 
 export class BillableProfileTicketProductExpense extends TicketProfileProduct {
     ticketUpdate: any;
+    sum: number;
 }

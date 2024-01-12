@@ -1,6 +1,7 @@
 <div
     class="qt-df qt-ai-c visible-to-all-user-dropdown"
     ngbDropdown
+    *ngIf="!customerPortalStateService.isCustomerPortal"
 >
     <div
         class="qt-toggle qt-mr-8"

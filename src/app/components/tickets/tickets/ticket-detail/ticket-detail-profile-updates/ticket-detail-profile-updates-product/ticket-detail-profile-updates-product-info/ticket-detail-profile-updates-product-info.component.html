@@ -117,11 +117,10 @@
                     (usersChange)="onChangeUser($event)"
                 ></app-tech-users>
                 <app-date-picker
+                    #dpDate
                     [isDisabled]="isBlockChange"
                     [placement]="'bottom-right'"
                     [useMinDate]="false"
-                    [editMode]="true"
-                    [editDate]="product.date"
                     [type]="'DETAIL_TICKET_UPDATE'"
                     (onChange)="onChangeDatePicker($event)"
                 ></app-date-picker>

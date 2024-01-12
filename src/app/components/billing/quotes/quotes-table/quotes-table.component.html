@@ -1,5 +1,10 @@
 <div class="qt-page-list quotes-page">
-    <app-quotes-header (onSortBy)="sortBy($event)"></app-quotes-header>
+    <app-quotes-header
+        [quotes]="quotes"
+        [selectAll]="selectAll"
+        (onSortBy)="sortBy($event)"
+        (onSelectAllQuotes)="onSelectAllQuotes($event)"
+    ></app-quotes-header>
     <div class="qt-page-list__body">
         <div
             class="qt-page-list__body-table-container"
@@ -36,6 +41,7 @@
                             (onTicket)="openTikcet($event)"
                             (onInvoice)="onInvoice($event)"
                             (onConvertToBillable)="onConvertToBillable($event)"
+                            (onSelected)="onSelected($event)"
                         ></app-quotes-item>
                     </ng-template>
                 </tbody>

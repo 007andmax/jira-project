@@ -18,6 +18,7 @@ export class QuotesItemComponent implements OnInit {
   createdUser: User;
   @Input() quote: Quote;
   @Output() onResend = new EventEmitter<any>();
+  @Output() onSelected = new EventEmitter<any>();
   @Output() onConvertToBillable = new EventEmitter<any>();
   @Output() onConvertToInvoice = new EventEmitter<any>();
   @Output() onConvertToTicket = new EventEmitter<any>();
@@ -103,12 +104,11 @@ export class QuotesItemComponent implements OnInit {
     if (this.toastrProgressStateService.check(this.quote.id)) return;
     this.onResend.emit(this.quote);
   }
-  public checkStatus(quote, statusForShowingArray) {
-    const elems = statusForShowingArray.filter((item) => item.toLowerCase() === quote.status.toLowerCase());
-    return elems.length > 0;
-  }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
+  }
+  selectQuote(event) {
+    this.onSelected.emit(this.quote);
   }
   public getStatusText(status) {
     return status.toLowerCase()
