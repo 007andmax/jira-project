@@ -213,7 +213,9 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     }
     this.page_number += 1;
 
-    let listFilter = this.reqCompaniesList;
+    let listFilter = this.companyFilter.getFilterList(this.reqCompaniesList);
+    this.calculateCount.onCalculate(listFilter, this.companyFilter.clientType);
+    this.companiesStateService.setCalculateCount(this.calculateCount);
     let start = (this.page_number - 1) * 30;
     let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
     let CompaniesList = [];
