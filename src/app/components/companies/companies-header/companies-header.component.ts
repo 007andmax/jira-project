@@ -53,6 +53,10 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
     this.sub.add(getOnCalculateCount);
     this.cd.markForCheck();
   }
+  clearSearch() {
+    this.searchText = "";
+    this.onSearch.emit("");
+  }
   onBlurSearch(event) {
     this.onSearch.emit(event.target.value);
   }

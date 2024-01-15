@@ -164,7 +164,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
   addCompnay() {
     this.user.addCustomerCompaniesInfo();
     this.cd.detectChanges();
-    console.log("this.user.customerCompaniesInfo[this.user.customerCompaniesInfo.length - 1]", this.user.customerCompaniesInfo[this.user.customerCompaniesInfo.length - 1]);
+    console.log("this.user.customerCompaniesInfo[this.user.customerCompaniesInfo.length - 1]", this.user.customerCompaniesInfo);
   }
   removeCompnay(i) {
     this.user.customerCompaniesInfo.splice(i, 1);
@@ -313,6 +313,9 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
   }
   public trackById(index, item) {
     return item.id;
+  }
+  public trackByCompanyId(index, item) {
+    return item.companyId;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
