@@ -92,6 +92,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
       this.opened = true;
       this.getJobTypeList();
       this.user.onEdit(this.usersStateService.getuserForEdit());
+      this.validate.initCompanies(this.user.customerCompaniesInfo);
       this.companyTags.setSelectedTag(this.user.tags);
       this.selectedUserType = this.userTypes.find(item => item.id == this.user.jobTypeId);
       this.selectedUserTitle = this.jobTitleList.find(item => item.id == this.user.jobTitleId);
@@ -163,10 +164,12 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
   }
   addCompnay() {
     this.user.addCustomerCompaniesInfo();
+    this.validate.addCompany();
     this.cd.detectChanges();
     console.log("this.user.customerCompaniesInfo[this.user.customerCompaniesInfo.length - 1]", this.user.customerCompaniesInfo);
   }
   removeCompnay(i) {
+    this.validate.removeCompany(i);
     this.user.customerCompaniesInfo.splice(i, 1);
   }
   onChangeCustomSubscriptions(data) {
@@ -227,6 +230,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
   public onSelectCompany(selectClient, index) {
     if (selectClient) {
       this.user.customerCompaniesInfo[index].companyId = selectClient.id;
+      this.validate.setCompanyValid(index);
     }
     //  this.user.serCompanyId((selectClient === null) ? null : selectClient.id);
     // if (selectClient !== null) this.validate.setCompanyValid();
