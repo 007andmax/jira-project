@@ -151,11 +151,13 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
   }
   addCompnay() {
     this.user.addCustomerCompaniesInfo();
+    this.validate.addCompany();
   }
   onSelectUserRole(data, index) {
     this.user.customerCompaniesInfo[index].setUserRole(data);
   }
   removeCompnay(i) {
+    this.validate.removeCompany(i);
     this.user.customerCompaniesInfo.splice(i, 1);
   }
   onSelectJobTitle(data, index) {
@@ -177,8 +179,8 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
   public onSelectCompany(selectClient, index) {
     if (selectClient) {
       this.user.customerCompaniesInfo[index].companyId = selectClient.id;
+      this.validate.setCompanyValid(index);
     }
-    if (selectClient !== null) this.validate.setCompanyValid();
     if (this.user.primaryEmail && this.user.primaryEmail.length > 0) this.onCheckValidPrimaryEmail();
 
   }
