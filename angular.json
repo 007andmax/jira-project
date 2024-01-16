@@ -31,7 +31,7 @@
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss",
-              "./node_modules/timepicker/jquery.timepicker.css",
+              "./node_modules/timepicker/dist/jquery.timepicker.css",
               "./node_modules/ngx-toastr/toastr.css",
               "src/app/components/device/styles.scss",
               "./node_modules/froala-editor/css/froala_editor.pkgd.min.css",
@@ -85,6 +85,12 @@
             "production": {
               "browserTarget": "migrated:build:production"
             }
+          }
+        },
+        "build-webpack": {
+          "builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+            "webpackConfig": "webpack.config.js"
           }
         },
         "extract-i18n": {

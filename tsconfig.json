@@ -10,7 +10,7 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "downlevelIteration": true,
-    "target": "ES6",
+    "target": "es2015",
     "module": "esNext",
     "types": [
       "node"

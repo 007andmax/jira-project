@@ -130,6 +130,7 @@ import { SuperAdminCompaniesComponent } from './components/super-admin/super-adm
 import { SuperAdminCompaniesHeaderComponent } from './components/super-admin/super-admin-companies/super-admin-companies-header/super-admin-companies-header.component';
 import { SuperAdminCompaniesItemComponent } from './components/super-admin/super-admin-companies/super-admin-companies-item/super-admin-companies-item.component';
 declare var $: any;
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 /**
  * This module represents the main application module
@@ -210,6 +211,7 @@ declare var $: any;
     SupportPageEditCategoryModule,
     ModalQuoteModule,
     LeftPanelCustomerPortalModule,
+    FroalaEditorModule.forRoot(), FroalaViewModule.forRoot()
   ],
   entryComponents: [
     ConfirmComponent,
