@@ -209,7 +209,7 @@ export class ServiceComponent implements OnInit, OnDestroy {
     if (this.service && this.service.commissionRate) {
       this.deleteServicePopup = true;
       this.confirmStateService.setConfirmAction(DELETE_COMMISSION_SERVICE);
-      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
+      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
       modalRef.componentInstance.message = `Are you sure you want ${this.service.name} commission rate to zero?`;
 
     }
@@ -222,7 +222,7 @@ export class ServiceComponent implements OnInit, OnDestroy {
     this.isSpecialService = isSpecialService;
     if (this.service.commissionRate === null) {
       this.confirmStateService.setConfirmAction(CHANGE_COMMISSION_SERVICE);
-      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
+      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
       modalRef.componentInstance.message = `Do you want this commission to fact old items?`;
 
     } else {

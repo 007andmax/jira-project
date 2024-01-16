@@ -8,6 +8,7 @@ import { PaymentsStateService } from 'src/app/states/payments/payments-state.ser
 import { DELETE_PAYMENT } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-payments-aside',
@@ -25,6 +26,7 @@ export class PaymentsAsideComponent implements OnInit {
     private modalService: NgbModal,
     private paymentsStateService: PaymentsStateService,
     public customerPortalStateService: CustomerPortalStateService,
+    private permissionsService: PermissionsService,
     private confirmStateService: ConfirmStateService) { }
 
   ngOnInit() {
@@ -55,6 +57,9 @@ export class PaymentsAsideComponent implements OnInit {
   }
   close() {
     this.onClose.emit(null);
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   public trackById(index, item) {
     return item.id;

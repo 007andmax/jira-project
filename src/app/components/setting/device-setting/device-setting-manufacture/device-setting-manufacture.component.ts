@@ -109,7 +109,7 @@ export class DeviceSettingManufactureComponent implements OnInit, OnDestroy {
   removeConfirmManufacturer(manufacturer: any) {
     this.manufacturer = manufacturer;
     this.confirmStateService.setConfirmAction(DELETE_DEVICE_MANUFACTURE);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Delete Manufacturer`;
   }
   removeManufacturer() {

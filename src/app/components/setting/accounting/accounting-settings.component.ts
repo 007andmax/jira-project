@@ -95,7 +95,7 @@ export class AccountingSettingsComponent implements OnInit, OnDestroy {
   }
   removeGls() {
     this.confirmStateService.setConfirmAction(DELETE_LIST_GL_NUMBERS);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove Income Account Number`;
   }
   getSelectedCount() {

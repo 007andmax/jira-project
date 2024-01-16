@@ -40,7 +40,8 @@ export class TaxesSettingsComponent implements OnInit, OnDestroy {
   /**
    * init
    */
-  ngOnInit() {;
+  ngOnInit() {
+    ;
     $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
     this.taxes = this.taxesStateService.getTaxes();
@@ -136,7 +137,7 @@ export class TaxesSettingsComponent implements OnInit, OnDestroy {
   removeConfirm(tax: any) {
     this.tax = tax;
     this.confirmStateService.setConfirmAction(DELETE_TAX);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Are you sure you want to delete?`;
   }
 

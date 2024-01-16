@@ -90,9 +90,9 @@ export class InvoicesItemComponent implements OnInit {
     if (this.toastrProgressStateService.check(this.invoice.id)) return;
     this.confirmStateService.setConfirmAction(ROLLBACK_INVOICE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to rollback invoice #${this.invoice.number}? 
-    ${(this.invoice.ticketNumbers && this.invoice.ticketNumbers.length ? (this.invoice.ticketNumbers.length > 1 ? 'Tickets #' : 'Ticket #') +
-        this.invoice.ticketNumbers.join(', #') + ' will be restored.' : '')}`;
+    modalRef.componentInstance.message = `<h3>Do you want to rollback invoice #${this.invoice.number}?</h3> 
+    <p>${(this.invoice.ticketNumbers && this.invoice.ticketNumbers.length ? (this.invoice.ticketNumbers.length > 1 ? 'Tickets #' : 'Ticket #') +
+        this.invoice.ticketNumbers.join(', #') + ' will be restored.' : '')}</p>`;
     this.invoiceStateService.setInvoiceForRollback(this.invoice);
   }
   refundPayments() {
