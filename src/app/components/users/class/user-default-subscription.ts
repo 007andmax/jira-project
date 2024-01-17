@@ -6,7 +6,6 @@ export class UserDefaultSubscription {
     invoiceSubscription: UserDefaultSubscriptionItem;
     ticketSubscription: UserDefaultSubscriptionItem;
     ticketManagerSubscription: UserDefaultSubscriptionItem;
-    mode: string = MODE_EDIT_SUBSCRIPTION;
     constructor(data = null) {
         if (data) {
             this.id = data.id;
@@ -15,16 +14,13 @@ export class UserDefaultSubscription {
             this.ticketManagerSubscription = new UserDefaultSubscriptionItem(data.ticketManagerSubscription);
         } else {
             this.invoiceSubscription = new UserDefaultSubscriptionItem({ enabled: true, activated: true, });
-            this.invoiceSubscription.setIsExist(false);
+            this.invoiceSubscription.setIsExist(true);
             this.ticketSubscription = new UserDefaultSubscriptionItem({ enabled: true, activated: true, });
-            this.ticketSubscription.setIsExist(false);
+            this.ticketSubscription.setIsExist(true);
             this.ticketManagerSubscription = new UserDefaultSubscriptionItem({ enabled: true, activated: true, });
-            this.ticketManagerSubscription.setIsExist(false);
+            this.ticketManagerSubscription.setIsExist(true);
         }
 
-    }
-    public setMode(data) {
-        this.mode = data;
     }
     /**
 * @description Reset values object 'invoiceSubscription'

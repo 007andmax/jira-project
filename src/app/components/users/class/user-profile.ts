@@ -37,10 +37,9 @@ export class UserProfile {
     /**
 * @description Add new element to array ojects customerCompaniesInfo
 */
-    public addCustomerCompaniesInfo(editMode = false) {
+    public addCustomerCompaniesInfo() {
         let customerCompaniesInfo = new UserCustomerCompaniesInfo();
         customerCompaniesInfo.setDefaultSubscriptionsForAddUser();
-        customerCompaniesInfo.defaultSubscriptions.setMode(editMode ? MODE_HIDE_ACTIVE : MODE_EDIT_SUBSCRIPTION);
         this.customerCompaniesInfo.unshift(customerCompaniesInfo);
     }
     /**
