@@ -8,10 +8,7 @@ import { UserDefaultSubscription } from '../../class/user-default-subscription';
   styleUrls: ['./user-default-subscription.component.scss']
 })
 export class UserDefaultSubscriptionComponent implements OnInit {
-  MODE_HIDE_ACTIVE = MODE_HIDE_ACTIVE;
-  MODE_EDIT_SUBSCRIPTION = MODE_EDIT_SUBSCRIPTION;
   @Input() defaultSubscriptions: UserDefaultSubscription;
-  @Input() mode: string;
   @Input() isDisabled: boolean = false;
   @Output() onChange = new EventEmitter();
   constructor() { }
@@ -27,7 +24,7 @@ export class UserDefaultSubscriptionComponent implements OnInit {
     let subscription = JSON.parse(JSON.stringify(this.defaultSubscriptions));
     subscription[field].enabled = !subscription[field].enabled;
     subscription[field].isExist = false;
-    if (this.mode == MODE_EDIT_USER_SUBSCRIPTION) subscription[field].activated = true;
+    subscription[field].activated = true;
     this.onChange.emit(subscription);
   }
   isSeleted(field) {
