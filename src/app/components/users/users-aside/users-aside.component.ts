@@ -15,7 +15,6 @@ import { TitleListType } from '../../tickets/tickets/tickets-header/class/title-
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { Subscription } from 'rxjs';
 import { CrmCompanyJobType } from '../../setting/crm-settings/crm-company-job-type/class/crm-company-job-type';
-import { Input } from 'hammerjs';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { MODE_EDIT_SUBSCRIPTION, MODE_HIDE_ACTIVE } from 'src/app/const/users';
