@@ -35,12 +35,15 @@ export class UserCustomerCompaniesInfoAdd {
         return {
             "invoiceSubscription": {
                 "enabled": data.invoiceSubscription.enabled,
+                "activated": data.invoiceSubscription.activated,
             },
             "ticketSubscription": {
                 "enabled": data.ticketSubscription.enabled,
+                "activated": data.ticketSubscription.activated,
             },
             "ticketManagerSubscription": {
                 "enabled": data.ticketManagerSubscription.enabled,
+                "activated": data.ticketManagerSubscription.activated,
             }
         }
     }
