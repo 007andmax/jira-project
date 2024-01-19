@@ -378,41 +378,9 @@
             (click)="modal.dismiss('Cross click')"
         ></div>
     </div>
-    <div class="modal-body">
-        <div class="modal-body__header qt-mb-24">
-            <strong class="qt-mb-8 qt-color-gray-900 qt-mb-8">Please download our agent</strong>
-            <p class="qt-color-gray-600">
-                You can download agent from the link given below
-            </p>
-            <a
-                href="javascript:;"
-                class="qt-button qt-w100 qt-mt-24 qt-jc-c"
-            >
-                Download Agent
-            </a>
-            <div class="modal-body__address qt-color-gray-500">
-                <p class="qt-fw-500 qt-color-gray-900">John Cooper</p>
-                <p class="qt-mt-4 qt-mb-4">Activetek Information</p>
-                <p>
-                    alma.lawson@example.com
-                    <span class="email_template_preview__circle"></span>
-                    (316) 555-0116
-                </p>
-            </div>
-        </div>
-        <div class="modal-body__body qt-color-gray-400">
-            <p class="qt-text-center">
-                Please contact Active Information @ or activeis@inbox.quicktech.com
-            </p>
-            <p class="email_template_preview__unsubscribe qt-text-center qt-mt-8 qt-mb-12">
-                If you no longer wish to receive these emails, simply click on the
-        following link
-                <span class="qt-color-info">unsubscribe.</span>
-            </p>
-            <p class="qt-text-center qt-df qt-jc-c qt-ai-c">
-                Powered by
-                <span class="qt-ml-6 icon__quicktech-logo--gray qt-ic-c qt-dib"></span>
-            </p>
-        </div>
+    <div
+        class="modal-body"
+        [innerHtml]="emailPreviewHtml"
+    >
     </div>
 </ng-template>

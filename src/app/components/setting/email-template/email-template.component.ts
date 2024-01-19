@@ -45,7 +45,8 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
     private settingStateService: SettingStateService,
-    private emailTemplateStateService: EmailTemplateStateService
+    private emailTemplateStateService: EmailTemplateStateService,
+    private sanitized: DomSanitizer,
   ) {
     this.ticketTemplates = this.emailService.getTicketTemplates();
     this.agentTemplates = this.emailService.getAgentTemplates();
@@ -268,8 +269,9 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
         map(resp => {
           this.emailPreviewHtml = resp;
           this.emailPreviewHtml = this.emailPreviewHtml.replace(/font-family: Inter, sans-serif;/gi, '')
+          this.emailPreviewHtml = this.sanitized.bypassSecurityTrustHtml(this.emailPreviewHtml);
           this.gettingEmailTemplatePreview = false;
-          this.modalService.open(template, { ariaLabelledBy: 'modal-basic-title', windowClass: "manage-tags", centered: true, backdrop: 'static', keyboard: false }).result.then((result) => {
+          this.modalService.open(template, { ariaLabelledBy: 'modal-basic-title', windowClass: "manage-tags email-template-preview", centered: true, backdrop: 'static', keyboard: false }).result.then((result) => {
 
           }, (reason) => {
 
