@@ -215,11 +215,13 @@
         <div class="qt-aside-modern__header-title">{{ templeteInfo.title }}</div>
         <div class="qt-df">
             <a
+                *ngIf="emailPages && emailPages.activeAndNotDefault[templeteInfo.key].isNotDefault"
                 href="javascript:;"
                 class="qt-button --square-md --gray pointer"
                 placement="top"
                 ngbTooltip="Reset Default"
                 container="body"
+                (click)="restoreDefault(templeteInfo.key)"
             >
                 <div class="icon__reset-gray-500 qt-sz-16 qt-button-icon"></div>
             </a>

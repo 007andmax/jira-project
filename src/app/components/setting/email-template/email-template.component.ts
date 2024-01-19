@@ -59,7 +59,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     this.keywords = [];
     this.templeteForm = this.formBuilder.group({
       subject: ["", Validators.required],
-      body: ["", Validators.required]
+      body: [""]
     });
     this.getEmailPages();
     this.settingStateService.setComponentName('EmailTempleteComponent');
@@ -140,8 +140,10 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     if (!templete) {
       return;
     }
-    this.templeteInfo = templete.value;
+    console.log("templete", templete);
+    this.templeteInfo = { ...templete.value, key: templete.key };
     this.edit = true;
+    console.log("this.templeteInfo", this.templeteInfo);
     this.emailService
       .getTemplate(templete.key)
       .pipe(
