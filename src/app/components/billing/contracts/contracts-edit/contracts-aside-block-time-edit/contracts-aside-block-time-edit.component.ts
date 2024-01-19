@@ -29,7 +29,6 @@ import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component'
 })
 export class ContractsAsideBlockTimeEditComponent implements OnInit {
   @ViewChild('taxes') taxesDP: TaxesComponent;
-  @ViewChild('customDateDP') customDateDP: DatePickerComponent;
   selectedCompany: any;
   selectedTaxes = [];
   selectedType = new ContractsFilterType('Block Time', 'BLOCK_TIME', null);
@@ -46,9 +45,6 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
   toggleNotifyAgentsUser: boolean = false;
   selectedUsers: any = [];
   userList = [];
-  customDate = new Date().getTime();
-  minCustomDate = new Date().getTime();
-
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
     private contractsService: ContractsService,
@@ -86,19 +82,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
       })
       this.toggleNotifyAgentsUser = true;
     }
-
     this.minStartDate = this.getMinStartDate(this.contractsBlockTime.intervalstring, this.contractsBlockTime.startDate);
-    this.setMinCustomDate();
-  }
-  private setMinCustomDate() {
-    let today = new Date(this.contractsBlockTime.startDate);
-    // this.minCustomDate = today.getTime();
-    if (this.customDateDP) this.customDateDP.minDate = this.minCustomDate;
-    this.cd.detectChanges();
-
-  }
-  onChangeCustomDate(data) {
-    this.contractsBlockTime.setCustomDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
   }
   public onEdit() {
     if (this.contractsBlockTime.blockTimeServices.length === 0 || !this.contractsBlockTime.checkDuplicatedBlockTimeServices() && !this.contractsBlockTime.checkDuplicatedServices()) return;
@@ -122,23 +106,6 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
       }, err => {
 
       })
-  }
-  setToggleCustomBillingDate(data) {
-    this.contractsBlockTime.withCustomBillingDate = data;
-    if (!data) {
-      //   this.contractsBlockTime.resetCustomBillingDate();
-    } else {
-      this.contractsBlockTime.customBillingDate = this.contractsBlockTime.startDate;
-      this.resetCustomDate();
-    }
-  }
-  private resetCustomDate() {
-    let startDate = new Date(this.contractsBlockTime.startDate);
-    this.customDate = startDate.getTime();
-    if (this.customDateDP) this.customDateDP.setEditDate(startDate.getTime());
-    startDate.setMonth(startDate.getMonth() + 1);
-    this.contractsBlockTime.setCustomDate(startDate.getDate(), startDate.getMonth(), startDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-
   }
   selectAllUsers() {
     this.techState.setUsersFromtEdit(JSON.parse(JSON.stringify(this.userList)));
@@ -212,9 +179,6 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
     let techusers = userList.filter((item) => item.accountType === "TECH" && !item.deletedAt);
     let clientUsers = userList.filter((item) => item.accountType === "CLIENT" && !item.deletedAt && item.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.contractsBlockTime.companyId));
     this.userList = [...techusers, ...clientUsers];
-
-
-
   }
   parsedateForTotal(date) {
     return moment(date).format('DD MMM YYYY');
@@ -263,8 +227,6 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
   }
   onChangeStartDate(data) {
     this.contractsBlockTime.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-    if (this.contractsBlockTime.withCustomBillingDate) this.resetCustomDate();
-    this.setMinCustomDate();
   }
   onChangeReviewDate(data) {
     this.contractsBlockTime.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);

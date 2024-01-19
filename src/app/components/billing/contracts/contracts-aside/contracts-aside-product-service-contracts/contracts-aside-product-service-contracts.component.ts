@@ -34,14 +34,11 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit, O
   @ViewChild('startDateDP') startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP') reviewDateDP: DatePickerComponent;
   @ViewChild('topContract') topContract: ContractsAsideTopComponent;
-  @ViewChild('customDateDP') customDateDP: DatePickerComponent;
   @Output() onClose = new EventEmitter<any>();
   contractsOther: ContractsOther = new ContractsOther();
   formatDate: string = FORMAT_DATE_2;
   startDate = new Date().getTime();
   reviewDate = new Date().getTime();
-  minCustomDate = new Date().getTime();
-  customDate = new Date().getTime();
   validate: ContractsOtherValidate = new ContractsOtherValidate();
   intervals: Array<string> = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
   selectedInterval: string = 'MONTHLY';
@@ -71,15 +68,7 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit, O
       this.onCheckServicesForAdd(data);
     })
     this.sub.add(getConfirm);
-
     if (this.сontractsStateService.getContractForCopy()) this.onInitCopy();
-    this.setMinCustomDate();
-  }
-  private setMinCustomDate() {
-    let today = new Date(this.contractsOther.startDate);
-    this.minCustomDate = today.getTime();
-    if (this.customDateDP) this.customDateDP.minDate = this.minCustomDate;
-    this.cd.detectChanges();
   }
   onInitCopy() {
     this.contractsOther.setDataFromCopy(this.сontractsStateService.getContractForCopy());
@@ -115,13 +104,8 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit, O
     this.contractsOther.setCompanyId((data) ? data.id : null);
     if (data) this.validate.resetCompany();
   }
-  onChangeCustomDate(data) {
-    this.contractsOther.setCustomDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-  }
   onChangeStartDate(data) {
     this.contractsOther.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-    if (this.contractsOther.withCustomBillingDate) this.resetCustomDate();
-    this.setMinCustomDate();
   }
   onChangeReviewDate(data) {
     this.contractsOther.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
@@ -155,23 +139,6 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit, O
   }
   parsedateForTotal(date) {
     return moment(date).format('DD MMM YYYY');
-  }
-  setToggleCustomBillingDate(data) {
-    this.contractsOther.withCustomBillingDate = data;
-    if (!data) {
-      this.contractsOther.clearCustomBillingDate();
-    } else {
-      this.contractsOther.customBillingDate = this.contractsOther.startDate;
-      this.resetCustomDate();
-    }
-  }
-  private resetCustomDate() {
-    let startDate = new Date(this.contractsOther.startDate);
-    this.customDate = startDate.getTime();
-    if (this.customDateDP) this.customDateDP.setEditDate(startDate.getTime());
-    startDate.setMonth(startDate.getMonth() + 1);
-    this.contractsOther.setCustomDate(startDate.getDate(), startDate.getMonth(), startDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-
   }
   public onCreate() {
     let checkProductExpenses = this.contractsOther.checkProductExpenses();
