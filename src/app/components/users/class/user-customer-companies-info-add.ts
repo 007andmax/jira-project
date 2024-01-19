@@ -35,15 +35,15 @@ export class UserCustomerCompaniesInfoAdd {
         return {
             "invoiceSubscription": {
                 "enabled": data.invoiceSubscription.enabled,
-                "activated": data.invoiceSubscription.activated,
+                "activated": data.invoiceSubscription.enabled ? data.invoiceSubscription.activated : false,
             },
             "ticketSubscription": {
                 "enabled": data.ticketSubscription.enabled,
-                "activated": data.ticketSubscription.activated,
+                "activated": data.ticketSubscription.enabled ? data.ticketSubscription.activated : false,
             },
             "ticketManagerSubscription": {
                 "enabled": data.ticketManagerSubscription.enabled,
-                "activated": data.ticketManagerSubscription.activated,
+                "activated": data.ticketManagerSubscription.enabled ? data.ticketManagerSubscription.activated : false,
             }
         }
     }
