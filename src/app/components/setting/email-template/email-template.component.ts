@@ -301,10 +301,12 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       if (matches === null) {
       }
     }
+    console.log(document.getElementById("myEditor")['value']);
     this.templeteForm.patchValue({
-      body: document.getElementById("myEditor")['value'],
+      body: (document.getElementById("myEditor")['value'].length == 0) ? null : document.getElementById("myEditor")['value'],
       subject: this.templeteForm.value.subject
     });
+    console.log("this.templeteForm.value", this.templeteForm.value)
     this.emailService
       .saveEmailTemplate(this.templeteForm.value, this.openEmailTemplate)
       .subscribe(
