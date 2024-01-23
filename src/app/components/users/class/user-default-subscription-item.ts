@@ -14,4 +14,7 @@ export class UserDefaultSubscriptionItem {
     public setIsExist(data) {
         this.isExist = data;
     }
+    public setActivated(data) {
+        this.activated = data;
+    }
 }

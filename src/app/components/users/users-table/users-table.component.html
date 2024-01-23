@@ -161,7 +161,7 @@
             #draftEmailTooltip
         ></app-dynamic-tooltip>
         <div
-            class="icon__email-dark qt-sz-16 pointer"
+            class="icon__email-dark qt-sz-16 pointer qt-bg-contain"
             *ngIf="!showArchivedUsers && !customerPortalStateService.isCustomerPortal"
             (click)="showAsideForDraftEmail()"
             (mouseenter)="draftEmailTooltip.show($event.target)"

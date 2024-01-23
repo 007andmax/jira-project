@@ -458,7 +458,6 @@
             <div class="qt-input-block">
                 <label class="qt-input-block__label">Get Subscribe</label>
                 <user-default-subscription
-                    [mode]="MODE_HIDE_ACTIVE"
                     [defaultSubscriptions]="company.contacts[0].customerCompaniesInfo[0].defaultSubscriptions"
                     (onChange)="onChangeSubscribe($event)"
                 ></user-default-subscription>
