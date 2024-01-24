@@ -243,6 +243,12 @@
                 ></app-tech-users>
             </div>
         </div>
+        <app-contracts-aside-block-time-billing-users
+            class="qt-mt-16 qt-db"
+            *ngIf="toggleNotifyAgentsUser"
+            (onSelected)="onChangeUser($event)"
+            [selectedUsers]="selectedUsers"
+        ></app-contracts-aside-block-time-billing-users>
     </div>
     <div class="qt-df qt-mb-16 qt-mt-24">
         <div
@@ -294,11 +300,6 @@
         *ngIf="toggleContractServices"
         (onSelect)="onAddDefaultService($event)"
     ></app-contracts-aside-block-time-billing-add-default-service>
-    <app-contracts-aside-block-time-billing-users
-        *ngIf="toggleNotifyAgentsUser"
-        (onSelected)="onChangeUser($event)"
-        [selectedUsers]="selectedUsers"
-    ></app-contracts-aside-block-time-billing-users>
     <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">
     <div class="qt-df qt-jc-sb qt-ai-c qt-mb-16">
         <div class="qt-df">
