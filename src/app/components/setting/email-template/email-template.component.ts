@@ -45,7 +45,8 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
     private settingStateService: SettingStateService,
-    private emailTemplateStateService: EmailTemplateStateService
+    private emailTemplateStateService: EmailTemplateStateService,
+    private sanitized: DomSanitizer,
   ) {
     this.ticketTemplates = this.emailService.getTicketTemplates();
     this.agentTemplates = this.emailService.getAgentTemplates();
@@ -58,7 +59,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     this.keywords = [];
     this.templeteForm = this.formBuilder.group({
       subject: ["", Validators.required],
-      body: ["", Validators.required]
+      body: [""]
     });
     this.getEmailPages();
     this.settingStateService.setComponentName('EmailTempleteComponent');
@@ -139,8 +140,10 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     if (!templete) {
       return;
     }
-    this.templeteInfo = templete.value;
+    console.log("templete", templete);
+    this.templeteInfo = { ...templete.value, key: templete.key };
     this.edit = true;
+    console.log("this.templeteInfo", this.templeteInfo);
     this.emailService
       .getTemplate(templete.key)
       .pipe(
@@ -268,8 +271,9 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
         map(resp => {
           this.emailPreviewHtml = resp;
           this.emailPreviewHtml = this.emailPreviewHtml.replace(/font-family: Inter, sans-serif;/gi, '')
+          this.emailPreviewHtml = this.sanitized.bypassSecurityTrustHtml(this.emailPreviewHtml);
           this.gettingEmailTemplatePreview = false;
-          this.modalService.open(template, { ariaLabelledBy: 'modal-basic-title', windowClass: "manage-tags", centered: true, backdrop: 'static', keyboard: false }).result.then((result) => {
+          this.modalService.open(template, { ariaLabelledBy: 'modal-basic-title', windowClass: "manage-tags email-template-preview", centered: true, backdrop: 'static', keyboard: false }).result.then((result) => {
 
           }, (reason) => {
 
@@ -297,10 +301,12 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       if (matches === null) {
       }
     }
+    console.log(document.getElementById("myEditor")['value']);
     this.templeteForm.patchValue({
-      body: document.getElementById("myEditor")['value'],
+      body: (document.getElementById("myEditor")['value'].length == 0) ? null : document.getElementById("myEditor")['value'],
       subject: this.templeteForm.value.subject
     });
+    console.log("this.templeteForm.value", this.templeteForm.value)
     this.emailService
       .saveEmailTemplate(this.templeteForm.value, this.openEmailTemplate)
       .subscribe(
