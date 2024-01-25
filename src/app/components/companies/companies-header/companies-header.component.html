@@ -6,6 +6,21 @@
             </h6>
         </div>
         <div class="qt-page-list__header-title-line--rigth">
+            <div class="qt-input-search qt-ml-8">
+                <!-- *ngIf="getSelectedCount() === 0" -->
+                <input
+                    type="text"
+                    placeholder="Search company"
+                    [(ngModel)]="searchText"
+                    (blur)="onBlurSearch($event)"
+                    (keyup)="onKeyUp($event)"
+                >
+                <span
+                    class="search-clear icon__close-round"
+                    *ngIf="searchText.length > 0"
+                    (click)="clearSearch()"
+                ></span>
+            </div>
             <div
                 class="new-companies-content__header-buttons"
                 *ngIf="getCountSelected() > 0"

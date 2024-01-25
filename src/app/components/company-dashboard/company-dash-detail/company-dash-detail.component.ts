@@ -187,91 +187,91 @@ export class CompanyDashDetailComponent implements OnInit {
       value: '12:30'
     },
     {
-      name: '13:00 PM',
+      name: '01:00 PM',
       value: '13:00'
     },
     {
-      name: '13:30 PM',
+      name: '01:30 PM',
       value: '13:30'
     },
     {
-      name: '14:00 PM',
+      name: '02:00 PM',
       value: '14:00'
     },
     {
-      name: '14:30 PM',
+      name: '02:30 PM',
       value: '14:30'
     },
     {
-      name: '15:00 PM',
+      name: '03:00 PM',
       value: '15:00'
     },
     {
-      name: '15:30 PM',
+      name: '03:30 PM',
       value: '15:30'
     },
     {
-      name: '16:00 PM',
+      name: '04:00 PM',
       value: '16:00'
     },
     {
-      name: '16:30 PM',
+      name: '04:30 PM',
       value: '16:30'
     },
     {
-      name: '17:00 PM',
+      name: '05:00 PM',
       value: '17:00'
     },
     {
-      name: '17:30 PM',
+      name: '05:30 PM',
       value: '17:30'
     },
     {
-      name: '18:00 PM',
+      name: '06:00 PM',
       value: '18:00'
     },
     {
-      name: '18:30 PM',
+      name: '06:30 PM',
       value: '18:30'
     },
     {
-      name: '19:00 PM',
+      name: '07:00 PM',
       value: '19:00'
     },
     {
-      name: '19:30 PM',
+      name: '07:30 PM',
       value: '19:30'
     },
     {
-      name: '20:00 PM',
+      name: '08:00 PM',
       value: '20:00'
     },
     {
-      name: '20:30 PM',
+      name: '08:30 PM',
       value: '20:30'
     },
     {
-      name: '21:00 PM',
+      name: '09:00 PM',
       value: '21:00'
     },
     {
-      name: '21:30 PM',
+      name: '09:30 PM',
       value: '21:30'
     },
     {
-      name: '22:00 PM',
+      name: '10:00 PM',
       value: '22:00'
     },
     {
-      name: '22:30 PM',
+      name: '10:30 PM',
       value: '22:30'
     },
     {
-      name: '23:00 PM',
+      name: '11:00 PM',
       value: '23:00'
     },
     {
-      name: '23:30 PM',
+      name: '11:30 PM',
       value: '23:30'
     }
   ];
@@ -444,7 +444,7 @@ export class CompanyDashDetailComponent implements OnInit {
       var minutesToreturn = minutes.toString().length > 1 ? minutes : '0' + minutes;
       return hoursToReturn + ':' + minutesToreturn;
     } else {
-      return "12:00";
+      return "00:00";
     }
   }
 

@@ -89,7 +89,7 @@ export class ActivityHistoryComponent implements OnInit, OnDestroy {
    */
   closeSession(device: any) {
     this.confirmStateService.setConfirmAction(CLOSE_SESSION);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove Location`;
     this.settingStateService.setSessionForRemove(device);
   }

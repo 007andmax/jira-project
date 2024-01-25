@@ -2,6 +2,7 @@ import { CompanyIndustry } from "src/app/interfaces/company/company-industry";
 import { Tag } from "src/app/interfaces/tag/tag";
 import { CompanyFilterTop } from "./company-filter-top";
 import { CompanyDeviceCount } from "./company-device-count";
+import { CompanyItem } from "./company-item";
 
 export class CompanyFilter {
     clientType: string;
@@ -20,8 +21,12 @@ export class CompanyFilter {
         new CompanyFilterTop('tickets', ''),
         new CompanyFilterTop('devices', ''),
         new CompanyFilterTop('users', '')];
+    search: string;
     constructor() {
 
+    }
+    public setSearch(data) {
+        this.search = data;
     }
     public setDevices(data) {
         this.devices = data;
@@ -54,6 +59,15 @@ export class CompanyFilter {
         this.clientIndustry = data.clientIndustry;
         this.techUser = data.techUser;
         this.tags = data.tags;
+    }
+    public getFilterList(reqList: Array<CompanyItem>) {
+        return reqList.filter(item => {
+            if ((this.search ? item.name.toLocaleLowerCase().includes(this.search.toLocaleLowerCase()) : true)) {
+                return true;
+            } else {
+                return false;
+            }
+        })
     }
     public isExistFilters() {
         return this.clientType || this.clientIndustry || this.techUser || this.tags.length > 0;

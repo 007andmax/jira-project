@@ -292,7 +292,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
   ConfirmDelete(tID: string, name) {
     this.tagId = tID;
     this.confirmStateService.setConfirmAction(DELETE_MANAGE_TAG);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = name;
 
   }

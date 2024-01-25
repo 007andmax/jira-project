@@ -57,8 +57,7 @@ export class CompanyAddAsideShortComponent implements OnInit, OnDestroy {
   }
   onSelectUser(item) {
     if (item) {
-      let indexhUser = this.users.findIndex(user => `${user.firstName} ${user.lastName}` === item);
-      if (indexhUser > -1) this.company.contacts[0].setId(this.users[indexhUser].id);
+      this.company.contacts[0].setId(item.id);
       this.validate.resetUser();
     } else {
       this.company.contacts[0].setId(null);
@@ -87,8 +86,9 @@ export class CompanyAddAsideShortComponent implements OnInit, OnDestroy {
     this.validate.checkValidType(this.company.clientType);
   }
   public onChangeDomain() {
+    this.validate.resetDomainIsExist();
     this.validate.checkValidDomain(this.company.domain);
-    if (this.validate.getDomain()) {
+    if (this.validate.getDomain() && this.validate.getDomainValid()) {
       this.companiesService.checkCompanyDomain('', this.company.domain).subscribe((data: any) => {
         if (data.value) {
           this.validate.resetDomain();

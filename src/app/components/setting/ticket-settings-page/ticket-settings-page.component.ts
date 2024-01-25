@@ -107,12 +107,12 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
   }
   removeTicketsStatus() {
     this.confirmStateService.setConfirmAction(DELETE_LIST_TICKET_STATUS);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove Ticket Status`;
   }
   removeTicketsPriority() {
     this.confirmStateService.setConfirmAction(DELETE_LIST_TICKET_PRIORITY);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove Ticket Priority`;
   }
 }

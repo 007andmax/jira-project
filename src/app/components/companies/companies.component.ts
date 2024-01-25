@@ -136,6 +136,12 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onChangeDevicesCount);
   }
+  onSearch(value) {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
+    this.companyFilter.setSearch((value !== "") ? value : null);
+    this.setDefaultScoll();
+    this.onScroll();
+  }
   getDevicesCounts(ids) {
     this.devicesService.getCountByCompany(ids).subscribe((data: any) => {
       this.devicesCounts = data.map(item => new CompanyDeviceCount(item));
@@ -207,7 +213,9 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     }
     this.page_number += 1;
 
-    let listFilter = this.reqCompaniesList;
+    let listFilter = this.companyFilter.getFilterList(this.reqCompaniesList);
+    this.calculateCount.onCalculate(listFilter, this.companyFilter.clientType);
+    this.companiesStateService.setCalculateCount(this.calculateCount);
     let start = (this.page_number - 1) * 30;
     let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
     let CompaniesList = [];

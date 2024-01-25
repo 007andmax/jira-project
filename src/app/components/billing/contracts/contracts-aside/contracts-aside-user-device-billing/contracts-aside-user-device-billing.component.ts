@@ -32,7 +32,6 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   @ViewChild('startDateDP') startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP') reviewDateDP: DatePickerComponent;
   @ViewChild('topContract') topContract: ContractsAsideTopComponent;
-  @ViewChild('customDateDP') customDateDP: DatePickerComponent;
   @Output() onClose = new EventEmitter<any>();
   selectedType = new ContractsFilterType('Service Contract/by device/by user', 'SERVICE_CONTRACT_DEVICE_USER', null);
   contractsUserDevice: ContractsUserDevice = new ContractsUserDevice();
@@ -43,9 +42,6 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   intervals: Array<string> = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
   selectedInterval: string = 'MONTHLY';
   minStartDate: number = null;
-  customDate = new Date().getTime();
-  minCustomDate = new Date().getTime();
-
   taxes: Array<Tax> = [];
   toggleMaximumAmountHours: boolean = false;
   toggleContractServices: boolean = false;
@@ -81,14 +77,6 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     this.contractsUserDevice.serviceContractServices = [new ContractsUserDeviceService(1, "Managed workstations", 0, this.defaultSelectedTax.map(item => item.id)),
     new ContractsUserDeviceService(1, "Managed servers", 0, this.defaultSelectedTax.map(item => item.id))]
     if (this.сontractsStateService.getContractForCopy()) this.onInitCopy();
-    this.setMinCustomDate();
-  }
-  private setMinCustomDate() {
-    let today = new Date(this.contractsUserDevice.startDate);
-    this.minCustomDate = today.getTime();
-    if (this.customDateDP) this.customDateDP.minDate = this.minCustomDate;
-    this.cd.detectChanges();
-
   }
   public onInitCopy() {
     this.contractsUserDevice.setDataFromCopy(this.сontractsStateService.getContractForCopy());
@@ -106,7 +94,6 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     }))
     if (this.contractsUserDevice.services.length > 0) this.toggleContractServices = true;
     if (this.contractsUserDevice.includedHours && this.contractsUserDevice.rateExceeding) this.toggleMaximumAmountHours = true;
-    this.customDate = this.сontractsStateService.getContractForCopy().getCustomDateByMilliseconds();
   }
   private setDefaultTaxes(lsitTaxes) {
     this.taxes = lsitTaxes;
@@ -226,23 +213,6 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     this.validate.resetIncludedHours();
     this.validate.resetRateExceeding();
   }
-  setToggleCustomBillingDate(data) {
-    this.contractsUserDevice.withCustomBillingDate = data;
-    if (!data) {
-      this.contractsUserDevice.clearCustomBillingDate();
-    } else {
-      this.contractsUserDevice.customBillingDate = this.contractsUserDevice.startDate;
-      this.resetCustomDate();
-    }
-  }
-  private resetCustomDate() {
-    let startDate = new Date(this.contractsUserDevice.startDate);
-    this.customDate = startDate.getTime();
-    if (this.customDateDP) this.customDateDP.setEditDate(startDate.getTime());
-    startDate.setMonth(startDate.getMonth() + 1);
-    this.contractsUserDevice.setCustomDate(startDate.getDate(), startDate.getMonth(), startDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-
-  }
   onTaxesChange(data) {
     this.contractsUserDevice.setTaxIds(data.map(item => item.id));
   }
@@ -265,15 +235,9 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     this.contractsUserDevice.setCompanyId((data) ? data.id : null);
     if (data) this.validate.resetCompany();
   }
-  onChangeCustomDate(data) {
-    this.contractsUserDevice.setCustomDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-  }
   onChangeStartDate(data) {
     this.contractsUserDevice.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-    if (this.contractsUserDevice.withCustomBillingDate) this.resetCustomDate();
-    this.setMinCustomDate();
   }
-
   onChangeReviewDate(data) {
     this.contractsUserDevice.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
   }

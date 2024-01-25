@@ -301,6 +301,7 @@
             let-companyInfo
             [ngForOf]="user.customerCompaniesInfo"
             let-i="index"
+            [ngForTrackBy]="trackByCompanyId"
         >
             <div class="qt-inputs-row-background">
                 <div class="qt-inputs-row qt-pos-rel">
@@ -323,7 +324,7 @@
                     <div class="qt-input-block">
                         <company-drop-down
                             [placeholder]="'Company'"
-                            [validate]="validate.getCompany()"
+                            [validate]="validate.getCompany(i)"
                             [errorMessage]="'The company name is required'"
                             [title]="'Company'"
                             [field]="'name'"
@@ -371,7 +372,6 @@
                     <div class="qt-input-block">
                         <label class="qt-input-block__label">Subscription</label>
                         <user-default-subscription
-                            [mode]="MODE_EDIT_USER_SUBSCRIPTION"
                             [defaultSubscriptions]="companyInfo.defaultSubscriptions"
                             (onChange)="onChangeDefaultSubscriptions($event,i)"
                             [isDisabled]="!companyInfo.companyId"

@@ -60,6 +60,7 @@
     <div class="qt-inputs-row">
         <div class="qt-input-block qt-f50">
             <app-drop-down
+                #companyTypeDp
                 [class]="['qt-select-input-40']"
                 [placeholder]="'Select Company Type'"
                 [field]="'title'"
@@ -92,7 +93,7 @@
             <div class="qt-input-block__label">Domain Name</div>
             <input
                 type="text"
-                [ngClass]="{'--input-error' : !validate.getDomain()}"
+                [ngClass]="{'--input-error' : !validate.getDomain() || validate.getDomainIsExist() || !validate.getDomainValid()}"
                 [(ngModel)]="company.domain"
                 (blur)="onChangeDomain()"
                 placeholder="example.com"
@@ -101,7 +102,19 @@
                 class="invalid-feedback"
                 *ngIf="!validate.getDomain()"
             >
+                Domain is required
+            </mat-error>
+            <mat-error
+                class="invalid-feedback"
+                *ngIf="!validate.getDomainValid()"
+            >
                 Please enter a valid domain
+            </mat-error>
+            <mat-error
+                class="invalid-feedback"
+                *ngIf="validate.getDomainIsExist()"
+            >
+                This company domain already occupied
             </mat-error>
         </div>
     </div>
@@ -271,7 +284,7 @@
     </div>
     <div
         class="qt-inputs-row-background"
-        *ngIf="company.isUseSelectedUser"
+        [hidden]="!company.isUseSelectedUser"
     >
         <div class="qt-inputs-row">
             <div class="qt-input-block">
@@ -286,18 +299,21 @@
                 >
                     + Create user
                 </span>
-                <app-drop-down
+                <company-users-drop-down
+                    #userDp
                     [class]="['qt-select-input-40']"
                     [placeholder]="'Select user'"
-                    [list]="usersList"
+                    [field]="'name'"
+                    [dropdownHeight]="'345px'"
                     [search]="true"
                     [change]="true"
+                    [sort]="false"
                     [validate]="validate.getUser()"
                     [errorMessage]="'Client user is required'"
                     [title]="'User'"
-                    (onSelectedItem)="onSelectUser($event)"
+                    (onSelectedItem)="onSelectUser($event.user)"
                 >
-                </app-drop-down>
+                </company-users-drop-down>
             </div>
         </div>
     </div>
@@ -442,7 +458,6 @@
             <div class="qt-input-block">
                 <label class="qt-input-block__label">Get Subscribe</label>
                 <user-default-subscription
-                    [mode]="MODE_HIDE_ACTIVE"
                     [defaultSubscriptions]="company.contacts[0].customerCompaniesInfo[0].defaultSubscriptions"
                     (onChange)="onChangeSubscribe($event)"
                 ></user-default-subscription>

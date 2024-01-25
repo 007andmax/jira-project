@@ -1,3 +1,4 @@
+import { MODE_EDIT_SUBSCRIPTION, MODE_HIDE_ACTIVE } from "src/app/const/users";
 import { UserDefaultSubscriptionItem } from "./user-default-subscription-item";
 
 export class UserDefaultSubscription {
@@ -13,11 +14,11 @@ export class UserDefaultSubscription {
             this.ticketManagerSubscription = new UserDefaultSubscriptionItem(data.ticketManagerSubscription);
         } else {
             this.invoiceSubscription = new UserDefaultSubscriptionItem({ enabled: true, activated: true, });
-            this.invoiceSubscription.setIsExist(false);
+            this.invoiceSubscription.setIsExist(true);
             this.ticketSubscription = new UserDefaultSubscriptionItem({ enabled: true, activated: true, });
-            this.ticketSubscription.setIsExist(false);
+            this.ticketSubscription.setIsExist(true);
             this.ticketManagerSubscription = new UserDefaultSubscriptionItem({ enabled: true, activated: true, });
-            this.ticketManagerSubscription.setIsExist(false);
+            this.ticketManagerSubscription.setIsExist(true);
         }
 
     }

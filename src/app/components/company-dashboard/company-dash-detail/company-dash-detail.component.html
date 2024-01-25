@@ -157,7 +157,13 @@
                     [number]="companyDetailing?.addresses[0]?.phoneNumbers[0]?.number"
                 ></preview-phone-mask>
             </a>
-            <address>{{companyDetailing.addresses_name}}</address>
+            <address>
+                <span
+                    *ngIf="companyDetailing.addresses.length > 0 && companyDetailing.addresses[0].suiteNumber"
+                    [textContent]="companyDetailing.addresses[0].suiteNumber + ', '"
+                ></span>
+                {{companyDetailing.addresses_name}}
+            </address>
             <span class="qt-fs-13 qt-mb-8 dfn qt-color-gray-900">
                 {{companyDetailing?.addresses[0]?.postalCode}}
             </span>

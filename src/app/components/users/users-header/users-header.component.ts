@@ -35,6 +35,7 @@ import { AppService } from 'src/app/states/app/app.service';
 export class UsersHeaderComponent implements OnInit, OnDestroy {
   @Output() onChangeFilterField = new EventEmitter<any>();
   @Output() onSelectAllUser = new EventEmitter<any>();
+  @Output() onSearch = new EventEmitter<any>();
   @Input() set users(value: Array<User>) {
     this._users = value;
   }
@@ -52,6 +53,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   TYPE_LIST_MARKETING_USERS = TYPE_LIST_MARKETING_USERS;
   TYPE_LIST_ALL_USERS = TYPE_LIST_ALL_USERS;
   TYPE_LIST_COMPANY_USERS = TYPE_LIST_COMPANY_USERS;
+  searchText: string = "";
   constructor(private usersStateService: UsersStateService,
     private draftEmailStateService: DraftEmailStateService,
     private confirmStateService: ConfirmStateService,
@@ -78,6 +80,16 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     this.sub.add(getConfirm);
     this.currentUser = this.usersStateService.getCurrentUser();
     this.ref.markForCheck();
+  }
+  onBlurSearch(event) {
+    this.onSearch.emit(event.target.value);
+  }
+  onKeyUp(event) {
+    if (event.keyCode === 13) this.onSearch.emit(event.target.value);
+  }
+  clearSearch() {
+    this.searchText = "";
+    this.onSearch.emit("");
   }
   public setReqUsers(data) {
     this.reqUsers = data;
@@ -144,7 +156,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   }
   removeUsersFromSubscription() {
     this.confirmStateService.setConfirmAction(MULTI_DELETE_USER_FROM_SUBSCRIPTION);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove subscription`;
     this.ref.markForCheck();
   }

@@ -129,7 +129,7 @@ export class TicketsPriorityComponent implements OnInit {
   }
   removeTicketPriority(data) {
     this.confirmStateService.setConfirmAction(DELETE_TICKET_PRIORITY);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove Ticket Priority`;
     this.ticketsStateService.setTicketPriorityForRemove(data);
   }

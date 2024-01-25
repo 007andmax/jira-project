@@ -68,7 +68,7 @@ export class TicketsFilterCompaniesDropDownComponent extends CompanyDropDownComp
 * @param {Object} event - Object from input
 */
   onSearch(event) {
-    this.list = this.reqList.filter(item => ((this.field) ? item[this.field] : item).toLowerCase().includes(event.target.value));
+    this.list = this.reqList.filter(item => ((this.field) ? item[this.field] : item).toLowerCase().includes(event.target.value.toLowerCase()));
   }
 
   /**

@@ -2,7 +2,7 @@ import { UserProfile } from './user-profile';
 
 export class UserValidate {
 
-    company: boolean = true;
+    companies: Array<boolean> = [];
     firstName: boolean = true;
     primaryContactEmail: boolean = true;
     existPrimaryContactEmail: boolean = true;
@@ -11,6 +11,16 @@ export class UserValidate {
     rePhoneNumber = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/;
 
     constructor() { }
+
+    public initCompanies(customerCompaniesInfo) {
+        customerCompaniesInfo.forEach(item => (this.companies.push(true)));
+    }
+    public addCompany() {
+        this.companies.unshift(true);
+    }
+    public removeCompany(i) {
+        this.companies.splice(i);
+    }
 
     /**
  * @description Check, if index of Array "phoneNumbers" > 0, when init logic add new elements to Array "phoneNumber"
@@ -38,14 +48,14 @@ export class UserValidate {
 * @description Return value of "company"
 * @returns {boolean} This is the result
 */
-    public getCompany() {
-        return this.company;
+    public getCompany(i) {
+        return this.companies[i];
     }
     /**
 * @description Reset value of "company"
 */
-    public setCompanyValid() {
-        this.company = true;
+    public setCompanyValid(i) {
+        this.companies[i] = true;
     }
     /**
 * @description Return value of "firstName"
@@ -128,8 +138,9 @@ export class UserValidate {
     public isValidate(user: UserProfile) {
         let phoneNumbers = true;
         if (!user.firstName || user.firstName.length < 2) this.firstName = false;
-        if (!user.customerCompaniesInfo[0].companyId) this.company = false;
-
+        user.customerCompaniesInfo.forEach((item, index) => {
+            if (!item.companyId) this.companies[index] = false;
+        })
         if (user.primaryEmail && user.primaryEmail.length > 0 && !user.primaryEmail.match(this.reEmail)) this.primaryContactEmail = false;
         if (user.phoneNumbers.length === 1) {
             if (user.phoneNumbers[0].number.length > 0 && user.phoneNumbers[0].number.length < 14) phoneNumbers = false;
@@ -141,7 +152,7 @@ export class UserValidate {
                 }
             })
         }
-        return this.firstName && this.company && this.primaryContactEmail && phoneNumbers;
+        return this.firstName && !this.companies.some(item => !item) && this.primaryContactEmail && phoneNumbers;
 
     }
 
