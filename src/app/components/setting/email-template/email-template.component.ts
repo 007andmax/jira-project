@@ -140,10 +140,8 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     if (!templete) {
       return;
     }
-    console.log("templete", templete);
     this.templeteInfo = { ...templete.value, key: templete.key };
     this.edit = true;
-    console.log("this.templeteInfo", this.templeteInfo);
     this.emailService
       .getTemplate(templete.key)
       .pipe(
@@ -301,12 +299,10 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       if (matches === null) {
       }
     }
-    console.log(document.getElementById("myEditor")['value']);
     this.templeteForm.patchValue({
       body: (document.getElementById("myEditor")['value'].length == 0) ? null : document.getElementById("myEditor")['value'],
       subject: this.templeteForm.value.subject
     });
-    console.log("this.templeteForm.value", this.templeteForm.value)
     this.emailService
       .saveEmailTemplate(this.templeteForm.value, this.openEmailTemplate)
       .subscribe(
