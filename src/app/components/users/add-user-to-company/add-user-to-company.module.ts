@@ -4,6 +4,7 @@ import { AddUserToCompanyComponent } from './add-user-to-company.component';
 import { FormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AddUserToCompanyItemComponent } from './add-user-to-company-item/add-user-to-company-item.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { AddUserToCompanyItemComponent } from './add-user-to-company-item/add-us
         CommonModule,
         FormsModule,
         InfiniteScrollModule,
+        NgbModule
 
     ],
     entryComponents: [AddUserToCompanyComponent],

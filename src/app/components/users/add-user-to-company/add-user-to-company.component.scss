@@ -20,8 +20,29 @@ app-add-user-to-company-item {
         content: " ";
         position: absolute;
         bottom: 0px;
-        left: 0;
-        right: 0;
+        left: -32px;
+        right: -32px;
+        height: 1px;
+        background-color: $gray-200;
+    }
+}
+.user-company-list {
+    height: 485px;
+    overflow: auto;
+}
+.user-company-btn-save {
+    background-color: $blue-light-600;
+    color: $white;
+}
+.archive-modal__body {
+    position: relative;
+    margin-bottom: 16px;
+    &:after {
+        position: absolute;
+        content: " ";
+        bottom: 0px;
+        left: -32px;
+        right: -32px;
         height: 1px;
         background-color: $gray-200;
     }

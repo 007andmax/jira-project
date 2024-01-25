@@ -48,13 +48,6 @@ export class AddUserToCompanyItemComponent implements OnInit {
     return `${this.user.firstName} ${this.user.lastName}`;
   }
   selectUser(event) {
-    if (event.target.checked) {
-      this.draftEmailStateService.addSelectedUser(this.user);
-    } else {
-      let list = this.draftEmailStateService.getSelectedUsers();
-      let index = list.findIndex(item => item.id === this.user.id);
-      if (index > -1) this.draftEmailStateService.removeSelectedUser(index);
-    }
     this.onSelectUser.emit(this.user);
     this.cd.detectChanges();
   }

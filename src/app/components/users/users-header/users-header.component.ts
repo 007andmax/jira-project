@@ -63,6 +63,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     private marketingEmailService: MarketingEmailService,
     private permissionsService: PermissionsService,
     private ref: ChangeDetectorRef,
+    private companiesStateService: CompaniesStateService,
     private usersHeaderService: UsersHeaderService) {
   }
 
@@ -151,7 +152,9 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   }
   addUser() {
     if (this.type == TYPE_LIST_COMPANY_USERS) {
-      const modalRef = this.modalService.open(AddUserToCompanyComponent, { windowClass: 'xs-modal user-modal', container: "company-user", backdrop: 'static', keyboard: false });
+      const modalRef = this.modalService.open(AddUserToCompanyComponent, { windowClass: 'xs-modal user-modal add-user-to-company', container: "company-user", backdrop: 'static', keyboard: false });
+      console.log("this.userFilter.company", this.userFilter);
+      modalRef.componentInstance.company = this.companiesStateService.getCompanies().find(item => item.id == this.userFilter.company);
     } else {
       this.usersStateService.onOpenAsige();
     }

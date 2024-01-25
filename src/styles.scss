@@ -1913,6 +1913,15 @@ app-quotes-item {
     padding: 0 16px 16px;
   }
 }
+.add-user-to-company {
+  .modal-dialog {
+    max-width: 504px;
+    max-height: 720px;
+    height: 720px;
+    overflow: hidden;
+    padding: 0px;
+  }
+}
 .new-users-content__modal,
 .new-companies-content__modal {
   .create-contract {

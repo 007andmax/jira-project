@@ -6,10 +6,10 @@
         <div class="qt-df">
             <label
                 class="qt-checkbox"
-                [attr.for]="'user-' + user.id"
+                [attr.for]="'user-company-' + user.id"
             >
                 <input
-                    [attr.id]="'user-' + user.id"
+                    [attr.id]="'user-company-' + user.id"
                     [(ngModel)]="user.selected"
                     type="checkbox"
                     (change)="selectUser($event)"

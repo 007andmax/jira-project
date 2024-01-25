@@ -1,10 +1,11 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { User } from '../class/user';
 import { UserFilter } from '../class/user-filter';
 import { UserListService } from '../services/user-list.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Company } from 'src/app/interfaces/company/company';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-add-user-to-company',
@@ -13,7 +14,8 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
   providers: [UserListService],
 })
 export class AddUserToCompanyComponent implements OnInit {
-  container = document.body.querySelector(".users-list");
+  @Input() company: Company;
+  container = document.body.querySelector(".user-company-list");
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
   companies: Array<Company> = [];
@@ -23,9 +25,12 @@ export class AddUserToCompanyComponent implements OnInit {
   constructor(private userListService: UserListService,
     public cd: ChangeDetectorRef,
     private usersStateService: UsersStateService,
+    public activeModal: NgbActiveModal,
     private companiesStateService: CompaniesStateService,) { }
 
   ngOnInit() {
+    this.container = document.body.querySelector(".user-company-list");
+    document.body.querySelector(".user-company-list").scrollTo(0, 0);
     if (this.companiesStateService.getCompanies().length > 0) this.companies = this.companiesStateService.getCompanies();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = data;
@@ -44,11 +49,15 @@ export class AddUserToCompanyComponent implements OnInit {
     //this.header.setReqUsers(this.reqUsers);
     this.cd.detectChanges();
   }
-  onSearch(value) {
-    document.body.querySelector(".main-container").scrollTo(0, 0);
-    this.filter.setSearch((value !== "") ? value : null);
+  onSearch(event) {
+    document.body.querySelector(".user-company-list").scrollTo(0, 0);
+    this.filter.setSearch((event.target.value !== "") ? event.target.value : null);
     this.setDefaultScoll();
     this.onScroll();
+  }
+  addUser() {
+    this.cancelConfirm();
+    this.usersStateService.onOpenAsige();
   }
   public setDefaultScoll() {
     this.page_number = 0;
@@ -61,6 +70,7 @@ export class AddUserToCompanyComponent implements OnInit {
     this.getUsers();
   }
   private getUsers() {
+    console.log("getUsers", this.userListService.getBlockList());
     if (this.userListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       this.cd.detectChanges();
@@ -82,4 +92,11 @@ export class AddUserToCompanyComponent implements OnInit {
   public trackById(index, item) {
     return item.id;
   }
+  onSelectUser(user) {
+    this.reqUsers.find(item => item.id === user.id).selected = user.selected;
+    this.cd.detectChanges();
+  }
+  cancelConfirm() {
+    this.activeModal.close();
+  };
 }

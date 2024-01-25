@@ -1,32 +1,22 @@
 <div class="archive-modal de-archive">
     <div class="archive-modal__body">
-        <div class="qt-df qt-ai-c user-company-header">
+        <div class="qt-df qt-ai-c user-company-header qt-mb-16 qt-pb-24">
             <div>
                 <h3 class="qt-mb-8">Add User</h3>
                 <p class="qt-mb-8">
-                    Select users from list to add into 16the Avenue Dental
+                    Select users from list to add into {{company.name}}
                 </p>
             </div>
-            <div class="user-company-add pointer qt-ml-auto">
+            <div
+                class="user-company-add pointer qt-ml-auto"
+                (click)="addUser()"
+                placement="top"
+                ngbTooltip="Add User"
+            >
                 <i class="icon__plus-gray qt-sz-16 qt-bg-contain"></i>
             </div>
         </div>
-        <div
-            class="no-exist-agreements"
-            *ngIf="!showPreloader && valid"
-        >
-            <span class="no-exist-agreements__info">
-                Are you sure you want to delete this product?
-            </span>
-            <div class="info-product">
-                <h3 [textContent]="inventory.description"></h3>
-                <span>Associate with no contracts</span>
-            </div>
-        </div>
-        <div
-            class="exist-agreements"
-            *ngIf="!showPreloader && !valid"
-        >
+        <div class="exist-agreements">
             <span class="qt-input-search">
                 <input
                     class="qt-input-search billable-list-search"
@@ -44,6 +34,7 @@
                     [infiniteScrollDistance]="2"
                     [infiniteScrollThrottle]="50"
                     [infiniteScrollDisabled]="infiniteScrollDisabled"
+                    [fromRoot]="true"
                     (scrolled)="onScroll()"
                 >
                     <ng-template
@@ -67,22 +58,19 @@
             <div class="loading"></div>
         </div>
     </div>
-    <div
-        class="archive-modal__footer"
-        *ngIf="!showPreloader && valid"
-    >
+    <div class="archive-modal__footer">
         <div class="qt-df qt-jc-fe">
             <button
-                class="btn-new btn-primary"
-                (click)=approveConfirm()
-            >
-                Yes, I am sure
-            </button>
-            <button
-                class="btn-new disabled"
+                class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
                 (click)=cancelConfirm()
             >
                 Cancel
+            </button>
+            <button
+                class="qt-button qt-jc-c qt-w100 user-company-btn-save"
+                (click)=approveConfirm()
+            >
+                Save
             </button>
         </div>
     </div>
