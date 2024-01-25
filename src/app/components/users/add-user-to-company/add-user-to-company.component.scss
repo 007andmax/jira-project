@@ -1,0 +1,28 @@
+@import "./src/assets/styles/variable";
+
+app-add-user-to-company-item {
+    display: contents;
+}
+.user-company-add {
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    border: 1px solid $gray-200;
+}
+.archive-modal {
+    padding: 24px 32px;
+}
+.user-company-header {
+    position: relative;
+    &::after {
+        content: " ";
+        position: absolute;
+        bottom: 0px;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background-color: $gray-200;
+    }
+}

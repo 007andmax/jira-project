@@ -1,0 +1,89 @@
+<div class="archive-modal de-archive">
+    <div class="archive-modal__body">
+        <div class="qt-df qt-ai-c user-company-header">
+            <div>
+                <h3 class="qt-mb-8">Add User</h3>
+                <p class="qt-mb-8">
+                    Select users from list to add into 16the Avenue Dental
+                </p>
+            </div>
+            <div class="user-company-add pointer qt-ml-auto">
+                <i class="icon__plus-gray qt-sz-16 qt-bg-contain"></i>
+            </div>
+        </div>
+        <div
+            class="no-exist-agreements"
+            *ngIf="!showPreloader && valid"
+        >
+            <span class="no-exist-agreements__info">
+                Are you sure you want to delete this product?
+            </span>
+            <div class="info-product">
+                <h3 [textContent]="inventory.description"></h3>
+                <span>Associate with no contracts</span>
+            </div>
+        </div>
+        <div
+            class="exist-agreements"
+            *ngIf="!showPreloader && !valid"
+        >
+            <span class="qt-input-search">
+                <input
+                    class="qt-input-search billable-list-search"
+                    name="ticket_search"
+                    placeholder="Search Company…"
+                    title="Company Search"
+                    type="text"
+                    (input)="onSearch($event)"
+                >
+            </span>
+            <div class="user-company-list">
+                <div
+                    infiniteScroll
+                    [infiniteScrollContainer]="container"
+                    [infiniteScrollDistance]="2"
+                    [infiniteScrollThrottle]="50"
+                    [infiniteScrollDisabled]="infiniteScrollDisabled"
+                    (scrolled)="onScroll()"
+                >
+                    <ng-template
+                        ngFor
+                        let-user
+                        [ngForOf]="users"
+                        [ngForTrackBy]="trackById"
+                    >
+                        <app-add-user-to-company-item
+                            (onSelectUser)="onSelectUser($event)"
+                            [user]="user"
+                        ></app-add-user-to-company-item>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+        <div
+            class="preloader-container"
+            *ngIf="showPreloader"
+        >
+            <div class="loading"></div>
+        </div>
+    </div>
+    <div
+        class="archive-modal__footer"
+        *ngIf="!showPreloader && valid"
+    >
+        <div class="qt-df qt-jc-fe">
+            <button
+                class="btn-new btn-primary"
+                (click)=approveConfirm()
+            >
+                Yes, I am sure
+            </button>
+            <button
+                class="btn-new disabled"
+                (click)=cancelConfirm()
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>

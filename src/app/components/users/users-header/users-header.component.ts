@@ -23,6 +23,7 @@ import { catchError, map } from 'rxjs/operators';
 import { UserFilter } from '../class/user-filter';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { AppService } from 'src/app/states/app/app.service';
+import { AddUserToCompanyComponent } from '../add-user-to-company/add-user-to-company.component';
 
 
 @Component({
@@ -149,7 +150,11 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     this.filter.onClearAll();
   }
   addUser() {
-    this.usersStateService.onOpenAsige();
+    if (this.type == TYPE_LIST_COMPANY_USERS) {
+      const modalRef = this.modalService.open(AddUserToCompanyComponent, { windowClass: 'xs-modal user-modal', container: "company-user", backdrop: 'static', keyboard: false });
+    } else {
+      this.usersStateService.onOpenAsige();
+    }
   }
   isUserOneCustomSubscription() {
     return this.filter.filter.customSubscriptions.length === 1;

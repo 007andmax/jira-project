@@ -1,0 +1,40 @@
+<div
+    [ngClass]="{'--selected': selected || user.selected}"
+    class="qt-df qt-ai-c qt-pt-12 qt-pb-12"
+>
+    <div class="qt-mr-16">
+        <div class="qt-df">
+            <label
+                class="qt-checkbox"
+                [attr.for]="'user-' + user.id"
+            >
+                <input
+                    [attr.id]="'user-' + user.id"
+                    [(ngModel)]="user.selected"
+                    type="checkbox"
+                    (change)="selectUser($event)"
+                >
+                <span></span>
+            </label>
+        </div>
+    </div>
+    <div>
+        <div class="qt-df qt-ai-c">
+            <div
+                class="user-company--avatar qt-mr-12"
+                [ngStyle]="{'background':  usersStateService.getUserAvatarUrl(user)}"
+                [textContent]="usersStateService.getNameForAvatar(user)"
+            ></div>
+            <div>
+                <div
+                    class="user-company-name"
+                    [textContent]="getUserName()"
+                ></div>
+                <div
+                    class="user-company-email"
+                    [textContent]="user.primaryEmail"
+                ></div>
+            </div>
+        </div>
+    </div>
+</div>
