@@ -40,6 +40,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   @Input() set users(value: Array<User>) {
     this._users = value;
   }
+  searchText: string = "";
   reqUsers: Array<User> = [];
   @Input() selectAll: boolean = false;
   _users: Array<User> = [];
@@ -54,7 +55,6 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   TYPE_LIST_MARKETING_USERS = TYPE_LIST_MARKETING_USERS;
   TYPE_LIST_ALL_USERS = TYPE_LIST_ALL_USERS;
   TYPE_LIST_COMPANY_USERS = TYPE_LIST_COMPANY_USERS;
-  searchText: string = "";
   constructor(private usersStateService: UsersStateService,
     private draftEmailStateService: DraftEmailStateService,
     private confirmStateService: ConfirmStateService,
@@ -152,7 +152,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   }
   addUser() {
     if (this.type == TYPE_LIST_COMPANY_USERS) {
-      const modalRef = this.modalService.open(AddUserToCompanyComponent, { windowClass: 'xs-modal user-modal add-user-to-company', container: "company-user", backdrop: 'static', keyboard: false });
+      const modalRef = this.modalService.open(AddUserToCompanyComponent, { windowClass: 'xs-modal user-modal add-user-to-company', backdrop: 'static', keyboard: false });
       console.log("this.userFilter.company", this.userFilter);
       modalRef.componentInstance.company = this.companiesStateService.getCompanies().find(item => item.id == this.userFilter.company);
     } else {

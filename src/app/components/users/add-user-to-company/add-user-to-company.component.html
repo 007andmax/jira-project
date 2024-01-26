@@ -24,10 +24,16 @@
                     placeholder="Search Company…"
                     title="Company Search"
                     type="text"
-                    (input)="onSearch($event)"
+                    [(ngModel)]="searchText"
+                    (input)="onSearch($event.target.value)"
                 >
+                <span
+                    class="search-clear icon__close-round"
+                    *ngIf="searchText.length > 0"
+                    (click)="clearSearch()"
+                ></span>
             </span>
-            <div class="user-company-list">
+            <div class="user-company-list qt-mt-16">
                 <div
                     infiniteScroll
                     [infiniteScrollContainer]="container"

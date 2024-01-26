@@ -72,6 +72,14 @@ export class UsersService {
         return data;
       }));
   }
+  public addUserToCompany(id, data) {
+    return this.http.put(this.apiUrl + `company/${id}/users`, data).pipe(
+      tap(data => {
+        this.toastrService.success("Users have been successfully added");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
   public addRole(name) {
     return this.http.post(this.apiUrl + `customerUser/createRole`, { name }).pipe(
       tap(data => {

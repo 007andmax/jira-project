@@ -87,6 +87,11 @@ export class UsersStateService {
     if (!createdUser.avatar) return `${(createdUser.firstName) ? createdUser.firstName[0].toUpperCase() : ''}${(createdUser.lastName) ? createdUser.lastName[0].toUpperCase() : ''}`;
     return '';
   }
+  getFirstNameForAvatar(createdUser) {
+    if (!createdUser) return '';
+    if (!createdUser.avatar) return `${(createdUser.firstName) ? createdUser.firstName[0].toUpperCase() : ''}`;
+    return '';
+  }
   public initSelectAllusers(data) {
     this.onSelectAll.emit(data);
   }

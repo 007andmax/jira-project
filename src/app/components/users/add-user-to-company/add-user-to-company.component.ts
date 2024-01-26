@@ -6,6 +6,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { Company } from 'src/app/interfaces/company/company';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
   selector: 'app-add-user-to-company',
@@ -22,10 +23,12 @@ export class AddUserToCompanyComponent implements OnInit {
   users: Array<User> = [];
   reqUsers: Array<User> = [];
   filter: UserFilter = new UserFilter();
+  searchText: string = "";
   constructor(private userListService: UserListService,
     public cd: ChangeDetectorRef,
     private usersStateService: UsersStateService,
     public activeModal: NgbActiveModal,
+    private usersService: UsersService,
     private companiesStateService: CompaniesStateService,) { }
 
   ngOnInit() {
@@ -40,18 +43,21 @@ export class AddUserToCompanyComponent implements OnInit {
       this.getUsersList(data);
     })
   }
+  clearSearch() {
+    this.searchText = "";
+    this.onSearch("");
+  }
   private getUsersList(data) {
-    this.reqUsers = data.filter(item => !item.deletedAt && item.accountType !== "TECH");
+    this.reqUsers = data.filter(item => !item.deletedAt && item.accountType !== "TECH" && !item.customerCompaniesInfo.some(compnay => compnay.companyId == this.company.id));
     this.reqUsers.sort((a, b) => ((a.firstName + a.lastName).toLowerCase() > (b.firstName + b.lastName).toLowerCase()) ?
       1 : (((b.firstName + b.lastName).toLowerCase() > (a.firstName + a.lastName).toLowerCase()) ? -1 : 0));
     this.onScroll();
-    //this.showPreloader = false;
-    //this.header.setReqUsers(this.reqUsers);
     this.cd.detectChanges();
   }
-  onSearch(event) {
+  onSearch(value) {
     document.body.querySelector(".user-company-list").scrollTo(0, 0);
-    this.filter.setSearch((event.target.value !== "") ? event.target.value : null);
+    this.reqUsers.forEach(item => item.selected = false);
+    this.filter.setSearch((value !== "") ? value : null);
     this.setDefaultScoll();
     this.onScroll();
   }
@@ -92,11 +98,20 @@ export class AddUserToCompanyComponent implements OnInit {
   public trackById(index, item) {
     return item.id;
   }
+  approveConfirm() {
+    let usersId = this.users.filter(item => item.selected).map(item => item.id);
+    if (usersId.length > 0) {
+      this.usersService.addUserToCompany(this.company.id, usersId).subscribe(data => {
+        this.cancelConfirm();
+      })
+    }
+  }
   onSelectUser(user) {
     this.reqUsers.find(item => item.id === user.id).selected = user.selected;
     this.cd.detectChanges();
   }
   cancelConfirm() {
+    this.reqUsers.forEach(item => item.selected = false);
     this.activeModal.close();
   };
 }
