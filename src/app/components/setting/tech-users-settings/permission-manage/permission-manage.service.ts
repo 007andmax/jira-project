@@ -20,7 +20,7 @@ export class PermissionManageService {
   ];
 
   userRelatedPermissions = ['CREATE_USERS', 'EDIT_USERS', 'ARCHIVE_USERS'];
-  accountingRelatedPermissions = ['CREATE_INVOICE'];
+  accountingRelatedPermissions = ['CREATE_INVOICE', 'ROLLBACK_INVOICE'];
   productsRelatedPermissions = ['MANAGE_PRODUCTS'];
   passwordsRelatedPermissions = [
     'VIEW_PASSWORD',
@@ -54,6 +54,7 @@ export class PermissionManageService {
     Accounting: [
       'VIEW_ACCOUNTING',
       'CREATE_INVOICE',
+      'ROLLBACK_INVOICE',
       'MANAGE_PRODUCTS',
       'VIEW_PRODUCT_COST',
       'MANAGE_SERVICES',

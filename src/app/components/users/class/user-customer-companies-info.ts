@@ -31,9 +31,9 @@ export class UserCustomerCompaniesInfo {
         this.defaultSubscriptions.invoiceSubscription = new UserDefaultSubscriptionItem({ enabled: false, activated: true, });
         this.defaultSubscriptions.ticketSubscription = new UserDefaultSubscriptionItem({ enabled: true, activated: true, });
         this.defaultSubscriptions.ticketManagerSubscription = new UserDefaultSubscriptionItem({ enabled: false, activated: true, });
-        this.defaultSubscriptions.invoiceSubscription.setIsExist(false);
-        this.defaultSubscriptions.ticketSubscription.setIsExist(false);
-        this.defaultSubscriptions.ticketManagerSubscription.setIsExist(false);
+        this.defaultSubscriptions.invoiceSubscription.setIsExist(true);
+        this.defaultSubscriptions.ticketSubscription.setIsExist(true);
+        this.defaultSubscriptions.ticketManagerSubscription.setIsExist(true);
     }
     /**
 * @description Return Object for request add Copmany

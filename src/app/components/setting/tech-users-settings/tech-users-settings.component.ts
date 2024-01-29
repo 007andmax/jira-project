@@ -240,7 +240,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   restoreConfirm(id) {
     this.userId = id;
     this.confirmStateService.setConfirmAction(RESTORE_USER);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

@@ -30,7 +30,8 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
   @Input() selectAll: boolean = false;
   @Output() onChangeFilterField = new EventEmitter<any>();
   @Output() onSelectAllCompanies = new EventEmitter<any>();
-
+  @Output() onSearch = new EventEmitter<any>();
+  searchText: string = "";
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
     private draftEmailStateService: DraftEmailStateService,
@@ -51,6 +52,16 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnCalculateCount);
     this.cd.markForCheck();
+  }
+  clearSearch() {
+    this.searchText = "";
+    this.onSearch.emit("");
+  }
+  onBlurSearch(event) {
+    this.onSearch.emit(event.target.value);
+  }
+  onKeyUp(event) {
+    if (event.keyCode === 13) this.onSearch.emit(event.target.value);
   }
   public setReqCompaniesList(data) {
     this.reqCompaniesList = data;
@@ -76,7 +87,7 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
   }
   archive() {
     this.confirmStateService.setConfirmAction(ARCHIVE_COMPANY);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to archive ${this.draftEmailStateService.getSelectedCompanies()[0].name}? All related users and service agreements will be archived and all agents will be uninstalled.`;
     this.companiesStateService.setCompnayForArchive(this.draftEmailStateService.getSelectedCompanies()[0]);
     this.cd.detectChanges();

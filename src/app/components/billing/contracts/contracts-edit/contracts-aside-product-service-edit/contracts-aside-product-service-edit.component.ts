@@ -27,8 +27,6 @@ export class ContractsAsideProductServiceEditComponent implements OnInit {
   formatDate: string = FORMAT_DATE_2;
   startDate = new Date().getTime();
   reviewDate = new Date().getTime();
-  customDate = new Date().getTime();
-  minCustomDate = new Date().getTime();
   validate: ContractsOtherValidate = new ContractsOtherValidate();
   intervals: Array<string> = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
   selectedInterval: string = 'MONTHLY';
@@ -48,7 +46,6 @@ export class ContractsAsideProductServiceEditComponent implements OnInit {
     }
     this.contractsOther.setIntervalString(this.selectedInterval);
     this.minStartDate = this.getMinStartDate(this.contractsOther.intervalstring, this.contractsOther.startDate);
-    this.setMinCustomDate();
   }
 
   public onEdit() {
@@ -89,8 +86,6 @@ export class ContractsAsideProductServiceEditComponent implements OnInit {
   onChangeStartDate(data) {
     this.contractsOther.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.contractsOther.calculateEndDate();
-    if (this.contractsOther.withCustomBillingDate) this.resetCustomDate();
-    this.setMinCustomDate();
   }
   onChangeReviewDate(data) {
     this.contractsOther.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
@@ -124,33 +119,6 @@ export class ContractsAsideProductServiceEditComponent implements OnInit {
   }
   parsedateForTotal(date) {
     return moment(date).format('DD MMM YYYY');
-  }
-  onChangeCustomDate(data) {
-    this.contractsOther.setCustomDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-  }
-  private setMinCustomDate() {
-    let today = new Date(this.contractsOther.startDate);
-    // this.minCustomDate = today.getTime();
-    if (this.customDateDP) this.customDateDP.minDate = this.minCustomDate;
-    this.cd.detectChanges();
-
-  }
-  setToggleCustomBillingDate(data) {
-    this.contractsOther.withCustomBillingDate = data;
-    if (!data) {
-      //  this.contractsOther.resetCustomBillingDate();
-    } else {
-      this.contractsOther.customBillingDate = this.contractsOther.startDate;
-      this.resetCustomDate();
-    }
-  }
-  private resetCustomDate() {
-    let startDate = new Date(this.contractsOther.startDate);
-    this.customDate = startDate.getTime();
-    if (this.customDateDP) this.customDateDP.setEditDate(startDate.getTime());
-    startDate.setMonth(startDate.getMonth() + 1);
-    this.contractsOther.setCustomDate(startDate.getDate(), startDate.getMonth(), startDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

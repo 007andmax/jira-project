@@ -21,6 +21,7 @@ import { CrmCompanyJobTitle } from 'src/app/components/setting/crm-settings/crm-
 import { CompanyProfileAddress } from '../../class/company-profile-address';
 import { MODE_EDIT_SUBSCRIPTION, MODE_HIDE_ACTIVE } from 'src/app/const/users';
 import { UsersService } from 'src/app/services/users/users.service';
+import { CompanyUsersDropDownComponent } from 'src/app/components/tickets/tickets/ticket-add-aside/company-users-drop-down/company-users-drop-down.component';
 
 @Component({
   selector: 'company-add-aside-full',
@@ -37,6 +38,9 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
   new CompanySetting('Credit Card', 'CREDIT_CARD'),
   new CompanySetting('Wire Transfer', 'WIRE_TRANSFER')];
   serviceTypes: Array<CrmCompanyServiceType> = [];
+  @ViewChild('addresstext'{ static: false }) addresstext: any;
+  @ViewChild('companyTypeDp'{ static: false }) companyTypeDp: DropDownComponent;
+  @ViewChild('userDp'{ static: false }) userDp: CompanyUsersDropDownComponent;
   industries: Array<CrmCompanyIndustry> = [];
   locationIsinit: boolean = false;
   jobTitleList: Array<CrmCompanyJobTitle> = [];
@@ -90,6 +94,11 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
       this.onGetUsers(this.usersStateService.getAllUsers());
     })
     this.sub.add(getOnUsers);
+    if (this.company.clientType) this.companyTypeDp.selectItemWithOutChanges(this.companyTypes.find(item => item.value == this.company.clientType));
+    if (this.company.contacts[0].id) {
+      let user = this.users.find(item => item.id == this.company.contacts[0].id);
+      if (user) this.userDp.selectItemWithOutChanges({ user: user, customerCompany: user.customerCompaniesInfo[0] });
+    }
     this.onCroppImage();
   }
   onGetUsers(data) {
@@ -181,8 +190,9 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
     this.company.clientIndustry.name = (item) ? item.name : null;
   }
   public onChangeDomain() {
+    this.validate.resetDomainIsExist();
     this.validate.checkValidDomain(this.company.domain);
-    if (this.validate.getDomain()) {
+    if (this.validate.getDomain() && this.validate.getDomainValid()) {
       this.companiesService.checkCompanyDomain('', this.company.domain).subscribe((data: any) => {
         if (data.value) {
           this.validate.resetDomain();

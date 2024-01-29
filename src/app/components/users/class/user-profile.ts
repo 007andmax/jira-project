@@ -9,6 +9,7 @@ import { Tag } from 'src/app/interfaces/tag/tag';
 import { UserCustomSubscription } from './user-custom-subscription';
 import { UserDefaultSubscription } from './user-default-subscription';
 import { UserCustomerCompaniesInfo } from './user-customer-companies-info';
+import { MODE_EDIT_SUBSCRIPTION, MODE_HIDE_ACTIVE } from 'src/app/const/users';
 
 export class UserProfile {
     id: string;
@@ -37,7 +38,9 @@ export class UserProfile {
 * @description Add new element to array ojects customerCompaniesInfo
 */
     public addCustomerCompaniesInfo() {
-        this.customerCompaniesInfo.push(new UserCustomerCompaniesInfo());
+        let customerCompaniesInfo = new UserCustomerCompaniesInfo();
+        customerCompaniesInfo.setDefaultSubscriptionsForAddUser();
+        this.customerCompaniesInfo.unshift(customerCompaniesInfo);
     }
     /**
 * @description Set Custom Subscriptions

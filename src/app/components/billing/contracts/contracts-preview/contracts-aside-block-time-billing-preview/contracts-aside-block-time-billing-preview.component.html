@@ -286,28 +286,6 @@
         <div class="qt-df">
             <div
                 class="qt-toggle  qt-mr-8"
-                [ngClass]="{'--on':contractsBlockTime.withCustomBillingDate}"
-            >
-                <div class="qt-toggle__circle"></div>
-            </div>
-            <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-gray-600">Custom Billing Date</div>
-        </div>
-        <div
-            class="notify-to-agents-assign-icon qt-df qt-ai-c qt-input-block"
-            *ngIf="contractsBlockTime.withCustomBillingDate"
-        >
-            <input
-                [value]="parsedateForTotal(contractsBlockTime.customBillingDate)"
-                type="text"
-                readonly
-            >
-        </div>
-    </div>
-    <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">
-    <div class="qt-df qt-jc-sb qt-ai-c qt-mb-16">
-        <div class="qt-df">
-            <div
-                class="qt-toggle  qt-mr-8"
                 [ngClass]="{'--on':contractsBlockTime.manualCreateBillableItem}"
             >
                 <div class="qt-toggle__circle"></div>

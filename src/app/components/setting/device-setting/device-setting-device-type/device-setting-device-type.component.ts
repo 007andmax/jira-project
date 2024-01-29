@@ -122,7 +122,7 @@ export class DeviceSettingDeviceTypeComponent implements OnInit, OnDestroy {
     this.deviceType = deviceType;
 
     this.confirmStateService.setConfirmAction(DELETE_DEVICE_TYPE);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Delete DeviceType`;
   }
   ngOnDestroy(): void {

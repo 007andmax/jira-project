@@ -160,7 +160,12 @@ export class MarketingComponent implements OnInit {
     this.sub.add(onGetIndustry);
     this.cd.markForCheck();
   }
-
+  onSearch(value) {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
+    this.filter.setSearch((value !== "") ? value : null);
+    this.setDefaultScoll();
+    this.onScroll();
+  }
   private onArchiveUsers(ids) {
     forkJoin(
       ids.map(item => this.usersService.onArchiveUsers(item))

@@ -1,281 +1,260 @@
 <div class="qt-aside-modern__content">
-  <div class="qt-inputs-row">
-    <div class="qt-input-block qt-f50">
-      <div class="qt-input-block__label">Company Name</div>
-      <app-drop-down
-        class="search-company"
-        [placeholder]="'Select Company'"
-        [editItem]="selectedCompany"
-        [class]="['qt-dropdown']"
-        [field]="'name'"
-        [isDisabled]="true"
-      ></app-drop-down>
+    <div class="qt-inputs-row">
+        <div class="qt-input-block qt-f50">
+            <div class="qt-input-block__label">Company Name</div>
+            <app-drop-down
+                class="search-company"
+                [placeholder]="'Select Company'"
+                [editItem]="selectedCompany"
+                [class]="['qt-dropdown']"
+                [field]="'name'"
+                [isDisabled]="true"
+            ></app-drop-down>
+        </div>
+        <div class="qt-input-block qt-f50">
+            <div class="qt-input-block__label">Contract Type</div>
+            <app-drop-down
+                class="search-users"
+                [isDisabled]="true"
+                [placeholder]="'Contract Type'"
+                [editItem]="selectedType"
+                [class]="['qt-dropdown']"
+                [field]="'title'"
+            ></app-drop-down>
+        </div>
     </div>
-    <div class="qt-input-block qt-f50">
-      <div class="qt-input-block__label">Contract Type</div>
-      <app-drop-down
-        class="search-users"
-        [isDisabled]="true"
-        [placeholder]="'Contract Type'"
-        [editItem]="selectedType"
-        [class]="['qt-dropdown']"
-        [field]="'title'"
-      ></app-drop-down>
+    <div class="qt-inputs-row">
+        <div class="qt-pl-12 qt-pr-12 qt-df qt-ai-c contract-tipe-info">
+            <div class="qt-sz-16 icon__tips qt-mr-5"></div>
+            <div>
+                Contact time can be based on the amount of users or devices, these number generated automaticaly
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="qt-inputs-row">
-    <div class="qt-pl-12 qt-pr-12 qt-df qt-ai-c contract-tipe-info">
-      <div class="qt-sz-16 icon__tips qt-mr-5"></div>
-      <div>
-        Contact time can be based on the amount of users or devices, these number generated automaticaly
-      </div>
+    <div class="qt-inputs-row">
+        <div class="qt-input-block qt-f50 --required">
+            <div class="qt-input-block__label">Start Date</div>
+            <app-date-picker
+                [formatDate]="formatDate"
+                [disabled]="true"
+                [editMode]="true"
+                [editDate]="contractsOther.startDate"
+            ></app-date-picker>
+        </div>
+        <div class="qt-input-block qt-f50 --required">
+            <app-drop-down
+                [title]="'Interval'"
+                [sort]="false"
+                [placeholder]="'Interval'"
+                [dropdownHeight]="'192px'"
+                [editItem]="selectedInterval"
+                [list]="intervals"
+                [isDisabled]="true"
+            ></app-drop-down>
+        </div>
+        <div class="qt-input-block qt-f50 --required">
+            <div class="qt-input-block__label">Review Date</div>
+            <app-date-picker
+                [formatDate]="formatDate"
+                [disabled]="true"
+                [editMode]="true"
+                [editDate]="contractsOther.reviewDate"
+            ></app-date-picker>
+        </div>
     </div>
-  </div>
-  <div class="qt-inputs-row">
-    <div class="qt-input-block qt-f50 --required">
-      <div class="qt-input-block__label">Start Date</div>
-      <app-date-picker
-        [formatDate]="formatDate"
-        [disabled]="true"
-        [editMode]="true"
-        [editDate]="contractsOther.startDate"
-      ></app-date-picker>
-    </div>
-    <div class="qt-input-block qt-f50 --required">
-      <app-drop-down
-        [title]="'Interval'"
-        [sort]="false"
-        [placeholder]="'Interval'"
-        [dropdownHeight]="'192px'"
-        [editItem]="selectedInterval"
-        [list]="intervals"
-        [isDisabled]="true"
-      ></app-drop-down>
-    </div>
-    <div class="qt-input-block qt-f50 --required">
-      <div class="qt-input-block__label">Review Date</div>
-      <app-date-picker
-        [formatDate]="formatDate"
-        [disabled]="true"
-        [editMode]="true"
-        [editDate]="contractsOther.reviewDate"
-      ></app-date-picker>
-    </div>
-  </div>
-  <div class="qt-inputs-row">
-    <div class="qt-input-block --required">
-      <div class="qt-input-block__label">Description</div>
-      <input
-        placeholder="Write contract description"
-        disabled
-        type="text"
-        [(ngModel)]="contractsOther.description"
-        readonly
-      >
-    </div>
-  </div>
-  <div class="qt-inputs-row-background">
-    <div class="qt-fs-15 qt-fw-600 qt-lh-147 qt-color-gray-900 qt-mb-20">
-      Select how you bill your customer. Managed Services will be added to Service time
-    </div>
-    <ul class="product-bill-customer-select-nav qt-mb-16">
-      <li
-        [ngClass]="{'--selected' :type === 'PRODUCTS'}"
-        (click)="type = 'PRODUCTS'"
-      >
-        Products ({{contractsOther.productExpenses.length}})
-      </li>
-      <li
-        [ngClass]="{'--selected' :type === 'SERVICES'}"
-        (click)="type = 'SERVICES'"
-      >
-        Service ({{contractsOther.serviceExpenses.length}})
-      </li>
-    </ul>
-    <div
-      class="table-last-icon-wrapper qt-mb-16"
-      *ngIf="type === 'SERVICES'"
-    >
-      <table class="qt-gray-table contract-product-service-table --last-icon">
-        <thead>
-        <tr>
-          <th class="contract-product-service-table__service">Service Expense</th>
-          <th class="contract-product-service-table__description">Description</th>
-          <th class="contract-product-service-table__duration">Duration</th>
-          <th class="contract-product-service-table__date">Date</th>
-          <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <ng-template
-          ngFor
-          let-item
-          [ngForOf]="contractsOther.serviceExpenses"
-          let-i="index"
-        >
-          <tr>
-            <td
-              class="contract-product-service-table__service"
-              [textContent]="item.name"
+    <div class="qt-inputs-row">
+        <div class="qt-input-block --required">
+            <div class="qt-input-block__label">Description</div>
+            <input
+                placeholder="Write contract description"
+                disabled
+                type="text"
+                [(ngModel)]="contractsOther.description"
+                readonly
             >
-            </td>
-            <td
-              class="contract-product-service-table__description"
-              [textContent]="item.description"
+        </div>
+    </div>
+    <div class="qt-inputs-row-background">
+        <div class="qt-fs-15 qt-fw-600 qt-lh-147 qt-color-gray-900 qt-mb-20">
+            Select how you bill your customer. Managed Services will be added to Service time
+        </div>
+        <ul class="product-bill-customer-select-nav qt-mb-16">
+            <li
+                [ngClass]="{'--selected' :type === 'PRODUCTS'}"
+                (click)="type = 'PRODUCTS'"
             >
-            </td>
-            <td
-              class="contract-product-service-table__duration"
-              [textContent]="getDuration(item.quantity)"
+                Products ({{contractsOther.productExpenses.length}})
+            </li>
+            <li
+                [ngClass]="{'--selected' :type === 'SERVICES'}"
+                (click)="type = 'SERVICES'"
             >
-            </td>
-            <td
-              class="contract-product-service-table__date"
-              [textContent]="parsedateForTotal(item.date)"
-            >
-            </td>
-            <td></td>
-          </tr>
-        </ng-template>
-        </tbody>
-      </table>
-    </div>
-    <div
-      class="table-last-icon-wrapper qt-mb-16"
-      *ngIf="type === 'PRODUCTS'"
-    >
-      <table class="qt-gray-table contract-product-products-table --last-icon">
-        <thead>
-        <tr>
-          <th class="contract-product-products-table__name">Product Name</th>
-          <th class="contract-product-products-table__quantity">Quantity</th>
-          <th class="contract-product-products-table__price">Price</th>
-          <th class="contract-product-products-table__price">Subtotal</th>
-          <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <ng-template
-          ngFor
-          let-item
-          [ngForOf]="contractsOther.productExpenses"
-          let-i="index"
-        >
-          <tr>
-            <td class="contract-product-products-table__name">
-              <pre [textContent]="item.description"></pre>
-            </td>
-            <td
-              class="contract-product-products-table__quantity"
-              [textContent]="item.quantity"
-            ></td>
-            <td
-              class="contract-product-products-table__price"
-              [textContent]="item.salePrice | currency"
-            ></td>
-            <td
-              class="contract-product-products-table__price"
-              [textContent]="getSubTotal(item) | currency"
-            ></td>
-            <td></td>
-          </tr>
-        </ng-template>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="qt-df qt-jc-sb qt-ai-c qt-mt-24 qt-mb-16">
-    <div class="qt-df">
-      <div
-        class="qt-toggle  qt-mr-8"
-        [ngClass]="{'--on':contractsOther.withCustomBillingDate}"
-      >
-        <div class="qt-toggle__circle"></div>
-      </div>
-      <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-gray-600">Custom Billing Date</div>
-    </div>
-    <div
-      class="notify-to-agents-assign-icon qt-df qt-ai-c qt-input-block"
-      *ngIf="contractsOther.withCustomBillingDate"
-    >
-      <input
-        [value]="parsedateForTotal(contractsOther.customBillingDate)"
-        type="text"
-        readonly
-      >
-    </div>
-  </div>
-  <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">
-  <div class="qt-df qt-jc-sb qt-ai-c qt-mt-16 qt-mb-16">
-    <div class="qt-df">
-      <div
-        class="qt-toggle  qt-mr-8"
-        [ngClass]="{'--on':contractsOther.manualCreateBillableItem}"
-      >
-        <div class="qt-toggle__circle"></div>
-      </div>
-      <ng-template
-        #manualContent
-        class="tooltip"
-      >
-        Warning, This will disable the automatic creation of a billable item for this contract. It must be manually created.
-      </ng-template>
-      <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-gray-600 qt-df qt-ai-c">
-        Manual create billable item
-        <span class="icon__automatically-create-invoice qt-bg-contain qt-dib qt-sz-20 qt-ml-8"></span>
-        <span
-          class="icon__help qt-dib qt-sz-12 qt-ic-c qt-ml-8"
-          placement="top"
-          [ngbTooltip]="manualContent"
-        ></span>
-      </div>
-    </div>
-  </div>
-  <hr class="qt-horisontal-line qt-mb-24 qt-mt-16">
-  <div class="qt-df qt-jc-sb qt-ai-c qt-mb-16">
-    <div class="qt-df">
-      <div
-        class="qt-toggle  qt-mr-8"
-        [ngClass]="{'--on':contractsOther.enableInvoiceAutoCreate}"
-      >
-        <div class="qt-toggle__circle"></div>
-      </div>
-      <ng-template
-        #tipContent
-        class="tooltip"
-      >
-        This option can be enabled only if the Manual create billable item option is disabled
-      </ng-template>
-      <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-gray-600 qt-df qt-ai-c">
-        Automatically create and send invoice
-        <span class="icon__manual-create-billable qt-bg-contain qt-dib qt-sz-20 qt-ml-8"></span>
-        <span
-          class="icon__help qt-dib qt-sz-12 qt-ic-c qt-ml-8"
-          placement="top"
-          [ngbTooltip]="tipContent"
-        ></span>
-      </div>
-    </div>
-  </div>
-  <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">
-  <div class="qt-df qt-jc-fe">
-    <div class="contract-total qt-color-gray-900">
-      <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
-        <div>Start Date</div>
-        <div [textContent]="parsedateForTotal(contractsOther.startDate)"></div>
-      </div>
-      <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
-        <div>Review Date</div>
-        <div [textContent]="parsedateForTotal(contractsOther.reviewDate)"></div>
-      </div>
-      <div class="contract-total__divider qt-mt-15 qt-mb-15"></div>
-      <div class="qt-df qt-jc-sb invoice-total__total-line">
-        <div class="qt-fs-13 qt-fw-b">Total</div>
+                Service ({{contractsOther.serviceExpenses.length}})
+            </li>
+        </ul>
         <div
-          class="qt-fs-16 qt-fw-b"
-          [textContent]="contractsOther.amount | currency"
-        ></div>
-      </div>
+            class="table-last-icon-wrapper qt-mb-16"
+            *ngIf="type === 'SERVICES'"
+        >
+            <table class="qt-gray-table contract-product-service-table --last-icon">
+                <thead>
+                    <tr>
+                        <th class="contract-product-service-table__service">Service Expense</th>
+                        <th class="contract-product-service-table__description">Description</th>
+                        <th class="contract-product-service-table__duration">Duration</th>
+                        <th class="contract-product-service-table__date">Date</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-template
+                        ngFor
+                        let-item
+                        [ngForOf]="contractsOther.serviceExpenses"
+                        let-i="index"
+                    >
+                        <tr>
+                            <td
+                                class="contract-product-service-table__service"
+                                [textContent]="item.name"
+                            >
+                            </td>
+                            <td
+                                class="contract-product-service-table__description"
+                                [textContent]="item.description"
+                            >
+                            </td>
+                            <td
+                                class="contract-product-service-table__duration"
+                                [textContent]="getDuration(item.quantity)"
+                            >
+                            </td>
+                            <td
+                                class="contract-product-service-table__date"
+                                [textContent]="parsedateForTotal(item.date)"
+                            >
+                            </td>
+                            <td></td>
+                        </tr>
+                    </ng-template>
+                </tbody>
+            </table>
+        </div>
+        <div
+            class="table-last-icon-wrapper qt-mb-16"
+            *ngIf="type === 'PRODUCTS'"
+        >
+            <table class="qt-gray-table contract-product-products-table --last-icon">
+                <thead>
+                    <tr>
+                        <th class="contract-product-products-table__name">Product Name</th>
+                        <th class="contract-product-products-table__quantity">Quantity</th>
+                        <th class="contract-product-products-table__price">Price</th>
+                        <th class="contract-product-products-table__price">Subtotal</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-template
+                        ngFor
+                        let-item
+                        [ngForOf]="contractsOther.productExpenses"
+                        let-i="index"
+                    >
+                        <tr>
+                            <td class="contract-product-products-table__name">
+                                <pre [textContent]="item.description"></pre>
+                            </td>
+                            <td
+                                class="contract-product-products-table__quantity"
+                                [textContent]="item.quantity"
+                            ></td>
+                            <td
+                                class="contract-product-products-table__price"
+                                [textContent]="item.salePrice | currency"
+                            ></td>
+                            <td
+                                class="contract-product-products-table__price"
+                                [textContent]="getSubTotal(item) | currency"
+                            ></td>
+                            <td></td>
+                        </tr>
+                    </ng-template>
+                </tbody>
+            </table>
+        </div>
     </div>
-  </div>
+    <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">
+    <div class="qt-df qt-jc-sb qt-ai-c qt-mt-16 qt-mb-16">
+        <div class="qt-df">
+            <div
+                class="qt-toggle  qt-mr-8"
+                [ngClass]="{'--on':contractsOther.manualCreateBillableItem}"
+            >
+                <div class="qt-toggle__circle"></div>
+            </div>
+            <ng-template
+                #manualContent
+                class="tooltip"
+            >
+                Warning, This will disable the automatic creation of a billable item for this contract. It must be manually created.
+            </ng-template>
+            <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-gray-600 qt-df qt-ai-c">
+                Manual create billable item
+                <span class="icon__automatically-create-invoice qt-bg-contain qt-dib qt-sz-20 qt-ml-8"></span>
+                <span
+                    class="icon__help qt-dib qt-sz-12 qt-ic-c qt-ml-8"
+                    placement="top"
+                    [ngbTooltip]="manualContent"
+                ></span>
+            </div>
+        </div>
+    </div>
+    <hr class="qt-horisontal-line qt-mb-24 qt-mt-16">
+    <div class="qt-df qt-jc-sb qt-ai-c qt-mb-16">
+        <div class="qt-df">
+            <div
+                class="qt-toggle  qt-mr-8"
+                [ngClass]="{'--on':contractsOther.enableInvoiceAutoCreate}"
+            >
+                <div class="qt-toggle__circle"></div>
+            </div>
+            <ng-template
+                #tipContent
+                class="tooltip"
+            >
+                This option can be enabled only if the Manual create billable item option is disabled
+            </ng-template>
+            <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-gray-600 qt-df qt-ai-c">
+                Automatically create and send invoice
+                <span class="icon__manual-create-billable qt-bg-contain qt-dib qt-sz-20 qt-ml-8"></span>
+                <span
+                    class="icon__help qt-dib qt-sz-12 qt-ic-c qt-ml-8"
+                    placement="top"
+                    [ngbTooltip]="tipContent"
+                ></span>
+            </div>
+        </div>
+    </div>
+    <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">
+    <div class="qt-df qt-jc-fe">
+        <div class="contract-total qt-color-gray-900">
+            <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
+                <div>Start Date</div>
+                <div [textContent]="parsedateForTotal(contractsOther.startDate)"></div>
+            </div>
+            <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
+                <div>Review Date</div>
+                <div [textContent]="parsedateForTotal(contractsOther.reviewDate)"></div>
+            </div>
+            <div class="contract-total__divider qt-mt-15 qt-mb-15"></div>
+            <div class="qt-df qt-jc-sb invoice-total__total-line">
+                <div class="qt-fs-13 qt-fw-b">Total</div>
+                <div
+                    class="qt-fs-16 qt-fw-b"
+                    [textContent]="contractsOther.amount | currency"
+                ></div>
+            </div>
+        </div>
+    </div>
 </div>

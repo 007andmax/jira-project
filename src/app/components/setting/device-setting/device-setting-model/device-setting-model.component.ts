@@ -125,7 +125,7 @@ export class DeviceSettingModelComponent implements OnInit, OnDestroy {
   removeConfirmModel(model: any) {
     this.model = model;
     this.confirmStateService.setConfirmAction(DELETE_DEVICE_MODEL);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Delete Model`;
   }
   ngOnDestroy(): void {

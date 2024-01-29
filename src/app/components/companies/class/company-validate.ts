@@ -4,6 +4,7 @@ export class CompanyValdiate {
     name: boolean = true;
     type: boolean = true;
     domain: boolean = true;
+    domainValid: boolean = true;
     firstName: boolean = true;
     primaryContactEmail: boolean = true;
     phoneNumber: boolean = true;
@@ -39,6 +40,12 @@ export class CompanyValdiate {
     }
     public getDomain() {
         return this.domain;
+    }
+    public getDomainValid() {
+        return this.domainValid;
+    }
+    public resetDomainValid() {
+        this.domainValid = true;
     }
     public resetDomain() {
         this.domain = true;
@@ -125,10 +132,15 @@ export class CompanyValdiate {
         }
     }
     public checkValidDomain(domain) {
-        if (domain && !domain.match(this.reDomain)) {
-            this.domain = false;
-        } else {
+        if (domain) {
             this.domain = true;
+        } else {
+            this.domain = false;
+        }
+        if (domain && !domain.match(this.reDomain)) {
+            this.domainValid = false;
+        } else {
+            this.domainValid = true;
         }
     }
 
@@ -162,9 +174,10 @@ export class CompanyValdiate {
         if (!company.isUseSelectedUser && (!company.contacts[0].primaryEmail || !company.contacts[0].primaryEmail.match(this.reEmail))) this.primaryContactEmail = false;
         if (!company.addresses[0].phoneNumbers[0].number || company.addresses[0].phoneNumbers[0].number.length < 14) this.phoneNumber = false;
         if (company.addresses.length === 2 && company.addresses[1].phoneNumbers[0].number.length > 0 && company.addresses[1].phoneNumbers[0].number.length < 14) this.shippingPhoneNumber = false;
-        if (company.domain && !company.domain.match(this.reDomain)) this.domain = false;
+        if (!company.domain) this.domain = false;
+        if (company.domain && !company.domain.match(this.reDomain)) this.domainValid = false;
         if (company.addresses.length > 0 && company.addresses[0].locationName != undefined && company.addresses[0].locationName.length == 0) this.billindAddress = false;
-        return this.name && this.type && this.primaryPhoneNumber && this.primaryContactEmail && this.phoneNumber && this.firstName && this.domain && !this.domainIsExist && this.shippingPhoneNumber && this.billindAddress && this.user;
+        return this.name && this.type && this.primaryPhoneNumber && this.primaryContactEmail && this.phoneNumber && this.firstName && this.domain && this.domainValid && !this.domainIsExist && this.shippingPhoneNumber && this.billindAddress && this.user;
     }
 
 

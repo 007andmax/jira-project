@@ -43,8 +43,6 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
   minStartDate: number = null;
   formatDate: string = FORMAT_DATE_2;
   startDate = new Date().getTime();
-  customDate = new Date().getTime();
-  minCustomDate = new Date().getTime();
   reviewDate = new Date().getTime();
   toggleContractServices: boolean = false;
   toggleTimeRollover: boolean = false;
@@ -91,14 +89,6 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
       this.setDefaultTaxes(data);
     })
     if (this.сontractsStateService.getContractForCopy()) this.onInitCopy();
-    this.setMinCustomDate();
-
-  }
-  private setMinCustomDate() {
-    let today = new Date(this.contractsBlockTime.startDate);
-    this.minCustomDate = today.getTime();
-    if (this.customDateDP) this.customDateDP.minDate = this.minCustomDate;
-    this.cd.detectChanges();
   }
   private setDefaultTaxes(lsitTaxes) {
     let taxes = lsitTaxes.filter(item => item.isDefault === true);
@@ -107,7 +97,6 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
   }
   public onInitCopy() {
     this.contractsBlockTime.setDataFromCopy(this.сontractsStateService.getContractForCopy());
-    this.customDate = this.сontractsStateService.getContractForCopy().getCustomDateByMilliseconds();
     this.selectedInterval = this.contractsBlockTime.intervalstring;
     this.startDate = this.сontractsStateService.getContractForCopy().getStartDateByMilliseconds();
     this.startDateDP.minDate = this.сontractsStateService.getContractForCopy().getStartDateByMilliseconds();
@@ -241,15 +230,6 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     this.selectedUsers = data;
     this.contractsBlockTime.setShares(this.selectedUsers.map(item => new СontractsBlockTimeShare(item.id)));
   }
-  setToggleCustomBillingDate(data) {
-    this.contractsBlockTime.withCustomBillingDate = data;
-    if (!data) {
-      this.contractsBlockTime.clearCustomBillingDate();
-    } else {
-      this.contractsBlockTime.customBillingDate = this.contractsBlockTime.startDate;
-      this.resetCustomDate();
-    }
-  }
   setToggleNotifyAgentsUser(data) {
     this.toggleNotifyAgentsUser = data;
     if (!data) this.clearAllSelectedUsers();
@@ -287,20 +267,6 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
   }
   onChangeStartDate(data) {
     this.contractsBlockTime.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-    if (this.contractsBlockTime.withCustomBillingDate) this.resetCustomDate();
-    this.setMinCustomDate();
-
-  }
-  private resetCustomDate() {
-    let startDate = new Date(this.contractsBlockTime.startDate);
-    this.customDate = startDate.getTime();
-    if (this.customDateDP) this.customDateDP.setEditDate(startDate.getTime());
-    startDate.setMonth(startDate.getMonth() + 1);
-    this.contractsBlockTime.setCustomDate(startDate.getDate(), startDate.getMonth(), startDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-
-  }
-  onChangeCustomDate(data) {
-    this.contractsBlockTime.setCustomDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
   }
   onChangeReviewDate(data) {
     this.contractsBlockTime.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);

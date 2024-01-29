@@ -269,8 +269,9 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     this.company.contacts[0].customerCompaniesInfo[index].changeDefaultSubscriptions(data);
   }
   public onChangeDomain() {
+    this.validate.resetDomainIsExist();
     this.validate.checkValidDomain(this.company.domain);
-    if (this.validate.getDomain()) {
+    if (this.validate.getDomain() && this.validate.getDomainValid()) {
       this.companiesService.checkCompanyDomain(this.company.id, this.company.domain).subscribe((data: any) => {
         if (data.value) {
           this.validate.resetDomain();

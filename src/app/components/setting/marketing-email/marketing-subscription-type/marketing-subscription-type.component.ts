@@ -140,7 +140,7 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
   }
   removeSubscription(item) {
     this.confirmStateService.setConfirmAction(DELETE_SUBSCRIPTION_TYPE);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove Subscription`;
     this.marketingEmailStateService.setSubscriptionTypeForRemove(item);
   }

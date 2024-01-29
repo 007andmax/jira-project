@@ -9,7 +9,7 @@
             ></div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__refund-payment"
-                *ngIf="!payment.refundMethod && !customerPortalStateService.isCustomerPortal"
+                *ngIf="!payment.refundMethod && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')"
                 (click)="showRefund()"
             ></div>
             <div
@@ -33,7 +33,7 @@
             >
                 <div class="qt-lh-154">
                     <img
-                        class="company-logo qt-mb-8"
+                        class="qt-mb-8"
                         [src]="companiesStateService.getCompanyLogoUrl(currentCompany)"
                     >
                     <div

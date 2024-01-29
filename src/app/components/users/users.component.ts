@@ -217,6 +217,12 @@ export class UsersComponent implements OnInit, OnDestroy {
       .subscribe(res => {
       });
   }
+  onSearch(value) {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
+    this.filter.setSearch((value !== "") ? value : null);
+    this.setDefaultScoll();
+    this.onScroll();
+  }
   setIdDetailUser(data) {
     this.idDetailUser = data;
   }
