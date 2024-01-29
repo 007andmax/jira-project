@@ -5,14 +5,14 @@ import { UserListService } from '../services/user-list.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Company } from 'src/app/interfaces/company/company';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
   selector: 'app-add-user-to-company',
   templateUrl: './add-user-to-company.component.html',
   styleUrls: ['./add-user-to-company.component.scss'],
-  providers: [UserListService],
+  providers: [UserListService, NgbModalConfig, NgbModal],
 })
 export class AddUserToCompanyComponent implements OnInit {
   @Input() company: Company;

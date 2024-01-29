@@ -115,18 +115,20 @@ export class CompanyUserComponent implements OnInit {
             this.reqUsers[reqIndex].onUpdate(data.data);
           }
         }
-        if (reqIndex === -1 && data.data.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === id)) {
-          this.reqUsers.unshift(new User(data.data));
-          this.users.unshift(new User(data.data));
-          this.header.count = this.header.count + 1;
-        }
+
+        if (reqIndex === -1 && data.data.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === id)) this.reqUsers.unshift(new User(data.data));
         const userIndex = this.users.findIndex((item) => item.id === data.data.id);
+        console.log("id", id);
+        console.log("userIndex", userIndex);
         if (userIndex > -1) {
           if (!data.data.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === id)) {
             this.users.splice(userIndex, 1);
           } else {
             this.users[userIndex].onUpdate(data.data);
           }
+        } else {
+          this.users.unshift(new User(data.data));
+          this.header.count = this.header.count + 1;
         }
         if (!this.showArchivedUsers && data.action === 'USER_ARCHIVED') {
           const userIndex = this.users.findIndex((item) => item.id === data.data.id);

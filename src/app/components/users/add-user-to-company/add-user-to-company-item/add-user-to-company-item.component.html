@@ -1,6 +1,6 @@
 <div
     [ngClass]="{'--selected': selected || user.selected}"
-    class="qt-df qt-ai-c qt-pt-12 qt-pb-12"
+    class="qt-df qt-ai-c qt-pt-12 qt-pb-12 user-company-item"
 >
     <div class="qt-mr-16">
         <div class="qt-df">
@@ -10,7 +10,7 @@
             >
                 <input
                     [attr.id]="'user-company-' + user.id"
-                    [(ngModel)]="user.selected"
+                    [checked]="user.selected"
                     type="checkbox"
                     (change)="selectUser($event)"
                 >
