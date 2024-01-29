@@ -39,6 +39,9 @@ app-add-user-to-company-item {
 .user-company-btn-save {
     background-color: $blue-light-600;
     color: $white;
+    &:hover {
+        background-color: $blue-light-500;
+    }
 }
 .archive-modal__body {
     position: relative;

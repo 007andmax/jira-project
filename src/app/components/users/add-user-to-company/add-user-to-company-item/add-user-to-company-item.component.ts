@@ -47,7 +47,8 @@ export class AddUserToCompanyItemComponent implements OnInit {
   getUserName() {
     return `${this.user.firstName} ${this.user.lastName}`;
   }
-  selectUser(event) {
+  selectUser() {
+    this.user.selected = !this.user.selected;
     this.onSelectUser.emit(this.user);
     this.cd.detectChanges();
   }

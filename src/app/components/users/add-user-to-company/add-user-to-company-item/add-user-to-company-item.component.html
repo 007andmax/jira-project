@@ -1,6 +1,7 @@
 <div
     [ngClass]="{'--selected': selected || user.selected}"
-    class="qt-df qt-ai-c qt-pt-12 qt-pb-12 user-company-item"
+    class="qt-df qt-ai-c qt-pt-12 qt-pb-12 user-company-item qt-pointer"
+    (click)="selectUser($event)"
 >
     <div class="qt-mr-16">
         <div class="qt-df">
@@ -12,7 +13,6 @@
                     [attr.id]="'user-company-' + user.id"
                     [checked]="user.selected"
                     type="checkbox"
-                    (change)="selectUser($event)"
                 >
                 <span></span>
             </label>
@@ -25,15 +25,15 @@
                 [ngStyle]="{'background':  usersStateService.getUserAvatarUrl(user)}"
                 [textContent]="usersStateService.getFirstNameForAvatar(user)"
             ></div>
-            <div>
-                <div
+            <div class="qt-df qt-fd-c user-company--name">
+                <span
                     class="user-company-name"
                     [textContent]="getUserName()"
-                ></div>
-                <div
+                ></span>
+                <span
                     class="user-company-email"
                     [textContent]="user.primaryEmail"
-                ></div>
+                ></span>
             </div>
         </div>
     </div>
