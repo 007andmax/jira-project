@@ -1,7 +1,7 @@
 <div
     [ngClass]="{'--selected': selected || user.selected}"
     class="qt-df qt-ai-c qt-pt-12 qt-pb-12 user-company-item qt-pointer"
-    (click)="selectUser($event)"
+    (click)="selectUser()"
 >
     <div class="qt-mr-16">
         <div class="qt-df">
@@ -13,6 +13,7 @@
                     [attr.id]="'user-company-' + user.id"
                     [checked]="user.selected"
                     type="checkbox"
+                    disabled
                 >
                 <span></span>
             </label>
