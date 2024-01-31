@@ -80,7 +80,7 @@
                         (click)="onSelectUser(item,customerCompany)"
                         [ngClass]="{'--selected':isSelectedUser(item,customerCompany)}"
                         class="qt-df user-container pointer"
-                        *ngIf="(!item.searchByCompany || item.searchByCompany && item.searchByCompany.companyId == customerCompany.companyId) && !item.isArchived"
+                        *ngIf="(!item.searchByCompany || item.searchByCompany && item.searchByCompany.companyId == customerCompany.companyId) && !customerCompany.isArchived"
                     >
                         <div
                             class="assigne-user-avatar qt-mr-12"
