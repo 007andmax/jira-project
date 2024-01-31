@@ -8,6 +8,9 @@
         font-size: 13px;
         line-height: 16px;
         color: $gray-700;
+        .icon__companies {
+            margin-right: 8px !important;
+        }
     }
 
     &__subtitle {
