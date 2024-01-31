@@ -12,7 +12,7 @@ export class EmailTempleteService {
   private apiUrl = environment.apiUrl;
   private ticketTemplates = {
     TICKET_CREATED: {
-      title: "A new Ticket is created",
+      title: "New Ticket is created",
       recipient: "User",
       description:
         "This message will confirm the ticket details that client user conveyed to the agent for creating the ticket.",
@@ -21,7 +21,7 @@ export class EmailTempleteService {
       showPreview: true
     },
     TICKET_CLOSED: {
-      title: "A Ticket is closed",
+      title: "Ticket is closed",
       recipient: "User",
       description:
         "This message will be sent to inform client user that ticket has been closed.",
@@ -30,7 +30,7 @@ export class EmailTempleteService {
       showPreview: true
     },
     TU_ADDED: {
-      title: "A new Ticket Update is added",
+      title: "Ticket Update is added",
       recipient: "All persons added to Ticket Update",
       description:
         "This message will be sent when a person is added to the Ticket Update.",
@@ -52,20 +52,27 @@ export class EmailTempleteService {
 
   private invoiceTemplates = {
     COMPANY_INV_SENT: {
-      title: "An Invoice is sent",
+      title: "Invoice is sent",
       recipient: "Company’s First Primary Contact",
       description:
         "This message will be sent when an invoice is created and sent.",
       showPreview: true
     },
     COMPANY_INV_RESENT: {
-      title: "An Invoice is re-sent",
+      title: "Invoice is re-sent",
       recipient: "Company’s First Primary Contact",
       description: "This message will be sent when an invoice is re-sent.",
       showPreview: true
     },
     COMPANY_PAYMENT_RECEIVED: {
-      title: "A payment is received",
+      title: "Payment is received",
+      recipient: "Company’s First Primary Contact",
+      description:
+        "This message will be sent to acknowledge the payment made against the invoices sent to company.",
+      showPreview: true
+    },
+    COMPANY_PAYMENT_REFUNDED: {
+      title: "Payment is refunded",
       recipient: "Company’s First Primary Contact",
       description:
         "This message will be sent to acknowledge the payment made against the invoices sent to company.",
