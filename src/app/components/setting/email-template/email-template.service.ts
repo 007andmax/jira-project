@@ -81,11 +81,6 @@ export class EmailTempleteService {
   };
 
   private userTemplates = {
-    COMPANY_TECH_CREATED: {
-      title: "New Tech user is created",
-      recipient: "New tech user",
-      showPreview: true
-    },
     USER_CREATED: {
       title: "New Customer user is created",
       recipient: "New customer user",
