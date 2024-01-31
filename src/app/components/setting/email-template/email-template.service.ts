@@ -80,6 +80,24 @@ export class EmailTempleteService {
     }
   };
 
+  private userTemplates = {
+    COMPANY_TECH_CREATED: {
+      title: "New Tech user is created",
+      recipient: "New tech user",
+      showPreview: true
+    },
+    USER_CREATED: {
+      title: "New Customer user is created",
+      recipient: "New customer user",
+      showPreview: true
+    },
+    USER_PASSWORD_RESET: {
+      title: "User password is reset",
+      recipient: "User",
+      showPreview: true
+    },
+  };
+
   constructor(private http: HttpClient,
     private toastrService: ToastrService,
     private appStateService: AppStateService) { }
@@ -103,6 +121,13 @@ export class EmailTempleteService {
    */
   getInvoiceTemplates() {
     return this.invoiceTemplates;
+  }
+
+  /**
+   * get user templates
+   */
+  getUserTemplates() {
+    return this.userTemplates;
   }
 
   /**
