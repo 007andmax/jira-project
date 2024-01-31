@@ -15,6 +15,12 @@ export class SoftwareSummaryDevicesDroDownComponent extends DropDownComponent {
     if (this.reqList.length === 0) this.reqList = JSON.parse(JSON.stringify(this.list));
     if (this.editItem) this.selectedItem = (this.field) ? this.editItem : this.editItem;
   }
+  public reset(data) {
+    this.list = data;
+    if (this.sort) this.list.sort((a, b) => (a.hostName || a.ip).localeCompare(b.hostName || b.ip));
+    this.reqList = JSON.parse(JSON.stringify(this.list));
+    this.ref.markForCheck();
+  }
   getSelectedItemText() {
     return (this.selectedItem) ? this.selectedItem.hostName || this.selectedItem.ip : "";
   }
