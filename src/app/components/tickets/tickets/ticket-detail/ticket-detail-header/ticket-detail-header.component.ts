@@ -86,7 +86,6 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
     return this.customerPortalStateService.checkEditTicket(this.usersStateService.getCurrentUser(), this.ticketProfile.createdUserId, this.ticketProfile.companyId);
   }
   checkClose() {
-    if (this.ticketProfile.updates.length === 0) return true;
     let completeServices = true;
     let completeProducts = true;
     let completeTasks = true;
@@ -99,6 +98,7 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
     this.ticketStateService.getListTasks().forEach(item => {
       if (item.status != "COMPLETED") completeTasks = false;
     })
+    console.log("completeTasks", completeTasks);
     return completeServices && completeProducts && completeTasks;
   }
   close() {
