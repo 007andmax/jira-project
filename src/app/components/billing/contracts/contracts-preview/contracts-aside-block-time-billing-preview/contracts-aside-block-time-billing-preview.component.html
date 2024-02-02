@@ -185,6 +185,29 @@
                 </div>
             </div>
         </div>
+        <div
+            class="ticket-edit-user-tags contract-time-users qt-mt-16"
+            *ngIf="contractsBlockTime.shares.length > 0"
+        >
+            <mat-chip-list class="example-chip">
+                <mat-chip
+                    class="selected-tag-user"
+                    *ngFor="let user of contractsBlockTime.shares; let i = index"
+                >
+                    <div class="assigne-user-item">
+                        <div
+                            class="assigne-user-avatar"
+                            [textContent]="getAssignedUserNameForAvatar(getUser(user.userId))"
+                            [ngStyle]="{'background': getStyleAvatar(getUser(user.userId)),'background-size': 'contain'}"
+                        ></div>
+                        <div
+                            class="assigne-user-name"
+                            [textContent]="getUserName(getUser(user.userId))"
+                        ></div>
+                    </div>
+                </mat-chip>
+            </mat-chip-list>
+        </div>
     </div>
     <div class="qt-df qt-mb-16 qt-mt-24">
         <div
@@ -257,29 +280,6 @@
                 </ng-template>
             </tbody>
         </table>
-    </div>
-    <div
-        class="ticket-edit-user-tags contract-time-users"
-        *ngIf="contractsBlockTime.shares.length > 0"
-    >
-        <mat-chip-list class="example-chip">
-            <mat-chip
-                class="selected-tag-user"
-                *ngFor="let user of contractsBlockTime.shares; let i = index"
-            >
-                <div class="assigne-user-item">
-                    <div
-                        class="assigne-user-avatar"
-                        [textContent]="getAssignedUserNameForAvatar(getUser(user.userId))"
-                        [ngStyle]="{'background': getStyleAvatar(getUser(user.userId)),'background-size': 'contain'}"
-                    ></div>
-                    <div
-                        class="assigne-user-name"
-                        [textContent]="getUserName(getUser(user.userId))"
-                    ></div>
-                </div>
-            </mat-chip>
-        </mat-chip-list>
     </div>
     <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">
     <div class="qt-df qt-jc-sb qt-ai-c qt-mb-16">

@@ -41,3 +41,8 @@ textarea {
     padding: 0 8px;
   }
 }
+/deep/ .email-template-preview {
+  .modal-content {
+    padding: 20px !important;
+  }
+}

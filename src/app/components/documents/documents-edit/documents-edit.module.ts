@@ -15,6 +15,7 @@ import { DatePickerModule } from '../../shared/date-picker/date-picker.module';
 import { DocumentsEditHistoryComponent } from './documents-edit-history/documents-edit-history.component';
 import { DocumentsAddEditCategoriesModule } from '../documents-add/documents-add-info/documents-add-edit-categories/documents-add-edit-categories.module';
 import { DocumentsEditRoutingModule } from './documents-edit-routing.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { DocumentsEditRoutingModule } from './documents-edit-routing.module';
         CompanyTagsModule,
         DatePickerModule,
         DocumentsAddEditCategoriesModule,
-        DocumentsEditRoutingModule
+        DocumentsEditRoutingModule,
+        NgbModule
     ],
 
 
