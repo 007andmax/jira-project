@@ -1,0 +1,20 @@
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'keysValue'
+})
+export class KeysValuePipe implements PipeTransform {
+
+  transform(value: any, sort?: any): any {
+    if (value) {
+      console.log("sort", sort);
+      let list = [];
+      for (const key in value) list.push(key);
+      return (sort) ? list.sort((a, b) => (a.total > b.total) ?
+        1 : ((b.total > a.total) ? -1 : 0)) : list;
+    } else {
+      return value;
+    }
+  }
+
+}

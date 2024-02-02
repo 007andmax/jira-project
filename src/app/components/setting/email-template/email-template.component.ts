@@ -126,6 +126,10 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     };
   }
 
+  public trackByIndex(index, item) {
+    return index;
+  }
+
   /**
    * email pages
    */
@@ -151,14 +155,15 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
    * @param templete
    * @param index
    */
-  getTemplate(templete, index) {
+  getTemplate(templete, key) {
     if (!templete) {
       return;
     }
-    this.templeteInfo = { ...templete.value, key: templete.key };
+    this.templeteInfo = { ...templete, key: key };
+    console.log("this.templeteInfo", this.templeteInfo)
     this.edit = true;
     this.emailService
-      .getTemplate(templete.key)
+      .getTemplate(key)
       .pipe(
         map((res: any) => {
           if (res) {
@@ -172,6 +177,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
 
             if (this.templeteInfo.requiredKeywordsRegExp) {
               const pattern = this.templeteInfo.requiredKeywordsRegExp;
+              console.log("pattern", pattern);
               this.templeteForm.controls["subject"].setValidators([
                 Validators.required,
                 Validators.pattern(pattern)
@@ -188,7 +194,8 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
               body: this.templatesData.body
             });
           }
-          this.openEmailTemplate = templete.key;
+          this.openEmailTemplate = key;
+          console.log(this.templeteForm.controls["subject"]);
         })
       )
       .subscribe();

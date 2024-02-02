@@ -29,6 +29,15 @@ export class EmailTempleteService {
       requiredKeywordsRegExp: /\$Ticket_Number/,
       showPreview: true
     },
+    TICKET_OPENED: {
+      title: "Ticket is re-opened",
+      recipient: "Tech / Customer Users",
+      description:
+        "This message will be sent when a person is added to the Ticket Update.",
+      requiredKeywords: ["$Ticket_Number"],
+      requiredKeywordsRegExp: /\$Ticket_Number/,
+      showPreview: true
+    },
     TU_ADDED: {
       title: "Ticket Update is added",
       recipient: "All persons added to Ticket Update",
@@ -38,17 +47,9 @@ export class EmailTempleteService {
       requiredKeywordsRegExp: /\$Ticket_Number/,
       showPreview: true
     },
-    TICKET_OPENED: {
-      title: "Ticket is opened",
-      recipient: "Tech / Customer Users",
-      description:
-        "This message will be sent when a person is added to the Ticket Update.",
-      requiredKeywords: ["$Ticket_Number"],
-      requiredKeywordsRegExp: /\$Ticket_Number/,
-      showPreview: true
-    },
+
     TU_DELETED: {
-      title: "Ticket update is delted",
+      title: "Ticket Update is deleted",
       recipient: "Tech / Customer Users",
       description:
         "This message will be sent when a person is added to the Ticket Update.",
