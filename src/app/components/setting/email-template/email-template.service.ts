@@ -37,6 +37,24 @@ export class EmailTempleteService {
       requiredKeywords: ["$Ticket_Number"],
       requiredKeywordsRegExp: /\$Ticket_Number/,
       showPreview: true
+    },
+    TICKET_OPENED: {
+      title: "Ticket is opened",
+      recipient: "Tech / Customer Users",
+      description:
+        "This message will be sent when a person is added to the Ticket Update.",
+      requiredKeywords: ["$Ticket_Number"],
+      requiredKeywordsRegExp: /\$Ticket_Number/,
+      showPreview: true
+    },
+    TU_DELETED: {
+      title: "Ticket update is delted",
+      recipient: "Tech / Customer Users",
+      description:
+        "This message will be sent when a person is added to the Ticket Update.",
+      requiredKeywords: ["$Ticket_Number"],
+      requiredKeywordsRegExp: /\$Ticket_Number/,
+      showPreview: true
     }
   };
 
@@ -86,9 +104,22 @@ export class EmailTempleteService {
       recipient: "New customer user",
       showPreview: true
     },
-    USER_PASSWORD_RESET: {
-      title: "User password is reset",
-      recipient: "User",
+  };
+
+  private quoteTemplates = {
+    SALE_QUOTE_CREATED: {
+      title: "New Quote is created",
+      recipient: "Tech / Customer Users",
+      showPreview: true
+    },
+    SALE_QUOTE_APPROVED: {
+      title: "Quote is approved",
+      recipient: "Tech / Customer Users",
+      showPreview: true
+    },
+    SALE_QUOTE_REFUSED: {
+      title: "Quote is refused",
+      recipient: "Tech / Customer Users",
       showPreview: true
     },
   };
@@ -102,6 +133,13 @@ export class EmailTempleteService {
    */
   getTicketTemplates() {
     return this.ticketTemplates;
+  }
+
+  /**
+  * quote templates
+  */
+  getQuoteTemplates() {
+    return this.quoteTemplates;
   }
 
   /**

@@ -24,6 +24,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   agentTemplates: any;
   invoiceTemplates: any;
   userTemplates: any;
+  quoteTemplates: any;
   currentOpenTemplate = "";
   keywords: any[];
   templeteInfo: any;
@@ -53,6 +54,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     this.agentTemplates = this.emailService.getAgentTemplates();
     this.invoiceTemplates = this.emailService.getInvoiceTemplates();
     this.userTemplates = this.emailService.getUserTemplates();
+    this.quoteTemplates = this.emailService.getQuoteTemplates();
   }
 
   ngOnInit() {
@@ -86,6 +88,12 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
           }
         }
         for (const key in this.userTemplates) {
+          if (data.data[key]) {
+            this.emailPages.activeAndNotDefault[key] = data.data[key];
+            break;
+          }
+        }
+        for (const key in this.quoteTemplates) {
           if (data.data[key]) {
             this.emailPages.activeAndNotDefault[key] = data.data[key];
             break;
