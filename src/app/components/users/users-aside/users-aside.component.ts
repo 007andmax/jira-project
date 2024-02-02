@@ -134,16 +134,19 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
     this.user.setCustomSubscriptions(data);
   }
   onCheckEmail() {
-
     if (this.user.primaryEmail && this.user.primaryEmail.length > 0) {
       this.validate.checkValidPrimaryEmail(this.user.primaryEmail);
+      console.log("valida", this.validate.primaryContactEmail);
+      this.cd.detectChanges();
       if (this.validate.getPrimaryContactEmail()) this.onCheckValidPrimaryEmail();
     }
   }
   onCheckValidPrimaryEmail() {
+    console.log("this.validate.getPrimaryContactEmail()", this.validate.getPrimaryContactEmail());
     this.usersService.checkValidPrimaryEmail(this.user.primaryEmail, this.companiesStateService.getCurrentCompany().id).subscribe((data: any) => {
       this.validate.setExistPrimaryContactEmail(data.value);
       this.cd.detectChanges();
+      console.log("this.validate.getPrimaryContactEmail()", this.validate.getPrimaryContactEmail());
     })
   }
   onCheckPhoneNumber(i) {
