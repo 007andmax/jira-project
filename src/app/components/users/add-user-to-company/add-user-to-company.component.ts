@@ -76,7 +76,6 @@ export class AddUserToCompanyComponent implements OnInit {
     this.getUsers();
   }
   private getUsers() {
-    console.log("getUsers", this.userListService.getBlockList());
     if (this.userListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       this.cd.detectChanges();

@@ -98,7 +98,6 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
     this.ticketStateService.getListTasks().forEach(item => {
       if (item.status != "COMPLETED") completeTasks = false;
     })
-    console.log("completeTasks", completeTasks);
     return completeServices && completeProducts && completeTasks;
   }
   close() {

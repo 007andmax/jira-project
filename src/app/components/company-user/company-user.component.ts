@@ -118,8 +118,6 @@ export class CompanyUserComponent implements OnInit {
 
         if (reqIndex === -1 && data.data.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === id)) this.reqUsers.unshift(new User(data.data));
         const userIndex = this.users.findIndex((item) => item.id === data.data.id);
-        console.log("id", id);
-        console.log("userIndex", userIndex);
         if (userIndex > -1) {
           if (!data.data.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === id)) {
             this.users.splice(userIndex, 1);
@@ -170,7 +168,6 @@ export class CompanyUserComponent implements OnInit {
   }
   public onInitFilters(id) {
     let company = this.companiesStateService.getCompanies().find(item => item.id === id);
-    console.log("company", company);
     this.header.filter.companiesDp.selectItemWithOutChanges(company);
     this.header.filter.companiesDp.isDisabled = true;
     this.header.filter.filter.setCompany(id);

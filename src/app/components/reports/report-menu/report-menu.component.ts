@@ -157,7 +157,6 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.softwareSummaryReport.setPreloaderSoft(false);
       this.deviceIpSummary.setPreloaderDevices(false);
       this.remoteConnectionReport.setPreloaderDevices(false);
-      console.log("this.devices", this.devices);
       this.dpDevices.reset(this.devices);
     }, err => {
       this.softwareSummaryReport.resetSoft();
@@ -236,7 +235,6 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     this.hardwareSummaryReport.setDeviceId((data) ? data.id : null);
     this.deviceIpSummary.setDeviceId((data) ? data.id : null);
     this.remoteConnectionReport.setDeviceId((data) ? data.id : null);
-    console.log("this.devices", this.devices);
   }
   public onSelectSoftware(data) {
     this.softwareSummaryReport.setSoftwareSoft(data);
