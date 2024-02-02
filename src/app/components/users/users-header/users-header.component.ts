@@ -23,6 +23,7 @@ import { catchError, map } from 'rxjs/operators';
 import { UserFilter } from '../class/user-filter';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { AppService } from 'src/app/states/app/app.service';
+import { AddUserToCompanyComponent } from '../add-user-to-company/add-user-to-company.component';
 
 
 @Component({
@@ -39,6 +40,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   @Input() set users(value: Array<User>) {
     this._users = value;
   }
+  searchText: string = "";
   reqUsers: Array<User> = [];
   @Input() selectAll: boolean = false;
   _users: Array<User> = [];
@@ -53,7 +55,6 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   TYPE_LIST_MARKETING_USERS = TYPE_LIST_MARKETING_USERS;
   TYPE_LIST_ALL_USERS = TYPE_LIST_ALL_USERS;
   TYPE_LIST_COMPANY_USERS = TYPE_LIST_COMPANY_USERS;
-  searchText: string = "";
   constructor(private usersStateService: UsersStateService,
     private draftEmailStateService: DraftEmailStateService,
     private confirmStateService: ConfirmStateService,
@@ -62,6 +63,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     private marketingEmailService: MarketingEmailService,
     private permissionsService: PermissionsService,
     private ref: ChangeDetectorRef,
+    private companiesStateService: CompaniesStateService,
     private usersHeaderService: UsersHeaderService) {
   }
 
@@ -149,7 +151,13 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     this.filter.onClearAll();
   }
   addUser() {
-    this.usersStateService.onOpenAsige();
+    if (this.type == TYPE_LIST_COMPANY_USERS) {
+      const modalRef = this.modalService.open(AddUserToCompanyComponent, { windowClass: 'xs-modal user-modal add-user-to-company', backdrop: 'static', keyboard: false });
+      console.log("this.userFilter.company", this.userFilter);
+      modalRef.componentInstance.company = this.companiesStateService.getCompanies().find(item => item.id == this.userFilter.company);
+    } else {
+      this.usersStateService.onOpenAsige();
+    }
   }
   isUserOneCustomSubscription() {
     return this.filter.filter.customSubscriptions.length === 1;

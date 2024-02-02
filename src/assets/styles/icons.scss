@@ -585,6 +585,17 @@
   &__export-dark {
     background-image: url("/assets/img/icons/export-dark.svg");
   }
+  &__plus-gray {
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/plus-white.svg");
+    mask-image: url("/assets/img/icons/plus-white.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
   &__plus-white {
     background-image: url("/assets/img/icons/plus-white.svg");
   }

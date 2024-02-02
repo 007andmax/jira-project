@@ -19,7 +19,7 @@ export class UserValidate {
         this.companies.unshift(true);
     }
     public removeCompany(i) {
-        this.companies.splice(i);
+        this.companies.splice(i, 1);
     }
 
     /**
