@@ -40,14 +40,16 @@ export class RemoteConnectionReport {
 
     }
     public getForRequest() {
-        return {
+        let data = {
             type: this.type,
             companyId: this.companyId,
             deviceId: this.deviceId,
             userId: this.userId,
             startDate: this.startDate,
             endDate: this.endDate,
-        }
+        };
+        if (this.deviceId) data.deviceId = this.deviceId;
+        return data
     }
     public setCompanyId(data) {
         this.companyId = data;
