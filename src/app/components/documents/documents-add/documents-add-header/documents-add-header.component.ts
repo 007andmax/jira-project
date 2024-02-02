@@ -63,7 +63,8 @@ export class DocumentsAddHeaderComponent implements OnInit, OnDestroy {
   }
   onToggleLeftPanel() {
     this.hideleLeftPanel = !this.hideleLeftPanel;
-    this.leftPanelStateService.hideLeftPanel(this.hideleLeftPanel);
+    // this.leftPanelStateService.hideLeftPanel(this.hideleLeftPanel);
+    this.leftPanelStateService.toggleLeftPanel(this.hideleLeftPanel);
   }
   exportPdf() {
     const url = `/documents/export?id=${this.documentEdit.id}`;
