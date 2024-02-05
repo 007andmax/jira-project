@@ -145,6 +145,9 @@ export class CompanyUserComponent implements OnInit {
         })
       }
       this.users = [...this.users.map(item => new User(item))];
+      this.reqUsers = [...this.reqUsers.map(item => new User(item))];
+      console.log(this.reqUsers.filter(item => item.selected));
+      console.log(this.users.filter(item => item.selected));
       this.header.setReqUsers(this.reqUsers);
       this.cd.detectChanges();
     })

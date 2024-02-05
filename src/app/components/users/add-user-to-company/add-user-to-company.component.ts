@@ -38,9 +38,9 @@ export class AddUserToCompanyComponent implements OnInit {
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = data;
     })
-    if (this.usersStateService.getAllUsers().length > 0) this.getUsersList(this.usersStateService.getAllUsers());
+    if (this.usersStateService.getAllUsers().length > 0) this.getUsersList(JSON.parse(JSON.stringify(this.usersStateService.getAllUsers())).map(item => new User(item)));
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
-      this.getUsersList(data);
+      this.getUsersList(JSON.parse(JSON.stringify(data)).map(item => new User(item)));
     })
   }
   clearSearch() {
@@ -111,6 +111,7 @@ export class AddUserToCompanyComponent implements OnInit {
   }
   cancelConfirm() {
     this.reqUsers.forEach(item => item.selected = false);
+    this.users.forEach(item => item.selected = false);
     this.activeModal.close();
   };
 }
