@@ -159,7 +159,7 @@
             </div>
             <div
                 class="quote-message-block qt-pt-10 qt-pl-16 qt-pr-16 qt-pb-20 qt-mb-24"
-                *ngIf="quote.message"
+                *ngIf="quote.message || quote.subject || quote.reviewNotes.length > 0"
                 [ngClass]="{'--closed': !toggleQuoteMessage}"
             >
                 <div class="quote-message-block__header qt-df qt-jc-sb">
