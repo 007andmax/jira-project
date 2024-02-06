@@ -22,7 +22,8 @@
   width: calc(100% - 30px);
   border: 1px solid transparent;
   border-radius: 6px;
-  box-shadow: 0 8px 25px 0 rgba(21, 30, 41, 0.4);
+  //box-shadow: 0 8px 25px 0 rgba(21, 30, 41, 0.4); // TODO check this style
+  box-shadow: 0 8px 8px -4px rgba(16, 24, 40, 0.03), 0px 20px 24px -4px rgba(16, 24, 40, 0.08);
   top: 50%;
   transform: translate(-50%, -50%);
   padding: 32px;
