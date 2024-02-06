@@ -134,9 +134,9 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
     this.user.setCustomSubscriptions(data);
   }
   onCheckEmail() {
-
     if (this.user.primaryEmail && this.user.primaryEmail.length > 0) {
       this.validate.checkValidPrimaryEmail(this.user.primaryEmail);
+      this.cd.detectChanges();
       if (this.validate.getPrimaryContactEmail()) this.onCheckValidPrimaryEmail();
     }
   }

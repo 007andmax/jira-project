@@ -27,16 +27,16 @@
                 >
                     <div class="with-checkbox">
                         <label
-                          class="qt-checkbox"
-                          [ngClass]="{'disable':item.count > 0}"
-                          *ngIf="getPermissions('DELETE_CATEGORY')"
+                            class="qt-checkbox"
+                            [ngClass]="{'disable':item.count > 0}"
+                            *ngIf="getPermissions('DELETE_CATEGORY')"
                         >
-                          <input
-                            type="checkbox"
-                            [disabled]="item.count > 0"
-                            (change)="onSelectCategory($event,item)"
-                          >
-                          <span></span>
+                            <input
+                                type="checkbox"
+                                [disabled]="item.count > 0"
+                                (change)="onSelectCategory($event,item)"
+                            >
+                            <span></span>
                         </label>
                         <div class="qt-w100 qt-fw-wrap qt-df qt-jc-sb --required">
                             <input
@@ -51,9 +51,9 @@
                                 max="100"
                             >
                             <mat-error
-                              class="invalid-feedback --pos-static"
-                              *ngIf="!editCategory.getValidate() && editCategory.isEditMode(item.id)"
-                              [textContent]="'This category name is already occupied'"
+                                class="invalid-feedback --pos-static"
+                                *ngIf="!editCategory.getValidate() && editCategory.isEditMode(item.id)"
+                                [textContent]="'This category name is already occupied'"
                             >
                             </mat-error>
                             <p
@@ -64,10 +64,17 @@
                                 {{item.name}}
                                 <span>({{item.count}})</span>
                             </p>
+                            <app-dynamic-tooltip
+                                [content]="'Delete'"
+                                [position]="'top'"
+                                #deleteTooltip
+                            ></app-dynamic-tooltip>
                             <div
                                 (click)="onRemoveCategory(item)"
                                 *ngIf="item.count === 0 && !editCategory.isEditMode(item.id) && getPermissions('DELETE_CATEGORY')"
                                 class="icon__remove qt-sz-16 qt-bg-contain qt-ml-6 pointer"
+                                (mouseenter)="deleteTooltip.show($event.target)"
+                                (mouseleave)="deleteTooltip.hide()"
                             ></div>
                         </div>
                     </div>
@@ -91,9 +98,9 @@
                             (keyup)="onAddCategoryByEnter($event)"
                         >
                         <mat-error
-                          class="invalid-feedback --pos-static"
-                          *ngIf="!addCategory.getValidate()"
-                          [textContent]="'This category name is already occupied'"
+                            class="invalid-feedback --pos-static"
+                            *ngIf="!addCategory.getValidate()"
+                            [textContent]="'This category name is already occupied'"
                         >
                         </mat-error>
                     </div>

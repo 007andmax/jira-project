@@ -39,4 +39,7 @@ export class CompanyDropDownComponent extends DropDownComponent {
     if (data && !this.companiesStateService.isInitLightClientsCompanies && this.clientType != undefined) this.companiesStateService.onInitGetLightClietnsCompanies();
     this.ref.markForCheck();
   }
+  getSelectedItemText() {
+    return `${this.reducerSelectedItem(this.selectedItem)}${(this.selectedItem && this.selectedItem.deletedAt) ? ' - Archived' : ''}`;
+  }
 }

@@ -1,0 +1,77 @@
+<div class="archive-modal de-archive">
+    <div class="archive-modal__body">
+        <div class="qt-df qt-ai-c user-company-header qt-mb-16 qt-pb-24">
+            <div>
+                <h3 class="qt-mb-8">Add User</h3>
+                <p class="qt-mb-8">
+                    Select users from list to add into {{company.name}}
+                </p>
+            </div>
+            <div
+                class="user-company-add pointer qt-ml-auto"
+                (click)="addUser()"
+                placement="top"
+                ngbTooltip="Add User"
+            >
+                <i class="icon__plus-gray qt-sz-16 qt-bg-contain"></i>
+            </div>
+        </div>
+        <div class="exist-agreements">
+            <span class="qt-input-search">
+                <input
+                    class="qt-input-search billable-list-search"
+                    name="ticket_search"
+                    placeholder="Search Company…"
+                    title="Company Search"
+                    type="text"
+                    [(ngModel)]="searchText"
+                    (input)="onSearch($event.target.value)"
+                >
+                <span
+                    class="search-clear icon__close-round"
+                    *ngIf="searchText.length > 0"
+                    (click)="clearSearch()"
+                ></span>
+            </span>
+            <div class="user-company-list qt-mt-16">
+                <div
+                    infiniteScroll
+                    [infiniteScrollContainer]="container"
+                    [infiniteScrollDistance]="2"
+                    [infiniteScrollThrottle]="50"
+                    [infiniteScrollDisabled]="infiniteScrollDisabled"
+                    [fromRoot]="true"
+                    (scrolled)="onScroll()"
+                >
+                    <ng-template
+                        ngFor
+                        let-user
+                        [ngForOf]="users"
+                        [ngForTrackBy]="trackById"
+                    >
+                        <app-add-user-to-company-item
+                            (onSelectUser)="onSelectUser($event)"
+                            [user]="user"
+                        ></app-add-user-to-company-item>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="archive-modal__footer">
+        <div class="qt-df qt-jc-fe">
+            <button
+                class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
+                (click)=cancelConfirm()
+            >
+                Cancel
+            </button>
+            <button
+                class="qt-button qt-jc-c qt-w100 user-company-btn-save"
+                (click)=approveConfirm()
+            >
+                Save
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+@import "./src/assets/styles/variable";
+
+.user-details {
+    display: flex;
+}
+
+.drop-down-users {
+    width: fit-content;
+}
+.users-table__name--profession {
+    color: $gray-400;
+}
+ 
+.user-primary-email {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.user-company--avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: $purple-400;
+    color: #ffffff;
+    background-size: cover !important;
+    background-position: center !important;
+    font-weight: 500;
+    font-size: 16px;
+}
+.user-company-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: $gray-900;
+}
+.user-company-email {
+    font-size: 13px;
+    font-weight: 400;
+    color: $gray-500;
+}
+.qt-checkbox {
+    position: relative;
+}
+.user-company-item {
+    &:hover {
+            background: $gray-50;
+    }
+}
+.user-company--name {
+    span {
+        line-height: normal;
+    }
+}

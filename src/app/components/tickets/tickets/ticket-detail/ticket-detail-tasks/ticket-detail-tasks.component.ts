@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { ClickOtsideDirective } from 'src/app/directives/click-otside/click-otside.directive';
@@ -33,6 +33,7 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     private ticketsRealTimeService: TicketsRealTimeService,
+    public cd: ChangeDetectorRef,
     private usersStateService: UsersStateService,) { }
 
   ngOnInit() {
@@ -60,6 +61,7 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
         this.list.splice(index, 1);
       }
       this.ticketStateService.setListTasks(this.list);
+      this.cd.detectChanges();
     })
     this.sub.add(changeTicketTasks);
 
@@ -68,6 +70,7 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
     this.ticketsService.getTicketTasks(id).subscribe((data: any) => {
       this.list = data.map(item => new TicketProfileTask(item))
       this.ticketStateService.setListTasks(this.list);
+      this.cd.detectChanges();
     })
   }
   setStatus(item, status) {

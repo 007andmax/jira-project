@@ -168,8 +168,8 @@
                         <button
                             class="qt-button --md --gray qt-fs-0"
                             (click)="getReportByRemoteConnectionReport()"
-                            [disabled]="remoteConnectionReport.preloaderDevices || !remoteConnectionReport.companyId || !remoteConnectionReport.deviceId"
-                            [ngClass]="{'--disabled':remoteConnectionReport.preloaderDevices || !remoteConnectionReport.companyId || !remoteConnectionReport.deviceId}"
+                            [disabled]="remoteConnectionReport.preloaderDevices || !remoteConnectionReport.companyId"
+                            [ngClass]="{'--disabled':remoteConnectionReport.preloaderDevices || !remoteConnectionReport.companyId}"
                         >
                             Get
                 Report

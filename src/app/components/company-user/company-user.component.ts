@@ -72,7 +72,7 @@ export class CompanyUserComponent implements OnInit {
       this.showPreloader = true;
       id = params['id'];
       if (id) this.companiesStateService.setCompanyRoutingId(id);
-      this.onInitFilters(id);
+      if (this.companiesStateService.getCompanies().length > 0) this.onInitFilters(id);
     });
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
       this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions, data.tags);
@@ -86,6 +86,7 @@ export class CompanyUserComponent implements OnInit {
     if (this.companiesStateService.getCompanies().length > 0) this.companies = this.companiesStateService.getCompanies();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = data;
+      if (id) this.onInitFilters(id);
     })
     this.userListService.addSubscription(getOnCompanies);
     if (this.usersStateService.getAllUsers().length > 0) this.getUsersList(this.usersStateService.getAllUsers());
@@ -114,11 +115,8 @@ export class CompanyUserComponent implements OnInit {
             this.reqUsers[reqIndex].onUpdate(data.data);
           }
         }
-        if (reqIndex === -1 && data.data.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === id)) {
-          this.reqUsers.unshift(new User(data.data));
-          this.users.unshift(new User(data.data));
-          this.header.count = this.header.count + 1;
-        }
+
+        if (reqIndex === -1 && data.data.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === id)) this.reqUsers.unshift(new User(data.data));
         const userIndex = this.users.findIndex((item) => item.id === data.data.id);
         if (userIndex > -1) {
           if (!data.data.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === id)) {
@@ -126,6 +124,9 @@ export class CompanyUserComponent implements OnInit {
           } else {
             this.users[userIndex].onUpdate(data.data);
           }
+        } else {
+          this.users.unshift(new User(data.data));
+          this.header.count = this.header.count + 1;
         }
         if (!this.showArchivedUsers && data.action === 'USER_ARCHIVED') {
           const userIndex = this.users.findIndex((item) => item.id === data.data.id);
@@ -167,9 +168,10 @@ export class CompanyUserComponent implements OnInit {
   }
   public onInitFilters(id) {
     let company = this.companiesStateService.getCompanies().find(item => item.id === id);
+    this.header.filter.companiesDp.selectItemWithOutChanges(company);
     this.header.filter.companiesDp.isDisabled = true;
-    this.header.filter.companiesDp.editItem = company;
     this.header.filter.filter.setCompany(id);
+    this.header.userFilter.setCompany(id);
     this.header.filter.onChangeCounterFilter();
     this.filter.setLeftFilters(null, id, null, null, null, [], []);
     this.cd.detectChanges();

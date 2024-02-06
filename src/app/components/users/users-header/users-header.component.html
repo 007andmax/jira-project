@@ -82,7 +82,8 @@
                 </button>
                 <!-- add class 'active' if filters open -->
                 <button
-                    class="qt-button --gray --md qt-ml-8"
+                    [ngClass]="(type == TYPE_LIST_COMPANY_USERS) ? 'qt-button --md qt-ml-8' : 'qt-button --gray --md qt-ml-8'"
+                    class="qt-button --md"
                     (click)="addUser()"
                     *ngIf="getPermissions('CREATE_USERS')"
                 >

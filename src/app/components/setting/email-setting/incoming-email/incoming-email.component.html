@@ -22,13 +22,11 @@
                 <div class="tab-pane-input__row">
                     <div class="qt-input-block">
                         <div class="qt-df">
-                            <input
-                                class="qt-input-afterpend"
+                            <div
                                 *ngIf="supportMailBox"
-                                type="text"
-                                value="{{ supportMailBox }}"
-                                disabled
-                            >
+                                [textContent]="supportMailBox"
+                                class="qt-input-afterpend email-domain-text"
+                            ></div>
                             <span class="qt-input-afterfix">@inbox.quicktech.com</span>
                         </div>
                         <div class="qt-input-help-text qt-mt-12">

@@ -4,8 +4,14 @@
         (click)="toggleContainer = !toggleContainer"
     >
         <div class="user-detail-company-info__title">
-            <i class="icn-sm icon__companies qt-bg-contain qt-sz-16 qt-mr-8"></i>
-            {{customerCompaniesInfo.clientCompanyName}}
+            <i class="icn-sm icon__companies qt-bg-contain qt-sz-16"></i>
+            <span [textContent]="customerCompaniesInfo.clientCompanyName"></span>
+            <span
+                class="qt-color-red-600"
+                *ngIf="customerCompaniesInfo.isArchived"
+            >
+                - Archived
+            </span>
         </div>
         <i class="icn-sm report-caret-icon pointer"></i>
     </div>

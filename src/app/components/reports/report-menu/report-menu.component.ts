@@ -157,6 +157,7 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.softwareSummaryReport.setPreloaderSoft(false);
       this.deviceIpSummary.setPreloaderDevices(false);
       this.remoteConnectionReport.setPreloaderDevices(false);
+      this.dpDevices.reset(this.devices);
     }, err => {
       this.softwareSummaryReport.resetSoft();
       this.softwareSummaryReport.setPreloaderSoft(false);
