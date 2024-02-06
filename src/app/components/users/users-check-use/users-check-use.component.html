@@ -18,7 +18,10 @@
                         [ngForOf]="user.customerCompaniesInfo"
                         [ngForTrackBy]="trackById"
                     >
-                        <div class="contract-item">
+                        <div
+                            class="contract-item"
+                            *ngIf="companyInfo.isPrimaryContact"
+                        >
                             <div class="contract-item-info">
                                 <h3 [textContent]="getCompanyName(companyInfo.companyId)"></h3>
                             </div>
