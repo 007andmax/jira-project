@@ -47,16 +47,6 @@ export class EmailTempleteService {
       requiredKeywordsRegExp: /\$Ticket_Number/,
       showPreview: true
     },
-
-    TU_DELETED: {
-      title: "Ticket Update is deleted",
-      recipient: "Tech / Customer Users",
-      description:
-        "This message will be sent when a person is added to the Ticket Update.",
-      requiredKeywords: ["$Ticket_Number"],
-      requiredKeywordsRegExp: /\$Ticket_Number/,
-      showPreview: true
-    }
   };
 
   private agentTemplates = {
