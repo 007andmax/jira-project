@@ -151,7 +151,6 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       return;
     }
     this.templeteInfo = { ...templete, key: key };
-    console.log("this.templeteInfo", this.templeteInfo)
     this.edit = true;
     this.emailService
       .getTemplate(key)
@@ -168,7 +167,6 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
 
             if (this.templeteInfo.requiredKeywordsRegExp) {
               const pattern = this.templeteInfo.requiredKeywordsRegExp;
-              console.log("pattern", pattern);
               this.templeteForm.controls["subject"].setValidators([
                 Validators.required,
                 Validators.pattern(pattern)
@@ -186,7 +184,6 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
             });
           }
           this.openEmailTemplate = key;
-          console.log(this.templeteForm.controls["subject"]);
         })
       )
       .subscribe();
