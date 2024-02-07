@@ -41,6 +41,7 @@ export class ModalImageCropperComponent implements OnInit, OnDestroy {
 
       //  this.imageCroper.imageBase64 = data;
       this.elRef.nativeElement.querySelector('.image-confirm-modal').style.display = 'block';
+      document.body.querySelector('modal-image-cropper').classList.add('modal', 'fade', 'show');
       this.show = true;
       this.cd.detectChanges();
     })
@@ -62,7 +63,7 @@ export class ModalImageCropperComponent implements OnInit, OnDestroy {
     }
   }
   closeModal() {
-
+    document.body.querySelector('modal-image-cropper').classList.remove('modal', 'fade', 'show');
     this.show = false;
     this.elRef.nativeElement.querySelector('.image-confirm-modal').style.display = 'none';
 
