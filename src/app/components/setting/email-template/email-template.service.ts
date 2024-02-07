@@ -97,24 +97,6 @@ export class EmailTempleteService {
     },
   };
 
-  private quoteTemplates = {
-    SALE_QUOTE_CREATED: {
-      title: "New Quote is created",
-      recipient: "Tech / Customer Users",
-      showPreview: true
-    },
-    SALE_QUOTE_APPROVED: {
-      title: "Quote is approved",
-      recipient: "Tech / Customer Users",
-      showPreview: true
-    },
-    SALE_QUOTE_REFUSED: {
-      title: "Quote is refused",
-      recipient: "Tech / Customer Users",
-      showPreview: true
-    },
-  };
-
   constructor(private http: HttpClient,
     private toastrService: ToastrService,
     private appStateService: AppStateService) { }
@@ -124,13 +106,6 @@ export class EmailTempleteService {
    */
   getTicketTemplates() {
     return this.ticketTemplates;
-  }
-
-  /**
-  * quote templates
-  */
-  getQuoteTemplates() {
-    return this.quoteTemplates;
   }
 
   /**

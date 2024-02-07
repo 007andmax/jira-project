@@ -265,68 +265,6 @@
                     </div>
                 </ng-template>
             </ngb-tab>
-            <ngb-tab title="Quote Templates">
-                <ng-template ngbTabContent>
-                    <div
-                        class="cmn-area"
-                        [hidden]="loading"
-                    >
-                        <div class="dataTable tab-pane__table">
-                            <div class="tab-pane__table-header">
-                                <div class="tab-pane__table-row">
-                                    <div class="tab-pane__table-cell email-templates-table__template-name">Template Name</div>
-                                    <div class="tab-pane__table-cell email-templates-table__action"></div>
-                                </div>
-                            </div>
-                            <div class="tab-pane__table-body">
-                                <div
-                                    class="tab-pane__table-row"
-                                    *ngFor="
-                            let template of quoteTemplates | keysValue:false;
-                            let i = index;
-                            trackBy: trackByIndex
-                          "
-                                >
-                                    <div class="tab-pane__table-cell email-templates-table__template-name">{{ quoteTemplates[template].title }}</div>
-                                    <div class="tab-pane__table-cell email-templates-table__action">
-                                        <div class="qt-df">
-                                            <app-dynamic-tooltip
-                                                [content]="'Edit'"
-                                                [position]="'top'"
-                                                #editTooltip
-                                            ></app-dynamic-tooltip>
-                                            <div
-                                                (mouseenter)="editTooltip.show($event.target)"
-                                                (mouseleave)="editTooltip.hide()"
-                                                class="icon__edit-gray-dark qt-sz-20 qt-bg-contain pointer"
-                                                (click)="getTemplate(quoteTemplates[template], template)"
-                                            >
-                                            </div>
-                                            <app-dynamic-tooltip
-                                                [content]="'Reset Default'"
-                                                [position]="'top'"
-                                                #resetTooltip
-                                            ></app-dynamic-tooltip>
-                                            <div
-                                                *ngIf="
-                                  emailPages &&
-                                  emailPages.activeAndNotDefault[template]
-                                    .isNotDefault
-                                "
-                                                (click)="restoreDefault(template)"
-                                                (mouseenter)="resetTooltip.show($event.target)"
-                                                (mouseleave)="resetTooltip.hide()"
-                                                class="icon__reset qt-sz-20 qt-ml-16 qt-bg-contain pointer"
-                                            >
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </ng-template>
-            </ngb-tab>
         </ngb-tabset>
     </div>
 </div>
