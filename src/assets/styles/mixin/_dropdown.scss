@@ -49,7 +49,8 @@
   @include dropdown-scrollbar;
 
   &.--tooltip-shadow {
-    box-shadow: 0 2px 4px -2px rgba(16,24,40,.03), 0px 0px 8px 6px rgba(16,24,40,.05);
+    box-shadow: 0 8px 8px -4px rgba(16, 24, 40, 0.03), 0px 20px 24px -4px rgba(16, 24, 40, 0.08);
+    padding: 0;
   }
 }
 
