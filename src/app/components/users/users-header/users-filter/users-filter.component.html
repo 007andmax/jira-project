@@ -1,4 +1,133 @@
-<div class="qt-page-list__header-filters">
+<div class="left-panel-ng2__content--filters aside-filters-content__main">
+    <div class="content-filters-header">
+        <div
+            class="icon__close-white qt-sz-20 qt-bg-contain"
+            (click)="close()"
+        ></div>
+        <div class="content-filters-header__title pointer">Filters</div>
+    </div>
+    <app-users-filter-job-title
+        #filterJobTitle
+        (onSelectTitle)="onSelectTitle($event.item, $event.event)"
+    ></app-users-filter-job-title>
+    <tickets-filter-companies-drop-down
+        class="qt-mb-16"
+        #companiesDp
+        [clientType]="'CLIENT'"
+        [title]="'Company'"
+        [placeholder]="'Select company'"
+        [placement]="'bottom-left'"
+        [field]="'name'"
+        (filterChange)="onSelectCompany($event)"
+    >
+    </tickets-filter-companies-drop-down>
+    <div class="qt-inputs-row">
+        <div class="qt-input-block">
+            <label class="qt-input-block__label">Subscription</label>
+            <user-default-subscription
+                [defaultSubscriptions]="filter.defaultSubscriptions"
+                (onChange)="onChangeDefaultSubscriptions($event)"
+            ></user-default-subscription>
+        </div>
+    </div>
+    <!-- <app-tickets-filter-tags
+        #tagsDp
+        [placement]="'bottom-left'"
+        (tagsChange)="onChangeTags($event)"
+    ></app-tickets-filter-tags>
+    <tickets-filter-created-drop-down
+        #datesDp
+        class="qt-pt-16"
+        [title]="'Created'"
+        [change]="true"
+        [search]="true"
+        [sort]="false"
+        [class]="['qt-dropdown']"
+        [container]="'body'"
+        [placement]="'bottom-right'"
+        [dropdownHeight]="'initial'"
+        [field]="'title'"
+        [placeholder]="'Select'"
+        (onSelectedItem)="onSelectCustomDateRange($event)"
+        (selectedDate)="onSelectDates($event)"
+    ></tickets-filter-created-drop-down>
+    <tickets-filter-users-drop-down
+        #usersDp
+        [title]="'User'"
+        [placeholder]="'Select user'"
+        [placement]="'top-left'"
+        [list]="users"
+        (filterChange)="onSelectUser($event)"
+    ></tickets-filter-users-drop-down>
+    <tickets-filter-users-drop-down
+        #techUsersDp
+        [placeholder]="'Select tech user'"
+        [title]="'Tech User'"
+        [placement]="'top-left'"
+        [list]="techUsersList"
+        (filterChange)="onSelectTechUser($event)"
+    ></tickets-filter-users-drop-down>
+    <tickets-filter-drop-down
+        #priorityDp
+        [title]="'Priority'"
+        [placeholder]="'Select priority'"
+        [placement]="'top-left'"
+        [field]="'name'"
+        [list]="ticketPriorities"
+        (filterChange)="onSelectPriority($event)"
+    >
+    </tickets-filter-drop-down> -->
+</div>
+<div class="aside-filters-content__footer">
+    <div class="qt-df">
+        <button
+            *ngIf="!customerPortalStateService.isCustomerPortal"
+            class="qt-button --gray qt-mr-12 qt-w100 qt-jc-c"
+            (click)="saveFilter()"
+        >
+            Save filter
+        </button>
+        <button
+            class="qt-button qt-w100 qt-jc-c"
+            (click)="applyFilters()"
+        >
+            Apply
+        </button>
+    </div>
+    <div class="qt-aside-modern__footer">
+        <div class="qt-df qt-w100">
+            <button
+                class="qt-button --gray qt-mr-12 qt-w100 qt-jc-c"
+                (click)="onClearAll()"
+            >
+                Clear All
+            </button>
+            <button
+                class="qt-button qt-w100 qt-jc-c"
+                (click)="applyFilters()"
+            >
+                Apply Filters
+            </button>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div
+    class="qt-page-list__header-filters"
+     
+>
     <app-drop-down
         #titlesDp
         class="qt-w100 qt-mr-8"
@@ -43,4 +172,4 @@
         class="filter-category tags dropdown companies-filter-tags qt-w100"
         (tagsChange)="onChangeTags($event)"
     ></app-company-tags>
-</div>
+</div> -->

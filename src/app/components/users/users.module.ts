@@ -10,6 +10,7 @@ import { UsersRoutingModule } from './users-routing.module';
 import { UsersCheckUseComponent } from './users-check-use/users-check-use.component';
 import { AddUserToCompanyComponent } from './add-user-to-company/add-user-to-company.component';
 import { AddUserToCompanyItemComponent } from './add-user-to-company/add-user-to-company-item/add-user-to-company-item.component';
+import { UsersFilterModule } from './users-header/users-filter/users-filter.module';
 
 @NgModule({
     declarations: [UsersComponent,
@@ -19,7 +20,8 @@ import { AddUserToCompanyItemComponent } from './add-user-to-company/add-user-to
         UsersHeaderModule,
         InfiniteScrollModule,
         UsersTableModule,
-        UsersRoutingModule
+        UsersRoutingModule,
+        UsersFilterModule
 
     ],
 

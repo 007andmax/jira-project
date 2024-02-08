@@ -5,6 +5,7 @@ import { QuoteFilter } from 'src/app/components/billing/quotes/class/quote-filte
 import { TicketsFilter } from 'src/app/components/tickets/tickets/class/tickets-filter';
 import { UserFilter } from 'src/app/components/users/class/user-filter';
 import { TicketsStateService } from '../tickets/tickets-state.service';
+import { UserFilters } from 'src/app/components/users/class/user-filters';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,7 @@ export class CustomerPortalStateService {
   isDefaultPage: boolean = false;
   ticketsFilter: TicketsFilter = new TicketsFilter();
   invoicesFilter: InvoicesFilter = new InvoicesFilter();
-  usersFilter: UserFilter = new UserFilter();
+  usersFilter: UserFilters = new UserFilters();
   quotesFilter: QuoteFilter = new QuoteFilter();
   paymentsFilter: PaymentsFilter = new PaymentsFilter();
   onTicketFilters: EventEmitter<any> = new EventEmitter();
@@ -58,7 +59,7 @@ export class CustomerPortalStateService {
   }
   public setUsersFilter(id) {
     this.usersFilter.setClientType(null);
-    this.usersFilter.setCompany(id);
+    this.usersFilter.setCompanies([id]);
     this.onUsersFilters.emit(this.usersFilter);
   }
   setInvoiceFilter(company) {

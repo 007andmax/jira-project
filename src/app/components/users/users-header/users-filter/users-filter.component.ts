@@ -11,6 +11,9 @@ import { DropDownComponent } from '../../../shared/drop-down/drop-down.component
 import { UserFilter } from '../../class/user-filter';
 import { UsersFilterSubscriptionsComponent } from './users-filter-subscriptions/users-filter-subscriptions.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { UserFilters } from '../../class/user-filters';
+import { TicketsFilterCompaniesDropDownComponent } from 'src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-companies-drop-down/tickets-filter-companies-drop-down.component';
+import { UserDefaultSubscription } from '../../class/user-default-subscription';
 
 @Component({
   selector: 'app-users-filter',
@@ -20,13 +23,12 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 })
 export class UsersFilterComponent implements OnInit {
   @ViewChild('titlesDp') titlesDp: DropDownComponent;
-  @ViewChild('companiesDp') companiesDp: DropDownComponent;
+  @ViewChild('companiesDp') companiesDp: TicketsFilterCompaniesDropDownComponent;
   @ViewChild('industriesDp') industriesDp: DropDownComponent;
   @ViewChild('subscriptionDp') subscriptionDp: UsersFilterSubscriptionsComponent;
   @ViewChild('tagsDp') tagsDp: CompanyTagsComponent;
   industries: Array<CrmCompanyIndustry> = [];
-  jobTitleList: Array<CrmCompanyJobTitle> = [];
-  public filter: UserFilter = new UserFilter();
+  public filter: UserFilters = new UserFilters();
   sub: Subscription = new Subscription();
   @Output() changeCountFilter = new EventEmitter<any>();
   constructor(private companiesState: CompaniesStateService,
@@ -43,13 +45,7 @@ export class UsersFilterComponent implements OnInit {
     this.sub.add(getOnCompanies);
     let onTicketFilters = this.customerPortalStateService.onUsersFilters.subscribe(data => (this.checkCompanyCustomerUser()));
     this.sub.add(onTicketFilters);
-    this.jobTitleList = this.crmStateService.getJobTitleList();
-    let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
-      this.jobTitleList = data;
-      if (this.titlesDp) this.titlesDp.reset(this.jobTitleList);
-      this.ref.markForCheck();
-    })
-    this.sub.add(onGetJobTitle);
+
     this.industries = this.crmStateService.getIndustryList();
     let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
       this.industries = data;
@@ -75,13 +71,15 @@ export class UsersFilterComponent implements OnInit {
     this.companiesDp.isDisabled = true;
     this.ref.markForCheck();
   }
-  public onChangeTags(data) {
-    this.filter.setTags(data);
+  applyFilters() {
     this.usersStateService.onInitFilter(this.filter);
     this.onChangeCounterFilter();
   }
-  public onChangeDefaultSubscription(data) {
-    this.filter.setDefaultSubscriptions(data);
+  onChangeDefaultSubscriptions(data) {
+    this.filter.changeDefaultSubscriptions(data);
+  }
+  public onChangeTags(data) {
+    this.filter.setTags(data);
     this.usersStateService.onInitFilter(this.filter);
     this.onChangeCounterFilter();
   }
@@ -92,10 +90,11 @@ export class UsersFilterComponent implements OnInit {
   }
   public onClearAll() {
 
-    if (!this.companiesDp.isDisabled) this.filter.setCompany(null);
-    this.filter.setClientIndustry(null);
-    this.filter.setTitle(null);
-    this.filter.setDefaultSubscriptions(null);
+    if (!this.companiesDp.isDisabled) this.filter.setCompanies([]);
+    this.filter.setIndustries([]);
+    this.filter.setJobTitles([]);
+    this.filter.changeDefaultSubscriptions(new UserDefaultSubscription(null));
+    this.filter.defaultSubscriptions.clearEnabledAll();
     this.filter.setCustomSubscriptions([]);
     this.filter.setTags([]);
     this.titlesDp.clearWithOutChanges();
@@ -107,48 +106,39 @@ export class UsersFilterComponent implements OnInit {
     this.onChangeCounterFilter();
 
   }
-  onSelectTitle(data) {
-    this.filter.setTitle(data);
-    this.usersStateService.onInitFilter(this.filter);
-    this.onChangeCounterFilter();
-  }
-  public onSelectCompany(item) {
-    if (!item) {
-      this.clearSelectedCompany();
-      return;
+  onSelectTitle(item, event) {
+    if (!event.target.checked) {
+      item.selected = false;
+    } else {
+      item.selected = true;
     }
-
-    this.filter.setCompany(item.id);
-    this.usersStateService.onInitFilter(this.filter);
-    this.onChangeCounterFilter();
+    this.filter.setJobTitles(this.crmStateService.getJobTitleList().filter(title => title.selected).map(item => item.id));
   }
-  clearSelectedCompany() {
-    this.filter.setCompany(null);
-    this.usersStateService.onInitFilter(this.filter);
-    this.onChangeCounterFilter();
+  public onSelectCompany(items) {
+    this.filter.setCompanies(items.map(item => item.id));
   }
   public onSelectClientIndustry(item) {
     if (!item) {
       this.clearClientIndustry();
       return;
     }
-    this.filter.setClientIndustry(item);
+    this.filter.setIndustries(item);
     this.usersStateService.onInitFilter(this.filter);
     this.onChangeCounterFilter();
 
   }
   clearClientIndustry() {
-    this.filter.setClientIndustry(null);
+    this.filter.setIndustries([]);
     this.usersStateService.onInitFilter(this.filter);
     this.onChangeCounterFilter();
   }
   public onChangeCounterFilter() {
     let count = 0;
-    if (this.filter.title) count++;
-    if (this.filter.company) count++;
-    if (this.filter.clientIndustry) count++;
-    if (this.filter.defaultSubscriptions || this.filter.customSubscriptions.length > 0) count++;
+    if (this.filter.jobTitles.length > 0) count++;
+    if (this.filter.companies.length > 0) count++;
+    if (this.filter.industries.length > 0) count++;
     if (this.filter.tags.length > 0) count++;
+    if (this.filter.customSubscriptions.length > 0) count++;
     this.changeCountFilter.emit(count);
     this.ref.detectChanges();
   }

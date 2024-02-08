@@ -28,6 +28,7 @@ import { UserCustomerCompaniesInfo } from './class/user-customer-companies-info'
 import { NavigationEnd, Router } from '@angular/router';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { UsersHeaderComponent } from './users-header/users-header.component';
+import { UserFilters } from './class/user-filters';
 
 @Component({
   selector: 'app-users',
@@ -42,7 +43,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   companies: Array<Company> = [];
   reqUsers: Array<User> = [];
   showPreloader: boolean = true;
-  filter: UserFilter = new UserFilter();
+  filter: UserFilters = new UserFilters();
   showArchivedUsers: boolean = false;
   selectAll: boolean = false;
   public infiniteScrollDisabled = false;
@@ -53,6 +54,8 @@ export class UsersComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   industries: Array<CrmCompanyIndustry> = [];
   listCustomSubscription: Array<MarketingSubscriptionType> = [];
+  toggleFilter: boolean = true;
+  showPendingPreloader: boolean = false;
   container = document.body.querySelector(".main-container");
   constructor(private usersStateService: UsersStateService,
     private userListService: UserListService,
@@ -72,13 +75,15 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
   ngOnInit() {
     if (this.customerPortalStateService.isCustomerPortal) {
-      this.filter.setCompany(this.customerPortalStateService.getUsersFilters().company);
+      this.filter.setCompanies(this.customerPortalStateService.getUsersFilters().companies);
     } else {
       this.filter = this.usersStateService.getFilter();
     }
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.usersStateService.setModeUserFilterSubscription(MODE_USERS_LIST);
     this.showArchivedUsers = JSON.parse(JSON.stringify(this.usersStateService.getShowArchivedCompanies()));
+    this.showPreloader = true;
+    this.onScroll();
     this.cd.detectChanges();
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
       document.body.querySelector(".main-container").scrollTo(0, 0);
@@ -115,12 +120,6 @@ export class UsersComponent implements OnInit, OnDestroy {
       this.companies = data;
     })
     this.userListService.addSubscription(getOnCompanies);
-    if (this.usersStateService.getAllUsers().length > 0) this.getUsersList(this.usersStateService.getAllUsers());
-    let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
-      this.getUsersList(data);
-    })
-    this.userListService.addSubscription(getOnUsers);
-
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === ARCHIVE_USER) {
@@ -145,7 +144,6 @@ export class UsersComponent implements OnInit, OnDestroy {
         if (reqIndex === -1) {
           this.reqUsers.unshift(new User(data.data));
           this.users.unshift(new User(data.data));
-          // this.onRelaodList();
         }
         const userIndex = this.users.findIndex((item) => item.id === data.data.id);
         if (userIndex > -1) this.users[userIndex].onUpdate(data.data);
@@ -204,7 +202,8 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.sub.add(onGetIndustry);
   }
   setFilters(data) {
-    this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions, data.tags);
+    this.filter.setData(data);
+    this.filter.page = 0;
     this.selectAll = false;
     this.reqUsers.forEach(item => item.selected = false);
     this.header.setReqUsers(this.reqUsers);
@@ -267,9 +266,9 @@ export class UsersComponent implements OnInit, OnDestroy {
         item.selected = true;
       })
       this.draftEmailStateService.resetSelectedUsers();
-      this.filter.getFilterList(this.reqUsers, this.companies).forEach(item => {
-        this.reqUsers.find(user => user.id === item.id).selected = true;
-      })
+      /* this.filter.getFilterList(this.reqUsers, this.companies).forEach(item => {
+         this.reqUsers.find(user => user.id === item.id).selected = true;
+       })*/
       this.reqUsers.forEach(user => {
         if (user.selected) this.draftEmailStateService.addSelectedUser(user);
       })
@@ -289,7 +288,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
   onSelectUser(user) {
     this.reqUsers.find(item => item.id === user.id).selected = user.selected;
-    this.selectAll = (this.filter.getFilterList(this.reqUsers, this.companies).find(item => !item.selected)) ? false : true;
+    /*this.selectAll = (this.filter.getFilterList(this.reqUsers, this.companies).find(item => !item.selected)) ? false : true;*/
     this.header.setReqUsers(this.reqUsers);
     this.cd.detectChanges();
   }
@@ -334,7 +333,7 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   }
   public onFilter(field) {
-    this.filter.onFilter(field, this.reqUsers, this.companies, this.industries)
+    this.filter.setSortBy(field);
     this.page_number = 0;
     this.userListService.setBlockList(false);
     this.users = [];
@@ -346,19 +345,16 @@ export class UsersComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
       return;
     }
-    this.page_number += 1;
-    let listFilter = this.filter.getFilterList(this.reqUsers, this.companies);
-    this.count = listFilter.length;
-    let start = (this.page_number - 1) * 30;
-    let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
-    let usersList = [];
-    for (let i = start; i < end; i++) {
-      usersList.push(listFilter[i]);
-    }
-    this.users = [...this.users, ...usersList.map(item => new User(JSON.parse(JSON.stringify(item))))];
-    if (this.selectAll) this.users.forEach(item => item.selected = true);
-    this.infiniteScrollDisabled = false;
-    if ((this.page_number * 30) > listFilter.length) this.userListService.setBlockList(true);
+    if (this.page_number > 0) this.showPendingPreloader = true;
+    this.usersService.getFilterUsers(this.filter.size, this.filter.page, this.filter.getDataForRequest()).subscribe((data: Array<User>) => {
+      this.users = [...this.users, ...data];
+      this.infiniteScrollDisabled = false;
+      if (data.length < this.filter.size) this.userListService.setBlockList(true);
+      this.filter.page += 1;
+      this.showPreloader = false;
+      this.showPendingPreloader = false;
+      this.cd.detectChanges();
+    })
     this.cd.detectChanges();
   }
   public setDefaultScoll() {

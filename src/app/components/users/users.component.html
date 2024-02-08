@@ -1,15 +1,15 @@
 <!-- for show filters add class "show" for app-left-panel -->
-<div class="qt-page-list users-page">
-    <app-users-header
-        #header
-        [type]="TYPE_LIST_ALL_USERS"
-        [count]="count"
-        [selectAll]="selectAll"
-        (onChangeFilterField)="onFilter($event)"
-        [users]="users"
-        (onSearch)="onSearch($event)"
-        (onSelectAllUser)="onSelectAllUser($event)"
-    ></app-users-header>
+<app-users-header
+    #header
+    [type]="TYPE_LIST_ALL_USERS"
+    [count]="count"
+    [selectAll]="selectAll"
+    (onChangeFilterField)="onFilter($event)"
+    [users]="users"
+    (onSearch)="onSearch($event)"
+    (onSelectAllUser)="onSelectAllUser($event)"
+></app-users-header>
+<div class="qt-page-list users-page qt-df">
     <div class="qt-page-list__body">
         <div class="qt-page-list__body-table-container">
             <table class="qt-page-list__body-tbody qt-table-modern users-table">
@@ -50,6 +50,30 @@
             >
                 We couldn't find any results
             </div>
+            <div
+                class="loading pengind-loading"
+                *ngIf="showPendingPreloader"
+            ></div>
+        </div>
+    </div>
+    <div
+        class="aside-filters"
+        [hidden]="!toggleFilter"
+    >
+        <div class="aside-filters-header qt-df qt-ai-c qt-jc-sb">
+            <div class="aside-filters-header__title">Filters</div>
+            <div
+                class="qt-button --square-md --gray pointer"
+                (click)="onToggleFilter(false)"
+            >
+                <div class="icon__close qt-bg-contain qt-sz-16 pointer"></div>
+            </div>
+        </div>
+        <div class="aside-filters-content">
+            <app-users-filter
+                class="qt-w100"
+                #filter
+            ></app-users-filter>
         </div>
     </div>
 </div>

@@ -24,6 +24,7 @@ import { UserFilter } from '../users/class/user-filter';
 import { UserListService } from '../users/services/user-list.service';
 import { UserCustomerCompaniesInfo } from '../users/class/user-customer-companies-info';
 import { UsersHeaderComponent } from '../users/users-header/users-header.component';
+import { UserFilters } from '../users/class/user-filters';
 
 @Component({
   selector: 'marketing',
@@ -38,7 +39,7 @@ export class MarketingComponent implements OnInit {
   companies: Array<Company> = [];
   reqUsers: Array<User> = [];
   showPreloader: boolean = true;
-  filter: UserFilter = new UserFilter();
+  filter: UserFilters = new UserFilters();
   selectAll: boolean = false;
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
@@ -68,7 +69,7 @@ export class MarketingComponent implements OnInit {
     this.filter = this.usersStateService.getFilter();
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
       document.body.querySelector(".main-container").scrollTo(0, 0);
-      this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions, data.tags);
+      this.filter.setData(data);
       this.selectAll = false;
       this.reqUsers.forEach(item => item.selected = false);
       this.header.setReqUsers(this.reqUsers);
@@ -211,9 +212,9 @@ export class MarketingComponent implements OnInit {
       this.selectAll = true;
       this.users.forEach(item => item.selected = true);
       this.draftEmailStateService.resetSelectedUsers();
-      this.filter.getFilterList(this.reqUsers, this.companies).forEach(item => {
-        this.reqUsers.find(user => user.id === item.id).selected = true;
-      })
+      /* this.filter.getFilterList(this.reqUsers, this.companies).forEach(item => {
+         this.reqUsers.find(user => user.id === item.id).selected = true;
+       })*/
       this.reqUsers.forEach(user => {
         if (user.selected) this.draftEmailStateService.addSelectedUser(user);
       })
@@ -233,7 +234,7 @@ export class MarketingComponent implements OnInit {
   }
   onSelectUser(user) {
     this.reqUsers.find(item => item.id === user.id).selected = user.selected;
-    this.selectAll = (this.filter.getFilterList(this.reqUsers, this.companies).find(item => !item.selected)) ? false : true;
+    // this.selectAll = (this.filter.getFilterList(this.reqUsers, this.companies).find(item => !item.selected)) ? false : true;
     this.header.setReqUsers(this.reqUsers);
     this.cd.detectChanges();
   }
@@ -266,7 +267,7 @@ export class MarketingComponent implements OnInit {
 
   }
   public onFilter(field) {
-    this.filter.onFilter(field, this.reqUsers, this.companies, this.industries)
+    this.filter.setSortBy(field);
     this.page_number = 0;
     this.userListService.setBlockList(false);
     this.users = [];
@@ -278,20 +279,20 @@ export class MarketingComponent implements OnInit {
       return;
     }
     this.page_number += 1;
-    let listFilter = this.filter.getFilterList(this.reqUsers, this.companies);
-    this.count = listFilter.length;
-    let start = (this.page_number - 1) * 30;
-    let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
-    let usersList = [];
-    for (let i = start; i < end; i++) {
-      usersList.push(listFilter[i]);
-    }
-    this.users = [...this.users, ...usersList.map(item => new User(JSON.parse(JSON.stringify(item))))];
-    if (this.selectAll) this.users.forEach(item => item.selected = true);
-    this.infiniteScrollDisabled = false;
-    this.header.setReqUsers(this.reqUsers);
-    if ((this.page_number * 30) > listFilter.length) this.userListService.setBlockList(true);
-    this.cd.detectChanges();
+    /* let listFilter = this.filter.getFilterList(this.reqUsers, this.companies);
+     this.count = listFilter.length;
+     let start = (this.page_number - 1) * 30;
+     let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
+     let usersList = [];
+     for (let i = start; i < end; i++) {
+       usersList.push(listFilter[i]);
+     }
+     this.users = [...this.users, ...usersList.map(item => new User(JSON.parse(JSON.stringify(item))))];
+     if (this.selectAll) this.users.forEach(item => item.selected = true);
+     this.infiniteScrollDisabled = false;
+     this.header.setReqUsers(this.reqUsers);
+     if ((this.page_number * 30) > listFilter.length) this.userListService.setBlockList(true);
+     this.cd.detectChanges();*/
   }
   public setDefaultScoll() {
     this.page_number = 0;

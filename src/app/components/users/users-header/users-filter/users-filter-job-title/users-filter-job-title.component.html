@@ -1,0 +1,43 @@
+<div class="qt-inputs-row --required">
+    <div class="qt-input-block">
+        <label class="qt-input-block__label">Status</label>
+        <ng-template
+            ngFor
+            let-title
+            let-i="index"
+            [ngForOf]="jobTitleList"
+            [ngForTrackBy]="trackById"
+        >
+            <div
+                class="qt-df content-filters-checkbox"
+                *ngIf="shortVersion ? i < 5 : true"
+            >
+                <label
+                    class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
+                    [attr.for]="'title-' + title.id"
+                >
+                    <input
+                        [attr.id]="'title-' + title.id"
+                        type="checkbox"
+                        [(ngModel)]="title.selected"
+                        (change)="selectTitle(title,$event)"
+                    >
+                    <span></span>
+                    <div
+                        class="qt-ml-8"
+                        [textContent]="title.name"
+                    ></div>
+                </label>
+                <!-- <span
+                    class="qt-ml-auto content-filters-checkbox__count"
+                    [textContent]="title.count"
+                ></span> -->
+            </div>
+        </ng-template>
+        <span
+            class="qt-fw-600 qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info pointer count-ticket-status"
+            [textContent]="(shortVersion ? '+ ' +(jobTitleList.length - 5) + ' more' : '- show less')"
+            (click)="shortVersion = !shortVersion"
+        ></span>
+    </div>
+</div>

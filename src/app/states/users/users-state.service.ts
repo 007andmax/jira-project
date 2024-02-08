@@ -10,6 +10,7 @@ import { MODE_USERS_LIST } from 'src/app/const/users';
 import { UserJobTitle } from 'src/app/components/users/class/user-job-title';
 import { UserRole } from 'src/app/components/users/class/user-role';
 import { CustomerPortalStateService } from '../customer-portal/customer-portal-state.service';
+import { UserFilters } from 'src/app/components/users/class/user-filters';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +35,7 @@ export class UsersStateService {
   usersForArchive: Array<User> = [];
   userForDeArchive: User = null;
   onChangeUsers: EventEmitter<UserChange> = new EventEmitter();
-  filter: UserFilter = new UserFilter();
+  filter: UserFilters = new UserFilters();
   showArchivedCompanies: boolean = false;
   isGetAllUsers: boolean = false;
   userRoleForRemove: UserRole;
@@ -186,7 +187,7 @@ export class UsersStateService {
     return this.userForDeArchive;
   }
   public clearFilter() {
-    this.filter = new UserFilter();
+    this.filter = new UserFilters();
     this.onFilter.emit(this.filter);
   }
   public onInitLeftPanelMarketingFilter(data) {

@@ -204,7 +204,7 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     this.cd.markForCheck();
   }
   getPermissionCustomerUser(permission) {
-    return this.currentUser.customerCompaniesInfo.find(item => item.companyId === this.customerPortalStateService.getUsersFilters().company).customerUserRole.getPermission(permission);
+    return this.currentUser.customerCompaniesInfo.find(item => item.companyId === this.customerPortalStateService.getUsersFilters().companies[0]).customerUserRole.getPermission(permission);
   }
   public trackById(index, item) {
     return item.id;
