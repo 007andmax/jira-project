@@ -61,15 +61,16 @@ export class UploadAreaComponent implements OnInit {
         this.uploadFilesSimulator(index + 1);
         return;
       }
-
+      this.elRef.nativeElement.querySelector('.qt-fileupload').classList.add('fileupload');
       this.uploadFile(this.files[index]).then((data: any) => {
         let res = JSON.parse(data.response);
         this.idfiles.push(res.id);
-        this.elRef.nativeElement.querySelector('.qt-fileupload').classList.add('fileupload');
+        this.elRef.nativeElement.querySelector('.qt-fileupload').classList.remove('fileupload');
         this.changeFiles.emit(this.idfiles);
         this.uploadFilesSimulator(index + 1);
         this.cd.detectChanges();
       }).catch(() => {
+        this.elRef.nativeElement.querySelector('.qt-fileupload').classList.remove('fileupload');
         this.files[index].showError = true;
         this.uploadFilesSimulator(index + 1);
       });
