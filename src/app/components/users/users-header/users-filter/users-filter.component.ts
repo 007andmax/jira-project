@@ -78,10 +78,9 @@ export class UsersFilterComponent implements OnInit {
   onChangeDefaultSubscriptions(data) {
     this.filter.changeDefaultSubscriptions(data);
   }
-  public onChangeTags(data) {
-    this.filter.setTags(data);
-    this.usersStateService.onInitFilter(this.filter);
-    this.onChangeCounterFilter();
+  public onChangeTags(items) {
+    console.log("data", items);
+    this.filter.setTags(items.map(item => item.id));
   }
   onChangeCustomSubscription(data) {
     this.filter.setCustomSubscriptions(data);
@@ -117,15 +116,8 @@ export class UsersFilterComponent implements OnInit {
   public onSelectCompany(items) {
     this.filter.setCompanies(items.map(item => item.id));
   }
-  public onSelectClientIndustry(item) {
-    if (!item) {
-      this.clearClientIndustry();
-      return;
-    }
-    this.filter.setIndustries(item);
-    this.usersStateService.onInitFilter(this.filter);
-    this.onChangeCounterFilter();
-
+  public onSelectIndustry(items) {
+    this.filter.setIndustries(items.map(item => item.id));
   }
   clearClientIndustry() {
     this.filter.setIndustries([]);

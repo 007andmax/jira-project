@@ -13,7 +13,7 @@ export class UserFilters {
     "sortBy": string;
     "defaultSubscriptions": UserDefaultSubscription = new UserDefaultSubscription(null);
     clientType: string;
-    search: string;
+    username: string;
     size: number = 30;
     page: number = 0;
     constructor() {
@@ -25,8 +25,8 @@ export class UserFilters {
     public getClientType() {
         return this.clientType;
     }
-    public setSearch(data) {
-        this.search = data;
+    public setUserName(data) {
+        this.username = data;
     }
     public setData(data) {
         this.jobTitles = data.jobTitles;
@@ -87,6 +87,8 @@ export class UserFilters {
             "customSubscriptions": this.customSubscriptions,
             "hasAccess": this.hasAccess,
             "sortBy": this.sortBy,
+            "clientType": this.clientType,
+            username: this.username
         }
     }
 }

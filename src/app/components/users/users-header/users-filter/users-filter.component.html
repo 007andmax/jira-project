@@ -30,6 +30,21 @@
             ></user-default-subscription>
         </div>
     </div>
+    <app-users-filter-industry
+        #industryDp
+        [title]="'Industry'"
+        [placeholder]="'Select industry'"
+        [placement]="'top-left'"
+        [field]="'name'"
+        [list]="industries"
+        (filterChange)="onSelectIndustry($event)"
+    >
+    </app-users-filter-industry>
+    <app-tickets-filter-tags
+        #tagsDp
+        [placement]="'bottom-left'"
+        (tagsChange)="onChangeTags($event)"
+    ></app-tickets-filter-tags>
     <!-- <app-tickets-filter-tags
         #tagsDp
         [placement]="'bottom-left'"
@@ -111,6 +126,11 @@
         </div>
     </div>
 </div>
+
+
+
+
+
 
 
 

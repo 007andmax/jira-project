@@ -16,11 +16,11 @@ import { TicketsFilterCreatedDropDownComponent } from './tickets-filter-created-
 import { DynamicTooltipModule } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.module';
 import { TicketsFilterUsersDropDownComponent } from './tickets-filter-users-drop-down/tickets-filter-users-drop-down.component';
 import { TicketsFilterCompaniesDropDownModule } from './tickets-filter-companies-drop-down/tickets-filter-companies-drop-down.module';
+import { TicketsFilterTagsModule } from './tickets-filter-tags/tickets-filter-tags.module';
 
 @NgModule({
     declarations: [
         TicketsFilterComponent,
-        TicketsFilterTagsComponent,
         TicketsFilterStatusComponent,
         TicketsFilterDropDownComponent,
         TicketsFilterSearchComponent,
@@ -39,7 +39,8 @@ import { TicketsFilterCompaniesDropDownModule } from './tickets-filter-companies
         DropDownModule,
         InfiniteScrollModule,
         DynamicTooltipModule,
-        TicketsFilterCompaniesDropDownModule
+        TicketsFilterCompaniesDropDownModule,
+        TicketsFilterTagsModule
     ],
     exports: [TicketsFilterComponent]
 

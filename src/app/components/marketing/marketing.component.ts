@@ -163,7 +163,7 @@ export class MarketingComponent implements OnInit {
   }
   onSearch(value) {
     document.body.querySelector(".main-container").scrollTo(0, 0);
-    this.filter.setSearch((value !== "") ? value : null);
+    this.filter.setUserName((value !== "") ? value : null);
     this.setDefaultScoll();
     this.onScroll();
   }
