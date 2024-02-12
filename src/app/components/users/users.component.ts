@@ -44,10 +44,8 @@ export class UsersComponent implements OnInit, OnDestroy {
   reqUsers: Array<User> = [];
   showPreloader: boolean = true;
   filter: UserFilters = new UserFilters();
-  showArchivedUsers: boolean = false;
   selectAll: boolean = false;
   public infiniteScrollDisabled = false;
-  public page_number: number = 0;
   count: number = 0;
   jobTitleList: Array<CrmCompanyJobTitle> = [];
   TYPE_LIST_ALL_USERS = TYPE_LIST_ALL_USERS;
@@ -81,31 +79,21 @@ export class UsersComponent implements OnInit, OnDestroy {
     }
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.usersStateService.setModeUserFilterSubscription(MODE_USERS_LIST);
-    this.showArchivedUsers = JSON.parse(JSON.stringify(this.usersStateService.getShowArchivedCompanies()));
+    this.filter.setIsArchive(JSON.parse(JSON.stringify(this.usersStateService.getShowArchivedCompanies())));
     this.showPreloader = true;
     this.onScroll();
     this.cd.detectChanges();
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
       document.body.querySelector(".main-container").scrollTo(0, 0);
-      if (this.showArchivedUsers != this.usersStateService.getShowArchivedCompanies()) {
-        this.showArchivedUsers = JSON.parse(JSON.stringify(this.usersStateService.getShowArchivedCompanies()));
+      if (this.filter.isArchive != this.usersStateService.getShowArchivedCompanies()) {
+        this.filter.setIsArchive(JSON.parse(JSON.stringify(this.usersStateService.getShowArchivedCompanies())));
         this.filter.setClientType(null);
         this.showPreloader = true;
         this.users = [];
-        this.cd.detectChanges();
-        if (this.showArchivedUsers) {
-          this.usersService.getArchiveUsers().subscribe(res => {
-            this.setFilters(data);
-            this.getUsersList(res);
-          })
-        } else {
-          this.setFilters(data);
-          this.getUsersList(this.usersStateService.getAllUsers());
-        }
-      } else {
-        this.setFilters(data);
-        this.onScroll();
       }
+      this.setFilters(data);
+      this.onScroll();
+      this.cd.detectChanges();
     });
     this.userListService.addSubscription(geLefttFilter);
     let onUsersFilters = this.customerPortalStateService.onUsersFilters.subscribe(data => {
@@ -147,7 +135,7 @@ export class UsersComponent implements OnInit, OnDestroy {
         }
         const userIndex = this.users.findIndex((item) => item.id === data.data.id);
         if (userIndex > -1) this.users[userIndex].onUpdate(data.data);
-        if (!this.showArchivedUsers && data.action === 'USER_ARCHIVED') {
+        if (!this.filter.isArchive && data.action === 'USER_ARCHIVED') {
           const userIndex = this.users.findIndex((item) => item.id === data.data.id);
           if (userIndex > -1) this.users.splice(userIndex, 1);
           if (reqIndex > -1) this.reqUsers[userIndex].selected = false;
@@ -160,7 +148,7 @@ export class UsersComponent implements OnInit, OnDestroy {
         data.data.forEach(user => {
           const reqIndex = this.reqUsers.findIndex((item) => item.id === user.id);
           if (reqIndex > -1) this.reqUsers[reqIndex].onUpdate(user);
-          if (this.showArchivedUsers) {
+          if (this.filter.isArchive) {
             const userIndex = this.users.findIndex((item) => item.id === user.id);
 
             if (userIndex > -1) this.users.splice(userIndex, 1);
@@ -294,7 +282,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
   private onDeArchiveUser(id) {
     let Dearchiveusers = this.usersService.onDeArchiveUsers(id).subscribe(data => {
-      if (this.showArchivedUsers) {
+      if (this.filter.isArchive) {
         let index = this.users.findIndex(item => item.id === id);
         if (index > -1) this.users.splice(index, 1);
       }
@@ -304,7 +292,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
   private onArchiveUser(id) {
     let archiveUser = this.usersService.onArchiveUsers(id).subscribe(data => {
-      if (!this.showArchivedUsers && this.filter.getClientType()) {
+      if (!this.filter.isArchive && this.filter.getClientType()) {
         let index = this.users.findIndex(item => item.id === id);
         if (index > -1) this.users.splice(index, 1);
       }
@@ -313,7 +301,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.userListService.addSubscription(archiveUser);
   }
   private getUsersList(data) {
-    this.reqUsers = data.filter(item => ((!this.showArchivedUsers) ? !item.deletedAt : item.deletedAt) && item.accountType !== "TECH");
+    this.reqUsers = data.filter(item => ((!this.filter.isArchive) ? !item.deletedAt : item.deletedAt) && item.accountType !== "TECH");
     this.reqUsers.sort((a, b) => ((a.firstName + a.lastName).toLowerCase() > (b.firstName + b.lastName).toLowerCase()) ?
       1 : (((b.firstName + b.lastName).toLowerCase() > (a.firstName + a.lastName).toLowerCase()) ? -1 : 0));
     if (this.customerPortalStateService.isCustomerPortal) {
@@ -334,7 +322,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
   public onFilter(field) {
     this.filter.setSortBy(field);
-    this.page_number = 0;
+    this.filter.page = 0;
     this.userListService.setBlockList(false);
     this.users = [];
     this.onScroll();
@@ -345,8 +333,8 @@ export class UsersComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
       return;
     }
-    if (this.page_number > 0) this.showPendingPreloader = true;
-    this.usersService.getFilterUsers(this.filter.size, this.filter.page, this.filter.getDataForRequest()).subscribe((data: Array<User>) => {
+    if (this.filter.page > 0) this.showPendingPreloader = true;
+    this.usersService.getFilterUsers(this.filter.size, this.filter.page, this.filter.getDataForRequest(), this.filter.isArchive).subscribe((data: Array<User>) => {
       this.users = [...this.users, ...data];
       this.infiniteScrollDisabled = false;
       if (data.length < this.filter.size) this.userListService.setBlockList(true);
@@ -358,7 +346,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
   }
   public setDefaultScoll() {
-    this.page_number = 0;
+    this.filter.page = 0;
     this.userListService.setBlockList(false);
     this.users = [];
     this.cd.detectChanges();

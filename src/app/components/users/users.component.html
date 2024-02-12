@@ -31,7 +31,7 @@
                             [selected]="idDetailUser === user.id"
                             (click)="setIdDetailUser(user.id)"
                             [type]="TYPE_LIST_ALL_USERS"
-                            [showArchivedUsers]="showArchivedUsers"
+                            [showArchivedUsers]="filter.isArchive"
                             (onSelectUser)="onSelectUser($event)"
                             [user]="user"
                             [listCustomSubscription]="listCustomSubscription"

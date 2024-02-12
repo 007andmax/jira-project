@@ -16,8 +16,12 @@ export class UserFilters {
     username: string;
     size: number = 30;
     page: number = 0;
+    isArchive: boolean = false;
     constructor() {
         this.defaultSubscriptions.clearEnabledAll();
+    }
+    public setIsArchive(data) {
+        this.isArchive = data;
     }
     public setSortBy(data) {
         this.sortBy = data;
@@ -39,6 +43,8 @@ export class UserFilters {
         this.customSubscriptions = data.customSubscriptions;
         this.hasAccess = data.hasAccess;
         this.sortBy = data.sortBy;
+        this.clientType = data.clientType;
+        this.username = data.username;
     }
     public setIndustries(data) {
         this.industries = data;

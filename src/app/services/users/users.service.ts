@@ -38,8 +38,8 @@ export class UsersService {
       map((data: any) => data.map((item) => new User(item))));
   }
 
-  public getFilterUsers(size, page, data) {
-    return this.http.post(this.apiUrl + `users/filter?size=${size}&page=${page}`, { isArchived: false, "accountType": "CLIENT", ...data }).pipe(
+  public getFilterUsers(size, page, data, isArchived) {
+    return this.http.post(this.apiUrl + `users/filter?size=${size}&page=${page}`, { isArchived: isArchived, "accountType": "CLIENT", ...data }).pipe(
       map((data: any) => data.map((item) => new User(item))));
   }
 

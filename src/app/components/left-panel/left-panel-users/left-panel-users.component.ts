@@ -4,6 +4,7 @@ import { UserFilter } from '../../users/class/user-filter';
 import { LeftPanelUsersService } from './services/left-panel-users.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
+import { UserFilters } from '../../users/class/user-filters';
 
 @Component({
   selector: 'app-left-panel-users',
@@ -14,7 +15,7 @@ import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service
 export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   open: boolean = false;
   showArchivedCompanies: boolean = false;
-  filter: UserFilter = new UserFilter();
+  filter: UserFilters = new UserFilters();
   @Input() activePage: string = "";
   @Output() onChangeState = new EventEmitter();
   @Output() onGoToLink = new EventEmitter();
@@ -37,7 +38,7 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
       if (this.leftPanelService.isUsersPage(data)) this.open = true;
     })
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
-      this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions, data.tags);
+      this.filter.setData(data);
     })
   }
   public close() {
