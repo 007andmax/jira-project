@@ -15,7 +15,7 @@
     >
         <mat-form-field ngbDropdownAnchor>
             <mat-chip-list
-                #chipList
+                #chipListUsers
                 aria-label="Fruit selection"
             >
                 <ng-template
@@ -42,13 +42,12 @@
                     </mat-chip>
                 </ng-template>
                 <input
-                    id="dropdownServices"
+                    id="dropdownUsers"
                     ngbDropdownToggle
-                    placeholder="Select Company and User to link"
-                    #userInput
+                    placeholder="Select user to link"
                     class="pointer"
                     [formControl]="linkedCtrl"
-                    [matChipInputFor]="chipList"
+                    [matChipInputFor]="chipListUsers"
                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                     [matChipInputAddOnBlur]="addOnBlur"
                     [disabled]="isDisabled"
@@ -59,7 +58,7 @@
         <div
             class="select-wrapper"
             ngbDropdownMenu
-            aria-labelledby="dropdownServices"
+            aria-labelledby="dropdownUsers"
         >
             <div
                 class="content"
@@ -103,7 +102,7 @@
     >
         <mat-form-field ngbDropdownAnchor>
             <mat-chip-list
-                #chipList
+                #chipListCompanies
                 aria-label="Fruit selection"
             >
                 <ng-template
@@ -130,13 +129,12 @@
                     </mat-chip>
                 </ng-template>
                 <input
-                    id="dropdownServices"
+                    id="dropdownCompanies"
                     ngbDropdownToggle
-                    placeholder="Select Company and User to link"
-                    #userInput
+                    placeholder="Select company to link"
                     class="pointer"
                     [formControl]="linkedCtrl"
-                    [matChipInputFor]="chipList"
+                    [matChipInputFor]="chipListCompanies"
                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                     [matChipInputAddOnBlur]="addOnBlur"
                     [disabled]="isDisabled"
@@ -147,7 +145,7 @@
         <div
             class="select-wrapper"
             ngbDropdownMenu
-            aria-labelledby="dropdownServices"
+            aria-labelledby="dropdownCompanies"
         >
             <div
                 class="content"
