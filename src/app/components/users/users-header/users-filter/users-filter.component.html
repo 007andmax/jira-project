@@ -23,10 +23,10 @@
     <div class="qt-inputs-row default-subscription">
         <div class="qt-input-block">
             <label class="qt-input-block__label">Subscription</label>
-            <user-default-subscription
+            <app-users-filter-default-subscription
                 [defaultSubscriptions]="filter.defaultSubscriptions"
                 (onChange)="onChangeDefaultSubscriptions($event)"
-            ></user-default-subscription>
+            ></app-users-filter-default-subscription>
         </div>
     </div>
     <app-users-filter-industry
@@ -42,7 +42,7 @@
     </app-users-filter-industry>
     <app-tickets-filter-tags
         #tagsDp
-        [placement]="'bottom-left'"
+        [placement]="'top-left'"
         (tagsChange)="onChangeTags($event)"
     ></app-tickets-filter-tags>
     <!-- <app-tickets-filter-tags
@@ -109,6 +109,9 @@
         </button>
     </div>
 </div>
+
+
+
 
 
 

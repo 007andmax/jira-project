@@ -84,10 +84,10 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
       document.body.querySelector(".main-container").scrollTo(0, 0);
+      this.showPreloader = true;
       if (this.filter.isArchive != this.usersStateService.getShowArchivedCompanies()) {
         this.filter.setIsArchive(JSON.parse(JSON.stringify(this.usersStateService.getShowArchivedCompanies())));
         this.filter.setClientType(null);
-        this.showPreloader = true;
         this.users = [];
       }
       this.setFilters(data);
@@ -97,6 +97,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.userListService.addSubscription(geLefttFilter);
     let onUsersFilters = this.customerPortalStateService.onUsersFilters.subscribe(data => {
       document.body.querySelector(".main-container").scrollTo(0, 0);
+      this.showPreloader = true;
       this.setFilters(this.customerPortalStateService.getUsersFilters());
       this.onScroll();
     });

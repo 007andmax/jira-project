@@ -34,42 +34,36 @@
                         </th>
                         <th
                             class="users-table__name pointer"
-                            (click)="onFilter('name')"
+                            (click)="onFilter('NAME')"
                         >
                             Name
                             <span class="qt-table-modern__sorting"></span>
                         </th>
-                        <th
-                            class="users-table__company pointer users-table__company-full"
-                            (click)="onFilter('company')"
-                        >
+                        <th class="users-table__company pointer users-table__company-full">
                             Company
                             <span class="qt-table-modern__sorting"></span>
                         </th>
                         <th
                             class="users-table__company pointer"
-                            (click)="onFilter('portalAccessStatus')"
+                            (click)="onFilter('PORTAL_STATUS')"
                         >
                             Portal Status
                             <span class="qt-table-modern__sorting"></span>
                         </th>
                         <th
                             class="users-table__company pointer"
-                            (click)="onFilter('industry')"
+                            (click)="onFilter('INDUSTRY')"
                         >
                             Industry
                             <span class="qt-table-modern__sorting"></span>
                         </th>
-                        <th
-                            class="users-table__contract-no pointer"
-                            (click)="onFilter('contact')"
-                        >
+                        <th class="users-table__contract-no pointer">
                             Contact No
                             <span class="qt-table-modern__sorting"></span>
                         </th>
                         <th
                             class="users-table__tickets pointer"
-                            (click)="onFilter('tickets')"
+                            (click)="onFilter('TICKET_NUMBER')"
                         >
                             Tickets
                             <span class="qt-table-modern__sorting"></span>
@@ -80,7 +74,10 @@
                 </thead>
             </table>
         </div>
-        <div class="qt-page-list__body-table-container">
+        <div
+            class="qt-page-list__body-table-container"
+            [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}"
+        >
             <table class="qt-page-list__body-tbody qt-table-modern users-table">
                 <tbody
                     infiniteScroll

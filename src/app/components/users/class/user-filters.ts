@@ -1,6 +1,12 @@
+import { FilterListTop } from "src/class/list/filter-list-top";
 import { UserDefaultSubscription } from "./user-default-subscription";
 
 export class UserFilters {
+    filterTop: Array<FilterListTop> = [new FilterListTop('NAME', 'ASC'),
+    new FilterListTop('INDUSTRY', ''),
+    new FilterListTop('TICKET_NUMBER', ''),
+    new FilterListTop('PORTAL_STATUS', '')];
+
     "jobTitles": Array<string> = [];
     "companies": Array<string> = [];
     "ticketSubscription": boolean;
@@ -10,7 +16,7 @@ export class UserFilters {
     "tags": Array<string> = [];
     "customSubscriptions": Array<string> = [];
     "hasAccess": boolean;
-    "sortBy": string;
+    "sortBy": string = "NAME_ASC";
     "defaultSubscriptions": UserDefaultSubscription = new UserDefaultSubscription(null);
     clientType: string;
     username: string;
@@ -23,8 +29,50 @@ export class UserFilters {
     public setIsArchive(data) {
         this.isArchive = data;
     }
-    public setSortBy(data) {
-        this.sortBy = data;
+    public setSortBy(field) {
+        let index = this.filterTop.findIndex(item => item.field === field);
+        if (index > -1) {
+            let sort = this.filterTop[index].filter;
+            if (field === 'NAME') {
+                this.clearFilter();
+                if (sort === '' || sort === 'DESC') {
+                    this.filterTop[index].filter = 'ASC';
+                } else {
+                    this.filterTop[index].filter = 'DESC';
+                }
+            }
+            if (field === 'INDUSTRY') {
+                this.clearFilter();
+                if (sort === '' || sort === 'DESC') {
+                    this.filterTop[index].filter = 'ASC';
+                } else {
+                    this.filterTop[index].filter = 'DESC';
+                }
+            }
+            if (field === 'TICKET_NUMBER') {
+                this.clearFilter();
+                if (sort === '' || sort === 'DESC') {
+                    this.filterTop[index].filter = 'ASC';
+                } else {
+                    this.filterTop[index].filter = 'DESC';
+                }
+            }
+            if (field === 'PORTAL_STATUS') {
+                this.clearFilter();
+                if (sort === '' || sort === 'DESC') {
+                    this.filterTop[index].filter = 'ASC';
+                } else {
+                    this.filterTop[index].filter = 'DESC';
+                }
+            }
+            this.sortBy = `${field}_${this.filterTop[index].filter}`;
+        }
+    }
+    /**
+  * @description Clear fields 'filter' from object 'filterTop'
+  */
+    public clearFilter() {
+        this.filterTop.forEach(item => item.filter = '');
     }
     public getClientType() {
         return this.clientType;

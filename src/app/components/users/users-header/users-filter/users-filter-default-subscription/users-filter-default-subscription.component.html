@@ -1,0 +1,126 @@
+<div
+    class="grey-dropdown filter-tags-body"
+    ngbDropdown
+    [container]="(isDisabled) ? null : 'body'"
+>
+    <i class="icn-sm report-caret-icon"></i>
+    <div
+        class="user-subscription"
+        id="dropdownServices"
+        ngbDropdownToggle
+        [ngClass]="{'placeholder-subscription': !showPlaceholder(),
+    'no-pointer':isDisabled,
+'--disabled':isDisabled}"
+    >
+        <div *ngIf="defaultSubscriptions.invoiceSubscription.enabled">
+            Invoice Updates
+            <i
+                *ngIf="!isDisabled"
+                class="icon__close--light-gray qt-sz-12 qt-ml-4 qt-bg-contain qt-dib "
+                (click)="selected('invoiceSubscription')"
+            ></i>
+        </div>
+        <div *ngIf="defaultSubscriptions.ticketSubscription.enabled">
+            Ticket Updates
+            <i
+                *ngIf="!isDisabled"
+                class="icon__close--light-gray qt-sz-12 qt-ml-4 qt-bg-contain qt-dib "
+                (click)="selected('ticketSubscription')"
+            ></i>
+        </div>
+        <div *ngIf="defaultSubscriptions.ticketManagerSubscription.enabled">
+            Ticket Manager
+            <i
+                *ngIf="!isDisabled"
+                class="icon__close--light-gray qt-sz-12 qt-ml-4 qt-bg-contain qt-dib "
+                (click)="selected('ticketManagerSubscription')"
+            ></i>
+        </div>
+    </div>
+    <!-- <div
+        class="dropdown-menu"
+        ngbDropdownMenu
+        aria-labelledby="dropdownServices"
+    >
+
+        <div class="qt-pos-rel">
+            <button
+                ngbDropdownItem
+                class="dropdown-item"
+                 (click)="selected('invoiceSubscription')"
+                [ngClass]="{'--selected':isSeleted('invoiceSubscription')}"
+            >
+                Invoice Updates
+            </button>
+            <div
+                *ngIf="isSeleted('invoiceSubscription')"
+                class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain filter-check"
+            ></div>
+        </div>
+        <div class="qt-pos-rel">
+            <button
+                ngbDropdownItem
+                class="dropdown-item"
+                (click)="selected('ticketSubscription')"
+               
+                [ngClass]="{'--selected':isSeleted('ticketSubscription')}"
+            >Ticket Updates
+            </button>
+            <div
+                *ngIf="isSeleted('ticketSubscription')"
+                class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain filter-check"
+            ></div>
+        </div>
+        <div class="qt-pos-rel">
+            <button
+                ngbDropdownItem
+                class="dropdown-item"
+                (click)="selected('ticketManagerSubscription')"
+               
+                [ngClass]="{'--selected':isSeleted('ticketManagerSubscription')}"
+            >Ticket Manager
+            </button>
+            <div
+                *ngIf="isSeleted('ticketManagerSubscription')"
+                class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain filter-check"
+            ></div>
+        </div>
+
+    </div> -->
+    <div
+        class="select-wrapper qt-dropdown-menu company-subscription-dropdown"
+        ngbDropdownMenu
+        aria-labelledby="dropdownServices"
+        *ngIf="!isDisabled"
+    >
+        <div
+            class="content"
+            (click)="$event.preventDefault()"
+        >
+            <div
+                (click)="selected('invoiceSubscription')"
+                class="company-tag-item"
+            >
+                <div class="text-content">
+                    <div class="name">Invoice Updates</div>
+                </div>
+            </div>
+            <div
+                (click)="selected('ticketSubscription')"
+                class="company-tag-item"
+            >
+                <div class="text-content">
+                    <div class="name">Ticket Updates</div>
+                </div>
+            </div>
+            <div
+                (click)="selected('ticketManagerSubscription')"
+                class="company-tag-item"
+            >
+                <div class="text-content">
+                    <div class="name">Ticket Manager</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

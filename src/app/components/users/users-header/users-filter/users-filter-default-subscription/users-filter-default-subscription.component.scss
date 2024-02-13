@@ -1,0 +1,112 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
+@import "./src/assets/styles/mixin/dropdown";
+
+.company-subscription-dropdown {
+    width: 280px;
+
+    li {
+        font-weight: $fw-medium;
+        color: $gray-900;
+    }
+}
+
+.no-pointer {
+    cursor: default;
+}
+
+.active {
+    background-color: rgba($green-600, 0.1);
+    color: $green-600;
+}
+
+.no-active {
+    background-color: rgba($red-600, 0.1);
+    color: $red-600;
+}
+
+.placeholder-subscription {
+    position: relative;
+
+    &:after {
+        content: "Select default subscription";
+        position: absolute;
+        top: 7px;
+        left: 15px;
+        color: $gray-400;
+        font-size: 13px;
+    }
+}
+
+.filter-tags-body {
+    .qt-checkbox {
+        .text-content {
+            padding: 3px 0 0px;
+            flex: 1;
+        }
+
+        .name,
+        .description {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: calc(298px - 23px);
+            width: 100%;
+        }
+
+        .name {
+            color: $gray-600;
+        }
+
+        .description {
+            margin-top: 6px;
+            color: $gray-500;
+            font-size: 12px;
+        }
+
+        span {
+            margin-right: 8px;
+        }
+    }
+
+    .select-wrapper {
+        width: 366px !important;
+        height: 260px;
+        overflow: hidden;
+        margin: 4px 0 0 !important;
+
+        .content {
+            height: 100%;
+
+            .company-tag-item {
+                min-height: 32px;
+                max-height: 60px;
+                height: auto;
+            }
+
+            .qt-checkbox {
+                width: 100%;
+                min-height: auto;
+                max-height: 50px;
+                height: auto;
+                align-items: flex-start;
+            }
+        }
+    }
+}
+
+.select-wrapper {
+    @include dropdown-menu;
+
+    .company-tag-item {
+        @include dropdown-checkbox-item;
+    }
+}
+
+.user-subscription {
+    background-color: #fff;
+
+    &.--disabled {
+        background-color: #F9FAFB !important;
+    }
+}

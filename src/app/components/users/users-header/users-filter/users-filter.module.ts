@@ -10,11 +10,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DynamicTooltipModule } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.module';
 import { MatChipsModule, MatFormFieldModule, MatIconModule } from '@angular/material';
 import { TicketsFilterTagsModule } from 'src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-tags/tickets-filter-tags.module';
+import { UsersFilterDefaultSubscriptionComponent } from './users-filter-default-subscription/users-filter-default-subscription.component';
 
 @NgModule({
     declarations: [UsersFilterComponent,
         UsersFilterJobTitleComponent,
-        UsersFilterIndustryComponent
+        UsersFilterIndustryComponent,
+        UsersFilterDefaultSubscriptionComponent
     ],
     imports: [
         CommonModule,
