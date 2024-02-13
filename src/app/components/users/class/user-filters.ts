@@ -18,7 +18,7 @@ export class UserFilters {
     page: number = 0;
     isArchive: boolean = false;
     constructor() {
-        this.defaultSubscriptions.clearEnabledAll();
+        this.resetDefaultSubscriptions();
     }
     public setIsArchive(data) {
         this.isArchive = data;
@@ -45,6 +45,13 @@ export class UserFilters {
         this.sortBy = data.sortBy;
         this.clientType = data.clientType;
         this.username = data.username;
+        this.isArchive = data.isArchive;
+    }
+    public resetDefaultSubscriptions() {
+        this.ticketSubscription = false;
+        this.ticketManagerSubscription = false;
+        this.invoiceSubscription = false;
+        this.defaultSubscriptions.clearEnabledAll();
     }
     public setIndustries(data) {
         this.industries = data;

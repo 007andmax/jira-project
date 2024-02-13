@@ -41,6 +41,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   @Input() set users(value: Array<User>) {
     this._users = value;
   }
+  @Output() onToggleFilter = new EventEmitter<any>();
   searchText: string = "";
   reqUsers: Array<User> = [];
   @Input() selectAll: boolean = false;
@@ -71,6 +72,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   ngOnInit() {
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
       this.userFilter.setData(data);
+      this.onChangeCountFilter();
     })
     this.sub.add(geLefttFilter);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
@@ -90,9 +92,13 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   onKeyUp(event) {
     if (event.keyCode === 13) this.onSearch.emit(event.target.value);
   }
-  clearSearch() {
+  clearSearch(withEvent = true) {
     this.searchText = "";
-    this.onSearch.emit("");
+    if (withEvent) this.onSearch.emit("");
+  }
+  public setToggleFilter(data) {
+    this.toggleFilter = data;
+    this.onToggleFilter.emit(data);
   }
   public setReqUsers(data) {
     this.reqUsers = data;
@@ -148,9 +154,6 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     this.onChangeFilterField.emit(field);
     this.ref.detectChanges();
   }
-  clearAll() {
-    this.filter.onClearAll();
-  }
   addUser() {
     if (this.type == TYPE_LIST_COMPANY_USERS) {
       const modalRef = this.modalService.open(AddUserToCompanyComponent, { windowClass: 'xs-modal user-modal add-user-to-company', backdrop: 'static', keyboard: false });
@@ -179,9 +182,17 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
         }
       );
   }
-  onChangeCountFilter(data) {
-    this.countFilter = data;
-    this.ref.markForCheck();
+  onChangeCountFilter() {
+    this.countFilter = 0;
+    if (this.userFilter.jobTitles.length > 0) this.countFilter++;
+    if (this.userFilter.companies.length > 0) this.countFilter++;
+    if (this.userFilter.ticketSubscription) this.countFilter++;
+    if (this.userFilter.invoiceSubscription) this.countFilter++;
+    if (this.userFilter.invoiceSubscription) this.countFilter++;
+    if (this.userFilter.industries.length > 0) this.countFilter++;
+    if (this.userFilter.tags.length > 0) this.countFilter++;
+    if (this.userFilter.customSubscriptions.length > 0) this.countFilter++;
+    if (this.userFilter.hasAccess) this.countFilter++;
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

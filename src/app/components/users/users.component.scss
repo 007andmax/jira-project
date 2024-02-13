@@ -132,3 +132,30 @@
         }
     }
 }
+.users-table__company {
+    width: 178px;
+    max-width: 178px;
+    min-width: 178px;
+}
+
+.users-table__company-full {
+    width: 434px;
+    max-width: 434px;
+    min-width: 434px;
+}
+.qt-page-list__header-thead-container {
+    position: sticky;
+    top: 57px;
+    z-index: 1;
+    background-color: $white;
+    padding-top: 32px;
+
+    .qt-page-list__header-thead {
+        border: 1px solid $gray-200;
+        border-radius: 8px 8px 0 0;
+        overflow: hidden;
+    }
+    .qt-page-list__header-thead {
+        background-color: $gray-50;
+    }
+}

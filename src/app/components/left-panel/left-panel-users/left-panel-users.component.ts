@@ -14,7 +14,6 @@ import { UserFilters } from '../../users/class/user-filters';
 })
 export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   open: boolean = false;
-  showArchivedCompanies: boolean = false;
   filter: UserFilters = new UserFilters();
   @Input() activePage: string = "";
   @Output() onChangeState = new EventEmitter();
@@ -61,7 +60,7 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     this.onShowAll();
   }
   setShowArchivedCompanies(data) {
-    this.showArchivedCompanies = data;
+    this.filter.setIsArchive(data);
     this.usersStateService.setShowArchivedCompanies(data);
   }
   onSetFilterClientType(data) {

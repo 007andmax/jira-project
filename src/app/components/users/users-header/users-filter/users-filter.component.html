@@ -7,11 +7,10 @@
         <div class="content-filters-header__title pointer">Filters</div>
     </div>
     <app-users-filter-job-title
-        #filterJobTitle
+        #jobTitleDp
         (onSelectTitle)="onSelectTitle($event.item, $event.event)"
     ></app-users-filter-job-title>
     <tickets-filter-companies-drop-down
-        class="qt-mb-16"
         #companiesDp
         [clientType]="'CLIENT'"
         [title]="'Company'"
@@ -21,7 +20,7 @@
         (filterChange)="onSelectCompany($event)"
     >
     </tickets-filter-companies-drop-down>
-    <div class="qt-inputs-row">
+    <div class="qt-inputs-row default-subscription">
         <div class="qt-input-block">
             <label class="qt-input-block__label">Subscription</label>
             <user-default-subscription
@@ -31,7 +30,8 @@
         </div>
     </div>
     <app-users-filter-industry
-        #industryDp
+        #industriesDp
+        class="qt-mb-10"
         [title]="'Industry'"
         [placeholder]="'Select industry'"
         [placement]="'top-left'"
@@ -96,11 +96,10 @@
 <div class="aside-filters-content__footer">
     <div class="qt-df">
         <button
-            *ngIf="!customerPortalStateService.isCustomerPortal"
             class="qt-button --gray qt-mr-12 qt-w100 qt-jc-c"
-            (click)="saveFilter()"
+            (click)="clearAll()"
         >
-            Save filter
+            Clear All
         </button>
         <button
             class="qt-button qt-w100 qt-jc-c"
@@ -109,23 +108,18 @@
             Apply
         </button>
     </div>
-    <div class="qt-aside-modern__footer">
-        <div class="qt-df qt-w100">
-            <button
-                class="qt-button --gray qt-mr-12 qt-w100 qt-jc-c"
-                (click)="onClearAll()"
-            >
-                Clear All
-            </button>
-            <button
-                class="qt-button qt-w100 qt-jc-c"
-                (click)="applyFilters()"
-            >
-                Apply Filters
-            </button>
-        </div>
-    </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
 
 
 

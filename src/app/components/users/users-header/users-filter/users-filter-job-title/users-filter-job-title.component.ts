@@ -26,6 +26,9 @@ export class UsersFilterJobTitleComponent implements OnInit {
     })
     this.sub.add(onGetJobTitle);
   }
+  public clearWithOutChanges() {
+    this.jobTitleList.filter(item => item.selected = false);
+  }
   selectTitle(item, event) {
     this.onSelectTitle.emit({ item, event })
   }

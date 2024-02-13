@@ -1,13 +1,5 @@
-.users-table__company {
-  width: 178px;
-  max-width: 178px;
-  min-width: 178px;
-}
-.users-table__company-full {
-  width: 434px;
-  max-width: 434px;
-  min-width: 434px;
-}
+@import "./src/assets/styles/variable";
+
 .search-clear {
   width: 12px;
   height: 12px;
@@ -15,4 +7,10 @@
   right: 12px;
   top: calc(50% - 6px);
   cursor: pointer;
+}
+.qt-page-list__header.--sticky {
+    margin: 0;
+    padding: 10px 32px;
+    background-color: $gray-50;
+    border-bottom: 1px solid $gray-200;
 }

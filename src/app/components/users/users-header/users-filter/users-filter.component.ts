@@ -14,6 +14,8 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { UserFilters } from '../../class/user-filters';
 import { TicketsFilterCompaniesDropDownComponent } from 'src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-companies-drop-down/tickets-filter-companies-drop-down.component';
 import { UserDefaultSubscription } from '../../class/user-default-subscription';
+import { UsersFilterJobTitleComponent } from './users-filter-job-title/users-filter-job-title.component';
+import { UsersFilterIndustryComponent } from './users-filter-industry/users-filter-industry.component';
 
 @Component({
   selector: 'app-users-filter',
@@ -22,15 +24,16 @@ import { UserDefaultSubscription } from '../../class/user-default-subscription';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersFilterComponent implements OnInit {
-  @ViewChild('titlesDp') titlesDp: DropDownComponent;
+  @ViewChild('jobTitleDp') jobTitleDp: UsersFilterJobTitleComponent;
   @ViewChild('companiesDp') companiesDp: TicketsFilterCompaniesDropDownComponent;
-  @ViewChild('industriesDp') industriesDp: DropDownComponent;
+  @ViewChild('industriesDp') industriesDp: UsersFilterIndustryComponent;
   @ViewChild('subscriptionDp') subscriptionDp: UsersFilterSubscriptionsComponent;
   @ViewChild('tagsDp') tagsDp: CompanyTagsComponent;
+  @Output() onClearAll = new EventEmitter();
+  @Output() onClose = new EventEmitter();
   industries: Array<CrmCompanyIndustry> = [];
   public filter: UserFilters = new UserFilters();
   sub: Subscription = new Subscription();
-  @Output() changeCountFilter = new EventEmitter<any>();
   constructor(private companiesState: CompaniesStateService,
     private crmStateService: CrmStateService,
     private customerPortalStateService: CustomerPortalStateService,
@@ -59,10 +62,12 @@ export class UsersFilterComponent implements OnInit {
         this.subscriptionDp.toggleSubscription(this.subscriptionDp.reqSubscriptions.find(item => item.id === data.id));
         this.filter.setCustomSubscriptions([data]);
       }
-      this.onChangeCounterFilter();
       this.ref.markForCheck();
     })
     this.sub.add(onLeftPanelMarketingFilter);
+    let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
+      this.filter.setIsArchive(data.isArchive);
+    });
   }
   private checkCompanyCustomerUser() {
     this.filter = this.customerPortalStateService.getUsersFilters();
@@ -73,7 +78,6 @@ export class UsersFilterComponent implements OnInit {
   }
   applyFilters() {
     this.usersStateService.onInitFilter(this.filter);
-    this.onChangeCounterFilter();
   }
   onChangeDefaultSubscriptions(data) {
     this.filter.changeDefaultSubscriptions(data);
@@ -85,25 +89,24 @@ export class UsersFilterComponent implements OnInit {
   onChangeCustomSubscription(data) {
     this.filter.setCustomSubscriptions(data);
     this.usersStateService.onInitFilter(this.filter);
-    this.onChangeCounterFilter();
   }
-  public onClearAll() {
-
-    if (!this.companiesDp.isDisabled) this.filter.setCompanies([]);
-    this.filter.setIndustries([]);
+  public clearAll() {
+    if (!this.companiesDp.isDisabled) {
+      this.filter.setCompanies([]);
+      this.companiesDp.clearWithOutChanges();
+    }
+    this.filter.setIsArchive(false);
     this.filter.setJobTitles([]);
-    this.filter.changeDefaultSubscriptions(new UserDefaultSubscription(null));
-    this.filter.defaultSubscriptions.clearEnabledAll();
-    this.filter.setCustomSubscriptions([]);
-    this.filter.setTags([]);
-    this.titlesDp.clearWithOutChanges();
+    this.jobTitleDp.clearWithOutChanges();
+    this.filter.resetDefaultSubscriptions();
+    this.filter.setIndustries([]);
     this.industriesDp.clearWithOutChanges();
-    this.subscriptionDp.clearWithOutChanges();
+    this.filter.setTags([]);
     this.tagsDp.clearWithOutChanges();
-    if (!this.companiesDp.isDisabled) this.companiesDp.clearWithOutChanges();
+    this.filter.setUserName(null);
+    this.filter.setClientType(null);
+    this.onClearAll.emit(null);
     this.usersStateService.onInitFilter(this.filter);
-    this.onChangeCounterFilter();
-
   }
   onSelectTitle(item, event) {
     if (!event.target.checked) {
@@ -122,16 +125,8 @@ export class UsersFilterComponent implements OnInit {
   clearClientIndustry() {
     this.filter.setIndustries([]);
     this.usersStateService.onInitFilter(this.filter);
-    this.onChangeCounterFilter();
   }
-  public onChangeCounterFilter() {
-    let count = 0;
-    if (this.filter.jobTitles.length > 0) count++;
-    if (this.filter.companies.length > 0) count++;
-    if (this.filter.industries.length > 0) count++;
-    if (this.filter.tags.length > 0) count++;
-    if (this.filter.customSubscriptions.length > 0) count++;
-    this.changeCountFilter.emit(count);
-    this.ref.detectChanges();
+  close() {
+    this.onClose.emit(null);
   }
 }

@@ -46,13 +46,12 @@ export class UsersComponent implements OnInit, OnDestroy {
   filter: UserFilters = new UserFilters();
   selectAll: boolean = false;
   public infiniteScrollDisabled = false;
-  count: number = 0;
   jobTitleList: Array<CrmCompanyJobTitle> = [];
   TYPE_LIST_ALL_USERS = TYPE_LIST_ALL_USERS;
   sub: Subscription = new Subscription();
   industries: Array<CrmCompanyIndustry> = [];
   listCustomSubscription: Array<MarketingSubscriptionType> = [];
-  toggleFilter: boolean = true;
+  toggleFilter: boolean = false;
   showPendingPreloader: boolean = false;
   container = document.body.querySelector(".main-container");
   constructor(private usersStateService: UsersStateService,
@@ -189,6 +188,9 @@ export class UsersComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onGetIndustry);
   }
+  onCloseFilters() {
+    this.header.setToggleFilter(false);
+  }
   setFilters(data) {
     this.filter.setData(data);
     this.filter.page = 0;
@@ -203,6 +205,9 @@ export class UsersComponent implements OnInit, OnDestroy {
     )
       .subscribe(res => {
       });
+  }
+  onClearAll() {
+    this.header.clearSearch(false);
   }
   onSearch(value) {
     document.body.querySelector(".main-container").scrollTo(0, 0);

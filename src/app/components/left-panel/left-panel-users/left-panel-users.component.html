@@ -16,7 +16,7 @@
         appRightClickBlank
     >
         <li
-            [ngClass]="{'--active': !showArchivedCompanies  && activePage === 'new-users'}"
+            [ngClass]="{'--active': !filter.isArchive  && activePage === 'new-users'}"
             (click)="goToAll()"
         >
             All Users
@@ -35,7 +35,7 @@
         Lead Users
     </li>
     <li
-        [ngClass]="{'--active': showArchivedCompanies && activePage === 'new-users'}"
+        [ngClass]="{'--active': filter.isArchive && activePage === 'new-users'}"
         (click)="goToState();onShowArchived()"
     >
         Archived Users

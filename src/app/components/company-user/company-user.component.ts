@@ -173,7 +173,7 @@ export class CompanyUserComponent implements OnInit {
     this.header.filter.companiesDp.isDisabled = true;
     this.header.filter.filter.setCompanies([id]);
     this.header.userFilter.setCompanies([id]);
-    this.header.filter.onChangeCounterFilter();
+    //this.header.filter.onChangeCounterFilter();
     this.filter.setLeftFilters(null, id, null, null, null, [], []);
     this.cd.detectChanges();
   }

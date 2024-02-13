@@ -11,6 +11,7 @@ import { UsersCheckUseComponent } from './users-check-use/users-check-use.compon
 import { AddUserToCompanyComponent } from './add-user-to-company/add-user-to-company.component';
 import { AddUserToCompanyItemComponent } from './add-user-to-company/add-user-to-company-item/add-user-to-company-item.component';
 import { UsersFilterModule } from './users-header/users-filter/users-filter.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [UsersComponent,
@@ -21,7 +22,8 @@ import { UsersFilterModule } from './users-header/users-filter/users-filter.modu
         InfiniteScrollModule,
         UsersTableModule,
         UsersRoutingModule,
-        UsersFilterModule
+        UsersFilterModule,
+        FormsModule
 
     ],
 
