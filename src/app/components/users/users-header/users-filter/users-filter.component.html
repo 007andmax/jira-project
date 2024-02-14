@@ -20,15 +20,10 @@
         (filterChange)="onSelectCompany($event)"
     >
     </tickets-filter-companies-drop-down>
-    <div class="qt-inputs-row default-subscription">
-        <div class="qt-input-block">
-            <label class="qt-input-block__label">Subscription</label>
-            <app-users-filter-default-subscription
-                [defaultSubscriptions]="filter.defaultSubscriptions"
-                (onChange)="onChangeDefaultSubscriptions($event)"
-            ></app-users-filter-default-subscription>
-        </div>
-    </div>
+    <app-users-filter-default-subscription
+        [defaultSubscriptions]="filter.defaultSubscriptions"
+        (onChange)="onChangeDefaultSubscriptions($event)"
+    ></app-users-filter-default-subscription>
     <app-users-filter-industry
         #industriesDp
         class="qt-mb-10"
@@ -109,6 +104,7 @@
         </button>
     </div>
 </div>
+
 
 
 
