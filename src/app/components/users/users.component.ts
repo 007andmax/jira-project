@@ -75,6 +75,7 @@ export class UsersComponent implements OnInit, OnDestroy {
       this.filter.setCompanies(this.customerPortalStateService.getUsersFilters().companies);
     } else {
       this.filter = this.usersStateService.getFilter();
+      console.log("this.filter", this.filter);
     }
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.usersStateService.setModeUserFilterSubscription(MODE_USERS_LIST);
@@ -369,6 +370,9 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.reqUsers.forEach(item => {
       item.selected = false;
     })
+    this.usersStateService.clearFilter();
+    this.filter = new UserFilters();
+    console.log("this.filter", this.filter);
     this.header.setReqUsers(this.reqUsers);
     this.draftEmailStateService.resetSelectedUsers();
     this.usersStateService.clearFilter();

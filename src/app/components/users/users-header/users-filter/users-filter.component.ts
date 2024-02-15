@@ -16,6 +16,7 @@ import { TicketsFilterCompaniesDropDownComponent } from 'src/app/components/tick
 import { UserDefaultSubscription } from '../../class/user-default-subscription';
 import { UsersFilterJobTitleComponent } from './users-filter-job-title/users-filter-job-title.component';
 import { UsersFilterIndustryComponent } from './users-filter-industry/users-filter-industry.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-users-filter',
@@ -38,6 +39,7 @@ export class UsersFilterComponent implements OnInit {
     private crmStateService: CrmStateService,
     private customerPortalStateService: CustomerPortalStateService,
     private usersStateService: UsersStateService,
+    private modalService: NgbModal,
     private ref: ChangeDetectorRef) { }
 
   ngOnInit() {

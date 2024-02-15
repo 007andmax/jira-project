@@ -63,6 +63,14 @@ export class UsersService {
     return this.http.get(this.apiUrl + 'users/current');
   }
 
+  public getFilters(page, marketing) {
+    return this.http.get(this.apiUrl + `filters/user/all?&size=30&page=${page}&marketing=${marketing}`);
+  }
+
+  public getusersCount() {
+    return this.http.get(this.apiUrl + 'users/count');
+  }
+
   public getMessagesUser(id, page) {
     return this.http.get(this.apiUrl + `email/${id}/user?size=20&page=${page}`);
   }

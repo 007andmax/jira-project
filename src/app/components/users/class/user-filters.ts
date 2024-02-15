@@ -94,6 +94,7 @@ export class UserFilters {
         this.clientType = data.clientType;
         this.username = data.username;
         this.isArchive = data.isArchive;
+        this.page = data.page;
     }
     public resetDefaultSubscriptions() {
         this.ticketSubscription = false;
@@ -137,19 +138,19 @@ export class UserFilters {
             this.hasAccess
     }
     public getDataForRequest() {
-        return {
-            "jobTitles": this.jobTitles,
-            "companies": this.companies,
-            "ticketSubscription": this.ticketSubscription,
-            "ticketManagerSubscription": this.ticketManagerSubscription,
-            "invoiceSubscription": this.invoiceSubscription,
-            "industries": this.industries,
-            "tags": this.tags,
-            "customSubscriptions": this.customSubscriptions,
-            "hasAccess": this.hasAccess,
-            "sortBy": this.sortBy,
-            "clientType": this.clientType,
-            username: this.username
-        }
+        let data: any = {};
+        if (this.jobTitles.length > 0) data.jobTitles = this.jobTitles;
+        if (this.companies.length > 0) data.companies = this.companies;
+        if (this.ticketSubscription) data.ticketSubscription = this.ticketSubscription;
+        if (this.ticketManagerSubscription) data.ticketManagerSubscription = this.ticketManagerSubscription;
+        if (this.invoiceSubscription) data.invoiceSubscription = this.invoiceSubscription;
+        if (this.industries.length > 0) data.industries = this.industries;
+        if (this.tags.length > 0) data.tags = this.tags;
+        if (this.customSubscriptions.length > 0) data.customSubscriptions = this.customSubscriptions;
+        if (this.hasAccess) data.hasAccess = this.hasAccess;
+        if (this.sortBy) data.sortBy = this.sortBy;
+        if (this.clientType) data.clientType = this.clientType;
+        if (this.username) data.username = this.username;
+        return data
     }
 }

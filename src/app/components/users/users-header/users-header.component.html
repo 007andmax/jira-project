@@ -3,7 +3,7 @@
         <div class="qt-page-list__header-title-line--left">
             <h6
                 class="qt-page-list__header-title"
-                [textContent]="'All Users (' + count + ')'"
+                [textContent]="'All Users'"
             ></h6>
         </div>
         <div class="qt-page-list__header-title-line--rigth">
@@ -14,7 +14,6 @@
                         type="text"
                         placeholder="Search user"
                         [(ngModel)]="searchText"
-                        (blur)="onBlurSearch($event)"
                         (keyup)="onKeyUp($event)"
                     >
                     <span

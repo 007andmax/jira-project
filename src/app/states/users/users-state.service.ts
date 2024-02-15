@@ -11,6 +11,8 @@ import { UserJobTitle } from 'src/app/components/users/class/user-job-title';
 import { UserRole } from 'src/app/components/users/class/user-role';
 import { CustomerPortalStateService } from '../customer-portal/customer-portal-state.service';
 import { UserFilters } from 'src/app/components/users/class/user-filters';
+import { TicketGlobalFilter } from 'src/app/components/tickets/tickets/class/ticket-global-filter';
+import { UserGlobalFilter } from 'src/app/components/users/class/user-global-filters';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +22,7 @@ export class UsersStateService {
   allUsers: Array<User> = [];
   currentUser: CurrentUser;
   userForEdit: User = null;
+  activePage: string = "";
   onGetUsers: EventEmitter<any> = new EventEmitter();
   onGetCurrentUser: EventEmitter<any> = new EventEmitter();
   onFilter: EventEmitter<any> = new EventEmitter();
@@ -31,6 +34,9 @@ export class UsersStateService {
   openDetailAside: EventEmitter<any> = new EventEmitter();
   closeDetailAside: EventEmitter<any> = new EventEmitter();
   onChangeUserPermissions: EventEmitter<any> = new EventEmitter();
+  onInitGlobalFilter: EventEmitter<any> = new EventEmitter();
+  onToggleFilter: EventEmitter<any> = new EventEmitter();
+  onGetGlobalFilters: EventEmitter<any> = new EventEmitter();
   userForArchive: User = null;
   usersForArchive: Array<User> = [];
   userForDeArchive: User = null;
@@ -39,6 +45,8 @@ export class UsersStateService {
   showArchivedCompanies: boolean = false;
   isGetAllUsers: boolean = false;
   userRoleForRemove: UserRole;
+  globalFilters: Array<UserGlobalFilter> = [];
+  globalFilterForRemove: UserGlobalFilter = null;
   constructor(private userService: UsersService,
     private appService: AppService,
     private customerPortalStateService: CustomerPortalStateService,
@@ -88,10 +96,20 @@ export class UsersStateService {
     if (!createdUser.avatar) return `${(createdUser.firstName) ? createdUser.firstName[0].toUpperCase() : ''}${(createdUser.lastName) ? createdUser.lastName[0].toUpperCase() : ''}`;
     return '';
   }
+  public onChangeGlobalFilter(data) {
+    this.onInitGlobalFilter.emit(data);
+  }
   getFirstNameForAvatar(createdUser) {
     if (!createdUser) return '';
     if (!createdUser.avatar) return `${(createdUser.firstName) ? createdUser.firstName[0].toUpperCase() : ''}`;
     return '';
+  }
+  public setGlobalFilterForRemove(data) {
+    this.globalFilterForRemove = data;
+  }
+  public setGlobalFilters(data) {
+    this.globalFilters = data;
+    this.onGetGlobalFilters.emit(this.globalFilters);
   }
   public initSelectAllusers(data) {
     this.onSelectAll.emit(data);
@@ -112,6 +130,9 @@ export class UsersStateService {
   }
   public setModeUserFilterSubscription(data) {
     this.modeUserFilterSubscription = data;
+  }
+  public changeToggleFilter(data) {
+    this.onToggleFilter.emit(data);
   }
   public getModeUserFilterSubscription() {
     return this.modeUserFilterSubscription;
