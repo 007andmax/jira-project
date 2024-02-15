@@ -200,7 +200,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     if (data) {
       this.contractsUserDevice.blockRate = 0;
       this.contractsUserDevice.includedHours = "1";
-      this.contractsUserDevice.rateExceeding = "";
+      this.contractsUserDevice.rateExceeding = "0.00";
       this.contractsUserDevice.setTaxIds(this.defaultSelectedTax.map(item => item.id));
       this.taxesDP.setEditItems(this.defaultSelectedTax);
     } else {

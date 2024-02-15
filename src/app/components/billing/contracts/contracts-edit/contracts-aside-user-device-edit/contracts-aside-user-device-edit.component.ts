@@ -31,6 +31,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
   validate: ContractsUserDeviceValidate = new ContractsUserDeviceValidate();
   @Input() contractsUserDevice: ServiceAgreement = new ServiceAgreement();
   @Output() onClose = new EventEmitter<any>();
+  @Output() onInitRequestForEdit = new EventEmitter<any>();
   formatDate: string = FORMAT_DATE_2;
   intervals: Array<string> = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
   selectedInterval: string = 'MONTHLY';
@@ -75,10 +76,11 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
   }
   public onEdit() {
     if (this.contractsUserDevice.blockTimeServices.length === 0 || !this.contractsUserDevice.checkDuplicatedBlockTimeServices() || !this.contractsUserDevice.checkDuplicatedServiceContractServices()
-      || !this.contractsUserDevice.checkDuplicatedServices()) {
+      || !this.contractsUserDevice.checkDuplicatedServices() || !this.validate.isValidate(this.contractsUserDevice)) {
       this.cd.detectChanges();
       return;
     };
+    this.onInitRequestForEdit.emit(null);
     this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
       moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, this.contractsUserDevice.id, this.contractsUserDevice.getAllServicesName()).subscribe(data => {
         if (Object.keys(data).length === 0) {
@@ -167,7 +169,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
     if (data) {
       this.contractsUserDevice.blockRate = String(0);
       this.contractsUserDevice.includedHours = 0;
-      this.contractsUserDevice.rateExceeding = "";
+      this.contractsUserDevice.rateExceeding = "0.00";
       this.contractsUserDevice.setTaxIds(this.defaultSelectedTax.map(item => item.id));
       this.taxesDP.setEditItems(this.defaultSelectedTax);
     } else {
