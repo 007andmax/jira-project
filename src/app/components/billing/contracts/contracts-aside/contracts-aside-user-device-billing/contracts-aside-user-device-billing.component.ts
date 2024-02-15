@@ -199,7 +199,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     this.toggleMaximumAmountHours = data;
     if (data) {
       this.contractsUserDevice.blockRate = 0;
-      this.contractsUserDevice.includedHours = "";
+      this.contractsUserDevice.includedHours = "1";
       this.contractsUserDevice.rateExceeding = "";
       this.contractsUserDevice.setTaxIds(this.defaultSelectedTax.map(item => item.id));
       this.taxesDP.setEditItems(this.defaultSelectedTax);

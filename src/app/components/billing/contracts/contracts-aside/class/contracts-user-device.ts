@@ -31,6 +31,7 @@ export class ContractsUserDevice {
     reviewDate: string;
     taxIds: Array<string>;
     type: string = "SERVICE_CONTRACT";
+    isCopy: boolean = false;
     manualCreateBillableItem: boolean = false;
     enableInvoiceAutoCreate: boolean = false;
     constructor() {
@@ -62,6 +63,7 @@ export class ContractsUserDevice {
         if (data.enableInvoiceAutoCreate != undefined) this.enableInvoiceAutoCreate = data.enableInvoiceAutoCreate;
         this.reviewDate = data.reviewDate;
         this.calculateEndDate();
+        this.isCopy = true;
     }
     public setManualCreateBillableItem(data) {
         this.manualCreateBillableItem = data;
