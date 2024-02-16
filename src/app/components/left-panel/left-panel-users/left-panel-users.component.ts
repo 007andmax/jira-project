@@ -13,6 +13,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DELETE_GLOBAL_USERS_FILTER } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { UserFilterSaveComponent } from '../../users/user-filter-save/user-filter-save.component';
 
 @Component({
   selector: 'app-left-panel-users',
@@ -138,7 +139,7 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   }
   saveFilter() {
     const conrainer = (this.usersStateService.activePage == "new-users") ? "app-users" : "company-user";
-    const modalRef = this.modalService.open(TicketsFilterSaveComponent, { windowClass: 'xs-modal user-modal', container: conrainer, backdrop: 'static', keyboard: false });
+    const modalRef = this.modalService.open(UserFilterSaveComponent, { windowClass: 'xs-modal user-modal', container: conrainer, backdrop: 'static', keyboard: false });
     modalRef.componentInstance.globalFilter = new UserGlobalFilter(JSON.parse(JSON.stringify(this.selectedGlobalFilter)));
     this.cd.detectChanges();
   }

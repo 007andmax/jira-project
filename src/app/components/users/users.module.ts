@@ -12,9 +12,10 @@ import { AddUserToCompanyComponent } from './add-user-to-company/add-user-to-com
 import { AddUserToCompanyItemComponent } from './add-user-to-company/add-user-to-company-item/add-user-to-company-item.component';
 import { UsersFilterModule } from './users-header/users-filter/users-filter.module';
 import { FormsModule } from '@angular/forms';
+import { UserFilterSaveComponent } from './user-filter-save/user-filter-save.component';
 
 @NgModule({
-    declarations: [UsersComponent,
+    declarations: [UsersComponent, UserFilterSaveComponent,
     ],
     imports: [
         CommonModule,

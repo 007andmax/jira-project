@@ -20,4 +20,23 @@ export class UserGlobalFilter {
             }
         }
     }
+
+    public getDataForRequest(add) {
+        let data: any = {
+            "name": this.name,
+            "global": this.global,
+
+            "jobTitles": this.jobTitles,
+            "companies": this.companies,
+            "ticketSubscription": this.ticketSubscription,
+            "ticketManagerSubscription": this.ticketManagerSubscription,
+            "invoiceSubscription": this.invoiceSubscription,
+            "industries": this.industries,
+            "tags": this.tags,
+            "customSubscriptions": this.customSubscriptions,
+            "hasAccess": this.hasAccess
+        };
+        if (add) data.forMarketing = this.forMarketing;
+        return data;
+    }
 }

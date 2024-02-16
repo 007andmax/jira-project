@@ -32,6 +32,14 @@ export class UsersService {
   /**
    * Get all users
    */
+  public addGlobalFilter(data) {
+    return this.http.post(this.apiUrl + 'filters/user', data);
+  }
+
+  public editGlobalFilter(id, data) {
+    return this.http.put(this.apiUrl + `filters/user/${id}`, data);
+  }
+
   public getAllusers() {
 
     return this.http.post(this.apiUrl + 'users/filter', {}).pipe(
