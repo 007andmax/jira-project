@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { ContractsAsideHourlyBillingComponent } from './contracts-aside-hourly-billing/contracts-aside-hourly-billing.component';
-import { DefaultServicesService } from 'src/app/services/default-services/default-services.service';
+import { NonContractServicesService } from 'src/app/services/non-contract-services/non-contract-services.service';
 import { ContractsAsideBlockTimeBillingComponent } from './contracts-aside-block-time-billing/contracts-aside-block-time-billing.component';
 import { ContractsAsideUserDeviceBillingComponent } from './contracts-aside-user-device-billing/contracts-aside-user-device-billing.component';
 import { ContractsAsideProductServiceContractsComponent } from './contracts-aside-product-service-contracts/contracts-aside-product-service-contracts.component';
@@ -19,7 +19,7 @@ export class ContractsAsideComponent implements OnInit {
   type: string = null;
   step: number = 1;
   constructor(private contractsStateService: ContractsStateService,
-    private defaultServicesService: DefaultServicesService
+    private nonContractServicesService: NonContractServicesService
   ) { }
 
   ngOnInit() {
@@ -30,7 +30,7 @@ export class ContractsAsideComponent implements OnInit {
     this.contractsStateService.getOnChangeType().subscribe(data => {
       this.type = `${data.type}${(data.billType) ? "_" + data.billType : ""}`;
     })
-    this.defaultServicesService.getDefaultServices().subscribe(data => {
+    this.nonContractServicesService.getNonContractServices().subscribe(data => {
       this.contractsStateService.setDefaultService(data);
     })
   }

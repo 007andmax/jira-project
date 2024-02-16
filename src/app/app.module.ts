@@ -63,8 +63,8 @@ import { InventoryEditAsideModule } from './components/inventory/inventory-edit-
 import { InvoicesAsideModule } from './components/billing/invoices/invoices-aside/invoices-aside.module';
 import { MapModalModule } from './components/shared/map-modal/map-modal.module';
 import { InvoicesAsidePreviewModule } from './components/billing/invoices/invoices-aside-preview/invoices-aside-preview.module';
-import { DefaultServicesAddModule } from './components/billing/default-services/default-services-add/default-services-add.module';
-import { DefaultServicesEditModule } from './components/billing/default-services/default-services-edit/default-services-edit.module';
+import { NonContractServicesAddModule } from './components/billing/non-contract-services/non-contract-services-add/non-contract-services-add.module';
+import { NonContractServicesEditModule } from './components/billing/non-contract-services/non-contract-services-edit/non-contract-services-edit.module';
 import { HeaderModule } from './components/header/header.module';
 import { BreadcrumbsModule } from './components/shared/breadcrumbs/breadcrumbs.module';
 import { PermissionAccountingSettingsService } from './components/setting/accounting/permission-accounting-settings.service';
@@ -192,8 +192,8 @@ declare var $: any;
     InvoicesAsideModule,
     MapModalModule,
     InvoicesAsidePreviewModule,
-    DefaultServicesAddModule,
-    DefaultServicesEditModule,
+    NonContractServicesAddModule,
+    NonContractServicesEditModule,
     HeaderModule,
     BreadcrumbsModule,
     UsersAsideDetailModule,

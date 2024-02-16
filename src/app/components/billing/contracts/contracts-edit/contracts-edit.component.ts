@@ -3,7 +3,7 @@ import { ServiceAgreement } from '../class/service-agreement';
 import { ContractsAsideHourlyEditComponent } from './contracts-aside-hourly-edit/contracts-aside-hourly-edit.component';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { ContractsAsideBlockTimeEditComponent } from './contracts-aside-block-time-edit/contracts-aside-block-time-edit.component';
-import { DefaultServicesService } from 'src/app/services/default-services/default-services.service';
+import { NonContractServicesService } from 'src/app/services/non-contract-services/non-contract-services.service';
 import { ContractsAsideUserDeviceEditComponent } from './contracts-aside-user-device-edit/contracts-aside-user-device-edit.component';
 import { ContractsAsideProductServiceEditComponent } from './contracts-aside-product-service-edit/contracts-aside-product-service-edit.component';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
@@ -22,10 +22,10 @@ export class ContractsEditComponent implements OnInit {
   @Input() serviceAgreement: ServiceAgreement;
   constructor(private contractsStateService: ContractsStateService,
     public cd: ChangeDetectorRef,
-    private defaultServicesService: DefaultServicesService,) { }
+    private nonContractServicesService: NonContractServicesService,) { }
 
   ngOnInit() {
-    this.defaultServicesService.getDefaultServices().subscribe(data => {
+    this.nonContractServicesService.getNonContractServices().subscribe(data => {
       this.contractsStateService.setDefaultService(data);
     })
   }
