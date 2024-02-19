@@ -55,7 +55,7 @@ export class ServiceAgreement {
             this.serviceContractServicesToTrack = data.serviceContractServicesToTrack.map(item => new ServiceAgreementBlockTimeServices(item));
             this.serviceContractServices = data.serviceContractServices.map(item => new ServiceAgreementBlockTimeServices(item))
             this.maxRolloverHours = (data.maxRolloverHours) ? String(data.maxRolloverHours) : "";
-            this.rateExceeding = (data.rateExceeding) ? String(data.rateExceeding) : "";
+            this.rateExceeding = (data.rateExceeding || data.rateExceeding == 0) ? String(data.rateExceeding) : "";
             this.blockRate = (typeof data.blockRate === "number") ? String(data.blockRate) : "";
             this.blockRate_str = parseFloat(this.blockRate).toFixed(2);
             this.rateExceeding_str = parseFloat(this.rateExceeding).toFixed(2);

@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
-import { DefaultServicesService } from 'src/app/services/default-services/default-services.service';
+import { NonContractServicesService } from 'src/app/services/non-contract-services/non-contract-services.service';
 import { GlobalSearchService } from 'src/app/services/global-search/global-search.service';
 import { ProductService } from 'src/app/services/product/product.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
-import { DefaultServicesStateService } from 'src/app/states/default-services/default-services-state.service';
+import { NonContractServicesStateService } from 'src/app/states/non-contract-services/non-contract-services-state.service';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -35,8 +35,8 @@ export class GlobalSearchComponent implements OnInit {
   constructor(private globalSearchService: GlobalSearchService,
     private ticketsService: TicketsService,
     private invoiceStateService: InvoiceStateService,
-    private defaultServicesStateService: DefaultServicesStateService,
-    private defaultServicesService: DefaultServicesService,
+    private nonContractServicesStateService: NonContractServicesStateService,
+    private nonContractServicesService: NonContractServicesService,
     public usersStateService: UsersStateService,
     private productService: ProductService,
     private router: Router,
@@ -93,8 +93,8 @@ export class GlobalSearchComponent implements OnInit {
       this.usersStateService.onOpenEditAsige();
     }
     if (item.type === 'SERVICES') {
-      this.defaultServicesService.getDefaultService(item.id).subscribe(res => {
-        this.defaultServicesStateService.toggleAsideForEdit(res);
+      this.nonContractServicesService.getNonContractService(item.id).subscribe(res => {
+        this.nonContractServicesStateService.toggleAsideForEdit(res);
       })
     }
     if (item.type === 'PRODUCTS') {

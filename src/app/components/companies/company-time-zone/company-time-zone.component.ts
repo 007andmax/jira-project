@@ -21,6 +21,8 @@ export class CompanyTimeZoneComponent implements OnInit, OnDestroy {
   ngOnInit() {
     let getTimeZones = this.timeZoneService.getTimeZones().subscribe((data: any) => {
       this.list = data.map(item => new TimeZone(item));
+      console.log("this.list", this.list);
+      console.log("this.selectedItem", this.selectedItem);
       if (this.selectedItem) {
         let find = this.list.find(item => item.second === this.selectedItem.second);
         this.selectedItem = find;

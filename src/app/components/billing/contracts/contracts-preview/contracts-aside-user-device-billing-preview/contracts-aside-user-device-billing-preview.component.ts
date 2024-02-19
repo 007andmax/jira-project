@@ -29,6 +29,8 @@ export class ContractsAsideUserDeviceBillingPreviewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log("contractsUserDevice", this.contractsUserDevice.includedHours)
+    console.log("contractsUserDevice", this.contractsUserDevice.rateExceeding)
   }
   ngDoCheck() {
     this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.contractsUserDevice.companyId);

@@ -3,7 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
-import { DefaultServicesService } from 'src/app/services/default-services/default-services.service';
+import { NonContractServicesService } from 'src/app/services/non-contract-services/non-contract-services.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
@@ -31,6 +31,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
   validate: ContractsUserDeviceValidate = new ContractsUserDeviceValidate();
   @Input() contractsUserDevice: ServiceAgreement = new ServiceAgreement();
   @Output() onClose = new EventEmitter<any>();
+  @Output() onInitRequestForEdit = new EventEmitter<any>();
   formatDate: string = FORMAT_DATE_2;
   intervals: Array<string> = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
   selectedInterval: string = 'MONTHLY';
@@ -42,7 +43,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
     private taxesStateService: TaxesStateService,
-    private defaultServicesService: DefaultServicesService,
+    private nonContractServicesService: NonContractServicesService,
     private contractsService: ContractsService,
     private modalService: NgbModal,
     private сontractsStateService: ContractsStateService,
@@ -75,11 +76,12 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
   }
   public onEdit() {
     if (this.contractsUserDevice.blockTimeServices.length === 0 || !this.contractsUserDevice.checkDuplicatedBlockTimeServices() || !this.contractsUserDevice.checkDuplicatedServiceContractServices()
-      || !this.contractsUserDevice.checkDuplicatedServices()) {
+      || !this.contractsUserDevice.checkDuplicatedServices() || !this.validate.isValidate(this.contractsUserDevice)) {
       this.cd.detectChanges();
       return;
     };
-    this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
+    this.onInitRequestForEdit.emit(null);
+    this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
       moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, this.contractsUserDevice.id, this.contractsUserDevice.getAllServicesName()).subscribe(data => {
         if (Object.keys(data).length === 0) {
           this.contractsService.updateContract(this.contractsUserDevice.getDataForUpdateServiceContract(this.toggleMaximumAmountHours)).subscribe(res => {
@@ -114,7 +116,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
 
   onCheckDuplicatedServices() {
     if (this.contractsUserDevice.services.length === 0 || !this.contractsUserDevice.checkDuplicatedServices()) return;
-    this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
+    this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
       moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, this.contractsUserDevice.id, this.contractsUserDevice.getServicesName()).subscribe(data => {
         if (Object.keys(data).length > 0) {
           let names = Object.keys(data);
@@ -132,7 +134,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
   }
   onCheckDuplicatedBlockTimeServices() {
     if (this.contractsUserDevice.blockTimeServices.length === 0 || !this.contractsUserDevice.checkDuplicatedBlockTimeServices()) return;
-    this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
+    this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
       moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, this.contractsUserDevice.id, this.contractsUserDevice.getBlockTimeServicesName()).subscribe(data => {
         if (Object.keys(data).length > 0) {
           let names = Object.keys(data);
@@ -147,7 +149,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
   }
   onCheckDuplicatedServiceContractServices() {
     if (this.contractsUserDevice.serviceContractServices.length === 0 || !this.contractsUserDevice.checkDuplicatedServiceContractServices()) return;
-    this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
+    this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
       moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, this.contractsUserDevice.id, this.contractsUserDevice.getServiceContractServicesName()).subscribe(data => {
         if (Object.keys(data).length > 0) {
           let names = Object.keys(data);
@@ -167,7 +169,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
     if (data) {
       this.contractsUserDevice.blockRate = String(0);
       this.contractsUserDevice.includedHours = 0;
-      this.contractsUserDevice.rateExceeding = "";
+      this.contractsUserDevice.rateExceeding = "0.00";
       this.contractsUserDevice.setTaxIds(this.defaultSelectedTax.map(item => item.id));
       this.taxesDP.setEditItems(this.defaultSelectedTax);
     } else {
