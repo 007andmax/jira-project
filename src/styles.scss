@@ -696,10 +696,10 @@ documents-edit-info {
 .archive-modal,
 .image-confirm-modal {
   background-color: $white;
-  padding: 24px;
+  padding: 32px;
   position: relative;
-  border-radius: 5px;
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  //box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2); // TODO check this style
   &.confirm-user-modal {
     h3 {
       font-weight: 400;
@@ -741,11 +741,14 @@ documents-edit-info {
     .btn-new {
       height: 40px;
       border-radius: 4px;
+      width: 100%;
       @include body-m__sb;
+    }
+    button + button {
+      margin-left: 16px;
     }
     .btn-primary {
       border: none;
-      margin-right: 16px;
       background-color: $red-600;
 
       &:hover {
