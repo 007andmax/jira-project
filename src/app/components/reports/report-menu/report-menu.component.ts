@@ -483,6 +483,8 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.techService.setList(data.lines);
       this.techService.setTotalQuantity(data.totalQuantity);
       this.setDatareport(this.techService)
+      this.reportsStateService.onChangeExportCSV(new ExportCSV('reports/sales/byServices', this.techService.getForExportRequest(), 'Sales_report_by_tech'));
+
     });
   }
   getReportDetailedCommissions() {
