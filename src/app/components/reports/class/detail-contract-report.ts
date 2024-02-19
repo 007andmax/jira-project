@@ -142,7 +142,6 @@ export class DetailContractreport {
 * @returns {Object} This is the result
 */
     public getForExportRequest() {
-        console.log("this.selectedAgreement", this.selectedAgreement);
         return { "startDate": moment(this.selectedAgreement.startDate).format('YYYY-MM-DD'), "endDate": moment(this.selectedAgreement.endDate).format('YYYY-MM-DD') };
     }
 }

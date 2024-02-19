@@ -43,7 +43,6 @@ export class ContractsUserDeviceValidate {
             if (contractsBlockTime.includedHours === "" || contractsBlockTime.includedHours === "0") this.includedHours = false;
             if (contractsBlockTime.rateExceeding !== "" && Number(contractsBlockTime.rateExceeding) === 0) this.rateExceeding = false;
         }
-        console.log("contractsBlockTime.rateExceeding", contractsBlockTime.rateExceeding);
         return this.company && this.description && this.includedHours && this.rateExceeding;
     }
 }
