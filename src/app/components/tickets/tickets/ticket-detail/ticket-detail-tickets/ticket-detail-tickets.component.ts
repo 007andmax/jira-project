@@ -6,6 +6,7 @@ import { TicketProfile } from '../../class/ticket-profile';
 import { TicketsFilter } from '../../class/tickets-filter';
 import { TicketStateService } from '../../ticket-edit-aside/services/ticket-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 
 @Component({
   selector: 'ticket-detail-tickets',
@@ -21,6 +22,7 @@ export class TicketDetailTicketsComponent implements OnInit {
   constructor(private ticketsService: TicketsService,
     private ticketStateService: TicketStateService,
     private companiesStateService: CompaniesStateService,
+    private ticketsStateService: TicketsStateService,
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -30,6 +32,11 @@ export class TicketDetailTicketsComponent implements OnInit {
     this.ticketsFilter.setCompanies([this.ticketProfile.company]);
     this.ticketsService.getTickets(this.ticketsFilter.getListTupe(), this.ticketsFilter.getDataForRequest()).subscribe((data: Array<Ticket>) => {
       this.tickets = data;
+      this.cd.detectChanges();
+    })
+    this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
+      let index = this.tickets.findIndex(item => item.id == data.id);
+      if (index > -1) this.tickets[index] = new Ticket(data);
       this.cd.detectChanges();
     })
   }

@@ -23,6 +23,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   ticketTemplates: any;
   agentTemplates: any;
   invoiceTemplates: any;
+  userTemplates: any;
   currentOpenTemplate = "";
   keywords: any[];
   templeteInfo: any;
@@ -51,6 +52,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     this.ticketTemplates = this.emailService.getTicketTemplates();
     this.agentTemplates = this.emailService.getAgentTemplates();
     this.invoiceTemplates = this.emailService.getInvoiceTemplates();
+    this.userTemplates = this.emailService.getUserTemplates();
   }
 
   ngOnInit() {
@@ -83,9 +85,13 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
             break;
           }
         }
-
+        for (const key in this.userTemplates) {
+          if (data.data[key]) {
+            this.emailPages.activeAndNotDefault[key] = data.data[key];
+            break;
+          }
+        }
       }
-
     })
   }
 
@@ -109,6 +115,10 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     ) {
       return new UploadAdapter(loader);
     };
+  }
+
+  public trackByIndex(index, item) {
+    return index;
   }
 
   /**
@@ -136,14 +146,14 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
    * @param templete
    * @param index
    */
-  getTemplate(templete, index) {
+  getTemplate(templete, key) {
     if (!templete) {
       return;
     }
-    this.templeteInfo = { ...templete.value, key: templete.key };
+    this.templeteInfo = { ...templete, key: key };
     this.edit = true;
     this.emailService
-      .getTemplate(templete.key)
+      .getTemplate(key)
       .pipe(
         map((res: any) => {
           if (res) {
@@ -173,7 +183,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
               body: this.templatesData.body
             });
           }
-          this.openEmailTemplate = templete.key;
+          this.openEmailTemplate = key;
         })
       )
       .subscribe();

@@ -22,14 +22,14 @@
         [clientType]="'CLIENT'"
         [title]="'Company'"
         [placeholder]="'Select company'"
-        [placement]="'top-left'"
+        [placement]="'bottom-left'"
         [field]="'name'"
         (filterChange)="onSelectCompany($event)"
     >
     </tickets-filter-companies-drop-down>
     <app-tickets-filter-tags
         #tagsDp
-        [placement]="'top-left'"
+        [placement]="'bottom-left'"
         (tagsChange)="onChangeTags($event)"
     ></app-tickets-filter-tags>
     <tickets-filter-created-drop-down
