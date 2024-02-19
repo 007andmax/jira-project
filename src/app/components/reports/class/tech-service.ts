@@ -42,6 +42,12 @@ export class TechService {
     public setTotalQuantity(data) {
         this.totalQuantity = data;
     }
+    public getForExportRequest() {
+        return {
+            startDate: this.startDate,
+            endDate: this.endDate,
+        };;
+    }
     public getForRequest() {
         let data: any = {
             startDate: this.startDate,
