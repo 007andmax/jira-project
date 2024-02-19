@@ -1,7 +1,7 @@
 export class UserGlobalFilter {
     "id": string;
-    "name": string;
-    "global": boolean;
+    "name": string = "";
+    "global": boolean = false;
     "forMarketing": boolean;
     "jobTitles": Array<string> = [];
     "companies": Array<string> = [];
@@ -20,7 +20,23 @@ export class UserGlobalFilter {
             }
         }
     }
-
+    public setIndustries(data) {
+        this.industries = data;
+    }
+    public setCompanies(data) {
+        this.companies = data;
+    }
+    public setJobTitles(data) {
+        this.jobTitles = data;
+    }
+    public setTags(data) {
+        this.tags = data;
+    }
+    public changeDefaultSubscriptions(data) {
+        this.invoiceSubscription = data.invoiceSubscription.enabled;
+        this.ticketSubscription = data.ticketSubscription.enabled;
+        this.ticketManagerSubscription = data.ticketManagerSubscription.enabled;
+    }
     public getDataForRequest(add) {
         let data: any = {
             "name": this.name,

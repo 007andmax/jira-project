@@ -17,6 +17,13 @@ import { UserDefaultSubscription } from '../../class/user-default-subscription';
 import { UsersFilterJobTitleComponent } from './users-filter-job-title/users-filter-job-title.component';
 import { UsersFilterIndustryComponent } from './users-filter-industry/users-filter-industry.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UserFilterSaveComponent } from '../../user-filter-save/user-filter-save.component';
+import { UserGlobalFilter } from '../../class/user-global-filters';
+import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { Company } from 'src/app/interfaces/company/company';
+import { TagsStateService } from 'src/app/states/tags/tags-state.service';
+import { CompanyTag } from 'src/app/components/companies/company-tags/class/company-tag';
+import { UserDefaultSubscriptionItem } from '../../class/user-default-subscription-item';
 
 @Component({
   selector: 'app-users-filter',
@@ -32,6 +39,7 @@ export class UsersFilterComponent implements OnInit {
   @ViewChild('tagsDp') tagsDp: CompanyTagsComponent;
   @Output() onClearAll = new EventEmitter();
   @Output() onClose = new EventEmitter();
+  globalFilter: UserGlobalFilter = new UserGlobalFilter();
   industries: Array<CrmCompanyIndustry> = [];
   public filter: UserFilters = new UserFilters();
   sub: Subscription = new Subscription();
@@ -40,6 +48,8 @@ export class UsersFilterComponent implements OnInit {
     private customerPortalStateService: CustomerPortalStateService,
     private usersStateService: UsersStateService,
     private modalService: NgbModal,
+    private leftPanelStateService: LeftPanelStateService,
+    public tagsStateService: TagsStateService,
     private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -70,6 +80,53 @@ export class UsersFilterComponent implements OnInit {
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
       this.filter.setIsArchive(data.isArchive);
     });
+    let onInitGlobalFilter = this.usersStateService.onInitGlobalFilter.subscribe((data: UserGlobalFilter) => {
+      this.globalFilter = new UserGlobalFilter(JSON.parse(JSON.stringify(data)));
+      let selectedCompanies: Array<Company> = this.companiesState.getCompanies().filter(item => data.companies.some(companyId => companyId == item.id));
+      if (selectedCompanies.length > 0) {
+        this.companiesDp.selectedItems = selectedCompanies;
+        this.onSelectCompany(selectedCompanies);
+      } else if (!this.filter.isDisbledCompany) {
+        this.companiesDp.clearWithOutChanges();
+        this.onSelectCompany([]);
+      }
+
+      let industries: Array<CrmCompanyIndustry> = this.industries.filter(item => data.industries.some(userId => userId == item.id));
+      if (industries.length > 0) {
+        this.industriesDp.selectedTag = industries;
+        this.onSelectIndustry(industries);
+      } else {
+        this.industriesDp.clearWithOutChanges();
+        this.onSelectIndustry([]);
+      }
+      let jobTitle = this.crmStateService.getJobTitleList().filter(item => data.industries.some(statusId => statusId == item.id));
+      this.jobTitleDp.clearWithOutChanges();
+      if (jobTitle.length > 0) {
+        jobTitle.forEach(item => item.selected = true);
+        this.jobTitleDp.setSelectedItemsWithoutChanges(jobTitle);
+        this.globalFilter.setJobTitles(jobTitle.map(item => item.id));
+      } else {
+        this.filter.setJobTitles([]);
+        this.globalFilter.setJobTitles([]);
+      }
+      let tags = this.tagsStateService.getTags().filter(item => data.tags.some(tagId => tagId == item.id)).map(item => new CompanyTag(item));
+      if (tags.length > 0) {
+        this.tagsDp.selectedTag = tags;
+        this.onChangeTags(tags);
+      } else {
+        this.onChangeTags([]);
+        this.tagsDp.clearWithOutChanges();
+      }
+      let defaultSubscriptions = new UserDefaultSubscription({
+        invoiceSubscription: new UserDefaultSubscriptionItem({ enabled: data.invoiceSubscription, activated: true }),
+        ticketSubscription: new UserDefaultSubscriptionItem({ enabled: data.ticketSubscription, activated: true }),
+        ticketManagerSubscription: new UserDefaultSubscriptionItem({ enabled: data.ticketManagerSubscription, activated: true })
+      });
+      this.filter.changeDefaultSubscriptions(defaultSubscriptions);
+      this.globalFilter.changeDefaultSubscriptions(defaultSubscriptions);
+      this.usersStateService.onInitFilter(this.filter);
+    })
+    this.sub.add(onInitGlobalFilter);
   }
   private checkCompanyCustomerUser() {
     this.filter = this.customerPortalStateService.getUsersFilters();
@@ -83,10 +140,12 @@ export class UsersFilterComponent implements OnInit {
   }
   onChangeDefaultSubscriptions(data) {
     this.filter.changeDefaultSubscriptions(data);
+    this.globalFilter.changeDefaultSubscriptions(data);
   }
   public onChangeTags(items) {
     console.log("data", items);
     this.filter.setTags(items.map(item => item.id));
+    this.globalFilter.setTags(items.map(item => item.id));
   }
   onChangeCustomSubscription(data) {
     this.filter.setCustomSubscriptions(data);
@@ -117,16 +176,25 @@ export class UsersFilterComponent implements OnInit {
       item.selected = true;
     }
     this.filter.setJobTitles(this.crmStateService.getJobTitleList().filter(title => title.selected).map(item => item.id));
+    this.globalFilter.setJobTitles(this.crmStateService.getJobTitleList().filter(title => title.selected).map(item => item.id));
   }
   public onSelectCompany(items) {
     this.filter.setCompanies(items.map(item => item.id));
+    this.globalFilter.setCompanies(items.map(item => item.id));
   }
   public onSelectIndustry(items) {
     this.filter.setIndustries(items.map(item => item.id));
+    this.globalFilter.setIndustries(items.map(item => item.id));
   }
   clearClientIndustry() {
     this.filter.setIndustries([]);
     this.usersStateService.onInitFilter(this.filter);
+  }
+  saveFilter() {
+    const conrainer = (this.leftPanelStateService.activePage == "new-users") ? "app-users" : "company-user";
+    const modalRef = this.modalService.open(UserFilterSaveComponent, { windowClass: 'xs-modal user-modal', container: conrainer, backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.globalFilter = new UserGlobalFilter(JSON.parse(JSON.stringify(this.globalFilter)));
+    this.ref.detectChanges();
   }
   close() {
     this.onClose.emit(null);

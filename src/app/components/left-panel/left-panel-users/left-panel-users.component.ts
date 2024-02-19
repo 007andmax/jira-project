@@ -64,6 +64,10 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       if (!this.isGetGlobalFilters && !this.customerPortalStateService.isCustomerPortal) this.getGLobalFilters();
     })
+    let onInitGlobalFilter = this.usersStateService.onInitGlobalFilter.subscribe((data) => {
+      this.selectedGlobalFilter = data;
+    });
+    if (this.leftPanelService.isUsersPage(this.leftPanelStateService.activePage) && !this.isGetGlobalFilters && !this.customerPortalStateService.isCustomerPortal && this.usersStateService.getCurrentUser()) this.getGLobalFilters();
     this.getUsersCount();
   }
   getUsersCount() {
@@ -137,12 +141,7 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     this.setShowArchivedCompanies(true);
     this.usersStateService.onInitFilter(this.filter);
   }
-  saveFilter() {
-    const conrainer = (this.usersStateService.activePage == "new-users") ? "app-users" : "company-user";
-    const modalRef = this.modalService.open(UserFilterSaveComponent, { windowClass: 'xs-modal user-modal', container: conrainer, backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.globalFilter = new UserGlobalFilter(JSON.parse(JSON.stringify(this.selectedGlobalFilter)));
-    this.cd.detectChanges();
-  }
+
   public trackByIndex(index, item) {
     return index;
   }

@@ -26,6 +26,9 @@ export class UsersFilterJobTitleComponent implements OnInit {
     })
     this.sub.add(onGetJobTitle);
   }
+  public setSelectedItemsWithoutChanges(data) {
+    this.jobTitleList.forEach(title => title.selected = data.some(item => item.id == title.id));
+  }
   public clearWithOutChanges() {
     this.jobTitleList.filter(item => item.selected = false);
   }

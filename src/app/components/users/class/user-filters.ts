@@ -23,6 +23,7 @@ export class UserFilters {
     size: number = 30;
     page: number = 0;
     isArchive: boolean = false;
+    isDisbledCompany: boolean = false;
     constructor() {
         this.resetDefaultSubscriptions();
     }

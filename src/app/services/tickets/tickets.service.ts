@@ -28,7 +28,7 @@ export class TicketsService {
     return this.http.get(this.apiUrl + `v2/tickets/previewInfo?userId=${userId}`);
   }
   public deleteGlobalFilter(id) {
-    return this.http.delete(this.apiUrl + `ticket/filters/${id}`).pipe(
+    return this.http.delete(this.apiUrl + `filters/ticket/${id}`).pipe(
       tap(data => {
         this.toastrService.success("The filter has been successfully deleted");
         this.appStateService.changeDetectorRef();
@@ -36,7 +36,7 @@ export class TicketsService {
       }));
   }
   public editGlobalFilter(id, data) {
-    return this.http.put(this.apiUrl + `ticket/filters/${id}`, data).pipe(
+    return this.http.put(this.apiUrl + `filters/ticket/${id}`, data).pipe(
       tap(data => {
         this.toastrService.success("The filter has been successfully saved");
         this.appStateService.changeDetectorRef();
@@ -44,7 +44,7 @@ export class TicketsService {
       }));
   }
   public addGlobalFilter(data) {
-    return this.http.post(this.apiUrl + `ticket/filters`, data).pipe(
+    return this.http.post(this.apiUrl + `filters/ticket`, data).pipe(
       tap(data => {
         this.toastrService.success("The filter has been successfully saved");
         this.appStateService.changeDetectorRef();
@@ -52,7 +52,7 @@ export class TicketsService {
       }));
   }
   public getFilters(page) {
-    return this.http.get(this.apiUrl + `ticket/filters/all?page=${page}&size=10`);
+    return this.http.get(this.apiUrl + `filters/ticket/all?page=${page}&size=10`);
   }
   public getDashboardByTech(startDate, endDate) {
     return this.http.get(this.apiUrl + `dashboard/ticket/counters?startDate=${startDate}&endDate=${endDate}`);

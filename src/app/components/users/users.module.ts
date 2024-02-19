@@ -15,7 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { UserFilterSaveComponent } from './user-filter-save/user-filter-save.component';
 
 @NgModule({
-    declarations: [UsersComponent, UserFilterSaveComponent,
+    declarations: [UsersComponent,
     ],
     imports: [
         CommonModule,
