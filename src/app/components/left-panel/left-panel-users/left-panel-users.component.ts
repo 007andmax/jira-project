@@ -68,7 +68,17 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
       this.selectedGlobalFilter = data;
     });
     if (this.leftPanelService.isUsersPage(this.leftPanelStateService.activePage) && !this.isGetGlobalFilters && !this.customerPortalStateService.isCustomerPortal && this.usersStateService.getCurrentUser()) this.getGLobalFilters();
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === DELETE_GLOBAL_USERS_FILTER) this.onDeleteGlobalFilter(this.usersStateService.getGlobalFilterForRemove());
+      }
+    })
     this.getUsersCount();
+  }
+  onDeleteGlobalFilter(filter) {
+    this.usersService.deleteGlobalFilter(filter.id).subscribe(data => {
+
+    })
   }
   getUsersCount() {
     this.usersService.getusersCount().subscribe(data => {
@@ -88,6 +98,7 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   }
   setGlobalFilter(filter) {
     this.selectedGlobalFilter = filter;
+    console.log("this.selectedGlobalFilter", this.selectedGlobalFilter);
     this.usersStateService.onChangeGlobalFilter(filter);
     this.usersStateService.changeToggleFilter(true);
   }

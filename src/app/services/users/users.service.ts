@@ -64,6 +64,15 @@ export class UsersService {
 
   }
 
+  public deleteGlobalFilter(id) {
+    return this.http.delete(this.apiUrl + `filters/user/${id}`).pipe(
+      tap(data => {
+        this.toastrService.success("The filter has been successfully deleted");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+
   /**
    * Get current user
    */

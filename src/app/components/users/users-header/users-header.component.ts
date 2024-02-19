@@ -83,6 +83,10 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+    let onToggleFilter = this.usersStateService.onToggleFilter.subscribe(data => {
+      this.setToggleFilter(data);
+    })
+    this.sub.add(onToggleFilter);
     this.currentUser = this.usersStateService.getCurrentUser();
     this.ref.markForCheck();
   }

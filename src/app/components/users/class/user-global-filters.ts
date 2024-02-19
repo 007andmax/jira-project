@@ -41,7 +41,6 @@ export class UserGlobalFilter {
         let data: any = {
             "name": this.name,
             "global": this.global,
-
             "jobTitles": this.jobTitles,
             "companies": this.companies,
             "ticketSubscription": this.ticketSubscription,

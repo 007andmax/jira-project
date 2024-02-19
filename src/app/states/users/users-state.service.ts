@@ -104,6 +104,9 @@ export class UsersStateService {
     if (!createdUser.avatar) return `${(createdUser.firstName) ? createdUser.firstName[0].toUpperCase() : ''}`;
     return '';
   }
+  public getGlobalFilterForRemove() {
+    return this.globalFilterForRemove;
+  }
   public setGlobalFilterForRemove(data) {
     this.globalFilterForRemove = data;
   }

@@ -81,11 +81,13 @@ export class UsersFilterComponent implements OnInit {
       this.filter.setIsArchive(data.isArchive);
     });
     let onInitGlobalFilter = this.usersStateService.onInitGlobalFilter.subscribe((data: UserGlobalFilter) => {
+      console.log("data", data);
       this.globalFilter = new UserGlobalFilter(JSON.parse(JSON.stringify(data)));
+      console.log("this.globalFilter", this.globalFilter);
       let selectedCompanies: Array<Company> = this.companiesState.getCompanies().filter(item => data.companies.some(companyId => companyId == item.id));
       if (selectedCompanies.length > 0) {
         this.companiesDp.selectedItems = selectedCompanies;
-        this.onSelectCompany(selectedCompanies);
+        this.filter.setCompanies(selectedCompanies.map(item => item.id));
       } else if (!this.filter.isDisbledCompany) {
         this.companiesDp.clearWithOutChanges();
         this.onSelectCompany([]);
@@ -94,17 +96,17 @@ export class UsersFilterComponent implements OnInit {
       let industries: Array<CrmCompanyIndustry> = this.industries.filter(item => data.industries.some(userId => userId == item.id));
       if (industries.length > 0) {
         this.industriesDp.selectedTag = industries;
-        this.onSelectIndustry(industries);
+        this.filter.setIndustries(industries.map(item => item.id));
       } else {
         this.industriesDp.clearWithOutChanges();
         this.onSelectIndustry([]);
       }
-      let jobTitle = this.crmStateService.getJobTitleList().filter(item => data.industries.some(statusId => statusId == item.id));
+      let jobTitles = this.crmStateService.getJobTitleList().filter(item => data.jobTitles.some(statusId => statusId == item.id));
       this.jobTitleDp.clearWithOutChanges();
-      if (jobTitle.length > 0) {
-        jobTitle.forEach(item => item.selected = true);
-        this.jobTitleDp.setSelectedItemsWithoutChanges(jobTitle);
-        this.globalFilter.setJobTitles(jobTitle.map(item => item.id));
+      if (jobTitles.length > 0) {
+        jobTitles.forEach(item => item.selected = true);
+        this.jobTitleDp.setSelectedItemsWithoutChanges(jobTitles);
+        this.filter.setJobTitles(jobTitles.map(item => item.id));
       } else {
         this.filter.setJobTitles([]);
         this.globalFilter.setJobTitles([]);
@@ -112,7 +114,7 @@ export class UsersFilterComponent implements OnInit {
       let tags = this.tagsStateService.getTags().filter(item => data.tags.some(tagId => tagId == item.id)).map(item => new CompanyTag(item));
       if (tags.length > 0) {
         this.tagsDp.selectedTag = tags;
-        this.onChangeTags(tags);
+        this.filter.setTags(tags.map(item => item.id));
       } else {
         this.onChangeTags([]);
         this.tagsDp.clearWithOutChanges();
@@ -123,7 +125,7 @@ export class UsersFilterComponent implements OnInit {
         ticketManagerSubscription: new UserDefaultSubscriptionItem({ enabled: data.ticketManagerSubscription, activated: true })
       });
       this.filter.changeDefaultSubscriptions(defaultSubscriptions);
-      this.globalFilter.changeDefaultSubscriptions(defaultSubscriptions);
+      console.log("this.filter", this.filter);
       this.usersStateService.onInitFilter(this.filter);
     })
     this.sub.add(onInitGlobalFilter);
