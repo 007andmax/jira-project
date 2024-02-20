@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { TicketGlobalFilter } from '../../class/ticket-global-filter';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
   selector: 'tickets-filter-save',
@@ -10,7 +11,7 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
   styleUrls: ['./tickets-filter-save.component.scss']
 })
 export class TicketsFilterSaveComponent implements OnInit {
-
+  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   @Input() globalFilter: TicketGlobalFilter;
   oldName: string;
   constructor(public activeModal: NgbActiveModal,
@@ -24,6 +25,7 @@ export class TicketsFilterSaveComponent implements OnInit {
 * @description Confirm and close modal
 */
   cancelConfirm() {
+    this.addBtn.setDisabled(false);
     this.activeModal.close();
     this.confirmStateService.setConfirm(false);
   };
@@ -32,6 +34,7 @@ export class TicketsFilterSaveComponent implements OnInit {
 */
   save() {
     if (this.globalFilter.name.length == 0) return;
+    this.addBtn.setDisabled(true);
     if (!this.globalFilter.id) {
       this.ticketsService.addGlobalFilter(this.globalFilter.getDataForRequest(true)).subscribe(data => {
         this.cancelConfirm();

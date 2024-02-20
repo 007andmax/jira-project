@@ -128,7 +128,9 @@ import { SuperAdminCompaniesComponent } from './components/super-admin/super-adm
 import { SuperAdminCompaniesHeaderComponent } from './components/super-admin/super-admin-companies/super-admin-companies-header/super-admin-companies-header.component';
 import { SuperAdminCompaniesItemComponent } from './components/super-admin/super-admin-companies/super-admin-companies-item/super-admin-companies-item.component';
 import { AddUserToCompanyModule } from './components/users/add-user-to-company/add-user-to-company.module';
-import { UserFilterSaveComponent } from './components/users/user-filter-save/user-filter-save.component';
+import { UserFilterSaveModule } from './components/users/user-filter-save/user-filter-save.module';
+import { TicketsHeaderModule } from './components/tickets/tickets/tickets-header/tickets-header.module';
+import { TicketsFilterSaveModule } from './components/tickets/tickets/tickets-header/tickets-filter-save/tickets-filter-save.module';
 declare var $: any;
 
 /**
@@ -157,8 +159,6 @@ declare var $: any;
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
     CannedResponsesAsideComponent,
-    TicketsFilterSaveComponent,
-    UserFilterSaveComponent
   ],
   imports: [
     BrowserModule,
@@ -211,7 +211,9 @@ declare var $: any;
     SupportPageEditCategoryModule,
     ModalQuoteModule,
     LeftPanelCustomerPortalModule,
-    AddUserToCompanyModule
+    AddUserToCompanyModule,
+    UserFilterSaveModule,
+    TicketsFilterSaveModule
   ],
   entryComponents: [
     ConfirmComponent,
@@ -231,8 +233,6 @@ declare var $: any;
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
     UsersCheckUseComponent,
-    TicketsFilterSaveComponent,
-    UserFilterSaveComponent
   ],
   providers: [
     {

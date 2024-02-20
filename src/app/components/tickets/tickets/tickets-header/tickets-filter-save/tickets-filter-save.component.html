@@ -67,9 +67,13 @@
             </button>
             <button
                 class="qt-button qt-jc-c qt-w100"
-                (click)=save()
+                [ngClass]="{'--loading':addBtn.isBlock()}"
+                appDisabledBtn
+                #addBtn="disabled"
+                (onClick)="save()"
             >
-                Save
+                <span>Save</span>
+                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
             </button>
         </div>
     </div>
