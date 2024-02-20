@@ -81,6 +81,23 @@ export class UsersStateService {
     this.usersRealTimeService.changePermissionsUsers.subscribe(newChange => {
       if (newChange.action == "PERMISSIONS_UPDATE") this.onChangeUserPermissions.emit(newChange.data);
     });
+    this.usersRealTimeService.changeUsersFilters.subscribe(newChange => {
+      if (newChange.action === 'USER_FILTER_SAVED') {
+        this.globalFilters.unshift(new UserGlobalFilter(newChange.data))
+        this.onGetGlobalFilters.emit(this.globalFilters);
+      }
+      if (newChange.action === 'USER_FILTER_EDITED') {
+        let index = this.globalFilters.findIndex(item => item.id === newChange.data.id);
+        if (index > -1) this.globalFilters[index] = new UserGlobalFilter(newChange.data);
+        this.onGetGlobalFilters.emit(this.globalFilters);
+      }
+      if (newChange.action === 'USER_FILTER_REMOVED') {
+        let index = this.globalFilters.findIndex(item => item.id === newChange.data);
+        this.globalFilters.splice(index, 1);
+        this.onGetGlobalFilters.emit(this.globalFilters);
+      }
+
+    })
   }
   public getUserAvatarUrl(user) {
     if (!(user && user.avatar)) return '';
