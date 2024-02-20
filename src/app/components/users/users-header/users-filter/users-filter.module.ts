@@ -11,12 +11,15 @@ import { DynamicTooltipModule } from 'src/app/components/shared/dynamic-tooltip/
 import { MatChipsModule, MatFormFieldModule, MatIconModule } from '@angular/material';
 import { TicketsFilterTagsModule } from 'src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-tags/tickets-filter-tags.module';
 import { UsersFilterDefaultSubscriptionComponent } from './users-filter-default-subscription/users-filter-default-subscription.component';
+import { UsersFilterTagsComponent } from './users-filter-tags/users-filter-tags.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
     declarations: [UsersFilterComponent,
         UsersFilterJobTitleComponent,
         UsersFilterIndustryComponent,
-        UsersFilterDefaultSubscriptionComponent
+        UsersFilterDefaultSubscriptionComponent,
+        UsersFilterTagsComponent
     ],
     imports: [
         CommonModule,
@@ -28,7 +31,7 @@ import { UsersFilterDefaultSubscriptionComponent } from './users-filter-default-
         MatChipsModule,
         MatIconModule,
         MatFormFieldModule,
-        TicketsFilterTagsModule
+        InfiniteScrollModule
     ],
     exports: [UsersFilterComponent]
 

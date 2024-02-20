@@ -15,7 +15,7 @@ export class UserFilters {
     "industries": Array<string> = [];
     "tags": Array<string> = [];
     "customSubscriptions": Array<string> = [];
-    "hasAccess": boolean;
+    "hasAccess": boolean = false;
     "sortBy": string = "NAME_ASC";
     "defaultSubscriptions": UserDefaultSubscription = new UserDefaultSubscription(null);
     clientType: string;

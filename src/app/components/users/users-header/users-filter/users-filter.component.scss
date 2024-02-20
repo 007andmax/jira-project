@@ -15,7 +15,7 @@
     .search-company,
     .search-priority,
     .light-dropdown.dropdown,
-    app-tickets-filter-tags {
+    app-users-filter-tags {
         &::before {
             color: $gray-500;
             font-size: 13px;
@@ -35,6 +35,9 @@
         width: 100%;
     }
     /deep/app-users-filter-default-subscription .mat-form-field {
+        width: 100%;
+    }
+    /deep/app-users-filter-tags .mat-form-field {
         width: 100%;
     }
 }

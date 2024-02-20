@@ -61,6 +61,9 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
       this.filter.setData(data);
     })
+    let onClearGlobalFilter = this.usersStateService.onClearGlobalFilter.subscribe((data) => {
+      this.selectedGlobalFilter = new UserGlobalFilter();
+    })
     this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       if (!this.isGetGlobalFilters && !this.customerPortalStateService.isCustomerPortal) this.getGLobalFilters();
     })

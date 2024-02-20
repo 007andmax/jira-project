@@ -29,6 +29,7 @@ export class UsersStateService {
   onLeftPanelMarketingFilter: EventEmitter<any> = new EventEmitter();
   openAside: EventEmitter<any> = new EventEmitter();
   openEditAside: EventEmitter<any> = new EventEmitter();
+  onClearGlobalFilter: EventEmitter<any> = new EventEmitter();
   openMessageAside: EventEmitter<any> = new EventEmitter();
   onSelectAll: EventEmitter<any> = new EventEmitter();
   openDetailAside: EventEmitter<any> = new EventEmitter();
@@ -98,6 +99,9 @@ export class UsersStateService {
       }
 
     })
+  }
+  public clearGlobalFilter() {
+    this.onClearGlobalFilter.emit(null);
   }
   public getUserAvatarUrl(user) {
     if (!(user && user.avatar)) return '';

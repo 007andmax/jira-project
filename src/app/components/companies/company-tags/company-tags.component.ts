@@ -130,6 +130,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     this.getTags(searchName);
   }
   getTags(searchName = null) {
+    console.log("getTags");
     if (this.companyTagsListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;

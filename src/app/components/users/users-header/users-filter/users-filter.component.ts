@@ -24,6 +24,7 @@ import { Company } from 'src/app/interfaces/company/company';
 import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 import { CompanyTag } from 'src/app/components/companies/company-tags/class/company-tag';
 import { UserDefaultSubscriptionItem } from '../../class/user-default-subscription-item';
+import { UsersFilterTagsComponent } from './users-filter-tags/users-filter-tags.component';
 
 @Component({
   selector: 'app-users-filter',
@@ -36,7 +37,7 @@ export class UsersFilterComponent implements OnInit {
   @ViewChild('companiesDp') companiesDp: TicketsFilterCompaniesDropDownComponent;
   @ViewChild('industriesDp') industriesDp: UsersFilterIndustryComponent;
   @ViewChild('subscriptionDp') subscriptionDp: UsersFilterSubscriptionsComponent;
-  @ViewChild('tagsDp') tagsDp: CompanyTagsComponent;
+  @ViewChild('tagsDp') tagsDp: UsersFilterTagsComponent;
   @Output() onClearAll = new EventEmitter();
   @Output() onClose = new EventEmitter();
   globalFilter: UserGlobalFilter = new UserGlobalFilter();
@@ -112,6 +113,7 @@ export class UsersFilterComponent implements OnInit {
         this.globalFilter.setJobTitles([]);
       }
       let tags = this.tagsStateService.getTags().filter(item => data.tags.some(tagId => tagId == item.id)).map(item => new CompanyTag(item));
+      console.log("tags", tags);
       if (tags.length > 0) {
         this.tagsDp.selectedTag = tags;
         this.filter.setTags(tags.map(item => item.id));
@@ -169,7 +171,9 @@ export class UsersFilterComponent implements OnInit {
     this.filter.setUserName(null);
     this.filter.setClientType(null);
     this.onClearAll.emit(null);
+    this.globalFilter = new UserGlobalFilter();
     this.usersStateService.onInitFilter(this.filter);
+    this.usersStateService.clearGlobalFilter();
   }
   onSelectTitle(item, event) {
     if (!event.target.checked) {

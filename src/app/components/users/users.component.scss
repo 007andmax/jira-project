@@ -78,7 +78,7 @@
         display: none;
     }
 
-    app-tickets-filter-tags .mat-form-field {
+    app-users-filter-tags .mat-form-field {
         width: 100%;
     }
 
@@ -126,7 +126,7 @@
         }
     }
 
-    app-tickets-filter-tags {
+    app-users-filter-tags {
         &::before {
             content: "Tags";
         }
@@ -148,7 +148,7 @@
     top: 57px;
     z-index: 1;
     background-color: $white;
-    padding-top: 32px;
+    padding-top: 0px;
 
     .qt-page-list__header-thead {
         border: 1px solid $gray-200;
@@ -162,4 +162,25 @@
 .pengind-loading {
     bottom: 20px;
     top: auto;
+}
+.page-list-users {
+    padding: 0;
+    background-color: $white;
+    /deep/ .qt-page-list {
+        background-color: $white;
+        padding: 0px;
+    }
+    /deep/ table.qt-table-modern tbody tr td:first-child {
+        border-left: 1px solid $gray-200;
+        border-top-left-radius: unset;
+        border-bottom-left-radius:unset;
+    }
+    /deep/ table.qt-table-modern tbody tr td:last-child {
+        border-right: 1px solid $gray-200;
+        border-top-right-radius: unset;
+        border-bottom-right-radius: unset;
+    }
+    /deep/ table.qt-table-modern tbody tr td {
+        border-bottom: 1px solid $gray-200;
+    }
 }
