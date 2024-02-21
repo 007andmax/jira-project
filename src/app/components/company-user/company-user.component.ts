@@ -169,10 +169,10 @@ export class CompanyUserComponent implements OnInit {
   }
   public onInitFilters(id) {
     let company = this.companiesStateService.getCompanies().find(item => item.id === id);
-    this.header.filter.companiesDp.selectItemsWithOutChanges([company]);
-    this.header.filter.companiesDp.isDisabled = true;
-    this.header.filter.filter.setCompanies([id]);
-    this.header.userFilter.setCompanies([id]);
+    // this.header.filter.companiesDp.selectItemsWithOutChanges([company]);
+    //  this.header.filter.companiesDp.isDisabled = true;
+    //  this.header.filter.filter.setCompanies([id]);
+    //  this.header.userFilter.setCompanies([id]);
     //this.header.filter.onChangeCounterFilter();
     this.filter.setLeftFilters(null, id, null, null, null, [], []);
     this.cd.detectChanges();
