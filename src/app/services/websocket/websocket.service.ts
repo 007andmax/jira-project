@@ -52,6 +52,7 @@ export class WebsocketService {
   private serverUrl = 'realtime';
   private stompClient;
   private netScanSub;
+  private userFilters;
   public IsKafkaConnected: boolean = false;
   onInit: EventEmitter<any> = new EventEmitter();
   isInit: boolean = false;
@@ -524,7 +525,7 @@ export class WebsocketService {
 
     setTimeout(() => {
 
-      this.stompClient.subscribe(`/user/watch/userFilters`, (message) => {
+      this.userFilters = this.stompClient.subscribe(`/user/watch/userFilters`, (message) => {
         var newChange = JSON.parse(message.body);
         this.usersRealTimeService.handleRealTimeChangesUsersFilters(newChange);
 
@@ -758,6 +759,9 @@ export class WebsocketService {
 
   public unSubsribeNetScan() {
     if (this.netScanSub) this.netScanSub.unsubscribe();
+  }
+  public unSubsribeUsersFilters() {
+    if (this.userFilters) this.userFilters.unsubscribe();
   }
   public getClient() {
     return this.stompClient;

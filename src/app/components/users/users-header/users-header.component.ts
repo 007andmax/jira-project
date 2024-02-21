@@ -44,7 +44,6 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   @Input() selectAll: boolean = false;
   @Input() count: number = 0;
   @Input() type: string;
-  @ViewChild('filter') filter: UsersFilterComponent;
   userFilter: UserFilters = new UserFilters();
   sub: Subscription = new Subscription();
   countFilter: number = 0;
@@ -88,6 +87,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   }
   public setUsers(data) {
     this.users = data;
+    this.ref.markForCheck();
   }
   onKeyUp(event) {
     if (event.keyCode === 13) this.onSearch.emit(event.target.value);
@@ -155,7 +155,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     }
   }
   isUserOneCustomSubscription() {
-    return this.filter.filter.customSubscriptions.length === 1;
+    return this.userFilter.customSubscriptions.length === 1;
   }
   removeUsersFromSubscription() {
     this.confirmStateService.setConfirmAction(MULTI_DELETE_USER_FROM_SUBSCRIPTION);
@@ -165,7 +165,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   }
   onRemoveUsersFromSubscription() {
     let users = this.users.filter(item => item.selected);
-    forkJoin(users.map(item => this.marketingEmailService.removeUser(item.id, this.filter.filter.customSubscriptions[0]).pipe(map((res) => res),
+    forkJoin(users.map(item => this.marketingEmailService.removeUser(item.id, this.userFilter.customSubscriptions[0]).pipe(map((res) => res),
       catchError(error => of(undefined)))))
       .subscribe(
         () => {
