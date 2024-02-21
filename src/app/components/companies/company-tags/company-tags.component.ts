@@ -66,6 +66,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   public ngOnInit() {
     this.onInitClearState();
     this.onCheckEditItem();
+    console.log("selectedTag", this.selectedTag);
   }
   getCompanyName(tag) {
     let company = this.companiesStateService.getCompanies().find(item => item.id === tag.companyId);

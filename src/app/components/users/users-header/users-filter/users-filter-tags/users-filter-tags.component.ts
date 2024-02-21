@@ -14,4 +14,8 @@ export class UsersFilterTagsComponent extends CompanyTagsComponent {
   @Input() placement: string = 'bottom-left';
 
 
+  public setSelectedTag(data) {
+    this.selectedTag = data;
+    this.cd.markForCheck();
+  }
 }

@@ -112,10 +112,10 @@ export class UsersFilterComponent implements OnInit {
         this.filter.setJobTitles([]);
         this.globalFilter.setJobTitles([]);
       }
-      let tags = this.tagsStateService.getTags().filter(item => data.tags.some(tagId => tagId == item.id)).map(item => new CompanyTag(item));
+      let tags = this.globalFilter.tagDtos.map(item => new CompanyTag(item));
       console.log("tags", tags);
       if (tags.length > 0) {
-        this.tagsDp.selectedTag = tags;
+        this.tagsDp.setSelectedTag(tags);
         this.filter.setTags(tags.map(item => item.id));
       } else {
         this.onChangeTags([]);

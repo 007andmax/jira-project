@@ -1,3 +1,5 @@
+import { Tag } from "src/app/interfaces/tag/tag";
+
 export class UserGlobalFilter {
     "id": string;
     "name": string = "";
@@ -7,6 +9,7 @@ export class UserGlobalFilter {
     "companies": Array<string> = [];
     "industries": Array<string> = [];
     "tags": Array<string> = [];
+    tagDtos: Array<Tag> = [];
     "customSubscriptions": Array<string> = [];
     "ticketSubscription": boolean;
     "ticketManagerSubscription": boolean;
