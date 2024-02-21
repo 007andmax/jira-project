@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CompanyTagsComponent } from 'src/app/components/companies/company-tags/company-tags.component';
 import { CrmCompanyIndustry } from 'src/app/components/setting/crm-settings/crm-company-industry/class/crm-company-industry';
@@ -32,7 +32,7 @@ import { UsersFilterTagsComponent } from './users-filter-tags/users-filter-tags.
   styleUrls: ['./users-filter.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UsersFilterComponent implements OnInit {
+export class UsersFilterComponent implements OnInit, OnDestroy {
   @ViewChild('jobTitleDp') jobTitleDp: UsersFilterJobTitleComponent;
   @ViewChild('companiesDp') companiesDp: TicketsFilterCompaniesDropDownComponent;
   @ViewChild('industriesDp') industriesDp: UsersFilterIndustryComponent;
@@ -81,6 +81,7 @@ export class UsersFilterComponent implements OnInit {
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
       this.filter.setIsArchive(data.isArchive);
     });
+    this.sub.add(geLefttFilter);
     let onInitGlobalFilter = this.usersStateService.onInitGlobalFilter.subscribe((data: UserGlobalFilter) => {
       console.log("data", data);
       this.globalFilter = new UserGlobalFilter(JSON.parse(JSON.stringify(data)));
@@ -140,6 +141,7 @@ export class UsersFilterComponent implements OnInit {
     this.ref.markForCheck();
   }
   applyFilters() {
+    console.log("applyFilters");
     this.usersStateService.onInitFilter(this.filter);
   }
   onChangeDefaultSubscriptions(data) {
@@ -153,6 +155,7 @@ export class UsersFilterComponent implements OnInit {
   }
   onChangeCustomSubscription(data) {
     this.filter.setCustomSubscriptions(data);
+    console.log("onChangeCustomSubscription");
     this.usersStateService.onInitFilter(this.filter);
   }
   public clearAll() {
@@ -172,6 +175,7 @@ export class UsersFilterComponent implements OnInit {
     this.filter.setClientType(null);
     this.onClearAll.emit(null);
     this.globalFilter = new UserGlobalFilter();
+    console.log("clearAll");
     this.usersStateService.onInitFilter(this.filter);
     this.usersStateService.clearGlobalFilter();
   }
@@ -194,6 +198,7 @@ export class UsersFilterComponent implements OnInit {
   }
   clearClientIndustry() {
     this.filter.setIndustries([]);
+    console.log("clearClientIndustry");
     this.usersStateService.onInitFilter(this.filter);
   }
   saveFilter() {
@@ -205,4 +210,9 @@ export class UsersFilterComponent implements OnInit {
   close() {
     this.onClose.emit(null);
   }
+  ngOnDestroy(): void {
+    this.jobTitleDp.clearWithOutChanges();
+    this.sub.unsubscribe();
+  }
+
 }

@@ -157,7 +157,6 @@ export class WebsocketService {
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToProducts();
       that.subsribeToTicketActualNumber();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToTicketsFilters();
-      if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToUsersFilters();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToTickets();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToCmdShellOutput();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToBillable();

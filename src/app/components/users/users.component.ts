@@ -40,8 +40,6 @@ export class UsersComponent implements OnInit, OnDestroy {
   @ViewChild('header') header: UsersHeaderComponent;
   idDetailUser: string = '';
   users: Array<User> = [];
-  companies: Array<Company> = [];
-  reqUsers: Array<User> = [];
   showPreloader: boolean = true;
   filter: UserFilters = new UserFilters();
   selectAll: boolean = false;
@@ -49,7 +47,6 @@ export class UsersComponent implements OnInit, OnDestroy {
   jobTitleList: Array<CrmCompanyJobTitle> = [];
   TYPE_LIST_ALL_USERS = TYPE_LIST_ALL_USERS;
   sub: Subscription = new Subscription();
-  industries: Array<CrmCompanyIndustry> = [];
   listCustomSubscription: Array<MarketingSubscriptionType> = [];
   toggleFilter: boolean = false;
   showPendingPreloader: boolean = false;
@@ -68,6 +65,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     private ref: ChangeDetectorRef,
     private router: Router,
     private appStateService: AppStateService,
+    private websocketService: WebsocketService,
   ) {
   }
   ngOnInit() {
@@ -75,7 +73,9 @@ export class UsersComponent implements OnInit, OnDestroy {
       this.filter.setCompanies(this.customerPortalStateService.getUsersFilters().companies);
     } else {
       this.filter = this.usersStateService.getFilter();
-      console.log("this.filter", this.filter);
+      if (this.websocketService.isInit) this.websocketService.subsribeToUsersFilters();
+      let onInit = this.websocketService.onInit.subscribe(data => this.websocketService.subsribeToUsersFilters());
+      this.sub.add(onInit);
     }
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.usersStateService.setModeUserFilterSubscription(MODE_USERS_LIST);
@@ -84,6 +84,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.onScroll();
     this.cd.detectChanges();
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
+      console.log("getOnFilter");
       document.body.querySelector(".main-container").scrollTo(0, 0);
       this.showPreloader = true;
       if (this.filter.isArchive != this.usersStateService.getShowArchivedCompanies()) {
@@ -95,20 +96,15 @@ export class UsersComponent implements OnInit, OnDestroy {
       this.onScroll();
       this.cd.detectChanges();
     });
-    this.userListService.addSubscription(geLefttFilter);
+    this.sub.add(geLefttFilter);
     let onUsersFilters = this.customerPortalStateService.onUsersFilters.subscribe(data => {
+      console.log("onUsersFilters");
       document.body.querySelector(".main-container").scrollTo(0, 0);
       this.showPreloader = true;
       this.setFilters(this.customerPortalStateService.getUsersFilters());
       this.onScroll();
     });
-    this.userListService.addSubscription(onUsersFilters);
-
-    if (this.companiesStateService.getCompanies().length > 0) this.companies = this.companiesStateService.getCompanies();
-    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
-      this.companies = data;
-    })
-    this.userListService.addSubscription(getOnCompanies);
+    this.sub.add(onUsersFilters);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === ARCHIVE_USER) {
@@ -122,54 +118,39 @@ export class UsersComponent implements OnInit, OnDestroy {
         }
       }
     })
-    this.userListService.addSubscription(getConfirm);
-
+    this.sub.add(getConfirm);
     let getChangeCompanies = this.usersStateService.getChangeUsers().subscribe((data: UserChange) => {
 
       if ((data.action === 'USER_SAVED' || data.action === 'USER_ARCHIVED') && data.data.accountType !== "TECH") {
-
-        const reqIndex = this.reqUsers.findIndex((item) => item.id === data.data.id);
-        if (reqIndex > -1) this.reqUsers[reqIndex].onUpdate(data.data);
-        if (reqIndex === -1) {
-          this.reqUsers.unshift(new User(data.data));
-          this.users.unshift(new User(data.data));
-        }
         const userIndex = this.users.findIndex((item) => item.id === data.data.id);
         if (userIndex > -1) this.users[userIndex].onUpdate(data.data);
         if (!this.filter.isArchive && data.action === 'USER_ARCHIVED') {
-          const userIndex = this.users.findIndex((item) => item.id === data.data.id);
           if (userIndex > -1) this.users.splice(userIndex, 1);
-          if (reqIndex > -1) this.reqUsers[userIndex].selected = false;
         }
       }
 
 
       if (data.action === 'USERS_DEARCHIVED' && data.data.accountType !== "TECH") {
-
         data.data.forEach(user => {
-          const reqIndex = this.reqUsers.findIndex((item) => item.id === user.id);
-          if (reqIndex > -1) this.reqUsers[reqIndex].onUpdate(user);
           if (this.filter.isArchive) {
             const userIndex = this.users.findIndex((item) => item.id === user.id);
-
             if (userIndex > -1) this.users.splice(userIndex, 1);
           }
         })
-
       }
       if (data.action === 'USER_SUBMITTED_TICKET' && data.data.accountType !== "TECH") {
-        const reqIndex = this.reqUsers.findIndex((item) => item.id === data.data.id);
+
         const Index = this.users.findIndex((item) => item.id === data.data.id);
-        var prevValue = this.reqUsers[reqIndex].userStatistic.ticketsSubmitted || 0;
+        var prevValue = this.users[Index].userStatistic.ticketsSubmitted || 0;
         prevValue++;
-        this.reqUsers[reqIndex].userStatistic.ticketsSubmitted = prevValue;
+        this.users[Index].userStatistic.ticketsSubmitted = prevValue;
         if (Index > -1) this.users[Index].userStatistic.ticketsSubmitted = prevValue;
       }
+      this.header.setUsers(this.users);
       this.users = [...this.users.map(item => new User(item))];
-      this.header.setReqUsers(this.reqUsers);
       this.cd.detectChanges();
     })
-    this.userListService.addSubscription(getChangeCompanies);
+    this.sub.add(getChangeCompanies);
     this.usersStateService.closeDetailAside.subscribe(data => {
       this.setIdDetailUser('');
     })
@@ -184,11 +165,6 @@ export class UsersComponent implements OnInit, OnDestroy {
       this.listCustomSubscription = data;
     })
     this.sub.add(onGetListCustomSubscription);
-    this.industries = this.crmStateService.getIndustryList();
-    let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
-      this.industries = data;
-    })
-    this.sub.add(onGetIndustry);
   }
   onCloseFilters() {
     this.header.setToggleFilter(false);
@@ -197,8 +173,8 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.filter.setData(data);
     this.filter.page = 0;
     this.selectAll = false;
-    this.reqUsers.forEach(item => item.selected = false);
-    this.header.setReqUsers(this.reqUsers);
+    this.users.forEach(item => item.selected = false);
+    this.header.setUsers(this.users);
     this.setDefaultScoll();
   }
   private onArchiveUsers(ids) {
@@ -228,11 +204,6 @@ export class UsersComponent implements OnInit, OnDestroy {
 
       let stompClient = this.usersRealTimeService.changeSubscriptionsUsers.subscribe(newChange => {
         if (newChange.action === 'DEFAULT_SUBSCRIPTION_SAVED') {
-          const reqIndex = this.reqUsers.findIndex((item) => item.id === newChange.data.userId);
-          if (reqIndex > -1) {
-            let index = this.reqUsers[reqIndex].customerCompaniesInfo.findIndex(item => item.companyId === newChange.data.companyId);
-            if (index > -1) this.reqUsers[reqIndex].customerCompaniesInfo[index] = new UserCustomerCompaniesInfo(newChange.data);
-          }
           const userIndex = this.users.findIndex((item) => item.id === newChange.data.userId);
           if (userIndex > -1) {
             let index = this.users[userIndex].customerCompaniesInfo.findIndex(item => item.companyId === newChange.data.companyId);
@@ -241,19 +212,18 @@ export class UsersComponent implements OnInit, OnDestroy {
           this.cd.detectChanges();
         }
         if (newChange.action === 'CUSTOM_SUBSCRIPTION_SAVED') {
-          const reqIndex = this.reqUsers.findIndex((item) => item.id === newChange.data.userId);
-          if (reqIndex > -1) this.reqUsers[reqIndex].changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
           const userIndex = this.users.findIndex((item) => item.id === newChange.data.userId);
           if (userIndex > -1) this.users[userIndex].changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
           this.cd.detectChanges();
         }
-        this.header.setReqUsers(this.reqUsers);
+        this.header.setUsers(this.users);
       });
       this.userListService.addSubscription(stompClient);
 
     }, 3000);
   }
-  onSelectAllUser(event) {
+  toggleAllUser(event) {
+    console.log("event.target.checked", event.target.checked);
     if (event.target.checked) {
       this.usersStateService.initSelectAllusers(true);
       this.selectAll = true;
@@ -261,10 +231,7 @@ export class UsersComponent implements OnInit, OnDestroy {
         item.selected = true;
       })
       this.draftEmailStateService.resetSelectedUsers();
-      /* this.filter.getFilterList(this.reqUsers, this.companies).forEach(item => {
-         this.reqUsers.find(user => user.id === item.id).selected = true;
-       })*/
-      this.reqUsers.forEach(user => {
+      this.users.forEach(user => {
         if (user.selected) this.draftEmailStateService.addSelectedUser(user);
       })
     } else {
@@ -273,18 +240,16 @@ export class UsersComponent implements OnInit, OnDestroy {
       this.users.forEach(item => {
         item.selected = false;
       })
-      this.reqUsers.forEach(item => {
-        item.selected = false;
-      })
+      this.users.forEach(item => item.selected = false)
       this.draftEmailStateService.resetSelectedUsers();
     }
-    this.header.setReqUsers(this.reqUsers);
+    this.header.setUsers(this.users);
     this.cd.detectChanges();
   }
   onSelectUser(user) {
-    this.reqUsers.find(item => item.id === user.id).selected = user.selected;
-    /*this.selectAll = (this.filter.getFilterList(this.reqUsers, this.companies).find(item => !item.selected)) ? false : true;*/
-    this.header.setReqUsers(this.reqUsers);
+    this.users.find(item => item.id === user.id).selected = user.selected;
+    this.selectAll = (this.users.some(item => item.selected == false)) ? false : true;
+    this.header.setUsers(this.users);
     this.cd.detectChanges();
   }
   private onDeArchiveUser(id) {
@@ -306,21 +271,6 @@ export class UsersComponent implements OnInit, OnDestroy {
 
     })
     this.userListService.addSubscription(archiveUser);
-  }
-  private getUsersList(data) {
-    this.reqUsers = data.filter(item => ((!this.filter.isArchive) ? !item.deletedAt : item.deletedAt) && item.accountType !== "TECH");
-    this.reqUsers.sort((a, b) => ((a.firstName + a.lastName).toLowerCase() > (b.firstName + b.lastName).toLowerCase()) ?
-      1 : (((b.firstName + b.lastName).toLowerCase() > (a.firstName + a.lastName).toLowerCase()) ? -1 : 0));
-    if (this.customerPortalStateService.isCustomerPortal) {
-      let customerCompaniesInfo = this.usersStateService.getCurrentUser().customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id'));
-      if (customerCompaniesInfo.customerUserRole.getPermission('VIEW_MY_PROFILE') && !customerCompaniesInfo.customerUserRole.getPermission('VIEW_ALL_USERS')) {
-        this.reqUsers = this.reqUsers.filter(item => item.id == this.usersStateService.getCurrentUser().id);
-      } else if (!(customerCompaniesInfo.customerUserRole.getPermission('VIEW_MY_PROFILE') && customerCompaniesInfo.customerUserRole.getPermission('VIEW_ALL_USERS'))) this.reqUsers = [];
-    }
-    this.onScroll();
-    this.showPreloader = false;
-    this.header.setReqUsers(this.reqUsers);
-    this.cd.detectChanges();
   }
   public onScroll() {
     this.infiniteScrollDisabled = true;
@@ -363,19 +313,18 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.userListService.onUnsubscribe();
+    this.sub.unsubscribe();
     this.selectAll = false;
     this.users.forEach(item => {
       item.selected = false;
     })
-    this.reqUsers.forEach(item => {
-      item.selected = false;
-    })
+    this.users.forEach(item => item.selected = false)
     this.usersStateService.clearFilter();
     this.filter = new UserFilters();
     console.log("this.filter", this.filter);
-    this.header.setReqUsers(this.reqUsers);
+    this.header.setUsers(this.users);
     this.draftEmailStateService.resetSelectedUsers();
-    this.usersStateService.clearFilter();
-    this.sub.unsubscribe();
+    this.usersStateService.clearGlobalFilter();
+
   }
 }

@@ -76,7 +76,7 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
         if (this.confirmStateService.getConfirmAction() === DELETE_GLOBAL_USERS_FILTER) this.onDeleteGlobalFilter(this.usersStateService.getGlobalFilterForRemove());
       }
     })
-    this.getUsersCount();
+    if (this.leftPanelService.isUsersPage(this.leftPanelStateService.activePage)) this.getUsersCount();
   }
   onDeleteGlobalFilter(filter) {
     this.usersService.deleteGlobalFilter(filter.id).subscribe(data => {
@@ -143,16 +143,19 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   }
   onSetFilterClientType(data) {
     this.filter.setClientType(data);
+    console.log("onSetFilterClientType");
     this.usersStateService.onInitFilter(this.filter);
   }
   onShowAll() {
     this.filter.setClientType(null);
     this.setShowArchivedCompanies(false);
+    console.log("onShowAll");
     this.usersStateService.onInitFilter(this.filter);
   }
   onShowArchived() {
     this.filter.setClientType(null);
     this.setShowArchivedCompanies(true);
+    console.log("onShowArchived");
     this.usersStateService.onInitFilter(this.filter);
   }
 

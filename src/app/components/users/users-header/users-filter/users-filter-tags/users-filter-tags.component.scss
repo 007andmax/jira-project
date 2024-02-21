@@ -12,10 +12,19 @@
 
 .filter-tags-check {
     position: absolute;
-    right: 6px;
+    right: 26px;
     top: 6px;
 }
 .content {
     height: 100%;
     overflow: scroll;
+}
+.qt-pos-rel {
+    i {
+        display: block;
+        flex-shrink: 0;
+        position: absolute;
+        right: 6px;
+        top: 6px;
+    }
 }

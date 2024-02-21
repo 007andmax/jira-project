@@ -78,7 +78,7 @@ export class CompanyUserComponent implements OnInit {
       this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions, data.tags);
       this.selectAll = false;
       this.reqUsers.forEach(item => item.selected = false);
-      this.header.setReqUsers(this.reqUsers);
+      this.header.setUsers(this.reqUsers);
       this.setDefaultScoll();
       this.onScroll();
     })
@@ -146,7 +146,7 @@ export class CompanyUserComponent implements OnInit {
       }
       this.users = [...this.users.map(item => new User(item))];
       this.reqUsers = [...this.reqUsers.map(item => new User(item))];
-      this.header.setReqUsers(this.reqUsers);
+      this.header.setUsers(this.reqUsers);
       this.cd.detectChanges();
     })
     this.userListService.addSubscription(getChangeCompanies);
@@ -204,13 +204,13 @@ export class CompanyUserComponent implements OnInit {
       })
       this.draftEmailStateService.resetSelectedUsers();
     }
-    this.header.setReqUsers(this.reqUsers);
+    this.header.setUsers(this.reqUsers);
     this.cd.detectChanges();
   }
   onSelectUser(user) {
     this.reqUsers.find(item => item.id === user.id).selected = user.selected;
     this.selectAll = (this.filter.getFilterList(this.reqUsers, this.companies).find(item => !item.selected)) ? false : true;
-    this.header.setReqUsers(this.reqUsers);
+    this.header.setUsers(this.reqUsers);
     this.cd.detectChanges();
   }
   private onInitSubscribe() {
@@ -238,7 +238,7 @@ export class CompanyUserComponent implements OnInit {
           if (userIndex > -1) this.users[userIndex].changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
           this.cd.detectChanges();
         }
-        this.header.setReqUsers(this.reqUsers);
+        this.header.setUsers(this.reqUsers);
         this.cd.detectChanges();
       });
       this.userListService.addSubscription(stompClient);
@@ -322,7 +322,7 @@ export class CompanyUserComponent implements OnInit {
     this.reqUsers.forEach(item => {
       item.selected = false;
     })
-    this.header.setReqUsers(this.reqUsers);
+    this.header.setUsers(this.reqUsers);
     this.draftEmailStateService.resetSelectedUsers();
     this.usersStateService.clearFilter();
     this.companiesStateService.setCompanyRoutingId(null);

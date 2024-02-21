@@ -38,14 +38,10 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   @Output() onChangeFilterField = new EventEmitter<any>();
   @Output() onSelectAllUser = new EventEmitter<any>();
   @Output() onSearch = new EventEmitter<any>();
-  @Input() set users(value: Array<User>) {
-    this._users = value;
-  }
+  @Input() users: Array<User> = [];
   @Output() onToggleFilter = new EventEmitter<any>();
   searchText: string = "";
-  reqUsers: Array<User> = [];
   @Input() selectAll: boolean = false;
-  _users: Array<User> = [];
   @Input() count: number = 0;
   @Input() type: string;
   @ViewChild('filter') filter: UsersFilterComponent;
@@ -90,6 +86,9 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     this.currentUser = this.usersStateService.getCurrentUser();
     this.ref.markForCheck();
   }
+  public setUsers(data) {
+    this.users = data;
+  }
   onKeyUp(event) {
     if (event.keyCode === 13) this.onSearch.emit(event.target.value);
   }
@@ -101,18 +100,14 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     this.toggleFilter = data;
     this.onToggleFilter.emit(data);
   }
-  public setReqUsers(data) {
-    this.reqUsers = data;
-    this.ref.markForCheck();
-  }
   public showAsideForDraftEmail() {
     this.draftEmailStateService.setAction(USERS);
     this.draftEmailStateService.resetSelectedUsers();
     if (this.userFilter.customSubscriptions.length === 1 && this.type === TYPE_LIST_MARKETING_USERS) {
-      let users = this.reqUsers.filter(item => item.selected).filter(item => item.customSubscriptions.find(subscription => subscription.id === this.userFilter.customSubscriptions[0] && subscription.activated));
+      let users = this.users.filter(item => item.selected).filter(item => item.customSubscriptions.find(subscription => subscription.id === this.userFilter.customSubscriptions[0] && subscription.activated));
       this.draftEmailStateService.setSelectedUser(users);
     } else {
-      this.draftEmailStateService.setSelectedUser(this.reqUsers.filter(item => item.selected));
+      this.draftEmailStateService.setSelectedUser(this.users.filter(item => item.selected));
     }
     this.draftEmailStateService.toggleAsideForAdd();
     this.ref.markForCheck();
@@ -122,34 +117,30 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     this.confirmStateService.setConfirmAction(ARCHIVE_USERS);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
 
-    if (this._users.filter(item => item.selected).length === 1) {
-      let user = this._users.filter(item => item.selected)[0];
+    if (this.users.filter(item => item.selected).length === 1) {
+      let user = this.users.filter(item => item.selected)[0];
       modalRef.componentInstance.message = `Do you want to archive ${user.firstName + ' ' + user.lastName}`;
     } else {
       modalRef.componentInstance.message = `Do you want to archive users?`;
     }
-    this.usersStateService.setUsersForArchive(this._users.filter(item => item.selected));
+    this.usersStateService.setUsersForArchive(this.users.filter(item => item.selected));
     this.ref.markForCheck();
   }
 
   isExistArchiveUser() {
-    return this._users.filter(item => item.selected).find(item => item.deletedAt != null);
+    return this.users.filter(item => item.selected).find(item => item.deletedAt != null);
   }
   isExistPrimaryContact() {
-    return this._users.filter(item => item.selected).find(item => item.isContact);
+    return this.users.filter(item => item.selected).find(item => item.isContact);
   }
   showAddToSubscription() {
     const modalRef = this.modalService.open(AddUserToSubscribeComponent, { windowClass: 'xs-modal modal-dialog__save-to-subscription', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.users = this.reqUsers.filter(item => item.selected);
+    modalRef.componentInstance.users = this.users.filter(item => item.selected);
     this.ref.markForCheck();
   }
-  toggleAllUser(data) {
-    this.selectAll = true;
-    this.onSelectAllUser.emit(data);
-    this.ref.detectChanges();
-  }
+
   getSelectedCount() {
-    return this.reqUsers.filter(item => item.selected).length;
+    return this.users.filter(item => item.selected).length;
   }
   public onFilter(field) {
     this.onChangeFilterField.emit(field);
@@ -173,7 +164,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     this.ref.markForCheck();
   }
   onRemoveUsersFromSubscription() {
-    let users = this.reqUsers.filter(item => item.selected);
+    let users = this.users.filter(item => item.selected);
     forkJoin(users.map(item => this.marketingEmailService.removeUser(item.id, this.filter.filter.customSubscriptions[0]).pipe(map((res) => res),
       catchError(error => of(undefined)))))
       .subscribe(

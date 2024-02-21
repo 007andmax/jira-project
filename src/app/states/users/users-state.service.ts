@@ -232,6 +232,7 @@ export class UsersStateService {
     return this.userForDeArchive;
   }
   public clearFilter() {
+    console.log("clearFilter");
     this.filter = new UserFilters();
     this.onFilter.emit(this.filter);
   }

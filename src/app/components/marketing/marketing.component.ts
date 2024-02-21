@@ -72,7 +72,7 @@ export class MarketingComponent implements OnInit {
       this.filter.setData(data);
       this.selectAll = false;
       this.reqUsers.forEach(item => item.selected = false);
-      this.header.setReqUsers(this.reqUsers);
+      this.header.setUsers(this.reqUsers);
       this.setDefaultScoll();
       this.onScroll();
     })
@@ -133,7 +133,7 @@ export class MarketingComponent implements OnInit {
         if (Index > -1) this.users[Index].userStatistic.ticketsSubmitted = prevValue;
       }
       this.users = [...this.users.map(item => new User(item))];
-      this.header.setReqUsers(this.reqUsers);
+      this.header.setUsers(this.reqUsers);
       this.cd.detectChanges();
     })
     this.userListService.addSubscription(getChangeCompanies);
@@ -200,7 +200,7 @@ export class MarketingComponent implements OnInit {
           if (userIndex > -1) this.users[userIndex].changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
           this.cd.detectChanges();
         }
-        this.header.setReqUsers(this.reqUsers);
+        this.header.setUsers(this.reqUsers);
       });
       this.userListService.addSubscription(stompClient);
 
@@ -229,13 +229,13 @@ export class MarketingComponent implements OnInit {
       })
       this.draftEmailStateService.resetSelectedUsers();
     }
-    this.header.setReqUsers(this.reqUsers);
+    this.header.setUsers(this.reqUsers);
     this.cd.detectChanges();
   }
   onSelectUser(user) {
     this.reqUsers.find(item => item.id === user.id).selected = user.selected;
     // this.selectAll = (this.filter.getFilterList(this.reqUsers, this.companies).find(item => !item.selected)) ? false : true;
-    this.header.setReqUsers(this.reqUsers);
+    this.header.setUsers(this.reqUsers);
     this.cd.detectChanges();
   }
   private onDeArchiveUser(id) {
@@ -290,7 +290,7 @@ export class MarketingComponent implements OnInit {
      this.users = [...this.users, ...usersList.map(item => new User(JSON.parse(JSON.stringify(item))))];
      if (this.selectAll) this.users.forEach(item => item.selected = true);
      this.infiniteScrollDisabled = false;
-     this.header.setReqUsers(this.reqUsers);
+     this.header.setUsers(this.reqUsers);
      if ((this.page_number * 30) > listFilter.length) this.userListService.setBlockList(true);
      this.cd.detectChanges();*/
   }
@@ -311,7 +311,7 @@ export class MarketingComponent implements OnInit {
     this.reqUsers.forEach(item => {
       item.selected = false;
     })
-    this.header.setReqUsers(this.reqUsers);
+    this.header.setUsers(this.reqUsers);
     this.draftEmailStateService.resetSelectedUsers();
     this.usersStateService.clearFilter();
   }
