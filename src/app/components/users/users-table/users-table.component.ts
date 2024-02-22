@@ -153,7 +153,6 @@ export class UsersTableComponent implements OnInit, OnDestroy {
       this.user.selected = data;
       this.cd.markForCheck();
     })
-    console.log("this.companyId", JSON.parse(JSON.stringify(this.companyId)));
     this.defaultSubscriptions = (this.companyId) ? this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).defaultSubscriptions : new UserDefaultSubscription(null);
   }
   delete() {
