@@ -95,7 +95,7 @@
                             [ngForTrackBy]="trackById"
                         >
                             <app-users-table
-                                [companyId]="filter.company"
+                                [companyId]="filter.companies[0]"
                                 [type]="TYPE_LIST_COMPANY_USERS"
                                 [listCustomSubscription]="listCustomSubscription"
                                 [jobTitleList]="jobTitleList"
@@ -144,6 +144,7 @@
                 ></app-users-filter>
             </div>
         </div>
+
 
 
 

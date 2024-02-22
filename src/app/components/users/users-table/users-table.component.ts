@@ -50,6 +50,7 @@ export class UsersTableComponent implements OnInit, OnDestroy {
   @ViewChild('customSubscription') customSubscription: UserTableCustomSubscriptionComponent;
   companies: Array<Company> = [];
   currentUser: CurrentUser = new CurrentUser();
+  defaultSubscriptions: UserDefaultSubscription = new UserDefaultSubscription(null);
   sub: Subscription = new Subscription();
   TYPE_LIST_ALL_USERS = TYPE_LIST_ALL_USERS;
   TYPE_LIST_MARKETING_USERS = TYPE_LIST_MARKETING_USERS;
@@ -110,6 +111,7 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     return `${this.user.firstName} ${this.user.lastName}`;
   }
   showDetailUser() {
+    console.log("this.user", this.user);
     this.usersStateService.showDetailUser(this.user);
     this.cd.markForCheck();
   }
@@ -127,9 +129,6 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     this.usersService.resetPrimaryContact(this.user.id, this.companyId).subscribe(data => {
 
     })
-  }
-  getDefaultSubscriptions() {
-    return (this.companyId) ? this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).defaultSubscriptions : new UserDefaultSubscription(null);
   }
   edit() {
     this.usersStateService.setUserForEdit(new User(JSON.parse(JSON.stringify(this.user))));
@@ -154,6 +153,8 @@ export class UsersTableComponent implements OnInit, OnDestroy {
       this.user.selected = data;
       this.cd.markForCheck();
     })
+    console.log("this.companyId", JSON.parse(JSON.stringify(this.companyId)));
+    this.defaultSubscriptions = (this.companyId) ? this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).defaultSubscriptions : new UserDefaultSubscription(null);
   }
   delete() {
     if (this.user.customerCompaniesInfo.find(item => item.isPrimaryContact)) {

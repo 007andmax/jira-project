@@ -9,8 +9,8 @@
     >
         <div
             *ngIf="defaultSubscriptions && defaultSubscriptions.invoiceSubscription && defaultSubscriptions.invoiceSubscription.enabled"
-            [ngClass]="{'active':defaultSubscriptions.invoiceSubscription.activated,
-        'no-active': !defaultSubscriptions.invoiceSubscription.activated}"
+            [ngClass]="{'active':defaultSubscriptions.invoiceSubscription.activated && defaultSubscriptions.invoiceSubscription.isExist,
+            'no-active':!defaultSubscriptions.invoiceSubscription.activated && defaultSubscriptions.invoiceSubscription.isExist}"
             class="selected-item"
         >
             Invoice Updates
@@ -22,8 +22,8 @@
         <div
             class="selected-item"
             *ngIf="defaultSubscriptions && defaultSubscriptions.ticketSubscription && defaultSubscriptions.ticketSubscription.enabled"
-            [ngClass]="{'active':defaultSubscriptions.ticketSubscription.activated,
-        'no-active': !defaultSubscriptions.ticketSubscription.activated}"
+            [ngClass]="{'active':defaultSubscriptions.ticketSubscription.activated && defaultSubscriptions.ticketSubscription.isExist,
+            'no-active':!defaultSubscriptions.ticketSubscription.activated && defaultSubscriptions.ticketSubscription.isExist}"
         >
             Ticket Updates
             <div
@@ -34,8 +34,8 @@
         <div
             class="selected-item"
             *ngIf="defaultSubscriptions && defaultSubscriptions.ticketManagerSubscription && defaultSubscriptions.ticketManagerSubscription.enabled"
-            [ngClass]="{'active':defaultSubscriptions.ticketManagerSubscription.activated,
-        'no-active': !defaultSubscriptions.ticketManagerSubscription.activated}"
+            [ngClass]="{'active':defaultSubscriptions.ticketManagerSubscription.activated && defaultSubscriptions.ticketManagerSubscription.isExist,
+            'no-active':!defaultSubscriptions.ticketManagerSubscription.activated && defaultSubscriptions.ticketManagerSubscription.isExist}"
         >
             Ticket Manager
             <div

@@ -23,6 +23,7 @@ export class UsersAsideDetailCompanyInfoComponent implements OnInit, OnDestroy {
   @Input() customerCompaniesInfo: UserCustomerCompaniesInfo;
   @Input() user: UserProfile = new UserProfile();
   @Output() onUpdate = new EventEmitter<any>();
+  @ViewChild('jobTitleDp') jobTitleDp: DropDownComponent;
   @ViewChild('userRolesDP') userRolesDP: DropDownComponent;
   toggleContainer: boolean = false;
   MODE_EDIT_SUBSCRIPTION = MODE_EDIT_SUBSCRIPTION;
