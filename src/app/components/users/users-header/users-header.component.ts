@@ -176,11 +176,12 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   }
   onChangeCountFilter() {
     this.countFilter = 0;
+    console.log("this.userFilter", this.userFilter);
     if (this.userFilter.jobTitles.length > 0) this.countFilter++;
     if (this.userFilter.companies.length > 0) this.countFilter++;
     if (this.userFilter.ticketSubscription) this.countFilter++;
     if (this.userFilter.invoiceSubscription) this.countFilter++;
-    if (this.userFilter.invoiceSubscription) this.countFilter++;
+    if (this.userFilter.ticketManagerSubscription) this.countFilter++;
     if (this.userFilter.industries.length > 0) this.countFilter++;
     if (this.userFilter.tags.length > 0) this.countFilter++;
     if (this.userFilter.customSubscriptions.length > 0) this.countFilter++;

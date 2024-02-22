@@ -81,6 +81,9 @@ export class UserFilters {
     public setUserName(data) {
         this.username = data;
     }
+    public getCustomSubscriptions() {
+        return this.customSubscriptions;
+    }
     public setData(data) {
         this.jobTitles = data.jobTitles;
         this.companies = data.companies;

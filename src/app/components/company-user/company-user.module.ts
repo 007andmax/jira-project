@@ -5,6 +5,8 @@ import { UsersHeaderModule } from '../users/users-header/users-header.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { UsersTableModule } from '../users/users-table/users-table.module';
 import { CompanyUserRoutingModule } from './company-user-routing.module';
+import { UsersFilterModule } from '../users/users-header/users-filter/users-filter.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -13,11 +15,13 @@ import { CompanyUserRoutingModule } from './company-user-routing.module';
         CompanyUserComponent
     ],
     imports: [
+        FormsModule,
         CommonModule,
         UsersHeaderModule,
         InfiniteScrollModule,
         UsersTableModule,
-        CompanyUserRoutingModule
+        CompanyUserRoutingModule,
+        UsersFilterModule
 
     ],
 

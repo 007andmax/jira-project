@@ -8,6 +8,7 @@ import { MarketingSubscriptionType } from '../../setting/marketing-email/marketi
 import { UserCustomSubscription } from '../../users/class/user-custom-subscription';
 import { UserFilter } from '../../users/class/user-filter';
 import { LeftPanelUsersService } from '../left-panel-users/services/left-panel-users.service';
+import { UserFilters } from '../../users/class/user-filters';
 
 @Component({
   selector: 'left-panel-marketing',
@@ -17,7 +18,7 @@ import { LeftPanelUsersService } from '../left-panel-users/services/left-panel-u
 })
 export class LeftPanelMarketingComponent implements OnInit {
   open: boolean = false;
-  filter: UserFilter = new UserFilter();
+  filter: UserFilters = new UserFilters();
   listCustomSubscription: Array<MarketingSubscriptionType> = [];
   @Input() activePage: string = "";
   @Output() onChangeState = new EventEmitter();
@@ -48,9 +49,9 @@ export class LeftPanelMarketingComponent implements OnInit {
     })
     this.sub.add(onGetListCustomSubscription);
     this.usersStateService.getOnFilter().subscribe((data) => {
-
-      this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions, data.tags);
-
+      console.log("data", data);
+      this.filter.setData(data);
+      console.log("this.filter", this.filter);
     })
   }
   onChangeCustomSubscription(data) {

@@ -282,6 +282,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.filter.page = 0;
     this.userListService.setBlockList(false);
     this.users = [];
+    this.showPreloader = true;
     this.onScroll();
   }
   private getUsers() {
