@@ -191,7 +191,7 @@
                     class="invalid-feedback"
                     *ngIf="!validate.getIncludedHours()"
                 >
-                    Field is required
+                    Cannot be 0
                 </mat-error>
             </div>
             <div class="qt-input-block qt-f50 --required">
@@ -212,7 +212,7 @@
                         class="invalid-feedback"
                         *ngIf="!validate.getRateExceeding()"
                     >
-                        Field is required
+                        Rate cannot be 0.00
                     </mat-error>
                 </div>
             </div>

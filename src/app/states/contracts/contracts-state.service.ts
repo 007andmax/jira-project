@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { ContractItem } from '../../components/billing/contracts/class/contract-item';
 import { ServiceAgreement } from '../../components/billing/contracts/class/service-agreement';
-import { DefaultServices } from '../../components/billing/default-services/class/default-service';
+import { NonContractServices } from '../../components/billing/non-contract-services/class/non-contract-service';
 import { Company } from '../../interfaces/company/company';
 import { ContractsFilter } from 'src/app/components/billing/contracts/class/contracts-filter';
 
@@ -11,7 +11,7 @@ import { ContractsFilter } from 'src/app/components/billing/contracts/class/cont
 export class ContractsStateService {
   contractForDelete: ContractItem;
   contractForCopy: ServiceAgreement;
-  defaultServices: Array<DefaultServices> = [];
+  defaultServices: Array<NonContractServices> = [];
   onFilter: EventEmitter<any> = new EventEmitter();
   onShowNotificationReview: EventEmitter<any> = new EventEmitter();
   onSort: EventEmitter<any> = new EventEmitter();

@@ -4,7 +4,6 @@ import { Subscription } from 'rxjs';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
-import { DefaultServicesService } from 'src/app/services/default-services/default-services.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';

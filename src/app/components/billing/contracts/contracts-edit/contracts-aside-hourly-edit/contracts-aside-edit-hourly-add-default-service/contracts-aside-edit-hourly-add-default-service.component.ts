@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { Subscription } from 'rxjs';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { Tax } from 'src/app/interfaces/service/tax';
-import { DefaultServicesService } from 'src/app/services/default-services/default-services.service';
+import { NonContractServicesService } from 'src/app/services/non-contract-services/non-contract-services.service';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { DefaultServicesHourlyContract } from '../../../contracts-aside/class/default-service-hourly-contract';
 import * as moment from "moment";
@@ -31,7 +31,7 @@ export class ContractsAsideEditHourlyAddDefaultServiceComponent implements OnIni
   @Output() onAdd = new EventEmitter<any>();
   constructor(private taxesStateService: TaxesStateService,
     private contractsStateService: ContractsStateService,
-    private defaultServicesService: DefaultServicesService) { }
+    private nonContractServicesService: NonContractServicesService) { }
 
   ngOnInit() {
     this.service.onInitForAdd();
@@ -84,7 +84,7 @@ export class ContractsAsideEditHourlyAddDefaultServiceComponent implements OnIni
     this.validate.resetDuplicateName();
     this.validate.resetValidate();
     if (!this.validate.isValidate(this.service) || !this.checkDuplicatedContractServiceByName()) return;
-    this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsHourly.startDate).format('DD MMM YYYY'),
+    this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsHourly.startDate).format('DD MMM YYYY'),
       moment(this.contractsHourly.endDate).format('DD MMM YYYY'), this.contractsHourly.companyId, this.contractsHourly.id, [this.service.name]).subscribe(data => {
         if (Object.keys(data).length === 0) {
           this.add();
@@ -113,7 +113,7 @@ export class ContractsAsideEditHourlyAddDefaultServiceComponent implements OnIni
   add() {
     if (this.checkDuplicatedService()) {
       this.addBtn.setDisabled(true);
-      this.defaultServicesService.addService(this.service.getDataForAddDefault()).subscribe((data: any) => {
+      this.nonContractServicesService.addService(this.service.getDataForAddDefault()).subscribe((data: any) => {
         this.addBtn.setDisabled(false);
         this.service.setVersionedId(data.versionedId);
         this.onAdd.emit(this.service);

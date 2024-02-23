@@ -96,7 +96,7 @@ export class LeftPanelComponent implements OnInit {
         if (this.state === '' || (event instanceof NavigationEnd && this.isInitPopStateNaviate)) {
           if (window.location.href.includes(`/companies`)) this.state = 'new-companies';
           if (window.location.href.includes(`/billing-dashboard`)) this.state = 'billing-dashboard';
-          if (window.location.href.includes(`/default-services`)) this.state = 'new-services';
+          if (window.location.href.includes(`/non-contract-services`)) this.state = 'non-contract-services';
           if (window.location.href.includes(`/billable`)) this.state = 'new-billable';
           if (window.location.href.includes(`/invoices`)) this.state = 'new-billable-invoices';
           if (window.location.href.includes(`/quotes`)) this.state = 'quotes-component';
@@ -307,7 +307,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'contract-statistics') this.goToLink(`contract-statistics`);
       if (this.state === 'new-companies') this.goToLink(`companies`);
       if (this.state === 'billing-dashboard') this.goToLink('billing-dashboard');
-      if (this.state === 'new-services') this.goToLink('default-services');
+      if (this.state === 'non-contract-services') this.goToLink('non-contract-services');
       if (this.state === 'default') this.goToLink('default');
       if (this.state === 'new-billable') this.goToLink('billable');
       if (this.state === 'new-billable-invoices') this.goToLink('invoices');

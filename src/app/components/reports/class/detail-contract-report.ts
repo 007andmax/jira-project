@@ -136,4 +136,12 @@ export class DetailContractreport {
         if (this.intervalAgreement.length > 0) data.intervals = this.intervalAgreement;
         return data;
     }
+
+    /**
+* @description Return object for request to get report
+* @returns {Object} This is the result
+*/
+    public getForExportRequest() {
+        return { "startDate": moment(this.selectedAgreement.startDate).format('YYYY-MM-DD'), "endDate": moment(this.selectedAgreement.endDate).format('YYYY-MM-DD') };
+    }
 }

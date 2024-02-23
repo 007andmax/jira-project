@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Output, EventEmitter, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-upload-area',
@@ -11,7 +11,8 @@ export class UploadAreaComponent implements OnInit {
   idfiles: Array<String> = [];
   @Output() changeFiles = new EventEmitter<any>();
   error: string = "- The uploaded file cannot be more than 4 MB.";
-  constructor(public cd: ChangeDetectorRef,) { }
+  constructor(public cd: ChangeDetectorRef,
+    private elRef: ElementRef,) { }
 
   ngOnInit() {
 
@@ -60,13 +61,16 @@ export class UploadAreaComponent implements OnInit {
         this.uploadFilesSimulator(index + 1);
         return;
       }
+      this.elRef.nativeElement.querySelector('.qt-fileupload').classList.add('fileupload');
       this.uploadFile(this.files[index]).then((data: any) => {
         let res = JSON.parse(data.response);
         this.idfiles.push(res.id);
+        this.elRef.nativeElement.querySelector('.qt-fileupload').classList.remove('fileupload');
         this.changeFiles.emit(this.idfiles);
         this.uploadFilesSimulator(index + 1);
         this.cd.detectChanges();
       }).catch(() => {
+        this.elRef.nativeElement.querySelector('.qt-fileupload').classList.remove('fileupload');
         this.files[index].showError = true;
         this.uploadFilesSimulator(index + 1);
       });

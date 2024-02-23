@@ -1,7 +1,7 @@
-import { DefaultServiceValidate } from '../../../../default-services/class/default-service-validate';
+import { NonContractServiceValidate } from '../../../../non-contract-services/class/non-contract-service-validate';
 
-export class ContractsHourlyAddDefaultServiceValidate extends DefaultServiceValidate {
-    validate:boolean = true;
+export class ContractsHourlyAddDefaultServiceValidate extends NonContractServiceValidate {
+    validate: boolean = true;
 
     public setName(data) {
         this.name = data;

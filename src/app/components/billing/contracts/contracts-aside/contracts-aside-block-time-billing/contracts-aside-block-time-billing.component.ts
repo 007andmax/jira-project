@@ -5,7 +5,7 @@ import { ContractsBlockTime } from '../class/contracts-block-time';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { ContractsBlockTimeService } from '../class/contracts-block-time-service';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
-import { DefaultServicesService } from 'src/app/services/default-services/default-services.service';
+import { NonContractServicesService } from 'src/app/services/non-contract-services/non-contract-services.service';
 import * as moment from "moment";
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TechUsersStateService } from 'src/app/components/shared/tech-users/services/tech-users-state.service';
@@ -56,7 +56,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     private сontractsStateService: ContractsStateService,
     private contractsService: ContractsService,
     private usersStateService: UsersStateService,
-    private defaultServicesService: DefaultServicesService,
+    private nonContractServicesService: NonContractServicesService,
     private techState: TechUsersStateService,
     private modalService: NgbModal,
     private taxesStateService: TaxesStateService,
@@ -153,7 +153,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
       this.cd.detectChanges();
       return;
     }
-    this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
+    this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
       moment(this.contractsBlockTime.endDate).format('DD MMM YYYY'), this.contractsBlockTime.companyId, null, this.contractsBlockTime.getAllServicesName()).subscribe(data => {
         if (Object.keys(data).length === 0) {
           this.contractsService.createContract(createBillableItem, this.contractsBlockTime.getDataForCreate()).subscribe(res => {
@@ -180,7 +180,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
   }
   onCheckDuplicatedCustomService() {
     if (this.contractsBlockTime.blockTimeServices.length === 0 || !this.contractsBlockTime.checkDuplicatedBlockTimeServices()) return;
-    this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
+    this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
       moment(this.contractsBlockTime.endDate).format('DD MMM YYYY'), this.contractsBlockTime.companyId, null, this.contractsBlockTime.getBlockTimeServicesName()).subscribe(data => {
         if (Object.keys(data).length > 0) {
           let names = Object.keys(data);
@@ -195,7 +195,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
   }
   onCheckDuplicatedService() {
     if (this.contractsBlockTime.services.length === 0 || !this.contractsBlockTime.checkDuplicatedServices()) return;
-    this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
+    this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
       moment(this.contractsBlockTime.endDate).format('DD MMM YYYY'), this.contractsBlockTime.companyId, null, this.contractsBlockTime.getServicesName()).subscribe(data => {
         if (Object.keys(data).length > 0) {
           let names = Object.keys(data);

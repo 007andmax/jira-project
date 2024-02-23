@@ -1,9 +1,9 @@
 import { CurrentUser } from "src/class/current-user/current-user";
-import { DefaultServicesCompany } from "../../billing/default-services/class/default-service-company";
+import { NonContractServicesCompany } from "../../billing/non-contract-services/class/non-contract-service-company";
 import { RemoteSessionClientUser } from "./remote-sessions-client-user";
 
 export class RemoteSession {
-    clientCompany: DefaultServicesCompany;
+    clientCompany: NonContractServicesCompany;
     clientUser: RemoteSessionClientUser;
     createdAt: number;
     deletedAt: number;

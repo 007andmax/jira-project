@@ -1,6 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { DefaultServicesHourlyContract } from '../../class/default-service-hourly-contract';
-import { DefaultServicesService } from 'src/app/services/default-services/default-services.service';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 
 @Component({
