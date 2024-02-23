@@ -12,7 +12,7 @@
     ></app-users-header>
     <div class="qt-page-list users-page qt-df">
         <div
-            class="qt-page-list__body qt-pt-32 qt-pl-32"
+            class="qt-page-list__body qt-pl-32"
             [ngClass]="{'qt-pr-32':!toggleFilter}"
         >
             <div class="qt-page-list__header-thead-container">
@@ -45,13 +45,6 @@
                             <th class="users-table__company users-table__company-full">Company</th>
                             <th
                                 class="users-table__company pointer"
-                                (click)="onFilter('PORTAL_STATUS')"
-                            >
-                                Portal Status
-                                <span class="qt-table-modern__sorting"></span>
-                            </th>
-                            <th
-                                class="users-table__company pointer"
                                 (click)="onFilter('INDUSTRY')"
                             >
                                 Industry
@@ -62,10 +55,16 @@
                                 class="users-table__tickets pointer"
                                 (click)="onFilter('TICKET_NUMBER')"
                             >
-                                Tickets
+                                No. Tickets
                                 <span class="qt-table-modern__sorting"></span>
                             </th>
-                            <th class="users-table__email"></th>
+                            <th
+                              class="users-table__company pointer"
+                              (click)="onFilter('PORTAL_STATUS')"
+                            >
+                              Portal Status
+                              <span class="qt-table-modern__sorting"></span>
+                            </th>
                             <th class="users-table__menu"></th>
                         </tr>
                     </thead>

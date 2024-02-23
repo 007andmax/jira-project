@@ -1,10 +1,24 @@
 @import "./src/assets/styles/variable";
 
 .users-page {
-  th.users-table__company,
-  th.users-table__contract-no,
-  th.users-table__tickets {
-    color: $gray-900;
+  .qt-table-modern {
+    border-spacing: 0 0;
+    th {
+      font-weight: 500;
+      font-size: 14px;
+      color: $gray-500;
+      text-transform: capitalize;
+    }
+    td {
+      color: $gray-900;
+    }
+    tr {
+      &:hover td,
+      &.--selected td {
+        background-color: $blue-dark-25;
+        border-color: transparent;
+      }
+    }
   }
   .users-table {
     &__check {
@@ -15,9 +29,9 @@
     }
 
     &__name {
-      width: 232px;
-      max-width: 232px;
-      min-width: 232px;
+      width: 270px;
+      max-width: 270px;
+      min-width: 270px;
 
       &--avatar {
         height: 40px;
@@ -48,7 +62,6 @@
     }
 
     &__company {
-      color: $gray-600;
       width: max-content;
       min-width: 88px;
     }
@@ -57,7 +70,6 @@
       width: 216px;
       max-width: 216px;
       min-width: 216px;
-      color: $gray-600;
     }
 
     &__subscription {
@@ -84,23 +96,16 @@
     }
 
     &__tickets {
-      width: 80px;
-      max-width: 80px;
-      min-width: 80px;
-      color: $gray-600;
-    }
-
-    &__email {
-      width: 25px;
-      max-width: 25px;
-      min-width: 25px;
+      width: 110px;
+      max-width: 110px;
+      min-width: 110px;
     }
 
     &__menu {
-      width: 38px;
-      max-width: 38px;
-      min-width: 38px;
-      padding: 23px 16px 23px 8px;
+      width: 104px;
+      max-width: 104px;
+      min-width: 104px;
+      padding: 23px 24px 23px 8px;
     }
   }
   .qt-table-modern__sorting {
