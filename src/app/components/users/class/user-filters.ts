@@ -6,7 +6,6 @@ export class UserFilters {
     new FilterListTop('INDUSTRY', ''),
     new FilterListTop('TICKET_NUMBER', ''),
     new FilterListTop('PORTAL_STATUS', '')];
-
     "jobTitles": Array<string> = [];
     "companies": Array<string> = [];
     "ticketSubscription": boolean;

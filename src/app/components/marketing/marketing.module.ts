@@ -5,6 +5,8 @@ import { MarketingComponent } from './marketing.component';
 import { UsersHeaderModule } from '../users/users-header/users-header.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { UsersTableModule } from '../users/users-table/users-table.module';
+import { FormsModule } from '@angular/forms';
+import { UsersFilterModule } from '../users/users-header/users-filter/users-filter.module';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { UsersTableModule } from '../users/users-table/users-table.module';
         MarketingRoutingModule,
         UsersHeaderModule,
         InfiniteScrollModule,
-        UsersTableModule
+        UsersTableModule,
+        FormsModule,
+        UsersFilterModule
 
     ],
 })
