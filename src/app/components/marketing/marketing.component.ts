@@ -258,7 +258,7 @@ export class MarketingComponent implements OnInit {
       return;
     }
     if (this.filter.page > 0) this.showPendingPreloader = true;
-    this.usersService.getFilterUsers(this.filter.size, this.filter.page, this.filter.getDataForRequest(), this.filter.isArchive).subscribe((data: Array<User>) => {
+    this.usersService.getFilterUsers(this.filter.size, this.filter.page, this.filter.getDataForRequest(), this.filter.isArchive, true).subscribe((data: Array<User>) => {
       this.users = [...this.users, ...data];
       this.infiniteScrollDisabled = false;
       if (data.length < this.filter.size) this.userListService.setBlockList(true);

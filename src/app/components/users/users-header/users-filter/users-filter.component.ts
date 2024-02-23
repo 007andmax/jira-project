@@ -25,6 +25,9 @@ import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 import { CompanyTag } from 'src/app/components/companies/company-tags/class/company-tag';
 import { UserDefaultSubscriptionItem } from '../../class/user-default-subscription-item';
 import { UsersFilterTagsComponent } from './users-filter-tags/users-filter-tags.component';
+import { MarketingSubscriptionType } from 'src/app/components/setting/marketing-email/marketing-subscription-type/class/marketing-subscription-type';
+import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
+import { TYPE_LIST_MARKETING_USERS } from 'src/app/const/users';
 
 @Component({
   selector: 'app-users-filter',
@@ -42,15 +45,18 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
   @Output() onClose = new EventEmitter();
   globalFilter: UserGlobalFilter = new UserGlobalFilter();
   industries: Array<CrmCompanyIndustry> = [];
+  listCustomSubscription: Array<MarketingSubscriptionType> = [];
   public filter: UserFilters = new UserFilters();
+  TYPE_LIST_MARKETING_USERS = TYPE_LIST_MARKETING_USERS;
   sub: Subscription = new Subscription();
   constructor(private companiesState: CompaniesStateService,
     private crmStateService: CrmStateService,
     private customerPortalStateService: CustomerPortalStateService,
-    private usersStateService: UsersStateService,
+    public usersStateService: UsersStateService,
     private modalService: NgbModal,
     private leftPanelStateService: LeftPanelStateService,
     public tagsStateService: TagsStateService,
+    private marketingEmailStateService: MarketingEmailStateService,
     private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -82,6 +88,11 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
       this.filter.setIsArchive(data.isArchive);
     });
     this.sub.add(geLefttFilter);
+    this.listCustomSubscription = this.marketingEmailStateService.getListCustomSubscription();
+    let onGetListCustomSubscription = this.marketingEmailStateService.onGetListCustomSubscription.subscribe(data => {
+      this.listCustomSubscription = data;
+    })
+    this.sub.add(onGetListCustomSubscription);
     let onInitGlobalFilter = this.usersStateService.onInitGlobalFilter.subscribe((data: UserGlobalFilter) => {
       console.log("data", data);
       this.globalFilter = new UserGlobalFilter(JSON.parse(JSON.stringify(data)));
@@ -195,6 +206,10 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
   public onSelectIndustry(items) {
     this.filter.setIndustries(items.map(item => item.id));
     this.globalFilter.setIndustries(items.map(item => item.id));
+  }
+  public onSelectMarketingSubscription(items) {
+    this.filter.setCustomSubscriptions(items.map(item => item.id));
+    this.globalFilter.setCustomSubscriptions(items.map(item => item.id));
   }
   clearClientIndustry() {
     this.filter.setIndustries([]);

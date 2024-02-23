@@ -40,6 +40,17 @@
         [placement]="'top-left'"
         (tagsChange)="onChangeTags($event)"
     ></app-users-filter-tags>
+    <app-users-filter-industry
+        #marketingDp
+        *ngIf="usersStateService.getModeUserFilterSubscription() == TYPE_LIST_MARKETING_USERS"
+        class="qt-mb-10"
+        [title]="'Marketing Subscription'"
+        [placeholder]="'Search by Marketing Subscription'"
+        [placement]="'top-left'"
+        [field]="'name'"
+        [list]="listCustomSubscription"
+        (filterChange)="onSelectMarketingSubscription($event)"
+    ></app-users-filter-industry>
     <!-- <app-tickets-filter-tags
         #tagsDp
         [placement]="'bottom-left'"
@@ -110,6 +121,11 @@
         </button>
     </div>
 </div>
+
+
+
+
+
 
 
 

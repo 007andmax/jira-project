@@ -4,7 +4,7 @@ export class UserGlobalFilter {
     "id": string;
     "name": string = "";
     "global": boolean = false;
-    "forMarketing": boolean;
+    "forMarketing": boolean = false;
     "jobTitles": Array<string> = [];
     "companies": Array<string> = [];
     "industries": Array<string> = [];
@@ -22,6 +22,9 @@ export class UserGlobalFilter {
                 this[key] = data[key];
             }
         }
+    }
+    public setCustomSubscriptions(data) {
+        this.customSubscriptions = data;
     }
     public setIndustries(data) {
         this.industries = data;
