@@ -10,6 +10,7 @@
       text-transform: capitalize;
     }
     td {
+      font-size: 14px;
       color: $gray-900;
     }
     tr {
@@ -19,13 +20,36 @@
         border-color: transparent;
       }
     }
+
+    .tag__modern {
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: 500;
+      padding: 4px 8px;
+      text-transform: unset;
+      border-color: $gray-300;
+      background-color: $gray-50;
+      color: $gray-500;
+
+      &.--unauthorized {
+        border-color: $gray-300;
+        background-color: $gray-50;
+        color: $gray-500;
+      }
+      &.--invite-sent,
+      &.--registered {
+        border-color: $green-200;
+        background-color: $green-25;
+        color: $green-700
+      }
+    }
   }
   .users-table {
     &__check {
       padding: 12px 6px 12px 16px;
-      width: 38px;
-      max-width: 38px;
-      min-width: 38px;
+      width: 36px;
+      max-width: 36px;
+      min-width: 36px;
     }
 
     &__name {
@@ -51,12 +75,10 @@
       }
 
       &--user-name {
-        @include body-m__m;
         color: $gray-900;
       }
 
       &--profession {
-        @include body-m;
         color: $gray-600;
       }
     }
@@ -167,6 +189,27 @@
       padding-bottom: 5px;
       margin: 2px;
     }
+  }
+}
+
+.filter-button {
+  &.active {
+    color: $blue-light-600;
+    background-color: #16a4fa10;
+    border-color: transparent;
+    &:hover {
+      color: $blue-light-600;
+    }
+
+    .icon__filter {
+      background-color: $blue-light-600;
+    }
+  }
+}
+
+.aside-filters-content__footer {
+  .qt-button {
+    max-width: 88px;
   }
 }
 

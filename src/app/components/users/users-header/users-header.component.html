@@ -61,10 +61,11 @@
                     </div>
                 </div>
                 <button
-                    class="qt-btn btn-filter qt-ml-8 qt-df"
+                    class="qt-button --gray --md filter-button qt-ml-8 qt-df"
                     [ngClass]="{'active':toggleFilter}"
                     (click)="setToggleFilter(!toggleFilter)"
                 >
+                    <span class="icon__filter qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
                     <span
                         class="filter-counter qt-circle qt-sz-18 qt-fw-600 qt-fs-10 qt-color-white qt-bg-info qt-mr-8 qt-df qt-ai-c qt-jc-c"
                         *ngIf="countFilter > 0"
