@@ -43,13 +43,6 @@
                                 Name
                                 <span class="qt-table-modern__sorting"></span>
                             </th>
-                            <th
-                                class="users-table__company pointer"
-                                (click)="onFilter('PORTAL_STATUS')"
-                            >
-                                Portal Status
-                                <span class="qt-table-modern__sorting"></span>
-                            </th>
                             <th class="users-table__company">
                                 Email
                                 <span class="qt-table-modern__sorting"></span>
@@ -62,6 +55,7 @@
                                 <span class="qt-table-modern__sorting"></span>
                             </th>
                             <th class="users-table__contract-no">Contact No</th>
+                            <th class="users-table__subscription">Subscription</th>
                             <th
                                 class="users-table__tickets pointer"
                                 (click)="onFilter('TICKET_NUMBER')"
@@ -69,7 +63,13 @@
                                 Tickets
                                 <span class="qt-table-modern__sorting"></span>
                             </th>
-                            <th class="users-table__email"></th>
+                            <th
+                              class="users-table__company pointer"
+                              (click)="onFilter('PORTAL_STATUS')"
+                            >
+                              Portal Status
+                              <span class="qt-table-modern__sorting"></span>
+                            </th>
                             <th class="users-table__menu"></th>
                         </tr>
                     </thead>
