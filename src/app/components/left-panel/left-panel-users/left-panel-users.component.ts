@@ -134,6 +134,7 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     })
   }
   public goToAll() {
+    console.log("goToAll");
     this.goToState();
     this.onShowAll();
   }

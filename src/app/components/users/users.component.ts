@@ -84,7 +84,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.onScroll();
     this.cd.detectChanges();
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
-      console.log("getOnFilter");
+      console.log("UsersComponent getOnFilter");
       document.body.querySelector(".main-container").scrollTo(0, 0);
       this.showPreloader = true;
       if (this.filter.isArchive != this.usersStateService.getShowArchivedCompanies()) {
@@ -273,6 +273,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.userListService.addSubscription(archiveUser);
   }
   public onScroll() {
+    console.log("UsersComponent", "onScroll");
     this.infiniteScrollDisabled = true;
     this.getUsers();
 
@@ -320,7 +321,7 @@ export class UsersComponent implements OnInit, OnDestroy {
       item.selected = false;
     })
     this.users.forEach(item => item.selected = false)
-    this.usersStateService.clearFilter();
+    this.usersStateService.clearFilterWithoutChange();
     this.filter = new UserFilters();
     console.log("this.filter", this.filter);
     this.header.setUsers(this.users);

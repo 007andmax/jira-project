@@ -71,14 +71,14 @@ export class MarketingComponent implements OnInit {
     this.onScroll();
     this.cd.detectChanges();
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
-      console.log("getOnFilter");
+      console.log("MarketingComponent getOnFilter");
       document.body.querySelector(".main-container").scrollTo(0, 0);
       this.showPreloader = true;
       this.setFilters(data);
       this.onScroll();
       this.cd.detectChanges();
     })
-    this.userListService.addSubscription(geLefttFilter);
+    this.sub.add(geLefttFilter);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === ARCHIVE_USER) {
@@ -92,7 +92,7 @@ export class MarketingComponent implements OnInit {
         }
       }
     })
-    this.userListService.addSubscription(getConfirm);
+    this.sub.add(getConfirm);
     let getChangeCompanies = this.usersStateService.getChangeUsers().subscribe((data: UserChange) => {
       if ((data.action === 'USER_SAVED' || data.action === 'USER_ARCHIVED') && data.data.accountType !== "TECH") {
         const userIndex = this.users.findIndex((item) => item.id === data.data.id);
@@ -120,7 +120,7 @@ export class MarketingComponent implements OnInit {
       this.header.setUsers(this.users);
       this.cd.detectChanges();
     })
-    this.userListService.addSubscription(getChangeCompanies);
+    this.sub.add(getChangeCompanies);
     this.usersStateService.closeDetailAside.subscribe(data => {
       this.setIdDetailUser('');
     })
@@ -239,6 +239,7 @@ export class MarketingComponent implements OnInit {
   }
 
   public onScroll() {
+    console.log("MarketingComponent", "onScroll");
     this.infiniteScrollDisabled = true;
     this.getUsers();
 
@@ -258,7 +259,7 @@ export class MarketingComponent implements OnInit {
       return;
     }
     if (this.filter.page > 0) this.showPendingPreloader = true;
-    this.usersService.getFilterUsers(this.filter.size, this.filter.page, this.filter.getDataForRequest(), this.filter.isArchive, true).subscribe((data: Array<User>) => {
+    this.usersService.getFilterUsers(this.filter.size, this.filter.page, this.filter.getDataForRequest(), this.filter.isArchive).subscribe((data: Array<User>) => {
       this.users = [...this.users, ...data];
       this.infiniteScrollDisabled = false;
       if (data.length < this.filter.size) this.userListService.setBlockList(true);
@@ -286,7 +287,7 @@ export class MarketingComponent implements OnInit {
       item.selected = false;
     })
     this.users.forEach(item => item.selected = false)
-    this.usersStateService.clearFilter();
+    this.usersStateService.clearFilterWithoutChange();
     this.filter = new UserFilters();
     console.log("this.filter", this.filter);
     this.header.setUsers(this.users);
