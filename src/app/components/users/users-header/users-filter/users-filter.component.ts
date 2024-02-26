@@ -27,7 +27,7 @@ import { UserDefaultSubscriptionItem } from '../../class/user-default-subscripti
 import { UsersFilterTagsComponent } from './users-filter-tags/users-filter-tags.component';
 import { MarketingSubscriptionType } from 'src/app/components/setting/marketing-email/marketing-subscription-type/class/marketing-subscription-type';
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
-import { TYPE_LIST_MARKETING_USERS } from 'src/app/const/users';
+import { MODE_MARKETING_USERS_LIST, TYPE_LIST_MARKETING_USERS } from 'src/app/const/users';
 
 @Component({
   selector: 'app-users-filter',
@@ -38,6 +38,7 @@ import { TYPE_LIST_MARKETING_USERS } from 'src/app/const/users';
 export class UsersFilterComponent implements OnInit, OnDestroy {
   @ViewChild('jobTitleDp') jobTitleDp: UsersFilterJobTitleComponent;
   @ViewChild('companiesDp') companiesDp: TicketsFilterCompaniesDropDownComponent;
+  @ViewChild('customSubscriptionDp') customSubscriptionDp: UsersFilterIndustryComponent;
   @ViewChild('industriesDp') industriesDp: UsersFilterIndustryComponent;
   @ViewChild('subscriptionDp') subscriptionDp: UsersFilterSubscriptionsComponent;
   @ViewChild('tagsDp') tagsDp: UsersFilterTagsComponent;
@@ -47,7 +48,7 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
   industries: Array<CrmCompanyIndustry> = [];
   listCustomSubscription: Array<MarketingSubscriptionType> = [];
   public filter: UserFilters = new UserFilters();
-  TYPE_LIST_MARKETING_USERS = TYPE_LIST_MARKETING_USERS;
+  MODE_MARKETING_USERS_LIST = MODE_MARKETING_USERS_LIST;
   sub: Subscription = new Subscription();
   constructor(private companiesState: CompaniesStateService,
     private crmStateService: CrmStateService,
@@ -133,6 +134,15 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
         this.onChangeTags([]);
         this.tagsDp.clearWithOutChanges();
       }
+      let customSubscriptions = this.listCustomSubscription.filter(item => data.customSubscriptions.some(userId => userId == item.id));
+      console.log("customSubscriptions", customSubscriptions);
+      if (customSubscriptions.length > 0) {
+        this.customSubscriptionDp.selectedTag = customSubscriptions;
+        this.filter.setCustomSubscriptions(customSubscriptions.map(item => item.id));
+      } else {
+        this.onSelectCustomSubscription([]);
+        this.customSubscriptionDp.clearWithOutChanges();
+      }
       let defaultSubscriptions = new UserDefaultSubscription({
         invoiceSubscription: new UserDefaultSubscriptionItem({ enabled: data.invoiceSubscription, activated: true }),
         ticketSubscription: new UserDefaultSubscriptionItem({ enabled: data.ticketSubscription, activated: true }),
@@ -184,6 +194,8 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
     this.tagsDp.clearWithOutChanges();
     this.filter.setUserName(null);
     this.filter.setClientType(null);
+    this.customSubscriptionDp.clearWithOutChanges();
+    this.filter.setCustomSubscriptions([]);
     this.onClearAll.emit(null);
     this.globalFilter = new UserGlobalFilter();
     console.log("clearAll");
@@ -207,7 +219,7 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
     this.filter.setIndustries(items.map(item => item.id));
     this.globalFilter.setIndustries(items.map(item => item.id));
   }
-  public onSelectMarketingSubscription(items) {
+  public onSelectCustomSubscription(items) {
     this.filter.setCustomSubscriptions(items.map(item => item.id));
     this.globalFilter.setCustomSubscriptions(items.map(item => item.id));
   }
@@ -217,7 +229,7 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
     this.usersStateService.onInitFilter(this.filter);
   }
   saveFilter() {
-    const conrainer = (this.leftPanelStateService.activePage == "new-users") ? "app-users" : "company-user";
+    const conrainer = (this.leftPanelStateService.activePage == "new-users") ? "app-users" : this.leftPanelStateService.activePage == "marketing" ? "marketing" : "company-user";
     const modalRef = this.modalService.open(UserFilterSaveComponent, { windowClass: 'xs-modal user-modal', container: conrainer, backdrop: 'static', keyboard: false });
     modalRef.componentInstance.globalFilter = new UserGlobalFilter(JSON.parse(JSON.stringify(this.globalFilter)));
     this.ref.detectChanges();

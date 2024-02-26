@@ -41,63 +41,16 @@
         (tagsChange)="onChangeTags($event)"
     ></app-users-filter-tags>
     <app-users-filter-industry
-        #marketingDp
-        *ngIf="usersStateService.getModeUserFilterSubscription() == TYPE_LIST_MARKETING_USERS"
+        #customSubscriptionDp
+        *ngIf="usersStateService.getModeUserFilterSubscription() == MODE_MARKETING_USERS_LIST"
         class="qt-mb-10"
         [title]="'Marketing Subscription'"
         [placeholder]="'Search by Marketing Subscription'"
         [placement]="'top-left'"
         [field]="'name'"
         [list]="listCustomSubscription"
-        (filterChange)="onSelectMarketingSubscription($event)"
+        (filterChange)="onSelectCustomSubscription($event)"
     ></app-users-filter-industry>
-    <!-- <app-tickets-filter-tags
-        #tagsDp
-        [placement]="'bottom-left'"
-        (tagsChange)="onChangeTags($event)"
-    ></app-tickets-filter-tags>
-    <tickets-filter-created-drop-down
-        #datesDp
-        class="qt-pt-16"
-        [title]="'Created'"
-        [change]="true"
-        [search]="true"
-        [sort]="false"
-        [class]="['qt-dropdown']"
-        [container]="'body'"
-        [placement]="'bottom-right'"
-        [dropdownHeight]="'initial'"
-        [field]="'title'"
-        [placeholder]="'Select'"
-        (onSelectedItem)="onSelectCustomDateRange($event)"
-        (selectedDate)="onSelectDates($event)"
-    ></tickets-filter-created-drop-down>
-    <tickets-filter-users-drop-down
-        #usersDp
-        [title]="'User'"
-        [placeholder]="'Select user'"
-        [placement]="'top-left'"
-        [list]="users"
-        (filterChange)="onSelectUser($event)"
-    ></tickets-filter-users-drop-down>
-    <tickets-filter-users-drop-down
-        #techUsersDp
-        [placeholder]="'Select tech user'"
-        [title]="'Tech User'"
-        [placement]="'top-left'"
-        [list]="techUsersList"
-        (filterChange)="onSelectTechUser($event)"
-    ></tickets-filter-users-drop-down>
-    <tickets-filter-drop-down
-        #priorityDp
-        [title]="'Priority'"
-        [placeholder]="'Select priority'"
-        [placement]="'top-left'"
-        [field]="'name'"
-        [list]="ticketPriorities"
-        (filterChange)="onSelectPriority($event)"
-    >
-    </tickets-filter-drop-down> -->
 </div>
 <div class="aside-filters-content__footer">
     <div class="qt-df">
@@ -121,94 +74,3 @@
         </button>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <div
-    class="qt-page-list__header-filters"
-
->
-    <app-drop-down
-        #titlesDp
-        class="qt-w100 qt-mr-8"
-        [placeholder]="'Select Job Title'"
-        [list]="jobTitleList"
-        [field]="'name'"
-        [search]="true"
-        [change]="true"
-        [heightInput]="'36px'"
-        (onSelectedItem)="onSelectTitle($event)"
-    ></app-drop-down>
-    <company-drop-down
-        #companiesDp
-        class="qt-w100 qt-mr-8"
-        [placeholder]="'Search By Company'"
-        [field]="'name'"
-        [search]="true"
-        [change]="true"
-        [heightInput]="'36px'"
-        (onSelectedItem)="onSelectCompany($event)"
-    ></company-drop-down>
-    <users-filter-subscriptions
-        #subscriptionDp
-        class="qt-w100 qt-mr-8"
-        (onChangeDefault)="onChangeDefaultSubscription($event)"
-        (onChangeCustom)="onChangeCustomSubscription($event)"
-    ></users-filter-subscriptions>
-    <app-drop-down
-        #industriesDp
-        class="qt-w100 qt-mr-8"
-        [placeholder]="'Search By Industry'"
-        [list]="industries"
-        [field]="'name'"
-        [search]="true"
-        [change]="true"
-        [heightInput]="'36px'"
-        (onSelectedItem)="onSelectClientIndustry($event)"
-    ></app-drop-down>
-    <app-company-tags
-        #tagsDp
-        [blockUserTag]="true"
-        class="filter-category tags dropdown companies-filter-tags qt-w100"
-        (tagsChange)="onChangeTags($event)"
-    ></app-company-tags>
-</div> -->
