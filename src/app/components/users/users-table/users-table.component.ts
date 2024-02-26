@@ -193,6 +193,8 @@ export class UsersTableComponent implements OnInit, OnDestroy {
       let index = list.findIndex(item => item.id === this.user.id);
       if (index > -1) this.draftEmailStateService.removeSelectedUser(index);
     }
+    console.log("selected", this.selected);
+    console.log("this.user", this.user);
     this.onSelectUser.emit(this.user);
     this.cd.detectChanges();
   }

@@ -59,11 +59,11 @@
                                 <span class="qt-table-modern__sorting"></span>
                             </th>
                             <th
-                              class="users-table__company pointer"
-                              (click)="onFilter('PORTAL_STATUS')"
+                                class="users-table__company pointer"
+                                (click)="onFilter('PORTAL_STATUS')"
                             >
-                              Portal Status
-                              <span class="qt-table-modern__sorting"></span>
+                                Portal Status
+                                <span class="qt-table-modern__sorting"></span>
                             </th>
                             <th class="users-table__menu"></th>
                         </tr>
@@ -91,7 +91,6 @@
                         >
                             <app-users-table
                                 [selected]="idDetailUser === user.id"
-                                (click)="setIdDetailUser(user.id)"
                                 [type]="TYPE_LIST_ALL_USERS"
                                 [showArchivedUsers]="filter.isArchive"
                                 (onSelectUser)="onSelectUser($event)"

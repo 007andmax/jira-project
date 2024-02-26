@@ -28,6 +28,7 @@ import { UsersFilterTagsComponent } from './users-filter-tags/users-filter-tags.
 import { MarketingSubscriptionType } from 'src/app/components/setting/marketing-email/marketing-subscription-type/class/marketing-subscription-type';
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
 import { MODE_MARKETING_USERS_LIST, TYPE_LIST_MARKETING_USERS } from 'src/app/const/users';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-users-filter',
@@ -58,6 +59,7 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
     private leftPanelStateService: LeftPanelStateService,
     public tagsStateService: TagsStateService,
     private marketingEmailStateService: MarketingEmailStateService,
+    private permissionsService: PermissionsService,
     private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -227,6 +229,9 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
     this.filter.setIndustries([]);
     console.log("clearClientIndustry");
     this.usersStateService.onInitFilter(this.filter);
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   saveFilter() {
     const conrainer = (this.leftPanelStateService.activePage == "new-users") ? "app-users" : this.leftPanelStateService.activePage == "marketing" ? "marketing" : "company-user";

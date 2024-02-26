@@ -16,6 +16,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UsersService } from 'src/app/services/users/users.service';
 import { DELETE_GLOBAL_USERS_FILTER } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'left-panel-marketing',
@@ -48,6 +49,7 @@ export class LeftPanelMarketingComponent implements OnInit {
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     private usersService: UsersService,
+    private permissionsService: PermissionsService,
   ) { }
 
   ngOnInit() {
@@ -136,6 +138,9 @@ export class LeftPanelMarketingComponent implements OnInit {
   }
   public goToState() {
     this.onChangeState.emit('marketing');
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
 
   toggleFilter(event) {

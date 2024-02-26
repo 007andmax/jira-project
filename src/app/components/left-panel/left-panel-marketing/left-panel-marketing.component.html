@@ -73,6 +73,7 @@
                     ngbDropdown
                     [placement]="'bottom-right'"
                     (click)="blockClick($event)"
+                    *ngIf="getPermissions('DELETE_USER_FILTER')"
                 >
                     <div
                         class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain actions-filter"

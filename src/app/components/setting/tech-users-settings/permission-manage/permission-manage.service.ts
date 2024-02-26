@@ -49,7 +49,10 @@ export class PermissionManageService {
       'VIEW_USERS',
       'CREATE_USERS',
       'EDIT_USERS',
-      'ARCHIVE_USERS'
+      'ARCHIVE_USERS',
+      'CREATE_USER_FILTER',
+      'EDIT_USER_FILTER',
+      'DELETE_USER_FILTER'
     ],
     Accounting: [
       'VIEW_ACCOUNTING',

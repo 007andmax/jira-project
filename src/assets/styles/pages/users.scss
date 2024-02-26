@@ -36,7 +36,11 @@
         background-color: $gray-50;
         color: $gray-500;
       }
-      &.--invite-sent,
+      &.--invite-sent {
+        border-color: $blue-light-60;
+        background-color: $blue-light-25;
+        color: $blue-light-700;
+      }
       &.--registered {
         border-color: $green-200;
         background-color: $green-25;

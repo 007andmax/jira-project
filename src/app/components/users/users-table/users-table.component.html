@@ -148,90 +148,99 @@
         (click)="showDetailUser()"
     ></td>
     <td
-      class="users-table__company"
-      (click)="showDetailUser()"
-      *ngIf="type !== TYPE_LIST_MARKETING_USERS"
+        class="users-table__company"
+        (click)="showDetailUser()"
+        *ngIf="type !== TYPE_LIST_MARKETING_USERS"
     >
-      <span class="tag__modern">{{ user.portalAccessStatus }}</span>
+        <span
+            class="tag__modern"
+            [ngClass]="{'--registered':user.portalAccessStatus == 'Registered',
+        '--invite-sent':user.portalAccessStatus == 'Invite sent',
+    '--unauthorized':user.portalAccessStatus == 'Unauthorized'}"
+        >
+            {{ user.portalAccessStatus }}
+        </span>
     </td>
     <td class="users-table__menu">
         <div class="qt-df qt-button-square-wrap">
-          <div class="qt-button-square qt-button-square__prepend pointer"
-               *ngIf="!showArchivedUsers && !customerPortalStateService.isCustomerPortal"
-               (click)="showAsideForDraftEmail()"
-               (mouseenter)="draftEmailTooltip.show($event.target)"
-               (mouseleave)="draftEmailTooltip.hide()"
-          >
-            <app-dynamic-tooltip
-              [content]="'Draft Email'"
-              [position]="'top'"
-              #draftEmailTooltip
-            ></app-dynamic-tooltip>
-            <div class="icon__email qt-sz-16 pointer qt-bg-contain"></div>
-          </div>
-          <div
-            ngbDropdown
-            [container]="'body'"
-            [placement]="'bottom-right'"
-          >
-            <div class="qt-button-square qt-button-square__afterpend pointer"
-                 id="dropdownBasic1"
-                 ngbDropdownToggle
+            <div
+                class="qt-button-square qt-button-square__prepend pointer"
+                *ngIf="!showArchivedUsers && !customerPortalStateService.isCustomerPortal"
+                (click)="showAsideForDraftEmail()"
+                (mouseenter)="draftEmailTooltip.show($event.target)"
+                (mouseleave)="draftEmailTooltip.hide()"
             >
-              <div class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"></div>
+                <app-dynamic-tooltip
+                    [content]="'Draft Email'"
+                    [position]="'top'"
+                    #draftEmailTooltip
+                ></app-dynamic-tooltip>
+                <div class="icon__email qt-sz-16 pointer qt-bg-contain"></div>
             </div>
-            <ul
-              class="qt-dropdown-menu"
-              ngbDropdownMenu
-              aria-labelledby="dropdownBasic1"
+            <div
+                ngbDropdown
+                [container]="'body'"
+                [placement]="'bottom-right'"
             >
-              <li
-                class="pointer"
-                *ngIf="!showArchivedUsers && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user))"
-                (click)="edit()"
-                ngbDropdownItem
-              >
-                <div class="icon__edit qt-bg-contain qt-sz-20 qt-mr-12"></div>
-                Edit
-              </li>
-              <li
-                class="pointer"
-                *ngIf="!showArchivedUsers && getPermissions('EDIT_USERS') && type !== TYPE_LIST_MARKETING_USERS && (user.portalAccessStatus == 'Unauthorized' || user.portalAccessStatus == 'Invite sent')"
-                (click)="sendInvite(user.primaryEmail)"
-                ngbDropdownItem
-              >
-                <div class="icon__email-dark qt-sz-20 qt-bg-contain pointer qt-mr-10"></div>
-                Send Invite
-              </li>
-              <li
-                class="pointer"
-                *ngIf="type == TYPE_LIST_COMPANY_USERS && !isPrimaryContact()"
-                (click)="resetPrimaryContact()"
-                ngbDropdownItem
-              >
-                <div class="icon__mark-as-master qt-bg-contain qt-sz-20 qt-mr-12"></div>
-                Set as Primary contact
-              </li>
-              <li
-                class="pointer qt-dropdown-menu__item-red qt-dropdown-menu__top-line"
-                *ngIf="currentUser && (!customerPortalStateService.isCustomerPortal && currentUser.checkPermission('ARCHIVE_USERS') ||  customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user) && !isPrimaryContact())  && !showArchivedUsers"
-                (click)="delete()"
-                ngbDropdownItem
-              >
-                <div class="icon__remove icon__remove--red-600 qt-bg-contain qt-sz-20 qt-mr-12"></div>
-                Archive
-              </li>
-              <li
-                class="pointer qt-dropdown-menu__item-red qt-dropdown-menu__top-line"
-                *ngIf="currentUser && currentUser.checkPermission('ARCHIVE_USERS') && showArchivedUsers"
-                (click)="restore()"
-                ngbDropdownItem
-              >
-                <div class="icon__archive-red qt-bg-contain qt-sz-20 qt-mr-12"></div>
-                Restore
-              </li>
-            </ul>
-          </div>
+                <div
+                    class="qt-button-square qt-button-square__afterpend pointer"
+                    id="dropdownBasic1"
+                    ngbDropdownToggle
+                >
+                    <div class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"></div>
+                </div>
+                <ul
+                    class="qt-dropdown-menu"
+                    ngbDropdownMenu
+                    aria-labelledby="dropdownBasic1"
+                >
+                    <li
+                        class="pointer"
+                        *ngIf="!showArchivedUsers && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user))"
+                        (click)="edit()"
+                        ngbDropdownItem
+                    >
+                        <div class="icon__edit qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                        Edit
+                    </li>
+                    <li
+                        class="pointer"
+                        *ngIf="!showArchivedUsers && getPermissions('EDIT_USERS') && type !== TYPE_LIST_MARKETING_USERS && (user.portalAccessStatus == 'Unauthorized' || user.portalAccessStatus == 'Invite sent')"
+                        (click)="sendInvite(user.primaryEmail)"
+                        ngbDropdownItem
+                    >
+                        <div class="icon__email-dark qt-sz-20 qt-bg-contain pointer qt-mr-10"></div>
+                        Send Invite
+                    </li>
+                    <li
+                        class="pointer"
+                        *ngIf="type == TYPE_LIST_COMPANY_USERS && !isPrimaryContact()"
+                        (click)="resetPrimaryContact()"
+                        ngbDropdownItem
+                    >
+                        <div class="icon__mark-as-master qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                        Set as Primary contact
+                    </li>
+                    <li
+                        class="pointer qt-dropdown-menu__item-red qt-dropdown-menu__top-line"
+                        *ngIf="currentUser && (!customerPortalStateService.isCustomerPortal && currentUser.checkPermission('ARCHIVE_USERS') ||  customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user) && !isPrimaryContact())  && !showArchivedUsers"
+                        (click)="delete()"
+                        ngbDropdownItem
+                    >
+                        <div class="icon__remove icon__remove--red-600 qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                        Archive
+                    </li>
+                    <li
+                        class="pointer qt-dropdown-menu__item-red qt-dropdown-menu__top-line"
+                        *ngIf="currentUser && currentUser.checkPermission('ARCHIVE_USERS') && showArchivedUsers"
+                        (click)="restore()"
+                        ngbDropdownItem
+                    >
+                        <div class="icon__archive-red qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                        Restore
+                    </li>
+                </ul>
+            </div>
         </div>
     </td>
 </tr>

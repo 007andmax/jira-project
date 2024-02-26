@@ -14,6 +14,7 @@ import { DELETE_GLOBAL_USERS_FILTER } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { UserFilterSaveComponent } from '../../users/user-filter-save/user-filter-save.component';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-left-panel-users',
@@ -44,6 +45,7 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     public customerPortalStateService: CustomerPortalStateService,
+    private permissionsService: PermissionsService,
   ) { }
 
   ngOnInit() {
@@ -104,6 +106,9 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     console.log("this.selectedGlobalFilter", this.selectedGlobalFilter);
     this.usersStateService.onChangeGlobalFilter(filter);
     this.usersStateService.changeToggleFilter(true);
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   blockClick(event) {
     event.preventDefault();

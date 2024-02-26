@@ -24,6 +24,7 @@
                 class="selected-item"
                 [ngClass]="{'active':custom.activated,
             'no-active':!custom.activated}"
+                *ngIf="i < 2"
             >
                 {{custom.name}}
                 <div
@@ -32,6 +33,19 @@
                 ></div>
             </div>
         </ng-template>
+        <app-dynamic-tooltip
+            [content]="getListHiveSubscribes()"
+            [position]="'top'"
+            #subscribe
+        ></app-dynamic-tooltip>
+        <div
+            class="selected-item"
+            *ngIf="customSubscriptions.length > 2"
+            (mouseenter)="subscribe.show($event.target)"
+            (mouseleave)="subscribe.hide()"
+        >
+            {{+ customSubscriptions.length - 2}}
+        </div>
     </div>
     <ul
         class="select-wrapper"

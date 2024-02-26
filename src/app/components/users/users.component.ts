@@ -165,6 +165,10 @@ export class UsersComponent implements OnInit, OnDestroy {
       this.listCustomSubscription = data;
     })
     this.sub.add(onGetListCustomSubscription);
+    let openDetailAside = this.usersStateService.openDetailAside.subscribe(data => {
+      this.setIdDetailUser(data);
+    });
+    this.sub.add(openDetailAside);
   }
   onCloseFilters() {
     this.header.setToggleFilter(false);
@@ -194,6 +198,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.onScroll();
   }
   setIdDetailUser(data) {
+    console.log("this.idDetailUser", this.idDetailUser);
     this.idDetailUser = data;
   }
   showMobileFilter() {
@@ -248,6 +253,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
   onSelectUser(user) {
     this.users.find(item => item.id === user.id).selected = user.selected;
+    console.log("user.selected", user.selected);
     this.selectAll = (this.users.some(item => item.selected == false)) ? false : true;
     this.header.setUsers(this.users);
     this.cd.detectChanges();

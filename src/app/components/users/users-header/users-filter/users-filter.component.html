@@ -63,6 +63,7 @@
         <button
             class="qt-button --md --gray qt-mr-12 qt-w100 qt-jc-c"
             (click)="saveFilter()"
+            *ngIf="getPermissions('CREATE_USER_FILTER') || getPermissions('EDIT_USER_FILTER')"
         >
             Save Fiter
         </button>
