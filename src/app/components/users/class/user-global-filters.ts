@@ -43,7 +43,10 @@ export class UserGlobalFilter {
         this.ticketSubscription = data.ticketSubscription.enabled;
         this.ticketManagerSubscription = data.ticketManagerSubscription.enabled;
     }
-    public getDataForRequest(add) {
+    public setForMarketing(data) {
+        this.forMarketing = data;
+    }
+    public getDataForRequest() {
         let data: any = {
             "name": this.name,
             "global": this.global,
@@ -55,9 +58,9 @@ export class UserGlobalFilter {
             "industries": this.industries,
             "tags": this.tags,
             "customSubscriptions": this.customSubscriptions,
-            "hasAccess": this.hasAccess
+            "hasAccess": this.hasAccess,
+            forMarketing: this.forMarketing
         };
-        if (add) data.forMarketing = this.forMarketing;
         return data;
     }
 }

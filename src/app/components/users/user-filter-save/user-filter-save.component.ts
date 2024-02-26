@@ -38,17 +38,18 @@ export class UserFilterSaveComponent implements OnInit {
   save() {
     if (this.globalFilter.name.length == 0) return;
     this.addBtn.setDisabled(true);
+    this.globalFilter.setForMarketing(this.usersStateService.getModeUserFilterSubscription() == MODE_MARKETING_USERS_LIST);
     if (!this.globalFilter.id) {
-      this.usersService.addGlobalFilter(this.globalFilter.getDataForRequest(true), this.usersStateService.getModeUserFilterSubscription() == MODE_MARKETING_USERS_LIST).subscribe(data => {
+      this.usersService.addGlobalFilter(this.globalFilter.getDataForRequest()).subscribe(data => {
         this.cancelConfirm();
       })
     } else {
       if (this.oldName !== this.globalFilter.name) {
-        this.usersService.addGlobalFilter(this.globalFilter.getDataForRequest(true), this.usersStateService.getModeUserFilterSubscription() == MODE_MARKETING_USERS_LIST).subscribe(data => {
+        this.usersService.addGlobalFilter(this.globalFilter.getDataForRequest()).subscribe(data => {
           this.cancelConfirm();
         })
       } else {
-        this.usersService.editGlobalFilter(this.globalFilter.id, this.globalFilter.getDataForRequest(false)).subscribe(data => {
+        this.usersService.editGlobalFilter(this.globalFilter.id, this.globalFilter.getDataForRequest()).subscribe(data => {
           this.cancelConfirm();
         })
       }
