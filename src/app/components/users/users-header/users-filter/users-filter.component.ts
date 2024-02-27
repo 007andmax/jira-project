@@ -135,11 +135,11 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
       }
       let customSubscriptions = this.listCustomSubscription.filter(item => data.customSubscriptions.some(userId => userId == item.id));
       if (customSubscriptions.length > 0) {
-        this.customSubscriptionDp.selectedTag = customSubscriptions;
+        if (this.customSubscriptionDp) this.customSubscriptionDp.selectedTag = customSubscriptions;
         this.filter.setCustomSubscriptions(customSubscriptions.map(item => item.id));
       } else {
         this.onSelectCustomSubscription([]);
-        this.customSubscriptionDp.clearWithOutChanges();
+        if (this.customSubscriptionDp) this.customSubscriptionDp.clearWithOutChanges();
       }
       let defaultSubscriptions = new UserDefaultSubscription({
         invoiceSubscription: new UserDefaultSubscriptionItem({ enabled: data.invoiceSubscription, activated: true }),
