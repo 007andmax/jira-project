@@ -22,8 +22,6 @@
         >
             <div
                 class="selected-item"
-                [ngClass]="{'active':custom.activated,
-            'no-active':!custom.activated}"
                 *ngIf="i < 2"
             >
                 {{custom.name}}
@@ -44,7 +42,7 @@
             (mouseenter)="subscribe.show($event.target)"
             (mouseleave)="subscribe.hide()"
         >
-            {{+ customSubscriptions.length - 2}}
+            + {{customSubscriptions.length - 2}}
         </div>
     </div>
     <ul
