@@ -35,4 +35,7 @@ export class UsersFilterJobTitleComponent implements OnInit {
   selectTitle(item, event) {
     this.onSelectTitle.emit({ item, event })
   }
+  public trackById(index, item) {
+    return item.id;
+  }
 }

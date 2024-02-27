@@ -3,11 +3,11 @@
     <app-users-header
         #header
         [type]="TYPE_LIST_COMPANY_USERS"
-        [count]="count"
+        [count]="users.length"
         (onChangeFilterField)="onFilter($event)"
         [users]="users"
         [selectAll]="selectAll"
-        (onSelectAllUser)="onSelectAllUser($event)"
+        (onSelectAllUser)="toggleAllUser($event)"
         (onSearch)="onSearch($event)"
         (onToggleFilter)="toggleFilter = $event"
     ></app-users-header>
@@ -64,11 +64,11 @@
                                 <span class="qt-table-modern__sorting"></span>
                             </th>
                             <th
-                              class="users-table__company pointer"
-                              (click)="onFilter('PORTAL_STATUS')"
+                                class="users-table__company pointer"
+                                (click)="onFilter('PORTAL_STATUS')"
                             >
-                              Portal Status
-                              <span class="qt-table-modern__sorting"></span>
+                                Portal Status
+                                <span class="qt-table-modern__sorting"></span>
                             </th>
                             <th class="users-table__menu"></th>
                         </tr>
@@ -144,6 +144,8 @@
                 ></app-users-filter>
             </div>
         </div>
+
+
 
 
 
