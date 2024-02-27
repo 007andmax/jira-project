@@ -43,7 +43,7 @@
     <app-users-filter-industry
         #customSubscriptionDp
         *ngIf="usersStateService.getModeUserFilterSubscription() == MODE_MARKETING_USERS_LIST"
-        class="qt-mb-10"
+        class="qt-mb-16"
         [title]="'Marketing Subscription'"
         [placeholder]="'Search by Marketing Subscription'"
         [placement]="'top-left'"
@@ -51,6 +51,26 @@
         [list]="listCustomSubscription"
         (filterChange)="onSelectCustomSubscription($event)"
     ></app-users-filter-industry>
+    <div *ngIf="usersStateService.getModeUserFilterSubscription() == MODE_MARKETING_USERS_LIST">
+        <p class="title-filter qt-mb-8">Permission</p>
+        <div class="qt-input-block qt-f50">
+            <div class="qt-df qt-ai-c">
+                <label
+                    class="qt-checkbox receive-full-amount-check qt-mb-0 pointer access-customer-portal"
+                    [attr.for]="'permission-a'"
+                >
+                    <input
+                        [attr.id]="'permission-a'"
+                        type="checkbox"
+                        [(ngModel)]="globalFilter.hasAccess"
+                        (change)="onChangeHasAccess($event)"
+                    >
+                    <span></span>
+                    <div class="qt-ml-8">Access to customer portal</div>
+                </label>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="aside-filters-content__footer">
     <div class="qt-df">

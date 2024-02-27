@@ -303,7 +303,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   /**
 * @description Clear all dropdown and "ticketsFilter"
 */
-  public onClearAll() {
+  public clearAll() {
 
     if (!this.ticketsFilter.isDisbledCompany) this.ticketsFilter.setCompanies([]);
     this.ticketsFilter.setTechUsers([]);
@@ -326,6 +326,9 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.onChangeCounterFilter();
     if (this.listType !== 'RECURRING_TICKETS') this.getCount();
     this.ticketsStateService.onChangeLeftPanelFilter(this.listType);
+    let ticketGlobalFilter = new TicketGlobalFilter();
+    if (this.ticketsFilter.isDisbledCompany) ticketGlobalFilter.setClientCompaies(this.ticketsFilter.selectedCompanies.map(item => item.id));
+    this.ticketsStateService.onChangeGlobalFilter(ticketGlobalFilter);
   }
   /**
   * @description Check which filters use, and update count by Output event

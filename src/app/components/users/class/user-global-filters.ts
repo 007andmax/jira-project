@@ -14,7 +14,7 @@ export class UserGlobalFilter {
     "ticketSubscription": boolean;
     "ticketManagerSubscription": boolean;
     "invoiceSubscription": boolean;
-    "hasAccess": boolean;
+    "hasAccess": boolean = false;
     "modified": boolean;
     constructor(data = null) {
         if (data) {

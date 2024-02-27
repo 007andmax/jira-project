@@ -146,6 +146,7 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
         ticketSubscription: new UserDefaultSubscriptionItem({ enabled: data.ticketSubscription, activated: true }),
         ticketManagerSubscription: new UserDefaultSubscriptionItem({ enabled: data.ticketManagerSubscription, activated: true })
       });
+      this.filter.setHasAccess(data.hasAccess);
       this.filter.changeDefaultSubscriptions(defaultSubscriptions);
       this.usersStateService.onInitFilter(this.filter);
     })
@@ -168,6 +169,9 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
   public onChangeTags(items) {
     this.filter.setTags(items.map(item => item.id));
     this.globalFilter.setTags(items.map(item => item.id));
+  }
+  onChangeHasAccess(event) {
+    this.filter.setHasAccess(event.target.checked);
   }
   onChangeCustomSubscription(data) {
     this.filter.setCustomSubscriptions(data);
