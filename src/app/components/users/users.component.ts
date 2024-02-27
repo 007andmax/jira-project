@@ -84,7 +84,6 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.onScroll();
     this.cd.detectChanges();
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
-      console.log("UsersComponent getOnFilter");
       document.body.querySelector(".main-container").scrollTo(0, 0);
       this.showPreloader = true;
       if (this.filter.isArchive != this.usersStateService.getShowArchivedCompanies()) {
@@ -98,7 +97,6 @@ export class UsersComponent implements OnInit, OnDestroy {
     });
     this.sub.add(geLefttFilter);
     let onUsersFilters = this.customerPortalStateService.onUsersFilters.subscribe(data => {
-      console.log("onUsersFilters");
       document.body.querySelector(".main-container").scrollTo(0, 0);
       this.showPreloader = true;
       this.setFilters(this.customerPortalStateService.getUsersFilters());
@@ -198,11 +196,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.onScroll();
   }
   setIdDetailUser(data) {
-    console.log("this.idDetailUser", this.idDetailUser);
     this.idDetailUser = data;
-  }
-  showMobileFilter() {
-    document.body.querySelector('app-left-panel-users').classList.add('show');
   }
   private onInitSubscribe() {
     setTimeout(() => {
@@ -228,7 +222,6 @@ export class UsersComponent implements OnInit, OnDestroy {
     }, 3000);
   }
   toggleAllUser(event) {
-    console.log("event.target.checked", event.target.checked);
     if (event.target.checked) {
       this.usersStateService.initSelectAllusers(true);
       this.selectAll = true;
@@ -253,7 +246,6 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
   onSelectUser(user) {
     this.users.find(item => item.id === user.id).selected = user.selected;
-    console.log("user.selected", user.selected);
     this.selectAll = (this.users.some(item => item.selected == false)) ? false : true;
     this.header.setUsers(this.users);
     this.cd.detectChanges();
@@ -279,10 +271,8 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.userListService.addSubscription(archiveUser);
   }
   public onScroll() {
-    console.log("UsersComponent", "onScroll");
     this.infiniteScrollDisabled = true;
     this.getUsers();
-
   }
   public onFilter(field) {
     this.filter.setSortBy(field);
@@ -329,11 +319,9 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.users.forEach(item => item.selected = false)
     this.usersStateService.clearFilterWithoutChange();
     this.filter = new UserFilters();
-    console.log("this.filter", this.filter);
     this.header.setUsers(this.users);
     this.draftEmailStateService.resetSelectedUsers();
     this.usersStateService.clearGlobalFilter();
     this.websocketService.unSubsribeUsersFilters();
-
   }
 }

@@ -103,7 +103,6 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   }
   setGlobalFilter(filter) {
     this.selectedGlobalFilter = filter;
-    console.log("this.selectedGlobalFilter", this.selectedGlobalFilter);
     this.usersStateService.onChangeGlobalFilter(filter);
     this.usersStateService.changeToggleFilter(true);
   }
@@ -139,7 +138,6 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     })
   }
   public goToAll() {
-    console.log("goToAll");
     this.goToState();
     this.onShowAll();
   }
@@ -149,19 +147,16 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   }
   onSetFilterClientType(data) {
     this.filter.setClientType(data);
-    console.log("onSetFilterClientType");
     this.usersStateService.onInitFilter(this.filter);
   }
   onShowAll() {
     this.filter.setClientType(null);
     this.setShowArchivedCompanies(false);
-    console.log("onShowAll");
     this.usersStateService.onInitFilter(this.filter);
   }
   onShowArchived() {
     this.filter.setClientType(null);
     this.setShowArchivedCompanies(true);
-    console.log("onShowArchived");
     this.usersStateService.onInitFilter(this.filter);
   }
 

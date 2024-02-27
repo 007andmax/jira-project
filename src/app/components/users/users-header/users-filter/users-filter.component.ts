@@ -97,9 +97,7 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onGetListCustomSubscription);
     let onInitGlobalFilter = this.usersStateService.onInitGlobalFilter.subscribe((data: UserGlobalFilter) => {
-      console.log("data", data);
       this.globalFilter = new UserGlobalFilter(JSON.parse(JSON.stringify(data)));
-      console.log("this.globalFilter", this.globalFilter);
       let selectedCompanies: Array<Company> = this.companiesState.getCompanies().filter(item => data.companies.some(companyId => companyId == item.id));
       if (selectedCompanies.length > 0) {
         this.companiesDp.selectedItems = selectedCompanies;
@@ -128,7 +126,6 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
         this.globalFilter.setJobTitles([]);
       }
       let tags = this.globalFilter.tagDtos.map(item => new CompanyTag(item));
-      console.log("tags", tags);
       if (tags.length > 0) {
         this.tagsDp.setSelectedTag(tags);
         this.filter.setTags(tags.map(item => item.id));
@@ -137,7 +134,6 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
         this.tagsDp.clearWithOutChanges();
       }
       let customSubscriptions = this.listCustomSubscription.filter(item => data.customSubscriptions.some(userId => userId == item.id));
-      console.log("customSubscriptions", customSubscriptions);
       if (customSubscriptions.length > 0) {
         this.customSubscriptionDp.selectedTag = customSubscriptions;
         this.filter.setCustomSubscriptions(customSubscriptions.map(item => item.id));
@@ -151,7 +147,6 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
         ticketManagerSubscription: new UserDefaultSubscriptionItem({ enabled: data.ticketManagerSubscription, activated: true })
       });
       this.filter.changeDefaultSubscriptions(defaultSubscriptions);
-      console.log("this.filter", this.filter);
       this.usersStateService.onInitFilter(this.filter);
     })
     this.sub.add(onInitGlobalFilter);
@@ -164,7 +159,6 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
     this.ref.markForCheck();
   }
   applyFilters() {
-    console.log("applyFilters");
     this.usersStateService.onInitFilter(this.filter);
   }
   onChangeDefaultSubscriptions(data) {
@@ -172,13 +166,11 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
     this.globalFilter.changeDefaultSubscriptions(data);
   }
   public onChangeTags(items) {
-    console.log("data", items);
     this.filter.setTags(items.map(item => item.id));
     this.globalFilter.setTags(items.map(item => item.id));
   }
   onChangeCustomSubscription(data) {
     this.filter.setCustomSubscriptions(data);
-    console.log("onChangeCustomSubscription");
     this.usersStateService.onInitFilter(this.filter);
   }
   public clearAll() {
@@ -200,7 +192,6 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
     this.filter.setCustomSubscriptions([]);
     this.onClearAll.emit(null);
     this.globalFilter = new UserGlobalFilter();
-    console.log("clearAll");
     this.usersStateService.onInitFilter(this.filter);
     this.usersStateService.clearGlobalFilter();
   }
@@ -227,7 +218,6 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
   }
   clearClientIndustry() {
     this.filter.setIndustries([]);
-    console.log("clearClientIndustry");
     this.usersStateService.onInitFilter(this.filter);
   }
   public getPermissions(action) {

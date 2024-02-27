@@ -71,7 +71,6 @@ export class MarketingComponent implements OnInit {
     this.onScroll();
     this.cd.detectChanges();
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
-      console.log("MarketingComponent getOnFilter");
       document.body.querySelector(".main-container").scrollTo(0, 0);
       this.showPreloader = true;
       this.setFilters(data);
@@ -193,7 +192,6 @@ export class MarketingComponent implements OnInit {
     }, 3000);
   }
   toggleAllUser(event) {
-    console.log("event.target.checked", event.target.checked);
     if (event.target.checked) {
       this.usersStateService.initSelectAllusers(true);
       this.selectAll = true;
@@ -239,10 +237,8 @@ export class MarketingComponent implements OnInit {
   }
 
   public onScroll() {
-    console.log("MarketingComponent", "onScroll");
     this.infiniteScrollDisabled = true;
     this.getUsers();
-
   }
   public onFilter(field) {
     this.filter.setSortBy(field);
@@ -289,7 +285,6 @@ export class MarketingComponent implements OnInit {
     this.users.forEach(item => item.selected = false)
     this.usersStateService.clearFilterWithoutChange();
     this.filter = new UserFilters();
-    console.log("this.filter", this.filter);
     this.header.setUsers(this.users);
     this.draftEmailStateService.resetSelectedUsers();
     this.usersStateService.clearGlobalFilter();

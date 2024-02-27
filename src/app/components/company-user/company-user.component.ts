@@ -81,11 +81,9 @@ export class CompanyUserComponent implements OnInit {
       this.showPreloader = true;
       id = params['id'];
       if (id) this.companiesStateService.setCompanyRoutingId(id);
-      //  if (this.companiesStateService.getCompanies().length > 0) this.onInitFilters(id);
     });
     this.sub.add(subscription);
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
-      console.log("getOnFilter");
       document.body.querySelector(".main-container").scrollTo(0, 0);
       this.showPreloader = true;
       if (this.filter.isArchive != this.usersStateService.getShowArchivedCompanies()) {
@@ -99,7 +97,6 @@ export class CompanyUserComponent implements OnInit {
     })
     this.userListService.addSubscription(geLefttFilter);
     let onUsersFilters = this.customerPortalStateService.onUsersFilters.subscribe(data => {
-      console.log("onUsersFilters");
       document.body.querySelector(".main-container").scrollTo(0, 0);
       this.showPreloader = true;
       this.setFilters(this.customerPortalStateService.getUsersFilters());
@@ -185,7 +182,6 @@ export class CompanyUserComponent implements OnInit {
     this.setDefaultScoll();
   }
   public onInitFilters(id) {
-    console.log("onInitFilters");
     let company = this.companiesStateService.getCompanies().find(item => item.id === id);
     this.filters.companiesDp.selectItemsWithOutChanges([company]);
     this.filters.companiesDp.isDisabled = true;
@@ -198,7 +194,6 @@ export class CompanyUserComponent implements OnInit {
     this.cd.detectChanges();
   }
   toggleAllUser(event) {
-    console.log("event.target.checked", event.target.checked);
     if (event.target.checked) {
       this.usersStateService.initSelectAllusers(true);
       this.selectAll = true;

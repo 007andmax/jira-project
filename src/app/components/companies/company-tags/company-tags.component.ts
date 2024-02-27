@@ -66,7 +66,6 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   public ngOnInit() {
     this.onInitClearState();
     this.onCheckEditItem();
-    console.log("selectedTag", this.selectedTag);
   }
   getCompanyName(tag) {
     let company = this.companiesStateService.getCompanies().find(item => item.id === tag.companyId);
@@ -131,7 +130,6 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     this.getTags(searchName);
   }
   getTags(searchName = null) {
-    console.log("getTags");
     if (this.companyTagsListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;

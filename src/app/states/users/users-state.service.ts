@@ -235,7 +235,6 @@ export class UsersStateService {
     this.filter = new UserFilters();
   }
   public clearFilter() {
-    console.log("clearFilter");
     this.filter = new UserFilters();
     this.onFilter.emit(this.filter);
   }

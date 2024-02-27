@@ -75,8 +75,6 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
         if (item.userRolesDP) item.userRolesDP.clearWithOutChanges();
       })
       this.user.onEdit(data);
-      console.log("companyInfo", this.companyInfo);
-      console.log("companyInfo", this.companyInfo.toArray());
       if (this.customerPortalStateService.checkShowTabTicketsAsideUserDetail(this.usersStateService.getCurrentUser(), this.user)) {
         this.tab = 'tickets';
       } else {

@@ -111,14 +111,8 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     return `${this.user.firstName} ${this.user.lastName}`;
   }
   showDetailUser() {
-    console.log("this.user", this.user);
     this.usersStateService.showDetailUser(this.user);
     this.cd.markForCheck();
-  }
-  getUserCompanyName() {
-    if (this.user.company.isDefault) return '';
-    let index = this.companies.findIndex(item => item.id === this.user.company.id);
-    return (index > -1) ? this.companies[index].name : '';
   }
   isPrimaryContact() {
     if (!this.customerPortalStateService.isCustomerPortal && this.companyId) return this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).isPrimaryContact;
@@ -174,10 +168,6 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     this.usersStateService.setUserForArchive(this.user);
     this.cd.markForCheck();
   }
-  showUserDetails() {
-    this.elRef.nativeElement.querySelector('.new-users-content__list--item').classList.toggle('show-details');
-    this.cd.markForCheck();
-  }
   restore() {
     this.confirmStateService.setConfirmAction(DEARCHIVE_USER);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
@@ -193,8 +183,6 @@ export class UsersTableComponent implements OnInit, OnDestroy {
       let index = list.findIndex(item => item.id === this.user.id);
       if (index > -1) this.draftEmailStateService.removeSelectedUser(index);
     }
-    console.log("selected", this.selected);
-    console.log("this.user", this.user);
     this.onSelectUser.emit(this.user);
     this.cd.detectChanges();
   }
@@ -204,9 +192,6 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     this.draftEmailStateService.addSelectedUser(this.user);
     this.draftEmailStateService.toggleAsideForAdd();
     this.cd.markForCheck();
-  }
-  getPermissionCustomerUser(permission) {
-    return this.currentUser.customerCompaniesInfo.find(item => item.companyId === this.customerPortalStateService.getUsersFilters().companies[0]).customerUserRole.getPermission(permission);
   }
   public trackById(index, item) {
     return item.id;

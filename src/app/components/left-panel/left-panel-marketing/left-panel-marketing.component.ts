@@ -90,7 +90,6 @@ export class LeftPanelMarketingComponent implements OnInit {
   }
   setGlobalFilter(filter) {
     this.selectedGlobalFilter = filter;
-    console.log("this.selectedGlobalFilter", this.selectedGlobalFilter);
     this.usersStateService.onChangeGlobalFilter(filter);
     this.usersStateService.changeToggleFilter(true);
   }
@@ -129,7 +128,6 @@ export class LeftPanelMarketingComponent implements OnInit {
     this.open = false;
   }
   public goToAll() {
-    console.log("goToAll");
     this.goToState();
     this.clearSubscription();
   }
