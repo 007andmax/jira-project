@@ -29,6 +29,9 @@ export class UserFilters {
     public setIsArchive(data) {
         this.isArchive = data;
     }
+    public setHasAccess(data) {
+        this.hasAccess = data;
+    }
     public setSortBy(field) {
         let index = this.filterTop.findIndex(item => item.field === field);
         if (index > -1) {
