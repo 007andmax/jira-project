@@ -6,31 +6,43 @@
     user-select: none;
     display: none;
   }
+  &.fileupload {
+    .qt-fileupload__label {
+      background-color: $blue-light-25;
+      border-color: $blue-light-300;
+    }
+  }
+  &.disable {
+    .qt-fileupload__label {
+      background-color: $white;
+      border-color: $gray-300;
+      opacity: .4;
+    }
+  }
   &__label {
     width: 100%;
-    border: 1px dotted $gray-300;
+    border: 1px dashed $gray-300;
     border-radius: 4px;
     cursor: pointer;
     padding: 24px;
-    font-size: 12px;
+    font-size: 14px;
     display: flex;
+    gap: 8px;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    &:hover {
+      background-color: $gray-25;
+    }
   }
   &__title {
-    color: $gray-600;
+    color: $gray-900;
   }
   &__link {
-    text-decoration: underline;
-    color: $blue-light-600;
+    color: $gray-900;
+    border-bottom: 1px solid $gray-900;
   }
-
-  &__attach-icon {
-    margin-right: 8px;
-    width: 24px;
-    height: 24px;
-  }
-
   &__mobile-text {
     color: $gray-900;
     @include сaption-l__sb;

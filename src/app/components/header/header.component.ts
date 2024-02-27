@@ -4,7 +4,7 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { SuperAdminPublicStateService } from 'src/app/states/super-admin-public/super-admin-public-state.service';
 import { Company } from '../../interfaces/company/company';
 import { CompaniesStateService } from '../../states/company/companies-state.service';
-import { DefaultServicesStateService } from '../../states/default-services/default-services-state.service';
+import { NonContractServicesStateService } from '../../states/non-contract-services/non-contract-services-state.service';
 import { InventoryStateService } from '../../states/inventory/inventory-state.service';
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
 import { QuoteStateService } from '../../states/quote/quote-state.service';
@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
     private ticketsStateService: TicketsStateService,
     // private quoteStateService: QuoteStateService,
     private inventoryStateService: InventoryStateService,
-    private defaultServicesStateService: DefaultServicesStateService,
+    private nonContractServicesStateService: NonContractServicesStateService,
     private leftPanelStateService: LeftPanelStateService,
     public cd: ChangeDetectorRef,
     private superAdminPublicStateService: SuperAdminPublicStateService,
@@ -71,7 +71,7 @@ export class HeaderComponent implements OnInit {
     this.companiesStateService.toggleAsideForAdd();
   }
   onAddService() {
-    this.defaultServicesStateService.toggleAsideForAdd();
+    this.nonContractServicesStateService.toggleAsideForAdd();
   }
   onAddProduct() {
     this.inventoryStateService.toggleAsideForAdd();

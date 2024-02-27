@@ -22,6 +22,7 @@
         *ngIf="serviceAgreement.type === 'SERVICE_CONTRACT' && serviceAgreement.billType !== 'OTHER'"
         #serviceContract
         [contractsUserDevice]="serviceAgreement"
+        (onInitRequestForEdit)="disabledBtnForEdit()"
         (onClose)="closed()"
     ></app-contracts-aside-user-device-edit>
     <app-contracts-aside-product-service-edit

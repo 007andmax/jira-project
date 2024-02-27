@@ -249,8 +249,8 @@ const routes: Routes = [
 
   },
   {
-    path: ':domain/default-services',
-    loadChildren: './components/billing/default-services/default-services.module#DefaultServicesModule',
+    path: ':domain/non-contract-services',
+    loadChildren: './components/billing/non-contract-services/non-contract-services.module#NonContractServicesModule',
     canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
 
   },

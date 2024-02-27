@@ -7,7 +7,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { DefaultServicesHourlyContract } from '../../contracts-aside/class/default-service-hourly-contract';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import * as moment from "moment";
-import { DefaultServicesService } from 'src/app/services/default-services/default-services.service';
+import { NonContractServicesService } from 'src/app/services/non-contract-services/non-contract-services.service';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { ContractsBlockTimeDefaultService } from '../../contracts-aside/class/contracts-block-time-default-service';
 @Component({
@@ -28,7 +28,7 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
   constructor(private companiesStateService: CompaniesStateService,
     private contractsService: ContractsService,
     private contractsStateService: ContractsStateService,
-    private defaultServicesService: DefaultServicesService,
+    private nonContractServicesService: NonContractServicesService,
   ) { }
 
   ngOnInit() {
@@ -47,7 +47,7 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
   }
   public searchDuplicatedServiceNames() {
     let servicesName = this.contractsHourly.services.filter(item => item.selected).map(item => item.name);
-    this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsHourly.startDate).format('DD MMM YYYY'),
+    this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsHourly.startDate).format('DD MMM YYYY'),
       moment(this.contractsHourly.endDate).format('DD MMM YYYY'), this.contractsHourly.companyId, this.contractsHourly.id, servicesName).subscribe(data => {
         if (Object.keys(data).length === 0) {
           this.contractsService.updateContract(this.contractsHourly.getDataForUpdateHourly()).subscribe(contract => {

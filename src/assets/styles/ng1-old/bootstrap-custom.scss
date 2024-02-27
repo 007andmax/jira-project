@@ -981,9 +981,8 @@ button.close {
 .modal-content {
   position: relative;
   background-color: $white;
-  border: 1px solid rgba(0,0,0,.2);
   border-radius: 6px;
-  box-shadow: 0 3px 9px rgba(0,0,0,.5);
+  box-shadow: 0 8px 8px -4px rgba(16, 24, 40, 0.03), 0px 20px 24px -4px rgba(16, 24, 40, 0.08);
   background-clip: padding-box;
   outline: 0;
 }
@@ -1052,9 +1051,6 @@ button.close {
 .modal-dialog {
   width: 600px;
   margin: 30px auto;
-}
-.modal-content {
-  box-shadow: 0 5px 15px rgba(0,0,0,.5);
 }
 
 .modal-sm { width: 300px; }

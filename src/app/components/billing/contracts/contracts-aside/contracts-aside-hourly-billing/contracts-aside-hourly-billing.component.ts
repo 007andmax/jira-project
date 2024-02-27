@@ -8,7 +8,7 @@ import { ContractsHourlyValidate } from '../class/contracts-hourly-validate';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import * as moment from "moment";
 import { DefaultServicesHourlyContract } from '../class/default-service-hourly-contract';
-import { DefaultServicesService } from 'src/app/services/default-services/default-services.service';
+import { NonContractServicesService } from 'src/app/services/non-contract-services/non-contract-services.service';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { Tax } from 'src/app/interfaces/service/tax';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
@@ -36,7 +36,7 @@ export class ContractsAsideHourlyBillingComponent implements OnInit {
   constructor(private companiesStateService: CompaniesStateService,
     private contractsService: ContractsService,
     private taxesStateService: TaxesStateService,
-    private defaultServicesService: DefaultServicesService,
+    private nonContractServicesService: NonContractServicesService,
     private contractsStateService: ContractsStateService,) { }
 
   ngOnInit() {
@@ -99,7 +99,7 @@ export class ContractsAsideHourlyBillingComponent implements OnInit {
   }
   public searchDuplicatedServiceNames() {
     let servicesName = this.contractsHourly.services.map(item => item.name);
-    this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsHourly.startDate).format('DD MMM YYYY'),
+    this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsHourly.startDate).format('DD MMM YYYY'),
       moment(this.contractsHourly.endDate).format('DD MMM YYYY'), this.contractsHourly.companyId, null, servicesName).subscribe(data => {
         if (Object.keys(data).length === 0) {
           this.contractsService.createContract(false, this.contractsHourly.getDataForCreate()).subscribe(contract => {

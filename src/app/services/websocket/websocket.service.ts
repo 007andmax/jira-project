@@ -16,7 +16,7 @@ import { TicketsRealTimeService } from '../../states/tickets/tickets-real-time.s
 import { BillableRealTimeService } from '../../states/billable/billable-real-time.service';
 import { InvoiceRealTimeService } from '../../states/invoice/invoice-real-time.service';
 import { PaymentsRealTimeService } from '../../states/payments/payments-real-time.service';
-import { DefaultServicesRealTimeService } from '../../states/default-services/default-services-real-time.service';
+import { NonContractServicesRealTimeService } from '../../states/non-contract-services/non-contract-services-real-time.service';
 import { ContractsRealTimeService } from '../../states/contracts/contracts-real-time.service';
 
 import { ShellRealTimeService } from '../../states/shell/shell-real-time.service';
@@ -81,7 +81,7 @@ export class WebsocketService {
     private paymentsRealTimeService: PaymentsRealTimeService,
     private billableRealTimeService: BillableRealTimeService,
     private invoiceRealTimeService: InvoiceRealTimeService,
-    private defaultServicesRealTimeService: DefaultServicesRealTimeService,
+    private nonContractServicesRealTimeService: NonContractServicesRealTimeService,
     private contractsRealTimeService: ContractsRealTimeService,
     private shellRealTimeService: ShellRealTimeService,
     private tagsRealTimeService: TagsRealTimeService,
@@ -608,7 +608,7 @@ export class WebsocketService {
     setTimeout(() => {
       this.stompClient.subscribe(`/user/watch/service`, (message) => {
         var newChange = JSON.parse(message.body);
-        this.defaultServicesRealTimeService.handleRealTimeChanges(newChange);
+        this.nonContractServicesRealTimeService.handleRealTimeChanges(newChange);
       });
 
     }, 3000);

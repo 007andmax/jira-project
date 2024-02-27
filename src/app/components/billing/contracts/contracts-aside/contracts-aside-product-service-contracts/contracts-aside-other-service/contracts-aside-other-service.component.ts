@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
-import { DefaultServices } from '../../../../default-services/class/default-service';
+import { NonContractServices } from '../../../../non-contract-services/class/non-contract-service';
 import { ContractsOtherService } from '../../class/contracts-other-service';
 import { DefaultServicesHourlyContract } from '../../class/default-service-hourly-contract';
 
@@ -14,7 +14,7 @@ import { DefaultServicesHourlyContract } from '../../class/default-service-hourl
 export class ContractsAsideOtherServiceComponent implements OnInit {
   formatDate: string = FORMAT_DATE_2;
   @Input() service: ContractsOtherService;
-  editItem: DefaultServices = null;
+  editItem: NonContractServices = null;
   @Output() onRemove = new EventEmitter<any>();
   defaultServices: Array<DefaultServicesHourlyContract> = [];
   constructor(private contractsStateService: ContractsStateService,
@@ -31,7 +31,7 @@ export class ContractsAsideOtherServiceComponent implements OnInit {
       this.defaultServices = data.map(item => new DefaultServicesHourlyContract(item));
       this.defaultServices.sort((a, b) => a.name.localeCompare(b.name));
     })
-    if (this.service.serviceId.length > 0) this.editItem = new DefaultServices(this.service);
+    if (this.service.serviceId.length > 0) this.editItem = new NonContractServices(this.service);
   }
   public getHours() {
     let timeInMinutes = this.service.quantity * 60;
@@ -50,7 +50,7 @@ export class ContractsAsideOtherServiceComponent implements OnInit {
   public onChangeDurationService(data) {
     this.service.setQuantity(data);
   }
-  select(data: DefaultServices) {
+  select(data: NonContractServices) {
     this.editItem = data;
     this.service.setData(data);
   }
