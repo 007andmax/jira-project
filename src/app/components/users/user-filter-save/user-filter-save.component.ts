@@ -6,6 +6,7 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { MODE_MARKETING_USERS_LIST, TYPE_LIST_MARKETING_USERS } from 'src/app/const/users';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-user-filter-save',
@@ -16,13 +17,18 @@ export class UserFilterSaveComponent implements OnInit {
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   @Input() globalFilter: UserGlobalFilter;
   oldName: string;
+  isDisabled: boolean = false;
   constructor(public activeModal: NgbActiveModal,
     private confirmStateService: ConfirmStateService,
     private usersStateService: UsersStateService,
+    private permissionsService: PermissionsService,
     private usersService: UsersService,) { }
 
   ngOnInit() {
     this.oldName = JSON.parse(JSON.stringify(this.globalFilter.name));
+    if (this.getPermissions('CREATE_USER_FILTER') && !this.getPermissions('EDIT_USER_FILTER')) this.isDisabled = true;
+    console.log("this.getPermissions('CREATE_USER_FILTER')", this.getPermissions('CREATE_USER_FILTER'));
+    console.log("this.getPermissions('EDIT_USER_FILTER')", this.getPermissions('EDIT_USER_FILTER'));
   }
   /**
 * @description Confirm and close modal
@@ -32,6 +38,10 @@ export class UserFilterSaveComponent implements OnInit {
     this.activeModal.close();
     this.confirmStateService.setConfirm(false);
   };
+  onChangeName() {
+    if (this.getPermissions('CREATE_USER_FILTER') && !this.getPermissions('EDIT_USER_FILTER') && this.oldName !== this.globalFilter.name) this.isDisabled = false;
+    if (this.getPermissions('CREATE_USER_FILTER') && !this.getPermissions('EDIT_USER_FILTER') && this.oldName === this.globalFilter.name) this.isDisabled = true;
+  }
   /**
 * @description Init request to add / edit global filter
 */
@@ -54,6 +64,9 @@ export class UserFilterSaveComponent implements OnInit {
         })
       }
     }
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
 
 }

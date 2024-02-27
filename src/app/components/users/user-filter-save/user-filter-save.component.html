@@ -15,7 +15,9 @@
                                 type="text"
                                 minlength="1"
                                 maxlength="50"
+                                [disabled]="!getPermissions('CREATE_USER_FILTER') && getPermissions('EDIT_USER_FILTER')"
                                 [(ngModel)]="globalFilter.name"
+                                (input)="onChangeName()"
                                 placeholder="Give this filter view a name"
                             >
                         </div>
@@ -66,6 +68,7 @@
                 Cancel
             </button>
             <button
+                [disabled]="isDisabled"
                 class="qt-button qt-jc-c qt-w100"
                 [ngClass]="{'--loading':addBtn.isBlock()}"
                 appDisabledBtn
