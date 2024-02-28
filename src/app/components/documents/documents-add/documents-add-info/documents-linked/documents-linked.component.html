@@ -1,92 +1,5 @@
 <div class="qt-temporary-col-fix --required qt-mb-24">
     <div class="qt-df qt-ai-c">
-        <div class="qt-input-block__label">Link to user</div>
-        <i
-            class="icn-sm icon__help"
-            placement="right"
-            ngbTooltip='The "Link to user" value can be used only for documents'
-        ></i>
-    </div>
-    <div
-        class="--required documents-linkeds-body"
-        ngbDropdown
-        #products="ngbDropdown"
-        [ngClass]="{ 'disabled': isDisabled}"
-    >
-        <mat-form-field ngbDropdownAnchor>
-            <mat-chip-list
-                #chipListUsers
-                aria-label="Fruit selection"
-            >
-                <ng-template
-                    ngFor
-                    let-item
-                    [ngForOf]="selectedUserAndCompanies"
-                    let-i="index"
-                    [ngForTrackBy]="trackByIndex"
-                >
-                    <mat-chip
-                        *ngIf="item.type === 'USER'"
-                        [selectable]="selectable"
-                        [removable]="removable"
-                        (removed)="removeItem(i)"
-                    >
-                        <i class="icon__user-grey qt-sz-16 qt-bg-contain"></i>
-                        {{item.name}}
-                        <mat-icon
-                            matChipRemove
-                            *ngIf="removable"
-                        >
-                            cancel
-                        </mat-icon>
-                    </mat-chip>
-                </ng-template>
-                <input
-                    id="dropdownUsers"
-                    ngbDropdownToggle
-                    placeholder="Select user to link"
-                    class="pointer"
-                    [formControl]="linkedCtrl"
-                    [matChipInputFor]="chipListUsers"
-                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                    [matChipInputAddOnBlur]="addOnBlur"
-                    [disabled]="isDisabled"
-                    (input)="onSearch($event)"
-                >
-            </mat-chip-list>
-        </mat-form-field>
-        <div
-            class="select-wrapper"
-            ngbDropdownMenu
-            aria-labelledby="dropdownUsers"
-        >
-            <div
-                class="content"
-                (click)="$event.preventDefault()"
-            >
-                <div>
-                    <div
-                        class="content-item"
-                        *ngFor="let item of usersList; let i = index"
-                        (click)="toggleItem(item,'USER')"
-                    >
-                        <label class="qt-checkbox pointer">
-                            <input
-                                type="checkbox"
-                                [checked]="isSeleted(item)"
-                                readonly
-                            >
-                            <span></span>
-                            <div class="name">{{item.firstName}} {{item.lastName}}</div>
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="qt-temporary-col-fix --required">
-    <div class="qt-df qt-ai-c">
         <div class="qt-input-block__label">Link to company</div>
         <i
             class="icn-sm icon__help"
@@ -165,6 +78,93 @@
                             >
                             <span></span>
                             {{item.name}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="qt-temporary-col-fix --required">
+    <div class="qt-df qt-ai-c">
+        <div class="qt-input-block__label">Link to user</div>
+        <i
+            class="icn-sm icon__help"
+            placement="right"
+            ngbTooltip='The "Link to user" value can be used only for documents'
+        ></i>
+    </div>
+    <div
+        class="--required documents-linkeds-body"
+        ngbDropdown
+        #products="ngbDropdown"
+        [ngClass]="{ 'disabled': isDisabled}"
+    >
+        <mat-form-field ngbDropdownAnchor>
+            <mat-chip-list
+                #chipListUsers
+                aria-label="Fruit selection"
+            >
+                <ng-template
+                    ngFor
+                    let-item
+                    [ngForOf]="selectedUserAndCompanies"
+                    let-i="index"
+                    [ngForTrackBy]="trackByIndex"
+                >
+                    <mat-chip
+                        *ngIf="item.type === 'USER'"
+                        [selectable]="selectable"
+                        [removable]="removable"
+                        (removed)="removeItem(i)"
+                    >
+                        <i class="icon__user-grey qt-sz-16 qt-bg-contain"></i>
+                        {{item.name}}
+                        <mat-icon
+                            matChipRemove
+                            *ngIf="removable"
+                        >
+                            cancel
+                        </mat-icon>
+                    </mat-chip>
+                </ng-template>
+                <input
+                    id="dropdownUsers"
+                    ngbDropdownToggle
+                    placeholder="Select user to link"
+                    class="pointer"
+                    [formControl]="linkedCtrl"
+                    [matChipInputFor]="chipListUsers"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur"
+                    [disabled]="isDisabled"
+                    (input)="onSearch($event)"
+                >
+            </mat-chip-list>
+        </mat-form-field>
+        <div
+            class="select-wrapper"
+            ngbDropdownMenu
+            aria-labelledby="dropdownUsers"
+        >
+            <div
+                class="content"
+                (click)="$event.preventDefault()"
+            >
+                <div>
+                    <div
+                        class="content-item"
+                        *ngFor="let item of usersList; let i = index"
+                        (click)="toggleItem(item,'USER')"
+                    >
+                        <label class="qt-checkbox pointer">
+                            <input
+                                type="checkbox"
+                                [checked]="isSeleted(item)"
+                                readonly
+                            >
+                            <span></span>
+                            <div class="name">{{item.firstName}} {{item.lastName}}</div>
                         </label>
                     </div>
                 </div>

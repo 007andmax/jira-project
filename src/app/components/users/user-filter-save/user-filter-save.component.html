@@ -53,7 +53,10 @@
                                 >
                                 <span class="radio-mark"></span>
                             </label>
-                            <label class="radio-container">
+                            <label
+                                class="radio-container"
+                                [ngClass]="{'no-pointer':!getPermissions('CREATE_USER_FILTER') && !getPermissions('EDIT_USER_FILTER')}"
+                            >
                                 <div
                                     (mouseenter)="!getPermissions('CREATE_USER_FILTER') && !getPermissions('EDIT_USER_FILTER') ? productTooltip.show($event.target) : null"
                                     (mouseleave)="!getPermissions('CREATE_USER_FILTER') && !getPermissions('EDIT_USER_FILTER') ? productTooltip.hide() : null"
@@ -68,7 +71,11 @@
                                     id="global-filter-2"
                                     [disabled]="!getPermissions('CREATE_USER_FILTER') && !getPermissions('EDIT_USER_FILTER')"
                                 >
-                                <span class="radio-mark"></span>
+                                <span
+                                    class="radio-mark"
+                                    (mouseenter)="!getPermissions('CREATE_USER_FILTER') && !getPermissions('EDIT_USER_FILTER') ? productTooltip.show($event.target) : null"
+                                    (mouseleave)="!getPermissions('CREATE_USER_FILTER') && !getPermissions('EDIT_USER_FILTER') ? productTooltip.hide() : null"
+                                ></span>
                             </label>
                         </div>
                     </div>
@@ -78,6 +85,11 @@
     </div>
     <div class="archive-modal__footer">
         <div class="qt-df qt-jc-fe">
+            <app-dynamic-tooltip
+                [content]="'You don`t have the permission to edit a global saved filter'"
+                [position]="'top'"
+                #addTooltip
+            ></app-dynamic-tooltip>
             <button
                 class="qt-button --gray qt-mr-12 qt-jc-c qt-w100"
                 (click)=cancelConfirm()
@@ -85,6 +97,8 @@
                 Cancel
             </button>
             <button
+                (mouseenter)="isDisabled ? addTooltip.show($event.target) : null"
+                (mouseleave)="isDisabled ? addTooltip.hide() : null"
                 [disabled]="isDisabled"
                 class="qt-button qt-jc-c qt-w100"
                 [ngClass]="{'--loading':addBtn.isBlock(),'--disabled':isDisabled}"
