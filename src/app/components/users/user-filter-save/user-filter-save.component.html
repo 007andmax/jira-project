@@ -34,6 +34,11 @@
                     <div class="qt-inputs-row">
                         <div class="qt-input-block qt-f100">
                             <div class="qt-input-block__label">Visible to</div>
+                            <app-dynamic-tooltip
+                                [content]="'You don`t have the permission to create a global saved filter'"
+                                [position]="'top'"
+                                #productTooltip
+                            ></app-dynamic-tooltip>
                             <label
                                 class="radio-container"
                                 for="global-filter-1"
@@ -48,17 +53,20 @@
                                 >
                                 <span class="radio-mark"></span>
                             </label>
-                            <label
-                                class="radio-container"
-                                for="global-filter-2"
-                            >
-                                All Tech users
+                            <label class="radio-container">
+                                <div
+                                    (mouseenter)="!getPermissions('CREATE_USER_FILTER') && !getPermissions('EDIT_USER_FILTER') ? productTooltip.show($event.target) : null"
+                                    (mouseleave)="!getPermissions('CREATE_USER_FILTER') && !getPermissions('EDIT_USER_FILTER') ? productTooltip.hide() : null"
+                                >
+                                    All Tech users
+                                </div>
                                 <input
                                     type="radio"
                                     [(ngModel)]="globalFilter.global"
                                     [value]="true"
                                     name="global-filter"
                                     id="global-filter-2"
+                                    [disabled]="!getPermissions('CREATE_USER_FILTER') && !getPermissions('EDIT_USER_FILTER')"
                                 >
                                 <span class="radio-mark"></span>
                             </label>

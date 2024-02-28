@@ -5,6 +5,7 @@ import { UserFilterSaveComponent } from './user-filter-save.component';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 import { MatSelectModule, MatChipsModule } from '@angular/material';
+import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 
 @NgModule({
     declarations: [UserFilterSaveComponent,
@@ -17,6 +18,7 @@ import { MatSelectModule, MatChipsModule } from '@angular/material';
         PreloaderTicketModule,
         MatSelectModule,
         MatChipsModule,
+        DynamicTooltipModule
     ],
     exports: [UserFilterSaveComponent],
     entryComponents: [UserFilterSaveComponent]
