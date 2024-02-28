@@ -7,6 +7,7 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { MODE_MARKETING_USERS_LIST, TYPE_LIST_MARKETING_USERS } from 'src/app/const/users';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { UserFilterSaveValidate } from './class/user-filter-save-validate';
 
 @Component({
   selector: 'app-user-filter-save',
@@ -18,6 +19,7 @@ export class UserFilterSaveComponent implements OnInit {
   @Input() globalFilter: UserGlobalFilter;
   oldName: string;
   isDisabled: boolean = false;
+  validate: UserFilterSaveValidate = new UserFilterSaveValidate();
   constructor(public activeModal: NgbActiveModal,
     private confirmStateService: ConfirmStateService,
     private usersStateService: UsersStateService,
@@ -26,7 +28,7 @@ export class UserFilterSaveComponent implements OnInit {
 
   ngOnInit() {
     this.oldName = JSON.parse(JSON.stringify(this.globalFilter.name));
-    if (this.getPermissions('CREATE_USER_FILTER') && !this.getPermissions('EDIT_USER_FILTER')) this.isDisabled = true;
+    if (this.globalFilter.global && this.getPermissions('CREATE_USER_FILTER') && !this.getPermissions('EDIT_USER_FILTER')) this.isDisabled = true;
     console.log("this.getPermissions('CREATE_USER_FILTER')", this.getPermissions('CREATE_USER_FILTER'));
     console.log("this.getPermissions('EDIT_USER_FILTER')", this.getPermissions('EDIT_USER_FILTER'));
   }
@@ -38,15 +40,17 @@ export class UserFilterSaveComponent implements OnInit {
     this.activeModal.close();
     this.confirmStateService.setConfirm(false);
   };
+
   onChangeName() {
-    if (this.getPermissions('CREATE_USER_FILTER') && !this.getPermissions('EDIT_USER_FILTER') && this.oldName !== this.globalFilter.name) this.isDisabled = false;
-    if (this.getPermissions('CREATE_USER_FILTER') && !this.getPermissions('EDIT_USER_FILTER') && this.oldName === this.globalFilter.name) this.isDisabled = true;
+    if (this.globalFilter.global && this.getPermissions('CREATE_USER_FILTER') && !this.getPermissions('EDIT_USER_FILTER') && this.oldName !== this.globalFilter.name) this.isDisabled = false;
+    if (this.globalFilter.global && this.getPermissions('CREATE_USER_FILTER') && !this.getPermissions('EDIT_USER_FILTER') && this.oldName === this.globalFilter.name) this.isDisabled = true;
+    this.validate.checkValidName(this.globalFilter.name);
   }
   /**
 * @description Init request to add / edit global filter
 */
   save() {
-    if (this.globalFilter.name.length == 0) return;
+    if (!this.validate.isValidate(this.globalFilter)) return;
     this.addBtn.setDisabled(true);
     this.globalFilter.setForMarketing(this.usersStateService.getModeUserFilterSubscription() == MODE_MARKETING_USERS_LIST);
     if (!this.globalFilter.id) {

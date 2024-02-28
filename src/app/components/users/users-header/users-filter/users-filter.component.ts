@@ -192,7 +192,7 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
     this.tagsDp.clearWithOutChanges();
     this.filter.setUserName(null);
     this.filter.setClientType(null);
-    this.customSubscriptionDp.clearWithOutChanges();
+    if (this.customSubscriptionDp) this.customSubscriptionDp.clearWithOutChanges();
     this.filter.setCustomSubscriptions([]);
     this.onClearAll.emit(null);
     this.globalFilter = new UserGlobalFilter();

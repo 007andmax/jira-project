@@ -9,17 +9,26 @@
             <div class="contract-container qt-mt-16">
                 <div class="contract-container-agreements qt-mt-8">
                     <div class="qt-inputs-row">
-                        <div class="qt-input-block qt-f100">
+                        <div
+                            class="qt-input-block qt-f100"
+                            [ngClass]="{'--input-error':!validate.getName()}"
+                        >
                             <div class="qt-input-block__label">Save Filter view as</div>
                             <input
                                 type="text"
                                 minlength="1"
                                 maxlength="50"
-                                [disabled]="!getPermissions('CREATE_USER_FILTER') && getPermissions('EDIT_USER_FILTER')"
+                                [disabled]="globalFilter.global && !getPermissions('CREATE_USER_FILTER') && getPermissions('EDIT_USER_FILTER')"
                                 [(ngModel)]="globalFilter.name"
                                 (input)="onChangeName()"
                                 placeholder="Give this filter view a name"
                             >
+                            <mat-error
+                                class="invalid-feedback first-name-invalid"
+                                *ngIf="!validate.getName()"
+                            >
+                                The field is required
+                            </mat-error>
                         </div>
                     </div>
                     <div class="qt-inputs-row">
@@ -70,7 +79,7 @@
             <button
                 [disabled]="isDisabled"
                 class="qt-button qt-jc-c qt-w100"
-                [ngClass]="{'--loading':addBtn.isBlock()}"
+                [ngClass]="{'--loading':addBtn.isBlock(),'--disabled':isDisabled}"
                 appDisabledBtn
                 #addBtn="disabled"
                 (onClick)="save()"
