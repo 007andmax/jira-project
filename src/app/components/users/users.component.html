@@ -13,7 +13,8 @@
     <div class="qt-page-list users-page qt-df">
         <div
             class="qt-page-list__body qt-pl-32"
-            [ngClass]="{'qt-pr-32':!toggleFilter}"
+            [ngClass]="{'qt-pr-32':!toggleFilter,
+        '--open-filters':toggleFilter}"
         >
             <div class="qt-page-list__header-thead-container">
                 <table class="qt-table-modern qt-page-list__header-thead">
@@ -46,7 +47,6 @@
                             <th
                                 class="users-table__industry pointer"
                                 (click)="onFilter('INDUSTRY')"
-                                [ngClass]="{'--hidden-xl':toggleFilter}"
                             >
                                 Industry
                                 <span class="qt-table-modern__sorting"></span>
