@@ -170,6 +170,7 @@ export class WebsocketService {
       that.subsribeToSubmittedOneTimeConnection();
       that.subsribeToLockScreen();
       that.subsribeToTicketPriority();
+      that.subsribeToAgentNotification();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToTags();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToDocuments();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToDocumentsCategory();
@@ -246,6 +247,17 @@ export class WebsocketService {
       this.stompClient.subscribe("/user/watch/user", (message) => {
         var newChange = JSON.parse(message.body);
         this.usersRealTimeService.handleRealTimeChanges(newChange);
+        if (message.body) {
+        }
+      });
+    }, 3000);
+  }
+  private subsribeToAgentNotification() {
+
+    setTimeout(() => {
+      this.stompClient.subscribe("/user/watch/agent", (message) => {
+        var newChange = JSON.parse(message.body);
+        //  this.emailTemplateRealTimeService.handleRealTimeChanges(newChange);
         if (message.body) {
         }
       });
