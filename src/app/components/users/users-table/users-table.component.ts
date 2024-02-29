@@ -41,6 +41,7 @@ export class UsersTableComponent implements OnInit, OnDestroy {
   @Input() selected: boolean = false;
   @Input() user: User;
   @Input() type: string;
+  @Input() toggleFilter: boolean = false;
   @Input() showArchivedUsers: boolean;
   @Output() onSelectUser = new EventEmitter<any>();
   @Input() jobTitleList: Array<CrmCompanyJobTitle> = [];

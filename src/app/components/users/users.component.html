@@ -46,6 +46,7 @@
                             <th
                                 class="users-table__company pointer"
                                 (click)="onFilter('INDUSTRY')"
+                                [ngClass]="{'--hidden-xl':toggleFilter}"
                             >
                                 Industry
                                 <span class="qt-table-modern__sorting"></span>
@@ -90,6 +91,7 @@
                             [ngForTrackBy]="trackById"
                         >
                             <app-users-table
+                                [toggleFilter]="toggleFilter"
                                 [selected]="idDetailUser === user.id"
                                 [type]="TYPE_LIST_ALL_USERS"
                                 [showArchivedUsers]="filter.isArchive"
