@@ -18,7 +18,7 @@
                                 type="text"
                                 minlength="1"
                                 maxlength="50"
-                                [disabled]="globalFilter.global && !getPermissions('CREATE_USER_FILTER') && getPermissions('EDIT_USER_FILTER')"
+                                [disabled]="globalFilter.global && !getPermissions('CREATE_GLOBAL_USER_FILTER') && getPermissions('EDIT_GLOBAL_USER_FILTER')"
                                 [(ngModel)]="globalFilter.name"
                                 (input)="onChangeName()"
                                 placeholder="Give this filter view a name"
@@ -55,11 +55,11 @@
                             </label>
                             <label
                                 class="radio-container"
-                                [ngClass]="{'no-pointer':!getPermissions('CREATE_USER_FILTER') && !getPermissions('EDIT_USER_FILTER')}"
+                                [ngClass]="{'no-pointer':!getPermissions('CREATE_GLOBAL_USER_FILTER') && !getPermissions('EDIT_GLOBAL_USER_FILTER')}"
                             >
                                 <div
-                                    (mouseenter)="!getPermissions('CREATE_USER_FILTER') && !getPermissions('EDIT_USER_FILTER') ? productTooltip.show($event.target) : null"
-                                    (mouseleave)="!getPermissions('CREATE_USER_FILTER') && !getPermissions('EDIT_USER_FILTER') ? productTooltip.hide() : null"
+                                    (mouseenter)="!getPermissions('CREATE_GLOBAL_USER_FILTER') && !getPermissions('EDIT_GLOBAL_USER_FILTER') ? productTooltip.show($event.target) : null"
+                                    (mouseleave)="!getPermissions('CREATE_GLOBAL_USER_FILTER') && !getPermissions('EDIT_GLOBAL_USER_FILTER') ? productTooltip.hide() : null"
                                 >
                                     All Tech users
                                 </div>
@@ -69,12 +69,12 @@
                                     [value]="true"
                                     name="global-filter"
                                     id="global-filter-2"
-                                    [disabled]="!getPermissions('CREATE_USER_FILTER') && !getPermissions('EDIT_USER_FILTER')"
+                                    [disabled]="!getPermissions('CREATE_GLOBAL_USER_FILTER') && !getPermissions('EDIT_GLOBAL_USER_FILTER')"
                                 >
                                 <span
                                     class="radio-mark"
-                                    (mouseenter)="!getPermissions('CREATE_USER_FILTER') && !getPermissions('EDIT_USER_FILTER') ? productTooltip.show($event.target) : null"
-                                    (mouseleave)="!getPermissions('CREATE_USER_FILTER') && !getPermissions('EDIT_USER_FILTER') ? productTooltip.hide() : null"
+                                    (mouseenter)="!getPermissions('CREATE_GLOBAL_USER_FILTER') && !getPermissions('EDIT_GLOBAL_USER_FILTER') ? productTooltip.show($event.target) : null"
+                                    (mouseleave)="!getPermissions('CREATE_GLOBAL_USER_FILTER') && !getPermissions('EDIT_GLOBAL_USER_FILTER') ? productTooltip.hide() : null"
                                 ></span>
                             </label>
                         </div>

@@ -85,6 +85,7 @@
     <td
         class="users-table__industry"
         (click)="showDetailUser()"
+        [ngClass]="{'--hidden-xl':toggleFilter}"
     >
         <span>{{ getUserIndustry() }}</span>
     </td>

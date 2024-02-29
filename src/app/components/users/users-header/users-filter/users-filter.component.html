@@ -82,7 +82,7 @@
         <button
             class="qt-button --md --gray qt-mr-12 qt-w100 qt-jc-c"
             (click)="saveFilter()"
-            *ngIf="globalFilter.global && (getPermissions('CREATE_USER_FILTER') || getPermissions('EDIT_USER_FILTER')) || !globalFilter.global"
+            *ngIf="globalFilter.global && (getPermissions('CREATE_GLOBAL_USER_FILTER') || getPermissions('EDIT_GLOBAL_USER_FILTER')) || !globalFilter.global"
         >
             Save Fiter
         </button>

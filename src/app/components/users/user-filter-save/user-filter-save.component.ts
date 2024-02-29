@@ -28,9 +28,9 @@ export class UserFilterSaveComponent implements OnInit {
 
   ngOnInit() {
     this.oldName = JSON.parse(JSON.stringify(this.globalFilter.name));
-    if (this.globalFilter.global && this.getPermissions('CREATE_USER_FILTER') && !this.getPermissions('EDIT_USER_FILTER')) this.isDisabled = true;
-    console.log("this.getPermissions('CREATE_USER_FILTER')", this.getPermissions('CREATE_USER_FILTER'));
-    console.log("this.getPermissions('EDIT_USER_FILTER')", this.getPermissions('EDIT_USER_FILTER'));
+    if (this.globalFilter.global && this.getPermissions('CREATE_GLOBAL_USER_FILTER') && !this.getPermissions('EDIT_GLOBAL_USER_FILTER')) this.isDisabled = true;
+    console.log("this.getPermissions('CREATE_GLOBAL_USER_FILTER')", this.getPermissions('CREATE_GLOBAL_USER_FILTER'));
+    console.log("this.getPermissions('EDIT_GLOBAL_USER_FILTER')", this.getPermissions('EDIT_GLOBAL_USER_FILTER'));
   }
   /**
 * @description Confirm and close modal
@@ -42,8 +42,8 @@ export class UserFilterSaveComponent implements OnInit {
   };
 
   onChangeName() {
-    if (this.globalFilter.global && this.getPermissions('CREATE_USER_FILTER') && !this.getPermissions('EDIT_USER_FILTER') && this.oldName !== this.globalFilter.name) this.isDisabled = false;
-    if (this.globalFilter.global && this.getPermissions('CREATE_USER_FILTER') && !this.getPermissions('EDIT_USER_FILTER') && this.oldName === this.globalFilter.name) this.isDisabled = true;
+    if (this.globalFilter.global && this.getPermissions('CREATE_GLOBAL_USER_FILTER') && !this.getPermissions('EDIT_GLOBAL_USER_FILTER') && this.oldName !== this.globalFilter.name) this.isDisabled = false;
+    if (this.globalFilter.global && this.getPermissions('CREATE_GLOBAL_USER_FILTER') && !this.getPermissions('EDIT_GLOBAL_USER_FILTER') && this.oldName === this.globalFilter.name) this.isDisabled = true;
     this.validate.checkValidName(this.globalFilter.name);
   }
   /**
