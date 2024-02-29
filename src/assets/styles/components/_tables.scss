@@ -5,6 +5,12 @@ table.qt-table-modern {
   border-collapse: separate;
   border-spacing: 0 2px;
 
+  .--hidden-xl {
+    @media (max-width: 1600px) {
+      display: none;
+    }
+  }
+
   thead {
     font-size: 12px;
     th {
@@ -158,7 +164,7 @@ table.qt-table-modern {
     }
 
     &__subject {
-      flex: 2 0 345px;
+      flex: 2 1 345px;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;

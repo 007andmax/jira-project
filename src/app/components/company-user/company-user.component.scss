@@ -134,9 +134,13 @@
 }
 
 .users-table__company {
-    width: 178px;
-    max-width: 178px;
-    min-width: 178px;
+  width: 100%;
+  min-width: 220px;
+}
+.users-table__portal-status {
+  width: 118px;
+  max-width: 118px;
+  min-width: 118px;
 }
 
 .users-table__company-full {
