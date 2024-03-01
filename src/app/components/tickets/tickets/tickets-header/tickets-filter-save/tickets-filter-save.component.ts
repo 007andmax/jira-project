@@ -4,6 +4,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { UserFilterSaveValidate } from 'src/app/components/users/user-filter-save/class/user-filter-save-validate';
+import { TicketsFilterSaveValidate } from './class/tickets-filter-save-validate';
 
 @Component({
   selector: 'tickets-filter-save',
@@ -13,6 +15,7 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
 export class TicketsFilterSaveComponent implements OnInit {
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   @Input() globalFilter: TicketGlobalFilter;
+  validate: TicketsFilterSaveValidate = new TicketsFilterSaveValidate();
   oldName: string;
   constructor(public activeModal: NgbActiveModal,
     private confirmStateService: ConfirmStateService,
@@ -29,11 +32,15 @@ export class TicketsFilterSaveComponent implements OnInit {
     this.activeModal.close();
     this.confirmStateService.setConfirm(false);
   };
+
+  onChangeName() {
+    this.validate.checkValidName(this.globalFilter.name);
+  }
   /**
 * @description Init request to add / edit global filter
 */
   save() {
-    if (this.globalFilter.name.length == 0) return;
+    if (!this.validate.isValidate(this.globalFilter)) return;
     this.addBtn.setDisabled(true);
     if (!this.globalFilter.id) {
       this.ticketsService.addGlobalFilter(this.globalFilter.getDataForRequest(true)).subscribe(data => {

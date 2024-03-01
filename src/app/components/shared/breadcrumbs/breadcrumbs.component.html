@@ -3,7 +3,8 @@
     *ngIf="isCompanyState()"
     [ngClass]="{ 
 'breadcrumbs-company-password-manager':state === 'company-password-manager',
-'breadcrumbs-company-products':state === 'company-products'}"
+'breadcrumbs-company-products':state === 'company-products',
+'--sticky':leftPanelService.isCompanyPage(state)}"
 >
     <div
         class="breadcrumbs-location pointer"

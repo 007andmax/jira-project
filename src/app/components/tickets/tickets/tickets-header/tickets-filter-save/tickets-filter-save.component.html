@@ -9,7 +9,10 @@
             <div class="contract-container qt-mt-16">
                 <div class="contract-container-agreements qt-mt-8">
                     <div class="qt-inputs-row">
-                        <div class="qt-input-block qt-f100">
+                        <div
+                            class="qt-input-block qt-f100"
+                            [ngClass]="{'--input-error':!validate.getName()}"
+                        >
                             <div class="qt-input-block__label">Save Filter view as</div>
                             <input
                                 type="text"
@@ -17,7 +20,14 @@
                                 maxlength="50"
                                 [(ngModel)]="globalFilter.name"
                                 placeholder="Text Tickets i have raised"
+                                (input)="onChangeName()"
                             >
+                            <mat-error
+                                class="invalid-feedback first-name-invalid"
+                                *ngIf="!validate.getName()"
+                            >
+                                The field is required
+                            </mat-error>
                         </div>
                     </div>
                     <div class="qt-inputs-row">

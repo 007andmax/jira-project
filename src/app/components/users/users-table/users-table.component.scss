@@ -23,9 +23,13 @@ tr {
   color: $gray-400;
 }
 .users-table__company {
-  width: 178px;
-  max-width: 178px;
-  min-width: 178px;
+  width: 100%;
+  min-width: 220px;
+}
+.users-table__portal-status {
+  width: 118px;
+  max-width: 118px;
+  min-width: 118px;
 }
 .users-table__contract-no--number {
   background-color: transparent;
@@ -33,9 +37,13 @@ tr {
   width: 190px;
 }
 .users-table__company-full {
-  width: 434px;
-  max-width: 434px;
-  min-width: 434px;
+  width: 100%;
+  min-width: 220px;
+}
+.users-table__industry {
+  width: 178px;
+  max-width: 178px;
+  min-width: 178px;
 }
 .user-primary-email {
   white-space: nowrap;

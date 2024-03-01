@@ -33,7 +33,7 @@
     }
 
     &-content {
-        height: calc(100% - 57px);
+        height: calc(100% - 102px);
 
         &__main {
             display: flex;
@@ -134,11 +134,19 @@
 }
 
 .users-table__company {
-    width: 178px;
-    max-width: 178px;
-    min-width: 178px;
+  width: 100%;
+  min-width: 220px;
 }
-
+.users-table__portal-status {
+  width: 118px;
+  max-width: 118px;
+  min-width: 118px;
+}
+.users-table__industry {
+  width: 178px;
+  max-width: 178px;
+  min-width: 178px;
+}
 .users-table__company-full {
     width: 434px;
     max-width: 434px;
@@ -196,4 +204,12 @@
 /deep/ .content-container .content-wrapper .breadcrumbs {
     padding: 15px 30px;
     background-color: $white;
+}
+
+.--open-filters {
+  .users-table__subscription {
+    width: 136px;
+    max-width: 136px;
+    min-width: 136px;
+  }
 }
