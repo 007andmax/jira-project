@@ -655,6 +655,15 @@ button.qt-button.--gray:focus {
   li {
     @include dropdown-item;
   }
+  .qt-dropdown-menu__item-red {
+    color: $red-600;
+  }
+  .qt-dropdown-menu__top-line {
+    border-top: 1px solid $gray-200;
+    border-radius: 0 0 6px 6px;
+    margin-top: 0;
+    padding-top: 10px;
+  }
   &.dropdown-menu {
     max-height: initial;
   }

@@ -57,9 +57,6 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
     this.searchText = "";
     this.onSearch.emit("");
   }
-  onBlurSearch(event) {
-    this.onSearch.emit(event.target.value);
-  }
   onKeyUp(event) {
     if (event.keyCode === 13) this.onSearch.emit(event.target.value);
   }

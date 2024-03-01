@@ -1,23 +1,65 @@
 @import "./src/assets/styles/variable";
 
 .users-page {
-  th.users-table__company,
-  th.users-table__contract-no,
-  th.users-table__tickets {
-    color: $gray-900;
+  .qt-table-modern {
+    border-spacing: 0 0;
+    th {
+      font-weight: 500;
+      font-size: 14px;
+      color: $gray-500;
+      text-transform: capitalize;
+    }
+    td {
+      font-size: 14px;
+      color: $gray-900;
+    }
+    tr {
+      &:hover td,
+      &.--selected td {
+        background-color: $blue-dark-25;
+        border-color: transparent;
+      }
+    }
+
+    .tag__modern {
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: 500;
+      padding: 4px 8px;
+      text-transform: unset;
+      border-color: $gray-300;
+      background-color: $gray-50;
+      color: $gray-500;
+
+      &.--unauthorized {
+        border-color: $gray-300;
+        background-color: $gray-50;
+        color: $gray-500;
+      }
+      &.--invite-sent {
+        border-color: $blue-light-60;
+        background-color: $blue-light-25;
+        color: $blue-light-700;
+      }
+      &.--registered {
+        border-color: $green-200;
+        background-color: $green-25;
+        color: $green-700
+      }
+    }
   }
   .users-table {
     &__check {
       padding: 12px 6px 12px 16px;
-      width: 38px;
-      max-width: 38px;
-      min-width: 38px;
+      width: 36px;
+      max-width: 36px;
+      min-width: 36px;
     }
 
     &__name {
-      width: 232px;
-      max-width: 232px;
-      min-width: 232px;
+      width: 270px;
+      max-width: 270px;
+      min-width: 270px;
 
       &--avatar {
         height: 40px;
@@ -37,18 +79,15 @@
       }
 
       &--user-name {
-        @include body-m__m;
         color: $gray-900;
       }
 
       &--profession {
-        @include body-m;
         color: $gray-600;
       }
     }
 
     &__company {
-      color: $gray-600;
       width: max-content;
       min-width: 88px;
     }
@@ -57,7 +96,6 @@
       width: 216px;
       max-width: 216px;
       min-width: 216px;
-      color: $gray-600;
     }
 
     &__subscription {
@@ -84,23 +122,16 @@
     }
 
     &__tickets {
-      width: 80px;
-      max-width: 80px;
-      min-width: 80px;
-      color: $gray-600;
-    }
-
-    &__email {
-      width: 25px;
-      max-width: 25px;
-      min-width: 25px;
+      width: 110px;
+      max-width: 110px;
+      min-width: 110px;
     }
 
     &__menu {
-      width: 38px;
-      max-width: 38px;
-      min-width: 38px;
-      padding: 23px 16px 23px 8px;
+      width: 104px;
+      max-width: 104px;
+      min-width: 104px;
+      padding: 23px 24px 23px 8px;
     }
   }
   .qt-table-modern__sorting {
@@ -162,6 +193,27 @@
       padding-bottom: 5px;
       margin: 2px;
     }
+  }
+}
+
+.filter-button {
+  &.active {
+    color: $blue-light-600;
+    background-color: #16a4fa10;
+    border-color: transparent;
+    &:hover {
+      color: $blue-light-600;
+    }
+
+    .icon__filter {
+      background-color: $blue-light-600;
+    }
+  }
+}
+
+.aside-filters-content__footer {
+  .qt-button {
+    max-width: 88px;
   }
 }
 

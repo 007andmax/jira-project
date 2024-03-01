@@ -122,15 +122,6 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     this.filter.applyFilters();
   }
   /**
-* @description Clear all filters and global filter
-*/
-  clearAll() {
-    if (this.filter) this.filter.onClearAll();
-    let ticketGlobalFilter = new TicketGlobalFilter();
-    if (this.ticketsFilter.isDisbledCompany) ticketGlobalFilter.setClientCompaies(this.ticketsFilter.selectedCompanies.map(item => item.id));
-    this.ticketsStateService.onChangeGlobalFilter(ticketGlobalFilter);
-  }
-  /**
 * @description Return text 'Filter' + countFilter
 * @returns {String} This is the result
 */

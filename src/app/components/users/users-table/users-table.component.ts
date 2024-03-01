@@ -50,6 +50,7 @@ export class UsersTableComponent implements OnInit, OnDestroy {
   @ViewChild('customSubscription') customSubscription: UserTableCustomSubscriptionComponent;
   companies: Array<Company> = [];
   currentUser: CurrentUser = new CurrentUser();
+  defaultSubscriptions: UserDefaultSubscription = new UserDefaultSubscription(null);
   sub: Subscription = new Subscription();
   TYPE_LIST_ALL_USERS = TYPE_LIST_ALL_USERS;
   TYPE_LIST_MARKETING_USERS = TYPE_LIST_MARKETING_USERS;
@@ -113,11 +114,6 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     this.usersStateService.showDetailUser(this.user);
     this.cd.markForCheck();
   }
-  getUserCompanyName() {
-    if (this.user.company.isDefault) return '';
-    let index = this.companies.findIndex(item => item.id === this.user.company.id);
-    return (index > -1) ? this.companies[index].name : '';
-  }
   isPrimaryContact() {
     if (!this.customerPortalStateService.isCustomerPortal && this.companyId) return this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).isPrimaryContact;
     if (this.customerPortalStateService.isCustomerPortal && this.user.customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id'))) return this.user.customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id')).isPrimaryContact;
@@ -127,9 +123,6 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     this.usersService.resetPrimaryContact(this.user.id, this.companyId).subscribe(data => {
 
     })
-  }
-  getDefaultSubscriptions() {
-    return (this.companyId) ? this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).defaultSubscriptions : new UserDefaultSubscription(null);
   }
   edit() {
     this.usersStateService.setUserForEdit(new User(JSON.parse(JSON.stringify(this.user))));
@@ -154,6 +147,7 @@ export class UsersTableComponent implements OnInit, OnDestroy {
       this.user.selected = data;
       this.cd.markForCheck();
     })
+    this.defaultSubscriptions = (this.companyId) ? this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).defaultSubscriptions : new UserDefaultSubscription(null);
   }
   delete() {
     if (this.user.customerCompaniesInfo.find(item => item.isPrimaryContact)) {
@@ -172,10 +166,6 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to archive ${this.user.firstName + ' ' + this.user.lastName}`;
     this.usersStateService.setUserForArchive(this.user);
-    this.cd.markForCheck();
-  }
-  showUserDetails() {
-    this.elRef.nativeElement.querySelector('.new-users-content__list--item').classList.toggle('show-details');
     this.cd.markForCheck();
   }
   restore() {
@@ -202,9 +192,6 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     this.draftEmailStateService.addSelectedUser(this.user);
     this.draftEmailStateService.toggleAsideForAdd();
     this.cd.markForCheck();
-  }
-  getPermissionCustomerUser(permission) {
-    return this.currentUser.customerCompaniesInfo.find(item => item.companyId === this.customerPortalStateService.getUsersFilters().company).customerUserRole.getPermission(permission);
   }
   public trackById(index, item) {
     return item.id;

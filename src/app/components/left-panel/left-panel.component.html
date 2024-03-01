@@ -25,7 +25,7 @@
         <div
             *ngIf="getPermissions('VIEW_USERS')"
             class="app-left-panel__menu-icon-wrap pointer"
-            (click)="changePage('USERS');onOpenPanel();panelUsers.goToAll()"
+            (click)="changePage('USERS');onOpenPanel();onChangeState('new-users')"
             [ngClass]="{'--active':page === 'USERS' }"
             placement="right"
             ngbTooltip="Users"
@@ -35,7 +35,7 @@
         <div
             *ngIf="getPermissions('VIEW_USERS')"
             class="app-left-panel__menu-icon-wrap pointer"
-            (click)="changePage('MARKETING');onOpenPanel();panelMarketing.goToAll()"
+            (click)="changePage('MARKETING');onOpenPanel();onChangeState('marketing')"
             [ngClass]="{'--active':page === 'MARKETING' }"
             placement="right"
             ngbTooltip="Marketing"

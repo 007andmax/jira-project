@@ -4,6 +4,17 @@ import { UserFilter } from '../../users/class/user-filter';
 import { LeftPanelUsersService } from './services/left-panel-users.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
+import { UserFilters } from '../../users/class/user-filters';
+import { UsersService } from 'src/app/services/users/users.service';
+import { UserCount } from '../../users/class/user-count';
+import { UserGlobalFilter } from '../../users/class/user-global-filters';
+import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DELETE_GLOBAL_USERS_FILTER } from 'src/app/const/confirm';
+import { ConfirmComponent } from '../../shared/confirm/confirm.component';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { UserFilterSaveComponent } from '../../users/user-filter-save/user-filter-save.component';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-left-panel-users',
@@ -13,9 +24,15 @@ import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service
 })
 export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   open: boolean = false;
-  showArchivedCompanies: boolean = false;
-  filter: UserFilter = new UserFilter();
+  filter: UserFilters = new UserFilters();
+  userCount: UserCount = new UserCount();
+  selectedGlobalFilter: UserGlobalFilter = new UserGlobalFilter();
+  globalFilters: Array<UserGlobalFilter> = [];
+  isGetGlobalFilters: boolean = false;
   @Input() activePage: string = "";
+  page: number = 0;
+  showLoadMoreUpdates = false;
+  showPreloaderGlobalFilters: boolean = false;
   @Output() onChangeState = new EventEmitter();
   @Output() onGoToLink = new EventEmitter();
   @Output() onOpenPanel = new EventEmitter();
@@ -24,6 +41,11 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private leftPanelService: LeftPanelService,
     private leftPanelStateService: LeftPanelStateService,
+    private usersService: UsersService,
+    private confirmStateService: ConfirmStateService,
+    private modalService: NgbModal,
+    public customerPortalStateService: CustomerPortalStateService,
+    private permissionsService: PermissionsService,
   ) { }
 
   ngOnInit() {
@@ -31,13 +53,41 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
       if (data) this.open = false;
     })
     this.leftPanelStateService.onChangeState.subscribe(state => {
-      if (!this.leftPanelService.isUsersPage(state)) this.open = false
+      if (!this.leftPanelService.isUsersPage(state)) this.open = false;
+      if (this.leftPanelService.isUsersPage(state) && !this.isGetGlobalFilters && !this.customerPortalStateService.isCustomerPortal && this.usersStateService.getCurrentUser()) this.getGLobalFilters();
+
     })
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
       if (this.leftPanelService.isUsersPage(data)) this.open = true;
     })
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
-      this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions, data.tags);
+      this.filter.setData(data);
+    })
+    let onClearGlobalFilter = this.usersStateService.onClearGlobalFilter.subscribe((data) => {
+      this.selectedGlobalFilter = new UserGlobalFilter();
+    })
+    this.usersStateService.getOnGetCurrentuser().subscribe(data => {
+      if (!this.isGetGlobalFilters && !this.customerPortalStateService.isCustomerPortal) this.getGLobalFilters();
+    })
+    let onInitGlobalFilter = this.usersStateService.onInitGlobalFilter.subscribe((data) => {
+      this.selectedGlobalFilter = data;
+    });
+    if (this.leftPanelService.isUsersPage(this.leftPanelStateService.activePage) && !this.isGetGlobalFilters && !this.customerPortalStateService.isCustomerPortal && this.usersStateService.getCurrentUser()) this.getGLobalFilters();
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === DELETE_GLOBAL_USERS_FILTER) this.onDeleteGlobalFilter(this.usersStateService.getGlobalFilterForRemove());
+      }
+    })
+    if (this.leftPanelService.isUsersPage(this.leftPanelStateService.activePage)) this.getUsersCount();
+  }
+  onDeleteGlobalFilter(filter) {
+    this.usersService.deleteGlobalFilter(filter.id).subscribe(data => {
+
+    })
+  }
+  getUsersCount() {
+    this.usersService.getusersCount().subscribe(data => {
+      this.userCount = new UserCount(data);
     })
   }
   public close() {
@@ -51,16 +101,48 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   public goToState() {
     this.onChangeState.emit('new-users');
   }
-
+  setGlobalFilter(filter) {
+    this.selectedGlobalFilter = filter;
+    this.usersStateService.onChangeGlobalFilter(filter);
+    this.usersStateService.changeToggleFilter(true);
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
+  }
+  blockClick(event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  removeFilter(filter) {
+    this.confirmStateService.setConfirmAction(DELETE_GLOBAL_USERS_FILTER);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    this.usersStateService.setGlobalFilterForRemove(filter);
+  }
   toggleFilter(event) {
     event.target.parentNode.classList.toggle('show-filter');
+  }
+  public getGLobalFilters() {
+    this.isGetGlobalFilters = true;
+    this.showPreloaderGlobalFilters = true;
+    this.usersService.getFilters(this.page, false).subscribe((data: any) => {
+      this.globalFilters = [...this.globalFilters, ...data.userFilterDtos.map(item => new UserGlobalFilter(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0))];
+      this.usersStateService.setGlobalFilters(this.globalFilters);
+      this.page++;
+      this.showPreloaderGlobalFilters = false;
+      if (data.totalElements > this.globalFilters.length) {
+        this.showLoadMoreUpdates = true;
+      } else {
+        this.showLoadMoreUpdates = false;
+      }
+    })
   }
   public goToAll() {
     this.goToState();
     this.onShowAll();
   }
   setShowArchivedCompanies(data) {
-    this.showArchivedCompanies = data;
+    this.filter.setIsArchive(data);
     this.usersStateService.setShowArchivedCompanies(data);
   }
   onSetFilterClientType(data) {
@@ -77,10 +159,14 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     this.setShowArchivedCompanies(true);
     this.usersStateService.onInitFilter(this.filter);
   }
+
   public trackByIndex(index, item) {
     return index;
   }
   ngOnDestroy(): void {
     this.leftPanelUsersService.onUnsubscribe();
+  }
+  public trackById(index, item) {
+    return item.id;
   }
 }

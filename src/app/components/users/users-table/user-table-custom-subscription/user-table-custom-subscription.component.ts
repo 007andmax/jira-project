@@ -18,6 +18,9 @@ export class UserTableCustomSubscriptionComponent implements OnInit {
   ngOnInit() {
 
   }
+  getListHiveSubscribes() {
+    return this.customSubscriptions.slice(2).map(item => item.name).join(",");
+  }
   toggleIsUpdate(data) {
     this.isUpdate = data;
     this.ref.markForCheck();

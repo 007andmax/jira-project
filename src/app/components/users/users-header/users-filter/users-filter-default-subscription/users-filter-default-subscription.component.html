@@ -1,0 +1,106 @@
+<div
+    class="light-dropdown"
+    ngbDropdown
+    #products="ngbDropdown"
+>
+    <p class="title-filter qt-mb-10">Subscription Title</p>
+    <mat-form-field ngbDropdownAnchor>
+        <mat-chip-list
+            #chipList
+            aria-label="Fruit selection"
+        >
+
+            <mat-chip
+                [selectable]="true"
+                [removable]="true"
+                (removed)="selected('invoiceSubscription')"
+                *ngIf="defaultSubscriptions.invoiceSubscription.enabled"
+            >
+                <div class="clip-text">Invoice Updates</div>
+                <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+
+            <mat-chip
+                [selectable]="true"
+                [removable]="true"
+                (removed)="selected('ticketSubscription')"
+                *ngIf="defaultSubscriptions.ticketSubscription.enabled"
+            >
+                <div class="clip-text">Ticket Updates</div>
+                <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+
+            <mat-chip
+                [selectable]="true"
+                [removable]="true"
+                (removed)="selected('ticketManagerSubscription')"
+                *ngIf="defaultSubscriptions.ticketManagerSubscription.enabled"
+            >
+                <div class="clip-text">Ticket Manager</div>
+                <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+            <input
+                id="dropdownServices"
+                ngbDropdownToggle
+                placeholder="Search by subscription title"
+                class="pointer"
+                [matChipInputFor]="chipList"
+                [matChipInputAddOnBlur]="true"
+                autocomplete="off"
+                readonly
+            >
+        </mat-chip-list>
+    </mat-form-field>
+    <div
+        class="dropdown-menu"
+        ngbDropdownMenu
+        aria-labelledby="dropdownServices"
+    >
+
+        <div class="qt-pos-rel">
+            <button
+                ngbDropdownItem
+                class="dropdown-item"
+                (click)="selected('invoiceSubscription')"
+                [ngClass]="{'--selected':isSeleted('invoiceSubscription')}"
+            >
+                Invoice Updates
+            </button>
+            <div
+                *ngIf="isSeleted('invoiceSubscription')"
+                class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain filter-company-check"
+            ></div>
+        </div>
+
+        <div class="qt-pos-rel">
+            <button
+                ngbDropdownItem
+                class="dropdown-item"
+                (click)="selected('ticketSubscription')"
+                [ngClass]="{'--selected':isSeleted('ticketSubscription')}"
+            >
+                Ticket Updates
+            </button>
+            <div
+                *ngIf="isSeleted('ticketSubscription')"
+                class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain filter-company-check"
+            ></div>
+        </div>
+
+        <div class="qt-pos-rel">
+            <button
+                ngbDropdownItem
+                class="dropdown-item"
+                (click)="selected('ticketManagerSubscription')"
+                [ngClass]="{'--selected':isSeleted('ticketManagerSubscription')}"
+            >
+                Ticket Manager
+            </button>
+            <div
+                *ngIf="isSeleted('ticketManagerSubscription')"
+                class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain filter-company-check"
+            ></div>
+        </div>
+
+    </div>
+</div>

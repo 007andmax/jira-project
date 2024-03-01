@@ -253,7 +253,10 @@ export class LeftPanelComponent implements OnInit {
     if (this.leftPanelService.isSupportPage(data)) this.page = "SUPPORT";
     if (this.leftPanelService.isTicketsPage(data)) this.page = "TICKETS";
     if (this.leftPanelService.isTicketDetailPage(data)) this.page = "TICKET-DETAIL";
-    if (this.leftPanelService.isUsersPage(data)) this.page = "USERS";
+    if (this.leftPanelService.isUsersPage(data)) {
+      this.page = "USERS";
+      if (this.panelUsers) this.panelUsers.getUsersCount();
+    }
     if (this.leftPanelService.isMarketingPage(data)) this.page = "MARKETING";
     if (this.leftPanelService.isCompanyPage(data)) this.page = "COMPANIES";
     if (this.leftPanelService.isBillingState(data)) this.page = "BILLING";

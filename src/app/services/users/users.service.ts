@@ -32,9 +32,22 @@ export class UsersService {
   /**
    * Get all users
    */
+  public addGlobalFilter(data) {
+    return this.http.post(this.apiUrl + `filters/user`, data);
+  }
+
+  public editGlobalFilter(id, data) {
+    return this.http.put(this.apiUrl + `filters/user/${id}`, data);
+  }
+
   public getAllusers() {
 
     return this.http.post(this.apiUrl + 'users/filter', {}).pipe(
+      map((data: any) => data.map((item) => new User(item))));
+  }
+
+  public getFilterUsers(size, page, data, isArchived) {
+    return this.http.post(this.apiUrl + `users/filter?size=${size}&page=${page}`, { isArchived: isArchived, "accountType": "CLIENT", ...data }).pipe(
       map((data: any) => data.map((item) => new User(item))));
   }
 
@@ -51,11 +64,28 @@ export class UsersService {
 
   }
 
+  public deleteGlobalFilter(id) {
+    return this.http.delete(this.apiUrl + `filters/user/${id}`).pipe(
+      tap(data => {
+        this.toastrService.success("The filter has been successfully deleted");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+
   /**
    * Get current user
    */
   public getCurrentUser() {
     return this.http.get(this.apiUrl + 'users/current');
+  }
+
+  public getFilters(page, marketing) {
+    return this.http.get(this.apiUrl + `filters/user/all?&size=30&page=${page}&marketing=${marketing}`);
+  }
+
+  public getusersCount() {
+    return this.http.get(this.apiUrl + 'users/count');
   }
 
   public getMessagesUser(id, page) {

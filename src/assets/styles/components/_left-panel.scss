@@ -252,6 +252,10 @@
       padding: 5px 8px;
       top: 100%;
     }
+
+    .icon__globe {
+      mask-size: cover;
+    }
   }
   &__menu-expand li:not(.dropdown-item) {
     display: flex;

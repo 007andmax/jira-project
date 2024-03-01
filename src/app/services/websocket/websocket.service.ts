@@ -52,6 +52,7 @@ export class WebsocketService {
   private serverUrl = 'realtime';
   private stompClient;
   private netScanSub;
+  private userFilters;
   public IsKafkaConnected: boolean = false;
   onInit: EventEmitter<any> = new EventEmitter();
   isInit: boolean = false;
@@ -520,6 +521,19 @@ export class WebsocketService {
     }, 3000);
   }
 
+  public subsribeToUsersFilters() {
+
+    setTimeout(() => {
+
+      this.userFilters = this.stompClient.subscribe(`/user/watch/userFilters`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.usersRealTimeService.handleRealTimeChangesUsersFilters(newChange);
+
+      });
+
+    }, 3000);
+  }
+
   public subsribeToTicketsCustomerUsers(clientCompId) {
     this.ticketsRealTimeService.subsribeToTicketsCustomerUser = this.stompClient.subscribe(`/user/watch/tickets/${clientCompId}`, (message) => {
       var newChange = JSON.parse(message.body);
@@ -745,6 +759,9 @@ export class WebsocketService {
 
   public unSubsribeNetScan() {
     if (this.netScanSub) this.netScanSub.unsubscribe();
+  }
+  public unSubsribeUsersFilters() {
+    if (this.userFilters) this.userFilters.unsubscribe();
   }
   public getClient() {
     return this.stompClient;

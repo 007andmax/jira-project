@@ -3,7 +3,7 @@
         <div class="qt-page-list__header-title-line--left">
             <h6
                 class="qt-page-list__header-title"
-                [textContent]="'All Users (' + count + ')'"
+                [textContent]="'All Users'"
             ></h6>
         </div>
         <div class="qt-page-list__header-title-line--rigth">
@@ -14,7 +14,6 @@
                         type="text"
                         placeholder="Search user"
                         [(ngModel)]="searchText"
-                        (blur)="onBlurSearch($event)"
                         (keyup)="onKeyUp($event)"
                     >
                     <span
@@ -23,15 +22,8 @@
                         (click)="clearSearch()"
                     ></span>
                 </div>
-                <button
-                    class="qt-btn --transparent"
-                    (click)="clearAll()"
-                    *ngIf="countFilter > 0"
-                >
-                    Clear all
-                </button>
                 <div
-                    class="company-devices-page__list-header-buttons"
+                    class="company-devices-page__list-header-buttons qt-ml-8"
                     *ngIf="getSelectedCount() > 0"
                 >
                     <div [textContent]="getSelectedCount() + ' Users Selected'"></div>
@@ -69,10 +61,11 @@
                     </div>
                 </div>
                 <button
-                    class="qt-btn btn-filter qt-ml-8 qt-df"
-                    [ngClass]="{'active':!toggleFilter}"
-                    (click)="toggleFilter  = !toggleFilter"
+                    class="qt-button --gray --md filter-button qt-ml-8 qt-df"
+                    [ngClass]="{'active':toggleFilter}"
+                    (click)="setToggleFilter(!toggleFilter)"
                 >
+                    <span class="icon__filter qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
                     <span
                         class="filter-counter qt-circle qt-sz-18 qt-fw-600 qt-fs-10 qt-color-white qt-bg-info qt-mr-8 qt-df qt-ai-c qt-jc-c"
                         *ngIf="countFilter > 0"
@@ -92,101 +85,9 @@
             </div>
         </div>
     </div>
-    <app-users-filter
+    <!-- <app-users-filter
         #filter
         (changeCountFilter)="onChangeCountFilter($event)"
         [hidden]="toggleFilter"
-    ></app-users-filter>
-    <div class="qt-page-list__header-thead-container">
-        <table class="qt-table-modern qt-page-list__header-thead">
-            <thead>
-                <tr>
-                    <th class="users-table__check">
-                        <div class="qt-df">
-                            <label
-                                class="qt-checkbox"
-                                for="all-users"
-                            >
-                                <input
-                                    id="all-users"
-                                    [(ngModel)]="selectAll"
-                                    (change)="toggleAllUser($event)"
-                                    type="checkbox"
-                                >
-                                <span></span>
-                            </label>
-                        </div>
-                    </th>
-                    <th
-                        class="users-table__name pointer"
-                        (click)="onFilter('name')"
-                    >
-                        Name
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
-                        class="users-table__company pointer"
-                        (click)="onFilter('company')"
-                        [ngClass]="{'users-table__company-full': type === TYPE_LIST_ALL_USERS}"
-                        *ngIf="type === TYPE_LIST_ALL_USERS || type === TYPE_LIST_MARKETING_USERS"
-                    >
-                        Company
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
-                        class="users-table__company pointer"
-                        (click)="onFilter('portalAccessStatus')"
-                        *ngIf="type !== TYPE_LIST_MARKETING_USERS"
-                    >
-                        Portal Status
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
-                        class="users-table__company pointer"
-                        (click)="onFilter('primaryEmail')"
-                        *ngIf="type === TYPE_LIST_COMPANY_USERS"
-                    >
-                        Email
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
-                        class="users-table__company pointer"
-                        (click)="onFilter('industry')"
-                    >
-                        Industry
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
-                        class="users-table__contract-no pointer"
-                        (click)="onFilter('contact')"
-                    >
-                        Contact No
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
-                        class="users-table__subscription"
-                        *ngIf="type === TYPE_LIST_COMPANY_USERS"
-                    >
-                        Subscription
-                    </th>
-                    <th
-                        class="users-table__subscription"
-                        *ngIf="type === TYPE_LIST_MARKETING_USERS"
-                    >
-                        Marketing Subscription
-                    </th>
-                    <th
-                        class="users-table__tickets pointer"
-                        (click)="onFilter('tickets')"
-                        *ngIf="type === TYPE_LIST_ALL_USERS || type === TYPE_LIST_COMPANY_USERS"
-                    >
-                        Tickets
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th class="users-table__email"></th>
-                    <th class="users-table__menu"></th>
-                </tr>
-            </thead>
-        </table>
-    </div>
+    ></app-users-filter> -->
 </div>
