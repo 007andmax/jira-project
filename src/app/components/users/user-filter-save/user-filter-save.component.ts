@@ -29,8 +29,6 @@ export class UserFilterSaveComponent implements OnInit {
   ngOnInit() {
     this.oldName = JSON.parse(JSON.stringify(this.globalFilter.name));
     if (this.globalFilter.global && this.getPermissions('CREATE_GLOBAL_USER_FILTER') && !this.getPermissions('EDIT_GLOBAL_USER_FILTER')) this.isDisabled = true;
-    console.log("this.getPermissions('CREATE_GLOBAL_USER_FILTER')", this.getPermissions('CREATE_GLOBAL_USER_FILTER'));
-    console.log("this.getPermissions('EDIT_GLOBAL_USER_FILTER')", this.getPermissions('EDIT_GLOBAL_USER_FILTER'));
   }
   /**
 * @description Confirm and close modal
