@@ -48,6 +48,39 @@
       }
     }
   }
+  .qt-table-modern__row {
+    margin-bottom: 0;
+    border: unset;
+    font-size: 14px;
+    color: $gray-900;
+    &.--selected > div {
+      background-color: $blue-dark-25;
+    }
+    &:hover {
+      border: unset;
+      > div {
+        background-color: $blue-dark-25;
+        @media (max-width: 1600px) {
+          word-break: break-all;
+        }
+      }
+    }
+    & > div {
+      border-bottom: 1px solid $gray-200;
+
+      &:first-child {
+        padding-left: 25px;
+        border-left: 1px solid $gray-200;
+        border-radius: 0;
+      }
+
+      &:last-child {
+        padding-right: 25px;
+        border-right: 1px solid $gray-200;
+        border-radius: 0;
+      }
+    }
+  }
   .qt-page-list__header-thead__row {
     > div {
       font-weight: 500;
@@ -92,19 +125,17 @@
       }
     }
 
-    &__company {
-      width: max-content;
-      min-width: 88px;
-    }
+    //&__company { // TODO check this style
+    //  width: max-content;
+    //  min-width: 88px;
+    //}
 
     &__contract-no {
       flex: 1 0 216px;
     }
 
     &__subscription {
-      width: 256px;
-      max-width: 256px;
-      min-width: 256px;
+      flex: 1 0 196px;
       &--dropdown .grey-dropdown {
         border: 1px solid $background;
         border-radius: 4px;
@@ -124,9 +155,7 @@
       }
     }
     &__tickets {
-      width: 110px;
-      max-width: 110px;
-      min-width: 110px;
+      flex: 0 0 110px;
     }
 
     &__menu {

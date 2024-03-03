@@ -132,22 +132,26 @@
     }
 }
 .users-table__company {
-    width: 100%;
-    min-width: 220px;
+    flex: 2 0 220px;
+   @media (max-width: 1600px) {
+     flex: 2 0 200px;
+   }
 }
 
 .users-table__company-full {
     flex: 2 0 220px;
+    @media (max-width: 1600px) {
+      flex: 2 0 200px;
+    }
 }
 .users-table__industry {
-  width: 178px;
-  max-width: 178px;
-  min-width: 178px;
+  flex: 0 0 176px;
+  @media (max-width: 1600px) {
+    flex: 0 0 150px;
+  }
 }
 .users-table__portal-status {
-  width: 118px;
-  max-width: 118px;
-  min-width: 118px;
+  flex: 0 0 118px;
 }
 .qt-page-list__header-thead-container {
     position: sticky;
@@ -191,33 +195,33 @@
     }
 }
 
-/deep/ .qt-table-modern__row {
-  margin-bottom: 0;
-  border: unset;
-  font-size: 14px;
-  color: $gray-900;
-  &.--selected > div {
-    background-color: $blue-dark-25;
-  }
-  &:hover {
-    border: unset;
-    > div {
-      background-color: $blue-dark-25;
-    }
-  }
-  & > div {
-    border-bottom: 1px solid $gray-200;
-
-    &:first-child {
-      padding-left: 25px;
-      border-left: 1px solid $gray-200;
-      border-radius: 0;
-    }
-
-    &:last-child {
-      padding-right: 25px;
-      border-right: 1px solid $gray-200;
-      border-radius: 0;
-    }
-  }
-}
+///deep/ .qt-table-modern__row { // TODO check this style
+//  margin-bottom: 0;
+//  border: unset;
+//  font-size: 14px;
+//  color: $gray-900;
+//  &.--selected > div {
+//    background-color: $blue-dark-25;
+//  }
+//  &:hover {
+//    border: unset;
+//    > div {
+//      background-color: $blue-dark-25;
+//    }
+//  }
+//  & > div {
+//    border-bottom: 1px solid $gray-200;
+//
+//    &:first-child {
+//      padding-left: 25px;
+//      border-left: 1px solid $gray-200;
+//      border-radius: 0;
+//    }
+//
+//    &:last-child {
+//      padding-right: 25px;
+//      border-right: 1px solid $gray-200;
+//      border-radius: 0;
+//    }
+//  }
+//}
