@@ -37,8 +37,7 @@ tr {
   width: 190px;
 }
 .users-table__company-full {
-  width: 100%;
-  min-width: 220px;
+  flex: 2 1 220px;
 }
 .users-table__industry {
   width: 178px;

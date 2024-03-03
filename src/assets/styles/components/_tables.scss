@@ -102,6 +102,11 @@ table.qt-table-modern {
       }
     }
 
+    &--height-auto {
+      min-height: 48px;
+      height: auto;
+    }
+
     &.--selected {
       border-color: $blue-light-600;
       background: #f4fbff;
@@ -131,6 +136,10 @@ table.qt-table-modern {
         border-bottom-right-radius: 5px;
         border-right: 1px solid transparent;
         padding-right: 16px;
+      }
+
+      &.qt-ai-fs {
+        align-items: flex-start;
       }
     }
 
