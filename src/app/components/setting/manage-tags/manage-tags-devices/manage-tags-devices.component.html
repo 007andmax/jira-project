@@ -1,0 +1,72 @@
+<div
+    class="tab-pane-input__row company-info-block qt-ml-32 qt-mr-32 qt-mt-16"
+    [hidden]="loading"
+>
+    <div class="icon__company-info qt-sz-20 qt-ic-c qt-mr-8 qt-fs-0"></div>
+    <span class="qt-f-1">
+        Tags can be used in devices to identify specific devices
+    </span>
+</div>
+<div
+    class="cmn-area"
+    [hidden]="loading"
+>
+    <div class="tab-pane__table dataTable">
+        <div class="tab-pane__table-header">
+            <div class="tab-pane__table-row">
+                <div class="tab-pane__table-cell manage-tags-table__custom-tags pointer">
+                    <span>Device Tags</span>
+                    <div class="qt-table-modern__sorting--new"></div>
+                </div>
+                <th class="tab-pane__table-cell manage-tags-table__action pointer"></th>
+            </div>
+        </div>
+        <div class="tab-pane__table-body">
+            <app-manage-tags-devices-add
+                *ngIf="create"
+                (onClose)="create = false"
+            ></app-manage-tags-devices-add>
+            <div
+                class="tab-pane__table-row"
+                *ngFor="
+                            let tag of tags;
+                            let i = index;
+                            trackBy: trackByFn
+                          "
+                appClickOtside
+                [init]="tag.isInitEdit"
+                [ngClass]="['edit-tag-container-' + i,tag.selected ? '--selected' : '']"
+                [class]="'.edit-tag-container-' + i"
+                (onOutSide)="onEditTag(tag)"
+            >
+                <div class="tab-pane__table-cell manage-tags-table__custom-tags">
+                    <input
+                        type="text"
+                        class="form-input  --editable"
+                        placeholder="Enter Name Status"
+                        [(ngModel)]="tag.name"
+                        appKeyUpEnter
+                        (onChange)="onEditTag(tag)"
+                        (input)="tag.onInitEdit(true)"
+                    >
+                </div>
+                <div class="tab-pane__table-cell manage-tags-table__action qt-pos-rel">
+                    <div class="qt-df qt-ai-c">
+                        <app-dynamic-tooltip
+                            [content]="'Remove'"
+                            [position]="'top'"
+                            #removeTooltip
+                        ></app-dynamic-tooltip>
+                        <div
+                            (mouseenter)="removeTooltip.show($event.target)"
+                            (mouseleave)="removeTooltip.hide()"
+                            class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                            (click)="delete(tag)"
+                        >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

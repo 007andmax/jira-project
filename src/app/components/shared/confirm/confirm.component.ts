@@ -49,6 +49,7 @@ export class ConfirmComponent implements OnInit {
       && this.action !== 'ARCHIVE_COMPANY'
       && this.action !== 'DEARCHIVE_COMPANY'
       && this.action !== 'DELETE_MANAGE_TAG'
+      && this.action !== 'DELETE_DEVICE_TAG'
       && this.action !== 'CHANGE_COMMISSION_PRODUCT'
       && this.action !== 'CHANGE_COMMISSION_SERVICE'
       && this.action !== 'RESTORE_USER'

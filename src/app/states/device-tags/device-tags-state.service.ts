@@ -1,0 +1,54 @@
+import { EventEmitter, Injectable } from '@angular/core';
+import { DeviceTag } from 'src/app/components/setting/manage-tags/manage-tags-devices/class/device-tag';
+import { DeviceTagsService } from 'src/app/services/device-tags/device-tags.service';
+import { DeviceTagsRealTimeService } from './device-tags-real-time.service';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DeviceTagsStateService {
+  tags: Array<DeviceTag> = [];
+  onGetTags: EventEmitter<any> = new EventEmitter();
+  tagForDelete: DeviceTag = null;
+  constructor(private deviceTagsService: DeviceTagsService,
+    private deviceTagsRealTimeService: DeviceTagsRealTimeService) { }
+
+  public onInit() {
+    this.deviceTagsRealTimeService.changeTagsrray.subscribe(newChange => {
+      if (newChange.action === 'COMPANY_TAG_SAVED') {
+        console.log("newChange.data", newChange.data);
+        newChange.data.tags.forEach(item => this.tags.push(new DeviceTag(item)))
+      }
+      if (newChange.action === 'COMPANY_TAG_EDITED') {
+        console.log("newChange.data", newChange.data.tags);
+        newChange.data.tags.forEach(item => {
+          let index = this.tags.findIndex(tag => tag.id == item.id);
+          this.tags[index] = new DeviceTag(item);
+        })
+      }
+      if (newChange.action === 'COMPANY_TAG_REMOVED') {
+        console.log("newChange.data", newChange.data.tags);
+        newChange.data.tags.forEach(item => {
+          let index = this.tags.findIndex(tag => tag.id == item.id);
+          this.tags[index] = new DeviceTag(item);
+        })
+      }
+      this.onGetTags.emit(this.tags);
+    })
+  }
+  public getTags() {
+    return this.tags;
+  }
+  public onInitGetTags() {
+    this.deviceTagsService.getTags().subscribe((data: any) => {
+      this.tags = data.tags.map(item => new DeviceTag(item));
+      this.onGetTags.emit(this.tags);
+    })
+  }
+  public setTagForDelete(data) {
+    this.tagForDelete = data;
+  }
+  public getTagForDelete() {
+    return this.tagForDelete;
+  }
+}
