@@ -22,10 +22,14 @@ tr {
 .users-table__name--profession {
   color: $gray-400;
 }
+.users-table__email,
 .users-table__company {
   flex: 2 0 220px;
   @media (max-width: 1600px) {
     flex: 2 0 200px;
+  }
+  @media (min-width: 2048px) {
+    flex: 3 0 220px;
   }
 }
 .users-table__portal-status {
@@ -41,11 +45,17 @@ tr {
   @media (max-width: 1600px) {
     flex: 2 0 200px;
   }
+  @media (min-width: 2048px) {
+    flex: 3 0 220px;
+  }
 }
 .users-table__industry {
   flex: 0 0 176px;
   @media (max-width: 1600px) {
-    flex: 0 0 150px;
+    display: none;
+  }
+  @media (min-width: 2048px) {
+    flex: 1 0 180px;
   }
 }
 .user-primary-email {

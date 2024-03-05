@@ -92,8 +92,8 @@
 
   .users-table {
     &__check {
-      padding: 12px 8px 12px 25px;
-      flex: 0 0 51px;
+      padding: 12px 8px 12px 24px;
+      flex: 0 0 52px;
     }
 
     &__name {
@@ -125,13 +125,11 @@
       }
     }
 
-    //&__company { // TODO check this style
-    //  width: max-content;
-    //  min-width: 88px;
-    //}
-
     &__contract-no {
       flex: 1 0 216px;
+      @media (min-width: 2048px) {
+        flex: 1 0 180px;
+      }
     }
 
     &__subscription {
@@ -159,7 +157,7 @@
     }
 
     &__menu {
-      flex: 0 0 104px;
+      flex: 0 0 106px;
       padding: 23px 24px 23px 8px;
     }
   }
@@ -673,12 +671,16 @@ users-aside-detail {
 company-user {
   .--open-filters {
     .users-table__industry {
-      width: 158px;
-      max-width: 158px;
-      min-width: 158px;
+      flex: 0 0 150px;
+      @media (min-width: 2048px) {
+        flex: 1 0 180px;
+      }
     }
-    .users-table__company {
-      min-width: 190px;
+    .users-table__company,
+    .users-table__email {
+      @media (max-width: 1920px) {
+        flex: 2 0 190px;
+      }
     }
   }
 }
