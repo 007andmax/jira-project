@@ -14,9 +14,12 @@
     <div class="tab-pane__table dataTable">
         <div class="tab-pane__table-header">
             <div class="tab-pane__table-row">
-                <div class="tab-pane__table-cell manage-tags-table__custom-tags pointer">
-                    <span>Device Tags</span>
-                    <div class="qt-table-modern__sorting--new"></div>
+                <div
+                    class="tab-pane__table-cell manage-tags-table__custom-tags pointer"
+                    (click)="onFilter('name')"
+                >
+                    Device Tags
+                    <span class="qt-table-modern__sorting"></span>
                 </div>
                 <th class="tab-pane__table-cell manage-tags-table__action pointer"></th>
             </div>
@@ -29,7 +32,7 @@
             <div
                 class="tab-pane__table-row"
                 *ngFor="
-                            let tag of tags;
+                            let tag of tags | deviceTag: searchTag;
                             let i = index;
                             trackBy: trackByFn
                           "

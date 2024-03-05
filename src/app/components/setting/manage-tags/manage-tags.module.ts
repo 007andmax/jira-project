@@ -12,6 +12,7 @@ import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.m
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 import { ManageTagsDevicesComponent } from './manage-tags-devices/manage-tags-devices.component';
 import { ManageTagsDevicesAddComponent } from './manage-tags-devices/manage-tags-devices-add/manage-tags-devices-add.component';
+import { DeviceTagPipe } from 'src/app/pipe/device-tag.pipe';
 
 
 
@@ -20,7 +21,8 @@ import { ManageTagsDevicesAddComponent } from './manage-tags-devices/manage-tags
         TagPipe,
         ManageTagsAddComponent,
         ManageTagsDevicesComponent,
-        ManageTagsDevicesAddComponent
+        ManageTagsDevicesAddComponent,
+        DeviceTagPipe
     ],
     imports: [
         CommonModule,
@@ -31,7 +33,7 @@ import { ManageTagsDevicesAddComponent } from './manage-tags-devices/manage-tags
         ManageTagsRoutingModule,
         ClickOtsideModule,
         KeyUpEnterModule,
-        DynamicTooltipModule
+        DynamicTooltipModule,
     ],
     exports: [TagPipe]
 

@@ -28,7 +28,7 @@ export class DeviceTagsService {
   }
 
   public deleteTags(data) {
-    return this.http.delete(this.apiUrl + `devices/tags`, data);
+    return this.http.delete(this.apiUrl + `devices/tags?ids=${data}`);
   }
 
   public addTags(data) {

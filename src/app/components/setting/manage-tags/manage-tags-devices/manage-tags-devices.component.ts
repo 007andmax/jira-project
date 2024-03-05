@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { DeviceTag } from './class/device-tag';
 import { DeviceTagsStateService } from 'src/app/states/device-tags/device-tags-state.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -11,6 +11,7 @@ import { ConfirmStateService } from 'src/app/components/shared/confirm/services/
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { DELETE_DEVICE_TAG } from 'src/app/const/confirm';
+import { ManageTagsDevicesFilter } from './class/manage-tags-devices-filter';
 
 @Component({
   selector: 'app-manage-tags-devices',
@@ -23,6 +24,8 @@ export class ManageTagsDevicesComponent implements OnInit {
   create: boolean = false;
   compnayForm: FormGroup;
   edit: boolean = false;
+  filter: ManageTagsDevicesFilter = new ManageTagsDevicesFilter();
+  @Input() searchTag = "";
   constructor(private deviceTagsStateService: DeviceTagsStateService,
     private formBuilder: FormBuilder,
     private toastrService: ToastrService,
@@ -60,16 +63,15 @@ export class ManageTagsDevicesComponent implements OnInit {
     // this.sub.add(getConfirm);
   }
   onRemoveTag() {
-    let data = {
-      "tags": this.deviceTagsStateService.getTagForDelete().id
-    };
-    console.log("data", data);
-    this.deviceTagsService.deleteTags(data).subscribe(res => {
+    this.deviceTagsService.deleteTags(this.deviceTagsStateService.getTagForDelete().id).subscribe(res => {
       console.log("res", res);
     })
   }
   get f() {
     return this.compnayForm.controls;
+  }
+  onFilter(field) {
+    this.filter.onFilter(field, this.tags);
   }
   public onAdd() {
     this.compnayForm.patchValue({ word: "" });

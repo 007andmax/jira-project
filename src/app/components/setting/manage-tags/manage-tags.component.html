@@ -370,7 +370,10 @@
                 id="tab3"
             >
                 <ng-template ngbTabContent>
-                    <app-manage-tags-devices #devicesTags></app-manage-tags-devices>
+                    <app-manage-tags-devices
+                        #devicesTags
+                        *ngIf="setActiveTab == 'device'"
+                    ></app-manage-tags-devices>
                 </ng-template>
             </ngb-tab>
         </ngb-tabset>
