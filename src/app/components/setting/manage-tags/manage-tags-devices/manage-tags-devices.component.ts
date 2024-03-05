@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { DeviceTag } from './class/device-tag';
 import { DeviceTagsStateService } from 'src/app/states/device-tags/device-tags-state.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { DeviceTagsService } from 'src/app/services/device-tags/device-tags.service';
 import { catchError, map } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { Subscription, of } from 'rxjs';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
@@ -18,7 +18,7 @@ import { ManageTagsDevicesFilter } from './class/manage-tags-devices-filter';
   templateUrl: './manage-tags-devices.component.html',
   styleUrls: ['./manage-tags-devices.component.scss']
 })
-export class ManageTagsDevicesComponent implements OnInit {
+export class ManageTagsDevicesComponent implements OnInit, OnDestroy {
   tags: Array<DeviceTag> = [];
   loading: boolean = true;
   create: boolean = false;
@@ -26,6 +26,7 @@ export class ManageTagsDevicesComponent implements OnInit {
   edit: boolean = false;
   filter: ManageTagsDevicesFilter = new ManageTagsDevicesFilter();
   @Input() searchTag = "";
+  sub: Subscription = new Subscription();
   constructor(private deviceTagsStateService: DeviceTagsStateService,
     private formBuilder: FormBuilder,
     private toastrService: ToastrService,
@@ -34,6 +35,7 @@ export class ManageTagsDevicesComponent implements OnInit {
     private modalService: NgbModal,
     private deviceTagsService: DeviceTagsService,
     public cd: ChangeDetectorRef,) { }
+
 
   ngOnInit() {
     this.compnayForm = this.formBuilder.group({
@@ -45,7 +47,7 @@ export class ManageTagsDevicesComponent implements OnInit {
       this.loading = false;
     }
     if (this.deviceTagsStateService.getTags().length == 0) this.deviceTagsStateService.onInitGetTags();
-    this.deviceTagsStateService.onGetTags.subscribe(data => {
+    let onGetTags = this.deviceTagsStateService.onGetTags.subscribe(data => {
       this.tags = data;
       this.loading = false;
       this.cd.detectChanges();
@@ -53,6 +55,7 @@ export class ManageTagsDevicesComponent implements OnInit {
       this.toastrService.success("The error has occurred, please check your entries");
       this.appStateService.changeDetectorRef();
     })
+    this.sub.add(onGetTags);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === DELETE_DEVICE_TAG) {
@@ -60,7 +63,7 @@ export class ManageTagsDevicesComponent implements OnInit {
         }
       }
     })
-    // this.sub.add(getConfirm);
+    this.sub.add(getConfirm);
   }
   onRemoveTag() {
     this.deviceTagsService.deleteTags(this.deviceTagsStateService.getTagForDelete().id).subscribe(res => {
@@ -107,6 +110,8 @@ export class ManageTagsDevicesComponent implements OnInit {
     this.confirmStateService.setConfirmAction(DELETE_DEVICE_TAG);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = tag.name;
-
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }
