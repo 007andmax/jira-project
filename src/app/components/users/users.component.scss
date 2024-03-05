@@ -204,34 +204,3 @@
         border-bottom: 1px solid $gray-200;
     }
 }
-
-///deep/ .qt-table-modern__row { // TODO check this style
-//  margin-bottom: 0;
-//  border: unset;
-//  font-size: 14px;
-//  color: $gray-900;
-//  &.--selected > div {
-//    background-color: $blue-dark-25;
-//  }
-//  &:hover {
-//    border: unset;
-//    > div {
-//      background-color: $blue-dark-25;
-//    }
-//  }
-//  & > div {
-//    border-bottom: 1px solid $gray-200;
-//
-//    &:first-child {
-//      padding-left: 25px;
-//      border-left: 1px solid $gray-200;
-//      border-radius: 0;
-//    }
-//
-//    &:last-child {
-//      padding-right: 25px;
-//      border-right: 1px solid $gray-200;
-//      border-radius: 0;
-//    }
-//  }
-//}

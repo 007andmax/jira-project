@@ -237,12 +237,10 @@ table.qt-table-modern {
     text-transform: uppercase;
 
     &:first-child {
-      //padding-left: 16px;  // TODO check this style
       padding: 12px 8px 12px 24px;
     }
 
     &:last-child {
-      //padding-right: 16px; // TODO check this style
       padding: 23px 24px 23px 8px;
     }
   }
