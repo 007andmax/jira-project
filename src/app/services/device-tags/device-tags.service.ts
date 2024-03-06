@@ -31,6 +31,13 @@ export class DeviceTagsService {
     return this.http.delete(this.apiUrl + `devices/tags?ids=${data}`);
   }
 
+  public unLinkDevice(data) {
+    return this.http.post(this.apiUrl + `devices/tags/unlink`, data);
+  }
+  public linkDevice(data) {
+    return this.http.post(this.apiUrl + `devices/tags/link`, data);
+  }
+
   public addTags(data) {
     return this.http.post(this.apiUrl + `devices/tags`, data).pipe(
       tap(data => {

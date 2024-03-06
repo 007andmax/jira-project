@@ -598,3 +598,8 @@ table.qt-table-modern.company-devices-table tbody tr.--ofline td {
     top: 11px !important;
   }
 }
+app-company-devices-tags{
+  .mat-form-field-wrapper {
+    padding-bottom: 0px !important;
+  }
+}

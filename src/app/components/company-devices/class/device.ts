@@ -1,3 +1,4 @@
+import { DeviceTag } from '../../setting/manage-tags/manage-tags-devices/class/device-tag';
 import { DeviceAntivirus } from './device-antivirus';
 import { DeviceRemoteSessions } from './device-remote-sessions';
 import { DeviceSystem } from './device-system';
@@ -26,6 +27,7 @@ export class Device {
     userName: string;
     timing: DeviceTiming = new DeviceTiming();
     remoteSessions: Array<DeviceRemoteSessions> = [];
+    tags: Array<DeviceTag> = [];
     constructor(data) {
         for (const key in data) {
             this[key] = data[key];
@@ -37,6 +39,10 @@ export class Device {
             let time = Date.now() + minutesDiff;
             this.timing.offline = (time - moment(this.offlineAt).valueOf());
         }
+        this.tags = data.tags.map(item => new DeviceTag(item));
+    }
+    public setTags(data) {
+        this.tags = data;
     }
     public setLabel(data) {
         this.label = data;

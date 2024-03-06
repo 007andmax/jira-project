@@ -13,6 +13,11 @@ import { DeviceCompanyAsideParams } from '../class/device-company-aside-params';
 import { CompanyDevicesEditLabelComponent } from '../company-devices-edit-label/company-devices-edit-label.component';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { CompanyDevicesTagsComponent } from '../company-devices-tags/company-devices-tags.component';
+import { DeviceTag } from '../../setting/manage-tags/manage-tags-devices/class/device-tag';
+import { DeviceTagsService } from 'src/app/services/device-tags/device-tags.service';
+import { DeviceTagsStateService } from 'src/app/states/device-tags/device-tags-state.service';
+import { DeviceTagsRealTimeService } from 'src/app/states/device-tags/device-tags-real-time.service';
 
 @Component({
   selector: 'app-company-devices-item',
@@ -21,6 +26,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 })
 export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
   @ViewChild('editLabel') editLabel: CompanyDevicesEditLabelComponent;
+  @ViewChild('deviceTags') deviceTags: CompanyDevicesTagsComponent;
   @Input() device: DeviceCompany;
   @Input() companyId: string;
   timer: any = null;
@@ -33,6 +39,9 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private companiesStateService: CompaniesStateService,
     public customerPortalStateService: CustomerPortalStateService,
+    private deviceTagsService: DeviceTagsService,
+    private deviceTagsRealTimeService: DeviceTagsRealTimeService,
+    private deviceTagsStateService: DeviceTagsStateService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
@@ -46,9 +55,61 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
       if (this.device.online) this.device.timing.uptimeForOrdering += 1000;
       this.cd.detectChanges();
     }, 1000);
+    this.deviceTags.setSelectedTag(JSON.parse(JSON.stringify(this.device.tags)).map(item => new DeviceTag(item)));
+    //  console.log("device", this.device);
+    this.deviceTagsRealTimeService.changeTagsrray.subscribe(newChange => {
+      if (newChange.action === 'BIND_DEVICE_TO_TAG') {
+        let index = newChange.data.devices.findIndex(item => item.deviceId == this.device.agentId || item.deviceId == this.device.id);
+        if (index > -1) {
+          let tags = this.deviceTagsStateService.getTags().filter(item => newChange.data.devices[index].tags.some(tag => tag == item.id));
+          this.device.setTags([...this.device.tags, ...tags]);
+          console.log("this.device", this.device.tags);
+          this.deviceTags.setSelectedTag(JSON.parse(JSON.stringify(this.device.tags)).map(item => new DeviceTag(item)));
+        }
+      }
+      if (newChange.action === 'UNBIND_DEVICE_FROM_TAG') {
+        let index = newChange.data.devices.findIndex(item => item.deviceId == this.device.agentId || item.deviceId == this.device.id);
+        if (index > -1) {
+          newChange.data.devices[index].tags.forEach(item => {
+            let index = this.device.tags.findIndex(tag => tag.id == item);
+            if (index > -1) this.device.tags.splice(index, 1);
+          })
+          console.log("this.device", this.device.tags);
+          this.deviceTags.setSelectedTag(JSON.parse(JSON.stringify(this.device.tags)).map(item => new DeviceTag(item)));
+        }
+      }
+    })
   }
   openAside(type) {
     if (this.device.agentId) this.devicesStateService.setOnOpenAside(new DeviceCompanyAsideParams(type, [this.device.agentId]));
+  }
+  onChangeTags(data) {
+    console.log("data", data);
+    console.log(this.device);
+    let forRemove = [];
+    let forAdd = [];
+    if (data.length > this.device.tags.length) {
+      data.forEach(item => {
+        let find = this.device.tags.some(dataItem => dataItem.id == item.id);
+        if (!find) forAdd.push(item);
+      })
+    } else {
+      this.device.tags.forEach(item => {
+        let find = data.some(dataItem => dataItem.id == item.id);
+        if (!find) forRemove.push(item);
+      })
+    }
+    console.log("forAdd", forAdd);
+    console.log("forRemove", forRemove);
+    if (forRemove.length > 0) {
+      this.deviceTagsService.unLinkDevice(this.device.getDataForRequestTags(forRemove.map(item => item.id))).subscribe(res => {
+
+      })
+    } else {
+      this.deviceTagsService.linkDevice(this.device.getDataForRequestTags(forAdd.map(item => item.id))).subscribe(res => {
+
+      })
+    }
   }
   onSelectDevice() {
     this.onChangeSelect.emit(null);
