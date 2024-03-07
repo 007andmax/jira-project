@@ -33,6 +33,7 @@ export class ManageTagsDevicesAddComponent implements OnInit {
           this.onClose.emit(null);
         },
         error => {
+          console.log("error", error);
           this.isInitRequest = false;
         }
       );

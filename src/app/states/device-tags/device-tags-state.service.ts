@@ -15,15 +15,16 @@ export class DeviceTagsStateService {
 
   public onInit() {
     this.deviceTagsRealTimeService.changeTagsrray.subscribe(newChange => {
-      if (newChange.action === 'COMPANY_TAG_SAVED') {
+      if (newChange.action === 'DEVICE_TAG_SAVED') {
+        newChange.data.tags.forEach(item => this.tags.push(new DeviceTag(item)))
       }
-      if (newChange.action === 'COMPANY_TAG_EDITED') {
+      if (newChange.action === 'DEVICE_TAG_EDITED') {
         newChange.data.forEach(item => {
           let index = this.tags.findIndex(tag => tag.id == item.id);
           this.tags[index] = new DeviceTag(item);
         })
       }
-      if (newChange.action === 'COMPANY_TAG_REMOVED') {
+      if (newChange.action === 'DEVICE_TAG_REMOVED') {
         newChange.data.forEach(item => {
           let index = this.tags.findIndex(tag => tag.id == item);
           this.tags.splice(index, 1);
