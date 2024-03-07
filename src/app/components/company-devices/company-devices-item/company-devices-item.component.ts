@@ -56,14 +56,12 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     }, 1000);
     this.deviceTags.setSelectedTag(JSON.parse(JSON.stringify(this.device.tags)).map(item => new DeviceTag(item)));
-    //  console.log("device", this.device);
     this.deviceTagsRealTimeService.changeTagsrray.subscribe(newChange => {
       if (newChange.action === 'BIND_DEVICE_TO_TAG') {
         let index = newChange.data.devices.findIndex(item => item.deviceId == this.device.agentId || item.deviceId == this.device.id);
         if (index > -1) {
           let tags = this.deviceTagsStateService.getTags().filter(item => newChange.data.devices[index].tags.some(tag => tag == item.id));
           this.device.setTags([...this.device.tags, ...tags]);
-          console.log("this.device", this.device.tags);
           this.deviceTags.setSelectedTag(JSON.parse(JSON.stringify(this.device.tags)).map(item => new DeviceTag(item)));
         }
       }
@@ -74,7 +72,6 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
             let index = this.device.tags.findIndex(tag => tag.id == item);
             if (index > -1) this.device.tags.splice(index, 1);
           })
-          console.log("this.device", this.device.tags);
           this.deviceTags.setSelectedTag(JSON.parse(JSON.stringify(this.device.tags)).map(item => new DeviceTag(item)));
         }
       }
@@ -84,8 +81,6 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     if (this.device.agentId) this.devicesStateService.setOnOpenAside(new DeviceCompanyAsideParams(type, [this.device.agentId]));
   }
   onChangeTags(data) {
-    console.log("data", data);
-    console.log(this.device);
     let forRemove = [];
     let forAdd = [];
     if (data.length > this.device.tags.length) {
@@ -99,8 +94,6 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
         if (!find) forRemove.push(item);
       })
     }
-    console.log("forAdd", forAdd);
-    console.log("forRemove", forRemove);
     if (forRemove.length > 0) {
       this.deviceTagsService.unLinkDevice(this.device.getDataForRequestTags(forRemove.map(item => item.id))).subscribe(res => {
 

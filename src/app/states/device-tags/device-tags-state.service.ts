@@ -16,18 +16,14 @@ export class DeviceTagsStateService {
   public onInit() {
     this.deviceTagsRealTimeService.changeTagsrray.subscribe(newChange => {
       if (newChange.action === 'COMPANY_TAG_SAVED') {
-        console.log("newChange.data", newChange.data);
-        newChange.data.tags.forEach(item => this.tags.push(new DeviceTag(item)))
       }
       if (newChange.action === 'COMPANY_TAG_EDITED') {
-        console.log("newChange.data", newChange.data);
         newChange.data.forEach(item => {
           let index = this.tags.findIndex(tag => tag.id == item.id);
           this.tags[index] = new DeviceTag(item);
         })
       }
       if (newChange.action === 'COMPANY_TAG_REMOVED') {
-        console.log("newChange.data", newChange.data);
         newChange.data.forEach(item => {
           let index = this.tags.findIndex(tag => tag.id == item);
           this.tags.splice(index, 1);

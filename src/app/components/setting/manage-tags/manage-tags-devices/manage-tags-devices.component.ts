@@ -22,8 +22,6 @@ export class ManageTagsDevicesComponent implements OnInit, OnDestroy {
   tags: Array<DeviceTag> = [];
   loading: boolean = true;
   create: boolean = false;
-  compnayForm: FormGroup;
-  edit: boolean = false;
   filter: ManageTagsDevicesFilter = new ManageTagsDevicesFilter();
   @Input() searchTag = "";
   sub: Subscription = new Subscription();
@@ -38,10 +36,6 @@ export class ManageTagsDevicesComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    this.compnayForm = this.formBuilder.group({
-      name: ["", Validators.required],
-      id: [""]
-    });
     if (this.deviceTagsStateService.getTags().length > 0) {
       this.tags = this.deviceTagsStateService.getTags();
       this.loading = false;
@@ -67,18 +61,12 @@ export class ManageTagsDevicesComponent implements OnInit, OnDestroy {
   }
   onRemoveTag() {
     this.deviceTagsService.deleteTags(this.deviceTagsStateService.getTagForDelete().id).subscribe(res => {
-      console.log("res", res);
     })
-  }
-  get f() {
-    return this.compnayForm.controls;
   }
   onFilter(field) {
     this.filter.onFilter(field, this.tags);
   }
   public onAdd() {
-    this.compnayForm.patchValue({ word: "" });
-    this.edit = false;
     this.create = true;
   }
   onEditTag(item) {
@@ -110,6 +98,9 @@ export class ManageTagsDevicesComponent implements OnInit, OnDestroy {
     this.confirmStateService.setConfirmAction(DELETE_DEVICE_TAG);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = tag.name;
+  }
+  public trackById(index, item) {
+    return item.id;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

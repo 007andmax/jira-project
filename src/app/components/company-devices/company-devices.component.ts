@@ -177,7 +177,6 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
         this.devices = data[id].map(item => new DeviceCompany(item, this.companyId));
         this.filter.onFilterName(this.devices);
       }
-      console.log("this.devices", this.devices);
       this.showPreloader = false;
       if (this.devices.length > 0 && this.devicesStateService.getIsInitWebSocket()) this.sendDeviceStatusRequest(this.companyId, this.devices.filter(item => item.agentId).map(item => item.agentId));
     });
