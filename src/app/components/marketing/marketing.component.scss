@@ -134,19 +134,32 @@
 }
 
 .users-table__company {
-  width: 100%;
-  min-width: 220px;
+  flex: 2 0 220px;
+  @media (max-width: 1600px) {
+    flex: 2 0 200px;
+  }
+  @media (min-width: 2048px) {
+    flex: 3 0 220px;
+  }
 }
 .users-table__industry {
-  width: 178px;
-  max-width: 178px;
-  min-width: 178px;
+  flex: 0 0 176px;
+  @media (max-width: 1600px) {
+    display: none;
+  }
+  @media (min-width: 2048px) {
+    flex: 1 0 180px;
+  }
 }
 
 .users-table__company-full {
-    width: 434px;
-    max-width: 434px;
-    min-width: 434px;
+  flex: 2 0 220px;
+  @media (max-width: 1600px) {
+    flex: 2 0 200px;
+  }
+  @media (min-width: 2048px) {
+    flex: 3 0 220px;
+  }
 }
 
 .qt-page-list__header-thead-container {
@@ -178,7 +191,7 @@
 
     /deep/ .qt-page-list {
         background-color: $white;
-        padding: 0px;
+        padding: 0;
     }
 
     /deep/ table.qt-table-modern tbody tr td:first-child {

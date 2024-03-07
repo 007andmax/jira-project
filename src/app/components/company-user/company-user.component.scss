@@ -133,19 +133,26 @@
     }
 }
 
-.users-table__company {
-  width: 100%;
-  min-width: 220px;
+.users-table__email {
+  flex: 2 0 220px;
+  @media (max-width: 1600px) {
+    flex: 2 0 200px;
+  }
+  @media (min-width: 2048px) {
+    flex: 3 0 220px;
+  }
 }
 .users-table__portal-status {
-  width: 118px;
-  max-width: 118px;
-  min-width: 118px;
+  flex: 0 0 118px;
 }
 .users-table__industry {
-  width: 178px;
-  max-width: 178px;
-  min-width: 178px;
+  flex: 0 0 176px;
+  @media (max-width: 1600px) {
+    display: none;
+  }
+  @media (min-width: 2048px) {
+    flex: 1 0 180px;
+  }
 }
 .users-table__company-full {
     width: 434px;
@@ -182,7 +189,7 @@
 
     /deep/ .qt-page-list {
         background-color: $white;
-        padding: 0px;
+        padding: 0;
     }
 
     /deep/ table.qt-table-modern tbody tr td:first-child {
@@ -200,6 +207,33 @@
     /deep/ table.qt-table-modern tbody tr td {
         border-bottom: 1px solid $gray-200;
     }
+    /deep/ .users-table__subscription {
+      @media (max-width: 1800px) {
+        flex: 1 0 130px;
+      }
+    }
+    /deep/ .users-table__tickets {
+      @media (max-width: 1800px) {
+        flex: 0 0 75px;
+      }
+    }
+    /deep/ .users-table__industry {
+      @media (max-width: 1800px) {
+        display: none;
+      }
+    }
+  /deep/ .users-table__email {
+    @media (max-width: 1600px) {
+       flex: 2 0 164px;
+    }
+  }
+  /deep/ .--open-filters {
+    .users-table__industry {
+      @media (max-width: 1920px) {
+        display: none;
+      }
+    }
+  }
 }
 /deep/ .content-container .content-wrapper .breadcrumbs {
     padding: 15px 30px;
