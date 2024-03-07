@@ -45,7 +45,6 @@ export class DeviceTagsService {
         this.appStateService.changeDetectorRef();
         return data;
       }, err => {
-        console.log("err", err.error.error.message);
         this.toastrService.error(err.error.error.message);
         this.appStateService.changeDetectorRef();
       }));
