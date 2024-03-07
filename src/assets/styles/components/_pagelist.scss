@@ -27,6 +27,19 @@
     }
   }
 
+  &.--sticky-breadcrumbs {
+    .qt-page-list__header {
+      top: 45px;
+      z-index: 2;
+    }
+    .aside-filters {
+      top: 103px;
+    }
+    .qt-page-list__header-thead-container {
+      top: 102px;
+    }
+  }
+
   &__header-title {
     @include h6__sb;
     color: $gray-900;

@@ -1,4 +1,4 @@
-<div class="product-list-report product-list list-of-product">
+<div class="product-list-report product-list list-of-product --sticky-breadcrumbs">
     <h6 class="report-title qt-fw-600 qt-color-gray-900">List of products sold</h6>
     <div>
         <app-report-menu
@@ -123,96 +123,97 @@
                         <!-- <div id="list-products" class="qt-page-list__body"> -->
                         <div class="qt-page-list__body">
                             <div class="qt-page-list__body-table-container">
-                              <div id="list-products" class="qt-page-list__body-tbody qt-table-modern companies-table">
-                                <ng-template
-                                  ngFor
-                                  let-product
-                                  [ngForOf]="productsCompanyReport.lines"
-                                  [ngForTrackBy]="trackByIndex"
-                                >
-                                  <li
-                                    class="qt-table-modern__row qt-table-modern__row--lg qt-table-modern__row"
-                                    ng-class="{'hide-in-report':product.isChecked}"
-                                  >
-                                    <div
-                                      class="product-list-ticket__check"
-                                    >
-                                      <label class="qt-checkbox">
-                                        <input
-                                          type="checkbox"
-                                          [(ngModel)]="product.isChecked"
-                                          (change)="selectLine()"
-                                        >
-                                        <span></span>
-                                      </label>
-                                    </div>
-                                    <div class="product-list-ticket__date">{{product.date}}</div>
-                                    <div
-                                      class="product-list-ticket__client"
-                                      *ngIf="productsCompanyReport.type === 'SUMMARY'"
-                                    >
-                                      {{product.client}}
-                                    </div>
-                                    <div class="product-list-ticket__mfg ellipsis">{{product.mfg}}</div>
-                                    <div class="product-list-ticket__description">
-                                      <pre>{{product.description}}</pre>
-                                    </div>
-                                    <div class="product-list-ticket__serial-number">
-                                      {{product.serialNumber
-                                      }}
-                                    </div>
-                                    <div
-                                      class="product-list-ticket__number"
-                                      [ngStyle]="{'color': !product.invoiceNumber ? 'red' : 'none'}"
-                                    >
-                                      {{product.ticketNumber
-                                      }}
-                                    </div>
-                                    <div
-                                      class="product-list-ticket__invoice-number"
-                                      [ngStyle]="{'color': product.invoiceNumber ? 'green' : 'none'}"
-                                    >
-                                      {{product.invoiceNumber }}
-                                    </div>
-                                    <div
-                                      class="product-list-ticket__purchase-cost"
-                                      *ngIf="getPermissions('VIEW_PRODUCT_COST')"
-                                    >
-                                      {{'$' + parseTotal(product.purchaseCost) }}
-                                    </div>
-                                    <div
-                                      class="product-list-ticket__sale-price"
-                                      [ngStyle]="{'color': product.salePrice < product.purchaseCost ? 'red' : 'none'}"
-                                    >
-                                      {{'$'+ parseTotal(product.salePrice) }}
-                                    </div>
-                                  </li>
-                                </ng-template>
-                              </div>
-                              <div class="qt-page-list__body-tbody">
                                 <div
-                                  class="qt-table-modern__row product-report-total-sales qt-df qt-jc-fe"
-                                  *ngIf="productsCompanyReport.lines"
+                                    id="list-products"
+                                    class="qt-page-list__body-tbody qt-table-modern companies-table"
                                 >
-                                  <div class="product-list-ticket__check"></div>
-                                  <div class="product-list-ticket__date"></div>
-                                  <div class="product-list-ticket__mfg"></div>
-                                  <div class="product-list-ticket__description"></div>
-                                  <div class="product-list-ticket__serial-number"></div>
-                                  <div class="product-list-ticket__number"></div>
-                                  <div class="product-list-ticket__invoice-number"></div>
-                                  <div class="product-list-ticket__purchase-cost">
-                                    <strong class="qt-fs-16">
-                                      <span>{{'$' + parseTotal(purchaseCostSum) }}</span>
-                                    </strong>
-                                  </div>
-                                  <div class="product-list-ticket__sale-price">
-                                    <strong class="qt-fs-16">
-                                      <span *ngIf="getPermissions('VIEW_PRODUCT_COST')">{{'$' + parseTotal(salesPriceSum) }}</span>
-                                    </strong>
-                                  </div>
+                                    <ng-template
+                                        ngFor
+                                        let-product
+                                        [ngForOf]="productsCompanyReport.lines"
+                                        [ngForTrackBy]="trackByIndex"
+                                    >
+                                        <li
+                                            class="qt-table-modern__row qt-table-modern__row--lg qt-table-modern__row"
+                                            ng-class="{'hide-in-report':product.isChecked}"
+                                        >
+                                            <div class="product-list-ticket__check">
+                                                <label class="qt-checkbox">
+                                                    <input
+                                                        type="checkbox"
+                                                        [(ngModel)]="product.isChecked"
+                                                        (change)="selectLine()"
+                                                    >
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                            <div class="product-list-ticket__date">{{product.date}}</div>
+                                            <div
+                                                class="product-list-ticket__client"
+                                                *ngIf="productsCompanyReport.type === 'SUMMARY'"
+                                            >
+                                                {{product.client}}
+                                            </div>
+                                            <div class="product-list-ticket__mfg ellipsis">{{product.mfg}}</div>
+                                            <div class="product-list-ticket__description">
+                                                <pre>{{product.description}}</pre>
+                                            </div>
+                                            <div class="product-list-ticket__serial-number">
+                                                {{product.serialNumber
+                                      }}
+                                            </div>
+                                            <div
+                                                class="product-list-ticket__number"
+                                                [ngStyle]="{'color': !product.invoiceNumber ? 'red' : 'none'}"
+                                            >
+                                                {{product.ticketNumber
+                                      }}
+                                            </div>
+                                            <div
+                                                class="product-list-ticket__invoice-number"
+                                                [ngStyle]="{'color': product.invoiceNumber ? 'green' : 'none'}"
+                                            >
+                                                {{product.invoiceNumber }}
+                                            </div>
+                                            <div
+                                                class="product-list-ticket__purchase-cost"
+                                                *ngIf="getPermissions('VIEW_PRODUCT_COST')"
+                                            >
+                                                {{'$' + parseTotal(product.purchaseCost) }}
+                                            </div>
+                                            <div
+                                                class="product-list-ticket__sale-price"
+                                                [ngStyle]="{'color': product.salePrice < product.purchaseCost ? 'red' : 'none'}"
+                                            >
+                                                {{'$'+ parseTotal(product.salePrice) }}
+                                            </div>
+                                        </li>
+                                    </ng-template>
                                 </div>
-                              </div>
+                                <div class="qt-page-list__body-tbody">
+                                    <div
+                                        class="qt-table-modern__row product-report-total-sales qt-df qt-jc-fe"
+                                        *ngIf="productsCompanyReport.lines"
+                                    >
+                                        <div class="product-list-ticket__check"></div>
+                                        <div class="product-list-ticket__date"></div>
+                                        <div class="product-list-ticket__mfg"></div>
+                                        <div class="product-list-ticket__description"></div>
+                                        <div class="product-list-ticket__serial-number"></div>
+                                        <div class="product-list-ticket__number"></div>
+                                        <div class="product-list-ticket__invoice-number"></div>
+                                        <div class="product-list-ticket__purchase-cost">
+                                            <strong class="qt-fs-16">
+                                                <span>{{'$' + parseTotal(purchaseCostSum) }}</span>
+                                            </strong>
+                                        </div>
+                                        <div class="product-list-ticket__sale-price">
+                                            <strong class="qt-fs-16">
+                                                <span *ngIf="getPermissions('VIEW_PRODUCT_COST')">{{'$' + parseTotal(salesPriceSum) }}</span>
+                                            </strong>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

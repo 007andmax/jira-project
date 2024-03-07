@@ -10,6 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CompanyTagsModule } from '../../companies/company-tags/company-tags.module';
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 import { UsersFilterJobTitleComponent } from './users-filter/users-filter-job-title/users-filter-job-title.component';
+import { UsersFilterInfoComponent } from './users-filter-info/users-filter-info.component';
 
 
 
@@ -17,6 +18,7 @@ import { UsersFilterJobTitleComponent } from './users-filter/users-filter-job-ti
     declarations: [
         UsersHeaderComponent,
         UsersFilterSubscriptionsComponent,
+        UsersFilterInfoComponent,
     ],
     imports: [
         CommonModule,

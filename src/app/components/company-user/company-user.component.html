@@ -1,5 +1,5 @@
 <!-- for show filters add class "show" for app-left-panel -->
-<div class="qt-page-list page-list-users">
+<div class="qt-page-list page-list-users --sticky-breadcrumbs">
     <app-users-header
         #header
         [type]="TYPE_LIST_COMPANY_USERS"
@@ -14,7 +14,8 @@
     <div class="qt-page-list users-page qt-df">
         <div
             class="qt-page-list__body qt-pt-32 qt-pl-32"
-            [ngClass]="{'qt-pr-32':!toggleFilter}"
+            [ngClass]="{'qt-pr-32':!toggleFilter,
+        '--open-filters':toggleFilter}"
         >
             <div class="qt-page-list__header-thead-container">
                 <table class="qt-table-modern qt-page-list__header-thead">
@@ -48,7 +49,7 @@
                                 <span class="qt-table-modern__sorting"></span>
                             </th>
                             <th
-                                class="users-table__company pointer"
+                                class="users-table__industry pointer"
                                 (click)="onFilter('INDUSTRY')"
                             >
                                 Industry
@@ -64,7 +65,7 @@
                                 <span class="qt-table-modern__sorting"></span>
                             </th>
                             <th
-                                class="users-table__company pointer"
+                                class="users-table__portal-status pointer"
                                 (click)="onFilter('PORTAL_STATUS')"
                             >
                                 Portal Status
@@ -144,6 +145,7 @@
                 ></app-users-filter>
             </div>
         </div>
+
 
 
 
