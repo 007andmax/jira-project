@@ -39,6 +39,7 @@ import { NoteRealTimeService } from 'src/app/states/note/note-real-time.service'
 import { EmailTemplateRealTimeService } from 'src/app/states/email-template/email-template-real-time.service';
 import { CustomerRoleRealTimeService } from 'src/app/states/customer-role/customer-role-real-time.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { DeviceTagsRealTimeService } from 'src/app/states/device-tags/device-tags-real-time.service';
 
 
 /**
@@ -99,6 +100,7 @@ export class WebsocketService {
     private emailTemplateRealTimeService: EmailTemplateRealTimeService,
     private customerRoleRealTimeService: CustomerRoleRealTimeService,
     private customerPortalStateService: CustomerPortalStateService,
+    private deviceTagsRealTimeService: DeviceTagsRealTimeService
 
   ) {
   }
@@ -170,6 +172,7 @@ export class WebsocketService {
       that.subsribeToSubmittedOneTimeConnection();
       that.subsribeToLockScreen();
       that.subsribeToTicketPriority();
+      that.subsribeToAgentNotification();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToTags();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToDocuments();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToDocumentsCategory();
@@ -246,6 +249,17 @@ export class WebsocketService {
       this.stompClient.subscribe("/user/watch/user", (message) => {
         var newChange = JSON.parse(message.body);
         this.usersRealTimeService.handleRealTimeChanges(newChange);
+        if (message.body) {
+        }
+      });
+    }, 3000);
+  }
+  private subsribeToAgentNotification() {
+
+    setTimeout(() => {
+      this.stompClient.subscribe("/user/watch/agent", (message) => {
+        var newChange = JSON.parse(message.body);
+        this.deviceTagsRealTimeService.handleRealTimeChanges(newChange);
         if (message.body) {
         }
       });

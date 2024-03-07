@@ -82,6 +82,14 @@
             </div>
         </div>
     </td>
+    <td class="company-devices-table__tags">
+        <app-company-devices-tags
+            #deviceTags
+            [showLabel]="false"
+            [placement]="'top'"
+            (tagsChange)="onChangeTags($event)"
+        ></app-company-devices-tags>
+    </td>
     <td class="company-devices-table__logged-user">
         <div class="qt-df qt-fd-c">
             <span

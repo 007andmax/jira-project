@@ -10,13 +10,19 @@ import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.
 import { ManageTagsAddComponent } from './manage-tags-add/manage-tags-add.component';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
+import { ManageTagsDevicesComponent } from './manage-tags-devices/manage-tags-devices.component';
+import { ManageTagsDevicesAddComponent } from './manage-tags-devices/manage-tags-devices-add/manage-tags-devices-add.component';
+import { DeviceTagPipe } from 'src/app/pipe/device-tag.pipe';
 
 
 
 @NgModule({
     declarations: [ManageTagsComponent,
         TagPipe,
-        ManageTagsAddComponent
+        ManageTagsAddComponent,
+        ManageTagsDevicesComponent,
+        ManageTagsDevicesAddComponent,
+        DeviceTagPipe
     ],
     imports: [
         CommonModule,
@@ -27,7 +33,7 @@ import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-toolt
         ManageTagsRoutingModule,
         ClickOtsideModule,
         KeyUpEnterModule,
-        DynamicTooltipModule
+        DynamicTooltipModule,
     ],
     exports: [TagPipe]
 
