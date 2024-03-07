@@ -16,7 +16,7 @@ export class DeviceTagsStateService {
   public onInit() {
     this.deviceTagsRealTimeService.changeTagsrray.subscribe(newChange => {
       if (newChange.action === 'DEVICE_TAG_SAVED') {
-        newChange.data.tags.forEach(item => this.tags.push(new DeviceTag(item)))
+        newChange.data.tags.forEach(item => this.tags.unshift(new DeviceTag(item)))
       }
       if (newChange.action === 'DEVICE_TAG_EDITED') {
         newChange.data.forEach(item => {
