@@ -103,6 +103,7 @@
                             <div class="tab-pane__table-header">
                                 <div class="tab-pane__table-row">
                                     <div class="tab-pane__table-cell email-templates-table__template-name">Template Name</div>
+                                    <div class="tab-pane__table-cell email-templates-table__status">Status</div>
                                     <div class="tab-pane__table-cell email-templates-table__action"></div>
                                 </div>
                             </div>
@@ -116,6 +117,19 @@
                           "
                                 >
                                     <div class="tab-pane__table-cell email-templates-table__template-name">{{ agentTemplates[template].title }}</div>
+                                    <div class="tab-pane__table-cell email-templates-table__status email-templates-table__status-item">
+                                        <app-dynamic-tooltip
+                                            [content]="'Active'"
+                                            [position]="'top'"
+                                            #activeTooltip
+                                        ></app-dynamic-tooltip>
+                                        <i
+                                            class="icon__check qt-sz-20 qt-bg-contain qt-dib"
+                                            *ngIf="emailPages && emailPages.activeAndNotDefault[template].isActive"
+                                            (mouseenter)="activeTooltip.show($event.target)"
+                                            (mouseleave)="activeTooltip.hide()"
+                                        ></i>
+                                    </div>
                                     <div class="tab-pane__table-cell email-templates-table__action">
                                         <div class="qt-df">
                                             <app-dynamic-tooltip
@@ -165,6 +179,7 @@
                             <div class="tab-pane__table-header">
                                 <div class="tab-pane__table-row">
                                     <div class="tab-pane__table-cell email-templates-table__template-name">Template Name</div>
+                                    <div class="tab-pane__table-cell email-templates-table__status">Status</div>
                                     <div class="tab-pane__table-cell email-templates-table__action"></div>
                                 </div>
                             </div>
@@ -178,6 +193,19 @@
                           "
                                 >
                                     <div class="tab-pane__table-cell email-templates-table__template-name">{{ invoiceTemplates[template].title }}</div>
+                                    <div class="tab-pane__table-cell email-templates-table__status email-templates-table__status-item">
+                                        <app-dynamic-tooltip
+                                            [content]="'Active'"
+                                            [position]="'top'"
+                                            #activeTooltip
+                                        ></app-dynamic-tooltip>
+                                        <i
+                                            class="icon__check qt-sz-20 qt-bg-contain qt-dib"
+                                            *ngIf="emailPages && emailPages.activeAndNotDefault[template].isActive"
+                                            (mouseenter)="activeTooltip.show($event.target)"
+                                            (mouseleave)="activeTooltip.hide()"
+                                        ></i>
+                                    </div>
                                     <div class="tab-pane__table-cell email-templates-table__action">
                                         <div class="qt-df">
                                             <app-dynamic-tooltip
@@ -227,6 +255,7 @@
                             <div class="tab-pane__table-header">
                                 <div class="tab-pane__table-row">
                                     <div class="tab-pane__table-cell email-templates-table__template-name">Template Name</div>
+                                    <div class="tab-pane__table-cell email-templates-table__status">Status</div>
                                     <div class="tab-pane__table-cell email-templates-table__action"></div>
                                 </div>
                             </div>
@@ -240,6 +269,19 @@
                           "
                                 >
                                     <div class="tab-pane__table-cell email-templates-table__template-name">{{ userTemplates[template].title }}</div>
+                                    <div class="tab-pane__table-cell email-templates-table__status email-templates-table__status-item">
+                                        <app-dynamic-tooltip
+                                            [content]="'Active'"
+                                            [position]="'top'"
+                                            #activeTooltip
+                                        ></app-dynamic-tooltip>
+                                        <i
+                                            class="icon__check qt-sz-20 qt-bg-contain qt-dib"
+                                            *ngIf="emailPages && emailPages.activeAndNotDefault[template].isActive"
+                                            (mouseenter)="activeTooltip.show($event.target)"
+                                            (mouseleave)="activeTooltip.hide()"
+                                        ></i>
+                                    </div>
                                     <div class="tab-pane__table-cell email-templates-table__action">
                                         <div class="qt-df">
                                             <app-dynamic-tooltip
