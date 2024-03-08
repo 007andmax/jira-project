@@ -48,6 +48,6 @@ export class TicketsFilterUsersDropDownComponent extends TicketsFilterDropDownCo
   onSearch(event) {
     console.log("this.field", this.field);
     console.log("this.reqList", this.reqList);
-    this.list = this.reqList.filter(item => this.reducerItem(item).toLowerCase().includes(event.target.value));
+    this.list = this.reqList.filter(item => this.reducerItem(item).toLowerCase().includes(event.target.value.toLowerCase()));
   }
 }
