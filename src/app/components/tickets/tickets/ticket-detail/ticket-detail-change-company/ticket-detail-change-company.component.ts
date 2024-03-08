@@ -28,6 +28,7 @@ export class TicketDetailChangeCompanyComponent implements OnInit, OnDestroy {
     this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.ticketProfile.company.id);
     if (this.companiesStateService.getCompanies().length > 0) this.getCompanies(this.companiesStateService.getCompanies());
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
+      this.selectedCompany = data.find(item => item.id === this.ticketProfile.company.id);
       this.getCompanies(data);
     })
     this.sub.add(getOnCompanies);

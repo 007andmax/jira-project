@@ -20,57 +20,54 @@
             <div class="qt-page-list__header-thead-container">
                 <div class="qt-table-modern qt-page-list__header-thead">
                     <div class="qt-page-list__header-thead__row">
-                      <div class="users-table__check">
-                        <div class="qt-df">
-                          <label
-                            class="qt-checkbox"
-                            for="all-users"
-                          >
-                            <input
-                              id="all-users"
-                              [(ngModel)]="selectAll"
-                              (change)="toggleAllUser($event)"
-                              type="checkbox"
-                            >
-                            <span></span>
-                          </label>
+                        <div class="users-table__check">
+                            <div class="qt-df">
+                                <label
+                                    class="qt-checkbox"
+                                    for="all-users"
+                                >
+                                    <input
+                                        id="all-users"
+                                        [(ngModel)]="selectAll"
+                                        (change)="toggleAllUser($event)"
+                                        type="checkbox"
+                                    >
+                                    <span></span>
+                                </label>
+                            </div>
                         </div>
-                      </div>
-                      <div
-                        class="users-table__name pointer"
-                        (click)="onFilter('NAME')"
-                      >
-                        Name
-                        <span class="qt-table-modern__sorting"></span>
-                      </div>
-                      <div class="users-table__email">
-                        Email
-                        <span class="qt-table-modern__sorting"></span>
-                      </div>
-                      <div
-                        class="users-table__industry pointer"
-                        (click)="onFilter('INDUSTRY')"
-                      >
-                        Industry
-                        <span class="qt-table-modern__sorting"></span>
-                      </div>
-                      <div class="users-table__contract-no">Contact No</div>
-                      <div class="users-table__subscription">Subscription</div>
-                      <div
-                        class="users-table__tickets pointer"
-                        (click)="onFilter('TICKET_NUMBER')"
-                      >
-                        Tickets
-                        <span class="qt-table-modern__sorting"></span>
-                      </div>
-                      <div
-                        class="users-table__portal-status pointer"
-                        (click)="onFilter('PORTAL_STATUS')"
-                      >
-                        Portal Status
-                        <span class="qt-table-modern__sorting"></span>
-                      </div>
-                      <div  class="users-table__menu"></div>
+                        <div
+                            class="users-table__name pointer"
+                            (click)="onFilter('NAME')"
+                        >
+                            Name
+                            <span class="qt-table-modern__sorting"></span>
+                        </div>
+                        <div class="users-table__email">Email</div>
+                        <div
+                            class="users-table__industry pointer"
+                            (click)="onFilter('INDUSTRY')"
+                        >
+                            Industry
+                            <span class="qt-table-modern__sorting"></span>
+                        </div>
+                        <div class="users-table__contract-no">Contact No</div>
+                        <div class="users-table__subscription">Subscription</div>
+                        <div
+                            class="users-table__tickets pointer"
+                            (click)="onFilter('TICKET_NUMBER')"
+                        >
+                            Tickets
+                            <span class="qt-table-modern__sorting"></span>
+                        </div>
+                        <div
+                            class="users-table__portal-status pointer"
+                            (click)="onFilter('PORTAL_STATUS')"
+                        >
+                            Portal Status
+                            <span class="qt-table-modern__sorting"></span>
+                        </div>
+                        <div class="users-table__menu"></div>
                     </div>
                 </div>
             </div>
@@ -79,7 +76,8 @@
                 [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}"
             >
                 <div class="qt-page-list__body-tbody qt-table-modern users-table">
-                    <div class="tbody"
+                    <div
+                        class="tbody"
                         infiniteScroll
                         [infiniteScrollContainer]="container"
                         [infiniteScrollDistance]="2"
@@ -143,6 +141,7 @@
                 ></app-users-filter>
             </div>
         </div>
+
 
 
 
