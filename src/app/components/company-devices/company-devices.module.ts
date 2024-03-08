@@ -16,6 +16,8 @@ import { CompanyDevicesAsideUpdatesComponent } from './company-devices-aside/com
 import { CompanyDevicesEditLabelModule } from './company-devices-edit-label/company-devices-edit-label.module';
 import { DatePickerModule } from '../shared/date-picker/date-picker.module';
 import { CompanyDevicesRoutingModule } from './company-devices-routing.module';
+import { CompanyDevicesTagsComponent } from './company-devices-tags/company-devices-tags.component';
+import { CompanyDevicesTagsModule } from './company-devices-tags/company-devices-tags.module';
 
 
 @NgModule({
@@ -30,7 +32,8 @@ import { CompanyDevicesRoutingModule } from './company-devices-routing.module';
         CompanyDevicesAsideSystemComponent,
         CompanyDevicesAsideNetworkTabComponent,
         CompanyDevicesAsideSoftwareComponent,
-        CompanyDevicesAsideUpdatesComponent
+        CompanyDevicesAsideUpdatesComponent,
+
     ],
     imports: [
         CommonModule,
@@ -38,7 +41,8 @@ import { CompanyDevicesRoutingModule } from './company-devices-routing.module';
         NgbModule,
         CompanyDevicesEditLabelModule,
         DatePickerModule,
-        CompanyDevicesRoutingModule
+        CompanyDevicesRoutingModule,
+        CompanyDevicesTagsModule
     ],
 
 

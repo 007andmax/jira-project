@@ -48,25 +48,56 @@
       }
     }
   }
+  .qt-table-modern__row {
+    margin-bottom: 0;
+    border: unset;
+    font-size: 14px;
+    color: $gray-900;
+    &.--selected > div {
+      background-color: $blue-dark-25;
+    }
+    &:hover {
+      border: unset;
+      > div {
+        background-color: $blue-dark-25;
+        @media (max-width: 1600px) {
+          word-break: break-all;
+        }
+      }
+    }
+    & > div {
+      border-bottom: 1px solid $gray-200;
+
+      &:first-child {
+        padding-left: 25px;
+        border-left: 1px solid $gray-200;
+        border-radius: 0;
+      }
+
+      &:last-child {
+        padding-right: 25px;
+        border-right: 1px solid $gray-200;
+        border-radius: 0;
+      }
+    }
+  }
+  .qt-page-list__header-thead__row {
+    > div {
+      font-weight: 500;
+      font-size: 14px;
+      color: $gray-500;
+      text-transform: capitalize;
+    }
+  }
 
   .users-table {
     &__check {
-      padding: 12px 6px 12px 16px;
-      width: 36px;
-      max-width: 36px;
-      min-width: 36px;
+      padding: 12px 8px 12px 24px;
+      flex: 0 0 52px;
     }
 
     &__name {
-      width: 300px;
-      max-width: 300px;
-      min-width: 300px;
-
-      @media (max-width: 1600px) {
-        width: 190px;
-        max-width: 190px;
-        min-width: 190px;
-      }
+      flex: 1 0 190px;
 
       &--avatar {
         height: 40px;
@@ -94,21 +125,15 @@
       }
     }
 
-    &__company {
-      width: max-content;
-      min-width: 88px;
-    }
-
     &__contract-no {
-      width: 216px;
-      max-width: 216px;
-      min-width: 216px;
+      flex: 1 0 216px;
+      @media (min-width: 2048px) {
+        flex: 1 0 180px;
+      }
     }
 
     &__subscription {
-      width: 256px;
-      max-width: 256px;
-      min-width: 256px;
+      flex: 1 0 196px;
       &--dropdown .grey-dropdown {
         border: 1px solid $background;
         border-radius: 4px;
@@ -128,28 +153,12 @@
       }
     }
     &__tickets {
-      width: 110px;
-      max-width: 110px;
-      min-width: 110px;
+      flex: 0 0 110px;
     }
 
     &__menu {
-      width: 104px;
-      max-width: 104px;
-      min-width: 104px;
+      flex: 0 0 106px;
       padding: 23px 24px 23px 8px;
-    }
-  }
-  .--open-filters {
-    .users-table__name {
-      width: 190px;
-      max-width: 190px;
-      min-width: 190px;
-    }
-    .users-table__subscription {
-      width: 136px;
-      max-width: 136px;
-      min-width: 136px;
     }
   }
   .qt-table-modern__sorting {
@@ -662,12 +671,16 @@ users-aside-detail {
 company-user {
   .--open-filters {
     .users-table__industry {
-      width: 158px;
-      max-width: 158px;
-      min-width: 158px;
+      flex: 0 0 150px;
+      @media (min-width: 2048px) {
+        flex: 1 0 180px;
+      }
     }
-    .users-table__company {
-      min-width: 190px;
+    .users-table__company,
+    .users-table__email {
+      @media (max-width: 1920px) {
+        flex: 2 0 190px;
+      }
     }
   }
 }

@@ -131,6 +131,7 @@ import { AddUserToCompanyModule } from './components/users/add-user-to-company/a
 import { UserFilterSaveModule } from './components/users/user-filter-save/user-filter-save.module';
 import { TicketsHeaderModule } from './components/tickets/tickets/tickets-header/tickets-header.module';
 import { TicketsFilterSaveModule } from './components/tickets/tickets/tickets-header/tickets-filter-save/tickets-filter-save.module';
+import { DeviceTagPipe } from './pipe/device-tag.pipe';
 declare var $: any;
 
 /**

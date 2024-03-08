@@ -7,12 +7,25 @@ export class DeviceCompany extends Device {
         super(data);
         this.companyId = companyId;
     }
+    public getTagsNames() {
+        return this.tags.map(item => item.name).join(",");
+    }
     public getDataForEditIcon(iconName) {
         return {
             "agentId": this.agentId,
             "companyId": this.companyId,
             "newLabelValue": this.label,
             "iconName": iconName
+        }
+    }
+    public getDataForRequestTags(data) {
+        return {
+            "devices": [
+                {
+                    "deviceId": this.id,
+                    "tags": data
+                }
+            ]
         }
     }
     public getDataForEditLabel(label) {

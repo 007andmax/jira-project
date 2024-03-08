@@ -131,24 +131,37 @@
         }
     }
 }
+.users-table__email,
 .users-table__company {
-    width: 100%;
-    min-width: 220px;
+  flex: 2 0 220px;
+  @media (max-width: 1600px) {
+    flex: 2 0 200px;
+  }
+  @media (min-width: 2048px) {
+    flex: 3 0 220px;
+  }
 }
 
 .users-table__company-full {
-    width: 100%;
-    min-width: 220px;
+  flex: 2 0 220px;
+  @media (max-width: 1600px) {
+    flex: 2 0 200px;
+  }
+  @media (min-width: 2048px) {
+    flex: 3 0 220px;
+  }
 }
 .users-table__industry {
-  width: 178px;
-  max-width: 178px;
-  min-width: 178px;
+  flex: 0 0 176px;
+  @media (max-width: 1600px) {
+    display: none;
+  }
+  @media (min-width: 2048px) {
+    flex: 1 0 180px;
+  }
 }
 .users-table__portal-status {
-  width: 118px;
-  max-width: 118px;
-  min-width: 118px;
+  flex: 0 0 118px;
 }
 .qt-page-list__header-thead-container {
     position: sticky;
@@ -175,7 +188,7 @@
     background-color: $white;
     /deep/ .qt-page-list {
         background-color: $white;
-        padding: 0px;
+        padding: 0;
     }
     /deep/ table.qt-table-modern tbody tr td:first-child {
         border-left: 1px solid $gray-200;

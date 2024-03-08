@@ -412,6 +412,7 @@ html {
   }
 }
 app-company-tags,
+app-company-devices-tags,
 company-associate {
   .dropdown-toggle .mat-form-field-wrapper .mat-form-field-infix {
     input {
@@ -3452,9 +3453,24 @@ input.--input-error:hover {
       width: 16px;
     }
     .company-devices-table__menu {
-      width: 34px;
-      max-width: 34px;
-      min-width: 34px;
+      width: 38px;
+      max-width: 38px;
+      min-width: 38px;
+    }
+    .company-devices-table__tags {
+      width: 380px;
+      max-width: 380px;
+      min-width: 380px;
+      @media (min-width: 1921px) {
+        width: 440px;
+        max-width: 440px;
+        min-width: 440px;
+      }
+      @media screen and (min-width: 2250px) {
+        width: 580px;
+        max-width: 580px;
+        min-width: 580px;
+      }
     }
     .company-devices-table__go-to {
       width: 30px;
@@ -3462,9 +3478,9 @@ input.--input-error:hover {
       min-width: 30px;
     }
     .company-devices-table__connect {
-      width: 38px;
-      max-width: 38px;
-      min-width: 38px;
+      width: 30px;
+      max-width: 30px;
+      min-width: 30px;
     }
     .company-devices-table__ip-address {
       width: 190px;
@@ -3606,3 +3622,100 @@ app-non-contract-services-edit,app-inventory-edit-aside {
   top: 50%;
   transform: translate(-50%, -50%);
 }
+app-company-devices-tags {
+    >.qt-temporary-col-fix {
+      // TODO change this temporary class (this class create for remove bootstrap col class)
+      margin-top: 12px;
+
+      .mat-form-field {
+        width: 100%;
+      }
+
+      .mat-form-field-infix {
+        border: none;
+      }
+
+      .mat-form-field-appearance-legacy .mat-form-field-underline,
+      .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+        display: none;
+      }
+
+      .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+        padding: 0;
+        position: relative;
+      }
+
+      .mat-form-field-appearance-legacy .mat-form-field-label {
+        padding: 12px 10px 10px 36px;
+        font-size: 13px;
+        font-weight: 400;
+        color: $gray-400;
+      }
+
+      .mat-form-field-infix {
+        border: none !important;
+        box-shadow: none;
+        border-radius: 6px;
+        padding-left: 4px !important;
+        position: relative;
+        min-height: 48px;
+
+        &:hover {
+          border-color: $gray-300;
+        }
+
+        &::before {
+          display: none;
+        }
+
+        input {
+          height: 42px;
+          margin: 0;
+          min-width: 100px;
+        }
+      }
+    }
+
+    >.qt-temporary-col-fix {
+
+      .qt-input-block__input,
+      // Fix input style
+      .qt-input-block input {
+        border-color: transparent;
+        box-shadow: unset;
+      }
+
+      margin-top: 0; // Fix style for no-column, delete after remove bootstrap col class
+
+      .mat-form-field {
+        margin-top: 0;
+        width: 275px !important;
+      }
+
+      .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+        &:before {
+          display: none;
+        }
+      }
+    }
+    .mat-chip.mat-standard-chip {
+        padding: 4px 8px 5px 8px;
+        height: 24px;
+        border-radius: 6px;
+        font-weight: 500;
+        font-size: 12px;
+        margin: 0 4px 0px px 0px;
+        background-color: $gray-100;
+        color: $gray-500;
+    }
+    .mat-standard-chip .mat-chip-remove.mat-icon {
+        width: 10px;
+        height: 10px;
+        &:before {
+            top: 0px;
+            right: -3px;
+            width: 10px;
+            height: 10px;
+        }
+    }
+  }
