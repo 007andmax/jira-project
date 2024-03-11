@@ -9,11 +9,12 @@ import { MatChipsModule, MatSelectModule } from '@angular/material';
 import { CompanyProfileRoutingModule } from './company-profile-routing.module';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { NgxMaskModule } from 'ngx-mask';
+import { CompanyProfileProfileComponent } from './company-profile-profile/company-profile-profile.component';
 
 
 
 @NgModule({
-    declarations: [CompanyProfileComponent
+    declarations: [CompanyProfileComponent, CompanyProfileProfileComponent
     ],
     imports: [
         CommonModule,

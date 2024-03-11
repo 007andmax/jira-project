@@ -30,6 +30,7 @@ import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { TitleListType } from '../../tickets/tickets/tickets-header/class/title-list-type';
 import { WORK_HOURS } from 'src/app/const/time';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { CompanyProfileProfileComponent } from './company-profile-profile/company-profile-profile.component';
 
 declare var google: any;
 declare var $: any;
@@ -100,6 +101,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   shortState = '';
   @ViewChild('search')
   public searchElementRef: ElementRef;
+  @ViewChild('profile') profile: CompanyProfileProfileComponent;
   sub: Subscription = new Subscription();
   phone: string;
   idUploadFile: string;
@@ -155,7 +157,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     // load address autocomplete
     this.getAddressAutocomplete();
     this.settingStateService.setComponentName('CompanyProfileComponent');
-    this.onCroppImage();
+    //this.onCroppImage();
   }
   public setTab(data) {
     this.tabSet = data['nextId'];
@@ -238,12 +240,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       });
     });
   }
-  public onChangeTimeZone(data) {
-    this.cProfileForm.patchValue({
-      timeZone: data,
-      locale: (data) ? data.second : ''
-    });
-  }
+
   // get current position
   private setCurrentPosition() {
     if ('geolocation' in navigator) {
@@ -337,98 +334,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     try {
       this.companyProfileService.getCompanyProfile().subscribe(
         (res: any) => {
-          this.loading = false;
-          if (res) {
-            this.cProfile.address = res.addresses;
-            if (this.cProfile.address.length > 0) {
-              if (res.addresses.length > 0 && res.addresses[0].timeZone) {
-                let find = this.timezones.find(item => item.second === res.addresses[0].timeZone.name);
-                if (find) this.cProfile.address[0].timeZone = new TimeZone(find);
-              }
-              this.cProfileForm.patchValue({
-                locale: res.addresses[0].timeZone.second
-              });
-            }
-            if (this.cProfile.address.length === 0) this.cProfile.address = [{
-              timeZone: new TimeZone({
-                first: "",
-                second: "",
-              })
-            }]
-            this.cProfile.logo = res.logo;
-            this.cProfile.name = res.name;
-            this.cProfile.timeSettings = res.responseTimeSettings;
-            // this.companyTimeZoneState.onEditMode(this.cProfile.address[0].timeZone);
-            if (res.responseTimeSettings) {
-              const workingDays = res.responseTimeSettings.workingDays;
-              for (let i = 0; i < this.weekDays.length; i++) {
-                const day = workingDays[i],
-                  name = this.weekDays[i];
-
-                if (!day || day.dayOfWeek !== name) {
-                  this.defaultWorkingDay.dayOfWeek = name;
-                  workingDays.splice(
-                    i,
-                    0,
-                    Object.assign({}, this.defaultWorkingDay)
-                  );
-                } else {
-                  day.isSelected = true;
-                }
-              }
-            }
-            this.cProfile.supportMailBox = res.supportMailBox;
-            this.url = res.supportMailBox;
-            this.cProfileForm.patchValue({
-              name: res.name,
-              url: res.techDomain,
-              suiteNumber: res.addresses.length === 0 ? '' : res.addresses[0].suiteNumber,
-              address: res.addresses.length === 0 ? '' : res.addresses[0].address,
-              postalCode: res.addresses.length === 0 ? '' : res.addresses[0].postalCode
-            });
-            this.country = res.addresses.length > 0 ? res.addresses[0].country : '';
-            this.countryCode = res.addresses.length > 0 ? res.addresses[0].countryCode : '';
-            this.longCity = res.addresses.length > 0 ? res.addresses[0].longCity : '';
-            this.shortCity = res.addresses.length > 0 ? res.addresses[0].shortCity : '';
-            this.longState = res.addresses.length > 0 ? res.addresses[0].longState : '';
-            this.shortState = res.addresses.length > 0 ? res.addresses[0].shortState : '';
-            for (let i = 0; i < this.cProfile.address.length; i++) {
-              const phoneNumbers = this.cProfile.address[i].phoneNumbers,
-                firstPhone = (phoneNumbers) ? phoneNumbers[0] : null,
-                lastPhone =
-                  phoneNumbers && phoneNumbers.length > 1
-                    ? phoneNumbers[phoneNumbers.length - 1]
-                    : '';
-              if (firstPhone) {
-                this.cProfileForm.patchValue({
-                  primaryId: firstPhone.id,
-                  primaryPhone: firstPhone.number,
-                  primaryPhoneType: firstPhone.typeNumber
-                    ? firstPhone.typeNumber.toUpperCase()
-                    : ''
-                });
-                if (firstPhone.typeNumber) this.primaryPhoneType = this.phoneTypes.find(item => item.type == firstPhone.typeNumber.toUpperCase());
-                this.primaryPhone = firstPhone.number;
-              }
-              if (lastPhone) {
-                this.isAddPhone = true;
-                this.cProfileForm.patchValue({
-                  secondaryId: lastPhone.id,
-                  secondaryPhone: lastPhone.number,
-                  secondaryPhoneType: lastPhone.typeNumber
-                    ? lastPhone.typeNumber.toUpperCase()
-                    : ''
-                });
-                if (lastPhone.typeNumber) this.secondaryPhoneType = this.phoneTypes.find(item => item.type == lastPhone.typeNumber.toUpperCase());
-                this.secondaryPhone = lastPhone.number;
-                this.cProfileForm.controls['secondaryPhone'].setValidators([Validators.minLength(14)]);
-              }
-            }
-            this.cProfileForm.controls['primaryPhone'].updateValueAndValidity()
-            this.cProfileForm.controls['primaryPhone'].setErrors(null);
-            this.cProfileForm.controls['secondaryPhone'].updateValueAndValidity()
-            this.cProfileForm.controls['secondaryPhone'].setErrors(null);
-          }
+          this.profile.getCompanyProfile(res);
         },
         error => {
           this.loading = false;
@@ -557,34 +463,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     this.isCroppedImg = false;
   }
 
-  /**
-   *  file selected on upload.
-   */
-  onSelectFile(event) {
-    if (event.target.files && event.target.files[0]) {
-      const size = event.target.files[0].size;
-      if (size > 4194304) {
-        this.toaster.info('Maximum size of 4MB');
-        return;
-      }
-      this.imageChangedEvent = event;
-      const fromData = new FormData();
-      fromData.append('file', event.target.files[0]);
-      this.settingService.fileAvatar(fromData).subscribe(
-        (result: any) => {
-          if (result) {
-            this.fileAvatar = result;
-            this.idUploadFile = result.id;
-            this.modalImageCropperStateService.onInitOpen(new ImageCroper(result.base64, result.id));
-            event.target.value = null;
-          }
-        },
-        error => {
-          event.target.value = null;
-        }
-      );
-    }
-  }
+
 
   basic() {
     this.companyProfileService
@@ -599,25 +478,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       );
   }
 
-  /**
-   * delete avatar
-   */
-  deleteAvatar() {
-    this.companyProfileService
-      .removeAvatar(this.currentCompany.id)
-      .subscribe(
-        res => {
-          this.toaster.success('Avatar Deleted Successfully', null, {
-            timeOut: 3000
-          });
-          this.imageSrc = '';
-          this.getCompanyProfile();
-          this.basic();
-        },
-        error => {
-        }
-      );
-  }
+
 
   /**
    * reposition avatar
@@ -765,7 +626,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
    * saved records
    */
   onSubmit() {
-    if (this.tabSet == "tab1") this.submitCompanyProfile();
+    if (this.tabSet == "tab1") this.profile.submitCompanyProfile();
     if (this.tabSet == "workspace") this.checkDomain();
     if (this.tabSet == "operationalhours") this.onWorkSubmit();
   }
