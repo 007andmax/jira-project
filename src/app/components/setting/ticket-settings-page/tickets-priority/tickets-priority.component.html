@@ -13,6 +13,7 @@
                 </div>
                 <div class="tab-pane__table-cell ticket-status-table__priority">Ticket Priority</div>
                 <div class="tab-pane__table-cell ticket-status-table__color">Set Color</div>
+                <div class="tab-pane__table-cell ticket-status-table__display">Display on the ticket list</div>
                 <div class="tab-pane__table-cell ticket-status-table__action">&nbsp;</div>
             </div>
         </div>
@@ -85,6 +86,20 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="tab-pane__table-cell ticket-status-table__display">
+                    <label
+                        class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
+                        for="priority-display-0"
+                    >
+                        <input
+                            id="priority-display-0"
+                            type="checkbox"
+                            [(ngModel)]="addPriority.isDisplay"
+                            (change)="editDisplay(addPriority)"
+                        >
+                        <span></span>
+                    </label>
                 </div>
                 <div class="tab-pane__table-cell ticket-status-table__action">
                     <app-dynamic-tooltip
@@ -177,6 +192,20 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="tab-pane__table-cell ticket-status-table__display">
+                    <label
+                        class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
+                        [attr.for]="'priority-display-' + item.id"
+                    >
+                        <input
+                            [attr.id]="'priority-display-' + item.id"
+                            type="checkbox"
+                            [(ngModel)]="item.isDisplay"
+                            (change)="editDisplay(item)"
+                        >
+                        <span></span>
+                    </label>
                 </div>
                 <div class="tab-pane__table-cell ticket-status-table__action">
                     <app-dynamic-tooltip
