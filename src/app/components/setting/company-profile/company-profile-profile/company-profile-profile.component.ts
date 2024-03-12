@@ -1,9 +1,10 @@
 import { MapsAPILoader } from '@agm/core';
-import { Component, ElementRef, EventEmitter, NgZone, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, NgZone, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { TimeZone } from 'src/app/components/companies/company-time-zone/class/time-zone';
+import { CompanyTimeZoneStateService } from 'src/app/components/companies/company-time-zone/services/company-time-zone-state.service';
 import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { ImageCroper } from 'src/app/services/modal/modal-image-cropper/class/image-croper';
@@ -23,7 +24,7 @@ declare var $: any;
   templateUrl: './company-profile-profile.component.html',
   styleUrls: ['./company-profile-profile.component.scss']
 })
-export class CompanyProfileProfileComponent implements OnInit {
+export class CompanyProfileProfileComponent implements OnInit, OnDestroy {
   public loading = true;
   cProfileForm: FormGroup;
   submitted = false;
@@ -70,6 +71,7 @@ export class CompanyProfileProfileComponent implements OnInit {
     private imageCropperStateService: ImageCropperStateService,
     private modalImageCropperStateService: ModalImageCropperStateService,
     private companiesService: CompaniesService,
+    private companyTimeZoneState: CompanyTimeZoneStateService,
     private ngZone: NgZone) { }
 
   ngOnInit() {
@@ -85,9 +87,16 @@ export class CompanyProfileProfileComponent implements OnInit {
     this.companiesStateService.onCurrentCompany.subscribe(res => {
       this.getCurrentCompany(res);
     })
-    this.getGroupedLocales().then(data => {
+    if (this.companyTimeZoneState.getTimeZone().length > 0) {
+      this.timezones = this.companyTimeZoneState.getTimeZone().map(item => new TimeZone(item));;
       this.onGetCurrentCompany.emit(null);
-    });
+    }
+    if (this.companyTimeZoneState.getTimeZone().length == 0) this.companyTimeZoneState.onGetTimeZone();
+    let onTimeZone = this.companyTimeZoneState.onTimeZone.subscribe(data => {
+      this.timezones = this.companyTimeZoneState.getTimeZone().map(item => new TimeZone(item));;
+      this.onGetCurrentCompany.emit(null);
+    })
+    this.sub.add(onTimeZone);
     this.getAddressAutocomplete();
     this.onCroppImage();
 
@@ -571,4 +580,8 @@ export class CompanyProfileProfileComponent implements OnInit {
       );
     }
   }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
 }

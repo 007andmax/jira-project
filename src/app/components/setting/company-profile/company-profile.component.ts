@@ -60,7 +60,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   ngOnInit() {
     $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
-    this.getCompanyProfile();
     this.settingStateService.setComponentName('CompanyProfileComponent');
   }
   public setTab(data) {
