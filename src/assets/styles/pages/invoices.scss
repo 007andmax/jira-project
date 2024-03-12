@@ -84,30 +84,27 @@
   }
 
   .invoice-table__check {
-    width: 32px;
-    min-width: 32px;
+    flex: 0 0 36px;
     padding-right: 0;
   }
 
   .invoce-table__date {
+    flex: 0 0 100px;
     padding-left: 8px;
     padding-right: 8px;
-    width: 100px;
-    min-width: 100px;
   }
 
   .invoce-table__company {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    width: 100%;
+    flex: 2 0 200px;
   }
 
   .invoce-table__invoice {
+    flex: 0 0 93px;
     padding-left: 8px;
     padding-right: 8px;
-    width: 93px;
-    min-width: 93px;
   }
   td.invoce-table__invoice {
    font-weight: $fw-medium;
@@ -115,45 +112,38 @@
   }
 
   .invoce-table__status {
-    width: 133px;
-    min-width: 133px;
+    flex: 0 0 133px;
     padding-left: 8px;
     padding-right: 8px;
   }
 
   .invoce-table__read-on {
-    width: 107px;
-    min-width: 107px;
+    flex: 0 0 107px;
     padding-left: 8px;
     padding-right: 8px;
   }
 
   .invoce-table__due-date {
-    width: 116px;
-    min-width: 116px;
+    flex: 0 0 116px;
     padding-left: 8px;
     padding-right: 8px;
   }
 
   .invoce-table__amount {
-    width: 89px;
-    min-width: 89px;
+    flex: 0 0 89px;
     padding-left: 8px;
     padding-right: 8px;
   }
 
   .invoce-table__balance-due {
-    width: 110px;
-    min-width: 110px;
+    flex: 0 0 110px;
     padding-left: 8px;
     padding-right: 8px;
     text-align: right;
   }
 
   .invoce-table__menu {
-    width: 28px;
-    min-width: 28px;
-    max-width: 28px;
+    flex: 0 0 36px;
     padding-left: 0;
     padding-right: 0;
 
