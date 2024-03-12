@@ -27,52 +27,7 @@
                 id="workspace"
             >
                 <ng-template ngbTabContent>
-                    <div class="cmn-area workspace">
-                        <div class="tab-pane__header">
-                            <div class="tab-pane__header-title">Workspace</div>
-                        </div>
-                        <div class="tab-pane__body">
-                            <form
-                                [formGroup]="cProfileForm"
-                                (ngSubmit)="checkDomain()"
-                            >
-                                <div class="tab-pane__row">
-                                    <div class="tab-pane__subtitle">Company URL</div>
-                                    <div class="tab-pane-input__row">
-                                        <div class="qt-input-block --required">
-                                            <div class="qt-df">
-                                                <input
-                                                    [ngClass]="{'--input-error' : cProfileForm.get('url').getError('incorrect') || cProfileForm.get('url').getError('invalidate')}"
-                                                    type="text"
-                                                    class="qt-input-afterpend"
-                                                    placeholder="Enter Your Company URL"
-                                                    formControlName="url"
-                                                    (input)="checkValidateDomain()"
-                                                >
-                                                <span class="qt-input-afterfix">.quicktech.com</span>
-                                            </div>
-                                            <mat-error
-                                                class="invalid-feedback --pos-static"
-                                                *ngIf="cProfileForm.get('url').getError('incorrect')"
-                                            >
-                                                Domain is required
-                                            </mat-error>
-                                            <mat-error
-                                                class="invalid-feedback --pos-static"
-                                                *ngIf="cProfileForm.get('url').getError('invalidate')"
-                                            >
-                                                Please enter a valid company domain.
-                                            </mat-error>
-                                        </div>
-                                        <div class="qt-input-help-text qt-mt-12">
-                                            Your workspace URL can only contain lowercase letters, numbers and dashes
-                      (and must start with a letter or number).
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                    <app-company-profile-workspace #workspace></app-company-profile-workspace>
                 </ng-template>
             </ngb-tab>
             <ngb-tab
@@ -81,86 +36,7 @@
                 id="operationalhours"
             >
                 <ng-template ngbTabContent>
-                    <div class="cmn-area --border-transparent">
-                        <form #workingHoursForm="ngForm">
-                            <div>
-                                <div *ngFor="
-                  let workingDay of this.cProfile.timeSettings.workingDays;
-                  let i = index
-                "></div>
-                            </div>
-                            <div class="tab-pane__body">
-                                <div
-                                    *ngFor="
-                    let workingDay of this.cProfile.timeSettings.workingDays;
-                    let i = index
-                  "
-                                    class="tab-pane__row --border --border-radius --ai-c qt-mb-16"
-                                >
-                                    <div class="tab-pane__subtitle">
-                                        <div class="qt-df qt-ai-c">
-                                            <label class="qt-switch">
-                                                <input
-                                                    type="checkbox"
-                                                    id="{{ workingDay.dayOfWeek }}"
-                                                    [(ngModel)]="workingDay.isSelected"
-                                                    name="{{ workingDay.dayOfWeek | titlecase }}"
-                                                    [ngModelOptions]="{ standalone: true }"
-                                                    class="qt-switch__input"
-                                                >
-                                                <span class="qt-switch__elem"></span>
-                                            </label>
-                                            <label
-                                                class="operations-hours__week"
-                                                for="{{ workingDay.dayOfWeek }}"
-                                            >
-                                                {{
-                          workingDay.dayOfWeek | titlecase
-                          }}
-                                            </label>
-                                            <div class="operations-hours__status">Open</div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane-input__row">
-                                        <div class="qt-input-block">
-                                            <div class="qt-df">
-                                                <div class="qt-mr-24 qt-w50">
-                                                    <app-drop-down
-                                                        [class]="['qt-select-input-40']"
-                                                        [placeholder]="'Select Company Type'"
-                                                        [field]="'name'"
-                                                        [list]="workHours"
-                                                        [editItem]="fromTime_convert(workingDay.startTime)"
-                                                        [search]="true"
-                                                        [sort]="false"
-                                                        [change]="true"
-                                                        [isBlockClear]="true"
-                                                        [isDisabled]="!workingDay.isSelected"
-                                                        (onSelectedItem)="startTimeChange(workingDay,$event.value)"
-                                                    ></app-drop-down>
-                                                </div>
-                                                <div class="qt-w50">
-                                                    <app-drop-down
-                                                        [class]="['qt-select-input-40']"
-                                                        [placeholder]="'Select Company Type'"
-                                                        [field]="'name'"
-                                                        [list]="workHours"
-                                                        [editItem]="toTime_convert(workingDay.endTime)"
-                                                        [search]="true"
-                                                        [sort]="false"
-                                                        [change]="true"
-                                                        [isBlockClear]="true"
-                                                        [isDisabled]="!workingDay.isSelected"
-                                                        (onSelectedItem)="endTimeChange(workingDay,$event.value)"
-                                                    ></app-drop-down>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                    <app-company-profile-operational-hours #operationalhours></app-company-profile-operational-hours>
                 </ng-template>
             </ngb-tab>
         </ngb-tabset>

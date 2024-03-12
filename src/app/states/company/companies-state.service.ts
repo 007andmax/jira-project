@@ -46,6 +46,7 @@ export class CompaniesStateService {
   companyIdForassignedDocumentCategory: string;
   assignedDocumentCategories: Array<CompanyAssigned> = [];
   onGetAssignedDocumentCategories: EventEmitter<any> = new EventEmitter();
+  companyProfile: any;
   constructor(private companiesService: CompaniesService,
     private companiesRealTimeService: CompaniesRealTimeService,
     private usersStateService: UsersStateService,
@@ -107,6 +108,12 @@ export class CompaniesStateService {
       }
       this.onChangeDevicesCount.emit(this.devicesCounts);
     })
+  }
+  public setCompanyProfile(data) {
+    this.companyProfile = data;
+  }
+  public getCompanyProfile() {
+    return this.companyProfile;
   }
   public getCompanyLogoUrl(company) {
     if (company && company.logo && company.logo && company.logo.base64 && !company.logo.cropped) return company.logo.base64;

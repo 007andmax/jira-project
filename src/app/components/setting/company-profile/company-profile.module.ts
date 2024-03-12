@@ -10,11 +10,13 @@ import { CompanyProfileRoutingModule } from './company-profile-routing.module';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { NgxMaskModule } from 'ngx-mask';
 import { CompanyProfileProfileComponent } from './company-profile-profile/company-profile-profile.component';
+import { CompanyProfileWorkspaceComponent } from './company-profile-workspace/company-profile-workspace.component';
+import { CompanyProfileOperationalHoursComponent } from './company-profile-operational-hours/company-profile-operational-hours.component';
 
 
 
 @NgModule({
-    declarations: [CompanyProfileComponent, CompanyProfileProfileComponent
+    declarations: [CompanyProfileComponent, CompanyProfileProfileComponent, CompanyProfileWorkspaceComponent, CompanyProfileOperationalHoursComponent
     ],
     imports: [
         CommonModule,
