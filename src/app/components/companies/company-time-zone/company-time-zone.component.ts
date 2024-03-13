@@ -19,14 +19,16 @@ export class CompanyTimeZoneComponent implements OnInit, OnDestroy {
     private companyTimeZoneState: CompanyTimeZoneStateService) { }
 
   ngOnInit() {
-    let getTimeZones = this.timeZoneService.getTimeZones().subscribe((data: any) => {
+    if (this.companyTimeZoneState.getTimeZone().length > 0) this.list = this.companyTimeZoneState.getTimeZone();
+    if (this.companyTimeZoneState.getTimeZone().length == 0) this.companyTimeZoneState.onGetTimeZone();
+    let onTimeZone = this.companyTimeZoneState.onTimeZone.subscribe(data => {
       this.list = data.map(item => new TimeZone(item));
       if (this.selectedItem) {
         let find = this.list.find(item => item.second === this.selectedItem.second);
         this.selectedItem = find;
       }
     })
-    this.sub.add(getTimeZones);
+    this.sub.add(onTimeZone);
     this.onEditMode();
   }
 
