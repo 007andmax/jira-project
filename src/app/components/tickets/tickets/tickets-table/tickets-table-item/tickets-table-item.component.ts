@@ -19,6 +19,7 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
   ticket: Ticket;
   @Input() set setTicket(value) {
     this.ticket = value;
+    console.log("this.ticket", this.ticket);
     this.assignedUser = this.usersStateService.getAllUsers().find(item => item.id === this.ticket.assignedUserId);
     this.requestedUser = this.usersStateService.getAllUsers().find(item => item.id === this.ticket.createdUserId);
   };
