@@ -16,9 +16,8 @@
         flex: 1 1 190px;
     }
     &__display {
-        flex: 0 0 190px;
-        display: flex;
-        justify-content: center;
+        flex: 1 1 500px;
+        padding: 0px !important;
     }
 
     &__preview {

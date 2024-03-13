@@ -12,8 +12,8 @@
                     </label>
                 </div>
                 <div class="tab-pane__table-cell ticket-status-table__priority">Ticket Priority</div>
-                <div class="tab-pane__table-cell ticket-status-table__color">Set Color</div>
-                <div class="tab-pane__table-cell ticket-status-table__display">Display on the ticket list</div>
+                <div class="tab-pane__table-cell ticket-status-table__color">Assign Color</div>
+                <div class="tab-pane__table-cell ticket-status-table__display">Show in ticket list</div>
                 <div class="tab-pane__table-cell ticket-status-table__action">&nbsp;</div>
             </div>
         </div>
@@ -202,7 +202,7 @@
                             [attr.id]="'priority-display-' + item.id"
                             type="checkbox"
                             [(ngModel)]="item.isDisplay"
-                            (change)="editDisplay(item)"
+                            (change)="editDisplay(item);onEditTicketPriority(item)"
                         >
                         <span></span>
                     </label>
