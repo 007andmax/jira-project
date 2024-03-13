@@ -18,6 +18,9 @@
     &__display {
         flex: 1 1 500px;
         padding: 0px !important;
+        label {
+            width: max-content;
+        }
     }
 
     &__preview {
