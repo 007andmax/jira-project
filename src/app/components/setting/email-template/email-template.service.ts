@@ -18,7 +18,8 @@ export class EmailTempleteService {
         "This message will confirm the ticket details that client user conveyed to the agent for creating the ticket.",
       requiredKeywords: ["$Ticket_Number"],
       requiredKeywordsRegExp: /\$Ticket_Number/,
-      showPreview: true
+      showPreview: true,
+      isActive: false
     },
     TICKET_CLOSED: {
       title: "Ticket is closed",
@@ -27,7 +28,8 @@ export class EmailTempleteService {
         "This message will be sent to inform client user that ticket has been closed.",
       requiredKeywords: ["$Ticket_Number"],
       requiredKeywordsRegExp: /\$Ticket_Number/,
-      showPreview: true
+      showPreview: true,
+      isActive: false
     },
     TICKET_OPENED: {
       title: "Ticket is re-opened",
@@ -36,7 +38,8 @@ export class EmailTempleteService {
         "This message will be sent when a person is added to the Ticket Update.",
       requiredKeywords: ["$Ticket_Number"],
       requiredKeywordsRegExp: /\$Ticket_Number/,
-      showPreview: true
+      showPreview: true,
+      isActive: false
     },
     TU_ADDED: {
       title: "Ticket Update is added",
@@ -45,7 +48,8 @@ export class EmailTempleteService {
         "This message will be sent when a person is added to the Ticket Update.",
       requiredKeywords: ["$Ticket_Number"],
       requiredKeywordsRegExp: /\$Ticket_Number/,
-      showPreview: true
+      showPreview: true,
+      isActive: false
     },
   };
 

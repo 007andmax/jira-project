@@ -41,4 +41,11 @@ export class TicketsFilterUsersDropDownComponent extends TicketsFilterDropDownCo
       this.onScroll();
     }
   }
+  /**
+* @description Filter list by field value
+* @param {Object} event - Object from input
+*/
+  onSearch(event) {
+    this.list = this.reqList.filter(item => this.reducerItem(item).toLowerCase().includes(event.target.value.toLowerCase()));
+  }
 }

@@ -36,7 +36,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   openEmailTemplate: string;
   public show = false;
   public buttonName: any = "Show Description";
-  templatesData = { subject: {}, body: {} };
+  templatesData = { subject: {}, body: {}, isActive: false };
   @ViewChild("body") body: ElementRef;
   @ViewChild("subject") subject: ElementRef;
 
@@ -61,7 +61,8 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     this.keywords = [];
     this.templeteForm = this.formBuilder.group({
       subject: ["", Validators.required],
-      body: [""]
+      body: [""],
+      isActive: [false]
     });
     this.getEmailPages();
     this.settingStateService.setComponentName('EmailTempleteComponent');
@@ -177,10 +178,10 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
                 Validators.required
               ]);
             }
-
             this.templeteForm.patchValue({
               subject: this.templatesData.subject,
-              body: this.templatesData.body
+              body: this.templatesData.body,
+              isActive: res.active
             });
           }
           this.openEmailTemplate = key;

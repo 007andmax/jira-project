@@ -46,3 +46,15 @@ textarea {
     padding: 20px !important;
   }
 }
+.email-templates-table__status {
+      flex: 0 0 150px;
+}
+.email-templates-table__status-item {
+  display: flex;
+  justify-content: center;
+}
+.default-services-page__question-icon {
+  top: 0px;
+  left: 0px;
+  margin-left: 8px;
+}
