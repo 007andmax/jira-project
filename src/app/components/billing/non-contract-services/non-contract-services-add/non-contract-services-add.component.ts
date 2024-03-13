@@ -69,7 +69,6 @@ export class NonContractServicesAddComponent implements OnInit {
     this.taxesStateService.setTaxesFromtEdit(taxes);
   }
   onTaxesChange(data) {
-    console.log("onTaxesChange", data);
     this.service.taxes = data;
   }
   onAddGlNumber(data) {
