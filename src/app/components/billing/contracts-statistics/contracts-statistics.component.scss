@@ -45,7 +45,7 @@
         max-width: 100%;
       }
       &__сontract-type {
-        flex: 0 0 180px;
+        flex: 0 0 220px;
       }
     }
     div.ticket-table__contract-description {
@@ -57,7 +57,7 @@
 /deep/ contracts-statistics {
   .qt-page-list__header-thead,
   .qt-page-list__body-tbody {
-    min-width: 1382px;
+    min-width: 1406px;
   }
 
 }
