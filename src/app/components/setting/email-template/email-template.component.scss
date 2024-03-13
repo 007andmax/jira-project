@@ -48,6 +48,11 @@ textarea {
 }
 .email-templates-table__status {
       flex: 0 0 150px;
+      display: flex;
+      justify-content: center;
+}
+.email-templates-table__action {
+  flex: 0 0 60px;
 }
 .email-templates-table__status-item {
   display: flex;
