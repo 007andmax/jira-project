@@ -118,11 +118,11 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
         this.ticketPriorities = data.priorityLevels.map(item => new TicketsPriority(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
           1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
         this.ticketsStateService.onSetTicketsPriorities(this.ticketPriorities);
-        this.ticketAdd.priorityLevel = this.ticketPriorities.find(item => item.name == "MEDIUM");
+        this.ticketAdd.priorityLevel = this.ticketPriorities.find(item => item.isDefault);
       })
     } else {
       this.ticketPriorities = this.ticketsStateService.getTicketsPriorities();
-      this.ticketAdd.priorityLevel = this.ticketPriorities.find(item => item.name == "MEDIUM");
+      this.ticketAdd.priorityLevel = this.ticketPriorities.find(item => item.isDefault);
     }
   }
   onAddAssignedUser() {
@@ -166,6 +166,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
 
   }
   getPriorityLevel() {
+    console.log("this.ticketAdd.priorityLevel", this.ticketAdd.priorityLevel);
     let fid = this.ticketPriorities.find(item => item.id === this.ticketAdd.priorityLevel.id);
     return `${(fid) ? fid.name : ''}`
   }
