@@ -15,6 +15,13 @@
     &__color {
         flex: 1 1 190px;
     }
+    &__display {
+        flex: 1 1 500px;
+        padding: 0px !important;
+        label {
+            width: max-content;
+        }
+    }
 
     &__preview {
         flex: 1 1 500px;

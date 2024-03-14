@@ -219,9 +219,9 @@ export class TicketsService {
         return data;
       }));
   }
-  public addPriority(name, color) {
+  public addPriority(data) {
 
-    return this.http.post(this.apiUrl + `priorityLevel`, { name: name, color: color }).pipe(
+    return this.http.post(this.apiUrl + `priorityLevel`, data).pipe(
       tap(data => {
         this.toastrService.success("Priority created successfully");
         this.appStateService.changeDetectorRef();
