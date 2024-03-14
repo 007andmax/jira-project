@@ -1,4 +1,9 @@
 .products-page {
+  .qt-table-modern__row:hover > div {
+    textarea {
+      background-color: $gray-50;
+    }
+  }
   table.qt-table-modern tbody tr:hover td {
     background-color: $white;
   }
@@ -38,27 +43,18 @@
 
   .products-table {
     &__product-name {
-      width: 280px;
-      max-width: 280px;
-      min-width: 280px;
-      //width: -webkit-max-content;
-      //width: -moz-max-content;
-      //width: max-content;
+     flex: 2 0 280px;
       font-weight: $fw-medium;
       color: $gray-900;
     }
 
     &__category {
-      width: 144px;
-      max-width: 144px;
-      min-width: 144px;
+      flex: 0 0 144px;
       color: $gray-600;
     }
 
     &__menu {
-      width: 62px;
-      max-width: 62px;
-      min-width: 62px;
+      flex: 0 0 50px;
       color: $gray-600;
     }
 
@@ -71,9 +67,7 @@
 
     &__tac,
     &__gl {
-      width: 92px;
-      max-width: 92px;
-      min-width: 92px;
+      flex: 0 0 92px;
       color: $gray-600;
     }
 
@@ -81,22 +75,16 @@
     &__mfg,
     &__ilc,
     &__cost{
-      width: 120px;
-      max-width: 120px;
-      min-width: 120px;
+      flex: 0 0 120px;
       color: $gray-600;
     }
     &__cost {
-      width: 78px;
-      max-width: 78px;
-      min-width: 78px;
+      flex: 0 0 78px;
       color: $gray-600;
       position: relative;
     }
     &__sale-price {
-      width: 92px;
-      max-width: 92px;
-      min-width: 92px;
+      flex: 0 0 92px;
       color: $gray-600;
     }
   }

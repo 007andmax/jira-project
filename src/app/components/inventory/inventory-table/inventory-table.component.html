@@ -1,5 +1,5 @@
-<tr>
-    <td class="products-table__product-name pre-line">
+<div class="qt-table-modern__row qt-table-modern__row--height-auto">
+    <div class="products-table__product-name pre-line">
         <!-- <pre [textContent]="inventory.description"></pre> -->
         <textarea
             appTextArea
@@ -18,8 +18,8 @@
             (keydown)="onEnterDescription($event)"
             (blur)="onBlurDescription($event)"
         ></div> -->
-    </td>
-    <td class="products-table__category">
+    </div>
+    <div class="products-table__category">
         <!-- <div [textContent]="inventory.category.name"></div> -->
         <app-drop-down
             #categoriesSelect
@@ -38,8 +38,8 @@
             (onSelectedItem)="onSelectCategory($event)"
         >
         </app-drop-down>
-    </td>
-    <td class="products-table__cost">
+    </div>
+    <div class="products-table__cost">
         <div
             *ngIf="!getPermissions('VIEW_PRODUCT_COST')"
             [textContent]="'$' + parseTotal(inventory.cost || 0)"
@@ -66,8 +66,8 @@
                 Cost cannot be higher than Price
             </mat-error>
         </div>
-    </td>
-    <td class="products-table__cost">
+    </div>
+    <div class="products-table__cost">
         <div class="products-table__cost-container">
             <input
                 type="text"
@@ -79,8 +79,8 @@
                 placeholder="Enter Markup"
             >
         </div>
-    </td>
-    <td class="products-table__sale-price">
+    </div>
+    <div class="products-table__sale-price">
         <!-- <div [textContent]="'$' + parseTotal(inventory.sale || 0)"></div> -->
         <div class="products-table__sale-price-container">
             <input
@@ -103,8 +103,8 @@
                 Price is required
             </mat-error>
         </div>
-    </td>
-    <td class="products-table__mfg">
+    </div>
+    <div class="products-table__mfg">
         <div class="products-table__mfg-container">
             <mat-error
                 class="qt-tooltip-error"
@@ -122,8 +122,8 @@
             >
         </div>
         <!-- <div [textContent]="inventory.manufacture"></div> -->
-    </td>
-    <td class="products-table__tac">
+    </div>
+    <div class="products-table__tac">
         <app-taxes
             [isLabel]="false"
             [isAdd]="false"
@@ -131,8 +131,8 @@
             [selectedTax]="getSelectedTaxes()"
             (taxesChange)="onTaxesChange($event)"
         ></app-taxes>
-    </td>
-    <td class="products-table__ilc">
+    </div>
+    <div class="products-table__ilc">
         <div class="products-table__ilc-container">
             <mat-error
                 class="qt-tooltip-error"
@@ -149,8 +149,8 @@
                 placeholder="Enter ILC Number"
             >
         </div>
-    </td>
-    <td class="products-table__gl">
+    </div>
+    <div class="products-table__gl">
         <!-- <div [textContent]="getGlNumberName()"></div> -->
         <app-drop-down
             #glNumberSelect
@@ -170,8 +170,8 @@
             (onSelectedItem)="onSelectGlNumbers($event)"
         >
         </app-drop-down>
-    </td>
-    <td class="products-table__menu">
+    </div>
+    <div class="products-table__menu">
         <div
             *ngIf="getPermissions('MANAGE_PRODUCTS')"
             [container]="'body'"
@@ -222,5 +222,5 @@
                 </li>
             </ul>
         </div>
-    </td>
-</tr>
+    </div>
+</div>

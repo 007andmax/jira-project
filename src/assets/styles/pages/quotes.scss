@@ -1,6 +1,10 @@
 @import "./src/assets/styles/variable";
 
 .quotes-page {
+  .qt-table-modern__row {
+    min-height: 48px;
+    height: auto;
+  }
   .quotes-company-filter {
     width: 35%;
     margin-right: 8px;
@@ -24,9 +28,7 @@
       word-break: break-word;
     }
     &__check {
-      max-width: 32px;
-      min-width: 32px;
-      width: 32px;
+      flex: 0 0 50px;
       padding-right: 0px;
       padding-left: 16px;
     }
@@ -35,21 +37,17 @@
     }
 
     &__date {
-      max-width: 113px;
-      min-width: 113px;
-      width: 113px;
-      padding-left: 16px;
-      padding-right: 8px;
-      padding-top: 14px;
+      flex: 0 0 113px;
     }
     td.quotes-table__date {
       padding-top: 14px;
     }
 
     &__company {
-      max-width: 192px;
-      min-width: 192px;
-      width: 192px;
+      flex: 0 0 190px;
+      @media (max-width: 1600px) {
+        flex: 0 0 156px;
+      }
       padding-left: 8px;
       padding-right: 8px;
     }
@@ -58,7 +56,7 @@
     }
 
     &__description {
-      width: 100%;
+      flex: 2 0 130px;
       padding-left: 8px;
       padding-right: 8px;
     }
@@ -67,9 +65,7 @@
     }
 
     &__number {
-      max-width: 72px;
-      min-width: 72px;
-      width: 72px;
+      flex: 0 0 72px;
       padding-left: 8px;
       padding-right: 8px;
     }
@@ -80,16 +76,15 @@
     }
 
     &__create-by {
-      max-width: 160px;
-      min-width: 160px;
-      width: 160px;
+      flex: 0 0 130px;
       padding-left: 8px;
       padding-right: 8px;
+      &-user-name {
+        max-width: calc(100% - 55px);
+      }
     }
     &__recipients {
-      max-width: 190px;
-      min-width: 190px;
-      width: 190px;
+      flex: 0 0 190px;
       padding-left: 8px;
       padding-right: 8px;
     }
@@ -98,9 +93,7 @@
     }
 
     &__status {
-      max-width: 90px;
-      min-width: 90px;
-      width: 90px;
+      flex: 0 0 90px;
       padding-left: 8px;
       padding-right: 8px;
     }
@@ -109,9 +102,7 @@
     }
 
     &__valid {
-      max-width: 100px;
-      min-width: 100px;
-      width: 100px;
+      flex: 0 0 100px;
       padding-left: 8px;
       padding-right: 8px;
     }
@@ -120,9 +111,7 @@
     }
 
     &__total {
-      max-width: 92px;
-      min-width: 92px;
-      width: 92px;
+      flex: 0 0 92px;
       padding-left: 8px;
       padding-right: 12px;
       text-align: right;
@@ -132,12 +121,11 @@
     }
 
     &__menu {
-      max-width: 24px;
-      min-width: 24px;
-      width: 24px;
+      flex: 0 0 36px;
       padding-left: 0;
       padding-right: 0;
-      padding-top: 16px;
+      padding-top: 15px;
+      padding-bottom: 15px;
     }
     td.quotes-table__menu {
       padding-top: 16px;
@@ -436,5 +424,13 @@
         height: 300px;
       }
     }
+  }
+}
+
+
+.quotes-page {
+  .qt-page-list__header-thead,
+  .qt-page-list__body-tbody {
+    min-width: 1146px;
   }
 }
