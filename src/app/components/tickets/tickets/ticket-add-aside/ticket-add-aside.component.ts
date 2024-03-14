@@ -166,7 +166,6 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
 
   }
   getPriorityLevel() {
-    console.log("this.ticketAdd.priorityLevel", this.ticketAdd.priorityLevel);
     let fid = this.ticketPriorities.find(item => item.id === this.ticketAdd.priorityLevel.id);
     return `${(fid) ? fid.name : ''}`
   }

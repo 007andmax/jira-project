@@ -86,7 +86,6 @@ export class TicketsPriorityComponent implements OnInit {
     this.onEditTicketPriority(item);
   }
   editDisplay(item) {
-    console.log("item", item);
     item.onInitEdit(true);
   }
   onKeyUp(event) {
