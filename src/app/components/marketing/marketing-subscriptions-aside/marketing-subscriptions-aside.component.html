@@ -1,0 +1,61 @@
+<div class="qt-aside-modern users-page__aside">
+    <!-- *ngIf="opened" -->
+    <div class="qt-aside-modern__header">
+        <div class="qt-aside-modern__header-title">Save to Subscription</div>
+        <div
+            class="icon__edit qt-bg-contain qt-sz-20 qt-mr-12"
+            (click)="edit()"
+        ></div>
+        <div
+            class="qt-aside-modern__header-close icon__close"
+            (click)="close()"
+        ></div>
+    </div>
+    <div class="qt-aside-modern__content">
+        <div class="qt-inputs-row">
+            <div class="qt-input-block qt-f100">
+                <div
+                    class="qt-input-block__label"
+                    *ngIf="!editMode"
+                >
+                    Select Subscription from following List
+                </div>
+                <ng-template
+                    ngFor
+                    let-subscription
+                    [ngForOf]="listCustomSubscription"
+                    [ngForTrackBy]="trackById"
+                >
+                    <app-marketing-subscriptions-aside-item-info
+                        *ngIf="!editMode"
+                        [subscription]="subscription"
+                    ></app-marketing-subscriptions-aside-item-info>
+                    <app-marketing-subscriptions-aside-item-edit
+                        *ngIf="editMode"
+                        [subscription]="subscription"
+                    ></app-marketing-subscriptions-aside-item-edit>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+    <div class="qt-aside-modern__footer">
+        <div class="qt-df">
+            <button
+                class="qt-button qt-mr-12"
+                appDisabledBtn
+                #addBtn="disabled"
+                (onClick)="onAdd()"
+                [ngClass]="{'--loading':addBtn.isBlock()}"
+            >
+                <span>Add User</span>
+                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+            </button>
+            <button
+                class="qt-button --gray"
+                (click)="close()"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>

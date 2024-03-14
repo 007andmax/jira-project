@@ -1,0 +1,17 @@
+<div class="qt-inputs-row">
+    <label
+        class="qt-checkbox"
+        [attr.for]="'subscribe-' + subscription.id"
+    >
+        <input
+            [attr.id]="'subscribe-' + subscription.id"
+            type="checkbox"
+            [(ngModel)]="subscription.selected"
+        >
+        <span></span>
+        <div
+            class="qt-ml-8 qt-fw-400 qt-lh-1"
+            [textContent]="subscription.name"
+        ></div>
+    </label>
+</div>

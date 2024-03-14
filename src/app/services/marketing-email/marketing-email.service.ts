@@ -1,5 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { tap } from 'rxjs/operators';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -17,6 +20,8 @@ export class MarketingEmailService {
    */
   public constructor(
     private http: HttpClient,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService,
 
   ) { }
   public getUsersList(subscription_id, subscribed) {
@@ -32,7 +37,12 @@ export class MarketingEmailService {
     return this.http.get(this.apiUrl + 'subscription/customSubscription');
   }
   public removeSubscriptionType(subscription_id) {
-    return this.http.delete(this.apiUrl + `subscription/customSubscription/${subscription_id}`);
+    return this.http.delete(this.apiUrl + `subscription/customSubscription/${subscription_id}`).pipe(
+      tap(data => {
+        this.toastrService.success("The subscription has been successfully removed");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
 
   }
   public editSubscriptionType(subscription_id, name) {

@@ -1,0 +1,29 @@
+<div class="qt-inputs-row">
+    <div
+        class="qt-input-block"
+        *ngIf="subscription.isInitEdit"
+    >
+        <input
+            placeholder="Service Name"
+            [(ngModel)]="subscription.name"
+            type="text"
+            appKeyUpEnter
+            (onChange)="onEditSubscription($event)"
+            maxlength="30"
+        >
+    </div>
+    <div
+        *ngIf="!subscription.isInitEdit"
+        class="qt-input-block"
+    >
+        <span [textContent]="subscription.name"></span>
+    </div>
+    <div
+        class="icon__edit qt-bg-contain qt-sz-20 qt-mr-12"
+        (click)="subscription.onInitEdit(true)"
+    ></div>
+    <div
+        class="icon__remove qt-bg-contain qt-sz-20"
+        (click)="remove()"
+    ></div>
+</div>

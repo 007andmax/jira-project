@@ -127,8 +127,6 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
   onRemoveSubscription(id) {
     this.marketingEmailService.removeSubscriptionType(id).subscribe(data => {
       this.marketingEmailStateService.setListSubscriptionTypeForRemove([]);
-      this.toastrService.success("The subscription has been successfully removed");
-      this.appStateService.changeDetectorRef();
     })
   }
   openAside(item, subscribed) {
