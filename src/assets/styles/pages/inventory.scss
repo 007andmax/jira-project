@@ -51,6 +51,9 @@
     &__category {
       flex: 0 0 144px;
       color: $gray-600;
+      @media (min-width: 2048px) {
+        flex: 0 0 288px;
+      }
     }
 
     &__menu {
@@ -69,6 +72,9 @@
     &__gl {
       flex: 0 0 92px;
       color: $gray-600;
+      @media (min-width: 2048px) {
+        flex: 0 0 182px;
+      }
     }
 
     &__sale-price,
@@ -77,6 +83,12 @@
     &__cost{
       flex: 0 0 120px;
       color: $gray-600;
+    }
+    &__mfg,
+    &__ilc {
+      @media (min-width: 2048px) {
+        flex: 0 0 220px;
+      }
     }
     &__cost {
       flex: 0 0 78px;
