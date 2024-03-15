@@ -29,12 +29,16 @@
     </div>
     <div class="qt-df qt-ai-c qt-jc-fe">
         <div
-            class="icon__edit qt-bg-contain qt-sz-20 qt-mr-12"
+            class="icon__edit qt-bg-contain qt-sz-20 qt-mr-12 pointer"
             (click)="subscription.onInitEdit(true)"
+            placement="top"
+            ngbTooltip="Edit"
         ></div>
         <div
-            class="icon__remove qt-bg-contain qt-sz-20"
+            class="icon__remove qt-bg-contain qt-sz-20 pointer"
             (click)="remove()"
+            placement="top"
+            ngbTooltip="Delete"
         ></div>
     </div>
 </div>

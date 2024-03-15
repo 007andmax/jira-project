@@ -9,6 +9,7 @@ import { MarketingSubscriptionsAsideItemEditComponent } from './marketing-subscr
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 import { MarketingSubscriptionsAddComponent } from './marketing-subscriptions-add/marketing-subscriptions-add.component';
 import { MatSelectModule, MatChipsModule } from '@angular/material';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { MatSelectModule, MatChipsModule } from '@angular/material';
         KeyUpEnterModule,
         MatSelectModule,
         MatChipsModule,
+        NgbModule,
     ],
     entryComponents: [MarketingSubscriptionsAddComponent],
     exports: [MarketingSubscriptionsAsideComponent]
