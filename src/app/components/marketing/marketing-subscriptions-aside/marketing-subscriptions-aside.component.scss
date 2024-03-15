@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .job-description {
     width: 100%;
 }
@@ -37,4 +39,22 @@
 
 .first-name-invalid {
     bottom: -30px !important;
+}
+.qt-aside-modern__header {
+    height: auto !important;
+    padding: 32px !important;
+    background-color: $white;
+}
+.qt-aside-modern__content {
+    padding: 32px !important;
+    height: calc(100% - 173px) !important;
+}
+.qt-input-block__label {
+    font-size: 14px;
+    color: $gray-900;
+    font-weight: 600;
+}
+.qt-aside-modern__footer {
+    box-shadow: 0px -2px 4px rgba(16, 24, 40, 0.05);
+    padding: 18px 32px;
 }

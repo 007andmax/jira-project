@@ -4,6 +4,7 @@ import { TicketsListService } from 'src/app/components/tickets/tickets/services/
 import { UserCustomSubscription } from 'src/app/components/users/class/user-custom-subscription';
 import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
 import { MarketingEmailRealTimeService } from './marketing-email-real-time.service';
+import { User } from 'src/app/components/users/class/user';
 
 @Injectable({
   providedIn: 'root',
@@ -14,10 +15,12 @@ export class MarketingEmailStateService {
   subscriptionUserForRemove;
   listSubscriptionTypeForRemove = [];
   listCustomSubscription: Array<MarketingSubscriptionType> = [];
-  openAside: EventEmitter<any> = new EventEmitter();
+  openAsideSettings: EventEmitter<any> = new EventEmitter();
   isGetMarketing: boolean = false;
+  openAside: EventEmitter<any> = new EventEmitter();
   onUpdateUsersListInAside: EventEmitter<any> = new EventEmitter();
   onGetListCustomSubscription: EventEmitter<any> = new EventEmitter();
+  usersForAddSubscriptions: Array<User> = [];
   constructor(private marketingEmailService: MarketingEmailService,
 
     private marketingEmailRealTimeService: MarketingEmailRealTimeService,) { }
@@ -62,8 +65,15 @@ export class MarketingEmailStateService {
   public updateUsersListInAside(data) {
     this.onUpdateUsersListInAside.emit(data);
   }
-  public onOpenAsige(data) {
-    this.openAside.emit(data);
+  public onOpenAsige(items) {
+    this.usersForAddSubscriptions = items;
+    this.openAside.emit(null);
+  }
+  public getUsersForAddSubscriptions() {
+    return this.usersForAddSubscriptions;
+  }
+  public onOpenAsigeSettings(data) {
+    this.openAsideSettings.emit(data);
   }
   public setSubscriptionUserForRemove(data) {
     this.subscriptionUserForRemove = data;

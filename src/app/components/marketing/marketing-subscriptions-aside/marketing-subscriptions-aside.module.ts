@@ -7,18 +7,23 @@ import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-t
 import { MarketingSubscriptionsAsideItemInfoComponent } from './marketing-subscriptions-aside-item-info/marketing-subscriptions-aside-item-info.component';
 import { MarketingSubscriptionsAsideItemEditComponent } from './marketing-subscriptions-aside-item-edit/marketing-subscriptions-aside-item-edit.component';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
+import { MarketingSubscriptionsAddComponent } from './marketing-subscriptions-add/marketing-subscriptions-add.component';
+import { MatSelectModule, MatChipsModule } from '@angular/material';
 
 
 @NgModule({
-    declarations: [MarketingSubscriptionsAsideComponent, MarketingSubscriptionsAsideItemInfoComponent, MarketingSubscriptionsAsideItemEditComponent
+    declarations: [MarketingSubscriptionsAsideComponent, MarketingSubscriptionsAsideItemInfoComponent, MarketingSubscriptionsAsideItemEditComponent, MarketingSubscriptionsAddComponent
     ],
     imports: [
         CommonModule,
         FormsModule,
         DisabledBtnModule,
         PreloaderTicketModule,
-        KeyUpEnterModule
+        KeyUpEnterModule,
+        MatSelectModule,
+        MatChipsModule,
     ],
+    entryComponents: [MarketingSubscriptionsAddComponent],
     exports: [MarketingSubscriptionsAsideComponent]
 })
 export class MarketingSubscriptionsAsideModule { }

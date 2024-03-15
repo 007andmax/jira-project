@@ -1,4 +1,10 @@
-<div class="qt-inputs-row">
+<div
+    class="qt-inputs-row qt-ai-c qt-jc-sb"
+    [ngClass]="{'qt-pt-20':!subscription.isInitEdit,
+    'qt-pb-20':!subscription.isInitEdit,
+'qt-pt-8':subscription.isInitEdit,
+'qt-pb-8':subscription.isInitEdit}"
+>
     <div
         class="qt-input-block"
         *ngIf="subscription.isInitEdit"
@@ -16,14 +22,19 @@
         *ngIf="!subscription.isInitEdit"
         class="qt-input-block"
     >
-        <span [textContent]="subscription.name"></span>
+        <span
+            class="qt-fs-14 qt-fw-400 qt-color-gray-700"
+            [textContent]="subscription.name"
+        ></span>
     </div>
-    <div
-        class="icon__edit qt-bg-contain qt-sz-20 qt-mr-12"
-        (click)="subscription.onInitEdit(true)"
-    ></div>
-    <div
-        class="icon__remove qt-bg-contain qt-sz-20"
-        (click)="remove()"
-    ></div>
+    <div class="qt-df qt-ai-c qt-jc-fe">
+        <div
+            class="icon__edit qt-bg-contain qt-sz-20 qt-mr-12"
+            (click)="subscription.onInitEdit(true)"
+        ></div>
+        <div
+            class="icon__remove qt-bg-contain qt-sz-20"
+            (click)="remove()"
+        ></div>
+    </div>
 </div>

@@ -25,6 +25,7 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { AppService } from 'src/app/states/app/app.service';
 import { AddUserToCompanyComponent } from '../add-user-to-company/add-user-to-company.component';
 import { UserFilters } from '../class/user-filters';
+import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
 
 
 @Component({
@@ -61,6 +62,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     private permissionsService: PermissionsService,
     private ref: ChangeDetectorRef,
     private companiesStateService: CompaniesStateService,
+    private marketingEmailStateService: MarketingEmailStateService,
     private usersHeaderService: UsersHeaderService) {
   }
 
@@ -134,8 +136,9 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     return this.users.filter(item => item.selected).find(item => item.isContact);
   }
   showAddToSubscription() {
-    const modalRef = this.modalService.open(AddUserToSubscribeComponent, { windowClass: 'xs-modal modal-dialog__save-to-subscription', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.users = this.users.filter(item => item.selected);
+    // const modalRef = this.modalService.open(AddUserToSubscribeComponent, { windowClass: 'xs-modal modal-dialog__save-to-subscription', backdrop: 'static', keyboard: false });
+    //  modalRef.componentInstance.users = this.users.filter(item => item.selected);
+    this.marketingEmailStateService.onOpenAsige(this.users.filter(item => item.selected));
     this.ref.markForCheck();
   }
 

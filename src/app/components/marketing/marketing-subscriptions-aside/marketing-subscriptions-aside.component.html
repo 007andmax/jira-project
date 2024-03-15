@@ -1,21 +1,48 @@
-<div class="qt-aside-modern users-page__aside">
+<div
+    class="qt-aside-modern users-page__aside"
+    *ngIf="opened"
+>
     <!-- *ngIf="opened" -->
     <div class="qt-aside-modern__header">
-        <div class="qt-aside-modern__header-title">Save to Subscription</div>
         <div
-            class="icon__edit qt-bg-contain qt-sz-20 qt-mr-12"
-            (click)="edit()"
-        ></div>
+            class="qt-aside-modern__header-title"
+            *ngIf="!editMode"
+        >
+            Save to Subscription
+        </div>
         <div
-            class="qt-aside-modern__header-close icon__close"
-            (click)="close()"
-        ></div>
+            class="qt-aside-modern__header-title qt-df qt-ai-c pointer"
+            *ngIf="editMode"
+            (click)="toggleEdit()"
+        >
+            <i class="icon__arrow-back qt-ic-c qt-sz-24 qt-va-m qt-dib qt-mr-12"></i>
+            <span class="qt-color-gray-500 qt-fs-14">Save to Subscription</span>
+            <span class="qt-color-gray-500 qt-mr-4 qt-ml-4 qt-fs-14">/</span>
+            <span class="qt-color-gray-900 qt-fs-14">Edit Subscription</span>
+        </div>
+        <div
+            class="qt-df"
+            *ngIf="!editMode"
+        >
+            <div
+                class="qt-button --square-md --gray pointer"
+                (click)="toggleEdit()"
+            >
+                <i class="icon__edit qt-sz-16 qt-bg-contain"></i>
+            </div>
+            <div
+                class="qt-button --square-md --gray pointer qt-ml-8"
+                (click)="add()"
+            >
+                <i class="icon__plus-gray qt-sz-16 qt-bg-contain"></i>
+            </div>
+        </div>
     </div>
     <div class="qt-aside-modern__content">
         <div class="qt-inputs-row">
             <div class="qt-input-block qt-f100">
                 <div
-                    class="qt-input-block__label"
+                    class="qt-input-block__label qt-mb-12"
                     *ngIf="!editMode"
                 >
                     Select Subscription from following List
@@ -33,28 +60,29 @@
                     <app-marketing-subscriptions-aside-item-edit
                         *ngIf="editMode"
                         [subscription]="subscription"
+                        class="qt-mb-12"
                     ></app-marketing-subscriptions-aside-item-edit>
                 </ng-template>
             </div>
         </div>
     </div>
     <div class="qt-aside-modern__footer">
-        <div class="qt-df">
+        <div class="qt-df qt-w100">
             <button
-                class="qt-button qt-mr-12"
-                appDisabledBtn
-                #addBtn="disabled"
-                (onClick)="onAdd()"
-                [ngClass]="{'--loading':addBtn.isBlock()}"
-            >
-                <span>Add User</span>
-                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
-            </button>
-            <button
-                class="qt-button --gray"
+                class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
                 (click)="close()"
             >
                 Cancel
+            </button>
+            <button
+                class="qt-button qt-jc-c qt-w100"
+                appDisabledBtn
+                #addBtn="disabled"
+                (onClick)="save()"
+                [ngClass]="{'--loading':addBtn.isBlock()}"
+            >
+                <span>Save</span>
+                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
             </button>
         </div>
     </div>
