@@ -129,7 +129,7 @@
 }
 
 .archive-modal__footer {
-    margin: 24px 0 0 0;
+    margin: 32px 0 0 0;
 }
 
 pre {
@@ -141,4 +141,14 @@ pre {
     border: unset;
     border-radius: unset;
     font-family: unset;
+}
+.btn-primary {
+    background-color: $blue-light-600;
+    &:hover {
+        background-color: $blue-light-500;
+    }
+}
+.disabled {
+    border: 1px solid $gray-200;
+    color: $gray-500;
 }
