@@ -69,14 +69,16 @@
       padding-left: 8px;
       padding-right: 8px;
     }
-    td.quotes-table__number {
-      font-weight: $fw-medium;
-      color: $blue-light-600;
-      padding-top: 14px;
+    .qt-table-modern__row {
+      .quotes-table__number {
+        font-weight: 500;
+        color: $blue-light-600;
+        font-size: 14px;
+      }
     }
 
     &__create-by {
-      flex: 0 0 130px;
+      flex: 0 0 160px;
       padding-left: 8px;
       padding-right: 8px;
       &-user-name {
@@ -102,7 +104,7 @@
     }
 
     &__valid {
-      flex: 0 0 100px;
+      flex: 0 0 104px;
       padding-left: 8px;
       padding-right: 8px;
     }
@@ -431,6 +433,6 @@
 .quotes-page {
   .qt-page-list__header-thead,
   .qt-page-list__body-tbody {
-    min-width: 1146px;
+    min-width: 1180px;
   }
 }

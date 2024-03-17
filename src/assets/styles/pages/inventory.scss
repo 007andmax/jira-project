@@ -46,6 +46,9 @@
      flex: 2 0 280px;
       font-weight: $fw-medium;
       color: $gray-900;
+      @media (max-width: 1920px) {
+        max-width: 382px;
+      }
     }
 
     &__category {
@@ -72,6 +75,9 @@
     &__gl {
       flex: 0 0 92px;
       color: $gray-600;
+      @media (max-width: 1920px) {
+        flex-grow: 1;
+      }
       @media (min-width: 2048px) {
         flex: 0 0 182px;
       }
@@ -83,6 +89,9 @@
     &__cost{
       flex: 0 0 120px;
       color: $gray-600;
+      @media (max-width: 1920px) {
+        flex-grow: 1;
+      }
     }
     &__mfg,
     &__ilc {
@@ -143,4 +152,11 @@ app-accounting-settings {
 }
 app-inventory-table {
   display: contents;
+}
+
+.products-page {
+  .qt-page-list__header-thead,
+  .qt-page-list__body-tbody {
+    min-width: 1134px;
+  }
 }
