@@ -81,6 +81,9 @@
       flex: 0 0 160px;
       padding-left: 8px;
       padding-right: 8px;
+      @media only screen and (min-width: 1601px) {
+        flex: 0 0 200px;
+      }
       &-user-name {
         max-width: calc(100% - 55px);
       }
