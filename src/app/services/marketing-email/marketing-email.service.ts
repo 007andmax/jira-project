@@ -39,7 +39,7 @@ export class MarketingEmailService {
   public removeSubscriptionType(subscription_id) {
     return this.http.delete(this.apiUrl + `subscription/customSubscription/${subscription_id}`).pipe(
       tap(data => {
-        this.toastrService.success("The subscription has been successfully removed");
+        this.toastrService.success("The subscription has been successfully deleted");
         this.appStateService.changeDetectorRef();
         return data;
       }));
@@ -50,6 +50,11 @@ export class MarketingEmailService {
 
   }
   public addSubscriptionType(name) {
-    return this.http.post(this.apiUrl + 'subscription/customSubscription', { "name": name });
+    return this.http.post(this.apiUrl + 'subscription/customSubscription', { "name": name }).pipe(
+      tap(data => {
+        this.toastrService.success("The subscription has been successfully created");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 }

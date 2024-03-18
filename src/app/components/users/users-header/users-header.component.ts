@@ -16,7 +16,6 @@ import { TicketsFilterComponent } from '../../tickets/tickets/tickets-header/tic
 import { UsersFilterComponent } from './users-filter/users-filter.component';
 import { TYPE_LIST_ALL_USERS, TYPE_LIST_COMPANY_USERS, TYPE_LIST_MARKETING_USERS } from 'src/app/const/users';
 import { UserCustomSubscription } from '../class/user-custom-subscription';
-import { AddUserToSubscribeComponent } from '../add-user-to-subscribe/add-user-to-subscribe.component';
 import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
 import { forkJoin, of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -136,8 +135,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     return this.users.filter(item => item.selected).find(item => item.isContact);
   }
   showAddToSubscription() {
-    // const modalRef = this.modalService.open(AddUserToSubscribeComponent, { windowClass: 'xs-modal modal-dialog__save-to-subscription', backdrop: 'static', keyboard: false });
-    //  modalRef.componentInstance.users = this.users.filter(item => item.selected);
+    console.log("showAddToSubscription");
     this.marketingEmailStateService.onOpenAsige(this.users.filter(item => item.selected));
     this.ref.markForCheck();
   }

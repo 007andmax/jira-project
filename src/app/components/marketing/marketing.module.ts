@@ -22,8 +22,6 @@ import { MarketingSubscriptionsAsideModule } from './marketing-subscriptions-asi
         UsersTableModule,
         FormsModule,
         UsersFilterModule,
-        MarketingSubscriptionsAsideModule
-
     ],
 })
 export class MarketingModule { }

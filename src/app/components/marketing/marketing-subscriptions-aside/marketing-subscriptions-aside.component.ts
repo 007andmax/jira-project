@@ -10,6 +10,8 @@ import { MarketingSubscriptionsAddComponent } from './marketing-subscriptions-ad
 import { User } from '../../users/class/user';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { catchError, map } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 @Component({
   selector: 'app-marketing-subscriptions-aside',
@@ -26,6 +28,8 @@ export class MarketingSubscriptionsAsideComponent implements OnInit {
   constructor(private marketingEmailStateService: MarketingEmailStateService,
     private marketingEmailService: MarketingEmailService,
     private modalService: NgbModal,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService,
     private confirmStateService: ConfirmStateService,) { }
 
   ngOnInit() {
@@ -72,6 +76,8 @@ export class MarketingSubscriptionsAsideComponent implements OnInit {
         catchError(error => of(undefined)))))
         .subscribe(
           () => {
+            this.toastrService.success("The subscription has been successfully added");
+            this.appStateService.changeDetectorRef();
             this.addBtn.setDisabled(false);
             this.close();
           },
@@ -85,6 +91,7 @@ export class MarketingSubscriptionsAsideComponent implements OnInit {
   }
   close() {
     this.opened = false;
+    this.listCustomSubscription.forEach(item => item.selected = false);
   }
   onRemoveSubscription(id) {
     this.marketingEmailService.removeSubscriptionType(id).subscribe(data => {
