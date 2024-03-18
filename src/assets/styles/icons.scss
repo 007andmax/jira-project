@@ -357,15 +357,6 @@
     -webkit-mask-image: url("/assets/img/icons/support-page-edit-category.svg");
     mask-image: url("/assets/img/icons/support-page-edit-category.svg");
   }
-  &__category-more {
-    background-color: $gray-400;
-    -webkit-mask-image: url("/assets/img/icons/category-more.svg");
-    mask-image: url("/assets/img/icons/category-more.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
-  }
   &__remove,
   &__remove--red-500,
   &__remove--red-600,
