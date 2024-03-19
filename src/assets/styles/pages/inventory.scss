@@ -52,10 +52,10 @@
     }
 
     &__category {
-      flex: 0 0 144px;
+      flex: 1 0 144px;
       color: $gray-600;
       @media (min-width: 2048px) {
-        flex: 0 0 288px;
+        flex: 1 0 200px;
       }
     }
 
@@ -95,17 +95,27 @@
     }
     &__mfg,
     &__ilc {
+      flex: 0 0 120px;
+      @media (max-width: 1600px) {
+        flex: 0 0 100px;
+      }
       @media (min-width: 2048px) {
         flex: 0 0 220px;
       }
     }
     &__cost {
-      flex: 0 0 78px;
+      flex: 0 0 101px;
       color: $gray-600;
       position: relative;
+      @media (max-width: 1600px) {
+        flex: 0 0 78px;
+      }
     }
     &__sale-price {
-      flex: 0 0 92px;
+      flex: 0 0 109px;
+      @media (max-width: 1600px) {
+        flex: 0 0 92px;
+      }
       color: $gray-600;
     }
   }

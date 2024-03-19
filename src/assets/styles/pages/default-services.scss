@@ -4,6 +4,9 @@
 .default-services-page {
   min-height: calc(100vh - #{$header-height});
   position: relative;
+  .qt-table-modern__row > div:last-child {
+    padding-right: 25px;
+  }
 
   &__table-container {
     overflow-x: auto;
@@ -28,7 +31,7 @@
     }
 
     &__menu {
-      flex: 0 0 32px;
+      flex: 0 0 42px;
       padding-left: 0;
       padding-right: 0;
       position: relative;
@@ -61,7 +64,7 @@
     }
 
     &__taxes {
-      flex: 0 0 100px;
+      flex: 0 0 105px;
     }
 
     &__rate {
