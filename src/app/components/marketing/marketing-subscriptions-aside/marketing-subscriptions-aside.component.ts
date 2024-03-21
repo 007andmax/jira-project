@@ -98,4 +98,7 @@ export class MarketingSubscriptionsAsideComponent implements OnInit {
       this.marketingEmailStateService.setListSubscriptionTypeForRemove([]);
     })
   }
+  public trackById(index, item) {
+    return item.id;
+  }
 }

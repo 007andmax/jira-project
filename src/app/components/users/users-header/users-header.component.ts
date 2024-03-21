@@ -135,7 +135,6 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     return this.users.filter(item => item.selected).find(item => item.isContact);
   }
   showAddToSubscription() {
-    console.log("showAddToSubscription");
     this.marketingEmailStateService.onOpenAsige(this.users.filter(item => item.selected));
     this.ref.markForCheck();
   }

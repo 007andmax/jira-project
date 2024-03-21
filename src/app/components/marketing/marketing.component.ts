@@ -100,7 +100,6 @@ export class MarketingComponent implements OnInit {
           const userIndex = this.users.findIndex((item) => item.id === data.data.id);
           if (userIndex > -1) this.users.splice(userIndex, 1);
         }
-        console.log("this.users[userIndex]", this.users[userIndex]);
       }
       if (data.action === 'USERS_DEARCHIVED' && data.data.accountType !== "TECH") {
         data.data.forEach(user => {
