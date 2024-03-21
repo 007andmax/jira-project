@@ -124,8 +124,11 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     })
     this.sub.add(changeTagsArray);
   }
-
+  ngAfterContentInit() {
+    console.log("ngAfterContentInit");
+  }
   ngAfterViewInit(): void {
+    console.log("ngAfterViewInit");
     this.dtTrigger.next();
   }
 
@@ -198,6 +201,12 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       if (this.reqcompanyTags.length === data.totalElements) this.manageTagsListService.setBlockList(true);
       this.loading = false;
       this.showPendingPreloader = false;
+      setTimeout(() => {
+        var div = document.getElementsByClassName('main-container')[0];
+        var hasVerticalScrollbar = div.scrollHeight > div.clientHeight;
+        console.log("hasVerticalScrollbar", hasVerticalScrollbar);
+        if (!hasVerticalScrollbar && this.reqcompanyTags.length !== data.totalElements) this.onScroll();
+      }, 1000)
     })
   }
 
