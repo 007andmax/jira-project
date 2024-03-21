@@ -1,3 +1,5 @@
+@import "./src/assets/styles/variable";
+
 app-company-devices-item {
     display: contents;
 }
@@ -10,3 +12,79 @@ app-company-devices-item {
 }
 
 
+.company-devices-table__system-network-buttons,
+.company-devices-table__ip-address-buttons {
+  display: none;
+  font-size: 12px;
+  font-weight: 600;
+  color: $blue-light-600;
+  padding-top: 8px;
+}
+
+/deep/ .company-devices-page {
+  .qt-table-modern__row > div:first-child {
+    padding-left: 22px;
+  }
+}
+
+/deep/ .company-devices-table {
+  &__check {
+    flex: 0 0 50px;
+  }
+  &__menu {
+    flex: 0 0 40px;
+  }
+  &__go-to {
+    flex: 0 0 40px;
+  }
+  &__connect {
+    flex: 0 0 38px;
+  }
+  &__ip-address {
+    flex: 0 0 190px;
+    position: relative;
+  }
+  &__windows {
+    flex: 0 0 164px;
+    position: relative;
+  }
+  &__up-time {
+    flex: 0 0 100px;
+  }
+  &__logged-user {
+    flex: 0 0 148px;
+  }
+  &__device-type {
+    flex: 0 0 32px;
+
+    .device-type-icon {
+      position: relative;
+      &::before {
+        content: '';
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        top: -2px;
+        right: -2px;
+        border: solid 2px $white;
+        background-color: $green-600;
+        border-radius: 50%;
+      }
+      &.--ofline {
+        &::before {
+          background-color: $red-600;
+        }
+      }
+    }
+  }
+  &__device-agent {
+    flex: 0 0 101px;
+  }
+  &__device-master-agent {
+    flex: 0 0 40px;
+  }
+  &__device-name,
+  &__company-name {
+    flex: 2 0 158px;
+  }
+}

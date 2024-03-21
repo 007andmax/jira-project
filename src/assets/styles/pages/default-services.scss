@@ -4,8 +4,13 @@
 .default-services-page {
   min-height: calc(100vh - #{$header-height});
   position: relative;
-  .qt-table-modern__row > div:last-child {
-    padding-right: 25px;
+  .qt-table-modern__row {
+    min-height: 48px;
+    height: auto;
+
+    > div:last-child {
+      padding-right: 25px;
+    }
   }
 
   &__table-container {
