@@ -82,7 +82,6 @@ import { ModalEditCategoryProductComponent } from './services/modal/modal-edit-c
 import { UsersAsideDetailModule } from './components/users/users-aside-detail/users-aside-detail.module';
 import { TextAreaModule } from './directives/text-area/text-area.module';
 import { AddMarketingSubscriptionTypeModule } from './components/setting/marketing-email/marketing-subscription-type/add-marketing-subscription-type/add-marketing-subscription-type.module';
-import { AddUserToSubscribeModule } from './components/users/add-user-to-subscribe/add-user-to-subscribe.module';
 import { PermissionInvoicesService } from './components/billing/invoices/permission-invoices.service';
 import { PermissionBillableService } from './components/billing/billable/permission-billable.service';
 import { PreviewAttachmentModule } from './components/tickets/tickets/ticket-edit-aside/preview-attachment/preview-attachment.module';
@@ -97,7 +96,6 @@ import { PermissionTechUserService } from './services/users/permission-tech-user
 import { PermissionSuperAdminService } from './services/users/permission-super-admin.service';
 import { HelpCenterInfoAsideComponent } from './components/super-admin-public/help-center-info-aside/help-center-info-aside.component';
 import { InventoryCheckUseComponent } from './components/inventory/inventory-check-use/inventory-check-use.component';
-import { AddUserToSubscribeComponent } from './components/users/add-user-to-subscribe/add-user-to-subscribe.component';
 import { SupportPageAddCategoryModule } from './components/super-admin/shared/support-page-add-category/support-page-add-category.module';
 import { LeftPanelSuperAdminModule } from './components/super-admin/left-panel-super-admin/left-panel-super-admin.module';
 import { SupportPageAddSubCategoryModule } from './components/super-admin/shared/support-page-add-sub-category/support-page-add-sub-category.module';
@@ -132,6 +130,7 @@ import { UserFilterSaveModule } from './components/users/user-filter-save/user-f
 import { TicketsHeaderModule } from './components/tickets/tickets/tickets-header/tickets-header.module';
 import { TicketsFilterSaveModule } from './components/tickets/tickets/tickets-header/tickets-filter-save/tickets-filter-save.module';
 import { DeviceTagPipe } from './pipe/device-tag.pipe';
+import { MarketingSubscriptionsAsideModule } from './components/marketing/marketing-subscriptions-aside/marketing-subscriptions-aside.module';
 declare var $: any;
 
 /**
@@ -202,7 +201,6 @@ declare var $: any;
     UsersAsideDetailModule,
     TextAreaModule,
     AddMarketingSubscriptionTypeModule,
-    AddUserToSubscribeModule,
     PreviewAttachmentModule,
     SupportPageAddCategoryModule,
     LeftPanelSuperAdminModule,
@@ -214,7 +212,8 @@ declare var $: any;
     LeftPanelCustomerPortalModule,
     AddUserToCompanyModule,
     UserFilterSaveModule,
-    TicketsFilterSaveModule
+    TicketsFilterSaveModule,
+    MarketingSubscriptionsAsideModule
   ],
   entryComponents: [
     ConfirmComponent,
@@ -229,7 +228,6 @@ declare var $: any;
     ModalAgentLinkComponent,
     ModalAddUsersNotifyComponent,
     ModalEditCategoryProductComponent,
-    AddUserToSubscribeComponent,
     InventoryCheckUseComponent,
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,

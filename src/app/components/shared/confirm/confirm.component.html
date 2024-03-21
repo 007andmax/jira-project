@@ -410,3 +410,30 @@
         </div>
     </div>
 </div>
+<div
+    class="archive-modal delete-marketing-subscribes"
+    *ngIf="action === 'DELETE_SUBSCRIPTION_TYPE'"
+>
+    <div class="archive-modal__body">
+        <h3 [textContent]="message"></h3>
+        <p>
+            Are you sure want to remove this subscription?
+        </p>
+    </div>
+    <div class="archive-modal__footer">
+        <div class="qt-df qt-jc-fe">
+            <button
+                class="btn-new disabled"
+                (click)=cancelConfirm()
+            >
+                Cancel
+            </button>
+            <button
+                class="btn-new btn-primary"
+                (click)=approveConfirm()
+            >
+                Yes, I am sure
+            </button>
+        </div>
+    </div>
+</div>
