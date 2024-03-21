@@ -201,6 +201,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       if (this.reqcompanyTags.length === data.totalElements) this.manageTagsListService.setBlockList(true);
       this.loading = false;
       this.showPendingPreloader = false;
+      this.cd.detectChanges();
       setTimeout(() => {
         var div = document.getElementsByClassName('main-container')[0];
         var hasVerticalScrollbar = div.scrollHeight > div.clientHeight;
