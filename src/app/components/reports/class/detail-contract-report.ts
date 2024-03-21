@@ -75,7 +75,7 @@ export class DetailContractreport {
   * @returns {String} This is the result
  */
     public getDateInterval(date) {
-        return moment(new Date(date)).format('DD MMM YYYY');
+        return moment(new Date(date)).format('DD MMM YYYY hh:mm A');
     }
     /**
   * @description Set new value filed "companyId"
