@@ -67,7 +67,7 @@ export class TicketsFilterTagsComponent extends CompanyTagsComponent {
 * @param {Object} event - Object from input
 */
   onSearch(event) {
-    this.tags = this.reqTags.filter(item => item.word.toLowerCase().includes(event.target.value));
+    this.tags = this.reqTags.filter(item => item.word.toLowerCase().includes(event.target.value.toLowerCase()));
   }
   /**
 * @description Check if element dropdown added in selectedTag

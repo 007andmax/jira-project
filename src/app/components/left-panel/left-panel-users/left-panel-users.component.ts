@@ -166,4 +166,7 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.leftPanelUsersService.onUnsubscribe();
   }
+  public trackById(index, item) {
+    return item.id;
+  }
 }

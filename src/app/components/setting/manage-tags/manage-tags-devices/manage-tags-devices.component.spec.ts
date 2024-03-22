@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddUserToSubscribeComponent } from './add-user-to-subscribe.component';
+import { ManageTagsDevicesComponent } from './manage-tags-devices.component';
 
-describe('AddUserToSubscribeComponent', () => {
-  let component: AddUserToSubscribeComponent;
-  let fixture: ComponentFixture<AddUserToSubscribeComponent>;
+describe('ManageTagsDevicesComponent', () => {
+  let component: ManageTagsDevicesComponent;
+  let fixture: ComponentFixture<ManageTagsDevicesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddUserToSubscribeComponent ]
+      declarations: [ ManageTagsDevicesComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddUserToSubscribeComponent);
+    fixture = TestBed.createComponent(ManageTagsDevicesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

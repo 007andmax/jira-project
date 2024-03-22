@@ -1,0 +1,44 @@
+<div
+    class="qt-inputs-row qt-ai-c qt-jc-sb"
+    [ngClass]="{'qt-pt-20':!subscription.isInitEdit,
+    'qt-pb-20':!subscription.isInitEdit,
+'qt-pt-8':subscription.isInitEdit,
+'qt-pb-8':subscription.isInitEdit}"
+>
+    <div
+        class="qt-input-block"
+        *ngIf="subscription.isInitEdit"
+    >
+        <input
+            placeholder="Service Name"
+            [(ngModel)]="subscription.name"
+            type="text"
+            appKeyUpEnter
+            (onChange)="onEditSubscription($event)"
+            maxlength="30"
+        >
+    </div>
+    <div
+        *ngIf="!subscription.isInitEdit"
+        class="qt-input-block"
+    >
+        <span
+            class="qt-fs-14 qt-fw-400 qt-color-gray-700"
+            [textContent]="subscription.name"
+        ></span>
+    </div>
+    <div class="qt-df qt-ai-c qt-jc-fe">
+        <div
+            class="icon__edit qt-bg-contain qt-sz-20 qt-mr-12 pointer"
+            (click)="subscription.onInitEdit(true)"
+            placement="top"
+            ngbTooltip="Edit"
+        ></div>
+        <div
+            class="icon__remove qt-bg-contain qt-sz-20 pointer"
+            (click)="remove()"
+            placement="top"
+            ngbTooltip="Delete"
+        ></div>
+    </div>
+</div>

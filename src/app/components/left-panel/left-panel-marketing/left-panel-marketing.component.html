@@ -23,7 +23,7 @@
             [ngForTrackBy]="trackById"
         >
             <li
-                [ngClass]="{'--active': getSelecteSubscription() && getSelecteSubscription().id === subscription.id && activePage === 'marketing'}"
+                [ngClass]="{'--active': getSelecteSubscription() && getSelecteSubscription() === subscription.id && activePage === 'marketing'}"
                 (click)="goToState();onChangeCustomSubscription(subscription)"
                 [textContent]="subscription.name"
                 class="qt-jc-sb"

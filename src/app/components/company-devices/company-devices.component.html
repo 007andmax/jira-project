@@ -7,48 +7,48 @@
             (onRemoveAgents)="onRemoveAgents()"
         ></app-company-devices-header>
         <div class="qt-page-list__header-thead-container">
-          <div class="qt-table-modern qt-page-list__header-thead">
-            <div class="qt-page-list__header-thead__row">
-              <div class="company-devices-table__check">
-                <div class="qt-df">
-                  <label class="qt-checkbox">
-                    <input
-                      type="checkbox"
-                      [(ngModel)]="selectAllDevices"
-                      (change)="toogleDevices()"
+            <div class="qt-table-modern qt-page-list__header-thead">
+                <div class="qt-page-list__header-thead__row">
+                    <div class="company-devices-table__check">
+                        <div class="qt-df">
+                            <label class="qt-checkbox">
+                                <input
+                                    type="checkbox"
+                                    [(ngModel)]="selectAllDevices"
+                                    (change)="toogleDevices()"
+                                >
+                                <span></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="company-devices-table__device-type"></div>
+                    <div
+                        class="company-devices-table__device-name pointer"
+                        (click)="onFilter('name')"
                     >
-                    <span></span>
-                  </label>
+                        Device Name
+                        <span class="qt-table-modern__sorting"></span>
+                    </div>
+                    <div
+                        class="company-devices-table__logged-user pointer"
+                        (click)="onFilter('user_name')"
+                    >
+                        Logged in user
+                        <span class="qt-table-modern__sorting"></span>
+                    </div>
+                    <div class="company-devices-table__up-time">
+                        Up time
+                        <span class="qt-table-modern__sorting"></span>
+                    </div>
+                    <div class="company-devices-table__windows">Windows</div>
+                    <div class="company-devices-table__ip-address">
+                        <span class="qt-pl-30">Ip address</span>
+                    </div>
+                    <div class="company-devices-table__go-to"></div>
+                    <div class="company-devices-table__connect"></div>
+                    <div class="company-devices-table__menu"></div>
                 </div>
-              </div>
-              <div class="company-devices-table__device-type"></div>
-              <div
-                class="company-devices-table__device-name pointer"
-                (click)="onFilter('name')"
-              >
-                Device Name
-                <span class="qt-table-modern__sorting"></span>
-              </div>
-              <div
-                class="company-devices-table__logged-user pointer"
-                (click)="onFilter('user_name')"
-              >
-                Logged in user
-                <span class="qt-table-modern__sorting"></span>
-              </div>
-              <div class="company-devices-table__up-time">
-                Up time
-                <span class="qt-table-modern__sorting"></span>
-              </div>
-              <div class="company-devices-table__windows">Windows</div>
-              <div class="company-devices-table__ip-address">
-                <span class="qt-pl-30">Ip address</span>
-              </div>
-              <div class="company-devices-table__go-to"></div>
-              <div class="company-devices-table__connect"></div>
-              <div class="company-devices-table__menu"></div>
             </div>
-          </div>
         </div>
     </div>
     <div class="qt-df qt-fd-c qt-jc-sb">

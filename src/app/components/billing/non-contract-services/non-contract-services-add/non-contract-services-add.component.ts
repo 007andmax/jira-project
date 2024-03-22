@@ -35,6 +35,7 @@ export class NonContractServicesAddComponent implements OnInit {
     this.nonContractServicesStateService.getShowAsideForAdd().subscribe(data => {
       this.showAdd = true;
       this.service.onInitForAdd();
+      if (this.taxesStateService.getTaxes().length > 0) this.setDefaultTaxes(this.taxesStateService.getTaxes());
     })
     if (this.glNumberStateService.getGLNumbers().length > 0) this.glNumbers = this.sortGlNumbers(this.glNumberStateService.getGLNumbers());
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {

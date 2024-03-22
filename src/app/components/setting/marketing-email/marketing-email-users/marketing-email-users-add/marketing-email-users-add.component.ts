@@ -6,6 +6,8 @@ import { MarketingEmailService } from 'src/app/services/marketing-email/marketin
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { MarketingSubscriptionType } from '../../marketing-subscription-type/class/marketing-subscription-type';
+import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 @Component({
   selector: 'marketing-email-users-add',
@@ -30,6 +32,8 @@ export class MarketingEmailUsersAddComponent implements OnInit {
     private userListService: UserListService,
     private marketingEmailService: MarketingEmailService,
     private cd: ChangeDetectorRef,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService,
     private usersStateService: UsersStateService,) { }
 
   ngOnInit() {
@@ -72,6 +76,8 @@ export class MarketingEmailUsersAddComponent implements OnInit {
     if (this.reqUsers.filter(item => item.selected).length > 0) {
       this.addBtn.setDisabled(true);
       this.marketingEmailService.addUsers(this.marketingSubscription.id, this.reqUsers.filter(item => item.selected).map(item => item.id)).subscribe(data => {
+        this.toastrService.success("The subscription has been successfully added");
+        this.appStateService.changeDetectorRef();
         this.addBtn.setDisabled(false);
         this.close();
       })

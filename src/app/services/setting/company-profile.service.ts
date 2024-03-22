@@ -79,7 +79,12 @@ export class CompanyProfileService {
     return this.http.put(
       `${this.apiUrl}settings/companyProfile/ticketSettings`,
       workTime
-    );
+    ).pipe(
+      tap(data => {
+        this.toastrService.success("Records Saved Successfully");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   getConstants() {

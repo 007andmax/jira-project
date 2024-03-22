@@ -22,6 +22,7 @@ import { ConfirmStateService } from "../../shared/confirm/services/confirm-state
 import { DELETE_MANAGE_TAG } from "src/app/const/confirm";
 import { ConfirmComponent } from "../../shared/confirm/confirm.component";
 import { ManageTag } from "./class/manage-tag";
+import { ManageTagsDevicesComponent } from "./manage-tags-devices/manage-tags-devices.component";
 declare var $: any;
 @Component({
   selector: "app-manage-tags",
@@ -54,6 +55,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     info: false
   };
   @ViewChild("tickets") tickets: ElementRef;
+  @ViewChild("devicesTags") devicesTags: ManageTagsDevicesComponent;
   private tabSet: ViewContainerRef;
 
   @ViewChild(NgbTabset) set content(content: ViewContainerRef) {
@@ -122,7 +124,6 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     })
     this.sub.add(changeTagsArray);
   }
-
   ngAfterViewInit(): void {
     this.dtTrigger.next();
   }
@@ -166,8 +167,11 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     );
   }
   onSearch() {
-    this.setDefaultScoll();
-    this.onScroll();
+    if (this.setActiveTab == "company") {
+      this.setDefaultScoll();
+      this.onScroll();
+    }
+    if (this.devicesTags) this.devicesTags.searchTag = this.searchTag;
   }
   public setDefaultScoll() {
     this.page = 0;
@@ -193,6 +197,12 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       if (this.reqcompanyTags.length === data.totalElements) this.manageTagsListService.setBlockList(true);
       this.loading = false;
       this.showPendingPreloader = false;
+      this.cd.detectChanges();
+      setTimeout(() => {
+        var div = document.getElementsByClassName('main-container')[0];
+        var hasVerticalScrollbar = div.scrollHeight > div.clientHeight;
+        if (!hasVerticalScrollbar && this.reqcompanyTags.length !== data.totalElements) this.onScroll();
+      }, 1000)
     })
   }
 
@@ -278,6 +288,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     this.searchTag = "";
     this.create = true;
     this.selectedIdx = -1;
+    if (this.devicesTags) this.devicesTags.onAdd();
   }
 
   onCancel() {

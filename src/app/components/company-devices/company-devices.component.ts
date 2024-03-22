@@ -16,6 +16,7 @@ import { CompanyDeviceFilter } from './class/device-company-filter';
 import { DeviceRemoteSessions } from './class/device-remote-sessions';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
+import { DeviceTagsStateService } from 'src/app/states/device-tags/device-tags-state.service';
 
 @Component({
   selector: 'app-company-devices',
@@ -40,11 +41,13 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     private leftPanelStateService: LeftPanelStateService,
     private customerPortalStateService: CustomerPortalStateService,
     private websocketService: WebsocketService,
+    private deviceTagsStateService: DeviceTagsStateService,
     private devicesRealTimeService: DevicesRealTimeService) { }
 
   ngOnInit() {
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.leftPanelStateService.changeStateWithoutNavigate('company-devices');
+    if (this.deviceTagsStateService.getTags().length == 0) this.deviceTagsStateService.onInitGetTags();
     let id = this.activateRoute.snapshot.params['id'];
     if (id) {
       if (this.customerPortalStateService.isCustomerPortal) this.websocketService.onInitConnectCustomerUser("company-devices", id);

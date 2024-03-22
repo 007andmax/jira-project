@@ -74,7 +74,7 @@ export class TicketsPriorityComponent implements OnInit {
   onEditTicketPriority(item) {
     if (item.isInitEdit) {
       if (item.name.length === 0 || item.disableUpdate) return;
-      this.ticketsService.editPriority(item.id, item.getDataForEdit(item.name, item.color)).pipe(map((res) => res),
+      this.ticketsService.editPriority(item.id, item.getDataForRequest(item.name, item.color)).pipe(map((res) => res),
         catchError(error => of(undefined))).subscribe(data => {
           item.onInitEdit(false);
         })
@@ -85,13 +85,16 @@ export class TicketsPriorityComponent implements OnInit {
     item.onInitEdit(true);
     this.onEditTicketPriority(item);
   }
+  editDisplay(item) {
+    item.onInitEdit(true);
+  }
   onKeyUp(event) {
     if (event.keyCode === 13) this.onAddTicketPriority();
   }
   onAddTicketPriority() {
     if (this.addPriority.name.length === 0 || !this.addPriorityBtn.getInit() || this.addPriority.disableCreate) return;
     this.addPriorityBtn.setInit(false);
-    this.ticketsService.addPriority(this.addPriority.name, this.addPriority.color).pipe(map((res) => res),
+    this.ticketsService.addPriority(this.addPriority.getDataForRequest(this.addPriority.name, this.addPriority.color)).pipe(map((res) => res),
       catchError(error => of(undefined))).subscribe(data => {
         this.showAddPriority = false;
         this.addPriority = new TicketsPriority();

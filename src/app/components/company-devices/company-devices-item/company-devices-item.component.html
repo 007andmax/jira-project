@@ -1,4 +1,7 @@
-<div class="qt-table-modern__row" [ngClass]="{'company-device-hover':device.agentId, '--ofline': !device.online}">
+<div
+    class="qt-table-modern__row"
+    [ngClass]="{'company-device-hover':device.agentId, '--ofline': !device.online}"
+>
     <div class="company-devices-table__check">
         <div class="qt-df">
             <label class="qt-checkbox">
@@ -81,6 +84,14 @@
                 ></span>
             </div>
         </div>
+    </div>
+    <div class="company-devices-table__tags">
+        <app-company-devices-tags
+            #deviceTags
+            [showLabel]="false"
+            [placement]="'top'"
+            (tagsChange)="onChangeTags($event)"
+        ></app-company-devices-tags>
     </div>
     <div class="company-devices-table__logged-user">
         <div class="qt-df qt-fd-c">
