@@ -1,0 +1,40 @@
+.job-description {
+    width: 100%;
+}
+
+.upload-photo__title {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    .remove-link {
+        width: auto;
+        margin: 0px 0px 0px 20px !important;
+    }
+}
+
+.upload-photo__input {
+    left: 80px;
+    top: 20px;
+    width: 110px;
+    height: 30px;
+}
+
+#upload-file {
+    display: none !important;
+}
+
+.company-actions {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 999;
+}
+
+.access-customer-portal {
+    cursor: default;
+}
+
+.first-name-invalid {
+    bottom: -30px !important;
+}

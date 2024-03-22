@@ -18,6 +18,7 @@ import { DatePickerModule } from '../shared/date-picker/date-picker.module';
 import { CompanyDevicesRoutingModule } from './company-devices-routing.module';
 import { CompanyDevicesTagsComponent } from './company-devices-tags/company-devices-tags.component';
 import { CompanyDevicesTagsModule } from './company-devices-tags/company-devices-tags.module';
+import { CompanyDevicesCustomAsideComponent } from './company-devices-custom-aside/company-devices-custom-aside.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { CompanyDevicesTagsModule } from './company-devices-tags/company-devices
         CompanyDevicesAsideNetworkTabComponent,
         CompanyDevicesAsideSoftwareComponent,
         CompanyDevicesAsideUpdatesComponent,
+        CompanyDevicesCustomAsideComponent,
 
     ],
     imports: [
