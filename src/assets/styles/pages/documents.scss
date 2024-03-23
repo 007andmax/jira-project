@@ -9,8 +9,8 @@
       height: 36px;
     }
   }
-  tr.documents-no-valid {
-    td {
+  .documents-no-valid {
+    > div {
       &:first-child {
         position: relative;
       }
@@ -33,34 +33,23 @@
   }
   .documents-table {
     &__title {
-      min-width: 430px;
-      width: 430px;
-      max-width: 430px;
+      flex: 2 0 200px;
     }
     &__create-by {
-      width: 140px;
-      max-width: 140px;
-      min-width: 140px;
+     flex: 0 0 140px;
     }
     &__created-date {
-      width: 116px;
-      max-width: 116px;
-      min-width: 116px;
+      flex: 0 0 116px;
     }
     &__review-date {
-      width: 110px;
-      max-width: 110px;
-      min-width: 110px;
+      flex: 0 0 110px;
     }
     &__company {
-      width: 220px;
-      max-width: 220px;
-      min-width: 220px;
+      flex: 1 0 220px;
+      max-width: 380px;
     }
     &__menu {
-      width: 28px;
-      max-width: 28px;
-      min-width: 28px;
+      flex: 0 0 42px;
 
       .menu {
         display: block;
@@ -68,9 +57,7 @@
       }
     }
     &__shared {
-      width: 32px;
-      max-width: 32px;
-      min-width: 32px;
+      flex: 0 0 32px
     }
 
     tr td:last-child {

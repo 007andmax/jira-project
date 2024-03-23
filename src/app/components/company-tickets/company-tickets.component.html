@@ -48,8 +48,9 @@
                 class="qt-page-list__body-table-container"
                 [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}"
             >
-                <table class="qt-table-modern qt-page-list__body-tbody ticket-table company-tickets-table">
-                    <tbody
+                <div class="qt-table-modern qt-page-list__body-tbody ticket-table company-tickets-table">
+                    <div
+                        class="tbody"
                         infiniteScroll
                         [infiniteScrollContainer]="container"
                         [infiniteScrollDistance]="2"
@@ -71,8 +72,8 @@
                                 [setTicket]="ticket"
                             ></app-tickets-table-item>
                         </ng-template>
-                    </tbody>
-                </table>
+                    </div>
+                </div>
                 <div
                     class="no-exist-elements"
                     *ngIf="!showPreloader && tickets.length == 0"

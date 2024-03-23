@@ -1,9 +1,9 @@
-<tr
-    class="pointer"
+<div
+    class="pointer qt-table-modern__row"
     [ngClass]="(showNotificationReview) ? 'documents-no-valid' : ''"
     (click)="showTemplate()"
 >
-    <td
+    <div
         class="documents-table__title"
         (click)="navigateToCategory()"
         [ngClass]="{'pointer':item.isCategory}"
@@ -19,32 +19,33 @@
                 [textContent]="item.isCategory ? item.categoryName : item.title"
             ></div>
         </div>
-    </td>
-    <td
+    </div>
+    <div
         class="documents-table__create-by ellipsis"
         [textContent]="item.isCategory ? '' : getCreateBy()"
         (click)="navigateToCategory()"
         [ngClass]="{'pointer':item.isCategory}"
-    ></td>
-    <td
+    ></div>
+    <div
         class="documents-table__created-date ellipsis"
         [textContent]="item.isCategory ? '' : parseCreateAt()"
         (click)="navigateToCategory()"
         [ngClass]="{'pointer':item.isCategory}"
-    ></td>
-    <td
+    ></div>
+    <div
         class="documents-table__review-date ellipsis"
         [textContent]="item.isCategory ? '' : parseReviewAt()"
         (click)="navigateToCategory()"
         [ngClass]="{'pointer':item.isCategory}"
-    ></td>
-    <td
+    ></div>
+    <div
         class="documents-table__company ellipsis"
-        [textContent]="item.isCategory ? '' : getCompanies()"
         (click)="navigateToCategory()"
         [ngClass]="{'pointer':item.isCategory}"
-    ></td>
-    <td
+    >
+      <div class="ellipsis" [textContent]="item.isCategory ? '' : getCompanies()"></div>
+    </div>
+    <div
         class="documents-table__menu"
         (click)="$event.stopPropagation();"
     >
@@ -146,5 +147,5 @@
                 </li>
             </ul>
         </div>
-    </td>
-</tr>
+    </div>
+</div>
