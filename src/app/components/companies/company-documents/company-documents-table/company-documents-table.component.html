@@ -4,11 +4,11 @@
     (click)="showTemplate()"
 >
     <div
-        class="documents-table__title"
+        class="documents-table__title ellipsis"
         (click)="navigateToCategory()"
         [ngClass]="{'pointer':item.isCategory}"
     >
-        <div class="documents-table__title-menu">
+        <div class="documents-table__title-menu ellipsis">
             <div
                 class="qt-sz-16 qt-bg-contain qt-mr-8 qt-fs-0"
                 [ngClass]="{ 'icon__documents':item.documentType === 'TEMPLATE',

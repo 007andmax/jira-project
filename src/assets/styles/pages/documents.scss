@@ -36,7 +36,10 @@
       flex: 2 0 200px;
     }
     &__create-by {
-     flex: 0 0 140px;
+     flex: 0 0 280px;
+     @media (max-width: 1600px) {
+       flex: 0 0 206px;
+     }
     }
     &__created-date {
       flex: 0 0 116px;

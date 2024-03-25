@@ -25,6 +25,10 @@ app-company-devices-item {
   .qt-table-modern__row > div:first-child {
     padding-left: 22px;
   }
+  .qt-page-list__header-thead,
+  .qt-page-list__body-tbody {
+    min-width: 1220px;
+  }
 }
 
 /deep/ .company-devices-table {
@@ -48,6 +52,9 @@ app-company-devices-item {
     flex: 0 0 164px;
     position: relative;
   }
+  &__ip-windows-text {
+    word-break: break-all;
+  }
   &__up-time {
     flex: 0 0 100px;
   }
@@ -55,7 +62,7 @@ app-company-devices-item {
     flex: 0 0 148px;
   }
   &__device-type {
-    flex: 0 0 32px;
+    flex: 0 0 40px;
 
     .device-type-icon {
       position: relative;
@@ -86,5 +93,14 @@ app-company-devices-item {
   &__device-name,
   &__company-name {
     flex: 2 0 158px;
+  }
+  &__tags {
+    flex: 1 0 260px;
+    @media (max-width: 1600px) {
+      flex: 0 0 260px;
+      app-company-devices-tags > .qt-temporary-col-fix .mat-form-field {
+        width: calc(260px - 16px) !important;
+      }
+    }
   }
 }
