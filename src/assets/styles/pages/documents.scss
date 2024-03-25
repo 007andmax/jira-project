@@ -1,6 +1,10 @@
 @import "./src/assets/styles/variable";
 
 .documents-page {
+  .qt-page-list__header-thead__row {
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+  }
   .qt-page-list__header-filters {
     .qt-dropdown input,
     .filter-users-documents .dropdown-toggle,
@@ -52,7 +56,7 @@
       max-width: 380px;
     }
     &__menu {
-      flex: 0 0 42px;
+      flex: 0 0 52px;
 
       .menu {
         display: block;

@@ -106,9 +106,12 @@
     padding-left: 8px;
     padding-right: 8px;
   }
-  td.invoce-table__invoice {
-   font-weight: $fw-medium;
-    color: $blue-light-600;
+  .qt-table-modern__row {
+    .invoce-table__invoice {
+      font-weight: 500;
+      color: $blue-light-600;
+      font-size: 14px;
+    }
   }
 
   .invoce-table__status {

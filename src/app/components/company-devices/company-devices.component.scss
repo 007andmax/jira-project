@@ -30,13 +30,16 @@ app-company-devices-item {
     min-width: 1220px;
   }
 }
-
+.qt-page-list__header-thead__row {
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+}
 /deep/ .company-devices-table {
   &__check {
     flex: 0 0 50px;
   }
   &__menu {
-    flex: 0 0 40px;
+    flex: 0 0 42px;
   }
   &__go-to {
     flex: 0 0 40px;
@@ -96,10 +99,11 @@ app-company-devices-item {
   }
   &__tags {
     flex: 1 0 260px;
-    @media (max-width: 1600px) {
-      flex: 0 0 260px;
-      app-company-devices-tags > .qt-temporary-col-fix .mat-form-field {
-        width: calc(260px - 16px) !important;
+    app-company-devices-tags {
+      width: 100%;
+
+      > .qt-temporary-col-fix .mat-form-field {
+        width: 100% !important;
       }
     }
   }

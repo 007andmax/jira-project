@@ -36,10 +36,12 @@
         class="quotes-table__description"
         [textContent]="quote.description"
     ></div>
-    <div
-        class="quotes-table__recipients"
+    <div class="quotes-table__recipients ellipsis">
+      <div
+        class="ellipsis"
         [innerHtml]="quote.parseRecipients()"
-    ></div>
+      ></div>
+    </div>
     <div class="quotes-table__create-by ellipsis">
         <div class="qt-df qt-ai-c qt-w100">
             <div
