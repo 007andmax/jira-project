@@ -18,13 +18,13 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
 })
 export class CompanyDevicesCustomAsideComponent implements OnInit {
   device: CustomDevice = new CustomDevice();
-  assestType: Array<string> = ["workstation",
-    "router",
-    "printer",
-    "printer",
-    "server",
-    "tablet",
-    "Network Device (network switch)",
+  assestType: Array<string> = ["Workstation",
+    "Router",
+    "Printer",
+    "Switch",
+    "Server",
+    "Tablet",
+    "Network Device",
     "Phone",
     "Generic device"];
   startDate = new Date().getTime();
@@ -88,6 +88,7 @@ export class CompanyDevicesCustomAsideComponent implements OnInit {
   closed() {
     this.opened = false;
     this.device = new CustomDevice();
+    this.validate = new ValidateCustomAside();
   }
   onAdd() {
     if (!this.validate.isValidate(this.device)) return;

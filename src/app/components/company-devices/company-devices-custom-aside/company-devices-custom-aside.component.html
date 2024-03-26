@@ -5,16 +5,20 @@
     <!-- *ngIf="opened" -->
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">None Agent Device</div>
-        <div
-            class="qt-aside-modern__header-close icon__close"
-            (click)="close()"
-        ></div>
+        <div class="qt-df">
+            <div
+                class="qt-button --square-md --gray pointer qt-ml-8"
+                (click)="closed()"
+            >
+                <i class="icon__close qt-sz-16 qt-bg-contain"></i>
+            </div>
+        </div>
     </div>
-    <div class="qt-aside-modern__content">
+    <div class="qt-aside-modern__content --required">
         <div class="qt-inputs-row">
             <div class="qt-f100">
                 <app-drop-down
-                    [placeholder]="'Select'"
+                    [placeholder]="'Select type'"
                     [list]="assestType"
                     [search]="true"
                     [change]="true"
@@ -25,7 +29,7 @@
                 ></app-drop-down>
             </div>
         </div>
-        <div class="qt-inputs-row">
+        <div class="qt-inputs-row --required">
             <div
                 class="qt-input-block qt-f100"
                 [ngClass]="{'--input-error':!validate.getName()}"
@@ -40,7 +44,7 @@
                     placeholder="Enter device name"
                 >
                 <mat-error
-                    class="invalid-feedback first-name-invalid"
+                    class="invalid-feedback"
                     *ngIf="!validate.getName()"
                 >
                     Field is required
@@ -91,6 +95,7 @@
                     [search]="true"
                     [change]="true"
                     [title]="'Model'"
+                    [isDisabled]="!device.manufacturerId"
                     (onSelectedItem)="onSelectModel($event)"
                 ></app-drop-down>
             </div>
@@ -121,7 +126,7 @@
                 ></app-date-picker>
             </div>
         </div>
-        <div class="qt-inputs-row">
+        <div class="qt-inputs-row --required">
             <div class="qt-input-block qt-f50">
                 <div class="qt-input-block__label">IP Address</div>
                 <input
@@ -147,7 +152,7 @@
                 >
             </div>
         </div>
-        <div class="qt-inputs-row">
+        <div class="qt-inputs-row --required">
             <div class="qt-input-block qt-f100">
                 <div class="qt-input-block__label">Mac Address</div>
                 <input
