@@ -9,6 +9,7 @@ import { Device } from '../../components/company-devices/class/device';
 import { DeviceCompany } from '../../components/company-devices/class/device-company';
 import { WebsocketService } from '../../services/websocket/websocket.service';
 import { DeviceStatus } from './class/device-status';
+import { ManufactureDevice } from 'src/app/components/company-devices/company-devices-custom-aside/class/manufacture-device';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,7 @@ export class DevicesStateService {
   onUpdateAgentActivityStatus: EventEmitter<any> = new EventEmitter();
   onResetDeviceTiming: EventEmitter<any> = new EventEmitter();
   onOpenAside: EventEmitter<any> = new EventEmitter();
+  onOpenCustomAside: EventEmitter<any> = new EventEmitter();
   onCloseAside: EventEmitter<any> = new EventEmitter();
   onRemoveConnecion: EventEmitter<any> = new EventEmitter();
   onChangeInfoForDevice: EventEmitter<any> = new EventEmitter();
@@ -32,6 +34,7 @@ export class DevicesStateService {
   onInitWebSocket: EventEmitter<any> = new EventEmitter();
   isInitWebSocket: boolean = false;
   preloaderDevices: boolean = true;
+  manufactures: Array<ManufactureDevice> = [];
   // onChangeDevices: EventEmitter<DeviceUpdate> = new EventEmitter();
   constructor(private userStateService: UsersStateService,
     private devicesService: DevicesService,
@@ -49,6 +52,12 @@ export class DevicesStateService {
       if (newChange.action === 'DEVICE_INSTALLED') this.onChangeDevice.emit(newChange);
       if (newChange.action === 'DEVICE_COUNT') this.onChangeDeviceCount.emit(newChange);
     })
+  }
+  public setManufactures(data) {
+    this.manufactures = data;
+  }
+  public getManufactures() {
+    return this.manufactures;
   }
   public changeDevice(allDevices, newChange) {
     if (newChange.action === 'DEVICE_UNINSTALLED') {
@@ -126,6 +135,9 @@ export class DevicesStateService {
   }
   public getOnOpenAside() {
     return this.onOpenAside;
+  }
+  public openAsideAddCustom() {
+    this.onOpenCustomAside.emit(null);
   }
   public setCloseAside() {
     this.onCloseAside.emit();

@@ -32,12 +32,20 @@ export class DevicesService {
    * Get devices from company
    * @param companyId - id of company
    */
-
+  public getManufactures() {
+    return this.http.get(this.apiUrl + `devices/manufactures`);
+  }
+  public getModels(id) {
+    return this.http.get(this.apiUrl + `devices/manufactures/models?manufacturerId=${id}`);
+  }
   public runScanDevices(companyId) {
     return this.http.get(this.apiUrl + `devices/refreshNetworkScan?companyId=${companyId}`);
   }
   public getCountByCompany(ids) {
     return this.http.post(this.apiUrl + `devices/count`, { companies: ids });
+  }
+  public addCustomDevice(data) {
+    return this.http.post(this.apiUrl + `devices`, data);
   }
   public remoteInstall(data) {
     return this.http.post(this.apiUrl + `devices/remoteInstall`, data);

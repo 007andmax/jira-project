@@ -31,4 +31,7 @@ export class CompanyDevicesHeaderComponent implements OnInit {
   openSidebar() {
     this.devicesStateService.setOnOpenAside(new DeviceCompanyAsideParams('SYSTEM', this.devices.filter(item => item.selected && item.agentId).map(item => item.agentId)));
   }
+  addDevice() {
+    this.devicesStateService.openAsideAddCustom();
+  }
 }
