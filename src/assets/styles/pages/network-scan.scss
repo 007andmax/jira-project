@@ -4,6 +4,10 @@
   padding: 24px;
   min-height: calc(100vh - #{$header-height});
   background-color: $background;
+  .qt-page-list__header-thead__row {
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+  }
   &__content {
     max-width: 1144px;
     margin: 0 auto;
@@ -227,7 +231,7 @@
         }
       }
       &__delete {
-        flex: 0 0 40px;
+        flex: 0 0 42px;
         padding-right: 16px;
       }
     }

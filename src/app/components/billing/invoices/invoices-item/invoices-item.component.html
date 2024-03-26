@@ -26,10 +26,12 @@
         [textContent]="invoice.number"
         (click)="onShowPreviewInvoice()"
     ></div>
-    <div
-        class="invoce-table__company"
+    <div class="invoce-table__company ellipsis">
+      <span
+        class="ellipsis"
         [textContent]="(company) ? company.name : ''"
-    ></div>
+      ></span>
+    </div>
     <div class="invoce-table__status">
         <span
             class="tag__modern --warning"
@@ -51,14 +53,18 @@
         class="invoce-table__read-on"
         [textContent]="getDate(invoice.readedAt)"
     ></div>
-    <div
-        class="invoce-table__amount"
+    <div class="invoce-table__amount ellipsis">
+      <span
+        class="ellipsis"
         [textContent]="invoice.totalSum | currency"
-    ></div>
-    <div
-        class="invoce-table__balance-due"
+      ></span>
+    </div>
+    <div class="invoce-table__balance-due">
+      <span
+        class="ellipsis"
         [textContent]="((invoice.totalSum || invoice.sum) - invoice.paidSum) | currency"
-    ></div>
+      ></span>
+    </div>
     <div
         class="invoce-table__menu"
         ngbDropdown
