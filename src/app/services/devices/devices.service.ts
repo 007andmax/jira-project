@@ -6,8 +6,11 @@ import { Subject } from 'rxjs';
 import { ConstantsStateService } from '../../states/constants/constants-state.service';
 
 import { Ticket } from '../../components/tickets/class/ticket';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Device } from '../../components/company-devices/class/device';
+import { error } from 'console';
+import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 /**
  * Device service to work with api
@@ -25,7 +28,9 @@ export class DevicesService {
    */
   public constructor(
     private http: HttpClient,
-    private constantsStateService: ConstantsStateService
+    private constantsStateService: ConstantsStateService,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService
   ) { }
 
   /**
@@ -84,6 +89,14 @@ export class DevicesService {
       agentIds: agentIds,
       actions: actions
     });
+  }
+  public deleteCustomDevice(deviceId) {
+    return this.http.delete(this.apiUrl + `/devices/${deviceId}`).pipe(
+      tap(data => {
+        this.toastrService.success("The custom device has been successfully deleted");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   sendUninstallAgentRequest(companyId, devicesIds) {
 

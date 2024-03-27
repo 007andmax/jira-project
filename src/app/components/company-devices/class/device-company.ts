@@ -3,6 +3,8 @@ import { Device } from './device';
 export class DeviceCompany extends Device {
     companyId: string;
     selected: boolean = false;
+    isCustom: boolean;
+    name: string;
     constructor(data, companyId) {
         super(data);
         this.companyId = companyId;

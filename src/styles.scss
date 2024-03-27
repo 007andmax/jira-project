@@ -544,11 +544,11 @@ documents-edit-info {
         }
         &:before {
           left: 12px;
-          top: 15px;
+          top: 10px;
           position: absolute;
           content: "";
-          width: 16px;
-          height: 16px;
+          width: 20px;
+          height: 20px;
           background: url("./assets/img/icons/tag.svg");
         }
         input {
@@ -1330,11 +1330,11 @@ app-quotes-item {
         border: none;
         &::before {
           left: 12px;
-          top: 9px;
+          top: 10px;
           position: absolute;
           content: "";
-          width: 16px;
-          height: 16px;
+          width: 20px;
+          height: 20px;
           background: url("/assets/img/icons/tag.svg");
         }
       }

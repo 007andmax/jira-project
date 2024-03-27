@@ -114,6 +114,10 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
           });
         }
         if (this.confirmStateService.getConfirmAction() === REMOVE_DEVICES) {
+          if (this.devicesStateService.getDevicesForRemove().length == 1 && this.devicesStateService.getDevicesForRemove()[0].isCustom) {
+            this.removeCustomDevice(this.devicesStateService.getDevicesForRemove()[0].id);
+            return;
+          }
           this.devicesService.sendUninstallAgentRequest(this.companyId, this.devicesStateService.getDevicesForRemove().map(item => item.id)).subscribe(data => {
             this.onChangeSelect();
           });
@@ -170,7 +174,11 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnSendDeviceStatus);
   }
+  removeCustomDevice(id) {
+    this.devicesService.deleteCustomDevice(id).subscribe(data => {
 
+    })
+  }
   getDevice(id) {
     this.devicesService.getCompanyDevices(id).subscribe((data: any) => {
       if (Object.keys(data).length > 0) {

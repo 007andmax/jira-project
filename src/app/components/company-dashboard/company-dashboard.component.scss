@@ -1860,11 +1860,11 @@ app-company-dash-tags {
         min-height: 48px;
         &::before {
             left: 12px;
-            top: 15px;
+            top: 10px;
             position: absolute;
             content: "";
-            width: 16px;
-            height: 16px;
+            width: 20px;
+            height: 20px;
             background: url("./../../../assets/img/icons/tag.svg");
         }
         input {

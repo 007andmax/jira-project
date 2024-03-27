@@ -91,7 +91,10 @@
         ></app-company-devices-tags>
     </td>
     <td class="company-devices-table__logged-user">
-        <div class="qt-df qt-fd-c">
+        <div
+            class="qt-df qt-fd-c"
+            *ngIf="!device.isCustom"
+        >
             <span
                 class="logged-name qt-fw-600"
                 [textContent]="device.userName || ''"
@@ -112,7 +115,10 @@
         </div>
     </td>
     <td class="company-devices-table__up-time">
-        <div class="qt-df qt-fd-c">
+        <div
+            class="qt-df qt-fd-c"
+            *ngIf="!device.isCustom"
+        >
             <span>
                 <span *ngIf="device.online && returnTimeFormatUpTime(device.timing.online).days > 0">
                     {{returnTimeFormatUpTime(device.timing.online).days}} day
@@ -157,11 +163,14 @@
     </td>
     <td class="company-devices-table__windows">
         <span
-            *ngIf="device.system"
+            *ngIf="device.system && !device.isCustom"
             class="company-devices-table__ip-windows-text"
             [textContent]="getWindows()"
         ></span>
-        <div class="company-devices-table__system-network-buttons">
+        <div
+            class="company-devices-table__system-network-buttons"
+            *ngIf="!device.isCustom"
+        >
             <div
                 class="qt-df qt-ai-c qt-mr-20 qt-pointer"
                 (click)="openAside('SYSTEM')"

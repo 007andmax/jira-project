@@ -23,7 +23,7 @@
  }
 app-company-devices-custom-drop-down {
       &::before {
-          color: $gray-500;
+          color: $gray-900;
           font-size: 13px;
           font-weight: 500;
           content: "Tags";
@@ -48,4 +48,9 @@ app-company-devices-custom-drop-down {
 }
 .qt-aside-modern {
     width: 480px;
+}
+/deep/.placeholder-date {
+.qt-input-block__input {
+    color: $gray-400 !important;
+}
 }

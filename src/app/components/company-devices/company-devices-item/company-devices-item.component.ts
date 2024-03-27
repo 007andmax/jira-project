@@ -147,6 +147,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     }
   }
   getLabelForEdit() {
+    if (this.device.isCustom) return this.device.name;
     if (this.device.label) return this.device.label;
     return this.device.hostName || this.device.ip;
   }
