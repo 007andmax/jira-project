@@ -11,8 +11,10 @@ export class CustomDevice {
     "manufacturerId": number;
     "modelId": number;
     "asset_tag": string;
-    "install_date": string = new Date().toISOString();
-    "warranty_date": string = new Date().toISOString();
+    install_date_int: number = 0;
+    warranty_date_int: number = 0;
+    "install_date": string;
+    "warranty_date": string;
     "location": string;
     "notes": string;
     "tags": [];
@@ -35,6 +37,7 @@ export class CustomDevice {
     }
     public setInstallDate(due, currentCompany) {
         this.install_date = this.parseDateFromDatePicker(due, currentCompany);
+        this.install_date_int = new Date(due).getTime();
         console.log("this.install_date", this.install_date);
     }
     parseDateFromDatePicker(due, currentCompany) {
@@ -53,6 +56,7 @@ export class CustomDevice {
     }
     public setWarrentyDate(due, currentCompany) {
         this.warranty_date = this.parseDateFromDatePicker(due, currentCompany);
+        this.warranty_date_int = new Date(due).getTime();
         console.log("this.warranty_date", this.warranty_date);
     }
     public getDataForRequest() {

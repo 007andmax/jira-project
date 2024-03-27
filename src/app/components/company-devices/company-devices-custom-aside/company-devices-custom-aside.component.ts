@@ -10,6 +10,7 @@ import { DeviceTagsStateService } from 'src/app/states/device-tags/device-tags-s
 import { DeviceTag } from '../../setting/manage-tags/manage-tags-devices/class/device-tag';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { DatePickerComponent } from '../../shared/date-picker/date-picker.component';
 
 @Component({
   selector: 'app-company-devices-custom-aside',
@@ -35,6 +36,8 @@ export class CompanyDevicesCustomAsideComponent implements OnInit {
   validate: ValidateCustomAside = new ValidateCustomAside();
   opened: boolean = false;
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
+  @ViewChild('installDateDP') installDateDP: DatePickerComponent;
+  @ViewChild('warrantyDateDP') warrantyDateDP: DatePickerComponent;
   constructor(private devicesStateService: DevicesStateService,
     private deviceTagsStateService: DeviceTagsStateService,
     private companiesState: CompaniesStateService,
@@ -53,9 +56,9 @@ export class CompanyDevicesCustomAsideComponent implements OnInit {
     })
     this.devicesStateService.onOpenCustomAside.subscribe(data => {
       this.opened = true;
-      this.device.setInstallDate(new Date(), this.companiesState.getCurrentCompany());
-      this.device.setWarrentyDate(new Date(), this.companiesState.getCurrentCompany());
       this.device.setCompanyId(this.companiesState.getCompanyRoutingId());
+      this.installDateDP.setEditDate(new Date().getTime());
+      this.warrantyDateDP.setEditDate(new Date().getTime());
     })
   }
   onSelectTags(data) {

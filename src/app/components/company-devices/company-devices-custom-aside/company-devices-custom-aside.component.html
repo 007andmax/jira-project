@@ -1,6 +1,6 @@
 <div
     class="qt-aside-modern users-page__aside"
-    *ngIf="opened"
+    [hidden]="!opened"
 >
     <!-- *ngIf="opened" -->
     <div class="qt-aside-modern__header">
@@ -104,11 +104,12 @@
             <div class="qt-input-block qt-f100 --required">
                 <div class="app-drop-down__title">Install Date</div>
                 <app-date-picker
-                    #startDateDP
+                    #installDateDP
+                    [type]="'DETAIL_TICKET_UPDATE'"
                     [formatDate]="formatDate"
-                    [editMode]="true"
                     [useMinDate]="false"
-                    [editDate]="startDate"
+                    [editMode]="true"
+                    [editDate]="device.install_date_int"
                     (onChange)="onChangeInstallDate($event)"
                 ></app-date-picker>
             </div>
@@ -117,11 +118,12 @@
             <div class="qt-input-block qt-f100 --required">
                 <div class="app-drop-down__title">Warrenty Date</div>
                 <app-date-picker
-                    #startDateDP
+                    #warrantyDateDP
+                    [type]="'DETAIL_TICKET_UPDATE'"
                     [formatDate]="formatDate"
                     [editMode]="true"
                     [useMinDate]="false"
-                    [editDate]="startDate"
+                    [editDate]="device.warranty_date_int"
                     (onChange)="onChangeWarrentyDate($event)"
                 ></app-date-picker>
             </div>
@@ -140,7 +142,7 @@
                     class="invalid-feedback"
                     *ngIf="!validate.getIpAdress()"
                 >
-                    Field is required
+                    Enter a valid IP value
                 </mat-error>
             </div>
             <div class="qt-input-block qt-f50">
@@ -154,7 +156,7 @@
         </div>
         <div class="qt-inputs-row --required">
             <div class="qt-input-block qt-f100">
-                <div class="qt-input-block__label">Mac Address</div>
+                <div class="qt-input-block__label">MAC address</div>
                 <input
                     type="text"
                     [(ngModel)]="device.mac_address"
@@ -166,7 +168,7 @@
                     class="invalid-feedback"
                     *ngIf="!validate.getMacAdress()"
                 >
-                    Field is required
+                    Enter a valid MAC address value
                 </mat-error>
             </div>
         </div>
