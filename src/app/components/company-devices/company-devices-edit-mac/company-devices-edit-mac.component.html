@@ -1,0 +1,14 @@
+<input
+    type="text"
+    [ngClass]="{'--input-error': !validate.getMacAdress()}"
+    class="device-table__input-name"
+    [(ngModel)]="value"
+    (blur)="onCheckValue()"
+    [disabled]="isDisabled"
+>
+<mat-error
+    class="invalid-feedback"
+    *ngIf="!validate.getMacAdress()"
+>
+    Enter a valid IP value
+</mat-error>

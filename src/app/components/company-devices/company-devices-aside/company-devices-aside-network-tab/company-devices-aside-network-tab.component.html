@@ -20,9 +20,31 @@
         <div class="sidebar-network__info">
             <div class="sidebar-network__info-title">IP:</div>
             <div
+                *ngIf="device"
                 class="sidebar-network__info-text"
                 [textContent]="chackDefaultValue(getNetworkAdapterField('ip_address'))"
             ></div>
+            <app-company-devices-edit-ip
+                *ngIf="customDevice"
+                [field]="customDevice.ip"
+                [title]="'IP address'"
+                [isDisabled]="customerPortalStateService.isCustomerPortal"
+                class="company-device-edit-name"
+                (onChange)="onChangeIp($event)"
+            ></app-company-devices-edit-ip>
+        </div>
+        <div
+            class="sidebar-network__info"
+            *ngIf="customDevice"
+        >
+            <div class="sidebar-network__info-title">Port:</div>
+            <app-company-devices-edit-label
+                [field]="customDevice.port"
+                [title]="'Port'"
+                class="company-device-edit-name"
+                [isDisabled]="customerPortalStateService.isCustomerPortal"
+                (onChange)="onChangePort($event)"
+            ></app-company-devices-edit-label>
         </div>
         <div class="sidebar-network__info">
             <div class="sidebar-network__info-title">Subnet Mask:</div>
@@ -55,10 +77,19 @@
         <div class="sidebar-network__info">
             <div class="sidebar-network__info-title">MAC:</div>
             <div
+                *ngIf="device"
                 class="sidebar-network__info-text"
                 [textContent]="chackDefaultValue(formatMacAddress(getNetworkAdapterField('mac')))"
             >
             </div>
+            <app-company-devices-edit-mac
+                *ngIf="customDevice"
+                [field]="customDevice.ip"
+                [title]="'IP address'"
+                [isDisabled]="customerPortalStateService.isCustomerPortal"
+                class="company-device-edit-name"
+                (onChange)="onChangeIp($event)"
+            ></app-company-devices-edit-mac>
         </div>
         <div class="sidebar-network__info">
             <div class="sidebar-network__info-title">DHCP:</div>

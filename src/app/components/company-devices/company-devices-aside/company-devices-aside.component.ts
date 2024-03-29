@@ -13,6 +13,7 @@ import { DeviceExtended } from '../class/device-extended';
 import { CompanyDevicesRemoteAccessComponent } from '../company-devices-remote-access/company-devices-remote-access.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { DeviceCompany } from '../class/device-company';
 
 @Component({
   selector: 'app-company-devices-aside',
@@ -21,9 +22,11 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 })
 export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
   @Input() companyId: string;
+  @Input() customDevices: Array<DeviceCompany> = [];
   tab: string = "SYSTEM";
   devices: Array<DeviceExtended> = [];
   currentDevice: DeviceExtended;
+  customDevice: DeviceCompany;
   open: boolean = false;
   showRemoteAccess: boolean = false;
   showPreloader: boolean = true;
@@ -40,15 +43,28 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
   ngOnInit() {
     let getOnOpenAside = this.devicesStateService.getOnOpenAside().subscribe((data: DeviceCompanyAsideParams) => {
       if (this.open) {
-        let find = this.devices.find(item => item.agentId === data.ids[0]);
+        let find = data.devices[0].isCustom ? this.customDevices.find(item => item.deviceId === data.devices[0].deviceId) : this.devices.find(item => item.agentId === data.devices[0].agentId);
         if (find) {
-          this.currentDevice = find;
+          this.currentDevice = new DeviceExtended(find, this.companyId);
           return;
         }
       }
       this.open = true;
+      console.log("data.devices[0]", data.devices[0]);
+      let list = data.devices.filter(item => !item.isCustom);
+      if (list.length == 0) {
+        if (!this.currentDevice) {
+          if (!data.devices[0].isCustom) this.currentDevice = new DeviceExtended(data.devices[0], this.companyId);
+          if (data.devices[0]) this.customDevice = data.devices[0];
+        } else {
+          this.currentDevice = new DeviceExtended(this.devices[this.devices.length - 1], this.companyId);;
+        }
+        this.tab = data.type;
+        this.showPreloader = false;
+      }
+      console.log("this.currentDevice", this.currentDevice);
       forkJoin(
-        [...data.ids.map(item => this.devicesService.getDeviceExtended(this.companyId, item))]
+        [...list.map(item => item.agentId).map(item => this.devicesService.getDeviceExtended(this.companyId, item))]
       )
         .subscribe(res => {
           res.forEach(item => {
@@ -119,6 +135,7 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
     this.open = false;
     this.showPreloader = true;
     this.currentDevice = null;
+    this.customDevice = null;
     this.devices = [];
     this.tab = "SYSTEM";
     this.devicesStateService.setCloseAside();

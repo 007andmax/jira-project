@@ -25,6 +25,9 @@ import { PreloaderTicketModule } from '../shared/preloader-ticket/preloader-tick
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { CompanyDevicesCustomDropDownComponent } from './company-devices-custom-aside/company-devices-custom-drop-down/company-devices-custom-drop-down.component';
 import { CompanyDevicesCustomAsideModule } from './company-devices-custom-aside/company-devices-custom-aside.module';
+import { CompanyDevicesEditIpComponent } from './company-devices-edit-ip/company-devices-edit-ip.component';
+import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
+import { CompanyDevicesEditMacComponent } from './company-devices-edit-mac/company-devices-edit-mac.component';
 
 
 @NgModule({
@@ -40,17 +43,22 @@ import { CompanyDevicesCustomAsideModule } from './company-devices-custom-aside/
         CompanyDevicesAsideNetworkTabComponent,
         CompanyDevicesAsideSoftwareComponent,
         CompanyDevicesAsideUpdatesComponent,
+        CompanyDevicesEditIpComponent,
+        CompanyDevicesEditMacComponent,
 
     ],
     imports: [
         CommonModule,
         FormsModule,
         NgbModule,
+        MatSelectModule,
+        MatChipsModule,
         CompanyDevicesEditLabelModule,
         DatePickerModule,
         CompanyDevicesRoutingModule,
         CompanyDevicesTagsModule,
-        CompanyDevicesCustomAsideModule
+        CompanyDevicesCustomAsideModule,
+        TextAreaModule
     ],
 
 

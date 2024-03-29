@@ -22,7 +22,10 @@
             </ng-template>
         </div>
         <div class="company-device-aside__header qt-df qt-ai-c qt-jc-sb">
-            <div class="qt-df qt-ai-c">
+            <div
+                class="qt-df qt-ai-c"
+                *ngIf="currentDevice"
+            >
                 <div
                     class="icon qt-sz-24 qt-mr-12 qt-bg-contain"
                     [ngClass]="{'icon__computer' : currentDevice.iconName === 'workstation' || !currentDevice.iconName,
@@ -40,6 +43,7 @@
             </div>
             <div class="qt-df qt-ai-c">
                 <div
+                    *ngIf="currentDevice"
                     ngbDropdown
                     container="body"
                     class="qt-overflow-v"
@@ -168,6 +172,7 @@
         <div class="company-device-aside__body">
             <app-company-devices-aside-system
                 [device]="currentDevice"
+                [customDevice]="customDevice"
                 *ngIf="tab === 'SYSTEM'"
             ></app-company-devices-aside-system>
             <app-company-devices-aside-network-tab

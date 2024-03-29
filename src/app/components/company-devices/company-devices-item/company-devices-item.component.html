@@ -1,4 +1,4 @@
-<tr [ngClass]="{'company-device-hover':device.agentId, '--ofline': !device.online}">
+<tr [ngClass]="{'company-device-hover':device.agentId || device.isCustom, '--ofline': !device.online}">
     <td class="company-devices-table__check">
         <div class="qt-df">
             <label class="qt-checkbox">
@@ -163,14 +163,11 @@
     </td>
     <td class="company-devices-table__windows">
         <span
-            *ngIf="device.system && !device.isCustom"
+            *ngIf="device.system"
             class="company-devices-table__ip-windows-text"
             [textContent]="getWindows()"
         ></span>
-        <div
-            class="company-devices-table__system-network-buttons"
-            *ngIf="!device.isCustom"
-        >
+        <div class="company-devices-table__system-network-buttons">
             <div
                 class="qt-df qt-ai-c qt-mr-20 qt-pointer"
                 (click)="openAside('SYSTEM')"
@@ -181,6 +178,7 @@
             <div
                 class="qt-df qt-ai-c qt-pointer"
                 (click)="openAside('NETWORK')"
+                *ngIf="!device.isCustom"
             >
                 <div class="icon__network qt-ic-c qt-mr-6 qt-sz-16"></div>
                 <div>Network</div>
@@ -192,7 +190,10 @@
             class="qt-pl-30 company-devices-table__ip-address-text"
             [textContent]="device.ip"
         ></span>
-        <div class="company-devices-table__ip-address-buttons qt-pl-15">
+        <div
+            class="company-devices-table__ip-address-buttons qt-pl-15"
+            *ngIf="!device.isCustom"
+        >
             <div
                 class="qt-df qt-ai-c qt-mr-20 qt-pointer"
                 (click)="openAside('SOFTWARE')"

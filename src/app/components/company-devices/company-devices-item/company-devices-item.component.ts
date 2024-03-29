@@ -78,7 +78,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     })
   }
   openAside(type) {
-    if (this.device.agentId) this.devicesStateService.setOnOpenAside(new DeviceCompanyAsideParams(type, [this.device.agentId]));
+    if (this.device.agentId || this.device.isCustom) this.devicesStateService.setOnOpenAside(new DeviceCompanyAsideParams(type, [this.device]));
   }
   onChangeTags(data) {
     let forRemove = [];

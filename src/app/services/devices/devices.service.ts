@@ -40,6 +40,9 @@ export class DevicesService {
   public getManufactures() {
     return this.http.get(this.apiUrl + `devices/manufactures`);
   }
+  public editFieldDevice(data) {
+    return this.http.put(this.apiUrl + `devices`, data);
+  }
   public getModels(id) {
     return this.http.get(this.apiUrl + `devices/manufactures/models?manufacturerId=${id}`);
   }

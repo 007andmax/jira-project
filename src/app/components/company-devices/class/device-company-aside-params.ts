@@ -1,8 +1,10 @@
+import { DeviceCompany } from "./device-company";
+
 export class DeviceCompanyAsideParams {
     type: string;
-    ids: Array<string>;
-    constructor(type, ids) {
+    devices: Array<DeviceCompany>;
+    constructor(type, devices) {
         this.type = type;
-        this.ids = ids;
+        this.devices = devices;
     }
 }
