@@ -33,7 +33,7 @@ export class DeviceSettingModelsAddComponent implements OnInit {
     this.modelForm = this.formBuilder.group({
       model: [
         "",
-        [Validators.required, Validators.minLength(2), Validators.maxLength(30)]
+        [Validators.required, Validators.minLength(1), Validators.maxLength(255)]
       ],
       manufacturerId: [""],
     })

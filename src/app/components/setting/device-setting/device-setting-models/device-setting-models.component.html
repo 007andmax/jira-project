@@ -12,6 +12,7 @@
                 <div class="qt-w100 qt-input-block">
                     <app-drop-down
                         [class]="['qt-select-input-40']"
+                        [placeholder]="'Select'"
                         [list]="manufactures"
                         [field]="'name'"
                         [sort]="false"
@@ -49,7 +50,7 @@
             *ngIf="!showPreloader"
         >
             <div
-                class="text-center"
+                class="text-center qt-df qt-jc-c qt-mb-24 qt-mt-24"
                 *ngIf="models.length == 0"
             >
                 No model to show

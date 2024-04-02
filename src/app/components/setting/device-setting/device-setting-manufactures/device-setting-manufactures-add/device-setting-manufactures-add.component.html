@@ -13,16 +13,16 @@
                     <input
                         type="text"
                         class="form-input"
-                        formControlName="name"
+                        formControlName="manufacturer"
                         placeholder="Enter Manufacture Name"
-                        #name
-                        [ngClass]="{ 'is-invalid': submitted && f1.name.errors }"
+                        #manufacturer
+                        [ngClass]="{ 'is-invalid': submitted && f1.manufacturer.errors }"
                     >
                     <div
-                        *ngIf="submitted && f1.name.errors"
+                        *ngIf="submitted && f1.manufacturer.errors"
                         class="invalid-feedback error-text-align"
                     >
-                        <div *ngIf="f1.name.errors.required">Name is required</div>
+                        <div *ngIf="f1.manufacturer.errors.required">Name is required</div>
                     </div>
                 </div>
                 <div class="qt-df qt-w100 qt-mt-32">

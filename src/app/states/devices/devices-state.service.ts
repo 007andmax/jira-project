@@ -55,6 +55,7 @@ export class DevicesStateService {
       if (newChange.action === 'DEVICE_COUNT') this.onChangeDeviceCount.emit(newChange);
       if (newChange.action === 'MANUFACTURE_SAVED') {
         this.manufactures.push(new ManufactureDevice(newChange.data));
+        this.manufactures.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0);
         this.onGetManufactures.emit(this.manufactures);
       }
       if (newChange.action === 'MANUFACTURE_MODULE_SAVED') this.onAddModel.emit(newChange.data);
@@ -63,6 +64,7 @@ export class DevicesStateService {
   public initGetManufactures() {
     this.devicesService.getManufactures().subscribe((data: any) => {
       this.manufactures = data.manufacturers.map(item => new ManufactureDevice(item));
+      this.manufactures.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0);
       this.onGetManufactures.emit(this.manufactures);
     })
   }

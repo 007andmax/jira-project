@@ -41,13 +41,27 @@ export class DevicesService {
     return this.http.get(this.apiUrl + `devices/manufactures`);
   }
   public addManufacture(data) {
-    return this.http.post(this.apiUrl + `devices/manufactures`, data);
+    this.appStateService.setCustomeError(true, "The error has occurred, please check your entries");
+    return this.http.post(this.apiUrl + `devices/manufactures`, data).pipe(
+      tap(data => {
+        this.appStateService.setCustomeError(false);
+        this.toastrService.success("The new Manufacturer has been successfully created");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public editFieldDevice(data) {
     return this.http.put(this.apiUrl + `devices`, data);
   }
   public addModel(data) {
-    return this.http.post(this.apiUrl + `devices/manufactures/models`, data);
+    this.appStateService.setCustomeError(true, "The error has occurred, please check your entries");
+    return this.http.post(this.apiUrl + `devices/manufactures/models`, data).pipe(
+      tap(data => {
+        this.appStateService.setCustomeError(false);
+        this.toastrService.success("The new Model has been successfully created");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public getModels(id) {
     return this.http.get(this.apiUrl + `devices/manufactures/models?manufacturerId=${id}`);

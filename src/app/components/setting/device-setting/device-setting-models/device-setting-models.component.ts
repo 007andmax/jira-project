@@ -39,6 +39,7 @@ export class DeviceSettingModelsComponent implements OnInit {
       this.showPreloader = true;
       this.devicesService.getModels(data.id).subscribe((res: any) => {
         this.models = res.models.map(item => new ModelDevice(item))
+        this.models.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0);
         this.showPreloader = false;
       })
     }

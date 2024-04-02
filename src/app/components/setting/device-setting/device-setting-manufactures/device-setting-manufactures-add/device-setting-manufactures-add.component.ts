@@ -18,9 +18,9 @@ export class DeviceSettingManufacturesAddComponent implements OnInit {
 
   ngOnInit() {
     this.manufactureForm = this.formBuilder.group({
-      name: [
+      manufacturer: [
         "",
-        [Validators.required, Validators.minLength(1), Validators.maxLength(30)]
+        [Validators.required, Validators.minLength(1), Validators.maxLength(255)]
       ],
     })
   }
@@ -28,7 +28,7 @@ export class DeviceSettingManufacturesAddComponent implements OnInit {
     this.submitted = true;
 
     // add
-    this.devicesService.addManufacture({ "manufacturer": this.manufactureForm.value.name })
+    this.devicesService.addManufacture(this.manufactureForm.value)
       .subscribe(
         () => {
           //this.getManufacturers(this.techCompany.id)
