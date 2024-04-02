@@ -32,6 +32,8 @@ export class DevicesStateService {
   onSendDeviceStatus: EventEmitter<any> = new EventEmitter();
   onLaunchRemoteApp: EventEmitter<any> = new EventEmitter();
   onInitWebSocket: EventEmitter<any> = new EventEmitter();
+  onGetManufactures: EventEmitter<any> = new EventEmitter();
+  onAddModel: EventEmitter<any> = new EventEmitter();
   isInitWebSocket: boolean = false;
   preloaderDevices: boolean = true;
   manufactures: Array<ManufactureDevice> = [];
@@ -51,6 +53,17 @@ export class DevicesStateService {
       if (newChange.action === 'REMOTE_CONNECTION' && newChange.data.status === 'offline') this.closedRemoveConnecion(newChange.data.id);
       if (newChange.action === 'DEVICE_INSTALLED') this.onChangeDevice.emit(newChange);
       if (newChange.action === 'DEVICE_COUNT') this.onChangeDeviceCount.emit(newChange);
+      if (newChange.action === 'MANUFACTURE_SAVED') {
+        this.manufactures.push(new ManufactureDevice(newChange.data));
+        this.onGetManufactures.emit(this.manufactures);
+      }
+      if (newChange.action === 'MANUFACTURE_MODULE_SAVED') this.onAddModel.emit(newChange.data);
+    })
+  }
+  public initGetManufactures() {
+    this.devicesService.getManufactures().subscribe((data: any) => {
+      this.manufactures = data.manufacturers.map(item => new ManufactureDevice(item));
+      this.onGetManufactures.emit(this.manufactures);
     })
   }
   public setManufactures(data) {

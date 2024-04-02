@@ -1,0 +1,102 @@
+<div class="cmn-area">
+    <div
+        class="tab-pane__table"
+        [ngClass]="{'cleat-height-dataTable':!showPreloader}"
+    >
+        <div class="tab-pane__row">
+            <div class="tab-pane__subtitle">Manufactures</div>
+            <div
+                id="authentication-type"
+                class="tab-pane-input__row "
+            >
+                <div class="qt-w100 qt-input-block">
+                    <app-drop-down
+                        [class]="['qt-select-input-40']"
+                        [list]="manufactures"
+                        [field]="'name'"
+                        [sort]="false"
+                        [isBlockClear]="true"
+                        (onSelectedItem)="onSelectManufacture($event)"
+                    >
+                    </app-drop-down>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane__table-header">
+            <div class="tab-pane__table-row">
+                <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+                    <label class="qt-checkbox">
+                        <input
+                            type="checkbox"
+                            [(ngModel)]="selectAllDevices"
+                            (change)="toogleDevices($event.target.checked)"
+                        >
+                        <span></span>
+                    </label>
+                </div>
+                <div
+                    class="tab-pane__table-cell crm-settings-company-industry-table__count pointer"
+                    (click)="onFilter('name')"
+                >
+                    Model
+                    <div class="qt-table-modern__sorting--new"></div>
+                </div>
+                <div class="tab-pane__table-cell crm-settings-company-industry-table__action"></div>
+            </div>
+        </div>
+        <div
+            class="tab-pane__table-body"
+            *ngIf="!showPreloader"
+        >
+            <div
+                class="text-center"
+                *ngIf="models.length == 0"
+            >
+                No model to show
+            </div>
+            <div
+                class="tab-pane__table-row"
+                *ngFor="let model of models; let i = index"
+            >
+                <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+                    <label class="qt-checkbox">
+                        <input
+                            type="checkbox"
+                            [(ngModel)]="model.selected"
+                            (change)="onSelect(i,$event.target.checked)"
+                        >
+                        <span></span>
+                    </label>
+                </div>
+                <div
+                    class="tab-pane__table-cell crm-settings-company-industry-table__count"
+                    [textContent]="model.name"
+                >
+                </div>
+                <div class="tab-pane__table-cell crm-settings-company-industry-table__action">
+                    <div class="qt-df qt-ai-c">
+                        <app-dynamic-tooltip
+                            [content]="'Remove'"
+                            [position]="'top'"
+                            #removeTooltip
+                        ></app-dynamic-tooltip>
+                        <div
+                            data-tooltip="Remove"
+                            class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                            (click)="removeConfirmModel(model)"
+                            (mouseenter)="removeTooltip.show($event.target)"
+                            (mouseleave)="removeTooltip.hide()"
+                        >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div
+    class="loading-container"
+    *ngIf="showPreloader"
+>
+    <div class="loading"></div>
+</div>

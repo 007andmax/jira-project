@@ -31,7 +31,7 @@ export class DeviceSettingComponent implements OnInit {
   addDeviceType: boolean = false;
   addManufacture: boolean = false;
   addModel: boolean = false;
-  activeTab: string = "deviceType";
+  activeTab: string = "manufacture";
   constructor(private settingStateService: SettingStateService,
     private agentService: AgentService,
     private formBuilder: FormBuilder,

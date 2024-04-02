@@ -53,18 +53,26 @@
                         (onClose)="onClosedAddDeviceType()"
                         (onAdded)="onAddDeviceType($event)"
                     ></add-device-type>
-                    <add-manufacture
+                    <app-device-setting-manufactures-add
+                        *ngIf="addManufacture"
+                        (onClose)="onClosedAddManufacture()"
+                    ></app-device-setting-manufactures-add>
+                    <!-- <add-manufacture
                         *ngIf="addManufacture"
                         [techCompany]="techCompany"
                         (onClose)="onClosedAddManufacture()"
                         (onAdded)="onAddManufacture($event)"
-                    ></add-manufacture>
-                    <add-model
+                    ></add-manufacture> -->
+                    <app-device-setting-models-add
+                        *ngIf="addModel"
+                        (onClose)="onClosedAddModel()"
+                    ></app-device-setting-models-add>
+                    <!-- <add-model
                         *ngIf="addModel"
                         [techCompany]="techCompany"
                         (onClose)="onClosedAddModel()"
                         (onAdded)="onAddModel($event)"
-                    ></add-model>
+                    ></add-model> -->
                 </div>
             </div>
         </div>
@@ -73,21 +81,21 @@
             [destroyOnHide]="true"
         >
             <!-- Device Type -->
-            <ngb-tab
+            <!-- <ngb-tab
                 title="Device Type"
                 id="deviceType"
             >
                 <ng-template ngbTabContent>
                     <device-setting-device-type #deviceType></device-setting-device-type>
                 </ng-template>
-            </ngb-tab>
+            </ngb-tab> -->
             <!-- Manufacture -->
             <ngb-tab
                 title="Manufacture"
                 id="manufacture"
             >
                 <ng-template ngbTabContent>
-                    <device-setting-manufacture #manufacture></device-setting-manufacture>
+                    <app-device-setting-manufactures #manufacture></app-device-setting-manufactures>
                 </ng-template>
             </ngb-tab>
             <!-- Model -->
@@ -96,10 +104,10 @@
                 id="model"
             >
                 <ng-template ngbTabContent>
-                    <device-setting-model
+                    <app-device-setting-models
                         #model
                         (onSelectManufactureId)="onSelectManufactureId($event)"
-                    ></device-setting-model>
+                    ></app-device-setting-models>
                 </ng-template>
             </ngb-tab>
         </ngb-tabset>

@@ -194,12 +194,12 @@ const routes: Routes = [
     loadChildren: './components/setting/commission/commission.module#CommissionModule',
     canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
   },
-  /* {
-     path: ':domain/setting/deviceSetting',
-     loadChildren: './components/setting/device-setting/device-setting.module#DeviceSettingModule',
-     // canActivate: [PermissionNoSuperAdminService]
-     canActivate: [TestPermissionService]
-   },*/
+  {
+    path: ':domain/setting/deviceSetting',
+    loadChildren: './components/setting/device-setting/device-setting.module#DeviceSettingModule',
+    // canActivate: [PermissionNoSuperAdminService]
+    canActivate: [TestPermissionService]
+  },
   {
     path: ':domain/inventory/products',
     loadChildren: './components/inventory/inventory.module#InventoryModule',

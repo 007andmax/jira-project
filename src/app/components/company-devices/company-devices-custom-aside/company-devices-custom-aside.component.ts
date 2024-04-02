@@ -45,11 +45,10 @@ export class CompanyDevicesCustomAsideComponent implements OnInit {
 
   ngOnInit() {
     if (this.devicesStateService.getManufactures().length > 0) this.manufactures = this.devicesStateService.getManufactures();
-    if (this.devicesStateService.getManufactures().length == 0) {
-      this.devicesService.getManufactures().subscribe((data: any) => {
-        this.manufactures = data.manufacturers.map(item => new ManufactureDevice(item));
-      })
-    }
+    if (this.devicesStateService.getManufactures().length == 0) this.devicesStateService.initGetManufactures();
+    this.devicesStateService.onGetManufactures.subscribe(data => {
+      this.manufactures = data;
+    })
     if (this.deviceTagsStateService.getTags().length > 0) this.tags = this.deviceTagsStateService.getTags();
     let onGetTags = this.deviceTagsStateService.onGetTags.subscribe(data => {
       this.tags = data;

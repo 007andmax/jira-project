@@ -15,6 +15,10 @@ import { DeviceSettingDeviceTypeComponent } from './device-setting-device-type/d
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 import { DeviceSettingManufactureComponent } from './device-setting-manufacture/device-setting-manufacture.component';
 import { DeviceSettingModelComponent } from './device-setting-model/device-setting-model.component';
+import { DeviceSettingManufacturesComponent } from './device-setting-manufactures/device-setting-manufactures.component';
+import { DeviceSettingManufacturesAddComponent } from './device-setting-manufactures/device-setting-manufactures-add/device-setting-manufactures-add.component';
+import { DeviceSettingModelsComponent } from './device-setting-models/device-setting-models.component';
+import { DeviceSettingModelsAddComponent } from './device-setting-models/device-setting-models-add/device-setting-models-add.component';
 
 @NgModule({
     declarations: [
@@ -26,7 +30,11 @@ import { DeviceSettingModelComponent } from './device-setting-model/device-setti
         DeviceSettingAsideComponent,
         DeviceSettingDeviceTypeComponent,
         DeviceSettingManufactureComponent,
-        DeviceSettingModelComponent
+        DeviceSettingModelComponent,
+        DeviceSettingManufacturesComponent,
+        DeviceSettingManufacturesAddComponent,
+        DeviceSettingModelsComponent,
+        DeviceSettingModelsAddComponent
     ],
     imports: [
         CommonModule,
