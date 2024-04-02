@@ -170,7 +170,7 @@
                 ></app-company-devices-edit-label>
             </div>
         </div>
-        <div>
+        <div *ngIf="customDevice">
             <div class="sidebar-system__info edit-field">
                 <div class="sidebar-system__info-title">Location</div>
                 <app-company-devices-edit-label
@@ -183,7 +183,7 @@
                 ></app-company-devices-edit-label>
             </div>
         </div>
-        <div>
+        <div *ngIf="customDevice">
             <div class="sidebar-system__info edit-field">
                 <div class="sidebar-system__info-title">Note</div>
                 <textarea
