@@ -26,6 +26,7 @@
                         type="text"
                         class="form-input"
                         formControlName="model"
+                        maxlength="255"
                         placeholder="Enter Model Name"
                         #model
                         [ngClass]="{ 'is-invalid': submitted && f2.model.errors }"

@@ -58,6 +58,9 @@ export class DeviceSettingModelsAddComponent implements OnInit {
   }
   onSubmitModel() {
     this.submitted = true;
+    if (this.modelForm.invalid) {
+      return;
+    }
     this.devicesService.addModel(this.modelForm.value)
       .subscribe(
         () => {

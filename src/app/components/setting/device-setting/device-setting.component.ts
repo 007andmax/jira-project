@@ -45,7 +45,7 @@ export class DeviceSettingComponent implements OnInit {
 
   ngOnInit() {
     // this.companiesState.onInit();
-    this.devicebutton = true;
+    this.manufacturebutton = true;
     $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
     this.settingStateService.setComponentName('DeviceSettingComponent');

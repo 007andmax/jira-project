@@ -26,6 +26,9 @@ export class DeviceSettingManufacturesAddComponent implements OnInit {
   }
   onSubmitManufacturer() {
     this.submitted = true;
+    if (this.manufactureForm.invalid) {
+      return;
+    }
 
     // add
     this.devicesService.addManufacture(this.manufactureForm.value)

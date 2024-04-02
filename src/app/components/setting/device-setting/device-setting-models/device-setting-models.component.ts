@@ -45,7 +45,7 @@ export class DeviceSettingModelsComponent implements OnInit {
     }
   }
   onFilter(field) {
-    this.filter.onFilter(field, this.manufactures)
+    this.filter.onFilter(field, this.models)
   }
   public getSelectedCount() {
     return this.models.filter(item => item.selected).length;
