@@ -27,11 +27,11 @@
             <div class="sidebar-system__info">
                 <div class="sidebar-system__info-title">Asset Tag</div>
                 <app-company-devices-edit-label
-                    [field]="customDevice ? customDevice.assetTag : getSystemField('asset_tag') || ''"
+                    [field]="customDevice ? customDevice.assetTag : getSystemField('assetTag') || ''"
                     [title]="'Asset Tag'"
                     class="company-device-edit-name"
                     [isDisabled]="customerPortalStateService.isCustomerPortal"
-                    (onChange)="onChangeHardware(device.getDataForUpdateAssetTag($event),'asset_tag',$event)"
+                    (onChange)="onChangeHardware(device.getDataForUpdateAssetTag($event),'assetTag',$event)"
                 ></app-company-devices-edit-label>
             </div>
         </div>
@@ -53,7 +53,7 @@
             <div
                 *ngIf="device"
                 class="sidebar-system__info-text"
-                [textContent]="chackDefaultValue(getNetworkAdapterField('ip_address'))"
+                [textContent]="chackDefaultValue(getNetworkAdapterField('ipAddress'))"
             ></div>
             <app-company-devices-edit-ip
                 *ngIf="customDevice"
@@ -137,11 +137,11 @@
                 [editMode]="true"
                 [dropdownClass]="['date-picker']"
                 [container]="'body'"
-                [editDate]="device.report.system.install_date"
+                [editDate]="device.report.system.installDate"
                 [useMinDate]="false"
                 [placement]="'top-right'"
                 [disabled]="customerPortalStateService.isCustomerPortal"
-                (onChange)="onChangeHardware(device.getDataForUpdateInstallDate(parseDateFromDatePicker($event)),'install_date',parseDateFromDatePicker($event))"
+                (onChange)="onChangeHardware(device.getDataForUpdateInstallDate(parseDateFromDatePicker($event)),'installDate',parseDateFromDatePicker($event))"
             ></app-date-picker>
             <app-date-picker
                 *ngIf="customDevice"

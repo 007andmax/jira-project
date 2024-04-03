@@ -22,7 +22,7 @@
             <div
                 *ngIf="device"
                 class="sidebar-network__info-text"
-                [textContent]="chackDefaultValue(getNetworkAdapterField('ip_address'))"
+                [textContent]="chackDefaultValue(getNetworkAdapterField('ipAddress'))"
             ></div>
             <app-company-devices-edit-ip
                 *ngIf="customDevice"
@@ -95,7 +95,7 @@
             <div class="sidebar-network__info-title">DHCP:</div>
             <div
                 class="sidebar-network__info-text"
-                [textContent]="chackDefaultValue(getNetworkAdapterField('dhcp_server'))"
+                [textContent]="chackDefaultValue(getNetworkAdapterField('dhcpServer'))"
             ></div>
         </div>
     </div>

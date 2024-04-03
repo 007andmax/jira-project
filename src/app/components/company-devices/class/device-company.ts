@@ -51,7 +51,7 @@ export class DeviceCompany extends Device {
     public setInstallDate(due, currentCompany) {
         this.installDate = this.parseDateFromDatePicker(due, currentCompany);
         this.installDateInt = new Date(due).getTime();
-        console.log("this.install_date", this.installDate);
+        console.log("this.installDate", this.installDate);
     }
     public setWarrentyDate(due, currentCompany) {
         this.warrantyDate = this.parseDateFromDatePicker(due, currentCompany);

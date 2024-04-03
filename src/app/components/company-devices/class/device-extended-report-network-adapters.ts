@@ -1,19 +1,19 @@
 export class DeviceExtendedReportNetworkAdapters {
-    adapter_index: number;
-    computer_id: string;
-    deleted_at: string;
+    adapterIndex: number;
+    computerId: string;
+    deletedAt: string;
     description: string;
-    dhcp_server: string;
+    dhcpServer: string;
     dns: string;
     gateway: string;
     id: string;
-    interface_index: number;
-    ip_address: string;
-    ip_enabled: boolean;
-    is_default: boolean;
+    interfaceIndex: number;
+    ipAddress: string;
+    ipEnabled: boolean;
+    isDefault: boolean;
     mac: string;
     manufacturer: string;
-    net_enabled: boolean;
+    netEnabled: boolean;
     speed: string;
     subnet: string;
 }

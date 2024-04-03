@@ -115,10 +115,10 @@
                             {{parseFloatValue(getDeviceReport(device, 'speed'))/1000000}}
                         </td>
                         <td *ngIf="deviceIpSummary.deviceIpSummaryWithDhcp">
-                            {{getDeviceReport(device, 'dhcp_server') ? 'yes' : 'no'}}
+                            {{getDeviceReport(device, 'dhcpServer') ? 'yes' : 'no'}}
                         </td>
                         <td *ngIf="deviceIpSummary.deviceIpSummaryWithIpAddress">
-                            {{getDeviceReport(device, 'ip_address')}}
+                            {{getDeviceReport(device, 'ipAddress')}}
                         </td>
                         <td *ngIf="deviceIpSummary.deviceIpSummaryWithSubnet">
                             <p>{{ getDeviceReport(device, 'dns')}}</p>

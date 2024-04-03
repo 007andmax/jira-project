@@ -32,7 +32,7 @@ export class CompanyDevicesAsideNetworkTabComponent implements OnInit {
     return (!value || value === "") ? "N\A" : value;
   }
   getNetworkAdapterField(field) {
-    let find = this.device.report.networkAdapters.find(item => item.is_default);
+    let find = this.device.report.networkAdapters.find(item => item.isDefault);
     return (find) ? find[field] : null;
   }
   getLinkSpeed() {

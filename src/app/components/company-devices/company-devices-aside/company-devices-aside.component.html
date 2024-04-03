@@ -159,11 +159,13 @@
                 (click)="tab = 'NETWORK'"
             ></div>
             <div
+                *ngIf="currentDevice"
                 class="company-device-aside__subheader-item subheader-item-software"
                 [ngClass]="{'--active':tab === 'SOFTWARE'}"
                 (click)="tab = 'SOFTWARE'"
             ></div>
             <div
+                *ngIf="currentDevice"
                 class="company-device-aside__subheader-item subheader-item-updates"
                 [ngClass]="{'--active':tab === 'UPDATES'}"
                 (click)="tab = 'UPDATES'"

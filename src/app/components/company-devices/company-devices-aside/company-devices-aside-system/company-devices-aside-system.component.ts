@@ -35,7 +35,7 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
   ngOnInit() {
     if (this.device && !this.device.report.system) {
       this.device.report.system.warranty = this.getToDayDate();
-      this.device.report.system.install_date = this.getToDayDate();
+      this.device.report.system.installDate = this.getToDayDate();
     }
   }
   onChangeName(value) {
@@ -57,7 +57,7 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
     return this.device.hostName || this.device.ip;
   }
   getNetworkAdapterField(field) {
-    let find = this.device.report.networkAdapters.find(item => item.is_default);
+    let find = this.device.report.networkAdapters.find(item => item.isDefault);
     return (find) ? find[field] : null;
   }
   public chackDefaultValue(value) {
@@ -120,7 +120,7 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
     })
   }
   getWindowsInfo() {
-    return (this.device && this.device.report.system) ? `${this.device.report.system.caption.replace('Microsoft ', '')}${(this.device.report.system.architecture !== '') ? ` ( ${this.device.report.system.architecture} )` : ''}${(this.device.report.system.release_id !== '') ? ` Version ${this.device.report.system.release_id}` : ''}` : '';
+    return (this.device && this.device.report.system) ? `${this.device.report.system.caption.replace('Microsoft ', '')}${(this.device.report.system.architecture !== '') ? ` ( ${this.device.report.system.architecture} )` : ''}${(this.device.report.system.releaseId !== '') ? ` Version ${this.device.report.system.releaseId}` : ''}` : '';
   }
   getRamSize(ramSize) {
     return (ramSize > 0 && ramSize / 1073741824 > 0) ? (ramSize / 1073741824) + 'GB' : 0 + 'GB';
