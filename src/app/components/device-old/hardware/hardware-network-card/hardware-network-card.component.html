@@ -1,18 +1,20 @@
 <div class="hardware-col">
     <div class="hardware-col-title">
         <span class="hardware-ico">
-           <span class="icon__networkcard qt-sz-40 qt-bg-contain qt-va-m qt-dib"></span>
+            <span class="icon__networkcard qt-sz-40 qt-bg-contain qt-va-m qt-dib"></span>
         </span>
         <div class="hardware-col__title">Network Card</div>
     </div>
     <ul class="hardware-col__list">
         <li class="hardware-col__list-item">
             <span class="hardware-col__list-title">Model(s):</span>
-            <div class="hardware-col__list-text">{{networkAdapters.description || 'N/A'}}</div>
+            <div class="hardware-col__list-text">
+                {{networkAdapters.description || 'N/A'}}
+            </div>
         </li>
         <li class="hardware-col__list-item">
             <span class="hardware-col__list-title">IP:</span>
-            <div class="hardware-col__list-text">{{networkAdapters.ip_address || 'N/A'}}</div>
+            <div class="hardware-col__list-text">{{networkAdapters.ipAddress || 'N/A'}}</div>
         </li>
         <li class="hardware-col__list-item">
             <span class="hardware-col__list-title">Subnet Mask:</span>
@@ -22,13 +24,19 @@
             <span class="hardware-col__list-title">DNS 1:</span>
             <div class="hardware-col__list-text">{{networkAdapters.dns || 'N/A'}}</div>
         </li>
-        <li class="hardware-col__list-item"
-          *ngIf="networkAdapters.speed != undefined">
+        <li
+            class="hardware-col__list-item"
+            *ngIf="networkAdapters.speed != undefined"
+        >
             <span class="hardware-col__list-title">Link Speed:</span>
-            <div class="hardware-col__list-text">{{networkAdapters.speed/1000000}} (MegaBit)</div>
+            <div class="hardware-col__list-text">
+                {{networkAdapters.speed/1000000}} (MegaBit)
+            </div>
         </li>
-        <li class="hardware-col__list-item"
-          *ngIf="networkAdapters.speed == undefined">
+        <li
+            class="hardware-col__list-item"
+            *ngIf="networkAdapters.speed == undefined"
+        >
             <span class="hardware-col__list-title">Link Speed:</span>
             <div class="hardware-col__list-text">N/A</div>
         </li>
@@ -38,11 +46,13 @@
         </li>
         <li class="hardware-col__list-item">
             <span class="hardware-col__list-title">MAC:</span>
-            <div class="hardware-col__list-text">{{formatMacAddress(networkAdapters.mac) || 'N/A'}}</div>
+            <div class="hardware-col__list-text">
+                {{formatMacAddress(networkAdapters.mac) || 'N/A'}}
+            </div>
         </li>
         <li class="hardware-col__list-item">
             <span class="hardware-col__list-title">DHCP:</span>
-            <div class="hardware-col__list-text">{{networkAdapters.dhcp_server || 'N/A'}}</div>
+            <div class="hardware-col__list-text">{{networkAdapters.dhcpServer || 'N/A'}}</div>
         </li>
     </ul>
 </div>

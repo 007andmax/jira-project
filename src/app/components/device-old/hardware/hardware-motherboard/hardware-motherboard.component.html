@@ -12,7 +12,7 @@
         </li>
         <li class="hardware-col__list-item">
             <span class="hardware-col__list-title">Model:</span>
-            <div class="hardware-col__list-text">{{motherBoard.serial_number || 'N/A'}}</div>
+            <div class="hardware-col__list-text">{{motherBoard.serialNumber || 'N/A'}}</div>
         </li>
         <li class="hardware-col__list-item">
             <span class="hardware-col__list-title">BIOS Manufacture:</span>
@@ -20,7 +20,9 @@
         </li>
         <li class="hardware-col__list-item">
             <span class="hardware-col__list-title">BIOS Model:</span>
-            <div class="hardware-col__list-text">BIOS Date {{(bios.release_date | date : DateTimeFormat) || 'N/A'}} Version: {{bios.version || 'N/A'}}</div>
+            <div class="hardware-col__list-text">
+                BIOS Date {{(bios.releaseDate | date : DateTimeFormat) || 'N/A'}} Version: {{bios.version || 'N/A'}}
+            </div>
         </li>
     </ul>
 </div>
