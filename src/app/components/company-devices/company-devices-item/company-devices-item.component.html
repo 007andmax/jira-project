@@ -26,10 +26,15 @@
                 ngbDropdown
                 container="body"
                 class="qt-ic-c qt-pointer device-type-icon qt-sz-24"
-                [ngClass]="{'icon__computer' : device.iconName === 'workstation' || !device.iconName,
-              'icon__tablet' : device.iconName === 'device',
-            'icon__printer' : device.iconName === 'printer',
-          'icon__server' : device.iconName === 'server',
+                [ngClass]="{'icon__computer' : device.getFieldForCheckIcon() === 'workstation' || !device.getFieldForCheckIcon(),
+               'icon__router' : device.getFieldForCheckIcon() === 'router',
+            'icon__printer' : device.getFieldForCheckIcon() === 'printer',
+                'icon__switch' : device.getFieldForCheckIcon() === 'switch',
+          'icon__server' : device.getFieldForCheckIcon() === 'server',
+            'icon__tablet' : device.getFieldForCheckIcon() === 'tablet',
+            'icon__network_device' : device.getFieldForCheckIcon() === 'network device',
+            'icon__phone' : device.getFieldForCheckIcon() === 'phone',
+             'icon__generic_device' : device.getFieldForCheckIcon() === 'generic device',
         '--ofline': !device.online }"
                 ngbDropdownToggle
                 *ngIf="!customerPortalStateService.isCustomerPortal"
@@ -40,28 +45,58 @@
                 >
                     <ul class="icon-list qt-dropdown-menu --dropdown-icons device-type-dropdown">
                         <li
-                            (click)="setIcon('workstation')"
+                            (click)="setIcon('Workstation')"
                             ngbDropdownItem
                         >
                             <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__computer"></i>
                         </li>
                         <li
-                            (click)="setIcon('device')"
+                            (click)="setIcon('Router')"
                             ngbDropdownItem
                         >
-                            <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__tablet"></i>
+                            <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__router"></i>
                         </li>
                         <li
-                            (click)="setIcon('printer')"
+                            (click)="setIcon('Printer')"
                             ngbDropdownItem
                         >
                             <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__printer"></i>
                         </li>
                         <li
-                            (click)="setIcon('server')"
+                            (click)="setIcon('Switch')"
+                            ngbDropdownItem
+                        >
+                            <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__switch"></i>
+                        </li>
+                        <li
+                            (click)="setIcon('Server')"
                             ngbDropdownItem
                         >
                             <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__server"></i>
+                        </li>
+                        <li
+                            (click)="setIcon('Tablet')"
+                            ngbDropdownItem
+                        >
+                            <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__tablet"></i>
+                        </li>
+                        <li
+                            (click)="setIcon('Network Device')"
+                            ngbDropdownItem
+                        >
+                            <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__network_device"></i>
+                        </li>
+                        <li
+                            (click)="setIcon('Phone')"
+                            ngbDropdownItem
+                        >
+                            <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__phone"></i>
+                        </li>
+                        <li
+                            (click)="setIcon('Generic device')"
+                            ngbDropdownItem
+                        >
+                            <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__generic_device"></i>
                         </li>
                     </ul>
                 </div>
@@ -227,11 +262,12 @@
     </td>
     <td class="company-devices-table__connect">
         <app-company-devices-no-exist-remote-sessions
-            *ngIf="customerPortalStateService.checkRemoteAccess(usersStateService.getCurrentUser())"
+            *ngIf="!device.isCustom && customerPortalStateService.checkRemoteAccess(usersStateService.getCurrentUser())"
             [device]="device"
             (onRemoteAccess)="remoteAccess($event)"
         ></app-company-devices-no-exist-remote-sessions>
         <app-company-devices-exist-remote-sessions
+            *ngIf="!device.isCustom"
             [device]="device"
             (onRemoteAccess)="remoteAccess($event)"
         ></app-company-devices-exist-remote-sessions>
@@ -252,6 +288,7 @@
                 ngbDropdownMenu
             >
                 <li
+                    *ngIf="!device.isCustom"
                     class="pointer"
                     (click)="turnOff('reboot')"
                     ngbDropdownItem
@@ -260,6 +297,7 @@
                     Restart
                 </li>
                 <li
+                    *ngIf="!device.isCustom"
                     class="pointer"
                     (click)="turnOff('shutdown')"
                     ngbDropdownItem
@@ -270,7 +308,7 @@
                 <li
                     class="pointer"
                     (click)="setMasterAgent()"
-                    *ngIf="!device.master"
+                    *ngIf="!device.isCustom && !device.master"
                     ngbDropdownItem
                 >
                     <div class="icon__master-agent qt-bg-contain qt-sz-20 qt-mr-12"></div>

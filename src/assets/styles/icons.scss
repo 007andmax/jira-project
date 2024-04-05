@@ -1253,8 +1253,20 @@
   &__printer {
     background-image: url("/assets/img/icons/printer.svg");
   }
+  &__switch {
+    background-image: url("/assets/img/icons/switch.svg");
+  }
   &__server {
     background-image: url("/assets/img/icons/server.svg");
+  }
+  &__network_device {
+    background-image: url("/assets/img/icons/network_device.svg");
+  }
+  &__phone {
+    background-image: url("/assets/img/icons/phone.svg");
+  }
+  &__generic_device {
+    background-image: url("/assets/img/icons/generic_device.svg");
   }
   &__button-server--gray-500 {
     background-color: $gray-500;
@@ -1269,6 +1281,9 @@
   }
   &__tablet {
     background-image: url("/assets/img/icons/tablet.svg");
+  }
+  &__router {
+    background-image: url("/assets/img/icons/router.svg");
   }
   &__master-agent-badge {
     background-image: url("/assets/img/icons/master-agent-badge.svg");

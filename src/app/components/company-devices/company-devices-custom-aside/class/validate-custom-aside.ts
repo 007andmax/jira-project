@@ -1,7 +1,7 @@
 export class ValidateCustomAside {
     name: boolean = true;
     reIpAdress = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
-    reMacAdress = /^([0-9a-f]{1,2}[\.:-]){5}([0-9a-f]{1,2})$/i;
+    reMacAdress = /^([0-9a-f]{1,2}){5}([0-9a-f]{1,2})$/i;
     ipAdress: boolean = true;
     macAdress: boolean = true;
     type: boolean = true;

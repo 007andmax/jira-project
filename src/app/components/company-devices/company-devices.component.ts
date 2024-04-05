@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Subscription } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { REBOOT_DEVICE, REMOVE_DEVICES, SHUTDOWN_DEVICE } from '../../const/confirm';
 import { DevicesService } from '../../services/devices/devices.service';
@@ -67,6 +67,19 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
 
     });
     this.sub.add(subscription);
+    this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
+      if (newChange.action === 'CUSTOM_DEVICE_SAVED') {
+        this.devices.push(new DeviceCompany(newChange.data, newChange.data.companyId));
+      }
+      if (newChange.action === 'CUSTOM_DEVICE_REMOVED') {
+        let index = this.devices.findIndex(item => item.id == newChange.data);
+        if (index > -1) this.devices.splice(index, 1);
+      }
+      if (newChange.action === 'CUSTOM_DEVICE_EDITED') {
+        let index = this.devices.findIndex(item => item.id == newChange.data);
+        if (index > -1) this.devices.splice(index, 1);
+      }
+    })
     let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
       if (id == newChange.data.clientCompanyId) {
         this.devicesStateService.changeDevice(this.devices, newChange);
@@ -114,11 +127,8 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
           });
         }
         if (this.confirmStateService.getConfirmAction() === REMOVE_DEVICES) {
-          if (this.devicesStateService.getDevicesForRemove().length == 1 && this.devicesStateService.getDevicesForRemove()[0].isCustom) {
-            this.removeCustomDevice(this.devicesStateService.getDevicesForRemove()[0].id);
-            return;
-          }
-          this.devicesService.sendUninstallAgentRequest(this.companyId, this.devicesStateService.getDevicesForRemove().map(item => item.id)).subscribe(data => {
+          if (this.devicesStateService.getDevicesForRemove().filter(item => item.isCustom).length > 0) this.removeCustomDevice(this.devicesStateService.getDevicesForRemove().filter(item => item.isCustom).map(item => item.id));
+          if (this.devicesStateService.getDevicesForRemove().filter(item => !item.isCustom).length > 0) this.devicesService.sendUninstallAgentRequest(this.companyId, this.devicesStateService.getDevicesForRemove().filter(item => !item.isCustom).map(item => item.id)).subscribe(data => {
             this.onChangeSelect();
           });
         }
@@ -174,10 +184,13 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnSendDeviceStatus);
   }
-  removeCustomDevice(id) {
-    this.devicesService.deleteCustomDevice(id).subscribe(data => {
+  removeCustomDevice(ids) {
+    forkJoin(
+      [...ids.map(item => this.devicesService.deleteCustomDevice(item))]
+    )
+      .subscribe(res => {
 
-    })
+      });
   }
   getDevice(id) {
     this.devicesService.getCompanyDevices(id).subscribe((data: any) => {
@@ -185,6 +198,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
         this.devices = data[id].map(item => new DeviceCompany(item, this.companyId));
         this.filter.onFilterName(this.devices);
       }
+      console.log("this.devices", this.devices);
       this.showPreloader = false;
       if (this.devices.length > 0 && this.devicesStateService.getIsInitWebSocket()) this.sendDeviceStatusRequest(this.companyId, this.devices.filter(item => item.agentId).map(item => item.agentId));
     });

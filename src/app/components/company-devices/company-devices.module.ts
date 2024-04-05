@@ -58,7 +58,8 @@ import { CompanyDevicesEditMacComponent } from './company-devices-edit-mac/compa
         CompanyDevicesRoutingModule,
         CompanyDevicesTagsModule,
         CompanyDevicesCustomAsideModule,
-        TextAreaModule
+        TextAreaModule,
+        DropDownModule
     ],
 
 

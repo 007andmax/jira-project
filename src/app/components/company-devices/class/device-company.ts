@@ -1,3 +1,5 @@
+import { ManufactureDevice } from '../company-devices-custom-aside/class/manufacture-device';
+import { ModelDevice } from '../company-devices-custom-aside/class/model-device';
 import { Device } from './device';
 import * as moment from 'moment';
 
@@ -8,10 +10,14 @@ export class DeviceCompany extends Device {
     selected: boolean = false;
     isCustom: boolean;
     name: string;
+    type: string;
+    macAddress: string;
     installDate: string;
     installDateInt: number = 0;
     warrantyDate: string;
     warrantyDateInt: number = 0;
+    manufacturer: ManufactureDevice;
+    model: ModelDevice;
     assetTag: string = "";
     location: string = "";
     note: string = "";
@@ -21,6 +27,11 @@ export class DeviceCompany extends Device {
         this.companyId = companyId;
         if (this.installDate) this.installDateInt = new Date(this.installDate).getTime();
         if (this.warrantyDate) this.warrantyDateInt = new Date(this.warrantyDate).getTime();
+        if (data.manufacturer) this.manufacturer = new ManufactureDevice(data.manufacturer);
+        if (data.model) this.model = new ModelDevice(data.model);
+    }
+    public setType(data) {
+        this.type = data;
     }
     public getTagsNames() {
         return this.tags.map(item => item.name).join(",");
@@ -33,6 +44,12 @@ export class DeviceCompany extends Device {
     }
     public setLocation(data) {
         this.location = data;
+    }
+    public setManufacturer(data) {
+        this.manufacturer = data;
+    }
+    public setModel(data) {
+        this.model = data;
     }
     parseDateFromDatePicker(due, currentCompany) {
         let date = new Date(due); // timestamp from calendar	
@@ -57,6 +74,10 @@ export class DeviceCompany extends Device {
         this.warrantyDate = this.parseDateFromDatePicker(due, currentCompany);
         this.warrantyDateInt = new Date(due).getTime();
         console.log("this.warrantyDate", this.warrantyDate);
+    }
+    public getFieldForCheckIcon() {
+        if (!this.isCustom) return this.iconName;
+        if (this.isCustom) return this.type;
     }
     public getDataForEditIcon(iconName) {
         return {

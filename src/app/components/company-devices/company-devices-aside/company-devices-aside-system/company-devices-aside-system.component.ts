@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { DeviceExtended } from '../../class/device-extended';
 import * as moment from "moment";
 import { DevicesService } from 'src/app/services/devices/devices.service';
@@ -10,6 +10,9 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { DeviceCompany } from '../../class/device-company';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { ModelDevice } from '../../company-devices-custom-aside/class/model-device';
+import { ManufactureDevice } from '../../company-devices-custom-aside/class/manufacture-device';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 
 @Component({
   selector: 'app-company-devices-aside-system',
@@ -19,9 +22,16 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 export class CompanyDevicesAsideSystemComponent implements OnInit {
   @ViewChild('datePickerInstalledOn') datePickerInstalledOn: DatePickerComponent;
   @ViewChild('datePickerWarranty') datePickerWarranty: DatePickerComponent;
-  @ViewChild('editLabel') editLabel: CompanyDevicesEditLabelComponent;
+  @ViewChild('nameLabel') nameLabel: CompanyDevicesEditLabelComponent;
+  @ViewChild('assetTagLabel') assetTagLabel: CompanyDevicesEditLabelComponent;
+  @ViewChild('ipAddressLabel') ipAddressLabel: CompanyDevicesEditLabelComponent;
+  @ViewChild('locationLabel') locationLabel: CompanyDevicesEditLabelComponent;
+  @ViewChild('manufacturerDd') manufacturerDd: DropDownComponent;
+  @ViewChild('modelDd') modelDd: DropDownComponent;
   @Input() device: DeviceExtended;
   @Input() customDevice: DeviceCompany;
+  models: Array<ModelDevice> = [];
+  manufactures: Array<ManufactureDevice> = [];
   formatDate: string = FORMAT_DATE_2;
   toggleWindowSpecifications: boolean = false;
   toggleDeviceSpecifications: boolean = false;
@@ -33,10 +43,50 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
+    if (this.devicesStateService.getManufactures().length > 0) this.manufactures = this.devicesStateService.getManufactures();
+    if (this.devicesStateService.getManufactures().length == 0) this.devicesStateService.initGetManufactures();
+    this.devicesStateService.onGetManufactures.subscribe(data => {
+      this.manufactures = data;
+    })
     if (this.device && !this.device.report.system) {
       this.device.report.system.warranty = this.getToDayDate();
       this.device.report.system.installDate = this.getToDayDate();
     }
+    if (this.customDevice && this.customDevice.manufacturer) this.getModels(this.customDevice.manufacturer.id);
+  }
+  onSelectManufacture(data) {
+    this.customDevice.setManufacturer(data);
+    if (data) {
+      this.devicesService.editFieldDevice(this.customDevice.getDataForRequestField("manufacturer", this.customDevice.manufacturer)).subscribe(data => {
+
+      })
+      this.getModels(data.id);
+    }
+  }
+  public refresh(data) {
+    this.customDevice = data;
+    this.device = null;
+    if (this.nameLabel) this.nameLabel.setValue(this.customDevice.name);
+    if (this.assetTagLabel) this.assetTagLabel.setValue(this.customDevice.assetTag);
+    if (this.manufacturerDd) this.manufacturerDd.selectItemWithOutChanges(this.customDevice.manufacturer);
+    if (this.ipAddressLabel) this.ipAddressLabel.setValue(this.customDevice.ip);
+    if (this.modelDd) this.modelDd.selectItemWithOutChanges(this.customDevice.model);
+    if (this.datePickerWarranty) this.datePickerWarranty.setEditDate(this.customDevice.warrantyDateInt);
+    if (this.datePickerInstalledOn) this.datePickerInstalledOn.setEditDate(this.customDevice.installDateInt);
+    if (this.locationLabel) this.locationLabel.setValue(this.customDevice.location);
+    console.log("this.customDevice", this.customDevice);
+    this.cd.detectChanges();
+  }
+  getModels(id) {
+    this.devicesService.getModels(id).subscribe((res: any) => {
+      this.models = res.models.map(item => new ModelDevice(item))
+    })
+  }
+  onSelectModel(data) {
+    this.customDevice.setModel(data);
+    this.devicesService.editFieldDevice(this.customDevice.getDataForRequestField("model", this.customDevice.model)).subscribe(data => {
+
+    })
   }
   onChangeName(value) {
     if (this.customDevice) {
@@ -47,12 +97,11 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
     }
     this.devicesService.editAgentInfo(this.device.getDataForEditName((value.length > 0) ? value : this.device.hostName || this.device.ip)).subscribe(data => {
       this.device.setLabel((value.length > 0) ? value : null);
-      this.editLabel.setValue((value.length > 0) ? value : this.device.hostName || this.device.ip);
+      this.nameLabel.setValue((value.length > 0) ? value : this.device.hostName || this.device.ip);
       this.cd.detectChanges();
     })
   }
   getLabelForEdit() {
-    if (this.customDevice) return this.customDevice.name;
     if (this.device.label) return this.device.label;
     return this.device.hostName || this.device.ip;
   }

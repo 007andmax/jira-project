@@ -51,7 +51,7 @@ export class DevicesService {
       }));
   }
   public editFieldDevice(data) {
-    return this.http.put(this.apiUrl + `devices`, data);
+    return this.http.put(this.apiUrl + `devices/custom`, data);
   }
   public addModel(data) {
     this.appStateService.setCustomeError(true, "The error has occurred, please check your entries");
@@ -73,7 +73,7 @@ export class DevicesService {
     return this.http.post(this.apiUrl + `devices/count`, { companies: ids });
   }
   public addCustomDevice(data) {
-    return this.http.post(this.apiUrl + `devices`, data);
+    return this.http.post(this.apiUrl + `devices/custom`, data);
   }
   public remoteInstall(data) {
     return this.http.post(this.apiUrl + `devices/remoteInstall`, data);
@@ -114,7 +114,7 @@ export class DevicesService {
     });
   }
   public deleteCustomDevice(deviceId) {
-    return this.http.delete(this.apiUrl + `/devices/${deviceId}`).pipe(
+    return this.http.delete(this.apiUrl + `/devices/custom/${deviceId}`).pipe(
       tap(data => {
         this.toastrService.success("The custom device has been successfully deleted");
         this.appStateService.changeDetectorRef();

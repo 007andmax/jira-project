@@ -78,6 +78,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     })
   }
   openAside(type) {
+    console.log("this.device", this.device);
     if (this.device.agentId || this.device.isCustom) this.devicesStateService.setOnOpenAside(new DeviceCompanyAsideParams(type, [this.device]));
   }
   onChangeTags(data) {
@@ -126,6 +127,13 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     return (user) ? `${user.firstName} ${user.lastName}` : '';
   }
   setIcon(iconName) {
+    if (this.device.isCustom) {
+      this.device.setType(iconName.toLowerCase());
+      this.devicesService.editFieldDevice(this.device.getDataForRequestField("type", this.device.type)).subscribe(data => {
+
+      })
+      return;
+    }
     this.devicesService.editAgentInfo(this.device.getDataForEditIcon(iconName)).subscribe(data => {
       this.device.setIconName(iconName);
     })

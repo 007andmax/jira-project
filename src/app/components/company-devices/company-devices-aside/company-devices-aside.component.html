@@ -20,30 +20,43 @@
                     [device]="item"
                 ></app-company-devices-aside-device-icon>
             </ng-template>
+            <ng-template
+                ngFor
+                let-item
+                [ngForOf]="customDevices"
+                [ngForTrackBy]="trackById"
+            >
+                <app-company-devices-aside-device-icon
+                    (onSelect)="setCustomDevice(item)"
+                    [currentDevice]="customDevice"
+                    [customDevice]="item"
+                ></app-company-devices-aside-device-icon>
+            </ng-template>
         </div>
         <div class="company-device-aside__header qt-df qt-ai-c qt-jc-sb">
-            <div
-                class="qt-df qt-ai-c"
-                *ngIf="currentDevice"
-            >
+            <div class="qt-df qt-ai-c">
                 <div
                     class="icon qt-sz-24 qt-mr-12 qt-bg-contain"
-                    [ngClass]="{'icon__computer' : currentDevice.iconName === 'workstation' || !currentDevice.iconName,
-              'icon__tablet' : currentDevice.iconName === 'device',
-            'icon__printer' : currentDevice.iconName === 'printer',
-          'icon__server' : currentDevice.iconName === 'server',
-        '--offline': !currentDevice.online,
-    '--online':currentDevice.online }"
+                    [ngClass]="{'icon__computer' : getFieldForCheckIcon() === 'workstation' || !getFieldForCheckIcon(),
+               'icon__router' : getFieldForCheckIcon() === 'router',
+            'icon__printer' : getFieldForCheckIcon() === 'printer',
+                'icon__switch' : getFieldForCheckIcon() === 'switch',
+          'icon__server' : getFieldForCheckIcon() === 'server',
+            'icon__tablet' : getFieldForCheckIcon() === 'tablet',
+            'icon__network_device' : getFieldForCheckIcon() === 'network device',
+            'icon__phone' : getFieldForCheckIcon() === 'phone',
+             'icon__generic_device' : getFieldForCheckIcon() === 'generic device',
+        '--offline': currentDevice && !currentDevice.online,
+    '--online':currentDevice &&currentDevice.online }"
                 ></div>
                 <div
                     class="qt-fs-13 qt-fw-600 qt-lh-154 company-device-aside__header-title"
-                    [textContent]="!isLabel() ? currentDevice.hostName || currentDevice.ip :  currentDevice.label || currentDevice.hostName || currentDevice.ip"
+                    [textContent]="getTextForDisplayName()"
                 >
                 </div>
             </div>
             <div class="qt-df qt-ai-c">
                 <div
-                    *ngIf="currentDevice"
                     ngbDropdown
                     container="body"
                     class="qt-overflow-v"
@@ -60,7 +73,7 @@
                             class="pointer"
                             ngbDropdownItem
                             (click)="gotiDetailDevice()"
-                            *ngIf="!customerPortalStateService.isCustomerPortal"
+                            *ngIf="currentDevice && !customerPortalStateService.isCustomerPortal"
                         >
                             <div class="qt-ic-c icon__go-to qt-pointer qt-sz-20 qt-mr-12"></div>
                             Device Detail
@@ -68,7 +81,7 @@
                         <li
                             class="pointer"
                             ngbDropdownItem
-                            *ngIf="currentDevice.type !== 'workstation' && currentDevice.online && (getPermissions('REMOTE_CONNECTIONS') || customerPortalStateService.checkRemoteAccess(usersStateService.getCurrentUser()))"
+                            *ngIf="currentDevice && currentDevice.type !== 'workstation' && currentDevice.online && (getPermissions('REMOTE_CONNECTIONS') || customerPortalStateService.checkRemoteAccess(usersStateService.getCurrentUser()))"
                             (click)="remoteAccess('PROXY')"
                         >
                             <div class="qt-ic-c icon__quick-connect qt-pointer qt-sz-20 qt-mr-12"></div>
@@ -76,7 +89,7 @@
                         </li>
                         <li
                             class="pointer"
-                            *ngIf="currentDevice.type === 'workstation' && currentDevice.online && (getPermissions('REMOTE_CONNECTIONS') || customerPortalStateService.checkRemoteAccess(usersStateService.getCurrentUser()))"
+                            *ngIf="currentDevice && currentDevice.type === 'workstation' && currentDevice.online && (getPermissions('REMOTE_CONNECTIONS') || customerPortalStateService.checkRemoteAccess(usersStateService.getCurrentUser()))"
                             (click)="showRemoteAccess = !showRemoteAccess "
                         >
                             <div class="qt-ic-c icon__quick-connect qt-pointer qt-sz-20 qt-mr-12"></div>
@@ -103,7 +116,7 @@
                             class="pointer"
                             (click)="turnOff('reboot')"
                             ngbDropdownItem
-                            *ngIf="!customerPortalStateService.isCustomerPortal"
+                            *ngIf="currentDevice && !customerPortalStateService.isCustomerPortal"
                         >
                             <div class="icon__reset qt-bg-contain qt-sz-20 qt-mr-12"></div>
                             Restart
@@ -112,7 +125,7 @@
                             class="pointer"
                             (click)="turnOff('shutdown')"
                             ngbDropdownItem
-                            *ngIf="!customerPortalStateService.isCustomerPortal"
+                            *ngIf="currentDevice && !customerPortalStateService.isCustomerPortal"
                         >
                             <div class="icon__shutdown qt-bg-contain qt-sz-20 qt-mr-12"></div>
                             Shutdown
@@ -120,7 +133,7 @@
                         <li
                             class="pointer"
                             (click)="setMasterAgent()"
-                            *ngIf="!currentDevice.master && !customerPortalStateService.isCustomerPortal"
+                            *ngIf="currentDevice && !currentDevice.master && !customerPortalStateService.isCustomerPortal"
                             ngbDropdownItem
                         >
                             <div class="icon__master-agent qt-bg-contain qt-sz-20 qt-mr-12"></div>
@@ -173,12 +186,15 @@
         </div>
         <div class="company-device-aside__body">
             <app-company-devices-aside-system
+                #system
                 [device]="currentDevice"
                 [customDevice]="customDevice"
                 *ngIf="tab === 'SYSTEM'"
             ></app-company-devices-aside-system>
             <app-company-devices-aside-network-tab
+                #network
                 [device]="currentDevice"
+                [customDevice]="customDevice"
                 *ngIf="tab === 'NETWORK'"
             ></app-company-devices-aside-network-tab>
             <app-company-devices-aside-software
