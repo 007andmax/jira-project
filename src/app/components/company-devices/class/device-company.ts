@@ -98,10 +98,15 @@ export class DeviceCompany extends Device {
         }
     }
     public getDataForRequestField(field, value) {
-        return {
+        let data: any = {
             "deviceId": this.deviceId,
             "companyId": this.companyId,
-            [field]: value
+        }
+        if (field != "name") data.name = this.name;
+        if (field != "type") data.type = this.type;
+        return {
+            ...data,
+            [field]: value,
         }
     }
     public getDataForEditLabel(label) {
