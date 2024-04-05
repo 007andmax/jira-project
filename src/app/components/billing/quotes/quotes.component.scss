@@ -1,4 +1,5 @@
 @import "../../../../assets/styles/variable";
+@import "./src/assets/styles/mixin/breakpoint";
 
 .quotes {
   background: $gray-50;
@@ -11,7 +12,7 @@
     width: calc(100vw - 324px);
     transition: all .3s;
     z-index: 1;
-    @media (max-width: 1600px) {
+    @include media-breakpoint-down($sm) {
       width: calc(100vw - 316px);
     }
     &--top {
@@ -21,7 +22,6 @@
       h1 {
         margin: 0;
         font-size: 20px;
-        font-weight: 500;
         font-weight: 400;
       }
       .quotes-actions {

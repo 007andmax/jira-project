@@ -2,6 +2,7 @@
 @import "./src/assets/styles/variable";
 @import "./src/assets/styles/fonts";
 @import "./src/assets/styles/mixin/dropdown";
+@import "./src/assets/styles/mixin/breakpoint";
 
 .cmp-dashboard-body {
     @include body-font;
@@ -743,9 +744,6 @@
                             border-top: 1px solid$gray-100;
                             padding-top: 10px !important;
                             justify-content: center;
-                            // @media only screen and (max-width: 1439px) {
-                            //     margin: 0 -16px !important;
-                            // }
                             li {
                                 width: auto;
                                 max-width: 90px;
@@ -754,7 +752,6 @@
                                 padding-left: 15px !important;
                                 margin: 0 15px;
                                 .title {
-                                    font-weight: 400;
                                     font-size: 11px;
                                     font-weight: normal;
                                     line-height: 1.09;
@@ -1197,7 +1194,7 @@
             justify-content: space-between;
             font-size: 10px;
             margin-bottom: 5px;
-            @media (min-width: 1361px) {
+            @include media-breakpoint-up($sm) {
               font-size: 11px;
             }
 

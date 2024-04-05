@@ -1,4 +1,5 @@
 @import "./src/assets/styles/variable";
+@import "./src/assets/styles/mixin/breakpoint";
 
 /deep/ .ticket-table {
     th {
@@ -301,7 +302,7 @@ app-tickets-table-item {
 }
 
 /deep/ .qt-table-modern .ticket-table__subject {
-    @media (max-width: 1600px) {
+    @include media-breakpoint-down($sm) {
         max-width: calc(345px - 16px);
     }
 }

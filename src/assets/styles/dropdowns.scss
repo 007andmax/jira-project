@@ -1,6 +1,7 @@
 @import './src/assets/styles/variable';
 @import './src/assets/styles/fonts';
 @import "./src/assets/styles/mixin/dropdown";
+@import "./src/assets/styles/mixin/breakpoint";
 
 .dark-dropdown,
 .light-dropdown,
@@ -412,14 +413,14 @@
             color: $white;
             background: $blue-light-600;
           }
-          @media (min-width: 2048px) {
+          @include media-breakpoint-down($sm) {
+            width: 93px;
+          }
+          @include media-breakpoint-up($lg) {
             width: 105px;
           }
-          @media (min-width: 2560px) {
+          @include media-breakpoint-up($xl) {
             width: 175px;
-          }
-          @media (max-width: 1280px) {
-            width: 93px;
           }
         }
       }
@@ -435,14 +436,14 @@
   .time-picker-out {
     width: 46.4%;
     display: inline-block;
-    @media (min-width: 2048px) {
+    @include media-breakpoint-down($xs) {
+      width: 48.5%;
+    }
+    @include media-breakpoint-up($lg) {
       width: 47%;
     }
-    @media (min-width: 2560px) {
+    @include media-breakpoint-up($xl) {
       width: 48%;
-    }
-    @media (max-width: 1280px) {
-      width: 48.5%;
     }
     .start-end-picker-item {
       font-size: 13px;
@@ -463,7 +464,7 @@
   }
   .time-picker-in {
     margin-right: 11px;
-    @media (max-width: 1600px) {
+    @include media-breakpoint-down($sm) {
       margin-right: 4px;
     }
     .dropdown-menu {

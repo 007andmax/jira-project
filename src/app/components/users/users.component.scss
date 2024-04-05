@@ -1,4 +1,5 @@
 @import "./src/assets/styles/variable";
+@import "./src/assets/styles/mixin/breakpoint";
 
 /deep/ .aside-filters {
     width: 320px;
@@ -134,29 +135,29 @@
 .users-table__email,
 .users-table__company {
   flex: 2 0 220px;
-  @media (max-width: 1600px) {
+  @include media-breakpoint-down($sm) {
     flex: 2 0 200px;
   }
-  @media (min-width: 2048px) {
+  @include media-breakpoint-up($lg) {
     flex: 3 0 220px;
   }
 }
 
 .users-table__company-full {
   flex: 2 0 220px;
-  @media (max-width: 1600px) {
+  @include media-breakpoint-down($sm) {
     flex: 2 0 200px;
   }
-  @media (min-width: 2048px) {
+  @include media-breakpoint-up($lg) {
     flex: 3 0 220px;
   }
 }
 .users-table__industry {
   flex: 0 0 176px;
-  @media (max-width: 1600px) {
+  @include media-breakpoint-down($sm) {
     display: none;
   }
-  @media (min-width: 2048px) {
+  @include media-breakpoint-up($lg) {
     flex: 1 0 180px;
   }
 }

@@ -1,6 +1,7 @@
 @import "./src/assets/styles/variable";
 @import "./src/assets/scss/fonts";
 @import "./assets/styles/dropdowns.scss";
+@import "./src/assets/styles/mixin/breakpoint";
 @import "./assets/styles/icons.scss";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "./assets/styles/main.scss";
@@ -858,7 +859,7 @@ app-quotes-item {
     }
     &--bottom {
       .fixed-width {
-        @media (max-width: 1600px) {
+        @include media-breakpoint-down($sm) {
           .with-dollar:before,
           .with-percent:before {
             left: 14px;
@@ -1421,30 +1422,30 @@ app-quotes-item {
       flex: 1 1 210px;
       line-height: 20px;
 
-      @media screen and (min-width: 2048px) {
+      @include media-breakpoint-down($sm) {
+        flex: 1 1 260px;
+      }
+
+      @include media-breakpoint-up($lg) {
         flex: 1 0 290px;
       }
 
-      @media screen and (min-width: 2250px) {
+      @include media-breakpoint-up($xl) {
         flex: 1 0 360px;
-      }
-
-      @media screen and (max-width: 1600px) {
-        flex: 1 1 260px;
       }
     }
     &__primary-contact {
       flex: 1 1 160px;
 
-      @media screen and (min-width: 2048px) {
+      @include media-breakpoint-up($lg) {
         flex: 1 0 230px;
       }
 
-      @media screen and (min-width: 2250px) {
+      @include media-breakpoint-up($xl) {
         flex: 1 0 300px;
       }
 
-      @media screen and (max-width: 1600px) {
+      @include media-breakpoint-down($sm) {
         flex: 1 1 210px;
         max-width: 100%;
       }
@@ -1498,16 +1499,16 @@ app-quotes-item {
       white-space: nowrap;
       overflow: hidden;
 
-      @media screen and (min-width: 2048px) {
+      @include media-breakpoint-down($sm) {
+        flex: 1 1 230px;
+      }
+
+      @include media-breakpoint-up($lg) {
         flex: 1 0 250px;
       }
 
-      @media screen and (min-width: 2250px) {
+      @include media-breakpoint-up($xl) {
         flex: 1 0 340px;
-      }
-
-      @media screen and (max-width: 1600px) {
-        flex: 1 1 230px;
       }
     }
     &__tickets {
@@ -1522,7 +1523,7 @@ app-quotes-item {
     &__tickets,
     &__devices,
     &__users {
-      @media screen and (max-width: 1600px) {
+      @include media-breakpoint-down($sm) {
         display: none;
       }
     }
@@ -3461,12 +3462,12 @@ input.--input-error:hover {
       width: 380px;
       max-width: 380px;
       min-width: 380px;
-      @media (min-width: 1921px) {
+      @include media-breakpoint-up($md) {
         width: 440px;
         max-width: 440px;
         min-width: 440px;
       }
-      @media screen and (min-width: 2250px) {
+      @include media-breakpoint-up($xl) {
         width: 580px;
         max-width: 580px;
         min-width: 580px;

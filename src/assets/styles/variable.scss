@@ -69,3 +69,11 @@ $fw-bold: 700;
 $fw-extra-bold: 800;
 $fw-black: 900;
 
+// Breakpoints
+$xl: 2250px;
+$lg: 2048px;
+$md: 1920px;
+$sm: 1600px;
+$xs: 1280px;
+//@include media-breakpoint-down($lg);
+//@include media-breakpoint-up($md)

@@ -1,9 +1,12 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/mixin/breakpoint";
+
 app-company-devices-item {
     display: contents;
 }
 
 .Resize{
-  @media only screen and (min-width: 1920px) {
+  @include media-breakpoint-up($md) {
     width:85% !important;
     margin-left:-150px !important;
   }

@@ -166,7 +166,7 @@
   }
 }
 
-@media (min-width: 1920px) {
+@include media-breakpoint-up($md) {
   .user-aside-detail-page__aside {
     .qt-page-list__body {
       width: 100%;

@@ -2,6 +2,8 @@
 @import "./src/assets/scss/device/mixin";
 @import "./src/assets/scss/device/custom";
 @import "./src/assets/scss/device/_modals.scss";
+@import "./src/assets/styles/mixin/breakpoint";
+
 .form-input-search {
   padding: 7px 14px 7px 34px;
   background: url(/html/assets/img/search-ico.svg) no-repeat 12px center;
@@ -725,13 +727,12 @@ span.qt-input-search:before {
 
   .sidebar-updates{
     &__security-update-item {
-      padding: 16px;
       width: 140px !important;
       height: 120px;
       padding: 16px;
       border-radius: 8px;
       background-color: $gray-100;
-      @media (max-width: 1920px) {
+      @include media-breakpoint-down($md) {
         width: 175px !important;
       }
     }
@@ -759,7 +760,7 @@ span.qt-input-search:before {
   }
 
   .Resize{
-    @media only screen and (min-width: 1920px) {
+    @include media-breakpoint-up($md) {
       width:78% !important;
       margin-left:-85px;
 
@@ -769,7 +770,7 @@ span.qt-input-search:before {
     .company-device-hover:hover {
       td {
         .company-devices-table__system-network-buttons {
-          @media  only screen and (min-width:1920px) {
+          @include media-breakpoint-up($md) {
             margin-left:40px;
           }
         }
@@ -781,7 +782,7 @@ span.qt-input-search:before {
 .company-device-hover:hover {
   td {
     .company-devices-table__system-network-buttons {
-      @media  only screen and (min-width:1920px) {
+      @include media-breakpoint-up($md) {
         margin-left:120px;
       }
 
@@ -805,7 +806,7 @@ span.qt-input-search:before {
 }
 
 .Resize{
-  @media only screen and (min-width: 1920px) {
+  @include media-breakpoint-up($md) {
     width:85% !important;
     margin-left:-150px;
   }
@@ -813,7 +814,7 @@ span.qt-input-search:before {
   .company-device-hover:hover {
     td {
       .company-devices-table__system-network-buttons {
-        @media  only screen and (min-width:1920px) {
+        @include media-breakpoint-up($md) {
           margin-left:40px;
         }
       }
@@ -823,11 +824,11 @@ span.qt-input-search:before {
 .company-device-hover:hover {
   td {
     .company-devices-table__system-network-buttons {
-      @media  only screen and (min-width:1920px) {
+      @include media-breakpoint-up($md) {
         margin-left:0 !important;
       }
 
-      @media only screen and (max-width: 1920) {
+      @include media-breakpoint-down($md) {
         margin-left: 40px;
       }
     }
