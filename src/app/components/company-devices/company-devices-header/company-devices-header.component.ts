@@ -28,6 +28,9 @@ export class CompanyDevicesHeaderComponent implements OnInit {
   removeAgents() {
     this.onRemoveAgents.emit(null);
   }
+  isExistCustomDevices() {
+    return this.devices.some(item => item.selected && item.isCustom);
+  }
   openSidebar() {
     this.devicesStateService.setOnOpenAside(new DeviceCompanyAsideParams('SYSTEM', this.devices.filter(item => item.selected && (!item.isCustom && item.agentId || item.isCustom))));
   }

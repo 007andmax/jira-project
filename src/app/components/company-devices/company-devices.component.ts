@@ -234,13 +234,13 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
   onChangeSelect() {
     let find = this.devices.find(item => !item.selected);
     this.selectAllDevices = (find) ? false : true;
-    this.isOfflineDeviceSelected = (this.devices.find(item => item.selected && !item.online)) ? true : false;
+    this.isOfflineDeviceSelected = (this.devices.find(item => item.selected && !item.isCustom && !item.online)) ? true : false;
   }
   toogleDevices() {
     this.devices.forEach(item => {
       item.selected = (this.selectAllDevices) ? true : false;
     })
-    this.isOfflineDeviceSelected = (this.devices.find(item => item.selected && !item.online)) ? true : false;
+    this.isOfflineDeviceSelected = (this.devices.find(item => item.selected && !item.isCustom && !item.online)) ? true : false;
   }
   isLabel(device) {
     if (device.label && device.hostName) return device.label !== device.hostName;
