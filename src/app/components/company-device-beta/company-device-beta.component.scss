@@ -417,7 +417,7 @@ table.qt-table-modern tbody tr td {
     padding: 16px;
     border-radius: 8px;
     background-color: $gray-100;
-    @include media-breakpoint-down($md) {
+    @include media-breakpoint-down($lg) {
       width: 175px !important;
     }
   }
@@ -443,7 +443,7 @@ table.qt-table-modern tbody tr td {
 }
 
 .Resize{
-  @include media-breakpoint-up($md) {
+  @include media-breakpoint-up($lg) {
     width:74% !important;
     margin-left: 0 !important;
   }
@@ -451,7 +451,7 @@ table.qt-table-modern tbody tr td {
   .company-device-hover:hover {
     td {
       .company-devices-table__system-network-buttons {
-        @include media-breakpoint-up($md) {
+        @include media-breakpoint-up($lg) {
           margin-left:40px;
         }
       }
@@ -461,11 +461,11 @@ table.qt-table-modern tbody tr td {
 .company-device-hover:hover {
   td {
     .company-devices-table__system-network-buttons {
-      @include media-breakpoint-up($md) {
+      @include media-breakpoint-up($lg) {
         margin-left:120px;
       }
 
-      @include media-breakpoint-up($md) {
+      @include media-breakpoint-up($lg) {
         margin-left: 40px;
       }
     }

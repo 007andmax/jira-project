@@ -135,7 +135,7 @@
 .users-table__email,
 .users-table__company {
   flex: 2 0 220px;
-  @include media-breakpoint-down($sm) {
+  @include media-breakpoint-down($md) {
     flex: 2 0 200px;
   }
   @include media-breakpoint-up($lg) {
@@ -145,7 +145,7 @@
 
 .users-table__company-full {
   flex: 2 0 220px;
-  @include media-breakpoint-down($sm) {
+  @include media-breakpoint-down($md) {
     flex: 2 0 200px;
   }
   @include media-breakpoint-up($lg) {
@@ -154,7 +154,7 @@
 }
 .users-table__industry {
   flex: 0 0 176px;
-  @include media-breakpoint-down($sm) {
+  @include media-breakpoint-down($md) {
     display: none;
   }
   @include media-breakpoint-up($lg) {

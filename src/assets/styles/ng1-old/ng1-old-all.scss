@@ -1,6 +1,7 @@
 @import "./src/assets/styles/variable";
 @import "./src/assets/styles/fonts";
 @import "./src/assets/styles/mixin/dropdown";
+@import "./src/assets/styles/mixin/breakpoint";
 
 // _button-with-loading-indicator
 .windows8 {
@@ -388,7 +389,7 @@
   right: 0;
   width: calc(100% - 856px);
 }
-@media screen and (max-width: 1700px) {
+@include media-breakpoint-down($lg) {
   .right-panel-closed.left-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
     width: calc(100% - 76px);
   }
@@ -397,7 +398,7 @@
     width: calc(100% - 316px);
   }
 }
-@media screen and (max-width: 1315px) {
+@include media-breakpoint-down($sm) {
   .left-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
     right: 77px;
   }
@@ -407,7 +408,7 @@
     width: 100%;
   }
 }
-@media only screen and (min-width: 1316px) and (max-width: 1440px) {
+@include media-breakpoint-down($md) {
   .right-panel-closed.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-content {
     right: 0;
     width: calc(100% - 656px);

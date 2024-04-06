@@ -413,7 +413,7 @@
             color: $white;
             background: $blue-light-600;
           }
-          @include media-breakpoint-down($sm) {
+          @include media-breakpoint-down($md) {
             width: 93px;
           }
           @include media-breakpoint-up($lg) {
@@ -436,7 +436,7 @@
   .time-picker-out {
     width: 46.4%;
     display: inline-block;
-    @include media-breakpoint-down($xs) {
+    @include media-breakpoint-down($sm) {
       width: 48.5%;
     }
     @include media-breakpoint-up($lg) {
@@ -464,7 +464,7 @@
   }
   .time-picker-in {
     margin-right: 11px;
-    @include media-breakpoint-down($sm) {
+    @include media-breakpoint-down($md) {
       margin-right: 4px;
     }
     .dropdown-menu {

@@ -61,7 +61,7 @@
       border: unset;
       > div {
         background-color: $blue-dark-25;
-        @include media-breakpoint-down($sm) {
+        @include media-breakpoint-down($md) {
           word-break: break-all;
         }
       }
@@ -679,7 +679,7 @@ company-user {
     }
     .users-table__company,
     .users-table__email {
-      @include media-breakpoint-down($md) {
+      @include media-breakpoint-down($lg) {
         flex: 2 0 190px;
       }
     }

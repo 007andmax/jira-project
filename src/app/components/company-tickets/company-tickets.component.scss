@@ -67,7 +67,7 @@ app-tickets-table-item {
   }
 }
 
-@include media-breakpoint-up($md) {
+@include media-breakpoint-up($lg) {
   /deep/ .company-tickets-table {
     &__requested-by {
       max-width: 300px;

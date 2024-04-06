@@ -4,7 +4,7 @@
 
 .terminal-page-area {
   margin-right: 352px;
-  @include media-breakpoint-up($sm) {
+  @include media-breakpoint-up($md) {
     margin-right: 512px !important;
   }
   .page-container{
@@ -292,7 +292,7 @@
   }
   .right-sidebar {
     &.terminal-sidebar {
-      @include media-breakpoint-up($sm) {
+      @include media-breakpoint-up($md) {
         width: 448px;
       }
 

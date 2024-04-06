@@ -278,7 +278,7 @@
     height: calc(100vh - #{$header-height});
     z-index: 10;
     box-shadow: -8px 0 8px 0 rgba(0, 0, 0, 0.05);
-    @include media-breakpoint-up($md) {
+    @include media-breakpoint-up($lg) {
       width: 591px;
     }
   }
@@ -529,7 +529,7 @@
       padding: 16px;
       border-radius: 8px;
       background-color: $gray-25;
-      @include media-breakpoint-down($md) {
+      @include media-breakpoint-down($lg) {
         width: 175px;
       }
     }

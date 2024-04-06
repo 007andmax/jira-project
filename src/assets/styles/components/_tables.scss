@@ -6,7 +6,7 @@ table.qt-table-modern {
   border-spacing: 0 2px;
 
   .--hidden-xl {
-    @include media-breakpoint-down($sm) {
+    @include media-breakpoint-down($md) {
       display: none;
     }
   }

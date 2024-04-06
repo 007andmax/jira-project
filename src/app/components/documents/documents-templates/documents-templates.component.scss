@@ -188,7 +188,7 @@
   }
 }
 
-@include media-breakpoint-up($md) {
+@include media-breakpoint-up($lg) {
   .documents-templates-page {
     width: 100%;
     max-width: unset;

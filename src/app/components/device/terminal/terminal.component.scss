@@ -7,7 +7,7 @@
 main {
     &.terminal-page-area {
         margin-right: 352px !important;
-        @include media-breakpoint-up($sm) {
+        @include media-breakpoint-up($md) {
             margin-right: 512px !important;
         }
         .page-container{
@@ -97,7 +97,7 @@ main {
                 -webkit-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
                 -moz-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
                 box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
-                @include media-breakpoint-up($sm) {
+                @include media-breakpoint-up($md) {
                     width: 448px;
                 }
                     ul.nav-tabs {

@@ -732,7 +732,7 @@ span.qt-input-search:before {
       padding: 16px;
       border-radius: 8px;
       background-color: $gray-100;
-      @include media-breakpoint-down($md) {
+      @include media-breakpoint-down($lg) {
         width: 175px !important;
       }
     }
@@ -760,7 +760,7 @@ span.qt-input-search:before {
   }
 
   .Resize{
-    @include media-breakpoint-up($md) {
+    @include media-breakpoint-up($lg) {
       width:78% !important;
       margin-left:-85px;
 
@@ -770,7 +770,7 @@ span.qt-input-search:before {
     .company-device-hover:hover {
       td {
         .company-devices-table__system-network-buttons {
-          @include media-breakpoint-up($md) {
+          @include media-breakpoint-up($lg) {
             margin-left:40px;
           }
         }
@@ -782,11 +782,11 @@ span.qt-input-search:before {
 .company-device-hover:hover {
   td {
     .company-devices-table__system-network-buttons {
-      @include media-breakpoint-up($md) {
+      @include media-breakpoint-up($lg) {
         margin-left:120px;
       }
 
-      @media only screen and (min-width: 1600) {
+      @include media-breakpoint-up($md) {
         margin-left: 40px;
       }
     }
@@ -806,7 +806,7 @@ span.qt-input-search:before {
 }
 
 .Resize{
-  @include media-breakpoint-up($md) {
+  @include media-breakpoint-up($lg) {
     width:85% !important;
     margin-left:-150px;
   }
@@ -814,7 +814,7 @@ span.qt-input-search:before {
   .company-device-hover:hover {
     td {
       .company-devices-table__system-network-buttons {
-        @include media-breakpoint-up($md) {
+        @include media-breakpoint-up($lg) {
           margin-left:40px;
         }
       }
@@ -824,11 +824,11 @@ span.qt-input-search:before {
 .company-device-hover:hover {
   td {
     .company-devices-table__system-network-buttons {
-      @include media-breakpoint-up($md) {
+      @include media-breakpoint-up($lg) {
         margin-left:0 !important;
       }
 
-      @include media-breakpoint-down($md) {
+      @include media-breakpoint-down($lg) {
         margin-left: 40px;
       }
     }

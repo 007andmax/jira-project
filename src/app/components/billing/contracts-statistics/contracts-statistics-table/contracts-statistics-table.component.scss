@@ -302,7 +302,7 @@ app-tickets-table-item {
 }
 
 /deep/ .qt-table-modern .ticket-table__subject {
-    @include media-breakpoint-down($sm) {
+    @include media-breakpoint-down($md) {
         max-width: calc(345px - 16px);
     }
 }

@@ -1,4 +1,5 @@
 @import './src/assets/styles/variable';
+@import "./src/assets/styles/mixin/breakpoint";
 
 // _customer-report
 html.no-d3-tooltip .nvtooltip .value {
@@ -181,7 +182,7 @@ html.no-d3-tooltip .nvtooltip .value {
     height: 36px;
   }
   .qt-report__body {
-    @media (min-width: 1448px) {
+    @include media-breakpoint-up($md) {
       min-height: calc(100vh - 211px);
     }
     &-row {
@@ -800,13 +801,13 @@ html.no-d3-tooltip .nvtooltip .value {
   margin-top: 50px;
 }
 
-@media screen and (max-width: 1366px) {
+@include media-breakpoint-down($lg) {
   .run-report-content .content {
     width: 28.6%;
   }
 }
 
-@media screen and (max-width: 1280px) {
+@include media-breakpoint-down($sm) {
   .run-report-content .content {
     max-width: 160px;
   }

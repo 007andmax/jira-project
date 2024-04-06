@@ -835,7 +835,7 @@ ngb-typeahead-window {
 .left-panel-closed {
   .quotes__header {
     width: calc(100vw - 85px) !important;
-    @media (max-width: 1280px) {
+    @include media-breakpoint-down($sm) {
       width: calc(100vw - 76px) !important;
     }
   }
@@ -859,7 +859,7 @@ app-quotes-item {
     }
     &--bottom {
       .fixed-width {
-        @include media-breakpoint-down($sm) {
+        @include media-breakpoint-down($md) {
           .with-dollar:before,
           .with-percent:before {
             left: 14px;
@@ -1422,7 +1422,7 @@ app-quotes-item {
       flex: 1 1 210px;
       line-height: 20px;
 
-      @include media-breakpoint-down($sm) {
+      @include media-breakpoint-down($md) {
         flex: 1 1 260px;
       }
 
@@ -1445,47 +1445,15 @@ app-quotes-item {
         flex: 1 0 300px;
       }
 
-      @include media-breakpoint-down($sm) {
+      @include media-breakpoint-down($md) {
         flex: 1 1 210px;
         max-width: 100%;
-      }
-
-      > div {
-        @media screen and (max-width: 767px) {
-          width: 100%;
-          display: flex;
-          align-items: center;
-          padding-left: 80px;
-        }
       }
 
       .name {
         position: relative;
         @include body-m__m;
         color: $gray-900;
-
-        @media screen and (max-width: 767px) {
-          margin-right: 4px;
-          padding-right: 8px;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          max-width: min-content
-        }
-
-        &::after {
-          @media screen and (max-width: 767px) {
-            position: absolute;
-            content: "";
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 4px;
-            height: 4px;
-            background: $gray-400;
-            border-radius: 50%;
-          }
-        }
       }
 
       .phone {
@@ -1499,7 +1467,7 @@ app-quotes-item {
       white-space: nowrap;
       overflow: hidden;
 
-      @include media-breakpoint-down($sm) {
+      @include media-breakpoint-down($md) {
         flex: 1 1 230px;
       }
 
@@ -1523,7 +1491,7 @@ app-quotes-item {
     &__tickets,
     &__devices,
     &__users {
-      @include media-breakpoint-down($sm) {
+      @include media-breakpoint-down($md) {
         display: none;
       }
     }
@@ -2135,7 +2103,7 @@ app-quotes-item {
     width: 90%;
     height: 100%;
     cursor: pointer;
-    @media (max-width: 1366px) {
+    @include media-breakpoint-down($sm) {
       width: 87%;
     }
   }
@@ -3462,7 +3430,7 @@ input.--input-error:hover {
       width: 380px;
       max-width: 380px;
       min-width: 380px;
-      @include media-breakpoint-up($md) {
+      @include media-breakpoint-up($lg) {
         width: 440px;
         max-width: 440px;
         min-width: 440px;
