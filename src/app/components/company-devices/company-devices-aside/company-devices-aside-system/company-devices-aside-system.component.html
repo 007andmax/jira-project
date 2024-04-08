@@ -70,7 +70,7 @@
                 <app-drop-down
                     #manufacturerDd
                     *ngIf="customDevice"
-                    class="qt-editable-dropdown qt-w100"
+                    class="qt-editable-dropdown qt-w100 company-devices-aside-system-dp"
                     [placeholder]="'Select Manufactur'"
                     [field]="'name'"
                     [list]="manufactures"
@@ -86,7 +86,7 @@
             <div class="sidebar-system__info-title">IP address</div>
             <div
                 *ngIf="device"
-                class="sidebar-system__info-text"
+                class="sidebar-system__info-text qt-df qt-ai-c"
                 [textContent]="chackDefaultValue(getNetworkAdapterField('ipAddress'))"
             ></div>
             <app-company-devices-edit-ip
@@ -113,7 +113,7 @@
                 <app-drop-down
                     #modelDd
                     *ngIf="customDevice"
-                    class="qt-editable-dropdown qt-w100"
+                    class="qt-editable-dropdown qt-w100 company-devices-aside-system-dp"
                     [placeholder]="'Select Model'"
                     [field]="'name'"
                     [list]="models"
@@ -176,7 +176,7 @@
         >
             <div class="sidebar-system__info-title">Windows Info</div>
             <div
-                class="sidebar-system__info-text"
+                class="sidebar-system__info-text qt-df qt-ai-c"
                 [textContent]="chackDefaultValue(getWindowsInfo())"
             ></div>
         </div>

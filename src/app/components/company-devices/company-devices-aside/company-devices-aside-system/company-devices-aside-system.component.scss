@@ -3,3 +3,11 @@
           display: flex;
         }
 }
+/deep/.company-devices-aside-system-dp  {
+  input {
+    height: 28px !important;
+  }
+}
+.sidebar-system__info-text {
+  height: 28px;
+}
