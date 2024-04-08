@@ -37,8 +37,18 @@
             <div class="sidebar-system__info">
                 <div class="sidebar-system__info-title">Asset Tag</div>
                 <app-company-devices-edit-label
+                    *ngIf="device"
                     #assetTagLabel
-                    [field]="customDevice ? customDevice.assetTag : getSystemField('assetTag') || ''"
+                    [field]="getSystemField('assetTag') || ''"
+                    [title]="'Asset Tag'"
+                    class="company-device-edit-name"
+                    [isDisabled]="customerPortalStateService.isCustomerPortal"
+                    (onChange)="onChangeHardware(device.getDataForUpdateAssetTag($event),'assetTag',$event)"
+                ></app-company-devices-edit-label>
+                <app-company-devices-edit-label
+                    *ngIf="customDevice"
+                    #assetTagLabel
+                    [field]="customDevice.assetTag"
                     [title]="'Asset Tag'"
                     class="company-device-edit-name"
                     [isDisabled]="customerPortalStateService.isCustomerPortal"

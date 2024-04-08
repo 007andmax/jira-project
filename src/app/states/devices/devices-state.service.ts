@@ -58,7 +58,7 @@ export class DevicesStateService {
         this.manufactures.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0);
         this.onGetManufactures.emit(this.manufactures);
       }
-      if (newChange.action === 'MANUFACTURE_MODEL_SAVED') this.onAddModel.emit(newChange.data);
+      if (newChange.action === 'MANUFACTURE_MODULE_SAVED') this.onAddModel.emit(newChange.data);
     })
   }
   public initGetManufactures() {

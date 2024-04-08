@@ -89,6 +89,11 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnOpenAside);
   }
+  public setCurrentDevice(data) {
+    this.customDevice = null;
+    this.currentDevice = data;
+    this.cd.detectChanges();
+  }
   public setCustomDevice(data) {
     this.tab = 'SYSTEM';
     this.customDevice = data;

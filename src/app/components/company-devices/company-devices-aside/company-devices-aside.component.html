@@ -15,7 +15,7 @@
                 [ngForTrackBy]="trackById"
             >
                 <app-company-devices-aside-device-icon
-                    (onSelect)="currentDevice = item"
+                    (onSelect)="setCurrentDevice(item)"
                     [currentDevice]="currentDevice"
                     [device]="item"
                 ></app-company-devices-aside-device-icon>

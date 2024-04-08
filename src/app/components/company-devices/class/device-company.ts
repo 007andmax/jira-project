@@ -29,6 +29,7 @@ export class DeviceCompany extends Device {
         if (this.warrantyDate) this.warrantyDateInt = new Date(this.warrantyDate).getTime();
         if (data.manufacturer) this.manufacturer = new ManufactureDevice(data.manufacturer);
         if (data.model) this.model = new ModelDevice(data.model);
+        if (!this.isCustom && data.iconName) this.iconName = data.iconName.toLowerCase();
     }
     public setType(data) {
         this.type = data;
