@@ -17,7 +17,7 @@
                     *ngIf="device"
                     #nameLabel
                     [field]="getLabelForEdit()"
-                    [title]="'Name'"
+                    [placeholder]="'Enter Name here'"
                     [isDisabled]="customerPortalStateService.isCustomerPortal"
                     class="company-device-edit-name"
                     (onChange)="onChangeName($event)"
@@ -26,7 +26,7 @@
                     #nameLabel
                     *ngIf="customDevice"
                     [field]="customDevice.name"
-                    [title]="'Name'"
+                    [placeholder]="'Enter device name'"
                     [isDisabled]="customerPortalStateService.isCustomerPortal"
                     class="company-device-edit-name"
                     (onChange)="onChangeName($event)"
@@ -40,7 +40,7 @@
                     *ngIf="device"
                     #assetTagLabel
                     [field]="getSystemField('assetTag') || ''"
-                    [title]="'Asset Tag'"
+                    [placeholder]="'Enter Asset Tag'"
                     class="company-device-edit-name"
                     [isDisabled]="customerPortalStateService.isCustomerPortal"
                     (onChange)="onChangeHardware(device.getDataForUpdateAssetTag($event),'assetTag',$event)"
@@ -50,6 +50,7 @@
                     #assetTagLabel
                     [field]="customDevice.assetTag"
                     [title]="'Asset Tag'"
+                    [placeholder]="'Enter Asset Tag'"
                     class="company-device-edit-name"
                     [isDisabled]="customerPortalStateService.isCustomerPortal"
                     (onChange)="onChangeHardware(device.getDataForUpdateAssetTag($event),'assetTag',$event)"
@@ -63,6 +64,7 @@
                     *ngIf="device"
                     [field]="getSystemField('manufacturer') || ''"
                     [title]="'Manufacturer'"
+                    [placeholder]="'Enter Manufacturer'"
                     class="company-device-edit-name"
                     [isDisabled]="customerPortalStateService.isCustomerPortal"
                     (onChange)="onChangeHardware(device.getDataForUpdateManufacturer($event),'manufacturer',$event)"
@@ -71,7 +73,7 @@
                     #manufacturerDd
                     *ngIf="customDevice"
                     class="qt-editable-dropdown qt-w100 company-devices-aside-system-dp"
-                    [placeholder]="'Select Manufactur'"
+                    [placeholder]="'Select'"
                     [field]="'name'"
                     [list]="manufactures"
                     [editItem]="customDevice.manufacturer"
@@ -94,6 +96,7 @@
                 *ngIf="customDevice"
                 [field]="customDevice.ip"
                 [title]="'IP address'"
+                [placeholder]="'Enter ip address'"
                 [isDisabled]="customerPortalStateService.isCustomerPortal"
                 class="company-device-edit-name"
                 (onChange)="onChangeIp($event)"
@@ -106,6 +109,7 @@
                     *ngIf="device"
                     [field]="getSystemField('model') || ''"
                     [title]="'Model'"
+                    [placeholder]="'Enter Model'"
                     class="company-device-edit-name"
                     [isDisabled]="customerPortalStateService.isCustomerPortal"
                     (onChange)="onChangeHardware(device.getDataForUpdateModel($event),'model',$event)"
@@ -114,7 +118,7 @@
                     #modelDd
                     *ngIf="customDevice"
                     class="qt-editable-dropdown qt-w100 company-devices-aside-system-dp"
-                    [placeholder]="'Select Model'"
+                    [placeholder]="'Select'"
                     [field]="'name'"
                     [list]="models"
                     [editItem]="customDevice.model"
@@ -217,6 +221,7 @@
                 <app-company-devices-edit-label
                     [field]="getSystemField('architecture') || ''"
                     [title]="'Architecture'"
+                    [placeholder]="'Enter System Type'"
                     class="company-device-edit-name"
                     [isDisabled]="customerPortalStateService.isCustomerPortal"
                     (onChange)="onChangeHardware(device.getDataForUpdateArchitecture($event),'architecture',$event)"
@@ -230,6 +235,7 @@
                     #locationLabel
                     [field]="customDevice.location"
                     [title]="'Location'"
+                    [placeholder]="'Enter location'"
                     [isDisabled]="customerPortalStateService.isCustomerPortal"
                     class="company-device-edit-name"
                     (onChange)="onChangeLocation($event)"
@@ -242,7 +248,7 @@
                 <textarea
                     class="qt-editable-input ng-untouched ng-pristine ng-valid"
                     appTextArea
-                    placeholder="Agent Network Credentials"
+                    placeholder="Write Note"
                     [(ngModel)]="customDevice.notes"
                     maxlength="65535"
                     (blur)="onChangeNote()"

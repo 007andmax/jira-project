@@ -5,6 +5,7 @@
     [(ngModel)]="value"
     (blur)="onCheckValue()"
     [disabled]="isDisabled"
+    [attr.placeholder]="placeholder"
 >
 <mat-error
     class="invalid-feedback"

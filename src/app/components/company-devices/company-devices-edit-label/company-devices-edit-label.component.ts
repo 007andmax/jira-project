@@ -11,7 +11,7 @@ export class CompanyDevicesEditLabelComponent implements OnInit {
   @Input() title: string;
   @Input() isDisabled: boolean = false;
   showEdit: boolean = false;
-  placeholder: string = '';
+  @Input() placeholder: string = '';
   @Output() onChange = new EventEmitter();
   constructor() { }
 
@@ -20,9 +20,6 @@ export class CompanyDevicesEditLabelComponent implements OnInit {
   }
   public setValue(value) {
     this.value = JSON.parse(JSON.stringify(value));
-  }
-  ngDoCheck() {
-    this.placeholder = (this.field !== '') ? this.field : `Enter ${this.title} here`;
   }
   onCheckValue() {
     if (this.value !== this.field) this.onChange.emit(this.value);

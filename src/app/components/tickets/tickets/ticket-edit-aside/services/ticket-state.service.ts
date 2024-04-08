@@ -92,7 +92,7 @@ export class TicketStateService {
         this.devices.sort((a, b) => (a.getLabelForEdit().toLowerCase() > b.getLabelForEdit().toLowerCase()) ?
           1 : ((b.getLabelForEdit().toLowerCase() > a.getLabelForEdit().toLowerCase()) ? -1 : 0));
         this.onGetDevices.emit(this.devices);
-        if (this.devices.length > 0 && this.devicesStateService.getIsInitWebSocket()) this.sendDeviceStatusRequest(companyID, this.devices.filter(item => item.agentId).map(item => item.agentId));
+        if (this.devices.filter(item => !item.isCustom).length > 0 && this.devicesStateService.getIsInitWebSocket()) this.sendDeviceStatusRequest(companyID, this.devices.filter(item => item.agentId).map(item => item.agentId));
       }
     });
     let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
@@ -103,7 +103,7 @@ export class TicketStateService {
     })
     this.sub.add(onDeviceUninstalled);
     let onInitWebSocket = this.devicesStateService.onInitWebSocket.subscribe(data => {
-      if (this.devices.length > 0 && this.devicesStateService.getIsInitWebSocket()) this.sendDeviceStatusRequest(companyID, this.devices.filter(item => item.agentId).map(item => item.agentId));
+      if (this.devices.filter(item => !item.isCustom).length > 0 && this.devicesStateService.getIsInitWebSocket()) this.sendDeviceStatusRequest(companyID, this.devices.filter(item => item.agentId).map(item => item.agentId));
     })
     this.sub.add(onInitWebSocket);
     let getOnUpdateAgentActivityStatus = this.devicesStateService.getOnUpdateAgentActivityStatus().subscribe(newChange => {
