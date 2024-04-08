@@ -20,10 +20,13 @@ export class DeviceCompany extends Device {
     model: ModelDevice;
     assetTag: string = "";
     location: string = "";
-    note: string = "";
+    notes: string = "";
     port: string = "";
     constructor(data, companyId) {
         super(data);
+        for (const key in data) {
+            this[key] = data[key];
+        }
         this.companyId = companyId;
         if (this.installDate) this.installDateInt = new Date(this.installDate).getTime();
         if (this.warrantyDate) this.warrantyDateInt = new Date(this.warrantyDate).getTime();

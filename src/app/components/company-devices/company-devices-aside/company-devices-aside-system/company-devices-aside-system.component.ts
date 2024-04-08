@@ -151,7 +151,7 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
     })
   }
   onChangeNote() {
-    this.devicesService.editFieldDevice(this.customDevice.getDataForRequestField("note", this.customDevice.note)).subscribe(data => {
+    this.devicesService.editFieldDevice(this.customDevice.getDataForRequestField("notes", this.customDevice.notes)).subscribe(data => {
 
     })
   }
