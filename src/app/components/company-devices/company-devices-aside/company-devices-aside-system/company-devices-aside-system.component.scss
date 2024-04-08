@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .edit-field:hover {
  .device-name-edit-marker {
           display: flex;
@@ -10,4 +12,9 @@
 }
 .sidebar-system__info-text {
   height: 28px;
+}
+.qt-editable-input {
+  &::placeholder {
+      color: $gray-400;
+    }
 }
