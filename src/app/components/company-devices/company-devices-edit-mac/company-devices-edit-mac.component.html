@@ -1,15 +1,17 @@
-<input
-    type="text"
-    [ngClass]="{'--input-error': !validate.getMacAdress()}"
-    class="device-table__input-name"
-    [(ngModel)]="value"
-    (blur)="onCheckValue()"
-    [disabled]="isDisabled"
-    [attr.placeholder]="placeholder"
->
-<mat-error
-    class="invalid-feedback"
-    *ngIf="!validate.getMacAdress()"
->
-    Enter a valid MAC address value - format XXXXXXXXXXXX
-</mat-error>
+<div class="qt-pos-rel">
+    <input
+        type="text"
+        [ngClass]="{'--input-error': !validate.getMacAdress()}"
+        class="device-table__input-name"
+        [(ngModel)]="value"
+        (blur)="onCheckValue()"
+        [disabled]="isDisabled"
+        [attr.placeholder]="placeholder"
+    >
+    <mat-error
+        class="invalid-feedback"
+        *ngIf="!validate.getMacAdress()"
+    >
+        Enter a valid MAC address value - format XXXXXXXXXXXX
+    </mat-error>
+</div>

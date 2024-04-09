@@ -34,7 +34,7 @@ export class CompanyDevicesAsideNetworkTabComponent implements OnInit {
   }
   onChangeIp(data) {
     this.customDevice.setIp(data);
-    this.devicesService.editFieldDevice(this.customDevice.getDataForRequestField("ip", this.customDevice.ip)).subscribe(data => {
+    this.devicesService.editFieldDevice(this.customDevice.getDataForRequestField("ipAddress", this.customDevice.ip)).subscribe(data => {
 
     })
   }
