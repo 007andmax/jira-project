@@ -1,5 +1,5 @@
-<tr>
-    <td class="network-scan-table__check">
+<div class="qt-table-modern__row">
+    <div class="network-scan-table__check">
         <div
             class="qt-df"
             *ngIf="networkScanSomeInfoForDevice.allowAgentInstall"
@@ -17,8 +17,8 @@
                 <span></span>
             </label>
         </div>
-    </td>
-    <td class="network-scan-table__device-name">
+    </div>
+    <div class="network-scan-table__device-name">
         <div class="qt-df qt-ai-c">
             <app-company-devices-edit-label
                 #editLabel
@@ -28,23 +28,23 @@
                 (onChange)="onChangeName($event)"
             ></app-company-devices-edit-label>
         </div>
-    </td>
-    <td
+    </div>
+    <div
         class="network-scan-table__lan-ip"
         [textContent]="device.ipAddress"
-    ></td>
-    <td
+    ></div>
+    <div
         class="network-scan-table__manufacturer"
         [textContent]="device.manufacturer || 'not defined'"
-    ></td>
-    <td
+    ></div>
+    <div
         class="network-scan-table__mac-address"
         [textContent]="device.macAddress"
-    ></td>
-    <td class="network-scan-table__status">
+    ></div>
+    <div class="network-scan-table__status">
         <app-company-network-scan-item-tooltip [device]="device"></app-company-network-scan-item-tooltip>
-    </td>
-    <td class="network-scan-table__delete">
+    </div>
+    <div class="network-scan-table__delete">
         <div
             class="icon__remove qt-ic-c qt-sz-16 qt-pointer"
             *ngIf="device.agentStatus === 'managed' || device.agentStatus === 'Installed'"
@@ -52,5 +52,5 @@
             ngbTooltip="Remove Agent"
             (click)="remove()"
         ></div>
-    </td>
-</tr>
+    </div>
+</div>

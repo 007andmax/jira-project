@@ -5,8 +5,8 @@
     ></app-payments-header>
     <div class="qt-page-list__body">
         <div class="qt-page-list__body-table-container">
-            <table class="qt-page-list__body-tbody qt-table-modern billable-table">
-                <tbody
+            <div class="qt-page-list__body-tbody qt-table-modern billable-table">
+                <div class="tbody"
                     infiniteScroll
                     [infiniteScrollContainer]="container"
                     [infiniteScrollDistance]="2"
@@ -28,8 +28,8 @@
                             [payment]="payment"
                         ></app-payment-item>
                     </ng-template>
-                </tbody>
-            </table>
+                </div>
+            </div>
         </div>
         <div
             class="loading"

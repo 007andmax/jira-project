@@ -1,23 +1,23 @@
-<tr
-    class="contracts-table-row-item"
+<div
+    class="contracts-table-row-item qt-table-modern__row"
     [ngClass]="(showNotificationReview) ? 'no-valid' : ''"
 >
-    <td
+    <div
         class="contracts-table__company"
         [textContent]="contract.company.name"
         (click)="preview()"
-    ></td>
-    <td
+    ></div>
+    <div
         class="contracts-table__description"
         [textContent]="contract.description"
         (click)="preview()"
-    ></td>
-    <td
+    ></div>
+    <div
         class="contracts-table__contract-type"
         [textContent]="getType()"
         (click)="preview()"
-    ></td>
-    <td
+    ></div>
+    <div
         class="contracts-table__status tooltip-contract-list"
         (click)="preview()"
     >
@@ -39,8 +39,8 @@
             placement="top"
             ngbTooltip="Manual create billable item"
         ></div>
-    </td>
-    <td
+    </div>
+    <div
         class="contracts-table__status"
         (click)="preview()"
     >
@@ -51,23 +51,23 @@
     '--info' : contract.status === 'CURRENT'}"
             [textContent]="contractStatusDictionary[contract.status]"
         ></span>
-    </td>
-    <td
+    </div>
+    <div
         class="contracts-table__start-date"
         [textContent]="getDate(contract.startDate)"
         (click)="preview()"
-    ></td>
-    <td
+    ></div>
+    <div
         class="contracts-table__review-date"
         [textContent]="getDate(contract.reviewDate)"
         (click)="preview()"
-    ></td>
-    <td
+    ></div>
+    <div
         class="contracts-table__amount"
         [textContent]="contract.amount | currency"
         (click)="preview()"
-    ></td>
-    <td
+    ></div>
+    <div
         class="contracts-table__menu"
         ngbDropdown
         container="body"
@@ -127,5 +127,5 @@
                 Delete agreement
             </li>
         </ul>
-    </td>
-</tr>
+    </div>
+</div>

@@ -1,17 +1,17 @@
-<tr>
-    <td
+<div class="qt-table-modern__row">
+    <div
         class="default-service-table__service-name"
         [textContent]="service.name"
-    ></td>
-    <td
+    ></div>
+    <div
         class="default-service-table__rate"
         [textContent]="service.rate | currency"
-    ></td>
-    <td
+    ></div>
+    <div
         class="default-service-table__taxes"
         [textContent]="getSelectedTaxNames(service.taxes)"
-    ></td>
-    <td class="default-service-table__gl">
+    ></div>
+    <div class="default-service-table__gl">
         <app-drop-down
             #glNumberSelect
             [class]="['--small-padding']"
@@ -31,9 +31,9 @@
             (onSelectedItem)="onSelectGlNumbers($event)"
         >
         </app-drop-down>
-    </td>
-    <td class="default-service-table__billable">
-        <div class="qt-df qt-jc-c">
+    </div>
+    <div class="default-service-table__billable">
+        <div class="qt-df qt-jc-c qt-w100">
             <label
                 class="qt-checkbox pointer"
                 [attr.for]="'service-billable-' + service.versionedId.id"
@@ -48,9 +48,9 @@
                 <span></span>
             </label>
         </div>
-    </td>
-    <td class="default-service-table__default">
-        <div class="qt-df qt-jc-c">
+    </div>
+    <div class="default-service-table__default">
+        <div class="qt-df qt-jc-c qt-w100">
             <label
                 class="qt-checkbox pointer"
                 [attr.for]="'service-default-' + service.versionedId.id"
@@ -65,8 +65,8 @@
                 <span></span>
             </label>
         </div>
-    </td>
-    <td class="default-service-table__menu">
+    </div>
+    <div class="default-service-table__menu">
         <div
             *ngIf="getPermissions('MANAGE_SERVICES')"
             ngbDropdown
@@ -100,5 +100,5 @@
                 </li>
             </ul>
         </div>
-    </td>
-</tr>
+    </div>
+</div>

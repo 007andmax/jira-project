@@ -96,47 +96,45 @@
         ></documents-filter>
     </div>
     <div class="qt-page-list__header-thead-container">
-        <table class="qt-table-modern qt-page-list__header-thead">
-            <thead>
-                <tr>
-                    <th
-                        class="documents-table__title pointer"
-                        (click)="onFilter('title')"
-                    >
-                        Title
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
-                        class="documents-table__create-by pointer"
-                        (click)="onFilter('createBy')"
-                    >
-                        Create By
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
-                        class="documents-table__created-date pointer"
-                        (click)="onFilter('createdDate')"
-                    >
-                        Created Date
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
-                        class="documents-table__review-date pointer"
-                        (click)="onFilter('reviewDate')"
-                    >
-                        Review Date
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th class="documents-table__company">Company</th>
-                    <th
-                        class="documents-table__assigned-companies pointer"
-                        *ngIf="showAssignedCompanies"
-                    >
-                        assigned to companies
-                    </th>
-                    <th class="documents-table__menu pointer"></th>
-                </tr>
-            </thead>
-        </table>
+        <div class="qt-table-modern qt-page-list__header-thead">
+          <div class="qt-page-list__header-thead__row">
+            <div
+              class="documents-table__title pointer"
+              (click)="onFilter('title')"
+            >
+              Title
+              <span class="qt-table-modern__sorting"></span>
+            </div>
+            <div
+              class="documents-table__create-by pointer"
+              (click)="onFilter('createBy')"
+            >
+              Create By
+              <span class="qt-table-modern__sorting"></span>
+            </div>
+            <div
+              class="documents-table__created-date pointer"
+              (click)="onFilter('createdDate')"
+            >
+              Created Date
+              <span class="qt-table-modern__sorting"></span>
+            </div>
+            <div
+              class="documents-table__review-date pointer"
+              (click)="onFilter('reviewDate')"
+            >
+              Review Date
+              <span class="qt-table-modern__sorting"></span>
+            </div>
+            <div class="documents-table__company">Company</div>
+            <div
+              class="documents-table__assigned-companies pointer"
+              *ngIf="showAssignedCompanies"
+            >
+              assigned to companies
+            </div>
+            <div class="documents-table__menu pointer"></div>
+          </div>
+        </div>
     </div>
 </div>

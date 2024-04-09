@@ -15,31 +15,31 @@
             </div>
         </div>
         <div class="qt-page-list__header-thead-container">
-            <table class="qt-table-modern qt-page-list__header-thead">
-                <thead>
-                    <tr>
-                        <th
+            <div class="qt-table-modern qt-page-list__header-thead">
+                <div class="qt-table-modern qt-page-list__header-thead">
+                    <div class="qt-page-list__header-thead__row">
+                        <div
                             class="default-service-table__service-name pointer"
                             (click)="onFilter('name')"
                         >
                             Service Name
                             <span class="qt-table-modern__sorting"></span>
-                        </th>
-                        <th
+                        </div>
+                        <div
                             class="default-service-table__rate pointer"
                             (click)="onFilter('rate')"
                         >
                             Hourly Rate($)
                             <span class="qt-table-modern__sorting"></span>
-                        </th>
-                        <th
+                        </div>
+                        <div
                             class="default-service-table__taxes pointer"
                             (click)="onFilter('taxes')"
                         >
                             Taxes
                             <span class="qt-table-modern__sorting"></span>
-                        </th>
-                        <th class="default-service-table__gl">
+                        </div>
+                        <div class="default-service-table__gl">
                             GL Number
                             <ng-template
                                 #tipContent
@@ -64,19 +64,19 @@
                                 container="body"
                             ></span>
                             <span class="qt-table-modern__sorting"></span>
-                        </th>
-                        <th class="default-service-table__billable">Make Billable</th>
-                        <th class="default-service-table__default">Set as Default</th>
-                        <th class="default-service-table__menu"></th>
-                    </tr>
-                </thead>
-            </table>
+                        </div>
+                        <div class="default-service-table__billable">Make Billable</div>
+                        <div class="default-service-table__default">Set as Default</div>
+                        <div class="default-service-table__menu"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="qt-page-list__body">
         <div class="qt-page-list__body-table-container --height-unset services-list">
-            <table class="qt-page-list__body-tbody  qt-table-modern default-service-table">
-                <tbody>
+            <div class="qt-page-list__body-tbody  qt-table-modern default-service-table">
+                <div class="tbody">
                     <ng-template
                         ngFor
                         let-item
@@ -88,8 +88,8 @@
                             (onEditService)="onEditService($event)"
                         ></app-non-contract-services-item>
                     </ng-template>
-                </tbody>
-            </table>
+                </div>
+            </div>
             <div
                 class="no-exist-elements"
                 *ngIf="!showPreloader && list.length == 0"
@@ -107,23 +107,23 @@
             class="qt-page-list__body-table-container --height-unset --visible"
             *ngIf="!showPreloader"
         >
-            <table class="qt-page-list__body-tbody  qt-table-modern default-service-table">
-                <thead>
-                    <tr>
-                        <th class="default-service-table__contracts  qt-fw-600">Contracts</th>
-                        <th class="default-service-table__rate"></th>
-                        <th class="default-service-table__taxes"></th>
-                        <th class="default-service-table__gl"></th>
-                        <th class="default-service-table__billable"></th>
-                        <th class="default-service-table__default"></th>
-                        <th class="default-service-table__menu"></th>
-                    </tr>
-                </thead>
-                <tbody>
+            <div class="qt-page-list__body-tbody  qt-table-modern default-service-table">
+                <div class="qt-table-modern qt-page-list__header-thead">
+                    <div class="qt-page-list__header-thead__row">
+                        <div class="default-service-table__contracts  qt-fw-600">Contracts</div>
+                        <div class="default-service-table__rate"></div>
+                        <div class="default-service-table__taxes"></div>
+                        <div class="default-service-table__gl"></div>
+                        <div class="default-service-table__billable"></div>
+                        <div class="default-service-table__default"></div>
+                        <div class="default-service-table__menu"></div>
+                    </div>
+                </div>
+                <div class="tbody">
                     <app-non-contract-services-contracts [type]="'BLOCK_TIME'"></app-non-contract-services-contracts>
                     <app-non-contract-services-contracts [type]="'USER_DEVICE'"></app-non-contract-services-contracts>
-                </tbody>
-            </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>
