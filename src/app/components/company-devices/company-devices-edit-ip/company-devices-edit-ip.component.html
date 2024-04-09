@@ -1,15 +1,20 @@
-<input
-    type="text"
-    [ngClass]="{'--input-error': !validate.getIpAdress()}"
-    class="device-table__input-name"
-    [(ngModel)]="value"
-    (blur)="onCheckValue()"
-    [disabled]="isDisabled"
-    [attr.placeholder]="placeholder"
+<div
+    class="qt-pos-rel"
+    [ngClass]="{'qt-mb-12' : !validate.getIpAdress()}"
 >
-<mat-error
-    class="invalid-feedback"
-    *ngIf="!validate.getIpAdress()"
->
-    Enter a valid IP value
-</mat-error>
+    <input
+        type="text"
+        [ngClass]="{'--input-error': !validate.getIpAdress()}"
+        class="device-table__input-name"
+        [(ngModel)]="value"
+        (blur)="onCheckValue()"
+        [disabled]="isDisabled"
+        [attr.placeholder]="placeholder"
+    >
+    <mat-error
+        class="invalid-feedback"
+        *ngIf="!validate.getIpAdress()"
+    >
+        Enter a valid IP value
+    </mat-error>
+</div>
