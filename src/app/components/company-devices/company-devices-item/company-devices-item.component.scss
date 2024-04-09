@@ -7,7 +7,7 @@
     position: relative;
 }
 .company-device-hover:hover {
-  td {
+  > div {
     background-color: $gray-25;
     .company-devices-table__ip-address-text,
     .company-devices-table__ip-windows-text {
@@ -16,7 +16,8 @@
     .company-devices-table__system-network-buttons,
     .company-devices-table__ip-address-buttons {
       position: absolute;
-      top: 7px;
+      top: 50%;
+      transform: translateY(-50%);
       display: flex;
     }
     .company-devices-table__ip-address-buttons {
@@ -31,6 +32,36 @@
   }
 }
 
+.company-devices-table__system-network-buttons,
+.company-devices-table__ip-address-buttons {
+  display: none;
+  font-size: 12px;
+  font-weight: 600;
+  color: $blue-light-600;
+}
+
 .sidebar-system__info-text-input {
   background-color: orange;
+}
+
+.qt-table-modern__row {
+  min-height: 48px;
+  height: auto;
+}
+
+.uptime-tag {
+  border: solid 1px $green-600;
+  line-height: 1;
+  width: fit-content;
+  padding: 2px 4px;
+  border-radius: 3px;
+  color: $green-600;
+  background-color: $white;
+  letter-spacing: 0.3px;
+  font-size: 8px;
+  text-transform: uppercase;
+  &.--offline {
+    color: $red-600;
+    border: solid 1px $red-600;
+  }
 }

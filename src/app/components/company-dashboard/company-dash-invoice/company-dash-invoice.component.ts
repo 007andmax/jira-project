@@ -49,7 +49,7 @@ export class CompanyDashInvoiceComponent implements OnInit {
     let getInvoice = this.companiesService.getRecentInvoice(companyId).subscribe((data: any) => {
       data.forEach(element => {
         let obj = element;
-        obj.dateName = moment(new Date(obj.date)).format('DD MMM YYYY');
+        obj.dateName = moment(obj.date).format('DD MMM YYYY');
         this.recentInvoiceList.push(obj);
       });
       if (!this.cd['destroyed']) {

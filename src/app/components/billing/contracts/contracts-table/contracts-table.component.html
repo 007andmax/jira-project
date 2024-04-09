@@ -1,7 +1,7 @@
 <div class="qt-page-list__body">
     <div class="qt-page-list__body-table-container">
-        <table class="qt-page-list__body-tbody qt-table-modern contracts-table">
-            <tbody>
+        <div class="qt-page-list__body-tbody qt-table-modern contracts-table">
+            <div class="tbody">
                 <ng-template
                     ngFor
                     let-item
@@ -17,8 +17,8 @@
                         (onForceCreate)="onForceCreate($event)"
                     ></app-contracts-table-item>
                 </ng-template>
-            </tbody>
-        </table>
+            </div>
+        </div>
         <div
             class="loading"
             *ngIf="showPreloader"

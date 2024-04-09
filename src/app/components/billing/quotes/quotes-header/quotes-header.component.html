@@ -59,10 +59,10 @@
         ></app-quotes-filter>
     </div>
     <div class="qt-page-list__header-thead-container">
-        <table class="qt-table-modern qt-page-list__header-thead">
-            <thead>
-                <tr>
-                    <th class="quotes-table__check">
+        <div class="qt-table-modern qt-page-list__header-thead">
+            <div class="qt-table-modern qt-page-list__header-thead">
+                <div class="qt-page-list__header-thead__row">
+                    <div class="quotes-table__check">
                         <div class="qt-df">
                             <label
                                 class="qt-checkbox"
@@ -77,51 +77,51 @@
                                 <span></span>
                             </label>
                         </div>
-                    </th>
-                    <th
+                    </div>
+                    <div
                         class="quotes-table__date pointer"
                         (click)="sortBy('date')"
                     >
                         Date
                         <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
+                    </div>
+                    <div
                         class="quotes-table__number"
                         (click)="sortBy('number')"
                     >
                         Quote#
-                    </th>
-                    <th
+                    </div>
+                    <div
                         class="quotes-table__company pointer"
                         (click)="sortBy('customerName')"
                     >
                         Company
                         <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th class="quotes-table__description pointer">
+                    </div>
+                    <div class="quotes-table__description pointer">
                         Description
                         <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th class="quotes-table__recipients">Recipients</th>
-                    <th class="quotes-table__create-by">Created By</th>
-                    <th class="quotes-table__status">Status</th>
-                    <th
+                    </div>
+                    <div class="quotes-table__recipients">Recipients</div>
+                    <div class="quotes-table__create-by">Created By</div>
+                    <div class="quotes-table__status">Status</div>
+                    <div
                         class="quotes-table__valid pointer"
                         (click)="sortBy('validUntil')"
                     >
                         Valid Until
                         <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
+                    </div>
+                    <div
                         class="quotes-table__total pointer"
                         (click)="sortBy('amount')"
                     >
                         Amount
                         <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th class="quotes-table__menu"></th>
-                </tr>
-            </thead>
-        </table>
+                    </div>
+                    <div class="quotes-table__menu"></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

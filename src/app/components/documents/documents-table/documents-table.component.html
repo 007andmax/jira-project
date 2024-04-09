@@ -1,14 +1,14 @@
-<tr
+<div class="qt-table-modern__row"
     [ngClass]="{'pointer':!item.isCategory && getPermissions('VIEW_DOCUMENT'),
     'documents-no-valid' : showNotificationReview}"
     (click)="showTemplate()"
 >
-    <td
-        class="documents-table__title"
+    <div
+        class="documents-table__title ellipsis"
         (click)="navigateToCategory()"
         [ngClass]="{'pointer':item.isCategory}"
     >
-        <div class="documents-table__title-menu">
+        <div class="documents-table__title-menu ellipsis">
             <div
                 class="qt-sz-16 qt-bg-contain qt-mr-8 qt-fs-0"
                 [ngClass]="{'icon__folder':item.isCategory,
@@ -19,32 +19,32 @@
                 [textContent]="item.isCategory ? item.categoryName : item.title"
             ></div>
         </div>
-    </td>
-    <td
+    </div>
+    <div
         class="documents-table__create-by ellipsis"
         [textContent]="item.isCategory ? '' : getCreateBy()"
         (click)="navigateToCategory()"
         [ngClass]="{'pointer':item.isCategory}"
-    ></td>
-    <td
+    ></div>
+    <div
         class="documents-table__created-date ellipsis"
         [textContent]="item.isCategory ? '' : parseCreateAt()"
         (click)="navigateToCategory()"
         [ngClass]="{'pointer':item.isCategory}"
-    ></td>
-    <td
+    ></div>
+    <div
         class="documents-table__review-date ellipsis"
         [textContent]="item.isCategory ? '' : parseReviewAt()"
         (click)="navigateToCategory()"
         [ngClass]="{'pointer':item.isCategory}"
-    ></td>
-    <td
+    ></div>
+    <div
         class="documents-table__company ellipsis"
         [textContent]="item.isCategory ? '' : getCompanies()"
         (click)="navigateToCategory()"
         [ngClass]="{'pointer':item.isCategory}"
-    ></td>
-    <td
+    ></div>
+    <div
         class="documents-table__assigned-companies ellipsis"
         (click)="navigateToCategory()"
         [ngClass]="{'pointer':item.isCategory}"
@@ -57,8 +57,8 @@
             ></i>
             <span *ngIf="item.assignedToCompany">Yes</span>
         </div>
-    </td>
-    <td
+    </div>
+    <div
         class="documents-table__menu"
         (click)="$event.stopPropagation();"
     >
@@ -168,5 +168,5 @@
                 </li>
             </ul>
         </div>
-    </td>
-</tr>
+    </div>
+</div>

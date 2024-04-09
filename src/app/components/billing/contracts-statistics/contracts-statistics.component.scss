@@ -24,3 +24,40 @@
     background-color: $gray-50;
     border-bottom: 1px solid $gray-200;
 }
+
+/deep/ contracts-statistics {
+  .qt-table-modern {
+    .ticket-table {
+      &__status {
+        flex: 0 0 177px;
+      }
+      &__created-date {
+        flex: 0 0 175px;
+      }
+      &__status {
+        flex: 0 0 177px;
+      }
+      &__created-date {
+        flex: 0 0 175px;
+      }
+      &__assignee {
+        flex: 0 0 150px;
+        max-width: 100%;
+      }
+      &__сontract-type {
+        flex: 0 0 220px;
+      }
+    }
+    div.ticket-table__contract-description {
+      max-width: unset;
+    }
+  }
+}
+
+/deep/ contracts-statistics {
+  .qt-page-list__header-thead,
+  .qt-page-list__body-tbody {
+    min-width: 1406px;
+  }
+
+}

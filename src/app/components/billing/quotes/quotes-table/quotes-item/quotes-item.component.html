@@ -1,5 +1,5 @@
-<tr>
-    <td class="quotes-table__check">
+<div class="qt-table-modern__row">
+    <div class="quotes-table__check">
         <div
             class="qt-df"
             *ngIf="quote.checkStatus(['UNREAD','SAVED', 'EXPIRED', 'INVOICED', 'TICKETED','CANCELED','BILLED'])"
@@ -17,31 +17,33 @@
                 <span></span>
             </label>
         </div>
-    </td>
-    <td
+    </div>
+    <div
         class="quotes-table__date"
         [textContent]="getDate(quote.date)"
     >
-    </td>
-    <td
+    </div>
+    <div
         class="quotes-table__number pointer"
         [textContent]="'#' + quote.number"
         (click)="preview()"
-    ></td>
-    <td
+    ></div>
+    <div
         class="quotes-table__company"
         [textContent]="quote.company.name"
-    ></td>
-    <td
+    ></div>
+    <div
         class="quotes-table__description"
         [textContent]="quote.description"
-    ></td>
-    <td
-        class="quotes-table__recipients"
+    ></div>
+    <div class="quotes-table__recipients ellipsis">
+      <div
+        class="ellipsis"
         [innerHtml]="quote.parseRecipients()"
-    ></td>
-    <td class="quotes-table__create-by">
-        <div class="qt-df qt-ai-c">
+      ></div>
+    </div>
+    <div class="quotes-table__create-by ellipsis">
+        <div class="qt-df qt-ai-c qt-w100">
             <div
                 class="qt-table-modern__circle-avatar"
                 [ngClass]="!usersStateService.getNameForAvatar(createdUser).length ? 'transparent-text' : ''"
@@ -50,11 +52,11 @@
             ></div>
             <div
                 [textContent]="getUserName(createdUser)"
-                class="ellipsis"
+                class="ellipsis quotes-table__create-by-user-name"
             ></div>
         </div>
-    </td>
-    <td class="quotes-table__status">
+    </div>
+    <div class="quotes-table__status">
         <span
             class="tag__modern"
             [ngClass]="[getStatusClass(quote.status),(quote.status === 'TICKETED' || quote.status === 'INVOICED' && getPermissions('VIEW_ACCOUNTING')) ? 'pointer' : '']"
@@ -63,17 +65,17 @@
         >
             <!-- [ngClass]="payment.refundMethod ? '--error' : '--success'" -->
         </span>
-    </td>
-    <td
+    </div>
+    <div
         class="quotes-table__valid"
         [textContent]="getDate(quote.validUntil)"
     >
-    </td>
-    <td
+    </div>
+    <div
         class="quotes-table__total"
         [textContent]="quote.totalAmount | currency"
-    ></td>
-    <td
+    ></div>
+    <div
         class="quotes-table__menu"
         ngbDropdown
         [container]="'body'"
@@ -187,5 +189,5 @@
                 Copy a quote
             </li>
         </ul>
-    </td>
-</tr>
+    </div>
+</div>

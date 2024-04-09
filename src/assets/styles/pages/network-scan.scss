@@ -4,6 +4,10 @@
   padding: 24px;
   min-height: calc(100vh - #{$header-height});
   background-color: $background;
+  .qt-page-list__header-thead__row {
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+  }
   &__content {
     max-width: 1144px;
     margin: 0 auto;
@@ -158,9 +162,7 @@
   }
 
   .network-scan-table {
-    border-collapse: collapse;
-
-    th {
+    .qt-page-list__header-thead__row > div {
       height: 40px;
       background: $gray-25;
       font-size: 11px;
@@ -171,14 +173,14 @@
       vertical-align: middle;
       &:first-child {
         border-top-left-radius: 8px;
+        padding-left: 17px;
       }
       &:last-child {
         border-top-right-radius: 8px;
       }
     }
-    td {
+    .qt-table-modern__row > div {
       height: 48px;
-      padding: 5px 8px;
       vertical-align: middle;
       text-align: left;
       background: $white;
@@ -187,16 +189,14 @@
       border-top: 1px solid $gray-100;
     }
 
-    td.network-scan-table, th.network-scan-table {
+    .network-scan-table {
       &__check {
-        width: 32px;
-        min-width: 32px;
-        max-width: 32px;
+        flex: 0 0 43px;
         padding-left: 16px;
         padding-right: 0;
       }
       &__device-name {
-        width: 100%;
+        flex: 2 0 200px;
         .network-scan-table__device-name-input {
           border-radius: 4px;
           border: 1px solid $background;
@@ -208,30 +208,20 @@
           }
         }
       }
-      &__os{
-        width:170px;
-        min-width: 170px;
-        max-width: 170px;
+      &__os {
+       flex: 0 0 170px;
       }
       &__lan-ip {
-        width: 115px;
-        min-width: 115px;
-        max-width: 115px;
+        flex: 0 0 115px;
       }
       &__manufacturer {
-        width: 208px;
-        min-width: 208px;
-        max-width: 208px;
+        flex: 0 0 208px;
       }
       &__mac-address {
-        width: 132px;
-        max-width: 132px;
-        min-width: 132px;
+        flex: 0 0 132px;;
       }
       &__status {
-        width: 102px;
-        max-width: 102px;
-        min-width: 102px;
+        flex: 0 0 102px;;
         .tag__modern {
           text-transform: uppercase;
           font-size: 9px;
@@ -241,9 +231,7 @@
         }
       }
       &__delete {
-        width: 40px;
-        max-width: 40px;
-        min-width: 40px;
+        flex: 0 0 42px;
         padding-right: 16px;
       }
     }

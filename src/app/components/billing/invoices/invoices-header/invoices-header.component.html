@@ -51,56 +51,56 @@
         ></app-invoices-filter>
     </div>
     <div class="qt-page-list__header-thead-container">
-        <table class="qt-table-modern qt-page-list__header-thead">
-            <thead>
-                <tr>
-                    <th class="invoice-table__check"></th>
-                    <th
+        <div class="qt-table-modern qt-page-list__header-thead">
+            <div class="qt-table-modern qt-page-list__header-thead">
+                <div class="qt-page-list__header-thead__row">
+                    <div class="invoice-table__check"></div>
+                    <div
                         class="invoce-table__date pointer"
                         (click)="sortBy('INVOICE_DATE')"
                     >
                         Date
                         <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
+                    </div>
+                    <div
                         class="invoce-table__invoice pointer"
                         (click)="sortBy('INVOICE_NUMBER')"
                     >
                         Invoice#
                         <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
+                    </div>
+                    <div
                         class="invoce-table__company pointer"
                         (click)="sortBy('COMPANY_NAME')"
                     >
                         Company
                         <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th class="invoce-table__status">Status</th>
-                    <th
+                    </div>
+                    <div class="invoce-table__status">Status</div>
+                    <div
                         class="invoce-table__read-on pointer"
                         (click)="sortBy('READ_ON')"
                     >
                         Read On
                         <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
+                    </div>
+                    <div
                         class="invoce-table__amount pointer"
                         (click)="sortBy('AMOUNT')"
                     >
                         Amount
                         <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
+                    </div>
+                    <div
                         class="invoce-table__balance-due pointer"
                         (click)="sortBy('BALANCE')"
                     >
                         Balance Due
                         <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th class="invoce-table__menu"></th>
-                </tr>
-            </thead>
-        </table>
+                    </div>
+                    <div class="invoce-table__menu"></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

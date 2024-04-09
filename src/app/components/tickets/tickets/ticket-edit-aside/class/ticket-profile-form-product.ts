@@ -24,7 +24,7 @@ export class TicketProfileFormProduct {
             this.discountType = data.discountType;
             this.completed = data.completed;
             this.valdiateSaleCost = data.valdiateSaleCost;
-            this.taxes = [...data.this.taxes, ...this.item.taxes];
+            this.taxes = [...data.taxes, ...this.item.taxes];
         }
     }
     public getDataForAdd() {
