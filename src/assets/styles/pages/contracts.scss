@@ -1,5 +1,6 @@
 @import "./src/assets/styles/variable";
 @import "./src/assets/styles/mixin/input";
+@import "./src/assets/styles/mixin/breakpoint";
 
 .contracts-page {
   .contracts-list-header,
@@ -68,21 +69,21 @@
 
   .contracts-table__contract-type {
     flex: 0 0 225px;
-    @media (max-width: 1600px) {
+    @include media-breakpoint-down($md) {
       flex: 0 0 200px;
     }
   }
 
   .contracts-table__company {
     flex: 0 0 230px;
-    @media (max-width: 1600px) {
+    @include media-breakpoint-down($md) {
       flex: 0 0 180px;
     }
   }
 
   .contracts-table__description {
     flex: 2 0 200px;
-    @media (max-width: 1600px) {
+    @include media-breakpoint-down($md) {
       flex: 2 0 160px;
     }
   }

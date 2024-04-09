@@ -1,3 +1,6 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/mixin/breakpoint";
+
 .products-page {
   .qt-table-modern__row:hover > div {
     textarea {
@@ -46,7 +49,7 @@
      flex: 2 0 280px;
       font-weight: $fw-medium;
       color: $gray-900;
-      @media (max-width: 1920px) {
+      @include media-breakpoint-down($lg) {
         max-width: 382px;
       }
     }
@@ -54,7 +57,7 @@
     &__category {
       flex: 1 0 144px;
       color: $gray-600;
-      @media (min-width: 2048px) {
+      @include media-breakpoint-up($lg) {
         flex: 1 0 200px;
       }
 
@@ -79,10 +82,10 @@
     &__gl {
       flex: 0 0 92px;
       color: $gray-600;
-      @media (max-width: 1920px) {
+      @include media-breakpoint-down($lg) {
         flex-grow: 1;
       }
-      @media (min-width: 2048px) {
+      @include media-breakpoint-up($lg) {
         flex: 0 0 182px;
       }
     }
@@ -93,17 +96,17 @@
     &__cost{
       flex: 0 0 120px;
       color: $gray-600;
-      @media (max-width: 1920px) {
+      @include media-breakpoint-down($lg) {
         flex-grow: 1;
       }
     }
     &__mfg,
     &__ilc {
       flex: 0 0 120px;
-      @media (max-width: 1600px) {
+      @include media-breakpoint-down($md) {
         flex: 0 0 100px;
       }
-      @media (min-width: 2048px) {
+      @include media-breakpoint-up($lg) {
         flex: 0 0 220px;
       }
     }
@@ -111,13 +114,13 @@
       flex: 0 0 101px;
       color: $gray-600;
       position: relative;
-      @media (max-width: 1600px) {
+      @include media-breakpoint-down($md) {
         flex: 0 0 78px;
       }
     }
     &__sale-price {
       flex: 0 0 109px;
-      @media (max-width: 1600px) {
+      @include media-breakpoint-down($md) {
         flex: 0 0 92px;
       }
       color: $gray-600;

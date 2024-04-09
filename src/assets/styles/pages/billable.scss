@@ -1,4 +1,5 @@
 @import './src/assets/styles/variable';
+@import "./src/assets/styles/mixin/breakpoint";
 
 .page-list-billable {
 
@@ -28,14 +29,14 @@
 
     &__sales {
       flex: 0 0 128px;
-      @media (min-width: 2048px) {
+      @include media-breakpoint-up($lg) {
         flex: 1 0 128px;
       }
     }
 
     &__billable {
       flex: 0 0 144px;
-      @media (min-width: 2048px) {
+      @include media-breakpoint-up($lg) {
         flex: 1 0 144px;
       }
     }
@@ -69,9 +70,7 @@
 
   }
 
-  &__check { // TODO Check This style
-    //width: 40px;
-    //padding-right: 4px !important;
+  &__check {
     flex: 0 0 52px;
   }
 
