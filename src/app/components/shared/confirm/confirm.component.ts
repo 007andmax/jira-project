@@ -56,6 +56,7 @@ export class ConfirmComponent implements OnInit {
       && this.action !== 'REMOVE_TASK_TICKET'
       && this.action !== 'REMOVE_ATTACHMENT'
       && this.action !== 'DELETE_COMMAND'
+      && this.action !== 'DELETE_SUBSCRIPTION_TYPE'
       && this.action !== 'CHANGE_COMPANY_TICKET'
       && this.action !== 'DELETE_GLOBAL_FILTER'
       && this.action !== 'DELETE_GLOBAL_USERS_FILTER'
@@ -81,7 +82,6 @@ export class ConfirmComponent implements OnInit {
       this.action === 'DELETE_LIST_TICKET_STATUS' ||
       this.action === 'DELETE_CATEGORIES_PRODUCT' ||
       this.action === 'DELETE_CATEGORY_PRODUCT' ||
-      this.action === 'DELETE_SUBSCRIPTION_TYPE' ||
       this.action === 'DELETE_SUBSCRIPTION_TYPIES' ||
       this.action === 'DELETE_SUBSCRIPTION_USER' ||
       this.action === 'DELETE_DEVICE_TYPE' ||
