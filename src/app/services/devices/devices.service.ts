@@ -53,6 +53,24 @@ export class DevicesService {
   public editFieldDevice(data) {
     return this.http.put(this.apiUrl + `devices/custom`, data);
   }
+  public editManufactur(data) {
+    return this.http.put(this.apiUrl + `devices/manufactures`, data).pipe(
+      tap(data => {
+        this.appStateService.setCustomeError(false);
+        this.toastrService.success("The Manufacturer has been successfully updated");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public editModel(data) {
+    return this.http.put(this.apiUrl + `devices/manufactures/models`, data).pipe(
+      tap(data => {
+        this.appStateService.setCustomeError(false);
+        this.toastrService.success("The Model has been successfully updated");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
   public addModel(data) {
     this.appStateService.setCustomeError(true, "The error has occurred, please check your entries");
     return this.http.post(this.apiUrl + `devices/manufactures/models`, data).pipe(

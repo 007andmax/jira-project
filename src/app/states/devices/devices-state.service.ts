@@ -58,6 +58,11 @@ export class DevicesStateService {
         this.manufactures.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0);
         this.onGetManufactures.emit(this.manufactures);
       }
+      if (newChange.action === 'MANUFACTURE_EDITED') {
+        let index = this.manufactures.findIndex(item => item.id == newChange.data.id);
+        if (index > -1) this.manufactures[index] = new ManufactureDevice(newChange.data);
+        this.onGetManufactures.emit(this.manufactures);
+      }
       if (newChange.action === 'MANUFACTURE_MODULE_SAVED') this.onAddModel.emit(newChange.data);
     })
   }

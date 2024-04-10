@@ -60,6 +60,11 @@
             <div
                 class="tab-pane__table-row"
                 *ngFor="let model of models; let i = index"
+                appClickOtside
+                [init]="model.isInitEdit"
+                [ngClass]="['edit-model-container-' + i,model.selected ? '--selected' : '']"
+                [class]="'.edit-model-container-' + i"
+                (onOutSide)="onEditModel(model)"
             >
                 <div class="tab-pane__table-cell tab-pane__table-checkboxes">
                     <label class="qt-checkbox">
@@ -71,10 +76,17 @@
                         <span></span>
                     </label>
                 </div>
-                <div
-                    class="tab-pane__table-cell crm-settings-company-industry-table__count"
-                    [textContent]="model.name"
-                >
+                <div class="tab-pane__table-cell crm-settings-company-industry-table__count">
+                    <input
+                        type="text"
+                        class="form-input  --editable"
+                        placeholder="Enter Model Name"
+                        [(ngModel)]="model.name"
+                        maxlength="255"
+                        appKeyUpEnter
+                        (onChange)="onEditModel(model)"
+                        (input)="model.onInitEdit(true)"
+                    >
                 </div>
                 <div class="tab-pane__table-cell crm-settings-company-industry-table__action">
                     <div class="qt-df qt-ai-c">

@@ -38,6 +38,11 @@
             <div
                 class="tab-pane__table-row"
                 *ngFor="let manufacture of manufactures; let i = index"
+                appClickOtside
+                [init]="manufacture.isInitEdit"
+                [ngClass]="['edit-manufacture-container-' + i,manufacture.selected ? '--selected' : '']"
+                [class]="'.edit-manufacture-container-' + i"
+                (onOutSide)="onEditManufactur(manufacture)"
             >
                 <div class="tab-pane__table-cell tab-pane__table-checkboxes">
                     <label class="qt-checkbox">
@@ -49,10 +54,18 @@
                         <span></span>
                     </label>
                 </div>
-                <div
-                    class="tab-pane__table-cell crm-settings-company-industry-table__industry-type"
-                    [textContent]="manufacture.name"
-                ></div>
+                <div class="tab-pane__table-cell crm-settings-company-industry-table__industry-type">
+                    <input
+                        type="text"
+                        class="form-input  --editable"
+                        placeholder="Enter Manufacture Name"
+                        [(ngModel)]="manufacture.name"
+                        maxlength="255"
+                        appKeyUpEnter
+                        (onChange)="onEditManufactur(manufacture)"
+                        (input)="manufacture.onInitEdit(true)"
+                    >
+                </div>
                 <div class="tab-pane__table-cell crm-settings-company-industry-table__action">
                     <div class="qt-df qt-ai-c">
                         <app-dynamic-tooltip

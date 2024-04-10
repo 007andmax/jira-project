@@ -19,6 +19,7 @@ import { DeviceSettingManufacturesComponent } from './device-setting-manufacture
 import { DeviceSettingManufacturesAddComponent } from './device-setting-manufactures/device-setting-manufactures-add/device-setting-manufactures-add.component';
 import { DeviceSettingModelsComponent } from './device-setting-models/device-setting-models.component';
 import { DeviceSettingModelsAddComponent } from './device-setting-models/device-setting-models-add/device-setting-models-add.component';
+import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.module';
 
 @NgModule({
     declarations: [
@@ -47,7 +48,8 @@ import { DeviceSettingModelsAddComponent } from './device-setting-models/device-
         DropDownModule,
         MatFormFieldModule,
         NgbModule,
-        DynamicTooltipModule
+        DynamicTooltipModule,
+        ClickOtsideModule
     ],
 })
 export class DeviceSettingModule { }
