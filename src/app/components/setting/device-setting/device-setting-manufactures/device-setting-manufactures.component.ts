@@ -4,7 +4,12 @@ import { DevicesService } from 'src/app/services/devices/devices.service';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 import { DeviceSettingFilter } from './class/device-setting-filter';
 import { catchError, map } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { of, Subscription } from 'rxjs';
+import { DELETE_DEVICE_MANUFACTURE } from 'src/app/const/confirm';
+import { InventoryCheckUseComponent } from 'src/app/components/inventory/inventory-check-use/inventory-check-use.component';
+import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ManufacturesCheckUseComponent } from '../manufactures-check-use/manufactures-check-use.component';
 
 @Component({
   selector: 'app-device-setting-manufactures',
@@ -15,8 +20,11 @@ export class DeviceSettingManufacturesComponent implements OnInit {
   showPreloader: boolean = true;
   filter: DeviceSettingFilter = new DeviceSettingFilter();
   manufactures: Array<ManufactureDevice> = [];
+  sub: Subscription = new Subscription();
   constructor(private devicesStateService: DevicesStateService,
     public cd: ChangeDetectorRef,
+    private confirmStateService: ConfirmStateService,
+    private modalService: NgbModal,
     private devicesService: DevicesService) { }
 
   ngOnInit() {
@@ -30,15 +38,38 @@ export class DeviceSettingManufacturesComponent implements OnInit {
       this.showPreloader = false;
       this.cd.detectChanges();
     })
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === DELETE_DEVICE_MANUFACTURE) this.removeManufacturer(this.devicesStateService.getManufacturForRemove().id);
+      }
+    })
+    this.sub.add(getConfirm);
   }
-  onEditManufactur(item) {
+  removeManufacturer(id) {
+    this.devicesService.deleteManufactur(id).subscribe(data => {
+
+    })
+  }
+
+  onEditManufactur(item, event) {
     if (item.isInitEdit) {
-      if (item.name.length === 0) return;
+      if (item.name.length === 0 || item.isInitRequest) return;
+      item.setIsInitRequest(true);
       this.devicesService.editManufactur(item.getDataForEdit()).pipe(map((res) => res),
         catchError(error => of(undefined))).subscribe(data => {
+          item.setIsInitRequest(false);
           item.onInitEdit(false);
+          if (event) event.target.blur();
+        }, err => {
+          item.setIsInitRequest(false);
         })
     }
+  }
+  removeConfirmManufacturer(manufacturer: any) {
+    this.confirmStateService.setConfirmAction(DELETE_DEVICE_MANUFACTURE);
+    const modalRef = this.modalService.open(ManufacturesCheckUseComponent, { windowClass: 'xs-modal user-modal', container: "device-setting", backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.manufacture = manufacturer;
+    this.devicesStateService.setManufacturForRemove(manufacturer);
   }
   public getSelectedCount() {
     return this.manufactures.filter(item => item.selected).length;

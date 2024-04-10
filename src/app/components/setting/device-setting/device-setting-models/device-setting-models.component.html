@@ -27,16 +27,6 @@
         </div>
         <div class="tab-pane__table-header">
             <div class="tab-pane__table-row">
-                <div class="tab-pane__table-cell tab-pane__table-checkboxes">
-                    <label class="qt-checkbox">
-                        <input
-                            type="checkbox"
-                            [(ngModel)]="selectAllDevices"
-                            (change)="toogleDevices($event.target.checked)"
-                        >
-                        <span></span>
-                    </label>
-                </div>
                 <div
                     class="tab-pane__table-cell crm-settings-company-industry-table__count pointer"
                     (click)="onFilter('name')"
@@ -64,18 +54,8 @@
                 [init]="model.isInitEdit"
                 [ngClass]="['edit-model-container-' + i,model.selected ? '--selected' : '']"
                 [class]="'.edit-model-container-' + i"
-                (onOutSide)="onEditModel(model)"
+                (onOutSide)="onEditModel(model,$event)"
             >
-                <div class="tab-pane__table-cell tab-pane__table-checkboxes">
-                    <label class="qt-checkbox">
-                        <input
-                            type="checkbox"
-                            [(ngModel)]="model.selected"
-                            (change)="onSelect(i,$event.target.checked)"
-                        >
-                        <span></span>
-                    </label>
-                </div>
                 <div class="tab-pane__table-cell crm-settings-company-industry-table__count">
                     <input
                         type="text"
@@ -84,7 +64,7 @@
                         [(ngModel)]="model.name"
                         maxlength="255"
                         appKeyUpEnter
-                        (onChange)="onEditModel(model)"
+                        (onChange)="onEditModel(model,$event)"
                         (input)="model.onInitEdit(true)"
                     >
                 </div>

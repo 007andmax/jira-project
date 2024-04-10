@@ -5,16 +5,6 @@
     >
         <div class="tab-pane__table-header">
             <div class="tab-pane__table-row">
-                <div class="tab-pane__table-cell tab-pane__table-checkboxes">
-                    <label class="qt-checkbox">
-                        <input
-                            type="checkbox"
-                            [(ngModel)]="selectAllDevices"
-                            (change)="toogleDevices($event.target.checked)"
-                        >
-                        <span></span>
-                    </label>
-                </div>
                 <div
                     class="tab-pane__table-cell crm-settings-company-industry-table__industry-type pointer"
                     (click)="onFilter('name')"
@@ -42,18 +32,8 @@
                 [init]="manufacture.isInitEdit"
                 [ngClass]="['edit-manufacture-container-' + i,manufacture.selected ? '--selected' : '']"
                 [class]="'.edit-manufacture-container-' + i"
-                (onOutSide)="onEditManufactur(manufacture)"
+                (onOutSide)="onEditManufactur(manufacture,$event)"
             >
-                <div class="tab-pane__table-cell tab-pane__table-checkboxes">
-                    <label class="qt-checkbox">
-                        <input
-                            type="checkbox"
-                            [(ngModel)]="manufacture.selected"
-                            (change)="onSelect(i,$event.target.checked)"
-                        >
-                        <span></span>
-                    </label>
-                </div>
                 <div class="tab-pane__table-cell crm-settings-company-industry-table__industry-type">
                     <input
                         type="text"
@@ -62,7 +42,7 @@
                         [(ngModel)]="manufacture.name"
                         maxlength="255"
                         appKeyUpEnter
-                        (onChange)="onEditManufactur(manufacture)"
+                        (onChange)="onEditManufactur(manufacture,$event)"
                         (input)="manufacture.onInitEdit(true)"
                     >
                 </div>

@@ -131,6 +131,7 @@ import { TicketsHeaderModule } from './components/tickets/tickets/tickets-header
 import { TicketsFilterSaveModule } from './components/tickets/tickets/tickets-header/tickets-filter-save/tickets-filter-save.module';
 import { DeviceTagPipe } from './pipe/device-tag.pipe';
 import { MarketingSubscriptionsAsideModule } from './components/marketing/marketing-subscriptions-aside/marketing-subscriptions-aside.module';
+import { ManufacturesCheckUseComponent } from './components/setting/device-setting/manufactures-check-use/manufactures-check-use.component';
 declare var $: any;
 
 /**
@@ -159,6 +160,7 @@ declare var $: any;
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
     CannedResponsesAsideComponent,
+    ManufacturesCheckUseComponent
   ],
   imports: [
     BrowserModule,
@@ -213,7 +215,7 @@ declare var $: any;
     AddUserToCompanyModule,
     UserFilterSaveModule,
     TicketsFilterSaveModule,
-    MarketingSubscriptionsAsideModule
+    MarketingSubscriptionsAsideModule,
   ],
   entryComponents: [
     ConfirmComponent,
@@ -232,6 +234,7 @@ declare var $: any;
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
     UsersCheckUseComponent,
+    ManufacturesCheckUseComponent,
   ],
   providers: [
     {

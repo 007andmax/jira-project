@@ -10,6 +10,7 @@ import { DeviceCompany } from '../../components/company-devices/class/device-com
 import { WebsocketService } from '../../services/websocket/websocket.service';
 import { DeviceStatus } from './class/device-status';
 import { ManufactureDevice } from 'src/app/components/company-devices/company-devices-custom-aside/class/manufacture-device';
+import { ModelDevice } from 'src/app/components/company-devices/company-devices-custom-aside/class/model-device';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,8 @@ export class DevicesStateService {
   isInitWebSocket: boolean = false;
   preloaderDevices: boolean = true;
   manufactures: Array<ManufactureDevice> = [];
+  manufacturForRemove: ManufactureDevice = null;
+  modelForRemove: ModelDevice = null;
   // onChangeDevices: EventEmitter<DeviceUpdate> = new EventEmitter();
   constructor(private userStateService: UsersStateService,
     private devicesService: DevicesService,
@@ -63,8 +66,25 @@ export class DevicesStateService {
         if (index > -1) this.manufactures[index] = new ManufactureDevice(newChange.data);
         this.onGetManufactures.emit(this.manufactures);
       }
+      if (newChange.action === 'MANUFACTURE_DELETED') {
+        let index = this.manufactures.findIndex(item => item.id == newChange.data);
+        if (index > -1) this.manufactures.splice(index, 1);
+        this.onGetManufactures.emit(this.manufactures);
+      }
       if (newChange.action === 'MANUFACTURE_MODULE_SAVED') this.onAddModel.emit(newChange.data);
     })
+  }
+  public setModelForRemove(data) {
+    this.modelForRemove = data;
+  }
+  public getModelForRemove() {
+    return this.modelForRemove;
+  }
+  public setManufacturForRemove(data) {
+    this.manufacturForRemove = data;
+  }
+  public getManufacturForRemove() {
+    return this.manufacturForRemove;
   }
   public initGetManufactures() {
     this.devicesService.getManufactures().subscribe((data: any) => {

@@ -40,6 +40,9 @@ export class DevicesService {
   public getManufactures() {
     return this.http.get(this.apiUrl + `devices/manufactures`);
   }
+  public validateManufacturesAndModelForRemove(manufacture_id, model_id = null) {
+    return this.http.get(this.apiUrl + `devices/custom/filter?manufacturerId=${manufacture_id}${model_id ? `&modelId=${model_id}` : ''}`);
+  }
   public addManufacture(data) {
     this.appStateService.setCustomeError(true, "The error has occurred, please check your entries");
     return this.http.post(this.apiUrl + `devices/manufactures`, data).pipe(
@@ -52,6 +55,24 @@ export class DevicesService {
   }
   public editFieldDevice(data) {
     return this.http.put(this.apiUrl + `devices/custom`, data);
+  }
+  public deleteManufactur(manufacture_id) {
+    return this.http.delete(this.apiUrl + `devices/manufactures/${manufacture_id}`).pipe(
+      tap(data => {
+        this.appStateService.setCustomeError(false);
+        this.toastrService.success("The Manufacturer has been successfully deleted");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public deleteModel(id) {
+    return this.http.delete(this.apiUrl + `devices/manufactures/models/${id}`).pipe(
+      tap(data => {
+        this.appStateService.setCustomeError(false);
+        this.toastrService.success("The Model has been successfully deleted");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public editManufactur(data) {
     return this.http.put(this.apiUrl + `devices/manufactures`, data).pipe(
