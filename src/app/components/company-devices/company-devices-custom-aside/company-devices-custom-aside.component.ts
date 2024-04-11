@@ -11,6 +11,7 @@ import { DeviceTag } from '../../setting/manage-tags/manage-tags-devices/class/d
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { DatePickerComponent } from '../../shared/date-picker/date-picker.component';
+import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 
 @Component({
   selector: 'app-company-devices-custom-aside',
@@ -36,6 +37,7 @@ export class CompanyDevicesCustomAsideComponent implements OnInit {
   validate: ValidateCustomAside = new ValidateCustomAside();
   opened: boolean = false;
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
+  @ViewChild('typeDd') typeDd: DropDownComponent;
   @ViewChild('installDateDP') installDateDP: DatePickerComponent;
   @ViewChild('warrantyDateDP') warrantyDateDP: DatePickerComponent;
   constructor(private devicesStateService: DevicesStateService,
@@ -91,6 +93,7 @@ export class CompanyDevicesCustomAsideComponent implements OnInit {
     this.opened = false;
     this.device = new CustomDevice();
     this.validate = new ValidateCustomAside();
+    this.typeDd.clearWithOutChanges();
   }
   onAdd() {
     if (!this.validate.isValidate(this.device)) return;

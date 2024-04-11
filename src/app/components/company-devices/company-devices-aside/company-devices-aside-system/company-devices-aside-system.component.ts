@@ -57,7 +57,7 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
   onSelectManufacture(data) {
     this.customDevice.setManufacturer(data);
     if (data) {
-      this.devicesService.editFieldDevice(this.customDevice.getDataForRequestField("manufacturer", this.customDevice.manufacturer)).subscribe(data => {
+      this.devicesService.editFieldDevice(this.customDevice.getDataForRequestField("manufacturerId", this.customDevice.manufacturer.id)).subscribe(data => {
 
       })
       this.getModels(data.id);
@@ -84,7 +84,7 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
   }
   onSelectModel(data) {
     this.customDevice.setModel(data);
-    this.devicesService.editFieldDevice(this.customDevice.getDataForRequestField("model", this.customDevice.model)).subscribe(data => {
+    this.devicesService.editFieldDevice(this.customDevice.getDataForRequestField("modelId", this.customDevice.model.id)).subscribe(data => {
 
     })
   }
@@ -120,6 +120,12 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
   }
   parseDateFromDatePicker(value) {
     return moment(new Date(value.year, value.month - 1, value.day)).format('YYYY/MM/DD');
+  }
+  onChangeAssetTag(data) {
+    this.customDevice.setAssetTag(data);
+    this.devicesService.editFieldDevice(this.customDevice.getDataForRequestField("assetTag", this.customDevice.assetTag)).subscribe(data => {
+
+    })
   }
   onChangeHardware(data, field, value) {
     this.hardwareService.overrideHardware(this.device.getDataForUpdateHardware(data))

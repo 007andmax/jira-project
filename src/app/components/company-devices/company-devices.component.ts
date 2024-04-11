@@ -76,9 +76,12 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
         if (index > -1) this.devices.splice(index, 1);
       }
       if (newChange.action === 'CUSTOM_DEVICE_EDITED') {
-        let index = this.devices.findIndex(item => item.id == newChange.data);
-        if (index > -1) this.devices.splice(index, 1);
+        if (newChange.data.companyId == this.companyId) {
+          let index = this.devices.findIndex(item => item.id == newChange.data.deviceId);
+          if (index > -1) this.devices[index].update(newChange.data);
+        }
       }
+      this.cd.detectChanges();
     })
     let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
       if (id == newChange.data.clientCompanyId) {

@@ -53,7 +53,7 @@
                     [placeholder]="'Enter Asset Tag'"
                     class="company-device-edit-name"
                     [isDisabled]="customerPortalStateService.isCustomerPortal"
-                    (onChange)="onChangeHardware(device.getDataForUpdateAssetTag($event),'assetTag',$event)"
+                    (onChange)="onChangeAssetTag($event)"
                 ></app-company-devices-edit-label>
             </div>
         </div>

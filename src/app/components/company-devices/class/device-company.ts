@@ -34,6 +34,14 @@ export class DeviceCompany extends Device {
         if (data.model) this.model = new ModelDevice(data.model);
         if (!this.isCustom && data.iconName) this.iconName = data.iconName.toLowerCase();
     }
+    public update(data) {
+        for (const key in data) {
+            this[key] = data[key];
+        }
+    }
+    public setAssetTag(data) {
+        this.assetTag = data;
+    }
     public setType(data) {
         this.type = data;
     }
