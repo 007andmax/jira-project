@@ -82,7 +82,7 @@ export class DevicesRecurringTicketsComponent implements OnInit, OnDestroy {
     this.selectedDevice = null;
     this.devicesService.getCompanyDevices(this.companyId).subscribe((data: any) => {
       this.preloader = false;
-      this.devicesList = (data[this.companyId]) ? JSON.parse(JSON.stringify(data[this.companyId])).map((item) => {
+      this.devicesList = (data[this.companyId]) ? JSON.parse(JSON.stringify(data[this.companyId])).filter(item => !item.isCustom).map((item) => {
         item.name = item.hostName;
         return item;
       }) : null;

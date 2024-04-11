@@ -162,7 +162,7 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
   getDevices() {
     if (this.devices.length == 0) {
       this.devicesService.getCompanyDevices(this.selectedClient.id).subscribe((data: any) => {
-        this.devices = (data[this.selectedClient.id]) ? JSON.parse(JSON.stringify(data[this.selectedClient.id])).map(item => new Device(item)) : [];
+        this.devices = (data[this.selectedClient.id]) ? JSON.parse(JSON.stringify(data[this.selectedClient.id])).filter(item => !item.isCustom).map(item => new Device(item)) : [];
         this.passwordManagerStateService.setDevices(this.devices);
       });
     } else {

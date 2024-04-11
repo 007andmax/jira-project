@@ -64,7 +64,7 @@ export class PasswordManagerLinkedComponent implements OnInit {
   }
   getDevices() {
     this.devicesService.getCompanyDevices(this.selectedCompanyId).subscribe((data: any) => {
-      let devices = (data[this.selectedCompanyId]) ? JSON.parse(JSON.stringify(data[this.selectedCompanyId])).map(item => new Device(item)) : [];
+      let devices = (data[this.selectedCompanyId]) ? JSON.parse(JSON.stringify(data[this.selectedCompanyId])).filter(item => !item.isCustom).map(item => new Device(item)) : [];
       devices.forEach(item => {
         this.devicesList.push(new PasswordDeviceUser(item.id, this.getLabelDevice(item), 'DEVICE'));
       })

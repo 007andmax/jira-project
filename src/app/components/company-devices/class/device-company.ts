@@ -112,10 +112,10 @@ export class DeviceCompany extends Device {
     public getDataForRequestField(field, value) {
         let data: any = {
             "deviceId": this.deviceId,
-            "companyId": this.companyId,
         }
         if (field != "name") data.name = this.name;
         if (field != "type") data.type = this.type;
+        if (field == "modelId") data.manufacturerId = this.manufacturer.id;
         return {
             ...data,
             [field]: value,
