@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild 
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { Subscription } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { USERS_TO_EDIT_TICKET } from 'src/app/const/add-users-notify';
 import { DELETE_FOREVER, MOVE_TO_SPAM_OR_REPORT_TICKET, REBOOT_DEVICE, REMOVE_DEVICES, SHUTDOWN_DEVICE } from 'src/app/const/confirm';
@@ -118,7 +118,8 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
           });
         }
         if (this.confirmStateService.getConfirmAction() === REMOVE_DEVICES) {
-          this.devicesService.sendUninstallAgentRequest(this.ticketProfile.company.id, this.devicesStateService.getDevicesForRemove().map(item => item.id)).subscribe(data => {
+          if (this.devicesStateService.getDevicesForRemove().filter(item => item.isCustom).length > 0) this.removeCustomDevice(this.devicesStateService.getDevicesForRemove().filter(item => item.isCustom).map(item => item.id));
+          if (this.devicesStateService.getDevicesForRemove().filter(item => !item.isCustom).length > 0) this.devicesService.sendUninstallAgentRequest(this.ticketProfile.company.id, this.devicesStateService.getDevicesForRemove().map(item => item.id)).subscribe(data => {
 
           });
         }
@@ -182,6 +183,14 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       this.showEditUpdate = true;
     })
     this.sub.add(onEditUpdateByForm);
+  }
+  removeCustomDevice(ids) {
+    forkJoin(
+      [...ids.map(item => this.devicesService.deleteCustomDevice(item))]
+    )
+      .subscribe(res => {
+
+      });
   }
   setAgent(data: TicketChangeField) {
     let device = this.ticketStateService.getDevices().find(item => item.agentId === data.value || item.id === data.value);

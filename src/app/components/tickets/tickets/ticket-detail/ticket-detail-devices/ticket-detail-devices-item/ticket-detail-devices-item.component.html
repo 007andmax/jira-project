@@ -77,6 +77,7 @@
         <div
             class="qt-df qt-ai-c pointer dropdown-menu-qt-item"
             (click)="remoteAccess('CSS')"
+            *ngIf="!device.isCustom"
         >
             <i class="icon__remote-access-ticket qt-sz-20 qt-bg-contain qt-mr-12 qt-fs-0 qt-dib"></i>
             Remote Access
@@ -84,6 +85,7 @@
         <div
             class="qt-df qt-ai-c pointer dropdown-menu-qt-item"
             (click)="turnOff('reboot')"
+            *ngIf="!device.isCustom"
         >
             <i class="icon__reset qt-sz-20 qt-bg-contain qt-mr-12 qt-fs-0 qt-dib"></i>
             Restart
@@ -91,11 +93,12 @@
         <div
             class="qt-df qt-ai-c pointer dropdown-menu-qt-item"
             (click)="turnOff('shutdown')"
+            *ngIf="!device.isCustom"
         >
             <i class="icon__shutdown qt-sz-20 qt-bg-contain qt-mr-12 qt-fs-0 qt-dib"></i>
             Shutdown
         </div>
-        <hr>
+        <hr *ngIf="!device.isCustom">
         <div
             class="qt-df qt-ai-c pointer dropdown-menu-qt-item qt-color-red-600"
             (click)="removeDevice()"

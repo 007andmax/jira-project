@@ -63,6 +63,11 @@ export class DeviceCompany extends Device {
     public setModel(data) {
         this.model = data;
     }
+    getLabelForEdit() {
+        if (this.isCustom) return this.name;
+        if (this.label) return this.label;
+        return this.hostName || this.ip;
+    }
     parseDateFromDatePicker(due, currentCompany) {
         let date = new Date(due); // timestamp from calendar	
         let timeOffset = currentCompany.addresses[0].timeZone.timeOffset;
