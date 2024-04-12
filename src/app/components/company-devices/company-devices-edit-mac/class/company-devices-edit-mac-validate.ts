@@ -1,5 +1,5 @@
 export class CompanyDevicesEditMacValidate {
-    reMacAdress = /^([0-9a-f]{1,2}[\.:-]){5}([0-9a-f]{1,2})$/i;
+    reMacAdress = /^([0-9a-f]{1,2}){5}([0-9a-f]{1,2})$/i;
     macAdress: boolean = true;
     public getMacAdress() {
         return this.macAdress;

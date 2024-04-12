@@ -100,6 +100,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   }
   public setEditDate(data: number) {
     let date = new Date(data);
+    if (this.type === 'DETAIL_TICKET_UPDATE' && this.editDate == 0) date = new Date();
     this.navDate = this.sericeDatePicker.getNavDate(date);
     this.datepicker = this.sericeDatePicker.getDateForDatePicker(data);
     if (this.navDate) this.sericeDatePicker.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
