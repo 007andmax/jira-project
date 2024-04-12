@@ -63,6 +63,9 @@ export class DeviceCompany extends Device {
     public setModel(data) {
         this.model = data;
     }
+    public setName(data) {
+        this.name = data;
+    }
     getLabelForEdit() {
         if (this.isCustom) return this.name;
         if (this.label) return this.label;
@@ -112,6 +115,24 @@ export class DeviceCompany extends Device {
                     "tags": data
                 }
             ]
+        }
+    }
+    public getRequestForEdit() {
+        return {
+            "deviceId": this.deviceId,
+            "name": this.name,
+            "type": this.type,
+            "ipAddress": this.ip,
+            "port": this.port,
+            "macAddress": this.macAddress,
+            "manufacturerId": this.manufacturer ? this.manufacturer.id : null,
+            "modelId": this.model ? this.model.id : null,
+            "assetTag": this.assetTag,
+            "installDate": this.installDate,
+            "warrantyDate": this.warrantyDate,
+            "location": this.location,
+            "notes": this.notes,
+            "tags": this.tags,
         }
     }
     public getDataForRequestField(field, value) {

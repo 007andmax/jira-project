@@ -34,13 +34,13 @@ export class CompanyDevicesAsideNetworkTabComponent implements OnInit {
   }
   onChangeIp(data) {
     this.customDevice.setIp(data);
-    this.devicesService.editFieldDevice(this.customDevice.getDataForRequestField("ipAddress", this.customDevice.ip)).subscribe(data => {
+    this.devicesService.editDevice(this.customDevice.getRequestForEdit()).subscribe(data => {
 
     })
   }
   onChangePort(data) {
     this.customDevice.setPort(data);
-    this.devicesService.editFieldDevice(this.customDevice.getDataForRequestField("port", this.customDevice.port)).subscribe(data => {
+    this.devicesService.editDevice(this.customDevice.getRequestForEdit()).subscribe(data => {
 
     })
   }

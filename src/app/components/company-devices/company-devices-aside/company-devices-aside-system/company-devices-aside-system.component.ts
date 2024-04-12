@@ -61,7 +61,7 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
     }
     this.customDevice.setManufacturer(data);
     if (data) {
-      this.devicesService.editFieldDevice(this.customDevice.getDataForRequestField("manufacturerId", this.customDevice.manufacturer.id)).subscribe(data => {
+      this.devicesService.editDevice(this.customDevice.getRequestForEdit()).subscribe(data => {
 
       })
       this.getModels(data.id);
@@ -88,13 +88,14 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
   }
   onSelectModel(data) {
     this.customDevice.setModel(data);
-    this.devicesService.editFieldDevice(this.customDevice.getDataForRequestField("modelId", this.customDevice.model.id)).subscribe(data => {
+    this.devicesService.editDevice(this.customDevice.getRequestForEdit()).subscribe(data => {
 
     })
   }
   onChangeName(value) {
     if (this.customDevice) {
-      if (value.length > 0) this.devicesService.editFieldDevice(this.customDevice.getDataForRequestField("name", value)).subscribe(data => {
+      this.customDevice.setName(value);
+      if (value.length > 0) this.devicesService.editDevice(this.customDevice.getRequestForEdit()).subscribe(data => {
 
       })
       return;
@@ -127,7 +128,10 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
   }
   onChangeAssetTag(data) {
     this.customDevice.setAssetTag(data);
-    this.devicesService.editFieldDevice(this.customDevice.getDataForRequestField("assetTag", this.customDevice.assetTag)).subscribe(data => {
+    this.editCustomDevice();
+  }
+  editCustomDevice() {
+    this.devicesService.editDevice(this.customDevice.getRequestForEdit()).subscribe(data => {
 
     })
   }
@@ -150,33 +154,23 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
   }
   onChangeWarrentyDate(data) {
     this.customDevice.setWarrentyDate(new Date(data.year, data.month - 1, data.day), this.companiesState.getCurrentCompany());
-    this.devicesService.editFieldDevice(this.customDevice.getDataForRequestField("warrantyDate", this.customDevice.warrantyDate)).subscribe(data => {
-
-    })
+    this.editCustomDevice();
   }
   onChangeIp(data) {
     this.customDevice.setIp(data);
-    this.devicesService.editFieldDevice(this.customDevice.getDataForRequestField("ip", this.customDevice.ip)).subscribe(data => {
-
-    })
+    this.editCustomDevice();
   }
   onChangeNote() {
-    this.devicesService.editFieldDevice(this.customDevice.getDataForRequestField("notes", this.customDevice.notes)).subscribe(data => {
-
-    })
+    this.editCustomDevice();
   }
   onChangeLocation(data) {
     this.customDevice.setLocation(data);
-    this.devicesService.editFieldDevice(this.customDevice.getDataForRequestField("location", this.customDevice.location)).subscribe(data => {
-
-    })
+    this.editCustomDevice();
   }
   onChangeInstallDate(data) {
     console.log(data);
     this.customDevice.setInstallDate(new Date(data.year, data.month - 1, data.day), this.companiesState.getCurrentCompany());
-    this.devicesService.editFieldDevice(this.customDevice.getDataForRequestField("installDate", this.customDevice.installDate)).subscribe(data => {
-
-    })
+    this.editCustomDevice();
   }
   getWindowsInfo() {
     return (this.device && this.device.report.system) ? `${this.device.report.system.caption.replace('Microsoft ', '')}${(this.device.report.system.architecture !== '') ? ` ( ${this.device.report.system.architecture} )` : ''}${(this.device.report.system.releaseId !== '') ? ` Version ${this.device.report.system.releaseId}` : ''}` : '';

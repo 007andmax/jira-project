@@ -129,7 +129,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
   setIcon(iconName) {
     if (this.device.isCustom) {
       this.device.setType(iconName.toLowerCase());
-      this.devicesService.editFieldDevice(this.device.getDataForRequestField("type", this.device.type)).subscribe(data => {
+      this.devicesService.editDevice(this.device.getRequestForEdit()).subscribe(data => {
 
       })
       return;

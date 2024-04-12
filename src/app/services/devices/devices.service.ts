@@ -53,7 +53,7 @@ export class DevicesService {
         return data;
       }));
   }
-  public editFieldDevice(data) {
+  public editDevice(data) {
     return this.http.put(this.apiUrl + `devices/custom`, data);
   }
   public deleteManufactur(manufacture_id) {
