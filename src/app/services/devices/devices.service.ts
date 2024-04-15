@@ -44,18 +44,20 @@ export class DevicesService {
     return this.http.get(this.apiUrl + `devices/custom/filter?manufacturerId=${manufacture_id}${model_id ? `&modelId=${model_id}` : ''}`);
   }
   public addManufacture(data) {
-    this.appStateService.setCustomeError(true, "The error has occurred, please check your entries");
+    this.appStateService.setServerError(true);
     return this.http.post(this.apiUrl + `devices/manufactures`, data).pipe(
       tap(data => {
-        this.appStateService.setCustomeError(false);
+        this.appStateService.setServerError(false);
         this.toastrService.success("The new Manufacturer has been successfully created");
         this.appStateService.changeDetectorRef();
         return data;
       }));
   }
   public editDevice(data) {
+    this.appStateService.setServerError(true);
     return this.http.put(this.apiUrl + `devices/custom`, data).pipe(
       tap(data => {
+        this.appStateService.setServerError(false);
         this.appStateService.setCustomeError(false);
         this.toastrService.success("The new custom device has been successfully edited");
         this.appStateService.changeDetectorRef();
@@ -81,28 +83,30 @@ export class DevicesService {
       }));
   }
   public editManufactur(data) {
+    this.appStateService.setServerError(true);
     return this.http.put(this.apiUrl + `devices/manufactures`, data).pipe(
       tap(data => {
-        this.appStateService.setCustomeError(false);
+        this.appStateService.setServerError(false);
         this.toastrService.success("The Manufacturer has been successfully updated");
         this.appStateService.changeDetectorRef();
         return data;
       }));
   }
   public editModel(data) {
+    this.appStateService.setServerError(true);
     return this.http.put(this.apiUrl + `devices/manufactures/models`, data).pipe(
       tap(data => {
-        this.appStateService.setCustomeError(false);
+        this.appStateService.setServerError(false);
         this.toastrService.success("The Model has been successfully updated");
         this.appStateService.changeDetectorRef();
         return data;
       }));
   }
   public addModel(data) {
-    this.appStateService.setCustomeError(true, "The error has occurred, please check your entries");
+    this.appStateService.setServerError(true);
     return this.http.post(this.apiUrl + `devices/manufactures/models`, data).pipe(
       tap(data => {
-        this.appStateService.setCustomeError(false);
+        this.appStateService.setServerError(false);
         this.toastrService.success("The new Model has been successfully created");
         this.appStateService.changeDetectorRef();
         return data;
@@ -118,8 +122,10 @@ export class DevicesService {
     return this.http.post(this.apiUrl + `devices/count`, { companies: ids });
   }
   public addCustomDevice(data) {
+    this.appStateService.setServerError(true);
     return this.http.post(this.apiUrl + `devices/custom`, data).pipe(
       tap(data => {
+        this.appStateService.setServerError(false);
         this.appStateService.setCustomeError(false);
         this.toastrService.success("The new custom device has been successfully created");
         this.appStateService.changeDetectorRef();
