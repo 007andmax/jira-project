@@ -243,7 +243,13 @@
             </div>
         </div>
         <div *ngIf="customDevice">
-            <div class="sidebar-system__info edit-field">
+            <div
+                class="sidebar-system__info edit-field edit-note-container"
+                [init]="isInitEditNote"
+                appClickOtside
+                [class]="'.edit-note-container'"
+                (onOutSide)="onChangeNote()"
+            >
                 <div class="sidebar-system__info-title">Note</div>
                 <textarea
                     class="qt-editable-input ng-untouched ng-pristine ng-valid"
@@ -251,7 +257,9 @@
                     placeholder="Write Note"
                     [(ngModel)]="customDevice.notes"
                     maxlength="65535"
-                    (blur)="onChangeNote()"
+                    appKeyUpEnter
+                    (onChange)="onChangeNote()"
+                    (input)="setIsInitEditNote(true)"
                     [default]="5"
                     cols="2"
                     rows="1"

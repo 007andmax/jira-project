@@ -1,8 +1,18 @@
-<input
-    type="text"
-    class="device-table__input-name"
-    [(ngModel)]="value"
-    (blur)="onCheckValue()"
-    [disabled]="isDisabled"
-    [attr.placeholder]="placeholder"
+<div
+    appClickOtside
+    [init]="isInitEdit"
+    [ngClass]="'edit-label-container'"
+    [class]="'.edit-label-container'"
+    (onOutSide)="onCheckValue()"
 >
+    <input
+        type="text"
+        class="device-table__input-name"
+        [(ngModel)]="value"
+        appKeyUpEnter
+        (onChange)="onCheckValue()"
+        (input)="setIsInitEdit(true)"
+        [disabled]="isDisabled"
+        [attr.placeholder]="placeholder"
+    >
+</div>

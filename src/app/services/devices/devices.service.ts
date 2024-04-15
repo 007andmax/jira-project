@@ -54,7 +54,13 @@ export class DevicesService {
       }));
   }
   public editDevice(data) {
-    return this.http.put(this.apiUrl + `devices/custom`, data);
+    return this.http.put(this.apiUrl + `devices/custom`, data).pipe(
+      tap(data => {
+        this.appStateService.setCustomeError(false);
+        this.toastrService.success("The new custom device has been successfully edited");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public deleteManufactur(manufacture_id) {
     return this.http.delete(this.apiUrl + `devices/manufactures/${manufacture_id}`).pipe(
@@ -112,7 +118,13 @@ export class DevicesService {
     return this.http.post(this.apiUrl + `devices/count`, { companies: ids });
   }
   public addCustomDevice(data) {
-    return this.http.post(this.apiUrl + `devices/custom`, data);
+    return this.http.post(this.apiUrl + `devices/custom`, data).pipe(
+      tap(data => {
+        this.appStateService.setCustomeError(false);
+        this.toastrService.success("The new custom device has been successfully created");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public remoteInstall(data) {
     return this.http.post(this.apiUrl + `devices/remoteInstall`, data);

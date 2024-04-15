@@ -35,6 +35,7 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
   formatDate: string = FORMAT_DATE_2;
   toggleWindowSpecifications: boolean = false;
   toggleDeviceSpecifications: boolean = false;
+  isInitEditNote = false;
   constructor(private devicesService: DevicesService,
     private devicesStateService: DevicesStateService,
     private hardwareService: HardwareService,
@@ -66,6 +67,9 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
       })
       this.getModels(data.id);
     }
+  }
+  public setIsInitEditNote(data) {
+    this.isInitEditNote = data;
   }
   public refresh(data) {
     this.customDevice = data;
@@ -161,6 +165,7 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
     this.editCustomDevice();
   }
   onChangeNote() {
+    this.setIsInitEditNote(false);
     this.editCustomDevice();
   }
   onChangeLocation(data) {

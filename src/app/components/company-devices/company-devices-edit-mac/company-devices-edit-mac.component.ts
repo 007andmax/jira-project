@@ -15,7 +15,10 @@ export class CompanyDevicesEditMacComponent extends CompanyDevicesEditLabelCompo
     this.validate.checkMacAddress(this.value);
     console.log("this.value", this.value);
     console.log("this.validate", this.validate);
-    if (this.value !== this.field && this.validate.getMacAdress()) this.onChange.emit(this.value);
+    if (this.value !== this.field && this.validate.getMacAdress()) {
+      this.onChange.emit(this.value);
+      this.setIsInitEdit(false);
+    }
   }
 
 }

@@ -13,16 +13,23 @@ export class CompanyDevicesEditLabelComponent implements OnInit {
   showEdit: boolean = false;
   @Input() placeholder: string = '';
   @Output() onChange = new EventEmitter();
+  isInitEdit: boolean = false;
   constructor() { }
 
   ngOnInit() {
     this.value = JSON.parse(JSON.stringify(this.field));
   }
+  public setIsInitEdit(data) {
+    this.isInitEdit = data;
+  }
   public setValue(value) {
     this.value = JSON.parse(JSON.stringify(value));
   }
   onCheckValue() {
-    if (this.value !== this.field) this.onChange.emit(this.value);
+    if (this.value !== this.field) {
+      this.onChange.emit(this.value);
+      this.setIsInitEdit(false);
+    }
   }
   public onUpdate() {
     this.value = JSON.parse(JSON.stringify(this.field));
