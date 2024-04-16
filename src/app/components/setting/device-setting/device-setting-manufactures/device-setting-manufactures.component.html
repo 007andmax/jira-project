@@ -1,71 +1,94 @@
-<div class="cmn-area">
-    <div
-        class="tab-pane__table"
-        [ngClass]="{'cleat-height-dataTable':!showPreloader}"
-    >
-        <div class="tab-pane__table-header">
-            <div class="tab-pane__table-row">
-                <div
-                    class="tab-pane__table-cell crm-settings-company-industry-table__industry-type pointer"
-                    (click)="onFilter('name')"
-                >
-                    Manufacture
-                    <div class="qt-table-modern__sorting--new"></div>
-                </div>
-                <div class="tab-pane__table-cell crm-settings-company-industry-table__action"></div>
-            </div>
-        </div>
-        <div
-            class="tab-pane__table-body"
-            *ngIf="!showPreloader"
+<div class="qt-df qt-mt-32 qt-mb-32">
+    <div class="qt-w100 qt-pos-rel qt-ml-32">
+        <a
+            href="javascript:;"
+            class="qt-button --md --gray qt-jc-c pointer qt-ml-auto button-gl-number__add qt-mb-12"
+            (click)="openModelManufacture()"
         >
+            <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+            Add Manufacture
+        </a>
+        <app-device-setting-manufactures-add
+            *ngIf="addManufacture"
+            (onClose)="onClosedAddManufacture()"
+        ></app-device-setting-manufactures-add>
+        <div class="cmn-area qt-w100">
             <div
-                class="text-center"
-                *ngIf="manufactures.length == 0"
+                class="tab-pane__table"
+                [ngClass]="{'cleat-height-dataTable':!showPreloader}"
             >
-                No manufacture to show
-            </div>
-            <div
-                class="tab-pane__table-row"
-                *ngFor="let manufacture of manufactures; let i = index"
-                appClickOtside
-                [init]="manufacture.isInitEdit"
-                [ngClass]="['edit-manufacture-container-' + i,manufacture.selected ? '--selected' : '']"
-                [class]="'.edit-manufacture-container-' + i"
-                (onOutSide)="onEditManufactur(manufacture,$event)"
-            >
-                <div class="tab-pane__table-cell crm-settings-company-industry-table__industry-type">
-                    <input
-                        type="text"
-                        class="form-input  --editable"
-                        placeholder="Enter Manufacture Name"
-                        [(ngModel)]="manufacture.name"
-                        maxlength="255"
-                        appKeyUpEnter
-                        (onChange)="onEditManufactur(manufacture,$event)"
-                        (input)="manufacture.onInitEdit(true)"
-                    >
-                </div>
-                <div class="tab-pane__table-cell crm-settings-company-industry-table__action">
-                    <div class="qt-df qt-ai-c">
-                        <app-dynamic-tooltip
-                            [content]="'Remove'"
-                            [position]="'top'"
-                            #removeTooltip
-                        ></app-dynamic-tooltip>
+                <div class="tab-pane__table-header">
+                    <div class="tab-pane__table-row">
                         <div
-                            data-tooltip="Remove"
-                            class="icon__remove qt-sz-20 qt-bg-contain pointer"
-                            (click)="removeConfirmManufacturer(manufacture)"
-                            (mouseenter)="removeTooltip.show($event.target)"
-                            (mouseleave)="removeTooltip.hide()"
+                            class="tab-pane__table-cell crm-settings-company-industry-table__industry-type pointer"
+                            (click)="onFilter('name')"
                         >
+                            Manufacture
+                            <div class="qt-table-modern__sorting--new"></div>
+                        </div>
+                        <div class="tab-pane__table-cell crm-settings-company-industry-table__action"></div>
+                    </div>
+                </div>
+                <div
+                    class="tab-pane__table-body"
+                    *ngIf="!showPreloader"
+                >
+                    <div
+                        class="text-center"
+                        *ngIf="manufactures.length == 0"
+                    >
+                        No manufacture to show
+                    </div>
+                    <div
+                        class="tab-pane__table-row"
+                        *ngFor="let manufacture of manufactures; let i = index"
+                        appClickOtside
+                        [init]="manufacture.isInitEdit"
+                        [ngClass]="['edit-manufacture-container-' + i,manufacture.selected ? '--selected' : '']"
+                        [class]="'.edit-manufacture-container-' + i"
+                        (onOutSide)="onEditManufactur(manufacture,$event)"
+                    >
+                        <div
+                            class="tab-pane__table-cell crm-settings-company-industry-table__industry-type"
+                            (click)="select(manufacture)"
+                        >
+                            <input
+                                type="text"
+                                class="form-input  --editable"
+                                placeholder="Enter Manufacture Name"
+                                [(ngModel)]="manufacture.name"
+                                maxlength="255"
+                                appKeyUpEnter
+                                (onChange)="onEditManufactur(manufacture,$event)"
+                                (input)="manufacture.onInitEdit(true)"
+                            >
+                        </div>
+                        <div class="tab-pane__table-cell crm-settings-company-industry-table__action">
+                            <div class="qt-df qt-ai-c">
+                                <app-dynamic-tooltip
+                                    [content]="'Remove'"
+                                    [position]="'top'"
+                                    #removeTooltip
+                                ></app-dynamic-tooltip>
+                                <div
+                                    data-tooltip="Remove"
+                                    class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                                    (click)="removeConfirmManufacturer(manufacture)"
+                                    (mouseenter)="removeTooltip.show($event.target)"
+                                    (mouseleave)="removeTooltip.hide()"
+                                >
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <app-device-setting-models
+        #models
+        class="qt-w100 qt-ml-32 qt-mr-32"
+    ></app-device-setting-models>
 </div>
 <div
     class="loading-container"

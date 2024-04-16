@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { ManufactureDevice } from 'src/app/components/company-devices/company-devices-custom-aside/class/manufacture-device';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
@@ -10,6 +10,7 @@ import { InventoryCheckUseComponent } from 'src/app/components/inventory/invento
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ManufacturesCheckUseComponent } from '../manufactures-check-use/manufactures-check-use.component';
+import { DeviceSettingModelsComponent } from '../device-setting-models/device-setting-models.component';
 
 @Component({
   selector: 'app-device-setting-manufactures',
@@ -18,9 +19,11 @@ import { ManufacturesCheckUseComponent } from '../manufactures-check-use/manufac
 })
 export class DeviceSettingManufacturesComponent implements OnInit {
   showPreloader: boolean = true;
+  addManufacture: boolean = false;
   filter: DeviceSettingFilter = new DeviceSettingFilter();
   manufactures: Array<ManufactureDevice> = [];
   sub: Subscription = new Subscription();
+  @ViewChild("models") models: DeviceSettingModelsComponent;
   constructor(private devicesStateService: DevicesStateService,
     public cd: ChangeDetectorRef,
     private confirmStateService: ConfirmStateService,
@@ -50,7 +53,15 @@ export class DeviceSettingManufacturesComponent implements OnInit {
 
     })
   }
-
+  openModelManufacture() {
+    this.addManufacture = true;
+  }
+  onClosedAddManufacture() {
+    this.addManufacture = false;
+  }
+  select(data) {
+    this.models.onSelectManufacture(data);
+  }
   onEditManufactur(item, event) {
     if (item.isInitEdit) {
       if (item.name.length === 0 || item.isInitRequest) return;

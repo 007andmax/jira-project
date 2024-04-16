@@ -1,30 +1,24 @@
-<div class="cmn-area">
+<div class="qt-pos-rel">
+    <a
+        href="javascript:;"
+        class="qt-button --md --gray qt-jc-c pointer qt-ml-auto button-gl-number__add qt-mb-12"
+        (click)="openModelPopup()"
+        *ngIf="selectedManufacture"
+    >
+        <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+        Add Model
+    </a>
+    <app-device-setting-models-add
+        *ngIf="addModel"
+        [manufactureId]="selectedManufacture.id"
+        (onClose)="onClosedAddModel()"
+    ></app-device-setting-models-add>
+</div>
+<div class="cmn-area qt-w100">
     <div
         class="tab-pane__table"
         [ngClass]="{'cleat-height-dataTable':!showPreloader}"
     >
-        <div class="tab-pane__row">
-            <div class="tab-pane__subtitle">Manufactures</div>
-            <div
-                id="authentication-type"
-                class="tab-pane-input__row "
-            >
-                <div class="qt-w100 qt-input-block">
-                    <app-drop-down
-                        [class]="['qt-select-input-40']"
-                        [placeholder]="'Select'"
-                        [list]="manufactures"
-                        [field]="'name'"
-                        [sort]="false"
-                        [search]="true"
-                        [change]="true"
-                        [isBlockClear]="true"
-                        (onSelectedItem)="onSelectManufacture($event)"
-                    >
-                    </app-drop-down>
-                </div>
-            </div>
-        </div>
         <div class="tab-pane__table-header">
             <div class="tab-pane__table-row">
                 <div

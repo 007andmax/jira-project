@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ManufactureDevice } from 'src/app/components/company-devices/company-devices-custom-aside/class/manufacture-device';
 import { ModelDevice } from 'src/app/components/company-devices/company-devices-custom-aside/class/model-device';
@@ -11,7 +11,7 @@ import { DevicesStateService } from 'src/app/states/devices/devices-state.servic
   styleUrls: ['./device-setting-models-add.component.scss']
 })
 export class DeviceSettingModelsAddComponent implements OnInit {
-  manufactureId: string;
+  @Input() manufactureId: string;
   modelForm: FormGroup;
   submitted: boolean = false;
   manufactures: Array<ManufactureDevice> = [];
@@ -37,24 +37,12 @@ export class DeviceSettingModelsAddComponent implements OnInit {
       ],
       manufacturerId: [""],
     })
-  }
-  onSelectManufacture(SelectManufacturer) {
-    if (SelectManufacturer) {
-      this.manufactureId = SelectManufacturer.id;
-      this.modelForm.patchValue({
-        manufacturerId: SelectManufacturer.id,
-      });
-      this.devicesService.getModels(SelectManufacturer.id).subscribe((res: any) => {
-        this.models = res.models.map(item => new ModelDevice(item))
-      })
-    }
-    else {
-      this.manufactureId = null;
-      this.modelForm.patchValue({
-        manufacturerId: null,
-        model: ""
-      });
-    }
+    this.modelForm.patchValue({
+      manufacturerId: this.manufactureId,
+    });
+    this.devicesService.getModels(this.manufactureId).subscribe((res: any) => {
+      this.models = res.models.map(item => new ModelDevice(item))
+    })
   }
   onSubmitModel() {
     this.submitted = true;

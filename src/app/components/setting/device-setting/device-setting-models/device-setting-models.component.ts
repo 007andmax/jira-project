@@ -22,6 +22,7 @@ export class DeviceSettingModelsComponent implements OnInit {
   manufactures: Array<ManufactureDevice> = [];
   models: Array<ModelDevice> = [];
   showPreloader: boolean = false;
+  addModel: boolean = false;
   filter: DeviceSettingFilter = new DeviceSettingFilter();
   sub: Subscription = new Subscription();
   constructor(private devicesStateService: DevicesStateService,
@@ -72,6 +73,12 @@ export class DeviceSettingModelsComponent implements OnInit {
       }
     })
     this.sub.add(getConfirm);
+  }
+  openModelPopup() {
+    this.addModel = true;
+  }
+  onClosedAddModel() {
+    this.addModel = false;
   }
   removeModel(id) {
     this.devicesService.deleteModel(id).subscribe(data => {

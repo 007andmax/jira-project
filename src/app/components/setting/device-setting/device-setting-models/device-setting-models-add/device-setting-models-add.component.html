@@ -5,18 +5,6 @@
         </div>
         <div>
             <form [formGroup]="modelForm">
-                <div class="qt-input-block qt-mb-24">
-                    <app-drop-down
-                        #manufacturer
-                        [class]="['light-dropdown', 'qt-select-input-40']"
-                        [placeholder]="'Select'"
-                        [list]="manufactures"
-                        [field]="'name'"
-                        [search]="true"
-                        [change]="true"
-                        (onSelectedItem)="onSelectManufacture($event)"
-                    ></app-drop-down>
-                </div>
                 <div
                     class="qt-input-block qt-mb-24"
                     *ngIf="manufactureId"
