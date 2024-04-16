@@ -56,10 +56,8 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
     if (this.customDevice && this.customDevice.manufacturer) this.getModels(this.customDevice.manufacturer.id);
   }
   onSelectManufacture(data) {
-    if (this.customDevice.manufacturer && this.customDevice.manufacturer.id !== data.id) {
-      this.modelDd.clearWithOutChanges();
-      this.customDevice.setModel(null);
-    }
+    this.modelDd.clearWithOutChanges();
+    this.customDevice.setModel(null);
     this.customDevice.setManufacturer(data);
     if (data) {
       this.devicesService.editDevice(this.customDevice.getRequestForEdit()).subscribe(data => {
