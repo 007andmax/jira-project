@@ -47,7 +47,7 @@ export class DeviceSettingModelsComponent implements OnInit, OnDestroy {
     })
     this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
       if (newChange.action === 'MANUFACTURE_MODEL_EDITED') {
-        if (newChange.data.manufacturerId == this.selectedManufacture.id) {
+        if (this.selectedManufacture && newChange.data.manufacturerId == this.selectedManufacture.id) {
           let index = this.models.findIndex(item => item.id == newChange.data.id);
           console.log("index", index);
           if (index > -1) this.models[index] = new ModelDevice(newChange.data);
@@ -55,7 +55,7 @@ export class DeviceSettingModelsComponent implements OnInit, OnDestroy {
         }
       }
       if (newChange.action === 'MANUFACTURE_MODEL_SAVED') {
-        if (newChange.data.manufacturerId == this.selectedManufacture.id) {
+        if (this.selectedManufacture && newChange.data.manufacturerId == this.selectedManufacture.id) {
           this.models.push(new ModelDevice(newChange.data));
           this.cd.detectChanges();
         }
