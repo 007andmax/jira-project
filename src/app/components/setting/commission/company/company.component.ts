@@ -218,22 +218,6 @@ export class CompanyComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * get client company info - not used
-   */
-  getClientCompaniesInfo() {
-    this.commissionService
-      .getClientCompaniesInfo()
-      .pipe(
-        map((res: any) => {
-          this.clientsCompanies = res.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-            1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-        }),
-        catchError(err => throwError(new Error("Get Client Companies")))
-      )
-      .subscribe();
-  }
-
-  /**
    * get company logo url by company - not used
    * @param company
    */

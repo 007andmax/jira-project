@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ManufactureDevice } from 'src/app/components/company-devices/company-devices-custom-aside/class/manufacture-device';
 import { ModelDevice } from 'src/app/components/company-devices/company-devices-custom-aside/class/model-device';
 import { DevicesService } from 'src/app/services/devices/devices.service';
@@ -17,7 +17,7 @@ import { ManufacturesCheckUseComponent } from '../manufactures-check-use/manufac
   templateUrl: './device-setting-models.component.html',
   styleUrls: ['./device-setting-models.component.scss']
 })
-export class DeviceSettingModelsComponent implements OnInit {
+export class DeviceSettingModelsComponent implements OnInit, OnDestroy {
   selectedManufacture: ManufactureDevice;
   manufactures: Array<ManufactureDevice> = [];
   models: Array<ModelDevice> = [];
@@ -75,6 +75,7 @@ export class DeviceSettingModelsComponent implements OnInit {
     this.sub.add(getConfirm);
   }
   openModelPopup() {
+    if (!this.selectedManufacture) return;
     this.addModel = true;
   }
   onClosedAddModel() {
@@ -124,5 +125,7 @@ export class DeviceSettingModelsComponent implements OnInit {
   public getSelectedCount() {
     return this.models.filter(item => item.selected).length;
   }
-
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

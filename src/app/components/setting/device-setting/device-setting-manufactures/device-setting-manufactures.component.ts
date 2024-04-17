@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { ManufactureDevice } from 'src/app/components/company-devices/company-devices-custom-aside/class/manufacture-device';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
@@ -17,7 +17,7 @@ import { DeviceSettingModelsComponent } from '../device-setting-models/device-se
   templateUrl: './device-setting-manufactures.component.html',
   styleUrls: ['./device-setting-manufactures.component.scss']
 })
-export class DeviceSettingManufacturesComponent implements OnInit {
+export class DeviceSettingManufacturesComponent implements OnInit, OnDestroy {
   showPreloader: boolean = true;
   addManufacture: boolean = false;
   filter: DeviceSettingFilter = new DeviceSettingFilter();
@@ -88,4 +88,8 @@ export class DeviceSettingManufacturesComponent implements OnInit {
   onFilter(field) {
     this.filter.onFilter(field, this.manufactures)
   }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
 }
