@@ -31,7 +31,6 @@
                 #ipLabel
                 *ngIf="customDevice"
                 [field]="customDevice.ip"
-                [title]="'IP address'"
                 [placeholder]="'Enter ip address'"
                 class="company-device-edit-name"
                 (onChange)="onChangeIp($event)"
@@ -45,7 +44,6 @@
             <app-company-devices-edit-label
                 #portLabel
                 [field]="customDevice.port"
-                [title]="'Port'"
                 [placeholder]="'Port'"
                 class="company-device-edit-name"
                 (onChange)="onChangePort($event)"
@@ -103,7 +101,6 @@
                 #macLabel
                 *ngIf="customDevice"
                 [field]="customDevice.macAddress"
-                [title]="'IP address'"
                 [placeholder]="'Enter mac address'"
                 class="company-device-edit-name"
                 (onChange)="onChangeIp($event)"

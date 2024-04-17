@@ -49,7 +49,6 @@
                     *ngIf="customDevice"
                     #assetTagLabel
                     [field]="customDevice.assetTag"
-                    [title]="'Asset Tag'"
                     [placeholder]="'Enter Asset Tag'"
                     class="company-device-edit-name"
                     [isDisabled]="customerPortalStateService.isCustomerPortal"
@@ -63,7 +62,6 @@
                 <app-company-devices-edit-label
                     *ngIf="device"
                     [field]="getSystemField('manufacturer') || ''"
-                    [title]="'Manufacturer'"
                     [placeholder]="'Enter Manufacturer'"
                     class="company-device-edit-name"
                     [isDisabled]="customerPortalStateService.isCustomerPortal"
@@ -95,7 +93,6 @@
                 #ipAddressLabel
                 *ngIf="customDevice"
                 [field]="customDevice.ip"
-                [title]="'IP address'"
                 [placeholder]="'Enter ip address'"
                 [isDisabled]="customerPortalStateService.isCustomerPortal"
                 class="company-device-edit-name"
@@ -108,7 +105,6 @@
                 <app-company-devices-edit-label
                     *ngIf="device"
                     [field]="getSystemField('model') || ''"
-                    [title]="'Model'"
                     [placeholder]="'Enter Model'"
                     class="company-device-edit-name"
                     [isDisabled]="customerPortalStateService.isCustomerPortal"
@@ -220,7 +216,6 @@
                 <div class="sidebar-system__info-title">System Type</div>
                 <app-company-devices-edit-label
                     [field]="getSystemField('architecture') || ''"
-                    [title]="'Architecture'"
                     [placeholder]="'Enter System Type'"
                     class="company-device-edit-name"
                     [isDisabled]="customerPortalStateService.isCustomerPortal"
@@ -234,7 +229,6 @@
                 <app-company-devices-edit-label
                     #locationLabel
                     [field]="customDevice.location"
-                    [title]="'Location'"
                     [placeholder]="'Enter location'"
                     [isDisabled]="customerPortalStateService.isCustomerPortal"
                     class="company-device-edit-name"

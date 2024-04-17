@@ -8,7 +8,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class CompanyDevicesEditLabelComponent implements OnInit {
   value: string;
   @Input() field: string;
-  @Input() title: string;
   @Input() isDisabled: boolean = false;
   showEdit: boolean = false;
   @Input() placeholder: string = '';
