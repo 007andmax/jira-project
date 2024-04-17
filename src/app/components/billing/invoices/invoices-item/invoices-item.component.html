@@ -1,4 +1,7 @@
-<div class="qt-table-modern__row" [ngClass]="{'--selected': invoice.selected}">
+<div
+    class="qt-table-modern__row"
+    [ngClass]="{'--selected': invoice.selected}"
+>
     <div class="invoice-table__check">
         <div class="qt-df">
             <label
@@ -27,26 +30,31 @@
         (click)="onShowPreviewInvoice()"
     ></div>
     <div class="invoce-table__company ellipsis">
-      <span
-        class="ellipsis"
-        [textContent]="(company) ? company.name : ''"
-      ></span>
+        <span
+            class="ellipsis"
+            [textContent]="(company) ? company.name : ''"
+        ></span>
     </div>
     <div class="invoce-table__status">
         <span
             class="tag__modern --warning"
-            *ngIf="invoice.isOverDue && !invoice.paidOn"
+            *ngIf="invoice.isOverDue && !invoice.paidOn && invoice.status != 'ROLLBACK'"
             [textContent]="'Overdue by ' + invoice.getOverDueDate() + ' days'"
         ></span>
         <span
             class="tag__modern --info"
-            *ngIf="!invoice.isOverDue && !invoice.paidOn"
+            *ngIf="!invoice.isOverDue && !invoice.paidOn && invoice.status != 'ROLLBACK'"
             [textContent]="'Due in ' + invoice.getDueDate() + ' days'"
         ></span>
         <span
             class="tag__modern --success"
-            *ngIf="invoice.paidOn"
+            *ngIf="invoice.paidOn && invoice.status != 'ROLLBACK'"
             [textContent]="'Paid ' + invoice.getPaidOnDate() + ' days ago'"
+        ></span>
+        <span
+            class="tag__modern saved"
+            *ngIf="invoice.status == 'ROLLBACK'"
+            [textContent]="'Rollbacked'"
         ></span>
     </div>
     <div
@@ -54,16 +62,16 @@
         [textContent]="getDate(invoice.readedAt)"
     ></div>
     <div class="invoce-table__amount ellipsis">
-      <span
-        class="ellipsis"
-        [textContent]="invoice.totalSum | currency"
-      ></span>
+        <span
+            class="ellipsis"
+            [textContent]="invoice.totalSum | currency"
+        ></span>
     </div>
     <div class="invoce-table__balance-due">
-      <span
-        class="ellipsis"
-        [textContent]="((invoice.totalSum || invoice.sum) - invoice.paidSum) | currency"
-      ></span>
+        <span
+            class="ellipsis"
+            [textContent]="((invoice.totalSum || invoice.sum) - invoice.paidSum) | currency"
+        ></span>
     </div>
     <div
         class="invoce-table__menu"
@@ -84,7 +92,7 @@
                     class="pointer"
                     ngbDropdownItem
                     (click)="resendInvoices(false)"
-                    *ngIf="!customerPortalStateService.isCustomerPortal"
+                    *ngIf="!customerPortalStateService.isCustomerPortal && invoice.status != 'ROLLBACK'"
                 >
                     <div class="icon__email-dark qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Resend
@@ -93,7 +101,7 @@
                     class="pointer"
                     ngbDropdownItem
                     (click)="resendInvoices(true)"
-                    *ngIf="!customerPortalStateService.isCustomerPortal"
+                    *ngIf="!customerPortalStateService.isCustomerPortal && invoice.status != 'ROLLBACK'"
                 >
                     <div class="icon__resend-pdf qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Resend with PDF
@@ -101,7 +109,7 @@
                 <li
                     class="pointer"
                     ngbDropdownItem
-                    *ngIf="!invoice.readedAt && !customerPortalStateService.isCustomerPortal"
+                    *ngIf="!invoice.readedAt && !customerPortalStateService.isCustomerPortal && invoice.status != 'ROLLBACK'"
                     (click)="markAsRead()"
                 >
                     <div class="icon__mark-as-read qt-bg-contain qt-sz-20 qt-mr-12"></div>
@@ -118,7 +126,7 @@
                 <li
                     class="pointer"
                     ngbDropdownItem
-                    *ngIf="invoice.paidOn && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')"
+                    *ngIf="invoice.paidOn && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE') && invoice.status != 'ROLLBACK'"
                     (click)="refundPayments()"
                 >
                     <div class="icon__refund-payment qt-bg-contain qt-sz-20 qt-mr-12"></div>
@@ -127,7 +135,7 @@
                 <li
                     class="pointer"
                     ngbDropdownItem
-                    *ngIf="!invoice.paidOn && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')"
+                    *ngIf="!invoice.paidOn && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE') && invoice.status != 'ROLLBACK'"
                     (click)="rollbackInvoice()"
                 >
                     <div class="icon__rool-back qt-bg-contain qt-sz-20 qt-mr-12"></div>
@@ -136,7 +144,7 @@
                 <li
                     ngbDropdownItem
                     class="payment-menu-item"
-                    *ngIf="!customerPortalStateService.isCustomerPortal"
+                    *ngIf="!customerPortalStateService.isCustomerPortal && invoice.status != 'ROLLBACK'"
                 >
                     <div class="icon__payment-history qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Payment history

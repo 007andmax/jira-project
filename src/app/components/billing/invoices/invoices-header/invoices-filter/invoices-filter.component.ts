@@ -21,7 +21,7 @@ export class InvoicesFilterComponent implements OnInit {
   sub: Subscription = new Subscription();
   invoicesFilter: InvoicesFilter = new InvoicesFilter();
   @Output() changeCountFilter = new EventEmitter<any>();
-  statusTypes = [new CompanySetting('Paid invoices', 'PAID'), new CompanySetting('Unpaid invoices', 'UNPAID'), new CompanySetting('Overdue invoices', 'OVERDUE')];
+  statusTypes = [new CompanySetting('Paid invoices', 'PAID'), new CompanySetting('Unpaid invoices', 'UNPAID'), new CompanySetting('Overdue invoices', 'OVERDUE'), new CompanySetting('Deleted invoices', 'ROLLBACK')];
   constructor(private companiesState: CompaniesStateService,
     private elRef: ElementRef,
     private customerPortalStateService: CustomerPortalStateService,
