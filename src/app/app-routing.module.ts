@@ -198,7 +198,6 @@ const routes: Routes = [
     path: ':domain/setting/deviceSetting',
     loadChildren: './components/setting/device-setting/device-setting.module#DeviceSettingModule',
     // canActivate: [PermissionNoSuperAdminService]
-    canActivate: [TestPermissionService]
   },
   {
     path: ':domain/inventory/products',
