@@ -30,7 +30,7 @@ export class AccountingYearComponent implements OnInit {
   }
   public saveAccountingDate() {
     let data = new Date(this.accountingStartDate.month + '/' + this.accountingStartDate.day + '/' + this.accountingStartDate.year);
-    this.companyProfileService.setAccountingStartDate(moment(data).format('YYYY-MM-DD')).subscribe(
+    this.companyProfileService.setAccountingStartDate(JSON.stringify(moment(data).format('YYYY-MM-DD'))).subscribe(
       (res: any) => {
         this.toaster.success('Accounting date updated successfully', null, {
           timeOut: 3000
