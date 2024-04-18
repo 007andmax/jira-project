@@ -11,7 +11,7 @@ export class InvoicesFilter {
     sortBy: string;
     startDate: number;
     status: string;
-
+    excludeDeleted: boolean;
     leftOffset: number = 0;
     initLeftOffset: boolean = false;
     constructor() { }
@@ -28,20 +28,25 @@ export class InvoicesFilter {
     public resetLeftOffset() {
         this.leftOffset = 0;
     }
+    public setExcludeDeleted(data) {
+        this.excludeDeleted = data;
+    }
     public getFIlter() {
         let endDate = new Date(this.endDate);
         endDate.setDate(endDate.getDate() + 1);
-        return {
+        let data: any = {
             companyId: this.companyId,
-            amount: (this.amount) ? this.amount : null,
-            endDate: (this.endDate) ? moment(endDate).format('YYYY-MM-DD') : null,
             invoiceNumber: this.invoiceNumber,
             limit: this.limit,
             offset: (this.initLeftOffset) ? (this.offset - this.leftOffset) : this.offset,
             sortBy: this.sortBy,
-            startDate: (this.startDate) ? moment(this.startDate).format('YYYY-MM-DD') : null,
             status: this.status,
-        }
+            excludeDeleted: this.excludeDeleted
+        };
+        if (this.amount) data.amount = this.amount;
+        if (this.endDate) data.endDate = moment(endDate).format('YYYY-MM-DD');
+        if (this.startDate) data.startDate = moment(this.startDate).format('YYYY-MM-DD');
+        return data;
     }
     public checkAddInvoice(invoice: Invoice, companies) {
         let company = companies.find(item => item.id === this.companyId);

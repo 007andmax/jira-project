@@ -20,7 +20,7 @@
                     [ngForOf]="recentInvoiceList"
                     [ngForTrackBy]="trackById"
                 >
-                    <tr *ngIf="invoice.status != 'ROLLBACK'">
+                    <tr>
                         <td
                             (click)="onPreviewInvoice(invoice)"
                             class="pointer"
