@@ -38,6 +38,12 @@ export class CompanyDevicesAsideNetworkTabComponent implements OnInit {
 
     })
   }
+  onChangeMac(data) {
+    this.customDevice.setMacAddress(data);
+    this.devicesService.editDevice(this.customDevice.getRequestForEdit()).subscribe(data => {
+
+    })
+  }
   onChangePort(data) {
     this.customDevice.setPort(data);
     this.devicesService.editDevice(this.customDevice.getRequestForEdit()).subscribe(data => {

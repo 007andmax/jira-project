@@ -39,6 +39,9 @@ export class DeviceCompany extends Device {
             this[key] = data[key];
         }
     }
+    public setMacAddress(data) {
+        this.macAddress = data;
+    }
     public setAssetTag(data) {
         this.assetTag = data;
     }
@@ -123,7 +126,7 @@ export class DeviceCompany extends Device {
             "name": this.name,
             "type": this.type,
             "ipAddress": this.ip,
-            "port": this.port,
+            "port": Number(this.port),
             "macAddress": this.macAddress,
             "manufacturerId": this.manufacturer ? this.manufacturer.id : null,
             "modelId": this.model ? this.model.id : null,

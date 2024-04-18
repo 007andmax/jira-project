@@ -65,7 +65,7 @@ export class CustomDevice {
             "name": this.name,
             "type": this.type,
             "ipAddress": this.ip_address,
-            "port": this.port,
+            "port": Number(this.port),
             "macAddress": this.mac_address,
             "manufacturerId": this.manufacturerId,
             "modelId": this.modelId,

@@ -59,10 +59,10 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
     this.modelDd.clearWithOutChanges();
     this.customDevice.setModel(null);
     this.customDevice.setManufacturer(data);
-    if (data) {
-      this.devicesService.editDevice(this.customDevice.getRequestForEdit()).subscribe(data => {
+    this.devicesService.editDevice(this.customDevice.getRequestForEdit()).subscribe(data => {
 
-      })
+    })
+    if (data) {
       this.getModels(data.id);
     }
   }
