@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CompanyProfileService } from 'src/app/services/setting/company-profile.service';
+import * as moment from "moment";
 
 @Component({
   selector: 'accounting-year',
@@ -28,8 +29,8 @@ export class AccountingYearComponent implements OnInit {
     this.getAccountingStartDate();
   }
   public saveAccountingDate() {
-    let data = new Date(this.accountingStartDate.month + '/' + this.accountingStartDate.day + '/' + this.accountingStartDate.year).getTime()
-    this.companyProfileService.setAccountingStartDate(data).subscribe(
+    let data = new Date(this.accountingStartDate.month + '/' + this.accountingStartDate.day + '/' + this.accountingStartDate.year);
+    this.companyProfileService.setAccountingStartDate(moment(data).format('YYYY-MM-DD')).subscribe(
       (res: any) => {
         this.toaster.success('Accounting date updated successfully', null, {
           timeOut: 3000
