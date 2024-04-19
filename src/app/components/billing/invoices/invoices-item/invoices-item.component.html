@@ -2,7 +2,7 @@
     class="qt-table-modern__row"
     [ngClass]="{'--selected': invoice.selected}"
 >
-    <div class="invoice-table__check">
+    <div class="invoice-table__check pointer">
         <div class="qt-df">
             <label
                 class="qt-checkbox"
@@ -21,21 +21,21 @@
         </div>
     </div>
     <div
-        class="invoce-table__date"
+        class="invoce-table__date no-pointer"
         [textContent]="getDate(invoice.date)"
     ></div>
     <div
-        class="invoce-table__invoice"
+        class="invoce-table__invoice pointer"
         [textContent]="invoice.number"
         (click)="onShowPreviewInvoice()"
     ></div>
-    <div class="invoce-table__company ellipsis">
+    <div class="invoce-table__company ellipsis no-pointer">
         <span
             class="ellipsis"
             [textContent]="(company) ? company.name : ''"
         ></span>
     </div>
-    <div class="invoce-table__status">
+    <div class="invoce-table__status no-pointer">
         <span
             class="tag__modern --warning"
             *ngIf="invoice.isOverDue && !invoice.paidOn && invoice.status != 'DELETED'"
@@ -54,20 +54,20 @@
         <span
             class="tag__modern saved"
             *ngIf="invoice.status == 'DELETED'"
-            [textContent]="'Rollbacked'"
+            [textContent]="'Deleted'"
         ></span>
     </div>
     <div
-        class="invoce-table__read-on"
+        class="invoce-table__read-on no-pointer"
         [textContent]="getDate(invoice.readedAt)"
     ></div>
-    <div class="invoce-table__amount ellipsis">
+    <div class="invoce-table__amount ellipsis no-pointer">
         <span
             class="ellipsis"
             [textContent]="invoice.totalSum | currency"
         ></span>
     </div>
-    <div class="invoce-table__balance-due">
+    <div class="invoce-table__balance-due no-pointer">
         <span
             class="ellipsis"
             [textContent]="((invoice.totalSum || invoice.sum) - invoice.paidSum) | currency"
@@ -79,7 +79,7 @@
         [container]="'body'"
     >
         <div
-            class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
+            class="qt-ic-c icon__more  pointer qt-sz-16 qt-bg-contain"
             id="dropdownBasic1"
             ngbDropdownToggle
         >
