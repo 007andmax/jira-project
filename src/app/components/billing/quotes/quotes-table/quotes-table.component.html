@@ -10,8 +10,8 @@
             class="qt-page-list__body-table-container"
             *ngIf="!showPreloader"
         >
-            <table class="qt-page-list__body-tbody qt-table-modern quotes-table">
-                <tbody
+            <div class="qt-page-list__body-tbody qt-table-modern quotes-table">
+                <div class="tbody"
                     infiniteScroll
                     [infiniteScrollContainer]="container"
                     [infiniteScrollDistance]="2"
@@ -44,8 +44,8 @@
                             (onSelected)="onSelected($event)"
                         ></app-quotes-item>
                     </ng-template>
-                </tbody>
-            </table>
+                </div>
+            </div>
             <div
                 class="loading"
                 *ngIf="showPreloader"

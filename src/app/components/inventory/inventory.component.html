@@ -5,8 +5,8 @@
     ></inventory-header>
     <div class="qt-page-list__body">
         <div class="qt-page-list__body-table-container">
-            <table class="qt-page-list__body-tbody qt-table-modern products-table">
-                <tbody
+            <div class="qt-page-list__body-tbody qt-table-modern products-table">
+                <div class="tbody"
                     infiniteScroll
                     [infiniteScrollContainer]="container"
                     [infiniteScrollDistance]="2"
@@ -37,8 +37,8 @@
                         class="loading"
                         *ngIf="showPreloader"
                     ></div>
-                </tbody>
-            </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>

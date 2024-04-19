@@ -700,7 +700,6 @@ documents-edit-info {
   padding: 32px;
   position: relative;
   border-radius: 6px;
-  //box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2); // TODO check this style
   &.confirm-user-modal {
     h3 {
       font-weight: 400;
@@ -1779,7 +1778,6 @@ app-quotes-item {
         z-index: -1;
       }
       &:hover {
-        //z-index: 1; // TODO check this style
         color: $white;
         &::after {
           background-color: transparent;
@@ -1818,7 +1816,6 @@ app-quotes-item {
       }
     }
     &:not(.faded):hover {
-      //z-index: 1; // TODO check this style
       &::after {
         width: 30px;
         z-index: -2;
@@ -2745,7 +2742,6 @@ app-ticket-profile-updates-note {
   }
   &-wrap {
     display: flex;
-    //box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05); // TODO check this style
   }
 }
 .ticket-updates__ticket-photo,
@@ -2960,12 +2956,17 @@ app-ticket-profile-updates-service-timepicker {
   margin-bottom: 15px;
 }
 
-.ticket-updates { // TODO check this style
+.ticket-updates {
   &__update-block {
     position: relative;
     border-bottom: 1px solid $gray-200;
     padding-bottom: 16px;
     margin-bottom: 16px;
+  }
+  .qt-report__body-table-body {
+    th, td {
+      white-space: unset;
+    }
   }
 }
 
@@ -3447,88 +3448,6 @@ input.--input-error:hover {
     display: none;
   }
 }
-
-  .company-devices-page {
-    .company-devices-table__check {
-      width: 16px;
-    }
-    .company-devices-table__menu {
-      width: 38px;
-      max-width: 38px;
-      min-width: 38px;
-    }
-    .company-devices-table__tags {
-      width: 380px;
-      max-width: 380px;
-      min-width: 380px;
-      @media (min-width: 1921px) {
-        width: 440px;
-        max-width: 440px;
-        min-width: 440px;
-      }
-      @media screen and (min-width: 2250px) {
-        width: 580px;
-        max-width: 580px;
-        min-width: 580px;
-      }
-    }
-    .company-devices-table__go-to {
-      width: 30px;
-      max-width: 30px;
-      min-width: 30px;
-    }
-    .company-devices-table__connect {
-      width: 30px;
-      max-width: 30px;
-      min-width: 30px;
-    }
-    .company-devices-table__ip-address {
-      width: 190px;
-      max-width: 190px;
-      min-width: 190px;
-    }
-    .company-devices-table__windows {
-      width: 164px;
-      max-width: 164px;
-      min-width: 164px;
-    }
-    .company-devices-table__up-time {
-      width: 100px;
-      max-width: 100px;
-      min-width: 100px;
-    }
-    .company-devices-table__logged-user {
-      width: 148px;
-      max-width: 148px;
-      min-width: 148px;
-    }
-    .company-devices-table__device-name {
-      max-width: 150px;
-      width: max-content;
-      min-width: 150px;
-    }
-    .company-devices-table__device-type {
-      width: 32px;
-      max-width: 32px;
-      min-width: 32px;
-    }
-    .company-devices-table__device-agent {
-      width: 101px;
-      max-width: 101px;
-      min-width: 101px;
-    }
-    .company-devices-table__device-master-agent{
-      width:30px;
-      max-width: 30px;
-      min-width: 30px;
-    }
-    .company-devices-table__company-name {
-      max-width: 158px;
-      width: max-content;
-      min-width: 158px;
-    }
-  }
-
 .quotes-page .qt-page-list__header-filters .dropdown-menu {
   right: 0;
   left: unset;

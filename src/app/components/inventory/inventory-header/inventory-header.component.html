@@ -36,70 +36,70 @@
     </div>
     <inventory-filter [hidden]="toggleFilter"></inventory-filter>
     <div class="qt-page-list__header-thead-container">
-        <table class="qt-table-modern qt-page-list__header-thead">
-            <thead>
-                <tr>
-                    <th
+        <div class="qt-table-modern qt-page-list__header-thead">
+            <div class="qt-table-modern qt-page-list__header-thead">
+                <div class="qt-page-list__header-thead__row">
+                    <div
                         class="products-table__product-name pointer"
                         (click)="filter('description')"
                     >
                         Product Name
                         <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
+                    </div>
+                    <div
                         class="products-table__category pointer"
                         (click)="filter('category')"
                     >
                         Category
                         <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
+                    </div>
+                    <div
                         class="products-table__cost pointer"
                         (click)="filter('cost')"
                         *ngIf="getPermissions('VIEW_PRODUCT_COST')"
                     >
                         Cost
                         <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
+                    </div>
+                    <div
                         class="products-table__cost pointer"
                         (click)="filter('markup')"
                     >
                         Markup
                         <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
+                    </div>
+                    <div
                         class="products-table__sale-price pointer"
                         (click)="filter('sale')"
                     >
                         Sale Price
                         <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
+                    </div>
+                    <div
                         class="products-table__mfg pointer"
                         (click)="filter('manufacture')"
                     >
                         #Mfg
                         <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th class="products-table__tac">Tax</th>
-                    <th
+                    </div>
+                    <div class="products-table__tac">Tax</div>
+                    <div
                         class="products-table__ilc pointer"
                         (click)="filter('ilc')"
                     >
                         ILC
                         <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
+                    </div>
+                    <div
                         class="products-table__gl pointer"
                         (click)="filter('glNumber')"
                     >
                         GL
                         <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th class="products-table__menu pointer"></th>
-                </tr>
-            </thead>
-        </table>
+                    </div>
+                    <div class="products-table__menu pointer"></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

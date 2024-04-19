@@ -75,8 +75,7 @@ users-aside-detail-tickets,
 users-aside-detail-documents,
 users-aside-detail-passwords,
 users-aside-detail-messages {
-  //height: 100%;
-  height: calc(100% - 40px); // TODO check this style
+  height: calc(100% - 40px);
   flex: 1;
   display: flex;
 }

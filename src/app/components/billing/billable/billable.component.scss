@@ -5,7 +5,7 @@ app-billable-item {
 }
 .billable-item-table__check {
     padding-left: 24px !important;
-    width: 45px;
+    flex: 0 0 52px;
 }
 .--outline-blue[disabled] {
     border: solid 1px $blue-light-300;

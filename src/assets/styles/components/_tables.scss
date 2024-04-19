@@ -193,6 +193,9 @@ table.qt-table-modern {
       flex: 1 0 148px;
       min-width: 0;
     }
+    &__contract-description {
+      min-width: 164px;
+    }
 
     &__assignee {
       max-width: 168px;

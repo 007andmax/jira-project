@@ -1,9 +1,9 @@
-<tr>
-    <td
+<div class="qt-table-modern__row">
+    <div
         class="billable-payment-table__date pointer"
         [textContent]="getDate()"
-    ></td>
-    <td class="billable-payment-table__invoice pointer">
+    ></div>
+    <div class="billable-payment-table__invoice pointer">
         <ng-template
             ngFor
             let-invoice
@@ -16,23 +16,23 @@
                 (click)="onShowPreviewInvoice(i)"
             ></span>
         </ng-template>
-    </td>
-    <td
+    </div>
+    <div
         class="billable-payment-table__company pointer"
         [textContent]="payment.clientCompanyName"
         (click)="showDetailsPayment()"
-    ></td>
-    <td
+    ></div>
+    <div
         class="billable-payment-table__payment-mode pointer"
         [textContent]="parsePaymentMethod(payment.paymentMethod)"
         (click)="showDetailsPayment()"
-    ></td>
-    <td
+    ></div>
+    <div
         class="billable-payment-table__reference pointer"
         [textContent]="payment.reference"
         (click)="showDetailsPayment()"
-    ></td>
-    <td class="billable-payment-table__payment">
+    ></div>
+    <div class="billable-payment-table__payment">
         <ng-template #tipContent>
             <div [textContent]="payment.note"></div>
         </ng-template>
@@ -42,13 +42,13 @@
             placement="left"
             [ngbTooltip]="tipContent"
         ></div>
-    </td>
-    <td
+    </div>
+    <div
         class="billable-payment-table__amount pointer"
         [textContent]="(payment.partialPaidAmount || payment.totalSum ) | currency"
         (click)="showDetailsPayment()"
-    ></td>
-    <td
+    ></div>
+    <div
         class="billable-payment-table__status pointer"
         (click)="showDetailsPayment()"
     >
@@ -58,8 +58,8 @@
             [textContent]="payment.refundMethod ? 'Refund' : 'Paid'"
         >
         </span>
-    </td>
-    <td
+    </div>
+    <div
         class="billable-payment-table__menu"
         ngbDropdown
         [container]="'body'"
@@ -102,5 +102,5 @@
                 Delete payment
             </li>
         </ul>
-    </td>
-</tr>
+    </div>
+</div>
