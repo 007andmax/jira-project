@@ -1,5 +1,5 @@
-<tr [ngClass]="{'company-device-hover':device.agentId || device.isCustom, '--ofline': !device.online}">
-    <td class="company-devices-table__check">
+<div [ngClass]="{'company-device-hover':device.agentId || device.isCustom, '--ofline': !device.online}">
+    <div class="company-devices-table__check">
         <div class="qt-df">
             <label class="qt-checkbox">
                 <input
@@ -124,8 +124,8 @@
             [placement]="'top'"
             (tagsChange)="onChangeTags($event)"
         ></app-company-devices-tags>
-    </td>
-    <td class="company-devices-table__logged-user">
+    </div>
+    <div class="company-devices-table__logged-user">
         <div
             class="qt-df qt-fd-c"
             *ngIf="!device.isCustom"
@@ -148,8 +148,8 @@
                 <span *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).minutes < 1 || !device.timing.idle">0 min</span>
             </span>
         </div>
-    </td>
-    <td class="company-devices-table__up-time">
+    </div>
+    <div class="company-devices-table__up-time">
         <div
             class="qt-df qt-fd-c"
             *ngIf="!device.isCustom"

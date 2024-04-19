@@ -63,7 +63,6 @@ export class CompanyDevicesCustomAsideComponent implements OnInit {
     })
   }
   onSelectTags(data) {
-    console.log(data);
     this.device.setTags(data.map(item => item.id));
   }
   onSelectAssestType(data) {
@@ -82,11 +81,9 @@ export class CompanyDevicesCustomAsideComponent implements OnInit {
     this.device.setModelId(data ? data.id : null);
   }
   onChangeInstallDate(data) {
-    console.log(data);
     this.device.setInstallDate(new Date(data.year, data.month - 1, data.day), this.companiesState.getCurrentCompany());
   }
   onChangeWarrentyDate(data) {
-    console.log(data);
     this.device.setWarrentyDate(new Date(data.year, data.month - 1, data.day), this.companiesState.getCurrentCompany());
   }
   closed() {

@@ -49,7 +49,6 @@ export class DeviceSettingModelsComponent implements OnInit, OnDestroy {
       if (newChange.action === 'MANUFACTURE_MODEL_EDITED') {
         if (this.selectedManufacture && newChange.data.manufacturerId == this.selectedManufacture.id) {
           let index = this.models.findIndex(item => item.id == newChange.data.id);
-          console.log("index", index);
           if (index > -1) this.models[index] = new ModelDevice(newChange.data);
           this.cd.detectChanges();
         }
@@ -62,7 +61,6 @@ export class DeviceSettingModelsComponent implements OnInit, OnDestroy {
       }
       if (newChange.action === 'MANUFACTURE_MODEL_DELETED') {
         let index = this.models.findIndex(item => item.id == newChange.data);
-        console.log("index", index);
         if (index > -1) this.models.splice(index, 1);
         this.cd.detectChanges();
       }

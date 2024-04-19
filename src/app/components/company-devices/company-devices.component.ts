@@ -70,7 +70,6 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
       if (newChange.action === 'CUSTOM_DEVICE_SAVED') {
         this.devices.push(new DeviceCompany({ ...newChange.data, isCustom: true }, newChange.data.companyId));
-        console.log(this.devices);
       }
       if (newChange.action === 'CUSTOM_DEVICE_REMOVED') {
         let index = this.devices.findIndex(item => item.id == newChange.data);
@@ -202,7 +201,6 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
         this.devices = data[id].map(item => new DeviceCompany(item, this.companyId));
         this.filter.onFilterName(this.devices);
       }
-      console.log("this.devices", this.devices);
       this.showPreloader = false;
       if (this.devices.filter(item => !item.isCustom).length > 0 && this.devicesStateService.getIsInitWebSocket()) this.sendDeviceStatusRequest(this.companyId, this.devices.filter(item => item.agentId).map(item => item.agentId));
     });

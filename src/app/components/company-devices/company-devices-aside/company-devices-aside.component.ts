@@ -57,7 +57,6 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
       }
       this.open = true;
       this.customDevices = data.devices.filter(item => item.isCustom);
-      console.log("data.devices[0]", data.devices[0]);
       let list = data.devices.filter(item => !item.isCustom);
       if (list.length == 0) {
         if (!this.currentDevice) {
@@ -68,8 +67,6 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
         this.tab = data.type;
         this.showPreloader = false;
       }
-      console.log("this.currentDevice", this.currentDevice);
-      console.log("this.customDevice", this.customDevice);
       if (list.length > 0) forkJoin(
         [...list.map(item => item.agentId).map(item => this.devicesService.getDeviceExtended(this.companyId, item))]
       )
@@ -82,7 +79,6 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
           } else {
             this.currentDevice = this.devices[this.devices.length - 1];
           }
-          console.log("this.currentDevice", this.currentDevice);
           this.tab = data.type;
           this.showPreloader = false;
         });
@@ -98,7 +94,6 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
     this.tab = 'SYSTEM';
     this.customDevice = data;
     this.currentDevice = null;
-    console.log("this.customDevice", this.customDevice);
     if (this.system) this.system.refresh(this.customDevice);
     if (this.network) this.network.refresh(this.customDevice);
     this.cd.detectChanges();

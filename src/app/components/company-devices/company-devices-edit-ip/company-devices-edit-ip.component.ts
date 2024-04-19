@@ -13,8 +13,6 @@ export class CompanyDevicesEditIpComponent extends CompanyDevicesEditLabelCompon
 
   onCheckValue() {
     this.validate.checkIpAddress(this.value);
-    console.log("this.value", this.value);
-    console.log("this.validate", this.validate);
     if (this.value !== this.field && this.validate.getIpAdress()) {
       this.onChange.emit(this.value);
       this.setIsInitEdit(false);

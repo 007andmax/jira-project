@@ -78,7 +78,6 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     })
   }
   openAside(type) {
-    console.log("this.device", this.device);
     if (this.device.agentId || this.device.isCustom) this.devicesStateService.setOnOpenAside(new DeviceCompanyAsideParams(type, [this.device]));
   }
   onChangeTags(data) {

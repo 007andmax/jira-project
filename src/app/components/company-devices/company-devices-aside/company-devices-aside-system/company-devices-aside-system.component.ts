@@ -80,7 +80,6 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
     if (this.datePickerWarranty) this.datePickerWarranty.setEditDate(this.customDevice.warrantyDateInt);
     if (this.datePickerInstalledOn) this.datePickerInstalledOn.setEditDate(this.customDevice.installDateInt);
     if (this.locationLabel) this.locationLabel.setValue(this.customDevice.location);
-    console.log("this.customDevice", this.customDevice);
     this.cd.detectChanges();
   }
   getModels(id) {
@@ -171,7 +170,6 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
     this.editCustomDevice();
   }
   onChangeInstallDate(data) {
-    console.log(data);
     this.customDevice.setInstallDate(new Date(data.year, data.month - 1, data.day), this.companiesState.getCurrentCompany());
     this.editCustomDevice();
   }

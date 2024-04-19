@@ -91,12 +91,10 @@ export class DeviceCompany extends Device {
     public setInstallDate(due, currentCompany) {
         this.installDate = this.parseDateFromDatePicker(due, currentCompany);
         this.installDateInt = new Date(due).getTime();
-        console.log("this.installDate", this.installDate);
     }
     public setWarrentyDate(due, currentCompany) {
         this.warrantyDate = this.parseDateFromDatePicker(due, currentCompany);
         this.warrantyDateInt = new Date(due).getTime();
-        console.log("this.warrantyDate", this.warrantyDate);
     }
     public getFieldForCheckIcon() {
         if (!this.isCustom) return this.iconName;

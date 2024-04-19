@@ -38,7 +38,6 @@ export class CustomDevice {
     public setInstallDate(due, currentCompany) {
         this.install_date = this.parseDateFromDatePicker(due, currentCompany);
         this.install_date_int = new Date(due).getTime();
-        console.log("this.install_date", this.install_date);
     }
     parseDateFromDatePicker(due, currentCompany) {
         let date = new Date(due); // timestamp from calendar	
@@ -57,7 +56,6 @@ export class CustomDevice {
     public setWarrentyDate(due, currentCompany) {
         this.warranty_date = this.parseDateFromDatePicker(due, currentCompany);
         this.warranty_date_int = new Date(due).getTime();
-        console.log("this.warranty_date", this.warranty_date);
     }
     public getDataForRequest() {
         return {
