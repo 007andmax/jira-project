@@ -107,7 +107,7 @@
                 <app-date-picker
                     #installDateDP
                     [ngClass]="{'placeholder-date':device.install_date_int == 0}"
-                    [type]="'DETAIL_TICKET_UPDATE'"
+                    [type]="'COMPANY_DEVICE'"
                     [formatDate]="formatDate"
                     [useMinDate]="false"
                     [editMode]="true"
@@ -122,7 +122,7 @@
                 <app-date-picker
                     #warrantyDateDP
                     [ngClass]="{'placeholder-date':device.warranty_date_int == 0}"
-                    [type]="'DETAIL_TICKET_UPDATE'"
+                    [type]="'COMPANY_DEVICE'"
                     [formatDate]="formatDate"
                     [editMode]="true"
                     [useMinDate]="false"

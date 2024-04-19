@@ -6,8 +6,11 @@
     [placement]="placement"
     [container]="container"
 >
-    <div *ngIf="type === 'DETAIL_TICKET_UPDATE'">
-        <i class="icn-16 icon__calendar pointer"></i>
+    <div *ngIf="type === 'DETAIL_TICKET_UPDATE' || type === 'COMPANY_DEVICE'">
+        <i
+            class="icn-16 icon__calendar pointer"
+            *ngIf="!selectedDateModel || type !== 'COMPANY_DEVICE'"
+        ></i>
         <input
             [disabled]="isDisabled"
             type="text"
@@ -18,6 +21,11 @@
             [value]="geTextDate()"
             readonly
         >
+        <i
+            *ngIf="selectedDateModel && type == 'COMPANY_DEVICE'"
+            class="icn-sm icn-remove-old"
+            (click)="clear()"
+        ></i>
     </div>
     <div
         class="detail-ticket-date-picker"

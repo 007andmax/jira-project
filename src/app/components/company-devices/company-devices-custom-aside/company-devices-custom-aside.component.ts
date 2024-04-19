@@ -81,10 +81,12 @@ export class CompanyDevicesCustomAsideComponent implements OnInit {
     this.device.setModelId(data ? data.id : null);
   }
   onChangeInstallDate(data) {
-    this.device.setInstallDate(new Date(data.year, data.month - 1, data.day), this.companiesState.getCurrentCompany());
+    if (!data) this.device.resetInstallDate();
+    if (data) this.device.setInstallDate(new Date(data.year, data.month - 1, data.day), this.companiesState.getCurrentCompany());
   }
   onChangeWarrentyDate(data) {
-    this.device.setWarrentyDate(new Date(data.year, data.month - 1, data.day), this.companiesState.getCurrentCompany());
+    if (!data) this.device.resetWarrentyDate();
+    if (data) this.device.setWarrentyDate(new Date(data.year, data.month - 1, data.day), this.companiesState.getCurrentCompany());
   }
   closed() {
     this.opened = false;

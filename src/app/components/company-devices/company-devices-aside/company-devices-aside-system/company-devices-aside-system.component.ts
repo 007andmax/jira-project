@@ -154,7 +154,8 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
     this.datePickerWarranty.getDropDown().open();
   }
   onChangeWarrentyDate(data) {
-    this.customDevice.setWarrentyDate(new Date(data.year, data.month - 1, data.day), this.companiesState.getCurrentCompany());
+    if (!data) this.customDevice.resetWarrentyDate();
+    if (data) this.customDevice.setWarrentyDate(new Date(data.year, data.month - 1, data.day), this.companiesState.getCurrentCompany());
     this.editCustomDevice();
   }
   onChangeIp(data) {
@@ -170,7 +171,8 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
     this.editCustomDevice();
   }
   onChangeInstallDate(data) {
-    this.customDevice.setInstallDate(new Date(data.year, data.month - 1, data.day), this.companiesState.getCurrentCompany());
+    if (!data) this.customDevice.resetInstallDate();
+    if (data) this.customDevice.setInstallDate(new Date(data.year, data.month - 1, data.day), this.companiesState.getCurrentCompany());
     this.editCustomDevice();
   }
   getWindowsInfo() {

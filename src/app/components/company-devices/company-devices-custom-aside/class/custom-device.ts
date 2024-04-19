@@ -35,6 +35,10 @@ export class CustomDevice {
     public setTags(data) {
         this.tags = data;
     }
+    public resetInstallDate() {
+        this.install_date = null;
+        this.install_date_int = 0;
+    }
     public setInstallDate(due, currentCompany) {
         this.install_date = this.parseDateFromDatePicker(due, currentCompany);
         this.install_date_int = new Date(due).getTime();
@@ -52,6 +56,10 @@ export class CustomDevice {
             let finalDate = new Date(currentTime - (current.getTimezoneOffset() * 60000) - timeOffset);
             return `${moment(finalDate).format('YYYY-MM-DD hh:mm:ss')}`;
         }
+    }
+    public resetWarrentyDate() {
+        this.warranty_date = null;
+        this.warranty_date_int = 0;
     }
     public setWarrentyDate(due, currentCompany) {
         this.warranty_date = this.parseDateFromDatePicker(due, currentCompany);

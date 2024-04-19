@@ -100,6 +100,14 @@ export class DeviceCompany extends Device {
         if (!this.isCustom) return this.iconName;
         if (this.isCustom) return this.type;
     }
+    public resetInstallDate() {
+        this.installDate = null;
+        this.installDateInt = 0;
+    }
+    public resetWarrentyDate() {
+        this.warrantyDate = null;
+        this.warrantyDateInt = 0;
+    }
     public getDataForEditIcon(iconName) {
         return {
             "agentId": this.agentId,
