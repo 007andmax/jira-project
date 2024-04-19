@@ -1,4 +1,7 @@
-<div [ngClass]="{'company-device-hover':device.agentId || device.isCustom, '--ofline': !device.online}">
+<div
+    class="qt-table-modern__row"
+    [ngClass]="{'company-device-hover':device.agentId || device.isCustom, '--ofline': !device.online}"
+>
     <div class="company-devices-table__check">
         <div class="qt-df">
             <label class="qt-checkbox">
