@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ViewChild, OnDestroy } from '@angular/core';
 import { ContractsFilterType } from '../../class/contracts-filter-type';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { ContractsHourly } from '../class/contracts-hourly';
@@ -13,12 +13,13 @@ import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { Tax } from 'src/app/interfaces/service/tax';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
 import { ContractsAsideTopComponent } from '../contracts-aside-top/contracts-aside-top.component';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-contracts-aside-hourly-billing',
   templateUrl: './contracts-aside-hourly-billing.component.html',
   styleUrls: ['./contracts-aside-hourly-billing.component.scss']
 })
-export class ContractsAsideHourlyBillingComponent implements OnInit {
+export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
   @ViewChild('startDateDP') startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP') reviewDateDP: DatePickerComponent;
   @ViewChild('topContract') topContract: ContractsAsideTopComponent;
@@ -32,12 +33,14 @@ export class ContractsAsideHourlyBillingComponent implements OnInit {
   showAddService: boolean = false;
   selectAllServices: boolean = true;
   taxes: Array<Tax> = [];
+  sub: Subscription = new Subscription();
   @Output() onClose = new EventEmitter<any>();
   constructor(private companiesStateService: CompaniesStateService,
     private contractsService: ContractsService,
     private taxesStateService: TaxesStateService,
     private nonContractServicesService: NonContractServicesService,
     private contractsStateService: ContractsStateService,) { }
+
 
   ngOnInit() {
     let today = new Date();
@@ -52,6 +55,7 @@ export class ContractsAsideHourlyBillingComponent implements OnInit {
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
       this.taxes = data;
     })
+    this.sub.add(getOnTaxess);
     if (this.contractsStateService.getContractForCopy()) {
       this.onInitCopy();
     } else {
@@ -145,5 +149,8 @@ export class ContractsAsideHourlyBillingComponent implements OnInit {
   }
   public trackById(index, item) {
     return item.id;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

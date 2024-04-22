@@ -14,6 +14,7 @@ import { environment } from './../../../../environments/environment';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import DataTables from 'datatables.net';
 import { SoftwareHeaderComponent } from './software-header/software-header.component';
 
 @Component({

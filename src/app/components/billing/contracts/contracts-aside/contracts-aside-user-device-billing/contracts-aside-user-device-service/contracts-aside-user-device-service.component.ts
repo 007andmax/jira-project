@@ -1,19 +1,20 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
-import { InvoiceFormTicketEditTaxesComponent } from '../../../../billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
 import { ContractsUserDeviceService } from '../../class/contracts-user-device-service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-contracts-aside-user-device-service',
   templateUrl: './contracts-aside-user-device-service.component.html',
   styleUrls: ['./contracts-aside-user-device-service.component.scss']
 })
-export class ContractsAsideUserDeviceServiceComponent implements OnInit {
+export class ContractsAsideUserDeviceServiceComponent implements OnInit, OnDestroy {
   @Input() service: ContractsUserDeviceService;
   @Output() onRemove = new EventEmitter<any>();
   @Output() onCheckName = new EventEmitter<any>();
   @ViewChild('taxesDropDown') taxesDropDown: TaxesComponent;
+  sub: Subscription = new Subscription();
   constructor(private taxesStateService: TaxesStateService,) { }
 
   ngOnInit() {
@@ -21,6 +22,7 @@ export class ContractsAsideUserDeviceServiceComponent implements OnInit {
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
       this.getTaxes(data);
     })
+    this.sub.add(getOnTaxess);
   }
   getTaxes(taxes) {
     let listTaxes = [];
@@ -50,6 +52,9 @@ export class ContractsAsideUserDeviceServiceComponent implements OnInit {
   public onChangeRate(val) {
     let value = Number(val);
     this.service.rate = value;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
 }

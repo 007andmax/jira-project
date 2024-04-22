@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { NonContractServicesService } from 'src/app/services/non-contract-services/non-contract-services.service';
@@ -7,7 +7,6 @@ import { ContractsStateService } from 'src/app/states/contracts/contracts-state.
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { Tax } from 'src/class/taxes/tax';
-import { InvoiceFormTicketEditTaxesComponent } from '../../../billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
 import { ContractsFilterType } from '../../class/contracts-filter-type';
 import { ServiceAgreement } from '../../class/service-agreement';
 import { ContractsBlockTimeValidate } from '../../contracts-aside/class/contracts-block-time-validate';
@@ -27,7 +26,7 @@ import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component'
   templateUrl: './contracts-aside-block-time-edit.component.html',
   styleUrls: ['./contracts-aside-block-time-edit.component.scss']
 })
-export class ContractsAsideBlockTimeEditComponent implements OnInit {
+export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
   @ViewChild('taxes') taxesDP: TaxesComponent;
   selectedCompany: any;
   selectedTaxes = [];
@@ -62,6 +61,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
       this.taxes = data;
     })
+    this.sub.add(getOnTaxess);
     if (this.contractsBlockTime.interval) {
       this.selectedInterval = this.contractsBlockTime.interval;
     } else {

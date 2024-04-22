@@ -46,9 +46,10 @@ export class BillableComponent implements OnInit, OnDestroy {
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.leftPanelStateService.setBillingPage('new-billable');
     if (this.appService.getIsInit()) this.getList();
-    this.appService.getOnInit().subscribe(data => {
+    let getOnInit = this.appService.getOnInit().subscribe(data => {
       this.getList();
     })
+    this.sub.add(getOnInit);
     let changeBillable = this.billableRealTimeService.changeBillable.subscribe(data => {
       if (data.action == 'TICKET_LOCKED') {
         let key = Object.keys(data.data)[0];

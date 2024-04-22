@@ -8,7 +8,6 @@ import { DefaultServicesHourlyContract } from '../../contracts-aside/class/defau
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import * as moment from "moment";
 import { NonContractServicesService } from 'src/app/services/non-contract-services/non-contract-services.service';
-import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { ContractsBlockTimeDefaultService } from '../../contracts-aside/class/contracts-block-time-default-service';
 @Component({
   selector: 'app-contracts-aside-hourly-edit',
@@ -27,7 +26,6 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
   selectAllServices: boolean = true;
   constructor(private companiesStateService: CompaniesStateService,
     private contractsService: ContractsService,
-    private contractsStateService: ContractsStateService,
     private nonContractServicesService: NonContractServicesService,
   ) { }
 
