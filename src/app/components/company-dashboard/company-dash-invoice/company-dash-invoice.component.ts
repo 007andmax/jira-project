@@ -68,5 +68,7 @@ export class CompanyDashInvoiceComponent implements OnInit {
       }
       this.showPreviewInvoice = true;*/
   }
-
+  public trackById(index, item) {
+    return item.id;
+  }
 }

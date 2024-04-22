@@ -111,8 +111,6 @@ export class DatePickerComponent implements OnInit, OnDestroy {
     this.datepicker = this.sericeDatePicker.getDateForDatePicker(data);
     if (this.navDate) this.sericeDatePicker.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
     this.date.setTitle(this.datepicker, this.formatDate);
-    console.log("this.selectedDateModel", this.selectedDateModel);
-    console.log("this.editDate", this.editDate);
     this.selectedDateModel = (this.editDate == 0) ? null : date.toString();
   }
 
