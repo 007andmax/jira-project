@@ -1,5 +1,8 @@
-<div class="qt-table-modern__row" [ngClass]="{'--selected': invoice.selected}">
-    <div class="invoice-table__check">
+<div
+    class="qt-table-modern__row"
+    [ngClass]="{'--selected': invoice.selected}"
+>
+    <div class="invoice-table__check pointer">
         <div class="qt-df">
             <label
                 class="qt-checkbox"
@@ -18,52 +21,57 @@
         </div>
     </div>
     <div
-        class="invoce-table__date"
+        class="invoce-table__date no-pointer"
         [textContent]="getDate(invoice.date)"
     ></div>
     <div
-        class="invoce-table__invoice"
+        class="invoce-table__invoice pointer"
         [textContent]="invoice.number"
         (click)="onShowPreviewInvoice()"
     ></div>
-    <div class="invoce-table__company ellipsis">
-      <span
-        class="ellipsis"
-        [textContent]="(company) ? company.name : ''"
-      ></span>
+    <div class="invoce-table__company ellipsis no-pointer">
+        <span
+            class="ellipsis"
+            [textContent]="(company) ? company.name : ''"
+        ></span>
     </div>
-    <div class="invoce-table__status">
+    <div class="invoce-table__status no-pointer">
         <span
             class="tag__modern --warning"
-            *ngIf="invoice.isOverDue && !invoice.paidOn"
+            *ngIf="invoice.isOverDue && !invoice.paidOn && invoice.status != 'DELETED'"
             [textContent]="'Overdue by ' + invoice.getOverDueDate() + ' days'"
         ></span>
         <span
             class="tag__modern --info"
-            *ngIf="!invoice.isOverDue && !invoice.paidOn"
+            *ngIf="!invoice.isOverDue && !invoice.paidOn && invoice.status != 'DELETED'"
             [textContent]="'Due in ' + invoice.getDueDate() + ' days'"
         ></span>
         <span
             class="tag__modern --success"
-            *ngIf="invoice.paidOn"
+            *ngIf="invoice.paidOn && invoice.status != 'DELETED'"
             [textContent]="'Paid ' + invoice.getPaidOnDate() + ' days ago'"
+        ></span>
+        <span
+            class="tag__modern saved"
+            *ngIf="invoice.status == 'DELETED'"
+            [textContent]="'Deleted'"
         ></span>
     </div>
     <div
-        class="invoce-table__read-on"
+        class="invoce-table__read-on no-pointer"
         [textContent]="getDate(invoice.readedAt)"
     ></div>
-    <div class="invoce-table__amount ellipsis">
-      <span
-        class="ellipsis"
-        [textContent]="invoice.totalSum | currency"
-      ></span>
+    <div class="invoce-table__amount ellipsis no-pointer">
+        <span
+            class="ellipsis"
+            [textContent]="invoice.totalSum | currency"
+        ></span>
     </div>
-    <div class="invoce-table__balance-due">
-      <span
-        class="ellipsis"
-        [textContent]="((invoice.totalSum || invoice.sum) - invoice.paidSum) | currency"
-      ></span>
+    <div class="invoce-table__balance-due no-pointer">
+        <span
+            class="ellipsis"
+            [textContent]="((invoice.totalSum || invoice.sum) - invoice.paidSum) | currency"
+        ></span>
     </div>
     <div
         class="invoce-table__menu"
@@ -71,7 +79,7 @@
         [container]="'body'"
     >
         <div
-            class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
+            class="qt-ic-c icon__more  pointer qt-sz-16 qt-bg-contain"
             id="dropdownBasic1"
             ngbDropdownToggle
         >
@@ -84,7 +92,7 @@
                     class="pointer"
                     ngbDropdownItem
                     (click)="resendInvoices(false)"
-                    *ngIf="!customerPortalStateService.isCustomerPortal"
+                    *ngIf="!customerPortalStateService.isCustomerPortal && invoice.status != 'DELETED'"
                 >
                     <div class="icon__email-dark qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Resend
@@ -93,7 +101,7 @@
                     class="pointer"
                     ngbDropdownItem
                     (click)="resendInvoices(true)"
-                    *ngIf="!customerPortalStateService.isCustomerPortal"
+                    *ngIf="!customerPortalStateService.isCustomerPortal && invoice.status != 'DELETED'"
                 >
                     <div class="icon__resend-pdf qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Resend with PDF
@@ -101,7 +109,7 @@
                 <li
                     class="pointer"
                     ngbDropdownItem
-                    *ngIf="!invoice.readedAt && !customerPortalStateService.isCustomerPortal"
+                    *ngIf="!invoice.readedAt && !customerPortalStateService.isCustomerPortal && invoice.status != 'DELETED'"
                     (click)="markAsRead()"
                 >
                     <div class="icon__mark-as-read qt-bg-contain qt-sz-20 qt-mr-12"></div>
@@ -118,7 +126,7 @@
                 <li
                     class="pointer"
                     ngbDropdownItem
-                    *ngIf="invoice.paidOn && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')"
+                    *ngIf="invoice.paidOn && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE') && invoice.status != 'DELETED'"
                     (click)="refundPayments()"
                 >
                     <div class="icon__refund-payment qt-bg-contain qt-sz-20 qt-mr-12"></div>
@@ -127,7 +135,7 @@
                 <li
                     class="pointer"
                     ngbDropdownItem
-                    *ngIf="!invoice.paidOn && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')"
+                    *ngIf="!invoice.paidOn && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE') && invoice.status != 'DELETED'"
                     (click)="rollbackInvoice()"
                 >
                     <div class="icon__rool-back qt-bg-contain qt-sz-20 qt-mr-12"></div>
@@ -136,7 +144,7 @@
                 <li
                     ngbDropdownItem
                     class="payment-menu-item"
-                    *ngIf="!customerPortalStateService.isCustomerPortal"
+                    *ngIf="!customerPortalStateService.isCustomerPortal && invoice.status != 'DELETED'"
                 >
                     <div class="icon__payment-history qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Payment history

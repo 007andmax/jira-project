@@ -15,7 +15,7 @@
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__payment-received"
                 (click)="onCreatePayment()"
-                *ngIf="!invoiceProfile.paidOn && !customerPortalStateService.isCustomerPortal"
+                *ngIf="!invoiceProfile.paidOn && !customerPortalStateService.isCustomerPortal && invoiceProfile.status != 'DELETED'"
                 placement="top"
                 ngbTooltip="Record payment"
                 container="body"
@@ -23,7 +23,7 @@
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__email-dark"
                 (click)="resendInvoices(false)"
-                *ngIf="!customerPortalStateService.isCustomerPortal"
+                *ngIf="!customerPortalStateService.isCustomerPortal && invoiceProfile.status != 'DELETED'"
                 placement="top"
                 ngbTooltip="Send"
                 container="body"
@@ -31,7 +31,7 @@
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__resend-pdf"
                 (click)="resendInvoices(true)"
-                *ngIf="!customerPortalStateService.isCustomerPortal"
+                *ngIf="!customerPortalStateService.isCustomerPortal && invoiceProfile.status != 'DELETED'"
                 placement="top"
                 ngbTooltip="Resend with PDF"
                 container="body"
@@ -52,7 +52,7 @@
             ></div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon qt-df qt-ai-c qt-jc-c"
-                *ngIf="!invoiceProfile.paidOn && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')"
+                *ngIf="!invoiceProfile.paidOn && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE') && invoiceProfile.status != 'DELETED'"
                 (click)="rollbackInvoice()"
                 placement="top"
                 ngbTooltip="Rollback"

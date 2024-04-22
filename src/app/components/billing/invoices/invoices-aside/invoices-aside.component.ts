@@ -184,6 +184,7 @@ export class InvoicesAsideComponent implements OnInit {
       this.invoicesFilter.setLimit(10000);
       this.invoicesFilter.setStatus("UNPAID");
       this.invoicesFilter.setCompanyId(item.id);
+      this.invoicesFilter.setExcludeDeleted(true);
       this.invoicesService.getInvoices(this.invoicesFilter.getFIlter()).subscribe((data: Array<Invoice>) => {
         this.invoices = data;
 

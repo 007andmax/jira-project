@@ -14,34 +14,41 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let invoice of recentInvoiceList">
-                    <td
-                        (click)="onPreviewInvoice(invoice)"
-                        class="pointer"
-                    >
-                        {{invoice.number}}
-                    </td>
-                    <td>{{invoice.dateName}}</td>
-                    <td
-                        *ngIf="invoice.paidOn"
-                        class="paid"
-                    >
-                        Paid
-                    </td>
-                    <td
-                        *ngIf="invoice.isOverDue && !invoice.paidOn"
-                        class="ov-d"
-                    >
-                        Over Due
-                    </td>
-                    <td
-                        *ngIf="!invoice.isOverDue && !invoice.paidOn"
-                        class="ov-d"
-                    >
-                        Outstanding
-                    </td>
-                    <td>{{invoice.totalSum | currency}}</td>
-                </tr>
+                <ng-template
+                    ngFor
+                    let-invoice
+                    [ngForOf]="recentInvoiceList"
+                    [ngForTrackBy]="trackById"
+                >
+                    <tr>
+                        <td
+                            (click)="onPreviewInvoice(invoice)"
+                            class="pointer"
+                        >
+                            {{invoice.number}}
+                        </td>
+                        <td>{{invoice.dateName}}</td>
+                        <td
+                            *ngIf="invoice.paidOn"
+                            class="paid"
+                        >
+                            Paid
+                        </td>
+                        <td
+                            *ngIf="invoice.isOverDue && !invoice.paidOn"
+                            class="ov-d"
+                        >
+                            Over Due
+                        </td>
+                        <td
+                            *ngIf="!invoice.isOverDue && !invoice.paidOn"
+                            class="ov-d"
+                        >
+                            Outstanding
+                        </td>
+                        <td>{{invoice.totalSum | currency}}</td>
+                    </tr>
+                </ng-template>
             </tbody>
         </table>
     </div>
