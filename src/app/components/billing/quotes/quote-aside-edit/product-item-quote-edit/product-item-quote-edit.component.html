@@ -33,6 +33,7 @@
             placeholder="0.00"
             [value]="product.markup"
             (onChange)="changeMarkup($event)"
+            (blur)="onCheckSaleCost()"
         >
     </td>
     <td class="new-quote-table__col-sales-price with-dollar">
