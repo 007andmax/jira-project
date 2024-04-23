@@ -69,7 +69,8 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     this.sub.add(subscription);
     this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
       if (newChange.action === 'CUSTOM_DEVICE_SAVED') {
-        this.devices.push(new DeviceCompany({ ...newChange.data, isCustom: true }, newChange.data.companyId));
+        let tags = this.deviceTagsStateService.getTags().filter(tag => newChange.data.tags.some(item => item == tag.id));
+        this.devices.push(new DeviceCompany({ ...newChange.data, isCustom: true, tags: tags }, newChange.data.companyId));
       }
       if (newChange.action === 'CUSTOM_DEVICE_REMOVED') {
         let index = this.devices.findIndex(item => item.id == newChange.data);
@@ -81,6 +82,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
           if (index > -1) this.devices[index].update(newChange.data);
         }
       }
+      this.filter.onCurrentFilter(this.devices);
       this.cd.detectChanges();
     })
     let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {

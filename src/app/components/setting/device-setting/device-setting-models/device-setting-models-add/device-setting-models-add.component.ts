@@ -26,7 +26,6 @@ export class DeviceSettingModelsAddComponent implements OnInit {
       this.manufactures = this.devicesStateService.getManufactures();
 
     }
-    if (this.devicesStateService.getManufactures().length == 0) this.devicesStateService.initGetManufactures();
     this.devicesStateService.onGetManufactures.subscribe(data => {
       this.manufactures = data;
     })

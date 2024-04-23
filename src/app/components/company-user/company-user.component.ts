@@ -119,22 +119,13 @@ export class CompanyUserComponent implements OnInit {
     })
     this.userListService.addSubscription(getConfirm);
     let getChangeCompanies = this.usersStateService.getChangeUsers().subscribe((data: UserChange) => {
-      if (data.action === 'USER_SAVED' || data.action === 'USER_ARCHIVED') {
+      if (data.action === 'USER_SAVED' && data.data.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === id)) {
+        this.users.unshift(new User(data.data));
+        this.header.count = this.header.count + 1;
+      }
+      if (data.action === 'USER_ARCHIVED' && data.data.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === id)) {
         const userIndex = this.users.findIndex((item) => item.id === data.data.id);
-        if (userIndex > -1) {
-          if (!data.data.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === id)) {
-            this.users.splice(userIndex, 1);
-          } else {
-            this.users[userIndex].onUpdate(data.data);
-          }
-        } else {
-          this.users.unshift(new User(data.data));
-          this.header.count = this.header.count + 1;
-        }
-        if (!this.showArchivedUsers && data.action === 'USER_ARCHIVED') {
-          const userIndex = this.users.findIndex((item) => item.id === data.data.id);
-          if (userIndex > -1) this.users.splice(userIndex, 1);
-        }
+        if (userIndex > -1) this.users.splice(userIndex, 1);
       }
       if (data.action === 'USERS_DEARCHIVED') {
         data.data.forEach(user => {

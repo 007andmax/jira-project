@@ -37,7 +37,6 @@ export class DeviceSettingModelsComponent implements OnInit, OnDestroy {
       this.manufactures = this.devicesStateService.getManufactures();
 
     }
-    if (this.devicesStateService.getManufactures().length == 0) this.devicesStateService.initGetManufactures();
     this.devicesStateService.onGetManufactures.subscribe(data => {
       this.manufactures = data;
 
