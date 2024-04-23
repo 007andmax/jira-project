@@ -12,6 +12,7 @@ export class ContractsReviewComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   constructor(public contractsStateService: ContractsStateService) { }
 
+
   ngOnInit() {
     let getOnShowNotificationReview = this.contractsStateService.getOnShowNotificationReview().subscribe(data => {
       this.showNotificationReview = true;

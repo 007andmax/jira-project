@@ -1,6 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ContractsService } from 'src/app/services/contracts/contracts.service';
-import { ContractStatisticsItem } from './class/contracts-statistics-item';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'contracts-statistics',

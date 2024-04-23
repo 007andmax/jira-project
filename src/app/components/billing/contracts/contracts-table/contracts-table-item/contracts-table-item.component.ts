@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { ContractItem } from '../../class/contract-item';
-import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import * as moment from "moment";
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
@@ -40,8 +39,7 @@ export class ContractsTableItemComponent implements OnInit {
     TERMINATED: 'Terminated',
     EXPIRED: 'Expired'
   };
-  constructor(private companiesStateService: CompaniesStateService,
-    private confirmStateService: ConfirmStateService,
+  constructor(private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     private contractsListService: ContractsListService,
     private contractsStateService: ContractsStateService,
