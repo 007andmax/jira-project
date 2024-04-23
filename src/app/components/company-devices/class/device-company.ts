@@ -141,7 +141,12 @@ export class DeviceCompany extends Device {
             "warrantyDate": this.warrantyDate,
             "location": this.location,
             "notes": this.notes,
-
+            "tags": this.tags.map(item => {
+                return {
+                    id: item.id,
+                    name: item.name
+                }
+            })
         }
     }
     public getDataForRequestField(field, value) {

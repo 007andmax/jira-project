@@ -65,7 +65,7 @@ export class CompanyDevicesCustomAsideComponent implements OnInit {
     })
   }
   onSelectTags(data) {
-    this.device.setTags(data.map(item => item.id));
+    this.device.setTags(data);
   }
   onSelectAssestType(data) {
     this.device.setType(data);

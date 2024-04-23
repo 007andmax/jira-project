@@ -80,7 +80,12 @@ export class CustomDevice {
             "warrantyDate": this.warranty_date,
             "location": this.location,
             "notes": this.notes,
-            "tags": this.tags
+            "tags": this.tags.map((item: any) => {
+                return {
+                    id: item.id,
+                    name: item.name
+                }
+            })
         }
     }
 }
