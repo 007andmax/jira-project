@@ -41,13 +41,14 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
       this.getServiceAgreements(data);
     })
     this.sub.add(getOnCompanies);
-    this.contractsStateService.getSort().subscribe(data => {
+    let getSort = this.contractsStateService.getSort().subscribe(data => {
       this.filter.onSort(data, this.list);
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
     })
-    this.contractsStateService.getFilter().subscribe(data => {
+    this.sub.add(getSort);
+    let getFilter = this.contractsStateService.getFilter().subscribe(data => {
       this.filter.setFilters(data)
       this.list = this.filter.getFilterList(this.reqList);
       this.filter.onSort('company', this.list);
@@ -55,13 +56,14 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
         this.cd.detectChanges();
       }
     })
+    this.sub.add(getFilter);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_CONTRACT) this.onDelete(this.contractsStateService.getContractForDelete());
       }
     })
     this.sub.add(getConfirm);
-    this.contractsRealTimeService.changeContractsArray.subscribe(data => {
+    let changeContractsArray = this.contractsRealTimeService.changeContractsArray.subscribe(data => {
       if (data.action === 'SERVICE_AGREEMENT_SAVED') {
         let company = this.companiesStateService.getCompanies().find(item => item.id === data.data.company.id);
         data.data.company.name = company.name;
@@ -90,7 +92,7 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
       }
       this.cd.detectChanges();
     })
-
+    this.sub.add(changeContractsArray);
   }
 
   getServiceAgreements(companies) {

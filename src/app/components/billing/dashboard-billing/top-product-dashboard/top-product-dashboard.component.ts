@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TopDashboardProductSum } from '../class/top-dashboard-product-sum';
-import { TopDashboardSum } from '../class/top-dashboard-sum';
 
 @Component({
   selector: 'app-top-product-dashboard',

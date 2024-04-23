@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ContractStatisticsItem } from '../class/contracts-statistics-item';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
-import { UserFilter } from 'src/app/components/users/class/user-filter';
 import { ContractStatisticsFilter } from '../class/contracts-statistics-filter';
 
 @Component({
