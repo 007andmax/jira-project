@@ -5,7 +5,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { InvoicesService } from 'src/app/services/invoices/invoices.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmStateService } from '../../../shared/confirm/services/confirm-state.service';
-import { ARCHIVE_COMPANY, ROLLBACK_INVOICE, REFUND_PAYMENTS } from 'src/app/const/confirm';
+import { ROLLBACK_INVOICE, REFUND_PAYMENTS } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
 import { AppService } from 'src/app/states/app/app.service';
@@ -39,24 +39,18 @@ export class InvoicesItemComponent implements OnInit {
     this.company = this.companiesStateService.getCompanies().find(item => item.id === this.invoice.companyId);
     if (this.invoice.payment) {
       this.paymentSum = this.invoice.payment.totalSum;
-
       this.allPayments.push(this.invoice.payment);
-
     }
-
     if (this.invoice.payment && this.invoice.partialPayments) {
       this.invoice.partialPayments.forEach((el) => {
         this.paymentSum -= el.partialPaidAmount;
-
       })
     }
-
     if (this.invoice.partialPayments) {
       this.invoice.partialPayments.forEach((el) => {
         this.allPayments.push(el);
       })
     }
-
     if (this.invoice.partialPayments && !this.invoice.payment) {
       this.allPaymentsSum = 0;
       this.invoice.partialPayments.forEach((el) => {

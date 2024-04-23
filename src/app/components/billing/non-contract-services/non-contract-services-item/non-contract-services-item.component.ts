@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, OnDestroy } from '@angular/core';
 import { GlNumber } from '../../../reports/class/gl-number';
 import { GlNumberStateService } from 'src/app/states/gl-number/gl-number-state.service';
 import { NonContractServices } from '../class/non-contract-service';
@@ -11,17 +11,19 @@ import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { NonContractServicesStateService } from 'src/app/states/non-contract-services/non-contract-services-state.service';
 import { GlNumberService } from 'src/app/services/gl-number/gl-number.service';
 import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-non-contract-services-item',
   templateUrl: './non-contract-services-item.component.html',
   styleUrls: ['./non-contract-services-item.component.scss']
 })
-export class NonContractServicesItemComponent implements OnInit {
+export class NonContractServicesItemComponent implements OnInit, OnDestroy {
   @ViewChild('glNumberSelect') glNumberSelect: DropDownComponent;
   @Input() service: NonContractServices;
   @Output() onEditService = new EventEmitter<any>();
   glNumbers: Array<GlNumber> = [];
+  sub: Subscription = new Subscription();
   constructor(private glNumberStateService: GlNumberStateService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
@@ -35,7 +37,7 @@ export class NonContractServicesItemComponent implements OnInit {
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
       this.glNumbers = this.sortGlNumbers(data);
     })
-
+    this.sub.add(getOnGlNumbers);
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
@@ -88,5 +90,8 @@ export class NonContractServicesItemComponent implements OnInit {
   glDropDownItemName(item) {
     return `${item["glNumber"]} - ${(item["description"] && item["description"].length > 0) ? item["description"]
       : "No description"}`;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

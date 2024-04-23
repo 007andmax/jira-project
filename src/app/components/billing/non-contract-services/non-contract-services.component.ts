@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { NonContractServices } from './class/non-contract-service';
 import { NonContractServicesService } from 'src/app/services/non-contract-services/non-contract-services.service';
 import { NonContractServicesFilter } from './class/non-contract-services-filter';
