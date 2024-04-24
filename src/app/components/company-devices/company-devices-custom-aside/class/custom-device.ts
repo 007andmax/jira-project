@@ -17,7 +17,7 @@ export class CustomDevice {
     "warranty_date": string;
     "location": string;
     "notes": string;
-    "tags": [];
+    "tags": Array<any> = [];
     constructor() { }
 
     public setCompanyId(data) {
@@ -69,6 +69,7 @@ export class CustomDevice {
         this.warranty_date_int = new Date(due).getTime();
     }
     public getDataForRequest() {
+        console.log("this.tags", this.tags);
         return {
             "companyId": this.companyId,
             "name": this.name,

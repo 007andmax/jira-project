@@ -86,6 +86,7 @@ export class CompanyDevicesCustomDropDownComponent extends CompanyTagsComponent 
           this.searchName = "";
           this.selectedTag.push(this.tags[indexSelected]);
           this.tagsChange.emit(this.selectedTag);
+          this.tags = this.reqTags;
           this.cd.detectChanges();
         }
         return;
@@ -103,6 +104,7 @@ export class CompanyDevicesCustomDropDownComponent extends CompanyTagsComponent 
           }
           this.userInput.nativeElement.value = '';
           this.searchName = "";
+          this.tags = this.reqTags;
           this.cd.detectChanges();
           return;
         }
@@ -121,6 +123,7 @@ export class CompanyDevicesCustomDropDownComponent extends CompanyTagsComponent 
           }
           this.userInput.nativeElement.value = '';
           this.searchName = "";
+          this.tags = this.reqTags;
           this.cd.detectChanges();
         });
         this.sub.add(setTags);

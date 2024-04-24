@@ -69,7 +69,6 @@ export class CompanyDevicesCustomAsideComponent implements OnInit {
   }
   onSelectAssestType(data) {
     this.device.setType(data);
-    console.log("this.device", this.device.type.toLocaleLowerCase());
     this.validate.resetType();
   }
   onSelectManufacture(data) {

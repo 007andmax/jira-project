@@ -149,7 +149,7 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
     this.confirmStateService.setConfirmAction(REMOVE_DEVICES);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to remove 1 device?`;
-    this.devicesStateService.setDevicesForRemove([this.currentDevice]);
+    this.devicesStateService.setDevicesForRemove([this.currentDevice || this.customDevice]);
   }
   removeDevice() {
     let index = this.devices.findIndex(item => item.id === this.currentDevice.id);
