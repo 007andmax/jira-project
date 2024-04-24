@@ -175,13 +175,13 @@
                                                 <div
                                                     (mouseenter)="removeTooltip.show($event.target)"
                                                     (mouseleave)="removeTooltip.hide()"
-                                                    class="icon__edit-gray-dark qt-sz-20 qt-bg-contain qt-mr-16 pointer"
+                                                    class="qt-icon icon__edit qt-icon__gray-400 qt-sz-20 qt-bg-contain qt-mr-16 pointer"
                                                     *ngIf="getPermissions('EDIT_USERS')"
                                                     (click)="editTechUser(techUser)"
                                                 >
                                                 </div>
                                                 <div
-                                                    class="icon__more qt-sz-20 qt-bg-contain pointer"
+                                                    class="qt-icon icon__more qt-sz-20 qt-bg-contain pointer"
                                                     ngbDropdownToggle
                                                     id="dropdown1"
                                                 ></div>

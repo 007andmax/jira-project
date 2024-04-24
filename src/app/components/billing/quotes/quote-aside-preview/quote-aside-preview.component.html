@@ -12,13 +12,15 @@
         ></div>
         <div class="qt-df qt-ai-c">
             <div
-                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__edit"
+                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon qt-df qt-ai-c qt-jc-c"
                 *ngIf="checkStatus(quote, ['READ','UNREAD','SAVED', 'APPROVED', 'CANCELED', 'EXPIRED']) && !customerPortalStateService.isCustomerPortal"
                 (click)="editQuote()"
                 placement="top"
                 container="body"
                 ngbTooltip="Edit"
-            ></div>
+            >
+              <div class="qt-icon qt-sz-20 icon__edit"></div>
+            </div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__email-dark"
                 (click)="resend()"

@@ -38,7 +38,7 @@
                 [placement]="'bottom-right'"
             >
                 <div
-                    class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
+                    class="qt-ic-c qt-icon icon__more  qt-pointer qt-sz-16 qt-bg-contain"
                     ngbDropdownToggle
                 ></div>
                 <ul
@@ -52,7 +52,7 @@
                         *ngIf="!item.isDefault && getPermissions('EDIT_TEMPLATE')"
                         (click)="editDocument(item)"
                     >
-                        <div class="icon__edit qt-sz-20 qt-bg-contain qt-mr-12"></div>
+                        <div class="qt-icon icon__edit qt-sz-20 qt-bg-contain qt-mr-12"></div>
                         Edit
                     </li>
                     <li

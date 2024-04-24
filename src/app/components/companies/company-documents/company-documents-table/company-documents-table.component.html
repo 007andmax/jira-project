@@ -56,7 +56,7 @@
         >
             <div
                 *ngIf="!item.isCategory && (getPermissions('EDIT_DOCUMENT') || getPermissions('CREATE_DOCUMENT') || getPermissions('VIEW_DOCUMENT') || getPermissions('DELETE_DOCUMENT')) || item.isCategory"
-                class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"
+                class="qt-ic-c qt-icon icon__more qt-pointer qt-sz-16 qt-bg-contain"
                 id="dropdownBasic1"
                 ngbDropdownToggle
             ></div>
@@ -96,7 +96,7 @@
                     (click)="goToEditDocument()"
                     *ngIf="getPermissions('EDIT_DOCUMENT')"
                 >
-                    <div class="icon__edit qt-sz-20 qt-bg-contain qt-mr-12"></div>
+                    <div class="qt-icon icon__edit qt-sz-20 qt-bg-contain qt-mr-12"></div>
                     Edit
                 </li>
                 <li

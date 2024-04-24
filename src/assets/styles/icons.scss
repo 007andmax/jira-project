@@ -17,9 +17,6 @@
   height: 16px;
   display: block;
 }
-.icn-attach {
-  background: url("/assets/img/icons/attachment-blue.svg");
-}
 .export-ng2 {
   background: url("/assets/img/icons/export-blue.svg");
 }
@@ -478,9 +475,6 @@
   &__quicktech_partical_bottom {
     background-image: url("/assets/img/icons/quicktech-part-bottom-logo.svg");
   }
-  &__attach-blue {
-    background-image: url("/assets/img/icons/attachment-blue.svg");
-  }
   &__check {
     background-image: url("/assets/img/icons/check.svg");
   }
@@ -518,7 +512,7 @@
       -webkit-mask-position: center;
       mask-position: center;
       -webkit-mask-image: url("/assets/img/icons/collapse-arrow.svg");
-      mask-image: url("/assets/img/icons/collapse-arrowt.svg");
+      mask-image: url("/assets/img/icons/collapse-arrow.svg");
       -webkit-mask-repeat: no-repeat;
       mask-repeat: no-repeat;
       -webkit-mask-size: contain;
@@ -1016,26 +1010,10 @@
     background-image: url("/assets/img/icons/filter-active.svg");
   }
   &__email {
-     background-color: $gray-500;
-      -webkit-mask-position: center;
-      mask-position: center;
-      -webkit-mask-image: url("/assets/img/icons/email.svg");
-      mask-image: url("/assets/img/icons/email.svg");
-      -webkit-mask-repeat: no-repeat;
-      mask-repeat: no-repeat;
-      -webkit-mask-size: contain;
-      mask-size: contain;
+    mask-image: url("/assets/img/icons/email.svg");
   }
   &__globe {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/globe.svg");
     mask-image: url("/assets/img/icons/globe.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
   }
   &__graphic-card {
     background-image: url("/assets/img/icons/graphic-card.svg");
@@ -1068,25 +1046,8 @@
     background-image: url("/assets/img/icons/get-paid.svg");
   }
   &__edit {
-    background-image: url("/assets/img/icons/edit-12.svg");
+    mask-image: url("/assets/img/icons/edit-12.svg");
   }
-  &__edit-gray,
-  &__edit-gray-dark {
-    background-color: $gray-400;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/edit-gray.svg");
-    mask-image: url("/assets/img/icons/edit-gray.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
-  }
-
-  &__edit-gray-dark {
-    background-color: $gray-500;
-  }
-
   &__expand-redactor {
     background-image: url("/assets/img/icons/expand-redactor.svg");
   }
@@ -1319,7 +1280,7 @@
     background-image: url("/assets/img/icons/shutdown-blue.svg");
   }
   &__more {
-    background-image: url("/assets/img/icons/more.svg");
+    mask-image: url("/assets/img/icons/more.svg");
   }
   &__motherboard {
     background-image: url("/assets/img/icons/motherboard.svg");
@@ -1592,5 +1553,34 @@
   }
   &.--low {
     background-color: $green-600;
+  }
+}
+
+.qt-icon {
+  background-color: $gray-500;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+
+  &__gray-300 {
+    background-color: $gray-300;
+  }
+  &__gray-400 {
+    background-color: $gray-400;
+  }
+  &__gray-500 {
+    background-color: $gray-500;
+  }
+  &__gray-600 {
+    background-color: $gray-600;
+  }
+  &__red-500 {
+    background-color: $red-500;
+  }
+  &__red-600 {
+    background-color: $red-600;
+  }
+  &__blue-light-600 {
+    background-color: $blue-light-600;
   }
 }
