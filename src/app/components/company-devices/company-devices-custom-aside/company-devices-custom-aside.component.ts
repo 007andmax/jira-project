@@ -49,7 +49,7 @@ export class CompanyDevicesCustomAsideComponent implements OnInit {
 
   ngOnInit() {
     if (this.devicesStateService.getManufactures().length > 0) this.manufactures = this.devicesStateService.getManufactures();
-    if (this.devicesStateService.getManufactures().length == 0) this.devicesStateService.initGetManufactures();
+    if (!this.devicesStateService.isGetManufactures) this.devicesStateService.initGetManufactures();
     this.devicesStateService.onGetManufactures.subscribe(data => {
       this.manufactures = data;
     })
@@ -69,6 +69,7 @@ export class CompanyDevicesCustomAsideComponent implements OnInit {
   }
   onSelectAssestType(data) {
     this.device.setType(data);
+    console.log("this.device", this.device.type.toLocaleLowerCase());
     this.validate.resetType();
   }
   onSelectManufacture(data) {

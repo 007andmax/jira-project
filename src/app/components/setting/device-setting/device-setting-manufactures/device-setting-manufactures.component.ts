@@ -35,7 +35,7 @@ export class DeviceSettingManufacturesComponent implements OnInit, OnDestroy {
       this.manufactures = this.devicesStateService.getManufactures();
       this.showPreloader = false;
     }
-    if (this.devicesStateService.getManufactures().length == 0) this.devicesStateService.initGetManufactures();
+    if (!this.devicesStateService.isGetManufactures) this.devicesStateService.initGetManufactures();
     let onGetManufactures = this.devicesStateService.onGetManufactures.subscribe(data => {
       this.manufactures = data;
       this.showPreloader = false;

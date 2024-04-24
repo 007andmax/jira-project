@@ -37,6 +37,7 @@ export class DevicesStateService {
   onAddModel: EventEmitter<any> = new EventEmitter();
   isInitWebSocket: boolean = false;
   preloaderDevices: boolean = true;
+  isGetManufactures: boolean = false;
   manufactures: Array<ManufactureDevice> = [];
   manufacturForRemove: ManufactureDevice = null;
   modelForRemove: ModelDevice = null;
@@ -92,6 +93,7 @@ export class DevicesStateService {
       this.manufactures = data.manufacturers.map(item => new ManufactureDevice(item));
       this.manufactures.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0);
       this.onGetManufactures.emit(this.manufactures);
+      this.isGetManufactures = true;
     })
   }
   public setManufactures(data) {

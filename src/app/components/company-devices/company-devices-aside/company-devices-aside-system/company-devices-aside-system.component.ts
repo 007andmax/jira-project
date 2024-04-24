@@ -45,7 +45,7 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
 
   ngOnInit() {
     if (this.devicesStateService.getManufactures().length > 0) this.manufactures = this.devicesStateService.getManufactures();
-    if (this.devicesStateService.getManufactures().length == 0) this.devicesStateService.initGetManufactures();
+    if (!this.devicesStateService.isGetManufactures) this.devicesStateService.initGetManufactures();
     this.devicesStateService.onGetManufactures.subscribe(data => {
       this.manufactures = data;
     })

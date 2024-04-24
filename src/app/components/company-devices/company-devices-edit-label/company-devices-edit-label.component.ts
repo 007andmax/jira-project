@@ -16,6 +16,7 @@ export class CompanyDevicesEditLabelComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log("placeholder", this.placeholder);
     this.value = JSON.parse(JSON.stringify(this.field));
   }
   public setIsInitEdit(data) {

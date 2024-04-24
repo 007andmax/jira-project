@@ -14,7 +14,7 @@ export class Device {
     hostName: string;
     iconName: string;
     id: string;
-    ip: string;
+    ip: string = "";
     isRegular: true
     label: string;
     master: boolean;

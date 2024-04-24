@@ -18,6 +18,7 @@ import { DeviceTag } from '../../setting/manage-tags/manage-tags-devices/class/d
 import { DeviceTagsService } from 'src/app/services/device-tags/device-tags.service';
 import { DeviceTagsStateService } from 'src/app/states/device-tags/device-tags-state.service';
 import { DeviceTagsRealTimeService } from 'src/app/states/device-tags/device-tags-real-time.service';
+import { DevicesRealTimeService } from 'src/app/states/devices/devices-real-time.service';
 
 @Component({
   selector: 'app-company-devices-item',
@@ -41,6 +42,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     public customerPortalStateService: CustomerPortalStateService,
     private deviceTagsService: DeviceTagsService,
     private deviceTagsRealTimeService: DeviceTagsRealTimeService,
+    private devicesRealTimeService: DevicesRealTimeService,
     private deviceTagsStateService: DeviceTagsStateService,
     public cd: ChangeDetectorRef,) { }
 
@@ -56,18 +58,22 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     }, 1000);
     this.deviceTags.setSelectedTag(JSON.parse(JSON.stringify(this.device.tags)).map(item => new DeviceTag(item)));
-    this.deviceTagsRealTimeService.changeTagsrray.subscribe(newChange => {
+    this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
       if (newChange.action === 'BIND_DEVICE_TO_TAG') {
         let index = newChange.data.devices.findIndex(item => item.deviceId == this.device.agentId || item.deviceId == this.device.id);
+        console.log("index", index);
         if (index > -1) {
           let tags = this.deviceTagsStateService.getTags().filter(item => newChange.data.devices[index].tags.some(tag => tag == item.id));
+          console.log("tags", tags);
           this.device.setTags([...this.device.tags, ...tags]);
           this.deviceTags.setSelectedTag(JSON.parse(JSON.stringify(this.device.tags)).map(item => new DeviceTag(item)));
         }
       }
       if (newChange.action === 'UNBIND_DEVICE_FROM_TAG') {
         let index = newChange.data.devices.findIndex(item => item.deviceId == this.device.agentId || item.deviceId == this.device.id);
+        console.log("index", index);
         if (index > -1) {
+          console.log("index", index);
           newChange.data.devices[index].tags.forEach(item => {
             let index = this.device.tags.findIndex(tag => tag.id == item);
             if (index > -1) this.device.tags.splice(index, 1);
@@ -76,6 +82,17 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
         }
       }
     })
+  }
+  getTextForTooltip(data) {
+    if (data == "workstation") return "Workstation";
+    if (data == "router") return "Router";
+    if (data == "printer") return "Printer";
+    if (data == "switch") return "Switch";
+    if (data == "server") return "Server";
+    if (data == "tablet") return "Tablet";
+    if (data == "network device") return "Network device";
+    if (data == "phone") return "Phone";
+    if (data == "generic device") return "Generic device";
   }
   openAside(type) {
     if (this.device.agentId || this.device.isCustom) this.devicesStateService.setOnOpenAside(new DeviceCompanyAsideParams(type, [this.device]));

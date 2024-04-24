@@ -23,6 +23,9 @@ export class CustomDevice {
     public setCompanyId(data) {
         this.companyId = data;
     }
+    public getTypeToLocaleLowerCase() {
+        return (this.type) ? this.type.toLocaleLowerCase() : '';
+    }
     public setType(data) {
         this.type = data;
     }

@@ -33,6 +33,9 @@ export class DeviceCompany extends Device {
         if (data.manufacturer) this.manufacturer = new ManufactureDevice(data.manufacturer);
         if (data.model) this.model = new ModelDevice(data.model);
         if (!this.isCustom && data.iconName) this.iconName = data.iconName.toLowerCase();
+        if (data.assetTag) this.assetTag = data.assetTag;
+        if (data.location) this.location = data.location;
+        if (data.ip) this.ip = data.ip;
     }
     public update(data) {
         for (const key in data) {
@@ -97,7 +100,7 @@ export class DeviceCompany extends Device {
         this.warrantyDateInt = new Date(due).getTime();
     }
     public getFieldForCheckIcon() {
-        if (!this.isCustom) return this.iconName;
+        if (!this.isCustom) return this.iconName || this.type;
         if (this.isCustom) return this.type;
     }
     public resetInstallDate() {

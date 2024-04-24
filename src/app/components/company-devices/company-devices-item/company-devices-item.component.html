@@ -41,6 +41,8 @@
         '--ofline': !device.online }"
                 ngbDropdownToggle
                 *ngIf="!customerPortalStateService.isCustomerPortal"
+                placement="top"
+                [ngbTooltip]="getTextForTooltip(device.getFieldForCheckIcon())"
             >
                 <div
                     class="company-device-type-dropdown"
@@ -49,54 +51,72 @@
                     <ul class="icon-list qt-dropdown-menu --dropdown-icons device-type-dropdown">
                         <li
                             (click)="setIcon('workstation')"
+                            placement="top"
+                            ngbTooltip="Workstation"
                             ngbDropdownItem
                         >
                             <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__computer"></i>
                         </li>
                         <li
                             (click)="setIcon('router')"
+                            placement="top"
+                            ngbTooltip="Router"
                             ngbDropdownItem
                         >
                             <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__router"></i>
                         </li>
                         <li
                             (click)="setIcon('printer')"
+                            placement="top"
+                            ngbTooltip="Printer"
                             ngbDropdownItem
                         >
                             <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__printer"></i>
                         </li>
                         <li
                             (click)="setIcon('switch')"
+                            placement="top"
+                            ngbTooltip="Switch"
                             ngbDropdownItem
                         >
                             <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__switch"></i>
                         </li>
                         <li
                             (click)="setIcon('server')"
+                            placement="top"
+                            ngbTooltip="Server"
                             ngbDropdownItem
                         >
                             <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__server"></i>
                         </li>
                         <li
                             (click)="setIcon('tablet')"
+                            placement="top"
+                            ngbTooltip="Tablet"
                             ngbDropdownItem
                         >
                             <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__tablet"></i>
                         </li>
                         <li
                             (click)="setIcon('network device')"
+                            placement="top"
+                            ngbTooltip="Network device"
                             ngbDropdownItem
                         >
                             <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__network_device"></i>
                         </li>
                         <li
                             (click)="setIcon('phone')"
+                            placement="top"
+                            ngbTooltip="Phone"
                             ngbDropdownItem
                         >
                             <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__phone"></i>
                         </li>
                         <li
                             (click)="setIcon('generic device')"
+                            placement="top"
+                            ngbTooltip="Generic device"
                             ngbDropdownItem
                         >
                             <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__generic_device"></i>

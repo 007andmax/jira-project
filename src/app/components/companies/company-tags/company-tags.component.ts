@@ -11,6 +11,7 @@ import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service'
 import { CompanyTag } from './class/company-tag';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { DeviceTagsStateService } from 'src/app/states/device-tags/device-tags-state.service';
+import { DeviceTagsService } from 'src/app/services/device-tags/device-tags.service';
 
 @Component({
   selector: 'app-company-tags',
@@ -56,8 +57,9 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     private companiesStateService: CompaniesStateService,
     private companyTagsListService: CompanyTagsListService,
     public tagsRealTimeService: TagsRealTimeService,
-    private elRef: ElementRef,
+    public elRef: ElementRef,
     public cd: ChangeDetectorRef,
+    public deviceTagsService: DeviceTagsService,
     public ticketsListService: TicketsListService,
     public deviceTagsStateService: DeviceTagsStateService,
   ) { }
