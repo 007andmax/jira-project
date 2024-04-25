@@ -10,12 +10,16 @@ import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-t
 import { DatePickerModule } from '../../shared/date-picker/date-picker.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
+import { ManufacturesDropDownComponent } from './manufactures-drop-down/manufactures-drop-down.component';
+import { ModelsDropDownComponent } from './models-drop-down/models-drop-down.component';
 
 
 @NgModule({
     declarations: [
         CompanyDevicesCustomAsideComponent,
-        CompanyDevicesCustomDropDownComponent
+        CompanyDevicesCustomDropDownComponent,
+        ManufacturesDropDownComponent,
+        ModelsDropDownComponent
     ],
     imports: [
         CommonModule,

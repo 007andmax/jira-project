@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { CompaniesService } from 'src/app/services/company/companies.service';
+import { DeviceTagsService } from 'src/app/services/device-tags/device-tags.service';
+import { DevicesService } from 'src/app/services/devices/devices.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -50,6 +52,7 @@ export class DropDownComponent implements OnInit {
     public usersStateService: UsersStateService,
     public customerPortalStateService: CustomerPortalStateService,
     public companiesService: CompaniesService,
+    public devicesService: DevicesService,
     public ref: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -122,6 +125,7 @@ export class DropDownComponent implements OnInit {
     return this.elRef.nativeElement.querySelector("#dropdown1").value;
   }
   public clearWithOutChanges() {
+    this.elRef.nativeElement.querySelector("#dropdown1").value = "";
     this.isAdd = false;
     this.selectedItem = null;
     this.ref.markForCheck();

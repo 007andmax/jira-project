@@ -89,7 +89,8 @@
         </div>
         <div class="qt-inputs-row">
             <div class="qt-f100">
-                <app-drop-down
+                <app-manufactures-drop-down
+                    #manufacturesDd
                     [placeholder]="'Select'"
                     [list]="manufactures"
                     [field]="'name'"
@@ -97,21 +98,23 @@
                     [change]="true"
                     [title]="'Manufacture'"
                     (onSelectedItem)="onSelectManufacture($event)"
-                ></app-drop-down>
+                ></app-manufactures-drop-down>
             </div>
         </div>
         <div class="qt-inputs-row">
             <div class="qt-f100">
-                <app-drop-down
+                <app-models-drop-down
+                    #modelsDd
                     [placeholder]="'Select'"
                     [list]="models"
                     [field]="'name'"
                     [search]="true"
                     [change]="true"
                     [title]="'Model'"
+                    [manufactureId]="device.manufacturerId"
                     [isDisabled]="!device.manufacturerId"
                     (onSelectedItem)="onSelectModel($event)"
-                ></app-drop-down>
+                ></app-models-drop-down>
             </div>
         </div>
         <div class="qt-inputs-row">

@@ -28,6 +28,15 @@ export class CompanyDevicesCustomDropDownComponent extends CompanyTagsComponent 
       this.sortTags();
     })
   }
+  public clearWithOutChanges() {
+    this.userInput.nativeElement.value = '';
+    this.searchName = "";
+    this.selectedTag = [];
+    this.tags = this.reqTags;
+    this.userInput.nativeElement.blur();
+    this.dp.close();
+    this.cd.detectChanges();
+  }
   /**
 * @description Sort tags and reqTags list by "name" field
 */

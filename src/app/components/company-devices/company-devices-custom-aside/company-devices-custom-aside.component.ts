@@ -13,6 +13,8 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
 import { DatePickerComponent } from '../../shared/date-picker/date-picker.component';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { CompanyDevicesCustomDropDownComponent } from './company-devices-custom-drop-down/company-devices-custom-drop-down.component';
+import { ManufacturesDropDownComponent } from './manufactures-drop-down/manufactures-drop-down.component';
+import { ModelsDropDownComponent } from './models-drop-down/models-drop-down.component';
 
 @Component({
   selector: 'app-company-devices-custom-aside',
@@ -40,6 +42,8 @@ export class CompanyDevicesCustomAsideComponent implements OnInit {
   @ViewChild('tagsDd') tagsDd: CompanyDevicesCustomDropDownComponent;
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   @ViewChild('typeDd') typeDd: DropDownComponent;
+  @ViewChild('manufacturesDd') manufacturesDd: ManufacturesDropDownComponent;
+  @ViewChild('modelsDd') modelsDd: ModelsDropDownComponent;
   @ViewChild('installDateDP') installDateDP: DatePickerComponent;
   @ViewChild('warrantyDateDP') warrantyDateDP: DatePickerComponent;
   constructor(private devicesStateService: DevicesStateService,
@@ -94,6 +98,8 @@ export class CompanyDevicesCustomAsideComponent implements OnInit {
     this.opened = false;
     this.device = new CustomDevice();
     this.validate = new ValidateCustomAside();
+    this.manufacturesDd.clearWithOutChanges();
+    this.modelsDd.clearWithOutChanges();
     this.typeDd.clearWithOutChanges();
     this.tagsDd.clearWithOutChanges();
   }
