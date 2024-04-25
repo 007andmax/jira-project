@@ -120,7 +120,7 @@
                         #removeTooltip
                     ></app-dynamic-tooltip>
                     <div
-                        class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                        class="qt-icon icon__remove qt-sz-20 qt-bg-contain pointer"
                         (mouseenter)="removeTooltip.show($event.target)"
                         (mouseleave)="removeTooltip.hide()"
                     >
@@ -238,7 +238,7 @@
                     <div
                         (mouseenter)="removeTooltip.show($event.target)"
                         (mouseleave)="removeTooltip.hide()"
-                        class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                        class="qt-icon icon__remove qt-sz-20 qt-bg-contain pointer"
                         (click)="removeTicketStatus(item)"
                         *ngIf="item.custom"
                     >

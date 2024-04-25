@@ -17,9 +17,6 @@
   height: 16px;
   display: block;
 }
-.export-ng2 {
-  background: url("/assets/img/icons/export-blue.svg");
-}
 .convert-to-billable {
   background-image: url("/assets/img/icons/billable.svg");
 }
@@ -111,13 +108,7 @@
     background-image: url("/assets/img/icons/addusers.svg");
   }
   &__close { // TODO need combine icons to mask
-    background-image: url("/assets/img/icons/close.svg");
-    &--light-gray {
-      background-image: url("/assets/img/icons/close-light-gray.svg");
-    }
-  }
-  &__close-white {
-    background-image: url("/assets/img/icons/close-light.svg");
+    mask-image: url("/assets/img/icons/close.svg");
   }
   &__settings {
     &-gray {
@@ -354,19 +345,8 @@
     -webkit-mask-image: url("/assets/img/icons/support-page-edit-category.svg");
     mask-image: url("/assets/img/icons/support-page-edit-category.svg");
   }
-  &__remove,
-  &__remove--red-500,
-  &__remove--red-600,
-  &__remove--blue-light-600 {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/remove.svg");
+  &__remove {
     mask-image: url("/assets/img/icons/remove.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
   }
   &__remove--red-600 {
     background-color: $red-600;
@@ -567,8 +547,8 @@
   &__expand {
     background-image: url("/assets/img/icons/expand.svg");
   }
-  &__export-dark {
-    background-image: url("/assets/img/icons/export-dark.svg");
+  &__export {
+    mask-image: url("/assets/img/icons/export-dark.svg");
   }
   &__plus-gray {
     background-color: $gray-500;
@@ -656,13 +636,13 @@
     background-image: url("/assets/img/icons/archive-blue.svg");
   }
   &__email-dark {
-    background-image: url("/assets/img/icons/email-dark.svg");
+    mask-image: url("/assets/img/icons/email-dark.svg");
   }
   &__resend-pdf {
-    background-image: url("/assets/img/icons/resend-pdf.svg");
+    mask-image: url("/assets/img/icons/resend-pdf.svg");
   }
   &__rool-back {
-    background-image: url("/assets/img/icons/rool-back.svg");
+    mask-image: url("/assets/img/icons/rool-back.svg");
   }
   &__email-blue {
     background-image: url("/assets/img/icons/email-blue.svg");
@@ -761,7 +741,7 @@
     background-image: url("/assets/img/icons/move.svg");
   }
   &__payment-received {
-    background-image: url("/assets/img/icons/payment-received.svg");
+    mask-image: url("/assets/img/icons/payment-received.svg");
   }
   &__convert-ticket {
     background-image: url("/assets/img/icons/convert-ticket.svg");
@@ -971,10 +951,7 @@
     background-image: url("/assets/img/icons/invoice-expired.svg");
   }
   &__print {
-    background-image: url("/assets/img/icons/print.svg");
-  }
-  &__print-blue {
-    background-image: url("/assets/img/icons/print-blue.svg");
+    mask-image: url("/assets/img/icons/print.svg");
   }
   &__processor {
     background-image: url("/assets/img/icons/processor.svg");
@@ -1052,7 +1029,7 @@
     background-image: url("/assets/img/icons/expand-redactor.svg");
   }
   &__download-pdf {
-    background-image: url("/assets/img/icons/download-pdf.svg");
+    mask-image: url("/assets/img/icons/download-pdf.svg");
   }
   &__add-document {
     background-image: url("/assets/img/icons/add-document.svg");
@@ -1562,6 +1539,9 @@
   mask-repeat: no-repeat;
   mask-size: contain;
 
+  &__white {
+    background-color: $white;
+  }
   &__gray-300 {
     background-color: $gray-300;
   }

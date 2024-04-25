@@ -788,8 +788,11 @@ documents-edit-info {
       right: -3px;
       width: 14px;
       height: 14px;
-      background: url("/assets/img/icons/close-light-gray.svg") no-repeat;
-      background-size: contain;
+      mask-image: url("/assets/img/icons/close.svg");
+      background-color: $gray-400;
+      mask-position: center;
+      mask-repeat: no-repeat;
+      mask-size: contain;
     }
   }
 }
@@ -2987,7 +2990,7 @@ app-ticket-edit-aside {
     }
 
     .qt-aside__close-modal {
-      background-image: url("/assets/img/icons/close-light.svg");
+      background-image: url("/assets/img/icons/close.svg");
       position: absolute;
       top: 50%;
       left: 26px;

@@ -86,7 +86,7 @@
                     (click)="resendInvoices(false)"
                     *ngIf="!customerPortalStateService.isCustomerPortal"
                 >
-                    <div class="icon__email-dark qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                    <div class="qt-icon icon__email-dark qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Resend
                 </li>
                 <li
@@ -95,7 +95,7 @@
                     (click)="resendInvoices(true)"
                     *ngIf="!customerPortalStateService.isCustomerPortal"
                 >
-                    <div class="icon__resend-pdf qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                    <div class="qt-icon icon__resend-pdf qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Resend with PDF
                 </li>
                 <li
@@ -112,7 +112,7 @@
                     ngbDropdownItem
                     (click)="exportAsPDF()"
                 >
-                    <div class="icon__download-pdf qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                    <div class="qt-icon icon__download-pdf qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Export as PDF
                 </li>
                 <li
@@ -130,7 +130,7 @@
                     *ngIf="!invoice.paidOn && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')"
                     (click)="rollbackInvoice()"
                 >
-                    <div class="icon__rool-back qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                    <div class="qt-icon icon__rool-back qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Rollback
                 </li>
                 <li

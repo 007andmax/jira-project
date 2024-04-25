@@ -127,13 +127,13 @@
                             (click)="removeCurrentDevice()"
                             *ngIf="!customerPortalStateService.isCustomerPortal"
                         >
-                            <div class="icon__remove pointer qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                            <div class="qt-icon icon__remove pointer qt-bg-contain qt-sz-20 qt-mr-12"></div>
                             Remove
                         </li>
                     </ul>
                 </div>
                 <div
-                    class="qt-sz-24 qt-pointer company-device-aside__close-icon icon__close"
+                    class="qt-sz-24 qt-pointer company-device-aside__close-icon qt-icon icon__close"
                     *ngIf="devices.length > 1"
                     (click)="removeDevice()"
                 ></div>

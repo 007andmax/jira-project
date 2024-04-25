@@ -22,20 +22,24 @@
               <div class="qt-icon qt-sz-20 icon__edit"></div>
             </div>
             <div
-                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__email-dark"
+                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon qt-df qt-ai-c qt-jc-c"
                 (click)="resend()"
                 placement="top"
                 container="body"
                 ngbTooltip="Send"
                 *ngIf="!customerPortalStateService.isCustomerPortal"
-            ></div>
+            >
+              <div class="qt-sz-20 qt-icon icon__email-dark"></div>
+            </div>
             <div
-                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__download-pdf"
+                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon qt-df qt-ai-c qt-jc-c"
                 (click)="downloadPdf()"
                 placement="top"
                 container="body"
                 ngbTooltip="Download"
-            ></div>
+            >
+              <div class="qt-sz-20 qt-icon icon__download-pdf"></div>
+            </div>
             <div
                 class="qt-circle qt-bg-white qt-mr-16 header-circle-icon qt-sz-32 qt-df qt-ai-c qt-jc-c pointer"
                 *ngIf="checkStatus(quote, ['UNREAD','SAVED', 'EXPIRED', 'INVOICED', 'TICKETED','CANCELED'])"
@@ -44,7 +48,7 @@
                 container="body"
                 ngbTooltip="Archive"
             >
-                <div class="qt-sz-20 icon__remove"></div>
+                <div class="qt-sz-20 qt-icon icon__remove"></div>
             </div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__convert-invoice"
@@ -63,7 +67,7 @@
                 ngbTooltip="Convert to Ticket"
             ></div>
             <div
-                class="icon__close qt-sz-24 qt-pointer qt-ic-c "
+                class="qt-icon icon__close qt-sz-24 qt-pointer qt-ic-c "
                 (click)="close()"
             ></div>
         </div>
@@ -125,7 +129,7 @@
                         </div>
                     </div>
                     <div class="qt-df qt-ai-c invoice-status-timeline__steps-info">
-                        <div class="step-citcle qt-mr-5 icon__email-dark"></div>
+                        <div class="step-citcle qt-mr-5 qt-icon icon__email-dark"></div>
                         <div>
                             <div class="qt-fs-12 qt-fw-600 qt-lh-133  qt-color-gray-900 ">Quote sent</div>
                             <div

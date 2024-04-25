@@ -2,7 +2,7 @@
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title qt-mr-auto">Edit Categories</div>
         <div
-            class="qt-aside-modern__header-close icon__close"
+            class="qt-aside-modern__header-close qt-icon icon__close"
             (click)="close()"
         >
         </div>
@@ -72,7 +72,7 @@
                             <div
                                 (click)="onRemoveCategory(item)"
                                 *ngIf="item.count === 0 && !editCategory.isEditMode(item.id) && getPermissions('DELETE_CATEGORY')"
-                                class="icon__remove qt-sz-16 qt-bg-contain qt-ml-6 pointer"
+                                class="qt-icon icon__remove qt-sz-16 qt-bg-contain qt-ml-6 pointer"
                                 (mouseenter)="deleteTooltip.show($event.target)"
                                 (mouseleave)="deleteTooltip.hide()"
                             ></div>
@@ -121,7 +121,7 @@
                     (click)="onRemoveAllCategories()"
                 >
                     Delete all
-                    <div class="icon__remove  qt-sz-16 qt-bg-contain qt-ml-6"></div>
+                    <div class="qt-icon icon__remove  qt-sz-16 qt-bg-contain qt-ml-6"></div>
                 </div>
             </div>
         </div>

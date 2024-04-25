@@ -10,7 +10,7 @@
                     *ngIf="getSelectedCount() > 0"
                 >
                     <div
-                        class="icon__remove delete qt-sz-16 qt-bg-contain qt-ic-c qt-button-icon"
+                        class="qt-icon icon__remove delete qt-sz-16 qt-bg-contain qt-ic-c qt-button-icon"
                         (click)="removeCategoriesStatus()"
                     >
                     </div>
@@ -165,7 +165,7 @@
                                                     #deleteTooltip
                                                 ></app-dynamic-tooltip>
                                                 <div
-                                                    class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                                                    class="qt-icon icon__remove qt-sz-20 qt-bg-contain pointer"
                                                     *ngIf="item.productsAmount > 0"
                                                     (mouseenter)="noDeleteTooltip.show($event.target)"
                                                     (mouseleave)="noDeleteTooltip.hide()"
@@ -177,7 +177,7 @@
                                                     #noDeleteTooltip
                                                 ></app-dynamic-tooltip>
                                                 <div
-                                                    class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                                                    class="qt-icon icon__remove qt-sz-20 qt-bg-contain pointer"
                                                     *ngIf="item.productsAmount === 0"
                                                     (click)="removeCategoryProduct(item)"
                                                     (mouseenter)="deleteTooltip.show($event.target)"

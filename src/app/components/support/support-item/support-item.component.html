@@ -35,7 +35,7 @@
                     <div
                         (mouseenter)="emailInfoTooltip.show($event.target)"
                         (mouseleave)="emailInfoTooltip.hide()"
-                        class="support-item-menu__button icon__email-dark pointer"
+                        class="support-item-menu__button qt-icon icon__email-dark pointer"
                         (click)="sendEmail()"
                     ></div>
                     <app-dynamic-tooltip
@@ -140,7 +140,7 @@
                 #closedTooltip
             ></app-dynamic-tooltip>
             <div
-                class="support-tickets-list__close icon__close pointer"
+                class="support-tickets-list__close qt-icon icon__close pointer"
                 (mouseenter)="closedTooltip.show($event.target)"
                 (mouseleave)="closedTooltip.hide()"
                 (click)="removeSession()"
