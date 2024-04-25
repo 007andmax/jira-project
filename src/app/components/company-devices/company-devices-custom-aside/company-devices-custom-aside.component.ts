@@ -68,7 +68,7 @@ export class CompanyDevicesCustomAsideComponent implements OnInit {
     this.device.setTags(data);
   }
   onSelectAssestType(data) {
-    this.device.setType(data);
+    this.device.setType((data) ? data.toLowerCase() : data);
     this.validate.resetType();
   }
   onSelectManufacture(data) {

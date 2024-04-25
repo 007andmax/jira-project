@@ -105,8 +105,13 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     this.cd.markForCheck();
   }
   public clearWithOutChanges() {
+    this.userInput.nativeElement.value = '';
+    this.searchName = "";
     this.selectedTag = [];
-    this.cd.markForCheck();
+    this.tags = this.reqTags;
+    this.userInput.nativeElement.blur();
+    this.dp.close();
+    this.cd.detectChanges();
   }
   public checkRemoveTag(index) {
     if (this.selectedTag[index].defaultTag === 'USER_TAG' && this.blockUserTag) return false;

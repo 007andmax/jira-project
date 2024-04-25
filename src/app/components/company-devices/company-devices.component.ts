@@ -69,7 +69,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     this.sub.add(subscription);
     this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
       if (newChange.action === 'CUSTOM_DEVICE_SAVED') {
-        this.devices.push(new DeviceCompany({ ...newChange.data, isCustom: true }, newChange.data.companyId));
+        this.devices.push(new DeviceCompany({ ...newChange.data, isCustom: true, id: newChange.data.deviceId }, newChange.data.companyId));
       }
       if (newChange.action === 'CUSTOM_DEVICE_REMOVED') {
         let index = this.devices.findIndex(item => item.id == newChange.data);
