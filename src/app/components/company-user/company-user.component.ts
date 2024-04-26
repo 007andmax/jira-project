@@ -120,8 +120,13 @@ export class CompanyUserComponent implements OnInit {
     this.userListService.addSubscription(getConfirm);
     let getChangeCompanies = this.usersStateService.getChangeUsers().subscribe((data: UserChange) => {
       if (data.action === 'USER_SAVED' && data.data.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === id)) {
-        this.users.unshift(new User(data.data));
-        this.header.count = this.header.count + 1;
+        let index = this.users.findIndex(item => item.id === data.data.id);
+        if (index != -1) {
+          this.users[index].onUpdate(data.data);
+        } else {
+          this.users.unshift(new User(data.data));
+          this.header.count = this.header.count + 1;
+        }
       }
       if (data.action === 'USER_ARCHIVED' && data.data.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === id)) {
         const userIndex = this.users.findIndex((item) => item.id === data.data.id);
