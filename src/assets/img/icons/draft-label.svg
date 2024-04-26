@@ -4,7 +4,7 @@
         <path fill="#637382" d="M15 74.11 20 69v20l-5-4zM85 15H75v6h13z"/>
         <path fill="#929EAC" d="m15 56 41-41h29L15 85z"/>
         <text transform="rotate(-45 44.354 40.146)" font-family="Inter-Bold, Inter" font-size="10" font-weight="bold" fill="#FFF">
-                    <tspan x="26.577" y="44.5">DELETED</tspan>
+                    <tspan x="19.577" y="44.5">DELETED</tspan>
                 </text>
         <path stroke="#FFF" opacity=".4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2" d="M58.882 15 15 58.399M82.333 15 15 83"/>
     </g>
