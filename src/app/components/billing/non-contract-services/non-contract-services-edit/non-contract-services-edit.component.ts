@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { GlNumber } from 'src/class/gl-number/gl-number';
 import { Subscription } from 'rxjs';
 import { GlNumberStateService } from 'src/app/states/gl-number/gl-number-state.service';
@@ -72,7 +72,6 @@ export class NonContractServicesEditComponent implements OnInit, OnDestroy {
     })
   }
   onSelectGlNumbers(data) {
-
     this.service.glNumber = data;
   }
   close() {

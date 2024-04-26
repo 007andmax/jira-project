@@ -1,8 +1,7 @@
-import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CompanyItem } from 'src/app/components/companies/class/company-item';
 import { CompanyProfile } from 'src/app/components/companies/class/company-profile';
-import { CompanyProfileAddress } from 'src/app/components/companies/class/company-profile-address';
 import { CompanyUpdate } from 'src/app/components/companies/class/company-update';
 import { InvoiceTicketsService } from 'src/app/components/setting/accounting/accounting-settings.service';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
@@ -20,7 +19,6 @@ import { InvoiceNote } from '../../../billable/class/invoice-note';
 import { QuoteAdd } from '../../class/quote-add';
 import { QuoteValdiate } from '../../class/quote-vildate';
 import { ServiceListQuoteComponent } from '../service-list-quote/service-list-quote.component';
-import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-role-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
 
@@ -29,7 +27,7 @@ import { ContractsService } from 'src/app/services/contracts/contracts.service';
   templateUrl: './quote-aside-add-body.component.html',
   styleUrls: ['./quote-aside-add-body.component.scss']
 })
-export class QuoteAsideAddBodyComponent implements OnInit {
+export class QuoteAsideAddBodyComponent implements OnInit, OnDestroy {
   @ViewChild('companyEdit') companyEdit: InvoiceFormEditCustomerComponent;
   @ViewChild('servicesList') servicesList: ServiceListQuoteComponent;
   @ViewChild('expiryDate') expiryDate: DatePickerComponent;
@@ -58,14 +56,17 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     private contractsService: ContractsService,
     private quoteServices: QuoteService,) { }
 
+
   ngOnInit() {
     if (this.companiesState.getCompanies().length > 0) this.getCLientsList(this.companiesState.getCompanies());
-    this.companiesState.getOnCompanies().subscribe((data) => {
+    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
       this.getCLientsList(data);
     })
-    this.quoteServices.getQuoteNumber().subscribe((data: any) => {
+    this.sub.add(getOnCompanies);
+    let getQuoteNumber = this.quoteServices.getQuoteNumber().subscribe((data: any) => {
       this.quote.number = data.number;
     });
+    this.sub.add(getQuoteNumber);
     let getChangeCompanies = this.companiesState.getChangeCompanies().subscribe((data: CompanyUpdate) => {
       if (data.action === 'COMPANY_SAVED' && this.quoteCompany && this.quoteCompany.id === data.data.id) {
         this.quoteCompany.name = data.data.name;
@@ -92,7 +93,6 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     this.quote.setBillTo(this.quoteCompany.companyInfo.addresses[0].id);
     if (this.quoteCompany.companyInfo.addresses.length == 2) this.quote.setShipTo(this.quoteCompany.companyInfo.addresses[1].id);
     this.cd.detectChanges();
-    //  this.servicesList.getServicesList();
     this.getServicesList();
   }
   public onChangeQuoteNumber(data) {
@@ -246,5 +246,8 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   }
   public trackById(index, item) {
     return item.item.versionedId.id;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }
