@@ -18,10 +18,14 @@ export class CustomDevice {
     "location": string;
     "notes": string;
     "tags": Array<any> = [];
+    preloaderModels: boolean = false;
     constructor() { }
 
     public setCompanyId(data) {
         this.companyId = data;
+    }
+    public setPreloaderModels(data) {
+        this.preloaderModels = data;
     }
     public getTypeToLocaleLowerCase() {
         return (this.type) ? this.type.toLocaleLowerCase() : '';

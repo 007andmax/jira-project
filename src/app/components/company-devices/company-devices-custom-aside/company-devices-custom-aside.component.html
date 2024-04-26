@@ -97,6 +97,8 @@
                     [search]="true"
                     [change]="true"
                     [title]="'Manufacture'"
+                    [preloader]="!devicesStateService.isGetManufactures"
+                    [isDisabled]="!devicesStateService.isGetManufactures"
                     (onSelectedItem)="onSelectManufacture($event)"
                 ></app-manufactures-drop-down>
             </div>
@@ -112,7 +114,8 @@
                     [change]="true"
                     [title]="'Model'"
                     [manufactureId]="device.manufacturerId"
-                    [isDisabled]="!device.manufacturerId"
+                    [isDisabled]="!device.manufacturerId || device.preloaderModels"
+                    [preloader]="device.preloaderModels"
                     (onSelectedItem)="onSelectModel($event)"
                 ></app-models-drop-down>
             </div>

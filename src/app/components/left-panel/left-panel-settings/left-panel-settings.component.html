@@ -25,12 +25,11 @@
         Company Profile
     </li>
     <li
-        [ngClass]="{'--active':activePage === 'customer-portal'}"
-        (click)="goToState('customer-portal')"
-        *ngIf="getPermissions('VIEW_COMPANIES') && getPermissions('CREATE_COMPANIES') && getPermissions('VIEW_USERS') && getPermissions('CREATE_USERS')"
+        [ngClass]="{'--active':activePage === 'commission-component'}"
+        (click)="goToState('commission-component')"
     >
-        <div class="icon__menu--submenu icon__menu-users qt-sz-20 qt-bg-contain qt-mr-8"></div>
-        Customer Portal
+        <div class="icon__menu--submenu icon__menu-commissions qt-sz-20 qt-bg-contain qt-mr-8"></div>
+        Commissions
     </li>
     <li
         [ngClass]="{'--active':activePage === 'crm-settings'}"
@@ -41,11 +40,12 @@
         CRM Settings
     </li>
     <li
-        [ngClass]="{'--active':activePage === 'commission-component'}"
-        (click)="goToState('commission-component')"
+        [ngClass]="{'--active':activePage === 'customer-portal'}"
+        (click)="goToState('customer-portal')"
+        *ngIf="getPermissions('VIEW_COMPANIES') && getPermissions('CREATE_COMPANIES') && getPermissions('VIEW_USERS') && getPermissions('CREATE_USERS')"
     >
-        <div class="icon__menu--submenu icon__menu-commissions qt-sz-20 qt-bg-contain qt-mr-8"></div>
-        Commissions
+        <div class="icon__menu--submenu icon__menu-users qt-sz-20 qt-bg-contain qt-mr-8"></div>
+        Customer Portal
     </li>
     <li
         [ngClass]="{'--active':activePage === 'device-setting-component'}"

@@ -46,7 +46,7 @@ export class CompanyDevicesCustomAsideComponent implements OnInit {
   @ViewChild('modelsDd') modelsDd: ModelsDropDownComponent;
   @ViewChild('installDateDP') installDateDP: DatePickerComponent;
   @ViewChild('warrantyDateDP') warrantyDateDP: DatePickerComponent;
-  constructor(private devicesStateService: DevicesStateService,
+  constructor(public devicesStateService: DevicesStateService,
     private deviceTagsStateService: DeviceTagsStateService,
     private companiesState: CompaniesStateService,
     private devicesService: DevicesService) { }
@@ -77,11 +77,14 @@ export class CompanyDevicesCustomAsideComponent implements OnInit {
   }
   onSelectManufacture(data) {
     this.device.setManufacturerId(data ? data.id : null);
+    this.models = [];
     this.modelsDd.clearWithOutChanges();
     this.device.setModelId(null);
     if (data) {
+      this.device.setPreloaderModels(true);
       this.devicesService.getModels(data.id).subscribe((res: any) => {
         this.models = res.models.map(item => new ModelDevice(item))
+        this.device.setPreloaderModels(false);
       })
     }
   }
