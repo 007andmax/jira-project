@@ -27,6 +27,7 @@
         id="dropdown1"
         class="qt-dropdown-input"
         [attr.maxlength]="maxlength"
+        (input)="onCheckAdd($event)"
         (keyup)="onKeyUp($event)"
         (focus)="onFocus($event)"
         [readonly]="!change"

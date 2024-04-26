@@ -77,6 +77,8 @@ export class CompanyDevicesCustomAsideComponent implements OnInit {
   }
   onSelectManufacture(data) {
     this.device.setManufacturerId(data ? data.id : null);
+    this.modelsDd.clearWithOutChanges();
+    this.device.setModelId(null);
     if (data) {
       this.devicesService.getModels(data.id).subscribe((res: any) => {
         this.models = res.models.map(item => new ModelDevice(item))

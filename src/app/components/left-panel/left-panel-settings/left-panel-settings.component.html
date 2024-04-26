@@ -25,6 +25,14 @@
         Company Profile
     </li>
     <li
+        [ngClass]="{'--active':activePage === 'customer-portal'}"
+        (click)="goToState('customer-portal')"
+        *ngIf="getPermissions('VIEW_COMPANIES') && getPermissions('CREATE_COMPANIES') && getPermissions('VIEW_USERS') && getPermissions('CREATE_USERS')"
+    >
+        <div class="icon__menu--submenu icon__menu-users qt-sz-20 qt-bg-contain qt-mr-8"></div>
+        Customer Portal
+    </li>
+    <li
         [ngClass]="{'--active':activePage === 'crm-settings'}"
         (click)="goToState('crm-settings')"
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_CRM_SETTINGS')"
@@ -100,14 +108,6 @@
     >
         <div class="icon__menu--submenu icon__menu-users qt-sz-20 qt-bg-contain qt-mr-8"></div>
         Tech Users
-    </li>
-    <li
-        [ngClass]="{'--active':activePage === 'customer-portal'}"
-        (click)="goToState('customer-portal')"
-        *ngIf="getPermissions('VIEW_COMPANIES') && getPermissions('CREATE_COMPANIES') && getPermissions('VIEW_USERS') && getPermissions('CREATE_USERS')"
-    >
-        <div class="icon__menu--submenu icon__menu-users qt-sz-20 qt-bg-contain qt-mr-8"></div>
-        Customer Portal
     </li>
     <li
         [ngClass]="{'--active':activePage === 'ticket-settings'}"
