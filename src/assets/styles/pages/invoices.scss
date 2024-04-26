@@ -531,6 +531,9 @@ app-invoices-item,app-payment-item {
     &.--paid {
       background: url('/assets/img/icons/update-label.svg');
     }
+    &.--draft {
+      background: url('/assets/img/icons/draft-label.svg');
+    }
     &.--overdue {
       background: url('/assets/img/icons/overdue.svg');
     }

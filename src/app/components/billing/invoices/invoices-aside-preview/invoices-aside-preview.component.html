@@ -159,7 +159,8 @@
             <div class="invoice-preview qt-pos-rel">
                 <div
                     class="invoice-preview__status"
-                    [ngClass]="{'--paid': invoiceProfile.paidOn, '--overdue': invoiceProfile.isOverDue && !invoiceProfile.paidOn}"
+                    [ngClass]="{'--paid': invoiceProfile.paidOn, '--overdue': invoiceProfile.isOverDue && !invoiceProfile.paidOn,
+                '--draft':invoiceProfile.status == 'DELETED'}"
                 ></div>
                 <div class="qt-df qt-jc-sb qt-pb-24 company-info">
                     <div class="qt-lh-154">
