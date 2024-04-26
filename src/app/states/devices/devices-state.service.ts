@@ -88,7 +88,6 @@ export class DevicesStateService {
     return this.manufacturForRemove;
   }
   public initGetManufactures() {
-    console.log("initGetManufactures");
     this.devicesService.getManufactures().subscribe((data: any) => {
       this.manufactures = data.manufacturers.map(item => new ManufactureDevice(item));
       this.manufactures.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0);

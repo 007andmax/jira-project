@@ -61,19 +61,15 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
       if (newChange.action === 'BIND_DEVICE_TO_TAG') {
         let index = newChange.data.devices.findIndex(item => item.deviceId == this.device.agentId || item.deviceId == this.device.id);
-        console.log("index", index);
         if (index > -1) {
           let tags = this.deviceTagsStateService.getTags().filter(item => newChange.data.devices[index].tags.some(tag => tag == item.id));
-          console.log("tags", tags);
           this.device.setTags([...this.device.tags, ...tags]);
           this.deviceTags.setSelectedTag(JSON.parse(JSON.stringify(this.device.tags)).map(item => new DeviceTag(item)));
         }
       }
       if (newChange.action === 'UNBIND_DEVICE_FROM_TAG') {
         let index = newChange.data.devices.findIndex(item => item.deviceId == this.device.agentId || item.deviceId == this.device.id);
-        console.log("index", index);
         if (index > -1) {
-          console.log("index", index);
           newChange.data.devices[index].tags.forEach(item => {
             let index = this.device.tags.findIndex(tag => tag.id == item);
             if (index > -1) this.device.tags.splice(index, 1);

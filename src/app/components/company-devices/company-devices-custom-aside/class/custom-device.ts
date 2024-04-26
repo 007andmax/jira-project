@@ -73,7 +73,6 @@ export class CustomDevice {
         this.warranty_date_int = new Date(due).getTime();
     }
     public getDataForRequest() {
-        console.log("this.tags", this.tags);
         return {
             "companyId": this.companyId,
             "name": this.name,
