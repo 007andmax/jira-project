@@ -9,7 +9,7 @@
         ></app-dynamic-tooltip>
         <i
             *ngIf="ticketProfile.ticketSource === 'FROM_EMAIL' && !checkExistServicesProducts() && getCompany(ticketProfile.company.id)"
-            class="icon__help default-services-page__question-icon qt-sz-12 qt-ic-c"
+            class="qt-icon icon__help default-services-page__question-icon qt-sz-12 qt-ic-c"
             (mouseenter)="userCompanyTooltip.show($event.target)"
             (mouseleave)="userCompanyTooltip.hide()"
         ></i>

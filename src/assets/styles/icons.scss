@@ -157,10 +157,6 @@
     background-image: url("/assets/img/icons/ticket-document.svg");
   }
   &__tickets-detail-contact {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-tickets.svg");
     mask-image: url("/assets/img/icons-left-sidebar/menu-tickets.svg");
   }
   &__menu-email-settings {
@@ -323,9 +319,6 @@
     background-color: $gray-500;
     -webkit-mask-image: url("/assets/img/icons/support-page-add-article.svg");
     mask-image: url("/assets/img/icons/support-page-add-article.svg");
-  }
-  &__help-center {
-    background-image: url("/assets/img/icons/help-center.svg");
   }
   &__road-map {
     background-image: url("/assets/img/icons/road-map.svg");
@@ -503,7 +496,7 @@
     background-image: url("/assets/img/icons/devices.svg");
   }
   &__devices-computer {
-    background-image: url("/assets/img/icons/devices-computer.svg");
+    mask-image: url("/assets/img/icons/devices-computer.svg");
   }
   &__devices-grey {
     background-image: url("/assets/img/icons/devices-grey.svg");
@@ -707,14 +700,9 @@
     mask-size: contain;
   }
   &__documents {
-    background-image: url("/assets/img/icons/documents.svg");
+    mask-image: url("/assets/img/icons/documents.svg");
   }
   &__folder {
-    background-image: url("/assets/img/icons/folder.svg");
-  }
-  &__folder-active {
-    background-color: $white;
-    -webkit-mask-image: url("/assets/img/icons/folder.svg");
     mask-image: url("/assets/img/icons/folder.svg");
   }
   &__calendar {
@@ -833,6 +821,9 @@
   &__clock-timer {
     background-image: url("/assets/img/icons/timer-counter.svg");
   }
+  &__timer {
+    mask-image: url("/assets/img/icons/timer.svg");
+  }
   &__secure {
     background-image: url("/assets/img/icons/secure.svg");
   }
@@ -857,20 +848,8 @@
     -webkit-mask-size: contain;
     mask-size: contain;
   }
-  &__filter-lines,
-  &__filter-lines--gray-300 {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/filter-lines.svg");
+  &__filter-lines {
     mask-image: url("/assets/img/icons/filter-lines.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
-  }
-  &__filter-lines--gray-300 {
-    background-color: $gray-300;
   }
   &__add--white {
     background-color: $white;
@@ -895,9 +874,6 @@
   &__raw-clear {
     background-image: url("/assets/img/icons/raw-clear.svg");
   }
-  &__timer-counter {
-    background-image: url("/assets/img/icons/timer-counter.svg");
-  }
   &__time,
   &__time--white {
     background-color: $gray-500;
@@ -913,17 +889,6 @@
   &__time--white {
     background-color: $white;
   }
-  &__timer {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/timer.svg");
-    mask-image: url("/assets/img/icons/timer.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
-  }
   &__timeline {
     background-image: url("/assets/img/icons/timeline.svg");
   }
@@ -934,18 +899,7 @@
     background-image: url("/assets/img/icons/dropdown-arrow-up.svg");
   }
   &__company-info {
-    background-image: url("/assets/img/icons/company-info.svg");
-  }
-  &__company-info--yellow-800 {
-    background-color: $yellow-800;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/company-info.svg");
     mask-image: url("/assets/img/icons/company-info.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
   }
   &__invoice-expired {
     background-image: url("/assets/img/icons/invoice-expired.svg");
@@ -966,22 +920,10 @@
     background-image: url("/assets/img/icons/display.svg");
   }
   &__locked {
-    background-image: url("/assets/img/icons/locked.svg");
+    mask-image: url("/assets/img/icons/locked.svg");
   }
-  &__filter,
-  &__filter--blue-light-600 {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/filter.svg");
+  &__filter {
     mask-image: url("/assets/img/icons/filter.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
-  }
-  &__filter--blue-light-600 {
-    background-color: $blue-light-600;
   }
   &__filter-active {
     background-image: url("/assets/img/icons/filter-active.svg");
@@ -1083,7 +1025,7 @@
     background-image: url("/assets/img/icons/product-contract.svg");
   }
   &__help {
-    background: url("/assets/img/icons/help.svg");
+    mask-image: url("/assets/img/icons/help.svg");
   }
   &__quotes {
     background-image: url("/assets/img/icons/quotes.svg");
@@ -1562,5 +1504,8 @@
   }
   &__blue-light-600 {
     background-color: $blue-light-600;
+  }
+  &__yellow-800 {
+    background-color: $yellow-800;
   }
 }

@@ -56,7 +56,7 @@
                     </div>
                     <button
                         *ngIf="getPermissions('CREATE_INVOICE')"
-                        class="qt-button --gray --md"
+                        class="qt-button --gray --md qt-ml-8"
                         [disabled]="!isCurrentCompanyAddressEmpty"
                         (click)="onCreateInvoice()"
                     >
@@ -146,7 +146,7 @@
                                 *ngIf="item.lockedBy"
                             >
                                 <div
-                                    class="icon__locked qt-sz-16"
+                                    class="qt-icon icon__locked qt-sz-16"
                                     placement="top"
                                     container="body"
                                     ngbTooltip="Is being used by other user"
