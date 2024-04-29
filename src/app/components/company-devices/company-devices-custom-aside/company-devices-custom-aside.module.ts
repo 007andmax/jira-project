@@ -12,6 +12,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 import { ManufacturesDropDownComponent } from './manufactures-drop-down/manufactures-drop-down.component';
 import { ModelsDropDownComponent } from './models-drop-down/models-drop-down.component';
+import { CompanyDevicesAssestTypeDropDownComponent } from './company-devices-assest-type-drop-down/company-devices-assest-type-drop-down.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ModelsDropDownComponent } from './models-drop-down/models-drop-down.com
         CompanyDevicesCustomAsideComponent,
         CompanyDevicesCustomDropDownComponent,
         ManufacturesDropDownComponent,
-        ModelsDropDownComponent
+        ModelsDropDownComponent,
+        CompanyDevicesAssestTypeDropDownComponent
     ],
     imports: [
         CommonModule,

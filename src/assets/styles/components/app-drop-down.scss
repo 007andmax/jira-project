@@ -8,7 +8,8 @@ contract-detail-intervals-drop-down,
 tickets-filter-created-drop-down,
 gl-numbers-drop-down,
 company-drop-down,
-contract-company-drop-down {
+contract-company-drop-down,
+app-company-devices-assest-type-drop-down {
   input {
     height: 40px;
     width: 100%;
@@ -49,7 +50,8 @@ contract-company-drop-down {
   }
 }
 
-.app-drop-down {
+.app-drop-down,
+app-company-devices-assest-type-drop-down {
   &__right-icon {
     position: absolute;
     right: 0;
