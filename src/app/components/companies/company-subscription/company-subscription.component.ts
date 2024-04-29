@@ -1,6 +1,5 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { UserDefaultSubscriptionAdd } from '../../users/class/user-default-subscription-add';
 import { CompanySubscription } from '../class/company-subscription';
 import { CompanySubscriptionStateService } from './class/company-subscription-state.service';
 import { UserCustomerCompaniesInfo } from '../../users/class/user-customer-companies-info';

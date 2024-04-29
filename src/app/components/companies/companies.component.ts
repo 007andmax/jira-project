@@ -5,11 +5,9 @@ import { UsersService } from '../../services/users/users.service';
 import { CompaniesStateService } from '../../states/company/companies-state.service';
 import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
 import { Subscription } from 'rxjs';
-import { CompanyFilterTop } from './class/company-filter-top';
 import { DevicesStateService } from '../../states/devices/devices-state.service';
 import { UsersStateService } from '../../states/users/users-state.service';
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
-import { LeftPanelCompaniesFilter } from '../left-panel/left-panel-companies/class/left-panel-companies-filter';
 import { CompanyCalculateCount } from './class/company-calculate-count';
 import { CompanyUpdate } from './class/company-update';
 import { ARCHIVE_COMPANY, DEARCHIVE_COMPANY } from '../../const/confirm';
@@ -44,9 +42,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   constructor(private companiesService: CompaniesService,
     private companiesList: CompaniesListService,
     private companiesStateService: CompaniesStateService,
-    private userService: UsersService,
     private confirmStateService: ConfirmStateService,
-    private devicesState: DevicesStateService,
     private usersStateService: UsersStateService,
     private leftPanelStateService: LeftPanelStateService,
     private draftEmailStateService: DraftEmailStateService,

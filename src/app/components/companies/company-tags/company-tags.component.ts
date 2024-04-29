@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, Input, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { CompanyTagsStateService } from './states/company-tags-state.service';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
-import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { TagsService } from 'src/app/services/tags/tags.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';

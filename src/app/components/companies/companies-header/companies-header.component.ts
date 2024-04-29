@@ -38,7 +38,6 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     public appService: AppService,
     private permissionsService: PermissionsService,
-    private leftPanelStateService: LeftPanelStateService,
     private confirmStateService: ConfirmStateService,
     private usersStateService: UsersStateService,
     public cd: ChangeDetectorRef,

@@ -103,5 +103,6 @@ export class CompanyProductsComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.companiesStateService.setCompanyRoutingId(null);
+    this.sub.unsubscribe();
   }
 }

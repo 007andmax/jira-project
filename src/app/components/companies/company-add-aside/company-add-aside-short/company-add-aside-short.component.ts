@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-
 import { Subscription } from 'rxjs';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { CompanyProfile } from '../../class/company-profile';

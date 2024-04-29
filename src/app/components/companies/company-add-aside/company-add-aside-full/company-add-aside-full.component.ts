@@ -3,8 +3,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ItemFilterPerson } from 'src/app/components/left-panel/left-panel-companies/class/item-filter-person';
 import { CompaniesService } from 'src/app/services/company/companies.service';
-import { ImageCroper } from 'src/app/services/modal/modal-image-cropper/class/image-croper';
-import { ModalImageCropperStateService } from 'src/app/services/modal/modal-image-cropper/services/modal-image-cropper-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { ImageCropperStateService } from 'src/app/states/image-cropper/image-cropper-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -12,7 +10,6 @@ import { CompanyProfile } from '../../class/company-profile';
 import { CompanySetting } from '../../class/company-setting';
 import { CompanyValdiate } from '../../class/company-validate';
 import { } from 'google-maps';
-import { CompanyIndustry } from 'src/app/interfaces/company/company-industry';
 import { CrmCompanyIndustry } from 'src/app/components/setting/crm-settings/crm-company-industry/class/crm-company-industry';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { CrmCompanyServiceType } from 'src/app/components/setting/crm-settings/crm-company-service-type/class/crm-company-service-type';
@@ -61,8 +58,7 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
     private companiesService: CompaniesService,
     private crmStateService: CrmStateService,
     private usersService: UsersService,
-    private companiesStateService: CompaniesStateService,
-    private modalImageCropperStateService: ModalImageCropperStateService) { }
+    private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
     this.industries = this.crmStateService.getIndustryList();

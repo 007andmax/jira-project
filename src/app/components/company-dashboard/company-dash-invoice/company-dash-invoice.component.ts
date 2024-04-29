@@ -1,10 +1,7 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input, OnDestroy } from '@angular/core';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import * as moment from "moment";
 import { Subscription } from 'rxjs';
-import { InvoicesAsidePreviewComponent } from '../../billing/invoices/invoices-aside-preview/invoices-aside-preview.component';
-import { Invoice } from '../../billing/invoices/class/invoice';
-import { InvoicesService } from '../../../services/invoices/invoices.service';
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -13,25 +10,22 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './company-dash-invoice.component.html',
   styleUrls: ['./company-dash-invoice.component.scss']
 })
-export class CompanyDashInvoiceComponent implements OnInit {
+export class CompanyDashInvoiceComponent implements OnInit, OnDestroy {
 
   _id: string = '';
   recentInvoiceList = [];
   sub: Subscription = new Subscription();
-  //showPreviewInvoice: boolean = false;
-  //previewInvoice: Invoice;
   @Input() public set companyId(val: string) {
     if (val !== '' && val !== null && val !== undefined) {
       this.getRecentInvoiceList(val);
     }
   }
-  // @ViewChild('previewInvoiceAside') previewInvoiceAside: InvoicesAsidePreviewComponent;
 
   public constructor(private companiesService: CompaniesService,
     private invoiceStateService: InvoiceStateService,
-    private invoicesService: InvoicesService,
     public activateRoute: ActivatedRoute,
     public cd: ChangeDetectorRef) { }
+
 
   public ngOnInit() {
     this._id = this.activateRoute.snapshot.params['id'];
@@ -39,9 +33,6 @@ export class CompanyDashInvoiceComponent implements OnInit {
       this._id = params['id'];
     });
     this.sub.add(subscription);
-
-    // this.getRecentInvoiceList();
-
   }
 
   getRecentInvoiceList(companyId: string) {
@@ -61,14 +52,11 @@ export class CompanyDashInvoiceComponent implements OnInit {
 
   onPreviewInvoice(data) {
     this.invoiceStateService.togglePreview(data.id);
-    /*  this.previewInvoice = data;
-      if (this.showPreviewInvoice) {
-        this.cd.detectChanges();
-        this.previewInvoiceAside.onGetInvoice();
-      }
-      this.showPreviewInvoice = true;*/
   }
   public trackById(index, item) {
     return item.id;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }
