@@ -39,7 +39,7 @@
     background-image: url("/assets/img/icons/subscribe-user.svg");
   }
   &__exclamation {
-    background-image: url("/assets/img/icons/exclamation.svg");
+    mask-image: url("/assets/img/icons/exclamation.svg");
   }
   &__tips {
     background-image: url("/assets/img/icons/tips.svg");
@@ -299,20 +299,8 @@
     -webkit-mask-size: contain;
     mask-size: contain;
   }
-  &__companies,
-  &__companies--white {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/companies.svg");
+  &__companies {
     mask-image: url("/assets/img/icons/companies.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
-  }
-  &__companies--white {
-    background-color: $white;
   }
   &__support-page {
     background-color: $gray-400;
@@ -557,6 +545,24 @@
   &__export {
     mask-image: url("/assets/img/icons/export-dark.svg");
   }
+  &__add-grey {
+    background-image: url("/assets/img/icons/add-grey.svg");
+  }
+  &__add--grey-500,
+  &__add--white {
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/add-grey.svg");
+    mask-image: url("/assets/img/icons/add-grey.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
+  &__add--white {
+    background-color: $white;
+  }
   &__plus-gray {
     background-color: $gray-500;
     -webkit-mask-position: center;
@@ -708,15 +714,7 @@
     background-image: url("/assets/img/icons/calendar.svg");
   }
   &__calendar-recurring-ticket {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/calendar-recurring-ticket.svg");
     mask-image: url("/assets/img/icons/calendar-recurring-ticket.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
   }
   &__user-grey {
     background-image: url("/assets/img/icons/user-grey.svg");
@@ -764,7 +762,7 @@
     background-image: url("/assets/img/icons/automatically-create-invoice.svg");
   }
   &__mark-as-master {
-    background-image: url("/assets/img/icons/mark-as-master.svg");
+    mask-image: url("/assets/img/icons/mark-as-master.svg");
   }
   &__remote-access {
     background-image: url("/assets/img/icons/remote-access.svg");
@@ -832,26 +830,8 @@
   &__add-product {
     background-image: url("/assets/img/icons/add-product.svg");
   }
-  &__add-grey {
-    background-image: url("/assets/img/icons/add-grey.svg");
-  }
-  &__add--grey-500,
-  &__add--white {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/add-grey.svg");
-    mask-image: url("/assets/img/icons/add-grey.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
-  }
   &__filter-lines {
     mask-image: url("/assets/img/icons/filter-lines.svg");
-  }
-  &__add--white {
-    background-color: $white;
   }
   &__company-address {
     background-image: url("/assets/img/icons/company-address.svg");
@@ -1265,16 +1245,8 @@
     -webkit-mask-size: contain;
     mask-size: contain;
   }
-  &__phone-gray-500 {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/phone-gray.svg");
+  &__phone-gray {
     mask-image: url("/assets/img/icons/phone-gray.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
   }
   &__collapse {
     background-image: url("/assets/img/icons/collapse.svg");
@@ -1299,9 +1271,6 @@
   }
   &__operating-system {
     background-image: url("/assets/img/icons/operating-system.svg");
-  }
-  &__phone-gray {
-    background-image: url("/assets/img/icons/phone-gray.svg");
   }
   &__upload-avtar {
     background-image: url("/assets/img/icons/upload-photo.svg");
@@ -1475,6 +1444,9 @@
   }
   &__blue-light-600 {
     background-color: $blue-light-600;
+  }
+  &__yellow-600 {
+    background-color: $yellow-600;
   }
   &__yellow-800 {
     background-color: $yellow-800;

@@ -92,7 +92,7 @@
                                         <div class="ticket-detail-page-content__body-header-data">
                                             <span [textContent]="getCreatAt()"></span>
                                             <div class="ticket-detail-page-content__body-header-data-divider"></div>
-                                            <span class="icon__companies qt-sz-16 qt-dib qt-mr-8"></span>
+                                            <span class="qt-icon icon__companies qt-sz-16 qt-dib qt-mr-8"></span>
                                             <span
                                                 class="pointer"
                                                 [textContent]="getCompanyName()"
@@ -126,7 +126,7 @@
                                     *ngIf="ticketProfile.ticketSource === 'FROM_WEB'"
                                 ></span>
                                 <span
-                                    class="icon__calendar-recurring-ticket qt-sz-16 qt-dib"
+                                    class="qt-icon icon__calendar-recurring-ticket qt-sz-16 qt-dib"
                                     *ngIf="ticketProfile.ticketSource === 'FROM_RECURRING_TICKET'"
                                 ></span>
                                 <span

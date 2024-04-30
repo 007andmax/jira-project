@@ -102,7 +102,7 @@
                     class="qt-df qt-ai-c"
                     *ngIf="checkExistUser() && getPhoneNumbers().length == 0"
                 >
-                    <i class="icon__phone-gray-500 qt-bg-contain qt-sz-16 qt-mr-8"></i>
+                    <i class="qt-icon icon__phone-gray" qt-sz-16 qt-mr-8"></i>
                     <div class="ticket-detail-contact-info-line__label">No information</div>
                 </div>
                 <ng-template
@@ -114,7 +114,7 @@
                     [ngForTrackBy]="trackByIndex"
                 >
                     <div class="qt-df qt-ai-c qt-mb-16">
-                        <i class="icon__phone-gray-500 qt-bg-contain qt-sz-16 qt-mr-8"></i>
+                        <i class="qt-icon icon__phone-gray" qt-sz-16 qt-mr-8"></i>
                         <preview-phone-mask
                             [class]="'company-info-aside__ticket-created-name ticket-detail-contact-info-line__label'"
                             *ngIf="phoneNumber.number"

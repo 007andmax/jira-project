@@ -36,7 +36,7 @@
         ></div>
       </div>
       <div
-        class="icon__mark-as-master qt-bg-contain qt-sz-20 qt-ml-12"
+        class="qt-icon icon__mark-as-master qt-sz-20 qt-ml-12"
         *ngIf="type == TYPE_LIST_COMPANY_USERS && isPrimaryContact()"
         (mouseenter)="addTooltip.show($event.target)"
         (mouseleave)="addTooltip.hide()"
@@ -106,7 +106,7 @@
           ></div>
           <div
             *ngIf="phone.typeNumber === 'MOBILE' || phone.typeNumber === 'OFFICE'"
-            class="qt-sz-16 qt-mr-6 icon__phone-gray"
+            class="qt-sz-16 qt-mr-6 qt-icon icon__phone-gray"
           ></div>
         </div>
         <preview-phone-mask
@@ -218,7 +218,7 @@
             (click)="resetPrimaryContact()"
             ngbDropdownItem
           >
-            <div class="icon__mark-as-master qt-bg-contain qt-sz-20 qt-mr-12"></div>
+            <div class="qt-icon icon__mark-as-master qt-sz-20 qt-mr-12"></div>
             Set as Primary contact
           </li>
           <li
