@@ -18,7 +18,7 @@
         <div>
             <div
                 class="qt-ic-c qt-pointer device-type-icon qt-sz-24"
-                [ngClass]="{'icon__computer' : device.iconName === 'workstation' || !device.iconName,
+                [ngClass]="{'qt-icon icon__computer' : device.iconName === 'workstation' || !device.iconName,
               'icon__tablet' : device.iconName === 'device',
             'icon__printer' : device.iconName === 'printer',
           'icon__server' : device.iconName === 'server',
@@ -29,7 +29,7 @@
                 ngbDropdown
                 container="body"
                 class="qt-ic-c qt-pointer device-type-icon qt-sz-24"
-                [ngClass]="{'icon__computer' : device.iconName === 'workstation' || !device.iconName,
+                [ngClass]="{'qt-icon icon__computer' : device.iconName === 'workstation' || !device.iconName,
               'icon__tablet' : device.iconName === 'device',
             'icon__printer' : device.iconName === 'printer',
           'icon__server' : device.iconName === 'server',
@@ -46,7 +46,7 @@
                             (click)="setIcon('workstation')"
                             ngbDropdownItem
                         >
-                            <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__computer"></i>
+                            <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 qt-icon icon__computer"></i>
                         </li>
                         <li
                             (click)="setIcon('device')"

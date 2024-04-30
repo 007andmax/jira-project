@@ -9,7 +9,7 @@
             (click)="downloadAll()"
             *ngIf="attachments.length > 0"
         >
-            <div class="icon__download qt-bg-contain qt-sz-16 qt-mr-4"></div>
+            <div class="qt-icon icon__download  qt-sz-16 qt-mr-4"></div>
             Download
         </div>
     </div>
@@ -63,7 +63,7 @@
                         ngbDropdownItem
                         (click)="download(attachment.file.id,attachment.file.contentType,attachment.file.name)"
                     >
-                        <i class="icon__download qt-bg-contain qt-sz-20 qt-mr-12"></i>
+                        <i class="qt-icon icon__download  qt-sz-20 qt-mr-12"></i>
                         <span>Download attachment</span>
                     </div>
                     <div

@@ -10,7 +10,7 @@
                     class="support-item-menu"
                     *ngIf="item.status === 'URL_GENERATED' || item.status === 'URL_OPENED'"
                 >
-                    <div class="support-item-menu__key icon__key"></div>
+                    <div class="support-item-menu__key qt-icon icon__key"></div>
                     <div
                         class="support-item-menu__number"
                         [textContent]="item.key"
@@ -22,11 +22,13 @@
                         #copyKeyTooltip
                     ></app-dynamic-tooltip>
                     <div
-                        class="support-item-menu__button icon__copy pointer"
+                        class="support-item-menu__button pointer qt-df qt-ai-c qt-jc-c"
                         (mouseenter)="copyKeyTooltip.show($event.target)"
                         (mouseleave)="copyKeyTooltip.hide()"
                         (click)="copyKey()"
-                    ></div>
+                    >
+                      <div class="qt-icon icon__copy qt-sz-18"></div>
+                    </div>
                     <app-dynamic-tooltip
                         [content]="'Email Info'"
                         [position]="'top'"
@@ -35,9 +37,11 @@
                     <div
                         (mouseenter)="emailInfoTooltip.show($event.target)"
                         (mouseleave)="emailInfoTooltip.hide()"
-                        class="support-item-menu__button qt-icon icon__email-dark pointer"
+                        class="support-item-menu__button qt-df qt-ai-c qt-jc-c pointer"
                         (click)="sendEmail()"
-                    ></div>
+                    >
+                      <div class="qt-icon icon__email-dark qt-sz-18"></div>
+                    </div>
                     <app-dynamic-tooltip
                         [content]="'Copy Support URL'"
                         [position]="'top'"
@@ -46,9 +50,11 @@
                     <div
                         (mouseenter)="copySupportTooltip.show($event.target)"
                         (mouseleave)="copySupportTooltip.hide()"
-                        class="support-item-menu__button icon__link-gray pointer"
+                        class="support-item-menu__button qt-df qt-ai-c qt-jc-c pointer"
                         (click)="copyLink()"
-                    ></div>
+                    >
+                      <div class="qt-icon icon__link-gray qt-sz-18"></div>
+                    </div>
                     <app-dynamic-tooltip
                         [content]="'Create Ticket'"
                         [position]="'top'"
@@ -57,16 +63,18 @@
                     <div
                         (mouseenter)="createTicketTooltip.show($event.target)"
                         (mouseleave)="createTicketTooltip.hide()"
-                        class="support-item-menu__button icon__ticket-support pointer"
+                        class="support-item-menu__button qt-df qt-ai-c qt-jc-c pointer"
                         (click)="onAddTicket()"
-                    ></div>
+                    >
+                      <div class="qt-icon icon__ticket-support qt-sz-18"></div>
+                    </div>
                 </div>
             </div>
             <div class="support-timeline-status qt-mr-24">
                 <div
                     class="support-timeline-status__step1 qt-bg-contain"
                     [ngClass]="{'icon__computer-green' : item.status === 'CONNECTED',
-                'icon__computer' : item.status !== 'CONNECTED'}"
+                'qt-icon icon__computer' : item.status !== 'CONNECTED'}"
                 ></div>
                 <div
                     class="support-timeline-status__line"
@@ -89,7 +97,7 @@
                 ></div>
                 <div
                     *ngIf="!(item.status === 'CONNECTED' && item.online) && !(item.status === 'INSTALLED' && item.online)"
-                    class="support-timeline-status__step2 icon__remote-access-gray"
+                    class="support-timeline-status__step2 qt-icon icon__remote-access-gray"
                 ></div>
                 <div
                     *ngIf="item.status === 'INSTALLED' && item.online"
@@ -131,7 +139,7 @@
                 <div
                     class="support-timeline-status__step3 qt-bg-contain"
                     [ngClass]="{'icon__computer-green' : item.status === 'CONNECTED' && item.online,
-                'icon__computer' : item.status !== 'CONNECTED' || !item.online}"
+                'qt-icon icon__computer' : item.status !== 'CONNECTED' || !item.online}"
                 ></div>
             </div>
             <app-dynamic-tooltip

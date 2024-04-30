@@ -145,7 +145,7 @@
             (click)="downloadAgent()"
             *ngIf="!showArchivedCompanies"
         >
-            <i class="icon__download qt-za-16 qt-sz-16 qt-dib qt-bg-contain"></i>
+            <i class="qt-icon icon__download qt-za-16 qt-sz-16 qt-dib"></i>
         </button>
         <app-dynamic-tooltip
             [content]="'Restore Company'"
@@ -192,7 +192,7 @@
                     (click)="remove()"
                     *ngIf="getPermissions('ARCHIVE_COMPANIES')"
                 >
-                    <i class="qt-sz-20 qt-mr-12 qt-bg-contain icon__archive"></i>
+                    <i class="qt-sz-20 qt-mr-12 qt-bg-contain qt-icon icon__archive"></i>
                     {{company.isExample ? 'Delete' : 'Archive'}}
                 </button>
             </div>

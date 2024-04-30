@@ -9,7 +9,7 @@
             [ngClass]="{'--ofline': !device.online}"
         >
             <div
-                [ngClass]="{'icon__computer' : device.iconName === 'workstation' || !device.iconName,
+                [ngClass]="{'qt-icon icon__computer' : device.iconName === 'workstation' || !device.iconName,
               'icon__tablet' : device.iconName === 'device',
             'icon__printer' : device.iconName === 'printer',
           'icon__server' : device.iconName === 'server'}"
