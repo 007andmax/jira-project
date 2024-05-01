@@ -17,20 +17,7 @@
     <div class="qt-aside-modern__content --required">
         <div class="qt-inputs-row">
             <div class="qt-f100 assest-type-body">
-                <div
-                    class="qt-ic-c qt-pointer device-type-icon qt-sz-24"
-                    [ngClass]="{'icon__computer' : device.getTypeToLocaleLowerCase() === 'workstation',
-               'icon__router' : device.getTypeToLocaleLowerCase() === 'router',
-            'icon__printer' : device.getTypeToLocaleLowerCase() === 'printer',
-                'icon__switch' : device.getTypeToLocaleLowerCase() === 'switch',
-          'icon__server' : device.getTypeToLocaleLowerCase() === 'server',
-            'icon__tablet' : device.getTypeToLocaleLowerCase() === 'tablet',
-            'icon__network_device' : device.getTypeToLocaleLowerCase() === 'network device',
-            'icon__phone' : device.getTypeToLocaleLowerCase() === 'phone',
-             'icon__generic_device' : device.getTypeToLocaleLowerCase() === 'generic device'}"
-                >
-                </div>
-                <app-drop-down
+                <app-company-devices-assest-type-drop-down
                     #typeDd
                     [placeholder]="'Select type'"
                     [list]="assestType"
@@ -40,7 +27,7 @@
                     [errorMessage]="'Field is required'"
                     [validate]="validate.getType()"
                     (onSelectedItem)="onSelectAssestType($event)"
-                ></app-drop-down>
+                ></app-company-devices-assest-type-drop-down>
             </div>
         </div>
         <div class="qt-inputs-row --required">

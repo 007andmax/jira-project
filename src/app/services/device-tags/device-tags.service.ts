@@ -32,10 +32,20 @@ export class DeviceTagsService {
   }
 
   public unLinkDevice(data) {
-    return this.http.post(this.apiUrl + `devices/tags/unlink`, data);
+    return this.http.post(this.apiUrl + `devices/tags/unlink`, data).pipe(
+      tap(data => {
+        this.toastrService.success("Tag has been successfully unlinked");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public linkDevice(data) {
-    return this.http.post(this.apiUrl + `devices/tags/link`, data);
+    return this.http.post(this.apiUrl + `devices/tags/link`, data).pipe(
+      tap(data => {
+        this.toastrService.success("Tag has been successfully linked");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   public addTags(data) {
