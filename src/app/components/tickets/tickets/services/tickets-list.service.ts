@@ -6,13 +6,16 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Injectable()
 export class TicketsListService {
-
+  listColorNoAvatar = ['#2BC7C6', '#FFB937', '#00CCFF', '#7839EE', '#D92D20', '#2EC866', '#16A4FA'];
   blockList: boolean = false;
   sub: Subscription = new Subscription();
   constructor(private usersStateService: UsersStateService) { }
   public addSubscription(data) {
     this.sub.add(data);
 
+  }
+  public getListColorNoAvatar() {
+    return this.listColorNoAvatar;
   }
   public onUnsubscribe() {
     this.sub.unsubscribe();

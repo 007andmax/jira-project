@@ -30,7 +30,7 @@ export class GlobalSearchComponent implements OnInit {
   selectedType: string = 'TICKETS';
   list: Array<GlobalSearchResult> = [];
   indexNoAvatar: number = 0;
-  listColorNoAvatar = ['#0cdeaa', '#16a4fa', '#7c77cb', '#ffb937'];
+  listColorNoAvatar = [];
   word: string = "";
   constructor(private globalSearchService: GlobalSearchService,
     private ticketsService: TicketsService,
@@ -50,7 +50,8 @@ export class GlobalSearchComponent implements OnInit {
     private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
-    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 3);
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
   }
   onSearch() {
     if (this.word.length == 0) {

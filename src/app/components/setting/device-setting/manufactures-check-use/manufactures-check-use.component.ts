@@ -20,7 +20,7 @@ export class ManufacturesCheckUseComponent implements OnInit {
   @Input() model: ModelDevice;
   list: Array<ManufacturesCheckUseItem> = [];
   showPreloader: boolean = true;
-  listColorNoAvatar = ['#0cdeaa', '#16a4fa', '#7c77cb', '#ffb937'];
+  listColorNoAvatar = [];
   sub: Subscription = new Subscription();
   constructor(private devicesService: DevicesService,
     public ticketsListService: TicketsListService,
@@ -30,6 +30,7 @@ export class ManufacturesCheckUseComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
     this.devicesService.validateManufacturesAndModelForRemove(this.manufacture.id, this.model ? this.model.id : null).subscribe((data: any) => {
       this.getList(data);
     })
@@ -45,7 +46,7 @@ export class ManufacturesCheckUseComponent implements OnInit {
     return name[0].toUpperCase();
   }
   getList(data) {
-    this.list = data.devices.map(item => new ManufacturesCheckUseItem(item, this.ticketsListService.randomInteger(0, 3))).sort((a, b) => (this.getCompanyName(a.companyId).toLowerCase() > this.getCompanyName(b.companyId).toLowerCase()) ?
+    this.list = data.devices.map(item => new ManufacturesCheckUseItem(item, this.ticketsListService.randomInteger(0, 6))).sort((a, b) => (this.getCompanyName(a.companyId).toLowerCase() > this.getCompanyName(b.companyId).toLowerCase()) ?
       1 : ((this.getCompanyName(b.companyId).toLowerCase() > this.getCompanyName(a.companyId).toLowerCase()) ? -1 : 0));;
     this.showPreloader = false;
   }

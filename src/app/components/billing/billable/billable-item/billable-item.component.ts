@@ -23,7 +23,7 @@ export class BillableItemComponent implements OnInit {
   salesPerson: User;
   totalSum: number = 0;
   indexNoAvatar: number = 0;
-  listColorNoAvatar = ['#0cdeaa', '#16a4fa', '#7c77cb', '#ffb937'];
+  listColorNoAvatar = [];
   constructor(private companiesStateService: CompaniesStateService,
     public ticketsListService: TicketsListService,
     private billableStateService: BillableStateService,
@@ -33,7 +33,8 @@ export class BillableItemComponent implements OnInit {
     private usersStateService: UsersStateService) { }
 
   ngOnInit() {
-    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 3);
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
     let company = this.companiesStateService.getCompanies().find(item => item.id === this.item.id);
     this.salesPerson = this.usersStateService.getAllUsers().find(item => item.id === company.techLeadId);
   }

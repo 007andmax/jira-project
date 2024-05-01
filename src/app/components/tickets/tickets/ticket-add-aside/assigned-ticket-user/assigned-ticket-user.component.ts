@@ -14,6 +14,7 @@ import { DevicesService } from 'src/app/services/devices/devices.service';
   providers: [TicketsListService]
 })
 export class AssignedTicketUserComponent extends DropDownComponent {
+  searchText: string = '';
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @Input() selectedUsers = [];
   @Output() usersChange = new EventEmitter<any>();
@@ -44,7 +45,13 @@ export class AssignedTicketUserComponent extends DropDownComponent {
     this.userInput.nativeElement.blur();
     this.userInput.nativeElement.value = "";
   }
+  public clearSearch() {
+    this.searchText = '';
+    this.userInput.nativeElement.value = "";
+    this.list = JSON.parse(JSON.stringify(this.reqList));
+  }
   onSearchUser(event) {
+    this.searchText = event.target.value;
     if (event.target.value.length > 0) {
       this.list = this.reqList.filter(item => (`${item.firstName} ${item.lastName}`).toLowerCase().includes(event.target.value.toLowerCase()));
     } else {
@@ -54,7 +61,5 @@ export class AssignedTicketUserComponent extends DropDownComponent {
   public getUserName(user) {
     return (user) ? `${user.firstName} ${user.lastName}` : '';
   }
-  isSelected(data) {
-    return this.selectedUsers.find(item => item.id === data.id);
-  }
+
 }
