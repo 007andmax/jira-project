@@ -21,9 +21,6 @@ export class TicketsComponent implements OnInit, OnDestroy {
       this.listType = data.listType;
     })
     this.sub.add(getOnInitFilter);
-    this.ticketsService.getActualNumber().subscribe((data: any) => {
-      this.ticketsStateService.onInitActualNumber(data.number);
-    })
   }
 
   ngOnDestroy(): void {

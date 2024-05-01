@@ -80,8 +80,9 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.selectedCompanyId) this.onGetDevices();
-    this.ticketsStateService.getOnActualNumber().subscribe(data => {
-      this.actualNumber = data;
+    this.ticketsService.getActualNumber().subscribe((data: any) => {
+      this.actualNumber = data.number;
+      this.ticketsStateService.onInitActualNumber(data.number);
     })
     if (this.usersStateService.getAllUsers().length > 0) this.onGetTechUsers(this.usersStateService.getAllUsers());
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {

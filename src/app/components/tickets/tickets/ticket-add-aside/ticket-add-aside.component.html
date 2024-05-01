@@ -5,16 +5,21 @@
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-info qt-df qt-ai-c">
             <div class="qt-aside__title">Create New Ticket</div>
-            <div
-                class="qt-aside__ticket-name"
-                [textContent]="'QT ' + actualNumber"
-            ></div>
+            <div class="qt-aside__ticket-name qt-df qt-ai-c">
+                <div class="icon__tickets-sm qt-sz-16 qt-bg-contain"></div>
+                <span
+                    class="qt-ml-8"
+                    [textContent]="'QT ' + actualNumber"
+                ></span>
+            </div>
         </div>
         <div>
             <div
-                class="qt-aside__close-modal icon__close"
+                class="qt-button --square-md --gray pointer"
                 (click)="closed()"
-            ></div>
+            >
+                <i class="icon__close qt-sz-16 qt-bg-contain"></i>
+            </div>
         </div>
     </div>
     <div class="qt-aside-modern__content">
@@ -33,7 +38,7 @@
                     [(ngModel)]="ticketAdd.subject"
                     (change)="onChangeSubject()"
                     type="text"
-                    placeholder="Write Ticket subject"
+                    placeholder="Write Ticket Subject"
                 >
                 <mat-error
                     class="invalid-feedback"
@@ -55,14 +60,14 @@
                     id="add-ticket-describe-issue"
                     class="qt-input-block__textarea"
                     contenteditable="true"
-                    placeholder="Describe Issue here…"
+                    placeholder="Write Job Description"
                     (input)="onChangeNote($event)"
                 ></div>
             </div>
         </div>
         <div class="qt-inputs-row">
             <div class="qt-input-block">
-                <span class="qt-input-block__label">Priority Level</span>
+                <span class="qt-input-block__label">Priority</span>
                 <app-priority-level-drop-down
                     [class]="['qt-dropdown']"
                     [field]="'name'"
@@ -81,7 +86,7 @@
                     #userDP
                     [title]="'User'"
                     [class]="['qt-dropdown']"
-                    [placeholder]="'Select User'"
+                    [placeholder]="'Select'"
                     [validate]="ticketValidate.getCompany()"
                     [errorMessage]="'Company is required'"
                     [field]="'name'"
@@ -106,7 +111,7 @@
                     [search]="true"
                     [change]="true"
                     (onSelectedItem)="onSelectTechUser($event)"
-                    [placeholder]="'Select User to assign'"
+                    [placeholder]="'Select'"
                 ></app-drop-down>
             </div>
         </div>
@@ -125,7 +130,7 @@
                     [change]="true"
                     [preloader]="ticketAdd.getPreloaderDevices()"
                     [isDisabled]="!selectedCompanyId || ticketAdd.getPreloaderDevices()"
-                    [placeholder]="'Select device'"
+                    [placeholder]="'Select'"
                     (onSelectedItem)="onSelectDevice($event)"
                 ></app-drop-down>
             </div>
@@ -150,21 +155,22 @@
         </div>
     </div>
     <div class="qt-aside-modern__footer">
-        <div class="qt-df">
+        <div class="qt-df qt-w100">
             <button
-                class="qt-button qt-mr-12"
-                appDisabledBtn
-                #addBtn="disabled"
-                (onClick)="add()"
-            >
-                <span *ngIf="!addBtn.isBlock()">Create Ticket</span>
-                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
-            </button>
-            <button
-                class="qt-button --gray"
+                class="qt-button --gray qt-mr-12 qt-w100 qt-jc-c"
                 (click)="closed()"
             >
                 Cancel
+            </button>
+            <button
+                class="qt-button qt-w100 qt-jc-c"
+                appDisabledBtn
+                #addBtn="disabled"
+                (onClick)="add()"
+                [ngClass]="{'--loading':addBtn.isBlock()}"
+            >
+                <span *ngIf="!addBtn.isBlock()">Create Ticket</span>
+                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
             </button>
         </div>
     </div>
