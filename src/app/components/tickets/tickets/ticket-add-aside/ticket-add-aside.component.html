@@ -9,54 +9,6 @@
                 class="qt-aside__ticket-name"
                 [textContent]="'QT ' + actualNumber"
             ></div>
-            <div
-                class="ticket-priority create-dropdown"
-                ngbDropdown
-            >
-                <input
-                    type="text"
-                    class="form-control ticket-drop has-dropdown readonly-normal"
-                    ngbDropdownToggle
-                    readonly
-                >
-                <i class="icn-sm report-caret-icon"></i>
-                <ul
-                    class="dropdown-menu dropdown-priority"
-                    ngbDropdownMenu
-                >
-                    <ng-template
-                        class="assigned-ticket-user"
-                        ngFor
-                        let-item
-                        [ngForOf]="ticketPriorities"
-                    >
-                        <li
-                            ngbDropdownItem
-                            (click)="setPriorityLevel(item)"
-                        >
-                            <a
-                                tabindex="-1"
-                                href="javascript:void(0)"
-                            >
-                                <div
-                                    class="qt-input-block__dot priority-dot"
-                                    [ngStyle]="{'background-color':  statusColors[item.color] && statusColors[item.color].textColor ,
-                            'border-color':  statusColors[item.color] && statusColors[item.color].textColor}"
-                                ></div>
-                                {{ item.name }}
-                            </a>
-                        </li>
-                    </ng-template>
-                </ul>
-                <div class="default-value">
-                    <div
-                        class="qt-input-block__dot priority-dot"
-                        [ngStyle]="{'background-color':ticketAdd.priorityLevel && statusColors[ticketAdd.priorityLevel.color] && statusColors[ticketAdd.priorityLevel.color].textColor ,
-                            'border-color': ticketAdd.priorityLevel &&  statusColors[ticketAdd.priorityLevel.color] && statusColors[ticketAdd.priorityLevel.color].textColor}"
-                    ></div>
-                    {{getPriorityLevel()}}
-                </div>
-            </div>
         </div>
         <div>
             <div
@@ -66,20 +18,6 @@
         </div>
     </div>
     <div class="qt-aside-modern__content">
-        <div class="qt-inputs-row ticket-add-aside__priority-level-input">
-            <div class="qt-input-block">
-                <span class="qt-input-block__label">Priority Level</span>
-                <app-drop-down
-                    [class]="['qt-dropdown']"
-                    [field]="'name'"
-                    [isBlockClear]="true"
-                    [editItem]="ticketAdd.priorityLevel"
-                    [list]="ticketPriorities"
-                    (onSelectedItem)="setPriorityLevel($event)"
-                    [placeholder]="'Low'"
-                ></app-drop-down>
-            </div>
-        </div>
         <div class="qt-inputs-row --required">
             <div class="qt-input-block">
                 <label
@@ -123,6 +61,21 @@
             </div>
         </div>
         <div class="qt-inputs-row">
+            <div class="qt-input-block">
+                <span class="qt-input-block__label">Priority Level</span>
+                <app-priority-level-drop-down
+                    [class]="['qt-dropdown']"
+                    [field]="'name'"
+                    [statusColors]="statusColors"
+                    [isBlockClear]="true"
+                    [editItem]="ticketAdd.priorityLevel"
+                    [list]="ticketPriorities"
+                    (onSelectedItem)="setPriorityLevel($event)"
+                    [placeholder]="'Low'"
+                ></app-priority-level-drop-down>
+            </div>
+        </div>
+        <div class="qt-inputs-row">
             <div class="qt-input-block qt-f100">
                 <company-users-drop-down
                     #userDP
@@ -144,7 +97,7 @@
             class="qt-inputs-row"
             *ngIf="!customerPortalStateService.isCustomerPortal"
         >
-            <div class="qt-input-block qt-f50">
+            <div class="qt-input-block qt-f100">
                 <span class="qt-input-block__label">Assign To</span>
                 <app-drop-down
                     #techUserDP
@@ -156,7 +109,12 @@
                     [placeholder]="'Select User to assign'"
                 ></app-drop-down>
             </div>
-            <div class="qt-input-block qt-f50">
+        </div>
+        <div
+            class="qt-inputs-row"
+            *ngIf="!customerPortalStateService.isCustomerPortal"
+        >
+            <div class="qt-input-block qt-f100">
                 <span class="qt-input-block__label">Device</span>
                 <app-drop-down
                     #deviceDP
@@ -177,106 +135,17 @@
             (changeFiles)="onChangeFiles($event)"
             class="ticket-fileupload"
         ></app-upload-area>
-        <div class="users-to-notify">
-            <div class="users-to-notify__title">Add users to notify them ticket update</div>
-            <div class="save-template">
-                <app-tech-users
+        <div class="qt-inputs-row">
+            <div class="qt-input-block">
+                <span class="qt-input-block__label">Notify Users to send them ticket update</span>
+                <app-assigned-ticket-user
                     #techUsersDp
-                    [users]="listTechUsersForAssign"
-                    [editMode]="true"
-                    [editUsers]="shareUsersList"
+                    [class]="['qt-dropdown']"
+                    [selectedUsers]="shareUsersList"
+                    [list]="listTechUsersForAssign"
                     (usersChange)="onChangeShareUsers($event)"
-                ></app-tech-users>
-                <div class="assigned-users-list">
-                    <div class="assigned-users-type assigned-users-type-clients">
-                        <ng-template
-                            class="assigned-ticket-user"
-                            ngFor
-                            let-user
-                            [ngForOf]="shareUsersList"
-                            let-i="index"
-                            [ngForTrackBy]="trackByIndex"
-                        >
-                            <app-dynamic-tooltip
-                                [content]="user.firstName + ' ' + user.lastName"
-                                [position]="'top'"
-                                #userTooltip
-                            ></app-dynamic-tooltip>
-                            <div
-                                class="assigned-ticket-user__item"
-                                *ngIf="user.accountType === 'CLIENT'"
-                                (mouseenter)="userTooltip.show($event.target)"
-                                (mouseleave)="userTooltip.hide()"
-                            >
-                                <div *ngIf="user.avatar">
-                                    <img
-                                        ng-if="user.avatar"
-                                        class="qt-circle default-user-avatar"
-                                        [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
-                                        alt="..."
-                                    >
-                                </div>
-                                <div *ngIf="!user.avatar">
-                                    <div class="default-user-avatar avatar-background-color-odd ng-scope">
-                                        <span [textContent]="(user.firstName) ? user.firstName[0].toUpperCase() : ''"></span>
-                                        <span [textContent]="(user.lastName) ? user.lastName[0].toUpperCase() : ''"></span>
-                                    </div>
-                                </div>
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        [(ngModel)]="user.selected"
-                                    >
-                                    <span class="assigned-ticket-user__checkmark"></span>
-                                </label>
-                            </div>
-                        </ng-template>
-                    </div>
-                    <div class="assigned-users-type">
-                        <ng-template
-                            class="assigned-ticket-user"
-                            ngFor
-                            let-user
-                            [ngForOf]="shareUsersList"
-                            let-i="index"
-                            [ngForTrackBy]="trackByIndex"
-                        >
-                            <app-dynamic-tooltip
-                                [content]="user.firstName + ' ' + user.lastName"
-                                [position]="'top'"
-                                #userTooltip
-                            ></app-dynamic-tooltip>
-                            <div
-                                class="assigned-ticket-user__item"
-                                *ngIf="user.accountType === 'TECH'"
-                                (mouseenter)="userTooltip.show($event.target)"
-                                (mouseleave)="userTooltip.hide()"
-                            >
-                                <div *ngIf="user.avatar">
-                                    <img
-                                        ng-if="user.avatar"
-                                        class="qt-circle default-user-avatar"
-                                        [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
-                                        alt="..."
-                                    >
-                                </div>
-                                <div *ngIf="!user.avatar">
-                                    <div class="default-user-avatar avatar-background-color-odd ng-scope">
-                                        <span [textContent]="(user.firstName) ? user.firstName[0].toUpperCase() : ''"></span>
-                                        <span [textContent]="(user.lastName) ? user.lastName[0].toUpperCase() : ''"></span>
-                                    </div>
-                                </div>
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        [(ngModel)]="user.selected"
-                                    >
-                                    <span class="assigned-ticket-user__checkmark"></span>
-                                </label>
-                            </div>
-                        </ng-template>
-                    </div>
-                </div>
+                    [placeholder]="'Select'"
+                ></app-assigned-ticket-user>
             </div>
         </div>
     </div>

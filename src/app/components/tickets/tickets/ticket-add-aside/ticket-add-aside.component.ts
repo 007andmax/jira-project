@@ -29,6 +29,7 @@ import { StatusColor } from '../../class/status-color';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { Device } from 'src/app/components/company-devices/class/device';
 import { CompanyUsersDropDownComponent } from './company-users-drop-down/company-users-drop-down.component';
+import { AssignedTicketUserComponent } from './assigned-ticket-user/assigned-ticket-user.component';
 
 
 
@@ -43,7 +44,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
   @ViewChild('deviceDP') deviceDP: DropDownComponent;
   @ViewChild('uplaodFile') uplaodFile: UploadAreaComponent;
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
-  @ViewChild('techUsersDp') techUsersDp: TechUsersComponent;
+  @ViewChild('techUsersDp') techUsersDp: AssignedTicketUserComponent;
   actualNumber: string = '';
   opened = false;
   isAdd = false;
@@ -198,13 +199,14 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       this.ticketAdd.createdUser.setCompanyId(item.id);
       this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === item.id)));
       this.onGetDevices();
-      let list = this.users.filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === item.id).defaultSubscriptions.ticketManagerSubscription.enabled);
+      let list = this.users.filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === item.id).defaultSubscriptions.ticketManagerSubscription.exist);
       list = list.map(item => {
         let user = new TechUserItem(item);
         return user;
       });
       this.shareUsersList = list;
-      this.techUsersDp.resetEditMode();
+      this.shareUsersList.forEach(item => item.selected = true)
+      this.techUsersDp.selectItemsWithOutChanges(this.shareUsersList);
       this.ticketValidate.resetCompany();
     } else {
       this.selectedCompanyId = null;
@@ -213,14 +215,14 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       this.users = [];
       this.devices = [];
       this.shareUsersList = [];
-      this.techUsersDp.resetEditMode();
+      this.techUsersDp.selectItemsWithOutChanges(this.shareUsersList);
     }
     let selectedUser = this.techUsersList.find(user => user.id === this.ticketAdd.assignedUser);
     if (selectedUser) {
       let user = new TechUserItem(selectedUser);
       user.selected = true;
       this.shareUsersList.push(user);
-      this.techUsersDp.resetEditMode();
+      this.techUsersDp.selectItemsWithOutChanges(this.shareUsersList);
     }
     if (this.deviceDP) this.deviceDP.clearClient();
     this.cd.detectChanges();
@@ -234,9 +236,13 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       let indexhUser = this.users.findIndex(user => user.id === selectedUser.id);
       if (indexhUser > -1) this.ticketAdd.createdUser.setUserData(this.users[indexhUser]);
       let findSharedUser = this.shareUsersList.find(item => item.id === this.users[indexhUser].id);
-      if (!findSharedUser) this.shareUsersList.push(new TechUserItem(this.users[indexhUser]));
+      if (!findSharedUser) {
+        let user = new TechUserItem(JSON.parse(JSON.stringify(this.users[indexhUser])));
+        user.selected = true;
+        this.shareUsersList.push(user);
+      }
       this.ticketValidate.resetClientUser();
-      this.techUsersDp.resetEditMode();
+      this.techUsersDp.selectItemsWithOutChanges(this.shareUsersList);
     } else {
       this.ticketAdd.createdUser.clearUserData();
       this.onSelectCompany(null);
@@ -252,7 +258,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
         let user = new TechUserItem(this.techUsersList[indexTechUser]);
         user.selected = true;
         this.shareUsersList.push(user);
-        this.techUsersDp.resetEditMode();
+        this.techUsersDp.selectItemsWithOutChanges(this.shareUsersList);
       }
 
     } else {
@@ -275,7 +281,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     let index = this.shareUsersList.findIndex(shareUser => shareUser.id === id);
     if (index > -1) {
       this.shareUsersList.splice(index, 1);
-      this.techUsersDp.resetEditMode();
+      this.techUsersDp.selectItemsWithOutChanges(this.shareUsersList);
     }
   }
   getTechUserList() {

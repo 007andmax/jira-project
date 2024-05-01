@@ -1,0 +1,38 @@
+@import "./src/assets/styles/variable";
+
+.disabled {
+    background: $gray-50;
+    color: $gray-400;
+
+    &::placeholder {
+        color: $gray-400;
+    }
+}
+
+.icon__active_subscription {
+    background-size: 15px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.priority-dot {
+    margin: 0px !important;
+}
+.priority-item {
+    &:hover {
+        background: $gray-50 !important;
+    }
+}
+.--selected {
+    background: $gray-50;
+    .dropdown-item {
+        background: $gray-50 !important;
+    }
+}
+.selected-priority {
+    position: absolute;
+    top: 16px;
+    left: 12px;
+}
+.qt-dropdown-input {
+    padding: 11px 28px !important;
+}

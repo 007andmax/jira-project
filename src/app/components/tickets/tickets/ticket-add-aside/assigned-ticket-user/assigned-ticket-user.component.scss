@@ -1,0 +1,183 @@
+@import "./src/assets/styles/variable";
+
+.disabled {
+    background: $gray-50;
+    color: $gray-400;
+
+    &::placeholder {
+        color: $gray-400;
+    }
+}
+
+.icon__active_subscription {
+    background-size: 15px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.tech-users-container {
+    .select-wrapper {
+        height: 284px !important;
+        max-height: 586px;
+        overflow: hidden;
+        display: block;
+        width: 100%;
+        box-shadow: unset;
+
+        .content {
+            height: 100%;
+
+            form,
+            .assign-ticket,
+            .assign-ticket-content {
+                height: 100%;
+            }
+
+            .assign-ticket-header {
+                padding: 0 8px;
+                margin-bottom: 14px;
+                margin-top: 4px;
+
+                .form-group {
+                    margin: 0;
+                }
+            }
+
+            .scroll-pane {
+                .user-list.custom-scroll {
+                    padding: 0;
+                }
+            }
+        }
+
+        .users-list {
+            max-height: 230px;
+            max-width: 100%;
+        }
+    }
+}
+
+.tech-user-body {
+    overflow: visible;
+    max-height: 586px !important;
+    width: 480px;
+}
+.tech-users-container {
+    max-height: 586px !important;
+}
+.user-item-detail {
+    display: flex;
+    align-items: center;
+    height: 36px;
+    border-radius: 8px;
+    margin: 4px 0;
+    padding: 0 12px;
+
+    &:hover {
+        background-color: $gray-50;
+    }
+}
+.user-item-user-avatar {
+    width: 20px;
+    height: 20px;
+    color: $white;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 15px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin-right: 8px;
+    border-radius: 50%;
+    min-width: 20px;
+    background-size: cover !important;
+    background-position: center !important;
+}
+.users-list .active {
+    background-color: $gray-50;
+}
+.user-item-user-name {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: $gray-900;
+    margin-right: 4px;
+}
+.user-item-user-email {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: $gray-500;
+}
+.qt-input-search {
+    input {
+        padding: 8px 16px 8px 42px;
+    }
+}
+.assigned-users-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    .default-user-avatar {
+        width: 24px;
+        height: 24px;
+    }
+
+    .assigned-ticket-user__item {
+        padding: 6px 8px;
+        border-radius: 6px;
+        border: 1px solid #EAECF0;
+        display: flex;
+        align-items: center;
+        position: relative;
+        cursor: pointer;
+        margin: 0px 8px 8px 0px;
+        .assigned-ticket-user__checkmark {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+
+            &:before {
+                position: absolute;
+                content: "";
+                width: 20px;
+                height: 20px;
+                border: 1px solid $gray-200;
+                background: $white;
+                border-radius: 50%;
+                background-size: contain;
+            }
+        }
+
+        input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+
+            &:checked~.assigned-ticket-user__checkmark {
+                &:before {
+                    background-image: url("/assets/img/icons/selected.svg");
+                    border: none;
+                }
+            }
+        }
+    }
+}
+.assigned-users-type {
+    display: flex;
+    flex-wrap: wrap;
+}
+.assigned-ticket-user__name {
+    font-size: 14px;
+    color: $gray-600;
+    font-weight: 400;
+}
