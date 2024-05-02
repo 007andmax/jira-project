@@ -28,7 +28,6 @@ export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
       this.onScroll();
     });
     this.sub.add(subscription);
-
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_RECORD) this.onRemoveRecord(this.passwordManagerStateService.getRecordForRemove().id);

@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { REMOVE_CREDENTIAL } from 'src/app/const/confirm';
 import { PasswordManagerService } from 'src/app/services/password-manager/password-manager.service';
@@ -39,9 +38,10 @@ export class NetworkScanCredentialsAsideComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.container = this.elRef.nativeElement.querySelector(".contracts-page-scroll-content");
     this.elRef.nativeElement.querySelector(".contracts-page-scroll-content").scrollTo(0, 0);
-    this.networkScanStateService.getOnOpenAside().subscribe(data => {
+    let getOnOpenAside = this.networkScanStateService.getOnOpenAside().subscribe(data => {
       this.open = true;
     })
+    this.sub.add(getOnOpenAside);
     this.filter.setCompany({ id: this.companyId });
     this.onScroll();
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {

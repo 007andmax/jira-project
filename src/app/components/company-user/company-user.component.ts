@@ -1,29 +1,23 @@
 import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { UserListService } from '../users/services/user-list.service';
 import { User } from '../users/class/user';
-import { Company } from '../../interfaces/company/company';
-import { UserFilter } from '../users/class/user-filter';
 import { UsersStateService } from '../../states/users/users-state.service';
 import { CompaniesStateService } from '../../states/company/companies-state.service';
 import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
 import { UsersService } from '../../services/users/users.service';
 import { DraftEmailStateService } from '../../states/draft-email/draft-email-state.service';
-import { WebsocketService } from '../../services/websocket/websocket.service';
 import { ARCHIVE_USER, DEARCHIVE_USER } from '../../const/confirm';
 import { UserChange } from '../users/class/user-change';
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
 import { UsersHeaderComponent } from '../users/users-header/users-header.component';
 import { MODE_USERS_LIST, TYPE_LIST_COMPANY_USERS } from '../../const/users';
 import { ActivatedRoute } from '@angular/router';
-import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
 import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
 import { UserCustomSubscription } from '../users/class/user-custom-subscription';
-import { UserDefaultSubscription } from '../users/class/user-default-subscription';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { CrmCompanyJobTitle } from '../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
 import { MarketingSubscriptionType } from '../setting/marketing-email/marketing-subscription-type/class/marketing-subscription-type';
-import { CrmCompanyIndustry } from '../setting/crm-settings/crm-company-industry/class/crm-company-industry';
 import { UserCustomerCompaniesInfo } from '../users/class/user-customer-companies-info';
 import { Subscription } from 'rxjs';
 import { UserFilters } from '../users/class/user-filters';
@@ -63,7 +57,6 @@ export class CompanyUserComponent implements OnInit {
     private draftEmailStateService: DraftEmailStateService,
     private leftPanelStateService: LeftPanelStateService,
     private usersRealTimeService: UsersRealTimeService,
-    private websocketService: WebsocketService,
     public customerPortalStateService: CustomerPortalStateService,
     private marketingEmailStateService: MarketingEmailStateService) { }
 
@@ -95,7 +88,7 @@ export class CompanyUserComponent implements OnInit {
       this.onScroll();
       this.cd.detectChanges();
     })
-    this.userListService.addSubscription(geLefttFilter);
+    this.sub.add(geLefttFilter);
     let onUsersFilters = this.customerPortalStateService.onUsersFilters.subscribe(data => {
       document.body.querySelector(".main-container").scrollTo(0, 0);
       this.showPreloader = true;
@@ -106,7 +99,7 @@ export class CompanyUserComponent implements OnInit {
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       if (id) this.onInitFilters(id);
     })
-    this.userListService.addSubscription(getOnCompanies);
+    this.sub.add(getOnCompanies);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === ARCHIVE_USER) {
@@ -117,7 +110,7 @@ export class CompanyUserComponent implements OnInit {
         }
       }
     })
-    this.userListService.addSubscription(getConfirm);
+    this.sub.add(getConfirm);
     let getChangeCompanies = this.usersStateService.getChangeUsers().subscribe((data: UserChange) => {
       if (data.action === 'USER_SAVED' || data.action === 'USER_ARCHIVED') {
         const userIndex = this.users.findIndex((item) => item.id === data.data.id);
@@ -148,7 +141,7 @@ export class CompanyUserComponent implements OnInit {
       this.header.setUsers(this.users);
       this.cd.detectChanges();
     })
-    this.userListService.addSubscription(getChangeCompanies);
+    this.sub.add(getChangeCompanies);
     this.jobTitleList = this.crmStateService.getJobTitleList();
     let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
       this.jobTitleList = data;
@@ -317,6 +310,7 @@ export class CompanyUserComponent implements OnInit {
     this.draftEmailStateService.resetSelectedUsers();
     this.usersStateService.clearGlobalFilter();
     this.companiesStateService.setCompanyRoutingId(null);
+    this.sub.unsubscribe();
   }
 
 }
