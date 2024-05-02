@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { ConstantsStateService } from 'src/app/states/constants/constants-state.service';
@@ -6,6 +6,7 @@ import { DevicesStateService } from 'src/app/states/devices/devices-state.servic
 import { environment } from 'src/environments/environment';
 import { RemoteControlService } from '../../device/_services/remoteControl.service';
 import { DeviceCompany } from '../class/device-company';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-company-devices-remote-access',
@@ -13,7 +14,7 @@ import { DeviceCompany } from '../class/device-company';
   styleUrls: ['./company-devices-remote-access.component.scss'],
   providers: [NgbModalConfig, NgbModal]
 })
-export class CompanyDevicesRemoteAccessComponent implements OnInit {
+export class CompanyDevicesRemoteAccessComponent implements OnInit, OnDestroy {
   @Input() connectionType: string;
   @Input() remoteSessionId: string;
   @Input() device: DeviceCompany;
@@ -23,6 +24,7 @@ export class CompanyDevicesRemoteAccessComponent implements OnInit {
   webserverDomain = environment.webserverDomain;
   sessionId: string;
   isConnection: boolean = false;
+  sub: Subscription = new Subscription();
   constructor(private constantsStateService: ConstantsStateService,
     private devicesStateService: DevicesStateService,
     public activeModal: NgbActiveModal,
@@ -30,9 +32,10 @@ export class CompanyDevicesRemoteAccessComponent implements OnInit {
     private devicesService: DevicesService) { }
 
   ngOnInit() {
-    this.devicesStateService.getOnLaunchRemoteApp().subscribe(data => {
+    let getOnLaunchRemoteApp = this.devicesStateService.getOnLaunchRemoteApp().subscribe(data => {
       if (data === this.sessionId) this.close();
     })
+    this.sub.add(getOnLaunchRemoteApp);
     this.launchRemoteApp();
 
   }
@@ -110,5 +113,8 @@ export class CompanyDevicesRemoteAccessComponent implements OnInit {
   }
   close() {
     this.activeModal.dismiss('Cross click');
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

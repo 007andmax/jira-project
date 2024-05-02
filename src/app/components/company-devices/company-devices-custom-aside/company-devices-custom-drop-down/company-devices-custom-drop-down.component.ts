@@ -1,10 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CompanyTag } from 'src/app/components/companies/company-tags/class/company-tag';
 import { CompanyTagsComponent } from 'src/app/components/companies/company-tags/company-tags.component';
 import { CompanyTagsListService } from 'src/app/components/companies/company-tags/services/company-tags-list.service';
-import { DeviceTag } from 'src/app/components/setting/manage-tags/manage-tags-devices/class/device-tag';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
-import { TicketsFilterDropDownComponent } from 'src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-drop-down/tickets-filter-drop-down.component';
 
 @Component({
   selector: 'app-company-devices-custom-drop-down',
@@ -27,6 +24,7 @@ export class CompanyDevicesCustomDropDownComponent extends CompanyTagsComponent 
       this.reqTags = JSON.parse(JSON.stringify(data));
       this.sortTags();
     })
+    this.sub.add(onGetTags);
   }
   /**
 * @description Sort tags and reqTags list by "name" field

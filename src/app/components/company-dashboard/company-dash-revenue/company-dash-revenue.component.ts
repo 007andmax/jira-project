@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import * as moment from "moment";
 import { Subscription } from 'rxjs';
@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './company-dash-revenue.component.html',
   styleUrls: ['./company-dash-revenue.component.scss']
 })
-export class CompanyDashRevenueComponent implements OnInit {
+export class CompanyDashRevenueComponent implements OnInit, OnDestroy {
 
   _id: string = '';
   month: string = '12';
@@ -26,6 +26,7 @@ export class CompanyDashRevenueComponent implements OnInit {
     public activateRoute: ActivatedRoute,
     public cd: ChangeDetectorRef) { }
 
+
   public ngOnInit() {
     this._id = this.activateRoute.snapshot.params['id'];
     let subscription = this.activateRoute.params.subscribe(params => {
@@ -33,8 +34,6 @@ export class CompanyDashRevenueComponent implements OnInit {
       this.getInvoiceRevenue('12');
     });
     this.sub.add(subscription);
-
-
     this.chartOptions = {
       chart: {
         type: 'pieChart',
@@ -96,9 +95,9 @@ export class CompanyDashRevenueComponent implements OnInit {
     });
     this.sub.add(getRevenue);
   }
-
-
-
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }
 
 export interface InvoiceRevenue {

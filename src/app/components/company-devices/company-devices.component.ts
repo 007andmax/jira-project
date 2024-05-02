@@ -67,7 +67,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
 
     });
     this.sub.add(subscription);
-    this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
+    let changeDevicesArray = this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
       if (newChange.action === 'CUSTOM_DEVICE_SAVED') {
         this.devices.push(new DeviceCompany({ ...newChange.data, isCustom: true }, newChange.data.companyId));
       }
@@ -83,6 +83,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       }
       this.cd.detectChanges();
     })
+    this.sub.add(changeDevicesArray);
     let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
       if (id == newChange.data.clientCompanyId) {
         this.devicesStateService.changeDevice(this.devices, newChange);

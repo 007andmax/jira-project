@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CustomDevice } from './class/custom-device';
 import { ValidateCustomAside } from './class/validate-custom-aside';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
@@ -12,13 +12,14 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { DatePickerComponent } from '../../shared/date-picker/date-picker.component';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-company-devices-custom-aside',
   templateUrl: './company-devices-custom-aside.component.html',
   styleUrls: ['./company-devices-custom-aside.component.scss']
 })
-export class CompanyDevicesCustomAsideComponent implements OnInit {
+export class CompanyDevicesCustomAsideComponent implements OnInit, OnDestroy {
   device: CustomDevice = new CustomDevice();
   assestType: Array<string> = ["Workstation",
     "Router",
@@ -36,6 +37,7 @@ export class CompanyDevicesCustomAsideComponent implements OnInit {
   manufactures: Array<ManufactureDevice> = [];
   validate: ValidateCustomAside = new ValidateCustomAside();
   opened: boolean = false;
+  sub: Subscription = new Subscription();
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   @ViewChild('typeDd') typeDd: DropDownComponent;
   @ViewChild('installDateDP') installDateDP: DatePickerComponent;
@@ -45,22 +47,26 @@ export class CompanyDevicesCustomAsideComponent implements OnInit {
     private companiesState: CompaniesStateService,
     private devicesService: DevicesService) { }
 
+
   ngOnInit() {
     if (this.devicesStateService.getManufactures().length > 0) this.manufactures = this.devicesStateService.getManufactures();
     if (this.devicesStateService.getManufactures().length == 0) this.devicesStateService.initGetManufactures();
-    this.devicesStateService.onGetManufactures.subscribe(data => {
+    let onGetManufactures = this.devicesStateService.onGetManufactures.subscribe(data => {
       this.manufactures = data;
     })
+    this.sub.add(onGetManufactures)
     if (this.deviceTagsStateService.getTags().length > 0) this.tags = this.deviceTagsStateService.getTags();
     let onGetTags = this.deviceTagsStateService.onGetTags.subscribe(data => {
       this.tags = data;
     })
-    this.devicesStateService.onOpenCustomAside.subscribe(data => {
+    this.sub.add(onGetTags);
+    let onOpenCustomAside = this.devicesStateService.onOpenCustomAside.subscribe(data => {
       this.opened = true;
       this.device.setCompanyId(this.companiesState.getCompanyRoutingId());
       this.installDateDP.setEditDate(new Date().getTime());
       this.warrantyDateDP.setEditDate(new Date().getTime());
     })
+    this.sub.add(onOpenCustomAside);
   }
   onSelectTags(data) {
     this.device.setTags(data.map(item => item.id));
@@ -103,5 +109,8 @@ export class CompanyDevicesCustomAsideComponent implements OnInit {
     }, err => {
       this.addBtn.setDisabled(false);
     })
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }
