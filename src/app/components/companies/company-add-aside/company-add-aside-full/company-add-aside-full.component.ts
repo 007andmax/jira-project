@@ -224,8 +224,10 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
     if (this.company.contacts[0].primaryEmail && this.company.contacts[0].primaryEmail.length > 0) this.onCheckValidPrimaryEmail();
   }
   onCheckValidPrimaryEmail() {
+    this.validate.setIsCheckingEmail(true);
     this.usersService.checkValidPrimaryEmail(this.company.contacts[0].primaryEmail, this.companiesStateService.getCurrentCompany().id).subscribe((data: any) => {
       this.validate.setExistPrimaryContactEmail(data.value);
+      this.validate.setIsCheckingEmail(false);
       this.cd.detectChanges();
     })
   }
