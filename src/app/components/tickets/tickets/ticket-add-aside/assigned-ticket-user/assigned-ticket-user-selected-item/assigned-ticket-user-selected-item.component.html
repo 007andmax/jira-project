@@ -7,6 +7,7 @@
     class="assigned-ticket-user__item"
     (mouseenter)="userTooltip.show($event.target)"
     (mouseleave)="userTooltip.hide()"
+    (click)="user.selected = !user.selected"
 >
     <div
         class="qt-circle default-user-avatar"
@@ -23,7 +24,7 @@
     <label class="qt-sz-20 relative">
         <input
             type="checkbox"
-            [(ngModel)]="user.selected"
+            [checked]="user.selected"
         >
         <span class="assigned-ticket-user__checkmark"></span>
     </label>
