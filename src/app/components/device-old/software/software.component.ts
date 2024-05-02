@@ -57,14 +57,10 @@ export class SoftwareComponent implements OnInit, OnDestroy {
   @ViewChild('header') header: SoftwareHeaderComponent;
   dtTrigger = new Subject();
   sub: Subscription = new Subscription();
-  constructor(private softwareListService: SoftwareListService,
-    private toastr: ToastrService,
+  constructor(private toastr: ToastrService,
     private deviceDetailService: DeviceDetailService,
     private hardwareService: HardwareService,
     private router: Router,
-    private excelService: ExcelService,
-    private modalService: NgbModal,
-    private confirmStateService: ConfirmStateService,
     public cd: ChangeDetectorRef,
   ) {
   }

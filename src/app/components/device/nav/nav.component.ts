@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonHttpServices } from './../_services/common_http.service';
 import { CommonServices } from './../_services/common.service';
 import { ToastrService } from 'ngx-toastr';
-import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -23,9 +22,7 @@ export class NavComponent implements OnInit, OnDestroy {
   _id: string = '';
   type: string = '';
   sub: Subscription = new Subscription();
-  constructor(private commonHttpServices: CommonHttpServices,
-    private toastr: ToastrService,
-    public router: Router,
+  constructor(public router: Router,
     public companiesStateService: CompaniesStateService,
     private usersStateService: UsersStateService,
     public commonServices: CommonServices) { }

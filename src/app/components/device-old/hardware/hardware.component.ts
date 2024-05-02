@@ -7,7 +7,6 @@ import { CommonHttpServices } from '../_services/common_http.service';
 import { ExcelService } from '../_services/download_csv.service';
 import { CONFIGCONSTANTS } from '../config/app-constants';
 import { Router } from '@angular/router';
-import * as moment from "moment";
 import { System, Graphics, Motherboard, Bios, Processor, Display, LogicalDisk, Memory, Adapter, DeviceDetail } from './class/system';
 import { HardwareHeaderComponent } from './hardware-header/hardware-header.component';
 declare var $: any;
@@ -48,11 +47,10 @@ export class HardwareComponent implements OnInit {
   @ViewChild('header') header: HardwareHeaderComponent;
   constructor(private hardwareService: HardwareService,
     private toastr: ToastrService,
-    private commonHttpServices: CommonHttpServices,
     private deviceDetailService: DeviceDetailService,
     private router: Router,
     public cd: ChangeDetectorRef,
-    private excelService: ExcelService) { }
+  ) { }
 
   ngOnInit() {
     this.type = window.location.href.split('/')[window.location.href.split('/').length - 2];

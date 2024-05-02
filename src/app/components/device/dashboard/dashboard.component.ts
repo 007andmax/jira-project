@@ -4,7 +4,7 @@ import { UploadInput, UploadFile, humanizeBytes, UploaderOptions } from "ngx-upl
 import { ToastrService } from "ngx-toastr";
 import { CONFIGCONSTANTS } from "../config/app-constants";
 import { environment } from "../../../../environments/environment";
-import { ModalDismissReasons, NgbActiveModal, NgbDatepicker, NgbDropdown, NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
+import { ModalDismissReasons, NgbDatepicker, NgbDropdown, NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 import { NgbDateAdapter, NgbDateParserFormatter } from "@ng-bootstrap/ng-bootstrap";
 import { AgentService } from "src/app/services/agent/agent.service";
 import { Subscription } from "rxjs";
@@ -127,23 +127,27 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this._id = this.activateRoute.snapshot.params["id"];
     this.currentUser = localStorage.getItem("currentUser");
     if (this.agentService.getDataAssetByGuid()) this.getAssetDetail(this.agentService.getDataAssetByGuid());
-    this.agentService.onAssetByGuid.subscribe(data => {
+    let onAssetByGuid = this.agentService.onAssetByGuid.subscribe(data => {
       this.getAssetDetail(data);
     })
+    this.sub.add(onAssetByGuid);
     let onSetAccessToken = this.agentService.onSetAccessToken.subscribe(data => {
       if (this.techCompany) this.getManufacturers(this.techCompany.id);
       if (this.techCompany) this.getModels(this.techCompany.id);
     })
     this.sub.add(onSetAccessToken);
-    this.kafkaStateService.onCurrentConfig.subscribe((resp) => this.onCurrentConfig(resp), this.loading = false, (e) => this.onCurrentConfigError(e));
-    this.kafkaStateService.onInstallWindowsUpdates.subscribe((resp) => this.onInstallWindowsUpdates(resp), (e) => this.onInstallWindowsUpdatesError(e));
+    let onCurrentConfig = this.kafkaStateService.onCurrentConfig.subscribe((resp) => this.onCurrentConfig(resp), this.loading = false, (e) => this.onCurrentConfigError(e));
+    this.sub.add(onCurrentConfig);
+    let onInstallWindowsUpdates = this.kafkaStateService.onInstallWindowsUpdates.subscribe((resp) => this.onInstallWindowsUpdates(resp), (e) => this.onInstallWindowsUpdatesError(e));
+    this.sub.add(onInstallWindowsUpdates);
     if (this.companyStateService.getCurrentCompany()) this.getCurrentCompany(this.companyStateService.getCurrentCompany());
-    this.companyStateService.onCurrentCompany.subscribe((data) => {
+    let onCurrentCompany = this.companyStateService.onCurrentCompany.subscribe((data) => {
       this.getCurrentCompany(data);
       this.techCompany = data;
       if (this.agentService.hasAccessToken()) this.getManufacturers(this.techCompany.id);
       if (this.agentService.hasAccessToken()) this.getModels(this.techCompany.id);
     })
+    this.sub.add(onCurrentCompany);
   }
 
   onCurrentConfig(resp: any) {
@@ -735,9 +739,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     return { updated: update == true, alert: alert == true };
   }
 
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
-  }
 
   getPendingWindowUpdate(template) {
     this.ngZone.run(() => {
@@ -909,4 +910,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.updateAsset();
     }
   }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
 }

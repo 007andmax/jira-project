@@ -1,16 +1,13 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { EventEmitter } from '@angular/core';
-import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions, } from 'ngx-uploader';
 import { HardwareService } from './../_services/hardware.service';
 import { first } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { CONFIGCONSTANTS } from '../config/app-constants';
 import { environment } from '../../../../environments/environment';
 import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
-import { NgbCalendar, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { DeviceDetailService } from '../_services/device_detail.service';
 import { Subscription } from 'rxjs';
-import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import * as moment from "moment";
 
 @Component({

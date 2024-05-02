@@ -1,16 +1,14 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { TerminalService } from '../_services/terminal.service';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { isArray } from 'util';
 import { Subscription } from 'rxjs';
-import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { CONFIGCONSTANTS } from '../config/app-constants';
 import { UserListService } from '../../users/services/user-list.service';
-import { CompaniesRealTimeService } from 'src/app/states/company/companies-real-time.service';
 import { ShellStateService } from 'src/app/states/shell/shell-state.service';
-import { command, script, commandModal, scriptModal } from './../class/device';
+import { command, script, scriptModal } from './../class/device';
 import { TerminalStateService } from '../states/terminal-state.service';
 import { DELETE_COMMAND } from 'src/app/const/confirm';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
@@ -24,7 +22,7 @@ import { TerminalAsideComponent } from './terminal-aside/terminal-aside.componen
   encapsulation: ViewEncapsulation.None,
   providers: [UserListService]
 })
-export class TerminalComponent implements OnInit {
+export class TerminalComponent implements OnInit, OnDestroy {
   submitted = false;
   loading = false;
   sub: Subscription = new Subscription();
@@ -78,6 +76,7 @@ export class TerminalComponent implements OnInit {
     private confirmStateService: ConfirmStateService,
     public cd: ChangeDetectorRef,
   ) { }
+
 
   ngOnInit() {
     this.type = window.location.href.split('/')[window.location.href.split('/').length - 2];
@@ -328,5 +327,8 @@ export class TerminalComponent implements OnInit {
     this.scriptDetail = !this.scriptDetail;
     this.submitted = false;
     this.openEditCommand(data, type);
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

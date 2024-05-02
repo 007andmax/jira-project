@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonServices } from './../_services/common.service';
 import { Router } from '@angular/router';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { User } from '../../users/class/user';
 import { Company } from 'src/app/interfaces/company/company';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'nav-old',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss']
 })
-export class NavOldComponent implements OnInit {
+export class NavOldComponent implements OnInit, OnDestroy {
 
   appTitle = 'quickHtml';
   currentUser: User;
@@ -19,11 +20,13 @@ export class NavOldComponent implements OnInit {
   deviceType = '';
   _id: string = '';
   type: string = '';
+  sub: Subscription = new Subscription();
   constructor(
     public router: Router,
     public companiesStateService: CompaniesStateService,
     private usersStateService: UsersStateService,
     public commonServices: CommonServices) { }
+
 
   ngOnInit() {
     this.type = window.location.href.split('/')[window.location.href.split('/').length - 2];
@@ -31,13 +34,15 @@ export class NavOldComponent implements OnInit {
     this.deviceType = this.type;
     // this.deviceType = 'printer';
     if (this.usersStateService.getCurrentUser()) this.getCurrentUser(this.usersStateService.getCurrentUser());
-    this.usersStateService.getOnGetCurrentuser().subscribe(data => {
+    let getOnGetCurrentuser = this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.getCurrentUser(data)
     })
+    this.sub.add(getOnGetCurrentuser);
     if (this.companiesStateService.getCurrentCompany()) this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
-    this.companiesStateService.getOnCurrentCompany().subscribe(data => {
+    let getOnCurrentCompany = this.companiesStateService.getOnCurrentCompany().subscribe(data => {
       this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
     })
+    this.sub.add(getOnCurrentCompany);
   }
   private getCurrentUser(data) {
     this.currentUser = data;
@@ -70,5 +75,8 @@ export class NavOldComponent implements OnInit {
   goToTerminal() {
     this.router.navigate(
       [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device-old/terminal/${this.type}/${this._id}`]);
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }
