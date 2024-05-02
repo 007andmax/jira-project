@@ -179,7 +179,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     });
     this.namesTechUsersList = this.getTechUserList();
     this.listTechUsersForAssign = this.getListTechUsersForAssign();
-
+    this.techUsersDp.reset(this.listTechUsersForAssign);
   }
   private getListTechUsersForAssign() {
 
@@ -200,7 +200,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       this.ticketAdd.createdUser.setCompanyId(item.id);
       this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === item.id)));
       this.onGetDevices();
-      let list = this.users.filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === item.id).defaultSubscriptions.ticketManagerSubscription.exist);
+      let list = this.users.filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === item.id).defaultSubscriptions.ticketManagerSubscription.enabled);
       list = list.map(item => {
         let user = new TechUserItem(item);
         return user;
@@ -228,6 +228,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     if (this.deviceDP) this.deviceDP.clearClient();
     this.cd.detectChanges();
     this.listTechUsersForAssign = this.getListTechUsersForAssign();
+    this.techUsersDp.reset(this.listTechUsersForAssign);
   }
   onSelectUser(selectedUser, customerCompany) {
     let shareUser = this.shareUsersList.find(item => item.id === this.ticketAdd.createdUser.id);
@@ -249,6 +250,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       this.onSelectCompany(null);
     }
     this.listTechUsersForAssign = this.getListTechUsersForAssign();
+    this.techUsersDp.reset(this.listTechUsersForAssign);
   }
   onSelectTechUser(item) {
     if (item) {
@@ -267,6 +269,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       this.ticketAdd.clearAssignedUser();
     }
     this.listTechUsersForAssign = this.getListTechUsersForAssign();
+    this.techUsersDp.reset(this.listTechUsersForAssign);
   }
   onSelectDevice(item) {
     if (item) {
@@ -330,12 +333,12 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     data.forEach(item => {
       let shareUser = shareUsersList.find(share => share.id === item.id);
       let user = new TechUserItem(JSON.parse(JSON.stringify(item)));
-      if (shareUser) {
-        user.selected = shareUser.selected;
-      } else if (user.accountType === "TECH") user.selected = true;
+      console.log("user.accountType", user.accountType);
+      if (shareUser && shareUser.selected) user.selected = true;
+      if (user.accountType === "TECH") user.selected = true;
       this.shareUsersList.push(user);
     });
-
+    this.cd.detectChanges();
   }
   public onPastNote(value) {
     this.ticketAdd.note = value;

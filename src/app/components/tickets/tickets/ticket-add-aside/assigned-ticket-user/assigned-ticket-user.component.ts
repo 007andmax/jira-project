@@ -33,17 +33,24 @@ export class AssignedTicketUserComponent extends DropDownComponent {
     if (this.reqList.length === 0) this.reqList = JSON.parse(JSON.stringify(this.list));
     if (this.editItem) this.selectedItem = (this.field) ? this.editItem : this.editItem;
   }
+  public reset(data) {
+    this.list = data;
+    if (this.sort) this.list.sort((a, b) => this.getUserName(a).localeCompare(this.getUserName(b)));
+    this.reqList = JSON.parse(JSON.stringify(this.list));
+    this.ref.markForCheck();
+  }
   public selectItemsWithOutChanges(data) {
     this.isAdd = false;
     this.selectedUsers = data;
     this.ref.markForCheck();
   }
   public selected(user): void {
-    user.selected = !user.selected;
-    this.selectedUsers = this.list.filter(item => item.selected);
+    // user.selected = !user.selected;
+    let index = this.selectedUsers.findIndex(item => item.id == user.id);
+    if (index > -1) this.selectedUsers.splice(index, 1);
+    if (index == -1) this.selectedUsers.push(user);
+    // this.selectedUsers = this.list.filter(item => item.selected);
     this.usersChange.emit(this.selectedUsers);
-    this.userInput.nativeElement.blur();
-    this.userInput.nativeElement.value = "";
   }
   public clearSearch() {
     this.searchText = '';

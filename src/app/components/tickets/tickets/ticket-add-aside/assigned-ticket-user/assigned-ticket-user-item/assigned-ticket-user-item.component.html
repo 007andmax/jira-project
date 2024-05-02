@@ -2,7 +2,7 @@
     class="user-item-detail pointer"
     data-index="1"
     (click)="selected(user)"
-    [ngClass]="(user.selected) ? 'active' : ''"
+    [ngClass]="isSelected(user) ? 'active' : ''"
 >
     <div
         class="user-item-user-avatar"
