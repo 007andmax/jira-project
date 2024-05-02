@@ -177,7 +177,7 @@ export class CompanyValdiate {
         if (!company.domain) this.domain = false;
         if (company.domain && !company.domain.match(this.reDomain)) this.domainValid = false;
         if (company.addresses.length > 0 && company.addresses[0].locationName != undefined && company.addresses[0].locationName.length == 0) this.billindAddress = false;
-        return this.name && this.type && this.primaryPhoneNumber && this.primaryContactEmail && this.phoneNumber && this.firstName && this.domain && this.domainValid && !this.domainIsExist && this.shippingPhoneNumber && this.billindAddress && this.user;
+        return this.name && this.type && this.primaryPhoneNumber && this.primaryContactEmail && this.phoneNumber && this.firstName && this.domain && this.domainValid && !this.domainIsExist && this.shippingPhoneNumber && this.billindAddress && this.user && this.existPrimaryContactEmail;
     }
 
 
