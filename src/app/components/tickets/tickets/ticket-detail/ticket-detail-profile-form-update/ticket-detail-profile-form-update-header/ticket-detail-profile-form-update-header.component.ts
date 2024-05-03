@@ -48,6 +48,7 @@ export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
     } else {
       this.selectedUsers = [];
     }
+    this.ticketProfileFormUpdate.setShares(this.selectedUsers);
   }
   isShowAssignedUser() {
     if (this.tab == "SERVICE") {
@@ -72,6 +73,7 @@ export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
     this.usersForUpdate = this.getUsersForUpdate(this.ticketProfileFormUpdate.noteType);
     this.addAssignedUser.resetList(this.usersForUpdate);
     this.selectedUsers = this.selectedUsers.filter(item => item.accountType !== "CLIENT");
+    this.ticketProfileFormUpdate.setShares(this.selectedUsers);
   }
   getUsersForUpdate(type) {
     let userList = this.usersStateService.getAllUsers();
