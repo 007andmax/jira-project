@@ -11,9 +11,7 @@
 >
     <div
         class="qt-circle default-user-avatar"
-        [ngClass]="{'qt-circle default-user-avatar' : user.avatar,
-                                'default-user-avatar avatar-background-color-odd': !user.avatar
-                            }"
+        [ngClass]="{'avatar-background-color-odd': !user.avatar}"
         [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
         [ngStyle]="{'background': ticketsListService.getStyleAvatar(user,listColorNoAvatar[indexNoAvatar])}"
     ></div>
