@@ -62,17 +62,6 @@
     -webkit-mask-size: contain;
     mask-size: contain;
   }
-  &__assign-user-check {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/save-changes.svg");
-    mask-image: url("/assets/img/icons/save-changes.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
-  }
    &__ticket-note {
     background-image: url("/assets/img/icons/ticket-note.svg");
   }
@@ -545,37 +534,8 @@
   &__export {
     mask-image: url("/assets/img/icons/export-dark.svg");
   }
-  &__add-grey {
-    background-image: url("/assets/img/icons/add-grey.svg");
-  }
-  &__add--grey-500,
-  &__add--white {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/add-grey.svg");
+  &__add {
     mask-image: url("/assets/img/icons/add-grey.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
-  }
-  &__add--white {
-    background-color: $white;
-  }
-  &__plus-gray {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/plus-white.svg");
-    mask-image: url("/assets/img/icons/plus-white.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
-  }
-  &__plus-white {
-    background-image: url("/assets/img/icons/plus-white.svg");
   }
   &__play-script {
     background-color: $gray-500;
@@ -720,7 +680,7 @@
     background-image: url("/assets/img/icons/user-grey.svg");
   }
   &__windows {
-    background-image: url("/assets/img/icons/window.svg");
+    mask-image: url("/assets/img/icons/window.svg");
   }
   &__move {
     background-image: url("/assets/img/icons/move.svg");
@@ -781,16 +741,8 @@
   &__run-script {
     background-image: url("/assets/img/icons/run-script-white.svg");
   }
-  &__save-changes {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/save-changes.svg");
+  &__assign-user-check {
     mask-image: url("/assets/img/icons/save-changes.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
   }
   &__start {
     background-image: url("/assets/img/icons/start.svg");
@@ -826,9 +778,6 @@
   }
   &__quicktech-logo-mini {
     background-image: url("/assets/img/icons-left-sidebar/quicktech-logo-mini.svg");
-  }
-  &__add-product {
-    background-image: url("/assets/img/icons/add-product.svg");
   }
   &__filter-lines {
     mask-image: url("/assets/img/icons/filter-lines.svg");
@@ -1128,7 +1077,7 @@
     background-image: url("/assets/img/icons/quick-connect.svg");
   }
   &__go-to {
-    background-image: url("/assets/img/icons/go-to.svg");
+    mask-image: url("/assets/img/icons/go-to.svg");
   }
   &__network {
     background-image: url("/assets/img/icons/network.svg");

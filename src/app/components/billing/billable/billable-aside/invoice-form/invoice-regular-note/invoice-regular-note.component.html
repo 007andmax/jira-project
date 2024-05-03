@@ -34,19 +34,22 @@
                     (onSelectedItem)="onSelectNotes($event)"
                 ></app-invoice-select-note>
                 <div
-                    class="qt-square-btn --done qt-ml-8"
+                    class="qt-square-btn qt-ml-8"
                     (click)="onUpdateRegularNote()"
                     *ngIf="changeRegularNote"
                     placement="top"
                     ngbTooltip="Edit Note"
-                ></div>
+                >
+                  <div class="qt-icon qt-icon__assign-user-check qt-icon__white qt-sz-16"></div>
+                </div>
                 <div
-                    class="qt-square-btn --add qt-ml-8"
+                    class="qt-square-btn qt-ml-8"
                     placement="top"
                     ngbTooltip="Add Note"
                     id="dropdownAddNote"
                     ngbDropdownToggle
                 >
+                    <div class="qt-icon icon__add qt-icon__white qt-sz-16"></div>
                     <div
                         class="billable-popup-add-note"
                         ngbDropdownMenu

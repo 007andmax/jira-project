@@ -79,7 +79,7 @@
                     class="add-btn"
                     (click)="openAddModal();"
                 >
-                  <span class="icon__add--white qt-sz-16 qt-bg-contain qt-dib"></span>
+                  <span class="qt-icon icon__add qt-sz-16 qt-icon__white qt-dib"></span>
                 </a>
                 <!-- Modal Add New Command -->
                 <div
@@ -134,10 +134,7 @@
                                                 readonly
                                                 [class.validation-error]="submitted == true && Category.errors && Category.errors.required"
                                             >
-                                            <img
-                                                class="icn-sm report-caret-icon"
-                                                src="/html/assets/img/icons/save-changes.svg"
-                                            >
+                                            <div class="qt-icon icon__assign-user-check qt-icon__white qt-sz-14 icn-sm report-caret-icon"></div>
                                             <div
                                                 ngbDropdownMenu
                                                 aria-labelledby="dropdownBasic1"
@@ -180,10 +177,7 @@
                                                 readonly
                                                 [class.validation-error]="submitted == true && scriptType.errors && scriptType.errors.required"
                                             >
-                                            <img
-                                                class="icn-sm report-caret-icon"
-                                                src="/html/assets/img/icons/save-changes.svg"
-                                            >
+                                            <div class="qt-icon icon__assign-user-check qt-icon__white qt-sz-14 icn-sm report-caret-icon"></div>
                                             <div
                                                 ngbDropdownMenu
                                                 aria-labelledby="dropdownType1"
@@ -455,10 +449,7 @@
                                                         name="my_category"
                                                         readonly
                                                     >
-                                                    <img
-                                                        class="icn-sm report-caret-icon"
-                                                        src="/html/assets/img/icons/save-changes.svg"
-                                                    >
+                                                    <div class="qt-icon icon__assign-user-check qt-icon__white qt-sz-14 icn-sm report-caret-icon"></div>
                                                     <div
                                                         ngbDropdownMenu
                                                         aria-labelledby="dropdownBasic2"
@@ -560,10 +551,7 @@
                                                         name="shared_category"
                                                         readonly
                                                     >
-                                                    <img
-                                                        class="icn-sm report-caret-icon"
-                                                        src="/html/assets/img/icons/save-changes.svg"
-                                                    >
+                                                    <div class="qt-icon icon__assign-user-check qt-icon__white qt-sz-14 icn-sm report-caret-icon"></div>
                                                     <div
                                                         ngbDropdownMenu
                                                         aria-labelledby="dropdownBasic2"
@@ -762,10 +750,7 @@
                                             readonly
                                             [class.validation-error]="Category1.errors && Category1.errors.required"
                                         >
-                                        <img
-                                            class="icn-sm report-caret-icon"
-                                            src="/html/assets/img/icons/save-changes.svg"
-                                        >
+                                        <div class="qt-icon icon__assign-user-check qt-icon__white qt-sz-14 icn-sm report-caret-icon"></div>
                                         <div
                                             ngbDropdownMenu
                                             aria-labelledby="dropdownBasic1"
@@ -802,10 +787,7 @@
                                             readonly
                                             [class.validation-error]="scriptType1.errors && scriptType1.errors.required"
                                         >
-                                        <img
-                                            class="icn-sm report-caret-icon"
-                                            src="/html/assets/img/icons/save-changes.svg"
-                                        >
+                                        <div class="qt-icon icon__assign-user-check qt-icon__white qt-sz-14 icn-sm report-caret-icon"></div>
                                         <div
                                             ngbDropdownMenu
                                             aria-labelledby="dropdownType2"
@@ -1019,11 +1001,7 @@
                                     data-tooltip="Edit"
                                     (click)="updateCategory(category, i)"
                                 >
-                                    <img
-                                        src="/html/assets/img/icons/save-changes.svg"
-                                        alt="save-changes"
-                                        title="save-changes"
-                                    >
+                                    <span class="qt-icon icon__assign-user-check qt-icon__white qt-sz-16"></span>
                                 </a>
                                 <a
                                     *ngIf="category.create"
@@ -1032,11 +1010,7 @@
                                     data-tooltip="Add"
                                     (click)="createCategory(category)"
                                 >
-                                    <img
-                                        src="/html/assets/img/icons/save-changes.svg"
-                                        alt="save-changes"
-                                        title="save-changes"
-                                    >
+                                  <span class="qt-icon icon__assign-user-check qt-icon__white qt-sz-16"></span>
                                 </a>
                                 <a
                                     *ngIf="!category.edit && !category.create"
@@ -1075,7 +1049,7 @@
                         class="btn btn-small"
                         (click)="addNewCategory()"
                     >
-                        <span class="icon__add--white qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
+                        <span class="qt-icon icon__add qt-sz-16 qt-icon__white qt-dib qt-mr-8"></span>
                         Add New Category
                     </button>
                 </div>

@@ -526,25 +526,20 @@ button.qt-button.--gray:focus {
 }
 
 .qt-square-btn {
+  position: relative;
   width: 40px;
   height: 40px;
   border-radius: 4px;
-  background-color: $gray-500;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: $gray-500;
   color: $white;
   font-size: 21px;
   background-repeat: no-repeat;
   background-position: center;
   background-size: 16px;
   cursor: pointer;
-  &.--add {
-    background-image: url("/assets/img/icons/plus-white.svg");
-  }
-  &.--done {
-    background-image: url("/assets/img/icons/save-changes.svg");
-  }
 }
 
 .qt-switch {

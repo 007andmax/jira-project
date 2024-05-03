@@ -46,7 +46,7 @@
                     (click)="onCreateProduct()"
                     *ngIf="getPermissions('MANAGE_PRODUCTS')"
                 >
-                    <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-4 qt-button-icon"></span>
+                    <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-4 qt-button-icon"></span>
                     Create Product
                 </div>
             </div>
@@ -81,7 +81,7 @@
                             {{item.name}}
                             <span *ngIf="item.products.length">({{item.products.length}})</span>
                         </div>
-                        <div class="icon__add-grey qt-sz-16"></div>
+                        <div class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8 qt-sz-16"></div>
                     </button>
                 </ng-template>
                 <ng-template ngbPanelContent>
@@ -107,7 +107,7 @@
                                 #pointerTooltip
                             ></app-dynamic-tooltip>
                             <div
-                                class="icon__add-grey qt-sz-16 qt-bg-contain"
+                                class="t-icon icon__add-grey qt-sz-16"
                                 (mouseenter)="pointerTooltip.show($event.target)"
                                 (mouseleave)="pointerTooltip.hide()"
                             ></div>
