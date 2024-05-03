@@ -33,13 +33,22 @@ export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
 
 
   ngOnInit() {
-    let users = this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === this.ticketProfile.company.id));
-    this.selectedUsers = [this.ticketProfile.createdUser, ...users.filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.ticketProfile.company.id).defaultSubscriptions.ticketManagerSubscription.enabled).map(item => new CurrentUser(item))]
-    this.selectedUsers = this.selectedUsers.filter((item, pos) => this.selectedUsers.findIndex(accountItem => accountItem.id == item.id) == pos);
+    this.setTab(this.tab);
     this.usersForUpdate = this.getUsersForUpdate(this.ticketProfileFormUpdate.noteType);
     this.usersForUpdate = this.getUsersForUpdate(this.ticketProfileFormUpdate.noteType);
     this.listTechUsers = this.getUsersForUpdate("PRIVATE");
     if (this.tab == "SERVICE" || this.tab == "PRODUCT") this.ticketProfileFormUpdate.setTechUser(this.currentUser);
+  }
+  public setTab(data) {
+    this.tab = data;
+    if (this.tab == "NOTE") {
+      let users = this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === this.ticketProfile.company.id));
+      this.selectedUsers = [this.ticketProfile.createdUser, ...users.filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.ticketProfile.company.id).defaultSubscriptions.ticketManagerSubscription.enabled).map(item => new CurrentUser(item))]
+      this.selectedUsers = this.selectedUsers.filter((item, pos) => this.selectedUsers.findIndex(accountItem => accountItem.id == item.id) == pos);
+    } else {
+      this.selectedUsers = [];
+    }
+    this.ticketProfileFormUpdate.setShares(this.selectedUsers);
   }
   isShowAssignedUser() {
     if (this.tab == "SERVICE") {
@@ -63,6 +72,8 @@ export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
     this.ticketProfileFormUpdate.setNoteType(data);
     this.usersForUpdate = this.getUsersForUpdate(this.ticketProfileFormUpdate.noteType);
     this.addAssignedUser.resetList(this.usersForUpdate);
+    this.selectedUsers = this.selectedUsers.filter(item => item.accountType !== "CLIENT");
+    this.ticketProfileFormUpdate.setShares(this.selectedUsers);
   }
   getUsersForUpdate(type) {
     let userList = this.usersStateService.getAllUsers();

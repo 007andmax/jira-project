@@ -333,6 +333,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     data.forEach(item => {
       let shareUser = shareUsersList.find(share => share.id === item.id);
       let user = new TechUserItem(JSON.parse(JSON.stringify(item)));
+      user.setIndexNoAvatar(item.indexNoAvatar);
       if (shareUser && shareUser.selected) user.selected = true;
       if (user.accountType === "TECH") user.selected = true;
       this.shareUsersList.push(user);

@@ -12,13 +12,11 @@ export class AssignedTicketUserItemComponent implements OnInit {
   @Output() onSelect = new EventEmitter<any>();
   @Input() user: User;
   @Input() selectedUsers = [];
-  indexNoAvatar: number = 0;
   listColorNoAvatar = [];
   constructor(public ticketsListService: TicketsListService,) { }
 
   ngOnInit() {
     this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
-    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
   }
   selected(user) {
     this.onSelect.emit(user);

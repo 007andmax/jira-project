@@ -10,13 +10,11 @@ import { TicketsListService } from '../../../services/tickets-list.service';
 })
 export class AssignedTicketUserSelectedItemComponent implements OnInit {
   @Input() user: User;
-  indexNoAvatar: number = 0;
   listColorNoAvatar = [];
   constructor(public ticketsListService: TicketsListService,) { }
 
   ngOnInit() {
     this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
-    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
   }
 
 }

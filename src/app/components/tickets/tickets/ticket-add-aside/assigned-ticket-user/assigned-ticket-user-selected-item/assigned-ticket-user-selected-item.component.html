@@ -13,7 +13,7 @@
         class="qt-circle default-user-avatar"
         [ngClass]="{'avatar-background-color-odd': !user.avatar}"
         [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
-        [ngStyle]="{'background': ticketsListService.getStyleAvatar(user,listColorNoAvatar[indexNoAvatar])}"
+        [ngStyle]="{'background': ticketsListService.getStyleAvatar(user,listColorNoAvatar[user.indexNoAvatar])}"
     ></div>
     <div
         class="assigned-ticket-user__name qt-ml-4 qt-mr-4"
