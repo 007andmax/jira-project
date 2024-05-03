@@ -27,6 +27,7 @@ import { TicketsListService } from '../../services/tickets-list.service';
 import { TicketProfileFormUpdate } from '../../ticket-edit-aside/class/ticket-profile-form-update';
 import { TicketStateService } from '../../ticket-edit-aside/services/ticket-state.service';
 import { TicketProfileFormUpdateNoteListComponent } from '../ticket-profile-form-update-note-list/ticket-profile-form-update-note-list.component';
+import { TicketDetailProfileFormUpdateHeaderComponent } from './ticket-detail-profile-form-update-header/ticket-detail-profile-form-update-header.component';
 
 @Component({
   selector: 'ticket-detail-profile-form-update',
@@ -36,6 +37,7 @@ import { TicketProfileFormUpdateNoteListComponent } from '../ticket-profile-form
 export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy {
   ticketProfile: TicketProfile = new TicketProfile();
   ticketProfileFormUpdate: TicketProfileFormUpdate = new TicketProfileFormUpdate();
+  @ViewChild('updateHeader') updateHeader: TicketDetailProfileFormUpdateHeaderComponent;
   @ViewChild('update_closeBtn') update_closeBtn: DisabledBtnDirective;
   @ViewChild('updateBtn') updateBtn: DisabledBtnDirective;
   @ViewChild('addMoreMobileBtn') addMoreMobileBtn: DisabledBtnDirective;
@@ -233,9 +235,11 @@ export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy
   }
   public setTab(data) {
     this.tab = data;
+    if (this.updateHeader) this.updateHeader.setTab(this.tab);
     this.ticketProfileFormUpdate.setType(data);
     this.ticketProfileFormUpdate.clearShares();
     if (this.tab === 'NOTE' && this.noteList && this.ticketProfile.id) this.noteList.onGetNoteList()
+
   }
 
   onChangeProducts(data) {
