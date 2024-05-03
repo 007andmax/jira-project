@@ -29,6 +29,8 @@ import { UserCustomerCompaniesDefaultSubscribtionAdd } from '../class/user-custo
 import { TechUsersService } from 'src/app/services/setting/tech-users.service';
 import { UsersCheckUseComponent } from '../users-check-use/users-check-use.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
+import { UserCustomerCompaniesInfo } from '../class/user-customer-companies-info';
 
 @Component({
   selector: 'app-users-table',
@@ -68,6 +70,7 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     private permissionsService: PermissionsService,
     private techUsersService: TechUsersService,
     public customerPortalStateService: CustomerPortalStateService,
+    private usersRealTimeService: UsersRealTimeService,
     private elRef: ElementRef) { }
 
 
@@ -149,6 +152,17 @@ export class UsersTableComponent implements OnInit, OnDestroy {
       this.cd.markForCheck();
     })
     this.defaultSubscriptions = (this.companyId) ? this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).defaultSubscriptions : new UserDefaultSubscription(null);
+    let stompClient = this.usersRealTimeService.changeSubscriptionsUsers.subscribe(newChange => {
+
+      if (newChange.action === 'DEFAULT_SUBSCRIPTION_SAVED') {
+        if (this.user.id == newChange.data.userId && this.companyId == newChange.data.companyId) {
+          this.defaultSubscriptions = new UserDefaultSubscription(newChange.data.defaultSubscriptions);
+        }
+        this.cd.detectChanges();
+      }
+      this.cd.detectChanges();
+    });
+    this.sub.add(stompClient);
   }
   delete() {
     if (this.user.customerCompaniesInfo.find(item => item.isPrimaryContact)) {
