@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { User } from 'src/app/components/users/class/user';
 import { TicketsListService } from '../../../services/tickets-list.service';
+import { TechUserItem } from 'src/app/components/shared/tech-users/class/tech-user-item';
 
 @Component({
   selector: 'app-assigned-ticket-user-item',
@@ -10,7 +11,7 @@ import { TicketsListService } from '../../../services/tickets-list.service';
 })
 export class AssignedTicketUserItemComponent implements OnInit {
   @Output() onSelect = new EventEmitter<any>();
-  @Input() user: User;
+  @Input() user: TechUserItem;
   @Input() selectedUsers = [];
   listColorNoAvatar = [];
   constructor(public ticketsListService: TicketsListService,) { }
