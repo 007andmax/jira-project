@@ -28,7 +28,7 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
   assignedUser: User;
   requestedUser: User;
   indexNoAvatar: number = 0;
-  listColorNoAvatar = ['#0cdeaa', '#16a4fa', '#7c77cb', '#ffb937'];
+  listColorNoAvatar = [];
   sub: Subscription = new Subscription();
   constructor(public usersStateService: UsersStateService,
     public ticketsListService: TicketsListService,
@@ -36,7 +36,8 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 3);
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
     let getOnUsers = this.usersStateService.getOnUsers().subscribe(data => {
       this.assignedUser = this.usersStateService.getAllUsers().find(item => item.id === this.ticket.assignedUserId);
       this.requestedUser = this.usersStateService.getAllUsers().find(item => item.id === this.ticket.createdUserId);

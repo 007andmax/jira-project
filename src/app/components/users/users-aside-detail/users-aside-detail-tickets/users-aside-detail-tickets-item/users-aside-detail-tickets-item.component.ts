@@ -17,7 +17,6 @@ export class UsersAsideDetailTicketsItemComponent implements OnInit {
   @Input() listColors: Array<StatusColor> = [];
   @Input() selected: boolean = false;
   @Input() ticketsStatus: Array<TicketStatus> = [];
-  listColorNoAvatar = ['#0cdeaa', '#16a4fa', '#7c77cb', '#ffb937'];
 
   constructor(public ticketsListService: TicketsListService,) { }
 

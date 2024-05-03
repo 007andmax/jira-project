@@ -23,7 +23,7 @@ export class InventoryCheckUseComponent implements OnInit, OnDestroy {
   @Input() agreements: Array<InventoryAgreement> = [];
   showPreloader: boolean = true;
   valid: boolean = false;
-  listColorNoAvatar = ['#0cdeaa', '#16a4fa', '#7c77cb', '#ffb937'];
+  listColorNoAvatar = [];
   sub: Subscription = new Subscription();
   constructor(private contractsService: ContractsService,
     private inventoryStateService: InventoryStateService,
@@ -36,6 +36,7 @@ export class InventoryCheckUseComponent implements OnInit, OnDestroy {
     private productService: ProductService) { }
 
   ngOnInit() {
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
     this.productService.validateproductForRemove(this.inventory.versionedId.id).subscribe((data: any) => {
       this.getAgreements(data);
     })
@@ -49,7 +50,7 @@ export class InventoryCheckUseComponent implements OnInit, OnDestroy {
   }
   getAgreements(data) {
     this.valid = data.valid;
-    if (!data.valid) this.agreements = data.agreements.map(item => new InventoryAgreement(item, this.ticketsListService.randomInteger(0, 3))).sort((a, b) => (this.getCompanyName(a.companyId).toLowerCase() > this.getCompanyName(b.companyId).toLowerCase()) ?
+    if (!data.valid) this.agreements = data.agreements.map(item => new InventoryAgreement(item, this.ticketsListService.randomInteger(0, 6))).sort((a, b) => (this.getCompanyName(a.companyId).toLowerCase() > this.getCompanyName(b.companyId).toLowerCase()) ?
       1 : ((this.getCompanyName(b.companyId).toLowerCase() > this.getCompanyName(a.companyId).toLowerCase()) ? -1 : 0));;
     this.showPreloader = false;
   }

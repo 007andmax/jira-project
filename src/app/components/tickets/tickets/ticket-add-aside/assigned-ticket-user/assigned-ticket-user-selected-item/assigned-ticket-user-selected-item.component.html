@@ -1,0 +1,29 @@
+<app-dynamic-tooltip
+    [content]="user.firstName + ' ' + user.lastName"
+    [position]="'top'"
+    #userTooltip
+></app-dynamic-tooltip>
+<div
+    class="assigned-ticket-user__item"
+    (mouseenter)="userTooltip.show($event.target)"
+    (mouseleave)="userTooltip.hide()"
+    (click)="user.selected = !user.selected"
+>
+    <div
+        class="qt-circle default-user-avatar"
+        [ngClass]="{'avatar-background-color-odd': !user.avatar}"
+        [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+        [ngStyle]="{'background': ticketsListService.getStyleAvatar(user,listColorNoAvatar[indexNoAvatar])}"
+    ></div>
+    <div
+        class="assigned-ticket-user__name qt-ml-4 qt-mr-4"
+        [textContent]="user.firstName + ' ' + user.lastName"
+    ></div>
+    <label class="qt-sz-20 relative">
+        <input
+            type="checkbox"
+            [checked]="user.selected"
+        >
+        <span class="assigned-ticket-user__checkmark"></span>
+    </label>
+</div>

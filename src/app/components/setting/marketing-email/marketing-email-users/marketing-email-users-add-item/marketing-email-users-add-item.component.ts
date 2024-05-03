@@ -12,18 +12,13 @@ import { User } from 'src/app/components/users/class/user';
 export class MarketingEmailUsersAddItemComponent implements OnInit {
   @Input() user: User;
   indexNoAvatar: number = 0;
-  listColorNoAvatar = ['#2BC7C6',
-    '#7839EE',
-    '#FFB937',
-    '#155EEF',
-    '#D92D20',
-    '#2EC866',
-    '#16A4FA'];
+  listColorNoAvatar = [];
   @Output() onSelect: EventEmitter<any> = new EventEmitter();
   constructor(public cd: ChangeDetectorRef,
     public ticketsListService: TicketsListService,) { }
 
   ngOnInit() {
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
     this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
   }
   selectUser() {

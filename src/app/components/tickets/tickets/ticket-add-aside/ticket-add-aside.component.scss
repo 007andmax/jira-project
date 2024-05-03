@@ -27,16 +27,33 @@
     display: none;
   }
 }
-
+.qt-aside-modern {
+  width: 480px !important;
+}
 .qt-aside {
   &__title {
-    margin-right: 24px;
+    margin-right: 8px;
   }
 
   &__ticket-name {
-    @include сaption-l__sb;
-    color: $gray-600;
-    margin-right: 16px;
+    @include body-r__m;
+    color: $gray-700;
+    padding: 2px 12px 2px 12px;
+    background-color: $gray-100;
+    border-radius: 24px;
+    span {
+      position: relative;
+      &:after {
+        content: " ";
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background-color: $gray-400;
+        top: calc(50% - 2px);
+        left: -6px;
+      }
+    }
   }
 
   .create-ticket-btn {
@@ -164,5 +181,13 @@
 .qt-input-block__label {
   &::after {
     display: none;
+  }
+}
+.qt-aside-modern__footer {
+  box-shadow: 0px -2px 4px rgba(16, 24, 40, 0.05);
+  padding: 18px 32px;
+
+  .qt-button {
+    height: 36px;
   }
 }
