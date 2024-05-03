@@ -68,5 +68,7 @@ export class AssignedTicketUserComponent extends DropDownComponent {
   public getUserName(user) {
     return (user) ? `${user.firstName} ${user.lastName}` : '';
   }
-
+  public trackByIndex(index, item) {
+    return index;
+  }
 }
