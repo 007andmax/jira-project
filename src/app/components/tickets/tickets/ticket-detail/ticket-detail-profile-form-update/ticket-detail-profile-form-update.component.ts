@@ -235,11 +235,11 @@ export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy
   }
   public setTab(data) {
     this.tab = data;
-    if (this.updateHeader) this.updateHeader.setTab(this.tab);
+
     this.ticketProfileFormUpdate.setType(data);
     this.ticketProfileFormUpdate.clearShares();
     if (this.tab === 'NOTE' && this.noteList && this.ticketProfile.id) this.noteList.onGetNoteList()
-
+    if (this.updateHeader) this.updateHeader.setTab(this.tab);
   }
 
   onChangeProducts(data) {
