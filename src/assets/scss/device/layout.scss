@@ -590,11 +590,18 @@
             left: -30px;
             content: "";
             position: absolute;
-            background: url("../../../assets/img/icons/task-pending.svg") no-repeat center;
+            mask-image: url("../../../assets/img/icons/task-pending.svg");
+            background-color: $green-600;
+            mask-repeat: no-repeat;
+            mask-position: center;
+            mask-size: contain;
           }
           &.complete {
             &::before {
-              background: url("../../../assets/img/icons/task-completed.svg") no-repeat center;
+              mask-image: url("../../../assets/img/icons/task-completed.svg") no-repeat center;
+              background-color: $green-600;
+              mask-size: contain;
+              mask-repeat: no-repeat;
             }
           }
           h5 {

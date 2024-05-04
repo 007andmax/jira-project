@@ -39,7 +39,7 @@
             ></i>
             <i
                 [hidden]="addTask.status != 'COMPLETED'"
-                class="icon__task-pending icn-20"
+                class="qt-icon icon__task-pending qt-icon__green-600 icn-20"
                 (click)="setStatus(addTask,'INCOMPLETED')"
                 (mouseenter)="incomplete.show($event.target)"
                 (mouseleave)="incomplete.hide()"
@@ -105,7 +105,7 @@
             ></i>
             <i
                 [hidden]="item.status != 'COMPLETED'"
-                class="icon__task-pending icn-20"
+                class="qt-icon icon__task-pending qt-icon__green-600 icn-20"
                 (click)="setStatus(item,'INCOMPLETED');onEditTicketTask(item)"
                 (mouseenter)="incomplete.show($event.target)"
                 (mouseleave)="incomplete.hide()"
