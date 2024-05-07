@@ -19,8 +19,7 @@ export class DocumentPreviewComponent implements OnInit {
   document: Document;
   body: any;
   sub: Subscription = new Subscription();
-  constructor(private documentsStateService: DocumentsStateService,
-    private elRef: ElementRef,
+  constructor(private elRef: ElementRef,
     private permissionsService: PermissionsService,
     public activateRoute: ActivatedRoute,
     public cd: ChangeDetectorRef,

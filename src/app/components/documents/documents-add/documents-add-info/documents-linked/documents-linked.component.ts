@@ -1,5 +1,5 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Company } from 'src/app/interfaces/company/company';
@@ -13,7 +13,7 @@ import { DocumentCompanyUser } from '../../class/document-company-user';
   templateUrl: './documents-linked.component.html',
   styleUrls: ['./documents-linked.component.scss']
 })
-export class DocumentsLinkedComponent implements OnInit {
+export class DocumentsLinkedComponent implements OnInit, OnDestroy {
   selectable = true;
   removable = true;
   addOnBlur = true;
@@ -116,4 +116,9 @@ export class DocumentsLinkedComponent implements OnInit {
   public trackByIndex(index, item) {
     return index;
   }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
 }
