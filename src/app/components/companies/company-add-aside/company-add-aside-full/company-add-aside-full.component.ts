@@ -171,12 +171,14 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
   }
   onSelectUser(item) {
     if (item) {
-      let indexhUser = this.users.findIndex(user => `${user.firstName} ${user.lastName}` === item);
-      if (indexhUser > -1) this.company.contacts[0].setId(this.users[indexhUser].id);
+      this.company.contacts[0].setId(item.id);
       this.validate.resetUser();
     } else {
       this.company.contacts[0].setId(null);
     }
+    this.validate.resetFirstName();
+    this.validate.resetPrimaryContactEmail();
+    this.validate.resetExistPrimaryContactEmail();
   }
   public onSelectCompanyTypes(type) {
     if (type) this.company.clientType = type.value;

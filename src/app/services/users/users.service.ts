@@ -190,6 +190,7 @@ export class UsersService {
       }));
   }
   public onDeArchiveUsers(archivedUserId) {
+    this.appStateService.setServerError(true);
     return this.http.post(this.apiUrl + `users/dearchive`, { "archivedUserId": archivedUserId });
   }
 
