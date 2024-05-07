@@ -132,6 +132,7 @@ import { TicketsFilterSaveModule } from './components/tickets/tickets/tickets-he
 import { DeviceTagPipe } from './pipe/device-tag.pipe';
 import { MarketingSubscriptionsAsideModule } from './components/marketing/marketing-subscriptions-aside/marketing-subscriptions-aside.module';
 import { ManufacturesCheckUseComponent } from './components/setting/device-setting/manufactures-check-use/manufactures-check-use.component';
+import { UserDeArchiveNotificationComponent } from './components/users/user-de-archive-notification/user-de-archive-notification.component';
 declare var $: any;
 
 /**
@@ -160,7 +161,8 @@ declare var $: any;
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
     CannedResponsesAsideComponent,
-    ManufacturesCheckUseComponent
+    ManufacturesCheckUseComponent,
+    UserDeArchiveNotificationComponent
   ],
   imports: [
     BrowserModule,
@@ -231,6 +233,7 @@ declare var $: any;
     ModalAddUsersNotifyComponent,
     ModalEditCategoryProductComponent,
     InventoryCheckUseComponent,
+    UserDeArchiveNotificationComponent,
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
     UsersCheckUseComponent,

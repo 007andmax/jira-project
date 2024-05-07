@@ -13,6 +13,7 @@ import { AddUserToCompanyItemComponent } from './add-user-to-company/add-user-to
 import { UsersFilterModule } from './users-header/users-filter/users-filter.module';
 import { FormsModule } from '@angular/forms';
 import { UserFilterSaveComponent } from './user-filter-save/user-filter-save.component';
+import { UserDeArchiveNotificationComponent } from './user-de-archive-notification/user-de-archive-notification.component';
 
 @NgModule({
     declarations: [UsersComponent,
