@@ -1641,24 +1641,26 @@ app-quotes-item {
         .tab-product,
         .tab-service {
           position: static;
-          background: url("./assets/img/icons/products.svg");
-          background-size: contain;
+          mask-image: url("./assets/img/icons/products.svg");
+          mask-size: contain;
           margin-right: 8px;
         }
         .tab-service {
-          background: url("./assets/img/icons/service.svg");
-          background-size: contain;
+          mask-image: url("./assets/img/icons/service.svg");
+          mask-size: contain;
         }
         &.active-tab {
           color: $blue-light-600;
           border-bottom: 2px solid $blue-light-600;
           .tab-product {
-            background: url("./assets/img/icons/products-blue.svg");
-            background-size: contain;
+            mask-image: url("/assets/img/icons/products.svg");
+            mask-size: contain;
+            background-color: $blue-light-600;
           }
           .tab-service {
-            background: url("./assets/img/icons/service-blue.svg");
-            background-size: contain;
+            mask-image: url("/assets/img/icons/time.svg");
+            mask-size: contain;
+            background-color: $blue-light-600;
           }
         }
       }

@@ -7,7 +7,7 @@
     [container]="container"
 >
     <div *ngIf="type === 'DETAIL_TICKET_UPDATE'">
-        <i class="icn-16 icon__calendar pointer"></i>
+        <i class="icn-16 qt-icon icon__calendar pointer"></i>
         <input
             [disabled]="isDisabled"
             type="text"
@@ -32,7 +32,7 @@
             class="detail-ticket-txt"
             [textContent]="geTextDate()"
         ></span>
-        <i class="icn-16 icon__calendar pointer"></i>
+        <i class="icn-16 qt-icon icon__calendar pointer"></i>
         <input
             [disabled]="disabled"
             type="text"
@@ -83,7 +83,7 @@
     </div>
     <i
         *ngIf="type === 'INPUT'"
-        class="icn-16 icon__calendar pointer"
+        class="icn-16 qt-icon icon__calendar pointer"
     ></i>
     <div
         ngbDropdownMenu

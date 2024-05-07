@@ -140,15 +140,7 @@
     background-color: $red-600;
   }
   &__map {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/map.svg");
     mask-image: url("/assets/img/icons/map.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
   }
   &__menu {
     background-image: url("/assets/img/icons/menu.svg");
@@ -348,54 +340,30 @@
     background-color: $blue-light-600;
   }
   &__attachment {
-    background-image: url("/assets/img/icons/attachment.svg");
+    background-image: url("/assets/img/icons/attachment.svg"); // TODO delete
   }
   &__attachments {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/attachements.svg");
     mask-image: url("/assets/img/icons/attachements.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
   }
   &__selected {
     background-image: url("/assets/img/icons/selected.svg");
   }
   &__chat {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/chat.svg");
     mask-image: url("/assets/img/icons/chat.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
     &.active {
-      background-image: url("/assets/img/icons/chat-blue.svg");
+      background-color: $blue-light-600;
     }
   }
   &__products {
     mask-image: url("/assets/img/icons/products.svg");
     &.active {
-      background-image: url("/assets/img/icons/products-blue.svg");
+      background-color: $blue-light-600;
     }
   }
   &__service {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/service.svg");
     mask-image: url("/assets/img/icons/service.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
     &.active {
-      background-image: url("/assets/img/icons/service-blue.svg");
+      mask-image: url("/assets/img/icons/time.svg");
     }
   }
   &__quick-support {
@@ -405,15 +373,7 @@
     }
   }
   &__quick-support-strip {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/quick-support-strip.svg");
     mask-image: url("/assets/img/icons/quick-support-strip.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
   }
   &__quicktech-logo { // TODO delete this icon on super admin page
     background-image: url("/assets/img/icons/quicktech-logo.svg");
@@ -658,7 +618,7 @@
     mask-image: url("/assets/img/icons/folder.svg");
   }
   &__calendar {
-    background-image: url("/assets/img/icons/calendar.svg");
+    mask-image: url("/assets/img/icons/calendar.svg");
   }
   &__calendar-recurring-ticket {
     mask-image: url("/assets/img/icons/calendar-recurring-ticket.svg");
@@ -765,18 +725,7 @@
     background-image: url("/assets/img/icons/company-address.svg");
   }
   &__discount {
-    background-image: url("/assets/img/icons/discount.svg");
-  }
-  &__discount--gray-500 {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/discount.svg");
     mask-image: url("/assets/img/icons/discount.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
   }
   &__raw-clear {
     background-image: url("/assets/img/icons/raw-clear.svg");
@@ -1198,7 +1147,7 @@
     background-image: url("/assets/img/icons/operating-system.svg");
   }
   &__upload-avtar {
-    background-image: url("/assets/img/icons/upload-photo.svg");
+    mask-image: url("/assets/img/icons/upload-photo.svg");
   }
   &__upload {
     mask-image: url("/assets/img/icons/upload.svg");

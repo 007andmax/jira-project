@@ -11,7 +11,7 @@
             *ngIf="index > 0"
         >
             <div class="qt-df qt-ai-c">
-                <div class="icn-16 icon__calendar pointer qt-mr-8 qt-fs-0"></div>
+                <div class="icn-16 qt-icon icon__calendar pointer qt-mr-8 qt-fs-0"></div>
                 <span
                     class="ticket-updates__tag-completed --completed"
                     *ngIf="product.completed && showCompleteLabel"
@@ -76,7 +76,7 @@
                         #productTooltip
                     ></app-dynamic-tooltip>
                     <div
-                        class="icon__discount qt-ml-4 qt-sz-16 qt-ic-c"
+                        class="qt-icon icon__discount qt-icon__blue-light-600 qt-ml-4 qt-sz-16 qt-ic-c"
                         *ngIf="product.discountAmount"
                         (mouseenter)="productTooltip.show($event.target)"
                         (mouseleave)="productTooltip.hide()"

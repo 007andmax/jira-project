@@ -110,11 +110,7 @@
                                                     class="tab-pane__table-avatar user-dp online"
                                                     *ngIf="techUser.avatar === null"
                                                 >
-                                                    <img
-                                                        class="img-circle"
-                                                        src="html/assets/img/icons/upload-photo.svg"
-                                                        alt="user"
-                                                    >
+                                                    <span class="img-circle qt-sz-36 qt-icon icon__upload-avtar qt-icon__blue-light-600"></span>
                                                 </span>
                                                 <div class="qt-ml-12 qt-f-1 ellipsis">
                                                     <div class="tab-pane__table-user-item-name qt-fw-600 qt-color-gray-900 ellipsis">
@@ -370,11 +366,7 @@
     <div class="qt-aside-modern__content middle-content">
         <div class="dp-area qt-df qt-ai-c qt-mb-24">
             <span class="dp">
-                <img
-                    src="/html/assets/img/icons/upload-photo.svg"
-                    alt="user"
-                    *ngIf="!croppedImage"
-                >
+                <span class="img-circle qt-sz-36 qt-icon icon__upload-avtar qt-icon__blue-light-600"></span>
                 <img
                     [src]="croppedImage?.base64"
                     alt="user"
@@ -671,10 +663,7 @@
                     class="simple-dp"
                     *ngIf="selectedTechUser.avatar === null"
                 >
-                    <img
-                        src="html/assets/img/icons/upload-photo.svg"
-                        alt="user"
-                    >
+                    <span class="img-circle qt-sz-36 qt-icon icon__upload-avtar qt-icon__blue-light-600"></span>
                 </span>
             </span>
             <div class="dp-info">

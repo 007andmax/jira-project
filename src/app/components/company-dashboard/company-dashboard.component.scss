@@ -713,7 +713,9 @@
                             .dropdown {
                                 width: 90px;
                                 padding-left: 22px;
-                                background: url("../../../assets/img/icons/calendar.svg") no-repeat left top;
+                                mask-image: url("../../../assets/img/icons/calendar.svg");
+                                mask-repeat: no-repeat;
+                                mask-position: left top;
                                 min-height: 16px;
                                 .dropdown-toggle {
                                     margin-top: 2px;
