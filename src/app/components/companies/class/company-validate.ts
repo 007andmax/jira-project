@@ -35,6 +35,9 @@ export class CompanyValdiate {
     public resetBillindAddress() {
         this.billindAddress = true;
     }
+    public resetExistPrimaryContactEmail() {
+        this.existPrimaryContactEmail = true;
+    }
     public getExistPrimaryContactEmail() {
         return this.existPrimaryContactEmail;
     }
@@ -89,8 +92,14 @@ export class CompanyValdiate {
     public getPrimaryPhoneNumber() {
         return this.primaryPhoneNumber;
     }
+    public resetFirstName() {
+        this.firstName = true;
+    }
     public getFirstName() {
         return this.firstName;
+    }
+    public resetPrimaryContactEmail() {
+        this.primaryContactEmail = true;
     }
     public getPrimaryContactEmail() {
         return this.primaryContactEmail;

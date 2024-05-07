@@ -176,6 +176,9 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
     } else {
       this.company.contacts[0].setId(null);
     }
+    this.validate.resetFirstName();
+    this.validate.resetPrimaryContactEmail();
+    this.validate.resetExistPrimaryContactEmail();
   }
   public onSelectCompanyTypes(type) {
     if (type) this.company.clientType = type.value;
