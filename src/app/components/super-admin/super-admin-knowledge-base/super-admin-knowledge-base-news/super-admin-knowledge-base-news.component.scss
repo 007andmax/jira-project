@@ -1,0 +1,13 @@
+ @import './src/assets/styles/variable';
+ .news-status {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: $blue-dark-600;
+ }
+ .news-container {
+    background-color: $white;
+    border-radius: 12px;
+    border: 1ps solid $gray-200;
+    padding: 16px;
+ }

@@ -1,0 +1,59 @@
+<div
+    [ngClass]="{'--selected': selected}"
+    class="qt-table-modern__row"
+    (click)="select()"
+>
+    <div class="companies-table__check">
+        <label class="qt-checkbox pointer">
+            <input
+                type="checkbox"
+                (change)="selectCompany($event)"
+            >
+            <span></span>
+        </label>
+    </div>
+    <div
+        class="ticket-table__subject qt-color-gray-900 qt-fs-14 qt-fw-500"
+        [textContent]="news.title"
+    ></div>
+    <div
+        class="ticket-table__created-date gray-900 qt-fs-14 qt-fw-400"
+        [textContent]="getDate(news.createdAt)"
+    ></div>
+    <div class="ticket-table__status">
+        <span
+            class="tag__modern"
+            [ngClass]="{'status-published':news.announcementType == 'PUBLISHED',
+        'status-draft':news.announcementType == 'DRAFT',
+    'status-archived':news.announcementType == 'ARCHIVED'}"
+            [textContent]="news.announcementType"
+        ></span>
+    </div>
+    <div class="companies-table__menu pointer">
+        <div
+            class="grey-dropdown right with-icons"
+            ngbDropdown
+        >
+            <div
+                class="qt-button --square-md --gray pointer"
+                id="dropdownBasic1"
+                ngbDropdownToggle
+            >
+                <i class="icn-16 qt-bg-contain icon__more pointer"></i>
+            </div>
+            <div
+                ngbDropdownMenu
+                aria-labelledby="dropdownBasic1"
+            >
+                <button ngbDropdownItem>
+                    <i class="qt-sz-20 qt-mr-12 qt-bg-contain icon__edit"></i>
+                    Edit
+                </button>
+                <button ngbDropdownItem>
+                    <i class="qt-sz-20 qt-mr-12 qt-bg-contain icon__archive"></i>
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

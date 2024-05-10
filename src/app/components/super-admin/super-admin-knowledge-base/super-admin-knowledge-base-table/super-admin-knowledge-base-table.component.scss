@@ -1,0 +1,197 @@
+@import "./src/assets/styles/variable";
+
+/deep/ .ticket-table {
+    th {
+        white-space: nowrap;
+    }
+
+    td {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}
+
+.priority-icon {
+    margin-left: 8px;
+}
+
+app-tickets-table-item {
+    display: contents;
+}
+
+.pengind-loading {
+    bottom: 20px;
+    top: auto;
+}
+
+.mobile-action-btn {
+    display: none;
+    width: 48px;
+    height: 48px;
+    background: $blue-light-600 url('/assets/img/icons/add-product.svg') 16px 16px no-repeat;
+    box-shadow: 0 8px 16px 0 rgba(22, 164, 250, 0.2);
+    position: fixed;
+    right: 16px;
+    bottom: 100px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.qt-page-list__header-thead-container {
+    position: sticky;
+    top: 57px;
+    z-index: 1;
+    background-color: $white;
+    //padding-top: 32px;
+    border-radius: 8px;
+
+    .qt-page-list__header-thead {
+        border: 1px solid $gray-200;
+        border-radius: 8px 8px 0 0;
+        overflow: hidden;
+    }
+}
+
+.qt-page-list__container {
+    display: flex;
+}
+
+/deep/ .filter-button.--gray:focus {
+    background-color: $white;
+}
+
+/deep/ .filter-button.active:focus {
+    background-color: #16a4fa10;
+}
+
+
+.qt-page-list__body {
+    padding: 0px 12px;
+}
+
+.qt-page-list__header-thead__row {
+    background-color: $gray-50;
+
+    &>div {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        font-weight: 500;
+        font-size: 14px;
+        text-transform: unset;
+        color: $gray-500;
+
+        &:first-child {
+            padding-left: 25px;
+        }
+
+        &:last-child {
+            padding-right: 25px;
+        }
+    }
+}
+
+/deep/ .qt-table-modern__row {
+    position: relative;
+    min-height: 56px;
+    border: unset;
+    margin-bottom: 0;
+
+    &>div {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid $gray-200;
+        font-size: 14px;
+
+        &:first-child {
+            padding-left: 25px;
+            border-left: 1px solid $gray-200;
+            border-radius: 0;
+        }
+
+        &:last-child {
+            padding-right: 25px;
+            border-right: 1px solid $gray-200;
+            border-radius: 0;
+        }
+    }
+
+    &:hover {
+        border: unset;
+
+        &>div {
+            background-color: $blue-dark-25;
+        }
+    }
+
+    .ticket-table__company {
+        font-weight: 500;
+        position: relative;
+        width: 100%;
+    }
+
+    .tag__modern {
+        font-size: 12px;
+        line-height: 14px;
+        font-weight: 500;
+        padding: 4px 8px;
+        text-transform: unset;
+    }
+
+    .ticket-table__subject {
+        position: static;
+
+        .ellipsis {
+            position: static;
+            transform: unset;
+            width: calc(412px - 16px);
+            flex: 1;
+
+            @media (max-width: 1600px) {
+                max-width: calc(345px - 16px);
+            }
+        }
+    }
+
+    span.priority-icon {
+        position: absolute;
+        top: 0;
+        left: 1px;
+        width: 3px;
+        height: 100%;
+
+        &.--high {
+            background-color: $red-600;
+        }
+
+        &.--medium {
+            background-color: $yellow-600;
+        }
+    }
+}
+
+/deep/ .qt-table-modern .ticket-table__company {
+    max-width: 300px;
+}
+
+.qt-page-list__body-table-container {
+    position: relative;
+}
+.companies-table__menu {
+    width: 70px;
+}
+.aside-filters {
+    width: 464px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 58px;
+    height: calc(100vh - 128px);
+    transition: .3s ease-in-out width;
+}
+.list-details-news {
+    padding: 16px;
+    background-color: $gray-50;
+}
+app-super-admin-knowledge-base-news {
+    display: block;
+}

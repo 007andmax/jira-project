@@ -133,6 +133,10 @@ import { DeviceTagPipe } from './pipe/device-tag.pipe';
 import { MarketingSubscriptionsAsideModule } from './components/marketing/marketing-subscriptions-aside/marketing-subscriptions-aside.module';
 import { ManufacturesCheckUseComponent } from './components/setting/device-setting/manufactures-check-use/manufactures-check-use.component';
 import { UserDeArchiveNotificationComponent } from './components/users/user-de-archive-notification/user-de-archive-notification.component';
+import { SuperAdminKnowledgeBaseComponent } from './components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base.component';
+import { SuperAdminKnowledgeBaseTableComponent } from './components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base-table/super-admin-knowledge-base-table.component';
+import { SuperAdminKnowledgeBaseTableItemComponent } from './components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base-table/super-admin-knowledge-base-table-item/super-admin-knowledge-base-table-item.component';
+import { SuperAdminKnowledgeBaseService } from './components/super-admin/services/super-admin-knowledge-base/super-admin-knowledge-base.service';
 declare var $: any;
 
 /**
@@ -162,7 +166,8 @@ declare var $: any;
     GlNumberCheckUseComponent,
     CannedResponsesAsideComponent,
     ManufacturesCheckUseComponent,
-    UserDeArchiveNotificationComponent
+    UserDeArchiveNotificationComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -271,7 +276,8 @@ declare var $: any;
     PermissionCompanyDevicesService,
     PermissionNoSuperAdminService,
     PermissionClientUserService,
-    PermissionMyProfileService
+    PermissionMyProfileService,
+    SuperAdminKnowledgeBaseService
   ],
   bootstrap: [AppComponent]
 })

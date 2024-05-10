@@ -1,0 +1,249 @@
+@import "./src/assets/styles/variable";
+
+.aside-filters {
+    flex-shrink: 0;
+    background-color: $white;
+    transition: .3s ease-in-out width;
+    border-left: 1px solid $gray-200;
+    border-radius: 12px 12px 0px 0px;
+
+    &-header {
+        padding: 12px 16px;
+        border-bottom: 1px solid $gray-200;
+        height: 60px;
+
+        &__title {
+            font-size: 20px;
+            font-weight: 600;
+            color: $gray-900 ;
+        }
+
+        .qt-button {
+            width: 32px;
+            height: 32px
+        }
+    }
+
+   
+
+    &-content {
+        height: calc(100% - 57px);
+
+        &__main {
+            display: flex;
+            flex-direction: column;
+            padding: 12px 16px;
+            height: calc(100% - 72px);
+            overflow: auto;
+
+            .qt-input-block__label {
+                font-size: 14px;
+                font-weight: 500;
+                color: $gray-700;
+                margin-top: 3px;
+                margin-bottom: 20px;
+            }
+
+            .content-filters-checkbox {
+                color: $gray-700;
+
+                &__count {
+                    border-radius: 24px;
+                    padding: 2px 8px;
+                    background-color: $gray-100;
+                    color: $gray-700;
+                    font-size: 12px;
+                    font-weight: 600;
+                }
+            }
+
+            .content-filters-checkbox:not(:last-child) {
+                margin-bottom: 20px;
+            }
+        }
+
+        &__footer {
+            padding: 10px 16px;
+            border-top: 1px solid $gray-200;
+        }
+    }
+
+    .content-filters-header {
+        display: none;
+    }
+
+  
+
+    // Start
+    .search-users,
+    .search-tech-users,
+    .search-status,
+    .search-company,
+    .light-dropdown.dropdown {
+
+        &::before {
+            color: $gray-900;
+            font-weight: 600;
+            line-height: 20px;
+        }
+    }
+
+    .qt-dropdown,
+    .light-dropdown {
+        padding-top: 8px;
+    }
+
+    .search-company {
+        &::before {
+            content: "Company";
+        }
+    }
+
+    .search-users {
+        &::before {
+            content: "User";
+        }
+    }
+
+    .search-tech-users {
+        &::before {
+            content: "Tech Team";
+        }
+    }
+
+    .search-status {
+        &::before {
+            content: "Status";
+        }
+    }
+}
+.left-panel-ng2__content--filters {
+    app-select-search {
+        margin-right: 8px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+    .search-users,
+    .search-tech-users,
+    .search-status,
+    .search-company,
+    .search-priority,
+    .light-dropdown.dropdown,
+    app-tickets-filter-tags {
+        &::before {
+            color: $gray-500;
+            font-size: 13px;
+            font-weight: 500;
+        }
+    }
+
+    /deep/tickets-filter-drop-down .mat-form-field {
+        width: 100%;
+    }
+
+    /deep/tickets-filter-users-drop-down .mat-form-field {
+        width: 100%;
+    }
+
+    /deep/tickets-filter-companies-drop-down .mat-form-field {
+        width: 100%;
+    }
+}
+
+/deep/ .qt-page-list__header-title {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0;
+    color: $gray-900;
+}
+
+/deep/ .angular-editor-button[title="Undo"],
+/deep/ .angular-editor-button[title="Redo"],
+/deep/ .angular-editor-button[title="Strikethrough"],
+/deep/ .angular-editor-button[title="Subscript"],
+/deep/ .angular-editor-button[title="Superscript"],
+/deep/ .angular-editor-button[title="Justify Full"],
+/deep/ .angular-editor-button[title="Indent"],
+/deep/ .angular-editor-button[title="Outdent"],
+/deep/ .select-heading[title="Formatting"],
+/deep/ .angular-editor-button[title="Text Color"],
+/deep/ .angular-editor-button[title="Background Color"],
+/deep/ .select-custom-style[title="Custom Style"],
+/deep/ .angular-editor-button[title="Insert Link"],
+/deep/ .angular-editor-button[title="Unlink"],
+/deep/ .angular-editor-button[title="Insert Image"],
+/deep/ .angular-editor-button[title="Insert Video"],
+/deep/ .angular-editor-button[title="Horizontal Line"],
+/deep/ .angular-editor-button[title="HTML Code"],
+/deep/ .angular-editor-button[title="Font Name"],
+/deep/ .angular-editor-button[title="Font Size"],
+/deep/ .angular-editor-button[title="Clear Formatting"],
+/deep/ .block-label {
+     display: none;
+}
+
+/deep/ .angular-editor-toolbar-set {
+    &:nth-child(1),
+    &:nth-child(4),
+    &:nth-child(6),
+    &:nth-child(7),
+    &:nth-child(8),
+    &:nth-child(9),
+    &:nth-child(10),
+    &:nth-child(11),
+    &:nth-child(13) {
+        display: none !important;
+    }
+}
+
+/deep/ .angular-editor {
+    border-radius: 0px !important;
+}
+
+/deep/ .angular-editor-placeholder {
+    font-size: 13px;
+    padding: 16px 15px;
+}
+
+/deep/ .angular-editor-textarea {
+    border-color: $gray-300;
+    padding: 16px 15px !important;
+    min-height: 175px;
+}
+
+/deep/ .angular-editor-toolbar-set .fa {
+    color: $gray-600;
+}
+
+/deep/ .angular-editor-toolbar {
+    background-color: $white !important;
+    border: 1px solid $gray-200 !important;
+    padding: 4px !important;
+    display: flex;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+/deep/  .angular-editor-textarea {
+    height: 160px !important;
+    border: none !important;
+}
+/deep/ .angular-editor-toolbar-set {
+    border: none !important;
+    margin-bottom: 0px !important;
+}
+.qt-input-block__input {
+    border: none !important;
+    box-shadow: none !important;
+}
+.aside-filters-content__footer {
+    padding: 16px !important;
+    .qt-button {
+        width: 100%;
+        max-width: none;
+    }
+}

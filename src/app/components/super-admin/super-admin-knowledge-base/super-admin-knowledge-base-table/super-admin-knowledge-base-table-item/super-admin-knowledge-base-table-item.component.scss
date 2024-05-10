@@ -1,0 +1,60 @@
+@import "./src/assets/styles/variable";
+
+tr {
+    cursor: pointer;
+
+    &:hover {
+        td {
+            background: $gray-50;
+            border-color: $blue-light-600;
+        }
+    }
+}
+
+.--selected {
+    >div {
+        background: #f4fbff;
+        border-color: $blue-light-600;
+    }
+}
+
+.multi-assign-user {
+    position: absolute;
+    top: -12px;
+}
+
+.multi-assign-user-container {
+    position: relative;
+}
+
+.more-users {
+    position: absolute;
+    top: -12px;
+    background: $gray-100;
+    color: $gray-600;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.ticket-table__assignee {
+    overflow: unset;
+
+    .ellipsis {
+        max-width: 120px;
+    }
+}
+.status-published {
+    color: $green-700;
+    border: 1px solid $green-200;
+    background-color: $green-25;
+}
+.status-draft {
+    color: $blue-light-700;
+    border: 1px solid $blue-light-200;
+    background-color: $blue-light-25;
+}
+.status-archived {
+    color: $gray-500;
+    border: 1px solid $gray-300;
+    background-color: $gray-50;
+}

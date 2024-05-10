@@ -1,0 +1,19 @@
+<div class="news-container">
+    <div class="qt-df qt-ai-c qt-mb-12">
+        <div class="news-status qt-mr-8"></div>
+        <div
+            class="news-date qt-fs-13 qt-color-gray-500 qt-fw-400"
+            [textContent]="getDate(news.createdAt)"
+        ></div>
+    </div>
+    <div
+        class="news-title qt-fs-18 qt-color-gray-900 qt-fw-600 qt-mb-8"
+        [textContent]="news.title"
+    >
+    </div>
+    <div
+        class="news-description qt-fs-14 qt-color-gray-700 qt-fw-400 qt-mb-8"
+        [innerHTML]="news.content"
+    >
+    </div>
+</div>

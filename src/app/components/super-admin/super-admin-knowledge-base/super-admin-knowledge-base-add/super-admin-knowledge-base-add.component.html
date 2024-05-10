@@ -1,0 +1,65 @@
+<div class="aside-filters">
+    <div class="aside-filters-header qt-df qt-ai-c qt-jc-sb">
+        <div class="aside-filters-header__title">Create Topic</div>
+        <div
+            class="qt-button --square-md --gray pointer"
+            (click)="close()"
+        >
+            <div class="icon__close qt-bg-contain qt-sz-16 pointer"></div>
+        </div>
+    </div>
+    <div class="aside-filters-content">
+        <div class="left-panel-ng2__content--filters aside-filters-content__main">
+            <div class="draft-email-container">
+                <div class="qt-w100 editor-container qt-mt-0 qt-mb-16">
+                    <div class="qt-inputs-row qt-mb-16">
+                        <div class="qt-input-block">
+                            <input
+                                id="add-ticket-subject"
+                                class="qt-input-block__input"
+                                [(ngModel)]="news.title"
+                                type="text"
+                                placeholder="Title"
+                            >
+                        </div>
+                    </div>
+                    <angular-editor
+                        [(ngModel)]="news.content"
+                        [config]="editorConfig"
+                    ></angular-editor>
+                </div>
+                <div class="qt-inputs-row">
+                    <div class="qt-input-block qt-f50">
+                        <app-drop-down
+                            [class]="['qt-select-input-40']"
+                            [placeholder]="'Select'"
+                            [field]="'title'"
+                            [list]="list"
+                            [search]="true"
+                            [change]="true"
+                            [title]="'Status'"
+                            (onSelectedItem)="onSelectStatus($event)"
+                        >
+                        </app-drop-down>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="aside-filters-content__footer">
+            <div class="qt-df">
+                <button
+                    class="qt-button --md --gray qt-mr-12 qt-w100 qt-jc-c"
+                    (click)="close()"
+                >
+                    Cancel
+                </button>
+                <button
+                    class="qt-button --md qt-w100 qt-jc-c"
+                    (click)="add()"
+                >
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
