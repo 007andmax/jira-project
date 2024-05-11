@@ -250,10 +250,12 @@
     // /deep/
 }
 
-/deep/ .tech-users-container .qt-icon icon__add-user {
+/deep/ .tech-users-container .icon__add-user {
   width: 16px;
   height: 16px;
-  background: url('/assets/img/icons/assign-user-plus.svg') no-repeat center / contain;
+  mask-image: url('/assets/img/icons/assign-user-plus.svg');
+  mask-repeat: no-repeat;
+  mask-size: contain;
   margin-right: 6px;
 }
 

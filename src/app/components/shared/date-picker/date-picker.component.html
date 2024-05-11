@@ -66,7 +66,7 @@
         *ngIf="type === 'ICON'"
         (mouseenter)="dateTooltip.show($event.target)"
         (mouseleave)="dateTooltip.hide()"
-        class="ticket-updates__date-icon icon__assign-date btn-icon-date-picker"
+        class="ticket-updates__date-icon qt-icon icon__assign-date qt-icon__blue-light-600 btn-icon-date-picker"
         ngbDropdownToggle
         [disabled]="isDisabled"
         id="dropdownDate"
@@ -76,7 +76,7 @@
         *ngIf="type === 'NO_ICON'"
         placement="top"
         ngbTooltip="Date"
-        class="ticket-updates__date-icon icon__assign-date hidden-icon"
+        class="ticket-updates__date-icon qt-icon icon__assign-date qt-icon__blue-light-600 hidden-icon"
         ngbDropdownToggle
         id="dropdownDate"
     >

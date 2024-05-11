@@ -47,36 +47,6 @@
   &__tips {
     background-image: url("/assets/img/icons/tips.svg");
   }
-  // END Color Icon
-  &__assign-date {
-    background-image: url("/assets/img/icons/assign-date.svg");
-  }
-  &__assign-user {
-    background-image: url("/assets/img/icons/assign-user.svg");
-  }
-  &__assign-user-plus {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/assign-user-plus.svg");
-    mask-image: url("/assets/img/icons/assign-user-plus.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
-  }
-   &__ticket-note {
-    mask-image: url("/assets/img/icons/ticket-note.svg");
-  }
-  &__private {
-    background-image: url("/assets/img/icons/private.svg");
-  }
-  &__remove-user {
-    background-image: url("/assets/img/icons/remove-user.svg");
-  }
-  &__list {
-    background-image: url("/assets/img/icons/list.svg");
-  }
   &__firefox {
     background-image: url("/assets/img/icons/firefox.svg");
   }
@@ -89,8 +59,24 @@
   &__safari {
     background-image: url("/assets/img/icons/safari.svg");
   }
+  // END Color Icon
+  &__assign-date {
+    mask-image: url("/assets/img/icons/assign-date.svg");
+  }
+  &__assign-user {
+    mask-image: url("/assets/img/icons/assign-user.svg");
+  }
+  &__assign-user-plus {
+    mask-image: url("/assets/img/icons/assign-user-plus.svg");
+  }
+  &__ticket-note {
+    mask-image: url("/assets/img/icons/ticket-note.svg");
+  }
+  &__list {
+    mask-image: url("/assets/img/icons/list.svg");
+  }
   &__remote-access-ticket {
-    background-image: url("/assets/img/icons/remote-access-ticket.svg");
+    mask-image: url("/assets/img/icons/remote-access-ticket.svg");
   }
   &__add-user {
     mask-image: url("/assets/img/icons/add-users.svg");
@@ -104,17 +90,20 @@
   &__done-circle-green {
     background-image: url("/assets/img/icons/done-circle-green.svg");
   }
-  &__user {
-    background-color: $gray-400;
-    -webkit-mask-image: url("/assets/img/icons/user.svg");
-    mask-image: url("/assets/img/icons/user.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
+  &__user-grey {
+    mask-image: url("/assets/img/icons/user-grey.svg");
   }
   &__users {
-    background-image: url("/assets/img/icons/addusers.svg");
+    mask-image: url("/assets/img/icons/addusers.svg"); // TODO CHECK DOUBLE (user plus)
+  }
+  &__users {
+    mask-image: url("/assets/img/icons/users.svg");
+  }
+  &__user-account {
+    mask-image: url("/assets/img/icons/local-user-account.svg");
+  }
+  &__user-avatar {
+    background-image: url("/assets/img/icons/user-avatar.svg");
   }
   &__close { // TODO need combine icons to mask
     mask-image: url("/assets/img/icons/close.svg");
@@ -462,15 +451,6 @@
   &__panel-open {
     background-image: url("/assets/img/icons/panel-open.svg");
   }
-  &__users {
-    background-image: url("/assets/img/icons/users.svg");
-  }
-  &__user-account {
-    background-image: url("/assets/img/icons/local-user-account.svg");
-  }
-  &__users-gray {
-    background-image: url("/assets/img/icons/users-gray.svg");
-  }
   &__note-list {
     background-image: url("/assets/img/icons/canned-responses.svg");
   }
@@ -622,9 +602,6 @@
   }
   &__calendar-recurring-ticket {
     mask-image: url("/assets/img/icons/calendar-recurring-ticket.svg");
-  }
-  &__user-grey {
-    background-image: url("/assets/img/icons/user-grey.svg");
   }
   &__windows {
     mask-image: url("/assets/img/icons/window.svg");
@@ -894,9 +871,6 @@
   }
   &__unpaid-invoice {
     background-image: url("/assets/img/icons/unpaid-invoice.svg");
-  }
-  &__user-avatar {
-    background-image: url("/assets/img/icons/user-avatar.svg");
   }
   &__message-forward {
     background-image: url("/assets/img/icons/message-forward.svg");
