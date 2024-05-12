@@ -59,6 +59,12 @@
   &__safari {
     background-image: url("/assets/img/icons/safari.svg");
   }
+  &__user-avatar {
+    background-image: url("/assets/img/icons/user-avatar.svg");
+  }
+  &__memory {
+    background-image: url("/assets/img/icons/memory.svg");
+  }
   // END Color Icon
   &__assign-date {
     mask-image: url("/assets/img/icons/assign-date.svg");
@@ -78,23 +84,14 @@
   &__remote-access-ticket {
     mask-image: url("/assets/img/icons/remote-access-ticket.svg");
   }
-  &__add-user {
-    mask-image: url("/assets/img/icons/add-users.svg");
-  }
   &__task-pending {
     mask-image: url("/assets/img/icons/task-pending.svg");
   }
   &__task-pending-done {
     mask-image: url("/assets/img/icons/task-completed.svg");
   }
-  &__done-circle-green {
-    background-image: url("/assets/img/icons/done-circle-green.svg");
-  }
   &__user-grey {
     mask-image: url("/assets/img/icons/user-grey.svg");
-  }
-  &__users {
-    mask-image: url("/assets/img/icons/addusers.svg"); // TODO CHECK DOUBLE (user plus)
   }
   &__users {
     mask-image: url("/assets/img/icons/users.svg");
@@ -102,58 +99,28 @@
   &__user-account {
     mask-image: url("/assets/img/icons/local-user-account.svg");
   }
-  &__user-avatar {
-    background-image: url("/assets/img/icons/user-avatar.svg");
-  }
   &__close { // TODO need combine icons to mask
     mask-image: url("/assets/img/icons/close.svg");
   }
-  &__settings {
-    &-gray {
-      background-color: $gray-600;
-      -webkit-mask-position: center;
-      mask-position: center;
-      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-settings.svg");
+  &__settings-gray {
       mask-image: url("/assets/img/icons-left-sidebar/menu-settings.svg");
-    }
   }
-  &__logout,
-  &__logout-red {
-    background-color: $red-600;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons-left-sidebar/logout.svg");
+  &__logout {
     mask-image: url("/assets/img/icons-left-sidebar/logout.svg");
-  }
-  &__logout-red {
-    background-color: $red-600;
   }
   &__map {
     mask-image: url("/assets/img/icons/map.svg");
   }
-  &__menu {
-    background-image: url("/assets/img/icons/menu.svg");
-  }
-  &__memory {
-    background-image: url("/assets/img/icons/memory.svg");
-  }
   &__ticket-filter {
-    background-image: url("/assets/img/icons/ticket-gray-500.svg");
-  }
-  &__menu-white {
-    background-image: url("/assets/img/icons/menu-white.svg");
+    mask-image: url("/assets/img/icons/ticket-gray-500.svg");
   }
   &__ticket-document {
-    background-image: url("/assets/img/icons/ticket-document.svg");
+    mask-image: url("/assets/img/icons/ticket-document.svg");
   }
   &__tickets-detail-contact {
     mask-image: url("/assets/img/icons-left-sidebar/menu-tickets.svg");
   }
   &__menu-email-settings {
-    background-color: $gray-300;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-email-settings.svg");
     mask-image: url("/assets/img/icons-left-sidebar/menu-email-settings.svg");
   }
   &__menu-email-template {
@@ -537,17 +504,6 @@
   }
   &__email-send {
     background-image: url("/assets/img/icons/email-send.svg");
-  }
-  &__menu-settings--gray-500 {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-settings.svg");
-    mask-image: url("/assets/img/icons-left-sidebar/menu-settings.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
   }
   &__merge {
     background-color: $gray-500;
