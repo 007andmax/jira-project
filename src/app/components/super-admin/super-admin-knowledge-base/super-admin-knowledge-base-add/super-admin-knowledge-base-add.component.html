@@ -17,24 +17,44 @@
                             <input
                                 id="add-ticket-subject"
                                 class="qt-input-block__input"
+                                [ngClass]="{'--input-error' : !validate.getTitle()}"
                                 [(ngModel)]="news.title"
                                 type="text"
                                 placeholder="Title"
+                                minlength="1"
+                                maxlength="255"
+                                (input)="onChangeTitle()"
                             >
+                            <mat-error
+                                class="invalid-feedback"
+                                *ngIf="!validate.getTitle()"
+                            >
+                                Title is required
+                            </mat-error>
                         </div>
                     </div>
                     <angular-editor
+                        (html)="onChangeContent()"
                         [(ngModel)]="news.content"
                         [config]="editorConfig"
                     ></angular-editor>
+                    <mat-error
+                        class="invalid-feedback"
+                        *ngIf="!validate.getContent()"
+                    >
+                        Content is required
+                    </mat-error>
                 </div>
                 <div class="qt-inputs-row">
                     <div class="qt-input-block qt-f50">
                         <app-drop-down
                             [class]="['qt-select-input-40']"
                             [placeholder]="'Select'"
+                            [container]="'body'"
+                            [editItem]="selectedStatus"
                             [field]="'title'"
                             [list]="list"
+                            [isBlockClear]="true"
                             [search]="true"
                             [change]="true"
                             [title]="'Status'"

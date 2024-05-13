@@ -11,3 +11,36 @@
     border: 1ps solid $gray-200;
     padding: 16px;
  }
+
+.status-published {
+   color: $green-700;
+   border: 1px solid $green-200;
+   background-color: $green-25;
+}
+
+.status-draft {
+   color: $blue-light-700;
+   border: 1px solid $blue-light-200;
+   background-color: $blue-light-25;
+}
+
+.status-archived {
+   color: $gray-500;
+   border: 1px solid $gray-300;
+   background-color: $gray-50;
+}
+
+.status-published-icon {
+   background-color: $green-700;
+   
+}
+
+.status-draft-icon {
+   background-color: $blue-light-700;
+   
+}
+
+.status-archived-icon {
+   background-color: $gray-500;
+  
+}

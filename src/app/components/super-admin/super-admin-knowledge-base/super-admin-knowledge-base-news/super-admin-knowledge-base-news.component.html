@@ -1,10 +1,45 @@
 <div class="news-container">
-    <div class="qt-df qt-ai-c qt-mb-12">
-        <div class="news-status qt-mr-8"></div>
+    <div
+        class="qt-df qt-ai-c qt-mb-12"
+        ngbDropdown
+    >
         <div
-            class="news-date qt-fs-13 qt-color-gray-500 qt-fw-400"
+            class="news-status qt-mr-8"
+            [ngClass]="{'status-published-icon':news.announcementType == 'PUBLISHED',
+        'status-draft-icon':news.announcementType == 'DRAFT',
+    'status-archived-icon':news.announcementType == 'ARCHIVED'}"
+        ></div>
+        <div
+            class="news-date qt-fs-13 qt-color-gray-500 qt-fw-400 qt-mr-8"
             [textContent]="getDate(news.createdAt)"
         ></div>
+        <span
+            class="tag__modern"
+            [ngClass]="{'status-published':news.announcementType == 'PUBLISHED',
+        'status-draft':news.announcementType == 'DRAFT',
+    'status-archived':news.announcementType == 'ARCHIVED'}"
+            [textContent]="news.announcementType"
+        ></span>
+        <div
+            class="qt-button --square-md --gray pointer qt-ml-auto"
+            id="dropdownBasic1"
+            ngbDropdownToggle
+        >
+            <i class="icn-16 qt-bg-contain icon__more pointer"></i>
+        </div>
+        <div
+            ngbDropdownMenu
+            aria-labelledby="dropdownBasic1"
+        >
+            <button ngbDropdownItem>
+                <i class="qt-sz-20 qt-mr-12 qt-bg-contain icon__edit"></i>
+                Edit
+            </button>
+            <button ngbDropdownItem>
+                <i class="qt-sz-20 qt-mr-12 qt-bg-contain icon__archive"></i>
+                Delete
+            </button>
+        </div>
     </div>
     <div
         class="news-title qt-fs-18 qt-color-gray-900 qt-fw-600 qt-mb-8"

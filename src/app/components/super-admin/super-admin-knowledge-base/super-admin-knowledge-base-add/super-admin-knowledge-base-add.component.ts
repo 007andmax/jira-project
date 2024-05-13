@@ -4,6 +4,7 @@ import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { News } from '../super-admin-knowledge-base-table/class/news';
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
 import { SuperAdminKnowledgeBaseService } from '../../services/super-admin-knowledge-base/super-admin-knowledge-base.service';
+import { KnowledgeBaseValidate } from './class/knowledge-base-validate';
 
 @Component({
   selector: 'app-super-admin-knowledge-base-add',
@@ -13,6 +14,8 @@ import { SuperAdminKnowledgeBaseService } from '../../services/super-admin-knowl
 export class SuperAdminKnowledgeBaseAddComponent implements OnInit {
   @Output() onClose = new EventEmitter();
   news: News = new News();
+  validate: KnowledgeBaseValidate = new KnowledgeBaseValidate();
+  selectedStatus: CompanySetting = new CompanySetting('Draft', 'DRAFT')
   list = [new CompanySetting('Published', 'PUBLISHED'), new CompanySetting('Draft', 'DRAFT'), new CompanySetting('Archived', 'ARCHIVED')];
   messageContent: string = '';
   formatDate: string = FORMAT_DATE_2;
@@ -54,13 +57,21 @@ export class SuperAdminKnowledgeBaseAddComponent implements OnInit {
 
   ngOnInit() {
   }
+  onChangeTitle() {
+    this.validate.resetTitle();
+  }
+  onChangeContent() {
+    this.validate.resetContent();
+  }
   onSelectStatus(data) {
+    this.selectedStatus = data;
     this.news.announcementType = data.value;
   }
   close() {
     this.onClose.emit(null);
   }
   add() {
+    if (!this.validate.isValidate(this.news)) return;
     this.superAdminKnowledgeBaseService.addNews(this.news.getDataForCreate()).subscribe(data => {
 
     })

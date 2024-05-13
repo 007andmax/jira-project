@@ -12,6 +12,7 @@ import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { FormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { SuperAdminKnowledgeBaseNewsComponent } from './super-admin-knowledge-base-news/super-admin-knowledge-base-news.component';
+import { MatFormFieldModule } from '@angular/material';
 
 
 
@@ -32,6 +33,7 @@ import { SuperAdminKnowledgeBaseNewsComponent } from './super-admin-knowledge-ba
         DropDownModule,
         FormsModule,
         InfiniteScrollModule,
+        MatFormFieldModule
 
     ],
 
