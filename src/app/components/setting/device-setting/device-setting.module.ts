@@ -15,6 +15,13 @@ import { DeviceSettingDeviceTypeComponent } from './device-setting-device-type/d
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 import { DeviceSettingManufactureComponent } from './device-setting-manufacture/device-setting-manufacture.component';
 import { DeviceSettingModelComponent } from './device-setting-model/device-setting-model.component';
+import { DeviceSettingManufacturesComponent } from './device-setting-manufactures/device-setting-manufactures.component';
+import { DeviceSettingManufacturesAddComponent } from './device-setting-manufactures/device-setting-manufactures-add/device-setting-manufactures-add.component';
+import { DeviceSettingModelsComponent } from './device-setting-models/device-setting-models.component';
+import { DeviceSettingModelsAddComponent } from './device-setting-models/device-setting-models-add/device-setting-models-add.component';
+import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.module';
+import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
+import { ManufacturesCheckUseComponent } from './manufactures-check-use/manufactures-check-use.component';
 
 @NgModule({
     declarations: [
@@ -26,7 +33,11 @@ import { DeviceSettingModelComponent } from './device-setting-model/device-setti
         DeviceSettingAsideComponent,
         DeviceSettingDeviceTypeComponent,
         DeviceSettingManufactureComponent,
-        DeviceSettingModelComponent
+        DeviceSettingModelComponent,
+        DeviceSettingManufacturesComponent,
+        DeviceSettingManufacturesAddComponent,
+        DeviceSettingModelsComponent,
+        DeviceSettingModelsAddComponent
     ],
     imports: [
         CommonModule,
@@ -39,7 +50,9 @@ import { DeviceSettingModelComponent } from './device-setting-model/device-setti
         DropDownModule,
         MatFormFieldModule,
         NgbModule,
-        DynamicTooltipModule
+        DynamicTooltipModule,
+        ClickOtsideModule,
+        KeyUpEnterModule
     ],
 })
 export class DeviceSettingModule { }

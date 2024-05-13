@@ -29,6 +29,8 @@ import { NavigationEnd, Router } from '@angular/router';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { UsersHeaderComponent } from './users-header/users-header.component';
 import { UserFilters } from './class/user-filters';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UserDeArchiveNotificationComponent } from './user-de-archive-notification/user-de-archive-notification.component';
 
 @Component({
   selector: 'app-users',
@@ -66,6 +68,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     private router: Router,
     private appStateService: AppStateService,
     private websocketService: WebsocketService,
+    private modalService: NgbModal,
   ) {
   }
   ngOnInit() {
@@ -257,6 +260,10 @@ export class UsersComponent implements OnInit, OnDestroy {
         if (index > -1) this.users.splice(index, 1);
       }
 
+    }, err => {
+      const modalRef = this.modalService.open(UserDeArchiveNotificationComponent, { windowClass: 'xs-modal user-modal', container: "app-users", backdrop: 'static', keyboard: false });
+      modalRef.componentInstance.user = this.usersStateService.getUserForDeArchive();
+      this.cd.detectChanges();
     })
     this.userListService.addSubscription(Dearchiveusers);
   }

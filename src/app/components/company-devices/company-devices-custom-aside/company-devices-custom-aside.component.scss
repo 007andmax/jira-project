@@ -1,0 +1,59 @@
+@import "./src/assets/styles/variable";
+
+.job-description {
+    width: 100%;
+}
+
+.company-actions {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 999;
+}
+
+.access-customer-portal {
+    cursor: default;
+}
+
+.first-name-invalid {
+    bottom: -30px !important;
+}
+ /deep/app-company-devices-custom-drop-down .mat-form-field {
+     width: 100%;
+ }
+app-company-devices-custom-drop-down {
+      &::before {
+          color: $gray-900;
+          font-size: 13px;
+          font-weight: 500;
+          content: "Tags";
+      }
+}
+.qt-aside-modern__header {
+    height: 88px !important;
+    padding: 0px 32px !important;
+    background-color: $white;
+}
+.qt-aside-modern__content {
+    padding: 32px !important;
+    height: calc(100% - 160px) !important;
+}
+.qt-aside-modern__footer {
+    box-shadow: 0px -2px 4px rgba(16, 24, 40, 0.05);
+    padding: 18px 32px;
+
+    .qt-button {
+        height: 36px;
+    }
+}
+.qt-aside-modern {
+    width: 480px;
+}
+/deep/.placeholder-date {
+.qt-input-block__input {
+    color: $gray-400 !important;
+}
+}
+.assest-type-body {
+    position: relative;
+}

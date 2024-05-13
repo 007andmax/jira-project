@@ -14,9 +14,19 @@
             <div class="sidebar-system__info edit-field">
                 <div class="sidebar-system__info-title">Name</div>
                 <app-company-devices-edit-label
-                    #editLabel
+                    *ngIf="device"
+                    #nameLabel
                     [field]="getLabelForEdit()"
-                    [title]="'Name'"
+                    [placeholder]="'Enter Name here'"
+                    [isDisabled]="customerPortalStateService.isCustomerPortal"
+                    class="company-device-edit-name"
+                    (onChange)="onChangeName($event)"
+                ></app-company-devices-edit-label>
+                <app-company-devices-edit-label
+                    #nameLabel
+                    *ngIf="customDevice"
+                    [field]="customDevice.name"
+                    [placeholder]="'Enter device name'"
                     [isDisabled]="customerPortalStateService.isCustomerPortal"
                     class="company-device-edit-name"
                     (onChange)="onChangeName($event)"
@@ -27,11 +37,22 @@
             <div class="sidebar-system__info">
                 <div class="sidebar-system__info-title">Asset Tag</div>
                 <app-company-devices-edit-label
-                    [field]="getSystemField('asset_tag') || ''"
-                    [title]="'Asset Tag'"
+                    *ngIf="device"
+                    #assetTagLabel
+                    [field]="getSystemField('assetTag') || ''"
+                    [placeholder]="'Enter Asset Tag'"
                     class="company-device-edit-name"
                     [isDisabled]="customerPortalStateService.isCustomerPortal"
-                    (onChange)="onChangeHardware(device.getDataForUpdateAssetTag($event),'asset_tag',$event)"
+                    (onChange)="onChangeHardware(device.getDataForUpdateAssetTag($event),'assetTag',$event)"
+                ></app-company-devices-edit-label>
+                <app-company-devices-edit-label
+                    *ngIf="customDevice"
+                    #assetTagLabel
+                    [field]="customDevice.assetTag"
+                    [placeholder]="'Enter Asset Tag'"
+                    class="company-device-edit-name"
+                    [isDisabled]="customerPortalStateService.isCustomerPortal"
+                    (onChange)="onChangeAssetTag($event)"
                 ></app-company-devices-edit-label>
             </div>
         </div>
@@ -39,31 +60,70 @@
             <div class="sidebar-system__info">
                 <div class="sidebar-system__info-title">Manufacturer</div>
                 <app-company-devices-edit-label
+                    *ngIf="device"
                     [field]="getSystemField('manufacturer') || ''"
-                    [title]="'Manufacturer'"
+                    [placeholder]="'Enter Manufacturer'"
                     class="company-device-edit-name"
                     [isDisabled]="customerPortalStateService.isCustomerPortal"
                     (onChange)="onChangeHardware(device.getDataForUpdateManufacturer($event),'manufacturer',$event)"
                 ></app-company-devices-edit-label>
+                <app-drop-down
+                    #manufacturerDd
+                    *ngIf="customDevice"
+                    class="qt-editable-dropdown qt-w100 company-devices-aside-system-dp"
+                    [placeholder]="'Select'"
+                    [field]="'name'"
+                    [list]="manufactures"
+                    [editItem]="customDevice.manufacturer"
+                    [search]="true"
+                    [change]="true"
+                    (onSelectedItem)="onSelectManufacture($event)"
+                    heightInput="auto"
+                ></app-drop-down>
             </div>
         </div>
         <div class="sidebar-system__info">
             <div class="sidebar-system__info-title">IP address</div>
             <div
-                class="sidebar-system__info-text"
-                [textContent]="chackDefaultValue(getNetworkAdapterField('ip_address'))"
+                *ngIf="device"
+                class="sidebar-system__info-text qt-df qt-ai-c"
+                [textContent]="chackDefaultValue(getNetworkAdapterField('ipAddress'))"
             ></div>
+            <app-company-devices-edit-ip
+                #ipAddressLabel
+                *ngIf="customDevice"
+                [field]="customDevice.ip"
+                [placeholder]="'Enter ip address'"
+                [isDisabled]="customerPortalStateService.isCustomerPortal"
+                class="company-device-edit-name"
+                (onChange)="onChangeIp($event)"
+            ></app-company-devices-edit-ip>
         </div>
         <div>
             <div class="sidebar-system__info">
                 <div class="sidebar-system__info-title">Computer Model</div>
                 <app-company-devices-edit-label
+                    *ngIf="device"
                     [field]="getSystemField('model') || ''"
-                    [title]="'Model'"
+                    [placeholder]="'Enter Model'"
                     class="company-device-edit-name"
                     [isDisabled]="customerPortalStateService.isCustomerPortal"
                     (onChange)="onChangeHardware(device.getDataForUpdateModel($event),'model',$event)"
                 ></app-company-devices-edit-label>
+                <app-drop-down
+                    #modelDd
+                    *ngIf="customDevice"
+                    class="qt-editable-dropdown qt-w100 company-devices-aside-system-dp"
+                    [placeholder]="'Select'"
+                    [field]="'name'"
+                    [list]="models"
+                    [editItem]="customDevice.model"
+                    [isDisabled]="!customDevice.manufacturer"
+                    [search]="true"
+                    [change]="true"
+                    (onSelectedItem)="onSelectModel($event)"
+                    heightInput="auto"
+                ></app-drop-down>
             </div>
         </div>
     </div>
@@ -82,10 +142,12 @@
         <div class="sidebar-system__info warranty-info date-picker">
             <div class="sidebar-system__info-title">Warranty</div>
             <app-date-picker
+                *ngIf="device"
                 #datePickerWarranty
                 [dropdownClass]="['date-picker']"
                 [container]="'body'"
                 [type]="'INPUT'"
+                [formatDate]="formatDate"
                 [editMode]="true"
                 [editDate]="device.report.system.warranty"
                 [useMinDate]="false"
@@ -93,38 +155,109 @@
                 [disabled]="customerPortalStateService.isCustomerPortal"
                 (onChange)="onChangeHardware(device.getDataForUpdateWarranty(parseDateFromDatePicker($event)),'warranty',parseDateFromDatePicker($event))"
             ></app-date-picker>
+            <app-date-picker
+                *ngIf="customDevice"
+                #datePickerWarranty
+                [dropdownClass]="['date-picker']"
+                [container]="'body'"
+                [type]="'COMPANY_DEVICE'"
+                [formatDate]="formatDate"
+                [editMode]="true"
+                [editDate]="customDevice.warrantyDateInt"
+                [useMinDate]="false"
+                [placement]="'top-right'"
+                [disabled]="customerPortalStateService.isCustomerPortal"
+                (onChange)="onChangeWarrentyDate($event)"
+            ></app-date-picker>
         </div>
-        <div class="sidebar-system__info">
+        <div
+            class="sidebar-system__info"
+            *ngIf="device"
+        >
             <div class="sidebar-system__info-title">Windows Info</div>
             <div
-                class="sidebar-system__info-text"
+                class="sidebar-system__info-text qt-df qt-ai-c"
                 [textContent]="chackDefaultValue(getWindowsInfo())"
             ></div>
         </div>
         <div class="sidebar-system__info installed-info date-picker">
             <div class="sidebar-system__info-title">Installed on</div>
             <app-date-picker
+                #datePickerInstalledOn
+                *ngIf="device"
                 [type]="'INPUT'"
+                [formatDate]="formatDate"
                 [editMode]="true"
                 [dropdownClass]="['date-picker']"
                 [container]="'body'"
-                [editDate]="device.report.system.install_date"
+                [editDate]="device.report.system.installDate"
                 [useMinDate]="false"
                 [placement]="'top-right'"
                 [disabled]="customerPortalStateService.isCustomerPortal"
-                (onChange)="onChangeHardware(device.getDataForUpdateInstallDate(parseDateFromDatePicker($event)),'install_date',parseDateFromDatePicker($event))"
+                (onChange)="onChangeHardware(device.getDataForUpdateInstallDate(parseDateFromDatePicker($event)),'installDate',parseDateFromDatePicker($event))"
+            ></app-date-picker>
+            <app-date-picker
+                #datePickerInstalledOn
+                *ngIf="customDevice"
+                [type]="'COMPANY_DEVICE'"
+                [formatDate]="formatDate"
+                [editMode]="true"
+                [dropdownClass]="['date-picker']"
+                [container]="'body'"
+                [editDate]="customDevice.installDateInt"
+                [useMinDate]="false"
+                [placement]="'top-right'"
+                [disabled]="customerPortalStateService.isCustomerPortal"
+                (onChange)="onChangeInstallDate($event)"
             ></app-date-picker>
         </div>
-        <div>
+        <div *ngIf="device">
             <div class="sidebar-system__info">
                 <div class="sidebar-system__info-title">System Type</div>
                 <app-company-devices-edit-label
                     [field]="getSystemField('architecture') || ''"
-                    [title]="'Architecture'"
+                    [placeholder]="'Enter System Type'"
                     class="company-device-edit-name"
                     [isDisabled]="customerPortalStateService.isCustomerPortal"
                     (onChange)="onChangeHardware(device.getDataForUpdateArchitecture($event),'architecture',$event)"
                 ></app-company-devices-edit-label>
+            </div>
+        </div>
+        <div *ngIf="customDevice">
+            <div class="sidebar-system__info edit-field">
+                <div class="sidebar-system__info-title">Location</div>
+                <app-company-devices-edit-label
+                    #locationLabel
+                    [field]="customDevice.location"
+                    [placeholder]="'Enter location'"
+                    [isDisabled]="customerPortalStateService.isCustomerPortal"
+                    class="company-device-edit-name"
+                    (onChange)="onChangeLocation($event)"
+                ></app-company-devices-edit-label>
+            </div>
+        </div>
+        <div *ngIf="customDevice">
+            <div
+                class="sidebar-system__info edit-field edit-note-container"
+                [init]="isInitEditNote"
+                appClickOtside
+                [class]="'.edit-note-container'"
+                (onOutSide)="onChangeNote()"
+            >
+                <div class="sidebar-system__info-title">Note</div>
+                <textarea
+                    class="qt-editable-input ng-untouched ng-pristine ng-valid"
+                    appTextArea
+                    placeholder="Write Note"
+                    [(ngModel)]="customDevice.notes"
+                    maxlength="65535"
+                    appKeyUpEnter
+                    (onChange)="onChangeNote()"
+                    (input)="setIsInitEditNote(true)"
+                    [default]="5"
+                    cols="2"
+                    rows="1"
+                ></textarea>
             </div>
         </div>
     </div>

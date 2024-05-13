@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Subscription } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { REBOOT_DEVICE, REMOVE_DEVICES, SHUTDOWN_DEVICE } from '../../const/confirm';
 import { DevicesService } from '../../services/devices/devices.service';
@@ -67,6 +67,23 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
 
     });
     this.sub.add(subscription);
+    this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
+      if (newChange.action === 'CUSTOM_DEVICE_SAVED') {
+        this.devices.push(new DeviceCompany({ ...newChange.data, isCustom: true, id: newChange.data.deviceId }, newChange.data.companyId));
+      }
+      if (newChange.action === 'CUSTOM_DEVICE_REMOVED') {
+        let index = this.devices.findIndex(item => item.id == newChange.data);
+        if (index > -1) this.devices.splice(index, 1);
+      }
+      if (newChange.action === 'CUSTOM_DEVICE_EDITED') {
+        if (newChange.data.companyId == this.companyId) {
+          let index = this.devices.findIndex(item => item.id == newChange.data.deviceId);
+          if (index > -1) this.devices[index].update(newChange.data);
+        }
+      }
+      this.filter.onCurrentFilter(this.devices);
+      this.cd.detectChanges();
+    })
     let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
       if (id == newChange.data.clientCompanyId) {
         this.devicesStateService.changeDevice(this.devices, newChange);
@@ -77,7 +94,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onDeviceUninstalled);
     let onInitWebSocket = this.devicesStateService.onInitWebSocket.subscribe(data => {
-      if (this.companyId && this.devices.length > 0) this.sendDeviceStatusRequest(this.companyId, this.devices.filter(item => item.agentId).map(item => item.agentId));
+      if (this.companyId && this.devices.filter(item => !item.isCustom).length > 0) this.sendDeviceStatusRequest(this.companyId, this.devices.filter(item => item.agentId).map(item => item.agentId));
     })
     this.sub.add(onInitWebSocket);
     let getOnClosedRemoveConnecion = this.devicesStateService.getOnClosedRemoveConnecion().subscribe(data => {
@@ -114,7 +131,8 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
           });
         }
         if (this.confirmStateService.getConfirmAction() === REMOVE_DEVICES) {
-          this.devicesService.sendUninstallAgentRequest(this.companyId, this.devicesStateService.getDevicesForRemove().map(item => item.id)).subscribe(data => {
+          if (this.devicesStateService.getDevicesForRemove().filter(item => item.isCustom).length > 0) this.removeCustomDevice(this.devicesStateService.getDevicesForRemove().filter(item => item.isCustom).map(item => item.id));
+          if (this.devicesStateService.getDevicesForRemove().filter(item => !item.isCustom).length > 0) this.devicesService.sendUninstallAgentRequest(this.companyId, this.devicesStateService.getDevicesForRemove().filter(item => !item.isCustom).map(item => item.id)).subscribe(data => {
             this.onChangeSelect();
           });
         }
@@ -165,12 +183,19 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnResetDeviceTiming);
     let getOnSendDeviceStatus = this.devicesStateService.getOnSendDeviceStatus().subscribe((data: DeviceStatus) => {
-      if (this.companyId === data.companyId && this.devicesStateService.getIsInitWebSocket() && this.devices.length > 0) this.devicesService.sendDeviceStatusRequest(data.companyId, data.agentIds, data.actions).subscribe(res => {
+      if (this.companyId === data.companyId && this.devicesStateService.getIsInitWebSocket() && this.devices.filter(item => !item.isCustom).length > 0) this.devicesService.sendDeviceStatusRequest(data.companyId, data.agentIds, data.actions).subscribe(res => {
       })
     })
     this.sub.add(getOnSendDeviceStatus);
   }
+  removeCustomDevice(ids) {
+    forkJoin(
+      [...ids.map(item => this.devicesService.deleteCustomDevice(item))]
+    )
+      .subscribe(res => {
 
+      });
+  }
   getDevice(id) {
     this.devicesService.getCompanyDevices(id).subscribe((data: any) => {
       if (Object.keys(data).length > 0) {
@@ -178,7 +203,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
         this.filter.onFilterName(this.devices);
       }
       this.showPreloader = false;
-      if (this.devices.length > 0 && this.devicesStateService.getIsInitWebSocket()) this.sendDeviceStatusRequest(this.companyId, this.devices.filter(item => item.agentId).map(item => item.agentId));
+      if (this.devices.filter(item => !item.isCustom).length > 0 && this.devicesStateService.getIsInitWebSocket()) this.sendDeviceStatusRequest(this.companyId, this.devices.filter(item => item.agentId).map(item => item.agentId));
     });
   }
   public onFilter(field) {
@@ -212,13 +237,13 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
   onChangeSelect() {
     let find = this.devices.find(item => !item.selected);
     this.selectAllDevices = (find) ? false : true;
-    this.isOfflineDeviceSelected = (this.devices.find(item => item.selected && !item.online)) ? true : false;
+    this.isOfflineDeviceSelected = (this.devices.find(item => item.selected && !item.isCustom && !item.online)) ? true : false;
   }
   toogleDevices() {
     this.devices.forEach(item => {
       item.selected = (this.selectAllDevices) ? true : false;
     })
-    this.isOfflineDeviceSelected = (this.devices.find(item => item.selected && !item.online)) ? true : false;
+    this.isOfflineDeviceSelected = (this.devices.find(item => item.selected && !item.isCustom && !item.online)) ? true : false;
   }
   isLabel(device) {
     if (device.label && device.hostName) return device.label !== device.hostName;

@@ -23,7 +23,7 @@ export class TicketsStateService {
   listTicketStatusForRemove: Array<TicketStatus> = [];
   onTicketsPriorities: EventEmitter<any> = new EventEmitter();
   clearFormUpdate: EventEmitter<any> = new EventEmitter();
-  actualNumber: EventEmitter<any> = new EventEmitter();
+  onActualNumber: EventEmitter<any> = new EventEmitter();
   addTicket: EventEmitter<any> = new EventEmitter();
   updateTicket: EventEmitter<any> = new EventEmitter();
   changeFieldTicket: EventEmitter<TicketChangeField> = new EventEmitter();
@@ -51,6 +51,7 @@ export class TicketsStateService {
   globalFilterForRemove: TicketGlobalFilter = null;
   ticketsPriorities: Array<TicketsPriority> = [];
   listTicketsPrioritiesForRemove: Array<TicketsPriority> = [];
+  actualNumber: string;
   constructor(private ticketsRealTimeService: TicketsRealTimeService,
     private ticketsService: TicketsService) { }
 
@@ -246,9 +247,12 @@ export class TicketsStateService {
   public onUpdateCounts(data) {
     this.updateCounts.emit(data);
   }
-
+  public getActualNumber() {
+    return this.actualNumber;
+  }
   public onInitActualNumber(data) {
-    this.actualNumber.emit(data);
+    this.actualNumber = data;
+    this.onActualNumber.emit(data);
   }
   public getTicketsFilter() {
     return this.ticketsFilter;
@@ -270,9 +274,6 @@ export class TicketsStateService {
   }
   public onInitCount(data) {
     this.count.emit(data);
-  }
-  public getOnActualNumber() {
-    return this.actualNumber;
   }
   public getOnInitFilter() {
     return this.filter;

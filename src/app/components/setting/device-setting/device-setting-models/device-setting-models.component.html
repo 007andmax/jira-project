@@ -1,0 +1,91 @@
+<div class="qt-pos-rel">
+    <a
+        href="javascript:;"
+        [ngClass]="{'--disabled':!selectedManufacture}"
+        class="qt-button --md --gray qt-jc-c pointer qt-ml-auto button-gl-number__add qt-mb-12"
+        (click)="openModelPopup()"
+    >
+        <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+        Add Model
+    </a>
+    <app-device-setting-models-add
+        *ngIf="addModel"
+        [manufactureId]="selectedManufacture.id"
+        (onClose)="onClosedAddModel()"
+    ></app-device-setting-models-add>
+</div>
+<div class="cmn-area qt-w100">
+    <div
+        class="tab-pane__table"
+        [ngClass]="{'cleat-height-dataTable':!showPreloader}"
+    >
+        <div class="tab-pane__table-header">
+            <div class="tab-pane__table-row">
+                <div
+                    class="tab-pane__table-cell crm-settings-company-industry-table__count pointer"
+                    (click)="onFilter('name')"
+                >
+                    Model
+                    <div class="qt-table-modern__sorting--new"></div>
+                </div>
+                <div class="tab-pane__table-cell crm-settings-company-industry-table__action"></div>
+            </div>
+        </div>
+        <div
+            class="tab-pane__table-body"
+            *ngIf="!showPreloader"
+        >
+            <div
+                class="text-center qt-df qt-jc-c qt-mb-24 qt-mt-24"
+                *ngIf="models.length == 0"
+            >
+                No model to show
+            </div>
+            <div
+                class="tab-pane__table-row"
+                *ngFor="let model of models; let i = index"
+                appClickOtside
+                [init]="model.isInitEdit"
+                [ngClass]="['edit-model-container-' + i,model.selected ? '--selected' : '']"
+                [class]="'.edit-model-container-' + i"
+                (onOutSide)="onEditModel(model,$event)"
+            >
+                <div class="tab-pane__table-cell crm-settings-company-industry-table__count">
+                    <input
+                        type="text"
+                        class="form-input  --editable"
+                        placeholder="Enter Model Name"
+                        [(ngModel)]="model.name"
+                        maxlength="255"
+                        appKeyUpEnter
+                        (onChange)="onEditModel(model,$event)"
+                        (input)="model.onInitEdit(true)"
+                    >
+                </div>
+                <div class="tab-pane__table-cell crm-settings-company-industry-table__action">
+                    <div class="qt-df qt-ai-c">
+                        <app-dynamic-tooltip
+                            [content]="'Remove'"
+                            [position]="'top'"
+                            #removeTooltip
+                        ></app-dynamic-tooltip>
+                        <div
+                            data-tooltip="Remove"
+                            class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                            (click)="removeConfirmModel(model)"
+                            (mouseenter)="removeTooltip.show($event.target)"
+                            (mouseleave)="removeTooltip.hide()"
+                        >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div
+    class="loading-container"
+    *ngIf="showPreloader"
+>
+    <div class="loading"></div>
+</div>

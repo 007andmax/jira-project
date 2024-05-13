@@ -18,6 +18,7 @@ import { DeviceTag } from '../../setting/manage-tags/manage-tags-devices/class/d
 import { DeviceTagsService } from 'src/app/services/device-tags/device-tags.service';
 import { DeviceTagsStateService } from 'src/app/states/device-tags/device-tags-state.service';
 import { DeviceTagsRealTimeService } from 'src/app/states/device-tags/device-tags-real-time.service';
+import { DevicesRealTimeService } from 'src/app/states/devices/devices-real-time.service';
 
 @Component({
   selector: 'app-company-devices-item',
@@ -41,6 +42,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     public customerPortalStateService: CustomerPortalStateService,
     private deviceTagsService: DeviceTagsService,
     private deviceTagsRealTimeService: DeviceTagsRealTimeService,
+    private devicesRealTimeService: DevicesRealTimeService,
     private deviceTagsStateService: DeviceTagsStateService,
     public cd: ChangeDetectorRef,) { }
 
@@ -56,7 +58,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     }, 1000);
     this.deviceTags.setSelectedTag(JSON.parse(JSON.stringify(this.device.tags)).map(item => new DeviceTag(item)));
-    this.deviceTagsRealTimeService.changeTagsrray.subscribe(newChange => {
+    this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
       if (newChange.action === 'BIND_DEVICE_TO_TAG') {
         let index = newChange.data.devices.findIndex(item => item.deviceId == this.device.agentId || item.deviceId == this.device.id);
         if (index > -1) {
@@ -77,8 +79,19 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
       }
     })
   }
+  getTextForTooltip(data) {
+    if (data == "workstation") return "Workstation";
+    if (data == "router") return "Router";
+    if (data == "printer") return "Printer";
+    if (data == "switch") return "Switch";
+    if (data == "server") return "Server";
+    if (data == "tablet") return "Tablet";
+    if (data == "network device") return "Network device";
+    if (data == "phone") return "Phone";
+    if (data == "generic device") return "Generic device";
+  }
   openAside(type) {
-    if (this.device.agentId) this.devicesStateService.setOnOpenAside(new DeviceCompanyAsideParams(type, [this.device.agentId]));
+    if (this.device.agentId || this.device.isCustom) this.devicesStateService.setOnOpenAside(new DeviceCompanyAsideParams(type, [this.device]));
   }
   onChangeTags(data) {
     let forRemove = [];
@@ -126,6 +139,13 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     return (user) ? `${user.firstName} ${user.lastName}` : '';
   }
   setIcon(iconName) {
+    if (this.device.isCustom) {
+      this.device.setType(iconName.toLowerCase());
+      this.devicesService.editDevice(this.device.getRequestForEdit()).subscribe(data => {
+
+      })
+      return;
+    }
     this.devicesService.editAgentInfo(this.device.getDataForEditIcon(iconName)).subscribe(data => {
       this.device.setIconName(iconName);
     })
@@ -147,6 +167,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     }
   }
   getLabelForEdit() {
+    if (this.device.isCustom) return this.device.name;
     if (this.device.label) return this.device.label;
     return this.device.hostName || this.device.ip;
   }
@@ -188,7 +209,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     this.devicesStateService.setDevicesForRemove([this.device]);
   }
   getWindows() {
-    return `${this.device.system.caption.replace('Microsoft', '')} ${this.device.system.release_id}`
+    return `${this.device.system.caption.replace('Microsoft', '')} ${this.device.system.releaseId}`
   }
   ngOnDestroy(): void {
     clearInterval(this.timer);

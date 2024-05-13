@@ -42,6 +42,7 @@ export class InvoiceDto {
     tickets: Array<InvoiceProfileTicket>;
     totalSum: number;
     invoiceDiscount: InvoiceDiscount;
+    status: string;
     constructor(data) {
         for (const key in data) {
             this[key] = data[key];

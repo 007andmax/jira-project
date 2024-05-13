@@ -1,0 +1,148 @@
+<div
+    ngbDropdown
+    #dp="ngbDropdown"
+    [ngClass]="class"
+    [container]="container"
+    [ngStyle]="{'width':widthInput ? widthInput : '100%'}"
+    class="tech-users-container"
+>
+    <div
+        *ngIf="title"
+        class="app-drop-down__title"
+        [textContent]="title"
+    ></div>
+    <mat-error
+        class="invalid-feedback"
+        *ngIf="!validate"
+        [textContent]="errorMessage"
+    >
+    </mat-error>
+    <input
+        type="text"
+        [ngStyle]="{'width': '100%', 'height': heightInput ? heightInput : '40px' }"
+        [ngClass]="{'disabled': isDisabled, '--input-error' : !validate}"
+        [disabled]="isDisabled"
+        autocomplete="off"
+        [placeholder]="placeholder"
+        id="dropdown1"
+        class="qt-dropdown-input"
+        [attr.maxlength]="maxlength"
+        (input)="onCheckAdd($event)"
+        (focus)="onFocus($event)"
+        [readonly]="!change"
+        ngbDropdownAnchor
+    >
+    <span
+        class="app-drop-down__right-icon pointer"
+        *ngIf="list && !isDisabled"
+        [ngStyle]="{'top': heightInput ? dividePosition(heightInput) : '20px' }"
+    >
+        <i
+            *ngIf="selectedItem && !isAdd && !isBlockClear"
+            class="icn-sm icn-remove-old"
+            (click)="clearClient()"
+        ></i>
+        <i
+            *ngIf="(!selectedItem || isBlockClear) && !isAdd && !preloader"
+            class="icn-sm report-caret-icon"
+        ></i>
+        <i
+            *ngIf="isAdd"
+            (click)="addItem()"
+            class="icn-sm icn-product-save icon__active_subscription"
+        ></i>
+    </span>
+    <i
+        class="loading xs"
+        *ngIf="preloader"
+    ></i>
+    <div class="save-template qt-mt-8">
+        <div class="assigned-users-list">
+            <div class="assigned-users-type assigned-users-type-clients">
+                <ng-template
+                    class="assigned-ticket-user"
+                    ngFor
+                    let-user
+                    [ngForOf]="selectedUsers"
+                    let-i="index"
+                    [ngForTrackBy]="trackByIndex"
+                >
+                    <app-assigned-ticket-user-selected-item
+                        [user]="user"
+                        *ngIf="user.accountType === 'CLIENT'"
+                    ></app-assigned-ticket-user-selected-item>
+                </ng-template>
+            </div>
+            <div class="assigned-users-type">
+                <ng-template
+                    class="assigned-ticket-user"
+                    ngFor
+                    let-user
+                    [ngForOf]="selectedUsers"
+                    let-i="index"
+                    [ngForTrackBy]="trackByIndex"
+                >
+                    <app-assigned-ticket-user-selected-item
+                        [user]="user"
+                        *ngIf="user.accountType === 'TECH'"
+                    ></app-assigned-ticket-user-selected-item>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+    <div
+        ngbDropdownMenu
+        [ngStyle]="{'width': dropdownWidth ? dropdownWidth : '100%', 'max-height': dropdownHeight ? dropdownHeight : '192px'}"
+        aria-labelledby="dropdown1"
+        class="tech-user-body"
+    >
+        <div class="select-wrapper dropdown-assign-ticket fixed-assign">
+            <div class="content">
+                <form class="px-4 py-3">
+                    <div class="assign-ticket">
+                        <div class="assign-ticket-content">
+                            <div class="assign-ticket-header">
+                                <div class="clearfix">
+                                    <div class="qt-input-search">
+                                        <input
+                                            #userInput
+                                            placeholder="Search Users"
+                                            autocomplete="off"
+                                            id="search-user"
+                                            (input)="onSearchUser($event)"
+                                        >
+                                        <span
+                                            class="search-clear icon__close-round"
+                                            *ngIf="searchText.length > 0"
+                                            (click)="clearSearch()"
+                                        ></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="scroll-pane">
+                                <div
+                                    class="users-list"
+                                    tabindex="-1"
+                                >
+                                    <ng-template
+                                        ngFor
+                                        let-user
+                                        [ngForOf]="list"
+                                        let-i="index"
+                                        [ngForTrackBy]="trackByIndex"
+                                    >
+                                        <app-assigned-ticket-user-item
+                                            [user]="user"
+                                            [selectedUsers]="selectedUsers"
+                                            (onSelect)="selected($event)"
+                                        ></app-assigned-ticket-user-item>
+                                    </ng-template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

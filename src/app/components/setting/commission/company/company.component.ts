@@ -205,65 +205,6 @@ export class CompanyComponent implements OnInit, OnDestroy {
     this.selectedIdx = i;
   }
 
-  /**
-   * get current company records - not used
-   */
-  getCurrentCompany() {
-    this.commissionService.getCurrentCompany().subscribe(
-      res => {
-        this.currentCompany = res;
-      },
-      error => { }
-    );
-  }
-
-  /**
-   * get client company info - not used
-   */
-  getClientCompaniesInfo() {
-    this.commissionService
-      .getClientCompaniesInfo()
-      .pipe(
-        map((res: any) => {
-          this.clientsCompanies = res.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-            1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-        }),
-        catchError(err => throwError(new Error("Get Client Companies")))
-      )
-      .subscribe();
-  }
-
-  /**
-   * get company logo url by company - not used
-   * @param company
-   */
-  getCompanyLogoUrl(company: any) {
-    if (
-      company &&
-      company.logo &&
-      company.logo &&
-      company.logo.base64 &&
-      !company.logo.cropped
-    ) {
-      return company.logo.base64;
-    } else if (
-      !(
-        company &&
-        company.logo &&
-        company.logo.cropped &&
-        company.logo.cropped.id
-      )
-    ) {
-      return "/company/default/logo" + ".jpg";
-    }
-    return (
-      "/file/" +
-      company.logo.cropped.id +
-      ".jpg?t=" +
-      (company.logo.updatedAt ? company.logo.updatedAt : "")
-    );
-  }
-
   displayFrstLstChar(user: any) {
     if (user) {
       const splitUser = user.split(" ");

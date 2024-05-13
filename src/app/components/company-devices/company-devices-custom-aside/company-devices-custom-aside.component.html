@@ -1,0 +1,225 @@
+<div
+    class="qt-aside-modern users-page__aside"
+    [hidden]="!opened"
+>
+    <!-- *ngIf="opened" -->
+    <div class="qt-aside-modern__header">
+        <div class="qt-aside-modern__header-title">None Agent Device</div>
+        <div class="qt-df">
+            <div
+                class="qt-button --square-md --gray pointer qt-ml-8"
+                (click)="closed()"
+            >
+                <i class="icon__close qt-sz-16 qt-bg-contain"></i>
+            </div>
+        </div>
+    </div>
+    <div class="qt-aside-modern__content --required">
+        <div class="qt-inputs-row">
+            <div class="qt-f100 assest-type-body">
+                <app-company-devices-assest-type-drop-down
+                    #typeDd
+                    [placeholder]="'Select type'"
+                    [list]="assestType"
+                    [search]="true"
+                    [change]="true"
+                    [title]="'Assest Type'"
+                    [errorMessage]="'Field is required'"
+                    [validate]="validate.getType()"
+                    (onSelectedItem)="onSelectAssestType($event)"
+                ></app-company-devices-assest-type-drop-down>
+            </div>
+        </div>
+        <div class="qt-inputs-row --required">
+            <div
+                class="qt-input-block qt-f100"
+                [ngClass]="{'--input-error':!validate.getName()}"
+            >
+                <div class="qt-input-block__label">Device Name</div>
+                <input
+                    type="text"
+                    minlength="1"
+                    maxlength="255"
+                    (blur)="validate.checkValidName(device.name)"
+                    [(ngModel)]="device.name"
+                    placeholder="Enter device name"
+                >
+                <mat-error
+                    class="invalid-feedback"
+                    *ngIf="!validate.getName()"
+                >
+                    Field is required
+                </mat-error>
+            </div>
+        </div>
+        <div class="qt-inputs-row">
+            <div class="qt-input-block qt-f100">
+                <div class="qt-input-block__label">Asset Tag</div>
+                <input
+                    type="text"
+                    maxlength="255"
+                    [(ngModel)]="device.asset_tag"
+                    placeholder="Select tag"
+                >
+            </div>
+        </div>
+        <div class="qt-inputs-row">
+            <div class="qt-input-block qt-f100">
+                <div class="qt-input-block__label">Location</div>
+                <input
+                    type="text"
+                    maxlength="255"
+                    [(ngModel)]="device.location"
+                    placeholder="Enter location"
+                >
+            </div>
+        </div>
+        <div class="qt-inputs-row">
+            <div class="qt-f100">
+                <app-manufactures-drop-down
+                    #manufacturesDd
+                    [placeholder]="'Select'"
+                    [list]="manufactures"
+                    [field]="'name'"
+                    [search]="true"
+                    [change]="true"
+                    [title]="'Manufacture'"
+                    [preloader]="!devicesStateService.isGetManufactures"
+                    [isDisabled]="!devicesStateService.isGetManufactures"
+                    (onSelectedItem)="onSelectManufacture($event)"
+                ></app-manufactures-drop-down>
+            </div>
+        </div>
+        <div class="qt-inputs-row">
+            <div class="qt-f100">
+                <app-models-drop-down
+                    #modelsDd
+                    [placeholder]="'Select'"
+                    [list]="models"
+                    [field]="'name'"
+                    [search]="true"
+                    [change]="true"
+                    [title]="'Model'"
+                    [manufactureId]="device.manufacturerId"
+                    [isDisabled]="!device.manufacturerId || device.preloaderModels"
+                    [preloader]="device.preloaderModels"
+                    (onSelectedItem)="onSelectModel($event)"
+                ></app-models-drop-down>
+            </div>
+        </div>
+        <div class="qt-inputs-row">
+            <div class="qt-input-block qt-f100 --required">
+                <div class="app-drop-down__title">Install Date</div>
+                <app-date-picker
+                    #installDateDP
+                    [ngClass]="{'placeholder-date':device.install_date_int == 0}"
+                    [type]="'COMPANY_DEVICE'"
+                    [formatDate]="formatDate"
+                    [useMinDate]="false"
+                    [editMode]="true"
+                    [editDate]="device.install_date_int"
+                    (onChange)="onChangeInstallDate($event)"
+                ></app-date-picker>
+            </div>
+        </div>
+        <div class="qt-inputs-row">
+            <div class="qt-input-block qt-f100 --required">
+                <div class="app-drop-down__title">Warrenty Date</div>
+                <app-date-picker
+                    #warrantyDateDP
+                    [ngClass]="{'placeholder-date':device.warranty_date_int == 0}"
+                    [type]="'COMPANY_DEVICE'"
+                    [formatDate]="formatDate"
+                    [editMode]="true"
+                    [useMinDate]="false"
+                    [editDate]="device.warranty_date_int"
+                    (onChange)="onChangeWarrentyDate($event)"
+                ></app-date-picker>
+            </div>
+        </div>
+        <div class="qt-inputs-row --required">
+            <div class="qt-input-block qt-f50">
+                <div class="qt-input-block__label">IP Address</div>
+                <input
+                    type="text"
+                    [(ngModel)]="device.ip_address"
+                    placeholder="Enter ip address"
+                    [ngClass]="{'--input-error': !validate.getIpAdress()}"
+                    (input)="validate.resetIpAdress()"
+                >
+                <mat-error
+                    class="invalid-feedback"
+                    *ngIf="!validate.getIpAdress()"
+                >
+                    Enter a valid IP value
+                </mat-error>
+            </div>
+            <div class="qt-input-block qt-f50">
+                <div class="qt-input-block__label">Remote Control port</div>
+                <input
+                    type="text"
+                    [(ngModel)]="device.port"
+                    placeholder="Port"
+                >
+            </div>
+        </div>
+        <div class="qt-inputs-row --required">
+            <div class="qt-input-block qt-f100">
+                <div class="qt-input-block__label">MAC address</div>
+                <input
+                    type="text"
+                    [(ngModel)]="device.mac_address"
+                    placeholder="Enter mac address"
+                    [ngClass]="{'--input-error': !validate.getMacAdress()}"
+                    (input)="validate.resetMacAdress()"
+                >
+                <mat-error
+                    class="invalid-feedback"
+                    *ngIf="!validate.getMacAdress()"
+                >
+                    Enter a valid MAC address value - format XXXXXXXXXXXX
+                </mat-error>
+            </div>
+        </div>
+        <div class="qt-inputs-row">
+            <div class="qt-f100">
+                <app-company-devices-custom-drop-down
+                    #tagsDd
+                    [placement]="'top-left'"
+                    (tagsChange)="onSelectTags($event)"
+                ></app-company-devices-custom-drop-down>
+            </div>
+        </div>
+        <div class="qt-inputs-row">
+            <div class="qt-input-block">
+                <div class="qt-input-block__label">Notes</div>
+                <textarea
+                    class="qt-input-block__textarea"
+                    [(ngModel)]="device.notes"
+                    placeholder="Write Note"
+                    maxlength="65535"
+                ></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="qt-aside-modern__footer">
+        <div class="qt-df qt-w100">
+            <button
+                class="qt-button --gray qt-mr-12 qt-w100 qt-jc-c"
+                (click)="closed()"
+            >
+                Cancel
+            </button>
+            <button
+                class="qt-button qt-w100 qt-jc-c"
+                appDisabledBtn
+                #addBtn="disabled"
+                (onClick)="onAdd()"
+                [ngClass]="{'--loading':addBtn.isBlock()}"
+            >
+                <span>Create</span>
+                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+            </button>
+        </div>
+    </div>
+</div>

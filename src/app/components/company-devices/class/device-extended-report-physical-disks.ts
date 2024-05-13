@@ -1,10 +1,10 @@
 export class DeviceExtendedReportPhysicalDisks {
-    computer_id: string;
-    deleted_at: string;
-    device_id: string;
-    disk_index: number;
+    computerId: string;
+    deletedAt: string;
+    deviceId: string;
+    diskIndex: number;
     id: string;
-    interface_type: string;
+    interfaceType: string;
     model: string;
-    serial_number: string;
+    serialNumber: string;
 }

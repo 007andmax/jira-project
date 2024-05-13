@@ -140,7 +140,7 @@ export class CompanyNetworkScanComponent implements OnInit {
   }
   getDevices(id) {
     this.devicesService.getCompanyDevices(id).subscribe((data: any) => {
-      this.devices = (data[this.companyId]) ? JSON.parse(JSON.stringify(data[this.companyId])).map(item => new Device(item)) : [];
+      this.devices = (data[this.companyId]) ? JSON.parse(JSON.stringify(data[this.companyId])).filter(item => !item.isCustom).map(item => new Device(item)) : [];
       this.companyNetworkScanService.onFilterName(this.devices);
       if (this.devices.length > 0 && !this.isGetDevices) this.getSomeInfoForDevices().then(result => {
         this.findMasterAgent();

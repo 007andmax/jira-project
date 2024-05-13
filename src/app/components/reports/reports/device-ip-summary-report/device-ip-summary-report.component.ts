@@ -40,7 +40,7 @@ export class DeviceIpSummaryReportComponent implements OnInit {
     var currentItem = '';
     if (device.report) {
       device.report.networkAdapters.map((item) => {
-        if (item.ip_enabled) { currentItem = item[params]; }
+        if (item.ipEnabled) { currentItem = item[params]; }
       });
       if (params === 'dns' || 'subnet') {
         var regex = /;/gi;

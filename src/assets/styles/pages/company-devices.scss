@@ -607,3 +607,21 @@ app-company-devices-tags{
     padding-bottom: 0px !important;
   }
 }
+app-company-devices-custom-drop-down {
+  .mat-form-field-infix {
+      position: relative;
+      padding-left: 36px !important;
+      &:before {
+        left: 12px;
+        top: 10px;
+        position: absolute;
+        content: "";
+        width: 20px;
+        height: 20px;
+        background: url("./assets/img/icons/tag.svg");
+      }
+}
+  .mat-form-field-label {
+  padding: 12px 10px 10px 36px !important;
+  }
+}

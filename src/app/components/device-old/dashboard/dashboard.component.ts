@@ -27,20 +27,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
   deviceDetail: any = {};
   windows_info: string = '';
   system = {
-    install_date: null,
+    installDate: null,
     manufacturer: '',
-    asset_tag: '',
+    assetTag: '',
     warranty: null,
     architecture: '',
     model: '',
     caption: '',
     version: '',
-    release_id: '',
+    releaseId: '',
     warrantyTime: null,
     install_dateTime: null,
   };
   networkAdapters = {
-    ip_address: ''
+    ipAddress: ''
   }
   logicalDisk: any = [];
   virusInfo: any = [];
@@ -58,9 +58,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   onChangeInstallDate(data) {
-    this.system.install_date = data;
+    this.system.installDate = data;
     this.system.install_dateTime = new Date(data.year, data.month - 1, data.day).getTime();
-    this.updateDashboard('install_date');
+    this.updateDashboard('installDate');
   }
   onChangeWarranty(data) {
     this.system.warranty = data;
@@ -93,20 +93,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.virusInfo = resp.reports[0].antivirus[0];
           this.system = resp.reports[0].system || {};
           let caption = this.system.caption.replace('Microsoft ', '')
-          let release_id = this.system.release_id === '' ? '' : ` Version ${this.system.release_id}`;
+          let releaseId = this.system.releaseId === '' ? '' : ` Version ${this.system.releaseId}`;
           let architecture = this.system.architecture === '' ? '' : ` ( ${this.system.architecture} )`;
-          this.windows_info = `${caption}${architecture}${release_id}`;
-          if (this.system.install_date !== '') {
-            this.system.install_dateTime = new Date(this.system.install_date).getTime();
-            this.system.install_date = {
-              "day": new Date(this.system.install_date).getDate(),
-              "month": new Date(this.system.install_date).getMonth(),
-              "year": new Date(this.system.install_date).getFullYear(),
+          this.windows_info = `${caption}${architecture}${releaseId}`;
+          if (this.system.installDate !== '') {
+            this.system.install_dateTime = new Date(this.system.installDate).getTime();
+            this.system.installDate = {
+              "day": new Date(this.system.installDate).getDate(),
+              "month": new Date(this.system.installDate).getMonth(),
+              "year": new Date(this.system.installDate).getFullYear(),
             };
           } else {
             this.system.install_dateTime = new Date().getTime();
           }
-          this.networkAdapters = resp['reports'][0].networkAdapters.filter(value => value.ip_enabled === true)[0] || {};
+          this.networkAdapters = resp['reports'][0].networkAdapters.filter(value => value.ipEnabled === true)[0] || {};
           if (this.system.warranty !== '') {
             this.system.warrantyTime = new Date(this.system.warranty).getTime();
             this.system.warranty = {
@@ -120,7 +120,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           let colors = ['#0057a8', '#00d8e7', '#16a4fa', '#0CB2B2', '#485EF0'];
           let count = 0;
           this.logicalDisk.forEach(element => {
-            if (element.is_system === true) {
+            if (element.isSystem === true) {
               element.color = '#2ec866';
             } else {
               element.color = colors[count];
@@ -129,9 +129,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
             if (count == 5) {
               count = 0;
             }
-            if (element.free_space != '' && element.size != '') {
+            if (element.freeSpace != '' && element.size != '') {
               let size = this.convertToGB(element.size);
-              let free = this.convertToGB(element.free_space)
+              let free = this.convertToGB(element.freeSpace)
               let osize = parseInt(size) - parseInt(free)
               element.percent = Math.round((osize / parseInt(size)) * 100);
             } else {
@@ -140,20 +140,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
           });
           // this.logicalDisk.sort(function(x, y) {
-          //   return (x.is_system === y.is_system)? 0 : x? -1 : 1;
+          //   return (x.isSystem === y.isSystem)? 0 : x? -1 : 1;
           // });
           this.logicalDisk.sort((a, b) => {
-            if (a['device_id'] && b['device_id']) {
-              return ((a['device_id'].toLowerCase() > b['device_id'].toLowerCase()) ?
-                1 : ((b['device_id'].toLowerCase() > a['device_id'].toLowerCase()) ? -1 : 0));
-            } else if (a['device_id']) {
+            if (a['deviceId'] && b['deviceId']) {
+              return ((a['deviceId'].toLowerCase() > b['deviceId'].toLowerCase()) ?
+                1 : ((b['deviceId'].toLowerCase() > a['deviceId'].toLowerCase()) ? -1 : 0));
+            } else if (a['deviceId']) {
               return 1
-            } else if (b['device_id']) {
+            } else if (b['deviceId']) {
               return -1
             }
             return 0;
           });
-          document.getElementById("tag").setAttribute("data-tooltip", this.system.asset_tag);
+          document.getElementById("tag").setAttribute("data-tooltip", this.system.assetTag);
           document.getElementById("manufacture").setAttribute("data-tooltip", this.system.manufacturer);
         },
         error => {
@@ -186,12 +186,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
       obj.system['manufacturer'] = this.system.manufacturer;
     } else if (type === 'model') {
       obj.system['model'] = this.system.model;
-    } else if (type === 'asset_tag') {
-      obj.system['asset_tag'] = this.system.asset_tag;
+    } else if (type === 'assetTag') {
+      obj.system['assetTag'] = this.system.assetTag;
     } else if (type === 'architecture') {
       obj.system['architecture'] = this.system.architecture;
-    } else if (type === 'install_date') {
-      obj.system['install_date'] = moment(new Date(this.system.install_date.year, this.system.install_date.month - 1, this.system.install_date.day)).format('YYYY/MM/DD');
+    } else if (type === 'installDate') {
+      obj.system['installDate'] = moment(new Date(this.system.installDate.year, this.system.installDate.month - 1, this.system.installDate.day)).format('YYYY/MM/DD');
     } else if (type === 'warranty') {
       obj.system['warranty'] = moment(new Date(this.system.warranty.year, this.system.warranty.month - 1, this.system.warranty.day)).format('YYYY/MM/DD');
     }

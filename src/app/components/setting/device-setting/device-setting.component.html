@@ -20,51 +20,24 @@
                     <div class="qt-icon icon__remove qt-sz-16 qt-bg-contain qt-ic-c qt-button-icon"></div>
                 </a>
                 <div class="qt-df qt-pos-rel">
-                    <a
-                        href="javascript:;"
-                        class="qt-button --md --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
-                        (click)="openModel()"
-                        *ngIf="devicebutton"
-                    >
-                        <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8 qt-button-icon"></span>
-                        Add Device Type
-                    </a>
-                    <a
-                        href="javascript:;"
-                        class="qt-button --md --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
-                        (click)="openModelManufacture()"
-                        *ngIf="manufacturebutton"
-                    >
-                        <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8 qt-button-icon"></span>
-                        Add Manufacture
-                    </a>
-                    <a
-                        href="javascript:;"
-                        class="qt-button --md --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
-                        (click)="openModelPopup()"
-                        *ngIf="modelbutton"
-                    >
-                        <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8 qt-button-icon"></span>
-                        Add Model
-                    </a>
                     <add-device-type
                         *ngIf="addDeviceType"
                         [techCompany]="techCompany"
                         (onClose)="onClosedAddDeviceType()"
                         (onAdded)="onAddDeviceType($event)"
                     ></add-device-type>
-                    <add-manufacture
+                    <!-- <add-manufacture
                         *ngIf="addManufacture"
                         [techCompany]="techCompany"
                         (onClose)="onClosedAddManufacture()"
                         (onAdded)="onAddManufacture($event)"
-                    ></add-manufacture>
-                    <add-model
+                    ></add-manufacture> -->
+                    <!-- <add-model
                         *ngIf="addModel"
                         [techCompany]="techCompany"
                         (onClose)="onClosedAddModel()"
                         (onAdded)="onAddModel($event)"
-                    ></add-model>
+                    ></add-model> -->
                 </div>
             </div>
         </div>
@@ -73,33 +46,21 @@
             [destroyOnHide]="true"
         >
             <!-- Device Type -->
-            <ngb-tab
+            <!-- <ngb-tab
                 title="Device Type"
                 id="deviceType"
             >
                 <ng-template ngbTabContent>
                     <device-setting-device-type #deviceType></device-setting-device-type>
                 </ng-template>
-            </ngb-tab>
+            </ngb-tab> -->
             <!-- Manufacture -->
             <ngb-tab
-                title="Manufacture"
+                title="Manufacturer / Model"
                 id="manufacture"
             >
                 <ng-template ngbTabContent>
-                    <device-setting-manufacture #manufacture></device-setting-manufacture>
-                </ng-template>
-            </ngb-tab>
-            <!-- Model -->
-            <ngb-tab
-                title="Model"
-                id="model"
-            >
-                <ng-template ngbTabContent>
-                    <device-setting-model
-                        #model
-                        (onSelectManufactureId)="onSelectManufactureId($event)"
-                    ></device-setting-model>
+                    <app-device-setting-manufactures #manufacture></app-device-setting-manufactures>
                 </ng-template>
             </ngb-tab>
         </ngb-tabset>

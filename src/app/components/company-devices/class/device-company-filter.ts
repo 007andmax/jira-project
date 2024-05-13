@@ -67,6 +67,7 @@ export class CompanyDeviceFilter {
             1 : ((this.getNameDevice(b).toLowerCase() > this.getNameDevice(a).toLowerCase()) ? -1 : 0));
     }
     private getNameDevice(device) {
+        if (device.isCustom) return device.name;
         return device.label || device.hostName || device.ip
     }
     public clearFilter() {

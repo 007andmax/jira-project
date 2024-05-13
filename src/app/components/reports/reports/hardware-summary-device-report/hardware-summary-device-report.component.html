@@ -208,7 +208,7 @@
                     >
                         <td *ngIf="hardwareSummaryReport.hardwareSummaryWithDevice">{{device.label || device.hostName}}</td>
                         <td *ngIf="hardwareSummaryReport.hardwareSummaryWithOperationSystem">
-                            {{device.report && device.report.system && (device.report.system.caption + ' ' + device.report.system.release_id)}}
+                            {{device.report && device.report.system && (device.report.system.caption + ' ' + device.report.system.releaseId)}}
                         </td>
                         <td *ngIf="hardwareSummaryReport.hardwareSummaryWithCpu">
                             {{device.report && device.report.processors && device.report.processors.length > 0 && device.report.processors[0].name}}
@@ -223,7 +223,7 @@
                             {{device.report && device.report.variant && device.report.variant.warrantyDate}}
                         </td>
                         <td *ngIf="hardwareSummaryReport.hardwareSummaryWithSerialNumber">
-                            {{device.report && device.report.system && device.report.system.serial_number}}
+                            {{device.report && device.report.system && device.report.system.serialNumber}}
                         </td>
                     </tr>
                 </ng-template>

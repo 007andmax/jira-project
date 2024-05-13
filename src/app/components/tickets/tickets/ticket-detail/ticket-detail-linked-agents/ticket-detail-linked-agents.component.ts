@@ -29,7 +29,7 @@ export class TicketDetailLinkedAgentsComponent extends PasswordManagerLinkedComp
     this.sub.add(getOnCompanies);
   }
   getDevicesCompany(data) {
-    this.devices = data;
+    this.devices = data.filter(item => !item.isCustom);
     this.preloader = false;
     if (this.selectedCompanyId) this.onSelectCompany(this.selectedCompanyId);
   }

@@ -101,10 +101,10 @@ export class HardwareComponent implements OnInit {
     this.motherBoard = this.hardwareDetail['reports'][0].motherboard || {};
     this.bios = this.hardwareDetail['reports'][0].bios || {};
     this.display = this.hardwareDetail['reports'][0].monitors[0] || {};
-    this.logicalDisks = this.hardwareDetail['reports'][0].logicalDisks.filter(value => value.is_system === true)[0] || {};
+    this.logicalDisks = this.hardwareDetail['reports'][0].logicalDisks.filter(value => value.isSystem === true)[0] || {};
     this.processors = this.hardwareDetail['reports'][0].processors[0] || {};
     this.memory = this.hardwareDetail['reports'][0].ram.slots || {};
-    this.networkAdapters = this.hardwareDetail['reports'][0].networkAdapters.filter(value => value.ip_enabled === true)[0] || {};
+    this.networkAdapters = this.hardwareDetail['reports'][0].networkAdapters.filter(value => value.ipEnabled === true)[0] || {};
     this.externalIp = this.hardwareDetail['reports'][0].externalIp || {};
 
     this.printSystem = [
@@ -116,9 +116,9 @@ export class HardwareComponent implements OnInit {
     ];
     this.printMotherBoard = [
       ['Manufacturer', this.motherBoard['manufacturer'] || 'N/A'],
-      ['Model', this.motherBoard['serial_number'] || 'N/A'],
+      ['Model', this.motherBoard['serialNumber'] || 'N/A'],
       ['BIOS Manufacturer', this.bios['manufacturer'] || 'N/A'],
-      ['BIOS Model', 'BIOS Date ' + (this.bios['release_date'] || 'N/A') + ' Version: ' + (this.bios['version'] || 'N/A')]
+      ['BIOS Model', 'BIOS Date ' + (this.bios['releaseDate'] || 'N/A') + ' Version: ' + (this.bios['version'] || 'N/A')]
     ];
     this.printProcessor = [
       ['Model', this.processors['name'] || 'N/A'],
@@ -130,13 +130,13 @@ export class HardwareComponent implements OnInit {
     ];
     this.printNetwork = [
       ['Model(s)', this.networkAdapters['description'] || 'N/A'],
-      ['IP', this.networkAdapters['ip_address'] || 'N/A'],
+      ['IP', this.networkAdapters['ipAddress'] || 'N/A'],
       ['Subnet Mask', this.networkAdapters['subnet'] || 'N/A'],
       ['Preferred DNS Server', this.networkAdapters['dns'] || 'N/A'],
       ['Link Speed', this.networkAdapters['speed'] != undefined ? (this.networkAdapters['speed'] / 1000000) + ' (MegaBit)' : 'N/A'],
       ['External IP', this.externalIp || 'N/A'],
       ['MAC', this.formatMacAddress(this.networkAdapters['mac']) || 'N/A'],
-      ['DHCP', this.networkAdapters['dhcp_server'] || 'N/A'],
+      ['DHCP', this.networkAdapters['dhcpServer'] || 'N/A'],
     ];
     this.printGraphic = [
       ['Model', this.graphics['hardwareDeviceName'] || 'N/A'],
@@ -151,16 +151,16 @@ export class HardwareComponent implements OnInit {
       ['Refresh Rate', 'N/A']
     ];
     this.printDisk = [
-      ['Model', this.logicalDisks['device_id'] || 'N/A'],
-      ['File Format(s)', 'NTFS ' + this.logicalDisks['device_id']],
+      ['Model', this.logicalDisks['deviceId'] || 'N/A'],
+      ['File Format(s)', 'NTFS ' + this.logicalDisks['deviceId']],
       ['Size', this.logicalDisks['size'] != undefined ? (this.logicalDisks['size'] / 1024 / 1024) + ' GB' : 'N/A'],
-      ['Free Space', this.logicalDisks['free_space'] != undefined ? (this.logicalDisks['free_space'] / 1024 / 1024) + ' GB' : 'N/A']
+      ['Free Space', this.logicalDisks['freeSpace'] != undefined ? (this.logicalDisks['freeSpace'] / 1024 / 1024) + ' GB' : 'N/A']
     ];
     this.printOS = [
       ['Name', this.system['caption'] || 'N/A'],
-      ['IP', this.networkAdapters['ip_address'] || 'N/A'],
+      ['IP', this.networkAdapters['ipAddress'] || 'N/A'],
       ['Version', this.system['version'] || 'N/A'],
-      ['Service Pack', this.system['service_pack'] || 'N/A']
+      ['Service Pack', this.system['servicePack'] || 'N/A']
     ];
   }
 

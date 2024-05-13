@@ -171,6 +171,7 @@ export class CompaniesService {
       limit: 5,
       offset: 0,
       companyId: companyId,
+      excludeDeleted: true
     });
   }
 

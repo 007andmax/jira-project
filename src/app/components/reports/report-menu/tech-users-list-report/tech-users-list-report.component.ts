@@ -5,6 +5,8 @@ import { DropDownComponent } from '../../../shared/drop-down/drop-down.component
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
+import { DeviceTagsService } from 'src/app/services/device-tags/device-tags.service';
+import { DevicesService } from 'src/app/services/devices/devices.service';
 
 @Component({
   selector: 'app-tech-users-list-report',
@@ -21,8 +23,9 @@ export class TechUsersListReportComponent extends DropDownComponent {
     public usersStateService: UsersStateService,
     public customerPortalStateService: CustomerPortalStateService,
     public ref: ChangeDetectorRef,
+    public devicesService: DevicesService,
     public companiesService: CompaniesService) {
-    super(elRef, companiesStateService, usersStateService, customerPortalStateService, companiesService, ref);
+    super(elRef, companiesStateService, usersStateService, customerPortalStateService, companiesService, devicesService, ref);
   }
 
   ngOnInit() {

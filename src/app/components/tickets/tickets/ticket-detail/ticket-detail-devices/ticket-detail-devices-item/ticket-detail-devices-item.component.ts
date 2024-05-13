@@ -30,6 +30,11 @@ export class TicketDetailDevicesItemComponent implements OnInit {
       minutes: minutes,
     }
   }
+  getLabelForEdit() {
+    if (this.device.isCustom) return this.device.name;
+    if (this.device.label) return this.device.label;
+    return this.device.hostName || this.device.ip;
+  }
   remoteAccess(connectionType) {
     const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, { windowClass: 'device-send-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.connectionType = connectionType;

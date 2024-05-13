@@ -1,12 +1,17 @@
 @import "./src/assets/styles/mixin/dropdown";
 
 app-drop-down,
+app-manufactures-drop-down,
+app-models-drop-down,
 contract-detail-drop-down,
 contract-detail-intervals-drop-down,
 tickets-filter-created-drop-down,
 gl-numbers-drop-down,
 company-drop-down,
-contract-company-drop-down {
+contract-company-drop-down,
+app-company-devices-assest-type-drop-down,
+app-priority-level-drop-down,
+app-assigned-ticket-user {
   input {
     height: 40px;
     width: 100%;
@@ -47,7 +52,8 @@ contract-company-drop-down {
   }
 }
 
-.app-drop-down {
+.app-drop-down,
+app-company-devices-assest-type-drop-down {
   &__right-icon {
     position: absolute;
     right: 0;
@@ -58,7 +64,7 @@ contract-company-drop-down {
     font-size: 13px;
     line-height: 16px;
     font-weight: 500;
-    color: $gray-500;
+    color: $gray-900;
     margin-bottom: 8px;
   }
 

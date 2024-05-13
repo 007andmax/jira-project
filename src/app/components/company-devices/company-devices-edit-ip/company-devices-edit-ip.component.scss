@@ -1,0 +1,20 @@
+@import './src/assets/styles/variable';
+
+.device-table__input-name {
+    width: 100%;
+    border: 1px solid $gray-200;
+    border-radius: 4px;
+    outline: none;
+    border-color: transparent;
+    &::placeholder {
+        color: $gray-400;
+    }
+    &:hover,
+    &:focus {
+        border-color: $gray-200;
+        outline: none;
+    }
+}
+.--input-error {
+    border: 1px solid $red-600;
+}

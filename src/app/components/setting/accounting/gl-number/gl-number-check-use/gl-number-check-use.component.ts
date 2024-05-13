@@ -25,7 +25,6 @@ export class GlNumberCheckUseComponent implements OnInit {
   showPreloader: boolean = true;
   valid: boolean = false;
   glNumberUse: GlNumberUse;
-  listColorNoAvatar = ['#0cdeaa', '#16a4fa', '#7c77cb', '#ffb937'];
   sub: Subscription = new Subscription();
   constructor(
     public ticketsListService: TicketsListService,

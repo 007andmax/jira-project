@@ -1,22 +1,27 @@
 <div
     class="company-device-aside__menu-item qt-pointer"
-    [ngClass]="{'--active': currentDevice.id === device.id}"
+    [ngClass]="{'--active': currentDevice && (currentDevice.id === (device && device.id) || currentDevice.id === (customDevice && customDevice.id))}"
     (click)="select()"
 >
     <ng-template
         #asideMenuItem
         class="tooltip"
     >
-        {{!isLabel() ? device.hostName || device.ip :  device.label || device.hostName || device.ip}}
+        {{getTextForTooltip()}}
     </ng-template>
     <div
         placement="left"
         [ngbTooltip]="asideMenuItem"
         class="qt-sz-24 qt-bg-contain"
-        [ngClass]="{'qt-icon icon__computer' : device.iconName === 'workstation' || !device.iconName,
-              'icon__tablet' : device.iconName === 'device',
-            'icon__printer' : device.iconName === 'printer',
-          'icon__server' : device.iconName === 'server',
-        '--ofline': !device.online }"
+        [ngClass]="{'icon__computer' : getFieldForCheckIcon() === 'workstation' || !getFieldForCheckIcon(),
+               'icon__router' : getFieldForCheckIcon() === 'router',
+            'icon__printer' : getFieldForCheckIcon() === 'printer',
+                'icon__switch' : getFieldForCheckIcon() === 'switch',
+          'icon__server' : getFieldForCheckIcon() === 'server',
+            'icon__tablet' : getFieldForCheckIcon() === 'tablet',
+            'icon__network_device' : getFieldForCheckIcon() === 'network device',
+            'icon__phone' : getFieldForCheckIcon() === 'phone',
+             'icon__generic_device' : getFieldForCheckIcon() === 'generic device',
+        '--ofline': !(device || customDevice).online }"
     ></div>
 </div>

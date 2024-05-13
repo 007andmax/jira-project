@@ -31,6 +31,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   @Input() container: string;
   @Input() dropdownClass = [];
   @Output() onChange: EventEmitter<ChangeDatePicker> = new EventEmitter();
+  public selectedDateModel = null;
   public datepicker: NgbDateStruct;
   public date: RecurringTicketsEditAsideDate = new RecurringTicketsEditAsideDate();
   public navDate: any;
@@ -81,7 +82,12 @@ export class DatePickerComponent implements OnInit, OnDestroy {
     });
     this.sericeDatePicker.addSubscription(clear);
   }
-
+  public clear() {
+    this.reset();
+    this.editDate = 0;
+    this.selectedDateModel = null;
+    this.onChange.emit(null);
+  }
   public reset() {
     this.date.clearTitle();
     let date = new Date();
@@ -100,15 +106,17 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   }
   public setEditDate(data: number) {
     let date = new Date(data);
+    if ((this.type === 'DETAIL_TICKET_UPDATE' || this.type === 'COMPANY_DEVICE') && this.editDate == 0) date = new Date();
     this.navDate = this.sericeDatePicker.getNavDate(date);
     this.datepicker = this.sericeDatePicker.getDateForDatePicker(data);
     if (this.navDate) this.sericeDatePicker.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
     this.date.setTitle(this.datepicker, this.formatDate);
+    this.selectedDateModel = (this.editDate == 0) ? null : date.toString();
   }
 
   public geTextDate() {
-    if (this.type === 'DETAIL_TICKET_UPDATE' && this.editDate == 0) return "Select date"
-    if (this.type === 'DETAIL_TICKET' || this.type === 'DETAIL_TICKET_UPDATE') return moment(new Date(this.date.getTitle())).format('DD MMM, YYYY');
+    if ((this.type === 'DETAIL_TICKET_UPDATE' || this.type === 'COMPANY_DEVICE') && this.editDate == 0) return "Select date"
+    if (this.type === 'DETAIL_TICKET' || this.type === 'DETAIL_TICKET_UPDATE' || this.type === 'COMPANY_DEVICE') return moment(new Date(this.date.getTitle())).format('DD MMM, YYYY');
     return this.date.getTitle();
   }
   /**
@@ -133,6 +141,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
     if (this.type === TYPE_INPUT) this.sericeDatePicker.setTextInput('dropdownDate', this.date.getTitle());
     this.onChange.emit(new ChangeDatePicker(this.datepicker.day, this.datepicker.month, this.datepicker.year));
     this.date_dropDown.close();
+    this.selectedDateModel = `${this.datepicker.year}/${this.datepicker.month}/${this.datepicker.day}`
     this.cd.detectChanges();
 
   }
@@ -165,6 +174,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
     this.date.setTitle(this.datepicker, this.formatDate);
     this.onChange.emit(new ChangeDatePicker(this.datepicker.day, this.datepicker.month, this.datepicker.year));
     if (this.type === TYPE_INPUT) this.sericeDatePicker.setTextInput('dropdownDate', this.date.getTitle());
+    this.selectedDateModel = `${this.datepicker.year}/${this.datepicker.month}/${this.datepicker.day}`
     this.date_dropDown.close();
   }
 

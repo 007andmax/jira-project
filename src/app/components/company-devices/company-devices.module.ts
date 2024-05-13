@@ -18,6 +18,18 @@ import { DatePickerModule } from '../shared/date-picker/date-picker.module';
 import { CompanyDevicesRoutingModule } from './company-devices-routing.module';
 import { CompanyDevicesTagsComponent } from './company-devices-tags/company-devices-tags.component';
 import { CompanyDevicesTagsModule } from './company-devices-tags/company-devices-tags.module';
+import { CompanyDevicesCustomAsideComponent } from './company-devices-custom-aside/company-devices-custom-aside.component';
+import { DropDownModule } from '../shared/drop-down/drop-down.module';
+import { MatSelectModule, MatChipsModule } from '@angular/material';
+import { PreloaderTicketModule } from '../shared/preloader-ticket/preloader-ticket.module';
+import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
+import { CompanyDevicesCustomDropDownComponent } from './company-devices-custom-aside/company-devices-custom-drop-down/company-devices-custom-drop-down.component';
+import { CompanyDevicesCustomAsideModule } from './company-devices-custom-aside/company-devices-custom-aside.module';
+import { CompanyDevicesEditIpComponent } from './company-devices-edit-ip/company-devices-edit-ip.component';
+import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
+import { CompanyDevicesEditMacComponent } from './company-devices-edit-mac/company-devices-edit-mac.component';
+import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.module';
+import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 
 
 @NgModule({
@@ -33,16 +45,25 @@ import { CompanyDevicesTagsModule } from './company-devices-tags/company-devices
         CompanyDevicesAsideNetworkTabComponent,
         CompanyDevicesAsideSoftwareComponent,
         CompanyDevicesAsideUpdatesComponent,
+        CompanyDevicesEditIpComponent,
+        CompanyDevicesEditMacComponent,
 
     ],
     imports: [
         CommonModule,
         FormsModule,
         NgbModule,
+        MatSelectModule,
+        MatChipsModule,
         CompanyDevicesEditLabelModule,
         DatePickerModule,
         CompanyDevicesRoutingModule,
-        CompanyDevicesTagsModule
+        CompanyDevicesTagsModule,
+        CompanyDevicesCustomAsideModule,
+        TextAreaModule,
+        DropDownModule,
+        ClickOtsideModule,
+        KeyUpEnterModule
     ],
 
 

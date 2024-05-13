@@ -6,8 +6,11 @@ import { Subject } from 'rxjs';
 import { ConstantsStateService } from '../../states/constants/constants-state.service';
 
 import { Ticket } from '../../components/tickets/class/ticket';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Device } from '../../components/company-devices/class/device';
+import { error } from 'console';
+import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 /**
  * Device service to work with api
@@ -25,19 +28,109 @@ export class DevicesService {
    */
   public constructor(
     private http: HttpClient,
-    private constantsStateService: ConstantsStateService
+    private constantsStateService: ConstantsStateService,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService
   ) { }
 
   /**
    * Get devices from company
    * @param companyId - id of company
    */
-
+  public getManufactures() {
+    return this.http.get(this.apiUrl + `devices/manufactures`);
+  }
+  public validateManufacturesAndModelForRemove(manufacture_id, model_id = null) {
+    return this.http.get(this.apiUrl + `devices/custom/filter?manufacturerId=${manufacture_id}${model_id ? `&modelId=${model_id}` : ''}`);
+  }
+  public addManufacture(data) {
+    this.appStateService.setServerError(true);
+    return this.http.post(this.apiUrl + `devices/manufactures`, data).pipe(
+      tap(data => {
+        this.appStateService.setServerError(false);
+        this.toastrService.success("The new Manufacturer has been successfully created");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public editDevice(data) {
+    this.appStateService.setServerError(true);
+    return this.http.put(this.apiUrl + `devices/custom`, data).pipe(
+      tap(data => {
+        this.appStateService.setServerError(false);
+        this.appStateService.setCustomeError(false);
+        this.toastrService.success("The new custom device has been successfully edited");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public deleteManufactur(manufacture_id) {
+    return this.http.delete(this.apiUrl + `devices/manufactures/${manufacture_id}`).pipe(
+      tap(data => {
+        this.appStateService.setCustomeError(false);
+        this.toastrService.success("The Manufacturer has been successfully deleted");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public deleteModel(id) {
+    return this.http.delete(this.apiUrl + `devices/manufactures/models/${id}`).pipe(
+      tap(data => {
+        this.appStateService.setCustomeError(false);
+        this.toastrService.success("The Model has been successfully deleted");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public editManufactur(data) {
+    this.appStateService.setServerError(true);
+    return this.http.put(this.apiUrl + `devices/manufactures`, data).pipe(
+      tap(data => {
+        this.appStateService.setServerError(false);
+        this.toastrService.success("The Manufacturer has been successfully updated");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public editModel(data) {
+    this.appStateService.setServerError(true);
+    return this.http.put(this.apiUrl + `devices/manufactures/models`, data).pipe(
+      tap(data => {
+        this.appStateService.setServerError(false);
+        this.toastrService.success("The Model has been successfully updated");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public addModel(data) {
+    this.appStateService.setServerError(true);
+    return this.http.post(this.apiUrl + `devices/manufactures/models`, data).pipe(
+      tap(data => {
+        this.appStateService.setServerError(false);
+        this.toastrService.success("The new Model has been successfully created");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public getModels(id) {
+    return this.http.get(this.apiUrl + `devices/manufactures/models?manufacturerId=${id}`);
+  }
   public runScanDevices(companyId) {
     return this.http.get(this.apiUrl + `devices/refreshNetworkScan?companyId=${companyId}`);
   }
   public getCountByCompany(ids) {
     return this.http.post(this.apiUrl + `devices/count`, { companies: ids });
+  }
+  public addCustomDevice(data) {
+    this.appStateService.setServerError(true);
+    return this.http.post(this.apiUrl + `devices/custom`, data).pipe(
+      tap(data => {
+        this.appStateService.setServerError(false);
+        this.appStateService.setCustomeError(false);
+        this.toastrService.success("The new custom device has been successfully created");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public remoteInstall(data) {
     return this.http.post(this.apiUrl + `devices/remoteInstall`, data);
@@ -76,6 +169,14 @@ export class DevicesService {
       agentIds: agentIds,
       actions: actions
     });
+  }
+  public deleteCustomDevice(deviceId) {
+    return this.http.delete(this.apiUrl + `/devices/custom/${deviceId}`).pipe(
+      tap(data => {
+        this.toastrService.success("The custom device has been successfully deleted");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   sendUninstallAgentRequest(companyId, devicesIds) {
 

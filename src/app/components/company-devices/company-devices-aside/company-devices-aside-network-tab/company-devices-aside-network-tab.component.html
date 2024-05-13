@@ -10,7 +10,10 @@
                 (click)="toggleIpSettings = !toggleIpSettings"
             ></div>
         </div>
-        <div class="sidebar-network__info">
+        <div
+            class="sidebar-network__info"
+            *ngIf="device"
+        >
             <div class="sidebar-network__info-title">Model(s):</div>
             <div
                 class="sidebar-network__info-text"
@@ -20,32 +23,66 @@
         <div class="sidebar-network__info">
             <div class="sidebar-network__info-title">IP:</div>
             <div
+                *ngIf="device"
                 class="sidebar-network__info-text"
-                [textContent]="chackDefaultValue(getNetworkAdapterField('ip_address'))"
+                [textContent]="chackDefaultValue(getNetworkAdapterField('ipAddress'))"
             ></div>
+            <app-company-devices-edit-ip
+                #ipLabel
+                *ngIf="customDevice"
+                [field]="customDevice.ip"
+                [placeholder]="'Enter ip address'"
+                class="company-device-edit-name"
+                (onChange)="onChangeIp($event)"
+            ></app-company-devices-edit-ip>
         </div>
-        <div class="sidebar-network__info">
+        <div
+            class="sidebar-network__info"
+            *ngIf="customDevice"
+        >
+            <div class="sidebar-network__info-title">Port:</div>
+            <app-company-devices-edit-label
+                #portLabel
+                [field]="customDevice.port"
+                [placeholder]="'Port'"
+                class="company-device-edit-name"
+                (onChange)="onChangePort($event)"
+            ></app-company-devices-edit-label>
+        </div>
+        <div
+            class="sidebar-network__info"
+            *ngIf="device"
+        >
             <div class="sidebar-network__info-title">Subnet Mask:</div>
             <div
                 class="sidebar-network__info-text"
                 [textContent]="chackDefaultValue(getNetworkAdapterField('subnet'))"
             ></div>
         </div>
-        <div class="sidebar-network__info">
+        <div
+            class="sidebar-network__info"
+            *ngIf="device"
+        >
             <div class="sidebar-network__info-title">DNS 1:</div>
             <div
                 class="sidebar-network__info-text"
                 [textContent]="chackDefaultValue(getNetworkAdapterField('dns'))"
             ></div>
         </div>
-        <div class="sidebar-network__info">
+        <div
+            class="sidebar-network__info"
+            *ngIf="device"
+        >
             <div class="sidebar-network__info-title">Link Speed:</div>
             <div
                 class="sidebar-network__info-text"
                 [textContent]="getLinkSpeed() + ' (MegaBit)'"
             ></div>
         </div>
-        <div class="sidebar-network__info">
+        <div
+            class="sidebar-network__info"
+            *ngIf="device"
+        >
             <div class="sidebar-network__info-title">External IP:</div>
             <div
                 class="sidebar-network__info-text"
@@ -55,16 +92,28 @@
         <div class="sidebar-network__info">
             <div class="sidebar-network__info-title">MAC:</div>
             <div
+                *ngIf="device"
                 class="sidebar-network__info-text"
                 [textContent]="chackDefaultValue(formatMacAddress(getNetworkAdapterField('mac')))"
             >
             </div>
+            <app-company-devices-edit-mac
+                #macLabel
+                *ngIf="customDevice"
+                [field]="customDevice.macAddress"
+                [placeholder]="'Enter mac address'"
+                class="company-device-edit-name"
+                (onChange)="onChangeMac($event)"
+            ></app-company-devices-edit-mac>
         </div>
-        <div class="sidebar-network__info">
+        <div
+            class="sidebar-network__info"
+            *ngIf="device"
+        >
             <div class="sidebar-network__info-title">DHCP:</div>
             <div
                 class="sidebar-network__info-text"
-                [textContent]="chackDefaultValue(getNetworkAdapterField('dhcp_server'))"
+                [textContent]="chackDefaultValue(getNetworkAdapterField('dhcpServer'))"
             ></div>
         </div>
     </div>

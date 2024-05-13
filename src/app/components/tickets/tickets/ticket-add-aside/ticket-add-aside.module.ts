@@ -16,11 +16,15 @@ import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-do
 import { DynamicTooltipModule } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.module';
 import { CompanyUsersDropDownComponent } from './company-users-drop-down/company-users-drop-down.component';
 import { CompanyUsersDropDownModule } from './company-users-drop-down/company-users-drop-down.module';
+import { PriorityLevelDropDownComponent } from './priority-level-drop-down/priority-level-drop-down.component';
+import { AssignedTicketUserComponent } from './assigned-ticket-user/assigned-ticket-user.component';
+import { AssignedTicketUserSelectedItemComponent } from './assigned-ticket-user/assigned-ticket-user-selected-item/assigned-ticket-user-selected-item.component';
+import { AssignedTicketUserItemComponent } from './assigned-ticket-user/assigned-ticket-user-item/assigned-ticket-user-item.component';
 
 
 
 @NgModule({
-    declarations: [TicketAddAsideComponent
+    declarations: [TicketAddAsideComponent, PriorityLevelDropDownComponent, AssignedTicketUserComponent, AssignedTicketUserSelectedItemComponent, AssignedTicketUserItemComponent
     ],
     imports: [
         CommonModule,

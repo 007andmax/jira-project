@@ -545,11 +545,11 @@ documents-edit-info {
         }
         &:before {
           left: 12px;
-          top: 15px;
+          top: 10px;
           position: absolute;
           content: "";
-          width: 16px;
-          height: 16px;
+          width: 20px;
+          height: 20px;
           background: url("./assets/img/icons/tag.svg");
         }
         input {
@@ -1333,11 +1333,11 @@ app-quotes-item {
         border: none;
         &::before {
           left: 12px;
-          top: 9px;
+          top: 10px;
           position: absolute;
           content: "";
-          width: 16px;
-          height: 16px;
+          width: 20px;
+          height: 20px;
           background: url("/assets/img/icons/tag.svg");
         }
       }
@@ -3350,7 +3350,7 @@ input.--input-error:hover {
   }
 }
 
-.page-list-ticket,.users-page {
+.page-list-ticket,.users-page,.company-devices-page {
   .light-dropdown {
     padding: 0;
   }
@@ -3613,3 +3613,6 @@ app-company-devices-tags {
         }
     }
   }
+app-company-devices-edit-ip,app-company-devices-edit-mac {
+  display: contents;
+}

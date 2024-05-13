@@ -46,7 +46,7 @@ export class HttpInterceptorService implements HttpInterceptor {
             return;
           }
           if (this.appStateService.isServerError) {
-            this.toastrService.error(err.error.message, "Server error");
+            this.toastrService.error(err.error.message ? err.error.message : err.error.error.message, "Server error");
             this.appStateService.setServerError(false);
           } else {
             if (err.status >= 400 && err.status < 500 && err.error && err.error.message) this.toastrService.error("Something went wrong", err.error.message);

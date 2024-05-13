@@ -7,6 +7,8 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { DateService } from 'src/app/services/date/date.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
+import { DeviceTagsService } from 'src/app/services/device-tags/device-tags.service';
+import { DevicesService } from 'src/app/services/devices/devices.service';
 
 @Component({
   selector: 'tickets-filter-created-drop-down',
@@ -33,8 +35,9 @@ export class TicketsFilterCreatedDropDownComponent extends DropDownComponent {
     public customerPortalStateService: CustomerPortalStateService,
     private dateService: DateService,
     public companiesService: CompaniesService,
+    public devicesService: DevicesService,
     public ref: ChangeDetectorRef) {
-    super(elRef, companiesStateService, usersStateService, customerPortalStateService, companiesService, ref);
+    super(elRef, companiesStateService, usersStateService, customerPortalStateService, companiesService, devicesService, ref);
   }
 
   /**

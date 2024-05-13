@@ -1,12 +1,12 @@
 export class DeviceExtendedReportLogicalDisks {
-    computer_id: string;
-    deleted_at: string;
-    device_id: string;
-    disk_index: number;
-    drive_type: number;
-    file_system: string;
-    free_space: string;
+    computerId: string;
+    deletedAt: string;
+    deviceId: string;
+    diskIndex: number;
+    driveType: number;
+    fileSystem: string;
+    freeSpace: string;
     id: string;
-    is_system: boolean;
+    isSystem: boolean;
     size: string;
 }

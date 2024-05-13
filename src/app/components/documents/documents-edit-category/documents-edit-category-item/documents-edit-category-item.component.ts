@@ -13,11 +13,12 @@ export class DocumentsEditCategoryItemComponent implements OnInit {
   @Input() company: Company;
   @Input() documentEditCategory: DocumentEditCategory;
   indexNoAvatar: number = 0;
-  listColorNoAvatar = ['#0cdeaa', '#16a4fa', '#7c77cb', '#ffb937'];
+  listColorNoAvatar = [];
   constructor(public ticketsListService: TicketsListService,) { }
 
   ngOnInit() {
-    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 3);
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
   }
   checkSelected(id) {
     return this.documentEditCategory.assignedCompaniesIds.find(item => item == id);

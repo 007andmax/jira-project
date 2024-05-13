@@ -8,11 +8,11 @@
     <ul class="hardware-col__list">
         <li class="hardware-col__list-item">
             <span class="hardware-col__list-title">Model:</span>
-            <div class="hardware-col__list-text">{{logicalDisks.device_id}}</div>
+            <div class="hardware-col__list-text">{{logicalDisks.deviceId}}</div>
         </li>
         <li class="hardware-col__list-item">
             <span class="hardware-col__list-title">File Format(s):</span>
-            <div class="hardware-col__list-text">NTFS ({{logicalDisks.device_id}})</div>
+            <div class="hardware-col__list-text">NTFS ({{logicalDisks.deviceId}})</div>
         </li>
         <li
             class="hardware-col__list-item"
@@ -30,17 +30,17 @@
         </li>
         <li
             class="hardware-col__list-item"
-            *ngIf="logicalDisks.free_space"
+            *ngIf="logicalDisks.freeSpace"
         >
             <span class="hardware-col__list-title">Free Space:</span>
-            <div class="hardware-col__list-text">{{parseDB(logicalDisks.free_space)}} GB</div>
+            <div class="hardware-col__list-text">{{parseDB(logicalDisks.freeSpace)}} GB</div>
         </li>
         <li
             class="hardware-col__list-item"
-            *ngIf="!logicalDisks.free_space"
+            *ngIf="!logicalDisks.freeSpace"
         >
             <span class="hardware-col__list-title">Free Space:</span>
-            <div class="hardware-col__list-text">{{parseDB(logicalDisks.free_space)}}N/A</div>
+            <div class="hardware-col__list-text">{{parseDB(logicalDisks.freeSpace)}}N/A</div>
         </li>
     </ul>
 </div>

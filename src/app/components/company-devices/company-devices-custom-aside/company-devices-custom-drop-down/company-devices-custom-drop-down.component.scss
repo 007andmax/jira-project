@@ -1,0 +1,18 @@
+@import "./src/assets/styles/variable";
+.dropdown-menu {
+    margin-top: 6px;
+    width: 100%;
+}
+
+.clip-text {
+    max-width: 230px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.filter-tags-check {
+    position: absolute;
+    right: 6px;
+    top: 6px;
+}

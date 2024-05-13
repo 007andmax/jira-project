@@ -7,6 +7,8 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { UserCustomerCompaniesInfo } from 'src/app/components/users/class/user-customer-companies-info';
 import { CompanyUser } from './class/company-user';
+import { DeviceTagsService } from 'src/app/services/device-tags/device-tags.service';
+import { DevicesService } from 'src/app/services/devices/devices.service';
 
 @Component({
   selector: 'company-users-drop-down',
@@ -23,8 +25,9 @@ export class CompanyUsersDropDownComponent extends DropDownComponent {
     public customerPortalStateService: CustomerPortalStateService,
     public companiesService: CompaniesService,
     public ticketsListService: TicketsListService,
+    public devicesService: DevicesService,
     public cd: ChangeDetectorRef,) {
-    super(elRef, companiesStateService, usersStateService, customerPortalStateService, companiesService, cd);
+    super(elRef, companiesStateService, usersStateService, customerPortalStateService, companiesService, devicesService, cd);
   }
   ngOnInit() {
     if (this.usersStateService.getAllUsers().length > 0) this.onGetUsers(this.usersStateService.getAllUsers());

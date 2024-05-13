@@ -131,6 +131,8 @@ import { TicketsHeaderModule } from './components/tickets/tickets/tickets-header
 import { TicketsFilterSaveModule } from './components/tickets/tickets/tickets-header/tickets-filter-save/tickets-filter-save.module';
 import { DeviceTagPipe } from './pipe/device-tag.pipe';
 import { MarketingSubscriptionsAsideModule } from './components/marketing/marketing-subscriptions-aside/marketing-subscriptions-aside.module';
+import { ManufacturesCheckUseComponent } from './components/setting/device-setting/manufactures-check-use/manufactures-check-use.component';
+import { UserDeArchiveNotificationComponent } from './components/users/user-de-archive-notification/user-de-archive-notification.component';
 declare var $: any;
 
 /**
@@ -159,6 +161,8 @@ declare var $: any;
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
     CannedResponsesAsideComponent,
+    ManufacturesCheckUseComponent,
+    UserDeArchiveNotificationComponent
   ],
   imports: [
     BrowserModule,
@@ -213,7 +217,7 @@ declare var $: any;
     AddUserToCompanyModule,
     UserFilterSaveModule,
     TicketsFilterSaveModule,
-    MarketingSubscriptionsAsideModule
+    MarketingSubscriptionsAsideModule,
   ],
   entryComponents: [
     ConfirmComponent,
@@ -229,9 +233,11 @@ declare var $: any;
     ModalAddUsersNotifyComponent,
     ModalEditCategoryProductComponent,
     InventoryCheckUseComponent,
+    UserDeArchiveNotificationComponent,
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
     UsersCheckUseComponent,
+    ManufacturesCheckUseComponent,
   ],
   providers: [
     {

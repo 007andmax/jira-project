@@ -32,7 +32,7 @@ export class SoftwareSummaryReportComponent implements OnInit {
             softwareTitle: soft.softName,
             installationKey: '',
             publisher: soft.softPublisher,
-            version: (soft.softName === "Windows") ? `${item.report.system.caption} ${item.report.system.release_id} ${item.report.system.architecture} ${item.report.system.service_pack}` : soft.softVersion,
+            version: (soft.softName === "Windows") ? `${item.report.system.caption} ${item.report.system.releaseId} ${item.report.system.architecture} ${item.report.system.servicePack}` : soft.softVersion,
             installDate: soft.softInstalledOn
           });
         });

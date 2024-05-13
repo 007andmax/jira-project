@@ -31,7 +31,7 @@ export class DeviceSettingComponent implements OnInit {
   addDeviceType: boolean = false;
   addManufacture: boolean = false;
   addModel: boolean = false;
-  activeTab: string = "deviceType";
+  activeTab: string = "manufacture";
   constructor(private settingStateService: SettingStateService,
     private agentService: AgentService,
     private formBuilder: FormBuilder,
@@ -45,7 +45,7 @@ export class DeviceSettingComponent implements OnInit {
 
   ngOnInit() {
     // this.companiesState.onInit();
-    this.devicebutton = true;
+    this.manufacturebutton = true;
     $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
     this.settingStateService.setComponentName('DeviceSettingComponent');
