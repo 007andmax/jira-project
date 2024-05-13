@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
@@ -41,7 +41,7 @@ export class DocumentsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.companiesStateService.setCompanyRoutingId(null);
-    this.documentsStateService.onGetCategories.subscribe(data => {
+    let onGetCategories = this.documentsStateService.onGetCategories.subscribe(data => {
       data.forEach(element => {
         let findIndex = this.list.findIndex(item => item.categoryId === element.id);
         if (findIndex > -1) {
@@ -59,6 +59,7 @@ export class DocumentsComponent implements OnInit, OnDestroy {
       }
       this.cd.detectChanges();
     })
+    this.sub.add(onGetCategories);
     let onChangeDocument = this.documentsStateService.onChangeDocument.subscribe(data => {
       if (data.action === "DOCUMENT_SAVED" && !data.data.categoryId) this.list.push(new Document(data.data));
       if (data.action === "DOCUMENT_EDITED") {

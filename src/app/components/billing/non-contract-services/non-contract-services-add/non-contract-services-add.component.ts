@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { GlNumber } from 'src/class/gl-number/gl-number';
 import { Subscription } from 'rxjs';
 import { GlNumberStateService } from 'src/app/states/gl-number/gl-number-state.service';
@@ -16,7 +16,7 @@ import { NonContractServicesStateService } from 'src/app/states/non-contract-ser
   templateUrl: './non-contract-services-add.component.html',
   styleUrls: ['./non-contract-services-add.component.scss']
 })
-export class NonContractServicesAddComponent implements OnInit {
+export class NonContractServicesAddComponent implements OnInit, OnDestroy {
   service: NonContractServices = new NonContractServices();
   glNumbers: Array<GlNumber> = [];
   sub: Subscription = new Subscription();
@@ -32,11 +32,12 @@ export class NonContractServicesAddComponent implements OnInit {
     private glNumberService: GlNumberService,) { }
 
   ngOnInit() {
-    this.nonContractServicesStateService.getShowAsideForAdd().subscribe(data => {
+    let getShowAsideForAdd = this.nonContractServicesStateService.getShowAsideForAdd().subscribe(data => {
       this.showAdd = true;
       this.service.onInitForAdd();
       if (this.taxesStateService.getTaxes().length > 0) this.setDefaultTaxes(this.taxesStateService.getTaxes());
     })
+    this.sub.add(getShowAsideForAdd);
     if (this.glNumberStateService.getGLNumbers().length > 0) this.glNumbers = this.sortGlNumbers(this.glNumberStateService.getGLNumbers());
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
       this.glNumbers = this.sortGlNumbers(data);
@@ -99,5 +100,8 @@ export class NonContractServicesAddComponent implements OnInit {
     this.service = new NonContractServices();
     this.validate = new NonContractServiceValidate();
     if (this.taxesStateService.getTaxes().length > 0) this.setDefaultTaxes(this.taxesStateService.getTaxes());
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

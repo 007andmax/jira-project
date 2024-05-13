@@ -12,12 +12,10 @@ import { TechUsersStateService } from 'src/app/components/shared/tech-users/serv
 import { ContractsBlockTimeValidate } from '../class/contracts-block-time-validate';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ContractsConfirmComponent } from '../../contracts-confirm/contracts-confirm.component';
-
 import { Subscription } from 'rxjs';
 import { СontractsBlockTimeShare } from '../class/contracts-block-time-share';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
 import { ContractsAsideTopComponent } from '../contracts-aside-top/contracts-aside-top.component';
-import { InvoiceFormTicketEditTaxesComponent } from '../../../billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { Tax } from 'src/class/taxes/tax';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
@@ -87,6 +85,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
       this.taxes = data;
       this.setDefaultTaxes(data);
     })
+    this.sub.add(getOnTaxess);
     if (this.сontractsStateService.getContractForCopy()) this.onInitCopy();
   }
   private setDefaultTaxes(lsitTaxes) {

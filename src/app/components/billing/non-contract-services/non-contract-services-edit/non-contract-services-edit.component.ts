@@ -1,10 +1,8 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { GlNumber } from 'src/class/gl-number/gl-number';
 import { Subscription } from 'rxjs';
 import { GlNumberStateService } from 'src/app/states/gl-number/gl-number-state.service';
 import { NonContractServices } from '../class/non-contract-service';
-import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
-import { TaxesComponent } from '../../../shared/taxes/taxes.component';
 import { GlNumberService } from 'src/app/services/gl-number/gl-number.service';
 import { NonContractServicesService } from 'src/app/services/non-contract-services/non-contract-services.service';
 import { NonContractServiceValidate } from '../class/non-contract-service-validate';
@@ -16,7 +14,7 @@ import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down
   templateUrl: './non-contract-services-edit.component.html',
   styleUrls: ['./non-contract-services-edit.component.scss']
 })
-export class NonContractServicesEditComponent implements OnInit {
+export class NonContractServicesEditComponent implements OnInit, OnDestroy {
   open: boolean = false;
   glNumbers: Array<GlNumber> = [];
   validate: NonContractServiceValidate = new NonContractServiceValidate();
@@ -27,15 +25,14 @@ export class NonContractServicesEditComponent implements OnInit {
   constructor(private glNumberStateService: GlNumberStateService,
     private glNumberService: GlNumberService,
     private nonContractServicesStateService: NonContractServicesStateService,
-    private nonContractServicesService: NonContractServicesService,
-    private taxesStateService: TaxesStateService) { }
+    private nonContractServicesService: NonContractServicesService) { }
 
   ngOnInit() {
-    this.nonContractServicesStateService.getShowAsideForEdit().subscribe(data => {
+    let getShowAsideForEdit = this.nonContractServicesStateService.getShowAsideForEdit().subscribe(data => {
       this.service = data;
-      // this.taxSelect.setEditItem(this.service.taxes);
       this.open = true;
     })
+    this.sub.add(getShowAsideForEdit);
     if (this.glNumberStateService.getGLNumbers().length > 0) this.glNumbers = this.sortGlNumbers(this.glNumberStateService.getGLNumbers());
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
       this.glNumbers = this.sortGlNumbers(data);
@@ -75,12 +72,14 @@ export class NonContractServicesEditComponent implements OnInit {
     })
   }
   onSelectGlNumbers(data) {
-
     this.service.glNumber = data;
   }
   close() {
     this.open = false;
     this.onClose.emit(null);
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { REMOVE_CATEGORY_DOCUMENT, REMOVE_DOCUMENT } from 'src/app/const/confirm';
 import { Document } from '../../documents/class/document';
 import { DocumentsHeaderComponent } from '../../documents/documents-header/documents-header.component';

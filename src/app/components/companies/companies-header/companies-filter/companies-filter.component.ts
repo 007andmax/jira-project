@@ -1,9 +1,8 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ItemFilterPerson } from 'src/app/components/left-panel/left-panel-companies/class/item-filter-person';
 import { CrmCompanyIndustry } from 'src/app/components/setting/crm-settings/crm-company-industry/class/crm-company-industry';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
-import { CompanyIndustry } from 'src/app/interfaces/company/company-industry';
 import { AppService } from 'src/app/states/app/app.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
@@ -19,7 +18,7 @@ import { CompanyTagsComponent } from '../../company-tags/company-tags.component'
   styleUrls: ['./companies-filter.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CompaniesFilterComponent implements OnInit {
+export class CompaniesFilterComponent implements OnInit, OnDestroy {
   companyTypes = [new CompanySetting('Client', 'CLIENT'),
   new CompanySetting('Lead', 'LEAD'),
   new CompanySetting('Vendor', 'VENDOR'),
@@ -41,6 +40,7 @@ export class CompaniesFilterComponent implements OnInit {
     private crmStateService: CrmStateService,
     public cd: ChangeDetectorRef,
     private usersStateService: UsersStateService) { }
+
 
   ngOnInit() {
     this.industries = this.crmStateService.getIndustryList();
@@ -132,5 +132,8 @@ export class CompaniesFilterComponent implements OnInit {
 
     this.changeCountFilter.emit(count);
     this.cd.detectChanges();
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

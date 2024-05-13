@@ -10,7 +10,7 @@ import { ContractsStateService } from 'src/app/states/contracts/contracts-state.
 export class ContractsConfirmComponent implements OnInit {
   @Input() public message = '';
   constructor(private сontractsStateService: ContractsStateService,
-    public activeModal: NgbActiveModal, private eRef: ElementRef,) {
+    public activeModal: NgbActiveModal,) {
   }
 
   ngOnInit() {

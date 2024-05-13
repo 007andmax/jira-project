@@ -7,7 +7,6 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
-import { environment } from 'src/environments/environment';
 import { Document } from '../../class/document';
 import { DocumentAdd } from '../class/document-add';
 import { DocumentValidate } from '../class/document-validate';

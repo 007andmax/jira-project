@@ -1,6 +1,7 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { AgentService } from 'src/app/services/agent/agent.service';
 import { KafkaStateService } from 'src/app/states/kafka/kafka-state.service';
 
@@ -9,7 +10,7 @@ import { KafkaStateService } from 'src/app/states/kafka/kafka-state.service';
   templateUrl: './window-updates.component.html',
   styleUrls: ['./window-updates.component.scss']
 })
-export class WindowUpdatesComponent implements OnInit {
+export class WindowUpdatesComponent implements OnInit, OnDestroy {
   kafkaMessage: any = "";
   installedWindowsUpdateList: any[] = [];
   installUpdate: number;
@@ -29,7 +30,7 @@ export class WindowUpdatesComponent implements OnInit {
   public kafkaresponse: boolean = false;
   public windowupdateview: boolean = false;
   public loading: boolean;
-
+  sub: Subscription = new Subscription();
   constructor(
     private kafkaStateService: KafkaStateService,
     private cd: ChangeDetectorRef,
@@ -42,19 +43,21 @@ export class WindowUpdatesComponent implements OnInit {
     this._id = this.activateRoute.snapshot.params["id"];
     this.loading = true;
     this.getAssetId();
-    this.kafkaStateService.onCurrentConfig.subscribe((resp) => {
+    let onCurrentConfig = this.kafkaStateService.onCurrentConfig.subscribe((resp) => {
       if (resp.length > 0) {
         this.kafkaresponse = true;
         this.onCurrentConfig(resp)
       }
     });
+    this.sub.add(onCurrentConfig);
     this.time();
-    this.kafkaStateService.onInstallWindowsUpdates.subscribe((resp) => {
+    let onInstallWindowsUpdates = this.kafkaStateService.onInstallWindowsUpdates.subscribe((resp) => {
       if (resp.length > 0) {
         this.loading = true;
         this.agentService.GetCurrentConfig(this.asset.ID);
       }
     });
+    this.sub.add(onInstallWindowsUpdates);
   }
 
   public time() {
@@ -239,5 +242,8 @@ export class WindowUpdatesComponent implements OnInit {
         this.isOverlay = false;
       }, 3000)
     }
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

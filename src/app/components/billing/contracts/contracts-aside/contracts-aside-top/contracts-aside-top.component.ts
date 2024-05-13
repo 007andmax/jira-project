@@ -1,16 +1,16 @@
-import { Component, OnInit, Input, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, ViewChild, OnDestroy } from '@angular/core';
 import { ContractsFilterType } from '../../class/contracts-filter-type';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Subscription } from 'rxjs';
-import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
+
 @Component({
   selector: 'app-contracts-aside-top',
   templateUrl: './contracts-aside-top.component.html',
   styleUrls: ['./contracts-aside-top.component.scss']
 })
-export class ContractsAsideTopComponent implements OnInit {
+export class ContractsAsideTopComponent implements OnInit, OnDestroy {
   listsTypes = [new ContractsFilterType('Hourly', 'HOURLY', null),
   new ContractsFilterType('Block Time', 'BLOCK_TIME', null),
   new ContractsFilterType('Service Contract/by device/by user', 'SERVICE_CONTRACT_DEVICE', null),
@@ -22,6 +22,7 @@ export class ContractsAsideTopComponent implements OnInit {
   sub: Subscription = new Subscription();
   constructor(private contractsStateService: ContractsStateService,
     private companiesState: CompaniesStateService,) { }
+
 
   ngOnInit() {
     if (this.companiesState.getLightClientsCompanies().length > 0 && this.companiesState.getCompanyRoutingId()) this.getClientsList(this.companiesState.getLightClientsCompanies());
@@ -39,5 +40,8 @@ export class ContractsAsideTopComponent implements OnInit {
   }
   selectCompany(item) {
     this.onSelectCompany.emit(item);
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

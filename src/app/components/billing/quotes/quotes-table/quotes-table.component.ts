@@ -44,8 +44,6 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     private quoteRealTimeService: QuoteRealTimeService,
     public cd: ChangeDetectorRef,
     private modalService: NgbModal,
-    private ticketsService: TicketsService,
-    private ticketsStateService: TicketsStateService,
     private quoteStateService: QuoteStateService,
     private confirmStateService: ConfirmStateService,
     private toastrProgressStateService: ToastrProgressStateService,

@@ -1,21 +1,16 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { NonContractServicesService } from 'src/app/services/non-contract-services/non-contract-services.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
-import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { Tax } from 'src/class/taxes/tax';
-import { InvoiceFormTicketEditTaxesComponent } from '../../../billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
 import { ContractsFilterType } from '../../class/contracts-filter-type';
 import { ServiceAgreement } from '../../class/service-agreement';
 import { ContractsUserDeviceValidate } from '../../contracts-aside/class/contracts-user-device-validate';
 import * as moment from "moment";
-import { ContractsConfirmComponent } from '../../contracts-confirm/contracts-confirm.component';
 import { ServiceAgreementBlockTimeServices } from '../../class/service-agreement-block-time-services';
-import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
 import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 
 @Component({
@@ -23,7 +18,7 @@ import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component'
   templateUrl: './contracts-aside-user-device-edit.component.html',
   styleUrls: ['./contracts-aside-user-device-edit.component.scss']
 })
-export class ContractsAsideUserDeviceEditComponent implements OnInit {
+export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy {
   @ViewChild('taxes') taxesDP: TaxesComponent;
   selectedCompany: any;
   selectedTaxes = [];
@@ -45,8 +40,6 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
     private taxesStateService: TaxesStateService,
     private nonContractServicesService: NonContractServicesService,
     private contractsService: ContractsService,
-    private modalService: NgbModal,
-    private сontractsStateService: ContractsStateService,
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -55,6 +48,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
       this.taxes = data;
     })
+    this.sub.add(getOnTaxess);
     if (this.contractsUserDevice.interval) {
       this.selectedInterval = this.contractsUserDevice.interval;
     } else {

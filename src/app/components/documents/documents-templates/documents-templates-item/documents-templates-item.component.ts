@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoryDocument } from 'src/app/components/left-panel/left-panel-documents/class/category-document';
 import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
@@ -6,13 +6,14 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 import { Document } from '../../class/document';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'documents-templates-item',
   templateUrl: './documents-templates-item.component.html',
   styleUrls: ['./documents-templates-item.component.scss']
 })
-export class DocumentsTemplatesItemComponent implements OnInit {
+export class DocumentsTemplatesItemComponent implements OnInit, OnDestroy {
   @Input() item: Document;
   @Output() onRemoveDocument = new EventEmitter<any>();
   categories: Array<CategoryDocument> = [];
@@ -21,19 +22,21 @@ export class DocumentsTemplatesItemComponent implements OnInit {
   new TitleListType('Lead', 'LEAD'),
   new TitleListType('Supplier', 'SUPPLIER'),
   new TitleListType('Vendor', 'VENDOR')];
-
+  sub: Subscription = new Subscription();
   constructor(private documentsStateService: DocumentsStateService,
     private permissionsService: PermissionsService,
     public cd: ChangeDetectorRef,
     public companiesStateService: CompaniesStateService,
     private router: Router,) { }
 
+
   ngOnInit() {
     this.categories = this.documentsStateService.getCategories();
-    this.documentsStateService.onGetCategories.subscribe((data: any) => {
+    let onGetCategories = this.documentsStateService.onGetCategories.subscribe((data: any) => {
       this.categories = data;
       this.cd.detectChanges();
     })
+    this.sub.add(onGetCategories);
   }
   getCompanyType() {
     let find = this.companyTypes.find(item => item.type === this.item.clientType);
@@ -74,5 +77,7 @@ export class DocumentsTemplatesItemComponent implements OnInit {
         }
       });
   }
-
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

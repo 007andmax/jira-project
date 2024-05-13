@@ -6,11 +6,7 @@ import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
-import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
-import { Tax } from 'src/class/taxes/tax';
-import { InvoiceFormTicketEditTaxesComponent } from '../../../billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
 import { ContractsFilterType } from '../../class/contracts-filter-type';
-import { ContractsBlockTimeValidate } from '../class/contracts-block-time-validate';
 import { ContractsOther } from '../class/contracts-other';
 import { ContractsOtherProduct } from '../class/contracts-other-product';
 import { ContractsOtherService } from '../class/contracts-other-service';
@@ -18,8 +14,6 @@ import * as moment from "moment";
 import { ContractsAsideTopComponent } from '../contracts-aside-top/contracts-aside-top.component';
 import { ContractsOtherValidate } from '../class/contracts-other-validate';
 import { ContractsConfirmComponent } from '../../contracts-confirm/contracts-confirm.component';
-import { ProductService } from 'src/app/services/product/product.service';
-import { InventoryItem } from 'src/app/components/inventory/class/inventory-item';
 import { ContractsListService } from '../../services/contracts-list.service';
 
 @Component({

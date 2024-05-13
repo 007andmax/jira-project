@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter, ElementRef } from '@angular/core';
 import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
-import { InvoiceFormTicketEditTaxesComponent } from '../../../../billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
 import { DefaultServicesHourlyContract } from '../../class/default-service-hourly-contract';
 
 @Component({
@@ -12,7 +11,7 @@ export class ContractsAsideHourlyBillingDefaultServiceComponent implements OnIni
   @Input() defaultService: DefaultServicesHourlyContract;
   @ViewChild('taxes') taxesDropDown: TaxesComponent;
   @Output() onSelectService = new EventEmitter<any>();
-  constructor(private element: ElementRef) { }
+  constructor() { }
 
   ngOnInit() {
     this.taxesDropDown.setEditItems(this.defaultService.taxes);

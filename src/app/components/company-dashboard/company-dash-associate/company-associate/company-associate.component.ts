@@ -99,9 +99,7 @@ export class CompanyAssociateComponent implements OnInit, OnDestroy {
   */
 
   public setDefaultScoll() {
-
     this.selectedCompanies = [];
-
   }
 
 

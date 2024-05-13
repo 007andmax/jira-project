@@ -1,6 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { InvoicesService } from 'src/app/services/invoices/invoices.service';
-import { Invoice } from '../class/invoice';
 import { InvoiceProfile } from '../class/invoice-profile';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import * as moment from "moment";

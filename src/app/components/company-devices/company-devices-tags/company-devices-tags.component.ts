@@ -10,7 +10,6 @@ import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service'
 import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 import { DeviceTagsService } from 'src/app/services/device-tags/device-tags.service';
 import { catchError, map } from 'rxjs/operators';
-import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-company-devices-tags',
@@ -48,10 +47,7 @@ export class CompanyDevicesTagsComponent implements OnInit {
   public constructor(
     private deviceTagsStateService: DeviceTagsStateService,
     public tagsStateService: TagsStateService,
-    private companiesStateService: CompaniesStateService,
-    private companyTagsListService: CompanyTagsListService,
     public tagsRealTimeService: TagsRealTimeService,
-    private elRef: ElementRef,
     public cd: ChangeDetectorRef,
     private deviceTagsService: DeviceTagsService,
     public ticketsListService: TicketsListService,
@@ -65,6 +61,7 @@ export class CompanyDevicesTagsComponent implements OnInit {
     let onGetTags = this.deviceTagsStateService.onGetTags.subscribe(data => {
       this.getTags(data);
     })
+    this.sub.add(onGetTags);
   }
   public setSelectedTag(data) {
     this.selectedTag = data;

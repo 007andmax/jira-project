@@ -1,19 +1,21 @@
-import { Component, OnInit, Input, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, ViewChild, OnDestroy } from '@angular/core';
 import { GlNumber } from 'src/class/gl-number/gl-number';
 import { GlNumberStateService } from 'src/app/states/gl-number/gl-number-state.service';
 import { GlNumberService } from 'src/app/services/gl-number/gl-number.service';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-non-contract-services-contracts',
   templateUrl: './non-contract-services-contracts.component.html',
   styleUrls: ['./non-contract-services-contracts.component.scss']
 })
-export class NonContractServicesContractsComponent implements OnInit {
+export class NonContractServicesContractsComponent implements OnInit, OnDestroy {
   @ViewChild('glNumberSelect') glNumberSelect: DropDownComponent;
   @Input() type: string = '';
   glNumbers: Array<GlNumber> = [];
   selectedGlNumber: GlNumber = null;
+  sub: Subscription = new Subscription();
   constructor(private glNumberStateService: GlNumberStateService,
     public cd: ChangeDetectorRef,
     private glNumberService: GlNumberService) { }
@@ -24,6 +26,7 @@ export class NonContractServicesContractsComponent implements OnInit {
       this.glNumbers = this.sortGlNumbers(data);
       this.selectedGlNumber = this.glNumbers.find(item => (this.type === 'BLOCK_TIME') ? item.blockTime : item.serviceContract);
     })
+    this.sub.add(getOnGlNumbers);
     this.selectedGlNumber = this.glNumbers.find(item => (this.type === 'BLOCK_TIME') ? item.blockTime : item.serviceContract);
   }
   private sortGlNumbers(data) {
@@ -53,5 +56,7 @@ export class NonContractServicesContractsComponent implements OnInit {
     return `${item["glNumber"]} - ${(item["description"] && item["description"].length > 0) ? item["description"]
       : "No description"}`;
   }
-
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

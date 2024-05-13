@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
@@ -7,13 +7,14 @@ import { Tax } from 'src/class/taxes/tax';
 import { ContractsFilterType } from '../../class/contracts-filter-type';
 import { ServiceAgreement } from '../../class/service-agreement';
 import * as moment from "moment";
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-contracts-aside-user-device-billing-preview',
   templateUrl: './contracts-aside-user-device-billing-preview.component.html',
   styleUrls: ['./contracts-aside-user-device-billing-preview.component.scss']
 })
-export class ContractsAsideUserDeviceBillingPreviewComponent implements OnInit {
+export class ContractsAsideUserDeviceBillingPreviewComponent implements OnInit, OnDestroy {
   selectedCompany: any;
   selectedTaxes = [];
   taxes: Array<Tax> = [];
@@ -22,9 +23,9 @@ export class ContractsAsideUserDeviceBillingPreviewComponent implements OnInit {
   selectedInterval: string = 'MONTHLY';
   @Input() contractsUserDevice: ServiceAgreement = new ServiceAgreement();
   formatDate: string = FORMAT_DATE_2;
+  sub: Subscription = new Subscription();
   toggleContractServices: boolean = false;
   constructor(private companiesStateService: CompaniesStateService,
-    private usersStateService: UsersStateService,
     private taxesStateService: TaxesStateService,
   ) { }
 
@@ -36,6 +37,7 @@ export class ContractsAsideUserDeviceBillingPreviewComponent implements OnInit {
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
       this.taxes = data;
     });
+    this.sub.add(getOnTaxess);
     this.getSelectedInterval();
     this.toggleContractServices = (this.contractsUserDevice.services.length > 0);
 
@@ -62,5 +64,8 @@ export class ContractsAsideUserDeviceBillingPreviewComponent implements OnInit {
   }
   public trackById(index, item) {
     return item.id;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

@@ -54,15 +54,15 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.companiesState.getCompanies().length > 0) this.getCLientsList(this.companiesState.getCompanies());
-    this.companiesState.getOnCompanies().subscribe((data) => {
+    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
       this.getCLientsList(data);
     })
+    this.sub.add(getOnCompanies);
     let getChangeCompanies = this.companiesState.getChangeCompanies().subscribe((data: CompanyUpdate) => {
       if (data.action === 'COMPANY_SAVED' && this.quoteCompany && this.quoteCompany.id === data.data.id) {
         this.quote.company.name = data.data.name;
         this.quote.company.primaryContact.firstName = data.data.companyInfo.contacts[0].firstName;
         this.quote.company.primaryContact.lastName = data.data.companyInfo.contacts[0].lastName;
-        // this.quote.company.addresses[0].address = data.data.companyInfo.addresses[0].address;
         this.quote.company.primaryContact.primaryEmail = data.data.companyInfo.contacts[0].primaryEmail;
         if (data.data.companyInfo.addresses.length == 1) {
           this.quote.company.addresses[0] = new CompanyProfileAddress(data.data.companyInfo.addresses[0]);

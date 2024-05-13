@@ -9,7 +9,6 @@ import { ContractsUserDevice } from '../class/contracts-user-device';
 import { ContractsUserDeviceService } from '../class/contracts-user-device-service';
 import { ContractsUserDeviceValidate } from '../class/contracts-user-device-validate';
 import * as moment from "moment";
-import { InvoiceFormTicketEditTaxesComponent } from '../../../billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -70,6 +69,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
       this.setDefaultTaxes(data);
     })
+    this.sub.add(getOnTaxess);
     let getConfirm = this.сontractsStateService.getConfirm().subscribe(data => {
       this.onCheckServicesForAdd(data);
     })

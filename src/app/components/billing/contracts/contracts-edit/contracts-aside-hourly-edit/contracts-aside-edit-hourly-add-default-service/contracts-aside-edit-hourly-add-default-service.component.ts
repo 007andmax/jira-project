@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { Tax } from 'src/app/interfaces/service/tax';
@@ -17,7 +17,7 @@ import { ServiceAgreement } from '../../../class/service-agreement';
   templateUrl: './contracts-aside-edit-hourly-add-default-service.component.html',
   styleUrls: ['./contracts-aside-edit-hourly-add-default-service.component.scss']
 })
-export class ContractsAsideEditHourlyAddDefaultServiceComponent implements OnInit {
+export class ContractsAsideEditHourlyAddDefaultServiceComponent implements OnInit, OnDestroy {
   service: DefaultServicesHourlyContract = new DefaultServicesHourlyContract();
   sub: Subscription = new Subscription();
   validate: ContractsHourlyAddDefaultServiceValidate = new ContractsHourlyAddDefaultServiceValidate();
@@ -33,6 +33,7 @@ export class ContractsAsideEditHourlyAddDefaultServiceComponent implements OnIni
     private contractsStateService: ContractsStateService,
     private nonContractServicesService: NonContractServicesService) { }
 
+
   ngOnInit() {
     this.service.onInitForAdd();
     if (this.taxesStateService.getTaxes().length > 0) this.setDefaultTaxes(this.taxesStateService.getTaxes());
@@ -42,10 +43,11 @@ export class ContractsAsideEditHourlyAddDefaultServiceComponent implements OnIni
     this.sub.add(getOnTaxess);
     if (this.contractsStateService.getDefaultService().length > 0) this.defaultServices = this.contractsStateService.getDefaultService().map(item => new DefaultServicesHourlyContract(item));
     this.defaultServices.sort((a, b) => a.name.localeCompare(b.name));
-    this.contractsStateService.getOnDefaultServices().subscribe(data => {
+    let getOnDefaultServices = this.contractsStateService.getOnDefaultServices().subscribe(data => {
       this.defaultServices = data.map(item => new DefaultServicesHourlyContract(item));
       this.defaultServices.sort((a, b) => a.name.localeCompare(b.name));
     })
+    this.sub.add(getOnDefaultServices);
   }
   onChangeName() {
     if (this.service.name.length > 3 && this.service.name.length < 100) this.validate.resetName();
@@ -131,5 +133,8 @@ export class ContractsAsideEditHourlyAddDefaultServiceComponent implements OnIni
   }
   closed() {
     this.onClose.emit(null);
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

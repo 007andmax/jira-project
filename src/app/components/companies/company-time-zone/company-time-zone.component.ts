@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter, ElementRef, OnDestroy, Input } from '@angular/core';
-import { TimeZoneService } from './services/time-zone.service';
+import { Component, OnInit, Output, EventEmitter, OnDestroy, Input } from '@angular/core';
 import { TimeZone } from './class/time-zone';
 import { CompanyTimeZoneStateService } from './services/company-time-zone-state.service';
 import { Subscription } from 'rxjs';
@@ -15,7 +14,7 @@ export class CompanyTimeZoneComponent implements OnInit, OnDestroy {
   public list: Array<TimeZone> = [];
   @Input() selectedItem: TimeZone = null;
   sub: Subscription = new Subscription();
-  constructor(private timeZoneService: TimeZoneService, private elRef: ElementRef,
+  constructor(
     private companyTimeZoneState: CompanyTimeZoneStateService) { }
 
   ngOnInit() {
@@ -48,7 +47,6 @@ export class CompanyTimeZoneComponent implements OnInit, OnDestroy {
     */
   public setOffset(data: TimeZone) {
     this.selectedItem = data;
-    // this.elRef.nativeElement.querySelector('#dropdownTimeZone').value = data.first;
     this.selectedOffsetItem.next(data);
   }
 

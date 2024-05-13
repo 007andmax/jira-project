@@ -43,12 +43,13 @@ export class DocumentsCategoryComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     document.body.querySelector(".main-container").scrollTo(0, 0);
-    this.documentsStateService.onGetCategories.subscribe(data => {
+    let onGetCategories = this.documentsStateService.onGetCategories.subscribe(data => {
       data.forEach(element => {
         let findIndex = this.list.findIndex(item => item.categoryId === element.id);
         if (findIndex > -1) this.list[findIndex].categoryName = data.name;
       });
     })
+    this.sub.add(onGetCategories);
     let onChangeDocument = this.documentsStateService.onChangeDocument.subscribe(data => {
       if (data.action === "DOCUMENT_SAVED" && this.categoryId === data.data.categoryId) this.list.push(new Document(data.data));
       if (data.action === "DOCUMENT_EDITED") {

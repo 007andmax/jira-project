@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { CompanyProfile } from '../../companies/class/company-profile';
 import { CompanyPrimaryContact } from '../../companies/class/company-primary-contact';
 import { Subscription } from 'rxjs';
@@ -12,7 +12,7 @@ import { DevicesService } from 'src/app/services/devices/devices.service';
   templateUrl: './company-dash-stats.component.html',
   styleUrls: ['./company-dash-stats.component.scss']
 })
-export class CompanyDashStatsComponent implements OnInit {
+export class CompanyDashStatsComponent implements OnInit, OnDestroy {
 
   public companyDetail: CompanyProfile;
   _id: string = '';
@@ -48,6 +48,7 @@ export class CompanyDashStatsComponent implements OnInit {
     public cd: ChangeDetectorRef,
   ) { }
 
+
   public ngOnInit() {
     this._id = this.activateRoute.snapshot.params['id'];
     let subscription = this.activateRoute.params.subscribe(params => {
@@ -81,5 +82,8 @@ export class CompanyDashStatsComponent implements OnInit {
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
     }
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

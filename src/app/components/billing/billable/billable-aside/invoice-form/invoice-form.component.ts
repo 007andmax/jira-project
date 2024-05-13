@@ -16,7 +16,6 @@ import { REMOVE_TICKET_INVOICE } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { InvoiceTicketsService } from 'src/app/components/setting/accounting/accounting-settings.service';
 import { InvoiceNote } from '../../class/invoice-note';
-import { NoteService } from 'src/app/services/note/note.service';
 import { InvoiceValidate } from './class/invoice-validate';
 import { InvoiceProfileTicket } from '../../class/invoice-profile-ticket';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
@@ -59,14 +58,12 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     private elRef: ElementRef,
     private permissionsService: PermissionsService,
     public cd: ChangeDetectorRef,
-    private noteService: NoteService,
     private ticketsService: TicketsService,
     private companiesStateService: CompaniesStateService) { }
 
 
   ngOnInit() {
     this.onSetEditTickets();
-    // this.globalNote = this.invoiceNotes.filter(item => item.noteType === "GLOBAL")[0];
     if (this.billableStateService.getGlobalNote()) this.globalNote = this.billableStateService.getGlobalNote();
     this.currentCompany = this.companiesStateService.getCurrentCompany();
     if (this.invoice.invoiceDataDto.termsAndConditions) this.elRef.nativeElement.querySelector("#description-global-note").value = this.invoice.invoiceDataDto.termsAndConditions;
@@ -76,7 +73,6 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
         this.company.name = data.data.name;
         this.company.contacts[0].firstName = data.data.companyInfo.contacts[0].firstName;
         this.company.contacts[0].lastName = data.data.companyInfo.contacts[0].lastName;
-        // this.company.addresses[0].addressWithSuitNumberAndPostalCode = data.data.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode;
         this.company.contacts[0].primaryEmail = data.data.companyInfo.contacts[0].primaryEmail;
         if (data.data.companyInfo.addresses.length == 1) {
           this.company.addresses[0] = new CompanyProfileAddress(data.data.companyInfo.addresses[0]);
