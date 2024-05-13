@@ -49,7 +49,10 @@
                     <i class="qt-sz-20 qt-mr-12 qt-bg-contain icon__edit"></i>
                     Edit
                 </button>
-                <button ngbDropdownItem>
+                <button
+                    ngbDropdownItem
+                    (click)="removeNews()"
+                >
                     <i class="qt-sz-20 qt-mr-12 qt-bg-contain icon__archive"></i>
                     Delete
                 </button>

@@ -106,6 +106,31 @@
 </div>
 <div
     class="archive-modal"
+    *ngIf="action === 'DELETE_NEWS'"
+>
+    <div class="archive-modal__body">
+        <h3>Delete Announcement</h3>
+        <p [textContent]="message"></p>
+    </div>
+    <div class="archive-modal__footer">
+        <div class="qt-df qt-jc-fe">
+            <button
+                class="btn-new disabled"
+                (click)=cancelConfirm()
+            >
+                Cancel
+            </button>
+            <button
+                class="btn-new btn-primary"
+                (click)=approveConfirm()
+            >
+                Yes, I am sure
+            </button>
+        </div>
+    </div>
+</div>
+<div
+    class="archive-modal"
     *ngIf="action === 'CHANGE_COMPANY_TICKET'"
 >
     <div class="archive-modal__body">

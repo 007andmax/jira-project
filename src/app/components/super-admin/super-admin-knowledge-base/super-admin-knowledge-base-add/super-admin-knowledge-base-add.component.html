@@ -33,11 +33,15 @@
                             </mat-error>
                         </div>
                     </div>
-                    <angular-editor
-                        (html)="onChangeContent()"
-                        [(ngModel)]="news.content"
-                        [config]="editorConfig"
-                    ></angular-editor>
+                    <div
+                        id="froala-editor"
+                        class="CodeMirror-scroll cm-s-default"
+                        [froalaEditor]="options"
+                        [(froalaModel)]="news.content"
+                        (froalaInit)="initialize($event)"
+                    >
+                        Hello, Froala!
+                    </div>
                     <mat-error
                         class="invalid-feedback"
                         *ngIf="!validate.getContent()"

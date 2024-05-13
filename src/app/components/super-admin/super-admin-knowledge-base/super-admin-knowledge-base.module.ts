@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { SuperAdminKnowledgeBaseNewsComponent } from './super-admin-knowledge-base-news/super-admin-knowledge-base-news.component';
 import { MatFormFieldModule } from '@angular/material';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 
 
@@ -33,7 +34,9 @@ import { MatFormFieldModule } from '@angular/material';
         DropDownModule,
         FormsModule,
         InfiniteScrollModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        FroalaEditorModule.forRoot(),
+        FroalaViewModule.forRoot()
 
     ],
 

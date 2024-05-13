@@ -4,6 +4,8 @@ import { TicketsListService } from 'src/app/components/tickets/tickets/services/
 import { News } from './class/news';
 import { SuperAdminKnowledgeBaseService } from '../../services/super-admin-knowledge-base/super-admin-knowledge-base.service';
 import { KnowledgeBaseStateService } from '../../state/knowledge-base/knowledge-base-state.service';
+import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
+import { DELETE_NEWS } from 'src/app/const/confirm';
 
 @Component({
   selector: 'app-super-admin-knowledge-base-table',
@@ -24,12 +26,27 @@ export class SuperAdminKnowledgeBaseTableComponent implements OnInit {
   constructor(private ticketsListService: TicketsListService,
     private superAdminKnowledgeBaseService: SuperAdminKnowledgeBaseService,
     public cd: ChangeDetectorRef,
+    private confirmStateService: ConfirmStateService,
     private knowledgeBaseStateService: KnowledgeBaseStateService
   ) { }
 
   ngOnInit() {
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === DELETE_NEWS) {
+          this.onDeleteNews(this.knowledgeBaseStateService.getNewsForDelete().id);
+        }
+
+      }
+    })
+    this.sub.add(getConfirm);
     this.setDefaultScoll();
     this.onScroll();
+  }
+  onDeleteNews(id) {
+    this.superAdminKnowledgeBaseService.deleteNews(id).subscribe(data => {
+
+    })
   }
   private getNews() {
     if (this.ticketsListService.getBlockList()) {

@@ -1,10 +1,12 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { News } from '../super-admin-knowledge-base-table/class/news';
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
 import { SuperAdminKnowledgeBaseService } from '../../services/super-admin-knowledge-base/super-admin-knowledge-base.service';
 import { KnowledgeBaseValidate } from './class/knowledge-base-validate';
+import { environment } from 'src/environments/environment';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
   selector: 'app-super-admin-knowledge-base-add',
@@ -13,49 +15,141 @@ import { KnowledgeBaseValidate } from './class/knowledge-base-validate';
 })
 export class SuperAdminKnowledgeBaseAddComponent implements OnInit {
   @Output() onClose = new EventEmitter();
+  private apiUrl = environment.apiUrl;
   news: News = new News();
+  public options: Object;
+  attachments = [];
   validate: KnowledgeBaseValidate = new KnowledgeBaseValidate();
   selectedStatus: CompanySetting = new CompanySetting('Draft', 'DRAFT')
   list = [new CompanySetting('Published', 'PUBLISHED'), new CompanySetting('Draft', 'DRAFT'), new CompanySetting('Archived', 'ARCHIVED')];
   messageContent: string = '';
   formatDate: string = FORMAT_DATE_2;
   startDate = new Date().getTime();
-  editorConfig: AngularEditorConfig = {
-    editable: true,
-    spellcheck: false,
-    height: '100%',
-    minHeight: '5rem',
-    width: 'auto',
-    minWidth: '0',
-    translate: 'no',
-    enableToolbar: true,
-    showToolbar: true,
-    placeholder: 'Add description',
-    defaultParagraphSeparator: '',
-    defaultFontName: '',
-    defaultFontSize: '',
-    toolbarPosition: 'bottom',
-    customClasses: [
-      {
-        name: 'quote',
-        class: 'quote',
-      },
-      {
-        name: 'redText',
-        class: 'redText'
-      },
-      {
-        name: 'titleText',
-        class: 'titleText',
-        tag: 'h1',
-      },
-    ],
-    uploadUrl: 'v1/image',
-    sanitize: false,
-  };
-  constructor(private superAdminKnowledgeBaseService: SuperAdminKnowledgeBaseService,) { }
+  currentUser: any;
+  froalaEditor: any;
+  constructor(private superAdminKnowledgeBaseService: SuperAdminKnowledgeBaseService,
+    private usersStateService: UsersStateService,
+    public cd: ChangeDetectorRef,
+  ) { }
 
   ngOnInit() {
+    this.currentUser = this.usersStateService.getCurrentUser();
+    this.onInitFloara();
+  }
+  ngAfterViewInit() {
+
+    this.cd.detectChanges();
+  }
+  ngDoCheck() {
+
+    if (this.news.content.length > 0) this.validate.resetContent();
+  }
+  onInitFloara() {
+    const self = this;
+    this.options = {
+      key: "lSA3D-17E4B3A1C2D1H2rXYb1VPUGRHYZNRJd1JVOOb1HAc1zG2B1A2A2D6B1A1C4G1I4==",
+      toolbarButtons: [
+        'bold', 'italic', 'underline', '|',
+        'alignLeft', 'alignCenter', 'alignRight', '|',
+        'formatOL', 'formatUL', '|',
+        'insertFile', '|',
+        'insertLink', 'insertImage'],
+      //  toolbarButtons: ['bold', 'italic', 'underline', 'moreText', '|', 'alignLeft', 'alignCenter', 'formatOLSimple', 'moreParagraph', '|', 'trackChanges', 'markdown', 'insertLink', 'insertFiles', 'moreRich', '|', 'undo', 'redo', 'moreMisc'],
+      /*  toolbarButtons: {
+          // Key represents the more button from the toolbar.
+          moreText: {
+            // List of buttons used in the  group.
+            buttons: ['bold', 'italic'],
+  
+            // Alignment of the group in the toolbar.
+            align: 'left',
+  
+  
+          },
+          moreParagraph: {
+            buttons: ['alignLeft', 'alignCenter', 'alignRight', 'alignJustify'],
+            align: 'left',
+            buttonsVisible: 1
+          },
+  
+  
+        },*/
+      toolbarBottom: true,
+      attribution: false,
+      heightMin: 180,
+      toolbarSticky: false,
+      saveParam: 'file',
+      saveMethod: 'POST',
+      saveParams: { id: 'my_editor' },
+      imageUploadParam: 'file',
+      imageUploadURL: self.apiUrl + 'file?isAvatar=false&documentFile=true&attachmentType=ANNOUNCEMENT_DOCUMENT',
+      imageUploadParams: { id: 'my_editor' },
+      imageUploadMethod: 'POST',
+      imageMaxSize: 4 * 1024 * 1024,
+      imageAllowedTypes: ['jpeg', 'jpg', 'png'],
+      filesManagerUploadURL: self.apiUrl + 'file?isAvatar=false&documentFile=true&attachmentType=ANNOUNCEMENT_DOCUMENT',
+      filesManagerUploadParams: {
+        id: 'my_editor'
+      },
+      filesManagerMaxSize: 1024 * 1024 * 4,
+      fileUpload: true,
+      fileUploadURL: self.apiUrl + 'file?isAvatar=false&documentFile=true&attachmentType=ANNOUNCEMENT_DOCUMENT',
+      fileUploadParams: {
+        id: 'my_editor'
+      },
+      fileUploadMethod: 'POST',
+      fileMaxSize: 1024 * 1024 * 4,
+      fileAllowedTypes: ['*'],
+      events: {
+        "initialized": function (data) {
+          let config = {
+            "docId": "e1626875-8d25-4f98-abd8-abfdd7010d81",
+            "user": { "name": `${self.usersStateService.getCurrentUser().firstName} ${self.usersStateService.getCurrentUser().lastName}` },
+            "editor": this,
+            "apiKey": "58e429b0-be4a-4cd8-8c8d-9a37fb0adec0",
+            "app": "froala",
+            "showPointer": true,
+            "cursorAlwaysOn": true,
+            "pointers": {
+              "shape": "arrow"
+            }
+          };
+        },
+        'image.uploaded': function ($img) {
+          // Do something here.
+          // this is the editor instance.
+          var file = JSON.parse($img);
+          self.attachments.push(file.link);
+          // self.onChangeAttachments.emit(self.attachments);
+          return file;
+        },
+
+        'file.uploaded': function (response) {
+          var file = JSON.parse(response);
+          self.attachments.push(file.link);
+          // self.onChangeAttachments.emit(self.attachments);
+          // File was uploaded to the server.
+        },
+        'file.inserted': function ($file, response) {
+          $file[0].href = `${$file[0]}/attachment`;
+          // File was inserted in the editor.
+        },
+        'filesManager.uploaded': function (response) {
+          // Do something here.
+          // this is the editor instance.
+          var file = JSON.parse(response);
+          self.attachments.push(file.link);
+          //   self.onChangeAttachments.emit(self.attachments);
+        }
+      }
+    };
+  }
+  initialize(initControls) {
+    this.froalaEditor = initControls;
+    this.froalaEditor.initialize();
+  }
+  ngOnDestroy(): void {
+    this.froalaEditor.destroy();
   }
   onChangeTitle() {
     this.validate.resetTitle();

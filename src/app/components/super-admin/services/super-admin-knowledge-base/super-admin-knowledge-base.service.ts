@@ -27,6 +27,17 @@ export class SuperAdminKnowledgeBaseService {
   public getNews(page) {
     return this.http.get(this.apiUrl + `announcements?page=${page}&size=20`);
   }
+  public deleteNews(id) {
+    return this.http.delete(this.apiUrl + `announcements/${id}`).pipe(
+      tap(data => {
+        this.toastrService.success("The Announcement has been successfully deleted");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }, err => {
+        this.toastrService.error("The error has occurred, please check your entries");
+        this.appStateService.changeDetectorRef();
+      }));
+  }
   public addNews(data) {
     return this.http.post(this.apiUrl + `announcements`, data).pipe(
       tap(data => {

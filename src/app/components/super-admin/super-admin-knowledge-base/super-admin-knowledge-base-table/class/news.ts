@@ -1,8 +1,8 @@
 export class News {
     "id": string;
     "title": string;
-    "content": string;
-    "announcementType": string;
+    "content": string = "";
+    "announcementType": string = "DRAFT";
     "createdAt": number;
     constructor(data = null) {
         if (data) {

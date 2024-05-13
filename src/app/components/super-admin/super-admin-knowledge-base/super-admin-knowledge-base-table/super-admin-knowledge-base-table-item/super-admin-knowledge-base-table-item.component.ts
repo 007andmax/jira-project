@@ -1,6 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { News } from '../class/news';
 import * as moment from "moment";
+import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DELETE_NEWS } from 'src/app/const/confirm';
+import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
+import { KnowledgeBaseStateService } from '../../../state/knowledge-base/knowledge-base-state.service';
 
 @Component({
   selector: 'app-super-admin-knowledge-base-table-item',
@@ -10,7 +15,10 @@ import * as moment from "moment";
 export class SuperAdminKnowledgeBaseTableItemComponent implements OnInit {
   @Input() news: News;
 
-  constructor() { }
+  constructor(private confirmStateService: ConfirmStateService,
+    private knowledgeBaseStateService: KnowledgeBaseStateService,
+    public cd: ChangeDetectorRef,
+    private modalService: NgbModal,) { }
 
   ngOnInit() {
   }
@@ -19,6 +27,13 @@ export class SuperAdminKnowledgeBaseTableItemComponent implements OnInit {
   }
   select() {
 
+  }
+  removeNews() {
+    this.confirmStateService.setConfirmAction(DELETE_NEWS);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.message = `Do you want to delete announcement?`;
+    this.knowledgeBaseStateService.setNewsForDelete(this.news);
+    this.cd.markForCheck();
   }
 
 }
