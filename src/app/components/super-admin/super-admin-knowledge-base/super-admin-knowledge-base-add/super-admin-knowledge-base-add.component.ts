@@ -7,6 +7,7 @@ import { SuperAdminKnowledgeBaseService } from '../../services/super-admin-knowl
 import { KnowledgeBaseValidate } from './class/knowledge-base-validate';
 import { environment } from 'src/environments/environment';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { KnowledgeBaseStateService } from '../../state/knowledge-base/knowledge-base-state.service';
 
 @Component({
   selector: 'app-super-admin-knowledge-base-add',
@@ -27,9 +28,10 @@ export class SuperAdminKnowledgeBaseAddComponent implements OnInit {
   startDate = new Date().getTime();
   currentUser: any;
   froalaEditor: any;
-  constructor(private superAdminKnowledgeBaseService: SuperAdminKnowledgeBaseService,
-    private usersStateService: UsersStateService,
+  constructor(public superAdminKnowledgeBaseService: SuperAdminKnowledgeBaseService,
+    public usersStateService: UsersStateService,
     public cd: ChangeDetectorRef,
+    public knowledgeBaseStateService: KnowledgeBaseStateService
   ) { }
 
   ngOnInit() {
@@ -159,7 +161,7 @@ export class SuperAdminKnowledgeBaseAddComponent implements OnInit {
   }
   onSelectStatus(data) {
     this.selectedStatus = data;
-    this.news.announcementType = data.value;
+    this.news.status = data.value;
   }
   close() {
     this.onClose.emit(null);
@@ -167,7 +169,7 @@ export class SuperAdminKnowledgeBaseAddComponent implements OnInit {
   add() {
     if (!this.validate.isValidate(this.news)) return;
     this.superAdminKnowledgeBaseService.addNews(this.news.getDataForCreate()).subscribe(data => {
-
+      this.knowledgeBaseStateService.addNews(new News(data));
     })
   }
 }

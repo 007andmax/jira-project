@@ -40,12 +40,19 @@ export class SuperAdminKnowledgeBaseTableComponent implements OnInit {
       }
     })
     this.sub.add(getConfirm);
+    let onChangeNews = this.knowledgeBaseStateService.onChangeNews.subscribe(data => {
+      let index = this.list.findIndex(item => item.id == data.id);
+      if (index > -1) this.list[index] = data;
+    })
+    this.sub.add(onChangeNews);
+
     this.setDefaultScoll();
     this.onScroll();
   }
   onDeleteNews(id) {
     this.superAdminKnowledgeBaseService.deleteNews(id).subscribe(data => {
-
+      let index = this.list.findIndex(item => item.id == id);
+      if (index > -1) this.list.splice(index, 1);
     })
   }
   private getNews() {

@@ -14,6 +14,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { SuperAdminKnowledgeBaseNewsComponent } from './super-admin-knowledge-base-news/super-admin-knowledge-base-news.component';
 import { MatFormFieldModule } from '@angular/material';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { SuperAdminKnowledgeBaseEditComponent } from './super-admin-knowledge-base-edit/super-admin-knowledge-base-edit.component';
 
 
 
@@ -23,7 +24,8 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
         SuperAdminKnowledgeBaseTableComponent,
         SuperAdminKnowledgeBaseTableItemComponent,
         SuperAdminKnowledgeBaseAddComponent,
-        SuperAdminKnowledgeBaseNewsComponent
+        SuperAdminKnowledgeBaseNewsComponent,
+        SuperAdminKnowledgeBaseEditComponent
     ],
     imports: [
         CommonModule,

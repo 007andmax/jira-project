@@ -69,6 +69,10 @@
             #filter
             (onClose)="setToggleFilter(false)"
         ></app-super-admin-knowledge-base-add>
+        <app-super-admin-knowledge-base-edit
+            class="qt-w100"
+            (onClose)="setToggleFilter(false)"
+        ></app-super-admin-knowledge-base-edit>
         <div class="list-details-news">
             <ng-template
                 ngFor
@@ -77,6 +81,7 @@
                 [ngForTrackBy]="trackById"
             >
                 <app-super-admin-knowledge-base-news
+                    [attr.id]="'preview-'+ item.id"
                     class="qt-mb-12"
                     [news]="item"
                 ></app-super-admin-knowledge-base-news>

@@ -38,6 +38,17 @@ export class SuperAdminKnowledgeBaseService {
         this.appStateService.changeDetectorRef();
       }));
   }
+  public editNews(id, data) {
+    return this.http.put(this.apiUrl + `announcements/${id}`, data).pipe(
+      tap(data => {
+        this.toastrService.success("The announcement has been successfully updated");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }, err => {
+        this.toastrService.error("The error has occurred, please check your entries");
+        this.appStateService.changeDetectorRef();
+      }));
+  }
   public addNews(data) {
     return this.http.post(this.apiUrl + `announcements`, data).pipe(
       tap(data => {

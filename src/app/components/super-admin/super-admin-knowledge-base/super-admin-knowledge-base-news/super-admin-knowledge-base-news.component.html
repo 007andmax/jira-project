@@ -5,9 +5,9 @@
     >
         <div
             class="news-status qt-mr-8"
-            [ngClass]="{'status-published-icon':news.announcementType == 'PUBLISHED',
-        'status-draft-icon':news.announcementType == 'DRAFT',
-    'status-archived-icon':news.announcementType == 'ARCHIVED'}"
+            [ngClass]="{'status-published-icon':news.status == 'PUBLISHED',
+        'status-draft-icon':news.status == 'DRAFT',
+    'status-archived-icon':news.status == 'ARCHIVED'}"
         ></div>
         <div
             class="news-date qt-fs-13 qt-color-gray-500 qt-fw-400 qt-mr-8"
@@ -15,10 +15,10 @@
         ></div>
         <span
             class="tag__modern"
-            [ngClass]="{'status-published':news.announcementType == 'PUBLISHED',
-        'status-draft':news.announcementType == 'DRAFT',
-    'status-archived':news.announcementType == 'ARCHIVED'}"
-            [textContent]="news.announcementType"
+            [ngClass]="{'status-published':news.status == 'PUBLISHED',
+        'status-draft':news.status == 'DRAFT',
+    'status-archived':news.status == 'ARCHIVED'}"
+            [textContent]="news.status"
         ></span>
         <div
             class="qt-button --square-md --gray pointer qt-ml-auto"

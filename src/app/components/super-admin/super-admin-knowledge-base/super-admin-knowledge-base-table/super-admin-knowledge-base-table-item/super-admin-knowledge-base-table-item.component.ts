@@ -26,7 +26,12 @@ export class SuperAdminKnowledgeBaseTableItemComponent implements OnInit {
     return moment(new Date(date)).format('MMM DD, YYYY');
   }
   select() {
+    var scrollDiv = document.getElementById("preview-" + this.news.id).offsetTop;
+    document.querySelector(".list-details-news").scrollTo({ top: scrollDiv, behavior: 'smooth' });
 
+  }
+  editNews() {
+    this.knowledgeBaseStateService.editNews(this.news);
   }
   removeNews() {
     this.confirmStateService.setConfirmAction(DELETE_NEWS);

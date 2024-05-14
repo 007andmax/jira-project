@@ -2,7 +2,7 @@ export class News {
     "id": string;
     "title": string;
     "content": string = "";
-    "announcementType": string = "DRAFT";
+    "status": string = "DRAFT";
     "createdAt": number;
     constructor(data = null) {
         if (data) {
@@ -15,7 +15,7 @@ export class News {
         return {
             "title": this.title,
             "content": this.content,
-            "announcementType": this.announcementType
+            "status": this.status
         }
     }
 }
