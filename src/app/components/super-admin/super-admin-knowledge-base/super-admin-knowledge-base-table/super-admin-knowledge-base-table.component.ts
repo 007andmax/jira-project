@@ -45,7 +45,10 @@ export class SuperAdminKnowledgeBaseTableComponent implements OnInit {
       if (index > -1) this.list[index] = data;
     })
     this.sub.add(onChangeNews);
-
+    let onAddNews = this.knowledgeBaseStateService.onAddNews.subscribe(data => {
+      this.list.unshift(data);
+    })
+    this.sub.add(onAddNews);
     this.setDefaultScoll();
     this.onScroll();
   }

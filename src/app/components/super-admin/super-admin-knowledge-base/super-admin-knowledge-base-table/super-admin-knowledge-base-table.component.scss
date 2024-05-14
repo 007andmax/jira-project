@@ -185,13 +185,13 @@ app-tickets-table-item {
     flex-shrink: 0;
     position: sticky;
     top: 58px;
-    height: calc(100vh - 128px);
+    height: calc(100vh - 123px);
     transition: .3s ease-in-out width;
 }
 .list-details-news {
     padding: 16px;
     background-color: $gray-50;
-    max-height: 500px;
+    max-height: 100%;
     overflow: auto;
 }
 app-super-admin-knowledge-base-news {

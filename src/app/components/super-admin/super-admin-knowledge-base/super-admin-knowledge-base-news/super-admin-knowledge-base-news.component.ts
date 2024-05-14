@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { News } from '../super-admin-knowledge-base-table/class/news';
 import * as moment from "moment";
 
@@ -10,9 +10,11 @@ import * as moment from "moment";
 export class SuperAdminKnowledgeBaseNewsComponent implements OnInit {
   @Input() news: News;
 
-  constructor() { }
+  constructor(private elRef: ElementRef,) { }
 
   ngOnInit() {
+    this.elRef.nativeElement.querySelector(".news-description").insertAdjacentHTML('afterbegin', this.news.content);
+
   }
   public getDate(date) {
     return moment(new Date(date)).format('DD MMM YYYY');
