@@ -103,7 +103,7 @@
     mask-image: url("/assets/img/icons/close.svg");
   }
   &__settings-gray {
-      mask-image: url("/assets/img/icons-left-sidebar/menu-settings.svg");
+    mask-image: url("/assets/img/icons-left-sidebar/menu-settings.svg");
   }
   &__logout {
     mask-image: url("/assets/img/icons-left-sidebar/logout.svg");
@@ -117,144 +117,55 @@
   &__ticket-document {
     mask-image: url("/assets/img/icons/ticket-document.svg");
   }
-  &__tickets-detail-contact {
-    mask-image: url("/assets/img/icons-left-sidebar/menu-tickets.svg");
-  }
   &__tickets-sm {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/ticket-sm.svg");
     mask-image: url("/assets/img/icons/ticket-sm.svg");
   }
   &__menu-email-settings {
     mask-image: url("/assets/img/icons-left-sidebar/menu-email-settings.svg");
   }
   &__menu-email-template {
-    background-color: $gray-300;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-email-template.svg");
     mask-image: url("/assets/img/icons-left-sidebar/menu-email-template.svg");
   }
   &__menu-tags {
-    background-color: $gray-300;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-tags.svg");
     mask-image: url("/assets/img/icons-left-sidebar/menu-tags.svg");
   }
   &__menu-my-profile-setting {
-    background-color: $gray-300;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-my-profile-settings.svg");
     mask-image: url("/assets/img/icons-left-sidebar/menu-my-profile-settings.svg");
   }
-  &__menu-crm-settings,
-  &__menu-crm-settings-gray {
-    background-color: $gray-300;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-crm-settings.svg");
+  &__menu-crm-settings {
     mask-image: url("/assets/img/icons-left-sidebar/menu-crm-settings.svg");
   }
-  &__menu-crm-settings-gray {
-    background-color: $gray-600;
-  }
   &__menu-commissions {
-    background-color: $gray-300;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-commissions.svg");
     mask-image: url("/assets/img/icons-left-sidebar/menu-commissions.svg");
   }
-  &__menu-company,
-  &__menu-company-gray {
-    background-color: $gray-300;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-company.svg");
+  &__menu-company {
     mask-image: url("/assets/img/icons-left-sidebar/menu-company.svg");
   }
-  &__menu-company-gray {
-    background-color: $gray-600;
-  }
-  &__menu-products,
-  &__menu-products-gray {
-    background-color: $gray-300;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-products.svg");
+  &__menu-products {
     mask-image: url("/assets/img/icons-left-sidebar/menu-products.svg");
   }
-  &__menu-products-gray {
-    background-color: $gray-600;
-  }
-  &__menu-tickets,
-  &__menu-tickets-gray {
-    background-color: $gray-300;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-tickets.svg");
+  &__menu-tickets {
     mask-image: url("/assets/img/icons-left-sidebar/menu-tickets.svg");
   }
-  &__menu-tickets-gray {
-    background-color: $gray-600;
-  }
   &__menu-marketing {
-    background-color: $gray-300;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-marketing.svg");
     mask-image: url("/assets/img/icons-left-sidebar/menu-marketing.svg");
   }
-  &__menu-users,
-  &__menu-users-gray {
-    background-color: $gray-300;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-users.svg");
+  &__menu-users {
     mask-image: url("/assets/img/icons-left-sidebar/menu-users.svg");
   }
-  &__menu-users-gray {
-    background-color: $gray-600;
-  }
   &__tickets-gray {
-    background-color: $gray-400;
-    -webkit-mask-image: url("/assets/img/icons/tickets-gray.svg");
     mask-image: url("/assets/img/icons/tickets-gray.svg");
   }
   &__menu-device-setting {
-    background-color: $gray-300;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons-left-sidebar/devices.svg");
     mask-image: url("/assets/img/icons-left-sidebar/devices.svg");
   }
   &__password-manager-gray {
-    background-color: $gray-400;
-    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-password-manager.svg");
     mask-image: url("/assets/img/icons-left-sidebar/menu-password-manager.svg");
-    // background-image: url("/assets/img/icons/password-manager-gray.svg");
-  }
-  &__company-gray {
-    background-color: $gray-400;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/company-gray.svg");
-    mask-image: url("/assets/img/icons/company-gray.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
   }
   &__companies {
     mask-image: url("/assets/img/icons/companies.svg");
   }
   &__support-page {
-    background-color: $gray-400;
-    -webkit-mask-image: url("/assets/img/icons/support-page.svg");
     mask-image: url("/assets/img/icons/support-page.svg");
   }
   &__category-closed {
@@ -660,9 +571,6 @@
   }
   &__filter-lines {
     mask-image: url("/assets/img/icons/filter-lines.svg");
-  }
-  &__company-address {
-    background-image: url("/assets/img/icons/company-address.svg");
   }
   &__discount {
     mask-image: url("/assets/img/icons/discount.svg");
