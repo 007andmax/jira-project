@@ -30,9 +30,7 @@ export class SuperAdminKnowledgeBaseTableItemComponent implements OnInit {
     document.querySelector(".list-details-news").scrollTo({ top: scrollDiv, behavior: 'smooth' });
 
   }
-  editNews() {
-    this.knowledgeBaseStateService.editNews(this.news);
-  }
+
   removeNews() {
     this.confirmStateService.setConfirmAction(DELETE_NEWS);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });

@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { News } from '../super-admin-knowledge-base-table/class/news';
 import * as moment from "moment";
+import { KnowledgeBaseStateService } from '../../state/knowledge-base/knowledge-base-state.service';
 
 @Component({
   selector: 'app-super-admin-knowledge-base-news',
@@ -10,11 +11,16 @@ import * as moment from "moment";
 export class SuperAdminKnowledgeBaseNewsComponent implements OnInit {
   @Input() news: News;
 
-  constructor(private elRef: ElementRef,) { }
+  constructor(private elRef: ElementRef,
+    private knowledgeBaseStateService: KnowledgeBaseStateService,
+  ) { }
 
   ngOnInit() {
     this.elRef.nativeElement.querySelector(".news-description").insertAdjacentHTML('afterbegin', this.news.content);
 
+  }
+  editNews() {
+    this.knowledgeBaseStateService.editNews(this.news);
   }
   public getDate(date) {
     return moment(new Date(date)).format('DD MMM YYYY');

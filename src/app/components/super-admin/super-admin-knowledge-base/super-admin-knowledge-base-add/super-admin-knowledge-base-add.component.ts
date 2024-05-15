@@ -23,7 +23,6 @@ export class SuperAdminKnowledgeBaseAddComponent implements OnInit {
   validate: KnowledgeBaseValidate = new KnowledgeBaseValidate();
   selectedStatus: CompanySetting = new CompanySetting('Draft', 'DRAFT')
   list = [new CompanySetting('Published', 'PUBLISHED'), new CompanySetting('Draft', 'DRAFT'), new CompanySetting('Archived', 'ARCHIVED')];
-  messageContent: string = '';
   formatDate: string = FORMAT_DATE_2;
   startDate = new Date().getTime();
   currentUser: any;
@@ -164,12 +163,15 @@ export class SuperAdminKnowledgeBaseAddComponent implements OnInit {
     this.news.status = data.value;
   }
   close() {
+    this.news = new News();
+    this.attachments = [];
     this.onClose.emit(null);
   }
   add() {
     if (!this.validate.isValidate(this.news)) return;
     this.superAdminKnowledgeBaseService.addNews(this.news.getDataForCreate()).subscribe(data => {
       this.knowledgeBaseStateService.addNews(new News(data));
+      this.close();
     })
   }
 }
