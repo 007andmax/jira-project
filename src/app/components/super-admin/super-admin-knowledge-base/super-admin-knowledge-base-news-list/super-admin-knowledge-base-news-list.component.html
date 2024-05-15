@@ -1,0 +1,24 @@
+<div
+    class="list-details-news"
+    #content
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="50"
+    [scrollWindow]="false"
+    [infiniteScrollDisabled]="infiniteScrollDisabled"
+    [fromRoot]="true"
+    (scrolled)="onScrolled()"
+>
+    <ng-template
+        ngFor
+        let-item
+        [ngForOf]="list"
+        [ngForTrackBy]="trackById"
+    >
+        <app-super-admin-knowledge-base-news
+            [attr.id]="'preview-'+ item.id"
+            class="qt-mb-12"
+            [news]="item"
+        ></app-super-admin-knowledge-base-news>
+    </ng-template>
+</div>

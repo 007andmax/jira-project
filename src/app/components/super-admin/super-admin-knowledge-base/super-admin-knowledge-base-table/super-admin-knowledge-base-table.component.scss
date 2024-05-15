@@ -188,12 +188,3 @@ app-tickets-table-item {
     height: calc(100vh - 123px);
     transition: .3s ease-in-out width;
 }
-.list-details-news {
-    padding: 16px;
-    background-color: $gray-50;
-    max-height: 100%;
-    overflow: auto;
-}
-app-super-admin-knowledge-base-news {
-    display: block;
-}

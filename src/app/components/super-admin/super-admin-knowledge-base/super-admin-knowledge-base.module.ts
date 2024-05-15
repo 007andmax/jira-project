@@ -15,6 +15,7 @@ import { SuperAdminKnowledgeBaseNewsComponent } from './super-admin-knowledge-ba
 import { MatFormFieldModule } from '@angular/material';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { SuperAdminKnowledgeBaseEditComponent } from './super-admin-knowledge-base-edit/super-admin-knowledge-base-edit.component';
+import { SuperAdminKnowledgeBaseNewsListComponent } from './super-admin-knowledge-base-news-list/super-admin-knowledge-base-news-list.component';
 
 
 
@@ -25,7 +26,8 @@ import { SuperAdminKnowledgeBaseEditComponent } from './super-admin-knowledge-ba
         SuperAdminKnowledgeBaseTableItemComponent,
         SuperAdminKnowledgeBaseAddComponent,
         SuperAdminKnowledgeBaseNewsComponent,
-        SuperAdminKnowledgeBaseEditComponent
+        SuperAdminKnowledgeBaseEditComponent,
+        SuperAdminKnowledgeBaseNewsListComponent
     ],
     imports: [
         CommonModule,

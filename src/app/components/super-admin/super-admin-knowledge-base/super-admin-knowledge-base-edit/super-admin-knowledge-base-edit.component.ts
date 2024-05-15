@@ -21,9 +21,12 @@ export class SuperAdminKnowledgeBaseEditComponent extends SuperAdminKnowledgeBas
     if (!this.validate.isValidate(this.news)) return;
     this.superAdminKnowledgeBaseService.editNews(this.news.id, this.news.getDataForCreate()).subscribe(data => {
       this.knowledgeBaseStateService.changeNews(this.news);
+      this.close();
     })
   }
   close() {
     this.open = false;
+    this.news = new News();
+    this.attachments = [];
   }
 }

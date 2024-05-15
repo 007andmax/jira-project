@@ -28,36 +28,33 @@ export class SuperAdminKnowledgeBaseService {
     return this.http.get(this.apiUrl + `announcements?page=${page}&size=20`);
   }
   public deleteNews(id) {
+    this.appStateService.setCustomeError(true, "The error has occurred, please check your entries");
     return this.http.delete(this.apiUrl + `announcements/${id}`).pipe(
       tap(data => {
+        this.appStateService.setCustomeError(false);
         this.toastrService.success("The Announcement has been successfully deleted");
         this.appStateService.changeDetectorRef();
         return data;
-      }, err => {
-        this.toastrService.error("The error has occurred, please check your entries");
-        this.appStateService.changeDetectorRef();
       }));
   }
   public editNews(id, data) {
+    this.appStateService.setCustomeError(true, "The error has occurred, please check your entries");
     return this.http.put(this.apiUrl + `announcements/${id}`, data).pipe(
       tap(data => {
+        this.appStateService.setCustomeError(false);
         this.toastrService.success("The announcement has been successfully updated");
         this.appStateService.changeDetectorRef();
         return data;
-      }, err => {
-        this.toastrService.error("The error has occurred, please check your entries");
-        this.appStateService.changeDetectorRef();
       }));
   }
   public addNews(data) {
+    this.appStateService.setCustomeError(true, "The error has occurred, please check your entries");
     return this.http.post(this.apiUrl + `announcements`, data).pipe(
       tap(data => {
+        this.appStateService.setCustomeError(false);
         this.toastrService.success("The new announcement has been successfully created");
         this.appStateService.changeDetectorRef();
         return data;
-      }, err => {
-        this.toastrService.error("The error has occurred, please check your entries");
-        this.appStateService.changeDetectorRef();
       }));
   }
 }

@@ -172,6 +172,11 @@
         padding: 8px 14px 8px 14px;
         border: 1px solid $gray-200;
         border-radius: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .fr-newline {
+        display: none;
     }
     .fr-wrapper {
         border: none;
