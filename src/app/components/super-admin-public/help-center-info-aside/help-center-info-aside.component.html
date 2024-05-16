@@ -26,6 +26,19 @@
                 <span>Learn how to set up your Quicktech</span>
             </div>
         </div>
+        <div
+            class="help-support-list-item pointer"
+            (click)="showListNews()"
+        >
+            <div class="help-support-list-item-icon">
+                <div class="icon__news qt-bg-contain qt-sz-24"></div>
+            </div>
+            <div class="help-support-list-item-text qt-ml-10">
+                <h3>Quicktech Knowledge Base</h3>
+                <span>Learn how to set up your Quicktech</span>
+            </div>
+        </div>
+        <app-super-admin-public-list *ngIf="showNews"></app-super-admin-public-list>
     </div>
     <div class="qt-aside-modern__footer"></div>
 </div>

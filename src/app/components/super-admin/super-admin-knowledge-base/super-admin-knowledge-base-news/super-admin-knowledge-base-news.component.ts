@@ -10,7 +10,7 @@ import { KnowledgeBaseStateService } from '../../state/knowledge-base/knowledge-
 })
 export class SuperAdminKnowledgeBaseNewsComponent implements OnInit {
   @Input() news: News;
-
+  @Input() display: string = 'SUPER_ADMIN';
   constructor(private elRef: ElementRef,
     private knowledgeBaseStateService: KnowledgeBaseStateService,
   ) { }

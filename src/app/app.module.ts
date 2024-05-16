@@ -137,6 +137,8 @@ import { SuperAdminKnowledgeBaseComponent } from './components/super-admin/super
 import { SuperAdminKnowledgeBaseTableComponent } from './components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base-table/super-admin-knowledge-base-table.component';
 import { SuperAdminKnowledgeBaseTableItemComponent } from './components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base-table/super-admin-knowledge-base-table-item/super-admin-knowledge-base-table-item.component';
 import { SuperAdminKnowledgeBaseService } from './components/super-admin/services/super-admin-knowledge-base/super-admin-knowledge-base.service';
+import { SuperAdminPublicListComponent } from './components/super-admin-public/super-admin-public-list/super-admin-public-list.component';
+import { SuperAdminPublicListModule } from './components/super-admin-public/super-admin-public-list/super-admin-public-list.module';
 declare var $: any;
 
 /**
@@ -167,7 +169,6 @@ declare var $: any;
     CannedResponsesAsideComponent,
     ManufacturesCheckUseComponent,
     UserDeArchiveNotificationComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -223,6 +224,7 @@ declare var $: any;
     UserFilterSaveModule,
     TicketsFilterSaveModule,
     MarketingSubscriptionsAsideModule,
+    SuperAdminPublicListModule
   ],
   entryComponents: [
     ConfirmComponent,

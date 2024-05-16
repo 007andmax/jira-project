@@ -11,6 +11,7 @@
             [textContent]="getDate(news.createdAt)"
         ></div>
         <span
+            *ngIf="display == 'SUPER_ADMIN'"
             class="tag__modern"
             [ngClass]="{'status-published':news.status == 'PUBLISHED',
         'status-draft':news.status == 'DRAFT',
@@ -18,6 +19,7 @@
             [textContent]="news.status"
         ></span>
         <div
+            *ngIf="display == 'SUPER_ADMIN'"
             class="qt-ml-auto grey-dropdown right with-icons"
             ngbDropdown
         >
