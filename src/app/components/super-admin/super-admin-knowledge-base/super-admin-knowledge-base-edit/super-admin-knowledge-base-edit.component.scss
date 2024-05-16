@@ -180,6 +180,10 @@
         border: none;
     }
 
+    .fr-wrapper .fr-placeholder {
+        color: $gray-400 !important;
+    }
+
     .fr-counter {
         display: none;
     }
@@ -187,6 +191,10 @@
     #formatOLOptions-1,
     #formatULOptions-1 {
         display: none;
+    }
+
+    .fr-wrapper .fr-element {
+        padding: 0px 20px 20px 16px !important;
     }
 }
 
@@ -198,6 +206,14 @@
     border: none !important;
     box-shadow: none !important;
     font-size: 18px !important;
+    &::placeholder {
+            color: $gray-400;
+    }
+    
+    &::-ms-input-placeholder {
+        /* Edge 12 -18 */
+        color: $gray-400;
+    }
 }
 
 .aside-filters-content__footer {
@@ -208,6 +224,4 @@
         max-width: none;
     }
 }
-/deep/ .fr-box.fr-basic .fr-element {
-    padding: 0px 20px 20px 20px !important;
-}
+ 

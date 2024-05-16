@@ -13,9 +13,13 @@
     </div>
     <div
         class="ticket-table__subject qt-color-gray-900 qt-fs-14 qt-fw-500"
-        [textContent]="news.title"
         (click)="select()"
-    ></div>
+    >
+        <div
+            class="ellipsis"
+            [textContent]="news.title"
+        ></div>
+    </div>
     <div
         class="ticket-table__created-date gray-900 qt-fs-14 qt-fw-400"
         [textContent]="getDate(news.createdAt)"

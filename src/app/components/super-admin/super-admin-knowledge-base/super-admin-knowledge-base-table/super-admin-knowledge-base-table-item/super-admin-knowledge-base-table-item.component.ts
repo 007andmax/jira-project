@@ -27,7 +27,7 @@ export class SuperAdminKnowledgeBaseTableItemComponent implements OnInit {
   }
   select() {
     var scrollDiv = document.getElementById("preview-" + this.news.id).offsetTop;
-    document.querySelector(".list-details-news").scrollTo({ top: scrollDiv, behavior: 'smooth' });
+    document.querySelector(".aside-filters").scrollTo({ top: scrollDiv, behavior: 'smooth' });
 
   }
 
