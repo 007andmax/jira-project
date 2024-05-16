@@ -8,6 +8,8 @@ import { KnowledgeBaseValidate } from './class/knowledge-base-validate';
 import { environment } from 'src/environments/environment';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { KnowledgeBaseStateService } from '../../state/knowledge-base/knowledge-base-state.service';
+import { DocumentsService } from 'src/app/services/documents/documents.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-super-admin-knowledge-base-add',
@@ -30,6 +32,7 @@ export class SuperAdminKnowledgeBaseAddComponent implements OnInit {
   constructor(public superAdminKnowledgeBaseService: SuperAdminKnowledgeBaseService,
     public usersStateService: UsersStateService,
     public cd: ChangeDetectorRef,
+    public documentsService: DocumentsService,
     public knowledgeBaseStateService: KnowledgeBaseStateService
   ) { }
 
@@ -75,6 +78,7 @@ export class SuperAdminKnowledgeBaseAddComponent implements OnInit {
   
   
         },*/
+      placeholderText: 'description',
       toolbarBottom: true,
       attribution: false,
       heightMin: 180,
@@ -167,10 +171,29 @@ export class SuperAdminKnowledgeBaseAddComponent implements OnInit {
     this.attachments = [];
     this.onClose.emit(null);
   }
+  checkAddAttachments(content) {
+    let contentAttachments = [];
+    let removedAttachments = [];
+    var urlRegex = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s]+)/g;
+    if (content) content.replace(urlRegex, function (url) {
+      contentAttachments.push(url.replace('\"', '').replace('/attachment', ''));
+      return url;
+    });
+    this.attachments.forEach(item => {
+      if (!contentAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
+    })
+    let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
+    forkJoin(
+      [...removedAttachmentsIds.map(item => this.documentsService.removeDocumentAttachment(item))]
+    )
+      .subscribe(res => {
+      });
+  }
   add() {
     if (!this.validate.isValidate(this.news)) return;
     this.superAdminKnowledgeBaseService.addNews(this.news.getDataForCreate()).subscribe(data => {
       this.knowledgeBaseStateService.addNews(new News(data));
+      this.checkAddAttachments(this.news.content);
       this.close();
     })
   }

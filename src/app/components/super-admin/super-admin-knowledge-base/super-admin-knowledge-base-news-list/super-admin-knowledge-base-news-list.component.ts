@@ -8,15 +8,8 @@ import { News } from '../super-admin-knowledge-base-table/class/news';
 })
 export class SuperAdminKnowledgeBaseNewsListComponent implements OnInit {
   @Input() list: Array<News> = [];
-  public infiniteScrollDisabled = false;
-  @Output() onScroll = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
-  }
-  public onScrolled() {
-    console.log("onScroll");
-    this.onScroll.emit(null);
-    // this.getNews();
   }
 }

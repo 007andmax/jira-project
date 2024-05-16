@@ -40,7 +40,7 @@ app-tickets-table-item {
 
 .qt-page-list__header-thead-container {
     position: sticky;
-    top: 57px;
+    top: 92px;
     z-index: 1;
     background-color: $white;
     //padding-top: 32px;
@@ -67,7 +67,7 @@ app-tickets-table-item {
 
 
 .qt-page-list__body {
-    padding: 0px 12px;
+    padding: 0px 32px;
 }
 
 .qt-page-list__header-thead__row {
@@ -187,4 +187,5 @@ app-tickets-table-item {
     top: 58px;
     height: calc(100vh - 123px);
     transition: .3s ease-in-out width;
+    overflow-y: auto;
 }

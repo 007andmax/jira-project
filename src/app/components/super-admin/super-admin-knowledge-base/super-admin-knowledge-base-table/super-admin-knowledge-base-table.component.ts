@@ -18,7 +18,7 @@ export class SuperAdminKnowledgeBaseTableComponent implements OnInit {
   public infiniteScrollDisabled = true;
   public page_number: number = 0;
   sub: Subscription = new Subscription();
-
+  public infiniteScrollDisabledRigth = false;
   list: Array<News> = [];
   toggleFilter: boolean = false;
   showPendingPreloader: boolean = false;

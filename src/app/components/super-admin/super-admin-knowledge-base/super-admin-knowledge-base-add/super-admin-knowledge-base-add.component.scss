@@ -194,6 +194,7 @@
 .qt-input-block__input {
     border: none !important;
     box-shadow: none !important;
+    font-size: 18px !important;
 }
 .aside-filters-content__footer {
     padding: 16px !important;
@@ -201,4 +202,7 @@
         width: 100%;
         max-width: none;
     }
+}
+/deep/ .fr-box.fr-basic .fr-element {
+    padding: 0px 20px 20px 20px !important;
 }

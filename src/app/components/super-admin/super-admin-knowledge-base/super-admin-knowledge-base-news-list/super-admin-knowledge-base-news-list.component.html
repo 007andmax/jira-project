@@ -1,13 +1,6 @@
 <div
     class="list-details-news"
     #content
-    infiniteScroll
-    [infiniteScrollDistance]="2"
-    [infiniteScrollThrottle]="50"
-    [scrollWindow]="false"
-    [infiniteScrollDisabled]="infiniteScrollDisabled"
-    [fromRoot]="true"
-    (scrolled)="onScrolled()"
 >
     <ng-template
         ngFor
