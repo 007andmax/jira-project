@@ -13,6 +13,7 @@ export class SuperAdminKnowledgeBaseComponent implements OnInit {
   ngOnInit() {
   }
   onAddNew() {
+    document.body.querySelector(".aside-filters").scrollTo(0, 0);
     this.table.setToggleFilter(true);
   }
 }

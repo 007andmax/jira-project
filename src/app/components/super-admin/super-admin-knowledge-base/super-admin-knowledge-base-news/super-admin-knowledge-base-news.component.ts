@@ -20,6 +20,7 @@ export class SuperAdminKnowledgeBaseNewsComponent implements OnInit {
 
   }
   editNews() {
+    document.body.querySelector(".aside-filters").scrollTo(0, 0);
     this.knowledgeBaseStateService.editNews(this.news);
   }
   public getDate(date) {
