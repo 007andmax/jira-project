@@ -20,6 +20,7 @@ export class HelpCenterInfoAsideComponent implements OnInit {
   }
   closed() {
     this.opened = false;
+    this.showNews = false;
   }
   gotiHelpCenter() {
     var url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/help-center`;
