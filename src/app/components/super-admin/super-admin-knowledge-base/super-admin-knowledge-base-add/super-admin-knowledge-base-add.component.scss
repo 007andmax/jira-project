@@ -153,12 +153,7 @@
     }
 }
 
-/deep/ .qt-page-list__header-title {
-    font-size: 16px;
-    font-weight: 600;
-    letter-spacing: 0;
-    color: $gray-900;
-}
+ 
 
 /deep/ #froala-editor {
     .fr-btn-grp {
@@ -174,6 +169,12 @@
         border-radius: 8px;
         flex-wrap: wrap;
         justify-content: center;
+        .fr-command.fr-btn {
+            margin: 0px !important;
+            svg {
+                margin: 0px 5px !important;
+            }
+        }
     }
     .fr-newline {
         display: none;
@@ -201,6 +202,7 @@
     border: none !important;
     box-shadow: none !important;
     font-size: 18px !important;
+    font-weight: 600;
 }
 .aside-filters-content__footer {
     padding: 16px !important;
