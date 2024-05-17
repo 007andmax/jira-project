@@ -5,7 +5,7 @@
     background-color: $white;
     transition: .3s ease-in-out width;
     border-left: 1px solid $gray-200;
-    border-radius: 12px 12px 0px 0px;
+    border-radius: 12px 12px 0 0;
 
     &-header {
         padding: 12px 16px;
@@ -165,7 +165,7 @@
     .fr-btn-grp {
         display: flex;
         align-items: center;
-        margin: 0px !important;
+        margin: 0 !important;
     }
 
     .fr-toolbar {
@@ -194,7 +194,7 @@
     }
 
     .fr-wrapper .fr-element {
-        padding: 0px 20px 20px 16px !important;
+        padding: 0 20px 20px 16px !important;
     }
 }
 
@@ -209,7 +209,7 @@
     &::placeholder {
             color: $gray-400;
     }
-    
+
     &::-ms-input-placeholder {
         /* Edge 12 -18 */
         color: $gray-400;
@@ -224,4 +224,3 @@
         max-width: none;
     }
 }
- 
