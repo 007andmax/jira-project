@@ -41,7 +41,7 @@
                     [ngClass]="{'--active':selectedCategory && selectedCategory.id === category.id}"
                 >
                     <div
-                        class="icon__category-closed qt-mr-10 pointer"
+                        class="qt-icon icon__category-closed qt-icon__gray-400 qt-mr-10 pointer"
                         [ngClass]="{'toggle-category':category.toggleSubCategory}"
                         (click)="category.toggleSubCategory = !category.toggleSubCategory"
                         *ngIf="category.subcategories.length > 0"
@@ -95,7 +95,7 @@
                                 [ngClass]="{'--active':selectedCategory && selectedCategory.id === subcategory.id}"
                             >
                                 <div
-                                    class="icon__category-closed qt-mr-10 pointer"
+                                    class="qt-icon icon__category-closed qt-icon__gray-400 qt-mr-10 pointer"
                                     [ngClass]="{'toggle-category':subcategory.toggleSubCategory}"
                                     (click)="subcategory.toggleSubCategory = !subcategory.toggleSubCategory"
                                     *ngIf="subcategory.subcategories.length > 0"
@@ -144,7 +144,7 @@
                                             [ngClass]="{'--active':selectedCategory && selectedCategory.id === subsubcategory.id}"
                                         >
                                             <div
-                                                class="icon__category-closed qt-mr-10 pointer"
+                                                class="qt-icon icon__category-closed qt-icon__gray-400 qt-mr-10 pointer"
                                                 [ngClass]="{'toggle-category':subsubcategory.toggleSubCategory}"
                                                 (click)="subsubcategory.toggleSubCategory = !subsubcategory.toggleSubCategory"
                                                 *ngIf="subsubcategory.subcategories.length > 0"
