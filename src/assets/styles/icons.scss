@@ -242,6 +242,13 @@
     -webkit-mask-image: url("/assets/img/icons/news.svg");
     mask-image: url("/assets/img/icons/news.svg");
   }
+  &__news-gray {
+    background-color: $metal;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/news.svg");
+    mask-image: url("/assets/img/icons/news.svg");
+  }
   &__menu-company-gray {
     background-color: $gray-600;
   }

@@ -28,6 +28,7 @@ export class SuperAdminPublicListComponent implements OnInit {
     this.list = [];
   }
   public onScroll() {
+    console.log("onScroll");
     this.infiniteScrollDisabled = true;
     this.getNews();
   }
