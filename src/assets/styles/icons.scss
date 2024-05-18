@@ -68,6 +68,12 @@
   &__selected {
     background-image: url("/assets/img/icons/selected.svg");
   }
+  &__quicktech_partical_top {
+    background-image: url("/assets/img/icons/quicktech-part-top-logo.svg");
+  }
+  &__quicktech_partical_bottom {
+    background-image: url("/assets/img/icons/quicktech-part-bottom-logo.svg");
+  }
   // END Color Icon
   &__assign-date {
     mask-image: url("/assets/img/icons/assign-date.svg");
@@ -193,96 +199,29 @@
   &__attachments {
     mask-image: url("/assets/img/icons/attachements.svg");
   }
-  &__chat {
-    mask-image: url("/assets/img/icons/chat.svg");
-    &.active {
-      background-color: $blue-light-600;
-    }
+  &__messages {
+    mask-image: url("/assets/img/icons/messages.svg");
   }
   &__products {
     mask-image: url("/assets/img/icons/products.svg");
-    &.active {
-      background-color: $blue-light-600;
-    }
   }
   &__service {
     mask-image: url("/assets/img/icons/service.svg");
-    &.active {
-      mask-image: url("/assets/img/icons/time.svg");
-    }
   }
   &__quick-support {
-    background-image: url("/assets/img/icons/quick-support-gray.svg");
-    &.active {
-      background-image: url("/assets/img/icons/quick-support.svg");
-    }
-  }
-  &__quick-support-strip {
-    mask-image: url("/assets/img/icons/quick-support-strip.svg");
-  }
-  &__quicktech-logo { // TODO delete this icon on super admin page
-    background-image: url("/assets/img/icons/quicktech-logo.svg");
+    mask-image: url("/assets/img/icons/quick-support.svg");
   }
   &__quicktech-logo {
-    &--gray {
-      background-color: $gray-400;
-      -webkit-mask-position: center;
-      mask-position: center;
-      -webkit-mask-image: url("/assets/img/icons/quicktech-logo.svg");
-      mask-image: url("/assets/img/icons/quicktech-logo.svg");
-      -webkit-mask-repeat: no-repeat;
-      mask-repeat: no-repeat;
-      -webkit-mask-size: cover;
-      mask-size: cover;
-    }
+    mask-image: url("/assets/img/icons/quicktech-logo.svg");
   }
-  &__quicktech_partical_top {
-    background-image: url("/assets/img/icons/quicktech-part-top-logo.svg");
-  }
-  &__quicktech_partical_bottom {
-    background-image: url("/assets/img/icons/quicktech-part-bottom-logo.svg");
-  }
-  &__inactive {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/inactive.svg");
-    mask-image: url("/assets/img/icons/inactive.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
-  }
-   &__active {
-    background-image: url("/assets/img/icons/active.svg");
-  }
-  &__collapse-arrow {
-    background-image: url("/assets/img/icons/collapse-arrow.svg"); // TODO replace collapse-arrow.svg and collapse-arrow-white.svg on mask
-  }
-  &__collapse-arrow {
-    &-white {
-      background-color: $white;
-      -webkit-mask-position: center;
-      mask-position: center;
-      -webkit-mask-image: url("/assets/img/icons/collapse-arrow.svg");
-      mask-image: url("/assets/img/icons/collapse-arrow.svg");
-      -webkit-mask-repeat: no-repeat;
-      mask-repeat: no-repeat;
-      -webkit-mask-size: contain;
-      mask-size: contain;
-    }
+  &__arrow-left {
+    mask-image: url("/assets/img/icons/arrow-left.svg");
   }
   &__devices {
-    background-image: url("/assets/img/icons/devices.svg");
+    mask-image: url("/assets/img/icons/devices.svg");
   }
-  &__devices-computer {
-    mask-image: url("/assets/img/icons/devices-computer.svg");
-  }
-  &__devices-grey {
-    background-image: url("/assets/img/icons/devices-grey.svg");
-  }
-  &__office-account {
-    mask-image: url("/assets/img/icons/office-account.svg");
+  &__office-365 {
+    mask-image: url("/assets/img/icons/office-365.svg");
   }
   &__unlock-screen {
     background-image: url("/assets/img/icons/unlock-screen.svg");

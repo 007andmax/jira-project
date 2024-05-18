@@ -32,7 +32,7 @@
             ></app-dynamic-tooltip>
             <i
                 [hidden]="addTask.status != 'INCOMPLETED'"
-                class="icon__active icn-20"
+                class="qt-icon icon__check icn-20"
                 (click)="setStatus(addTask,'COMPLETED')"
                 (mouseenter)="complete.show($event.target)"
                 (mouseleave)="complete.hide()"
@@ -98,7 +98,7 @@
             ></app-dynamic-tooltip>
             <i
                 [hidden]="item.status != 'INCOMPLETED'"
-                class="icon__active icn-20"
+                class="qt-icon icon__check icn-20"
                 (click)="setStatus(item,'COMPLETED');onEditTicketTask(item)"
                 (mouseenter)="complete.show($event.target)"
                 (mouseleave)="complete.hide()"
