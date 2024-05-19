@@ -74,6 +74,18 @@
   &__quicktech_partical_bottom {
     background-image: url("/assets/img/icons/quicktech-part-bottom-logo.svg");
   }
+  &__unlock-screen {
+    background-image: url("/assets/img/icons/unlock-screen.svg");
+  }
+  &__claim-ticket {
+    background-image: url("/assets/img/icons/claim-ticket.svg");
+  }
+  &__rating-filled {
+    background-image: url("/assets/img/icons/rating-filled.svg");
+  }
+  &__rating {
+    background-image: url("/assets/img/icons/rating.svg");
+  }
   // END Color Icon
   &__assign-date {
     mask-image: url("/assets/img/icons/assign-date.svg");
@@ -178,9 +190,6 @@
     mask-image: url("/assets/img/icons/support-page.svg");
   }
   // TODO Start Rename Icon Name
-  &__category-closed {
-    mask-image: url("/assets/img/icons/category-closed.svg");
-  }
   &__add-sub-category {
     mask-image: url("/assets/img/icons/support-page-add-sub-category.svg");
   }
@@ -223,51 +232,28 @@
   &__office-365 {
     mask-image: url("/assets/img/icons/office-365.svg");
   }
-  &__unlock-screen {
-    background-image: url("/assets/img/icons/unlock-screen.svg");
-  }
   &__custom-category {
-    background-image: url("/assets/img/icons/custom-category.svg");
+    mask-image: url("/assets/img/icons/custom-category.svg");
   }
   &__panel-open {
-    background-image: url("/assets/img/icons/panel-open.svg");
+    mask-image: url("/assets/img/icons/panel-open.svg");
   }
   &__note-list {
-    background-image: url("/assets/img/icons/canned-responses.svg");
+    mask-image: url("/assets/img/icons/canned-responses.svg");
   }
-  &__get-direction {
-    background-image: url("/assets/img/icons/get-direction.svg");
+  &__share {
+    mask-image: url("/assets/img/icons/share.svg");
   }
-  &__panel-close {
-    background-image: url("/assets/img/icons/panel-close.svg");
-  }
-  &__rating-filled {
-    background-image: url("/assets/img/icons/rating-filled.svg");
-  }
-  &__rating {
-    background-image: url("/assets/img/icons/rating.svg");
-  }
-  &__expand {
-    background-image: url("/assets/img/icons/expand.svg");
-  }
-  &__export {
-    mask-image: url("/assets/img/icons/export-dark.svg");
+  &__email-send {
+    mask-image: url("/assets/img/icons/email-send.svg");
   }
   &__add {
     mask-image: url("/assets/img/icons/add-grey.svg");
   }
-  &__play-script {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/play.svg");
-    mask-image: url("/assets/img/icons/play.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
+  &__category-closed {
+    mask-image: url("/assets/img/icons/category-closed.svg");
   }
-  &__power-shell {
+  &__power-shell { // TODO check
     background-color: $gray-500;
     -webkit-mask-position: center;
     mask-position: center;
@@ -279,16 +265,13 @@
     mask-size: contain;
   }
   &__snapshot {
-    background-image: url("/assets/img/icons/snapshot.svg");
+    mask-image: url("/assets/img/icons/snapshot.svg");
   }
   &__claim {
     mask-image: url("/assets/img/icons/claim.svg");
   }
-  &__claim-ticket {
-    background-image: url("/assets/img/icons/claim-ticket.svg");
-  }
   &__claim-edit-ticket {
-    background-image: url("/assets/img/icons/claim-edit-ticket.svg");
+    mask-image: url("/assets/img/icons/claim-edit-ticket.svg");
   }
   &__tags {
     background-color: $gray-500;
@@ -304,9 +287,6 @@
   &__archive {
     mask-image: url("/assets/img/icons/archive.svg");
   }
-  &__email-dark {
-    mask-image: url("/assets/img/icons/email-dark.svg");
-  }
   &__resend-pdf {
     mask-image: url("/assets/img/icons/resend-pdf.svg");
   }
@@ -315,9 +295,6 @@
   }
   &__email-blue {
     background-image: url("/assets/img/icons/email-blue.svg");
-  }
-  &__email-send {
-    background-image: url("/assets/img/icons/email-send.svg");
   }
   &__merge {
     background-color: $gray-500;
@@ -691,9 +668,6 @@
   }
   &__link {
     background-image: url("/assets/img/icons/link.svg");
-  }
-  &__play {
-    background-image: url("/assets/img/icons/play.svg");
   }
   &__computer {
     mask-image: url("/assets/img/icons/computer.svg");

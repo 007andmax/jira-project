@@ -69,6 +69,7 @@
       font-weight: 500;
     }
 
+    &__add,
     &__expand {
       width: 16px;
       height: 16px;
@@ -89,6 +90,7 @@
             padding-right: 0 !important;
           }
 
+          &__add,
           &__expand {
             background-image: url("/assets/img/icons/collapse.svg");
           }
