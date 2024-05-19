@@ -27,12 +27,12 @@
                                 Old Password is not correct.
                             </label>
                             <div
-                                class="qt-sz-16 qt-bg-contain icon__view show-password pointer"
+                                class="qt-sz-16 qt-bg-contain qt-icon icon__show show-password pointer"
                                 *ngIf="!showCurrentPassword"
                                 (click)="showCurrentPassword = !showCurrentPassword"
                             ></div>
                             <div
-                                class="icon__hide qt-za-16 qt-sz-16 qt-bg-contain hide-password pointer"
+                                class="qt-icon icon__hide qt-za-16 qt-sz-16 hide-password pointer"
                                 *ngIf="showCurrentPassword"
                                 (click)="showCurrentPassword = !showCurrentPassword"
                             ></div>
@@ -55,12 +55,12 @@
                             >
                             <div class="qt-input-info-help">Minimum 8 characters</div>
                             <div
-                                class="qt-sz-16 qt-bg-contain icon__view show-password pointer"
+                                class="qt-sz-16 qt-bg-contain qt-icon icon__show show-password pointer"
                                 *ngIf="!showNewPassword"
                                 (click)="showNewPassword = !showNewPassword"
                             ></div>
                             <div
-                                class="icon__hide qt-za-16 qt-sz-16 qt-bg-contain hide-password pointer"
+                                class="qt-icon icon__hide qt-za-16 qt-sz-16 hide-password pointer"
                                 *ngIf="showNewPassword"
                                 (click)="showNewPassword = !showNewPassword"
                             ></div>

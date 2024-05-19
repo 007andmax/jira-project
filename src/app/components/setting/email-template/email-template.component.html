@@ -352,7 +352,7 @@
                 ngbTooltip="Show Preview"
                 container="body"
             >
-                <div class="icon__view qt-sz-16 qt-button-icon"></div>
+                <div class="qt-icon icon__show qt-sz-16 qt-button-icon"></div>
             </a>
         </div>
     </div>
@@ -430,7 +430,7 @@
                         >
                             <span
                                 class="qt-sz-16 qt-dib qt-mr-8 qt-button-icon"
-                                [ngClass]="{'icon__view':!show, 'icon__hide':show}"
+                                [ngClass]="{'qt-icon icon__show':!show, 'qt-icon icon__hide':show}"
                             ></span>
                             {{ buttonName }}
                         </a>

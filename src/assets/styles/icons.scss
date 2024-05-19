@@ -147,9 +147,6 @@
   &__menu-email-template {
     mask-image: url("/assets/img/icons-left-sidebar/menu-email-template.svg");
   }
-  &__menu-tags {
-    mask-image: url("/assets/img/icons-left-sidebar/menu-tags.svg");
-  }
   &__menu-my-profile-setting {
     mask-image: url("/assets/img/icons-left-sidebar/menu-my-profile-settings.svg");
   }
@@ -274,69 +271,25 @@
     mask-image: url("/assets/img/icons/claim-edit-ticket.svg");
   }
   &__tags {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/tags.svg");
-    mask-image: url("/assets/img/icons/tags.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
+    mask-image: url("/assets/img/icons-left-sidebar/menu-tags.svg");
   }
-  &__archive {
-    mask-image: url("/assets/img/icons/archive.svg");
+  &__resend {
+    mask-image: url("/assets/img/icons/resend.svg");
   }
-  &__resend-pdf {
-    mask-image: url("/assets/img/icons/resend-pdf.svg");
+  &__subscription {
+    mask-image: url("/assets/img/icons/subscription.svg");
   }
-  &__rool-back {
-    mask-image: url("/assets/img/icons/rool-back.svg");
-  }
-  &__email-blue {
-    background-image: url("/assets/img/icons/email-blue.svg");
-  }
-  &__merge {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/merge.svg");
-    mask-image: url("/assets/img/icons/merge.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
-  }
-  &__edit-blue {
-    background-image: url("/assets/img/icons/edit-blue.svg");
-  }
-  &__create-document {
-    background-image: url("/assets/img/icons/create-document.svg");
+  &__email {
+    mask-image: url("/assets/img/icons/email.svg");
   }
   &__upload-company-logo {
-    background-image: url("/assets/img/icons/upload-company-logo.svg");
+    mask-image: url("/assets/img/icons/upload-company-logo.svg");
   }
-  &__view {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/view.svg");
-    mask-image: url("/assets/img/icons/view.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
+  &__show {
+    mask-image: url("/assets/img/icons/show.svg");
   }
   &__hide {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/password-show.svg");
-    mask-image: url("/assets/img/icons/password-show.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
+    mask-image: url("/assets/img/icons/hide.svg")
   }
   &__documents {
     mask-image: url("/assets/img/icons/documents.svg");
@@ -505,9 +458,6 @@
   &__filter-active {
     background-image: url("/assets/img/icons/filter-active.svg");
   }
-  &__email {
-    mask-image: url("/assets/img/icons/email.svg");
-  }
   &__globe {
     mask-image: url("/assets/img/icons/globe.svg");
   }
@@ -572,9 +522,6 @@
   }
   &__payment-history {
     background-image: url("/assets/img/icons/payment-history.svg");
-  }
-  &__mark-as-read {
-    background-image: url("/assets/img/icons/password-show-old.svg");
   }
   &__refund-payment {
     background-image: url("/assets/img/icons/refund-payment.svg");

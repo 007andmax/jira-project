@@ -27,7 +27,7 @@
                         *ngIf="!isExistArchiveUser() && (type === TYPE_LIST_MARKETING_USERS || type === TYPE_LIST_COMPANY_USERS)"
                         (click)="showAsideForDraftEmail()"
                     >
-                        <div class="icon__email-blue qt-sz-16 qt-ic-c qt-mr-6"></div>
+                        <div class="qt-icon icon__email qt-icon__blue-light-600 qt-sz-16 qt-ic-c qt-mr-6"></div>
                         <div class="qt-lh-1">Send email</div>
                     </div>
                     <div
@@ -51,7 +51,7 @@
                         *ngIf="!isExistArchiveUser() && !isExistPrimaryContact() && currentUser && currentUser.checkPermission('ARCHIVE_USERS')"
                         (click)="delete()"
                     >
-                        <div class="qt-icon icon__archive qt-icon__blue-light-600 qt-sz-16 qt-ic-c qt-mr-6"></div>
+                        <div class="qt-icon icon__remove qt-icon__red-600 qt-sz-16 qt-ic-c qt-mr-6"></div>
                         <div class="qt-lh-1">Archive User</div>
                     </div>
                 </div>
