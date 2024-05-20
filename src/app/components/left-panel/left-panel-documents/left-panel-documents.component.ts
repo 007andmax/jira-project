@@ -3,7 +3,6 @@ import { Subscription } from 'rxjs';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
-import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { DocumentCategoryAdd } from '../../documents/documents-add/class/document-category-add';
@@ -29,7 +28,6 @@ export class LeftPanelDocumentsComponent implements OnInit, OnDestroy {
     private permissionsService: PermissionsService,
     public cd: ChangeDetectorRef,
     private leftPanelService: LeftPanelService,
-    private companiesStateService: CompaniesStateService,
     private leftPanelStateService: LeftPanelStateService,) { }
 
   ngOnInit() {
@@ -38,21 +36,25 @@ export class LeftPanelDocumentsComponent implements OnInit, OnDestroy {
       this.activePage = data;
     })
     this.sub.add(onDocumentsPage);
-    this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
+    let onToggleLeftPanel = this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       if (data) this.open = false;
     })
-    this.leftPanelStateService.onChangeState.subscribe(state => {
+    this.sub.add(onToggleLeftPanel);
+    let onChangeState = this.leftPanelStateService.onChangeState.subscribe(state => {
       if (!this.leftPanelService.isDocumentsState(state)) this.open = false;
     })
-    this.leftPanelStateService.onFirstOpen.subscribe(data => {
+    this.sub.add(onChangeState);
+    let onFirstOpen = this.leftPanelStateService.onFirstOpen.subscribe(data => {
       if (this.leftPanelService.isDocumentsState(data)) this.open = true;
     })
-    this.documentsStateService.onGetCategories.subscribe((data: any) => {
+    this.sub.add(onFirstOpen);
+    let onGetCategories = this.documentsStateService.onGetCategories.subscribe((data: any) => {
       this.categories = data;
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
     })
+    this.sub.add(onGetCategories);
   }
 
   onCheckNameCategory() {

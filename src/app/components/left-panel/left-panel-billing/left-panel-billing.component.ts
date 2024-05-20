@@ -4,7 +4,6 @@ import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
-import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 
 /**
  * Left panel billing component
@@ -43,15 +42,18 @@ export class LeftPanelBillingComponent implements OnInit, OnDestroy {
       this.activePage = data;
     })
     this.sub.add(getOnBillingPage);
-    this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
+    let onToggleLeftPanel = this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       if (data) this.open = false;
     })
-    this.leftPanelStateService.onChangeState.subscribe(state => {
+    this.sub.add(onToggleLeftPanel);
+    let onChangeState = this.leftPanelStateService.onChangeState.subscribe(state => {
       if (!this.leftPanelService.isBillingState(state)) this.open = false;
     })
-    this.leftPanelStateService.onFirstOpen.subscribe(data => {
+    this.sub.add(onChangeState);
+    let onFirstOpen = this.leftPanelStateService.onFirstOpen.subscribe(data => {
       if (this.leftPanelService.isBillingState(data)) this.open = true;
     })
+    this.sub.add(onFirstOpen);
     let getOnShowNotificationReview = this.contractsStateService.getOnShowNotificationReview().subscribe(data => {
       this.showNotificationReview = true;
     })

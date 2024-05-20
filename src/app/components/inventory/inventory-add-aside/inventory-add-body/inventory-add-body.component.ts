@@ -31,7 +31,6 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
   @ViewChild('suppliersSelect') suppliersSelect: DropDownComponent;
   @Output() onClose: EventEmitter<any> = new EventEmitter();
   @Input() class: string;
-  //opened: boolean = false;
   inventory: InventoryItem = new InventoryItem();
   glNumbers: Array<GlNumber> = [];
   taxes: Array<Tax> = [];

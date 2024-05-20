@@ -5,8 +5,6 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { MarketingSubscriptionType } from '../../setting/marketing-email/marketing-subscription-type/class/marketing-subscription-type';
-import { UserCustomSubscription } from '../../users/class/user-custom-subscription';
-import { UserFilter } from '../../users/class/user-filter';
 import { LeftPanelUsersService } from '../left-panel-users/services/left-panel-users.service';
 import { UserFilters } from '../../users/class/user-filters';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
@@ -53,14 +51,15 @@ export class LeftPanelMarketingComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
+    let onToggleLeftPanel = this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       if (data) this.open = false;
     })
-    this.leftPanelStateService.onChangeState.subscribe(state => {
+    this.sub.add(onToggleLeftPanel);
+    let onChangeState = this.leftPanelStateService.onChangeState.subscribe(state => {
       if (!this.leftPanelService.isMarketingPage(state)) this.open = false;
       if (this.leftPanelService.isMarketingPage(state) && !this.isGetGlobalFilters && !this.customerPortalStateService.isCustomerPortal && this.usersStateService.getCurrentUser()) this.getGLobalFilters();
-
     })
+    this.sub.add(onChangeState);
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
       if (this.leftPanelService.isMarketingPage(data)) this.open = true;
     })
@@ -72,15 +71,18 @@ export class LeftPanelMarketingComponent implements OnInit {
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
       this.filter.setData(data);
     })
+    this.sub.add(geLefttFilter);
     let onClearGlobalFilter = this.usersStateService.onClearGlobalFilter.subscribe((data) => {
       this.selectedGlobalFilter = new UserGlobalFilter();
     })
+    this.sub.add(onClearGlobalFilter);
     this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       if (!this.isGetGlobalFilters && !this.customerPortalStateService.isCustomerPortal) this.getGLobalFilters();
     })
     let onInitGlobalFilter = this.usersStateService.onInitGlobalFilter.subscribe((data) => {
       this.selectedGlobalFilter = data;
     });
+    this.sub.add(onInitGlobalFilter);
     if (this.leftPanelService.isMarketingPage(this.leftPanelStateService.activePage) && !this.isGetGlobalFilters && !this.customerPortalStateService.isCustomerPortal && this.usersStateService.getCurrentUser()) this.getGLobalFilters();
   }
   onDeleteGlobalFilter(filter) {

@@ -1,5 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Router, ActivatedRoute, ActivationStart, NavigationEnd } from '@angular/router';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { CurrentUser } from 'src/class/current-user/current-user';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -7,16 +6,18 @@ import { SettingStateService } from 'src/app/states/setting/setting-state.servic
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-left-panel-settings',
   templateUrl: './left-panel-settings.component.html',
   styleUrls: ['./left-panel-settings.component.scss']
 })
-export class LeftPanelSettingsComponent implements OnInit {
+export class LeftPanelSettingsComponent implements OnInit, OnDestroy {
   open: boolean = false;
   active: boolean = false;
   currentUser: CurrentUser;
+  sub: Subscription = new Subscription();
   @Input() componentName: string;
   @Input() activePage: string = "";
   @Output() onGoToLink = new EventEmitter();
@@ -30,18 +31,22 @@ export class LeftPanelSettingsComponent implements OnInit {
     private usersStateService: UsersStateService) {
   }
 
+
   ngOnInit() {
     this.componentName = this.settingStateService.getComponentName();
     this.currentUser = this.usersStateService.getCurrentUser();
-    this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
+    let onToggleLeftPanel = this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       if (data) this.open = false;
     })
-    this.leftPanelStateService.onChangeState.subscribe(state => {
+    this.sub.add(onToggleLeftPanel);
+    let onChangeState = this.leftPanelStateService.onChangeState.subscribe(state => {
       if (!this.leftPanelService.isSettingsPage(state)) this.open = false
     })
-    this.leftPanelStateService.onFirstOpen.subscribe(data => {
+    this.sub.add(onChangeState);
+    let onFirstOpen = this.leftPanelStateService.onFirstOpen.subscribe(data => {
       if (this.leftPanelService.isSettingsPage(data)) this.open = true;
     })
+    this.sub.add(onFirstOpen);
   }
   public close() {
     this.open = false;
@@ -76,5 +81,8 @@ export class LeftPanelSettingsComponent implements OnInit {
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

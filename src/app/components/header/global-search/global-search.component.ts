@@ -45,9 +45,8 @@ export class GlobalSearchComponent implements OnInit {
     private inventoryStateService: InventoryStateService,
     public ticketsListService: TicketsListService,
     private permissionsService: PermissionsService,
-    private appService: AppService,
     private ticketStateService: TicketStateService,
-    private ticketsStateService: TicketsStateService) { }
+  ) { }
 
   ngOnInit() {
     this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();

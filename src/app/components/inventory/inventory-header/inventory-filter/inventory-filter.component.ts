@@ -41,7 +41,6 @@ export class InventoryFilterComponent implements OnInit {
     this.cd.detectChanges();
   }
   onSelectCategory(category) {
-    //  this.sortCategoty = category;
     this.inventoryStateService.setSortCategory(category);
     this.cd.detectChanges();
   }

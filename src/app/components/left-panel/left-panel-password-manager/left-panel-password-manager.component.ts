@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { CompaniesService } from "../../../services/company/companies.service";
 import { DevicesService } from "../../../services/devices/devices.service";
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
@@ -10,6 +9,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 import { PasswordRecordCategories } from '../../password-manager/class/password-record-categories';
 import { PasswordManagerStateService } from 'src/app/states/password-manager/password-manager-state.service';
+import { Subscription } from 'rxjs';
 
 /**
  * Left panel password manager component
@@ -26,6 +26,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   @Output() onGoToLink = new EventEmitter();
   @Output() onChangeState = new EventEmitter();
   @Output() onOpenPanel = new EventEmitter();
+  sub: Subscription = new Subscription();
   /**
    * Creates an instance of the LeftPanelPasswordManagerComponent with the injected services
    * @param {CompaniesService} companiesService Service to work with companies
@@ -36,15 +37,6 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
    * @param {ChangeDetectorRef} cdRef Service to work with change detection
    */
   constructor(
-    private companiesService: CompaniesService,
-    private devicesService: DevicesService,
-    private userService: UsersService,
-    private passwordManagerService: PasswordManagerService,
-    private gadgetsService: GadgetsService,
-    private cdRef: ChangeDetectorRef,
-    private usersStateService: UsersStateService,
-    private companiesState: CompaniesStateService,
-    private devicesStateService: DevicesStateService,
     private passwordManagerStateService: PasswordManagerStateService,
   ) {
 
@@ -55,9 +47,10 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
    */
   ngOnInit() {
     this.categories = this.passwordManagerStateService.getCategories();
-    this.passwordManagerStateService.onGetCategories.subscribe((data: Array<PasswordRecordCategories>) => {
+    let onGetCategories = this.passwordManagerStateService.onGetCategories.subscribe((data: Array<PasswordRecordCategories>) => {
       this.categories = data;
     })
+    this.sub.add(onGetCategories);
   }
   public openPanel() {
     this.onOpenPanel.emit(null);

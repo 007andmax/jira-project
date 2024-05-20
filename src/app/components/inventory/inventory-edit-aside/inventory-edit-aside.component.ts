@@ -52,8 +52,6 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
     private productService: ProductService,
     private elRef: ElementRef,
     public cd: ChangeDetectorRef,
-    private toastrService: ToastrService,
-    private appStateService: AppStateService,
     private quoteStateService: QuoteStateService,
     private glNumberService: GlNumberService) { }
 
@@ -68,7 +66,6 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
       this.taxes = data;
     })
     this.sub.add(getOnTaxess);
-
     if (this.companiesStateService.getCompanies().length > 0) this.onInitSuppliers(this.companiesStateService.getCompanies());
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.onInitSuppliers(data);
