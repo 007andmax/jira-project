@@ -75,10 +75,11 @@
         <app-super-admin-knowledge-base-add
             [hidden]="!toggleFilter"
             class="qt-w100"
-            #filter
+            #addAside
             (onClose)="setToggleFilter(false)"
         ></app-super-admin-knowledge-base-add>
         <app-super-admin-knowledge-base-edit
+            #editAside
             class="qt-w100"
             (onClose)="setToggleFilter(false)"
         ></app-super-admin-knowledge-base-edit>

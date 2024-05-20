@@ -34,7 +34,7 @@
             [ngClass]="{'status-published':news.status == 'PUBLISHED',
         'status-draft':news.status == 'DRAFT',
     'status-archived':news.status == 'ARCHIVED'}"
-            [textContent]="news.status"
+            [textContent]="news.parseStatus()"
         ></span>
     </div>
     <div class="companies-table__menu pointer">

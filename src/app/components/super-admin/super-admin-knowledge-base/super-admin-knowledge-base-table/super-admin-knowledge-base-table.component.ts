@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 import { News } from './class/news';
@@ -6,6 +6,8 @@ import { SuperAdminKnowledgeBaseService } from '../../services/super-admin-knowl
 import { KnowledgeBaseStateService } from '../../state/knowledge-base/knowledge-base-state.service';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { DELETE_NEWS } from 'src/app/const/confirm';
+import { SuperAdminKnowledgeBaseAddComponent } from '../super-admin-knowledge-base-add/super-admin-knowledge-base-add.component';
+import { SuperAdminKnowledgeBaseEditComponent } from '../super-admin-knowledge-base-edit/super-admin-knowledge-base-edit.component';
 
 @Component({
   selector: 'app-super-admin-knowledge-base-table',
@@ -13,7 +15,7 @@ import { DELETE_NEWS } from 'src/app/const/confirm';
   styleUrls: ['./super-admin-knowledge-base-table.component.scss'],
   providers: [TicketsListService]
 })
-export class SuperAdminKnowledgeBaseTableComponent implements OnInit {
+export class SuperAdminKnowledgeBaseTableComponent implements OnInit, OnDestroy {
   showPreloader: boolean = true;
   public infiniteScrollDisabled = true;
   public page_number: number = 0;
@@ -23,6 +25,8 @@ export class SuperAdminKnowledgeBaseTableComponent implements OnInit {
   toggleFilter: boolean = false;
   showPendingPreloader: boolean = false;
   container = document.body.querySelector(".main-container");
+  @ViewChild("addAside") addAside: SuperAdminKnowledgeBaseAddComponent;
+  @ViewChild("editAside") editAside: SuperAdminKnowledgeBaseEditComponent;
   constructor(private ticketsListService: TicketsListService,
     private superAdminKnowledgeBaseService: SuperAdminKnowledgeBaseService,
     public cd: ChangeDetectorRef,
@@ -49,6 +53,9 @@ export class SuperAdminKnowledgeBaseTableComponent implements OnInit {
       this.list.unshift(data);
     })
     this.sub.add(onAddNews);
+    this.knowledgeBaseStateService.onEditNews.subscribe(data => {
+      this.addAside.close();
+    })
     this.setDefaultScoll();
     this.onScroll();
   }
@@ -88,6 +95,10 @@ export class SuperAdminKnowledgeBaseTableComponent implements OnInit {
   }
   public setToggleFilter(data) {
     this.toggleFilter = data;
+    if (this.toggleFilter) this.editAside.close();
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
 }

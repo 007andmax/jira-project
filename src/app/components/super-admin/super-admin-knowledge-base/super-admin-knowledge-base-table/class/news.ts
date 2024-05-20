@@ -13,6 +13,14 @@ export class News {
             if (data.content) this.newContent = JSON.parse(JSON.stringify(data.content));
         }
     }
+    public parseStatus() {
+        return this.status.toLocaleLowerCase();
+    }
+    public update(data) {
+        this.content = data.content;
+        this.status = data.status;
+        this.title = data.title;
+    }
     public getDataForCreate() {
         return {
             "title": this.title,
