@@ -62,6 +62,7 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
       })
       this.cd.markForCheck();
     })
+    this.categories = this.supportPageCategoriesStateService.getCategories();
     this.supportPageCategoriesStateService.onGetCategories.subscribe(data => {
       this.categories = data;
       this.cd.markForCheck();

@@ -9,6 +9,7 @@ import { SuperAdminPublicStateService } from 'src/app/states/super-admin-public/
 })
 export class HelpCenterInfoAsideComponent implements OnInit {
   opened: boolean = false;
+  showNews: boolean = false;
   constructor(private superAdminPublicStateService: SuperAdminPublicStateService,
     private companiesStateService: CompaniesStateService,) { }
 
@@ -19,9 +20,13 @@ export class HelpCenterInfoAsideComponent implements OnInit {
   }
   closed() {
     this.opened = false;
+    this.showNews = false;
   }
   gotiHelpCenter() {
     var url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/help-center`;
     window.open(url, '_blank');
   };
+  showListNews() {
+    this.showNews = true;
+  }
 }

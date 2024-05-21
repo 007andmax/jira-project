@@ -1,0 +1,54 @@
+<div class="news-container">
+    <div class="qt-df qt-ai-c qt-mb-12">
+        <div
+            class="news-status qt-mr-8"
+            [ngClass]="{'status-published-icon':news.status == 'PUBLISHED',
+        'status-draft-icon':news.status == 'DRAFT',
+    'status-archived-icon':news.status == 'ARCHIVED'}"
+        ></div>
+        <div
+            class="news-date qt-fs-13 qt-color-gray-500 qt-fw-400 qt-mr-8"
+            [textContent]="getDate(news.createdAt)"
+        ></div>
+        <span
+            *ngIf="display == 'SUPER_ADMIN'"
+            class="tag__modern"
+            [ngClass]="{'status-published':news.status == 'PUBLISHED',
+        'status-draft':news.status == 'DRAFT',
+    'status-archived':news.status == 'ARCHIVED'}"
+            [textContent]="news.parseStatus()"
+        ></span>
+        <div
+            *ngIf="display == 'SUPER_ADMIN'"
+            class="qt-ml-auto grey-dropdown right with-icons"
+            ngbDropdown
+        >
+            <div
+                class="qt-button --square-md --gray pointer "
+                id="dropdownBasic1"
+                ngbDropdownToggle
+            >
+                <i class="icn-16 qt-bg-contain icon__more pointer"></i>
+            </div>
+            <div
+                ngbDropdownMenu
+                aria-labelledby="dropdownBasic1"
+                class="qt-dropdown-menu"
+            >
+                <button
+                    ngbDropdownItem
+                    (click)="editNews()"
+                >
+                    <i class="qt-sz-20 qt-mr-12 qt-bg-contain icon__edit"></i>
+                    Edit
+                </button>
+            </div>
+        </div>
+    </div>
+    <div
+        class="news-title qt-fs-18 qt-color-gray-900 qt-fw-600 qt-mb-8"
+        [textContent]="news.title"
+    >
+    </div>
+    <div class="news-description qt-fs-14 qt-color-gray-700 qt-fw-400 qt-mb-8"></div>
+</div>
