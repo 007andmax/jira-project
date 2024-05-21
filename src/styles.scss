@@ -111,9 +111,15 @@ h6,
   color: $blue-light-600;
   border: 1px solid $blue-light-600;
   @include сaption-l__m;
+  .qt-icon {
+    transition: .3s ease-in-out background-color;
+  }
   &:hover {
     background: $blue-light-600;
     color: $white;
+    .qt-icon {
+      background-color: $white;
+    }
   }
 }
 .radio-container {

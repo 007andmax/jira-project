@@ -12,6 +12,7 @@
                                 [ngClass]="{'active': scriptTyped == 'cmd'}"
                                 (click)="switchTerminal('cmd')"
                             >
+                               <span class="d-block qt-icon icon__command-line-gray qt-sz-18"></span>
                                 Command Line
                             </a>
                             <a
@@ -19,6 +20,7 @@
                                 [ngClass]="{'active': scriptTyped == 'powershell'}"
                                 (click)="switchTerminal('powershell')"
                             >
+                                <span class="d-block qt-icon icon__terminal qt-sz-18"></span>
                                 Power Shell
                             </a>
                         </div>

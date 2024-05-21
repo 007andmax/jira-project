@@ -458,8 +458,9 @@
     display: inline-block;
     vertical-align: middle;
     a {
-      display: inline-block;
-      vertical-align: middle;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       margin-left: 23px;
       font-size: 12px;
       font-weight: 500;
@@ -468,26 +469,28 @@
       line-height: 1.33;
       letter-spacing: normal;
       color: $gray-600;
-      padding-left: 25px;
+      //padding-left: 25px;
       min-height: 16px;
       &:hover {
         color: $blue-light-600;
       }
       &.Command {
         margin-left: 0;
-        background: url("../../../../assets/img/icons/command-line-gray.svg") no-repeat left 0;
         cursor: pointer;
         &.active {
-          background: url("../../../../assets/img/icons/command-line-blue.svg") no-repeat left 0;
           color: $blue-light-600;
+          .qt-icon {
+            background-color: $blue-light-600;
+          }
         }
       }
       &.Power {
-        background: url("../../../../assets/img/icons/power-shell.svg") no-repeat left 0;
         cursor: pointer;
         &.active {
-          background: url("../../../../assets/img/icons/power-shell-blue.svg") no-repeat left 0;
           color: $blue-light-600;
+          .qt-icon {
+            background-color: $blue-light-600;
+          }
         }
       }
     }

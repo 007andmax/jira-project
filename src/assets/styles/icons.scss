@@ -86,6 +86,9 @@
   &__rating {
     background-image: url("/assets/img/icons/rating.svg");
   }
+  &__command-line {
+    background-image: url("/assets/img/icons/command-line.svg");
+  }
   // END Color Icon
   &__assign-date {
     mask-image: url("/assets/img/icons/assign-date.svg");
@@ -250,16 +253,11 @@
   &__category-closed {
     mask-image: url("/assets/img/icons/category-closed.svg");
   }
-  &__power-shell { // TODO check
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/power-shell.svg");
-    mask-image: url("/assets/img/icons/power-shell.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
+  &__terminal {
+    mask-image: url("/assets/img/icons/terminal.svg");
+  }
+  &__command-line-gray {
+    mask-image: url("/assets/img/icons/command-line-gray.svg");
   }
   &__snapshot {
     mask-image: url("/assets/img/icons/snapshot.svg");
@@ -295,7 +293,7 @@
     mask-image: url("/assets/img/icons/documents.svg");
   }
   &__folder {
-    mask-image: url("/assets/img/icons/folder.svg");
+    mask-image: url("/assets/img/icons-left-sidebar/submenu-folder.svg");
   }
   &__calendar {
     mask-image: url("/assets/img/icons/calendar.svg");
@@ -305,9 +303,6 @@
   }
   &__windows {
     mask-image: url("/assets/img/icons/window.svg");
-  }
-  &__move {
-    background-image: url("/assets/img/icons/move.svg");
   }
   &__payment-received {
     mask-image: url("/assets/img/icons/payment-received.svg");
@@ -320,9 +315,6 @@
   }
   &__continue {
     background-image: url("/assets/img/icons/continue.svg");
-  }
-  &__command-line {
-    background-image: url("/assets/img/icons/command-line.svg");
   }
   &__approve-quote {
     background-image: url("/assets/img/icons/approve-quote.svg");
