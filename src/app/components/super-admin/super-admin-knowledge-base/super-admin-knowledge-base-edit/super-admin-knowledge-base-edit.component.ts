@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SuperAdminKnowledgeBaseAddComponent } from '../super-admin-knowledge-base-add/super-admin-knowledge-base-add.component';
 import { News } from '../super-admin-knowledge-base-table/class/news';
 import { forkJoin } from 'rxjs';
+import { KnowledgeBaseValidate } from '../super-admin-knowledge-base-add/class/knowledge-base-validate';
 
 @Component({
   selector: 'app-super-admin-knowledge-base-edit',
@@ -29,7 +30,7 @@ export class SuperAdminKnowledgeBaseEditComponent extends SuperAdminKnowledgeBas
     this.news.setNewContent(this.content);
   }
   edit() {
-    if (!this.validate.isValidate(this.news)) return;
+    if (!this.validate.isValidateEdit(this.news)) return;
     this.addBtn.setDisabled(true);
     this.superAdminKnowledgeBaseService.editNews(this.news.id, this.news.getDataForEdit()).subscribe(data => {
       this.checkAttachments(this.news.content, this.news.newContent);
@@ -68,5 +69,6 @@ export class SuperAdminKnowledgeBaseEditComponent extends SuperAdminKnowledgeBas
     this.open = false;
     this.news = new News();
     this.attachments = [];
+    this.validate = new KnowledgeBaseValidate();
   }
 }

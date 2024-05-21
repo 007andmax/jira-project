@@ -172,6 +172,7 @@ export class SuperAdminKnowledgeBaseAddComponent implements OnInit {
   close() {
     this.news = new News();
     this.attachments = [];
+    this.validate = new KnowledgeBaseValidate();
     this.onClose.emit(null);
   }
   checkAddAttachments(content) {

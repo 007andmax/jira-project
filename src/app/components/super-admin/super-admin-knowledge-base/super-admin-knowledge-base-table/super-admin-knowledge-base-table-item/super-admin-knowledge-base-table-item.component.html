@@ -28,6 +28,7 @@
     <div
         class="ticket-table__status grey-dropdown"
         (click)="select()"
+        ngbDropdown
     >
         <span
             class="tag__modern"
@@ -35,11 +36,11 @@
         'status-draft':news.status == 'DRAFT',
     'status-archived':news.status == 'ARCHIVED'}"
             [textContent]="news.parseStatus()"
+            ngbDropdownToggle
         ></span>
         <div
             ngbDropdownMenu
             class="qt-dropdown-menu dropdown-menu"
-            *ngIf="false"
         >
             <ng-template
                 ngFor
