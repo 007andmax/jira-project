@@ -17,6 +17,8 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { SuperAdminKnowledgeBaseEditComponent } from './super-admin-knowledge-base-edit/super-admin-knowledge-base-edit.component';
 import { SuperAdminKnowledgeBaseNewsListComponent } from './super-admin-knowledge-base-news-list/super-admin-knowledge-base-news-list.component';
 import { SuperAdminKnowledgeBaseNewsModule } from './super-admin-knowledge-base-news/super-admin-knowledge-base-news.module';
+import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
+import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 
 
 
@@ -41,7 +43,9 @@ import { SuperAdminKnowledgeBaseNewsModule } from './super-admin-knowledge-base-
         MatFormFieldModule,
         FroalaEditorModule.forRoot(),
         FroalaViewModule.forRoot(),
-        SuperAdminKnowledgeBaseNewsModule
+        SuperAdminKnowledgeBaseNewsModule,
+        DisabledBtnModule,
+        PreloaderTicketModule
 
     ],
 

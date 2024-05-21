@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { News } from '../super-admin-knowledge-base-table/class/news';
@@ -10,6 +10,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { KnowledgeBaseStateService } from '../../state/knowledge-base/knowledge-base-state.service';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { forkJoin } from 'rxjs';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
   selector: 'app-super-admin-knowledge-base-add',
@@ -17,6 +18,7 @@ import { forkJoin } from 'rxjs';
   styleUrls: ['./super-admin-knowledge-base-add.component.scss']
 })
 export class SuperAdminKnowledgeBaseAddComponent implements OnInit {
+  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   @Output() onClose = new EventEmitter();
   private apiUrl = environment.apiUrl;
   news: News = new News();
@@ -24,7 +26,7 @@ export class SuperAdminKnowledgeBaseAddComponent implements OnInit {
   attachments = [];
   validate: KnowledgeBaseValidate = new KnowledgeBaseValidate();
   selectedStatus: CompanySetting = new CompanySetting('Draft', 'DRAFT')
-  list = [new CompanySetting('Published', 'PUBLISHED'), new CompanySetting('Draft', 'DRAFT'), new CompanySetting('Archived', 'ARCHIVED')];
+  list = [];
   formatDate: string = FORMAT_DATE_2;
   startDate = new Date().getTime();
   currentUser: any;
@@ -37,6 +39,7 @@ export class SuperAdminKnowledgeBaseAddComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.list = this.knowledgeBaseStateService.getStatusList();
     this.currentUser = this.usersStateService.getCurrentUser();
     this.onInitFloara();
   }
@@ -191,10 +194,14 @@ export class SuperAdminKnowledgeBaseAddComponent implements OnInit {
   }
   add() {
     if (!this.validate.isValidate(this.news)) return;
+    this.addBtn.setDisabled(true);
     this.superAdminKnowledgeBaseService.addNews(this.news.getDataForCreate()).subscribe(data => {
       this.knowledgeBaseStateService.addNews(new News(data));
       this.checkAddAttachments(this.news.content);
       this.close();
+      this.addBtn.setDisabled(false);
+    }, err => {
+      this.addBtn.setDisabled(false);
     })
   }
 }

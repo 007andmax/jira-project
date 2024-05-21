@@ -211,3 +211,13 @@
         max-width: none;
     }
 }
+.error-title {
+    bottom: -7px;
+    z-index: 99;
+    left: 16px;
+}
+.error-description {
+    bottom: 100px;
+    z-index: 99;
+    left: 30px;
+}

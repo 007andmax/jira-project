@@ -21,6 +21,9 @@ export class News {
         this.status = data.status;
         this.title = data.title;
     }
+    public setStatus(data) {
+        this.status = data;
+    }
     public getDataForCreate() {
         return {
             "title": this.title,
