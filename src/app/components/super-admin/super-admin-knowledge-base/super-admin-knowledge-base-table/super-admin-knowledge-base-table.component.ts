@@ -97,6 +97,9 @@ export class SuperAdminKnowledgeBaseTableComponent implements OnInit, OnDestroy 
     this.toggleFilter = data;
     if (this.toggleFilter) this.editAside.close();
   }
+  public trackById(index, item) {
+    return item.id;
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

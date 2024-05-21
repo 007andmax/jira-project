@@ -9,7 +9,6 @@
                                 <input
                                     type="checkbox"
                                     class="ng-untouched ng-pristine ng-valid"
-                                    (change)="toggleAllCompanies($event)"
                                 >
                                 <span></span>
                             </label>
@@ -70,7 +69,7 @@
         [scrollWindow]="false"
         [infiniteScrollDisabled]="infiniteScrollDisabledRigth"
         [fromRoot]="true"
-        (scrolled)="getNews()"
+        (scrolled)="onScroll()"
     >
         <app-super-admin-knowledge-base-add
             [hidden]="!toggleFilter"

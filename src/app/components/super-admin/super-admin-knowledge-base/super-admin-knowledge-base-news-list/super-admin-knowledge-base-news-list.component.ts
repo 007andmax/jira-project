@@ -12,4 +12,7 @@ export class SuperAdminKnowledgeBaseNewsListComponent implements OnInit {
 
   ngOnInit() {
   }
+  public trackById(index, item) {
+    return item.id;
+  }
 }

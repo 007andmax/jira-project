@@ -45,4 +45,7 @@ export class SuperAdminPublicListComponent implements OnInit {
       this.cd.detectChanges();
     })
   }
+  public trackById(index, item) {
+    return item.id;
+  }
 }
