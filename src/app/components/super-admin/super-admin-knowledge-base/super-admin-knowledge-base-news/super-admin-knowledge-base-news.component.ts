@@ -17,7 +17,10 @@ export class SuperAdminKnowledgeBaseNewsComponent implements OnInit {
 
   ngOnInit() {
     this.elRef.nativeElement.querySelector(".news-description").insertAdjacentHTML('afterbegin', this.news.content);
-
+    $('.news-description').on('click', function (e) {
+      e.preventDefault();
+      console.log("e", e.target.tagName);
+    });
   }
   editNews() {
     document.body.querySelector(".aside-filters").scrollTo(0, 0);

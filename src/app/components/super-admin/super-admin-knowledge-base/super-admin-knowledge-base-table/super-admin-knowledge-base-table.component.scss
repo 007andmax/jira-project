@@ -185,7 +185,7 @@ app-tickets-table-item {
     flex-shrink: 0;
     position: sticky;
     top: 92px;
-    height: calc(100vh - 123px);
+    height: calc(100vh - 100px);
     transition: .3s ease-in-out width;
     overflow-y: auto;
 }
