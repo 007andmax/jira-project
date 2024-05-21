@@ -2,6 +2,7 @@ import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { News } from '../super-admin-knowledge-base-table/class/news';
 import * as moment from "moment";
 import { KnowledgeBaseStateService } from '../../state/knowledge-base/knowledge-base-state.service';
+import { PreviewAttachmentStateService } from 'src/app/components/tickets/tickets/ticket-edit-aside/preview-attachment/services/preview-attachment-state.service';
 
 @Component({
   selector: 'app-super-admin-knowledge-base-news',
@@ -13,13 +14,16 @@ export class SuperAdminKnowledgeBaseNewsComponent implements OnInit {
   @Input() display: string = 'SUPER_ADMIN';
   constructor(private elRef: ElementRef,
     private knowledgeBaseStateService: KnowledgeBaseStateService,
+    private previewAttachmentStateService: PreviewAttachmentStateService,
   ) { }
 
   ngOnInit() {
     this.elRef.nativeElement.querySelector(".news-description").insertAdjacentHTML('afterbegin', this.news.content);
-    $('.news-description').on('click', function (e) {
+    $('.news-description').on('click', (e) => {
       e.preventDefault();
-      console.log("e", e.target.tagName);
+      e.stopPropagation();
+      if (e.target.tagName == "IMG") this.previewAttachmentStateService.onInitPreview(e.target.getAttribute("src"));
+      // this.previewAttachmentStateService.onInitPreview(`/file/${attachmentId}`);
     });
   }
   editNews() {
