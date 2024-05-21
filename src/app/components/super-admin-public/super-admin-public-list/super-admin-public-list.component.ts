@@ -28,7 +28,6 @@ export class SuperAdminPublicListComponent implements OnInit {
     this.list = [];
   }
   public onScroll() {
-    console.log("onScroll");
     this.infiniteScrollDisabled = true;
     this.getNews();
   }
@@ -37,18 +36,13 @@ export class SuperAdminPublicListComponent implements OnInit {
       this.infiniteScrollDisabled = false;
       return;
     }
-
-    //if (this.page_number > 0) this.showPendingPreloader = true;
     this.superAdminKnowledgeBaseService.getNews(this.page_number).subscribe((data: any) => {
       this.list = [...this.list, ...data.announcementDtos.map(item => new News(item))];
-
       this.infiniteScrollDisabled = false;
       if (data.totalPages == this.page_number) this.ticketsListService.setBlockList(true);
       this.page_number += 1;
       this.showPreloader = false;
-      //  this.showPendingPreloader = false;
       this.cd.detectChanges();
-
     })
   }
 }
