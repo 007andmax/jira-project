@@ -63,3 +63,8 @@
 .tag__modern {
    text-transform: capitalize;
 }
+/deep/.news-description {
+   img {
+      cursor: pointer !important;
+   }
+}
