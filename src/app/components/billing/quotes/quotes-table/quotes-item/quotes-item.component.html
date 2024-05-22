@@ -113,7 +113,7 @@
                 (click)="convertToInvoice()"
                 *ngIf="quote.checkStatus(['APPROVED']) && !customerPortalStateService.isCustomerPortal"
             >
-                <div class="icon__convert-invoice qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                <div class="qt-icon icon__billing qt-sz-20 qt-mr-12"></div>
                 Convert to Invoice
             </li>
             <li
@@ -122,7 +122,7 @@
                 (click)="convertToTicket()"
                 *ngIf="quote.checkStatus(['APPROVED']) && !customerPortalStateService.isCustomerPortal"
             >
-                <div class="icon__convert-ticket qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                <div class="qt-icon icon__convert-ticket qt-sz-20 qt-mr-12"></div>
                 Convert to Ticket
             </li>
             <li
@@ -131,7 +131,7 @@
                 (click)="approveQuote()"
                 *ngIf="quote.checkStatus(['SAVED', 'READ', 'EXPIRED', 'UNREAD'])"
             >
-                <div class="icon__approve-quote qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                <div class="qt-icon icon__approve-quote qt-sz-20 qt-mr-12"></div>
                 Approve a quote
             </li>
             <li
@@ -149,7 +149,7 @@
                 (click)="cancelQuote()"
                 *ngIf="quote.checkStatus(['READ','UNREAD']) && !customerPortalStateService.isCustomerPortal"
             >
-                <div class="icon__uninstall qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                <div class="qt-icon icon__uninstall qt-sz-20 qt-mr-12"></div>
                 Cancel quote
             </li>
             <li

@@ -86,9 +86,6 @@
   &__rating {
     background-image: url("/assets/img/icons/rating.svg");
   }
-  &__command-line {
-    background-image: url("/assets/img/icons/command-line.svg");
-  }
   // END Color Icon
   &__assign-date {
     mask-image: url("/assets/img/icons/assign-date.svg");
@@ -256,7 +253,7 @@
   &__terminal {
     mask-image: url("/assets/img/icons/terminal.svg");
   }
-  &__command-line-gray {
+  &__command-line {
     mask-image: url("/assets/img/icons/command-line-gray.svg");
   }
   &__snapshot {
@@ -298,29 +295,32 @@
   &__calendar {
     mask-image: url("/assets/img/icons/calendar.svg");
   }
-  &__calendar-recurring-ticket {
-    mask-image: url("/assets/img/icons/calendar-recurring-ticket.svg");
+  &__calendar-tick {
+    mask-image: url("/assets/img/icons/calendar-tick.svg");
   }
-  &__windows {
-    mask-image: url("/assets/img/icons/window.svg");
+  &__microsoft {
+    mask-image: url("/assets/img/icons/microsoft.svg");
   }
   &__payment-received {
     mask-image: url("/assets/img/icons/payment-received.svg");
   }
-  &__convert-ticket {
-    background-image: url("/assets/img/icons/convert-ticket.svg");
+  &__block {
+    mask-image: url("/assets/img/icons/block.svg");
   }
-  &__convert-invoice {
-    background-image: url("/assets/img/icons/convert-invoice.svg");
+  &__convert-ticket {
+    mask-image: url("/assets/img/icons/convert-ticket.svg");
+  }
+  &__billing {
+    mask-image: url("/assets/img/icons/billing.svg");
   }
   &__continue {
-    background-image: url("/assets/img/icons/continue.svg");
+    mask-image: url("/assets/img/icons/continue.svg");
   }
   &__approve-quote {
-    background-image: url("/assets/img/icons/approve-quote.svg");
+    mask-image: url("/assets/img/icons/approve-quote.svg");
   }
   &__uninstall {
-    background-image: url("/assets/img/icons/uninstall.svg");
+    mask-image: url("/assets/img/icons/uninstall.svg");
   }
   &__set-privilege {
     background-image: url("/assets/img/icons/set-privilege.svg");
@@ -525,9 +525,6 @@
   &__block-time-billing {
     background-image: url("/assets/img/icons/block-time-billing.svg");
   }
-  &__billing-gray {
-    background-image: url("/assets/img/icons/billing-gray.svg");
-  }
   &__inventory-gray {
     background-image: url("/assets/img/icons/inventory-gray.svg");
   }
@@ -687,9 +684,6 @@
   }
   &__wifi {
     background-image: url("/assets/img/icons/wifi-network.svg");
-  }
-  &__microsoft {
-    background-image: url("/assets/img/icons/microsoft.svg");
   }
   &__hosting {
     background-image: url("/assets/img/icons/hosting.svg");
