@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DELETE_NEWS } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { KnowledgeBaseStateService } from '../../../state/knowledge-base/knowledge-base-state.service';
+import { SuperAdminKnowledgeBaseService } from '../../../services/super-admin-knowledge-base/super-admin-knowledge-base.service';
 
 @Component({
   selector: 'app-super-admin-knowledge-base-table-item',
@@ -14,13 +15,15 @@ import { KnowledgeBaseStateService } from '../../../state/knowledge-base/knowled
 })
 export class SuperAdminKnowledgeBaseTableItemComponent implements OnInit {
   @Input() news: News;
-
+  listStatus = [];
   constructor(private confirmStateService: ConfirmStateService,
     private knowledgeBaseStateService: KnowledgeBaseStateService,
+    public superAdminKnowledgeBaseService: SuperAdminKnowledgeBaseService,
     public cd: ChangeDetectorRef,
     private modalService: NgbModal,) { }
 
   ngOnInit() {
+    this.listStatus = this.knowledgeBaseStateService.getStatusList();
   }
   public getDate(date) {
     return moment(new Date(date)).format('MMM DD, YYYY');
@@ -30,7 +33,13 @@ export class SuperAdminKnowledgeBaseTableItemComponent implements OnInit {
     document.querySelector(".aside-filters").scrollTo({ top: scrollDiv, behavior: 'smooth' });
 
   }
-
+  setStatus(status) {
+    this.news.setStatus(status);
+    this.superAdminKnowledgeBaseService.editNews(this.news.id, this.news.getDataForEdit()).subscribe(data => {
+      this.news.update(data);
+      this.knowledgeBaseStateService.changeNews(this.news);
+    })
+  }
   removeNews() {
     this.confirmStateService.setConfirmAction(DELETE_NEWS);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });

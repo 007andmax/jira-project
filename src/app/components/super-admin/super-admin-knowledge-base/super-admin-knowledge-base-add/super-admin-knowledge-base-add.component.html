@@ -26,7 +26,7 @@
                                 (input)="onChangeTitle()"
                             >
                             <mat-error
-                                class="invalid-feedback"
+                                class="invalid-feedback error-title"
                                 *ngIf="!validate.getTitle()"
                             >
                                 Title is required
@@ -43,7 +43,7 @@
                         Hello, Froala!
                     </div>
                     <mat-error
-                        class="invalid-feedback"
+                        class="invalid-feedback error-description"
                         *ngIf="!validate.getContent()"
                     >
                         Content is required
@@ -79,9 +79,13 @@
                 </button>
                 <button
                     class="qt-button --md qt-w100 qt-jc-c"
-                    (click)="add()"
+                    [ngClass]="{'--loading':addBtn.isBlock()}"
+                    appDisabledBtn
+                    #addBtn="disabled"
+                    (onClick)="add()"
                 >
-                    Save
+                    <span>Save</span>
+                    <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
                 </button>
             </div>
         </div>

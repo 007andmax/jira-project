@@ -22,4 +22,10 @@ export class KnowledgeBaseValidate {
         return this.title && this.content;
 
     }
+    public isValidateEdit(news: News) {
+        if (!news.title || news.title.length < 1 || news.title.length > 255) this.title = false;
+        if (!news.newContent || news.newContent.length < 1 || news.newContent.length > 10000) this.content = false;
+        return this.title && this.content;
+
+    }
 }
