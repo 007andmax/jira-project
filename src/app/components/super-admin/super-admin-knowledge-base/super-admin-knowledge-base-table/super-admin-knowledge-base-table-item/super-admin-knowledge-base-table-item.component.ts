@@ -47,5 +47,7 @@ export class SuperAdminKnowledgeBaseTableItemComponent implements OnInit {
     this.knowledgeBaseStateService.setNewsForDelete(this.news);
     this.cd.markForCheck();
   }
-
+  public trackById(index, item) {
+    return item.id;
+  }
 }
