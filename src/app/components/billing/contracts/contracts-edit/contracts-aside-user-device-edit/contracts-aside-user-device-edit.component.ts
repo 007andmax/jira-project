@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
@@ -12,6 +12,7 @@ import { ContractsUserDeviceValidate } from '../../contracts-aside/class/contrac
 import * as moment from "moment";
 import { ServiceAgreementBlockTimeServices } from '../../class/service-agreement-block-time-services';
 import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
+import { ContractsAsideUserDeviceServiceComponent } from '../../contracts-aside/contracts-aside-user-device-billing/contracts-aside-user-device-service/contracts-aside-user-device-service.component';
 
 @Component({
   selector: 'app-contracts-aside-user-device-edit',
@@ -20,10 +21,12 @@ import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component'
 })
 export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy {
   @ViewChild('taxes') taxesDP: TaxesComponent;
+  @ViewChild('taxesServices') taxesServicesDP: TaxesComponent;
   selectedCompany: any;
   selectedTaxes = [];
   selectedType = new ContractsFilterType('Service Contract/by device/by user', 'SERVICE_CONTRACT_DEVICE_USER', null);
   validate: ContractsUserDeviceValidate = new ContractsUserDeviceValidate();
+  @ViewChildren("deviceService") deviceServices: QueryList<ContractsAsideUserDeviceServiceComponent>;
   @Input() contractsUserDevice: ServiceAgreement = new ServiceAgreement();
   @Output() onClose = new EventEmitter<any>();
   @Output() onInitRequestForEdit = new EventEmitter<any>();
@@ -44,9 +47,9 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
 
   ngOnInit() {
     this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.contractsUserDevice.companyId);
-    if (this.taxesStateService.getTaxes().length > 0) this.taxes = this.taxesStateService.getTaxes();
+    if (this.taxesStateService.getTaxes().length > 0) this.setDefaultTaxes(this.taxesStateService.getTaxes());
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
-      this.taxes = data;
+      this.setDefaultTaxes(data);
     })
     this.sub.add(getOnTaxess);
     if (this.contractsUserDevice.interval) {
@@ -67,6 +70,19 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
     } else {
       this.contractsUserDevice.blockTimeServices = this.contractsUserDevice.serviceContractServicesToTrack;
     }
+  }
+  setInvoiceAsSingleItem(data) {
+    this.contractsUserDevice.invoiceAsSingleItem = data;
+    if (data) {
+      this.taxesServicesDP.setEditItems(this.defaultSelectedTax);
+      this.onServiceTaxesChange(this.defaultSelectedTax);
+    }
+  }
+  private setDefaultTaxes(lsitTaxes) {
+    this.taxes = lsitTaxes;
+    let taxes = lsitTaxes.filter(item => item.isDefault === true);
+    this.defaultSelectedTax = taxes;
+    this.taxesServicesDP.setEditItems(taxes);
   }
   public onEdit() {
     if (this.contractsUserDevice.blockTimeServices.length === 0 || !this.contractsUserDevice.checkDuplicatedBlockTimeServices() || !this.contractsUserDevice.checkDuplicatedServiceContractServices()
@@ -107,7 +123,13 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
     this.toggleContractServices = data;
     this.contractsUserDevice.services = [];
   }
-
+  onServiceTaxesChange(data) {
+    console.log("deviceServices", this.deviceServices.toArray());
+    this.contractsUserDevice.serviceContractServices.forEach((item, index) => {
+      item.taxIds = data.map(item => item.id);
+      this.deviceServices.toArray()[index].setSelectedTaxes(data);
+    })
+  }
   onCheckDuplicatedServices() {
     if (this.contractsUserDevice.services.length === 0 || !this.contractsUserDevice.checkDuplicatedServices()) return;
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),

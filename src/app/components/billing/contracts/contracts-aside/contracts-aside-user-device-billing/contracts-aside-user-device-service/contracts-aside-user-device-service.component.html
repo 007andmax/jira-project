@@ -31,7 +31,10 @@
             (onChange)="onChangeCount($event)"
         >
     </td>
-    <td class="col-tax --editable">
+    <td
+        class="col-tax --editable"
+        [hidden]="invoiceAsSingleItem"
+    >
         <app-invoice-form-ticket-edit-taxes
             class="qt-taxes-multiselect"
             #taxesDropDown
