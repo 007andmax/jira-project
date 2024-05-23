@@ -215,6 +215,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
   }
   addServiceContractService() {
     this.contractsUserDevice.serviceContractServices.push(new ServiceAgreementBlockTimeServices(this.contractsUserDevice.getDefaultBlockTimeService()));
+    if (this.contractsUserDevice.invoiceAsSingleItem) this.contractsUserDevice.serviceContractServices[this.contractsUserDevice.serviceContractServices.length - 1].setTaxIds(this.taxesServicesDP.selectedTax.map(item => item.id));
   }
   onRemoveServices(i) {
     this.contractsUserDevice.services.splice(i, 1);

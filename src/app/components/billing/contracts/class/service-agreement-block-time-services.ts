@@ -18,6 +18,9 @@ export class ServiceAgreementBlockTimeServices {
             this.rate_str = this.rate.toFixed(2);
         }
     }
+    public setTaxIds(data) {
+        this.taxIds = data;
+    }
     public getDataForUpdate() {
         return {
             basedOnDefault: this.basedOnDefault,
