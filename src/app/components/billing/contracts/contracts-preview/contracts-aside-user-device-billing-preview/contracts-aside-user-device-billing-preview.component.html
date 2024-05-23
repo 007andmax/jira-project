@@ -108,7 +108,12 @@
                     <tr>
                         <th>Device Name</th>
                         <th class="col-count">Count</th>
-                        <th class="col-tax">Tax</th>
+                        <th
+                            class="col-tax"
+                            *ngIf="!contractsUserDevice.invoiceAsSingleItem"
+                        >
+                            Tax
+                        </th>
                         <th class="col-price">Price</th>
                         <th></th>
                     </tr>
@@ -129,6 +134,7 @@
                             >
                             </td>
                             <td
+                                *ngIf="!contractsUserDevice.invoiceAsSingleItem"
                                 class="col-tax"
                                 [textContent]="getSelectedTaxes(item.taxIds)"
                             >

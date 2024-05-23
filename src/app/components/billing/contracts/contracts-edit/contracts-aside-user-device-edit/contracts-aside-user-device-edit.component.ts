@@ -62,6 +62,14 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
       let find = this.contractsUserDevice.taxIds.find(taxId => taxId === item.id);
       return (find) ? true : false;
     }))
+    let taxIds = [];
+    this.contractsUserDevice.serviceContractServices.forEach(item => taxIds = [...taxIds, ...item.taxIds]);
+    taxIds = taxIds.filter((item, pos) => taxIds.findIndex(accountItem => accountItem == item) == pos);
+    console.log("taxIds", taxIds);
+    this.taxesServicesDP.setEditItems(this.taxes.filter(item => {
+      let find = taxIds.find(taxId => taxId === item.id);
+      return (find) ? true : false;
+    }))
     if (this.contractsUserDevice.services.length > 0) this.toggleContractServices = true;
     this.minStartDate = this.getMinStartDate(this.contractsUserDevice.intervalstring, this.contractsUserDevice.startDate);
     if (this.contractsUserDevice.includedHours && this.contractsUserDevice.rateExceeding) {
@@ -82,7 +90,8 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
     this.taxes = lsitTaxes;
     let taxes = lsitTaxes.filter(item => item.isDefault === true);
     this.defaultSelectedTax = taxes;
-    this.taxesServicesDP.setEditItems(taxes);
+    console.log("this.defaultSelectedTax", this.defaultSelectedTax);
+    if (this.contractsUserDevice.invoiceAsSingleItem) this.taxesServicesDP.setEditItems(taxes);
   }
   public onEdit() {
     if (this.contractsUserDevice.blockTimeServices.length === 0 || !this.contractsUserDevice.checkDuplicatedBlockTimeServices() || !this.contractsUserDevice.checkDuplicatedServiceContractServices()
