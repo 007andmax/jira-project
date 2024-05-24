@@ -86,6 +86,12 @@
   &__rating {
     background-image: url("/assets/img/icons/rating.svg");
   }
+  &__send-to-front {
+    background-image: url("/assets/img/icons/send-to-front.svg");
+  }
+  &__run-script {
+    background-image: url("/assets/img/icons/run-script-white.svg");
+  }
   // END Color Icon
   &__assign-date {
     mask-image: url("/assets/img/icons/assign-date.svg");
@@ -254,7 +260,7 @@
     mask-image: url("/assets/img/icons/terminal.svg");
   }
   &__command-line {
-    mask-image: url("/assets/img/icons/command-line-gray.svg");
+    mask-image: url("/assets/img/icons/command-line.svg");
   }
   &__snapshot {
     mask-image: url("/assets/img/icons/snapshot.svg");
@@ -307,8 +313,8 @@
   &__block {
     mask-image: url("/assets/img/icons/block.svg");
   }
-  &__convert-ticket {
-    mask-image: url("/assets/img/icons/convert-ticket.svg");
+  &__ticket {
+    mask-image: url("/assets/img/icons/ticket.svg");
   }
   &__billing {
     mask-image: url("/assets/img/icons/billing.svg");
@@ -316,41 +322,29 @@
   &__continue {
     mask-image: url("/assets/img/icons/continue.svg");
   }
-  &__approve-quote {
-    mask-image: url("/assets/img/icons/approve-quote.svg");
+  &__approve {
+    mask-image: url("/assets/img/icons/approve.svg");
   }
   &__uninstall {
     mask-image: url("/assets/img/icons/uninstall.svg");
   }
-  &__set-privilege {
-    background-image: url("/assets/img/icons/set-privilege.svg");
-  }
-  &__send-to-front {
-    background-image: url("/assets/img/icons/send-to-front.svg");
-  }
-  &__subscribe {
-    background-image: url("/assets/img/icons/subscribe.svg");
-  }
   &__manual-create-billable {
-    background-image: url("/assets/img/icons/manual-create-billable.svg");
+    mask-image: url("/assets/img/icons/manual-create-billable.svg");
   }
   &__automatically-create-invoice {
-    background-image: url("/assets/img/icons/automatically-create-invoice.svg");
+    mask-image: url("/assets/img/icons/automatically-create-invoice.svg");
   }
-  &__mark-as-master {
-    mask-image: url("/assets/img/icons/mark-as-master.svg");
+  &__permission-role {
+    mask-image: url("/assets/img/icons/permission-role.svg");
   }
-  &__remote-access {
-    background-image: url("/assets/img/icons/remote-access.svg");
+  &__connect {
+    mask-image: url("/assets/img/icons/connect.svg");
   }
-  &__receipt {
-    mask-image: url("/assets/img/icons/receipt.svg");
+  &__quotes {
+    mask-image: url("/assets/img/icons/quotes.svg");
   }
-  &__run-script {
-    background-image: url("/assets/img/icons/run-script-white.svg");
-  }
-  &__assign-user-check {
-    mask-image: url("/assets/img/icons/save-changes.svg");
+  &__done {
+    mask-image: url("/assets/img/icons/done.svg");
   }
   &__start {
     background-image: url("/assets/img/icons/start.svg");
@@ -539,9 +533,6 @@
   }
   &__help {
     mask-image: url("/assets/img/icons/help.svg");
-  }
-  &__quotes {
-    background-image: url("/assets/img/icons/quotes.svg");
   }
   &__total-sales {
     background-image: url("/assets/img/icons/total-sales.svg");

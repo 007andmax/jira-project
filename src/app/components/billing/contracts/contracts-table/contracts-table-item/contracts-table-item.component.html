@@ -28,13 +28,13 @@
             Automatically create and send invoice
         </ng-template>
         <div
-            class="icon__automatically-create-invoice qt-bg-contain  qt-sz-20"
+            class="qt-icon icon__automatically-create-invoice  qt-sz-20"
             *ngIf="contract.enableInvoiceAutoCreate"
             placement="top"
             [ngbTooltip]="manualContent"
         ></div>
         <div
-            class="icon__manual-create-billable qt-bg-contain  qt-sz-20"
+            class="qt-icon icon__manual-create-billable  qt-sz-20"
             *ngIf="contract.manualCreateBillableItem"
             placement="top"
             ngbTooltip="Manual create billable item"

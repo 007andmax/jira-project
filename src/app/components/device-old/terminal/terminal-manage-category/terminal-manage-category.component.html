@@ -36,7 +36,7 @@
                         <a
                             *ngIf="!category.create && category.edit"
                             href="javascript:;"
-                            class="icon__assign-user-check sz-20 qt-bg-contain pointer qt-dib"
+                            class="icon__done sz-20 qt-bg-contain pointer qt-dib"
                             data-tooltip="Edit"
                             (click)="updateCategory(category, i)"
                         >
@@ -44,7 +44,7 @@
                         <a
                             *ngIf="category.create"
                             href="javascript:;"
-                            class="icon__assign-user-check qt-sz-20 qt-bg-contain pointer qt-dib"
+                            class="icon__done qt-sz-20 qt-bg-contain pointer qt-dib"
                             data-tooltip="Add"
                             (click)="createCategory(category)"
                         >

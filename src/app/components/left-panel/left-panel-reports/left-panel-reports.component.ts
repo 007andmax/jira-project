@@ -29,7 +29,7 @@ export class LeftPanelReportsComponent implements OnInit {
     this.list.push(new ReportsLeftMenuItem("icon__financial", "FINANCIAL", [new ReportsLeftMenuItemReport('Accounts receivable report', 'accounts-receivable'),
     new ReportsLeftMenuItemReport('Customer Transaction History', 'customer-transaction-history'),
     new ReportsLeftMenuItemReport('Payments report', 'payments-report')], 'VIEW_FINANCIAL_REPORT'));
-    this.list.push(new ReportsLeftMenuItem("icon__remote-access", "REMOTE ACCESS", [new ReportsLeftMenuItemReport('Remote connection report', 'remote-access')], 'VIEW_REMOTE_ACCESS_REPORT'));
+    this.list.push(new ReportsLeftMenuItem("qt-icon icon__connect", "REMOTE ACCESS", [new ReportsLeftMenuItemReport('Remote connection report', 'remote-access')], 'VIEW_REMOTE_ACCESS_REPORT'));
     this.list.push(new ReportsLeftMenuItem("icon__devices", "DEVICES", [new ReportsLeftMenuItemReport('Software Summary report', 'software-summary'),
     new ReportsLeftMenuItemReport('Hardware Summary reports', 'hardware-summary'),
     new ReportsLeftMenuItemReport('Device IP Summary report', 'device-ip-summary')], 'VIEW_DEVICES_REPORTS'));
