@@ -111,7 +111,9 @@ export class QuoteAsideAddBodyComponent implements OnInit, OnDestroy {
   }
   getServicesList() {
     this.quoteServices.getServiceList(this.quoteCompany.id).subscribe((res: any) => {
-      this.services = res;
+      this.services = res.filter(item => item.canUseInTicket);
+      this.services.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
       this.getServiceAgreements(this.quoteCompany.id);
       this.onCheckValidateServicesByCompany();
     });
