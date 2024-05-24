@@ -1,11 +1,8 @@
 import { Component, OnInit, Input, EventEmitter, Output, ViewChild, OnDestroy } from '@angular/core';
 import * as moment from "moment";
-import { Validate } from '../class/validate';
 import { GlNumber } from '../class/gl-number';
 import { ReportsService } from 'src/app/services/reports/reports.service';
-import { GlNumberItem } from '../class/gl-number-item';
 import { ReportsStateService } from 'src/app/states/reports/reports-state.service';
-import { MultiDatepickerComponent } from '../../shared/multi-datepicker/multi-datepicker.component';
 import { ReportValidate } from '../class/report-validate';
 import { AccountsReceivable } from '../class/accounts-receivable';
 import { TaxesReport } from '../class/taxes';
@@ -113,7 +110,6 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(onDeviceUninstalled);
-    //  this.sub.add(getOnCompanies);
   }
   /**
    * @description Return parse company name
