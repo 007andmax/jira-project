@@ -12,3 +12,6 @@
   background-position: center;
   background-repeat: no-repeat;
 }
+.--input-error {
+  border: solid 1px $red-600 !important;
+}
