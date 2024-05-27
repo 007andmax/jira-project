@@ -8,6 +8,6 @@
     </mat-error>
     <input type="text" class="qt-input-in-table" [ngClass]="{'--input-error' : !service.validate || !service.validateDuplicated}" [(ngModel)]="service.name" (blur)="checkName()" (input)="onChange()" /></td>
   <td>
-    <div class="icon__raw-clear qt-ic-c qt-sz-16" (click)="remove()"></div>
+    <div class="qt-icon icon__inactive qt-ic-c qt-sz-16" (click)="remove()"></div>
   </td>
 </tr>

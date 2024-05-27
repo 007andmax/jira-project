@@ -92,6 +92,9 @@
   &__run-script {
     background-image: url("/assets/img/icons/run-script-white.svg");
   }
+  &__quicktech-logo-mini {
+    background-image: url("/assets/img/icons-left-sidebar/quicktech-logo-mini.svg");
+  }
   // END Color Icon
   &__assign-date {
     mask-image: url("/assets/img/icons/assign-date.svg");
@@ -346,49 +349,32 @@
   &__done {
     mask-image: url("/assets/img/icons/done.svg");
   }
-  &__start {
+  &__start { // TODO Check and play-circle.svg
     background-image: url("/assets/img/icons/start.svg");
   }
-  &__stop {
+  &__stop { // TODO Check
     background-image: url("/assets/img/icons/stop.svg");
   }
-  &__payment-note {
-    background-image: url("/assets/img/icons/saved-note.svg");
-  }
   &__shutdown {
-    background-image: url("/assets/img/icons/shutdown.svg");
-  }
-  &__shutdown--white {
-    background-color: $white;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/shutdown.svg");
     mask-image: url("/assets/img/icons/shutdown.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
-  }
-  &__clock-timer {
-    background-image: url("/assets/img/icons/timer-counter.svg");
   }
   &__timer {
     mask-image: url("/assets/img/icons/timer.svg");
   }
   &__secure {
-    background-image: url("/assets/img/icons/secure.svg");
-  }
-  &__quicktech-logo-mini {
-    background-image: url("/assets/img/icons-left-sidebar/quicktech-logo-mini.svg");
+    mask-image: url("/assets/img/icons/secure.svg");
   }
   &__filter-lines {
     mask-image: url("/assets/img/icons/filter-lines.svg");
   }
-  &__discount {
-    mask-image: url("/assets/img/icons/discount.svg");
+  &__filter {
+    mask-image: url("/assets/img/icons/filter.svg");
   }
-  &__raw-clear {
-    background-image: url("/assets/img/icons/raw-clear.svg");
+  &__сommissions {
+    mask-image: url("/assets/img/icons/сommissions.svg");
+  }
+  &__inactive {
+    mask-image: url("/assets/img/icons/inactive.svg");
   }
   &__time,
   &__time--white {
@@ -437,12 +423,6 @@
   }
   &__locked {
     mask-image: url("/assets/img/icons/locked.svg");
-  }
-  &__filter {
-    mask-image: url("/assets/img/icons/filter.svg");
-  }
-  &__filter-active {
-    background-image: url("/assets/img/icons/filter-active.svg");
   }
   &__globe {
     mask-image: url("/assets/img/icons/globe.svg");
@@ -690,9 +670,6 @@
   }
   &__restart-blue {
     background-image: url("/assets/img/icons/restart-blue.svg");
-  }
-  &__shutdown-blue {
-    background-image: url("/assets/img/icons/shutdown-blue.svg");
   }
   &__more {
     mask-image: url("/assets/img/icons/more.svg");

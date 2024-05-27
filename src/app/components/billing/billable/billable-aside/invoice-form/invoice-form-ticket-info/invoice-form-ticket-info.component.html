@@ -16,7 +16,7 @@
         </div>
         <div class="delete-item-container qt-pl-4">
             <div
-                class="qt-pointer  qt-sz-16 icon__raw-clear qt-ic-c "
+                class="qt-pointer  qt-sz-16 qt-icon icon__inactive qt-ic-c "
                 *ngIf="ticketsLength > 1"
                 placement="left"
                 ngbTooltip="Remove Ticket"
@@ -111,7 +111,7 @@
                                 #productTooltip
                             ></app-dynamic-tooltip>
                             <div
-                                class="qt-icon icon__discount qt-icon__blue-light-600 qt-mr-4 qt-sz-16 qt-ic-c"
+                                class="qt-icon icon__сommissions qt-icon__blue-light-600 qt-mr-4 qt-sz-16 qt-ic-c"
                                 *ngIf="product.discountAmount"
                                 (mouseenter)="productTooltip.show($event.target)"
                                 (mouseleave)="productTooltip.hide()"

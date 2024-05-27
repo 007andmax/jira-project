@@ -90,7 +90,7 @@
                                   <td class="accountName">{{service.startName}}</td>
                                   <td class="action">
                                     <div *ngIf="service.started==false">
-                                      <div *ngIf="service.started==false" [ngClass]="service.Loaded=='False' ? 'icon__start qt-bg-contain qt-sz-16 qt-mr-8' : 'service-loader qt-bg-contain qt-sz-16 qt-mr-8'"  (click)="servicePlay(service.Name,i)"></div>
+                                      <div *ngIf="service.started==false" [ngClass]="service.Loaded=='False' ? 'qt-icon icon__start qt-bg-contain qt-sz-16 qt-mr-8' : 'service-loader qt-bg-contain qt-sz-16 qt-mr-8'"  (click)="servicePlay(service.Name,i)"></div>
                                     </div>
                                     <div *ngIf="service.started==true">
                                       <div *ngIf="service.started==true" [ngClass]="service.Loaded=='False' || service.RestartLoaded=='False' ? 'icon__reset qt-bg-contain qt-sz-16 qt-mr-8 service-button' : 'service-loader qt-bg-contain qt-sz-16 qt-mr-8 service-button'" (click)="serviceRestart(service.Name,i)"></div>
