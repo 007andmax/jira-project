@@ -84,7 +84,7 @@ export class TicketDetailProfileFormUpdateProductsComponent implements OnInit, O
   public onChangeProduct(item, i, taxesDropDown) {
     this.addedProductList[i].setData(item, this.getItemOrger());
     this.addedProductList[i].valdiateSaleCost = true;
-    taxesDropDown.selectedTax = item.taxes;
+    taxesDropDown.selectedTax = JSON.parse(JSON.stringify(item.taxes));
   }
   public onTaxesChangeProduct(data, i) {
     this.addedProductList[i].setTexes(data);
@@ -92,7 +92,7 @@ export class TicketDetailProfileFormUpdateProductsComponent implements OnInit, O
   public selectProduct(item, taxesDropDown) {
     if (item) {
       this.currentProduct.setData(item, this.getItemOrger());
-      taxesDropDown.selectedTax = item.taxes;
+      taxesDropDown.selectedTax = JSON.parse(JSON.stringify(item.taxes));
     }
     if (!item) {
       this.initCurrentProduct();
@@ -104,6 +104,7 @@ export class TicketDetailProfileFormUpdateProductsComponent implements OnInit, O
     this.currentProduct.setTexes(item);
   }
   public addProduct() {
+    console.log("this.currentProduct", this.currentProduct);
     this.addedProductList.push(new TicketProfileFormProduct(JSON.parse(JSON.stringify(this.currentProduct))));
     this.initCurrentProduct();
     this.productDP.clear();
