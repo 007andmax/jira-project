@@ -48,6 +48,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     if (this.type === 'REPORT') this.classAddProduct = 'report-add-product';
     if (this.type === 'RECURRING-TICKET') this.classAddProduct = 'recurring-ticket-add-product';
     if (this.type === 'TICKET') this.classAddProduct = 'ticket-add-product';
+    this.inventoryStateService.getProducts();
     if (this.inventoryStateService.getListProducts().length > 0) this.itemList = this.inventoryStateService.getListProducts();
     let getOnProducts = this.inventoryStateService.getOnProducts().subscribe(data => {
       this.itemList = data;
