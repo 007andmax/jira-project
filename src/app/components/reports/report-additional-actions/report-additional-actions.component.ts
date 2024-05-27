@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { ACION_OPEN_PDF, ACION_DOWNLOAD_PDF } from 'src/app/const/reports';
 import { ReportsService } from 'src/app/services/reports/reports.service';
 import { AppService } from 'src/app/states/app/app.service';
@@ -33,7 +33,7 @@ export class ReportAdditionalActionsComponent implements OnInit, OnDestroy {
     private appService: AppService,
     config: NgbModalConfig,
     public draftEmailStateService: DraftEmailStateService,
-    private modalService: NgbModal,) {
+  ) {
     config.backdrop = 'static';
     config.keyboard = false;
   }

@@ -1,26 +1,24 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { CONFIGCONSTANTS } from 'src/app/components/device/config/app-constants';
 import { CommonHttpServices } from 'src/app/components/device/_services/common_http.service';
 import { ExcelService } from 'src/app/components/device/_services/download_csv.service';
 import { AgentService } from 'src/app/services/agent/agent.service';
-import { DevicesService } from 'src/app/services/devices/devices.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
-import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { HardwareSummaryReport } from '../../class/hardware-summary-report';
 import { ReportValidate } from '../../class/report-validate';
 import { HardwareSummaryReportFilter } from './class/hardware-summary-report';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'hardware-summary-device-report',
   templateUrl: './hardware-summary-device-report.component.html',
   styleUrls: ['./hardware-summary-device-report.component.scss']
 })
-export class HardwareSummaryDeviceReportComponent implements OnInit {
+export class HardwareSummaryDeviceReportComponent implements OnInit, OnDestroy {
   loadingInProgress: boolean = false;
   onInit: boolean = false;
   company: any;
@@ -46,20 +44,17 @@ export class HardwareSummaryDeviceReportComponent implements OnInit {
   deviceSummaryReport: HardwareSummaryReport = new HardwareSummaryReport();
   tempararyDeviceList: any = [];
   tempararyDevice: any = [];
-
+  sub: Subscription = new Subscription();
   constructor(public cd: ChangeDetectorRef,
     private companiesStateService: CompaniesStateService,
     public leftPanelStateService: LeftPanelStateService,
-    private devicesStateService: DevicesStateService,
-    private devicesService: DevicesService,
-    private modalService: NgbModal,
     private excelService: ExcelService,
     private commonHttpServices: CommonHttpServices,
     private toastr: ToastrService,
     private agentService: AgentService,
-    private companiesState: CompaniesStateService,
     public draftEmailStateService: DraftEmailStateService,
   ) { }
+
 
   ngOnInit() {
     this.clientName = "All Companies";
@@ -68,6 +63,7 @@ export class HardwareSummaryDeviceReportComponent implements OnInit {
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.getClientsList(data);
     });
+    this.sub.add(getOnCompanies);
   }
 
   getHardwareSummaryList() {
@@ -419,6 +415,8 @@ export class HardwareSummaryDeviceReportComponent implements OnInit {
         }
       );
   }
-
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 
 }

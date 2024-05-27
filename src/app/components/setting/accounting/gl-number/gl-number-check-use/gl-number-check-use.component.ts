@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
-import { InventoryItem } from 'src/app/components/inventory/class/inventory-item';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 import { NonContractServicesService } from 'src/app/services/non-contract-services/non-contract-services.service';

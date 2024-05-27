@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { values } from "d3";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
 import { PermissionsService } from "../../services/permissions/permissions.service";
 import { LeftPanelStateService } from "../../states/left-panel/left-panel-state.service";

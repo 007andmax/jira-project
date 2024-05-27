@@ -1,9 +1,9 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import * as moment from 'moment';
 import { TechService } from '../../class/tech-service';
-import { CurrentUser } from 'src/class/current-user/current-user';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { User } from '../../../users/class/user';
+
 @Component({
   selector: 'app-tech-service-report',
   templateUrl: './tech-service-report.component.html',

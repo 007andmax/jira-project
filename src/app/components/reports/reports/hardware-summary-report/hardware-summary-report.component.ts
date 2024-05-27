@@ -1,5 +1,4 @@
-import { LogicalDisk } from './../../../device/hardware/class/system';
-import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { HardwareSummaryReport } from '../../class/hardware-summary-report';
 import * as moment from "moment";

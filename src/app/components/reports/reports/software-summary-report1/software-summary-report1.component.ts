@@ -1,6 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { xhr } from "d3";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
 import { CONFIGCONSTANTS } from "src/app/components/device/config/app-constants";
@@ -13,15 +12,15 @@ import { DraftEmailStateService } from "src/app/states/draft-email/draft-email-s
 import { LeftPanelStateService } from "src/app/states/left-panel/left-panel-state.service";
 import { ReportValidate1 } from "../../class/report-validate1";
 import { SoftwareSummaryReport1 } from "../../class/software-summary-report1";
-import { ReportSendEmailComponent } from "../../report-additional-actions/report-send-email/report-send-email.component";
 import { SoftwareSummaryReportFilter } from "./Class/software-summary-report1-filter";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "software-summary-report1",
   templateUrl: "./software-summary-report1.component.html",
   styleUrls: ["./software-summary-report1.component.scss"],
 })
-export class SoftwareSummaryReport1Component implements OnInit {
+export class SoftwareSummaryReport1Component implements OnInit, OnDestroy {
   @ViewChild('dropdownDevice') dropdownDevice: DropDownComponent;
   @ViewChild('dropdownSoftware') dropdownSoftware: DropDownComponent;
   tempararyDeviceList: any = [];
@@ -50,15 +49,14 @@ export class SoftwareSummaryReport1Component implements OnInit {
   fileName: string = "software-summary-report";
   accountType = "CLIENT";
   report: string = "software-summary";
+  sub: Subscription = new Subscription();
   constructor(
     private agentService: AgentService,
     private companiesStateService: CompaniesStateService,
     private commonHttpServices: CommonHttpServices,
     private toastr: ToastrService,
     private excelService: ExcelService,
-    private companiesState: CompaniesStateService,
     public leftPanelStateService: LeftPanelStateService,
-    private modalService: NgbModal,
     public elRef: ElementRef,
     public draftEmailStateService: DraftEmailStateService,
   ) { }
@@ -71,10 +69,11 @@ export class SoftwareSummaryReport1Component implements OnInit {
 
   setPreviewDataDevice() {
     if (this.companiesStateService.getCompanies().length > 0) this.companies = this.getClientsList(this.companiesStateService.getCompanies());
-    this.companiesStateService.getOnCompanies().subscribe((data) => {
+    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.loading = false;
       this.companies = this.getClientsList(data);
     });
+    this.sub.add(getOnCompanies);
   }
   getClientsList(data) {
     return data
@@ -638,4 +637,8 @@ export class SoftwareSummaryReport1Component implements OnInit {
   goToReportList() {
     this.leftPanelStateService.goToState("new-device-summary");
   }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
 }
