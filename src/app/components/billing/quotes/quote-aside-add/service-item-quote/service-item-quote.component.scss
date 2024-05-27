@@ -3,6 +3,8 @@
     app-drop-down {
     .invalid-feedback {
             width: max-content;
+            bottom: -15px;
+            z-index: 100;
         }
     }
 }
