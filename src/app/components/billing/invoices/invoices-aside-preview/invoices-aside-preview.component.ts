@@ -99,7 +99,7 @@ export class InvoicesAsidePreviewComponent implements OnInit {
   }
   getServiceTaxes(service) {
     if (service.taxesForSingleItem.length > 0) return this.getSelectedTaxes(service.taxesForSingleItem);
-    if (service.taxesForSingleItem.length == 0) return this.getSelectedTaxes(service.item.taxes || []);
+    if (service.taxesForSingleItem.length == 0) return this.getSelectedTaxes(service.taxes || []);
   }
   public getDateTicket(date) {
     return moment(new Date(date)).format('DD/MM/YYYY');

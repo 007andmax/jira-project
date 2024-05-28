@@ -188,7 +188,7 @@
       }
       &__col-quentity {
         text-align: right;
-        width: 90px;
+        width: 135px;
       }
       &__col-tax {
         text-align: right;
@@ -576,6 +576,17 @@ app-invoice-form-ticket-edit-service,app-invoice-form-ticket-edit-product {
 
     app-ticket-profile-updates-service-timepicker {
       flex-direction: column;
+      .start-end-timer {
+        flex-direction: column;
+      }
+      .start-end-timer__label {
+        display: flex;
+        align-items: center;
+        margin-right: 0px !important;
+       .icon__time {
+        display: none !important;
+       }
+      }
   }
 
     .time.start, .time.end {

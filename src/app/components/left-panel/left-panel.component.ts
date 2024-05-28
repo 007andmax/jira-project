@@ -142,6 +142,8 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
           if (window.location.href.includes(`/contract-statistics`)) this.state = 'contract-statistics';
           if (window.location.href.includes(`/support-page`)) this.state = 'support-page';
           if (window.location.href.includes(`/tech-companies`)) this.state = 'tech-companies';
+          if (window.location.href.includes(`/knowledge-base`)) this.state = 'knowledge-base';
+
           if (window.location.href.includes(`/users`)) this.state = 'new-users';
           if (!window.location.href.includes(`/setting/marketing-email`) && window.location.href.includes(`/marketing`)) this.state = 'marketing';
           if (window.location.href.includes(`/reports`)) this.state = 'new-reports';
@@ -366,6 +368,8 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
       if (this.state === 'new-template-documents') this.goToLink('documents/templates');
       if (this.state === 'support-page') this.goToLink('support-page');
       if (this.state === 'tech-companies') this.goToLink('tech-companies');
+      if (this.state === 'knowledge-base') this.goToLink('knowledge-base');
+
       if (this.state === 'company-documents') this.goToLink(`company/${this.companiesStateService.getCompanyRoutingId()}/documents`);
       if (this.state === 'new-devices') this.goToLink('devices');
       if (this.state === 'new-device-summary') this.goToLink('devices/reports');

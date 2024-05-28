@@ -24,7 +24,9 @@ export class TicketProfileFormProduct {
             this.discountType = data.discountType;
             this.completed = data.completed;
             this.valdiateSaleCost = data.valdiateSaleCost;
-            this.taxes = [...data.taxes, ...this.item.taxes];
+            let taxes = [...data.taxes, ...this.item.taxes];
+            taxes = taxes.filter((item, pos) => taxes.findIndex(accountItem => accountItem.id == item.id) == pos);
+            this.taxes = taxes;
         }
     }
     public getDataForAdd() {

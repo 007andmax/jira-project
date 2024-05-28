@@ -1,0 +1,242 @@
+@import "./src/assets/styles/variable";
+
+.aside-filters {
+    flex-shrink: 0;
+    background-color: $white;
+    transition: .3s ease-in-out width;
+    border-left: 1px solid $gray-200;
+    border-radius: 12px 12px 0 0;
+
+    &-header {
+        padding: 12px 16px;
+        border-bottom: 1px solid $gray-200;
+        height: 60px;
+
+        &__title {
+            font-size: 20px;
+            font-weight: 600;
+            color: $gray-900 ;
+        }
+
+        .qt-button {
+            width: 32px;
+            height: 32px
+        }
+    }
+
+
+
+    &-content {
+        height: calc(100% - 57px);
+
+        &__main {
+            display: flex;
+            flex-direction: column;
+            padding: 12px 16px;
+            height: calc(100% - 72px);
+            overflow: auto;
+
+            .qt-input-block__label {
+                font-size: 14px;
+                font-weight: 500;
+                color: $gray-700;
+                margin-top: 3px;
+                margin-bottom: 20px;
+            }
+
+            .content-filters-checkbox {
+                color: $gray-700;
+
+                &__count {
+                    border-radius: 24px;
+                    padding: 2px 8px;
+                    background-color: $gray-100;
+                    color: $gray-700;
+                    font-size: 12px;
+                    font-weight: 600;
+                }
+            }
+
+            .content-filters-checkbox:not(:last-child) {
+                margin-bottom: 20px;
+            }
+        }
+
+        &__footer {
+            padding: 10px 16px;
+            border-top: 1px solid $gray-200;
+        }
+    }
+
+    .content-filters-header {
+        display: none;
+    }
+
+
+
+    // Start
+    .search-users,
+    .search-tech-users,
+    .search-status,
+    .search-company,
+    .light-dropdown.dropdown {
+
+        &::before {
+            color: $gray-900;
+            font-weight: 600;
+            line-height: 20px;
+        }
+    }
+
+    .qt-dropdown,
+    .light-dropdown {
+        padding-top: 8px;
+    }
+
+    .search-company {
+        &::before {
+            content: "Company";
+        }
+    }
+
+    .search-users {
+        &::before {
+            content: "User";
+        }
+    }
+
+    .search-tech-users {
+        &::before {
+            content: "Tech Team";
+        }
+    }
+
+    .search-status {
+        &::before {
+            content: "Status";
+        }
+    }
+}
+
+.left-panel-ng2__content--filters {
+    app-select-search {
+        margin-right: 8px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+    .search-users,
+    .search-tech-users,
+    .search-status,
+    .search-company,
+    .search-priority,
+    .light-dropdown.dropdown,
+    app-tickets-filter-tags {
+        &::before {
+            color: $gray-500;
+            font-size: 13px;
+            font-weight: 500;
+        }
+    }
+
+    /deep/tickets-filter-drop-down .mat-form-field {
+        width: 100%;
+    }
+
+    /deep/tickets-filter-users-drop-down .mat-form-field {
+        width: 100%;
+    }
+
+    /deep/tickets-filter-companies-drop-down .mat-form-field {
+        width: 100%;
+    }
+}
+
+ 
+/deep/ #froala-editor {
+    .fr-btn-grp {
+        display: flex;
+        align-items: center;
+        margin: 0 !important;
+    }
+
+    .fr-toolbar {
+        display: flex;
+        align-items: center;
+        padding: 8px 14px 8px 14px;
+        border: 1px solid $gray-200;
+        border-radius: 8px;
+        .fr-command.fr-btn {
+        margin: 0px !important;
+
+        svg {
+            margin: 0px 5px !important;
+        }
+        }
+    }
+
+    .fr-wrapper {
+        border: none;
+    }
+
+    .fr-wrapper .fr-placeholder {
+        color: $gray-400 !important;
+    }
+
+    .fr-counter {
+        display: none;
+    }
+
+    #formatOLOptions-1,
+    #formatULOptions-1 {
+        display: none;
+    }
+
+    .fr-wrapper .fr-element {
+        padding: 0 20px 20px 16px !important;
+    }
+}
+
+.--input-error {
+    border-color: $red-600 !important;
+}
+
+.qt-input-block__input {
+    border: none !important;
+    box-shadow: none !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    &::placeholder {
+            color: $gray-400;
+    }
+
+    &::-ms-input-placeholder {
+        /* Edge 12 -18 */
+        color: $gray-400;
+    }
+}
+
+.aside-filters-content__footer {
+    padding: 16px !important;
+
+    .qt-button {
+        width: 100%;
+        max-width: none;
+    }
+}
+.error-title {
+    bottom: -7px;
+    z-index: 99;
+    left: 16px;
+}
+
+.error-description {
+    bottom: 150px;
+    z-index: 99;
+    left: 16px;
+}
+.draft-email-container {
+    position: relative;
+}

@@ -32,6 +32,7 @@ export class SupportPageComponent implements OnInit {
       this.isShowHelpCenter = true;
       this.cd.markForCheck();
     })
+    this.categories = JSON.parse(JSON.stringify(this.supportPageCategoriesStateService.getCategories())).map(item => new SupportPageCategory(item));
     this.supportPageCategoriesStateService.onGetCategories.subscribe(data => {
       this.categories = JSON.parse(JSON.stringify(data)).map(item => new SupportPageCategory(item));
       this.cd.markForCheck();
