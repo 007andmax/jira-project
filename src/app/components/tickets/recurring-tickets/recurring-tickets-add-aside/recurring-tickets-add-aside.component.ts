@@ -17,6 +17,7 @@ import { TechUserItem } from '../../../shared/tech-users/class/tech-user-item';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { DevicesRecurringTicketsComponent } from '../devices-recurring-tickets/devices-recurring-tickets.component';
+import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
 
 @Component({
   selector: 'app-recurring-tickets-add-aside',
@@ -63,6 +64,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     private devicesRecurringTicketsStateService: DevicesRecurringTicketsStateService,
     private usersStateService: UsersStateService,
     private contractsService: ContractsService,
+    private inventoryStateService: InventoryStateService,
   ) {
   }
 
@@ -222,7 +224,8 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   public getItemListProducts() {
     this.productService.getCategories().subscribe((res: any) => {
       this.productList = res;
-
+      this.inventoryStateService.setproducts(this.productList);
+      this.inventoryStateService.onInitGetProducts(this.productList);
     });
   }
 
