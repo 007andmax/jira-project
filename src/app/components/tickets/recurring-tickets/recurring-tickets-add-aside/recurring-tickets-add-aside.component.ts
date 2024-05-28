@@ -71,7 +71,6 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     */
   ngOnInit() {
     this.showTicketRecurring();
-    this.getItemListProducts();
     //this.recurringState.onInitClientList();
     this.onCopyCreate();
 
@@ -299,7 +298,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   public showTicketRecurring() {
     this.showTicketRecurringSub = this.recurringState.showTicketAddRecurringAside.subscribe((res) => {
       this.opened = true;
-
+      this.getItemListProducts();
       this.onInitCreateMod();
     });
   }

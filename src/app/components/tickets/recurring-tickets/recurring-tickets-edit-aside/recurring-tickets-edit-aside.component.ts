@@ -76,7 +76,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
    * Initializes edit recurring ticket. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-    this.getItemListProducts();
+
 
     this.onCheckEditMode();
     if (this.usersStateService.getAllUsers().length > 0) this.onGetTechUsers(this.usersStateService.getAllUsers());
@@ -99,7 +99,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   private onCheckEditMode() {
     let editmode = this.recurringState.getEditMode().subscribe((data: RecurringTicket) => {
       this.opened = true;
-
+      this.getItemListProducts();
       this.onEditEditMode(data);
     })
     this.createService.addSubscription(editmode);

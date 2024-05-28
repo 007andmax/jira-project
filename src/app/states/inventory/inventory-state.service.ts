@@ -58,7 +58,7 @@ export class InventoryStateService {
       this.onInitGetProducts(this.productList);
       this.onChangeProducts.emit(new InventoryChange(newChange.action, newChange.data, []));
     })
-    this.getProducts();
+    // this.getProducts();
   }
   public getProducts() {
     this.productService.getCategories().subscribe((res: any) => {
