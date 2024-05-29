@@ -22,7 +22,7 @@
                 </div>
                 <div class="hp-device-info">
                     <span class="device-icn">
-                        <span class="icon__time--white qt-bg-contain qt-sz-16"></span>
+                        <span class="qt-icon icon__time qt-icon__white qt-sz-16"></span>
                     </span>
                     <div class="head-device">
                         <div
@@ -72,7 +72,7 @@
                     (click)="sendCommand('r')"
                     class="head-btn-info btn-refresh"
                 >
-                  <span class="icon__reset--white qt-sz-20 qt-dib"></span>
+                  <span class="qt-icon icon__reset qt-icon__white qt-sz-20 qt-dib"></span>
                 </a>
                 <a
                     href="javascript:;"
@@ -85,11 +85,11 @@
         </div>
         <div class="head-counter">
             <div class="sub-head-counter pointer">
-              <span class="icon__reset--white qt-sz-24 qt-dib"></span>
+              <span class="qt-icon icon__reset qt-icon__white qt-sz-24 qt-dib"></span>
             </div>
             <div class="sub-head-counter pointer">
                 <img
-                    [attr.src]="interval && !playTimer ? '/html/assets/img/icons/play-circle.svg' : '/html/assets/img/icons/pause.svg'"
+                    [attr.src]="interval && !playTimer ? '/html/assets/img/icons/start.svg' : '/html/assets/img/icons/pause.svg'"
                     alt="Play"
                     (click)="timerControl()"
                 >

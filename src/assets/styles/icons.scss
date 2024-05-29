@@ -95,6 +95,18 @@
   &__quicktech-logo-mini {
     background-image: url("/assets/img/icons-left-sidebar/quicktech-logo-mini.svg");
   }
+  &__invoice-expired {
+    background-image: url("/assets/img/icons/invoice-expired.svg");
+  }
+  &__processor {
+    background-image: url("/assets/img/icons/processor.svg");
+  }
+  &__display {
+    background-image: url("/assets/img/icons/display.svg");
+  }
+  &__graphic-card {
+    background-image: url("/assets/img/icons/graphic-card.svg");
+  }
   // END Color Icon
   &__assign-date {
     mask-image: url("/assets/img/icons/assign-date.svg");
@@ -161,9 +173,6 @@
   }
   &__menu-crm-settings {
     mask-image: url("/assets/img/icons-left-sidebar/menu-crm-settings.svg");
-  }
-  &__menu-commissions {
-    mask-image: url("/assets/img/icons-left-sidebar/menu-commissions.svg");
   }
   &__menu-company {
     mask-image: url("/assets/img/icons-left-sidebar/menu-company.svg");
@@ -370,89 +379,47 @@
   &__filter {
     mask-image: url("/assets/img/icons/filter.svg");
   }
-  &__сommissions {
+  &__commissions {
     mask-image: url("/assets/img/icons/commissions.svg");
   }
   &__inactive {
     mask-image: url("/assets/img/icons/inactive.svg");
   }
-  &__time,
-  &__time--white {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/time.svg");
+  &__time {
     mask-image: url("/assets/img/icons/time.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
   }
-  &__time--white {
-    background-color: $white;
-  }
-  &__timeline {
+  &__timeline { // TODO cehck
     background-image: url("/assets/img/icons/timeline.svg");
   }
-  &__move-light {
-    background-image: url("/assets/img/icons/move-light.svg");
+  &__dot-vertical {
+    mask-image: url("/assets/img/icons/dot-vertical.svg");
   }
-  &__dropdown-arrow-up {
-    background-image: url("/assets/img/icons/dropdown-arrow-up.svg");
+  &__arrow-up {
+    mask-image: url("/assets/img/icons/arrow-up.svg");
   }
-  &__company-info {
-    mask-image: url("/assets/img/icons/company-info.svg");
-  }
-  &__invoice-expired {
-    background-image: url("/assets/img/icons/invoice-expired.svg");
+  &__info {
+    mask-image: url("/assets/img/icons/info.svg");
   }
   &__print {
     mask-image: url("/assets/img/icons/print.svg");
   }
-  &__processor {
-    background-image: url("/assets/img/icons/processor.svg");
-  }
-  &__invoice-expired {
-    background-image: url("/assets/img/icons/invoice-expired.svg");
-  }
   &__download {
     mask-image: url("/assets/img/icons/download.svg");
   }
-  &__display {
-    background-image: url("/assets/img/icons/display.svg");
+  &__password {
+    mask-image: url("/assets/img/icons/password.svg");
   }
-  &__locked {
-    mask-image: url("/assets/img/icons/locked.svg");
-  }
-  &__globe {
+  &__globe { // TODO check
     mask-image: url("/assets/img/icons/globe.svg");
   }
-  &__graphic-card {
-    background-image: url("/assets/img/icons/graphic-card.svg");
-  }
   &__reset {
-    background-image: url("/assets/img/icons/reset.svg");
+    mask-image: url("/assets/img/icons/reset.svg");
   }
-  &__email-resend {
+  &__email-resend { // TODO check
       background-image: url("/assets/img/icons/email-resend.svg");
   }
-  &__reset-gray-500,
-  &__reset--white {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/reset.svg");
-    mask-image: url("/assets/img/icons/reset.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
-  }
-  &__reset--white {
-    background-color: $white;
-  }
   &__collapse-task {
-    background-image: url("/assets/img/icons/collapse-task.svg");
+    mask-image: url("/assets/img/icons/collapse-task.svg");
   }
   &__get-paid {
     background-image: url("/assets/img/icons/get-paid.svg");

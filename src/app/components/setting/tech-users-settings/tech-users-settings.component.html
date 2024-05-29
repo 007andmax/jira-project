@@ -200,7 +200,7 @@
                                                         ngbDropdownToggle
                                                         (click)="changePasswordRequest(techUser.id)"
                                                     >
-                                                        <div class="icon__reset qt-sz-20 qt-bg-contain pointer qt-mr-10"></div>
+                                                        <div class="qt-icon icon__reset qt-sz-20 qt-bg-contain pointer qt-mr-10"></div>
                                                         <span>Reset Password</span>
                                                     </div>
                                                     <hr>
@@ -333,7 +333,7 @@
                                             <div
                                                 (mouseenter)="restoreUser.show($event.target)"
                                                 (mouseleave)="restoreUser.hide()"
-                                                class="icon__reset qt-sz-20 qt-bg-contain qt-mr-16 pointer ng-star-inserted"
+                                                class="qt-icon icon__reset qt-sz-20 qt-bg-contain qt-mr-16 pointer ng-star-inserted"
                                                 (click)="restoreConfirm(techUser.id)"
                                             >
                                             </div>
@@ -593,7 +593,7 @@
                 placement="top"
                 container="body"
             >
-                <div class="icon__reset qt-sz-16 qt-bg-contain"></div>
+                <div class="qt-icon icon__reset qt-sz-16 qt-bg-contain"></div>
             </div>
             <div
                 class="qt-aside__restore-modal qt-ml-8 pointer"
@@ -625,7 +625,7 @@
             class="notifications --warning qt-mb-20"
             *ngIf="selectedTechUser && !selectedTechUser.isEmailVerified"
         >
-            <span class="qt-icon icon__company-info qt-icon__yellow-800 qt-sz-20 qt-mr-8 qt-fs-0"></span>
+            <span class="qt-icon icon__info qt-icon__yellow-800 qt-sz-20 qt-mr-8 qt-fs-0"></span>
             <p class="notifications__content">
                 User email is not verified yet to verify email click on link here
                 <a

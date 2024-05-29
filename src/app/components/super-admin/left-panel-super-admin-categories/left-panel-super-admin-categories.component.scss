@@ -17,13 +17,13 @@
       margin-left: 14px;
     }
 
-    .icon__move-light {
+    .icon__dot-vertical {
         opacity: 0;
         cursor: grab;
     }
     &:hover {
         background-color: $white;
-        .icon__move-light {
+        .icon__dot-vertical {
             opacity: 1;
         }
         /deep/.icon__more {
