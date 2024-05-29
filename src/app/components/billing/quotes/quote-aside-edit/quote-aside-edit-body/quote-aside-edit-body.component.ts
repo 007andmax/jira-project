@@ -4,7 +4,6 @@ import { CompanyItem } from 'src/app/components/companies/class/company-item';
 import { CompanyProfile } from 'src/app/components/companies/class/company-profile';
 import { CompanyProfileAddress } from 'src/app/components/companies/class/company-profile-address';
 import { CompanyUpdate } from 'src/app/components/companies/class/company-update';
-import { InvoiceTicketsService } from 'src/app/components/setting/accounting/accounting-settings.service';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { BillableService } from 'src/app/services/billable/billable.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
@@ -19,6 +18,7 @@ import { QuoteValdiateEdit } from '../../class/quote-vildate-edit';
 import { ServiceListQuoteComponent } from '../../quote-aside-add/service-list-quote/service-list-quote.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
+import { InvoiceTicketsService } from 'src/app/services/accounting/accounting-settings.service';
 
 @Component({
   selector: 'app-quote-aside-edit-body',

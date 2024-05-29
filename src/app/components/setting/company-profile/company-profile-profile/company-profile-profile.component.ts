@@ -1,6 +1,6 @@
 import { MapsAPILoader } from '@agm/core';
 import { Component, ElementRef, EventEmitter, NgZone, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { TimeZone } from 'src/app/components/companies/company-time-zone/class/time-zone';
@@ -11,11 +11,8 @@ import { ImageCroper } from 'src/app/services/modal/modal-image-cropper/class/im
 import { ModalImageCropperStateService } from 'src/app/services/modal/modal-image-cropper/services/modal-image-cropper-state.service';
 import { CompanyProfileService } from 'src/app/services/setting/company-profile.service';
 import { SettingService } from 'src/app/services/setting/setting.service';
-import { CompaniesRealTimeService } from 'src/app/states/company/companies-real-time.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
-import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { ImageCropperStateService } from 'src/app/states/image-cropper/image-cropper-state.service';
-import { SettingStateService } from 'src/app/states/setting/setting-state.service';
 
 declare var google: any;
 declare var $: any;
@@ -84,9 +81,10 @@ export class CompanyProfileProfileComponent implements OnInit, OnDestroy {
     };
     this.createCProfileForm();
     if (this.companiesStateService.getCurrentCompany()) this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
-    this.companiesStateService.onCurrentCompany.subscribe(res => {
+    let onCurrentCompany = this.companiesStateService.onCurrentCompany.subscribe(res => {
       this.getCurrentCompany(res);
     })
+    this.sub.add(onCurrentCompany);
     if (this.companyTimeZoneState.getTimeZone().length > 0) {
       this.timezones = this.companyTimeZoneState.getTimeZone().map(item => new TimeZone(item));;
       this.onGetCurrentCompany.emit(null);

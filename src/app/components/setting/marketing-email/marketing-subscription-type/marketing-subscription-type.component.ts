@@ -31,7 +31,6 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     private marketingEmailStateService: MarketingEmailStateService,
-    private marketingEmailRealTimeService: MarketingEmailRealTimeService,
     public usersStateService: UsersStateService,
     private toastrService: ToastrService,
     private appStateService: AppStateService,

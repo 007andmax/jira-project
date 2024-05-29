@@ -26,7 +26,6 @@ export class ActivityHistoryComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   constructor(
     private settingService: SettingService,
-    private toastr: ToastrService,
     private modalService: NgbModal,
     private confirmStateService: ConfirmStateService,
     public settingStateService: SettingStateService,

@@ -3,7 +3,6 @@ import { Subscription } from 'rxjs';
 import { CompanyItem } from 'src/app/components/companies/class/company-item';
 import { CompanyProfile } from 'src/app/components/companies/class/company-profile';
 import { CompanyUpdate } from 'src/app/components/companies/class/company-update';
-import { InvoiceTicketsService } from 'src/app/components/setting/accounting/accounting-settings.service';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { Service } from 'src/app/interfaces/service/service';
@@ -21,6 +20,7 @@ import { QuoteValdiate } from '../../class/quote-vildate';
 import { ServiceListQuoteComponent } from '../service-list-quote/service-list-quote.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
+import { InvoiceTicketsService } from 'src/app/services/accounting/accounting-settings.service';
 
 @Component({
   selector: 'app-quote-aside-add-body',

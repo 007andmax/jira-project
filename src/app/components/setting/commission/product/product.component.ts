@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { CommissionService, ICategory } from '../commission.service';
+import { CommissionService, ICategory } from '../../../../services/commission/commission.service';
 import { ToastrService } from 'ngx-toastr';
 import { CHANGE_COMMISSION_PRODUCT, DELETE_COMMISSION_PRODUCT } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';

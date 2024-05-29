@@ -37,9 +37,10 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
     $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
     if (this.inventoryStateService.getCategories().length > 0) this.getCategories(this.inventoryStateService.getCategories());
-    this.inventoryStateService.onGetCategories.subscribe(data => {
+    let onGetCategories = this.inventoryStateService.onGetCategories.subscribe(data => {
       this.getCategories(data);
     })
+    this.sub.add(onGetCategories);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === DELETE_CATEGORY_PRODUCT) {
@@ -55,6 +56,7 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
       this.glNumbers = this.sortGlNumbers(data);
     })
+    this.sub.add(getOnGlNumbers);
   }
   private sortGlNumbers(data) {
     this.loading = false;

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ManufactureDevice } from 'src/app/components/company-devices/company-devices-custom-aside/class/manufacture-device';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
@@ -6,7 +6,6 @@ import { DeviceSettingFilter } from './class/device-setting-filter';
 import { catchError, map } from 'rxjs/operators';
 import { of, Subscription } from 'rxjs';
 import { DELETE_DEVICE_MANUFACTURE } from 'src/app/const/confirm';
-import { InventoryCheckUseComponent } from 'src/app/components/inventory/inventory-check-use/inventory-check-use.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ManufacturesCheckUseComponent } from '../manufactures-check-use/manufactures-check-use.component';

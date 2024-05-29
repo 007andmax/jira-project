@@ -10,7 +10,7 @@ import { ClickOtsideDirective } from 'src/app/directives/click-otside/click-otsi
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
-import { DELETE_TICKET_PRIORITY, DELETE_TICKET_STATUS } from 'src/app/const/confirm';
+import { DELETE_TICKET_PRIORITY } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 
 @Component({

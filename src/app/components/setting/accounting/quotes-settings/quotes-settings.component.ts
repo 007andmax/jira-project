@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { InvoiceTicketsService } from '../accounting-settings.service';
+import { InvoiceTicketsService } from '../../../../services/accounting/accounting-settings.service';
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 

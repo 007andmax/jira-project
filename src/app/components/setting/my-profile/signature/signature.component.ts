@@ -22,7 +22,6 @@ export class SignatureComponent implements OnInit, OnDestroy {
   @ViewChild('editSignature') editSignature: EditSignatureComponent;
   constructor(private signatureService: SignatureService,
     private confirmStateService: ConfirmStateService,
-    private signatureStateService: SignatureStateService,
     private elRef: ElementRef,
     private modalService: NgbModal) { }
 

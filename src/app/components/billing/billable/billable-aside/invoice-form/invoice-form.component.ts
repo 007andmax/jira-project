@@ -14,7 +14,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { REMOVE_TICKET_INVOICE } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
-import { InvoiceTicketsService } from 'src/app/components/setting/accounting/accounting-settings.service';
 import { InvoiceNote } from '../../class/invoice-note';
 import { InvoiceValidate } from './class/invoice-validate';
 import { InvoiceProfileTicket } from '../../class/invoice-profile-ticket';
@@ -23,6 +22,7 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { CompanyProfileAddress } from 'src/app/components/companies/class/company-profile-address';
+import { InvoiceTicketsService } from 'src/app/services/accounting/accounting-settings.service';
 
 @Component({
   selector: 'app-invoice-form',

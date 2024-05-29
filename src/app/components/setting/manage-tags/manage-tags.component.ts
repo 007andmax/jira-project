@@ -90,9 +90,10 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       id: [""]
     });
     if (this.companiesStateService.getCurrentCompany()) this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
-    this.companiesStateService.onCurrentCompany.subscribe(res => {
+    let onCurrentCompany = this.companiesStateService.onCurrentCompany.subscribe(res => {
       this.getCurrentCompany(res);
     })
+    this.sub.add(onCurrentCompany);
     this.serviceAllTickets = this.tagsService.getTags();
     this.getAllTags();
     this.settingStateService.setComponentName('ManageTagsComponent');

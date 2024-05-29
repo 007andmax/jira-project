@@ -34,13 +34,6 @@ export class ManufacturesCheckUseComponent implements OnInit {
     this.devicesService.validateManufacturesAndModelForRemove(this.manufacture.id, this.model ? this.model.id : null).subscribe((data: any) => {
       this.getList(data);
     })
-    /* let onRefreshProductsAgreements = this.inventoryStateService.onRefreshProductsAgreements.subscribe(data => {
-       this.showPreloader = true;
-       this.productService.validateproductForRemove(this.inventory.versionedId.id).subscribe((data: any) => {
-         this.getAgreements(data);
-       });
-     })
-     this.sub.add(onRefreshProductsAgreements);*/
   }
   getNameForAvatar(name) {
     return name[0].toUpperCase();

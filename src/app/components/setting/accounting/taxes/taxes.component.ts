@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { TaxesService } from "./taxes.service";
 import { ToastrService } from "ngx-toastr";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { map } from "rxjs/operators";
@@ -10,6 +9,7 @@ import { DELETE_TAX } from "src/app/const/confirm";
 import { ConfirmComponent } from "../../../shared/confirm/confirm.component";
 import { Subscription } from "rxjs";
 import { TaxesStateService } from "src/app/states/taxes/taxes-state.service";
+import { TaxesService } from "src/app/services/taxes/taxes.service";
 declare var $: any;
 @Component({
   selector: "app-taxes-settings",

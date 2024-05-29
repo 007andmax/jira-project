@@ -4,7 +4,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { UsersService } from 'src/app/services/users/users.service';
 import { UserRole } from '../../users/class/user-role';
 import { UserPermissions } from '../../users/class/user-permissions';
-import { PermissionManageService } from '../tech-users-settings/permission-manage/permission-manage.service';
+import { PermissionManageService } from '../../../services/permission-manage/permission-manage.service';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { DELETE_USER_ROLE } from 'src/app/const/confirm';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';

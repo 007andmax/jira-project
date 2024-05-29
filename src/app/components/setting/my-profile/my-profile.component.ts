@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, ViewChild } from "@angular/core";
+import { Component, OnInit, OnDestroy, ViewChild } from "@angular/core";
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
 import { AccountComponent } from "./account/account.component";
 import { ActivityHistoryComponent } from "./activity-history/activity-history.component";

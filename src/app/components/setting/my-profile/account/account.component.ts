@@ -1,11 +1,10 @@
-import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SettingService } from 'src/app/services/setting/setting.service';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { GoogleAuthenticatorComponent } from 'src/app/components/shared/google-authenticator/google-authenticator.component';
-import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { Subscription } from 'rxjs';
 import { GoogleAuthenticatorScratchesComponent } from 'src/app/components/shared/google-authenticator-scratches/google-authenticator-scratches.component';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
