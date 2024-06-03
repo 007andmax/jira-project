@@ -23,7 +23,8 @@ tr.--selected {
 .billable-payment-table__invoice {
   font-weight: 500;
   color: $blue-light-600;
-
+  flex-direction: column;
+  align-items: flex-start;
   p {
     @include body-m;
   }
@@ -31,4 +32,8 @@ tr.--selected {
   span {
     display: block;
   }
+}
+.qt-table-modern__row {
+  height: auto;
+  min-height: 48px;
 }
