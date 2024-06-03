@@ -30,7 +30,7 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
-    this.supportPageCategoriesStateService.onPreviewContent.subscribe(data => {
+    let onPreviewContent = this.supportPageCategoriesStateService.onPreviewContent.subscribe(data => {
       this.selectedCategory = data;
       this.isShowHelpCenter = false;
       this.categories.forEach(category => {
@@ -62,11 +62,13 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
       })
       this.cd.markForCheck();
     })
+    this.sub.add(onPreviewContent);
     this.categories = this.supportPageCategoriesStateService.getCategories();
-    this.supportPageCategoriesStateService.onGetCategories.subscribe(data => {
+    let onGetCategories = this.supportPageCategoriesStateService.onGetCategories.subscribe(data => {
       this.categories = data;
       this.cd.markForCheck();
     })
+    this.sub.add(onGetCategories);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVED_SUPPORT_CATEGORY) {
@@ -75,10 +77,11 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
       }
     })
     this.sub.add(getConfirm);
-    this.supportPageCategoriesStateService.onShowHelpCenter.subscribe(data => {
+    let onShowHelpCenter = this.supportPageCategoriesStateService.onShowHelpCenter.subscribe(data => {
       this.isShowHelpCenter = true;
       this.cd.markForCheck();
     })
+    this.sub.add(onShowHelpCenter);
   }
   editArticle(category) {
     if (category.document) {

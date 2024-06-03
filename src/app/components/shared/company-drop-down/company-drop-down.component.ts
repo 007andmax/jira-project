@@ -15,12 +15,14 @@ export class CompanyDropDownComponent extends DropDownComponent {
     if (this.companiesStateService.isInitLightAllCompanies && this.clientType == undefined) this.getClientsList(this.companiesStateService.getLightCompanies());
     if (this.companiesStateService.isInitLightClientsCompanies && this.clientType) this.getClientsList(this.companiesStateService.getLightClientsCompanies());
 
-    this.companiesStateService.onLightCompanies.subscribe((data) => {
+    let onLightCompanies = this.companiesStateService.onLightCompanies.subscribe((data) => {
       if (this.clientType == undefined) this.getClientsList(data);
     })
-    this.companiesStateService.onLightClientsCompanies.subscribe((data) => {
+    this.sub.add(onLightCompanies);
+    let onLightClientsCompanies = this.companiesStateService.onLightClientsCompanies.subscribe((data) => {
       if (this.clientType != undefined) this.getClientsList(data);
     })
+    this.sub.add(onLightClientsCompanies);
     this.ref.markForCheck();
   }
   public getClientsList(data) {

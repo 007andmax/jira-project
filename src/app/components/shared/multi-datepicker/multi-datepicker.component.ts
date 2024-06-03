@@ -27,11 +27,9 @@ export class MultiDatepickerComponent implements OnInit {
 
   /**
    * Creates an instance of the MultiDatepickerComponent with the injected services
-   * @param {NgbCalendar} calendar Service to work with date
-   * @param {DateService} dateService Service to work with date
+    * @param {DateService} dateService Service to work with date
    */
   constructor(
-    private calendar: NgbCalendar,
     private dateService: DateService
   ) { }
 
