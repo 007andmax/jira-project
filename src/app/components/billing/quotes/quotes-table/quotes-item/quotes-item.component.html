@@ -19,7 +19,7 @@
         </div>
     </div>
     <div
-        class="quotes-table__date"
+        class="quotes-table__date cursor-default"
         [textContent]="getDate(quote.date)"
     >
     </div>
@@ -29,20 +29,20 @@
         (click)="preview()"
     ></div>
     <div
-        class="quotes-table__company"
+        class="quotes-table__company cursor-default"
         [textContent]="quote.company.name"
     ></div>
     <div
-        class="quotes-table__description"
+        class="quotes-table__description cursor-default"
         [textContent]="quote.description"
     ></div>
-    <div class="quotes-table__recipients ellipsis">
-      <div
-        class="ellipsis"
-        [innerHtml]="quote.parseRecipients()"
-      ></div>
+    <div class="quotes-table__recipients ellipsis cursor-default">
+        <div
+            class="ellipsis"
+            [innerHtml]="quote.parseRecipients()"
+        ></div>
     </div>
-    <div class="quotes-table__create-by ellipsis">
+    <div class="quotes-table__create-by ellipsis cursor-default">
         <div class="qt-df qt-ai-c qt-w100">
             <div
                 class="qt-table-modern__circle-avatar"
@@ -56,7 +56,11 @@
             ></div>
         </div>
     </div>
-    <div class="quotes-table__status">
+    <div
+        class="quotes-table__status"
+        [ngClass]="{'cursor-default':!(quote.status === 'TICKETED' && !customerPortalStateService.isCustomerPortal) && 
+    quote.status !== 'INVOICED'}"
+    >
         <span
             class="tag__modern"
             [ngClass]="[getStatusClass(quote.status),(quote.status === 'TICKETED' || quote.status === 'INVOICED' && getPermissions('VIEW_ACCOUNTING')) ? 'pointer' : '']"
@@ -67,12 +71,12 @@
         </span>
     </div>
     <div
-        class="quotes-table__valid"
+        class="quotes-table__valid cursor-default"
         [textContent]="getDate(quote.validUntil)"
     >
     </div>
     <div
-        class="quotes-table__total"
+        class="quotes-table__total cursor-default"
         [textContent]="quote.totalAmount | currency"
     ></div>
     <div

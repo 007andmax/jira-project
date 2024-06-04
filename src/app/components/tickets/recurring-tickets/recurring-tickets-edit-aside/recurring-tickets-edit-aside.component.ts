@@ -20,6 +20,7 @@ import { TextAreaDirective } from 'src/app/directives/text-area/text-area.direct
 import { TechUserItem } from 'src/app/components/shared/tech-users/class/tech-user-item';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { DevicesRecurringTicketsComponent } from '../devices-recurring-tickets/devices-recurring-tickets.component';
+import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
 
 @Component({
   selector: 'app-recurring-tickets-edit-aside',
@@ -69,6 +70,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     public createService: RecurringTicketsService,
     private usersStateService: UsersStateService,
     private contractsService: ContractsService,
+    private inventoryStateService: InventoryStateService,
   ) {
   }
 
@@ -76,7 +78,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
    * Initializes edit recurring ticket. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-    this.getItemListProducts();
+
 
     this.onCheckEditMode();
     if (this.usersStateService.getAllUsers().length > 0) this.onGetTechUsers(this.usersStateService.getAllUsers());
@@ -99,7 +101,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   private onCheckEditMode() {
     let editmode = this.recurringState.getEditMode().subscribe((data: RecurringTicket) => {
       this.opened = true;
-
+      this.getItemListProducts();
       this.onEditEditMode(data);
     })
     this.createService.addSubscription(editmode);
@@ -204,7 +206,8 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   public getItemListProducts() {
     this.productService.getCategories().subscribe((res: any) => {
       this.productList = res;
-
+      this.inventoryStateService.setproducts(this.productList);
+      this.inventoryStateService.onInitGetProducts(this.productList);
     });
   }
 
