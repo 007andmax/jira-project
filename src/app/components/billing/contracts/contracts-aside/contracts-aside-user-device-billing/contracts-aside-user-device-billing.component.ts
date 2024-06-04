@@ -200,7 +200,6 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     }
   }
   onServiceTaxesChange(data) {
-    console.log("deviceServices", this.deviceServices.toArray());
     this.contractsUserDevice.serviceContractServices.forEach((item, index) => {
       item.taxIds = data.map(item => item.id);
       this.deviceServices.toArray()[index].setSelectedTaxes(JSON.parse(JSON.stringify(data)));

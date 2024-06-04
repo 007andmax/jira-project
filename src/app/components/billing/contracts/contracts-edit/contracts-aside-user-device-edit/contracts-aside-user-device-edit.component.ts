@@ -65,7 +65,6 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
     let taxIds = [];
     this.contractsUserDevice.serviceContractServices.forEach(item => taxIds = [...taxIds, ...item.taxIds]);
     taxIds = taxIds.filter((item, pos) => taxIds.findIndex(accountItem => accountItem == item) == pos);
-    console.log("taxIds", taxIds);
     this.taxesServicesDP.setEditItems(this.taxes.filter(item => {
       let find = taxIds.find(taxId => taxId === item.id);
       return (find) ? true : false;
@@ -90,7 +89,6 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
     this.taxes = lsitTaxes;
     let taxes = lsitTaxes.filter(item => item.isDefault === true);
     this.defaultSelectedTax = taxes;
-    console.log("this.defaultSelectedTax", this.defaultSelectedTax);
     if (this.contractsUserDevice.invoiceAsSingleItem) this.taxesServicesDP.setEditItems(taxes);
   }
   public onEdit() {
@@ -133,7 +131,6 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
     this.contractsUserDevice.services = [];
   }
   onServiceTaxesChange(data) {
-    console.log("deviceServices", this.deviceServices.toArray());
     this.contractsUserDevice.serviceContractServices.forEach((item, index) => {
       item.taxIds = data.map(item => item.id);
       this.deviceServices.toArray()[index].setSelectedTaxes(JSON.parse(JSON.stringify(data)));
