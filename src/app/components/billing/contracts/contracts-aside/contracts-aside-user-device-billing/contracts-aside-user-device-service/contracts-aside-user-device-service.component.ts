@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./contracts-aside-user-device-service.component.scss']
 })
 export class ContractsAsideUserDeviceServiceComponent implements OnInit, OnDestroy {
+  @Input() invoiceAsSingleItem: boolean = false;
   @Input() service: ContractsUserDeviceService;
   @Output() onRemove = new EventEmitter<any>();
   @Output() onCheckName = new EventEmitter<any>();
@@ -18,11 +19,15 @@ export class ContractsAsideUserDeviceServiceComponent implements OnInit, OnDestr
   constructor(private taxesStateService: TaxesStateService,) { }
 
   ngOnInit() {
+    console.log("service", this.service);
     if (this.taxesStateService.getTaxes().length > 0) this.getTaxes(this.taxesStateService.getTaxes());
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
       this.getTaxes(data);
     })
     this.sub.add(getOnTaxess);
+  }
+  public setSelectedTaxes(listTaxes) {
+    this.taxesDropDown.setEditItems(listTaxes);
   }
   getTaxes(taxes) {
     let listTaxes = [];
@@ -31,7 +36,7 @@ export class ContractsAsideUserDeviceServiceComponent implements OnInit, OnDestr
       if (find) listTaxes.push(find);
 
     });
-    this.taxesDropDown.setEditItems(listTaxes);
+    this.setSelectedTaxes(listTaxes);
   }
   onChangeCount(event) {
     this.service.count = event;

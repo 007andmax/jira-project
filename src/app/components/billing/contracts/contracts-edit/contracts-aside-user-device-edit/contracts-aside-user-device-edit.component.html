@@ -120,7 +120,12 @@
                     <tr>
                         <th>Device Name</th>
                         <th class="col-count">Count</th>
-                        <th class="col-tax">Tax</th>
+                        <th
+                            class="col-tax"
+                            *ngIf="!contractsUserDevice.invoiceAsSingleItem"
+                        >
+                            Tax
+                        </th>
                         <th class="col-price">Price</th>
                         <th></th>
                     </tr>
@@ -134,7 +139,9 @@
                         [ngForTrackBy]="trackById"
                     >
                         <app-contracts-aside-user-device-service
+                            #deviceService
                             [service]="item"
+                            [invoiceAsSingleItem]="contractsUserDevice.invoiceAsSingleItem"
                             (onRemove)="onRemoveServiceContractServices(i)"
                             (onCheckName)="onCheckDuplicatedServiceContractServices()"
                         ></app-contracts-aside-user-device-service>
@@ -143,11 +150,36 @@
             </table>
         </div>
         <button
-            class="qt-button --gray --sm qt-mb-24"
+            class="qt-button --gray --sm"
             (click)="addServiceContractService()"
         >
             + Add Service
         </button>
+        <div class="qt-df qt-ai-c single-invoice">
+            <div
+                class="qt-toggle qt-mr-8"
+                [ngClass]="{'--on':contractsUserDevice.invoiceAsSingleItem}"
+                (click)="setInvoiceAsSingleItem(!contractsUserDevice.invoiceAsSingleItem)"
+            >
+                <div class="qt-toggle__circle"></div>
+            </div>
+            <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-gray-600">Invoice as single item</div>
+            <div
+                class="qt-inputs-row qt-ml-auto"
+                [hidden]="!contractsUserDevice.invoiceAsSingleItem"
+            >
+                <div class="qt-input-block">
+                    <div class="qt-input-block__label">Select taxes</div>
+                    <app-taxes
+                        class="qt-taxes-multiselect"
+                        #taxesServices
+                        [isLabel]="false"
+                        [isAdd]="false"
+                        (taxesChange)="onServiceTaxesChange($event)"
+                    ></app-taxes>
+                </div>
+            </div>
+        </div>
         <div class="qt-fs-15 qt-fw-600 qt-lh-147 qt-color-gray-900 qt-mb-16">
             Create service that you want to track the time for. Tracked service time counts towards contract and is not billed to customer
         </div>
@@ -191,7 +223,7 @@
             <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-gray-600">Set maximum amount of hours</div>
         </div>
         <div
-            class="qt-df qt-mb-16"
+            class="qt-df qt-mt-24"
             [hidden]="!toggleMaximumAmountHours"
         >
             <div class="qt-input-block --required qt-w25 qt-mr-16">
@@ -235,16 +267,6 @@
                 ></app-taxes>
             </div>
             <div class="qt-w25"></div>
-        </div>
-        <div class="qt-df">
-            <div
-                class="qt-toggle qt-mr-8"
-                [ngClass]="{'--on':contractsUserDevice.invoiceAsSingleItem}"
-                (click)="contractsUserDevice.invoiceAsSingleItem = !contractsUserDevice.invoiceAsSingleItem"
-            >
-                <div class="qt-toggle__circle"></div>
-            </div>
-            <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-gray-600">Invoice as single item</div>
         </div>
     </div>
     <div class="qt-df qt-mb-16 qt-mt-16">
