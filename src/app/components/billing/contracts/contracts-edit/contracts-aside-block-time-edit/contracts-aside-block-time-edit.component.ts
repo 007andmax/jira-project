@@ -12,7 +12,7 @@ import { ServiceAgreement } from '../../class/service-agreement';
 import { ContractsBlockTimeValidate } from '../../contracts-aside/class/contracts-block-time-validate';
 import * as moment from "moment";
 import { TechUsersStateService } from 'src/app/components/shared/tech-users/services/tech-users-state.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 import { СontractsBlockTimeShare } from '../../contracts-aside/class/contracts-block-time-share';
 import { ContractsConfirmComponent } from '../../contracts-confirm/contracts-confirm.component';
 import { Subscription } from 'rxjs';
@@ -44,6 +44,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
   toggleNotifyAgentsUser: boolean = false;
   selectedUsers: any = [];
   userList = [];
+  @ViewChild('customerTooltip') customerTooltip: NgbTooltip;
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
     private contractsService: ContractsService,
@@ -115,6 +116,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
     this.techState.onInitClear();
     this.selectedUsers = [];
   }
+
   getMinStartDate(interval, startDate) {
     let newMinStartDate;
     let now = new Date(startDate);
@@ -215,7 +217,13 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
     this.contractsBlockTime.setCompanyId((data) ? data.id : null);
     this.validate.resetCompany();
   }
+  onChangeRate(data) {
+    console.log("this.customerTooltip", this.customerTooltip);
+    this.customerTooltip.open();
+    this.contractsBlockTime.rateExceeding = data;
+  }
   onTaxesChange(data) {
+    this.customerTooltip.open();
     this.contractsBlockTime.setTaxIds(data.map(item => item.id));
   }
   onSelectInterval(data) {

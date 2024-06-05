@@ -13,6 +13,7 @@ import * as moment from "moment";
 import { ServiceAgreementBlockTimeServices } from '../../class/service-agreement-block-time-services';
 import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 import { ContractsAsideUserDeviceServiceComponent } from '../../contracts-aside/contracts-aside-user-device-billing/contracts-aside-user-device-service/contracts-aside-user-device-service.component';
+import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-contracts-aside-user-device-edit',
@@ -39,6 +40,8 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
   toggleContractServices: boolean = false;
   defaultSelectedTax: Array<Tax> = [];
   sub: Subscription = new Subscription();
+  @ViewChild('managedServices') managedServices: NgbTooltip;
+  @ViewChild('maximumAmount') maximumAmount: NgbTooltip;
   constructor(private companiesStateService: CompaniesStateService,
     private taxesStateService: TaxesStateService,
     private nonContractServicesService: NonContractServicesService,
@@ -84,6 +87,13 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
       this.taxesServicesDP.setEditItems(this.defaultSelectedTax);
       this.onServiceTaxesChange(this.defaultSelectedTax);
     }
+  }
+  showManagedServices() {
+    this.managedServices.open();
+  }
+  onChangeRateExceeding(data) {
+    this.maximumAmount.open();
+    this.contractsUserDevice.rateExceeding = data;
   }
   private setDefaultTaxes(lsitTaxes) {
     this.taxes = lsitTaxes;
@@ -205,6 +215,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
     this.validate.resetRateExceeding();
   }
   onTaxesChange(data) {
+    this.maximumAmount.open();
     this.contractsUserDevice.setTaxIds(data.map(item => item.id));
   }
   addBlockTimeService() {

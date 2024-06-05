@@ -14,6 +14,7 @@ export class ContractsAsideUserDeviceServiceComponent implements OnInit, OnDestr
   @Input() service: ContractsUserDeviceService;
   @Output() onRemove = new EventEmitter<any>();
   @Output() onCheckName = new EventEmitter<any>();
+  @Output() onDisplayBillableTooltip = new EventEmitter<any>();
   @ViewChild('taxesDropDown') taxesDropDown: TaxesComponent;
   sub: Subscription = new Subscription();
   constructor(private taxesStateService: TaxesStateService,) { }
@@ -39,12 +40,14 @@ export class ContractsAsideUserDeviceServiceComponent implements OnInit, OnDestr
   }
   onChangeCount(event) {
     this.service.count = event;
+    this.onDisplayBillableTooltip.emit(null);
   }
   remove() {
     this.onRemove.emit(null);
   }
   onTaxesChange(data) {
     this.service.taxIds = data.map(item => item.id);
+    this.onDisplayBillableTooltip.emit(null);
   }
   checkName() {
     this.onCheckName.emit(null);
@@ -56,6 +59,7 @@ export class ContractsAsideUserDeviceServiceComponent implements OnInit, OnDestr
   public onChangeRate(val) {
     let value = Number(val);
     this.service.rate = value;
+    this.onDisplayBillableTooltip.emit(null);
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

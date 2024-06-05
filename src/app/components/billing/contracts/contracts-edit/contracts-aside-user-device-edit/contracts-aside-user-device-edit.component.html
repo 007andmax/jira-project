@@ -88,6 +88,14 @@
     <div class="qt-inputs-row-background">
         <div class="qt-fs-15 qt-fw-600 qt-lh-147 qt-color-gray-900 qt-mb-10">
             Select how you bill your customer. Managed Services will be added to Service time
+            <i
+                #managedServices="ngbTooltip"
+                class="icon__help default-services-page__question-icon qt-sz-12 qt-ic-c qt-ml-8"
+                placement="top"
+                container="body"
+                [tooltipClass]="'cotract-billable-tooltip'"
+                ngbTooltip="If you change the existing 'Service name', 'Count', 'Tax' or 'Price' and update the contract then the new values will be applied to an appropriate contract service that has not been invoiced yet. The total amount for unbilled services will be recalculated taking into account the new values."
+            ></i>
         </div>
         <div class="qt-df qt-ai-c qt-mb-25">
             <div class="qt-fs-12 qt-color-gray-900 qt-mr-8">Service Bill Type</div>
@@ -144,6 +152,7 @@
                             [invoiceAsSingleItem]="contractsUserDevice.invoiceAsSingleItem"
                             (onRemove)="onRemoveServiceContractServices(i)"
                             (onCheckName)="onCheckDuplicatedServiceContractServices()"
+                            (onDisplayBillableTooltip)="showManagedServices()"
                         ></app-contracts-aside-user-device-service>
                     </ng-template>
                 </tbody>
@@ -220,18 +229,28 @@
             >
                 <div class="qt-toggle__circle"></div>
             </div>
-            <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-gray-600">Set maximum amount of hours</div>
+            <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-gray-600">
+                Set maximum amount of hours
+                <i
+                    #maximumAmount="ngbTooltip"
+                    class="icon__help default-services-page__question-icon qt-sz-12 qt-ic-c qt-ml-8"
+                    placement="top"
+                    container="body"
+                    [tooltipClass]="'cotract-billable-tooltip'"
+                    ngbTooltip="If you change the existing 'Rate exceeding block time' value or 'Taxes' and update the contract then the new values will be applied to all block-time contract services that have not been invoiced yet. The total amount for unbilled services will be recalculated taking into account the new values."
+                ></i>
+            </div>
         </div>
         <div
             class="qt-df qt-mt-24"
             [hidden]="!toggleMaximumAmountHours"
         >
-            <div class="qt-input-block --required qt-w25 qt-mr-16">
+            <div class="qt-input-block --required qt-w25 qt-mr-16 --disabled">
                 <label>Included block time</label>
                 <input
                     placeholder="1"
                     [value]="contractsUserDevice.includedHours"
-                    readonly
+                    disabled
                 >
             </div>
             <div class="qt-input-block --required qt-w25 qt-mr-16">
@@ -246,7 +265,7 @@
                         placeholder="0.00"
                         [value]="contractsUserDevice.rateExceeding"
                         (input)="validate.resetRateExceeding()"
-                        (onChange)="contractsUserDevice.rateExceeding=$event"
+                        (onChange)="onChangeRateExceeding($event)"
                     >
                     <mat-error
                         class="invalid-feedback"
