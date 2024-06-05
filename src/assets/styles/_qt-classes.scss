@@ -41,7 +41,7 @@
     input {
       &:checked {
         & ~ span {
-          background-image: url(/assets/img/icons/selected.svg);
+          background-image: url(/assets/img/icons/status-green.svg);
           border: none;
         }
       }
@@ -935,6 +935,9 @@ button.qt-button.--gray:focus {
 .qt-ml-0 {
   margin-left: 0;
 }
+.qt-ml-2 {
+  margin-left: 2px;
+}
 .qt-ml-4 {
   margin-left: 4px;
 }
@@ -986,6 +989,9 @@ button.qt-button.--gray:focus {
 
 .qt-mr-0 {
   margin-right: 0;
+}
+.qt-mr-2 {
+  margin-right: 2px;
 }
 .qt-mr-4 {
   margin-right: 4px;

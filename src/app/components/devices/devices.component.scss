@@ -164,14 +164,15 @@ img.Online-Search {
 
 .Favourite {
   margin-bottom: 5px;
-  background-image: url(/assets/img/icons/rating.svg);
-  background-repeat: no-repeat;
+  mask-image: url('/assets/img/icons/rating-filled.svg');
+  background-color: $background;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
   display: inline-block;
   max-width: 100%;
-  background-repeat: no-repeat;
   width: 24px;
   height: 24px;
-  background-position: center;
 }
 
 .SearchRectangle {

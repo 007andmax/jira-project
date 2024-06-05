@@ -1016,7 +1016,7 @@ app-quotes-item {
         border-radius: 50%;
       }
       input:checked ~ span {
-        background-image: url("/assets/img/icons/selected.svg");
+        background-image: url("/src/assets/img/icons/status-green.svg");
         border: none;
       }
     }

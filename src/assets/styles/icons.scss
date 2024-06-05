@@ -65,8 +65,8 @@
   &__memory {
     background-image: url("/assets/img/icons/memory.svg");
   }
-  &__selected {
-    background-image: url("/assets/img/icons/selected.svg");
+  &__status-green {
+    background-image: url("/assets/img/icons/status-green.svg");
   }
   &__quicktech_partical_top {
     background-image: url("/assets/img/icons/quicktech-part-top-logo.svg");
@@ -81,10 +81,7 @@
     background-image: url("/assets/img/icons/claim-ticket.svg");
   }
   &__rating-filled {
-    background-image: url("/assets/img/icons/rating-filled.svg");
-  }
-  &__rating {
-    background-image: url("/assets/img/icons/rating.svg");
+    mask-image: url("/assets/img/icons/rating-filled.svg");
   }
   &__send-to-front {
     background-image: url("/assets/img/icons/send-to-front.svg");
@@ -205,14 +202,14 @@
     mask-image: url("/assets/img/icons/support-page.svg");
   }
   // TODO Start Rename Icon Name
-  &__add-sub-category {
-    mask-image: url("/assets/img/icons/support-page-add-sub-category.svg");
+  &__categories {
+    mask-image: url("/assets/img/icons/categories.svg");
   }
-  &__add-article {
-    mask-image: url("/assets/img/icons/support-page-add-article.svg");
+  &__article {
+    mask-image: url("/assets/img/icons/article.svg");
   }
-  &__draft-content {
-    mask-image: url("/assets/img/icons/draft.svg");
+  &__save {
+    mask-image: url("/assets/img/icons/save.svg");
   }
   &__check {
     mask-image: url("/assets/img/icons/check.svg");
@@ -235,8 +232,8 @@
   &__quick-support {
     mask-image: url("/assets/img/icons/quick-support.svg");
   }
-  &__quicktech-logo {
-    mask-image: url("/assets/img/icons/quicktech-logo.svg");
+  &__full-logo {
+    mask-image: url("/assets/img/icons/full-logo.svg");
   }
   &__arrow-left {
     mask-image: url("/assets/img/icons/arrow-left.svg");
@@ -917,5 +914,8 @@
   }
   &__green-600 {
     background-color: $green-600;
+  }
+  &__background {
+    background-color: $background;
   }
 }

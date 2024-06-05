@@ -27,20 +27,18 @@
         </div>
         <div class="cmp-dboard-rating qt-df">
             <span class="qt-dflex">
-                <img
-                    *ngFor="let item of arrayOne(selectedRating); let i = index;"
-                    class="pointer"
-                    src="html/assets/img/icons/rating-filled.svg"
-                    alt="rating"
-                    (click)="changeRating(i, 'selected')"
+                <span
+                  class="qt-icon icon__rating-filled qt-icon__yellow-600 qt-sz-16 qt-dib qt-ml-2 qt-mr-2 pointer"
+                  *ngFor="let item of arrayOne(selectedRating); let i = index;"
+                  (click)="changeRating(i, 'selected')"
                 >
-                <img
-                    *ngFor="let item of arrayOne(unSelectedRating); let i = index;"
-                    class="pointer"
-                    src="html/assets/img/icons/rating.svg"
-                    alt="rating"
-                    (click)="changeRating(i, 'unselected')"
+                </span>
+                <span
+                  class="qt-icon icon__rating-filled qt-icon__background qt-sz-16 qt-dib qt-ml-2 qt-mr-2 pointer"
+                  *ngFor="let item of arrayOne(unSelectedRating); let i = index;"
+                  (click)="changeRating(i, 'unselected')"
                 >
+                </span>
             </span>
             <div class="cmp-user-info qt-df">
                 <span
