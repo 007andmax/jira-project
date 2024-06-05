@@ -98,6 +98,7 @@
         </div>
         <div class="qt-df qt-jc-fe qt-ai-c qt-mt-8">
             <app-tech-users
+                *ngIf="listTechUsers.length > 0"
                 [type]="'DETAIL_TICKET'"
                 [editMode]="true"
                 [selectedMode]="'SINGLE'"

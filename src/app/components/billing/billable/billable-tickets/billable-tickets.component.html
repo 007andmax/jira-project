@@ -67,47 +67,47 @@
         </div>
         <div class="qt-page-list__header-thead-container">
             <div class="qt-table-modern qt-page-list__header-thead">
-              <div class="qt-page-list__header-thead__row">
-                <div class="billable-item-table__check">
-                  <div class="qt-df">
-                    <label class="qt-checkbox">
-                      <input
-                        type="checkbox"
-                        (change)="onToggleAll($event)"
-                      >
-                      <span></span>
-                    </label>
-                  </div>
+                <div class="qt-page-list__header-thead__row">
+                    <div class="billable-item-table__check">
+                        <div class="qt-df">
+                            <label class="qt-checkbox">
+                                <input
+                                    type="checkbox"
+                                    (change)="onToggleAll($event)"
+                                >
+                                <span></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div
+                        class="billable-item-table__date"
+                        (click)="onFilter('closedAt')"
+                    >
+                        Date
+                        <span class="qt-table-modern__sorting"></span>
+                    </div>
+                    <div
+                        class="billable-item-table__ticket"
+                        (click)="onFilter('ticketNumber')"
+                    >
+                        Ticket#
+                        <span class="qt-table-modern__sorting"></span>
+                    </div>
+                    <div
+                        class="billable-item-table__subject"
+                        (click)="onFilter('subject')"
+                    >
+                        Ticket Subject
+                        <span class="qt-table-modern__sorting"></span>
+                    </div>
+                    <div
+                        class="billable-item-table__amount"
+                        (click)="onFilter('sum')"
+                    >
+                        Amount
+                        <span class="qt-table-modern__sorting"></span>
+                    </div>
                 </div>
-                <div
-                  class="billable-item-table__date"
-                  (click)="onFilter('closedAt')"
-                >
-                  Date
-                  <span class="qt-table-modern__sorting"></span>
-                </div>
-                <div
-                  class="billable-item-table__ticket"
-                  (click)="onFilter('ticketNumber')"
-                >
-                  Ticket#
-                  <span class="qt-table-modern__sorting"></span>
-                </div>
-                <div
-                  class="billable-item-table__subject"
-                  (click)="onFilter('subject')"
-                >
-                  Ticket Subject
-                  <span class="qt-table-modern__sorting"></span>
-                </div>
-                <div
-                  class="billable-item-table__amount"
-                  (click)="onFilter('sum')"
-                >
-                  Amount
-                  <span class="qt-table-modern__sorting"></span>
-                </div>
-              </div>
             </div>
         </div>
     </div>
@@ -122,7 +122,10 @@
                         let-i="index"
                         [ngForTrackBy]="trackById"
                     >
-                        <div class="qt-table-modern__row" [ngClass]="{'--selected': item.selected}">
+                        <div
+                            class="qt-table-modern__row"
+                            [ngClass]="{'--selected': item.selected}"
+                        >
                             <div
                                 class="billable-item-table__check"
                                 *ngIf="!item.lockedBy"
@@ -157,7 +160,7 @@
                                 [textContent]="getDate(item.closedAt)"
                             ></div>
                             <div
-                                class="billable-item-table__ticket pointer"
+                                class="billable-item-table__ticket pointer is-exist-ticket-number"
                                 *ngIf="!item.isOrder"
                                 [textContent]="item.ticketNumber"
                                 (click)="editTicket(item.id)"

@@ -107,6 +107,7 @@
             </div>
             <div class="qt-ml-16 qt-df qt-ai-c">
                 <app-tech-users
+                    *ngIf="listTechUsers.length > 0"
                     [isDisabled]="isBlockChange"
                     [type]="'DETAIL_TICKET'"
                     [editMode]="true"
