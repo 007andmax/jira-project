@@ -43,6 +43,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   areTicketsPresented: boolean = false;
   areTicketsTerminated: boolean = false;
   @ViewChild('deviceDp') deviceDp: DevicesRecurringTicketsComponent;
+  sub: Subscription = new Subscription();
   /**
    * Creates an instance of the RecurringTicketsAddAsideComponent with the injected services
    * @param {ProductService} productService Service to work with products
@@ -301,11 +302,12 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
  * Subscribe to show ticker
  */
   public showTicketRecurring() {
-    this.showTicketRecurringSub = this.recurringState.showTicketAddRecurringAside.subscribe((res) => {
+    let showTicketAddRecurringAside = this.recurringState.showTicketAddRecurringAside.subscribe((res) => {
       this.opened = true;
       this.getItemListProducts();
       this.onInitCreateMod();
     });
+    this.sub.add(showTicketAddRecurringAside);
   }
 
 
@@ -513,7 +515,6 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.copy = false;
     this.createService.resetAddAdditionalOptions();
     this.createService.resetCloneMode();
-    this.showTicketRecurringSub.unsubscribe();
   }
 
   public trackById(index, item) {
@@ -548,6 +549,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.sub.unsubscribe();
     this.createService.clearSubscriptions();
   }
 
