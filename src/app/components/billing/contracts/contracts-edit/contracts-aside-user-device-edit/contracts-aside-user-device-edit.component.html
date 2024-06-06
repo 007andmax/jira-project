@@ -266,6 +266,7 @@
                         [value]="contractsUserDevice.rateExceeding"
                         (input)="validate.resetRateExceeding()"
                         (onChange)="onChangeRateExceeding($event)"
+                        (change)="maximumAmount.open()"
                     >
                     <mat-error
                         class="invalid-feedback"

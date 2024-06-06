@@ -40,6 +40,8 @@ export class ContractsAsideUserDeviceServiceComponent implements OnInit, OnDestr
   }
   onChangeCount(event) {
     this.service.count = event;
+  }
+  onChangeDisplayBillableTooltip() {
     this.onDisplayBillableTooltip.emit(null);
   }
   remove() {
@@ -47,7 +49,7 @@ export class ContractsAsideUserDeviceServiceComponent implements OnInit, OnDestr
   }
   onTaxesChange(data) {
     this.service.taxIds = data.map(item => item.id);
-    this.onDisplayBillableTooltip.emit(null);
+    this.onChangeDisplayBillableTooltip();
   }
   checkName() {
     this.onCheckName.emit(null);
@@ -59,7 +61,6 @@ export class ContractsAsideUserDeviceServiceComponent implements OnInit, OnDestr
   public onChangeRate(val) {
     let value = Number(val);
     this.service.rate = value;
-    this.onDisplayBillableTooltip.emit(null);
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

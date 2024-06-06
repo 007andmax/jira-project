@@ -92,7 +92,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
     this.managedServices.open();
   }
   onChangeRateExceeding(data) {
-    this.maximumAmount.open();
+    // this.maximumAmount.open();
     this.contractsUserDevice.rateExceeding = data;
   }
   private setDefaultTaxes(lsitTaxes) {

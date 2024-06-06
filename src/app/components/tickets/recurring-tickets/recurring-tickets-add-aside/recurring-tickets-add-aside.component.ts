@@ -315,6 +315,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   public selectProduct(item, index) {
     item = (item) ? { ...item, ...{ quantity: 1, discount: 1 } } : null;
     this.products[index] = new ForCreateProduct(item);
+    this.products[index].setDiscount(0);
     this.cd.detectChanges();
   }
 
