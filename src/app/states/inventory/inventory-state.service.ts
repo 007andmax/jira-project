@@ -23,6 +23,7 @@ export class InventoryStateService {
   listCategoriesForRemove = [];
   categories = [];
   productList: Array<CategoryProductitem> = [];
+  preloader: boolean = true;
   constructor(private productService: ProductService,
     private inventoryRealTimeService: InventoryRealTimeService) { }
   public onInit() {
@@ -60,8 +61,14 @@ export class InventoryStateService {
     })
     // this.getProducts();
   }
+  public setPreloader(data) {
+    this.preloader = data;
+  }
   public getProducts() {
+    this.preloader = true;
     this.productService.getCategories().subscribe((res: any) => {
+      this.preloader = false;
+      console.log("this.preloader", this.preloader);
       this.setproducts(res);
       this.onInitGetProducts(this.productList);
     });

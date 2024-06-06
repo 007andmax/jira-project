@@ -146,9 +146,8 @@
                         [useFixed]="true"
                         placeholder="0.00"
                         [value]="contractsBlockTime.rateExceeding_str"
-                        (input)="validate.resetRateExceeding()"
+                        (input)="customerTooltip.open();validate.resetRateExceeding()"
                         (onChange)="onChangeRate($event)"
-                        (change)="customerTooltip.open()"
                     >
                     <mat-error
                         class="invalid-feedback"

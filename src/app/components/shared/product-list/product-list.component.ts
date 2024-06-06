@@ -29,7 +29,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
   resetSearch: boolean = false;
   selectedItem = false;
   sub: Subscription = new Subscription();
-  preloader: boolean = true;
   /**
    * Creates an instance of the ProductListComponent with the injected services
    * @param {ElementRef} elRef Service to work with template
@@ -38,7 +37,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     public quoteStateService: QuoteStateService,
     private permissionsService: PermissionsService,
-    private inventoryStateService: InventoryStateService) { }
+    public inventoryStateService: InventoryStateService) { }
 
 
   /**
@@ -50,13 +49,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
     if (this.type === 'RECURRING-TICKET') this.classAddProduct = 'recurring-ticket-add-product';
     if (this.type === 'TICKET' || this.type === 'PRODUCTS_TICKET') this.classAddProduct = 'ticket-add-product';
     if (this.type !== 'RECURRING-TICKET' && this.type !== 'PRODUCTS_TICKET') this.inventoryStateService.getProducts();
-    if (this.inventoryStateService.getListProducts().length > 0) {
-      this.itemList = this.inventoryStateService.getListProducts();
-      this.preloader = false;
-    }
+    if (this.inventoryStateService.getListProducts().length > 0) this.itemList = this.inventoryStateService.getListProducts();
     let getOnProducts = this.inventoryStateService.getOnProducts().subscribe(data => {
       this.itemList = data;
-      this.preloader = false;
+      console.log("inventoryStateService.preloader", this.inventoryStateService.preloader);
       this.onUpdateList();
       this.cd.detectChanges();
     })

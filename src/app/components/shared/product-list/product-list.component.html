@@ -20,22 +20,22 @@
         (input)="onSearch($event)"
         (focus)="onFocus($event)"
         id="dropdownProducts"
-        [disabled]="preloader"
+        [disabled]="inventoryStateService.preloader"
         ngbDropdownAnchor
     >
     <span>
         <i
-            *ngIf="selectedItem && !preloader"
+            *ngIf="selectedItem && !inventoryStateService.preloader"
             class="icn-sm icn-remove-old"
             (click)="clear()"
         ></i>
         <i
-            *ngIf="!selectedItem && !preloader"
+            *ngIf="!selectedItem && !inventoryStateService.preloader"
             class="icn-sm report-caret-icon"
         ></i>
         <i
             class="loading xs"
-            *ngIf="preloader"
+            *ngIf="inventoryStateService.preloader"
         ></i>
     </span>
     <div

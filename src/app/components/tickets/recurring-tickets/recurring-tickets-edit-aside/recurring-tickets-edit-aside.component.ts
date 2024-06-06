@@ -204,10 +204,12 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
    * Get product list
    */
   public getItemListProducts() {
+    this.inventoryStateService.setPreloader(true);
     this.productService.getCategories().subscribe((res: any) => {
       this.productList = res;
       this.inventoryStateService.setproducts(this.productList);
       this.inventoryStateService.onInitGetProducts(this.productList);
+      this.inventoryStateService.setPreloader(false);
     });
   }
 
