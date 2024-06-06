@@ -1,29 +1,33 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { SupportPageCategory } from '../super-admin/left-panel-super-admin-categories/class/support-page-category';
 import { SupportPageCategoriesStateService } from '../super-admin/state/support-page-categories/support-page-categories-state.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'super-admin-public',
   templateUrl: './super-admin-public.component.html',
   styleUrls: ['./super-admin-public.component.scss']
 })
-export class SuperAdminPublicComponent implements OnInit {
+export class SuperAdminPublicComponent implements OnInit, OnDestroy {
   categories: Array<SupportPageCategory> = [];
   selectedCategory: SupportPageCategory;
+  sub: Subscription = new Subscription();
   constructor(private supportPageCategoriesStateService: SupportPageCategoriesStateService,
     public companiesStateService: CompaniesStateService,
     private router: Router,
     public cd: ChangeDetectorRef) { }
 
+
   ngOnInit() {
     this.categories = this.supportPageCategoriesStateService.getCategories();
     this.cd.detectChanges();
-    this.supportPageCategoriesStateService.onGetCategories.subscribe(data => {
+    let onGetCategories = this.supportPageCategoriesStateService.onGetCategories.subscribe(data => {
       this.categories = data;
       this.cd.detectChanges();
     })
+    this.sub.add(onGetCategories);
   }
   selectCategory(data) {
     if (data.document) {
@@ -36,5 +40,8 @@ export class SuperAdminPublicComponent implements OnInit {
   }
   public trackById(index, item) {
     return item.id;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

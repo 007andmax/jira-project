@@ -5,9 +5,7 @@ import { TicketsFilter } from '../../../class/tickets-filter';
 import { Company } from 'src/app/interfaces/company/company';
 import { Ticket } from 'src/app/interfaces/quote/ticket';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
-import { AppService } from 'src/app/states/app/app.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
-import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { CurrentUser } from 'src/class/current-user/current-user';
 import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-state.service';
 @Component({
@@ -19,7 +17,6 @@ import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-s
 export class TicketDetailContactDetailsHistoryComponent implements OnInit {
 
   ticketsFilter: TicketsFilter = new TicketsFilter();
-
   @Input() user: CurrentUser;
   @Input() company: Company;
   showPreloader: boolean = true;
@@ -33,8 +30,6 @@ export class TicketDetailContactDetailsHistoryComponent implements OnInit {
   constructor(private ticketsListService: TicketsListService,
     private ticketsService: TicketsService,
     private elRef: ElementRef,
-    private ticketsStateService: TicketsStateService,
-    private appService: AppService,
     private ticketStateService: TicketStateService,
     private companiesStateService: CompaniesStateService,
     public cd: ChangeDetectorRef,) { }

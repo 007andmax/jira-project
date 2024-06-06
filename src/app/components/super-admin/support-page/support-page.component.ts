@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
@@ -12,7 +12,7 @@ var $ = require("jquery");
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./support-page.component.scss']
 })
-export class SupportPageComponent implements OnInit {
+export class SupportPageComponent implements OnInit, OnDestroy {
   isShowHelpCenter: boolean = true;
   categories: Array<SupportPageCategory> = [];
   sub: Subscription = new Subscription();
@@ -24,19 +24,22 @@ export class SupportPageComponent implements OnInit {
 
   ngOnInit() {
     this.isShowHelpCenter = this.supportPageCategoriesStateService.getShowHelpCenter();
-    this.supportPageCategoriesStateService.onToggleShowHelpCenter.subscribe(data => {
+    let onToggleShowHelpCenter = this.supportPageCategoriesStateService.onToggleShowHelpCenter.subscribe(data => {
       this.isShowHelpCenter = data;
       this.cd.markForCheck();
     })
-    this.supportPageCategoriesStateService.onShowHelpCenter.subscribe(data => {
+    this.sub.add(onToggleShowHelpCenter);
+    let onShowHelpCenter = this.supportPageCategoriesStateService.onShowHelpCenter.subscribe(data => {
       this.isShowHelpCenter = true;
       this.cd.markForCheck();
     })
+    this.sub.add(onShowHelpCenter);
     this.categories = JSON.parse(JSON.stringify(this.supportPageCategoriesStateService.getCategories())).map(item => new SupportPageCategory(item));
-    this.supportPageCategoriesStateService.onGetCategories.subscribe(data => {
+    let onGetCategories = this.supportPageCategoriesStateService.onGetCategories.subscribe(data => {
       this.categories = JSON.parse(JSON.stringify(data)).map(item => new SupportPageCategory(item));
       this.cd.markForCheck();
     })
+    this.sub.add(onGetCategories);
     const selectTarget = (fromElement, selector) => {
       if (!(fromElement instanceof HTMLElement)) {
         return null;
@@ -90,5 +93,8 @@ export class SupportPageComponent implements OnInit {
   }
   public trackById(index, item) {
     return item.id;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

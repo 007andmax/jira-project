@@ -42,6 +42,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   areTicketsPresented: boolean = false;
   areTicketsTerminated: boolean = false;
   @ViewChild('deviceDp') deviceDp: DevicesRecurringTicketsComponent;
+  sub: Subscription = new Subscription();
   /**
    * Creates an instance of the RecurringTicketsAddAsideComponent with the injected services
    * @param {ProductService} productService Service to work with products
@@ -57,7 +58,6 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     private productService: ProductService,
     private recurringService: RecurringService,
     public cd: ChangeDetectorRef,
-    private devicesService: DevicesService,
     public recurringState: RecurringTicketsStateService,
     public createService: RecurringTicketsService,
     private devicesRecurringTicketsStateService: DevicesRecurringTicketsStateService,
@@ -79,6 +79,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.onGetTechUsers(data);
     })
+    this.sub.add(getOnUsers);
   }
 
   public onCopyCreate() {
@@ -542,6 +543,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.sub.unsubscribe();
     this.createService.clearSubscriptions();
   }
 

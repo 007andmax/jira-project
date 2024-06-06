@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { SupportPageCategory } from '../../super-admin/left-panel-super-admin-categories/class/support-page-category';
@@ -9,7 +9,7 @@ import { SupportPageCategoriesStateService } from '../../super-admin/state/suppo
   templateUrl: './super-admin-public-category.component.html',
   styleUrls: ['./super-admin-public-category.component.scss']
 })
-export class SuperAdminPublicCategoryComponent implements OnInit {
+export class SuperAdminPublicCategoryComponent implements OnInit, OnDestroy {
   _id: string = '';
   isFirstOpen: boolean = true;
   selectedCategory: SupportPageCategory;
@@ -25,9 +25,10 @@ export class SuperAdminPublicCategoryComponent implements OnInit {
     });
     this.sub.add(subscription);
     if (this._id) this.getCategories(this.supportPageCategoriesStateService.getCategories());
-    this.supportPageCategoriesStateService.onGetCategories.subscribe((data) => {
+    let onGetCategories = this.supportPageCategoriesStateService.onGetCategories.subscribe((data) => {
       if (this.isFirstOpen) this.getCategories(data);
     });
+    this.sub.add(onGetCategories);
   }
   getCategories(data) {
     if (data.length > 0) this.isFirstOpen = false;
@@ -43,5 +44,8 @@ export class SuperAdminPublicCategoryComponent implements OnInit {
         })
       })
     });
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

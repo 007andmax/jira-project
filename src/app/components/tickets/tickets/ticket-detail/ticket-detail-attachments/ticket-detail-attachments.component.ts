@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { REMOVE_ATTACHMENT } from 'src/app/const/confirm';
 import { TicketProfileAttachmentsComponent } from '../../ticket-edit-aside/ticket-profile-attachments/ticket-profile-attachments.component';

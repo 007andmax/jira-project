@@ -34,7 +34,6 @@ export class TicketDetailContactDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.company = this.companiesStateService.getCompanies().find(item => item.id === this.ticketProfile.company.id);
-
     this.getDataCompany();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.company = this.companiesStateService.getCompanies().find(item => item.id === this.ticketProfile.company.id);
