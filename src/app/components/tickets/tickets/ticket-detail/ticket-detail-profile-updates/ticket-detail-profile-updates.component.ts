@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { REMOVE_UPDATE_TICKET, REMOVE_UPDATE_TICKET_SERVICE, REMOVE_UPDATE_TICKET_PRODUCT, REMOVE_UPDATE_TICKET_DETAIL_SERVICE, REMOVE_UPDATE_TICKET_DETAIL_PRODUCT, REMOVE_UPDATE_TICKET_DETAIL } from 'src/app/const/confirm';
+import { REMOVE_UPDATE_TICKET_DETAIL_SERVICE, REMOVE_UPDATE_TICKET_DETAIL_PRODUCT, REMOVE_UPDATE_TICKET_DETAIL } from 'src/app/const/confirm';
 import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tickets-permissions.service';
 import { TicketProfileUpdate } from '../../class/ticket-profile-update';
 import { TicketProfile } from '../../class/ticket-profile';

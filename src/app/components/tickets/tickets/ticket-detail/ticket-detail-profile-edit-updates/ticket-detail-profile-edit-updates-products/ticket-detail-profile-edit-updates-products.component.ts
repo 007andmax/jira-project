@@ -6,10 +6,6 @@ import { Subscription } from 'rxjs';
 import { ProductListComponent } from 'src/app/components/shared/product-list/product-list.component';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
-import { ProductService } from 'src/app/services/product/product.service';
-import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
-import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
-import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { InvoiceFormTicketEditTaxesComponent } from 'src/app/components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
 
@@ -20,7 +16,8 @@ import { InvoiceFormTicketEditTaxesComponent } from 'src/app/components/billing/
 })
 export class TicketDetailProfileEditUpdatesProductsComponent implements OnInit, OnDestroy {
   isUpdate: boolean = false;
-
+  @Input() update: TicketProfileUpdate;
+  product: TicketProfileProduct = new TicketProfileProduct();
   @ViewChild('taxesDropDown') taxesDropDown: InvoiceFormTicketEditTaxesComponent;
   @ViewChild('updateMobileBtn') updateMobileBtn: DisabledBtnDirective;
   @ViewChild('addMoreMobileBtn') addMoreMobileBtn: DisabledBtnDirective;
@@ -30,12 +27,9 @@ export class TicketDetailProfileEditUpdatesProductsComponent implements OnInit, 
   addedProductList = [];
   currentProduct: TicketProfileFormProduct = new TicketProfileFormProduct();
   sub: Subscription = new Subscription();
-  constructor(private productService: ProductService,
-    private inventoryStateService: InventoryStateService,
-    public cd: ChangeDetectorRef,
+  constructor(public cd: ChangeDetectorRef,
     private permissionsService: PermissionsService,
-    private taxesStateService: TaxesStateService,
-    private ticketsStateService: TicketsStateService) { }
+    private taxesStateService: TaxesStateService) { }
 
 
   initUpdateMobile() {
@@ -115,9 +109,6 @@ export class TicketDetailProfileEditUpdatesProductsComponent implements OnInit, 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
-
-  @Input() update: TicketProfileUpdate;
-  product: TicketProfileProduct = new TicketProfileProduct();
   ngOnInit() {
     this.product = new TicketProfileProduct(this.update.products[0]);
     if (this.taxesStateService.getTaxes().length > 0) this.onSetEditTaxes(this.taxesStateService.getTaxes());
