@@ -87,10 +87,10 @@
     background-image: url("/assets/img/icons/send-to-front.svg");
   }
   &__run-script {
-    background-image: url("/assets/img/icons/run-script-white.svg");
+    mask-image: url("/assets/img/icons/run-script-white.svg");
   }
-  &__quicktech-logo-mini {
-    background-image: url("/assets/img/icons-left-sidebar/quicktech-logo-mini.svg");
+  &__monogram {
+    background-image: url("/assets/img/icons-left-sidebar/monogram.svg");
   }
   &__invoice-expired {
     background-image: url("/assets/img/icons/invoice-expired.svg");
@@ -355,11 +355,14 @@
   &__done {
     mask-image: url("/assets/img/icons/done.svg");
   }
-  &__start { // TODO Check and play-circle.svg
-    background-image: url("/assets/img/icons/start.svg");
+  &__start {
+    mask-image: url("/assets/img/icons/start.svg");
   }
-  &__stop { // TODO Check
-    background-image: url("/assets/img/icons/stop.svg");
+  &__pause {
+    mask-image: url("/assets/img/icons/pause.svg");
+  }
+  &__stop {
+    mask-image: url("/assets/img/icons/stop.svg");
   }
   &__shutdown {
     mask-image: url("/assets/img/icons/shutdown.svg");
@@ -412,17 +415,17 @@
   &__reset {
     mask-image: url("/assets/img/icons/reset.svg");
   }
-  &__email-resend { // TODO check
-      background-image: url("/assets/img/icons/email-resend.svg");
-  }
   &__collapse-task {
     mask-image: url("/assets/img/icons/collapse-task.svg");
   }
-  &__get-paid {
-    background-image: url("/assets/img/icons/get-paid.svg");
+  &__taxes {
+    mask-image: url("/assets/img/icons/taxes.svg");
+  }
+  &__taxes-color { // TODO check
+    background-image: url("/assets/img/icons/taxes-color.svg");
   }
   &__edit {
-    mask-image: url("/assets/img/icons/edit-12.svg");
+    mask-image: url("/assets/img/icons/edit.svg");
   }
   &__expand-redactor {
     background-image: url("/assets/img/icons/expand-redactor.svg");

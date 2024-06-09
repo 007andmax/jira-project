@@ -23,7 +23,7 @@ export class LeftPanelReportsComponent implements OnInit {
   ngOnInit() {
     this.list.push(new ReportsLeftMenuItem("icon__sales", "SALES", [new ReportsLeftMenuItemReport('Product sales report', 'byProducts'),
     new ReportsLeftMenuItemReport('Customer sales report', 'byCustomers')], 'VIEW_SALES_REPORT'));
-    this.list.push(new ReportsLeftMenuItem("icon__taxes", "TAXES", [new ReportsLeftMenuItemReport('Tax report', 'byTaxes')], 'VIEW_TAXES_REPORT'));
+    this.list.push(new ReportsLeftMenuItem("icon__taxes-color", "TAXES", [new ReportsLeftMenuItemReport('Tax report', 'byTaxes')], 'VIEW_TAXES_REPORT'));
     this.list.push(new ReportsLeftMenuItem("", "COMMISSIONS", [new ReportsLeftMenuItemReport('Common report', 'common-commissions'),
     new ReportsLeftMenuItemReport('Detailed report', 'detailed-commissions')], 'VIEW_SALES_REPORT'));
     this.list.push(new ReportsLeftMenuItem("icon__financial", "FINANCIAL", [new ReportsLeftMenuItemReport('Accounts receivable report', 'accounts-receivable'),

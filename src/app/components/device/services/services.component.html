@@ -94,7 +94,7 @@
                                     </div>
                                     <div *ngIf="service.started==true">
                                       <div *ngIf="service.started==true" [ngClass]="service.Loaded=='False' || service.RestartLoaded=='False' ? 'qt-icon icon__reset qt-bg-contain qt-sz-16 qt-mr-8 service-button' : 'service-loader qt-bg-contain qt-sz-16 qt-mr-8 service-button'" (click)="serviceRestart(service.Name,i)"></div>
-                                      <div *ngIf="service.started==true" [ngClass]="service.Loaded=='False' || service.StopLoaded=='False' ? 'icon__stop qt-bg-contain qt-sz-16 qt-mr-8' : 'service-loader qt-bg-contain qt-sz-16 qt-mr-8'"  (click)="servicePause(service.Name,i)"></div>
+                                      <div *ngIf="service.started==true" [ngClass]="service.Loaded=='False' || service.StopLoaded=='False' ? 'qt-icon icon__stop qt-sz-16 qt-mr-8' : 'service-loader qt-bg-contain qt-sz-16 qt-mr-8'"  (click)="servicePause(service.Name,i)"></div>
                                     </div>
                                   </td>
                               </tr>
