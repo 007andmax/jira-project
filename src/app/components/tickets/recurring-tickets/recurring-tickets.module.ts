@@ -21,6 +21,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RecurringTicketsRoutingModule } from './recurring-tickets-routing.module';
 import { TechUsersModule } from '../../shared/tech-users/tech-users.module';
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
+import { RecurringTicketsTableAssignedUserComponent } from './recurring-tickets-table/recurring-tickets-table-assigned-user/recurring-tickets-table-assigned-user.component';
+import { RecurringTicketsTableAssignedUserMoreComponent } from './recurring-tickets-table/recurring-tickets-table-assigned-user-more/recurring-tickets-table-assigned-user-more.component';
+import { AssignedTicketUserModule } from '../tickets/ticket-add-aside/assigned-ticket-user/assigned-ticket-user.module';
 
 
 
@@ -33,7 +36,9 @@ import { CompanyDropDownModule } from '../../shared/company-drop-down/company-dr
         DevicesRecurringTicketsComponent,
         IntervalComponent,
         DurationComponent,
-        TagsComponent
+        TagsComponent,
+        RecurringTicketsTableAssignedUserComponent,
+        RecurringTicketsTableAssignedUserMoreComponent
 
     ],
     imports: [
@@ -52,7 +57,8 @@ import { CompanyDropDownModule } from '../../shared/company-drop-down/company-dr
         MatIconModule,
         ReactiveFormsModule,
         RecurringTicketsRoutingModule,
-        CompanyDropDownModule
+        CompanyDropDownModule,
+        AssignedTicketUserModule
     ],
 
 

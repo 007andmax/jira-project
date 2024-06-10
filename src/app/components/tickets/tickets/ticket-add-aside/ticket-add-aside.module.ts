@@ -20,11 +20,12 @@ import { PriorityLevelDropDownComponent } from './priority-level-drop-down/prior
 import { AssignedTicketUserComponent } from './assigned-ticket-user/assigned-ticket-user.component';
 import { AssignedTicketUserSelectedItemComponent } from './assigned-ticket-user/assigned-ticket-user-selected-item/assigned-ticket-user-selected-item.component';
 import { AssignedTicketUserItemComponent } from './assigned-ticket-user/assigned-ticket-user-item/assigned-ticket-user-item.component';
+import { AssignedTicketUserModule } from './assigned-ticket-user/assigned-ticket-user.module';
 
 
 
 @NgModule({
-    declarations: [TicketAddAsideComponent, PriorityLevelDropDownComponent, AssignedTicketUserComponent, AssignedTicketUserSelectedItemComponent, AssignedTicketUserItemComponent
+    declarations: [TicketAddAsideComponent, PriorityLevelDropDownComponent
     ],
     imports: [
         CommonModule,
@@ -39,7 +40,8 @@ import { AssignedTicketUserItemComponent } from './assigned-ticket-user/assigned
         UploadAreaModule,
         CompanyDropDownModule,
         DynamicTooltipModule,
-        CompanyUsersDropDownModule
+        CompanyUsersDropDownModule,
+        AssignedTicketUserModule
     ],
     exports: [TicketAddAsideComponent]
 })

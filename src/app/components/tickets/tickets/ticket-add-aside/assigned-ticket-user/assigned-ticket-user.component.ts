@@ -16,6 +16,7 @@ import { DevicesService } from 'src/app/services/devices/devices.service';
 export class AssignedTicketUserComponent extends DropDownComponent {
   searchText: string = '';
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
+  @Input() type: string;
   @Input() selectedUsers = [];
   @Output() usersChange = new EventEmitter<any>();
   constructor(public elRef: ElementRef,

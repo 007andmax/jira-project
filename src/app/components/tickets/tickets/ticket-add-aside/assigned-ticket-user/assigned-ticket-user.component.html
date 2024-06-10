@@ -69,6 +69,7 @@
                 >
                     <app-assigned-ticket-user-selected-item
                         [user]="user"
+                        [type]="type"
                         *ngIf="user.accountType === 'CLIENT'"
                     ></app-assigned-ticket-user-selected-item>
                 </ng-template>
@@ -84,6 +85,7 @@
                 >
                     <app-assigned-ticket-user-selected-item
                         [user]="user"
+                        [type]="type"
                         *ngIf="user.accountType === 'TECH'"
                     ></app-assigned-ticket-user-selected-item>
                 </ng-template>

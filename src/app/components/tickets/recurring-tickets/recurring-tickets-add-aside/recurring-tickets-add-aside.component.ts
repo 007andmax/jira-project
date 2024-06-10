@@ -18,6 +18,7 @@ import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { DevicesRecurringTicketsComponent } from '../devices-recurring-tickets/devices-recurring-tickets.component';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
+import { AssignedTicketUserComponent } from '../../tickets/ticket-add-aside/assigned-ticket-user/assigned-ticket-user.component';
 
 @Component({
   selector: 'app-recurring-tickets-add-aside',
@@ -43,6 +44,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   areTicketsPresented: boolean = false;
   areTicketsTerminated: boolean = false;
   @ViewChild('deviceDp') deviceDp: DevicesRecurringTicketsComponent;
+  @ViewChild('techUsersDp') techUsersDp: AssignedTicketUserComponent;
   /**
    * Creates an instance of the RecurringTicketsAddAsideComponent with the injected services
    * @param {ProductService} productService Service to work with products
@@ -199,16 +201,15 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.techUsers.forEach((item) => {
       this.recurringState.getCreateTicket().addAssignedUsers(item.id);
     })
-
   }
 
   private onGetTechUsers(data) {
     this.listTechUsers = data.filter(item => {
-
       if (item.accountType === 'TECH' && !item.deletedAt) {
         return new TechUserItem(item);
       }
     });
+    // this.techUsersDp.reset(this.listTechUsers);
   }
 
   /**
