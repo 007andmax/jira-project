@@ -74,11 +74,11 @@
                 (mouseenter)="agentConnectedTooltip.show($event.target)"
                 (mouseleave)="agentConnectedTooltip.hide()"
             >
-                <i class="icon__connection-green"></i>
+                <i class="qt-icon icon__connection qt-icon__green-600"></i>
             </div>
             <div
                 *ngIf="!(item.status === 'CONNECTED' && item.online) && !(item.status === 'INSTALLED' && item.online)"
-                class="support-timeline-status__step2 icon__connection qt-fs-0"
+                class="support-timeline-status__step2 qt-icon icon__connection qt-fs-0"
             ></div>
             <div
                 *ngIf="item.status === 'INSTALLED' && item.online"
@@ -87,7 +87,7 @@
                 container="body"
                 ngbDropdownToggle
             >
-                <i class="icon__connection-green"></i>
+                <i class="qt-icon icon__connection qt-icon__green-600"></i>
                 <ul
                     ngbDropdownMenu
                     class="qt-dropdown-menu"
@@ -139,7 +139,7 @@
         class="qt-df qt-ai-c qt-fd-c init-connection qt-pb-30 qt-pt-30"
         *ngIf="!item"
     >
-        <div class="icon__connection qt-sz-24 qt-mb-16"></div>
+        <div class="qt-icon icon__connection qt-sz-24 qt-mb-16"></div>
         <div class="csp-block-support__title qt-mb-8">No Connection Establish</div>
         <p class="csp-block-support__text qt-mb-16">Click button to create new one</p>
         <a
