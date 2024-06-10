@@ -350,6 +350,18 @@
                 </label>
             </div>
         </div>
+        <div class="qt-inputs-row">
+            <div class="qt-input-block">
+                <span class="qt-input-block__label">Assigned Users</span>
+                <app-assigned-ticket-user
+                    #techUsersDp
+                    [class]="['qt-dropdown']"
+                    [list]="listTechUsers"
+                    (usersChange)="onChangeTechUsers($event)"
+                    [placeholder]="'Select'"
+                ></app-assigned-ticket-user>
+            </div>
+        </div>
     </div>
     <div class="qt-aside-modern__footer">
         <div class="qt-df qt-ai-c qt-jc-sb qt-w100">
