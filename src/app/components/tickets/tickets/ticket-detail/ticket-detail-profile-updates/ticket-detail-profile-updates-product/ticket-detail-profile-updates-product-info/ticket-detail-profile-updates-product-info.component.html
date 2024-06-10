@@ -108,7 +108,7 @@
                     [textContent]="product.serialNumber"
                 ></div>
                 <i
-                    *ngIf="product.serialNumber.length > 19"
+                    *ngIf="product.serialNumber && product.serialNumber.length > 19"
                     class="icon__help default-services-page__question-icon qt-sz-12 qt-ic-c qt-ml-8"
                     placement="top"
                     [ngbTooltip]="product.serialNumber"
