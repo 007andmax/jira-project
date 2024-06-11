@@ -173,6 +173,7 @@ export class CompanyDashDetailComponent implements OnInit, OnDestroy {
     this.sub.add(getCompany);
   }
   private setCompanyData(data) {
+    console.log("this.companyDetailing.reputation", this.companyDetailing.reputation);
     if (this.companyDetailing.reputation === undefined || this.companyDetailing.reputation === null) {
       this.unSelectedRating = 5
     } else {
@@ -519,6 +520,7 @@ export class CompanyDashDetailComponent implements OnInit, OnDestroy {
       this.selectedRating = this.companyDetail.reputation;
       this.unSelectedRating = 5 - this.selectedRating;
     }
+    console.log("this.companyDetail.reputation", this.companyDetail.reputation);
     this.saveCompany();
   }
 

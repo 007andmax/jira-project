@@ -161,6 +161,7 @@ export class CompanyProfile {
             techLeadId: this.techLeadId,
             id: this.id,
             tags: this.tags,
+            reputation: this.reputation
         }
     }
     public getDataForAdd() {
