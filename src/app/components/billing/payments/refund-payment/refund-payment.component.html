@@ -1,57 +1,100 @@
 <div class="payments-page payments-page__aside qt-aside-modern --x-large">
-  <div class="qt-aside-modern__header">
-    <div class="qt-aside-modern__header-title">Refund</div>
-    <div class="qt-aside-modern__header-close icon__close" (click)="close()"></div>
-  </div>
-  <div class="qt-aside-modern__content">
-    <div class="payment-preview qt-pt-40 qt-pl-40 qt-pr-40 qt-pb-40">
-      <div class="qt-df">
-        <div class="qt-w100">
-
-          <div class="qt-df qt-jc-sb">
-            <div>You can refund the payment</div>
-            <div class="payment-info-lines qt-mb-16 payment-refound-totals">
-              <div class="qt-df qt-jc-sb">
-                <div class="payment-info-lines__title" >Amount Paid</div>
-                <div class="payment-info-lines__value" [textContent]="(payment.partialPaidAmount || payment.totalSum ) | currency"></div>
-              </div>
-              <div class="qt-df qt-jc-sb">
-                <div class="payment-info-lines__title">Paid by</div>
-                <div class="payment-info-lines__value "  [textContent]="parsePaymentMethod(payment.paymentMethod)"></div>
-              </div>
-              <div class="qt-df qt-jc-sb">
-                <div class="payment-info-lines__title">Refund Amount</div>
-                <div class="payment-info-lines__value" [textContent]="(payment.partialPaidAmount || payment.totalSum ) | currency"></div>
-              </div>
-              <div class="qt-df qt-jc-sb">
-                <div class="payment-info-lines__title">Refund Mode</div>
-                <div class="payment-info-lines__value"  >Refund payment</div>
-              </div>
-            </div>
-          </div>
+    <div class="qt-aside-modern__header">
+        <div class="qt-aside-modern__header-title">Refund</div>
+        <div
+            class="qt-aside-modern__header-close icon__close"
+            (click)="close()"
+        ></div>
+    </div>
+    <div class="qt-aside-modern__content">
+        <div class="payment-preview qt-pt-40 qt-pl-40 qt-pr-40 qt-pb-40">
+            <div class="qt-df">
+                <div class="qt-w100">
 
 
-          <div>
-            <div>
-              <textarea class="summary-info__textarea refound-textarea qt-input-block__textarea" [(ngModel)]="refundPayment.note" placeholder="Type your custom note here" appTextArea    maxlength="250"   cols="30" rows="1"></textarea>
+
+                    <div class="qt-df qt-jc-sb">
+                        <div>You can refund the payment</div>
+                        <div class="payment-info-lines qt-mb-16 payment-refound-totals">
+                            <div class="qt-df qt-jc-sb">
+                                <div class="payment-info-lines__title">Amount Paid</div>
+                                <div
+                                    class="payment-info-lines__value"
+                                    [textContent]="(payment.partialPaidAmount || payment.totalSum ) | currency"
+                                ></div>
+                            </div>
+                            <div class="qt-df qt-jc-sb">
+                                <div class="payment-info-lines__title">Paid by</div>
+                                <div
+                                    class="payment-info-lines__value "
+                                    [textContent]="parsePaymentMethod(payment.paymentMethod)"
+                                ></div>
+                            </div>
+                            <div class="qt-df qt-jc-sb">
+                                <div class="payment-info-lines__title">Refund Amount</div>
+                                <div
+                                    class="payment-info-lines__value"
+                                    [textContent]="(payment.partialPaidAmount || payment.totalSum ) | currency"
+                                ></div>
+                            </div>
+                            <div class="qt-df qt-jc-sb">
+                                <div class="payment-info-lines__title">Refund Mode</div>
+                                <div class="payment-info-lines__value">Refund payment</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div>
+                        <div>
+                            <textarea
+                                class="summary-info__textarea refound-textarea qt-input-block__textarea"
+                                [(ngModel)]="refundPayment.note"
+                                placeholder="Type your custom note here"
+                                appTextArea
+                                maxlength="250"
+                                cols="30"
+                                rows="1"
+                            ></textarea>
+                        </div>
+                        <div class="qt-df qt-ai-c qt-mt-15">
+                            <label
+                                class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
+                                for="email-payment"
+                            >
+                                <input
+                                    id="email-payment"
+                                    type="checkbox"
+                                    [(ngModel)]="refundPayment.sendEmailNotification"
+                                >
+                                <span></span>
+                                <div class="qt-ml-8">Email Payment receipt</div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="qt-df qt-ai-c qt-mt-15">
-              <label class="qt-checkbox receive-full-amount-check qt-mb-0 pointer" for="email-payment">
-                <input id="email-payment" type="checkbox" [(ngModel)]="refundPayment.sendEmailNotification" >
-                <span></span>
-                <div class="qt-ml-8">Email Payment receipt</div>
-              </label>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div class="qt-aside-modern__footer">
-    <div class="qt-df">
-      <button class="qt-button qt-mr-12" appDisabledBtn #refundPaymentBtn="disabled" (onClick)="create()"><span *ngIf="!refundPaymentBtn.isBlock()">Refund Payment</span> <app-preloader-ticket *ngIf="refundPaymentBtn.isBlock()"></app-preloader-ticket></button>
-      <button class="qt-button --gray" (click)="close()">Cancel</button>
+    <div class="qt-aside-modern__footer">
+        <div class="qt-df">
+            <button
+                class="qt-button --gray qt-mr-12"
+                (click)="close()"
+            >
+                Cancel
+            </button>
+            <button
+                class="qt-button "
+                appDisabledBtn
+                #refundPaymentBtn="disabled"
+                (onClick)="create()"
+            >
+                <span *ngIf="!refundPaymentBtn.isBlock()">Refund Payment</span>
+                <app-preloader-ticket *ngIf="refundPaymentBtn.isBlock()"></app-preloader-ticket>
+            </button>
+        </div>
     </div>
-   </div>
-
 </div>
