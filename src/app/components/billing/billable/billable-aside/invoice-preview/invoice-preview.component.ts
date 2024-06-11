@@ -37,8 +37,8 @@ export class InvoicePreviewComponent implements OnInit {
     return (hours >= 10 ? hours : '0' + hours) + ':' + (minutes >= 10 ? minutes : '0' + minutes) + ' hr(s)';
   }
   getServiceTaxes(service) {
-    if (service.taxesForSingleItem.length > 0) return this.getSelectedTaxes(service.taxesForSingleItem);
-    if (service.taxesForSingleItem.length == 0) return this.getSelectedTaxes(service.taxes || []);
+    if (service.taxes.length > 0) return this.getSelectedTaxes(service.taxes);
+    if (service.taxes.length == 0) return this.getSelectedTaxes(service.taxes || []);
   }
   getSelectedTaxes(taxes) {
     return taxes.map(item => {

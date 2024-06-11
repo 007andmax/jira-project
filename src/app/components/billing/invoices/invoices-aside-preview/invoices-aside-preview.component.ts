@@ -98,8 +98,8 @@ export class InvoicesAsidePreviewComponent implements OnInit {
     wnd.print();
   }
   getServiceTaxes(service) {
-    if (service.taxesForSingleItem.length > 0) return this.getSelectedTaxes(service.taxesForSingleItem);
-    if (service.taxesForSingleItem.length == 0) return this.getSelectedTaxes(service.taxes || []);
+    if (service.taxes.length > 0) return this.getSelectedTaxes(service.taxes);
+    if (service.taxes.length == 0) return this.getSelectedTaxes(service.taxes || []);
   }
   public getDateTicket(date) {
     return moment(new Date(date)).format('DD/MM/YYYY');
