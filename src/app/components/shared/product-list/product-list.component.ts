@@ -52,7 +52,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
     if (this.inventoryStateService.getListProducts().length > 0) this.itemList = this.inventoryStateService.getListProducts();
     let getOnProducts = this.inventoryStateService.getOnProducts().subscribe(data => {
       this.itemList = data;
-      console.log("inventoryStateService.preloader", this.inventoryStateService.preloader);
       this.onUpdateList();
       this.cd.detectChanges();
     })

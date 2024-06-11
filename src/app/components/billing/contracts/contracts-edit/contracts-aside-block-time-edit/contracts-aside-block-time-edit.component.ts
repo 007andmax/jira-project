@@ -218,8 +218,6 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
     this.validate.resetCompany();
   }
   onChangeRate(data) {
-    console.log("this.customerTooltip", this.customerTooltip);
-    //  this.customerTooltip.open();
     this.contractsBlockTime.rateExceeding = data;
   }
   onTaxesChange(data) {
