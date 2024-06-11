@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { TicketsFilterDropDownComponent } from '../tickets-filter-drop-down/tickets-filter-drop-down.component';
 import { TicketsListService } from '../../../services/tickets-list.service';
 import { CompanyTagsListService } from 'src/app/components/companies/company-tags/services/company-tags-list.service';

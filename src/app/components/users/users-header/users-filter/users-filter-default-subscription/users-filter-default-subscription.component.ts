@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { UsersFilterSubscriptionsComponent } from '../users-filter-subscriptions/users-filter-subscriptions.component';
+import { Component } from '@angular/core';
 import { UserDefaultSubscriptionComponent } from '../../../users-aside/user-default-subscription/user-default-subscription.component';
 
 @Component({

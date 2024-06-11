@@ -1,25 +1,19 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { USERS } from 'src/app/const/emails';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 import { UsersHeaderService } from './services/users-header.service';
 import { User } from '../class/user';
-
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ARCHIVE_USER, ARCHIVE_USERS, MULTI_DELETE_USER_FROM_SUBSCRIPTION } from 'src/app/const/confirm';
+import { ARCHIVE_USERS, MULTI_DELETE_USER_FROM_SUBSCRIPTION } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
-import { UsersService } from 'src/app/services/users/users.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CurrentUser } from 'src/class/current-user/current-user';
-import { TicketsFilterComponent } from '../../tickets/tickets/tickets-header/tickets-filter/tickets-filter.component';
-import { UsersFilterComponent } from './users-filter/users-filter.component';
 import { TYPE_LIST_ALL_USERS, TYPE_LIST_COMPANY_USERS, TYPE_LIST_MARKETING_USERS } from 'src/app/const/users';
-import { UserCustomSubscription } from '../class/user-custom-subscription';
 import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
 import { forkJoin, of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { UserFilter } from '../class/user-filter';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { AppService } from 'src/app/states/app/app.service';
 import { AddUserToCompanyComponent } from '../add-user-to-company/add-user-to-company.component';

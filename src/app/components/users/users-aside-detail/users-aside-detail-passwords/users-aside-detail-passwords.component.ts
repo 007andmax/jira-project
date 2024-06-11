@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { PasswordDeviceUser } from 'src/app/components/password-manager/class/password-device-user';
 import { PasswordRecord } from 'src/app/components/password-manager/class/password-record';
 import { PasswordManagerComponent } from 'src/app/components/password-manager/password-manager.component';
@@ -27,7 +27,6 @@ export class UsersAsideDetailPasswordsComponent extends PasswordManagerComponent
     })
     this.sub.add(getConfirm);
     let geLefttFilter = this.passwordManagerStateService.getOnFilter().subscribe((data) => {
-
       this.filter.setFilter(data);
       this.setDefaultScoll();
       this.onScroll();

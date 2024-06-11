@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { forkJoin, Subscription } from 'rxjs';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
@@ -507,5 +506,6 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
     }
+    this.sub.unsubscribe();
   }
 }

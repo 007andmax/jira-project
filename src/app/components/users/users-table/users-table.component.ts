@@ -5,7 +5,6 @@ import { Company } from 'src/app/interfaces/company/company';
 import { UsersService } from 'src/app/services/users/users.service';
 import { CurrentUser } from 'src/class/current-user/current-user';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
-
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { ARCHIVE_USER, DEARCHIVE_USER } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
@@ -16,8 +15,6 @@ import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-s
 import { USERS } from 'src/app/const/emails';
 import { TYPE_LIST_ALL_USERS, TYPE_LIST_COMPANY_USERS, TYPE_LIST_MARKETING_USERS } from 'src/app/const/users';
 import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
-import { CrmCompanyJobType } from '../../setting/crm-settings/crm-company-job-type/class/crm-company-job-type';
-import { UserDefaultSubscriptionAdd } from '../class/user-default-subscription-add';
 import { UserDefaultSubscription } from '../class/user-default-subscription';
 import { UserCustomSubscription } from '../class/user-custom-subscription';
 import { UserTableCustomSubscriptionComponent } from './user-table-custom-subscription/user-table-custom-subscription.component';
@@ -30,7 +27,6 @@ import { TechUsersService } from 'src/app/services/setting/tech-users.service';
 import { UsersCheckUseComponent } from '../users-check-use/users-check-use.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
-import { UserCustomerCompaniesInfo } from '../class/user-customer-companies-info';
 
 @Component({
   selector: 'app-users-table',
@@ -70,8 +66,7 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     private permissionsService: PermissionsService,
     private techUsersService: TechUsersService,
     public customerPortalStateService: CustomerPortalStateService,
-    private usersRealTimeService: UsersRealTimeService,
-    private elRef: ElementRef) { }
+    private usersRealTimeService: UsersRealTimeService) { }
 
 
   onChangeDefaultSubscriptions(subscriptions) {
@@ -144,16 +139,17 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = data;
     })
+    this.sub.add(getOnCompanies);
     this.currentUser = this.usersStateService.getCurrentUser();
     this.cd.markForCheck();
     //this.sub.add(getOnCompanies);
-    this.usersStateService.onSelectAll.subscribe(data => {
+    let onSelectAll = this.usersStateService.onSelectAll.subscribe(data => {
       this.user.selected = data;
       this.cd.markForCheck();
     })
+    this.sub.add(onSelectAll);
     this.defaultSubscriptions = (this.companyId) ? this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).defaultSubscriptions : new UserDefaultSubscription(null);
     let stompClient = this.usersRealTimeService.changeSubscriptionsUsers.subscribe(newChange => {
-
       if (newChange.action === 'DEFAULT_SUBSCRIPTION_SAVED') {
         if (this.user.id == newChange.data.userId && this.companyId == newChange.data.companyId) {
           this.defaultSubscriptions = new UserDefaultSubscription(newChange.data.defaultSubscriptions);

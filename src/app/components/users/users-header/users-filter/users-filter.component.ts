@@ -1,14 +1,9 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { CompanyTagsComponent } from 'src/app/components/companies/company-tags/company-tags.component';
 import { CrmCompanyIndustry } from 'src/app/components/setting/crm-settings/crm-company-industry/class/crm-company-industry';
-import { CrmCompanyJobTitle } from 'src/app/components/setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
-import { CompanyIndustry } from 'src/app/interfaces/company/company-industry';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
-import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
-import { UserFilter } from '../../class/user-filter';
 import { UsersFilterSubscriptionsComponent } from './users-filter-subscriptions/users-filter-subscriptions.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { UserFilters } from '../../class/user-filters';
@@ -27,7 +22,7 @@ import { UserDefaultSubscriptionItem } from '../../class/user-default-subscripti
 import { UsersFilterTagsComponent } from './users-filter-tags/users-filter-tags.component';
 import { MarketingSubscriptionType } from 'src/app/components/setting/marketing-email/marketing-subscription-type/class/marketing-subscription-type';
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
-import { MODE_MARKETING_USERS_LIST, TYPE_LIST_MARKETING_USERS } from 'src/app/const/users';
+import { MODE_MARKETING_USERS_LIST } from 'src/app/const/users';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({

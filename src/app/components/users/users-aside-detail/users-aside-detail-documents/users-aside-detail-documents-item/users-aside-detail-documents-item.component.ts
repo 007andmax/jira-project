@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { DocumentsTableComponent } from 'src/app/components/documents/documents-table/documents-table.component';
 
 @Component({

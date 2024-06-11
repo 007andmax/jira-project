@@ -1,5 +1,5 @@
 import { DOCUMENT } from "@angular/common";
-import { Component, HostListener, Inject, OnInit, ViewChild, Input, Output, EventEmitter, ElementRef } from "@angular/core";
+import { Component, Inject, OnInit, Input, Output, EventEmitter, ElementRef } from "@angular/core";
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { ServiceDurationValue } from "./class/service-duration-value";
 

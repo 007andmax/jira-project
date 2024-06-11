@@ -4,7 +4,7 @@ import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { MatAutocomplete } from '@angular/material';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
-import { NgbActiveModal, NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { TicketStateService } from '../services/ticket-state.service';
 import { TicketsListService } from '../../services/tickets-list.service';
 import { CompanyUser } from '../../ticket-add-aside/company-users-drop-down/class/company-user';
