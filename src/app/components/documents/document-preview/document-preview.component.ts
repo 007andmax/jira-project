@@ -39,14 +39,7 @@ export class DocumentPreviewComponent implements OnInit {
       this.getDocument(id);
     });
     this.sub.add(subscription);
-    this.leftPanelStateService.changeStateWithoutNavigate('new-preview-documents');
-    $('.documents-create-panel__content').on('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      console.log("e.target.tagName", e.target.tagName);
-      if (e.target.tagName == "IMG") this.previewAttachmentStateService.onInitPreview(e.target.getAttribute("src"));
-      // this.previewAttachmentStateService.onInitPreview(`/file/${attachmentId}`);
-    });
+    this.leftPanelStateService.changeStateWithoutNavigate('new-preview-documents')
   }
   public goToDocumentsList() {
     this.leftPanelStateService.hideLeftPanel(false);
