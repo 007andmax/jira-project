@@ -116,10 +116,13 @@ li.icon__assign-user {
         margin-right: 8px;
         .form-input {
             padding: 7px 14px 7px 34px;
-            background: url(/assets/img/icons/search.svg) no-repeat 12px center;
+            mask-image: url(/assets/img/icons/search.svg);
             font-size: 12px;
             line-height: 1.67;
-            background-color: $white;
+            mask-position: center;
+            mask-repeat: no-repeat;
+            mask-size: 12px;
+            background-color: $gray-400;
             width: 200px;
         }
     }

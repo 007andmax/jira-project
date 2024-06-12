@@ -206,11 +206,13 @@
   &::before {
     width: 18px;
     height: 18px;
-    background-image: url("/assets/img/icons/search.svg");
+    mask-image: url("/assets/img/icons/search.svg");
     left: 14px;
     top: calc(50% - 8px);
-    background-size: contain;
-    background-repeat: no-repeat;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: contain;
+    background-color: $gray-400;
   }
   input {
     border: 1px solid $gray-200;

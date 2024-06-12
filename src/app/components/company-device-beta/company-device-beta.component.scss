@@ -277,9 +277,11 @@ span.qt-input-search:before {
   width: 25px;
   height: 25px;
   margin-top: 15px;
-  background-image: url(/assets/img/icons/search.svg);
-  background-repeat: no-repeat;
-
+  mask-image: url(/assets/img/icons/search.svg);
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  background-color: $gray-400;
 }
 
 .qt-btn.--outline-blue {

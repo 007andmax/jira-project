@@ -546,7 +546,11 @@
   height: 22px;
   top: 11px;
   left: 10px;
-  background: url('/assets/img/icons/search.svg') no-repeat center / contain;
+  mask-image: url('/assets/img/icons/search.svg');
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  background-color: $gray-400;
 }
 
 .dropdown-assign-ticket.fixed-assign .assign-ticket-header .form-control {

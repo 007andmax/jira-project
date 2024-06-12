@@ -1058,10 +1058,13 @@ app-quotes-item {
           content: "";
           width: 16px;
           height: 16px;
-          background: url("/html/assets/img/icons/search.svg");
+          mask-image: url("/html/assets/img/icons/search.svg");
+          mask-position: center;
+          mask-repeat: no-repeat;
+          mask-size: contain;
+          background-color: $gray-400;
           left: 26px;
           top: calc(50% - 8px);
-          background-size: contain;
         }
       }
     }

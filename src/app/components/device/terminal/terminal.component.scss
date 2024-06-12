@@ -587,8 +587,11 @@ main {
                             }
                             .script-search {
                                 padding-left: 30px;
-                                background: url("/assets/img/icons/search.svg") no-repeat left
-                                    12px center;
+                                mask-image: url("/assets/img/icons/search.svg");
+                                mask-position: center;
+                                mask-repeat: no-repeat;
+                                mask-size: 12px;
+                                background-color: $gray-400;
                             }
                         }
                 }
