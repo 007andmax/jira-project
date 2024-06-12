@@ -10,9 +10,11 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./contracts-aside-user-device-service.component.scss']
 })
 export class ContractsAsideUserDeviceServiceComponent implements OnInit, OnDestroy {
+  @Input() invoiceAsSingleItem: boolean = false;
   @Input() service: ContractsUserDeviceService;
   @Output() onRemove = new EventEmitter<any>();
   @Output() onCheckName = new EventEmitter<any>();
+  @Output() onDisplayBillableTooltip = new EventEmitter<any>();
   @ViewChild('taxesDropDown') taxesDropDown: TaxesComponent;
   sub: Subscription = new Subscription();
   constructor(private taxesStateService: TaxesStateService,) { }
@@ -24,6 +26,9 @@ export class ContractsAsideUserDeviceServiceComponent implements OnInit, OnDestr
     })
     this.sub.add(getOnTaxess);
   }
+  public setSelectedTaxes(listTaxes) {
+    this.taxesDropDown.setEditItems(listTaxes);
+  }
   getTaxes(taxes) {
     let listTaxes = [];
     this.service.taxIds.forEach(id => {
@@ -31,16 +36,20 @@ export class ContractsAsideUserDeviceServiceComponent implements OnInit, OnDestr
       if (find) listTaxes.push(find);
 
     });
-    this.taxesDropDown.setEditItems(listTaxes);
+    this.setSelectedTaxes(listTaxes);
   }
   onChangeCount(event) {
     this.service.count = event;
+  }
+  onChangeDisplayBillableTooltip() {
+    this.onDisplayBillableTooltip.emit(null);
   }
   remove() {
     this.onRemove.emit(null);
   }
   onTaxesChange(data) {
     this.service.taxIds = data.map(item => item.id);
+    this.onChangeDisplayBillableTooltip();
   }
   checkName() {
     this.onCheckName.emit(null);

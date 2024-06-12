@@ -340,7 +340,7 @@ export class ServiceAgreement {
             count: 0,
             id: uuidv4(),
             name: "",
-            rate: 5,
+            rate: 0,
             taxIds: []
         }
     }

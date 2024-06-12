@@ -36,3 +36,20 @@
 .qt-table-modern__row {
   min-width: calc(100% + 2px);
 }
+.multi-assign-user {
+  position: absolute;
+  top: -12px;
+}
+
+.multi-assign-user-container {
+  position: relative;
+}
+
+.more-users {
+  position: absolute;
+  top: -12px;
+  background: $gray-100;
+  color: $gray-600;
+  font-size: 12px;
+  font-weight: 600;
+}

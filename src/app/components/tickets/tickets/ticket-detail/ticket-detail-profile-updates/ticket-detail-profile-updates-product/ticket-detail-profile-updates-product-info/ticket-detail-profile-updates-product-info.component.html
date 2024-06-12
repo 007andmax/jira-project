@@ -101,12 +101,22 @@
             </div>
         </div>
         <div class="qt-df qt-ai-c qt-jc-sb qt-mt-8">
-            <div class="ticket-updates__ticket-price qt-fs-0">
+            <div class="ticket-updates__ticket-price qt-fs-0 qt-df qt-a">
                 <span>Serial number -</span>
-                <span [textContent]="product.serialNumber"></span>
+                <div
+                    class="ellipsis serial-number"
+                    [textContent]="product.serialNumber"
+                ></div>
+                <i
+                    *ngIf="product.serialNumber && product.serialNumber.length > 19"
+                    class="icon__help default-services-page__question-icon qt-sz-12 qt-ic-c qt-ml-8"
+                    placement="top"
+                    [ngbTooltip]="product.serialNumber"
+                ></i>
             </div>
             <div class="qt-ml-16 qt-df qt-ai-c">
                 <app-tech-users
+                    *ngIf="listTechUsers.length > 0"
                     [isDisabled]="isBlockChange"
                     [type]="'DETAIL_TICKET'"
                     [editMode]="true"

@@ -49,7 +49,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
   setActiveTab = "company";
   private tagId: string;
   public loading = true;
-  dtOptions: DataTables.Settings = {
+  dtOptions: any = {
     searching: false,
     paging: false,
     info: false

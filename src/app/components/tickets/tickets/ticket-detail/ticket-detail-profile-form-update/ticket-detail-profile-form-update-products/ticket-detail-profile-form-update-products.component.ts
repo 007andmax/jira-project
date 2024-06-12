@@ -101,7 +101,6 @@ export class TicketDetailProfileFormUpdateProductsComponent implements OnInit, O
     this.currentProduct.setTexes(item);
   }
   public addProduct() {
-    console.log("this.currentProduct", this.currentProduct);
     this.addedProductList.push(new TicketProfileFormProduct(JSON.parse(JSON.stringify(this.currentProduct))));
     this.initCurrentProduct();
     this.productDP.clear();

@@ -43,7 +43,7 @@
             #taxes
             [isLabel]="false"
             [isAdd]="false"
-            [isDisabled]="service.taxesForSingleItem && service.taxesForSingleItem.length > 0"
+            [isDisabled]="service.taxes && service.taxes.length > 0"
             (taxesChange)="onTaxesChange($event)"
         ></app-taxes>
     </td>

@@ -27,7 +27,5 @@ import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-n
         DecimalNumberModule
     ],
     exports: [ContractsAsideUserDeviceServiceComponent]
-
-
 })
 export class ContractsAsideUserDeviceServiceModule { }

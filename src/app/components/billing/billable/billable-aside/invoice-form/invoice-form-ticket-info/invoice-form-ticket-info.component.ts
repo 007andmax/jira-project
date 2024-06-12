@@ -29,8 +29,8 @@ export class InvoiceFormTicketInfoComponent implements OnInit {
 
   }
   getServiceTaxes(service) {
-    if (service.taxesForSingleItem.length > 0) return this.getSelectedTaxes(service.taxesForSingleItem);
-    if (service.taxesForSingleItem.length == 0) return this.getSelectedTaxes(service.taxes || []);
+    if (service.taxes.length > 0) return this.getSelectedTaxes(service.taxes);
+    if (service.taxes.length == 0) return this.getSelectedTaxes(service.taxes || []);
   }
   getSelectedTaxes(taxes) {
     return taxes.map(item => {

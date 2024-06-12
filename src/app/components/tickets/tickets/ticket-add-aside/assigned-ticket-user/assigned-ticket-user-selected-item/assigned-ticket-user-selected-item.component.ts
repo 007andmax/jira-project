@@ -10,6 +10,7 @@ import { TechUserItem } from 'src/app/components/shared/tech-users/class/tech-us
 })
 export class AssignedTicketUserSelectedItemComponent implements OnInit {
   @Input() user: TechUserItem;
+  @Input() type: string;
   listColorNoAvatar = [];
   constructor(public ticketsListService: TicketsListService,) { }
 

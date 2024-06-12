@@ -36,7 +36,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     public quoteStateService: QuoteStateService,
     private permissionsService: PermissionsService,
-    private inventoryStateService: InventoryStateService) { }
+    public inventoryStateService: InventoryStateService) { }
 
 
   /**
@@ -46,7 +46,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
     if (this.type === 'QUOTE') this.classAddProduct = 'quote-add-product';
     if (this.type === 'REPORT') this.classAddProduct = 'report-add-product';
     if (this.type === 'RECURRING-TICKET') this.classAddProduct = 'recurring-ticket-add-product';
-    if (this.type === 'TICKET') this.classAddProduct = 'ticket-add-product';
+    if (this.type === 'TICKET' || this.type === 'PRODUCTS_TICKET') this.classAddProduct = 'ticket-add-product';
+    if (this.type !== 'RECURRING-TICKET' && this.type !== 'PRODUCTS_TICKET') this.inventoryStateService.getProducts();
     if (this.inventoryStateService.getListProducts().length > 0) this.itemList = this.inventoryStateService.getListProducts();
     let getOnProducts = this.inventoryStateService.getOnProducts().subscribe(data => {
       this.itemList = data;

@@ -30,7 +30,7 @@ export class SoftwareComponent implements OnInit, OnDestroy {
   deviceDetail: any = {};
   search = '';
   DateFormat = CONFIGCONSTANTS.DateFormat;
-  dtOptions: DataTables.Settings = {
+  dtOptions: any = {
     searching: false,
     paging: false,
     info: false,
