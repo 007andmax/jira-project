@@ -45,7 +45,6 @@ export class DocumentsTemplatesInfoComponent implements OnInit, OnDestroy {
   preview(e) {
     e.preventDefault();
     e.stopPropagation();
-    console.log("e.target.tagName", e.target.tagName);
     if (e.target.tagName == "IMG") this.previewAttachmentStateService.onInitPreview(e.target.getAttribute("src"));
   }
   goToCloneDocument() {

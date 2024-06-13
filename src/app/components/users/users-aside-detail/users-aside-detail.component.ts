@@ -75,7 +75,6 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
         if (item.userRolesDP) item.userRolesDP.clearWithOutChanges();
       })
       this.user.onEdit(data);
-      console.log("this.user", this.user);
       if (this.customerPortalStateService.checkShowTabTicketsAsideUserDetail(this.usersStateService.getCurrentUser(), this.user)) {
         this.tab = 'tickets';
       } else {
@@ -217,6 +216,9 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
   }
   public trackByIndex(index, item) {
     return index;
+  }
+  public trackById(index, item) {
+    return item.id;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
