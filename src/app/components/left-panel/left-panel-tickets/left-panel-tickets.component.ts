@@ -51,6 +51,7 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    console.log("this.activePage", this.activePage);
     this.listType = this.ticketsStateService.getListType();
     this.ticketsStateService.getOnChangeLeftPanelFilter().subscribe(data => {
       this.listType = data;
@@ -82,9 +83,10 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
       if (data) this.open = false;
     })
     this.usersStateService.getOnGetCurrentuser().subscribe(data => {
-      if (!this.isGetGlobalFilters && !this.customerPortalStateService.isCustomerPortal) this.getGLobalFilters();
+      if (!this.isGetGlobalFilters && !this.customerPortalStateService.isCustomerPortal && this.activePage == 'new-tickets') this.getGLobalFilters();
     })
     this.leftPanelStateService.onChangeState.subscribe(state => {
+      console.log("state", state);
       if (!this.leftPanelService.isTicketsPage(state)) this.open = false
       if (this.leftPanelService.isTicketsPage(state) && !this.isGetGlobalFilters && !this.customerPortalStateService.isCustomerPortal && this.usersStateService.getCurrentUser()) this.getGLobalFilters();
     })
