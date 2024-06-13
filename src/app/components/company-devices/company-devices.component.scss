@@ -68,10 +68,16 @@ app-company-devices-item {
   &__device-type {
     flex: 0 0 40px;
 
+    .icon-color {
+      background-color: transparent;
+      mask-image: unset;
+      background-size: contain;
+      background-position: center;
+    }
     .device-type-icon {
       position: relative;
-      &::before {
-        content: '';
+
+      &__status {
         width: 10px;
         height: 10px;
         position: absolute;
@@ -80,10 +86,11 @@ app-company-devices-item {
         border: solid 2px $white;
         background-color: $green-600;
         border-radius: 50%;
+        z-index: 1;
       }
       &.--ofline {
-        &::before {
-          background-color: $red-600;
+        + .device-type-icon__status {
+          background-color: $red-600
         }
       }
     }

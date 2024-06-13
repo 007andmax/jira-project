@@ -119,6 +119,9 @@
   &__no-devices-installed {
     background-image: url("/assets/img/icons/no-devices-installed.svg");
   }
+  &__phone-old {
+    background-image: url("/assets/img/icons/phone-old.svg");
+  }
   // END Color Icon
   &__assign-date {
     mask-image: url("/assets/img/icons/assign-date.svg");
@@ -442,9 +445,6 @@
   &__download-pdf {
     mask-image: url("/assets/img/icons/download-pdf.svg");
   }
-  &__add-document { // TODO check
-    background-image: url("/assets/img/icons/add-document.svg");
-  }
   &__connection {
     mask-image: url("/assets/img/icons/connection.svg");
   }
@@ -499,14 +499,20 @@
   &__links {
     mask-image: url("/assets/img/icons/links.svg");
   }
-  &__computer {
-    mask-image: url("/assets/img/icons/computer.svg");
+  &__network-switch {
+    mask-image: url("/assets/img/icons/network-switch.svg");
   }
-  &__create-template {
-    background-image: url("/assets/img/icons/create-template.svg");
+  &__add-document {
+    mask-image: url("/assets/img/icons/add-document.svg");
   }
-  &__tag-light-gray {
-    background-image: url("/assets/img/icons/tag-light-gray.svg");
+  &__router {
+    mask-image: url("/assets/img/icons/router.svg");
+  }
+  &__generic_device {
+    mask-image: url("/assets/img/icons/generic-device.svg");
+  }
+  &__tags {
+    background-image: url("/assets/img/icons/tags.svg");
   }
   &__down-arrow {
     background-image: url("/assets/img/icons/down-arrow.svg");
@@ -517,23 +523,11 @@
   &__down-arrow__sm {
     background-image: url("/assets/img/icons/down-arrow-sm.svg");
   }
-  &__printer {
-    background-image: url("/assets/img/icons/printer.svg");
-  }
-  &__switch {
-    background-image: url("/assets/img/icons/switch.svg");
-  }
   &__server {
     background-image: url("/assets/img/icons/server.svg");
   }
   &__network_device {
     background-image: url("/assets/img/icons/network_device.svg");
-  }
-  &__phone {
-    background-image: url("/assets/img/icons/phone.svg");
-  }
-  &__generic_device {
-    background-image: url("/assets/img/icons/generic_device.svg");
   }
   &__button-server--gray-500 {
     background-color: $gray-500;
@@ -548,9 +542,6 @@
   }
   &__tablet {
     background-image: url("/assets/img/icons/tablet.svg");
-  }
-  &__router {
-    background-image: url("/assets/img/icons/router.svg");
   }
   &__master-agent-badge {
     background-image: url("/assets/img/icons/master-agent-badge.svg");

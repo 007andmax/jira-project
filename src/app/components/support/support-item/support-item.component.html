@@ -74,7 +74,7 @@
                 <div
                     class="support-timeline-status__step1 qt-bg-contain"
                     [ngClass]="{'icon__computer-green' : item.status === 'CONNECTED',
-                'qt-icon icon__computer' : item.status !== 'CONNECTED'}"
+                'qt-icon icon__devices' : item.status !== 'CONNECTED'}"
                 ></div>
                 <div
                     class="support-timeline-status__line"
@@ -139,7 +139,7 @@
                 <div
                     class="support-timeline-status__step3 qt-bg-contain"
                     [ngClass]="{'icon__computer-green' : item.status === 'CONNECTED' && item.online,
-                'qt-icon icon__computer' : item.status !== 'CONNECTED' || !item.online}"
+                    'qt-icon icon__devices' : item.status !== 'CONNECTED' || !item.online}"
                 ></div>
             </div>
             <app-dynamic-tooltip

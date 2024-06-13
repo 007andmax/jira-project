@@ -36,15 +36,15 @@
         <div class="company-device-aside__header qt-df qt-ai-c qt-jc-sb">
             <div class="qt-df qt-ai-c">
                 <div
-                    class="icon qt-sz-24 qt-mr-12 qt-bg-contain"
-                    [ngClass]="{'icon__computer' : getFieldForCheckIcon() === 'workstation' || !getFieldForCheckIcon(),
+                    class="icon qt-sz-24 qt-mr-12 qt-icon"
+                    [ngClass]="{'qt-icon icon__devices' : getFieldForCheckIcon() === 'workstation' || !getFieldForCheckIcon(),
                'icon__router' : getFieldForCheckIcon() === 'router',
-            'icon__printer' : getFieldForCheckIcon() === 'printer',
-                'icon__switch' : getFieldForCheckIcon() === 'switch',
+            'icon__print' : getFieldForCheckIcon() === 'printer',
+                'qt-icon icon__network-switch' : getFieldForCheckIcon() === 'switch',
           'icon__server' : getFieldForCheckIcon() === 'server',
             'icon__tablet' : getFieldForCheckIcon() === 'tablet',
             'icon__network_device' : getFieldForCheckIcon() === 'network device',
-            'icon__phone' : getFieldForCheckIcon() === 'phone',
+            'icon__phone-old' : getFieldForCheckIcon() === 'phone',
              'icon__generic_device' : getFieldForCheckIcon() === 'generic device',
         '--offline': currentDevice && !currentDevice.online,
     '--online':currentDevice &&currentDevice.online }"

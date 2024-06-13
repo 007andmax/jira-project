@@ -15,12 +15,12 @@
         </div>
     </div>
     <div class="company-devices-table__device-type">
-        <div>
+        <div class="qt-pos-rel">
             <div
-                class="qt-ic-c qt-pointer device-type-icon qt-sz-24"
-                [ngClass]="{'qt-icon icon__computer' : device.iconName === 'workstation' || !device.iconName,
+                class="qt-ic-c qt-pointer device-type-icon qt-sz-24 qt-icon"
+                [ngClass]="{'qt-icon icon__devices' : device.iconName === 'workstation' || !device.iconName,
               'icon__tablet' : device.iconName === 'device',
-            'icon__printer' : device.iconName === 'printer',
+            'icon__print' : device.iconName === 'printer',
           'icon__server' : device.iconName === 'server',
         '--ofline': !device.online }"
                 *ngIf="customerPortalStateService.isCustomerPortal"
@@ -28,15 +28,15 @@
             <div
                 ngbDropdown
                 container="body"
-                class="qt-ic-c qt-pointer device-type-icon qt-sz-24"
-                [ngClass]="{'icon__computer' : device.getFieldForCheckIcon() === 'workstation' || !device.getFieldForCheckIcon(),
+                class="qt-ic-c qt-pointer device-type-icon qt-sz-24 qt-icon"
+                [ngClass]="{'icon__devices' : device.getFieldForCheckIcon() === 'workstation' || !device.getFieldForCheckIcon(),
                'icon__router' : device.getFieldForCheckIcon() === 'router',
-            'icon__printer' : device.getFieldForCheckIcon() === 'printer',
-                'icon__switch' : device.getFieldForCheckIcon() === 'switch',
+            'icon__print' : device.getFieldForCheckIcon() === 'printer',
+                'icon__network-switch' : device.getFieldForCheckIcon() === 'switch',
           'icon__server' : device.getFieldForCheckIcon() === 'server',
             'icon__tablet' : device.getFieldForCheckIcon() === 'tablet',
             'icon__network_device' : device.getFieldForCheckIcon() === 'network device',
-            'icon__phone' : device.getFieldForCheckIcon() === 'phone',
+            'icon__phone-old icon-color' : device.getFieldForCheckIcon() === 'phone',
              'icon__generic_device' : device.getFieldForCheckIcon() === 'generic device',
         '--ofline': !device.online }"
                 ngbDropdownToggle
@@ -55,7 +55,7 @@
                             ngbTooltip="Workstation"
                             ngbDropdownItem
                         >
-                            <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 qt-icon icon__computer"></i>
+                            <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 qt-icon icon__devices"></i>
                         </li>
                         <li
                             (click)="setIcon('router')"
@@ -63,7 +63,7 @@
                             ngbTooltip="Router"
                             ngbDropdownItem
                         >
-                            <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__router"></i>
+                            <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 qt-icon icon__router"></i>
                         </li>
                         <li
                             (click)="setIcon('printer')"
@@ -71,7 +71,7 @@
                             ngbTooltip="Printer"
                             ngbDropdownItem
                         >
-                            <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__printer"></i>
+                            <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 qt-icon icon__print"></i>
                         </li>
                         <li
                             (click)="setIcon('switch')"
@@ -79,7 +79,7 @@
                             ngbTooltip="Switch"
                             ngbDropdownItem
                         >
-                            <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__switch"></i>
+                            <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 qt-icon icon__network-switch"></i>
                         </li>
                         <li
                             (click)="setIcon('server')"
@@ -111,7 +111,7 @@
                             ngbTooltip="Phone"
                             ngbDropdownItem
                         >
-                            <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__phone"></i>
+                            <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__phone-old"></i>
                         </li>
                         <li
                             (click)="setIcon('generic device')"
@@ -119,11 +119,12 @@
                             ngbTooltip="Generic device"
                             ngbDropdownItem
                         >
-                            <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__generic_device"></i>
+                            <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 qt-icon icon__generic_device"></i>
                         </li>
                     </ul>
                 </div>
             </div>
+          <div class="device-type-icon__status"></div>
         </div>
     </div>
     <div class="company-devices-table__device-name">

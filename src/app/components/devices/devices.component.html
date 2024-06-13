@@ -254,7 +254,7 @@
             icon__computer:
             asset.iconName === 'Workstation' || !asset.iconName,
             icon__tablet: asset.iconName === 'Networking Hardware',
-            icon__printer: asset.iconName === 'Printer',
+            icon__print: asset.iconName === 'Printer',
             icon__server: asset.iconName === 'Server',
             icon__documents: asset.iconName !== 'Workstation' || asset.iconName !== 'Networking Hardware' || asset.iconName !== 'Printer' || asset.iconName !== 'Server',
             '--ofline': !asset.online
@@ -281,7 +281,7 @@
                         hardwar.Name === 'Workstation' || !hardwar.Name,
                       icon__tablet:
                         hardwar.Name === 'Networking Hardware',
-                      icon__printer: hardwar.Name === 'Printer',
+                      icon__print: hardwar.Name === 'Printer',
                       icon__server: hardwar.Name === 'Server',
                       icon__documents: hardwar.Name !== 'Workstation' || hardwar.Name !== 'Networking Hardware' || hardwar.Name !== 'Printer' || hardwar.Name !== 'Server'
                     }"
@@ -611,7 +611,7 @@
                         [ngClass]="{ icon__computer:
               assetData.iconName === 'Workstation' || !assetData.iconName,
             icon__tablet: assetData.iconName === 'Networking Hardware',
-            icon__printer: assetData.iconName === 'Printer',
+            icon__print: assetData.iconName === 'Printer',
             icon__server: assetData.iconName === 'Server',
             icon__documents: assetData.iconName !== 'Workstation' || assetData.iconName !== 'Networking Hardware' || assetData.iconName !== 'Printer' || assetData.iconName !== 'Server',
             '--offline': !assetData.online,
@@ -622,11 +622,11 @@
             <div class="company-device-aside__header qt-df qt-ai-c qt-jc-sb">
                 <div class="qt-df qt-ai-c">
                     <div
-                        class="icon qt-sz-24 qt-mr-12"
+                        class="icon qt-sz-24 qt-mr-12 qt-icon"
                         [ngClass]="{ icon__computer:
             assetData.iconName === 'Workstation' || !assetData.iconName,
           icon__tablet: assetData.iconName === 'Networking Hardware',
-          icon__printer: assetData.iconName === 'Printer',
+          icon__print: assetData.iconName === 'Printer',
           icon__server: assetData.iconName === 'Server',
           icon__documents: assetData.iconName !== 'Workstation' || assetData.iconName !== 'Networking Hardware' || assetData.iconName !== 'Printer' || assetData.iconName !== 'Server',
           '--offline': !assetData.online,
