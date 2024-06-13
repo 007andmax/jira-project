@@ -21,7 +21,7 @@ export class LeftPanelReportsComponent implements OnInit {
     private permissionsService: PermissionsService) { }
 
   ngOnInit() {
-    this.list.push(new ReportsLeftMenuItem("icon__sales", "SALES", [new ReportsLeftMenuItemReport('Product sales report', 'byProducts'),
+    this.list.push(new ReportsLeftMenuItem("", "SALES", [new ReportsLeftMenuItemReport('Product sales report', 'byProducts'),
     new ReportsLeftMenuItemReport('Customer sales report', 'byCustomers')], 'VIEW_SALES_REPORT'));
     this.list.push(new ReportsLeftMenuItem("", "TAXES", [new ReportsLeftMenuItemReport('Tax report', 'byTaxes')], 'VIEW_TAXES_REPORT'));
     this.list.push(new ReportsLeftMenuItem("", "COMMISSIONS", [new ReportsLeftMenuItemReport('Common report', 'common-commissions'),
