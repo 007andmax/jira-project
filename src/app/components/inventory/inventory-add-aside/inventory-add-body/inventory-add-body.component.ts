@@ -30,6 +30,7 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
   @ViewChild('glNumberSelect') glNumberSelect: DropDownComponent;
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
   @ViewChild('suppliersSelect') suppliersSelect: DropDownComponent;
+  @ViewChild('typeSelect') typeSelect: DropDownComponent;
   @Output() onClose: EventEmitter<any> = new EventEmitter();
   @Input() class: string;
   //opened: boolean = false;
@@ -212,6 +213,7 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
     this.taxesDp.close();
     this.elRef.nativeElement.querySelector('#inventory-description').value = '';
     this.validate = new InventoryValidate();
+    this.typeSelect.clearWithOutChanges();
     this.onClose.emit(null);
     this.cd.detectChanges();
   }

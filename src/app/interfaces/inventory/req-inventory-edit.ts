@@ -11,4 +11,5 @@ export interface reqInventoryEdit {
     categoryId: string;
     active: boolean;
     glNumber: { id: string };
+    productType: { id: string };
 }

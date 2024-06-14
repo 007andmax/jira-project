@@ -34,6 +34,7 @@ export class InventoryItem {
             this.billable = data.billable;
             this.taxIds = data.taxIds;
             this.active = data.active;
+            this.productType = data.productType;
             if (this.cost) this.cost_str = this.cost.toFixed(2);
             if (this.sale) this.sale_str = this.sale.toFixed(2);
         }
@@ -56,6 +57,7 @@ export class InventoryItem {
             active: this.active,
             categoryId: (this.category) ? this.category.id : null,
             glNumber: (this.glNumber && this.glNumber.id) ? { id: this.glNumber.id } : null,
+            productType: this.productType
         }
         return item;
     }
@@ -75,6 +77,7 @@ export class InventoryItem {
             active: this.active,
             categoryId: (this.category) ? this.category.id : null,
             glNumber: (this.glNumber && this.glNumber.id) ? { id: this.glNumber.id } : null,
+            productType: this.productType
         }
         return item;
     }
