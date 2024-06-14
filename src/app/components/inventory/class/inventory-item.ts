@@ -19,6 +19,7 @@ export class InventoryItem {
     markup: number = 0;
     active: boolean = true;
     isEdit: boolean = false;
+    productType: any;
     constructor(data = null) {
         if (data != null) {
             this.versionedId = data.versionedId;
@@ -36,6 +37,9 @@ export class InventoryItem {
             if (this.cost) this.cost_str = this.cost.toFixed(2);
             if (this.sale) this.sale_str = this.sale.toFixed(2);
         }
+    }
+    public setProductType(data) {
+        this.productType = data;
     }
     public setIsEdit(data) {
         this.isEdit = data;

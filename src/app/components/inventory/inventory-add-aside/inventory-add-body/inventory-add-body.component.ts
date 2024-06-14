@@ -17,6 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
+import { ProductType } from 'src/app/components/setting/products-settings/class/product-type';
 
 @Component({
   selector: 'app-inventory-add-body',
@@ -41,7 +42,7 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
   selectedItem: any;
   categories: Array<CategoryProduct> = [];
   validate: InventoryValidate = new InventoryValidate();
-
+  listTypes: Array<ProductType> = [];
   constructor(private inventoryStateService: InventoryStateService,
     private taxesStateService: TaxesStateService,
     private glNumberStateService: GlNumberStateService,
@@ -55,6 +56,17 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
     private glNumberService: GlNumberService) { }
 
   ngOnInit() {
+    if (this.inventoryStateService.getListTypes().length === 0) {
+      this.inventoryStateService.onInitGetServiceTypeList();
+    } else {
+      this.listTypes = this.inventoryStateService.getListTypes().sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
+        1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
+    }
+    let onGetServiceType = this.inventoryStateService.onGetListType.subscribe(data => {
+      this.listTypes = data.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
+        1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));;
+    })
+    this.sub.add(onGetServiceType);
     if (this.glNumberStateService.getGLNumbers().length > 0) this.glNumbers = this.sortGlNumbers(this.glNumberStateService.getGLNumbers());
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
       this.glNumbers = this.sortGlNumbers(data);
@@ -81,7 +93,9 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
     this.sub.add(getOnCategries);
     this.cd.detectChanges();
   }
-
+  onSelectProuctType(data) {
+    this.inventory.setProductType(data ? { id: data.id } : null);
+  }
   onCheckILC() {
     this.productService.validateProductILC(this.inventory.ilc, '').subscribe((data: any) => {
       this.validate.resetILCIsExist();
