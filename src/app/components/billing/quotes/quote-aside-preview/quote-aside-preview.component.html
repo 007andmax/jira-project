@@ -51,21 +51,25 @@
                 <div class="qt-sz-20 qt-icon icon__remove"></div>
             </div>
             <div
-                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon qt-icon icon__billing"
+                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon qt-df qt-jc-c qt-ai-c"
                 *ngIf="checkStatus(quote, ['APPROVED']) && !customerPortalStateService.isCustomerPortal"
                 (click)="convertToInvoice()"
                 placement="top"
                 container="body"
                 ngbTooltip="Convert to Invoice"
-            ></div>
+            >
+              <div class="qt-icon icon__billing qt-sz-20"></div>
+            </div>
             <div
-                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon qt-icon icon__ticket"
+                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon qt-df qt-ai-c qt-jc-c"
                 *ngIf="checkStatus(quote, ['APPROVED']) && !customerPortalStateService.isCustomerPortal"
                 (click)="convertToTicket()"
                 placement="top"
                 container="body"
                 ngbTooltip="Convert to Ticket"
-            ></div>
+            >
+              <div class="qt-icon icon__ticket qt-sz-20"></div>
+            </div>
             <div
                 class="qt-icon icon__close qt-sz-24 qt-pointer qt-ic-c "
                 (click)="close()"

@@ -3,15 +3,19 @@
         <div class="qt-aside-modern__header-title">Payment Detail</div>
         <div class="qt-df qt-ai-c">
             <div
-                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon qt-icon icon__edit"
+                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon qt-df qt-ai-c qt-jc-c"
                 *ngIf="!payment.refundMethod && !customerPortalStateService.isCustomerPortal"
                 (click)="showEdit()"
-            ></div>
+            >
+              <div class="qt-icon icon__edit qt-sz-20"></div>
+            </div>
             <div
-                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__refund-payment"
+                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon qt-df qt-ai-c qt-jc-c"
                 *ngIf="!payment.refundMethod && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')"
                 (click)="showRefund()"
-            ></div>
+            >
+              <div class="icon__refund-payment qt-sz-20"></div>
+            </div>
             <div
                 class="qt-circle qt-bg-white qt-mr-16 header-circle-icon qt-sz-32 qt-df qt-ai-c qt-jc-c pointer"
                 (click)="deletePayment()"

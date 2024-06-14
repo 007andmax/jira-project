@@ -6,21 +6,25 @@
         <div class="qt-aside-modern__header-title">User Detail</div>
         <div class="qt-df qt-ai-c">
             <div
-                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon qt-icon icon__edit"
+                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon qt-df qt-jc-c qt-ai-c"
                 (click)="editUser()"
                 placement="top"
                 container="body"
                 ngbTooltip="Edit"
                 *ngIf="getPermissions('EDIT_USERS')"
-            ></div>
+            >
+              <div class="qt-icon icon__edit qt-sz-20"></div>
+            </div>
             <div
-                class="qt-sz-32 qt-circle qt-bg-white qt-mr-16 header-circle-icon qt-icon icon__email-send qt-mr-16 pointer"
+                class="qt-sz-32 qt-circle qt-bg-white qt-mr-16 header-circle-icon qt-df qt-jc-c qt-ai-c qt-mr-16 pointer"
                 (click)="showAsideForDraftEmail()"
                 placement="top"
                 container="body"
                 [ngbTooltip]="'Draft Email'"
                 *ngIf="!customerPortalStateService.isCustomerPortal"
-            ></div>
+            >
+              <div class="qt-icon icon__email-send qt-sz-20"></div>
+            </div>
             <div
                 class="qt-icon icon__close qt-aside-modern__header-close"
                 (click)="close()"

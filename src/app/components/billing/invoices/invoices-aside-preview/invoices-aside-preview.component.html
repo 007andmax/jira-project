@@ -71,13 +71,15 @@
                 <div class="qt-icon icon__subscription qt-sz-20"></div>
             </div>
             <div
-                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__refund-payment"
+                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon qt-df qt-ai-c qt-jc-c"
                 *ngIf="invoiceProfile.paidOn && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')"
                 (click)="refundPayments()"
                 placement="top"
                 ngbTooltip="Refund payment"
                 container="body"
-            ></div>
+            >
+              <div class="icon__refund-payment qt-sz-20"></div>
+            </div>
             <div
                 class="qt-icon icon__close qt-aside-modern__header-close"
                 (click)="close()"

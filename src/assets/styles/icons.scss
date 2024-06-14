@@ -511,8 +511,20 @@
   &__generic_device {
     mask-image: url("/assets/img/icons/generic-device.svg");
   }
+  &__server {
+    mask-image: url("/assets/img/icons/server.svg");
+  }
+  &__tablet {
+    mask-image: url("/assets/img/icons/tablet.svg");
+  }
+  &__network_device {
+    mask-image: url("/assets/img/icons/network_device.svg");
+  }
+  &__wifi { // TODO CHECK
+    background-image: url("/assets/img/icons/wifi-network.svg");
+  }
   &__tags {
-    background-image: url("/assets/img/icons/tags.svg");
+    mask-image: url("/assets/img/icons/tags.svg");
   }
   &__down-arrow {
     background-image: url("/assets/img/icons/down-arrow.svg");
@@ -522,12 +534,6 @@
   }
   &__down-arrow__sm {
     background-image: url("/assets/img/icons/down-arrow-sm.svg");
-  }
-  &__server {
-    background-image: url("/assets/img/icons/server.svg");
-  }
-  &__network_device {
-    background-image: url("/assets/img/icons/network_device.svg");
   }
   &__button-server--gray-500 {
     background-color: $gray-500;
@@ -539,9 +545,6 @@
     mask-repeat: no-repeat;
     -webkit-mask-size: contain;
     mask-size: contain;
-  }
-  &__tablet {
-    background-image: url("/assets/img/icons/tablet.svg");
   }
   &__master-agent-badge {
     background-image: url("/assets/img/icons/master-agent-badge.svg");
@@ -566,9 +569,6 @@
   }
   &__software-image {
     background-image: url("/assets/img/icons/software-image.svg");
-  }
-  &__wifi {
-    background-image: url("/assets/img/icons/wifi-network.svg");
   }
   &__hosting {
     background-image: url("/assets/img/icons/hosting.svg");
