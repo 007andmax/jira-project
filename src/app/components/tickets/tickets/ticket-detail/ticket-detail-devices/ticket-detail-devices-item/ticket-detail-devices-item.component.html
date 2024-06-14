@@ -9,16 +9,16 @@
             [ngClass]="{'--ofline': !device.online,'device-type-icon':!device.isCustom}"
         >
             <div
+                class="qt-icon qt-za-16 qt-sz-16"
                 [ngClass]="{'icon__devices' : device.getFieldForCheckIcon() === 'workstation' || !device.getFieldForCheckIcon(),
                'icon__router' : device.getFieldForCheckIcon() === 'router',
             'icon__print' : device.getFieldForCheckIcon() === 'printer',
-                'qt-icon icon__network-switch' : device.getFieldForCheckIcon() === 'switch',
+                'icon__network-switch' : device.getFieldForCheckIcon() === 'switch',
           'icon__server' : device.getFieldForCheckIcon() === 'server',
             'icon__tablet' : device.getFieldForCheckIcon() === 'tablet',
             'icon__network_device' : device.getFieldForCheckIcon() === 'network device',
             'icon__phone-old' : device.getFieldForCheckIcon() === 'phone',
              'icon__generic_device' : device.getFieldForCheckIcon() === 'generic device'}"
-                class="qt-za-16 qt-sz-16 qt-icon"
             >
             </div>
         </div>
