@@ -40,7 +40,7 @@
                 [init]="item.isInitEdit"
                 [ngClass]="'edit-crm-container-' + i"
                 [class]="'.edit-crm-container-' + i"
-                (onOutSide)="onEditIndustry(item,$event)"
+                (onOutSide)="onEditType(item,$event)"
             >
                 <div class="tab-pane__table-cell tab-pane__table-checkboxes">
                     <label class="qt-checkbox">
@@ -62,9 +62,9 @@
                         placeholder="Enter Name Category"
                         [(ngModel)]="item.title"
                         appKeyUpEnter
-                        (onChange)="onEditIndustry(item,$event)"
-                        maxlength="30"
-                        (input)="item.onInitEdit(true);item.checkDublicate(industryList)"
+                        (onChange)="onEditType(item,$event)"
+                        maxlength="100"
+                        (input)="item.onInitEdit(true);item.checkDublicate(list)"
                     >
                     <mat-error
                         class="qt-tooltip-error"

@@ -44,6 +44,18 @@ export class ProductService {
   /**
   * Get products categories
   */
+  public editProductType(id, data) {
+    return this.http.put(`${this.apiUrl}products/types/${id}`, { title: data }).pipe(
+      tap(data => {
+        this.toastrService.success("The product type has been successfully updated");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+
+  /**
+  * Get products categories
+  */
   public getCategories() {
     return this.http.get(`${this.apiUrl}products/autocompleteList`).pipe(map((data: any) => data.map(item => new CategoryProductitem(item))));
   }
