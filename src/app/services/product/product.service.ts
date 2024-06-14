@@ -32,9 +32,29 @@ export class ProductService {
   /**
    * Get products categories
    */
+  public addProductType(data) {
+    return this.http.post(`${this.apiUrl}products/types`, { title: data }).pipe(
+      tap(data => {
+        this.toastrService.success("The new product type has been successfully created");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+
+  /**
+  * Get products categories
+  */
   public getCategories() {
     return this.http.get(`${this.apiUrl}products/autocompleteList`).pipe(map((data: any) => data.map(item => new CategoryProductitem(item))));
   }
+
+  /**
+ * Get products categories
+ */
+  public getProductsTypes() {
+    return this.http.get(`${this.apiUrl}products/types/filtered?titleSortDirection=desc&page=0&size=1000`);
+  }
+
 
   /**
   * validate product name

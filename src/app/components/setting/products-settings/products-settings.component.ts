@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { forkJoin, of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -11,6 +11,7 @@ import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { CategoryProductSettings } from './class/category-product-settings';
 import { ProductsCategoryFilter } from './class/products-category-filter';
+import { ProductsSettingsTypeComponent } from './products-settings-type/products-settings-type.component';
 
 @Component({
   selector: 'products-settings',
@@ -25,6 +26,7 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
   categoriesProducts: Array<CategoryProductSettings> = [];
   sub: Subscription = new Subscription();
   glNumbers: Array<GlNumber> = [];
+  @ViewChild("productType") productType: ProductsSettingsTypeComponent;
   constructor(private inventoryStateService: InventoryStateService,
     private confirmStateService: ConfirmStateService,
     private productService: ProductService,
@@ -55,6 +57,11 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
       this.glNumbers = this.sortGlNumbers(data);
     })
+  }
+  parseAddText() {
+    if (this.activeTab === "productType") return "Add Type";
+    if (this.activeTab === "productCategories") return "Add category";
+    return "";
   }
   private sortGlNumbers(data) {
     this.loading = false;
@@ -102,7 +109,10 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
   }
   create() {
     if (this.activeTab === "productCategories") this.showAddCategory = true;
-
+    if (this.activeTab === "productType") this.productType.toggleShowAdd(true);
+  }
+  setTab(data) {
+    this.activeTab = data['nextId'];
   }
   onRemoveCategoriesProduct() {
     forkJoin(this.inventoryStateService.getListCategoriesForRemove().map(item => this.productService.removeCategory(item.id).pipe(map((res) => res),

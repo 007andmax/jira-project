@@ -11,11 +11,15 @@ import { MatFormFieldModule } from '@angular/material';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 import { GlNumbersDropDownModule } from '../../inventory/gl-numbers-drop-down/gl-numbers-drop-down.module';
+import { ProductsSettingsTypeComponent } from './products-settings-type/products-settings-type.component';
+import { AddProductTypeComponent } from './add-product-type/add-product-type.component';
 
 @NgModule({
     declarations: [
         ProductsSettingsComponent,
-        AddCategoryProductComponent
+        AddCategoryProductComponent,
+        ProductsSettingsTypeComponent,
+        AddProductTypeComponent
     ],
     imports: [
         CommonModule,

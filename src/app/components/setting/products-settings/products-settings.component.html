@@ -21,7 +21,7 @@
                     (click)="create()"
                 >
                     <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
-                    Add category
+                    <span [textContent]="parseAddText()"></span>
                 </a>
             </div>
         </div>
@@ -34,6 +34,7 @@
         <ngb-tabset
             #tabset="ngbTabset"
             [destroyOnHide]="false"
+            (tabChange)="setTab($event)"
         >
             <ngb-tab
                 title="Product Category"
@@ -191,6 +192,14 @@
                             </div>
                         </div>
                     </div>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab
+                title="Product Type"
+                id="productType"
+            >
+                <ng-template ngbTabContent>
+                    <app-products-settings-type #productType></app-products-settings-type>
                 </ng-template>
             </ngb-tab>
         </ngb-tabset>
