@@ -52,9 +52,9 @@
                 #performerTooltip
             ></app-dynamic-tooltip>
             <div
-                class="support-timeline-status__step1 qt-fs-0"
-                [ngClass]="{'icon__monitor-green' : item.status === 'CONNECTED',
-                'icon__monitor' : item.status !== 'CONNECTED'}"
+                class="support-timeline-status__step1 qt-fs-0 qt-icon icon__monitor"
+                [ngClass]="{'qt-icon__green-600' : item.status === 'CONNECTED',
+                'qt-icon__gray-500' : item.status !== 'CONNECTED'}"
                 (mouseenter)="performerTooltip.show($event.target)"
                 (mouseleave)="performerTooltip.hide()"
             ></div>
@@ -117,9 +117,9 @@
                 #userNameTooltip
             ></app-dynamic-tooltip>
             <div
-                class="support-timeline-status__step3 qt-fs-0"
-                [ngClass]="{'icon__monitor-green' : item.status === 'CONNECTED' && item.online,
-                'icon__monitor' : item.status !== 'CONNECTED' || !item.online}"
+                class="support-timeline-status__step3 qt-fs-0 qt-icon icon__monitor"
+                [ngClass]="{'qt-icon__green-600' : item.status === 'CONNECTED' && item.online,
+                'qt-icon__gray-500' : item.status !== 'CONNECTED' || !item.online}"
                 (mouseenter)="userNameTooltip.show($event.target)"
                 (mouseleave)="userNameTooltip.hide()"
             ></div>

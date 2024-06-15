@@ -264,7 +264,7 @@
                 class="qt-df qt-ai-c qt-pointer"
                 (click)="openAside('UPDATES')"
             >
-                <div class="icon__updates qt-ic-c qt-mr-6 qt-sz-16"></div>
+                <div class="update-label-yellows qt-ic-c qt-mr-6 qt-sz-16"></div>
                 <div>Updates</div>
             </div>
         </div>
@@ -277,7 +277,7 @@
             Device Detail
         </ng-template>
         <div
-            class="qt-ic-c qt-icon icon__go-to qt-pointer qt-sz-16"
+            class="qt-ic-c qt-icon icon__external-link qt-pointer qt-sz-16"
             placement="top"
             *ngIf="device.agentId && !customerPortalStateService.isCustomerPortal"
             [ngbTooltip]="tipDeviceDetail"

@@ -369,9 +369,13 @@
         }
       }
       &.subheader-item-updates {
-        background-image: url(/assets/img/icons/updates-gray.svg);
+        mask-image: url(/assets/img/icons/update.svg);
+        background-color: $gray-500;
+        mask-position: center;
+        mask-repeat: no-repeat;
+        mask-size: contain;
         &.--active {
-          background-image: url(/assets/img/icons/updates.svg);
+          background-color: $blue-light-600;
         }
       }
       &.--active {

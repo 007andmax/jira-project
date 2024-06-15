@@ -21,7 +21,7 @@
   background-image: url("/assets/img/icons/billable.svg");
 }
 .no-valid-label {
-  background: url("/assets/img/icons/update.svg") no-repeat;
+  background: url("/assets/img/icons/update-label-yellow.svg") no-repeat;
   display: block;
   width: 44px;
   height: 20px;
@@ -121,6 +121,24 @@
   }
   &__phone-old {
     background-image: url("/assets/img/icons/phone-old.svg");
+  }
+  &__network {
+    background-image: url("/assets/img/icons/network.svg");
+  }
+  &__networkcard {
+    background-image: url("/assets/img/icons/networkcard.svg");
+  }
+  &__software-image {
+    background-image: url("/assets/img/icons/software-image.svg");
+  }
+  &__harddisk {
+    background-image: url("/assets/img/icons/harddisk.svg");
+  }
+  &__update-label-yellow {
+    background-image: url("/assets/img/icons/update-label-yellow.svg");
+  }
+  &__motherboard {
+    background-image: url("/assets/img/icons/motherboard.svg");
   }
   // END Color Icon
   &__assign-date {
@@ -523,96 +541,6 @@
   &__wifi { // TODO CHECK
     background-image: url("/assets/img/icons/wifi-network.svg");
   }
-  &__tags {
-    mask-image: url("/assets/img/icons/tags.svg");
-  }
-  &__down-arrow {
-    background-image: url("/assets/img/icons/down-arrow.svg");
-    &--sm {
-      background-image: url("/assets/img/icons/filter-dropdown.svg");
-    }
-  }
-  &__down-arrow__sm {
-    background-image: url("/assets/img/icons/down-arrow-sm.svg");
-  }
-  &__button-server--gray-500 {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/button-server.svg");
-    mask-image: url("/assets/img/icons/button-server.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
-  }
-  &__master-agent-badge {
-    background-image: url("/assets/img/icons/master-agent-badge.svg");
-  }
-  &__agent {
-    background-image: url("/assets/img/icons/agent.svg");
-  }
-  &__quick-connect {
-    background-image: url("/assets/img/icons/quick-connect.svg");
-  }
-  &__go-to {
-    mask-image: url("/assets/img/icons/go-to.svg");
-  }
-  &__network {
-    background-image: url("/assets/img/icons/network.svg");
-  }
-  &__networkcard {
-    background-image: url("/assets/img/icons/networkcard.svg");
-  }
-  &__software {
-    background-image: url("/assets/img/icons/software.svg");
-  }
-  &__software-image {
-    background-image: url("/assets/img/icons/software-image.svg");
-  }
-  &__hosting {
-    background-image: url("/assets/img/icons/hosting.svg");
-  }
-  &__harddisk {
-    background-image: url("/assets/img/icons/harddisk.svg");
-  }
-  &__system {
-    background-image: url("/assets/img/icons/system.svg");
-  }
-  &__updates {
-    background-image: url("/assets/img/icons/updates.svg");
-  }
-  &__restart-blue {
-    background-image: url("/assets/img/icons/restart-blue.svg");
-  }
-  &__more {
-    mask-image: url("/assets/img/icons/more.svg");
-  }
-  &__motherboard {
-    background-image: url("/assets/img/icons/motherboard.svg");
-  }
-  &__monitor {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/monitor.svg");
-    mask-image: url("/assets/img/icons/monitor.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
-  }
-  &__monitor-green {
-    background-color: $green-600;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/monitor.svg");
-    mask-image: url("/assets/img/icons/monitor.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
-  }
   &__arrow-down,
   &__arrow-down--blue-light-800 {
     background-color: $gray-500;
@@ -627,6 +555,56 @@
   }
   &__arrow-down--blue-light-800 {
     background-color: $sky-blue-800;
+  }
+  &__tags {
+    mask-image: url("/assets/img/icons/tags.svg");
+  }
+  &__down-arrow { // TODO check
+    background-image: url("/assets/img/icons/down-arrow.svg");
+    &--sm {
+      background-image: url("/assets/img/icons/filter-dropdown.svg");
+    }
+  }
+  &__down-arrow__sm { // TODO check
+    background-image: url("/assets/img/icons/down-arrow-sm.svg");
+  }
+  &__button-server--gray-500 { // TODO check
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/button-server.svg");
+    mask-image: url("/assets/img/icons/button-server.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
+  &__agent {
+    mask-image: url("/assets/img/icons/agent.svg");
+  }
+  &__quick-connect { // TODO check
+    background-image: url("/assets/img/icons/quick-connect.svg");
+  }
+  &__external-link {
+    mask-image: url("/assets/img/icons/external-link.svg");
+  }
+  &__software { // TODO check
+    background-image: url("/assets/img/icons/software.svg");
+  }
+  &__hosting {
+    mask-image: url("/assets/img/icons/hosting.svg");
+  }
+  &__system { // TODO check
+    background-image: url("/assets/img/icons/system.svg");
+  }
+  &__update {
+    mask-image: url("/assets/img/icons/update.svg");
+  }
+  &__more {
+    mask-image: url("/assets/img/icons/more.svg");
+  }
+  &__monitor {
+    mask-image: url("/assets/img/icons/monitor.svg");
   }
   &__arrow-right {
     background-image: url("/assets/img/icons/arrow-right.svg");
@@ -730,12 +708,6 @@
   &__computer-blue {
     background-image: url("/assets/img/icons/computer-blue.svg");
   }
-  &__update {
-    background-image: url("/assets/img/icons/update.svg");
-  }
-  &__update-device {
-    background-image: url("/assets/img/icons/update-device.svg");
-  }
   &__uninstall-agent {
     background-image: url("/assets/img/icons/uninstall-agent.svg");
   }
@@ -755,7 +727,7 @@
       height: 20px;
       right: -2px;
       top: -3px;
-      background-image: url("/assets/img/icons/updated.svg");
+      background-image: url("/assets/img/icons/status-green.svg");
     }
   }
   &.--alert {
