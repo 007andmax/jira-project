@@ -119,9 +119,6 @@
   &__no-devices-installed {
     background-image: url("/assets/img/icons/no-devices-installed.svg");
   }
-  &__phone-old {
-    background-image: url("/assets/img/icons/phone-old.svg");
-  }
   &__network {
     background-image: url("/assets/img/icons/network.svg");
   }
@@ -139,6 +136,21 @@
   }
   &__motherboard {
     background-image: url("/assets/img/icons/motherboard.svg");
+  }
+  &__drivers-missing {
+    background-image: url("/assets/img/icons/drivers-missing.svg");
+  }
+  &__security-update {
+    background-image: url("/assets/img/icons/security-update.svg");
+  }
+  &__virus-protection {
+    background-image: url("/assets/img/icons/virus-protection.svg");
+  }
+  &__operating-system {
+    background-image: url("/assets/img/icons/operating-system.svg");
+  }
+  &__connected-device-green {
+    background-image: url("/assets/img/icons/connected-device-green.svg");
   }
   // END Color Icon
   &__assign-date {
@@ -607,100 +619,52 @@
     mask-image: url("/assets/img/icons/monitor.svg");
   }
   &__arrow-right {
-    background-image: url("/assets/img/icons/arrow-right.svg");
-  }
-  &__up-arrow-gray-400 {
-    background-color: $gray-400;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/up-arrow.svg");
-    mask-image: url("/assets/img/icons/up-arrow.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
-  }
-  &__arrow-right-gray-400 {
-    background-color: $gray-400;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/arrow-right.svg");
     mask-image: url("/assets/img/icons/arrow-right.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
   }
   &__arrow-back {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/arrow-back.svg");
     mask-image: url("/assets/img/icons/arrow-back.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
   }
-  &__phone-gray {
-    mask-image: url("/assets/img/icons/phone-gray.svg");
+  &__phone {
+    mask-image: url("/assets/img/icons/phone.svg");
+  }
+  &__phone-old {
+    mask-image: url("/assets/img/icons/phone-old.svg");
   }
   &__collapse {
-    background-image: url("/assets/img/icons/collapse.svg");
+    mask-image: url("/assets/img/icons/minus.svg");
   }
-  &__drivers-missing {
-    background-image: url("/assets/img/icons/drivers-missing.svg");
-  }
-  &__security-update {
-    background-image: url("/assets/img/icons/security-update.svg");
-  }
-  &__virus-protection {
-    background-image: url("/assets/img/icons/virus-protection.svg");
-  }
-  &__master-agent {
+  &__master-agent { // TODO check
     background-image: url("/assets/img/icons/master-agent.svg");
   }
-  &__sidebar-blue {
+  &__sidebar-blue { // TODO check
     background-image: url("/assets/img/icons/sidebar-blue.svg");
   }
-  &__office-phone-gray {
-    background-image: url("/assets/img/icons/office-phone-gray.svg");
-  }
-  &__operating-system {
-    background-image: url("/assets/img/icons/operating-system.svg");
-  }
-  &__upload-avtar {
+  &__upload-avtar { // TODO check
     mask-image: url("/assets/img/icons/upload-photo.svg");
   }
   &__upload {
     mask-image: url("/assets/img/icons/upload.svg");
   }
-  &__notifications {
-    background-image: url("/assets/img/icons/notifications.svg");
-  }
-  &__close-round {
+  &__close-round { // TODO check
     background-image: url("/assets/img/icons/close-round.svg");
   }
-  &__key {
+  &__key { // TODO check
     mask-image: url("/assets/img/icons/key.svg");
   }
   &__copy {
     mask-image: url("/assets/img/icons/copy.svg");
   }
-  &__clone-document {
+  &__clone-document { // TODO check
     background-image: url("/assets/img/icons/clone-document.svg");
   }
-  &__ticket-support {
+  &__ticket-support { // TODO check
     mask-image: url("/assets/img/icons/ticket-support.svg");
   }
-  &__remote-access-green {
+  &__remote-access-green { // TODO check
     background-image: url("/assets/img/icons/remote-access-green.svg");
   }
-  &__remote-access-gray {
+  &__remote-access-gray { // TODO check
     mask-image: url("/assets/img/icons/remote-access-gray.svg");
-  }
-  &__connected-device-green {
-    background-image: url("/assets/img/icons/connected-device-green.svg");
   }
   &__computer-green {
     background-image: url("/assets/img/icons/computer-green.svg");
