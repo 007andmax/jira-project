@@ -224,7 +224,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
     return (value) ? parseFloat(value).toFixed(2) : '';
   }
   onSelectProuctType(data) {
-    this.inventory.setProductType(data ? { id: data.id } : null);
+    this.inventory.setProductType(data);
   }
   close() {
     this.opened = false;

@@ -171,6 +171,23 @@
         >
         </app-drop-down>
     </div>
+    <div class="products-table__gl">
+        <!-- <div [textContent]="getGlNumberName()"></div> -->
+        <app-drop-down
+            #glNumberSelect
+            [class]="['--small-padding']"
+            [list]="listTypes"
+            [placeholder]="'Select Product Type'"
+            [container]="'body'"
+            [editItem]="inventory.productType"
+            [field]="'title'"
+            uiType="dark"
+            heightInput="32px"
+            dropdownWidth="392px"
+            (onSelectedItem)="onSelectProuctType($event)"
+        >
+        </app-drop-down>
+    </div>
     <div class="products-table__menu">
         <div
             *ngIf="getPermissions('MANAGE_PRODUCTS')"

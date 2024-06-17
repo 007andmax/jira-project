@@ -16,6 +16,7 @@ import { Subscription } from 'rxjs';
 import { CategoryProduct } from 'src/app/interfaces/product/category-product';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
+import { ProductType } from '../../setting/products-settings/class/product-type';
 
 @Component({
   selector: 'app-inventory-table',
@@ -37,6 +38,7 @@ export class InventoryTableComponent implements OnInit {
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
   categories: Array<CategoryProduct> = [];
   validate: InventoryValidate = new InventoryValidate();
+  listTypes: Array<ProductType> = [];
   sub: Subscription = new Subscription();
   constructor(private permissionsService: PermissionsService,
     private inventoryStateService: InventoryStateService,
@@ -51,6 +53,15 @@ export class InventoryTableComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if (this.inventoryStateService.getListTypes().length > 0) {
+      this.listTypes = this.inventoryStateService.getListTypes().sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
+        1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
+    }
+    let onGetServiceType = this.inventoryStateService.onGetListType.subscribe(data => {
+      this.listTypes = data.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
+        1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));;
+    })
+    this.sub.add(onGetServiceType);
     if (this.glNumberStateService.getGLNumbers().length > 0) this.glNumbers = this.sortGlNumbers(this.glNumberStateService.getGLNumbers());
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
       this.glNumbers = this.sortGlNumbers(data);
@@ -182,6 +193,12 @@ export class InventoryTableComponent implements OnInit {
     return `${result["glNumber"]} - ${(result["description"] && result["description"].length > 0) ? result["description"]
       : "No description"}`;
   };
+  onSelectProuctType(data) {
+    this.inventory.setProductType(data);
+    this.inventory.setIsEdit(true);
+    this.save();
+    this.cd.markForCheck();
+  }
   onAddGlNumber(data) {
     this.glNumberService.addGlNumber(data, "").subscribe((res: any) => {
       this.inventory.glNumber = res;

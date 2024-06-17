@@ -11,11 +11,13 @@ import { ProductType } from 'src/app/components/setting/products-settings/class/
 })
 export class InventoryStateService {
   sortCategoty: CategoryProduct = null;
+
   showAsideForAdd: EventEmitter<any> = new EventEmitter();
   onEditInventory: EventEmitter<InventoryItem> = new EventEmitter();
   categoryForDelete: CategoryProduct = null;
   productForDelete: InventoryItem = null;
   onSortCategory: EventEmitter<any> = new EventEmitter();
+  onSortType: EventEmitter<any> = new EventEmitter();
   onSortActive: EventEmitter<any> = new EventEmitter();
   onGetCategories: EventEmitter<any> = new EventEmitter();
   onGetProducts: EventEmitter<any> = new EventEmitter();
@@ -163,6 +165,9 @@ export class InventoryStateService {
   public setSortCategory(data) {
     this.sortCategoty = data;
     this.onSortCategory.emit(data);
+  }
+  public setSortType(data) {
+    this.onSortType.emit(data);
   }
   public setSortActive(data) {
     this.onSortActive.emit(data);

@@ -95,7 +95,7 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
   }
   onSelectProuctType(data) {
-    this.inventory.setProductType(data ? { id: data.id } : null);
+    this.inventory.setProductType(data);
   }
   onCheckILC() {
     this.productService.validateProductILC(this.inventory.ilc, '').subscribe((data: any) => {

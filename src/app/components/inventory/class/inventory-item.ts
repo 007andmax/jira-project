@@ -57,7 +57,7 @@ export class InventoryItem {
             active: this.active,
             categoryId: (this.category) ? this.category.id : null,
             glNumber: (this.glNumber && this.glNumber.id) ? { id: this.glNumber.id } : null,
-            productType: this.productType
+            productType: this.productType ? { id: this.productType.id } : null
         }
         return item;
     }
@@ -77,7 +77,7 @@ export class InventoryItem {
             active: this.active,
             categoryId: (this.category) ? this.category.id : null,
             glNumber: (this.glNumber && this.glNumber.id) ? { id: this.glNumber.id } : null,
-            productType: this.productType
+            productType: this.productType ? { id: this.productType.id } : null
         }
         return item;
     }

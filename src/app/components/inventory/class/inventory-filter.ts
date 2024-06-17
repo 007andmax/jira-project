@@ -2,6 +2,7 @@ import { FilterListTop } from 'src/class/list/filter-list-top';
 import { InventoryItem } from './inventory-item';
 import { Company } from 'src/app/interfaces/company/company';
 import { CategoryProductitem } from 'src/class/category-product-item';
+import { ProductType } from '../../setting/products-settings/class/product-type';
 export class InventoryFilter {
     filterTop: Array<FilterListTop> = [new FilterListTop('description', 'ASC'),
     new FilterListTop('category', ''),
@@ -9,13 +10,18 @@ export class InventoryFilter {
     new FilterListTop('sale', ''),
     new FilterListTop('manufacture', ''),
     new FilterListTop('ilc', ''),
-    new FilterListTop('glNumber', '')];
+    new FilterListTop('glNumber', ''),
+    new FilterListTop('productType', '')];
     sortCategoty: CategoryProductitem = null;
+    sortType: ProductType = null;
     active: boolean = true;
     productSearchName: string = "";
     constructor() { }
     public setSortCategoty(data) {
         this.sortCategoty = data;
+    }
+    public setSortType(data) {
+        this.sortType = data;
     }
     public setActive(data) {
         this.active = data;
@@ -32,6 +38,7 @@ export class InventoryFilter {
     }
     public isFilterItem(item) {
         if (this.sortCategoty && item.category.id != this.sortCategoty.id) return false;
+        if (this.sortType && item.productType && item.productType.id != this.sortType.id) return false;
         if (item.active != this.active) return false;
         if (this.productSearchName.length > 0 && (!item.description.toLowerCase().includes(this.productSearchName.toLowerCase()) && !(item.ilc && item.ilc.toLowerCase().includes(this.productSearchName.toLowerCase())) && !item.isFindGlNumber(this.productSearchName) && !(item.manufacture && item.manufacture.toLowerCase().includes(this.productSearchName.toLowerCase())))) return false;
         return true;
@@ -93,6 +100,13 @@ export class InventoryFilter {
                     this.filterTop[index].filter = 'DESC';
                 }
             }
+            if (field === 'productType') {
+                if (sort === '' || sort === 'DESC') {
+                    this.filterTop[index].filter = 'ASC';
+                } else {
+                    this.filterTop[index].filter = 'DESC';
+                }
+            }
         }
     }
     public onFilter(reqInventory, companies, glNumbers) {
@@ -128,6 +142,10 @@ export class InventoryFilter {
                 this.onFilterGlNumber(reqInventory, glNumbers);
                 if (sort !== 'ASC') reqInventory.reverse();
             }
+            if (field === 'productType') {
+                this.onFilterProductType(reqInventory);
+                if (sort !== 'ASC') reqInventory.reverse();
+            }
         }
     }
     private getCompanyName(inventory, companies) {
@@ -158,6 +176,14 @@ export class InventoryFilter {
         reqInventory.sort((a, b) => {
             let first = (a.glNumber && a.glNumber.glNumber) ? a.glNumber.glNumber : '';
             let next = (b.glNumber && b.glNumber.glNumber) ? b.glNumber.glNumber : '';
+            return (first.toLowerCase() > next.toLowerCase()) ?
+                1 : ((next.toLowerCase() > first.toLowerCase()) ? -1 : 0)
+        });
+    }
+    private onFilterProductType(reqInventory) {
+        reqInventory.sort((a, b) => {
+            let first = (a.productType && a.productType.title) ? a.productType.title : '';
+            let next = (b.productType && b.productType.title) ? b.productType.title : '';
             return (first.toLowerCase() > next.toLowerCase()) ?
                 1 : ((next.toLowerCase() > first.toLowerCase()) ? -1 : 0)
         });
