@@ -219,9 +219,13 @@
         </button>
         <button
             class="qt-button qt-w100 qt-jc-c"
-            (click)="add()"
+            appDisabledBtn
+            #addBtn="disabled"
+            (onClick)="add()"
+            [ngClass]="{'--loading':addBtn.isBlock()}"
         >
-            Create Product
+            <span>Create Product</span>
+            <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
         </button>
     </div>
 </div>

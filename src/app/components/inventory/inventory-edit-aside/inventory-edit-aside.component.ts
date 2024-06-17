@@ -19,6 +19,7 @@ import { TextAreaDirective } from 'src/app/directives/text-area/text-area.direct
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { TaxesComponent } from '../../shared/taxes/taxes.component';
 import { ProductType } from '../../setting/products-settings/class/product-type';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
   selector: 'app-inventory-edit-aside',
@@ -37,6 +38,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
   categories: Array<CategoryProduct> = [];
   validate: InventoryValidate = new InventoryValidate();
   editSupplier: Company = null;
+  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   @ViewChild('addTax') containerAddTax;
   @ViewChild('taxesDp') taxesDp: TaxesComponent;
   @ViewChild('glNumberSelect') glNumberSelect: DropDownComponent;
@@ -239,10 +241,14 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
   }
   save() {
     if (!this.validate.isValidate(this.inventory)) return;
+    this.addBtn.setDisabled(true);
     // this.inventory.description = this.elRef.nativeElement.querySelector('#inventory-description').innerHTML;
     this.productService.editProduct(this.inventory.getForEdit()).subscribe(data => {
+      this.addBtn.setDisabled(false);
       this.glNumberStateService.refreshGlNumbersCheck();
       this.close();
+    }, er => {
+      this.addBtn.setDisabled(false);
     })
   }
   ngOnDestroy(): void {

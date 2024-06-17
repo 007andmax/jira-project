@@ -18,6 +18,7 @@ import { AppStateService } from 'src/app/states/app/app-state.service';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 import { ProductType } from 'src/app/components/setting/products-settings/class/product-type';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
   selector: 'app-inventory-add-body',
@@ -31,6 +32,7 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
   @ViewChild('suppliersSelect') suppliersSelect: DropDownComponent;
   @ViewChild('typeSelect') typeSelect: DropDownComponent;
+  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   @Output() onClose: EventEmitter<any> = new EventEmitter();
   @Input() class: string;
   //opened: boolean = false;
@@ -219,10 +221,14 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
   }
   add() {
     if (!this.validate.isValidate(this.inventory)) return;
+    this.addBtn.setDisabled(true);
     this.productService.addProduct(this.inventory.getForAdd()).subscribe(data => {
+      this.addBtn.setDisabled(false);
       this.toastrService.success("The new product has been successfully created");
       this.appStateService.changeDetectorRef();
       this.close();
+    }, err => {
+      this.addBtn.setDisabled(false);
     })
   }
   formatterGLNumber = (result) => {
