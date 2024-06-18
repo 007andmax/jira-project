@@ -42,6 +42,7 @@ export class ProductsSettingsTypeComponent implements OnInit {
     })
     this.sub.add(onGetServiceType);
   }
+
   onFilter(field) {
     this.filter.onFilter(field, this.list);
   }

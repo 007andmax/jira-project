@@ -16,6 +16,7 @@ export class ProductTypeCheckUseComponent implements OnInit {
   showPreloader: boolean = false;
   valid: boolean = true;
   productType: ProductType;
+  selectedProductType: ProductType;
   products: Array<InventoryItem> = [];
   listTypes: Array<ProductType> = [];
   sub: Subscription = new Subscription();
@@ -45,8 +46,20 @@ export class ProductTypeCheckUseComponent implements OnInit {
      })
      this.sub.add(onRefreshGlNumbersCheck);*/
   }
+  onSelectProuctType(data) {
+    this.selectedProductType = data;
+  }
 
-
+  changeProductType() {
+    if (this.selectedProductType) {
+      this.showPreloader = true;
+      this.productService.setProductType(this.selectedProductType.id, this.products.map(item => item.versionedId.id)).subscribe(data => {
+        this.approveConfirm();
+      }, err => {
+        this.showPreloader = false;
+      })
+    }
+  }
   cancelConfirm() {
     this.activeModal.close();
     this.confirmStateService.setConfirm(false);
@@ -60,6 +73,7 @@ export class ProductTypeCheckUseComponent implements OnInit {
     }, err => {
       this.showPreloader = false;
       this.valid = false;
+      if (err.status == 409) this.products = err.error.map(item => new InventoryItem(item));
       console.log("err", err);
     })
   };

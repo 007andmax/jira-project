@@ -12,12 +12,6 @@
             <span class="no-exist-agreements__info">
                 Are you sure you want to delete this Product Type?
             </span>
-            <div class="info-product">
-                <h3 [textContent]="productType.title"></h3>
-                <span>
-                    Associate with no products, services, categories
-                </span>
-            </div>
         </div>
         <div
             class="exist-agreements"
@@ -41,7 +35,7 @@
             <div class="list-elements">
                 <div
                     class="contract-container qt-mt-16"
-                    *ngIf="products > 0"
+                    *ngIf="products.length > 0"
                 >
                     <h3>Products</h3>
                     <div class="contract-container-agreements qt-mt-8">
@@ -49,19 +43,13 @@
                             ngFor
                             let-product
                             let-i="index"
-                            [ngForOf]="glNumberUse.products"
+                            [ngForOf]="products"
                             [ngForTrackBy]="trackById"
                         >
                             <div class="contract-item">
                                 <div class="contract-item-info">
                                     <h3 [textContent]="product.description"></h3>
                                 </div>
-                                <span
-                                    class="view-contract pointer"
-                                    (click)="showProduct(product)"
-                                >
-                                    View Product
-                                </span>
                             </div>
                         </ng-template>
                     </div>
@@ -91,6 +79,25 @@
                 (click)=cancelConfirm()
             >
                 Cancel
+            </button>
+        </div>
+    </div>
+    <div
+        class="archive-modal__footer"
+        *ngIf="!showPreloader && products.length > 0"
+    >
+        <div class="qt-df qt-jc-fe">
+            <button
+                class="btn-new disabled"
+                (click)=cancelConfirm()
+            >
+                Cancel
+            </button>
+            <button
+                class="qt-button qt-w100 qt-jc-c"
+                (click)=changeProductType()
+            >
+                Save
             </button>
         </div>
     </div>

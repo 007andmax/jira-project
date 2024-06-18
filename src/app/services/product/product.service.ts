@@ -40,6 +40,20 @@ export class ProductService {
         return data;
       }));
   }
+  /**
+  * Get products categories
+  */
+  public setProductType(productTypeId, productIds) {
+    return this.http.put(`${this.apiUrl}products/types/update`, {
+      "productTypeId": productTypeId,
+      "productIds": productIds
+    }).pipe(
+      tap(data => {
+        this.toastrService.success("Product type has been successfully changed");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
 
   /**
   * Get products categories

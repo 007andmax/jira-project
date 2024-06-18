@@ -77,10 +77,10 @@ export class InventoryStateService {
         let index = this.listTypes.findIndex(item => item.id === data.data.id);
         if (index > -1) this.listTypes[index] = new ProductType(data.data);
       }
-      /* if (data.action === "SERVICE_TYPE_REMOVED") {
-         let index = this.serviceTypeList.findIndex(item => item.id === data.data);
-         if (index > -1) this.serviceTypeList.splice(index, 1);
-       }*/
+      if (data.action === "PRODUCT_TYPE_REMOVED") {
+        let index = this.listTypes.findIndex(item => item.id === data.data);
+        if (index > -1) this.listTypes.splice(index, 1);
+      }
       this.onGetListType.emit(this.listTypes);
     })
   }
