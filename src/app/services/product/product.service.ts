@@ -35,7 +35,21 @@ export class ProductService {
   public addProductType(data) {
     return this.http.post(`${this.apiUrl}products/types`, { title: data }).pipe(
       tap(data => {
-        this.toastrService.success("The new product type has been successfully created");
+        this.toastrService.success("The Product type has been successfully deleted");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+
+  /**
+  * Get products categories
+  */
+  public removeProductType(id) {
+    this.appStateService.setCustomeError(true, "The error has occurred, please check your entries");
+    return this.http.delete(`${this.apiUrl}products/types/${id}`).pipe(
+      tap(data => {
+        this.appStateService.setCustomeError(false);
+        this.toastrService.success("The error has occurred, please check your entries");
         this.appStateService.changeDetectorRef();
         return data;
       }));

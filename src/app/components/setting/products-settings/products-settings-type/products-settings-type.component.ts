@@ -5,6 +5,10 @@ import { InventoryStateService } from 'src/app/states/inventory/inventory-state.
 import { of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { ProductTypeFilter } from '../class/product-type-filter';
+import { DELETE_PRODUCT_TYPE } from 'src/app/const/confirm';
+import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ProductTypeCheckUseComponent } from '../product-type-check-use/product-type-check-use.component';
 
 @Component({
   selector: 'app-products-settings-type',
@@ -18,7 +22,9 @@ export class ProductsSettingsTypeComponent implements OnInit {
   filter: ProductTypeFilter = new ProductTypeFilter();
   sub: Subscription = new Subscription();
   constructor(private productService: ProductService,
-    private inventoryStateService: InventoryStateService
+    private inventoryStateService: InventoryStateService,
+    private confirmStateService: ConfirmStateService,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit() {
@@ -52,6 +58,11 @@ export class ProductsSettingsTypeComponent implements OnInit {
           item.setIsInitRequest(false);
         })
     }
+  }
+  removeType(item) {
+    this.confirmStateService.setConfirmAction(DELETE_PRODUCT_TYPE);
+    const modalRef = this.modalService.open(ProductTypeCheckUseComponent, { windowClass: 'xs-modal user-modal', container: "products-settings", backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.productType = item;
   }
   public toggleShowAdd(data) {
     this.showAdd = data;
