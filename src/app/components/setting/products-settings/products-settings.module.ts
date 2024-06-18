@@ -15,13 +15,15 @@ import { ProductsSettingsTypeComponent } from './products-settings-type/products
 import { AddProductTypeComponent } from './add-product-type/add-product-type.component';
 import { ProductTypeCheckUseComponent } from './product-type-check-use/product-type-check-use.component';
 import { ProductTypeCheckUseModule } from './product-type-check-use/product-type-check-use.module';
+import { ProductsSettingsCategoryComponent } from './products-settings-category/products-settings-category.component';
 
 @NgModule({
     declarations: [
         ProductsSettingsComponent,
         AddCategoryProductComponent,
         ProductsSettingsTypeComponent,
-        AddProductTypeComponent
+        AddProductTypeComponent,
+        ProductsSettingsCategoryComponent
     ],
     imports: [
         CommonModule,

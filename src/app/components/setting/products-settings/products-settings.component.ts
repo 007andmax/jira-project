@@ -12,6 +12,7 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 import { CategoryProductSettings } from './class/category-product-settings';
 import { ProductsCategoryFilter } from './class/products-category-filter';
 import { ProductsSettingsTypeComponent } from './products-settings-type/products-settings-type.component';
+import { ProductsSettingsCategoryComponent } from './products-settings-category/products-settings-category.component';
 
 @Component({
   selector: 'products-settings',
@@ -19,14 +20,11 @@ import { ProductsSettingsTypeComponent } from './products-settings-type/products
   styleUrls: ['./products-settings.component.scss']
 })
 export class ProductsSettingsComponent implements OnInit, OnDestroy {
-  loading: boolean = true;
   activeTab: string = "productCategories";
-  showAddCategory: boolean = false;
-  filter: ProductsCategoryFilter = new ProductsCategoryFilter();
-  categoriesProducts: Array<CategoryProductSettings> = [];
+  loading: boolean = true;
   sub: Subscription = new Subscription();
-  glNumbers: Array<GlNumber> = [];
   @ViewChild("productType") productType: ProductsSettingsTypeComponent;
+  @ViewChild("categories") categories: ProductsSettingsCategoryComponent;
   constructor(private inventoryStateService: InventoryStateService,
     private confirmStateService: ConfirmStateService,
     private productService: ProductService,
@@ -38,141 +36,35 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
-    if (this.inventoryStateService.getCategories().length > 0) this.getCategories(this.inventoryStateService.getCategories());
-    this.inventoryStateService.onGetCategories.subscribe(data => {
-      this.getCategories(data);
-    })
-    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-      if (data) {
-        if (this.confirmStateService.getConfirmAction() === DELETE_CATEGORY_PRODUCT) {
-          this.onRemoveCategoryProduct(this.inventoryStateService.getCategoryForDelete().id);
-        }
-        if (this.confirmStateService.getConfirmAction() === DELETE_CATEGORIES_PRODUCT) {
-          this.onRemoveCategoriesProduct();
-        }
-      }
-    })
-    this.sub.add(getConfirm);
-    this.glNumbers = this.sortGlNumbers(this.glNumberStateService.getGLNumbers());
-    let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
-      this.glNumbers = this.sortGlNumbers(data);
-    })
+
+  }
+  setPreloader(data) {
+    this.loading = data;
   }
   parseAddText() {
     if (this.activeTab === "productType") return "Add Type";
     if (this.activeTab === "productCategories") return "Add category";
     return "";
   }
-  private sortGlNumbers(data) {
-    this.loading = false;
-    return data.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
-      1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
-  }
-  glDropDownItemName(item) {
-    return `${item["glNumber"]} - ${(item["description"] && item["description"].length > 0) ? item["description"]
-      : "No description"}`;
-  }
-  onSelectAll(event) {
-    if (event.target.checked) {
-      this.categoriesProducts.forEach(item => {
-        if (item.productsAmount === 0) {
-          item.selected = true;
-          this.inventoryStateService.getListCategoriesForRemove().push(item);
-        }
-      })
-    } else {
-      this.categoriesProducts.forEach(item => (item.selected = false));
-      this.inventoryStateService.setListCategoriesForRemove([]);
-    }
-    this.cd.detectChanges();
-  }
-  onSelect(event, item) {
-    if (event.target.checked) {
-      this.inventoryStateService.getListCategoriesForRemove().push(item);
-    } else {
-      let list = this.inventoryStateService.getListCategoriesForRemove();
-      let index = list.findIndex(item => item.id === item.id);
-      if (index > -1) list.splice(index, 1);
-      this.inventoryStateService.setListCategoriesForRemove(list);
-    }
-    this.cd.detectChanges();
-  }
-  public getCategories(data) {
-    this.categoriesProducts = JSON.parse(JSON.stringify(data)).map(item => new CategoryProductSettings(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-  }
-  getSelectedCount() {
-    return this.inventoryStateService.getListCategoriesForRemove().length;
-  }
-  onFilter(field) {
-    this.filter.onFilter(field, this.categoriesProducts);
-  }
-  create() {
-    if (this.activeTab === "productCategories") this.showAddCategory = true;
-    if (this.activeTab === "productType") this.productType.toggleShowAdd(true);
-  }
-  setTab(data) {
-    this.activeTab = data['nextId'];
-  }
-  onRemoveCategoriesProduct() {
-    forkJoin(this.inventoryStateService.getListCategoriesForRemove().map(item => this.productService.removeCategory(item.id).pipe(map((res) => res),
-      catchError(error => of(undefined)))))
-      .subscribe(
-        () => {
-          this.inventoryStateService.setListCategoriesForRemove([]);
-          this.cd.detectChanges();
-        },
-        error => {
-        }
-      );
-  }
-  onRemoveCategoryProduct(id) {
-    this.productService.removeCategory(id).pipe(map((res) => res),
-      catchError(error => of(undefined)))
-      .subscribe(
-        () => {
-          this.inventoryStateService.setListCategoriesForRemove([]);
-          this.cd.detectChanges();
-        },
-        error => {
-        }
-      )
-  }
-  onSelectGlNumbers(item, glNumber) {
-    this.productService.setGlNumberCategory(item.id, (glNumber) ? { id: glNumber.id } : null)
-      .subscribe(
-        () => {
 
-        })
-  }
-  onEditCategory(item) {
-    if (item.isInitEdit) {
-      if (item.length === 0 || item.disableUpdate || item.isInitRequest) return;
-      item.setIsInitRequest(true);
-      this.productService.editCategory(item.id, item.name).pipe(map((res) => res),
-        catchError(error => of(undefined)))
-        .subscribe(
-          () => {
-            item.setIsInitRequest(false);
-            item.onInitEdit(false);
-          }, err => {
-            item.setIsInitRequest(false);
-          })
-    }
-  }
   removeCategoriesStatus() {
     this.confirmStateService.setConfirmAction(DELETE_CATEGORIES_PRODUCT);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove Product Category`;
 
   }
-  removeCategoryProduct(data) {
-    this.confirmStateService.setConfirmAction(DELETE_CATEGORY_PRODUCT);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Remove Product Category`;
-    this.inventoryStateService.setCategoryForDelete(data);
+
+  getSelectedCount() {
+    return this.inventoryStateService.getListCategoriesForRemove().length;
   }
 
+  create() {
+    if (this.activeTab === "productCategories") this.categories.showAddCategory = true;
+    if (this.activeTab === "productType") this.productType.toggleShowAdd(true);
+  }
+  setTab(data) {
+    this.activeTab = data['nextId'];
+  }
 
 
   ngOnDestroy(): void {
