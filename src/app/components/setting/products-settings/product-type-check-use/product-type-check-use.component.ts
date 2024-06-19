@@ -19,6 +19,7 @@ export class ProductTypeCheckUseComponent implements OnInit {
   selectedProductType: ProductType;
   products: Array<InventoryItem> = [];
   listTypes: Array<ProductType> = [];
+  validate: boolean = true;
   sub: Subscription = new Subscription();
   constructor(private productService: ProductService,
     private confirmStateService: ConfirmStateService,
@@ -48,6 +49,7 @@ export class ProductTypeCheckUseComponent implements OnInit {
   }
   onSelectProuctType(data) {
     this.selectedProductType = data;
+    this.validate = true;
   }
 
   changeProductType() {
@@ -58,6 +60,8 @@ export class ProductTypeCheckUseComponent implements OnInit {
       }, err => {
         this.showPreloader = false;
       })
+    } else {
+      this.validate = false;
     }
   }
   cancelConfirm() {

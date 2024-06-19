@@ -18,15 +18,20 @@
             *ngIf="!showPreloader && !valid"
         >
             <p class="qt-mb-16">
-                You can’t delete Product type that associate with a product. Please remove Product type from following product, before you delete it.
+                You can’t delete the Product type associated with a product. Please remove the Product type from the following product, before you delete it.
             </p>
-            <h3 [textContent]="'Product Type - ' + productType.title"></h3>
+            <h3
+                class="qt-mb-8"
+                [textContent]="'Product Type - ' + productType.title"
+            ></h3>
             <app-drop-down
                 #typeSelect
                 [class]="['qt-select-input-40']"
                 [placeholder]="'Select Type'"
                 [field]="'title'"
                 [list]="listTypes"
+                [errorMessage]="'The Product type is required'"
+                [validate]="validate"
                 [search]="true"
                 [change]="true"
                 (onSelectedItem)="onSelectProuctType($event)"

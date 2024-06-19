@@ -63,7 +63,7 @@ export class ProductService {
     return this.http.delete(`${this.apiUrl}products/types/${id}`).pipe(
       tap(data => {
         this.appStateService.setCustomeError(false);
-        this.toastrService.success("The error has occurred, please check your entries");
+        this.toastrService.success("The Product type has been successfully deleted");
         this.appStateService.changeDetectorRef();
         return data;
       }));
