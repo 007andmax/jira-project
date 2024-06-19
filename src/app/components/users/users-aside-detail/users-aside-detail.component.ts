@@ -211,6 +211,9 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
   public trackByIndex(index, item) {
     return index;
   }
+  public trackById(index, item) {
+    return item.id;
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

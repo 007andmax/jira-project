@@ -8,6 +8,7 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { Document } from '../class/document';
 import * as moment from "moment";
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { PreviewAttachmentStateService } from '../../tickets/tickets/ticket-edit-aside/preview-attachment/services/preview-attachment-state.service';
 
 @Component({
   selector: 'document-preview',
@@ -26,6 +27,7 @@ export class DocumentPreviewComponent implements OnInit {
     private router: Router,
     private companiesStateService: CompaniesStateService,
     private leftPanelStateService: LeftPanelStateService,
+    private previewAttachmentStateService: PreviewAttachmentStateService,
     private documentsService: DocumentsService) { }
 
   ngOnInit() {
@@ -37,7 +39,7 @@ export class DocumentPreviewComponent implements OnInit {
       this.getDocument(id);
     });
     this.sub.add(subscription);
-    this.leftPanelStateService.changeStateWithoutNavigate('new-preview-documents');
+    this.leftPanelStateService.changeStateWithoutNavigate('new-preview-documents')
   }
   public goToDocumentsList() {
     this.leftPanelStateService.hideLeftPanel(false);

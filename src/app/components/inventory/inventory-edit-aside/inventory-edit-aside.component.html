@@ -38,22 +38,23 @@
         </div>
         <div class="qt-inputs-row">
             <div class="qt-input-block">
-                <p>GL Number</p>
-                <gl-numbers-drop-down
-                    [class]="['light-dropdown']"
-                    [list]="glNumbers"
-                    #glNumberSelect
+                <app-drop-down
+                    #categoriesSelect
+                    [class]="['qt-select-input-40']"
+                    [placeholder]="'Select Category'"
+                    [validate]="validate.getCategory()"
+                    [errorMessage]="'Category is required'"
+                    [title]="'Category'"
+                    [field]="'name'"
                     [add]="true"
+                    [list]="categories"
                     [search]="true"
                     [change]="true"
-                    [field]="'glNumber'"
-                    [reducerSelectedItem]="formatterSeletedGLNumber"
-                    [reducerItem]="formatterGLNumber"
-                    [placeholder]="'Select GL'"
-                    [editItem]="inventory.glNumber"
-                    (onAddItem)="onAddGlNumber($event)"
-                    (onSelectedItem)="onSelectGlNumbers($event)"
-                ></gl-numbers-drop-down>
+                    [editItem]="inventory.category"
+                    (onAddItem)="onAddCategory($event)"
+                    (onSelectedItem)="onSelectCategory($event)"
+                >
+                </app-drop-down>
             </div>
         </div>
         <div class="qt-inputs-row">
@@ -156,23 +157,22 @@
         </div>
         <div class="qt-inputs-row">
             <div class="qt-input-block">
-                <app-drop-down
-                    #categoriesSelect
-                    [class]="['qt-select-input-40']"
-                    [placeholder]="'Select Category'"
-                    [validate]="validate.getCategory()"
-                    [errorMessage]="'Category is required'"
-                    [title]="'Category'"
-                    [field]="'name'"
+                <p>GL Number</p>
+                <gl-numbers-drop-down
+                    [class]="['light-dropdown']"
+                    [list]="glNumbers"
+                    #glNumberSelect
                     [add]="true"
-                    [list]="categories"
                     [search]="true"
                     [change]="true"
-                    [editItem]="inventory.category"
-                    (onAddItem)="onAddCategory($event)"
-                    (onSelectedItem)="onSelectCategory($event)"
-                >
-                </app-drop-down>
+                    [field]="'glNumber'"
+                    [reducerSelectedItem]="formatterSeletedGLNumber"
+                    [reducerItem]="formatterGLNumber"
+                    [placeholder]="'Select GL'"
+                    [editItem]="inventory.glNumber"
+                    (onAddItem)="onAddGlNumber($event)"
+                    (onSelectedItem)="onSelectGlNumbers($event)"
+                ></gl-numbers-drop-down>
             </div>
         </div>
         <div class="qt-inputs-row">

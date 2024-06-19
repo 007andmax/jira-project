@@ -121,6 +121,11 @@ export class CompanyDashDetailComponent implements OnInit, OnDestroy {
         this.companyDetailing = this.companyDetail.getDataForDashboard();
         this.setCompanyData(data.data);
       }
+      if (data.action === "COMPANY_TAGS_EDITED" && data.data.companyId === this.companyDetail.id) {
+        this.companyDetail.setTags(data.data.tags);
+        this.companyDetailing = this.companyDetail.getDataForDashboard();
+        this.cd.detectChanges();
+      }
     })
     this.sub.add(onChangeCompanies);
     this.currentService = new TicketProfileFormService();
@@ -214,9 +219,7 @@ export class CompanyDashDetailComponent implements OnInit, OnDestroy {
     })
   }
   public onChangeTags(tags) {
-    this.companyDetail.tags = tags;
-    this.companiesService.updateCompany(this.companyDetail.getDataForUpdate()).subscribe(data => {
-
+    this.companiesService.changeTags(this.companyDetail.id, tags.map(item => item.id)).subscribe(data => {
       this.cd.detectChanges();
     })
   }
@@ -381,15 +384,6 @@ export class CompanyDashDetailComponent implements OnInit, OnDestroy {
     if (addresses) this.mapSrc = "https://maps.google.com/maps/embed/v1/place?key=AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s&q=" + addresses.locationLat + "," + addresses.locationLng + "";
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal map', backdrop: 'static', keyboard: false });
   }
-
-  deleteTag(index: number) {
-    this.tags.splice(index, 1);
-    let removeTag = this.companiesService.removeTag(this._id, this.tags).subscribe((data: any) => {
-
-    });
-    this.sub.add(removeTag);
-  }
-
 
 
   edit() {
