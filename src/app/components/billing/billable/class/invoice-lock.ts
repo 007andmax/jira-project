@@ -26,7 +26,7 @@ export class InvoiceLock {
             billTo: (company.addresses.length > 0) ? company.addresses[0].id : null,
             shipTo: (company.addresses.length == 2) ? company.addresses[1].id : null,
             sendNotification: sendNotification,
-            includeAccountReceivableReportAsAttachmentSetting: this.includeAccountReceivableReportAsAttachmentSetting,
+            IncludeAccountReceivableReportAsAttachment: this.includeAccountReceivableReportAsAttachmentSetting,
             includeInvoiceAsAttachment: this.includeInvoiceAsAttachmentSetting
         }
     }
