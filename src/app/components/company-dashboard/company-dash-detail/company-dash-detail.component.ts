@@ -121,6 +121,13 @@ export class CompanyDashDetailComponent implements OnInit, OnDestroy {
         this.companyDetailing = this.companyDetail.getDataForDashboard();
         this.setCompanyData(data.data);
       }
+      console.log("data.action", data.action);
+      if (data.action === "COMPANY_TAGS_EDITED" && data.data.companyId === this.companyDetail.id) {
+        console.log("data.data.tags", data.data.tags);
+        this.companyDetail.setTags(data.data.tags);
+        this.companyDetailing = this.companyDetail.getDataForDashboard();
+        this.cd.detectChanges();
+      }
     })
     this.sub.add(onChangeCompanies);
     this.currentService = new TicketProfileFormService();
@@ -166,6 +173,7 @@ export class CompanyDashDetailComponent implements OnInit, OnDestroy {
     this.sub.add(getCompany);
   }
   private setCompanyData(data) {
+    console.log("this.companyDetailing.reputation", this.companyDetailing.reputation);
     if (this.companyDetailing.reputation === undefined || this.companyDetailing.reputation === null) {
       this.unSelectedRating = 5
     } else {
@@ -214,9 +222,7 @@ export class CompanyDashDetailComponent implements OnInit, OnDestroy {
     })
   }
   public onChangeTags(tags) {
-    this.companyDetail.tags = tags;
-    this.companiesService.updateCompany(this.companyDetail.getDataForUpdate()).subscribe(data => {
-
+    this.companiesService.changeTags(this.companyDetail.id, tags.map(item => item.id)).subscribe(data => {
       this.cd.detectChanges();
     })
   }
@@ -382,15 +388,6 @@ export class CompanyDashDetailComponent implements OnInit, OnDestroy {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal map', backdrop: 'static', keyboard: false });
   }
 
-  deleteTag(index: number) {
-    this.tags.splice(index, 1);
-    let removeTag = this.companiesService.removeTag(this._id, this.tags).subscribe((data: any) => {
-
-    });
-    this.sub.add(removeTag);
-  }
-
-
 
   edit() {
     let getCompany = this.companiesService.getCompany(this._id).subscribe((data: CompanyProfile) => {
@@ -523,6 +520,7 @@ export class CompanyDashDetailComponent implements OnInit, OnDestroy {
       this.selectedRating = this.companyDetail.reputation;
       this.unSelectedRating = 5 - this.selectedRating;
     }
+    console.log("this.companyDetail.reputation", this.companyDetail.reputation);
     this.saveCompany();
   }
 
