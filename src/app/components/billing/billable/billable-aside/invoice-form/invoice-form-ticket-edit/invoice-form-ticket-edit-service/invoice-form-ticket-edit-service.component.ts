@@ -45,6 +45,7 @@ export class InvoiceFormTicketEditServiceComponent implements OnInit, OnDestroy 
     })
     this.onSetEditTaxes();
     this.sub.add(getOnTaxess);
+    console.log("service", this.service);
   }
   onSetEditTaxes() {
     let notFindTax = [];
