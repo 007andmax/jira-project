@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProductType } from '../class/product-type';
 import { ProductService } from 'src/app/services/product/product.service';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
@@ -15,7 +15,7 @@ import { ProductTypeCheckUseComponent } from '../product-type-check-use/product-
   templateUrl: './products-settings-type.component.html',
   styleUrls: ['./products-settings-type.component.scss']
 })
-export class ProductsSettingsTypeComponent implements OnInit {
+export class ProductsSettingsTypeComponent implements OnInit, OnDestroy {
   list: Array<ProductType> = [];
   showAdd: boolean = false;
   showPreloader: boolean = true;
@@ -67,5 +67,8 @@ export class ProductsSettingsTypeComponent implements OnInit {
   }
   public toggleShowAdd(data) {
     this.showAdd = data;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

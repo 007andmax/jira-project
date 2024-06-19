@@ -27,9 +27,7 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
   @ViewChild("categories") categories: ProductsSettingsCategoryComponent;
   constructor(private inventoryStateService: InventoryStateService,
     private confirmStateService: ConfirmStateService,
-    private productService: ProductService,
     public cd: ChangeDetectorRef,
-    private glNumberStateService: GlNumberStateService,
     private modalService: NgbModal,) { }
 
 

@@ -3,7 +3,6 @@ import { ProductsCategoryFilter } from "./products-category-filter";
 export class ProductTypeFilter extends ProductsCategoryFilter {
 
     onFilter(field, list) {
-        console.log("field", field);
         let index = this.filter.findIndex(item => item.field === field);
         if (index > -1) {
             let sort = this.filter[index].filter;
@@ -16,7 +15,6 @@ export class ProductTypeFilter extends ProductsCategoryFilter {
                     this.filter[index].filter = 'DESC';
                     list.reverse();
                 }
-                console.log("list", list);
             }
             if (field === 'count') {
                 this.clearFilter();

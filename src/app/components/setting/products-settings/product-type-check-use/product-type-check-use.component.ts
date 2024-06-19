@@ -78,7 +78,6 @@ export class ProductTypeCheckUseComponent implements OnInit {
       this.showPreloader = false;
       this.valid = false;
       if (err.status == 409) this.products = err.error.map(item => new InventoryItem(item));
-      console.log("err", err);
     })
   };
   public trackById(index, item) {
