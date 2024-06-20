@@ -29,6 +29,10 @@ export class ProductService {
     private appStateService: AppStateService
   ) { }
 
+  validateForRemoveProductType(id) {
+    return this.http.get(`${this.apiUrl}products/types/validate/${id}`);
+  }
+
   /**
    * Get products categories
    */

@@ -13,7 +13,7 @@ import { InventoryStateService } from 'src/app/states/inventory/inventory-state.
   styleUrls: ['./product-type-check-use.component.scss']
 })
 export class ProductTypeCheckUseComponent implements OnInit {
-  showPreloader: boolean = false;
+  showPreloader: boolean = true;
   valid: boolean = true;
   productType: ProductType;
   selectedProductType: ProductType;
@@ -39,13 +39,11 @@ export class ProductTypeCheckUseComponent implements OnInit {
         1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));;
     })
     this.sub.add(onGetServiceType);
-    /* let onRefreshGlNumbersCheck = this.glNumberStateService.onRefreshGlNumbersCheck.subscribe(data => {
-       this.showPreloader = true;
-       this.glNumberService.validateForRemove(this.glNumber.id).subscribe((data: any) => {
-         this.getGlNumber(data);
-       });
-     })
-     this.sub.add(onRefreshGlNumbersCheck);*/
+    this.productService.validateForRemoveProductType(this.productType.id).subscribe((data: any) => {
+      this.valid = data.valid;
+      this.products = data.products;
+      this.showPreloader = false;
+    })
   }
   onSelectProuctType(data) {
     this.selectedProductType = data;
