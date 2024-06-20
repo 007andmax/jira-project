@@ -127,6 +127,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     });
     this.sub.add(getConfirm);
     this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
+
       let ticket = new Ticket(data);
       if (this.ticketProfile.id === ticket.id) {
         this.ticketProfile.update(data);
@@ -183,6 +184,11 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       this.showEditUpdate = true;
     })
     this.sub.add(onEditUpdateByForm);
+    let onCloseTicket = this.ticketStateService.onCloseTicket.subscribe(data => {
+      this.ticketProfile.setStatus("COMPLETED");
+      this.cd.detectChanges();
+    })
+    this.sub.add(onCloseTicket);
   }
   removeCustomDevice(ids) {
     forkJoin(

@@ -7,10 +7,11 @@
     (openChange)="onCloseDropDown($event)"
 >
     <div
-        class="device-user pointer"
+        class="device-user"
         *ngIf="type === 'DETAIL_TICKET' && selectedUsers.length === 0"
         id="dropdownTechuser"
         style="margin-bottom: 10px;"
+        [ngClass]="{'pointer':!isDisabled}"
         ngbDropdownToggle
     >
         <div class="qt-df qt-ai-c">
@@ -113,12 +114,13 @@
         #selectUserTooltip
     ></app-dynamic-tooltip>
     <div
-        class="tech__user-icon icon__assign-user pointer"
+        class="tech__user-icon icon__assign-user"
         *ngIf="type === 'TICEKTS' && selectedUsers.length === 0 || type === 'CONTRACT'"
         id="dropdownTechuser"
         (mouseenter)="selectUserTooltip.show($event.target)"
         (mouseleave)="selectUserTooltip.hide()"
         ngbDropdownToggle
+        [ngClass]="{'pointer':!isDisabled}"
     ></div>
     <app-dynamic-tooltip
         [content]="ticketsListService.getUserName(selectedUsers[0])"

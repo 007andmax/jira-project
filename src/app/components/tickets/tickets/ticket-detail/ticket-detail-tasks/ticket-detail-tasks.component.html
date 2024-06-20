@@ -3,6 +3,7 @@
     <div
         class="qt-button qt-button--with-icon --sm --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
         (click)="showAdd = true"
+        *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
     >
         <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-4 qt-button-icon"></span>
         Add Task
@@ -85,7 +86,10 @@
         [class]="'.edit-ticket-container-' + i"
         (onOutSide)="onEditTicketTask(item)"
     >
-        <div class="ab-pane__table-cell tab-pane__table-checkboxes qt-ml-8 pointer">
+        <div
+            class="ab-pane__table-cell tab-pane__table-checkboxes qt-ml-8"
+            [ngClass]="{'pointer':ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)}"
+        >
             <app-dynamic-tooltip
                 [content]="'Mark task as incomplete'"
                 [position]="'right'"
@@ -97,6 +101,7 @@
                 #complete
             ></app-dynamic-tooltip>
             <i
+                *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
                 [hidden]="item.status != 'INCOMPLETED'"
                 class="icon__active icn-20"
                 (click)="setStatus(item,'COMPLETED');onEditTicketTask(item)"
@@ -104,11 +109,18 @@
                 (mouseleave)="complete.hide()"
             ></i>
             <i
+                *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
                 [hidden]="item.status != 'COMPLETED'"
                 class="icon__task-pending icn-20"
                 (click)="setStatus(item,'INCOMPLETED');onEditTicketTask(item)"
                 (mouseenter)="incomplete.show($event.target)"
                 (mouseleave)="incomplete.hide()"
+            ></i>
+            <i
+                *ngIf="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
+                [ngClass]="{'icon__task-pending':item.status != 'COMPLETED',
+            'icon__active':item.status != 'INCOMPLETED'}"
+                class=" icn-20"
             ></i>
         </div>
         <div class="tab-pane__table-cell ticket-status-table__status">
@@ -122,6 +134,7 @@
                 appKeyUpEnter
                 (onChange)="onEditTicketTask(item)"
                 (input)="item.onInitEdit(true)"
+                [disabled]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
             >
         </div>
         <div class="tab-pane__table-cell ticket-status-table__action">
@@ -132,6 +145,7 @@
                 [useMinDate]="false"
                 [type]="'DETAIL_TICKET'"
                 (onChange)="onChangeDatePicker($event,item);onEditTicketTask(item)"
+                [isDisabled]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
             ></app-date-picker>
             <app-tech-users
                 [editMode]="true"
@@ -141,6 +155,7 @@
                 [users]="listTechUsers"
                 (usersChange)="onChangeUser($event,item);onEditTicketTask(item)"
                 [placement]="'bottom-right'"
+                [isDisabled]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
             ></app-tech-users>
             <app-dynamic-tooltip
                 [content]="'Delete task'"
@@ -148,6 +163,7 @@
                 #dateTooltip
             ></app-dynamic-tooltip>
             <div
+                *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
                 class="ticket-updates__delete icon__remove"
                 (click)="remove(item)"
                 (mouseenter)="dateTooltip.show($event.target)"

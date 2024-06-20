@@ -14,6 +14,7 @@ import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.comp
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TicketsRealTimeService } from 'src/app/states/tickets/tickets-real-time.service';
 import { OnDestroy } from '@angular/core';
+import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tickets-permissions.service';
 
 @Component({
   selector: 'ticket-detail-tasks',
@@ -34,6 +35,7 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private ticketsRealTimeService: TicketsRealTimeService,
     public cd: ChangeDetectorRef,
+    public ticketsPermissionsService: TicketsPermissionsService,
     private usersStateService: UsersStateService,) { }
 
   ngOnInit() {

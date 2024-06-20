@@ -91,6 +91,9 @@ export class TicketProfile {
             this.priorityLevel = new TicketsPriority(data.priorityLevel);
         }
     }
+    public setStatus(data) {
+        this.status = data;
+    }
     public refreshAttachments(attachments) {
         this.attachments = [];
         this.updates.forEach(item => {

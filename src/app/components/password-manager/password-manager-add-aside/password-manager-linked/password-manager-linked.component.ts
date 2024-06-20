@@ -14,6 +14,7 @@ import { TicketStateService } from 'src/app/components/tickets/tickets/ticket-ed
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { Device } from 'src/app/components/company-devices/class/device';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
+import { TicketsPermissionsService } from 'src/app/components/tickets/tickets/ticket-edit-aside/services/tickets-permissions.service';
 
 @Component({
   selector: 'password-manager-linked',
@@ -48,6 +49,7 @@ export class PasswordManagerLinkedComponent implements OnInit {
     public devicesStateService: DevicesStateService,
     public customerPortalStateService: CustomerPortalStateService,
     public devicesService: DevicesService,
+    public ticketsPermissionsService: TicketsPermissionsService,
     private usersStateService: UsersStateService,) { }
 
   ngOnInit() {

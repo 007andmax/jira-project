@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { REMOVE_ATTACHMENT } from 'src/app/const/confirm';
 import { TicketProfileAttachmentsComponent } from '../../ticket-edit-aside/ticket-profile-attachments/ticket-profile-attachments.component';
+import { TicketProfile } from '../../class/ticket-profile';
 
 @Component({
   selector: 'ticket-detail-attachments',
@@ -10,6 +11,7 @@ import { TicketProfileAttachmentsComponent } from '../../ticket-edit-aside/ticke
 })
 export class TicketDetailAttachmentsComponent extends TicketProfileAttachmentsComponent {
   indexAllDownload: number = 0;
+  @Input() ticketProfile: TicketProfile = new TicketProfile();
   ngOnInit() {
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {

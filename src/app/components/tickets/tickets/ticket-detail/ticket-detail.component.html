@@ -197,6 +197,7 @@
                 <ticket-detail-change-priority [ticketProfile]="ticketProfile"></ticket-detail-change-priority>
                 <ticket-detail-change-company [ticketProfile]="ticketProfile"></ticket-detail-change-company>
                 <ticket-detail-add-assigned-user
+                    [ticketProfile]="ticketProfile"
                     [listAssignedUser]="listAssignedUser"
                     (onSelectAssignedUser)="onSelectAssignedUser($event)"
                 ></ticket-detail-add-assigned-user>
@@ -209,7 +210,10 @@
                     (tagsChange)="onChangeTags($event,false)"
                     (tagsRemove)="onChangeTags($event,true)"
                 ></ticket-detail-edit-tags>
-                <ticket-detail-attachments [attachments]="ticketProfile.attachments"></ticket-detail-attachments>
+                <ticket-detail-attachments
+                    [ticketProfile]="ticketProfile"
+                    [attachments]="ticketProfile.attachments"
+                ></ticket-detail-attachments>
                 <!-- <div class="qt-input-block">
                     <span class="qt-input-block__label">Priority Level</span>
                     <app-drop-down
