@@ -138,15 +138,15 @@
                                 <div
                                     class="ticket-detail-page__edit"
                                     appClickOtside
-                                    [init]="modeDescription === 'edit'"
+                                    [init]="modeDescription === 'edit' && ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
                                     [class]="'.ticket-detail-page__edit-wrap'"
                                     (onOutSide)="toggleNote()"
                                 >
                                     <div
-                                        class="ticket-detail-page__editor pointer"
-                                        [ngClass]="{'no-edit-note':!getPermissions('EDIT_TICKETS')}"
+                                        class="ticket-detail-page__editor"
+                                        [ngClass]="{'no-edit-note':!getPermissions('EDIT_TICKETS'),'pointer':ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)}"
                                         (blur)="modeDescription = 'edit'"
-                                        [attr.contenteditable]="getPermissions('EDIT_TICKETS')"
+                                        [attr.contenteditable]="getPermissions('EDIT_TICKETS') && ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
                                         id="ticket-note"
                                         placeholder="Enter description here"
                                     ></div>
@@ -206,6 +206,7 @@
                     [selectedCompanyId]="ticketProfile.company.id"
                 ></ticket-detail-linked-agents>
                 <ticket-detail-edit-tags
+                    [ticketProfile]="ticketProfile"
                     [selectedTag]="ticketProfile.tags"
                     (tagsChange)="onChangeTags($event,false)"
                     (tagsRemove)="onChangeTags($event,true)"

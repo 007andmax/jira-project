@@ -1,6 +1,7 @@
 <div
     class="tech-users-container"
     ngbDropdown
+    #techUsersDd="ngbDropdown"
     [container]="container"
     [autoClose]="'outside'"
     [placement]="placement"
@@ -12,7 +13,7 @@
         id="dropdownTechuser"
         style="margin-bottom: 10px;"
         [ngClass]="{'pointer':!isDisabled}"
-        ngbDropdownToggle
+        (click)="openDropDown()"
     >
         <div class="qt-df qt-ai-c">
             <div class="add-user qt-sz-36 qt-circle qt-bg-contain qt-mr-8"></div>
@@ -64,7 +65,7 @@
         class="device-user company-settings-user"
         *ngIf="type === 'DETAIL_TICKET' && selectedUsers.length === 1"
         id="dropdownTechuser"
-        ngbDropdownToggle
+        (click)="openDropDown()"
         [ngClass]="{'pointer':!isDisabled}"
     >
         <div class="user-tech-dp">

@@ -118,8 +118,8 @@
             ></i>
             <i
                 *ngIf="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
-                [ngClass]="{'icon__task-pending':item.status != 'COMPLETED',
-            'icon__active':item.status != 'INCOMPLETED'}"
+                [ngClass]="{'icon__active':item.status != 'COMPLETED',
+            'icon__task-pending':item.status != 'INCOMPLETED'}"
                 class=" icn-20"
             ></i>
         </div>
