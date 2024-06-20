@@ -234,7 +234,7 @@
         }
         select.cmn-select {
             @include app-none();
-            background: url("/assets/img/icons/down-arrow.svg") no-repeat right 7px center;
+            background: url("/assets/img/icons/arrow-down.svg") no-repeat right 7px center;
             padding-right: 25px;
             option {
                 padding: 10px;
@@ -1150,7 +1150,7 @@
                     color: $gray-600;
                     padding: 0 15px 0 0;
                     text-align: left;
-                    background: url(/assets/img/icons/down-arrow.svg) no-repeat right center $white;
+                    background: url(/assets/img/icons/arrow-down.svg) no-repeat right center $white;
                     background-size: 16px;
                     display: flex;
                 }
@@ -1222,7 +1222,7 @@
                     color: $gray-600;
                     padding: 0 15px 0 0;
                     text-align: left;
-                    background: url(/assets/img/icons/down-arrow.svg) no-repeat right center $white;
+                    background: url(/assets/img/icons/arrow-down.svg) no-repeat right center $white;
                     background-size: 16px;
                     display: flex;
                 }
@@ -1374,7 +1374,7 @@
             top: 16px;
             font-size: 0;
             text-indent: -5000px;
-            background: url(/assets/img/icons/payment-history.svg) no-repeat center $white;
+            background: url(/assets/img/icons/updates.svg) no-repeat center $white;
         }
     }
     aside {
@@ -1686,7 +1686,7 @@
                                                     line-height: 1.54;
                                                     letter-spacing: normal;
                                                     height: auto;
-                                                    background: url("/assets/img/icons/down-arrow.svg") no-repeat right 15px
+                                                    background: url("/assets/img/icons/arrow-down.svg") no-repeat right 15px
                                                         center;
                                                     padding-right: 30px;
                                                     -webkit-appearance: none;

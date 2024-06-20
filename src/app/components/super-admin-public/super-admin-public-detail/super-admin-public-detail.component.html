@@ -29,7 +29,7 @@
                                 [ngClass]="{'--active':selectedCategory && selectedCategory.id === category.id}"
                             >
                                 <div
-                                    class="icon__down-arrow qt-mr-8 qt-sz-16 qt-bg-contain pointer"
+                                    class="qt-icon icon__arrow-down qt-mr-8 qt-sz-16 qt-bg-contain pointer"
                                     [ngClass]="{'toggle-category':category.toggleSubCategory}"
                                     (click)="category.toggleSubCategory = !category.toggleSubCategory"
                                     *ngIf="category.subcategories.length > 0"
@@ -62,7 +62,7 @@
                                             [ngClass]="{'--active':selectedCategory && selectedCategory.id === subcategory.id}"
                                         >
                                             <div
-                                                class="icon__down-arrow qt-mr-8 qt-sz-16 qt-bg-contain pointer"
+                                                class="qt-icon icon__arrow-down qt-mr-8 qt-sz-16 qt-bg-contain pointer"
                                                 [ngClass]="{'toggle-category':subcategory.toggleSubCategory}"
                                                 (click)="subcategory.toggleSubCategory = !subcategory.toggleSubCategory"
                                                 *ngIf="subcategory.subcategories.length > 0"
@@ -95,7 +95,7 @@
                                                         [ngClass]="{'--active':selectedCategory && selectedCategory.id === subsubcategory.id}"
                                                     >
                                                         <div
-                                                            class="icon__down-arrow qt-mr-8 qt-sz-16 qt-bg-contain pointer"
+                                                            class="qt-icon icon__arrow-down qt-mr-8 qt-sz-16 qt-bg-contain pointer"
                                                             [ngClass]="{'toggle-category':subsubcategory.toggleSubCategory}"
                                                             (click)="subsubcategory.toggleSubCategory = !subsubcategory.toggleSubCategory"
                                                             *ngIf="subsubcategory.subcategories.length > 0"

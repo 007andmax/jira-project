@@ -120,7 +120,7 @@
                     ngbDropdownItem
                     (click)="exportAsPDF()"
                 >
-                    <div class="qt-icon icon__download-pdf qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                    <div class="qt-icon icon__download qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Export as PDF
                 </li>
                 <li
@@ -129,7 +129,7 @@
                     *ngIf="invoice.paidOn && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE') && invoice.status != 'DELETED'"
                     (click)="refundPayments()"
                 >
-                    <div class="icon__refund-payment qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                    <div class="qt-icon icon__return-money qt-sz-20 qt-mr-12"></div>
                     Refund Payments
                 </li>
                 <li
@@ -146,7 +146,7 @@
                     class="payment-menu-item"
                     *ngIf="!customerPortalStateService.isCustomerPortal && invoice.status != 'DELETED'"
                 >
-                    <div class="qt-icon icon__payment-history qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                    <div class="qt-icon icon__updates qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Payment history
                     <div class="dropdown-submenu-wrapper payment-info-submenu">
                         <div class="payment-info">

@@ -84,7 +84,7 @@
                             *ngIf="currentDevice && currentDevice.type !== 'workstation' && currentDevice.online && (getPermissions('REMOTE_CONNECTIONS') || customerPortalStateService.checkRemoteAccess(usersStateService.getCurrentUser()))"
                             (click)="remoteAccess('PROXY')"
                         >
-                            <div class="qt-ic-c qt-icon icon__quick-connect qt-pointer qt-sz-20 qt-mr-12"></div>
+                            <div class="qt-ic-c qt-icon icon__remote-access qt-pointer qt-sz-20 qt-mr-12"></div>
                             Remote Access
                         </li>
                         <li
@@ -92,7 +92,7 @@
                             *ngIf="currentDevice && currentDevice.type === 'workstation' && currentDevice.online && (getPermissions('REMOTE_CONNECTIONS') || customerPortalStateService.checkRemoteAccess(usersStateService.getCurrentUser()))"
                             (click)="showRemoteAccess = !showRemoteAccess "
                         >
-                            <div class="qt-ic-c qt-icon icon__quick-connect qt-pointer qt-sz-20 qt-mr-12"></div>
+                            <div class="qt-ic-c qt-icon icon__remote-access qt-pointer qt-sz-20 qt-mr-12"></div>
                             Remote Access
                             <ul
                                 class="dropdown-menu-qt__submenu dropdown-menu"

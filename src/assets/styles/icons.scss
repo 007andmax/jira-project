@@ -119,9 +119,6 @@
   &__no-devices-installed {
     background-image: url("/assets/img/icons/no-devices-installed.svg");
   }
-  &__network {
-    background-image: url("/assets/img/icons/network.svg");
-  }
   &__networkcard {
     background-image: url("/assets/img/icons/networkcard.svg");
   }
@@ -149,8 +146,35 @@
   &__operating-system {
     background-image: url("/assets/img/icons/operating-system.svg");
   }
-  &__connected-device-green {
-    background-image: url("/assets/img/icons/connected-device-green.svg");
+  &__connected-device {
+    background-image: url("/assets/img/icons/connected-device.svg");
+  }
+  &__unpaid-invoice {
+    background-image: url("/assets/img/icons/unpaid-invoice.svg");
+  }
+  &__avg-response {
+    background-image: url("/assets/img/icons/avg-response.svg");
+  }
+  &__tickets-on-time {
+    background-image: url("/assets/img/icons/tickets-on-time.svg");
+  }
+  &__tickets {
+    background-image: url("/assets/img/icons/tickets.svg");
+  }
+  &__on-hold-tickets {
+    background-image: url("/assets/img/icons/on-hold-tickets.svg");
+  }
+  &__recurring-tickets {
+    background-image: url("/assets/img/icons/recurring-tickets.svg");
+  }
+  &__solved-tickets {
+    background-image: url("/assets/img/icons/solved-tickets.svg");
+  }
+  &__system {
+    background-image: url("/assets/img/icons/system.svg");
+  }
+  &__clone-document {
+    background-image: url("/assets/img/icons/clone-document.svg");
   }
   // END Color Icon
   &__assign-date {
@@ -186,7 +210,7 @@
   &__user-account {
     mask-image: url("/assets/img/icons/local-user-account.svg");
   }
-  &__close { // TODO need combine icons to mask
+  &__close {
     mask-image: url("/assets/img/icons/close.svg");
   }
   &__settings-gray {
@@ -469,20 +493,17 @@
   &__edit {
     mask-image: url("/assets/img/icons/edit.svg");
   }
-  &__expand-redactor {
-    mask-image: url("/assets/img/icons/expand-redactor.svg");
-  }
-  &__download-pdf {
-    mask-image: url("/assets/img/icons/download-pdf.svg");
+  &__expand {
+    mask-image: url("/assets/img/icons/expand.svg");
   }
   &__connection {
     mask-image: url("/assets/img/icons/connection.svg");
   }
-  &__payment-history { // TODO check
-    mask-image: url("/assets/img/icons/payment-history.svg");
+  &__updates {
+    mask-image: url("/assets/img/icons/updates.svg");
   }
-  &__refund-payment { // TODO check
-    background-image: url("/assets/img/icons/refund-payment.svg");
+  &__return-money {
+    mask-image: url("/assets/img/icons/return-money.svg");
   }
   &__help {
     mask-image: url("/assets/img/icons/help.svg");
@@ -490,14 +511,11 @@
   &__total-sales { // TODO check rename for sales, delete sales icon
     background-image: url("/assets/img/icons/total-sales.svg");
   }
-  &__unbilled-amount { // TODO check
-    background-image: url("/assets/img/icons/unbilled-amount.svg");
+  &__unbilled-amount {
+    mask-image: url("/assets/img/icons/unbilled-amount.svg");
   }
-  &__unpaid-invoice { // TODO check
-    background-image: url("/assets/img/icons/unpaid-invoice.svg");
-  }
-  &__message-response { // TODO check
-    background-image: url("/assets/img/icons/message-response.svg");
+  &__message-response {
+    mask-image: url("/assets/img/icons/message-response.svg");
   }
   &__search {
     mask-image: url("/assets/img/icons/search.svg");
@@ -505,26 +523,8 @@
   &__spam {
     mask-image: url("/assets/img/icons/spam.svg");
   }
-  &__force-create { // TODO check
-    background-image: url("/assets/img/icons/force-create.svg");
-  }
-  &__avg-response { // TODO check
-    background-image: url("/assets/img/icons/avg-response.svg");
-  }
-  &__tickets-on-time { // TODO check
-    background-image: url("/assets/img/icons/tickets-on-time.svg");
-  }
-  &__tickets { // TODO check
-    background-image: url("/assets/img/icons/tickets.svg");
-  }
-  &__on-hold-tickets { // TODO check
-    background-image: url("/assets/img/icons/on-hold-tickets.svg");
-  }
-  &__recurring-tickets { // TODO check
-    background-image: url("/assets/img/icons/recurring-tickets.svg");
-  }
-  &__solved-tickets { // TODO check
-    background-image: url("/assets/img/icons/solved-tickets.svg");
+  &__force-create {
+    mask-image: url("/assets/img/icons/force-create.svg");
   }
   &__links {
     mask-image: url("/assets/img/icons/links.svg");
@@ -550,35 +550,17 @@
   &__network_device {
     mask-image: url("/assets/img/icons/network_device.svg");
   }
-  &__wifi { // TODO CHECK
-    background-image: url("/assets/img/icons/wifi-network.svg");
+  &__wifi-network {
+    mask-image: url("/assets/img/icons/wifi-network.svg");
   }
-  &__arrow-down,
-  &__arrow-down--blue-light-800 {
-    background-color: $gray-500;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/arrow-down.svg");
-    mask-image: url("/assets/img/icons/arrow-down.svg");
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
-  }
-  &__arrow-down--blue-light-800 {
-    background-color: $sky-blue-800;
+  &__arrow-narrow-down {
+    mask-image: url("/assets/img/icons/arrow-narrow-down.svg");
   }
   &__tags {
     mask-image: url("/assets/img/icons/tags.svg");
   }
-  &__down-arrow { // TODO check
-    background-image: url("/assets/img/icons/down-arrow.svg");
-    &--sm {
-      background-image: url("/assets/img/icons/filter-dropdown.svg");
-    }
-  }
-  &__down-arrow__sm { // TODO check
-    background-image: url("/assets/img/icons/down-arrow-sm.svg");
+  &__arrow-down {
+    mask-image: url("/assets/img/icons/arrow-down.svg");
   }
   &__button-server--gray-500 { // TODO check
     background-color: $gray-500;
@@ -594,20 +576,14 @@
   &__agent {
     mask-image: url("/assets/img/icons/agent.svg");
   }
-  &__quick-connect { // TODO check
-    background-image: url("/assets/img/icons/quick-connect.svg");
-  }
   &__external-link {
     mask-image: url("/assets/img/icons/external-link.svg");
   }
-  &__software { // TODO check
-    background-image: url("/assets/img/icons/software.svg");
+  &__software {
+    mask-image: url("/assets/img/icons/software.svg");
   }
   &__hosting {
     mask-image: url("/assets/img/icons/hosting.svg");
-  }
-  &__system { // TODO check
-    background-image: url("/assets/img/icons/system.svg");
   }
   &__update {
     mask-image: url("/assets/img/icons/update.svg");
@@ -636,8 +612,8 @@
   &__master-agent { // TODO check
     background-image: url("/assets/img/icons/master-agent.svg");
   }
-  &__sidebar-blue { // TODO check
-    background-image: url("/assets/img/icons/sidebar-blue.svg");
+  &__sidebar {
+    mask-image: url("/assets/img/icons/sidebar.svg");
   }
   &__upload-avtar { // TODO check
     mask-image: url("/assets/img/icons/upload-photo.svg");
@@ -645,26 +621,23 @@
   &__upload {
     mask-image: url("/assets/img/icons/upload.svg");
   }
-  &__close-round { // TODO check
-    background-image: url("/assets/img/icons/close-round.svg");
+  &__close-round {
+    mask-image: url("/assets/img/icons/close-round.svg");
   }
-  &__key { // TODO check
+  &__key {
     mask-image: url("/assets/img/icons/key.svg");
   }
   &__copy {
     mask-image: url("/assets/img/icons/copy.svg");
   }
-  &__clone-document { // TODO check
-    background-image: url("/assets/img/icons/clone-document.svg");
-  }
   &__ticket-support { // TODO check
     mask-image: url("/assets/img/icons/ticket-support.svg");
   }
-  &__remote-access-green { // TODO check
-    background-image: url("/assets/img/icons/remote-access-green.svg");
+  &__network {
+    mask-image: url("/assets/img/icons/network.svg");
   }
-  &__remote-access-gray { // TODO check
-    mask-image: url("/assets/img/icons/remote-access-gray.svg");
+  &__remote-access {
+    mask-image: url("/assets/img/icons/remote-access.svg");
   }
   &__computer-green {
     background-image: url("/assets/img/icons/computer-green.svg");
@@ -782,6 +755,9 @@
   }
   &__blue-light-600 {
     background-color: $blue-light-600;
+  }
+  &__blue-light-800 {
+    background-color: $blue-light-800;
   }
   &__yellow-600 {
     background-color: $yellow-600;

@@ -91,17 +91,17 @@
                 ></app-dynamic-tooltip>
                 <div
                     *ngIf="item.status === 'CONNECTED' && item.online"
-                    class="support-timeline-status__step2 icon__connected-device-green qt-bg-contain"
+                    class="support-timeline-status__step2 icon__connected-device qt-bg-contain"
                     (mouseenter)="agentConnectedTooltip.show($event.target)"
                     (mouseleave)="agentConnectedTooltip.hide()"
                 ></div>
                 <div
                     *ngIf="!(item.status === 'CONNECTED' && item.online) && !(item.status === 'INSTALLED' && item.online)"
-                    class="support-timeline-status__step2 qt-icon icon__remote-access-gray"
+                    class="support-timeline-status__step2 qt-icon icon__remote-access"
                 ></div>
                 <div
                     *ngIf="item.status === 'INSTALLED' && item.online"
-                    class="support-timeline-status__step2 icon__remote-access-green pointer"
+                    class="support-timeline-status__step2 qt-icon icon__remote-access qt-icon__green-600 pointer"
                     ngbDropdown
                     container="body"
                     ngbDropdownToggle
