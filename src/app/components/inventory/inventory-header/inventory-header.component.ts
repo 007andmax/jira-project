@@ -3,6 +3,8 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { AppService } from 'src/app/states/app/app.service';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
 import { InventoryItem } from '../class/inventory-item';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { InventoryChangeProductTypeComponent } from '../inventory-change-product-type/inventory-change-product-type.component';
 
 @Component({
   selector: 'inventory-header',
@@ -21,6 +23,7 @@ export class InventoryHeaderComponent implements OnInit {
   constructor(private permissionsService: PermissionsService,
     private inventoryStateService: InventoryStateService,
     public cd: ChangeDetectorRef,
+    private modalService: NgbModal,
     public appService: AppService) { }
 
   ngOnInit() {
@@ -43,6 +46,10 @@ export class InventoryHeaderComponent implements OnInit {
   }
   public getCountSelected() {
     return this.reqInventoryList.filter(item => item.selected).length;
+  }
+  setProductType() {
+    const modalRef = this.modalService.open(InventoryChangeProductTypeComponent, { windowClass: 'xs-modal user-modal', container: "app-inventory", backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.products = this.reqInventoryList.filter(item => item.selected);
   }
   toggleAllCompanies(event) {
     this.selectAll = event.target.checked;
