@@ -47,15 +47,17 @@ export class ProductService {
   /**
   * Get products categories
   */
-  public setProductType(productTypeId, productIds) {
-    return this.http.put(`${this.apiUrl}products/types/update`, {
-      "productTypeId": productTypeId,
+  public setProductType(productTypeId, productIds, active = null) {
+    let data: any = {
       "productIds": productIds
-    }).pipe(
-      tap(data => {
+    }
+    if (productTypeId) data.productTypeId = productTypeId;
+    if (active) data.active = active;
+    return this.http.put(`${this.apiUrl}products/update`, data).pipe(
+      tap(res => {
         this.toastrService.success("Product type has been successfully changed");
         this.appStateService.changeDetectorRef();
-        return data;
+        return res;
       }));
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { InventoryItem } from '../class/inventory-item';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
@@ -35,6 +35,7 @@ export class InventoryTableComponent implements OnInit {
   @Input() companies;
   @Input() glNumbers;
   @Input() taxes;
+  @Output() onSelectIventory = new EventEmitter<any>();
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
   categories: Array<CategoryProduct> = [];
   validate: InventoryValidate = new InventoryValidate();
@@ -101,6 +102,21 @@ export class InventoryTableComponent implements OnInit {
     let glNumber = this.inventory.glNumber;
     if (!glNumber) return '';
     return (glNumber.glNumber) ? glNumber.glNumber : '';
+  }
+  public setSelected(data) {
+    this.inventory.setSelected(data);
+    this.cd.markForCheck();
+  }
+  selectIventory(event) {
+    /*  if (event.target.checked) {
+        this.draftEmailStateService.addSelectedUser(this.user);
+      } else {
+        let list = this.draftEmailStateService.getSelectedUsers();
+        let index = list.findIndex(item => item.id === this.user.id);
+        if (index > -1) this.draftEmailStateService.removeSelectedUser(index);
+      }*/
+    this.onSelectIventory.emit(this.inventory);
+    this.cd.detectChanges();
   }
   public getCompanyName() {
     let conpany = this.companies.find(item => item.id === this.inventory.companyId);

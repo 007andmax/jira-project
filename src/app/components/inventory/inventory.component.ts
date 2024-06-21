@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { ProductService } from '../../services/product/product.service';
 import { CategoryProductitem } from 'src/class/category-product-item';
 import { InventoryListService } from './services/inventory-list.service';
@@ -17,6 +17,8 @@ import { DELETE_COMPANY, DELETE_PRODUCT } from '../../const/confirm';
 import { InventoryChange } from './class/inventory-change';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { ServiceAgreement } from '../billing/contracts/class/service-agreement';
+import { InventoryHeaderComponent } from './inventory-header/inventory-header.component';
+import { InventoryTableComponent } from './inventory-table/inventory-table.component';
 @Component({
   selector: 'app-inventory',
   templateUrl: './inventory.component.html',
@@ -37,6 +39,8 @@ export class InventoryComponent implements OnInit {
   showEdit = false;
   serviceAgreement: ServiceAgreement;
   container = document.body.querySelector(".main-container");
+  @ViewChildren('inventoryItem') inventoryItem: QueryList<InventoryTableComponent>;
+  @ViewChild('header') header: InventoryHeaderComponent;
   constructor(private productService: ProductService,
     private inventoryListService: InventoryListService,
     private companiesStateService: CompaniesStateService,
@@ -156,6 +160,36 @@ export class InventoryComponent implements OnInit {
   onRemoveCategory(id) {
     this.productService.removeCategory(id).subscribe(data => {
     })
+  }
+  onSelectAllIventory(data) {
+    console.log("onSelectAllIventory", data);
+    if (data) {
+      this.reqInventoryList.forEach(item => {
+        item.selected = true;
+      });
+      this.inventoryList.forEach(item => {
+        item.selected = true;
+      });
+    } else {
+      this.reqInventoryList.forEach(item => {
+        item.selected = false;
+      });
+      this.inventoryList.forEach(item => {
+        item.selected = false;
+      });
+    }
+    console.log("this.inventoryList", this.inventoryList);
+    this.header.setReqInventoryList(this.reqInventoryList);
+    this.inventoryItem.toArray().forEach(item => {
+      console.log("item", item);
+      item.setSelected(data);
+    })
+  }
+  onSelectIventory(iventory) {
+    this.reqInventoryList.find(item => item.versionedId.id === iventory.versionedId.id).selected = iventory.selected;
+    this.header.selectAll = (this.reqInventoryList.find(item => !item.selected)) ? false : true;
+    this.header.setReqInventoryList(this.reqInventoryList);
+    this.cd.detectChanges();
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

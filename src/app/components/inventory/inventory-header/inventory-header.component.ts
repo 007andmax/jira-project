@@ -2,17 +2,21 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, On
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { AppService } from 'src/app/states/app/app.service';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
+import { InventoryItem } from '../class/inventory-item';
 
 @Component({
   selector: 'inventory-header',
   templateUrl: './inventory-header.component.html',
-  styleUrls: ['./inventory-header.component.css'],
+  styleUrls: ['./inventory-header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InventoryHeaderComponent implements OnInit {
   productSearchName: string = '';
+  reqInventoryList: Array<InventoryItem> = [];
+  selectAll: boolean = false;
   @Output() onSearch: EventEmitter<any> = new EventEmitter();
   @Output() onFilter: EventEmitter<any> = new EventEmitter();
+  @Output() onSelectAllIventory: EventEmitter<any> = new EventEmitter();
   toggleFilter: boolean = false;
   constructor(private permissionsService: PermissionsService,
     private inventoryStateService: InventoryStateService,
@@ -31,6 +35,18 @@ export class InventoryHeaderComponent implements OnInit {
   }
   filter(data) {
     this.onFilter.emit(data);
+    this.cd.detectChanges();
+  }
+  public setReqInventoryList(data) {
+    this.reqInventoryList = data;
+    this.cd.markForCheck();
+  }
+  public getCountSelected() {
+    return this.reqInventoryList.filter(item => item.selected).length;
+  }
+  toggleAllCompanies(event) {
+    this.selectAll = event.target.checked;
+    this.onSelectAllIventory.emit(event.target.checked);
     this.cd.detectChanges();
   }
   addProduct() {

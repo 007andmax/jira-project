@@ -1,4 +1,14 @@
 <div class="qt-table-modern__row qt-table-modern__row--height-auto">
+    <div class="companies-table__check">
+        <label class="qt-checkbox pointer">
+            <input
+                type="checkbox"
+                [(ngModel)]="inventory.selected"
+                (change)="selectIventory($event)"
+            >
+            <span></span>
+        </label>
+    </div>
     <div class="products-table__product-name pre-line">
         <!-- <pre [textContent]="inventory.description"></pre> -->
         <textarea
