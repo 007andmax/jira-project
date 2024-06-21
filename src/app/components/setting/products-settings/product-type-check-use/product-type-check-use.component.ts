@@ -39,6 +39,10 @@ export class ProductTypeCheckUseComponent implements OnInit {
         1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));;
     })
     this.sub.add(onGetServiceType);
+    this.validateForRemoveProductType();
+  }
+  validateForRemoveProductType() {
+    this.showPreloader = true;
     this.productService.validateForRemoveProductType(this.productType.id).subscribe((data: any) => {
       this.valid = data.valid;
       this.products = data.products;
@@ -54,7 +58,7 @@ export class ProductTypeCheckUseComponent implements OnInit {
     if (this.selectedProductType) {
       this.showPreloader = true;
       this.productService.setProductType(this.selectedProductType.id, this.products.map(item => item.versionedId.id)).subscribe(data => {
-        this.approveConfirm();
+        this.validateForRemoveProductType();
       }, err => {
         this.showPreloader = false;
       })
