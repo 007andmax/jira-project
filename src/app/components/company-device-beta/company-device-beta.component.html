@@ -210,7 +210,7 @@
                         >
                             <div
                                 *ngIf="asset.IsMasterAgent"
-                                class="icon__master-agent qt-bg-contain qt-sz-16 qt-mr-8"
+                                class="qt-icon icon__agent qt-sz-16 qt-mr-8"
                                 title="Master Agent"
                             ></div>
                         </td>
@@ -490,10 +490,7 @@
                                         ngbDropdownItem
                                         (click)="sendCommand('m', asset.Guid)"
                                     >
-                                        <div class="
-                          icon__master-agent
-                          qt-bg-contain qt-sz-16 qt-mr-8
-                        "></div>
+                                        <div class="qt-icon icon__agent qt-sz-16 qt-mr-8"></div>
                                         Set as Master Agent
                                     </li>
                                     <li
@@ -645,7 +642,7 @@
                                 class="pointer"
                                 ngbDropdownItem
                             >
-                                <div class="icon__master-agent qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                <div class="qt-icon icon__agent qt-sz-16 qt-mr-8"></div>
                                 Set as Master Agent
                             </li>
                             <li
