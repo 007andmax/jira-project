@@ -5,6 +5,7 @@ import { InventoryStateService } from 'src/app/states/inventory/inventory-state.
 import { InventoryItem } from '../class/inventory-item';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { InventoryChangeProductTypeComponent } from '../inventory-change-product-type/inventory-change-product-type.component';
+import { ProductService } from 'src/app/services/product/product.service';
 
 @Component({
   selector: 'inventory-header',
@@ -24,6 +25,7 @@ export class InventoryHeaderComponent implements OnInit {
     private inventoryStateService: InventoryStateService,
     public cd: ChangeDetectorRef,
     private modalService: NgbModal,
+    private productService: ProductService,
     public appService: AppService) { }
 
   ngOnInit() {
@@ -35,6 +37,17 @@ export class InventoryHeaderComponent implements OnInit {
   }
   onKeyUp(event) {
     if (event.keyCode === 13) this.onSearch.emit(event.target.value); this.cd.detectChanges();
+  }
+  parseMarkSelectedProducts() {
+    if (this.reqInventoryList.filter(item => item.selected).some(item => item.active)) return "Mark as inactive";
+    if (this.reqInventoryList.filter(item => item.selected).some(item => !item.active)) return "Mark as active";
+    return '';
+  }
+  setActive() {
+    let active = this.reqInventoryList.filter(item => item.selected).some(item => item.active) ? false : true;
+    this.productService.setProductType(null, this.reqInventoryList.filter(item => item.selected).map(item => item.versionedId.id), active).subscribe(data => {
+
+    })
   }
   filter(data) {
     this.onFilter.emit(data);

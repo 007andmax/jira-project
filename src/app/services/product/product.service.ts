@@ -52,7 +52,7 @@ export class ProductService {
       "productIds": productIds
     }
     if (productTypeId) data.productTypeId = productTypeId;
-    if (active) data.active = active;
+    if (active != null) data.active = active;
     return this.http.put(`${this.apiUrl}products/update`, data).pipe(
       tap(res => {
         this.toastrService.success("Product type has been successfully changed");
