@@ -49,6 +49,10 @@ export class InventoryHeaderComponent implements OnInit {
 
     })
   }
+  resetSelected() {
+    this.selectAll = false;
+    this.onSelectAllIventory.emit(false);
+  }
   filter(data) {
     this.onFilter.emit(data);
     this.cd.detectChanges();

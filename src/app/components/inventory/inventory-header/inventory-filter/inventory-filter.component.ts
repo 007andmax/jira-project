@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CategoryProduct } from 'src/app/interfaces/product/category-product';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
@@ -19,6 +19,7 @@ export class InventoryFilterComponent implements OnInit {
   selectedActive = new TitleListType('Active products', 'ACTIVE');
   listTypes: Array<ProductType> = [];
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
+  @Output() onResetSelected: EventEmitter<any> = new EventEmitter();
   constructor(private inventoryStateService: InventoryStateService,
     public cd: ChangeDetectorRef,) { }
   ngOnInit() {
@@ -50,15 +51,18 @@ export class InventoryFilterComponent implements OnInit {
   }
   onSelectProuctType(data) {
     this.inventoryStateService.setSortType(data);
+    this.onResetSelected.emit(null);
   }
   selectActive(data) {
     this.selectedActive = data;
     this.inventoryStateService.setSortActive(data.type === 'ACTIVE');
+    this.onResetSelected.emit(null);
     this.cd.detectChanges();
   }
   onSelectCategory(category) {
     //  this.sortCategoty = category;
     this.inventoryStateService.setSortCategory(category);
+    this.onResetSelected.emit(null);
     this.cd.detectChanges();
   }
 }

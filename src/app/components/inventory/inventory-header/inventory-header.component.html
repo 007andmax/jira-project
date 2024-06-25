@@ -58,7 +58,10 @@
             </div>
         </div>
     </div>
-    <inventory-filter [hidden]="toggleFilter"></inventory-filter>
+    <inventory-filter
+        [hidden]="toggleFilter"
+        (onResetSelected)="resetSelected()"
+    ></inventory-filter>
     <div class="qt-page-list__header-thead-container">
         <div class="qt-table-modern qt-page-list__header-thead">
             <div class="qt-table-modern qt-page-list__header-thead">

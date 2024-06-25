@@ -39,7 +39,7 @@ export class ProductService {
   public addProductType(data) {
     return this.http.post(`${this.apiUrl}products/types`, { title: data }).pipe(
       tap(data => {
-        this.toastrService.success("The Product type has been successfully deleted");
+        this.toastrService.success("The new product type has been successfully created");
         this.appStateService.changeDetectorRef();
         return data;
       }));

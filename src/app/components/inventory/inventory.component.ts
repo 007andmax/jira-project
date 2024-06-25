@@ -179,7 +179,7 @@ export class InventoryComponent implements OnInit {
       });
     }
     console.log("this.inventoryList", this.inventoryList);
-    this.header.setReqInventoryList(this.reqInventoryList);
+    this.header.setReqInventoryList(this.inventoryList);
     this.inventoryItem.toArray().forEach(item => {
       console.log("item", item);
       item.setSelected(data);
@@ -187,8 +187,9 @@ export class InventoryComponent implements OnInit {
   }
   onSelectIventory(iventory) {
     this.reqInventoryList.find(item => item.versionedId.id === iventory.versionedId.id).selected = iventory.selected;
+    this.inventoryList.find(item => item.versionedId.id === iventory.versionedId.id).selected = iventory.selected;
     this.header.selectAll = (this.reqInventoryList.find(item => !item.selected)) ? false : true;
-    this.header.setReqInventoryList(this.reqInventoryList);
+    this.header.setReqInventoryList(this.inventoryList);
     this.cd.detectChanges();
   }
   public getPermissions(action) {
@@ -226,6 +227,9 @@ export class InventoryComponent implements OnInit {
     this.page_number = 0;
     this.inventoryListService.setBlockList(false);
     this.inventoryList = [];
+    this.reqInventoryList.forEach(item => {
+      item.selected = false;
+    });
     this.onScroll();
   }
   public onFilter(field) {
