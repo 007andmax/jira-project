@@ -11,11 +11,19 @@ import { MatFormFieldModule } from '@angular/material';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 import { GlNumbersDropDownModule } from '../../inventory/gl-numbers-drop-down/gl-numbers-drop-down.module';
+import { ProductsSettingsTypeComponent } from './products-settings-type/products-settings-type.component';
+import { AddProductTypeComponent } from './add-product-type/add-product-type.component';
+import { ProductTypeCheckUseComponent } from './product-type-check-use/product-type-check-use.component';
+import { ProductTypeCheckUseModule } from './product-type-check-use/product-type-check-use.module';
+import { ProductsSettingsCategoryComponent } from './products-settings-category/products-settings-category.component';
 
 @NgModule({
     declarations: [
         ProductsSettingsComponent,
-        AddCategoryProductComponent
+        AddCategoryProductComponent,
+        ProductsSettingsTypeComponent,
+        AddProductTypeComponent,
+        ProductsSettingsCategoryComponent
     ],
     imports: [
         CommonModule,
@@ -27,7 +35,8 @@ import { GlNumbersDropDownModule } from '../../inventory/gl-numbers-drop-down/gl
         MatFormFieldModule,
         DropDownModule,
         KeyUpEnterModule,
-        GlNumbersDropDownModule
+        GlNumbersDropDownModule,
+        ProductTypeCheckUseModule
     ],
 
 

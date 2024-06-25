@@ -51,7 +51,8 @@
       }
     }
 
-    &__category {
+    &__category,
+    &__product-type {
       flex: 1 0 144px;
       color: $gray-600;
       @media (min-width: 2048px) {
@@ -171,6 +172,6 @@ app-inventory-table {
 .products-page {
   .qt-page-list__header-thead,
   .qt-page-list__body-tbody {
-    min-width: 1134px;
+    min-width: 1815px;
   }
 }

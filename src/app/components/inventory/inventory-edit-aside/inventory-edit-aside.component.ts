@@ -18,6 +18,8 @@ import { AppStateService } from 'src/app/states/app/app-state.service';
 import { TextAreaDirective } from 'src/app/directives/text-area/text-area.directive';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { TaxesComponent } from '../../shared/taxes/taxes.component';
+import { ProductType } from '../../setting/products-settings/class/product-type';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
   selector: 'app-inventory-edit-aside',
@@ -36,15 +38,18 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
   categories: Array<CategoryProduct> = [];
   validate: InventoryValidate = new InventoryValidate();
   editSupplier: Company = null;
+  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   @ViewChild('addTax') containerAddTax;
   @ViewChild('taxesDp') taxesDp: TaxesComponent;
   @ViewChild('glNumberSelect') glNumberSelect: DropDownComponent;
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
   @ViewChild('suppliersSelect') suppliersSelect: DropDownComponent;
+  @ViewChild('typeSelect') typeSelect: DropDownComponent;
   @ViewChild(TextAreaDirective) set appTextArea(directive: TextAreaDirective) {
     this.description = directive;
   };
   selectedItem: any;
+  listTypes: Array<ProductType> = [];
   constructor(private inventoryStateService: InventoryStateService,
     private taxesStateService: TaxesStateService,
     private glNumberStateService: GlNumberStateService,
@@ -58,6 +63,17 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
     private glNumberService: GlNumberService) { }
 
   ngOnInit() {
+    if (this.inventoryStateService.getListTypes().length === 0) {
+      this.inventoryStateService.onInitGetServiceTypeList();
+    } else {
+      this.listTypes = this.inventoryStateService.getListTypes().sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
+        1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
+    }
+    let onGetServiceType = this.inventoryStateService.onGetListType.subscribe(data => {
+      this.listTypes = data.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
+        1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));;
+    })
+    this.sub.add(onGetServiceType);
     if (this.glNumberStateService.getGLNumbers().length > 0) this.glNumbers = this.sortGlNumbers(this.glNumberStateService.getGLNumbers());
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
       this.glNumbers = this.sortGlNumbers(data);
@@ -94,6 +110,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
       this.elRef.nativeElement.querySelector("#inventory-description").value = this.inventory.description;
       this.opened = true;
       this.inventory.markup = this.getMarkups();
+      if (this.inventory.productType) this.typeSelect.selectItemWithOutChanges(this.listTypes.find(item => item.id == this.inventory.productType.id));
       //   this.description.update();
       this.cd.detectChanges();
     })
@@ -208,6 +225,9 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
   getParseMoney(value) {
     return (value) ? parseFloat(value).toFixed(2) : '';
   }
+  onSelectProuctType(data) {
+    this.inventory.setProductType(data);
+  }
   close() {
     this.opened = false;
     this.glNumberSelect.clearClient();
@@ -216,14 +236,19 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
     this.taxesDp.close();
     this.elRef.nativeElement.querySelector('#inventory-description').value = '';
     this.validate = new InventoryValidate();
+    this.typeSelect.clearWithOutChanges();
     this.cd.detectChanges();
   }
   save() {
     if (!this.validate.isValidate(this.inventory)) return;
+    this.addBtn.setDisabled(true);
     // this.inventory.description = this.elRef.nativeElement.querySelector('#inventory-description').innerHTML;
     this.productService.editProduct(this.inventory.getForEdit()).subscribe(data => {
+      this.addBtn.setDisabled(false);
       this.glNumberStateService.refreshGlNumbersCheck();
       this.close();
+    }, er => {
+      this.addBtn.setDisabled(false);
     })
   }
   ngOnDestroy(): void {

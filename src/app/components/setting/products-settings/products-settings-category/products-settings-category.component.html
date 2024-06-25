@@ -1,0 +1,151 @@
+<div
+    class="cmn-area"
+    [hidden]="loading"
+>
+    <div class="data-table-wrap">
+        <div class="tab-pane__table">
+            <div class="tab-pane__table-header">
+                <div class="tab-pane__table-row">
+                    <div class="tab-pane__table-cell product-category-table__checkboxes">
+                        <label class="qt-checkbox">
+                            <input
+                                id="select-all"
+                                type="checkbox"
+                                (change)="onSelectAll($event)"
+                            >
+                            <span></span>
+                        </label>
+                    </div>
+                    <div
+                        class="tab-pane__table-cell product-category-table__category-name pointer"
+                        (click)="onFilter('name')"
+                    >
+                        Category Name
+                        <div class="qt-table-modern__sorting--new"></div>
+                    </div>
+                    <div
+                        class="tab-pane__table-cell product-category-table__count pointer"
+                        (click)="onFilter('count')"
+                    >
+                        Count
+                        <div class="qt-table-modern__sorting--new"></div>
+                    </div>
+                    <div
+                        class="tab-pane__table-cell product-category-table__gl-number pointer"
+                        (click)="onFilter('gl-number')"
+                    >
+                        GL Number
+                        <div class="qt-table-modern__sorting--new"></div>
+                    </div>
+                    <div class="tab-pane__table-cell product-category-table__action"></div>
+                </div>
+            </div>
+            <div class="tab-pane__table-body">
+                <add-category-product
+                    *ngIf="showAddCategory"
+                    (onClose)="showAddCategory = false"
+                ></add-category-product>
+                <div
+                    class="tab-pane__table-row"
+                    *ngFor="let item of categoriesProducts; let i = index"
+                    appClickOtside
+                    [init]="item.isInitEdit"
+                    [ngClass]="'edit-category-container-' + i"
+                    [class]="'.edit-category-container-' + i"
+                    (onOutSide)="onEditCategory(item)"
+                >
+                    <div
+                        class="tab-pane__table-cell product-category-table__checkboxes"
+                        *ngIf="item.productsAmount === 0"
+                    >
+                        <label class="qt-checkbox">
+                            <input
+                                type="checkbox"
+                                [(ngModel)]="item.selected"
+                                (change)="onSelect($event,item)"
+                            >
+                            <span></span>
+                        </label>
+                    </div>
+                    <div
+                        class="tab-pane__table-cell product-category-table__checkboxes"
+                        *ngIf="item.productsAmount > 0"
+                    ></div>
+                    <div
+                        class="tab-pane__table-cell product-category-table__category-name"
+                        [ngClass]="{'--input-error' :  item.disableUpdate  }"
+                    >
+                        <input
+                            type="text"
+                            class="form-input --editable"
+                            placeholder="Enter Name Category"
+                            [(ngModel)]="item.name"
+                            maxlength="20"
+                            appKeyUpEnter
+                            (onChange)="onEditCategory(item)"
+                            (input)="item.onInitEdit(true);item.checkDublicate(categoriesProducts)"
+                        >
+                        <mat-error
+                            class="qt-tooltip-error"
+                            *ngIf="item.disableUpdate"
+                        >
+                            This Category is already occupied
+                        </mat-error>
+                    </div>
+                    <div
+                        class="tab-pane__table-cell product-category-table__count"
+                        [textContent]="item.productsAmount"
+                    ></div>
+                    <div class="tab-pane__table-cell product-category-table__gl-number">
+                        <gl-numbers-drop-down
+                            [class]="['--small-padding','gl-number-product-settings' ,'--editable-dropdown', 'qt-input-block']"
+                            [list]="glNumbers"
+                            [placeholder]="'Select GL'"
+                            [container]="'body'"
+                            [search]="true"
+                            [change]="true"
+                            [editItem]="item.glNumber"
+                            [add]="true"
+                            [field]="'glNumber'"
+                            uiType="dark"
+                            heightInput="32px"
+                            dropdownWidth="392px"
+                            [reducerItem]="glDropDownItemName"
+                            (onSelectedItem)="onSelectGlNumbers(item,$event)"
+                        >
+                        </gl-numbers-drop-down>
+                    </div>
+                    <div class="tab-pane__table-cell product-category-table__action">
+                        <div class="qt-df qt-ai-c">
+                            <app-dynamic-tooltip
+                                [content]="'Remove'"
+                                [position]="'top'"
+                                #deleteTooltip
+                            ></app-dynamic-tooltip>
+                            <div
+                                class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                                *ngIf="item.productsAmount > 0"
+                                (mouseenter)="noDeleteTooltip.show($event.target)"
+                                (mouseleave)="noDeleteTooltip.hide()"
+                            >
+                            </div>
+                            <app-dynamic-tooltip
+                                [content]="'You can’t delete category with existing products'"
+                                [position]="'top'"
+                                #noDeleteTooltip
+                            ></app-dynamic-tooltip>
+                            <div
+                                class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                                *ngIf="item.productsAmount === 0"
+                                (click)="removeCategoryProduct(item)"
+                                (mouseenter)="deleteTooltip.show($event.target)"
+                                (mouseleave)="deleteTooltip.hide()"
+                            >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

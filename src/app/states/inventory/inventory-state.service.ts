@@ -5,25 +5,30 @@ import { ProductService } from '../../services/product/product.service';
 import { InventoryRealTimeService } from './inventory-real-time.service';
 import { InventoryChange } from '../../components/inventory/class/inventory-change';
 import { CategoryProductitem } from 'src/class/category-product-item';
+import { ProductType } from 'src/app/components/setting/products-settings/class/product-type';
 @Injectable({
   providedIn: 'root'
 })
 export class InventoryStateService {
   sortCategoty: CategoryProduct = null;
+
   showAsideForAdd: EventEmitter<any> = new EventEmitter();
   onEditInventory: EventEmitter<InventoryItem> = new EventEmitter();
   categoryForDelete: CategoryProduct = null;
   productForDelete: InventoryItem = null;
   onSortCategory: EventEmitter<any> = new EventEmitter();
+  onSortType: EventEmitter<any> = new EventEmitter();
   onSortActive: EventEmitter<any> = new EventEmitter();
   onGetCategories: EventEmitter<any> = new EventEmitter();
   onGetProducts: EventEmitter<any> = new EventEmitter();
   onRefreshProductsAgreements: EventEmitter<any> = new EventEmitter();
   onChangeProducts: EventEmitter<InventoryChange> = new EventEmitter();
+  onGetListType: EventEmitter<any> = new EventEmitter();
   listCategoriesForRemove = [];
   categories = [];
   productList: Array<CategoryProductitem> = [];
   preloader: boolean = true;
+  listTypes: Array<ProductType> = [];
   constructor(private productService: ProductService,
     private inventoryRealTimeService: InventoryRealTimeService) { }
   public onInit() {
@@ -60,6 +65,27 @@ export class InventoryStateService {
       this.onChangeProducts.emit(new InventoryChange(newChange.action, newChange.data, []));
     })
     // this.getProducts();
+  }
+  public onInitGetServiceTypeList() {
+    this.productService.getProductsTypes().subscribe((data: any) => {
+      this.listTypes = data.productTypeDtos.map(item => new ProductType(item));
+      this.onGetListType.emit(this.listTypes)
+    })
+    this.inventoryRealTimeService.changeProductsArray.subscribe(data => {
+      if (data.action === "PRODUCT_TYPE_SAVED") this.listTypes.push(new ProductType(data.data));
+      if (data.action === "PRODUCT_TYPE_EDITED") {
+        let index = this.listTypes.findIndex(item => item.id === data.data.id);
+        if (index > -1) this.listTypes[index] = new ProductType(data.data);
+      }
+      if (data.action === "PRODUCT_TYPE_REMOVED") {
+        let index = this.listTypes.findIndex(item => item.id === data.data);
+        if (index > -1) this.listTypes.splice(index, 1);
+      }
+      this.onGetListType.emit(this.listTypes);
+    })
+  }
+  public getListTypes() {
+    return this.listTypes;
   }
   public setPreloader(data) {
     this.preloader = data;
@@ -139,6 +165,9 @@ export class InventoryStateService {
   public setSortCategory(data) {
     this.sortCategoty = data;
     this.onSortCategory.emit(data);
+  }
+  public setSortType(data) {
+    this.onSortType.emit(data);
   }
   public setSortActive(data) {
     this.onSortActive.emit(data);

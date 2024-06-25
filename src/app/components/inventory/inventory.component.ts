@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { ProductService } from '../../services/product/product.service';
 import { CategoryProductitem } from 'src/class/category-product-item';
 import { InventoryListService } from './services/inventory-list.service';
@@ -17,6 +17,8 @@ import { DELETE_COMPANY, DELETE_PRODUCT } from '../../const/confirm';
 import { InventoryChange } from './class/inventory-change';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { ServiceAgreement } from '../billing/contracts/class/service-agreement';
+import { InventoryHeaderComponent } from './inventory-header/inventory-header.component';
+import { InventoryTableComponent } from './inventory-table/inventory-table.component';
 @Component({
   selector: 'app-inventory',
   templateUrl: './inventory.component.html',
@@ -24,6 +26,7 @@ import { ServiceAgreement } from '../billing/contracts/class/service-agreement';
   providers: [InventoryListService]
 })
 export class InventoryComponent implements OnInit {
+  selectAll: boolean = false;
   inventoryList: Array<InventoryItem> = [];
   reqInventoryList: Array<InventoryItem> = [];
   filter: InventoryFilter = new InventoryFilter();
@@ -37,6 +40,8 @@ export class InventoryComponent implements OnInit {
   showEdit = false;
   serviceAgreement: ServiceAgreement;
   container = document.body.querySelector(".main-container");
+  @ViewChildren('inventoryItem') inventoryItem: QueryList<InventoryTableComponent>;
+  @ViewChild('header') header: InventoryHeaderComponent;
   constructor(private productService: ProductService,
     private inventoryListService: InventoryListService,
     private companiesStateService: CompaniesStateService,
@@ -91,6 +96,15 @@ export class InventoryComponent implements OnInit {
       this.getListProducts();
     })
     this.sub.add(onSortActive);
+    let onSortType = this.inventoryStateService.onSortType.subscribe(data => {
+      this.filter.setSortType(data);
+      document.body.querySelector(".main-container").scrollTo(0, 0);
+      this.page_number = 0;
+      this.inventoryListService.setBlockList(false);
+      this.inventoryList = [];
+      this.onScroll();
+    })
+    this.sub.add(onSortType);
     let getChangeProducts = this.inventoryStateService.getChangeProducts().subscribe((data: InventoryChange) => {
       if (data.action === 'PRODUCT_SAVED') {
         const reqIndex = this.reqInventoryList.findIndex((item) => item.versionedId.id === data.data.versionedId.id);
@@ -148,6 +162,35 @@ export class InventoryComponent implements OnInit {
     this.productService.removeCategory(id).subscribe(data => {
     })
   }
+  onSelectAllIventory(data) {
+    this.selectAll = data;
+    if (data) {
+      this.reqInventoryList.forEach(item => {
+        item.selected = true;
+      });
+      this.inventoryList.forEach(item => {
+        item.selected = true;
+      });
+    } else {
+      this.reqInventoryList.forEach(item => {
+        item.selected = false;
+      });
+      this.inventoryList.forEach(item => {
+        item.selected = false;
+      });
+    }
+    this.header.setReqInventoryList(this.inventoryList);
+    this.inventoryItem.toArray().forEach(item => {
+      item.setSelected(data);
+    })
+  }
+  onSelectIventory(iventory) {
+    this.reqInventoryList.find(item => item.versionedId.id === iventory.versionedId.id).selected = iventory.selected;
+    this.inventoryList.find(item => item.versionedId.id === iventory.versionedId.id).selected = iventory.selected;
+    this.header.selectAll = (this.reqInventoryList.find(item => !item.selected)) ? false : true;
+    this.header.setReqInventoryList(this.inventoryList);
+    this.cd.detectChanges();
+  }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }
@@ -174,6 +217,8 @@ export class InventoryComponent implements OnInit {
       inventoryList.push(listFilter[i]);
     }
     this.inventoryList = [...this.inventoryList, ...inventoryList];
+    this.inventoryList.forEach(item => item.selected = this.selectAll);
+    this.header.setReqInventoryList(this.inventoryList);
     this.infiniteScrollDisabled = false;
     if ((this.page_number * 30) > listFilter.length) this.inventoryListService.setBlockList(true);
     this.cd.detectChanges();
@@ -183,6 +228,9 @@ export class InventoryComponent implements OnInit {
     this.page_number = 0;
     this.inventoryListService.setBlockList(false);
     this.inventoryList = [];
+    this.reqInventoryList.forEach(item => {
+      item.selected = false;
+    });
     this.onScroll();
   }
   public onFilter(field) {

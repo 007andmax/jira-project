@@ -9,4 +9,5 @@ export interface reqInventoryAdd {
     categoryId: string;
     active: boolean;
     glNumber: { id: string };
+    productType: { id: string };
 }
