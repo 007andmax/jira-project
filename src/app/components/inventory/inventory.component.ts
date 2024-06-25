@@ -102,7 +102,8 @@ export class InventoryComponent implements OnInit {
       this.page_number = 0;
       this.inventoryListService.setBlockList(false);
       this.inventoryList = [];
-      this.onScroll();
+      this.showPreloader = true;
+      this.getListProducts();
     })
     this.sub.add(onSortType);
     let getChangeProducts = this.inventoryStateService.getChangeProducts().subscribe((data: InventoryChange) => {
@@ -195,7 +196,7 @@ export class InventoryComponent implements OnInit {
     return this.permissionsService.isAllowed(action)
   }
   public getListProducts() {
-    this.productService.getProducts(this.filter.getActive()).subscribe((res: Array<InventoryItem>) => {
+    this.productService.getProducts(this.filter.getActive(), this.filter.getSortTypeId()).subscribe((res: Array<InventoryItem>) => {
       this.reqInventoryList = res;
       this.onScroll();
       this.showPreloader = false;
