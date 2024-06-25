@@ -163,7 +163,6 @@ export class InventoryComponent implements OnInit {
     })
   }
   onSelectAllIventory(data) {
-    console.log("onSelectAllIventory", data);
     this.selectAll = data;
     if (data) {
       this.reqInventoryList.forEach(item => {
@@ -180,10 +179,8 @@ export class InventoryComponent implements OnInit {
         item.selected = false;
       });
     }
-    console.log("this.inventoryList", this.inventoryList);
     this.header.setReqInventoryList(this.inventoryList);
     this.inventoryItem.toArray().forEach(item => {
-      console.log("item", item);
       item.setSelected(data);
     })
   }
