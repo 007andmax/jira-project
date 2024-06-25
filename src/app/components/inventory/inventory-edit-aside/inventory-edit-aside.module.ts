@@ -9,6 +9,8 @@ import { NumberModule } from 'src/app/directives/number/number.module';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-number.module';
 import { GlNumbersDropDownModule } from '../gl-numbers-drop-down/gl-numbers-drop-down.module';
+import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
+import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { GlNumbersDropDownModule } from '../gl-numbers-drop-down/gl-numbers-drop
         NumberModule,
         DropDownModule,
         DecimalNumberModule,
-        GlNumbersDropDownModule
+        GlNumbersDropDownModule,
+        DisabledBtnModule,
+        PreloaderTicketModule
     ],
     exports: [InventoryEditAsideComponent]
 

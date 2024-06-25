@@ -58,6 +58,22 @@
             </div>
         </div>
         <div class="qt-inputs-row">
+            <div class="qt-input-block --required">
+                <app-drop-down
+                    #typeSelect
+                    [class]="['qt-select-input-40']"
+                    [placeholder]="'Select Type'"
+                    [title]="'Product Type'"
+                    [field]="'title'"
+                    [list]="listTypes"
+                    [search]="true"
+                    [change]="true"
+                    (onSelectedItem)="onSelectProuctType($event)"
+                >
+                </app-drop-down>
+            </div>
+        </div>
+        <div class="qt-inputs-row">
             <div class="qt-input-block">
                 <div class="qt-input-block__label">Description</div>
                 <textarea
@@ -214,9 +230,13 @@
             </button>
             <button
                 class="qt-button qt-w100 qt-jc-c"
-                (click)="save()"
+                appDisabledBtn
+                #addBtn="disabled"
+                (onClick)="save()"
+                [ngClass]="{'--loading':addBtn.isBlock()}"
             >
-                Save Product
+                <span>Save Product</span>
+                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
             </button>
         </div>
     </div>

@@ -139,6 +139,8 @@ import { SuperAdminKnowledgeBaseTableItemComponent } from './components/super-ad
 import { SuperAdminKnowledgeBaseService } from './components/super-admin/services/super-admin-knowledge-base/super-admin-knowledge-base.service';
 import { SuperAdminPublicListComponent } from './components/super-admin-public/super-admin-public-list/super-admin-public-list.component';
 import { SuperAdminPublicListModule } from './components/super-admin-public/super-admin-public-list/super-admin-public-list.module';
+import { ProductTypeCheckUseComponent } from './components/setting/products-settings/product-type-check-use/product-type-check-use.component';
+import { ProductTypeCheckUseModule } from './components/setting/products-settings/product-type-check-use/product-type-check-use.module';
 declare var $: any;
 
 /**
@@ -168,7 +170,7 @@ declare var $: any;
     GlNumberCheckUseComponent,
     CannedResponsesAsideComponent,
     ManufacturesCheckUseComponent,
-    UserDeArchiveNotificationComponent,
+    UserDeArchiveNotificationComponent
   ],
   imports: [
     BrowserModule,
@@ -224,7 +226,8 @@ declare var $: any;
     UserFilterSaveModule,
     TicketsFilterSaveModule,
     MarketingSubscriptionsAsideModule,
-    SuperAdminPublicListModule
+    SuperAdminPublicListModule,
+    ProductTypeCheckUseModule
   ],
   entryComponents: [
     ConfirmComponent,
@@ -244,7 +247,7 @@ declare var $: any;
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
     UsersCheckUseComponent,
-    ManufacturesCheckUseComponent,
+    ManufacturesCheckUseComponent
   ],
   providers: [
     {

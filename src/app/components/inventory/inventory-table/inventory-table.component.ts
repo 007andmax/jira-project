@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { InventoryItem } from '../class/inventory-item';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs';
 import { CategoryProduct } from 'src/app/interfaces/product/category-product';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
+import { ProductType } from '../../setting/products-settings/class/product-type';
 
 @Component({
   selector: 'app-inventory-table',
@@ -32,9 +33,11 @@ export class InventoryTableComponent implements OnInit {
   @Input() companies;
   @Input() glNumbers;
   @Input() taxes;
+  @Output() onSelectIventory = new EventEmitter<any>();
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
   categories: Array<CategoryProduct> = [];
   validate: InventoryValidate = new InventoryValidate();
+  listTypes: Array<ProductType> = [];
   sub: Subscription = new Subscription();
   constructor(private permissionsService: PermissionsService,
     private inventoryStateService: InventoryStateService,
@@ -49,6 +52,15 @@ export class InventoryTableComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if (this.inventoryStateService.getListTypes().length > 0) {
+      this.listTypes = this.inventoryStateService.getListTypes().sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
+        1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
+    }
+    let onGetServiceType = this.inventoryStateService.onGetListType.subscribe(data => {
+      this.listTypes = data.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
+        1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));;
+    })
+    this.sub.add(onGetServiceType);
     if (this.glNumberStateService.getGLNumbers().length > 0) this.glNumbers = this.sortGlNumbers(this.glNumberStateService.getGLNumbers());
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
       this.glNumbers = this.sortGlNumbers(data);
@@ -88,6 +100,21 @@ export class InventoryTableComponent implements OnInit {
     let glNumber = this.inventory.glNumber;
     if (!glNumber) return '';
     return (glNumber.glNumber) ? glNumber.glNumber : '';
+  }
+  public setSelected(data) {
+    this.inventory.setSelected(data);
+    this.cd.markForCheck();
+  }
+  selectIventory(event) {
+    /*  if (event.target.checked) {
+        this.draftEmailStateService.addSelectedUser(this.user);
+      } else {
+        let list = this.draftEmailStateService.getSelectedUsers();
+        let index = list.findIndex(item => item.id === this.user.id);
+        if (index > -1) this.draftEmailStateService.removeSelectedUser(index);
+      }*/
+    this.onSelectIventory.emit(this.inventory);
+    this.cd.detectChanges();
   }
   public getCompanyName() {
     let conpany = this.companies.find(item => item.id === this.inventory.companyId);
@@ -180,6 +207,12 @@ export class InventoryTableComponent implements OnInit {
     return `${result["glNumber"]} - ${(result["description"] && result["description"].length > 0) ? result["description"]
       : "No description"}`;
   };
+  onSelectProuctType(data) {
+    this.inventory.setProductType(data);
+    this.inventory.setIsEdit(true);
+    this.save();
+    this.cd.markForCheck();
+  }
   onAddGlNumber(data) {
     this.glNumberService.addGlNumber(data, "").subscribe((res: any) => {
       this.inventory.glNumber = res;
