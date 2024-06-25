@@ -26,6 +26,7 @@ import { InventoryTableComponent } from './inventory-table/inventory-table.compo
   providers: [InventoryListService]
 })
 export class InventoryComponent implements OnInit {
+  selectAll: boolean = false;
   inventoryList: Array<InventoryItem> = [];
   reqInventoryList: Array<InventoryItem> = [];
   filter: InventoryFilter = new InventoryFilter();
@@ -163,6 +164,7 @@ export class InventoryComponent implements OnInit {
   }
   onSelectAllIventory(data) {
     console.log("onSelectAllIventory", data);
+    this.selectAll = data;
     if (data) {
       this.reqInventoryList.forEach(item => {
         item.selected = true;
@@ -218,6 +220,8 @@ export class InventoryComponent implements OnInit {
       inventoryList.push(listFilter[i]);
     }
     this.inventoryList = [...this.inventoryList, ...inventoryList];
+    this.inventoryList.forEach(item => item.selected = this.selectAll);
+    this.header.setReqInventoryList(this.inventoryList);
     this.infiniteScrollDisabled = false;
     if ((this.page_number * 30) > listFilter.length) this.inventoryListService.setBlockList(true);
     this.cd.detectChanges();
