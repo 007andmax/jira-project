@@ -67,10 +67,10 @@
                         (input)="item.onInitEdit(true);item.checkDublicate(list)"
                     >
                     <mat-error
-                        class="qt-tooltip-error"
+                        class="invalid-feedback"
                         *ngIf="item.disableUpdate"
                     >
-                        This Industry is already occupied
+                        This type is already occupied
                     </mat-error>
                 </div>
                 <div class="tab-pane__table-cell crm-settings-company-industry-table__action">

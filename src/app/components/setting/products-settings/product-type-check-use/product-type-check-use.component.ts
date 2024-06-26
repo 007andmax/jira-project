@@ -31,11 +31,11 @@ export class ProductTypeCheckUseComponent implements OnInit {
     if (this.inventoryStateService.getListTypes().length === 0) {
       this.inventoryStateService.onInitGetServiceTypeList();
     } else {
-      this.listTypes = this.inventoryStateService.getListTypes().sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
+      this.listTypes = this.inventoryStateService.getListTypes().filter(item => item.id !== this.productType.id).sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
         1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
     }
     let onGetServiceType = this.inventoryStateService.onGetListType.subscribe(data => {
-      this.listTypes = data.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
+      this.listTypes = data.filter(item => item.id !== this.productType.id).sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
         1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));;
     })
     this.sub.add(onGetServiceType);
