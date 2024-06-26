@@ -493,6 +493,9 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     }
     this.ticketsService.assignUserToTicket(this.ticketProfile.id, value.join(",")).subscribe(res => {
       // this.ticketMessage.isClaimTicket = false;
+      this.ticketProfile.setAssignedUser(this.usersStateService.getCurrentUser());
+      this.ticketProfile.setAssignedUserId(this.usersStateService.getCurrentUser().id);
+      this.ticketProfile.setAssignedAt(new Date().getTime());
       this.ticketStateService.fastOpenTicket();
       this.cd.detectChanges();
     })
