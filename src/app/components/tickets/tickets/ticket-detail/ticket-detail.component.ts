@@ -189,6 +189,11 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(onCloseTicket);
+    let onOpenTicket = this.ticketStateService.onOpenTicket.subscribe(data => {
+      this.ticketProfile.setStatus("IN_PROGRESS");
+      this.cd.detectChanges();
+    })
+    this.sub.add(onOpenTicket);
   }
   removeCustomDevice(ids) {
     forkJoin(
@@ -252,8 +257,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
         return;
       }
       this.ticketMessage.isMarkAsOpen = false;
-      this.toastrService.success("The ticket has been successfully changed");
-      this.appStateService.changeDetectorRef();
+      this.ticketStateService.fastOpenTicket();
     })
   };
   onAddUpdate(data) {
@@ -489,6 +493,8 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     }
     this.ticketsService.assignUserToTicket(this.ticketProfile.id, value.join(",")).subscribe(res => {
       // this.ticketMessage.isClaimTicket = false;
+      this.ticketStateService.fastOpenTicket();
+      this.cd.detectChanges();
     })
 
   };

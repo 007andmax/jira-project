@@ -47,6 +47,7 @@ export class TicketStateService {
   onGetPasswords: EventEmitter<any> = new EventEmitter();
   onGetDevices: EventEmitter<any> = new EventEmitter();
   onCloseTicket: EventEmitter<any> = new EventEmitter();
+  onOpenTicket: EventEmitter<any> = new EventEmitter();
   devices: Array<DeviceCompany> = [];
   sub: Subscription = new Subscription();
   constructor(private contractsService: ContractsService,
@@ -64,6 +65,9 @@ export class TicketStateService {
   }
   public fastCloseTicket() {
     this.onCloseTicket.emit(null);
+  }
+  public fastOpenTicket() {
+    this.onOpenTicket.emit(null);
   }
   public setDocumentForPreview(data) {
     this.documentForPreview = data;

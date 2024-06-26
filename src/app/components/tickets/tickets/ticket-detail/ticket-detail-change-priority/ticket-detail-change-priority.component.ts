@@ -71,6 +71,10 @@ export class TicketDetailChangePriorityComponent extends DropDownComponent {
       this.isDisabled = true;
       this.cd.detectChanges();
     })
+    this.ticketStateService.onOpenTicket.subscribe(data => {
+      this.isDisabled = false;
+      this.cd.detectChanges();
+    })
     let getOnUpdateTicket = this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
       this.isDisabled = !(this.ticketsPermissionsService.isActionVisible('update', this.ticketProfile, null, null) && (this.customerPortalStateService.isCustomerPortal && this.isAddNoteForCustomerUser() || !this.customerPortalStateService.isCustomerPortal));
       this.selectedItem = this.ticketProfile.priorityLevel;
