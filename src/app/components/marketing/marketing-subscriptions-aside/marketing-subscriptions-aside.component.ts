@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MarketingSubscriptionType } from '../../setting/marketing-email/marketing-subscription-type/class/marketing-subscription-type';
 import { Subscription, forkJoin, of } from 'rxjs';
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
@@ -18,7 +18,7 @@ import { AppStateService } from 'src/app/states/app/app-state.service';
   templateUrl: './marketing-subscriptions-aside.component.html',
   styleUrls: ['./marketing-subscriptions-aside.component.scss']
 })
-export class MarketingSubscriptionsAsideComponent implements OnInit {
+export class MarketingSubscriptionsAsideComponent implements OnInit, OnDestroy {
   opened: boolean = false;
   listCustomSubscription: Array<MarketingSubscriptionType> = [];
   users: Array<User> = [];
@@ -32,6 +32,7 @@ export class MarketingSubscriptionsAsideComponent implements OnInit {
     private appStateService: AppStateService,
     private confirmStateService: ConfirmStateService,) { }
 
+
   ngOnInit() {
     this.listCustomSubscription = this.marketingEmailStateService.getListCustomSubscription();
     let onGetListCustomSubscription = this.marketingEmailStateService.onGetListCustomSubscription.subscribe(data => {
@@ -39,7 +40,7 @@ export class MarketingSubscriptionsAsideComponent implements OnInit {
     })
     this.sub.add(onGetListCustomSubscription);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-      if (data) {
+      if (data && this.opened) {
         if (this.confirmStateService.getConfirmAction() === DELETE_SUBSCRIPTION_TYPE) {
           this.onRemoveSubscription(this.marketingEmailStateService.getSubscriptionTypeForRemove().id);
         }
@@ -100,5 +101,8 @@ export class MarketingSubscriptionsAsideComponent implements OnInit {
   }
   public trackById(index, item) {
     return item.id;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

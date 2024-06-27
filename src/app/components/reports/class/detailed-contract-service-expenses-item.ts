@@ -28,10 +28,6 @@ export class DetailedContractServiceExpensesItem {
     }
     public getParseDate() {
         let date = new Date(this.date);
-        let typeTime = (date.getHours() > 12) ? "PM" : "AM",
-            hours = (date.getHours() > 12) ? date.getHours() - 12 : date.getHours(),
-            minutes = (date.getMinutes() > 10) ? date.getMinutes() : "0" + date.getMinutes();
-
-        return `${moment((date) ? new Date(date) : new Date()).format('DD/MM/YYYY')} ${(hours > 10) ? hours : "0" + hours}:${minutes} ${typeTime}`;
+        return `${moment((date) ? new Date(date) : new Date()).format('DD/MM/YYYY')} ${moment(new Date(date)).format('hh:mm A')}`;
     }
 }
