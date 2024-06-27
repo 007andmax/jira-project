@@ -302,6 +302,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       this.devices.sort((a, b) => (a.hostName.toLowerCase() > b.hostName.toLowerCase()) ?
         1 : ((b.hostName.toLowerCase() > a.hostName.toLowerCase()) ? -1 : 0));
       this.ticketAdd.setPreloaderDevices(false);
+      this.deviceDP.reset(this.devices);
     });
   }
   onGetUsers(data) {
