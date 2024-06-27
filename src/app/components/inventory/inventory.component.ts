@@ -102,7 +102,8 @@ export class InventoryComponent implements OnInit {
       this.page_number = 0;
       this.inventoryListService.setBlockList(false);
       this.inventoryList = [];
-      this.onScroll();
+      this.showPreloader = true;
+      this.getListProducts();
     })
     this.sub.add(onSortType);
     let getChangeProducts = this.inventoryStateService.getChangeProducts().subscribe((data: InventoryChange) => {
@@ -131,6 +132,8 @@ export class InventoryComponent implements OnInit {
         const Index = this.inventoryList.findIndex((item) => item.versionedId.id === data.data.versionedId.id);
         if (Index > -1) this.inventoryList.splice(Index, 1);
       }
+      this.header.selectAll = (this.reqInventoryList.find(item => !item.selected)) ? false : true;
+      this.header.setReqInventoryList(this.inventoryList);
       this.cd.detectChanges();
     })
     this.sub.add(getChangeProducts);
@@ -195,7 +198,7 @@ export class InventoryComponent implements OnInit {
     return this.permissionsService.isAllowed(action)
   }
   public getListProducts() {
-    this.productService.getProducts(this.filter.getActive()).subscribe((res: Array<InventoryItem>) => {
+    this.productService.getProducts(this.filter.getActive(), this.filter.getSortTypeId()).subscribe((res: Array<InventoryItem>) => {
       this.reqInventoryList = res;
       this.onScroll();
       this.showPreloader = false;

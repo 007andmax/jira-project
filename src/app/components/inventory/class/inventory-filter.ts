@@ -23,6 +23,9 @@ export class InventoryFilter {
     public setSortType(data) {
         this.sortType = data;
     }
+    public getSortTypeId() {
+        return this.sortType ? this.sortType.id : null;
+    }
     public setActive(data) {
         this.active = data;
     }
@@ -38,7 +41,6 @@ export class InventoryFilter {
     }
     public isFilterItem(item) {
         if (this.sortCategoty && item.category.id != this.sortCategoty.id) return false;
-        if (this.sortType && item.productType && item.productType.id != this.sortType.id) return false;
         if (item.active != this.active) return false;
         if (this.productSearchName.length > 0 && (!item.description.toLowerCase().includes(this.productSearchName.toLowerCase()) && !(item.ilc && item.ilc.toLowerCase().includes(this.productSearchName.toLowerCase())) && !item.isFindGlNumber(this.productSearchName) && !(item.manufacture && item.manufacture.toLowerCase().includes(this.productSearchName.toLowerCase())))) return false;
         return true;

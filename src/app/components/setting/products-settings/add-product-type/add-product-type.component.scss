@@ -8,3 +8,10 @@
         flex: 0 0 20px;
     }
 }
+.--input-error {
+    position: relative;
+
+    input {
+        border: solid 1px $red-600 !important;
+    }
+}

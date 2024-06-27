@@ -101,7 +101,6 @@ export class ProductService {
     return this.http.get(`${this.apiUrl}products/types/filtered?titleSortDirection=desc&page=0&size=1000`);
   }
 
-
   /**
   * validate product name
   */
@@ -167,8 +166,8 @@ export class ProductService {
   /**
  * Get products categories
  */
-  public getProducts(active) {
-    return this.http.get(`${this.apiUrl}products/?active=${active}`).pipe(map((data: any) => data.map(item => new InventoryItem(item))));
+  public getProducts(active, typeId = null) {
+    return this.http.get(`${this.apiUrl}products/?active=${active}${typeId ? '&typeId=' + typeId : ''}`).pipe(map((data: any) => data.map(item => new InventoryItem(item))));
   }
 
 
