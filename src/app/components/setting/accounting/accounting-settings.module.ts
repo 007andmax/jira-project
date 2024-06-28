@@ -8,7 +8,7 @@ import { AccountingYearComponent } from './accounting-year/accounting-year.compo
 import { AddGlNumberComponent } from './gl-number/add-gl-number/add-gl-number.component';
 import { InvoiceSettingsComponent } from './invoice-settings/invoice-settings.component';
 import { QuotesSettingsComponent } from './quotes-settings/quotes-settings.component';
-import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.module';
+import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material';
 import { NgxMaskModule } from 'ngx-mask';
@@ -42,7 +42,7 @@ import { EditCustomNotesSettingsComponent } from './custom-notes-settings/edit-c
         CommonModule,
         NgbModule,
         AccountingSettingsRoutingModule,
-        ClickOtsideModule,
+        ClickOutsideModule,
         FormsModule,
         MatFormFieldModule,
         ReactiveFormsModule,

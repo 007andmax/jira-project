@@ -5,7 +5,7 @@ import { ProductsSettingsComponent } from './products-settings.component';
 import { ProductsSettingsRoutingModule } from './products-settings-routing.module';
 import { AddCategoryProductComponent } from './add-category-product/add-category-product.component';
 import { FormsModule } from '@angular/forms';
-import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.module';
+import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 import { MatFormFieldModule } from '@angular/material';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
@@ -30,7 +30,7 @@ import { ProductsSettingsCategoryComponent } from './products-settings-category/
         NgbModule,
         ProductsSettingsRoutingModule,
         FormsModule,
-        ClickOtsideModule,
+        ClickOutsideModule,
         DynamicTooltipModule,
         MatFormFieldModule,
         DropDownModule,

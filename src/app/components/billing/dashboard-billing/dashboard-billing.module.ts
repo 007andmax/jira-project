@@ -14,7 +14,7 @@ import { NvD3Module } from 'ng2-nvd3';
 import { MultiDatepickerDashboardComponent } from './multi-datepicker-dashboard/multi-datepicker-dashboard.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardBillingRoutingModule } from './dashboard-billing-routing.module';
-import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.module';
+import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
 
 
 
@@ -36,7 +36,7 @@ import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.
         NvD3Module,
         NgbModule,
         DashboardBillingRoutingModule,
-        ClickOtsideModule
+        ClickOutsideModule
 
     ],
 

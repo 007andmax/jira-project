@@ -14,7 +14,7 @@ import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
-import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.module';
+import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
 
 @NgModule({
     declarations: [
@@ -35,7 +35,7 @@ import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.
         PreloaderTicketModule,
         DynamicTooltipModule,
         CompanyDropDownModule,
-        ClickOtsideModule
+        ClickOutsideModule
 
     ],
     exports: [PasswordManagerAddAsideComponent],

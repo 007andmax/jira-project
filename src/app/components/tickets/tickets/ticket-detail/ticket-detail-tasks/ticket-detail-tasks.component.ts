@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { ClickOtsideDirective } from 'src/app/directives/click-otside/click-otside.directive';
+import { ClickOutsideDirective } from 'src/app/directives/click-otside/click-otside.directive';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketProfile } from '../../class/ticket-profile';
@@ -26,7 +26,7 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
   addTask: TicketProfileTask = new TicketProfileTask();
   listTechUsers = [];
   sub: Subscription = new Subscription();
-  @ViewChild('addTaskBtn') addTaskBtn: ClickOtsideDirective;
+  @ViewChild('addTaskBtn') addTaskBtn: ClickOutsideDirective;
   @Input() ticketProfile: TicketProfile = new TicketProfile();
   constructor(private ticketsService: TicketsService,
     private ticketStateService: TicketStateService,

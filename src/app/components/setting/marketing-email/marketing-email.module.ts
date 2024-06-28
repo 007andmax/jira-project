@@ -6,7 +6,7 @@ import { AddMarketingSubscriptionTypeModule } from './marketing-subscription-typ
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MarketingEmailUsersComponent } from './marketing-email-users/marketing-email-users.component';
 import { MarketingSubscriptionTypeComponent } from './marketing-subscription-type/marketing-subscription-type.component';
-import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.module';
+import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material';
 import { MarketingEmailUsersAddComponent } from './marketing-email-users/marketing-email-users-add/marketing-email-users-add.component';
@@ -32,7 +32,7 @@ import { MarketingEmailUsersItemComponent } from './marketing-email-users/market
         MarketingEmailRoutingModule,
         AddMarketingSubscriptionTypeModule,
         NgbModule,
-        ClickOtsideModule,
+        ClickOutsideModule,
         FormsModule,
         MatFormFieldModule,
         InfiniteScrollModule,
