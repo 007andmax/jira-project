@@ -193,7 +193,10 @@
                 *ngIf="!showPreloader"
             >
                 <ticket-detail-claim-info [ticketProfile]="ticketProfile"></ticket-detail-claim-info>
-                <ticket-detail-change-status [ticketProfile]="ticketProfile"></ticket-detail-change-status>
+                <ticket-detail-change-status
+                    #changeStatus
+                    [ticketProfile]="ticketProfile"
+                ></ticket-detail-change-status>
                 <ticket-detail-change-priority [ticketProfile]="ticketProfile"></ticket-detail-change-priority>
                 <ticket-detail-change-company [ticketProfile]="ticketProfile"></ticket-detail-change-company>
                 <ticket-detail-add-assigned-user

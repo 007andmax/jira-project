@@ -37,6 +37,7 @@ import { DevicesService } from 'src/app/services/devices/devices.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { Device } from 'src/app/components/company-devices/class/device';
 import { TicketDetailMessageComponent } from './ticket-detail-message/ticket-detail-message.component';
+import { TicketDetailChangeStatusComponent } from './ticket-detail-change-status/ticket-detail-change-status.component';
 
 @Component({
   selector: 'ticket-detail',
@@ -50,6 +51,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   @ViewChild('ticketProfileUpdates') ticketProfileUpdates: TicketDetailProfileUpdatesComponent;
   @ViewChild('ticketTasks') ticketTasks: TicketDetailTasksComponent;
   @ViewChild('detailHeader') detailHeader: TicketDetailHeaderComponent;
+  @ViewChild('changeStatus') changeStatus: TicketDetailChangeStatusComponent;
   isInit: boolean = false;
   ticketProfile: TicketProfile = new TicketProfile();
   showFormUpdate: boolean = false;
@@ -186,6 +188,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.sub.add(onEditUpdateByForm);
     let onCloseTicket = this.ticketStateService.onCloseTicket.subscribe(data => {
       this.ticketProfile.setStatus("COMPLETED");
+      this.changeStatus.setStatusWithoutChange("COMPLETED");
       this.cd.detectChanges();
     })
     this.sub.add(onCloseTicket);

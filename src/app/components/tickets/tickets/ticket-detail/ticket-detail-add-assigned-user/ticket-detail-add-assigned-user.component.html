@@ -14,6 +14,7 @@
         #assignedUser
         class="assigned-user-ticket-detail"
         [container]="'body'"
+        [removable]="!customerPortalStateService.isCustomerPortal && ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
         [type]="'DETAIL_TICKET_ASSIGNED_USER'"
         [placement]="'bottom-left'"
         [userList]="userList"

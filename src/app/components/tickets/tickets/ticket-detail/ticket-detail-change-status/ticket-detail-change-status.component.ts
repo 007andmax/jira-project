@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TicketChangeStatusComponent } from '../../ticket-edit-aside/ticket-change-status/ticket-change-status.component';
 import { TitleListType } from '../../tickets-header/class/title-list-type';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 
 @Component({
   selector: 'ticket-detail-change-status',
@@ -8,6 +9,7 @@ import { TitleListType } from '../../tickets-header/class/title-list-type';
   styleUrls: ['./ticket-detail-change-status.component.scss']
 })
 export class TicketDetailChangeStatusComponent extends TicketChangeStatusComponent {
+  @ViewChild('dp') dp: DropDownComponent;
   selectedTicketStatus: TitleListType;
   list: Array<TitleListType> = [new TitleListType('In Progress', 'IN_PROGRESS'),
   new TitleListType('On Hold', 'ON_HOLD')];
@@ -37,6 +39,10 @@ export class TicketDetailChangeStatusComponent extends TicketChangeStatusCompone
     this.selectedTicketStatus = this.list.find(item => item.type == (this.ticketProfile.customStatus ? this.ticketProfile.customStatus : this.ticketProfile.status));
     if (this.ticketProfile.status === null) this.selectedTicketStatus = new TitleListType(this.parseStatus("UNASSIGNED"), "UNASSIGNED");
     if (this.ticketProfile.status === "COMPLETED") this.selectedTicketStatus = new TitleListType(this.parseStatus("COMPLETED"), "COMPLETED");
+  }
+  setStatusWithoutChange(data) {
+    this.selectedTicketStatus = new TitleListType(this.parseStatus("COMPLETED"), "COMPLETED");
+    this.dp.selectItemWithOutChanges(this.selectedTicketStatus);
   }
   changeTicketStatus(item) {
     this.ticketsService.changeStatus(this.ticketProfile.id, item.type).subscribe((data: any) => {
