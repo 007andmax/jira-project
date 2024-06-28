@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { DeviceTag } from './class/device-tag';
 import { DeviceTagsStateService } from 'src/app/states/device-tags/device-tags-state.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { DeviceTagsService } from 'src/app/services/device-tags/device-tags.service';
@@ -26,7 +26,6 @@ export class ManageTagsDevicesComponent implements OnInit, OnDestroy {
   @Input() searchTag = "";
   sub: Subscription = new Subscription();
   constructor(private deviceTagsStateService: DeviceTagsStateService,
-    private formBuilder: FormBuilder,
     private toastrService: ToastrService,
     private appStateService: AppStateService,
     private confirmStateService: ConfirmStateService,

@@ -1,4 +1,4 @@
-import { Component, ElementRef, NgZone, OnInit, ViewChild } from "@angular/core";
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { ModalDismissReasons, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
@@ -12,18 +12,16 @@ import { DraftEmailStateService } from "src/app/states/draft-email/draft-email-s
 import { LeftPanelStateService } from "src/app/states/left-panel/left-panel-state.service";
 import { DeviceApplictionByCompanyReport } from "../../class/applicationbycompany-report";
 import { ApplicationByCompanyValidate } from "../../class/applicationbycompanyvalidate";
-import { ReportSendEmailComponent } from "../../report-additional-actions/report-send-email/report-send-email.component";
 import { ApplicationByCompanyReportFilter } from "./Class/applicationbycompanyReportFilter";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "applicationbycompany-report",
   templateUrl: "./applicationbycompany-report.component.html",
   styleUrls: ["./applicationbycompany-report.component.scss"],
 })
-export class ApplicationbycompanyReportComponent implements OnInit {
+export class ApplicationbycompanyReportComponent implements OnInit, OnDestroy {
   @ViewChild('dropdownDevice') dropdownDevice: DropDownComponent;
-  // @ViewChild("templatecounterApplication") templatecounterApplication;
-
   clientName: string;
   companies = [];
   application = [];
@@ -49,9 +47,9 @@ export class ApplicationbycompanyReportComponent implements OnInit {
   displayName: string;
   assetNameList: any[];
   opened: boolean = false;
+  sub: Subscription = new Subscription();
   constructor(
     private agentService: AgentService,
-    private companiesState: CompaniesStateService,
     private companiesStateService: CompaniesStateService,
     public leftPanelStateService: LeftPanelStateService,
     private modalService: NgbModal,
@@ -59,21 +57,21 @@ export class ApplicationbycompanyReportComponent implements OnInit {
     private toastr: ToastrService,
     private excelService: ExcelService,
     public elRef: ElementRef,
-    private ngZone: NgZone,
     public draftEmailStateService: DraftEmailStateService,
   ) { }
 
+
   ngOnInit() {
     this.clientName = "All Companies";
-    // this.companiesState.onInit();
     this.setPreviewDataDevice();
   }
 
   setPreviewDataDevice() {
     if (this.companiesStateService.getCompanies().length > 0) this.companies = this.getClientsList(this.companiesStateService.getCompanies());
-    this.companiesStateService.getOnCompanies().subscribe((data) => {
+    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = this.getClientsList(data);
     });
+    this.sub.add(getOnCompanies);
   }
 
   getClientsList(data) {
@@ -412,5 +410,8 @@ export class ApplicationbycompanyReportComponent implements OnInit {
 
   applicationclosed() {
     this.opened = false;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

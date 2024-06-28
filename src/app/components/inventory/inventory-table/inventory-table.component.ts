@@ -6,8 +6,6 @@ import { ProductService } from 'src/app/services/product/product.service';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DELETE_PRODUCT } from 'src/app/const/confirm';
-import { ContractsService } from 'src/app/services/contracts/contracts.service';
-import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { InventoryCheckUseComponent } from '../inventory-check-use/inventory-check-use.component';
 import { InventoryValidate } from '../class/inventory-validate';
 import { GlNumberService } from 'src/app/services/gl-number/gl-number.service';

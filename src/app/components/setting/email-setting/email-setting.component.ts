@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild } from "@angular/core";
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
-import { EmailSettingService } from './email-setting.service';
+import { EmailSettingService } from '../../../services/email-settings/email-setting.service';
 import { IncomingEmailComponent } from "./incoming-email/incoming-email.component";
 import { OutgoingEmailComponent } from "./outgoing-email/outgoing-email.component";
 declare var $: any;

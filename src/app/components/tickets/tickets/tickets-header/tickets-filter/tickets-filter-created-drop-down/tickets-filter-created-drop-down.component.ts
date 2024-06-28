@@ -7,7 +7,6 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { DateService } from 'src/app/services/date/date.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
-import { DeviceTagsService } from 'src/app/services/device-tags/device-tags.service';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 
 @Component({

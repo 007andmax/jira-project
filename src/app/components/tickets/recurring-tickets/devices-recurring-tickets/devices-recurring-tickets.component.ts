@@ -1,13 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { merge, Observable, Subject, Subscription } from "rxjs";
-import { ISubscription } from "rxjs/Subscription";
 import { debounceTime, distinctUntilChanged, filter, map } from "rxjs/operators";
 import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
-import { FormGroup } from "@angular/forms";
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { DevicesRecurringTicketsStateService } from './services/devices-recurring-tickets-state.service';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
-import { Device } from 'src/app/components/company-devices/class/device';
 
 
 @Component({

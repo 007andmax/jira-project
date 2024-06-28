@@ -1,11 +1,10 @@
-import { Component, OnInit, OnChanges, Input, Output, EventEmitter, SimpleChanges, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { CronOptions } from 'src/app/components/shared/interval/interfaces/cron/cront-option';
-import { Days, MonthWeeks, Months } from './config/enums';
 import { IntervalService } from './services/interval.service';
-import { NgbDateStruct, NgbCalendar, NgbDate, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
-import { NgbDatepickerNavigateEvent } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker';
+import { NgbDateStruct, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { IntervalStateService } from './services/interval-state.service';
 import { RecurringTicketsStateService } from '../../tickets/recurring-tickets/services/recurring-tickets-state.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -30,7 +29,7 @@ export class IntervalComponent implements OnInit, OnDestroy {
   }
 
   @Output() cronChange = new EventEmitter();
-
+  sub: Subscription = new Subscription();
   public activeTab: string = 'daily';
   public selectOptions;
   public state: any;
@@ -107,6 +106,7 @@ export class IntervalComponent implements OnInit, OnDestroy {
         }
       }
     });
+    this.sub.add(getEditMode);
     this.intervalService.addSubscription(getEditMode);
   }
 
@@ -139,6 +139,7 @@ export class IntervalComponent implements OnInit, OnDestroy {
       this.datepicker = this.stateInterval.getDefaultDate();
 
     })
+    this.sub.add(getClearState);
     this.intervalService.addSubscription(getClearState);
   }
 
@@ -236,6 +237,7 @@ export class IntervalComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.intervalService.clearSubscriptions();
+    this.sub.unsubscribe();
   }
 
 }

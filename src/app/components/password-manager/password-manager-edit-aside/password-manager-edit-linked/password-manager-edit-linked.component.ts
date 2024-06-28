@@ -5,7 +5,6 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { PasswordDeviceUser } from '../../class/password-device-user';
-import { Device } from 'src/app/components/company-devices/class/device';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { PasswordManagerStateService } from 'src/app/states/password-manager/password-manager-state.service';
 import { Subscription } from 'rxjs';

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Company } from 'src/app/interfaces/company/company';
 import { GadgetsService } from 'src/app/services/gadgets/gadgets.service';
@@ -6,7 +6,6 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { PasswordDeviceUser } from '../../class/password-device-user';
-
 import { PasswordRecordAdd } from '../../class/password-record-add';
 import { PasswordRecordValidate } from '../../class/password-record-validate';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
@@ -20,7 +19,7 @@ import { DevicesStateService } from 'src/app/states/devices/devices-state.servic
   templateUrl: './password-manager-linked.component.html',
   styleUrls: ['./password-manager-linked.component.scss']
 })
-export class PasswordManagerLinkedComponent implements OnInit {
+export class PasswordManagerLinkedComponent implements OnInit, OnDestroy {
   @Input() passwordRecordAdd: PasswordRecordAdd;
   @Input() validate: PasswordRecordValidate;
   public selectedUserAndDevices: Array<PasswordDeviceUser> = [];
@@ -49,6 +48,7 @@ export class PasswordManagerLinkedComponent implements OnInit {
     public customerPortalStateService: CustomerPortalStateService,
     public devicesService: DevicesService,
     private usersStateService: UsersStateService,) { }
+
 
   ngOnInit() {
     if (this.selectedCompanyId) this.onSelectCompany(this.selectedCompanyId);
@@ -174,5 +174,8 @@ export class PasswordManagerLinkedComponent implements OnInit {
   }
   public trackByIndex(index, item) {
     return index;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

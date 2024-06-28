@@ -26,7 +26,6 @@ export class CrmCompanyJobTitleComponent implements OnInit {
     private confirmStateService: ConfirmStateService,
     private crmStateService: CrmStateService,
     public cd: ChangeDetectorRef,
-    private crmRealTimeService: CrmRealTimeService,
     private modalService: NgbModal) { }
 
   ngOnInit() {

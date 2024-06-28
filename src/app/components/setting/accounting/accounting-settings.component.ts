@@ -9,7 +9,7 @@ import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { GlNumberSettingsComponent } from './gl-number/gl-number.component';
 import { GlNumberService } from './gl-number/gl-number.service';
-import { InvoiceTicketsService } from './accounting-settings.service';
+import { InvoiceTicketsService } from '../../../services/accounting/accounting-settings.service';
 import { InvoiceSettingsComponent } from './invoice-settings/invoice-settings.component';
 import { QuotesSettingsComponent } from './quotes-settings/quotes-settings.component';
 import { AccountingYearComponent } from './accounting-year/accounting-year.component';

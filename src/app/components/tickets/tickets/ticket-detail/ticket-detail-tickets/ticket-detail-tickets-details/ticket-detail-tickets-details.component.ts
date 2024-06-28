@@ -4,7 +4,6 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { Ticket } from '../../../../class/ticket';
 import { TicketProfile } from '../../../class/ticket-profile';
 import * as moment from "moment";
-import { Company } from 'src/app/interfaces/company/company';
 import { TicketsListService } from '../../../services/tickets-list.service';
 import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';

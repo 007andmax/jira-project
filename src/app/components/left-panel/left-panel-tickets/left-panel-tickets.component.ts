@@ -4,7 +4,6 @@ import { TicketsStateService } from 'src/app/states/tickets/tickets-state.servic
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { TicketsCounts } from '../../tickets/tickets/class/tickets-counts';
-import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
@@ -15,7 +14,6 @@ import { DELETE_GLOBAL_FILTER } from 'src/app/const/confirm';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { Subscription } from 'rxjs';
-import { TicketsFilterSaveComponent } from '../../tickets/tickets/tickets-header/tickets-filter-save/tickets-filter-save.component';
 
 @Component({
   selector: 'app-left-panel-tickets',
@@ -60,6 +58,7 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
     let onGetCurrentUser = this.usersStateService.onGetCurrentUser.subscribe(data => {
       if (!this.ticketsStateService.isMoveToTickets && this.activePage !== 'help-center' && !this.customerPortalStateService.isCustomerPortal) this.getCounts();
     })
+    this.sub.add(onGetCurrentUser);
     if (this.ticketsStateService.isMoveToTickets) {
       this.ticketsCounts = this.ticketsStateService.getTicketsCounts();
       if (this.listType !== "DASHBOARD") this.ticketsStateService.onInitCount(this.ticketsCounts[(this.listType === 'USERS') ? 'USER' : this.listType]);
@@ -84,15 +83,17 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
     this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       if (!this.isGetGlobalFilters && !this.customerPortalStateService.isCustomerPortal && this.activePage == 'new-tickets') this.getGLobalFilters();
     })
-    this.leftPanelStateService.onChangeState.subscribe(state => {
+    let onChangeState = this.leftPanelStateService.onChangeState.subscribe(state => {
       if (!this.leftPanelService.isTicketsPage(state)) this.open = false
       if (this.leftPanelService.isTicketsPage(state) && !this.isGetGlobalFilters && !this.customerPortalStateService.isCustomerPortal && this.usersStateService.getCurrentUser()) this.getGLobalFilters();
     })
-    this.leftPanelStateService.onFirstOpen.subscribe(data => {
+    this.sub.add(onChangeState);
+    let onFirstOpen = this.leftPanelStateService.onFirstOpen.subscribe(data => {
       if (this.leftPanelService.isTicketsPage(data)) {
         this.open = true;
       }
     })
+    this.sub.add(onFirstOpen);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === DELETE_GLOBAL_FILTER) this.onDeleteGlobalFilter(this.ticketsStateService.getGlobalFilterForRemove());

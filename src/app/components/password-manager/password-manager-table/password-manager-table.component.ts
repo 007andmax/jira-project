@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ChangeDetectorRef, OnChanges, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectorRef, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { REMOVE_RECORD } from 'src/app/const/confirm';

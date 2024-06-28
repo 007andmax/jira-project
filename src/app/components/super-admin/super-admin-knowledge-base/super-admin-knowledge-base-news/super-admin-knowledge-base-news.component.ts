@@ -23,7 +23,6 @@ export class SuperAdminKnowledgeBaseNewsComponent implements OnInit {
       e.preventDefault();
       e.stopPropagation();
       if (e.target.tagName == "IMG") this.previewAttachmentStateService.onInitPreview(e.target.getAttribute("src"));
-      // this.previewAttachmentStateService.onInitPreview(`/file/${attachmentId}`);
     });
   }
   editNews() {

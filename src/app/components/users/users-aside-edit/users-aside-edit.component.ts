@@ -11,11 +11,7 @@ import { ModalImageCropperStateService } from 'src/app/services/modal/modal-imag
 import { ImageCroper } from 'src/app/services/modal/modal-image-cropper/class/image-croper';
 import { CompanyEditLogo } from '../../companies/class/company-edit-logo';
 import { CompaniesService } from 'src/app/services/company/companies.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ImageCropperComponent } from '../../shared/image-cropper/image-cropper.component';
 import { CompanySubscriptionStateService } from '../../companies/company-subscription/class/company-subscription-state.service';
-import { Company } from 'src/app/interfaces/company/company';
-import { TitleListType } from '../../tickets/tickets/tickets-header/class/title-list-type';
 import { CompanyTagsStateService } from '../../companies/company-tags/states/company-tags-state.service';
 import { CompanyTagsComponent } from '../../companies/company-tags/company-tags.component';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
@@ -66,8 +62,6 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     private usersService: UsersService,
     private companiesStateService: CompaniesStateService,
     private modalImageCropperStateService: ModalImageCropperStateService,
-    private tagsState: CompanyTagsStateService,
-    private companySubscriptionState: CompanySubscriptionStateService,
     private crmStateService: CrmStateService,
     public customerRoleStateService: CustomerRoleStateService,
     public customerPortalStateService: CustomerPortalStateService,
@@ -87,7 +81,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     this.sub.add(onGetJobTitle);
     this.onCroppImage();
     this.userRoles = this.customerRoleStateService.getUserRoles();
-    this.usersStateService.getOpenEditAside().subscribe(data => {
+    let getOpenEditAside = this.usersStateService.getOpenEditAside().subscribe(data => {
       if (!this.customerRoleStateService.isGetUserRole) this.customerRoleStateService.onInitGetUsersRoles();
       this.opened = true;
       this.getJobTypeList();
@@ -99,6 +93,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
       this.selectedUserIndustry = this.industries.find(item => item.id == this.user.userIndustryId);
       this.validate.addPhoneNumbers(this.user.phoneNumbers);
     })
+    this.sub.add(getOpenEditAside);
     let onGetUserRole = this.customerRoleStateService.onGetUserRole.subscribe(data => {
       this.userRoles = this.customerRoleStateService.getUserRoles();
       if (this.userRolesDP) this.userRolesDP.reset(this.userRoles);

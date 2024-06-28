@@ -38,7 +38,6 @@ export class TicketDetailProfileUpdatesProductInfoComponent implements OnInit, O
     private ticketsService: TicketsService,
     private usersStateService: UsersStateService,
     public companiesStateService: CompaniesStateService,
-    private appService: AppService,
     public modalService: NgbModal) { }
 
   ngOnInit() {

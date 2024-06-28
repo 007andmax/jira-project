@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { SuperAdminPublicStateService } from 'src/app/states/super-admin-public/super-admin-public-state.service';
 
@@ -7,16 +8,18 @@ import { SuperAdminPublicStateService } from 'src/app/states/super-admin-public/
   templateUrl: './help-center-info-aside.component.html',
   styleUrls: ['./help-center-info-aside.component.scss']
 })
-export class HelpCenterInfoAsideComponent implements OnInit {
+export class HelpCenterInfoAsideComponent implements OnInit, OnDestroy {
   opened: boolean = false;
   showNews: boolean = false;
+  sub: Subscription = new Subscription();
   constructor(private superAdminPublicStateService: SuperAdminPublicStateService,
     private companiesStateService: CompaniesStateService,) { }
 
   ngOnInit() {
-    this.superAdminPublicStateService.onOpen.subscribe(data => {
+    let onOpen = this.superAdminPublicStateService.onOpen.subscribe(data => {
       this.opened = true;
     })
+    this.sub.add(onOpen);
   }
   closed() {
     this.opened = false;
@@ -28,5 +31,8 @@ export class HelpCenterInfoAsideComponent implements OnInit {
   };
   showListNews() {
     this.showNews = true;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { forkJoin, Subscription } from 'rxjs';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
@@ -28,14 +27,12 @@ import * as moment from "moment";
 import { TicketDetailProfileUpdatesComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates.component';
 import { TicketDetailTasksComponent } from './ticket-detail-tasks/ticket-detail-tasks.component';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
-import { TicketDetailProfileFormUpdateComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update.component';
 import { TicketProfileUpdate } from '../class/ticket-profile-update';
 import { DatePickerStateService } from 'src/app/components/shared/date-picker/services/date-picker-state.service';
 import { TicketDetailHeaderComponent } from './ticket-detail-header/ticket-detail-header.component';
 import { TicketProfileAgent } from '../class/ticket-profile-agent';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
-import { Device } from 'src/app/components/company-devices/class/device';
 import { TicketDetailMessageComponent } from './ticket-detail-message/ticket-detail-message.component';
 
 @Component({
@@ -78,7 +75,6 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private toastrService: ToastrService,
     private appStateService: AppStateService,
-    private modalService: NgbModal,
     public appService: AppService,
     private router: Router,
     private permissionsService: PermissionsService,
@@ -126,7 +122,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       }
     });
     this.sub.add(getConfirm);
-    this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
+    let getOnUpdateTicket = this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
       let ticket = new Ticket(data);
       if (this.ticketProfile.id === ticket.id) {
         this.ticketProfile.update(data);
@@ -136,16 +132,15 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       }
       this.cd.detectChanges();
     })
-    this.ticketsStateService.getOnChangeFieldTicket().subscribe((data: TicketChangeField) => {
+    this.sub.add(getOnUpdateTicket);
+    let getOnChangeFieldTicket = this.ticketsStateService.getOnChangeFieldTicket().subscribe((data: TicketChangeField) => {
       if (this.ticketProfile.id === data.id) {
         if (data.field === "agent.deviceId") this.setAgent(data);
       }
       this.cd.detectChanges();
-
     });
-    this.ticketStateService.getOnChangeUpdatesTicket().subscribe(newChange => {
-
-
+    this.sub.add(getOnChangeFieldTicket);
+    let getOnChangeUpdatesTicket = this.ticketStateService.getOnChangeUpdatesTicket().subscribe(newChange => {
       if (newChange.action == 'UPDATE_SAVED' || newChange.action == 'UPDATE_CREATED' || newChange.action === 'UPDATE_EXPENSE_DELETED') {
         let update = this.ticketProfile.updates.find(item => item.id === newChange.data.id),
           attachments = newChange.data.attachments;
@@ -166,6 +161,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       if (newChange.action == 'UPDATE_DELETED') this.ticketProfile.removeUpdate(newChange.data);
       this.cd.detectChanges();
     });
+    this.sub.add(getOnChangeUpdatesTicket);
     let onChangeAssignedUser = this.addUsersNotifyStateService.onChangeAssignedUser.subscribe(data => {
       if (this.addUsersNotifyStateService.getAction() !== USERS_TO_EDIT_TICKET) return;
       this.onSelectAssignedUser(data);
@@ -510,5 +506,6 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
     }
+    this.sub.unsubscribe();
   }
 }

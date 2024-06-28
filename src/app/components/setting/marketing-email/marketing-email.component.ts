@@ -17,8 +17,7 @@ export class MarketingEmailComponent implements OnInit, OnDestroy {
   activeTab: string = "companyIndustry";
   @ViewChild("subscriptionType") subscriptionType: MarketingSubscriptionTypeComponent;
 
-  constructor(private crmStateService: CrmStateService,
-    private confirmStateService: ConfirmStateService,
+  constructor(private confirmStateService: ConfirmStateService,
     private marketingEmailStateService: MarketingEmailStateService,
     public cd: ChangeDetectorRef,
     private modalService: NgbModal) { }

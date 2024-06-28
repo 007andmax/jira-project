@@ -1,21 +1,23 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { Company } from 'src/app/interfaces/company/company';
 import { AppService } from 'src/app/states/app/app.service';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-left-panel-companies',
   templateUrl: './left-panel-companies.component.html',
   styleUrls: ['./left-panel-companies.component.scss']
 })
-export class LeftPanelCompaniesComponent implements OnInit {
+export class LeftPanelCompaniesComponent implements OnInit, OnDestroy {
   open: boolean = false;
   showArchivedCompanies: boolean = false;
   selectedCompany: Company;
   clientType: string;
   toggleTypeCompanies: boolean = true;
+  sub: Subscription = new Subscription();
   @Input() activePage: string = "";
   @Output() onGoToLink = new EventEmitter();
   @Output() onChangeState = new EventEmitter();
@@ -25,26 +27,32 @@ export class LeftPanelCompaniesComponent implements OnInit {
     private leftPanelService: LeftPanelService,
     private leftPanelStateService: LeftPanelStateService) { }
 
+
   ngOnInit() {
     if (this.companiesState.getCompanyRoutingId()) this.toggleTypeCompanies = false;
     if (this.selectedCompany) this.toggleTypeCompanies = false;
-    this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
+    let onToggleLeftPanel = this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       if (data) this.open = false;
     })
-    this.leftPanelStateService.onChangeState.subscribe(state => {
+    this.sub.add(onToggleLeftPanel);
+    let onChangeState = this.leftPanelStateService.onChangeState.subscribe(state => {
       if (!this.leftPanelService.isCompanyPage(state)) this.open = false
     })
-    this.leftPanelStateService.onFirstOpen.subscribe(data => {
+    this.sub.add(onChangeState);
+    let onFirstOpen = this.leftPanelStateService.onFirstOpen.subscribe(data => {
       if (this.leftPanelService.isCompanyPage(data)) this.open = true;
     })
-    this.companiesState.filter.subscribe(data => {
+    this.sub.add(onFirstOpen);
+    let filter = this.companiesState.filter.subscribe(data => {
       this.showArchivedCompanies = (data.clientType === "ARCHIVE");
       this.clientType = (data.clientType !== "ARCHIVE") ? data.clientType : null;
     })
-    this.companiesState.onChangeSelectedCompanyId.subscribe(data => {
+    this.sub.add(filter);
+    let onChangeSelectedCompanyId = this.companiesState.onChangeSelectedCompanyId.subscribe(data => {
       if (data) this.toggleTypeCompanies = false;
       if (!data) this.toggleTypeCompanies = true;
     })
+    this.sub.add(onChangeSelectedCompanyId);
   }
   onToggleTypeCompanies() {
     if (this.selectedCompany) this.toggleTypeCompanies = !this.toggleTypeCompanies;
@@ -92,5 +100,8 @@ export class LeftPanelCompaniesComponent implements OnInit {
 
   public trackByIndex(index, item) {
     return index;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

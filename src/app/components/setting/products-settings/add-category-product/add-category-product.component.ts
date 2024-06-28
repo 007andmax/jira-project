@@ -36,6 +36,7 @@ export class AddCategoryProductComponent implements OnInit {
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
       this.glNumbers = this.sortGlNumbers(data);
     })
+    this.sub.add(getOnGlNumbers);
   }
   private sortGlNumbers(data) {
     return data.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?

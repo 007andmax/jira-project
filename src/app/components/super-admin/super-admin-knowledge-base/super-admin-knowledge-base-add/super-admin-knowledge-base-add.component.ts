@@ -1,5 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { News } from '../super-admin-knowledge-base-table/class/news';
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
@@ -9,7 +8,7 @@ import { environment } from 'src/environments/environment';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { KnowledgeBaseStateService } from '../../state/knowledge-base/knowledge-base-state.service';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
@@ -17,7 +16,7 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
   templateUrl: './super-admin-knowledge-base-add.component.html',
   styleUrls: ['./super-admin-knowledge-base-add.component.scss']
 })
-export class SuperAdminKnowledgeBaseAddComponent implements OnInit {
+export class SuperAdminKnowledgeBaseAddComponent implements OnInit, OnDestroy {
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   @Output() onClose = new EventEmitter();
   private apiUrl = environment.apiUrl;
@@ -31,6 +30,7 @@ export class SuperAdminKnowledgeBaseAddComponent implements OnInit {
   startDate = new Date().getTime();
   currentUser: any;
   froalaEditor: any;
+  sub: Subscription = new Subscription();
   constructor(public superAdminKnowledgeBaseService: SuperAdminKnowledgeBaseService,
     public usersStateService: UsersStateService,
     public cd: ChangeDetectorRef,
@@ -61,26 +61,6 @@ export class SuperAdminKnowledgeBaseAddComponent implements OnInit {
         'formatOL', 'formatUL', '|',
         'insertFile', '|',
         'insertLink', 'insertImage'],
-      //  toolbarButtons: ['bold', 'italic', 'underline', 'moreText', '|', 'alignLeft', 'alignCenter', 'formatOLSimple', 'moreParagraph', '|', 'trackChanges', 'markdown', 'insertLink', 'insertFiles', 'moreRich', '|', 'undo', 'redo', 'moreMisc'],
-      /*  toolbarButtons: {
-          // Key represents the more button from the toolbar.
-          moreText: {
-            // List of buttons used in the  group.
-            buttons: ['bold', 'italic'],
-  
-            // Alignment of the group in the toolbar.
-            align: 'left',
-  
-  
-          },
-          moreParagraph: {
-            buttons: ['alignLeft', 'alignCenter', 'alignRight', 'alignJustify'],
-            align: 'left',
-            buttonsVisible: 1
-          },
-  
-  
-        },*/
       placeholderText: 'description',
       toolbarBottom: true,
       attribution: false,
@@ -157,6 +137,7 @@ export class SuperAdminKnowledgeBaseAddComponent implements OnInit {
     this.froalaEditor.initialize();
   }
   ngOnDestroy(): void {
+    this.sub.unsubscribe();
     this.froalaEditor.destroy();
   }
   onChangeTitle() {

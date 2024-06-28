@@ -2,11 +2,9 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { User } from 'src/app/components/users/class/user';
 import { Company } from 'src/app/interfaces/company/company';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
-import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { PaymentsReport } from './class/payments-report';
 import * as moment from 'moment';
 import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
-import { ItemStatus } from 'src/app/components/tickets/class/item-status';
 
 @Component({
   selector: 'payments-report',
@@ -28,7 +26,7 @@ export class PaymentsReportComponent implements OnInit {
   new TitleListType('Refunds', 'REFUND_PAYMENT')];
   constructor(public cd: ChangeDetectorRef,
     private companiesStateService: CompaniesStateService,
-    private usersStateService: UsersStateService,) { }
+  ) { }
 
   ngOnInit() {
     this.currentCompany = this.companiesStateService.getCurrentCompany();

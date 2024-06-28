@@ -40,7 +40,6 @@ export class SuperAdminKnowledgeBaseTableComponent implements OnInit, OnDestroy 
         if (this.confirmStateService.getConfirmAction() === DELETE_NEWS) {
           this.onDeleteNews(this.knowledgeBaseStateService.getNewsForDelete().id);
         }
-
       }
     })
     this.sub.add(getConfirm);
@@ -53,9 +52,10 @@ export class SuperAdminKnowledgeBaseTableComponent implements OnInit, OnDestroy 
       this.list.unshift(data);
     })
     this.sub.add(onAddNews);
-    this.knowledgeBaseStateService.onEditNews.subscribe(data => {
+    let onEditNews = this.knowledgeBaseStateService.onEditNews.subscribe(data => {
       this.addAside.close();
     })
+    this.sub.add(onEditNews);
     this.setDefaultScoll();
     this.onScroll();
   }

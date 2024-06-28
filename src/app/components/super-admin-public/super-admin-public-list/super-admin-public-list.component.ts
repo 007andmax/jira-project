@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { News } from '../../super-admin/super-admin-knowledge-base/super-admin-knowledge-base-table/class/news';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { SuperAdminKnowledgeBaseService } from '../../super-admin/services/super-admin-knowledge-base/super-admin-knowledge-base.service';

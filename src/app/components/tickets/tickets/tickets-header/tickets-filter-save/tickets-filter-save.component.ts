@@ -4,7 +4,6 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
-import { UserFilterSaveValidate } from 'src/app/components/users/user-filter-save/class/user-filter-save-validate';
 import { TicketsFilterSaveValidate } from './class/tickets-filter-save-validate';
 
 @Component({

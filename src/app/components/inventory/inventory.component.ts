@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { ProductService } from '../../services/product/product.service';
-import { CategoryProductitem } from 'src/class/category-product-item';
 import { InventoryListService } from './services/inventory-list.service';
 import { InventoryItem } from './class/inventory-item';
 import { CompaniesStateService } from '../../states/company/companies-state.service';
@@ -148,7 +147,6 @@ export class InventoryComponent implements OnInit {
     })
     this.sub.add(getOnEdit);
     let getOnToggleEdit = this.contractsStateService.getOnToggleEdit().subscribe(data => {
-
       this.showEdit = data;
       if (!this.showEdit) this.inventoryStateService.refreshProductsAgreements();
       if (!this.cd['destroyed']) {

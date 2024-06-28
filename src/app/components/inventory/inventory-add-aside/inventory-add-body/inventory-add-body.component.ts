@@ -35,7 +35,6 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   @Output() onClose: EventEmitter<any> = new EventEmitter();
   @Input() class: string;
-  //opened: boolean = false;
   inventory: InventoryItem = new InventoryItem();
   glNumbers: Array<GlNumber> = [];
   taxes: Array<Tax> = [];

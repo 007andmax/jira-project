@@ -11,8 +11,7 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 export class TicketsComponent implements OnInit, OnDestroy {
   listType: string = "USERS";
   sub: Subscription = new Subscription();
-  constructor(private ticketsStateService: TicketsStateService,
-    private ticketsService: TicketsService,) { }
+  constructor(private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
     document.body.querySelector(".main-container").scrollTo(0, 0);

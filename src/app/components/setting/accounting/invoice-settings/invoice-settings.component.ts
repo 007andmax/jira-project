@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { InvoiceTicketsService } from '../accounting-settings.service';
+import { InvoiceTicketsService } from '../../../../services/accounting/accounting-settings.service';
 import { ToastrService } from 'ngx-toastr';
 import { forkJoin, of } from 'rxjs';
-import { catchError, map, mergeMap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 

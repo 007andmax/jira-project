@@ -15,12 +15,13 @@ export class SuperAdminKnowledgeBaseEditComponent extends SuperAdminKnowledgeBas
 
   ngOnInit() {
     this.list = this.knowledgeBaseStateService.getStatusList();
-    this.knowledgeBaseStateService.onEditNews.subscribe(data => {
+    let onEditNews = this.knowledgeBaseStateService.onEditNews.subscribe(data => {
       this.news = new News(JSON.parse(JSON.stringify(data)));
       this.content = JSON.parse(JSON.stringify(data.content));
       this.selectedStatus = this.list.find(item => item.value == this.news.status);
       this.open = true;
     })
+    this.sub.add(onEditNews);
     this.currentUser = this.usersStateService.getCurrentUser();
     this.onInitFloara();
   }

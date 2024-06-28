@@ -61,7 +61,6 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     private productService: ProductService,
     private recurringService: RecurringService,
     public cd: ChangeDetectorRef,
-    private devicesService: DevicesService,
     public recurringState: RecurringTicketsStateService,
     public createService: RecurringTicketsService,
     private devicesRecurringTicketsStateService: DevicesRecurringTicketsStateService,
@@ -83,6 +82,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.onGetTechUsers(data);
     })
+    this.sub.add(getOnUsers);
   }
 
   public onCopyCreate() {

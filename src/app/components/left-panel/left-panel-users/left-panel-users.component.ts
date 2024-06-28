@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, Output, EventEmitter, Input } from '@angular/core';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
-import { UserFilter } from '../../users/class/user-filter';
 import { LeftPanelUsersService } from './services/left-panel-users.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
@@ -13,8 +12,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DELETE_GLOBAL_USERS_FILTER } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
-import { UserFilterSaveComponent } from '../../users/user-filter-save/user-filter-save.component';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-left-panel-users',
@@ -33,6 +32,7 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   page: number = 0;
   showLoadMoreUpdates = false;
   showPreloaderGlobalFilters: boolean = false;
+  sub: Subscription = new Subscription();
   @Output() onChangeState = new EventEmitter();
   @Output() onGoToLink = new EventEmitter();
   @Output() onOpenPanel = new EventEmitter();
@@ -49,35 +49,41 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
+    let onToggleLeftPanel = this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       if (data) this.open = false;
     })
-    this.leftPanelStateService.onChangeState.subscribe(state => {
+    this.sub.add(onToggleLeftPanel);
+    let onChangeState = this.leftPanelStateService.onChangeState.subscribe(state => {
       if (!this.leftPanelService.isUsersPage(state)) this.open = false;
       if (this.leftPanelService.isUsersPage(state) && !this.isGetGlobalFilters && !this.customerPortalStateService.isCustomerPortal && this.usersStateService.getCurrentUser()) this.getGLobalFilters();
-
     })
-    this.leftPanelStateService.onFirstOpen.subscribe(data => {
+    this.sub.add(onChangeState);
+    let onFirstOpen = this.leftPanelStateService.onFirstOpen.subscribe(data => {
       if (this.leftPanelService.isUsersPage(data)) this.open = true;
     })
+    this.sub.add(onFirstOpen);
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
       this.filter.setData(data);
     })
+    this.sub.add(geLefttFilter);
     let onClearGlobalFilter = this.usersStateService.onClearGlobalFilter.subscribe((data) => {
       this.selectedGlobalFilter = new UserGlobalFilter();
     })
+    this.sub.add(onClearGlobalFilter);
     this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       if (!this.isGetGlobalFilters && !this.customerPortalStateService.isCustomerPortal) this.getGLobalFilters();
     })
     let onInitGlobalFilter = this.usersStateService.onInitGlobalFilter.subscribe((data) => {
       this.selectedGlobalFilter = data;
     });
+    this.sub.add(onInitGlobalFilter);
     if (this.leftPanelService.isUsersPage(this.leftPanelStateService.activePage) && !this.isGetGlobalFilters && !this.customerPortalStateService.isCustomerPortal && this.usersStateService.getCurrentUser()) this.getGLobalFilters();
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === DELETE_GLOBAL_USERS_FILTER) this.onDeleteGlobalFilter(this.usersStateService.getGlobalFilterForRemove());
       }
     })
+    this.sub.add(getConfirm);
     if (this.leftPanelService.isUsersPage(this.leftPanelStateService.activePage)) this.getUsersCount();
   }
   onDeleteGlobalFilter(filter) {
@@ -164,6 +170,7 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     return index;
   }
   ngOnDestroy(): void {
+    this.sub.unsubscribe();
     this.leftPanelUsersService.onUnsubscribe();
   }
   public trackById(index, item) {

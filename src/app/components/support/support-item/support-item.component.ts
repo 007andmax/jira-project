@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { NgbModal, NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SUPPORT_MODAL_ACTION_SEND } from 'src/app/const/support';
 import { ModalQuoteComponent } from 'src/app/services/modal/modal-quote/modal-quote.component';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -37,8 +37,6 @@ export class SupportItemComponent implements OnInit {
     private companiesStateService: CompaniesStateService,
     private usersStateService: UsersStateService,
     private supportService: SupportService,
-    private supportStateService: SupportStateService,
-    private devicesService: DevicesService,
     private ticketsStateService: TicketsStateService,
     public cd: ChangeDetectorRef,
     private modalService: NgbModal,) { }

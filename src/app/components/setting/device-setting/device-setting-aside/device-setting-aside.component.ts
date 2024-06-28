@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AgentService } from 'src/app/services/agent/agent.service';
 import { DeviceSettingStateService } from 'src/app/states/device-setting/device-setting-state.service';
@@ -8,13 +8,14 @@ import { DeviceSettingStateService } from 'src/app/states/device-setting/device-
   templateUrl: './device-setting-aside.component.html',
   styleUrls: ['./device-setting-aside.component.scss']
 })
-export class DeviceSettingAsideComponent implements OnInit {
+export class DeviceSettingAsideComponent implements OnInit, OnDestroy {
   name: string;
   opened: boolean = false;
   list = [];
   sub: Subscription = new Subscription();
   constructor(private agentService: AgentService,
     private deviceSettingStateService: DeviceSettingStateService) { }
+
 
   ngOnInit() {
     let openAside = this.deviceSettingStateService.onOpenAside.subscribe(data => {
@@ -49,5 +50,8 @@ export class DeviceSettingAsideComponent implements OnInit {
   }
   public trackByIndex(index, item) {
     return index;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

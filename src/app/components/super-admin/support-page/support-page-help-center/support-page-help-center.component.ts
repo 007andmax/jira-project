@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { SupportPageCategory } from '../../left-panel-super-admin-categories/class/support-page-category';
 import { SupportPageCategoriesStateService } from '../../state/support-page-categories/support-page-categories-state.service';

@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { UserCustomSubscription } from '../../class/user-custom-subscription';
 import { UserDefaultSubscription } from '../../class/user-default-subscription';
-import { UserSubscription } from '../../class/user-subscription';
 
 @Component({
   selector: 'app-user-table-subscription',

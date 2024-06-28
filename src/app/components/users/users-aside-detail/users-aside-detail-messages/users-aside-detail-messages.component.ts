@@ -4,7 +4,7 @@ import { User } from '../../class/user';
 import { UserListService } from '../../services/user-list.service';
 import { UserMessage } from './class/user-message';
 import * as moment from "moment";
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({

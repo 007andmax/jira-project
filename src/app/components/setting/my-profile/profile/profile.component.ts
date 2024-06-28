@@ -86,9 +86,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.imageSrc = '';
     if (this.usersStateService.getCurrentUser()) this.getCurrentUser(this.usersStateService.getCurrentUser());
-    this.usersStateService.getOnGetCurrentuser().subscribe(data => {
+    let getOnGetCurrentuser = this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.getCurrentUser(data)
     })
+    this.sub.add(getOnGetCurrentuser);
     this.getUserProfile();
     /**
      * init form validation and declaration

@@ -30,8 +30,7 @@ export class UsersAsideDetailCompanyInfoComponent implements OnInit, OnDestroy {
   jobTitleList: Array<CrmCompanyJobTitle> = [];
   userRoles: Array<UserRole> = [];
   sub: Subscription = new Subscription();
-  constructor(private companiesStateService: CompaniesStateService,
-    private crmStateService: CrmStateService,
+  constructor(private crmStateService: CrmStateService,
     private permissionsService: PermissionsService,
     private usersService: UsersService,
     public usersStateService: UsersStateService,

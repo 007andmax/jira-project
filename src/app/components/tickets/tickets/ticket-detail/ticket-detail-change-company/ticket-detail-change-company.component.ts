@@ -6,7 +6,7 @@ import { TicketProfile } from '../../class/ticket-profile';
 import { Subscription } from 'rxjs';
 import { CHANGE_COMPANY_TICKET } from 'src/app/const/confirm';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 
 @Component({

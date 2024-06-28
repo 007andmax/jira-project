@@ -37,14 +37,15 @@ export class DeviceSettingModelsComponent implements OnInit, OnDestroy {
       this.manufactures = this.devicesStateService.getManufactures();
 
     }
-    this.devicesStateService.onGetManufactures.subscribe(data => {
+    let onGetManufactures = this.devicesStateService.onGetManufactures.subscribe(data => {
       this.manufactures = data;
-
     })
-    this.devicesStateService.onAddModel.subscribe(data => {
+    this.sub.add(onGetManufactures);
+    let onAddModel = this.devicesStateService.onAddModel.subscribe(data => {
       if (data.manufacturerId == this.selectedManufacture.id) this.models.push(new ModelDevice(data));
     })
-    this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
+    this.sub.add(onAddModel);
+    let changeDevicesArray = this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
       if (newChange.action === 'MANUFACTURE_MODEL_EDITED') {
         if (this.selectedManufacture && newChange.data.manufacturerId == this.selectedManufacture.id) {
           let index = this.models.findIndex(item => item.id == newChange.data.id);
@@ -64,6 +65,7 @@ export class DeviceSettingModelsComponent implements OnInit, OnDestroy {
         this.cd.detectChanges();
       }
     });
+    this.sub.add(changeDevicesArray);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === DELETE_DEVICE_MODEL) this.removeModel(this.devicesStateService.getModelForRemove().id);

@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ElementRef, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
-import { InventoryChange } from '../../inventory/class/inventory-change';
 import { Subscription } from 'rxjs';
 import { CategoryProductitem } from 'src/class/category-product-item';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';

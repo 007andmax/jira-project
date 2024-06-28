@@ -1,7 +1,7 @@
 
-import { Component, OnInit, Renderer2, Inject } from '@angular/core';
-import { NavigationStart, Router } from '@angular/router';
-import { DOCUMENT } from '@angular/common';
+import { Component, OnInit, Renderer2, Inject, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 /**
  * Main component
@@ -11,19 +11,18 @@ import { DOCUMENT } from '@angular/common';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
 })
-export class MainComponent implements OnInit {
+export class MainComponent implements OnInit, OnDestroy {
   public appType: string;
-
+  sub: Subscription = new Subscription();
   constructor(
     private router: Router,
-    private renderer: Renderer2,
-    @Inject(DOCUMENT) private document: Document,
   ) {
-    this.router.events.subscribe(event => {
-
+    let events = this.router.events.subscribe(event => {
       this.setAppType('ng2');
     });
+    this.sub.add(events);
   }
+
 
   /**
    * set app type
@@ -36,5 +35,8 @@ export class MainComponent implements OnInit {
   ngOnInit() { }
   isAppTypeIsNg2() {
     return this.appType === 'ng2';
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

@@ -57,16 +57,11 @@ export class PasswordManagerAddAsideComponent implements OnInit {
    */
   constructor(
     private passwordManagerService: PasswordManagerService,
-    private gadgetsService: GadgetsService,
     private permissionsService: PermissionsService,
     private passwordManagerStateService: PasswordManagerStateService,
     public cd: ChangeDetectorRef,
     private companiesState: CompaniesStateService,
-    private devicesStateService: DevicesStateService,
-    private usersStateService: UsersStateService,
-    private toastrService: ToastrService,
     public appService: AppService,
-    private appStateService: AppStateService,
     private elRef: ElementRef,
   ) { }
 

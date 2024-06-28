@@ -25,7 +25,6 @@ export class CrmCompanyJobTypeComponent implements OnInit {
   constructor(private crmService: CrmService,
     private confirmStateService: ConfirmStateService,
     private crmStateService: CrmStateService,
-    private crmRealTimeService: CrmRealTimeService,
     public cd: ChangeDetectorRef,
     private modalService: NgbModal) { }
 

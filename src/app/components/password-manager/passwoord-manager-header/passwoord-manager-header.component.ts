@@ -39,7 +39,6 @@ export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
   constructor(
     private passwordManagerService: PasswordManagerService,
     private permissionsService: PermissionsService,
-    private leftPanelStateService: LeftPanelStateService,
     public passwordManagerStateService: PasswordManagerStateService,
     public appService: AppService,
   ) { }

@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { SignatureService } from 'src/app/services/signature/signature.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'add-signature',
@@ -10,7 +9,6 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./add-signature.component.scss']
 })
 export class AddSignatureComponent implements OnInit {
-  private apiUrl = environment.apiUrl;
   messageContent: string = '';
   editorConfig: AngularEditorConfig = {
     editable: true,
