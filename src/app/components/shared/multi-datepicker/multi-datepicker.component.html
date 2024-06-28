@@ -1,6 +1,9 @@
 <div
     class="date-picker"
-    (clickOutside)="hideDatePicker()"
+    appClickOtside
+    [class]="'.date-picker'"
+    [init]="true"
+    (onOutSide)="hideDatePicker()"
 >
     <mat-error
         class="app-drop-down__error invalid-feedback mat-error"
