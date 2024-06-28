@@ -67,7 +67,6 @@ export class InventoryStateService {
     // this.getProducts();
   }
   public onInitGetServiceTypeList() {
-    console.log("onInitGetServiceTypeList");
     this.productService.getProductsTypes().subscribe((data: any) => {
       this.listTypes = data.productTypeDtos.map(item => new ProductType(item));
       this.onGetListType.emit(this.listTypes)
