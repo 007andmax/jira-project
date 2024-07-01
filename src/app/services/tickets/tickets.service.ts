@@ -208,12 +208,7 @@ export class TicketsService {
   }
   public changeStatus(id, value) {
     let data = { value: value };
-    return this.http.put(this.apiUrl + `v2/tickets/${id}/status`, data).pipe(
-      tap(data => {
-        this.toastrService.success("The ticket has been successfully changed");
-        this.appStateService.changeDetectorRef();
-        return data;
-      }));
+    return this.http.put(this.apiUrl + `v2/tickets/${id}/status`, data);
   }
   public addStatus(name, color) {
 

@@ -260,6 +260,8 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
         var user = this.usersStateService.getAllUsers().find(item => item.id === data.message);
         return;
       }
+      this.toastrService.success(`The tickets “${this.ticketProfile.number}” status has been changed`);
+      this.appStateService.changeDetectorRef();
       this.ticketMessage.isMarkAsOpen = false;
       this.ticketStateService.fastOpenTicket();
     })
