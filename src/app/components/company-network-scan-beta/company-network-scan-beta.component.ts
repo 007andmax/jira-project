@@ -21,11 +21,15 @@ import { NetworkScanSomeInfoForDevice } from './class/network-scan-some-info-for
 import { CompanyNetworkScanService } from './services/company-network-scan.service';
 import { v4 as uuidv4 } from 'uuid';
 import { ToastrService } from 'ngx-toastr';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'app-company-network-scan-beta',
   templateUrl: './company-network-scan-beta.component.html',
   styleUrls: ['./company-network-scan-beta.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   providers: [CompanyNetworkScanService]
 })
 export class CompanyNetworkScanBetaComponent implements OnInit, OnDestroy {

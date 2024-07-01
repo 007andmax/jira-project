@@ -25,7 +25,7 @@ import { UsersHeaderComponent } from './users-header/users-header.component';
 import { UserFilters } from './class/user-filters';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserDeArchiveNotificationComponent } from './user-de-archive-notification/user-de-archive-notification.component';
-import { fadeInAnimation } from 'src/app/_animations';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'app-users',

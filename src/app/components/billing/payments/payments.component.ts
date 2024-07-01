@@ -13,11 +13,15 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'payments',
   templateUrl: './payments.component.html',
   styleUrls: ['./payments.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   providers: [PaymentsListService]
 })
 export class PaymentsComponent implements OnInit, OnDestroy {

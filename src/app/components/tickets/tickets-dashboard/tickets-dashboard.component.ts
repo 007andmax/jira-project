@@ -9,10 +9,14 @@ import { RecurringTicketWidgetComponent } from './recurring-ticket-widget/recurr
 import { TicketPriorityWidgetComponent } from './ticket-priority-widget/ticket-priority-widget.component';
 import { TicketsAnalyticsWidgetComponent } from './tickets-analytics-widget/tickets-analytics-widget.component';
 import { TicketsPriority } from '../../setting/ticket-settings-page/tickets-priority/class/tickets-priority';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'tickets-dashboard',
   templateUrl: './tickets-dashboard.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./tickets-dashboard.component.scss']
 })
 export class TicketsDashboardComponent implements OnInit {

@@ -1,12 +1,16 @@
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { fadeInAnimation } from 'src/app/animations';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 
 
 @Component({
   selector: 'app-item-report',
   templateUrl: './item-report.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./item-report.component.scss']
 })
 export class ItemReportComponent implements OnInit, OnDestroy {

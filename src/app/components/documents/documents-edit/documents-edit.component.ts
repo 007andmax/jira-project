@@ -2,10 +2,14 @@ import { Component, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Document } from '../class/document';
 import { DocumentsAddComponent } from '../documents-add/documents-add.component';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'documents-edit',
   templateUrl: './documents-edit.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./documents-edit.component.scss']
 })
 export class DocumentsEditComponent extends DocumentsAddComponent {

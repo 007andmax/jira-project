@@ -17,10 +17,14 @@ import { DeviceRemoteSessions } from './class/device-remote-sessions';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { DeviceTagsStateService } from 'src/app/states/device-tags/device-tags-state.service';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'app-company-devices',
   templateUrl: './company-devices.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./company-devices.component.scss']
 })
 export class CompanyDevicesComponent implements OnInit, OnDestroy {

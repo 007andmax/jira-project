@@ -17,10 +17,14 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { TicketStateService } from 'src/app/components/tickets/tickets/ticket-edit-aside/services/ticket-state.service';
 import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toastr-progress-state.service';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'billable-tickets',
   templateUrl: './billable-tickets.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./billable-tickets.component.scss']
 })
 export class BillableTicketsComponent implements OnInit, OnDestroy {

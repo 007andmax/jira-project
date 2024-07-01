@@ -12,12 +12,16 @@ import { BillableProfileTicket } from './class/billable-profile-ticket';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { fadeInAnimation } from 'src/app/animations';
 
 
 @Component({
   selector: 'billable',
   templateUrl: './billable.component.html',
   styleUrls: ['./billable.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   providers: [TicketsListService]
 })
 export class BillableComponent implements OnInit, OnDestroy {

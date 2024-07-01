@@ -13,11 +13,15 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toastr-progress-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'app-invoices',
   templateUrl: './invoices.component.html',
   styleUrls: ['./invoices.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   providers: [InvoicesListService]
 })
 export class InvoicesComponent implements OnInit, OnDestroy {

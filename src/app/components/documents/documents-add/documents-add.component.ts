@@ -9,10 +9,14 @@ import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { DocumentAdd } from './class/document-add';
 import { DocumentValidate } from './class/document-validate';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'app-documents-add',
   templateUrl: './documents-add.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./documents-add.component.scss']
 })
 export class DocumentsAddComponent implements OnInit, OnDestroy {

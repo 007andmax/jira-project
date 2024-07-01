@@ -18,7 +18,7 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { CompanyDeviceCount } from './class/company-device-count';
 import { CompaniesHeaderComponent } from './companies-header/companies-header.component';
-import { fadeInAnimation } from 'src/app/_animations';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'app-companies',
