@@ -41,7 +41,7 @@ export class TicketDetailChangeStatusComponent extends TicketChangeStatusCompone
     if (this.ticketProfile.status === "COMPLETED") this.selectedTicketStatus = new TitleListType(this.parseStatus("COMPLETED"), "COMPLETED");
   }
   setStatusWithoutChange(data) {
-    this.selectedTicketStatus = new TitleListType(this.parseStatus("COMPLETED"), "COMPLETED");
+    this.selectedTicketStatus = new TitleListType(this.parseStatus(data), data);
     this.dp.selectItemWithOutChanges(this.selectedTicketStatus);
   }
   changeTicketStatus(item) {

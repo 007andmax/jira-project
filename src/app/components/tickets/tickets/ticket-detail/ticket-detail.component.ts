@@ -194,6 +194,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.sub.add(onCloseTicket);
     let onOpenTicket = this.ticketStateService.onOpenTicket.subscribe(data => {
       this.ticketProfile.setStatus("IN_PROGRESS");
+      this.changeStatus.setStatusWithoutChange("IN_PROGRESS");
       this.cd.detectChanges();
     })
     this.sub.add(onOpenTicket);
