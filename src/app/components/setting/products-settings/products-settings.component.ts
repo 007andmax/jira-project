@@ -13,10 +13,14 @@ import { CategoryProductSettings } from './class/category-product-settings';
 import { ProductsCategoryFilter } from './class/products-category-filter';
 import { ProductsSettingsTypeComponent } from './products-settings-type/products-settings-type.component';
 import { ProductsSettingsCategoryComponent } from './products-settings-category/products-settings-category.component';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'products-settings',
   templateUrl: './products-settings.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./products-settings.component.scss']
 })
 export class ProductsSettingsComponent implements OnInit, OnDestroy {

@@ -11,10 +11,14 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { CompanyProfileProfileComponent } from './company-profile-profile/company-profile-profile.component';
 import { CompanyProfileWorkspaceComponent } from './company-profile-workspace/company-profile-workspace.component';
 import { CompanyProfileOperationalHoursComponent } from './company-profile-operational-hours/company-profile-operational-hours.component';
+import { fadeInAnimation } from 'src/app/animations';
 declare var $: any;
 @Component({
   selector: 'app-company-profile',
   templateUrl: './company-profile.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./company-profile.component.scss']
 })
 export class CompanyProfileComponent implements OnInit, OnDestroy {
