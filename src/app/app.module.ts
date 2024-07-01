@@ -183,7 +183,6 @@ declare var $: any;
     MatChipsModule,
     MatIconModule,
     MatAutocompleteModule,
-    BrowserAnimationsModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     AppRoutingModule,
     ToastrModule.forRoot({
@@ -191,7 +190,6 @@ declare var $: any;
       timeOut: 5000,
       onActivateTick: true
     }),
-    BrowserAnimationsModule,
     AngularEditorModule,
     LeftPanelModule,
     CompanyAddAsideModule,
