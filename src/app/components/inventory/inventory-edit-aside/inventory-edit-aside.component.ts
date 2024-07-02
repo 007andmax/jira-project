@@ -61,9 +61,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
     private glNumberService: GlNumberService) { }
 
   ngOnInit() {
-    if (this.inventoryStateService.getListTypes().length === 0) {
-      this.inventoryStateService.onInitGetServiceTypeList();
-    } else {
+    if (this.inventoryStateService.getListTypes().length > 0) {
       this.listTypes = this.inventoryStateService.getListTypes().sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
         1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
     }
@@ -106,6 +104,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
       this.editSupplier = this.suppliers.find(item => item.id === this.inventory.companyId);
       this.elRef.nativeElement.querySelector("#inventory-description").value = this.inventory.description;
       this.opened = true;
+      if (this.inventoryStateService.getListTypes().length == 0) this.inventoryStateService.onInitGetServiceTypeList();
       this.inventory.markup = this.getMarkups();
       if (this.inventory.productType) this.typeSelect.selectItemWithOutChanges(this.listTypes.find(item => item.id == this.inventory.productType.id));
       //   this.description.update();
