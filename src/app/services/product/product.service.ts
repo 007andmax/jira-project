@@ -90,8 +90,8 @@ export class ProductService {
   /**
   * Get products categories
   */
-  public getCategories() {
-    return this.http.get(`${this.apiUrl}products/autocompleteList`).pipe(map((data: any) => data.map(item => new CategoryProductitem(item))));
+  public getCategories(needArchived = false) {
+    return (needArchived ? this.http.get(`${this.apiUrl}products/autocompleteList?needArchived=${needArchived}`) : this.http.get(`${this.apiUrl}products/autocompleteList`)).pipe(map((data: any) => data.map(item => new CategoryProductitem(item))));
   }
 
   /**
