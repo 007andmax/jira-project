@@ -47,7 +47,7 @@ export class CompanyDevicesAsideSystemComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.devicesStateService.getManufactures().length > 0) this.manufactures = this.devicesStateService.getManufactures();
-    if (!this.devicesStateService.isGetManufactures) this.devicesStateService.initGetManufactures();
+    if (!this.devicesStateService.isGetManufactures && !this.customerPortalStateService.isCustomerPortal) this.devicesStateService.initGetManufactures();
     let onGetManufactures = this.devicesStateService.onGetManufactures.subscribe(data => {
       this.manufactures = data;
     })

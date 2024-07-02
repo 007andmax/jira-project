@@ -16,6 +16,7 @@ import { CompanyDevicesCustomDropDownComponent } from './company-devices-custom-
 import { ManufacturesDropDownComponent } from './manufactures-drop-down/manufactures-drop-down.component';
 import { ModelsDropDownComponent } from './models-drop-down/models-drop-down.component';
 import { Subscription } from 'rxjs';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-company-devices-custom-aside',
@@ -50,13 +51,14 @@ export class CompanyDevicesCustomAsideComponent implements OnInit, OnDestroy {
   @ViewChild('warrantyDateDP') warrantyDateDP: DatePickerComponent;
   constructor(public devicesStateService: DevicesStateService,
     private deviceTagsStateService: DeviceTagsStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     private companiesState: CompaniesStateService,
     private devicesService: DevicesService) { }
 
 
   ngOnInit() {
     if (this.devicesStateService.getManufactures().length > 0) this.manufactures = this.devicesStateService.getManufactures();
-    if (!this.devicesStateService.isGetManufactures) this.devicesStateService.initGetManufactures();
+    if (!this.devicesStateService.isGetManufactures && !this.customerPortalStateService.isCustomerPortal) this.devicesStateService.initGetManufactures();
     let onGetManufactures = this.devicesStateService.onGetManufactures.subscribe(data => {
       this.manufactures = data;
     })
