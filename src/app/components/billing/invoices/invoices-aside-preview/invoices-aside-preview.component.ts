@@ -84,10 +84,7 @@ export class InvoicesAsidePreviewComponent implements OnInit {
   }
   getStatusDate(dateInvoice) {
     let date = new Date(dateInvoice);
-    let typeTime = (date.getHours() > 12) ? "PM" : "AM",
-      hours = (date.getHours() > 12) ? date.getHours() - 12 : date.getHours(),
-      minutes = (date.getMinutes() > 10) ? date.getMinutes() : "0" + date.getMinutes();
-    return `${this.getDateTicket(this.invoiceProfile.date)} ${(hours > 10) ? hours : "0" + hours}:${minutes} ${typeTime}`;
+    return `${this.getDateTicket(this.invoiceProfile.date)} ${moment(new Date(date)).format('hh:mm A')}`;
   }
   downloadPDF() {
     let company = this.companiesStateService.getCompanies().find(item => item.id === this.invoiceProfile.company.id);

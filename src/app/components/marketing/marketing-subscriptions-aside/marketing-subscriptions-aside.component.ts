@@ -40,7 +40,7 @@ export class MarketingSubscriptionsAsideComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onGetListCustomSubscription);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-      if (data) {
+      if (data && this.opened) {
         if (this.confirmStateService.getConfirmAction() === DELETE_SUBSCRIPTION_TYPE) {
           this.onRemoveSubscription(this.marketingEmailStateService.getSubscriptionTypeForRemove().id);
         }

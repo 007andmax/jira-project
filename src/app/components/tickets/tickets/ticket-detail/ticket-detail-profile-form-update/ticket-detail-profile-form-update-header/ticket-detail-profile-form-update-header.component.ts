@@ -42,7 +42,8 @@ export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
     this.tab = data;
     if (this.tab == "NOTE") {
       let users = this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === this.ticketProfile.company.id));
-      this.selectedUsers = [this.ticketProfile.createdUser, ...users.filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.ticketProfile.company.id).defaultSubscriptions.ticketManagerSubscription.enabled).map(item => new CurrentUser(item))]
+      this.selectedUsers = [...users.filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.ticketProfile.company.id).defaultSubscriptions.ticketManagerSubscription.enabled).map(item => new CurrentUser(item))]
+      if (this.ticketProfile.createdUser) this.selectedUsers.push(this.ticketProfile.createdUser);
       this.selectedUsers = this.selectedUsers.filter((item, pos) => this.selectedUsers.findIndex(accountItem => accountItem.id == item.id) == pos);
     } else {
       this.selectedUsers = [];
