@@ -21,11 +21,15 @@ import { UserListService } from '../users/services/user-list.service';
 import { UserCustomerCompaniesInfo } from '../users/class/user-customer-companies-info';
 import { UsersHeaderComponent } from '../users/users-header/users-header.component';
 import { UserFilters } from '../users/class/user-filters';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'marketing',
   templateUrl: './marketing.component.html',
   styleUrls: ['./marketing.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   providers: [UserListService]
 })
 export class MarketingComponent implements OnInit {

@@ -3,10 +3,14 @@ import { REMOVE_CATEGORY_DOCUMENT, REMOVE_DOCUMENT } from 'src/app/const/confirm
 import { Document } from '../../documents/class/document';
 import { DocumentsHeaderComponent } from '../../documents/documents-header/documents-header.component';
 import { DocumentsComponent } from '../../documents/documents.component';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'company-documents',
   templateUrl: './company-documents.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./company-documents.component.scss']
 })
 export class CompanyDocumentsComponent extends DocumentsComponent {

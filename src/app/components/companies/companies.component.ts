@@ -18,11 +18,15 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { CompanyDeviceCount } from './class/company-device-count';
 import { CompaniesHeaderComponent } from './companies-header/companies-header.component';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'app-companies',
   templateUrl: './companies.component.html',
   styleUrls: ['./companies.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   providers: [CompaniesListService]
 })
 export class CompaniesComponent implements OnInit, OnDestroy {

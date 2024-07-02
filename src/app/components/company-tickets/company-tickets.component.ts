@@ -15,11 +15,15 @@ import { ActivatedRoute } from '@angular/router';
 import { TicketStatus } from '../setting/ticket-settings-page/tickets-status/class/ticket-status';
 import { StatusColor } from '../tickets/class/status-color';
 import { TicketsFilterComponent } from '../tickets/tickets/tickets-header/tickets-filter/tickets-filter.component';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'company-tickets',
   templateUrl: './company-tickets.component.html',
   styleUrls: ['./company-tickets.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   providers: [TicketsListService]
 })
 export class CompanyTicketsComponent implements OnInit, OnDestroy {

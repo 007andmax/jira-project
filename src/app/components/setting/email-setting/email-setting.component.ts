@@ -3,10 +3,14 @@ import { SettingStateService } from "src/app/states/setting/setting-state.servic
 import { EmailSettingService } from '../../../services/email-settings/email-setting.service';
 import { IncomingEmailComponent } from "./incoming-email/incoming-email.component";
 import { OutgoingEmailComponent } from "./outgoing-email/outgoing-email.component";
+import { fadeInAnimation } from "src/app/animations";
 declare var $: any;
 @Component({
   selector: "app-email-setting",
   templateUrl: "./email-setting.component.html",
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ["./email-setting.component.scss"]
 })
 export class EmailSettingComponent implements OnInit, OnDestroy {

@@ -23,10 +23,14 @@ import { Subscription } from "rxjs";
 import { DeviceCompany } from "../company-devices/class/device-company";
 import { DevicesService } from "src/app/services/devices/devices.service";
 import { CompanyDevicesRemoteAccessComponent } from "../company-devices/company-devices-remote-access/company-devices-remote-access.component";
+import { fadeInAnimation } from "src/app/animations";
 
 @Component({
   selector: "app-company-device-beta",
   templateUrl: "./company-device-beta.component.html",
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ["./company-device-beta.component.scss"]
 })
 export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {

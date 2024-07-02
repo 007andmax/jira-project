@@ -23,10 +23,14 @@ import { DELETE_MANAGE_TAG } from "src/app/const/confirm";
 import { ConfirmComponent } from "../../shared/confirm/confirm.component";
 import { ManageTag } from "./class/manage-tag";
 import { ManageTagsDevicesComponent } from "./manage-tags-devices/manage-tags-devices.component";
+import { fadeInAnimation } from "src/app/animations";
 declare var $: any;
 @Component({
   selector: "app-manage-tags",
   templateUrl: "./manage-tags.component.html",
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ["./manage-tags.component.scss"],
   providers: [ManageTagsListService],
 })

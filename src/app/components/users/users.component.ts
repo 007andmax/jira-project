@@ -25,11 +25,15 @@ import { UsersHeaderComponent } from './users-header/users-header.component';
 import { UserFilters } from './class/user-filters';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserDeArchiveNotificationComponent } from './user-de-archive-notification/user-de-archive-notification.component';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   providers: [UserListService],
 })
 export class UsersComponent implements OnInit, OnDestroy {

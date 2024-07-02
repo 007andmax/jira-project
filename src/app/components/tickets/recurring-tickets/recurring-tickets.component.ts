@@ -3,11 +3,15 @@ import { RecurringService } from 'src/app/services/recurring/recurring.service';
 import { RecurringTicket } from './class/recurring-ticket';
 import { RecurringTicketsListService } from './services/recurring-tickets-list.service';
 import { RecurringTicketsRealTimeService } from './services/recurring-tickets-real-time.service';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'app-recurring-tickets',
   templateUrl: './recurring-tickets.component.html',
   styleUrls: ['./recurring-tickets.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   providers: [RecurringTicketsListService]
 })
 export class RecurringTicketsComponent implements OnInit {

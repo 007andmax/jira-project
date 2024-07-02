@@ -17,10 +17,14 @@ import { TaxesSettingsComponent } from './taxes/taxes.component';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { CustomNotesSettingsComponent } from './custom-notes-settings/custom-notes-settings.component';
 import { BillableStateService } from 'src/app/states/billable/billable-state.service';
+import { fadeInAnimation } from 'src/app/animations';
 declare var $: any;
 @Component({
   selector: 'app-accounting-settings',
   templateUrl: './accounting-settings.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./accounting-settings.component.scss']
 })
 export class AccountingSettingsComponent implements OnInit, OnDestroy {

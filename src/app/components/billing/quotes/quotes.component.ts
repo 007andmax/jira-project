@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { fadeInAnimation } from 'src/app/animations';
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
@@ -10,6 +11,9 @@ import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 @Component({
   selector: 'app-quotes',
   templateUrl: './quotes.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./quotes.component.scss'],
 
 })

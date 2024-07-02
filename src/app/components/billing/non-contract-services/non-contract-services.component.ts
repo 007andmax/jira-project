@@ -9,10 +9,14 @@ import { Subscription } from 'rxjs';
 import { NonContractServicesRealTimeService } from 'src/app/states/non-contract-services/non-contract-services-real-time.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'non-contract-services',
   templateUrl: './non-contract-services.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./non-contract-services.component.scss']
 })
 export class NonContractServicesComponent implements OnInit, OnDestroy {

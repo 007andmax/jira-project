@@ -8,11 +8,15 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { Company } from '../../interfaces/company/company';
 import { ContractsStateService } from '../../states/contracts/contracts-state.service';
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'company-dashboard',
   templateUrl: './company-dashboard.component.html',
   styleUrls: ['./company-dashboard.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   encapsulation: ViewEncapsulation.None
 })
 

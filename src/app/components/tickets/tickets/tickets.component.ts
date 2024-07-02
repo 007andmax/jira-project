@@ -2,10 +2,14 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { Subscription } from 'rxjs';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'app-tickets',
   templateUrl: './tickets.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./tickets.component.scss']
 })
 export class TicketsComponent implements OnInit, OnDestroy {

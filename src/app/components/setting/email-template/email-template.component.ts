@@ -8,12 +8,16 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
 import { EmailTemplateStateService } from "src/app/states/email-template/email-template-state.service";
+import { fadeInAnimation } from "src/app/animations";
 
 declare var $: any;
 
 @Component({
   selector: "app-email-template",
   templateUrl: "./email-template.component.html",
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ["./email-template.component.scss"]
 })
 export class EmailTempleteComponent implements OnInit, OnDestroy {

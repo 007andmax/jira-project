@@ -23,11 +23,15 @@ import { Subscription } from 'rxjs';
 import { UserFilters } from '../users/class/user-filters';
 import { UsersFilterComponent } from '../users/users-header/users-filter/users-filter.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'company-user',
   templateUrl: './company-user.component.html',
   styleUrls: ['./company-user.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   providers: [UserListService]
 })
 export class CompanyUserComponent implements OnInit {

@@ -12,10 +12,14 @@ import { SettingStateService } from 'src/app/states/setting/setting-state.servic
 import { FormBuilder } from '@angular/forms';
 import { forkJoin, of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'device-setting',
   templateUrl: './device-setting.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./device-setting.component.scss']
 })
 export class DeviceSettingComponent implements OnInit {

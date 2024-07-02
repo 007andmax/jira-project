@@ -14,10 +14,14 @@ import { CannedResponsesComponent } from './canned-responses/canned-responses.co
 import { TicketSettingsComponent } from './ticket-settings/ticket-settings.component';
 import { TicketsStatusComponent } from './tickets-status/tickets-status.component';
 import { TicketsPriorityComponent } from './tickets-priority/tickets-priority.component';
+import { fadeInAnimation } from 'src/app/animations';
 declare var $: any;
 @Component({
   selector: 'ticket-settings-page',
   templateUrl: './ticket-settings-page.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./ticket-settings-page.component.scss']
 })
 export class TicketSettingsPageComponent implements OnInit, OnDestroy {

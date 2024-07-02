@@ -6,10 +6,14 @@ import { MarketingEmailStateService } from 'src/app/states/marketing-email/marke
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { MarketingSubscriptionTypeComponent } from './marketing-subscription-type/marketing-subscription-type.component';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'marketing-email',
   templateUrl: './marketing-email.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./marketing-email.component.scss']
 })
 export class MarketingEmailComponent implements OnInit, OnDestroy {

@@ -11,6 +11,7 @@ import { PasswordManagerStateService } from '../../states/password-manager/passw
 import { CompaniesStateService } from '../../states/company/companies-state.service';
 import { ActivatedRoute } from '@angular/router';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { fadeInAnimation } from 'src/app/animations';
 
 /**
  * Password manager component
@@ -19,6 +20,9 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
   selector: 'app-password-manager',
   templateUrl: './password-manager.component.html',
   styleUrls: ['./password-manager.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   providers: [PasswordManagerListService]
 })
 
