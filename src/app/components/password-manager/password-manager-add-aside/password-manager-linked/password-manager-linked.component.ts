@@ -18,7 +18,8 @@ import { TicketsPermissionsService } from 'src/app/components/tickets/tickets/ti
 @Component({
   selector: 'password-manager-linked',
   templateUrl: './password-manager-linked.component.html',
-  styleUrls: ['./password-manager-linked.component.scss']
+  styleUrls: ['./password-manager-linked.component.scss'],
+  providers: [TicketsPermissionsService]
 })
 export class PasswordManagerLinkedComponent implements OnInit, OnDestroy {
   @Input() passwordRecordAdd: PasswordRecordAdd;
