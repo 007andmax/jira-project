@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { CategoryProductitem } from 'src/class/category-product-item';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { ProductService } from 'src/app/services/product/product.service';
 
 /**
  * Product list component
@@ -20,8 +21,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
   itemList: Array<CategoryProductitem> = [];
   @Input() editItem: any;
   @Input() type: string;
+  @Input() needArchived: boolean = false;
   @Input() validate: boolean = true;
-
   classAddProduct: string
   public isFormValid = false;
   search: string = '';
@@ -36,6 +37,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     public quoteStateService: QuoteStateService,
     private permissionsService: PermissionsService,
+    private productService: ProductService,
     public inventoryStateService: InventoryStateService) { }
 
 
@@ -47,7 +49,15 @@ export class ProductListComponent implements OnInit, OnDestroy {
     if (this.type === 'REPORT') this.classAddProduct = 'report-add-product';
     if (this.type === 'RECURRING-TICKET') this.classAddProduct = 'recurring-ticket-add-product';
     if (this.type === 'TICKET' || this.type === 'PRODUCTS_TICKET') this.classAddProduct = 'ticket-add-product';
-    if (this.type !== 'RECURRING-TICKET' && this.type !== 'PRODUCTS_TICKET') this.inventoryStateService.getProducts();
+    if (this.type !== 'RECURRING-TICKET' && this.type !== 'PRODUCTS_TICKET' && this.type !== 'REPORT') this.inventoryStateService.getProducts();
+    if (this.type === 'REPORT') {
+      this.productService.getCategories(this.needArchived).subscribe((res: any) => {
+        this.itemList = res;
+        this.inventoryStateService.setPreloader(false);
+        this.onUpdateList();
+        this.cd.detectChanges();
+      });
+    }
     if (this.inventoryStateService.getListProducts().length > 0) this.itemList = this.inventoryStateService.getListProducts();
     let getOnProducts = this.inventoryStateService.getOnProducts().subscribe(data => {
       this.itemList = data;

@@ -1146,6 +1146,7 @@
                             <div class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c">
                                 <div class="qt-report__dropdown qt-report__dropdown-xl qt-mr-8">
                                     <app-product-list
+                                        [needArchived]="true"
                                         [type]="'REPORT'"
                                         (selectedProductItem)="selectProduct($event)"
                                     ></app-product-list>
@@ -1446,6 +1447,7 @@
                         >
                             <div class="qt-report__dropdown product-dropdown-new-ng light-dropdown select-product qt-mr-8">
                                 <app-product-list
+                                    [needArchived]="true"
                                     [type]="'REPORT'"
                                     (selectedProductItem)="selectProduct($event)"
                                 ></app-product-list>
