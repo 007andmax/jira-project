@@ -986,7 +986,11 @@
                                             line-height: 1.33;
                                             position: relative;
                                             padding-left: 20px;
-                                            background: url(/assets/img/icons/tips.svg) no-repeat left top;
+                                            background-color: $gray-500;
+                                            mask-position: center;
+                                            mask-repeat: no-repeat;
+                                            mask-size: contain;
+                                            mask-image: url(/assets/img/icons/info.svg);
                                         }
                                         p {
                                             margin: 0;

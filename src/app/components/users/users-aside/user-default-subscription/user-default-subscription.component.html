@@ -20,7 +20,7 @@
             <i
                 class="qt-sz-16 qt-bg-contain qt-mr-4"
                 *ngIf="defaultSubscriptions.invoiceSubscription.isExist"
-                [ngClass]="{'icon__unsubscribe-user':!defaultSubscriptions.invoiceSubscription.activated,'icon__subscribe-user':defaultSubscriptions.invoiceSubscription.activated}"
+                [ngClass]="{'icon__unsubscribe-user':!defaultSubscriptions.invoiceSubscription.activated,'icon__status-green':defaultSubscriptions.invoiceSubscription.activated}"
             ></i>
             Invoice Updates
             <i
@@ -37,7 +37,7 @@
             <i
                 class="qt-sz-16 qt-bg-contain qt-mr-4"
                 *ngIf="defaultSubscriptions.ticketSubscription.isExist"
-                [ngClass]="{'icon__unsubscribe-user':!defaultSubscriptions.ticketSubscription.activated,'icon__subscribe-user':defaultSubscriptions.ticketSubscription.activated}"
+                [ngClass]="{'icon__unsubscribe-user':!defaultSubscriptions.ticketSubscription.activated,'icon__status-green':defaultSubscriptions.ticketSubscription.activated}"
             ></i>
             Ticket Updates
             <i
@@ -54,7 +54,7 @@
             <i
                 class="qt-sz-16 qt-bg-contain qt-mr-4"
                 *ngIf="defaultSubscriptions.ticketManagerSubscription.isExist"
-                [ngClass]="{'icon__unsubscribe-user':!defaultSubscriptions.ticketManagerSubscription.activated,'icon__subscribe-user':defaultSubscriptions.ticketManagerSubscription.activated}"
+                [ngClass]="{'icon__unsubscribe-user':!defaultSubscriptions.ticketManagerSubscription.activated,'icon__status-green':defaultSubscriptions.ticketManagerSubscription.activated}"
             ></i>
             Ticket Manager
             <i
