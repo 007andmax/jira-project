@@ -8,7 +8,7 @@ import { TicketsStatusComponent } from './tickets-status/tickets-status.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
-import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.module';
+import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { Onlynumber } from 'src/app/helpers/Onlynumber';
 import { CannedResponsesComponent } from './canned-responses/canned-responses.component';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
@@ -32,7 +32,7 @@ import { TicketsPriorityComponent } from './tickets-priority/tickets-priority.co
         ReactiveFormsModule,
         MatFormFieldModule,
         DropDownModule,
-        ClickOtsideModule,
+        ClickOutsideModule,
         TicketSettingsPageRoutingModule,
         DynamicTooltipModule,
         KeyUpEnterModule

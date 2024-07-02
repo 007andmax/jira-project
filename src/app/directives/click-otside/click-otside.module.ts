@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ClickOtsideDirective } from './click-otside.directive';
+import { ClickOutsideDirective } from './click-otside.directive';
 
 @NgModule({
     declarations: [
-        ClickOtsideDirective
+        ClickOutsideDirective
     ],
     imports: [
         CommonModule,
         FormsModule,
 
     ],
-    exports: [ClickOtsideDirective],
+    exports: [ClickOutsideDirective],
 
 
 })
-export class ClickOtsideModule { }
+export class ClickOutsideModule { }

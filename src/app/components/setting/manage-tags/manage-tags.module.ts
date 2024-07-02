@@ -6,7 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { TagPipe } from 'src/app/pipe/tag.pipe';
 import { ManageTagsRoutingModule } from './manage-tags-routing.module';
-import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.module';
+import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { ManageTagsAddComponent } from './manage-tags-add/manage-tags-add.component';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
@@ -31,7 +31,7 @@ import { DeviceTagPipe } from 'src/app/pipe/device-tag.pipe';
         ReactiveFormsModule,
         InfiniteScrollModule,
         ManageTagsRoutingModule,
-        ClickOtsideModule,
+        ClickOutsideModule,
         KeyUpEnterModule,
         DynamicTooltipModule,
     ],

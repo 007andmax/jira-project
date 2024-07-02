@@ -6,7 +6,7 @@ import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.comp
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { StatusColor } from 'src/app/components/tickets/class/status-color';
 import { DELETE_TICKET_STATUS } from 'src/app/const/confirm';
-import { ClickOtsideDirective } from 'src/app/directives/click-otside/click-otside.directive';
+import { ClickOutsideDirective } from 'src/app/directives/click-otside/click-otside.directive';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
@@ -24,7 +24,7 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
   statusColors: Array<StatusColor> = [];
   editTicketsStatus: TicketStatus;
   sort = "ASC";
-  @ViewChild('addStatusBtn') addStatusBtn: ClickOtsideDirective;
+  @ViewChild('addStatusBtn') addStatusBtn: ClickOutsideDirective;
   sub: Subscription = new Subscription();
   constructor(private ticketsStateService: TicketsStateService,
     private ticketsService: TicketsService,
