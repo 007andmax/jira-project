@@ -7,6 +7,8 @@ import { TagsService } from 'src/app/services/tags/tags.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
 import { TagsStateService } from 'src/app/states/tags/tags-state.service';
+import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tickets-permissions.service';
+import { TicketProfile } from '../../class/ticket-profile';
 
 @Component({
   selector: 'ticket-detail-edit-tags',
@@ -33,6 +35,7 @@ export class TicketDetailEditTagsComponent implements OnInit, OnDestroy {
   @Output() tagsChange = new EventEmitter();
   @ViewChild('tagsDp') tagsDp: any;
   @Output() tagsRemove = new EventEmitter();
+  @Input() ticketProfile: TicketProfile = new TicketProfile();
   /**
    * Creates an instance of the TagsComponent with the injected services
    * @param {TagsService} tagsService Service to work with tags
@@ -44,6 +47,7 @@ export class TicketDetailEditTagsComponent implements OnInit, OnDestroy {
     public tagsRealTimeService: TagsRealTimeService,
     public cd: ChangeDetectorRef,
     public customerPortalStateService: CustomerPortalStateService,
+    public ticketsPermissionsService: TicketsPermissionsService,
     public elRef: ElementRef
   ) { }
 

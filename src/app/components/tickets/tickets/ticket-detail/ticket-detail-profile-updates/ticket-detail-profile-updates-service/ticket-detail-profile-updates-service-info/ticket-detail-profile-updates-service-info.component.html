@@ -106,6 +106,7 @@
                 [users]="listTechUsers"
                 [placement]="'top-end'"
                 (usersChange)="onChangeUser($event)"
+                [isDisabled]="isBlockChange"
             ></app-tech-users>
             <app-date-picker
                 #dpDate

@@ -132,6 +132,7 @@ export class TicketsStateService {
 
     })
   }
+
   public changeFilterField(data) {
     this.onChangeFilterField.emit(data);
   }

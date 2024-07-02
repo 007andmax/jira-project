@@ -19,7 +19,7 @@ import { CompanyUser } from '../../ticket-add-aside/company-users-drop-down/clas
 export class AddAssignedUserComponent implements OnInit {
 
   selectable = true;
-  removable = true;
+  @Input() removable = true;
   addOnBlur = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   userCtrl = new FormControl();

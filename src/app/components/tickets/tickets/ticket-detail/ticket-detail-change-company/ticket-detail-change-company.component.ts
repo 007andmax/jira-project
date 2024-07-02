@@ -8,6 +8,7 @@ import { CHANGE_COMPANY_TICKET } from 'src/app/const/confirm';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
+import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tickets-permissions.service';
 
 @Component({
   selector: 'ticket-detail-change-company',
@@ -21,6 +22,7 @@ export class TicketDetailChangeCompanyComponent implements OnInit, OnDestroy {
   @Input() ticketProfile: TicketProfile = new TicketProfile();
   constructor(private companiesStateService: CompaniesStateService,
     private confirmStateService: ConfirmStateService,
+    public ticketsPermissionsService: TicketsPermissionsService,
     private modalService: NgbModal,
     private ticketsService: TicketsService,) { }
 

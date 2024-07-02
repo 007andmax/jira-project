@@ -13,6 +13,7 @@ import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { Subscription } from 'rxjs';
+import { TicketStateService } from '../../ticket-edit-aside/services/ticket-state.service';
 
 @Component({
   selector: 'ticket-detail-change-priority',
@@ -35,6 +36,7 @@ export class TicketDetailChangePriorityComponent extends DropDownComponent {
     public cd: ChangeDetectorRef,
     public ticketsService: TicketsService,
     public devicesService: DevicesService,
+    public ticketStateService: TicketStateService,
     public companiesService: CompaniesService) {
     super(elRef, companiesStateService, usersStateService, customerPortalStateService, companiesService, devicesService, cd);
 
@@ -65,6 +67,14 @@ export class TicketDetailChangePriorityComponent extends DropDownComponent {
     } else {
       this.statusColors = this.ticketsStateService.getListStatusColor();
     }
+    this.ticketStateService.onCloseTicket.subscribe(data => {
+      this.isDisabled = true;
+      this.cd.detectChanges();
+    })
+    this.ticketStateService.onOpenTicket.subscribe(data => {
+      this.isDisabled = false;
+      this.cd.detectChanges();
+    })
     let getOnUpdateTicket = this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
       this.isDisabled = !(this.ticketsPermissionsService.isActionVisible('update', this.ticketProfile, null, null) && (this.customerPortalStateService.isCustomerPortal && this.isAddNoteForCustomerUser() || !this.customerPortalStateService.isCustomerPortal));
       this.selectedItem = this.ticketProfile.priorityLevel;

@@ -91,6 +91,18 @@ export class TicketProfile {
             this.priorityLevel = new TicketsPriority(data.priorityLevel);
         }
     }
+    public setAssignedUser(data) {
+        this.assignedUser = data;
+    }
+    public setAssignedUserId(data) {
+        this.assignedUserId = data;
+    }
+    public setAssignedAt(data) {
+        this.assignedAt = data;
+    }
+    public setStatus(data) {
+        this.status = data;
+    }
     public refreshAttachments(attachments) {
         this.attachments = [];
         this.updates.forEach(item => {

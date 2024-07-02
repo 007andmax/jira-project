@@ -34,6 +34,7 @@ import { TicketProfileAgent } from '../class/ticket-profile-agent';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { TicketDetailMessageComponent } from './ticket-detail-message/ticket-detail-message.component';
+import { TicketDetailChangeStatusComponent } from './ticket-detail-change-status/ticket-detail-change-status.component';
 
 @Component({
   selector: 'ticket-detail',
@@ -47,6 +48,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   @ViewChild('ticketProfileUpdates') ticketProfileUpdates: TicketDetailProfileUpdatesComponent;
   @ViewChild('ticketTasks') ticketTasks: TicketDetailTasksComponent;
   @ViewChild('detailHeader') detailHeader: TicketDetailHeaderComponent;
+  @ViewChild('changeStatus') changeStatus: TicketDetailChangeStatusComponent;
   isInit: boolean = false;
   ticketProfile: TicketProfile = new TicketProfile();
   showFormUpdate: boolean = false;
@@ -179,6 +181,18 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       this.showEditUpdate = true;
     })
     this.sub.add(onEditUpdateByForm);
+    let onCloseTicket = this.ticketStateService.onCloseTicket.subscribe(data => {
+      this.ticketProfile.setStatus("COMPLETED");
+      this.changeStatus.setStatusWithoutChange("COMPLETED");
+      this.cd.detectChanges();
+    })
+    this.sub.add(onCloseTicket);
+    let onOpenTicket = this.ticketStateService.onOpenTicket.subscribe(data => {
+      this.ticketProfile.setStatus("IN_PROGRESS");
+      this.changeStatus.setStatusWithoutChange("IN_PROGRESS");
+      this.cd.detectChanges();
+    })
+    this.sub.add(onOpenTicket);
   }
   removeCustomDevice(ids) {
     forkJoin(
@@ -241,9 +255,10 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
         var user = this.usersStateService.getAllUsers().find(item => item.id === data.message);
         return;
       }
-      this.ticketMessage.isMarkAsOpen = false;
-      this.toastrService.success("The ticket has been successfully changed");
+      this.toastrService.success(`The tickets “${this.ticketProfile.number}” status has been changed`);
       this.appStateService.changeDetectorRef();
+      this.ticketMessage.isMarkAsOpen = false;
+      this.ticketStateService.fastOpenTicket();
     })
   };
   onAddUpdate(data) {
@@ -479,6 +494,11 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     }
     this.ticketsService.assignUserToTicket(this.ticketProfile.id, value.join(",")).subscribe(res => {
       // this.ticketMessage.isClaimTicket = false;
+      this.ticketProfile.setAssignedUser(this.usersStateService.getCurrentUser());
+      this.ticketProfile.setAssignedUserId(this.usersStateService.getCurrentUser().id);
+      this.ticketProfile.setAssignedAt(new Date().getTime());
+      this.ticketStateService.fastOpenTicket();
+      this.cd.detectChanges();
     })
 
   };

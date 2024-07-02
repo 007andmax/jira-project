@@ -8,6 +8,7 @@ import { TicketStateService } from '../services/ticket-state.service';
 import { OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { TicketsPermissionsService } from '../services/tickets-permissions.service';
 
 @Component({
   selector: 'app-ticket-profile-attachments',
@@ -23,6 +24,7 @@ export class TicketProfileAttachmentsComponent implements OnInit, OnDestroy {
     public modalService: NgbModal,
     public customerPortalStateService: CustomerPortalStateService,
     public ticketStateService: TicketStateService,
+    public ticketsPermissionsService: TicketsPermissionsService,
     public confirmStateService: ConfirmStateService,) { }
 
 
