@@ -17,7 +17,6 @@ export class DeviceTagsStateService {
 
   public onInit() {
     this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
-      console.log("newChange", newChange);
       if (newChange.action === 'DEVICE_TAG_SAVED') {
         newChange.data.tags.forEach(item => this.tags.unshift(new DeviceTag(item)))
       }
@@ -33,7 +32,6 @@ export class DeviceTagsStateService {
           this.tags.splice(index, 1);
         })
       }
-      console.log("this.tags", this.tags);
       this.onGetTags.emit(this.tags);
     })
   }

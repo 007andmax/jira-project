@@ -65,7 +65,6 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
         let index = newChange.data.devices.findIndex(item => item.deviceId == this.device.agentId || item.deviceId == this.device.id);
         if (index > -1) {
           let tags = this.deviceTagsStateService.getTags().filter(item => newChange.data.devices[index].tags.some(tag => tag == item.id));
-          console.log("tags", tags);
           this.device.setTags([...this.device.tags, ...tags]);
           this.deviceTags.setSelectedTag(JSON.parse(JSON.stringify(this.device.tags)).map(item => new DeviceTag(item)));
         }
