@@ -5,6 +5,7 @@ import { DevicesService } from 'src/app/services/devices/devices.service';
 import { CompanyDevicesEditIpComponent } from '../../company-devices-edit-ip/company-devices-edit-ip.component';
 import { CompanyDevicesEditLabelComponent } from '../../company-devices-edit-label/company-devices-edit-label.component';
 import { CompanyDevicesEditMacComponent } from '../../company-devices-edit-mac/company-devices-edit-mac.component';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-company-devices-aside-network-tab',
@@ -19,6 +20,7 @@ export class CompanyDevicesAsideNetworkTabComponent implements OnInit {
   @Input() customDevice: DeviceCompany;
   toggleIpSettings: boolean = false;
   constructor(private devicesService: DevicesService,
+    public customerPortalStateService: CustomerPortalStateService,
     public cd: ChangeDetectorRef
   ) { }
 

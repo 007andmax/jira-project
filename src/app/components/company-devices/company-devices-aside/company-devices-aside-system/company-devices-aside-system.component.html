@@ -77,6 +77,7 @@
                     [editItem]="customDevice.manufacturer"
                     [search]="true"
                     [change]="true"
+                    [isDisabled]="customerPortalStateService.isCustomerPortal"
                     (onSelectedItem)="onSelectManufacture($event)"
                     heightInput="auto"
                 ></app-drop-down>
@@ -118,7 +119,7 @@
                     [field]="'name'"
                     [list]="models"
                     [editItem]="customDevice.model"
-                    [isDisabled]="!customDevice.manufacturer"
+                    [isDisabled]="!customDevice.manufacturer || customerPortalStateService.isCustomerPortal"
                     [search]="true"
                     [change]="true"
                     (onSelectedItem)="onSelectModel($event)"
@@ -152,7 +153,7 @@
                 [editDate]="device.report.system.warranty"
                 [useMinDate]="false"
                 [placement]="'top-right'"
-                [disabled]="customerPortalStateService.isCustomerPortal"
+                [isDisabled]="customerPortalStateService.isCustomerPortal"
                 (onChange)="onChangeHardware(device.getDataForUpdateWarranty(parseDateFromDatePicker($event)),'warranty',parseDateFromDatePicker($event))"
             ></app-date-picker>
             <app-date-picker
@@ -166,7 +167,7 @@
                 [editDate]="customDevice.warrantyDateInt"
                 [useMinDate]="false"
                 [placement]="'top-right'"
-                [disabled]="customerPortalStateService.isCustomerPortal"
+                [isDisabled]="customerPortalStateService.isCustomerPortal"
                 (onChange)="onChangeWarrentyDate($event)"
             ></app-date-picker>
         </div>
@@ -193,7 +194,7 @@
                 [editDate]="device.report.system.installDate"
                 [useMinDate]="false"
                 [placement]="'top-right'"
-                [disabled]="customerPortalStateService.isCustomerPortal"
+                [isDisabled]="customerPortalStateService.isCustomerPortal"
                 (onChange)="onChangeHardware(device.getDataForUpdateInstallDate(parseDateFromDatePicker($event)),'installDate',parseDateFromDatePicker($event))"
             ></app-date-picker>
             <app-date-picker
@@ -207,7 +208,7 @@
                 [editDate]="customDevice.installDateInt"
                 [useMinDate]="false"
                 [placement]="'top-right'"
-                [disabled]="customerPortalStateService.isCustomerPortal"
+                [isDisabled]="customerPortalStateService.isCustomerPortal"
                 (onChange)="onChangeInstallDate($event)"
             ></app-date-picker>
         </div>
@@ -255,6 +256,7 @@
                     (onChange)="onChangeNote()"
                     (input)="setIsInitEditNote(true)"
                     [default]="5"
+                    [disabled]="customerPortalStateService.isCustomerPortal"
                     cols="2"
                     rows="1"
                 ></textarea>

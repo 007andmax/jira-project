@@ -143,6 +143,7 @@
     <div class="company-devices-table__tags">
         <app-company-devices-tags
             #deviceTags
+            [isDisabled]="customerPortalStateService.isCustomerPortal"
             [showLabel]="false"
             [placement]="'top'"
             (tagsChange)="onChangeTags($event)"
