@@ -2,6 +2,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { DeviceTag } from 'src/app/components/setting/manage-tags/manage-tags-devices/class/device-tag';
 import { DeviceTagsService } from 'src/app/services/device-tags/device-tags.service';
 import { DeviceTagsRealTimeService } from './device-tags-real-time.service';
+import { DevicesRealTimeService } from '../devices/devices-real-time.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +12,12 @@ export class DeviceTagsStateService {
   onGetTags: EventEmitter<any> = new EventEmitter();
   tagForDelete: DeviceTag = null;
   constructor(private deviceTagsService: DeviceTagsService,
-    private deviceTagsRealTimeService: DeviceTagsRealTimeService) { }
+    private deviceTagsRealTimeService: DeviceTagsRealTimeService,
+    private devicesRealTimeService: DevicesRealTimeService) { }
 
   public onInit() {
-    this.deviceTagsRealTimeService.changeTagsrray.subscribe(newChange => {
+    this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
+      console.log("newChange", newChange);
       if (newChange.action === 'DEVICE_TAG_SAVED') {
         newChange.data.tags.forEach(item => this.tags.unshift(new DeviceTag(item)))
       }
@@ -30,6 +33,7 @@ export class DeviceTagsStateService {
           this.tags.splice(index, 1);
         })
       }
+      console.log("this.tags", this.tags);
       this.onGetTags.emit(this.tags);
     })
   }
