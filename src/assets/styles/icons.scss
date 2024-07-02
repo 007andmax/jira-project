@@ -179,6 +179,9 @@
   &__timeline {
     background-image: url("/assets/img/icons/timeline.svg");
   }
+  &__computer-blue {
+    background-image: url("/assets/img/icons/computer-blue.svg");
+  }
   // END Color Icon
   &__assign-date {
     mask-image: url("/assets/img/icons/assign-date.svg");
@@ -620,19 +623,10 @@
     mask-image: url("/assets/img/icons/remote-access.svg");
   }
   &__computer-green {
-    background-image: url("/assets/img/icons/computer-green.svg");
+    mask-image: url("/assets/img/icons/computer-green.svg");
   }
-  &__computer-blue {
-    background-image: url("/assets/img/icons/computer-blue.svg");
-  }
-  &__uninstall-agent {
+  &__uninstall-agent { // TODO check
     background-image: url("/assets/img/icons/uninstall-agent.svg");
-  }
-  &__install {
-    background-image: url("/assets/img/icons/install.svg");
-  }
-  &__device-connect {
-    background-image: url("/assets/img/icons/device-connect.svg");
   }
 
   &.--updated {
