@@ -21,7 +21,7 @@
   background-image: url("/assets/img/icons/billable.svg");
 }
 .no-valid-label {
-  background: url("/assets/img/icons/update-label-yellow.svg") no-repeat;
+  background: url("/assets/img/icons/new-update.svg") no-repeat;
   display: block;
   width: 44px;
   height: 20px;
@@ -80,9 +80,6 @@
   &__send-to-front {
     background-image: url("/assets/img/icons/send-to-front.svg");
   }
-  &__run-script {
-    mask-image: url("/assets/img/icons/run-script-white.svg");
-  }
   &__monogram {
     background-image: url("/assets/img/icons-left-sidebar/monogram.svg");
   }
@@ -122,8 +119,8 @@
   &__harddisk {
     background-image: url("/assets/img/icons/harddisk.svg");
   }
-  &__update-label-yellow {
-    background-image: url("/assets/img/icons/update-label-yellow.svg");
+  &__new-update {
+    background-image: url("/assets/img/icons/new-update.svg");
   }
   &__motherboard {
     background-image: url("/assets/img/icons/motherboard.svg");
@@ -186,8 +183,8 @@
   &__assign-user-plus {
     mask-image: url("/assets/img/icons/assign-user-plus.svg");
   }
-  &__ticket-note {
-    mask-image: url("/assets/img/icons/ticket-note.svg");
+  &__notes {
+    mask-image: url("/assets/img/icons/notes.svg");
   }
   &__list {
     mask-image: url("/assets/img/icons/list.svg");
@@ -444,6 +441,9 @@
   }
   &__filter-lines {
     mask-image: url("/assets/img/icons/filter-lines.svg");
+  }
+  &__run-script {
+    mask-image: url("/assets/img/icons/run-script.svg");
   }
   &__filter {
     mask-image: url("/assets/img/icons/filter.svg");
