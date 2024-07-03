@@ -235,7 +235,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       let indexhUser = this.users.findIndex(user => user.id === selectedUser.id);
       if (indexhUser > -1) this.ticketAdd.createdUser.setUserData(this.users[indexhUser]);
       let findSharedUser = this.shareUsersList.find(item => item.id === this.users[indexhUser].id);
-      if (!findSharedUser) {
+      if (!findSharedUser && this.users[indexhUser]) {
         let user = new TechUserItem(JSON.parse(JSON.stringify(this.users[indexhUser])));
         user.selected = true;
         this.shareUsersList.push(user);
