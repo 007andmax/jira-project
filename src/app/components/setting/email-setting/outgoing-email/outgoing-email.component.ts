@@ -353,13 +353,15 @@ export class OutgoingEmailComponent implements OnInit {
    */
   changeEncryption(value) {
     this.encryptionType = this.encryptionTypes.find(itme => itme.type == value);
+    console.log("this.encryptionType", this.encryptionType);
     if (value) {
       if (this.initialized || this.portIsEmpty) {
         var port = this.portToTypes[value];
         if (port) {
           this.smtp.port = port;
           this.smtpForm.patchValue({
-            port: port
+            port: port,
+            encryptionType: this.encryptionType.type
           });
         }
       } else {

@@ -101,7 +101,7 @@ export class EmailSettingComponent implements OnInit, OnDestroy {
             ? this.getEmailViaByDomain(this.smtp.domain)
             : this.emailVia[0];
           this.showIn = true;
-
+          console.log("this.smtp", this.smtp);
         }
       },
       (error: any) => {
