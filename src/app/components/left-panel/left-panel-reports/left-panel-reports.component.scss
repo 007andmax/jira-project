@@ -20,23 +20,6 @@
         align-items: center;
         padding: 0;
         margin: 0 0 8px 0;
-        .icon {
-            &__taxes {
-                background-image: url("/assets/img/icons/report-left-menu/taxes.svg");
-            }
-            &__remote-access {
-                background-image: url("/assets/img/icons/report-left-menu/connect.svg");
-            }
-
-            &__devices {
-                background-image: url("/assets/img/icons/report-left-menu/devices.svg");
-            }
-
-            &__tickets {
-                background-image: url("/assets/img/icons/report-left-menu/tickets.svg");
-            }
-        }
-
         i {
             width: 24px;
             height: 24px;
