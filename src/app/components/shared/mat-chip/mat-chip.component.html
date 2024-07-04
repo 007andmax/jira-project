@@ -1,0 +1,10 @@
+<div class="mat-chip mat-primary mat-standard-chip mat-chip-with-trailing-icon">
+    <ng-content></ng-content>
+    <div
+        class="mat-chip-remove mat-chip-trailing-icon mat-icon material-icons"
+        *ngIf="isRemove"
+        (click)="remove()"
+    >
+        cancel
+    </div>
+</div>

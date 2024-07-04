@@ -141,6 +141,9 @@ import { SuperAdminPublicListComponent } from './components/super-admin-public/s
 import { SuperAdminPublicListModule } from './components/super-admin-public/super-admin-public-list/super-admin-public-list.module';
 import { ProductTypeCheckUseComponent } from './components/setting/products-settings/product-type-check-use/product-type-check-use.component';
 import { ProductTypeCheckUseModule } from './components/setting/products-settings/product-type-check-use/product-type-check-use.module';
+import { MatChipComponent } from './components/shared/mat-chip/mat-chip.component';
+import { MatChipTagComponent } from './components/shared/mat-chip-tag/mat-chip-tag.component';
+import { MatFormFieldComponent } from './components/shared/mat-form-field/mat-form-field.component';
 declare var $: any;
 
 /**
@@ -170,7 +173,7 @@ declare var $: any;
     GlNumberCheckUseComponent,
     CannedResponsesAsideComponent,
     ManufacturesCheckUseComponent,
-    UserDeArchiveNotificationComponent
+    UserDeArchiveNotificationComponent,
   ],
   imports: [
     BrowserModule,
