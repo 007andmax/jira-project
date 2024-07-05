@@ -1,10 +1,11 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy, Input, ChangeDetectorRef, ElementRef } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy, Input, ChangeDetectorRef, ElementRef, ViewChild } from '@angular/core';
 import { TechUsersStateService } from './services/tech-users-state.service';
 import { Subscription } from 'rxjs';
 import { RecurringTicketUser } from '../../tickets/recurring-tickets/interfaces/recurring-ticket-user';
 import { TechUserItem } from './class/tech-user-item';
 import { SINGLE_SELECT, MULTIPLE_SELECT, RECURRING_TICEKTS } from 'src/app/const/users';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
+import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-tech-users',
@@ -28,6 +29,7 @@ export class TechUsersComponent implements OnInit, OnDestroy {
   @Input() isDisabled: boolean = false;
   @Input() type: string = RECURRING_TICEKTS;
   @Input() placement: string = "bottom-left";
+  @ViewChild('techUsersDd') techUsersDd: NgbDropdown;
   users: Array<TechUserItem> = [];
   sub = new Subscription();
   @Output() usersChange = new EventEmitter();
@@ -60,7 +62,9 @@ export class TechUsersComponent implements OnInit, OnDestroy {
     this.onInitClearState();
     this.checUsersForEdit();
   }
-
+  openDropDown() {
+    if (!this.isDisabled) this.techUsersDd.open();
+  }
   public resetEditMode() {
     this.selectedUsers = [];
     this.usersList.forEach(item => {
@@ -125,7 +129,7 @@ export class TechUsersComponent implements OnInit, OnDestroy {
   };
   onCloseDropDown(data) {
     if (!data) {
-      this.elRef.nativeElement.querySelector("#search-user").value = "";
+      if (this.elRef.nativeElement.querySelector("#search-user")) this.elRef.nativeElement.querySelector("#search-user").value = "";
       this.usersList = JSON.parse(JSON.stringify(this.users));
     }
   }

@@ -9,11 +9,8 @@ import { TicketStateService } from '../ticket-edit-aside/services/ticket-state.s
 import { TicketStatus } from 'src/app/components/setting/ticket-settings-page/tickets-status/class/ticket-status';
 import { StatusColor } from '../../class/status-color';
 import { AppService } from 'src/app/states/app/app.service';
-import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
-import { Router } from '@angular/router';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
-import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { TicketsRealTimeService } from 'src/app/states/tickets/tickets-real-time.service';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
@@ -77,16 +74,18 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     });
     this.sub.add(onTicketFilters);
 
-    this.ticketsStateService.getOnAddTicket().subscribe(data => {
+    let getOnAddTicket = this.ticketsStateService.getOnAddTicket().subscribe(data => {
       if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter, data) && !this.tickets.find(item => item.id == data.id) && !(this.page_number == 0 && this.showPreloader)) {
         this.tickets.unshift(data);
         this.cd.detectChanges();
       }
     })
-    this.ticketStateService.getOnTicketClosed().subscribe(data => {
+    this.sub.add(getOnAddTicket);
+    let getOnTicketClosed = this.ticketStateService.getOnTicketClosed().subscribe(data => {
       this.idEditTicket = '';
     })
-    this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
+    this.sub.add(getOnTicketClosed);
+    let getOnUpdateTicket = this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
       let ticket = new Ticket(data);
       if (data.assignedUser) ticket.setAssignedUserId(data.assignedUser.id);
       let findIndex = this.tickets.findIndex(item => item.id === ticket.id);
@@ -97,11 +96,12 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       }
       this.cd.detectChanges();
     })
-
-    this.ticketsStateService.getOnRemoveTicket().subscribe(data => {
+    this.sub.add(getOnUpdateTicket);
+    let getOnRemoveTicket = this.ticketsStateService.getOnRemoveTicket().subscribe(data => {
       let findIndex = this.tickets.findIndex(item => item.id === data.id);
       if (findIndex > -1) this.tickets.splice(findIndex, 1);
     });
+    this.sub.add(getOnRemoveTicket);
 
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
       this.ticketsFilter = data;
@@ -121,10 +121,10 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     } else {
       this.listColors = this.ticketsStateService.getListStatusColor();
     }
-    this.ticketsStateService.getOnInitColor().subscribe(data => {
+    let getOnInitColor = this.ticketsStateService.getOnInitColor().subscribe(data => {
       this.listColors = data;
     })
-
+    this.sub.add(getOnInitColor);
     if (localStorage.getItem('billable_ticket_id')) {
       this.editTicket(localStorage.getItem('billable_ticket_id'));
       localStorage.removeItem('billable_ticket_id');

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { NonContractServicesService } from 'src/app/services/non-contract-services/non-contract-services.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -9,7 +9,6 @@ import { ContractsUserDevice } from '../class/contracts-user-device';
 import { ContractsUserDeviceService } from '../class/contracts-user-device-service';
 import { ContractsUserDeviceValidate } from '../class/contracts-user-device-validate';
 import * as moment from "moment";
-import { InvoiceFormTicketEditTaxesComponent } from '../../../billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -20,6 +19,7 @@ import { ContractsBlockTimeService } from '../class/contracts-block-time-service
 import { Subscription } from 'rxjs';
 import { ContractsListService } from '../../services/contracts-list.service';
 import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
+import { ContractsAsideUserDeviceServiceComponent } from './contracts-aside-user-device-service/contracts-aside-user-device-service.component';
 
 @Component({
   selector: 'app-contracts-aside-user-device-billing',
@@ -29,9 +29,11 @@ import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component'
 })
 export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestroy {
   @ViewChild('taxes') taxesDP: TaxesComponent;
+  @ViewChild('taxesServices') taxesServicesDP: TaxesComponent;
   @ViewChild('startDateDP') startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP') reviewDateDP: DatePickerComponent;
   @ViewChild('topContract') topContract: ContractsAsideTopComponent;
+  @ViewChildren("deviceService") deviceServices: QueryList<ContractsAsideUserDeviceServiceComponent>;
   @Output() onClose = new EventEmitter<any>();
   selectedType = new ContractsFilterType('Service Contract/by device/by user', 'SERVICE_CONTRACT_DEVICE_USER', null);
   contractsUserDevice: ContractsUserDevice = new ContractsUserDevice();
@@ -70,6 +72,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
       this.setDefaultTaxes(data);
     })
+    this.sub.add(getOnTaxess);
     let getConfirm = this.сontractsStateService.getConfirm().subscribe(data => {
       this.onCheckServicesForAdd(data);
     })
@@ -100,6 +103,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     let taxes = lsitTaxes.filter(item => item.isDefault === true);
     this.defaultSelectedTax = taxes;
     this.taxesDP.setEditItems(taxes);
+    this.taxesServicesDP.setEditItems(taxes);
   }
   parsedateForTotal(date) {
     return moment(date).format('DD MMM YYYY');
@@ -193,6 +197,19 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
       if (type === "DEVICE") this.contractsUserDevice.serviceContractServices = [new ContractsUserDeviceService(1, "Managed workstations", 0, this.defaultSelectedTax.map(item => item.id)),
       new ContractsUserDeviceService(1, "Managed servers", 0, this.defaultSelectedTax.map(item => item.id))];
       if (type === "USER") this.contractsUserDevice.serviceContractServices = [new ContractsUserDeviceService(1, "Managed users", 0, this.defaultSelectedTax.map(item => item.id))];
+    }
+  }
+  onServiceTaxesChange(data) {
+    this.contractsUserDevice.serviceContractServices.forEach((item, index) => {
+      item.taxIds = data.map(item => item.id);
+      this.deviceServices.toArray()[index].setSelectedTaxes(JSON.parse(JSON.stringify(data)));
+    })
+  }
+  setInvoiceAsSingleItem(data) {
+    this.contractsUserDevice.invoiceAsSingleItem = data;
+    if (data) {
+      this.taxesServicesDP.setEditItems(this.defaultSelectedTax);
+      this.onServiceTaxesChange(this.defaultSelectedTax);
     }
   }
   setToggleMaximumAmountHours(data) {

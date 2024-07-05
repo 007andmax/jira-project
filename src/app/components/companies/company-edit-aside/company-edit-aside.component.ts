@@ -18,8 +18,6 @@ import { ModalImageCropperStateService } from 'src/app/services/modal/modal-imag
 import { ImageCroper } from 'src/app/services/modal/modal-image-cropper/class/image-croper';
 import { CompanyEditLogo } from '../class/company-edit-logo';
 import { UsersService } from 'src/app/services/users/users.service';
-import { User } from '../../users/class/user';
-import { CompanyIndustry } from 'src/app/interfaces/company/company-industry';
 import { CompanyTagsComponent } from '../company-tags/company-tags.component';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { CompanyAssociateComponent } from '../../company-dashboard/company-dash-associate/company-associate/company-associate.component';
@@ -28,7 +26,6 @@ import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-industry/class/crm-company-industry';
 import { CrmCompanyServiceType } from '../../setting/crm-settings/crm-company-service-type/class/crm-company-service-type';
 import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
-import { CompanyProfileAddress } from '../class/company-profile-address';
 import { MODE_EDIT_SUBSCRIPTION, MODE_EDIT_USER_SUBSCRIPTION } from 'src/app/const/users';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
@@ -76,15 +73,11 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   constructor(public companiesStateService: CompaniesStateService,
     private companiesService: CompaniesService,
     private usersStateService: UsersStateService,
-    private modalService: NgbModal,
     private imageCropperStateService: ImageCropperStateService,
     private elRef: ElementRef,
     private usersService: UsersService,
-    private companySubscriptionState: CompanySubscriptionStateService,
     private companyTimeZoneState: CompanyTimeZoneStateService,
-    private companyTagsStateService: CompanyTagsStateService,
     private modalImageCropperStateService: ModalImageCropperStateService,
-    private tagsState: CompanyTagsStateService,
     public appService: AppService,
     private crmStateService: CrmStateService,
     public cd: ChangeDetectorRef) { }

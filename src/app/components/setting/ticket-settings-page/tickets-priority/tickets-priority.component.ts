@@ -6,11 +6,11 @@ import { TicketsPriority } from './class/tickets-priority';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { catchError, map } from 'rxjs/operators';
-import { ClickOtsideDirective } from 'src/app/directives/click-otside/click-otside.directive';
+import { ClickOutsideDirective } from 'src/app/directives/click-otside/click-otside.directive';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
-import { DELETE_TICKET_PRIORITY, DELETE_TICKET_STATUS } from 'src/app/const/confirm';
+import { DELETE_TICKET_PRIORITY } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 
 @Component({
@@ -26,7 +26,7 @@ export class TicketsPriorityComponent implements OnInit {
   statusColors: Array<StatusColor> = [];
   editTicketsStatus: TicketStatus;
   sort = "ASC";
-  @ViewChild('addPriorityBtn') addPriorityBtn: ClickOtsideDirective;
+  @ViewChild('addPriorityBtn') addPriorityBtn: ClickOutsideDirective;
   sub: Subscription = new Subscription();
   constructor(private ticketsStateService: TicketsStateService,
     private ticketsService: TicketsService,

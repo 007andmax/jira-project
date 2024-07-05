@@ -3626,3 +3626,9 @@ app-company-devices-tags {
 app-company-devices-edit-ip,app-company-devices-edit-mac {
   display: contents;
 }
+.cotract-billable-tooltip {
+  .tooltip-inner {
+    width: 400px;
+    min-width: 400px;
+  }
+}

@@ -4,8 +4,6 @@ import { Subscription } from 'rxjs';
 import { ProductListComponent } from 'src/app/components/shared/product-list/product-list.component';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
-import { ProductService } from 'src/app/services/product/product.service';
-import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
@@ -24,20 +22,19 @@ export class TicketDetailProfileFormUpdateProductsComponent implements OnInit, O
   addedProductList = [];
   currentProduct: TicketProfileFormProduct = new TicketProfileFormProduct();
   sub: Subscription = new Subscription();
-  constructor(private productService: ProductService,
-    private inventoryStateService: InventoryStateService,
-    public cd: ChangeDetectorRef,
+  constructor(public cd: ChangeDetectorRef,
     public companiesStateService: CompaniesStateService,
     private permissionsService: PermissionsService,
     private ticketsStateService: TicketsStateService) { }
 
 
   ngOnInit() {
-    this.ticketsStateService.getOnClearFormUpdate().subscribe(data => {
+    let getOnClearFormUpdate = this.ticketsStateService.getOnClearFormUpdate().subscribe(data => {
       this.addedProductList = [];
       this.initCurrentProduct();
       this.productDP.clear();
     })
+    this.sub.add(getOnClearFormUpdate);
     this.initCurrentProduct();
   }
   initCurrentProduct() {
@@ -84,7 +81,7 @@ export class TicketDetailProfileFormUpdateProductsComponent implements OnInit, O
   public onChangeProduct(item, i, taxesDropDown) {
     this.addedProductList[i].setData(item, this.getItemOrger());
     this.addedProductList[i].valdiateSaleCost = true;
-    taxesDropDown.selectedTax = item.taxes;
+    taxesDropDown.selectedTax = JSON.parse(JSON.stringify(item.taxes));
   }
   public onTaxesChangeProduct(data, i) {
     this.addedProductList[i].setTexes(data);
@@ -92,7 +89,7 @@ export class TicketDetailProfileFormUpdateProductsComponent implements OnInit, O
   public selectProduct(item, taxesDropDown) {
     if (item) {
       this.currentProduct.setData(item, this.getItemOrger());
-      taxesDropDown.selectedTax = item.taxes;
+      taxesDropDown.selectedTax = JSON.parse(JSON.stringify(item.taxes));
     }
     if (!item) {
       this.initCurrentProduct();

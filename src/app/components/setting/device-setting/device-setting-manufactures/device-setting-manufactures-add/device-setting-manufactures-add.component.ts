@@ -1,7 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { map } from 'rxjs/operators';
-import { AgentService } from 'src/app/services/agent/agent.service';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 
 @Component({

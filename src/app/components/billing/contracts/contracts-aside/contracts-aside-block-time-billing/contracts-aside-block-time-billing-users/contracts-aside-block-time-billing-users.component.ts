@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { User } from 'src/app/components/users/class/user';
 
 @Component({
   selector: 'app-contracts-aside-block-time-billing-users',

@@ -1,6 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { InvoicesService } from 'src/app/services/invoices/invoices.service';
-import { Invoice } from '../class/invoice';
 import { InvoiceProfile } from '../class/invoice-profile';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import * as moment from "moment";
@@ -85,10 +84,7 @@ export class InvoicesAsidePreviewComponent implements OnInit {
   }
   getStatusDate(dateInvoice) {
     let date = new Date(dateInvoice);
-    let typeTime = (date.getHours() > 12) ? "PM" : "AM",
-      hours = (date.getHours() > 12) ? date.getHours() - 12 : date.getHours(),
-      minutes = (date.getMinutes() > 10) ? date.getMinutes() : "0" + date.getMinutes();
-    return `${this.getDateTicket(this.invoiceProfile.date)} ${(hours > 10) ? hours : "0" + hours}:${minutes} ${typeTime}`;
+    return `${this.getDateTicket(this.invoiceProfile.date)} ${moment(new Date(date)).format('hh:mm A')}`;
   }
   downloadPDF() {
     let company = this.companiesStateService.getCompanies().find(item => item.id === this.invoiceProfile.company.id);
@@ -99,8 +95,8 @@ export class InvoicesAsidePreviewComponent implements OnInit {
     wnd.print();
   }
   getServiceTaxes(service) {
-    if (service.taxesForSingleItem.length > 0) return this.getSelectedTaxes(service.taxesForSingleItem);
-    if (service.taxesForSingleItem.length == 0) return this.getSelectedTaxes(service.item.taxes || []);
+    if (service.taxes.length > 0) return this.getSelectedTaxes(service.taxes);
+    if (service.taxes.length == 0) return this.getSelectedTaxes(service.taxes || []);
   }
   public getDateTicket(date) {
     return moment(new Date(date)).format('DD/MM/YYYY');

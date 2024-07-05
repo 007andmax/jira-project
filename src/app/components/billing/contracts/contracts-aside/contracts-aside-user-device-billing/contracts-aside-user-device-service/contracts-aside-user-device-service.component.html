@@ -29,9 +29,13 @@
             placeholder="1"
             [value]="service.count"
             (onChange)="onChangeCount($event)"
+            (input)="onChangeDisplayBillableTooltip()"
         >
     </td>
-    <td class="col-tax --editable">
+    <td
+        class="col-tax --editable"
+        [hidden]="invoiceAsSingleItem"
+    >
         <app-invoice-form-ticket-edit-taxes
             class="qt-taxes-multiselect"
             #taxesDropDown
@@ -46,6 +50,7 @@
             [money]="true"
             [ngModel]="service.rate_str"
             (ngModelChange)="onChangeRate($event)"
+            (input)="onChangeDisplayBillableTooltip()"
             appToFixed
         >
     </td>

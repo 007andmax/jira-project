@@ -2,7 +2,6 @@ import { Component, ElementRef, EventEmitter, OnInit, Output } from '@angular/co
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { SettingService } from 'src/app/services/setting/setting.service';
-import { UsersService } from 'src/app/services/users/users.service';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 
@@ -24,7 +23,6 @@ export class GoogleAuthenticatorComponent implements OnInit {
   verifyCoded = ['', '', '', '', '', ''];
   constructor(private settingService: SettingService,
     private usersStateService: UsersStateService,
-    private modalService: NgbModal,
     public activeModal: NgbActiveModal,
     private toastrService: ToastrService,
     private appStateService: AppStateService,

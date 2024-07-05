@@ -23,10 +23,14 @@ import { DELETE_MANAGE_TAG } from "src/app/const/confirm";
 import { ConfirmComponent } from "../../shared/confirm/confirm.component";
 import { ManageTag } from "./class/manage-tag";
 import { ManageTagsDevicesComponent } from "./manage-tags-devices/manage-tags-devices.component";
+import { fadeInAnimation } from "src/app/animations";
 declare var $: any;
 @Component({
   selector: "app-manage-tags",
   templateUrl: "./manage-tags.component.html",
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ["./manage-tags.component.scss"],
   providers: [ManageTagsListService],
 })
@@ -49,7 +53,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
   setActiveTab = "company";
   private tagId: string;
   public loading = true;
-  dtOptions: DataTables.Settings = {
+  dtOptions: any = {
     searching: false,
     paging: false,
     info: false
@@ -90,9 +94,10 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       id: [""]
     });
     if (this.companiesStateService.getCurrentCompany()) this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
-    this.companiesStateService.onCurrentCompany.subscribe(res => {
+    let onCurrentCompany = this.companiesStateService.onCurrentCompany.subscribe(res => {
       this.getCurrentCompany(res);
     })
+    this.sub.add(onCurrentCompany);
     this.serviceAllTickets = this.tagsService.getTags();
     this.getAllTags();
     this.settingStateService.setComponentName('ManageTagsComponent');

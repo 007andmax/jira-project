@@ -8,10 +8,15 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { Document } from '../class/document';
 import * as moment from "moment";
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { PreviewAttachmentStateService } from '../../tickets/tickets/ticket-edit-aside/preview-attachment/services/preview-attachment-state.service';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'document-preview',
   templateUrl: './document-preview.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./document-preview.component.scss']
 })
 export class DocumentPreviewComponent implements OnInit {
@@ -19,14 +24,14 @@ export class DocumentPreviewComponent implements OnInit {
   document: Document;
   body: any;
   sub: Subscription = new Subscription();
-  constructor(private documentsStateService: DocumentsStateService,
-    private elRef: ElementRef,
+  constructor(private elRef: ElementRef,
     private permissionsService: PermissionsService,
     public activateRoute: ActivatedRoute,
     public cd: ChangeDetectorRef,
     private router: Router,
     private companiesStateService: CompaniesStateService,
     private leftPanelStateService: LeftPanelStateService,
+    private previewAttachmentStateService: PreviewAttachmentStateService,
     private documentsService: DocumentsService) { }
 
   ngOnInit() {
@@ -38,7 +43,7 @@ export class DocumentPreviewComponent implements OnInit {
       this.getDocument(id);
     });
     this.sub.add(subscription);
-    this.leftPanelStateService.changeStateWithoutNavigate('new-preview-documents');
+    this.leftPanelStateService.changeStateWithoutNavigate('new-preview-documents')
   }
   public goToDocumentsList() {
     this.leftPanelStateService.hideLeftPanel(false);

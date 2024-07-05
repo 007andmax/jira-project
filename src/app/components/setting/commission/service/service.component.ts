@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { CommissionService } from '../commission.service';
+import { CommissionService } from '../../../../services/commission/commission.service';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';

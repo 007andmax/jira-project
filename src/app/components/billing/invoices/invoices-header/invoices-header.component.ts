@@ -4,7 +4,6 @@ import { ReportsService } from 'src/app/services/reports/reports.service';
 import { AppService } from 'src/app/states/app/app.service';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
-import { InvoicesFilter } from '../class/invoices-filter';
 import { InvoicesFilterComponent } from './invoices-filter/invoices-filter.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 

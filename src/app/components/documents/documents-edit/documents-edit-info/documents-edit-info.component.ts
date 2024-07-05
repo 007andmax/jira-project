@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { Document } from '../../class/document';
@@ -25,10 +25,11 @@ export class DocumentsEditInfoComponent extends DocumentsAddInfoComponent {
   ngOnInit() {
 
     this.categories = this.documentsStateService.getCategories();
-    this.documentsStateService.onGetCategories.subscribe((data: any) => {
+    let onChangeDocument = this.documentsStateService.onGetCategories.subscribe((data: any) => {
       this.categories = data;
       this.categoriesDp.reset(this.categories);
     })
+    this.sub.add(onChangeDocument);
     if (this.documentEdit.clientType) this.requiredCompanyType = true;
   }
   backFromEdit() {

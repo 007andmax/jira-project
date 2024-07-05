@@ -24,6 +24,7 @@
         [list]="listCompanies"
         [sort]="true"
         (onSelectedItem)="onSelectCompany($event)"
+        [isDisabled]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
     ></app-drop-down>
     <company-drop-down
         *ngIf="ticketProfile.ticketSource === 'FROM_EMAIL' && !checkExistServicesProducts() && getCompany(ticketProfile.company.id) && getCompany(ticketProfile.company.id).isUnknown || !(ticketProfile.ticketSource === 'FROM_EMAIL' && !checkExistServicesProducts() && getCompany(ticketProfile.company.id) && !getCompany(ticketProfile.company.id).isUnknown)"

@@ -3,7 +3,6 @@ import { merge, Observable, Subject, Subscription } from "rxjs";
 import { ISubscription } from "rxjs/Subscription";
 import { debounceTime, distinctUntilChanged, filter, map } from "rxjs/operators";
 import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
-import { FormGroup } from "@angular/forms";
 import { HOURS, MINUTES } from 'src/app/const/duration';
 import { Duration } from './class/duration';
 import { DurationStateService } from './services/duration-state.service';
@@ -32,7 +31,7 @@ export class DurationComponent implements OnInit, OnDestroy {
   clickHours$ = new Subject<string>();
   focusMin$ = new Subject<string>();
   clickMin$ = new Subject<string>();
-
+  sub: Subscription = new Subscription();
 
   /**
    * Creates an instance of the DurationComponent with the injected services
@@ -90,7 +89,7 @@ export class DurationComponent implements OnInit, OnDestroy {
   */
   private onInitClearState() {
     let getClearState = this.durationState.getClearState().subscribe(() => this.clearData());
-    this.durationService.addSubscription(getClearState);
+    this.sub.add(getClearState);
   }
 
   /**
@@ -183,6 +182,7 @@ export class DurationComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.sub.unsubscribe();
     this.durationService.clearSubscription();
   }
 }

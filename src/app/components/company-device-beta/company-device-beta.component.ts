@@ -14,7 +14,6 @@ import { MatAutocompleteSelectedEvent } from '@angular/material';
 import * as _ from "lodash";
 import { v4 as uuidv4 } from 'uuid';
 import { DropDownComponent } from "../shared/drop-down/drop-down.component";
-import { element } from "@angular/core/src/render3";
 import { DatePickerComponent } from "../shared/date-picker/date-picker.component";
 import { CommonHttpServices } from "../device/_services/common_http.service";
 import { ExcelService } from "../device/_services/download_csv.service";
@@ -24,10 +23,14 @@ import { Subscription } from "rxjs";
 import { DeviceCompany } from "../company-devices/class/device-company";
 import { DevicesService } from "src/app/services/devices/devices.service";
 import { CompanyDevicesRemoteAccessComponent } from "../company-devices/company-devices-remote-access/company-devices-remote-access.component";
+import { fadeInAnimation } from "src/app/animations";
 
 @Component({
   selector: "app-company-device-beta",
   templateUrl: "./company-device-beta.component.html",
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ["./company-device-beta.component.scss"]
 })
 export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
@@ -161,7 +164,6 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private ngZone: NgZone,
     private remoteControlService: RemoteControlService,
-    private companiesState: CompaniesStateService,
     private commonHttpServices: CommonHttpServices,
     private excelService: ExcelService,
     public draftEmailStateService: DraftEmailStateService,
@@ -172,8 +174,6 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.showPreloader = true;
     this.leftPanelStateService.changeStateWithoutNavigate('company-devices-beta');
-    // this.companiesState.onInit();
-    // this.devicesStateService.onInit();
     this.clientName = "All Companies";
     this.companyId = this.activateRoute.snapshot.params["id"];
     let id = this.activateRoute.snapshot.params['id'];
@@ -187,14 +187,14 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
     });
     this.sub.add(subscription);
     if (id) this.companiesStateService.setCompanyRoutingId(id);
-    this.companiesStateService.getOnCompanies().subscribe((data) => {
+    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = this.getClientsList(data);
     });
+    this.sub.add(getOnCompanies);
     let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
       if (id == newChange.data.clientCompanyId) this.devicesStateService.changeDevice(this.devices, newChange);
     })
     this.sub.add(onDeviceUninstalled);
-
     let company = this.companiesStateService.getCurrentCompany();
     if (company) {
       this.currentCompany = company;
@@ -224,17 +224,17 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
     this.onInstallRemoteAgentCommand();
     this.onUninstallRemoteAgentCommand();
 
-    this.kafkaStateService.onCurrentConfig.subscribe((resp) => {
+    let onCurrentConfig = this.kafkaStateService.onCurrentConfig.subscribe((resp) => {
       if (resp.length > 0) {
         this.onCurrentConfig(resp)
       }
     });
-
-    this.kafkaStateService.onInstallWindowsUpdates.subscribe((resp) => {
+    this.sub.add(onCurrentConfig);
+    let onInstallWindowsUpdates = this.kafkaStateService.onInstallWindowsUpdates.subscribe((resp) => {
       this.IsCurrentConfigLoading = true;
       this.agentService.GetCurrentConfig(this.asset.ID);
     });
-
+    this.sub.add(onInstallWindowsUpdates);
     this.todaysDate = Date.now();
   }
 

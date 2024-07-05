@@ -19,7 +19,7 @@ import { DeviceSettingManufacturesComponent } from './device-setting-manufacture
 import { DeviceSettingManufacturesAddComponent } from './device-setting-manufactures/device-setting-manufactures-add/device-setting-manufactures-add.component';
 import { DeviceSettingModelsComponent } from './device-setting-models/device-setting-models.component';
 import { DeviceSettingModelsAddComponent } from './device-setting-models/device-setting-models-add/device-setting-models-add.component';
-import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.module';
+import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 import { ManufacturesCheckUseComponent } from './manufactures-check-use/manufactures-check-use.component';
 
@@ -51,7 +51,7 @@ import { ManufacturesCheckUseComponent } from './manufactures-check-use/manufact
         MatFormFieldModule,
         NgbModule,
         DynamicTooltipModule,
-        ClickOtsideModule,
+        ClickOutsideModule,
         KeyUpEnterModule
     ],
 })

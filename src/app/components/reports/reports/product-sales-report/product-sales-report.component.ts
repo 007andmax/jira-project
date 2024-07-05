@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ProductSalesReport } from '../../class/product-sales-report';
-import { ReportsStateService } from 'src/app/states/reports/reports-state.service';
 import * as moment from "moment";
+
 @Component({
   selector: 'app-product-sales-report',
   templateUrl: './product-sales-report.component.html',
@@ -15,7 +15,7 @@ export class ProductSalesReportComponent implements OnInit {
   classes = [];
   selectedClient = null;
   loadingInProgress: boolean = false;
-  constructor(private reportsStateService: ReportsStateService, public cd: ChangeDetectorRef,) { }
+  constructor(public cd: ChangeDetectorRef,) { }
 
 
   ngOnInit() {

@@ -1,8 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MarketingSubscriptionType } from 'src/app/components/setting/marketing-email/marketing-subscription-type/class/marketing-subscription-type';
 import { MODE_HIDE_ACTIVE } from 'src/app/const/users';
-import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
 import { UserCustomSubscription } from '../../class/user-custom-subscription';
 
@@ -11,7 +10,7 @@ import { UserCustomSubscription } from '../../class/user-custom-subscription';
   templateUrl: './user-custom-subscription.component.html',
   styleUrls: ['./user-custom-subscription.component.scss']
 })
-export class UserCustomSubscriptionComponent implements OnInit {
+export class UserCustomSubscriptionComponent implements OnInit, OnDestroy {
   MODE_HIDE_ACTIVE = MODE_HIDE_ACTIVE;
   @Input() mode: string;
   @Input() customSubscriptions: Array<UserCustomSubscription> = [];
@@ -21,6 +20,7 @@ export class UserCustomSubscriptionComponent implements OnInit {
   list: Array<MarketingSubscriptionType> = [];
   sub: Subscription = new Subscription();
   constructor(private marketingEmailStateService: MarketingEmailStateService) { }
+
 
   ngOnInit() {
     this.list = this.marketingEmailStateService.getListCustomSubscription();
@@ -46,5 +46,8 @@ export class UserCustomSubscriptionComponent implements OnInit {
   }
   public trackById(index, item) {
     return item.id;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

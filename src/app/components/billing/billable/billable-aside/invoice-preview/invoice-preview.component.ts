@@ -1,12 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { BillableStateService } from 'src/app/states/billable/billable-state.service';
 import { Subscription } from 'rxjs';
 import * as moment from "moment";
 import { InvoiceLock } from '../../class/invoice-lock';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CompanyProfile } from 'src/app/components/companies/class/company-profile';
 import { InvoiceTaxNumber } from '../../class/invoice-tax-number';
-import { InvoiceNote } from '../../class/invoice-note';
+
 @Component({
   selector: 'app-invoice-preview',
   templateUrl: './invoice-preview.component.html',
@@ -20,8 +19,7 @@ export class InvoicePreviewComponent implements OnInit {
   opened: boolean = false;
   sub: Subscription = new Subscription();
   currentCompany: any;
-  constructor(private billableStateService: BillableStateService,
-    public companiesStateService: CompaniesStateService) { }
+  constructor(public companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
     this.currentCompany = this.companiesStateService.getCurrentCompany();
@@ -39,8 +37,8 @@ export class InvoicePreviewComponent implements OnInit {
     return (hours >= 10 ? hours : '0' + hours) + ':' + (minutes >= 10 ? minutes : '0' + minutes) + ' hr(s)';
   }
   getServiceTaxes(service) {
-    if (service.taxesForSingleItem.length > 0) return this.getSelectedTaxes(service.taxesForSingleItem);
-    if (service.taxesForSingleItem.length == 0) return this.getSelectedTaxes(service.item.taxes || []);
+    if (service.taxes.length > 0) return this.getSelectedTaxes(service.taxes);
+    if (service.taxes.length == 0) return this.getSelectedTaxes(service.taxes || []);
   }
   getSelectedTaxes(taxes) {
     return taxes.map(item => {

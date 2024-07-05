@@ -9,7 +9,7 @@ import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { GlNumberSettingsComponent } from './gl-number/gl-number.component';
 import { GlNumberService } from './gl-number/gl-number.service';
-import { InvoiceTicketsService } from './accounting-settings.service';
+import { InvoiceTicketsService } from '../../../services/accounting/accounting-settings.service';
 import { InvoiceSettingsComponent } from './invoice-settings/invoice-settings.component';
 import { QuotesSettingsComponent } from './quotes-settings/quotes-settings.component';
 import { AccountingYearComponent } from './accounting-year/accounting-year.component';
@@ -17,10 +17,14 @@ import { TaxesSettingsComponent } from './taxes/taxes.component';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { CustomNotesSettingsComponent } from './custom-notes-settings/custom-notes-settings.component';
 import { BillableStateService } from 'src/app/states/billable/billable-state.service';
+import { fadeInAnimation } from 'src/app/animations';
 declare var $: any;
 @Component({
   selector: 'app-accounting-settings',
   templateUrl: './accounting-settings.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./accounting-settings.component.scss']
 })
 export class AccountingSettingsComponent implements OnInit, OnDestroy {

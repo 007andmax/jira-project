@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
@@ -9,7 +9,7 @@ import { SupportStateService } from 'src/app/states/support/support-state.servic
   templateUrl: './left-panel-support.component.html',
   styleUrls: ['./left-panel-support.component.scss']
 })
-export class LeftPanelSupportComponent implements OnInit {
+export class LeftPanelSupportComponent implements OnInit, OnDestroy {
   type: string = 'ALL';
   open: boolean = false;
   @Input() activePage: string = "";
@@ -21,16 +21,20 @@ export class LeftPanelSupportComponent implements OnInit {
     private leftPanelService: LeftPanelService,
     private leftPanelStateService: LeftPanelStateService,) { }
 
+
   ngOnInit() {
-    this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
+    let onToggleLeftPanel = this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       if (data) this.open = false;
     })
-    this.leftPanelStateService.onChangeState.subscribe(state => {
+    this.sub.add(onToggleLeftPanel);
+    let onChangeState = this.leftPanelStateService.onChangeState.subscribe(state => {
       if (!this.leftPanelService.isSupportPage(state)) this.open = false
     })
-    this.leftPanelStateService.onFirstOpen.subscribe(data => {
+    this.sub.add(onChangeState);
+    let onFirstOpen = this.leftPanelStateService.onFirstOpen.subscribe(data => {
       if (this.leftPanelService.isSupportPage(data)) this.open = true;
     })
+    this.sub.add(onFirstOpen);
   }
   public close() {
     this.open = false;
@@ -50,5 +54,8 @@ export class LeftPanelSupportComponent implements OnInit {
     this.supportStateService.onHandleFilter(active);
     this.type = active;
     this.goToState('new-quickSupport');
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

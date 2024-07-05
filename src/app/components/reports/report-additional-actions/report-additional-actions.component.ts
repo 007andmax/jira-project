@@ -1,12 +1,9 @@
-import { Component, OnInit, ElementRef, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { ACION_OPEN_PDF, ACION_DOWNLOAD_PDF } from 'src/app/const/reports';
 import { ReportsService } from 'src/app/services/reports/reports.service';
 import { AppService } from 'src/app/states/app/app.service';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
-import { ModalQuoteComponent } from 'src/app/services/modal/modal-quote/modal-quote.component';
-import { ReportSendEmailComponent } from './report-send-email/report-send-email.component';
 import { ReportsStateService } from 'src/app/states/reports/reports-state.service';
-import { GlNumber } from '../class/gl-number';
 import { ExportCSV } from './class/export-csv';
 import { Subscription } from 'rxjs';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
@@ -36,7 +33,7 @@ export class ReportAdditionalActionsComponent implements OnInit, OnDestroy {
     private appService: AppService,
     config: NgbModalConfig,
     public draftEmailStateService: DraftEmailStateService,
-    private modalService: NgbModal,) {
+  ) {
     config.backdrop = 'static';
     config.keyboard = false;
   }
@@ -52,7 +49,6 @@ export class ReportAdditionalActionsComponent implements OnInit, OnDestroy {
     this.changePurchaseCost.emit(event.target.checked);
   }
   sendEmail() {
-
     this.draftEmailStateService.toogleAsideAddReport({
       selectedClient: this.selectedClient,
       orientation: this.orientation,
@@ -61,8 +57,6 @@ export class ReportAdditionalActionsComponent implements OnInit, OnDestroy {
       fileName: this.fileName,
       accountType: this.accountType
     });
-
-
   }
   getPdfIdFromRest(action) {
     var dto = {

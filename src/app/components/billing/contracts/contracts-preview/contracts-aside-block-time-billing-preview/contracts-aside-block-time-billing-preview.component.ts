@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { Tax } from 'src/app/interfaces/service/tax';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -7,13 +7,14 @@ import { ContractsFilterType } from '../../class/contracts-filter-type';
 import { ServiceAgreement } from '../../class/service-agreement';
 import * as moment from "moment";
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-contracts-aside-block-time-billing-preview',
   templateUrl: './contracts-aside-block-time-billing-preview.component.html',
   styleUrls: ['./contracts-aside-block-time-billing-preview.component.scss']
 })
-export class ContractsAsideBlockTimeBillingPreviewComponent implements OnInit {
+export class ContractsAsideBlockTimeBillingPreviewComponent implements OnInit, OnDestroy {
 
   selectedCompany: any;
   selectedTaxes = [];
@@ -24,7 +25,7 @@ export class ContractsAsideBlockTimeBillingPreviewComponent implements OnInit {
   @Input() contractsBlockTime: ServiceAgreement = new ServiceAgreement();
   formatDate: string = FORMAT_DATE_2;
   toggleTimeRollover: boolean = false;
-
+  sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
     private usersStateService: UsersStateService,
     private taxesStateService: TaxesStateService,
@@ -40,6 +41,7 @@ export class ContractsAsideBlockTimeBillingPreviewComponent implements OnInit {
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
       this.taxes = data;
     });
+    this.sub.add(getOnTaxess);
     this.getSelectedInterval();
     if (this.contractsBlockTime.maxRolloverHours) this.toggleTimeRollover = true;
   }
@@ -92,5 +94,8 @@ export class ContractsAsideBlockTimeBillingPreviewComponent implements OnInit {
   };
   public getUserName(user) {
     return (user) ? `${user.firstName} ${user.lastName}` : '';
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

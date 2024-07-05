@@ -350,6 +350,19 @@
                 </label>
             </div>
         </div>
+        <div class="qt-inputs-row">
+            <div class="qt-input-block">
+                <span class="qt-input-block__label">Assigned Users</span>
+                <app-assigned-ticket-user
+                    #techUsersDp
+                    [type]="'RECURRING-TICKET'"
+                    [class]="['qt-dropdown']"
+                    [list]="listTechUsers"
+                    (usersChange)="onChangeTechUsers($event)"
+                    [placeholder]="'Select'"
+                ></app-assigned-ticket-user>
+            </div>
+        </div>
     </div>
     <div class="qt-aside-modern__footer">
         <div class="qt-df qt-ai-c qt-jc-sb qt-w100">
@@ -372,37 +385,6 @@
                 >
                     Cancel
                 </button>
-            </div>
-            <div class="save-template">
-                <app-tech-users
-                    [placement]="'top-right'"
-                    [users]="listTechUsers"
-                    (usersChange)="onChangeTechUsers($event)"
-                ></app-tech-users>
-                <div class="assigned-users-list">
-                    <ng-template
-                        ngFor
-                        let-user
-                        [ngForOf]="techUsers"
-                        let-i="index"
-                        [ngForTrackBy]="trackByIndex"
-                    >
-                        <div *ngIf="user.avatar">
-                            <img
-                                ng-if="user.avatar"
-                                class="img-circle avatar-26"
-                                [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
-                                alt="..."
-                            >
-                        </div>
-                        <div *ngIf="!user.avatar">
-                            <div class="default-user-avatar avatar-background-color-odd ng-scope">
-                                <span [textContent]="user.firstName[0].toUpperCase()"></span>
-                                <span [textContent]="user.lastName[0].toUpperCase()"></span>
-                            </div>
-                        </div>
-                    </ng-template>
-                </div>
             </div>
         </div>
     </div>

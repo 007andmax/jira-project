@@ -21,7 +21,7 @@
                     (click)="create()"
                 >
                     <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8 qt-button-icon"></span>
-                    Add category
+                    <span [textContent]="parseAddText()"></span>
                 </a>
             </div>
         </div>
@@ -34,12 +34,14 @@
         <ngb-tabset
             #tabset="ngbTabset"
             [destroyOnHide]="false"
+            (tabChange)="setTab($event)"
         >
             <ngb-tab
                 title="Product Category"
                 id="productCategories"
             >
                 <ng-template ngbTabContent>
+                    <<<<<<< HEAD
                     <div
                         class="cmn-area"
                         [hidden]="loading"
@@ -191,6 +193,20 @@
                             </div>
                         </div>
                     </div>
+                    =======
+                    <app-products-settings-category
+                        #categories
+                        (onPreloader)="setPreloader($event)"
+                    ></app-products-settings-category>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab
+                title="Product Type"
+                id="productType"
+            >
+                <ng-template ngbTabContent>
+                    <app-products-settings-type #productType></app-products-settings-type>
+                    >>>>>>> development
                 </ng-template>
             </ngb-tab>
         </ngb-tabset>

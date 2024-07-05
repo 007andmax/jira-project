@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, ViewChild, OnDestroy } from '@angular/core';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Subscription } from 'rxjs';
 import { InvoicesService } from 'src/app/services/invoices/invoices.service';
@@ -18,7 +18,7 @@ import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.servic
   templateUrl: './invoices-aside.component.html',
   styleUrls: ['./invoices-aside.component.scss']
 })
-export class InvoicesAsideComponent implements OnInit {
+export class InvoicesAsideComponent implements OnInit, OnDestroy {
   companies = [];
   reqCompanies = [];
   validate: PaymentInvoice = new PaymentInvoice();
@@ -235,5 +235,8 @@ export class InvoicesAsideComponent implements OnInit {
   }
   public trackById(index, item) {
     return item.id;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

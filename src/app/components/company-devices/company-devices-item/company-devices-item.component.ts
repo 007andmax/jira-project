@@ -19,6 +19,7 @@ import { DeviceTagsService } from 'src/app/services/device-tags/device-tags.serv
 import { DeviceTagsStateService } from 'src/app/states/device-tags/device-tags-state.service';
 import { DeviceTagsRealTimeService } from 'src/app/states/device-tags/device-tags-real-time.service';
 import { DevicesRealTimeService } from 'src/app/states/devices/devices-real-time.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-company-devices-item',
@@ -31,6 +32,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
   @Input() device: DeviceCompany;
   @Input() companyId: string;
   timer: any = null;
+  sub: Subscription = new Subscription();
   @Output() onChangeSelect = new EventEmitter();
   constructor(private modalService: NgbModal,
     private devicesService: DevicesService,
@@ -58,7 +60,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     }, 1000);
     this.deviceTags.setSelectedTag(JSON.parse(JSON.stringify(this.device.tags)).map(item => new DeviceTag(item)));
-    this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
+    let changeTagsrray = this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
       if (newChange.action === 'BIND_DEVICE_TO_TAG') {
         let index = newChange.data.devices.findIndex(item => item.deviceId == this.device.agentId || item.deviceId == this.device.id);
         if (index > -1) {
@@ -78,6 +80,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
         }
       }
     })
+    this.sub.add(changeTagsrray);
   }
   getTextForTooltip(data) {
     if (data == "workstation") return "Workstation";
@@ -212,6 +215,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     return `${this.device.system.caption.replace('Microsoft', '')} ${this.device.system.releaseId}`
   }
   ngOnDestroy(): void {
+    this.sub.unsubscribe();
     clearInterval(this.timer);
   }
 }

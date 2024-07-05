@@ -42,7 +42,7 @@
         ></span>
         <i class="icn-16 qt-icon icon__calendar pointer"></i>
         <input
-            [disabled]="disabled"
+            [disabled]="isDisabled"
             type="text"
             class="pointer qt-input-block__input"
             placeholder="Select Date"
@@ -56,7 +56,7 @@
     </div>
     <input
         *ngIf="type === 'INPUT'"
-        [disabled]="disabled"
+        [disabled]="isDisabled"
         type="text"
         class="pointer qt-input-block__input"
         placeholder="Select Date"

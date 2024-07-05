@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { forkJoin, Subscription } from 'rxjs';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
@@ -28,15 +27,14 @@ import * as moment from "moment";
 import { TicketDetailProfileUpdatesComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates.component';
 import { TicketDetailTasksComponent } from './ticket-detail-tasks/ticket-detail-tasks.component';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
-import { TicketDetailProfileFormUpdateComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update.component';
 import { TicketProfileUpdate } from '../class/ticket-profile-update';
 import { DatePickerStateService } from 'src/app/components/shared/date-picker/services/date-picker-state.service';
 import { TicketDetailHeaderComponent } from './ticket-detail-header/ticket-detail-header.component';
 import { TicketProfileAgent } from '../class/ticket-profile-agent';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
-import { Device } from 'src/app/components/company-devices/class/device';
 import { TicketDetailMessageComponent } from './ticket-detail-message/ticket-detail-message.component';
+import { TicketDetailChangeStatusComponent } from './ticket-detail-change-status/ticket-detail-change-status.component';
 
 @Component({
   selector: 'ticket-detail',
@@ -50,6 +48,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   @ViewChild('ticketProfileUpdates') ticketProfileUpdates: TicketDetailProfileUpdatesComponent;
   @ViewChild('ticketTasks') ticketTasks: TicketDetailTasksComponent;
   @ViewChild('detailHeader') detailHeader: TicketDetailHeaderComponent;
+  @ViewChild('changeStatus') changeStatus: TicketDetailChangeStatusComponent;
   isInit: boolean = false;
   ticketProfile: TicketProfile = new TicketProfile();
   showFormUpdate: boolean = false;
@@ -78,7 +77,6 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private toastrService: ToastrService,
     private appStateService: AppStateService,
-    private modalService: NgbModal,
     public appService: AppService,
     private router: Router,
     private permissionsService: PermissionsService,
@@ -126,7 +124,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       }
     });
     this.sub.add(getConfirm);
-    this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
+    let getOnUpdateTicket = this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
       let ticket = new Ticket(data);
       if (this.ticketProfile.id === ticket.id) {
         this.ticketProfile.update(data);
@@ -136,16 +134,15 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       }
       this.cd.detectChanges();
     })
-    this.ticketsStateService.getOnChangeFieldTicket().subscribe((data: TicketChangeField) => {
+    this.sub.add(getOnUpdateTicket);
+    let getOnChangeFieldTicket = this.ticketsStateService.getOnChangeFieldTicket().subscribe((data: TicketChangeField) => {
       if (this.ticketProfile.id === data.id) {
         if (data.field === "agent.deviceId") this.setAgent(data);
       }
       this.cd.detectChanges();
-
     });
-    this.ticketStateService.getOnChangeUpdatesTicket().subscribe(newChange => {
-
-
+    this.sub.add(getOnChangeFieldTicket);
+    let getOnChangeUpdatesTicket = this.ticketStateService.getOnChangeUpdatesTicket().subscribe(newChange => {
       if (newChange.action == 'UPDATE_SAVED' || newChange.action == 'UPDATE_CREATED' || newChange.action === 'UPDATE_EXPENSE_DELETED') {
         let update = this.ticketProfile.updates.find(item => item.id === newChange.data.id),
           attachments = newChange.data.attachments;
@@ -166,6 +163,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       if (newChange.action == 'UPDATE_DELETED') this.ticketProfile.removeUpdate(newChange.data);
       this.cd.detectChanges();
     });
+    this.sub.add(getOnChangeUpdatesTicket);
     let onChangeAssignedUser = this.addUsersNotifyStateService.onChangeAssignedUser.subscribe(data => {
       if (this.addUsersNotifyStateService.getAction() !== USERS_TO_EDIT_TICKET) return;
       this.onSelectAssignedUser(data);
@@ -183,6 +181,18 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       this.showEditUpdate = true;
     })
     this.sub.add(onEditUpdateByForm);
+    let onCloseTicket = this.ticketStateService.onCloseTicket.subscribe(data => {
+      this.ticketProfile.setStatus("COMPLETED");
+      this.changeStatus.setStatusWithoutChange("COMPLETED");
+      this.cd.detectChanges();
+    })
+    this.sub.add(onCloseTicket);
+    let onOpenTicket = this.ticketStateService.onOpenTicket.subscribe(data => {
+      this.ticketProfile.setStatus("IN_PROGRESS");
+      this.changeStatus.setStatusWithoutChange("IN_PROGRESS");
+      this.cd.detectChanges();
+    })
+    this.sub.add(onOpenTicket);
   }
   removeCustomDevice(ids) {
     forkJoin(
@@ -245,9 +255,10 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
         var user = this.usersStateService.getAllUsers().find(item => item.id === data.message);
         return;
       }
-      this.ticketMessage.isMarkAsOpen = false;
-      this.toastrService.success("The ticket has been successfully changed");
+      this.toastrService.success(`The tickets “${this.ticketProfile.number}” status has been changed`);
       this.appStateService.changeDetectorRef();
+      this.ticketMessage.isMarkAsOpen = false;
+      this.ticketStateService.fastOpenTicket();
     })
   };
   onAddUpdate(data) {
@@ -398,9 +409,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   }
   getCreatAt() {
     let date = new Date(this.ticketProfile.createdAt);
-    let hours = (date.getHours() > 12) ? date.getHours() - 12 : date.getHours();
-    let type = (date.getHours() >= 12) ? 'PM' : 'AM';
-    return `${moment(date).format('DD MMM YYYY')} at ${(hours < 10 ? '0' + hours : hours)}:${(date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes()} ${type}`
+    return `${moment(new Date(date)).format('DD MMM YYYY')} at ${moment(new Date(date)).format('hh:mm A')}`;
   }
   getCompanyName() {
     if (!this.ticketProfile.company) return '';
@@ -483,6 +492,11 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     }
     this.ticketsService.assignUserToTicket(this.ticketProfile.id, value.join(",")).subscribe(res => {
       // this.ticketMessage.isClaimTicket = false;
+      this.ticketProfile.setAssignedUser(this.usersStateService.getCurrentUser());
+      this.ticketProfile.setAssignedUserId(this.usersStateService.getCurrentUser().id);
+      this.ticketProfile.setAssignedAt(new Date().getTime());
+      this.ticketStateService.fastOpenTicket();
+      this.cd.detectChanges();
     })
 
   };
@@ -510,5 +524,6 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
     }
+    this.sub.unsubscribe();
   }
 }

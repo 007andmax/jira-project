@@ -1,5 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
 import { CONFIGCONSTANTS } from "src/app/components/device/config/app-constants";
@@ -11,15 +10,15 @@ import { CompaniesStateService } from "src/app/states/company/companies-state.se
 import { DraftEmailStateService } from "src/app/states/draft-email/draft-email-state.service";
 import { LeftPanelStateService } from "src/app/states/left-panel/left-panel-state.service";
 import { DeviceDiskSpaceReport } from "../../class/device-diskspace-report";
-import { ReportSendEmailComponent } from "../../report-additional-actions/report-send-email/report-send-email.component";
 import { DeviceDiskSpaceReportFilter } from "./Class/device-diskspace-report";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "report-device-diskspace",
   templateUrl: "./report-device-diskspace.component.html",
   styleUrls: ["./report-device-diskspace.component.scss"],
 })
-export class ReportDeviceDiskspaceComponent implements OnInit {
+export class ReportDeviceDiskspaceComponent implements OnInit, OnDestroy {
   @ViewChild('dropdownDevice') dropdownDevice: DropDownComponent;
   clientName: string;
   companies = [];
@@ -37,12 +36,11 @@ export class ReportDeviceDiskspaceComponent implements OnInit {
   template: string = "PDF_TEMPLATE";
   fileName: string = "device-diskspace-report";
   accountType = "CLIENT";
+  sub: Subscription = new Subscription();
   constructor(
     private agentService: AgentService,
-    private companiesState: CompaniesStateService,
     private companiesStateService: CompaniesStateService,
     public leftPanelStateService: LeftPanelStateService,
-    private modalService: NgbModal,
     private commonHttpServices: CommonHttpServices,
     private toastr: ToastrService,
     private excelService: ExcelService,
@@ -58,9 +56,10 @@ export class ReportDeviceDiskspaceComponent implements OnInit {
 
   setPreviewDataDevice() {
     if (this.companiesStateService.getCompanies().length > 0) this.companies = this.getClientsList(this.companiesStateService.getCompanies());
-    this.companiesStateService.getOnCompanies().subscribe((data) => {
+    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = this.getClientsList(data);
     });
+    this.sub.add(getOnCompanies);
   }
 
   getDeviceDiskDriveList() {
@@ -401,4 +400,8 @@ export class ReportDeviceDiskspaceComponent implements OnInit {
 
     return (freeSpace * 100 / size).toFixed(0) + '%';
   }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
 }

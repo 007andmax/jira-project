@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { ClickOtsideDirective } from 'src/app/directives/click-otside/click-otside.directive';
+import { ClickOutsideDirective } from 'src/app/directives/click-otside/click-otside.directive';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketProfile } from '../../class/ticket-profile';
@@ -14,6 +14,7 @@ import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.comp
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TicketsRealTimeService } from 'src/app/states/tickets/tickets-real-time.service';
 import { OnDestroy } from '@angular/core';
+import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tickets-permissions.service';
 
 @Component({
   selector: 'ticket-detail-tasks',
@@ -26,7 +27,7 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
   addTask: TicketProfileTask = new TicketProfileTask();
   listTechUsers = [];
   sub: Subscription = new Subscription();
-  @ViewChild('addTaskBtn') addTaskBtn: ClickOtsideDirective;
+  @ViewChild('addTaskBtn') addTaskBtn: ClickOutsideDirective;
   @Input() ticketProfile: TicketProfile = new TicketProfile();
   constructor(private ticketsService: TicketsService,
     private ticketStateService: TicketStateService,
@@ -34,6 +35,7 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private ticketsRealTimeService: TicketsRealTimeService,
     public cd: ChangeDetectorRef,
+    public ticketsPermissionsService: TicketsPermissionsService,
     private usersStateService: UsersStateService,) { }
 
   ngOnInit() {

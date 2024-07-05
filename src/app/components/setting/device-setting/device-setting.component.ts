@@ -1,5 +1,4 @@
-import { ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { Component, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { AgentService } from 'src/app/services/agent/agent.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -11,12 +10,16 @@ import { DeviceSettingManufactureComponent } from './device-setting-manufacture/
 import { DeviceSettingModelComponent } from './device-setting-model/device-setting-model.component';
 import { SettingStateService } from 'src/app/states/setting/setting-state.service';
 import { FormBuilder } from '@angular/forms';
-import { forkJoin, of } from 'rxjs';
+import { forkJoin, of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'device-setting',
   templateUrl: './device-setting.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./device-setting.component.scss']
 })
 export class DeviceSettingComponent implements OnInit {
@@ -32,16 +35,12 @@ export class DeviceSettingComponent implements OnInit {
   addManufacture: boolean = false;
   addModel: boolean = false;
   activeTab: string = "manufacture";
+  sub: Subscription = new Subscription();
   constructor(private settingStateService: SettingStateService,
     private agentService: AgentService,
-    private formBuilder: FormBuilder,
     private toastrService: ToastrService,
-    private ngZone: NgZone,
-    private modalService: NgbModal,
-    private companiesService: CompaniesService,
     private companiesStateService: CompaniesStateService,
-    private deviceSettingStateService: DeviceSettingStateService,
-    private companiesState: CompaniesStateService) { }
+  ) { }
 
   ngOnInit() {
     // this.companiesState.onInit();
@@ -49,11 +48,12 @@ export class DeviceSettingComponent implements OnInit {
     $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
     this.settingStateService.setComponentName('DeviceSettingComponent');
-    this.companiesStateService.onCurrentCompany.subscribe((data) => {
+    let onCurrentCompany = this.companiesStateService.onCurrentCompany.subscribe((data) => {
       if (data) {
         this.techCompany = data;
       }
     })
+    this.sub.add(onCurrentCompany);
   }
   onClosedAddManufacture() {
     this.addManufacture = false;
@@ -158,6 +158,7 @@ export class DeviceSettingComponent implements OnInit {
     this.addModel = true;
   }
   ngOnDestroy() {
+    this.sub.unsubscribe();
     $('body').removeClass('page-settings');
   }
 }

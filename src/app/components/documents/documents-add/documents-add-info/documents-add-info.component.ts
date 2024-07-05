@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { CategoryDocument } from 'src/app/components/left-panel/left-panel-documents/class/category-document';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
@@ -15,13 +15,14 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { DocumentsLinkedComponent } from './documents-linked/documents-linked.component';
 import { CompanyTagsStateService } from 'src/app/components/companies/company-tags/states/company-tags-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-documents-add-info',
   templateUrl: './documents-add-info.component.html',
   styleUrls: ['./documents-add-info.component.scss']
 })
-export class DocumentsAddInfoComponent implements OnInit {
+export class DocumentsAddInfoComponent implements OnInit, OnDestroy {
   openAside: boolean = true;
   toggleEditCategories: boolean = false;
   tab: string = 'DOCUMENT_INFO';
@@ -32,6 +33,7 @@ export class DocumentsAddInfoComponent implements OnInit {
   new TitleListType('Supplier', 'SUPPLIER'),
   new TitleListType('Vendor', 'VENDOR')];
   requiredCompanyType: boolean;
+  sub: Subscription = new Subscription();
   @Output() onChangeRequiredCompanyType = new EventEmitter<any>();
   @Input() documentAdd: DocumentAdd = new DocumentAdd();
   @Input() companyId: string;
@@ -59,10 +61,11 @@ export class DocumentsAddInfoComponent implements OnInit {
       this.onChangeRequiredCompanyType.emit(this.requiredCompanyType);
     }
     this.categories = this.documentsStateService.getCategories();
-    this.documentsStateService.onGetCategories.subscribe((data: any) => {
+    let onGetCategories = this.documentsStateService.onGetCategories.subscribe((data: any) => {
       this.categories = data;
       this.categoriesDp.reset(this.categories);
     })
+    this.sub.add(onGetCategories);
     let currentDate = new Date();
     currentDate.setFullYear(currentDate.getFullYear() + 1);
     this.documentAdd.setReviewDate(moment(currentDate).format('YYYY/MM/DD'));
@@ -121,4 +124,8 @@ export class DocumentsAddInfoComponent implements OnInit {
   onSelectCategory(data) {
     this.documentAdd.setCategoryId((data) ? data.id : null);
   }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
 }

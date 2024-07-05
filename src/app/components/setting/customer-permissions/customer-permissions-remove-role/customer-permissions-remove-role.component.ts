@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { CustomerPermissionsRemoveRole } from './class/customer-permissions-user-role';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -15,7 +15,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
   templateUrl: './customer-permissions-remove-role.component.html',
   styleUrls: ['./customer-permissions-remove-role.component.scss']
 })
-export class CustomerPermissionsRemoveRoleComponent implements OnInit {
+export class CustomerPermissionsRemoveRoleComponent implements OnInit, OnDestroy {
   @Input() users: Array<CustomerPermissionsRemoveRole> = [];
   @Input() userRoleForRemove: UserRole;
   @Output() onClose = new EventEmitter<any>();
@@ -61,4 +61,8 @@ export class CustomerPermissionsRemoveRoleComponent implements OnInit {
   public trackById(index, item) {
     return item.id;
   }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
 }

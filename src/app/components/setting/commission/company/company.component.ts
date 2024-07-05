@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild, Pipe, OnDestroy } from "@angular/core";
-import { throwError, Subscription } from "rxjs";
-import { catchError } from "rxjs/operators";
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Subscription } from "rxjs";
 import { map } from "rxjs/operators";
-import { CommissionService } from "../commission.service";
+import { CommissionService } from "../../../../services/commission/commission.service";
 import { UsersService } from "src/app/services/users/users.service";
 import { ToastrService } from "ngx-toastr";
 import { UsersStateService } from "src/app/states/users/users-state.service";
@@ -49,9 +48,10 @@ export class CompanyComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.usersStateService.getCurrentUser()) this.currentUser = this.usersStateService.getCurrentUser();
-    this.usersStateService.getOnGetCurrentuser().subscribe(data => {
+    let getOnGetCurrentuser = this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.currentUser = data;
     })
+    this.sub.add(getOnGetCurrentuser);
     // this.getClientCompanies();
 
     this.getUsers();

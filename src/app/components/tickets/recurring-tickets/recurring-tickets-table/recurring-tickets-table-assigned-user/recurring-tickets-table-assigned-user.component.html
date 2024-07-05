@@ -1,0 +1,7 @@
+<div
+    class="qt-table-modern__circle-avatar"
+    [textContent]="getAssignedUserNameForAvatar(user)"
+    [ngStyle]="{'background': ticketsListService.getStyleAvatar(user,listColorNoAvatar[indexNoAvatar])}"
+    [ngbTooltip]="user.firstName + ' ' + user.lastName"
+    [container]="'body'"
+></div>

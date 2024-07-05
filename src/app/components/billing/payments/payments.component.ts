@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Payment } from './class/payment';
 import { PaymentsFilter } from './class/payments-filter';
 import { Subscription } from 'rxjs';
@@ -8,21 +8,23 @@ import { PaymentsStateService } from 'src/app/states/payments/payments-state.ser
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { PaymentsListService } from './services/payments-list.service';
 import { DELETE_PAYMENT } from 'src/app/const/confirm';
-import { Invoice } from '../invoices/class/invoice';
-import { InvoicesAsidePreviewComponent } from '../invoices/invoices-aside-preview/invoices-aside-preview.component';
 import { PaymentsRealTimeService } from 'src/app/states/payments/payments-real-time.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'payments',
   templateUrl: './payments.component.html',
   styleUrls: ['./payments.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   providers: [PaymentsListService]
 })
-export class PaymentsComponent implements OnInit {
+export class PaymentsComponent implements OnInit, OnDestroy {
 
   paymentsFilter: PaymentsFilter = new PaymentsFilter();
   payments: Array<Payment> = [];
@@ -40,10 +42,7 @@ export class PaymentsComponent implements OnInit {
   detailsPayment: Payment;
   refundPayment: Payment;
   editPayment: Payment;
-  // previewInvoiceId: string;
-  //showPreviewInvoice: boolean = false;
   selectedPayments: Array<Payment> = [];
-  // @ViewChild('previewInvoiceAside') previewInvoiceAside: InvoicesAsidePreviewComponent;
   sub: Subscription = new Subscription();
   container = document.body.querySelector(".main-container");
   constructor(private paymentsService: PaymentsService,
@@ -81,7 +80,6 @@ export class PaymentsComponent implements OnInit {
       this.onScroll();
     })
     this.sub.add(getOnCompanies);
-
     let getOnInitFilter = this.paymentsStateService.getOnInitFilter().subscribe(data => {
       this.selectedPayments = [];
       this.selectedCompanyId = null;
@@ -131,12 +129,6 @@ export class PaymentsComponent implements OnInit {
   }
   onPreviewInvoice(data) {
     this.invoiceStateService.togglePreview(data);
-    /*  this.previewInvoiceId = data;
-      if (this.showPreviewInvoice) {
-        this.cd.detectChanges();
-        this.previewInvoiceAside.onGetInvoice();
-      }
-      this.showPreviewInvoice = true;*/
   }
   onRefundPayment(data) {
     this.refundPayment = data;
@@ -145,7 +137,6 @@ export class PaymentsComponent implements OnInit {
   onDetailsPayment(data) {
     this.detailsPayment = data;
     this.showDetailsPayment = true;
-
   }
   onRemovePayment(payment) {
     this.paymentsService.deletePayment(payment).subscribe(data => {

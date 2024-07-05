@@ -5,9 +5,7 @@ import { Company } from 'src/app/interfaces/company/company';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
-import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { CompanyAssigned } from '../../companies/class/company-assigned';
-import { CompanyProfile } from '../../companies/class/company-profile';
 
 @Component({
   selector: 'app-left-panel-company',
@@ -25,8 +23,7 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   @Output() onGoToLink = new EventEmitter();
   @Output() onChangeState = new EventEmitter();
-
-  constructor(//private quoteStateService: QuoteStateService,
+  constructor(
     public router: Router,
     private permissionsService: PermissionsService,
     public companiesStateService: CompaniesStateService,
@@ -44,9 +41,10 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
     })
     this.sub.add(onGetAssignedDocumentCategories);
-    this.companiesStateService.onChangeSelectedCompanyId.subscribe(data => {
+    let onChangeSelectedCompanyId = this.companiesStateService.onChangeSelectedCompanyId.subscribe(data => {
       this.companyId = data;
     })
+    this.sub.add(onChangeSelectedCompanyId);
     this.activePage = this.leftPanelStateService.activePage;
     let getOnBillingPage = this.leftPanelStateService.getOnCompanyPage().subscribe(data => {
       this.activePage = data;

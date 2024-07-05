@@ -1,9 +1,9 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import * as moment from 'moment';
 import { TechService } from '../../class/tech-service';
-import { CurrentUser } from 'src/class/current-user/current-user';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { User } from '../../../users/class/user';
+
 @Component({
   selector: 'app-tech-service-report',
   templateUrl: './tech-service-report.component.html',
@@ -42,11 +42,7 @@ export class TechServiceReportComponent implements OnInit {
   }
   public getDate(dateInvoice) {
     let date = new Date(dateInvoice);
-    let typeTime = (date.getHours() > 12) ? "PM" : "AM",
-      hours = (date.getHours() > 12) ? date.getHours() - 12 : date.getHours(),
-      minutes = (date.getMinutes() > 10) ? date.getMinutes() : "0" + date.getMinutes();
-
-    return `${moment((date) ? new Date(date) : new Date()).format('DD/MM/YYYY')} ${(hours > 10) ? hours : "0" + hours}:${minutes} ${typeTime}`;
+    return `${moment((date) ? new Date(date) : new Date()).format('DD/MM/YYYY')} ${moment(new Date(date)).format('hh:mm A')}`;
   }
   public trackByIndex(index, item) {
     return index;

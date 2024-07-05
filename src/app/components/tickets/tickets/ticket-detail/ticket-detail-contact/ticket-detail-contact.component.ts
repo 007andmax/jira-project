@@ -1,9 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Company } from 'src/app/interfaces/company/company';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
-import { CurrentUser } from 'src/class/current-user/current-user';
 import { TicketProfile } from '../../class/ticket-profile';
 import { TicketsListService } from '../../services/tickets-list.service';
 

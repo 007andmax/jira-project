@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { TechUsersComponent } from 'src/app/components/shared/tech-users/tech-users.component';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';

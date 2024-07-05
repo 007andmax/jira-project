@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { User } from '../class/user';
 import { UserFilter } from '../class/user-filter';
 import { UserListService } from '../services/user-list.service';
@@ -7,6 +7,7 @@ import { Company } from 'src/app/interfaces/company/company';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { UsersService } from 'src/app/services/users/users.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-user-to-company',
@@ -14,7 +15,7 @@ import { UsersService } from 'src/app/services/users/users.service';
   styleUrls: ['./add-user-to-company.component.scss'],
   providers: [UserListService, NgbModalConfig, NgbModal],
 })
-export class AddUserToCompanyComponent implements OnInit {
+export class AddUserToCompanyComponent implements OnInit, OnDestroy {
   @Input() company: Company;
   container = document.body.querySelector(".user-company-list");
   public infiniteScrollDisabled = false;
@@ -24,12 +25,14 @@ export class AddUserToCompanyComponent implements OnInit {
   reqUsers: Array<User> = [];
   filter: UserFilter = new UserFilter();
   searchText: string = "";
+  sub: Subscription = new Subscription();
   constructor(private userListService: UserListService,
     public cd: ChangeDetectorRef,
     private usersStateService: UsersStateService,
     public activeModal: NgbActiveModal,
     private usersService: UsersService,
     private companiesStateService: CompaniesStateService,) { }
+
 
   ngOnInit() {
     this.container = document.body.querySelector(".user-company-list");
@@ -38,10 +41,12 @@ export class AddUserToCompanyComponent implements OnInit {
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = data;
     })
+    this.sub.add(getOnCompanies);
     if (this.usersStateService.getAllUsers().length > 0) this.getUsersList(JSON.parse(JSON.stringify(this.usersStateService.getAllUsers())).map(item => new User(item)));
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.getUsersList(JSON.parse(JSON.stringify(data)).map(item => new User(item)));
     })
+    this.sub.add(getOnUsers);
   }
   clearSearch() {
     this.searchText = "";
@@ -114,4 +119,7 @@ export class AddUserToCompanyComponent implements OnInit {
     this.users.forEach(item => item.selected = false);
     this.activeModal.close();
   };
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

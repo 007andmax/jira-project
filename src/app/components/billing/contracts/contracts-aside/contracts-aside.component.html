@@ -1,7 +1,10 @@
 <div class="contracts-page__aside --x-large qt-aside-modern ">
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">Create Contract</div>
-        <div class="qt-aside-modern__header-close qt-icon icon__close" (click)="closed()"></div>
+        <div
+            class="qt-aside-modern__header-close qt-icon icon__close"
+            (click)="closed()"
+        ></div>
     </div>
     <app-contracts-aside-select-type
         *ngIf="step === 1"
@@ -30,6 +33,12 @@
     <div class="qt-aside-modern__footer">
         <div class="qt-df">
             <button
+                class="qt-button --gray qt-mr-12"
+                (click)="closed()"
+            >
+                Cancel
+            </button>
+            <button
                 class="qt-button qt-mr-12"
                 *ngIf="step === 1"
                 (click)="continue()"
@@ -42,12 +51,6 @@
                 (click)="onCreate()"
             >
                 Create Contract
-            </button>
-            <button
-                class="qt-button --gray"
-                (click)="closed()"
-            >
-                Cancel
             </button>
         </div>
     </div>

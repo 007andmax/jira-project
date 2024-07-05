@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { UserCustomSubscription } from '../../class/user-custom-subscription';
 import { UserDefaultSubscription } from '../../class/user-default-subscription';
 
 @Component({

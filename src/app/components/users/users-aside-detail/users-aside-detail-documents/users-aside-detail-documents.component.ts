@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Document } from 'src/app/components/documents/class/document';
 import { DocumentsComponent } from 'src/app/components/documents/documents.component';
 import { REMOVE_CATEGORY_DOCUMENT, REMOVE_DOCUMENT } from 'src/app/const/confirm';
@@ -11,18 +11,16 @@ import { User } from '../../class/user';
 })
 export class UsersAsideDetailDocumentsComponent extends DocumentsComponent {
   @Input() user: User;
-
-
-
   ngOnInit() {
 
-    this.documentsStateService.onGetCategories.subscribe(data => {
+    let onGetCategories = this.documentsStateService.onGetCategories.subscribe(data => {
       data.forEach(element => {
         let findIndex = this.list.findIndex(item => item.categoryId === element.id);
         if (findIndex > -1) this.list[findIndex].categoryName = element.name;
       });
       this.cd.detectChanges();
     })
+    this.sub.add(onGetCategories);
     let onChangeDocument = this.documentsStateService.onChangeDocument.subscribe(data => {
       if (data.action === "DOCUMENT_SAVED" && !data.data.categoryId) this.list.push(new Document(data.data));
       if (data.action === "DOCUMENT_EDITED") {
@@ -43,7 +41,6 @@ export class UsersAsideDetailDocumentsComponent extends DocumentsComponent {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_CATEGORY_DOCUMENT) this.removeCategory(this.documentsStateService.getCategoryForRemove());
         if (this.confirmStateService.getConfirmAction() === REMOVE_DOCUMENT) this.removeDocument(this.documentsStateService.getDocumentForRemove());
-
       }
     })
     this.sub.add(getConfirm);

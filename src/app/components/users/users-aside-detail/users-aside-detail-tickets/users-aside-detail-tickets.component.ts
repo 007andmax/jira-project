@@ -80,11 +80,12 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
       let findIndex = this.tickets.findIndex(item => item.id === data.id);
       if (findIndex > -1) this.tickets.splice(findIndex, 1);
     });
-
+    this.sub.add(getOnRemoveTicket);
     this.onScroll();
-    this.ticketsStateService.getOnInitColor().subscribe(data => {
+    let getOnInitColor = this.ticketsStateService.getOnInitColor().subscribe(data => {
       this.listColors = data;
     })
+    this.sub.add(getOnInitColor);
     this.ticketsStatus = this.ticketsStateService.getTicketsStatus();
     let onGetTicketsStatus = this.ticketsStateService.onGetTicketsStatus.subscribe(data => {
       this.ticketsStatus = data;

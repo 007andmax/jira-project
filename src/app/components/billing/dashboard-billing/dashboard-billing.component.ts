@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { DashboardBillingService } from 'src/app/services/dashboard-billing/dashboard-billing.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Dashboard } from './class/dashboard';
-import { InvoiceRevenue } from './class/invoice-revenue';
 import * as moment from "moment";
 import { ContractsDashboard } from './class/contracts-dashboard';
 import { ContractsDashboardComponent } from './contracts-dashboard/contracts-dashboard.component';
@@ -12,10 +11,14 @@ import { DashboardSalesAnalyticsComponent } from './dashboard-sales-analytics/da
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { InvoiceRevenueComponent } from './invoice-revenue/invoice-revenue.component';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'app-dashboard-billing',
   templateUrl: './dashboard-billing.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./dashboard-billing.component.scss']
 })
 export class DashboardBillingComponent implements OnInit {
@@ -34,8 +37,7 @@ export class DashboardBillingComponent implements OnInit {
     private reportsService: ReportsService,
     public cd: ChangeDetectorRef,
     private permissionsService: PermissionsService,
-    private leftPanelStateService: LeftPanelStateService,
-    private companiesStateService: CompaniesStateService) { }
+    private leftPanelStateService: LeftPanelStateService) { }
 
   ngOnInit() {
     this.leftPanelStateService.setBillingPage('billing-dashboard');

@@ -17,7 +17,6 @@ export class LeftPanelReportsComponent implements OnInit {
   list: Array<ReportsLeftMenuItem> = [];
   constructor(private leftPanelStateService: LeftPanelStateService,
     public companiesStateService: CompaniesStateService,
-    private usersRealTimeService: UsersRealTimeService,
     private permissionsService: PermissionsService) { }
 
   ngOnInit() {

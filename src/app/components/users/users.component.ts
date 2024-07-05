@@ -1,41 +1,39 @@
-import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy, ViewChild } from '@angular/core';
 import { User } from './class/user';
 import { UsersStateService } from '../../states/users/users-state.service';
 import { UserListService } from './services/user-list.service';
-import { UserFilter } from './class/user-filter';
 import { CompaniesStateService } from '../../states/company/companies-state.service';
-import { Company } from '../../interfaces/company/company';
 import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
 import { ARCHIVE_USER, ARCHIVE_USERS, DEARCHIVE_USER } from '../../const/confirm';
 import { UsersService } from '../../services/users/users.service';
 import { UserChange } from './class/user-change';
 import { WebsocketService } from '../../services/websocket/websocket.service';
 import { DraftEmailStateService } from '../../states/draft-email/draft-email-state.service';
-import { MODE_MARKETING_USERS_LIST, MODE_USERS_LIST, TYPE_LIST_ALL_USERS } from '../../const/users';
+import { MODE_USERS_LIST, TYPE_LIST_ALL_USERS } from '../../const/users';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { CrmCompanyJobTitle } from '../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
-import { CrmCompanyJobType } from '../setting/crm-settings/crm-company-job-type/class/crm-company-job-type';
 import { forkJoin, Subscription } from 'rxjs';
 import { UserCustomSubscription } from './class/user-custom-subscription';
-import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
-import { UserDefaultSubscription } from './class/user-default-subscription';
 import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
 import { MarketingSubscriptionType } from '../setting/marketing-email/marketing-subscription-type/class/marketing-subscription-type';
-import { CrmCompanyIndustry } from '../setting/crm-settings/crm-company-industry/class/crm-company-industry';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { UserCustomerCompaniesInfo } from './class/user-customer-companies-info';
-import { NavigationEnd, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { UsersHeaderComponent } from './users-header/users-header.component';
 import { UserFilters } from './class/user-filters';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserDeArchiveNotificationComponent } from './user-de-archive-notification/user-de-archive-notification.component';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   providers: [UserListService],
 })
 export class UsersComponent implements OnInit, OnDestroy {
@@ -55,7 +53,6 @@ export class UsersComponent implements OnInit, OnDestroy {
   container = document.body.querySelector(".main-container");
   constructor(private usersStateService: UsersStateService,
     private userListService: UserListService,
-    private companiesStateService: CompaniesStateService,
     private confirmStateService: ConfirmStateService,
     private usersService: UsersService,
     public cd: ChangeDetectorRef,
@@ -64,9 +61,6 @@ export class UsersComponent implements OnInit, OnDestroy {
     private usersRealTimeService: UsersRealTimeService,
     private marketingEmailStateService: MarketingEmailStateService,
     public customerPortalStateService: CustomerPortalStateService,
-    private ref: ChangeDetectorRef,
-    private router: Router,
-    private appStateService: AppStateService,
     private websocketService: WebsocketService,
     private modalService: NgbModal,
   ) {
@@ -121,7 +115,6 @@ export class UsersComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
     let getChangeCompanies = this.usersStateService.getChangeUsers().subscribe((data: UserChange) => {
-
       if ((data.action === 'USER_SAVED' || data.action === 'USER_ARCHIVED') && data.data.accountType !== "TECH") {
         const userIndex = this.users.findIndex((item) => item.id === data.data.id);
         if (userIndex > -1) this.users[userIndex].onUpdate(data.data);
@@ -129,8 +122,6 @@ export class UsersComponent implements OnInit, OnDestroy {
           if (userIndex > -1) this.users.splice(userIndex, 1);
         }
       }
-
-
       if (data.action === 'USERS_DEARCHIVED' && data.data.accountType !== "TECH") {
         data.data.forEach(user => {
           if (this.filter.isArchive) {
@@ -140,7 +131,6 @@ export class UsersComponent implements OnInit, OnDestroy {
         })
       }
       if (data.action === 'USER_SUBMITTED_TICKET' && data.data.accountType !== "TECH") {
-
         const Index = this.users.findIndex((item) => item.id === data.data.id);
         var prevValue = this.users[Index].userStatistic.ticketsSubmitted || 0;
         prevValue++;
@@ -152,9 +142,10 @@ export class UsersComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(getChangeCompanies);
-    this.usersStateService.closeDetailAside.subscribe(data => {
+    let closeDetailAside = this.usersStateService.closeDetailAside.subscribe(data => {
       this.setIdDetailUser('');
     })
+    this.sub.add(closeDetailAside);
     this.onInitSubscribe();
     this.jobTitleList = this.crmStateService.getJobTitleList();
     let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {

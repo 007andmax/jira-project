@@ -191,6 +191,10 @@
                 ></preview-phone-mask>
             </a>
             <address>
+                <span
+                    *ngIf="companyDetailing.addresses.length > 1 && companyDetailing.addresses[1].suiteNumber"
+                    [textContent]="companyDetailing.addresses[1].suiteNumber + ', '"
+                ></span>
                 {{companyDetailing.shipping_addresses_name}}
             </address>
             <span class="qt-fs-13 qt-mb-8 dfn qt-color-gray-900">

@@ -17,6 +17,8 @@ import { TechUserItem } from '../../../shared/tech-users/class/tech-user-item';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { DevicesRecurringTicketsComponent } from '../devices-recurring-tickets/devices-recurring-tickets.component';
+import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
+import { AssignedTicketUserComponent } from '../../tickets/ticket-add-aside/assigned-ticket-user/assigned-ticket-user.component';
 
 @Component({
   selector: 'app-recurring-tickets-add-aside',
@@ -42,6 +44,8 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   areTicketsPresented: boolean = false;
   areTicketsTerminated: boolean = false;
   @ViewChild('deviceDp') deviceDp: DevicesRecurringTicketsComponent;
+  sub: Subscription = new Subscription();
+  @ViewChild('techUsersDp') techUsersDp: AssignedTicketUserComponent;
   /**
    * Creates an instance of the RecurringTicketsAddAsideComponent with the injected services
    * @param {ProductService} productService Service to work with products
@@ -57,12 +61,12 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     private productService: ProductService,
     private recurringService: RecurringService,
     public cd: ChangeDetectorRef,
-    private devicesService: DevicesService,
     public recurringState: RecurringTicketsStateService,
     public createService: RecurringTicketsService,
     private devicesRecurringTicketsStateService: DevicesRecurringTicketsStateService,
     private usersStateService: UsersStateService,
     private contractsService: ContractsService,
+    private inventoryStateService: InventoryStateService,
   ) {
   }
 
@@ -71,7 +75,6 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     */
   ngOnInit() {
     this.showTicketRecurring();
-    this.getItemListProducts();
     //this.recurringState.onInitClientList();
     this.onCopyCreate();
 
@@ -79,6 +82,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.onGetTechUsers(data);
     })
+    this.sub.add(getOnUsers);
   }
 
   public onCopyCreate() {
@@ -198,16 +202,15 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.techUsers.forEach((item) => {
       this.recurringState.getCreateTicket().addAssignedUsers(item.id);
     })
-
   }
 
   private onGetTechUsers(data) {
     this.listTechUsers = data.filter(item => {
-
       if (item.accountType === 'TECH' && !item.deletedAt) {
         return new TechUserItem(item);
       }
     });
+    // this.techUsersDp.reset(this.listTechUsers);
   }
 
   /**
@@ -221,9 +224,12 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
    * Get product list
    */
   public getItemListProducts() {
+    this.inventoryStateService.setPreloader(true);
     this.productService.getCategories().subscribe((res: any) => {
       this.productList = res;
-
+      this.inventoryStateService.setproducts(this.productList);
+      this.inventoryStateService.onInitGetProducts(this.productList);
+      this.inventoryStateService.setPreloader(false);
     });
   }
 
@@ -297,11 +303,12 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
  * Subscribe to show ticker
  */
   public showTicketRecurring() {
-    this.showTicketRecurringSub = this.recurringState.showTicketAddRecurringAside.subscribe((res) => {
+    let showTicketAddRecurringAside = this.recurringState.showTicketAddRecurringAside.subscribe((res) => {
       this.opened = true;
-
+      this.getItemListProducts();
       this.onInitCreateMod();
     });
+    this.sub.add(showTicketAddRecurringAside);
   }
 
 
@@ -313,6 +320,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   public selectProduct(item, index) {
     item = (item) ? { ...item, ...{ quantity: 1, discount: 1 } } : null;
     this.products[index] = new ForCreateProduct(item);
+    this.products[index].setDiscount(0);
     this.cd.detectChanges();
   }
 
@@ -542,6 +550,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.sub.unsubscribe();
     this.createService.clearSubscriptions();
   }
 

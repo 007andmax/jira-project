@@ -7,8 +7,8 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { UserCustomerCompaniesInfo } from 'src/app/components/users/class/user-customer-companies-info';
 import { CompanyUser } from './class/company-user';
-import { DeviceTagsService } from 'src/app/services/device-tags/device-tags.service';
 import { DevicesService } from 'src/app/services/devices/devices.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'company-users-drop-down',
@@ -17,7 +17,7 @@ import { DevicesService } from 'src/app/services/devices/devices.service';
   providers: [TicketsListService],
 })
 export class CompanyUsersDropDownComponent extends DropDownComponent {
-
+  sub: Subscription = new Subscription();
   selectedCustomerCompany: UserCustomerCompaniesInfo;
   constructor(public elRef: ElementRef,
     public companiesStateService: CompaniesStateService,
@@ -34,6 +34,7 @@ export class CompanyUsersDropDownComponent extends DropDownComponent {
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.onGetUsers(data);
     })
+    this.sub.add(getOnUsers);
   }
   /**
  * @description Check if item is selected

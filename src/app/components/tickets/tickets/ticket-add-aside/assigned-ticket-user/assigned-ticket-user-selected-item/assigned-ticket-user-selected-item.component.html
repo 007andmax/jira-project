@@ -19,7 +19,10 @@
         class="assigned-ticket-user__name qt-ml-4 qt-mr-4"
         [textContent]="user.firstName + ' ' + user.lastName"
     ></div>
-    <label class="qt-sz-20 relative">
+    <label
+        class="qt-sz-20 relative"
+        *ngIf="type !== 'RECURRING-TICKET'"
+    >
         <input
             type="checkbox"
             [checked]="user.selected"

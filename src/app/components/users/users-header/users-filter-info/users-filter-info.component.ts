@@ -1,8 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { TicketGlobalFilter } from 'src/app/components/tickets/tickets/class/ticket-global-filter';
-import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { UserGlobalFilter } from '../../class/user-global-filters';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-users-filter-info',
@@ -11,6 +10,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 })
 export class UsersFilterInfoComponent implements OnInit {
   globalFilter: UserGlobalFilter = new UserGlobalFilter();
+  sub: Subscription = new Subscription();
   constructor(public usersStateService: UsersStateService,
     private cd: ChangeDetectorRef,) { }
 
@@ -18,9 +18,11 @@ export class UsersFilterInfoComponent implements OnInit {
     let onInitGlobalFilter = this.usersStateService.onInitGlobalFilter.subscribe((data: UserGlobalFilter) => {
       this.globalFilter = data;
     });
+    this.sub.add(onInitGlobalFilter);
     let getOnChangeTypeFilter = this.usersStateService.onClearGlobalFilter.subscribe(type => {
       this.globalFilter = new UserGlobalFilter();
       this.cd.detectChanges();
     })
+    this.sub.add(getOnChangeTypeFilter);
   }
 }

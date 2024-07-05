@@ -1,4 +1,5 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Company } from 'src/app/interfaces/company/company';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -9,28 +10,31 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
     templateUrl: './breadcrumbs.component.html',
     styleUrls: ['./breadcrumbs.component.scss']
 })
-export class BreadcrumbsComponent implements OnInit {
-
+export class BreadcrumbsComponent implements OnInit, OnDestroy {
     selectedCompany: Company;
     state: string = '';
+    sub: Subscription = new Subscription();
     constructor(private companiesStateService: CompaniesStateService,
         public cd: ChangeDetectorRef,
         public leftPanelService: LeftPanelService,
         private leftPanelStateService: LeftPanelStateService) { }
 
+
     ngOnInit() {
-        this.leftPanelStateService.onChangeState.subscribe(data => {
+        let onChangeState = this.leftPanelStateService.onChangeState.subscribe(data => {
             this.state = data;
             if (!this.cd['destroyed']) {
                 this.cd.detectChanges();
             }
         })
-        this.leftPanelStateService.onChangeStateWithoutNavigate.subscribe(data => {
+        this.sub.add(onChangeState);
+        let onChangeStateWithoutNavigate = this.leftPanelStateService.onChangeStateWithoutNavigate.subscribe(data => {
             this.state = data;
             if (!this.cd['destroyed']) {
                 this.cd.detectChanges();
             }
         })
+        this.sub.add(onChangeStateWithoutNavigate);
     }
     ngDoCheck() {
         if (this.companiesStateService.getCompanyRoutingId()) this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.companiesStateService.getCompanyRoutingId());
@@ -62,5 +66,7 @@ export class BreadcrumbsComponent implements OnInit {
     public back() {
         this.leftPanelStateService.goToState('new-companies');
     }
-
+    ngOnDestroy(): void {
+        this.sub.unsubscribe();
+    }
 }

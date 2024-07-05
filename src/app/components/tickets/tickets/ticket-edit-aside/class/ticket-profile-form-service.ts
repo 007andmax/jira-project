@@ -117,8 +117,7 @@ export class TicketProfileFormService {
             quantity: this.quantity,
             user: {
                 id: techUser.id
-            },
-            taxes: this.item.taxes
+            }
         }
     }
 }

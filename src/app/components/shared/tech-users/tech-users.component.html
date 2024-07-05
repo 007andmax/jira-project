@@ -1,17 +1,19 @@
 <div
     class="tech-users-container"
     ngbDropdown
+    #techUsersDd="ngbDropdown"
     [container]="container"
     [autoClose]="'outside'"
     [placement]="placement"
     (openChange)="onCloseDropDown($event)"
 >
     <div
-        class="device-user pointer"
+        class="device-user"
         *ngIf="type === 'DETAIL_TICKET' && selectedUsers.length === 0"
         id="dropdownTechuser"
         style="margin-bottom: 10px;"
-        ngbDropdownToggle
+        [ngClass]="{'pointer':!isDisabled}"
+        (click)="openDropDown()"
     >
         <div class="qt-df qt-ai-c">
             <div class="qt-icon qt-sz-16 qt-mr-8"></div>
@@ -63,7 +65,7 @@
         class="device-user company-settings-user"
         *ngIf="type === 'DETAIL_TICKET' && selectedUsers.length === 1"
         id="dropdownTechuser"
-        ngbDropdownToggle
+        (click)="openDropDown()"
         [ngClass]="{'pointer':!isDisabled}"
     >
         <div class="user-tech-dp">
@@ -119,6 +121,7 @@
         (mouseenter)="selectUserTooltip.show($event.target)"
         (mouseleave)="selectUserTooltip.hide()"
         ngbDropdownToggle
+        [ngClass]="{'pointer':!isDisabled}"
     ></div>
     <app-dynamic-tooltip
         [content]="ticketsListService.getUserName(selectedUsers[0])"

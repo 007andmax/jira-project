@@ -25,11 +25,15 @@ import { PermissionManageComponent } from './permission-manage/permission-manage
 import { TechUsersReassignComponent } from './tech-users-reassign/tech-users-reassign.component';
 import { TitleListType } from '../../tickets/tickets/tickets-header/class/title-list-type';
 import { UsersService } from 'src/app/services/users/users.service';
+import { fadeInAnimation } from 'src/app/animations';
 declare var $;
 
 @Component({
   selector: 'app-tech-users-settings',
   templateUrl: './tech-users-settings.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./tech-users-settings.component.scss']
 })
 export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDestroy {

@@ -263,19 +263,19 @@
     <div class="qt-aside-modern__footer">
         <div class="qt-df">
             <button
-                class="qt-button qt-mr-12"
+                class="qt-button --gray qt-mr-12"
+                (click)="close()"
+            >
+                Cancel
+            </button>
+            <button
+                class="qt-button "
                 appDisabledBtn
                 #recordPayment="disabled"
                 (onClick)="create()"
             >
                 <span *ngIf="!recordPayment.isBlock()">Record Payment</span>
                 <app-preloader-ticket *ngIf="recordPayment.isBlock()"></app-preloader-ticket>
-            </button>
-            <button
-                class="qt-button --gray"
-                (click)="close()"
-            >
-                Cancel
             </button>
         </div>
     </div>

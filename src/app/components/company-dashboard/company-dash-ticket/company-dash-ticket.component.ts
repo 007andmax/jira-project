@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './company-dash-ticket.component.html',
   styleUrls: ['./company-dash-ticket.component.scss']
 })
-export class CompanyDashTicketComponent implements OnInit {
+export class CompanyDashTicketComponent implements OnInit, OnDestroy {
 
   _id: string = '';
   ticketFrequency: string = 'Monthly';
@@ -21,6 +21,7 @@ export class CompanyDashTicketComponent implements OnInit {
     public activateRoute: ActivatedRoute,
     public cd: ChangeDetectorRef
   ) { }
+
 
   public ngOnInit() {
     this._id = this.activateRoute.snapshot.params['id'];
@@ -108,7 +109,7 @@ export class CompanyDashTicketComponent implements OnInit {
     });
     this.sub.add(getTicket);
   }
-
-
-
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

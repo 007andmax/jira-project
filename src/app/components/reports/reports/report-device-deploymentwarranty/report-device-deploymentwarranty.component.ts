@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
@@ -12,15 +12,15 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { DeviceDeploymentWarrantyReport } from '../../class/report-device-deploymentwarranty';
-import { ReportSendEmailComponent } from '../../report-additional-actions/report-send-email/report-send-email.component';
 import { DeviceDeploymentWarrantyReportFilter } from './Class/report-device-deploymentwarranty';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'report-device-deploymentwarranty',
   templateUrl: './report-device-deploymentwarranty.component.html',
   styleUrls: ['./report-device-deploymentwarranty.component.scss']
 })
-export class ReportDeviceDeploymentwarrantyComponent implements OnInit {
+export class ReportDeviceDeploymentwarrantyComponent implements OnInit, OnDestroy {
   @ViewChild('dropdownDevice') dropdownDevice: DropDownComponent;
   clientName: string;
   companies = [];
@@ -39,19 +39,18 @@ export class ReportDeviceDeploymentwarrantyComponent implements OnInit {
   fileName: string = "device-deploymentwarranty-report";
   accountType = "CLIENT";
   pipe = new DatePipe("en-US");
-
+  sub: Subscription = new Subscription();
   constructor(
     private agentService: AgentService,
-    private companiesState: CompaniesStateService,
     private companiesStateService: CompaniesStateService,
     public leftPanelStateService: LeftPanelStateService,
-    private modalService: NgbModal,
     private commonHttpServices: CommonHttpServices,
     private toastr: ToastrService,
     private excelService: ExcelService,
     public elRef: ElementRef,
     public draftEmailStateService: DraftEmailStateService,
   ) { }
+
 
   ngOnInit() {
     this.clientName = "All Companies";
@@ -61,9 +60,10 @@ export class ReportDeviceDeploymentwarrantyComponent implements OnInit {
 
   setPreviewDataDevice() {
     if (this.companiesStateService.getCompanies().length > 0) this.companies = this.getClientsList(this.companiesStateService.getCompanies());
-    this.companiesStateService.getOnCompanies().subscribe((data) => {
+    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = this.getClientsList(data);
     });
+    this.sub.add(getOnCompanies);
   }
 
   getDeviceDeplyomentList() {
@@ -393,5 +393,7 @@ export class ReportDeviceDeploymentwarrantyComponent implements OnInit {
   onFilter(field) {
     this.filter.onFilter(field, this.deviceDeploymentWarrantyList);
   }
-
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

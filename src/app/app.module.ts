@@ -133,6 +133,14 @@ import { DeviceTagPipe } from './pipe/device-tag.pipe';
 import { MarketingSubscriptionsAsideModule } from './components/marketing/marketing-subscriptions-aside/marketing-subscriptions-aside.module';
 import { ManufacturesCheckUseComponent } from './components/setting/device-setting/manufactures-check-use/manufactures-check-use.component';
 import { UserDeArchiveNotificationComponent } from './components/users/user-de-archive-notification/user-de-archive-notification.component';
+import { SuperAdminKnowledgeBaseComponent } from './components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base.component';
+import { SuperAdminKnowledgeBaseTableComponent } from './components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base-table/super-admin-knowledge-base-table.component';
+import { SuperAdminKnowledgeBaseTableItemComponent } from './components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base-table/super-admin-knowledge-base-table-item/super-admin-knowledge-base-table-item.component';
+import { SuperAdminKnowledgeBaseService } from './components/super-admin/services/super-admin-knowledge-base/super-admin-knowledge-base.service';
+import { SuperAdminPublicListComponent } from './components/super-admin-public/super-admin-public-list/super-admin-public-list.component';
+import { SuperAdminPublicListModule } from './components/super-admin-public/super-admin-public-list/super-admin-public-list.module';
+import { ProductTypeCheckUseComponent } from './components/setting/products-settings/product-type-check-use/product-type-check-use.component';
+import { ProductTypeCheckUseModule } from './components/setting/products-settings/product-type-check-use/product-type-check-use.module';
 declare var $: any;
 
 /**
@@ -175,7 +183,6 @@ declare var $: any;
     MatChipsModule,
     MatIconModule,
     MatAutocompleteModule,
-    BrowserAnimationsModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     AppRoutingModule,
     ToastrModule.forRoot({
@@ -183,7 +190,6 @@ declare var $: any;
       timeOut: 5000,
       onActivateTick: true
     }),
-    BrowserAnimationsModule,
     AngularEditorModule,
     LeftPanelModule,
     CompanyAddAsideModule,
@@ -218,6 +224,8 @@ declare var $: any;
     UserFilterSaveModule,
     TicketsFilterSaveModule,
     MarketingSubscriptionsAsideModule,
+    SuperAdminPublicListModule,
+    ProductTypeCheckUseModule
   ],
   entryComponents: [
     ConfirmComponent,
@@ -237,7 +245,7 @@ declare var $: any;
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
     UsersCheckUseComponent,
-    ManufacturesCheckUseComponent,
+    ManufacturesCheckUseComponent
   ],
   providers: [
     {
@@ -271,7 +279,8 @@ declare var $: any;
     PermissionCompanyDevicesService,
     PermissionNoSuperAdminService,
     PermissionClientUserService,
-    PermissionMyProfileService
+    PermissionMyProfileService,
+    SuperAdminKnowledgeBaseService
   ],
   bootstrap: [AppComponent]
 })

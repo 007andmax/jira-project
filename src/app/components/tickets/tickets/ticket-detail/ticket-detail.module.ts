@@ -16,7 +16,7 @@ import { ProductListModule } from 'src/app/components/shared/product-list/produc
 import { ServicesListModule } from 'src/app/components/shared/services-list/services-list.module';
 import { TechUsersModule } from 'src/app/components/shared/tech-users/tech-users.module';
 import { UploadAreaProgressModule } from 'src/app/components/shared/upload-area/upload-area-progress/upload-area-progress.module';
-import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.module';
+import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { NumberModule } from 'src/app/directives/number/number.module';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
@@ -173,7 +173,7 @@ import { TicketDetailTicketsStatusComponent } from './ticket-detail-tickets/tick
         InfiniteScrollModule,
         TechUsersModule,
         UploadAreaProgressModule,
-        ClickOtsideModule,
+        ClickOutsideModule,
         TicketProfileAttachmentsModule,
         PreviewPhoneMaskModule,
         InvoiceFormTicketEditTaxesModule,

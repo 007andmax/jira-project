@@ -92,9 +92,10 @@ export class DeviceComponent implements OnInit, OnDestroy {
     }
     this.deviceDetail = {};
     this.deviceDetail.id = this._id;
-    this.kafkaStateService.onCurrentConfig.subscribe((resp) =>
+    let onCurrentConfig = this.kafkaStateService.onCurrentConfig.subscribe((resp) =>
       this.onGetCurrentConfig(resp)
     );
+    this.sub.add(onCurrentConfig);
 
     this.onPowerShellCommand();
     this.onAck();
@@ -347,7 +348,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
   }
 
   onPowerShellCommand() {
-    this.kafkaStateService.onPowerShellCommand.subscribe((resp) => {
+    let onPowerShellCommand = this.kafkaStateService.onPowerShellCommand.subscribe((resp) => {
       let item = resp.find((x) => x.key == this.asset.ID);
       if (item) {
         this.kafkaMessage = item.Value;
@@ -371,6 +372,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
         });
       }
     });
+    this.sub.add(onPowerShellCommand);
   }
 
   sendCommand(command, assetId) {
@@ -471,13 +473,9 @@ export class DeviceComponent implements OnInit, OnDestroy {
     this.modalService.dismissAll();
   }
 
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
-    this.deviceDetailService.setDevice(null);
-  }
 
   onUninstallAgent() {
-    this.kafkaStateService.onUninstallAgent.subscribe((resp) => {
+    let onUninstallAgent = this.kafkaStateService.onUninstallAgent.subscribe((resp) => {
       let item = resp.find((x) => x.key == this.asset.ID);
       if (item) {
         this.kafkaMessage = item.Value;
@@ -491,10 +489,11 @@ export class DeviceComponent implements OnInit, OnDestroy {
         });
       }
     });
+    this.sub.add(onUninstallAgent);
   }
 
   onUpdateAgent() {
-    this.kafkaStateService.onUpdateAgent.subscribe((resp) => {
+    let onUpdateAgent = this.kafkaStateService.onUpdateAgent.subscribe((resp) => {
       let item = resp.find((x) => x.key == this.asset.ID);
       if (item) {
         this.kafkaMessage = item.Value;
@@ -504,10 +503,11 @@ export class DeviceComponent implements OnInit, OnDestroy {
         });
       }
     });
+    this.sub.add(onUpdateAgent);
   }
 
   onInstallRemoteAgentCommand() {
-    this.kafkaStateService.onInstallRemoteAgent.subscribe((resp) => {
+    let onInstallRemoteAgent = this.kafkaStateService.onInstallRemoteAgent.subscribe((resp) => {
       let item = resp.find((x) => x.key == this.asset.ID);
       if (item) {
         this.kafkaMessage = item.Value;
@@ -518,10 +518,11 @@ export class DeviceComponent implements OnInit, OnDestroy {
         });
       }
     });
+    this.sub.add(onInstallRemoteAgent);
   }
 
   onUninstallRemoteAgentCommand() {
-    this.kafkaStateService.onUninstallRemoteAgent.subscribe((resp) => {
+    let onUninstallRemoteAgent = this.kafkaStateService.onUninstallRemoteAgent.subscribe((resp) => {
       let item = resp.find((x) => x.key == this.asset.ID);
       if (item) {
         this.kafkaMessage = item.Value;
@@ -532,5 +533,11 @@ export class DeviceComponent implements OnInit, OnDestroy {
         });
       }
     });
+    this.sub.add(onUninstallRemoteAgent);
   }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+    this.deviceDetailService.setDevice(null);
+  }
+
 }

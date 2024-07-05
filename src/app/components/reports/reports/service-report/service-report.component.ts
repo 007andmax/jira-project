@@ -1,5 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { TicketsReport } from '../../class/tickets-reports';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Company } from 'src/app/interfaces/company/company';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -8,15 +7,15 @@ import * as moment from "moment";
 import { ServiceReports } from '../../class/service-reports';
 import { ServiceReportsItem } from '../../class/service-reports-item';
 import { ReportsStateService } from 'src/app/states/reports/reports-state.service';
-import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
-import { isEmbeddedView } from '@angular/core/src/view/util';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-service-report',
   templateUrl: './service-report.component.html',
   styleUrls: ['./service-report.component.scss']
 })
-export class ServiceReportComponent implements OnInit {
+export class ServiceReportComponent implements OnInit, OnDestroy {
 
   chartOptions;
   chartData;
@@ -32,11 +31,13 @@ export class ServiceReportComponent implements OnInit {
   showProducts = true;
   currentCompany: Company;
   timeSpent: any;
+  sub: Subscription = new Subscription();
   constructor(public cd: ChangeDetectorRef,
     private companiesStateService: CompaniesStateService,
     private usersStateService: UsersStateService,
     private reportsStateService: ReportsStateService,
     private ticketReportStateService: TicketReportStateService) { }
+
 
   ngOnInit() {
     this.currentCompany = this.companiesStateService.getCurrentCompany();
@@ -68,9 +69,10 @@ export class ServiceReportComponent implements OnInit {
         }
       }
     }
-    this.ticketReportStateService.getOnShowDashboard().subscribe(data => {
+    let getOnShowDashboard = this.ticketReportStateService.getOnShowDashboard().subscribe(data => {
       this.showHeader = data;
     })
+    this.sub.add(getOnShowDashboard);
     this.reportsStateService.serviceReport.subscribe(data => {
       this.serviceReport.setDataFromObject(data);
       if (this.serviceReport && this.serviceReport.services) {
@@ -199,5 +201,8 @@ export class ServiceReportComponent implements OnInit {
   }
   public trackByIndex(index, item) {
     return index;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

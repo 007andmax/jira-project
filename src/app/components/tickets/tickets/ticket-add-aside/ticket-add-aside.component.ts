@@ -5,7 +5,6 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { TicketCreatedUser } from '../class/ticket-created-user';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TechUserItem } from '../../../shared/tech-users/class/tech-user-item';
-import { TitleListType } from '../tickets-header/class/title-list-type';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { TicketValidate } from '../class/ticket-validate';
 import { UploadAreaComponent } from '../../../shared/upload-area/upload-area.component';
@@ -14,14 +13,11 @@ import { DropDownComponent } from '../../../shared/drop-down/drop-down.component
 import { AppService } from 'src/app/states/app/app.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalAddUsersNotifyComponent } from 'src/app/services/modal/modal-add-users-notify/modal-add-users-notify.component';
-import { TicketStateService } from '../ticket-edit-aside/services/ticket-state.service';
 import { forkJoin, Subscription } from 'rxjs';
 import { AddUsersNotifyStateService } from 'src/app/services/modal/modal-add-users-notify/state/add-users-notify-state.service';
 import { USERS_TO_ADD_TICKET } from 'src/app/const/add-users-notify';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { CompaniesService } from 'src/app/services/company/companies.service';
-import { TechUsersComponent } from 'src/app/components/shared/tech-users/tech-users.component';
-import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { TicketsPriority } from 'src/app/components/setting/ticket-settings-page/tickets-priority/class/tickets-priority';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
@@ -69,7 +65,6 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     public appService: AppService,
     private modalService: NgbModal,
-    private ticketStateService: TicketStateService,
     private companiesService: CompaniesService,
     public customerPortalStateService: CustomerPortalStateService,
     private addUsersNotifyStateService: AddUsersNotifyStateService,
@@ -88,13 +83,15 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.onGetTechUsers(data);
     })
-    this.ticketsStateService.getToggleAddTicket().subscribe(data => {
+    this.sub.add(getOnUsers);
+    let getToggleAddTicket = this.ticketsStateService.getToggleAddTicket().subscribe(data => {
       this.opened = !this.opened;
       if (this.opened) {
         this.getTicketPriority();
         this.getColors();
       }
     })
+    this.sub.add(getToggleAddTicket);
     let onChangeAssignedUser = this.addUsersNotifyStateService.onChangeAssignedUser.subscribe(data => {
       if (this.addUsersNotifyStateService.getAction() === USERS_TO_ADD_TICKET) this.onChangeShareUsers(data);
     })
@@ -302,6 +299,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       this.devices.sort((a, b) => (a.hostName.toLowerCase() > b.hostName.toLowerCase()) ?
         1 : ((b.hostName.toLowerCase() > a.hostName.toLowerCase()) ? -1 : 0));
       this.ticketAdd.setPreloaderDevices(false);
+      this.deviceDP.reset(this.devices);
     });
   }
   onGetUsers(data) {

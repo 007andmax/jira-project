@@ -142,7 +142,14 @@ export class DevicesService {
     return this.http.get(this.apiUrl + `devices/networkScan?companyId=${companyId}`);
   }
   public getCompanyDevices(companyId) {
-    return this.http.get(this.apiUrl + `devices?companyId=${companyId}`);
+    this.appStateService.setCustomeError(true, "The device list cannot be loaded, please try to refresh your page.");
+    return this.http.get(this.apiUrl + `devices?companyId=${companyId}`).pipe(
+      tap(data => {
+        this.appStateService.setServerError(false);
+        this.appStateService.setCustomeError(false);
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public getDeviceExtended(companyId, agentId) {
     return this.http.get(this.apiUrl + `devices/extended?companyId=${companyId}&agentId=${agentId}`);

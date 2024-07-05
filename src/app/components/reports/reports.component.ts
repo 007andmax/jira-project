@@ -1,14 +1,17 @@
 import { Component, OnInit } from "@angular/core";
-import { values } from "d3";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
 import { PermissionsService } from "../../services/permissions/permissions.service";
 import { LeftPanelStateService } from "../../states/left-panel/left-panel-state.service";
 import { QuoteStateService } from "../../states/quote/quote-state.service";
+import { fadeInAnimation } from "src/app/animations";
 
 @Component({
   selector: "app-reports",
   templateUrl: "./reports.component.html",
   styleUrls: ["./reports.component.scss"],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
 })
 export class ReportsComponent implements OnInit {
   listSalesTitles: Array<string> = [];

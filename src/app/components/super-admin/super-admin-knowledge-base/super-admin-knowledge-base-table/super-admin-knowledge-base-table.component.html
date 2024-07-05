@@ -1,0 +1,87 @@
+<div class="qt-page-list__container">
+    <div class="qt-page-list__body">
+        <div class="qt-page-list__header-thead-container">
+            <div class="qt-table-modern qt-page-list__header-thead">
+                <div class="qt-page-list__header-thead__row">
+                    <div class="companies-table__check">
+                        <div class="qt-df qt-jc-fe">
+                            <label class="qt-checkbox">
+                                <input
+                                    type="checkbox"
+                                    class="ng-untouched ng-pristine ng-valid"
+                                >
+                                <span></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="ticket-table__subject">Topic Title</div>
+                    <div class="ticket-table__created-date">Created</div>
+                    <div class="ticket-table__status pointer">Status</div>
+                    <div class="companies-table__menu pointer"></div>
+                </div>
+            </div>
+        </div>
+        <div
+            class="qt-page-list__body-table-container"
+            [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}"
+        >
+            <div class="qt-page-list__body-tbody qt-table-modern ticket-table">
+                <div
+                    infiniteScroll
+                    [infiniteScrollContainer]="container"
+                    [infiniteScrollDistance]="2"
+                    [infiniteScrollThrottle]="30"
+                    [infiniteScrollDisabled]="infiniteScrollDisabled"
+                    (scrolled)="onScroll()"
+                    class="tbody"
+                >
+                    <ng-template
+                        ngFor
+                        let-item
+                        [ngForOf]="list"
+                        [ngForTrackBy]="trackById"
+                    >
+                        <app-super-admin-knowledge-base-table-item [news]="item"></app-super-admin-knowledge-base-table-item>
+                    </ng-template>
+                </div>
+            </div>
+            <div
+                class="loading pengind-loading"
+                *ngIf="showPendingPreloader"
+            ></div>
+            <div
+                class="loading"
+                *ngIf="showPreloader"
+            ></div>
+            <div
+                class="no-exist-elements"
+                *ngIf="!showPreloader && list.length == 0"
+            >
+                We couldn't find any results
+            </div>
+        </div>
+    </div>
+    <div
+        class="aside-filters qt-ml-4"
+        infiniteScroll
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="50"
+        [scrollWindow]="false"
+        [infiniteScrollDisabled]="infiniteScrollDisabledRigth"
+        [fromRoot]="true"
+        (scrolled)="onScroll()"
+    >
+        <app-super-admin-knowledge-base-add
+            [hidden]="!toggleFilter"
+            class="qt-w100"
+            #addAside
+            (onClose)="setToggleFilter(false)"
+        ></app-super-admin-knowledge-base-add>
+        <app-super-admin-knowledge-base-edit
+            #editAside
+            class="qt-w100"
+            (onClose)="setToggleFilter(false)"
+        ></app-super-admin-knowledge-base-edit>
+        <app-super-admin-knowledge-base-news-list [list]=list></app-super-admin-knowledge-base-news-list>
+    </div>
+</div>

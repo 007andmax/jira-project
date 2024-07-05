@@ -1,19 +1,23 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy, TemplateRef } from "@angular/core";
-import { EmailTempleteService } from "./email-template.service";
+import { EmailTempleteService } from "../../../services/email-template/email-template.service";
 import { map, catchError } from "rxjs/operators";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { of } from "rxjs";
+import { of, Subscription } from "rxjs";
 import { ToastrService } from "ngx-toastr";
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
 import { EmailTemplateStateService } from "src/app/states/email-template/email-template-state.service";
+import { fadeInAnimation } from "src/app/animations";
 
 declare var $: any;
 
 @Component({
   selector: "app-email-template",
   templateUrl: "./email-template.component.html",
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ["./email-template.component.scss"]
 })
 export class EmailTempleteComponent implements OnInit, OnDestroy {
@@ -39,7 +43,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   templatesData = { subject: {}, body: {}, isActive: false };
   @ViewChild("body") body: ElementRef;
   @ViewChild("subject") subject: ElementRef;
-
+  sub: Subscription = new Subscription();
   constructor(
     private modalService: NgbModal,
     private emailService: EmailTempleteService,
@@ -66,7 +70,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     });
     this.getEmailPages();
     this.settingStateService.setComponentName('EmailTempleteComponent');
-    this.emailTemplateStateService.onChangeEmailTemplates.subscribe(data => {
+    let onChangeEmailTemplates = this.emailTemplateStateService.onChangeEmailTemplates.subscribe(data => {
       if (data.action == "COMPANY_EMAIL_NOTIFICATION") {
         for (const key in this.ticketTemplates) {
           if (data.data[key]) {
@@ -94,6 +98,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
         }
       }
     })
+    this.sub.add(onChangeEmailTemplates);
   }
 
   ngOnDestroy() {

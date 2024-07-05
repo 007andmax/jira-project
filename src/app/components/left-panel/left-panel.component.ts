@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from "@angular/router";
 import { Company } from 'src/app/interfaces/company/company';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
@@ -13,7 +13,6 @@ import { TicketStateService } from '../tickets/tickets/ticket-edit-aside/service
 import { User } from '../users/class/user';
 import { LeftPanelBillingComponent } from './left-panel-billing/left-panel-billing.component';
 import { LeftPanelCompaniesComponent } from './left-panel-companies/left-panel-companies.component';
-import { LeftPanelCompanyComponent } from './left-panel-company/left-panel-company.component';
 import { LeftPanelDevicesComponent } from './left-panel-devices/left-panel-devices.component';
 import { LeftPanelDocumentsComponent } from './left-panel-documents/left-panel-documents.component';
 import { LeftPanelInventoryComponent } from './left-panel-inventory/left-panel-inventory.component';
@@ -24,6 +23,7 @@ import { LeftPanelSupportComponent } from './left-panel-support/left-panel-suppo
 import { LeftPanelTicketsComponent } from './left-panel-tickets/left-panel-tickets.component';
 import { LeftPanelUsersComponent } from './left-panel-users/left-panel-users.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { Subscription } from 'rxjs';
 
 /**
  * Left panel component
@@ -33,7 +33,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
   templateUrl: './left-panel.component.html',
   styleUrls: ['./left-panel.component.scss']
 })
-export class LeftPanelComponent implements OnInit {
+export class LeftPanelComponent implements OnInit, OnDestroy {
   currentCompany: Company;
   currentUser: User;
   toggleLeftPanel: boolean = false;
@@ -41,6 +41,7 @@ export class LeftPanelComponent implements OnInit {
   page: string = '';
   showMobTab = false;
   isInitPopStateNaviate: boolean = false;
+  sub: Subscription = new Subscription();
   @ViewChild('panelBilling') panelBilling: LeftPanelBillingComponent;
   @ViewChild('panelCompanies') panelCompanies: LeftPanelCompaniesComponent;
   @ViewChild('panelSettings') panelSettings: LeftPanelSettingsComponent;
@@ -78,19 +79,20 @@ export class LeftPanelComponent implements OnInit {
    */
   ngOnInit() {
     if (this.usersStateService.getCurrentUser()) this.getCurrentUser(this.usersStateService.getCurrentUser());
-    this.usersStateService.getOnGetCurrentuser().subscribe(data => {
+    let getOnGetCurrentuser = this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.getCurrentUser(data)
     })
+    this.sub.add(getOnGetCurrentuser);
     this.currentCompany = this.companiesStateService.getCurrentCompany();
-    this.companiesStateService.getOnCurrentCompany().subscribe(data => {
+    let getOnCurrentCompany = this.companiesStateService.getOnCurrentCompany().subscribe(data => {
       this.currentCompany = this.companiesStateService.getCurrentCompany();
     });
-
-    this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
+    this.sub.add(getOnCurrentCompany);
+    let onToggleLeftPanel = this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       this.toggleLeftPanel = data;
     });
-
-    this.router.events
+    this.sub.add(onToggleLeftPanel);
+    let events = this.router.events
       .subscribe((event: any) => {
         if (event.navigationTrigger === "popstate") this.isInitPopStateNaviate = true;
         if (this.state === '' || (event instanceof NavigationEnd && this.isInitPopStateNaviate)) {
@@ -140,6 +142,8 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/contract-statistics`)) this.state = 'contract-statistics';
           if (window.location.href.includes(`/support-page`)) this.state = 'support-page';
           if (window.location.href.includes(`/tech-companies`)) this.state = 'tech-companies';
+          if (window.location.href.includes(`/knowledge-base`)) this.state = 'knowledge-base';
+
           if (window.location.href.includes(`/users`)) this.state = 'new-users';
           if (!window.location.href.includes(`/setting/marketing-email`) && window.location.href.includes(`/marketing`)) this.state = 'marketing';
           if (window.location.href.includes(`/reports`)) this.state = 'new-reports';
@@ -209,11 +213,12 @@ export class LeftPanelComponent implements OnInit {
           this.isInitPopStateNaviate = false;
         }
       });
-
-    this.leftPanelStateService.onGoToState.subscribe(data => {
+    this.sub.add(events);
+    let onGoToState = this.leftPanelStateService.onGoToState.subscribe(data => {
       this.onChangeState(data);
     })
-    this.leftPanelStateService.onOpenCompanyPage.subscribe(data => {
+    this.sub.add(onGoToState);
+    let onOpenCompanyPage = this.leftPanelStateService.onOpenCompanyPage.subscribe(data => {
       if (this.panelBilling) this.panelBilling.close();
 
       if (this.panelSettings) this.panelSettings.close();
@@ -226,13 +231,15 @@ export class LeftPanelComponent implements OnInit {
       if (this.panelCompanies) this.panelCompanies.openPanel();
       if (this.panelCompanies) this.panelCompanies.togglePanel(true);
     })
-    this.leftPanelStateService.onChangeStateWithoutNavigate.subscribe(data => {
+    this.sub.add(onOpenCompanyPage);
+    let onChangeStateWithoutNavigate = this.leftPanelStateService.onChangeStateWithoutNavigate.subscribe(data => {
       this.state = data;
       if (!this.cd['destroyed']) {
         this.updatePage(this.state);
         this.cd.detectChanges();
       }
     })
+    this.sub.add(onChangeStateWithoutNavigate);
     /* this.companiesStateService.onCurrentCompany.subscribe(data => {
        if (this.state === '') {
          this.leftPanelStateService.firstOpen(this.state);
@@ -361,6 +368,8 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'new-template-documents') this.goToLink('documents/templates');
       if (this.state === 'support-page') this.goToLink('support-page');
       if (this.state === 'tech-companies') this.goToLink('tech-companies');
+      if (this.state === 'knowledge-base') this.goToLink('knowledge-base');
+
       if (this.state === 'company-documents') this.goToLink(`company/${this.companiesStateService.getCompanyRoutingId()}/documents`);
       if (this.state === 'new-devices') this.goToLink('devices');
       if (this.state === 'new-device-summary') this.goToLink('devices/reports');
@@ -431,4 +440,8 @@ export class LeftPanelComponent implements OnInit {
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
 }

@@ -17,10 +17,14 @@ import { DeviceRemoteSessions } from './class/device-remote-sessions';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { DeviceTagsStateService } from 'src/app/states/device-tags/device-tags-state.service';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'app-company-devices',
   templateUrl: './company-devices.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./company-devices.component.scss']
 })
 export class CompanyDevicesComponent implements OnInit, OnDestroy {
@@ -67,7 +71,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
 
     });
     this.sub.add(subscription);
-    this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
+    let changeDevicesArray = this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
       if (newChange.action === 'CUSTOM_DEVICE_SAVED') {
         this.devices.push(new DeviceCompany({ ...newChange.data, isCustom: true, id: newChange.data.deviceId }, newChange.data.companyId));
       }
@@ -84,6 +88,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       this.filter.onCurrentFilter(this.devices);
       this.cd.detectChanges();
     })
+    this.sub.add(changeDevicesArray);
     let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
       if (id == newChange.data.clientCompanyId) {
         this.devicesStateService.changeDevice(this.devices, newChange);

@@ -1,0 +1,17 @@
+@import "./src/assets/styles/variable";
+
+.crm-settings-company-industry-table {
+    &__industry-type {
+        flex: 1;
+    }
+    &__action {
+        flex: 0 0 20px;
+    }
+}
+.--input-error {
+    position: relative;
+
+    input {
+        border: solid 1px $red-600 !important;
+    }
+}

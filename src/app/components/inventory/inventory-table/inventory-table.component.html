@@ -1,4 +1,14 @@
 <div class="qt-table-modern__row qt-table-modern__row--height-auto">
+    <div class="companies-table__check">
+        <label class="qt-checkbox pointer">
+            <input
+                type="checkbox"
+                [(ngModel)]="inventory.selected"
+                (change)="selectIventory($event)"
+            >
+            <span></span>
+        </label>
+    </div>
     <div class="products-table__product-name pre-line">
         <!-- <pre [textContent]="inventory.description"></pre> -->
         <textarea
@@ -168,6 +178,23 @@
             [reducerItem]="glDropDownItemName"
             (onAddItem)="onAddGlNumber($event)"
             (onSelectedItem)="onSelectGlNumbers($event)"
+        >
+        </app-drop-down>
+    </div>
+    <div class="products-table__product-type">
+        <!-- <div [textContent]="getGlNumberName()"></div> -->
+        <app-drop-down
+            #glNumberSelect
+            [class]="['--small-padding']"
+            [list]="listTypes"
+            [placeholder]="'Select Product Type'"
+            [container]="'body'"
+            [editItem]="inventory.productType"
+            [field]="'title'"
+            uiType="dark"
+            heightInput="32px"
+            dropdownWidth="392px"
+            (onSelectedItem)="onSelectProuctType($event)"
         >
         </app-drop-down>
     </div>

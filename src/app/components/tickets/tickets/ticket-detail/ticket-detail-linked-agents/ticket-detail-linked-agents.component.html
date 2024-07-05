@@ -9,7 +9,7 @@
         <div
             class="qt-button qt-button--with-icon --sm --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
             ngbDropdownToggle
-            *ngIf="!customerPortalStateService.isCustomerPortal"
+            *ngIf="!customerPortalStateService.isCustomerPortal && ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
         >
             <span class="qt-icon icon__links qt-sz-16 qt-dib qt-mr-4 qt-button-icon"></span>
             Link
@@ -33,6 +33,7 @@
             {{getLabelDevice(selectedDevice)}}
             <i
                 class="icn-sm qt-icon icon__close qt-icon__gray-400 qt-ml-4 pointer"
+                *ngIf="!customerPortalStateService.isCustomerPortal && ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
                 (click)="removeItem()"
             ></i>
         </div>

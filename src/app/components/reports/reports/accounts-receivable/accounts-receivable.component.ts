@@ -1,5 +1,4 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { ReportsStateService } from 'src/app/states/reports/reports-state.service';
 import { AccountsReceivable } from '../../class/accounts-receivable';
 
 @Component({
@@ -14,7 +13,7 @@ export class AccountsReceivableComponent implements OnInit {
   classes = [];
   selectedClient = null;
   loadingInProgress: boolean = false;
-  constructor(private reportsStateService: ReportsStateService, public cd: ChangeDetectorRef,) { }
+  constructor(public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
 

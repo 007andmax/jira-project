@@ -28,7 +28,7 @@ import { CompanyDevicesCustomAsideModule } from './company-devices-custom-aside/
 import { CompanyDevicesEditIpComponent } from './company-devices-edit-ip/company-devices-edit-ip.component';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { CompanyDevicesEditMacComponent } from './company-devices-edit-mac/company-devices-edit-mac.component';
-import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.module';
+import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 
 
@@ -62,7 +62,7 @@ import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.m
         CompanyDevicesCustomAsideModule,
         TextAreaModule,
         DropDownModule,
-        ClickOtsideModule,
+        ClickOutsideModule,
         KeyUpEnterModule
     ],
 

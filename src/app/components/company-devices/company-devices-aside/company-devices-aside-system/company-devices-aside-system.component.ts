@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { DeviceExtended } from '../../class/device-extended';
 import * as moment from "moment";
 import { DevicesService } from 'src/app/services/devices/devices.service';
@@ -13,13 +13,14 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { ModelDevice } from '../../company-devices-custom-aside/class/model-device';
 import { ManufactureDevice } from '../../company-devices-custom-aside/class/manufacture-device';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-company-devices-aside-system',
   templateUrl: './company-devices-aside-system.component.html',
   styleUrls: ['./company-devices-aside-system.component.scss']
 })
-export class CompanyDevicesAsideSystemComponent implements OnInit {
+export class CompanyDevicesAsideSystemComponent implements OnInit, OnDestroy {
   @ViewChild('datePickerInstalledOn') datePickerInstalledOn: DatePickerComponent;
   @ViewChild('datePickerWarranty') datePickerWarranty: DatePickerComponent;
   @ViewChild('nameLabel') nameLabel: CompanyDevicesEditLabelComponent;
@@ -36,6 +37,7 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
   toggleWindowSpecifications: boolean = false;
   toggleDeviceSpecifications: boolean = false;
   isInitEditNote = false;
+  sub: Subscription = new Subscription();
   constructor(private devicesService: DevicesService,
     private devicesStateService: DevicesStateService,
     private hardwareService: HardwareService,
@@ -46,9 +48,10 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
   ngOnInit() {
     if (this.devicesStateService.getManufactures().length > 0) this.manufactures = this.devicesStateService.getManufactures();
     if (!this.devicesStateService.isGetManufactures) this.devicesStateService.initGetManufactures();
-    this.devicesStateService.onGetManufactures.subscribe(data => {
+    let onGetManufactures = this.devicesStateService.onGetManufactures.subscribe(data => {
       this.manufactures = data;
     })
+    this.sub.add(onGetManufactures);
     if (this.device && !this.device.report.system) {
       this.device.report.system.warranty = this.getToDayDate();
       this.device.report.system.installDate = this.getToDayDate();
@@ -181,4 +184,7 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
   getRamSize(ramSize) {
     return (ramSize > 0 && ramSize / 1073741824 > 0) ? (ramSize / 1073741824) + 'GB' : 0 + 'GB';
   };
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

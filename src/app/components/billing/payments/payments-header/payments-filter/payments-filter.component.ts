@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter, ElementRef, OnDestroy } from '@angular/core';
 import { PaymentsFilter } from '../../class/payments-filter';
 import { PaymentsStateService } from 'src/app/states/payments/payments-state.service';
 import { MultiDatepickerComponent } from 'src/app/components/shared/multi-datepicker/multi-datepicker.component';
@@ -14,7 +14,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
   templateUrl: './payments-filter.component.html',
   styleUrls: ['./payments-filter.component.scss']
 })
-export class PaymentsFilterComponent implements OnInit {
+export class PaymentsFilterComponent implements OnInit, OnDestroy {
   @ViewChild('companyDp') companyDp: CompanyDropDownComponent;
   @ViewChild('statusDp') statusDp: DropDownComponent;
   @ViewChild('datesDp') datesDp: MultiDatepickerComponent;
@@ -102,5 +102,8 @@ export class PaymentsFilterComponent implements OnInit {
     if (event.target.value.length > 0) this.elRef.nativeElement.querySelector("#amount-filter").value = this.paymentsFilter.amount;
     this.paymentsStateService.onInitFilter(this.paymentsFilter);
     this.onChangeCounterFilter();
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

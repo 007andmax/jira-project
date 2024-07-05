@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { NonContractServicesService } from 'src/app/services/non-contract-services/non-contract-services.service';
@@ -7,13 +7,12 @@ import { ContractsStateService } from 'src/app/states/contracts/contracts-state.
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { Tax } from 'src/class/taxes/tax';
-import { InvoiceFormTicketEditTaxesComponent } from '../../../billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
 import { ContractsFilterType } from '../../class/contracts-filter-type';
 import { ServiceAgreement } from '../../class/service-agreement';
 import { ContractsBlockTimeValidate } from '../../contracts-aside/class/contracts-block-time-validate';
 import * as moment from "moment";
 import { TechUsersStateService } from 'src/app/components/shared/tech-users/services/tech-users-state.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 import { СontractsBlockTimeShare } from '../../contracts-aside/class/contracts-block-time-share';
 import { ContractsConfirmComponent } from '../../contracts-confirm/contracts-confirm.component';
 import { Subscription } from 'rxjs';
@@ -27,7 +26,7 @@ import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component'
   templateUrl: './contracts-aside-block-time-edit.component.html',
   styleUrls: ['./contracts-aside-block-time-edit.component.scss']
 })
-export class ContractsAsideBlockTimeEditComponent implements OnInit {
+export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
   @ViewChild('taxes') taxesDP: TaxesComponent;
   selectedCompany: any;
   selectedTaxes = [];
@@ -45,6 +44,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
   toggleNotifyAgentsUser: boolean = false;
   selectedUsers: any = [];
   userList = [];
+  @ViewChild('customerTooltip') customerTooltip: NgbTooltip;
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
     private contractsService: ContractsService,
@@ -62,6 +62,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
       this.taxes = data;
     })
+    this.sub.add(getOnTaxess);
     if (this.contractsBlockTime.interval) {
       this.selectedInterval = this.contractsBlockTime.interval;
     } else {
@@ -115,6 +116,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
     this.techState.onInitClear();
     this.selectedUsers = [];
   }
+
   getMinStartDate(interval, startDate) {
     let newMinStartDate;
     let now = new Date(startDate);
@@ -215,7 +217,11 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
     this.contractsBlockTime.setCompanyId((data) ? data.id : null);
     this.validate.resetCompany();
   }
+  onChangeRate(data) {
+    this.contractsBlockTime.rateExceeding = data;
+  }
   onTaxesChange(data) {
+    this.customerTooltip.open();
     this.contractsBlockTime.setTaxIds(data.map(item => item.id));
   }
   onSelectInterval(data) {

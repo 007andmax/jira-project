@@ -12,12 +12,16 @@ import { BillableProfileTicket } from './class/billable-profile-ticket';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { fadeInAnimation } from 'src/app/animations';
 
 
 @Component({
   selector: 'billable',
   templateUrl: './billable.component.html',
   styleUrls: ['./billable.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   providers: [TicketsListService]
 })
 export class BillableComponent implements OnInit, OnDestroy {
@@ -46,9 +50,10 @@ export class BillableComponent implements OnInit, OnDestroy {
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.leftPanelStateService.setBillingPage('new-billable');
     if (this.appService.getIsInit()) this.getList();
-    this.appService.getOnInit().subscribe(data => {
+    let getOnInit = this.appService.getOnInit().subscribe(data => {
       this.getList();
     })
+    this.sub.add(getOnInit);
     let changeBillable = this.billableRealTimeService.changeBillable.subscribe(data => {
       if (data.action == 'TICKET_LOCKED') {
         let key = Object.keys(data.data)[0];

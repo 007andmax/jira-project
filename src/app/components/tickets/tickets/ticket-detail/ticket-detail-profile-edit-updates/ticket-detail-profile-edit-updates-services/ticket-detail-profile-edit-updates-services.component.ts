@@ -37,13 +37,12 @@ export class TicketDetailProfileEditUpdatesServicesComponent implements OnInit, 
   currentCompany = null;
   currentService: TicketProfileFormService = new TicketProfileFormService();
   sub: Subscription = new Subscription();
-
   @Input() update: TicketProfileUpdate;
   service: TicketProfileService;
+
   constructor(
     private elRef: ElementRef,
     private permissionsService: PermissionsService,
-    private ticketsStateService: TicketsStateService,
     public companiesStateService: CompaniesStateService,
     public ticketStateService: TicketStateService) { }
   initUpdateMobile() {
@@ -162,9 +161,10 @@ export class TicketDetailProfileEditUpdatesServicesComponent implements OnInit, 
     this.service = new TicketProfileService(this.update.services[0]);
     this.currentCompany = this.companiesStateService.getCurrentCompany();
     this.getServices();
-    this.ticketStateService.getOnGetServicesList().subscribe(data => {
+    let getOnGetServicesList = this.ticketStateService.getOnGetServicesList().subscribe(data => {
       this.getServices();
     })
+    this.sub.add(getOnGetServicesList);
   }
   public selectService(item) {
     this.service.setItem(item);

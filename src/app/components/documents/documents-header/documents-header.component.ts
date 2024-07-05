@@ -44,9 +44,10 @@ export class DocumentsHeaderComponent implements OnInit {
    */
   ngOnInit() {
     this.activePage = this.leftPanelStateService.activePage;
-    this.leftPanelStateService.onFirstOpen.subscribe(data => {
+    let onFirstOpen = this.leftPanelStateService.onFirstOpen.subscribe(data => {
       this.activePage = data;
     })
+    this.sub.add(onFirstOpen);
   }
   clearSearch() {
     this.searchText = "";

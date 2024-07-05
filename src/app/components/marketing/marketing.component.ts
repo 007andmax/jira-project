@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { forkJoin, Subscription } from 'rxjs';
 import { ARCHIVE_USER, DEARCHIVE_USER, ARCHIVE_USERS } from 'src/app/const/confirm';
 import { MODE_MARKETING_USERS_LIST, TYPE_LIST_MARKETING_USERS } from 'src/app/const/users';
-import { Company } from 'src/app/interfaces/company/company';
 import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
 import { UsersService } from 'src/app/services/users/users.service';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
@@ -12,24 +11,25 @@ import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-s
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
 import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
-import { CrmCompanyIndustry } from '../setting/crm-settings/crm-company-industry/class/crm-company-industry';
 import { CrmCompanyJobTitle } from '../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { MarketingSubscriptionType } from '../setting/marketing-email/marketing-subscription-type/class/marketing-subscription-type';
 import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
 import { User } from '../users/class/user';
 import { UserChange } from '../users/class/user-change';
 import { UserCustomSubscription } from '../users/class/user-custom-subscription';
-import { UserDefaultSubscription } from '../users/class/user-default-subscription';
-import { UserFilter } from '../users/class/user-filter';
 import { UserListService } from '../users/services/user-list.service';
 import { UserCustomerCompaniesInfo } from '../users/class/user-customer-companies-info';
 import { UsersHeaderComponent } from '../users/users-header/users-header.component';
 import { UserFilters } from '../users/class/user-filters';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'marketing',
   templateUrl: './marketing.component.html',
   styleUrls: ['./marketing.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   providers: [UserListService]
 })
 export class MarketingComponent implements OnInit {
@@ -55,7 +55,6 @@ export class MarketingComponent implements OnInit {
     public cd: ChangeDetectorRef,
     private draftEmailStateService: DraftEmailStateService,
     private crmStateService: CrmStateService,
-    private marketingEmailService: MarketingEmailService,
     private usersRealTimeService: UsersRealTimeService,
     private marketingEmailStateService: MarketingEmailStateService,
     private websocketService: WebsocketService) { }
@@ -120,9 +119,10 @@ export class MarketingComponent implements OnInit {
       this.cd.detectChanges();
     })
     this.sub.add(getChangeCompanies);
-    this.usersStateService.closeDetailAside.subscribe(data => {
+    let closeDetailAside = this.usersStateService.closeDetailAside.subscribe(data => {
       this.setIdDetailUser('');
     })
+    this.sub.add(closeDetailAside);
     this.onInitSubscribe();
     this.jobTitleList = this.crmStateService.getJobTitleList();
     let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
@@ -290,5 +290,4 @@ export class MarketingComponent implements OnInit {
     this.usersStateService.clearGlobalFilter();
     this.websocketService.unSubsribeUsersFilters();
   }
-
 }

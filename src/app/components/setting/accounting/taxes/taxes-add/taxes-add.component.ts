@@ -1,7 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { map } from 'rxjs/operators';
-import { TaxesService } from '../taxes.service';
+import { TaxesService } from 'src/app/services/taxes/taxes.service';
+
 
 @Component({
   selector: 'taxes-add',

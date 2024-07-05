@@ -1,11 +1,10 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy, ElementRef, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, ElementRef, Input, ChangeDetectorRef } from '@angular/core';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { Subscription } from 'rxjs';
 import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
-import { DeviceTagsService } from 'src/app/services/device-tags/device-tags.service';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 
 @Component({
@@ -40,7 +39,6 @@ export class TechUsersListReportComponent extends DropDownComponent {
     this.sub.add(getOnUsers);
   }
   ngDoCheck() {
-
     if (this.reqList.length === 0) this.reqList = JSON.parse(JSON.stringify(this.list));
     if (this.editItem) this.selectedItem = (this.field) ? this.editItem : this.editItem;
   }

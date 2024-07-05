@@ -30,7 +30,9 @@ export class ForCreateProduct {
         this.quantity = data.quantity;
         this.discount = data.discount;
     }
-
+    public setDiscount(data) {
+        this.discount = data;
+    }
     public setDataFromEdit(data: ProductRecurringTicket) {
         this.quantity = data.quantity;
         this.discount = data.discount;

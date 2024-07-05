@@ -138,15 +138,15 @@
                                 <div
                                     class="ticket-detail-page__edit"
                                     appClickOtside
-                                    [init]="modeDescription === 'edit'"
+                                    [init]="modeDescription === 'edit' && ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
                                     [class]="'.ticket-detail-page__edit-wrap'"
                                     (onOutSide)="toggleNote()"
                                 >
                                     <div
-                                        class="ticket-detail-page__editor pointer"
-                                        [ngClass]="{'no-edit-note':!getPermissions('EDIT_TICKETS')}"
+                                        class="ticket-detail-page__editor"
+                                        [ngClass]="{'no-edit-note':!getPermissions('EDIT_TICKETS'),'pointer':ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)}"
                                         (blur)="modeDescription = 'edit'"
-                                        [attr.contenteditable]="getPermissions('EDIT_TICKETS')"
+                                        [attr.contenteditable]="getPermissions('EDIT_TICKETS') && ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
                                         id="ticket-note"
                                         placeholder="Enter description here"
                                     ></div>
@@ -193,10 +193,14 @@
                 *ngIf="!showPreloader"
             >
                 <ticket-detail-claim-info [ticketProfile]="ticketProfile"></ticket-detail-claim-info>
-                <ticket-detail-change-status [ticketProfile]="ticketProfile"></ticket-detail-change-status>
+                <ticket-detail-change-status
+                    #changeStatus
+                    [ticketProfile]="ticketProfile"
+                ></ticket-detail-change-status>
                 <ticket-detail-change-priority [ticketProfile]="ticketProfile"></ticket-detail-change-priority>
                 <ticket-detail-change-company [ticketProfile]="ticketProfile"></ticket-detail-change-company>
                 <ticket-detail-add-assigned-user
+                    [ticketProfile]="ticketProfile"
                     [listAssignedUser]="listAssignedUser"
                     (onSelectAssignedUser)="onSelectAssignedUser($event)"
                 ></ticket-detail-add-assigned-user>
@@ -205,11 +209,15 @@
                     [selectedCompanyId]="ticketProfile.company.id"
                 ></ticket-detail-linked-agents>
                 <ticket-detail-edit-tags
+                    [ticketProfile]="ticketProfile"
                     [selectedTag]="ticketProfile.tags"
                     (tagsChange)="onChangeTags($event,false)"
                     (tagsRemove)="onChangeTags($event,true)"
                 ></ticket-detail-edit-tags>
-                <ticket-detail-attachments [attachments]="ticketProfile.attachments"></ticket-detail-attachments>
+                <ticket-detail-attachments
+                    [ticketProfile]="ticketProfile"
+                    [attachments]="ticketProfile.attachments"
+                ></ticket-detail-attachments>
                 <!-- <div class="qt-input-block">
                     <span class="qt-input-block__label">Priority Level</span>
                     <app-drop-down

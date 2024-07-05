@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from "@angular/core";
-import { EmailSettingService } from "../email-setting.service";
+import { EmailSettingService } from "../../../../services/email-settings/email-setting.service";
 import { SettingService } from "src/app/services/setting/setting.service";
 import { ToastrService } from "ngx-toastr";
 import {

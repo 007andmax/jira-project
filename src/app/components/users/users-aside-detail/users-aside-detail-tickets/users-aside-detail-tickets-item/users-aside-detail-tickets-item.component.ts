@@ -27,9 +27,7 @@ export class UsersAsideDetailTicketsItemComponent implements OnInit {
     let date = new Date(this.ticket.createdAt);
     let currentDate = new Date();
     if (date.getFullYear() === currentDate.getFullYear() && date.getMonth() === currentDate.getMonth() && date.getDate() === currentDate.getDate()) {
-      let hours = (date.getHours() > 12) ? date.getHours() - 12 : date.getHours();
-      let type = (date.getHours() >= 12) ? 'PM' : 'AM';
-      return `${(hours < 10 ? '0' + hours : hours)}:${(date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes()} ${type}`;
+      return `${moment(new Date(date)).format('hh:mm A')}`;
     }
     return moment(date).format('DD MMM')
   }

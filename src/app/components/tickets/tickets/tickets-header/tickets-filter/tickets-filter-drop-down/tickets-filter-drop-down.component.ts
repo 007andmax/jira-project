@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CompanyTagsComponent } from 'src/app/components/companies/company-tags/company-tags.component';
 import { CompanyTagsListService } from 'src/app/components/companies/company-tags/services/company-tags-list.service';
 import { TicketsListService } from '../../../services/tickets-list.service';

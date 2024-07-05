@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tickets-permissions.service';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { TicketProfile } from '../../class/ticket-profile';
@@ -9,6 +9,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { DELETE_FOREVER, MOVE_TO_SPAM_OR_REPORT_TICKET } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ticket-detail-message',
@@ -16,7 +17,7 @@ import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.comp
   styleUrls: ['./ticket-detail-message.component.scss'],
   providers: [TicketsPermissionsService]
 })
-export class TicketDetailMessageComponent implements OnInit {
+export class TicketDetailMessageComponent implements OnInit, OnDestroy {
   @ViewChild('claimTicketBtn') claimTicketBtn: DisabledBtnDirective;
   @ViewChild('markAsOpenBillableBtn') markAsOpenBillableBtn: DisabledBtnDirective;
   @ViewChild('markAsOpenBtn') markAsOpenBtn: DisabledBtnDirective;
@@ -28,17 +29,20 @@ export class TicketDetailMessageComponent implements OnInit {
   currentUser: CurrentUser;
   isClaimTicket: boolean = false;
   isMarkAsOpen: boolean = false;
+  sub: Subscription = new Subscription();
   constructor(public ticketsPermissionsService: TicketsPermissionsService,
     private usersStateService: UsersStateService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     private permissionsService: PermissionsService,) { }
 
+
   ngOnInit() {
     this.currentUser = this.usersStateService.getCurrentUser();
-    this.usersStateService.onGetCurrentUser.subscribe(data => {
+    let onGetCurrentUser = this.usersStateService.onGetCurrentUser.subscribe(data => {
       this.currentUser = data;
     })
+    this.sub.add(onGetCurrentUser);
   }
   public getUserName(user: CurrentUser) {
     return (user) ? `${user.firstName} ${user.lastName}` : '';
@@ -116,4 +120,7 @@ export class TicketDetailMessageComponent implements OnInit {
       }
     }
   };
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

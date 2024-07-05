@@ -70,7 +70,7 @@
                         class="qt-df"
                         ngbDropdownItem
                         (click)="deleteFile(attachment.file.id)"
-                        *ngIf="!customerPortalStateService.isCustomerPortal"
+                        *ngIf="!customerPortalStateService.isCustomerPortal && ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
                     >
                         <i class="qt-icon icon__remove qt-bg-contain qt-sz-20 qt-mr-12"></i>
                         <span>Delete attachment</span>

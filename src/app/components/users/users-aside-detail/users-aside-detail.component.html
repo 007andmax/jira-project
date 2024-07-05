@@ -115,25 +115,41 @@
                         class="qt-icon icon__edit qt-icon__gray-400 qt-za-16 qt-sz-16 qt-bg-contain pointer"
                         *ngIf="getPermissions('EDIT_USERS')"
                     ></div>
-                    <input
-                        type="text"
-                        class="qt-editable-input qt-w100"
-                        [(ngModel)]="user.phoneNumbers[0].number"
-                        (input)="onCheckPhoneNumber(0)"
-                        (blur)="onUpdatePhoneNumber()"
-                        placeholder="Enter Primary Phone"
-                        prefix="+1"
-                        mask="(000) 000-0000 Ext: 999999||000-000-0000"
-                        [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                        [dropSpecialCharacters]="false"
-                        [disabled]="!getPermissions('EDIT_USERS')"
+                    <ng-template
+                        ngFor
+                        let-number
+                        let-i="index"
+                        [ngForOf]="user.phoneNumbers"
+                        [ngForTrackBy]="trackById"
                     >
-                    <mat-error
-                        class="invalid-feedback"
-                        *ngIf="!validate.getPhoneNumber(0)"
-                    >
-                        Phone number is required
-                    </mat-error>
+                        <div class="qt-df qt-ai-c">
+                            <div
+                                [ngClass]="{'icon__office-phone-gray':number.typeNumber == 'FAX',
+                        'icon__mobile_type':number.typeNumber == 'MOBILE',
+                         'icon__phone-gray':number.typeNumber == 'OFFICE'}"
+                                class=" qt-za-16 qt-sz-16 qt-bg-contain  qt-fs-0 qt-mr-6"
+                            ></div>
+                            <input
+                                type="text"
+                                class="qt-editable-input qt-w100"
+                                [(ngModel)]="number.number"
+                                (input)="onCheckPhoneNumber(i)"
+                                (blur)="onUpdatePhoneNumber()"
+                                placeholder="Enter Primary Phone"
+                                prefix="+1"
+                                mask="(000) 000-0000 Ext: 999999||000-000-0000"
+                                [specialCharacters]="['(',')',' ','-','E','x','t',':']"
+                                [dropSpecialCharacters]="false"
+                                [disabled]="!getPermissions('EDIT_USERS')"
+                            >
+                            <mat-error
+                                class="invalid-feedback"
+                                *ngIf="!validate.getPhoneNumber(i)"
+                            >
+                                Phone number is required
+                            </mat-error>
+                        </div>
+                    </ng-template>
                 </div>
             </div>
             <hr class="user-detail-aside__divider">

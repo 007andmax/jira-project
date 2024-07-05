@@ -4,7 +4,6 @@ import { DownloadAgentStateService } from 'src/app/states/download-agent/downloa
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { CompanyDownlaodAgent } from '../class/company-download-agent';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-download-agent',
@@ -13,7 +12,6 @@ import { environment } from 'src/environments/environment';
 })
 export class DownloadAgentComponent implements OnInit {
   downloadLink: string;
-  private apiUrl = environment.apiUrl;
   constructor(private downloadAgentService: DownloadAgentService, private downloadAgentStateService: DownloadAgentStateService,
     public activeModal: NgbActiveModal, private companiesService: CompaniesService) { }
 

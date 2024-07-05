@@ -325,3 +325,14 @@
   box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
   color: $green-800;
 }
+.serial-number {
+    position: static;
+    transform: unset;
+    width: 200px;
+    flex: 1;
+}
+/deep/.ticket-updates__ticket-price {
+  .tooltip-inner {
+    word-break: break-all;
+  }
+}

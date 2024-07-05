@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CurrentUser } from 'src/class/current-user/current-user';
 
@@ -7,16 +8,18 @@ import { CurrentUser } from 'src/class/current-user/current-user';
   templateUrl: './customer-portal-default.component.html',
   styleUrls: ['./customer-portal-default.component.scss']
 })
-export class CustomerPortalDefaultComponent implements OnInit {
+export class CustomerPortalDefaultComponent implements OnInit, OnDestroy {
   currentUser: CurrentUser;
   noPermissions: boolean = true;
+  sub: Subscription = new Subscription();
   constructor(private usersStateService: UsersStateService,) { }
 
   ngOnInit() {
     if (this.usersStateService.getCurrentUser()) this.getCurrentUser(this.usersStateService.getCurrentUser());
-    this.usersStateService.getOnGetCurrentuser().subscribe(data => {
+    let getOnGetCurrentuser = this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.getCurrentUser(data)
     })
+    this.sub.add(getOnGetCurrentuser);
   }
   getCurrentUser(data) {
     this.currentUser = data;
@@ -30,6 +33,9 @@ export class CustomerPortalDefaultComponent implements OnInit {
         if (item.customerUserRole.getPermission('VIEW_ALL_PAYMENTS')) this.noPermissions = false;
       }
     })
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
 }

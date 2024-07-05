@@ -5,7 +5,6 @@ import { AgentService } from 'src/app/services/agent/agent.service';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { KafkaStateService } from 'src/app/states/kafka/kafka-state.service';
-import { NETWORK_REMOVE_DEVICE } from '../../const/confirm';
 import { DevicesService } from '../../services/devices/devices.service';
 import { PasswordManagerService } from '../../services/password-manager/password-manager.service';
 import { PermissionsService } from '../../services/permissions/permissions.service';
@@ -15,20 +14,22 @@ import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.
 import { NetworkScanStateService } from '../../states/network-scan/network-scan-state.service';
 import { Device } from '../company-devices/class/device';
 import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
-import { NetworkScanDevice } from './class/network-scan-device';
 import { NetworkScanDevices } from './class/network-scan-devices';
 import { NetworkScanFilter } from './class/network-scan-filter';
 import { NetworkScanInstallAgent } from './class/network-scan-install-agent';
 import { NetworkScanSomeInfoForDevice } from './class/network-scan-some-info-for-devices';
-import { installationStatuses } from './const/const';
 import { CompanyNetworkScanService } from './services/company-network-scan.service';
 import { v4 as uuidv4 } from 'uuid';
 import { ToastrService } from 'ngx-toastr';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'app-company-network-scan-beta',
   templateUrl: './company-network-scan-beta.component.html',
   styleUrls: ['./company-network-scan-beta.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   providers: [CompanyNetworkScanService]
 })
 export class CompanyNetworkScanBetaComponent implements OnInit, OnDestroy {
@@ -61,8 +62,6 @@ export class CompanyNetworkScanBetaComponent implements OnInit, OnDestroy {
     private networkScanStateService: NetworkScanStateService,
     private passwordManagerService: PasswordManagerService,
     public activateRoute: ActivatedRoute,
-    private confirmStateService: ConfirmStateService,
-    private companyNetworkScanService: CompanyNetworkScanService,
     private leftPanelStateService: LeftPanelStateService,
     private companiesStateService: CompaniesStateService,
     private websocketService: WebsocketService,
@@ -74,9 +73,10 @@ export class CompanyNetworkScanBetaComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.kafkaStateService.getAssetConfigMessage().length > 0) this.onNetworkScan(this.kafkaStateService.getAssetConfigMessage());
-    this.kafkaStateService.onNetworkScan.subscribe((resp) => {
+    let onNetworkScan = this.kafkaStateService.onNetworkScan.subscribe((resp) => {
       this.onNetworkScan(resp)
     });
+    this.sub.add(onNetworkScan);
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.leftPanelStateService.changeStateWithoutNavigate('company-network-scan-beta');
     let id = this.activateRoute.snapshot.params['id'];
@@ -87,6 +87,7 @@ export class CompanyNetworkScanBetaComponent implements OnInit, OnDestroy {
       this.companyId = id;
       this.getDevices();
     });
+    this.sub.add(subscription);
 
   }
 

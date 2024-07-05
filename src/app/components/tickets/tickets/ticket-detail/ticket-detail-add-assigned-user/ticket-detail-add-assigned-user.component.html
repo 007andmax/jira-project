@@ -4,7 +4,7 @@
         <div
             class="qt-button qt-button--with-icon --sm --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
             (click)="openAssignedUser()"
-            *ngIf="!customerPortalStateService.isCustomerPortal"
+            *ngIf="!customerPortalStateService.isCustomerPortal && ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
         >
             <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-4 qt-button-icon"></span>
             Add
@@ -14,6 +14,7 @@
         #assignedUser
         class="assigned-user-ticket-detail"
         [container]="'body'"
+        [removable]="!customerPortalStateService.isCustomerPortal && ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
         [type]="'DETAIL_TICKET_ASSIGNED_USER'"
         [placement]="'bottom-left'"
         [userList]="userList"

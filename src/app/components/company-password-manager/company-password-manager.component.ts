@@ -3,12 +3,16 @@ import { PasswordManagerComponent } from '../password-manager/password-manager.c
 import { PasswordRecord } from '../password-manager/class/password-record';
 import { PasswordManagerListService } from '../password-manager/services/password-manager-list.service';
 import { REMOVE_RECORD } from '../../const/confirm';
+import { fadeInAnimation } from 'src/app/animations';
 
 
 @Component({
   selector: 'company-password-manager',
   templateUrl: './company-password-manager.component.html',
   styleUrls: ['./company-password-manager.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   providers: [PasswordManagerListService]
 })
 export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
@@ -28,7 +32,6 @@ export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
       this.onScroll();
     });
     this.sub.add(subscription);
-
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_RECORD) this.onRemoveRecord(this.passwordManagerStateService.getRecordForRemove().id);

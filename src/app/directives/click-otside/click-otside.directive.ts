@@ -4,7 +4,7 @@ import { Directive, HostListener, ElementRef, Input, Output, EventEmitter } from
   selector: '[appClickOtside]',
   exportAs: 'click'
 })
-export class ClickOtsideDirective {
+export class ClickOutsideDirective {
   @Input() init: boolean = false;
   @Input() class: string = "";
   @Output() onOutSide = new EventEmitter<any>();

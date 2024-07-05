@@ -1,7 +1,6 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { PasswordManagerService } from 'src/app/services/password-manager/password-manager.service';
-import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
 import { PasswordManagerStateService } from 'src/app/states/password-manager/password-manager-state.service';
 import { PasswordRecordCategories } from '../class/password-record-categories';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
@@ -11,7 +10,7 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
   templateUrl: './password-manager-add-category.component.html',
   styleUrls: ['./password-manager-add-category.component.scss']
 })
-export class PasswordManagerAddCategoryComponent implements OnInit {
+export class PasswordManagerAddCategoryComponent implements OnInit, OnDestroy {
   @Output() onClose: EventEmitter<any> = new EventEmitter();
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   name: string = "";
@@ -20,14 +19,14 @@ export class PasswordManagerAddCategoryComponent implements OnInit {
   sub: Subscription = new Subscription();
   constructor(
     private passwordManagerService: PasswordManagerService,
-    private passwordManagerStateService: PasswordManagerStateService,
-    private inventoryStateService: InventoryStateService,) { }
+    private passwordManagerStateService: PasswordManagerStateService) { }
 
   ngOnInit() {
     this.categories = this.passwordManagerStateService.getCategories();
-    this.passwordManagerStateService.onGetCategories.subscribe((data: Array<PasswordRecordCategories>) => {
+    let onGetCategories = this.passwordManagerStateService.onGetCategories.subscribe((data: Array<PasswordRecordCategories>) => {
       this.categories = data;
     })
+    this.sub.add(onGetCategories);
   }
   checkDublicateCategory() {
     var duplicateCategory = this.categories.filter((item) => {
@@ -51,6 +50,9 @@ export class PasswordManagerAddCategoryComponent implements OnInit {
   }
   public close() {
     this.onClose.emit(null);
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
 }

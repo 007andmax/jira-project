@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { User } from 'src/app/components/users/class/user';
 import { TicketsListService } from '../../../services/tickets-list.service';
 import { TechUserItem } from 'src/app/components/shared/tech-users/class/tech-user-item';
 
@@ -11,6 +10,7 @@ import { TechUserItem } from 'src/app/components/shared/tech-users/class/tech-us
 })
 export class AssignedTicketUserSelectedItemComponent implements OnInit {
   @Input() user: TechUserItem;
+  @Input() type: string;
   listColorNoAvatar = [];
   constructor(public ticketsListService: TicketsListService,) { }
 

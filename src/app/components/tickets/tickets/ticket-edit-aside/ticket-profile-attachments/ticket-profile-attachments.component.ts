@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TicketProfileAttachment } from '../../class/ticket-profile-attachment';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
-import { PreviewAttachmentComponent } from '../preview-attachment/preview-attachment.component';
 import { PreviewAttachmentStateService } from '../preview-attachment/services/preview-attachment-state.service';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -9,6 +8,7 @@ import { TicketStateService } from '../services/ticket-state.service';
 import { OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { TicketsPermissionsService } from '../services/tickets-permissions.service';
 
 @Component({
   selector: 'app-ticket-profile-attachments',
@@ -24,6 +24,7 @@ export class TicketProfileAttachmentsComponent implements OnInit, OnDestroy {
     public modalService: NgbModal,
     public customerPortalStateService: CustomerPortalStateService,
     public ticketStateService: TicketStateService,
+    public ticketsPermissionsService: TicketsPermissionsService,
     public confirmStateService: ConfirmStateService,) { }
 
 

@@ -1,14 +1,9 @@
-import { Component, OnInit, TemplateRef, ViewChild, OnDestroy, ViewContainerRef } from '@angular/core';
-import { EventEmitter } from '@angular/core';
-import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions, } from 'ngx-uploader';
+import { Component, OnInit, ViewChild, OnDestroy, ViewContainerRef } from '@angular/core';
 import { TicketService } from './../_services/ticket.service';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
 import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
-import { environment } from './../../../../environments/environment';
-import { searchTextPipe } from './../_pipe/searchText.pipe';
 import { CommonServices } from '../_services/common.service';
-import { DeviceDetailService } from '../_services/device_detail.service';
 import { CONFIGCONSTANTS } from '../config/app-constants';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
@@ -113,6 +108,7 @@ export class TicketTaskComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.sub.unsubscribe();
     $("body").removeClass("expandTicket");
   }
 

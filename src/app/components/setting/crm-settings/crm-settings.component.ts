@@ -8,10 +8,14 @@ import { CrmCompanyIndustryComponent } from './crm-company-industry/crm-company-
 import { CrmCompanyJobTitleComponent } from './crm-company-job-title/crm-company-job-title.component';
 import { CrmCompanyJobTypeComponent } from './crm-company-job-type/crm-company-job-type.component';
 import { CrmCompanyServiceTypeComponent } from './crm-company-service-type/crm-company-service-type.component';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'crm-settings',
   templateUrl: './crm-settings.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./crm-settings.component.scss']
 })
 export class CrmSettingsComponent implements OnInit, OnDestroy {

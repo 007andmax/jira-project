@@ -34,19 +34,19 @@
     <div class="qt-aside-modern__footer">
         <div class="qt-df">
             <button
-                class="qt-button qt-mr-12"
+                class="qt-button --gray qt-mr-12"
+                (click)="closed()"
+            >
+                Cancel
+            </button>
+            <button
+                class="qt-button "
                 appDisabledBtn
                 #editContract="disabled"
                 (onClick)="edit()"
             >
                 <span *ngIf="!editContract.isBlock()">Save</span>
                 <app-preloader-ticket *ngIf="editContract.isBlock()"></app-preloader-ticket>
-            </button>
-            <button
-                class="qt-button --gray"
-                (click)="closed()"
-            >
-                Cancel
             </button>
         </div>
     </div>

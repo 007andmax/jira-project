@@ -9,16 +9,19 @@ import { Subscription } from 'rxjs';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { ROLLBACK_INVOICE, REFUND_PAYMENTS } from 'src/app/const/confirm';
 import { InvoiceRealTimeService } from 'src/app/states/invoice/invoice-real-time.service';
-import { InvoicesAsidePreviewComponent } from './invoices-aside-preview/invoices-aside-preview.component';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toastr-progress-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'app-invoices',
   templateUrl: './invoices.component.html',
   styleUrls: ['./invoices.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   providers: [InvoicesListService]
 })
 export class InvoicesComponent implements OnInit, OnDestroy {
@@ -30,12 +33,9 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   public sort: string = '';
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
-  // showPreviewInvoice: boolean = false;
   offset: number = 40;
   public direction: string = 'ASC';
-  //previewInvoice: Invoice;
   selectedInvoices: Array<Invoice> = [];
-  //@ViewChild('previewInvoiceAside') previewInvoiceAside: InvoicesAsidePreviewComponent;
   sub: Subscription = new Subscription();
   container = document.body.querySelector(".main-container");
   constructor(private invoicesService: InvoicesService,
@@ -75,7 +75,6 @@ export class InvoicesComponent implements OnInit, OnDestroy {
       this.onScroll();
     })
     this.sub.add(getOnCompanies);
-
     let getOnInitFilter = this.invoiceStateService.getOnInitFilter().subscribe(data => {
       this.invoicesFilter.onInitLeftOffset(false);
       this.invoicesFilter.resetLeftOffset();
@@ -100,7 +99,6 @@ export class InvoicesComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
-
     let changeInvoice = this.invoiceRealTimeService.changeInvoice.subscribe(data => {
       if (data.action === 'INVOICE_SAVED') {
         let index = this.invoices.findIndex(item => item.id === data.data.id);
@@ -131,7 +129,6 @@ export class InvoicesComponent implements OnInit, OnDestroy {
             this.invoicesFilter.updateLeftOffset();
           }
         });
-
       }
       if (data.action === 'INVOICE_DELETED') {
         let index = this.invoices.findIndex(item => item.id === data.data.id);
@@ -146,7 +143,6 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(changeInvoice);
     let getClosedAside = this.invoiceStateService.getClosedAside().subscribe(data => {
-
       this.selectedCompanyId = null;
       this.invoices.forEach(item => {
         item.selected = false;
@@ -182,12 +178,6 @@ export class InvoicesComponent implements OnInit, OnDestroy {
 
   onPreviewInvoice(data) {
     this.invoiceStateService.togglePreview(data.id);
-    /*  this.previewInvoice = data;
-      if (this.showPreviewInvoice) {
-        this.cd.detectChanges();
-        this.previewInvoiceAside.onGetInvoice();
-      }
-      this.showPreviewInvoice = true;*/
   }
   onRollbackInvoice(invoice) {
     this.toastrProgressStateService.onInit(invoice.id);

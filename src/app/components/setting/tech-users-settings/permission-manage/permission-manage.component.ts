@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { PermissionManageService } from './permission-manage.service';
+import { PermissionManageService } from '../../../../services/permission-manage/permission-manage.service';
 import { map, catchError } from 'rxjs/operators';
 import { SettingService } from 'src/app/services/setting/setting.service';
 import { UsersService } from 'src/app/services/users/users.service';
 import { ToastrService } from 'ngx-toastr';
 import { SettingStateService } from 'src/app/states/setting/setting-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { Subscription } from 'rxjs';
 declare var $: any;
 
 @Component({
@@ -41,12 +42,11 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
   viewDocumentsRelatedPermissions = [];
   editCategoryDocumentsRelatedPermissions = [];
   sections = {};
-
+  sub: Subscription = new Subscription();
   showDeleteRole = false;
 
   constructor(
     private permissionManageService: PermissionManageService,
-    private settingService: SettingService,
     private usersService: UsersService,
     private toastrService: ToastrService,
     private settingStateService: SettingStateService,
@@ -73,18 +73,16 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
     this.getPermissionManage();
     this.getRoleNames();
     if (this.companiesStateService.getCurrentCompany()) this.currentCompany(this.companiesStateService.getCurrentCompany());
-    this.companiesStateService.onCurrentCompany.subscribe(res => {
+    let onCurrentCompany = this.companiesStateService.onCurrentCompany.subscribe(res => {
       this.currentCompany(res);
     })
+    this.sub.add(onCurrentCompany);
     this.getAllUsers();
     this.settingStateService.setComponentName('PermissionManageComponent');
   }
 
   public getRoles() {
     return this.roles;
-  }
-  ngOnDestroy() {
-
   }
 
   /**
@@ -504,5 +502,8 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
         })
         .join('');
     }
+  }
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }

@@ -1,12 +1,9 @@
 import { Component, OnInit, ChangeDetectorRef, OnDestroy, ViewChild } from '@angular/core';
 import { Subscription } from "rxjs";
-
-
 import { ProductService } from 'src/app/services/product/product.service';
 import { ForCreateProduct } from '../class/for-create-product';
 import { RecurringService } from 'src/app/services/recurring/recurring.service';
 import { ForCreateService } from '../class/for-create-service';
-import { DevicesService } from 'src/app/services/devices/devices.service';
 import { RecurringTicketsStateService } from '../services/recurring-tickets-state.service';
 import { CreateRecurringTicketsProduct } from '../class/create-recurring-tickets-product';
 import { CreateRecurringTicketsService } from '../class/create-recurring-tickets-service';
@@ -20,6 +17,7 @@ import { TextAreaDirective } from 'src/app/directives/text-area/text-area.direct
 import { TechUserItem } from 'src/app/components/shared/tech-users/class/tech-user-item';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { DevicesRecurringTicketsComponent } from '../devices-recurring-tickets/devices-recurring-tickets.component';
+import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
 
 @Component({
   selector: 'app-recurring-tickets-edit-aside',
@@ -49,7 +47,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.description = directive;
   };
   @ViewChild('deviceDp') deviceDp: DevicesRecurringTicketsComponent;
-
+  sub: Subscription = new Subscription();
   /**
    * Creates an instance of the RecurringTicketsAddAsideComponent with the injected services
    * @param {ProductService} productService Service to work with products
@@ -69,6 +67,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     public createService: RecurringTicketsService,
     private usersStateService: UsersStateService,
     private contractsService: ContractsService,
+    private inventoryStateService: InventoryStateService,
   ) {
   }
 
@@ -76,13 +75,14 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
    * Initializes edit recurring ticket. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-    this.getItemListProducts();
+
 
     this.onCheckEditMode();
     if (this.usersStateService.getAllUsers().length > 0) this.onGetTechUsers(this.usersStateService.getAllUsers());
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.onGetTechUsers(data);
     })
+    this.sub.add(getOnUsers);
   }
 
   /**
@@ -99,7 +99,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   private onCheckEditMode() {
     let editmode = this.recurringState.getEditMode().subscribe((data: RecurringTicket) => {
       this.opened = true;
-
+      this.getItemListProducts();
       this.onEditEditMode(data);
     })
     this.createService.addSubscription(editmode);
@@ -202,9 +202,12 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
    * Get product list
    */
   public getItemListProducts() {
+    this.inventoryStateService.setPreloader(true);
     this.productService.getCategories().subscribe((res: any) => {
       this.productList = res;
-
+      this.inventoryStateService.setproducts(this.productList);
+      this.inventoryStateService.onInitGetProducts(this.productList);
+      this.inventoryStateService.setPreloader(false);
     });
   }
 
@@ -280,6 +283,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   public selectProduct(item, index) {
     item = (item) ? { ...item, ...{ quantity: 1, discount: 1 } } : null;
     this.products[index] = new ForCreateProduct(item);
+    this.products[index].setDiscount(0);
     this.cd.detectChanges();
   }
 
@@ -482,6 +486,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.sub.unsubscribe();
     this.createService.clearSubscriptions();
   }
 
