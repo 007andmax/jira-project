@@ -144,6 +144,7 @@ import { ProductTypeCheckUseModule } from './components/setting/products-setting
 import { MatChipComponent } from './components/shared/mat-chip/mat-chip.component';
 import { MatChipTagComponent } from './components/shared/mat-chip-tag/mat-chip-tag.component';
 import { MatFormFieldComponent } from './components/shared/mat-form-field/mat-form-field.component';
+import { MatChipListComponent } from './components/shared/mat-chip-list/mat-chip-list.component';
 declare var $: any;
 
 /**

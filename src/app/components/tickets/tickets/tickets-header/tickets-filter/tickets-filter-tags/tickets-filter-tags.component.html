@@ -5,7 +5,7 @@
     [placement]="placement"
 >
     <app-mat-form-field ngbDropdownAnchor>
-        <div>
+        <app-mat-chip-list>
             <app-dynamic-tooltip
                 [position]="'top'"
                 #productTooltip
@@ -41,7 +41,7 @@
                 (input)="onSearch($event)"
                 (keyup)="onKeyUp($event)"
             >
-        </div>
+        </app-mat-chip-list>
     </app-mat-form-field>
     <div
         class="dropdown-menu"

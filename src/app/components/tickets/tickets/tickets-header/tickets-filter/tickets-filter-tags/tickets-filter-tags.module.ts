@@ -7,6 +7,7 @@ import { MatSelectModule, MatChipsModule, MatIconModule } from '@angular/materia
 import { DynamicTooltipModule } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.module';
 import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.module';
 import { MatFormFieldModule } from 'src/app/components/shared/mat-form-field/mat-form-field.module';
+import { MatChipListModule } from 'src/app/components/shared/mat-chip-list/mat-chip-list.module';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import { MatFormFieldModule } from 'src/app/components/shared/mat-form-field/mat
         FormsModule,
         DynamicTooltipModule,
         MatChipModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        MatChipListModule
     ],
     exports: [TicketsFilterTagsComponent]
 
