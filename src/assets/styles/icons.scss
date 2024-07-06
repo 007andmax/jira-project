@@ -29,14 +29,11 @@
 
 .icon {
   // Start Color Icon
-  &__unsubscribe-user {
-    background-image: url("/assets/img/icons/unsubscribe-user.svg");
+  &__unsubscribe {
+    background-image: url("/assets/img/icons/unsubscribe.svg");
   }
   &__status-green {
     background-image: url("/assets/img/icons/status-green.svg");
-  }
-  &__exclamation {
-    mask-image: url("/assets/img/icons/exclamation.svg");
   }
   &__templete-thumb {
     background-image: url("/assets/img/icons/templete-thumb.svg");
@@ -94,18 +91,6 @@
   }
   &__graphic-card {
     background-image: url("/assets/img/icons/graphic-card.svg");
-  }
-  &__block-time-billing {
-    background-image: url("/assets/img/icons/block-time-billing.svg");
-  }
-  &__contract-claim-ticket {
-    background-image: url("/assets/img/icons/contract-claim-ticket.svg");
-  }
-  &__per-user {
-    background-image: url("/assets/img/icons/per-user.svg");
-  }
-  &__product-contract {
-    background-image: url("/assets/img/icons/product-contract.svg");
   }
   &__no-devices-installed {
     background-image: url("/assets/img/icons/no-devices-installed.svg");
@@ -170,21 +155,18 @@
   &__timeline {
     background-image: url("/assets/img/icons/timeline.svg");
   }
-  &__computer-blue {
-    background-image: url("/assets/img/icons/computer-blue.svg");
+  &__computer {
+    background-image: url("/assets/img/icons/computer.svg");
   }
   // END Color Icon
-  &__assign-date {
-    mask-image: url("/assets/img/icons/assign-date.svg");
+  &__warning {
+    mask-image: url("/assets/img/icons/warning.svg");
   }
   &__assign-user-plus {
     mask-image: url("/assets/img/icons/assign-user-plus.svg");
   }
   &__notes {
     mask-image: url("/assets/img/icons/notes.svg");
-  }
-  &__list {
-    mask-image: url("/assets/img/icons/list.svg");
   }
   &__remote-access-ticket {
     mask-image: url("/assets/img/icons/remote-access-ticket.svg");
@@ -351,6 +333,15 @@
   }
   &__resend {
     mask-image: url("/assets/img/icons/resend.svg");
+  }
+  &__time-book {
+    mask-image: url("/assets/img/icons/time-book.svg");
+  }
+  &__timer-start {
+    mask-image: url("/assets/img/icons/timer-start.svg");
+  }
+  &__user-tag {
+    mask-image: url("/assets/img/icons/user-tag.svg");
   }
   &__subscription {
     mask-image: url("/assets/img/icons/subscription.svg");
@@ -613,7 +604,7 @@
   &__remote-access {
     mask-image: url("/assets/img/icons/remote-access.svg");
   }
-  &__computer-green {
+  &__device-connected {
     mask-image: url("/assets/img/icons/computer-green.svg");
   }
   &__uninstall-agent { // TODO check

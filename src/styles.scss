@@ -686,7 +686,8 @@ documents-edit-info {
 .billing-dashboard-page__content {
   .input-group {
     .btn-icon-date-picker {
-      background-color: transparent;
+      background-color: $blue-light-600;
+      transform: translateY(2px);
     }
   }
 }

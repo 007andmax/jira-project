@@ -73,7 +73,7 @@
             <div class="support-timeline-status qt-mr-24">
                 <div
                     class="support-timeline-status__step1 qt-bg-contain"
-                    [ngClass]="{'qt-icon icon__computer-green qt-icon__green-600' : item.status === 'CONNECTED',
+                    [ngClass]="{'qt-icon icon__device-connected qt-icon__green-600' : item.status === 'CONNECTED',
                 'qt-icon icon__devices' : item.status !== 'CONNECTED'}"
                 ></div>
                 <div
@@ -138,7 +138,7 @@
                 </div>
                 <div
                     class="support-timeline-status__step3 qt-bg-contain"
-                    [ngClass]="{'qt-icon icon__computer-green qt-icon__green-600' : item.status === 'CONNECTED' && item.online,
+                    [ngClass]="{'qt-icon icon__device-connected qt-icon__green-600' : item.status === 'CONNECTED' && item.online,
                     'qt-icon icon__devices' : item.status !== 'CONNECTED' || !item.online}"
                 ></div>
             </div>
