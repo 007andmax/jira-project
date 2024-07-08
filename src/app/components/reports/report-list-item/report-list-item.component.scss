@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .d-report{
   position: absolute;
   top: -3px;
@@ -47,11 +49,13 @@
 .d-software{
   display: inline-block;
   max-width: 100%;
-  background-image: url(/assets/img/icons/software-image.svg);
-  background-repeat: no-repeat;
+  mask-image: url(/assets/img/icons/software.svg);
+  background-color: $gray-500;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
   width: 24px;
   height: 24px;
-  background-position: center;
 }
 
 .d-financial{

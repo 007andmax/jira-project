@@ -180,6 +180,9 @@
       background-repeat: no-repeat;
       background-position: center;
       background-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     &__text-info {
       display: flex;
