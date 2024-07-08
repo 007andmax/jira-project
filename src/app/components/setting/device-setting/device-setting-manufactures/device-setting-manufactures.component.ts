@@ -30,7 +30,7 @@ export class DeviceSettingManufacturesComponent implements OnInit, OnDestroy {
     private devicesService: DevicesService) { }
 
   ngOnInit() {
-    if (this.devicesStateService.getManufactures().length > 0 && this.devicesStateService.isGetManufactures) {
+    if (this.devicesStateService.isGetManufactures) {
       this.manufactures = this.devicesStateService.getManufactures();
       this.showPreloader = false;
     }
