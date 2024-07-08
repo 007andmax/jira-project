@@ -54,7 +54,12 @@
                 [ngForTrackBy]="trackByIndex"
             >
                 <div class="qt-df qt-ai-c qt-mb-12">
-                    <i class="icon__phone-gray-500 qt-bg-contain qt-sz-16 qt-mr-8"></i>
+                    <i
+                        class="qt-bg-contain qt-sz-16 qt-mr-8"
+                        [ngClass]="{'icon__office-phone-gray':phoneNumber.typeNumber == 'FAX',
+                        'icon__mobile_type':phoneNumber.typeNumber == 'MOBILE',
+                         'icon__phone-gray':phoneNumber.typeNumber == 'OFFICE'}"
+                    ></i>
                     <preview-phone-mask
                         [class]="'company-info-aside__ticket-created-name ticket-detail-contact__subtitle'"
                         *ngIf="phoneNumber.number"
