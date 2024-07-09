@@ -22,6 +22,7 @@ import { AppStateService } from 'src/app/states/app/app-state.service';
 import { AppService } from 'src/app/states/app/app.service';
 import { DatePickerComponent } from '../../shared/date-picker/date-picker.component';
 import { CompanyDropDownComponent } from '../../shared/company-drop-down/company-drop-down.component';
+import { PasswordRecord } from '../class/password-record';
 
 
 @Component({
@@ -121,6 +122,9 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     this.addRecord.setDisabled(true);
     this.passwordManagerService.saveRecord(this.passwordRecordAdd.getDataForAdd(this.selectedUserAndDevices))
       .subscribe((res) => {
+        console.log("res", res);
+        this.passwordManagerStateService.onChangeRealTime.next({ action: "PASSWORD_RECORD_CREATED", data: res });
+        //  console.log("new PasswordRecord(newChange.data)", new PasswordRecord(res))
         this.addRecord.setDisabled(false);
         this.close();
       }, err => {

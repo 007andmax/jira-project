@@ -291,6 +291,7 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
     this.saveRecord.setDisabled(true);
     this.passwordManagerService.editRecord(this.editItem.getDataForEdit(this.selectedUserAndDevices))
       .subscribe((res) => {
+        this.passwordManagerStateService.onChangeRealTime.next({ action: "PASSWORD_RECORD_UPDATED", data: res });
         this.passwordManagerStateService.changePassword(this.editItem);
         this.saveRecord.setDisabled(false);
         this.close();
