@@ -69,7 +69,6 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
     this.sub.add(geLefttFilter);
     let onChangeRealTime = this.passwordManagerStateService.onChangeRealTime.subscribe(newChange => {
       if (newChange.action === 'PASSWORD_RECORD_CREATED') {
-        console.log(newChange.data);
         let index = this.list_records.findIndex(item => item.id == newChange.data.id);
         if (index == -1) this.list_records.push(new PasswordRecord(newChange.data));
       } else if (newChange.action === 'PASSWORD_RECORD_UPDATED') {

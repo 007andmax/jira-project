@@ -353,7 +353,6 @@ export class OutgoingEmailComponent implements OnInit {
    */
   changeEncryption(value) {
     this.encryptionType = this.encryptionTypes.find(itme => itme.type == value);
-    console.log("this.encryptionType", this.encryptionType);
     if (value) {
       this.smtpForm.patchValue({
         encryptionType: value == "PLAIN" ? "NONE" : value
@@ -365,7 +364,6 @@ export class OutgoingEmailComponent implements OnInit {
           this.smtpForm.patchValue({
             port: port
           });
-          console.log("this.smtpForm", value);
         }
       } else {
         this.initialized = true;
@@ -494,7 +492,6 @@ export class OutgoingEmailComponent implements OnInit {
   }
   checkTestServer() {
     this.testServerBtn.setDisabled(true);
-    console.log("this.smtpForm.value.encryptionType", this.smtpForm.value.encryptionType);
     this.settingService.checkTestServer({
       "login": this.smtpForm.value.login,
       "password": this.smtpForm.value.password,
