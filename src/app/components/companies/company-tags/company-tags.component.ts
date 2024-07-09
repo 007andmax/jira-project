@@ -111,7 +111,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     this.selectedTag = [];
     this.tags = this.reqTags;
     this.userInput.nativeElement.blur();
-    this.formField.checkSelectedItems(this.selectedTag);
+    if (this.formField) this.formField.checkSelectedItems(this.selectedTag);
     this.dp.close();
     this.cd.detectChanges();
   }
