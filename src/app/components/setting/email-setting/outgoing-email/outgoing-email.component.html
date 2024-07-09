@@ -106,6 +106,7 @@
                                 [field]="'type'"
                                 [sort]="false"
                                 [isBlockClear]="true"
+                                [isDisabled]="!usedEmailVia.value"
                                 (onSelectedItem)="changeEncryption($event.type)"
                             >
                             </app-drop-down>
@@ -166,6 +167,7 @@
                         appDisabledBtn
                         #testServerBtn="disabled"
                         (onClick)="checkTestServer()"
+                        [disabled]="!usedEmailVia.value"
                     >
                         <span class="icon__button-server--gray-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
                         <span *ngIf="!testServerBtn.isBlock()">Test Server</span>
