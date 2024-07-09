@@ -8,7 +8,7 @@ import { Component, ContentChildren, ElementRef, Input, OnChanges, OnInit, Query
 })
 export class MatFormFieldComponent implements OnInit {
   classes = [];
-  @ViewChild('content') content;
+  @Input() placeholder: string;
   constructor(private elRef: ElementRef,) { }
 
   ngOnInit() {
@@ -25,7 +25,6 @@ export class MatFormFieldComponent implements OnInit {
   }
   ngAfterViewInit() {
     console.log(this.elRef.nativeElement.querySelector("input"));
-    console.log("content", this.content);
     this.elRef.nativeElement.querySelector("input").onfocus = () => {
       if (!this.classes.some(item => item == "mat-focused")) this.classes.push("mat-focused");
     }

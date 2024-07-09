@@ -6,14 +6,14 @@
         <div class="mat-form-field-flex">
             <!--  -->
             <div class="mat-form-field-infix">
-                <ng-content #content></ng-content>
+                <ng-content></ng-content>
                 <span class="mat-form-field-label-wrapper">
                     <!--  -->
                     <label
                         class="mat-form-field-label mat-empty mat-form-field-empty"
                         for="mat-form-field"
+                        [textContent]="placeholder"
                     >
-                        Select tech user
                     </label>
                 </span>
             </div>

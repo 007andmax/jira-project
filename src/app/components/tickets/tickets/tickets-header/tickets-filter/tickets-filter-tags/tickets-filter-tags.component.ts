@@ -12,7 +12,7 @@ import { MatFormFieldComponent } from 'src/app/components/shared/mat-form-field/
 })
 export class TicketsFilterTagsComponent extends CompanyTagsComponent {
   @Input() placement: string = 'bottom-left';
-  @ViewChild('formField') formField: MatFormFieldComponent;
+
   public ngOnInit() {
     if (this.tagsStateService.getTags().length == 0) {
       let getTags = this.tagsService.getTags().subscribe((data) => {
@@ -78,24 +78,7 @@ export class TicketsFilterTagsComponent extends CompanyTagsComponent {
   isSelected(id) {
     return this.selectedTag.find(item => item.id == id);
   }
-  public toggleItem(newItem) {
-    let findIndex = this.selectedTag.findIndex(item => item.id === newItem.id);
-    if (findIndex > -1) {
-      this.selectedTag.splice(findIndex, 1);
-    } else {
-      this.selectedTag.push(newItem);
-      this.tags = this.reqTags;
-    }
-    this.tagsChange.emit(this.selectedTag);
-    this.userInput.nativeElement.value = '';
 
-    if (this.searchName.length > 0) {
-      this.searchName = "";
-      this.setDefaultScoll();
-      this.onScroll();
-    }
-    this.formField.checkSelectedItems(this.selectedTag);
-  }
   /**
  * Remove tag from selected
  * @param index - user index
@@ -109,14 +92,5 @@ export class TicketsFilterTagsComponent extends CompanyTagsComponent {
       this.cd.detectChanges();
     }
   }
-  public clearWithOutChanges() {
-    this.userInput.nativeElement.value = '';
-    this.searchName = "";
-    this.selectedTag = [];
-    this.tags = this.reqTags;
-    this.userInput.nativeElement.blur();
-    this.formField.checkSelectedItems(this.selectedTag);
-    this.dp.close();
-    this.cd.detectChanges();
-  }
+
 }

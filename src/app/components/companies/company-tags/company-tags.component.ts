@@ -11,6 +11,7 @@ import { CompanyTag } from './class/company-tag';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { DeviceTagsStateService } from 'src/app/states/device-tags/device-tags-state.service';
 import { DeviceTagsService } from 'src/app/services/device-tags/device-tags.service';
+import { MatFormFieldComponent } from '../../shared/mat-form-field/mat-form-field.component';
 
 @Component({
   selector: 'app-company-tags',
@@ -44,6 +45,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('dp') dp: any;
   @Output() tagsChange = new EventEmitter();
+  @ViewChild('formField') formField: MatFormFieldComponent;
   /**
    * Creates an instance of the TagsComponent with the injected services
    * @param {TagsService} tagsService Service to work with tags
@@ -109,6 +111,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     this.selectedTag = [];
     this.tags = this.reqTags;
     this.userInput.nativeElement.blur();
+    this.formField.checkSelectedItems(this.selectedTag);
     this.dp.close();
     this.cd.detectChanges();
   }
@@ -261,6 +264,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
       if (!this.checkRemoveTag(index)) return;
       this.selectedTag.splice(index, 1);
       this.tagsChange.emit(this.selectedTag);
+      this.formField.checkSelectedItems(this.selectedTag);
       this.cd.detectChanges();
     }
   }
@@ -283,7 +287,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
       this.setDefaultScoll();
       this.onScroll();
     }
-
+    this.formField.checkSelectedItems(this.selectedTag);
   }
 
   public setSelectedTag(data) {
