@@ -34,7 +34,7 @@
                     *ngIf="!showPreloader"
                 >
                     <div
-                        class="text-center"
+                        class="text-center qt-df qt-jc-c qt-mb-24 qt-mt-24"
                         *ngIf="manufactures.length == 0"
                     >
                         No manufacture to show
@@ -87,6 +87,7 @@
     </div>
     <app-device-setting-models
         #models
+        [isManufacturePreloader]="showPreloader"
         class="qt-w100 qt-ml-32 qt-mr-32 qt-pos-rel"
     ></app-device-setting-models>
 </div>

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ManufactureDevice } from 'src/app/components/company-devices/company-devices-custom-aside/class/manufacture-device';
 import { ModelDevice } from 'src/app/components/company-devices/company-devices-custom-aside/class/model-device';
 import { DevicesService } from 'src/app/services/devices/devices.service';
@@ -22,6 +22,7 @@ export class DeviceSettingModelsComponent implements OnInit, OnDestroy {
   manufactures: Array<ManufactureDevice> = [];
   models: Array<ModelDevice> = [];
   showPreloader: boolean = false;
+  @Input() isManufacturePreloader: boolean = false;
   addModel: boolean = false;
   filter: DeviceSettingFilter = new DeviceSettingFilter();
   sub: Subscription = new Subscription();
