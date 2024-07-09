@@ -51,7 +51,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.leftPanelStateService.changeStateWithoutNavigate('company-devices');
-    if (this.deviceTagsStateService.getTags().length == 0) this.deviceTagsStateService.onInitGetTags();
+    if (this.deviceTagsStateService.getTags().length == 0 && !this.customerPortalStateService.isCustomerPortal) this.deviceTagsStateService.onInitGetTags();
     let id = this.activateRoute.snapshot.params['id'];
     if (id) {
       if (this.customerPortalStateService.isCustomerPortal) this.websocketService.onInitConnectCustomerUser("company-devices", id);
