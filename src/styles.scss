@@ -3436,9 +3436,6 @@ input.--input-error:hover {
     @include body-m;
     color: $gray-400;
   }
-  .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
-    display: none;
-  }
   .mat-chip-list-wrapper {
     .mat-standard-chip {
       padding: 4px 6px 3px 8px;

@@ -1,12 +1,20 @@
-<div class="mat-form-field mat-primary mat-form-field-type-mat-chip-list mat-form-field-appearance-legacy mat-form-field-can-float mat-form-field-hide-placeholder mat-form-field-should-float">
+<div
+    class="mat-form-field mat-primary mat-form-field-type-mat-chip-list mat-form-field-appearance-legacy mat-form-field-can-float mat-form-field-hide-placeholder mat-form-field-should-float"
+    [ngClass]="classes"
+>
     <div class="mat-form-field-wrapper">
         <div class="mat-form-field-flex">
             <!--  -->
             <div class="mat-form-field-infix">
-                <ng-content></ng-content>
+                <ng-content #content></ng-content>
                 <span class="mat-form-field-label-wrapper">
                     <!--  -->
-                    <label class="mat-form-field-label">Select tag</label>
+                    <label
+                        class="mat-form-field-label mat-empty mat-form-field-empty"
+                        for="mat-form-field"
+                    >
+                        Select tech user
+                    </label>
                 </span>
             </div>
             <!--  -->

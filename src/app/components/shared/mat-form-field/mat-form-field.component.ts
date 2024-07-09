@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Component, ContentChildren, ElementRef, Input, OnChanges, OnInit, QueryList, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 
 @Component({
   selector: 'app-mat-form-field',
@@ -7,11 +7,34 @@ import { Component, OnInit, TemplateRef, ViewContainerRef } from '@angular/core'
 
 })
 export class MatFormFieldComponent implements OnInit {
-
-  constructor() { }
+  classes = [];
+  @ViewChild('content') content;
+  constructor(private elRef: ElementRef,) { }
 
   ngOnInit() {
 
+  }
+
+  public checkSelectedItems(data) {
+    console.log('data', data);
+    if (data.length > 0 && !this.classes.some(item => item == "mat-form-selected")) this.classes.push("mat-form-selected");
+    if (data.length == 0 && this.classes.some(item => item == "mat-form-selected")) {
+      let index = this.classes.findIndex(item => item == "mat-form-selected");
+      this.classes.splice(index, 1);
+    }
+  }
+  ngAfterViewInit() {
+    console.log(this.elRef.nativeElement.querySelector("input"));
+    console.log("content", this.content);
+    this.elRef.nativeElement.querySelector("input").onfocus = () => {
+      if (!this.classes.some(item => item == "mat-focused")) this.classes.push("mat-focused");
+    }
+    this.elRef.nativeElement.querySelector("input").onblur = () => {
+      if (this.classes.some(item => item == "mat-focused")) {
+        let index = this.classes.findIndex(item => item == "mat-focused");
+        this.classes.splice(index, 1);
+      }
+    }
   }
 
 }

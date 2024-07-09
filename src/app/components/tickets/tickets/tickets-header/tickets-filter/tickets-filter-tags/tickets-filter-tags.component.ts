@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { CompanyTagsComponent } from 'src/app/components/companies/company-tags/company-tags.component';
 import { CompanyTagsListService } from 'src/app/components/companies/company-tags/services/company-tags-list.service';
 import { TicketsListService } from '../../../services/tickets-list.service';
+import { MatFormFieldComponent } from 'src/app/components/shared/mat-form-field/mat-form-field.component';
 
 @Component({
   selector: 'app-tickets-filter-tags',
@@ -11,6 +12,7 @@ import { TicketsListService } from '../../../services/tickets-list.service';
 })
 export class TicketsFilterTagsComponent extends CompanyTagsComponent {
   @Input() placement: string = 'bottom-left';
+  @ViewChild('formField') formField: MatFormFieldComponent;
   public ngOnInit() {
     if (this.tagsStateService.getTags().length == 0) {
       let getTags = this.tagsService.getTags().subscribe((data) => {
@@ -75,5 +77,46 @@ export class TicketsFilterTagsComponent extends CompanyTagsComponent {
 */
   isSelected(id) {
     return this.selectedTag.find(item => item.id == id);
+  }
+  public toggleItem(newItem) {
+    let findIndex = this.selectedTag.findIndex(item => item.id === newItem.id);
+    if (findIndex > -1) {
+      this.selectedTag.splice(findIndex, 1);
+    } else {
+      this.selectedTag.push(newItem);
+      this.tags = this.reqTags;
+    }
+    this.tagsChange.emit(this.selectedTag);
+    this.userInput.nativeElement.value = '';
+
+    if (this.searchName.length > 0) {
+      this.searchName = "";
+      this.setDefaultScoll();
+      this.onScroll();
+    }
+    this.formField.checkSelectedItems(this.selectedTag);
+  }
+  /**
+ * Remove tag from selected
+ * @param index - user index
+ */
+  public remove(index): void {
+    if (index >= 0) {
+      if (!this.checkRemoveTag(index)) return;
+      this.selectedTag.splice(index, 1);
+      this.tagsChange.emit(this.selectedTag);
+      this.formField.checkSelectedItems(this.selectedTag);
+      this.cd.detectChanges();
+    }
+  }
+  public clearWithOutChanges() {
+    this.userInput.nativeElement.value = '';
+    this.searchName = "";
+    this.selectedTag = [];
+    this.tags = this.reqTags;
+    this.userInput.nativeElement.blur();
+    this.formField.checkSelectedItems(this.selectedTag);
+    this.dp.close();
+    this.cd.detectChanges();
   }
 }
