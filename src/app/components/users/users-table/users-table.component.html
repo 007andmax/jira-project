@@ -68,70 +68,10 @@
             </div>
         </ng-template>
     </div>
-  </div>
-  <div
-    class="users-table__name"
-    (click)="showDetailUser()"
-  >
-    <div class="qt-df qt-ai-c">
-      <div
-        class="users-table__name--avatar"
-        [ngStyle]="{'background':  usersStateService.getUserAvatarUrl(user)}"
-        [textContent]="usersStateService.getNameForAvatar(user)"
-      ></div>
-      <div>
-        <div
-          class="users-table__name--user-name qt-fw-600"
-          [textContent]="getUserName()"
-        ></div>
-        <div
-          class="users-table__name--profession qt-color-gray-600"
-          [textContent]="getJobTitle()"
-        ></div>
-      </div>
-      <div
-        class="qt-icon qt-icon icon__permission-role qt-sz-20 qt-ml-12"
-        *ngIf="type == TYPE_LIST_COMPANY_USERS && isPrimaryContact()"
-        (mouseenter)="addTooltip.show($event.target)"
-        (mouseleave)="addTooltip.hide()"
-      ></div>
-      <app-dynamic-tooltip
-        [content]="'Primary Contact'"
-        [position]="'top'"
-        #addTooltip
-      ></app-dynamic-tooltip>
-    </div>
-  </div>
-  <div
-    class="users-table__company qt-fd-c qt-ai-fs qt-jc-c"
-    [ngClass]="{'users-table__company-full': type === TYPE_LIST_ALL_USERS}"
-    *ngIf="type === TYPE_LIST_ALL_USERS || type === TYPE_LIST_MARKETING_USERS"
-    (click)="showDetailUser()"
-  >
-    <ng-template
-      ngFor
-      let-company
-      [ngForOf]="user.customerCompaniesInfo"
-      [ngForTrackBy]="trackByIndex"
-    >
-      <div class="qt-df qt-ai-c">
-        <div [textContent]="company.clientCompanyName"></div>
-      </div>
-    </ng-template>
-  </div>
-  <div
-    class="users-table__email ellipsis"
-    *ngIf="type === TYPE_LIST_COMPANY_USERS"
-    (click)="showDetailUser()"
-  >
-    <app-dynamic-tooltip
-      [content]="user.primaryEmail"
-      [position]="'top'"
-      #emailTooltip
-    ></app-dynamic-tooltip>
-    <span
-      (mouseenter)="emailTooltip.show($event.target)"
-      (mouseleave)="emailTooltip.hide()"
+    <div
+        class="users-table__email ellipsis"
+        *ngIf="type === TYPE_LIST_COMPANY_USERS"
+        (click)="showDetailUser()"
     >
         <app-dynamic-tooltip
             [content]="user.primaryEmail"
@@ -149,33 +89,11 @@
         class="users-table__industry"
         (click)="showDetailUser()"
     >
-      <div class="qt-df qt-ai-c">
-        <div>
-          <div
-            *ngIf="phone.typeNumber === 'FAX'"
-            class="qt-sz-16 qt-mr-6 qt-icon icon__phone-old"
-          ></div>
-          <div
-            *ngIf="phone.typeNumber === 'MOBILE' || phone.typeNumber === 'OFFICE'"
-            class="qt-sz-16 qt-mr-6 qt-icon icon__phone"
-          ></div>
-        </div>
-        <preview-phone-mask
-          [class]="'users-table__contract-no--number'"
-          *ngIf="phone.number"
-          [number]="phone.number"
-        ></preview-phone-mask>
-      </div>
-    </ng-template>
-  </div>
-  <div
-    class="users-table__subscription"
-    *ngIf="type === TYPE_LIST_COMPANY_USERS"
-  >
-    <user-table-default-subscription
-      class="users-table__subscription--dropdown"
-      (onChangeDefault)="onChangeDefaultSubscriptions($event)"
-      [defaultSubscriptions]="defaultSubscriptions"
+        <span>{{ getUserIndustry() }}</span>
+    </div>
+    <div
+        class="users-table__contract-no qt-fd-c qt-ai-fs qt-jc-c"
+        (click)="showDetailUser()"
     >
         <ng-template
             ngFor
@@ -243,87 +161,6 @@
         >
             {{ user.portalAccessStatus }}
         </span>
-  </div>
-  <div class="users-table__menu">
-    <div class="qt-df qt-button-square-wrap">
-      <div
-        class="qt-button-square qt-button-square__prepend pointer"
-        *ngIf="!showArchivedUsers && !customerPortalStateService.isCustomerPortal"
-        (click)="showAsideForDraftEmail()"
-        (mouseenter)="draftEmailTooltip.show($event.target)"
-        (mouseleave)="draftEmailTooltip.hide()"
-      >
-        <app-dynamic-tooltip
-          [content]="'Draft Email'"
-          [position]="'top'"
-          #draftEmailTooltip
-        ></app-dynamic-tooltip>
-        <div class="qt-icon icon__email qt-sz-16 pointer qt-bg-contain"></div>
-      </div>
-      <div
-        ngbDropdown
-        [container]="'body'"
-        [placement]="'bottom-right'"
-      >
-        <div
-          class="qt-button-square qt-button-square__afterpend pointer"
-          id="dropdownBasic1"
-          ngbDropdownToggle
-        >
-          <div class="qt-ic-c qt-icon icon__more qt-pointer qt-sz-16 qt-bg-contain"></div>
-        </div>
-        <ul
-          class="qt-dropdown-menu"
-          ngbDropdownMenu
-          aria-labelledby="dropdownBasic1"
-        >
-          <li
-            class="pointer"
-            *ngIf="!showArchivedUsers && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user))"
-            (click)="edit()"
-            ngbDropdownItem
-          >
-            <div class="qt-icon icon__edit qt-bg-contain qt-sz-20 qt-mr-12"></div>
-            Edit
-          </li>
-          <li
-            class="pointer"
-            *ngIf="!showArchivedUsers && getPermissions('EDIT_USERS') && type !== TYPE_LIST_MARKETING_USERS && (user.portalAccessStatus == 'Unauthorized' || user.portalAccessStatus == 'Invite sent')"
-            (click)="sendInvite(user.primaryEmail)"
-            ngbDropdownItem
-          >
-            <div class="qt-icon icon__email-send qt-sz-20 qt-bg-contain pointer qt-mr-10"></div>
-            Send Invite
-          </li>
-          <li
-            class="pointer"
-            *ngIf="type == TYPE_LIST_COMPANY_USERS && !isPrimaryContact()"
-            (click)="resetPrimaryContact()"
-            ngbDropdownItem
-          >
-            <div class="qt-icon qt-icon icon__permission-role qt-sz-20 qt-mr-12"></div>
-            Set as Primary contact
-          </li>
-          <li
-            class="pointer qt-dropdown-menu__item-red qt-dropdown-menu__top-line"
-            *ngIf="currentUser && (!customerPortalStateService.isCustomerPortal && currentUser.checkPermission('ARCHIVE_USERS') ||  customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user) && !isPrimaryContact())  && !showArchivedUsers"
-            (click)="delete()"
-            ngbDropdownItem
-          >
-            <div class="qt-icon icon__remove qt-icon icon__remove qt-icon__red-600 qt-bg-contain qt-sz-20 qt-mr-12"></div>
-            Archive
-          </li>
-          <li
-            class="pointer qt-dropdown-menu__item-red qt-dropdown-menu__top-line"
-            *ngIf="currentUser && currentUser.checkPermission('ARCHIVE_USERS') && showArchivedUsers"
-            (click)="restore()"
-            ngbDropdownItem
-          >
-            <div class="qt-icon icon__remove qt-icon__red-600 qt-icon__red-600 qt-sz-20 qt-mr-12"></div>
-            Restore
-          </li>
-        </ul>
-      </div>
     </div>
     <div class="users-table__menu">
         <div class="qt-df qt-button-square-wrap">
