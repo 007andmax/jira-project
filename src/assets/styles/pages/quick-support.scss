@@ -47,15 +47,6 @@
       display: flex;
       align-items: center;
     }
-    &__close {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background-color: $gray-50;
-      background-position: center;
-      background-size: 18px;
-      background-repeat: no-repeat;
-    }
   }
 
 }
@@ -117,8 +108,8 @@
     height: 24px;
   }
   &__step2 {
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
     margin: 8px;
   }
   &__line {

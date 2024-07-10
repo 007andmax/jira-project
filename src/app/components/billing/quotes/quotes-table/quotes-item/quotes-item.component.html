@@ -58,7 +58,7 @@
     </div>
     <div
         class="quotes-table__status"
-        [ngClass]="{'cursor-default':!(quote.status === 'TICKETED' && !customerPortalStateService.isCustomerPortal) && 
+        [ngClass]="{'cursor-default':!(quote.status === 'TICKETED' && !customerPortalStateService.isCustomerPortal) &&
     quote.status !== 'INVOICED'}"
     >
         <span
@@ -126,7 +126,7 @@
                 (click)="convertToTicket()"
                 *ngIf="quote.checkStatus(['APPROVED']) && !customerPortalStateService.isCustomerPortal"
             >
-                <div class="qt-icon icon__ticket qt-sz-20 qt-mr-12"></div>
+                <div class="qt-icon icon__tickets qt-sz-20 qt-mr-12"></div>
                 Convert to Ticket
             </li>
             <li
