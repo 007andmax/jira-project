@@ -7,7 +7,7 @@
     <app-mat-form-field
         ngbDropdownAnchor
         #formField
-        [placeholder]="'Select tech user'"
+        [placeholder]="'Select tag'"
     >
         <app-mat-chip-list>
             <app-dynamic-tooltip
@@ -40,7 +40,7 @@
                 ngbDropdownToggle
                 placeholder="Select tag"
                 #userInput
-                class="pointer pointer mat-chip-input mat-input-element"
+                class="pointer mat-chip-input mat-input-element"
                 autocomplete="off"
                 (input)="onSearch($event)"
                 (keyup)="onKeyUp($event)"

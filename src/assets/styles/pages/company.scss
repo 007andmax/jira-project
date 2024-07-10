@@ -19,10 +19,6 @@ company-associate {
         border: unset;
       }
     }
-    .mat-form-field-appearance-legacy .mat-form-field-underline,
-    .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
-      display: none;
-    }
     .mat-form-field-appearance-legacy .mat-form-field-wrapper {
       padding: 0;
       position: relative;
@@ -40,13 +36,6 @@ company-associate {
         height: 42px !important;
         margin: 0;
       }
-    }
-  }
-}
-company-dash-associate {
-  company-associate {
-    .mat-form-field-label {
-      padding: 12px 10px 10px 0px !important;
     }
   }
 }

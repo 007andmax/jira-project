@@ -13,6 +13,9 @@ import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-toolt
 import { ManufacturesDropDownComponent } from './manufactures-drop-down/manufactures-drop-down.component';
 import { ModelsDropDownComponent } from './models-drop-down/models-drop-down.component';
 import { CompanyDevicesAssestTypeDropDownComponent } from './company-devices-assest-type-drop-down/company-devices-assest-type-drop-down.component';
+import { MatChipModule } from '../../shared/mat-chip/mat-chip.module';
+import { MatFormFieldModule } from '../../shared/mat-form-field/mat-form-field.module';
+import { MatChipListModule } from '../../shared/mat-chip-list/mat-chip-list.module';
 
 
 @NgModule({
@@ -27,9 +30,9 @@ import { CompanyDevicesAssestTypeDropDownComponent } from './company-devices-ass
         CommonModule,
         FormsModule,
         DropDownModule,
-        MatSelectModule,
-        MatChipsModule,
-        MatIconModule,
+        MatChipModule,
+        MatFormFieldModule,
+        MatChipListModule,
         PreloaderTicketModule,
         DisabledBtnModule,
         DatePickerModule,

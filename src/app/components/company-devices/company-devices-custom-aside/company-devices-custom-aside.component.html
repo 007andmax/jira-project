@@ -44,12 +44,12 @@
                     [(ngModel)]="device.name"
                     placeholder="Enter device name"
                 >
-                <mat-error
+                <div
                     class="invalid-feedback"
                     *ngIf="!validate.getName()"
                 >
                     Field is required
-                </mat-error>
+                </div>
             </div>
         </div>
         <div class="qt-inputs-row">
@@ -147,12 +147,12 @@
                     [ngClass]="{'--input-error': !validate.getIpAdress()}"
                     (input)="validate.resetIpAdress()"
                 >
-                <mat-error
+                <div
                     class="invalid-feedback"
                     *ngIf="!validate.getIpAdress()"
                 >
                     Enter a valid IP value
-                </mat-error>
+                </div>
             </div>
             <div class="qt-input-block qt-f50">
                 <div class="qt-input-block__label">Remote Control port</div>
@@ -173,12 +173,12 @@
                     [ngClass]="{'--input-error': !validate.getMacAdress()}"
                     (input)="validate.resetMacAdress()"
                 >
-                <mat-error
+                <div
                     class="invalid-feedback"
                     *ngIf="!validate.getMacAdress()"
                 >
                     Enter a valid MAC address value - format XXXXXXXXXXXX
-                </mat-error>
+                </div>
             </div>
         </div>
         <div class="qt-inputs-row">
