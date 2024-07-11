@@ -518,10 +518,6 @@ documents-edit-info {
       .mat-form-field-infix {
         border: none;
       }
-      .mat-form-field-appearance-legacy .mat-form-field-underline,
-      .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
-        display: none;
-      }
       .mat-form-field-appearance-legacy .mat-form-field-wrapper {
         padding: 0;
         position: relative;
@@ -3512,10 +3508,7 @@ app-company-devices-tags {
         border: none;
       }
 
-      .mat-form-field-appearance-legacy .mat-form-field-underline,
-      .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
-        display: none;
-      }
+     
 
       .mat-form-field-appearance-legacy .mat-form-field-wrapper {
         padding: 0;
