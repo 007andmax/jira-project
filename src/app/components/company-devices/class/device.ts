@@ -28,6 +28,7 @@ export class Device {
     timing: DeviceTiming = new DeviceTiming();
     remoteSessions: Array<DeviceRemoteSessions> = [];
     tags: Array<DeviceTag> = [];
+    isCustom: boolean = false;
     constructor(data) {
         for (const key in data) {
             this[key] = data[key];
