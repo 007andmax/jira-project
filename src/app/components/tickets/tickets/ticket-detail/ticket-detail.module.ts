@@ -86,6 +86,7 @@ import { AddAssignedUserNoteComponent } from './ticket-detail-profile-form-updat
 import { TicketDetailTicketsDetailsComponent } from './ticket-detail-tickets/ticket-detail-tickets-details/ticket-detail-tickets-details.component';
 import { TicketDetailTicketsComponent } from './ticket-detail-tickets/ticket-detail-tickets.component';
 import { TicketDetailTicketsStatusComponent } from './ticket-detail-tickets/ticket-detail-tickets-status/ticket-detail-tickets-status.component';
+import { CompanyUsersDropDownModule } from '../ticket-add-aside/company-users-drop-down/company-users-drop-down.module';
 
 
 
@@ -183,7 +184,8 @@ import { TicketDetailTicketsStatusComponent } from './ticket-detail-tickets/tick
         KeyUpEnterModule,
         DropDownModule,
         CompanyDropDownModule,
-        DndModule
+        DndModule,
+        CompanyUsersDropDownModule
     ],
 
 
