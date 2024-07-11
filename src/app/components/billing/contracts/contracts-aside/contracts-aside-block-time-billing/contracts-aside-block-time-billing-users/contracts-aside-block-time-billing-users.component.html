@@ -1,11 +1,10 @@
 <div class="ticket-edit-user-tags contract-time-users">
-    <mat-chip-list class="example-chip">
-        <mat-chip
+    <app-mat-chip-list class="example-chip">
+        <app-mat-chip
             class="selected-tag-user"
             *ngFor="let user of selectedUsers; let i = index"
-            [selectable]="selectable"
-            [removable]="removable"
-            (removed)="remove(i)"
+            [isRemove]="true"
+            (onClose)="remove(i)"
         >
             <div class="assigne-user-item">
                 <div
@@ -17,14 +16,7 @@
                     class="assigne-user-name"
                     [textContent]="getUserName(user)"
                 ></div>
-                <mat-icon
-                    class="assigne-user-cancel-icon"
-                    matChipRemove
-                    *ngIf="removable"
-                >
-                    cancel
-                </mat-icon>
             </div>
-        </mat-chip>
-    </mat-chip-list>
+        </app-mat-chip>
+    </app-mat-chip-list>
 </div>

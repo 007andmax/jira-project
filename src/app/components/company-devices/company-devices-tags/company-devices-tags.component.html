@@ -3,44 +3,31 @@
     ngbDropdown
     #dp="ngbDropdown"
 >
-    <mat-form-field
+    <app-mat-form-field
         ngbDropdownAnchor
         [ngClass]="{'hidde-label' :!showLabel}"
     >
-        <mat-chip-list
-            #chipList
-            aria-label="Fruit selection"
-        >
-            <mat-chip
+        <app-mat-chip-list>
+            <app-mat-chip
                 *ngFor="let tag of selectedTag; let i = index"
-                [selectable]="selectable"
-                [removable]="!isDisabled"
-                (removed)="remove(i)"
+                (onClose)="remove(i)"
+                [isRemove]="!isDisabled"
             >
                 {{tag.name}}
-                <mat-icon
-                    matChipRemove
-                    *ngIf="!isDisabled"
-                >
-                    cancel
-                </mat-icon>
-            </mat-chip>
+            </app-mat-chip>
             <input
                 id="dropdownServices"
                 ngbDropdownToggle
                 #userInput
                 class="company-tag-input pointer"
-                [matChipInputFor]="chipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                [matChipInputAddOnBlur]="addOnBlur"
                 (input)="onSearch($event)"
                 (keyup)="onKeyUp($event)"
                 autocomplete="off"
                 [ngClass]="{'disabled': isDisabled}"
                 [disabled]="isDisabled"
             >
-        </mat-chip-list>
-    </mat-form-field>
+        </app-mat-chip-list>
+    </app-mat-form-field>
     <div
         class="select-wrapper user-aside-tags-dropdown"
         ngbDropdownMenu

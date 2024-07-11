@@ -189,8 +189,8 @@
             class="ticket-edit-user-tags contract-time-users qt-mt-16"
             *ngIf="contractsBlockTime.shares.length > 0"
         >
-            <mat-chip-list class="example-chip">
-                <mat-chip
+            <app-mat-chip-list class="example-chip">
+                <app-mat-chip
                     class="selected-tag-user"
                     *ngFor="let user of contractsBlockTime.shares; let i = index"
                 >
@@ -205,8 +205,8 @@
                             [textContent]="getUserName(getUser(user.userId))"
                         ></div>
                     </div>
-                </mat-chip>
-            </mat-chip-list>
+                </app-mat-chip>
+            </app-mat-chip-list>
         </div>
     </div>
     <div class="qt-df qt-mb-16 qt-mt-24">

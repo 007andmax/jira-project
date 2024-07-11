@@ -1,12 +1,16 @@
 @import './src/assets/styles/variable';
-
-.contract-time-users {
-    mat-chip {
+/deep/.contract-time-users {
+    app-mat-chip {
       border-radius: 16px !important;
       border: solid 1px $gray-200;
       background-color: $gray-50;
       padding: 4px;
       height: 32px;
+      .mat-standard-chip {
+        padding: 0px;
+        margin: 0px;
+        border: none;
+      }
 
       .assigne-user-item {
         display: flex;
