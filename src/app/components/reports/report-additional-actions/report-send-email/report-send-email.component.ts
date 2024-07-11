@@ -41,6 +41,7 @@ export class ReportSendEmailComponent extends DraftEmailComponent {
     })
     this.sub.add(showAsideSendReport);
     let showAsideSendReportInvoice = this.draftEmailStateService.showAsideSendReportInvoice.subscribe(data => {
+      console.log("showAsideSendReportInvoice");
       this.opened = true;
       this.draftReport = new ReportEmail();
       this.type = TYPE_REPORT_INVOICE;
@@ -140,10 +141,10 @@ export class ReportSendEmailComponent extends DraftEmailComponent {
     this.filesInfo = new FilesInfo();
     this.action = null;
     this.validateReport = new ReportSendEmailValidate();
-    this.sub.unsubscribe();
   }
   ngOnDestroy(): void {
     this.validateReport = new ReportSendEmailValidate();
+    this.sub.unsubscribe();
   }
   trackByIndex(index, item) {
     return index;
