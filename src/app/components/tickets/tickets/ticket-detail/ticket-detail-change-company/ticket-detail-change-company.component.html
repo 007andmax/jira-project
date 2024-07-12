@@ -8,7 +8,7 @@
             #userCompanyTooltip
         ></app-dynamic-tooltip>
         <i
-            *ngIf="ticketProfile.ticketSource === 'FROM_EMAIL' && !checkExistServicesProducts() && getCompany(ticketProfile.company.id)"
+            *ngIf="ticketProfile.ticketSource === 'FROM_EMAIL' && !checkExistServicesProducts() && getCompany(ticketProfile.company.id) && getCompany(ticketProfile.company.id).isUnknown"
             class="icon__help default-services-page__question-icon qt-sz-12 qt-ic-c"
             (mouseenter)="userCompanyTooltip.show($event.target)"
             (mouseleave)="userCompanyTooltip.hide()"
@@ -24,7 +24,7 @@
         [list]="listCompanies"
         [sort]="true"
         (onSelectedItem)="onSelectCompany($event)"
-        [isDisabled]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
+        [isDisabled]="true"
     ></app-drop-down>
     <company-drop-down
         *ngIf="ticketProfile.ticketSource === 'FROM_EMAIL' && !checkExistServicesProducts() && getCompany(ticketProfile.company.id) && getCompany(ticketProfile.company.id).isUnknown || !(ticketProfile.ticketSource === 'FROM_EMAIL' && !checkExistServicesProducts() && getCompany(ticketProfile.company.id) && !getCompany(ticketProfile.company.id).isUnknown)"
