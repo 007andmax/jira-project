@@ -29,10 +29,14 @@ export class TicketDetailPasswordsDetailsComponent implements OnInit {
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
+    this.initDefaultPasswordRecordList();
+  }
+  public initDefaultPasswordRecordList() {
     this.container = this.elRef.nativeElement.querySelector(".ticket-detail-passwords__body");
     this.elRef.nativeElement.querySelector(".ticket-detail-passwords__body").scrollTo(0, 0);
     this.filter.setSort('DESCRIPTION');
     this.filter.setCompany({ id: this.ticketProfile.company.id });
+    this.setDefaultScoll();
     this.onScroll();
   }
   public onScroll() {

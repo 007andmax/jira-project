@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Company } from 'src/app/interfaces/company/company';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -24,6 +24,7 @@ export class TicketDetailChangeCompanyComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     public ticketsPermissionsService: TicketsPermissionsService,
     private modalService: NgbModal,
+    public cd: ChangeDetectorRef,
     private ticketsService: TicketsService,) { }
 
   ngOnInit() {
@@ -42,6 +43,10 @@ export class TicketDetailChangeCompanyComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+  }
+  public selectItemWithOutChanges(data) {
+    this.selectedCompany = data;
+    this.cd.markForCheck();
   }
   getTextForTooltip() {
     if (this.ticketProfile.ticketSource === 'FROM_EMAIL' && !this.checkExistServicesProducts() && this.getCompany(this.ticketProfile.company.id) && !this.getCompany(this.ticketProfile.company.id).isUnknown) return 'The ticket creator is associated with many customer companies. You can change the customer company of the ticket.';

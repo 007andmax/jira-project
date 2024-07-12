@@ -19,7 +19,8 @@ import { Subscription } from 'rxjs';
 export class CompanyUsersDropDownComponent extends DropDownComponent {
   @Input() isShowTooltip: boolean = false;
   sub: Subscription = new Subscription();
-  selectedCustomerCompany: UserCustomerCompaniesInfo;
+  @Input() selectedCustomerCompany: UserCustomerCompaniesInfo;
+  @Input() selectedItem = null;
   constructor(public elRef: ElementRef,
     public companiesStateService: CompaniesStateService,
     public usersStateService: UsersStateService,
@@ -50,7 +51,7 @@ export class CompanyUsersDropDownComponent extends DropDownComponent {
  * @returns {String} This is the result
 */
   getSelectedItemText() {
-    return (this.selectedItem) ? `${this.getUserName(this.selectedItem)} - ${this.selectedCustomerCompany.clientCompanyName}` : "";
+    return (this.selectedItem && this.selectedCustomerCompany) ? `${this.getUserName(this.selectedItem)} - ${this.selectedCustomerCompany.clientCompanyName}` : "";
   }
   /**
  * @description Init logic to get user list from global request

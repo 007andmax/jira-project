@@ -106,7 +106,12 @@ export class TicketsService {
   }
   public changeSubjectNoteTicket(id, subject, note, companyId = null, createdBy = null) {
     let data = { id: id, subject: subject, note: note, companyId: companyId, createdBy: createdBy };
-    return this.http.put(this.apiUrl + `v2/tickets/edit`, data);
+    return this.http.put(this.apiUrl + `v2/tickets/edit`, data).pipe(
+      tap(data => {
+        this.toastrService.success("The ticket creator has been successfully changed");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public removeTicketStatus(ticket_id) {
     return this.http.delete(this.apiUrl + `ticket/status/${ticket_id}`).pipe(
