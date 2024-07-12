@@ -36,7 +36,7 @@
           'icon__server' : device.getFieldForCheckIcon() === 'server',
             'icon__tablet' : device.getFieldForCheckIcon() === 'tablet',
             'icon__network_device' : device.getFieldForCheckIcon() === 'network device',
-            'icon__phone-old icon-color' : device.getFieldForCheckIcon() === 'phone',
+            'icon__old-phone' : device.getFieldForCheckIcon() === 'phone',
              'icon__generic_device' : device.getFieldForCheckIcon() === 'generic device',
         '--ofline': !device.online }"
                 ngbDropdownToggle
@@ -111,7 +111,7 @@
                             ngbTooltip="Phone"
                             ngbDropdownItem
                         >
-                            <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 qt-icon icon__phone-old"></i>
+                            <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 qt-icon icon__old-phone"></i>
                         </li>
                         <li
                             (click)="setIcon('generic device')"
@@ -264,7 +264,7 @@
                 class="qt-df qt-ai-c qt-pointer"
                 (click)="openAside('UPDATES')"
             >
-                <div class="update-label-yellows qt-ic-c qt-mr-6 qt-sz-16"></div>
+                <div class="qt-icon icon__subscription qt-icon__blue-light-600 qt-ic-c qt-mr-6 qt-sz-16"></div>
                 <div>Updates</div>
             </div>
         </div>
@@ -277,7 +277,7 @@
             Device Detail
         </ng-template>
         <div
-            class="qt-ic-c qt-icon icon__external-link qt-pointer qt-sz-16"
+            class="qt-ic-c qt-icon icon__external-link qt-pointer qt-sz-24"
             placement="top"
             *ngIf="device.agentId && !customerPortalStateService.isCustomerPortal"
             [ngbTooltip]="tipDeviceDetail"

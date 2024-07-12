@@ -411,7 +411,7 @@
                                         class="qt-df qt-ai-c qt-pointer"
                                         (click)="openAside('UPDATES',asset)"
                                     >
-                                        <div class="update-label-yellows qt-ic-c qt-mr-6 qt-sz-16"></div>
+                                        <div class="qt-icon icon__subscription qt-icon__blue-light-600 qt-ic-c qt-mr-6 qt-sz-16"></div>
                                         <div>Updates</div>
                                     </div>
                                 </div>
@@ -449,7 +449,7 @@
                                     #tipDeviceDetailTooltip
                                 ></app-dynamic-tooltip>
                                 <div
-                                    class="qt-ic-c qt-icon icon__external-link qt-pointer qt-sz-16"
+                                    class="qt-ic-c qt-icon icon__external-link qt-pointer qt-sz-24"
                                     *ngIf="asset.ID"
                                     (mouseenter)="tipDeviceDetailTooltip.show($event.target)"
                                     (mouseleave)="tipDeviceDetailTooltip.hide()"
@@ -657,7 +657,7 @@
                                 ngbDropdownItem
                                 (click)="gotiDetailDevice(assetData.Guid)"
                             >
-                                <div class="qt-ic-c qt-icon icon__external-link qt-pointer qt-sz-16 qt-mr-8"></div>
+                                <div class="qt-ic-c qt-icon icon__external-link qt-pointer qt-sz-24 qt-mr-8"></div>
                                 Device Detail
                             </li>
                             <li

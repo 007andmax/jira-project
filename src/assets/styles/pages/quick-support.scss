@@ -48,7 +48,12 @@
       align-items: center;
     }
   }
-
+  .support-tickets-list__close {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: $gray-50;
+  }
 }
 
 .support-item-menu {
@@ -108,8 +113,10 @@
     height: 24px;
   }
   &__step2 {
-    width: 18px;
-    height: 18px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: $gray-50;
     margin: 8px;
   }
   &__line {

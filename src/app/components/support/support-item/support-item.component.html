@@ -40,7 +40,7 @@
                         class="support-item-menu__button qt-df qt-ai-c qt-jc-c pointer"
                         (click)="sendEmail()"
                     >
-                      <div class="qt-icon icon__email-send qt-sz-18"></div>
+                      <div class="qt-icon icon__email-send qt-sz-20"></div>
                     </div>
                     <app-dynamic-tooltip
                         [content]="'Copy Support URL'"
@@ -97,8 +97,10 @@
                 ></div>
                 <div
                     *ngIf="!(item.status === 'CONNECTED' && item.online) && !(item.status === 'INSTALLED' && item.online)"
-                    class="support-timeline-status__step2 qt-icon icon__remote-access"
-                ></div>
+                    class="support-timeline-status__step2 qt-df qt-ai-c qt-jc-c"
+                >
+                  <div class="qt-icon icon__remote-access qt-sz-18"></div>
+                </div>
                 <div
                     *ngIf="item.status === 'INSTALLED' && item.online"
                     class="support-timeline-status__step2 qt-icon icon__remote-access qt-icon__green-600 pointer"
@@ -148,11 +150,13 @@
                 #closedTooltip
             ></app-dynamic-tooltip>
             <div
-                class="support-tickets-list__close qt-icon icon__close qt-sz-24 pointer"
+                class="support-tickets-list__close qt-df qt-ai-c qt-jc-c pointer"
                 (mouseenter)="closedTooltip.show($event.target)"
                 (mouseleave)="closedTooltip.hide()"
                 (click)="removeSession()"
-            ></div>
+            >
+              <div class="qt-icon icon__close qt-sz-18"></div>
+            </div>
         </div>
     </div>
     <div class="support-tickets-list__status-msg">

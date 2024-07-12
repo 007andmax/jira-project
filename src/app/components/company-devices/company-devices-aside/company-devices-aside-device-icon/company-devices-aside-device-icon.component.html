@@ -14,14 +14,14 @@
         [ngbTooltip]="asideMenuItem"
         class="qt-sz-24 qt-icon"
         [ngClass]="{'qt-icon icon__devices' : getFieldForCheckIcon() === 'workstation' || !getFieldForCheckIcon(),
-               'icon__router' : getFieldForCheckIcon() === 'router',
-            'icon__print' : getFieldForCheckIcon() === 'printer',
+               'qt-icon icon__router' : getFieldForCheckIcon() === 'router',
+            'qt-icon icon__print' : getFieldForCheckIcon() === 'printer',
                 'qt-icon icon__network-switch' : getFieldForCheckIcon() === 'switch',
-          'icon__server' : getFieldForCheckIcon() === 'server',
-            'icon__tablet' : getFieldForCheckIcon() === 'tablet',
-            'icon__network_device' : getFieldForCheckIcon() === 'network device',
-            'icon__phone-old' : getFieldForCheckIcon() === 'phone',
-             'icon__generic_device' : getFieldForCheckIcon() === 'generic device',
+          'qt-icon icon__server' : getFieldForCheckIcon() === 'server',
+            'qt-icon icon__tablet' : getFieldForCheckIcon() === 'tablet',
+            'qt-icon icon__network_device' : getFieldForCheckIcon() === 'network device',
+            'qt-icon icon__old-phone' : getFieldForCheckIcon() === 'phone',
+             'qt-icon icon__generic_device' : getFieldForCheckIcon() === 'generic device',
         '--ofline': !(device || customDevice).online }"
     ></div>
 </div>
