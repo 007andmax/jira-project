@@ -203,7 +203,15 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       });
   }
   onSelectUser(selectedUser, customerCompany) {
-    this.ticketsService.changeSubjectNoteTicket(this.ticketProfile.id, this.ticketProfile.subject, this.ticketProfile.note, customerCompany.id, selectedUser.id).subscribe(data => {
+    console.log("customerCompany", customerCompany);
+    console.log("selectedUser", selectedUser);
+    this.ticketsService.changeSubjectNoteTicket(this.ticketProfile.id, this.ticketProfile.subject, this.ticketProfile.note, customerCompany.companyId, selectedUser.id).subscribe(data => {
+      console.log("this.devices = this.ticketStateService.getDevices();", this.ticketStateService.getDevices())
+      if (this.ticketStateService.getDevices().filter(item => item.isCustom).length > 0) this.removeCustomDevice(this.ticketStateService.getDevices().filter(item => item.isCustom).map(item => item.id));
+      if (this.ticketStateService.getDevices().filter(item => !item.isCustom).length > 0) this.devicesService.sendUninstallAgentRequest(this.ticketProfile.company.id, this.ticketStateService.getDevices().map(item => item.id)).subscribe(data => {
+        this.toastrService.success("The ticket creator has been successfully changed");
+        this.appStateService.changeDetectorRef();
+      });
     })
   }
   setAgent(data: TicketChangeField) {

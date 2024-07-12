@@ -17,6 +17,7 @@ import { Subscription } from 'rxjs';
   providers: [TicketsListService],
 })
 export class CompanyUsersDropDownComponent extends DropDownComponent {
+  @Input() isShowTooltip: boolean = false;
   sub: Subscription = new Subscription();
   selectedCustomerCompany: UserCustomerCompaniesInfo;
   constructor(public elRef: ElementRef,

@@ -203,7 +203,7 @@
                     <div class="qt-input-block qt-f100">
                         <company-users-drop-down
                             #userDP
-                            [title]="'User'"
+                            [title]="' Ticket creator'"
                             [class]="['qt-dropdown']"
                             [placeholder]="'Select'"
                             [field]="'name'"
@@ -211,6 +211,8 @@
                             [search]="true"
                             [change]="true"
                             [sort]="false"
+                            [isBlockClear]="true"
+                            [isShowTooltip]="ticketProfile.updates.length > 0"
                             [isDisabled]="ticketProfile.updates.length > 0"
                             (onSelectedItem)="onSelectUser($event.user,$event.customerCompany)"
                         ></company-users-drop-down>
