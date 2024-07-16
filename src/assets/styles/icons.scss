@@ -159,8 +159,8 @@
   &__warning {
     mask-image: url("/assets/img/icons/warning.svg");
   }
-  &__assign-user-plus {
-    mask-image: url("/assets/img/icons/assign-user-plus.svg");
+  &__assign-user {
+    mask-image: url("/src/assets/img/icons/assign-user.svg");
   }
   &__notes {
     mask-image: url("/assets/img/icons/notes.svg");
@@ -507,6 +507,9 @@
   }
   &__force-create {
     mask-image: url("/assets/img/icons/force-create.svg");
+  }
+  &__mobile {
+    mask-image: url("/assets/img/icons/mobile.svg");
   }
   &__links {
     mask-image: url("/assets/img/icons/links.svg");

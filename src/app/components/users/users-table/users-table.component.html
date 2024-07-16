@@ -104,10 +104,10 @@
       <div class="qt-df qt-ai-c">
         <div>
           <div
-            [ngClass]="{'icon__office-phone-gray':phone.typeNumber == 'FAX',
-                        'icon__mobile_type':phone.typeNumber == 'MOBILE',
-                         'icon__phone-gray':phone.typeNumber == 'OFFICE'}"
-            class="qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-6"
+            [ngClass]="{'icon__old-phone':phone.typeNumber == 'FAX',
+                        'icon__mobile':phone.typeNumber == 'MOBILE',
+                         'icon__phone':phone.typeNumber == 'OFFICE'}"
+            class="qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-6 qt-icon"
           ></div>
         </div>
         <preview-phone-mask
