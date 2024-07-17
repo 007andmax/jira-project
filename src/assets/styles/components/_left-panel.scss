@@ -155,40 +155,40 @@
       mask-image: url("/assets/img/icons-left-sidebar/menu-quick-support.svg");
     }
     &.--tickets {
-      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-tickets.svg");
-      mask-image: url("/assets/img/icons-left-sidebar/menu-tickets.svg");
+      -webkit-mask-image: url("/assets/img/icons/tickets.svg");
+      mask-image: url("/assets/img/icons/tickets.svg");
     }
     &.--companies {
-      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-company.svg");
-      mask-image: url("/assets/img/icons-left-sidebar/menu-company.svg");
+      -webkit-mask-image: url("/assets/img/icons/companies.svg");
+      mask-image: url("/assets/img/icons/companies.svg");
     }
     &.--users {
-      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-users.svg");
-      mask-image: url("/assets/img/icons-left-sidebar/menu-users.svg");
+      -webkit-mask-image: url("/assets/img/icons/users.svg");
+      mask-image: url("/assets/img/icons/users.svg");
     }
     &.--marketing {
-      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-marketing.svg");
-      mask-image: url("/assets/img/icons-left-sidebar/menu-marketing.svg");
+      -webkit-mask-image: url("/assets/img/icons-left-sidebar/marketing.svg");
+      mask-image: url("/assets/img/icons-left-sidebar/marketing.svg");
     }
     &.--billing {
       -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-billing.svg");
       mask-image: url("/assets/img/icons-left-sidebar/menu-billing.svg");
     }
     &.--products {
-      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-products.svg");
-      mask-image: url("/assets/img/icons-left-sidebar/menu-products.svg");
+      -webkit-mask-image: url("/assets/img/icons/products.svg");
+      mask-image: url("/assets/img/icons/products.svg");
     }
     &.--password-manager {
-      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-password-manager.svg");
-      mask-image: url("/assets/img/icons-left-sidebar/menu-password-manager.svg");
+      -webkit-mask-image: url("/assets/img/icons/password.svg");
+      mask-image: url("/assets/img/icons/password.svg");
     }
     &.--reports {
       -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-reports.svg");
       mask-image: url("/assets/img/icons-left-sidebar/menu-reports.svg");
     }
     &.--settings {
-      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-settings.svg");
-      mask-image: url("/assets/img/icons-left-sidebar/menu-settings.svg");
+      -webkit-mask-image: url("/assets/img/icons-left-sidebar/settings.svg");
+      mask-image: url("/assets/img/icons-left-sidebar/settings.svg");
     }
     &.--documents {
       -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-documents.svg");
@@ -213,13 +213,7 @@
     background-size: contain;
     opacity: 0.5;
     &.--folder {
-      background-image: url("/assets/img/icons-left-sidebar/submenu-folder.svg");
-    }
-    &.--add-folder {
-      width: 18px;
-      height: 18px;
-      margin-right: 6px;
-      background-image: url("/assets/img/icons-left-sidebar/submenu-add-folder.svg");
+      background-image: url("/assets/img/icons/folder.svg");
     }
   }
 

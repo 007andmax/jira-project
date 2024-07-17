@@ -165,29 +165,23 @@
   &__notes {
     mask-image: url("/assets/img/icons/notes.svg");
   }
-  &__remote-access-ticket {
-    mask-image: url("/assets/img/icons/remote-access-ticket.svg");
-  }
-  &__task-pending {
-    mask-image: url("/assets/img/icons/task-pending.svg");
-  }
-  &__task-pending-done {
+  &__task-pending-done { // Todo check
     mask-image: url("/assets/img/icons/task-completed.svg");
   }
-  &__user-grey {
-    mask-image: url("/assets/img/icons/user-grey.svg");
+  &__user {
+    mask-image: url("/assets/img/icons/user.svg");
   }
   &__users {
     mask-image: url("/assets/img/icons/users.svg");
   }
-  &__user-account {
-    mask-image: url("/assets/img/icons/local-user-account.svg");
+  &__my-profile {
+    mask-image: url("/assets/img/icons/my-profile.svg");
   }
   &__close {
     mask-image: url("/assets/img/icons/close.svg");
   }
-  &__settings-gray {
-    mask-image: url("/assets/img/icons-left-sidebar/menu-settings.svg");
+  &__settings {
+    mask-image: url("/assets/img/icons-left-sidebar/settings.svg");
   }
   &__logout {
     mask-image: url("/assets/img/icons-left-sidebar/logout.svg");
@@ -195,55 +189,28 @@
   &__map {
     mask-image: url("/assets/img/icons/map.svg");
   }
-  &__ticket-filter {
-    mask-image: url("/assets/img/icons/ticket-gray-500.svg");
+  &__folder {
+    mask-image: url("/assets/img/icons/folder.svg");
   }
-  &__ticket-document {
-    mask-image: url("/assets/img/icons/ticket-document.svg");
+  &__template-settings {
+    mask-image: url("/assets/img/icons-left-sidebar/template-settings.svg");
   }
-  &__tickets-sm {
-    mask-image: url("/assets/img/icons/ticket-sm.svg");
+  &__crm {
+    mask-image: url("/assets/img/icons-left-sidebar/crm.svg");
   }
-  &__menu-email-settings {
-    mask-image: url("/assets/img/icons-left-sidebar/menu-email-settings.svg");
+  &__marketing {
+    mask-image: url("/assets/img/icons-left-sidebar/marketing.svg");
   }
-  &__menu-email-template {
-    mask-image: url("/assets/img/icons-left-sidebar/menu-email-template.svg");
-  }
-  &__menu-my-profile-setting {
-    mask-image: url("/assets/img/icons-left-sidebar/menu-my-profile-settings.svg");
-  }
-  &__menu-crm-settings {
-    mask-image: url("/assets/img/icons-left-sidebar/menu-crm-settings.svg");
-  }
-  &__menu-company {
-    mask-image: url("/assets/img/icons-left-sidebar/menu-company.svg");
-  }
-  &__menu-products {
-    mask-image: url("/assets/img/icons-left-sidebar/menu-products.svg");
-  }
-  &__menu-tickets {
-    mask-image: url("/assets/img/icons-left-sidebar/menu-tickets.svg");
-  }
-  &__menu-marketing {
-    mask-image: url("/assets/img/icons-left-sidebar/menu-marketing.svg");
-  }
-  &__menu-users {
-    mask-image: url("/assets/img/icons-left-sidebar/menu-users.svg");
-  }
-  &__tickets-gray {
+  &__tickets-gray { // Todo check
     mask-image: url("/assets/img/icons/tickets-gray.svg");
   }
-  &__menu-device-setting {
+  &__menu-device-setting { // Todo check
     mask-image: url("/assets/img/icons-left-sidebar/devices.svg");
-  }
-  &__password-manager-gray {
-    mask-image: url("/assets/img/icons-left-sidebar/menu-password-manager.svg");
   }
   &__companies {
     mask-image: url("/assets/img/icons/companies.svg");
   }
-  &__support-page {
+  &__support-page { // Todo check
     mask-image: url("/assets/img/icons/support-page.svg");
   }
   // TODO Start Rename Icon Name
@@ -357,9 +324,6 @@
   }
   &__documents {
     mask-image: url("/assets/img/icons/documents.svg");
-  }
-  &__folder {
-    mask-image: url("/assets/img/icons-left-sidebar/submenu-folder.svg");
   }
   &__calendar {
     mask-image: url("/assets/img/icons/calendar.svg");

@@ -28,7 +28,7 @@
                 ngbDropdownItem
                 (click)="onAddTicket()"
             >
-                <div class="qt-icon icon__menu-tickets qt-icon__gray-600 qt-sz-20 qt-mr-12"></div>
+                <div class="qt-icon icon__tickets qt-icon__gray-600 qt-sz-20 qt-mr-12"></div>
                 Ticket
             </li>
             <li
@@ -36,7 +36,7 @@
                 (click)="onAddCompany()"
                 *ngIf="getPermissions('CREATE_COMPANIES')"
             >
-                <div class="qt-icon icon__menu-company qt-sz-20 qt-icon__gray-600 qt-sz-20 qt-mr-12"></div>
+                <div class="qt-icon icon__companies qt-sz-20 qt-icon__gray-600 qt-sz-20 qt-mr-12"></div>
                 Company
             </li>
             <li
@@ -44,7 +44,7 @@
                 (click)="onAddUser()"
                 *ngIf="getPermissions('CREATE_USERS')"
             >
-                <div class="qt-icon icon__menu-users qt-icon__gray-600 qt-sz-20 qt-mr-12"></div>
+                <div class="qt-icon icon__users qt-icon__gray-600 qt-sz-20 qt-mr-12"></div>
                 Users
             </li>
             <li
@@ -52,7 +52,7 @@
                 (click)="onAddService()"
                 *ngIf="getPermissions('MANAGE_SERVICES')"
             >
-                <div class="qt-icon icon__menu-crm-settings qt-icon__gray-600 qt-sz-20 qt-mr-12"></div>
+                <div class="qt-icon icon__crm qt-icon__gray-600 qt-sz-20 qt-mr-12"></div>
                 Service
             </li>
             <li
@@ -60,7 +60,7 @@
                 (click)="onAddProduct()"
                 *ngIf="getPermissions('MANAGE_PRODUCTS')"
             >
-                <div class="qt-icon icon__menu-products qt-icon__gray-600 qt-sz-20 qt-mr-12"></div>
+                <div class="qt-icon icon__products qt-icon__gray-600 qt-sz-20 qt-mr-12"></div>
                 Product
             </li>
         </ul>
@@ -115,7 +115,7 @@
                     ngbDropdownItem
                     (click)="goToSettings()"
                 >
-                    <div class="qt-icon icon__settings-gray qt-sz-20 qt-mr-12"></div>
+                    <div class="qt-icon icon__settings qt-sz-20 qt-mr-12"></div>
                     My Profile
                 </li>
                 <li

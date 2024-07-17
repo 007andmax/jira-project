@@ -105,7 +105,7 @@
   height: 28px;
   border: 1px solid $gray-200;
   background-color: $white;
-  background-image: url('/assets/img/icons/user-grey.svg');
+  background-image: url('/src/assets/img/icons/user.svg');
   background-size: 16px 16px;
   background-position: center;
   background-repeat: no-repeat;
@@ -116,7 +116,7 @@
   -webkit-mask-size: 16px;
   mask-size: 16px;
 }
-/deep/ .icon__task-pending {
+/deep/ .icon__task-pending-done {
   background-size: contain;
 }
 /deep/ .qt-icon icon__check {

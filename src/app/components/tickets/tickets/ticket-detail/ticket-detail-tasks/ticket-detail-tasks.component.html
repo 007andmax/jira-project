@@ -40,7 +40,7 @@
             ></i>
             <i
                 [hidden]="addTask.status != 'COMPLETED'"
-                class="qt-icon icon__task-pending qt-icon__green-600 icn-20"
+                class="qt-icon icon__task-pending-done qt-icon__green-600 icn-20"
                 (click)="setStatus(addTask,'INCOMPLETED')"
                 (mouseenter)="incomplete.show($event.target)"
                 (mouseleave)="incomplete.hide()"
@@ -111,7 +111,7 @@
             <i
                 *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
                 [hidden]="item.status != 'COMPLETED'"
-                class="qt-icon icon__task-pending qt-icon__green-600 icn-20"
+                class="qt-icon icon__task-pending-done qt-icon__green-600 icn-20"
                 (click)="setStatus(item,'INCOMPLETED');onEditTicketTask(item)"
                 (mouseenter)="incomplete.show($event.target)"
                 (mouseleave)="incomplete.hide()"
