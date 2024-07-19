@@ -80,7 +80,7 @@
                             ></div>
                             <div
                                 *ngIf="getPermissions('DELETE_TICKET_NOTE_TEMPLATE')"
-                                class="qt-icon icon__remove qt-sz-20 qt-bg-contain pointer"
+                                class="qt-icon icon__delete qt-sz-20 qt-bg-contain pointer"
                                 (click)="removeNote(item)"
                                 (mouseenter)="deleteTooltip.show($event.target)"
                                 (mouseleave)="deleteTooltip.hide()"

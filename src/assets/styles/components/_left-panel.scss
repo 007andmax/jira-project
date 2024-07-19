@@ -149,10 +149,13 @@
     height: 24px;
     background-position: center;
     background-color: $gray-300;
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
 
     &.--quick-support {
-      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-quick-support.svg");
-      mask-image: url("/assets/img/icons-left-sidebar/menu-quick-support.svg");
+      -webkit-mask-image: url("/assets/img/icons/quick-support.svg");
+      mask-image: url("/assets/img/icons/quick-support.svg");
     }
     &.--tickets {
       -webkit-mask-image: url("/assets/img/icons/tickets.svg");
@@ -171,8 +174,8 @@
       mask-image: url("/assets/img/icons-left-sidebar/marketing.svg");
     }
     &.--billing {
-      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-billing.svg");
-      mask-image: url("/assets/img/icons-left-sidebar/menu-billing.svg");
+      -webkit-mask-image: url("/assets/img/icons/billing.svg");
+      mask-image: url("/assets/img/icons/billing.svg");
     }
     &.--products {
       -webkit-mask-image: url("/assets/img/icons/products.svg");
@@ -183,20 +186,20 @@
       mask-image: url("/assets/img/icons/password.svg");
     }
     &.--reports {
-      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-reports.svg");
-      mask-image: url("/assets/img/icons-left-sidebar/menu-reports.svg");
+      -webkit-mask-image: url("/assets/img/icons/reports.svg");
+      mask-image: url("/assets/img/icons/reports.svg");
     }
     &.--settings {
       -webkit-mask-image: url("/assets/img/icons-left-sidebar/settings.svg");
       mask-image: url("/assets/img/icons-left-sidebar/settings.svg");
     }
     &.--documents {
-      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-documents.svg");
-      mask-image: url("/assets/img/icons-left-sidebar/menu-documents.svg");
+      -webkit-mask-image: url("/assets/img/icons/documents.svg");
+      mask-image: url("/assets/img/icons/documents.svg");
     }
     &.--devices{
-      -webkit-mask-image: url("/assets/img/icons-left-sidebar/devices.svg");
-      mask-image: url("/assets/img/icons-left-sidebar/devices.svg");
+      -webkit-mask-image: url("/assets/img/tool.svg");
+      mask-image: url("/assets/img/tool.svg");
     }
     &.--logout {
       -webkit-mask-image: url("/assets/img/icons-left-sidebar/logout.svg");

@@ -160,13 +160,10 @@
     mask-image: url("/assets/img/icons/warning.svg");
   }
   &__assign-user {
-    mask-image: url("/src/assets/img/icons/assign-user.svg");
+    mask-image: url("/assets/img/icons/assign-user.svg");
   }
   &__notes {
     mask-image: url("/assets/img/icons/notes.svg");
-  }
-  &__task-pending-done { // Todo check
-    mask-image: url("/assets/img/icons/task-completed.svg");
   }
   &__user {
     mask-image: url("/assets/img/icons/user.svg");
@@ -201,17 +198,14 @@
   &__marketing {
     mask-image: url("/assets/img/icons-left-sidebar/marketing.svg");
   }
-  &__tickets-gray { // Todo check
-    mask-image: url("/assets/img/icons/tickets-gray.svg");
-  }
-  &__menu-device-setting { // Todo check
-    mask-image: url("/assets/img/icons-left-sidebar/devices.svg");
+  &__tool {
+    mask-image: url("/assets/img/icons/tool.svg");
   }
   &__companies {
     mask-image: url("/assets/img/icons/companies.svg");
   }
-  &__support-page { // Todo check
-    mask-image: url("/assets/img/icons/support-page.svg");
+  &__pages {
+    mask-image: url("/assets/img/icons/pages.svg");
   }
   // TODO Start Rename Icon Name
   &__categories {
@@ -226,8 +220,8 @@
   &__check {
     mask-image: url("/assets/img/icons/check.svg");
   }
-  &__remove {
-    mask-image: url("/assets/img/icons/remove.svg");
+  &__delete {
+    mask-image: url("/assets/img/icons/delete.svg");
   }
   &__attachments {
     mask-image: url("/assets/img/icons/attachements.svg");
@@ -241,8 +235,8 @@
   &__service {
     mask-image: url("/assets/img/icons/service.svg");
   }
-  &__quick-support {
-    mask-image: url("/assets/img/icons/quick-support.svg");
+  &__zap-fast {
+    mask-image: url("/assets/img/icons/zap-fast.svg");
   }
   &__full-logo {
     mask-image: url("/assets/img/icons/full-logo.svg");
@@ -291,9 +285,6 @@
   }
   &__claim-edit-ticket {
     mask-image: url("/assets/img/icons/claim-edit-ticket.svg");
-  }
-  &__tags {
-    mask-image: url("/assets/img/icons-left-sidebar/menu-tags.svg");
   }
   &__resend {
     mask-image: url("/assets/img/icons/resend.svg");
@@ -570,9 +561,6 @@
   }
   &__device-connected {
     mask-image: url("/assets/img/icons/computer-green.svg");
-  }
-  &__uninstall-agent { // TODO check
-    background-image: url("/assets/img/icons/uninstall-agent.svg");
   }
 
   &.--updated {

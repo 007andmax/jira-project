@@ -628,7 +628,7 @@ documents-edit-info {
   }
   .service-tab-content,
   .product-tab-content {
-    .icon__remove {
+    .icon__delete {
       top: 43px;
       right: -18px;
       cursor: pointer;
@@ -1017,7 +1017,7 @@ app-quotes-item {
         border-radius: 50%;
       }
       input:checked ~ span {
-        background-image: url("/src/assets/img/icons/status-green.svg");
+        background-image: url("/assets/img/icons/status-green.svg");
         border: none;
       }
     }

@@ -590,7 +590,7 @@
             left: -30px;
             content: "";
             position: absolute;
-            mask-image: url("../../../assets/img/icons/task-completed.svg");
+            mask-image: url("../../../assets/img/icons/check.svg");
             background-color: $green-600;
             mask-repeat: no-repeat;
             mask-position: center;
@@ -598,7 +598,7 @@
           }
           &.complete {
             &::before {
-              mask-image: url("../../../assets/img/icons/task-completed.svg") no-repeat center;
+              mask-image: url("../../../assets/img/icons/check.svg") no-repeat center;
               background-color: $green-600;
               mask-size: contain;
               mask-repeat: no-repeat;

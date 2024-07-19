@@ -52,7 +52,7 @@
                             class="qt-ml-20 qt-fw-500 qt-df qt-ai-c qt-color-info qt-ai-c qt-pointer"
                             (click)="deleteSelectedTickets()"
                         >
-                            <div class="qt-icon icon__remove qt-icon__red-600 qt-sz-16 qt-ic-c qt-mr-6"></div>
+                            <div class="qt-icon icon__delete qt-icon__red-600 qt-sz-16 qt-ic-c qt-mr-6"></div>
                             <div class="qt-lh-1">Delete</div>
                         </div>
                     </div>
@@ -179,7 +179,7 @@
                             <div class="billable-item-table__check">
                                 <div
                                     *ngIf="item.isOrder"
-                                    class="qt-icon icon__remove qt-sz-20"
+                                    class="qt-icon icon__delete qt-sz-20"
                                     (click)="deleteTicket(item)"
                                     placement="top"
                                     ngbTooltip="Delete"

@@ -146,17 +146,17 @@
     -webkit-mask-size: 16px;
     mask-size: 16px;
     flex-shrink: 0;
-    &.icon__remove {
+    &.icon__delete {
       margin-left: 0;
     }
   }
   .icon__edit,
-  .icon__remove {
+  .icon__delete {
     display: none;
   }
   &:hover {
     .icon__edit,
-    .icon__remove {
+    .icon__delete {
       display: block;
     }
   }
