@@ -23,8 +23,10 @@ export class InventoryFilterComponent implements OnInit {
   constructor(private inventoryStateService: InventoryStateService,
     public cd: ChangeDetectorRef,) { }
   ngOnInit() {
-    if (this.inventoryStateService.getListTypes().length > 0) {
-      this.listTypes = JSON.parse(JSON.stringify(this.inventoryStateService.getListTypes())).map(item => new ProductType(item)).sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
+    if (this.inventoryStateService.getListTypes().length === 0) {
+      this.inventoryStateService.onInitGetServiceTypeList();
+    } else {
+      this.listTypes = this.inventoryStateService.getListTypes().sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
         1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
     }
     let onGetServiceType = this.inventoryStateService.onGetListType.subscribe(data => {
