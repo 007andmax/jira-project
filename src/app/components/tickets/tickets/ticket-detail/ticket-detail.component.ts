@@ -139,10 +139,12 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     });
     this.sub.add(getConfirm);
     let onGetUsers = this.usersStateService.onGetUsers.subscribe(data => {
-      if (this.showPreloader) {
-        let user = this.usersStateService.getAllUsers().find(item => item.id == this.ticketProfile.createdUserId);
+      console.log("this.ticketProfile 1", JSON.parse(JSON.stringify(this.ticketProfile)));
+      console.log("this.usersStateService.getAllUsers()", JSON.parse(JSON.stringify(this.usersStateService.getAllUsers())));
+      if (this.ticketProfile.createdUser) {
+        let user = this.usersStateService.getAllUsers().find(item => item.id === this.ticketProfile.createdUser.id);
         if (user) this.ticketProfile.setSelectedCustomerCompany(user.customerCompaniesInfo.find(item => item.companyId == this.ticketProfile.companyId));
-
+        console.log("user", user);
       }
     })
     this.sub.add(onGetUsers);
@@ -325,8 +327,9 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       if (this.ticketMessage) this.ticketMessage.reset();
       this.ticketProfileUpdates.resetShowLoadMoreUpdates();
       if (this.ticketTasks) this.ticketTasks.getTicketTasks(id);
-
-      let user = this.usersStateService.getAllUsers().find(item => item.id == this.ticketProfile.createdUserId);
+      console.log("this.ticketProfile 2", this.ticketProfile);
+      console.log("this.usersStateService.getAllUsers()", JSON.parse(JSON.stringify(this.usersStateService.getAllUsers())));
+      let user = this.usersStateService.getAllUsers().find(item => item.id === this.ticketProfile.createdUser.id);
       if (user) this.ticketProfile.setSelectedCustomerCompany(user.customerCompaniesInfo.find(item => item.companyId == this.ticketProfile.companyId));
       console.log("user", user);
 
