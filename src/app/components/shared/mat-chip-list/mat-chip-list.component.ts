@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-mat-chip-list',
@@ -6,10 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mat-chip-list.component.scss']
 })
 export class MatChipListComponent implements OnInit {
-
+  @Input() items: any = [];
+  @Output() onChangeItems = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
   }
-
+  ngDoCheck() {
+    this.onChangeItems.emit(this.items);
+  }
 }

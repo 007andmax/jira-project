@@ -88,7 +88,6 @@ export class TicketsFilterTagsComponent extends CompanyTagsComponent {
       if (!this.checkRemoveTag(index)) return;
       this.selectedTag.splice(index, 1);
       this.tagsChange.emit(this.selectedTag);
-      this.formField.checkSelectedItems(this.selectedTag);
       this.cd.detectChanges();
     }
   }

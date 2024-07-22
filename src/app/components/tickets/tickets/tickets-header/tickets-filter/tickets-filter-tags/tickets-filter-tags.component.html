@@ -9,7 +9,10 @@
         #formField
         [placeholder]="'Select tag'"
     >
-        <app-mat-chip-list>
+        <app-mat-chip-list
+            [items]="selectedTag"
+            (onChangeItems)="formField.checkSelectedItems(selectedTag)"
+        >
             <app-dynamic-tooltip
                 [position]="'top'"
                 #productTooltip
