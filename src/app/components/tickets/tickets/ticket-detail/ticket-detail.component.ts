@@ -239,9 +239,10 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       });
   }
   onSelectUser(selectedUser, customerCompany) {
-    console.log("customerCompany", customerCompany);
-    console.log("selectedUser", selectedUser);
-    this.ticketsService.changeSubjectNoteTicket(this.ticketProfile.id, this.ticketProfile.subject, this.ticketProfile.note, customerCompany.companyId, selectedUser.id).subscribe(data => {
+    console.log("customerCompany", customerCompany.companyId);
+    //console.log("selectedUser", selectedUser);
+    console.log("this.ticketProfile.companyId", this.ticketProfile.companyId);
+    this.ticketsService.changeSubjectNoteTicket(this.ticketProfile.id, this.ticketProfile.subject, this.ticketProfile.note, customerCompany.companyId == this.ticketProfile.companyId ? null : customerCompany.companyId, selectedUser.id).subscribe(data => {
       console.log("this.devices = this.ticketStateService.getDevices();", this.ticketStateService.getDevices())
 
 

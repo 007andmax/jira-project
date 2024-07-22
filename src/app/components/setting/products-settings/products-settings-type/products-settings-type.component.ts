@@ -28,8 +28,10 @@ export class ProductsSettingsTypeComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    if (this.inventoryStateService.getListTypes().length > 0) {
-      this.list = JSON.parse(JSON.stringify(this.inventoryStateService.getListTypes())).map(item => new ProductType(item)).sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
+    if (this.inventoryStateService.getListTypes().length === 0) {
+      this.inventoryStateService.onInitGetServiceTypeList();
+    } else {
+      this.list = this.inventoryStateService.getListTypes().sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
         1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
       this.showPreloader = false;
     }
