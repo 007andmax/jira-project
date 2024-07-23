@@ -210,7 +210,6 @@ export class TicketStateService {
   public getServicesList(ticketProfile) {
     this.servicePreloader = true;
     this.onServicePreloader.emit(this.servicePreloader);
-    console.log("this.servicePreloader", this.servicePreloader);
     this.recurringService.getServiceList(ticketProfile.company.id).subscribe((res: any) => {
       this.servicesForTicket = res.filter(item => item.canUseInTicket);
       this.servicesForTicket.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
@@ -219,7 +218,6 @@ export class TicketStateService {
       this.servicesList.emit(this.servicesForTicket);
       this.servicePreloader = false;
       this.onServicePreloader.emit(this.servicePreloader);
-      console.log("this.servicePreloader", this.servicePreloader);
     })
   }
   public subsribeToTicket(id) {

@@ -44,7 +44,6 @@ export class ServicesListComponent implements OnInit, OnDestroy {
     if (this.editItem && this.type === TYPE_QUOTE) this.elRef.nativeElement.querySelector('#dropdownServices').value = this.getNameOrDescription(this.editItem);
     if (this.editItem && this.type === TYPE_TICKET) this.elRef.nativeElement.querySelector('#dropdownServices').value = this.getNameOrDescription(this.editItem);
     let onServicePreloader = this.ticketStateService.onServicePreloader.subscribe(data => {
-      console.log("onServicePreloader", data);
       this.isDisabled = data;
       this.preloader = data;
       this.clear();
