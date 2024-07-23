@@ -41,7 +41,6 @@ export class ReportSendEmailComponent extends DraftEmailComponent {
     })
     this.sub.add(showAsideSendReport);
     let showAsideSendReportInvoice = this.draftEmailStateService.showAsideSendReportInvoice.subscribe(data => {
-      console.log("showAsideSendReportInvoice");
       this.opened = true;
       this.draftReport = new ReportEmail();
       this.type = TYPE_REPORT_INVOICE;

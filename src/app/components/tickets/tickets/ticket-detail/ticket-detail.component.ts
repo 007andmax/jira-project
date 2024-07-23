@@ -139,12 +139,9 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     });
     this.sub.add(getConfirm);
     let onGetUsers = this.usersStateService.onGetUsers.subscribe(data => {
-      console.log("this.ticketProfile 1", JSON.parse(JSON.stringify(this.ticketProfile)));
-      console.log("this.usersStateService.getAllUsers()", JSON.parse(JSON.stringify(this.usersStateService.getAllUsers())));
       if (this.ticketProfile.createdUser) {
         let user = this.usersStateService.getAllUsers().find(item => item.id === this.ticketProfile.createdUser.id);
         if (user) this.ticketProfile.setSelectedCustomerCompany(user.customerCompaniesInfo.find(item => item.companyId == this.ticketProfile.companyId));
-        console.log("user", user);
       }
     })
     this.sub.add(onGetUsers);
@@ -239,13 +236,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       });
   }
   onSelectUser(selectedUser, customerCompany) {
-    console.log("customerCompany", customerCompany.companyId);
-    //console.log("selectedUser", selectedUser);
-    console.log("this.ticketProfile.companyId", this.ticketProfile.companyId);
     this.ticketsService.changeSubjectNoteTicket(this.ticketProfile.id, this.ticketProfile.subject, this.ticketProfile.note, customerCompany.companyId == this.ticketProfile.companyId ? null : customerCompany.companyId, selectedUser.id).subscribe(data => {
-      console.log("this.devices = this.ticketStateService.getDevices();", this.ticketStateService.getDevices())
-
-
     })
   }
   setAgent(data: TicketChangeField) {
@@ -328,12 +319,8 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       if (this.ticketMessage) this.ticketMessage.reset();
       this.ticketProfileUpdates.resetShowLoadMoreUpdates();
       if (this.ticketTasks) this.ticketTasks.getTicketTasks(id);
-      console.log("this.ticketProfile 2", this.ticketProfile);
-      console.log("this.usersStateService.getAllUsers()", JSON.parse(JSON.stringify(this.usersStateService.getAllUsers())));
       let user = this.usersStateService.getAllUsers().find(item => item.id === this.ticketProfile.createdUser.id);
       if (user) this.ticketProfile.setSelectedCustomerCompany(user.customerCompaniesInfo.find(item => item.companyId == this.ticketProfile.companyId));
-      console.log("user", user);
-
       this.onInitRealTimes();
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
