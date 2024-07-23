@@ -47,6 +47,7 @@ export class ServicesListComponent implements OnInit, OnDestroy {
       console.log("onServicePreloader", data);
       this.isDisabled = data;
       this.preloader = data;
+      this.clear();
       this.cd.detectChanges();
     })
     this.sub.add(onServicePreloader);
