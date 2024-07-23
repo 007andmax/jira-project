@@ -29,11 +29,13 @@ export class TicketStateService {
   changeUpdatesTicket: EventEmitter<any> = new EventEmitter();
   closedTicket: EventEmitter<any> = new EventEmitter();
   onDocumentForPreview: EventEmitter<any> = new EventEmitter();
+  onServicePreloader: EventEmitter<any> = new EventEmitter();
   updateForRemove: TicketProfileUpdate = null;
   serviceForRemove: TicketProfileService = null;
   productForRemove: TicketProfileProduct = null;
   areTicketsPresented: boolean = false;
   areTicketsTerminated: boolean = false;
+  servicePreloader: boolean = false;
   servicesForTicket = [];
   ticketRoutingId: string;
   taskForRemove: TicketProfileTask;
@@ -206,12 +208,18 @@ export class TicketStateService {
     return this.closedTicket;
   }
   public getServicesList(ticketProfile) {
+    this.servicePreloader = true;
+    this.onServicePreloader.emit(this.servicePreloader);
+    console.log("this.servicePreloader", this.servicePreloader);
     this.recurringService.getServiceList(ticketProfile.company.id).subscribe((res: any) => {
       this.servicesForTicket = res.filter(item => item.canUseInTicket);
       this.servicesForTicket.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
       if (!this.customerPortalStateService.isCustomerPortal && this.permissionsService.isAllowed("VIEW_SERVICE_AGREEMENTS")) this.getServiceAgreements(ticketProfile);
       this.servicesList.emit(this.servicesForTicket);
+      this.servicePreloader = false;
+      this.onServicePreloader.emit(this.servicePreloader);
+      console.log("this.servicePreloader", this.servicePreloader);
     })
   }
   public subsribeToTicket(id) {

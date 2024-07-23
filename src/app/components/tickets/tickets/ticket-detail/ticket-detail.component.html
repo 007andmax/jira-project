@@ -218,7 +218,7 @@
                             [selectedItem]="ticketProfile.createdUser"
                             [selectedCustomerCompany]="ticketProfile.selectedCustomerCompany"
                             [isShowTooltip]="ticketProfile.updates.length > 0"
-                            [isDisabled]="ticketProfile.updates.length > 0 || getCompany(ticketProfile.company.id).isUnknown"
+                            [isDisabled]="ticketProfile.updates.length > 0 || getCompany(ticketProfile.company.id).isUnknown || customerPortalStateService.isCustomerPortal"
                             (onSelectedItem)="onSelectUser($event.user,$event.customerCompany)"
                         ></company-users-drop-down>
                     </div>
