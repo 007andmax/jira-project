@@ -26,17 +26,20 @@ export class TicketDetailTicketsComponent implements OnInit {
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
+    this.initDefaultTicketsList();
+    this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
+      let index = this.tickets.findIndex(item => item.id == data.id);
+      if (index > -1) this.tickets[index] = new Ticket(data);
+      this.cd.detectChanges();
+    })
+  }
+  public initDefaultTicketsList() {
     this.ticketsFilter.setListType("ALL");
     this.ticketsFilter.setOffset(0);
     this.ticketsFilter.setSize(3);
     this.ticketsFilter.setCompanies([this.ticketProfile.company]);
     this.ticketsService.getTickets(this.ticketsFilter.getListTupe(), this.ticketsFilter.getDataForRequest()).subscribe((data: Array<Ticket>) => {
       this.tickets = data;
-      this.cd.detectChanges();
-    })
-    this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
-      let index = this.tickets.findIndex(item => item.id == data.id);
-      if (index > -1) this.tickets[index] = new Ticket(data);
       this.cd.detectChanges();
     })
   }

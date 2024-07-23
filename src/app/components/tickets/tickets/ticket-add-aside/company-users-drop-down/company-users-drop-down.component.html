@@ -5,11 +5,20 @@
     [container]="container"
     [ngStyle]="{'width':widthInput ? widthInput : '100%'}"
 >
-    <div
-        *ngIf="title"
-        class="app-drop-down__title"
-        [textContent]="title"
-    ></div>
+    <div class="qt-df qt-ai-c">
+        <div
+            *ngIf="title"
+            class="app-drop-down__title qt-mr-8"
+            [textContent]="title"
+        ></div>
+        <span
+            *ngIf="isShowTooltip"
+            class="icon__help default-services-page__question-icon qt-sz-12 qt-ic-c qt-mb-8"
+            placement="top"
+            ngbTooltip="You cannot change the ticket company/user while the ticket has updates."
+            container="body"
+        ></span>
+    </div>
     <mat-error
         class="invalid-feedback mat-error"
         *ngIf="!validate"

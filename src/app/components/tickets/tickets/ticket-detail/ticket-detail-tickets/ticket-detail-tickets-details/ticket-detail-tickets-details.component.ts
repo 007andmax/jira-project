@@ -33,10 +33,12 @@ export class TicketDetailTicketsDetailsComponent implements OnInit {
     private companiesStateService: CompaniesStateService,
     private ticketsListService: TicketsListService,) { }
   ngOnInit(): void {
+    this.initDefaultTicketsList();
+  }
+  public initDefaultTicketsList() {
     this.container = this.elRef.nativeElement.querySelector(".ticket-detail-tickets__body");
     this.onScroll();
   }
-
   public setDefaultScoll() {
     this.page_number = 0;
     this.ticketsListService.setBlockList(false);

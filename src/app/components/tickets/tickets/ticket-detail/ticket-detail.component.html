@@ -198,7 +198,31 @@
                     [ticketProfile]="ticketProfile"
                 ></ticket-detail-change-status>
                 <ticket-detail-change-priority [ticketProfile]="ticketProfile"></ticket-detail-change-priority>
-                <ticket-detail-change-company [ticketProfile]="ticketProfile"></ticket-detail-change-company>
+                <ticket-detail-change-company
+                    #changeCompany
+                    [ticketProfile]="ticketProfile"
+                ></ticket-detail-change-company>
+                <div class="qt-inputs-row">
+                    <div class="qt-input-block qt-f100">
+                        <company-users-drop-down
+                            #userDP
+                            [title]="' Ticket creator'"
+                            [class]="['qt-dropdown']"
+                            [placeholder]="'Select'"
+                            [field]="'name'"
+                            [dropdownHeight]="'345px'"
+                            [search]="true"
+                            [change]="true"
+                            [sort]="false"
+                            [isBlockClear]="true"
+                            [selectedItem]="ticketProfile.createdUser"
+                            [selectedCustomerCompany]="ticketProfile.selectedCustomerCompany"
+                            [isShowTooltip]="ticketProfile.updates.length > 0"
+                            [isDisabled]="ticketProfile.updates.length > 0 || getCompany(ticketProfile.company.id).isUnknown"
+                            (onSelectedItem)="onSelectUser($event.user,$event.customerCompany)"
+                        ></company-users-drop-down>
+                    </div>
+                </div>
                 <ticket-detail-add-assigned-user
                     [ticketProfile]="ticketProfile"
                     [listAssignedUser]="listAssignedUser"
@@ -240,11 +264,13 @@
                     *ngIf="toggleRigthPanelContainer"
                 >
                     <ticket-detail-contact-details
+                        #contactDetail
                         *ngIf="typeRigthDetailAside == 'CONTACT'"
                         [ticketProfile]="ticketProfile"
                         (onClose)="onCloseDetails()"
                     ></ticket-detail-contact-details>
                     <ticket-detail-contact
+                        #contact
                         *ngIf="toggleRigthPanel"
                         [ticketProfile]="ticketProfile"
                         (onShowMore)="onShowMore('CONTACT')"
@@ -263,6 +289,7 @@
                         (onShowMore)="onShowMore('DEVICES')"
                     ></ticket-detail-devices>
                     <ticket-detail-tickets
+                        #ticketsDetail
                         *ngIf="toggleRigthPanel"
                         [ticketProfile]="ticketProfile"
                         (onShowMore)="onShowMore('TICKETS')"
@@ -272,12 +299,14 @@
                         *ngIf="ticketStateService.getDocumentForPreview()"
                     ></ticket-detail-documents-preview>
                     <ticket-detail-documents-details
+                        #documentsRecordDetail
                         [ticketProfile]="ticketProfile"
                         (onViewDocument)="onViewDocumentsPreview($event)"
                         *ngIf="typeRigthDetailAside == 'DOCUMENT'"
                         (onClose)="onCloseDetails()"
                     ></ticket-detail-documents-details>
                     <ticket-detail-passwords-details
+                        #passwordRecordDetail
                         [ticketProfile]="ticketProfile"
                         *ngIf="typeRigthDetailAside == 'PASSWORD'"
                         (onClose)="onCloseDetails()"
@@ -287,6 +316,7 @@
                         (onClose)="onCloseDetails()"
                     ></ticket-detail-devices-details>
                     <ticket-detail-tickets-details
+                        #ticketsDetailList
                         [ticketProfile]="ticketProfile"
                         *ngIf="typeRigthDetailAside == 'TICKETS'"
                         (onClose)="onCloseDetails()"
