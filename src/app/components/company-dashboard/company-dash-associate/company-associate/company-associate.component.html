@@ -9,7 +9,10 @@
         #formField
         [placeholder]="'Search By Associated Companies'"
     >
-        <app-mat-chip-list>
+        <app-mat-chip-list
+            [items]="selectedCompanies"
+            (onChangeItems)="formField.checkSelectedItems(selectedCompanies)"
+        >
             <app-mat-chip
                 *ngFor="let company of selectedCompanies; let i = index"
                 (onClose)="remove(i)"

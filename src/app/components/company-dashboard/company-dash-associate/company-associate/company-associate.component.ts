@@ -31,12 +31,11 @@ export class CompanyAssociateComponent implements OnInit, OnDestroy {
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('dp') dp: any;
   @Output() companiesChange = new EventEmitter();
-  @ViewChild('formField') formField: MatFormFieldComponent;
   /**
-   * Creates an instance of the TagsComponent with the injected services
-   * @param {TagsService} tagsService Service to work with tags
-   * @param {TagsStateService} tagsState to work with tags state
-   */
+ * Creates an instance of the TagsComponent with the injected services
+ * @param {TagsService} tagsService Service to work with tags
+ * @param {TagsStateService} tagsState to work with tags state
+ */
   public constructor(
 
     private companiesStateService: CompaniesStateService,
@@ -83,7 +82,6 @@ export class CompanyAssociateComponent implements OnInit, OnDestroy {
       let find = this.companies.find(tag => tag.id === item);
       if (find) this.selectedCompanies.push(find);
     })
-    this.formField.checkSelectedItems(this.selectedCompanies);
   }
   public setEditItems(data) {
     this.clearWithOutChanges();
@@ -92,11 +90,9 @@ export class CompanyAssociateComponent implements OnInit, OnDestroy {
       let find = this.companies.find(tag => tag.id === item);
       if (find) this.selectedCompanies.push(find);
     })
-    this.formField.checkSelectedItems(this.selectedCompanies);
   }
   public clearWithOutChanges() {
     this.selectedCompanies = [];
-    this.formField.checkSelectedItems(this.selectedCompanies);
   }
 
   /**
@@ -131,7 +127,6 @@ export class CompanyAssociateComponent implements OnInit, OnDestroy {
     if (index >= 0) {
       this.selectedCompanies.splice(index, 1);
       this.companiesChange.emit(this.selectedCompanies.map(item => item.id));
-      this.formField.checkSelectedItems(this.selectedCompanies);
       this.cd.detectChanges();
     }
   }
@@ -149,7 +144,6 @@ export class CompanyAssociateComponent implements OnInit, OnDestroy {
     this.companiesChange.emit(this.selectedCompanies.map(item => item.id));
     this.tagCtrl.setValue(null);
     if (this.searchName.length > 0) this.searchName = "";
-    this.formField.checkSelectedItems(this.selectedCompanies);
   }
 
   public setSelectedTag(data) {

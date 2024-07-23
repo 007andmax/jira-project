@@ -32,7 +32,6 @@ export class CompanyDevicesCustomDropDownComponent extends CompanyTagsComponent 
     this.selectedTag = [];
     this.tags = this.reqTags;
     this.userInput.nativeElement.blur();
-    if (this.formField) this.formField.checkSelectedItems(this.selectedTag);
     this.dp.close();
     this.cd.detectChanges();
   }

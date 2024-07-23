@@ -7,7 +7,10 @@
         ngbDropdownAnchor
         [ngClass]="{'hidde-label' :!showLabel}"
     >
-        <app-mat-chip-list>
+        <app-mat-chip-list
+            [items]="selectedTag"
+            (onChangeItems)="formField.checkSelectedItems(selectedTag)"
+        >
             <app-mat-chip
                 *ngFor="let tag of selectedTag; let i = index"
                 (onClose)="remove(i)"
