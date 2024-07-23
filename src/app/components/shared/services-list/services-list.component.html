@@ -16,7 +16,14 @@
         [disabled]="isDisabled"
         ngbDropdownAnchor
     >
-    <i class="icn-sm report-caret-icon"></i>
+    <i
+        class="icn-sm report-caret-icon"
+        *ngIf="!preloader"
+    ></i>
+    <i
+        class="loading xs"
+        *ngIf="preloader"
+    ></i>
     <div
         class="dropdown-menu services-container"
         ngbDropdownMenu
