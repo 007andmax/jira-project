@@ -381,6 +381,17 @@ const routes: Routes = [
     loadChildren: './components/billing/contracts-statistics/contracts-statistics.module#ContractsStatisticsModule',
     canActivate: [PermissionContractsService, PermissionNoSuperAdminService]
   },
+  {
+    path: ':domain/file-management',
+    loadChildren: './components/file-management/file-management.module#FileManagementModule',
+    canActivate: [PermissionSupportService, PermissionNoSuperAdminService]
+  },
+  {
+    path: ':domain/file-management/category/:id',
+    loadChildren: './components/file-management/file-management-category/file-management-category.module#FileManagementCategoryModule',
+    canActivate: [PermissionSupportService, PermissionNoSuperAdminService]
+
+  },
 ];
 
 /**

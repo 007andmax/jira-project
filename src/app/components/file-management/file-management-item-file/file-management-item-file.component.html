@@ -1,0 +1,58 @@
+<div class="qt-table-modern__row">
+    <div
+        class="documents-table__title ellipsis pointer"
+        (click)="preview()"
+    >
+        <div class="documents-table__title-menu ellipsis">
+            <div class="qt-sz-16 qt-bg-contain qt-mr-8 qt-fs-0 icon__templete-thumb"></div>
+            <div
+                class="title ellipsis"
+                [textContent]="item.name"
+            ></div>
+        </div>
+    </div>
+    <div
+        class="documents-table__create-by ellipsis pointer"
+        [textContent]="getCreateBy()"
+        (click)="preview()"
+    ></div>
+    <div
+        class="documents-table__menu"
+        (click)="$event.stopPropagation();"
+    >
+        <div
+            ngbDropdown
+            [container]="'body'"
+            [placement]="'bottom-right'"
+        >
+            <div
+                class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
+                id="dropdownBasic1"
+                ngbDropdownToggle
+            ></div>
+            <ul
+                class="qt-dropdown-menu"
+                ngbDropdownMenu
+                aria-labelledby="dropdownBasic1"
+            >
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                    (click)="download()"
+                >
+                    <div class="icon__go-to qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Download
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                    class="remove-item"
+                    (click)="remove()"
+                >
+                    <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Delete
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

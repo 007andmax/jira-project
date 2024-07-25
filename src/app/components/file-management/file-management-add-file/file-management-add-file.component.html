@@ -1,0 +1,66 @@
+<div
+    *ngIf="opened"
+    class="qt-aside-modern draft-email-aside"
+    [ngStyle]="{'z-index':opened ? '6' : '5'}"
+>
+    <div class="qt-aside-modern__header">
+        <div class="qt-aside-modern__header-title">Add File</div>
+        <div
+            class="qt-aside-modern__header-close icon__close"
+            (click)="close()"
+        ></div>
+    </div>
+    <div class="qt-aside-modern__content new-companies-content__modal--content">
+        <div class="qt-inputs-row">
+            <div class="qt-input-block">
+                <label class="qt-input-block__label">Name</label>
+                <input
+                    [(ngModel)]="file.name"
+                    type="text"
+                    maxlength="250"
+                    placeholder="Write Subject line"
+                >
+            </div>
+        </div>
+        <div class="qt-inputs-row">
+            <div class="qt-input-block">
+                <label class="qt-input-block__label">Description</label>
+                <input
+                    [(ngModel)]="file.description"
+                    type="text"
+                    maxlength="250"
+                    placeholder="Write Subject line"
+                >
+            </div>
+        </div>
+        <div class="draft-email-container">
+            <div class="qt-w100 editor-container qt-mt-0">
+                <input
+                    type="file"
+                    #fileDropRef
+                    id="fileDropRef"
+                    (change)="fileBrowseHandler($event.target.files)"
+                >
+            </div>
+        </div>
+    </div>
+    <div class="qt-aside-modern__footer">
+        <div class="qt-df qt-w100">
+            <button
+                class="qt-button --gray qt-mr-12 qt-w100 qt-jc-c"
+                (click)="close()"
+            >
+                Cancel
+            </button>
+            <button
+                class="qt-button qt-w100 qt-jc-c"
+                appDisabledBtn
+                #addBtn="disabled"
+                (onClick)="onSend()"
+            >
+                <span *ngIf="!addBtn.isBlock()">Send</span>
+                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+            </button>
+        </div>
+    </div>
+</div>

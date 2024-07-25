@@ -1,0 +1,16 @@
+.disabled {
+    background-color: rgb(235, 235, 228);
+    cursor: default !important;
+}
+
+.documents-table__assigned-companies {
+    width: 180px;
+    max-width: 180px;
+    min-width: 180px;
+}
+.upload-file {
+    input[type="file"] {
+            height: 100%;
+            opacity: 0;
+        }
+}

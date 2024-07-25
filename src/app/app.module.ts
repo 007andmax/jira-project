@@ -141,6 +141,7 @@ import { SuperAdminPublicListComponent } from './components/super-admin-public/s
 import { SuperAdminPublicListModule } from './components/super-admin-public/super-admin-public-list/super-admin-public-list.module';
 import { ProductTypeCheckUseComponent } from './components/setting/products-settings/product-type-check-use/product-type-check-use.component';
 import { ProductTypeCheckUseModule } from './components/setting/products-settings/product-type-check-use/product-type-check-use.module';
+import { FileManagementComponent } from './components/file-management/file-management.component';
 declare var $: any;
 
 /**

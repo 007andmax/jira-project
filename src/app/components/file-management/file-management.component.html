@@ -1,0 +1,38 @@
+<div class="qt-page-list documents-page ">
+    <app-file-management-header></app-file-management-header>
+    <div class="qt-page-list__body">
+        <div class="qt-page-list__body-table-container">
+            <div class="qt-page-list__body-tbody qt-table-modern documents-table">
+                <div class="tbody">
+                    <ng-template
+                        ngFor
+                        let-item
+                        [ngForOf]="categories"
+                        [ngForTrackBy]="trackById"
+                    >
+                        <app-file-management-item-category [item]="item"></app-file-management-item-category>
+                    </ng-template>
+                    <ng-template
+                        ngFor
+                        let-item
+                        [ngForOf]="files"
+                        [ngForTrackBy]="trackById"
+                    >
+                        <app-file-management-item-file [item]="item"></app-file-management-item-file>
+                    </ng-template>
+                </div>
+            </div>
+            <div
+                class="no-exist-elements"
+                *ngIf="!showPreloader && categories.length == 0 && files.length == 0"
+            >
+                We couldn't find any results
+            </div>
+            <div
+                class="loading"
+                *ngIf="showPreloader"
+            ></div>
+        </div>
+    </div>
+</div>
+<app-file-management-add-file></app-file-management-add-file>

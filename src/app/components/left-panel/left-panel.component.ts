@@ -105,6 +105,8 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
           if (window.location.href.includes(`/payments`)) this.state = 'new-payments-ng2';
           if (window.location.href.includes(`/contracts`)) this.state = 'new-contracts';
           if (window.location.href.includes(`/default`)) this.state = 'default';
+          if (window.location.href.includes(`/file-management`)) this.state = 'file-management';
+          if (window.location.href.includes(`/file-management`) && window.location.href.includes(`category`)) this.state = 'file-management-category';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`dashboard`)) this.state = 'company-dashboard';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`tickets`)) this.state = 'company-tickets';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`user`)) this.state = 'company-user';
@@ -373,6 +375,7 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
       if (this.state === 'company-documents') this.goToLink(`company/${this.companiesStateService.getCompanyRoutingId()}/documents`);
       if (this.state === 'new-devices') this.goToLink('devices');
       if (this.state === 'new-device-summary') this.goToLink('devices/reports');
+      if (this.state === 'file-management') this.goToLink('file-management');
 
       if (this.state === 'byProducts' ||
         this.state === 'byCustomers' ||

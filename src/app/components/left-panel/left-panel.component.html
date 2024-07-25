@@ -110,6 +110,16 @@
             <div class="app-left-panel__menu-icon --reports"></div>
         </div>
         <div
+            *ngIf="getAccessReports()"
+            class="app-left-panel__menu-icon-wrap pointer"
+            (click)="changePage('FILE_MANAGEMENT');onChangeState('file-management')"
+            [ngClass]="{'--active':page === 'FILE_MANAGEMENT' }"
+            placement="right"
+            ngbTooltip="Reports"
+        >
+            <div class="app-left-panel__menu-icon --reports"></div>
+        </div>
+        <div
             class="app-left-panel__menu-icon-wrap app-left-panel__menu-icon-wrap-settings pointer"
             (click)="changePage('SETTINGS');onOpenPanel();onChangeState('myprofile-component')"
             [ngClass]="{'--active':page === 'SETTINGS' }"
