@@ -186,6 +186,9 @@
   &__map {
     mask-image: url("/assets/img/icons/map.svg");
   }
+  &__new {
+    mask-image: url("/assets/img/icons/new.svg");
+  }
   &__folder {
     mask-image: url("/assets/img/icons/folder.svg");
   }
@@ -207,7 +210,6 @@
   &__pages {
     mask-image: url("/assets/img/icons/pages.svg");
   }
-  // TODO Start Rename Icon Name
   &__categories {
     mask-image: url("/assets/img/icons/categories.svg");
   }
