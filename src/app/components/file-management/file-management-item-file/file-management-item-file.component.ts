@@ -27,7 +27,7 @@ export class FileManagementItemFileComponent implements OnInit {
   download() {
     console.log(`${this.item.name}.${this.item.contentType.substring(this.item.contentType.indexOf("/") + 1, this.item.contentType.length)}`);
     var req = new XMLHttpRequest();
-    //  req.responseType = "arraybuffer";
+    req.responseType = "";
     req.open('GET', `/file/${this.item.mediaFileId}`, true); /* Третий аргумент true означает асинхронность */
     req.onload = (oEvent) => {
       console.log("oEvent", oEvent);
@@ -39,7 +39,7 @@ export class FileManagementItemFileComponent implements OnInit {
       link.click();
     };
     req.onerror = (error) => {
-      console.log("error", error);
+      console.log("error", req.responseText);
     }
     req.send(null);
   }
