@@ -30,6 +30,7 @@ export class FileManagementItemFileComponent implements OnInit {
     req.responseType = "arraybuffer";
     req.open('GET', `/file/${this.item.mediaFileId}`, true); /* Третий аргумент true означает асинхронность */
     req.onload = (oEvent) => {
+      console.log("oEvent", oEvent);
       var blob = new Blob([req.response], { type: this.item.contentType });
       console.log("blob", blob);
       const link = document.createElement("a");
@@ -37,6 +38,9 @@ export class FileManagementItemFileComponent implements OnInit {
       link.download = `${this.item.name}.${this.item.contentType.substring(this.item.contentType.indexOf("/") + 1, this.item.contentType.length)}`;
       link.click();
     };
+    req.onerror = (error) => {
+      console.log("error", error);
+    }
     req.send(null);
   }
   getCreateBy() {
