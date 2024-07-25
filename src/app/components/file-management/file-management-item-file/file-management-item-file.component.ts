@@ -25,15 +25,18 @@ export class FileManagementItemFileComponent implements OnInit {
 
   }
   download() {
-    this.fileManagementService.downloadFile(`file/${this.item.mediaFileId}`)
-      .subscribe((response: any) => {
-        let blob = response.blob();
-        console.log("blob", blob);
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = `${this.item}.${this.item.contentType.substring(this.item.contentType.indexOf("/"), this.item.contentType.length)}`;
-        link.click();
-      })
+    var req = new XMLHttpRequest();
+    req.responseType = "arraybuffer";
+    req.open('GET', `/file/${this.item.mediaFileId}`, true); /* Третий аргумент true означает асинхронность */
+    req.onload = (oEvent) => {
+      var blob = new Blob([req.response], { type: this.item.contentType });
+      console.log("blob", blob);
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = `${this.item}.${this.item.contentType.substring(this.item.contentType.indexOf("/"), this.item.contentType.length)}`;
+      link.click();
+    };
+    req.send(null);
   }
   getCreateBy() {
     return this.item.createdAt;
