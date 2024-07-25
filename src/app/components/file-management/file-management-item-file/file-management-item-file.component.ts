@@ -26,7 +26,7 @@ export class FileManagementItemFileComponent implements OnInit {
   }
   download() {
     var req = new XMLHttpRequest();
-    req.responseType = (this.item.contentType == "text/plain") ? "document" : "blob";
+    req.responseType = (this.item.contentType == "text/plain") ? "document" : "arraybuffer";
     req.open('GET', `/file/${this.item.mediaFileId}`, true); /* Третий аргумент true означает асинхронность */
     req.onload = (oEvent) => {
       console.log("oEvent", oEvent);
