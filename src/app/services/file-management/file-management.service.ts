@@ -27,7 +27,7 @@ export class FileManagementService {
     return this.http.get(`${this.apiUrl}file-management${categoryId ? '?categoryId=' + categoryId : ''}`)
   }
   public downloadFile(url) {
-    return this.http.get(url)
+    return this.http.get(`${this.apiUrl}${url}`)
   }
 
   public addFile(data) {

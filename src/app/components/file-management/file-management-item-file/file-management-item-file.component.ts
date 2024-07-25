@@ -25,7 +25,7 @@ export class FileManagementItemFileComponent implements OnInit {
 
   }
   download() {
-    this.fileManagementService.downloadFile(this.item.url)
+    this.fileManagementService.downloadFile(`file/${this.item.mediaFileId}`)
       .subscribe((response: any) => {
         let blob = response.blob();
         console.log("blob", blob);
