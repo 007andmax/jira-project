@@ -3474,6 +3474,11 @@ add-category-product {
     line-height: 16px;
     font-weight: 500;
   }
+  .qt-input-block {
+    label {
+      margin-bottom: 8px;
+    }
+  }
   .btn-primary {
     min-width: auto;
   }
