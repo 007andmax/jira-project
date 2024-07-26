@@ -1,0 +1,79 @@
+<div
+    class="tab-pane-input__row company-info-block qt-ml-32 qt-mr-32 qt-mt-16"
+    [hidden]="loading"
+>
+    <div class="icon__company-info qt-sz-20 qt-ic-c qt-mr-8 qt-fs-0"></div>
+    <span class="qt-f-1">
+        Tags can be used in tickets to identify specific issues, when quicktech matches tag words in a ticket
+                        they will automaticly be added to the tags. Tags can be used to search tickets
+    </span>
+</div>
+<div
+    class="cmn-area"
+    [hidden]="loading"
+>
+    <div class="tab-pane__table dataTable">
+        <div class="tab-pane__table-header">
+            <div class="tab-pane__table-row">
+                <div class="tab-pane__table-cell manage-tags-table__custom-tags pointer">
+                    <span>Custom Tags</span>
+                    <div class="qt-table-modern__sorting--new"></div>
+                </div>
+                <div class="tab-pane__table-cell manage-tags-table__count pointer">
+                    Count
+                    <div class="qt-table-modern__sorting--new"></div>
+                </div>
+                <th class="tab-pane__table-cell manage-tags-table__action pointer"></th>
+            </div>
+        </div>
+        <div class="tab-pane__table-body">
+            <manage-tags-add
+                *ngIf="create"
+                [setActiveTab]="setActiveTab"
+                (onClose)="create = false"
+            ></manage-tags-add>
+            <div
+                class="tab-pane__table-row"
+                *ngFor="
+                            let ticket of tags | tag: searchTag;
+                            let i = index;
+                            trackBy: trackByFn
+                          "
+                appClickOtside
+                [init]="ticket.isInitEdit"
+                [ngClass]="['edit-tag-container-' + i,ticket.selected ? '--selected' : '']"
+                [class]="'.edit-tag-container-' + i"
+                (onOutSide)="onEditTag(ticket)"
+            >
+                <div class="tab-pane__table-cell manage-tags-table__custom-tags">
+                    <input
+                        type="text"
+                        class="form-input  --editable"
+                        placeholder="Enter Name Status"
+                        [(ngModel)]="ticket.word"
+                        appKeyUpEnter
+                        (onChange)="onEditTag(ticket)"
+                        (input)="ticket.onInitEdit(true)"
+                    >
+                </div>
+                <div class="tab-pane__table-cell manage-tags-table__count">{{ ticket.usedCounter }}</div>
+                <div class="tab-pane__table-cell manage-tags-table__action qt-pos-rel">
+                    <div class="qt-df qt-ai-c">
+                        <app-dynamic-tooltip
+                            [content]="'Remove'"
+                            [position]="'top'"
+                            #removeTooltip
+                        ></app-dynamic-tooltip>
+                        <div
+                            (mouseenter)="removeTooltip.show($event.target)"
+                            (mouseleave)="removeTooltip.hide()"
+                            class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                            (click)="ConfirmDelete(ticket.id,ticket.word)"
+                        >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

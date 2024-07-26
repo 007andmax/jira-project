@@ -14,9 +14,11 @@ import { FileManagementItemCategoryModule } from './file-management-item-categor
 import { FileManagementItemFileModule } from './file-management-item-file/file-management-item-file.module';
 import { FileManagementHeaderModule } from './file-management-header/file-management-header.module';
 import { FileManagementAddFileComponent } from './file-management-add-file/file-management-add-file.component';
+import { FileManagementAddFileModule } from './file-management-add-file/file-management-add-file.module';
+import { FileManagementAddCategoryComponent } from './file-management-add-category/file-management-add-category.component';
 
 @NgModule({
-    declarations: [FileManagementComponent, FileManagementAddFileComponent
+    declarations: [FileManagementComponent
 
     ],
     imports: [
@@ -28,7 +30,8 @@ import { FileManagementAddFileComponent } from './file-management-add-file/file-
         NgbModule,
         FileManagementItemCategoryModule,
         FileManagementItemFileModule,
-        FileManagementHeaderModule
+        FileManagementHeaderModule,
+        FileManagementAddFileModule
     ],
 })
 export class FileManagementModule { }

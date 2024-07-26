@@ -19,11 +19,12 @@ export class ManageTagsAddComponent implements OnInit {
   }
   save() {
     if (this.name.length === 0 || this.isInitRequest) return;
-    const tags = {
+    const tags: any = {
       colorCode: 0,
       usedCounter: 0,
       word: this.name
     };
+    if (this.setActiveTab == "file") tags.defaultTag = "FILE_TAG";
     this.isInitRequest = true;
     this.tagsService.tags(tags, this.setActiveTab).pipe(map((res) => res),
       catchError(error => of(undefined)))

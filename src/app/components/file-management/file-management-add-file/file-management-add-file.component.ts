@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { FileManagementAddFile } from './class/file-management-add-file';
 import { FileManagementService } from 'src/app/services/file-management/file-management.service';
 import { FileManagementStateService } from 'src/app/states/file-management/file-management-state.service';
@@ -9,6 +9,7 @@ import { FileManagementStateService } from 'src/app/states/file-management/file-
   styleUrls: ['./file-management-add-file.component.scss']
 })
 export class FileManagementAddFileComponent implements OnInit {
+  @Input() categoryId: string;
   file: FileManagementAddFile = new FileManagementAddFile();
   files: any[] = [];
   opened: boolean = false;
@@ -20,6 +21,7 @@ export class FileManagementAddFileComponent implements OnInit {
   ngOnInit() {
     this.fileManagementStateService.onShowAsideForAdd.subscribe(() => {
       this.file = new FileManagementAddFile();
+      this.file.setCategoryId(this.categoryId);
       this.opened = true;
     })
   }

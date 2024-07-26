@@ -24,6 +24,7 @@ import { ConfirmComponent } from "../../shared/confirm/confirm.component";
 import { ManageTag } from "./class/manage-tag";
 import { ManageTagsDevicesComponent } from "./manage-tags-devices/manage-tags-devices.component";
 import { fadeInAnimation } from "src/app/animations";
+import { ManageTagsFilesComponent } from "./manage-tags-files/manage-tags-files.component";
 declare var $: any;
 @Component({
   selector: "app-manage-tags",
@@ -60,6 +61,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
   };
   @ViewChild("tickets") tickets: ElementRef;
   @ViewChild("devicesTags") devicesTags: ManageTagsDevicesComponent;
+  @ViewChild("filesTags") filesTags: ManageTagsFilesComponent;
   private tabSet: ViewContainerRef;
 
   @ViewChild(NgbTabset) set content(content: ViewContainerRef) {
@@ -177,6 +179,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       this.onScroll();
     }
     if (this.devicesTags) this.devicesTags.searchTag = this.searchTag;
+    if (this.filesTags) this.filesTags.searchTag = this.searchTag;
   }
   public setDefaultScoll() {
     this.page = 0;
@@ -267,6 +270,9 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     } else if (data['nextId'] === 'tab3') {
       this.infiniteScrollDisabled = true;
       this.setActiveTab = "device";
+    } else if (data['nextId'] === 'tab4') {
+      this.infiniteScrollDisabled = true;
+      this.setActiveTab = "file";
     }
   }
 
@@ -294,6 +300,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     this.create = true;
     this.selectedIdx = -1;
     if (this.devicesTags) this.devicesTags.onAdd();
+    if (this.filesTags) this.filesTags.onAdd();
   }
 
   onCancel() {

@@ -8,6 +8,9 @@ export class FileManagementAddFile {
     constructor() {
 
     }
+    public setCategoryId(data) {
+        this.categoryId = data;
+    }
     public setMediaFileId(data) {
         this.mediaFileId = data;
     }

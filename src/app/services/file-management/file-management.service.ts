@@ -29,9 +29,19 @@ export class FileManagementService {
   public downloadFile(url) {
     return this.http.get(`${this.apiUrl}${url}`)
   }
-
+  public getTags(page, partWord) {
+    return this.http.get(`${this.apiUrl}commonTags/filter?page=${page}&size=20&partWord=${partWord}&defaultTag=FILE_TAG`)
+  }
   public addFile(data) {
     return this.http.post(`${this.apiUrl}file-management/files`, data)
+  }
+  public addCategory(data) {
+    return this.http.post(`${this.apiUrl}file-management/categories`, data).pipe(
+      tap(data => {
+        this.toastrService.success("The new category has been successfully created");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public downloadPdf(url) {
     return this.http.get(url, {

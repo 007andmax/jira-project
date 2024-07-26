@@ -11,6 +11,7 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 })
 export class FileManagementHeaderComponent implements OnInit {
   activePage: string = "";
+  toggleAddCategory: boolean = false;
   sub: Subscription = new Subscription();
   constructor(private leftPanelStateService: LeftPanelStateService,
     public cd: ChangeDetectorRef,

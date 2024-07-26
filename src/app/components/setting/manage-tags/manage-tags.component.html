@@ -376,6 +376,18 @@
                     ></app-manage-tags-devices>
                 </ng-template>
             </ngb-tab>
+            <ngb-tab
+                #devices
+                title="Files"
+                id="tab4"
+            >
+                <ng-template ngbTabContent>
+                    <app-manage-tags-files
+                        #filesTags
+                        *ngIf="setActiveTab == 'file'"
+                    ></app-manage-tags-files>
+                </ng-template>
+            </ngb-tab>
         </ngb-tabset>
     </div>
 </div>

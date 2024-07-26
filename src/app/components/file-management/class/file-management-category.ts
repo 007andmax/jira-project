@@ -6,9 +6,11 @@ export class FileManagementCategory {
     "subcategories": Array<FileManagementCategory>;
     "allCompaniesRoot": boolean;
     "customerCompanyRoot": boolean;
-    constructor(data) {
-        for (const key in data) {
-            this[key] = data[key];
+    constructor(data = null) {
+        if (data) {
+            for (const key in data) {
+                this[key] = data[key];
+            }
         }
     }
 }

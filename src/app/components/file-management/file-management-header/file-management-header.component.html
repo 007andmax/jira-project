@@ -55,6 +55,18 @@
                                 <span>Upload file</span>
                             </span>
                         </button>
+                        <a
+                            href="javascript:;"
+                            class="qt-button --md --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
+                            (click)="toggleAddCategory = !toggleAddCategory"
+                        >
+                            <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+                            Add Category
+                        </a>
+                        <app-file-management-add-category
+                            *ngIf="toggleAddCategory"
+                            (onClose)="toggleAddCategory = false"
+                        ></app-file-management-add-category>
                     </div>
                 </div>
             </div>
