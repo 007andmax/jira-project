@@ -26,6 +26,22 @@ export class FileManagementService {
   public getFileManagement(categoryId = null) {
     return this.http.get(`${this.apiUrl}file-management${categoryId ? '?categoryId=' + categoryId : ''}`)
   }
+  public removeFile(fileId) {
+    return this.http.delete(`${this.apiUrl}file-management/files/${fileId}`).pipe(
+      tap(data => {
+        this.toastrService.success("The File has been successfully deleted");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public removeCategory(categoryId) {
+    return this.http.delete(`${this.apiUrl}file-management/categories/${categoryId}`).pipe(
+      tap(data => {
+        this.toastrService.success("The category has been successfully deleted");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
   public downloadFile(url) {
     return this.http.get(`${this.apiUrl}${url}`)
   }

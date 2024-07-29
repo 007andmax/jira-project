@@ -10,7 +10,10 @@
                         [ngForOf]="categories"
                         [ngForTrackBy]="trackById"
                     >
-                        <app-file-management-item-category [item]="item"></app-file-management-item-category>
+                        <app-file-management-item-category
+                            [item]="item"
+                            (onRemove)="onRemoveCategory($event)"
+                        ></app-file-management-item-category>
                     </ng-template>
                     <ng-template
                         ngFor
@@ -18,7 +21,10 @@
                         [ngForOf]="files"
                         [ngForTrackBy]="trackById"
                     >
-                        <app-file-management-item-file [item]="item"></app-file-management-item-file>
+                        <app-file-management-item-file
+                            [item]="item"
+                            (onRemove)="onRemoveFile($event)"
+                        ></app-file-management-item-file>
                     </ng-template>
                 </div>
             </div>

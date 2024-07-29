@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FileManagementCategory } from '../class/file-management-category';
 import { Router } from '@angular/router';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -10,6 +10,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 })
 export class FileManagementItemCategoryComponent implements OnInit {
   @Input() item: FileManagementCategory;
+  @Output() onRemove = new EventEmitter<any>();
   constructor(public router: Router,
     public companiesStateService: CompaniesStateService
   ) { }
@@ -19,5 +20,8 @@ export class FileManagementItemCategoryComponent implements OnInit {
   navigateToCategory() {
     this.router.navigate(
       [`${this.companiesStateService.getCurrentCompany().techDomain}/file-management/category/`, this.item.id]);
+  }
+  removeCategory() {
+    this.onRemove.emit(this.item);
   }
 }

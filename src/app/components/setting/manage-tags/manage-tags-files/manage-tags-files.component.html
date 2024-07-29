@@ -4,8 +4,7 @@
 >
     <div class="icon__company-info qt-sz-20 qt-ic-c qt-mr-8 qt-fs-0"></div>
     <span class="qt-f-1">
-        Tags can be used in tickets to identify specific issues, when quicktech matches tag words in a ticket
-                        they will automaticly be added to the tags. Tags can be used to search tickets
+        Tags can be used in the file management section to identify specific files. Tags can be used to search for files.
     </span>
 </div>
 <div
@@ -15,7 +14,10 @@
     <div class="tab-pane__table dataTable">
         <div class="tab-pane__table-header">
             <div class="tab-pane__table-row">
-                <div class="tab-pane__table-cell manage-tags-table__custom-tags pointer">
+                <div
+                    class="tab-pane__table-cell manage-tags-table__custom-tags pointer"
+                    (click)="onFilter('name')"
+                >
                     <span>Custom Tags</span>
                     <div class="qt-table-modern__sorting--new"></div>
                 </div>

@@ -7,6 +7,7 @@ import { FileManagementService } from 'src/app/services/file-management/file-man
 import { TagsService } from 'src/app/services/tags/tags.service';
 import { catchError, map } from 'rxjs/operators';
 import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
+import { ManageTagsFilter } from '../class/manage-tags-filter';
 
 @Component({
   selector: 'app-manage-tags-files',
@@ -14,6 +15,7 @@ import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service'
   styleUrls: ['./manage-tags-files.component.scss']
 })
 export class ManageTagsFilesComponent implements OnInit, OnDestroy {
+  filter: ManageTagsFilter = new ManageTagsFilter();
   setActiveTab: string = "file";
   searchTag: string;
   create: boolean = false;
@@ -38,12 +40,14 @@ export class ManageTagsFilesComponent implements OnInit, OnDestroy {
     })
     let changeTagsArray = this.tagsRealTimeService.changeTagsArray.subscribe((data: any) => {
       if (data.action === "TAG_SAVED") {
-        let index = this.tags.findIndex(item => item.id === data.data.id);
-        if (index > -1) {
-          this.tags[index] = new ManageTag(data.data);
-        } else {
-          this.tags.push(new ManageTag(data.data));
-        }
+        data.data.forEach(tag => {
+          let index = this.tags.findIndex(item => item.id === tag.id);
+          if (index > -1) {
+            this.tags[index] = new ManageTag(tag);
+          } else {
+            this.tags.push(new ManageTag(tag));
+          }
+        })
       }
       if (data.action === "TAG_REMOVED") {
         let index = this.tags.findIndex(item => item.id === data.data);
@@ -79,6 +83,9 @@ export class ManageTagsFilesComponent implements OnInit, OnDestroy {
             item.setIsInitRequest(false);
           })
     }
+  }
+  onFilter(field) {
+    this.filter.onFilter(field, this.tags);
   }
   ConfirmDelete(tID: string, name) {
     this.onRemove.emit({ id: tID, word: name })

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FileManagementFile } from '../class/file-management-file';
 import { PreviewAttachmentStateService } from '../../tickets/tickets/ticket-edit-aside/preview-attachment/services/preview-attachment-state.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
@@ -11,6 +11,7 @@ import { FileManagementService } from 'src/app/services/file-management/file-man
 })
 export class FileManagementItemFileComponent implements OnInit {
   @Input() item: FileManagementFile;
+  @Output() onRemove = new EventEmitter<any>();
   constructor(private previewAttachmentStateService: PreviewAttachmentStateService,
     public ticketsService: TicketsService,
     private fileManagementService: FileManagementService
@@ -22,7 +23,7 @@ export class FileManagementItemFileComponent implements OnInit {
     if (this.item.contentType === "image/jpg" || this.item.contentType === "image/png" || this.item.contentType === "image/jpeg") this.previewAttachmentStateService.onInitPreview(this.item.url);
   }
   remove() {
-
+    this.onRemove.emit(this.item);
   }
   download() {
     var req = new XMLHttpRequest();
