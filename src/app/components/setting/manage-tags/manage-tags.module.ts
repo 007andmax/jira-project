@@ -14,6 +14,7 @@ import { ManageTagsDevicesComponent } from './manage-tags-devices/manage-tags-de
 import { ManageTagsDevicesAddComponent } from './manage-tags-devices/manage-tags-devices-add/manage-tags-devices-add.component';
 import { DeviceTagPipe } from 'src/app/pipe/device-tag.pipe';
 import { ManageTagsFilesComponent } from './manage-tags-files/manage-tags-files.component';
+import { MatFormFieldModule } from '@angular/material';
 
 
 
@@ -36,6 +37,7 @@ import { ManageTagsFilesComponent } from './manage-tags-files/manage-tags-files.
         ClickOutsideModule,
         KeyUpEnterModule,
         DynamicTooltipModule,
+        MatFormFieldModule,
     ],
     exports: [TagPipe]
 

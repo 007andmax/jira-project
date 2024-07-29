@@ -21,3 +21,11 @@
     bottom: 20px;
     top: auto;
 }
+.--input-error {
+    position: relative;
+
+    input,
+    input:hover {
+        border: solid 1px $red-600 !important;
+    }
+}

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FileManagementStateService } from 'src/app/states/file-management/file-management-state.service';
 import { ManageTag } from '../class/manage-tag';
 import { of, Subscription } from 'rxjs';
@@ -6,6 +6,7 @@ import { ConfirmStateService } from 'src/app/components/shared/confirm/services/
 import { FileManagementService } from 'src/app/services/file-management/file-management.service';
 import { TagsService } from 'src/app/services/tags/tags.service';
 import { catchError, map } from 'rxjs/operators';
+import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
 
 @Component({
   selector: 'app-manage-tags-files',
@@ -19,10 +20,12 @@ export class ManageTagsFilesComponent implements OnInit, OnDestroy {
   tags: Array<ManageTag> = [];
   loading: boolean = true;
   sub: Subscription = new Subscription();
+  @Output() onRemove: EventEmitter<any> = new EventEmitter();
   constructor(private fileManagementStateService: FileManagementStateService,
     private confirmStateService: ConfirmStateService,
     private fileManagementService: FileManagementService,
     private tagsService: TagsService,
+    private tagsRealTimeService: TagsRealTimeService,
     public cd: ChangeDetectorRef
   ) { }
 
@@ -33,14 +36,25 @@ export class ManageTagsFilesComponent implements OnInit, OnDestroy {
       this.loading = false;
       this.cd.detectChanges();
     })
-    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-      /* if (data) {
-         if (this.confirmStateService.getConfirmAction() === DELETE_DEVICE_TAG) {
-           this.onRemoveTag()
-         }
-       }*/
+    let changeTagsArray = this.tagsRealTimeService.changeTagsArray.subscribe((data: any) => {
+      if (data.action === "TAG_SAVED") {
+        let index = this.tags.findIndex(item => item.id === data.data.id);
+        if (index > -1) {
+          this.tags[index] = new ManageTag(data.data);
+        } else {
+          this.tags.push(new ManageTag(data.data));
+        }
+      }
+      if (data.action === "TAG_REMOVED") {
+        let index = this.tags.findIndex(item => item.id === data.data);
+        if (index > -1) this.tags.splice(index, 1);
+
+        let indexCompany = this.tags.findIndex(item => item.id === data.data);
+        if (indexCompany > -1) this.tags.splice(indexCompany, 1);
+      }
+      this.cd.detectChanges();
     })
-    this.sub.add(getConfirm);
+    this.sub.add(changeTagsArray);
   }
   public onAdd() {
     this.create = true;
@@ -48,7 +62,8 @@ export class ManageTagsFilesComponent implements OnInit, OnDestroy {
   }
   onEditTag(item) {
     if (item.isInitEdit) {
-      if (item.word.length === 0 || item.disableUpdate || item.isInitRequest) return;
+      if (this.tags.some(tag => tag.word == item.word && tag.id != item.id)) item.setIsUniqueness(false);
+      if (item.word.length === 0 || item.disableUpdate || item.isInitRequest || !item.isUniqueness) return;
       item.setIsInitRequest(true);
       this.tagsService
         .setWordForTag(
@@ -64,6 +79,9 @@ export class ManageTagsFilesComponent implements OnInit, OnDestroy {
             item.setIsInitRequest(false);
           })
     }
+  }
+  ConfirmDelete(tID: string, name) {
+    this.onRemove.emit({ id: tID, word: name })
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

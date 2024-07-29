@@ -6,7 +6,10 @@
     [class]="'.add-tag-container'"
     (onOutSide)="save()"
 >
-    <div class="tab-pane__table-cell manage-tags-table__custom-tags">
+    <div
+        class="tab-pane__table-cell manage-tags-table__custom-tags"
+        [ngClass]="{'--input-error' :  !isUniqueness  }"
+    >
         <input
             type="text"
             class="form-input  --editable"
@@ -14,6 +17,12 @@
             [(ngModel)]="name"
             (keyup)="onKeyUp($event)"
         >
+        <mat-error
+            class="qt-tooltip-error"
+            *ngIf="!isUniqueness"
+        >
+            This Tag is already occupied
+        </mat-error>
     </div>
     <div class="tab-pane__table-cell manage-tags-table__count"></div>
     <div class="tab-pane__table-cell manage-tags-table__action qt-pos-rel"></div>

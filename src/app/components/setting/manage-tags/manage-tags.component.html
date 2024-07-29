@@ -385,6 +385,7 @@
                     <app-manage-tags-files
                         #filesTags
                         *ngIf="setActiveTab == 'file'"
+                        (onRemove)="ConfirmDelete($event.id,$event.word)"
                     ></app-manage-tags-files>
                 </ng-template>
             </ngb-tab>

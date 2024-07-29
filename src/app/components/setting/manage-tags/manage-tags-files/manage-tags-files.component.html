@@ -29,34 +29,45 @@
         <div class="tab-pane__table-body">
             <manage-tags-add
                 *ngIf="create"
+                [checkUniqueness]="true"
+                [list]="tags"
                 [setActiveTab]="setActiveTab"
                 (onClose)="create = false"
             ></manage-tags-add>
             <div
                 class="tab-pane__table-row"
                 *ngFor="
-                            let ticket of tags | tag: searchTag;
+                            let tag of tags | tag: searchTag;
                             let i = index;
                             trackBy: trackByFn
                           "
                 appClickOtside
-                [init]="ticket.isInitEdit"
-                [ngClass]="['edit-tag-container-' + i,ticket.selected ? '--selected' : '']"
+                [init]="tag.isInitEdit"
+                [ngClass]="['edit-tag-container-' + i,tag.selected ? '--selected' : '']"
                 [class]="'.edit-tag-container-' + i"
-                (onOutSide)="onEditTag(ticket)"
+                (onOutSide)="onEditTag(tag)"
             >
-                <div class="tab-pane__table-cell manage-tags-table__custom-tags">
+                <div
+                    class="tab-pane__table-cell manage-tags-table__custom-tags"
+                    [ngClass]="{'--input-error' : !tag.isUniqueness  }"
+                >
                     <input
                         type="text"
                         class="form-input  --editable"
                         placeholder="Enter Name Status"
-                        [(ngModel)]="ticket.word"
+                        [(ngModel)]="tag.word"
                         appKeyUpEnter
-                        (onChange)="onEditTag(ticket)"
-                        (input)="ticket.onInitEdit(true)"
+                        (onChange)="onEditTag(tag)"
+                        (input)="tag.onInitEdit(true);item.setIsUniqueness(true)"
                     >
+                    <mat-error
+                        class="qt-tooltip-error"
+                        *ngIf="!tag.isUniqueness"
+                    >
+                        This Tag is already occupied
+                    </mat-error>
                 </div>
-                <div class="tab-pane__table-cell manage-tags-table__count">{{ ticket.usedCounter }}</div>
+                <div class="tab-pane__table-cell manage-tags-table__count">{{ tag.usedCounter }}</div>
                 <div class="tab-pane__table-cell manage-tags-table__action qt-pos-rel">
                     <div class="qt-df qt-ai-c">
                         <app-dynamic-tooltip
@@ -68,7 +79,7 @@
                             (mouseenter)="removeTooltip.show($event.target)"
                             (mouseleave)="removeTooltip.hide()"
                             class="icon__remove qt-sz-20 qt-bg-contain pointer"
-                            (click)="ConfirmDelete(ticket.id,ticket.word)"
+                            (click)="ConfirmDelete(tag.id,tag.word)"
                         >
                         </div>
                     </div>
