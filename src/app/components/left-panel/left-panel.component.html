@@ -117,7 +117,7 @@
             placement="right"
             ngbTooltip="Reports"
         >
-            <div class="app-left-panel__menu-icon --reports"></div>
+            <div class="app-left-panel__menu-icon --folder-management"></div>
         </div>
         <div
             class="app-left-panel__menu-icon-wrap app-left-panel__menu-icon-wrap-settings pointer"
@@ -176,6 +176,13 @@
             [activePage]="state"
             [hidden]="page !== 'COMPANIES'"
         ></app-left-panel-companies>
+        <app-left-panel-file-management
+            #filesCompanies
+            (onOpenPanel)="onOpenPanel()"
+            (onChangeState)="onChangeState($event)"
+            [activePage]="state"
+            [hidden]="page !== 'FILE'"
+        ></app-left-panel-file-management>
         <app-left-panel-billing
             #panelBilling
             (onOpenPanel)="onOpenPanel()"

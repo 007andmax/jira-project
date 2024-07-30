@@ -24,6 +24,7 @@ import { LeftPanelTicketsComponent } from './left-panel-tickets/left-panel-ticke
 import { LeftPanelUsersComponent } from './left-panel-users/left-panel-users.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { Subscription } from 'rxjs';
+import { LeftPanelFileManagementComponent } from './left-panel-file-management/left-panel-file-management.component';
 
 /**
  * Left panel component
@@ -53,6 +54,7 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
   @ViewChild('panelInventory') panelInventory: LeftPanelInventoryComponent;
   @ViewChild('panelMarketing') panelMarketing: LeftPanelMarketingComponent;
   @ViewChild('panelPasswordManager') panelPasswordManager: LeftPanelPasswordManagerComponent;
+  @ViewChild('filesCompanies') filesCompanies: LeftPanelFileManagementComponent;
 
 
   /**
@@ -229,7 +231,7 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
       if (this.panelUsers) this.panelUsers.close();
       if (this.panelDocuments) this.panelDocuments.close();
       if (this.panelDevices) this.panelDevices.close();
-
+      if (this.filesCompanies) this.filesCompanies.close();
       if (this.panelCompanies) this.panelCompanies.openPanel();
       if (this.panelCompanies) this.panelCompanies.togglePanel(true);
     })
@@ -275,6 +277,7 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
     if (this.leftPanelService.isReportsState(data)) this.page = "REPORTS";
     if (this.leftPanelService.isSettingsPage(data)) this.page = "SETTINGS";
     if (this.leftPanelService.isDevicesPage(data)) this.page = "DEVICES";
+    if (this.leftPanelService.isFilePage(data)) this.page = "FILE";
   }
   setDefaultTypeFilter() {
     this.panelTickets.setTypeFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage)

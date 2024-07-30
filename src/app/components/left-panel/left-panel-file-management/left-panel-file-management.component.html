@@ -1,18 +1,12 @@
 <div
     class="app-left-panel__menu"
     [ngClass]="{'--active': open}"
-    (click)="open = !open;openPanel();onToggleTypeCompanies()"
+    (click)="open = !open;openPanel()"
 >
     <div class="app-left-panel__menu-title">File Manager</div>
-    <i
-        class="icn-sm report-caret-icon"
-        *ngIf="selectedCompany"
-        [ngClass]="{'report-caret-icon-rotate':toggleTypeCompanies}"
-    ></i>
 </div>
 <ul
     class="app-left-panel__menu-expand"
-    *ngIf="toggleTypeCompanies"
     [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
 >
     <a
@@ -22,8 +16,8 @@
         appRightClickBlank
     >
         <li
-            [ngClass]="{'--active':activePage === 'new-companies'}"
-            (click)="onShowAll();"
+            [ngClass]="{'--active':activePage === 'file-management'}"
+            (click)="goToState('file-management');"
         >
             All Folder
         </li>
@@ -43,9 +37,3 @@
         </li>
     </a>
 </ul>
-<app-left-panel-company
-    [selectedCompany]="selectedCompany"
-    (onChangeState)="goToState($event)"
-    [activePage]="activePage"
-    *ngIf="selectedCompany"
-></app-left-panel-company>

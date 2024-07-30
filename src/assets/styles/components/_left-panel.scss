@@ -186,6 +186,10 @@
       -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-reports.svg");
       mask-image: url("/assets/img/icons-left-sidebar/menu-reports.svg");
     }
+    &.--folder-management {
+      -webkit-mask-image: url("/assets/img/icons-left-sidebar/folder-management.svg");
+      mask-image: url("/assets/img/icons-left-sidebar/folder-management.svg");
+    }
     &.--settings {
       -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-settings.svg");
       mask-image: url("/assets/img/icons-left-sidebar/menu-settings.svg");

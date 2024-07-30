@@ -40,6 +40,9 @@ export class LeftPanelService {
   isMarketingPage(state) {
     return (state === 'marketing')
   }
+  isFilePage(state) {
+    return (state === 'file-management')
+  }
   public isCompanyPage(state) {
     return (state == 'new-companies'
       || state == 'company-dashboard'
