@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FileManagementCategory } from '../class/file-management-category';
 import { Router } from '@angular/router';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { FileManagementCategoryRenameComponent } from '../file-management-category-rename/file-management-category-rename.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-file-management-item-category',
@@ -12,7 +14,8 @@ export class FileManagementItemCategoryComponent implements OnInit {
   @Input() item: FileManagementCategory;
   @Output() onRemove = new EventEmitter<any>();
   constructor(public router: Router,
-    public companiesStateService: CompaniesStateService
+    public companiesStateService: CompaniesStateService,
+    private modalService: NgbModal,
   ) { }
 
   ngOnInit() {
@@ -24,4 +27,9 @@ export class FileManagementItemCategoryComponent implements OnInit {
   removeCategory() {
     this.onRemove.emit(this.item);
   }
+  rename() {
+    const modalRef = this.modalService.open(FileManagementCategoryRenameComponent, { windowClass: 'xs-modal user-modal', container: "app-file-management", backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.item = this.item;
+  }
+
 }

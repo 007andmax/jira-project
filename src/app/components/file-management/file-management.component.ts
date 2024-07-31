@@ -19,6 +19,7 @@ export class FileManagementComponent implements OnInit, OnDestroy {
   showPreloader: boolean = true;
   categories: Array<FileManagementCategory> = [];
   files: Array<FileManagementFile> = [];
+  groupedByCreateAt: { [key: string]: FileManagementFile[] } = {};
   sub: Subscription = new Subscription();
   constructor(private fileManagementService: FileManagementService,
     public confirmStateService: ConfirmStateService,
@@ -32,7 +33,16 @@ export class FileManagementComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.fileManagementService.getFileManagement().subscribe((data: any) => {
       this.categories = data.categories.map(item => new FileManagementCategory(item));
-      this.files = data.files.map(item => new FileManagementCategory(item));
+      this.files = data.files.map(item => new FileManagementFile(item));
+
+
+      this.files.forEach(person => {
+        if (!this.groupedByCreateAt[person.createdAt]) {
+          this.groupedByCreateAt[person.createdAt] = [];
+        }
+        this.groupedByCreateAt[person.createdAt].push(person);
+      });
+      console.log("groupedByCreateAt", this.groupedByCreateAt);
       this.showPreloader = false;
     })
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {

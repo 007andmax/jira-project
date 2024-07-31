@@ -1,4 +1,14 @@
-<div class="qt-table-modern__row">
+<div class="item-file-container">
+    <div class="qt-sz-48 qt-bg-contain qt-mb-8 qt-fs-0 icon__folder-type"></div>
+    <div class>
+        <h3 [textContent]="item.name"></h3>
+    </div>
+</div>
+
+<div
+    class="qt-table-modern__row"
+    *ngIf="false"
+>
     <div
         class="documents-table__title ellipsis pointer"
         (click)="navigateToCategory()"
@@ -37,10 +47,10 @@
                 <li
                     class="pointer"
                     ngbDropdownItem
-                    (click)="goToEditDocument()"
+                    (click)="rename()"
                 >
-                    <div class="icon__edit qt-sz-16 qt-bg-contain qt-mr-8"></div>
-                    Edit
+                    <div class="icon__rename-folder qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Rename
                 </li>
                 <li
                     class="pointer"

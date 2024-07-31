@@ -1,4 +1,30 @@
-<div class="qt-table-modern__row">
+<div class="item-file-container">
+    <div
+        class="qt-sz-48 qt-bg-contain qt-mb-8 qt-fs-0"
+        [ngClass]="{'icon__file-type-pdf': item.contentType == 'application/pdf',
+    'icon__file-type-txt': item.contentType == 'text/plain',
+ 'icon__file-type-csv': item.contentType == 'text/csv',
+'icon__file-type-doc': item.contentType == 'application/msword',
+'icon__file-type-html': item.contentType == 'text/html',
+'icon__file-type-odt': item.contentType == 'application/vnd.oasis.opendocument.text'}"
+        *ngIf="!isImage()"
+    ></div>
+    <div
+        class="qt-sz-48 qt-bg-contain qt-mb-8 qt-fs-0"
+        *ngIf="isImage()"
+    >
+        <img [src]="item.url">
+    </div>
+    <div class>
+        <h3 [textContent]="item.name"></h3>
+        <span [textContent]="getCreateBy()"></span>
+    </div>
+</div>
+
+<div
+    class="qt-table-modern__row"
+    *ngIf="false"
+>
     <div
         class="documents-table__title ellipsis pointer"
         (click)="preview()"

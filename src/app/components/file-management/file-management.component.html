@@ -15,17 +15,23 @@
                             (onRemove)="onRemoveCategory($event)"
                         ></app-file-management-item-category>
                     </ng-template>
-                    <ng-template
-                        ngFor
-                        let-item
-                        [ngForOf]="files"
-                        [ngForTrackBy]="trackById"
-                    >
-                        <app-file-management-item-file
-                            [item]="item"
-                            (onRemove)="onRemoveFile($event)"
-                        ></app-file-management-item-file>
-                    </ng-template>
+                    <div *ngFor="let item of groupedByCreateAt | keyvalue">
+                        <span [textContent]="item.key"></span>
+                        <div class="qt-df qt-ai-c">
+                            <ng-template
+                                ngFor
+                                let-file
+                                [ngForOf]="groupedByCreateAt[item.key]"
+                                [ngForTrackBy]="trackById"
+                            >
+                                <app-file-management-item-file
+                                    [item]="file"
+                                    (onRemove)="onRemoveFile($event)"
+                                ></app-file-management-item-file>
+                            </ng-template>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <div

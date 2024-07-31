@@ -3,6 +3,7 @@ import { FileManagementFile } from '../class/file-management-file';
 import { PreviewAttachmentStateService } from '../../tickets/tickets/ticket-edit-aside/preview-attachment/services/preview-attachment-state.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { FileManagementService } from 'src/app/services/file-management/file-management.service';
+import * as moment from "moment";
 
 @Component({
   selector: 'app-file-management-item-file',
@@ -18,6 +19,9 @@ export class FileManagementItemFileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+  }
+  isImage() {
+    return this.item.contentType === "image/jpg" || this.item.contentType === "image/png" || this.item.contentType === "image/jpeg";
   }
   preview() {
     if (this.item.contentType === "image/jpg" || this.item.contentType === "image/png" || this.item.contentType === "image/jpeg") this.previewAttachmentStateService.onInitPreview(this.item.url);
@@ -44,7 +48,7 @@ export class FileManagementItemFileComponent implements OnInit {
     req.send();
   }
   getCreateBy() {
-    return this.item.createdAt;
+    return moment(new Date(this.item.createdAt)).format('MMM DD, YYYY');
   }
 
 }

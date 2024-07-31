@@ -59,6 +59,14 @@ export class FileManagementService {
         return data;
       }));
   }
+  public editCategory(id, data) {
+    return this.http.put(`${this.apiUrl}file-management/categories/${id}`, data).pipe(
+      tap(data => {
+        this.toastrService.success("The category has been successfully updated");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
   public downloadPdf(url) {
     return this.http.get(url, {
       headers: new HttpHeaders({

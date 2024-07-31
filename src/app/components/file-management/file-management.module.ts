@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FileManagementComponent } from './file-management.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FileManagementRoutingModule } from './file-management-routing.module';
 import { FileManagementCategoryComponent } from './file-management-category/file-management-category.component';
 import { FileManagementHeaderComponent } from './file-management-header/file-management-header.component';
@@ -16,9 +16,10 @@ import { FileManagementHeaderModule } from './file-management-header/file-manage
 import { FileManagementAddFileComponent } from './file-management-add-file/file-management-add-file.component';
 import { FileManagementAddFileModule } from './file-management-add-file/file-management-add-file.module';
 import { FileManagementAddCategoryComponent } from './file-management-add-category/file-management-add-category.component';
+import { FileManagementCategoryRenameComponent } from './file-management-category-rename/file-management-category-rename.component';
 
 @NgModule({
-    declarations: [FileManagementComponent
+    declarations: [FileManagementComponent, FileManagementCategoryRenameComponent
 
     ],
     imports: [
@@ -31,7 +32,11 @@ import { FileManagementAddCategoryComponent } from './file-management-add-catego
         FileManagementItemCategoryModule,
         FileManagementItemFileModule,
         FileManagementHeaderModule,
-        FileManagementAddFileModule
+        FileManagementAddFileModule,
+        ReactiveFormsModule
     ],
+    entryComponents: [
+        FileManagementCategoryRenameComponent
+    ]
 })
 export class FileManagementModule { }
