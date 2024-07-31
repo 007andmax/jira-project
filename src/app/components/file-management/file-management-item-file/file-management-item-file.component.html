@@ -13,7 +13,10 @@
         class="qt-sz-48 qt-bg-contain qt-mb-8 qt-fs-0"
         *ngIf="isImage()"
     >
-        <img [src]="item.url">
+        <img
+            width="48px"
+            [src]="item.url"
+        >
     </div>
     <div class>
         <h3 [textContent]="item.name"></h3>
