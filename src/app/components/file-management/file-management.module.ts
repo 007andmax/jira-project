@@ -17,9 +17,10 @@ import { FileManagementAddFileComponent } from './file-management-add-file/file-
 import { FileManagementAddFileModule } from './file-management-add-file/file-management-add-file.module';
 import { FileManagementAddCategoryComponent } from './file-management-add-category/file-management-add-category.component';
 import { FileManagementCategoryRenameComponent } from './file-management-category-rename/file-management-category-rename.component';
+import { FileManagementFileInfoComponent } from './file-management-file-info/file-management-file-info.component';
 
 @NgModule({
-    declarations: [FileManagementComponent, FileManagementCategoryRenameComponent
+    declarations: [FileManagementComponent, FileManagementCategoryRenameComponent, FileManagementFileInfoComponent
 
     ],
     imports: [

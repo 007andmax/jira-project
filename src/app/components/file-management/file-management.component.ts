@@ -16,6 +16,7 @@ import { FileManagementRealTimeService } from 'src/app/states/file-management/fi
   styleUrls: ['./file-management.component.scss']
 })
 export class FileManagementComponent implements OnInit, OnDestroy {
+  toggleFileInfo: boolean = false;
   showPreloader: boolean = true;
   categories: Array<FileManagementCategory> = [];
   files: Array<FileManagementFile> = [];
@@ -76,6 +77,9 @@ export class FileManagementComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(onChangeDocument);
+  }
+  onToggleFileInfo(data) {
+    this.toggleFileInfo = data;
   }
   removeCategory(item) {
     this.fileManagementService.removeCategory(item.id).subscribe(data => {

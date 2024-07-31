@@ -4,17 +4,20 @@
         <div class="qt-page-list__body-table-container">
             <div class="qt-page-list__body-tbody qt-table-modern documents-table">
                 <div class="tbody">
-                    <ng-template
-                        ngFor
-                        let-item
-                        [ngForOf]="categories"
-                        [ngForTrackBy]="trackById"
-                    >
-                        <app-file-management-item-category
-                            [item]="item"
-                            (onRemove)="onRemoveCategory($event)"
-                        ></app-file-management-item-category>
-                    </ng-template>
+                    <div class="qt-df categories-conteiner">
+                        <ng-template
+                            ngFor
+                            let-item
+                            [ngForOf]="categories"
+                            [ngForTrackBy]="trackById"
+                        >
+                            <app-file-management-item-category
+                                [item]="item"
+                                class="qt-mr-16 qt-mb-16"
+                                (onRemove)="onRemoveCategory($event)"
+                            ></app-file-management-item-category>
+                        </ng-template>
+                    </div>
                     <div *ngFor="let item of groupedByCreateAt | keyvalue">
                         <span [textContent]="item.key"></span>
                         <div class="qt-df qt-ai-c">
@@ -25,6 +28,7 @@
                                 [ngForTrackBy]="trackById"
                             >
                                 <app-file-management-item-file
+                                    class="qt-mr-16 qt-mb-16"
                                     [item]="file"
                                     (onRemove)="onRemoveFile($event)"
                                 ></app-file-management-item-file>
@@ -44,6 +48,26 @@
                 class="loading"
                 *ngIf="showPreloader"
             ></div>
+        </div>
+    </div>
+    <div
+        class="aside-filters"
+        *ngIf="toggleFileInfo"
+    >
+        <div class="aside-filters-header qt-df qt-ai-c qt-jc-sb">
+            <div class="aside-filters-header__title">File Info</div>
+            <div
+                class="qt-button --square-md --gray pointer"
+                (click)="onToggleFileInfo(false)"
+            >
+                <div class="icon__close qt-bg-contain qt-sz-16 pointer"></div>
+            </div>
+        </div>
+        <div class="aside-filters-content">
+            <app-file-management-file-info
+                class="qt-w100"
+                #filter
+            ></app-file-management-file-info>
         </div>
     </div>
 </div>

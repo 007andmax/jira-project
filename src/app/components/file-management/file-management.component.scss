@@ -1,3 +1,9 @@
-app-file-management-item-file {
-    display: contents;
+@import "./src/assets/styles/variable";
+
+.categories-conteiner {
+    flex-wrap: wrap;
+}
+.qt-page-list__body {
+    background-color: $white;
+    padding: 32px;
 }

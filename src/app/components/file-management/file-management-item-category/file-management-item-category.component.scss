@@ -9,7 +9,16 @@
     border-radius: 8px;
     border: 1px solid $gray-200;
     padding: 16px;
+    width: 220px;
+    position: relative;
 
+    &:hover {
+        border: 1px solid $blue-light-600;
+    }
+
+    img {
+        height: 100%;
+    }
     h3 {
         font-size: 14px;
         color: $gray-900;
