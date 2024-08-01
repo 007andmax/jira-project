@@ -13,7 +13,8 @@ import { TicketProfile } from '../../class/ticket-profile';
 @Component({
   selector: 'ticket-detail-edit-tags',
   templateUrl: './ticket-detail-edit-tags.component.html',
-  styleUrls: ['./ticket-detail-edit-tags.component.scss']
+  styleUrls: ['./ticket-detail-edit-tags.component.scss'],
+  providers: [TicketsPermissionsService]
 })
 export class TicketDetailEditTagsComponent implements OnInit, OnDestroy {
   visible = true;

@@ -13,6 +13,7 @@ import * as moment from "moment";
 export class FileManagementItemFileComponent implements OnInit {
   @Input() item: FileManagementFile;
   @Output() onRemove = new EventEmitter<any>();
+  @Output() onFileInfo = new EventEmitter<any>();
   constructor(private previewAttachmentStateService: PreviewAttachmentStateService,
     public ticketsService: TicketsService,
     private fileManagementService: FileManagementService
@@ -28,6 +29,9 @@ export class FileManagementItemFileComponent implements OnInit {
   }
   remove() {
     this.onRemove.emit(this.item);
+  }
+  fileInfo() {
+    this.onFileInfo.emit(this.item);
   }
   download() {
     var req = new XMLHttpRequest();

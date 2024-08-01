@@ -1,0 +1,123 @@
+@import './src/assets/styles/variable';
+@import "./src/assets/styles/mixin/dropdown";
+
+.dropdown-menu {
+    transform: translate(0, 0) !important;
+    top: 35px !important;
+    left: 56px !important;
+    width: 270px;
+}
+
+/deep/ .ticket-tags-container {
+    .dropdown-item {
+        @include dropdown-item;
+    }
+}
+
+/deep/ .ticket-edit-tags {
+    padding: 0;
+
+    input.mat-chip-input {
+        width: 20px;
+        margin: 0;
+        flex: 1 0 20px;
+    }
+
+    .mat-form-field {
+        width: 100%;
+    }
+
+    .mat-form-field-infix {
+        padding: 0;
+        border: none;
+    }
+
+    .mat-form-field-underline {
+        display: none;
+    }
+
+    .selected-tag-ticket {
+        background-color: $gray-100;
+        border-radius: 6px !important;
+        border: unset;
+        padding: 4px 6px !important;
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 16px;
+        color: $gray-600;
+        margin: 0;
+    }
+
+    .tag-icon {
+        display: none;
+    }
+
+    .mat-chip.mat-standard-chip .mat-chip-remove {
+        width: 12px;
+        height: 12px;
+        margin-left: 4px;
+
+        &:before {
+            top: 1px;
+            right: 0;
+            width: 12px;
+            height: 12px;
+        }
+    }
+
+    .mat-chip-remove {
+        opacity: 1;
+    }
+
+    .mat-chip-remove:before {
+        filter: brightness(0.8)
+    }
+
+    .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+        padding: 0;
+    }
+
+    .mat-standard-chip:focus {
+        box-shadow: none;
+    }
+
+    .mat-form-field-label-wrapper {
+        display: none;
+    }
+
+    .mat-chip-list-wrapper {
+        margin: 0;
+        gap: 8px;
+    }
+
+    input.mat-chip-input {
+        height: 24px;
+        padding: 0 6px;
+        border: unset;
+        box-shadow: unset;
+
+        &::placeholder {
+            color: $gray-400 !important;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+        }
+    }
+
+    .selected-tag-ticket+input.mat-chip-input {
+        &::placeholder {
+            color: transparent !important;
+        }
+
+        &:focus {
+            &::placeholder {
+                color: $gray-400 !important;
+            }
+        }
+    }
+}
+
+.ticket-detail-tag__dropdown-menu {
+    max-height: 232px;
+    padding: 8px;
+}

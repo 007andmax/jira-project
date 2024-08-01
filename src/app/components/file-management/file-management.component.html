@@ -1,73 +1,79 @@
 <div class="qt-page-list documents-page ">
     <app-file-management-header></app-file-management-header>
-    <div class="qt-page-list__body">
-        <div class="qt-page-list__body-table-container">
-            <div class="qt-page-list__body-tbody qt-table-modern documents-table">
-                <div class="tbody">
-                    <div class="qt-df categories-conteiner">
-                        <ng-template
-                            ngFor
-                            let-item
-                            [ngForOf]="categories"
-                            [ngForTrackBy]="trackById"
-                        >
-                            <app-file-management-item-category
-                                [item]="item"
-                                class="qt-mr-16 qt-mb-16"
-                                (onRemove)="onRemoveCategory($event)"
-                            ></app-file-management-item-category>
-                        </ng-template>
-                    </div>
-                    <div *ngFor="let item of groupedByCreateAt | keyvalue">
-                        <span [textContent]="item.key"></span>
-                        <div class="qt-df qt-ai-c">
+    <div class="qt-page-list-container">
+        <div class="qt-page-list__body">
+            <div class="qt-page-list__body-table-container">
+                <div class="qt-page-list__body-tbody qt-table-modern documents-table">
+                    <div class="tbody">
+                        <div class="qt-df categories-conteiner">
                             <ng-template
                                 ngFor
-                                let-file
-                                [ngForOf]="groupedByCreateAt[item.key]"
+                                let-item
+                                [ngForOf]="categories"
                                 [ngForTrackBy]="trackById"
                             >
-                                <app-file-management-item-file
+                                <app-file-management-item-category
+                                    [item]="item"
                                     class="qt-mr-16 qt-mb-16"
-                                    [item]="file"
-                                    (onRemove)="onRemoveFile($event)"
-                                ></app-file-management-item-file>
+                                    (onRemove)="onRemoveCategory($event)"
+                                    (onFileInfo)="onCategoryInfo($event)"
+                                ></app-file-management-item-category>
                             </ng-template>
                         </div>
-                    </div>
+                        <div *ngFor="let item of groupedByCreateAt | keyvalue">
+                            <span [textContent]="item.key"></span>
+                            <div class="qt-df qt-ai-c">
+                                <ng-template
+                                    ngFor
+                                    let-file
+                                    [ngForOf]="groupedByCreateAt[item.key]"
+                                    [ngForTrackBy]="trackById"
+                                >
+                                    <app-file-management-item-file
+                                        class="qt-mr-16 qt-mb-16"
+                                        [item]="file"
+                                        (onRemove)="onRemoveFile($event)"
+                                        (onFileInfo)="onFileInfo($event)"
+                                    ></app-file-management-item-file>
+                                </ng-template>
+                            </div>
+                        </div>
 
+                    </div>
+                </div>
+                <div
+                    class="no-exist-elements"
+                    *ngIf="!showPreloader && categories.length == 0 && files.length == 0"
+                >
+                    We couldn't find any results
+                </div>
+                <div
+                    class="loading"
+                    *ngIf="showPreloader"
+                ></div>
+            </div>
+        </div>
+        <div
+            class="aside-filters"
+            *ngIf="toggleFileInfo"
+        >
+            <div class="aside-filters-header qt-df qt-ai-c qt-jc-sb">
+                <div class="aside-filters-header__title">File Info</div>
+                <div
+                    class="qt-button --square-md --gray pointer"
+                    (click)="onToggleFileInfo(false)"
+                >
+                    <div class="icon__close qt-bg-contain qt-sz-16 pointer"></div>
                 </div>
             </div>
-            <div
-                class="no-exist-elements"
-                *ngIf="!showPreloader && categories.length == 0 && files.length == 0"
-            >
-                We couldn't find any results
+            <div class="aside-filters-content">
+                <app-file-management-file-info
+                    class="qt-w100"
+                    #filter
+                    [file]="fileInfo"
+                    [category]="cateforyInfo"
+                ></app-file-management-file-info>
             </div>
-            <div
-                class="loading"
-                *ngIf="showPreloader"
-            ></div>
-        </div>
-    </div>
-    <div
-        class="aside-filters"
-        *ngIf="toggleFileInfo"
-    >
-        <div class="aside-filters-header qt-df qt-ai-c qt-jc-sb">
-            <div class="aside-filters-header__title">File Info</div>
-            <div
-                class="qt-button --square-md --gray pointer"
-                (click)="onToggleFileInfo(false)"
-            >
-                <div class="icon__close qt-bg-contain qt-sz-16 pointer"></div>
-            </div>
-        </div>
-        <div class="aside-filters-content">
-            <app-file-management-file-info
-                class="qt-w100"
-                #filter
-            ></app-file-management-file-info>
         </div>
     </div>
 </div>

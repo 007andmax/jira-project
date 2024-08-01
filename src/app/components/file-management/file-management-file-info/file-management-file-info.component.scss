@@ -42,3 +42,25 @@
     letter-spacing: 0;
     color: $gray-900;
 }
+.file-info-avatar {
+    border-bottom: 1px solid $gray-200;
+}
+.info-file-view {
+    padding: 10px 0px;
+    border: 1px solid $gray-200;
+    border-radius: 6px;
+    height: 36px;
+}
+.file-info-field-header {
+    min-width: 80px;
+}
+.file-info-name {
+    text-align: center;
+}
+.file-info-description {
+    border-top: 1px solid $gray-200;
+    border-bottom: 1px solid $gray-200;
+}
+.error-container {
+    position: relative;
+}

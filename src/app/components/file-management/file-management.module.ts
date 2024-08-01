@@ -18,9 +18,13 @@ import { FileManagementAddFileModule } from './file-management-add-file/file-man
 import { FileManagementAddCategoryComponent } from './file-management-add-category/file-management-add-category.component';
 import { FileManagementCategoryRenameComponent } from './file-management-category-rename/file-management-category-rename.component';
 import { FileManagementFileInfoComponent } from './file-management-file-info/file-management-file-info.component';
+import { FileManagementFileInfoTagsComponent } from './file-management-file-info/file-management-file-info-tags/file-management-file-info-tags.component';
+import { MatSelectModule, MatChipsModule, MatIconModule } from '@angular/material';
+import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
+import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 
 @NgModule({
-    declarations: [FileManagementComponent, FileManagementCategoryRenameComponent, FileManagementFileInfoComponent
+    declarations: [FileManagementComponent, FileManagementCategoryRenameComponent, FileManagementFileInfoComponent, FileManagementFileInfoTagsComponent
 
     ],
     imports: [
@@ -34,7 +38,12 @@ import { FileManagementFileInfoComponent } from './file-management-file-info/fil
         FileManagementItemFileModule,
         FileManagementHeaderModule,
         FileManagementAddFileModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatSelectModule,
+        MatChipsModule,
+        MatIconModule,
+        TextAreaModule,
+        KeyUpEnterModule
     ],
     entryComponents: [
         FileManagementCategoryRenameComponent

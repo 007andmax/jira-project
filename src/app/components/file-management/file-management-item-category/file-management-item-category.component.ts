@@ -13,12 +13,16 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class FileManagementItemCategoryComponent implements OnInit {
   @Input() item: FileManagementCategory;
   @Output() onRemove = new EventEmitter<any>();
+  @Output() onFileInfo = new EventEmitter<any>();
   constructor(public router: Router,
     public companiesStateService: CompaniesStateService,
     private modalService: NgbModal,
   ) { }
 
   ngOnInit() {
+  }
+  fileInfo() {
+    this.onFileInfo.emit(this.item);
   }
   navigateToCategory() {
     this.router.navigate(

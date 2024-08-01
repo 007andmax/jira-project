@@ -67,6 +67,14 @@ export class FileManagementService {
         return data;
       }));
   }
+  public editFile(id, data) {
+    return this.http.put(`${this.apiUrl}file-management/files/${id}`, data).pipe(
+      tap(data => {
+        this.toastrService.success("The file has been successfully updated");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
   public downloadPdf(url) {
     return this.http.get(url, {
       headers: new HttpHeaders({

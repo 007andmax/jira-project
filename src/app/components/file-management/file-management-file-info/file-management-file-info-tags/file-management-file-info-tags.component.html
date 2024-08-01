@@ -1,0 +1,81 @@
+<div
+    class="qt-input-block"
+    ngbDropdown
+    #tagsDp="ngbDropdown"
+    (openChange)="onChangeDropDown($event)"
+    autoClose="outside"
+    container="body"
+>
+    <span class="qt-fs-14 qt-color-gray-900 qt-mb-12">Tags</span>
+    <div class="light-dropdown ticket-edit-tags">
+        <mat-form-field ngbDropdownAnchor>
+            <mat-chip-list
+                #chipList
+                aria-label="Fruit selection"
+            >
+                <span class="tag-icon"></span>
+                <mat-chip
+                    class="selected-tag-ticket"
+                    *ngFor="let tag of selectedTag; let i = index"
+                    [selectable]="selectable"
+                    [removable]="removable"
+                    (removed)="remove(i)"
+                >
+                    {{tag.word}}
+                    <mat-icon
+                        matChipRemove
+                        *ngIf="removable && !customerPortalStateService.isCustomerPortal"
+                    >
+                        cancel
+                    </mat-icon>
+                </mat-chip>
+                <input
+                    id="dropdownServices"
+                    ngbDropdownToggle
+                    #userInput
+                    placeholder="Type characters and hit tab"
+                    class="pointer"
+                    autocomplete="new-password"
+                    [formControl]="tagCtrl"
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur"
+                    (input)="onSearch($event)"
+                    (keyup)="onKeyUp($event)"
+                    *ngIf="!customerPortalStateService.isCustomerPortal"
+                >
+            </mat-chip-list>
+        </mat-form-field>
+        <div
+            class="dropdown-menu ticket-detail-tag__dropdown-menu"
+            ngbDropdownMenu
+            aria-labelledby="dropdownServices"
+        >
+            <div class="qt-input-search">
+                <input
+                    id="search-dropdown"
+                    placeholder="Search Tags"
+                    class="pointer"
+                    autocomplete="new-password"
+                    (input)="onSearch($event)"
+                >
+            </div>
+            <div class="ticket-tags-container">
+                <ng-template
+                    ngFor
+                    let-tag
+                    [ngForOf]="tags"
+                    [ngForTrackBy]="trackById"
+                >
+                    <button
+                        class="dropdown-item"
+                        (click)="selected(tag)"
+                        [textContent]="tag.word"
+                        [ngClass]="{'--selected':isSelected(tag.id)}"
+                    >
+                    </button>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>

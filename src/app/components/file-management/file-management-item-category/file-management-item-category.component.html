@@ -1,7 +1,52 @@
-<div class="item-file-container">
+<div
+    class="item-file-container"
+    ngbDropdown
+>
     <div class="qt-sz-48 qt-bg-contain qt-mb-8 qt-fs-0 icon__folder-type"></div>
     <div class>
         <h3 [textContent]="item.name"></h3>
+    </div>
+    <div
+        class="qt-button --square-md --gray pointer actions"
+        ngbDropdownToggle
+    >
+        <div class="icon__more qt-sz-16 qt-bg-contain"></div>
+    </div>
+    <div
+        ngbDropdownMenu
+        class="dropdown-menu-qt icon__more-dropdown"
+    >
+        <ul
+            class
+            role="menu"
+            class="dropdown-qt"
+        >
+            <li
+                class="pointer"
+                ngbDropdownItem
+                (click)="rename()"
+            >
+                <div class="icon__go-to qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                Rename
+            </li>
+            <li
+                class="pointer"
+                ngbDropdownItem
+                (click)="fileInfo()"
+            >
+                <div class="icon__company-info qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                File Info
+            </li>
+            <li
+                class="pointer"
+                ngbDropdownItem
+                class="remove-item"
+                (click)="removeCategory()"
+            >
+                <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                Delete
+            </li>
+        </ul>
     </div>
 </div>
 
