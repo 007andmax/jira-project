@@ -46,7 +46,7 @@ export class FileManagementFileInfoComponent implements OnInit, OnDestroy {
   }
 
   isImage() {
-    return this.file.contentType === "image/jpg" || this.file.contentType === "image/png" || this.file.contentType === "image/jpeg";
+    return this.file && (this.file.contentType === "image/jpg" || this.file.contentType === "image/png" || this.file.contentType === "image/jpeg");
   }
   onChangeTags(data) {
     console.log("data", data);
@@ -64,9 +64,15 @@ export class FileManagementFileInfoComponent implements OnInit, OnDestroy {
       console.log("this.modelForm", this.modelForm);
       return;
     }
-    this.file.setName(this.modelForm.value.name);
     if (this.file) {
+      this.file.setName(this.modelForm.value.name);
       this.fileManagementService.editFile(this.file.id, this.file.getDataForUpate()).subscribe(data => {
+
+      })
+    }
+    if (this.category) {
+      this.category.setName(this.modelForm.value.name);
+      this.fileManagementService.editCategory(this.category.id, this.category.getDataForUpate()).subscribe(data => {
 
       })
     }

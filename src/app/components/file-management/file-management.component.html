@@ -1,10 +1,48 @@
 <div class="qt-page-list documents-page ">
-    <app-file-management-header></app-file-management-header>
+    <app-file-management-header (onSort)="onSort($event)"></app-file-management-header>
     <div class="qt-page-list-container">
         <div class="qt-page-list__body">
             <div class="qt-page-list__body-table-container">
                 <div class="qt-page-list__body-tbody qt-table-modern documents-table">
-                    <div class="tbody">
+                    <div
+                        class="tbody"
+                        *ngIf="sort == 'Name'"
+                    >
+                        <div class="qt-df categories-conteiner">
+                            <ng-template
+                                ngFor
+                                let-file
+                                [ngForOf]="files"
+                                [ngForTrackBy]="trackById"
+                            >
+                                <app-file-management-item-file
+                                    class="qt-mr-16 qt-mb-16"
+                                    [item]="file"
+                                    (onRemove)="onRemoveFile($event)"
+                                    (onFileInfo)="onFileInfo($event)"
+                                ></app-file-management-item-file>
+                            </ng-template>
+                        </div>
+                        <div class="qt-df categories-conteiner">
+                            <ng-template
+                                ngFor
+                                let-item
+                                [ngForOf]="categories"
+                                [ngForTrackBy]="trackById"
+                            >
+                                <app-file-management-item-category
+                                    [item]="item"
+                                    class="qt-mr-16 qt-mb-16"
+                                    (onRemove)="onRemoveCategory($event)"
+                                    (onFileInfo)="onCategoryInfo($event)"
+                                ></app-file-management-item-category>
+                            </ng-template>
+                        </div>
+                    </div>
+                    <div
+                        class="tbody"
+                        *ngIf="sort == 'Date'"
+                    >
                         <div class="qt-df categories-conteiner">
                             <ng-template
                                 ngFor
@@ -21,7 +59,10 @@
                             </ng-template>
                         </div>
                         <div *ngFor="let item of groupedByCreateAt | keyvalue">
-                            <span [textContent]="item.key"></span>
+                            <span
+                                class="qt-mb-16"
+                                [textContent]="getCreateBy(item.key)"
+                            ></span>
                             <div class="qt-df qt-ai-c">
                                 <ng-template
                                     ngFor
@@ -38,7 +79,6 @@
                                 </ng-template>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div

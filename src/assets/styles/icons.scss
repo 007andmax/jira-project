@@ -1511,6 +1511,17 @@
     -webkit-mask-size: contain;
     mask-size: contain;
   }
+  &__upload-white {
+    background-color: $white;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/upload.svg");
+    mask-image: url("/assets/img/icons/upload.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
   &__notifications {
     background-image: url("/assets/img/icons/notifications.svg");
   }

@@ -17,9 +17,18 @@
 'icon__file-type-html': file && file.contentType == 'text/html',
 'icon__file-type-odt': file && file.contentType == 'application/vnd.oasis.opendocument.text',
 'icon__folder': category}"
+                *ngIf="file && !isImage() || category"
             ></div>
-            <!-- *ngIf="!isImage()" -->
-            <div class="error-container">
+            <div
+                class="qt-sz-80 qt-bg-contain qt-mb-16 qt-fs-0"
+                *ngIf="isImage()"
+            >
+                <img
+                    width="80px"
+                    [src]="file.url"
+                >
+            </div>
+            <div class="error-container qt-df qt-ai-c">
                 <input
                     class="qt-editable-input qt-fs-16 qt-fw-500 qt-color-gray-900 file-info-name"
                     type="text"
@@ -36,6 +45,9 @@
                 >
                     Field is required
                 </mat-error>
+                <div class="qt-button --square-md --gray qt-ml-8 info-file-label-edit">
+                    <div class="icon__edit qt-sz-16 qt-bg-contain"></div>
+                </div>
             </div>
         </div>
         <div class="file-info-field qt-df qt-ai-c qt-mb-16">

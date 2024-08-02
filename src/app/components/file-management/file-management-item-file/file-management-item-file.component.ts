@@ -52,7 +52,14 @@ export class FileManagementItemFileComponent implements OnInit {
     req.send();
   }
   getCreateBy() {
-    return moment(new Date(this.item.createdAt)).format('MMM DD, YYYY');
+    return moment(new Date(this.item.createdAt)).format('DD MMM YYYY');
+  }
+  getTypeFile() {
+    if (this.item.contentType == 'application/pdf') return "PDF";
+    if (this.item.contentType == 'text/plain' || this.item.contentType == 'application/msword' || this.item.contentType == 'application/vnd.oasis.opendocument.text') return "Document";
+    if (this.item.contentType == 'text/csv') return "CSV";
+    if (this.item.contentType == 'text/html') return "HTML";
+    return "";
   }
 
 }

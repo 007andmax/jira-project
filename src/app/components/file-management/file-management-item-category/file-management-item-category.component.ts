@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { FileManagementCategoryRenameComponent } from '../file-management-category-rename/file-management-category-rename.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from "moment";
 
 @Component({
   selector: 'app-file-management-item-category',
@@ -30,6 +31,9 @@ export class FileManagementItemCategoryComponent implements OnInit {
   }
   removeCategory() {
     this.onRemove.emit(this.item);
+  }
+  getCreateBy() {
+    return moment(new Date(this.item.createdAt)).format('DD MMM YYYY');
   }
   rename() {
     const modalRef = this.modalService.open(FileManagementCategoryRenameComponent, { windowClass: 'xs-modal user-modal', container: "app-file-management", backdrop: 'static', keyboard: false });

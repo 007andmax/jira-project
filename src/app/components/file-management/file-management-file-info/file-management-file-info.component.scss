@@ -55,7 +55,7 @@
     min-width: 80px;
 }
 .file-info-name {
-    text-align: center;
+    text-align: left;
 }
 .file-info-description {
     border-top: 1px solid $gray-200;
@@ -63,4 +63,9 @@
 }
 .error-container {
     position: relative;
+}
+.info-file-label-edit {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
 }

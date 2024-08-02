@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FileManagementService } from 'src/app/services/file-management/file-management.service';
 import { FileManagementStateService } from 'src/app/states/file-management/file-management-state.service';
@@ -10,9 +10,12 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
   styleUrls: ['./file-management-header.component.scss']
 })
 export class FileManagementHeaderComponent implements OnInit {
+  sort: string = "Date";
+  searchText: string = "";
   activePage: string = "";
   toggleAddCategory: boolean = false;
   sub: Subscription = new Subscription();
+  @Output() onSort = new EventEmitter<any>();
   constructor(private leftPanelStateService: LeftPanelStateService,
     public cd: ChangeDetectorRef,
     private fileManagementService: FileManagementService,
@@ -31,6 +34,10 @@ export class FileManagementHeaderComponent implements OnInit {
   }
   addFile() {
     this.fileManagementStateService.showAsideForAdd();
+  }
+  setSort(data) {
+    this.sort = data;
+    this.onSort.emit(data);
   }
 
 }

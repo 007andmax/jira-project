@@ -9,6 +9,7 @@ import { ConfirmStateService } from '../shared/confirm/services/confirm-state.se
 import { FileManagementStateService } from 'src/app/states/file-management/file-management-state.service';
 import { Subscription } from 'rxjs';
 import { FileManagementRealTimeService } from 'src/app/states/file-management/file-management-real-time.service';
+import * as moment from "moment";
 
 @Component({
   selector: 'app-file-management',
@@ -16,6 +17,7 @@ import { FileManagementRealTimeService } from 'src/app/states/file-management/fi
   styleUrls: ['./file-management.component.scss']
 })
 export class FileManagementComponent implements OnInit, OnDestroy {
+  sort: string = "Date";
   toggleFileInfo: boolean = false;
   showPreloader: boolean = true;
   fileInfo: FileManagementFile;
@@ -37,14 +39,19 @@ export class FileManagementComponent implements OnInit, OnDestroy {
     this.fileManagementService.getFileManagement().subscribe((data: any) => {
       this.categories = data.categories.map(item => new FileManagementCategory(item));
       this.files = data.files.map(item => new FileManagementFile(item));
-
-
       this.files.forEach(person => {
         if (!this.groupedByCreateAt[person.createdAt]) {
           this.groupedByCreateAt[person.createdAt] = [];
         }
         this.groupedByCreateAt[person.createdAt].push(person);
       });
+      this.groupedByCreateAt = Object.keys(this.groupedByCreateAt).sort().reverse().reduce(
+        (obj, key) => {
+          obj[key] = this.groupedByCreateAt[key];
+          return obj;
+        },
+        {}
+      );
       console.log("groupedByCreateAt", this.groupedByCreateAt);
       this.showPreloader = false;
     })
@@ -79,6 +86,12 @@ export class FileManagementComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(onChangeDocument);
+  }
+  onSort(data) {
+    this.sort = data;
+  }
+  getCreateBy(item) {
+    return moment(new Date(item)).format('DD MMM YYYY');
   }
   onCategoryInfo(data) {
     this.fileInfo = null;

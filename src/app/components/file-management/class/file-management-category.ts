@@ -16,4 +16,12 @@ export class FileManagementCategory {
             }
         }
     }
+    public setName(data) {
+        this.name = data;
+    }
+    public getDataForUpate() {
+        return {
+            "name": this.name,
+        }
+    }
 }
