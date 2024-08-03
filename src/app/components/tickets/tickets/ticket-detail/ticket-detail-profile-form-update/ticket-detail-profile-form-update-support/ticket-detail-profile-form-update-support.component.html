@@ -17,11 +17,13 @@
                 #copyKeyTooltip
             ></app-dynamic-tooltip>
             <div
-                class="support-item-menu__button qt-icon icon__copy pointer"
+                class="support-item-menu__button qt-df qt-ai-c qt-jc-c pointer"
                 (mouseenter)="copyKeyTooltip.show($event.target)"
                 (mouseleave)="copyKeyTooltip.hide()"
                 (click)="copyKey()"
-            ></div>
+            >
+              <div class="qt-icon icon__copy qt-sz-20"></div>
+            </div>
             <app-dynamic-tooltip
                 [content]="'Email Info'"
                 [position]="'top'"
@@ -30,9 +32,11 @@
             <div
                 (mouseenter)="emailInfoTooltip.show($event.target)"
                 (mouseleave)="emailInfoTooltip.hide()"
-                class="support-item-menu__button qt-icon icon__email-send pointer"
+                class="support-item-menu__button pointer qt-df qt-ai-c qt-jc-c"
                 (click)="sendEmail()"
-            ></div>
+            >
+              <div class="qt-icon icon__email-send qt-sz-20"></div>
+            </div>
             <app-dynamic-tooltip
                 [content]="'Copy Support URL'"
                 [position]="'top'"
@@ -41,9 +45,11 @@
             <div
                 (mouseenter)="copySupportTooltip.show($event.target)"
                 (mouseleave)="copySupportTooltip.hide()"
-                class="support-item-menu__button qt-icon icon__links pointer"
+                class="support-item-menu__button qt-df qt-ai-c qt-jc-c pointer"
                 (click)="copyLink()"
-            ></div>
+            >
+              <div class="qt-icon icon__links qt-sz-20"></div>
+            </div>
         </div>
         <div class="support-timeline-status">
             <app-dynamic-tooltip
@@ -78,8 +84,10 @@
             </div>
             <div
                 *ngIf="!(item.status === 'CONNECTED' && item.online) && !(item.status === 'INSTALLED' && item.online)"
-                class="support-timeline-status__step2 qt-icon icon__connection qt-fs-0"
-            ></div>
+                class="support-timeline-status__step2 qt-fs-0 qt-df qt-ai-c qt-jc-c"
+            >
+              <div class="qt-icon icon__connection qt-sz-20"></div>
+            </div>
             <div
                 *ngIf="item.status === 'INSTALLED' && item.online"
                 class="support-timeline-status__step2 pointer"
@@ -139,7 +147,9 @@
         class="qt-df qt-ai-c qt-fd-c init-connection qt-pb-30 qt-pt-30"
         *ngIf="!item"
     >
-        <div class="qt-icon icon__connection qt-sz-24 qt-mb-16"></div>
+        <div class="icon__connection-wrap qt-df qt-ai-c qt-jc-c qt-mb-16">
+          <div class="qt-icon icon__connection qt-sz-24"></div>
+        </div>
         <div class="csp-block-support__title qt-mb-8">No Connection Establish</div>
         <p class="csp-block-support__text qt-mb-16">Click button to create new one</p>
         <a

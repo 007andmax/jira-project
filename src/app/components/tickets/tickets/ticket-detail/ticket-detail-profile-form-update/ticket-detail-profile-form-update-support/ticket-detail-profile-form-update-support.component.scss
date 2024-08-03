@@ -37,7 +37,7 @@
 }
 
 .init-connection {
-    .qt-icon.icon__connection {
+    .icon__connection-wrap {
         background-position: center;
         background-repeat: no-repeat;
         background-color: $gray-50;
@@ -52,12 +52,6 @@
     align-items: center;
     justify-content: center;
     background-size: 20px;
-
-    .icon__connection {
-        width: 16px;
-        height: 16px;
-        display: block;
-    }
 }
 
 .support-timeline-status__step1,
