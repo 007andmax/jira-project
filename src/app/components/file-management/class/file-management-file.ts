@@ -30,4 +30,7 @@ export class FileManagementFile {
             "categoryId": this.categoryId
         }
     }
+    public parseCreatedAt() {
+        return (this.createdAt) ? this.createdAt : '';
+    }
 }

@@ -11,6 +11,21 @@
                         <div class="qt-df categories-conteiner">
                             <ng-template
                                 ngFor
+                                let-item
+                                [ngForOf]="categories"
+                                [ngForTrackBy]="trackById"
+                            >
+                                <app-file-management-item-category
+                                    [item]="item"
+                                    class="qt-mr-16 qt-mb-16"
+                                    (onRemove)="onRemoveCategory($event)"
+                                    (onFileInfo)="onCategoryInfo($event)"
+                                ></app-file-management-item-category>
+                            </ng-template>
+                        </div>
+                        <div class="qt-df categories-conteiner">
+                            <ng-template
+                                ngFor
                                 let-file
                                 [ngForOf]="files"
                                 [ngForTrackBy]="trackById"
@@ -23,51 +38,23 @@
                                 ></app-file-management-item-file>
                             </ng-template>
                         </div>
-                        <div class="qt-df categories-conteiner">
-                            <ng-template
-                                ngFor
-                                let-item
-                                [ngForOf]="categories"
-                                [ngForTrackBy]="trackById"
-                            >
-                                <app-file-management-item-category
-                                    [item]="item"
-                                    class="qt-mr-16 qt-mb-16"
-                                    (onRemove)="onRemoveCategory($event)"
-                                    (onFileInfo)="onCategoryInfo($event)"
-                                ></app-file-management-item-category>
-                            </ng-template>
-                        </div>
                     </div>
                     <div
                         class="tbody"
                         *ngIf="sort == 'Date'"
                     >
-                        <div class="qt-df categories-conteiner">
-                            <ng-template
-                                ngFor
-                                let-item
-                                [ngForOf]="categories"
-                                [ngForTrackBy]="trackById"
-                            >
-                                <app-file-management-item-category
-                                    [item]="item"
-                                    class="qt-mr-16 qt-mb-16"
-                                    (onRemove)="onRemoveCategory($event)"
-                                    (onFileInfo)="onCategoryInfo($event)"
-                                ></app-file-management-item-category>
-                            </ng-template>
-                        </div>
-                        <div *ngFor="let item of groupedByCreateAt | keyvalue">
-                            <span
-                                class="qt-mb-16"
-                                [textContent]="getCreateBy(item.key)"
-                            ></span>
+                        <div *ngFor="let item of sortKeyObject()">
+                            <div class="file-management-create-at-container qt-mb-16">
+                                <span
+                                    class="file-management-create-at"
+                                    [textContent]="getCreateBy(item)"
+                                ></span>
+                            </div>
                             <div class="qt-df qt-ai-c">
                                 <ng-template
                                     ngFor
                                     let-file
-                                    [ngForOf]="groupedByCreateAt[item.key]"
+                                    [ngForOf]="groupedByCreateAt[item]"
                                     [ngForTrackBy]="trackById"
                                 >
                                     <app-file-management-item-file
@@ -78,6 +65,21 @@
                                     ></app-file-management-item-file>
                                 </ng-template>
                             </div>
+                        </div>
+                        <div class="qt-df categories-conteiner">
+                            <ng-template
+                                ngFor
+                                let-item
+                                [ngForOf]="categories"
+                                [ngForTrackBy]="trackById"
+                            >
+                                <app-file-management-item-category
+                                    [item]="item"
+                                    class="qt-mr-16 qt-mb-16"
+                                    (onRemove)="onRemoveCategory($event)"
+                                    (onFileInfo)="onCategoryInfo($event)"
+                                ></app-file-management-item-category>
+                            </ng-template>
                         </div>
                     </div>
                 </div>

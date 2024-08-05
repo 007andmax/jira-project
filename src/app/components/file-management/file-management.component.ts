@@ -37,14 +37,17 @@ export class FileManagementComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.fileManagementService.getFileManagement().subscribe((data: any) => {
-      this.categories = data.categories.map(item => new FileManagementCategory(item));
-      this.files = data.files.map(item => new FileManagementFile(item));
+      this.categories = data.categories.map(item => new FileManagementCategory(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+      this.files = data.files.map(item => new FileManagementFile(item)).sort((a, b) => (a.parseCreatedAt().toLowerCase() > b.parseCreatedAt().toLowerCase()) ?
+        1 : ((b.parseCreatedAt().toLowerCase() > a.parseCreatedAt().toLowerCase()) ? -1 : 0));
       this.files.forEach(person => {
         if (!this.groupedByCreateAt[person.createdAt]) {
           this.groupedByCreateAt[person.createdAt] = [];
         }
         this.groupedByCreateAt[person.createdAt].push(person);
       });
+      console.log("Object.keys(this.groupedByCreateAt).sort().reverse()", Object.keys(this.groupedByCreateAt).sort().reverse());
       this.groupedByCreateAt = Object.keys(this.groupedByCreateAt).sort().reverse().reduce(
         (obj, key) => {
           obj[key] = this.groupedByCreateAt[key];
@@ -86,6 +89,9 @@ export class FileManagementComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(onChangeDocument);
+  }
+  sortKeyObject() {
+    return Object.keys(this.groupedByCreateAt).sort().reverse();
   }
   onSort(data) {
     this.sort = data;
