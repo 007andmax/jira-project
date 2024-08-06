@@ -12,7 +12,7 @@ export class UploadAreaComponent implements OnInit {
   @Output() changeFiles = new EventEmitter<any>();
   error: string = "- The uploaded file cannot be more than 4 MB.";
   constructor(public cd: ChangeDetectorRef,
-    private elRef: ElementRef,) { }
+    public elRef: ElementRef,) { }
 
   ngOnInit() {
 

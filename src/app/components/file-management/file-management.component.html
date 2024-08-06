@@ -23,20 +23,28 @@
                                 ></app-file-management-item-category>
                             </ng-template>
                         </div>
-                        <div class="qt-df categories-conteiner">
-                            <ng-template
-                                ngFor
-                                let-file
-                                [ngForOf]="files"
-                                [ngForTrackBy]="trackById"
-                            >
-                                <app-file-management-item-file
-                                    class="qt-mr-16 qt-mb-16"
-                                    [item]="file"
-                                    (onRemove)="onRemoveFile($event)"
-                                    (onFileInfo)="onFileInfo($event)"
-                                ></app-file-management-item-file>
-                            </ng-template>
+                        <div *ngFor="let item of sortKeyObject()">
+                            <div class="file-management-create-at-container qt-mb-16">
+                                <span
+                                    class="file-management-create-at"
+                                    [textContent]="getCreateBy(item)"
+                                ></span>
+                            </div>
+                            <div class="qt-df qt-ai-c">
+                                <ng-template
+                                    ngFor
+                                    let-file
+                                    [ngForOf]="groupedByCreateAt[item]"
+                                    [ngForTrackBy]="trackById"
+                                >
+                                    <app-file-management-item-file
+                                        class="qt-mr-16 qt-mb-16"
+                                        [item]="file"
+                                        (onRemove)="onRemoveFile($event)"
+                                        (onFileInfo)="onFileInfo($event)"
+                                    ></app-file-management-item-file>
+                                </ng-template>
+                            </div>
                         </div>
                     </div>
                     <div

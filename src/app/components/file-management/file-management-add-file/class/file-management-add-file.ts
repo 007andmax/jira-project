@@ -14,4 +14,7 @@ export class FileManagementAddFile {
     public setMediaFileId(data) {
         this.mediaFileId = data;
     }
+    public setTags(data) {
+        this.tags = data;
+    }
 }

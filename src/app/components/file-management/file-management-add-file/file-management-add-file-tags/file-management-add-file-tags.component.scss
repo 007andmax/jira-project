@@ -1,0 +1,127 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
+@import "./src/assets/styles/mixin/dropdown";
+
+.disabled {
+    background: $gray-50;
+    color: $gray-400;
+}
+
+.device-user-wrap {
+    * {
+        width: 100%;
+    }
+}
+
+.filter-tags-body {
+    padding: 0;
+    margin-top: 0 !important;
+
+    /deep/.mat-form-field-label {
+        top: 8px;
+    }
+}
+
+.device-user {
+    outline: none;
+    min-height: 40px;
+    padding: 4px 4px 0;
+    font-size: 13px;
+    border: 1px solid $gray-200;
+    border-radius: 4px;
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    background-color: $white;
+}
+
+.select-wrapper {
+    width: 100%;
+    @include dropdown-content;
+
+    .tab-wrapper {
+        display: flex;
+        padding: 0 20px;
+        justify-content: space-between;
+        border-bottom: 1px solid #dce0e6;
+
+        .tab {
+            cursor: pointer;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            border-bottom: 2px solid transparent;
+            color: $gray-600;
+            font-size: 13px;
+            transition: all 0.3s;
+            font-weight: 700;
+
+            &.active,
+            &:hover {
+                color: $blue-light-600;
+                border-bottom: 2px solid $blue-light-600;
+            }
+        }
+    }
+
+    .company-tag-item {
+        @include dropdown-checkbox-item;
+    }
+}
+
+.user-aside-tags-dropdown {
+    .text-content {
+        width: calc(100% - 48px);
+
+        .name,
+        .description {
+            max-width: 100%;
+        }
+    }
+}
+
+.selected-user {
+    border: 1px solid $background;
+    border-radius: 3px;
+    padding: 0 5px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    background: $gray-25;
+    margin: 0 4px 4px 0;
+
+    i {
+        position: static;
+        margin-left: 10px;
+    }
+
+    .icon__devices-grey,
+    .icon__user-grey {
+        margin: 0 5px 0 0;
+    }
+}
+
+.device-user.has-placeholder:before {
+    content: "Add a Tag";
+    color: $gray-400;
+}
+
+.pengind-loading {
+    width: 25px !important;
+    height: 25px !important;
+    min-height: auto !important;
+    left: calc(50% - 12px) !important;
+}
+
+.company-tag-input {
+    &::placeholder {
+        opacity: 0 !important;
+        color: $gray-400;
+    }
+}
+
+.no-remove {
+    background: $gray-100;
+    color: $gray-600;
+}

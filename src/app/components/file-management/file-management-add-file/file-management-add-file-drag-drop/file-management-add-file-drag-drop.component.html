@@ -1,0 +1,44 @@
+<div
+    class="qt-fileupload"
+    appDnd
+    (fileDropped)="onFileDropped($event)"
+>
+    <label class="qt-fileupload__label">
+        <div class="qt-fileupload__attach-icon icon__upload qt-sz-24"></div>
+        <span class="qt-fileupload__title">
+            Drag and drop file here or
+            <span class="qt-fileupload__link">Click to upload</span>
+        </span>
+        <input
+            type="file"
+            #fileDropRef
+            id="fileDropRef"
+            multiple
+            (change)="fileBrowseHandler($event.target.files)"
+        >
+        <div class="qt-fileupload__mobile-text">
+            Click here to attachfiles or take a screen shot
+            <div class="icon__snapshot qt-sz-16 qt-bg-contain qt-ml-6"></div>
+        </div>
+    </label>
+</div>
+<div class="files-list">
+    <div
+        class="single-file"
+        *ngFor="let file of files; let i = index"
+    >
+        <div class="info">
+            <h4 class="name">{{ file?.name }}</h4>
+            <p class="size">
+                {{ formatBytes(file?.size,2) }}
+                <span class="file-error">{{(file.showError) ? file.error : ''}}</span>
+            </p>
+            <app-upload-area-progress [progress]="file?.progress"></app-upload-area-progress>
+        </div>
+        <i
+            class="icn-sm icn-remove-old"
+            (click)="deleteFile(i)"
+        ></i>
+        <!-- <img src="assets/img/dnd/ic-delete-file.svg" class="delete" width="20px" alt="file" (click)="deleteFile(i)"> -->
+    </div>
+</div>

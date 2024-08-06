@@ -1,8 +1,10 @@
 import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { FileManagementService } from 'src/app/services/file-management/file-management.service';
 import { FileManagementStateService } from 'src/app/states/file-management/file-management-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { FileManagementAddFileComponent } from '../file-management-add-file/file-management-add-file.component';
 
 @Component({
   selector: 'app-file-management-header',
@@ -19,7 +21,8 @@ export class FileManagementHeaderComponent implements OnInit {
   constructor(private leftPanelStateService: LeftPanelStateService,
     public cd: ChangeDetectorRef,
     private fileManagementService: FileManagementService,
-    private fileManagementStateService: FileManagementStateService
+    private fileManagementStateService: FileManagementStateService,
+    private modalService: NgbModal,
   ) { }
 
   ngOnInit() {
@@ -33,7 +36,9 @@ export class FileManagementHeaderComponent implements OnInit {
     this.leftPanelStateService.goToState('file-management');
   }
   addFile() {
-    this.fileManagementStateService.showAsideForAdd();
+    const modalRef = this.modalService.open(FileManagementAddFileComponent, { windowClass: 'xs-modal user-modal', container: "app-file-management", backdrop: 'static', keyboard: false });
+
+    //   this.fileManagementStateService.showAsideForAdd();
   }
   setSort(data) {
     this.sort = data;
