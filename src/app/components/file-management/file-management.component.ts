@@ -26,11 +26,11 @@ export class FileManagementComponent implements OnInit, OnDestroy {
   files: Array<FileManagementFile> = [];
   groupedByCreateAt: { [key: string]: FileManagementFile[] } = {};
   sub: Subscription = new Subscription();
-  constructor(private fileManagementService: FileManagementService,
+  constructor(public fileManagementService: FileManagementService,
     public confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
-    private fileManagementStateService: FileManagementStateService,
-    private fileManagementRealTimeService: FileManagementRealTimeService,
+    public fileManagementStateService: FileManagementStateService,
+    public fileManagementRealTimeService: FileManagementRealTimeService,
     public cd: ChangeDetectorRef,
   ) { }
 
@@ -131,6 +131,9 @@ export class FileManagementComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to delete this category?`;
     this.fileManagementStateService.setCategoryForRemove(data);
+  }
+  goToCategory(data) {
+    console.log("data", data);
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

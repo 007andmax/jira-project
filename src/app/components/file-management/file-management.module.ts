@@ -22,9 +22,12 @@ import { FileManagementFileInfoTagsComponent } from './file-management-file-info
 import { MatSelectModule, MatChipsModule, MatIconModule } from '@angular/material';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
+import { DblclickModule } from 'src/app/directives/dblclick/dblclick.module';
+import { FileManagementAllCustomerComponent } from './file-management-all-customer/file-management-all-customer.component';
+import { FileManagementFileInfoModule } from './file-management-file-info/file-management-file-info.module';
 
 @NgModule({
-    declarations: [FileManagementComponent, FileManagementCategoryRenameComponent, FileManagementFileInfoComponent, FileManagementFileInfoTagsComponent
+    declarations: [FileManagementComponent, FileManagementCategoryRenameComponent,
 
     ],
     imports: [
@@ -37,13 +40,13 @@ import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.m
         FileManagementItemCategoryModule,
         FileManagementItemFileModule,
         FileManagementHeaderModule,
-        FileManagementAddFileModule,
         ReactiveFormsModule,
         MatSelectModule,
         MatChipsModule,
         MatIconModule,
         TextAreaModule,
-        KeyUpEnterModule
+        KeyUpEnterModule,
+        FileManagementFileInfoModule
     ],
     entryComponents: [
         FileManagementCategoryRenameComponent

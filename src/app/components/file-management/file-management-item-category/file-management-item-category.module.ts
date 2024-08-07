@@ -5,6 +5,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 import { FileManagementItemCategoryComponent } from './file-management-item-category.component';
+import { DblclickModule } from 'src/app/directives/dblclick/dblclick.module';
 
 @NgModule({
     declarations: [FileManagementItemCategoryComponent
@@ -15,6 +16,7 @@ import { FileManagementItemCategoryComponent } from './file-management-item-cate
         DisabledBtnModule,
         PreloaderTicketModule,
         NgbModule,
+        DblclickModule
     ],
     exports: [FileManagementItemCategoryComponent]
 })

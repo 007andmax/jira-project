@@ -23,8 +23,13 @@ export class FileManagementService {
 
   ) { }
 
-  public getFileManagement(categoryId = null) {
-    return this.http.get(`${this.apiUrl}file-management${categoryId ? '?categoryId=' + categoryId : ''}`)
+  public getFileManagement(categoryId = null, customerCompanyRoot = null) {
+    let data = {};
+    if (categoryId) data["categoryId"] = categoryId;
+    if (customerCompanyRoot) data["customerCompanyRoot"] = customerCompanyRoot;
+    let getParams = new URLSearchParams(data).toString();
+    console.log("getParams", getParams);
+    return this.http.get(`${this.apiUrl}file-management?${getParams}`)
   }
   public removeFile(fileId) {
     return this.http.delete(`${this.apiUrl}file-management/files/${fileId}`).pipe(

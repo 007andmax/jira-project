@@ -4,14 +4,14 @@ import { FileManagementService } from 'src/app/services/file-management/file-man
 import { FileManagementStateService } from 'src/app/states/file-management/file-management-state.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
   selector: 'app-file-management-add-file',
   templateUrl: './file-management-add-file.component.html',
   styleUrls: ['./file-management-add-file.component.scss'],
-  providers: [NgbActiveModal]
+  providers: [NgbModalConfig, NgbModal]
 })
 export class FileManagementAddFileComponent implements OnInit {
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
@@ -45,6 +45,7 @@ export class FileManagementAddFileComponent implements OnInit {
     this.addBtn.setDisabled(data);
   }
   close() {
+    console.log("close");
     this.activeModal.close();
     this.confirmStateService.setConfirm(false);
   }

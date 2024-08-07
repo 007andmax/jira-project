@@ -387,6 +387,11 @@ const routes: Routes = [
     canActivate: [PermissionSupportService, PermissionNoSuperAdminService]
   },
   {
+    path: ':domain/file-management/all/customer',
+    loadChildren: './components/file-management/file-management-all-customer/file-management-all-customer.module#FileManagementAllCustomerModule',
+    canActivate: [PermissionSupportService, PermissionNoSuperAdminService]
+  },
+  {
     path: ':domain/file-management/category/:id',
     loadChildren: './components/file-management/file-management-category/file-management-category.module#FileManagementCategoryModule',
     canActivate: [PermissionSupportService, PermissionNoSuperAdminService]

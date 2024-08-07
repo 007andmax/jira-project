@@ -36,7 +36,7 @@ export class FileManagementHeaderComponent implements OnInit {
     this.leftPanelStateService.goToState('file-management');
   }
   addFile() {
-    const modalRef = this.modalService.open(FileManagementAddFileComponent, { windowClass: 'xs-modal user-modal', container: "app-file-management", backdrop: 'static', keyboard: false });
+    const modalRef = this.modalService.open(FileManagementAddFileComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
 
     //   this.fileManagementStateService.showAsideForAdd();
   }

@@ -142,6 +142,7 @@ import { SuperAdminPublicListModule } from './components/super-admin-public/supe
 import { ProductTypeCheckUseComponent } from './components/setting/products-settings/product-type-check-use/product-type-check-use.component';
 import { ProductTypeCheckUseModule } from './components/setting/products-settings/product-type-check-use/product-type-check-use.module';
 import { FileManagementComponent } from './components/file-management/file-management.component';
+import { FileManagementAddFileModule } from './components/file-management/file-management-add-file/file-management-add-file.module';
 declare var $: any;
 
 /**
@@ -226,7 +227,8 @@ declare var $: any;
     TicketsFilterSaveModule,
     MarketingSubscriptionsAsideModule,
     SuperAdminPublicListModule,
-    ProductTypeCheckUseModule
+    ProductTypeCheckUseModule,
+    FileManagementAddFileModule
   ],
   entryComponents: [
     ConfirmComponent,
