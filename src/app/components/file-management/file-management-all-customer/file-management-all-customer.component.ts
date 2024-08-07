@@ -10,15 +10,9 @@ import { FileManagementFile } from '../class/file-management-file';
   styleUrls: ['./file-management-all-customer.component.scss']
 })
 export class FileManagementAllCustomerComponent extends FileManagementComponent {
-
+  companyArchived: boolean;
   ngOnInit() {
-    this.fileManagementService.getFileManagement(null, true).subscribe((data: any) => {
-      this.categories = data.categories.map(item => new FileManagementCategory(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-
-      console.log("groupedByCreateAt", this.groupedByCreateAt);
-      this.showPreloader = false;
-    })
+    this.getFileManagement();
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_CATEGORY_FILES) this.removeCategory(this.fileManagementStateService.getCategoryForRemove());
@@ -51,5 +45,19 @@ export class FileManagementAllCustomerComponent extends FileManagementComponent 
     })
     this.sub.add(onChangeDocument);
   }
+  onChangeArchived(companyArchived) {
+    this.companyArchived = companyArchived;
+    this.getFileManagement();
+  }
+  getFileManagement() {
+    this.showPreloader = true;
+    this.categories = [];
+    this.fileManagementService.getFileManagement(null, true, this.companyArchived).subscribe((data: any) => {
+      this.categories = data.categories.map(item => new FileManagementCategory(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
 
+      console.log("groupedByCreateAt", this.groupedByCreateAt);
+      this.showPreloader = false;
+    })
+  }
 }

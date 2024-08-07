@@ -13,7 +13,20 @@
         </div>
         <div class="qt-page-list__header-title-line--rigth">
             <div class="qt-df qt-ai-c">
-                <div class="qt-input-search">
+                <app-drop-down
+                    *ngIf="isShowCompanyArchived"
+                    class="dropdown"
+                    [placeholder]="'Select Active'"
+                    [editItem]="selectedActive"
+                    [list]="listActive"
+                    [field]="'title'"
+                    [search]="true"
+                    [change]="true"
+                    [isBlockClear]="true"
+                    (onSelectedItem)="selectActive($event)"
+                    heightInput="36px"
+                ></app-drop-down>
+                <div class="qt-input-search qt-ml-12">
                     <input
                         type="text"
                         placeholder="Search files"
@@ -72,6 +85,11 @@
                 </button>
                 <div class="qt-df">
                     <div class="qt-pos-rel">
+
+
+
+
+
 
                         <app-file-management-add-category
                             *ngIf="toggleAddCategory"

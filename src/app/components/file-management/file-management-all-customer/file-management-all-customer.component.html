@@ -1,5 +1,9 @@
 <div class="qt-page-list documents-page ">
-    <app-file-management-header (onSort)="onSort($event)"></app-file-management-header>
+    <app-file-management-header
+        [isShowCompanyArchived]="true"
+        (onSort)="onSort($event)"
+        (onChangeArchived)="onChangeArchived($event)"
+    ></app-file-management-header>
     <div class="qt-page-list-container">
         <div class="qt-page-list__body">
             <div class="qt-page-list__body-table-container">

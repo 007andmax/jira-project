@@ -7,6 +7,7 @@ import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-t
 import { FileManagementHeaderComponent } from './file-management-header.component';
 import { FileManagementAddCategoryComponent } from '../file-management-add-category/file-management-add-category.component';
 import { MatFormFieldModule } from '@angular/material';
+import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 
 @NgModule({
     declarations: [FileManagementHeaderComponent,
@@ -21,6 +22,7 @@ import { MatFormFieldModule } from '@angular/material';
         NgbModule,
         ReactiveFormsModule,
         MatFormFieldModule,
+        DropDownModule
     ],
     exports: [FileManagementHeaderComponent]
 })

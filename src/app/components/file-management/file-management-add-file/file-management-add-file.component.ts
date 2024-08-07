@@ -63,6 +63,7 @@ export class FileManagementAddFileComponent implements OnInit {
     if (this.addForm.invalid) {
       return;
     }
+    this.addForm.controls["categoryId"].setValue(this.categoryId);
     console.log("this.invoiceForm.value", this.addForm.value);
     this.addBtn.setDisabled(true);
     this.fileManagementService.addFile(this.addForm.value).subscribe(data => {
