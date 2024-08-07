@@ -1,4 +1,5 @@
 @import "./src/assets/styles/variable";
+@import "./src/assets/styles/mixin/breakpoint";
 
 .users-page {
   .qt-table-modern {
@@ -60,7 +61,7 @@
       border: unset;
       > div {
         background-color: $blue-dark-25;
-        @media (max-width: 1600px) {
+        @include media-breakpoint-down($md) {
           word-break: break-all;
         }
       }
@@ -127,7 +128,7 @@
 
     &__contract-no {
       flex: 1 0 216px;
-      @media (min-width: 2048px) {
+      @include media-breakpoint-up($lg) {
         flex: 1 0 180px;
       }
     }
@@ -332,7 +333,7 @@
           content: "";
           width: 20px;
           height: 20px;
-          background: url("./assets/img/icons/tag.svg");
+          background: url("./assets/img/icons/tags.svg");
         }
         input {
           height: 38px !important;
@@ -414,7 +415,11 @@
       .qt-input-search {
         display: block;
         &::before {
-          background-image: url(/assets/img/icons/search.svg);
+          mask-image: url(/assets/img/icons/search.svg);
+          mask-position: center;
+          mask-repeat: no-repeat;
+          mask-size: contain;
+          background-color: $gray-400;
         }
       }
     }
@@ -672,13 +677,13 @@ company-user {
   .--open-filters {
     .users-table__industry {
       flex: 0 0 150px;
-      @media (min-width: 2048px) {
+      @include media-breakpoint-up($lg) {
         flex: 1 0 180px;
       }
     }
     .users-table__company,
     .users-table__email {
-      @media (max-width: 1920px) {
+      @include media-breakpoint-down($lg) {
         flex: 2 0 190px;
       }
     }

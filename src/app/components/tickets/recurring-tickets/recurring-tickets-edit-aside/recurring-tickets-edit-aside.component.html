@@ -5,7 +5,7 @@
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">Edit Recurring Service</div>
         <div
-            class="qt-aside-modern__header-close icon__close"
+            class="qt-aside-modern__header-close qt-icon icon__close"
             (click)="close()"
         ></div>
     </div>
@@ -143,7 +143,7 @@
                             *ngIf="products.length > 1"
                         >
                             <i
-                                class="icon__remove icn-16"
+                                class="qt-icon icon__delete icn-16"
                                 (click)="removeProduct(i)"
                             ></i>
                         </div>
@@ -252,7 +252,7 @@
                                 Service
                                 <span
                                     *ngIf="areTicketsPresented && areTicketsTerminated"
-                                    class="icon__help default-services-page__question-icon qt-sz-12 qt-ic-c"
+                                    class="qt-icon icon__help default-services-page__question-icon qt-sz-12 qt-ic-c"
                                     placement="top"
                                     ngbTooltip="Your contacts are expired/terminated. Please recreate them in order to use contract's services or remove them in order to use non-contract services"
                                     container="body"
@@ -278,7 +278,7 @@
                             *ngIf="services.length > 1"
                         >
                             <i
-                                class="icon__remove icn-16"
+                                class="qt-icon icon__delete icn-16"
                                 (click)="removeService(i)"
                             ></i>
                         </div>

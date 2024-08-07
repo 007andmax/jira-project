@@ -1,4 +1,5 @@
 @import "./src/assets/styles/variable";
+@import "./src/assets/styles/mixin/breakpoint";
 
 table.qt-table-modern {
   width: 100%;
@@ -6,7 +7,7 @@ table.qt-table-modern {
   border-spacing: 0 2px;
 
   .--hidden-xl {
-    @media (max-width: 1600px) {
+    @include media-breakpoint-down($md) {
       display: none;
     }
   }

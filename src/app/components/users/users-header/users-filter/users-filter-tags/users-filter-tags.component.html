@@ -90,19 +90,19 @@
                 </button>
                 <div
                     *ngIf="isSeleted(tag)"
-                    class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain filter-tags-check"
+                    class="icon__done qt-za-20 qt-sz-20 qt-bg-contain filter-tags-check"
                 ></div>
                 <i
                     *ngIf="tag.defaultTag && tag.defaultTag === 'USER_TAG'"
-                    class="icon__user-grey qt-sz-16 qt-bg-contain qt-ml-8"
+                    class="qt-icon icon__user qt-icon__gray-400 qt-sz-16 qt-ml-8"
                 ></i>
                 <i
                     *ngIf="tag.defaultTag && tag.defaultTag === 'COMMON'"
-                    class="icon__tag-light-gray qt-sz-16 qt-bg-contain qt-ml-8"
+                    class="qt-icon icon__tags qt-icon__gray-400 qt-sz-16 qt-ml-8"
                 ></i>
                 <i
                     *ngIf="tag.defaultTag && tag.defaultTag === 'COMPANY_TAG'"
-                    class="icon__company-gray qt-za-16 qt-sz-16 qt-bg-contain qt-ml-8"
+                    class="qt-icon icon__companies qt-icon__gray-400 qt-za-16 qt-sz-16 qt-bg-contain qt-ml-8"
                 ></i>
             </div>
         </ng-template>

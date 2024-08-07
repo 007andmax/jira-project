@@ -204,8 +204,8 @@
             >
                 <i
                     class="qt-sz-16 qt-bg-contain qt-mr-8"
-                    [ngClass]="{'icon__folder-active':selectedCategoryDocument === assignedDocumentCategory.id,
-                'icon__folder':selectedCategoryDocument !== assignedDocumentCategory.id}"
+                    [ngClass]="{'qt-icon icon__folder qt-icon__white':selectedCategoryDocument === assignedDocumentCategory.id,
+                'qt-icon icon__folder':selectedCategoryDocument !== assignedDocumentCategory.id}"
                 ></i>
                 {{assignedDocumentCategory.name}}
             </li>

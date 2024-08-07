@@ -2,10 +2,12 @@
     <div class="qt-page-list__header-title-line">
         <div class="qt-page-list__header-title-line--left">
             <div
-                class="qt-page-list__back-button icon__collapse-arrow button-icon pointer"
+                class="qt-page-list__back-button qt-df qt-ai-c qt-jc-c pointer"
                 *ngIf="activePage === 'new-category-documents'"
                 (click)="back()"
-            ></div>
+            >
+              <div class="qt-icon icon__arrow-left button-icon qt-sz-16"></div>
+            </div>
             <h3
                 class="qt-page-list__header-title"
                 [textContent]="'Documents'"
@@ -21,7 +23,7 @@
                         [(ngModel)]="searchText"
                     >
                     <span
-                        class="search-clear icon__close-round"
+                        class="search-clear qt-icon icon__close-round qt-icon__gray-400"
                         *ngIf="searchText.length > 0"
                         (click)="clearSearch()"
                     ></span>
@@ -66,7 +68,7 @@
                                 id="dropdownSave"
                                 ngbDropdownToggle
                             >
-                                <div class="qt-sz-16 qt-ic-c icon__dropdown-arrow-up"></div>
+                                <div class="qt-sz-16 qt-ic-c qt-icon icon__arrow-up qt-icon__white"></div>
                             </div>
                         </button>
                         <ul
@@ -78,7 +80,7 @@
                                 ngbDropdownItem
                                 (click)="goToTemplates()"
                             >
-                                <div class="icon__create-template qt-sz-20 qt-mr-12 qt-bg-contain"></div>
+                                <div class="qt-icon icon__add-document qt-sz-20 qt-mr-12"></div>
                                 Create from Template
                             </li>
                         </ul>

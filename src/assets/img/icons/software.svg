@@ -5,9 +5,9 @@
                 <g>
                     <g>
                         <g transform="translate(-1119 -266) translate(288 148) translate(0 94) translate(662 24) translate(169)">
-                            <circle cx="8" cy="8" r="7" stroke="#16A4FA" stroke-linecap="round" stroke-linejoin="round"/>
-                            <circle cx="8" cy="8" r="4" stroke="#16A4FA" stroke-linecap="round" stroke-linejoin="round"/>
-                            <circle cx="8" cy="8" r="1" fill="#16A4FA"/>
+                            <circle cx="8" cy="8" r="7" stroke="#667085" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="8" cy="8" r="4" stroke="#667085" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="8" cy="8" r="1" fill="#667085"/>
                         </g>
                     </g>
                 </g>

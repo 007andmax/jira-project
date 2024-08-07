@@ -44,7 +44,7 @@
                                 <div
                                     data-tooltip="Edit"
                                     (click)="openModel(false, i, tax)"
-                                    class="icon__edit-gray-dark qt-sz-20 qt-bg-contain qt-mr-16 pointer"
+                                    class="qt-icon icon__edit qt-icon__gray-400 qt-sz-20 qt-bg-contain qt-mr-16 pointer"
                                     (mouseenter)="editTooltip.show($event.target)"
                                     (mouseleave)="editTooltip.hide()"
                                 >
@@ -55,7 +55,7 @@
                                     #removeTooltip
                                 ></app-dynamic-tooltip>
                                 <div
-                                    class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                                    class="qt-icon icon__delete qt-sz-20 qt-bg-contain pointer"
                                     (click)="removeConfirm(tax)"
                                     (mouseenter)="removeTooltip.show($event.target)"
                                     (mouseleave)="removeTooltip.hide()"

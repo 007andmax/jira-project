@@ -7,13 +7,15 @@
             <div
                 id="dropdownCreate"
                 ngbDropdownToggle
-                class="nav-header__add-btn icon__add-product tooltip-max--content"
+                class="nav-header__add-btn tooltip-max--content qt-df qt-ai-c qt-jc-c"
                 placement="left"
                 ngbTooltip="Quick Create"
-            ></div>
+            >
+              <div class="qt-icon icon__add qt-icon__white qt-sz-16"></div>
+            </div>
             <div
                 *ngIf="!customerPortalStateService.isCustomerPortal"
-                class="icon__help-center qt-bg-contain qt-sz-18 pointer qt-mr-24"
+                class="qt-icon icon__help qt-bg-contain qt-sz-18 pointer qt-mr-24"
                 (click)="showHelpCanterAside()"
             ></div>
         </div>
@@ -26,7 +28,7 @@
                 ngbDropdownItem
                 (click)="onAddTicket()"
             >
-                <div class="icon__menu-tickets-gray qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                <div class="qt-icon icon__tickets qt-icon__gray-600 qt-sz-20 qt-mr-12"></div>
                 Ticket
             </li>
             <li
@@ -34,7 +36,7 @@
                 (click)="onAddCompany()"
                 *ngIf="getPermissions('CREATE_COMPANIES')"
             >
-                <div class="icon__menu-company-gray qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                <div class="qt-icon icon__companies qt-sz-20 qt-icon__gray-600 qt-sz-20 qt-mr-12"></div>
                 Company
             </li>
             <li
@@ -42,7 +44,7 @@
                 (click)="onAddUser()"
                 *ngIf="getPermissions('CREATE_USERS')"
             >
-                <div class="icon__menu-users-gray qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                <div class="qt-icon icon__users qt-icon__gray-600 qt-sz-20 qt-mr-12"></div>
                 Users
             </li>
             <li
@@ -50,7 +52,7 @@
                 (click)="onAddService()"
                 *ngIf="getPermissions('MANAGE_SERVICES')"
             >
-                <div class="icon__menu-crm-settings-gray qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                <div class="qt-icon icon__service qt-icon__gray-600 qt-sz-20 qt-mr-12"></div>
                 Service
             </li>
             <li
@@ -58,7 +60,7 @@
                 (click)="onAddProduct()"
                 *ngIf="getPermissions('MANAGE_PRODUCTS')"
             >
-                <div class="icon__menu-products-gray qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                <div class="qt-icon icon__products qt-icon__gray-600 qt-sz-20 qt-mr-12"></div>
                 Product
             </li>
         </ul>
@@ -102,7 +104,7 @@
                         {{(currentCompany) ? currentCompany.name : ''}}
                     </span>
                 </ng-template>
-                <div class="nav-header__account-info-menu-arrow icon__down-arrow"></div>
+                <div class="nav-header__account-info-menu-arrow qt-icon icon__arrow-down"></div>
             </div>
             <ul
                 class="qt-dropdown-menu"
@@ -113,14 +115,14 @@
                     ngbDropdownItem
                     (click)="goToSettings()"
                 >
-                    <div class="icon__settings-gray qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                    <div class="qt-icon icon__settings qt-sz-20 qt-mr-12"></div>
                     My Profile
                 </li>
                 <li
                     ngbDropdownItem
                     (click)="logOut()"
                 >
-                    <div class="icon__logout-red qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                    <div class="qt-icon icon__logout qt-icon__red-600 qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Logout
                 </li>
             </ul>

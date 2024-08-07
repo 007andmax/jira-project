@@ -2,11 +2,12 @@
 @import "./src/assets/scss/device/mixin";
 @import "./src/assets/scss/device/custom";
 @import './src/assets/styles/variable';
+@import "./src/assets/styles/mixin/breakpoint";
 
 main {
     &.terminal-page-area {
         margin-right: 352px !important;
-        @media only screen and (min-width: 1601px) {
+        @include media-breakpoint-up($md) {
             margin-right: 512px !important;
         }
         .page-container{
@@ -29,17 +30,8 @@ main {
                         font-weight: 500;
                         margin-bottom: 16px;
                         height: 310px;
-                        // max-height: 310px !important;
                         overflow-y: auto;
                         overflow-x: hidden;
-                        // @media only screen and (min-height:900px) {
-                        //     height: 580px;
-                        //     max-height: 440px !important;
-                        // }
-                        // @media only screen and (min-height:1080px) {
-                        //     height: 650px;
-                        //     max-height: 650px !important;
-                        // }
                         p {
                             margin-bottom: 0;
                             font-weight: 500;
@@ -61,16 +53,7 @@ main {
                             color: $gray-600 !important;
                             font-weight: 500;
                             height: 120px;
-                            // max-height: 150px !important;
                             margin-bottom: 0;
-                            // @media only screen and (min-height:900px) {
-                            //     height: 280px;
-                            //     max-height: 280px !important;
-                            // }
-                            // @media only screen and (min-height:1080px) {
-                            //     height: 400px;
-                            //     max-height: 400px !important;
-                            // }
                             &:focus{
                                 outline: none !important;
                             }
@@ -114,7 +97,7 @@ main {
                 -webkit-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
                 -moz-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
                 box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
-                @media only screen and (min-width: 1601px) {
+                @include media-breakpoint-up($md) {
                     width: 448px;
                 }
                     ul.nav-tabs {
@@ -295,11 +278,6 @@ main {
                         background-color: $white;
                         @include border-radius(5px);
                         padding: 24px;
-                        // @media only screen and (max-width:1440px){
-                        //     max-height: 460px;
-                        //     overflow-y: auto;
-                        //     overflow-x: hidden;
-                        // }
                         .modal-body {
                             @media only screen and (max-height: 900px) {
                                 max-height: 500px;
@@ -609,8 +587,11 @@ main {
                             }
                             .script-search {
                                 padding-left: 30px;
-                                background: url("/assets/img/icons/search.svg") no-repeat left
-                                    12px center;
+                                mask-image: url("/assets/img/icons/search.svg");
+                                mask-position: center;
+                                mask-repeat: no-repeat;
+                                mask-size: 12px;
+                                background-color: $gray-400;
                             }
                         }
                 }
@@ -750,19 +731,21 @@ main {
                 }
                 &.Command {
                     margin-left: 0;
-                    background: url("/assets/img/icons/command-line-gray.svg") no-repeat left 0;
                     cursor: pointer;
                     &.active {
-                        background: url("/assets/img/icons/command-line-blue.svg") no-repeat left 0;
-                        color: $blue-light-600;
+                      color: $blue-light-600;
+                      .qt-icon {
+                        background-color: $blue-light-600;
+                      }
                     }
                 }
                 &.Power {
-                    background: url("/assets/img/device/power-shell.svg") no-repeat left 0;
                     cursor: pointer;
                     &.active {
-                        background: url("/assets/img/icons/power-shell-blue.svg") no-repeat left 0;
-                        color: $blue-light-600;
+                      color: $blue-light-600;
+                      .qt-icon {
+                        background-color: $blue-light-600;
+                      }
                     }
                 }
             }
@@ -797,9 +780,10 @@ main {
                     height: 16px;
                     position: relative;
                     font-weight: 500;
-                    background: url("/assets/img/icons/send-to-front.svg") no-repeat center;
+                    mask-image: url("/assets/img/icons/send-to-front.svg");
+                    mask-size: contain;
+                    mask-repeat: no-repeat;
                     &::before {
-                        font-weight: 400;
                         font-weight: 400;
                         width: 85px;
                     }

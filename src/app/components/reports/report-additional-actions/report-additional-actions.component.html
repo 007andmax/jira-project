@@ -1,25 +1,28 @@
 <div class="qt-report__control-panel qt-ml-16">
     <div
-        class="qt-report__control-panel-btn icon__email-dark qt-mr-6 pointer"
+        class="qt-report__control-panel-btn qt-df qt-ai-c qt-jc-c qt-mr-6 pointer"
         uib-tooltip="send mail"
         tooltip-placement="top"
         (click)="sendEmail()"
     >
+      <div class="qt-sz-20 qt-icon icon__email-send"></div>
     </div>
     <div
-        class="qt-report__control-panel-btn icon__print qt-mr-6 pointer"
+        class="qt-report__control-panel-btn qt-df qt-jc-c qt-ai-c qt-mr-6 pointer"
         uib-tooltip="print"
         tooltip-placement="top"
         (click)="getPdfIdFromRest(ACION_OPEN_PDF)"
     >
+      <div class="qt-sz-20 qt-icon icon__print"></div>
     </div>
     <div
-        class="qt-report__control-panel-btn icon__export-dark pointer"
+        class="qt-report__control-panel-btn qt-df qt-ai-c qt-jc-c pointer"
         ngbDropdown
         keyboard-nav="true"
         uib-tooltip="export"
         tooltip-placement="top"
     >
+        <div class="qt-sz-20 qt-icon icon__share"></div>
         <div
             class="mask-dp pointer"
             ngbDropdownToggle

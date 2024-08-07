@@ -1,6 +1,6 @@
 <div class="cmp-dboard-col m-0 qt-df">
     <div
-        class="collapse-arrow icon__close"
+        class="collapse-arrow qt-icon icon__close"
         (click)="back()"
     ></div>
     <div class="profile-cmp-board qt-df">
@@ -27,20 +27,18 @@
         </div>
         <div class="cmp-dboard-rating qt-df">
             <span class="qt-dflex">
-                <img
-                    *ngFor="let item of arrayOne(selectedRating); let i = index;"
-                    class="pointer"
-                    src="html/assets/img/icons/rating-filled.svg"
-                    alt="rating"
-                    (click)="changeRating(i, 'selected')"
+                <span
+                  class="qt-icon icon__rating-filled qt-icon__yellow-600 qt-sz-16 qt-dib qt-ml-2 qt-mr-2 pointer"
+                  *ngFor="let item of arrayOne(selectedRating); let i = index;"
+                  (click)="changeRating(i, 'selected')"
                 >
-                <img
-                    *ngFor="let item of arrayOne(unSelectedRating); let i = index;"
-                    class="pointer"
-                    src="html/assets/img/icons/rating.svg"
-                    alt="rating"
-                    (click)="changeRating(i, 'unselected')"
+                </span>
+                <span
+                  class="qt-icon icon__rating-filled qt-icon__background qt-sz-16 qt-dib qt-ml-2 qt-mr-2 pointer"
+                  *ngFor="let item of arrayOne(unSelectedRating); let i = index;"
+                  (click)="changeRating(i, 'unselected')"
                 >
+                </span>
             </span>
             <div class="cmp-user-info qt-df">
                 <span
@@ -112,11 +110,11 @@
                                         <div>
                                             <div
                                                 *ngIf="phone.typeNumber === 'FAX'"
-                                                class="qt-sz-16 qt-mr-6 icon__office-phone-gray"
+                                                class="qt-sz-16 qt-mr-6 qt-icon icon__old-phone"
                                             ></div>
                                             <div
                                                 *ngIf="phone.typeNumber === 'MOBILE' || phone.typeNumber === 'OFFICE'"
-                                                class="qt-sz-16 qt-mr-6 icon__phone-gray"
+                                                class="qt-sz-16 qt-mr-6 qt-icon icon__phone"
                                             ></div>
                                         </div>
                                         <div class="users-table__contract-no--number">
@@ -133,7 +131,7 @@
                         </div>
                         <div class="email-container">
                             <div
-                                class="icon__email-dark qt-sz-16 pointer"
+                                class="qt-icon icon__email-send qt-sz-16 pointer"
                                 (click)="showAsideForDraftEmail(user)"
                             ></div>
                         </div>
@@ -267,11 +265,7 @@
                                 class="btn-new btn-primary-white qt-w100"
                                 (click)="open(contentHour)"
                             >
-                                <img
-                                    class="qt-mr-4"
-                                    src="html/assets/img/icons/edit-blue.svg"
-                                    alt="user"
-                                >
+                                <span class="qt-icon icon__edit qt-icon__blue-light-600 qt-sz-16 qt-mr-4"></span>
                                 Edit Suggestions
                             </button>
                         </div>

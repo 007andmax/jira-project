@@ -5,7 +5,7 @@
             class="qt-button --square-md --gray pointer"
             (click)="close()"
         >
-            <div class="icon__close qt-bg-contain qt-sz-16 pointer"></div>
+            <div class="qt-icon icon__close qt-sz-16 pointer"></div>
         </div>
     </div>
     <div class="qt-input-search qt-mt-16 qt-mb-16 qt-ml-16 qt-mr-16">
@@ -17,7 +17,7 @@
         <span
             *ngIf="isSearch"
             (click)="clearSearch()"
-            class="search-clear icon__close-round"
+            class="search-clear qt-icon icon__close-round qt-icon__gray-400"
         ></span>
     </div>
     <div
@@ -38,7 +38,7 @@
                 *ngIf="tickets.length == 0 && !showPreloader"
             >
                 <div class="no-find-tickets-avatar">
-                    <div class="icon__tickets-detail-contact qt-sz-24 qt-bg-contain"></div>
+                    <div class="qt-icon icon__tickets qt-sz-24"></div>
                 </div>
                 <h4 class="qt-mt-16">No Tickets Found</h4>
                 <span>Try using another word</span>
@@ -55,7 +55,7 @@
                 >
                     <div class="qt-df qt-ai-fs">
                         <div class="ticket-detail-tickets__icon-wrap qt-dif qt-jc-c qt-ai-c qt-mr-8">
-                            <i class="icon__tickets-detail-contact qt-bg-contain qt-sz-20 qt-dib"></i>
+                            <i class="qt-icon icon__tickets qt-sz-20 qt-dib"></i>
                         </div>
                         <div>
                             <div

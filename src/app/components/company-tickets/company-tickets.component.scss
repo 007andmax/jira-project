@@ -1,4 +1,5 @@
 @import "./src/assets/styles/variable";
+@import "./src/assets/styles/mixin/breakpoint";
 
 /deep/ .company-tickets-table {
   th {
@@ -66,7 +67,7 @@ app-tickets-table-item {
   }
 }
 
-@media (min-width: 1920px) {
+@include media-breakpoint-up($lg) {
   /deep/ .company-tickets-table {
     &__requested-by {
       max-width: 300px;

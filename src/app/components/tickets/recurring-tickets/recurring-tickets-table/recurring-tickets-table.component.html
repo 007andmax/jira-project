@@ -91,7 +91,7 @@
             ngbDropdown
         >
             <div
-                class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain pointer"
+                class="qt-ic-c qt-icon icon__more qt-pointer qt-sz-16 qt-bg-contain pointer"
                 id="dropdownBasic"
                 ngbDropdownToggle
             >
@@ -104,7 +104,7 @@
                     ngbDropdownItem
                     (click)="editTicket()"
                 >
-                    <i class="qt-sz-20 qt-mr-12 qt-bg-contain qt-bg-contain icon__edit"></i>
+                    <i class="qt-sz-20 qt-mr-12 qt-bg-contain qt-bg-contain qt-icon icon__edit"></i>
                     Edit
                 </button>
                 <button
@@ -112,7 +112,7 @@
                     (click)="suspendTicket()"
                     *ngIf="!ticket.suspended"
                 >
-                    <i class="qt-sz-20 qt-mr-12 qt-bg-contain icon__archive"></i>
+                    <i class="qt-sz-20 qt-mr-12 qt-icon icon__block"></i>
                     Suspend
                 </button>
                 <button
@@ -120,14 +120,14 @@
                     (click)="resumeTicket()"
                     *ngIf="ticket.suspended"
                 >
-                    <i class="qt-sz-20 qt-mr-12 qt-bg-contain icon__archive"></i>
+                    <i class="qt-sz-20 qt-mr-12 qt-icon icon__delete qt-icon__red-600"></i>
                     Resume
                 </button>
                 <button
                     ngbDropdownItem
                     (click)="removeTicket()"
                 >
-                    <i class="qt-sz-20 qt-mr-12 qt-bg-contain icon__archive"></i>
+                    <i class="qt-sz-20 qt-mr-12 qt-icon icon__delete qt-icon__red-600"></i>
                     Delete
                 </button>
             </div>

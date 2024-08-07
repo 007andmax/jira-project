@@ -14,7 +14,7 @@
                 class="selected-item"
             >
                 Invoice
-                <div class="icon__close "></div>
+                <div class="qt-icon icon__close "></div>
             </div>
             <div
                 class
@@ -22,7 +22,7 @@
                 [ngClass]="{'active':defaultSubscriptions.ticketSubscription.activated}"
             >
                 Ticket
-                <div class="icon__close "></div>
+                <div class="qt-icon icon__close "></div>
             </div>
             <div
                 class
@@ -30,7 +30,7 @@
                 [ngClass]="{'active':defaultSubscriptions.ticketManagerSubscription.activated}"
             >
                 Ticket Manager
-                <div class="icon__close "></div>
+                <div class="qt-icon icon__close "></div>
             </div>
             <ng-template
                 ngFor
@@ -43,7 +43,7 @@
                     [ngClass]="{'active':custom.activated}"
                     [textContent]="custom.name"
                 >
-                    <div class="icon__close "></div>
+                    <div class="qt-icon icon__close "></div>
                 </div>
             </ng-template>
             <i class="icn-sm report-caret-icon"></i>

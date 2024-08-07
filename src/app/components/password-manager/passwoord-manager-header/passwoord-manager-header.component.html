@@ -9,7 +9,7 @@
         <div class="qt-page-list__header-title-line--rigth">
             <div class="qt-df qt-ai-c">
                 <div
-                    class="icon__close-white qt-sz-20 qt-bg-contain closed-search"
+                    class="qt-icon icon__close qt-icon__white qt-sz-20 qt-bg-contain closed-search"
                     *ngIf="toggleSearch"
                     (click)="toggleSearch = false"
                 ></div>
@@ -25,7 +25,7 @@
                         (keyup)="onKeyUp($event)"
                     >
                     <span
-                        class="search-clear icon__close-round"
+                        class="search-clear qt-icon icon__close-round qt-icon__gray-400"
                         *ngIf="searchText.length > 0"
                         (click)="clearSearch()"
                     ></span>

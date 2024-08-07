@@ -25,7 +25,7 @@
             <app-dashboard-stats
                 [title]="'Total Sales'"
                 [total]="dashboard.totalSales | currency"
-                [class]="'icon__total-sales'"
+                [class]="'qt-icon icon__sales'"
                 [tooltip]="'Represents the total amount of all created invoices from the accounting date to the current day inclusive.'"
             ></app-dashboard-stats>
             <app-dashboard-stats
@@ -37,14 +37,14 @@
             <app-dashboard-stats
                 [title]="'Unbilled Amount'"
                 [total]="dashboard.totalBillable | currency"
-                [class]="'icon__unbilled-amount'"
+                [class]="'qt-icon icon__unbilled-amount'"
                 [tooltip]="'Represents the total amount of products/services in tickets for which an invoice has not been created since the creation of the technical company. The current day is not taken into account.'"
                 [customTooltipClass]="true"
             ></app-dashboard-stats>
             <app-dashboard-stats
                 [title]="'Total Quotes'"
                 [total]="dashboard.saleQuotesPossibleRevenue | currency"
-                [class]="'icon__quotes'"
+                [class]="'qt-icon icon__manual-create-billable'"
                 [tooltip]="'Represents the potential income for all quotas since the creation of the technical company to the current day inclusive. Only quotes with the following statuses are taken into account: SAVED, READ, APPROVED, UNREAD.'"
                 [customTooltipClass]="true"
             ></app-dashboard-stats>

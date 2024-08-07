@@ -1,4 +1,5 @@
 @import "./src/assets/styles/variable";
+@import "./src/assets/styles/mixin/breakpoint";
 
 .documents-page {
   .qt-page-list__header-thead__row {
@@ -22,7 +23,7 @@
       &:first-child::before {
         position: absolute;
         content: "";
-        background: url("/assets/img/icons/update.svg") no-repeat;
+        background: url("/assets/img/icons/new-update.svg") no-repeat;
         width: 44px;
         height: 20px;
         padding-left: 5px;
@@ -41,7 +42,7 @@
     }
     &__create-by {
      flex: 0 0 280px;
-     @media (max-width: 1600px) {
+     @include media-breakpoint-down($md) {
        flex: 0 0 206px;
      }
     }

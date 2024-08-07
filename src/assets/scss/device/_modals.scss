@@ -137,18 +137,14 @@
   overflow: scroll;
 }
 
-@media (min-width: $screen-sm-min) {
-  .modal-dialog {
-    width: $modal-md;
-    margin: 30px auto;
-  }
-  .modal-content {
-    @include box-shadow(0 5px 15px rgba(0, 0, 0, .5));
-  }
-
-  .modal-sm { width: $modal-sm; }
+.modal-dialog {
+  width: $modal-md;
+  margin: 30px auto;
+}
+.modal-content {
+  @include box-shadow(0 5px 15px rgba(0, 0, 0, .5));
 }
 
-@media (min-width: $screen-md-min) {
-  .modal-lg { width: $modal-lg; }
-}
+.modal-sm { width: $modal-sm; }
+
+.modal-lg { width: $modal-lg; }

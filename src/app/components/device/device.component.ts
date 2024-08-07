@@ -316,7 +316,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
     this.playTimer = !this.playTimer;
     if (this.interval && !this.playTimer) {
       clearInterval(this.interval);
-      this.play_pause_path = "/html/assets/img/device/play.svg";
+      this.play_pause_path = "/html/assets/img/device/category-closed.svg";
     } else {
       this.play_pause_path = "/html/assets/img/device/pause.svg";
       this.interval = setInterval(() => {
