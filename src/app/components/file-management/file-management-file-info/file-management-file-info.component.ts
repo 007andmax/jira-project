@@ -6,6 +6,7 @@ import { FileManagementService } from 'src/app/services/file-management/file-man
 import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 import { Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PreviewFileStateService } from 'src/app/states/file-management/preview-file-state.service';
 
 @Component({
   selector: 'app-file-management-file-info',
@@ -23,6 +24,7 @@ export class FileManagementFileInfoComponent implements OnInit, OnDestroy {
   constructor(private fileManagementService: FileManagementService,
     private tagsState: TagsStateService,
     public formBuilder: FormBuilder,
+    public previewFileStateService: PreviewFileStateService,
   ) { }
 
   ngOnInit() {
@@ -79,5 +81,9 @@ export class FileManagementFileInfoComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
+  }
+  preview() {
+    if (this.file.contentType === "image/jpg" || this.file.contentType === "image/png" || this.file.contentType === "image/jpeg") this.previewFileStateService.initPreview(this.file);
+
   }
 }

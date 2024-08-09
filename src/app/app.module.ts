@@ -143,6 +143,7 @@ import { ProductTypeCheckUseComponent } from './components/setting/products-sett
 import { ProductTypeCheckUseModule } from './components/setting/products-settings/product-type-check-use/product-type-check-use.module';
 import { FileManagementComponent } from './components/file-management/file-management.component';
 import { FileManagementAddFileModule } from './components/file-management/file-management-add-file/file-management-add-file.module';
+import { PreviewFileComponent } from './components/shared/preview-file/preview-file.component';
 declare var $: any;
 
 /**
@@ -172,7 +173,8 @@ declare var $: any;
     GlNumberCheckUseComponent,
     CannedResponsesAsideComponent,
     ManufacturesCheckUseComponent,
-    UserDeArchiveNotificationComponent
+    UserDeArchiveNotificationComponent,
+    PreviewFileComponent
   ],
   imports: [
     BrowserModule,

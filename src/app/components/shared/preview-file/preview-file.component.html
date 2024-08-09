@@ -1,0 +1,38 @@
+<div
+    class="preview-attachment"
+    *ngIf="show"
+>
+    <div>
+        <img [src]="file.url">
+        <div class="file-actions-container">
+            <div class="qt-df qt-ai-c">
+                <div class="file-actions-item qt-df qt-ai-c">
+                    <a
+                        href="javascript:;"
+                        class="qt-button --md --gray qt-jc-c pointer qt-ml-12"
+                        (click)="toggleAddCategory = !toggleAddCategory"
+                    >
+                        <span class="icon__print  qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+                        Print
+                    </a>
+                    <a
+                        href="javascript:;"
+                        class="qt-button --md --gray qt-jc-c pointer qt-ml-12 "
+                        (click)="download()"
+                    >
+                        <span class="icon__export-dark qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+                        Download
+                    </a>
+                </div>
+                <div class="file-actions-item qt-df qt-ai-c">
+                    <div
+                        class="qt-button --square-md --gray pointer"
+                        (click)="show = false"
+                    >
+                        <div class="icon__close qt-bg-contain qt-sz-16 pointer"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

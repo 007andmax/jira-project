@@ -1,11 +1,30 @@
 <div
     class="qt-fileupload"
+    [ngClass]="{'qt-fileupload-file-info':idfiles.length > 0}"
     appDnd
     (fileDropped)="onFileDropped($event)"
+    [hidden]="isUploading"
 >
     <label class="qt-fileupload__label">
-        <div class="qt-fileupload__attach-icon icon__upload qt-sz-24"></div>
-        <span class="qt-fileupload__title">
+        <div
+            class="qt-fileupload__attach-icon icon__upload qt-sz-24"
+            *ngIf="idfiles.length == 0"
+        ></div>
+        <img
+            class="qt-mb-5"
+            *ngIf="idfiles.length > 0"
+            [src]="files[0].src"
+        >
+        <span
+            class="qt-fileupload__title file-name"
+            *ngIf="idfiles.length > 0"
+        >
+            {{files[0].name}}
+        </span>
+        <span
+            class="qt-fileupload__title"
+            *ngIf="idfiles.length == 0"
+        >
             Drag and drop file here or
             <span class="qt-fileupload__link">Click to upload</span>
         </span>
@@ -13,32 +32,50 @@
             type="file"
             #fileDropRef
             id="fileDropRef"
-            multiple
             (change)="fileBrowseHandler($event.target.files)"
         >
-        <div class="qt-fileupload__mobile-text">
+        <div
+            class="qt-fileupload__mobile-text"
+            *ngIf="idfiles.length == 0"
+        >
             Click here to attachfiles or take a screen shot
             <div class="icon__snapshot qt-sz-16 qt-bg-contain qt-ml-6"></div>
         </div>
     </label>
 </div>
-<div class="files-list">
-    <div
-        class="single-file"
-        *ngFor="let file of files; let i = index"
-    >
-        <div class="info">
-            <h4 class="name">{{ file?.name }}</h4>
-            <p class="size">
-                {{ formatBytes(file?.size,2) }}
-                <span class="file-error">{{(file.showError) ? file.error : ''}}</span>
-            </p>
-            <app-upload-area-progress [progress]="file?.progress"></app-upload-area-progress>
+<div
+    class="attachment-container"
+    *ngIf="isUploading"
+>
+    <span class="qt-fs-13 qt-fw-500 qt-color-gray-900 qt-mb-8">Attachment</span>
+    <div class="files-list">
+        <div
+            class="single-file"
+            *ngFor="let file of files; let i = index"
+        >
+            <div class="info qt-df">
+                <div class="qt-sz-48">
+                    <img [src]="file.src">
+                </div>
+                <div class="qt-ml-12">
+                    <span class="name qt-mb-4">{{ file?.name }}</span>
+                    <div class="qt-df qt-ai-c size">
+                        <span class="size-progress">Uploading {{file?.progress}}%</span>
+                        <span
+                            class="qt-ml-8 size-remaining"
+                            *ngIf="false"
+                        >
+                            20 seconds remaining
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="progress-line-container">
+                <div
+                    class="progress-line"
+                    [ngStyle]="{width: file?.progress + '%'}"
+                ></div>
+            </div>
         </div>
-        <i
-            class="icn-sm icn-remove-old"
-            (click)="deleteFile(i)"
-        ></i>
-        <!-- <img src="assets/img/dnd/ic-delete-file.svg" class="delete" width="20px" alt="file" (click)="deleteFile(i)"> -->
     </div>
 </div>

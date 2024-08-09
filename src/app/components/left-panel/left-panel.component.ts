@@ -277,7 +277,7 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
     if (this.leftPanelService.isReportsState(data)) this.page = "REPORTS";
     if (this.leftPanelService.isSettingsPage(data)) this.page = "SETTINGS";
     if (this.leftPanelService.isDevicesPage(data)) this.page = "DEVICES";
-    if (this.leftPanelService.isFilePage(data)) this.page = "FILE";
+    if (this.leftPanelService.isFilePage(data)) this.page = "FILE_MANAGEMENT";
   }
   setDefaultTypeFilter() {
     this.panelTickets.setTypeFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage)

@@ -7,11 +7,24 @@ import { UploadAreaComponent } from 'src/app/components/shared/upload-area/uploa
   styleUrls: ['./file-management-add-file-drag-drop.component.scss']
 })
 export class FileManagementAddFileDragDropComponent extends UploadAreaComponent {
+  isUploading: boolean = false;
   @Output() isUploadingFile = new EventEmitter<any>();
+  onFileDropped($event) {
+    this.files = [];
+    this.idfiles = [];
+    this.prepareFilesList($event);
+    this.cd.detectChanges();
+  }
+  prepareFilesList(files: Array<any>) {
+    console.log("files", files.length);
+    files[files.length - 1].progress = 0;
+    this.files = [files[files.length - 1]]
+    console.log("this.files", this.files);
+    this.uploadFilesSimulator(0);
+  }
   uploadFilesSimulator(index: number) {
     if (index === this.files.length) {
-      (<any>document.getElementById('fileDropRef')).value = null;
-
+      (<any>this.elRef.nativeElement.querySelector('#fileDropRef')).value = '';
       return;
     } else {
       if (this.files[index].size > 4194304) {
@@ -22,6 +35,9 @@ export class FileManagementAddFileDragDropComponent extends UploadAreaComponent 
       }
       this.elRef.nativeElement.querySelector('.qt-fileupload').classList.add('fileupload');
       this.isUploadingFile.emit(true);
+      this.isUploading = true;
+      console.log("this.files[index]", this.files[index]);
+      this.files[index].src = URL.createObjectURL(this.files[index]);
       this.uploadFile(this.files[index]).then((data: any) => {
         let res = JSON.parse(data.response);
         this.idfiles.push(res.id);
@@ -30,6 +46,7 @@ export class FileManagementAddFileDragDropComponent extends UploadAreaComponent 
         this.uploadFilesSimulator(index + 1);
         this.cd.detectChanges();
         this.isUploadingFile.emit(false);
+        this.isUploading = false;
       }).catch(() => {
         this.elRef.nativeElement.querySelector('.qt-fileupload').classList.remove('fileupload');
         this.files[index].showError = true;
