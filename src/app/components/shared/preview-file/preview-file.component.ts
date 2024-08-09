@@ -24,7 +24,7 @@ export class PreviewFileComponent implements OnInit {
     this.sub.unsubscribe();
   }
   download() {
-    fetch(this.file.url)
+    fetch(`/file/${this.file.mediaFileId}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
