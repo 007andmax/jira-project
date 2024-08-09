@@ -29,10 +29,15 @@ export class PreviewFileComponent implements OnInit {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-        return response;
+        return response.blob();
       })
-      .then(data => {
-        console.log(data);
+      .then(blob => {
+        const downloadUrl = window.URL.createObjectURL(blob); // Create a URL for the Blob
+        const link = document.createElement('a'); // Create an anchor element
+        link.href = downloadUrl;
+        link.download = `${this.file.name}.${this.file.contentType.substring(this.file.contentType.indexOf("/") + 1, this.file.contentType.length)}`; // Set the file name for download
+        link.click(); // Trigger the download
+        window.URL.revokeObjectURL(downloadUrl); // Clean up by revoking the object URL
       })
       .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
