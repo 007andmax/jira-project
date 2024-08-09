@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { map } from 'rxjs/operators';
 import { FileManagementService } from 'src/app/services/file-management/file-management.service';
@@ -11,6 +11,7 @@ import { FileManagementCategory } from '../class/file-management-category';
   styleUrls: ['./file-management-add-category.component.scss']
 })
 export class FileManagementAddCategoryComponent implements OnInit {
+  @Input() categoryId: string;
   categoryForm: FormGroup;
   submitted = false;
   @Output() onClose = new EventEmitter();
@@ -23,6 +24,7 @@ export class FileManagementAddCategoryComponent implements OnInit {
         "",
         [Validators.required, Validators.minLength(1), Validators.maxLength(50)]
       ],
+      parentCategoryId: [null]
     });
   }
   get f() {
@@ -35,7 +37,7 @@ export class FileManagementAddCategoryComponent implements OnInit {
     if (this.categoryForm.invalid) {
       return;
     }
-
+    if (this.categoryId) this.categoryForm.controls["parentCategoryId"].setValue(this.categoryId);
     this.fileManagementService
       .addCategory(this.categoryForm.value)
       .pipe(

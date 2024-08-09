@@ -5,3 +5,59 @@
     max-width: 180px;
     min-width: 180px;
 }
+.file-management-create-at {
+    padding: 2px 6px;
+    border: 1px solid $blue-light-100;
+    background-color: $blue-light-25;
+    margin-left: 24px;
+    font-size: 14px;
+    color: $blue-light-800;
+    border-radius: 76px;
+    font-weight: 500;
+
+}
+.categories-conteiner {
+    flex-wrap: wrap;
+}
+
+.qt-page-list {
+    padding: 10px 0px;
+}
+
+.qt-page-list__body {
+    background-color: $white;
+    padding: 32px;
+}
+.qt-page-list-container {
+    display: flex;
+}
+.file-management-create-at-container {
+    position: relative;
+
+    span {
+        position: relative;
+        z-index: 3;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        height: 1px;
+        left: 0px;
+        top: 50%;
+        right: 0px;
+        background-color: $gray-200;
+        z-index: 1;
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        height: 24px;
+        left: 16px;
+        background-color: $white;
+        width: 108px;
+        z-index: 2;
+
+    }
+}

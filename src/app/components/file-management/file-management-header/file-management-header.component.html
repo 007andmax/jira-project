@@ -85,14 +85,8 @@
                 </button>
                 <div class="qt-df">
                     <div class="qt-pos-rel">
-
-
-
-
-
-
-
                         <app-file-management-add-category
+                            [categoryId]="categoryId"
                             *ngIf="toggleAddCategory"
                             (onClose)="toggleAddCategory = false"
                         ></app-file-management-add-category>

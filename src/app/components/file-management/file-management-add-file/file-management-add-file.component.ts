@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { DocumentsService } from 'src/app/services/documents/documents.service';
 
 @Component({
   selector: 'app-file-management-add-file',
@@ -25,6 +26,7 @@ export class FileManagementAddFileComponent implements OnInit {
     private confirmStateService: ConfirmStateService,
     public activeModal: NgbActiveModal,
     private formBuilder: FormBuilder,
+    private documentsService: DocumentsService,
   ) { }
 
   ngOnInit() {
@@ -46,10 +48,16 @@ export class FileManagementAddFileComponent implements OnInit {
   }
   close() {
     console.log("close");
+    console.log(this.addForm.controls["mediaFileId"].value);
+    if (!this.submitted && this.addForm.controls["mediaFileId"].value) this.onRemoveFile(this.addForm.controls["mediaFileId"].value);
     this.activeModal.close();
     this.confirmStateService.setConfirm(false);
   }
+  onRemoveFile(id) {
+    this.documentsService.removeDocumentAttachment(id).subscribe(data => {
 
+    })
+  }
   onChangeFiles(ids) {
     console.log("ids", ids);
     this.addForm.controls["mediaFileId"].setValue(ids[0]);

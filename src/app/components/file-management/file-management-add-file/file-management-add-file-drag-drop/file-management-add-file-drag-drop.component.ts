@@ -9,12 +9,15 @@ import { UploadAreaComponent } from 'src/app/components/shared/upload-area/uploa
 export class FileManagementAddFileDragDropComponent extends UploadAreaComponent {
   isUploading: boolean = false;
   @Output() isUploadingFile = new EventEmitter<any>();
+  @Output() onRemoveFile = new EventEmitter<any>();
   onFileDropped($event) {
+    if (this.idfiles.length > 0) this.onRemoveFile.emit(this.idfiles[0]);
     this.files = [];
     this.idfiles = [];
     this.prepareFilesList($event);
     this.cd.detectChanges();
   }
+
   prepareFilesList(files: Array<any>) {
     console.log("files", files.length);
     files[files.length - 1].progress = 0;

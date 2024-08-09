@@ -12,8 +12,9 @@
         ></div>
         <img
             class="qt-mb-5"
+            height="62px"
             *ngIf="idfiles.length > 0"
-            [src]="files[0].src"
+            [src]="'/file/' + idfiles[0]"
         >
         <span
             class="qt-fileupload__title file-name"

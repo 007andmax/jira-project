@@ -84,6 +84,10 @@ export class FileManagementComponent implements OnInit, OnDestroy {
       if (data.action === "DELETE_MANAGEMENT_FILE") {
         let findIndex = this.files.findIndex(item => item.id === data.data);
         if (findIndex > -1) this.files.splice(findIndex, 1);
+        for (const key in this.groupedByCreateAt) {
+          let findIndex = this.groupedByCreateAt[key].findIndex(item => item.id === data.data);
+          if (findIndex > -1) this.groupedByCreateAt[key].splice(findIndex, 1);
+        }
       }
 
       this.cd.detectChanges();
