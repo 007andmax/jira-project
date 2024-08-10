@@ -78,7 +78,7 @@
     background-image: url("/assets/img/icons/send-to-front.svg");
   }
   &__monogram {
-    background-image: url("/assets/img/icons-left-sidebar/monogram.svg");
+    background-image: url("/assets/img/icons/monogram.svg");
   }
   &__invoice-expired {
     background-image: url("/assets/img/icons/invoice-expired.svg");
@@ -178,10 +178,10 @@
     mask-image: url("/assets/img/icons/close.svg");
   }
   &__settings {
-    mask-image: url("/assets/img/icons-left-sidebar/settings.svg");
+    mask-image: url("/assets/img/icons/settings.svg");
   }
   &__logout {
-    mask-image: url("/assets/img/icons-left-sidebar/logout.svg");
+    mask-image: url("/assets/img/icons/logout.svg");
   }
   &__map {
     mask-image: url("/assets/img/icons/map.svg");
@@ -193,13 +193,13 @@
     mask-image: url("/assets/img/icons/folder.svg");
   }
   &__template-settings {
-    mask-image: url("/assets/img/icons-left-sidebar/template-settings.svg");
+    mask-image: url("/assets/img/icons/template-settings.svg");
   }
   &__crm {
-    mask-image: url("/assets/img/icons-left-sidebar/crm.svg");
+    mask-image: url("/assets/img/icons/crm.svg");
   }
   &__marketing {
-    mask-image: url("/assets/img/icons-left-sidebar/marketing.svg");
+    mask-image: url("/assets/img/icons/marketing.svg");
   }
   &__tool {
     mask-image: url("/assets/img/icons/tool.svg");
