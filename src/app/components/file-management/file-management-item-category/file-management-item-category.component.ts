@@ -26,6 +26,7 @@ export class FileManagementItemCategoryComponent implements OnInit {
     this.onFileInfo.emit(this.item);
   }
   navigateToCategory() {
+    console.log("this.item", this.item);
     if (!this.item.allCompaniesRoot) {
       this.router.navigate(
         [`${this.companiesStateService.getCurrentCompany().techDomain}/file-management/category/`, this.item.id]);

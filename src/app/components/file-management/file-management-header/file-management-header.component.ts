@@ -6,6 +6,9 @@ import { FileManagementStateService } from 'src/app/states/file-management/file-
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { FileManagementAddFileComponent } from '../file-management-add-file/file-management-add-file.component';
 import { TitleListType } from '../../tickets/tickets/tickets-header/class/title-list-type';
+import { BreadcrumbsItem } from '../class/breadcrumbs-item';
+import { Router } from '@angular/router';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'app-file-management-header',
@@ -13,6 +16,7 @@ import { TitleListType } from '../../tickets/tickets/tickets-header/class/title-
   styleUrls: ['./file-management-header.component.scss']
 })
 export class FileManagementHeaderComponent implements OnInit {
+  @Input() breadcrumbs: Array<BreadcrumbsItem> = [];
   @Input() categoryId: string;
   @Input() isShowCompanyArchived: boolean = false;
   sort: string = "Date";
@@ -23,12 +27,15 @@ export class FileManagementHeaderComponent implements OnInit {
   listActive: Array<TitleListType> = [new TitleListType('Active companies', 'ACTIVE'), new TitleListType('Archived companies', 'NO_ACTIVE')];
   selectedActive = new TitleListType('Active companies', 'ACTIVE');
   @Output() onSort = new EventEmitter<any>();
+  @Output() onChangeCategory = new EventEmitter<any>();
   @Output() onChangeArchived = new EventEmitter<any>();
   constructor(private leftPanelStateService: LeftPanelStateService,
     public cd: ChangeDetectorRef,
     private fileManagementService: FileManagementService,
     private fileManagementStateService: FileManagementStateService,
     private modalService: NgbModal,
+    public router: Router,
+    public companiesStateService: CompaniesStateService,
   ) { }
 
   ngOnInit() {
@@ -45,6 +52,12 @@ export class FileManagementHeaderComponent implements OnInit {
     const modalRef = this.modalService.open(FileManagementAddFileComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.categoryId = this.categoryId;
     //   this.fileManagementStateService.showAsideForAdd();
+  }
+  goToCategory(id) {
+    if (id) {
+      this.router.navigate(
+        [`${this.companiesStateService.getCurrentCompany().techDomain}/file-management/category/`, id]);
+    }
   }
   setSort(data) {
     this.sort = data;

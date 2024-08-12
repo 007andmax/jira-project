@@ -41,7 +41,7 @@ export class FileManagementAddFileComponent implements OnInit {
   }
   onChangeTags(data) {
     console.log("ata", data);
-    this.addForm.controls["tags"].setValue(data.map(item => item.id));
+    this.addForm.controls["tags"].setValue(data.map(item => ({ id: item.id })));
   }
   onUploadingFile(data) {
     this.addBtn.setDisabled(data);
@@ -54,6 +54,7 @@ export class FileManagementAddFileComponent implements OnInit {
     this.confirmStateService.setConfirm(false);
   }
   onRemoveFile(id) {
+    console.log("onRemoveFile", id);
     this.documentsService.removeDocumentAttachment(id).subscribe(data => {
 
     })

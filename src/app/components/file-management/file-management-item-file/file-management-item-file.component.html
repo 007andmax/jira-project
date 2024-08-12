@@ -2,6 +2,8 @@
     class="item-file-container qt-pointer"
     ngbDropdown
     (click)="fileInfo()"
+    appDoubleClick
+    (doubleClick)="preview()"
 >
     <div class="item-file-avatar qt-df qt-ai-c qt-jc-c qt-mb-12">
         <div
@@ -15,13 +17,10 @@
             *ngIf="!isImage()"
         ></div>
         <div
-            class="qt-sz-64 qt-bg-contain qt-mb-8 qt-fs-0"
+            class="qt-bg-contain qt-mb-8 qt-fs-0 qt-df qt-ai-c"
             *ngIf="isImage()"
         >
-            <img
-                width="48px"
-                [src]="item.url"
-            >
+            <img [src]="item.url">
         </div>
     </div>
     <div class>

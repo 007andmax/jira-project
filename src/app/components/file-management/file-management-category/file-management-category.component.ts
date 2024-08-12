@@ -12,6 +12,7 @@ import { REMOVE_CATEGORY_FILES, REMOVE_FILE } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { FileManagementStateService } from 'src/app/states/file-management/file-management-state.service';
+import { BreadcrumbsItem } from '../class/breadcrumbs-item';
 
 @Component({
   selector: 'app-file-management-category',
@@ -22,6 +23,7 @@ export class FileManagementCategoryComponent implements OnInit {
   sort: string = "Date";
   showPreloader: boolean = true;
   categoryId: string;
+  breadcrumbs: Array<BreadcrumbsItem> = [];
   categories: Array<FileManagementCategory> = [];
   files: Array<FileManagementFile> = [];
   groupedByCreateAt: { [key: string]: FileManagementFile[] } = {};
@@ -84,6 +86,7 @@ export class FileManagementCategoryComponent implements OnInit {
   }
   getList() {
     this.fileManagementService.getFileManagement(this.categoryId).subscribe((data: any) => {
+      this.breadcrumbs = data.breadcrumbs.map(item => new BreadcrumbsItem(item));
       this.categories = data.categories.map(item => new FileManagementCategory(item));
       this.files = data.files.map(item => new FileManagementFile(item)).sort((a, b) => (a.parseCreatedAt().toLowerCase() > b.parseCreatedAt().toLowerCase()) ?
         1 : ((b.parseCreatedAt().toLowerCase() > a.parseCreatedAt().toLowerCase()) ? -1 : 0));

@@ -6,6 +6,7 @@ import { FileManagementFileInfoComponent } from './file-management-file-info.com
 import { MatSelectModule, MatChipsModule, MatIconModule } from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
     declarations: [FileManagementFileInfoTagsComponent, FileManagementFileInfoComponent
@@ -20,6 +21,7 @@ import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
         NgbModule,
         ReactiveFormsModule,
         TextAreaModule,
+        InfiniteScrollModule
     ],
     exports: [FileManagementFileInfoComponent]
 })

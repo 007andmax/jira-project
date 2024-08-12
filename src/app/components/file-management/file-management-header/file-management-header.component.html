@@ -1,15 +1,35 @@
 <div class="qt-page-list__header --sticky">
     <div class="qt-page-list__header-title-line">
         <div class="qt-page-list__header-title-line--left">
-            <div
-                class="qt-page-list__back-button icon__collapse-arrow button-icon pointer"
-                *ngIf="activePage === 'file-management-category'"
-                (click)="back()"
-            ></div>
             <h3
+                *ngIf="breadcrumbs.length == 0"
                 class="qt-page-list__header-title"
                 [textContent]="'File Manager'"
             ></h3>
+            <div
+                *ngIf="breadcrumbs.length > 0"
+                class="qt-df qt-ai-c"
+            >
+                <ng-template
+                    ngFor
+                    let-i="index"
+                    let-breadcrumb
+                    [ngForOf]="breadcrumbs"
+                >
+                    <span
+                        [ngClass]="{'breadcrumb-item-active':breadcrumbs.length == (i + 1)}"
+                        class="qt-fs-14 breadcrumb-item qt-pointer"
+                        [textContent]="breadcrumb.name"
+                        (click)="goToCategory(breadcrumb.id)"
+                    ></span>
+                    <span
+                        *ngIf="breadcrumbs.length != (i + 1)"
+                        class="qt-fs-14 qt-ml-8 qt-mr-8 breadcrumb-splite"
+                    >
+                        /
+                    </span>
+                </ng-template>
+            </div>
         </div>
         <div class="qt-page-list__header-title-line--rigth">
             <div class="qt-df qt-ai-c">

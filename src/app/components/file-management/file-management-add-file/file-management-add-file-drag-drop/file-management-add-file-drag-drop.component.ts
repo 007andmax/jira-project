@@ -11,15 +11,16 @@ export class FileManagementAddFileDragDropComponent extends UploadAreaComponent 
   @Output() isUploadingFile = new EventEmitter<any>();
   @Output() onRemoveFile = new EventEmitter<any>();
   onFileDropped($event) {
-    if (this.idfiles.length > 0) this.onRemoveFile.emit(this.idfiles[0]);
-    this.files = [];
-    this.idfiles = [];
+    console.log("onFileDropped", this.idfiles.length);
     this.prepareFilesList($event);
     this.cd.detectChanges();
   }
 
   prepareFilesList(files: Array<any>) {
     console.log("files", files.length);
+    if (this.idfiles.length > 0) this.onRemoveFile.emit(this.idfiles[0]);
+    this.files = [];
+    this.idfiles = [];
     files[files.length - 1].progress = 0;
     this.files = [files[files.length - 1]]
     console.log("this.files", this.files);

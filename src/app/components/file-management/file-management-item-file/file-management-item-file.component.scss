@@ -18,7 +18,8 @@
         }
     }
     img {
-        height: 100%;
+        max-height: 120px;
+        max-width: 100%;
     }
     .item-file-h {
         font-size: 14px;
@@ -66,3 +67,4 @@
         border-radius: 40px;
     }
 }
+ 

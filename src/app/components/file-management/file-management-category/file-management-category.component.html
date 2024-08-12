@@ -1,5 +1,6 @@
 <div class="qt-page-list documents-page ">
     <app-file-management-header
+        [breadcrumbs]="breadcrumbs"
         [categoryId]="categoryId"
         (onSort)="onSort($event)"
     ></app-file-management-header>

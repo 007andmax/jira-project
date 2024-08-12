@@ -61,20 +61,37 @@
                 >
             </div>
             <div class="ticket-tags-container">
-                <ng-template
-                    ngFor
-                    let-tag
-                    [ngForOf]="tags"
-                    [ngForTrackBy]="trackById"
+                <div
+                    class="content"
+                    #content
+                    (click)="$event.preventDefault()"
+                    infiniteScroll
+                    [infiniteScrollContainer]="content"
+                    [infiniteScrollDistance]="2"
+                    [infiniteScrollThrottle]="50"
+                    [infiniteScrollDisabled]="infiniteScrollDisabled"
+                    [fromRoot]="true"
+                    (scrolled)="onScroll()"
                 >
-                    <button
-                        class="dropdown-item"
-                        (click)="selected(tag)"
-                        [textContent]="tag.word"
-                        [ngClass]="{'--selected':isSelected(tag.id)}"
+                    <ng-template
+                        ngFor
+                        let-tag
+                        [ngForOf]="tags"
+                        [ngForTrackBy]="trackById"
                     >
-                    </button>
-                </ng-template>
+                        <button
+                            class="dropdown-item"
+                            (click)="selected(tag)"
+                            [textContent]="tag.word"
+                            [ngClass]="{'--selected':isSelected(tag.id)}"
+                        >
+                        </button>
+                    </ng-template>
+                    <div
+                        class="loading pengind-loading"
+                        *ngIf="showPreloader"
+                    ></div>
+                </div>
             </div>
         </div>
     </div>

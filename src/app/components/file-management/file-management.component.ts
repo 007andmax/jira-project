@@ -10,6 +10,7 @@ import { FileManagementStateService } from 'src/app/states/file-management/file-
 import { Subscription } from 'rxjs';
 import { FileManagementRealTimeService } from 'src/app/states/file-management/file-management-real-time.service';
 import * as moment from "moment";
+import { BreadcrumbsItem } from './class/breadcrumbs-item';
 
 @Component({
   selector: 'app-file-management',
@@ -76,6 +77,7 @@ export class FileManagementComponent implements OnInit, OnDestroy {
       if (data.action === "EDIT_MANAGEMENT_FILE") {
         let findIndex = this.files.findIndex(item => item.id === data.data.id);
         if (findIndex > -1) this.files[findIndex] = new FileManagementFile(data.data);
+        console.log(this.files[findIndex]);
       }
       if (data.action === "DELETE_FILE_MANAGEMENT_CATEGORY") {
         let findIndex = this.categories.findIndex(item => item.id === data.data);

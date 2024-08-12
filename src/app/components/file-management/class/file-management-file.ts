@@ -1,3 +1,5 @@
+import { Tag } from "src/app/interfaces/tag/tag";
+
 export class FileManagementFile {
     "id": string;
     "mediaFileId": string;
@@ -6,7 +8,7 @@ export class FileManagementFile {
     "companyId": string;
     "name": string;
     "createdAt": string;
-    "tags": Array<string> = [];
+    "tags": Array<Tag> = [];
     "url": string;
     contentType: string;
     "uploaderEmail": string;
@@ -26,7 +28,7 @@ export class FileManagementFile {
         return {
             "name": this.name,
             "description": this.description,
-            "tags": this.tags,
+            "tags": this.tags.map(item => ({ id: item.id })),
             "categoryId": this.categoryId
         }
     }

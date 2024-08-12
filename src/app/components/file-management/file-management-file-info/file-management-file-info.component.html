@@ -16,7 +16,7 @@
 'icon__file-type-doc': file && file.contentType == 'application/msword',
 'icon__file-type-html': file && file.contentType == 'text/html',
 'icon__file-type-odt': file && file.contentType == 'application/vnd.oasis.opendocument.text',
-'icon__folder': category}"
+'icon__folder-type': category}"
                 *ngIf="file && !isImage() || category"
             ></div>
             <div
@@ -129,7 +129,10 @@
         (tagsRemove)="onChangeTags($event)"
     ></app-file-management-file-info-tags>
 </div>
-<div class="aside-filters-content__footer">
+<div
+    class="aside-filters-content__footer"
+    *ngIf="file"
+>
     <div
         class="qt-df qt-ai-c qt-jc-c qt-w100 info-file-view pointer"
         (click)="preview()"

@@ -29,13 +29,7 @@ export class FileManagementFileInfoComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     console.log("this.file", this.file);
-    let onGetTags = this.tagsState.onGetTags.subscribe(data => {
-      if (this.file) this.selectedTags = data.filter(item => this.file.tags.some(tag => tag == item.id));
-    })
-    this.sub.add(onGetTags);
-    if (this.tagsState.getTags().length > 0) {
-      if (this.file) this.selectedTags = this.tagsState.getTags().filter(item => this.file.tags.some(tag => tag == item.id));
-    }
+    if (this.file) this.selectedTags = JSON.parse(JSON.stringify(this.file.tags));
     this.modelForm = this.formBuilder.group({
       name: [
         this.file && this.file.name || this.category && this.category.name,
@@ -52,7 +46,7 @@ export class FileManagementFileInfoComponent implements OnInit, OnDestroy {
   }
   onChangeTags(data) {
     console.log("data", data);
-    this.file.setTags(data.map(item => item.id));
+    this.file.setTags(data);
     this.selectedTags = data;
     if (this.file) {
       this.fileManagementService.editFile(this.file.id, this.file.getDataForUpate()).subscribe(data => {

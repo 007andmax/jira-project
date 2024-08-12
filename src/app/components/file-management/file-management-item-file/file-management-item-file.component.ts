@@ -4,6 +4,7 @@ import { PreviewAttachmentStateService } from '../../tickets/tickets/ticket-edit
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { FileManagementService } from 'src/app/services/file-management/file-management.service';
 import * as moment from "moment";
+import { PreviewFileStateService } from 'src/app/states/file-management/preview-file-state.service';
 
 @Component({
   selector: 'app-file-management-item-file',
@@ -16,7 +17,8 @@ export class FileManagementItemFileComponent implements OnInit {
   @Output() onFileInfo = new EventEmitter<any>();
   constructor(private previewAttachmentStateService: PreviewAttachmentStateService,
     public ticketsService: TicketsService,
-    private fileManagementService: FileManagementService
+    private fileManagementService: FileManagementService,
+    public previewFileStateService: PreviewFileStateService,
   ) { }
 
   ngOnInit() {
@@ -25,7 +27,7 @@ export class FileManagementItemFileComponent implements OnInit {
     return this.item.contentType === "image/jpg" || this.item.contentType === "image/png" || this.item.contentType === "image/jpeg";
   }
   preview() {
-    if (this.item.contentType === "image/jpg" || this.item.contentType === "image/png" || this.item.contentType === "image/jpeg") this.previewAttachmentStateService.onInitPreview(this.item.url);
+    if (this.item.contentType === "image/jpg" || this.item.contentType === "image/png" || this.item.contentType === "image/jpeg") this.previewFileStateService.initPreview(this.item);
   }
   remove() {
     this.onRemove.emit(this.item);
