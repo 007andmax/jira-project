@@ -28,11 +28,13 @@ export class FileManagementItemCategoryComponent implements OnInit {
   navigateToCategory() {
     console.log("this.item", this.item);
     if (!this.item.allCompaniesRoot) {
-      this.router.navigate(
+      if (this.item.id) this.router.navigate(
         [`${this.companiesStateService.getCurrentCompany().techDomain}/file-management/category/`, this.item.id]);
+      if (!this.item.id && this.item.companyId) this.router.navigate(
+        [`${this.companiesStateService.getCurrentCompany().techDomain}/file-management/all-customer/`, this.item.companyId]);
     } else {
       this.router.navigate(
-        [`${this.companiesStateService.getCurrentCompany().techDomain}/file-management/all/customer`]);
+        [`${this.companiesStateService.getCurrentCompany().techDomain}/file-management/all-customer`]);
     }
   }
   removeCategory() {

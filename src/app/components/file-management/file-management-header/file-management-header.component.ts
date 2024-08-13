@@ -53,11 +53,15 @@ export class FileManagementHeaderComponent implements OnInit {
     modalRef.componentInstance.categoryId = this.categoryId;
     //   this.fileManagementStateService.showAsideForAdd();
   }
-  goToCategory(id) {
-    if (id) {
+  goToCategory(item) {
+    if (item.id) {
       this.router.navigate(
-        [`${this.companiesStateService.getCurrentCompany().techDomain}/file-management/category/`, id]);
+        [`${this.companiesStateService.getCurrentCompany().techDomain}/file-management/category/`, item.id]);
     }
+    if (!item.id && item.allCompaniesRoot) this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().techDomain}/file-management/all-customer`]);
+    if (!item.id && item.companyId) this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().techDomain}/file-management/all-customer/`, item.companyId]);
   }
   setSort(data) {
     this.sort = data;

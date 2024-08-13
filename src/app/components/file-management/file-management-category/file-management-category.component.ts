@@ -28,15 +28,19 @@ export class FileManagementCategoryComponent implements OnInit {
   files: Array<FileManagementFile> = [];
   groupedByCreateAt: { [key: string]: FileManagementFile[] } = {};
   sub: Subscription = new Subscription();
-  constructor(private fileManagementService: FileManagementService,
-    private activateRoute: ActivatedRoute,
-    private leftPanelStateService: LeftPanelStateService,
+  constructor(public fileManagementService: FileManagementService,
+    public activateRoute: ActivatedRoute,
+    public leftPanelStateService: LeftPanelStateService,
     public fileManagementRealTimeService: FileManagementRealTimeService,
     public fileManagementStateService: FileManagementStateService,
     public cd: ChangeDetectorRef,
     public confirmStateService: ConfirmStateService,
-    private modalService: NgbModal,
+    public modalService: NgbModal,
   ) {
+
+  }
+
+  ngOnInit() {
     this.categoryId = this.activateRoute.snapshot.params['id'];
     let subscription = this.activateRoute.params.subscribe(params => {
       this.showPreloader = true;
@@ -44,9 +48,6 @@ export class FileManagementCategoryComponent implements OnInit {
       this.getList();
     });
     this.sub.add(subscription);
-  }
-
-  ngOnInit() {
     this.leftPanelStateService.changeStateWithoutNavigate("file-management-category");
     let onChangeDocument = this.fileManagementRealTimeService.changeArray.subscribe(data => {
       if (data.action === "CREATE_FILE_MANAGEMENT_CATEGORY") this.categories.push(new FileManagementCategory(data.data));

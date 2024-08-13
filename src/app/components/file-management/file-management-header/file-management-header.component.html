@@ -20,7 +20,7 @@
                         [ngClass]="{'breadcrumb-item-active':breadcrumbs.length == (i + 1)}"
                         class="qt-fs-14 breadcrumb-item qt-pointer"
                         [textContent]="breadcrumb.name"
-                        (click)="goToCategory(breadcrumb.id)"
+                        (click)="goToCategory(breadcrumb)"
                     ></span>
                     <span
                         *ngIf="breadcrumbs.length != (i + 1)"

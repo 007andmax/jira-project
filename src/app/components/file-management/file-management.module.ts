@@ -25,6 +25,7 @@ import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.m
 import { DblclickModule } from 'src/app/directives/dblclick/dblclick.module';
 import { FileManagementAllCustomerComponent } from './file-management-all-customer/file-management-all-customer.component';
 import { FileManagementFileInfoModule } from './file-management-file-info/file-management-file-info.module';
+import { FileManagementAllCustomerCompanyComponent } from './file-management-all-customer-company/file-management-all-customer-company.component';
 
 @NgModule({
     declarations: [FileManagementComponent, FileManagementCategoryRenameComponent,

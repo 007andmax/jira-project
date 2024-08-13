@@ -23,11 +23,12 @@ export class FileManagementService {
 
   ) { }
 
-  public getFileManagement(categoryId = null, customerCompanyRoot = null, companyArchived = null) {
+  public getFileManagement(categoryId = null, customerCompanyRoot = null, companyArchived = null, companyId = null) {
     let data = {};
     if (categoryId) data["categoryId"] = categoryId;
     if (customerCompanyRoot) data["customerCompanyRoot"] = customerCompanyRoot;
     if (companyArchived != null) data["companyArchived"] = companyArchived;
+    if (companyId) data["companyId"] = companyId;
     let getParams = new URLSearchParams(data).toString();
     console.log("getParams", getParams);
     return this.http.get(`${this.apiUrl}file-management?${getParams}`)
