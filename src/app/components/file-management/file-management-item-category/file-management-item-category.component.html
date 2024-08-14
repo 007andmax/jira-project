@@ -1,6 +1,7 @@
 <div
     class="item-file-container qt-pointer"
     ngbDropdown
+    #db="ngbDropdown"
     (click)="fileInfo()"
     appDoubleClick
     (doubleClick)="navigateToCategory()"
@@ -19,6 +20,7 @@
         </div>
     </div>
     <div
+        [ngClass]="{'show-db':db.isOpen()}"
         class="qt-button --square-md --gray pointer actions"
         ngbDropdownToggle
         (click)="$event.stopPropagation();"

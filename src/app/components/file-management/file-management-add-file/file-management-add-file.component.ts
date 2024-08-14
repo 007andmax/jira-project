@@ -32,7 +32,7 @@ export class FileManagementAddFileComponent implements OnInit {
   ngOnInit() {
     this.addForm = this.formBuilder.group({
       "name": ["", [Validators.required, Validators.minLength(1), Validators.maxLength(100)]],
-      "description": ['', [Validators.required, Validators.minLength(1), Validators.maxLength(1000)]],
+      "description": [null, [Validators.minLength(1), Validators.maxLength(1000)]],
       "mediaFileId": ['', [Validators.required]],
       "tags": [[]],
       "companyId": [null],
@@ -76,6 +76,7 @@ export class FileManagementAddFileComponent implements OnInit {
     console.log("this.invoiceForm.value", this.addForm.value);
     this.addBtn.setDisabled(true);
     this.fileManagementService.addFile(this.addForm.value).subscribe(data => {
+      this.fileManagementStateService.addFile(data);
       this.addBtn.setDisabled(false);
       this.close();
     }, err => {

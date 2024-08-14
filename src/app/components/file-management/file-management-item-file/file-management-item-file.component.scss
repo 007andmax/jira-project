@@ -12,7 +12,7 @@
     width: 222px;
     position: relative;
     &:hover {
-        border: 1px solid $blue-light-600;
+        border: 1px solid $gray-400;
         .actions {
             display: flex;
         }
@@ -69,4 +69,7 @@
 }
 .item-file-image {
     width: 100%;
+}
+.show-db {
+    display: flex !important;
 }

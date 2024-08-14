@@ -1,6 +1,7 @@
 <div
     class="item-file-container qt-pointer"
     ngbDropdown
+    #db="ngbDropdown"
     (click)="fileInfo()"
     appDoubleClick
     (doubleClick)="preview()"
@@ -17,7 +18,7 @@
             *ngIf="!isImage()"
         ></div>
         <div
-            class="qt-bg-contain qt-mb-8 qt-fs-0 qt-df qt-ai-c item-file-image"
+            class="qt-bg-contain qt-mb-8 qt-fs-0 qt-df qt-ai-c qt-jc-c item-file-image"
             *ngIf="isImage()"
         >
             <img [src]="item.url">
@@ -37,6 +38,7 @@
         </div>
     </div>
     <div
+        [ngClass]="{'show-db':db.isOpen()}"
         class="qt-button --square-md --gray pointer actions"
         ngbDropdownToggle
         (click)="$event.stopPropagation();"

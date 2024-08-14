@@ -7,6 +7,7 @@ import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 import { Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PreviewFileStateService } from 'src/app/states/file-management/preview-file-state.service';
+import { FileManagementStateService } from 'src/app/states/file-management/file-management-state.service';
 
 @Component({
   selector: 'app-file-management-file-info',
@@ -25,6 +26,7 @@ export class FileManagementFileInfoComponent implements OnInit, OnDestroy {
     private tagsState: TagsStateService,
     public formBuilder: FormBuilder,
     public previewFileStateService: PreviewFileStateService,
+    public fileManagementStateService: FileManagementStateService,
   ) { }
 
   ngOnInit() {
@@ -49,8 +51,8 @@ export class FileManagementFileInfoComponent implements OnInit, OnDestroy {
     this.file.setTags(data);
     this.selectedTags = data;
     if (this.file) {
-      this.fileManagementService.editFile(this.file.id, this.file.getDataForUpate()).subscribe(data => {
-
+      this.fileManagementService.editFile(this.file.id, this.file.getDataForUpate()).subscribe(res => {
+        this.fileManagementStateService.editFile(res);
       })
     }
   }
@@ -62,14 +64,14 @@ export class FileManagementFileInfoComponent implements OnInit, OnDestroy {
     }
     if (this.file) {
       this.file.setName(this.modelForm.value.name);
-      this.fileManagementService.editFile(this.file.id, this.file.getDataForUpate()).subscribe(data => {
-
+      this.fileManagementService.editFile(this.file.id, this.file.getDataForUpate()).subscribe(res => {
+        this.fileManagementStateService.editFile(res);
       })
     }
     if (this.category) {
       this.category.setName(this.modelForm.value.name);
-      this.fileManagementService.editCategory(this.category.id, this.category.getDataForUpate()).subscribe(data => {
-
+      this.fileManagementService.editCategory(this.category.id, this.category.getDataForUpate()).subscribe(res => {
+        this.fileManagementStateService.editCategory(res);
       })
     }
   }

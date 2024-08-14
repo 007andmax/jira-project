@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FileManagementFile } from '../class/file-management-file';
 import { PreviewAttachmentStateService } from '../../tickets/tickets/ticket-edit-aside/preview-attachment/services/preview-attachment-state.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { FileManagementService } from 'src/app/services/file-management/file-management.service';
 import * as moment from "moment";
 import { PreviewFileStateService } from 'src/app/states/file-management/preview-file-state.service';
+import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-file-management-item-file',
@@ -12,6 +13,7 @@ import { PreviewFileStateService } from 'src/app/states/file-management/preview-
   styleUrls: ['./file-management-item-file.component.scss']
 })
 export class FileManagementItemFileComponent implements OnInit {
+  @ViewChild('db') db: NgbDropdown;
   @Input() item: FileManagementFile;
   @Output() onRemove = new EventEmitter<any>();
   @Output() onFileInfo = new EventEmitter<any>();

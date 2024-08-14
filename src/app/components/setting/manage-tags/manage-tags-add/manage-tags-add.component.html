@@ -24,6 +24,9 @@
             This Tag is already occupied
         </mat-error>
     </div>
-    <div class="tab-pane__table-cell manage-tags-table__count"></div>
+    <div
+        class="tab-pane__table-cell manage-tags-table__count"
+        *ngIf="setActiveTab != 'file'"
+    ></div>
     <div class="tab-pane__table-cell manage-tags-table__action qt-pos-rel"></div>
 </div>

@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FileManagementCategory } from '../class/file-management-category';
 import { Router } from '@angular/router';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { FileManagementCategoryRenameComponent } from '../file-management-category-rename/file-management-category-rename.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdown, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from "moment";
 
 @Component({
@@ -12,6 +12,7 @@ import * as moment from "moment";
   styleUrls: ['./file-management-item-category.component.scss']
 })
 export class FileManagementItemCategoryComponent implements OnInit {
+  @ViewChild('db') db: NgbDropdown;
   @Input() item: FileManagementCategory;
   @Output() onRemove = new EventEmitter<any>();
   @Output() onFileInfo = new EventEmitter<any>();

@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { FileManagementService } from 'src/app/services/file-management/file-management.service';
 import { TaxesService } from 'src/app/services/taxes/taxes.service';
 import { FileManagementCategory } from '../class/file-management-category';
+import { FileManagementStateService } from 'src/app/states/file-management/file-management-state.service';
 
 @Component({
   selector: 'app-file-management-add-category',
@@ -16,6 +17,7 @@ export class FileManagementAddCategoryComponent implements OnInit {
   submitted = false;
   @Output() onClose = new EventEmitter();
   constructor(private fileManagementService: FileManagementService,
+    private fileManagementStateService: FileManagementStateService,
     private formBuilder: FormBuilder,) { }
 
   ngOnInit() {
@@ -40,12 +42,10 @@ export class FileManagementAddCategoryComponent implements OnInit {
     if (this.categoryId) this.categoryForm.controls["parentCategoryId"].setValue(this.categoryId);
     this.fileManagementService
       .addCategory(this.categoryForm.value)
-      .pipe(
-        map((res: any) => {
-          this.onClose.emit();
-        })
-      )
-      .subscribe();
+      .subscribe(data => {
+        this.fileManagementStateService.addCategory(data);
+        this.onClose.emit();
+      });
   }
   closed() {
     this.onClose.emit();
