@@ -59,9 +59,10 @@ export class FileManagementAddFileComponent implements OnInit {
 
     })
   }
-  onChangeFiles(ids) {
-    console.log("ids", ids);
-    this.addForm.controls["mediaFileId"].setValue(ids[0]);
+  onChangeFiles(data) {
+    console.log("ids", data);
+    this.addForm.controls["mediaFileId"].setValue(data.id);
+    this.addForm.controls["name"].setValue(data.name);
   }
   get f2() {
     return this.addForm.controls;

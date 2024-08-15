@@ -30,6 +30,7 @@ export class FileManagementAllCustomerComponent extends FileManagementComponent 
       let isExist = this.files.some(item => item.id == data.id);
       if (!isExist) {
         this.files.push(new FileManagementFile(data));
+        if (!this.groupedByCreateAt[data.createdAt]) this.groupedByCreateAt[data.createdAt] = [];
         this.groupedByCreateAt[data.createdAt].push(new FileManagementFile(data));
       }
     })
@@ -75,6 +76,7 @@ export class FileManagementAllCustomerComponent extends FileManagementComponent 
         let isExist = this.files.some(item => item.id == data.data.id);
         if (!isExist) {
           this.files.push(new FileManagementFile(data.data));
+          if (!this.groupedByCreateAt[data.data.createdAt]) this.groupedByCreateAt[data.data.createdAt] = [];
           this.groupedByCreateAt[data.data.createdAt].push(new FileManagementFile(data.data));
         }
       }

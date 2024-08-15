@@ -108,6 +108,10 @@
         margin-bottom: 1rem;
         position: relative;
         border-radius: 8px;
+        img {
+            width: 100%;
+            max-height: 100%;
+        }
         .progress-line-container {
             position: absolute;
             bottom: 0;
@@ -139,6 +143,8 @@
             font-weight: 500;
             color: $gray-900;
             margin: 0;
+            max-width: 300px;
+            display: block;
         }
 
         .size {
@@ -229,8 +235,9 @@
     padding: 4px 6px;
     color: $white;
     background-color: $blue-dark-200;
-    word-break: break-all;
     max-width: 150px;
+    display: block;
+    min-height: 20px;
 }
 .qt-fileupload-file-info {
     .qt-fileupload__label {

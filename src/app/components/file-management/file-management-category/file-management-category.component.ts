@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FileManagementCategory } from '../class/file-management-category';
 import { FileManagementFile } from '../class/file-management-file';
 import { FileManagementService } from 'src/app/services/file-management/file-management.service';
@@ -24,7 +24,7 @@ import { fadeInAnimation } from 'src/app/animations';
   host: { '[@fadeInAnimation]': '' },
 
 })
-export class FileManagementCategoryComponent implements OnInit {
+export class FileManagementCategoryComponent implements OnInit, OnDestroy {
   sort: string = "Date";
   showPreloader: boolean = true;
   categoryId: string;
@@ -45,6 +45,7 @@ export class FileManagementCategoryComponent implements OnInit {
 
   }
 
+
   ngOnInit() {
     this.categoryId = this.activateRoute.snapshot.params['id'];
     let subscription = this.activateRoute.params.subscribe(params => {
@@ -61,6 +62,7 @@ export class FileManagementCategoryComponent implements OnInit {
       let isExist = this.files.some(item => item.id == data.id);
       if (!isExist) {
         this.files.push(new FileManagementFile(data));
+        if (!this.groupedByCreateAt[data.createdAt]) this.groupedByCreateAt[data.createdAt] = [];
         this.groupedByCreateAt[data.createdAt].push(new FileManagementFile(data));
       }
     })
@@ -107,6 +109,7 @@ export class FileManagementCategoryComponent implements OnInit {
         let isExist = this.files.some(item => item.id == data.data.id);
         if (!isExist) {
           this.files.push(new FileManagementFile(data.data));
+          if (!this.groupedByCreateAt[data.data.createdAt]) this.groupedByCreateAt[data.data.createdAt] = [];
           this.groupedByCreateAt[data.data.createdAt].push(new FileManagementFile(data.data));
         }
       }
@@ -199,5 +202,8 @@ export class FileManagementCategoryComponent implements OnInit {
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to delete this category?`;
     this.fileManagementStateService.setCategoryForRemove(data);
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

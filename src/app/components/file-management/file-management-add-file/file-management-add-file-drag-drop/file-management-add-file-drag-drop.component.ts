@@ -41,12 +41,19 @@ export class FileManagementAddFileDragDropComponent extends UploadAreaComponent 
       this.isUploadingFile.emit(true);
       this.isUploading = true;
       console.log("this.files[index]", this.files[index]);
-      this.files[index].src = URL.createObjectURL(this.files[index]);
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        this.files[index].src = reader.result;
+      };
+
+      reader.readAsDataURL(this.files[index]);
+
       this.uploadFile(this.files[index]).then((data: any) => {
         let res = JSON.parse(data.response);
         this.idfiles.push(res.id);
         this.elRef.nativeElement.querySelector('.qt-fileupload').classList.remove('fileupload');
-        this.changeFiles.emit(this.idfiles);
+        this.changeFiles.emit({ id: res.id, name: this.files[index].name.substring(0, this.files[index].name.lastIndexOf('.')) });
         this.uploadFilesSimulator(index + 1);
         this.cd.detectChanges();
         this.isUploadingFile.emit(false);

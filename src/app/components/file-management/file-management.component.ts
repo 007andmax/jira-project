@@ -48,9 +48,7 @@ export class FileManagementComponent implements OnInit, OnDestroy {
       this.files = data.files.map(item => new FileManagementFile(item)).sort((a, b) => (a.parseCreatedAt().toLowerCase() > b.parseCreatedAt().toLowerCase()) ?
         1 : ((b.parseCreatedAt().toLowerCase() > a.parseCreatedAt().toLowerCase()) ? -1 : 0));
       this.files.forEach(person => {
-        if (!this.groupedByCreateAt[person.createdAt]) {
-          this.groupedByCreateAt[person.createdAt] = [];
-        }
+        if (!this.groupedByCreateAt[person.createdAt]) this.groupedByCreateAt[person.createdAt] = [];
         this.groupedByCreateAt[person.createdAt].push(person);
       });
       console.log("Object.keys(this.groupedByCreateAt).sort().reverse()", Object.keys(this.groupedByCreateAt).sort().reverse());
@@ -76,6 +74,7 @@ export class FileManagementComponent implements OnInit, OnDestroy {
       let isExist = this.files.some(item => item.id == data.id);
       if (!isExist) {
         this.files.push(new FileManagementFile(data));
+        if (!this.groupedByCreateAt[data.createdAt]) this.groupedByCreateAt[data.createdAt] = [];
         this.groupedByCreateAt[data.createdAt].push(new FileManagementFile(data));
       }
     })
@@ -122,6 +121,7 @@ export class FileManagementComponent implements OnInit, OnDestroy {
         let isExist = this.files.some(item => item.id == data.data.id);
         if (!isExist) {
           this.files.push(new FileManagementFile(data.data));
+          if (!this.groupedByCreateAt[data.data.createdAt]) this.groupedByCreateAt[data.data.createdAt] = [];
           this.groupedByCreateAt[data.data.createdAt].push(new FileManagementFile(data.data));
         }
       }

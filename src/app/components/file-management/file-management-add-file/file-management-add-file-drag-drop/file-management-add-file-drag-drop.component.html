@@ -17,7 +17,7 @@
             [src]="'/file/' + idfiles[0]"
         >
         <span
-            class="qt-fileupload__title file-name"
+            class="qt-fileupload__title file-name ellipsis"
             *ngIf="idfiles.length > 0"
         >
             {{files[0].name}}
@@ -59,7 +59,7 @@
                     <img [src]="file.src">
                 </div>
                 <div class="qt-ml-12">
-                    <span class="name qt-mb-4">{{ file?.name }}</span>
+                    <span class="name qt-mb-4 ellipsis">{{ file?.name }}</span>
                     <div class="qt-df qt-ai-c size">
                         <span class="size-progress">Uploading {{file?.progress}}%</span>
                         <span

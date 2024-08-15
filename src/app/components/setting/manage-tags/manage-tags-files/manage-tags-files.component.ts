@@ -23,6 +23,7 @@ export class ManageTagsFilesComponent implements OnInit, OnDestroy {
   loading: boolean = true;
   sub: Subscription = new Subscription();
   @Output() onRemove: EventEmitter<any> = new EventEmitter();
+  @Output() onPreloader: EventEmitter<any> = new EventEmitter();
   constructor(private fileManagementStateService: FileManagementStateService,
     private confirmStateService: ConfirmStateService,
     private fileManagementService: FileManagementService,
@@ -33,9 +34,11 @@ export class ManageTagsFilesComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    this.onPreloader.emit(this.loading);
     this.fileManagementService.getTags(0, "").subscribe((data: any) => {
       this.tags = data.commonTagViews.map(item => new ManageTag(item));
       this.loading = false;
+      this.onPreloader.emit(this.loading);
       this.cd.detectChanges();
     })
     let changeTagsArray = this.tagsRealTimeService.changeTagsArray.subscribe((data: any) => {

@@ -134,7 +134,10 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
   ngAfterViewInit(): void {
     this.dtTrigger.next();
   }
-
+  onPreloader(data) {
+    this.loading = data;
+    this.cd.detectChanges();
+  }
   /**
    * load all services
    */
