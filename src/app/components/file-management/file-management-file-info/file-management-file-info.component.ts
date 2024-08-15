@@ -35,7 +35,7 @@ export class FileManagementFileInfoComponent implements OnInit, OnDestroy {
     this.modelForm = this.formBuilder.group({
       name: [
         this.file && this.file.name || this.category && this.category.name,
-        [Validators.required, Validators.min(1), Validators.min(100)]
+        [Validators.required, Validators.min(1), this.file ? Validators.max(100) : Validators.max(50)]
       ],
     })
   }
