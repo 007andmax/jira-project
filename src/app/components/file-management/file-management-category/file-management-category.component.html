@@ -4,7 +4,10 @@
         [categoryId]="categoryId"
         (onSort)="onSort($event)"
     ></app-file-management-header>
-    <div class="qt-page-list__body">
+    <div
+        class="qt-page-list__body"
+        [ngClass]="{'qt-page-list__body-color':!showPreloader}"
+    >
         <div class="qt-page-list__body-table-container">
             <div class="qt-page-list__body-tbody qt-table-modern documents-table">
                 <div

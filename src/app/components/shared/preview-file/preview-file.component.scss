@@ -34,3 +34,10 @@
     border-radius: 12px;
     border: 1px solid #E8E8E8;
 }
+.preview-attachment-img {
+    width: 100%;
+    margin-bottom: 63px;
+    img {
+        max-height: 60vh;
+    }
+}

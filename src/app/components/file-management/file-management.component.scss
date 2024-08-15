@@ -7,8 +7,10 @@
     padding: 10px 0px;
 }
 .qt-page-list__body {
-    background-color: $white;
     padding: 32px;
+}
+.qt-page-list__body-color {
+    background-color: $white;
 }
 /deep/ .aside-filters {
     width: 320px;

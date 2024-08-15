@@ -6,7 +6,10 @@
     appDoubleClick
     (doubleClick)="preview()"
 >
-    <div class="item-file-avatar qt-df qt-ai-c qt-jc-c qt-mb-12">
+    <div
+        class="item-file-avatar qt-df qt-ai-c qt-jc-c qt-mb-12"
+        [ngClass]="{'item-file-avatar-background':!isImage()}"
+    >
         <div
             class="qt-sz-64 qt-bg-contain qt-mb-8 qt-fs-0"
             [ngClass]="{'icon__file-type-pdf': item.contentType == 'application/pdf',

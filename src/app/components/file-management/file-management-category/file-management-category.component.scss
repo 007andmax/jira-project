@@ -25,8 +25,11 @@
 }
 
 .qt-page-list__body {
-    background-color: $white;
     padding: 32px;
+}
+
+.qt-page-list__body-color {
+    background-color: $white;
 }
 .qt-page-list-container {
     display: flex;

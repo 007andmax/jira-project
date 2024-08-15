@@ -33,7 +33,6 @@
 }
 .item-file-avatar {
     height: 120px;
-    background-color: $gray-50;
     border-radius: 8px;
 }
 .actions {
@@ -68,7 +67,13 @@
 }
 .item-file-image {
     width: 100%;
+    img {
+        border-radius: 8px;
+    }
 }
 .show-db {
     display: flex !important;
+}
+.item-file-avatar-background {
+    background-color: $gray-50;
 }
