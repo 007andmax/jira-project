@@ -34,7 +34,7 @@
                     type="text"
                     [ngClass]="{'--input-error' : submitted && f2.name.errors}"
                     formControlName="name"
-                    maxlength="100"
+                    [attr.maxlength]="file ? '100' : '50'"
                     (blur)="onChange()"
                     appKeyUpEnter
                     (onChange)="onChange()"

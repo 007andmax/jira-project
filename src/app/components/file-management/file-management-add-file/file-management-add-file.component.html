@@ -33,6 +33,7 @@
                                 [ngClass]="{'--input-error' : submitted && f2.name.errors}"
                                 class="qt-input-block__input"
                                 formControlName="name"
+                                maxlength="100"
                                 type="text"
                                 placeholder="File Name"
                             >
@@ -54,7 +55,7 @@
                                     Description
                                 </label>
                                 <span class="qt-fs-12 qt-color-gray-500">
-                                    {{f2.description.value ? f2.description.value.length : "0"}}/10000
+                                    {{f2.description.value ? f2.description.value.length : "0"}}/1000
                                 </span>
                             </div>
                             <textarea
@@ -63,7 +64,7 @@
                                 class="terms-n-conditions__textarea qt-input-block__textarea"
                                 placeholder="Add a file description"
                                 appTextArea
-                                maxlength="500"
+                                maxlength="1000"
                                 cols="30"
                                 [default]="3"
                                 rows="3"

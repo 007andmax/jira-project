@@ -77,6 +77,12 @@ export class FileManagementFileInfoComponent implements OnInit, OnDestroy {
     this.category = category;
     if (this.file) this.selectedTags = JSON.parse(JSON.stringify(this.file.tags));
     this.modelForm.controls["name"].setValue(this.file && this.file.name || this.category && this.category.name);
+    this.modelForm = this.formBuilder.group({
+      name: [
+        this.file && this.file.name || this.category && this.category.name,
+        [Validators.required, Validators.minLength(1), this.file ? Validators.maxLength(100) : Validators.maxLength(50)]
+      ],
+    })
   }
   get f2() {
     return this.modelForm.controls;
