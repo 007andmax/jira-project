@@ -24,7 +24,7 @@
                             <app-file-management-item-category
                                 [ngClass]="{'selected-item':cateforyInfo && cateforyInfo.id == item.id}"
                                 [item]="item"
-                                class="qt-mr-16 qt-mb-16"
+                                class=""
                                 (onRemove)="onRemoveCategory($event)"
                                 (onFileInfo)="onCategoryInfo($event)"
                             ></app-file-management-item-category>
@@ -40,7 +40,7 @@
                                 [textContent]="getCreateBy(item)"
                             ></span>
                         </div>
-                        <div class="qt-df qt-ai-c">
+                        <div class="qt-df qt-ai-c file-management-create__folder-wrap">
                             <ng-template
                                 ngFor
                                 let-file
@@ -49,7 +49,7 @@
                             >
                                 <app-file-management-item-file
                                     [ngClass]="{'selected-item':fileInfo && fileInfo.id == file.id}"
-                                    class="qt-mr-16 qt-mb-16"
+                                    class=""
                                     [item]="file"
                                     (onRemove)="onRemoveFile($event)"
                                     (onFileInfo)="onFileInfo($event)"
@@ -72,7 +72,7 @@
                                 [textContent]="getCreateBy(item)"
                             ></span>
                         </div>
-                        <div class="qt-df qt-ai-c">
+                        <div class="qt-df qt-ai-c file-management-create__folder-wrap qt-mb-32">
                             <ng-template
                                 ngFor
                                 let-file
@@ -81,7 +81,7 @@
                             >
                                 <app-file-management-item-file
                                     [ngClass]="{'selected-item':fileInfo && fileInfo.id == file.id}"
-                                    class="qt-mr-16 qt-mb-16"
+                                    class=""
                                     [item]="file"
                                     (onRemove)="onRemoveFile($event)"
                                     (onFileInfo)="onFileInfo($event)"
@@ -99,7 +99,7 @@
                             <app-file-management-item-category
                                 [ngClass]="{'selected-item':cateforyInfo && cateforyInfo.id == item.id}"
                                 [item]="item"
-                                class="qt-mr-16 qt-mb-16"
+                                class=""
                                 (onRemove)="onRemoveCategory($event)"
                                 (onFileInfo)="onCategoryInfo($event)"
                             ></app-file-management-item-category>

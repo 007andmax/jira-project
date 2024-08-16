@@ -3,7 +3,10 @@
     background-color: rgb(235, 235, 228);
     cursor: default !important;
 }
-
+.qt-page-list__header-title {
+  font-size: 16px;
+  line-height: 19px;
+}
 .documents-table__assigned-companies {
     width: 180px;
     max-width: 180px;
@@ -21,12 +24,7 @@
     }
 }
 .--sticky {
-    padding-top: 9px;
-    margin-top: -9px;
-    padding-bottom: 9px;
-    margin-bottom: -9px;
-    padding-left: 32px;
-    padding-right: 32px;
+    padding: 9px 32px;
     z-index: 4;
 }
 .qt-input-search {
@@ -44,6 +42,5 @@
 }
 .qt-page-list__header {
     background-color: $gray-50;
-    border-top: 1px solid $gray-200;
     border-bottom: 1px solid $gray-200;
 }

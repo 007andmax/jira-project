@@ -12,13 +12,20 @@
 .qt-page-list__body-color {
     background-color: $white;
 }
+
+.categories-conteiner,
+.file-management-create__folder-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
 /deep/ .aside-filters {
     width: 320px;
     flex-shrink: 0;
     background-color: $white;
     position: sticky;
-    top: 58px;
-    height: calc(100vh - 128px);
+    top: 55px;
+    height: calc(100vh - 119px);
     transition: .3s ease-in-out width;
     border-left: 1px solid $gray-200;
 
@@ -92,11 +99,12 @@
     border: 1px solid $blue-light-100;
     background-color: $blue-light-25;
     margin-left: 24px;
-    font-size: 14px;
+    font-size: 12px;
+    line-height: 16px;
     color: $blue-light-800;
     border-radius: 76px;
     font-weight: 500;
-    
+
 }
 .file-management-create-at-container {
     position: relative;
@@ -122,7 +130,7 @@
         background-color: $white;
         width: 108px;
         z-index: 2;
-        
+
     }
 }
 /deep/.selected-item {
