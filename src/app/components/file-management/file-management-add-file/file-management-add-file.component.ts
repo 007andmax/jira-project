@@ -38,6 +38,7 @@ export class FileManagementAddFileComponent implements OnInit {
       "companyId": [null],
       "categoryId": [null],
     });
+    console.log("rrr", this.f2.name.value.length)
   }
   onChangeTags(data) {
     console.log("ata", data);

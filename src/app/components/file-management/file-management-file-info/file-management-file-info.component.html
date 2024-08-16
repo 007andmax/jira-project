@@ -94,7 +94,14 @@
             <span class="file-info-field-header qt-fs-12 qt-color-gray-500">Edited on</span>
             <span
                 class="qt-fs-14 qt-color-gray-900"
-                [textContent]="file && file.createdAt || category && category.createdAt"
+                [textContent]="file && file.updatedAt || category && category.updatedAt"
+            ></span>
+        </div>
+        <div class="file-info-field qt-df qt-ai-c qt-mb-16">
+            <span class="file-info-field-header qt-fs-12 qt-color-gray-500">Edited by</span>
+            <span
+                class="qt-fs-14 qt-color-gray-900"
+                [textContent]="file && file.updatedBy || category && category.updatedBy"
             ></span>
         </div>
         <div class="file-info-field qt-df qt-ai-c qt-mb-16">

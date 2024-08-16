@@ -13,6 +13,8 @@ export class FileManagementFile {
     contentType: string;
     "uploaderEmail": string;
     "uploaderName": string;
+    "updatedBy": string;
+    "updatedAt": string;
     constructor(data) {
         for (const key in data) {
             this[key] = data[key];

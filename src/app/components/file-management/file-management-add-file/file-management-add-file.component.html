@@ -46,12 +46,15 @@
                     </div>
                     <div class="qt-inputs-row">
                         <div class="qt-input-block">
-                            <label
-                                for="add-ticket-describe-issue"
-                                class="qt-input-block__label"
-                            >
-                                Description
-                            </label>
+                            <div class="qt-df qt-ai-c qt-jc-sb">
+                                <label
+                                    for="add-ticket-describe-issue"
+                                    class="qt-input-block__label"
+                                >
+                                    Description
+                                </label>
+                                <span>{{f2.name.value.length}}/10000</span>
+                            </div>
                             <textarea
                                 id="description-global-note"
                                 formControlName="description"

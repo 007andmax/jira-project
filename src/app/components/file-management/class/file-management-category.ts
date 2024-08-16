@@ -9,6 +9,8 @@ export class FileManagementCategory {
     createdAt: string;
     creatorEmail: string;
     creatorName: string;
+    "updatedBy": string;
+    "updatedAt": string;
     constructor(data = null) {
         if (data) {
             for (const key in data) {

@@ -63,6 +63,11 @@
 }
 .error-container {
     position: relative;
+    width: 100%;
+    justify-content: space-between;
+    input {
+        padding: 8px 8px 8px 0px;
+    }
 }
 .info-file-label-edit {
     width: 28px;

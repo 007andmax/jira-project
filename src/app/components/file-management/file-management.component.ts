@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FileManagementService } from 'src/app/services/file-management/file-management.service';
 import { FileManagementCategory } from './class/file-management-category';
 import { FileManagementFile } from './class/file-management-file';
@@ -12,6 +12,7 @@ import { FileManagementRealTimeService } from 'src/app/states/file-management/fi
 import * as moment from "moment";
 import { BreadcrumbsItem } from './class/breadcrumbs-item';
 import { fadeInAnimation } from 'src/app/animations';
+import { FileManagementFileInfoComponent } from './file-management-file-info/file-management-file-info.component';
 
 @Component({
   selector: 'app-file-management',
@@ -32,6 +33,7 @@ export class FileManagementComponent implements OnInit, OnDestroy {
   files: Array<FileManagementFile> = [];
   groupedByCreateAt: { [key: string]: FileManagementFile[] } = {};
   sub: Subscription = new Subscription();
+  @ViewChild('fileInfoContainer') fileInfoContainer: FileManagementFileInfoComponent;
   constructor(public fileManagementService: FileManagementService,
     public confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
@@ -167,11 +169,13 @@ export class FileManagementComponent implements OnInit, OnDestroy {
     this.fileInfo = null;
     this.cateforyInfo = data;
     this.toggleFileInfo = true;
+    if (this.fileInfoContainer) this.fileInfoContainer.reset(null, this.cateforyInfo);
   }
   onFileInfo(data) {
     this.cateforyInfo = null;
     this.fileInfo = data;
     this.toggleFileInfo = true;
+    if (this.fileInfoContainer) this.fileInfoContainer.reset(this.fileInfo, null);
   }
   onToggleFileInfo(data) {
     this.toggleFileInfo = data;

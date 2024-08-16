@@ -39,6 +39,12 @@ export class FileManagementFileInfoComponent implements OnInit, OnDestroy {
       ],
     })
   }
+  public reset(file, category) {
+    this.file = file;
+    this.category = category;
+    if (this.file) this.selectedTags = JSON.parse(JSON.stringify(this.file.tags));
+    this.modelForm.controls["name"].setValue(this.file && this.file.name || this.category && this.category.name);
+  }
   get f2() {
     return this.modelForm.controls;
   }
