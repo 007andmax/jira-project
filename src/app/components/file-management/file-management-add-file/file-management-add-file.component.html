@@ -53,7 +53,9 @@
                                 >
                                     Description
                                 </label>
-                                <span>{{f2.name.value.length}}/10000</span>
+                                <span class="qt-fs-12 qt-color-gray-500">
+                                    {{f2.description.value ? f2.description.value.length : "0"}}/10000
+                                </span>
                             </div>
                             <textarea
                                 id="description-global-note"

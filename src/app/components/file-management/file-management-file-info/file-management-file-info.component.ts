@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FileManagementCategory } from '../class/file-management-category';
 import { FileManagementFile } from '../class/file-management-file';
 import { TicketsPermissionsService } from '../../tickets/tickets/ticket-edit-aside/services/tickets-permissions.service';
@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PreviewFileStateService } from 'src/app/states/file-management/preview-file-state.service';
 import { FileManagementStateService } from 'src/app/states/file-management/file-management-state.service';
+import { FileManagementRealTimeService } from 'src/app/states/file-management/file-management-real-time.service';
 
 @Component({
   selector: 'app-file-management-file-info',
@@ -27,6 +28,8 @@ export class FileManagementFileInfoComponent implements OnInit, OnDestroy {
     public formBuilder: FormBuilder,
     public previewFileStateService: PreviewFileStateService,
     public fileManagementStateService: FileManagementStateService,
+    public fileManagementRealTimeService: FileManagementRealTimeService,
+    public cd: ChangeDetectorRef,
   ) { }
 
   ngOnInit() {
@@ -35,9 +38,39 @@ export class FileManagementFileInfoComponent implements OnInit, OnDestroy {
     this.modelForm = this.formBuilder.group({
       name: [
         this.file && this.file.name || this.category && this.category.name,
-        [Validators.required, Validators.min(1), this.file ? Validators.max(100) : Validators.max(50)]
+        [Validators.required, Validators.minLength(1), this.file ? Validators.maxLength(100) : Validators.maxLength(50)]
       ],
     })
+    let onEditFile = this.fileManagementStateService.onEditFile.subscribe(data => {
+      if (this.file && this.file.id == data.id) {
+        this.file = new FileManagementFile(data);
+        this.reset(this.file, null);
+      }
+    })
+    this.sub.add(onEditFile);
+    let onEditCategory = this.fileManagementStateService.onEditCategory.subscribe(data => {
+      if (this.category && this.category.id == data.id) {
+        this.category = new FileManagementCategory(data);
+        this.reset(null, this.category);
+      }
+    })
+    this.sub.add(onEditCategory);
+    let onChangeDocument = this.fileManagementRealTimeService.changeArray.subscribe(data => {
+      if (data.action === "EDIT_FILE_MANAGEMENT_CATEGORY") {
+        if (this.category && this.category.id == data.data.id) {
+          this.category = new FileManagementCategory(data.data);
+          this.reset(null, this.category);
+        }
+      }
+      if (data.action === "EDIT_MANAGEMENT_FILE") {
+        if (this.file && this.file.id == data.data.id) {
+          this.file = new FileManagementFile(data.data);
+          this.reset(this.file, null);
+        }
+      }
+      this.cd.detectChanges();
+    })
+    this.sub.add(onChangeDocument);
   }
   public reset(file, category) {
     this.file = file;
