@@ -19,6 +19,15 @@
   flex-wrap: wrap;
   gap: 16px;
 }
+/deep/ .user-modal .modal-dialog {
+  max-width: 504px;
+  padding: 0;
+
+  h3 {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
 /deep/ .aside-filters {
     width: 320px;
     flex-shrink: 0;
