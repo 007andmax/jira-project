@@ -32,9 +32,6 @@
     }
     &:hover {
         border: 1px solid $gray-400;
-        &::after {
-          opacity: 1;
-        }
         .actions {
             display: flex;
         }

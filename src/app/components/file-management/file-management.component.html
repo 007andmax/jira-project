@@ -11,7 +11,7 @@
                         class="tbody"
                         *ngIf="sort == 'Name'"
                     >
-                        <div class="qt-df categories-conteiner">
+                        <div class="qt-df categories-container">
                             <ng-template
                                 ngFor
                                 let-item
@@ -28,7 +28,7 @@
                             </ng-template>
                         </div>
                         <div
-                            class="qt-mb-16"
+                            class="file-manager-wrap qt-mb-16"
                             *ngFor="let item of sortKeyObject()"
                         >
                             <div class="file-management-create-at-container qt-mb-16">
@@ -60,7 +60,7 @@
                         *ngIf="sort == 'Date'"
                     >
                         <div
-                            class="qt-mb-16"
+                            class="file-manager-wrap qt-mb-16"
                             *ngFor="let item of sortKeyObject()"
                         >
                             <div class="file-management-create-at-container qt-mb-16">
@@ -86,7 +86,7 @@
                                 </ng-template>
                             </div>
                         </div>
-                        <div class="qt-df categories-conteiner">
+                        <div class="qt-df categories-container">
                             <ng-template
                                 ngFor
                                 let-item

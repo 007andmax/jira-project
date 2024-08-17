@@ -1,6 +1,6 @@
 @import "./src/assets/styles/variable";
 
-.categories-conteiner {
+.categories-container {
     flex-wrap: wrap;
 }
 .qt-page-list {
@@ -13,7 +13,7 @@
     background-color: $white;
 }
 
-.categories-conteiner,
+.categories-container,
 .file-management-create__folder-wrap {
   display: flex;
   flex-wrap: wrap;
@@ -142,8 +142,15 @@
 
     }
 }
-/deep/.selected-item {
- .item-file-container,.item-file-container {
+/deep/ .selected-item {
+  .item-file-container {
     border: 1px solid $blue-light-600 !important;
- }
+    &::after {
+      opacity: 1 !important;
+    }
+  }
+}
+
+.file-manager-wrap + .categories-container {
+  margin-top: 52px;
 }

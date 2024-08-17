@@ -33,15 +33,11 @@
 
     &:hover {
         border: 1px solid $gray-400;
-        &::after {
-          opacity: 1;
-        }
 
         .actions {
             display: flex;
         }
     }
-
     img {
         height: 100%;
     }
@@ -60,7 +56,6 @@
         color: $gray-500;
     }
 }
-
 .item-file-avatar {
     height: 120px;
     background-color: $gray-50;
