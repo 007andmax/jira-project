@@ -2,9 +2,9 @@
     class="preview-attachment"
     *ngIf="show"
 >
-    <div>
-        <div class="preview-attachment-img">
-            <img [src]="file.url">
+    <div class="preview-attachment__inner">
+        <div class="preview-attachment-img-container">
+            <img class="preview-attachment-img" [src]="file.url">
         </div>
         <div class="file-actions-container">
             <div class="qt-df qt-ai-c">
