@@ -76,4 +76,8 @@
 }
 .item-file-image {
     width: 100%;
+    img {
+        max-height: 120px;
+        max-width: 100%;
+    }
 }
