@@ -104,16 +104,18 @@ export class FileManagementFileInfoComponent implements OnInit, OnDestroy {
   onChange() {
     this.submitted = true;
     if (this.modelForm.invalid) {
-      console.log("this.modelForm", this.modelForm);
+
       return;
     }
-    if (this.file) {
+    console.log("this.modelForm", this.modelForm);
+    if (this.file && this.modelForm.value.name != this.file.name) {
+      console.log("file", JSON.parse(JSON.stringify(this.file.name)));
       this.file.setName(this.modelForm.value.name);
       this.fileManagementService.editFile(this.file.id, this.file.getDataForUpate()).subscribe(res => {
         this.fileManagementStateService.editFile(res);
       })
     }
-    if (this.category) {
+    if (this.category && this.modelForm.value.name != this.category.name) {
       this.category.setName(this.modelForm.value.name);
       this.fileManagementService.editCategory(this.category.id, this.category.getDataForUpate()).subscribe(res => {
         this.fileManagementStateService.editCategory(res);

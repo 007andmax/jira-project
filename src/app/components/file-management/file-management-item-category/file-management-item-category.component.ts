@@ -42,7 +42,7 @@ export class FileManagementItemCategoryComponent implements OnInit {
     this.onRemove.emit(this.item);
   }
   getCreateBy() {
-    return moment(new Date(this.item.createdAt)).format('DD MMM YYYY');
+    return moment(new Date(this.item.createdAt)).format('DD MMM YYYY hh:mm A');
   }
   rename() {
     const modalRef = this.modalService.open(FileManagementCategoryRenameComponent, { windowClass: 'xs-modal user-modal', container: "app-file-management", backdrop: 'static', keyboard: false });

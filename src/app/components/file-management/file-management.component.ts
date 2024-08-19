@@ -47,11 +47,12 @@ export class FileManagementComponent implements OnInit, OnDestroy {
     this.fileManagementService.getFileManagement().subscribe((data: any) => {
       this.categories = data.categories.map(item => new FileManagementCategory(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-      this.files = data.files.map(item => new FileManagementFile(item)).sort((a, b) => (a.parseCreatedAt().toLowerCase() > b.parseCreatedAt().toLowerCase()) ?
-        1 : ((b.parseCreatedAt().toLowerCase() > a.parseCreatedAt().toLowerCase()) ? -1 : 0));
+      this.files = data.files.map(item => new FileManagementFile(item)).sort((a, b) => (a.parseCreatedAt() > b.parseCreatedAt()) ?
+        1 : ((b.parseCreatedAt() > a.parseCreatedAt()) ? -1 : 0));
       this.files.forEach(person => {
-        if (!this.groupedByCreateAt[person.createdAt]) this.groupedByCreateAt[person.createdAt] = [];
-        this.groupedByCreateAt[person.createdAt].push(person);
+        let date = moment(new Date(person.createdAt)).format('DD MMM YYYY');
+        if (!this.groupedByCreateAt[date]) this.groupedByCreateAt[date] = [];
+        this.groupedByCreateAt[date].push(person);
       });
       console.log("Object.keys(this.groupedByCreateAt).sort().reverse()", Object.keys(this.groupedByCreateAt).sort().reverse());
       this.groupedByCreateAt = Object.keys(this.groupedByCreateAt).sort().reverse().reduce(
@@ -76,8 +77,9 @@ export class FileManagementComponent implements OnInit, OnDestroy {
       let isExist = this.files.some(item => item.id == data.id);
       if (!isExist) {
         this.files.push(new FileManagementFile(data));
-        if (!this.groupedByCreateAt[data.createdAt]) this.groupedByCreateAt[data.createdAt] = [];
-        this.groupedByCreateAt[data.createdAt].push(new FileManagementFile(data));
+        let date = moment(new Date(data.createdAt)).format('DD MMM YYYY');
+        if (!this.groupedByCreateAt[date]) this.groupedByCreateAt[date] = [];
+        this.groupedByCreateAt[date].push(new FileManagementFile(data));
       }
     })
     this.sub.add(onAddFile);
@@ -104,8 +106,9 @@ export class FileManagementComponent implements OnInit, OnDestroy {
       let findIndex = this.files.findIndex(item => item.id === data.id);
       if (findIndex > -1) {
         this.files[findIndex] = new FileManagementFile(data);
-        let indexGroup = this.groupedByCreateAt[data.createdAt].findIndex(item => item.id === data.id);
-        if (indexGroup > -1) this.groupedByCreateAt[data.createdAt][indexGroup] = new FileManagementFile(data);
+        let date = moment(new Date(data.createdAt)).format('DD MMM YYYY');
+        let indexGroup = this.groupedByCreateAt[date].findIndex(item => item.id === data.id);
+        if (indexGroup > -1) this.groupedByCreateAt[date][indexGroup] = new FileManagementFile(data);
       }
     })
     this.sub.add(onEditFile);
@@ -123,8 +126,9 @@ export class FileManagementComponent implements OnInit, OnDestroy {
         let isExist = this.files.some(item => item.id == data.data.id);
         if (!isExist) {
           this.files.push(new FileManagementFile(data.data));
-          if (!this.groupedByCreateAt[data.data.createdAt]) this.groupedByCreateAt[data.data.createdAt] = [];
-          this.groupedByCreateAt[data.data.createdAt].push(new FileManagementFile(data.data));
+          let date = moment(new Date(data.data.createdAt)).format('DD MMM YYYY');
+          if (!this.groupedByCreateAt[date]) this.groupedByCreateAt[date] = [];
+          this.groupedByCreateAt[date].push(new FileManagementFile(data.data));
         }
       }
       if (data.action === "EDIT_FILE_MANAGEMENT_CATEGORY") {
@@ -135,8 +139,9 @@ export class FileManagementComponent implements OnInit, OnDestroy {
         let findIndex = this.files.findIndex(item => item.id === data.data.id);
         if (findIndex > -1) {
           this.files[findIndex] = new FileManagementFile(data.data);
-          let indexGroup = this.groupedByCreateAt[data.data.createdAt].findIndex(item => item.id === data.data.id);
-          if (indexGroup > -1) this.groupedByCreateAt[data.data.createdAt][indexGroup] = new FileManagementFile(data.data);
+          let date = moment(new Date(data.data.createdAt)).format('DD MMM YYYY');
+          let indexGroup = this.groupedByCreateAt[date].findIndex(item => item.id === data.data.id);
+          if (indexGroup > -1) this.groupedByCreateAt[date][indexGroup] = new FileManagementFile(data.data);
         }
       }
       if (data.action === "DELETE_FILE_MANAGEMENT_CATEGORY") {

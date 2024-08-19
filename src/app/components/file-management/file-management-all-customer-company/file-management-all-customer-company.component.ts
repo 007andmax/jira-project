@@ -12,6 +12,7 @@ import { FileManagementCategory } from '../class/file-management-category';
 import { FileManagementFile } from '../class/file-management-file';
 import { REMOVE_CATEGORY_FILES, REMOVE_FILE } from 'src/app/const/confirm';
 import { fadeInAnimation } from 'src/app/animations';
+import * as moment from "moment";
 
 @Component({
   selector: 'app-file-management-all-customer-company',
@@ -133,13 +134,14 @@ export class FileManagementAllCustomerCompanyComponent extends FileManagementCat
     this.fileManagementService.getFileManagement(null, null, null, this.companyId).subscribe((data: any) => {
       this.breadcrumbs = data.breadcrumbs.map(item => new BreadcrumbsItem(item));
       this.categories = data.categories.map(item => new FileManagementCategory(item));
-      this.files = data.files.map(item => new FileManagementFile(item)).sort((a, b) => (a.parseCreatedAt().toLowerCase() > b.parseCreatedAt().toLowerCase()) ?
-        1 : ((b.parseCreatedAt().toLowerCase() > a.parseCreatedAt().toLowerCase()) ? -1 : 0));
+      this.files = data.files.map(item => new FileManagementFile(item)).sort((a, b) => (a.parseCreatedAt() > b.parseCreatedAt()) ?
+        1 : ((b.parseCreatedAt() > a.parseCreatedAt()) ? -1 : 0));
       this.files.forEach(person => {
-        if (!this.groupedByCreateAt[person.createdAt]) {
-          this.groupedByCreateAt[person.createdAt] = [];
+        let date = moment(new Date(person.createdAt)).format('DD MMM YYYY');
+        if (!this.groupedByCreateAt[date]) {
+          this.groupedByCreateAt[date] = [];
         }
-        this.groupedByCreateAt[person.createdAt].push(person);
+        this.groupedByCreateAt[date].push(person);
       });
       console.log("Object.keys(this.groupedByCreateAt).sort().reverse()", Object.keys(this.groupedByCreateAt).sort().reverse());
       this.groupedByCreateAt = Object.keys(this.groupedByCreateAt).sort().reverse().reduce(

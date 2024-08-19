@@ -7,7 +7,7 @@ export class FileManagementFile {
     "categoryId": string;
     "companyId": string;
     "name": string;
-    "createdAt": string;
+    "createdAt": number;
     "tags": Array<Tag> = [];
     "url": string;
     contentType: string;

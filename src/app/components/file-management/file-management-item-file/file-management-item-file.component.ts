@@ -56,7 +56,7 @@ export class FileManagementItemFileComponent implements OnInit {
     req.send();
   }
   getCreateBy() {
-    return moment(new Date(this.item.createdAt)).format('DD MMM YYYY');
+    return moment(new Date(this.item.createdAt)).format('DD MMM YYYY hh:mm A');
   }
   getTypeFile() {
     if (this.item.contentType == 'application/pdf') return "PDF";

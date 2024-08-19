@@ -7,6 +7,7 @@ import { MatSelectModule, MatChipsModule, MatIconModule } from '@angular/materia
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 
 @NgModule({
     declarations: [FileManagementFileInfoTagsComponent, FileManagementFileInfoComponent
@@ -21,7 +22,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
         NgbModule,
         ReactiveFormsModule,
         TextAreaModule,
-        InfiniteScrollModule
+        InfiniteScrollModule,
+        KeyUpEnterModule
     ],
     exports: [FileManagementFileInfoComponent]
 })
