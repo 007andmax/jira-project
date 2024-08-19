@@ -4,7 +4,7 @@
         (onSort)="onSort($event)"
         (onChangeArchived)="onChangeArchived($event)"
     ></app-file-management-header>
-    <div class="qt-page-list-container">
+    <div class="qt-page-list-container qt-df">
         <div
             class="qt-page-list__body"
             [ngClass]="{'qt-page-list__body-color':!showPreloader}"
@@ -24,7 +24,7 @@
                             >
                                 <app-file-management-item-category
                                     [item]="item"
-                                    class=""
+                                    class
                                     (onRemove)="onRemoveCategory($event)"
                                     (onFileInfo)="onCategoryInfo($event)"
                                 ></app-file-management-item-category>
@@ -44,7 +44,7 @@
                             >
                                 <app-file-management-item-category
                                     [item]="item"
-                                    class=""
+                                    class
                                     (onRemove)="onRemoveCategory($event)"
                                     (onFileInfo)="onCategoryInfo($event)"
                                 ></app-file-management-item-category>
@@ -79,8 +79,8 @@
             </div>
             <div class="aside-filters-content">
                 <app-file-management-file-info
+                    #fileInfoContainer
                     class="qt-w100"
-                    #filter
                     [file]="fileInfo"
                     [category]="cateforyInfo"
                 ></app-file-management-file-info>

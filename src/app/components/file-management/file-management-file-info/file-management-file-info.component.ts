@@ -124,7 +124,7 @@ export class FileManagementFileInfoComponent implements OnInit, OnDestroy {
     }
   }
   parseDate(item) {
-    return moment(new Date(item)).format('DD MMM YYYY');
+    return moment(new Date(item)).format('DD MMM YYYY hh:mm A');
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

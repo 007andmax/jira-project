@@ -34,13 +34,7 @@ export class ManageTagsFilesComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    this.onPreloader.emit(this.loading);
-    this.fileManagementService.getTags(0, "").subscribe((data: any) => {
-      this.tags = data.commonTagViews.map(item => new ManageTag(item));
-      this.loading = false;
-      this.onPreloader.emit(this.loading);
-      this.cd.detectChanges();
-    })
+    this.getTags();
     let changeTagsArray = this.tagsRealTimeService.changeTagsArray.subscribe((data: any) => {
       if (data.action === "TAG_SAVED") {
         data.data.forEach(tag => {
@@ -62,6 +56,21 @@ export class ManageTagsFilesComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(changeTagsArray);
+  }
+  public onSearch(data) {
+    this.searchTag = data;
+    if (!this.loading) this.getTags();
+  }
+  getTags() {
+    this.loading = true;
+    this.tags = [];
+    this.onPreloader.emit(this.loading);
+    this.fileManagementService.getTags(0, this.searchTag).subscribe((data: any) => {
+      this.tags = data.commonTagViews.map(item => new ManageTag(item));
+      this.loading = false;
+      this.onPreloader.emit(this.loading);
+      this.cd.detectChanges();
+    })
   }
   public onAdd() {
     this.create = true;

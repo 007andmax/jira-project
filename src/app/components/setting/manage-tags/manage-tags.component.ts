@@ -182,7 +182,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       this.onScroll();
     }
     if (this.devicesTags) this.devicesTags.searchTag = this.searchTag;
-    if (this.filesTags) this.filesTags.searchTag = this.searchTag;
+    if (this.filesTags) this.filesTags.onSearch(this.searchTag);
   }
   public setDefaultScoll() {
     this.page = 0;

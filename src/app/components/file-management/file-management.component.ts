@@ -47,8 +47,8 @@ export class FileManagementComponent implements OnInit, OnDestroy {
     this.fileManagementService.getFileManagement().subscribe((data: any) => {
       this.categories = data.categories.map(item => new FileManagementCategory(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-      this.files = data.files.map(item => new FileManagementFile(item)).sort((a, b) => (a.parseCreatedAt() > b.parseCreatedAt()) ?
-        1 : ((b.parseCreatedAt() > a.parseCreatedAt()) ? -1 : 0));
+      this.files = data.files.map(item => new FileManagementFile(item)).sort((a, b) => (a.createdAt > b.createdAt) ?
+        1 : ((b.createdAt > a.createdAt) ? -1 : 0));
       this.files.forEach(person => {
         let date = moment(new Date(person.createdAt)).format('DD MMM YYYY');
         if (!this.groupedByCreateAt[date]) this.groupedByCreateAt[date] = [];
@@ -164,7 +164,8 @@ export class FileManagementComponent implements OnInit, OnDestroy {
     this.sub.add(onChangeDocument);
   }
   sortKeyObject() {
-    return Object.keys(this.groupedByCreateAt).sort().reverse();
+    return Object.keys(this.groupedByCreateAt).sort((a, b) => (new Date(a) > new Date(b)) ?
+      1 : ((new Date(b) > new Date(a)) ? -1 : 0)).reverse();
   }
   onSort(data) {
     this.sort = data;

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FileManagementCategory } from '../class/file-management-category';
 import { FileManagementFile } from '../class/file-management-file';
 import { FileManagementService } from 'src/app/services/file-management/file-management.service';
@@ -14,6 +14,7 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 import { FileManagementStateService } from 'src/app/states/file-management/file-management-state.service';
 import { BreadcrumbsItem } from '../class/breadcrumbs-item';
 import { fadeInAnimation } from 'src/app/animations';
+import { FileManagementFileInfoComponent } from '../file-management-file-info/file-management-file-info.component';
 
 @Component({
   selector: 'app-file-management-category',
@@ -26,13 +27,17 @@ import { fadeInAnimation } from 'src/app/animations';
 })
 export class FileManagementCategoryComponent implements OnInit, OnDestroy {
   sort: string = "Date";
+  fileInfo: FileManagementFile;
+  cateforyInfo: FileManagementFile;
   showPreloader: boolean = true;
+  toggleFileInfo: boolean = false;
   categoryId: string;
   breadcrumbs: Array<BreadcrumbsItem> = [];
   categories: Array<FileManagementCategory> = [];
   files: Array<FileManagementFile> = [];
   groupedByCreateAt: { [key: string]: FileManagementFile[] } = {};
   sub: Subscription = new Subscription();
+  @ViewChild('fileInfoContainer') fileInfoContainer: FileManagementFileInfoComponent;
   constructor(public fileManagementService: FileManagementService,
     public activateRoute: ActivatedRoute,
     public leftPanelStateService: LeftPanelStateService,
@@ -154,6 +159,21 @@ export class FileManagementCategoryComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
   }
+  onCategoryInfo(data) {
+    this.fileInfo = null;
+    this.cateforyInfo = data;
+    this.toggleFileInfo = true;
+    if (this.fileInfoContainer) this.fileInfoContainer.reset(null, this.cateforyInfo);
+  }
+  onFileInfo(data) {
+    this.cateforyInfo = null;
+    this.fileInfo = data;
+    this.toggleFileInfo = true;
+    if (this.fileInfoContainer) this.fileInfoContainer.reset(this.fileInfo, null);
+  }
+  onToggleFileInfo(data) {
+    this.toggleFileInfo = data;
+  }
   getList() {
     this.fileManagementService.getFileManagement(this.categoryId).subscribe((data: any) => {
       this.breadcrumbs = data.breadcrumbs.map(item => new BreadcrumbsItem(item));
@@ -183,7 +203,8 @@ export class FileManagementCategoryComponent implements OnInit, OnDestroy {
     this.sort = data;
   }
   sortKeyObject() {
-    return Object.keys(this.groupedByCreateAt).sort().reverse();
+    return Object.keys(this.groupedByCreateAt).sort((a, b) => (new Date(a) > new Date(b)) ?
+      1 : ((new Date(b) > new Date(a)) ? -1 : 0)).reverse();
   }
   getCreateBy(item) {
     return moment(new Date(item)).format('DD MMM YYYY');
