@@ -17,7 +17,7 @@ import { ManageTagsFilter } from '../class/manage-tags-filter';
 export class ManageTagsFilesComponent implements OnInit, OnDestroy {
   filter: ManageTagsFilter = new ManageTagsFilter();
   setActiveTab: string = "file";
-  searchTag: string;
+  searchTag: string = "";
   create: boolean = false;
   tags: Array<ManageTag> = [];
   loading: boolean = true;

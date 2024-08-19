@@ -17,6 +17,7 @@ import { DocumentsService } from 'src/app/services/documents/documents.service';
 export class FileManagementAddFileComponent implements OnInit {
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   @Input() categoryId: string;
+  @Input() companyId: string;
   addForm: FormGroup;
   submitted = false;
   files: any[] = [];
@@ -75,6 +76,7 @@ export class FileManagementAddFileComponent implements OnInit {
       return;
     }
     this.addForm.controls["categoryId"].setValue(this.categoryId);
+    if (this.companyId) this.addForm.controls["companyId"].setValue(this.companyId);
     console.log("this.invoiceForm.value", this.addForm.value);
     this.addBtn.setDisabled(true);
     this.fileManagementService.addFile(this.addForm.value).subscribe(data => {

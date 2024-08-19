@@ -19,6 +19,7 @@ export class FileManagementHeaderComponent implements OnInit {
   @Input() breadcrumbs: Array<BreadcrumbsItem> = [];
   @Input() categoryId: string;
   @Input() isShowCompanyArchived: boolean = false;
+  @Input() companyId: string;
   sort: string = "Date";
   searchText: string = "";
   activePage: string = "";
@@ -51,6 +52,7 @@ export class FileManagementHeaderComponent implements OnInit {
   addFile() {
     const modalRef = this.modalService.open(FileManagementAddFileComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.categoryId = this.categoryId;
+    modalRef.componentInstance.companyId = this.companyId;
     //   this.fileManagementStateService.showAsideForAdd();
   }
   goToCategory(item) {

@@ -46,7 +46,10 @@
                     (onSelectedItem)="selectActive($event)"
                     heightInput="36px"
                 ></app-drop-down>
-                <div class="qt-input-search qt-ml-12">
+                <div
+                    class="qt-input-search qt-ml-12"
+                    *ngIf="false"
+                >
                     <input
                         type="text"
                         placeholder="Search files"
@@ -107,6 +110,7 @@
                     <div class="qt-pos-rel">
                         <app-file-management-add-category
                             [categoryId]="categoryId"
+                            [companyId]="companyId"
                             *ngIf="toggleAddCategory"
                             (onClose)="toggleAddCategory = false"
                         ></app-file-management-add-category>

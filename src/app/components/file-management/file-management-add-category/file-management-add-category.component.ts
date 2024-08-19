@@ -13,6 +13,7 @@ import { FileManagementStateService } from 'src/app/states/file-management/file-
 })
 export class FileManagementAddCategoryComponent implements OnInit {
   @Input() categoryId: string;
+  @Input() companyId: string;
   categoryForm: FormGroup;
   submitted = false;
   @Output() onClose = new EventEmitter();
@@ -26,7 +27,8 @@ export class FileManagementAddCategoryComponent implements OnInit {
         "",
         [Validators.required, Validators.minLength(1), Validators.maxLength(50)]
       ],
-      parentCategoryId: [null]
+      parentCategoryId: [null],
+      companyId: [null]
     });
   }
   get f() {
@@ -40,6 +42,7 @@ export class FileManagementAddCategoryComponent implements OnInit {
       return;
     }
     if (this.categoryId) this.categoryForm.controls["parentCategoryId"].setValue(this.categoryId);
+    if (this.companyId) this.categoryForm.controls["companyId"].setValue(this.companyId);
     this.fileManagementService
       .addCategory(this.categoryForm.value)
       .subscribe(data => {
