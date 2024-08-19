@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PreviewFileStateService } from 'src/app/states/file-management/preview-file-state.service';
 import { FileManagementStateService } from 'src/app/states/file-management/file-management-state.service';
 import { FileManagementRealTimeService } from 'src/app/states/file-management/file-management-real-time.service';
+import * as moment from "moment";
 
 @Component({
   selector: 'app-file-management-file-info',
@@ -121,6 +122,9 @@ export class FileManagementFileInfoComponent implements OnInit, OnDestroy {
         this.fileManagementStateService.editCategory(res);
       })
     }
+  }
+  parseDate(item) {
+    return moment(new Date(item)).format('DD MMM YYYY');
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

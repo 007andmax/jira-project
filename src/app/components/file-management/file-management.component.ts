@@ -54,14 +54,16 @@ export class FileManagementComponent implements OnInit, OnDestroy {
         if (!this.groupedByCreateAt[date]) this.groupedByCreateAt[date] = [];
         this.groupedByCreateAt[date].push(person);
       });
-      console.log("Object.keys(this.groupedByCreateAt).sort().reverse()", Object.keys(this.groupedByCreateAt).sort().reverse());
-      this.groupedByCreateAt = Object.keys(this.groupedByCreateAt).sort().reverse().reduce(
-        (obj, key) => {
-          obj[key] = this.groupedByCreateAt[key];
-          return obj;
-        },
-        {}
-      );
+      console.log("Object.keys(this.groupedByCreateAt).sort().reverse()", Object.keys(this.groupedByCreateAt).sort((a, b) => (new Date(a) > new Date(b)) ?
+        1 : ((new Date(b) > new Date(a)) ? -1 : 0)).reverse());
+      this.groupedByCreateAt = Object.keys(this.groupedByCreateAt).sort((a, b) => (new Date(a) > new Date(b)) ?
+        1 : ((new Date(b) > new Date(a)) ? -1 : 0)).reverse().reduce(
+          (obj, key) => {
+            obj[key] = this.groupedByCreateAt[key];
+            return obj;
+          },
+          {}
+        );
       console.log("groupedByCreateAt", this.groupedByCreateAt);
       this.showPreloader = false;
     })

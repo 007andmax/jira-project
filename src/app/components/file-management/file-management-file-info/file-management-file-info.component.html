@@ -20,13 +20,10 @@
                 *ngIf="file && !isImage() || category"
             ></div>
             <div
-                class="qt-sz-80 qt-bg-contain qt-mb-16 qt-fs-0"
+                class="qt-bg-contain qt-mb-16 qt-fs-0 item-file-image"
                 *ngIf="isImage()"
             >
-                <img
-                    width="80px"
-                    [src]="file.url"
-                >
+                <img [src]="file.url">
             </div>
             <div class="error-container qt-df qt-ai-c">
                 <input
@@ -87,14 +84,14 @@
             <span class="file-info-field-header qt-fs-12 qt-color-gray-500">Created on</span>
             <span
                 class="qt-fs-14 qt-color-gray-900"
-                [textContent]="file && file.createdAt || category && category.createdAt"
+                [textContent]="file && parseDate(file.createdAt) || category && parseDate(category.createdAt)"
             ></span>
         </div>
         <div class="file-info-field qt-df qt-ai-c qt-mb-16">
             <span class="file-info-field-header qt-fs-12 qt-color-gray-500">Edited on</span>
             <span
                 class="qt-fs-14 qt-color-gray-900"
-                [textContent]="file && file.updatedAt || category && category.updatedAt"
+                [textContent]="file && file.updatedAt && parseDate(file.updatedAt) || category && category.updatedAt && parseDate(category.updatedAt)"
             ></span>
         </div>
         <div class="file-info-field qt-df qt-ai-c qt-mb-16">
