@@ -112,7 +112,12 @@
             class="file-info-description file-info-field qt-mb-16 qt-pt-16 qt-pb-16"
             *ngIf="file"
         >
-            <div class="file-info-field-header qt-fs-12 qt-color-gray-500 qt-mb-8">Description</div>
+            <div class="qt-df qt-ai-c qt-mb-8">
+              <div class="file-info-field-header qt-fs-12 qt-color-gray-500 qt-f-1">Description</div>
+              <div class="qt-button --square-md --gray qt-ml-8 info-file-label-edit">
+                <div class="icon__edit qt-sz-16 qt-bg-contain"></div>
+              </div>
+            </div>
             <textarea
                 class="qt-editable-input"
                 appTextArea

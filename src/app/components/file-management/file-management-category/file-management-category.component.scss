@@ -1,5 +1,8 @@
 @import "./src/assets/styles/variable";
 
+.file-manager-page {
+  background-color: $white;
+}
 .documents-table__assigned-companies {
     width: 180px;
     max-width: 180px;
@@ -24,11 +27,11 @@
 }
 
 .qt-page-list {
-    padding: 10px 0px;
+    padding: 10px 0 0;
 }
 
 .qt-page-list__body {
-    padding: 32px;
+    padding: 32px 32px 20px;
 }
 
 .qt-page-list__body-color {
@@ -36,6 +39,7 @@
 }
 .qt-page-list-container {
     display: flex;
+    min-height: calc(100vh - 115px);
 }
 .file-management-create-at-container {
     position: relative;
