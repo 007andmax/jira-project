@@ -41,7 +41,10 @@ export class LeftPanelService {
     return (state === 'marketing')
   }
   isFilePage(state) {
-    return (state === 'file-management')
+    return (state === 'file-management'
+      || state === 'file-management-category'
+      || state === 'file-management-all-customer'
+    )
   }
   public isCompanyPage(state) {
     return (state == 'new-companies'

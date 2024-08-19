@@ -53,7 +53,7 @@ export class FileManagementService {
     return this.http.get(`${this.apiUrl}${url}`)
   }
   public getTags(page, partWord) {
-    return this.http.get(`${this.apiUrl}commonTags/filter?page=${page}&size=20&partWord=${partWord}&defaultTag=FILE_TAG`)
+    return this.http.get(`${this.apiUrl}commonTags/${partWord != '' ? 'filter' : 'getAll'}?page=${page}&size=20${partWord != '' ? `&partWord=${partWord}` : ''}&defaultTag=FILE_TAG`)
   }
   public addFile(data) {
     return this.http.post(`${this.apiUrl}file-management/files`, data)
