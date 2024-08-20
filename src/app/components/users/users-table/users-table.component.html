@@ -39,7 +39,7 @@
         ></div>
       </div>
       <div
-        class="qt-icon icon__mark-as-master qt-bg-contain qt-sz-20 qt-ml-12"
+        class="qt-icon icon__permission-role qt-sz-20 qt-ml-12"
         *ngIf="type == TYPE_LIST_COMPANY_USERS && isPrimaryContact()"
         (mouseenter)="addTooltip.show($event.target)"
         (mouseleave)="addTooltip.hide()"
@@ -219,7 +219,7 @@
             (click)="resetPrimaryContact()"
             ngbDropdownItem
           >
-            <div class="qt-icon icon__mark-as-master qt-bg-contain qt-sz-20 qt-mr-12"></div>
+            <div class="qt-icon icon__permission-role qt-sz-20 qt-mr-12"></div>
             Set as Primary contact
           </li>
           <li

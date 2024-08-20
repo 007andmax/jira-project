@@ -49,10 +49,10 @@
                     Field is required
                 </mat-error>
                 <div
-                    class="qt-button --square-md --gray qt-ml-8 info-file-label-edit"
+                    class="qt-button --square-md --gray qt-ml-8 info-file-label-edit qt-fs-0"
                     [hidden]="category && (category.allCompaniesRoot || category.companyId)"
                 >
-                    <div class="icon__edit qt-sz-16 qt-bg-contain"></div>
+                    <div class="qt-icon icon__edit qt-sz-16"></div>
                 </div>
             </div>
         </div>
@@ -123,8 +123,8 @@
         >
             <div class="qt-df qt-ai-c qt-mb-8">
                 <div class="file-info-field-header qt-fs-12 qt-color-gray-500 qt-f-1">Description</div>
-                <div class="qt-button --square-md --gray qt-ml-8 info-file-label-edit">
-                    <div class="icon__edit qt-sz-16 qt-bg-contain"></div>
+                <div class="qt-button --square-md --gray qt-ml-8 info-file-label-edit qt-fs-0">
+                    <div class="qt-icon icon__edit qt-sz-16"></div>
                 </div>
             </div>
             <textarea
@@ -155,7 +155,7 @@
         class="qt-df qt-ai-c qt-jc-c qt-w100 info-file-view pointer"
         (click)="preview()"
     >
-        <span class="icon__view qt-sz-16 qt-bg-contain qt-mr-8 pointer"></span>
+        <span class="qt-icon icon__show qt-sz-16 qt-mr-8 pointer"></span>
         View
     </div>
 </div>

@@ -5,6 +5,10 @@
 }
 .categories-container {
     flex-wrap: wrap;
+
+    & + .file-manager-wrap {
+      margin-top: 32px;
+    }
 }
 .qt-page-list {
     padding: 10px 0 0;
@@ -156,5 +160,5 @@
 }
 
 .file-manager-wrap + .categories-container {
-  margin-top: 52px;
+  margin-top: 68px;
 }
