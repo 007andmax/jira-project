@@ -23,7 +23,7 @@
         [ngClass]="{'show-db':db.isOpen()}"
         class="qt-button --square-md --gray pointer actions"
         ngbDropdownToggle
-        *ngIf="!item.allCompaniesRoot"
+        *ngIf="!item.allCompaniesRoot && !item.companyId"
     >
         <div class="icon__more qt-sz-16 qt-bg-contain"></div>
     </div>

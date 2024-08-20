@@ -29,7 +29,7 @@
                 <span
                     class="qt-fs-16 qt-fw-500 qt-color-gray-900"
                     [textContent]="category.name"
-                    *ngIf="category && category.allCompaniesRoot"
+                    *ngIf="category && (category.allCompaniesRoot || category.companyId)"
                 ></span>
                 <input
                     class="qt-editable-input qt-fs-16 qt-fw-500 qt-color-gray-900 file-info-name"
@@ -40,7 +40,7 @@
                     (blur)="onChange()"
                     appKeyUpEnter
                     (onChange)="onChange()"
-                    [hidden]="category && category.allCompaniesRoot"
+                    [hidden]="category && (category.allCompaniesRoot || category.companyId)"
                 >
                 <mat-error
                     class="invalid-feedback"
@@ -50,7 +50,7 @@
                 </mat-error>
                 <div
                     class="qt-button --square-md --gray qt-ml-8 info-file-label-edit"
-                    [hidden]="category && category.allCompaniesRoot"
+                    [hidden]="category && (category.allCompaniesRoot || category.companyId)"
                 >
                     <div class="icon__edit qt-sz-16 qt-bg-contain"></div>
                 </div>

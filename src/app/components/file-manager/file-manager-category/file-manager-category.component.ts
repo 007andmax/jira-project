@@ -32,6 +32,7 @@ export class FileManagerCategoryComponent implements OnInit, OnDestroy {
   showPreloader: boolean = true;
   toggleFileInfo: boolean = false;
   categoryId: string;
+  companyId: string;
   breadcrumbs: Array<BreadcrumbsItem> = [];
   categories: Array<FileManagerCategory> = [];
   files: Array<FileManagerFile> = [];
@@ -177,6 +178,7 @@ export class FileManagerCategoryComponent implements OnInit, OnDestroy {
   getList() {
     this.fileManagementService.getFileManagement(this.categoryId).subscribe((data: any) => {
       this.breadcrumbs = data.breadcrumbs.map(item => new BreadcrumbsItem(item));
+      this.companyId = this.breadcrumbs[this.breadcrumbs.length - 1].companyId;
       this.categories = data.categories.map(item => new FileManagerCategory(item));
       this.files = data.files.map(item => new FileManagerFile(item)).sort((a, b) => (a.parseCreatedAt() > b.parseCreatedAt()) ?
         1 : ((b.parseCreatedAt() > a.parseCreatedAt()) ? -1 : 0));
