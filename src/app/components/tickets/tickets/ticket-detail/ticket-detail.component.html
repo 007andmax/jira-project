@@ -13,7 +13,7 @@
         (onToggleRigthPanel)="onToggleRigthPanel($event)"
     ></ticket-detail-header>
     <!-- <div -->
-    <!-- class="collapse-arrow icon__close" -->
+    <!-- class="collapse-arrow qt-icon icon__close" -->
     <!-- (click)="close()" -->
     <!-- ></div> -->
     <div
@@ -92,7 +92,7 @@
                                         <div class="ticket-detail-page-content__body-header-data">
                                             <span [textContent]="getCreatAt()"></span>
                                             <div class="ticket-detail-page-content__body-header-data-divider"></div>
-                                            <span class="icon__companies qt-sz-16 qt-dib qt-mr-8"></span>
+                                            <span class="qt-icon icon__companies qt-sz-16 qt-dib qt-mr-8"></span>
                                             <span
                                                 class="pointer"
                                                 [textContent]="getCompanyName()"
@@ -114,23 +114,23 @@
                         <div class="qt-df qt-ai-fs qt-mt-24 qt-mb-24">
                             <div class="ticket-detail-page__desc-icon qt-mr-16 qt-fs-0">
                                 <span
-                                    class="icon__email qt-sz-16 qt-dib"
+                                    class="qt-icon icon__email qt-sz-16 qt-dib"
                                     *ngIf="ticketProfile.ticketSource === 'FROM_EMAIL'"
                                 ></span>
                                 <span
-                                    class="icon__monitor qt-sz-16 qt-dib"
+                                    class="qt-icon icon__monitor qt-sz-16 qt-dib"
                                     *ngIf="ticketProfile.ticketSource === 'FROM_AGENT'"
                                 ></span>
                                 <span
-                                    class="icon__globe qt-sz-16 qt-dib"
+                                    class="qt-icon icon__globe qt-sz-16 qt-dib"
                                     *ngIf="ticketProfile.ticketSource === 'FROM_WEB'"
                                 ></span>
                                 <span
-                                    class="icon__calendar-recurring-ticket qt-sz-16 qt-dib"
+                                    class="qt-icon qt-icon icon__calendar-tick qt-sz-16 qt-dib"
                                     *ngIf="ticketProfile.ticketSource === 'FROM_RECURRING_TICKET'"
                                 ></span>
                                 <span
-                                    class="icon__receipt qt-sz-16 qt-dib"
+                                    class="qt-icon icon__quotes qt-sz-16 qt-dib"
                                     *ngIf="ticketProfile.ticketSource === 'FROM_SALE_QUOTE'"
                                 ></span>
                             </div>
@@ -331,31 +331,31 @@
                     class="ticket-detail-page-content__sidebar-menu-button"
                     (click)="openDetailRigthPanel('CONTACT')"
                 >
-                    <div class="icon__company-info qt-sz-20 qt-bg-contain"></div>
+                    <div class="qt-icon icon__info qt-sz-20 qt-bg-contain"></div>
                 </div>
                 <div
                     class="ticket-detail-page-content__sidebar-menu-button"
                     (click)="openDetailRigthPanel('PASSWORD')"
                 >
-                    <div class="icon__locked qt-sz-20 qt-bg-contain"></div>
+                    <div class="qt-icon icon__password qt-sz-20 qt-bg-contain"></div>
                 </div>
                 <div
                     class="ticket-detail-page-content__sidebar-menu-button"
                     (click)="openDetailRigthPanel('DEVICES')"
                 >
-                    <div class="icon__devices-computer qt-sz-20 qt-bg-contain"></div>
+                    <div class="qt-icon icon__devices qt-sz-20"></div>
                 </div>
                 <div
                     class="ticket-detail-page-content__sidebar-menu-button"
                     (click)="openDetailRigthPanel('DOCUMENT')"
                 >
-                    <div class="icon__documents qt-sz-20 qt-bg-contain"></div>
+                    <div class="qt-icon icon__documents qt-sz-20 qt-bg-contain"></div>
                 </div>
                 <div
                     class="ticket-detail-page-content__sidebar-menu-button"
                     (click)="openDetailRigthPanel('TICKETS')"
                 >
-                    <div class="icon__tickets-detail-contact qt-sz-20 qt-bg-contain"></div>
+                    <div class="qt-icon icon__tickets qt-sz-20"></div>
                 </div>
             </div>
         </div>

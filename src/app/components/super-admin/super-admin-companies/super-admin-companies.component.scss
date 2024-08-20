@@ -35,6 +35,7 @@ super-admin-companies-item {
 
 .qt-page-list__container {
     display: flex;
+    padding: 0 32px;
 }
 .qt-page-list__body {
   min-width: 1376px;
@@ -47,7 +48,7 @@ super-admin-companies-item {
     display: flex;
     margin: 0;
     height: 56px;
-    padding: 0px 32px;
+    padding: 0px 36px;
     background-color: $gray-50;
     border-bottom: 1px solid $gray-200;
 }
@@ -120,7 +121,7 @@ super-admin-companies-item {
     overflow: auto;
 }
 aside {
-    background-color: $gray-50;
+    background-color: $white;
 }
 .app-left-panel-super-admin-categories {
     display: block;
@@ -137,13 +138,14 @@ aside {
     position: relative;
     box-sizing: border-box;
     width: 2px;
-    height: 100%;
+    min-height: 100vh;
+    height: auto;
+    background-color: transparent;
     border-left-width: 1px;
     border-left-style: solid;
-    border-left-color: $gray-900;
     border-right-width: 1px;
     border-right-style: solid;
-    border-right-color: $gray-900;
+    border-color: transparent;
     cursor: ew-resize;
 
     -webkit-touch-callout: none;
@@ -157,13 +159,15 @@ aside {
         content: "";
         position: absolute;
         z-index: 1;
-        top: 50%;
+        top: 0;
         right: 100%;
-        height: 100vh;
+        min-height: 100vh;
+        height: 100%;
         width: 2px;
         margin-top: -18px / 2;
         border-left-color: $gray-100;
         border-left-width: 1px;
         border-left-style: solid;
+        background-color: $gray-100;
     }
 }

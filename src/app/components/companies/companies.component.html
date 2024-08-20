@@ -49,8 +49,10 @@
     </div>
     <div
         *ngIf="getPermissions('CREATE_COMPANIES')"
-        class="mobile-action-btn"
+        class="mobile-action-btn qt-df qt-ai-c qt-jc-c"
         (click)="onAddCompany()"
-    ></div>
+    >
+      <div class="qt-icon icon__add qt-icon__white qt-sz-16"></div>
+    </div>
 </div>
 <app-company-edit-aside></app-company-edit-aside>

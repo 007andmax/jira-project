@@ -4,7 +4,7 @@
 >
     <div class="qt-df qt-ai-c qt-jc-sb">
         <div class="card__icon">
-            <div class="icon__documents qt-za-16 qt-sz-16 qt-bg-contain"></div>
+            <div class="qt-icon icon__documents qt-za-16 qt-sz-16 qt-bg-contain"></div>
         </div>
         <div
             class="card__label"
@@ -38,7 +38,7 @@
                 [placement]="'bottom-right'"
             >
                 <div
-                    class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
+                    class="qt-ic-c qt-icon icon__more  qt-pointer qt-sz-16 qt-bg-contain"
                     ngbDropdownToggle
                 ></div>
                 <ul
@@ -52,7 +52,7 @@
                         *ngIf="!item.isDefault && getPermissions('EDIT_TEMPLATE')"
                         (click)="editDocument(item)"
                     >
-                        <div class="icon__edit qt-sz-20 qt-bg-contain qt-mr-12"></div>
+                        <div class="qt-icon icon__edit qt-sz-20 qt-bg-contain qt-mr-12"></div>
                         Edit
                     </li>
                     <li
@@ -69,7 +69,7 @@
                         ngbDropdownItem
                         (click)="printPdf()"
                     >
-                        <div class="icon__print qt-sz-20 qt-bg-contain qt-mr-12"></div>
+                        <div class="qt-icon icon__print qt-sz-20 qt-bg-contain qt-mr-12"></div>
                         Print
                     </li>
                     <li
@@ -77,7 +77,7 @@
                         ngbDropdownItem
                         (click)="exportPdf()"
                     >
-                        <div class="icon__download-pdf qt-sz-20 qt-bg-contain qt-mr-12"></div>
+                        <div class="qt-icon icon__download qt-sz-20 qt-bg-contain qt-mr-12"></div>
                         Export PDF
                     </li>
                     <li
@@ -87,7 +87,7 @@
                         class="remove-item"
                         (click)="removeDocument()"
                     >
-                        <div class="icon__remove qt-sz-20 qt-bg-contain qt-mr-12"></div>
+                        <div class="qt-icon icon__delete qt-sz-20 qt-bg-contain qt-mr-12"></div>
                         Delete
                     </li>
                 </ul>

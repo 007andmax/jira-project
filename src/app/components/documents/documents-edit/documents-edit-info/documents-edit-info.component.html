@@ -4,13 +4,13 @@
 >
     <div class="qt-aside-modern__header">
         <div
-            class="toggle-aside icon__panel-open qt-mr-16"
+            class="toggle-aside qt-icon icon__panel-open qt-mr-16"
             [ngClass]="{'opened' : openAside}"
             (click)="toggleAside()"
         ></div>
         <div class="qt-aside-modern__header-title qt-mr-auto">Create Document</div>
         <div
-            class="qt-aside-modern__header-close icon__close"
+            class="qt-aside-modern__header-close qt-icon icon__close"
             (click)="backFromEdit()"
         >
         </div>
@@ -151,7 +151,7 @@
                             <span></span>
                             <div>Required by Company Type</div>
                             <i
-                                class="icn-sm icon__help"
+                                class="icn-sm qt-icon icon__help"
                                 placement="top"
                                 ngbTooltip="The required type value can be used only for templates"
                             ></i>

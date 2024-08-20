@@ -1,0 +1,12 @@
+@mixin media-breakpoint-down ($breakpoint) {
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin media-breakpoint-up ($breakpoint) {
+  $adjusted-breakpoint: $breakpoint + 1px;
+  @media (min-width: $adjusted-breakpoint) {
+    @content;
+  }
+}

@@ -14,7 +14,7 @@
         ></app-dynamic-tooltip>
         <div
             *ngIf="selectedCategory"
-            class="icon__edit qt-sz-16 pointer qt-ml-6 qt-bg-contain"
+            class="qt-icon icon__edit qt-sz-16 pointer qt-ml-6 qt-bg-contain"
             (click)="editCategoryName()"
             (mouseenter)="editTooltip.show($event.target)"
             (mouseleave)="editTooltip.hide()"
@@ -34,7 +34,7 @@
                 (mouseenter)="deleteTooltip.show($event.target)"
                 (mouseleave)="deleteTooltip.hide()"
             >
-                <div class="icon__remove qt-sz-18 qt-bg-contain"></div>
+                <div class="qt-icon icon__delete qt-sz-18 qt-bg-contain"></div>
             </div>
             <div
                 class="preview qt-ml-12 pointer"
@@ -46,7 +46,7 @@
                 class="save-draft qt-ml-12 pointer"
                 (click)="saveContent('DRAFT')"
             >
-                <div class="icon__draft-content qt-sz-20   qt-mr-10"></div>
+                <div class="qt-icon icon__save qt-sz-20 qt-mr-10"></div>
                 Save Draft
             </div>
             <button
@@ -66,7 +66,7 @@
             class="preview qt-ml-12 pointer"
             (click)="toglePreview()"
         >
-            <i class="icon__edit qt-sz-16 pointer qt-mr-10 qt-bg-contain"></i>
+            <i class="qt-icon icon__edit qt-sz-16 pointer qt-mr-10 qt-bg-contain"></i>
             Edit Mode
         </div>
     </div>

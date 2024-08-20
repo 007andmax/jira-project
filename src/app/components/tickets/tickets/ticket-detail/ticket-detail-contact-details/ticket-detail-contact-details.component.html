@@ -5,7 +5,7 @@
             class="qt-button --square-md --gray pointer"
             (click)="close()"
         >
-            <div class="icon__close qt-bg-contain qt-sz-16 pointer"></div>
+            <div class="qt-icon icon__close qt-sz-16 pointer"></div>
         </div>
     </div>
     <div class="ticket-detail-contact__body">
@@ -48,7 +48,7 @@
                 class="qt-button --gray --sm qt-w100 qt-jc-c qt-mt-8"
                 (click)="onShowMap()"
             >
-                <span class="icon__map qt-sz-16 qt-dib qt-mr-4"></span>
+                <span class="qt-icon icon__map qt-sz-16 qt-dib qt-mr-4"></span>
                 Get Direction
             </div>
         </div>
@@ -92,7 +92,7 @@
                     class="qt-df qt-ai-c qt-mb-16"
                     *ngIf="checkExistUser()"
                 >
-                    <i class="icon__email qt-bg-contain qt-sz-16 qt-mr-8"></i>
+                    <i class="qt-icon icon__email qt-bg-contain qt-sz-16 qt-mr-8"></i>
                     <div
                         class="ticket-detail-contact-info-line__label"
                         [textContent]="ticketProfile.createdUser.email"
@@ -102,7 +102,7 @@
                     class="qt-df qt-ai-c"
                     *ngIf="checkExistUser() && getPhoneNumbers().length == 0"
                 >
-                    <i class="icon__phone-gray-500 qt-bg-contain qt-sz-16 qt-mr-8"></i>
+                    <i class="qt-icon icon__phone qt-sz-16 qt-mr-8"></i>
                     <div class="ticket-detail-contact-info-line__label">No information</div>
                 </div>
                 <ng-template
@@ -115,10 +115,10 @@
                 >
                     <div class="qt-df qt-ai-c qt-mb-16">
                         <i
-                            class="qt-bg-contain qt-sz-16 qt-mr-8"
-                            [ngClass]="{'icon__office-phone-gray':phoneNumber.typeNumber == 'FAX',
-                        'icon__mobile_type':phoneNumber.typeNumber == 'MOBILE',
-                         'icon__phone-gray':phoneNumber.typeNumber == 'OFFICE'}"
+                            class="qt-icon qt-sz-16 qt-mr-8"
+                            [ngClass]="{'icon__old-phone':phoneNumber.typeNumber == 'FAX',
+                        'icon__mobile':phoneNumber.typeNumber == 'MOBILE',
+                         'icon__phone':phoneNumber.typeNumber == 'OFFICE'}"
                         ></i>
                         <preview-phone-mask
                             [class]="'company-info-aside__ticket-created-name ticket-detail-contact-info-line__label'"
@@ -136,6 +136,7 @@
             ></ticket-detail-contact-details-history>
         </div>
     </div>
+
 
 
 

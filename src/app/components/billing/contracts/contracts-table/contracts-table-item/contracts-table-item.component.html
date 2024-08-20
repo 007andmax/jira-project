@@ -28,13 +28,13 @@
             Automatically create and send invoice
         </ng-template>
         <div
-            class="icon__automatically-create-invoice qt-bg-contain  qt-sz-20"
+            class="qt-icon icon__automatically-create-invoice  qt-sz-20"
             *ngIf="contract.enableInvoiceAutoCreate"
             placement="top"
             [ngbTooltip]="manualContent"
         ></div>
         <div
-            class="icon__manual-create-billable qt-bg-contain  qt-sz-20"
+            class="qt-icon icon__manual-create-billable  qt-sz-20"
             *ngIf="contract.manualCreateBillableItem"
             placement="top"
             ngbTooltip="Manual create billable item"
@@ -73,7 +73,7 @@
         container="body"
     >
         <div
-            class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"
+            class="qt-ic-c qt-icon icon__more qt-pointer qt-sz-16 qt-bg-contain"
             id="dropdownBasic1"
             ngbDropdownToggle
         ></div>
@@ -87,7 +87,7 @@
                 ngbDropdownItem
                 (click)="copyContract()"
             >
-                <div class="icon__copy qt-sz-20 qt-bg-contain qt-mr-12"></div>
+                <div class="qt-icon icon__copy qt-sz-20 qt-bg-contain qt-mr-12"></div>
                 Copy contract
             </li>
             <li
@@ -96,7 +96,7 @@
                 [hidden]="contract.status == 'TERMINATED' || contract.status == 'EXPIRED' || contract.type == 'HOURLY'"
                 (click)="forceCreate()"
             >
-                <div class="icon__force-create qt-sz-20 qt-bg-contain qt-mr-12"></div>
+                <div class="qt-icon icon__force-create qt-sz-20 qt-mr-12"></div>
                 Force create
             </li>
             <li
@@ -105,7 +105,7 @@
                 (click)="editContract()"
                 *ngIf="contract.status !== 'TERMINATED'"
             >
-                <div class="icon__edit qt-sz-20 qt-bg-contain qt-mr-12"></div>
+                <div class="qt-icon icon__edit qt-sz-20 qt-mr-12"></div>
                 Edit contract
             </li>
             <li
@@ -114,7 +114,7 @@
                 (click)="terminateContract()"
                 *ngIf="contract.status !== 'TERMINATED'"
             >
-                <div class="icon__terminate qt-sz-20 qt-bg-contain qt-mr-12"></div>
+                <div class="qt-icon icon__block qt-sz-20 qt-mr-12"></div>
                 Terminate
             </li>
             <li
@@ -123,7 +123,7 @@
                 (click)="deleteContract()"
                 *ngIf="getPermissions('DELETE_SERVICE_AGREEMENTS') && contract.status !== 'CURRENT'"
             >
-                <div class="icon__remove qt-sz-20 qt-bg-contain qt-mr-12"></div>
+                <div class="qt-icon icon__delete qt-sz-20 qt-bg-contain qt-mr-12"></div>
                 Delete agreement
             </li>
         </ul>

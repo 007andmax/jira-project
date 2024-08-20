@@ -2,7 +2,7 @@
     class="qt-button qt-mr-12"
     (click)="add()"
 >
-    <span class="icon__add-product qt-sz-18 qt-bg-contain qt-mr-8"></span>
+    <span class="qt-icon icon__add qt-icon__white qt-sz-18 qt-mr-8"></span>
     Add Category
 </button>
 <div class="category-item category-item-category-body">
@@ -35,13 +35,13 @@
             [attr.id]="category.id"
         >
             <div class="category-item-category">
-                <div class="icon__move-light qt-sz-20 qt-mr-2 qt-bg-contain"></div>
+                <div class="qt-icon icon__dot-vertical qt-sz-20 qt-mr-2"></div>
                 <div
                     class="category-item-category__name"
                     [ngClass]="{'--active':selectedCategory && selectedCategory.id === category.id}"
                 >
                     <div
-                        class="icon__category-closed qt-mr-10 pointer"
+                        class="qt-icon icon__category-closed qt-icon__gray-400 qt-mr-10 pointer"
                         [ngClass]="{'toggle-category':category.toggleSubCategory}"
                         (click)="category.toggleSubCategory = !category.toggleSubCategory"
                         *ngIf="category.subcategories.length > 0"
@@ -89,13 +89,13 @@
                         [attr.category-id]="category.id"
                     >
                         <div class="category-item-category">
-                            <div class="icon__move-light qt-sz-20 qt-mr-2 qt-bg-contain"></div>
+                            <div class="qt-icon icon__dot-vertical qt-sz-20 qt-mr-2"></div>
                             <div
                                 class="category-item-category__name"
                                 [ngClass]="{'--active':selectedCategory && selectedCategory.id === subcategory.id}"
                             >
                                 <div
-                                    class="icon__category-closed qt-mr-10 pointer"
+                                    class="qt-icon icon__category-closed qt-icon__gray-400 qt-mr-10 pointer"
                                     [ngClass]="{'toggle-category':subcategory.toggleSubCategory}"
                                     (click)="subcategory.toggleSubCategory = !subcategory.toggleSubCategory"
                                     *ngIf="subcategory.subcategories.length > 0"
@@ -138,13 +138,13 @@
                                     [attr.category-id]="subcategory.id"
                                 >
                                     <div class="category-item-category">
-                                        <div class="icon__move-light qt-sz-20 qt-mr-2 qt-bg-contain"></div>
+                                        <div class="qt-icon icon__dot-vertical qt-sz-20 qt-mr-2"></div>
                                         <div
                                             class="category-item-category__name"
                                             [ngClass]="{'--active':selectedCategory && selectedCategory.id === subsubcategory.id}"
                                         >
                                             <div
-                                                class="icon__category-closed qt-mr-10 pointer"
+                                                class="qt-icon icon__category-closed qt-icon__gray-400 qt-mr-10 pointer"
                                                 [ngClass]="{'toggle-category':subsubcategory.toggleSubCategory}"
                                                 (click)="subsubcategory.toggleSubCategory = !subsubcategory.toggleSubCategory"
                                                 *ngIf="subsubcategory.subcategories.length > 0"
@@ -187,7 +187,7 @@
                                                 [attr.category-id]="subsubcategory.id"
                                             >
                                                 <div class="category-item-category">
-                                                    <div class="icon__move-light qt-sz-20 qt-mr-2 qt-bg-contain"></div>
+                                                    <div class="qt-icon icon__dot-vertical qt-sz-20 qt-mr-2"></div>
                                                     <div
                                                         class="category-item-category__name"
                                                         [ngClass]="{'--active':selectedCategory && selectedCategory.id === subsubsubcategory.id}"

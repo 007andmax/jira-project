@@ -1,3 +1,6 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/mixin/breakpoint";
+
 .users-list {
   width: 100%;
   padding-right: 30px;
@@ -10,7 +13,7 @@
   padding: 0 30px;
 }
 
-@media only screen and (min-width: 1000px) and (max-width: 1200px) {
+@include media-breakpoint-down($sm) {
   .users-list .user-card {
     min-width: 370px !important;
   }

@@ -1,4 +1,5 @@
 @import "./src/assets/styles/variable";
+@import "./src/assets/styles/mixin/breakpoint";
 
 /deep/ .aside-filters {
     width: 320px;
@@ -135,10 +136,10 @@
 
 .users-table__email {
   flex: 2 0 220px;
-  @media (max-width: 1600px) {
+  @include media-breakpoint-down($md) {
     flex: 2 0 200px;
   }
-  @media (min-width: 2048px) {
+  @include media-breakpoint-up($lg) {
     flex: 3 0 220px;
   }
 }
@@ -147,10 +148,10 @@
 }
 .users-table__industry {
   flex: 0 0 176px;
-  @media (max-width: 1600px) {
+  @include media-breakpoint-down($md) {
     display: none;
   }
-  @media (min-width: 2048px) {
+  @include media-breakpoint-up($lg) {
     flex: 1 0 180px;
   }
 }
@@ -208,28 +209,28 @@
         border-bottom: 1px solid $gray-200;
     }
     /deep/ .users-table__subscription {
-      @media (max-width: 1800px) {
+      @include media-breakpoint-down($lg) {
         flex: 1 0 130px;
       }
     }
     /deep/ .users-table__tickets {
-      @media (max-width: 1800px) {
+      @include media-breakpoint-down($lg) {
         flex: 0 0 75px;
       }
     }
     /deep/ .users-table__industry {
-      @media (max-width: 1800px) {
+      @include media-breakpoint-down($lg) {
         display: none;
       }
     }
   /deep/ .users-table__email {
-    @media (max-width: 1600px) {
+    @include media-breakpoint-down($md) {
        flex: 2 0 164px;
     }
   }
   /deep/ .--open-filters {
     .users-table__industry {
-      @media (max-width: 1920px) {
+      @include media-breakpoint-down($lg){
         display: none;
       }
     }

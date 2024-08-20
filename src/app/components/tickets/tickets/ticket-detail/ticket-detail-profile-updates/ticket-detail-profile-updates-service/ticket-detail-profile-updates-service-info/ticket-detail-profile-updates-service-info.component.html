@@ -1,7 +1,7 @@
 <div class="qt-df qt-mb-16 ticket-updates__update-block__inner">
     <div class="qt-df qt-fd-c qt-ai-c qt-mr-16">
         <div class="ticket-updates__ticket-icon qt-mb-4">
-            <i class="icon__service icn-16"></i>
+            <i class="qt-icon icon__service icn-16"></i>
         </div>
         <div class="ticket-updates__ticket-line"></div>
     </div>
@@ -11,7 +11,7 @@
             *ngIf="index > 0"
         >
             <div class="qt-df qt-ai-c">
-                <div class="icn-16 icon__calendar pointer qt-mr-8 qt-fs-0"></div>
+                <div class="icn-16 qt-icon icon__calendar pointer qt-mr-8 qt-fs-0"></div>
                 <span
                     class="ticket-updates__tag-completed --completed"
                     *ngIf="service.completed && showCompleteLabel"
@@ -34,7 +34,7 @@
                     (mouseenter)="editTooltip.show($event.target)"
                     (mouseleave)="editTooltip.hide()"
                 >
-                    <div class="icon__edit qt-sz-16"></div>
+                    <div class="qt-icon icon__edit qt-sz-16"></div>
                 </div>
                 <div
                     class="qt-button-square qt-button-square__prepend pointer"
@@ -43,7 +43,7 @@
                     (mouseenter)="editTooltip.show($event.target)"
                     (mouseleave)="editTooltip.hide()"
                 >
-                    <div class="icon__edit qt-sz-16"></div>
+                    <div class="qt-icon icon__edit qt-sz-16"></div>
                 </div>
                 <div
                     class="qt-button-square qt-button-square__afterpend pointer"
@@ -51,7 +51,7 @@
                     (mouseenter)="deleteTooltip.show($event.target)"
                     (mouseleave)="deleteTooltip.hide()"
                 >
-                    <div class="icon__remove qt-sz-16"></div>
+                    <div class="qt-icon icon__delete qt-sz-16"></div>
                 </div>
                 <app-dynamic-tooltip
                     [content]="'Delete Service'"
@@ -123,11 +123,11 @@
                 'button-mark-complete': service.completed}"
             >
                 <i
-                    class="icon__task-pending --done qt-bg-contain icn-16 qt-mr-6"
+                    class="qt-icon icon__check qt-icon__green-600 icn-16 qt-mr-6"
                     *ngIf="service.completed"
                 ></i>
                 <i
-                    class="icon__active qt-bg-contain icn-16 qt-mr-6"
+                    class="qt-icon icon__check icn-16 qt-mr-6"
                     *ngIf="!service.completed"
                 ></i>
                 <span [textContent]="(!service.completed) ? 'Mark completed' : 'Сompleted'"></span>
@@ -143,14 +143,14 @@
     <!-- (click)="edit()" -->
     <!-- *ngIf="!isIOSDevice()" -->
     <!-- > -->
-    <!-- <div class="icon__edit qt-sz-16"></div> -->
+    <!-- <div class="qt-icon icon__edit qt-sz-16"></div> -->
     <!-- </div> -->
     <!-- <div -->
     <!-- class="qt-button-square qt-button-square__prepend pointer" -->
     <!-- (touchstart)="edit()" -->
     <!-- *ngIf="isIOSDevice()" -->
     <!-- > -->
-    <!-- <div class="icon__edit qt-sz-16"></div> -->
+    <!-- <div class="qt-icon icon__edit qt-sz-16"></div> -->
     <!-- </div> -->
     <!-- <div -->
     <!-- class="qt-button-square qt-button-square__afterpend pointer" -->
@@ -158,7 +158,7 @@
     <!-- (mouseenter)="deleteTooltip.show($event.target)" -->
     <!-- (mouseleave)="deleteTooltip.hide()" -->
     <!-- > -->
-    <!-- <div class="icon__remove qt-sz-16"></div> -->
+    <!-- <div class="qt-icon icon__delete qt-sz-16"></div> -->
     <!-- </div> -->
     <!-- <app-dynamic-tooltip -->
     <!-- [content]="'Delete Service'" -->

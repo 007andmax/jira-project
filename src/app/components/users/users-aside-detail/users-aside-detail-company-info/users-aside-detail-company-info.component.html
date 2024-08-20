@@ -4,7 +4,7 @@
         (click)="toggleContainer = !toggleContainer"
     >
         <div class="user-detail-company-info__title">
-            <i class="icn-sm icon__companies qt-bg-contain qt-sz-16"></i>
+            <i class="icn-sm qt-icon icon__companies qt-sz-16"></i>
             <span [textContent]="customerCompaniesInfo.clientCompanyName"></span>
             <span
                 class="qt-color-red-600"
@@ -24,7 +24,7 @@
                 <div class="qt-df qt-jc-sb qt-ai-c">
                     <label class="qt-input-block__label">Job Title</label>
                     <div
-                        class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"
+                        class="qt-icon icon__edit qt-icon__gray-400 qt-za-16 qt-sz-16 qt-bg-contain pointer"
                         *ngIf="getPermissions('EDIT_USERS')"
                     ></div>
                 </div>
@@ -48,7 +48,7 @@
                 <div class="qt-df qt-jc-sb qt-ai-c">
                     <label class="qt-input-block__label">Permission Role</label>
                     <div
-                        class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"
+                        class="qt-icon icon__edit qt-icon__gray-400 qt-za-16 qt-sz-16 qt-bg-contain pointer"
                         *ngIf="getPermissions('EDIT_USERS')"
                     ></div>
                 </div>
@@ -73,7 +73,7 @@
                 <div class="qt-df qt-jc-sb qt-ai-c">
                     <div class="user-detail__row-info-label">Updates</div>
                     <div
-                        class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"
+                        class="qt-icon icon__edit qt-icon__gray-400 qt-za-16 qt-sz-16 qt-bg-contain pointer"
                         *ngIf="getPermissions('EDIT_USERS')"
                     ></div>
                 </div>
@@ -105,7 +105,7 @@
                         <div class="qt-ml-8">
                             Access to the Customer portal
                             <i
-                                class="icon__help default-services-page__question-icon qt-sz-12 qt-ic-c"
+                                class="qt-icon icon__help default-services-page__question-icon qt-sz-12 qt-ic-c"
                                 (mouseenter)="customerPortalTooltip.show($event.target)"
                                 (mouseleave)="customerPortalTooltip.hide()"
                             ></i>

@@ -1,0 +1,9 @@
+<svg width="44" height="20" viewBox="0 0 44 20" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" fill-rule="evenodd">
+        <path fill="#9A7015" d="m0 4 7-4v20H0z"/>
+        <path fill="#FFBA1F" d="M0 4h44l-4 8 4 8H0z"/>
+        <text font-family="Inter-SemiBold, Inter" font-size="9" font-weight="500" fill="#FFF">
+                    <tspan x="2" y="17">UPDATE</tspan>
+                </text>
+    </g>
+</svg>

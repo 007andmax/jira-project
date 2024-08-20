@@ -9,7 +9,7 @@
                     class="qt-button --md --gray qt-jc-c pointer qt-ml-12"
                     *ngIf="getPermissions('CREATE_USERS') && (activeTab === 'activeUsers' || activeTab === 'archivedUsers')"
                 >
-                    <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+                    <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8 qt-button-icon"></span>
                     Add Tech User
                 </a>
                 <a
@@ -18,7 +18,7 @@
                     class="qt-button --md --gray qt-jc-c pointer qt-ml-12"
                     *ngIf="activeTab === 'userPermissions' && userPermissions && userPermissions.getRoles() && userPermissions.getRoles().length < 5"
                 >
-                    <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+                    <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8 qt-button-icon"></span>
                     Create New Role
                 </a>
             </div>
@@ -110,11 +110,7 @@
                                                     class="tab-pane__table-avatar user-dp online"
                                                     *ngIf="techUser.avatar === null"
                                                 >
-                                                    <img
-                                                        class="img-circle"
-                                                        src="html/assets/img/icons/upload-photo.svg"
-                                                        alt="user"
-                                                    >
+                                                    <span class="img-circle qt-sz-36 icon__user-avatar qt-bg-contain"></span>
                                                 </span>
                                                 <div class="qt-ml-12 qt-f-1 ellipsis">
                                                     <div class="tab-pane__table-user-item-name qt-fw-600 qt-color-gray-900 ellipsis">
@@ -138,7 +134,7 @@
                                         <div class="tab-pane__table-cell active-users-table__authentication">
                                             <div class="qt-df qt-ai-c">
                                                 <span
-                                                    class="icon__secure qt-sz-16 qt-bg-contain qt-mr-4 qt-dib"
+                                                    class="qt-icon icon__secure qt-icon__green-600 qt-sz-16 qt-mr-4 qt-dib"
                                                     *ngIf="techUser.twoFactorAuthType == 'SECURE' || techUser.twoFactorAuthType == 'GOOGLE_SECURE'"
                                                 ></span>
                                                 {{getSecureText(techUser.twoFactorAuthType)}}
@@ -175,13 +171,13 @@
                                                 <div
                                                     (mouseenter)="removeTooltip.show($event.target)"
                                                     (mouseleave)="removeTooltip.hide()"
-                                                    class="icon__edit-gray-dark qt-sz-20 qt-bg-contain qt-mr-16 pointer"
+                                                    class="qt-icon icon__edit qt-icon__gray-400 qt-sz-20 qt-bg-contain qt-mr-16 pointer"
                                                     *ngIf="getPermissions('EDIT_USERS')"
                                                     (click)="editTechUser(techUser)"
                                                 >
                                                 </div>
                                                 <div
-                                                    class="icon__more qt-sz-20 qt-bg-contain pointer"
+                                                    class="qt-icon icon__more qt-sz-20 qt-bg-contain pointer"
                                                     ngbDropdownToggle
                                                     id="dropdown1"
                                                 ></div>
@@ -196,7 +192,7 @@
                                                         ngbDropdownToggle
                                                         *ngIf="!techUser.isEmailVerified"
                                                     >
-                                                        <div class="icon__email-resend qt-sz-20 qt-bg-contain pointer qt-mr-10"></div>
+                                                        <div class="icon__resend qt-sz-20 qt-bg-contain pointer qt-mr-10"></div>
                                                         <span>Resend Email</span>
                                                     </div>
                                                     <div
@@ -204,7 +200,7 @@
                                                         ngbDropdownToggle
                                                         (click)="changePasswordRequest(techUser.id)"
                                                     >
-                                                        <div class="icon__reset qt-sz-20 qt-bg-contain pointer qt-mr-10"></div>
+                                                        <div class="qt-icon icon__reset qt-sz-20 qt-bg-contain pointer qt-mr-10"></div>
                                                         <span>Reset Password</span>
                                                     </div>
                                                     <hr>
@@ -214,7 +210,7 @@
                                                         (click)="removeUserConfirm(techUser)"
                                                         *ngIf="!techUser.isOwner"
                                                     >
-                                                        <div class="icon__remove--red-600 qt-sz-20 pointer qt-bg-contain qt-mr-10 "></div>
+                                                        <div class="qt-icon icon__delete qt-icon__red-600 qt-sz-20 pointer qt-bg-contain qt-mr-10 "></div>
                                                         <span class="qt-color-red-600">Archive User</span>
                                                     </div>
                                                 </div>
@@ -317,7 +313,7 @@
                                         <div class="tab-pane__table-cell active-users-table__authentication">
                                             <div class="qt-df qt-ai-c">
                                                 <span
-                                                    class="icon__secure qt-sz-16 qt-bg-contain qt-mr-4 qt-dib"
+                                                    class="qt-icon icon__secure qt-icon__green-600 qt-sz-16 qt-mr-4 qt-dib"
                                                     *ngIf="techUser.twoFactorAuthType == 'SECURE' || techUser.twoFactorAuthType == 'GOOGLE_SECURE'"
                                                 ></span>
                                                 {{getSecureText(techUser.twoFactorAuthType)}}
@@ -337,7 +333,7 @@
                                             <div
                                                 (mouseenter)="restoreUser.show($event.target)"
                                                 (mouseleave)="restoreUser.hide()"
-                                                class="icon__reset qt-sz-20 qt-bg-contain qt-mr-16 pointer ng-star-inserted"
+                                                class="qt-icon icon__reset qt-sz-20 qt-bg-contain qt-mr-16 pointer ng-star-inserted"
                                                 (click)="restoreConfirm(techUser.id)"
                                             >
                                             </div>
@@ -370,11 +366,7 @@
     <div class="qt-aside-modern__content middle-content">
         <div class="dp-area qt-df qt-ai-c qt-mb-24">
             <span class="dp">
-                <img
-                    src="/html/assets/img/icons/upload-photo.svg"
-                    alt="user"
-                    *ngIf="!croppedImage"
-                >
+                <span class="img-circle qt-sz-36 icon__user-avatar qt-bg-contain"></span>
                 <img
                     [src]="croppedImage?.base64"
                     alt="user"
@@ -601,7 +593,7 @@
                 placement="top"
                 container="body"
             >
-                <div class="icon__reset qt-sz-16 qt-bg-contain"></div>
+                <div class="qt-icon icon__reset qt-sz-16 qt-bg-contain"></div>
             </div>
             <div
                 class="qt-aside__restore-modal qt-ml-8 pointer"
@@ -611,10 +603,10 @@
                 placement="top"
                 container="body"
             >
-                <div class="icon__email-send qt-sz-16 qt-bg-contain"></div>
+                <div class="qt-icon icon__email-send qt-sz-16"></div>
             </div>
             <div class="qt-aside__restore-modal qt-ml-8 pointer">
-                <div class="icon__menu-settings--gray-500 qt-sz-16 qt-bg-contain"></div>
+                <div class="qt-icon icon__settings qt-sz-16"></div>
             </div>
             <div
                 class="qt-aside__restore-modal qt-ml-8 pointer"
@@ -624,7 +616,7 @@
                 placement="top"
                 container="body"
             >
-                <div class="icon__remove--red-600 qt-sz-16 qt-bg-contain"></div>
+                <div class="qt-icon icon__delete qt-icon__red-600 qt-sz-16 qt-bg-contain"></div>
             </div>
         </div>
     </div>
@@ -633,7 +625,7 @@
             class="notifications --warning qt-mb-20"
             *ngIf="selectedTechUser && !selectedTechUser.isEmailVerified"
         >
-            <span class="icon__company-info--yellow-800 qt-sz-20 qt-mr-8 qt-fs-0"></span>
+            <span class="qt-icon icon__info qt-icon__yellow-800 qt-sz-20 qt-mr-8 qt-fs-0"></span>
             <p class="notifications__content">
                 User email is not verified yet to verify email click on link here
                 <a
@@ -671,10 +663,7 @@
                     class="simple-dp"
                     *ngIf="selectedTechUser.avatar === null"
                 >
-                    <img
-                        src="html/assets/img/icons/upload-photo.svg"
-                        alt="user"
-                    >
+                    <span class="img-circle qt-sz-36 icon__user-avatar qt-bg-contain"></span>
                 </span>
             </span>
             <div class="dp-info">

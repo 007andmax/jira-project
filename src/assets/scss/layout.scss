@@ -77,7 +77,11 @@ body {
         content: '';
         width: 20px;
         height: 20px;
-        background: url("/assets/img/icons/search.svg") no-repeat center / contain;
+        mask-image: url("/assets/img/icons/search.svg");
+        mask-position: center;
+        mask-repeat: no-repeat;
+        mask-size: contain;
+        background-color: $gray-400;
         left: 14px;
         top: calc(50% - 10px);
       }
@@ -330,7 +334,7 @@ body {
         position: absolute;
         width: 12px;
         height: 12px;
-        background: url('/assets/img/icons/down-arrow-sm.svg');
+        background: url('/assets/img/icons/arrow-down.svg') no-repeat center / contain;
       }
 
       &::before {
@@ -531,7 +535,7 @@ body {
     }
     .cmn-select {
       appearance: none;
-      background: url("/assets/img/icons/down-arrow.svg") no-repeat right 8px center;
+      background: url("/assets/img/icons/arrow-down.svg") no-repeat right 8px center;
       padding: 0 14px;
       height: 40px;
       width: 100%;

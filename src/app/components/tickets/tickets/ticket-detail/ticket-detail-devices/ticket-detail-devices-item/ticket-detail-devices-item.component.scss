@@ -68,6 +68,13 @@
         background-color: $green-600;
         border-radius: 50%;
     }
+
+  .icon__devices { // TODO delete after Maxim fix
+    background-color: $gray-500;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: contain;
+  }
 }
 .--ofline {
     &::before {
@@ -97,7 +104,7 @@
     right: 0;
     cursor: pointer;
 }
-.icon__remove {
+.icon__delete {
     background-color: $red-600;
 }
 .dropdown-menu-qt {

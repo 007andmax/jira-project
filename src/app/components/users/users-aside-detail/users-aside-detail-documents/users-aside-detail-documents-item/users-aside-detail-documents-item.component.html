@@ -11,7 +11,7 @@
         <div class="documents-table__title-menu">
             <div
                 class="qt-sz-16 qt-bg-contain qt-mr-8 qt-fs-0"
-                [ngClass]="{'icon__folder':item.isCategory,
+                [ngClass]="{'qt-icon icon__folder':item.isCategory,
             'icon__templete-thumb':!item.isCategory}"
             ></div>
             <div
@@ -47,7 +47,7 @@
             [container]="'body'"
         >
             <div
-                class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
+                class="qt-ic-c qt-icon icon__more  qt-pointer qt-sz-16 qt-bg-contain"
                 id="dropdownBasic1"
                 ngbDropdownToggle
             ></div>
@@ -63,7 +63,7 @@
                     (click)="goToAddDocument()"
                     *ngIf="getPermissions('CREATE_DOCUMENT')"
                 >
-                    <div class="icon__add-document qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    <div class="qt-icon icon__add-document qt-sz-16 qt-mr-8"></div>
                     Add New Document
                 </li>
                 <li
@@ -71,7 +71,7 @@
                     ngbDropdownItem
                     (click)="removeCategory()"
                 >
-                    <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    <div class="qt-icon icon__delete qt-sz-16 qt-bg-contain qt-mr-8"></div>
                     Delete
                 </li>
             </ul>
@@ -87,7 +87,7 @@
                     (click)="goToEditDocument()"
                     *ngIf="getPermissions('EDIT_DOCUMENT')"
                 >
-                    <div class="icon__edit qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    <div class="qt-icon icon__edit qt-sz-16 qt-bg-contain qt-mr-8"></div>
                     Edit
                 </li>
                 <li
@@ -104,7 +104,7 @@
                     ngbDropdownItem
                     (click)="printPdf()"
                 >
-                    <div class="icon__print qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    <div class="qt-icon icon__print qt-sz-16 qt-bg-contain qt-mr-8"></div>
                     Print
                 </li>
                 <li
@@ -112,7 +112,7 @@
                     ngbDropdownItem
                     (click)="exportPdf()"
                 >
-                    <div class="icon__download-pdf qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    <div class="qt-icon icon__download qt-sz-16 qt-bg-contain qt-mr-8"></div>
                     Export PDF
                 </li>
                 <li
@@ -120,7 +120,7 @@
                     ngbDropdownItem
                     (click)="previewDocument()"
                 >
-                    <div class="icon__go-to qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    <div class="qt-icon icon__external-link qt-sz-16 qt-mr-8"></div>
                     Open in new tab
                 </li>
                 <li
@@ -130,7 +130,7 @@
                     (click)="removeDocument()"
                     *ngIf="getPermissions('DELETE_DOCUMENT')"
                 >
-                    <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    <div class="qt-icon icon__delete qt-sz-16 qt-bg-contain qt-mr-8"></div>
                     Delete
                 </li>
             </ul>

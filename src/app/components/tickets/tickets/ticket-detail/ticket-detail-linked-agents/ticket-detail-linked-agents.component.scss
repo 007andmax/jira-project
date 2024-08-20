@@ -135,13 +135,13 @@
     i {
         position: static;
 
-      &.icon__close--light-gray  {
+      &.qt-icon__gray-400  {
         margin-left: 4px;
       }
     }
 
-    .icon__devices-grey,
-    .icon__user-grey {
+    .icon__devices,
+    .icon__user {
         margin: 0 5px 0 0;
     }
 }

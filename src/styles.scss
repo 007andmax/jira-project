@@ -1,6 +1,7 @@
 @import "./src/assets/styles/variable";
 @import "./src/assets/scss/fonts";
 @import "./assets/styles/dropdowns.scss";
+@import "./src/assets/styles/mixin/breakpoint";
 @import "./assets/styles/icons.scss";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "./assets/styles/main.scss";
@@ -110,9 +111,15 @@ h6,
   color: $blue-light-600;
   border: 1px solid $blue-light-600;
   @include сaption-l__m;
+  .qt-icon {
+    transition: .3s ease-in-out background-color;
+  }
   &:hover {
     background: $blue-light-600;
     color: $white;
+    .qt-icon {
+      background-color: $white;
+    }
   }
 }
 .radio-container {
@@ -551,7 +558,7 @@ documents-edit-info {
           content: "";
           width: 20px;
           height: 20px;
-          background: url("./assets/img/icons/tag.svg");
+          background: url("./assets/img/icons/tags.svg");
         }
         input {
           height: 42px;
@@ -623,7 +630,7 @@ documents-edit-info {
   }
   .service-tab-content,
   .product-tab-content {
-    .icon__remove {
+    .icon__delete {
       top: 43px;
       right: -18px;
       cursor: pointer;
@@ -681,7 +688,8 @@ documents-edit-info {
 .billing-dashboard-page__content {
   .input-group {
     .btn-icon-date-picker {
-      background-color: transparent;
+      background-color: $blue-light-600;
+      transform: translateY(2px);
     }
   }
 }
@@ -789,8 +797,11 @@ documents-edit-info {
       right: -3px;
       width: 14px;
       height: 14px;
-      background: url("/assets/img/icons/close-light-gray.svg") no-repeat;
-      background-size: contain;
+      mask-image: url("/assets/img/icons/close.svg");
+      background-color: $gray-400;
+      mask-position: center;
+      mask-repeat: no-repeat;
+      mask-size: contain;
     }
   }
 }
@@ -835,7 +846,7 @@ ngb-typeahead-window {
 .left-panel-closed {
   .quotes__header {
     width: calc(100vw - 85px) !important;
-    @media (max-width: 1280px) {
+    @include media-breakpoint-down($sm) {
       width: calc(100vw - 76px) !important;
     }
   }
@@ -859,7 +870,7 @@ app-quotes-item {
     }
     &--bottom {
       .fixed-width {
-        @media (max-width: 1600px) {
+        @include media-breakpoint-down($md) {
           .with-dollar:before,
           .with-percent:before {
             left: 14px;
@@ -1008,7 +1019,7 @@ app-quotes-item {
         border-radius: 50%;
       }
       input:checked ~ span {
-        background-image: url("/assets/img/icons/selected.svg");
+        background-image: url("/assets/img/icons/status-green.svg");
         border: none;
       }
     }
@@ -1050,10 +1061,13 @@ app-quotes-item {
           content: "";
           width: 16px;
           height: 16px;
-          background: url("/html/assets/img/icons/search.svg");
+          mask-image: url("/html/assets/img/icons/search.svg");
+          mask-position: center;
+          mask-repeat: no-repeat;
+          mask-size: contain;
+          background-color: $gray-400;
           left: 26px;
           top: calc(50% - 8px);
-          background-size: contain;
         }
       }
     }
@@ -1336,7 +1350,7 @@ app-quotes-item {
           content: "";
           width: 20px;
           height: 20px;
-          background: url("/assets/img/icons/tag.svg");
+          background: url("/assets/img/icons/tags.svg");
         }
       }
       .mat-form-field-appearance-legacy .mat-form-field-infix {
@@ -1422,70 +1436,38 @@ app-quotes-item {
       flex: 1 1 210px;
       line-height: 20px;
 
-      @media screen and (min-width: 2048px) {
+      @include media-breakpoint-down($md) {
+        flex: 1 1 260px;
+      }
+
+      @include media-breakpoint-up($lg) {
         flex: 1 0 290px;
       }
 
-      @media screen and (min-width: 2250px) {
+      @include media-breakpoint-up($xl) {
         flex: 1 0 360px;
-      }
-
-      @media screen and (max-width: 1600px) {
-        flex: 1 1 260px;
       }
     }
     &__primary-contact {
       flex: 1 1 160px;
 
-      @media screen and (min-width: 2048px) {
+      @include media-breakpoint-up($lg) {
         flex: 1 0 230px;
       }
 
-      @media screen and (min-width: 2250px) {
+      @include media-breakpoint-up($xl) {
         flex: 1 0 300px;
       }
 
-      @media screen and (max-width: 1600px) {
+      @include media-breakpoint-down($md) {
         flex: 1 1 210px;
         max-width: 100%;
-      }
-
-      > div {
-        @media screen and (max-width: 767px) {
-          width: 100%;
-          display: flex;
-          align-items: center;
-          padding-left: 80px;
-        }
       }
 
       .name {
         position: relative;
         @include body-m__m;
         color: $gray-900;
-
-        @media screen and (max-width: 767px) {
-          margin-right: 4px;
-          padding-right: 8px;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          max-width: min-content
-        }
-
-        &::after {
-          @media screen and (max-width: 767px) {
-            position: absolute;
-            content: "";
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 4px;
-            height: 4px;
-            background: $gray-400;
-            border-radius: 50%;
-          }
-        }
       }
 
       .phone {
@@ -1499,16 +1481,16 @@ app-quotes-item {
       white-space: nowrap;
       overflow: hidden;
 
-      @media screen and (min-width: 2048px) {
+      @include media-breakpoint-down($md) {
+        flex: 1 1 230px;
+      }
+
+      @include media-breakpoint-up($lg) {
         flex: 1 0 250px;
       }
 
-      @media screen and (min-width: 2250px) {
+      @include media-breakpoint-up($xl) {
         flex: 1 0 340px;
-      }
-
-      @media screen and (max-width: 1600px) {
-        flex: 1 1 230px;
       }
     }
     &__tickets {
@@ -1523,7 +1505,7 @@ app-quotes-item {
     &__tickets,
     &__devices,
     &__users {
-      @media screen and (max-width: 1600px) {
+      @include media-breakpoint-down($md) {
         display: none;
       }
     }
@@ -1671,24 +1653,27 @@ app-quotes-item {
         .tab-product,
         .tab-service {
           position: static;
-          background: url("./assets/img/icons/products.svg");
-          background-size: contain;
+          mask-image: url("./assets/img/icons/products.svg");
+          mask-size: contain;
           margin-right: 8px;
+          background-color: $gray-500;
         }
         .tab-service {
-          background: url("./assets/img/icons/service.svg");
-          background-size: contain;
+          mask-image: url("./assets/img/icons/service.svg");
+          mask-size: contain;
         }
         &.active-tab {
           color: $blue-light-600;
           border-bottom: 2px solid $blue-light-600;
           .tab-product {
-            background: url("./assets/img/icons/products-blue.svg");
-            background-size: contain;
+            mask-image: url("/assets/img/icons/products.svg");
+            mask-size: contain;
+            background-color: $blue-light-600;
           }
           .tab-service {
-            background: url("./assets/img/icons/service-blue.svg");
-            background-size: contain;
+            mask-image: url("/assets/img/icons/time.svg");
+            mask-size: contain;
+            background-color: $blue-light-600;
           }
         }
       }
@@ -2133,7 +2118,7 @@ app-quotes-item {
     width: 90%;
     height: 100%;
     cursor: pointer;
-    @media (max-width: 1366px) {
+    @include media-breakpoint-down($sm) {
       width: 87%;
     }
   }
@@ -3020,7 +3005,7 @@ app-ticket-edit-aside {
     }
 
     .qt-aside__close-modal {
-      background-image: url("/assets/img/icons/close-light.svg");
+      background-image: url("/assets/img/icons/close.svg");
       position: absolute;
       top: 50%;
       left: 26px;
@@ -3450,6 +3435,7 @@ input.--input-error:hover {
     display: none;
   }
 }
+
 .quotes-page .qt-page-list__header-filters .dropdown-menu {
   right: 0;
   left: unset;
@@ -3489,6 +3475,11 @@ add-category-product {
     font-size: 13px;
     line-height: 16px;
     font-weight: 500;
+  }
+  .qt-input-block {
+    label {
+      margin-bottom: 8px;
+    }
   }
   .btn-primary {
     min-width: auto;

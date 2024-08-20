@@ -2,6 +2,7 @@
 @import "./src/assets/styles/variable";
 @import "./src/assets/styles/fonts";
 @import "./src/assets/styles/mixin/dropdown";
+@import "./src/assets/styles/mixin/breakpoint";
 
 .cmp-dashboard-body {
     @include body-font;
@@ -30,7 +31,6 @@
 
     a {
         color: $blue-light-600;
-        text-decoration: none;
         text-decoration: none !important;
     }
     p {
@@ -207,7 +207,7 @@
                 border-color: $background;
             }
             &.link {
-                background-image: url("/assets/img/icons/link-gray.svg");
+                background-image: url("/assets/img/icons/links.svg");
                 background-repeat: no-repeat;
                 background-position: right 13px center;
                 padding-right: 25px;
@@ -234,7 +234,7 @@
         }
         select.cmn-select {
             @include app-none();
-            background: url("/assets/img/icons/down-arrow.svg") no-repeat right 7px center;
+            background: url("/assets/img/icons/arrow-down.svg") no-repeat right 7px center;
             padding-right: 25px;
             option {
                 padding: 10px;
@@ -531,7 +531,6 @@
                 .btn-row {
                     position: absolute;
                     left: 24px;
-                    right: 0;
                     bottom: 24px;
                     right: 24px;
                     margin: 0 -4px;
@@ -539,7 +538,7 @@
                     @include flexbox;
                     align-items: center;
                     justify-content: center;
-                    @media only screen and (max-width: 1439px) {
+                    @include media-breakpoint-down($md) {
                         left: 16px;
                         right: 16px;
                     }
@@ -548,7 +547,7 @@
                         width: 144px;
                         padding: 11px 5px;
                         img {
-                            @media only screen and (max-width: 1439px) {
+                            @include media-breakpoint-down($md) {
                                 display: none;
                             }
                         }
@@ -714,7 +713,9 @@
                             .dropdown {
                                 width: 90px;
                                 padding-left: 22px;
-                                background: url("../../../assets/img/icons/calendar.svg") no-repeat left top;
+                                mask-image: url("../../../assets/img/icons/calendar.svg");
+                                mask-repeat: no-repeat;
+                                mask-position: left top;
                                 min-height: 16px;
                                 .dropdown-toggle {
                                     margin-top: 2px;
@@ -743,9 +744,6 @@
                             border-top: 1px solid$gray-100;
                             padding-top: 10px !important;
                             justify-content: center;
-                            // @media only screen and (max-width: 1439px) {
-                            //     margin: 0 -16px !important;
-                            // }
                             li {
                                 width: auto;
                                 max-width: 90px;
@@ -754,7 +752,6 @@
                                 padding-left: 15px !important;
                                 margin: 0 15px;
                                 .title {
-                                    font-weight: 400;
                                     font-size: 11px;
                                     font-weight: normal;
                                     line-height: 1.09;
@@ -989,7 +986,11 @@
                                             line-height: 1.33;
                                             position: relative;
                                             padding-left: 20px;
-                                            background: url(/assets/img/icons/tips.svg) no-repeat left top;
+                                            background-color: $gray-500;
+                                            mask-position: center;
+                                            mask-repeat: no-repeat;
+                                            mask-size: contain;
+                                            mask-image: url(/assets/img/icons/info.svg);
                                         }
                                         p {
                                             margin: 0;
@@ -1036,13 +1037,13 @@
                                         background-color: $gray-25;
                                         padding: 6px 10px 6px 0;
                                         text-transform: uppercase;
-                                        @media only screen and (max-width: 1439px) {
+                                        @include media-breakpoint-down($md) {
                                             padding: 6px 7px 6px 0;
                                         }
                                         &:last-child {
                                             padding-right: 0;
                                             text-align: right;
-                                            @media only screen and (max-width: 1439px) {
+                                            @include media-breakpoint-down($md) {
                                                 padding-right: 0;
                                             }
                                         }
@@ -1055,14 +1056,14 @@
                                     color: $gray-600;
                                     padding: 12px 10px 12px 0;
                                     border-bottom: 1px solid$gray-100;
-                                    @media only screen and (max-width: 1439px) {
+                                    @include media-breakpoint-down($md) {
                                         padding: 12px 7px 12px 0;
                                     }
                                     &:last-child {
                                         padding-right: 0;
                                         text-align: right;
                                         font-weight: 600;
-                                        @media only screen and (max-width: 1439px) {
+                                        @include media-breakpoint-down($md) {
                                             padding-right: 0;
                                         }
                                     }
@@ -1109,7 +1110,7 @@
             @include box-shadow(0, 1px, 3px, 0 rgba(0, 0, 0, 0.05));
             background-color: $white;
             padding: 24px;
-            @media only screen and (max-width: 1439px) {
+            @include media-breakpoint-down($md) {
                 padding: 16px;
                 box-shadow: unset;
             }
@@ -1153,7 +1154,7 @@
                     color: $gray-600;
                     padding: 0 15px 0 0;
                     text-align: left;
-                    background: url(/assets/img/icons/down-arrow.svg) no-repeat right center $white;
+                    background: url(/assets/img/icons/arrow-down.svg) no-repeat right center $white;
                     background-size: 16px;
                     display: flex;
                 }
@@ -1197,7 +1198,7 @@
             justify-content: space-between;
             font-size: 10px;
             margin-bottom: 5px;
-            @media (min-width: 1361px) {
+            @include media-breakpoint-up($md) {
               font-size: 11px;
             }
 
@@ -1225,7 +1226,7 @@
                     color: $gray-600;
                     padding: 0 15px 0 0;
                     text-align: left;
-                    background: url(/assets/img/icons/down-arrow.svg) no-repeat right center $white;
+                    background: url(/assets/img/icons/arrow-down.svg) no-repeat right center $white;
                     background-size: 16px;
                     display: flex;
                 }
@@ -1377,7 +1378,7 @@
             top: 16px;
             font-size: 0;
             text-indent: -5000px;
-            background: url(/assets/img/icons/payment-history.svg) no-repeat center $white;
+            background: url(/assets/img/icons/updates.svg) no-repeat center $white;
         }
     }
     aside {
@@ -1689,7 +1690,7 @@
                                                     line-height: 1.54;
                                                     letter-spacing: normal;
                                                     height: auto;
-                                                    background: url("/assets/img/icons/down-arrow.svg") no-repeat right 15px
+                                                    background: url("/assets/img/icons/arrow-down.svg") no-repeat right 15px
                                                         center;
                                                     padding-right: 30px;
                                                     -webkit-appearance: none;
@@ -1865,7 +1866,7 @@ app-company-dash-tags {
             content: "";
             width: 20px;
             height: 20px;
-            background: url("./../../../assets/img/icons/tag.svg");
+            background: url("./../../../assets/img/icons/tags.svg");
         }
         input {
             margin: 0;

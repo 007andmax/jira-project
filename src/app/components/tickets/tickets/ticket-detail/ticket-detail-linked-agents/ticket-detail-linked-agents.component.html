@@ -11,7 +11,7 @@
             ngbDropdownToggle
             *ngIf="!customerPortalStateService.isCustomerPortal && ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
         >
-            <span class="icon__link-agent qt-sz-16 qt-bg-contain qt-dib qt-mr-4 qt-button-icon"></span>
+            <span class="qt-icon icon__links qt-sz-16 qt-dib qt-mr-4 qt-button-icon"></span>
             Link
         </div>
     </div>
@@ -29,11 +29,11 @@
             class="selected-user"
             *ngIf="selectedDevice"
         >
-            <i class="icon__monitor qt-sz-16 qt-bg-contain qt-mr-4"></i>
+            <i class="qt-icon icon__monitor qt-sz-16 qt-bg-contain qt-mr-4"></i>
             {{getLabelDevice(selectedDevice)}}
             <i
+                class="icn-sm qt-icon icon__close qt-icon__gray-400 qt-ml-4 pointer"
                 *ngIf="!customerPortalStateService.isCustomerPortal && ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
-                class="icn-sm icon__close--light-gray qt-ml-4 pointer"
                 (click)="removeItem()"
             ></i>
         </div>
@@ -67,7 +67,7 @@
                         ></div>
                         <i
                             *ngIf="isSeletedDevice(item)"
-                            class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
+                            class="icon__done qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
                         ></i>
                     </label>
                 </div>

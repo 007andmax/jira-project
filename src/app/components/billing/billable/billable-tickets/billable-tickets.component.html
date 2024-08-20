@@ -31,9 +31,11 @@
         <div class="qt-page-list__header-title-line">
             <div class="qt-page-list__header-title-line--left">
                 <div
-                    class="qt-page-list__back-button icon__collapse-arrow button-icon pointer"
+                    class="qt-page-list__back-button qt-df qt-ai-c qt-jc-c pointer"
                     (click)="back()"
-                ></div>
+                >
+                  <div class="qt-icon icon__arrow-left button-icon qt-sz-16"></div>
+                </div>
                 <h6
                     class="qt-page-list__header-title"
                     [textContent]="billableProfile.name"
@@ -50,13 +52,13 @@
                             class="qt-ml-20 qt-fw-500 qt-df qt-ai-c qt-color-info qt-ai-c qt-pointer"
                             (click)="deleteSelectedTickets()"
                         >
-                            <div class="icon__archive-blue qt-sz-16 qt-ic-c qt-mr-6"></div>
+                            <div class="qt-icon icon__delete qt-icon__red-600 qt-sz-16 qt-ic-c qt-mr-6"></div>
                             <div class="qt-lh-1">Delete</div>
                         </div>
                     </div>
                     <button
                         *ngIf="getPermissions('CREATE_INVOICE')"
-                        class="qt-button --gray --md"
+                        class="qt-button --gray --md qt-ml-8"
                         [disabled]="!isCurrentCompanyAddressEmpty"
                         (click)="onCreateInvoice()"
                     >
@@ -149,7 +151,7 @@
                                 *ngIf="item.lockedBy"
                             >
                                 <div
-                                    class="icon__locked qt-sz-16"
+                                    class="qt-icon icon__password qt-sz-16"
                                     placement="top"
                                     container="body"
                                     ngbTooltip="Is being used by other user"
@@ -177,7 +179,7 @@
                             <div class="billable-item-table__check">
                                 <div
                                     *ngIf="item.isOrder"
-                                    class="icon__remove qt-sz-20"
+                                    class="qt-icon icon__delete qt-sz-20"
                                     (click)="deleteTicket(item)"
                                     placement="top"
                                     ngbTooltip="Delete"

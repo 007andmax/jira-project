@@ -18,7 +18,7 @@
                     class="qt-button --md --gray qt-jc-c pointer qt-ml-12"
                     (click)="onCreate()"
                 >
-                    <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+                    <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8 qt-button-icon"></span>
                     Add Tag
                 </a>
             </div>
@@ -43,7 +43,7 @@
                         class="tab-pane-input__row company-info-block qt-ml-32 qt-mr-32 qt-mt-16"
                         [hidden]="loading"
                     >
-                        <div class="company-info-block__checkbox tickets-tab-header">
+                        <div class="company-info-block__checkbox">
                             <label class="qt-checkbox">
                                 <input
                                     type="checkbox"
@@ -127,7 +127,7 @@
                                                     <div
                                                         (mouseenter)="removeTooltip.show($event.target)"
                                                         (mouseleave)="removeTooltip.hide()"
-                                                        class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                                                        class="qt-icon icon__delete qt-sz-20 qt-bg-contain pointer"
                                                         (click)="ConfirmDelete(company.id,company.word)"
                                                     >
                                                     </div>
@@ -210,7 +210,7 @@
                         class="tab-pane-input__row company-info-block qt-ml-32 qt-mr-32 qt-mt-16"
                         [hidden]="loading"
                     >
-                        <div class="icon__company-info qt-sz-20 qt-ic-c qt-mr-8 qt-fs-0"></div>
+                        <div class="qt-icon icon__info qt-sz-20 qt-ic-c qt-mr-8 qt-fs-0"></div>
                         <span class="qt-f-1">
                             Tags can be used in tickets to identify specific issues, when quicktech matches tag words in a ticket
                         they will automaticly be added to the tags. Tags can be used to search tickets
@@ -287,7 +287,7 @@
                                             <div
                                                 (mouseenter)="removeTooltip.show($event.target)"
                                                 (mouseleave)="removeTooltip.hide()"
-                                                class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                                                class="qt-icon icon__delete qt-sz-20 qt-bg-contain pointer"
                                                 (click)="ConfirmDelete(ticket.id,ticket.word)"
                                             >
                                             </div>

@@ -9,7 +9,7 @@
     <div class="tab-pane__body">
         <div class="tab-pane__row">
             <div class="tab-pane-input__row company-info-block">
-                <div class="icon__company-info qt-sz-20 qt-ic-c qt-mr-8 qt-fs-0 qt-mt-2"></div>
+                <div class="qt-icon icon__info qt-sz-20 qt-ic-c qt-mr-8 qt-fs-0 qt-mt-2"></div>
                 <span class="qt-f-1">
                     You can specify a custom outgoing email service if you prefer to use your
         own, or you can use our quicktech email servers. If you select customer
@@ -149,8 +149,8 @@
                             >
                                 <div
                                     class="qt-sz-16 qt-bg-contain "
-                                    [ngClass]="{'icon__hide': showPassword,
-                    'icon__view': !showPassword}"
+                                    [ngClass]="{'qt-icon icon__hide': showPassword,
+                    'qt-icon icon__show': !showPassword}"
                                 ></div>
                             </div>
                         </div>
@@ -169,7 +169,7 @@
                         (onClick)="checkTestServer()"
                         [disabled]="!usedEmailVia.value"
                     >
-                        <span class="icon__button-server--gray-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+                        <span class="qt-icon icon__server qt-sz-16 qt-dib qt-mr-8 qt-button-icon"></span>
                         <span *ngIf="!testServerBtn.isBlock()">Test Server</span>
                         <app-preloader-ticket *ngIf="testServerBtn.isBlock()"></app-preloader-ticket>
                     </button>

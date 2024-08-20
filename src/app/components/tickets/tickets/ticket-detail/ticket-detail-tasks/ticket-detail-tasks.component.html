@@ -5,7 +5,7 @@
         (click)="showAdd = true"
         *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
     >
-        <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-4 qt-button-icon"></span>
+        <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-4 qt-button-icon"></span>
         Add Task
     </div>
 </div>
@@ -33,14 +33,14 @@
             ></app-dynamic-tooltip>
             <i
                 [hidden]="addTask.status != 'INCOMPLETED'"
-                class="icon__active icn-20"
+                class="qt-icon icon__check icn-20"
                 (click)="setStatus(addTask,'COMPLETED')"
                 (mouseenter)="complete.show($event.target)"
                 (mouseleave)="complete.hide()"
             ></i>
             <i
                 [hidden]="addTask.status != 'COMPLETED'"
-                class="icon__task-pending icn-20"
+                class="qt-icon icon__check qt-icon__green-600 icn-20"
                 (click)="setStatus(addTask,'INCOMPLETED')"
                 (mouseenter)="incomplete.show($event.target)"
                 (mouseleave)="incomplete.hide()"
@@ -103,7 +103,7 @@
             <i
                 *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
                 [hidden]="item.status != 'INCOMPLETED'"
-                class="icon__active icn-20"
+                class="qt-icon icon__check icn-20"
                 (click)="setStatus(item,'COMPLETED');onEditTicketTask(item)"
                 (mouseenter)="complete.show($event.target)"
                 (mouseleave)="complete.hide()"
@@ -111,7 +111,7 @@
             <i
                 *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
                 [hidden]="item.status != 'COMPLETED'"
-                class="icon__task-pending icn-20"
+                class="qt-icon icon__check qt-icon__green-600 icn-20"
                 (click)="setStatus(item,'INCOMPLETED');onEditTicketTask(item)"
                 (mouseenter)="incomplete.show($event.target)"
                 (mouseleave)="incomplete.hide()"
@@ -163,8 +163,8 @@
                 #dateTooltip
             ></app-dynamic-tooltip>
             <div
+                class="ticket-updates__delete qt-icon icon__delete"
                 *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
-                class="ticket-updates__delete icon__remove"
                 (click)="remove(item)"
                 (mouseenter)="dateTooltip.show($event.target)"
                 (mouseleave)="dateTooltip.hide()"

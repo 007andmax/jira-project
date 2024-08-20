@@ -1,4 +1,5 @@
 @import './src/assets/styles/variable';
+@import "./src/assets/styles/mixin/breakpoint";
 
 .company-devices-page {
 
@@ -277,7 +278,7 @@
     height: calc(100vh - #{$header-height});
     z-index: 10;
     box-shadow: -8px 0 8px 0 rgba(0, 0, 0, 0.05);
-    @media screen and (min-width: 1920px) {
+    @include media-breakpoint-up($lg) {
       width: 591px;
     }
   }
@@ -368,9 +369,13 @@
         }
       }
       &.subheader-item-updates {
-        background-image: url(/assets/img/icons/updates-gray.svg);
+        mask-image: url(/assets/img/icons/update.svg);
+        background-color: $gray-500;
+        mask-position: center;
+        mask-repeat: no-repeat;
+        mask-size: contain;
         &.--active {
-          background-image: url(/assets/img/icons/updates.svg);
+          background-color: $blue-light-600;
         }
       }
       &.--active {
@@ -385,13 +390,13 @@
       .company-device-aside__expand-collapse {
         background-size: 16px;
         cursor: pointer;
-        background-image: url(/assets/img/icons/collapse.svg);
+        background-image: url(/assets/img/icons/minus.svg);
       }
       &.--collapsed {
         max-height: 13px;
         overflow-y: hidden;
         .company-device-aside__expand-collapse {
-          background-image: url(/assets/img/icons/expand.svg);
+          background-image: url(/assets/img/icons/add-grey.svg);
         }
       }
 
@@ -523,13 +528,12 @@
       justify-content: space-between;
     }
     &__item {
-      padding: 16px;
       width: 136px;
       height: 120px;
       padding: 16px;
       border-radius: 8px;
       background-color: $gray-25;
-      @media (max-width: 1920px) {
+      @include media-breakpoint-down($lg) {
         width: 175px;
       }
     }
@@ -618,7 +622,7 @@ app-company-devices-custom-drop-down {
         content: "";
         width: 20px;
         height: 20px;
-        background: url("./assets/img/icons/tag.svg");
+        background: url("./assets/img/icons/tags.svg");
       }
 }
   .mat-form-field-label {

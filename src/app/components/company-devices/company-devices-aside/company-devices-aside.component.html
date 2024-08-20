@@ -36,15 +36,15 @@
         <div class="company-device-aside__header qt-df qt-ai-c qt-jc-sb">
             <div class="qt-df qt-ai-c">
                 <div
-                    class="icon qt-sz-24 qt-mr-12 qt-bg-contain"
-                    [ngClass]="{'icon__computer' : getFieldForCheckIcon() === 'workstation' || !getFieldForCheckIcon(),
+                    class="icon qt-sz-24 qt-mr-12 qt-icon"
+                    [ngClass]="{'qt-icon icon__devices' : getFieldForCheckIcon() === 'workstation' || !getFieldForCheckIcon(),
                'icon__router' : getFieldForCheckIcon() === 'router',
-            'icon__printer' : getFieldForCheckIcon() === 'printer',
-                'icon__switch' : getFieldForCheckIcon() === 'switch',
+            'icon__print' : getFieldForCheckIcon() === 'printer',
+                'qt-icon icon__network-switch' : getFieldForCheckIcon() === 'switch',
           'icon__server' : getFieldForCheckIcon() === 'server',
             'icon__tablet' : getFieldForCheckIcon() === 'tablet',
             'icon__network_device' : getFieldForCheckIcon() === 'network device',
-            'icon__phone' : getFieldForCheckIcon() === 'phone',
+            'icon__old-phone' : getFieldForCheckIcon() === 'phone',
              'icon__generic_device' : getFieldForCheckIcon() === 'generic device',
         '--offline': currentDevice && !currentDevice.online,
     '--online':currentDevice &&currentDevice.online }"
@@ -62,9 +62,11 @@
                     class="qt-overflow-v"
                 >
                     <div
-                        class="qt-sz-24 qt-mr-8 qt-pointer company-device-aside__more-icon icon__more"
+                        class="qt-sz-24 qt-mr-8 qt-pointer company-device-aside__more-icon qt-df qt-ai-c qt-jc-c"
                         ngbDropdownToggle
-                    ></div>
+                    >
+                      <div class="qt-icon icon__more qt-sz-18"></div>
+                    </div>
                     <ul
                         class="qt-dropdown-menu --open-bot qt-overflow-v"
                         ngbDropdownMenu
@@ -75,7 +77,7 @@
                             (click)="gotiDetailDevice()"
                             *ngIf="currentDevice && !customerPortalStateService.isCustomerPortal"
                         >
-                            <div class="qt-ic-c icon__go-to qt-pointer qt-sz-20 qt-mr-12"></div>
+                            <div class="qt-ic-c qt-icon icon__external-link qt-pointer qt-sz-20 qt-mr-12"></div>
                             Device Detail
                         </li>
                         <li
@@ -84,7 +86,7 @@
                             *ngIf="currentDevice && currentDevice.type !== 'workstation' && currentDevice.online && (getPermissions('REMOTE_CONNECTIONS') || customerPortalStateService.checkRemoteAccess(usersStateService.getCurrentUser()))"
                             (click)="remoteAccess('PROXY')"
                         >
-                            <div class="qt-ic-c icon__quick-connect qt-pointer qt-sz-20 qt-mr-12"></div>
+                            <div class="qt-ic-c qt-icon icon__remote-access qt-pointer qt-sz-20 qt-mr-12"></div>
                             Remote Access
                         </li>
                         <li
@@ -92,7 +94,7 @@
                             *ngIf="currentDevice && currentDevice.type === 'workstation' && currentDevice.online && (getPermissions('REMOTE_CONNECTIONS') || customerPortalStateService.checkRemoteAccess(usersStateService.getCurrentUser()))"
                             (click)="showRemoteAccess = !showRemoteAccess "
                         >
-                            <div class="qt-ic-c icon__quick-connect qt-pointer qt-sz-20 qt-mr-12"></div>
+                            <div class="qt-ic-c qt-icon icon__remote-access qt-pointer qt-sz-20 qt-mr-12"></div>
                             Remote Access
                             <ul
                                 class="dropdown-menu-qt__submenu dropdown-menu"
@@ -118,7 +120,7 @@
                             ngbDropdownItem
                             *ngIf="currentDevice && !customerPortalStateService.isCustomerPortal"
                         >
-                            <div class="icon__reset qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                            <div class="qt-icon icon__reset qt-bg-contain qt-sz-20 qt-mr-12"></div>
                             Restart
                         </li>
                         <li
@@ -127,7 +129,7 @@
                             ngbDropdownItem
                             *ngIf="currentDevice && !customerPortalStateService.isCustomerPortal"
                         >
-                            <div class="icon__shutdown qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                            <div class="qt-icon icon__shutdown qt-bg-contain qt-sz-20 qt-mr-12"></div>
                             Shutdown
                         </li>
                         <li
@@ -136,7 +138,7 @@
                             *ngIf="currentDevice && !currentDevice.master && !customerPortalStateService.isCustomerPortal"
                             ngbDropdownItem
                         >
-                            <div class="icon__master-agent qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                            <div class="qt-icon icon__agent qt-sz-20 qt-mr-12"></div>
                             Set as Master Agent
                         </li>
                         <li
@@ -144,20 +146,22 @@
                             (click)="removeCurrentDevice()"
                             *ngIf="!customerPortalStateService.isCustomerPortal"
                         >
-                            <div class="icon__remove pointer qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                            <div class="qt-icon icon__delete pointer qt-bg-contain qt-sz-20 qt-mr-12"></div>
                             Remove
                         </li>
                     </ul>
                 </div>
                 <div
-                    class="qt-sz-24 qt-pointer company-device-aside__close-icon icon__close"
+                    class="qt-sz-24 qt-pointer company-device-aside__close-icon qt-icon icon__close"
                     *ngIf="devices.length > 1"
                     (click)="removeDevice()"
                 ></div>
                 <div
-                    class="qt-pointer company-device-aside__arrow-right-icon icon__arrow-right"
+                    class="qt-pointer company-device-aside__arrow-right-icon qt-df qt-ai-c qt-jc-c"
                     (click)="close()"
-                ></div>
+                >
+                  <div class="qt-icon icon__arrow-right qt-sz-24"></div>
+                </div>
             </div>
         </div>
         <div class="company-device-aside__subheader">
@@ -179,10 +183,12 @@
             ></div>
             <div
                 *ngIf="currentDevice"
-                class="company-device-aside__subheader-item subheader-item-updates"
+                class="company-device-aside__subheader-item qt-df qt-ai-c qt-jc-c"
                 [ngClass]="{'--active':tab === 'UPDATES'}"
                 (click)="tab = 'UPDATES'"
-            ></div>
+            >
+              <div class="qt-icon icon__update qt-sz-16"></div>
+            </div>
         </div>
         <div class="company-device-aside__body">
             <app-company-devices-aside-system
