@@ -141,8 +141,8 @@ import { SuperAdminPublicListComponent } from './components/super-admin-public/s
 import { SuperAdminPublicListModule } from './components/super-admin-public/super-admin-public-list/super-admin-public-list.module';
 import { ProductTypeCheckUseComponent } from './components/setting/products-settings/product-type-check-use/product-type-check-use.component';
 import { ProductTypeCheckUseModule } from './components/setting/products-settings/product-type-check-use/product-type-check-use.module';
-import { FileManagementComponent } from './components/file-management/file-management.component';
-import { FileManagementAddFileModule } from './components/file-management/file-management-add-file/file-management-add-file.module';
+import { FileManagerComponent } from './components/file-manager/file-manager.component';
+import { FileManagementAddFileModule } from './components/file-manager/file-manager-add-file/file-manager-add-file.module';
 import { PreviewFileComponent } from './components/shared/preview-file/preview-file.component';
 declare var $: any;
 

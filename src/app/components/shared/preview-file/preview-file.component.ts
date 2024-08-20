@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { PreviewFileStateService } from 'src/app/states/file-management/preview-file-state.service';
-import { FileManagementFile } from '../../file-management/class/file-management-file';
+import { FileManagerFile } from '../../file-manager/class/file-manager-file';
 
 @Component({
   selector: 'app-preview-file',
@@ -9,7 +9,7 @@ import { FileManagementFile } from '../../file-management/class/file-management-
   styleUrls: ['./preview-file.component.scss']
 })
 export class PreviewFileComponent implements OnInit {
-  file: FileManagementFile;
+  file: FileManagerFile;
   show: boolean = false;
   sub: Subscription = new Subscription();
   constructor(public previewFileStateService: PreviewFileStateService,

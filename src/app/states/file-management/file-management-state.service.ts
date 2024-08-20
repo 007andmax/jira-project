@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { FileManagementCategory } from 'src/app/components/file-management/class/file-management-category';
-import { FileManagementFile } from 'src/app/components/file-management/class/file-management-file';
+import { FileManagerCategory } from 'src/app/components/file-manager/class/file-manager-category';
+import { FileManagerFile } from 'src/app/components/file-manager/class/file-manager-file';
 import { ManageTag } from 'src/app/components/setting/manage-tags/class/manage-tag';
 import { FileManagementService } from 'src/app/services/file-management/file-management.service';
 import { Tag } from 'src/app/interfaces/tag/tag';
@@ -18,8 +18,8 @@ export class FileManagementStateService {
   onRemoveCategory: EventEmitter<any> = new EventEmitter();
   onAddCategory: EventEmitter<any> = new EventEmitter();
   onShowAsideForAdd: EventEmitter<any> = new EventEmitter();
-  categoryForRemove: FileManagementCategory;
-  categoryForFile: FileManagementFile;
+  categoryForRemove: FileManagerCategory;
+  categoryForFile: FileManagerFile;
   constructor(private fileManagementService: FileManagementService) { }
 
   public getTags() {

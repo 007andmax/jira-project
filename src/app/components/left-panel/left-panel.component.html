@@ -112,8 +112,8 @@
         <div
             *ngIf="getAccessReports()"
             class="app-left-panel__menu-icon-wrap pointer"
-            (click)="changePage('FILE_MANAGEMENT');onChangeState('file-management')"
-            [ngClass]="{'--active':page === 'FILE_MANAGEMENT' }"
+            (click)="changePage('FILE_MANAGER');onChangeState('file-manager')"
+            [ngClass]="{'--active':page === 'FILE_MANAGER' }"
             placement="right"
             ngbTooltip="File Manager"
         >
@@ -176,13 +176,13 @@
             [activePage]="state"
             [hidden]="page !== 'COMPANIES'"
         ></app-left-panel-companies>
-        <app-left-panel-file-management
+        <app-left-panel-file-manager
             #filesCompanies
             (onOpenPanel)="onOpenPanel()"
             (onChangeState)="onChangeState($event)"
             [activePage]="state"
-            [hidden]="page !== 'FILE_MANAGEMENT'"
-        ></app-left-panel-file-management>
+            [hidden]="page !== 'FILE_MANAGER'"
+        ></app-left-panel-file-manager>
         <app-left-panel-billing
             #panelBilling
             (onOpenPanel)="onOpenPanel()"

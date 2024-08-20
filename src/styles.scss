@@ -414,7 +414,7 @@ html {
 app-company-tags,
 app-company-devices-tags,
 company-associate,
-app-file-management-add-file-tags {
+app-file-manager-add-file-tags {
   .dropdown-toggle .mat-form-field-wrapper .mat-form-field-infix {
     input {
       top: 0;
@@ -511,7 +511,7 @@ documents-edit-info {
   documents-linked,
   app-draft-email-recipients,
   draft-email-user-recipients,
-  app-file-management-add-file-tags {
+  app-file-manager-add-file-tags {
     > .qt-temporary-col-fix { // TODO change this temporary class (this class create for remove bootstrap col class)
       margin-top: 12px;
       .mat-form-field {
