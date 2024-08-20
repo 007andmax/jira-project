@@ -42,8 +42,9 @@ export class FileManagerAllCustomerCompanyComponent extends FileManagerCategoryC
       let isExist = this.files.some(item => item.id == data.id);
       if (!isExist) {
         this.files.push(new FileManagerFile(data));
-        if (!this.groupedByCreateAt[data.createdAt]) this.groupedByCreateAt[data.createdAt] = [];
-        this.groupedByCreateAt[data.createdAt].push(new FileManagerFile(data));
+        let date = moment(new Date(data.createdAt)).format('DD MMM YYYY');
+        if (!this.groupedByCreateAt[date]) this.groupedByCreateAt[date] = [];
+        this.groupedByCreateAt[date].push(new FileManagerFile(data));
       }
     })
     this.sub.add(onAddFile);
@@ -70,8 +71,9 @@ export class FileManagerAllCustomerCompanyComponent extends FileManagerCategoryC
       let findIndex = this.files.findIndex(item => item.id === data.id);
       if (findIndex > -1) {
         this.files[findIndex] = new FileManagerFile(data);
-        let indexGroup = this.groupedByCreateAt[data.createdAt].findIndex(item => item.id === data.id);
-        if (indexGroup > -1) this.groupedByCreateAt[data.createdAt][indexGroup] = new FileManagerFile(data);
+        let date = moment(new Date(data.createdAt)).format('DD MMM YYYY');
+        let indexGroup = this.groupedByCreateAt[date].findIndex(item => item.id === data.id);
+        if (indexGroup > -1) this.groupedByCreateAt[date][indexGroup] = new FileManagerFile(data);
       }
     })
     this.sub.add(onEditFile);
@@ -89,8 +91,9 @@ export class FileManagerAllCustomerCompanyComponent extends FileManagerCategoryC
         let isExist = this.files.some(item => item.id == data.data.id);
         if (!isExist) {
           this.files.push(new FileManagerFile(data.data));
-          if (!this.groupedByCreateAt[data.data.createdAt]) this.groupedByCreateAt[data.data.createdAt] = [];
-          this.groupedByCreateAt[data.data.createdAt].push(new FileManagerFile(data.data));
+          let date = moment(new Date(data.data.createdAt)).format('DD MMM YYYY');
+          if (!this.groupedByCreateAt[date]) this.groupedByCreateAt[date] = [];
+          this.groupedByCreateAt[date].push(new FileManagerFile(data.data));
         }
       }
       if (data.action === "EDIT_FILE_MANAGEMENT_CATEGORY") {
@@ -101,8 +104,9 @@ export class FileManagerAllCustomerCompanyComponent extends FileManagerCategoryC
         let findIndex = this.files.findIndex(item => item.id === data.data.id);
         if (findIndex > -1) {
           this.files[findIndex] = new FileManagerFile(data.data);
-          let indexGroup = this.groupedByCreateAt[data.data.createdAt].findIndex(item => item.id === data.data.id);
-          if (indexGroup > -1) this.groupedByCreateAt[data.data.createdAt][indexGroup] = new FileManagerFile(data.data);
+          let date = moment(new Date(data.data.createdAt)).format('DD MMM YYYY');
+          let indexGroup = this.groupedByCreateAt[date].findIndex(item => item.id === data.data.id);
+          if (indexGroup > -1) this.groupedByCreateAt[date][indexGroup] = new FileManagerFile(data.data);
         }
       }
       if (data.action === "DELETE_FILE_MANAGEMENT_CATEGORY") {
