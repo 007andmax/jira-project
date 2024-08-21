@@ -88,6 +88,12 @@
             >
                 HTML
             </span>
+            <span
+                class="qt-fs-14 qt-color-gray-900"
+                *ngIf="isImage()"
+            >
+                Image
+            </span>
         </div>
         <div class="file-info-field qt-df qt-ai-c qt-mb-16">
             <span class="file-info-field-header qt-fs-12 qt-color-gray-500">Created on</span>
@@ -135,7 +141,7 @@
                 [default]="2"
                 cols="2"
                 rows="1"
-                (blur)="onChange()"
+                (blur)="onChangeDescription()"
                 [ngModelOptions]="{standalone: true}"
             ></textarea>
         </div>

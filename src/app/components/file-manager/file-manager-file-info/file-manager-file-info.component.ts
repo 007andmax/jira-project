@@ -102,6 +102,11 @@ export class FileManagerFileInfoComponent implements OnInit, OnDestroy {
       })
     }
   }
+  onChangeDescription() {
+    this.fileManagementService.editFile(this.file.id, this.file.getDataForUpate()).subscribe(res => {
+      this.fileManagementStateService.editFile(res);
+    })
+  }
   onChange() {
     this.submitted = true;
     if (this.modelForm.invalid) {
