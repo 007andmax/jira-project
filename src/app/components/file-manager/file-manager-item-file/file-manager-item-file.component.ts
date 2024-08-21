@@ -59,7 +59,7 @@ export class FileManagerItemFileComponent implements OnInit {
         });
     } else {
       const xhr = new XMLHttpRequest();
-      xhr.open('GET', `/file/${this.item.mediaFileId}`, true);
+      xhr.open('GET', this.item.url, true);
       xhr.responseType = 'blob';
 
       xhr.onload = () => {
