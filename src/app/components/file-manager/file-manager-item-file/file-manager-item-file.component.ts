@@ -61,7 +61,7 @@ export class FileManagerItemFileComponent implements OnInit {
       const xhr = new XMLHttpRequest();
       xhr.open('GET', `/file/${this.item.mediaFileId}`, true);
       xhr.responseType = 'blob';
-
+      xhr.setRequestHeader('Content-Type', 'application/pdf')
       xhr.onload = () => {
         if (xhr.status === 200) {
           const blob = xhr.response;
