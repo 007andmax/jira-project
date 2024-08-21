@@ -110,7 +110,7 @@
             <div class="app-left-panel__menu-icon --reports"></div>
         </div>
         <div
-            *ngIf="getAccessReports()"
+            *ngIf="currentCompany && (currentCompany.id === '73221c72-f87c-4519-8235-c4b57ad1cc19' || currentCompany.id === '72381bff-127c-4a63-9d2e-6e952350dcbd')"
             class="app-left-panel__menu-icon-wrap pointer"
             (click)="changePage('FILE_MANAGER');onChangeState('file-manager')"
             [ngClass]="{'--active':page === 'FILE_MANAGER' }"
