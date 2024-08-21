@@ -1,12 +1,5 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FileManagerCategoryComponent } from '../file-manager-category/file-manager-category.component';
-import { ActivatedRoute } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FileManagementService } from 'src/app/services/file-management/file-management.service';
-import { FileManagementRealTimeService } from 'src/app/states/file-management/file-management-real-time.service';
-import { FileManagementStateService } from 'src/app/states/file-management/file-management-state.service';
-import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
-import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { BreadcrumbsItem } from '../class/breadcrumbs-item';
 import { FileManagerCategory } from '../class/file-manager-category';
 import { FileManagerFile } from '../class/file-manager-file';
@@ -147,7 +140,6 @@ export class FileManagerAllCustomerCompanyComponent extends FileManagerCategoryC
         }
         this.groupedByCreateAt[date].push(person);
       });
-      console.log("Object.keys(this.groupedByCreateAt).sort().reverse()", Object.keys(this.groupedByCreateAt).sort().reverse());
       this.groupedByCreateAt = Object.keys(this.groupedByCreateAt).sort((a, b) => (new Date(a) > new Date(b)) ?
         1 : ((new Date(b) > new Date(a)) ? -1 : 0)).reverse().reduce(
           (obj, key) => {
@@ -156,7 +148,6 @@ export class FileManagerAllCustomerCompanyComponent extends FileManagerCategoryC
           },
           {}
         );
-      console.log("FileManagerAllCustomerCompanyComponent", this.breadcrumbs);
       this.showPreloader = false;
     })
   }

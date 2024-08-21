@@ -20,7 +20,6 @@ export class ManageTagsAddComponent implements OnInit {
   constructor(private tagsService: TagsService,) { }
 
   ngOnInit() {
-    console.log("this.list", this.list);
   }
   save() {
     if (this.name.length === 0 || this.isInitRequest) return;

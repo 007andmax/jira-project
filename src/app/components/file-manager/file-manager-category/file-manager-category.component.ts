@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FileManagerCategory } from '../class/file-manager-category';
 import { FileManagerFile } from '../class/file-manager-file';
 import { FileManagementService } from 'src/app/services/file-management/file-management.service';
@@ -189,7 +189,6 @@ export class FileManagerCategoryComponent implements OnInit, OnDestroy {
         }
         this.groupedByCreateAt[date].push(person);
       });
-      console.log("Object.keys(this.groupedByCreateAt).sort().reverse()", Object.keys(this.groupedByCreateAt).sort().reverse());
       this.groupedByCreateAt = Object.keys(this.groupedByCreateAt).sort((a, b) => (new Date(a) > new Date(b)) ?
         1 : ((new Date(b) > new Date(a)) ? -1 : 0)).reverse().reduce(
           (obj, key) => {

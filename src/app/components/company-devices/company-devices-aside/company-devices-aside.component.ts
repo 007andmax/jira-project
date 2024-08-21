@@ -49,9 +49,7 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
   ngOnInit() {
     let getOnOpenAside = this.devicesStateService.getOnOpenAside().subscribe((data: DeviceCompanyAsideParams) => {
       if (this.open) {
-        console.log("data", data);
         let find = data.devices[0].isCustom ? this.devicesCompany.find(item => item.deviceId === data.devices[0].deviceId) : this.devices.find(item => item.agentId === data.devices[0].agentId);
-        console.log("find", find);
         if (find) {
           if (!find.isCustom) {
             this.currentDevice = new DeviceExtended(find, this.companyId);
@@ -59,9 +57,7 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
           } else {
             this.customDevice = new DeviceCompany(find, this.companyId);
             this.currentDevice = null;
-
           }
-
           return;
         }
       }
@@ -74,7 +70,6 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
         } else {
           this.customDevice = this.customDevices[this.customDevices.length - 1];
         }
-        console.log("this.customDevice", this.customDevice);
         this.tab = data.type;
         this.showPreloader = false;
       }

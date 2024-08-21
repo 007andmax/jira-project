@@ -30,7 +30,6 @@ export class FileManagementService {
     if (companyArchived != null) data["companyArchived"] = companyArchived;
     if (companyId) data["companyId"] = companyId;
     let getParams = new URLSearchParams(data).toString();
-    console.log("getParams", getParams);
     return this.http.get(`${this.apiUrl}file-management?${getParams}`)
   }
   public removeFile(fileId) {

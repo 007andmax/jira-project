@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CompanyTagsListService } from 'src/app/components/companies/company-tags/services/company-tags-list.service';
 import { TicketDetailEditTagsComponent } from 'src/app/components/tickets/tickets/ticket-detail/ticket-detail-edit-tags/ticket-detail-edit-tags.component';
 import { TicketsPermissionsService } from 'src/app/components/tickets/tickets/ticket-edit-aside/services/tickets-permissions.service';
-import { Tag } from 'src/app/interfaces/tag/tag';
+
 @Component({
   selector: 'app-file-manager-file-info-tags',
   templateUrl: './file-manager-file-info-tags.component.html',

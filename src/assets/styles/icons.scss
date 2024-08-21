@@ -158,6 +158,24 @@
   &__folder-type {
     background-image: url("/assets/img/icons/folder-type.svg");
   }
+  &__file-type-csv {
+    background-image: url("/assets/img/icons/file-type-csv.svg");
+  }
+  &__file-type-doc {
+    background-image: url("/assets/img/icons/file-type-doc.svg");
+  }
+  &__file-type-html {
+    background-image: url("/assets/img/icons/file-type-html.svg");
+  }
+  &__file-type-odt {
+    background-image: url("/assets/img/icons/file-type-odt.svg");
+  }
+  &__file-type-txt {
+    background-image: url("/assets/img/icons/file-type-txt.svg");
+  }
+  &__file-type-pdf {
+    background-image: url("/assets/img/icons/file-type-pdf.svg");
+  }
   // END Color Icon
   &__warning {
     mask-image: url("/assets/img/icons/warning.svg");

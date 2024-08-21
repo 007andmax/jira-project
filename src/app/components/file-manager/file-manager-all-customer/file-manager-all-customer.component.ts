@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FileManagerComponent } from '../file-manager.component';
 import { REMOVE_CATEGORY_FILES, REMOVE_FILE } from 'src/app/const/confirm';
 import { FileManagerCategory } from '../class/file-manager-category';
@@ -120,8 +120,6 @@ export class FileManagerAllCustomerComponent extends FileManagerComponent {
     this.fileManagementService.getFileManagement(null, true, this.companyArchived).subscribe((data: any) => {
       this.categories = data.categories.map(item => new FileManagerCategory(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-
-      console.log("groupedByCreateAt", this.groupedByCreateAt);
       this.showPreloader = false;
     })
   }

@@ -4,7 +4,10 @@
 >
     <div class="preview-attachment__inner">
         <div class="preview-attachment-img-container">
-            <img class="preview-attachment-img" [src]="file.url">
+            <img
+                class="preview-attachment-img"
+                [src]="file.url"
+            >
         </div>
         <div class="file-actions-container">
             <div class="qt-df qt-ai-c">
@@ -22,7 +25,7 @@
                         class="qt-button --md --gray qt-jc-c pointer qt-ml-12 qt-fs-0"
                         (click)="download()"
                     >
-                        <span class="icon__export-dark qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+                        <span class="qt-icon icon__download qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
                         Download
                     </a>
                 </div>

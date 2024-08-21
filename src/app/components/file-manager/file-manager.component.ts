@@ -3,14 +3,13 @@ import { FileManagementService } from 'src/app/services/file-management/file-man
 import { FileManagerCategory } from './class/file-manager-category';
 import { FileManagerFile } from './class/file-manager-file';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { REMOVE_CATEGORY_DOCUMENT, REMOVE_CATEGORY_FILES, REMOVE_FILE } from 'src/app/const/confirm';
+import { REMOVE_CATEGORY_FILES, REMOVE_FILE } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
 import { FileManagementStateService } from 'src/app/states/file-management/file-management-state.service';
 import { Subscription } from 'rxjs';
 import { FileManagementRealTimeService } from 'src/app/states/file-management/file-management-real-time.service';
 import * as moment from "moment";
-import { BreadcrumbsItem } from './class/breadcrumbs-item';
 import { fadeInAnimation } from 'src/app/animations';
 import { FileManagerFileInfoComponent } from './file-manager-file-info/file-manager-file-info.component';
 
@@ -54,8 +53,6 @@ export class FileManagerComponent implements OnInit, OnDestroy {
         if (!this.groupedByCreateAt[date]) this.groupedByCreateAt[date] = [];
         this.groupedByCreateAt[date].push(person);
       });
-      console.log("Object.keys(this.groupedByCreateAt).sort().reverse()", Object.keys(this.groupedByCreateAt).sort((a, b) => (new Date(a) > new Date(b)) ?
-        1 : ((new Date(b) > new Date(a)) ? -1 : 0)).reverse());
       this.groupedByCreateAt = Object.keys(this.groupedByCreateAt).sort((a, b) => (new Date(a) > new Date(b)) ?
         1 : ((new Date(b) > new Date(a)) ? -1 : 0)).reverse().reduce(
           (obj, key) => {
@@ -64,14 +61,12 @@ export class FileManagerComponent implements OnInit, OnDestroy {
           },
           {}
         );
-      console.log("groupedByCreateAt", this.groupedByCreateAt);
       this.showPreloader = false;
     })
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_CATEGORY_FILES) this.removeCategory(this.fileManagementStateService.getCategoryForRemove());
         if (this.confirmStateService.getConfirmAction() === REMOVE_FILE) this.removeFile(this.fileManagementStateService.getFileForRemove());
-
       }
     })
     this.sub.add(getConfirm);
@@ -209,9 +204,6 @@ export class FileManagerComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to delete this category?`;
     this.fileManagementStateService.setCategoryForRemove(data);
-  }
-  goToCategory(data) {
-    console.log("data", data);
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

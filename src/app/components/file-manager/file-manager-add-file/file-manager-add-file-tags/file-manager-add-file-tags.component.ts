@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CompanyTag } from 'src/app/components/companies/company-tags/class/company-tag';
 import { CompanyTagsComponent } from 'src/app/components/companies/company-tags/company-tags.component';
 import { CompanyTagsListService } from 'src/app/components/companies/company-tags/services/company-tags-list.service';

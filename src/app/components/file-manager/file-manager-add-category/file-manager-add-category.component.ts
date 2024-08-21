@@ -1,9 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { map } from 'rxjs/operators';
 import { FileManagementService } from 'src/app/services/file-management/file-management.service';
-import { TaxesService } from 'src/app/services/taxes/taxes.service';
-import { FileManagerCategory } from '../class/file-manager-category';
 import { FileManagementStateService } from 'src/app/states/file-management/file-management-state.service';
 
 @Component({

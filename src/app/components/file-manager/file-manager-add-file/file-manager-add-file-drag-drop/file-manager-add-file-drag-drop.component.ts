@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { UploadAreaComponent } from 'src/app/components/shared/upload-area/upload-area.component';
 
 @Component({
@@ -11,19 +11,16 @@ export class FileManagementAddFileDragDropComponent extends UploadAreaComponent 
   @Output() isUploadingFile = new EventEmitter<any>();
   @Output() onRemoveFile = new EventEmitter<any>();
   onFileDropped($event) {
-    console.log("onFileDropped", this.idfiles.length);
     this.prepareFilesList($event);
     this.cd.detectChanges();
   }
 
   prepareFilesList(files: Array<any>) {
-    console.log("files", files.length);
     if (this.idfiles.length > 0) this.onRemoveFile.emit(this.idfiles[0]);
     this.files = [];
     this.idfiles = [];
     files[files.length - 1].progress = 0;
     this.files = [files[files.length - 1]]
-    console.log("this.files", this.files);
     this.uploadFilesSimulator(0);
   }
   uploadFilesSimulator(index: number) {
@@ -40,15 +37,11 @@ export class FileManagementAddFileDragDropComponent extends UploadAreaComponent 
       this.elRef.nativeElement.querySelector('.qt-fileupload').classList.add('fileupload');
       this.isUploadingFile.emit(true);
       this.isUploading = true;
-      console.log("this.files[index]", this.files[index]);
       const reader = new FileReader();
-
       reader.onload = () => {
         this.files[index].src = reader.result;
       };
-
       reader.readAsDataURL(this.files[index]);
-
       this.uploadFile(this.files[index]).then((data: any) => {
         let res = JSON.parse(data.response);
         this.idfiles.push(res.id);
@@ -64,9 +57,7 @@ export class FileManagementAddFileDragDropComponent extends UploadAreaComponent 
         this.uploadFilesSimulator(index + 1);
         this.isUploadingFile.emit(false);
       });
-
     }
-
   }
   uploadFile(file) {
     return new Promise((resolve, reject) => {

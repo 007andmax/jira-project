@@ -102,12 +102,10 @@ export class UploadAreaComponent implements OnInit {
    * @param files (Files List)
    */
   prepareFilesList(files: Array<any>) {
-    console.log("files", files.length);
     for (const item of files) {
       item.progress = 0;
       this.files.push(item);
     }
-    console.log("this.files", this.files);
     this.uploadFilesSimulator((this.idfiles.length == 0) ? 0 : this.idfiles.length);
   }
 

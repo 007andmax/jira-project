@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FileManagerCategory } from '../class/file-manager-category';
 import { FileManagerFile } from '../class/file-manager-file';
-import { TicketsPermissionsService } from '../../tickets/tickets/ticket-edit-aside/services/tickets-permissions.service';
 import { FileManagementService } from 'src/app/services/file-management/file-management.service';
 import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 import { Subscription } from 'rxjs';
@@ -34,7 +33,6 @@ export class FileManagerFileInfoComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    console.log("this.file", this.file);
     if (this.file) this.selectedTags = JSON.parse(JSON.stringify(this.file.tags));
     this.modelForm = this.formBuilder.group({
       name: [
@@ -93,7 +91,6 @@ export class FileManagerFileInfoComponent implements OnInit, OnDestroy {
     return this.file && (this.file.contentType === "image/jpg" || this.file.contentType === "image/png" || this.file.contentType === "image/jpeg");
   }
   onChangeTags(data) {
-    console.log("data", data);
     this.file.setTags(data);
     this.selectedTags = data;
     if (this.file) {
@@ -110,12 +107,9 @@ export class FileManagerFileInfoComponent implements OnInit, OnDestroy {
   onChange() {
     this.submitted = true;
     if (this.modelForm.invalid) {
-
       return;
     }
-    console.log("this.modelForm", this.modelForm);
     if (this.file && this.modelForm.value.name != this.file.name) {
-      console.log("file", JSON.parse(JSON.stringify(this.file.name)));
       this.file.setName(this.modelForm.value.name);
       this.fileManagementService.editFile(this.file.id, this.file.getDataForUpate()).subscribe(res => {
         this.fileManagementStateService.editFile(res);

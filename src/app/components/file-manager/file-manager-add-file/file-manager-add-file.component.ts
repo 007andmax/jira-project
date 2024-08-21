@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FileManagerAddFile } from './class/file-manager-add-file';
 import { FileManagementService } from 'src/app/services/file-management/file-management.service';
 import { FileManagementStateService } from 'src/app/states/file-management/file-management-state.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -39,30 +38,24 @@ export class FileManagerAddFileComponent implements OnInit {
       "companyId": [null],
       "categoryId": [null],
     });
-    console.log("rrr", this.f2.name.value.length)
   }
   onChangeTags(data) {
-    console.log("ata", data);
     this.addForm.controls["tags"].setValue(data.map(item => ({ id: item.id })));
   }
   onUploadingFile(data) {
     this.addBtn.setDisabled(data);
   }
   close() {
-    console.log("close");
-    console.log(this.addForm.controls["mediaFileId"].value);
     if (!this.submitted && this.addForm.controls["mediaFileId"].value) this.onRemoveFile(this.addForm.controls["mediaFileId"].value);
     this.activeModal.close();
     this.confirmStateService.setConfirm(false);
   }
   onRemoveFile(id) {
-    console.log("onRemoveFile", id);
     this.documentsService.removeDocumentAttachment(id).subscribe(data => {
 
     })
   }
   onChangeFiles(data) {
-    console.log("ids", data);
     this.addForm.controls["mediaFileId"].setValue(data.id);
     this.addForm.controls["name"].setValue(data.name);
   }
@@ -77,7 +70,6 @@ export class FileManagerAddFileComponent implements OnInit {
     }
     this.addForm.controls["categoryId"].setValue(this.categoryId);
     if (this.companyId) this.addForm.controls["companyId"].setValue(this.companyId);
-    console.log("this.invoiceForm.value", this.addForm.value);
     this.addBtn.setDisabled(true);
     this.fileManagementService.addFile(this.addForm.value).subscribe(data => {
       this.fileManagementStateService.addFile(data);
