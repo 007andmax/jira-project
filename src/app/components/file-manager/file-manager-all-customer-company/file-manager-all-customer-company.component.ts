@@ -151,4 +151,7 @@ export class FileManagerAllCustomerCompanyComponent extends FileManagerCategoryC
       this.showPreloader = false;
     })
   }
+  public trackById(index, item) {
+    return item.id;
+  }
 }

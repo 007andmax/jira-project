@@ -123,4 +123,7 @@ export class FileManagerAllCustomerComponent extends FileManagerComponent {
       this.showPreloader = false;
     })
   }
+  public trackById(index, item) {
+    return item.id;
+  }
 }

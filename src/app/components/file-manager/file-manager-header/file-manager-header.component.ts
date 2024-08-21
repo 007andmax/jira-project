@@ -55,6 +55,12 @@ export class FileManagerHeaderComponent implements OnInit {
     modalRef.componentInstance.companyId = this.companyId;
     //   this.fileManagementStateService.showAsideForAdd();
   }
+  clearSearch() {
+
+  }
+  onKeyUp(data) {
+
+  }
   goToCategory(item) {
     if (item.id) {
       this.router.navigate(
