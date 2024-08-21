@@ -56,7 +56,10 @@
         >
             <div class="info qt-df">
                 <div class="qt-sz-48">
-                    <img [src]="file.src">
+                    <img
+                        *ngIf="file.src"
+                        [src]="file.src"
+                    >
                 </div>
                 <div class="qt-ml-12">
                     <span class="name qt-mb-4 ellipsis">{{ file?.name }}</span>

@@ -384,22 +384,22 @@ const routes: Routes = [
   {
     path: ':domain/file-manager',
     loadChildren: './components/file-manager/file-manager.module#FileManagementModule',
-    canActivate: [PermissionSupportService, PermissionNoSuperAdminService]
+    canActivate: [PermissionSupportService, PermissionNoSuperAdminService, TestPermissionService]
   },
   {
     path: ':domain/file-manager/all-customer',
     loadChildren: './components/file-manager/file-manager-all-customer/file-manager-all-customer.module#FileManagementAllCustomerModule',
-    canActivate: [PermissionSupportService, PermissionNoSuperAdminService]
+    canActivate: [PermissionSupportService, PermissionNoSuperAdminService, TestPermissionService]
   },
   {
     path: ':domain/file-manager/all-customer/:id',
     loadChildren: './components/file-manager/file-manager-all-customer-company/file-manager-all-customer-company.module#FileManagementAllCustomerCompanyModule',
-    canActivate: [PermissionSupportService, PermissionNoSuperAdminService]
+    canActivate: [PermissionSupportService, PermissionNoSuperAdminService, TestPermissionService]
   },
   {
     path: ':domain/file-manager/category/:id',
     loadChildren: './components/file-manager/file-manager-category/file-manager-category.module#FileManagementCategoryModule',
-    canActivate: [PermissionSupportService, PermissionNoSuperAdminService]
+    canActivate: [PermissionSupportService, PermissionNoSuperAdminService, TestPermissionService]
 
   },
 ];
