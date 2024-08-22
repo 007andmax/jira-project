@@ -100,6 +100,8 @@ export class FileManagerAddFileTagsComponent extends CompanyTagsComponent {
           tag.id = res.id;
           this.reqTags.push(tag);
           this.tags = this.reqTags;
+          console.log("this.tags", this.tags);
+          console.log("this.reqTags", this.reqTags);
           this.selectedTag.push(tag);
           this.tagsChange.emit(this.selectedTag);
           if (input) {
@@ -108,6 +110,9 @@ export class FileManagerAddFileTagsComponent extends CompanyTagsComponent {
           this.userInput.nativeElement.value = '';
           this.searchName = "";
           this.cd.detectChanges();
+          this.showPreloader = true;
+          this.setDefaultScoll();
+          this.onScroll();
         });
         this.sub.add(setTags);
       }
