@@ -45,6 +45,7 @@
                                 <app-file-manager-item-category
                                     [item]="item"
                                     class
+                                    [isRemove]="false"
                                     (onRemove)="onRemoveCategory($event)"
                                     (onFileInfo)="onCategoryInfo($event)"
                                 ></app-file-manager-item-category>
