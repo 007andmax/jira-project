@@ -108,7 +108,7 @@ export class FileManagerFileInfoTagsComponent extends TicketDetailEditTagsCompon
           this.isChangeInput = false;
           this.init = false;
           this.tagsChange.emit(this.selectedTag);
-
+          this.searchName = '';
         }, err => {
           this.isChangeInput = false;
 
@@ -153,6 +153,7 @@ export class FileManagerFileInfoTagsComponent extends TicketDetailEditTagsCompon
           }
           this.tagCtrl.setValue(null);
           this.tagsChange.emit(this.selectedTag);
+          this.searchName = '';
         }, err => {
           this.isChangeInput = false;
         });
