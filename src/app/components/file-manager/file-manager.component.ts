@@ -182,6 +182,10 @@ export class FileManagerComponent implements OnInit, OnDestroy {
   }
   onToggleFileInfo(data) {
     this.toggleFileInfo = data;
+    if (!data) {
+      this.fileInfo = null;
+      this.cateforyInfo = null;
+    }
   }
   removeCategory(item) {
     this.fileManagementService.removeCategory(item.id).subscribe(data => {

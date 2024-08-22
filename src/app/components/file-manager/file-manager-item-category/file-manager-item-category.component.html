@@ -16,7 +16,12 @@
         ></span>
         <div class="qt-df qt-ai-c qt-lh-16">
             <span [textContent]="getCreateBy()"></span>
-            <span class="item-file-type qt-ml-16">Folder</span>
+            <span
+                class="qt-ml-16"
+                [ngClass]="{'item-file-type': item.createdAt}"
+            >
+                Folder
+            </span>
         </div>
     </div>
     <div
