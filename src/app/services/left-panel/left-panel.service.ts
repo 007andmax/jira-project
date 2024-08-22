@@ -60,7 +60,8 @@ export class LeftPanelService {
       || state == 'company-documents'
       || state == 'new-edit-documents-company'
       || state == 'new-add-documents-company'
-      || state == 'company-devices-beta')
+      || state == 'company-devices-beta'
+      || state == 'company-file-manager')
   }
   isBillingState(state) {
     return (state === 'billing-dashboard'

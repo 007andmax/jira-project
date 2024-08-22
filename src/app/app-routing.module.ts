@@ -235,6 +235,13 @@ const routes: Routes = [
 
   },
   {
+    path: ':domain/company/:id/file-manager',
+    loadChildren: './components/companies/company-file-manager/company-file-manager.module#CompanyFileManagerModule',
+    canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]
+
+
+  },
+  {
     path: ':domain/documents/preview/:id',
     loadChildren: './components/documents/document-preview/document-preview.module#DocumentPreviewModule',
     canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
