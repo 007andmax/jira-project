@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { CompanyTagsListService } from 'src/app/components/companies/company-tags/services/company-tags-list.service';
 import { TicketDetailEditTagsComponent } from 'src/app/components/tickets/tickets/ticket-detail/ticket-detail-edit-tags/ticket-detail-edit-tags.component';
 import { TicketsPermissionsService } from 'src/app/components/tickets/tickets/ticket-edit-aside/services/tickets-permissions.service';
@@ -79,5 +79,88 @@ export class FileManagerFileInfoTagsComponent extends TicketDetailEditTagsCompon
       this.showPreloader = false;
       this.cd.markForCheck();
     })
+  }
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    if (event.target.closest('.selected-tag-ticket')) return;
+    if (!event.target.closest('app-ticket-edit-tags') && !event.target.closest('.dropdown-menu') && (this.init || this.isChangeInput)) {
+      if (this.isChangeInput) {
+        if (this.userInput.nativeElement.value.trim() == "") {
+          this.tagCtrl.setValue(null);
+          return;
+        }
+        if (this.tags.find(item => item.word == this.userInput.nativeElement.value.trim())) {
+          this.selected(this.tags.find(item => item.word == this.userInput.nativeElement.value.trim()));
+          this.tagCtrl.setValue(null);
+          this.tagsDp.close();
+          return;
+        }
+        let tag: any = {
+          colorCode: 0, usedCounter: 0, word: this.userInput.nativeElement.value.trim(), defaultTag: "FILE_TAG"
+        }
+        this.tagsDp.close();
+        let setTags = this.tagsService.addCompanyTags(tag).subscribe((res) => {
+          tag.id = res.id;
+          this.tags.push(tag);
+          this.selectedTag.push(tag);
+          this.userInput.nativeElement.value = '';
+          this.tagCtrl.setValue(null);
+          this.isChangeInput = false;
+          this.init = false;
+          this.tagsChange.emit(this.selectedTag);
+          this.searchName = '';
+        }, err => {
+          this.isChangeInput = false;
+
+        });
+        this.sub.add(setTags);
+      } else {
+        this.isChangeInput = false;
+        this.init = false;
+        this.tagsChange.emit(this.selectedTag);
+      }
+
+    }
+  }
+  onKeyUp(event) {
+
+    if (event.keyCode === 13) {
+      const input = event.target.input;
+      const value = event.target.value;
+
+      if ((value || '').trim()) {
+        if (this.tags.find(item => item.word == value)) {
+          this.selected(this.tags.find(item => item.word == value));
+          if (input) {
+            input.value = '';
+          }
+          this.tagCtrl.setValue(null);
+          this.tagsDp.close();
+          return;
+        }
+        let tag: any = {
+          colorCode: 0, usedCounter: 0, word: value.trim(), defaultTag: "FILE_TAG"
+        }
+        this.tagsDp.close();
+        let setTags = this.tagsService.addCompanyTags(tag).subscribe((res) => {
+          this.isChangeInput = false;
+          //  this.init = true;
+          tag.id = res.id;
+          this.tags.push(tag);
+          this.selectedTag.push(tag);
+          if (input) {
+            input.value = '';
+          }
+          this.tagCtrl.setValue(null);
+          this.tagsChange.emit(this.selectedTag);
+          this.searchName = '';
+        }, err => {
+          this.isChangeInput = false;
+        });
+        this.sub.add(setTags);
+      }
+
+    }
+
   }
 }

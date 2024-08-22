@@ -37,54 +37,23 @@ export class FileManagerItemFileComponent implements OnInit {
   fileInfo() {
     this.onFileInfo.emit(this.item);
   }
+
   download() {
-    if (this.isImage()) {
-      fetch(`/file/${this.item.mediaFileId}`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.blob();
-        })
-        .then(blob => {
-          const downloadUrl = window.URL.createObjectURL(blob); // Create a URL for the Blob
-          const link = document.createElement('a'); // Create an anchor element
-          link.href = downloadUrl;
-          link.download = `${this.item.name}.${this.item.contentType.substring(this.item.contentType.indexOf("/") + 1, this.item.contentType.length)}`; // Set the file name for download
-          link.click(); // Trigger the download
-          window.URL.revokeObjectURL(downloadUrl); // Clean up by revoking the object URL
-        })
-        .catch(error => {
-          console.error('There was a problem with the fetch operation:', error);
-        });
-    } else {
-      const xhr = new XMLHttpRequest();
-      xhr.open('GET', this.item.url, true);
-      xhr.responseType = 'blob';
-
-      xhr.onload = () => {
-        if (xhr.status === 200) {
-          const blob = xhr.response;
-          const url = window.URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = `${this.item.name}.${this.item.contentType.substring(this.item.contentType.indexOf("/") + 1, this.item.contentType.length)}`;
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          window.URL.revokeObjectURL(url);
-        } else {
-          console.error('Download error:', xhr.status, xhr.statusText);
-        }
-      };
-
-      xhr.onerror = () => {
-        console.error('Download error:', xhr.status, xhr.statusText);
-      };
-
-      xhr.send();
-    }
-
+    this.ticketsService.downloadFile(this.item.mediaFileId, this.item.contentType).subscribe(res => {
+      var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+      const data = window.URL.createObjectURL(res);
+      var link = document.createElement('a');
+      link.href = data;
+      if (isFirefox) {
+        link.href = `${window.location.origin}/file/${this.item.mediaFileId}/attachment`;
+        link.target = "_blank";
+      } else {
+        link.download = `${this.item.name}.${this.item.contentType.substring(this.item.contentType.indexOf("/") + 1, this.item.contentType.length)}`;
+      }
+      var e = document.createEvent('MouseEvents');
+      e.initEvent('click', true, true);
+      link.dispatchEvent(e);
+    })
   }
   getCreateBy() {
     return moment(new Date(this.item.createdAt)).format('DD MMM YYYY hh:mm A');
