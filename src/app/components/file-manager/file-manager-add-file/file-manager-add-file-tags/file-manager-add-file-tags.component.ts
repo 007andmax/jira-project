@@ -100,8 +100,6 @@ export class FileManagerAddFileTagsComponent extends CompanyTagsComponent {
           tag.id = res.id;
           this.reqTags.push(tag);
           this.tags = this.reqTags;
-          console.log("this.tags", this.tags);
-          console.log("this.reqTags", this.reqTags);
           this.selectedTag.push(tag);
           this.tagsChange.emit(this.selectedTag);
           if (input) {
