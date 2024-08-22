@@ -202,7 +202,7 @@
             &:hover {
                 border-color: $gray-300;
             }
-        
+
             input {
                 border: unset;
             }
@@ -257,4 +257,7 @@
 }
 .archive-modal__body {
     margin-bottom: 32px !important;
+}
+.qt-input-block__textarea {
+  height: 100px;
 }
