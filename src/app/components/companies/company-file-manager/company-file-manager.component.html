@@ -1,9 +1,9 @@
 <div class="qt-page-list file-manager-page">
-    <app-file-manager-header
+    <app-company-file-manager-header
         [companyId]="companyId"
         [breadcrumbs]="breadcrumbs"
         (onSort)="onSort($event)"
-    ></app-file-manager-header>
+    ></app-company-file-manager-header>
     <div class="qt-page-list-container">
         <div
             class="qt-page-list__body"
@@ -22,13 +22,14 @@
                                 [ngForOf]="categories"
                                 [ngForTrackBy]="trackById"
                             >
-                                <app-file-manager-item-category
+                                <app-company-file-manager-item-category
                                     [item]="item"
                                     [ngClass]="{'selected-item':cateforyInfo && cateforyInfo.id == item.id}"
                                     class
+                                    [companyId]="companyId"
                                     (onRemove)="onRemoveCategory($event)"
                                     (onFileInfo)="onCategoryInfo($event)"
-                                ></app-file-manager-item-category>
+                                ></app-company-file-manager-item-category>
                             </ng-template>
                         </div>
                         <div
@@ -97,13 +98,14 @@
                                 [ngForOf]="categories"
                                 [ngForTrackBy]="trackById"
                             >
-                                <app-file-manager-item-category
+                                <app-company-file-manager-item-category
                                     [ngClass]="{'selected-item':cateforyInfo && cateforyInfo.id == item.id}"
                                     [item]="item"
                                     class
+                                    [companyId]="companyId"
                                     (onRemove)="onRemoveCategory($event)"
                                     (onFileInfo)="onCategoryInfo($event)"
-                                ></app-file-manager-item-category>
+                                ></app-company-file-manager-item-category>
                             </ng-template>
                         </div>
                     </div>

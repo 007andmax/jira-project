@@ -1,0 +1,55 @@
+<div
+    class="item-file-container qt-pointer"
+    ngbDropdown
+    #db="ngbDropdown"
+    (click)="fileInfo()"
+    appDoubleClick
+    (doubleClick)="navigateToCategory()"
+>
+    <div class="item-file-avatar qt-df qt-ai-c qt-jc-c qt-mb-12">
+        <div class="qt-sz-64 qt-bg-contain qt-mb-8 qt-fs-0 icon__folder-type"></div>
+    </div>
+    <div class>
+        <span
+            class="item-file-h ellipsis qt-db"
+            [textContent]="item.name"
+        ></span>
+        <div class="qt-df qt-ai-c qt-lh-16">
+            <span [textContent]="getCreateBy()"></span>
+            <span
+                class="qt-ml-16"
+                [ngClass]="{'item-file-type': item.createdAt}"
+            >
+                Folder
+            </span>
+        </div>
+    </div>
+    <div
+        [ngClass]="{'show-db':db.isOpen()}"
+        class="qt-button --square-md --gray pointer actions"
+        ngbDropdownToggle
+        *ngIf="!item.allCompaniesRoot && !item.companyId"
+    >
+        <div class="qt-icon icon__more qt-sz-16"></div>
+    </div>
+    <div
+        ngbDropdownMenu
+        class="dropdown-menu-qt icon__more-dropdown"
+        (click)="$event.stopPropagation();"
+    >
+        <ul
+            class
+            role="menu"
+            class="dropdown-qt"
+        >
+            <li
+                class="pointer qt-dropdown-menu__item-red qt-color-red-600"
+                ngbDropdownItem
+                (click)="removeCategory()"
+            >
+                <div class="qt-icon icon__delete qt-icon__red-600 qt-sz-20 qt-mr-12"></div>
+                Delete
+            </li>
+        </ul>
+    </div>
+</div>
