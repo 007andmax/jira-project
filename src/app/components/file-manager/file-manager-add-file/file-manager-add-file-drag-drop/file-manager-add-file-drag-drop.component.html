@@ -3,7 +3,7 @@
     [ngClass]="{'qt-fileupload-file-info':idfiles.length > 0}"
     appDnd
     (fileDropped)="onFileDropped($event)"
-    [hidden]="isUploading"
+    [hidden]="isUploading || idfiles.length > 0"
 >
     <label class="qt-fileupload__label">
         <div
@@ -43,6 +43,37 @@
             <div class="icon__snapshot qt-sz-16 qt-bg-contain qt-ml-6"></div>
         </div>
     </label>
+</div>
+<div
+    class="attachment-container"
+    *ngIf="!isUploading && idfiles.length > 0"
+>
+    <span class="qt-fs-13 qt-fw-500 qt-color-gray-900 qt-mb-8">Attachment</span>
+    <div class="files-list">
+        <div
+            class="single-file"
+            *ngFor="let file of files; let i = index"
+        >
+            <div class="info qt-df">
+                <div class="qt-sz-48">
+                    <img
+                        *ngIf="file.src"
+                        [src]="file.src"
+                    >
+                </div>
+                <div class="qt-ml-12">
+                    <span class="name qt-mb-4 ellipsis">{{ file?.name }}</span>
+                    <div class="qt-df qt-ai-c size">
+                        {{parseSize(file?.size)}}
+                        <span
+                            class="qt-ml-12 size-remaining"
+                            [textContent]="parseType(file?.type)"
+                        ></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div
     class="attachment-container"

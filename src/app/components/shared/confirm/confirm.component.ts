@@ -62,6 +62,8 @@ export class ConfirmComponent implements OnInit {
       && this.action !== 'DELETE_GLOBAL_USERS_FILTER'
       && this.action !== 'ROLLBACK_INVOICE'
       && this.action !== 'DELETE_NEWS'
+      && this.action !== 'REMOVE_CATEGORY_FILES'
+      && this.action !== 'REMOVE_FILE'
       && !this.isSignaturePage()
       && !this.isSettingsPage();
   }

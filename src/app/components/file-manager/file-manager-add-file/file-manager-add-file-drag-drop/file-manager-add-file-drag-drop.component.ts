@@ -34,6 +34,7 @@ export class FileManagementAddFileDragDropComponent extends UploadAreaComponent 
         this.uploadFilesSimulator(index + 1);
         return;
       }
+      console.log("this.files[index]", this.files[index]);
       this.elRef.nativeElement.querySelector('.qt-fileupload').classList.add('fileupload');
       this.isUploadingFile.emit(true);
       this.isUploading = true;
@@ -58,6 +59,15 @@ export class FileManagementAddFileDragDropComponent extends UploadAreaComponent 
         this.isUploadingFile.emit(false);
       });
     }
+  }
+  parseType(type) {
+    return type.substring(type.lastIndexOf("/") + 1, type.length).toUpperCase();
+  }
+  parseSize(size) {
+    if (size < 1024) return `${size} B`;
+    if (size > 1024) return `${(size / 1024).toFixed(2)} KB`;
+    if (size > 1024 * 1024) return `${(size / 1024 / 1024).toFixed(2)} MB`;
+    return '';
   }
   uploadFile(file) {
     return new Promise((resolve, reject) => {

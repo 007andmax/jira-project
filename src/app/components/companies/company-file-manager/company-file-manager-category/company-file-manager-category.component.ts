@@ -14,12 +14,15 @@ import { REMOVE_CATEGORY_FILES, REMOVE_FILE } from 'src/app/const/confirm';
 })
 export class CompanyFileManagerCategoryComponent extends FileManagerCategoryComponent {
   ngOnInit() {
+    this.leftPanelStateService.changeStateWithoutNavigate('company-file-manager');
     this.categoryId = this.activateRoute.snapshot.params['categoryId'];
     this.companyId = this.activateRoute.snapshot.params['id'];
+    if (this.companyId) this.companiesStateService.setCompanyRoutingId(this.companyId);
     let subscription = this.activateRoute.params.subscribe(params => {
       this.showPreloader = true;
       this.categoryId = params['categoryId'];
       this.companyId = params['id'];
+      if (this.companyId) this.companiesStateService.setCompanyRoutingId(this.companyId);
       console.log("params", params);
       this.categories = [];
       this.files = [];
@@ -27,7 +30,6 @@ export class CompanyFileManagerCategoryComponent extends FileManagerCategoryComp
       this.getList();
     });
     this.sub.add(subscription);
-    this.leftPanelStateService.changeStateWithoutNavigate("file-manager-category");
     let onAddFile = this.fileManagementStateService.onAddFile.subscribe(data => {
       let isExist = this.files.some(item => item.id == data.id);
       if (!isExist) {
@@ -73,11 +75,13 @@ export class CompanyFileManagerCategoryComponent extends FileManagerCategoryComp
     })
     this.sub.add(onEditCategory);
     let onChangeDocument = this.fileManagementRealTimeService.changeArray.subscribe(data => {
-      if (data.action === "CREATE_FILE_MANAGEMENT_CATEGORY") {
-        let isExist = this.files.some(item => item.id == data.data.id);
+      console.log("data", data);
+      if (data.action === "CREATE_FILE_MANAGEMENT_CATEGORY" && this.companyId == data.data.companyId) {
+        let isExist = this.categories.some(item => item.id == data.data.id);
+        console.log("isExist", isExist);
         if (!isExist) this.categories.push(new FileManagerCategory(data.data));
       }
-      if (data.action === "CREATE_MANAGEMENT_FILE") {
+      if (data.action === "CREATE_MANAGEMENT_FILE" && this.companyId == data.data.companyId) {
         let isExist = this.files.some(item => item.id == data.data.id);
         if (!isExist) {
           this.files.push(new FileManagerFile(data.data));
@@ -111,7 +115,6 @@ export class CompanyFileManagerCategoryComponent extends FileManagerCategoryComp
           if (findIndex > -1) this.groupedByCreateAt[key].splice(findIndex, 1);
         }
       }
-
       this.cd.detectChanges();
     })
     this.sub.add(onChangeDocument);
