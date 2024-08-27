@@ -90,22 +90,12 @@
                         </div>
                         <div
                             class="qt-df qt-ai-c size"
-                            *ngIf="isUploading"
-                        >
-                            <span class="size-progress">Uploading {{file?.progress}}%</span>
-                            <span
-                                class="qt-ml-8 size-remaining"
-                                *ngIf="false"
-                            >
-                                20 seconds remaining
-                            </span>
-                        </div>
-                        <div
-                            class="qt-df qt-ai-c size"
                             *ngIf="isError"
                         >
-                            <span class="size-progress size-error">
-                                An error occured in the upload, Please try again.
+                            <span
+                                class="size-progress size-error"
+                                [textContent]="file.error"
+                            >
                             </span>
                         </div>
                     </div>

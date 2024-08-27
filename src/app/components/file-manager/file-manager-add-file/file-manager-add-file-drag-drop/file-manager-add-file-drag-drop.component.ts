@@ -13,6 +13,7 @@ export class FileManagementAddFileDragDropComponent extends UploadAreaComponent 
   @Output() isUploadingFile = new EventEmitter<any>();
   @Output() onRemoveFile = new EventEmitter<any>();
   onFileDropped($event) {
+    this.isDragover = false;
     this.prepareFilesList($event);
     this.cd.detectChanges();
   }
@@ -26,7 +27,7 @@ export class FileManagementAddFileDragDropComponent extends UploadAreaComponent 
     this.uploadFilesSimulator(0);
   }
   removeFile() {
-    this.onRemoveFile.emit(this.idfiles[0]);
+    if (this.idfiles.length > 0) this.onRemoveFile.emit(this.idfiles[0]);
     this.files = [];
     this.idfiles = [];
   }
@@ -37,6 +38,8 @@ export class FileManagementAddFileDragDropComponent extends UploadAreaComponent 
   }
   uploadFilesSimulator(index: number) {
     if (index === this.files.length) {
+      this.isUploading = false;
+      this.isUploadingFile.emit(false);
       (<any>this.elRef.nativeElement.querySelector('#fileDropRef')).value = '';
       return;
     } else {
@@ -57,6 +60,7 @@ export class FileManagementAddFileDragDropComponent extends UploadAreaComponent 
       this.isUploadingFile.emit(true);
       this.isUploading = true;
       this.uploadFile(this.files[index]).then((data: any) => {
+        console.log("data", data);
         let res = JSON.parse(data.response);
         this.idfiles.push(res.id);
         this.elRef.nativeElement.querySelector('.qt-fileupload').classList.remove('fileupload');
@@ -65,11 +69,13 @@ export class FileManagementAddFileDragDropComponent extends UploadAreaComponent 
         this.cd.detectChanges();
         this.isUploadingFile.emit(false);
         this.isUploading = false;
-      }).catch(() => {
+      }, err => {
+        this.isError = true;
         this.elRef.nativeElement.querySelector('.qt-fileupload').classList.remove('fileupload');
         this.files[index].showError = true;
+        console.log("err2", err);
+        this.files[index].error = err.message;
         this.uploadFilesSimulator(index + 1);
-        this.isUploadingFile.emit(false);
       });
     }
   }
@@ -88,13 +94,15 @@ export class FileManagementAddFileDragDropComponent extends UploadAreaComponent 
       fd.append("file", file);
       var xhr = new XMLHttpRequest();
       xhr.addEventListener("load", (event) => {
-        resolve(xhr);
+        if (xhr.status == 200) resolve(xhr);
+        if (xhr.status != 200) reject(JSON.parse(xhr.response));
       }, false);
 
       xhr.upload.onprogress = (event) => {
         file.progress = Math.round((event.loaded / event.total) * 100);
       }
       xhr.addEventListener("error", (error) => {
+        console.log("error", error);
         reject(error);
       }, false);
       xhr.open("POST", "/file?isAvatar=false&attachmentType=FILE_MANAGEMENT");
