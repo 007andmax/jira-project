@@ -1,9 +1,11 @@
 <div
     class="qt-fileupload"
-    [ngClass]="{'qt-fileupload-file-info':idfiles.length > 0}"
+    [ngClass]="{'qt-fileupload-file-info':idfiles.length > 0 || isDragover}"
     appDnd
+    (onDragover)="isDragover = true"
+    (onDragleave)="isDragover = false"
     (fileDropped)="onFileDropped($event)"
-    [hidden]="isUploading || idfiles.length > 0"
+    [hidden]="isUploading || idfiles.length > 0 || isError"
 >
     <label class="qt-fileupload__label">
         <div
@@ -46,7 +48,7 @@
 </div>
 <div
     class="attachment-container"
-    *ngIf="!isUploading && idfiles.length > 0"
+    *ngIf="isUploading || idfiles.length > 0 || isError"
 >
     <span class="qt-fs-13 qt-fw-500 qt-color-gray-900 qt-mb-8">Attachment</span>
     <div class="files-list">
@@ -64,59 +66,72 @@
                 <div class="qt-ml-12 qt-df qt-ai-c qt-jc-sb qt-w100">
                     <div>
                         <span class="name qt-mb-4 ellipsis">{{ file?.name }}</span>
-                        <div class="qt-df qt-ai-c size">
+                        <div
+                            class="qt-df qt-ai-c size"
+                            *ngIf="!isUploading && !isError"
+                        >
                             {{parseSize(file?.size)}}
                             <span
                                 class="qt-ml-12 size-remaining"
                                 [textContent]="parseType(file?.type)"
                             ></span>
                         </div>
+                        <div
+                            class="qt-df qt-ai-c size"
+                            *ngIf="isUploading"
+                        >
+                            <span class="size-progress">Uploading {{file?.progress}}%</span>
+                            <span
+                                class="qt-ml-8 size-remaining"
+                                *ngIf="false"
+                            >
+                                20 seconds remaining
+                            </span>
+                        </div>
+                        <div
+                            class="qt-df qt-ai-c size"
+                            *ngIf="isUploading"
+                        >
+                            <span class="size-progress">Uploading {{file?.progress}}%</span>
+                            <span
+                                class="qt-ml-8 size-remaining"
+                                *ngIf="false"
+                            >
+                                20 seconds remaining
+                            </span>
+                        </div>
+                        <div
+                            class="qt-df qt-ai-c size"
+                            *ngIf="isError"
+                        >
+                            <span class="size-progress size-error">
+                                An error occured in the upload, Please try again.
+                            </span>
+                        </div>
                     </div>
                     <div
+                        *ngIf="!isUploading && idfiles.length > 0"
                         class="attachment-remove qt-pointer"
                         (click)="removeFile()"
                     >
                         Remove
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div
-    class="attachment-container"
-    *ngIf="isUploading"
->
-    <span class="qt-fs-13 qt-fw-500 qt-color-gray-900 qt-mb-8">Attachment</span>
-    <div class="files-list">
-        <div
-            class="single-file"
-            *ngFor="let file of files; let i = index"
-        >
-            <div class="info qt-df">
-                <div class="qt-sz-48">
-                    <img
-                        *ngIf="file.src"
-                        [src]="file.src"
+                    <div
+                        *ngIf="isError"
+                        class="attachment-retry qt-pointer"
+                        (click)="retryFile()"
                     >
-                </div>
-                <div class="qt-ml-12">
-                    <span class="name qt-mb-4 ellipsis">{{ file?.name }}</span>
-                    <div class="qt-df qt-ai-c size">
-                        <span class="size-progress">Uploading {{file?.progress}}%</span>
-                        <span
-                            class="qt-ml-8 size-remaining"
-                            *ngIf="false"
-                        >
-                            20 seconds remaining
-                        </span>
+                        Retry
                     </div>
                 </div>
             </div>
-            <div class="progress-line-container">
+            <div
+                class="progress-line-container"
+                *ngIf="isUploading"
+            >
                 <div
                     class="progress-line"
-                    [ngStyle]="{width: file?.progress + '%'}"
+                    [ngStyle]="{width: 'calc('+file?.progress+'% - 8px)'}"
                 ></div>
             </div>
         </div>
