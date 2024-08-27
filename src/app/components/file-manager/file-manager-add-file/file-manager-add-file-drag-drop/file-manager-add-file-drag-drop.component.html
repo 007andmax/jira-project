@@ -55,20 +55,28 @@
             *ngFor="let file of files; let i = index"
         >
             <div class="info qt-df">
-                <div class="qt-sz-48">
+                <div class="qt-sz-48 img-container">
                     <img
                         *ngIf="file.src"
                         [src]="file.src"
                     >
                 </div>
-                <div class="qt-ml-12">
-                    <span class="name qt-mb-4 ellipsis">{{ file?.name }}</span>
-                    <div class="qt-df qt-ai-c size">
-                        {{parseSize(file?.size)}}
-                        <span
-                            class="qt-ml-12 size-remaining"
-                            [textContent]="parseType(file?.type)"
-                        ></span>
+                <div class="qt-ml-12 qt-df qt-ai-c qt-jc-sb qt-w100">
+                    <div>
+                        <span class="name qt-mb-4 ellipsis">{{ file?.name }}</span>
+                        <div class="qt-df qt-ai-c size">
+                            {{parseSize(file?.size)}}
+                            <span
+                                class="qt-ml-12 size-remaining"
+                                [textContent]="parseType(file?.type)"
+                            ></span>
+                        </div>
+                    </div>
+                    <div
+                        class="attachment-remove qt-pointer"
+                        (click)="removeFile()"
+                    >
+                        Remove
                     </div>
                 </div>
             </div>

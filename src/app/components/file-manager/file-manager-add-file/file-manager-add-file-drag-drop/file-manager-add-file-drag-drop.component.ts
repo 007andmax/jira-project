@@ -23,6 +23,11 @@ export class FileManagementAddFileDragDropComponent extends UploadAreaComponent 
     this.files = [files[files.length - 1]]
     this.uploadFilesSimulator(0);
   }
+  removeFile() {
+    this.onRemoveFile.emit(this.idfiles[0]);
+    this.files = [];
+    this.idfiles = [];
+  }
   uploadFilesSimulator(index: number) {
     if (index === this.files.length) {
       (<any>this.elRef.nativeElement.querySelector('#fileDropRef')).value = '';
