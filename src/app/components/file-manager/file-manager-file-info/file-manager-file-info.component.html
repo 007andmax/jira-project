@@ -123,6 +123,13 @@
                 [textContent]="file && file.uploaderName || category && category.creatorName"
             ></span>
         </div>
+        <div class="file-info-field qt-df qt-ai-c qt-mb-16">
+            <span class="file-info-field-header qt-fs-12 qt-color-gray-500">Author email</span>
+            <span
+                class="qt-fs-14 qt-color-gray-900"
+                [textContent]="file && file.uploaderEmail || category && category.uploaderEmail"
+            ></span>
+        </div>
         <div
             class="file-info-description file-info-field qt-mb-16 qt-pt-16 qt-pb-16"
             *ngIf="file"

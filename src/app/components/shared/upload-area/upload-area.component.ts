@@ -41,15 +41,6 @@ export class UploadAreaComponent implements OnInit {
     this.prepareFilesList(files);
   }
 
-  /**
-   * Delete file from files list
-   * @param index (File index)
-   */
-  deleteFile(index: number) {
-    this.files.splice(index, 1);
-    this.idfiles.splice(index, 1);
-    this.changeFiles.emit(this.idfiles);
-  }
 
   /**
    * Simulate the upload process
@@ -76,8 +67,9 @@ export class UploadAreaComponent implements OnInit {
       this.uploadFile(this.files[index]).then((data: any) => {
         let res = JSON.parse(data.response);
         this.idfiles.push(res.id);
+        this.files[index].id = res.id;
         this.elRef.nativeElement.querySelector('.qt-fileupload').classList.remove('fileupload');
-        this.changeFiles.emit(this.files.map((item, i) => ({ id: this.idfiles[i], name: item.name.substring(0, item.name.lastIndexOf('.')) })));
+        this.changeFiles.emit(this.files.map((item, i) => ({ id: item.id, name: item.name.substring(0, item.name.lastIndexOf('.')) })));
         this.uploadFilesSimulator(index + 1);
         this.cd.detectChanges();
         this.files[index].isUploading = false;
@@ -127,16 +119,19 @@ export class UploadAreaComponent implements OnInit {
     for (const item of files) {
       item.progress = 0;
       item.isUploading = false;
+      item.id = null;
       this.files.push(item);
     }
     this.uploadFilesSimulator((this.idfiles.length == 0) ? 0 : this.idfiles.length);
   }
-  removeFile(index) {
-    this.companiesService.removeAttachment(this.idfiles[index]).subscribe(data => {
+  removeFile(id) {
+    this.companiesService.removeAttachment(id).subscribe(data => {
     })
-    this.files.splice(index, 1)
-    this.idfiles.splice(index, 1)
-    this.changeFiles.emit(this.files.map((item, i) => ({ id: this.idfiles[i], name: item.name.substring(0, item.name.lastIndexOf('.')) })));
+    let filesIndex = this.files.findIndex(item => item.id == id);
+    if (filesIndex > -1) this.files.splice(filesIndex, 1)
+    let idfilesIndex = this.idfiles.findIndex(item => item == id);
+    if (idfilesIndex > -1) this.idfiles.splice(idfilesIndex, 1)
+    this.changeFiles.emit(this.files.map((item, i) => ({ id: item.id, name: item.name.substring(0, item.name.lastIndexOf('.')) })));
   }
   retryFile(index) {
     this.files.splice(index, 1)

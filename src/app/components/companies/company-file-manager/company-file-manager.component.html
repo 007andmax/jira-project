@@ -26,6 +26,7 @@
                                     [item]="item"
                                     [ngClass]="{'selected-item':cateforyInfo && cateforyInfo.id == item.id}"
                                     class
+                                    [isRemove]="true"
                                     [companyId]="companyId"
                                     (onRemove)="onRemoveCategory($event)"
                                     (onFileInfo)="onCategoryInfo($event)"
@@ -102,6 +103,7 @@
                                     [ngClass]="{'selected-item':cateforyInfo && cateforyInfo.id == item.id}"
                                     [item]="item"
                                     class
+                                    [isRemove]="true"
                                     [companyId]="companyId"
                                     (onRemove)="onRemoveCategory($event)"
                                     (onFileInfo)="onCategoryInfo($event)"

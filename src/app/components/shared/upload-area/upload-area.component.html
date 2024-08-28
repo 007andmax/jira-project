@@ -89,14 +89,14 @@
                         </div>
                     </div>
                     <div
-                        *ngIf="!file?.isUploading && idfiles.length > 0"
+                        *ngIf="!file?.isUploading && file?.id"
                         class="attachment-remove qt-pointer"
-                        (click)="removeFile(i)"
+                        (click)="removeFile(file?.id)"
                     >
                         Remove
                     </div>
                     <div
-                        *ngIf="file?.showError"
+                        *ngIf="file?.showError && !file?.id"
                         class="attachment-retry qt-pointer"
                         (click)="retryFile(i)"
                     >

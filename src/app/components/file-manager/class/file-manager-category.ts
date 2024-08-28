@@ -11,6 +11,7 @@ export class FileManagerCategory {
     creatorName: string;
     "updatedBy": string;
     "updatedAt": string;
+    uploaderEmail: string;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
