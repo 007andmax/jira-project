@@ -37,7 +37,7 @@
                 *ngFor="
                             let tag of tags;
                             let i = index;
-                            trackBy: trackByFn
+                            trackBy: trackById
                           "
                 appClickOtside
                 [init]="tag.isInitEdit"
@@ -56,7 +56,7 @@
                         [(ngModel)]="tag.word"
                         appKeyUpEnter
                         (onChange)="onEditTag(tag)"
-                        (input)="tag.onInitEdit(true);item.setIsUniqueness(true)"
+                        (input)="tag.onInitEdit(true);tag.setIsUniqueness(true)"
                     >
                     <mat-error
                         class="qt-tooltip-error"

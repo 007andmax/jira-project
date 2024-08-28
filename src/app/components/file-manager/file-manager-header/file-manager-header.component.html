@@ -54,12 +54,10 @@
                         type="text"
                         placeholder="Search files"
                         [(ngModel)]="searchText"
-                        (keyup)="onKeyUp($event)"
                     >
                     <span
                         class="search-clear icon__close-round"
                         *ngIf="searchText.length > 0"
-                        (click)="clearSearch()"
                     ></span>
                 </div>
                 <div

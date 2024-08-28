@@ -54,12 +54,10 @@ export class FileManagementAddFileDragDropComponent extends UploadAreaComponent 
         this.uploadFilesSimulator(index + 1);
         return;
       }
-      console.log("this.files[index]", this.files[index]);
       this.elRef.nativeElement.querySelector('.qt-fileupload').classList.add('fileupload');
       this.isUploadingFile.emit(true);
       this.isUploading = true;
       this.uploadFile(this.files[index]).then((data: any) => {
-        console.log("data", data);
         let res = JSON.parse(data.response);
         this.idfiles.push(res.id);
         this.elRef.nativeElement.querySelector('.qt-fileupload').classList.remove('fileupload');
@@ -72,7 +70,6 @@ export class FileManagementAddFileDragDropComponent extends UploadAreaComponent 
         this.isError = true;
         this.elRef.nativeElement.querySelector('.qt-fileupload').classList.remove('fileupload');
         this.files[index].showError = true;
-        console.log("err2", err);
         this.files[index].error = err.message;
         this.uploadFilesSimulator(index + 1);
       });
@@ -101,7 +98,6 @@ export class FileManagementAddFileDragDropComponent extends UploadAreaComponent 
         file.progress = Math.round((event.loaded / event.total) * 100);
       }
       xhr.addEventListener("error", (error) => {
-        console.log("error", error);
         reject(error);
       }, false);
       xhr.open("POST", "/file?isAvatar=false&attachmentType=FILE_MANAGEMENT");

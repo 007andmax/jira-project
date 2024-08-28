@@ -9,7 +9,6 @@ import { FileManagerHeaderComponent } from 'src/app/components/file-manager/file
 export class CompanyFileManagerHeaderComponent extends FileManagerHeaderComponent {
 
   goToCategory(item) {
-    console.log("companyId", this.companyId)
     if (item.id) {
       this.router.navigate(
         [`${this.companiesStateService.getCurrentCompany().techDomain}/company/`, this.companyId, `file-manager`, 'category', item.id]);

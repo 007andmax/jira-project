@@ -240,4 +240,7 @@ export class FileManagerCategoryComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
+  public trackById(index, item) {
+    return item.id;
+  }
 }
