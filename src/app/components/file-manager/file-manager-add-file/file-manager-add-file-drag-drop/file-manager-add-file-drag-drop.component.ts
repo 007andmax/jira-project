@@ -9,7 +9,6 @@ import { UploadAreaComponent } from 'src/app/components/shared/upload-area/uploa
 export class FileManagementAddFileDragDropComponent extends UploadAreaComponent {
   isUploading: boolean = false;
   isError: boolean = false;
-  isDragover: boolean = false;
   @Output() isUploadingFile = new EventEmitter<any>();
   @Output() onRemoveFile = new EventEmitter<any>();
   onFileDropped($event) {

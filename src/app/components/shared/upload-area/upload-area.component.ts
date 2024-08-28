@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectorRef, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Output, EventEmitter, ElementRef, Input } from '@angular/core';
+import { CompaniesService } from 'src/app/services/company/companies.service';
 
 @Component({
   selector: 'app-upload-area',
@@ -6,12 +7,14 @@ import { Component, OnInit, ChangeDetectorRef, Output, EventEmitter, ElementRef 
   styleUrls: ['./upload-area.component.scss']
 })
 export class UploadAreaComponent implements OnInit {
-
+  @Input() uploadType = 'MULTIPLE';
+  isDragover: boolean = false;
   files: any[] = [];
   idfiles: Array<String> = [];
+  @Output() onRemoveFile = new EventEmitter<any>();
   @Output() changeFiles = new EventEmitter<any>();
-  error: string = "- The uploaded file cannot be more than 4 MB.";
   constructor(public cd: ChangeDetectorRef,
+    private companiesService: CompaniesService,
     public elRef: ElementRef,) { }
 
   ngOnInit() {
@@ -26,7 +29,9 @@ export class UploadAreaComponent implements OnInit {
    * on file drop handler
    */
   onFileDropped($event) {
+    this.isDragover = false;
     this.prepareFilesList($event);
+    this.cd.detectChanges();
   }
 
   /**
@@ -51,10 +56,15 @@ export class UploadAreaComponent implements OnInit {
    */
   uploadFilesSimulator(index: number) {
     if (index === this.files.length) {
+      this.files[index - 1].isUploading = false;
       (<any>document.getElementById('fileDropRef')).value = null;
-
       return;
     } else {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.files[index].src = reader.result;
+      };
+      reader.readAsDataURL(this.files[index]);
       if (this.files[index].size > 4194304) {
         this.files[index].showError = true;
         this.files[index].error = "The size is too big. You can upload a file up to 4MB in size."
@@ -62,21 +72,32 @@ export class UploadAreaComponent implements OnInit {
         return;
       }
       this.elRef.nativeElement.querySelector('.qt-fileupload').classList.add('fileupload');
+      this.files[index].isUploading = true;
       this.uploadFile(this.files[index]).then((data: any) => {
         let res = JSON.parse(data.response);
         this.idfiles.push(res.id);
         this.elRef.nativeElement.querySelector('.qt-fileupload').classList.remove('fileupload');
-        this.changeFiles.emit(this.idfiles);
+        this.changeFiles.emit(this.files.map((item, i) => ({ id: this.idfiles[i], name: item.name.substring(0, item.name.lastIndexOf('.')) })));
         this.uploadFilesSimulator(index + 1);
         this.cd.detectChanges();
-      }).catch(() => {
+        this.files[index].isUploading = false;
+      }, err => {
         this.elRef.nativeElement.querySelector('.qt-fileupload').classList.remove('fileupload');
         this.files[index].showError = true;
+        this.files[index].error = err.message;
         this.uploadFilesSimulator(index + 1);
       });
-
     }
 
+  }
+  parseType(type) {
+    return type.substring(type.lastIndexOf("/") + 1, type.length).toUpperCase();
+  }
+  parseSize(size) {
+    if (size < 1024) return `${size} B`;
+    if (size > 1024) return `${(size / 1024).toFixed(2)} KB`;
+    if (size > 1024 * 1024) return `${(size / 1024 / 1024).toFixed(2)} MB`;
+    return '';
   }
   uploadFile(file) {
     return new Promise((resolve, reject) => {
@@ -84,7 +105,8 @@ export class UploadAreaComponent implements OnInit {
       fd.append("file", file);
       var xhr = new XMLHttpRequest();
       xhr.addEventListener("load", (event) => {
-        resolve(xhr);
+        if (xhr.status == 200) resolve(xhr);
+        if (xhr.status != 200) reject(JSON.parse(xhr.response));
       }, false);
 
       xhr.upload.onprogress = (event) => {
@@ -104,11 +126,21 @@ export class UploadAreaComponent implements OnInit {
   prepareFilesList(files: Array<any>) {
     for (const item of files) {
       item.progress = 0;
+      item.isUploading = false;
       this.files.push(item);
     }
     this.uploadFilesSimulator((this.idfiles.length == 0) ? 0 : this.idfiles.length);
   }
-
+  removeFile(index) {
+    this.companiesService.removeAttachment(this.idfiles[index]).subscribe(data => {
+    })
+    this.files.splice(index, 1)
+    this.idfiles.splice(index, 1)
+    this.changeFiles.emit(this.files.map((item, i) => ({ id: this.idfiles[i], name: item.name.substring(0, item.name.lastIndexOf('.')) })));
+  }
+  retryFile(index) {
+    this.files.splice(index, 1)
+  }
   /**
    * format bytes
    * @param bytes (File size in bytes)
