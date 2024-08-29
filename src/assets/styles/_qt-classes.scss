@@ -308,7 +308,7 @@ input.qt-dropdown-input {
   position: relative;
   height: 40px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 17px;
   border-radius: 6px;
   background-color: $blue-light-600;
@@ -388,6 +388,7 @@ input.qt-dropdown-input {
     border: solid 1px $gray-200;
     color: $gray-500;
     background-color: $white;
+    font-weight: 500;
 
     &:hover {
       color: $gray-600;

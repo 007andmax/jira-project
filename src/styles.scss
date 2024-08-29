@@ -902,7 +902,7 @@ app-quotes-item {
     top: 16px !important;
   }
   textarea {
-    font-size: 13px;
+    font-size: 14px;
     &::placeholder {
       color: $gray-400;
     }
@@ -922,7 +922,7 @@ app-quotes-item {
     width: 103% !important;
     border: none;
     padding: 7px 12px;
-    font-size: 13px;
+    font-size: 14px;
     outline: none;
     &:last-child {
       visibility: hidden;
@@ -1577,7 +1577,7 @@ app-quotes-item {
     width: 100%;
     border: none;
     padding: 12px;
-    font-size: 13px;
+    font-size: 14px;
     outline: none;
     border-radius: inherit;
     &:last-child {
@@ -1619,7 +1619,7 @@ app-quotes-item {
         width: 100%;
         border: none;
         padding: 12px;
-        font-size: 13px;
+        font-size: 14px;
         outline: none;
         &:last-child {
           visibility: hidden;
