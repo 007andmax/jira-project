@@ -27,6 +27,7 @@
                                     [ngClass]="{'selected-item':cateforyInfo && cateforyInfo.id == item.id}"
                                     [item]="item"
                                     class
+                                    [isRemove]="true"
                                     (onRemove)="onRemoveCategory($event)"
                                     (onFileInfo)="onCategoryInfo($event)"
                                 ></app-file-manager-item-category>
@@ -102,6 +103,7 @@
                                     [ngClass]="{'selected-item':cateforyInfo && cateforyInfo.id == item.id}"
                                     [item]="item"
                                     class
+                                    [isRemove]="true"
                                     (onRemove)="onRemoveCategory($event)"
                                     (onFileInfo)="onCategoryInfo($event)"
                                 ></app-file-manager-item-category>

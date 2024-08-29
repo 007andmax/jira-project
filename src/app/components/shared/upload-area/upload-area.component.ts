@@ -40,7 +40,12 @@ export class UploadAreaComponent implements OnInit {
   fileBrowseHandler(files) {
     this.prepareFilesList(files);
   }
-
+  isImage(file) {
+    return file.type === "image/jpg" || file.type === "image/png" || file.type === "image/jpeg" || file.type === "image/gif";
+  }
+  isOdt(name) {
+    return name.includes("odt");
+  }
 
   /**
    * Simulate the upload process
