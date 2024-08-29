@@ -46,12 +46,28 @@
     <div class="files-list">
         <div class="single-file">
             <div class="info qt-df">
-                <div class="qt-sz-48 img-container">
+                <div
+                    class="qt-sz-48 img-container"
+                    *ngIf="isImage(file)"
+                >
                     <img
                         *ngIf="file.src"
                         [src]="file.src"
                     >
                 </div>
+                <div
+                    class="qt-sz-48 qt-bg-contain qt-mb-8 qt-fs-0"
+                    [ngClass]="{'icon__file-type-pdf': file.type == 'application/pdf',
+    'icon__file-type-txt': file.type == 'text/plain',
+ 'icon__file-type-csv': file.type == 'text/csv',
+'icon__file-type-doc': file.type == 'application/msword',
+'icon__file-type-html': file.type == 'text/html',
+'icon__file-type-odt': file.type == 'application/vnd.oasis.opendocument.text',
+'icon__file-type-ppt': file.type == 'application/vnd.ms-powerpoint',
+'icon__file-type-rtf': file.type == 'application/rtf',
+'icon__file-type-xls': file.type == 'application/msxls'}"
+                    *ngIf="!isImage(file)"
+                ></div>
                 <div class="qt-ml-12 qt-df qt-ai-c qt-jc-sb qt-w100">
                     <div>
                         <span class="name qt-mb-4 ellipsis">{{ file?.name }}</span>

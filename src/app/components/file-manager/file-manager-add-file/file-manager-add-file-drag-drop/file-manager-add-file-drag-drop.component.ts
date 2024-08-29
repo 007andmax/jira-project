@@ -57,6 +57,7 @@ export class FileManagementAddFileDragDropComponent extends UploadAreaComponent 
       this.elRef.nativeElement.querySelector('.qt-fileupload').classList.add('fileupload');
       this.isUploadingFile.emit(true);
       this.isUploading = true;
+      console.log("this.files[index]", this.files[index]);
       this.uploadFile(this.files[index]).then((data: any) => {
         let res = JSON.parse(data.response);
         this.idfiles.push(res.id);
