@@ -230,6 +230,7 @@
     color: $gray-500;
     font-weight: 400;
     position: relative;
+    max-width: 210px;
     &::after {
         content: "";
         width: 3px;

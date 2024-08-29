@@ -91,7 +91,7 @@ export class FileManagerFileInfoComponent implements OnInit, OnDestroy {
   }
 
   isImage() {
-    return this.file && (this.file.contentType === "image/jpg" || this.file.contentType === "image/png" || this.file.contentType === "image/jpeg");
+    return this.file && (this.file.contentType === "image/jpg" || this.file.contentType === "image/png" || this.file.contentType === "image/jpeg" || this.file.contentType === "image/gif");
   }
   onChangeTags(data) {
     this.file.setTags(data);

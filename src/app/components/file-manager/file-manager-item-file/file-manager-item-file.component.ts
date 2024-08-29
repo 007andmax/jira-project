@@ -26,10 +26,10 @@ export class FileManagerItemFileComponent implements OnInit {
   ngOnInit() {
   }
   isImage() {
-    return this.item.contentType === "image/jpg" || this.item.contentType === "image/png" || this.item.contentType === "image/jpeg";
+    return this.item.contentType === "image/jpg" || this.item.contentType === "image/png" || this.item.contentType === "image/jpeg" || this.item.contentType === "image/gif";
   }
   preview() {
-    if (this.item.contentType === "image/jpg" || this.item.contentType === "image/png" || this.item.contentType === "image/jpeg") this.previewFileStateService.initPreview(this.item);
+    if (this.item.contentType === "image/jpg" || this.item.contentType === "image/png" || this.item.contentType === "image/jpeg" || this.item.contentType === "image/gif") this.previewFileStateService.initPreview(this.item);
   }
   remove() {
     this.onRemove.emit(this.item);
