@@ -1,5 +1,5 @@
 <div
-    class="item-file-container qt-pointer"
+    class="item-file-container"
     ngbDropdown
     #db="ngbDropdown"
     appDoubleClick
@@ -25,7 +25,7 @@
     </div>
     <div
         [ngClass]="{'show-db':db.isOpen()}"
-        class="qt-button --square-md --gray pointer actions"
+        class="qt-button --square-md --gray qt-pointer actions"
         ngbDropdownToggle
         *ngIf="!item.allCompaniesRoot && !item.companyId || isRemove"
     >
