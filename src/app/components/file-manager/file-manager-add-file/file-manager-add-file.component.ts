@@ -52,7 +52,7 @@ export class FileManagerAddFileComponent implements OnInit {
   }
   onRemoveFile(id) {
     this.documentsService.removeDocumentAttachment(id).subscribe(data => {
-
+      this.addForm.controls["mediaFileId"].setValue('');
     })
   }
   onChangeFiles(data) {

@@ -166,7 +166,7 @@
     top: 57px;
     z-index: 1;
     background-color: $white;
-    padding-top: 0px;
+    padding-top: 32px;
 
     .qt-page-list__header-thead {
         border: 1px solid $gray-200;
@@ -187,10 +187,12 @@
 .page-list-users {
     padding: 0;
     background-color: $white;
+    min-height: calc(100vh - 109px);
 
     /deep/ .qt-page-list {
         background-color: $white;
         padding: 0;
+        min-height: calc(100vh - 166px);
     }
 
     /deep/ table.qt-table-modern tbody tr td:first-child {

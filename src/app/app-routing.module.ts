@@ -231,8 +231,16 @@ const routes: Routes = [
     path: ':domain/company/:id/documents',
     loadChildren: './components/companies/company-documents/company-documents.module#CompanyDocumentsModule',
     canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]
-
-
+  },
+  {
+    path: ':domain/company/:id/file-manager',
+    loadChildren: './components/companies/company-file-manager/company-file-manager.module#CompanyFileManagerModule',
+    canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]
+  },
+  {
+    path: ':domain/company/:id/file-manager/category/:categoryId',
+    loadChildren: './components/companies/company-file-manager/company-file-manager-category/company-file-manager-category.module#CompanyFileManagerCategoryModule',
+    canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/documents/preview/:id',

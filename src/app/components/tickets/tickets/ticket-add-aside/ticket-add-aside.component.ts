@@ -313,17 +313,17 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     this.ticketValidate.resetSubject();
   }
   onChangeFiles(ids) {
-    if (this.ticketAdd.attachFileIds && this.ticketAdd.attachFileIds.length > ids.length) {
-      this.ticketAdd.attachFileIds.forEach(item => {
-        let find = ids.find(id => id === item);
-        if (!find) {
-          this.companiesService.removeAttachment(item).subscribe(data => {
-
-          })
-        }
-      })
-    }
-    this.ticketAdd.setAttachFileIds(JSON.parse(JSON.stringify(ids)));
+    /* if (this.ticketAdd.attachFileIds && this.ticketAdd.attachFileIds.length > ids.length) {
+       this.ticketAdd.attachFileIds.forEach(item => {
+         let find = ids.find(id => id.id === item);
+         if (!find) {
+           this.companiesService.removeAttachment(item).subscribe(data => {
+ 
+           })
+         }
+       })
+     }*/
+    this.ticketAdd.setAttachFileIds(JSON.parse(JSON.stringify(ids.map(item => item.id))));
   }
   onChangeShareUsers(data) {
     let shareUsersList = JSON.parse(JSON.stringify(this.shareUsersList));

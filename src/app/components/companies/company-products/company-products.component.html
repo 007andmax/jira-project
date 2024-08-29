@@ -1,12 +1,14 @@
 <div class="product-list-report product-list list-of-product --sticky-breadcrumbs">
-    <h6 class="report-title qt-fw-600 qt-color-gray-900">List of products sold</h6>
-    <div>
+    <div class="qt-page-list__header --sticky">
+      <h6 class="report-title qt-fw-600 qt-color-gray-900">List of products sold</h6>
+      <div>
         <app-report-menu
-            [report]="'company-roducts-report'"
-            (onSelectedClient)="onSelectedClient($event)"
-            (onRequest)="onRequest($event)"
-            (getReport)="getReport($event)"
+          [report]="'company-roducts-report'"
+          (onSelectedClient)="onSelectedClient($event)"
+          (onRequest)="onRequest($event)"
+          (getReport)="getReport($event)"
         ></app-report-menu>
+      </div>
     </div>
     <!-- <app-report-additional-actions -->
     <!-- [orientation]="'LANDSCAPE'" -->
@@ -16,209 +18,211 @@
     <!-- (changePurchaseCost)="togglePurchaseCost($event)" -->
     <!-- ></app-report-additional-actions> -->
     <div
-        class="loading"
-        *ngIf="loadingInProgress"
+      class="loading"
+      *ngIf="loadingInProgress"
     ></div>
-    <div
+    <div class="qt-page-list__body">
+      <div
         class="product-list___ticket"
         id="product-list-ticket-data"
-    >
+      >
         <div
-            class="product-list-ticket product-list-ticket-pdf list-of-product-pdf company-report"
-            *ngIf="!loadingInProgress"
+          class="product-list-ticket product-list-ticket-pdf list-of-product-pdf company-report"
+          *ngIf="!loadingInProgress"
         >
-            <div class="qt-report__body-header">
-                <h6 class="qt-fw-600 qt-color-gray-900">List of products sold</h6>
-                <div class="body-m__sb qt-color-gray-900">
-                    {{productsCompanyReport.clientCompanyName}}
-                </div>
-                <div class="body-m qt-color-gray-600">
-                    <span>{{productsCompanyReport.startDate}}</span>
-                    -
-                    <span>{{productsCompanyReport.endDate}}</span>
-                </div>
-                <div *ngIf="productsCompanyReport.lines.length > 0">
-                    <div class="body-m__sb qt-color-gray-900">
-                        {{ productsCompanyReport.techCompanyName }}
-                    </div>
-                </div>
+          <div class="qt-report__body-header">
+            <h6 class="qt-fw-600 qt-color-gray-900">List of products sold</h6>
+            <div class="body-m__sb qt-color-gray-900">
+              {{productsCompanyReport.clientCompanyName}}
+            </div>
+            <div class="body-m qt-color-gray-600">
+              <span>{{productsCompanyReport.startDate}}</span>
+              -
+              <span>{{productsCompanyReport.endDate}}</span>
             </div>
             <div *ngIf="productsCompanyReport.lines.length > 0">
-                <div *ngIf="productsCompanyReport.lines">
-                    <div class="product-list-ticket__table">
-                        <div class="qt-page-list__header-thead-container">
-                            <div class="qt-table-modern qt-page-list__header-thead">
-                                <div class="qt-page-list__header-thead__row">
-                                    <div class="product-list-ticket__check">
-                                        <strong>
-                                            <label class="qt-checkbox">
-                                                <input
-                                                    type="checkbox"
-                                                    [(ngModel)]="generalCheckbox"
-                                                    (change)="changeGeneralCheckbox()"
-                                                >
-                                                <span></span>
-                                            </label>
-                                        </strong>
-                                    </div>
-                                    <div
-                                        class="product-list-ticket__date"
-                                        (click)="onFilter('date')"
-                                    >
-                                        Date
-                                    </div>
-                                    <div
-                                        class="product-list-ticket__client"
-                                        (click)="onFilter('client')"
-                                        *ngIf="productsCompanyReport.type === 'SUMMARY'"
-                                    >
-                                        <strong>Client</strong>
-                                    </div>
-                                    <div
-                                        class="product-list-ticket__mfg"
-                                        (click)="onFilter('mfg')"
-                                    >
-                                        MFG#
-                                    </div>
-                                    <div
-                                        class="product-list-ticket__description"
-                                        (click)="onFilter('description')"
-                                    >
-                                        Description
-                                    </div>
-                                    <div
-                                        class="product-list-ticket__serial-number"
-                                        (click)="onFilter('serialNumber')"
-                                    >
-                                        Serial number
-                                    </div>
-                                    <div
-                                        class="product-list-ticket__number"
-                                        (click)="onFilter('ticketNumber')"
-                                    >
-                                        Ticket number
-                                    </div>
-                                    <div
-                                        class="product-list-ticket__invoice-number"
-                                        (click)="onFilter('invoiceNumber')"
-                                    >
-                                        Invoice number
-                                    </div>
-                                    <div
-                                        class="product-list-ticket__purchase-cost"
-                                        (click)="onFilter('purchaseCost')"
-                                        *ngIf="getPermissions('VIEW_PRODUCT_COST')"
-                                    >
-                                        Purchase cost
-                                    </div>
-                                    <div
-                                        class="product-list-ticket__sale-price"
-                                        (click)="onFilter('salePrice')"
-                                    >
-                                        Sale price
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- <div id="list-products" class="qt-page-list__body"> -->
-                        <div class="qt-page-list__body">
-                            <div class="qt-page-list__body-table-container">
-                                <div
-                                    id="list-products"
-                                    class="qt-page-list__body-tbody qt-table-modern companies-table"
-                                >
-                                    <ng-template
-                                        ngFor
-                                        let-product
-                                        [ngForOf]="productsCompanyReport.lines"
-                                        [ngForTrackBy]="trackByIndex"
-                                    >
-                                        <li
-                                            class="qt-table-modern__row qt-table-modern__row--lg qt-table-modern__row"
-                                            ng-class="{'hide-in-report':product.isChecked}"
-                                        >
-                                            <div class="product-list-ticket__check">
-                                                <label class="qt-checkbox">
-                                                    <input
-                                                        type="checkbox"
-                                                        [(ngModel)]="product.isChecked"
-                                                        (change)="selectLine()"
-                                                    >
-                                                    <span></span>
-                                                </label>
-                                            </div>
-                                            <div class="product-list-ticket__date">{{product.date}}</div>
-                                            <div
-                                                class="product-list-ticket__client"
-                                                *ngIf="productsCompanyReport.type === 'SUMMARY'"
-                                            >
-                                                {{product.client}}
-                                            </div>
-                                            <div class="product-list-ticket__mfg ellipsis">{{product.mfg}}</div>
-                                            <div class="product-list-ticket__description">
-                                                <pre>{{product.description}}</pre>
-                                            </div>
-                                            <div class="product-list-ticket__serial-number">
-                                                {{product.serialNumber
-                                      }}
-                                            </div>
-                                            <div
-                                                class="product-list-ticket__number"
-                                                [ngStyle]="{'color': !product.invoiceNumber ? 'red' : 'none'}"
-                                            >
-                                                {{product.ticketNumber
-                                      }}
-                                            </div>
-                                            <div
-                                                class="product-list-ticket__invoice-number"
-                                                [ngStyle]="{'color': product.invoiceNumber ? 'green' : 'none'}"
-                                            >
-                                                {{product.invoiceNumber }}
-                                            </div>
-                                            <div
-                                                class="product-list-ticket__purchase-cost"
-                                                *ngIf="getPermissions('VIEW_PRODUCT_COST')"
-                                            >
-                                                {{'$' + parseTotal(product.purchaseCost) }}
-                                            </div>
-                                            <div
-                                                class="product-list-ticket__sale-price"
-                                                [ngStyle]="{'color': product.salePrice < product.purchaseCost ? 'red' : 'none'}"
-                                            >
-                                                {{'$'+ parseTotal(product.salePrice) }}
-                                            </div>
-                                        </li>
-                                    </ng-template>
-                                </div>
-                                <div class="qt-page-list__body-tbody">
-                                    <div
-                                        class="qt-table-modern__row product-report-total-sales qt-df qt-jc-fe"
-                                        *ngIf="productsCompanyReport.lines"
-                                    >
-                                        <div class="product-list-ticket__check"></div>
-                                        <div class="product-list-ticket__date"></div>
-                                        <div class="product-list-ticket__mfg"></div>
-                                        <div class="product-list-ticket__description"></div>
-                                        <div class="product-list-ticket__serial-number"></div>
-                                        <div class="product-list-ticket__number"></div>
-                                        <div class="product-list-ticket__invoice-number"></div>
-                                        <div class="product-list-ticket__purchase-cost">
-                                            <strong class="qt-fs-16">
-                                                <span>{{'$' + parseTotal(purchaseCostSum) }}</span>
-                                            </strong>
-                                        </div>
-                                        <div class="product-list-ticket__sale-price">
-                                            <strong class="qt-fs-16">
-                                                <span *ngIf="getPermissions('VIEW_PRODUCT_COST')">{{'$' + parseTotal(salesPriceSum) }}</span>
-                                            </strong>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              <div class="body-m__sb qt-color-gray-900">
+                {{ productsCompanyReport.techCompanyName }}
+              </div>
             </div>
+          </div>
+          <div *ngIf="productsCompanyReport.lines.length > 0">
+            <div *ngIf="productsCompanyReport.lines">
+              <div class="product-list-ticket__table">
+                <div class="qt-page-list__header-thead-container">
+                  <div class="qt-table-modern qt-page-list__header-thead">
+                    <div class="qt-page-list__header-thead__row">
+                      <div class="product-list-ticket__check">
+                        <strong>
+                          <label class="qt-checkbox">
+                            <input
+                              type="checkbox"
+                              [(ngModel)]="generalCheckbox"
+                              (change)="changeGeneralCheckbox()"
+                            >
+                            <span></span>
+                          </label>
+                        </strong>
+                      </div>
+                      <div
+                        class="product-list-ticket__date"
+                        (click)="onFilter('date')"
+                      >
+                        Date
+                      </div>
+                      <div
+                        class="product-list-ticket__client"
+                        (click)="onFilter('client')"
+                        *ngIf="productsCompanyReport.type === 'SUMMARY'"
+                      >
+                        <strong>Client</strong>
+                      </div>
+                      <div
+                        class="product-list-ticket__mfg"
+                        (click)="onFilter('mfg')"
+                      >
+                        MFG#
+                      </div>
+                      <div
+                        class="product-list-ticket__description"
+                        (click)="onFilter('description')"
+                      >
+                        Description
+                      </div>
+                      <div
+                        class="product-list-ticket__serial-number"
+                        (click)="onFilter('serialNumber')"
+                      >
+                        Serial number
+                      </div>
+                      <div
+                        class="product-list-ticket__number"
+                        (click)="onFilter('ticketNumber')"
+                      >
+                        Ticket number
+                      </div>
+                      <div
+                        class="product-list-ticket__invoice-number"
+                        (click)="onFilter('invoiceNumber')"
+                      >
+                        Invoice number
+                      </div>
+                      <div
+                        class="product-list-ticket__purchase-cost"
+                        (click)="onFilter('purchaseCost')"
+                        *ngIf="getPermissions('VIEW_PRODUCT_COST')"
+                      >
+                        Purchase cost
+                      </div>
+                      <div
+                        class="product-list-ticket__sale-price"
+                        (click)="onFilter('salePrice')"
+                      >
+                        Sale price
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div id="list-products" class="qt-page-list__body"> -->
+                <div class="qt-page-list__body">
+                  <div class="qt-page-list__body-table-container">
+                    <div
+                      id="list-products"
+                      class="qt-page-list__body-tbody qt-table-modern companies-table"
+                    >
+                      <ng-template
+                        ngFor
+                        let-product
+                        [ngForOf]="productsCompanyReport.lines"
+                        [ngForTrackBy]="trackByIndex"
+                      >
+                        <li
+                          class="qt-table-modern__row qt-table-modern__row--lg qt-table-modern__row"
+                          ng-class="{'hide-in-report':product.isChecked}"
+                        >
+                          <div class="product-list-ticket__check">
+                            <label class="qt-checkbox">
+                              <input
+                                type="checkbox"
+                                [(ngModel)]="product.isChecked"
+                                (change)="selectLine()"
+                              >
+                              <span></span>
+                            </label>
+                          </div>
+                          <div class="product-list-ticket__date">{{product.date}}</div>
+                          <div
+                            class="product-list-ticket__client"
+                            *ngIf="productsCompanyReport.type === 'SUMMARY'"
+                          >
+                            {{product.client}}
+                          </div>
+                          <div class="product-list-ticket__mfg ellipsis">{{product.mfg}}</div>
+                          <div class="product-list-ticket__description">
+                            <pre>{{product.description}}</pre>
+                          </div>
+                          <div class="product-list-ticket__serial-number">
+                            {{product.serialNumber
+                            }}
+                          </div>
+                          <div
+                            class="product-list-ticket__number"
+                            [ngStyle]="{'color': !product.invoiceNumber ? 'red' : 'none'}"
+                          >
+                            {{product.ticketNumber
+                            }}
+                          </div>
+                          <div
+                            class="product-list-ticket__invoice-number"
+                            [ngStyle]="{'color': product.invoiceNumber ? 'green' : 'none'}"
+                          >
+                            {{product.invoiceNumber }}
+                          </div>
+                          <div
+                            class="product-list-ticket__purchase-cost"
+                            *ngIf="getPermissions('VIEW_PRODUCT_COST')"
+                          >
+                            {{'$' + parseTotal(product.purchaseCost) }}
+                          </div>
+                          <div
+                            class="product-list-ticket__sale-price"
+                            [ngStyle]="{'color': product.salePrice < product.purchaseCost ? 'red' : 'none'}"
+                          >
+                            {{'$'+ parseTotal(product.salePrice) }}
+                          </div>
+                        </li>
+                      </ng-template>
+                    </div>
+                    <div class="qt-page-list__body-tbody">
+                      <div
+                        class="qt-table-modern__row product-report-total-sales qt-df qt-jc-fe"
+                        *ngIf="productsCompanyReport.lines"
+                      >
+                        <div class="product-list-ticket__check"></div>
+                        <div class="product-list-ticket__date"></div>
+                        <div class="product-list-ticket__mfg"></div>
+                        <div class="product-list-ticket__description"></div>
+                        <div class="product-list-ticket__serial-number"></div>
+                        <div class="product-list-ticket__number"></div>
+                        <div class="product-list-ticket__invoice-number"></div>
+                        <div class="product-list-ticket__purchase-cost">
+                          <strong class="qt-fs-16">
+                            <span>{{'$' + parseTotal(purchaseCostSum) }}</span>
+                          </strong>
+                        </div>
+                        <div class="product-list-ticket__sale-price">
+                          <strong class="qt-fs-16">
+                            <span *ngIf="getPermissions('VIEW_PRODUCT_COST')">{{'$' + parseTotal(salesPriceSum) }}</span>
+                          </strong>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
 </div>

@@ -158,8 +158,20 @@
             Contracts
         </li>
     </a>
-
-
+    <a
+        class="clear-link-style"
+        href
+        [link]="getLinkSection('file-manager')"
+        target="_blank"
+        appRightClickBlank
+    >
+        <li
+            [ngClass]="{'--active':activePage === 'company-file-manager'}"
+            (click)="goToCompanySection('file-manager')"
+        >
+            File Manager
+        </li>
+    </a>
     <a
         class="clear-link-style"
         href
@@ -186,8 +198,6 @@
             </div>
         </li>
     </a>
-
-
     <ul
         class="categories"
         *ngIf="toogleCategoriesDocuments"

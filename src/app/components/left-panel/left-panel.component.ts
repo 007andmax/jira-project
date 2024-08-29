@@ -122,6 +122,7 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`products`)) this.state = 'company-products';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`contracts`)) this.state = 'company-contracts';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`documents`)) this.state = 'company-documents';
+          if (window.location.href.includes(`/company/`) && window.location.href.includes(`file-manager`)) this.state = 'company-file-manager';
 
 
           if (window.location.href.includes(`/inventory/products`)) this.state = 'inventory';
@@ -337,6 +338,7 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
       if (this.state === 'company-password-manager') this.goToLink('company/password-manager');
       if (this.state === 'company-products') this.goToLink('company/products');
       if (this.state === 'company-contracts') this.goToLink('company/contracts');
+      if (this.state === 'company-file-manager') this.goToLink(`company/${this.companiesStateService.getCompanyRoutingId()}/file-manager`);
       if (this.state === 'inventory') this.goToLink(`inventory/products`);
       if (this.state === 'password-manager') this.goToLink(`password-manager`);
       if (this.state === 'myprofile-component') this.goToLink('setting/myprofile');

@@ -9,6 +9,7 @@ import { PreviewFileStateService } from 'src/app/states/file-management/preview-
 import { FileManagementStateService } from 'src/app/states/file-management/file-management-state.service';
 import { FileManagementRealTimeService } from 'src/app/states/file-management/file-management-real-time.service';
 import * as moment from "moment";
+import { TicketsService } from 'src/app/services/tickets/tickets.service';
 
 @Component({
   selector: 'app-file-manager-file-info',
@@ -18,6 +19,7 @@ import * as moment from "moment";
 })
 export class FileManagerFileInfoComponent implements OnInit, OnDestroy {
   selectedTags: Array<any> = [];
+  @Input() isEdit: boolean = false;
   @Input() file: FileManagerFile;
   @Input() category: FileManagerCategory;
   modelForm: FormGroup;
@@ -30,6 +32,7 @@ export class FileManagerFileInfoComponent implements OnInit, OnDestroy {
     public fileManagementStateService: FileManagementStateService,
     public fileManagementRealTimeService: FileManagementRealTimeService,
     public cd: ChangeDetectorRef,
+    public ticketsService: TicketsService,
   ) { }
 
   ngOnInit() {
@@ -131,5 +134,22 @@ export class FileManagerFileInfoComponent implements OnInit, OnDestroy {
   preview() {
     if (this.file.contentType === "image/jpg" || this.file.contentType === "image/png" || this.file.contentType === "image/jpeg") this.previewFileStateService.initPreview(this.file);
 
+  }
+  download() {
+    this.ticketsService.downloadFile(this.file.mediaFileId, this.file.contentType).subscribe(res => {
+      var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+      const data = window.URL.createObjectURL(res);
+      var link = document.createElement('a');
+      link.href = data;
+      if (isFirefox) {
+        link.href = `${window.location.origin}/file/${this.file.mediaFileId}/attachment`;
+        link.target = "_blank";
+      } else {
+        link.download = `${this.file.name}.${this.file.contentType.substring(this.file.contentType.indexOf("/") + 1, this.file.contentType.length)}`;
+      }
+      var e = document.createEvent('MouseEvents');
+      e.initEvent('click', true, true);
+      link.dispatchEvent(e);
+    })
   }
 }

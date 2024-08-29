@@ -12,6 +12,9 @@ import { FileManagementRealTimeService } from 'src/app/states/file-management/fi
 import * as moment from "moment";
 import { fadeInAnimation } from 'src/app/animations';
 import { FileManagerFileInfoComponent } from './file-manager-file-info/file-manager-file-info.component';
+import { ActivatedRoute } from '@angular/router';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 
 @Component({
   selector: 'app-file-manager',
@@ -39,30 +42,14 @@ export class FileManagerComponent implements OnInit, OnDestroy {
     public fileManagementStateService: FileManagementStateService,
     public fileManagementRealTimeService: FileManagementRealTimeService,
     public cd: ChangeDetectorRef,
+    public activateRoute: ActivatedRoute,
+    public companiesStateService: CompaniesStateService,
+    public leftPanelStateService: LeftPanelStateService,
   ) { }
 
 
   ngOnInit() {
-    this.fileManagementService.getFileManagement().subscribe((data: any) => {
-      this.categories = data.categories.map(item => new FileManagerCategory(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-      this.files = data.files.map(item => new FileManagerFile(item)).sort((a, b) => (a.createdAt > b.createdAt) ?
-        1 : ((b.createdAt > a.createdAt) ? -1 : 0));
-      this.files.forEach(person => {
-        let date = moment(new Date(person.createdAt)).format('DD MMM YYYY');
-        if (!this.groupedByCreateAt[date]) this.groupedByCreateAt[date] = [];
-        this.groupedByCreateAt[date].push(person);
-      });
-      this.groupedByCreateAt = Object.keys(this.groupedByCreateAt).sort((a, b) => (new Date(a) > new Date(b)) ?
-        1 : ((new Date(b) > new Date(a)) ? -1 : 0)).reverse().reduce(
-          (obj, key) => {
-            obj[key] = this.groupedByCreateAt[key];
-            return obj;
-          },
-          {}
-        );
-      this.showPreloader = false;
-    })
+    this.getFileManagement();
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_CATEGORY_FILES) this.removeCategory(this.fileManagementStateService.getCategoryForRemove());
@@ -116,7 +103,7 @@ export class FileManagerComponent implements OnInit, OnDestroy {
     this.sub.add(onEditCategory);
     let onChangeDocument = this.fileManagementRealTimeService.changeArray.subscribe(data => {
       if (data.action === "CREATE_FILE_MANAGEMENT_CATEGORY") {
-        let isExist = this.files.some(item => item.id == data.data.id);
+        let isExist = this.categories.some(item => item.id == data.data.id);
         if (!isExist) this.categories.push(new FileManagerCategory(data.data));
       }
       if (data.action === "CREATE_MANAGEMENT_FILE") {
@@ -158,6 +145,28 @@ export class FileManagerComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onChangeDocument);
   }
+  getFileManagement() {
+    this.fileManagementService.getFileManagement().subscribe((data: any) => {
+      this.categories = data.categories.map(item => new FileManagerCategory(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+      this.files = data.files.map(item => new FileManagerFile(item)).sort((a, b) => (a.createdAt > b.createdAt) ?
+        1 : ((b.createdAt > a.createdAt) ? -1 : 0));
+      this.files.forEach(person => {
+        let date = moment(new Date(person.createdAt)).format('DD MMM YYYY');
+        if (!this.groupedByCreateAt[date]) this.groupedByCreateAt[date] = [];
+        this.groupedByCreateAt[date].push(person);
+      });
+      this.groupedByCreateAt = Object.keys(this.groupedByCreateAt).sort((a, b) => (new Date(a) > new Date(b)) ?
+        1 : ((new Date(b) > new Date(a)) ? -1 : 0)).reverse().reduce(
+          (obj, key) => {
+            obj[key] = this.groupedByCreateAt[key];
+            return obj;
+          },
+          {}
+        );
+      this.showPreloader = false;
+    })
+  }
   sortKeyObject() {
     return Object.keys(this.groupedByCreateAt).sort((a, b) => (new Date(a) > new Date(b)) ?
       1 : ((new Date(b) > new Date(a)) ? -1 : 0)).reverse();
@@ -182,6 +191,10 @@ export class FileManagerComponent implements OnInit, OnDestroy {
   }
   onToggleFileInfo(data) {
     this.toggleFileInfo = data;
+    if (!data) {
+      this.fileInfo = null;
+      this.cateforyInfo = null;
+    }
   }
   removeCategory(item) {
     this.fileManagementService.removeCategory(item.id).subscribe(data => {
@@ -196,13 +209,13 @@ export class FileManagerComponent implements OnInit, OnDestroy {
   onRemoveFile(data) {
     this.confirmStateService.setConfirmAction(REMOVE_FILE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to delete this file?`;
+    modalRef.componentInstance.message = `Are you sure you want to delete this folder?`;
     this.fileManagementStateService.setFileForRemove(data);
   }
   onRemoveCategory(data) {
     this.confirmStateService.setConfirmAction(REMOVE_CATEGORY_FILES);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to delete this category?`;
+    modalRef.componentInstance.message = `Are you sure you want to delete this folder?`;
     this.fileManagementStateService.setCategoryForRemove(data);
   }
   public trackById(index, item) {
@@ -210,5 +223,8 @@ export class FileManagerComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
+  }
+  public trackById(index, item) {
+    return item.id;
   }
 }

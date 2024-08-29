@@ -4,6 +4,19 @@
 app-company-devices-item {
     display: contents;
 }
+.qt-page-list {
+    min-height: calc(100vh - 109px);
+    padding-top: 0;
+
+    .qt-page-list__header {
+      &.--sticky {
+        top: 45px;
+        padding-top: 24px;
+        margin-top: 0;
+        z-index: 2;
+      }
+    }
+}
 
 .Resize{
   @include media-breakpoint-up($lg) {

@@ -14,7 +14,8 @@ import {
 export class DndDirective implements OnInit {
   @HostBinding('class.fileover') fileOver: boolean;
   @Output() fileDropped = new EventEmitter<any>();
-
+  @Output() onDragover = new EventEmitter<any>();
+  @Output() onDragleave = new EventEmitter<any>();
   ngOnInit() {
   }
 
@@ -23,6 +24,7 @@ export class DndDirective implements OnInit {
     evt.preventDefault();
     evt.stopPropagation();
     this.fileOver = true;
+    this.onDragover.emit(null);
   }
 
   // Dragleave listener
@@ -30,6 +32,7 @@ export class DndDirective implements OnInit {
     evt.preventDefault();
     evt.stopPropagation();
     this.fileOver = false;
+    this.onDragleave.emit(null);
   }
 
   // Drop listener

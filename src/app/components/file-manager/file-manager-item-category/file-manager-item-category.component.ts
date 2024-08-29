@@ -13,6 +13,7 @@ import * as moment from "moment";
 })
 export class FileManagerItemCategoryComponent implements OnInit {
   @ViewChild('db') db: NgbDropdown;
+  @Input() isRemove: boolean = false;
   @Input() item: FileManagerCategory;
   @Input() isRemove: boolean = true;
   @Output() onRemove = new EventEmitter<any>();
@@ -42,7 +43,7 @@ export class FileManagerItemCategoryComponent implements OnInit {
     this.onRemove.emit(this.item);
   }
   getCreateBy() {
-    return moment(new Date(this.item.createdAt)).format('DD MMM YYYY hh:mm A');
+    return this.item.createdAt ? moment(new Date(this.item.createdAt)).format('DD MMM YYYY hh:mm A') : '';
   }
   rename() {
     const modalRef = this.modalService.open(FileManagerCategoryRenameComponent, { windowClass: 'xs-modal user-modal', container: "app-file-manager", backdrop: 'static', keyboard: false });

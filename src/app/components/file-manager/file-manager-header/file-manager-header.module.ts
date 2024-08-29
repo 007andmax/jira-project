@@ -8,11 +8,10 @@ import { FileManagerHeaderComponent } from './file-manager-header.component';
 import { FileManagerAddCategoryComponent } from '../file-manager-add-category/file-manager-add-category.component';
 import { MatFormFieldModule } from '@angular/material';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
+import { FileManagerAddCategoryModule } from '../file-manager-add-category/file-manager-add-category.module';
 
 @NgModule({
     declarations: [FileManagerHeaderComponent,
-        FileManagerAddCategoryComponent
-
     ],
     imports: [
         CommonModule,
@@ -22,7 +21,8 @@ import { DropDownModule } from '../../shared/drop-down/drop-down.module';
         NgbModule,
         ReactiveFormsModule,
         MatFormFieldModule,
-        DropDownModule
+        DropDownModule,
+        FileManagerAddCategoryModule
     ],
     exports: [FileManagerHeaderComponent]
 })

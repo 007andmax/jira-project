@@ -1,8 +1,7 @@
 <div
-    class="item-file-container qt-pointer"
+    class="item-file-container"
     ngbDropdown
     #db="ngbDropdown"
-    (click)="fileInfo()"
     appDoubleClick
     (doubleClick)="preview()"
 >
@@ -17,7 +16,10 @@
  'icon__file-type-csv': item.contentType == 'text/csv',
 'icon__file-type-doc': item.contentType == 'application/msword',
 'icon__file-type-html': item.contentType == 'text/html',
-'icon__file-type-odt': item.contentType == 'application/vnd.oasis.opendocument.text'}"
+'icon__file-type-odt': item.contentType == 'application/vnd.oasis.opendocument.text',
+'icon__file-type-ppt': item.contentType == 'application/vnd.ms-powerpoint',
+'icon__file-type-rtf': item.contentType == 'application/rtf',
+'icon__file-type-xls': item.contentType == 'application/msxls'}"
             *ngIf="!isImage()"
         ></div>
         <div
@@ -45,7 +47,7 @@
     </div>
     <div
         [ngClass]="{'show-db':db.isOpen()}"
-        class="qt-button --square-md --gray pointer actions"
+        class="qt-button --square-md --gray qt-pointer actions"
         ngbDropdownToggle
         (click)="$event.stopPropagation();"
     >
@@ -68,6 +70,14 @@
             >
                 <div class="qt-icon icon__download qt-sz-20 qt-mr-12"></div>
                 Download
+            </li>
+            <li
+                class="pointer"
+                ngbDropdownItem
+                (click)="fileInfo()"
+            >
+                <div class="qt-icon icon__info qt-sz-20 qt-mr-12"></div>
+                File info
             </li>
             <li
                 class="pointer qt-dropdown-menu__item-red qt-dropdown-menu__top-line qt-color-red-600"

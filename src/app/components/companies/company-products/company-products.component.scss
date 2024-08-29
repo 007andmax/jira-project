@@ -1,5 +1,24 @@
 @import './src/assets/styles/variable';
 
+.product-list-report {
+  padding-top: 0;
+  min-height: calc(100vh - 109px);
+}
+.qt-page-list {
+  &__header {
+    &.--sticky {
+      position: sticky;
+      top: 45px;
+      padding-top: 24px;
+      margin-top: 0;
+    }
+  }
+
+  &__body {
+    overflow-x: clip;
+  }
+}
+
 /deep/.send-modal-center .new-companies-content {
     &__modal--header {
       border-top-right-radius: 10px;

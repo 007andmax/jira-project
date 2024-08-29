@@ -13,6 +13,9 @@
 'icon__file-type-doc': file && file.contentType == 'application/msword',
 'icon__file-type-html': file && file.contentType == 'text/html',
 'icon__file-type-odt': file && file.contentType == 'application/vnd.oasis.opendocument.text',
+'icon__file-type-ppt': file && file.contentType == 'application/vnd.ms-powerpoint',
+'icon__file-type-rtf': file && file.contentType == 'application/rtf',
+'icon__file-type-xls': file && file.contentType == 'application/msxls',
 'icon__folder-type': category}"
                 *ngIf="file && !isImage() || category"
             ></div>
@@ -26,7 +29,7 @@
                 <span
                     class="qt-fs-16 qt-fw-500 qt-color-gray-900"
                     [textContent]="category.name"
-                    *ngIf="category && (category.allCompaniesRoot || category.companyId)"
+                    *ngIf="category && (category.allCompaniesRoot || category.companyId) && !isEdit"
                 ></span>
                 <input
                     class="qt-editable-input qt-fs-16 qt-fw-500 qt-color-gray-900 file-info-name"
@@ -37,7 +40,7 @@
                     (blur)="onChange()"
                     appKeyUpEnter
                     (onChange)="onChange()"
-                    [hidden]="category && (category.allCompaniesRoot || category.companyId)"
+                    *ngIf="file || category && !(category.allCompaniesRoot || category.companyId) || category && isEdit"
                 >
                 <mat-error
                     class="invalid-feedback"
@@ -47,7 +50,7 @@
                 </mat-error>
                 <div
                     class="qt-button --square-md --gray qt-ml-8 info-file-label-edit qt-fs-0"
-                    [hidden]="category && (category.allCompaniesRoot || category.companyId)"
+                    *ngIf="file || category && !(category.allCompaniesRoot || category.companyId) || category && isEdit"
                 >
                     <div class="qt-icon icon__edit qt-sz-16"></div>
                 </div>
@@ -120,6 +123,13 @@
                 [textContent]="file && file.uploaderName || category && category.creatorName"
             ></span>
         </div>
+        <div class="file-info-field qt-df qt-ai-c qt-mb-16">
+            <span class="file-info-field-header qt-fs-12 qt-color-gray-500">Author email</span>
+            <span
+                class="qt-fs-14 qt-color-gray-900"
+                [textContent]="file && file.uploaderEmail || category && category.uploaderEmail"
+            ></span>
+        </div>
         <div
             class="file-info-description file-info-field qt-mb-16 qt-pt-16 qt-pb-16"
             *ngIf="file"
@@ -133,6 +143,7 @@
             <textarea
                 class="qt-editable-input"
                 appTextArea
+                placeholder="Add a few description about this file here."
                 [(ngModel)]="file.description"
                 maxlength="1000"
                 [default]="2"
@@ -151,14 +162,21 @@
     ></app-file-manager-file-info-tags>
 </div>
 <div
-    class="aside-filters-content__footer"
+    class="aside-filters-content__footer qt-df qt-ai-c"
     *ngIf="file"
 >
     <div
-        class="qt-df qt-ai-c qt-jc-c qt-w100 info-file-view pointer"
+        class="qt-df qt-ai-c qt-jc-c qt-w50 info-file-view pointer"
         (click)="preview()"
     >
         <span class="qt-icon icon__show qt-sz-16 qt-mr-8 pointer"></span>
         View
+    </div>
+    <div
+        class="qt-df qt-ai-c qt-jc-c qt-w50 info-file-view pointer qt-ml-12"
+        (click)="download()"
+    >
+        <span class="qt-icon icon__download qt-sz-16 qt-mr-8 pointer"></span>
+        Download
     </div>
 </div>

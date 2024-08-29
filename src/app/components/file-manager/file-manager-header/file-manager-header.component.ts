@@ -79,4 +79,7 @@ export class FileManagerHeaderComponent implements OnInit {
     this.selectedActive = data;
     this.onChangeArchived.emit(data.type == "NO_ACTIVE");
   }
+  public trackById(index, item) {
+    return item.id;
+  }
 }

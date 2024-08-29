@@ -8,9 +8,11 @@ import { UploadAreaComponent } from 'src/app/components/shared/upload-area/uploa
 })
 export class FileManagementAddFileDragDropComponent extends UploadAreaComponent {
   isUploading: boolean = false;
+  isError: boolean = false;
   @Output() isUploadingFile = new EventEmitter<any>();
   @Output() onRemoveFile = new EventEmitter<any>();
   onFileDropped($event) {
+    this.isDragover = false;
     this.prepareFilesList($event);
     this.cd.detectChanges();
   }
@@ -23,12 +25,30 @@ export class FileManagementAddFileDragDropComponent extends UploadAreaComponent 
     this.files = [files[files.length - 1]]
     this.uploadFilesSimulator(0);
   }
+  removeFile() {
+    if (this.idfiles.length > 0) this.onRemoveFile.emit(this.idfiles[0]);
+    this.files = [];
+    this.idfiles = [];
+  }
+  retryFile() {
+    this.files = [];
+    this.idfiles = [];
+    this.isError = false;
+  }
   uploadFilesSimulator(index: number) {
     if (index === this.files.length) {
+      this.isUploading = false;
+      this.isUploadingFile.emit(false);
       (<any>this.elRef.nativeElement.querySelector('#fileDropRef')).value = '';
       return;
     } else {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.files[index].src = reader.result;
+      };
+      reader.readAsDataURL(this.files[index]);
       if (this.files[index].size > 4194304) {
+        this.isError = true;
         this.files[index].showError = true;
         this.files[index].error = "The size is too big. You can upload a file up to 4MB in size."
         this.uploadFilesSimulator(index + 1);
@@ -37,11 +57,6 @@ export class FileManagementAddFileDragDropComponent extends UploadAreaComponent 
       this.elRef.nativeElement.querySelector('.qt-fileupload').classList.add('fileupload');
       this.isUploadingFile.emit(true);
       this.isUploading = true;
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.files[index].src = reader.result;
-      };
-      reader.readAsDataURL(this.files[index]);
       this.uploadFile(this.files[index]).then((data: any) => {
         let res = JSON.parse(data.response);
         this.idfiles.push(res.id);
@@ -51,13 +66,23 @@ export class FileManagementAddFileDragDropComponent extends UploadAreaComponent 
         this.cd.detectChanges();
         this.isUploadingFile.emit(false);
         this.isUploading = false;
-      }).catch(() => {
+      }, err => {
+        this.isError = true;
         this.elRef.nativeElement.querySelector('.qt-fileupload').classList.remove('fileupload');
         this.files[index].showError = true;
+        this.files[index].error = err.message;
         this.uploadFilesSimulator(index + 1);
-        this.isUploadingFile.emit(false);
       });
     }
+  }
+  parseType(type) {
+    return type.substring(type.lastIndexOf("/") + 1, type.length).toUpperCase();
+  }
+  parseSize(size) {
+    if (size < 1024) return `${size} B`;
+    if (size > 1024) return `${(size / 1024).toFixed(2)} KB`;
+    if (size > 1024 * 1024) return `${(size / 1024 / 1024).toFixed(2)} MB`;
+    return '';
   }
   uploadFile(file) {
     return new Promise((resolve, reject) => {
@@ -65,7 +90,8 @@ export class FileManagementAddFileDragDropComponent extends UploadAreaComponent 
       fd.append("file", file);
       var xhr = new XMLHttpRequest();
       xhr.addEventListener("load", (event) => {
-        resolve(xhr);
+        if (xhr.status == 200) resolve(xhr);
+        if (xhr.status != 200) reject(JSON.parse(xhr.response));
       }, false);
 
       xhr.upload.onprogress = (event) => {

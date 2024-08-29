@@ -15,6 +15,7 @@ import { FileManagementStateService } from 'src/app/states/file-management/file-
 import { BreadcrumbsItem } from '../class/breadcrumbs-item';
 import { fadeInAnimation } from 'src/app/animations';
 import { FileManagerFileInfoComponent } from '../file-manager-file-info/file-manager-file-info.component';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'app-file-manager-category',
@@ -47,6 +48,7 @@ export class FileManagerCategoryComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     public confirmStateService: ConfirmStateService,
     public modalService: NgbModal,
+    public companiesStateService: CompaniesStateService,
   ) {
 
   }
@@ -110,7 +112,7 @@ export class FileManagerCategoryComponent implements OnInit, OnDestroy {
     this.sub.add(onEditCategory);
     let onChangeDocument = this.fileManagementRealTimeService.changeArray.subscribe(data => {
       if (data.action === "CREATE_FILE_MANAGEMENT_CATEGORY") {
-        let isExist = this.files.some(item => item.id == data.data.id);
+        let isExist = this.categories.some(item => item.id == data.data.id);
         if (!isExist) this.categories.push(new FileManagerCategory(data.data));
       }
       if (data.action === "CREATE_MANAGEMENT_FILE") {
@@ -174,6 +176,10 @@ export class FileManagerCategoryComponent implements OnInit, OnDestroy {
   }
   onToggleFileInfo(data) {
     this.toggleFileInfo = data;
+    if (!data) {
+      this.fileInfo = null;
+      this.cateforyInfo = null;
+    }
   }
   getList() {
     this.fileManagementService.getFileManagement(this.categoryId).subscribe((data: any) => {
@@ -222,13 +228,13 @@ export class FileManagerCategoryComponent implements OnInit, OnDestroy {
   onRemoveFile(data) {
     this.confirmStateService.setConfirmAction(REMOVE_FILE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to delete this file?`;
+    modalRef.componentInstance.message = `Are you sure you want to delete this folder?`;
     this.fileManagementStateService.setFileForRemove(data);
   }
   onRemoveCategory(data) {
     this.confirmStateService.setConfirmAction(REMOVE_CATEGORY_FILES);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to delete this category?`;
+    modalRef.componentInstance.message = `Are you sure you want to delete this folder?`;
     this.fileManagementStateService.setCategoryForRemove(data);
   }
   public trackById(index, item) {
@@ -236,5 +242,8 @@ export class FileManagerCategoryComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
+  }
+  public trackById(index, item) {
+    return item.id;
   }
 }

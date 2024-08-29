@@ -26,7 +26,7 @@
         width: 100%;
         height: 120px;
         border: 1px dashed $gray-300;
-        border-radius: 4px;
+        border-radius: 6px;
         cursor: pointer;
         padding: 24px;
         font-size: 14px;
@@ -112,10 +112,17 @@
             width: 100%;
             max-height: 100%;
         }
+        .img-container {
+            min-width: 48px;
+            min-height: 48px;
+            img {
+                border-radius: 4px;
+            }
+        }
         .progress-line-container {
             position: absolute;
             bottom: 0;
-            left: 0;
+            left: 4px;
             right: 0;
             width: 100%;
         }
@@ -143,13 +150,13 @@
             font-weight: 500;
             color: $gray-900;
             margin: 0;
-            max-width: 300px;
+            max-width: 270px;
             display: block;
         }
 
         .size {
             font-size: 12px;
-            font-weight: 500;
+            font-weight: 400;
             color: #a4a4a4;
             margin: 0;
             margin-bottom: 0.25rem;
@@ -211,19 +218,23 @@
         transform: translate(1px, -2px) rotate(-1deg);
     }
 }
-.size-progress {
+.size-progress,.size-error {
     font-size: 12px;
     color: $green-600;
+}
+.size-error {
+    color: $red-600;
 }
 .size-remaining {
     font-size: 12px;
     color: $gray-500;
+    font-weight: 400;
     position: relative;
     &::after {
         content: "";
         width: 3px;
         height: 3px;
-        background-color: $gray-500;
+        background-color: $gray-400;
         border-radius: 50%;
         left: -7px;
         top: 11px;
@@ -240,6 +251,23 @@
     min-height: 20px;
 }
 .qt-fileupload-file-info {
+    .qt-fileupload__label {
+        background-color: $blue-light-25;
+        border: 1px dashed $blue-light-300;
+    }
+}
+.attachment-remove,.attachment-retry {
+    border: 1px solid $gray-200;
+    padding: 6px 8px;
+    border-radius: 6px;
+    color: $red-600;
+    font-size: 13px;
+    font-weight: 500;
+}
+.attachment-retry {
+    color: $gray-500;
+}
+.is-dragover {
     .qt-fileupload__label {
         background-color: $blue-light-25;
         border: 1px dashed $blue-light-300;

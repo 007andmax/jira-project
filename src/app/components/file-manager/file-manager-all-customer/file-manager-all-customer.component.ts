@@ -73,7 +73,7 @@ export class FileManagerAllCustomerComponent extends FileManagerComponent {
     this.sub.add(onEditCategory);
     let onChangeDocument = this.fileManagementRealTimeService.changeArray.subscribe(data => {
       if (data.action === "CREATE_FILE_MANAGEMENT_CATEGORY") {
-        let isExist = this.files.some(item => item.id == data.data.id);
+        let isExist = this.categories.some(item => item.id == data.data.id);
         if (!isExist) this.categories.push(new FileManagerCategory(data.data));
       } if (data.action === "CREATE_MANAGEMENT_FILE") {
         let isExist = this.files.some(item => item.id == data.data.id);
