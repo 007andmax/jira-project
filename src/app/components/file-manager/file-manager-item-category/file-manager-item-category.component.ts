@@ -15,7 +15,6 @@ export class FileManagerItemCategoryComponent implements OnInit {
   @ViewChild('db') db: NgbDropdown;
   @Input() isRemove: boolean = false;
   @Input() item: FileManagerCategory;
-  @Input() isRemove: boolean = true;
   @Output() onRemove = new EventEmitter<any>();
   @Output() onFileInfo = new EventEmitter<any>();
   constructor(public router: Router,

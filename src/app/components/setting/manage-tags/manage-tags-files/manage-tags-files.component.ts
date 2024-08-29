@@ -102,9 +102,6 @@ export class ManageTagsFilesComponent implements OnInit, OnDestroy {
   ConfirmDelete(tID: string, name) {
     this.onRemove.emit({ id: tID, word: name })
   }
-  public trackById(index, item) {
-    return item.id;
-  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

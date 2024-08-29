@@ -237,9 +237,6 @@ export class FileManagerCategoryComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.message = `Are you sure you want to delete this folder?`;
     this.fileManagementStateService.setCategoryForRemove(data);
   }
-  public trackById(index, item) {
-    return item.id;
-  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
