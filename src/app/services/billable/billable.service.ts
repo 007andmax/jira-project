@@ -41,7 +41,7 @@ export class BillableService {
     return this.http.post(this.apiUrl + `invoice/addDiscount/${lockId}`, data);
   }
   public create(invoice) {
-    return this.http.post(this.apiUrl + `/invoice/create`, invoice).pipe(
+    return this.http.post(this.apiUrl + `invoice/create`, invoice).pipe(
       tap(data => {
         this.toastrService.success("The invoice has been successfully created");
         this.appStateService.changeDetectorRef();
