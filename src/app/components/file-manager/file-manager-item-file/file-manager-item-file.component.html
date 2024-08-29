@@ -2,7 +2,6 @@
     class="item-file-container qt-pointer"
     ngbDropdown
     #db="ngbDropdown"
-    (click)="fileInfo()"
     appDoubleClick
     (doubleClick)="preview()"
 >
@@ -71,6 +70,14 @@
             >
                 <div class="qt-icon icon__download qt-sz-20 qt-mr-12"></div>
                 Download
+            </li>
+            <li
+                class="pointer"
+                ngbDropdownItem
+                (click)="fileInfo()"
+            >
+                <div class="qt-icon icon__info qt-sz-20 qt-mr-12"></div>
+                File info
             </li>
             <li
                 class="pointer qt-dropdown-menu__item-red qt-dropdown-menu__top-line qt-color-red-600"

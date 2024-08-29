@@ -2,7 +2,6 @@
     class="item-file-container qt-pointer"
     ngbDropdown
     #db="ngbDropdown"
-    (click)="fileInfo()"
     appDoubleClick
     (doubleClick)="navigateToCategory()"
 >
@@ -43,7 +42,15 @@
             class="dropdown-qt"
         >
             <li
-                class="pointer qt-dropdown-menu__item-red qt-color-red-600"
+                class="pointer"
+                ngbDropdownItem
+                (click)="fileInfo()"
+            >
+                <div class="qt-icon icon__info qt-sz-20 qt-mr-12"></div>
+                File info
+            </li>
+            <li
+                class="pointer qt-dropdown-menu__item-red qt-color-red-600 qt-dropdown-menu__top-line"
                 ngbDropdownItem
                 (click)="removeCategory()"
             >
