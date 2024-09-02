@@ -42,7 +42,6 @@ export class FileManagementAddFileDragDropComponent extends UploadAreaComponent 
       (<any>this.elRef.nativeElement.querySelector('#fileDropRef')).value = '';
       return;
     } else {
-      console.log("this.files[index]", this.files[index]);
       const reader = new FileReader();
       reader.onload = () => {
         this.files[index].src = reader.result;
@@ -58,7 +57,6 @@ export class FileManagementAddFileDragDropComponent extends UploadAreaComponent 
       this.elRef.nativeElement.querySelector('.qt-fileupload').classList.add('fileupload');
       this.isUploadingFile.emit(true);
       this.isUploading = true;
-      console.log("this.files[index]", this.files[index]);
       this.uploadFile(this.files[index]).then((data: any) => {
         let res = JSON.parse(data.response);
         this.idfiles.push(res.id);
