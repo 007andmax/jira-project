@@ -13,7 +13,8 @@ import { TicketsPermissionsService } from '../services/tickets-permissions.servi
 @Component({
   selector: 'app-ticket-profile-attachments',
   templateUrl: './ticket-profile-attachments.component.html',
-  styleUrls: ['./ticket-profile-attachments.component.scss']
+  styleUrls: ['./ticket-profile-attachments.component.scss'],
+  providers: [TicketsPermissionsService]
 })
 export class TicketProfileAttachmentsComponent implements OnInit, OnDestroy {
   @Input() attachments: Array<TicketProfileAttachment> = [];

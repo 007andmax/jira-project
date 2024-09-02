@@ -58,8 +58,6 @@
                     id="test-drag"
                     style="position:relative;"
                     [ngStyle]="{'height':((tab == 'plain') ? '100%' : 'auto')}"
-                    appDnd
-                    (fileDropped)="onFileDropped($event)"
                     *ngIf="tab == 'plain'"
                 >
                     <div class="file-background">

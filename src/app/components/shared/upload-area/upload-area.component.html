@@ -65,6 +65,7 @@
 'icon__file-type-odt': file.type == 'application/vnd.oasis.opendocument.text' || isOdt(file.name),
 'icon__file-type-ppt': file.type == 'application/vnd.ms-powerpoint',
 'icon__file-type-rtf': file.type == 'application/rtf' || file.type == 'text/rtf',
+'icon__file-type-ods': file.type == 'application/vnd.oasis.opendocument.spreadsheet' || isOds(file.name),
 'icon__file-type-xls': file.type == 'application/msxls' || file.type == 'application/vnd.ms-excel' || file.type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}"
                     *ngIf="!isImage(file)"
                 ></div>

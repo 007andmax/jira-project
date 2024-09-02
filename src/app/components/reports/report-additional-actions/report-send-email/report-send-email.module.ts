@@ -10,6 +10,7 @@ import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.
 import { ReportSendEmailComponent } from './report-send-email.component';
 import { MatChipsModule, MatSelectModule } from '@angular/material';
 import { DndModule } from 'src/app/directives/dnd/dnd.module';
+import { UploadAreaModule } from 'src/app/components/shared/upload-area/upload-area.module';
 
 
 

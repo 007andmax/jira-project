@@ -46,6 +46,9 @@ export class UploadAreaComponent implements OnInit {
   isOdt(name) {
     return name.includes("odt");
   }
+  isOds(name) {
+    return name.includes("ods");
+  }
 
   /**
    * Simulate the upload process
