@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TicketDetailComponent } from './ticket-detail.component';
 import { TicketDetailRoutingModule } from './ticket-detail-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MatSelectModule, MatChipsModule, MatIconModule } from '@angular/material';
+import { MatSelectModule, MatChipsModule, MatIconModule, MatFormFieldModule } from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxMaskModule } from 'ngx-mask';
@@ -86,6 +86,8 @@ import { AddAssignedUserNoteComponent } from './ticket-detail-profile-form-updat
 import { TicketDetailTicketsDetailsComponent } from './ticket-detail-tickets/ticket-detail-tickets-details/ticket-detail-tickets-details.component';
 import { TicketDetailTicketsComponent } from './ticket-detail-tickets/ticket-detail-tickets.component';
 import { TicketDetailTicketsStatusComponent } from './ticket-detail-tickets/ticket-detail-tickets-status/ticket-detail-tickets-status.component';
+import { MatChipListModule } from 'src/app/components/shared/mat-chip-list/mat-chip-list.module';
+import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.module';
 
 
 
@@ -183,7 +185,10 @@ import { TicketDetailTicketsStatusComponent } from './ticket-detail-tickets/tick
         KeyUpEnterModule,
         DropDownModule,
         CompanyDropDownModule,
-        DndModule
+        DndModule,
+        MatChipModule,
+        MatFormFieldModule,
+        MatChipListModule,
     ],
 
 

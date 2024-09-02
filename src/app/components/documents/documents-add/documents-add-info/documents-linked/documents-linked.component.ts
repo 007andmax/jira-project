@@ -92,7 +92,6 @@ export class DocumentsLinkedComponent implements OnInit, OnDestroy {
     this.linkedCtrl.setValue(null);
     this.usersList = JSON.parse(JSON.stringify(this.requsersList));
     this.companiesList = JSON.parse(JSON.stringify(this.reqcompaniesList));
-    if (this.formField) this.formField.checkSelectedItems(this.selectedUserAndCompanies);
   }
 
   public setCurrentTab($event, item) {
@@ -114,7 +113,6 @@ export class DocumentsLinkedComponent implements OnInit, OnDestroy {
   removeItem(index) {
     this.selectedUserAndCompanies.splice(index, 1);
     this.onSelectedItem.emit(this.selectedUserAndCompanies);
-    this.formField.checkSelectedItems(this.selectedUserAndCompanies);
   }
   public trackByIndex(index, item) {
     return index;

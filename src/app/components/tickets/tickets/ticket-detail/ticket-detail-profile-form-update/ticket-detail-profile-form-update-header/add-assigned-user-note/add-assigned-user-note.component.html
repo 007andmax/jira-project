@@ -1,6 +1,7 @@
 <div class="add-assigned-user-note">
     <span>Notify to All:</span>
-    <mat-form-field
+    <app-mat-form-field
+        #formField
         ngbDropdown
         [autoClose]="'outside'"
         [placement]="placement"
@@ -9,17 +10,19 @@
         [container]="container"
         (openChange)="onCloseDropDown($event)"
     >
-        <mat-chip-list
+        <app-mat-chip-list
             #chipList
             aria-label="Fruit selection"
             ngbDropdownAnchor
+            [items]="selectedUsers"
+            (onChangeItems)="formField.checkSelectedItems(selectedUsers)"
         >
-            <mat-chip
+            <app-mat-chip
                 class="selected-tag-user"
                 *ngFor="let user of selectedUsers; let i = index"
                 [selectable]="selectable"
-                [removable]="removable"
-                (removed)="remove(i)"
+                [isRemove]="removable"
+                (onClose)="remove(i)"
             >
                 <div class="assigne-user-item">
                     <div
@@ -42,14 +45,8 @@
                         *ngIf="user.isCustomEmail"
                         [textContent]="user.recipient"
                     ></div>
-                    <mat-icon
-                        matChipRemove
-                        *ngIf="removable"
-                    >
-                        cancel
-                    </mat-icon>
                 </div>
-            </mat-chip>
+            </app-mat-chip>
             <input
                 #userInput
                 class="pointer"
@@ -67,7 +64,7 @@
             >
                 Please enter a valid email address
             </mat-error>
-        </mat-chip-list>
+        </app-mat-chip-list>
         <div
             ngbDropdownMenu
             aria-labelledby="dropdown"
@@ -149,5 +146,5 @@
                 </ng-container>
             </ng-template>
         </div>
-    </mat-form-field>
+    </app-mat-form-field>
 </div>

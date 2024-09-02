@@ -117,37 +117,37 @@
     filter.selectedUserOrDevice ||
     filter.selectedCategory"
 >
-    <mat-form-field>
-        <mat-chip-list aria-label="Fruit selection">
-            <mat-chip
+    <app-mat-form-field #formField>
+        <app-mat-chip-list aria-label="Fruit selection">
+            <app-mat-chip
                 *ngIf="filter.selectedCompany"
-                (removed)="filters.companiesSelect.clearClient();refreshFilters()"
+                (onClose)="filters.companiesSelect.clearClient();refreshFilters()"
+                [isRemove]="true"
             >
                 {{filter.selectedCompany.name}}
-                <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
-            <mat-chip
+            </app-mat-chip>
+            <app-mat-chip
                 *ngIf="filter.selectedDate"
-                (removed)="filters.dateSelect.clearClient();refreshFilters()"
+                (onClose)="filters.dateSelect.clearClient();refreshFilters()"
+                [isRemove]="true"
             >
                 {{filter.selectedDate.title}}
-                <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
-            <mat-chip
+            </app-mat-chip>
+            <app-mat-chip
                 *ngIf="filter.selectedUserOrDevice"
-                (removed)="filters.deviceUserSelect.clearClient();refreshFilters()"
+                (onClose)="filters.deviceUserSelect.clearClient();refreshFilters()"
+                [isRemove]="true"
             >
                 {{filter.selectedUserOrDevice.name}}
-                <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
-            <mat-chip
+            </app-mat-chip>
+            <app-mat-chip
                 *ngIf="filter.selectedCategory"
-                (removed)="filters.categoriesSelect.clearClient();refreshFilters()"
+                (onClose)="filters.categoriesSelect.clearClient();refreshFilters()"
                 class="status"
+                [isRemove]="true"
             >
                 {{filter.selectedCategory.title}}
-                <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
-        </mat-chip-list>
-    </mat-form-field>
+            </app-mat-chip>
+        </app-mat-chip-list>
+    </app-mat-form-field>
 </div>

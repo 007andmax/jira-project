@@ -6,11 +6,13 @@ import { PasswoordManagerFiltersComponent } from './passwoord-manager-filters/pa
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { PasswordManagerAddCategoryComponent } from '../password-manager-add-category/password-manager-add-category.component';
 import { PasswoordManagerDevicesUsersComponent } from '../passwoord-manager-devices-users/passwoord-manager-devices-users.component';
-import { MatSelectModule, MatChipsModule, MatIconModule } from '@angular/material';
+import { MatSelectModule, MatChipsModule, MatIconModule, MatFormFieldModule } from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { PasswordManagerAddCategoryModule } from '../password-manager-add-category/password-manager-add-category.module';
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
+import { MatChipListModule } from '../../shared/mat-chip-list/mat-chip-list.module';
+import { MatChipModule } from '../../shared/mat-chip/mat-chip.module';
 
 @NgModule({
     declarations: [PasswoordManagerHeaderComponent,
@@ -26,7 +28,10 @@ import { CompanyDropDownModule } from '../../shared/company-drop-down/company-dr
         NgbModule,
         PasswordManagerAddCategoryModule,
         MatIconModule,
-        CompanyDropDownModule
+        CompanyDropDownModule,
+        MatChipModule,
+        MatFormFieldModule,
+        MatChipListModule,
     ],
     exports: [PasswoordManagerHeaderComponent]
 })

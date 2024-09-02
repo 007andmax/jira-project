@@ -21,6 +21,8 @@
             <app-mat-chip-list
                 #chipListCompanies
                 aria-label="Fruit selection"
+                [items]="selectedUserAndCompanies"
+                (onChangeItems)="formField.checkSelectedItems(selectedUserAndCompanies)"
             >
                 <ng-template
                     ngFor
@@ -98,7 +100,10 @@
             #formField
             [placeholder]="'Select user to link'"
         >
-            <app-mat-chip-list>
+            <app-mat-chip-list
+                [items]="selectedUserAndCompanies"
+                (onChangeItems)="formField.checkSelectedItems(selectedUserAndCompanies)"
+            >
                 <ng-template
                     ngFor
                     let-item

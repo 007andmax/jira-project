@@ -10,25 +10,20 @@
         ngbDropdownToggle
         [ngClass]="{'--input-error':!validate}"
     >
-        <mat-form-field>
-            <mat-chip-list
+        <app-mat-form-field #formField>
+            <app-mat-chip-list
                 #chipList
                 aria-label="Fruit selection"
+                [items]="selectedCompanies"
+                (onChangeItems)="formField.checkSelectedItems(selectedCompanies)"
             >
-                <mat-chip
+                <app-mat-chip
                     *ngFor="let user of selectedCompanies; let i = index"
-                    [selectable]="selectable"
-                    [removable]="removable"
-                    (removed)="remove(i)"
+                    [isRemove]="removable"
+                    (onClose)="remove(i)"
                 >
                     {{user}}
-                    <mat-icon
-                        matChipRemove
-                        *ngIf="removable"
-                    >
-                        cancel
-                    </mat-icon>
-                </mat-chip>
+                </app-mat-chip>
                 <input
                     id="dropdownServices"
                     placeholder="Add receipt email address"
@@ -43,8 +38,8 @@
                     (keyup)="onKeyUp($event)"
                     (blur)="onAdd($event)"
                 >
-            </mat-chip-list>
-        </mat-form-field>
+            </app-mat-chip-list>
+        </app-mat-form-field>
     </div>
     <mat-error
         class="invalid-feedback"

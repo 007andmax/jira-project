@@ -11,6 +11,8 @@ import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.
 import { PreloaderTicketModule } from '../preloader-ticket/preloader-ticket.module';
 import { UploadAreaModule } from '../upload-area/upload-area.module';
 import { DndModule } from 'src/app/directives/dnd/dnd.module';
+import { MatChipModule } from '../mat-chip/mat-chip.module';
+import { MatChipListModule } from '../mat-chip-list/mat-chip-list.module';
 
 
 @NgModule({
@@ -31,7 +33,10 @@ import { DndModule } from 'src/app/directives/dnd/dnd.module';
         DisabledBtnModule,
         PreloaderTicketModule,
         UploadAreaModule,
-        DndModule
+        DndModule,
+        MatChipModule,
+        MatFormFieldModule,
+        MatChipListModule,
     ],
     exports: [DraftEmailComponent]
 
