@@ -216,9 +216,10 @@
                             [sort]="false"
                             [isBlockClear]="true"
                             [selectedItem]="ticketProfile.createdUser"
+                            [tooltipMessage]="'You can set a new company for the ticket unless the ticket contains at least one product/service update.'"
                             [selectedCustomerCompany]="ticketProfile.selectedCustomerCompany"
-                            [isShowTooltip]="ticketProfile.updates.length > 0"
-                            [isDisabled]="ticketProfile.updates.length > 0 || getCompany(ticketProfile.company.id).isUnknown || customerPortalStateService.isCustomerPortal"
+                            [isShowTooltip]="true"
+                            [isDisabled]="getCompany(ticketProfile.company.id).isUnknown || customerPortalStateService.isCustomerPortal"
                             (onSelectedItem)="onSelectUser($event.user,$event.customerCompany)"
                         ></company-users-drop-down>
                     </div>

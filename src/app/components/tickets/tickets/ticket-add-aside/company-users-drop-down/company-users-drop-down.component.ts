@@ -21,6 +21,7 @@ export class CompanyUsersDropDownComponent extends DropDownComponent {
   sub: Subscription = new Subscription();
   @Input() selectedCustomerCompany: UserCustomerCompaniesInfo;
   @Input() selectedItem = null;
+  @Input() tooltipMessage = "You cannot change the ticket company/user while the ticket has updates.";
   constructor(public elRef: ElementRef,
     public companiesStateService: CompaniesStateService,
     public usersStateService: UsersStateService,

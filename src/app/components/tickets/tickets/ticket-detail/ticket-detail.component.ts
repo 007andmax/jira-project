@@ -244,6 +244,9 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.ticketsService.changeSubjectNoteTicket(this.ticketProfile.id, this.ticketProfile.subject, this.ticketProfile.note, customerCompany.companyId == this.ticketProfile.companyId ? null : customerCompany.companyId, selectedUser.id).subscribe(data => {
     })
   }
+  isDisabledTicketCreator() {
+    return this.ticketProfile.updates.some(item => item.type == "PRODUCT" || item.type == "SERVICE");
+  }
   setAgent(data: TicketChangeField) {
     let device = this.ticketStateService.getDevices().find(item => item.agentId === data.value || item.id === data.value);
     if (device) this.ticketProfile.agent = new TicketProfileAgent(device);
