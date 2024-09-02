@@ -42,6 +42,7 @@ export class FileManagementAddFileDragDropComponent extends UploadAreaComponent 
       (<any>this.elRef.nativeElement.querySelector('#fileDropRef')).value = '';
       return;
     } else {
+      console.log("this.files[index]", this.files[index]);
       const reader = new FileReader();
       reader.onload = () => {
         this.files[index].src = reader.result;

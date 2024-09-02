@@ -43,7 +43,7 @@
                 ></draft-email-user-recipients>
             </div>
         </div>
-        <div class="draft-email-container">
+        <div class="draft-email-container qt-mb-24">
             <div class="qt-w100 draft-email-sidebar__editor-tab">
                 <div
                     class="draft-email-sidebar__editor-tab-item"
@@ -58,8 +58,6 @@
                     id="test-drag"
                     style="position:relative;"
                     [ngStyle]="{'height':((tab == 'plain') ? '100%' : 'auto')}"
-                    appDnd
-                    (fileDropped)="onFileDropped($event)"
                     *ngIf="tab == 'plain'"
                 >
                     <div class="file-background">
@@ -75,6 +73,11 @@
                 </div>
             </div>
         </div>
+        <app-upload-area
+            #uplaodFile
+            (changeFiles)="onChangeFiles($event)"
+            class="ticket-fileupload"
+        ></app-upload-area>
     </div>
     <div class="qt-aside-modern__footer">
         <div class="qt-df qt-w100">
