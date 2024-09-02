@@ -53,9 +53,6 @@ export class ReportSendEmailComponent extends DraftEmailComponent {
     })
     this.sub.add(showAsideSendReportPayment);
   }
-  onChangeFiles(ids) {
-    this.draftReport.setAttachments(JSON.parse(JSON.stringify(ids.map(item => item.id))));
-  }
   onChangeCompanyEmails(data) {
     this.draftReport.setEmails(data);
     this.validateReport.resetEmail();
@@ -75,7 +72,6 @@ export class ReportSendEmailComponent extends DraftEmailComponent {
     let payments = this.paymentsStateService.getPayments().map(item => item.getDataForExportPDF());
     this.draftEmailService.sendMessage(this.draftReport.getDataForPaymentReport(payments)).subscribe((data) => {
       this.addBtn.setDisabled(false);
-      this.draftReport.setAttachments([]);
       this.close();
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
@@ -90,7 +86,6 @@ export class ReportSendEmailComponent extends DraftEmailComponent {
     let invoices = this.invoiceStateService.getInvoices().map(item => item.getDataForExportPDF());
     this.draftEmailService.sendMessage(this.draftReport.getDataForInvoiceReport(invoices)).subscribe((data) => {
       this.addBtn.setDisabled(false);
-      this.draftReport.setAttachments([]);
       this.close();
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
@@ -107,7 +102,6 @@ export class ReportSendEmailComponent extends DraftEmailComponent {
     if (this.template === "PDF_TEMPLATE") {
       this.reportsService.sendMessage(this.draftReport).subscribe((data) => {
         this.addBtn.setDisabled(false);
-        this.draftReport.setAttachments([]);
         this.close();
         if (!this.cd['destroyed']) {
           this.cd.detectChanges();
@@ -118,7 +112,6 @@ export class ReportSendEmailComponent extends DraftEmailComponent {
     } else {
       this.reportsService.sendCustomerMessage(this.draftReport).subscribe((data) => {
         this.addBtn.setDisabled(false);
-        this.draftReport.setAttachments([]);
         this.close();
         if (!this.cd['destroyed']) {
           this.cd.detectChanges();
@@ -129,13 +122,6 @@ export class ReportSendEmailComponent extends DraftEmailComponent {
     }
   }
   close() {
-    if (this.draftReport.attachments.length > 0) {
-      forkJoin(
-        this.draftReport.attachments.map(item => this.draftEmailService.removeAttachment(item))
-      ).subscribe(result => {
-
-      });
-    }
     this.opened = false;
     this.draftReport = new ReportEmail();
     this.tab = 'plain';

@@ -5,7 +5,6 @@ export class ReportEmail {
     fileName: string = "income_accounts";
     orientation: string = 'PORTRAIT';
     note: string;
-    attachments: Array<string> = [];
     constructor() { }
 
     public setContent(data) {
@@ -21,9 +20,6 @@ export class ReportEmail {
     public setOrientation(data) {
         this.orientation = data;
     }
-    public setAttachments(data) {
-        this.attachments = data;
-    }
     public setNote(data) {
         this.note = data;
     }
@@ -35,10 +31,9 @@ export class ReportEmail {
                 "invoiceViewDtos": invoices
             },
             note: this.note,
-            attachments: this.attachments
             /* fileName: this.fileName,
-             content: this.content,
-             orientation: "LANDSCAPE"*/
+           content: this.content,
+           orientation: "LANDSCAPE"*/
         }
     }
     public getDataForPaymentReport(payments) {
@@ -49,10 +44,9 @@ export class ReportEmail {
                 paymentViewDtos: payments
             },
             note: this.note,
-            attachments: this.attachments
             /* fileName: this.fileName,
-             content: this.content,
-             orientation: "LANDSCAPE"*/
+            content: this.content,
+            orientation: "LANDSCAPE"*/
         }
     }
 }

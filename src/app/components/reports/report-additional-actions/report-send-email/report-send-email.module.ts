@@ -27,8 +27,7 @@ import { UploadAreaModule } from 'src/app/components/shared/upload-area/upload-a
         FormsModule,
         MatSelectModule,
         MatChipsModule,
-        DndModule,
-        UploadAreaModule
+        DndModule
     ],
     exports: [ReportSendEmailComponent]
 })
