@@ -187,6 +187,12 @@
 
 
 
+
+
+
+
+
+
                                 <ul
                                     class="list-unstyled"
                                     *ngIf="!isNonAgentDevice"
@@ -338,6 +344,12 @@
 
 
 
+
+
+
+
+
+
                                             <span
                                                 class="drive-limit"
                                                 *ngIf="drive.FreeSpace != '' && drive.Size != ''"
@@ -392,6 +404,12 @@
                                             <span class="drive-name">
                                                 {{ network.Caption }} ({{ network.FileSystem }} on drive)
                                             </span>
+
+
+
+
+
+
 
 
 
@@ -479,16 +497,23 @@
                                     ngbDropdown
                                     #Tagproducts="ngbDropdown"
                                 >
-                                    <mat-form-field appearance="none">
-                                        <mat-chip-list #chipList>
-                                            <mat-chip
+                                    <app-mat-form-field
+                                        #formField
+                                        appearance="none"
+                                    >
+                                        <app-mat-chip-list
+                                            [items]="selectedTag"
+                                            (onChangeItems)="formField.checkSelectedItems(selectedTag)"
+                                            #chipList
+                                        >
+                                            <app-mat-chip
                                                 *ngFor="let tag of selectedTag; let i = index"
-                                                (removed)="onRemoveTag(i)"
+                                                (onClose)="onRemoveTag(i)"
+                                                [isRemove]="true"
                                             >
                                                 {{ tag.Name }}
-                                                <mat-icon matChipRemove>cancel</mat-icon>
-                                            </mat-chip>
-                                        </mat-chip-list>
+                                            </app-mat-chip>
+                                        </app-mat-chip-list>
                                         <input
                                             autofocus
                                             id="dropdownServices"
@@ -501,7 +526,7 @@
                                             (keyup.enter)="AddTags($event.target.value)"
                                             (keyup)="onSearchTag($event.target.value)"
                                         >
-                                    </mat-form-field>
+                                    </app-mat-form-field>
                                     <div
                                         class="dropdown-menu"
                                         ngbDropdownMenu
@@ -705,6 +730,12 @@
 
 
 
+
+
+
+
+
+
                 <div
                     class="sidebar-popup note"
                     [class.opened]="editNote"
@@ -793,6 +824,12 @@
 
 
 
+
+
+
+
+
+
                                 <button
                                     type="button"
                                     class="btn btn-danger pull-right"
@@ -812,6 +849,12 @@
     class="loading"
     *ngIf="loading"
 ></div>
+
+
+
+
+
+
 
 
 

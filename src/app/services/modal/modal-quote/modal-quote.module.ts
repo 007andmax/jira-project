@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatSelectModule, MatChipsModule, MatIconModule, MatAutocompleteModule } from '@angular/material';
+import { MatSelectModule, MatChipsModule, MatIconModule, MatAutocompleteModule, MatFormFieldModule } from '@angular/material';
 import { ModalQuoteComponent } from './modal-quote.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
+import { MatChipListModule } from 'src/app/components/shared/mat-chip-list/mat-chip-list.module';
+import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.module';
 
 
 
@@ -20,7 +22,10 @@ import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
         MatAutocompleteModule,
         NgbModule,
         TextAreaModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatChipModule,
+        MatFormFieldModule,
+        MatChipListModule,
 
     ],
     entryComponents: [ModalQuoteComponent],

@@ -4,41 +4,35 @@
     #products="ngbDropdown"
 >
     <p class="title-filter qt-mb-10">Subscription Title</p>
-    <mat-form-field ngbDropdownAnchor>
-        <mat-chip-list
+    <app-mat-form-field ngbDropdownAnchor>
+        <app-mat-chip-list
             #chipList
             aria-label="Fruit selection"
         >
-
-            <mat-chip
+            <app-mat-chip
                 [selectable]="true"
-                [removable]="true"
-                (removed)="selected('invoiceSubscription')"
+                [isRemove]="true"
+                (onClose)="selected('invoiceSubscription')"
                 *ngIf="defaultSubscriptions.invoiceSubscription.enabled"
             >
                 <div class="clip-text">Invoice Updates</div>
-                <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
-
-            <mat-chip
+            </app-mat-chip>
+            <app-mat-chip
                 [selectable]="true"
-                [removable]="true"
-                (removed)="selected('ticketSubscription')"
+                [isRemove]="true"
+                (onClose)="selected('ticketSubscription')"
                 *ngIf="defaultSubscriptions.ticketSubscription.enabled"
             >
                 <div class="clip-text">Ticket Updates</div>
-                <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
-
-            <mat-chip
+            </app-mat-chip>
+            <app-mat-chip
                 [selectable]="true"
-                [removable]="true"
-                (removed)="selected('ticketManagerSubscription')"
+                [isRemove]="true"
+                (onClose)="selected('ticketManagerSubscription')"
                 *ngIf="defaultSubscriptions.ticketManagerSubscription.enabled"
             >
                 <div class="clip-text">Ticket Manager</div>
-                <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
+            </app-mat-chip>
             <input
                 id="dropdownServices"
                 ngbDropdownToggle
@@ -49,14 +43,13 @@
                 autocomplete="off"
                 readonly
             >
-        </mat-chip-list>
-    </mat-form-field>
+        </app-mat-chip-list>
+    </app-mat-form-field>
     <div
         class="dropdown-menu"
         ngbDropdownMenu
         aria-labelledby="dropdownServices"
     >
-
         <div class="qt-pos-rel">
             <button
                 ngbDropdownItem
@@ -71,7 +64,6 @@
                 class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain filter-company-check"
             ></div>
         </div>
-
         <div class="qt-pos-rel">
             <button
                 ngbDropdownItem
@@ -86,7 +78,6 @@
                 class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain filter-company-check"
             ></div>
         </div>
-
         <div class="qt-pos-rel">
             <button
                 ngbDropdownItem
@@ -101,6 +92,5 @@
                 class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain filter-company-check"
             ></div>
         </div>
-
     </div>
 </div>

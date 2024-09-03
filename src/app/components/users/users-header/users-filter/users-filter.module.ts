@@ -13,6 +13,8 @@ import { TicketsFilterTagsModule } from 'src/app/components/tickets/tickets/tick
 import { UsersFilterDefaultSubscriptionComponent } from './users-filter-default-subscription/users-filter-default-subscription.component';
 import { UsersFilterTagsComponent } from './users-filter-tags/users-filter-tags.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { MatChipListModule } from 'src/app/components/shared/mat-chip-list/mat-chip-list.module';
+import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.module';
 
 @NgModule({
     declarations: [UsersFilterComponent,
@@ -31,7 +33,10 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
         MatChipsModule,
         MatIconModule,
         MatFormFieldModule,
-        InfiniteScrollModule
+        InfiniteScrollModule,
+        MatChipModule,
+        MatFormFieldModule,
+        MatChipListModule,
     ],
     exports: [UsersFilterComponent]
 

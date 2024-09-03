@@ -9,18 +9,23 @@
                 <div class="Rectangle">
                     <span class="qt-input-search"></span>
                     <div class="SearchRectangle">
-                        <mat-form-field
+                        <app-mat-form-field
                             class="example-chip-list"
                             appearance="none"
+                            #formField
                         >
-                            <mat-chip-list #chipList>
-                                <mat-chip
+                            <app-mat-chip-list
+                                [items]="selectedTag"
+                                (onChangeItems)="formField.checkSelectedItems(selectedTag)"
+                                #chipList
+                            >
+                                <app-mat-chip
                                     *ngFor="let tag of selectedTag; let i=index"
-                                    (removed)="remove(i)"
+                                    (onClose)="remove(i)"
+                                    [isRemove]="true"
                                 >
                                     {{tag}}
-                                    <mat-icon matChipRemove></mat-icon>
-                                </mat-chip>
+                                </app-mat-chip>
                                 <input
                                     #dropdownServices
                                     autofocus
@@ -34,7 +39,7 @@
                                     (keyup.enter)="add($event.target.value)"
                                     (keyup)="onSearchTag($event.target.value)"
                                 >
-                            </mat-chip-list>
+                            </app-mat-chip-list>
                             <mat-autocomplete
                                 class="extended"
                                 #auto="matAutocomplete"
@@ -52,7 +57,7 @@
                                     ></span>
                                 </mat-option>
                             </mat-autocomplete>
-                        </mat-form-field>
+                        </app-mat-form-field>
                     </div>
                     <div class="StarRectangle">
                         <a
@@ -1248,15 +1253,22 @@
                     Linked Devices
                 </label>
                 <div class="Rectangle_device-popup">
-                    <mat-form-field appearance="none">
-                        <mat-chip-list #chipdeviceTag>
-                            <mat-chip
+                    <app-mat-form-field
+                        #formField1
+                        appearance="none"
+                    >
+                        <app-mat-chip-list
+                            [items]="linkDevicesTag"
+                            (onChangeItems)="formField1.checkSelectedItems(linkDevicesTag)"
+                            #chipdeviceTag
+                        >
+                            <app-mat-chip
                                 *ngFor="let tag of linkDevicesTag; let i=index"
-                                (removed)="Deviceremove(i)"
+                                (onClose)="Deviceremove(i)"
+                                [isRemove]="true"
                             >
                                 {{tag}}
-                                <mat-icon matChipRemove></mat-icon>
-                            </mat-chip>
+                            </app-mat-chip>
                             <input
                                 autofocus
                                 id="dropdownServices"
@@ -1270,8 +1282,8 @@
                                 (keyup.enter)="addLinkDevices($event.target.value)"
                                 (keyup)="onSearchLinkDevices($event.target.value)"
                             >
-                        </mat-chip-list>
-                    </mat-form-field>
+                        </app-mat-chip-list>
+                    </app-mat-form-field>
                 </div>
             </div>
             <div
@@ -1286,15 +1298,22 @@
                     Tag
                 </label>
                 <div class="Rectangle_device-popup">
-                    <mat-form-field appearance="none">
-                        <mat-chip-list #chipTag>
-                            <mat-chip
+                    <app-mat-form-field
+                        #formField2
+                        appearance="none"
+                    >
+                        <app-mat-chip-list
+                            [items]="selectedSidebarTag"
+                            (onChangeItems)="formField2.checkSelectedItems(selectedSidebarTag)"
+                            #chipTag
+                        >
+                            <app-mat-chip
                                 *ngFor="let tag of selectedSidebarTag; let i = index"
-                                (removed)="onTagRemove(i)"
+                                (onClose)="onTagRemove(i)"
+                                [isRemove]="true"
                             >
                                 {{ tag.Name }}
-                                <mat-icon matChipRemove>cancel</mat-icon>
-                            </mat-chip>
+                            </app-mat-chip>
                             <input
                                 autofocus
                                 id="dropdownServices"
@@ -1307,8 +1326,8 @@
                                 (blur)="addTags($event.target.value)"
                                 (keyup.enter)="addTags($event.target.value)"
                             >
-                        </mat-chip-list>
-                    </mat-form-field>
+                        </app-mat-chip-list>
+                    </app-mat-form-field>
                 </div>
                 <div
                     class="dropdown-menu"
@@ -1430,18 +1449,23 @@
                         Company
                     </label>
                     <div class="Rectangle_device-popup">
-                        <mat-form-field
+                        <app-mat-form-field
+                            #formField3
                             class="example-chip-list"
                             appearance="none"
                         >
-                            <mat-chip-list #chipCompanyTag>
-                                <mat-chip
+                            <app-mat-chip-list
+                                [items]="advancesearchCompanyTag"
+                                (onChangeItems)="formField3.checkSelectedItems(advancesearchCompanyTag)"
+                                #chipCompanyTag
+                            >
+                                <app-mat-chip
                                     *ngFor="let tag of advancesearchCompanyTag; let i=index"
-                                    (removed)="searchCompanyRemove(i)"
+                                    (onClose)="searchCompanyRemove(i)"
+                                    [isRemove]="true"
                                 >
                                     {{tag.name}}
-                                    <mat-icon matChipRemove></mat-icon>
-                                </mat-chip>
+                                </app-mat-chip>
                                 <input
                                     autofocus
                                     id="dropdownCompanyTag"
@@ -1452,8 +1476,8 @@
                                     placeholder="select Company "
                                     [matChipInputFor]="chipCompanyTag"
                                 >
-                            </mat-chip-list>
-                        </mat-form-field>
+                            </app-mat-chip-list>
+                        </app-mat-form-field>
                     </div>
                     <div
                         class="dropdown-menu advance-search-devices"
@@ -1566,18 +1590,23 @@
                         OS Version
                     </label>
                     <div class="Rectangle_device-popup">
-                        <mat-form-field
+                        <app-mat-form-field
+                            #formField4
                             class="example-chip-list"
                             appearance="none"
                         >
-                            <mat-chip-list #chipOSVersionNameTag>
-                                <mat-chip
+                            <app-mat-chip-list
+                                [items]="advancesearchOSVersionNameTag"
+                                (onChangeItems)="formField4.checkSelectedItems(advancesearchOSVersionNameTag)"
+                                #chipOSVersionNameTag
+                            >
+                                <app-mat-chip
                                     *ngFor="let tag of advancesearchOSVersionNameTag; let i=index"
-                                    (removed)="searcOSVersionNameRemove(i)"
+                                    (onClose)="searcOSVersionNameRemove(i)"
+                                    [isRemove]="true"
                                 >
                                     {{tag}}
-                                    <mat-icon matChipRemove></mat-icon>
-                                </mat-chip>
+                                </app-mat-chip>
                                 <input
                                     autofocus
                                     id="dropdownOSVersionNameTag"
@@ -1588,8 +1617,8 @@
                                     placeholder="select OS Version"
                                     [matChipInputFor]="chipOSVersionNameTag"
                                 >
-                            </mat-chip-list>
-                        </mat-form-field>
+                            </app-mat-chip-list>
+                        </app-mat-form-field>
                     </div>
                     <div
                         class="dropdown-menu advance-search-devices"
@@ -1622,18 +1651,23 @@
                         HW Type
                     </label>
                     <div class="Rectangle_device-popup">
-                        <mat-form-field
+                        <app-mat-form-field
                             class="example-chip-list"
                             appearance="none"
+                            #formField5
                         >
-                            <mat-chip-list #chipHardwareTag>
-                                <mat-chip
+                            <app-mat-chip-list
+                                [items]="advancesearchHardwareTag"
+                                (onChangeItems)="formField5.checkSelectedItems(advancesearchHardwareTag)"
+                                #chipHardwareTag
+                            >
+                                <app-mat-chip
                                     *ngFor="let tag of advancesearchHardwareTag; let i=index"
-                                    (removed)="searchHardwareRemove(i)"
+                                    (onClose)="searchHardwareRemove(i)"
+                                    [isRemove]="true"
                                 >
                                     {{tag.Name}}
-                                    <mat-icon matChipRemove></mat-icon>
-                                </mat-chip>
+                                </app-mat-chip>
                                 <input
                                     autofocus
                                     id="dropdownHardwareTag"
@@ -1644,8 +1678,8 @@
                                     placeholder="select HW"
                                     [matChipInputFor]="chipHardwareTag"
                                 >
-                            </mat-chip-list>
-                        </mat-form-field>
+                            </app-mat-chip-list>
+                        </app-mat-form-field>
                     </div>
                     <div
                         class="dropdown-menu advance-search-devices"
@@ -1678,18 +1712,23 @@
                         Manufacture
                     </label>
                     <div class="Rectangle_device-popup">
-                        <mat-form-field
+                        <app-mat-form-field
                             class="example-chip-list"
                             appearance="none"
+                            #formField6
                         >
-                            <mat-chip-list #chipManufacturerTag>
-                                <mat-chip
+                            <app-mat-chip-list
+                                [items]="advancesearchManufacturerTag"
+                                (onChangeItems)="formField6.checkSelectedItems(advancesearchManufacturerTag)"
+                                #chipManufacturerTag
+                            >
+                                <app-mat-chip
                                     *ngFor="let tag of advancesearchManufacturerTag; let i=index"
-                                    (removed)="searchManufacturerRemove(i)"
+                                    (onClose)="searchManufacturerRemove(i)"
+                                    [isRemove]="true"
                                 >
                                     {{tag.Name}}
-                                    <mat-icon matChipRemove></mat-icon>
-                                </mat-chip>
+                                </app-mat-chip>
                                 <input
                                     autofocus
                                     id="dropdownManufacturerTag"
@@ -1700,8 +1739,8 @@
                                     placeholder="select Manufacturer"
                                     [matChipInputFor]="chipManufacturerTag"
                                 >
-                            </mat-chip-list>
-                        </mat-form-field>
+                            </app-mat-chip-list>
+                        </app-mat-form-field>
                     </div>
                     <div
                         class="dropdown-menu advance-search-devices"
@@ -1734,18 +1773,23 @@
                         Model
                     </label>
                     <div class="Rectangle_device-popup">
-                        <mat-form-field
+                        <app-mat-form-field
                             class="example-chip-list"
                             appearance="none"
+                            #formField7
                         >
-                            <mat-chip-list #chipModelTag>
-                                <mat-chip
+                            <app-mat-chip-list
+                                [items]="advancesearchModelTag"
+                                (onChangeItems)="formField7.checkSelectedItems(advancesearchModelTag)"
+                                #chipModelTag
+                            >
+                                <app-mat-chip
                                     *ngFor="let tag of advancesearchModelTag; let i=index"
-                                    (removed)="searchModelRemove(i)"
+                                    (onClose)="searchModelRemove(i)"
+                                    [isRemove]="true"
                                 >
                                     {{tag.Name}}
-                                    <mat-icon matChipRemove></mat-icon>
-                                </mat-chip>
+                                </app-mat-chip>
                                 <input
                                     autofocus
                                     id="dropdownModelTag"
@@ -1756,8 +1800,8 @@
                                     placeholder="select Model"
                                     [matChipInputFor]="chipModelTag"
                                 >
-                            </mat-chip-list>
-                        </mat-form-field>
+                            </app-mat-chip-list>
+                        </app-mat-form-field>
                     </div>
                     <div
                         class="dropdown-menu advance-search-devices"
@@ -1790,18 +1834,23 @@
                         Software
                     </label>
                     <div class="Rectangle_device-popup">
-                        <mat-form-field
+                        <app-mat-form-field
                             class="example-chip-list"
                             appearance="none"
+                            #formField8
                         >
-                            <mat-chip-list #chipSoftwareTag>
-                                <mat-chip
+                            <app-mat-chip-list
+                                [items]="advancesearchSoftwareTag"
+                                (onChangeItems)="formField8.checkSelectedItems(advancesearchSoftwareTag)"
+                                #chipSoftwareTag
+                            >
+                                <app-mat-chip
                                     *ngFor="let tag of advancesearchSoftwareTag; let i=index"
-                                    (removed)="searchSoftwareRemove(i)"
+                                    (onClose)="searchSoftwareRemove(i)"
+                                    [isRemove]="true"
                                 >
                                     {{tag.DisplayName}}
-                                    <mat-icon matChipRemove></mat-icon>
-                                </mat-chip>
+                                </app-mat-chip>
                                 <input
                                     autofocus
                                     id="dropdownSoftwareTag"
@@ -1812,8 +1861,8 @@
                                     placeholder="select Software"
                                     [matChipInputFor]="chipSoftwareTag"
                                 >
-                            </mat-chip-list>
-                        </mat-form-field>
+                            </app-mat-chip-list>
+                        </app-mat-form-field>
                     </div>
                     <div
                         class="dropdown-menu advance-search-devices"
@@ -1912,6 +1961,46 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <div class="remote-area">
             <ul class="list-unstyled">
                 <li>
@@ -1963,6 +2052,46 @@
         >
             <span aria-hidden="true">&times;</span>
         </button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

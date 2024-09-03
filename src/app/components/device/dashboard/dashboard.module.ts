@@ -6,7 +6,9 @@ import { NgxUploaderModule } from 'ngx-uploader';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
-import { MatChipsModule, MatIconModule, MatSelectModule } from '@angular/material';
+import { MatChipsModule, MatFormFieldModule, MatIconModule, MatSelectModule } from '@angular/material';
+import { MatChipListModule } from '../../shared/mat-chip-list/mat-chip-list.module';
+import { MatChipModule } from '../../shared/mat-chip/mat-chip.module';
 
 
 
@@ -25,6 +27,9 @@ import { MatChipsModule, MatIconModule, MatSelectModule } from '@angular/materia
         MatSelectModule,
         MatChipsModule,
         MatIconModule,
+        MatChipModule,
+        MatFormFieldModule,
+        MatChipListModule,
     ],
 })
 export class DashboardModule { }
