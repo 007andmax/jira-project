@@ -175,7 +175,6 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     if (this.userFilter.ticketSubscription) this.countFilter++;
     if (this.userFilter.invoiceSubscription) this.countFilter++;
     if (this.userFilter.ticketManagerSubscription) this.countFilter++;
-    if (this.userFilter.industries.length > 0) this.countFilter++;
     if (this.userFilter.tags.length > 0) this.countFilter++;
     if (this.userFilter.customSubscriptions.length > 0) this.countFilter++;
     if (this.userFilter.hasAccess) this.countFilter++;

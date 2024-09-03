@@ -24,23 +24,12 @@
         [defaultSubscriptions]="filter.defaultSubscriptions"
         (onChange)="onChangeDefaultSubscriptions($event)"
     ></app-users-filter-default-subscription>
-    <app-users-filter-industry
-        #industriesDp
-        class="qt-mb-16"
-        [title]="'Industry'"
-        [placeholder]="'Select industry'"
-        [placement]="'top-left'"
-        [field]="'name'"
-        [list]="industries"
-        (filterChange)="onSelectIndustry($event)"
-    >
-    </app-users-filter-industry>
     <app-users-filter-tags
         #tagsDp
         [placement]="'top-left'"
         (tagsChange)="onChangeTags($event)"
     ></app-users-filter-tags>
-    <app-users-filter-industry
+    <app-users-filter-custom-subscriptions
         #customSubscriptionDp
         *ngIf="usersStateService.getModeUserFilterSubscription() == MODE_MARKETING_USERS_LIST"
         [title]="'Marketing Subscription'"
@@ -49,7 +38,7 @@
         [field]="'name'"
         [list]="listCustomSubscription"
         (filterChange)="onSelectCustomSubscription($event)"
-    ></app-users-filter-industry>
+    ></app-users-filter-custom-subscriptions>
     <div class="qt-mt-16">
         <p class="title-filter qt-mb-8">Permission</p>
         <div class="qt-input-block qt-f50">

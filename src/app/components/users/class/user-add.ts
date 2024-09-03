@@ -42,7 +42,6 @@ export class UserAdd {
     this.jobDescription = data.jobDescription;
     this.jobTypeId = data.jobTypeId;
     this.jobTitleId = data.jobTitleId;
-    this.userIndustryId = data.userIndustryId;
     this.customerCompaniesInfo = data.customerCompaniesInfo.filter(item => item.companyId).map(item => new UserCustomerCompaniesInfoAdd(item));
     this.sendPortalInvitation = data.sendPortalInvitation;
   }

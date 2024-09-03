@@ -28,7 +28,6 @@ export class UserProfile {
     jobDescription: string;
     jobTitleId: string;
     jobTypeId: string;
-    userIndustryId: string;
     sendPortalInvitation: boolean = false;
     portalAccessStatus: string;
     constructor() {
@@ -84,7 +83,6 @@ export class UserProfile {
         this.jobDescription = user.jobDescription;
         this.jobTitleId = user.jobTitleId;
         this.jobTypeId = user.jobTypeId;
-        this.userIndustryId = user.userIndustryId;
         this.customerCompaniesInfo = user.customerCompaniesInfo;
         this.portalAccessStatus = user.portalAccessStatus;
     }
@@ -116,13 +114,6 @@ export class UserProfile {
 */
     public addPhoneNumber() {
         this.phoneNumbers.push(new PhoneNumber('OFFICE'));
-    }
-    /**
-* @description Set userIndustryId
-* @param  {string} data  - Value of userIndustryId
-*/
-    public setUserIndustryId(data) {
-        this.userIndustryId = data;
     }
     /**
 * @description Set role

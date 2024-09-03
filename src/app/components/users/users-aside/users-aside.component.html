@@ -101,19 +101,6 @@
             </div>
         </div>
         <div class="qt-inputs-row">
-            <div class="qt-f50">
-                <app-drop-down
-                    [placeholder]="'Select Industry'"
-                    [list]="industries"
-                    [field]="'name'"
-                    [search]="true"
-                    [change]="true"
-                    [title]="'Industry'"
-                    (onSelectedItem)="onSelectClientIndustry($event)"
-                ></app-drop-down>
-            </div>
-        </div>
-        <div class="qt-inputs-row">
             <div class="qt-input-block job-description">
                 <div class="qt-input-block__label">Job Description</div>
                 <textarea

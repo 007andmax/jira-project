@@ -7,7 +7,6 @@ export class UserGlobalFilter {
     "forMarketing": boolean = false;
     "jobTitles": Array<string> = [];
     "companies": Array<string> = [];
-    "industries": Array<string> = [];
     "tags": Array<string> = [];
     tagDtos: Array<Tag> = [];
     "customSubscriptions": Array<string> = [];
@@ -25,9 +24,6 @@ export class UserGlobalFilter {
     }
     public setCustomSubscriptions(data) {
         this.customSubscriptions = data;
-    }
-    public setIndustries(data) {
-        this.industries = data;
     }
     public setCompanies(data) {
         this.companies = data;
@@ -55,7 +51,6 @@ export class UserGlobalFilter {
             "ticketSubscription": this.ticketSubscription,
             "ticketManagerSubscription": this.ticketManagerSubscription,
             "invoiceSubscription": this.invoiceSubscription,
-            "industries": this.industries,
             "tags": this.tags,
             "customSubscriptions": this.customSubscriptions,
             "hasAccess": this.hasAccess,

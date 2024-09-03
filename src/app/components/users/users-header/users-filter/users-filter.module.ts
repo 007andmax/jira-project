@@ -5,7 +5,6 @@ import { UsersFilterJobTitleComponent } from './users-filter-job-title/users-fil
 import { TicketsFilterCompaniesDropDownModule } from 'src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-companies-drop-down/tickets-filter-companies-drop-down.module';
 import { UserDefaultSubscriptionModule } from '../../users-aside/user-default-subscription/user-default-subscription.module';
 import { FormsModule } from '@angular/forms';
-import { UsersFilterIndustryComponent } from './users-filter-industry/users-filter-industry.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DynamicTooltipModule } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.module';
 import { MatChipsModule, MatFormFieldModule, MatIconModule } from '@angular/material';
@@ -13,13 +12,14 @@ import { TicketsFilterTagsModule } from 'src/app/components/tickets/tickets/tick
 import { UsersFilterDefaultSubscriptionComponent } from './users-filter-default-subscription/users-filter-default-subscription.component';
 import { UsersFilterTagsComponent } from './users-filter-tags/users-filter-tags.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { UsersFilterCustomSubscriptionsComponent } from './users-filter-custom-subscriptions/users-filter-custom-subscriptions.component';
 
 @NgModule({
     declarations: [UsersFilterComponent,
         UsersFilterJobTitleComponent,
-        UsersFilterIndustryComponent,
         UsersFilterDefaultSubscriptionComponent,
-        UsersFilterTagsComponent
+        UsersFilterTagsComponent,
+        UsersFilterCustomSubscriptionsComponent
     ],
     imports: [
         CommonModule,
