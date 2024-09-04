@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatSelectModule, MatChipsModule, MatIconModule, MatAutocompleteModule, MatFormFieldModule } from '@angular/material';
 import { ModalQuoteComponent } from './modal-quote.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -16,9 +15,7 @@ import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.modul
     imports: [
         CommonModule,
         FormsModule,
-        MatSelectModule,
         MatChipsModule,
-        MatIconModule,
         MatAutocompleteModule,
         NgbModule,
         TextAreaModule,

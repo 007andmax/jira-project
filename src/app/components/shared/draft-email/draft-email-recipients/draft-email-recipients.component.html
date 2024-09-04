@@ -31,9 +31,6 @@
                     class="pointer"
                     [formControl]="companyCtrl"
                     autocomplete="new-password"
-                    [matChipInputFor]="chipList"
-                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                    [matChipInputAddOnBlur]="addOnBlur"
                     (input)="onSearch($event)"
                     (keyup)="onKeyUp($event)"
                     (blur)="onAdd($event)"
@@ -41,12 +38,12 @@
             </app-mat-chip-list>
         </app-mat-form-field>
     </div>
-    <mat-error
+    <app-mat-error
         class="invalid-feedback"
         *ngIf="!validate"
     >
         At least one email address must be added
-    </mat-error>
+    </app-mat-error>
     <div
         class="dropdown-menu unique-down"
         ngbDropdownMenu

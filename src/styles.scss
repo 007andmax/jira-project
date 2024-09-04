@@ -3464,7 +3464,7 @@ add-category-product {
     color: $gray-900;
   }
   .qt-input-block {
-    mat-error {
+    mat-error,app-mat-error {
       position: static;
       order: -1;
       margin-bottom: 8px;

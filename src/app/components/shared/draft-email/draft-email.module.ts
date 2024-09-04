@@ -6,13 +6,14 @@ import { DraftEmailRecipientsComponent } from './draft-email-recipients/draft-em
 import { DraftEmailUserRecipientsModule } from './draft-email-user-recipients/draft-email-user-recipients.module';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MatChipsModule, MatFormFieldModule, MatIconModule } from '@angular/material';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from '../preloader-ticket/preloader-ticket.module';
 import { UploadAreaModule } from '../upload-area/upload-area.module';
 import { DndModule } from 'src/app/directives/dnd/dnd.module';
 import { MatChipModule } from '../mat-chip/mat-chip.module';
 import { MatChipListModule } from '../mat-chip-list/mat-chip-list.module';
+import { MatFormFieldModule } from '../mat-form-field/mat-form-field.module';
+import { MatErrorModule } from '../mat-error/mat-error.module';
 
 
 @NgModule({
@@ -26,10 +27,7 @@ import { MatChipListModule } from '../mat-chip-list/mat-chip-list.module';
         DraftEmailUserRecipientsModule,
         AngularEditorModule,
         NgbModule,
-        MatIconModule,
-        MatChipsModule,
         ReactiveFormsModule,
-        MatFormFieldModule,
         DisabledBtnModule,
         PreloaderTicketModule,
         UploadAreaModule,
@@ -37,6 +35,7 @@ import { MatChipListModule } from '../mat-chip-list/mat-chip-list.module';
         MatChipModule,
         MatFormFieldModule,
         MatChipListModule,
+        MatErrorModule
     ],
     exports: [DraftEmailComponent]
 

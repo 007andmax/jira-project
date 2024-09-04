@@ -145,6 +145,7 @@ import { MatChipComponent } from './components/shared/mat-chip/mat-chip.componen
 import { MatChipTagComponent } from './components/shared/mat-chip-tag/mat-chip-tag.component';
 import { MatFormFieldComponent } from './components/shared/mat-form-field/mat-form-field.component';
 import { MatChipListComponent } from './components/shared/mat-chip-list/mat-chip-list.component';
+import { MatErrorComponent } from './components/shared/mat-error/mat-error.component';
 declare var $: any;
 
 /**
@@ -174,7 +175,7 @@ declare var $: any;
     GlNumberCheckUseComponent,
     CannedResponsesAsideComponent,
     ManufacturesCheckUseComponent,
-    UserDeArchiveNotificationComponent,
+    UserDeArchiveNotificationComponent
   ],
   imports: [
     BrowserModule,

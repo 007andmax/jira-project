@@ -24,7 +24,6 @@
             ></app-dynamic-tooltip>
             <app-mat-chip
                 *ngFor="let tag of selectedTag; let i = index"
-                [selectable]="selectable"
                 [isRemove]="removable"
                 (onClose)="remove(i)"
             >

@@ -16,7 +16,6 @@
         >
             <app-mat-chip
                 *ngFor="let subscription of selectedSubscriptions; let i = index"
-                [selectable]="selectable"
                 [isRemove]="removable"
                 (onClose)="toggleSubscription(subscription)"
             >

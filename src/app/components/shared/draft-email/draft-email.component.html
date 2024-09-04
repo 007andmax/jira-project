@@ -24,12 +24,12 @@
                     placeholder="Write Subject line"
                     (input)="validate.resetSubject()"
                 >
-                <mat-error
+                <app-mat-error
                     class="invalid-feedback"
                     *ngIf="!validate.getSubject()"
                 >
                     Subject is required
-                </mat-error>
+                </app-mat-error>
             </div>
         </div>
         <div class="qt-inputs-row">

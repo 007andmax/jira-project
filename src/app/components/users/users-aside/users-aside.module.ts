@@ -17,6 +17,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 @NgModule({
     declarations: [UsersAsideComponent,
@@ -38,7 +39,8 @@ import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-toolt
         NgxMaskModule.forRoot(),
         CompanyDropDownModule,
         PreloaderTicketModule,
-        DynamicTooltipModule
+        DynamicTooltipModule,
+        MatErrorModule
     ],
     exports: [UsersAsideComponent]
 

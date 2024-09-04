@@ -37,7 +37,6 @@
                     >
                         <app-mat-chip
                             *ngFor="let user of selectedUsers; let i = index"
-                            [selectable]="selectable"
                             [isRemove]="removable"
                             (onClose)="remove(i)"
                         >
@@ -86,6 +85,7 @@
                             <span class="user-email qt-ml-8">{{user.primaryEmail}}</span>
                         </mat-option>
                     </div>
+
 
 
 

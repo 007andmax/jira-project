@@ -162,7 +162,7 @@ input.qt-dropdown-input {
     text-transform: uppercase;
   }
 
-  mat-error {
+  mat-error,app-mat-error {
     &.qt-tooltip-error {
       position: absolute;
       color: #D92D20;

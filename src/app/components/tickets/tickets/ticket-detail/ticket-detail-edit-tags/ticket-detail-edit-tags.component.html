@@ -27,7 +27,6 @@
                 <app-mat-chip
                     class="selected-tag-ticket"
                     *ngFor="let tag of selectedTag; let i = index"
-                    [selectable]="selectable"
                     [isRemove]="removable && !customerPortalStateService.isCustomerPortal && ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
                     (onClose)="remove(i)"
                 >

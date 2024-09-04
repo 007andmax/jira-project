@@ -10,7 +10,6 @@
             aria-label="Fruit selection"
         >
             <app-mat-chip
-                [selectable]="true"
                 [isRemove]="true"
                 (onClose)="selected('invoiceSubscription')"
                 *ngIf="defaultSubscriptions.invoiceSubscription.enabled"
@@ -18,7 +17,6 @@
                 <div class="clip-text">Invoice Updates</div>
             </app-mat-chip>
             <app-mat-chip
-                [selectable]="true"
                 [isRemove]="true"
                 (onClose)="selected('ticketSubscription')"
                 *ngIf="defaultSubscriptions.ticketSubscription.enabled"
@@ -26,7 +24,6 @@
                 <div class="clip-text">Ticket Updates</div>
             </app-mat-chip>
             <app-mat-chip
-                [selectable]="true"
                 [isRemove]="true"
                 (onClose)="selected('ticketManagerSubscription')"
                 *ngIf="defaultSubscriptions.ticketManagerSubscription.enabled"

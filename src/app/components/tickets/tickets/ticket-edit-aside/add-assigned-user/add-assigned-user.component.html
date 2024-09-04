@@ -19,7 +19,6 @@
             <app-mat-chip
                 class="selected-tag-user"
                 *ngFor="let user of selectedUsers; let i = index"
-                [selectable]="selectable"
                 [isRemove]="removable"
                 (onClose)="remove(i)"
             >
