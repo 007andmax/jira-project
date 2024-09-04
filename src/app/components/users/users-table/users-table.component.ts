@@ -45,7 +45,6 @@ export class UsersTableComponent implements OnInit, OnDestroy {
   @Input() jobTitleList: Array<CrmCompanyJobTitle> = [];
   @Input() listCustomSubscription: Array<UserCustomSubscription> = [];
   @Input() companyId: string;
-  industries: Array<CrmCompanyIndustry> = [];
   @ViewChild('customSubscription') customSubscription: UserTableCustomSubscriptionComponent;
   companies: Array<Company> = [];
   currentUser: CurrentUser = new CurrentUser();
@@ -98,10 +97,7 @@ export class UsersTableComponent implements OnInit, OnDestroy {
       sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
         1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
   }
-  getUserIndustry() {
-    let find = this.industries.find(item => item.id === this.user.userIndustryId);
-    return (find) ? find.name : '';
-  }
+
   getJobTitle() {
     let find = this.jobTitleList.find(item => item.id === this.user.jobTitleId);
     return (find) ? find.name : '';
@@ -129,12 +125,6 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     this.cd.markForCheck();
   }
   ngOnInit() {
-    this.industries = this.crmStateService.getIndustryList();
-    let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
-      this.industries = data;
-      this.cd.detectChanges();
-    })
-    this.sub.add(onGetIndustry);
     if (this.companiesStateService.getCompanies().length > 0) this.companies = this.companiesStateService.getCompanies();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = data;

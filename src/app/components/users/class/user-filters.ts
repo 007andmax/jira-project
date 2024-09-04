@@ -3,7 +3,6 @@ import { UserDefaultSubscription } from "./user-default-subscription";
 
 export class UserFilters {
     filterTop: Array<FilterListTop> = [new FilterListTop('NAME', 'ASC'),
-    new FilterListTop('INDUSTRY', ''),
     new FilterListTop('TICKET_NUMBER', ''),
     new FilterListTop('PORTAL_STATUS', '')];
     "jobTitles": Array<string> = [];
@@ -36,14 +35,6 @@ export class UserFilters {
         if (index > -1) {
             let sort = this.filterTop[index].filter;
             if (field === 'NAME') {
-                this.clearFilter();
-                if (sort === '' || sort === 'DESC') {
-                    this.filterTop[index].filter = 'ASC';
-                } else {
-                    this.filterTop[index].filter = 'DESC';
-                }
-            }
-            if (field === 'INDUSTRY') {
                 this.clearFilter();
                 if (sort === '' || sort === 'DESC') {
                     this.filterTop[index].filter = 'ASC';

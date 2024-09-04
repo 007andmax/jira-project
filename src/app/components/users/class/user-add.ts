@@ -20,7 +20,6 @@ export class UserAdd {
   jobTypeId: string;
   customSubscriptionIds: Array<string> = [];
   customerCompaniesInfo: Array<UserCustomerCompaniesInfoAdd> = [];
-  userIndustryId: string;
   sendPortalInvitation: boolean;
   constructor(data: UserProfile) {
     if (data.phoneNumbers.length === 1 && data.phoneNumbers[0].number === '') {

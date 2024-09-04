@@ -86,7 +86,7 @@
         </span>
     </div>
     <div
-        class="users-table__industry"
+        class="users-table__industry qt-fd-c qt-ai-fs qt-jc-c"
         (click)="showDetailUser()"
     >
         <ng-template
@@ -95,11 +95,8 @@
             [ngForOf]="user.customerCompaniesInfo"
             [ngForTrackBy]="trackByIndex"
         >
-            <div
-                class="qt-df qt-ai-c"
-                *ngIf="company.jobTitleDto"
-            >
-                <div [textContent]="company.jobTitleDto.name"></div>
+            <div class="qt-df qt-ai-c">
+                <div [textContent]="company.jobTitleDto ? company.jobTitleDto.name : ''"></div>
             </div>
         </ng-template>
     </div>
