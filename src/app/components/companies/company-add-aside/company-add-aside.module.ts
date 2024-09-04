@@ -17,6 +17,7 @@ import { UserDefaultSubscriptionModule } from '../../users/users-aside/user-defa
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 import { CompanyUsersDropDownModule } from '../../tickets/tickets/ticket-add-aside/company-users-drop-down/company-users-drop-down.module';
+import { UsersDropDownModule } from '../../shared/users-drop-down/users-drop-down.module';
 
 
 
@@ -41,7 +42,8 @@ import { CompanyUsersDropDownModule } from '../../tickets/tickets/ticket-add-asi
         UserDefaultSubscriptionModule,
         DisabledBtnModule,
         PreloaderTicketModule,
-        CompanyUsersDropDownModule
+        CompanyUsersDropDownModule,
+        UsersDropDownModule
     ],
     exports: [CompanyAddAsideComponent]
 
