@@ -88,6 +88,7 @@
     <div
         class="users-table__industry qt-fd-c qt-ai-fs qt-jc-c"
         (click)="showDetailUser()"
+        *ngIf="type !== TYPE_LIST_COMPANY_USERS"
     >
         <ng-template
             ngFor
@@ -95,10 +96,19 @@
             [ngForOf]="user.customerCompaniesInfo"
             [ngForTrackBy]="trackByIndex"
         >
-            <div class="qt-df qt-ai-c">
+            <div class="qt-df qt-ai-c job-title-item">
                 <div [textContent]="company.jobTitleDto ? company.jobTitleDto.name : ''"></div>
             </div>
         </ng-template>
+    </div>
+    <div
+        class="users-table__industry qt-fd-c qt-ai-fs qt-jc-c"
+        (click)="showDetailUser()"
+        *ngIf="type == TYPE_LIST_COMPANY_USERS"
+    >
+        <div class="qt-df qt-ai-c job-title-item">
+            <div [textContent]="getJobTitleCompany() ? getJobTitleCompany().name : ''"></div>
+        </div>
     </div>
     <div
         class="users-table__contract-no qt-fd-c qt-ai-fs qt-jc-c"

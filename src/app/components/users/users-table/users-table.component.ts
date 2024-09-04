@@ -105,6 +105,9 @@ export class UsersTableComponent implements OnInit, OnDestroy {
   getUserName() {
     return `${this.user.firstName} ${this.user.lastName}`;
   }
+  getJobTitleCompany() {
+    return this.user.customerCompaniesInfo.find(item => item.companyId == this.companyId).jobTitleDto;
+  }
   showDetailUser() {
     this.usersStateService.showDetailUser(this.user);
     this.cd.markForCheck();
