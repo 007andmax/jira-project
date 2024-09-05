@@ -13,6 +13,7 @@ import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.
 import { ReportSendEmailModule } from '../reports/report-additional-actions/report-send-email/report-send-email.module';
 import { MatChipListModule } from '../shared/mat-chip-list/mat-chip-list.module';
 import { MatChipModule } from '../shared/mat-chip/mat-chip.module';
+import { MatOptionModule } from '../shared/mat-option/mat-option.module';
 
 @NgModule({
     declarations: [
@@ -37,6 +38,7 @@ import { MatChipModule } from '../shared/mat-chip/mat-chip.module';
         MatChipModule,
         MatFormFieldModule,
         MatChipListModule,
+        MatOptionModule
     ],
 })
 export class CompanyDeviceBetaModule { }

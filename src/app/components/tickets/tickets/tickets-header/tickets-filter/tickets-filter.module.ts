@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MatSelectModule, MatChipsModule, MatIconModule, MatFormFieldModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-down/company-drop-down.module';
 import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.module';
@@ -19,6 +18,8 @@ import { TicketsFilterCompaniesDropDownModule } from './tickets-filter-companies
 import { TicketsFilterTagsModule } from './tickets-filter-tags/tickets-filter-tags.module';
 import { MatChipListModule } from 'src/app/components/shared/mat-chip-list/mat-chip-list.module';
 import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.module';
+import { MatFormFieldModule } from 'src/app/components/shared/mat-form-field/mat-form-field.module';
+import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 
 @NgModule({
     declarations: [
@@ -32,9 +33,6 @@ import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.modul
     imports: [
         CommonModule,
         NgbModule,
-        MatSelectModule,
-        MatChipsModule,
-        MatIconModule,
         FormsModule,
         ReactiveFormsModule,
         CompanyDropDownModule,
@@ -46,6 +44,7 @@ import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.modul
         MatChipModule,
         MatFormFieldModule,
         MatChipListModule,
+        MatErrorModule
     ],
     exports: [TicketsFilterComponent]
 

@@ -789,14 +789,14 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
     }, 500);
   }
 
-  selectedSearch(event: MatAutocompleteSelectedEvent): void {
-    let data = this.selectedTag.find(x => x.toLowerCase() == event.option.viewValue.toLocaleLowerCase());
+  selectedSearch(search): void {
+    let data = this.selectedTag.find(x => x.toLowerCase() == search.Result.toLocaleLowerCase());
     if (!data) {
-      this.selectedTag.push(event.option.viewValue);
-      this.searchTag.push(event.option.viewValue);
+      this.selectedTag.push(search.Result);
+      this.searchTag.push(search.Result);
       this.selectedInput.nativeElement.value = '';
       this.selectedCtrl.setValue(null);
-      this.add(event.option.viewValue);
+      this.add(search.Result);
     }
     this.selectedInput.nativeElement.value = '';
   }

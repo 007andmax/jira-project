@@ -70,10 +70,9 @@
                 >
             </div>
             <div class="autocomplete-container">
-                <mat-option
+                <app-mat-chip
                     class="qt-ai-c"
                     *ngFor="let user of users"
-                    [value]="user"
                     (click)="selected(user)"
                 >
                     <div class="assigne-user-item">
@@ -95,7 +94,7 @@
                             class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
                         ></i>
                     </div>
-                </mat-option>
+                </app-mat-chip>
             </div>
         </div>
     </app-mat-form-field>

@@ -6,7 +6,11 @@
                     class="qt-page-list__header-title"
                     [textContent]="'Devices'"
                 ></h3>
-                <div class="Rectangle">
+                <div
+                    class="Rectangle"
+                    ngbDropdown
+                    container="body"
+                >
                     <span class="qt-input-search"></span>
                     <div class="SearchRectangle">
                         <app-mat-form-field
@@ -32,7 +36,7 @@
                                     id="dropdownServices"
                                     [formControl]="selectedCtrl"
                                     [(ngModel)]="tagFilterValue"
-                                    [matAutocomplete]="auto"
+                                    ngbDropdownToggle
                                     class="pointer"
                                     placeholder="Input at least 3 characters to start searching by companies, devices, work stations etc. "
                                     [matChipInputFor]="chipList"
@@ -40,14 +44,16 @@
                                     (keyup)="onSearchTag($event.target.value)"
                                 >
                             </app-mat-chip-list>
-                            <mat-autocomplete
-                                class="extended"
-                                #auto="matAutocomplete"
-                                (optionSelected)="selected($event)"
+                            <div
+                                class="mat-autocomplete-panel mat-autocomplete-visible"
+                                ngbDropdownMenu
+                                aria-labelledby="dropdownServices"
                             >
-                                <mat-option
+                                <app-mat-option
                                     class="SubRectangle"
                                     *ngFor="let search of autosearchDevice"
+                                    ngbDropdownItem
+                                    (click)="selected(search)"
                                 >
                                     {{search.Result}}
                                     <span
@@ -55,8 +61,8 @@
                                         [ngClass]="search.Type"
                                         [title]="search.Type"
                                     ></span>
-                                </mat-option>
-                            </mat-autocomplete>
+                                </app-mat-option>
+                            </div>
                         </app-mat-form-field>
                     </div>
                     <div class="StarRectangle">
@@ -2001,6 +2007,14 @@
 
 
 
+
+
+
+
+
+
+
+
         <div class="remote-area">
             <ul class="list-unstyled">
                 <li>
@@ -2052,6 +2066,14 @@
         >
             <span aria-hidden="true">&times;</span>
         </button>
+
+
+
+
+
+
+
+
 
 
 

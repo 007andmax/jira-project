@@ -6,6 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { MatChipListModule } from 'src/app/components/shared/mat-chip-list/mat-chip-list.module';
 import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.module';
+import { MatFormFieldModule } from 'src/app/components/shared/mat-form-field/mat-form-field.module';
+import { MatOptionModule } from 'src/app/components/shared/mat-option/mat-option.module';
 
 
 
@@ -15,14 +17,13 @@ import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.modul
     imports: [
         CommonModule,
         FormsModule,
-        MatChipsModule,
-        MatAutocompleteModule,
         NgbModule,
         TextAreaModule,
         ReactiveFormsModule,
         MatChipModule,
         MatFormFieldModule,
         MatChipListModule,
+        MatOptionModule
 
     ],
     entryComponents: [ModalQuoteComponent],

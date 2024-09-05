@@ -49,9 +49,6 @@
                 placeholder="Select company"
                 #userInput
                 class="pointer"
-                [matChipInputFor]="chipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                [matChipInputAddOnBlur]="addOnBlur"
                 autocomplete="off"
                 (input)="onSearch($event)"
                 [disabled]="isDisabled"

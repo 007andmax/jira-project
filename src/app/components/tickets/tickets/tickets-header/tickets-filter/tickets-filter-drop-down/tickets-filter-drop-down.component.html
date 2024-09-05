@@ -41,12 +41,6 @@
                 >
                     {{reduceItemName(tag)}}
                 </div>
-                <mat-icon
-                    matChipRemove
-                    *ngIf="removable"
-                >
-                    cancel
-                </mat-icon>
             </app-mat-chip>
             <input
                 id="dropdownServices"
@@ -54,9 +48,6 @@
                 [placeholder]="placeholder"
                 #userInput
                 class="pointer"
-                [matChipInputFor]="chipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                [matChipInputAddOnBlur]="addOnBlur"
                 autocomplete="off"
                 (input)="onSearch($event)"
             >

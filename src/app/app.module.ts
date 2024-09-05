@@ -146,6 +146,7 @@ import { MatChipTagComponent } from './components/shared/mat-chip-tag/mat-chip-t
 import { MatFormFieldComponent } from './components/shared/mat-form-field/mat-form-field.component';
 import { MatChipListComponent } from './components/shared/mat-chip-list/mat-chip-list.component';
 import { MatErrorComponent } from './components/shared/mat-error/mat-error.component';
+import { MatOptionComponent } from './components/shared/mat-option/mat-option.component';
 declare var $: any;
 
 /**
