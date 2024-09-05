@@ -33,4 +33,18 @@ export class UsersDropDownComponent extends CompanyUsersDropDownComponent {
   getSelectedItemText() {
     return (this.selectedItem) ? `${this.getUserName(this.selectedItem)}` : "";
   }
+  /**
+* @description Check if use "search", will filter list items by 'field'. If 'field' no exist filter will by Array String. If search element doesn't exist, will init logic to show icon for add
+* @param {Object} event - Object from input
+*/
+  onCheckAdd(event) {
+    this.list = this.reqList.filter(item => {
+      if (this.getUserName(item).toLowerCase().toLowerCase().includes(event.target.value.toLowerCase())) {
+        item.setSearchByCompany(null);
+        return true;
+      }
+      item.setSearchByCompany(null);
+      return false;
+    });
+  }
 }
