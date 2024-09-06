@@ -1,6 +1,24 @@
+@import "./src/assets/styles/variable";
  .error-payments {
      position: relative;
      .qt-tooltip-error {
          right: 0px;
      }
  }
+  app-multi-company-drop-down {
+      &::before {
+          color: $gray-500;
+          font-size: 13px;
+          font-weight: 500;
+            content: "Tags";
+      }
+  }
+/deep/app-multi-company-drop-down .mat-form-field {
+    width: 100%;
+}
+.unpaid-table__amount,.unpaid-table__date {
+    width: 120px !important;
+}
+.unpaid-table__payment {
+    width: 130px !important;
+}

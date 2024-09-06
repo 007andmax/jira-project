@@ -9,6 +9,7 @@ import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.
 import { PreloaderTicketModule } from 'src/app/components/shared/preloader-ticket/preloader-ticket.module';
 import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-down/company-drop-down.module';
 import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.module';
+import { MultiCompanyDropDownModule } from 'src/app/components/shared/multi-company-drop-down/multi-company-drop-down.module';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.mo
         DisabledBtnModule,
         PreloaderTicketModule,
         CompanyDropDownModule,
-        DropDownModule
+        DropDownModule,
+        MultiCompanyDropDownModule
     ],
     exports: [InvoicesAsideComponent]
 

@@ -33,6 +33,7 @@ export class InvoicesAsideComponent implements OnInit, OnDestroy {
   new CompanySetting('Credit Card', 'CREDIT_CARD'),
   new CompanySetting('Wire Transfer', 'WIRE_TRANSFER')];
   selectedCompany: any = null;
+  selectedCompanies = [];
   isChangeAmountReceived: boolean = false;
   selectAllInvoice: boolean = false;
   opened: boolean = false;
@@ -179,11 +180,13 @@ export class InvoicesAsideComponent implements OnInit, OnDestroy {
     }, 0);
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);
   }
-  onSelectCompany(item) {
-    if (item) {
+  onSelectCompany(items) {
+    console.log("items", items);
+    this.selectedCompanies = items;
+    if (items.length > 0) {
       this.invoicesFilter.setLimit(10000);
       this.invoicesFilter.setStatus("UNPAID");
-      this.invoicesFilter.setCompanyId(item.id);
+      this.invoicesFilter.setCompanyId(items[0].id);
       this.invoicesFilter.setExcludeDeleted(true);
       this.invoicesService.getInvoices(this.invoicesFilter.getFIlter()).subscribe((data: Array<Invoice>) => {
         this.invoices = data;
@@ -201,10 +204,8 @@ export class InvoicesAsideComponent implements OnInit, OnDestroy {
           this.amountReceived_str = this.amountReceived.toFixed(2);
         }
       })
-      this.selectedCompany = item;
     } else {
       this.invoices = [];
-      this.selectedCompany = null;
     }
   }
   getDate(date) {
