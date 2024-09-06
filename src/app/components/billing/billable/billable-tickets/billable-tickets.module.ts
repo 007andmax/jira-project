@@ -28,6 +28,7 @@ import { DynamicTooltipModule } from 'src/app/components/shared/dynamic-tooltip/
 import { TaxesModule } from 'src/app/components/shared/taxes/taxes.module';
 import { InvoiceChangeAddressComponent } from '../billable-aside/invoice-form/invoice-change-address/invoice-change-address.component';
 import { InvoiceChangeAddressModule } from '../billable-aside/invoice-form/invoice-change-address/invoice-change-address.module';
+import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { InvoiceChangeAddressModule } from '../billable-aside/invoice-form/invoi
         BillableTicketsRoutingModule,
         PreviewPhoneMaskModule,
         DynamicTooltipModule,
-        InvoiceChangeAddressModule
+        InvoiceChangeAddressModule,
+        MatErrorModule
     ],
 
 

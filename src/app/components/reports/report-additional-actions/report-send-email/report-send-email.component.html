@@ -23,12 +23,12 @@
                     placeholder="Write Subject line"
                     (input)="validateReport.resetSubject()"
                 >
-                <mat-error
+                <app-mat-error
                     class="invalid-feedback"
                     *ngIf="!validateReport.getSubject()"
                 >
                     Subject is required
-                </mat-error>
+                </app-mat-error>
             </div>
         </div>
         <div class="qt-inputs-row draft-email-sidebar__select-users-container">

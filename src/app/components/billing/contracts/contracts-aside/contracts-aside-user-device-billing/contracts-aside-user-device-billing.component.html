@@ -59,12 +59,12 @@
                 [(ngModel)]="contractsUserDevice.description"
                 (input)="validate.resetDescription()"
             >
-            <mat-error
+            <app-mat-error
                 class="invalid-feedback"
                 *ngIf="!validate.getDescription()"
             >
                 Description is required
-            </mat-error>
+            </app-mat-error>
         </div>
     </div>
     <div class="qt-inputs-row-background">
@@ -219,12 +219,12 @@
                     [value]="contractsUserDevice.includedHours"
                     (onChange)="contractsUserDevice.includedHours=$event"
                 >
-                <mat-error
+                <app-mat-error
                     class="invalid-feedback"
                     *ngIf="!validate.getIncludedHours()"
                 >
                     Cannot be 0
-                </mat-error>
+                </app-mat-error>
             </div>
             <div class="qt-input-block qt-f50 --required">
                 <div class="qt-input-block__label">Rate exceding block time</div>
@@ -240,12 +240,12 @@
                         (input)="validate.resetRateExceeding()"
                         (onChange)="contractsUserDevice.rateExceeding=$event"
                     >
-                    <mat-error
+                    <app-mat-error
                         class="invalid-feedback"
                         *ngIf="!validate.getRateExceeding()"
                     >
                         Rate cannot be 0.00
-                    </mat-error>
+                    </app-mat-error>
                 </div>
             </div>
             <div class="qt-input-block qt-f50">

@@ -77,12 +77,12 @@
                 [(ngModel)]="contractsOther.description"
                 (input)="validate.resetDescription()"
             >
-            <mat-error
+            <app-mat-error
                 class="invalid-feedback"
                 *ngIf="!validate.getDescription()"
             >
                 Description is required
-            </mat-error>
+            </app-mat-error>
         </div>
     </div>
     <div class="qt-inputs-row-background">
@@ -175,9 +175,9 @@
         >
             + Add Service
         </button>
-        <mat-error *ngIf="!validate.getServicesOrProducts()">
+        <app-mat-error *ngIf="!validate.getServicesOrProducts()">
             At least one {{(type === 'PRODUCTS' ? 'product' : 'service')}} should be added
-        </mat-error>
+        </app-mat-error>
     </div>
     <div class="qt-pt-16 qt-pb-16">
         <div class="qt-df qt-jc-sb qt-ai-c">

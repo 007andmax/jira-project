@@ -55,12 +55,12 @@
         class="app-left-panel__menu-expand-item-icon --required"
         *ngIf="toggleAddCategory"
     >
-        <mat-error
+        <app-mat-error
             class="qt-tooltip-error"
             *ngIf="!addCategory.getValidate()"
             [textContent]="'This category name is already occupied'"
         >
-        </mat-error>
+        </app-mat-error>
         <input
             type="text"
             [(ngModel)]="addCategory.categoryName"

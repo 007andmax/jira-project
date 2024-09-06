@@ -51,12 +51,12 @@
                         (change)="onChangeAmountReceived($event)"
                         appToFixed
                     >
-                    <mat-error
+                    <app-mat-error
                         class="invalid-feedback amount-received-invalid-feedback"
                         *ngIf="!validate.getAmountReceived()"
                     >
                         You must use the entire amount. ${{getUnUsedAmountReceived()}} left unused
-                    </mat-error>
+                    </app-mat-error>
                 </div>
             </div>
             <div class="qt-input-block qt-mr-16 qt-w100">

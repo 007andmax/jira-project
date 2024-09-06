@@ -1,18 +1,18 @@
 <tr>
     <td class="track-and-bill-table__service-name">
         {{service.name}}
-        <mat-error
+        <app-mat-error
             class="qt-tooltip-error qt-w-auto-important"
             *ngIf="!service.validate"
         >
             The selected service is used in the contract - "{{service.descriptionValidate}}" with the same dates.
-        </mat-error>
-        <mat-error
+        </app-mat-error>
+        <app-mat-error
             class="qt-tooltip-error qt-w-auto-important"
             *ngIf="!service.validateDuplicated"
         >
             Duplicate service name
-        </mat-error>
+        </app-mat-error>
     </td>
     <td class="track-and-bill-table__billable">
         <label class="qt-checkbox">

@@ -3,12 +3,12 @@
     [ngClass]="class"
     ngbDropdown
 >
-    <mat-error
+    <app-mat-error
         class="app-drop-down__error qt-tooltip-error mat-error"
         *ngIf="!validate"
         [textContent]="errorMessage"
     >
-    </mat-error>
+    </app-mat-error>
     <input
         [ngClass]="{'--input-error' : !validate}"
         type="text"

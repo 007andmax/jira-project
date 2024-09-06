@@ -6,6 +6,7 @@ import { InvoiceSelectNoteComponent } from '../invoice-select-note/invoice-selec
 import { InvoiceAddNoteComponent } from '../invoice-add-note/invoice-add-note.component';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule, MatChipsModule } from '@angular/material';
+import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { MatSelectModule, MatChipsModule } from '@angular/material';
         FormsModule,
         MatSelectModule,
         MatChipsModule,
+        MatErrorModule
     ],
     exports: [InvoiceRegularNoteComponent]
 

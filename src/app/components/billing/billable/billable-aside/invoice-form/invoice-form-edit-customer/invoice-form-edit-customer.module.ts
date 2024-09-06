@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { MatSelectModule, MatChipsModule } from '@angular/material';
 import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.module';
 import { NgxMaskModule } from 'ngx-mask';
+import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { NgxMaskModule } from 'ngx-mask';
         MatChipsModule,
         DropDownModule,
         NgxMaskModule.forRoot(),
+        MatErrorModule
     ],
     exports: [InvoiceFormEditCustomerComponent]
 

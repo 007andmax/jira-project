@@ -17,10 +17,10 @@
         [attr.placeholder]="placeholder"
         (input)="setIsInitEdit(true)"
     >
-    <mat-error
+    <app-mat-error
         class="invalid-feedback"
         *ngIf="!validate.getIpAdress()"
     >
         Enter a valid IP value
-    </mat-error>
+    </app-mat-error>
 </div>
