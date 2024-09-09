@@ -57,12 +57,12 @@
                 id="dropdown"
                 ngbDropdownToggle
             >
-            <mat-error
+            <app-mat-error
                 class="invalid-feedback"
                 *ngIf="!validate.getEmail()"
             >
                 Please enter a valid email address
-            </mat-error>
+            </app-mat-error>
         </app-mat-chip-list>
         <div
             ngbDropdownMenu

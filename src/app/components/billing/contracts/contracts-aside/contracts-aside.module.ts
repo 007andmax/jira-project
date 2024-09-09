@@ -27,6 +27,7 @@ import { NumberModule } from 'src/app/directives/number/number.module';
 import { TechUsersModule } from 'src/app/components/shared/tech-users/tech-users.module';
 import { TaxesModule } from 'src/app/components/shared/taxes/taxes.module';
 import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-down/company-drop-down.module';
+import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-do
         ContractsAsideOtherServiceModule,
         ContractsAsideOtherProductModule,
         NumberModule,
-        CompanyDropDownModule
+        CompanyDropDownModule,
+        MatErrorModule
 
     ],
     exports: [ContractsAsideComponent]

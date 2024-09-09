@@ -125,12 +125,12 @@
                                 mask="9"
                                 (input)="changeVerifyCode($event,5)"
                             >
-                            <mat-error
+                            <app-mat-error
                                 class="qt-tooltip-error"
                                 *ngIf="!validVerifyCoded"
                             >
                                 Invalid two-step authentication code
-                            </mat-error>
+                            </app-mat-error>
                         </div>
                     </div>
                 </div>

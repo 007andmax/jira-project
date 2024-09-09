@@ -6,6 +6,7 @@ import { MatChipsModule, MatSelectModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { DatePickerModule } from 'src/app/components/shared/date-picker/date-picker.module';
 import { TicketProfileUpdatesServiceDurationModule } from 'src/app/components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-duration/ticket-profile-updates-service-duration.module';
+import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 
 
 
@@ -19,7 +20,8 @@ import { TicketProfileUpdatesServiceDurationModule } from 'src/app/components/ti
         MatChipsModule,
         FormsModule,
         TicketProfileUpdatesServiceDurationModule,
-        DatePickerModule
+        DatePickerModule,
+        MatErrorModule
     ],
     exports: [ContractsAsideOtherServiceComponent]
 

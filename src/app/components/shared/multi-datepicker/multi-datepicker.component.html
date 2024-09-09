@@ -5,12 +5,12 @@
     [init]="true"
     (onOutSide)="hideDatePicker()"
 >
-    <mat-error
+    <app-mat-error
         class="app-drop-down__error invalid-feedback mat-error"
         *ngIf="!validate"
         [textContent]="errorMessage"
     >
-    </mat-error>
+    </app-mat-error>
     <input
         type="text"
         [attr.placeholder]="placeholder"

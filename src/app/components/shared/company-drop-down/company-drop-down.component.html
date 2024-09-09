@@ -11,12 +11,12 @@
         class="app-drop-down__title"
         [textContent]="title"
     ></div>
-    <mat-error
+    <app-mat-error
         class="invalid-feedback mat-error"
         *ngIf="!validate"
         [textContent]="errorMessage"
     >
-    </mat-error>
+    </app-mat-error>
     <form>
         <input
             type="text"

@@ -9,6 +9,7 @@ import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.mo
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from 'src/app/components/shared/preloader-ticket/preloader-ticket.module';
 import { GlNumbersDropDownModule } from 'src/app/components/inventory/gl-numbers-drop-down/gl-numbers-drop-down.module';
+import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { GlNumbersDropDownModule } from 'src/app/components/inventory/gl-numbers
         DropDownModule,
         DisabledBtnModule,
         PreloaderTicketModule,
-        GlNumbersDropDownModule
+        GlNumbersDropDownModule,
+        MatErrorModule
     ],
     exports: [NonContractServicesAddComponent]
 

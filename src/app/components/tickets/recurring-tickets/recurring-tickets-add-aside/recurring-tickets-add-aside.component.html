@@ -69,7 +69,7 @@
                     [valid]="validate.getInterval()"
                     (cronChange)="onChangeCron($event)"
                 ></app-interval>
-                <mat-error *ngIf="!validate.getInterval()">Interval is required</mat-error>
+                <app-mat-error *ngIf="!validate.getInterval()">Interval is required</app-mat-error>
             </div>
         </div>
         <div class="qt-inputs-row ticket-tabs">

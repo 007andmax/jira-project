@@ -20,12 +20,12 @@
             (keyup)="onKeyUp($event)"
             required
         >
-        <mat-error
-          class="invalid-feedback"
-          *ngIf="disableCreateCategory"
+        <app-mat-error
+            class="invalid-feedback"
+            *ngIf="disableCreateCategory"
         >
-          This category name is already occupied
-        </mat-error>
+            This category name is already occupied
+        </app-mat-error>
     </div>
     <div class="tab-pane__table-cell product-category-table__count"></div>
     <div class="tab-pane__table-cell product-category-table__gl-number">

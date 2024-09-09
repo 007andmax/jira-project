@@ -30,12 +30,12 @@
                         (blur)="onValidateSaleCost()"
                         [disabled]="!getPermissions('MANAGE_PRODUCTS')"
                     >
-                    <mat-error
+                    <app-mat-error
                         class="qt-tooltip-error"
                         *ngIf="!valdiateSaleCost"
                     >
                         Product price can not be lower than cost
-                    </mat-error>
+                    </app-mat-error>
                 </div>
                 <input
                     class="input-default input-qty"

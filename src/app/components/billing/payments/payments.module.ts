@@ -22,6 +22,7 @@ import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.m
 import { InvoiceExportModule } from '../invoices/invoices-header/invoice-export/invoice-export.module';
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 
 
@@ -55,7 +56,8 @@ import { DropDownModule } from '../../shared/drop-down/drop-down.module';
         KeyUpEnterModule,
         InvoiceExportModule,
         CompanyDropDownModule,
-        DropDownModule
+        DropDownModule,
+        MatErrorModule
     ],
 
 

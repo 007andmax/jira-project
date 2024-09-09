@@ -18,14 +18,14 @@
                 min="1"
                 max="100"
             >
-            <mat-error *ngIf="!validate.getName()">
+            <app-mat-error *ngIf="!validate.getName()">
                 Category name must be between 1 and 100 characters
-            </mat-error>
-            <mat-error
+            </app-mat-error>
+            <app-mat-error
                 *ngIf="validate.getNameIsExist()"
                 [textContent]="validate.getTextErrorNameExist()"
             >
-            </mat-error>
+            </app-mat-error>
         </div>
     </div>
     <div class="qt-df qt-jc-fe qt-mt-24">
