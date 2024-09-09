@@ -2,9 +2,12 @@ import { InvoicesFilter } from '../../invoices/class/invoices-filter';
 import { Payment } from './payment';
 
 export class PaymentsFilter extends InvoicesFilter {
+    companyId: string;
 
 
-
+    public setCompanyId(data) {
+        this.setCompanyId = data;
+    }
     public checkPaymentForAdd(payment: Payment) {
         let createdAt = new Date(payment.createdAt).getTime();
         let companyFilter = ((this.companyId) ? payment.clientCompanyId == this.companyId : true);

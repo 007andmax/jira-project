@@ -2,7 +2,7 @@ import { Invoice } from './invoice';
 import * as moment from "moment";
 
 export class InvoicesFilter {
-    companyId: string;
+    companyIds: Array<string> = [];
     endDate: number;
     invoiceNumber: string;
     limit: number = 40;
@@ -35,7 +35,7 @@ export class InvoicesFilter {
         let endDate = new Date(this.endDate);
         endDate.setDate(endDate.getDate() + 1);
         let data: any = {
-            companyId: this.companyId,
+            companyIds: this.companyIds,
             invoiceNumber: this.invoiceNumber,
             limit: this.limit,
             offset: (this.initLeftOffset) ? (this.offset - this.leftOffset) : this.offset,
@@ -49,7 +49,7 @@ export class InvoicesFilter {
         return data;
     }
     public checkAddInvoice(invoice: Invoice, companies) {
-        let company = companies.find(item => item.id === this.companyId);
+        let company = companies.find(item => item.id === this.companyIds);
         if ((company) ? invoice.companyId === company.id : true
             && (this.invoiceNumber) ? invoice.ticketNumbers.includes(this.invoiceNumber) : true
                 && (this.status) ? invoice.status === this.status : true
@@ -68,8 +68,8 @@ export class InvoicesFilter {
     public setStatus(status) {
         this.status = status;
     }
-    public setCompanyId(data) {
-        this.companyId = data;
+    public setCompanyIds(data) {
+        this.companyIds = data;
     }
     public setStartDate(data) {
         this.startDate = data;

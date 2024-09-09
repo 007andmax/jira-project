@@ -53,7 +53,7 @@ export class InvoicesFilterComponent implements OnInit, OnDestroy {
     this.datesDp.clearWithOutChanges();
     this.statusDp.clearWithOutChanges();
     this.invoicesFilter.setStatus(null);
-    if (!this.customerPortalStateService.isCustomerPortal) this.invoicesFilter.setCompanyId(null);
+    if (!this.customerPortalStateService.isCustomerPortal) this.invoicesFilter.setCompanyIds([]);
     this.invoicesFilter.setStartDate(null);
     this.invoicesFilter.setEndDate(null);
     this.invoicesFilter.setInvoiceNumber(null);
@@ -65,9 +65,9 @@ export class InvoicesFilterComponent implements OnInit, OnDestroy {
 
   public onSelectCompany(item) {
     if (!item) {
-      this.invoicesFilter.setCompanyId(null);
+      this.invoicesFilter.setCompanyIds([]);
     } else {
-      this.invoicesFilter.setCompanyId(item.id);
+      this.invoicesFilter.setCompanyIds([item.id]);
     }
     this.invoiceStateService.onInitFilter(this.invoicesFilter);
     this.onChangeCounterFilter();
@@ -96,7 +96,7 @@ export class InvoicesFilterComponent implements OnInit, OnDestroy {
   }
   public onChangeCounterFilter() {
     let count = 0;
-    if (this.invoicesFilter.companyId) count++;
+    if (this.invoicesFilter.companyIds.length > 0) count++;
     if (this.invoicesFilter.endDate && this.invoicesFilter.startDate) count++;
     if (this.invoicesFilter.invoiceNumber) count++;
     if (this.invoicesFilter.status) count++;

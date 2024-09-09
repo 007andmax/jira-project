@@ -1,3 +1,4 @@
+import { Company } from 'src/app/interfaces/company/company';
 import { PaymentData } from './payment-Data';
 
 export class Payment {
@@ -15,6 +16,7 @@ export class Payment {
     reference: string;
     refundMethod: string;
     totalSum: number;
+    multipleCompanies: Array<any> = [];
     constructor(data) {
         this.clientCompanyId = data.clientCompanyId;
         this.clientCompanyName = data.clientCompanyName;
@@ -32,6 +34,7 @@ export class Payment {
         this.reference = data.reference;
         this.refundMethod = data.refundMethod;
         this.totalSum = data.totalSum;
+        this.multipleCompanies = data.multipleCompanies;
     }
     public getDataForExportPDF() {
         return {

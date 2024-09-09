@@ -63,7 +63,7 @@ export class CustomerPortalStateService {
     this.onUsersFilters.emit(this.usersFilter);
   }
   setInvoiceFilter(company) {
-    this.invoicesFilter.setCompanyId(company.companyId);
+    this.invoicesFilter.setCompanyIds([company.companyId]);
     this.onInvoiceFilters.emit(this.invoicesFilter);
   }
   public setTicketsFilter(company, type, currentUser) {

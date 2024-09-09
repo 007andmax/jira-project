@@ -3363,7 +3363,7 @@ input.--input-error:hover {
   }
 }
 
-.page-list-ticket,.users-page,.company-devices-page {
+.page-list-ticket,.users-page,.company-devices-page,app-multi-company-drop-down {
   .light-dropdown {
     padding: 0;
   }
@@ -3435,7 +3435,15 @@ input.--input-error:hover {
     display: none;
   }
 }
-
+app-multi-company-drop-down {
+  &:before {
+    display: none;
+  }
+  .mat-form-field-label-wrapper {
+    top: -20px;
+    padding-top: 15px;
+  }
+}
 .quotes-page .qt-page-list__header-filters .dropdown-menu {
   right: 0;
   left: unset;
