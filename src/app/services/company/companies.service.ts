@@ -170,7 +170,7 @@ export class CompaniesService {
     return this.http.post(this.apiUrl + 'receivable', {
       limit: 5,
       offset: 0,
-      companyId: companyId,
+      companyIds: [companyId],
       excludeDeleted: true
     });
   }

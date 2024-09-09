@@ -3443,6 +3443,9 @@ app-multi-company-drop-down {
     top: -20px;
     padding-top: 15px;
   }
+  .mat-form-field-wrapper {
+    padding-bottom: 0px !important;
+  }
 }
 .quotes-page .qt-page-list__header-filters .dropdown-menu {
   right: 0;
