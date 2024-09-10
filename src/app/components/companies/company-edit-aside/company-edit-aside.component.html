@@ -508,6 +508,7 @@
                 <app-company-tags
                     #companyTags
                     [companyId]="company.id"
+                    [filter]="true"
                     [isRemoveCompanySelectedTag]="false"
                     (tagsChange)="onChangeTags($event)"
                 ></app-company-tags>

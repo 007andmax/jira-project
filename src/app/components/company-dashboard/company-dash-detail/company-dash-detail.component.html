@@ -28,15 +28,15 @@
         <div class="cmp-dboard-rating qt-df">
             <span class="qt-dflex">
                 <span
-                  class="qt-icon icon__rating-filled qt-icon__yellow-600 qt-sz-16 qt-dib qt-ml-2 qt-mr-2 pointer"
-                  *ngFor="let item of arrayOne(selectedRating); let i = index;"
-                  (click)="changeRating(i, 'selected')"
+                    class="qt-icon icon__rating-filled qt-icon__yellow-600 qt-sz-16 qt-dib qt-ml-2 qt-mr-2 pointer"
+                    *ngFor="let item of arrayOne(selectedRating); let i = index;"
+                    (click)="changeRating(i, 'selected')"
                 >
                 </span>
                 <span
-                  class="qt-icon icon__rating-filled qt-icon__background qt-sz-16 qt-dib qt-ml-2 qt-mr-2 pointer"
-                  *ngFor="let item of arrayOne(unSelectedRating); let i = index;"
-                  (click)="changeRating(i, 'unselected')"
+                    class="qt-icon icon__rating-filled qt-icon__background qt-sz-16 qt-dib qt-ml-2 qt-mr-2 pointer"
+                    *ngFor="let item of arrayOne(unSelectedRating); let i = index;"
+                    (click)="changeRating(i, 'unselected')"
                 >
                 </span>
             </span>
@@ -341,6 +341,7 @@
             [showLabel]="false"
             [selectedTag]="companyDetail.tags"
             [placement]="'top'"
+            [filter]="true"
             [isDisabled]="!getPermissions('EDIT_COMPANIES')"
             [companyId]="companyDetail.id"
             [isRemoveCompanySelectedTag]="false"
