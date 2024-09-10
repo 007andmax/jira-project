@@ -12,7 +12,7 @@ export class TextAreaDirective implements OnInit {
   @Input() limit;
   @Input() default;
   @Input() minHeight;
-  @Input() maxLines = 5;
+  @Input() maxLines;
   @Output() onPast = new EventEmitter<any>();
   block: boolean = false;
   ctrlDown: boolean = false;
@@ -22,6 +22,7 @@ export class TextAreaDirective implements OnInit {
   }
 
   ngOnInit() {
+    if (!this.maxLines) this.maxLines = 5;
     if (this.minHeight) this.element.nativeElement.style.minHeight = this.minHeight + "px";
     this.element.nativeElement.style.visibility = 'visible';
     this.element.nativeElement.style.display = 'block';
@@ -38,7 +39,7 @@ export class TextAreaDirective implements OnInit {
         this.element.nativeElement.setAttribute("rows", this.maxLines);
       }
     }
-
+    console.log("maxLines", this.maxLines);
   }
 
   private getNumberOfLines(str) {

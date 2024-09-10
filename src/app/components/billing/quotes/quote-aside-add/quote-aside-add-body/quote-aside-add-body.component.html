@@ -291,8 +291,8 @@
             placeholder="Enter the terms and conditions of your business to be displayed in your transaction"
             appTextArea
             maxlength="250"
-            cols="30"
-            rows="1"
+            [maxLines]="10"
+            [default]="3"
         ></textarea>
     </div>
 </div>
