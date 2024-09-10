@@ -15,6 +15,7 @@ import { CompanyDropDownModule } from '../../shared/company-drop-down/company-dr
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 @NgModule({
     declarations: [UsersAsideEditComponent
@@ -34,7 +35,8 @@ import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-toolt
         CompanyDropDownModule,
         PreloaderTicketModule,
         DisabledBtnModule,
-        DynamicTooltipModule
+        DynamicTooltipModule,
+        MatErrorModule
     ],
     exports: [UsersAsideEditComponent]
 

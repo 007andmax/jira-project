@@ -10,6 +10,7 @@ import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.
 import { ReportSendEmailComponent } from './report-send-email.component';
 import { MatChipsModule, MatSelectModule } from '@angular/material';
 import { DndModule } from 'src/app/directives/dnd/dnd.module';
+import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 
 
 
@@ -26,7 +27,8 @@ import { DndModule } from 'src/app/directives/dnd/dnd.module';
         FormsModule,
         MatSelectModule,
         MatChipsModule,
-        DndModule
+        DndModule,
+        MatErrorModule
     ],
     exports: [ReportSendEmailComponent]
 })

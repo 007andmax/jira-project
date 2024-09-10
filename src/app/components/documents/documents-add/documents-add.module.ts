@@ -15,6 +15,7 @@ import { DatePickerModule } from '../../shared/date-picker/date-picker.module';
 import { DocumentsAddEditCategoriesModule } from './documents-add-info/documents-add-edit-categories/documents-add-edit-categories.module';
 import { DocumentsAddRoutingModule } from './documents-add-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         DatePickerModule,
         DocumentsAddEditCategoriesModule,
         DocumentsAddRoutingModule,
-        NgbModule
+        NgbModule,
+        MatErrorModule
     ],
 
 

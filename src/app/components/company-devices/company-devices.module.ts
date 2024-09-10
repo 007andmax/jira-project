@@ -30,6 +30,7 @@ import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { CompanyDevicesEditMacComponent } from './company-devices-edit-mac/company-devices-edit-mac.component';
 import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
+import { MatErrorModule } from '../shared/mat-error/mat-error.module';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.m
         TextAreaModule,
         DropDownModule,
         ClickOutsideModule,
-        KeyUpEnterModule
+        KeyUpEnterModule,
+        MatErrorModule
     ],
 
 

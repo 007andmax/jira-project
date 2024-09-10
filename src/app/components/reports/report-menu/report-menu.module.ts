@@ -14,6 +14,7 @@ import { CompanyDropDownModule } from '../../shared/company-drop-down/company-dr
 import { ContractDetailDropDownComponent } from './contract-detail-drop-down/contract-detail-drop-down.component';
 import { ContractDetailIntervalsDropDownComponent } from './contract-detail-intervals-drop-down/contract-detail-intervals-drop-down.component';
 import { ContractCompanyDropDownComponent } from './contract-company-drop-down/contract-company-drop-down.component';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 
 
@@ -36,7 +37,8 @@ import { ContractCompanyDropDownComponent } from './contract-company-drop-down/c
         MatSelectModule,
         MatChipsModule,
         ReportAdditionalActionsModule,
-        CompanyDropDownModule
+        CompanyDropDownModule,
+        MatErrorModule
     ],
     exports: [ReportMenuComponent]
 

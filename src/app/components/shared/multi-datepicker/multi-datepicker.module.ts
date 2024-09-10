@@ -5,6 +5,7 @@ import { MatChipsModule, MatSelectModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
+import { MatErrorModule } from '../mat-error/mat-error.module';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside
         MatChipsModule,
         FormsModule,
         NgbModule,
-        ClickOutsideModule
+        ClickOutsideModule,
+        MatErrorModule
     ],
     exports: [MultiDatepickerComponent]
 

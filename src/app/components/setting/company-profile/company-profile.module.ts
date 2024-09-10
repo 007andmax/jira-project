@@ -12,6 +12,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { CompanyProfileProfileComponent } from './company-profile-profile/company-profile-profile.component';
 import { CompanyProfileWorkspaceComponent } from './company-profile-workspace/company-profile-workspace.component';
 import { CompanyProfileOperationalHoursComponent } from './company-profile-operational-hours/company-profile-operational-hours.component';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 
 
@@ -30,6 +31,7 @@ import { CompanyProfileOperationalHoursComponent } from './company-profile-opera
         CompanyProfileRoutingModule,
         DropDownModule,
         NgxMaskModule.forRoot(),
+        MatErrorModule
     ],
 
 

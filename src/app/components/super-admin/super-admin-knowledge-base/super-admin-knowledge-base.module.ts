@@ -19,6 +19,7 @@ import { SuperAdminKnowledgeBaseNewsListComponent } from './super-admin-knowledg
 import { SuperAdminKnowledgeBaseNewsModule } from './super-admin-knowledge-base-news/super-admin-knowledge-base-news.module';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 
 
@@ -45,7 +46,8 @@ import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-t
         FroalaViewModule.forRoot(),
         SuperAdminKnowledgeBaseNewsModule,
         DisabledBtnModule,
-        PreloaderTicketModule
+        PreloaderTicketModule,
+        MatErrorModule
 
     ],
 

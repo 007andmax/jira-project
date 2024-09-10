@@ -15,6 +15,7 @@ import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-toolt
 import { UploadAreaProgressModule } from '../../shared/upload-area/upload-area-progress/upload-area-progress.module';
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside
         DynamicTooltipModule,
         UploadAreaProgressModule,
         CompanyDropDownModule,
-        ClickOutsideModule
+        ClickOutsideModule,
+        MatErrorModule
     ],
     exports: [PasswordManagerEditAsideComponent]
 

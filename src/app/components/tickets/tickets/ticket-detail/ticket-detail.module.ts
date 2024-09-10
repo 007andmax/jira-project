@@ -88,6 +88,7 @@ import { TicketDetailTicketsComponent } from './ticket-detail-tickets/ticket-det
 import { TicketDetailTicketsStatusComponent } from './ticket-detail-tickets/ticket-detail-tickets-status/ticket-detail-tickets-status.component';
 import { MatChipListModule } from 'src/app/components/shared/mat-chip-list/mat-chip-list.module';
 import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.module';
+import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 
 
 
@@ -189,6 +190,7 @@ import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.modul
         MatChipModule,
         MatFormFieldModule,
         MatChipListModule,
+        MatErrorModule
     ],
 
 

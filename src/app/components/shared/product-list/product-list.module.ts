@@ -5,6 +5,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatChipsModule, MatSelectModule } from '@angular/material';
 import { FilterModule } from 'src/app/pipe/filter/filter.module';
 import { DynamicTooltipModule } from '../dynamic-tooltip/dynamic-tooltip.module';
+import { MatErrorModule } from '../mat-error/mat-error.module';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { DynamicTooltipModule } from '../dynamic-tooltip/dynamic-tooltip.module'
         MatSelectModule,
         MatChipsModule,
         FilterModule,
-        DynamicTooltipModule
+        DynamicTooltipModule,
+        MatErrorModule
     ],
     exports: [ProductListComponent]
 

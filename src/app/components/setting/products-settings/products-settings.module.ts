@@ -16,6 +16,7 @@ import { AddProductTypeComponent } from './add-product-type/add-product-type.com
 import { ProductTypeCheckUseComponent } from './product-type-check-use/product-type-check-use.component';
 import { ProductTypeCheckUseModule } from './product-type-check-use/product-type-check-use.module';
 import { ProductsSettingsCategoryComponent } from './products-settings-category/products-settings-category.component';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 @NgModule({
     declarations: [
@@ -36,7 +37,8 @@ import { ProductsSettingsCategoryComponent } from './products-settings-category/
         DropDownModule,
         KeyUpEnterModule,
         GlNumbersDropDownModule,
-        ProductTypeCheckUseModule
+        ProductTypeCheckUseModule,
+        MatErrorModule
     ],
 
 

@@ -17,6 +17,7 @@ import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-t
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 import { MarketingEmailUsersItemComponent } from './marketing-email-users/marketing-email-users-item/marketing-email-users-item.component';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { MarketingEmailUsersItemComponent } from './marketing-email-users/market
         DisabledBtnModule,
         PreloaderTicketModule,
         DynamicTooltipModule,
-        KeyUpEnterModule
+        KeyUpEnterModule,
+        MatErrorModule
 
     ],
 })

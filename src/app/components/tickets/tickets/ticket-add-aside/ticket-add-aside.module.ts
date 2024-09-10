@@ -21,6 +21,7 @@ import { AssignedTicketUserComponent } from './assigned-ticket-user/assigned-tic
 import { AssignedTicketUserSelectedItemComponent } from './assigned-ticket-user/assigned-ticket-user-selected-item/assigned-ticket-user-selected-item.component';
 import { AssignedTicketUserItemComponent } from './assigned-ticket-user/assigned-ticket-user-item/assigned-ticket-user-item.component';
 import { AssignedTicketUserModule } from './assigned-ticket-user/assigned-ticket-user.module';
+import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 
 
 
@@ -41,7 +42,8 @@ import { AssignedTicketUserModule } from './assigned-ticket-user/assigned-ticket
         CompanyDropDownModule,
         DynamicTooltipModule,
         CompanyUsersDropDownModule,
-        AssignedTicketUserModule
+        AssignedTicketUserModule,
+        MatErrorModule
     ],
     exports: [TicketAddAsideComponent]
 })

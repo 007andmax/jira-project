@@ -5,6 +5,7 @@ import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.
 import { MatFormFieldModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { SupportPageAddSubCategoryComponent } from './support-page-add-sub-category.component';
+import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 
 
 
@@ -18,6 +19,7 @@ import { SupportPageAddSubCategoryComponent } from './support-page-add-sub-categ
         PreloaderTicketModule,
         MatFormFieldModule,
         FormsModule,
+        MatErrorModule
     ],
     entryComponents: [SupportPageAddSubCategoryComponent],
     exports: [SupportPageAddSubCategoryComponent]

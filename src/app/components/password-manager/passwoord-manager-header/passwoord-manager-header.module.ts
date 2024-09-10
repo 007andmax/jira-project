@@ -13,6 +13,7 @@ import { PasswordManagerAddCategoryModule } from '../password-manager-add-catego
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 import { MatChipListModule } from '../../shared/mat-chip-list/mat-chip-list.module';
 import { MatChipModule } from '../../shared/mat-chip/mat-chip.module';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 @NgModule({
     declarations: [PasswoordManagerHeaderComponent,
@@ -32,6 +33,7 @@ import { MatChipModule } from '../../shared/mat-chip/mat-chip.module';
         MatChipModule,
         MatFormFieldModule,
         MatChipListModule,
+        MatErrorModule
     ],
     exports: [PasswoordManagerHeaderComponent]
 })

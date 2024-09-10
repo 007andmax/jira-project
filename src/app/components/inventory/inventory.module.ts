@@ -19,6 +19,7 @@ import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { TaxesModule } from '../shared/taxes/taxes.module';
 import { InventoryChangeProductTypeComponent } from './inventory-change-product-type/inventory-change-product-type.component';
 import { InventoryChangeProductTypeModule } from './inventory-change-product-type/inventory-change-product-type.module';
+import { MatErrorModule } from '../shared/mat-error/mat-error.module';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { InventoryChangeProductTypeModule } from './inventory-change-product-typ
         ToFixedModule,
         TaxesModule,
         TextAreaModule,
-        InventoryChangeProductTypeModule
+        InventoryChangeProductTypeModule,
+        MatErrorModule
 
     ],
 

@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AssignedTicketUserSelectedItemComponent } from './assigned-ticket-user-selected-item/assigned-ticket-user-selected-item.component';
 import { AssignedTicketUserItemComponent } from './assigned-ticket-user-item/assigned-ticket-user-item.component';
 import { DynamicTooltipModule } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.module';
+import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { DynamicTooltipModule } from 'src/app/components/shared/dynamic-tooltip/
         FormsModule,
         DropDownModule,
         NgbModule,
-        DynamicTooltipModule
+        DynamicTooltipModule,
+        MatErrorModule
     ],
     exports: [AssignedTicketUserComponent]
 })

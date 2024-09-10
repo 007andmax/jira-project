@@ -25,6 +25,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 import { UsersAsideDetailCompanyInfoComponent } from './users-aside-detail-company-info/users-aside-detail-company-info.component';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 @NgModule({
     declarations: [UsersAsideDetailComponent,
@@ -54,7 +55,8 @@ import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-toolt
         TicketProfileAttachmentsModule,
         NgxMaskModule.forRoot(),
         CompanyDropDownModule,
-        DynamicTooltipModule
+        DynamicTooltipModule,
+        MatErrorModule
     ],
     exports: [UsersAsideDetailComponent]
 

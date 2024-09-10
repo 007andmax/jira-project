@@ -4,6 +4,7 @@ import { CompanyUsersDropDownComponent } from './company-users-drop-down.compone
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule, MatChipsModule } from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 
 
 
@@ -16,7 +17,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         MatChipsModule,
         FormsModule,
         NgbModule,
-
+        MatErrorModule
     ],
     exports: [CompanyUsersDropDownComponent]
 })

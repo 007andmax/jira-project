@@ -5,6 +5,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from 'src/app/app.component';
 import { MatChipsModule, MatSelectModule } from '@angular/material';
 import { CompanyDropDownComponent } from './company-drop-down.component';
+import { MatErrorModule } from '../mat-error/mat-error.module';
 @NgModule({
     declarations: [
         CompanyDropDownComponent
@@ -15,6 +16,7 @@ import { CompanyDropDownComponent } from './company-drop-down.component';
         MatChipsModule,
         FormsModule,
         NgbModule,
+        MatErrorModule
     ],
     exports: [CompanyDropDownComponent],
 

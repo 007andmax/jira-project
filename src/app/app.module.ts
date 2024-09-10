@@ -147,6 +147,7 @@ import { MatFormFieldComponent } from './components/shared/mat-form-field/mat-fo
 import { MatChipListComponent } from './components/shared/mat-chip-list/mat-chip-list.component';
 import { MatErrorComponent } from './components/shared/mat-error/mat-error.component';
 import { MatOptionComponent } from './components/shared/mat-option/mat-option.component';
+import { MatErrorModule } from './components/shared/mat-error/mat-error.module';
 declare var $: any;
 
 /**
@@ -231,7 +232,8 @@ declare var $: any;
     TicketsFilterSaveModule,
     MarketingSubscriptionsAsideModule,
     SuperAdminPublicListModule,
-    ProductTypeCheckUseModule
+    ProductTypeCheckUseModule,
+    MatErrorModule
   ],
   entryComponents: [
     ConfirmComponent,

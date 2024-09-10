@@ -17,6 +17,8 @@ import { UserDefaultSubscriptionModule } from '../../users/users-aside/user-defa
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 import { CompanyUsersDropDownModule } from '../../tickets/tickets/ticket-add-aside/company-users-drop-down/company-users-drop-down.module';
+import { ProductListQuoteComponent } from '../../billing/quotes/quote-aside-add/product-list-quote/product-list-quote.component';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 
 
@@ -41,7 +43,8 @@ import { CompanyUsersDropDownModule } from '../../tickets/tickets/ticket-add-asi
         UserDefaultSubscriptionModule,
         DisabledBtnModule,
         PreloaderTicketModule,
-        CompanyUsersDropDownModule
+        CompanyUsersDropDownModule,
+        MatErrorModule
     ],
     exports: [CompanyAddAsideComponent]
 

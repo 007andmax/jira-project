@@ -15,6 +15,7 @@ import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-t
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 @NgModule({
     declarations: [
@@ -35,7 +36,8 @@ import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside
         PreloaderTicketModule,
         DynamicTooltipModule,
         CompanyDropDownModule,
-        ClickOutsideModule
+        ClickOutsideModule,
+        MatErrorModule
 
     ],
     exports: [PasswordManagerAddAsideComponent],

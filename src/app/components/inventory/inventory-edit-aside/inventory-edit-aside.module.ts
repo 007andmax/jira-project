@@ -11,6 +11,7 @@ import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-n
 import { GlNumbersDropDownModule } from '../gl-numbers-drop-down/gl-numbers-drop-down.module';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-t
         DecimalNumberModule,
         GlNumbersDropDownModule,
         DisabledBtnModule,
-        PreloaderTicketModule
+        PreloaderTicketModule,
+        MatErrorModule
     ],
     exports: [InventoryEditAsideComponent]
 

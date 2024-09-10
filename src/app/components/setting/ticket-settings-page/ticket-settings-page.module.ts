@@ -14,6 +14,7 @@ import { CannedResponsesComponent } from './canned-responses/canned-responses.co
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 import { TicketsPriorityComponent } from './tickets-priority/tickets-priority.component';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { TicketsPriorityComponent } from './tickets-priority/tickets-priority.co
         ClickOutsideModule,
         TicketSettingsPageRoutingModule,
         DynamicTooltipModule,
-        KeyUpEnterModule
+        KeyUpEnterModule,
+        MatErrorModule
     ],
 })
 export class TicketSettingsPageModule { }

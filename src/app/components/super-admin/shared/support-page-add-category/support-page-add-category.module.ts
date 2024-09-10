@@ -5,6 +5,7 @@ import { PreloaderTicketModule } from 'src/app/components/shared/preloader-ticke
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { MatFormFieldModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
+import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 
 
 
@@ -18,6 +19,7 @@ import { FormsModule } from '@angular/forms';
         PreloaderTicketModule,
         MatFormFieldModule,
         FormsModule,
+        MatErrorModule
     ],
     entryComponents: [SupportPageAddCategoryComponent],
     exports: [SupportPageAddCategoryComponent]

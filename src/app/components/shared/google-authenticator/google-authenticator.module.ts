@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { GoogleAuthenticatorComponent } from './google-authenticator.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { MatChipsModule, MatSelectModule } from '@angular/material';
+import { MatErrorModule } from '../mat-error/mat-error.module';
 @NgModule({
     declarations: [
         GoogleAuthenticatorComponent
@@ -14,6 +15,7 @@ import { MatChipsModule, MatSelectModule } from '@angular/material';
         MatSelectModule,
         MatChipsModule,
         NgxMaskModule.forRoot(),
+        MatErrorModule
     ],
     entryComponents: [GoogleAuthenticatorComponent],
     exports: [GoogleAuthenticatorComponent],

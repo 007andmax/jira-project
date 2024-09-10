@@ -4,6 +4,7 @@ import { AddMarketingSubscriptionTypeComponent } from './add-marketing-subscript
 import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { MatFormFieldModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
+import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { FormsModule } from '@angular/forms';
         CommonModule,
         FormsModule,
         ClickOutsideModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        MatErrorModule
 
     ],
     exports: [AddMarketingSubscriptionTypeComponent]

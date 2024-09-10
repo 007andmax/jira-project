@@ -16,6 +16,7 @@ import { AddCrmCompanyJobTitleComponent } from './crm-company-job-title/add-crm-
 import { AddCrmCompanyJobTypeComponent } from './crm-company-job-type/add-crm-company-job-type/add-crm-company-job-type.component';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 
 
@@ -39,7 +40,8 @@ import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.m
         FormsModule,
         MatFormFieldModule,
         DynamicTooltipModule,
-        KeyUpEnterModule
+        KeyUpEnterModule,
+        MatErrorModule
     ],
 
 

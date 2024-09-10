@@ -28,9 +28,6 @@
                 #userInput
                 class="pointer"
                 [formControl]="tagCtrl"
-                [matChipInputFor]="chipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                [matChipInputAddOnBlur]="addOnBlur"
                 (input)="onSearch($event)"
                 autocomplete="off"
             >

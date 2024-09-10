@@ -16,6 +16,7 @@ import { DocumentsEditHistoryComponent } from './documents-edit-history/document
 import { DocumentsAddEditCategoriesModule } from '../documents-add/documents-add-info/documents-add-edit-categories/documents-add-edit-categories.module';
 import { DocumentsEditRoutingModule } from './documents-edit-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         DatePickerModule,
         DocumentsAddEditCategoriesModule,
         DocumentsEditRoutingModule,
-        NgbModule
+        NgbModule,
+        MatErrorModule
     ],
 
 

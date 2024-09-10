@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DropDownComponent } from './drop-down.component';
 import { AppComponent } from 'src/app/app.component';
 import { MatChipsModule, MatSelectModule } from '@angular/material';
+import { MatErrorModule } from '../mat-error/mat-error.module';
 @NgModule({
     declarations: [
         DropDownComponent
@@ -18,6 +19,7 @@ import { MatChipsModule, MatSelectModule } from '@angular/material';
         MatChipsModule,
         FormsModule,
         NgbModule,
+        MatErrorModule
     ],
     exports: [DropDownComponent],
 

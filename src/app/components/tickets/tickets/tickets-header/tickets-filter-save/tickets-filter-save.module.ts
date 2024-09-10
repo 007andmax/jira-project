@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { PreloaderTicketModule } from 'src/app/components/shared/preloader-ticket/preloader-ticket.module';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { MatSelectModule, MatChipsModule } from '@angular/material';
+import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 
 @NgModule({
     declarations: [
@@ -17,7 +18,7 @@ import { MatSelectModule, MatChipsModule } from '@angular/material';
         PreloaderTicketModule,
         MatSelectModule,
         MatChipsModule,
-
+        MatErrorModule
     ],
     exports: [TicketsFilterSaveComponent],
     entryComponents: [TicketsFilterSaveComponent]

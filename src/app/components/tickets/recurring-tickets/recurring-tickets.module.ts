@@ -24,6 +24,7 @@ import { CompanyDropDownModule } from '../../shared/company-drop-down/company-dr
 import { RecurringTicketsTableAssignedUserComponent } from './recurring-tickets-table/recurring-tickets-table-assigned-user/recurring-tickets-table-assigned-user.component';
 import { RecurringTicketsTableAssignedUserMoreComponent } from './recurring-tickets-table/recurring-tickets-table-assigned-user-more/recurring-tickets-table-assigned-user-more.component';
 import { AssignedTicketUserModule } from '../tickets/ticket-add-aside/assigned-ticket-user/assigned-ticket-user.module';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 
 
@@ -58,7 +59,8 @@ import { AssignedTicketUserModule } from '../tickets/ticket-add-aside/assigned-t
         ReactiveFormsModule,
         RecurringTicketsRoutingModule,
         CompanyDropDownModule,
-        AssignedTicketUserModule
+        AssignedTicketUserModule,
+        MatErrorModule
     ],
 
 
