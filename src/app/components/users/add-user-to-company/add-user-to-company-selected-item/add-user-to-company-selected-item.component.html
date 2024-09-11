@@ -1,0 +1,18 @@
+<div class="assigned-ticket-user__item">
+    <div
+        class="qt-circle default-user-avatar"
+        [ngClass]="{'avatar-background-color-odd': !user.avatar}"
+        [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+        [ngStyle]="{'background': ticketsListService.getStyleAvatar(user,listColorNoAvatar[user.indexNoAvatar])}"
+    ></div>
+    <div
+        class="assigned-ticket-user__name qt-ml-4 qt-mr-4"
+        [textContent]="user.firstName + ' ' + user.lastName"
+    ></div>
+    <div
+        class="qt-sz-20 relative qt-ml-4 qt-pointer"
+        (click)="remove()"
+    >
+        <i class="qt-icon icon__close qt-icon__gray-400 qt-sz-20 qt-dib"></i>
+    </div>
+</div>

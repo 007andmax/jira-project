@@ -5,11 +5,13 @@ import { FormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AddUserToCompanyItemComponent } from './add-user-to-company-item/add-user-to-company-item.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AddUserToCompanySelectedItemComponent } from './add-user-to-company-selected-item/add-user-to-company-selected-item.component';
 
 
 @NgModule({
     declarations: [AddUserToCompanyComponent,
-        AddUserToCompanyItemComponent
+        AddUserToCompanyItemComponent,
+        AddUserToCompanySelectedItemComponent
     ],
     imports: [
         CommonModule,

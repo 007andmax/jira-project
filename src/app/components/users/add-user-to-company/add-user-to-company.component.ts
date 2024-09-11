@@ -61,7 +61,7 @@ export class AddUserToCompanyComponent implements OnInit, OnDestroy {
   }
   onSearch(value) {
     document.body.querySelector(".user-company-list").scrollTo(0, 0);
-    this.reqUsers.forEach(item => item.selected = false);
+    // this.reqUsers.forEach(item => item.selected = false);
     this.filter.setSearch((value !== "") ? value : null);
     this.setDefaultScoll();
     this.onScroll();
@@ -110,8 +110,12 @@ export class AddUserToCompanyComponent implements OnInit, OnDestroy {
       })
     }
   }
+  getSelectedUsers() {
+    return this.reqUsers.filter(item => item.selected);
+  }
   onSelectUser(user) {
     this.reqUsers.find(item => item.id === user.id).selected = user.selected;
+    this.clearSearch();
     this.cd.detectChanges();
   }
   cancelConfirm() {

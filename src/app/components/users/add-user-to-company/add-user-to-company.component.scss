@@ -64,3 +64,10 @@ app-add-user-to-company-item {
     top: calc(50% - 6px);
     cursor: pointer;
 }
+.assigned-users-type {
+    display: flex;
+    flex-wrap: wrap;
+}
+app-add-user-to-company-selected-item {
+    display: contents;
+}
