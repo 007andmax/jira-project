@@ -36,8 +36,6 @@
                 #userInput
                 class="pointer"
                 [formControl]="userCtrl"
-                [matChipInputFor]="chipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                 (input)="onSearchUser($event)"
                 id="dropdown"
                 ngbDropdownToggle
@@ -63,8 +61,6 @@
                     id="search-user"
                     class="pointer"
                     [formControl]="userCtrl"
-                    [matChipInputFor]="chipList"
-                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                     (input)="onSearchUser($event)"
                     placeholder="Search Users"
                 >

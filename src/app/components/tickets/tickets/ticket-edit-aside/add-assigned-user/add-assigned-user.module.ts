@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AddAssignedUserComponent } from './add-assigned-user.component';
-import { MatSelectModule, MatChipsModule, MatIconModule, MatFormFieldModule } from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatChipListModule } from 'src/app/components/shared/mat-chip-list/mat-chip-list.module';
 import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.module';
 import { MatOptionModule } from 'src/app/components/shared/mat-option/mat-option.module';
+import { MatFormFieldModule } from 'src/app/components/shared/mat-form-field/mat-form-field.module';
 
 
 
@@ -16,9 +16,6 @@ import { MatOptionModule } from 'src/app/components/shared/mat-option/mat-option
     ],
     imports: [
         CommonModule,
-        MatSelectModule,
-        MatChipsModule,
-        MatIconModule,
         NgbModule,
         ReactiveFormsModule,
         MatChipModule,

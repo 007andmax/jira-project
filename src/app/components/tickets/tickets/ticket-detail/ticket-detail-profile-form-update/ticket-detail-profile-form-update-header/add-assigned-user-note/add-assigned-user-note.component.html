@@ -50,8 +50,6 @@
                 #userInput
                 class="pointer"
                 [formControl]="userCtrl"
-                [matChipInputFor]="chipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                 (input)="onSearchUser($event)"
                 (keyup)="onKeyUp($event)"
                 id="dropdown"

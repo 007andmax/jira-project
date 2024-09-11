@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { TicketDetailComponent } from './ticket-detail.component';
 import { TicketDetailRoutingModule } from './ticket-detail-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MatSelectModule, MatChipsModule, MatIconModule, MatFormFieldModule } from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxMaskModule } from 'ngx-mask';
@@ -89,6 +88,7 @@ import { TicketDetailTicketsStatusComponent } from './ticket-detail-tickets/tick
 import { MatChipListModule } from 'src/app/components/shared/mat-chip-list/mat-chip-list.module';
 import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.module';
 import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
+import { MatFormFieldModule } from 'src/app/components/shared/mat-form-field/mat-form-field.module';
 
 
 
@@ -156,9 +156,6 @@ import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.mo
         TicketDetailRoutingModule,
         DynamicTooltipModule,
         NgbModule,
-        MatSelectModule,
-        MatChipsModule,
-        MatIconModule,
         ReactiveFormsModule,
         DisabledBtnModule,
         PreloaderTicketModule,
