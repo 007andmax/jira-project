@@ -38,7 +38,6 @@
                                     ngbDropdownToggle
                                     class="pointer"
                                     placeholder="Input at least 3 characters to start searching by companies, devices, work stations etc. "
-                                    [matChipInputFor]="chipList"
                                     (keyup.enter)="add($event.target.value)"
                                     (keyup)="onSearchTag($event.target.value)"
                                 >
@@ -1249,7 +1248,6 @@
                             ngbDropdownToggle
                             class="pointer"
                             placeholder="Enter Devices"
-                            [matChipInputFor]="chipdeviceTag"
                             (keyup)="onSearchLinkDevices($event.target.value)"
                         >
                     </app-mat-chip-list>
@@ -1310,7 +1308,6 @@
                             ngbDropdownToggle
                             class="pointer"
                             placeholder="Enter tag"
-                            [matChipInputFor]="chipTag"
                             (blur)="addTags($event.target.value)"
                             (keyup.enter)="addTags($event.target.value)"
                             (keyup)="onSidebarSearchTag($event.target.value)"

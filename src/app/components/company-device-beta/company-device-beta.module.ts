@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { CompanyDeviceBetaRoutingModule } from './company-device-beta-routing.module';
 import { CompanyDeviceBetaComponent } from './company-device-beta.component';
 import { DropDownModule } from '../shared/drop-down/drop-down.module';
-import { MatAutocompleteModule, MatChipsModule, MatFormFieldModule, MatIconModule, MatSelectModule } from '@angular/material';
 import { DatePickerModule } from '../shared/date-picker/date-picker.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DeviceBeta } from 'src/app/pipe/device-beta.pipe';
@@ -14,6 +13,7 @@ import { ReportSendEmailModule } from '../reports/report-additional-actions/repo
 import { MatChipListModule } from '../shared/mat-chip-list/mat-chip-list.module';
 import { MatChipModule } from '../shared/mat-chip/mat-chip.module';
 import { MatOptionModule } from '../shared/mat-option/mat-option.module';
+import { MatFormFieldModule } from '../shared/mat-form-field/mat-form-field.module';
 
 @NgModule({
     declarations: [
@@ -24,13 +24,9 @@ import { MatOptionModule } from '../shared/mat-option/mat-option.module';
         CommonModule,
         CompanyDeviceBetaRoutingModule,
         DropDownModule,
-        MatSelectModule,
-        MatChipsModule,
-        MatIconModule,
         DatePickerModule,
         ReactiveFormsModule,
         FormsModule,
-        MatAutocompleteModule,
         DynamicTooltipModule,
         NgbModule,
         DisabledBtnModule,
