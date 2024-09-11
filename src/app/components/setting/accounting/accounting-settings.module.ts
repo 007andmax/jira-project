@@ -21,6 +21,7 @@ import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.m
 import { CustomNotesSettingsComponent } from './custom-notes-settings/custom-notes-settings.component';
 import { AddCustomNotesSettingsComponent } from './custom-notes-settings/add-custom-notes-settings/add-custom-notes-settings.component';
 import { EditCustomNotesSettingsComponent } from './custom-notes-settings/edit-custom-notes-settings/edit-custom-notes-settings.component';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 
 
@@ -50,7 +51,8 @@ import { EditCustomNotesSettingsComponent } from './custom-notes-settings/edit-c
         DropDownModule,
         TextAreaModule,
         DynamicTooltipModule,
-        KeyUpEnterModule
+        KeyUpEnterModule,
+        MatErrorModule
     ],
 })
 export class AccoutingSettingsModule { }
