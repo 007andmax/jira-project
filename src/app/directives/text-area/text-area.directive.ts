@@ -34,7 +34,7 @@ export class TextAreaDirective implements OnInit {
     } else {
       this.lines = this.getNumberOfLines(this.element.nativeElement.value);
       if (this.lines <= this.maxLines) {
-        this.element.nativeElement.setAttribute("rows", (this.default && this.default > this.lines) ? this.default : this.lines);
+        this.element.nativeElement.setAttribute("rows", (this.default && this.default > this.lines) ? this.default : this.lines + 1);
       } else {
         this.element.nativeElement.setAttribute("rows", this.maxLines);
       }
