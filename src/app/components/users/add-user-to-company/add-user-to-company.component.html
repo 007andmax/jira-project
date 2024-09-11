@@ -33,40 +33,42 @@
                     (click)="clearSearch()"
                 ></span>
             </span>
-            <div class="assigned-users-type assigned-users-type-clients qt-mt-8">
+            <div class="user-company-content">
+              <div class="assigned-users-type assigned-users-type-clients qt-mt-8">
                 <ng-template
-                    class="assigned-ticket-user"
+                  class="assigned-ticket-user"
+                  ngFor
+                  let-user
+                  [ngForOf]="getSelectedUsers()"
+                  let-i="index"
+                  [ngForTrackBy]="trackByIndex"
+                >
+                  <app-add-user-to-company-selected-item [user]="user"></app-add-user-to-company-selected-item>
+                </ng-template>
+              </div>
+              <div class="user-company-list qt-mt-16">
+                <div
+                  infiniteScroll
+                  [infiniteScrollContainer]="container"
+                  [infiniteScrollDistance]="2"
+                  [infiniteScrollThrottle]="50"
+                  [infiniteScrollDisabled]="infiniteScrollDisabled"
+                  [fromRoot]="true"
+                  (scrolled)="onScroll()"
+                >
+                  <ng-template
                     ngFor
                     let-user
-                    [ngForOf]="getSelectedUsers()"
-                    let-i="index"
-                    [ngForTrackBy]="trackByIndex"
-                >
-                    <app-add-user-to-company-selected-item [user]="user"></app-add-user-to-company-selected-item>
-                </ng-template>
-            </div>
-            <div class="user-company-list qt-mt-16">
-                <div
-                    infiniteScroll
-                    [infiniteScrollContainer]="container"
-                    [infiniteScrollDistance]="2"
-                    [infiniteScrollThrottle]="50"
-                    [infiniteScrollDisabled]="infiniteScrollDisabled"
-                    [fromRoot]="true"
-                    (scrolled)="onScroll()"
-                >
-                    <ng-template
-                        ngFor
-                        let-user
-                        [ngForOf]="users"
-                        [ngForTrackBy]="trackById"
-                    >
-                        <app-add-user-to-company-item
-                            (onSelectUser)="onSelectUser($event)"
-                            [user]="user"
-                        ></app-add-user-to-company-item>
-                    </ng-template>
+                    [ngForOf]="users"
+                    [ngForTrackBy]="trackById"
+                  >
+                    <app-add-user-to-company-item
+                      (onSelectUser)="onSelectUser($event)"
+                      [user]="user"
+                    ></app-add-user-to-company-item>
+                  </ng-template>
                 </div>
+              </div>
             </div>
         </div>
     </div>
