@@ -6,6 +6,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AddUserToCompanyItemComponent } from './add-user-to-company-item/add-user-to-company-item.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddUserToCompanySelectedItemComponent } from './add-user-to-company-selected-item/add-user-to-company-selected-item.component';
+import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
+import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { AddUserToCompanySelectedItemComponent } from './add-user-to-company-sel
         CommonModule,
         FormsModule,
         InfiniteScrollModule,
-        NgbModule
+        NgbModule,
+        DisabledBtnModule,
+        PreloaderTicketModule
 
     ],
     entryComponents: [AddUserToCompanyComponent],

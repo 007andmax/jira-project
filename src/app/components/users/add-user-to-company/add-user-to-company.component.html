@@ -34,41 +34,44 @@
                 ></span>
             </span>
             <div class="user-company-content">
-              <div class="assigned-users-type assigned-users-type-clients qt-mt-8">
-                <ng-template
-                  class="assigned-ticket-user"
-                  ngFor
-                  let-user
-                  [ngForOf]="getSelectedUsers()"
-                  let-i="index"
-                  [ngForTrackBy]="trackByIndex"
-                >
-                  <app-add-user-to-company-selected-item [user]="user"></app-add-user-to-company-selected-item>
-                </ng-template>
-              </div>
-              <div class="user-company-list qt-mt-16">
-                <div
-                  infiniteScroll
-                  [infiniteScrollContainer]="container"
-                  [infiniteScrollDistance]="2"
-                  [infiniteScrollThrottle]="50"
-                  [infiniteScrollDisabled]="infiniteScrollDisabled"
-                  [fromRoot]="true"
-                  (scrolled)="onScroll()"
-                >
-                  <ng-template
-                    ngFor
-                    let-user
-                    [ngForOf]="users"
-                    [ngForTrackBy]="trackById"
-                  >
-                    <app-add-user-to-company-item
-                      (onSelectUser)="onSelectUser($event)"
-                      [user]="user"
-                    ></app-add-user-to-company-item>
-                  </ng-template>
+                <div class="assigned-users-type assigned-users-type-clients qt-mt-8">
+                    <ng-template
+                        class="assigned-ticket-user"
+                        ngFor
+                        let-user
+                        [ngForOf]="getSelectedUsers()"
+                        let-i="index"
+                        [ngForTrackBy]="trackByIndex"
+                    >
+                        <app-add-user-to-company-selected-item
+                            [user]="user"
+                            (onSelectUser)="onSelectUser($event)"
+                        ></app-add-user-to-company-selected-item>
+                    </ng-template>
                 </div>
-              </div>
+                <div class="user-company-list qt-mt-16">
+                    <div
+                        infiniteScroll
+                        [infiniteScrollContainer]="container"
+                        [infiniteScrollDistance]="2"
+                        [infiniteScrollThrottle]="50"
+                        [infiniteScrollDisabled]="infiniteScrollDisabled"
+                        [fromRoot]="true"
+                        (scrolled)="onScroll()"
+                    >
+                        <ng-template
+                            ngFor
+                            let-user
+                            [ngForOf]="users"
+                            [ngForTrackBy]="trackById"
+                        >
+                            <app-add-user-to-company-item
+                                (onSelectUser)="onSelectUser($event)"
+                                [user]="user"
+                            ></app-add-user-to-company-item>
+                        </ng-template>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -82,9 +85,13 @@
             </button>
             <button
                 class="qt-button qt-jc-c qt-w100 user-company-btn-save"
-                (click)=approveConfirm()
+                appDisabledBtn
+                #addBtn="disabled"
+                (onClick)="approveConfirm()"
+                [ngClass]="{'--loading':addBtn.isBlock()}"
             >
-                Save
+                <span>Save</span>
+                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
             </button>
         </div>
     </div>

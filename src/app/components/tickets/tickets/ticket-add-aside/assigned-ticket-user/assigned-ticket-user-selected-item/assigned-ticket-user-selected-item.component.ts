@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { TicketsListService } from '../../../services/tickets-list.service';
 import { TechUserItem } from 'src/app/components/shared/tech-users/class/tech-user-item';
 
@@ -12,7 +12,9 @@ export class AssignedTicketUserSelectedItemComponent implements OnInit {
   @Input() user: TechUserItem;
   @Input() type: string;
   listColorNoAvatar = [];
-  constructor(public ticketsListService: TicketsListService,) { }
+  constructor(public ticketsListService: TicketsListService,
+    public cd: ChangeDetectorRef,
+  ) { }
 
   ngOnInit() {
     this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();

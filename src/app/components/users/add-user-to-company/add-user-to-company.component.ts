@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { User } from '../class/user';
 import { UserFilter } from '../class/user-filter';
 import { UserListService } from '../services/user-list.service';
@@ -8,6 +8,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { UsersService } from 'src/app/services/users/users.service';
 import { Subscription } from 'rxjs';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
   selector: 'app-add-user-to-company',
@@ -17,6 +18,7 @@ import { Subscription } from 'rxjs';
 })
 export class AddUserToCompanyComponent implements OnInit, OnDestroy {
   @Input() company: Company;
+  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   container = document.body.querySelector(".user-company-list");
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
@@ -105,8 +107,12 @@ export class AddUserToCompanyComponent implements OnInit, OnDestroy {
   approveConfirm() {
     let usersId = this.users.filter(item => item.selected).map(item => item.id);
     if (usersId.length > 0) {
+      this.addBtn.setDisabled(true);
       this.usersService.addUserToCompany(this.company.id, usersId).subscribe(data => {
+        this.addBtn.setDisabled(false);
         this.cancelConfirm();
+      }, err => {
+        this.addBtn.setDisabled(false);
       })
     }
   }
@@ -114,6 +120,7 @@ export class AddUserToCompanyComponent implements OnInit, OnDestroy {
     return this.reqUsers.filter(item => item.selected);
   }
   onSelectUser(user) {
+    console.log("user.selected", user.selected);
     this.reqUsers.find(item => item.id === user.id).selected = user.selected;
     this.clearSearch();
     this.cd.detectChanges();
