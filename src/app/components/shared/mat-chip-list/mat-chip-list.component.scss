@@ -23,3 +23,16 @@
     align-items: center;
     margin: -4px;
 }
+/deep/.page-list-ticket .mat-form-field-wrapper .mat-form-field-infix input,
+.users-page .mat-form-field-wrapper .mat-form-field-infix input,
+.company-devices-page .mat-form-field-wrapper .mat-form-field-infix input {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    color: #101828;
+    padding: 11px 14px;
+    height: 34px;
+    margin: 0;
+    width: 100%;
+    flex: 1;
+}

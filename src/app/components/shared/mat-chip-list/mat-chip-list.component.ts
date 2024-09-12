@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-mat-chip-list',
@@ -8,9 +8,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class MatChipListComponent implements OnInit {
   @Input() items: any = [];
   @Output() onChangeItems = new EventEmitter();
-  constructor() { }
+  constructor(private elRef: ElementRef) { }
 
   ngOnInit() {
+    if (this.elRef.nativeElement.querySelector("input")) this.elRef.nativeElement.querySelector("input").classList.add('mat-chip-input', 'mat-input-element');
   }
   ngDoCheck() {
     this.onChangeItems.emit(this.items);
