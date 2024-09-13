@@ -2,7 +2,7 @@
     <div class="qt-page-list__header-title-line--left">
         <h6
             class="qt-page-list__header-title qt-mb-16"
-            [textContent]="'All Devices (' + devices.length + ')'"
+            [textContent]="'All Devices (' + getCountDevices() + ')'"
         ></h6>
     </div>
     <div class="qt-page-list__header-title-line--rigth">
@@ -43,6 +43,19 @@
                 <div>Sidebar</div>
             </div>
         </div>
+        <button
+            class="qt-button --gray --md filter-button qt-ml-8 qt-df"
+            [ngClass]="{'active':toggleFilter}"
+            (click)="setToggleFilter(!toggleFilter)"
+        >
+            <span class="qt-icon icon__filter qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
+            <span
+                class="filter-counter qt-circle qt-sz-18 qt-fw-600 qt-fs-10 qt-color-white qt-bg-info qt-mr-8 qt-df qt-ai-c qt-jc-c"
+                *ngIf="countFilter > 0"
+                [textContent]="countFilter"
+            ></span>
+            Filters
+        </button>
         <div class="qt-df qt-ai-c">
             <button
                 class="qt-button --gray --md qt-ml-8"

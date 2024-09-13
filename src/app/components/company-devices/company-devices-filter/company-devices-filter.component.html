@@ -1,0 +1,74 @@
+<div class="left-panel-ng2__content--filters aside-filters-content__main">
+    <div class="content-filters-header">
+        <div
+            class="qt-icon icon__close qt-icon__white qt-sz-20"
+            (click)="close()"
+        ></div>
+        <div class="content-filters-header__title pointer">Filters</div>
+    </div>
+    <app-company-devices-filter-type
+        #priorityDp
+        [title]="'Type'"
+        [placeholder]="'Select Types'"
+        [placement]="'top-left'"
+        [list]="assestType"
+        (filterChange)="onSelectType($event)"
+    >
+    </app-company-devices-filter-type>
+    <div class="qt-mt-16">
+        <p class="title-filter qt-mb-8">Custom device</p>
+        <div class="qt-input-block qt-f50">
+            <div class="qt-df qt-ai-c">
+                <label
+                    class="qt-checkbox receive-full-amount-check qt-mb-0 pointer access-customer-portal"
+                    [attr.for]="'permission-a'"
+                >
+                    <input
+                        [attr.id]="'permission-a'"
+                        type="checkbox"
+                        [(ngModel)]="filter.isCustomDevices"
+                        (change)="onChangeCustomDevice($event)"
+                    >
+                    <span></span>
+                    <div class="qt-ml-8">Custom device</div>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="qt-mt-16">
+        <p class="title-filter qt-mb-8">Agents</p>
+        <div class="qt-input-block qt-f50">
+            <div class="qt-df qt-ai-c">
+                <label
+                    class="qt-checkbox receive-full-amount-check qt-mb-0 pointer access-customer-portal"
+                    [attr.for]="'permission-b'"
+                >
+                    <input
+                        [attr.id]="'permission-b'"
+                        type="checkbox"
+                        [(ngModel)]="filter.isAgent"
+                        (change)="onChangeAgent($event)"
+                    >
+                    <span></span>
+                    <div class="qt-ml-8">Agents</div>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="aside-filters-content__footer">
+    <div class="qt-df">
+        <button
+            class="qt-button --md --gray qt-mr-12 qt-w100 qt-jc-c"
+            (click)="clearAll()"
+        >
+            Clear All
+        </button>
+        <button
+            class="qt-button --md qt-w100 qt-jc-c"
+            (click)="applyFilters()"
+        >
+            Apply
+        </button>
+    </div>
+</div>

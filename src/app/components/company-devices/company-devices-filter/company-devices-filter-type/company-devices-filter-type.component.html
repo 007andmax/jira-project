@@ -1,0 +1,88 @@
+<div
+    class="light-dropdown"
+    ngbDropdown
+    #dp="ngbDropdown"
+    [placement]="placement"
+>
+    <p
+        class="title-filter qt-mb-8"
+        [textContent]="title"
+    ></p>
+    <mat-form-field ngbDropdownAnchor>
+        <mat-chip-list
+            #chipList
+            aria-label="Fruit selection"
+        >
+            <app-dynamic-tooltip
+                [position]="'top'"
+                #productTooltip
+            ></app-dynamic-tooltip>
+            <mat-chip
+                *ngFor="let tag of selectedTag; let i = index"
+                [selectable]="selectable"
+                [removable]="removable"
+                (removed)="remove(i)"
+            >
+                <div
+                    class="clip-text"
+                    *ngIf="reduceItemName(tag).length >= 30"
+                    (mouseenter)="productTooltip.setContent(reduceItemName(tag));productTooltip.show($event.target)"
+                    (mouseleave)="productTooltip.hide()"
+                >
+                    {{reduceItemName(tag)}}
+                </div>
+                <div
+                    class="clip-text"
+                    *ngIf="reduceItemName(tag).length < 30"
+                >
+                    {{reduceItemName(tag)}}
+                </div>
+                <mat-icon
+                    matChipRemove
+                    *ngIf="removable"
+                >
+                    cancel
+                </mat-icon>
+            </mat-chip>
+            <input
+                id="dropdownServices"
+                ngbDropdownToggle
+                [placeholder]="placeholder"
+                #userInput
+                class="pointer"
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur"
+                autocomplete="off"
+                (input)="onSearch($event)"
+            >
+        </mat-chip-list>
+    </mat-form-field>
+    <div
+        class="dropdown-menu"
+        ngbDropdownMenu
+        aria-labelledby="dropdownServices"
+    >
+        <ng-template
+            ngFor
+            let-item
+            [ngForOf]="list"
+            [ngForTrackBy]="trackById"
+        >
+            <div class="qt-pos-rel">
+                <button
+                    ngbDropdownItem
+                    class="dropdown-item"
+                    (click)="toggleItem(item)"
+                    [textContent]="reduceItemName(item)"
+                    [ngClass]="{'--selected':isSelected(item)}"
+                >
+                </button>
+                <div
+                    *ngIf="isSelected(item)"
+                    class="qt-icon icon__done qt-za-20 qt-sz-20 qt-bg-contain filter-check"
+                ></div>
+            </div>
+        </ng-template>
+    </div>
+</div>

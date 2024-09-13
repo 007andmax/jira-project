@@ -1,10 +1,12 @@
-<div class="qt-page-list company-devices-page --sticky">
+<div class="qt-page-list company-devices-page">
     <div class="qt-page-list__header --sticky">
         <app-company-devices-header
+            #header
             [devices]="devices"
             [isOfflineDeviceSelected]="isOfflineDeviceSelected"
             (onTurnOff)="onTurnOff($event)"
             (onRemoveAgents)="onRemoveAgents()"
+            (onToggleFilter)="toggleFilter = $event"
         ></app-company-devices-header>
         <div class="qt-page-list__header-thead-container">
             <div class="qt-table-modern qt-page-list__header-thead">
@@ -52,41 +54,65 @@
             </div>
         </div>
     </div>
-    <div class="qt-df qt-fd-c qt-jc-sb">
-        <div class="qt-page-list__body">
-            <div class="qt-page-list__body-table-container">
-                <div class="qt-page-list__body-tbody qt-table-modern company-devices-table">
-                    <div class="tbody">
-                        <ng-template
-                            ngFor
-                            let-item
-                            [ngForOf]="devices"
-                            [ngForTrackBy]="trackById"
-                        >
-                            <app-company-devices-item
-                                [companyId]="companyId"
-                                [device]="item"
-                                (onChangeSelect)="onChangeSelect()"
-                            ></app-company-devices-item>
-                        </ng-template>
+    <div class="qt-page-list qt-df">
+        <div
+            class="qt-page-list__body qt-pl-32"
+            [ngClass]="{'qt-pr-32':!toggleFilter,
+        '--open-filters':toggleFilter}"
+        >
+            <div class="qt-page-list__container">
+                <div class="qt-page-list__body">
+                    <div class="qt-page-list__body-table-container">
+                        <div class="qt-page-list__body-tbody qt-table-modern company-devices-table">
+                            <div class="tbody">
+                                <div *ngFor="let item of devices | filterDevices:filter">
+                                    <app-company-devices-item
+                                        [companyId]="companyId"
+                                        [device]="item"
+                                        (onChangeSelect)="onChangeSelect()"
+                                    ></app-company-devices-item>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="loading"
+                        *ngIf="showPreloader"
+                    ></div>
+                    <div
+                        class="no-exist-elements"
+                        *ngIf="!showPreloader && devices.length == 0"
+                    >
+                        We couldn't find any results
                     </div>
                 </div>
             </div>
-            <div
-                class="loading"
-                *ngIf="showPreloader"
-            ></div>
-            <div
-                class="no-exist-elements"
-                *ngIf="!showPreloader && devices.length == 0"
-            >
-                We couldn't find any results
+        </div>
+        <app-company-devices-aside
+            [companyId]="companyId"
+            [devicesCompany]="devices"
+        ></app-company-devices-aside>
+        <app-company-devices-custom-aside></app-company-devices-custom-aside>
+        <div
+            class="aside-filters qt-ml-16"
+            [hidden]="!toggleFilter"
+        >
+            <div class="aside-filters-header qt-df qt-ai-c qt-jc-sb">
+                <div class="aside-filters-header__title">Filters</div>
+                <div
+                    class="qt-button --square-md --gray pointer"
+                    (click)="onCloseFilters()"
+                >
+                    <div class="qt-icon icon__close qt-sz-16 pointer"></div>
+                </div>
+            </div>
+            <div class="aside-filters-content">
+                <app-company-devices-filter
+                    class="qt-w100"
+                    (onClearAll)="onClearAll()"
+                    (onClose)="onCloseFilters()"
+                ></app-company-devices-filter>
             </div>
         </div>
     </div>
-    <app-company-devices-aside
-        [companyId]="companyId"
-        [devicesCompany]="devices"
-    ></app-company-devices-aside>
-    <app-company-devices-custom-aside></app-company-devices-custom-aside>
 </div>
