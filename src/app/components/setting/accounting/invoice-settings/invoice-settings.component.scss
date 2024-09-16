@@ -1,2 +1,8 @@
 @import "./src/assets/styles/variable";
 
+.qt-input-block__textarea {
+    font-size: 13.5px !important;
+    overflow: scroll;
+    height: auto !important;
+    width: 100% !important;
+}

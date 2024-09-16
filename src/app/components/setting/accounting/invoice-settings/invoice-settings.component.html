@@ -102,6 +102,8 @@
                             appTextArea
                             [limit]="400"
                             maxlength="400"
+                            [maxLines]="10"
+                            [default]="3"
                             (input)="onChangeMemo($event)"
                             (onPast)="onPastMemo($event)"
                         ></textarea>
