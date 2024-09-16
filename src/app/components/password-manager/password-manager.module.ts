@@ -4,8 +4,6 @@ import { CommonModule } from '@angular/common';
 import { PasswordManagerRoutingModule } from './password-manager-routing.module';
 import { PasswordManagerComponent } from './password-manager.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { MatSelectModule } from '@angular/material/select';
-import { MatChipsModule } from '@angular/material/chips';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DropDownModule } from '../shared/drop-down/drop-down.module';
@@ -43,8 +41,6 @@ import { PasswordManagerAddAsideModule } from './password-manager-add-aside/pass
         CommonModule,
         PasswordManagerRoutingModule,
         InfiniteScrollModule,
-        MatSelectModule,
-        MatChipsModule,
         FormsModule,
         NgbModule,
         DropDownModule,

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { GoogleAuthenticatorComponent } from './google-authenticator.component';
 import { NgxMaskModule } from 'ngx-mask';
-import { MatChipsModule, MatSelectModule } from '@angular/material';
 import { MatErrorModule } from '../mat-error/mat-error.module';
 @NgModule({
     declarations: [
@@ -12,8 +11,6 @@ import { MatErrorModule } from '../mat-error/mat-error.module';
     imports: [
         CommonModule,
         FormsModule,
-        MatSelectModule,
-        MatChipsModule,
         NgxMaskModule.forRoot(),
         MatErrorModule
     ],

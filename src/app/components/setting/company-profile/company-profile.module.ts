@@ -5,7 +5,6 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CompanyTimeZoneModule } from '../../companies/company-time-zone/company-time-zone.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MatChipsModule, MatSelectModule } from '@angular/material';
 import { CompanyProfileRoutingModule } from './company-profile-routing.module';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { NgxMaskModule } from 'ngx-mask';
@@ -25,8 +24,6 @@ import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
         ReactiveFormsModule,
         CompanyTimeZoneModule,
         NgbModule,
-        MatSelectModule,
-        MatChipsModule,
         FormsModule,
         CompanyProfileRoutingModule,
         DropDownModule,

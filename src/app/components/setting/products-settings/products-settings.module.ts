@@ -7,7 +7,6 @@ import { AddCategoryProductComponent } from './add-category-product/add-category
 import { FormsModule } from '@angular/forms';
 import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
-import { MatFormFieldModule } from '@angular/material';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 import { GlNumbersDropDownModule } from '../../inventory/gl-numbers-drop-down/gl-numbers-drop-down.module';
@@ -33,7 +32,6 @@ import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
         FormsModule,
         ClickOutsideModule,
         DynamicTooltipModule,
-        MatFormFieldModule,
         DropDownModule,
         KeyUpEnterModule,
         GlNumbersDropDownModule,

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DevicesComponent } from './devices.component';
 import { DevicesRoutingModule } from './devices-routing.module';
-import { MatAutocompleteModule, MatChipsModule, MatFormFieldModule, MatIconModule, MatSelectModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DropDownModule } from '../shared/drop-down/drop-down.module';
 import { DynamicTooltipModule } from '../shared/dynamic-tooltip/dynamic-tooltip.module';
@@ -21,20 +20,15 @@ import { MatOptionModule } from '../shared/mat-option/mat-option.module';
     imports: [
         CommonModule,
         DevicesRoutingModule,
-        MatSelectModule,
-        MatChipsModule,
-        MatIconModule,
         ReactiveFormsModule,
         FormsModule,
         DropDownModule,
-        MatAutocompleteModule,
         DynamicTooltipModule,
         NgbModule,
         DatePickerModule,
         DisabledBtnModule,
         ReportSendEmailModule,
         MatChipModule,
-        MatFormFieldModule,
         MatChipListModule,
         MatOptionModule
     ],

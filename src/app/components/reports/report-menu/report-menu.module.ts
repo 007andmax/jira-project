@@ -8,7 +8,6 @@ import { SoftwareSummaryDevicesDroDownComponent } from '../reports/software-summ
 import { FormsModule } from '@angular/forms';
 import { ProductListModule } from '../../shared/product-list/product-list.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MatSelectModule, MatChipsModule } from '@angular/material';
 import { ReportAdditionalActionsModule } from '../report-additional-actions/report-additional-actions.module';
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 import { ContractDetailDropDownComponent } from './contract-detail-drop-down/contract-detail-drop-down.component';
@@ -34,8 +33,6 @@ import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
         FormsModule,
         ProductListModule,
         NgbModule,
-        MatSelectModule,
-        MatChipsModule,
         ReportAdditionalActionsModule,
         CompanyDropDownModule,
         MatErrorModule

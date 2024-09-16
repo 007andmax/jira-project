@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { CompanyAddAsideComponent } from './company-add-aside.component';
 import { CompanyAddAsideShortComponent } from './company-add-aside-short/company-add-aside-short.component';
 import { CompanyAddAsideFullComponent } from './company-add-aside-full/company-add-aside-full.component';
-import { MatChipsModule, MatSelectModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { CompanySubscriptionModule } from '../company-subscription/company-subscription.module';
@@ -29,8 +28,6 @@ import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
     ],
     imports: [
         CommonModule,
-        MatSelectModule,
-        MatChipsModule,
         FormsModule,
         DropDownModule,
         CompanySubscriptionModule,

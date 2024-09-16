@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InventoryEditAsideComponent } from './inventory-edit-aside.component';
-import { MatFormFieldModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { TaxesModule } from '../../shared/taxes/taxes.module';
@@ -19,7 +18,6 @@ import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
     ],
     imports: [
         CommonModule,
-        MatFormFieldModule,
         FormsModule,
         TextAreaModule,
         TaxesModule,

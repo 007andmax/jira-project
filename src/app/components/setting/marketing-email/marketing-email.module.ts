@@ -8,7 +8,6 @@ import { MarketingEmailUsersComponent } from './marketing-email-users/marketing-
 import { MarketingSubscriptionTypeComponent } from './marketing-subscription-type/marketing-subscription-type.component';
 import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { FormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material';
 import { MarketingEmailUsersAddComponent } from './marketing-email-users/marketing-email-users-add/marketing-email-users-add.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MarketingEmailUsersAddItemComponent } from './marketing-email-users/marketing-email-users-add-item/marketing-email-users-add-item.component';
@@ -35,7 +34,6 @@ import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
         NgbModule,
         ClickOutsideModule,
         FormsModule,
-        MatFormFieldModule,
         InfiniteScrollModule,
         DisabledBtnModule,
         PreloaderTicketModule,

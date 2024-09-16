@@ -9,7 +9,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from 'src/app/components/shared/preloader-ticket/preloader-ticket.module';
 import { InvoiceFormEditCustomerModule } from '../billable-aside/invoice-form/invoice-form-edit-customer/invoice-form-edit-customer.module';
-import { MatSelectModule, MatChipsModule } from '@angular/material';
 import { DatePickerModule } from 'src/app/components/shared/date-picker/date-picker.module';
 import { InvoiceFormTicketInfoComponent } from '../billable-aside/invoice-form/invoice-form-ticket-info/invoice-form-ticket-info.component';
 import { InvoiceFormTicketEditComponent } from '../billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit.component';
@@ -50,8 +49,6 @@ import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.mo
         DisabledBtnModule,
         PreloaderTicketModule,
         InvoiceFormEditCustomerModule,
-        MatSelectModule,
-        MatChipsModule,
         DatePickerModule,
         InvoiceRegularNoteModule,
         TextAreaModule,

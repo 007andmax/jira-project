@@ -6,7 +6,6 @@ import { TicketSettingsPageRoutingModule } from './ticket-settings-page-routing.
 import { TicketSettingsComponent } from './ticket-settings/ticket-settings.component';
 import { TicketsStatusComponent } from './tickets-status/tickets-status.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { Onlynumber } from 'src/app/helpers/Onlynumber';
@@ -31,7 +30,6 @@ import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
         NgbModule,
         FormsModule,
         ReactiveFormsModule,
-        MatFormFieldModule,
         DropDownModule,
         ClickOutsideModule,
         TicketSettingsPageRoutingModule,

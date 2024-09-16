@@ -7,7 +7,6 @@ import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { PasswordManagerAddCategoryComponent } from '../password-manager-add-category/password-manager-add-category.component';
 import { PasswordManagerAddCategoryModule } from '../password-manager-add-category/password-manager-add-category.module';
-import { MatSelectModule, MatChipsModule } from '@angular/material';
 import { DatePickerModule } from '../../shared/date-picker/date-picker.module';
 import { PasswordManagerLinkedComponent } from './password-manager-linked/password-manager-linked.component';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
@@ -29,8 +28,6 @@ import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
         FormsModule,
         TextAreaModule,
         PasswordManagerAddCategoryModule,
-        MatSelectModule,
-        MatChipsModule,
         DatePickerModule,
         DisabledBtnModule,
         PreloaderTicketModule,

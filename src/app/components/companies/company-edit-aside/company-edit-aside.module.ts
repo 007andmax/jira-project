@@ -1,10 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { MatSelectModule } from '@angular/material/select';
-import { MatChipsModule } from '@angular/material/chips';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CompanyEditAsideComponent } from './company-edit-aside.component';
@@ -28,9 +23,7 @@ import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
     ],
     imports: [
         CommonModule,
-        MatSelectModule,
         FormsModule,
-        MatChipsModule,
         NgbModule,
         DropDownModule,
         CompanySubscriptionModule,

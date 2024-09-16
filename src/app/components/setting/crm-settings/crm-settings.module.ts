@@ -10,7 +10,6 @@ import { CrmCompanyJobTypeComponent } from './crm-company-job-type/crm-company-j
 import { AddCrmCompanyIndustryComponent } from './crm-company-industry/add-crm-company-industry/add-crm-company-industry.component';
 import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { FormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material';
 import { AddCrmCompanyServiceTypeComponent } from './crm-company-service-type/add-crm-company-service-type/add-crm-company-service-type.component';
 import { AddCrmCompanyJobTitleComponent } from './crm-company-job-title/add-crm-company-job-title/add-crm-company-job-title.component';
 import { AddCrmCompanyJobTypeComponent } from './crm-company-job-type/add-crm-company-job-type/add-crm-company-job-type.component';
@@ -38,7 +37,6 @@ import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
         CrmSettingsRoutingModule,
         ClickOutsideModule,
         FormsModule,
-        MatFormFieldModule,
         DynamicTooltipModule,
         KeyUpEnterModule,
         MatErrorModule
