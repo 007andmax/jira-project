@@ -52,7 +52,6 @@ export class CompanyDevicesFilterComponent implements OnInit {
   applyFilters() {
     this.devicesStateService.onInitFilter(this.filter);
     this.onChangeCounterFilter();
-    this.close();
     this.cd.detectChanges();
   }
 

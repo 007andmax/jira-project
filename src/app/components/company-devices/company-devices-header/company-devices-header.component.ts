@@ -17,6 +17,7 @@ export class CompanyDevicesHeaderComponent implements OnInit {
   @Output() onTurnOff = new EventEmitter();
   @Output() onRemoveAgents = new EventEmitter();
   toggleFilter: boolean = false;
+  countFilter: number = 0;
   filter: CompanyDeviceFilter = new CompanyDeviceFilter();
   @Output() onToggleFilter = new EventEmitter<any>();
   sub: Subscription = new Subscription();
@@ -26,10 +27,12 @@ export class CompanyDevicesHeaderComponent implements OnInit {
 
   ngOnInit() {
     let geLefttFilter = this.devicesStateService.onFilter.subscribe((data) => {
-      this.filter.setAssestType(data.assestType);
+      this.filter.setFilter(JSON.parse(JSON.stringify(data)));
+      this.onChangeCountFilter();
       this.cd.detectChanges();
     });
     this.sub.add(geLefttFilter);
+    this.onChangeCountFilter();
   }
   public setToggleFilter(data) {
     this.toggleFilter = data;
@@ -48,6 +51,12 @@ export class CompanyDevicesHeaderComponent implements OnInit {
     console.log("filtesList", filtesList);
     if (this.filter.assestType.length > 0) return filtesList.filter(item => this.filter.assestType.some(filteritem => filteritem.toLocaleLowerCase() == item.type.toLocaleLowerCase())).length;
     return filtesList.length;
+  }
+  onChangeCountFilter() {
+    this.countFilter = 0;
+    if (this.filter.assestType.length > 0) this.countFilter++;
+    if (this.filter.isAgent) this.countFilter++;
+    if (this.filter.isCustomDevices) this.countFilter++;
   }
   getCountSelected() {
     return this.devices.filter(item => item.selected).length;
