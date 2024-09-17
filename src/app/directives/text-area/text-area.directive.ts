@@ -1,4 +1,5 @@
 import { Directive, OnInit, ElementRef, Injectable, Input, ChangeDetectorRef, OnChanges, SimpleChanges, AfterContentChecked, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 var $ = require("jquery");
 @Directive({
   selector: '[appTextArea]'
@@ -9,7 +10,9 @@ export class TextAreaDirective implements OnInit {
   @Input() maxHeight;
   @Output() onPast = new EventEmitter<any>();
   block: boolean = false;
-  constructor(private element: ElementRef, public cd: ChangeDetectorRef) {
+  constructor(private element: ElementRef, public cd: ChangeDetectorRef,
+    private appStateService: AppStateService,
+  ) {
   }
 
   ngOnInit() {
@@ -47,6 +50,7 @@ export class TextAreaDirective implements OnInit {
         this.element.nativeElement.style.overflowY = 'scroll';  // Show scrollbar when max height is reached
       }
       this.block = true;
+      // this.appStateService.changeDetectorRef();
     }
   }
 }
