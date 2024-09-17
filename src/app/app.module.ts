@@ -8,9 +8,6 @@ import {
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularEditorModule } from '@kolkov/angular-editor';
-import { MatSelectModule } from '@angular/material/select';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatAutocompleteModule, MatIconModule, MatRow } from '@angular/material';
 import { AppComponent } from './app.component';
 import { MainComponent } from './components/main/main.component';
 import { ModalQuoteComponent } from './services/modal/modal-quote/modal-quote.component';
@@ -186,10 +183,6 @@ declare var $: any;
     UpgradeModule,
     HttpClientModule,
     FormsModule,
-    MatSelectModule,
-    MatChipsModule,
-    MatIconModule,
-    MatAutocompleteModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     AppRoutingModule,
     ToastrModule.forRoot({

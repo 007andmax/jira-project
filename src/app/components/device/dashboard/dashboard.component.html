@@ -193,6 +193,7 @@
 
 
 
+
                                 <ul
                                     class="list-unstyled"
                                     *ngIf="!isNonAgentDevice"
@@ -350,6 +351,7 @@
 
 
 
+
                                             <span
                                                 class="drive-limit"
                                                 *ngIf="drive.FreeSpace != '' && drive.Size != ''"
@@ -404,6 +406,7 @@
                                             <span class="drive-name">
                                                 {{ network.Caption }} ({{ network.FileSystem }} on drive)
                                             </span>
+
 
 
 
@@ -521,7 +524,6 @@
                                             [(ngModel)]="tagFilterValue"
                                             ngbDropdownToggle
                                             class="pointer"
-                                            [matChipInputFor]="chipList"
                                             (blur)="AddTags($event.target.value)"
                                             (keyup.enter)="AddTags($event.target.value)"
                                             (keyup)="onSearchTag($event.target.value)"
@@ -736,6 +738,7 @@
 
 
 
+
                 <div
                     class="sidebar-popup note"
                     [class.opened]="editNote"
@@ -830,6 +833,7 @@
 
 
 
+
                                 <button
                                     type="button"
                                     class="btn btn-danger pull-right"
@@ -849,6 +853,7 @@
     class="loading"
     *ngIf="loading"
 ></div>
+
 
 
 

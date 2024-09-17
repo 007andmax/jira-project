@@ -24,9 +24,6 @@
                 #userInput
                 class="pointer"
                 [formControl]="tagCtrl"
-                [matChipInputFor]="chipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                [matChipInputAddOnBlur]="addOnBlur"
                 (keyup)="onKeyUp($event)"
             >
         </app-mat-chip-list>

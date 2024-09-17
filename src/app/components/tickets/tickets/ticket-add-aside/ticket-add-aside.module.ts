@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TicketAddAsideComponent } from './ticket-add-aside.component';
-import { MatFormFieldModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.module';
 import { UploadAreaComponent } from 'src/app/components/shared/upload-area/upload-area.component';
@@ -22,6 +21,7 @@ import { AssignedTicketUserSelectedItemComponent } from './assigned-ticket-user/
 import { AssignedTicketUserItemComponent } from './assigned-ticket-user/assigned-ticket-user-item/assigned-ticket-user-item.component';
 import { AssignedTicketUserModule } from './assigned-ticket-user/assigned-ticket-user.module';
 import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
+import { MatFormFieldModule } from 'src/app/components/shared/mat-form-field/mat-form-field.module';
 
 
 

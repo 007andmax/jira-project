@@ -7,7 +7,6 @@ import { RecurringTicketsTableComponent } from './recurring-tickets-table/recurr
 import { RecurringTicketsEditAsideComponent } from './recurring-tickets-edit-aside/recurring-tickets-edit-aside.component';
 import { RecurringTicketsAddAsideComponent } from './recurring-tickets-add-aside/recurring-tickets-add-aside.component';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
-import { MatSelectModule, MatChipsModule, MatIconModule } from '@angular/material';
 import { DevicesRecurringTicketsComponent } from './devices-recurring-tickets/devices-recurring-tickets.component';
 import { DatePickerModule } from '../../shared/date-picker/date-picker.module';
 import { IntervalComponent } from '../../shared/interval/interval.component';
@@ -25,6 +24,7 @@ import { RecurringTicketsTableAssignedUserComponent } from './recurring-tickets-
 import { RecurringTicketsTableAssignedUserMoreComponent } from './recurring-tickets-table/recurring-tickets-table-assigned-user-more/recurring-tickets-table-assigned-user-more.component';
 import { AssignedTicketUserModule } from '../tickets/ticket-add-aside/assigned-ticket-user/assigned-ticket-user.module';
 import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
+
 
 
 
@@ -46,8 +46,6 @@ import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
         CommonModule,
         InfiniteScrollModule,
         TextAreaModule,
-        MatSelectModule,
-        MatChipsModule,
         DatePickerModule,
         ProductListModule,
         FormsModule,
@@ -55,7 +53,6 @@ import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
         ServicesListModule,
         TechUsersModule,
         NgbModule,
-        MatIconModule,
         ReactiveFormsModule,
         RecurringTicketsRoutingModule,
         CompanyDropDownModule,

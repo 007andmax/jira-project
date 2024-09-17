@@ -4,7 +4,6 @@ import { TicketsFilterSaveComponent } from './tickets-filter-save.component';
 import { FormsModule } from '@angular/forms';
 import { PreloaderTicketModule } from 'src/app/components/shared/preloader-ticket/preloader-ticket.module';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
-import { MatSelectModule, MatChipsModule } from '@angular/material';
 import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 
 @NgModule({
@@ -16,8 +15,6 @@ import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.mo
         FormsModule,
         DisabledBtnModule,
         PreloaderTicketModule,
-        MatSelectModule,
-        MatChipsModule,
         MatErrorModule
     ],
     exports: [TicketsFilterSaveComponent],

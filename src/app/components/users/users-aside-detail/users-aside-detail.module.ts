@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { UsersAsideDetailComponent } from './users-aside-detail.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
-import { MatChipsModule, MatFormFieldModule } from '@angular/material';
 import { CompanySubscriptionModule } from '../../companies/company-subscription/company-subscription.module';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { CompanyTagsModule } from '../../companies/company-tags/company-tags.module';
@@ -44,7 +43,6 @@ import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
         FormsModule,
         NgbModule,
         DropDownModule,
-        MatFormFieldModule,
         CompanySubscriptionModule,
         TextAreaModule,
         CompanyTagsModule,

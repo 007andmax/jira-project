@@ -39,7 +39,6 @@
                                     ngbDropdownToggle
                                     class="pointer"
                                     placeholder="Input at least 3 characters to start searching by companies, devices, work stations etc. "
-                                    [matChipInputFor]="chipList"
                                     (keyup.enter)="add($event.target.value)"
                                     (keyup)="onSearchTag($event.target.value)"
                                 >
@@ -1283,7 +1282,6 @@
                                 ngbDropdownToggle
                                 class="pointer"
                                 placeholder="Enter Devices"
-                                [matChipInputFor]="chipdeviceTag"
                                 (blur)="addLinkDevices($event.target.value)"
                                 (keyup.enter)="addLinkDevices($event.target.value)"
                                 (keyup)="onSearchLinkDevices($event.target.value)"
@@ -1328,7 +1326,6 @@
                                 ngbDropdownToggle
                                 class="pointer"
                                 placeholder="Enter tag"
-                                [matChipInputFor]="chipTag"
                                 (blur)="addTags($event.target.value)"
                                 (keyup.enter)="addTags($event.target.value)"
                             >
@@ -1480,7 +1477,6 @@
                                     ngbDropdownToggle
                                     class="pointer"
                                     placeholder="select Company "
-                                    [matChipInputFor]="chipCompanyTag"
                                 >
                             </app-mat-chip-list>
                         </app-mat-form-field>
@@ -1621,7 +1617,6 @@
                                     ngbDropdownToggle
                                     class="pointer"
                                     placeholder="select OS Version"
-                                    [matChipInputFor]="chipOSVersionNameTag"
                                 >
                             </app-mat-chip-list>
                         </app-mat-form-field>
@@ -1682,7 +1677,6 @@
                                     ngbDropdownToggle
                                     class="pointer"
                                     placeholder="select HW"
-                                    [matChipInputFor]="chipHardwareTag"
                                 >
                             </app-mat-chip-list>
                         </app-mat-form-field>
@@ -1743,7 +1737,6 @@
                                     ngbDropdownToggle
                                     class="pointer"
                                     placeholder="select Manufacturer"
-                                    [matChipInputFor]="chipManufacturerTag"
                                 >
                             </app-mat-chip-list>
                         </app-mat-form-field>
@@ -1804,7 +1797,6 @@
                                     ngbDropdownToggle
                                     class="pointer"
                                     placeholder="select Model"
-                                    [matChipInputFor]="chipModelTag"
                                 >
                             </app-mat-chip-list>
                         </app-mat-form-field>
@@ -1865,7 +1857,6 @@
                                     ngbDropdownToggle
                                     class="pointer"
                                     placeholder="select Software"
-                                    [matChipInputFor]="chipSoftwareTag"
                                 >
                             </app-mat-chip-list>
                         </app-mat-form-field>
