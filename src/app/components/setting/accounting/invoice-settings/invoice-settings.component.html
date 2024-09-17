@@ -100,7 +100,9 @@
                             class="qt-input-block__textarea"
                             placeholder="Enter memo of invoice"
                             appTextArea
+                            [checkScrollHeight]="true"
                             maxlength="400"
+                            [maxHeight]="200"
                             (input)="onChangeMemo($event)"
                             (onPast)="onPastMemo($event)"
                         ></textarea>

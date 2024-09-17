@@ -4,6 +4,8 @@ var $ = require("jquery");
   selector: '[appTextArea]'
 })
 export class TextAreaDirective implements OnInit {
+  @Input() height = 'auto';
+  @Input() checkScrollHeight = false;
   @Input() maxHeight;
   @Output() onPast = new EventEmitter<any>();
   block: boolean = false;
@@ -14,7 +16,7 @@ export class TextAreaDirective implements OnInit {
 
     this.element.nativeElement.addEventListener('input', () => {
       // Reset the height to auto to calculate the new height
-      this.element.nativeElement.style.height = 'auto';
+      this.element.nativeElement.style.height = this.height;
 
       // Get the scroll height and set the new height accordingly
       let computedStyle = getComputedStyle(this.element.nativeElement);
@@ -32,13 +34,11 @@ export class TextAreaDirective implements OnInit {
   }
   ngDoCheck() {
     if (this.element.nativeElement.value !== "" && !this.block) {
-      this.element.nativeElement.style.height = 'auto';
-
+      if (this.checkScrollHeight && this.element.nativeElement.scrollHeight == 0) return;
+      this.element.nativeElement.style.height = this.height;
       // Get the scroll height and set the new height accordingly
       let computedStyle = getComputedStyle(this.element.nativeElement);
-      console.log("computedStyle.paddingTop", computedStyle.paddingTop);
       const newHeight = this.element.nativeElement.scrollHeight + parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom);
-
       // Set height, but limit it to the maximum height
       if (newHeight <= this.maxHeight) {
         this.element.nativeElement.style.height = `${newHeight}px`;

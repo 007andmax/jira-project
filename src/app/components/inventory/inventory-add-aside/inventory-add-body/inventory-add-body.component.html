@@ -82,6 +82,8 @@
             >
                 <textarea
                     appTextArea
+                    [height]="'100px'"
+                    rows="5"
                     id="inventory-description"
                     placeholder="Write Product Description"
                     (input)="onChangeDescription($event)"
