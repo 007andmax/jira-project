@@ -12,6 +12,7 @@ export class UserCustomerCompaniesInfo {
     "hasAccess": boolean;
     "isPrimaryContact": boolean = false;
     isArchived: boolean = false;
+    eligibleForTicket: boolean = false;
     constructor(data = null) {
         if (data) {
             for (const key in data) {

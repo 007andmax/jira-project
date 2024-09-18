@@ -27,6 +27,7 @@ import { TechUsersService } from 'src/app/services/setting/tech-users.service';
 import { UsersCheckUseComponent } from '../users-check-use/users-check-use.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
+import { UserProfile } from '../class/user-profile';
 
 @Component({
   selector: 'app-users-table',
@@ -121,6 +122,17 @@ export class UsersTableComponent implements OnInit, OnDestroy {
   resetPrimaryContact() {
     this.usersService.resetPrimaryContact(this.user.id, this.companyId).subscribe(data => {
 
+    })
+  }
+  getCustomerCompaniesInfo() {
+    return this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId);
+  }
+  changeDisplay(event) {
+    let index = this.user.customerCompaniesInfo.findIndex(item => item.companyId === this.companyId);
+    this.user.customerCompaniesInfo[index].eligibleForTicket = event.target.checked;
+    let user: UserProfile = new UserProfile();
+    user.onEdit(this.user);
+    this.usersService.updateUser(user.getUserForUpdate(this.user)).subscribe(data => {
     })
   }
   edit() {

@@ -417,11 +417,11 @@
                     </div>
                 </div>
                 <div
-                    class="qt-inputs-row"
+                    class="qt-inputs-row qt-mb-12"
                     *ngIf="i == 0"
                 >
                     <div class="qt-input-block qt-f50">
-                        <div class="qt-df qt-ai-c qt-mt-15 qt-mb-12">
+                        <div class="qt-df qt-ai-c qt-mt-15">
                             <label
                                 class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
                                 for="sendPortalInvitation"
@@ -433,6 +433,26 @@
                                 >
                                 <span></span>
                                 <div class="qt-ml-8">Send Invite to Customer Portal</div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="qt-inputs-row">
+                    <div class="qt-input-block qt-f100">
+                        <div class="qt-df qt-ai-c qt-mt-15">
+                            <label
+                                class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
+                                [attr.for]="'eligibleForTicket-' + i"
+                            >
+                                <input
+                                    [attr.id]="'eligibleForTicket-' + i"
+                                    type="checkbox"
+                                    [(ngModel)]="companyInfo.eligibleForTicket"
+                                >
+                                <span></span>
+                                <div class="qt-ml-8">
+                                    Display in then Users dropdown to create a new ticket
+                                </div>
                             </label>
                         </div>
                     </div>
