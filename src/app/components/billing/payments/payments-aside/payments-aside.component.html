@@ -7,14 +7,14 @@
                 *ngIf="!payment.refundMethod && !customerPortalStateService.isCustomerPortal"
                 (click)="showEdit()"
             >
-              <div class="qt-icon icon__edit qt-sz-20"></div>
+                <div class="qt-icon icon__edit qt-sz-20"></div>
             </div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon qt-df qt-ai-c qt-jc-c"
                 *ngIf="!payment.refundMethod && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')"
                 (click)="showRefund()"
             >
-              <div class="qt-icon icon__return-money qt-sz-20"></div>
+                <div class="qt-icon icon__return-money qt-sz-20"></div>
             </div>
             <div
                 class="qt-circle qt-bg-white qt-mr-16 header-circle-icon qt-sz-32 qt-df qt-ai-c qt-jc-c pointer"
@@ -133,6 +133,7 @@
                 <thead>
                     <tr>
                         <th class="payment-table__number">Invoice Number</th>
+                        <th class="payment-table__company">Company Name</th>
                         <th class="payment-table__date">Invoice Date</th>
                         <th class="payment-table__inv-amount">Invoice Amount</th>
                         <th class="payment-table__pay-amount">Payment Amount</th>
@@ -149,6 +150,10 @@
                             <td
                                 class="payment-table__number"
                                 [textContent]="item.invoiceNumber"
+                            ></td>
+                            <td
+                                class="payment-table__company"
+                                [textContent]="item.companyName"
                             ></td>
                             <td
                                 class="payment-table__date"

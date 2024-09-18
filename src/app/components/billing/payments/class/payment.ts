@@ -28,7 +28,7 @@ export class Payment {
         this.partialPaidAmount = data.partialPaidAmount;
         this.partialPaidInvoices = data.partialPaidInvoices;
         this.paymentData = (data.paymentData) ? data.paymentData.map(item => {
-            return new PaymentData(item.invoiceAmount, item.invoiceDate, item.invoiceId, item.paidAmount, item.invoiceNumber, item.invoicePaidDue);
+            return new PaymentData(item.invoiceAmount, item.invoiceDate, item.invoiceId, item.paidAmount, item.invoiceNumber, item.invoicePaidDue, item.companyName);
         }) : [];
         this.paymentMethod = data.paymentMethod;
         this.reference = data.reference;
