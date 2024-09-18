@@ -107,4 +107,14 @@
     .mat-form-field-label,.mat-form-field-ripple {
         display: none;
     }
+   /deep/ input {
+        &::placeholder {
+            opacity: 0 !important;
+        }
+    }
+}
+.mat-form-field-appearance-legacy {
+    .mat-form-field-infix {
+        padding: .4375em 0;
+    }
 }

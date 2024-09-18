@@ -97,12 +97,12 @@
     >
         <app-mat-form-field
             ngbDropdownAnchor
-            #formField
+            #formField1
             [placeholder]="'Select user to link'"
         >
             <app-mat-chip-list
                 [items]="selectedUserAndCompanies"
-                (onChangeItems)="formField.checkSelectedItems(selectedUserAndCompanies)"
+                (onChangeItems)="formField1.checkSelectedItems(selectedUserAndCompanies)"
             >
                 <ng-template
                     ngFor
