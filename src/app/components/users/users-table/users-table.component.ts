@@ -130,9 +130,7 @@ export class UsersTableComponent implements OnInit, OnDestroy {
   changeDisplay(event) {
     let index = this.user.customerCompaniesInfo.findIndex(item => item.companyId === this.companyId);
     this.user.customerCompaniesInfo[index].eligibleForTicket = event.target.checked;
-    let user: UserProfile = new UserProfile();
-    user.onEdit(this.user);
-    this.usersService.updateUser(user.getUserForUpdate(this.user)).subscribe(data => {
+    this.usersService.updateeligibleForTicket(this.user.id, this.companyId, event.target.checked).subscribe(data => {
     })
   }
   edit() {
