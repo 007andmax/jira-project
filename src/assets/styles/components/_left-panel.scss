@@ -84,7 +84,7 @@
     width: 20px;
     height: 20px;
     cursor: pointer;
-    background-image: url("/assets/img/icons-left-sidebar/panel-open.svg");
+    background-image: url("/assets/img/icons/panel-open.svg");
     transition: transform 300ms, left 300ms;
     z-index: 9999;
   }
@@ -93,7 +93,7 @@
     width: 24px;
     height: 24px;
     cursor: pointer;
-    background-image: url("/assets/img/icons-left-sidebar/panel-open.svg");
+    background-image: url("/assets/img/icons/panel-open.svg");
     transition: transform 300ms;
   }
 
@@ -170,8 +170,8 @@
       mask-image: url("/assets/img/icons/users.svg");
     }
     &.--marketing {
-      -webkit-mask-image: url("/assets/img/icons-left-sidebar/marketing.svg");
-      mask-image: url("/assets/img/icons-left-sidebar/marketing.svg");
+      -webkit-mask-image: url("/assets/img/icons/marketing.svg");
+      mask-image: url("/assets/img/icons/marketing.svg");
     }
     &.--billing {
       -webkit-mask-image: url("/assets/img/icons/billing.svg");
@@ -194,8 +194,8 @@
       mask-image: url("/assets/img/icons-left-sidebar/folder-management.svg");
     }
     &.--settings {
-      -webkit-mask-image: url("/assets/img/icons-left-sidebar/settings.svg");
-      mask-image: url("/assets/img/icons-left-sidebar/settings.svg");
+      -webkit-mask-image: url("/assets/img/icons/settings.svg");
+      mask-image: url("/assets/img/icons/settings.svg");
     }
     &.--documents {
       -webkit-mask-image: url("/assets/img/icons/documents.svg");
@@ -206,8 +206,8 @@
       mask-image: url("/assets/img/tool.svg");
     }
     &.--logout {
-      -webkit-mask-image: url("/assets/img/icons-left-sidebar/logout.svg");
-      mask-image: url("/assets/img/icons-left-sidebar/logout.svg");
+      -webkit-mask-image: url("/assets/img/icons/logout.svg");
+      mask-image: url("/assets/img/icons/logout.svg");
     }
   }
 
