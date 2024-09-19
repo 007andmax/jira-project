@@ -12,6 +12,7 @@ company-associate {
     }
     .mat-form-field-infix {
       border: 1px solid $gray-200;
+      padding: 0px !important;
       &:hover {
         border-color: $gray-300;
       }
@@ -33,7 +34,7 @@ company-associate {
       position: relative;
       min-height: 48px;
       input {
-        height: 42px !important;
+        height: 38px !important;
         margin: 0;
       }
     }
