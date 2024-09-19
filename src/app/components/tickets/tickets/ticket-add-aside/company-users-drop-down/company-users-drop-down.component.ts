@@ -38,6 +38,10 @@ export class CompanyUsersDropDownComponent extends DropDownComponent {
       this.onGetUsers(data);
     })
     this.sub.add(getOnUsers);
+    let onEditUser = this.usersStateService.onEditUser.subscribe((data) => {
+      this.onGetUsers(this.usersStateService.getAllUsers());
+    })
+    this.sub.add(onEditUser);
   }
   /**
  * @description Check if item is selected

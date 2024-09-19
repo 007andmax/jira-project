@@ -48,6 +48,7 @@ export class UsersStateService {
   userRoleForRemove: UserRole;
   globalFilters: Array<UserGlobalFilter> = [];
   globalFilterForRemove: UserGlobalFilter = null;
+  onEditUser: EventEmitter<any> = new EventEmitter();
   constructor(private userService: UsersService,
     private appService: AppService,
     private customerPortalStateService: CustomerPortalStateService,
@@ -99,6 +100,11 @@ export class UsersStateService {
       }
 
     })
+  }
+  public fastEditUser(data) {
+    let index = this.allUsers.findIndex(item => item.id == data.id);
+    if (index > -1) this.allUsers[index].onUpdate(data);
+    this.onEditUser.emit(data);
   }
   public clearGlobalFilter() {
     this.onClearGlobalFilter.emit(null);

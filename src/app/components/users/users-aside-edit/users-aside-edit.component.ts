@@ -240,6 +240,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     this.editBtn.setDisabled(true);
     this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit())).subscribe(data => {
       this.editBtn.setDisabled(false);
+      this.usersStateService.fastEditUser(this.user);
       this.close();
     }, err => {
       this.editBtn.setDisabled(false);
