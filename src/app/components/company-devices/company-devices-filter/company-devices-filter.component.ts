@@ -4,6 +4,7 @@ import { ItemFilterPerson } from '../../left-panel/left-panel-companies/class/it
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { CompanyDeviceFilter } from '../class/device-company-filter';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
+import { CompanyDevicesFilterTypeComponent } from './company-devices-filter-type/company-devices-filter-type.component';
 
 @Component({
   selector: 'app-company-devices-filter',
@@ -21,7 +22,7 @@ export class CompanyDevicesFilterComponent implements OnInit {
     "Phone",
     "Generic device"];
   filter: CompanyDeviceFilter = new CompanyDeviceFilter();
-  @ViewChild('typesDp') typesDp: DropDownComponent;
+  @ViewChild('typesDp') typesDp: CompanyDevicesFilterTypeComponent;
   @Output() changeCountFilter = new EventEmitter<any>();
   @Output() onClose = new EventEmitter();
   sub: Subscription = new Subscription();
@@ -41,6 +42,8 @@ export class CompanyDevicesFilterComponent implements OnInit {
   }
   public onClearAll() {
     this.typesDp.clearWithOutChanges();
+    this.filter.setIsCustomDevices(false);
+    this.filter.setIsAgent(false);
     this.devicesStateService.onInitFilter(this.filter);
     this.onChangeCounterFilter();
     this.cd.detectChanges();
