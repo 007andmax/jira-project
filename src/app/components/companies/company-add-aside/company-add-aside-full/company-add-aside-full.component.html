@@ -540,7 +540,10 @@
     <div class="qt-inputs-row">
         <div class="qt-inputs-block">
             <div class="qt-input-block__label">Tags</div>
-            <app-company-tags (tagsChange)="onChangeTags($event)"></app-company-tags>
+            <app-company-tags
+                [filter]="true"
+                (tagsChange)="onChangeTags($event)"
+            ></app-company-tags>
         </div>
     </div>
     <div class="qt-inputs-row">

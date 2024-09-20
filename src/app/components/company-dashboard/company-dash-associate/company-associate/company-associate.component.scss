@@ -17,6 +17,7 @@
         }
     }
     .select-wrapper {
+        width: 100%;
         .company-tag-item {
           @include dropdown-checkbox-item;
         }
