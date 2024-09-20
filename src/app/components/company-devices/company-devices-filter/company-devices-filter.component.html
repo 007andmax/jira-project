@@ -7,7 +7,7 @@
         <div class="content-filters-header__title pointer">Filters</div>
     </div>
     <app-company-devices-filter-type
-        #priorityDp
+        #typesDp
         [title]="'Type'"
         [placeholder]="'Select Types'"
         [placement]="'bottom-left'"
@@ -59,7 +59,7 @@
     <div class="qt-df">
         <button
             class="qt-button --md --gray qt-mr-12 qt-w100 qt-jc-c"
-            (click)="clearAll()"
+            (click)="onClearAll()"
         >
             Clear All
         </button>
