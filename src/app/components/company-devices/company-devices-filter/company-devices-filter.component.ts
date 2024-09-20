@@ -42,8 +42,9 @@ export class CompanyDevicesFilterComponent implements OnInit {
   }
   public onClearAll() {
     this.typesDp.clearWithOutChanges();
-    this.filter.setIsCustomDevices(false);
-    this.filter.setIsAgent(false);
+    this.filter.setAssestType([]);
+    this.filter.setIsCustomDevices(true);
+    this.filter.setIsAgent(true);
     this.devicesStateService.onInitFilter(this.filter);
     this.onChangeCounterFilter();
     this.cd.detectChanges();
