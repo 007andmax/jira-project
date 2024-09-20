@@ -482,11 +482,9 @@ documents-filter {
 .recurring-tickets-content__modal--content,
 .billing-dashboard-page__content,
 documents-filter,
-app-documents-add-info,
 .company-dashboard-add-tag,
 users-aside-detail,
-app-company-dash-detail,
-documents-edit-info {
+app-company-dash-detail {
   .tab-btns {
     display: flex;
     margin: 0 20px;
@@ -3577,16 +3575,6 @@ app-company-devices-tags {
         margin: 0 4px 0px px 0px;
         background-color: $gray-100;
         color: $gray-500;
-    }
-    .mat-standard-chip .mat-chip-remove.mat-icon {
-        width: 10px;
-        height: 10px;
-        &:before {
-            top: 0px;
-            right: -3px;
-            width: 10px;
-            height: 10px;
-        }
     }
   }
 app-company-devices-edit-ip,app-company-devices-edit-mac {
