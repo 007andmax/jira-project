@@ -597,6 +597,9 @@
   &__device-connected {
     mask-image: url("/assets/img/icons/computer-green.svg");
   }
+  &__resend-receipt {
+    mask-image: url("/assets/img/icons/resend-receipt.svg");
+  }
 
   &.--updated {
     position: relative;

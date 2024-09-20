@@ -138,6 +138,11 @@ export class PaymentsComponent implements OnInit, OnDestroy {
     this.detailsPayment = data;
     this.showDetailsPayment = true;
   }
+  onResendPaymentReceipt(data) {
+    this.paymentsService.resendPaymentReceipt(data.id).subscribe(res => {
+
+    })
+  }
   onRemovePayment(payment) {
     this.paymentsService.deletePayment(payment).subscribe(data => {
     })

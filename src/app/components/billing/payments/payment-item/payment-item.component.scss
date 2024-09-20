@@ -25,6 +25,7 @@ tr.--selected {
   color: $blue-light-600;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: center;
   p {
     @include body-m;
   }

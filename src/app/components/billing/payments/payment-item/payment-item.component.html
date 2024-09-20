@@ -95,6 +95,14 @@
             <li
                 class="pointer"
                 ngbDropdownItem
+                (click)="resendPaymentReceipt()"
+            >
+                <div class="qt-icon icon__resend-receipt qt-sz-20 qt-mr-12"></div>
+                Resend payment receipt
+            </li>
+            <li
+                class="pointer"
+                ngbDropdownItem
                 (click)="deletePayment()"
                 *ngIf="!customerPortalStateService.isCustomerPortal"
             >
