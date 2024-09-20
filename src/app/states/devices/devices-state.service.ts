@@ -41,6 +41,7 @@ export class DevicesStateService {
   manufactures: Array<ManufactureDevice> = [];
   manufacturForRemove: ManufactureDevice = null;
   modelForRemove: ModelDevice = null;
+  onFilter: EventEmitter<any> = new EventEmitter();
   // onChangeDevices: EventEmitter<DeviceUpdate> = new EventEmitter();
   constructor(private userStateService: UsersStateService,
     private devicesService: DevicesService,
@@ -74,6 +75,9 @@ export class DevicesStateService {
       }
       if (newChange.action === 'MANUFACTURE_MODULE_SAVED') this.onAddModel.emit(newChange.data);
     })
+  }
+  public onInitFilter(data) {
+    this.onFilter.emit(data);
   }
   public setModelForRemove(data) {
     this.modelForRemove = data;

@@ -5,17 +5,19 @@ app-company-devices-item {
     display: contents;
 }
 .qt-page-list {
-    min-height: calc(100vh - 109px);
-    padding-top: 0;
+  padding: 0;
+  background-color: $white;
 
-    .qt-page-list__header {
-      &.--sticky {
-        top: 45px;
-        padding-top: 24px;
-        margin-top: 0;
-        z-index: 2;
-      }
+  .qt-page-list__header {
+    &.--sticky {
+      top: 45px;
+      margin: 0;
+      padding: 10px 32px;
+      background-color: $gray-50;
+      border-bottom: 1px solid $gray-200;
+      z-index: 2;
     }
+  }
 }
 
 .Resize{
@@ -35,10 +37,16 @@ app-company-devices-item {
   padding-top: 8px;
 }
 
+
 /deep/ .company-devices-page {
-  .qt-table-modern__row > div:first-child {
-    padding-left: 22px;
+  padding: 0;
+  background-color: $white;
+  min-height: calc(100vh - 109px);
+
+  .qt-page-list {
+    min-height: calc(100vh - 166px);
   }
+
   .qt-page-list__header-thead,
   .qt-page-list__body-tbody {
     min-width: 1220px;
@@ -64,10 +72,16 @@ app-company-devices-item {
   &__ip-address {
     flex: 0 0 190px;
     position: relative;
+    @include media-breakpoint-down($md) {
+      flex: 0 0 160px;
+    }
   }
   &__windows {
     flex: 0 0 164px;
     position: relative;
+    @include media-breakpoint-down($md) {
+      flex: 0 0 150px;
+    }
   }
   &__ip-windows-text {
     word-break: break-all;
@@ -77,6 +91,9 @@ app-company-devices-item {
   }
   &__logged-user {
     flex: 0 0 148px;
+    @include media-breakpoint-down($md) {
+      flex: 0 0 136px;
+    }
   }
   &__device-type {
     flex: 0 0 40px;
@@ -125,6 +142,182 @@ app-company-devices-item {
 
       > .qt-temporary-col-fix .mat-form-field {
         width: 100% !important;
+      }
+    }
+  }
+}
+/deep/ .aside-filters {
+  width: 320px;
+  flex-shrink: 0;
+  background-color: $white;
+  position: sticky;
+  top: 58px;
+  height: calc(100vh - 128px);
+  transition: .3s ease-in-out width;
+  border-left: 1px solid $gray-200;
+
+  &-header {
+    padding: 12px 16px;
+    border-bottom: 1px solid $gray-200;
+
+    &__title {
+      font-size: 16px;
+      font-weight: 600;
+      color: $gray-900 ;
+    }
+
+    .qt-button {
+      width: 32px;
+      height: 32px
+    }
+  }
+
+    app-company-devices-filter {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-content {
+    height: calc(100% - 57px);
+
+    &__main {
+      display: flex;
+      flex-direction: column;
+      padding: 12px 16px;
+      height: calc(100% - 57px);
+      overflow: auto;
+
+      .qt-input-block__label {
+        font-size: 14px;
+        font-weight: 500;
+        color: $gray-700;
+        margin-top: 3px;
+        margin-bottom: 20px;
+      }
+
+      .content-filters-checkbox {
+        color: $gray-700;
+
+        &__count {
+          border-radius: 24px;
+          padding: 2px 8px;
+          background-color: $gray-100;
+          color: $gray-700;
+          font-size: 12px;
+          font-weight: 600;
+        }
+      }
+
+      .content-filters-checkbox:not(:last-child) {
+        margin-bottom: 20px;
+      }
+    }
+
+    &__footer {
+      padding: 10px 16px;
+      border-top: 1px solid $gray-200;
+    }
+  }
+
+  .content-filters-header {
+    display: none;
+  }
+
+  app-company-devices-filter-type .mat-form-field {
+    width: 100%;
+  }
+
+  // Start
+  .search-users,
+  .search-tech-users,
+  .search-status,
+  .search-company,
+  .light-dropdown.dropdown {
+
+    &::before {
+      color: $gray-900;
+      font-weight: 600;
+      line-height: 20px;
+    }
+  }
+
+  .qt-dropdown,
+  .light-dropdown {
+    padding-top: 8px;
+  }
+
+  .search-company {
+    &::before {
+      content: "Company";
+    }
+  }
+
+  .search-users {
+    &::before {
+      content: "User";
+    }
+  }
+
+  .search-tech-users {
+    &::before {
+      content: "Tech Team";
+    }
+  }
+
+  .search-status {
+    &::before {
+      content: "Status";
+    }
+  }
+
+  app-users-filter-tags {
+    &::before {
+      content: "Tags";
+    }
+  }
+}
+
+.qt-page-list__header-thead-container {
+  position: sticky;
+  top: 102px;
+  z-index: 2;
+  background-color: $white;
+  padding-top: 32px;
+
+  .qt-page-list__header-thead {
+    border: 1px solid $gray-200;
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+  }
+
+  .qt-page-list__header-thead {
+    background-color: $gray-50;
+  }
+}
+
+/deep/ .content-container .content-wrapper .breadcrumbs {
+  padding: 15px 30px;
+  background-color: $white;
+}
+
+.qt-page-list__body {
+  &.--open-filters {
+    /deep/ .company-devices-table {
+      &__logged-user {
+        @include media-breakpoint-down($lg) {
+          flex: 0 0 136px;
+        }
+      }
+      &__windows {
+        @include media-breakpoint-down($lg) {
+          flex: 0 0 150px;
+        }
+      }
+      &__ip-address {
+        @include media-breakpoint-down($lg) {
+          flex: 0 0 160px;
+        }
       }
     }
   }
