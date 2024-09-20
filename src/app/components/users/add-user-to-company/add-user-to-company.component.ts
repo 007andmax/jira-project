@@ -120,7 +120,6 @@ export class AddUserToCompanyComponent implements OnInit, OnDestroy {
     return this.reqUsers.filter(item => item.selected);
   }
   onSelectUser(user) {
-    console.log("user.selected", user.selected);
     this.reqUsers.find(item => item.id === user.id).selected = user.selected;
     this.clearSearch();
     this.cd.detectChanges();
@@ -132,5 +131,8 @@ export class AddUserToCompanyComponent implements OnInit, OnDestroy {
   };
   ngOnDestroy(): void {
     this.sub.unsubscribe();
+  }
+  public trackByIndex(index, item) {
+    return index;
   }
 }

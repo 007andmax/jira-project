@@ -48,7 +48,6 @@ export class CompanyDevicesHeaderComponent implements OnInit {
     } else if (this.filter.isCustomDevices) {
       filtesList = this.devices.filter(item => item.isCustom);
     }
-    console.log("filtesList", filtesList);
     if (this.filter.assestType.length > 0) return filtesList.filter(item => this.filter.assestType.some(filteritem => filteritem.toLocaleLowerCase() == item.type.toLocaleLowerCase())).length;
     return filtesList.length;
   }
