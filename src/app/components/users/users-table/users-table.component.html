@@ -152,7 +152,10 @@
         *ngIf="type === TYPE_LIST_COMPANY_USERS"
         class="users-table__tickets"
     >
-        <div class="qt-df">
+        <div
+            class="qt-df"
+            *ngIf="getCustomerCompaniesInfo()"
+        >
             <label
                 class="qt-checkbox"
                 [attr.for]="'user-display-' + user.id"
