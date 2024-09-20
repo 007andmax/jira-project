@@ -144,6 +144,7 @@ import { ProductTypeCheckUseModule } from './components/setting/products-setting
 import { FileManagerComponent } from './components/file-manager/file-manager.component';
 import { FileManagementAddFileModule } from './components/file-manager/file-manager-add-file/file-manager-add-file.module';
 import { PreviewFileComponent } from './components/shared/preview-file/preview-file.component';
+import { UsersDropDownComponent } from './components/shared/users-drop-down/users-drop-down.component';
 declare var $: any;
 
 /**
