@@ -348,8 +348,10 @@
                 @include border-radius(50%);
                 overflow: hidden;
                 figure {
+                    display: flex;
                     align-items: center;
                     justify-content: center;
+                    align-items: center;
                     width: 56px;
                     height: 56px;
                     background-color: $white;
@@ -546,7 +548,7 @@
                         margin: 0 4px;
                         width: 144px;
                         padding: 11px 5px;
-                        img {
+                        .qt-icon {
                             @include media-breakpoint-down($md) {
                                 display: none;
                             }

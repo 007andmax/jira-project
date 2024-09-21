@@ -27,6 +27,32 @@
   height: 20px;
 }
 
+/*
+========================================
+Adding Images to the Page
+========================================
+
+*** Size Class (qt-sz-{size}) ***
+- Size class: qt-sz-{size}, where {size} is a numeric value representing the size of the icon in pixels.
+
+1. *** Color Icon (background-image) ***
+- Used for adding an icon with a background image.
+- Alignment: qt-bg-contain — ensures the background image is contained within the element.
+
+Example:
+.icon__computer qt-sz-40 qt-bg-contain -> Adds a 40px wide icon with the background sized to contain.
+
+2. *** Monochrome Icon (mask-image) ***
+- Used for adding a monochrome image using mask-image.
+- Base class: qt-icon — applies alignment and base color ($gray-500).
+- Change color: Use class qt-icon__{color}, where {color} defines the desired icon color.
+
+Example:
+.qt-icon icon__tickets qt-icon__gray-400 qt-sz-24 -> Adds a 24px wide icon with the color gray-400.
+
+========================================
+*/
+
 .icon {
   // Start Color Icon
   &__unsubscribe {
@@ -189,6 +215,8 @@
     background-image: url("/assets/img/icons/file-type-ods.svg");
   }
   // END Color Icon
+
+  // Start Monochrome image
   &__warning {
     mask-image: url("/assets/img/icons/warning.svg");
   }
@@ -218,6 +246,9 @@
   }
   &__map {
     mask-image: url("/assets/img/icons/map.svg");
+  }
+  &__map-pin {
+    mask-image: url("/assets/img/icons/map-pin.svg");
   }
   &__new {
     mask-image: url("/assets/img/icons/new.svg");
@@ -595,7 +626,7 @@
     mask-image: url("/assets/img/icons/remote-access.svg");
   }
   &__device-connected {
-    mask-image: url("/assets/img/icons/computer-green.svg");
+    mask-image: url("/assets/img/icons/device-connected.svg");
   }
   &__resend-receipt {
     mask-image: url("/assets/img/icons/resend-receipt.svg");
