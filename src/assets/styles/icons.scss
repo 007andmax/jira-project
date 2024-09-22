@@ -55,6 +55,9 @@ Example:
 
 .icon {
   // Start Color Icon
+  &__user-image {
+    background-image: url('/assets/img/icons/user.jpg');
+  }
   &__unsubscribe {
     background-image: url("/assets/img/icons/unsubscribe.svg");
   }
@@ -213,6 +216,12 @@ Example:
   }
   &__file-type-ods {
     background-image: url("/assets/img/icons/file-type-ods.svg");
+  }
+  &__remote-desktop {
+    background-image: url("/assets/img/icons/remote-desktop.svg");
+  }
+  &__alert {
+    background-image: url("/assets/img/icons/alert.svg");
   }
   // END Color Icon
 

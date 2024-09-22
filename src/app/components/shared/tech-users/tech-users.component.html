@@ -115,7 +115,7 @@
         #selectUserTooltip
     ></app-dynamic-tooltip>
     <div
-        class="tech__user-icon qt-icon qt-icon__blue-light-600 pointer"
+        class="qt-icon icon__user qt-icon__blue-light-600 qt-sz-24 pointer"
         *ngIf="type === 'TICEKTS' && selectedUsers.length === 0 || type === 'CONTRACT'"
         id="dropdownTechuser"
         (mouseenter)="selectUserTooltip.show($event.target)"

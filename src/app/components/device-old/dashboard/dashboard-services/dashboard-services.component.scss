@@ -26,7 +26,8 @@
     }
 
     figure {
-      &::after{
+      .icon__alert,
+      .icon__status-green {
         content: "";
         position: absolute;
         left: 50%;
@@ -34,21 +35,6 @@
         width: 20px;
         height: 20px;
         transform: translatex(2px);
-      }
-    }
-
-    &.updated{
-      figure{
-        &::after{
-          background: url('/assets/img/icons/status-green.svg') no-repeat center;
-        }
-      }
-    }
-    &.alert{
-      figure{
-        &::after{
-          background: url('/assets/img/icons/alert.svg') no-repeat center;
-        }
       }
     }
   }
