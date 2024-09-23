@@ -220,9 +220,6 @@ Example:
   &__remote-desktop {
     background-image: url("/assets/img/icons/remote-desktop.svg");
   }
-  &__alert {
-    background-image: url("/assets/img/icons/alert.svg");
-  }
   // END Color Icon
 
   // Start Monochrome image
@@ -261,6 +258,9 @@ Example:
   }
   &__new {
     mask-image: url("/assets/img/icons/new.svg");
+  }
+  &__signature {
+    mask-image: url("/assets/img/icons/signature.svg");
   }
   &__folder {
     mask-image: url("/assets/img/icons/folder.svg");
@@ -662,7 +662,7 @@ Example:
       height: 20px;
       right: -2px;
       top: -3px;
-      background-image: url("/assets/img/icons/alert.svg");
+      background-image: url("/assets/img/icons/warning.svg");
     }
   }
   &.--online,
