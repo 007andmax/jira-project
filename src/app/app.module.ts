@@ -145,6 +145,8 @@ import { MatChipListComponent } from './components/shared/mat-chip-list/mat-chip
 import { MatErrorComponent } from './components/shared/mat-error/mat-error.component';
 import { MatOptionComponent } from './components/shared/mat-option/mat-option.component';
 import { MatErrorModule } from './components/shared/mat-error/mat-error.module';
+import { MatChipListModule } from './components/shared/mat-chip-list/mat-chip-list.module';
+import { MatChipModule } from './components/shared/mat-chip/mat-chip.module';
 declare var $: any;
 
 /**
@@ -226,7 +228,9 @@ declare var $: any;
     MarketingSubscriptionsAsideModule,
     SuperAdminPublicListModule,
     ProductTypeCheckUseModule,
-    MatErrorModule
+    MatErrorModule,
+    MatChipListModule,
+    MatChipModule
   ],
   entryComponents: [
     ConfirmComponent,

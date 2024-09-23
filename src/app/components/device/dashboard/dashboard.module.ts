@@ -8,6 +8,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { MatChipListModule } from '../../shared/mat-chip-list/mat-chip-list.module';
 import { MatChipModule } from '../../shared/mat-chip/mat-chip.module';
+import { MatFormFieldModule } from '../../shared/mat-form-field/mat-form-field.module';
 
 
 
@@ -25,6 +26,7 @@ import { MatChipModule } from '../../shared/mat-chip/mat-chip.module';
         DropDownModule,
         MatChipModule,
         MatChipListModule,
+        MatFormFieldModule
     ],
 })
 export class DashboardModule { }

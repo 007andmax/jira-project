@@ -6,7 +6,6 @@
     <app-mat-form-field #formField>
         <app-mat-chip-list
             #chipList
-            aria-label="Fruit selection"
             [items]="selectedTag"
             (onChangeItems)="formField.checkSelectedItems(selectedTag)"
         >

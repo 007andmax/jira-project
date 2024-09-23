@@ -12,6 +12,7 @@ import { ReportSendEmailModule } from '../reports/report-additional-actions/repo
 import { MatChipListModule } from '../shared/mat-chip-list/mat-chip-list.module';
 import { MatChipModule } from '../shared/mat-chip/mat-chip.module';
 import { MatOptionModule } from '../shared/mat-option/mat-option.module';
+import { MatFormFieldModule } from '../shared/mat-form-field/mat-form-field.module';
 
 @NgModule({
     declarations: [
@@ -30,7 +31,8 @@ import { MatOptionModule } from '../shared/mat-option/mat-option.module';
         ReportSendEmailModule,
         MatChipModule,
         MatChipListModule,
-        MatOptionModule
+        MatOptionModule,
+        MatFormFieldModule
     ],
 })
 export class DevicesModule { }

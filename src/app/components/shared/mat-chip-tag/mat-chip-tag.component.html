@@ -7,8 +7,6 @@
         class="clip-text"
         [textContent]="value"
         *ngIf="value.length >= 30"
-        (mouseenter)="productTooltip.setContent(value);productTooltip.show($event.target)"
-        (mouseleave)="productTooltip.hide()"
     ></div>
     <div
         class="clip-text"

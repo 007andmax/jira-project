@@ -24,6 +24,10 @@ import { RecurringTicketsTableAssignedUserComponent } from './recurring-tickets-
 import { RecurringTicketsTableAssignedUserMoreComponent } from './recurring-tickets-table/recurring-tickets-table-assigned-user-more/recurring-tickets-table-assigned-user-more.component';
 import { AssignedTicketUserModule } from '../tickets/ticket-add-aside/assigned-ticket-user/assigned-ticket-user.module';
 import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
+import { MatChipListModule } from '../../shared/mat-chip-list/mat-chip-list.module';
+import { MatChipModule } from '../../shared/mat-chip/mat-chip.module';
+import { MatFormFieldModule } from '../../shared/mat-form-field/mat-form-field.module';
+import { MatOptionModule } from '../../shared/mat-option/mat-option.module';
 
 
 
@@ -57,7 +61,11 @@ import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
         RecurringTicketsRoutingModule,
         CompanyDropDownModule,
         AssignedTicketUserModule,
-        MatErrorModule
+        MatErrorModule,
+        MatChipModule,
+        MatFormFieldModule,
+        MatChipListModule,
+        MatOptionModule
     ],
 
 
