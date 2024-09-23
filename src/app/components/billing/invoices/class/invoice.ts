@@ -20,7 +20,6 @@ export class Invoice {
     isOverDue: boolean = false;
     ticketNumbers: Array<String>;
     selected: boolean = false;
-    blockSelected: boolean = false;
     paymentAmount: number = 0;
     paymentAmount_str: string;
     totalSum: number;

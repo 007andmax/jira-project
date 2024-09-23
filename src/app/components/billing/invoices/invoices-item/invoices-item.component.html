@@ -5,8 +5,7 @@
     <div class="invoice-table__check pointer">
         <div class="qt-df">
             <label
-                class="qt-checkbox"
-                [ngClass]="{'--disabled':invoice.blockSelected, 'pointer':!invoice.blockSelected}"
+                class="qt-checkbox pointer"
                 [attr.for]="'invoice-' + invoice.id"
             >
                 <input
@@ -14,7 +13,6 @@
                     [(ngModel)]="invoice.selected"
                     type="checkbox"
                     (change)="onChangeSelect()"
-                    [disabled]="invoice.blockSelected"
                 >
                 <span></span>
             </label>
