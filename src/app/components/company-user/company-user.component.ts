@@ -6,7 +6,7 @@ import { CompaniesStateService } from '../../states/company/companies-state.serv
 import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
 import { UsersService } from '../../services/users/users.service';
 import { DraftEmailStateService } from '../../states/draft-email/draft-email-state.service';
-import { ARCHIVE_USER, DEARCHIVE_USER } from '../../const/confirm';
+import { ARCHIVE_USER, ARCHIVE_USERS, DEARCHIVE_USER } from '../../const/confirm';
 import { UserChange } from '../users/class/user-change';
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
 import { UsersHeaderComponent } from '../users/users-header/users-header.component';
@@ -19,7 +19,7 @@ import { CrmCompanyJobTitle } from '../setting/crm-settings/crm-company-job-titl
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
 import { MarketingSubscriptionType } from '../setting/marketing-email/marketing-subscription-type/class/marketing-subscription-type';
 import { UserCustomerCompaniesInfo } from '../users/class/user-customer-companies-info';
-import { Subscription } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 import { UserFilters } from '../users/class/user-filters';
 import { UsersFilterComponent } from '../users/users-header/users-filter/users-filter.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
@@ -111,6 +111,9 @@ export class CompanyUserComponent implements OnInit {
         }
         if (this.confirmStateService.getConfirmAction() === DEARCHIVE_USER) {
           this.onDeArchiveUser(this.usersStateService.getUserForDeArchive().id);
+        }
+        if (this.confirmStateService.getConfirmAction() === ARCHIVE_USERS) {
+          this.onArchiveUsers(this.usersStateService.getUsersForArchive().map(item => item.id));
         }
       }
     })
@@ -260,7 +263,13 @@ export class CompanyUserComponent implements OnInit {
     })
     this.userListService.addSubscription(archiveUser);
   }
-
+  private onArchiveUsers(ids) {
+    forkJoin(
+      ids.map(item => this.usersService.onArchiveUsers(item))
+    )
+      .subscribe(res => {
+      });
+  }
   public onScroll() {
     this.infiniteScrollDisabled = true;
     this.getUsers();
