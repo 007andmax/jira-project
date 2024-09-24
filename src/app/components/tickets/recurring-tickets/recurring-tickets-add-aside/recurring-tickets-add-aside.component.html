@@ -16,7 +16,6 @@
                 <div class="editable-description">
                     <textarea
                         appTextArea
-                        [limit]="250"
                         id="service-description"
                         placeholder="Write Description"
                         (input)="onChangeDescription($event)"
@@ -293,7 +292,6 @@
                             <div class="editable-description">
                                 <textarea
                                     appTextArea
-                                    [limit]="250"
                                     [(ngModel)]="service.description"
                                     placeholder="Write Description"
                                     (onPast)="onPastDescriptionService($event,i)"

@@ -13,7 +13,7 @@
                 ngbTooltip="Edit"
                 *ngIf="getPermissions('EDIT_USERS')"
             >
-              <div class="qt-icon icon__edit qt-sz-20"></div>
+                <div class="qt-icon icon__edit qt-sz-20"></div>
             </div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-16 header-circle-icon qt-df qt-jc-c qt-ai-c qt-mr-16 pointer"
@@ -23,7 +23,7 @@
                 [ngbTooltip]="'Draft Email'"
                 *ngIf="!customerPortalStateService.isCustomerPortal"
             >
-              <div class="qt-icon icon__email-send qt-sz-20"></div>
+                <div class="qt-icon icon__email-send qt-sz-20"></div>
             </div>
             <div
                 class="qt-icon icon__close qt-aside-modern__header-close"
@@ -197,7 +197,6 @@
                             placeholder="Enter job description"
                             appTextArea
                             cols="30"
-                            [default]="3"
                             rows="3"
                             [disabled]="!getPermissions('EDIT_USERS')"
                         ></textarea>

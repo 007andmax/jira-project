@@ -558,7 +558,8 @@
             <div class="editable-description">
                 <textarea
                     appTextArea
-                    [limit]="250"
+                    rows="1"
+                    [maxHeight]="200"
                     id="company-description"
                     placeholder="Write note for company"
                     (input)="onChangeDescription($event)"

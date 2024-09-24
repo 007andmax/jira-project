@@ -36,6 +36,7 @@ import { InvoiceChangeAddressModule } from '../billable/billable-aside/invoice-f
 import { QuoteAsideAddChangeAddressComponent } from './quote-aside-add/quote-aside-add-change-address/quote-aside-add-change-address.component';
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 import { NumberModule } from 'src/app/directives/number/number.module';
+import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 
 
 
@@ -81,7 +82,8 @@ import { NumberModule } from 'src/app/directives/number/number.module';
         KeyUpEnterModule,
         InvoiceChangeAddressModule,
         CompanyDropDownModule,
-        NumberModule
+        NumberModule,
+        TextAreaModule
     ],
 
 

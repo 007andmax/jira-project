@@ -1580,10 +1580,6 @@ app-quotes-item {
     font-size: 14px;
     outline: none;
     border-radius: inherit;
-    &:last-child {
-      visibility: hidden;
-      display: none;
-    }
   }
 }
 .quote-create__content--top {
@@ -1621,10 +1617,6 @@ app-quotes-item {
         padding: 12px;
         font-size: 14px;
         outline: none;
-        &:last-child {
-          visibility: hidden;
-          display: none;
-        }
       }
     }
     .ticket-tabs {
