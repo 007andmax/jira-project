@@ -23,7 +23,6 @@ export class TextAreaDirective implements OnInit {
 
       // Get the scroll height and set the new height accordingly
       let computedStyle = getComputedStyle(this.element.nativeElement);
-      console.log("computedStyle.paddingTop", computedStyle.paddingTop);
       const newHeight = this.element.nativeElement.scrollHeight + parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom);
 
       // Set height, but limit it to the maximum height

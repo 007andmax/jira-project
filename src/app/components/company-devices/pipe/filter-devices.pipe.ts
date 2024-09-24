@@ -20,7 +20,6 @@ export class FilterDevicesPipe implements PipeTransform {
     } else if (filter.isCustomDevices) {
       filtesList = items.filter(item => item.isCustom);
     }
-    console.log("filtesList", filtesList);
     if (filter.assestType.length > 0) return filtesList.filter(item => filter.assestType.some(filteritem => filteritem.toLocaleLowerCase() == ((item.isCustom) ? item.type.toLocaleLowerCase() : (item.iconName || item.type).toLocaleLowerCase())));
     return filtesList;
   }
