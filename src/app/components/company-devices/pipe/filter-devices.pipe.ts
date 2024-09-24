@@ -15,7 +15,10 @@ export class FilterDevicesPipe implements PipeTransform {
     console.log("filter", filter);
     let filtesList = [];
     if (filter.isAgent && filter.isCustomDevices) {
-      if (filter.assestType.length > 0) return items.filter(item => filter.assestType.some(filteritem => filteritem.toLocaleLowerCase() == item.type.toLocaleLowerCase()));
+      if (filter.assestType.length > 0) {
+
+        return items.filter(item => filter.assestType.some(filteritem => filteritem.toLocaleLowerCase() == ((item.isCustom) ? item.type.toLocaleLowerCase() : (item.iconName || item.type).toLocaleLowerCase())));
+      }
       return items;
     } else if (filter.isAgent) {
       filtesList = items.filter(item => !item.isCustom);
@@ -23,7 +26,7 @@ export class FilterDevicesPipe implements PipeTransform {
       filtesList = items.filter(item => item.isCustom);
     }
     console.log("filtesList", filtesList);
-    if (filter.assestType.length > 0) return filtesList.filter(item => filter.assestType.some(filteritem => filteritem.toLocaleLowerCase() == item.type.toLocaleLowerCase()));
+    if (filter.assestType.length > 0) return filtesList.filter(item => filter.assestType.some(filteritem => filteritem.toLocaleLowerCase() == ((item.isCustom) ? item.type.toLocaleLowerCase() : (item.iconName || item.type).toLocaleLowerCase())));
     return filtesList;
     // filtesList = items.filter(item => ((filter.isCustomDevices) ? item.isCustom == true : item.isCustom == false) && (filter.isAgent) ? item.);
   }
