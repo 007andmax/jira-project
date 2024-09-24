@@ -59,15 +59,17 @@
             <hr class="qt-divider qt-mt-24 qt-mb-40">
             <div class="qt-df">
                 <div class="payments-page__payment-info qt-pr-15">
-                    <div class="qt-fw-600 qt-fs-16 qt-lh-133 qt-mb-4 qt-color-gray-900 qt-df qt-ai-c">
-                        <div class="icon__status-green qt-mr-5 qt-ic-c qt-sz-24"></div>
-                        Amount Received
+                    <div>
+                        <div class="qt-fw-600 qt-fs-16 qt-lh-133 qt-mb-4 qt-color-gray-900 qt-df qt-ai-c">
+                            <div class="icon__status-green qt-mr-5 qt-ic-c qt-sz-24"></div>
+                            Amount Received
+                        </div>
+                        <div
+                            class="qt-fs-40 qt-fw-600 qt-lh-12 qt-color-gray-900"
+                            [textContent]="(payment.partialPaidAmount || payment.totalSum ) | currency"
+                        ></div>
                     </div>
-                    <div
-                        class="qt-fs-40 qt-fw-600 qt-lh-12 qt-color-gray-900"
-                        [textContent]="(payment.partialPaidAmount || payment.totalSum ) | currency"
-                    ></div>
-                    <div *ngIf="company">
+                    <div *ngIf="!isExistMultipleCompanies">
                         <div class="qt-fs-10 qt-mt-25 qt-lh-12 qt-fw-600  qt-mb-8 qt-text-upper qt-color-gray-400">Received From</div>
                         <div
                             class="qt-fs-13 qt-fw-600 qt-color-gray-900 qt-lh-154"
