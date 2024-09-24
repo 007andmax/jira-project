@@ -13,6 +13,8 @@ import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-toolt
 import { ManageTagsDevicesComponent } from './manage-tags-devices/manage-tags-devices.component';
 import { ManageTagsDevicesAddComponent } from './manage-tags-devices/manage-tags-devices-add/manage-tags-devices-add.component';
 import { DeviceTagPipe } from 'src/app/pipe/device-tag.pipe';
+import { ManageTagsFilesComponent } from './manage-tags-files/manage-tags-files.component';
+import { MatFormFieldModule } from '@angular/material';
 
 
 
@@ -22,7 +24,8 @@ import { DeviceTagPipe } from 'src/app/pipe/device-tag.pipe';
         ManageTagsAddComponent,
         ManageTagsDevicesComponent,
         ManageTagsDevicesAddComponent,
-        DeviceTagPipe
+        DeviceTagPipe,
+        ManageTagsFilesComponent
     ],
     imports: [
         CommonModule,
@@ -34,6 +37,7 @@ import { DeviceTagPipe } from 'src/app/pipe/device-tag.pipe';
         ClickOutsideModule,
         KeyUpEnterModule,
         DynamicTooltipModule,
+        MatFormFieldModule,
     ],
     exports: [TagPipe]
 

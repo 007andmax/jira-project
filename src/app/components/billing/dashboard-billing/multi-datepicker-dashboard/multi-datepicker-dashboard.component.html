@@ -1,9 +1,6 @@
 <div
     class="date-picker"
-    appClickOtside
-    [class]="'.date-picker'"
-    [init]="showDatePicker"
-    (onOutSide)="hideDatePicker()"
+    (clickOutside)="hideDatePicker()"
 >
     <div
         class="date-picker-header"
@@ -20,7 +17,7 @@
         ></i>
         <i
             *ngIf="!selectedDateModel"
-            class="icn-16 icon__calendar pointer"
+            class="icn-16 qt-icon icon__calendar pointer"
         ></i>
     </div>
     <div
@@ -78,6 +75,7 @@
                     year to date
                 </button>
             </div>
+
 
 
 

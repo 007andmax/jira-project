@@ -6,23 +6,27 @@
         <div class="qt-aside-modern__header-title">User Detail</div>
         <div class="qt-df qt-ai-c">
             <div
-                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__edit"
+                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon qt-df qt-jc-c qt-ai-c"
                 (click)="editUser()"
                 placement="top"
                 container="body"
                 ngbTooltip="Edit"
                 *ngIf="getPermissions('EDIT_USERS')"
-            ></div>
+            >
+                <div class="qt-icon icon__edit qt-sz-20"></div>
+            </div>
             <div
-                class="qt-sz-32 qt-circle qt-bg-white qt-mr-16 header-circle-icon icon__email-dark qt-mr-16 pointer"
+                class="qt-sz-32 qt-circle qt-bg-white qt-mr-16 header-circle-icon qt-df qt-jc-c qt-ai-c qt-mr-16 pointer"
                 (click)="showAsideForDraftEmail()"
                 placement="top"
                 container="body"
                 [ngbTooltip]="'Draft Email'"
                 *ngIf="!customerPortalStateService.isCustomerPortal"
-            ></div>
+            >
+                <div class="qt-icon icon__email-send qt-sz-20"></div>
+            </div>
             <div
-                class="icon__close qt-aside-modern__header-close"
+                class="qt-icon icon__close qt-aside-modern__header-close"
                 (click)="close()"
             ></div>
         </div>
@@ -78,7 +82,7 @@
                 >
                     <label class="qt-input-block__label">Email Address</label>
                     <div
-                        class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"
+                        class="qt-icon icon__edit qt-icon__gray-400 qt-za-16 qt-sz-16 qt-bg-contain pointer"
                         *ngIf="getPermissions('EDIT_USERS')"
                     ></div>
                     <input
@@ -108,7 +112,7 @@
                 >
                     <label class="qt-input-block__label">Contact No.</label>
                     <div
-                        class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"
+                        class="qt-icon icon__edit qt-icon__gray-400 qt-za-16 qt-sz-16 qt-bg-contain pointer"
                         *ngIf="getPermissions('EDIT_USERS')"
                     ></div>
                     <ng-template
@@ -120,10 +124,10 @@
                     >
                         <div class="qt-df qt-ai-c">
                             <div
-                                [ngClass]="{'icon__office-phone-gray':number.typeNumber == 'FAX',
-                        'icon__mobile_type':number.typeNumber == 'MOBILE',
-                         'icon__phone-gray':number.typeNumber == 'OFFICE'}"
-                                class=" qt-za-16 qt-sz-16 qt-bg-contain  qt-fs-0 qt-mr-6"
+                                [ngClass]="{'icon__old-phone':number.typeNumber == 'FAX',
+                        'icon__mobile':number.typeNumber == 'MOBILE',
+                         'icon__phone':number.typeNumber == 'OFFICE'}"
+                                class=" qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-6 qt-icon"
                             ></div>
                             <input
                                 type="text"
@@ -154,7 +158,7 @@
                     <div class="qt-df qt-jc-sb qt-ai-c">
                         <div class="user-detail__row-info-label">Marketing</div>
                         <div
-                            class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"
+                            class="qt-icon icon__edit qt-icon__gray-400 qt-za-16 qt-sz-16 qt-bg-contain pointer"
                             *ngIf="getPermissions('EDIT_USERS')"
                         ></div>
                     </div>
@@ -193,7 +197,6 @@
                             placeholder="Enter job description"
                             appTextArea
                             cols="30"
-                            [default]="3"
                             rows="3"
                             [disabled]="!getPermissions('EDIT_USERS')"
                         ></textarea>
@@ -204,7 +207,7 @@
                     <div class="qt-df qt-jc-sb qt-ai-c qt-mb-4">
                         <div class="user-detail__row-info-label">Tags</div>
                         <div
-                            class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"
+                            class="qt-icon icon__edit qt-icon__gray-400 qt-za-16 qt-sz-16 qt-bg-contain pointer"
                             *ngIf="getPermissions('EDIT_USERS')"
                         ></div>
                     </div>

@@ -35,6 +35,6 @@ export class AddUserToCompanyItemComponent implements OnInit {
   selectUser() {
     this.user.selected = !this.user.selected;
     this.onSelectUser.emit(this.user);
-    this.cd.detectChanges();
+    if (!this.cd['destroyed']) this.cd.detectChanges();
   }
 }

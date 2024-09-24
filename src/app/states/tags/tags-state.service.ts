@@ -39,6 +39,7 @@ export class TagsStateService {
 */
   public setTags(data) {
     this.tags = data;
+    this.onGetTags.emit(this.tags);
   }
   /**
   * Initializes to subscribe for clear data

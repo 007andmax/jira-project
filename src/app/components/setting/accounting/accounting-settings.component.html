@@ -18,7 +18,7 @@
                         *ngIf="getSelectedCount() > 0"
                         (click)="removeGls()"
                     >
-                        <div class="icon__remove qt-sz-16 qt-bg-contain qt-ic-c qt-button-icon"></div>
+                        <div class="qt-icon icon__delete qt-sz-16 qt-bg-contain qt-ic-c qt-button-icon"></div>
                     </a>
                     <a
                         href="javascript:;"
@@ -26,7 +26,7 @@
                         (click)="create()"
                         *ngIf="activeTab === 'gLNumbers'"
                     >
-                        <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+                        <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8 qt-button-icon"></span>
                         Add GL Number
                     </a>
                     <a
@@ -35,7 +35,7 @@
                         (click)="toggleAddTax = !toggleAddTax"
                         *ngIf="activeTab === 'taxes'"
                     >
-                        <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+                        <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8 qt-button-icon"></span>
                         Add Tax
                     </a>
                     <a
@@ -44,7 +44,7 @@
                         (click)="addCustomeNote()"
                         *ngIf="activeTab === 'notes'"
                     >
-                        <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+                        <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8 qt-button-icon"></span>
                         Create Note
                     </a>
                     <taxes-add

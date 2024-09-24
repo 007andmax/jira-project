@@ -16,7 +16,7 @@
         (click)="openDropDown()"
     >
         <div class="qt-df qt-ai-c">
-            <div class="add-user qt-sz-36 qt-circle qt-bg-contain qt-mr-8"></div>
+            <div class="qt-icon qt-sz-16 qt-mr-8"></div>
             <span>Assign User</span>
         </div>
     </div>
@@ -31,7 +31,7 @@
         <div class="qt-df qt-ai-c">
             <div
                 *ngIf="type === 'RECURRING_TICEKTS'"
-                class="icon__upload-avtar qt-mr-8"
+                class="icon__user-avatar qt-mr-8"
             ></div>
             <span *ngIf="type === 'RECURRING_TICEKTS'">Assigned Users</span>
         </div>
@@ -115,7 +115,7 @@
         #selectUserTooltip
     ></app-dynamic-tooltip>
     <div
-        class="tech__user-icon icon__assign-user"
+        class="tech__user-icon qt-icon qt-icon__blue-light-600 pointer"
         *ngIf="type === 'TICEKTS' && selectedUsers.length === 0 || type === 'CONTRACT'"
         id="dropdownTechuser"
         (mouseenter)="selectUserTooltip.show($event.target)"
@@ -202,7 +202,7 @@
                                             ></span>
                                             <i
                                                 *ngIf="isSelected(user)"
-                                                class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
+                                                class="qt-icon icon__done qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
                                             ></i>
                                         </div>
                                     </ng-template>

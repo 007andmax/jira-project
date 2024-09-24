@@ -147,6 +147,10 @@ import { MatOptionComponent } from './components/shared/mat-option/mat-option.co
 import { MatErrorModule } from './components/shared/mat-error/mat-error.module';
 import { MatChipListModule } from './components/shared/mat-chip-list/mat-chip-list.module';
 import { MatChipModule } from './components/shared/mat-chip/mat-chip.module';
+import { FileManagerComponent } from './components/file-manager/file-manager.component';
+import { FileManagementAddFileModule } from './components/file-manager/file-manager-add-file/file-manager-add-file.module';
+import { PreviewFileComponent } from './components/shared/preview-file/preview-file.component';
+import { UsersDropDownComponent } from './components/shared/users-drop-down/users-drop-down.component';
 declare var $: any;
 
 /**
@@ -176,7 +180,8 @@ declare var $: any;
     GlNumberCheckUseComponent,
     CannedResponsesAsideComponent,
     ManufacturesCheckUseComponent,
-    UserDeArchiveNotificationComponent
+    UserDeArchiveNotificationComponent,
+    PreviewFileComponent
   ],
   imports: [
     BrowserModule,
@@ -230,7 +235,8 @@ declare var $: any;
     ProductTypeCheckUseModule,
     MatErrorModule,
     MatChipListModule,
-    MatChipModule
+    MatChipModule,
+    FileManagementAddFileModule
   ],
   entryComponents: [
     ConfirmComponent,

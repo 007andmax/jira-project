@@ -100,8 +100,9 @@
                             class="qt-input-block__textarea"
                             placeholder="Enter memo of invoice"
                             appTextArea
-                            [limit]="400"
+                            [checkScrollHeight]="true"
                             maxlength="400"
+                            [maxHeight]="200"
                             (input)="onChangeMemo($event)"
                             (onPast)="onPastMemo($event)"
                         ></textarea>
@@ -294,7 +295,7 @@
                             class="qt-button --gray qt-jc-c qt-w100"
                             (click)="onAddPhone()"
                         >
-                            <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+                            <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8 qt-button-icon"></span>
                             Add Phone
                         </a>
                     </div>
@@ -337,7 +338,7 @@
                             class="qt-button --gray qt-jc-c qt-w100 --color-red"
                             (click)="onAddPhone()"
                         >
-                            <span class="icon__remove--red-500 qt-sz-20 qt-bg-contain qt-mr-8 qt-button-icon"></span>
+                            <span class="qt-icon icon__delete qt-icon__red-500 qt-sz-20 qt-bg-contain qt-mr-8 qt-button-icon"></span>
                             Remove
                         </a>
                     </div>

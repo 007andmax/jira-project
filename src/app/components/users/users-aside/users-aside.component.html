@@ -5,7 +5,7 @@
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">Add user</div>
         <div
-            class="qt-aside-modern__header-close icon__close"
+            class="qt-aside-modern__header-close qt-icon icon__close"
             (click)="close()"
         ></div>
     </div>
@@ -18,7 +18,7 @@
                     [src]="user.avatar.base64"
                 >
                 <div
-                    class="upload-photo__no-avatar-icon icon__upload-avtar"
+                    class="upload-photo__no-avatar-icon icon__user-avatar"
                     *ngIf="!user.avatar"
                 ></div>
             </div>
@@ -124,7 +124,6 @@
                     appTextArea
                     maxlength="500"
                     cols="30"
-                    [default]="3"
                     rows="3"
                 ></textarea>
             </div>
@@ -382,7 +381,7 @@
                                 <div class="qt-ml-8">
                                     Access to the Customer portal
                                     <i
-                                        class="icon__help default-services-page__question-icon qt-sz-12 qt-ic-c"
+                                        class="qt-icon icon__help default-services-page__question-icon qt-sz-12 qt-ic-c"
                                         (mouseenter)="customerPortalTooltip.show($event.target)"
                                         (mouseleave)="customerPortalTooltip.hide()"
                                     ></i>

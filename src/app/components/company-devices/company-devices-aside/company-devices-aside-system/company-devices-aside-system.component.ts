@@ -47,7 +47,7 @@ export class CompanyDevicesAsideSystemComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.devicesStateService.getManufactures().length > 0) this.manufactures = this.devicesStateService.getManufactures();
-    if (!this.devicesStateService.isGetManufactures) this.devicesStateService.initGetManufactures();
+    if (!this.devicesStateService.isGetManufactures && !this.customerPortalStateService.isCustomerPortal) this.devicesStateService.initGetManufactures();
     let onGetManufactures = this.devicesStateService.onGetManufactures.subscribe(data => {
       this.manufactures = data;
     })
@@ -56,7 +56,7 @@ export class CompanyDevicesAsideSystemComponent implements OnInit, OnDestroy {
       this.device.report.system.warranty = this.getToDayDate();
       this.device.report.system.installDate = this.getToDayDate();
     }
-    if (this.customDevice && this.customDevice.manufacturer) this.getModels(this.customDevice.manufacturer.id);
+    if (this.customDevice && this.customDevice.manufacturer && !this.customerPortalStateService.isCustomerPortal) this.getModels(this.customDevice.manufacturer.id);
   }
   onSelectManufacture(data) {
     this.modelDd.clearWithOutChanges();

@@ -1,4 +1,5 @@
 @import "./src/assets/styles/variable";
+@import "./src/assets/styles/mixin/breakpoint";
 
 .quotes-page {
   .qt-table-modern__row {
@@ -49,7 +50,7 @@
 
     &__company {
       flex: 0 0 190px;
-      @media (max-width: 1600px) {
+      @include media-breakpoint-down($md) {
         flex: 0 0 156px;
       }
       padding-left: 8px;
@@ -85,7 +86,7 @@
       flex: 0 0 160px;
       padding-left: 8px;
       padding-right: 8px;
-      @media only screen and (min-width: 1601px) {
+      @include media-breakpoint-up($md) {
         flex: 0 0 200px;
       }
       &-user-name {
@@ -292,7 +293,6 @@
       margin-right: -30px;
       &__textarea {
         min-height: 72px;
-        max-width: 541px;
       }
     }
 

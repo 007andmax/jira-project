@@ -36,11 +36,13 @@ export class DeviceCompany extends Device {
         if (data.assetTag) this.assetTag = data.assetTag;
         if (data.location) this.location = data.location;
         if (data.ip) this.ip = data.ip;
+        if (data.ipAddress) this.ip = data.ipAddress;
     }
     public update(data) {
         for (const key in data) {
             this[key] = data[key];
         }
+        if (data.ipAddress) this.ip = data.ipAddress;
     }
     public setMacAddress(data) {
         this.macAddress = data;

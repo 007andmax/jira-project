@@ -30,6 +30,10 @@ import { CompanyDevicesEditMacComponent } from './company-devices-edit-mac/compa
 import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 import { MatErrorModule } from '../shared/mat-error/mat-error.module';
+import { CompanyDevicesFilterComponent } from './company-devices-filter/company-devices-filter.component';
+import { CompanyDevicesFilterTypeComponent } from './company-devices-filter/company-devices-filter-type/company-devices-filter-type.component';
+import { DynamicTooltipModule } from '../shared/dynamic-tooltip/dynamic-tooltip.module';
+import { FilterDevicesPipe } from './pipe/filter-devices.pipe';
 
 
 @NgModule({
@@ -47,6 +51,9 @@ import { MatErrorModule } from '../shared/mat-error/mat-error.module';
         CompanyDevicesAsideUpdatesComponent,
         CompanyDevicesEditIpComponent,
         CompanyDevicesEditMacComponent,
+        CompanyDevicesFilterComponent,
+        CompanyDevicesFilterTypeComponent,
+        FilterDevicesPipe,
 
     ],
     imports: [
@@ -62,7 +69,8 @@ import { MatErrorModule } from '../shared/mat-error/mat-error.module';
         DropDownModule,
         ClickOutsideModule,
         KeyUpEnterModule,
-        MatErrorModule
+        MatErrorModule,
+        DynamicTooltipModule,
     ],
 
 

@@ -24,6 +24,7 @@ import { LeftPanelTicketsComponent } from './left-panel-tickets/left-panel-ticke
 import { LeftPanelUsersComponent } from './left-panel-users/left-panel-users.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { Subscription } from 'rxjs';
+import { LeftPanelFileManagerComponent } from './left-panel-file-manager/left-panel-file-manager.component';
 
 /**
  * Left panel component
@@ -53,6 +54,7 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
   @ViewChild('panelInventory') panelInventory: LeftPanelInventoryComponent;
   @ViewChild('panelMarketing') panelMarketing: LeftPanelMarketingComponent;
   @ViewChild('panelPasswordManager') panelPasswordManager: LeftPanelPasswordManagerComponent;
+  @ViewChild('filesCompanies') filesCompanies: LeftPanelFileManagerComponent;
 
 
   /**
@@ -105,6 +107,10 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
           if (window.location.href.includes(`/payments`)) this.state = 'new-payments-ng2';
           if (window.location.href.includes(`/contracts`)) this.state = 'new-contracts';
           if (window.location.href.includes(`/default`)) this.state = 'default';
+          if (window.location.href.includes(`/file-manager`)) this.state = 'file-manager';
+          if (window.location.href.includes(`/file-manager`) && window.location.href.includes(`category`)) this.state = 'file-manager-category';
+          if (window.location.href.includes(`/file-manager`) && window.location.href.includes(`all-customer`)) this.state = 'file-manager-all-customer';
+
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`dashboard`)) this.state = 'company-dashboard';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`tickets`)) this.state = 'company-tickets';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`user`)) this.state = 'company-user';
@@ -116,6 +122,7 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`products`)) this.state = 'company-products';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`contracts`)) this.state = 'company-contracts';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`documents`)) this.state = 'company-documents';
+          if (window.location.href.includes(`/company/`) && window.location.href.includes(`file-manager`)) this.state = 'company-file-manager';
 
 
           if (window.location.href.includes(`/inventory/products`)) this.state = 'inventory';
@@ -227,7 +234,7 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
       if (this.panelUsers) this.panelUsers.close();
       if (this.panelDocuments) this.panelDocuments.close();
       if (this.panelDevices) this.panelDevices.close();
-
+      if (this.filesCompanies) this.filesCompanies.close();
       if (this.panelCompanies) this.panelCompanies.openPanel();
       if (this.panelCompanies) this.panelCompanies.togglePanel(true);
     })
@@ -273,6 +280,7 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
     if (this.leftPanelService.isReportsState(data)) this.page = "REPORTS";
     if (this.leftPanelService.isSettingsPage(data)) this.page = "SETTINGS";
     if (this.leftPanelService.isDevicesPage(data)) this.page = "DEVICES";
+    if (this.leftPanelService.isFilePage(data)) this.page = "FILE_MANAGER";
   }
   setDefaultTypeFilter() {
     this.panelTickets.setTypeFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage)
@@ -330,6 +338,7 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
       if (this.state === 'company-password-manager') this.goToLink('company/password-manager');
       if (this.state === 'company-products') this.goToLink('company/products');
       if (this.state === 'company-contracts') this.goToLink('company/contracts');
+      if (this.state === 'company-file-manager') this.goToLink(`company/${this.companiesStateService.getCompanyRoutingId()}/file-manager`);
       if (this.state === 'inventory') this.goToLink(`inventory/products`);
       if (this.state === 'password-manager') this.goToLink(`password-manager`);
       if (this.state === 'myprofile-component') this.goToLink('setting/myprofile');
@@ -373,6 +382,8 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
       if (this.state === 'company-documents') this.goToLink(`company/${this.companiesStateService.getCompanyRoutingId()}/documents`);
       if (this.state === 'new-devices') this.goToLink('devices');
       if (this.state === 'new-device-summary') this.goToLink('devices/reports');
+      if (this.state === 'file-manager') this.goToLink('file-manager');
+      if (this.state === 'file-manager-all-customer') this.goToLink('file-manager/all-customer');
 
       if (this.state === 'byProducts' ||
         this.state === 'byCustomers' ||

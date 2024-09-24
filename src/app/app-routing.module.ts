@@ -231,8 +231,16 @@ const routes: Routes = [
     path: ':domain/company/:id/documents',
     loadChildren: './components/companies/company-documents/company-documents.module#CompanyDocumentsModule',
     canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]
-
-
+  },
+  {
+    path: ':domain/company/:id/file-manager',
+    loadChildren: './components/companies/company-file-manager/company-file-manager.module#CompanyFileManagerModule',
+    canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]
+  },
+  {
+    path: ':domain/company/:id/file-manager/category/:categoryId',
+    loadChildren: './components/companies/company-file-manager/company-file-manager-category/company-file-manager-category.module#CompanyFileManagerCategoryModule',
+    canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/documents/preview/:id',
@@ -380,6 +388,27 @@ const routes: Routes = [
     path: ':domain/contract-statistics',
     loadChildren: './components/billing/contracts-statistics/contracts-statistics.module#ContractsStatisticsModule',
     canActivate: [PermissionContractsService, PermissionNoSuperAdminService]
+  },
+  {
+    path: ':domain/file-manager',
+    loadChildren: './components/file-manager/file-manager.module#FileManagementModule',
+    canActivate: [PermissionSupportService, PermissionNoSuperAdminService, TestPermissionService]
+  },
+  {
+    path: ':domain/file-manager/all-customer',
+    loadChildren: './components/file-manager/file-manager-all-customer/file-manager-all-customer.module#FileManagementAllCustomerModule',
+    canActivate: [PermissionSupportService, PermissionNoSuperAdminService, TestPermissionService]
+  },
+  {
+    path: ':domain/file-manager/all-customer/:id',
+    loadChildren: './components/file-manager/file-manager-all-customer-company/file-manager-all-customer-company.module#FileManagementAllCustomerCompanyModule',
+    canActivate: [PermissionSupportService, PermissionNoSuperAdminService, TestPermissionService]
+  },
+  {
+    path: ':domain/file-manager/category/:id',
+    loadChildren: './components/file-manager/file-manager-category/file-manager-category.module#FileManagementCategoryModule',
+    canActivate: [PermissionSupportService, PermissionNoSuperAdminService, TestPermissionService]
+
   },
 ];
 

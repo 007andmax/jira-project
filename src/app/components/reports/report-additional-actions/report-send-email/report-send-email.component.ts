@@ -53,7 +53,6 @@ export class ReportSendEmailComponent extends DraftEmailComponent {
     })
     this.sub.add(showAsideSendReportPayment);
   }
-
   onChangeCompanyEmails(data) {
     this.draftReport.setEmails(data);
     this.validateReport.resetEmail();
@@ -123,15 +122,8 @@ export class ReportSendEmailComponent extends DraftEmailComponent {
     }
   }
   close() {
-    if (this.draftEmail.attachments.length > 0) {
-      forkJoin(
-        this.draftEmail.attachments.map(item => this.draftEmailService.removeAttachment(item))
-      ).subscribe(result => {
-
-      });
-    }
     this.opened = false;
-    this.draftEmail = new DraftEmail();
+    this.draftReport = new ReportEmail();
     this.tab = 'plain';
     this.messageContent = '';
     this.messageHTML = '';
@@ -140,10 +132,10 @@ export class ReportSendEmailComponent extends DraftEmailComponent {
     this.filesInfo = new FilesInfo();
     this.action = null;
     this.validateReport = new ReportSendEmailValidate();
-    this.sub.unsubscribe();
   }
   ngOnDestroy(): void {
     this.validateReport = new ReportSendEmailValidate();
+    this.sub.unsubscribe();
   }
   trackByIndex(index, item) {
     return index;

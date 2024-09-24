@@ -4,7 +4,7 @@
 >
     <div class="qt-aside-modern__header">
       <div class="qt-aside-modern__header-title">Edit Quote</div>
-      <div class="qt-aside-modern__header-close icon__close" (click)="close()"></div>
+      <div class="qt-aside-modern__header-close qt-icon icon__close" (click)="close()"></div>
     </div>
     <div class="qt-aside-modern__content --no-padding">
         <div
@@ -43,7 +43,7 @@
                     #saveAndApproveBtn="disabled"
                     (onClick)="saveAndApprove()"
                 >
-                    <div class="icon__approve-quote qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                    <div class="qt-icon icon__approve qt-sz-20 qt-mr-12"></div>
                     Save and Approve
                 </li>
                 <li
@@ -52,7 +52,7 @@
                     #saveAndDownloadBtn="disabled"
                     (onClick)="saveAndDownload()"
                 >
-                    <div class="icon__download qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                    <div class="qt-icon icon__download  qt-sz-20 qt-mr-12"></div>
                     Save and Download
                 </li>
                 <li
@@ -61,7 +61,7 @@
                     #saveAndSendBtn="disabled"
                     (onClick)="saveAndContinue()"
                 >
-                    <div class="icon__continue qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                    <div class="qt-icon icon__continue qt-sz-20 qt-mr-12"></div>
                     Save and Continue
                 </li>
             </ul>
@@ -80,7 +80,7 @@
                     id="dropdownUpdate"
                     ngbDropdownToggle
                 >
-                    <div class="qt-sz-16 qt-ic-c icon__dropdown-arrow-up"></div>
+                    <div class="qt-sz-16 qt-ic-c qt-icon icon__arrow-up qt-icon__white"></div>
                 </div>
             </button>
         </div>

@@ -354,6 +354,9 @@ export class OutgoingEmailComponent implements OnInit {
   changeEncryption(value) {
     this.encryptionType = this.encryptionTypes.find(itme => itme.type == value);
     if (value) {
+      this.smtpForm.patchValue({
+        encryptionType: value == "PLAIN" ? "NONE" : value
+      });
       if (this.initialized || this.portIsEmpty) {
         var port = this.portToTypes[value];
         if (port) {

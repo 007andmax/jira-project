@@ -49,7 +49,7 @@
         <i
             *ngIf="isAdd"
             (click)="addItem()"
-            class="icn-sm icn-product-save icon__active_subscription"
+            class="icn-sm icn-product-save qt-icon icon__done qt-icon__blue-light-600"
         ></i>
     </span>
     <i
@@ -114,7 +114,7 @@
                                             (input)="onSearchUser($event)"
                                         >
                                         <span
-                                            class="search-clear icon__close-round"
+                                            class="search-clear qt-icon icon__close-round qt-icon__gray-400"
                                             *ngIf="searchText.length > 0"
                                             (click)="clearSearch()"
                                         ></span>

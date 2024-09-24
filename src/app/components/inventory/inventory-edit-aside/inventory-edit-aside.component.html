@@ -5,7 +5,7 @@
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">Edit Product</div>
         <div
-            class="qt-aside-modern__header-close icon__close"
+            class="qt-aside-modern__header-close qt-icon icon__close"
             (click)="close()"
         ></div>
     </div>
@@ -78,8 +78,8 @@
                 <div class="qt-input-block__label">Description</div>
                 <textarea
                     appTextArea
-                    [limit]="160"
-                    [default]="5"
+                    [height]="'100px'"
+                    rows="5"
                     id="inventory-description"
                     placeholder="Write Product Description"
                     (input)="onChangeDescription($event)"

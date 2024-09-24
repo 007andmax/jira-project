@@ -116,10 +116,10 @@
   -webkit-mask-size: 16px;
   mask-size: 16px;
 }
-/deep/ .icon__task-pending {
+/deep/ .icon__check {
   background-size: contain;
 }
-/deep/ .icon__active {
+/deep/ .qt-icon icon__check {
   background-size: contain;
 }
 /deep/ .tag__modern {

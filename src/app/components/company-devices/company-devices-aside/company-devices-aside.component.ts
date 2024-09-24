@@ -51,7 +51,13 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
       if (this.open) {
         let find = data.devices[0].isCustom ? this.devicesCompany.find(item => item.deviceId === data.devices[0].deviceId) : this.devices.find(item => item.agentId === data.devices[0].agentId);
         if (find) {
-          this.currentDevice = new DeviceExtended(find, this.companyId);
+          if (!find.isCustom) {
+            this.currentDevice = new DeviceExtended(find, this.companyId);
+            this.customDevice = null;
+          } else {
+            this.customDevice = new DeviceCompany(find, this.companyId);
+            this.currentDevice = null;
+          }
           return;
         }
       }

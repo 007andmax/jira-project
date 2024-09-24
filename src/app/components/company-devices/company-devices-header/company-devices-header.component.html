@@ -1,8 +1,8 @@
 <div class="qt-page-list__header-title-line">
     <div class="qt-page-list__header-title-line--left">
         <h6
-            class="qt-page-list__header-title qt-mb-16"
-            [textContent]="'All Devices (' + devices.length + ')'"
+            class="qt-page-list__header-title"
+            [textContent]="'All Devices (' + getCountDevices() + ')'"
         ></h6>
     </div>
     <div class="qt-page-list__header-title-line--rigth">
@@ -16,7 +16,7 @@
                 *ngIf="!isExistCustomDevices() && !isOfflineDeviceSelected && !customerPortalStateService.isCustomerPortal"
                 (click)="turnOff('reboot')"
             >
-                <div class="icon__restart-blue qt-sz-16 qt-ic-c qt-mr-6"></div>
+                <div class="qt-icon icon__reset qt-icon__blue-light-600 qt-sz-16 qt-ic-c qt-mr-6"></div>
                 <div>Restart</div>
             </div>
             <div
@@ -24,7 +24,7 @@
                 *ngIf="!isExistCustomDevices() && !isOfflineDeviceSelected && !customerPortalStateService.isCustomerPortal"
                 (click)="turnOff('shutdown')"
             >
-                <div class="icon__shutdown-blue qt-sz-16 qt-ic-c qt-mr-6"></div>
+                <div class="qt-icon icon__shutdown qt-icon__blue-light-600 qt-sz-16 qt-ic-c qt-mr-6"></div>
                 <div>Shutdown</div>
             </div>
             <div
@@ -32,21 +32,35 @@
                 (click)="removeAgents()"
                 *ngIf="!customerPortalStateService.isCustomerPortal"
             >
-                <div class="icon__remove--blue-light-600 qt-sz-16 qt-ic-c qt-mr-6"></div>
+                <div class="qt-icon icon__delete qt-icon__blue-light-600 qt-sz-16 qt-ic-c qt-mr-6"></div>
                 <div>Remove Agent</div>
             </div>
             <div
                 class="qt-ml-16 qt-fw-600 qt-df qt-color-info qt-ai-c qt-pointer"
                 (click)="openSidebar()"
             >
-                <div class="icon__sidebar-blue qt-sz-16 qt-ic-c qt-mr-6"></div>
+                <div class="qt-icon icon__sidebar qt-icon__blue-light-600 qt-sz-16 qt-ic-c qt-mr-6"></div>
                 <div>Sidebar</div>
             </div>
         </div>
+        <button
+            class="qt-button --gray --md filter-button qt-ml-8 qt-df"
+            [ngClass]="{'active':toggleFilter}"
+            (click)="setToggleFilter(!toggleFilter)"
+        >
+            <span class="qt-icon icon__filter qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
+            <span
+                class="filter-counter qt-circle qt-sz-18 qt-fw-600 qt-fs-10 qt-color-white qt-bg-info qt-mr-8 qt-df qt-ai-c qt-jc-c"
+                *ngIf="countFilter > 0"
+                [textContent]="countFilter"
+            ></span>
+            Filters
+        </button>
         <div class="qt-df qt-ai-c">
             <button
                 class="qt-button --gray --md qt-ml-8"
                 (click)="addDevice()"
+                *ngIf="!customerPortalStateService.isCustomerPortal"
             >
                 Create Custom Device
             </button>

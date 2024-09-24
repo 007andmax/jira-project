@@ -1,0 +1,93 @@
+<div
+    class="item-file-container"
+    ngbDropdown
+    #db="ngbDropdown"
+    appDoubleClick
+    (doubleClick)="preview()"
+>
+    <div
+        class="item-file-avatar qt-df qt-ai-c qt-jc-c qt-mb-12"
+        [ngClass]="{'item-file-avatar-background':!isImage()}"
+    >
+        <div
+            class="qt-sz-64 qt-bg-contain qt-mb-8 qt-fs-0"
+            [ngClass]="{'icon__file-type-pdf': item.contentType == 'application/pdf',
+    'icon__file-type-txt': item.contentType == 'text/plain',
+ 'icon__file-type-csv': item.contentType == 'text/csv',
+'icon__file-type-doc': item.contentType == 'application/msword',
+'icon__file-type-html': item.contentType == 'text/html',
+'icon__file-type-odt': item.contentType == 'application/vnd.oasis.opendocument.text',
+'icon__file-type-ppt': item.contentType == 'application/vnd.ms-powerpoint',
+'icon__file-type-rtf': item.contentType == 'application/rtf',
+'icon__file-type-xls': item.contentType == 'application/msxls',
+'icon__file-type-ods': item.contentType == 'application/vnd.oasis.opendocument.spreadsheet'}"
+            *ngIf="!isImage()"
+        ></div>
+        <div
+            class="qt-bg-contain qt-mb-8 qt-fs-0 qt-df qt-ai-c qt-jc-c item-file-image"
+            *ngIf="isImage()"
+        >
+            <img [src]="item.url">
+        </div>
+    </div>
+    <div class>
+        <span
+            class="item-file-h ellipsis qt-db"
+            [textContent]="item.name"
+        ></span>
+        <div class="qt-df qt-ai-c qt-lh-16">
+            <span
+                class="qt-fs-12 qt-color-gray-500"
+                [textContent]="getCreateBy()"
+            ></span>
+            <span
+                class="item-file-type qt-ml-16"
+                [textContent]="getTypeFile()"
+            ></span>
+        </div>
+    </div>
+    <div
+        [ngClass]="{'show-db':db.isOpen()}"
+        class="qt-button --square-md --gray qt-pointer actions"
+        ngbDropdownToggle
+        (click)="$event.stopPropagation();"
+    >
+        <div class="qt-icon icon__more qt-sz-16"></div>
+    </div>
+    <div
+        ngbDropdownMenu
+        class="dropdown-menu-qt icon__more-dropdown"
+        (click)="$event.stopPropagation();"
+    >
+        <ul
+            class
+            role="menu"
+            class="dropdown-qt"
+        >
+            <li
+                class="pointer"
+                ngbDropdownItem
+                (click)="download()"
+            >
+                <div class="qt-icon icon__download qt-sz-20 qt-mr-12"></div>
+                Download
+            </li>
+            <li
+                class="pointer"
+                ngbDropdownItem
+                (click)="fileInfo()"
+            >
+                <div class="qt-icon icon__info qt-sz-20 qt-mr-12"></div>
+                File info
+            </li>
+            <li
+                class="pointer qt-dropdown-menu__item-red qt-dropdown-menu__top-line qt-color-red-600"
+                ngbDropdownItem
+                (click)="remove()"
+            >
+                <div class="qt-icon icon__delete qt-icon__red-600 qt-sz-20 qt-mr-12"></div>
+                Delete
+            </li>
+        </ul>
+    </div>
+</div>

@@ -20,7 +20,6 @@ export class ReportEmail {
     public setOrientation(data) {
         this.orientation = data;
     }
-
     public setNote(data) {
         this.note = data;
     }
@@ -33,8 +32,8 @@ export class ReportEmail {
             },
             note: this.note,
             /* fileName: this.fileName,
-             content: this.content,
-             orientation: "LANDSCAPE"*/
+           content: this.content,
+           orientation: "LANDSCAPE"*/
         }
     }
     public getDataForPaymentReport(payments) {
@@ -46,8 +45,8 @@ export class ReportEmail {
             },
             note: this.note,
             /* fileName: this.fileName,
-             content: this.content,
-             orientation: "LANDSCAPE"*/
+            content: this.content,
+            orientation: "LANDSCAPE"*/
         }
     }
 }

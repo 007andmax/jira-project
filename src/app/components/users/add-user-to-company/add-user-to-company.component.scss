@@ -32,7 +32,7 @@ app-add-user-to-company-item {
         font-size: 18px;
     }
 }
-.user-company-list {
+.user-company-content {
     height: 439px;
     overflow: auto;
 }
@@ -63,4 +63,11 @@ app-add-user-to-company-item {
     right: 12px;
     top: calc(50% - 6px);
     cursor: pointer;
+}
+.assigned-users-type {
+    display: flex;
+    flex-wrap: wrap;
+}
+app-add-user-to-company-selected-item {
+    display: contents;
 }

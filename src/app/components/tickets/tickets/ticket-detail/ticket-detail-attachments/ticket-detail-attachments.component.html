@@ -9,7 +9,7 @@
             (click)="downloadAll()"
             *ngIf="attachments.length > 0"
         >
-            <div class="icon__download qt-bg-contain qt-sz-16 qt-mr-4"></div>
+            <div class="qt-icon icon__download  qt-sz-16 qt-mr-4"></div>
             Download
         </div>
     </div>
@@ -31,7 +31,7 @@
                     class="qt-sz-36 attachment-item__icon qt-circle qt-mr-8 qt-df qt-ai-c qt-jc-c qt-fs-0"
                     (click)="preview(attachment.file.id,attachment.file.contentType)"
                 >
-                    <div class="icon__attachments qt-sz-16"></div>
+                    <div class="qt-icon icon__attachments qt-sz-16"></div>
                 </div>
                 <div
                     class="qt-w100 ellipsis"
@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div
-                    class="icon__more qt-pointer qt-sz-16 qt-bg-contain qt-ml-8 qt-fs-0"
+                    class="qt-icon icon__more qt-pointer qt-sz-16 qt-bg-contain qt-ml-8 qt-fs-0"
                     ngbDropdownToggle
                     [attr.id]="'dropdown' + i"
                 ></div>
@@ -63,7 +63,7 @@
                         ngbDropdownItem
                         (click)="download(attachment.file.id,attachment.file.contentType,attachment.file.name)"
                     >
-                        <i class="icon__download qt-bg-contain qt-sz-20 qt-mr-12"></i>
+                        <i class="qt-icon icon__download  qt-sz-20 qt-mr-12"></i>
                         <span>Download attachment</span>
                     </div>
                     <div
@@ -72,7 +72,7 @@
                         (click)="deleteFile(attachment.file.id)"
                         *ngIf="!customerPortalStateService.isCustomerPortal && ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
                     >
-                        <i class="icon__remove qt-bg-contain qt-sz-20 qt-mr-12"></i>
+                        <i class="qt-icon icon__delete qt-bg-contain qt-sz-20 qt-mr-12"></i>
                         <span>Delete attachment</span>
                     </div>
                 </div>

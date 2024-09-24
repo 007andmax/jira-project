@@ -7,7 +7,7 @@
                     [src]="company.logo.base64"
                 >
                 <i
-                    class="icon__upload-company-logo qt-sz-64 qt-bg-contain qt-mr-16"
+                    class="qt-icon icon__upload-company-logo qt-icon__blue-light-600 qt-sz-64 qt-bg-contain qt-mr-16"
                     *ngIf="!company.logo"
                 ></i>
                 <div>
@@ -299,7 +299,7 @@
                 >
                     + Create user
                 </span>
-                <company-users-drop-down
+                <app-users-drop-down
                     #userDp
                     [class]="['qt-select-input-40']"
                     [placeholder]="'Select user'"
@@ -313,7 +313,7 @@
                     [title]="'User'"
                     (onSelectedItem)="onSelectUser($event.user)"
                 >
-                </company-users-drop-down>
+                </app-users-drop-down>
             </div>
         </div>
     </div>
@@ -540,7 +540,10 @@
     <div class="qt-inputs-row">
         <div class="qt-inputs-block">
             <div class="qt-input-block__label">Tags</div>
-            <app-company-tags (tagsChange)="onChangeTags($event)"></app-company-tags>
+            <app-company-tags
+                [filter]="true"
+                (tagsChange)="onChangeTags($event)"
+            ></app-company-tags>
         </div>
     </div>
     <div class="qt-inputs-row">
@@ -555,7 +558,8 @@
             <div class="editable-description">
                 <textarea
                     appTextArea
-                    [limit]="250"
+                    rows="1"
+                    [maxHeight]="200"
                     id="company-description"
                     placeholder="Write note for company"
                     (input)="onChangeDescription($event)"

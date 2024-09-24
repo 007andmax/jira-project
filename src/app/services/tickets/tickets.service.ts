@@ -104,9 +104,17 @@ export class TicketsService {
     }
     return this.http.post(this.apiUrl + `v2/tickets/${ticket.id}/updates/fetch`, loadedIds);
   }
-  public changeSubjectNoteTicket(id, subject, note, companyId = null) {
-    let data = { id: id, subject: subject, note: note, companyId: companyId };
-    return this.http.put(this.apiUrl + `v2/tickets/edit`, data);
+  public changeSubjectNoteTicket(id, subject, note, companyId = null, createdBy = null) {
+    let data: any = { id: id, subject: subject, note: note, createdBy: createdBy };
+    if (companyId) data.companyId = companyId;
+    this.appStateService.setServerError(true);
+    return this.http.put(this.apiUrl + `v2/tickets/edit`, data).pipe(
+      tap(data => {
+        this.appStateService.setServerError(false);
+        this.toastrService.success("The ticket creator has been successfully changed");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public removeTicketStatus(ticket_id) {
     return this.http.delete(this.apiUrl + `ticket/status/${ticket_id}`).pipe(

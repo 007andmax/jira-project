@@ -1,0 +1,82 @@
+@import "./src/assets/styles/variable";
+
+.left-panel-ng2__content--filters {
+    app-select-search {
+        margin-right: 8px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+    .search-users,
+    .search-tech-users,
+    .search-status,
+    .search-company,
+    .search-priority,
+    .light-dropdown.dropdown,
+    app-tickets-filter-tags {
+        &::before {
+            color: $gray-500;
+            font-size: 13px;
+            font-weight: 500;
+        }
+    }
+
+    /deep/tickets-filter-drop-down .mat-form-field {
+        width: 100%;
+    }
+
+    /deep/tickets-filter-users-drop-down .mat-form-field {
+        width: 100%;
+    }
+
+    /deep/tickets-filter-companies-drop-down .mat-form-field {
+        width: 100%;
+    }
+}
+
+/deep/ .qt-page-list__header-title {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0;
+    color: $gray-900;
+}
+.file-info-avatar {
+    border-bottom: 1px solid $gray-200;
+}
+.info-file-view {
+    padding: 10px 0px;
+    border: 1px solid $gray-200;
+    border-radius: 6px;
+    height: 36px;
+}
+.file-info-field-header {
+    min-width: 80px;
+}
+.file-info-name {
+    text-align: left;
+}
+.file-info-description {
+    border-top: 1px solid $gray-200;
+    border-bottom: 1px solid $gray-200;
+}
+.error-container {
+    position: relative;
+    width: 100%;
+    justify-content: space-between;
+    input {
+        padding: 8px 8px 8px 0px;
+    }
+}
+.info-file-label-edit {
+    width: 28px;
+    height: 28px;
+}
+.item-file-image {
+    width: 100%;
+    img {
+        max-height: 120px;
+        max-width: 100%;
+    }
+}

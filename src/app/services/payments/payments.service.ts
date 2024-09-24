@@ -29,6 +29,14 @@ export class PaymentsService {
   public refundPayments(data) {
     return this.http.put(`${this.apiUrl}payments/refund`, data);
   }
+  public resendPaymentReceipt(paymentId) {
+    return this.http.post(`${this.apiUrl}payments/resend/${paymentId}`, {}).pipe(
+      tap(data => {
+        this.toastrService.success("The payment receipt has been successfully sent");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
   public getPayments(data) {
     return this.http.post(`${this.apiUrl}payments`, data).pipe(map((res: any) => res.map(item => new Payment(item))));
   }

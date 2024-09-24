@@ -36,6 +36,7 @@ import { QuoteAsideAddChangeAddressComponent } from './quote-aside-add/quote-asi
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 import { NumberModule } from 'src/app/directives/number/number.module';
 import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
+import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 
 
 
@@ -80,7 +81,8 @@ import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
         InvoiceChangeAddressModule,
         CompanyDropDownModule,
         NumberModule,
-        MatErrorModule
+        MatErrorModule,
+        TextAreaModule
     ],
 
 

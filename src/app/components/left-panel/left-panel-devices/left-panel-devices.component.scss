@@ -45,24 +45,6 @@ li.child-menu {
     padding-left: 15px;
 }
 
-.expand-search {
-    background-image: url('/assets/img/icons/expand1.svg');
-    background-repeat: no-repeat;
-    margin-top:-17px;
-    width:16px;
-    height:16px;
-    margin-left: auto;
-}
-
-.collapse-search {
-    background-image: url('/assets/img/icons/collapse1.svg');
-    background-repeat: no-repeat;
-    margin-top:-17px;
-    width:16px;
-    height:16px;
-    margin-left: auto;
-}
-
 .favr {
   height: 14px;
   margin-right: 4px;
@@ -85,14 +67,14 @@ li.child-menu {
     height: 24px;
     background-position: center;
     opacity: 0.5;
-    background-image: url(/assets/img/icons-left-sidebar/menu-company.svg);
+    background-image: url(/assets/img/icons/companies.svg);
     background-repeat: no-repeat;
     display: inline-block;
 }
 
 .devices-ping-remove{
     display: flex;
-    background-image: url(/assets/img/icons/remove.svg);
+    background-image: url(/assets/img/icons/delete.svg);
     background-repeat: no-repeat;
     justify-content: center;
     align-items: center;

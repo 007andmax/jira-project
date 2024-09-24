@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { forkJoin, Subscription } from 'rxjs';
@@ -18,6 +18,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { DeviceTagsStateService } from 'src/app/states/device-tags/device-tags-state.service';
 import { fadeInAnimation } from 'src/app/animations';
+import { CompanyDevicesHeaderComponent } from './company-devices-header/company-devices-header.component';
 
 @Component({
   selector: 'app-company-devices',
@@ -34,7 +35,9 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
   filter: CompanyDeviceFilter = new CompanyDeviceFilter();
   showPreloader: boolean = true;
   companyId: string;
+  toggleFilter: boolean = false;
   sub: Subscription = new Subscription();
+  @ViewChild('header') header: CompanyDevicesHeaderComponent;
   constructor(private devicesStateService: DevicesStateService,
     private devicesService: DevicesService,
     private confirmStateService: ConfirmStateService,
@@ -51,7 +54,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.leftPanelStateService.changeStateWithoutNavigate('company-devices');
-    if (this.deviceTagsStateService.getTags().length == 0) this.deviceTagsStateService.onInitGetTags();
+    if (this.deviceTagsStateService.getTags().length == 0 && !this.customerPortalStateService.isCustomerPortal) this.deviceTagsStateService.onInitGetTags();
     let id = this.activateRoute.snapshot.params['id'];
     if (id) {
       if (this.customerPortalStateService.isCustomerPortal) this.websocketService.onInitConnectCustomerUser("company-devices", id);
@@ -71,6 +74,12 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
 
     });
     this.sub.add(subscription);
+    let geLefttFilter = this.devicesStateService.onFilter.subscribe((data) => {
+      document.body.querySelector(".main-container").scrollTo(0, 0);
+      this.filter.setFilter(JSON.parse(JSON.stringify(data)));
+      this.cd.detectChanges();
+    });
+    this.sub.add(geLefttFilter);
     let changeDevicesArray = this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
       if (newChange.action === 'CUSTOM_DEVICE_SAVED') {
         this.devices.push(new DeviceCompany({ ...newChange.data, isCustom: true, id: newChange.data.deviceId }, newChange.data.companyId));
@@ -200,6 +209,9 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       .subscribe(res => {
 
       });
+  }
+  onCloseFilters() {
+    this.header.setToggleFilter(false);
   }
   getDevice(id) {
     this.devicesService.getCompanyDevices(id).subscribe((data: any) => {

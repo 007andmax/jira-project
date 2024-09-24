@@ -26,11 +26,13 @@
         content: " ";
         width: 16px;
         height: 16px;
-        background-image: url("/assets/img/icons/search.svg");
+        mask-image: url("/assets/img/icons/search.svg");
         left: 8px;
         top: calc(50% - 7px);
-        background-size: contain;
-        background-repeat: no-repeat;
+        mask-position: center;
+        mask-repeat: no-repeat;
+        mask-size: contain;
+        background-color: $gray-400;
         position: absolute;
     }
     input {

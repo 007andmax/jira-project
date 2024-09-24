@@ -5,7 +5,7 @@
             class="qt-button --md --gray qt-jc-c pointer qt-ml-auto button-gl-number__add qt-mb-12"
             (click)="openModelManufacture()"
         >
-            <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+            <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8 qt-button-icon"></span>
             Add Manufacture
         </a>
         <app-device-setting-manufactures-add
@@ -34,7 +34,7 @@
                     *ngIf="!showPreloader"
                 >
                     <div
-                        class="text-center"
+                        class="text-center qt-df qt-jc-c qt-mb-24 qt-mt-24"
                         *ngIf="manufactures.length == 0"
                     >
                         No manufacture to show
@@ -72,7 +72,7 @@
                                 ></app-dynamic-tooltip>
                                 <div
                                     data-tooltip="Remove"
-                                    class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                                    class="icon__delete qt-sz-20 qt-bg-contain pointer"
                                     (click)="removeConfirmManufacturer(manufacture)"
                                     (mouseenter)="removeTooltip.show($event.target)"
                                     (mouseleave)="removeTooltip.hide()"
@@ -87,6 +87,7 @@
     </div>
     <app-device-setting-models
         #models
+        [isManufacturePreloader]="showPreloader"
         class="qt-w100 qt-ml-32 qt-mr-32 qt-pos-rel"
     ></app-device-setting-models>
 </div>

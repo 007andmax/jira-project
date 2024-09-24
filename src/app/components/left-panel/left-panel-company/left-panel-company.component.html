@@ -158,8 +158,20 @@
             Contracts
         </li>
     </a>
-
-
+    <a
+        class="clear-link-style"
+        href
+        [link]="getLinkSection('file-manager')"
+        target="_blank"
+        appRightClickBlank
+    >
+        <li
+            [ngClass]="{'--active':activePage === 'company-file-manager'}"
+            (click)="goToCompanySection('file-manager')"
+        >
+            File Manager
+        </li>
+    </a>
     <a
         class="clear-link-style"
         href
@@ -186,8 +198,6 @@
             </div>
         </li>
     </a>
-
-
     <ul
         class="categories"
         *ngIf="toogleCategoriesDocuments"
@@ -204,8 +214,8 @@
             >
                 <i
                     class="qt-sz-16 qt-bg-contain qt-mr-8"
-                    [ngClass]="{'icon__folder-active':selectedCategoryDocument === assignedDocumentCategory.id,
-                'icon__folder':selectedCategoryDocument !== assignedDocumentCategory.id}"
+                    [ngClass]="{'qt-icon icon__folder qt-icon__white':selectedCategoryDocument === assignedDocumentCategory.id,
+                'qt-icon icon__folder':selectedCategoryDocument !== assignedDocumentCategory.id}"
                 ></i>
                 {{assignedDocumentCategory.name}}
             </li>

@@ -40,6 +40,7 @@ import { EmailTemplateRealTimeService } from 'src/app/states/email-template/emai
 import { CustomerRoleRealTimeService } from 'src/app/states/customer-role/customer-role-real-time.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { DeviceTagsRealTimeService } from 'src/app/states/device-tags/device-tags-real-time.service';
+import { FileManagementRealTimeService } from 'src/app/states/file-management/file-management-real-time.service';
 
 
 /**
@@ -100,7 +101,8 @@ export class WebsocketService {
     private emailTemplateRealTimeService: EmailTemplateRealTimeService,
     private customerRoleRealTimeService: CustomerRoleRealTimeService,
     private customerPortalStateService: CustomerPortalStateService,
-    private deviceTagsRealTimeService: DeviceTagsRealTimeService
+    private deviceTagsRealTimeService: DeviceTagsRealTimeService,
+    private fileManagementRealTimeService: FileManagementRealTimeService
 
   ) {
   }
@@ -169,6 +171,7 @@ export class WebsocketService {
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToPayments();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToSubmittedService();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToSubmittedServiceAgreement();
+      if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToSubmittedFileManagement();
       that.subsribeToSubmittedOneTimeConnection();
       that.subsribeToLockScreen();
       that.subsribeToTicketPriority();
@@ -647,6 +650,15 @@ export class WebsocketService {
       this.stompClient.subscribe(`/user/watch/serviceAgreement`, (message) => {
         var newChange = JSON.parse(message.body);
         this.contractsRealTimeService.handleRealTimeChanges(newChange);
+      });
+
+    }, 3000);
+  }
+  public subsribeToSubmittedFileManagement() {
+    setTimeout(() => {
+      this.stompClient.subscribe(`/user/watch/fileManagement`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.fileManagementRealTimeService.handleRealTimeChanges(newChange);
       });
 
     }, 3000);

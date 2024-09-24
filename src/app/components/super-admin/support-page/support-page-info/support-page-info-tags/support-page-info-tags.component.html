@@ -74,7 +74,7 @@
                         </div>
                     </div>
                     <i
-                        class="icon__save-support-tag qt-sz-16 pointer"
+                        class="qt-icon icon____check qt-sz-16 pointer"
                         *ngIf="item.isEditMode()"
                         (click)="saveEditTooltip.hide();editTag(item.id,$event);item.setEditMode(false)"
                         (mouseenter)="saveEditTooltip.show($event.target)"
@@ -96,14 +96,14 @@
                         #deleteTooltip
                     ></app-dynamic-tooltip>
                     <i
-                        class="icon__edit qt-sz-20 qt-bg-contain qt-mr-12 pointer"
+                        class="qt-icon icon__edit qt-sz-20 qt-bg-contain qt-mr-12 pointer"
                         (click)="editTooltip.hide();item.setEditMode(true)"
                         *ngIf="!item.isEditMode()"
                         (mouseenter)="editTooltip.show($event.target)"
                         (mouseleave)="editTooltip.hide()"
                     ></i>
                     <i
-                        class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                        class="qt-icon icon__delete qt-sz-20 qt-bg-contain pointer"
                         (click)="removeTag(item)"
                         *ngIf="!item.isEditMode()"
                         (mouseenter)="deleteTooltip.show($event.target)"
@@ -116,7 +116,7 @@
             class="crate-tag pointer"
             (click)="addTag()"
         >
-            <span class="icon__add-grey qt-sz-12 qt-bg-contain qt-dib qt-mr-6"></span>
+            <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8 qt-sz-12 qt-dib qt-mr-6"></span>
             <span [textContent]="(newTag.length > 0) ? ('Create a tag ' + '“' + newTag + '”') : 'Create a tag'"></span>
         </div>
     </div>

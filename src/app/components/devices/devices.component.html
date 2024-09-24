@@ -146,7 +146,7 @@
                                     *ngIf="!isOfflineDeviceSelected"
                                     (click)="sendCommandHeader('r')"
                                 >
-                                    <div class="icon__reset qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                    <div class="qt-icon icon__reset qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                     Restart
                                 </li>
                                 <li
@@ -155,14 +155,14 @@
                                     *ngIf="!isOfflineDeviceSelected"
                                     (click)="sendCommandHeader('s')"
                                 >
-                                    <div class="icon__shutdown qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                    <div class="qt-icon icon__shutdown qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                     Shutdown
                                 </li>
                                 <li
                                     class="pointer"
                                     (click)="sendCommandHeader('ar')"
                                 >
-                                    <div class="icon__remove pointer qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                    <div class="qt-icon icon__delete pointer qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                     Remove Agent
                                 </li>
                             </ul>
@@ -251,7 +251,7 @@
                             <td class="company-devices-table__device-master-agent">
                                 <div
                                     *ngIf="asset.IsMasterAgent"
-                                    class="icon__master-agent qt-bg-contain qt-sz-16 qt-mr-8"
+                                    class="qt-icon icon__agent qt-sz-16 qt-mr-8"
                                 ></div>
                             </td>
                             <td class="company-devices-table__device-type">
@@ -264,7 +264,7 @@
             icon__computer:
             asset.iconName === 'Workstation' || !asset.iconName,
             icon__tablet: asset.iconName === 'Networking Hardware',
-            icon__printer: asset.iconName === 'Printer',
+            icon__print: asset.iconName === 'Printer',
             icon__server: asset.iconName === 'Server',
             icon__documents: asset.iconName !== 'Workstation' || asset.iconName !== 'Networking Hardware' || asset.iconName !== 'Printer' || asset.iconName !== 'Server',
             '--ofline': !asset.online
@@ -291,7 +291,7 @@
                         hardwar.Name === 'Workstation' || !hardwar.Name,
                       icon__tablet:
                         hardwar.Name === 'Networking Hardware',
-                      icon__printer: hardwar.Name === 'Printer',
+                      icon__print: hardwar.Name === 'Printer',
                       icon__server: hardwar.Name === 'Server',
                       icon__documents: hardwar.Name !== 'Workstation' || hardwar.Name !== 'Networking Hardware' || hardwar.Name !== 'Printer' || hardwar.Name !== 'Server'
                     }"
@@ -399,7 +399,7 @@
                                         class="qt-df qt-ai-c qt-pointer"
                                         (click)="openAside('NETWORK',asset)"
                                     >
-                                        <div class="icon__network qt-ic-c qt-mr-6 qt-sz-16"></div>
+                                        <div class="qt-icon icon__network qt-icon__blue-light-600 qt-ic-c qt-mr-6 qt-sz-16"></div>
                                         <div>Network</div>
                                     </div>
                                 </div>
@@ -414,14 +414,14 @@
                                         class="qt-df qt-ai-c qt-mr-20 qt-pointer"
                                         (click)="openAside('SOFTWARE',asset)"
                                     >
-                                        <div class="icon__software qt-ic-c qt-mr-6 qt-sz-16"></div>
+                                        <div class="qt-icon icon__software qt-icon__blue-light-600 qt-ic-c qt-mr-6 qt-sz-16"></div>
                                         <div>Software</div>
                                     </div>
                                     <div
                                         class="qt-df qt-ai-c qt-pointer"
                                         (click)="openAside('UPDATES',asset)"
                                     >
-                                        <div class="icon__updates qt-ic-c qt-mr-6 qt-sz-16"></div>
+                                        <div class="qt-icon icon__subscription qt-icon__blue-light-600 qt-ic-c qt-mr-6 qt-sz-16"></div>
                                         <div>Updates</div>
                                     </div>
                                 </div>
@@ -459,7 +459,7 @@
                                     #tipDeviceDetailTooltip
                                 ></app-dynamic-tooltip>
                                 <div
-                                    class="qt-ic-c icon__go-to qt-pointer qt-sz-24 qt-bgsz-16"
+                                    class="qt-ic-c qt-icon icon__external-link qt-pointer qt-sz-24"
                                     *ngIf="asset.ID"
                                     (mouseenter)="tipDeviceDetailTooltip.show($event.target)"
                                     (mouseleave)="tipDeviceDetailTooltip.hide()"
@@ -483,7 +483,7 @@
                                         [hidden]="!(asset.RemoteOnline)"
                                         class="
               qt-ic-c
-              icon__quick-connect
+              qt-icon icon__remote-access
               qt-pointer qt-sz-24 qt-bg-contain
             "
                                         placement="top"
@@ -524,7 +524,7 @@
                                     container="body"
                                 >
                                     <div
-                                        class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"
+                                        class="qt-ic-c qt-icon icon__more qt-pointer qt-sz-16 qt-bg-contain"
                                         ngbDropdownToggle
                                     >
                                     </div>
@@ -538,7 +538,7 @@
                                             (click)="sendCommand('ura', asset.ID)"
                                             ngbDropdownItem
                                         >
-                                            <div class="icon__uninstall qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                            <div class="qt-icon icon__uninstall qt-sz-16 qt-mr-8"></div>
                                             Uninstall Remote Agent
                                         </li>
                                         <li
@@ -546,7 +546,7 @@
                                             (click)="sendCommand('u',asset.ID)"
                                             ngbDropdownItem
                                         >
-                                            <div class="icon__update-device qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                            <div class="update-label-yellow-device qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                             Update Agent
                                         </li>
                                         <li
@@ -554,7 +554,7 @@
                                             (click)="sendCommand('d',asset.ID)"
                                             ngbDropdownItem
                                         >
-                                            <div class="icon__uninstall-agent qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                            <div class="icon__delete qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                             Uninstall Agent
                                         </li>
                                         <li
@@ -563,7 +563,7 @@
                                             (click)="sendCommand('ira', asset.ID)"
                                             ngbDropdownItem
                                         >
-                                            <div class="icon__install qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                            <div class="qt-icon icon__download qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                             Install Remote Agent
                                         </li>
                                     </ul>
@@ -621,7 +621,7 @@
                         [ngClass]="{ icon__computer:
               assetData.iconName === 'Workstation' || !assetData.iconName,
             icon__tablet: assetData.iconName === 'Networking Hardware',
-            icon__printer: assetData.iconName === 'Printer',
+            icon__print: assetData.iconName === 'Printer',
             icon__server: assetData.iconName === 'Server',
             icon__documents: assetData.iconName !== 'Workstation' || assetData.iconName !== 'Networking Hardware' || assetData.iconName !== 'Printer' || assetData.iconName !== 'Server',
             '--offline': !assetData.online,
@@ -632,11 +632,11 @@
             <div class="company-device-aside__header qt-df qt-ai-c qt-jc-sb">
                 <div class="qt-df qt-ai-c">
                     <div
-                        class="icon qt-sz-24 qt-mr-12"
+                        class="icon qt-sz-24 qt-mr-12 qt-icon"
                         [ngClass]="{ icon__computer:
             assetData.iconName === 'Workstation' || !assetData.iconName,
           icon__tablet: assetData.iconName === 'Networking Hardware',
-          icon__printer: assetData.iconName === 'Printer',
+          icon__print: assetData.iconName === 'Printer',
           icon__server: assetData.iconName === 'Server',
           icon__documents: assetData.iconName !== 'Workstation' || assetData.iconName !== 'Networking Hardware' || assetData.iconName !== 'Printer' || assetData.iconName !== 'Server',
           '--offline': !assetData.online,
@@ -667,7 +667,7 @@
                                 ngbDropdownItem
                                 (click)="gotiDetailDevice(assetData.Guid)"
                             >
-                                <div class="qt-ic-c icon__go-to qt-pointer qt-sz-16 qt-mr-8"></div>
+                                <div class="qt-ic-c qt-icon icon__external-link qt-pointer qt-sz-24 qt-mr-8"></div>
                                 Device Detail
                             </li>
                             <li
@@ -675,7 +675,7 @@
                                 ngbDropdownItem
                                 (click)="sendCommand('r', assetData.ID)"
                             >
-                                <div class="icon__reset qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                <div class="qt-icon icon__reset qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                 Restart
                             </li>
                             <li
@@ -683,29 +683,31 @@
                                 ngbDropdownItem
                                 (click)="sendCommand('s', assetData.ID)"
                             >
-                                <div class="icon__shutdown qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                <div class="qt-icon icon__shutdown qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                 Shutdown
                             </li>
                             <li
                                 class="pointer"
                                 ngbDropdownItem
                             >
-                                <div class="icon__master-agent qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                <div class="qt-icon icon__agent qt-sz-16 qt-mr-8"></div>
                                 Set as Master Agent
                             </li>
                             <li
                                 class="pointer"
                                 (click)="sendCommand('ar', assetData.ID)"
                             >
-                                <div class="icon__remove pointer qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                <div class="qt-icon icon__delete pointer qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                 Remove
                             </li>
                         </ul>
                     </div>
                     <div
-                        class="qt-pointer company-device-aside__arrow-right-icon icon__arrow-right"
+                        class="qt-pointer company-device-aside__arrow-right-icon qt-df qt-ai-c qt-jc-c"
                         (click)="menuclose()"
-                    ></div>
+                    >
+                      <div class="qt-icon icon__arrow-right qt-sz-24"></div>
+                    </div>
                 </div>
             </div>
             <div class="company-device-aside__subheader">
@@ -725,10 +727,12 @@
                     (click)="tab = 'SOFTWARE'"
                 ></div>
                 <div
-                    class="company-device-aside__subheader-item subheader-item-updates"
+                    class="ompany-device-aside__subheader-item qt-df qt-ai-c qt-jc-c"
                     [ngClass]="{'--active':tab === 'UPDATES'}"
                     (click)="tab = 'UPDATES'"
-                ></div>
+                >
+                  <div class="qt-icon icon__update qt-sz-16"></div>
+                </div>
             </div>
             <div class="company-device-aside__body">
                 <div
@@ -1140,7 +1144,7 @@
             </div>
             <div>
                 <div
-                    class="qt-aside__close-modal icon__close"
+                    class="qt-aside__close-modal qt-icon icon__close"
                     (click)="deviceclosed()"
                 ></div>
             </div>
@@ -1434,7 +1438,7 @@
                 </div>
                 <div>
                     <div
-                        class="qt-aside__close-modal icon__close"
+                        class="qt-aside__close-modal qt-icon icon__close"
                         (click)="advanceSearchClosed()"
                     ></div>
                 </div>
@@ -2089,7 +2093,7 @@
             </div>
             <div>
                 <div
-                    class="qt-aside__close-modal icon__close"
+                    class="qt-aside__close-modal qt-icon icon__close"
                     (click)="closed()"
                 ></div>
             </div>

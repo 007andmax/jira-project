@@ -47,7 +47,7 @@
                 <div class="qt-df qt-ai-c">
                     <span class="address-h qt-fw-600">BILLING ADDRESS</span>
                     <i
-                        class="icn-16 icon__edit-gray qt-ml-8 pointer"
+                        class="icn-16 qt-icon icon__edit qt-icon__gray-400 qt-ml-8 pointer"
                         ngbDropdownToggle
                         id="dropdownForm2"
                         placement="top"
@@ -99,7 +99,7 @@
                 <div class="qt-fs-10 qt-fw-600  qt-df qt-ai-c qt-mb-12 qt-lh-154">
                     <span class="address-h">SHIPPING ADDRESS</span>
                     <i
-                        class="icn-16 icon__edit-gray qt-ml-8 pointer"
+                        class="icn-16 qt-icon icon__edit qt-icon__gray-400 qt-ml-8 pointer"
                         ngbDropdownToggle
                         placement="top"
                         ngbTooltip="Change Address"
@@ -290,9 +290,8 @@
             class="terms-n-conditions__textarea qt-input-block__textarea"
             placeholder="Enter the terms and conditions of your business to be displayed in your transaction"
             appTextArea
-            maxlength="250"
-            cols="30"
-            rows="1"
+            maxlength="400"
+            [maxHeight]="200"
         ></textarea>
     </div>
 </div>

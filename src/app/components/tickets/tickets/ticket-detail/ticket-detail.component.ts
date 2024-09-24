@@ -35,6 +35,13 @@ import { DevicesService } from 'src/app/services/devices/devices.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { TicketDetailMessageComponent } from './ticket-detail-message/ticket-detail-message.component';
 import { TicketDetailChangeStatusComponent } from './ticket-detail-change-status/ticket-detail-change-status.component';
+import { CompanyUsersDropDownComponent } from '../ticket-add-aside/company-users-drop-down/company-users-drop-down.component';
+import { TicketDetailChangeCompanyComponent } from './ticket-detail-change-company/ticket-detail-change-company.component';
+import { TicketDetailTicketsComponent } from './ticket-detail-tickets/ticket-detail-tickets.component';
+import { TicketDetailContactDetailsComponent } from './ticket-detail-contact-details/ticket-detail-contact-details.component';
+import { TicketDetailPasswordsDetailsComponent } from './ticket-detail-passwords/ticket-detail-passwords-details/ticket-detail-passwords-details.component';
+import { TicketDetailDocumentsDetailsComponent } from './ticket-detail-documents/ticket-detail-documents-details/ticket-detail-documents-details.component';
+import { TicketDetailTicketsDetailsComponent } from './ticket-detail-tickets/ticket-detail-tickets-details/ticket-detail-tickets-details.component';
 
 @Component({
   selector: 'ticket-detail',
@@ -49,6 +56,13 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   @ViewChild('ticketTasks') ticketTasks: TicketDetailTasksComponent;
   @ViewChild('detailHeader') detailHeader: TicketDetailHeaderComponent;
   @ViewChild('changeStatus') changeStatus: TicketDetailChangeStatusComponent;
+  @ViewChild('userDP') userDP: CompanyUsersDropDownComponent;
+  @ViewChild('changeCompany') changeCompany: TicketDetailChangeCompanyComponent;
+  @ViewChild('ticketsDetail') ticketsDetail: TicketDetailTicketsComponent;
+  @ViewChild('contactDetail') contactDetail: TicketDetailContactDetailsComponent;
+  @ViewChild('passwordRecordDetail') passwordRecordDetail: TicketDetailPasswordsDetailsComponent;
+  @ViewChild('documentsRecordDetail') documentsRecordDetail: TicketDetailDocumentsDetailsComponent;
+  @ViewChild('ticketsDetailList') ticketsDetailList: TicketDetailTicketsDetailsComponent;
   isInit: boolean = false;
   ticketProfile: TicketProfile = new TicketProfile();
   showFormUpdate: boolean = false;
@@ -124,13 +138,37 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       }
     });
     this.sub.add(getConfirm);
+    let onGetUsers = this.usersStateService.onGetUsers.subscribe(data => {
+      if (this.ticketProfile.createdUser) {
+        let user = this.usersStateService.getAllUsers().find(item => item.id === this.ticketProfile.createdUser.id);
+        if (user) this.ticketProfile.setSelectedCustomerCompany(user.customerCompaniesInfo.find(item => item.companyId == this.ticketProfile.companyId));
+      }
+    })
+    this.sub.add(onGetUsers);
     let getOnUpdateTicket = this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
       let ticket = new Ticket(data);
+      let isChangeCompany = data.companyId != this.ticketProfile.companyId;
+      let isChangeUser = data.createdUser.id != this.ticketProfile.createdUser.id;
       if (this.ticketProfile.id === ticket.id) {
         this.ticketProfile.update(data);
         this.elRef.nativeElement.querySelector("#ticket-note").innerHTML = this.ticketProfile.note;
         this.updateListAssignedUser();
         this.updateLisUpdateUser();
+        this.changeCompany.selectItemWithOutChanges(this.companiesStateService.getCompanies().find(item => item.id == this.ticketProfile.companyId));
+        if (isChangeCompany && this.ticketProfile.createdUser && !this.customerPortalStateService.isCustomerPortal) this.ticketStateService.getPasswordsDocuments(this.ticketProfile.createdUser.id);
+        if (isChangeUser && !this.customerPortalStateService.isCustomerPortal) this.ticketStateService.getDevicesByCompany(this.ticketProfile.company.id);
+        if (isChangeCompany) {
+          if (this.ticketsDetail) this.ticketsDetail.initDefaultTicketsList();
+          if (this.contactDetail) this.contactDetail.resetCompany();
+          if (this.passwordRecordDetail) this.passwordRecordDetail.initDefaultPasswordRecordList();
+          if (this.documentsRecordDetail) this.documentsRecordDetail.initDefaultPasswordRecordList();
+          if (this.ticketsDetailList) this.ticketsDetailList.initDefaultTicketsList();
+          this.ticketStateService.getServicesList(this.ticketProfile);
+          if (this.customerPortalStateService.isCustomerPortal) this.websocketService.onInitConnectCustomerUser("ticket-detail", this.ticketProfile.company.id);
+          let user = this.usersStateService.getAllUsers().find(item => item.id === this.ticketProfile.createdUser.id);
+          if (user) this.ticketProfile.setSelectedCustomerCompany(user.customerCompaniesInfo.find(item => item.companyId == this.ticketProfile.companyId));
+        }
+
       }
       this.cd.detectChanges();
     })
@@ -201,6 +239,13 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       .subscribe(res => {
 
       });
+  }
+  onSelectUser(selectedUser, customerCompany) {
+    this.ticketsService.changeSubjectNoteTicket(this.ticketProfile.id, this.ticketProfile.subject, this.ticketProfile.note, customerCompany.companyId == this.ticketProfile.companyId ? null : customerCompany.companyId, selectedUser.id).subscribe(data => {
+    })
+  }
+  isDisabledTicketCreator() {
+    return this.ticketProfile.updates.some(item => item.type == "PRODUCT" || item.type == "SERVICE");
   }
   setAgent(data: TicketChangeField) {
     let device = this.ticketStateService.getDevices().find(item => item.agentId === data.value || item.id === data.value);
@@ -282,6 +327,8 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       if (this.ticketMessage) this.ticketMessage.reset();
       this.ticketProfileUpdates.resetShowLoadMoreUpdates();
       if (this.ticketTasks) this.ticketTasks.getTicketTasks(id);
+      let user = this.usersStateService.getAllUsers().find(item => item.id === this.ticketProfile.createdUser.id);
+      if (user) this.ticketProfile.setSelectedCustomerCompany(user.customerCompaniesInfo.find(item => item.companyId == this.ticketProfile.companyId));
       this.onInitRealTimes();
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();

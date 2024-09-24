@@ -43,7 +43,7 @@
 
          &:checked~.assigned-ticket-user__checkmark {
              &:before {
-                 background-image: url("/assets/img/icons/selected.svg");
+                 background-image: url("/assets/img/icons/status-green.svg");
                  border: none;
              }
          }

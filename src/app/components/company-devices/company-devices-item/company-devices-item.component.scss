@@ -6,9 +6,33 @@
 .company-devices-table__menu-body {
     position: relative;
 }
+
+.qt-table-modern__row {
+  margin: 0;
+  border: unset;
+
+  &.--selected > div,
+  &:hover > div {
+    background-color: $blue-dark-25;
+  }
+
+  & > div {
+    border-bottom: 1px solid $gray-200;
+    &:first-child {
+      padding-left: 25px;
+      border-left: 1px solid $gray-200;
+      border-radius: 0;
+    }
+    &:last-child {
+      padding-right: 25px;
+      border-right: 1px solid $gray-200;
+      border-radius: 0;
+    }
+  }
+}
+
 .company-device-hover:hover {
   > div {
-    background-color: $gray-25;
     .company-devices-table__ip-address-text,
     .company-devices-table__ip-windows-text {
       opacity: 0;

@@ -7,12 +7,6 @@
   min-width: fit-content;
   min-width: -moz-fit-content;
 
-  &.page-list-ticket {
-    .icon__menu-white {
-      display: none;
-    }
-  }
-
   &__header {
     background-color: $background;
     margin: 0 auto;
@@ -121,7 +115,11 @@
       content: '';
       width: 20px;
       height: 20px;
-      background: url('/assets/img/icons/search.svg') no-repeat center / contain;
+      mask-image: url('/assets/img/icons/search.svg');
+      mask-position: center;
+      mask-repeat: no-repeat;
+      mask-size: contain;
+      background-color: $gray-400;
       left: 10px;
       top: calc(50% - 10px);
       z-index: 1;
@@ -166,7 +164,7 @@
   }
 }
 
-@media (min-width: 1920px) {
+@include media-breakpoint-up($lg) {
   .user-aside-detail-page__aside {
     .qt-page-list__body {
       width: 100%;

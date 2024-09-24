@@ -10,7 +10,7 @@
     </div>
     <div class="qt-df qt-ai-c qt-pos-rel ticket-detail-page__management-block">
         <div class="qt-button qt-button-timer --gray qt-ml-12">
-            <span class="icon__timer qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon qt-fs-0"></span>
+            <span class="qt-icon icon__timer qt-sz-16 qt-dib qt-mr-8 qt-button-icon qt-fs-0"></span>
             {{dateTxt}}
         </div>
         <div
@@ -25,7 +25,7 @@
             [ngClass]="{'--disabled':!checkClose(), '--loading':isUpdateAndClose}"
         >
             <span
-                class="icon__check--white qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"
+                class="qt-icon icon__check qt-icon__white qt-sz-16 qt-dib qt-mr-8 qt-button-icon"
                 *ngIf="!isUpdateAndClose"
             ></span>
             <span>Close Ticket</span>
@@ -49,7 +49,7 @@
                     class="qt-button qt-button--with-icon --gray --md pointer qt-mr-8"
                     (click)="addUpdate('NOTE')"
                 >
-                    <div class="icon__chat qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
+                    <div class="qt-icon icon__messages qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
                     Chat
                 </div>
                 <div
@@ -57,7 +57,7 @@
                     (click)="addUpdate('PRODUCT')"
                     *ngIf="!customerPortalStateService.isCustomerPortal"
                 >
-                    <div class="icon__products qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
+                    <div class="qt-icon icon__products qt-sz-16 qt-button-icon qt-mr-6"></div>
                     Products
                 </div>
                 <div
@@ -65,7 +65,7 @@
                     (click)="addUpdate('SERVICE')"
                     *ngIf="!customerPortalStateService.isCustomerPortal"
                 >
-                    <div class="icon__service qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
+                    <div class="qt-icon icon__service qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
                     Service
                 </div>
                 <div
@@ -73,16 +73,9 @@
                     (click)="addUpdate('QUICK_SUPPORT')"
                     *ngIf="!customerPortalStateService.isCustomerPortal"
                 >
-                    <div class="icon__quick-support-strip qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
+                    <div class="qt-icon icon__zap-fast qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
                     Quick Support
                 </div>
-                <!-- <div
-                    class="qt-button qt-button--with-icon --gray --md pointer qt-mr-8"
-                    *ngIf="!customerPortalStateService.isCustomerPortal"
-                >
-                    <div class="icon__merge qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
-                    Merge Ticket
-                </div> -->
             </div>
         </div>
         <div
@@ -94,7 +87,7 @@
                 class="qt-button --square-md --gray pointer qt-ml-8"
                 ngbDropdownToggle
             >
-                <div class="icon__more qt-sz-16 qt-bg-contain"></div>
+                <div class="qt-icon icon__more qt-sz-16 qt-bg-contain"></div>
             </div>
             <div
                 ngbDropdownMenu
@@ -114,7 +107,7 @@
                             class="dropdown-item"
                             href="javascript:void(0)"
                         >
-                            <i class="qt-sz-20 qt-bg-contain icon__claim-edit-ticket"></i>
+                            <i class="qt-sz-20 qt-icon icon__claim-edit-ticket"></i>
                             Claim Ticket
                         </a>
                     </li>
@@ -128,7 +121,7 @@
                             href="javascript:void(0)"
                             *ngIf="currentUser && currentUser.isOwner"
                         >
-                            <i class="qt-sz-20 qt-bg-contain icon__terminate"></i>
+                            <i class="qt-sz-20 qt-icon icon__block"></i>
                             Mark as Spam
                         </a>
                         <a
@@ -137,7 +130,7 @@
                             href="javascript:void(0)"
                             *ngIf="currentUser && !currentUser.isOwner"
                         >
-                            <i class="qt-sz-20 qt-bg-contain icon__spam"></i>
+                            <i class="qt-sz-20 qt-icon icon__spam"></i>
                             Report as Spam
                         </a>
                     </li>
@@ -151,7 +144,7 @@
                             class="dropdown-item trash-user"
                             href="javascript:void(0)"
                         >
-                            <i class="qt-sz-20 qt-bg-contain icon__remove"></i>
+                            <i class="qt-sz-20 qt-bg-contain qt-icon icon__delete"></i>
                             Move to Trash
                         </a>
                     </li>
@@ -162,7 +155,7 @@
                 class="qt-button --square-md --gray pointer"
                 (click)="toggleRigthPanel()"
             >
-                <div class="icon__panel-open qt-sz-16 qt-bg-contain"></div>
+                <div class="qt-icon icon__panel-open qt-sz-16"></div>
             </div>
         </div>
     </div>

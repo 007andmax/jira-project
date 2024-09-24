@@ -2,7 +2,7 @@
     class="tab-pane-input__row company-info-block qt-ml-32 qt-mr-32 qt-mt-16"
     [hidden]="loading"
 >
-    <div class="icon__company-info qt-sz-20 qt-ic-c qt-mr-8 qt-fs-0"></div>
+    <div class="qt-icon icon__info qt-sz-20 qt-ic-c qt-mr-8 qt-fs-0"></div>
     <span class="qt-f-1">
         By hovering on each contract name below, you can see decription of contract
     </span>
@@ -89,7 +89,7 @@
                         <div
                             placement="top"
                             ngbTooltip="Edit"
-                            class="icon__edit-gray-dark qt-sz-20 qt-bg-contain qt-mr-16 pointer"
+                            class="qt-icon icon__edit qt-icon__gray-400 qt-sz-20 qt-bg-contain qt-mr-16 pointer"
                             (click)="
                   editContract(
                     'commissionRateSetOldSalesBlockTime',
@@ -102,7 +102,7 @@
                             placement="top"
                             ngbTooltip="Remove"
                             *ngIf="agreementsCommissions && agreementsCommissions.blockTimeContractCommission"
-                            class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                            class="qt-icon icon__delete qt-sz-20 qt-bg-contain pointer"
                             (click)="
                   confirmDelete(
                     'commissionRateSetOldSalesBlockTime',
@@ -175,7 +175,7 @@
                         <div
                             placement="top"
                             ngbTooltip="Edit"
-                            class="icon__edit-gray-dark qt-sz-20 qt-bg-contain qt-mr-16 pointer"
+                            class="qt-icon icon__edit qt-icon__gray-400 qt-sz-20 qt-bg-contain qt-mr-16 pointer"
                             (click)="
                   editContract(
                     'commissionRateSetOldSalesBlockTimeExceeding',
@@ -188,7 +188,7 @@
                             placement="top"
                             ngbTooltip="Remove"
                             *ngIf="agreementsCommissions && agreementsCommissions.blockTimeContractCommissionExceeding"
-                            class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                            class="qt-icon icon__delete qt-sz-20 qt-bg-contain pointer"
                             (click)="
                 confirmDelete(
                     'commissionRateSetOldSalesBlockTimeExceeding',
@@ -279,7 +279,7 @@
                         <div
                             placement="top"
                             ngbTooltip="Edit"
-                            class="icon__edit-gray-dark qt-sz-20 qt-bg-contain qt-mr-16 pointer"
+                            class="qt-icon icon__edit qt-icon__gray-400 qt-sz-20 qt-bg-contain qt-mr-16 pointer"
                             (click)="
                   editContract(
                     'commissionRateSetOldSalesUserOrDeviceContract',
@@ -292,7 +292,7 @@
                             placement="top"
                             ngbTooltip="Remove"
                             *ngIf="agreementsCommissions && agreementsCommissions.userOrDeviceContractCommission"
-                            class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                            class="qt-icon icon__delete qt-sz-20 qt-bg-contain pointer"
                             (click)="
                 confirmDelete(
                     'commissionRateSetOldSalesUserOrDeviceContract',
@@ -363,7 +363,7 @@
                         <div
                             placement="top"
                             ngbTooltip="Edit"
-                            class="icon__edit-gray-dark qt-sz-20 qt-bg-contain qt-mr-16 pointer"
+                            class="qt-icon icon__edit qt-icon__gray-400 qt-sz-20 qt-bg-contain qt-mr-16 pointer"
                             (click)="
                   editContract(
                     'commissionRateSetOldSalesUserOrDeviceContractExceeding',
@@ -376,7 +376,7 @@
                             placement="top"
                             ngbTooltip="Remove"
                             *ngIf="agreementsCommissions && agreementsCommissions.userOrDeviceContractCommissionExceeding"
-                            class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                            class="qt-icon icon__delete qt-sz-20 qt-bg-contain pointer"
                             (click)="
                 confirmDelete(
                     'commissionRateSetOldSalesUserOrDeviceContractExceeding',

@@ -22,6 +22,7 @@ export class PaymentItemComponent implements OnInit {
   @Output() onRefundPayment = new EventEmitter<any>();
   @Output() onPreviewInvoice = new EventEmitter<any>();
   @Output() onEditPayment = new EventEmitter<any>();
+  @Output() onResendPaymentReceipt = new EventEmitter<any>();
   allPayments = [];
   paymentSum: number;
   allPaymentsSum: number = 0;
@@ -47,6 +48,9 @@ export class PaymentItemComponent implements OnInit {
   }
   showRefundPayment() {
     this.onRefundPayment.emit(this.payment);
+  }
+  resendPaymentReceipt() {
+    this.onResendPaymentReceipt.emit(this.payment);
   }
   onShowPreviewInvoice(index) {
     if (this.usersStateService.getCurrentUser().accountType == "CLIENT") {

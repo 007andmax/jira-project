@@ -1,19 +1,30 @@
 <div
     class="qt-fileupload"
+    [ngClass]="{'qt-fileupload-file-info': isDragover}"
     appDnd
+    (onDragover)="isDragover = true"
+    (onDragleave)="isDragover = false"
     (fileDropped)="onFileDropped($event)"
 >
     <label class="qt-fileupload__label">
-        <div class="qt-fileupload__attach-icon icon__upload qt-sz-24"></div>
+        <div class="qt-icon qt-fileupload__attach-icon icon__upload qt-sz-20"></div>
         <span class="qt-fileupload__title">
             Drag and drop file here or
-            <span class="qt-fileupload__link">Click to upload </span>
+            <span class="qt-fileupload__link">Click to upload</span>
         </span>
         <input
+            *ngIf="uploadType == 'MULTIPLE'"
             type="file"
             #fileDropRef
             id="fileDropRef"
             multiple
+            (change)="fileBrowseHandler($event.target.files)"
+        >
+        <input
+            *ngIf="uploadType == 'SINGLE'"
+            type="file"
+            #fileDropRef
+            id="fileDropRef"
             (change)="fileBrowseHandler($event.target.files)"
         >
         <div class="qt-fileupload__mobile-text">
@@ -22,23 +33,103 @@
         </div>
     </label>
 </div>
-<div class="files-list">
-    <div
-        class="single-file"
-        *ngFor="let file of files; let i = index"
-    >
-        <div class="info">
-            <h4 class="name">{{ file?.name }}</h4>
-            <p class="size">
-                {{ formatBytes(file?.size,2) }}
-                <span class="file-error">{{(file.showError) ? file.error : ''}}</span>
-            </p>
-            <app-upload-area-progress [progress]="file?.progress"></app-upload-area-progress>
+<div
+    class="qt-fs-13 qt-fw-500 qt-color-gray-900 qt-mb-16"
+    *ngIf="files.length > 0"
+>
+    Attachment
+</div>
+<div
+    class="attachment-container qt-mb-16"
+    *ngFor="let file of files; let i = index"
+>
+    <div class="files-list">
+        <div class="single-file">
+            <div class="info qt-df">
+                <div
+                    class="qt-sz-48 img-container"
+                    *ngIf="isImage(file)"
+                >
+                    <img
+                        *ngIf="file.src"
+                        [src]="file.src"
+                    >
+                </div>
+                <div
+                    class="qt-sz-48 qt-bg-contain qt-mb-8 qt-fs-0"
+                    [ngClass]="{'icon__file-type-pdf': file.type == 'application/pdf',
+    'icon__file-type-txt': file.type == 'text/plain',
+ 'icon__file-type-csv': file.type == 'text/csv',
+'icon__file-type-doc': file.type == 'application/msword' || file.type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+'icon__file-type-html': file.type == 'text/html',
+'icon__file-type-odt': file.type == 'application/vnd.oasis.opendocument.text' || isOdt(file.name),
+'icon__file-type-ppt': file.type == 'application/vnd.ms-powerpoint',
+'icon__file-type-rtf': file.type == 'application/rtf' || file.type == 'text/rtf',
+'icon__file-type-ods': file.type == 'application/vnd.oasis.opendocument.spreadsheet' || isOds(file.name),
+'icon__file-type-xls': file.type == 'application/msxls' || file.type == 'application/vnd.ms-excel' || file.type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}"
+                    *ngIf="!isImage(file)"
+                ></div>
+                <div class="qt-ml-12 qt-df qt-ai-c qt-jc-sb qt-w100">
+                    <div>
+                        <span class="name qt-mb-4 ellipsis">{{ file?.name }}</span>
+                        <div
+                            class="qt-df qt-ai-c size"
+                            *ngIf="!file?.isUploading && !file?.showError"
+                        >
+                            {{parseSize(file?.size)}}
+                            <span
+                                class="qt-ml-12 size-remaining ellipsis"
+                                [textContent]="parseType(file?.type)"
+                            ></span>
+                        </div>
+                        <div
+                            class="qt-df qt-ai-c size"
+                            *ngIf="file?.isUploading"
+                        >
+                            <span class="size-progress">Uploading {{file?.progress}}%</span>
+                            <span
+                                class="qt-ml-8 size-remaining"
+                                *ngIf="false"
+                            >
+                                20 seconds remaining
+                            </span>
+                        </div>
+                        <div
+                            class="qt-df qt-ai-c size"
+                            *ngIf="file?.showError"
+                        >
+                            <span
+                                class="size-progress size-error"
+                                [textContent]="file.error"
+                            >
+                            </span>
+                        </div>
+                    </div>
+                    <div
+                        *ngIf="!file?.isUploading && file?.id"
+                        class="attachment-remove qt-pointer"
+                        (click)="removeFile(file?.id)"
+                    >
+                        Remove
+                    </div>
+                    <div
+                        *ngIf="file?.showError && !file?.id"
+                        class="attachment-retry qt-pointer"
+                        (click)="retryFile(i)"
+                    >
+                        Retry
+                    </div>
+                </div>
+            </div>
+            <div
+                class="progress-line-container"
+                *ngIf="file?.isUploading"
+            >
+                <div
+                    class="progress-line"
+                    [ngStyle]="{width: 'calc('+file?.progress+'% - 8px)'}"
+                ></div>
+            </div>
         </div>
-        <i
-            class="icn-sm icn-remove-old"
-            (click)="deleteFile(i)"
-        ></i>
-        <!-- <img src="assets/img/dnd/ic-delete-file.svg" class="delete" width="20px" alt="file" (click)="deleteFile(i)"> -->
     </div>
 </div>

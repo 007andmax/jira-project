@@ -12,15 +12,15 @@
             [textContent]="title"
         ></div>
         <div
-            class="qt-ic-c qt-pointer device-type-icon qt-sz-24 qt-mb-8 qt-ml-8"
-            [ngClass]="{'icon__computer' : getTypeToLocaleLowerCase(selectedItem) === 'workstation',
+            class="qt-ic-c qt-pointer device-type-icon qt-sz-24 qt-mb-8 qt-ml-8 qt-icon"
+            [ngClass]="{'icon__devices' : getTypeToLocaleLowerCase(selectedItem) === 'workstation',
                'icon__router' : getTypeToLocaleLowerCase(selectedItem) === 'router',
-            'icon__printer' : getTypeToLocaleLowerCase(selectedItem) === 'printer',
-                'icon__switch' : getTypeToLocaleLowerCase(selectedItem) === 'switch',
+            'icon__print' : getTypeToLocaleLowerCase(selectedItem) === 'printer',
+                'qt-icon icon__network-switch' : getTypeToLocaleLowerCase(selectedItem) === 'switch',
           'icon__server' : getTypeToLocaleLowerCase(selectedItem) === 'server',
             'icon__tablet' : getTypeToLocaleLowerCase(selectedItem) === 'tablet',
             'icon__network_device' : getTypeToLocaleLowerCase(selectedItem) === 'network device',
-            'icon__phone' : getTypeToLocaleLowerCase(selectedItem) === 'phone',
+            'icon__old-phone' : getTypeToLocaleLowerCase(selectedItem) === 'phone',
              'icon__generic_device' : getTypeToLocaleLowerCase(selectedItem) === 'generic device'}"
         >
         </div>
@@ -64,7 +64,7 @@
         <i
             *ngIf="isAdd"
             (click)="addItem()"
-            class="icn-sm icn-product-save icon__active_subscription"
+            class="icn-sm icn-product-save qt-icon icon__done qt-icon__blue-light-600"
         ></i>
     </span>
     <i
@@ -85,15 +85,15 @@
         >
             <div class="qt-df qt-ai-c qt-pl-8">
                 <div
-                    class="qt-ic-c qt-pointer device-type-icon qt-sz-24"
-                    [ngClass]="{'icon__computer' : getTypeToLocaleLowerCase(item) === 'workstation',
+                    class="qt-ic-c qt-pointer device-type-icon qt-sz-24 qt-icon"
+                    [ngClass]="{'icon__devices' : getTypeToLocaleLowerCase(item) === 'workstation',
                'icon__router' : getTypeToLocaleLowerCase(item) === 'router',
-            'icon__printer' : getTypeToLocaleLowerCase(item) === 'printer',
-                'icon__switch' : getTypeToLocaleLowerCase(item) === 'switch',
+            'icon__print' : getTypeToLocaleLowerCase(item) === 'printer',
+                'icon__network-switch' : getTypeToLocaleLowerCase(item) === 'switch',
           'icon__server' : getTypeToLocaleLowerCase(item) === 'server',
             'icon__tablet' : getTypeToLocaleLowerCase(item) === 'tablet',
             'icon__network_device' : getTypeToLocaleLowerCase(item) === 'network device',
-            'icon__phone' : getTypeToLocaleLowerCase(item) === 'phone',
+            'icon__old-phone' : getTypeToLocaleLowerCase(item) === 'phone',
              'icon__generic_device' : getTypeToLocaleLowerCase(item) === 'generic device'}"
                 >
                 </div>

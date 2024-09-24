@@ -235,7 +235,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       let indexhUser = this.users.findIndex(user => user.id === selectedUser.id);
       if (indexhUser > -1) this.ticketAdd.createdUser.setUserData(this.users[indexhUser]);
       let findSharedUser = this.shareUsersList.find(item => item.id === this.users[indexhUser].id);
-      if (!findSharedUser) {
+      if (!findSharedUser && this.users[indexhUser]) {
         let user = new TechUserItem(JSON.parse(JSON.stringify(this.users[indexhUser])));
         user.selected = true;
         this.shareUsersList.push(user);
@@ -299,7 +299,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       this.devices.sort((a, b) => (a.hostName.toLowerCase() > b.hostName.toLowerCase()) ?
         1 : ((b.hostName.toLowerCase() > a.hostName.toLowerCase()) ? -1 : 0));
       this.ticketAdd.setPreloaderDevices(false);
-      this.deviceDP.reset(this.devices);
+      if (this.deviceDP) this.deviceDP.reset(this.devices);
     });
   }
   onGetUsers(data) {
@@ -313,17 +313,17 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     this.ticketValidate.resetSubject();
   }
   onChangeFiles(ids) {
-    if (this.ticketAdd.attachFileIds && this.ticketAdd.attachFileIds.length > ids.length) {
-      this.ticketAdd.attachFileIds.forEach(item => {
-        let find = ids.find(id => id === item);
-        if (!find) {
-          this.companiesService.removeAttachment(item).subscribe(data => {
-
-          })
-        }
-      })
-    }
-    this.ticketAdd.setAttachFileIds(JSON.parse(JSON.stringify(ids)));
+    /* if (this.ticketAdd.attachFileIds && this.ticketAdd.attachFileIds.length > ids.length) {
+       this.ticketAdd.attachFileIds.forEach(item => {
+         let find = ids.find(id => id.id === item);
+         if (!find) {
+           this.companiesService.removeAttachment(item).subscribe(data => {
+ 
+           })
+         }
+       })
+     }*/
+    this.ticketAdd.setAttachFileIds(JSON.parse(JSON.stringify(ids.map(item => item.id))));
   }
   onChangeShareUsers(data) {
     let shareUsersList = JSON.parse(JSON.stringify(this.shareUsersList));

@@ -3,6 +3,7 @@
 @import "../../../assets/scss/device/custom";
 @import "../../../assets/scss/device/_modals.scss";
 @import "./src/assets/styles/variable";
+@import "./src/assets/styles/mixin/breakpoint";
 
 .form-input-search {
   padding: 7px 14px 7px 34px;
@@ -237,7 +238,7 @@ input.mat-chip-input {
 
 .opt-icon.Asset.Tag,
 .opt-icon.Tag {
-  background-image: url(/assets/img/icons/tag-light-gray.svg);
+  background-image: url(/assets/img/icons/tags.svg);
   background-repeat: no-repeat;
 }
 
@@ -276,9 +277,11 @@ span.qt-input-search:before {
   width: 25px;
   height: 25px;
   margin-top: 15px;
-  background-image: url(/assets/img/icons/search.svg);
-  background-repeat: no-repeat;
-
+  mask-image: url(/assets/img/icons/search.svg);
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  background-color: $gray-400;
 }
 
 .qt-btn.--outline-blue {
@@ -391,7 +394,7 @@ table.qt-table-modern tbody tr td {
 
 .install-Update{
   display: flex;
-  background-image: url(/assets/img/icons/install.svg);
+  background-image: url(/assets/img/icons/download.svg);
   background-repeat: no-repeat;
   justify-content: center;
   align-items: center;
@@ -402,7 +405,7 @@ table.qt-table-modern tbody tr td {
 
 .install-security-Update{
   display: flex;
-  background-image: url(/assets/img/icons/install.svg);
+  background-image: url(/assets/img/icons/download.svg);
   background-repeat: no-repeat;
   justify-content: center;
   align-items: center;
@@ -411,13 +414,12 @@ table.qt-table-modern tbody tr td {
 
 .sidebar-updates{
   &__security-update-item {
-    padding: 16px;
     width: 140px !important;
     height: 120px;
     padding: 16px;
     border-radius: 8px;
     background-color: $gray-100;
-    @media (max-width: 1920px) {
+    @include media-breakpoint-down($lg) {
       width: 175px !important;
     }
   }
@@ -443,7 +445,7 @@ table.qt-table-modern tbody tr td {
 }
 
 .Resize{
-  @media only screen and (min-width: 1920px) {
+  @include media-breakpoint-up($lg) {
     width:74% !important;
     margin-left: 0 !important;
   }
@@ -451,7 +453,7 @@ table.qt-table-modern tbody tr td {
   .company-device-hover:hover {
     td {
       .company-devices-table__system-network-buttons {
-        @media  only screen and (min-width:1920px) {
+        @include media-breakpoint-up($lg) {
           margin-left:40px;
         }
       }
@@ -461,11 +463,11 @@ table.qt-table-modern tbody tr td {
 .company-device-hover:hover {
   td {
     .company-devices-table__system-network-buttons {
-      @media  only screen and (min-width:1920px) {
+      @include media-breakpoint-up($lg) {
         margin-left:120px;
       }
 
-      @media only screen and (max-width: 1920) {
+      @include media-breakpoint-up($lg) {
         margin-left: 40px;
       }
     }

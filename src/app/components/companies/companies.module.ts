@@ -21,6 +21,7 @@ import { DropDownModule } from '../shared/drop-down/drop-down.module';
 import { CompanyTagsModule } from './company-tags/company-tags.module';
 import { RightClickBlankModule } from 'src/app/directives/right-click-blank/right-click-blank.module';
 import { PreviewPhoneMaskModule } from '../shared/preview-phone-mask/preview-phone-mask.module';
+import { CompanyFileManagerComponent } from './company-file-manager/company-file-manager.component';
 
 @NgModule({
     declarations: [CompaniesComponent,

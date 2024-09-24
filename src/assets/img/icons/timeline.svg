@@ -1,6 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12">
-    <g fill="none" fill-rule="evenodd">
-        <circle cx="6" cy="6" r="6" fill="#FFF"/>
-        <circle cx="6" cy="6" r="4" fill="#16A4FA" fill-opacity=".2" fill-rule="nonzero" stroke="#16A4FA" stroke-linecap="round" stroke-linejoin="round"/>
-    </g>
+<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#clip0_13046_54626)">
+    <path d="M6 12C9.31371 12 12 9.31371 12 6C12 2.68629 9.31371 0 6 0C2.68629 0 0 2.68629 0 6C0 9.31371 2.68629 12 6 12Z" fill="white"/>
+    <path d="M6 10C8.20914 10 10 8.20914 10 6C10 3.79086 8.20914 2 6 2C3.79086 2 2 3.79086 2 6C2 8.20914 3.79086 10 6 10Z" fill="#16A4FA" fill-opacity="0.2" stroke="#16A4FA" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <defs>
+    <clipPath id="clip0_13046_54626">
+      <rect width="12" height="12" fill="white"/>
+    </clipPath>
+  </defs>
 </svg>

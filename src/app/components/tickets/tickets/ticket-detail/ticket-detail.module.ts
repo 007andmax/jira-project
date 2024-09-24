@@ -89,6 +89,7 @@ import { MatChipListModule } from 'src/app/components/shared/mat-chip-list/mat-c
 import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.module';
 import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 import { MatFormFieldModule } from 'src/app/components/shared/mat-form-field/mat-form-field.module';
+import { CompanyUsersDropDownModule } from '../ticket-add-aside/company-users-drop-down/company-users-drop-down.module';
 
 
 
@@ -187,7 +188,8 @@ import { MatFormFieldModule } from 'src/app/components/shared/mat-form-field/mat
         MatChipModule,
         MatFormFieldModule,
         MatChipListModule,
-        MatErrorModule
+        MatErrorModule,
+        CompanyUsersDropDownModule
     ],
 
 

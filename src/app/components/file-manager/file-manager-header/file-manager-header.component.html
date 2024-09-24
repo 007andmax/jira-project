@@ -1,0 +1,120 @@
+<div class="qt-page-list__header --sticky">
+    <div class="qt-page-list__header-title-line">
+        <div class="qt-page-list__header-title-line--left">
+            <h3
+                *ngIf="breadcrumbs.length == 0"
+                class="qt-page-list__header-title"
+                [textContent]="'File Manager'"
+            ></h3>
+            <div
+                *ngIf="breadcrumbs.length > 0"
+                class="qt-df qt-ai-c"
+            >
+                <ng-template
+                    ngFor
+                    let-i="index"
+                    let-breadcrumb
+                    [ngForOf]="breadcrumbs"
+                >
+                    <span
+                        [ngClass]="{'breadcrumb-item-active':breadcrumbs.length == (i + 1)}"
+                        class="qt-fs-14 breadcrumb-item qt-pointer"
+                        [textContent]="breadcrumb.name"
+                        (click)="goToCategory(breadcrumb)"
+                    ></span>
+                    <span
+                        *ngIf="breadcrumbs.length != (i + 1)"
+                        class="qt-fs-14 qt-ml-8 qt-mr-8 breadcrumb-splite"
+                    >
+                        /
+                    </span>
+                </ng-template>
+            </div>
+        </div>
+        <div class="qt-page-list__header-title-line--rigth">
+            <div class="qt-df qt-ai-c">
+                <app-drop-down
+                    *ngIf="isShowCompanyArchived"
+                    class="dropdown"
+                    [placeholder]="'Select Active'"
+                    [editItem]="selectedActive"
+                    [list]="listActive"
+                    [field]="'title'"
+                    [search]="true"
+                    [change]="true"
+                    [isBlockClear]="true"
+                    (onSelectedItem)="selectActive($event)"
+                    heightInput="36px"
+                ></app-drop-down>
+                <div
+                    class="qt-input-search qt-ml-12"
+                    *ngIf="false"
+                >
+                    <input
+                        type="text"
+                        placeholder="Search files"
+                        [(ngModel)]="searchText"
+                    >
+                    <span
+                        class="search-clear icon__close-round"
+                        *ngIf="searchText.length > 0"
+                    ></span>
+                </div>
+                <div
+                    class="file-info-sort qt-ml-12"
+                    ngbDropdown
+                >
+                    <button
+                        class="qt-button qt-button--with-icon --gray --md filter-button qt-df"
+                        ngbDropdownToggle
+                    >
+                        Sort By: {{sort}}
+                        <i class="icn-sm report-caret-icon"></i>
+                    </button>
+                    <div
+                        ngbDropdownMenu
+                        class="app-drop-down__dropdown"
+                    >
+                        <button
+                            ngbDropdownItem
+                            (click)="setSort('Date')"
+                        >
+                            Date
+                        </button>
+                        <button
+                            ngbDropdownItem
+                            (click)="setSort('Name')"
+                        >
+                            Name
+                        </button>
+                    </div>
+                </div>
+                <a
+                    href="javascript:;"
+                    class="qt-button --md --gray qt-button--with-icon qt-jc-c pointer qt-ml-12 button-gl-number__add"
+                    (click)="toggleAddCategory = !toggleAddCategory"
+                >
+                    <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8 qt-button-icon"></span>
+                    Create Folder
+                </a>
+                <button
+                    class="qt-button --md qt-button--with-icon qt-ml-12 upload-file"
+                    (click)="addFile()"
+                >
+                    <span class="qt-icon icon__upload qt-icon__white qt-sz-16 qt-dib qt-mr-8 qt-button-icon"></span>
+                    <span>Upload a File</span>
+                </button>
+                <div class="qt-df">
+                    <div class="qt-pos-rel">
+                        <app-file-manager-add-category
+                            [categoryId]="categoryId"
+                            [companyId]="companyId"
+                            *ngIf="toggleAddCategory"
+                            (onClose)="toggleAddCategory = false"
+                        ></app-file-manager-add-category>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

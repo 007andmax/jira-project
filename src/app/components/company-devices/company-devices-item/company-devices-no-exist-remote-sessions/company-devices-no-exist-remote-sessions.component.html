@@ -7,7 +7,7 @@
     </ng-template>
     <div
         [hidden]="!(device.remoteSessions.length == 0 && device.type !== 'workstation' && device.online && (getPermissions('REMOTE_CONNECTIONS') || customerPortalStateService.isCustomerPortal))"
-        class="qt-ic-c icon__quick-connect qt-pointer qt-sz-24 qt-bgsz-16"
+        class="qt-ic-c qt-icon icon__remote-access qt-pointer qt-sz-18"
         placement="top"
         [ngbTooltip]="tipRemoteAccess"
         (click)="remoteAccess('PROXY')"
@@ -15,7 +15,7 @@
     </div>
     <div
         [hidden]="!(device.remoteSessions.length == 0 && device.type === 'workstation' && device.online && (getPermissions('REMOTE_CONNECTIONS') || customerPortalStateService.isCustomerPortal))"
-        class="qt-ic-c icon__quick-connect qt-pointer qt-sz-24 qt-bgsz-16"
+        class="qt-ic-c qt-icon icon__remote-access qt-pointer qt-sz-18"
         placement="top"
         container="body"
         [ngbTooltip]="tipRemoteAccess"

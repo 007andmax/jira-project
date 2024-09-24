@@ -69,7 +69,8 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
     this.sub.add(geLefttFilter);
     let onChangeRealTime = this.passwordManagerStateService.onChangeRealTime.subscribe(newChange => {
       if (newChange.action === 'PASSWORD_RECORD_CREATED') {
-        this.list_records.push(new PasswordRecord(newChange.data));
+        let index = this.list_records.findIndex(item => item.id == newChange.data.id);
+        if (index == -1) this.list_records.push(new PasswordRecord(newChange.data));
       } else if (newChange.action === 'PASSWORD_RECORD_UPDATED') {
         let index = this.list_records.findIndex(item => item.id === newChange.data.id);
         if (index > -1) this.list_records[index].onUpdate(newChange.data);
@@ -96,6 +97,7 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
   }
   onRemoveRecord(id) {
     this.passwordManagerService.deleteRecord(id).subscribe(data => {
+      this.passwordManagerStateService.onChangeRealTime.next({ action: "PASSWORD_RECORD_DELETED", data: { id: id } });
     })
   }
   public onScroll() {

@@ -1,0 +1,146 @@
+<div
+    class="qt-fileupload"
+    [ngClass]="{'qt-fileupload-file-info':idfiles.length > 0 || isDragover}"
+    appDnd
+    (onDragover)="isDragover = true"
+    (onDragleave)="isDragover = false"
+    (fileDropped)="onFileDropped($event)"
+    [hidden]="isUploading || idfiles.length > 0 || isError"
+>
+    <label class="qt-fileupload__label">
+        <div
+            class="qt-icon qt-fileupload__attach-icon icon__upload qt-sz-20"
+            *ngIf="idfiles.length == 0"
+        ></div>
+        <img
+            class="qt-mb-5"
+            height="62px"
+            *ngIf="idfiles.length > 0"
+            [src]="'/file/' + idfiles[0]"
+        >
+        <span
+            class="qt-fileupload__title file-name ellipsis"
+            *ngIf="idfiles.length > 0"
+        >
+            {{files[0].name}}
+        </span>
+        <span
+            class="qt-fileupload__title"
+            *ngIf="idfiles.length == 0"
+        >
+            Drag and drop file here or
+            <span class="qt-fileupload__link">Click to upload</span>
+        </span>
+        <input
+            type="file"
+            #fileDropRef
+            id="fileDropRef"
+            (change)="fileBrowseHandler($event.target.files)"
+        >
+        <div
+            class="qt-fileupload__mobile-text"
+            *ngIf="idfiles.length == 0"
+        >
+            Click here to attachfiles or take a screen shot
+            <div class="icon__snapshot qt-sz-16 qt-bg-contain qt-ml-6"></div>
+        </div>
+    </label>
+</div>
+<div
+    class="attachment-container"
+    *ngIf="isUploading || idfiles.length > 0 || isError"
+>
+    <span class="qt-fs-13 qt-fw-500 qt-color-gray-900 qt-mb-8">Attachment</span>
+    <div class="files-list">
+        <div
+            class="single-file"
+            *ngFor="let file of files; let i = index"
+        >
+            <div class="info qt-df">
+                <div
+                    class="qt-sz-48 img-container"
+                    *ngIf="isImage(file)"
+                >
+                    <img
+                        *ngIf="file.src"
+                        [src]="file.src"
+                    >
+                </div>
+                <div
+                    class="qt-sz-48 qt-bg-contain qt-mb-8 qt-fs-0"
+                    [ngClass]="{'icon__file-type-pdf': file.type == 'application/pdf',
+    'icon__file-type-txt': file.type == 'text/plain',
+ 'icon__file-type-csv': file.type == 'text/csv',
+'icon__file-type-doc': file.type == 'application/msword' || file.type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+'icon__file-type-html': file.type == 'text/html',
+'icon__file-type-odt': file.type == 'application/vnd.oasis.opendocument.text' || isOdt(file.name),
+'icon__file-type-ppt': file.type == 'application/vnd.ms-powerpoint',
+'icon__file-type-rtf': file.type == 'application/rtf' || file.type == 'text/rtf',
+'icon__file-type-ods': file.type == 'application/vnd.oasis.opendocument.spreadsheet' || isOds(file.name),
+'icon__file-type-xls': file.type == 'application/msxls' || file.type == 'application/vnd.ms-excel' || file.type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}"
+                    *ngIf="!isImage(file)"
+                ></div>
+                <div class="qt-ml-12 qt-df qt-ai-c qt-jc-sb qt-w100">
+                    <div>
+                        <span class="name qt-mb-4 ellipsis">{{ file?.name }}</span>
+                        <div
+                            class="qt-df qt-ai-c size"
+                            *ngIf="!isUploading && !isError"
+                        >
+                            {{parseSize(file?.size)}}
+                            <span
+                                class="qt-ml-12 size-remaining ellipsis"
+                                [textContent]="parseType(file?.type)"
+                            ></span>
+                        </div>
+                        <div
+                            class="qt-df qt-ai-c size"
+                            *ngIf="isUploading"
+                        >
+                            <span class="size-progress">Uploading {{file?.progress}}%</span>
+                            <span
+                                class="qt-ml-8 size-remaining ellipsis"
+                                *ngIf="false"
+                            >
+                                20 seconds remaining
+                            </span>
+                        </div>
+                        <div
+                            class="qt-df qt-ai-c size"
+                            *ngIf="isError"
+                        >
+                            <span
+                                class="size-progress size-error"
+                                [textContent]="file.error"
+                            >
+                            </span>
+                        </div>
+                    </div>
+                    <div
+                        *ngIf="!isUploading && idfiles.length > 0"
+                        class="attachment-remove qt-pointer"
+                        (click)="removeFile()"
+                    >
+                        Remove
+                    </div>
+                    <div
+                        *ngIf="isError"
+                        class="attachment-retry qt-pointer"
+                        (click)="retryFile()"
+                    >
+                        Retry
+                    </div>
+                </div>
+            </div>
+            <div
+                class="progress-line-container"
+                *ngIf="isUploading"
+            >
+                <div
+                    class="progress-line"
+                    [ngStyle]="{width: 'calc('+file?.progress+'% - 8px)'}"
+                ></div>
+            </div>
+        </div>
+    </div>
+</div>

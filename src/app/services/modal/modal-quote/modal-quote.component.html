@@ -2,7 +2,7 @@
     <div class="qt-modal__header">
         <div class="qt-modal__header-title qt-fw-600">Emall info</div>
         <div
-            class="qt-modal__close icon__close qt-pointer"
+            class="qt-modal__close qt-icon icon__close qt-pointer"
             (click)="onCheckForClose()"
         ></div>
     </div>
@@ -96,8 +96,6 @@
                     placeholder="Write message here…"
                     [(ngModel)]="message"
                     appTextArea
-                    [default]="5"
-                    [maxLines]="100"
                     cols="5"
                     rows="5"
                     (ngModelChange)="setMessage($event)"
