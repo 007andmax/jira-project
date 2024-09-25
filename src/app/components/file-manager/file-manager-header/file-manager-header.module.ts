@@ -6,7 +6,6 @@ import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 import { FileManagerHeaderComponent } from './file-manager-header.component';
 import { FileManagerAddCategoryComponent } from '../file-manager-add-category/file-manager-add-category.component';
-import { MatFormFieldModule } from '@angular/material';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { FileManagerAddCategoryModule } from '../file-manager-add-category/file-manager-add-category.module';
 
@@ -20,7 +19,6 @@ import { FileManagerAddCategoryModule } from '../file-manager-add-category/file-
         PreloaderTicketModule,
         NgbModule,
         ReactiveFormsModule,
-        MatFormFieldModule,
         DropDownModule,
         FileManagerAddCategoryModule
     ],

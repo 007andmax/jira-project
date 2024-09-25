@@ -58,12 +58,12 @@
                         (onChange)="onEditTag(tag)"
                         (input)="tag.onInitEdit(true);tag.setIsUniqueness(true)"
                     >
-                    <mat-error
+                    <app-mat-error
                         class="qt-tooltip-error"
                         *ngIf="!tag.isUniqueness"
+                        [textContent]="'This Tag is already occupied'"
                     >
-                        This Tag is already occupied
-                    </mat-error>
+                    </app-mat-error>
                 </div>
                 <div class="tab-pane__table-cell manage-tags-table__action qt-pos-rel">
                     <div class="qt-df qt-ai-c">

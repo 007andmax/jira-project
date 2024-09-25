@@ -7,13 +7,16 @@ import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-t
 import { FileManagerAddFileComponent } from './file-manager-add-file.component';
 import { FileManagementAddFileDragDropComponent } from './file-manager-add-file-drag-drop/file-manager-add-file-drag-drop.component';
 import { UploadAreaProgressModule } from '../../shared/upload-area/upload-area-progress/upload-area-progress.module';
-import { MatSelectModule, MatChipsModule, MatIconModule } from '@angular/material';
 import { DatePickerModule } from '../../shared/date-picker/date-picker.module';
 import { CompanyTagsModule } from '../../companies/company-tags/company-tags.module';
 import { FileManagerAddFileTagsComponent } from './file-manager-add-file-tags/file-manager-add-file-tags.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { DndModule } from 'src/app/directives/dnd/dnd.module';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
+import { MatChipModule } from '../../shared/mat-chip/mat-chip.module';
+import { MatFormFieldModule } from '../../shared/mat-form-field/mat-form-field.module';
+import { MatChipListModule } from '../../shared/mat-chip-list/mat-chip-list.module';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 @NgModule({
     declarations: [FileManagerAddFileComponent, FileManagementAddFileDragDropComponent, FileManagerAddFileTagsComponent
@@ -26,15 +29,16 @@ import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
         PreloaderTicketModule,
         NgbModule,
         UploadAreaProgressModule,
-        MatSelectModule,
-        MatChipsModule,
-        MatIconModule,
+        MatChipModule,
+        MatFormFieldModule,
+        MatChipListModule,
         DatePickerModule,
         CompanyTagsModule,
         InfiniteScrollModule,
         DndModule,
         ReactiveFormsModule,
-        TextAreaModule
+        TextAreaModule,
+        MatErrorModule
     ],
     entryComponents: [FileManagerAddFileComponent],
     exports: [FileManagerAddFileComponent]
