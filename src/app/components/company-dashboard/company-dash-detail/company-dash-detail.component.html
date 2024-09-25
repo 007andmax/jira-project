@@ -220,7 +220,7 @@
                 {{companyOpen}}
             </span>
             <i
-                class="icn-sm report-caret-icon qt-ml-8"
+                class="icn-sm qt-icon icon__arrow-down report-caret-icon qt-ml-8"
                 *ngIf="!showWorkingHours"
                 (click)="showWorkingHours = !showWorkingHours"
             ></i>
@@ -371,7 +371,7 @@
         <h1>Edit Hours</h1>
         <button
             type="button"
-            class="close"
+            class="qt-icon icon__close qt-sz-20 close"
             aria-label="Close"
             (click)="modal.dismiss('Cross click')"
         >
@@ -479,7 +479,7 @@
         <div class="footer-area-modal qt-df">
             <button
                 type="button"
-                class="btn btn-secondary"
+                class="btn btn-secondary qt-w100"
                 aria-label="Close"
                 (click)="modal.dismiss('Cross click')"
             >
@@ -487,7 +487,7 @@
             </button>
             <button
                 type="button"
-                class="btn btn-primary"
+                class="btn btn-primary qt-w100 qt-ml-12"
                 (click)="saveHours();modal.dismiss();"
             >
                 Save Changes
@@ -503,7 +503,7 @@
 >
     <button
         type="button"
-        class="close"
+        class="qt-icon icon__close qt-sz-20 close"
         aria-label="Close"
         (click)="modal.dismiss('Cross click')"
     >

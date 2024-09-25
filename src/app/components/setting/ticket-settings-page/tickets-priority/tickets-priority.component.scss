@@ -35,21 +35,7 @@
 
 .tag-color {
     position: relative;
-    display: block;
-    width: 24px;
-    height: 24px;
     border-radius: 6px;
-
-    &::after {
-        content: "";
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        background: url("/assets/img/icons/color-picker.svg") no-repeat center / contain;
-        width: 16px;
-        height: 16px;
-    }
 }
 
 .tag-color-item {
@@ -71,27 +57,14 @@
     padding: 4px 0;
 
     .tag-color {
-        &::after {
-            content: none;
-        }
+       .qt-icon {
+         display: none;
+       }
 
         &.--active,
         &:hover {
-            &::after {
-                content: "";
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%);
-                background-color: $white;
-                -webkit-mask-position: center;
-                mask-position: center;
-                -webkit-mask-image: url("/assets/img/icons/done.svg");
-                mask-image: url("/assets/img/icons/done.svg");
-                -webkit-mask-repeat: no-repeat;
-                mask-repeat: no-repeat;
-                -webkit-mask-size: 16px 16px;
-                mask-size: 16px 16px;
+            .qt-icon {
+              display: inline-block;
             }
         }
     }
