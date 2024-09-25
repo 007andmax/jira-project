@@ -6,6 +6,7 @@ import { forkJoin, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
 import { AppStateService } from 'src/app/states/app/app-state.service';
+import { InvoiceSettings } from './class/invoice-settings';
 
 @Component({
   selector: 'app-invoice-settings',
@@ -18,15 +19,15 @@ export class InvoiceSettingsComponent implements OnInit {
   isAddPhone = false;
   loading = false;
   isDisable: boolean;
-  includeInvoiceAsAttachmentSetting: boolean = false;
-  includeAccountReceivableReportAsAttachmentSetting: boolean = false;
   invoiceTerm: any;
   primaryPhoneType;
   secondaryPhoneType = new TitleListType("Office", "OFFICE");
   phoneTypes = [new TitleListType("Mobile", "MOBILE"),
   new TitleListType("Office", "OFFICE"),
   new TitleListType("Fax", "FAX")];
-  invoiceTerms = [new TitleListType("15 days", "15"),
+  invoiceTerms = [new TitleListType("COD", "0"),
+  new TitleListType("7 days", "7"),
+  new TitleListType("15 days", "15"),
   new TitleListType("30 days", "30"),
   new TitleListType("45 days", "45"),
   new TitleListType("60 days", "60")];
@@ -34,6 +35,7 @@ export class InvoiceSettingsComponent implements OnInit {
   @Input() taxIdInput: any;
   @Input() termInput: any;
   @Input() conditionInput: any;
+  invoiceSettings: InvoiceSettings;
   constructor(
     private formBuilder: FormBuilder,
     private invoiceTicketsService: InvoiceTicketsService,
@@ -82,7 +84,7 @@ export class InvoiceSettingsComponent implements OnInit {
           Validators.pattern(/^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,30}$/)
         ]
       ],
-      conditions: ['', [Validators.maxLength(400)]],
+      condition: ['', [Validators.maxLength(400)]],
       designation: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       email: [
         '',
@@ -103,28 +105,72 @@ export class InvoiceSettingsComponent implements OnInit {
       secondaryPhoneType: ['']
     });
     this.loading = true;
-    const source = [this.invoiceTicketsService.getInvoiceContact().pipe(catchError(error => of(undefined))),
-    this.invoiceTicketsService.termsAndConditions().pipe(catchError(error => of(undefined))),
-    this.invoiceTicketsService.actualNumber('INVOICE').pipe(catchError(error => of(undefined))),
-    this.invoiceTicketsService.getTaxNumber().pipe(catchError(error => of(undefined)))];
-    forkJoin(source)
-      .subscribe(
-        (data) => {
-          if (data[0]) this.getInvoiceContact(data[0]);
-          if (data[1]) this.getTermsAndConditions(data[1]);
-          if (data[2]) this.getActualNumber(data[2]);
-          if (data[3]) this.getTaxNumber(data[3]);
-          this.loading = false;
-        },
-        error => {
+    this.invoiceTicketsService.getInvoiceSettings().subscribe(data => {
+      this.invoiceSettings = new InvoiceSettings(data);
+      this.isDisable = this.invoiceSettings.invoiceContact.enabled;
+      const state = !this.isDisable ? 'disable' : 'enable';
+      if (!this.isDisable) {
+        Object.keys(this.invoiceForm.controls).forEach(controlName => {
+          if (
+            controlName !== 'invoiceCount' &&
+            controlName !== 'invoiceTerms' &&
+            controlName !== 'enableInvoiceContact' &&
+            controlName !== 'taxIdDescription' &&
+            controlName !== 'taxId' &&
+            controlName !== 'condition'
+          ) {
+            this.invoiceForm.controls[controlName][state](); // disables/enables each form control based on 'this.formDisabled'
+          }
+        });
+      }
+      this.invoiceForm.patchValue({
+        designation: this.invoiceSettings.invoiceContact.designation,
+        email: this.invoiceSettings.invoiceContact.email,
+        enableInvoiceContact: this.invoiceSettings.invoiceContact.enabled,
+        enableOwnerSending: this.invoiceSettings.enableOwnerSending,
+        firstName: this.invoiceSettings.invoiceContact.firstName,
+        lastName: this.invoiceSettings.invoiceContact.lastName,
+        enableContactSending: (!this.invoiceSettings.invoiceContact.enabled) ? true : this.invoiceSettings.invoiceContact.enableContactSending,
+        invoiceTerms: this.invoiceSettings.term,
+        condition: this.invoiceSettings.condition,
+        invoiceCount: this.invoiceSettings.number,
+        taxId: this.invoiceSettings.taxId,
+        taxIdDescription: this.invoiceSettings.taxIdDescription
+      });
+      (<any>document.body.querySelector("#accounting-active")).checked = (!this.invoiceSettings.invoiceContact.enabled) ? true : this.invoiceSettings.invoiceContact.enableContactSending;
+      const phoneNumbers = this.invoiceSettings.invoiceContact.phoneNumbers || [];
+      if (phoneNumbers) {
+        phoneNumbers.forEach((phone, i) => {
+          if (i === 0) {
+            this.invoiceForm.patchValue({
+              primaryPhone: phone.number,
+              primaryPhoneType: phone.typeNumber
+            });
+            this.primaryPhoneType = this.phoneTypes.find(item => item.type == phone.typeNumber.toUpperCase());
+
+          }
+
+          if (i === 1) {
+            this.isAddPhone = true;
+            this.invoiceForm.patchValue({
+              secondaryPhone: phone.number,
+              secondaryPhoneType: phone.typeNumber
+            });
+            this.secondaryPhoneType = this.phoneTypes.find(item => item.type == phone.typeNumber.toUpperCase());
+          }
+        });
+        if (phoneNumbers.length === 0) {
+          this.invoiceForm.patchValue({
+            primaryPhone: "",
+            primaryPhoneType: "OFFICE"
+          });
         }
-      );
-    /*  this.getInvoiceContact();
-      this.getTermsAndConditions();
-      this.getActualNumber();
-      this.getTaxNumber();*/
-
-
+      }
+      this.invoiceTerm = this.invoiceTerms.find(item => item.type == this.invoiceSettings.term);
+      this.elRef.nativeElement.querySelector('#memo-invoice').value = this.invoiceSettings.condition;
+      this.loading = false;
+      this.appStateService.changeDetectorRef();
+    })
   }
   onChangePrimaryPhoneType(data) {
     this.primaryPhoneType = data;
@@ -133,7 +179,7 @@ export class InvoiceSettingsComponent implements OnInit {
     });
   }
   public onPastMemo(value) {
-    this.invoiceForm.patchValue({ conditions: value });
+    this.invoiceForm.patchValue({ condition: value });
   }
 
   /**
@@ -141,7 +187,7 @@ export class InvoiceSettingsComponent implements OnInit {
   * @param event - description event
   */
   public onChangeMemo(event) {
-    this.invoiceForm.patchValue({ conditions: event.target.value });
+    this.invoiceForm.patchValue({ condition: event.target.value });
   }
 
   onInvoiceTermsChange(data) {
@@ -172,121 +218,6 @@ export class InvoiceSettingsComponent implements OnInit {
     }
   }
 
-  getConditions() {
-    this.invoiceTicketsService.termsAndConditions().subscribe(
-      (res: any) => {
-        this.invoiceForm.patchValue({
-          conditions: res.conditions
-        });
-      }
-    );
-  }
-
-  getTaxNumber(res) {
-    if (res) {
-      this.invoiceForm.patchValue({
-        taxId: res.taxId,
-        taxIdDescription: res.taxIdDescription
-      });
-    }
-  }
-
-  /**
-   * get invoice contact details
-   */
-  getInvoiceContact(res: any) {
-    // this.getTaxNumber();
-    // this.getConditions();
-    if (res) {
-      this.includeInvoiceAsAttachmentSetting = res.includeInvoiceAsAttachmentSetting;
-      this.includeAccountReceivableReportAsAttachmentSetting = res.includeAccountReceivableReportAsAttachmentSetting;
-      this.isDisable = res.invoiceContact.enabled;
-      const state = !this.isDisable ? 'disable' : 'enable';
-      if (!this.isDisable) {
-        Object.keys(this.invoiceForm.controls).forEach(controlName => {
-          if (
-            controlName !== 'invoiceCount' &&
-            controlName !== 'invoiceTerms' &&
-            controlName !== 'enableInvoiceContact' &&
-            controlName !== 'taxIdDescription' &&
-            controlName !== 'taxId' &&
-            controlName !== 'conditions'
-          ) {
-            this.invoiceForm.controls[controlName][state](); // disables/enables each form control based on 'this.formDisabled'
-          }
-        });
-      }
-
-      this.invoiceForm.patchValue({
-        designation: res.invoiceContact.designation,
-        email: res.invoiceContact.email,
-        enableInvoiceContact: res.invoiceContact.enabled,
-        enableOwnerSending: res.enableOwnerSending,
-        firstName: res.invoiceContact.firstName,
-        lastName: res.invoiceContact.lastName,
-        enableContactSending: (!res.invoiceContact.enabled) ? true : res.invoiceContact.enableContactSending,
-      });
-      (<any>document.body.querySelector("#accounting-active")).checked = (!res.invoiceContact.enabled) ? true : res.invoiceContact.enableContactSending;
-      const phoneNumbers = res.invoiceContact.phoneNumbers || [];
-      if (phoneNumbers) {
-        phoneNumbers.forEach((phone, i) => {
-          if (i === 0) {
-            this.invoiceForm.patchValue({
-              primaryPhone: phone.number,
-              primaryPhoneType: phone.typeNumber
-            });
-            this.primaryPhoneType = this.phoneTypes.find(item => item.type == phone.typeNumber.toUpperCase());
-
-          }
-
-          if (i === 1) {
-            this.isAddPhone = true;
-            this.invoiceForm.patchValue({
-              secondaryPhone: phone.number,
-              secondaryPhoneType: phone.typeNumber
-            });
-            this.secondaryPhoneType = this.phoneTypes.find(item => item.type == phone.typeNumber.toUpperCase());
-          }
-        });
-        if (phoneNumbers.length === 0) {
-          this.invoiceForm.patchValue({
-            primaryPhone: "",
-            primaryPhoneType: "OFFICE"
-          });
-        }
-      }
-    }
-
-  }
-
-  /**
-   * get invoice terms
-   */
-
-  getTermsAndConditions(res) {
-    if (res) {
-      this.invoiceForm.patchValue({
-        invoiceTerms: res.term,
-        conditions: res.conditions
-      });
-      this.invoiceTerm = this.invoiceTerms.find(item => item.type == res.term);
-      this.elRef.nativeElement.querySelector('#memo-invoice').value = res.conditions;
-      //this.cd.detectChanges();
-      this.appStateService.changeDetectorRef();
-    }
-  }
-
-  /**
-   * get invoice number
-   */
-  getActualNumber(res) {
-    if (res) {
-      this.invoiceForm.patchValue({
-        invoiceCount: res.number
-      });
-    }
-  }
-
   onEnableInvoice(data) {
     this.invoiceForm.patchValue({
       enableInvoiceContact: data
@@ -301,7 +232,7 @@ export class InvoiceSettingsComponent implements OnInit {
         controlName !== 'enableInvoiceContact' &&
         controlName !== 'taxIdDescription' &&
         controlName !== 'taxId' &&
-        controlName !== 'conditions'
+        controlName !== 'condition'
       ) {
         this.invoiceForm.controls[controlName][state](); // disables/enables each form control based on 'this.formDisabled'
       }
@@ -340,11 +271,11 @@ export class InvoiceSettingsComponent implements OnInit {
       emailSettingPageNumberFormDto: {
         count: this.invoiceForm.value.invoiceCount,
         term: this.invoiceForm.value.invoiceTerms,
-        termsAndConditions: this.invoiceForm.value.conditions,
+        termsAndConditions: this.invoiceForm.value.condition,
         type: 'INVOICE',
         enableOwnerSending: this.invoiceForm.value.enableOwnerSending,
-        includeInvoiceAsAttachmentSetting: this.includeInvoiceAsAttachmentSetting,
-        includeAccountReceivableReportAsAttachmentSetting: this.includeAccountReceivableReportAsAttachmentSetting
+        includeInvoiceAsAttachmentSetting: this.invoiceSettings.includeInvoiceAsAttachmentSetting,
+        includeAccountReceivableReportAsAttachmentSetting: this.invoiceSettings.includeAccountReceivableReportAsAttachmentSetting
       },
       invoiceContactDto: {
         enabled: this.invoiceForm.value.enableInvoiceContact,

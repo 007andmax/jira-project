@@ -28,7 +28,7 @@ import { CompanyUsersDropDownComponent } from 'src/app/components/tickets/ticket
 export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
   phoneTypes = ['Office', 'Mobile', 'Fax'];
   companyTypes = [new CompanySetting('Client', 'CLIENT'), new CompanySetting('Lead', 'LEAD'), new CompanySetting('Vendor', 'VENDOR'), new CompanySetting('Supplier', 'SUPPLIER')];
-  paymentTerms = [new CompanySetting('COD', 0), new CompanySetting('7 days', 7), new CompanySetting('15 days', 15), new CompanySetting('30 days', 30)];
+  paymentTerms = [new CompanySetting('COD', 0), new CompanySetting('7 days', 7), new CompanySetting('15 days', 15), new CompanySetting('30 days', 30), new CompanySetting('45 days', 45), new CompanySetting('60 days', 60)];
   paymentMethods = [new CompanySetting('Cash', 'CASH'),
   new CompanySetting('Cheque', 'CHEQUE'),
   new CompanySetting('Debit Card', 'DEBIT_CARD'),
@@ -36,6 +36,7 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
   new CompanySetting('Wire Transfer', 'WIRE_TRANSFER')];
   serviceTypes: Array<CrmCompanyServiceType> = [];
   @ViewChild('addresstext') addresstext: any;
+  @ViewChild('paymentTerm') paymentTerm: DropDownComponent;
   @ViewChild('companyTypeDp') companyTypeDp: DropDownComponent;
   @ViewChild('userDp') userDp: CompanyUsersDropDownComponent;
   industries: Array<CrmCompanyIndustry> = [];
@@ -95,6 +96,9 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
       let user = this.users.find(item => item.id == this.company.contacts[0].id);
       if (user) this.userDp.selectItemWithOutChanges({ user: user, customerCompany: user.customerCompaniesInfo[0] });
     }
+    console.log("this.companiesStateService.getCurrentCompany().paymentTerms", this.companiesStateService.getCurrentCompany().paymentTerms);
+    this.paymentTerm.selectItemWithOutChanges(this.paymentTerms.find(item => item.value == this.companiesStateService.getCurrentCompany().paymentTerms));
+    this.company.paymentTerms = JSON.parse(JSON.stringify(this.companiesStateService.getCurrentCompany().paymentTerms));
     this.onCroppImage();
   }
   onGetUsers(data) {

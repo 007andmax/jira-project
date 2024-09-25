@@ -43,7 +43,14 @@ export class InvoiceTicketsService {
       .get(`${this.apiUrl}settings/emailPages/invoiceContact`)
       .pipe(map(data => data));
   }
-
+  /**
+    * get invoice contact
+    */
+  getInvoiceSettings() {
+    return this.http
+      .get(`${this.apiUrl}settings/companyProfile/InvoiceSettings`)
+      .pipe(map(data => data));
+  }
   /**
    * get tax number
    */
