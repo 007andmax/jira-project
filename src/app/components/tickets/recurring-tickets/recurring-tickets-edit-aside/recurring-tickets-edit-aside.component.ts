@@ -117,7 +117,6 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.createService.getStateDatePicker().onInitEditMode(data.startDate);
     this.products = (data.products.length > 0) ? this.createService.getProductsForEdit(data.products) : [new ForCreateProduct()];
     this.services = (data.services.length > 0) ? this.createService.getServicesForEdit(data.services, data.serviceErrors) : [new ForCreateService()];
-    console.log("this.services", this.services);
     this.createService.setTagsForEdit(data.tags);
     this.createService.setCreateTask(data.createTask);
     this.createService.setRequireUpdate(data.requireUpdate);
@@ -162,7 +161,6 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   private getServiceAgreements(id) {
     this.contractsService.getServiceAgreementsByCompany(id).subscribe((data: any) => {
       this.agreements = data;
-      console.log("this.agreements", this.agreements);
       this.areTicketsPresented = (this.agreements.length > 0) ? true : false;
     })
   }
@@ -299,7 +297,6 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   public setService(item, index) {
     let newItem = { ...item, ...{ description: this.services[index].description, duration: (this.services[index].duration) ? this.services[index].duration : 1 } };
     this.services[index] = new ForCreateService(newItem);
-    console.log("this.services[index]", this.services[index]);
     this.cd.detectChanges();
   }
 
@@ -419,7 +416,6 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
       }
     }
     this.services.filter((item: ForCreateService) => item.versionedId).forEach(item => this.recurringState.getCreateTicket().addService(new CreateRecurringTicketsService(item.versionedId.id, item.description, item.duration)));
-    console.log("this.recurringState.getCreateTicket()", this.recurringState.getCreateTicket());
     if (this.ticketForEdit && this.ticketForEdit.id) {
 
       this.recurringState.getCreateTicket().checkForEdit(this.ticketForEdit);
