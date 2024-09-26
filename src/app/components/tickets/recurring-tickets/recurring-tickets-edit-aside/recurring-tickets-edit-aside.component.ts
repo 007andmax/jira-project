@@ -295,6 +295,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   public setService(item, index) {
     let newItem = { ...item, ...{ description: this.services[index].description, duration: (this.services[index].duration) ? this.services[index].duration : 1 } };
     this.services[index] = new ForCreateService(newItem);
+    console.log("this.services[index]", this.services[index]);
     this.cd.detectChanges();
   }
 
@@ -413,16 +414,8 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
         this.recurringState.getCreateTicket().clearProducts();
       }
     }
-    if (this.createService.checkServicesForSave(this.ticketForEdit, this.services)) {
-      this.services.forEach((item: ForCreateService) => (item.versionedId && (item.name || item.description)) && this.recurringState.getCreateTicket().addService(new CreateRecurringTicketsService(item.versionedId.id, item.description, item.duration)));
-    } else {
-      if (this.ticketForEdit === null) {
-        this.recurringState.getCreateTicket().resetServices();
-
-      } else {
-        this.recurringState.getCreateTicket().clearServices();
-      }
-    }
+    this.services.filter((item: ForCreateService) => item.versionedId).forEach(item => this.recurringState.getCreateTicket().addService(new CreateRecurringTicketsService(item.versionedId.id, item.description, item.duration)));
+    console.log("this.recurringState.getCreateTicket()", this.recurringState.getCreateTicket());
     if (this.ticketForEdit && this.ticketForEdit.id) {
 
       this.recurringState.getCreateTicket().checkForEdit(this.ticketForEdit);
