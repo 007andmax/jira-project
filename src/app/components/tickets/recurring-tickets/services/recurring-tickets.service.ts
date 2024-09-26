@@ -345,5 +345,4 @@ export class RecurringTicketsService {
 
     return change;
   }
-
 }

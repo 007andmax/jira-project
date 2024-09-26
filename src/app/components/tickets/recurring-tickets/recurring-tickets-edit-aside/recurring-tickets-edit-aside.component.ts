@@ -31,6 +31,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   public opened = false;
   public productList = [];
   public servicesList = [];
+  agreements = [];
   public products: Array<ForCreateProduct> = [];
   public services: Array<ForCreateService> = [];
   public type: string = "services";
@@ -42,7 +43,6 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   public listTechUsers: Array<TechUserItem> = [];
   description: TextAreaDirective;
   areTicketsPresented: boolean = false;
-  areTicketsTerminated: boolean = false;
   @ViewChild(TextAreaDirective) set appTextArea(directive: TextAreaDirective) {
     this.description = directive;
   };
@@ -117,6 +117,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.createService.getStateDatePicker().onInitEditMode(data.startDate);
     this.products = (data.products.length > 0) ? this.createService.getProductsForEdit(data.products) : [new ForCreateProduct()];
     this.services = (data.services.length > 0) ? this.createService.getServicesForEdit(data.services, data.serviceErrors) : [new ForCreateService()];
+    console.log("this.services", this.services);
     this.createService.setTagsForEdit(data.tags);
     this.createService.setCreateTask(data.createTask);
     this.createService.setRequireUpdate(data.requireUpdate);
@@ -160,12 +161,15 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   }
   private getServiceAgreements(id) {
     this.contractsService.getServiceAgreementsByCompany(id).subscribe((data: any) => {
-      let Agreements = data;
-      this.areTicketsPresented = (Agreements.length > 0) ? true : false;
-      this.areTicketsTerminated = Agreements.every((el) => {
-        return el.status === 'EXPIRED' || el.status === 'TERMINATED'
-      })
+      this.agreements = data;
+      console.log("this.agreements", this.agreements);
+      this.areTicketsPresented = (this.agreements.length > 0) ? true : false;
     })
+  }
+  checkServiceTerminated(service) {
+    if (!service.serviceAgreement && !service.serviceContractServiceAgreement) return false;
+    let serviceAgreement = this.agreements.find(item => service.serviceAgreement && service.serviceAgreement.id == item.id || service.serviceContractServiceAgreement && service.serviceContractServiceAgreement.id == item.id);
+    return serviceAgreement.status === 'EXPIRED' || serviceAgreement.status === 'TERMINATED';
   }
   /**
   * Subscribe to change description
