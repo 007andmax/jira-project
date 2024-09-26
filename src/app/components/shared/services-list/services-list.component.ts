@@ -85,7 +85,9 @@ export class ServicesListComponent implements OnInit, OnDestroy {
     this.products_dropDown.close();
     this.selectedServicesItem.next(item);
     this.searchName = null;
-    this.cd.detectChanges();
+    if (!this.cd['destroyed']) {
+      this.cd.detectChanges();
+    }
   }
   public isSelected(id) {
     return this.editItem && this.editItem.name && this.editItem.versionedId.id == id;
