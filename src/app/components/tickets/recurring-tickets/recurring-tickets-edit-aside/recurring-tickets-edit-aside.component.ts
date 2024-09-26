@@ -169,7 +169,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   checkServiceTerminated(service) {
     if (!service.serviceAgreement && !service.serviceContractServiceAgreement) return false;
     let serviceAgreement = this.agreements.find(item => service.serviceAgreement && service.serviceAgreement.id == item.id || service.serviceContractServiceAgreement && service.serviceContractServiceAgreement.id == item.id);
-    return serviceAgreement.status === 'EXPIRED' || serviceAgreement.status === 'TERMINATED';
+    return serviceAgreement ? (serviceAgreement.status === 'EXPIRED' || serviceAgreement.status === 'TERMINATED') : false;
   }
   /**
   * Subscribe to change description
