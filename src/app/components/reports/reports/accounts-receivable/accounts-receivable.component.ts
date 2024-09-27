@@ -35,18 +35,29 @@ export class AccountsReceivableComponent implements OnInit {
     this.headers.push("Total");
     this.classes = ["accounts-receivable__col-company-name", "", "", "", "", "", ""];
     this.list = [];
-    this.accountsReceivable.lines.forEach((item, index) => {
+    this.accountsReceivable.reportData.forEach((item, index) => {
       let list = [];
 
       if (this.accountsReceivable.type === "SUMMARY") list.push(item.clientCompanyName);
       if (this.accountsReceivable.type === "DETAILED") list.push(item.invoiceNumber);
-      list.push(`$${this.parseTotal(item.currentSum)}`);
-      list.push(`$${this.parseTotal(item.month1Sum)}`);
-      list.push(`$${this.parseTotal(item.month2Sum)}`);
-      list.push(`$${this.parseTotal(item.month3Sum)}`);
-      list.push(`$${this.parseTotal(item.olderSum)}`);
+      list.push(`$${this.parseTotal(item.totalCurrentSum)}`);
+      list.push(`$${this.parseTotal(item.total1MonthSum)}`);
+      list.push(`$${this.parseTotal(item.total2MonthSum)}`);
+      list.push(`$${this.parseTotal(item.total3MonthSum)}`);
+      list.push(`$${this.parseTotal(item.totalOlderSum)}`);
       list.push(`$${this.parseTotal(item.totalSum)}`);
       this.list.push(list);
+      item.lines.forEach((itemLine, index) => {
+        let listLine = [];
+        listLine.push(itemLine.invoiceNumber);
+        listLine.push(`$${this.parseTotal(itemLine.currentSum)}`);
+        listLine.push(`$${this.parseTotal(itemLine.month1Sum)}`);
+        listLine.push(`$${this.parseTotal(itemLine.month2Sum)}`);
+        listLine.push(`$${this.parseTotal(itemLine.month3Sum)}`);
+        listLine.push(`$${this.parseTotal(itemLine.olderSum)}`);
+        listLine.push(`$${this.parseTotal(itemLine.totalSum)}`);
+        this.list.push(listLine);
+      });
     })
     let list = [];
     list.push("Total");
@@ -61,7 +72,6 @@ export class AccountsReceivableComponent implements OnInit {
   }
   onSelectedClient(client) {
     this.selectedClient = client;
-
   }
   parseTotal(value) {
     return parseFloat(value.toString()).toFixed(2)

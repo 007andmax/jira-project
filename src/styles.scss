@@ -3632,3 +3632,23 @@ app-company-devices-edit-ip,app-company-devices-edit-mac {
     min-width: 400px;
   }
 }
+app-multi-company-drop-down {
+ &:before {
+     display: none;
+     
+  }
+
+   .mat-form-field-label-wrapper {
+     top: -20px;
+     padding-top: 15px;
+    
+  }
+
+   .mat-form-field-wrapper {
+     padding-bottom: 0px !important;
+    
+  }
+  .mat-form-field {
+      width: 100%;
+  }
+}

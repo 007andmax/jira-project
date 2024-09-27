@@ -251,13 +251,15 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     this.isDisabledCompany = (data === 'Summary') ? true : false;
     if (data === 'Summary') this.validate.resetCompany();
   }
+  selectMultiClient(data) {
+    this.accountsReceivable.setClientCompanyIds(data.map(item => item.id));
+  }
   /**
 * @description Set new value selected company from dropdown
 * @param {Object} selectClient - Object Company
 */
   public selectClient(selectClient) {
     if (selectClient == null) {
-      this.accountsReceivable.setClientCompanyId(null);
       this.selectedClient = null;
       this.glNumber.setClientCompanyId(null);
       this.productSalesReport.setCompanyId(null);
@@ -278,7 +280,6 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.detailContractReport.setCompanyId(selectClient.id);
       this.accountingReport.setCompanyId(selectClient.id);
       this.glNumber.setClientCompanyId(selectClient.id);
-      this.accountsReceivable.setClientCompanyId(selectClient.id);
       this.productSalesReport.setCompanyId(selectClient.id);
       this.customerSalesReport.setCompanyId(selectClient.id);
       this.serviceReport.setCompanyId(selectClient.id);

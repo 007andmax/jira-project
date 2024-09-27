@@ -417,7 +417,7 @@
                     class="qt-report__control-panel-btn-close pointer qt-df qt-ai-c qt-jc-c"
                     (click)="back()"
                 >
-                  <div class="qt-icon icon__close qt-sz-24"></div>
+                    <div class="qt-icon icon__close qt-sz-24"></div>
                 </div>
             </div>
         </div>
@@ -545,7 +545,7 @@
                     class="qt-report__control-panel-btn-close pointer qt-df qt-ai-c qt-jc-c"
                     (click)="back()"
                 >
-                  <div class="qt-icon icon__close qt-sz-24"></div>
+                    <div class="qt-icon icon__close qt-sz-24"></div>
                 </div>
             </div>
         </div>
@@ -681,7 +681,7 @@
                     class="qt-report__control-panel-btn-close pointer qt-df qt-ai-c qt-jc-c"
                     (click)="back()"
                 >
-                  <div class="qt-icon icon__close qt-sz-24"></div>
+                    <div class="qt-icon icon__close qt-sz-24"></div>
                 </div>
             </div>
         </div>
@@ -1133,14 +1133,13 @@
                         [ngClass]="className"
                     >
                         <div class="qt-report__dropdown qt-mr-8">
-                            <company-drop-down
-                                [placeholder]="'Select Company'"
-                                [field]="'name'"
-                                [heightInput]="'36px'"
-                                [search]="true"
+                            <app-multi-company-drop-down
+                                #companyDp
                                 [change]="true"
-                                (onSelectedItem)="selectClient($event)"
-                            ></company-drop-down>
+                                [search]="true"
+                                [sort]="false"
+                                (onChangeCompanies)="selectMultiClient($event)"
+                            ></app-multi-company-drop-down>
                         </div>
                         <button
                             class="qt-button --md --gray qt-fs-0"
@@ -1149,6 +1148,24 @@
                             Get
                 Report
                         </button>
+                        <label class="qt-checkbox qt-dif qt-ai-c qt-mr-20 pointer">
+                            <input
+                                type="checkbox"
+                                [(ngModel)]="accountsReceivable.isCommonReport"
+                            >
+                            <span></span>
+                            <div class="qt-ml-8">Common</div>
+                        </label>
+                        <label class="qt-checkbox qt-dif qt-ai-c qt-mr-20 pointer">
+                            <input
+                                type="checkbox"
+                                [checked]="detailedCommissionsReport.detailsByProducts"
+                                (change)="toggleDetailsByProducts(true)"
+                                checked
+                            >
+                            <span></span>
+                            <div class="qt-ml-8">Detailed</div>
+                        </label>
                     </div>
                 </div>
                 <app-report-additional-actions
@@ -1252,7 +1269,7 @@
                     class="qt-report__control-panel-btn-close pointer qt-df qt-ai-c qt-jc-c"
                     (click)="back()"
                 >
-                  <div class="qt-icon icon__close qt-sz-24"></div>
+                    <div class="qt-icon icon__close qt-sz-24"></div>
                 </div>
             </div>
         </div>
@@ -1340,7 +1357,7 @@
                     class="qt-report__control-panel-btn-close pointer qt-df qt-ai-c qt-jc-c"
                     (click)="back()"
                 >
-                  <div class="qt-icon icon__close qt-sz-24"></div>
+                    <div class="qt-icon icon__close qt-sz-24"></div>
                 </div>
             </div>
         </div>
@@ -1402,11 +1419,11 @@
                 </div>
             </div>
             <div
-              class="qt-report__control-panel-btn-close qt-df qt-jc-c qt-ai-c pointer"
-              (click)="back()"
-          >
-              <div class="qt-icon icon__close qt-sz-24"></div>
-          </div>
+                class="qt-report__control-panel-btn-close qt-df qt-jc-c qt-ai-c pointer"
+                (click)="back()"
+            >
+                <div class="qt-icon icon__close qt-sz-24"></div>
+            </div>
         </div>
     </div>
     <div *ngIf="report === 'service-report'">

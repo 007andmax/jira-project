@@ -24,7 +24,7 @@
                 [textContent]="(selectedClient) ? selectedClient.name : 'All companies'"
             ></div>
             <h6 class="qt-fw-600 qt-color-gray-900">Accounts Receivable</h6>
-            <div *ngIf="accountsReceivable.lines.length > 0">
+            <div *ngIf="accountsReceivable.reportData.length > 0">
                 <div
                     class="qt-fw-600 body-m__sb qt-color-gray-900"
                     [textContent]="accountsReceivable.techCompanyName"
