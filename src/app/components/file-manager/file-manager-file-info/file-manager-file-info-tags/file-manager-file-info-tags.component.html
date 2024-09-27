@@ -42,7 +42,7 @@
                     [formControl]="tagCtrl"
                     (input)="onSearch($event)"
                     (keyup)="onKeyUp($event)"
-                    *ngIf="!customerPortalStateService.isCustomerPortal"
+                    [hidden]="customerPortalStateService.isCustomerPortal"
                 >
             </app-mat-chip-list>
         </app-mat-form-field>
