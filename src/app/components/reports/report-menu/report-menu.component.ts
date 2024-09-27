@@ -524,6 +524,9 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
   public trackByIndex(index, item) {
     return index;
   }
+  onSetIsCommonReport(data) {
+    this.accountsReceivable.isCommonReport = data;
+  }
   /**
   * filter data by date
   */

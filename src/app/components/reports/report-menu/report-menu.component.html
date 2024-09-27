@@ -1126,52 +1126,63 @@
     </div>
     <div *ngIf="report === 'accounts-receivable'">
         <div class="qt-report__header qt-df qt-ai-fs">
-            <div class="qt-report__header-content qt-df qt-ai-c qt-jc-sb">
-                <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
-                    <div
-                        class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c"
-                        [ngClass]="className"
-                    >
-                        <div class="qt-report__dropdown qt-mr-8">
-                            <app-multi-company-drop-down
-                                #companyDp
-                                [change]="true"
-                                [search]="true"
-                                [sort]="false"
-                                (onChangeCompanies)="selectMultiClient($event)"
-                            ></app-multi-company-drop-down>
-                        </div>
-                        <button
-                            class="qt-button --md --gray qt-fs-0"
-                            (click)="getReportByAccountsReceivable()"
+            <div class="qt-report__header-content">
+                <div class="qt-df qt-ai-c qt-jc-sb">
+                    <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
+                        <div
+                            class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c"
+                            [ngClass]="className"
                         >
-                            Get
+                            <div class="qt-report__dropdown qt-mr-8">
+                                <app-multi-company-drop-down
+                                    #companyDp
+                                    [change]="true"
+                                    [search]="true"
+                                    [sort]="false"
+                                    (onChangeCompanies)="selectMultiClient($event)"
+                                ></app-multi-company-drop-down>
+                            </div>
+                            <button
+                                class="qt-button --md --gray qt-fs-0 qt-mr-8"
+                                (click)="getReportByAccountsReceivable()"
+                            >
+                                Get
                 Report
-                        </button>
-                        <label class="qt-checkbox qt-dif qt-ai-c qt-mr-20 pointer">
+                            </button>
+                        </div>
+                    </div>
+                    <app-report-additional-actions
+                        [fileName]="'accounts_receivable'"
+                        [selectedClient]="selectedClient"
+                    ></app-report-additional-actions>
+                </div>
+                <div class="qt-report__include-columns-panel qt-mt-16">
+                    <p class="qt-mb-4">Report type</p>
+                    <div class="qt-df qt-ai-c qt-jc-c">
+                        <div class="qt-radio qt-mr-16">
                             <input
-                                type="checkbox"
-                                [(ngModel)]="accountsReceivable.isCommonReport"
+                                id="by-device"
+                                type="radio"
+                                name="radio"
+                                value="1"
+                                [checked]="accountsReceivable.isCommonReport"
+                                (change)="onSetIsCommonReport(true)"
                             >
-                            <span></span>
-                            <div class="qt-ml-8">Common</div>
-                        </label>
-                        <label class="qt-checkbox qt-dif qt-ai-c qt-mr-20 pointer">
+                            <label for="by-device">Common</label>
+                        </div>
+                        <div class="qt-radio">
                             <input
-                                type="checkbox"
-                                [checked]="detailedCommissionsReport.detailsByProducts"
-                                (change)="toggleDetailsByProducts(true)"
-                                checked
+                                id="by-users"
+                                type="radio"
+                                name="radio"
+                                value="2"
+                                [checked]="!accountsReceivable.isCommonReport"
+                                (change)="onSetIsCommonReport(false)"
                             >
-                            <span></span>
-                            <div class="qt-ml-8">Detailed</div>
-                        </label>
+                            <label for="by-users">Detailed</label>
+                        </div>
                     </div>
                 </div>
-                <app-report-additional-actions
-                    [fileName]="'accounts_receivable'"
-                    [selectedClient]="selectedClient"
-                ></app-report-additional-actions>
             </div>
             <div
                 class="qt-report__control-panel-btn-close qt-df qt-jc-c qt-ai-c pointer"

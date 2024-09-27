@@ -11,13 +11,10 @@ export class AccountsReceivableReport {
     invoiceNumber: string;
     lines: Array<AccountsReceivableReportLineReport> = [];
     constructor(data) {
-        this.totalCurrentSum = data.totalCurrentSum;
-        this.total1MonthSum = data.total1MonthSum;
-        this.total2MonthSum = data.total2MonthSum;
-        this.total3MonthSum = data.total3MonthSum;
-        this.totalOlderSum = data.totalOlderSum;
-        this.totalSum = data.totalSum;
-        this.clientCompanyName = data.clientCompanyName;
-        this.invoiceNumber = data.invoiceNumber;
+        for (const key in data) {
+            this[key] = data[key];
+        }
+        this.lines = [];
+        if (data.lines) this.lines = data.lines.map(item => new AccountsReceivableReportLineReport(item));
     }
 }

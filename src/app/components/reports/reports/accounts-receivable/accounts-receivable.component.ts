@@ -38,8 +38,7 @@ export class AccountsReceivableComponent implements OnInit {
     this.accountsReceivable.reportData.forEach((item, index) => {
       let list = [];
 
-      if (this.accountsReceivable.type === "SUMMARY") list.push(item.clientCompanyName);
-      if (this.accountsReceivable.type === "DETAILED") list.push(item.invoiceNumber);
+      list.push(item.clientCompanyName);
       list.push(`$${this.parseTotal(item.totalCurrentSum)}`);
       list.push(`$${this.parseTotal(item.total1MonthSum)}`);
       list.push(`$${this.parseTotal(item.total2MonthSum)}`);
@@ -58,7 +57,9 @@ export class AccountsReceivableComponent implements OnInit {
         listLine.push(`$${this.parseTotal(itemLine.totalSum)}`);
         this.list.push(listLine);
       });
+      if (this.accountsReceivable.type == "DETAILED") this.list.push(['', '', '', '', '', '', '']);
     })
+    this.list.push(['', '', '', '', '', '', '']);
     let list = [];
     list.push("Total");
     list.push(`$${this.parseTotal(this.accountsReceivable.totalCurrentSum)}`);
@@ -68,6 +69,7 @@ export class AccountsReceivableComponent implements OnInit {
     list.push(`$${this.parseTotal(this.accountsReceivable.totalOlderSum)}`);
     list.push(`$${this.parseTotal(this.accountsReceivable.totalSum)}`);
     this.list.push(list);
+
     this.cd.detectChanges();
   }
   onSelectedClient(client) {
