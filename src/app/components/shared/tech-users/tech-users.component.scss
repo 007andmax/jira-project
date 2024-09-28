@@ -117,3 +117,9 @@
   background-size: cover !important;
   background-position: center !important;
 }
+.tab-pane__user-circle {
+  width: 30px;
+  height: 30px;
+  border: 1px solid $gray-200;
+  background-color: $white;
+}

@@ -1913,20 +1913,6 @@ app-quotes-item {
 }
 .new-users-content__modal,
 .new-companies-content__modal {
-  .create-contract {
-    position: relative;
-    margin-right: 20px;
-    &:after {
-      position: absolute;
-      content: "";
-      background: url("./assets/img/icons/help.svg") no-repeat center / contain;
-      height: 16px;
-      width: 16px;
-      right: -22px;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-  }
   .advanced {
     .editable-field {
       position: relative;
