@@ -57,6 +57,7 @@
 }
 .--disabled-radio {
   label {
+    cursor: default !important;
     &::before {
       border: 1px solid $gray-200 !important;
       background: $gray-100 !important;

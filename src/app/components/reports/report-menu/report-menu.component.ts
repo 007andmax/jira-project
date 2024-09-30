@@ -253,6 +253,7 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
   }
   selectMultiClient(data) {
     this.accountsReceivable.setClientCompanyIds(data.map(item => item.id));
+    if (data.length == 0) this.accountsReceivable.setIsCommonReport(true);
   }
   /**
 * @description Set new value selected company from dropdown

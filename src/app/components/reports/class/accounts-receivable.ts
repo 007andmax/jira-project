@@ -18,6 +18,9 @@ export class AccountsReceivable {
     constructor() {
 
     }
+    public setIsCommonReport(data) {
+        this.isCommonReport = data;
+    }
     public setData(data) {
         this.companyIds = data.companyIds;
         this.techCompanyName = data.techCompanyName;
