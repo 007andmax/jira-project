@@ -1138,7 +1138,8 @@
                                     #companyDp
                                     [change]="true"
                                     [search]="true"
-                                    [sort]="false"
+                                    [sort]="true"
+                                    [field]="'name'"
                                     (onChangeCompanies)="selectMultiClient($event)"
                                 ></app-multi-company-drop-down>
                             </div>
@@ -1171,7 +1172,10 @@
                             >
                             <label for="by-device">Common</label>
                         </div>
-                        <div class="qt-radio">
+                        <div
+                            class="qt-radio"
+                            [ngClass]="{'--disabled-radio': accountsReceivable.companyIds.length == 0}"
+                        >
                             <input
                                 id="by-users"
                                 type="radio"

@@ -55,7 +55,17 @@
     }
   }
 }
-
+.--disabled-radio {
+  label {
+    &::before {
+      border: 1px solid $gray-200 !important;
+      background: $gray-100 !important;
+    }
+    &::after {
+      background: $gray-300 !important;
+    }
+  }
+}
 
 .qt-input-line {
   display: flex;
