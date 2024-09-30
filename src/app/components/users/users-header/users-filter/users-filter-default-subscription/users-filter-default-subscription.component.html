@@ -4,7 +4,10 @@
     #products="ngbDropdown"
 >
     <p class="title-filter qt-mb-10">Subscription Title</p>
-    <app-mat-form-field ngbDropdownAnchor>
+    <app-mat-form-field
+        ngbDropdownAnchor
+        #formField
+    >
         <app-mat-chip-list
             #chipList
             aria-label="Fruit selection"
