@@ -1165,6 +1165,7 @@
                                 type="radio"
                                 name="radio"
                                 value="1"
+                                [disabled]="accountsReceivable.companyIds.length == 0"
                                 [checked]="accountsReceivable.isCommonReport"
                                 (change)="onSetIsCommonReport(true)"
                             >
@@ -1176,6 +1177,7 @@
                                 type="radio"
                                 name="radio"
                                 value="2"
+                                [disabled]="accountsReceivable.companyIds.length == 0"
                                 [checked]="!accountsReceivable.isCommonReport"
                                 (change)="onSetIsCommonReport(false)"
                             >

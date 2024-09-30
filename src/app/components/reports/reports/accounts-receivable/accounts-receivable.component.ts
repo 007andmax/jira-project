@@ -57,7 +57,7 @@ export class AccountsReceivableComponent implements OnInit {
         listLine.push(`$${this.parseTotal(itemLine.totalSum)}`);
         this.list.push(listLine);
       });
-      if (this.accountsReceivable.type == "DETAILED") this.list.push(['', '', '', '', '', '', '']);
+      if (this.accountsReceivable.type == "DETAILED" && index + 1 !== this.accountsReceivable.reportData.length) this.list.push(['', '', '', '', '', '', '']);
     })
     this.list.push(['', '', '', '', '', '', '']);
     let list = [];
