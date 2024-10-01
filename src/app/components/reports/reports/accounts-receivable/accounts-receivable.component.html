@@ -32,11 +32,49 @@
             </div>
         </div>
         <div>
-            <app-overview-report
-                [headers]="headers"
-                [list]="list"
-                [classes]="classes"
-            ></app-overview-report>
+            <table class="qt-report__body-table-body">
+                <thead>
+                    <tr>
+                        <ng-template
+                            ngFor
+                            let-item
+                            [ngForOf]="headers"
+                            let-i="index"
+                            [ngForTrackBy]="trackByIndex"
+                        >
+                            <th
+                                [ngClass]="(classes.length > 0) ? classes[i] : ''"
+                                [textContent]="item"
+                                class="qt-fw-600 qt-color-gray-900"
+                            ></th>
+                        </ng-template>
+                    </tr>
+                </thead>
+                <tbody class="qt-report__body-table-body">
+                    <ng-template
+                        ngFor
+                        let-item
+                        [ngForOf]="list"
+                        let-i="index"
+                        [ngForTrackBy]="trackByIndex"
+                    >
+                        <tr class="qt-report__body-row ng-star-inserted">
+                            <ng-template
+                                ngFor
+                                let-child
+                                [ngForOf]="item"
+                                let-u="index"
+                                [ngForTrackBy]="trackByIndex"
+                            >
+                                <td
+                                    [ngClass]="child.class"
+                                    [textContent]="child.value"
+                                ></td>
+                            </ng-template>
+                        </tr>
+                    </ng-template>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
