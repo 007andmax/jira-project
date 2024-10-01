@@ -1653,26 +1653,13 @@ app-quotes-item {
         .tab-product,
         .tab-service {
           position: static;
-          mask-image: url("./assets/img/icons/products.svg");
-          mask-size: contain;
           margin-right: 8px;
           background-color: $gray-500;
-        }
-        .tab-service {
-          mask-image: url("./assets/img/icons/service.svg");
-          mask-size: contain;
         }
         &.active-tab {
           color: $blue-light-600;
           border-bottom: 2px solid $blue-light-600;
-          .tab-product {
-            mask-image: url("/assets/img/icons/products.svg");
-            mask-size: contain;
-            background-color: $blue-light-600;
-          }
-          .tab-service {
-            mask-image: url("/assets/img/icons/time.svg");
-            mask-size: contain;
+          .qt-icon {
             background-color: $blue-light-600;
           }
         }

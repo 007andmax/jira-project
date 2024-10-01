@@ -662,6 +662,12 @@ Example:
   &__resend-receipt {
     mask-image: url("/assets/img/icons/resend-receipt.svg");
   }
+  &__quick-support {
+    mask-image: url("/assets/img/icons/quick-support.svg");
+  }
+  &__reports {
+    mask-image: url("/assets/img/icons/reports.svg");
+  }
 
   &.--updated {
     position: relative;

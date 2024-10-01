@@ -73,11 +73,13 @@
                     >
                         <div id="dropdownBasic1">
                             <i
-                                class="tag-color pointer"
+                                class="qt-df qt-ai-c qt-jc-c qt-sz-24 tag-color pointer"
                                 ngbDropdownToggle
                                 [ngStyle]="{'background-color':statusColors[addStatus.color].textColor ,
                             'border-color': statusColors[addStatus.color].textColor}"
-                            ></i>
+                            >
+                              <div class="qt-icon icon__color-picker qt-icon__white qt-sz-16 qt-icon__white"></div>
+                            </i>
                         </div>
                         <div
                             ngbDropdownMenu
@@ -208,11 +210,13 @@
                                     ngbDropdownItem
                                 >
                                     <i
-                                        class="tag-color"
+                                        class="qt-df qt-ai-c qt-jc-c qt-sz-24 tag-color"
                                         [ngClass]="{'--active':item.color == i}"
                                         [ngStyle]="{'background-color':tagColor.textColor ,
                             'border-color': tagColor.textColor}"
-                                    ></i>
+                                    >
+                                      <div class="qt-icon icon__done qt-icon__white qt-sz-16 qt-icon__white"></div>
+                                    </i>
                                 </div>
                             </div>
                         </div>
