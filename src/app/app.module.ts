@@ -145,6 +145,7 @@ import { FileManagerComponent } from './components/file-manager/file-manager.com
 import { FileManagementAddFileModule } from './components/file-manager/file-manager-add-file/file-manager-add-file.module';
 import { PreviewFileComponent } from './components/shared/preview-file/preview-file.component';
 import { UsersDropDownComponent } from './components/shared/users-drop-down/users-drop-down.component';
+import { MultiCompanyDropDownComponent } from './components/shared/multi-company-drop-down/multi-company-drop-down.component';
 declare var $: any;
 
 /**

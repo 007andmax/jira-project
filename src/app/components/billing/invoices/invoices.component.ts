@@ -29,7 +29,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   invoices: Array<Invoice> = [];
   showPendingPreloader: boolean = false;
   showPreloader: boolean = true;
-  selectedCompanyId: string = null;
+  selectedCompanyIds: Array<string> = [];
   public sort: string = '';
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
@@ -52,15 +52,15 @@ export class InvoicesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.customerPortalStateService.isCustomerPortal) {
-      this.invoicesFilter.setCompanyId(this.customerPortalStateService.getInvoicesFilter().companyId);
-      this.websocketService.onInitConnectCustomerUser("new-billable-invoices", this.customerPortalStateService.getInvoicesFilter().companyId);
+      this.invoicesFilter.setCompanyIds(this.customerPortalStateService.getInvoicesFilter().companyIds);
+      this.websocketService.onInitConnectCustomerUser("new-billable-invoices", this.customerPortalStateService.getInvoicesFilter().companyIds[0]);
     }
     let onInvoiceFilters = this.customerPortalStateService.onInvoiceFilters.subscribe(data => {
       this.invoicesFilter.onInitLeftOffset(false);
       this.invoicesFilter.resetLeftOffset();
       this.selectedInvoices = [];
-      this.selectedCompanyId = null;
-      this.invoicesFilter.setCompanyId(this.customerPortalStateService.getInvoicesFilter().companyId);
+      this.selectedCompanyIds = [];
+      this.invoicesFilter.setCompanyIds(this.customerPortalStateService.getInvoicesFilter().companyIds);
       this.invoicesFilter.resetSortBy();
       this.showPreloader = true;
       document.body.querySelector(".main-container").scrollTo(0, 0);
@@ -79,7 +79,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
       this.invoicesFilter.onInitLeftOffset(false);
       this.invoicesFilter.resetLeftOffset();
       this.selectedInvoices = [];
-      this.selectedCompanyId = null;
+      this.selectedCompanyIds = [];
       this.invoicesFilter = data;
       this.invoicesFilter.resetSortBy();
       this.showPreloader = true;
@@ -143,10 +143,9 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(changeInvoice);
     let getClosedAside = this.invoiceStateService.getClosedAside().subscribe(data => {
-      this.selectedCompanyId = null;
+      this.selectedCompanyIds = [];
       this.invoices.forEach(item => {
         item.selected = false;
-        item.blockSelected = false;
       })
     })
     this.sub.add(getClosedAside);
@@ -167,7 +166,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   }
   onCreatePayment() {
     this.selectedInvoices = [];
-    if (this.selectedCompanyId) {
+    if (this.selectedCompanyIds.length > 0) {
       this.invoices.forEach(item => {
         if (item.selected) this.selectedInvoices.push(item);
       })
@@ -190,7 +189,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   public sortBy(sort) {
     this.showPreloader = true;
     this.selectedInvoices = [];
-    this.selectedCompanyId = null;
+    this.selectedCompanyIds = [];
     this.direction = this.invoicesListService.getDirection(this.direction, this.sort, sort);
     this.sort = sort;
     this.invoicesFilter.setSortBy(`${this.sort}_${this.direction}`);
@@ -199,19 +198,12 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     this.onScroll();
   }
   onSelectInvoice() {
-    let find = this.invoices.find(item => item.selected);
-    if (find) {
-      this.selectedCompanyId = find.companyId;
-      this.invoices.forEach(item => {
-        if (item.companyId !== this.selectedCompanyId) item.blockSelected = true;
-        if (item.companyId === this.selectedCompanyId) item.blockSelected = false;
-      })
-    } else {
-      this.selectedCompanyId = null;
-      this.invoices.forEach(item => {
-        item.blockSelected = false
-      })
-    }
+    this.invoices.forEach(item => {
+      if (item.selected) this.selectedCompanyIds.push(item.companyId);
+    })
+    this.selectedCompanyIds = this.selectedCompanyIds.filter((item, pos, self) => {
+      return self.indexOf(item) == pos;
+    })
     this.cd.detectChanges();
   }
   getInvoices() {
@@ -223,10 +215,6 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     if (this.page_number > 0) this.showPendingPreloader = true;
     this.invoicesService.getInvoices(this.invoicesFilter.getFIlter()).subscribe((data: any) => {
       this.invoices = [...this.invoices, ...data.map(item => new Invoice(item))];
-      if (this.selectedCompanyId) this.invoices.forEach(item => {
-        if (item.companyId !== this.selectedCompanyId) item.blockSelected = true;
-        if (item.companyId === this.selectedCompanyId) item.blockSelected = false;
-      })
       this.infiniteScrollDisabled = false;
       if (data.length < this.offset) this.invoicesListService.setBlockList(true);
       this.page_number += 1;
