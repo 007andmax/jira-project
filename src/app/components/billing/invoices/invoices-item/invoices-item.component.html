@@ -7,12 +7,14 @@
             <label
                 class="qt-checkbox pointer"
                 [attr.for]="'invoice-' + invoice.id"
+                [ngClass]="{'--disabled': invoice.status == 'DELETED'}"
             >
                 <input
                     [attr.id]="'invoice-' + invoice.id"
                     [(ngModel)]="invoice.selected"
                     type="checkbox"
                     (change)="onChangeSelect()"
+                    [disabled]="invoice.status == 'DELETED'"
                 >
                 <span></span>
             </label>
