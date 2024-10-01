@@ -55,7 +55,12 @@ export class FileManagementService {
     return this.http.get(`${this.apiUrl}commonTags/${partWord != '' ? 'filter' : 'getAll'}?page=${page}&size=20${partWord != '' ? `&partWord=${partWord}` : ''}&defaultTag=FILE_TAG`)
   }
   public addFile(data) {
-    return this.http.post(`${this.apiUrl}file-management/files`, data)
+    return this.http.post(`${this.apiUrl}file-management/files`, data).pipe(
+      tap(data => {
+        this.toastrService.success("The new file has been successfully uploaded");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public addCategory(data) {
     return this.http.post(`${this.apiUrl}file-management/categories`, data).pipe(
