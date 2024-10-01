@@ -103,7 +103,7 @@
                 <div class="invoice-status-timeline__header qt-df qt-jc-sb">
                     <div class="qt-fs-13 qt-lh-154 qt-color-gray-900 qt-mb-15 qt-fw-600">Invoice Status</div>
                     <div
-                        class="qt-ic-c qt-sz-16 toggle-invoice-timeline"
+                        class="qt-icon icon__collapse-task qt-ic-c qt-sz-12 pointer toggle-invoice-timeline"
                         (click)="toggleStatus = !toggleStatus"
                     ></div>
                     <!-- by clicking this button you should toggle class '--closed' for .invoice-status-timeline -->
@@ -178,9 +178,9 @@
             </div>
             <div class="invoice-preview qt-pos-rel">
                 <div
-                    class="invoice-preview__status"
-                    [ngClass]="{'--paid': invoiceProfile.paidOn, '--overdue': invoiceProfile.isOverDue && !invoiceProfile.paidOn,
-                '--draft':invoiceProfile.status == 'DELETED'}"
+                    class="invoice-preview__status qt-bg-contain"
+                    [ngClass]="{'icon__badge-ticket-paid --paid': invoiceProfile.paidOn, 'icon__badge-ticket-overdue --overdue': invoiceProfile.isOverDue && !invoiceProfile.paidOn,
+                'icon__badge-ticket-draft --draft':invoiceProfile.status == 'DELETED'}"
                 ></div>
                 <div class="qt-df qt-jc-sb qt-pb-24 company-info">
                     <div class="qt-lh-154">

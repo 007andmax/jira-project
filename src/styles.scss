@@ -2485,9 +2485,6 @@ app-quotes-item {
   }
 }
 
-@import "./assets/styles/dropdowns.scss";
-@import "./assets/styles/icons.scss";
-
 .ng-sidebar {
   position: fixed !important;
   background: $white;
@@ -3602,7 +3599,7 @@ app-company-devices-tags {
         border-radius: 6px;
         font-weight: 500;
         font-size: 12px;
-        margin: 0 4px 0px px 0px;
+        margin: 0 4px 0 0;
         background-color: $gray-100;
         color: $gray-500;
     }
@@ -3610,7 +3607,7 @@ app-company-devices-tags {
         width: 10px;
         height: 10px;
         &:before {
-            top: 0px;
+            top: 0;
             right: -3px;
             width: 10px;
             height: 10px;

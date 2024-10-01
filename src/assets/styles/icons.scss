@@ -220,6 +220,25 @@ Example:
   &__remote-desktop {
     background-image: url("/assets/img/icons/remote-desktop.svg");
   }
+
+  &__badge-ticket-paid {
+    background-image: url("/assets/img/icons/badge-ticket-paid.svg");
+  }
+  &__badge-ticket-invoiced {
+    background-image: url("/assets/img/icons/badge-ticket-invoiced.svg");
+  }
+  &__badge-ticket-draft {
+    background-image: url("/assets/img/icons/badge-ticket-draft.svg");
+  }
+  &__badge-ticket-overdue {
+    background-image: url("/assets/img/icons/badge-ticket-overdue.svg");
+  }
+  &__badge-bill-approved {
+    background-image: url("/assets/img/icons/badge-bill-approved.svg");
+  }
+  &__badge-bill-ticketed {
+    background-image: url("/assets/img/icons/badge-bill-ticketed.svg");
+  }
   // END Color Icon
 
   // Start Monochrome image

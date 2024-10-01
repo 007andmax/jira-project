@@ -528,24 +528,6 @@ app-invoices-item,app-payment-item {
     height: 88px;
     top: -22px;
     left: -20px;
-    &.--paid {
-      background: url('/assets/img/icons/update-label.svg');
-    }
-    &.--draft {
-      background: url('/assets/img/icons/delete-label.svg');
-    }
-    &.--overdue {
-      background: url('/assets/img/icons/overdue.svg');
-    }
-    &.--invoiced {
-      background: url('/assets/img/icons/invoiced-label.svg');
-    }
-    &.--ticket {
-      background: url('/assets/img/icons/ticket-label.svg');
-    }
-    &.--approved {
-      background: url('/assets/img/icons/approved-label.svg');
-    }
   }
 
   .invoice-status-timeline {
@@ -557,10 +539,6 @@ app-invoices-item,app-payment-item {
     transition: max-height .3s;
 
     .toggle-invoice-timeline {
-      background-image: url(/assets/img/icons/collapse-task.svg);
-      cursor: pointer;
-      background-size: 12px;
-      background-position: bottom center;
       transition: transform .3s;
     }
 
