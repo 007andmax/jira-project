@@ -43,4 +43,7 @@ export class MultiCompanyDropDownComponent extends CompanyDropDownComponent {
     this.onChangeCompanies.emit(this.selectedCompanies);
     this.userInput.nativeElement.value = '';
   }
+  public trackById(index, item) {
+    return item.id;
+  }
 }
