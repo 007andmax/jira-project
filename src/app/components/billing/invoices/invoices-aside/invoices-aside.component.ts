@@ -180,7 +180,6 @@ export class InvoicesAsideComponent implements OnInit, OnDestroy {
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);
   }
   onSelectCompany(items) {
-    console.log("items", items);
     this.selectedCompanies = items;
     if (items.length > 0) {
       this.invoicesFilter.setLimit(10000);
