@@ -39,7 +39,7 @@ export class Payment {
     public getDataForExportPDF() {
         return {
             createdAt: this.createdAt,
-            clientCompanyName: this.clientCompanyName,
+            multipleCompanies: this.multipleCompanies.map(item => ({ name: item.name })),
             note: this.note,
             paymentMethod: this.paymentMethod,
             partialPaidAmount: this.partialPaidAmount,
