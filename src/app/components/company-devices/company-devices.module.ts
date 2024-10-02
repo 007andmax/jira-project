@@ -34,6 +34,9 @@ import { CompanyDevicesFilterComponent } from './company-devices-filter/company-
 import { CompanyDevicesFilterTypeComponent } from './company-devices-filter/company-devices-filter-type/company-devices-filter-type.component';
 import { DynamicTooltipModule } from '../shared/dynamic-tooltip/dynamic-tooltip.module';
 import { FilterDevicesPipe } from './pipe/filter-devices.pipe';
+import { MatChipModule } from '../shared/mat-chip/mat-chip.module';
+import { MatFormFieldModule } from '../shared/mat-form-field/mat-form-field.module';
+import { MatChipListModule } from '../shared/mat-chip-list/mat-chip-list.module';
 
 
 @NgModule({
@@ -71,6 +74,9 @@ import { FilterDevicesPipe } from './pipe/filter-devices.pipe';
         KeyUpEnterModule,
         MatErrorModule,
         DynamicTooltipModule,
+        MatChipModule,
+        MatFormFieldModule,
+        MatChipListModule,
     ],
 
 
