@@ -39,7 +39,7 @@
                     [formControl]="tagCtrl"
                     (input)="onSearch($event)"
                     (keyup)="onKeyUp($event)"
-                    *ngIf="!customerPortalStateService.isCustomerPortal && ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
+                    [hidden]="customerPortalStateService.isCustomerPortal && !ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
                 >
             </app-mat-chip-list>
         </app-mat-form-field>
