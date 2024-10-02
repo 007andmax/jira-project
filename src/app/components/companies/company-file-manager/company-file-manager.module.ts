@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatSelectModule, MatChipsModule, MatIconModule } from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
@@ -34,9 +33,6 @@ import { CompanyFileManagerItemCategoryModule } from './company-file-manager-ite
         FileManagementItemFileModule,
         CompanyFileManagerHeaderModule,
         ReactiveFormsModule,
-        MatSelectModule,
-        MatChipsModule,
-        MatIconModule,
         TextAreaModule,
         KeyUpEnterModule,
         FileManagementFileInfoModule,

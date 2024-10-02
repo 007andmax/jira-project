@@ -54,12 +54,12 @@
                             appToFixed
                             (blur)="onValidateSaleCost()"
                         >
-                        <mat-error
+                        <app-mat-error
                             class="invalid-feedback --pos-static"
                             *ngIf="!product.valdiateSaleCost"
                         >
                             Product price can not be lower than cost
-                        </mat-error>
+                        </app-mat-error>
                     </span>
                 </label>
             </div>

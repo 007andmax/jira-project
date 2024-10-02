@@ -4,7 +4,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DraftEmailUserRecipientsComponent } from './draft-email-user-recipients.component';
 import { DropDownModule } from '../../drop-down/drop-down.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MatChipsModule, MatIconModule, MatSelectModule } from '@angular/material';
+import { MatChipListModule } from '../../mat-chip-list/mat-chip-list.module';
+import { MatChipModule } from '../../mat-chip/mat-chip.module';
+import { MatFormFieldModule } from '../../mat-form-field/mat-form-field.module';
+import { MatErrorModule } from '../../mat-error/mat-error.module';
 
 
 @NgModule({
@@ -15,10 +18,11 @@ import { MatChipsModule, MatIconModule, MatSelectModule } from '@angular/materia
         CommonModule,
         FormsModule,
         NgbModule,
-        MatSelectModule,
-        MatChipsModule,
-        MatIconModule,
         ReactiveFormsModule,
+        MatChipModule,
+        MatChipListModule,
+        MatFormFieldModule,
+        MatErrorModule
     ],
     exports: [DraftEmailUserRecipientsComponent]
 

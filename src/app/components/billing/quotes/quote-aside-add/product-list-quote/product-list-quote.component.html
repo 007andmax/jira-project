@@ -5,12 +5,12 @@
     #products="ngbDropdown"
     (openChange)="onCloseProducts($event)"
 >
-    <mat-error
+    <app-mat-error
         class="qt-tooltip-error qt-w-auto-important"
         *ngIf="!validate"
     >
         Product is required
-    </mat-error>
+    </app-mat-error>
     <button
         class="qt-button --gray --sm"
         id="dropdownProducts"

@@ -8,20 +8,23 @@
         class="title-filter qt-mb-8"
         [textContent]="title"
     ></p>
-    <mat-form-field ngbDropdownAnchor>
-        <mat-chip-list
+    <app-mat-form-field
+        #formField
+        ngbDropdownAnchor
+    >
+        <app-mat-chip-list
             #chipList
-            aria-label="Fruit selection"
+            [items]="selectedTag"
+            (onChangeItems)="formField.checkSelectedItems(selectedTag)"
         >
             <app-dynamic-tooltip
                 [position]="'top'"
                 #productTooltip
             ></app-dynamic-tooltip>
-            <mat-chip
+            <app-mat-chip
                 *ngFor="let tag of selectedTag; let i = index"
-                [selectable]="selectable"
-                [removable]="removable"
-                (removed)="remove(i)"
+                [isRemove]="removable"
+                (onClose)="remove(i)"
             >
                 <div
                     class="clip-text"
@@ -37,27 +40,18 @@
                 >
                     {{reduceItemName(tag)}}
                 </div>
-                <mat-icon
-                    matChipRemove
-                    *ngIf="removable"
-                >
-                    cancel
-                </mat-icon>
-            </mat-chip>
+            </app-mat-chip>
             <input
                 id="dropdownServices"
                 ngbDropdownToggle
                 [placeholder]="placeholder"
                 #userInput
                 class="pointer"
-                [matChipInputFor]="chipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                [matChipInputAddOnBlur]="addOnBlur"
                 autocomplete="off"
                 (input)="onSearch($event)"
             >
-        </mat-chip-list>
-    </mat-form-field>
+        </app-mat-chip-list>
+    </app-mat-form-field>
     <div
         class="dropdown-menu"
         ngbDropdownMenu

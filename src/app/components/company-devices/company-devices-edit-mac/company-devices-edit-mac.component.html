@@ -16,10 +16,10 @@
         [disabled]="isDisabled"
         [attr.placeholder]="placeholder"
     >
-    <mat-error
+    <app-mat-error
         class="invalid-feedback"
         *ngIf="!validate.getMacAdress()"
     >
         Enter a valid MAC address value - format XXXXXXXXXXXX
-    </mat-error>
+    </app-mat-error>
 </div>

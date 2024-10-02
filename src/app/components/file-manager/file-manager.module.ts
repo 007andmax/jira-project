@@ -19,13 +19,15 @@ import { FileManagerAddCategoryComponent } from './file-manager-add-category/fil
 import { FileManagerCategoryRenameComponent } from './file-manager-category-rename/file-manager-category-rename.component';
 import { FileManagerFileInfoComponent } from './file-manager-file-info/file-manager-file-info.component';
 import { FileManagerFileInfoTagsComponent } from './file-manager-file-info/file-manager-file-info-tags/file-manager-file-info-tags.component';
-import { MatSelectModule, MatChipsModule, MatIconModule } from '@angular/material';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 import { DblclickModule } from 'src/app/directives/dblclick/dblclick.module';
 import { FileManagerAllCustomerComponent } from './file-manager-all-customer/file-manager-all-customer.component';
 import { FileManagementFileInfoModule } from './file-manager-file-info/file-manager-file-info.module';
 import { FileManagerAllCustomerCompanyComponent } from './file-manager-all-customer-company/file-manager-all-customer-company.component';
+import { MatChipListModule } from '../shared/mat-chip-list/mat-chip-list.module';
+import { MatChipModule } from '../shared/mat-chip/mat-chip.module';
+import { MatFormFieldModule } from '../shared/mat-form-field/mat-form-field.module';
 
 @NgModule({
     declarations: [FileManagerComponent, FileManagerCategoryRenameComponent,
@@ -42,9 +44,9 @@ import { FileManagerAllCustomerCompanyComponent } from './file-manager-all-custo
         FileManagementItemFileModule,
         FileManagementHeaderModule,
         ReactiveFormsModule,
-        MatSelectModule,
-        MatChipsModule,
-        MatIconModule,
+        MatChipModule,
+        MatFormFieldModule,
+        MatChipListModule,
         TextAreaModule,
         KeyUpEnterModule,
         FileManagementFileInfoModule

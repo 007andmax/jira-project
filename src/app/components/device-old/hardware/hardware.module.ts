@@ -14,7 +14,6 @@ import { HardwareDisplayComponent } from './hardware-display/hardware-display.co
 import { HardwareHardDiskComponent } from './hardware-hard-disk/hardware-hard-disk.component';
 import { HardwareOperatingSystemComponent } from './hardware-operating-system/hardware-operating-system.component';
 import { HardwareHeaderComponent } from './hardware-header/hardware-header.component';
-import { MatSelectModule, MatChipsModule, MatIconModule, MatFormFieldModule } from '@angular/material';
 
 
 
@@ -25,13 +24,6 @@ import { MatSelectModule, MatChipsModule, MatIconModule, MatFormFieldModule } fr
         CommonModule,
         FormsModule,
         HardwareRoutingOldModule,
-        MatSelectModule,
-        MatChipsModule,
-        MatIconModule,
-        MatFormFieldModule,
     ],
-
-
-
 })
 export class HardwareOldModule { }

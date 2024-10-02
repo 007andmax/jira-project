@@ -77,12 +77,12 @@
                 [(ngModel)]="contractsBlockTime.description"
                 (input)="validate.resetDescription()"
             >
-            <mat-error
+            <app-mat-error
                 class="invalid-feedback"
                 *ngIf="!validate.getDescription()"
             >
                 Description is required
-            </mat-error>
+            </app-mat-error>
         </div>
     </div>
     <div class="qt-inputs-row-background">
@@ -106,12 +106,12 @@
                     [value]="contractsBlockTime.includedHours"
                     disabled
                 >
-                <mat-error
+                <app-mat-error
                     class="invalid-feedback"
                     *ngIf="!validate.getIncludedHours()"
                 >
                     Field is required
-                </mat-error>
+                </app-mat-error>
             </div>
             <div class="qt-input-block --required qt-w25 qt-mr-16">
                 <div class="qt-input-block__label">Block Rate</div>
@@ -127,12 +127,12 @@
                         (input)="validate.resetBlockRate()"
                         (onChange)="contractsBlockTime.blockRate=$event"
                     >
-                    <mat-error
+                    <app-mat-error
                         class="invalid-feedback"
                         *ngIf="!validate.getBlockRate()"
                     >
                         Field is required
-                    </mat-error>
+                    </app-mat-error>
                 </div>
             </div>
             <div class="qt-input-block --required qt-w25 qt-mr-16">
@@ -149,12 +149,12 @@
                         (input)="customerTooltip.open();validate.resetRateExceeding()"
                         (onChange)="onChangeRate($event)"
                     >
-                    <mat-error
+                    <app-mat-error
                         class="invalid-feedback"
                         *ngIf="!validate.getRateExceeding()"
                     >
                         Field is required
-                    </mat-error>
+                    </app-mat-error>
                 </div>
             </div>
             <div class="qt-input-block qt-w25 qt-mr-16">

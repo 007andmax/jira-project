@@ -13,27 +13,25 @@
         </div>
     </div>
     <div class="light-dropdown ticket-edit-tags">
-        <mat-form-field ngbDropdownAnchor>
-            <mat-chip-list
+        <app-mat-form-field
+            #formField
+            ngbDropdownAnchor
+        >
+            <app-mat-chip-list
                 #chipList
                 aria-label="Fruit selection"
+                [items]="selectedTag"
+                (onChangeItems)="formField.checkSelectedItems(selectedTag)"
             >
                 <span class="tag-icon"></span>
-                <mat-chip
+                <app-mat-chip
                     class="selected-tag-ticket"
                     *ngFor="let tag of selectedTag; let i = index"
-                    [selectable]="selectable"
-                    [removable]="removable"
-                    (removed)="remove(i)"
+                    (onClose)="remove(i)"
+                    [isRemove]="removable && !customerPortalStateService.isCustomerPortal"
                 >
                     {{tag.word}}
-                    <mat-icon
-                        matChipRemove
-                        *ngIf="removable && !customerPortalStateService.isCustomerPortal"
-                    >
-                        cancel
-                    </mat-icon>
-                </mat-chip>
+                </app-mat-chip>
                 <input
                     id="dropdownServices"
                     ngbDropdownToggle
@@ -42,15 +40,12 @@
                     class="file-manager-tag-input pointer"
                     autocomplete="new-password"
                     [formControl]="tagCtrl"
-                    [matChipInputFor]="chipList"
-                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                    [matChipInputAddOnBlur]="addOnBlur"
                     (input)="onSearch($event)"
                     (keyup)="onKeyUp($event)"
-                    *ngIf="!customerPortalStateService.isCustomerPortal"
+                    [hidden]="customerPortalStateService.isCustomerPortal"
                 >
-            </mat-chip-list>
-        </mat-form-field>
+            </app-mat-chip-list>
+        </app-mat-form-field>
         <div
             class="dropdown-menu ticket-detail-tag__dropdown-menu"
             ngbDropdownMenu

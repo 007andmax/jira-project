@@ -23,12 +23,12 @@
                                 (input)="onChangeName()"
                                 placeholder="Give this filter view a name"
                             >
-                            <mat-error
+                            <app-mat-error
                                 class="invalid-feedback first-name-invalid"
                                 *ngIf="!validate.getName()"
                             >
                                 The field is required
-                            </mat-error>
+                            </app-mat-error>
                         </div>
                     </div>
                     <div class="qt-inputs-row">

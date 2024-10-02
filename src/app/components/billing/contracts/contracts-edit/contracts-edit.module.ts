@@ -10,7 +10,6 @@ import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.
 import { DatePickerModule } from 'src/app/components/shared/date-picker/date-picker.module';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MatChipsModule, MatSelectModule } from '@angular/material';
 import { ContractsAsideHourlyBillingEditDefaultServiceComponent } from './contracts-aside-hourly-edit/contracts-aside-hourly-billing-edit-default-service/contracts-aside-hourly-billing-edit-default-service.component';
 import { ContractsAsideEditHourlyAddDefaultServiceComponent } from './contracts-aside-hourly-edit/contracts-aside-edit-hourly-add-default-service/contracts-aside-edit-hourly-add-default-service.component';
 import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.module';
@@ -28,6 +27,7 @@ import { NumberModule } from 'src/app/directives/number/number.module';
 import { ContractsAsideEditHourlyAddDefaultServiceModule } from './contracts-aside-hourly-edit/contracts-aside-edit-hourly-add-default-service/contracts-aside-edit-hourly-add-default-service.module';
 import { TechUsersModule } from 'src/app/components/shared/tech-users/tech-users.module';
 import { TaxesModule } from 'src/app/components/shared/taxes/taxes.module';
+import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 
 
 @NgModule({
@@ -47,8 +47,6 @@ import { TaxesModule } from 'src/app/components/shared/taxes/taxes.module';
         DatePickerModule,
         FormsModule,
         NgbModule,
-        MatSelectModule,
-        MatChipsModule,
         DropDownModule,
         TaxesModule,
         DecimalNumberModule,
@@ -61,7 +59,8 @@ import { TaxesModule } from 'src/app/components/shared/taxes/taxes.module';
         ContractsAsideOtherServiceModule,
         ContractsAsideOtherProductModule,
         NumberModule,
-        ContractsAsideEditHourlyAddDefaultServiceModule
+        ContractsAsideEditHourlyAddDefaultServiceModule,
+        MatErrorModule
     ],
     exports: [ContractsEditComponent,
     ]

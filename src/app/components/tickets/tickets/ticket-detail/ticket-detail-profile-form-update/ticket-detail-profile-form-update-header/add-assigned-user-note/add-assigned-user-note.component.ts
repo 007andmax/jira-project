@@ -2,7 +2,6 @@ import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Outpu
 import { TicketsListService } from '../../../../services/tickets-list.service';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { FormControl } from '@angular/forms';
-import { MatAutocomplete } from '@angular/material';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -36,7 +35,6 @@ export class AddAssignedUserNoteComponent implements OnInit {
   @Output() hidden = new EventEmitter<any>();
   @Output() onSelected = new EventEmitter<any>();
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
-  @ViewChild('auto') matAutocomplete: MatAutocomplete;
   @ViewChild('assignedUserDp') assignedUserDp: NgbDropdown;
 
   /**

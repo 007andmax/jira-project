@@ -7,7 +7,6 @@ import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { PasswordManagerAddCategoryComponent } from '../password-manager-add-category/password-manager-add-category.component';
 import { PasswordManagerAddCategoryModule } from '../password-manager-add-category/password-manager-add-category.module';
-import { MatSelectModule, MatChipsModule } from '@angular/material';
 import { DatePickerModule } from '../../shared/date-picker/date-picker.module';
 import { PasswordManagerLinkedComponent } from './password-manager-linked/password-manager-linked.component';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
@@ -15,6 +14,7 @@ import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-t
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 @NgModule({
     declarations: [
@@ -28,14 +28,13 @@ import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside
         FormsModule,
         TextAreaModule,
         PasswordManagerAddCategoryModule,
-        MatSelectModule,
-        MatChipsModule,
         DatePickerModule,
         DisabledBtnModule,
         PreloaderTicketModule,
         DynamicTooltipModule,
         CompanyDropDownModule,
-        ClickOutsideModule
+        ClickOutsideModule,
+        MatErrorModule
 
     ],
     exports: [PasswordManagerAddAsideComponent],

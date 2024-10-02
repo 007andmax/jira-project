@@ -9,7 +9,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from 'src/app/components/shared/preloader-ticket/preloader-ticket.module';
 import { InvoiceFormEditCustomerModule } from '../billable-aside/invoice-form/invoice-form-edit-customer/invoice-form-edit-customer.module';
-import { MatSelectModule, MatChipsModule } from '@angular/material';
 import { DatePickerModule } from 'src/app/components/shared/date-picker/date-picker.module';
 import { InvoiceFormTicketInfoComponent } from '../billable-aside/invoice-form/invoice-form-ticket-info/invoice-form-ticket-info.component';
 import { InvoiceFormTicketEditComponent } from '../billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit.component';
@@ -28,6 +27,7 @@ import { DynamicTooltipModule } from 'src/app/components/shared/dynamic-tooltip/
 import { TaxesModule } from 'src/app/components/shared/taxes/taxes.module';
 import { InvoiceChangeAddressComponent } from '../billable-aside/invoice-form/invoice-change-address/invoice-change-address.component';
 import { InvoiceChangeAddressModule } from '../billable-aside/invoice-form/invoice-change-address/invoice-change-address.module';
+import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 
 
 @NgModule({
@@ -49,8 +49,6 @@ import { InvoiceChangeAddressModule } from '../billable-aside/invoice-form/invoi
         DisabledBtnModule,
         PreloaderTicketModule,
         InvoiceFormEditCustomerModule,
-        MatSelectModule,
-        MatChipsModule,
         DatePickerModule,
         InvoiceRegularNoteModule,
         TextAreaModule,
@@ -61,7 +59,8 @@ import { InvoiceChangeAddressModule } from '../billable-aside/invoice-form/invoi
         BillableTicketsRoutingModule,
         PreviewPhoneMaskModule,
         DynamicTooltipModule,
-        InvoiceChangeAddressModule
+        InvoiceChangeAddressModule,
+        MatErrorModule
     ],
 
 

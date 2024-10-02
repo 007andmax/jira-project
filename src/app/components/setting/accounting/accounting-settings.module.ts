@@ -10,7 +10,6 @@ import { InvoiceSettingsComponent } from './invoice-settings/invoice-settings.co
 import { QuotesSettingsComponent } from './quotes-settings/quotes-settings.component';
 import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material';
 import { NgxMaskModule } from 'ngx-mask';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
@@ -21,6 +20,7 @@ import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.m
 import { CustomNotesSettingsComponent } from './custom-notes-settings/custom-notes-settings.component';
 import { AddCustomNotesSettingsComponent } from './custom-notes-settings/add-custom-notes-settings/add-custom-notes-settings.component';
 import { EditCustomNotesSettingsComponent } from './custom-notes-settings/edit-custom-notes-settings/edit-custom-notes-settings.component';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 
 
@@ -44,13 +44,13 @@ import { EditCustomNotesSettingsComponent } from './custom-notes-settings/edit-c
         AccountingSettingsRoutingModule,
         ClickOutsideModule,
         FormsModule,
-        MatFormFieldModule,
         ReactiveFormsModule,
         NgxMaskModule.forRoot(),
         DropDownModule,
         TextAreaModule,
         DynamicTooltipModule,
-        KeyUpEnterModule
+        KeyUpEnterModule,
+        MatErrorModule
     ],
 })
 export class AccoutingSettingsModule { }

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { TicketDetailComponent } from './ticket-detail.component';
 import { TicketDetailRoutingModule } from './ticket-detail-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MatSelectModule, MatChipsModule, MatIconModule } from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxMaskModule } from 'ngx-mask';
@@ -86,6 +85,10 @@ import { AddAssignedUserNoteComponent } from './ticket-detail-profile-form-updat
 import { TicketDetailTicketsDetailsComponent } from './ticket-detail-tickets/ticket-detail-tickets-details/ticket-detail-tickets-details.component';
 import { TicketDetailTicketsComponent } from './ticket-detail-tickets/ticket-detail-tickets.component';
 import { TicketDetailTicketsStatusComponent } from './ticket-detail-tickets/ticket-detail-tickets-status/ticket-detail-tickets-status.component';
+import { MatChipListModule } from 'src/app/components/shared/mat-chip-list/mat-chip-list.module';
+import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.module';
+import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
+import { MatFormFieldModule } from 'src/app/components/shared/mat-form-field/mat-form-field.module';
 import { CompanyUsersDropDownModule } from '../ticket-add-aside/company-users-drop-down/company-users-drop-down.module';
 
 
@@ -154,9 +157,6 @@ import { CompanyUsersDropDownModule } from '../ticket-add-aside/company-users-dr
         TicketDetailRoutingModule,
         DynamicTooltipModule,
         NgbModule,
-        MatSelectModule,
-        MatChipsModule,
-        MatIconModule,
         ReactiveFormsModule,
         DisabledBtnModule,
         PreloaderTicketModule,
@@ -185,6 +185,10 @@ import { CompanyUsersDropDownModule } from '../ticket-add-aside/company-users-dr
         DropDownModule,
         CompanyDropDownModule,
         DndModule,
+        MatChipModule,
+        MatFormFieldModule,
+        MatChipListModule,
+        MatErrorModule,
         CompanyUsersDropDownModule
     ],
 

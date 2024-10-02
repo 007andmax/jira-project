@@ -3,12 +3,12 @@
     <div class="qt-mb-20 qt-fw-600 qt-fs-15 qt-lh-133">Add Saved Note</div>
     <div class="qt-mb-16 --required">
         <div class="qt-input-block qt-lh-154">
-            <mat-error
+            <app-mat-error
                 class="invalid-feedback"
                 *ngIf="!validate.getTitle()"
             >
                 Title is required
-            </mat-error>
+            </app-mat-error>
             <label>Note Subject</label>
             <input
                 minlength="1"
@@ -23,12 +23,12 @@
     </div>
     <div class="qt-mb-24 --required">
         <div class="qt-input-block qt-text-area-block">
-            <mat-error
+            <app-mat-error
                 class="invalid-feedback"
                 *ngIf="!validate.getContent()"
             >
                 Description is required
-            </mat-error>
+            </app-mat-error>
             <label class="qt-lh-154">Note Description</label>
             <textarea
                 class="qt-input-block__textarea"

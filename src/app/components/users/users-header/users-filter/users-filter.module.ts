@@ -8,11 +8,13 @@ import { FormsModule } from '@angular/forms';
 import { UsersFilterIndustryComponent } from './users-filter-industry/users-filter-industry.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DynamicTooltipModule } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.module';
-import { MatChipsModule, MatFormFieldModule, MatIconModule } from '@angular/material';
 import { TicketsFilterTagsModule } from 'src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-tags/tickets-filter-tags.module';
 import { UsersFilterDefaultSubscriptionComponent } from './users-filter-default-subscription/users-filter-default-subscription.component';
 import { UsersFilterTagsComponent } from './users-filter-tags/users-filter-tags.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { MatChipListModule } from 'src/app/components/shared/mat-chip-list/mat-chip-list.module';
+import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.module';
+import { MatFormFieldModule } from 'src/app/components/shared/mat-form-field/mat-form-field.module';
 
 @NgModule({
     declarations: [UsersFilterComponent,
@@ -28,10 +30,10 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
         FormsModule,
         NgbModule,
         DynamicTooltipModule,
-        MatChipsModule,
-        MatIconModule,
         MatFormFieldModule,
-        InfiniteScrollModule
+        InfiniteScrollModule,
+        MatChipModule,
+        MatChipListModule,
     ],
     exports: [UsersFilterComponent]
 

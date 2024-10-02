@@ -10,8 +10,8 @@
                 placeholder="Write Company or Search Company"
                 (blur)="onChangeName()"
             >
-            <mat-error *ngIf="validate.getNameIsExist()">This company name already occupied</mat-error>
-            <mat-error *ngIf="!validate.getName()">Company name is required</mat-error>
+            <app-mat-error *ngIf="validate.getNameIsExist()">This company name already occupied</app-mat-error>
+            <app-mat-error *ngIf="!validate.getName()">Company name is required</app-mat-error>
         </div>
     </div>
     <div class="qt-inputs-row">
@@ -53,7 +53,7 @@
                 (input)="onChangeFirstName()"
                 placeholder="Enter First Name"
             >
-            <mat-error *ngIf="!validate.getFirstName()">First name is required</mat-error>
+            <app-mat-error *ngIf="!validate.getFirstName()">First name is required</app-mat-error>
         </div>
         <div class="qt-input-block qt-f50">
             <div class="qt-input-block__label">Last Name</div>
@@ -63,37 +63,37 @@
                 (input)="onChangeLastName()"
                 placeholder="Enter Last Name"
             >
-            <mat-error *ngIf="!validate.getLastName()">Last name is required</mat-error>
+            <app-mat-error *ngIf="!validate.getLastName()">Last name is required</app-mat-error>
         </div>
     </div>
     <div class="qt-inputs-row">
-      <div class="qt-input-block">
-        <div class="qt-input-block__label">Primary Contact Email</div>
-        <input
-          type="text"
-          [(ngModel)]="company.contacts[0].primaryEmail"
-          (input)="onChangePrimaryEmail()"
-          placeholder="Primary Email Address"
-        >
-        <mat-error *ngIf="!validate.getPrimaryContactEmail()">Please enter a valid email address</mat-error>
-      </div>
+        <div class="qt-input-block">
+            <div class="qt-input-block__label">Primary Contact Email</div>
+            <input
+                type="text"
+                [(ngModel)]="company.contacts[0].primaryEmail"
+                (input)="onChangePrimaryEmail()"
+                placeholder="Primary Email Address"
+            >
+            <app-mat-error *ngIf="!validate.getPrimaryContactEmail()">Please enter a valid email address</app-mat-error>
+        </div>
     </div>
     <div class="qt-inputs-row">
-      <div class="qt-input-block">
-        <div class="qt-input-block__label">Phone Number</div>
-        <input
-          type="text"
-          *ngIf="company.contacts[0].phoneNumbers.length > 0"
-          [(ngModel)]="company.contacts[0].phoneNumbers[0].number"
-          placeholder="Enter Phone Number"
-          (input)="onChangePhoneNumber()"
-          prefix="+1"
-          mask="(000) 000-0000 Ext: 999999||000-000-0000"
-          [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-          [dropSpecialCharacters]="false"
-        >
-        <mat-error *ngIf="!validate.getPhoneNumber()">Phone number is required</mat-error>
-      </div>
+        <div class="qt-input-block">
+            <div class="qt-input-block__label">Phone Number</div>
+            <input
+                type="text"
+                *ngIf="company.contacts[0].phoneNumbers.length > 0"
+                [(ngModel)]="company.contacts[0].phoneNumbers[0].number"
+                placeholder="Enter Phone Number"
+                (input)="onChangePhoneNumber()"
+                prefix="+1"
+                mask="(000) 000-0000 Ext: 999999||000-000-0000"
+                [specialCharacters]="['(',')',' ','-','E','x','t',':']"
+                [dropSpecialCharacters]="false"
+            >
+            <app-mat-error *ngIf="!validate.getPhoneNumber()">Phone number is required</app-mat-error>
+        </div>
     </div>
     <div class="qt-df">
         <button

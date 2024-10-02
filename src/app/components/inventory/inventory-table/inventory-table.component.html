@@ -69,12 +69,12 @@
                 (keyup)="onEnterCost($event)"
                 placeholder="Enter Cost"
             >
-            <mat-error
+            <app-mat-error
                 class="qt-tooltip-error"
                 *ngIf="!validate.getCostSale()"
             >
                 Cost cannot be higher than Price
-            </mat-error>
+            </app-mat-error>
         </div>
     </div>
     <div class="products-table__cost">
@@ -106,22 +106,22 @@
                 (keyup)="onEnterSale($event)"
                 placeholder="Enter Price"
             >
-            <mat-error
+            <app-mat-error
                 class="qt-tooltip-error"
                 *ngIf="!validate.getSale()"
             >
                 Price is required
-            </mat-error>
+            </app-mat-error>
         </div>
     </div>
     <div class="products-table__mfg">
         <div class="products-table__mfg-container">
-            <mat-error
+            <app-mat-error
                 class="qt-tooltip-error"
                 *ngIf="!validate.getManufactureIsExist()"
             >
                 This number is already occupied
-            </mat-error>
+            </app-mat-error>
             <input
                 type="text"
                 [ngClass]="{'--input-error' : !validate.getManufactureIsExist()}"
@@ -144,12 +144,12 @@
     </div>
     <div class="products-table__ilc">
         <div class="products-table__ilc-container">
-            <mat-error
+            <app-mat-error
                 class="qt-tooltip-error"
                 *ngIf="!validate.getILCIsExist()"
             >
                 This number is already occupied
-            </mat-error>
+            </app-mat-error>
             <input
                 type="text"
                 [ngClass]="{'--input-error' : !validate.getILCIsExist()}"

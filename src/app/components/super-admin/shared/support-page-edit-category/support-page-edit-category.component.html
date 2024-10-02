@@ -18,32 +18,32 @@
                 min="1"
                 max="100"
             >
-            <mat-error *ngIf="!validate.getName()">
+            <app-mat-error *ngIf="!validate.getName()">
                 Category name must be between 1 and 100 characters
-            </mat-error>
-            <mat-error
+            </app-mat-error>
+            <app-mat-error
                 *ngIf="validate.getNameIsExist()"
                 [textContent]="validate.getTextErrorNameExist()"
             >
-            </mat-error>
+            </app-mat-error>
         </div>
     </div>
-  <div class="qt-df qt-jc-fe qt-mt-24">
-    <div
-      class="btn-new disabled qt-mr-12 qt-w100"
-      data-dismiss='modal'
-      (click)="closeModal()"
-    >
-      Cancel
+    <div class="qt-df qt-jc-fe qt-mt-24">
+        <div
+            class="btn-new disabled qt-mr-12"
+            data-dismiss='modal'
+            (click)="closeModal()"
+        >
+            Cancel
+        </div>
+        <div
+            class="btn-new btn-primary"
+            appDisabledBtn
+            #addBtn="disabled"
+            (onClick)="editCategory()"
+        >
+            <span *ngIf="!addBtn.isBlock()">Save</span>
+            <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+        </div>
     </div>
-    <div
-      class="btn-new btn-primary"
-      appDisabledBtn
-      #addBtn="disabled"
-      (onClick)="editCategory()"
-    >
-      <span *ngIf="!addBtn.isBlock()">Save</span>
-      <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
-    </div>
-  </div>
 </div>

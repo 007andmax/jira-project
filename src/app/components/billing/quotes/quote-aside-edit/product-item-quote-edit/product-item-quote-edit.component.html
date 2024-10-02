@@ -48,12 +48,12 @@
             placeholder="0.00"
             (blur)="onCheckSaleCost()"
         >
-        <mat-error
+        <app-mat-error
             class="qt-tooltip-error"
             *ngIf="!product.validateSaleCost"
         >
             Product price can not be lower than cost
-        </mat-error>
+        </app-mat-error>
     </td>
     <td class="new-quote-table__col-quantify">
         <input

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PasswordManagerEditAsideComponent } from './password-manager-edit-aside.component';
-import { MatChipsModule, MatSelectModule } from '@angular/material';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { DatePickerModule } from '../../shared/date-picker/date-picker.module';
@@ -15,6 +14,7 @@ import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-toolt
 import { UploadAreaProgressModule } from '../../shared/upload-area/upload-area-progress/upload-area-progress.module';
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 
 @NgModule({
@@ -25,8 +25,6 @@ import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside
     imports: [
         CommonModule,
         FormsModule,
-        MatSelectModule,
-        MatChipsModule,
         DropDownModule,
         TextAreaModule,
         DatePickerModule,
@@ -35,7 +33,8 @@ import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside
         DynamicTooltipModule,
         UploadAreaProgressModule,
         CompanyDropDownModule,
-        ClickOutsideModule
+        ClickOutsideModule,
+        MatErrorModule
     ],
     exports: [PasswordManagerEditAsideComponent]
 

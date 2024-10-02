@@ -20,7 +20,6 @@ import { CompanyDevicesTagsComponent } from './company-devices-tags/company-devi
 import { CompanyDevicesTagsModule } from './company-devices-tags/company-devices-tags.module';
 import { CompanyDevicesCustomAsideComponent } from './company-devices-custom-aside/company-devices-custom-aside.component';
 import { DropDownModule } from '../shared/drop-down/drop-down.module';
-import { MatSelectModule, MatChipsModule, MatIconModule } from '@angular/material';
 import { PreloaderTicketModule } from '../shared/preloader-ticket/preloader-ticket.module';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { CompanyDevicesCustomDropDownComponent } from './company-devices-custom-aside/company-devices-custom-drop-down/company-devices-custom-drop-down.component';
@@ -30,10 +29,14 @@ import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { CompanyDevicesEditMacComponent } from './company-devices-edit-mac/company-devices-edit-mac.component';
 import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
+import { MatErrorModule } from '../shared/mat-error/mat-error.module';
 import { CompanyDevicesFilterComponent } from './company-devices-filter/company-devices-filter.component';
 import { CompanyDevicesFilterTypeComponent } from './company-devices-filter/company-devices-filter-type/company-devices-filter-type.component';
 import { DynamicTooltipModule } from '../shared/dynamic-tooltip/dynamic-tooltip.module';
 import { FilterDevicesPipe } from './pipe/filter-devices.pipe';
+import { MatChipModule } from '../shared/mat-chip/mat-chip.module';
+import { MatFormFieldModule } from '../shared/mat-form-field/mat-form-field.module';
+import { MatChipListModule } from '../shared/mat-chip-list/mat-chip-list.module';
 
 
 @NgModule({
@@ -60,8 +63,6 @@ import { FilterDevicesPipe } from './pipe/filter-devices.pipe';
         CommonModule,
         FormsModule,
         NgbModule,
-        MatSelectModule,
-        MatChipsModule,
         CompanyDevicesEditLabelModule,
         DatePickerModule,
         CompanyDevicesRoutingModule,
@@ -71,8 +72,11 @@ import { FilterDevicesPipe } from './pipe/filter-devices.pipe';
         DropDownModule,
         ClickOutsideModule,
         KeyUpEnterModule,
+        MatErrorModule,
         DynamicTooltipModule,
-        MatIconModule,
+        MatChipModule,
+        MatFormFieldModule,
+        MatChipListModule,
     ],
 
 

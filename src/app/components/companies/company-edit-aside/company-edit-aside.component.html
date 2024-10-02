@@ -53,18 +53,18 @@
                     (blur)="onChangeName()"
                     placeholder="Write Company or Search Company"
                 >
-                <mat-error
+                <app-mat-error
                     class="invalid-feedback"
                     *ngIf="validate.getNameIsExist()"
                 >
                     This company name already occupied
-                </mat-error>
-                <mat-error
+                </app-mat-error>
+                <app-mat-error
                     class="invalid-feedback"
                     *ngIf="!validate.getName()"
                 >
                     Company name is required
-                </mat-error>
+                </app-mat-error>
             </div>
         </div>
         <div class="qt-inputs-row">
@@ -111,24 +111,24 @@
                     [(ngModel)]="company.domain"
                     placeholder="example.com"
                 >
-                <mat-error
+                <app-mat-error
                     class="invalid-feedback"
                     *ngIf="!validate.getDomain()"
                 >
                     Domain is required
-                </mat-error>
-                <mat-error
+                </app-mat-error>
+                <app-mat-error
                     class="invalid-feedback"
                     *ngIf="!validate.getDomainValid()"
                 >
                     Please enter a valid domain
-                </mat-error>
-                <mat-error
+                </app-mat-error>
+                <app-mat-error
                     class="invalid-feedback"
                     *ngIf="validate.getDomainIsExist()"
                 >
                     This company domain already occupied
-                </mat-error>
+                </app-mat-error>
             </div>
         </div>
         <div class="qt-inputs-row qt-inputs-row__divider">
@@ -145,12 +145,12 @@
                     [(ngModel)]="company.addresses[0].locationName"
                     placeholder="Enter Location Name"
                 >
-                <mat-error
+                <app-mat-error
                     class="invalid-feedback"
                     *ngIf="!validate.getBillindAddress()"
                 >
                     Billing Location Name is required
-                </mat-error>
+                </app-mat-error>
             </div>
         </div>
         <div class="qt-inputs-row">
@@ -196,12 +196,12 @@
                     [specialCharacters]="['(',')',' ','-','E','x','t',':']"
                     [dropSpecialCharacters]="false"
                 >
-                <mat-error
+                <app-mat-error
                     class="invalid-feedback"
                     *ngIf="!validate.getPhoneNumber()"
                 >
                     Phone number is required
-                </mat-error>
+                </app-mat-error>
             </div>
         </div>
         <div class="qt-inputs-row qt-inputs-row__divider">
@@ -287,12 +287,12 @@
                     [specialCharacters]="['(',')',' ','-','E','x','t',':']"
                     [dropSpecialCharacters]="false"
                 >
-                <mat-error
+                <app-mat-error
                     class="invalid-feedback"
                     *ngIf="!validate.getShippingPhoneNumber()"
                 >
                     Phone number is required
-                </mat-error>
+                </app-mat-error>
             </div>
         </div>
         <div class="qt-inputs-row-background">
@@ -313,12 +313,12 @@
                         [(ngModel)]="company.contacts[0].firstName"
                         placeholder="Enter First Name"
                     >
-                    <mat-error
+                    <app-mat-error
                         class="invalid-feedback first-name-invalid"
                         *ngIf="!validate.getFirstName()"
                     >
                         First name must be a minimum of 2 characters long
-                    </mat-error>
+                    </app-mat-error>
                 </div>
                 <div class="qt-input-block qt-f50">
                     <div class="qt-input-block__label">Last Name</div>
@@ -405,18 +405,18 @@
                         (blur)="onCheckEmail()"
                         placeholder="Primary Email Address"
                     >
-                    <mat-error
+                    <app-mat-error
                         class="invalid-feedback"
                         *ngIf="!validate.getPrimaryContactEmail()"
                     >
                         Please enter a valid email address
-                    </mat-error>
-                    <mat-error
+                    </app-mat-error>
+                    <app-mat-error
                         class="invalid-feedback"
                         *ngIf="!validate.getExistPrimaryContactEmail()"
                     >
                         The email address is already occupied
-                    </mat-error>
+                    </app-mat-error>
                 </div>
             </div>
             <div class="qt-inputs-row">

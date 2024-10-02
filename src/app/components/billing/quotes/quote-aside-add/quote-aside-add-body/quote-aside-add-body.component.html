@@ -133,12 +133,12 @@
                     [value]="quote.number"
                     (onChange)="onChangeQuoteNumber($event)"
                 >
-                <mat-error
+                <app-mat-error
                     class="invalid-feedback"
                     *ngIf="!validate.getNumber()"
                 >
                     Quote number is required
-                </mat-error>
+                </app-mat-error>
             </div>
         </div>
         <div class="qt-input-block qt-mr-16 qt-w100">
@@ -217,18 +217,18 @@
                 </ng-template>
             </tbody>
         </table>
-        <mat-error
+        <app-mat-error
             class="qt-mt-10"
             *ngIf="!validate.getServicesProducts()"
         >
             You need to select one product/service at least.
-        </mat-error>
-        <mat-error
+        </app-mat-error>
+        <app-mat-error
             class="qt-mt-10"
             *ngIf="!validate.getValidate()"
         >
             {{validate.errorMessage}}
-        </mat-error>
+        </app-mat-error>
     </div>
     <div class="qt-df qt-jc-sb qt-mb-40">
         <div>

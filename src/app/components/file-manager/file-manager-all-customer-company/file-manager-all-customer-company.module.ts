@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatSelectModule, MatChipsModule, MatIconModule } from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
@@ -13,6 +12,9 @@ import { FileManagementFileInfoModule } from '../file-manager-file-info/file-man
 import { FileManagerAllCustomerCompanyComponent } from './file-manager-all-customer-company.component';
 import { FileManagementAllCustomerCompanyRoutingModule } from './file-manager-all-customer-company-routing.module';
 import { FileManagementItemFileModule } from '../file-manager-item-file/file-manager-item-file.module';
+import { MatChipModule } from '../../shared/mat-chip/mat-chip.module';
+import { MatFormFieldModule } from '../../shared/mat-form-field/mat-form-field.module';
+import { MatChipListModule } from '../../shared/mat-chip-list/mat-chip-list.module';
 
 @NgModule({
     declarations: [FileManagerAllCustomerCompanyComponent
@@ -28,9 +30,9 @@ import { FileManagementItemFileModule } from '../file-manager-item-file/file-man
         FileManagementItemCategoryModule,
         FileManagementHeaderModule,
         ReactiveFormsModule,
-        MatSelectModule,
-        MatChipsModule,
-        MatIconModule,
+        MatChipModule,
+        MatFormFieldModule,
+        MatChipListModule,
         TextAreaModule,
         KeyUpEnterModule,
         FileManagementFileInfoModule,

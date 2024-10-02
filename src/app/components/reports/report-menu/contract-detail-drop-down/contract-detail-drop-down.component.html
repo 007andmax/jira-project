@@ -9,12 +9,12 @@
         class="app-drop-down__title"
         [textContent]="title"
     ></div>
-    <mat-error
+    <app-mat-error
         class="invalid-feedback"
         *ngIf="!validate"
         [textContent]="errorMessage"
     >
-    </mat-error>
+    </app-mat-error>
     <input
         type="text"
         [ngStyle]="{'width': '100%', 'height': heightInput ? heightInput : '40px' }"

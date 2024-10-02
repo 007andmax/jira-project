@@ -77,12 +77,12 @@
                 rows="1"
                 [ngClass]="{'--error' : !validate.getContent()}"
             ></textarea>
-            <mat-error
+            <app-mat-error
                 class="invalid-feedback"
                 *ngIf="!validate.getContent()"
             >
                 Description is required
-            </mat-error>
+            </app-mat-error>
         </div>
     </div>
 </div>

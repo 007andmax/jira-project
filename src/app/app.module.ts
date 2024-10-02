@@ -8,9 +8,6 @@ import {
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularEditorModule } from '@kolkov/angular-editor';
-import { MatSelectModule } from '@angular/material/select';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatAutocompleteModule, MatIconModule, MatRow } from '@angular/material';
 import { AppComponent } from './app.component';
 import { MainComponent } from './components/main/main.component';
 import { ModalQuoteComponent } from './services/modal/modal-quote/modal-quote.component';
@@ -141,6 +138,15 @@ import { SuperAdminPublicListComponent } from './components/super-admin-public/s
 import { SuperAdminPublicListModule } from './components/super-admin-public/super-admin-public-list/super-admin-public-list.module';
 import { ProductTypeCheckUseComponent } from './components/setting/products-settings/product-type-check-use/product-type-check-use.component';
 import { ProductTypeCheckUseModule } from './components/setting/products-settings/product-type-check-use/product-type-check-use.module';
+import { MatChipComponent } from './components/shared/mat-chip/mat-chip.component';
+import { MatChipTagComponent } from './components/shared/mat-chip-tag/mat-chip-tag.component';
+import { MatFormFieldComponent } from './components/shared/mat-form-field/mat-form-field.component';
+import { MatChipListComponent } from './components/shared/mat-chip-list/mat-chip-list.component';
+import { MatErrorComponent } from './components/shared/mat-error/mat-error.component';
+import { MatOptionComponent } from './components/shared/mat-option/mat-option.component';
+import { MatErrorModule } from './components/shared/mat-error/mat-error.module';
+import { MatChipListModule } from './components/shared/mat-chip-list/mat-chip-list.module';
+import { MatChipModule } from './components/shared/mat-chip/mat-chip.module';
 import { FileManagerComponent } from './components/file-manager/file-manager.component';
 import { FileManagementAddFileModule } from './components/file-manager/file-manager-add-file/file-manager-add-file.module';
 import { PreviewFileComponent } from './components/shared/preview-file/preview-file.component';
@@ -185,10 +191,6 @@ declare var $: any;
     UpgradeModule,
     HttpClientModule,
     FormsModule,
-    MatSelectModule,
-    MatChipsModule,
-    MatIconModule,
-    MatAutocompleteModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     AppRoutingModule,
     ToastrModule.forRoot({
@@ -232,6 +234,9 @@ declare var $: any;
     MarketingSubscriptionsAsideModule,
     SuperAdminPublicListModule,
     ProductTypeCheckUseModule,
+    MatErrorModule,
+    MatChipListModule,
+    MatChipModule,
     FileManagementAddFileModule
   ],
   entryComponents: [

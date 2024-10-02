@@ -26,27 +26,22 @@
         >
             <div class="qt-input-block email-selects">
                 <div class="qt-input-block__label">Recipient Email Address</div>
-                <mat-form-field>
-                    <mat-chip-list
+                <app-mat-form-field #formField>
+                    <app-mat-chip-list
                         #chipList
                         ngbDropdownAnchor
                         id="dropdownServices"
                         aria-label="Fruit selection"
+                        [items]="selectedUsers"
+                        (onChangeItems)="formField.checkSelectedItems(selectedUsers)"
                     >
-                        <mat-chip
+                        <app-mat-chip
                             *ngFor="let user of selectedUsers; let i = index"
-                            [selectable]="selectable"
-                            [removable]="removable"
-                            (removed)="remove(i)"
+                            [isRemove]="removable"
+                            (onClose)="remove(i)"
                         >
                             {{user}}
-                            <mat-icon
-                                matChipRemove
-                                *ngIf="removable"
-                            >
-                                cancel
-                            </mat-icon>
-                        </mat-chip>
+                        </app-mat-chip>
                         <input
                             placeholder="Add receipt email address"
                             #userInput
@@ -54,98 +49,37 @@
                             ngbDropdownToggle
                             [formControl]="userCtrl"
                             autocomplete="new-password"
-                            autocomplete="new-password"
-                            [matChipInputFor]="chipList"
-                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                            [matChipInputAddOnBlur]="addOnBlur"
                             (input)="onSearch($event)"
                             (keyup)="keyup($event)"
                             (blur)="onAdd($event)"
                         >
-                    </mat-chip-list>
+                    </app-mat-chip-list>
                     <div
                         class="mat-autocomplete-panel quote-email-dropdown mat-autocomplete-visible"
                         ngbDropdownMenu
                         aria-labelledby="dropdownServices"
                     >
-                        <mat-option
+                        <app-mat-option
                             class="modal-quote-user-item"
                             *ngFor="let user of usersClients"
-                            [value]="user"
                             ngbDropdownItem
                             (click)="selected(user)"
                         >
                             <span class="user-name">{{getFirstLastName(user)}}</span>
                             <span class="user-email qt-ml-8">{{user.primaryEmail}}</span>
-                        </mat-option>
+                        </app-mat-option>
                         <hr>
-                        <mat-option
+                        <app-mat-option
                             class="modal-quote-user-item"
                             *ngFor="let user of usersTechnical"
-                            [value]="user"
                             ngbDropdownItem
                             (click)="selected(user)"
                         >
                             <span class="user-name">{{getFirstLastName(user)}}</span>
                             <span class="user-email qt-ml-8">{{user.primaryEmail}}</span>
-                        </mat-option>
+                        </app-mat-option>
                     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    <!-- <mat-autocomplete
-                        ngbDropdownMenu
-                        aria-labelledby="dropdownServices"
-                        class="quote-email-dropdown"
-                        (optionSelected)="selected($event)"
-                    >
-                        <mat-option
-                            class="modal-quote-user-item"
-                            *ngFor="let user of usersClients"
-                            [value]="user"
-                            ngbDropdownItem
-                        >
-                            <span class="user-name">{{getFirstLastName(user)}}</span>
-                            <span class="user-email qt-ml-8">{{user.primaryEmail}}</span>
-                        </mat-option>
-                        <hr>
-                        <mat-option
-                            class="modal-quote-user-item"
-                            *ngFor="let user of usersTechnical"
-                            [value]="user"
-                        >
-                            <span class="user-name">{{getFirstLastName(user)}}</span>
-                            <span class="user-email qt-ml-8">{{user.primaryEmail}}</span>
-                        </mat-option>
-                    </mat-autocomplete> -->
-                </mat-form-field>
+                </app-mat-form-field>
                 <div
                     *ngIf="showError"
                     class="invalid-feedback"

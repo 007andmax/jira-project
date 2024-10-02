@@ -8,8 +8,8 @@ import { MarketingSubscriptionsAsideItemInfoComponent } from './marketing-subscr
 import { MarketingSubscriptionsAsideItemEditComponent } from './marketing-subscriptions-aside-item-edit/marketing-subscriptions-aside-item-edit.component';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 import { MarketingSubscriptionsAddComponent } from './marketing-subscriptions-add/marketing-subscriptions-add.component';
-import { MatSelectModule, MatChipsModule } from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 
 @NgModule({
@@ -21,9 +21,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         DisabledBtnModule,
         PreloaderTicketModule,
         KeyUpEnterModule,
-        MatSelectModule,
-        MatChipsModule,
         NgbModule,
+        MatErrorModule
     ],
     entryComponents: [MarketingSubscriptionsAddComponent],
     exports: [MarketingSubscriptionsAsideComponent]

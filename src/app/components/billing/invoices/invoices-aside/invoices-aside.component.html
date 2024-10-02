@@ -57,12 +57,12 @@
                         (change)="onChangeAmountReceived($event)"
                         appToFixed
                     >
-                    <mat-error
+                    <app-mat-error
                         class="invalid-feedback amount-received-invalid-feedback"
                         *ngIf="!validate.getAmountReceived()"
                     >
                         You must use the entire amount. ${{getUnUsedAmountReceived()}} left unused
-                    </mat-error>
+                    </app-mat-error>
                 </div>
                 <!-- <div class="qt-df qt-ai-c qt-mt-10">
           <label class="qt-checkbox receive-full-amount-check qt-mb-0">
@@ -201,9 +201,9 @@
                 class="error-payments --input-error"
                 *ngIf="!validate.getPayment()"
             >
-                <mat-error class="qt-tooltip-error">
+                <app-mat-error class="qt-tooltip-error">
                     The payment amount is more than the Amount Due of invoices
-                </mat-error>
+                </app-mat-error>
             </div>
         </div>
         <div class="summary-info qt-df qt-pl-30 qt-pr-30 qt-pb-24 qt-jc-sb">
