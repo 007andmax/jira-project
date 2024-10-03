@@ -729,7 +729,6 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
       "techRole": this.techUserForm.value.techRole,
       "userEnabled": this.selectedTechUser.userEnabled,
       //  "jobTypeId": this.selectedTechUser.jobTypeId,
-      "userIndustryId": this.selectedTechUser.userIndustryId,
       // "defaultSubscriptions": this.selectedTechUser.defaultSubscriptions,
       //"customSubscriptions": this.selectedTechUser.customSubscriptions,
       "twoFactorAuthType": this.techUserForm.value.twoFactorAuthType,
