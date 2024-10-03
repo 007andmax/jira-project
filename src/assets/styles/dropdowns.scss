@@ -511,3 +511,11 @@ app-company-time-zone {
 app-mat-form-field {
   display: block;
 }
+app-modal-quote {
+  .quote-email-dropdown-container {
+      input {
+        border: none !important;
+        box-shadow: none !important;
+      }
+    }
+}
