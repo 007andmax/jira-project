@@ -16,17 +16,14 @@ export class MatFormFieldComponent implements OnInit {
   }
 
   public checkSelectedItems(data) {
-    console.log('data', data);
     if (data.length > 0 && !this.classes.some(item => item == "mat-form-selected")) this.classes.push("mat-form-selected");
     if (data.length == 0 && this.classes.some(item => item == "mat-form-selected")) {
       let index = this.classes.findIndex(item => item == "mat-form-selected");
       this.classes.splice(index, 1);
 
     }
-    console.log("this.classes", this.classes);
   }
   ngAfterViewInit() {
-    console.log(this.elRef.nativeElement.querySelector("input"));
     this.elRef.nativeElement.querySelector("input").onfocus = () => {
       if (!this.classes.some(item => item == "mat-focused")) this.classes.push("mat-focused");
     }
