@@ -31,6 +31,25 @@
                 </div>
             </div>
             <div class="tab-pane__row">
+                <div class="tab-pane__subtitle">Default payment method</div>
+                <div class="tab-pane-input__row">
+                    <div class="qt-input-block">
+                        <div class="qt-w100">
+                            <app-drop-down
+                                [class]="['qt-select-input-40']"
+                                [list]="paymentMethods"
+                                [editItem]="paymentMethod"
+                                [field]="'title'"
+                                [sort]="false"
+                                [isBlockClear]="true"
+                                (onSelectedItem)="onDefaultPaymentMethodChange($event)"
+                            >
+                            </app-drop-down>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane__row">
                 <div class="tab-pane__subtitle">Default invoice terms</div>
                 <div class="tab-pane-input__row">
                     <div class="qt-input-block">

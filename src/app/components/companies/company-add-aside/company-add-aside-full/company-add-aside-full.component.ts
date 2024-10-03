@@ -37,6 +37,7 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
   serviceTypes: Array<CrmCompanyServiceType> = [];
   @ViewChild('addresstext') addresstext: any;
   @ViewChild('paymentTerm') paymentTerm: DropDownComponent;
+  @ViewChild('paymentMethod') paymentMethod: DropDownComponent;
   @ViewChild('companyTypeDp') companyTypeDp: DropDownComponent;
   @ViewChild('userDp') userDp: CompanyUsersDropDownComponent;
   industries: Array<CrmCompanyIndustry> = [];
@@ -99,6 +100,11 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
     console.log("this.companiesStateService.getCurrentCompany().paymentTerms", this.companiesStateService.getCurrentCompany().paymentTerms);
     this.paymentTerm.selectItemWithOutChanges(this.paymentTerms.find(item => item.value == this.companiesStateService.getCurrentCompany().paymentTerms));
     this.company.paymentTerms = JSON.parse(JSON.stringify(this.companiesStateService.getCurrentCompany().paymentTerms));
+
+    if (this.companiesStateService.getCurrentCompany().defaultPaymentMethod) {
+      this.paymentMethod.selectItemWithOutChanges(this.paymentMethods.find(item => item.value == this.companiesStateService.getCurrentCompany().defaultPaymentMethod));
+      this.company.defaultPaymentMethod = JSON.parse(JSON.stringify(this.companiesStateService.getCurrentCompany().defaultPaymentMethod));
+    }
     this.onCroppImage();
   }
   onGetUsers(data) {

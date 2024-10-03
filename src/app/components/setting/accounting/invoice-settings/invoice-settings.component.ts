@@ -7,6 +7,7 @@ import { catchError } from 'rxjs/operators';
 import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { InvoiceSettings } from './class/invoice-settings';
+import { CompanySetting } from 'src/app/components/companies/class/company-setting';
 
 @Component({
   selector: 'app-invoice-settings',
@@ -20,6 +21,7 @@ export class InvoiceSettingsComponent implements OnInit {
   loading = false;
   isDisable: boolean;
   invoiceTerm: any;
+  paymentMethod: any;
   primaryPhoneType;
   secondaryPhoneType = new TitleListType("Office", "OFFICE");
   phoneTypes = [new TitleListType("Mobile", "MOBILE"),
@@ -31,6 +33,11 @@ export class InvoiceSettingsComponent implements OnInit {
   new TitleListType("30 days", "30"),
   new TitleListType("45 days", "45"),
   new TitleListType("60 days", "60")];
+  paymentMethods = [new CompanySetting('Cash', 'CASH'),
+  new CompanySetting('Cheque', 'CHEQUE'),
+  new CompanySetting('Debit Card', 'DEBIT_CARD'),
+  new CompanySetting('Credit Card', 'CREDIT_CARD'),
+  new CompanySetting('Wire Transfer', 'WIRE_TRANSFER')];
   @Input() taxIdDescInput: any;
   @Input() taxIdInput: any;
   @Input() termInput: any;
@@ -58,6 +65,7 @@ export class InvoiceSettingsComponent implements OnInit {
           Validators.minLength(1), Validators.maxLength(7)
         ])
       ],
+      defaultPaymentMethod: [''],
       invoiceTerms: ['', Validators.required],
       enableInvoiceContact: [false],
       enableOwnerSending: [false],
@@ -132,6 +140,7 @@ export class InvoiceSettingsComponent implements OnInit {
         lastName: this.invoiceSettings.invoiceContact.lastName,
         enableContactSending: (!this.invoiceSettings.invoiceContact.enabled) ? true : this.invoiceSettings.invoiceContact.enableContactSending,
         invoiceTerms: this.invoiceSettings.term,
+        defaultPaymentMethod: this.invoiceSettings.defaultPaymentMethod,
         condition: this.invoiceSettings.condition,
         invoiceCount: this.invoiceSettings.number,
         taxId: this.invoiceSettings.taxId,
@@ -167,6 +176,7 @@ export class InvoiceSettingsComponent implements OnInit {
         }
       }
       this.invoiceTerm = this.invoiceTerms.find(item => item.type == this.invoiceSettings.term);
+      this.paymentMethod = this.paymentMethods.find(item => item.value == this.invoiceSettings.defaultPaymentMethod);
       this.elRef.nativeElement.querySelector('#memo-invoice').value = this.invoiceSettings.condition;
       this.loading = false;
       this.appStateService.changeDetectorRef();
@@ -193,6 +203,12 @@ export class InvoiceSettingsComponent implements OnInit {
   onInvoiceTermsChange(data) {
     this.invoiceTerm = data;
     this.invoiceForm.patchValue({ invoiceTerms: data.type });
+  }
+
+  onDefaultPaymentMethodChange(data) {
+    console.log("onDefaultPaymentMethodChange", data);
+    this.paymentMethod = data;
+    this.invoiceForm.patchValue({ defaultPaymentMethod: data.value });
   }
 
   // convenience getter for easy access to form fields
@@ -267,6 +283,7 @@ export class InvoiceSettingsComponent implements OnInit {
     if (!this.invoiceForm.value.invoiceCount.trim()) {
       return;
     }
+    console.log("this.invoiceForm.value", this.invoiceForm.value);
     const objInvoice = {
       emailSettingPageNumberFormDto: {
         count: this.invoiceForm.value.invoiceCount,
@@ -275,7 +292,8 @@ export class InvoiceSettingsComponent implements OnInit {
         type: 'INVOICE',
         enableOwnerSending: this.invoiceForm.value.enableOwnerSending,
         includeInvoiceAsAttachmentSetting: this.invoiceSettings.includeInvoiceAsAttachmentSetting,
-        includeAccountReceivableReportAsAttachmentSetting: this.invoiceSettings.includeAccountReceivableReportAsAttachmentSetting
+        includeAccountReceivableReportAsAttachmentSetting: this.invoiceSettings.includeAccountReceivableReportAsAttachmentSetting,
+        defaultPaymentMethod: this.invoiceForm.value.defaultPaymentMethod
       },
       invoiceContactDto: {
         enabled: this.invoiceForm.value.enableInvoiceContact,
