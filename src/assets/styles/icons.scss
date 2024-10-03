@@ -17,12 +17,7 @@
   height: 16px;
   display: block;
 }
-.convert-to-billable {
-  background-image: url("/assets/img/icons/billable.svg");
-}
 .no-valid-label {
-  background: url("/assets/img/icons/new-update.svg") no-repeat;
-  display: block;
   width: 44px;
   height: 20px;
 }
@@ -463,6 +458,9 @@ Example:
   }
   &__stop {
     mask-image: url("/assets/img/icons/stop.svg");
+  }
+  &__billable {
+    mask-image: url("/assets/img/icons/billable.svg");
   }
   &__shutdown {
     mask-image: url("/assets/img/icons/shutdown.svg");

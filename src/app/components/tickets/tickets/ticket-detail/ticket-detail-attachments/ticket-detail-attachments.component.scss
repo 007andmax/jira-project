@@ -68,17 +68,15 @@
         }
 
         &__download {
-            position: absolute;
-            display: none;
-            right: 5px;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background-image: url("/assets/img/icons/download-blue.svg");
-            background-size: 20px;
-            background-repeat: no-repeat;
-            cursor: pointer;
-            background-position: center;
+          position: absolute;
+          display: none;
+          right: 5px;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background-color: $blue-light-600;
+          cursor: pointer;
+          background-position: center;
         }
 
         &__icon {

@@ -153,9 +153,6 @@
     background-position: center;
     background-size: contain;
     opacity: 0.5;
-    &.--folder {
-      background-image: url("/assets/img/icons/folder.svg");
-    }
   }
 
   &__menu-expand {
