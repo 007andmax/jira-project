@@ -14,7 +14,6 @@ import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 import { DatePickerModule } from '../../shared/date-picker/date-picker.module';
 import { NumberModule } from 'src/app/directives/number/number.module';
-import { MatSelectModule, MatChipsModule } from '@angular/material';
 import { MultiDatepickerModule } from '../../shared/multi-datepicker/multi-datepicker.module';
 import { PaymentsRoutingModule } from './payments-routing.module';
 import { PreviewPhoneMaskModule } from '../../shared/preview-phone-mask/preview-phone-mask.module';
@@ -22,6 +21,7 @@ import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.m
 import { InvoiceExportModule } from '../invoices/invoices-header/invoice-export/invoice-export.module';
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 
 
@@ -47,15 +47,14 @@ import { DropDownModule } from '../../shared/drop-down/drop-down.module';
         PreloaderTicketModule,
         DatePickerModule,
         NumberModule,
-        MatSelectModule,
-        MatChipsModule,
         MultiDatepickerModule,
         PaymentsRoutingModule,
         PreviewPhoneMaskModule,
         KeyUpEnterModule,
         InvoiceExportModule,
         CompanyDropDownModule,
-        DropDownModule
+        DropDownModule,
+        MatErrorModule
     ],
 
 

@@ -41,15 +41,11 @@
     }
 
     .selected-tag-ticket {
-        background-color: $gray-100;
-        border-radius: 6px !important;
-        border: unset;
-        padding: 4px 6px !important;
-        font-weight: 500;
-        font-size: 13px;
-        line-height: 16px;
-        color: $gray-600;
-        margin: 0;
+        .mat-chip {
+            background-color: $gray-100;
+            margin: 0px;
+            padding: 2px 6px;
+        }
     }
 
     .tag-icon {
@@ -72,7 +68,10 @@
     .mat-chip-remove {
         opacity: 1;
     }
-
+    .mat-form-field-appearance-legacy .mat-form-field-underline,
+    .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    display: none;
+    }
     .mat-chip-remove:before {
         filter: brightness(0.8)
     }
@@ -86,7 +85,9 @@
     }
 
     .mat-form-field-label-wrapper {
-        display: none;
+        font-size: 14px;
+        font-weight: 400;
+        color:$gray-400;
     }
 
     .mat-chip-list-wrapper {
@@ -120,7 +121,12 @@
         }
     }
 }
-
+.file-manager-tag-input {
+    &::placeholder {
+        opacity: 0 !important;
+        color: $gray-400;
+    }
+}
 .pengind-loading {
     width: 25px !important;
     height: 25px !important;

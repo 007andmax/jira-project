@@ -18,27 +18,17 @@
         </div>
     </div>
     <div class="light-dropdown ticket-edit-tags">
-        <mat-form-field ngbDropdownAnchor>
-            <mat-chip-list
-                #chipList
-                aria-label="Fruit selection"
-            >
+        <app-mat-form-field ngbDropdownAnchor>
+            <app-mat-chip-list #chipList>
                 <span class="tag-icon"></span>
-                <mat-chip
+                <app-mat-chip
                     class="selected-tag-ticket"
                     *ngFor="let tag of selectedTag; let i = index"
-                    [selectable]="selectable"
-                    [removable]="removable"
-                    (removed)="remove(i)"
+                    [isRemove]="removable && !customerPortalStateService.isCustomerPortal && ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
+                    (onClose)="remove(i)"
                 >
                     {{tag.word}}
-                    <mat-icon
-                        matChipRemove
-                        *ngIf="removable && !customerPortalStateService.isCustomerPortal && ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
-                    >
-                        cancel
-                    </mat-icon>
-                </mat-chip>
+                </app-mat-chip>
                 <input
                     id="dropdownServices"
                     ngbDropdownToggle
@@ -47,15 +37,12 @@
                     class="pointer"
                     autocomplete="new-password"
                     [formControl]="tagCtrl"
-                    [matChipInputFor]="chipList"
-                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                    [matChipInputAddOnBlur]="addOnBlur"
                     (input)="onSearch($event)"
                     (keyup)="onKeyUp($event)"
-                    *ngIf="!customerPortalStateService.isCustomerPortal && ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
+                    [hidden]="customerPortalStateService.isCustomerPortal && !ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
                 >
-            </mat-chip-list>
-        </mat-form-field>
+            </app-mat-chip-list>
+        </app-mat-form-field>
         <div
             class="dropdown-menu ticket-detail-tag__dropdown-menu"
             ngbDropdownMenu

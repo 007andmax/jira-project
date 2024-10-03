@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { CompanyAddAsideComponent } from './company-add-aside.component';
 import { CompanyAddAsideShortComponent } from './company-add-aside-short/company-add-aside-short.component';
 import { CompanyAddAsideFullComponent } from './company-add-aside-full/company-add-aside-full.component';
-import { MatChipsModule, MatSelectModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { CompanySubscriptionModule } from '../company-subscription/company-subscription.module';
@@ -17,6 +16,8 @@ import { UserDefaultSubscriptionModule } from '../../users/users-aside/user-defa
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 import { CompanyUsersDropDownModule } from '../../tickets/tickets/ticket-add-aside/company-users-drop-down/company-users-drop-down.module';
+import { ProductListQuoteComponent } from '../../billing/quotes/quote-aside-add/product-list-quote/product-list-quote.component';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 import { UsersDropDownModule } from '../../shared/users-drop-down/users-drop-down.module';
 
 
@@ -28,8 +29,6 @@ import { UsersDropDownModule } from '../../shared/users-drop-down/users-drop-dow
     ],
     imports: [
         CommonModule,
-        MatSelectModule,
-        MatChipsModule,
         FormsModule,
         DropDownModule,
         CompanySubscriptionModule,
@@ -43,6 +42,7 @@ import { UsersDropDownModule } from '../../shared/users-drop-down/users-drop-dow
         DisabledBtnModule,
         PreloaderTicketModule,
         CompanyUsersDropDownModule,
+        MatErrorModule,
         UsersDropDownModule
     ],
     exports: [CompanyAddAsideComponent]

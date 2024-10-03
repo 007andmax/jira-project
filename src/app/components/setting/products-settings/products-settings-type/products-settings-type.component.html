@@ -47,12 +47,12 @@
                         maxlength="100"
                         (input)="item.onInitEdit(true);item.checkDublicate(list)"
                     >
-                    <mat-error
+                    <app-mat-error
                         class="invalid-feedback"
                         *ngIf="item.disableUpdate"
                     >
                         This type is already occupied
-                    </mat-error>
+                    </app-mat-error>
                 </div>
                 <div class="tab-pane__table-cell crm-settings-company-industry-table__action">
                     <div class="qt-df qt-ai-c">

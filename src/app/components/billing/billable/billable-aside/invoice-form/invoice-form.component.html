@@ -103,12 +103,12 @@
         >
             Get an actual number
         </span>
-        <mat-error
+        <app-mat-error
             class="invalid-feedback"
             *ngIf="!validate.getNumber()"
             [textContent]="'Invoice with number ' + invoiceNumber + ' is already occupied'"
         >
-        </mat-error>
+        </app-mat-error>
     </div>
     <div
         class="qt-input-block qt-mr-16 qt-w100"

@@ -3,7 +3,6 @@
 @import "./assets/styles/dropdowns.scss";
 @import "./src/assets/styles/mixin/breakpoint";
 @import "./assets/styles/icons.scss";
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "./assets/styles/main.scss";
 @import "./src/assets/styles/fonts";
 
@@ -418,6 +417,9 @@ html {
     }
   }
 }
+app-company-tags {
+  position: relative;
+}
 app-company-tags,
 app-company-devices-tags,
 company-associate,
@@ -488,11 +490,9 @@ documents-filter {
 .recurring-tickets-content__modal--content,
 .billing-dashboard-page__content,
 documents-filter,
-app-documents-add-info,
 .company-dashboard-add-tag,
 users-aside-detail,
-app-company-dash-detail,
-documents-edit-info {
+app-company-dash-detail {
   .tab-btns {
     display: flex;
     margin: 0 20px;
@@ -527,10 +527,6 @@ documents-edit-info {
       .mat-form-field-infix {
         border: none;
       }
-      .mat-form-field-appearance-legacy .mat-form-field-underline,
-      .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
-        display: none;
-      }
       .mat-form-field-appearance-legacy .mat-form-field-wrapper {
         padding: 0;
         position: relative;
@@ -545,9 +541,8 @@ documents-edit-info {
         border: 1px solid $gray-200;
         box-shadow: inset 0 1px 2px rgba(16, 24, 40, .05);
         border-radius: 6px;
-        padding-left: 36px;
+        padding: 0px 0px 0px 36px !important;
         position: relative;
-        min-height: 48px;
         &:hover {
           border-color: $gray-300;
         }
@@ -561,7 +556,8 @@ documents-edit-info {
           background: url("./assets/img/icons/tags.svg");
         }
         input {
-          height: 42px;
+          height: 38px !important;      
+          padding: 11px 14px;
           margin: 0;
           min-width: 100px;
         }
@@ -1319,18 +1315,7 @@ app-quotes-item {
         margin: 0;
       }
 
-      .mat-form-field-appearance-legacy.mat-form-field-can-float
-        .mat-input-server:focus
-        + .mat-form-field-label-wrapper
-        .mat-form-field-label,
-      .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
-        width: 100%;
-        transform: none;
-        color: $gray-600;
-      }
-
-      .mat-form-field-appearance-legacy .mat-form-field-underline,
-      .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+      .mat-form-field-appearance-legacy .mat-form-field-underline {
         display: none;
       }
 
@@ -2074,10 +2059,8 @@ app-quotes-item {
     }
     .mat-form-field-infix {
       input {
-        height: 38px !important;
         margin: 0;
-        padding: 11px 14px;
-      }
+        }
     }
 
     .mat-standard-chip {
@@ -3355,7 +3338,7 @@ input.--input-error:hover {
   }
 }
 
-.page-list-ticket,.users-page,.company-devices-page {
+.page-list-ticket,.users-page,.company-devices-page,app-multi-company-drop-down {
   .light-dropdown {
     padding: 0;
   }
@@ -3370,35 +3353,7 @@ input.--input-error:hover {
   .mat-form-field-underline {
     display: none;
   }
-  .mat-form-field-wrapper {
-    .mat-form-field-infix {
-      border: 1px solid $gray-200;
-      border-radius: 6px;
-      position: relative;
-      min-height: 40px;
-      padding-left: 6px;
-      &:hover {
-        border: 1px solid $gray-300;
-      }
-
-      input {
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 17px;
-        color: $gray-900;
-        padding: 11px 14px;
-        height: 34px;
-        margin: 0;
-        width: 100%;
-        flex: 1;
-
-        &::placeholder {
-          color: $gray-400;
-          font-family: inherit;
-        }
-      }
-    }
-  }
+  
   .mat-form-field-label-wrapper {
     position: absolute;
     left: 0;
@@ -3415,9 +3370,6 @@ input.--input-error:hover {
     @include body-m;
     color: $gray-400;
   }
-  .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
-    display: none;
-  }
   .mat-chip-list-wrapper {
     .mat-standard-chip {
       padding: 4px 6px 3px 8px;
@@ -3427,7 +3379,18 @@ input.--input-error:hover {
     display: none;
   }
 }
-
+app-multi-company-drop-down {
+  &:before {
+    display: none;
+  }
+  .mat-form-field-label-wrapper {
+    top: -20px;
+    padding-top: 15px;
+  }
+  .mat-form-field-wrapper {
+    padding-bottom: 0px !important;
+  }
+}
 .quotes-page .qt-page-list__header-filters .dropdown-menu {
   right: 0;
   left: unset;
@@ -3495,7 +3458,7 @@ add-category-product {
     color: $gray-900;
   }
   .qt-input-block {
-    mat-error {
+    mat-error,app-mat-error {
       position: static;
       order: -1;
       margin-bottom: 8px;
@@ -3539,10 +3502,7 @@ app-company-devices-tags {
         border: none;
       }
 
-      .mat-form-field-appearance-legacy .mat-form-field-underline,
-      .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
-        display: none;
-      }
+     
 
       .mat-form-field-appearance-legacy .mat-form-field-wrapper {
         padding: 0;
@@ -3562,7 +3522,7 @@ app-company-devices-tags {
         border-radius: 6px;
         padding-left: 4px !important;
         position: relative;
-        min-height: 48px;
+        min-height: 40px;
 
         &:hover {
           border-color: $gray-300;
@@ -3612,16 +3572,6 @@ app-company-devices-tags {
         background-color: $gray-100;
         color: $gray-500;
     }
-    .mat-standard-chip .mat-chip-remove.mat-icon {
-        width: 10px;
-        height: 10px;
-        &:before {
-            top: 0px;
-            right: -3px;
-            width: 10px;
-            height: 10px;
-        }
-    }
   }
 app-company-devices-edit-ip,app-company-devices-edit-mac {
   display: contents;
@@ -3630,5 +3580,25 @@ app-company-devices-edit-ip,app-company-devices-edit-mac {
   .tooltip-inner {
     width: 400px;
     min-width: 400px;
+  }
+}
+app-multi-company-drop-down {
+ &:before {
+     display: none;
+     
+  }
+
+   .mat-form-field-label-wrapper {
+     top: -20px;
+     padding-top: 15px;
+    
+  }
+
+   .mat-form-field-wrapper {
+     padding-bottom: 0px !important;
+    
+  }
+  .mat-form-field {
+      width: 100%;
   }
 }

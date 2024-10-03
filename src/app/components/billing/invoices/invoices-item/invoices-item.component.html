@@ -2,11 +2,16 @@
     class="qt-table-modern__row"
     [ngClass]="{'--selected': invoice.selected}"
 >
-    <div class="invoice-table__check pointer">
-        <div class="qt-df">
+    <div
+        class="invoice-table__check"
+        [ngClass]="{'no-pointer':invoice.status == 'DELETED'}"
+    >
+        <div
+            class="qt-df"
+            *ngIf="invoice.status != 'DELETED'"
+        >
             <label
-                class="qt-checkbox"
-                [ngClass]="{'--disabled':invoice.blockSelected, 'pointer':!invoice.blockSelected}"
+                class="qt-checkbox pointer"
                 [attr.for]="'invoice-' + invoice.id"
             >
                 <input
@@ -14,7 +19,6 @@
                     [(ngModel)]="invoice.selected"
                     type="checkbox"
                     (change)="onChangeSelect()"
-                    [disabled]="invoice.blockSelected"
                 >
                 <span></span>
             </label>

@@ -2,7 +2,6 @@ import { Component, OnInit, Input, ViewChild, ElementRef, HostListener, Output, 
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { MatAutocomplete } from '@angular/material';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { TicketStateService } from '../services/ticket-state.service';
@@ -36,7 +35,6 @@ export class AddAssignedUserComponent implements OnInit {
   @Output() hidden = new EventEmitter<any>();
   @Output() onSelected = new EventEmitter<any>();
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
-  @ViewChild('auto') matAutocomplete: MatAutocomplete;
   @ViewChild('assignedUserDp') assignedUserDp: NgbDropdown;
 
   /**

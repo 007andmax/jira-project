@@ -66,12 +66,12 @@
                         (input)="item.onInitEdit(true);item.checkDublicate(jobTitleList)"
                         maxlength="30"
                     >
-                    <mat-error
+                    <app-mat-error
                         class="qt-tooltip-error"
                         *ngIf="item.disableUpdate"
                     >
                         This Job Title is already occupied
-                    </mat-error>
+                    </app-mat-error>
                 </div>
                 <div class="tab-pane__table-cell crm-settings-table-job-title__action">
                     <app-dynamic-tooltip

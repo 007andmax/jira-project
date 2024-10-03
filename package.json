@@ -22,7 +22,6 @@
     "@angular/compiler": "~7.0.0",
     "@angular/core": "~7.0.0",
     "@angular/forms": "~7.0.0",
-    "@angular/material": "github:angular/material2-builds#8873f67f2988f214d09b55b15f2e10a5d9b5bb0d",
     "@angular/platform-browser": "~7.2.0",
     "@angular/platform-browser-dynamic": "~7.0.0",
     "@angular/router": "~7.0.0",

@@ -22,18 +22,18 @@
                             >
                             <span class="qt-input-afterfix">.quicktech.com</span>
                         </div>
-                        <mat-error
+                        <app-mat-error
                             class="invalid-feedback --pos-static"
                             *ngIf="cProfileForm.get('url').getError('incorrect')"
                         >
                             Domain is required
-                        </mat-error>
-                        <mat-error
+                        </app-mat-error>
+                        <app-mat-error
                             class="invalid-feedback --pos-static"
                             *ngIf="cProfileForm.get('url').getError('invalidate')"
                         >
                             Please enter a valid company domain.
-                        </mat-error>
+                        </app-mat-error>
                     </div>
                     <div class="qt-input-help-text qt-mt-12">
                         Your workspace URL can only contain lowercase letters, numbers and dashes

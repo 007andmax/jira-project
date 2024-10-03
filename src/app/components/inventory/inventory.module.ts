@@ -9,7 +9,6 @@ import { InventoryFilterComponent } from './inventory-header/inventory-filter/in
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DropDownModule } from '../shared/drop-down/drop-down.module';
 import { InventoryAddCategoryComponent } from './inventory-add-category/inventory-add-category.component';
-import { MatSelectModule, MatChipsModule } from '@angular/material';
 import { InventoryRoutingModule } from './inventory-routing.module';
 import { ContractsEditModule } from '../billing/contracts/contracts-edit/contracts-edit.module';
 import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-number.module';
@@ -19,6 +18,7 @@ import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { TaxesModule } from '../shared/taxes/taxes.module';
 import { InventoryChangeProductTypeComponent } from './inventory-change-product-type/inventory-change-product-type.component';
 import { InventoryChangeProductTypeModule } from './inventory-change-product-type/inventory-change-product-type.module';
+import { MatErrorModule } from '../shared/mat-error/mat-error.module';
 
 
 @NgModule({
@@ -34,15 +34,14 @@ import { InventoryChangeProductTypeModule } from './inventory-change-product-typ
         FormsModule,
         NgbModule,
         DropDownModule,
-        MatSelectModule,
-        MatChipsModule,
         InventoryRoutingModule,
         ContractsEditModule,
         DecimalNumberModule,
         ToFixedModule,
         TaxesModule,
         TextAreaModule,
-        InventoryChangeProductTypeModule
+        InventoryChangeProductTypeModule,
+        MatErrorModule
 
     ],
 

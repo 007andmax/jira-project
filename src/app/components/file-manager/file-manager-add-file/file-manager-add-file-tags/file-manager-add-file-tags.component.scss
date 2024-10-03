@@ -113,14 +113,6 @@
     min-height: auto !important;
     left: calc(50% - 12px) !important;
 }
-
-.company-tag-input {
-    &::placeholder {
-        opacity: 0 !important;
-        color: $gray-400;
-    }
-}
-
 .no-remove {
     background: $gray-100;
     color: $gray-600;

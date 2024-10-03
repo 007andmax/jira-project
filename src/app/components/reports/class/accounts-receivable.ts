@@ -1,9 +1,9 @@
-import { reqAccountsReceivable } from 'src/app/interfaces/reports/req-accounts-receivable';
-import { AccountsReceivableItem } from './accounts-receivable-item';
-import { AccountsReceivableLine } from './accounts-receivable-line';
+import { AccountsReceivableReport } from "./accounts-receivable-report";
+
+
 
 export class AccountsReceivable {
-    companyId: string;
+    companyIds: Array<string> = [];
     techCompanyName: string;
     clientCompanyName: string;
     type: string;
@@ -13,13 +13,16 @@ export class AccountsReceivable {
     total3MonthSum: number;
     totalOlderSum: number;
     totalSum: number;
-
-    lines: Array<AccountsReceivableLine> = [];
+    isCommonReport: boolean = true;
+    reportData: Array<AccountsReceivableReport> = [];
     constructor() {
 
     }
+    public setIsCommonReport(data) {
+        this.isCommonReport = data;
+    }
     public setData(data) {
-        this.companyId = data.companyId;
+        this.companyIds = data.companyIds;
         this.techCompanyName = data.techCompanyName;
         this.clientCompanyName = data.clientCompanyName;
         this.type = data.type;
@@ -29,13 +32,13 @@ export class AccountsReceivable {
         this.total3MonthSum = data.total3MonthSum;
         this.totalOlderSum = data.totalOlderSum;
         this.totalSum = data.totalSum;
-        this.lines = data.lines.map((item => {
-            return new AccountsReceivableLine(item);
+        this.reportData = data.reportData.map((item => {
+            return new AccountsReceivableReport(item);
         }));
     }
     public getDataObject() {
         return {
-            companyId: this.companyId,
+            companyIds: this.companyIds,
             techCompanyName: this.techCompanyName,
             clientCompanyName: this.clientCompanyName,
             type: this.type,
@@ -45,14 +48,14 @@ export class AccountsReceivable {
             total3MonthSum: this.total3MonthSum,
             totalOlderSum: this.totalOlderSum,
             totalSum: this.totalSum,
-            lines: this.lines
+            reportData: this.reportData
         }
     }
     public clearLines() {
-        this.lines = [];
+        this.reportData = [];
     }
     public setDataFromObject(data) {
-        this.companyId = data.companyId;
+        this.companyIds = data.companyIds;
         this.techCompanyName = data.techCompanyName;
         this.clientCompanyName = data.clientCompanyName;
         this.type = data.type;
@@ -62,18 +65,19 @@ export class AccountsReceivable {
         this.total3MonthSum = data.total3MonthSum;
         this.totalOlderSum = data.totalOlderSum;
         this.totalSum = data.totalSum;
-        this.lines = data.lines;
+        this.reportData = data.reportData;
     }
     public setLines(data) {
-        this.lines = data;
+        this.reportData = data;
     }
-    public setClientCompanyId(data) {
-        this.companyId = data;
+    public setClientCompanyIds(data) {
+        this.companyIds = data;
     }
     public getForRequest() {
-        let data: reqAccountsReceivable = {
-            companyId: this.companyId
+        let data: any = {
+            "isCommonReport": this.isCommonReport
         }
+        if (this.companyIds.length > 0) data.companyIds = this.companyIds;
         return data;
     }
 }

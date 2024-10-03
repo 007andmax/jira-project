@@ -23,12 +23,12 @@
                     type="text"
                     (input)="onChangeName()"
                 >
-                <mat-error
+                <app-mat-error
                     class="invalid-feedback --pos-static"
                     *ngIf="!validate.getName()"
                 >
                     Service name is required
-                </mat-error>
+                </app-mat-error>
             </div>
         </div>
         <div class="qt-inputs-row">
@@ -45,12 +45,12 @@
                         (change)="onChangeRate($event)"
                         appToFixed
                     >
-                    <mat-error
+                    <app-mat-error
                         class="invalid-feedback"
                         *ngIf="!validate.getRate()"
                     >
                         Hour rate is required
-                    </mat-error>
+                    </app-mat-error>
                 </div>
             </div>
             <div class="qt-input-block qt-w50">

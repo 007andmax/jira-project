@@ -21,12 +21,12 @@
         [attr.maxlength]="maxlength"
         (isPopupOpen)="isDropDownOpen()"
     >
-    <mat-error
+    <app-mat-error
         class="invalid-feedback mat-error"
         *ngIf="!valid"
     >
         Title is required
-    </mat-error>
+    </app-mat-error>
     <span *ngIf="list">
         <i
             *ngIf="selectedItem"

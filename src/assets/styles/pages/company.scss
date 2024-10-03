@@ -12,16 +12,13 @@ company-associate {
     }
     .mat-form-field-infix {
       border: 1px solid $gray-200;
+      padding: 0px !important;
       &:hover {
         border-color: $gray-300;
       }
       input {
         border: unset;
       }
-    }
-    .mat-form-field-appearance-legacy .mat-form-field-underline,
-    .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
-      display: none;
     }
     .mat-form-field-appearance-legacy .mat-form-field-wrapper {
       padding: 0;
@@ -37,16 +34,9 @@ company-associate {
       position: relative;
       min-height: 48px;
       input {
-        height: 42px !important;
+        height: 38px !important;
         margin: 0;
       }
-    }
-  }
-}
-company-dash-associate {
-  company-associate {
-    .mat-form-field-label {
-      padding: 12px 10px 10px 0px !important;
     }
   }
 }

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MatSelectModule, MatChipsModule, MatIconModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-down/company-drop-down.module';
 import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.module';
@@ -17,6 +16,10 @@ import { DynamicTooltipModule } from 'src/app/components/shared/dynamic-tooltip/
 import { TicketsFilterUsersDropDownComponent } from './tickets-filter-users-drop-down/tickets-filter-users-drop-down.component';
 import { TicketsFilterCompaniesDropDownModule } from './tickets-filter-companies-drop-down/tickets-filter-companies-drop-down.module';
 import { TicketsFilterTagsModule } from './tickets-filter-tags/tickets-filter-tags.module';
+import { MatChipListModule } from 'src/app/components/shared/mat-chip-list/mat-chip-list.module';
+import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.module';
+import { MatFormFieldModule } from 'src/app/components/shared/mat-form-field/mat-form-field.module';
+import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 
 @NgModule({
     declarations: [
@@ -30,9 +33,6 @@ import { TicketsFilterTagsModule } from './tickets-filter-tags/tickets-filter-ta
     imports: [
         CommonModule,
         NgbModule,
-        MatSelectModule,
-        MatChipsModule,
-        MatIconModule,
         FormsModule,
         ReactiveFormsModule,
         CompanyDropDownModule,
@@ -40,7 +40,11 @@ import { TicketsFilterTagsModule } from './tickets-filter-tags/tickets-filter-ta
         InfiniteScrollModule,
         DynamicTooltipModule,
         TicketsFilterCompaniesDropDownModule,
-        TicketsFilterTagsModule
+        TicketsFilterTagsModule,
+        MatChipModule,
+        MatFormFieldModule,
+        MatChipListModule,
+        MatErrorModule
     ],
     exports: [TicketsFilterComponent]
 

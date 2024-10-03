@@ -10,8 +10,6 @@
         <div class="payment-preview qt-pt-40 qt-pl-40 qt-pr-40 qt-pb-40">
             <div class="qt-df">
                 <div class="qt-w100">
-
-
                     <div class="qt-df qt-jc-sb">
                         <div>You can refund the payment</div>
                         <div class="payment-info-lines qt-mb-16 payment-refound-totals">
@@ -42,45 +40,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
-                    <div class="qt-df qt-jc-sb">
-                        <div>You can refund the payment</div>
-                        <div class="payment-info-lines qt-mb-16 payment-refound-totals">
-                            <div class="qt-df qt-jc-sb">
-                                <div class="payment-info-lines__title">Amount Paid</div>
-                                <div
-                                    class="payment-info-lines__value"
-                                    [textContent]="(payment.partialPaidAmount || payment.totalSum ) | currency"
-                                ></div>
-                            </div>
-                            <div class="qt-df qt-jc-sb">
-                                <div class="payment-info-lines__title">Paid by</div>
-                                <div
-                                    class="payment-info-lines__value "
-                                    [textContent]="parsePaymentMethod(payment.paymentMethod)"
-                                ></div>
-                            </div>
-                            <div class="qt-df qt-jc-sb">
-                                <div class="payment-info-lines__title">Refund Amount</div>
-                                <div
-                                    class="payment-info-lines__value"
-                                    [textContent]="(payment.partialPaidAmount || payment.totalSum ) | currency"
-                                ></div>
-                            </div>
-                            <div class="qt-df qt-jc-sb">
-                                <div class="payment-info-lines__title">Refund Mode</div>
-                                <div class="payment-info-lines__value">Refund payment</div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-
                     <div>
                         <div>
                             <textarea

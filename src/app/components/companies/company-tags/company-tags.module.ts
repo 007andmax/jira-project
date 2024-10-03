@@ -3,8 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CompanyTagsComponent } from './company-tags.component';
-import { MatChipsModule, MatIconModule, MatSelectModule } from '@angular/material';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { MatChipModule } from '../../shared/mat-chip/mat-chip.module';
+import { MatFormFieldModule } from '../../shared/mat-form-field/mat-form-field.module';
+import { MatChipListModule } from '../../shared/mat-chip-list/mat-chip-list.module';
 
 
 @NgModule({
@@ -15,9 +17,9 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
         CommonModule,
         ReactiveFormsModule,
         FormsModule,
-        MatSelectModule,
-        MatChipsModule,
-        MatIconModule,
+        MatChipModule,
+        MatFormFieldModule,
+        MatChipListModule,
         NgbModule,
         InfiniteScrollModule,
 

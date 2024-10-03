@@ -20,18 +20,18 @@
                         [itemList]="servicesList"
                         (selectedServicesItem)="onSelectService($event,i)"
                     ></app-services-list>
-                    <mat-error
+                    <app-mat-error
                         class="invalid-feedback --pos-static"
                         *ngIf="!service.validate"
                     >
                         The Service is required
-                    </mat-error>
-                    <mat-error
+                    </app-mat-error>
+                    <app-mat-error
                         class="invalid-feedback --pos-static"
                         *ngIf="!service.validateQuantity"
                     >
                         You have to set any time value
-                    </mat-error>
+                    </app-mat-error>
                 </div>
                 <div class="qt-df">
                     <app-ticket-profile-updates-service-timepicker
@@ -97,12 +97,12 @@
                     [itemList]="servicesList"
                     (selectedServicesItem)="selectService($event)"
                 ></app-services-list>
-                <mat-error
+                <app-mat-error
                     class="invalid-feedback --pos-static"
                     *ngIf="!currentService.validate"
                 >
                     The Service is required
-                </mat-error>
+                </app-mat-error>
             </div>
             <div class="qt-df ticket-timepicker-time-in-out">
                 <app-ticket-profile-updates-service-timepicker

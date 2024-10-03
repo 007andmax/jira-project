@@ -4,41 +4,34 @@
     (openChange)="openChange($event)"
     #dp="ngbDropdown"
 >
-    <mat-form-field ngbDropdownAnchor>
-        <mat-chip-list
-            #chipList
-            aria-label="Fruit selection"
+    <app-mat-form-field
+        ngbDropdownAnchor
+        #formField
+        [placeholder]="'Search By Associated Companies'"
+    >
+        <app-mat-chip-list
+            [items]="selectedCompanies"
+            (onChangeItems)="formField.checkSelectedItems(selectedCompanies)"
         >
-            <mat-chip
+            <app-mat-chip
                 *ngFor="let company of selectedCompanies; let i = index"
-                [selectable]="selectable"
-                [removable]="removable"
-                (removed)="remove(i)"
+                (onClose)="remove(i)"
+                [isRemove]="getPermissions('EDIT_COMPANIES')"
             >
                 {{company.name}}
-                <mat-icon
-                    matChipRemove
-                    *ngIf="getPermissions('EDIT_COMPANIES')"
-                >
-                    cancel
-                </mat-icon>
-            </mat-chip>
+            </app-mat-chip>
             <input
                 id="dropdownServices"
                 ngbDropdownToggle
-                placeholder="Search By Associated Companies"
                 #userInput
                 class="pointer"
                 [formControl]="tagCtrl"
-                [matChipInputFor]="chipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                [matChipInputAddOnBlur]="addOnBlur"
                 (input)="onSearch($event)"
                 [disabled]="!getPermissions('EDIT_COMPANIES')"
             >
             <!-- (keyup)="onKeyUp($event)" -->
-        </mat-chip-list>
-    </mat-form-field>
+        </app-mat-chip-list>
+    </app-mat-form-field>
     <div
         class="select-wrapper"
         ngbDropdownMenu

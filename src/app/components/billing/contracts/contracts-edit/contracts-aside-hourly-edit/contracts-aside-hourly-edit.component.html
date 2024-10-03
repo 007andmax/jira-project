@@ -59,12 +59,12 @@
                 [(ngModel)]="contractsHourly.description"
                 (input)="onChangeDescription()"
             >
-            <mat-error
+            <app-mat-error
                 class="invalid-feedback"
                 *ngIf="!validate.getDescription()"
             >
                 Description is required
-            </mat-error>
+            </app-mat-error>
         </div>
     </div>
     <div class="qt-inputs-row qt-inputs-row__divider"></div>
@@ -160,7 +160,7 @@
     >
         + Add Custom Service
     </button>
-    <mat-error *ngIf="!validate.getDate()">
+    <app-mat-error *ngIf="!validate.getDate()">
         The current company has a working hourly agreement for these dates
-    </mat-error>
+    </app-mat-error>
 </div>

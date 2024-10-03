@@ -25,12 +25,12 @@
                                 maxlength="255"
                                 (input)="onChangeTitle()"
                             >
-                            <mat-error
+                            <app-mat-error
                                 class="invalid-feedback error-title"
                                 *ngIf="!validate.getTitle()"
                             >
                                 Title is required
-                            </mat-error>
+                            </app-mat-error>
                         </div>
                     </div>
                     <div
@@ -42,12 +42,12 @@
                     >
                         Hello, Froala!
                     </div>
-                    <mat-error
+                    <app-mat-error
                         class="invalid-feedback error-description"
                         *ngIf="!validate.getContent()"
                     >
                         Content is required
-                    </mat-error>
+                    </app-mat-error>
                 </div>
                 <div class="qt-inputs-row">
                     <div class="qt-input-block qt-f100">

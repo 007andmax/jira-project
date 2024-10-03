@@ -3,52 +3,44 @@
     ngbDropdown
     (openChange)="openChange($event)"
     #dp="ngbDropdown"
+    ngbDropdownAnchor
 >
-    <mat-form-field
-        ngbDropdownAnchor
+    <app-mat-form-field
         [ngClass]="{'hidde-label' :!showLabel}"
+        #formField
+        [placeholder]="'Search By Tags'"
     >
-        <mat-chip-list
-            #chipList
-            aria-label="Fruit selection"
+        <app-mat-chip-list
+            [items]="selectedTag"
+            (onChangeItems)="formField.checkSelectedItems(selectedTag)"
         >
-            <mat-chip
+            <app-mat-chip
                 *ngFor="let tag of selectedTag; let i = index"
-                [selectable]="selectable"
-                [removable]="!isDisabled"
-                (removed)="remove(i)"
+                (onClose)="remove(i)"
                 [ngClass]="{'no-remove':!checkRemoveTag(i)}"
                 placement="top"
                 container="body"
                 tooltipClass="company-tags-default-tooltip"
                 ngbTooltip="This is a default tag. You cannot remove it."
                 [disableTooltip]="checkRemoveTag(i)"
+                [isRemove]="!isDisabled"
             >
                 {{tag.word}}
-                <mat-icon
-                    matChipRemove
-                    *ngIf="!isDisabled"
-                >
-                    cancel
-                </mat-icon>
-            </mat-chip>
+            </app-mat-chip>
             <input
                 id="dropdownServices"
                 ngbDropdownToggle
                 placeholder="Search By Tags"
                 #userInput
                 class="company-tag-input pointer"
-                [matChipInputFor]="chipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                [matChipInputAddOnBlur]="addOnBlur"
                 (input)="onSearch($event)"
                 (keyup)="onKeyUp($event)"
                 autocomplete="off"
                 [ngClass]="{'disabled': isDisabled}"
                 [disabled]="isDisabled"
             >
-        </mat-chip-list>
-    </mat-form-field>
+        </app-mat-chip-list>
+    </app-mat-form-field>
     <div
         class="select-wrapper user-aside-tags-dropdown"
         ngbDropdownMenu

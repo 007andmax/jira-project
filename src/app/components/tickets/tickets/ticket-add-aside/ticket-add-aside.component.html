@@ -40,12 +40,12 @@
                     type="text"
                     placeholder="Write Ticket Subject"
                 >
-                <mat-error
+                <app-mat-error
                     class="invalid-feedback"
                     *ngIf="!ticketValidate.getSubject()"
                 >
                     Ticket Subject is required
-                </mat-error>
+                </app-mat-error>
             </div>
         </div>
         <div class="qt-inputs-row">

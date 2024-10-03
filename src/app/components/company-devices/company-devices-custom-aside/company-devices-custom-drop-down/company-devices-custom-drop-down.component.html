@@ -4,17 +4,23 @@
     [placement]="placement"
     #dp="ngbDropdown"
 >
-    <mat-form-field ngbDropdownAnchor>
-        <mat-chip-list #chipList>
+    <app-mat-form-field
+        ngbDropdownAnchor
+        #formField
+        [placeholder]="'Search By Tags'"
+    >
+        <app-mat-chip-list
+            [items]="selectedTag"
+            (onChangeItems)="formField.checkSelectedItems(selectedTag)"
+        >
             <app-dynamic-tooltip
                 [position]="'top'"
                 #productTooltip
             ></app-dynamic-tooltip>
-            <mat-chip
+            <app-mat-chip
                 *ngFor="let tag of selectedTag; let i = index"
-                [selectable]="selectable"
-                [removable]="removable"
-                (removed)="remove(i)"
+                (onClose)="remove(i)"
+                [isRemove]="removable"
             >
                 <div
                     class="clip-text"
@@ -30,28 +36,18 @@
                 >
                     {{tag.name}}
                 </div>
-                <mat-icon
-                    matChipRemove
-                    *ngIf="removable"
-                >
-                    cancel
-                </mat-icon>
-            </mat-chip>
+            </app-mat-chip>
             <input
                 id="dropdownServices"
                 ngbDropdownToggle
-                placeholder="Search by Tags"
                 #userInput
-                class="pointer"
-                [matChipInputFor]="chipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                [matChipInputAddOnBlur]="addOnBlur"
+                class="pointer mat-chip-input mat-input-element"
                 autocomplete="off"
                 (input)="onSearch($event)"
                 (keyup)="onKeyUp($event)"
             >
-        </mat-chip-list>
-    </mat-form-field>
+        </app-mat-chip-list>
+    </app-mat-form-field>
     <div
         class="dropdown-menu"
         ngbDropdownMenu

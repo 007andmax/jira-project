@@ -8,12 +8,13 @@ import { SoftwareSummaryDevicesDroDownComponent } from '../reports/software-summ
 import { FormsModule } from '@angular/forms';
 import { ProductListModule } from '../../shared/product-list/product-list.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MatSelectModule, MatChipsModule } from '@angular/material';
 import { ReportAdditionalActionsModule } from '../report-additional-actions/report-additional-actions.module';
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 import { ContractDetailDropDownComponent } from './contract-detail-drop-down/contract-detail-drop-down.component';
 import { ContractDetailIntervalsDropDownComponent } from './contract-detail-intervals-drop-down/contract-detail-intervals-drop-down.component';
 import { ContractCompanyDropDownComponent } from './contract-company-drop-down/contract-company-drop-down.component';
+import { MultiCompanyDropDownModule } from '../../shared/multi-company-drop-down/multi-company-drop-down.module';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 
 
@@ -33,10 +34,10 @@ import { ContractCompanyDropDownComponent } from './contract-company-drop-down/c
         FormsModule,
         ProductListModule,
         NgbModule,
-        MatSelectModule,
-        MatChipsModule,
         ReportAdditionalActionsModule,
-        CompanyDropDownModule
+        CompanyDropDownModule,
+        MultiCompanyDropDownModule,
+        MatErrorModule
     ],
     exports: [ReportMenuComponent]
 

@@ -41,19 +41,16 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
   phoneTypes = ['Office', 'Mobile', 'Fax'];
   selectedUserType: CrmCompanyJobType;
   selectedUserTitle: CrmCompanyJobTitle;
-  selectedUserIndustry: CrmCompanyIndustry;
   userTypes: Array<CrmCompanyJobType> = [];
   sub: Subscription = new Subscription();
   MODE_EDIT_SUBSCRIPTION = MODE_EDIT_SUBSCRIPTION;
   MODE_EDIT_USER_SUBSCRIPTION = MODE_EDIT_USER_SUBSCRIPTION;
-  industries: Array<CrmCompanyIndustry> = [];
   idUploadFile: string;
   userRoles: Array<UserRole> = [];
   @ViewChild('editBtn') editBtn: DisabledBtnDirective;
   @ViewChild('companyTags') companyTags: CompanyTagsComponent;
   @ViewChild('jobTitleDp') jobTitleDp: DropDownComponent;
   @ViewChild('jobTypeDp') jobTypeDp: DropDownComponent;
-  @ViewChild('jobIndustryDp') jobIndustryDp: DropDownComponent;
   @ViewChild('userRolesDP') userRolesDP: DropDownComponent;
   constructor(private imageCropperStateService: ImageCropperStateService,
     public ticketsListService: TicketsListService,
@@ -69,11 +66,6 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.industries = this.crmStateService.getIndustryList();
-    let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
-      this.industries = data;
-    })
-    this.sub.add(onGetIndustry);
     this.jobTitleList = this.crmStateService.getJobTitleList();
     let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
       this.jobTitleList = data;
@@ -90,7 +82,6 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
       this.companyTags.setSelectedTag(this.user.tags);
       this.selectedUserType = this.userTypes.find(item => item.id == this.user.jobTypeId);
       this.selectedUserTitle = this.jobTitleList.find(item => item.id == this.user.jobTitleId);
-      this.selectedUserIndustry = this.industries.find(item => item.id == this.user.userIndustryId);
       this.validate.addPhoneNumbers(this.user.phoneNumbers);
     })
     this.sub.add(getOpenEditAside);
@@ -99,11 +90,6 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
       if (this.userRolesDP) this.userRolesDP.reset(this.userRoles);
     })
     this.sub.add(onGetUserRole);
-  }
-
-  onSelectClientIndustry(item) {
-    this.selectedUserIndustry = item;
-    this.user.setUserIndustryId((item) ? item.id : null);
   }
   public onChangeTags(tags) {
     this.user.setTags(tags);
@@ -299,10 +285,8 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     this.validate = new UserValidate();
     this.selectedUserTitle = null;
     this.selectedUserType = null;
-    this.selectedUserIndustry = null;
     this.jobTitleDp.clearWithOutChanges();
     this.jobTypeDp.clearWithOutChanges();
-    this.jobIndustryDp.clearWithOutChanges();
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
     }

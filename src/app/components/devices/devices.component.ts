@@ -1,7 +1,6 @@
 import { Subscription } from 'rxjs';
 import { ChangeDetectorRef, Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatAutocompleteSelectedEvent } from '@angular/material';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
@@ -662,15 +661,15 @@ export class DevicesComponent implements OnInit, OnDestroy {
     }, 500);
   }
 
-  selected(event: MatAutocompleteSelectedEvent): void {
-    let data = this.selectedTag.find(x => x.toLowerCase() == event.option.viewValue.toLocaleLowerCase());
+  selected(search): void {
+    let data = this.selectedTag.find(x => x.toLowerCase() == search.Result.toLocaleLowerCase());
     if (!data) {
-      this.selectedTag.push(event.option.viewValue);
+      this.selectedTag.push(search.Result);
       this.searchTag = [];
       this.searchTag = this.selectedTag;
       this.selectedInput.nativeElement.value = '';
       this.selectedCtrl.setValue(null);
-      this.add(event.option.viewValue);
+      this.add(search.Result);
     }
     this.selectedInput.nativeElement.value = '';
   }

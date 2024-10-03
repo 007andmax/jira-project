@@ -1,0 +1,93 @@
+@import "./src/assets/styles/variable";
+
+.mat-chip {
+    padding: 9px 15px 9px 5px;
+    border-radius: 3px !important;
+    border: 1px solid $background;
+    color: $gray-900;
+    text-transform: none;
+    position: relative;
+    display: flex;
+    min-width: 35px;
+    margin: 2px;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    background-color: $gray-25;
+    float: left;
+    cursor: inherit;
+    overflow: hidden;
+}
+
+.mat-standard-chip {
+    padding: 4px 6px 3px 8px;
+    margin: 4px;
+    transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1);
+    align-items: center;
+    &:focus {
+        box-shadow: 0 3px 3px -2px rgba(0, 0, 0, .2),
+            0 3px 4px 0 rgba(0, 0, 0, .14),
+            0 1px 8px 0 rgba(0, 0, 0, .12);
+        outline: 0;
+    }
+}
+
+.clip-text {
+    max-width: 230px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.mat-chip-remove {
+    font-size: 0;
+    position: relative;
+    margin: 0;
+    color: rgba(0, 0, 0, .87);
+    opacity: .4;
+    cursor: pointer;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 2px;
+        right: -3px;
+        width: 14px;
+        height: 14px;
+        -webkit-mask-image: url(/assets/img/icons/close.svg);
+        mask-image: url(/assets/img/icons/close.svg);
+        background-color: #98A2B3;
+        -webkit-mask-position: center;
+        mask-position: center;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+    }
+}
+
+.mat-icon {
+    width: 18px;
+    height: 18px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    fill: currentColor;
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+}

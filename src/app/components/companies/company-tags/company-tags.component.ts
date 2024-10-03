@@ -11,6 +11,7 @@ import { CompanyTag } from './class/company-tag';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { DeviceTagsStateService } from 'src/app/states/device-tags/device-tags-state.service';
 import { DeviceTagsService } from 'src/app/services/device-tags/device-tags.service';
+import { MatFormFieldComponent } from '../../shared/mat-form-field/mat-form-field.component';
 
 @Component({
   selector: 'app-company-tags',
@@ -283,7 +284,6 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
       this.setDefaultScoll();
       this.onScroll();
     }
-
   }
 
   public setSelectedTag(data) {
