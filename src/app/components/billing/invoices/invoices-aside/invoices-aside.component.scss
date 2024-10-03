@@ -22,3 +22,8 @@
 .unpaid-table__payment {
     width: 130px !important;
 }
+/deep/.multi-company-dropdown-invoices {
+    .mat-form-field-infix {
+        padding: 0px !important;
+    }
+}

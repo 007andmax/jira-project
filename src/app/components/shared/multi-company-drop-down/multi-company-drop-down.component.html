@@ -4,20 +4,24 @@
     #products="ngbDropdown"
     (openChange)="onOpenChange($event)"
 >
-    <mat-form-field ngbDropdownAnchor>
-        <mat-chip-list
+    <app-mat-form-field
+        ngbDropdownAnchor
+        #formField
+    >
+        <app-mat-chip-list
             #chipList
             aria-label="Fruit selection"
+            [items]="selectedCompanies"
+            (onChangeItems)="formField.checkSelectedItems(selectedCompanies)"
         >
             <app-dynamic-tooltip
                 [position]="'top'"
                 #productTooltip
             ></app-dynamic-tooltip>
-            <mat-chip
+            <app-mat-chip
                 *ngFor="let company of selectedCompanies; let i = index"
-                [selectable]="true"
-                [removable]="true"
-                (removed)="remove(i)"
+                [isRemove]="true"
+                (onClose)="remove(i)"
             >
                 <div
                     class="clip-text"
@@ -33,22 +37,18 @@
                 >
                     {{company.name}}
                 </div>
-                <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
+            </app-mat-chip>
             <input
                 id="dropdownServices"
                 ngbDropdownToggle
                 placeholder="Select Company"
                 #userInput
                 class="pointer"
-                [matChipInputFor]="chipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                [matChipInputAddOnBlur]="true"
                 autocomplete="off"
                 (input)="onSearch($event)"
             >
-        </mat-chip-list>
-    </mat-form-field>
+        </app-mat-chip-list>
+    </app-mat-form-field>
     <div
         class="dropdown-menu"
         ngbDropdownMenu
