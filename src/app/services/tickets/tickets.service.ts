@@ -28,7 +28,7 @@ export class TicketsService {
     return this.http.get(this.apiUrl + `v2/tickets/previewInfo?userId=${userId}`);
   }
   public deleteGlobalFilter(id) {
-    return this.http.delete(this.apiUrl + `ticket/filters/${id}`).pipe(
+    return this.http.delete(this.apiUrl + `filters/ticket/${id}`).pipe(
       tap(data => {
         this.toastrService.success("The filter has been successfully deleted");
         this.appStateService.changeDetectorRef();
@@ -36,7 +36,7 @@ export class TicketsService {
       }));
   }
   public editGlobalFilter(id, data) {
-    return this.http.put(this.apiUrl + `ticket/filters/${id}`, data).pipe(
+    return this.http.put(this.apiUrl + `filters/ticket/${id}`, data).pipe(
       tap(data => {
         this.toastrService.success("The filter has been successfully saved");
         this.appStateService.changeDetectorRef();
@@ -44,7 +44,7 @@ export class TicketsService {
       }));
   }
   public addGlobalFilter(data) {
-    return this.http.post(this.apiUrl + `ticket/filters`, data).pipe(
+    return this.http.post(this.apiUrl + `filters/ticket`, data).pipe(
       tap(data => {
         this.toastrService.success("The filter has been successfully saved");
         this.appStateService.changeDetectorRef();
@@ -52,7 +52,7 @@ export class TicketsService {
       }));
   }
   public getFilters(page) {
-    return this.http.get(this.apiUrl + `ticket/filters/all?page=${page}&size=10`);
+    return this.http.get(this.apiUrl + `filters/ticket/all?page=${page}&size=10`);
   }
   public getDashboardByTech(startDate, endDate) {
     return this.http.get(this.apiUrl + `dashboard/ticket/counters?startDate=${startDate}&endDate=${endDate}`);
@@ -104,9 +104,17 @@ export class TicketsService {
     }
     return this.http.post(this.apiUrl + `v2/tickets/${ticket.id}/updates/fetch`, loadedIds);
   }
-  public changeSubjectNoteTicket(id, subject, note, companyId = null) {
-    let data = { id: id, subject: subject, note: note, companyId: companyId };
-    return this.http.put(this.apiUrl + `v2/tickets/edit`, data);
+  public changeSubjectNoteTicket(id, subject, note, companyId = null, createdBy = null) {
+    let data: any = { id: id, subject: subject, note: note, createdBy: createdBy };
+    if (companyId) data.companyId = companyId;
+    this.appStateService.setServerError(true);
+    return this.http.put(this.apiUrl + `v2/tickets/edit`, data).pipe(
+      tap(data => {
+        this.appStateService.setServerError(false);
+        this.toastrService.success("The ticket creator has been successfully changed");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public removeTicketStatus(ticket_id) {
     return this.http.delete(this.apiUrl + `ticket/status/${ticket_id}`).pipe(
@@ -219,9 +227,9 @@ export class TicketsService {
         return data;
       }));
   }
-  public addPriority(name, color) {
+  public addPriority(data) {
 
-    return this.http.post(this.apiUrl + `priorityLevel`, { name: name, color: color }).pipe(
+    return this.http.post(this.apiUrl + `priorityLevel`, data).pipe(
       tap(data => {
         this.toastrService.success("Priority created successfully");
         this.appStateService.changeDetectorRef();

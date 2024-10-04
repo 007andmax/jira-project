@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CompanyDevicesEditLabelComponent } from './company-devices-edit-label.component';
 import { FormsModule } from '@angular/forms';
+import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
+import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 
 
 @NgModule({
@@ -11,6 +13,8 @@ import { FormsModule } from '@angular/forms';
     imports: [
         CommonModule,
         FormsModule,
+        ClickOutsideModule,
+        KeyUpEnterModule
     ],
     exports: [CompanyDevicesEditLabelComponent]
 

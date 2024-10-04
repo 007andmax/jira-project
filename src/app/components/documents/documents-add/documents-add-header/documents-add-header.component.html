@@ -1,10 +1,13 @@
 <div class="document-header">
     <div class="qt-df qt-ai-c">
         <button
+            placement="top"
+            [ngbTooltip]="hideleLeftPanel ? 'Expand Document' : 'Collapse Document'"
             (click)="onToggleLeftPanel()"
             class="btn-expand qt-mr-16"
+            container="body"
         >
-            <div class="icon__expand-redactor qt-za-16 qt-sz-16 qt-bg-contain"></div>
+            <div class="qt-icon icon__expand qt-za-16 qt-sz-16"></div>
         </button>
     </div>
     <div
@@ -21,7 +24,7 @@
             [container]="'body'"
         >
             <div
-                class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
+                class="qt-ic-c qt-icon icon__more  qt-pointer qt-sz-16 qt-bg-contain"
                 id="dropdownBasic1"
                 ngbDropdownToggle
             >
@@ -44,7 +47,7 @@
                         ngbDropdownItem
                         (click)="printPdf()"
                     >
-                        <div class="icon__print qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        <div class="qt-icon icon__print qt-sz-16 qt-bg-contain qt-mr-8"></div>
                         Print
                     </li>
                     <li
@@ -52,7 +55,7 @@
                         ngbDropdownItem
                         (click)="exportPdf()"
                     >
-                        <div class="icon__download-pdf qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        <div class="qt-icon icon__download qt-sz-16 qt-bg-contain qt-mr-8"></div>
                         Export PDF
                     </li>
                     <li
@@ -60,7 +63,7 @@
                         ngbDropdownItem
                         (click)="previewDocument()"
                     >
-                        <div class="icon__go-to qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        <div class="qt-icon icon__external-link qt-sz-16 qt-mr-8"></div>
                         Open in new tab
                     </li>
                     <li
@@ -70,7 +73,7 @@
                         (click)="onRemoveDocument()"
                         *ngIf="getPermissions('DELETE_DOCUMENT')"
                     >
-                        <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        <div class="qt-icon icon__delete qt-sz-16 qt-bg-contain qt-mr-8"></div>
                         Delete
                     </li>
                 </ul>

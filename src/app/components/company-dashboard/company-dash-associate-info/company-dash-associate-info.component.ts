@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Company } from 'src/app/interfaces/company/company';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CompanyProfile } from '../../companies/class/company-profile';
 
@@ -9,11 +8,12 @@ import { CompanyProfile } from '../../companies/class/company-profile';
   templateUrl: './company-dash-associate-info.component.html',
   styleUrls: ['./company-dash-associate-info.component.scss']
 })
-export class CompanyDashAssociateInfoComponent implements OnInit {
+export class CompanyDashAssociateInfoComponent implements OnInit, OnDestroy {
   @Input() company: CompanyProfile;
   companies: Array<any> = [];
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,) { }
+
 
   ngOnInit() {
     if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
@@ -47,5 +47,7 @@ export class CompanyDashAssociateInfoComponent implements OnInit {
     }
     return (primaryPhone && primaryPhone.number) ? primaryPhone.number : ''
   }
-
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

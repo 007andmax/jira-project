@@ -1,3 +1,4 @@
 export interface reqAccountsReceivable {
-    companyId:string;
+    companyIds: Array<string>;
+    isCommonReport: boolean;
 }

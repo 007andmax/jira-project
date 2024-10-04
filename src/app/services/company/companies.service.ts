@@ -170,7 +170,8 @@ export class CompaniesService {
     return this.http.post(this.apiUrl + 'receivable', {
       limit: 5,
       offset: 0,
-      companyId: companyId,
+      companyIds: [companyId],
+      excludeDeleted: true
     });
   }
 
@@ -200,7 +201,7 @@ export class CompaniesService {
     return this.http.get(this.apiUrl + `dashboard/company?companyId=${id}&frequency=${frequency}`);
   }
 
-  public removeTag(id, data) {
+  public changeTags(id, data) {
     return this.http.put(this.apiUrl + 'commonTags/company/' + id, data);
   }
 

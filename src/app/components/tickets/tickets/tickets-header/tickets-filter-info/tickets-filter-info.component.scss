@@ -12,3 +12,71 @@
   font-weight: 500;
   color: $gray-900;
 }
+
+.tickets-list-search {
+  margin-right: 8px;
+}
+
+.filter-button {
+  &.active {
+    color: $blue-light-600;
+    background-color: #16a4fa10;
+    border-color: transparent;
+
+    .icon__filter {
+      background-color: $blue-light-600;
+    }
+  }
+}
+
+.list-filters {
+  display: none;
+  margin: -8px -8px 8px -8px;
+
+  /deep/.mat-form-field-infix {
+    overflow: auto;
+    border: none;
+    border-radius: 0;
+  }
+
+  /deep/.mat-chip-list-wrapper {
+    width: fit-content;
+    margin: 0;
+    flex-wrap: unset;
+
+    .mat-standard-chip {
+      margin: 0 8px 0 0;
+    }
+  }
+}
+
+.status {
+  text-transform: capitalize;
+}
+
+.is-exist-filters {
+  position: relative;
+
+  &::before {
+    display: none;
+    content: " ";
+    position: absolute;
+    top: 1px;
+    right: 0;
+    width: 8px;
+    height: 8px;
+    background-color: $red-600;
+    border-radius: 10px;
+  }
+}
+
+.qt-page-list__header.--sticky {
+  margin: 0;
+  padding: 10px 32px;
+  background-color: $gray-50;
+  border-bottom: 1px solid $gray-200;
+}
+
+.qt-page-list__header-filters {
+  display: none;
+}

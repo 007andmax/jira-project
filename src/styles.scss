@@ -1,8 +1,8 @@
 @import "./src/assets/styles/variable";
 @import "./src/assets/scss/fonts";
 @import "./assets/styles/dropdowns.scss";
+@import "./src/assets/styles/mixin/breakpoint";
 @import "./assets/styles/icons.scss";
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "./assets/styles/main.scss";
 @import "./src/assets/styles/fonts";
 
@@ -110,9 +110,15 @@ h6,
   color: $blue-light-600;
   border: 1px solid $blue-light-600;
   @include сaption-l__m;
+  .qt-icon {
+    transition: .3s ease-in-out background-color;
+  }
   &:hover {
     background: $blue-light-600;
     color: $white;
+    .qt-icon {
+      background-color: $white;
+    }
   }
 }
 .radio-container {
@@ -411,8 +417,13 @@ html {
     }
   }
 }
+app-company-tags {
+  position: relative;
+}
 app-company-tags,
-company-associate {
+app-company-devices-tags,
+company-associate,
+app-file-manager-add-file-tags {
   .dropdown-toggle .mat-form-field-wrapper .mat-form-field-infix {
     input {
       top: 0;
@@ -479,11 +490,9 @@ documents-filter {
 .recurring-tickets-content__modal--content,
 .billing-dashboard-page__content,
 documents-filter,
-app-documents-add-info,
 .company-dashboard-add-tag,
 users-aside-detail,
-app-company-dash-detail,
-documents-edit-info {
+app-company-dash-detail {
   .tab-btns {
     display: flex;
     margin: 0 20px;
@@ -508,7 +517,8 @@ documents-edit-info {
   app-taxes,
   documents-linked,
   app-draft-email-recipients,
-  draft-email-user-recipients {
+  draft-email-user-recipients,
+  app-file-manager-add-file-tags {
     > .qt-temporary-col-fix { // TODO change this temporary class (this class create for remove bootstrap col class)
       margin-top: 12px;
       .mat-form-field {
@@ -516,10 +526,6 @@ documents-edit-info {
       }
       .mat-form-field-infix {
         border: none;
-      }
-      .mat-form-field-appearance-legacy .mat-form-field-underline,
-      .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
-        display: none;
       }
       .mat-form-field-appearance-legacy .mat-form-field-wrapper {
         padding: 0;
@@ -535,23 +541,23 @@ documents-edit-info {
         border: 1px solid $gray-200;
         box-shadow: inset 0 1px 2px rgba(16, 24, 40, .05);
         border-radius: 6px;
-        padding-left: 36px;
+        padding: 0px 0px 0px 36px !important;
         position: relative;
-        min-height: 48px;
         &:hover {
           border-color: $gray-300;
         }
         &:before {
           left: 12px;
-          top: 15px;
+          top: 10px;
           position: absolute;
           content: "";
-          width: 16px;
-          height: 16px;
-          background: url("./assets/img/icons/tag.svg");
+          width: 20px;
+          height: 20px;
+          background: url("./assets/img/icons/tags.svg");
         }
         input {
-          height: 42px;
+          height: 38px !important;      
+          padding: 11px 14px;
           margin: 0;
           min-width: 100px;
         }
@@ -620,7 +626,7 @@ documents-edit-info {
   }
   .service-tab-content,
   .product-tab-content {
-    .icon__remove {
+    .icon__delete {
       top: 43px;
       right: -18px;
       cursor: pointer;
@@ -678,7 +684,8 @@ documents-edit-info {
 .billing-dashboard-page__content {
   .input-group {
     .btn-icon-date-picker {
-      background-color: transparent;
+      background-color: $blue-light-600;
+      transform: translateY(2px);
     }
   }
 }
@@ -696,10 +703,9 @@ documents-edit-info {
 .archive-modal,
 .image-confirm-modal {
   background-color: $white;
-  padding: 24px;
+  padding: 32px;
   position: relative;
-  border-radius: 5px;
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
   &.confirm-user-modal {
     h3 {
       font-weight: 400;
@@ -741,11 +747,14 @@ documents-edit-info {
     .btn-new {
       height: 40px;
       border-radius: 4px;
+      width: 100%;
       @include body-m__sb;
+    }
+    button + button {
+      margin-left: 16px;
     }
     .btn-primary {
       border: none;
-      margin-right: 16px;
       background-color: $red-600;
 
       &:hover {
@@ -784,8 +793,11 @@ documents-edit-info {
       right: -3px;
       width: 14px;
       height: 14px;
-      background: url("/assets/img/icons/close-light-gray.svg") no-repeat;
-      background-size: contain;
+      mask-image: url("/assets/img/icons/close.svg");
+      background-color: $gray-400;
+      mask-position: center;
+      mask-repeat: no-repeat;
+      mask-size: contain;
     }
   }
 }
@@ -830,7 +842,7 @@ ngb-typeahead-window {
 .left-panel-closed {
   .quotes__header {
     width: calc(100vw - 85px) !important;
-    @media (max-width: 1280px) {
+    @include media-breakpoint-down($sm) {
       width: calc(100vw - 76px) !important;
     }
   }
@@ -854,7 +866,7 @@ app-quotes-item {
     }
     &--bottom {
       .fixed-width {
-        @media (max-width: 1600px) {
+        @include media-breakpoint-down($md) {
           .with-dollar:before,
           .with-percent:before {
             left: 14px;
@@ -886,7 +898,7 @@ app-quotes-item {
     top: 16px !important;
   }
   textarea {
-    font-size: 13px;
+    font-size: 14px;
     &::placeholder {
       color: $gray-400;
     }
@@ -906,7 +918,7 @@ app-quotes-item {
     width: 103% !important;
     border: none;
     padding: 7px 12px;
-    font-size: 13px;
+    font-size: 14px;
     outline: none;
     &:last-child {
       visibility: hidden;
@@ -1003,7 +1015,7 @@ app-quotes-item {
         border-radius: 50%;
       }
       input:checked ~ span {
-        background-image: url("/assets/img/icons/selected.svg");
+        background-image: url("/assets/img/icons/status-green.svg");
         border: none;
       }
     }
@@ -1045,10 +1057,13 @@ app-quotes-item {
           content: "";
           width: 16px;
           height: 16px;
-          background: url("/html/assets/img/icons/search.svg");
+          mask-image: url("/html/assets/img/icons/search.svg");
+          mask-position: center;
+          mask-repeat: no-repeat;
+          mask-size: contain;
+          background-color: $gray-400;
           left: 26px;
           top: calc(50% - 8px);
-          background-size: contain;
         }
       }
     }
@@ -1300,18 +1315,7 @@ app-quotes-item {
         margin: 0;
       }
 
-      .mat-form-field-appearance-legacy.mat-form-field-can-float
-        .mat-input-server:focus
-        + .mat-form-field-label-wrapper
-        .mat-form-field-label,
-      .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
-        width: 100%;
-        transform: none;
-        color: $gray-600;
-      }
-
-      .mat-form-field-appearance-legacy .mat-form-field-underline,
-      .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+      .mat-form-field-appearance-legacy .mat-form-field-underline {
         display: none;
       }
 
@@ -1326,12 +1330,12 @@ app-quotes-item {
         border: none;
         &::before {
           left: 12px;
-          top: 9px;
+          top: 10px;
           position: absolute;
           content: "";
-          width: 16px;
-          height: 16px;
-          background: url("/assets/img/icons/tag.svg");
+          width: 20px;
+          height: 20px;
+          background: url("/assets/img/icons/tags.svg");
         }
       }
       .mat-form-field-appearance-legacy .mat-form-field-infix {
@@ -1417,70 +1421,38 @@ app-quotes-item {
       flex: 1 1 210px;
       line-height: 20px;
 
-      @media screen and (min-width: 2048px) {
+      @include media-breakpoint-down($md) {
+        flex: 1 1 260px;
+      }
+
+      @include media-breakpoint-up($lg) {
         flex: 1 0 290px;
       }
 
-      @media screen and (min-width: 2250px) {
+      @include media-breakpoint-up($xl) {
         flex: 1 0 360px;
-      }
-
-      @media screen and (max-width: 1600px) {
-        flex: 1 1 260px;
       }
     }
     &__primary-contact {
       flex: 1 1 160px;
 
-      @media screen and (min-width: 2048px) {
+      @include media-breakpoint-up($lg) {
         flex: 1 0 230px;
       }
 
-      @media screen and (min-width: 2250px) {
+      @include media-breakpoint-up($xl) {
         flex: 1 0 300px;
       }
 
-      @media screen and (max-width: 1600px) {
+      @include media-breakpoint-down($md) {
         flex: 1 1 210px;
         max-width: 100%;
-      }
-
-      > div {
-        @media screen and (max-width: 767px) {
-          width: 100%;
-          display: flex;
-          align-items: center;
-          padding-left: 80px;
-        }
       }
 
       .name {
         position: relative;
         @include body-m__m;
         color: $gray-900;
-
-        @media screen and (max-width: 767px) {
-          margin-right: 4px;
-          padding-right: 8px;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          max-width: min-content
-        }
-
-        &::after {
-          @media screen and (max-width: 767px) {
-            position: absolute;
-            content: "";
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 4px;
-            height: 4px;
-            background: $gray-400;
-            border-radius: 50%;
-          }
-        }
       }
 
       .phone {
@@ -1494,16 +1466,16 @@ app-quotes-item {
       white-space: nowrap;
       overflow: hidden;
 
-      @media screen and (min-width: 2048px) {
+      @include media-breakpoint-down($md) {
+        flex: 1 1 230px;
+      }
+
+      @include media-breakpoint-up($lg) {
         flex: 1 0 250px;
       }
 
-      @media screen and (min-width: 2250px) {
+      @include media-breakpoint-up($xl) {
         flex: 1 0 340px;
-      }
-
-      @media screen and (max-width: 1600px) {
-        flex: 1 1 230px;
       }
     }
     &__tickets {
@@ -1518,7 +1490,7 @@ app-quotes-item {
     &__tickets,
     &__devices,
     &__users {
-      @media screen and (max-width: 1600px) {
+      @include media-breakpoint-down($md) {
         display: none;
       }
     }
@@ -1590,13 +1562,9 @@ app-quotes-item {
     width: 100%;
     border: none;
     padding: 12px;
-    font-size: 13px;
+    font-size: 14px;
     outline: none;
     border-radius: inherit;
-    &:last-child {
-      visibility: hidden;
-      display: none;
-    }
   }
 }
 .quote-create__content--top {
@@ -1632,12 +1600,8 @@ app-quotes-item {
         width: 100%;
         border: none;
         padding: 12px;
-        font-size: 13px;
+        font-size: 14px;
         outline: none;
-        &:last-child {
-          visibility: hidden;
-          display: none;
-        }
       }
     }
     .ticket-tabs {
@@ -1666,24 +1630,27 @@ app-quotes-item {
         .tab-product,
         .tab-service {
           position: static;
-          background: url("./assets/img/icons/products.svg");
-          background-size: contain;
+          mask-image: url("./assets/img/icons/products.svg");
+          mask-size: contain;
           margin-right: 8px;
+          background-color: $gray-500;
         }
         .tab-service {
-          background: url("./assets/img/icons/service.svg");
-          background-size: contain;
+          mask-image: url("./assets/img/icons/service.svg");
+          mask-size: contain;
         }
         &.active-tab {
           color: $blue-light-600;
           border-bottom: 2px solid $blue-light-600;
           .tab-product {
-            background: url("./assets/img/icons/products-blue.svg");
-            background-size: contain;
+            mask-image: url("/assets/img/icons/products.svg");
+            mask-size: contain;
+            background-color: $blue-light-600;
           }
           .tab-service {
-            background: url("./assets/img/icons/service-blue.svg");
-            background-size: contain;
+            mask-image: url("/assets/img/icons/time.svg");
+            mask-size: contain;
+            background-color: $blue-light-600;
           }
         }
       }
@@ -1775,7 +1742,6 @@ app-quotes-item {
         z-index: -1;
       }
       &:hover {
-        //z-index: 1; // TODO check this style
         color: $white;
         &::after {
           background-color: transparent;
@@ -1814,7 +1780,6 @@ app-quotes-item {
       }
     }
     &:not(.faded):hover {
-      //z-index: 1; // TODO check this style
       &::after {
         width: 30px;
         z-index: -2;
@@ -1911,6 +1876,16 @@ app-quotes-item {
 
   .qt-modal__body {
     padding: 0 16px 16px;
+  }
+}
+.add-user-to-company {
+  .modal-dialog {
+    max-width: 504px;
+    max-height: 720px;
+    height: 720px;
+    overflow: hidden;
+    padding: 0px;
+    transition: none !important;
   }
 }
 .new-users-content__modal,
@@ -2084,10 +2059,8 @@ app-quotes-item {
     }
     .mat-form-field-infix {
       input {
-        height: 38px !important;
         margin: 0;
-        padding: 11px 14px;
-      }
+        }
     }
 
     .mat-standard-chip {
@@ -2120,7 +2093,7 @@ app-quotes-item {
     width: 90%;
     height: 100%;
     cursor: pointer;
-    @media (max-width: 1366px) {
+    @include media-breakpoint-down($sm) {
       width: 87%;
     }
   }
@@ -2128,7 +2101,7 @@ app-quotes-item {
 .modal.fade {
   opacity: 1;
   transition: none;
-  background: rgba(16, 24, 39, 0.4);
+  background-color: rgba(16,24,40,.5);
 }
 .modal-dialog__save-to-subscription {
   .modal-content {
@@ -2731,7 +2704,6 @@ app-ticket-profile-updates-note {
   }
   &-wrap {
     display: flex;
-    //box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05); // TODO check this style
   }
 }
 .ticket-updates__ticket-photo,
@@ -2946,12 +2918,17 @@ app-ticket-profile-updates-service-timepicker {
   margin-bottom: 15px;
 }
 
-.ticket-updates { // TODO check this style
+.ticket-updates {
   &__update-block {
     position: relative;
     border-bottom: 1px solid $gray-200;
     padding-bottom: 16px;
     margin-bottom: 16px;
+  }
+  .qt-report__body-table-body {
+    th, td {
+      white-space: unset;
+    }
   }
 }
 
@@ -3003,7 +2980,7 @@ app-ticket-edit-aside {
     }
 
     .qt-aside__close-modal {
-      background-image: url("/assets/img/icons/close-light.svg");
+      background-image: url("/assets/img/icons/close.svg");
       position: absolute;
       top: 50%;
       left: 26px;
@@ -3361,7 +3338,7 @@ input.--input-error:hover {
   }
 }
 
-.page-list-ticket {
+.page-list-ticket,.users-page,.company-devices-page,app-multi-company-drop-down {
   .light-dropdown {
     padding: 0;
   }
@@ -3376,35 +3353,7 @@ input.--input-error:hover {
   .mat-form-field-underline {
     display: none;
   }
-  .mat-form-field-wrapper {
-    .mat-form-field-infix {
-      border: 1px solid $gray-200;
-      border-radius: 6px;
-      position: relative;
-      min-height: 40px;
-      padding-left: 6px;
-      &:hover {
-        border: 1px solid $gray-300;
-      }
-
-      input {
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 17px;
-        color: $gray-900;
-        padding: 11px 14px;
-        height: 34px;
-        margin: 0;
-        width: 100%;
-        flex: 1;
-
-        &::placeholder {
-          color: $gray-400;
-          font-family: inherit;
-        }
-      }
-    }
-  }
+  
   .mat-form-field-label-wrapper {
     position: absolute;
     left: 0;
@@ -3421,9 +3370,6 @@ input.--input-error:hover {
     @include body-m;
     color: $gray-400;
   }
-  .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
-    display: none;
-  }
   .mat-chip-list-wrapper {
     .mat-standard-chip {
       padding: 4px 6px 3px 8px;
@@ -3433,73 +3379,18 @@ input.--input-error:hover {
     display: none;
   }
 }
-
-  .company-devices-page {
-    .company-devices-table__check {
-      width: 16px;
-    }
-    .company-devices-table__menu {
-      width: 34px;
-      max-width: 34px;
-      min-width: 34px;
-    }
-    .company-devices-table__go-to {
-      width: 30px;
-      max-width: 30px;
-      min-width: 30px;
-    }
-    .company-devices-table__connect {
-      width: 38px;
-      max-width: 38px;
-      min-width: 38px;
-    }
-    .company-devices-table__ip-address {
-      width: 190px;
-      max-width: 190px;
-      min-width: 190px;
-    }
-    .company-devices-table__windows {
-      width: 164px;
-      max-width: 164px;
-      min-width: 164px;
-    }
-    .company-devices-table__up-time {
-      width: 100px;
-      max-width: 100px;
-      min-width: 100px;
-    }
-    .company-devices-table__logged-user {
-      width: 148px;
-      max-width: 148px;
-      min-width: 148px;
-    }
-    .company-devices-table__device-name {
-      max-width: 150px;
-      width: max-content;
-      min-width: 150px;
-    }
-    .company-devices-table__device-type {
-      width: 32px;
-      max-width: 32px;
-      min-width: 32px;
-    }
-    .company-devices-table__device-agent {
-      width: 101px;
-      max-width: 101px;
-      min-width: 101px;
-    }
-    .company-devices-table__device-master-agent{
-      width:30px;
-      max-width: 30px;
-      min-width: 30px;
-    }
-    .company-devices-table__company-name {
-      max-width: 158px;
-      width: max-content;
-      min-width: 158px;
-    }
+app-multi-company-drop-down {
+  &:before {
+    display: none;
   }
-
+  .mat-form-field-label-wrapper {
+    top: -20px;
+    padding-top: 15px;
+  }
+  .mat-form-field-wrapper {
+    padding-bottom: 0px !important;
+  }
+}
 .quotes-page .qt-page-list__header-filters .dropdown-menu {
   right: 0;
   left: unset;
@@ -3540,6 +3431,11 @@ add-category-product {
     line-height: 16px;
     font-weight: 500;
   }
+  .qt-input-block {
+    label {
+      margin-bottom: 8px;
+    }
+  }
   .btn-primary {
     min-width: auto;
   }
@@ -3562,7 +3458,7 @@ add-category-product {
     color: $gray-900;
   }
   .qt-input-block {
-    mat-error {
+    mat-error,app-mat-error {
       position: static;
       order: -1;
       margin-bottom: 8px;
@@ -3582,7 +3478,7 @@ add-category-product {
     overflow: auto;
   }
 }
-app-default-services-edit,app-inventory-edit-aside {
+app-non-contract-services-edit,app-inventory-edit-aside {
   position: relative;
   z-index: 999;
 }
@@ -3592,4 +3488,117 @@ app-default-services-edit,app-inventory-edit-aside {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+app-company-devices-tags {
+    >.qt-temporary-col-fix {
+      // TODO change this temporary class (this class create for remove bootstrap col class)
+      margin-top: 12px;
+
+      .mat-form-field {
+        width: 100%;
+      }
+
+      .mat-form-field-infix {
+        border: none;
+      }
+
+     
+
+      .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+        padding: 0;
+        position: relative;
+      }
+
+      .mat-form-field-appearance-legacy .mat-form-field-label {
+        padding: 12px 10px 10px 36px;
+        font-size: 13px;
+        font-weight: 400;
+        color: $gray-400;
+      }
+
+      .mat-form-field-infix {
+        border: none !important;
+        box-shadow: none;
+        border-radius: 6px;
+        padding-left: 4px !important;
+        position: relative;
+        min-height: 40px;
+
+        &:hover {
+          border-color: $gray-300;
+        }
+
+        &::before {
+          display: none;
+        }
+
+        input {
+          height: 42px;
+          margin: 0;
+          min-width: 100px;
+        }
+      }
+    }
+
+    >.qt-temporary-col-fix {
+
+      .qt-input-block__input,
+      // Fix input style
+      .qt-input-block input {
+        border-color: transparent;
+        box-shadow: unset;
+      }
+
+      margin-top: 0; // Fix style for no-column, delete after remove bootstrap col class
+
+      .mat-form-field {
+        margin-top: 0;
+        width: 275px !important;
+      }
+
+      .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+        &:before {
+          display: none;
+        }
+      }
+    }
+    .mat-chip.mat-standard-chip {
+        padding: 4px 8px 5px 8px;
+        height: 24px;
+        border-radius: 6px;
+        font-weight: 500;
+        font-size: 12px;
+        margin: 0 4px 0px px 0px;
+        background-color: $gray-100;
+        color: $gray-500;
+    }
+  }
+app-company-devices-edit-ip,app-company-devices-edit-mac {
+  display: contents;
+}
+.cotract-billable-tooltip {
+  .tooltip-inner {
+    width: 400px;
+    min-width: 400px;
+  }
+}
+app-multi-company-drop-down {
+ &:before {
+     display: none;
+     
+  }
+
+   .mat-form-field-label-wrapper {
+     top: -20px;
+     padding-top: 15px;
+    
+  }
+
+   .mat-form-field-wrapper {
+     padding-bottom: 0px !important;
+    
+  }
+  .mat-form-field {
+      width: 100%;
+  }
 }

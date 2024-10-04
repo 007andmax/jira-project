@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, OnDestroy } from '@angular/core';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Payment } from '../class/payment';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
@@ -15,7 +15,7 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
   templateUrl: './edit-payment.component.html',
   styleUrls: ['./edit-payment.component.scss']
 })
-export class EditPaymentComponent implements OnInit {
+export class EditPaymentComponent implements OnInit, OnDestroy {
   @Input() payment: Payment;
   @Output() onClose = new EventEmitter<any>();
   validate: PaymentInvoice = new PaymentInvoice();
@@ -34,6 +34,7 @@ export class EditPaymentComponent implements OnInit {
   sub: Subscription = new Subscription();
   constructor(private companiesState: CompaniesStateService,
     private paymentsService: PaymentsService,) { }
+
 
   ngOnInit() {
     this.editPayment = new EditPayment(JSON.parse(JSON.stringify(this.payment)));
@@ -118,5 +119,8 @@ export class EditPaymentComponent implements OnInit {
   }
   public trackById(index, item) {
     return item.id;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

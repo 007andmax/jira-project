@@ -62,5 +62,9 @@
     z-index: 999;
 }
 .password-table__menu {
-    flex: 0 0 38px !important;
+    flex: 0 0 42px !important;
+}
+.qt-page-list__header-thead__row {
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
 }

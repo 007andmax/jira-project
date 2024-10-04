@@ -8,6 +8,30 @@
         </div>
         <div class="qt-page-list__header-title-line--rigth">
             <div class="qt-df qt-ai-c">
+                <div
+                    class="company-devices-page__list-header-buttons qt-fs-0 qt-mr-8"
+                    *ngIf="getCountSelected() > 0"
+                >
+                    <div
+                        class="qt-fs-0"
+                        [textContent]="getCountSelected() + ' Products Selected'"
+                    ></div>
+                    <div
+                        class="qt-ml-20 qt-fw-500 qt-df qt-ai-c qt-color-info qt-ai-c qt-pointer qt-fs-0"
+                        (click)="setProductType()"
+                    >
+                        <div class="qt-lh-1">Set Product Type</div>
+                    </div>
+                    <div
+                        class="qt-ml-20 qt-fw-500 qt-df qt-ai-c qt-color-info qt-ai-c qt-pointer qt-fs-0"
+                        (click)="setActive()"
+                    >
+                        <div
+                            class="qt-lh-1"
+                            [textContent]="parseMarkSelectedProducts()"
+                        ></div>
+                    </div>
+                </div>
                 <div class="qt-input-search">
                     <input
                         type="text"
@@ -34,72 +58,95 @@
             </div>
         </div>
     </div>
-    <inventory-filter [hidden]="toggleFilter"></inventory-filter>
+    <inventory-filter
+        [hidden]="toggleFilter"
+        (onResetSelected)="resetSelected()"
+    ></inventory-filter>
     <div class="qt-page-list__header-thead-container">
-        <table class="qt-table-modern qt-page-list__header-thead">
-            <thead>
-                <tr>
-                    <th
+        <div class="qt-table-modern qt-page-list__header-thead">
+            <div class="qt-table-modern qt-page-list__header-thead">
+                <div class="qt-page-list__header-thead__row">
+                    <div class="companies-table__check">
+                        <div class="qt-df qt-jc-fe">
+                            <label class="qt-checkbox">
+                                <input
+                                    type="checkbox"
+                                    class="ng-untouched ng-pristine ng-valid"
+                                    [(ngModel)]="selectAll"
+                                    (change)="toggleAllCompanies($event)"
+                                >
+                                <span></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div
                         class="products-table__product-name pointer"
                         (click)="filter('description')"
                     >
                         Product Name
                         <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
+                    </div>
+                    <div
                         class="products-table__category pointer"
                         (click)="filter('category')"
                     >
                         Category
                         <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
+                    </div>
+                    <div
                         class="products-table__cost pointer"
                         (click)="filter('cost')"
                         *ngIf="getPermissions('VIEW_PRODUCT_COST')"
                     >
                         Cost
                         <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
+                    </div>
+                    <div
                         class="products-table__cost pointer"
                         (click)="filter('markup')"
                     >
                         Markup
                         <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
+                    </div>
+                    <div
                         class="products-table__sale-price pointer"
                         (click)="filter('sale')"
                     >
                         Sale Price
                         <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
+                    </div>
+                    <div
                         class="products-table__mfg pointer"
                         (click)="filter('manufacture')"
                     >
                         #Mfg
                         <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th class="products-table__tac">Tax</th>
-                    <th
+                    </div>
+                    <div class="products-table__tac">Tax</div>
+                    <div
                         class="products-table__ilc pointer"
                         (click)="filter('ilc')"
                     >
                         ILC
                         <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
+                    </div>
+                    <div
                         class="products-table__gl pointer"
                         (click)="filter('glNumber')"
                     >
                         GL
                         <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th class="products-table__menu pointer"></th>
-                </tr>
-            </thead>
-        </table>
+                    </div>
+                    <div
+                        class="products-table__product-type pointer"
+                        (click)="filter('productType')"
+                    >
+                        Product Type
+                        <span class="qt-table-modern__sorting"></span>
+                    </div>
+                    <div class="products-table__menu pointer"></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

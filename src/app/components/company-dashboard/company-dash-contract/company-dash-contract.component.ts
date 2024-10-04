@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import * as moment from "moment";
 import { Subscription } from 'rxjs';
@@ -15,7 +15,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
   templateUrl: './company-dash-contract.component.html',
   styleUrls: ['./company-dash-contract.component.scss']
 })
-export class CompanyDashContractComponent implements OnInit {
+export class CompanyDashContractComponent implements OnInit, OnDestroy {
 
   _id: string = '';
   statisticsCount: number = 0;
@@ -38,6 +38,7 @@ export class CompanyDashContractComponent implements OnInit {
     public contractsStateService: ContractsStateService,
     private companiesStateService: CompaniesStateService,
     private contractsService: ContractsService) { }
+
 
   public ngOnInit() {
     this._id = this.activateRoute.snapshot.params['id'];
@@ -115,7 +116,7 @@ export class CompanyDashContractComponent implements OnInit {
       }
     })
   }
-
-
-
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

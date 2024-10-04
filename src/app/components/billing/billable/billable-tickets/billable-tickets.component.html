@@ -31,9 +31,11 @@
         <div class="qt-page-list__header-title-line">
             <div class="qt-page-list__header-title-line--left">
                 <div
-                    class="qt-page-list__back-button icon__collapse-arrow button-icon pointer"
+                    class="qt-page-list__back-button qt-df qt-ai-c qt-jc-c pointer"
                     (click)="back()"
-                ></div>
+                >
+                  <div class="qt-icon icon__arrow-left button-icon qt-sz-16"></div>
+                </div>
                 <h6
                     class="qt-page-list__header-title"
                     [textContent]="billableProfile.name"
@@ -50,13 +52,13 @@
                             class="qt-ml-20 qt-fw-500 qt-df qt-ai-c qt-color-info qt-ai-c qt-pointer"
                             (click)="deleteSelectedTickets()"
                         >
-                            <div class="icon__archive-blue qt-sz-16 qt-ic-c qt-mr-6"></div>
+                            <div class="qt-icon icon__delete qt-icon__red-600 qt-sz-16 qt-ic-c qt-mr-6"></div>
                             <div class="qt-lh-1">Delete</div>
                         </div>
                     </div>
                     <button
                         *ngIf="getPermissions('CREATE_INVOICE')"
-                        class="qt-button --gray --md"
+                        class="qt-button --gray --md qt-ml-8"
                         [disabled]="!isCurrentCompanyAddressEmpty"
                         (click)="onCreateInvoice()"
                     >
@@ -66,57 +68,55 @@
             </div>
         </div>
         <div class="qt-page-list__header-thead-container">
-            <table class="qt-table-modern qt-page-list__header-thead">
-                <thead>
-                    <tr>
-                        <th class="billable-item-table__check">
-                            <div class="qt-df">
-                                <label class="qt-checkbox">
-                                    <input
-                                        type="checkbox"
-                                        (change)="onToggleAll($event)"
-                                    >
-                                    <span></span>
-                                </label>
-                            </div>
-                        </th>
-                        <th
-                            class="billable-item-table__date"
-                            (click)="onFilter('closedAt')"
-                        >
-                            Date
-                            <span class="qt-table-modern__sorting"></span>
-                        </th>
-                        <th
-                            class="billable-item-table__ticket"
-                            (click)="onFilter('ticketNumber')"
-                        >
-                            Ticket#
-                            <span class="qt-table-modern__sorting"></span>
-                        </th>
-                        <th
-                            class="billable-item-table__subject"
-                            (click)="onFilter('subject')"
-                        >
-                            Ticket Subject
-                            <span class="qt-table-modern__sorting"></span>
-                        </th>
-                        <th
-                            class="billable-item-table__amount"
-                            (click)="onFilter('sum')"
-                        >
-                            Amount
-                            <span class="qt-table-modern__sorting"></span>
-                        </th>
-                    </tr>
-                </thead>
-            </table>
+            <div class="qt-table-modern qt-page-list__header-thead">
+                <div class="qt-page-list__header-thead__row">
+                    <div class="billable-item-table__check">
+                        <div class="qt-df">
+                            <label class="qt-checkbox">
+                                <input
+                                    type="checkbox"
+                                    (change)="onToggleAll($event)"
+                                >
+                                <span></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div
+                        class="billable-item-table__date"
+                        (click)="onFilter('closedAt')"
+                    >
+                        Date
+                        <span class="qt-table-modern__sorting"></span>
+                    </div>
+                    <div
+                        class="billable-item-table__ticket"
+                        (click)="onFilter('ticketNumber')"
+                    >
+                        Ticket#
+                        <span class="qt-table-modern__sorting"></span>
+                    </div>
+                    <div
+                        class="billable-item-table__subject"
+                        (click)="onFilter('subject')"
+                    >
+                        Ticket Subject
+                        <span class="qt-table-modern__sorting"></span>
+                    </div>
+                    <div
+                        class="billable-item-table__amount"
+                        (click)="onFilter('sum')"
+                    >
+                        Amount
+                        <span class="qt-table-modern__sorting"></span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="qt-page-list__body">
         <div class="qt-page-list__body-table-container">
-            <table class="qt-page-list__body-tbody qt-table-modern billable-item-table">
-                <tbody>
+            <div class="qt-page-list__body-tbody qt-table-modern billable-item-table">
+                <div class="tbody">
                     <ng-template
                         ngFor
                         let-item
@@ -124,8 +124,11 @@
                         let-i="index"
                         [ngForTrackBy]="trackById"
                     >
-                        <tr [ngClass]="{'--selected': item.selected}">
-                            <td
+                        <div
+                            class="qt-table-modern__row"
+                            [ngClass]="{'--selected': item.selected}"
+                        >
+                            <div
                                 class="billable-item-table__check"
                                 *ngIf="!item.lockedBy"
                             >
@@ -142,54 +145,54 @@
                                         <span></span>
                                     </label>
                                 </div>
-                            </td>
-                            <td
+                            </div>
+                            <div
                                 class="billable-item-table__check"
                                 *ngIf="item.lockedBy"
                             >
                                 <div
-                                    class="icon__locked qt-sz-16"
+                                    class="qt-icon icon__password qt-sz-16"
                                     placement="top"
                                     container="body"
                                     ngbTooltip="Is being used by other user"
                                 ></div>
-                            </td>
-                            <td
+                            </div>
+                            <div
                                 class="billable-item-table__date"
                                 [textContent]="getDate(item.closedAt)"
-                            ></td>
-                            <td
-                                class="billable-item-table__ticket pointer"
+                            ></div>
+                            <div
+                                class="billable-item-table__ticket pointer is-exist-ticket-number"
                                 *ngIf="!item.isOrder"
                                 [textContent]="item.ticketNumber"
                                 (click)="editTicket(item.id)"
-                            ></td>
-                            <td
+                            ></div>
+                            <div
                                 class="billable-item-table__ticket no-edit-ticket"
                                 *ngIf="item.isOrder"
                                 [textContent]="'Contract'"
-                            ></td>
-                            <td
+                            ></div>
+                            <div
                                 class="billable-item-table__subject"
                                 [textContent]="item.subject"
-                            ></td>
-                            <td class="billable-item-table__check">
+                            ></div>
+                            <div class="billable-item-table__check">
                                 <div
                                     *ngIf="item.isOrder"
-                                    class="icon__remove qt-sz-20"
+                                    class="qt-icon icon__delete qt-sz-20"
                                     (click)="deleteTicket(item)"
                                     placement="top"
                                     ngbTooltip="Delete"
                                 ></div>
-                            </td>
-                            <td
+                            </div>
+                            <div
                                 class="billable-item-table__amount"
                                 [textContent]="item.sum | currency"
-                            ></td>
-                        </tr>
+                            ></div>
+                        </div>
                     </ng-template>
-                </tbody>
-            </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>

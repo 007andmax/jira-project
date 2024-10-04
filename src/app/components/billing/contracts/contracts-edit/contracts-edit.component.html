@@ -2,7 +2,7 @@
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">Edit Contract</div>
         <div
-            class="qt-aside-modern__header-close icon__close"
+            class="qt-aside-modern__header-close qt-icon icon__close"
             (click)="closed()"
         ></div>
     </div>
@@ -22,6 +22,7 @@
         *ngIf="serviceAgreement.type === 'SERVICE_CONTRACT' && serviceAgreement.billType !== 'OTHER'"
         #serviceContract
         [contractsUserDevice]="serviceAgreement"
+        (onInitRequestForEdit)="disabledBtnForEdit()"
         (onClose)="closed()"
     ></app-contracts-aside-user-device-edit>
     <app-contracts-aside-product-service-edit
@@ -33,19 +34,19 @@
     <div class="qt-aside-modern__footer">
         <div class="qt-df">
             <button
-                class="qt-button qt-mr-12"
+                class="qt-button --gray qt-mr-12"
+                (click)="closed()"
+            >
+                Cancel
+            </button>
+            <button
+                class="qt-button "
                 appDisabledBtn
                 #editContract="disabled"
                 (onClick)="edit()"
             >
                 <span *ngIf="!editContract.isBlock()">Save</span>
                 <app-preloader-ticket *ngIf="editContract.isBlock()"></app-preloader-ticket>
-            </button>
-            <button
-                class="qt-button --gray"
-                (click)="closed()"
-            >
-                Cancel
             </button>
         </div>
     </div>

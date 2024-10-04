@@ -14,13 +14,16 @@ import { UsersStateService } from '../../states/users/users-state.service';
 import { ActivatedRoute } from '@angular/router';
 import { TicketStatus } from '../setting/ticket-settings-page/tickets-status/class/ticket-status';
 import { StatusColor } from '../tickets/class/status-color';
-import { AppService } from 'src/app/states/app/app.service';
 import { TicketsFilterComponent } from '../tickets/tickets/tickets-header/tickets-filter/tickets-filter.component';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'company-tickets',
   templateUrl: './company-tickets.component.html',
   styleUrls: ['./company-tickets.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   providers: [TicketsListService]
 })
 export class CompanyTicketsComponent implements OnInit, OnDestroy {
@@ -47,7 +50,6 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     private leftPanelService: LeftPanelService,
     private usersStateService: UsersStateService,
     public activateRoute: ActivatedRoute,
-    private appService: AppService,
     private companiesStateService: CompaniesStateService,
     private leftPanelStateService: LeftPanelStateService,
     private ticketsStateService: TicketsStateService) { }
@@ -69,12 +71,13 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     } else {
       this.listColors = this.ticketsStateService.getListStatusColor();
     }
-    this.ticketsStateService.getOnAddTicket().subscribe(data => {
+    let getOnAddTicket = this.ticketsStateService.getOnAddTicket().subscribe(data => {
       if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter, data) && !this.tickets.find(item => item.id == data.id) && !(this.page_number == 0 && this.showPreloader)) {
         this.tickets.unshift(data);
       }
     })
-    this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
+    this.sub.add(getOnAddTicket);
+    let getOnUpdateTicket = this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
       let ticket = new Ticket(data);
       if (data.assignedUser) ticket.setAssignedUserId(data.assignedUser.id);
       let findIndex = this.tickets.findIndex(item => item.id === ticket.id);
@@ -85,12 +88,12 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
       }
       this.cd.detectChanges();
     })
-
-    this.ticketsStateService.getOnRemoveTicket().subscribe(data => {
+    this.sub.add(getOnUpdateTicket);
+    let getOnRemoveTicket = this.ticketsStateService.getOnRemoveTicket().subscribe(data => {
       let findIndex = this.tickets.findIndex(item => item.id === data.id);
       if (findIndex > -1) this.tickets.splice(findIndex, 1);
     });
-
+    this.sub.add(getOnRemoveTicket);
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
       this.ticketsFilter = data;
       this.showPreloader = true;
@@ -99,11 +102,10 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
       this.onScroll();
     })
     this.sub.add(getOnInitFilter);
-
-    this.ticketsStateService.getOnInitColor().subscribe(data => {
+    let getOnInitColor = this.ticketsStateService.getOnInitColor().subscribe(data => {
       this.listColors = data;
     })
-
+    this.sub.add(getOnInitColor);
     this.header.setTitle("All Tickets");
     if (this.companiesStateService.getCompanies().length > 0 && this.activateRoute.snapshot.params['id'] && this.usersStateService.getAllUsers().length > 0) this.setCompanyRoutingId(this.activateRoute.snapshot.params['id']);
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {

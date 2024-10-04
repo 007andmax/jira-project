@@ -51,50 +51,44 @@
         ></app-payments-filter>
     </div>
     <div class="qt-page-list__header-thead-container">
-        <table class="qt-table-modern qt-page-list__header-thead">
-            <thead>
-                <tr>
-                    <th
+        <div class="qt-table-modern qt-page-list__header-thead">
+            <div class="qt-table-modern qt-page-list__header-thead">
+                <div class="qt-page-list__header-thead__row">
+                    <div
                         class="billable-payment-table__date pointer"
                         (click)="sortBy('PAYMENT_DATE')"
                     >
                         Date
                         <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th class="billable-payment-table__invoice">Invoice#</th>
-                    <th
-                        class="billable-payment-table__company pointer"
-                        (click)="sortBy('COMPANY_NAME')"
-                    >
-                        Company
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
+                    </div>
+                    <div class="billable-payment-table__invoice">Invoice#</div>
+                    <div class="billable-payment-table__company">Company</div>
+                    <div
                         class="billable-payment-table__payment-mode pointer"
                         (click)="sortBy('PAYMENT_METHOD')"
                     >
                         PaymentMode
                         <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th class="billable-payment-table__reference">Reference#</th>
-                    <th class="billable-payment-table__payment">Payment#</th>
-                    <th
+                    </div>
+                    <div class="billable-payment-table__reference">Reference#</div>
+                    <div class="billable-payment-table__payment">Payment#</div>
+                    <div
                         class="billable-payment-table__amount pointer"
                         (click)="sortBy('AMOUNT')"
                     >
                         Amount
                         <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
+                    </div>
+                    <div
                         class="billable-payment-table__status pointer"
                         (click)="sortBy('STATUS')"
                     >
                         Status
                         <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th class="billable-payment-table__menu"></th>
-                </tr>
-            </thead>
-        </table>
+                    </div>
+                    <div class="billable-payment-table__menu"></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

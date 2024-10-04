@@ -6,6 +6,7 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 import { Document } from '../../class/document';
+import { PreviewAttachmentStateService } from 'src/app/components/tickets/tickets/ticket-edit-aside/preview-attachment/services/preview-attachment-state.service';
 declare var $: any;
 @Component({
   selector: 'documents-templates-info',
@@ -22,6 +23,7 @@ export class DocumentsTemplatesInfoComponent implements OnInit, OnDestroy {
     public router: Router,
     public companiesStateService: CompaniesStateService,
     private permissionsService: PermissionsService,
+    private previewAttachmentStateService: PreviewAttachmentStateService,
     private documentsService: DocumentsService) { }
 
 
@@ -39,6 +41,11 @@ export class DocumentsTemplatesInfoComponent implements OnInit, OnDestroy {
       })
     })
     this.sub.add(onGetTemplate);
+  }
+  preview(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.target.tagName == "IMG") this.previewAttachmentStateService.onInitPreview(e.target.getAttribute("src"));
   }
   goToCloneDocument() {
     this.router.navigate(

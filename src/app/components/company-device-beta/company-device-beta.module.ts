@@ -3,10 +3,6 @@ import { CommonModule } from '@angular/common';
 import { CompanyDeviceBetaRoutingModule } from './company-device-beta-routing.module';
 import { CompanyDeviceBetaComponent } from './company-device-beta.component';
 import { DropDownModule } from '../shared/drop-down/drop-down.module';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
 import { DatePickerModule } from '../shared/date-picker/date-picker.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DeviceBeta } from 'src/app/pipe/device-beta.pipe';
@@ -14,6 +10,10 @@ import { DynamicTooltipModule } from '../shared/dynamic-tooltip/dynamic-tooltip.
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { ReportSendEmailModule } from '../reports/report-additional-actions/report-send-email/report-send-email.module';
+import { MatChipListModule } from '../shared/mat-chip-list/mat-chip-list.module';
+import { MatChipModule } from '../shared/mat-chip/mat-chip.module';
+import { MatOptionModule } from '../shared/mat-option/mat-option.module';
+import { MatFormFieldModule } from '../shared/mat-form-field/mat-form-field.module';
 
 @NgModule({
     declarations: [
@@ -24,17 +24,17 @@ import { ReportSendEmailModule } from '../reports/report-additional-actions/repo
         CommonModule,
         CompanyDeviceBetaRoutingModule,
         DropDownModule,
-        MatSelectModule,
-        MatChipsModule,
-        MatIconModule,
         DatePickerModule,
         ReactiveFormsModule,
         FormsModule,
-        MatAutocompleteModule,
         DynamicTooltipModule,
         NgbModule,
         DisabledBtnModule,
-        ReportSendEmailModule
+        ReportSendEmailModule,
+        MatChipModule,
+        MatFormFieldModule,
+        MatChipListModule,
+        MatOptionModule
     ],
 })
 export class CompanyDeviceBetaModule { }

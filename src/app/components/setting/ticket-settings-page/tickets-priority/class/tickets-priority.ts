@@ -3,6 +3,7 @@ export class TicketsPriority {
     "color": number = 0;
     "name": string = "";
     "isDefault": boolean;
+    "isDisplay": boolean = false;
     selected: boolean = false;
     disableCreate: boolean = false;
     disableUpdate: boolean = false;
@@ -37,10 +38,11 @@ export class TicketsPriority {
             return this.disableUpdate = false;
         }
     };
-    public getDataForEdit(name, color) {
+    public getDataForRequest(name, color) {
         return {
             name: name,
-            color: color
+            color: color,
+            isDisplay: this.isDisplay
         }
     }
     public onInitEdit(data) {

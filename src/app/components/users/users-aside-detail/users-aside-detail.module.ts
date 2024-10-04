@@ -4,8 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { UsersAsideDetailComponent } from './users-aside-detail.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { CompanySubscriptionModule } from '../../companies/company-subscription/company-subscription.module';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { CompanyTagsModule } from '../../companies/company-tags/company-tags.module';
@@ -26,6 +24,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 import { UsersAsideDetailCompanyInfoComponent } from './users-aside-detail-company-info/users-aside-detail-company-info.component';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 @NgModule({
     declarations: [UsersAsideDetailComponent,
@@ -44,7 +43,6 @@ import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-toolt
         FormsModule,
         NgbModule,
         DropDownModule,
-        MatFormFieldModule,
         CompanySubscriptionModule,
         TextAreaModule,
         CompanyTagsModule,
@@ -55,7 +53,8 @@ import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-toolt
         TicketProfileAttachmentsModule,
         NgxMaskModule.forRoot(),
         CompanyDropDownModule,
-        DynamicTooltipModule
+        DynamicTooltipModule,
+        MatErrorModule
     ],
     exports: [UsersAsideDetailComponent]
 

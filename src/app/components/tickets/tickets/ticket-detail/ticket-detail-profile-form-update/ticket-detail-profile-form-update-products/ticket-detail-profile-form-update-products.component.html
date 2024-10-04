@@ -10,7 +10,7 @@
         <div class="product-item">
             <div class="product-item__first-line qt-df">
                 <app-product-list
-                    [type]="'TICKET'"
+                    [type]="'PRODUCTS_TICKET'"
                     [editItem]="product.item"
                     class="product-item__prodect-list qt-w100 qt-mb-8"
                     (selectedProductItem)="onChangeProduct($event,i,taxesDropDown)"
@@ -62,12 +62,12 @@
                                 appToFixed
                                 (blur)="onValidateSaleCostProduct(i)"
                             >
-                            <mat-error
+                            <app-mat-error
                                 class="invalid-feedback --pos-static"
                                 *ngIf="!product.valdiateSaleCost"
                             >
                                 Product price can not be lower than cost
-                            </mat-error>
+                            </app-mat-error>
                         </span>
                     </label>
                 </div>
@@ -106,7 +106,7 @@
                 class="product-item__btn-del qt-button --gray --md qt-jc-c qt-w100 qt-mt-8"
                 (click)="removeProduct(i)"
             >
-                <span class="icon__remove--red-600 qt-ic-c qt-sz-16 qt-mr-4"></span>
+                <span class="qt-icon icon__delete qt-icon__red-600 qt-ic-c qt-sz-16 qt-mr-4"></span>
                 <span class="qt-color-red-600 qt-fw-500">Remove</span>
             </button>
         </div>
@@ -165,12 +165,12 @@
                             appToFixed
                             (blur)="onValidateSaleCost()"
                         >
-                        <mat-error
+                        <app-mat-error
                             class="invalid-feedback --pos-static"
                             *ngIf="!currentProduct.valdiateSaleCost"
                         >
                             Product price can not be lower than cost
-                        </mat-error>
+                        </app-mat-error>
                     </span>
                 </label>
             </div>
@@ -209,7 +209,7 @@
             (click)="clearForm(taxesDropDown)"
             *ngIf="addedProductList.length > 0"
         >
-            <span class="icon__remove--red-600 qt-ic-c qt-sz-16 qt-mr-4"></span>
+            <span class="qt-icon icon__delete qt-icon__red-600 qt-ic-c qt-sz-16 qt-mr-4"></span>
             <span class="qt-color-red-600 qt-fw-500">Remove</span>
         </button>
     </div>

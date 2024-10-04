@@ -5,7 +5,7 @@
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">Create Recurring Service</div>
         <div
-            class="qt-aside-modern__header-close icon__close"
+            class="qt-aside-modern__header-close qt-icon icon__close"
             (click)="close()"
         ></div>
     </div>
@@ -16,7 +16,6 @@
                 <div class="editable-description">
                     <textarea
                         appTextArea
-                        [limit]="250"
                         id="service-description"
                         placeholder="Write Description"
                         (input)="onChangeDescription($event)"
@@ -69,7 +68,7 @@
                     [valid]="validate.getInterval()"
                     (cronChange)="onChangeCron($event)"
                 ></app-interval>
-                <mat-error *ngIf="!validate.getInterval()">Interval is required</mat-error>
+                <app-mat-error *ngIf="!validate.getInterval()">Interval is required</app-mat-error>
             </div>
         </div>
         <div class="qt-inputs-row ticket-tabs">
@@ -79,7 +78,7 @@
                 (click)="type = 'services'"
                 [ngClass]="(type === 'services') ? 'active-tab' : ''"
             >
-                <i class="icn-20 tab-service"></i>
+                <i class="qt-icon icn-20 tab-service"></i>
                 Service
             </div>
             <!-- ---------------------------------------------------------------- -->
@@ -89,7 +88,7 @@
                 (click)="type = 'products'"
                 [ngClass]="(type === 'products') ? 'active-tab' : ''"
             >
-                <i class="icn-20 tab-product"></i>
+                <i class="qt-icon icn-20 tab-product"></i>
                 Products
             </div>
             <!-- ---------------------------------------------------------------- -->
@@ -147,7 +146,7 @@
                             *ngIf="products.length > 1"
                         >
                             <i
-                                class="icon__remove icn-16"
+                                class="qt-icon icon__delete icn-16"
                                 (click)="removeProduct(i)"
                             ></i>
                         </div>
@@ -256,9 +255,9 @@
                                 Service
                                 <span
                                     *ngIf="areTicketsPresented && areTicketsTerminated"
-                                    class="icon__help default-services-page__question-icon qt-sz-12 qt-ic-c"
+                                    class="qt-icon icon__help default-services-page__question-icon qt-sz-12 qt-ic-c"
                                     placement="top"
-                                    ngbTooltip="Your contacts are expired/terminated. Please recreate them in order to use contract's services or remove them in order to use default services"
+                                    ngbTooltip="Your contacts are expired/terminated. Please recreate them in order to use contract's services or remove them in order to use non-contract services"
                                     container="body"
                                 ></span>
                             </div>
@@ -282,7 +281,7 @@
                             *ngIf="services.length > 1"
                         >
                             <i
-                                class="icon__remove icn-16"
+                                class="qt-icon icon__delete icn-16"
                                 (click)="removeService(i)"
                             ></i>
                         </div>
@@ -293,7 +292,6 @@
                             <div class="editable-description">
                                 <textarea
                                     appTextArea
-                                    [limit]="250"
                                     [(ngModel)]="service.description"
                                     placeholder="Write Description"
                                     (onPast)="onPastDescriptionService($event,i)"
@@ -350,6 +348,19 @@
                 </label>
             </div>
         </div>
+        <div class="qt-inputs-row">
+            <div class="qt-input-block">
+                <span class="qt-input-block__label">Assigned Users</span>
+                <app-assigned-ticket-user
+                    #techUsersDp
+                    [type]="'RECURRING-TICKET'"
+                    [class]="['qt-dropdown']"
+                    [list]="listTechUsers"
+                    (usersChange)="onChangeTechUsers($event)"
+                    [placeholder]="'Select'"
+                ></app-assigned-ticket-user>
+            </div>
+        </div>
     </div>
     <div class="qt-aside-modern__footer">
         <div class="qt-df qt-ai-c qt-jc-sb qt-w100">
@@ -372,37 +383,6 @@
                 >
                     Cancel
                 </button>
-            </div>
-            <div class="save-template">
-                <app-tech-users
-                    [placement]="'top-right'"
-                    [users]="listTechUsers"
-                    (usersChange)="onChangeTechUsers($event)"
-                ></app-tech-users>
-                <div class="assigned-users-list">
-                    <ng-template
-                        ngFor
-                        let-user
-                        [ngForOf]="techUsers"
-                        let-i="index"
-                        [ngForTrackBy]="trackByIndex"
-                    >
-                        <div *ngIf="user.avatar">
-                            <img
-                                ng-if="user.avatar"
-                                class="img-circle avatar-26"
-                                [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
-                                alt="..."
-                            >
-                        </div>
-                        <div *ngIf="!user.avatar">
-                            <div class="default-user-avatar avatar-background-color-odd ng-scope">
-                                <span [textContent]="user.firstName[0].toUpperCase()"></span>
-                                <span [textContent]="user.lastName[0].toUpperCase()"></span>
-                            </div>
-                        </div>
-                    </ng-template>
-                </div>
             </div>
         </div>
     </div>

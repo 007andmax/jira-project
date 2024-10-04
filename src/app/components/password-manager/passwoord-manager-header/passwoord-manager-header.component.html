@@ -9,7 +9,7 @@
         <div class="qt-page-list__header-title-line--rigth">
             <div class="qt-df qt-ai-c">
                 <div
-                    class="icon__close-white qt-sz-20 qt-bg-contain closed-search"
+                    class="qt-icon icon__close qt-icon__white qt-sz-20 qt-bg-contain closed-search"
                     *ngIf="toggleSearch"
                     (click)="toggleSearch = false"
                 ></div>
@@ -22,11 +22,10 @@
                         type="text"
                         placeholder="Search password"
                         [(ngModel)]="searchText"
-                        (blur)="onBlurSearch($event)"
                         (keyup)="onKeyUp($event)"
                     >
                     <span
-                        class="search-clear icon__close-round"
+                        class="search-clear qt-icon icon__close-round qt-icon__gray-400"
                         *ngIf="searchText.length > 0"
                         (click)="clearSearch()"
                     ></span>
@@ -118,37 +117,37 @@
     filter.selectedUserOrDevice ||
     filter.selectedCategory"
 >
-    <mat-form-field>
-        <mat-chip-list aria-label="Fruit selection">
-            <mat-chip
+    <app-mat-form-field #formField>
+        <app-mat-chip-list aria-label="Fruit selection">
+            <app-mat-chip
                 *ngIf="filter.selectedCompany"
-                (removed)="filters.companiesSelect.clearClient();refreshFilters()"
+                (onClose)="filters.companiesSelect.clearClient();refreshFilters()"
+                [isRemove]="true"
             >
                 {{filter.selectedCompany.name}}
-                <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
-            <mat-chip
+            </app-mat-chip>
+            <app-mat-chip
                 *ngIf="filter.selectedDate"
-                (removed)="filters.dateSelect.clearClient();refreshFilters()"
+                (onClose)="filters.dateSelect.clearClient();refreshFilters()"
+                [isRemove]="true"
             >
                 {{filter.selectedDate.title}}
-                <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
-            <mat-chip
+            </app-mat-chip>
+            <app-mat-chip
                 *ngIf="filter.selectedUserOrDevice"
-                (removed)="filters.deviceUserSelect.clearClient();refreshFilters()"
+                (onClose)="filters.deviceUserSelect.clearClient();refreshFilters()"
+                [isRemove]="true"
             >
                 {{filter.selectedUserOrDevice.name}}
-                <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
-            <mat-chip
+            </app-mat-chip>
+            <app-mat-chip
                 *ngIf="filter.selectedCategory"
-                (removed)="filters.categoriesSelect.clearClient();refreshFilters()"
+                (onClose)="filters.categoriesSelect.clearClient();refreshFilters()"
                 class="status"
+                [isRemove]="true"
             >
                 {{filter.selectedCategory.title}}
-                <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
-        </mat-chip-list>
-    </mat-form-field>
+            </app-mat-chip>
+        </app-mat-chip-list>
+    </app-mat-form-field>
 </div>

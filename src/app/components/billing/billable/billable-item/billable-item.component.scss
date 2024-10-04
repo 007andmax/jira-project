@@ -10,10 +10,10 @@ tr:hover {
   background-size: auto;
 }
 .billable-item-table__check {
-  width: 45px;
+  flex: 0 0 52px
 }
 .invoce-table__menu {
-  width: 55px;
+  flex: 0 0 55px;
 }
 .billable-table__user {
   width: max-content;

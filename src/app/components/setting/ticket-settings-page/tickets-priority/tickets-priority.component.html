@@ -12,7 +12,8 @@
                     </label>
                 </div>
                 <div class="tab-pane__table-cell ticket-status-table__priority">Ticket Priority</div>
-                <div class="tab-pane__table-cell ticket-status-table__color">Set Color</div>
+                <div class="tab-pane__table-cell ticket-status-table__color">Assign Color</div>
+                <div class="tab-pane__table-cell ticket-status-table__display">Show in ticket list</div>
                 <div class="tab-pane__table-cell ticket-status-table__action">&nbsp;</div>
             </div>
         </div>
@@ -43,12 +44,12 @@
                         (input)="addPriority.checkDublicate(ticketsPriorities)"
                         maxlength="30"
                     >
-                    <mat-error
+                    <app-mat-error
                         class="qt-tooltip-error"
                         *ngIf="addPriority.disableCreate"
                     >
                         This Ticket Priority is already occupied
-                    </mat-error>
+                    </app-mat-error>
                 </div>
                 <div class="tab-pane__table-cell ticket-status-table__color">
                     <div
@@ -86,6 +87,20 @@
                         </div>
                     </div>
                 </div>
+                <div class="tab-pane__table-cell ticket-status-table__display">
+                    <label
+                        class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
+                        for="priority-display-0"
+                    >
+                        <input
+                            id="priority-display-0"
+                            type="checkbox"
+                            [(ngModel)]="addPriority.isDisplay"
+                            (change)="editDisplay(addPriority)"
+                        >
+                        <span></span>
+                    </label>
+                </div>
                 <div class="tab-pane__table-cell ticket-status-table__action">
                     <app-dynamic-tooltip
                         [content]="'Remove'"
@@ -93,7 +108,7 @@
                         #removeTooltip
                     ></app-dynamic-tooltip>
                     <div
-                        class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                        class="qt-icon icon__delete qt-sz-20 qt-bg-contain pointer"
                         (mouseenter)="removeTooltip.show($event.target)"
                         (mouseleave)="removeTooltip.hide()"
                         (click)="toggleAddPriority(false)"
@@ -135,12 +150,12 @@
                         (onChange)="onEditTicketPriority(item)"
                         (input)="item.onInitEdit(true);item.checkDublicateUpdate(ticketsPriorities)"
                     >
-                    <mat-error
+                    <app-mat-error
                         class="qt-tooltip-error"
                         *ngIf="item.disableUpdate"
                     >
                         This Ticket Priority is already occupied
-                    </mat-error>
+                    </app-mat-error>
                 </div>
                 <div class="tab-pane__table-cell ticket-status-table__color">
                     <div
@@ -178,6 +193,20 @@
                         </div>
                     </div>
                 </div>
+                <div class="tab-pane__table-cell ticket-status-table__display">
+                    <label
+                        class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
+                        [attr.for]="'priority-display-' + item.id"
+                    >
+                        <input
+                            [attr.id]="'priority-display-' + item.id"
+                            type="checkbox"
+                            [(ngModel)]="item.isDisplay"
+                            (change)="editDisplay(item);onEditTicketPriority(item)"
+                        >
+                        <span></span>
+                    </label>
+                </div>
                 <div class="tab-pane__table-cell ticket-status-table__action">
                     <app-dynamic-tooltip
                         [content]="'Remove'"
@@ -187,7 +216,7 @@
                     <div
                         (mouseenter)="removeTooltip.show($event.target)"
                         (mouseleave)="removeTooltip.hide()"
-                        class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                        class="qt-icon icon__delete qt-sz-20 qt-bg-contain pointer"
                         (click)="removeTicketPriority(item)"
                         *ngIf="!item.isDefault"
                     >

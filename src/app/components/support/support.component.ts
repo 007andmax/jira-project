@@ -7,10 +7,14 @@ import { SupportStateService } from '../../states/support/support-state.service'
 import { UsersStateService } from '../../states/users/users-state.service';
 import { CompanyDevicesRemoteAccessComponent } from '../company-devices/company-devices-remote-access/company-devices-remote-access.component';
 import { RemoteSession } from './class/remote-sessions';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'app-support',
   templateUrl: './support.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./support.component.scss']
 })
 export class SupportComponent implements OnInit, OnDestroy {

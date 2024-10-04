@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
-import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { DocumentsTemplatesFilterComponent } from './documents-templates-filter/documents-templates-filter.component';
 
 @Component({
@@ -22,7 +21,6 @@ export class DocumentsTemplatesHeaderComponent implements OnInit {
    * @param {permissionsService} permissionsService to work with permissions service
    */
   constructor(
-    private leftPanelStateService: LeftPanelStateService,
     private permissionsService: PermissionsService,
   ) { }
 

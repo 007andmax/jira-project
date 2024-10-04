@@ -1,10 +1,8 @@
-import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CompanyItem } from 'src/app/components/companies/class/company-item';
 import { CompanyProfile } from 'src/app/components/companies/class/company-profile';
-import { CompanyProfileAddress } from 'src/app/components/companies/class/company-profile-address';
 import { CompanyUpdate } from 'src/app/components/companies/class/company-update';
-import { InvoiceTicketsService } from 'src/app/components/setting/accounting/accounting-settings.service';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { Service } from 'src/app/interfaces/service/service';
@@ -20,16 +18,16 @@ import { InvoiceNote } from '../../../billable/class/invoice-note';
 import { QuoteAdd } from '../../class/quote-add';
 import { QuoteValdiate } from '../../class/quote-vildate';
 import { ServiceListQuoteComponent } from '../service-list-quote/service-list-quote.component';
-import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-role-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
+import { InvoiceTicketsService } from 'src/app/services/accounting/accounting-settings.service';
 
 @Component({
   selector: 'app-quote-aside-add-body',
   templateUrl: './quote-aside-add-body.component.html',
   styleUrls: ['./quote-aside-add-body.component.scss']
 })
-export class QuoteAsideAddBodyComponent implements OnInit {
+export class QuoteAsideAddBodyComponent implements OnInit, OnDestroy {
   @ViewChild('companyEdit', { static: false }) companyEdit: InvoiceFormEditCustomerComponent;
   @ViewChild('servicesList', { static: false }) servicesList: ServiceListQuoteComponent;
   @ViewChild('expiryDate', { static: false }) expiryDate: DatePickerComponent;
@@ -58,14 +56,17 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     private contractsService: ContractsService,
     private quoteServices: QuoteService,) { }
 
+
   ngOnInit() {
     if (this.companiesState.getCompanies().length > 0) this.getCLientsList(this.companiesState.getCompanies());
-    this.companiesState.getOnCompanies().subscribe((data) => {
+    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
       this.getCLientsList(data);
     })
-    this.quoteServices.getQuoteNumber().subscribe((data: any) => {
+    this.sub.add(getOnCompanies);
+    let getQuoteNumber = this.quoteServices.getQuoteNumber().subscribe((data: any) => {
       this.quote.number = data.number;
     });
+    this.sub.add(getQuoteNumber);
     let getChangeCompanies = this.companiesState.getChangeCompanies().subscribe((data: CompanyUpdate) => {
       if (data.action === 'COMPANY_SAVED' && this.quoteCompany && this.quoteCompany.id === data.data.id) {
         this.quoteCompany.name = data.data.name;
@@ -92,8 +93,8 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     this.quote.setBillTo(this.quoteCompany.companyInfo.addresses[0].id);
     if (this.quoteCompany.companyInfo.addresses.length == 2) this.quote.setShipTo(this.quoteCompany.companyInfo.addresses[1].id);
     this.cd.detectChanges();
-    //  this.servicesList.getServicesList();
     this.getServicesList();
+    this.getServiceAgreements(this.quoteCompany.id);
   }
   public onChangeQuoteNumber(data) {
     this.quote.number = data;
@@ -111,8 +112,9 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   }
   getServicesList() {
     this.quoteServices.getServiceList(this.quoteCompany.id).subscribe((res: any) => {
-      this.services = res;
-      this.getServiceAgreements(this.quoteCompany.id);
+      this.services = res.filter(item => item.canUseInTicket);
+      this.services.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
       this.onCheckValidateServicesByCompany();
     });
   }
@@ -225,6 +227,7 @@ export class QuoteAsideAddBodyComponent implements OnInit {
       this.validate.resetCompany();
       //  this.servicesList.getServicesList();
       this.getServicesList();
+      this.getServiceAgreements(this.quoteCompany.id);
       this.quote.setBillTo(this.quoteCompany.companyInfo.addresses[0].id);
       if (this.quoteCompany.companyInfo.addresses.length == 2) this.quote.setShipTo(this.quoteCompany.companyInfo.addresses[1].id);
     } else {
@@ -246,5 +249,8 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   }
   public trackById(index, item) {
     return item.item.versionedId.id;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

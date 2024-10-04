@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AddMarketingSubscriptionTypeComponent } from './add-marketing-subscription-type.component';
-import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.module';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { FormsModule } from '@angular/forms';
+import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 
 
 @NgModule({
@@ -12,8 +12,8 @@ import { FormsModule } from '@angular/forms';
     imports: [
         CommonModule,
         FormsModule,
-        ClickOtsideModule,
-        MatFormFieldModule
+        ClickOutsideModule,
+        MatErrorModule
 
     ],
     exports: [AddMarketingSubscriptionTypeComponent]

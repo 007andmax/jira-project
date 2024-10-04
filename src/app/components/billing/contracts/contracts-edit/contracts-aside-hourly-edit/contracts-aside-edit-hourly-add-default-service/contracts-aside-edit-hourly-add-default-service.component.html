@@ -11,18 +11,18 @@
             dropdownWidth="509px"
             (onSelectedItem)="selectService($event)"
         ></app-drop-down>
-        <mat-error
+        <app-mat-error
             class="invalid-feedback"
             *ngIf="!validate.getValidate() || !validate.getDuplicateName()"
         >
             Duplicate Service
-        </mat-error>
-        <mat-error
+        </app-mat-error>
+        <app-mat-error
             class="invalid-feedback"
             *ngIf="!validate.getName()"
         >
             Service name is required
-        </mat-error>
+        </app-mat-error>
     </div>
     <div class="contract-aside-hourly-add-service__billable">
         <label
@@ -61,21 +61,21 @@
             (input)="onChangeRate($event)"
             appToFixed
         >
-        <mat-error
+        <app-mat-error
             class="qt-tooltip-error"
             *ngIf="!validate.getRate()"
         >
             Hour rate is required
-        </mat-error>
+        </app-mat-error>
     </div>
     <div
-        class="icon__close contract-aside-hourly-add-service__add qt-sz-16 qt-pointer qt-ic-c"
+        class="qt-icon icon__close contract-aside-hourly-add-service__add qt-sz-16 qt-pointer qt-ic-c"
         appDisabledBtn
         #addBtn="disabled"
         (onClick)="searchDuplicatedServiceNames()"
     ></div>
     <div
-        class="icon__close contract-aside-hourly-add-service__cancel qt-sz-16 qt-pointer qt-ic-c"
+        class="qt-icon icon__close contract-aside-hourly-add-service__cancel qt-sz-16 qt-pointer qt-ic-c"
         (click)="closed()"
     ></div>
 </div>

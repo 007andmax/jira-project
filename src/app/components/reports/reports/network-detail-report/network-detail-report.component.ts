@@ -1,5 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
 import { CONFIGCONSTANTS } from "src/app/components/device/config/app-constants";
@@ -11,15 +10,15 @@ import { CompaniesStateService } from "src/app/states/company/companies-state.se
 import { DraftEmailStateService } from "src/app/states/draft-email/draft-email-state.service";
 import { LeftPanelStateService } from "src/app/states/left-panel/left-panel-state.service";
 import { NetworkDetailReport } from "../../class/network-detail-report";
-import { ReportSendEmailComponent } from "../../report-additional-actions/report-send-email/report-send-email.component";
 import { DeviceNetworkDetailReportFilter } from "./Class/network-detail-report";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "network-detail-report",
   templateUrl: "./network-detail-report.component.html",
   styleUrls: ["./network-detail-report.component.scss"],
 })
-export class NetworkDetailReportComponent implements OnInit {
+export class NetworkDetailReportComponent implements OnInit, OnDestroy {
   @ViewChild('dropdownDevice', { static: true }) dropdownDevice: DropDownComponent;
   clientName: string;
   companies = [];
@@ -38,19 +37,18 @@ export class NetworkDetailReportComponent implements OnInit {
   template: string = "PDF_TEMPLATE";
   fileName: string = "network-detail-report";
   accountType = "CLIENT";
-
+  sub: Subscription = new Subscription();
   constructor(
     private agentService: AgentService,
-    private companiesState: CompaniesStateService,
     private companiesStateService: CompaniesStateService,
     public leftPanelStateService: LeftPanelStateService,
-    private modalService: NgbModal,
     private commonHttpServices: CommonHttpServices,
     private toastr: ToastrService,
     private excelService: ExcelService,
     public elRef: ElementRef,
     public draftEmailStateService: DraftEmailStateService,
   ) { }
+
 
   ngOnInit() {
     this.clientName = "All Companies";
@@ -60,9 +58,10 @@ export class NetworkDetailReportComponent implements OnInit {
 
   setPreviewDataDevice() {
     if (this.companiesStateService.getCompanies().length > 0) this.companies = this.getClientsList(this.companiesStateService.getCompanies());
-    this.companiesStateService.getOnCompanies().subscribe((data) => {
+    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = this.getClientsList(data);
     });
+    this.sub.add(getOnCompanies);
   }
 
   getDeviceNetworkList() {
@@ -440,5 +439,8 @@ export class NetworkDetailReportComponent implements OnInit {
 
   onFilter(field) {
     this.filter.onFilter(field, this.networkDetailList);
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

@@ -3,29 +3,29 @@
     class="start-end-timer"
 >
     <label class="start-end-timer__label qt-mr-8">
-      <input
-        type="text"
-        class="time start qt-input-block__input"
-        [ngClass]="{'--input-error':!validate}"
-      >
-      <span class="icn-16 icon__time pointer"></span>
+        <input
+            type="text"
+            class="time start qt-input-block__input"
+            [ngClass]="{'--input-error':!validate}"
+        >
+        <span class="icn-16 qt-icon icon__time pointer"></span>
     </label>
     <label class="start-end-timer__label qt-mr-8">
-      <input
-        *ngIf="!editMode || editMode && currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'"
-        type="text"
-        class="time end qt-input-block__input"
-        [ngClass]="{'--input-error':! validate}"
-      >
-      <span class="icn-16 icon__time pointer"></span>
+        <input
+            *ngIf="!editMode || editMode && currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'"
+            type="text"
+            class="time end qt-input-block__input"
+            [ngClass]="{'--input-error':! validate}"
+        >
+        <span class="icn-16 qt-icon icon__time pointer"></span>
     </label>
 </div>
-<mat-error
-  class="invalid-feedback --pos-static"
-  *ngIf="!validate"
-  [textContent]="errorMessage"
+<app-mat-error
+    class="invalid-feedback --pos-static"
+    *ngIf="!validate"
+    [textContent]="errorMessage"
 >
-</mat-error>
+</app-mat-error>
 <p
     *ngIf="editMode && currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'"
     class="start-end-timer"

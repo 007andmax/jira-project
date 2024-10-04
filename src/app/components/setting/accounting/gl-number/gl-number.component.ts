@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from "@angular/core";
 import { GlNumberService } from "./gl-number.service";
 import { ToastrService } from "ngx-toastr";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { map } from "rxjs/operators";
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
 import { GlNumber } from "src/class/gl-number/gl-number";
@@ -10,7 +9,6 @@ import { Subscription } from "rxjs";
 import { ConfirmStateService } from "src/app/components/shared/confirm/services/confirm-state.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { DELETE_GL_NUMBER } from "src/app/const/confirm";
-import { ConfirmComponent } from "src/app/components/shared/confirm/confirm.component";
 import { GlNumberCheckUseComponent } from "./gl-number-check-use/gl-number-check-use.component";
 declare var $: any;
 @Component({

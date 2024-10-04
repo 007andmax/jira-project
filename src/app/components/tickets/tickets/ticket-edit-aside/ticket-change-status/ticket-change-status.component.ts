@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { TicketProfile } from '../../class/ticket-profile';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { TitleListType } from '../../tickets-header/class/title-list-type';

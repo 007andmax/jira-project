@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContractsAsideBlockTimeBillingUsersComponent } from './contracts-aside-block-time-billing-users.component';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
+import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.module';
+import { MatChipListModule } from 'src/app/components/shared/mat-chip-list/mat-chip-list.module';
+
 
 
 
@@ -12,9 +12,8 @@ import { MatSelectModule } from '@angular/material/select';
     ],
     imports: [
         CommonModule,
-        MatSelectModule,
-        MatChipsModule,
-        MatIconModule
+        MatChipModule,
+        MatChipListModule
 
     ],
     exports: [ContractsAsideBlockTimeBillingUsersComponent]

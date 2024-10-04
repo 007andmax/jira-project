@@ -1,16 +1,17 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { NoteService } from 'src/app/services/note/note.service';
 import { NoteStateService } from 'src/app/states/note/note-state.service';
 import { NoteTemplate } from '../class/note-template';
 import { NoteTemplateValidate } from '../class/note-template-validate';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'canned-responses-aside',
   templateUrl: './canned-responses-aside.component.html',
   styleUrls: ['./canned-responses-aside.component.scss']
 })
-export class CannedResponsesAsideComponent implements OnInit {
+export class CannedResponsesAsideComponent implements OnInit, OnDestroy {
 
   noteTemplate: NoteTemplate = new NoteTemplate();
   noteTemplateValidate: NoteTemplateValidate = new NoteTemplateValidate();
@@ -55,28 +56,33 @@ export class CannedResponsesAsideComponent implements OnInit {
 
   };
   opened: boolean = false;
+  sub: Subscription = new Subscription();
   constructor(private noteStateService: NoteStateService,
     public cd: ChangeDetectorRef,
     private noteService: NoteService) { }
 
+
   ngOnInit() {
-    this.noteStateService.onOpenAddAside.subscribe(data => {
+    let onOpenAddAside = this.noteStateService.onOpenAddAside.subscribe(data => {
       this.opened = true;
       this.cd.detectChanges();
     })
-    this.noteStateService.onEditNote.subscribe(data => {
+    this.sub.add(onOpenAddAside);
+    let onEditNote = this.noteStateService.onEditNote.subscribe(data => {
       this.noteTemplate = new NoteTemplate(data);
       this.noteTemplate.setEditMode(true);
       this.opened = true;
       this.cd.detectChanges();
 
     })
-    this.noteStateService.onCopyNote.subscribe(data => {
+    this.sub.add(onEditNote);
+    let onCopyNote = this.noteStateService.onCopyNote.subscribe(data => {
       this.noteTemplate = new NoteTemplate(data);
       this.noteTemplateValidate.setTitleIsExist(true);
       this.opened = true;
       this.cd.detectChanges();
     })
+    this.sub.add(onCopyNote);
   }
   checkTitle() {
     this.noteTemplateValidate.resetTitle();
@@ -104,5 +110,7 @@ export class CannedResponsesAsideComponent implements OnInit {
       this.closed();
     })
   }
-
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

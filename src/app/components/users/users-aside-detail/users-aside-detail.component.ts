@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { USERS } from 'src/app/const/emails';
 import { MODE_EDIT_SUBSCRIPTION } from 'src/app/const/users';
@@ -11,23 +11,19 @@ import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-s
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
-import { PhoneNumber } from 'src/class/phone-number';
 import { CompanySubscriptionStateService } from '../../companies/company-subscription/class/company-subscription-state.service';
 import { StatusColor } from '../../tickets/class/status-color';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { User } from '../class/user';
 import { UserChange } from '../class/user-change';
 import { UserCustomSubscription } from '../class/user-custom-subscription';
-import { UserDefaultSubscription } from '../class/user-default-subscription';
-import { UserDefaultSubscriptionAdd } from '../class/user-default-subscription-add';
 import { UserProfile } from '../class/user-profile';
 import { UserValidate } from '../class/user-validate';
 import { UsersAsideDetailTicketsComponent } from './users-aside-detail-tickets/users-aside-detail-tickets.component';
-import { UserCustomerCompaniesDefaultSubscribtionAdd } from '../class/user-customer-companies-default-subscribtion-add';
-import { UserRole } from '../class/user-role';
 import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-role-state.service';
 import { UserCustomerCompaniesInfo } from '../class/user-customer-companies-info';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { UsersAsideDetailCompanyInfoComponent } from './users-aside-detail-company-info/users-aside-detail-company-info.component';
 
 @Component({
   selector: 'users-aside-detail',
@@ -44,6 +40,7 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
   tab: string = 'tickets';
   selectedCompany = null;
   MODE_EDIT_SUBSCRIPTION = MODE_EDIT_SUBSCRIPTION;
+  @ViewChildren('companyInfo', { static: false }) companyInfo: QueryList<UsersAsideDetailCompanyInfoComponent>;
   @ViewChild('ticketsDetail', { static: false }) ticketsDetail: UsersAsideDetailTicketsComponent;
   sub: Subscription = new Subscription();
   constructor(public ticketsListService: TicketsListService,
@@ -54,7 +51,6 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
     private leftPanelService: LeftPanelService,
     private ticketsStateService: TicketsStateService,
     private draftEmailStateService: DraftEmailStateService,
-    private companySubscriptionState: CompanySubscriptionStateService,
     private usersRealTimeService: UsersRealTimeService,
     private permissionsService: PermissionsService,
     public customerRoleStateService: CustomerRoleStateService,
@@ -68,6 +64,10 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
       this.getColors();
       this.usersStateService.setUserForEdit(data);
       //   this.companySubscriptionState.onEditMode(this.user.subscription);
+      this.companyInfo.toArray().forEach(item => {
+        if (item.jobTitleDp) item.jobTitleDp.clearWithOutChanges();
+        if (item.userRolesDP) item.userRolesDP.clearWithOutChanges();
+      })
       this.user.onEdit(data);
       if (this.customerPortalStateService.checkShowTabTicketsAsideUserDetail(this.usersStateService.getCurrentUser(), this.user)) {
         this.tab = 'tickets';
@@ -205,8 +205,14 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }
+  public trackByCompanyId(index, item) {
+    return item.companyId;
+  }
   public trackByIndex(index, item) {
     return index;
+  }
+  public trackById(index, item) {
+    return item.id;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

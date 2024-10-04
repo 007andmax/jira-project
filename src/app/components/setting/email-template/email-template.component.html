@@ -24,6 +24,7 @@
                             <div class="tab-pane__table-header">
                                 <div class="tab-pane__table-row">
                                     <div class="tab-pane__table-cell email-templates-table__template-name">Template Name</div>
+                                    <div class="tab-pane__table-cell email-templates-table__status">Status</div>
                                     <div class="tab-pane__table-cell email-templates-table__action">&nbsp;</div>
                                 </div>
                             </div>
@@ -34,12 +35,25 @@
                                 <div
                                     class="tab-pane__table-row"
                                     *ngFor="
-                                        let template of ticketTemplates | keyvalue;
+                                        let template of ticketTemplates | keysValue:false;
                                         let i = index;
-                                        trackBy: trackByTicket
+                                        trackBy: trackByIndex
                                       "
                                 >
-                                    <div class="tab-pane__table-cell email-templates-table__template-name">{{ template.value.title }}</div>
+                                    <div class="tab-pane__table-cell email-templates-table__template-name">{{ ticketTemplates[template].title }}</div>
+                                    <div class="tab-pane__table-cell email-templates-table__status email-templates-table__status-item">
+                                        <app-dynamic-tooltip
+                                            [content]="'Active'"
+                                            [position]="'top'"
+                                            #activeTooltip
+                                        ></app-dynamic-tooltip>
+                                        <i
+                                            class="qt-icon icon__check qt-icon__green-600 qt-sz-20 qt-dib"
+                                            *ngIf="emailPages && emailPages.activeAndNotDefault[template].isActive"
+                                            (mouseenter)="activeTooltip.show($event.target)"
+                                            (mouseleave)="activeTooltip.hide()"
+                                        ></i>
+                                    </div>
                                     <div class="tab-pane__table-cell email-templates-table__action">
                                         <div class="qt-df qt-ai-c">
                                             <app-dynamic-tooltip
@@ -50,8 +64,8 @@
                                             <div
                                                 (mouseenter)="editTooltip.show($event.target)"
                                                 (mouseleave)="editTooltip.hide()"
-                                                class="icon__edit-gray-dark qt-sz-20 qt-bg-contain pointer"
-                                                (click)="getTemplate(template, i)"
+                                                class="qt-icon icon__edit qt-icon__gray-400 qt-sz-20 qt-bg-contain pointer"
+                                                (click)="getTemplate(ticketTemplates[template], template)"
                                             >
                                             </div>
                                             <app-dynamic-tooltip
@@ -62,13 +76,13 @@
                                             <div
                                                 *ngIf="
                                   emailPages &&
-                                  emailPages.activeAndNotDefault[template.key]
+                                  emailPages.activeAndNotDefault[template]
                                     .isNotDefault
                                 "
                                                 (mouseenter)="resetTooltip.show($event.target)"
                                                 (mouseleave)="resetTooltip.hide()"
-                                                (click)="restoreDefault(template.key)"
-                                                class="icon__reset qt-sz-20 qt-ml-16 qt-bg-contain pointer"
+                                                (click)="restoreDefault(template)"
+                                                class="qt-icon icon__reset qt-sz-20 qt-ml-16 qt-bg-contain pointer"
                                             >
                                             </div>
                                         </div>
@@ -89,6 +103,7 @@
                             <div class="tab-pane__table-header">
                                 <div class="tab-pane__table-row">
                                     <div class="tab-pane__table-cell email-templates-table__template-name">Template Name</div>
+                                    <div class="tab-pane__table-cell email-templates-table__status">Status</div>
                                     <div class="tab-pane__table-cell email-templates-table__action"></div>
                                 </div>
                             </div>
@@ -96,12 +111,25 @@
                                 <div
                                     class="tab-pane__table-row"
                                     *ngFor="
-                            let template of agentTemplates | keyvalue;
+                            let template of agentTemplates | keysValue:true;
                             let i = index;
-                            trackBy: trackByTicket
+                            trackBy: trackByIndex
                           "
                                 >
-                                    <div class="tab-pane__table-cell email-templates-table__template-name">{{ template.value.title }}</div>
+                                    <div class="tab-pane__table-cell email-templates-table__template-name">{{ agentTemplates[template].title }}</div>
+                                    <div class="tab-pane__table-cell email-templates-table__status email-templates-table__status-item">
+                                        <app-dynamic-tooltip
+                                            [content]="'Active'"
+                                            [position]="'top'"
+                                            #activeTooltip
+                                        ></app-dynamic-tooltip>
+                                        <i
+                                            class="qt-icon icon__check qt-icon__green-600 qt-sz-20 qt-dib"
+                                            *ngIf="emailPages && emailPages.activeAndNotDefault[template].isActive"
+                                            (mouseenter)="activeTooltip.show($event.target)"
+                                            (mouseleave)="activeTooltip.hide()"
+                                        ></i>
+                                    </div>
                                     <div class="tab-pane__table-cell email-templates-table__action">
                                         <div class="qt-df">
                                             <app-dynamic-tooltip
@@ -112,8 +140,8 @@
                                             <div
                                                 (mouseenter)="editTooltip.show($event.target)"
                                                 (mouseleave)="editTooltip.hide()"
-                                                (click)="getTemplate(template, i)"
-                                                class="icon__edit-gray-dark qt-sz-20 qt-bg-contain pointer"
+                                                (click)="getTemplate(agentTemplates[template], template)"
+                                                class="qt-icon icon__edit qt-icon__gray-400 qt-sz-20 qt-bg-contain pointer"
                                             >
                                             </div>
                                             <app-dynamic-tooltip
@@ -124,13 +152,13 @@
                                             <div
                                                 *ngIf="
                                   emailPages &&
-                                  emailPages.activeAndNotDefault[template.key]
+                                  emailPages.activeAndNotDefault[template]
                                     .isNotDefault
                                 "
-                                                (click)="restoreDefault(template.key)"
+                                                (click)="restoreDefault(template)"
                                                 (mouseenter)="resetTooltip.show($event.target)"
                                                 (mouseleave)="resetTooltip.hide()"
-                                                class="icon__reset qt-sz-20 qt-ml-16 qt-bg-contain pointer"
+                                                class="qt-icon icon__reset qt-sz-20 qt-ml-16 qt-bg-contain pointer"
                                             >
                                             </div>
                                         </div>
@@ -151,6 +179,7 @@
                             <div class="tab-pane__table-header">
                                 <div class="tab-pane__table-row">
                                     <div class="tab-pane__table-cell email-templates-table__template-name">Template Name</div>
+                                    <div class="tab-pane__table-cell email-templates-table__status">Status</div>
                                     <div class="tab-pane__table-cell email-templates-table__action"></div>
                                 </div>
                             </div>
@@ -158,12 +187,25 @@
                                 <div
                                     class="tab-pane__table-row"
                                     *ngFor="
-                            let template of invoiceTemplates | keyvalue;
+                            let template of invoiceTemplates | keysValue:true;
                             let i = index;
-                            trackBy: trackByTicket
+                            trackBy: trackByIndex
                           "
                                 >
-                                    <div class="tab-pane__table-cell email-templates-table__template-name">{{ template.value.title }}</div>
+                                    <div class="tab-pane__table-cell email-templates-table__template-name">{{ invoiceTemplates[template].title }}</div>
+                                    <div class="tab-pane__table-cell email-templates-table__status email-templates-table__status-item">
+                                        <app-dynamic-tooltip
+                                            [content]="'Active'"
+                                            [position]="'top'"
+                                            #activeTooltip
+                                        ></app-dynamic-tooltip>
+                                        <i
+                                            class="qt-icon icon__check qt-icon__green-600 qt-sz-20 qt-dib"
+                                            *ngIf="emailPages && emailPages.activeAndNotDefault[template].isActive"
+                                            (mouseenter)="activeTooltip.show($event.target)"
+                                            (mouseleave)="activeTooltip.hide()"
+                                        ></i>
+                                    </div>
                                     <div class="tab-pane__table-cell email-templates-table__action">
                                         <div class="qt-df">
                                             <app-dynamic-tooltip
@@ -174,8 +216,8 @@
                                             <div
                                                 (mouseenter)="editTooltip.show($event.target)"
                                                 (mouseleave)="editTooltip.hide()"
-                                                class="icon__edit-gray-dark qt-sz-20 qt-bg-contain pointer"
-                                                (click)="getTemplate(template, i)"
+                                                class="qt-icon icon__edit qt-icon__gray-400 qt-sz-20 qt-bg-contain pointer"
+                                                (click)="getTemplate(invoiceTemplates[template], template)"
                                             >
                                             </div>
                                             <app-dynamic-tooltip
@@ -186,13 +228,89 @@
                                             <div
                                                 *ngIf="
                                   emailPages &&
-                                  emailPages.activeAndNotDefault[template.key]
+                                  emailPages.activeAndNotDefault[template]
                                     .isNotDefault
                                 "
-                                                (click)="restoreDefault(template.key)"
+                                                (click)="restoreDefault(template)"
                                                 (mouseenter)="resetTooltip.show($event.target)"
                                                 (mouseleave)="resetTooltip.hide()"
-                                                class="icon__reset qt-sz-20 qt-ml-16 qt-bg-contain pointer"
+                                                class="qt-icon icon__reset qt-sz-20 qt-ml-16 qt-bg-contain pointer"
+                                            >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab title="User Templates">
+                <ng-template ngbTabContent>
+                    <div
+                        class="cmn-area"
+                        [hidden]="loading"
+                    >
+                        <div class="dataTable tab-pane__table">
+                            <div class="tab-pane__table-header">
+                                <div class="tab-pane__table-row">
+                                    <div class="tab-pane__table-cell email-templates-table__template-name">Template Name</div>
+                                    <div class="tab-pane__table-cell email-templates-table__status">Status</div>
+                                    <div class="tab-pane__table-cell email-templates-table__action"></div>
+                                </div>
+                            </div>
+                            <div class="tab-pane__table-body">
+                                <div
+                                    class="tab-pane__table-row"
+                                    *ngFor="
+                            let template of userTemplates | keysValue:true;
+                            let i = index;
+                            trackBy: trackByIndex
+                          "
+                                >
+                                    <div class="tab-pane__table-cell email-templates-table__template-name">{{ userTemplates[template].title }}</div>
+                                    <div class="tab-pane__table-cell email-templates-table__status email-templates-table__status-item">
+                                        <app-dynamic-tooltip
+                                            [content]="'Active'"
+                                            [position]="'top'"
+                                            #activeTooltip
+                                        ></app-dynamic-tooltip>
+                                        <i
+                                            class="qt-icon icon__check qt-icon__green-600 qt-sz-20 qt-dib"
+                                            *ngIf="emailPages && emailPages.activeAndNotDefault[template].isActive"
+                                            (mouseenter)="activeTooltip.show($event.target)"
+                                            (mouseleave)="activeTooltip.hide()"
+                                        ></i>
+                                    </div>
+                                    <div class="tab-pane__table-cell email-templates-table__action">
+                                        <div class="qt-df">
+                                            <app-dynamic-tooltip
+                                                [content]="'Edit'"
+                                                [position]="'top'"
+                                                #editTooltip
+                                            ></app-dynamic-tooltip>
+                                            <div
+                                                (mouseenter)="editTooltip.show($event.target)"
+                                                (mouseleave)="editTooltip.hide()"
+                                                class="qt-icon icon__edit qt-icon__gray-400 qt-sz-20 qt-bg-contain pointer"
+                                                (click)="getTemplate(userTemplates[template], template)"
+                                            >
+                                            </div>
+                                            <app-dynamic-tooltip
+                                                [content]="'Reset Default'"
+                                                [position]="'top'"
+                                                #resetTooltip
+                                            ></app-dynamic-tooltip>
+                                            <div
+                                                *ngIf="
+                                  emailPages &&
+                                  emailPages.activeAndNotDefault[template]
+                                    .isNotDefault
+                                "
+                                                (click)="restoreDefault(template)"
+                                                (mouseenter)="resetTooltip.show($event.target)"
+                                                (mouseleave)="resetTooltip.hide()"
+                                                class="qt-icon icon__reset qt-sz-20 qt-ml-16 qt-bg-contain pointer"
                                             >
                                             </div>
                                         </div>
@@ -223,7 +341,7 @@
                 container="body"
                 (click)="restoreDefault(templeteInfo.key)"
             >
-                <div class="icon__reset-gray-500 qt-sz-16 qt-button-icon"></div>
+                <div class="qt-icon icon__reset qt-sz-16 qt-button-icon"></div>
             </a>
             <a
                 href="javascript:;"
@@ -234,7 +352,7 @@
                 ngbTooltip="Show Preview"
                 container="body"
             >
-                <div class="icon__view qt-sz-16 qt-button-icon"></div>
+                <div class="qt-icon icon__show qt-sz-16 qt-button-icon"></div>
             </a>
         </div>
     </div>
@@ -244,7 +362,7 @@
                 class="qt-input-block__label"
                 for="edit-reponse-recipient"
             >
-                Receipient
+                Recipient
             </label>
             <input
                 class="qt-input-block__input"
@@ -263,7 +381,7 @@
                     class="qt-input-block__label"
                     for="subject"
                 >
-                    Template Name
+                    Email subject
                 </label>
                 <input
                     type="text"
@@ -290,7 +408,7 @@
                     class="qt-input-block__label"
                     for="myEditor"
                 >
-                    Template body
+                    Email template body
                 </label>
                 <textarea
                     id="myEditor"
@@ -312,13 +430,13 @@
                         >
                             <span
                                 class="qt-sz-16 qt-dib qt-mr-8 qt-button-icon"
-                                [ngClass]="{'icon__view':!show, 'icon__hide':show}"
+                                [ngClass]="{'qt-icon icon__show':!show, 'qt-icon icon__hide':show}"
                             ></span>
                             {{ buttonName }}
                         </a>
                     </div>
                     <div class="company-info-block --light qt-mb-16">
-                        <div class="icon__company-info qt-sz-20 qt-ic-c qt-mr-8 qt-fs-0 qt-mt-2"></div>
+                        <div class="qt-icon icon__info qt-sz-20 qt-ic-c qt-mr-8 qt-fs-0 qt-mt-2"></div>
                         <span class="qt-f-1">
                             By clicking on each keyword will be apply to Template Descripition above
                         </span>
@@ -350,6 +468,28 @@
                     </div>
                 </div>
             </div>
+            <div class="qt-inputs-row qt-mt-24">
+                <label
+                    class="qt-checkbox"
+                    for="email-payment"
+                >
+                    <input
+                        id="email-payment"
+                        type="checkbox"
+                        name="isActive"
+                        [value]="templeteForm.controls.isActive.value"
+                        formControlName="isActive"
+                    >
+                    <span></span>
+                    <div class="qt-ml-8 qt-fw-400 qt-lh-1">Mark as active</div>
+                    <i
+                        class="qt-icon icon__help default-services-page__question-icon qt-sz-12 qt-ic-c"
+                        placement="top"
+                        ngbTooltip="If disabled, the system will not send the email notification to recipients"
+                        container="body"
+                    ></i>
+                </label>
+            </div>
         </form>
     </div>
     <div class="qt-aside-modern__footer">
@@ -376,7 +516,7 @@
     <div class="qt-df qt-ai-c qt-jc-sb qt-mb-24">
         <h6 class="email_template_preview__title qt-fw-600 qt-color-gray-900">Email Template Preview</h6>
         <div
-            class="icon__close qt-sz-20 qt-ic-c qt-fs-0 qt-ml-8 pointer"
+            class="qt-icon icon__close qt-sz-20 qt-ic-c qt-fs-0 qt-ml-8 pointer"
             (click)="modal.dismiss('Cross click')"
         ></div>
     </div>

@@ -1,0 +1,73 @@
+@import "./src/assets/styles/variable";
+
+app-add-user-to-company-item {
+    display: contents;
+}
+.user-company-add {
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    border: 1px solid $gray-200;
+}
+.archive-modal {
+    padding: 24px 32px;
+}
+.user-company-header {
+    position: relative;
+    &::after {
+        content: " ";
+        position: absolute;
+        bottom: 0px;
+        left: -32px;
+        right: -32px;
+        height: 1px;
+        background-color: $gray-200;
+    }
+    p {
+        font-size: 14px;
+    }
+    h3 {
+        font-size: 18px;
+    }
+}
+.user-company-content {
+    height: 439px;
+    overflow: auto;
+}
+.user-company-btn-save {
+    background-color: $blue-light-600;
+    color: $white;
+    &:hover {
+        background-color: $blue-light-500;
+    }
+}
+.archive-modal__body {
+    position: relative;
+    margin-bottom: 16px;
+    &:after {
+        position: absolute;
+        content: " ";
+        bottom: 0px;
+        left: -32px;
+        right: -32px;
+        height: 1px;
+        background-color: $gray-200;
+    }
+}
+.search-clear {
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    right: 12px;
+    top: calc(50% - 6px);
+    cursor: pointer;
+}
+.assigned-users-type {
+    display: flex;
+    flex-wrap: wrap;
+}
+app-add-user-to-company-selected-item {
+    display: contents;
+}

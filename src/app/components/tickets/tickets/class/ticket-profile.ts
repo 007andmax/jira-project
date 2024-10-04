@@ -7,6 +7,7 @@ import { TicketProfileAttachment } from './ticket-profile-attachment';
 import { CurrentUserCompany } from 'src/class/current-user/current-user-company';
 import { TicketProfileUpdate } from './ticket-profile-update';
 import { TicketsPriority } from 'src/app/components/setting/ticket-settings-page/tickets-priority/class/tickets-priority';
+import { UserCustomerCompaniesInfo } from 'src/app/components/users/class/user-customer-companies-info';
 
 export class TicketProfile {
     agent: TicketProfileAgent = null;
@@ -58,6 +59,7 @@ export class TicketProfile {
     customStatus: string;
     isCompanyDeleted: boolean = false;
     deviceId: string;
+    selectedCustomerCompany: UserCustomerCompaniesInfo;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -90,6 +92,21 @@ export class TicketProfile {
             })
             this.priorityLevel = new TicketsPriority(data.priorityLevel);
         }
+    }
+    public setSelectedCustomerCompany(data) {
+        this.selectedCustomerCompany = data;
+    }
+    public setAssignedUser(data) {
+        this.assignedUser = data;
+    }
+    public setAssignedUserId(data) {
+        this.assignedUserId = data;
+    }
+    public setAssignedAt(data) {
+        this.assignedAt = data;
+    }
+    public setStatus(data) {
+        this.status = data;
     }
     public refreshAttachments(attachments) {
         this.attachments = [];

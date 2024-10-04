@@ -6,14 +6,14 @@ import { TicketSettingsPageRoutingModule } from './ticket-settings-page-routing.
 import { TicketSettingsComponent } from './ticket-settings/ticket-settings.component';
 import { TicketsStatusComponent } from './tickets-status/tickets-status.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
-import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.module';
+import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { Onlynumber } from 'src/app/helpers/Onlynumber';
 import { CannedResponsesComponent } from './canned-responses/canned-responses.component';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 import { TicketsPriorityComponent } from './tickets-priority/tickets-priority.component';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 
 @NgModule({
@@ -30,12 +30,12 @@ import { TicketsPriorityComponent } from './tickets-priority/tickets-priority.co
         NgbModule,
         FormsModule,
         ReactiveFormsModule,
-        MatFormFieldModule,
         DropDownModule,
-        ClickOtsideModule,
+        ClickOutsideModule,
         TicketSettingsPageRoutingModule,
         DynamicTooltipModule,
-        KeyUpEnterModule
+        KeyUpEnterModule,
+        MatErrorModule
     ],
 })
 export class TicketSettingsPageModule { }

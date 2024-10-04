@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TicketsDashboardService } from 'src/app/services/tickets-dashboard/tickets-dashboard.service';
 import { CompanySetting } from '../../../companies/class/company-setting';
 import { DashboardTicketsTime } from '../class/dashboard-tickets-time';

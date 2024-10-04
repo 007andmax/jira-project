@@ -6,9 +6,8 @@ import { AddMarketingSubscriptionTypeModule } from './marketing-subscription-typ
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MarketingEmailUsersComponent } from './marketing-email-users/marketing-email-users.component';
 import { MarketingSubscriptionTypeComponent } from './marketing-subscription-type/marketing-subscription-type.component';
-import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.module';
+import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { FormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MarketingEmailUsersAddComponent } from './marketing-email-users/marketing-email-users-add/marketing-email-users-add.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MarketingEmailUsersAddItemComponent } from './marketing-email-users/marketing-email-users-add-item/marketing-email-users-add-item.component';
@@ -17,6 +16,7 @@ import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-t
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 import { MarketingEmailUsersItemComponent } from './marketing-email-users/marketing-email-users-item/marketing-email-users-item.component';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 
 @NgModule({
@@ -32,14 +32,14 @@ import { MarketingEmailUsersItemComponent } from './marketing-email-users/market
         MarketingEmailRoutingModule,
         AddMarketingSubscriptionTypeModule,
         NgbModule,
-        ClickOtsideModule,
+        ClickOutsideModule,
         FormsModule,
-        MatFormFieldModule,
         InfiniteScrollModule,
         DisabledBtnModule,
         PreloaderTicketModule,
         DynamicTooltipModule,
-        KeyUpEnterModule
+        KeyUpEnterModule,
+        MatErrorModule
 
     ],
 })

@@ -1,9 +1,9 @@
-import { Component, OnInit, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { InvoiceTicketsService } from '../accounting-settings.service';
+import { InvoiceTicketsService } from '../../../../services/accounting/accounting-settings.service';
 import { ToastrService } from 'ngx-toastr';
 import { forkJoin, of } from 'rxjs';
-import { catchError, map, mergeMap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 
@@ -39,7 +39,8 @@ export class InvoiceSettingsComponent implements OnInit {
     private invoiceTicketsService: InvoiceTicketsService,
     private toaster: ToastrService,
     private elRef: ElementRef,
-    private appStateService: AppStateService
+    private appStateService: AppStateService,
+    public cd: ChangeDetectorRef,
   ) { }
 
   ngOnInit() {
@@ -270,7 +271,8 @@ export class InvoiceSettingsComponent implements OnInit {
       });
       this.invoiceTerm = this.invoiceTerms.find(item => item.type == res.term);
       this.elRef.nativeElement.querySelector('#memo-invoice').value = res.conditions;
-
+      //this.cd.detectChanges();
+      this.appStateService.changeDetectorRef();
     }
   }
 

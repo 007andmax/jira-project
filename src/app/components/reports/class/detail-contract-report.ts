@@ -75,7 +75,7 @@ export class DetailContractreport {
   * @returns {String} This is the result
  */
     public getDateInterval(date) {
-        return moment(new Date(date)).format('DD MMM YYYY');
+        return moment(new Date(date)).format('DD MMM YYYY hh:mm A');
     }
     /**
   * @description Set new value filed "companyId"
@@ -135,5 +135,13 @@ export class DetailContractreport {
         data.agreementId = this.selectedAgreement.id;
         if (this.intervalAgreement.length > 0) data.intervals = this.intervalAgreement;
         return data;
+    }
+
+    /**
+* @description Return object for request to get report
+* @returns {Object} This is the result
+*/
+    public getForExportRequest() {
+        return { "startDate": moment(this.selectedAgreement.startDate).format('YYYY-MM-DD'), "endDate": moment(this.selectedAgreement.endDate).format('YYYY-MM-DD') };
     }
 }

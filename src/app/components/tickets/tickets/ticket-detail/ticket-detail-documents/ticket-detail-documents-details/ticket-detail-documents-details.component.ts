@@ -24,7 +24,11 @@ export class TicketDetailDocumentsDetailsComponent implements OnInit {
     private elRef: ElementRef,) { }
 
   ngOnInit() {
+    this.initDefaultPasswordRecordList();
+  }
+  public initDefaultPasswordRecordList() {
     this.showPreloader = true;
+    this.documents = [];
     this.filter.setCompanyId(this.ticketProfile.company.id);
     this.documentsService.filterDocuments(this.filter.getDataForFilter()).subscribe((data: any) => {
       data.map(item => this.documents.push(new Document(item)));

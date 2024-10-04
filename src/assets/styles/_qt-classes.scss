@@ -41,7 +41,7 @@
     input {
       &:checked {
         & ~ span {
-          background-image: url(/assets/img/icons/selected.svg);
+          background-image: url(/assets/img/icons/status-green.svg);
           border: none;
         }
       }
@@ -145,7 +145,7 @@ input.qt-dropdown-input {
     font-size: 13px;
     line-height: 16px;
     font-weight: 500;
-    color: $gray-500;
+    color: $gray-900;
     margin-bottom: 8px;
 
     &.--without-offset {
@@ -162,7 +162,7 @@ input.qt-dropdown-input {
     text-transform: uppercase;
   }
 
-  mat-error {
+  mat-error,app-mat-error {
     &.qt-tooltip-error {
       position: absolute;
       color: #D92D20;
@@ -308,7 +308,7 @@ input.qt-dropdown-input {
   position: relative;
   height: 40px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 17px;
   border-radius: 6px;
   background-color: $blue-light-600;
@@ -388,6 +388,7 @@ input.qt-dropdown-input {
     border: solid 1px $gray-200;
     color: $gray-500;
     background-color: $white;
+    font-weight: 500;
 
     &:hover {
       color: $gray-600;
@@ -463,7 +464,7 @@ input.qt-dropdown-input {
       margin-left: -6px;
       margin-right: -6px;
     }
-    .icon__dropdown-arrow-up {
+    .icon__arrow-up {
       transform: rotate(180deg);
     }
   }
@@ -484,8 +485,8 @@ input.qt-dropdown-input {
   &[disabled],
   &.--disabled:hover,
   &[disabled]:hover {
-    background-color: $gray-300;
-    border-color: $gray-300;
+    background-color: $gray-300 !important;
+    border-color: $gray-300 !important;
     color: $white;
     cursor: default;
     box-shadow: unset;
@@ -526,25 +527,20 @@ button.qt-button.--gray:focus {
 }
 
 .qt-square-btn {
+  position: relative;
   width: 40px;
   height: 40px;
   border-radius: 4px;
-  background-color: $gray-500;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: $gray-500;
   color: $white;
   font-size: 21px;
   background-repeat: no-repeat;
   background-position: center;
   background-size: 16px;
   cursor: pointer;
-  &.--add {
-    background-image: url("/assets/img/icons/plus-white.svg");
-  }
-  &.--done {
-    background-image: url("/assets/img/icons/save-changes.svg");
-  }
 }
 
 .qt-switch {
@@ -655,6 +651,15 @@ button.qt-button.--gray:focus {
   li {
     @include dropdown-item;
   }
+  .qt-dropdown-menu__item-red {
+    color: $red-600;
+  }
+  .qt-dropdown-menu__top-line {
+    border-top: 1px solid $gray-200;
+    border-radius: 0 0 6px 6px;
+    margin-top: 0;
+    padding-top: 10px;
+  }
   &.dropdown-menu {
     max-height: initial;
   }
@@ -666,6 +671,9 @@ button.qt-button.--gray:focus {
 
 .qt-df {
   display: flex;
+}
+.qt-db {
+  display: block;
 }
 .qt-dif {
   display: inline-flex;
@@ -928,6 +936,9 @@ button.qt-button.--gray:focus {
 .qt-ml-0 {
   margin-left: 0;
 }
+.qt-ml-2 {
+  margin-left: 2px;
+}
 .qt-ml-4 {
   margin-left: 4px;
 }
@@ -979,6 +990,9 @@ button.qt-button.--gray:focus {
 
 .qt-mr-0 {
   margin-right: 0;
+}
+.qt-mr-2 {
+  margin-right: 2px;
 }
 .qt-mr-4 {
   margin-right: 4px;
@@ -1148,6 +1162,9 @@ button.qt-button.--gray:focus {
 .qt-fs-13 {
   font-size: 13px;
 }
+.qt-fs-14 {
+  font-size: 14px;
+}
 .qt-fs-15 {
   font-size: 15px;
 }
@@ -1218,6 +1235,10 @@ button.qt-button.--gray:focus {
   width: 24px;
   height: 24px;
 }
+.qt-sz-28 {
+  width: 28px;
+  height: 28px;
+}
 .qt-sz-32 {
   width: 32px;
   height: 32px;
@@ -1242,7 +1263,10 @@ button.qt-button.--gray:focus {
   width: 72px;
   height: 72px;
 }
-
+.qt-sz-80 {
+  width: 80px;
+  height: 80px;
+}
 .qt-h40 {
   height: 40px;
 }
@@ -1367,7 +1391,9 @@ button.qt-button.--gray:focus {
 .qt-lh-154 {
   line-height: 1.54;
 }
-
+.qt-lh-16 {
+  line-height: 1.6;
+}
 .qt-lh-163 {
   line-height: 1.63;
 }
@@ -1505,7 +1531,7 @@ button.qt-button.--gray:focus {
         width: 21px;
         background-color: transparent;
         padding: 0;
-        .icon__raw-clear {
+        .icon__inactive {
           border-radius: 50%;
           margin-left: 4px;
           cursor: pointer;
@@ -1536,7 +1562,7 @@ button.qt-button.--gray:focus {
         width: 18px;
         background-color: transparent;
         padding: 0;
-        .icon__raw-clear {
+        .icon__inactive {
           border-radius: 50%;
           margin-left: 4px;
           cursor: pointer;

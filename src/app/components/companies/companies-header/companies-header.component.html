@@ -12,11 +12,10 @@
                     type="text"
                     placeholder="Search company"
                     [(ngModel)]="searchText"
-                    (blur)="onBlurSearch($event)"
                     (keyup)="onKeyUp($event)"
                 >
                 <span
-                    class="search-clear icon__close-round"
+                    class="search-clear qt-icon icon__close-round qt-icon__gray-400"
                     *ngIf="searchText.length > 0"
                     (click)="clearSearch()"
                 ></span>
@@ -33,7 +32,7 @@
                         class="qt-df qt-mr-16"
                         (click)="showAsideForDraftEmail()"
                     >
-                        <div class="icon__email-blue qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"></div>
+                        <div class="qt-icon icon__email qt-icon__blue-light-600 qt-za-16 qt-sz-16 qt-mr-6"></div>
                         Write Draft
                     </div>
                     <div
@@ -41,7 +40,7 @@
                         *ngIf="getCountSelected() === 1"
                         (click)="archive()"
                     >
-                        <div class="icon__archive-blue qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"></div>
+                        <div class="qt-icon icon__delete qt-icon__red-600 qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"></div>
                         Archive Company
                     </div>
                 </div>
@@ -53,7 +52,7 @@
                         Selected
                     </div>
                     <div class="new-companies-selected-actions">
-                        <i class="icn-16 icon__email-blue"></i>
+                        <i class="icn-16 qt-icon icon__email qt-icon__blue-light-600"></i>
                     </div>
                 </div>
                 <button
@@ -82,7 +81,7 @@
                     tooltip-placement="top"
                     (click)="showAsideForDraftEmail()"
                 >
-                    <span class="icon__email qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+                    <span class="qt-icon icon__email qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
                     Send email
                 </button>
                 <button
@@ -181,41 +180,4 @@
             </div>
         </div>
     </div>
-</div>
-<div
-    class="list-filters"
-    *ngIf="isExistFilters()"
->
-    <mat-form-field>
-        <mat-chip-list aria-label="Fruit selection">
-            <mat-chip
-                *ngIf="filter.companyFilter.clientType"
-                (removed)="filter.typesDp.clearClient();refreshFilters()"
-            >
-                {{getClientType(filter.companyFilter.clientType)}}
-                <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
-            <mat-chip
-                *ngIf="filter.companyFilter.clientIndustry"
-                (removed)="filter.industriesDp.clearClient();refreshFilters()"
-            >
-                {{filter.companyFilter.clientIndustry.name}}
-                <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
-            <mat-chip
-                *ngIf="filter.companyFilter.techUser"
-                (removed)="filter.personsDp.clearClient();refreshFilters()"
-            >
-                {{getUserName(filter.companyFilter.techUser)}}
-                <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
-            <mat-chip
-                *ngFor="let tag of filter.companyFilter.tags; let i = index"
-                (removed)="filter.tagsDp.remove(i);refreshFilters()"
-            >
-                {{tag.word}}
-                <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
-        </mat-chip-list>
-    </mat-form-field>
 </div>

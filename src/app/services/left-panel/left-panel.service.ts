@@ -40,6 +40,12 @@ export class LeftPanelService {
   isMarketingPage(state) {
     return (state === 'marketing')
   }
+  isFilePage(state) {
+    return (state === 'file-manager'
+      || state === 'file-manager-category'
+      || state === 'file-manager-all-customer'
+    )
+  }
   public isCompanyPage(state) {
     return (state == 'new-companies'
       || state == 'company-dashboard'
@@ -54,11 +60,12 @@ export class LeftPanelService {
       || state == 'company-documents'
       || state == 'new-edit-documents-company'
       || state == 'new-add-documents-company'
-      || state == 'company-devices-beta')
+      || state == 'company-devices-beta'
+      || state == 'company-file-manager')
   }
   isBillingState(state) {
     return (state === 'billing-dashboard'
-      || state === 'new-services'
+      || state === 'non-contract-services'
       || state === 'new-billable'
       || state === 'new-billable-tickets'
       || state === 'new-billable-invoices'

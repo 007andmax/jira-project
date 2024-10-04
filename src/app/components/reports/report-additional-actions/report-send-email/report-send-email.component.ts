@@ -1,17 +1,8 @@
-import { Component, OnInit, ElementRef, ChangeDetectorRef, Input, OnDestroy } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DraftEmail } from '../../../shared/draft-email/class/draft-email';
 import { FilesInfo } from '../../../shared/draft-email/class/files-Info';
-import { User } from '../../../users/class/user';
-import { Company } from 'src/app/interfaces/company/company';
-import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
-import { DraftEmailService } from 'src/app/services/draft-email/draft-email.service';
-import { FilesInfoItem } from '../../../shared/draft-email/class/files-Info-item';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ReportsService } from 'src/app/services/reports/reports.service';
 import { ReportEmail } from '../../class/report-email';
-import { ReportsStateService } from 'src/app/states/reports/reports-state.service';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 import { DraftEmailComponent } from 'src/app/components/shared/draft-email/draft-email.component';
 import { ReportSendEmailValidate } from './class/report-send-email-validate';
 import { TYPE_REPORT_INVOICE, TYPE_REPORT_PAYMENT, TYPE_REPORT_PRODUCTS } from 'src/app/const/reports';
@@ -31,38 +22,37 @@ export class ReportSendEmailComponent extends DraftEmailComponent {
   @Input() orientation;
   @Input() selectedClient = null;
   @Input() accountType = 'CLIENT';
-
+  sub: Subscription = new Subscription();
 
   ngOnInit() {
-    this.draftEmailStateService.showAsideSendReport.subscribe((data) => {
+    let showAsideSendReport = this.draftEmailStateService.showAsideSendReport.subscribe((data) => {
       this.usersSelected = this.draftEmailStateService.getSelectedUsers();
       this.companiesSelected = this.draftEmailStateService.getSelectedCompanies();
       this.action = this.draftEmailStateService.getAction();
-
       this.selectedClient = data.selectedClient;
       this.orientation = data.orientation;
       this.report = data.report;
       this.template = data.template;
       this.fileName = data.fileName;
       this.accountType = data.accountType;
-
-
       this.opened = true;
       this.draftReport = new ReportEmail();
       this.type = TYPE_REPORT_PRODUCTS;
     })
-    this.draftEmailStateService.showAsideSendReportInvoice.subscribe(data => {
+    this.sub.add(showAsideSendReport);
+    let showAsideSendReportInvoice = this.draftEmailStateService.showAsideSendReportInvoice.subscribe(data => {
       this.opened = true;
       this.draftReport = new ReportEmail();
       this.type = TYPE_REPORT_INVOICE;
     })
-    this.draftEmailStateService.showAsideSendReportPayment.subscribe(data => {
+    this.sub.add(showAsideSendReportInvoice);
+    let showAsideSendReportPayment = this.draftEmailStateService.showAsideSendReportPayment.subscribe(data => {
       this.opened = true;
       this.draftReport = new ReportEmail();
       this.type = TYPE_REPORT_PAYMENT;
     })
+    this.sub.add(showAsideSendReportPayment);
   }
-
   onChangeCompanyEmails(data) {
     this.draftReport.setEmails(data);
     this.validateReport.resetEmail();
@@ -70,7 +60,6 @@ export class ReportSendEmailComponent extends DraftEmailComponent {
 
   onSend() {
     if (!this.validateReport.isValidate(this.draftReport)) return;
-
     this.addBtn.setDisabled(true);
     if (this.type == TYPE_REPORT_PRODUCTS) this.productsReport();
     if (this.type == TYPE_REPORT_INVOICE) this.invoiceReport();
@@ -133,15 +122,8 @@ export class ReportSendEmailComponent extends DraftEmailComponent {
     }
   }
   close() {
-    if (this.draftEmail.attachments.length > 0) {
-      forkJoin(
-        this.draftEmail.attachments.map(item => this.draftEmailService.removeAttachment(item))
-      ).subscribe(result => {
-
-      });
-    }
     this.opened = false;
-    this.draftEmail = new DraftEmail();
+    this.draftReport = new ReportEmail();
     this.tab = 'plain';
     this.messageContent = '';
     this.messageHTML = '';
@@ -153,6 +135,7 @@ export class ReportSendEmailComponent extends DraftEmailComponent {
   }
   ngOnDestroy(): void {
     this.validateReport = new ReportSendEmailValidate();
+    this.sub.unsubscribe();
   }
   trackByIndex(index, item) {
     return index;

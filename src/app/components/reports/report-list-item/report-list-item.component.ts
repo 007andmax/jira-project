@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
-import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 
 @Component({
   selector: 'app-report-list-item',

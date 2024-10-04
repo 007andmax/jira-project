@@ -2,11 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild, OnDestroy, C
 import { merge, Observable, Subject, Subscription } from "rxjs";
 import { debounceTime, distinctUntilChanged, filter, map } from "rxjs/operators";
 import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
-import { FormGroup } from "@angular/forms";
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { DevicesRecurringTicketsStateService } from './services/devices-recurring-tickets-state.service';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
-import { Device } from 'src/app/components/company-devices/class/device';
 
 
 @Component({
@@ -82,7 +80,7 @@ export class DevicesRecurringTicketsComponent implements OnInit, OnDestroy {
     this.selectedDevice = null;
     this.devicesService.getCompanyDevices(this.companyId).subscribe((data: any) => {
       this.preloader = false;
-      this.devicesList = (data[this.companyId]) ? JSON.parse(JSON.stringify(data[this.companyId])).map((item) => {
+      this.devicesList = (data[this.companyId]) ? JSON.parse(JSON.stringify(data[this.companyId])).filter(item => !item.isCustom).map((item) => {
         item.name = item.hostName;
         return item;
       }) : null;

@@ -8,11 +8,6 @@ import {
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularEditorModule } from '@kolkov/angular-editor';
-import { MatSelectModule } from '@angular/material/select';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatIconModule } from '@angular/material/icon';
-import { MatRow } from '@angular/material/table';
 import { AppComponent } from './app.component';
 import { MainComponent } from './components/main/main.component';
 import { ModalQuoteComponent } from './services/modal/modal-quote/modal-quote.component';
@@ -65,8 +60,8 @@ import { InventoryEditAsideModule } from './components/inventory/inventory-edit-
 import { InvoicesAsideModule } from './components/billing/invoices/invoices-aside/invoices-aside.module';
 import { MapModalModule } from './components/shared/map-modal/map-modal.module';
 import { InvoicesAsidePreviewModule } from './components/billing/invoices/invoices-aside-preview/invoices-aside-preview.module';
-import { DefaultServicesAddModule } from './components/billing/default-services/default-services-add/default-services-add.module';
-import { DefaultServicesEditModule } from './components/billing/default-services/default-services-edit/default-services-edit.module';
+import { NonContractServicesAddModule } from './components/billing/non-contract-services/non-contract-services-add/non-contract-services-add.module';
+import { NonContractServicesEditModule } from './components/billing/non-contract-services/non-contract-services-edit/non-contract-services-edit.module';
 import { HeaderModule } from './components/header/header.module';
 import { BreadcrumbsModule } from './components/shared/breadcrumbs/breadcrumbs.module';
 import { PermissionAccountingSettingsService } from './components/setting/accounting/permission-accounting-settings.service';
@@ -84,7 +79,6 @@ import { ModalEditCategoryProductComponent } from './services/modal/modal-edit-c
 import { UsersAsideDetailModule } from './components/users/users-aside-detail/users-aside-detail.module';
 import { TextAreaModule } from './directives/text-area/text-area.module';
 import { AddMarketingSubscriptionTypeModule } from './components/setting/marketing-email/marketing-subscription-type/add-marketing-subscription-type/add-marketing-subscription-type.module';
-import { AddUserToSubscribeModule } from './components/users/add-user-to-subscribe/add-user-to-subscribe.module';
 import { PermissionInvoicesService } from './components/billing/invoices/permission-invoices.service';
 import { PermissionBillableService } from './components/billing/billable/permission-billable.service';
 import { PreviewAttachmentModule } from './components/tickets/tickets/ticket-edit-aside/preview-attachment/preview-attachment.module';
@@ -99,7 +93,6 @@ import { PermissionTechUserService } from './services/users/permission-tech-user
 import { PermissionSuperAdminService } from './services/users/permission-super-admin.service';
 import { HelpCenterInfoAsideComponent } from './components/super-admin-public/help-center-info-aside/help-center-info-aside.component';
 import { InventoryCheckUseComponent } from './components/inventory/inventory-check-use/inventory-check-use.component';
-import { AddUserToSubscribeComponent } from './components/users/add-user-to-subscribe/add-user-to-subscribe.component';
 import { SupportPageAddCategoryModule } from './components/super-admin/shared/support-page-add-category/support-page-add-category.module';
 import { LeftPanelSuperAdminModule } from './components/super-admin/left-panel-super-admin/left-panel-super-admin.module';
 import { SupportPageAddSubCategoryModule } from './components/super-admin/shared/support-page-add-sub-category/support-page-add-sub-category.module';
@@ -129,6 +122,36 @@ import { ContractsStatisticsTableItemComponent } from './components/billing/cont
 import { SuperAdminCompaniesComponent } from './components/super-admin/super-admin-companies/super-admin-companies.component';
 import { SuperAdminCompaniesHeaderComponent } from './components/super-admin/super-admin-companies/super-admin-companies-header/super-admin-companies-header.component';
 import { SuperAdminCompaniesItemComponent } from './components/super-admin/super-admin-companies/super-admin-companies-item/super-admin-companies-item.component';
+import { AddUserToCompanyModule } from './components/users/add-user-to-company/add-user-to-company.module';
+import { UserFilterSaveModule } from './components/users/user-filter-save/user-filter-save.module';
+import { TicketsHeaderModule } from './components/tickets/tickets/tickets-header/tickets-header.module';
+import { TicketsFilterSaveModule } from './components/tickets/tickets/tickets-header/tickets-filter-save/tickets-filter-save.module';
+import { DeviceTagPipe } from './pipe/device-tag.pipe';
+import { MarketingSubscriptionsAsideModule } from './components/marketing/marketing-subscriptions-aside/marketing-subscriptions-aside.module';
+import { ManufacturesCheckUseComponent } from './components/setting/device-setting/manufactures-check-use/manufactures-check-use.component';
+import { UserDeArchiveNotificationComponent } from './components/users/user-de-archive-notification/user-de-archive-notification.component';
+import { SuperAdminKnowledgeBaseComponent } from './components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base.component';
+import { SuperAdminKnowledgeBaseTableComponent } from './components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base-table/super-admin-knowledge-base-table.component';
+import { SuperAdminKnowledgeBaseTableItemComponent } from './components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base-table/super-admin-knowledge-base-table-item/super-admin-knowledge-base-table-item.component';
+import { SuperAdminKnowledgeBaseService } from './components/super-admin/services/super-admin-knowledge-base/super-admin-knowledge-base.service';
+import { SuperAdminPublicListComponent } from './components/super-admin-public/super-admin-public-list/super-admin-public-list.component';
+import { SuperAdminPublicListModule } from './components/super-admin-public/super-admin-public-list/super-admin-public-list.module';
+import { ProductTypeCheckUseComponent } from './components/setting/products-settings/product-type-check-use/product-type-check-use.component';
+import { ProductTypeCheckUseModule } from './components/setting/products-settings/product-type-check-use/product-type-check-use.module';
+import { MatChipComponent } from './components/shared/mat-chip/mat-chip.component';
+import { MatChipTagComponent } from './components/shared/mat-chip-tag/mat-chip-tag.component';
+import { MatFormFieldComponent } from './components/shared/mat-form-field/mat-form-field.component';
+import { MatChipListComponent } from './components/shared/mat-chip-list/mat-chip-list.component';
+import { MatErrorComponent } from './components/shared/mat-error/mat-error.component';
+import { MatOptionComponent } from './components/shared/mat-option/mat-option.component';
+import { MatErrorModule } from './components/shared/mat-error/mat-error.module';
+import { MatChipListModule } from './components/shared/mat-chip-list/mat-chip-list.module';
+import { MatChipModule } from './components/shared/mat-chip/mat-chip.module';
+import { FileManagerComponent } from './components/file-manager/file-manager.component';
+import { FileManagementAddFileModule } from './components/file-manager/file-manager-add-file/file-manager-add-file.module';
+import { PreviewFileComponent } from './components/shared/preview-file/preview-file.component';
+import { UsersDropDownComponent } from './components/shared/users-drop-down/users-drop-down.component';
+import { MultiCompanyDropDownComponent } from './components/shared/multi-company-drop-down/multi-company-drop-down.component';
 declare var $: any;
 /**
  * This module represents the main application module
@@ -156,7 +179,9 @@ declare var $: any;
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
     CannedResponsesAsideComponent,
-    TicketsFilterSaveComponent,
+    ManufacturesCheckUseComponent,
+    UserDeArchiveNotificationComponent,
+    PreviewFileComponent
   ],
   imports: [
     BrowserModule,
@@ -165,11 +190,6 @@ declare var $: any;
     UpgradeModule,
     HttpClientModule,
     FormsModule,
-    MatSelectModule,
-    MatChipsModule,
-    MatIconModule,
-    MatAutocompleteModule,
-    BrowserAnimationsModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     AppRoutingModule,
     ToastrModule.forRoot({
@@ -177,7 +197,6 @@ declare var $: any;
       timeOut: 5000,
       onActivateTick: true
     }),
-    BrowserAnimationsModule,
     AngularEditorModule,
     LeftPanelModule,
     CompanyAddAsideModule,
@@ -192,14 +211,13 @@ declare var $: any;
     InvoicesAsideModule,
     MapModalModule,
     InvoicesAsidePreviewModule,
-    DefaultServicesAddModule,
-    DefaultServicesEditModule,
+    NonContractServicesAddModule,
+    NonContractServicesEditModule,
     HeaderModule,
     BreadcrumbsModule,
     UsersAsideDetailModule,
     TextAreaModule,
     AddMarketingSubscriptionTypeModule,
-    AddUserToSubscribeModule,
     PreviewAttachmentModule,
     SupportPageAddCategoryModule,
     LeftPanelSuperAdminModule,
@@ -208,7 +226,17 @@ declare var $: any;
     GoogleAuthenticatorModule,
     SupportPageEditCategoryModule,
     ModalQuoteModule,
-    LeftPanelCustomerPortalModule
+    LeftPanelCustomerPortalModule,
+    AddUserToCompanyModule,
+    UserFilterSaveModule,
+    TicketsFilterSaveModule,
+    MarketingSubscriptionsAsideModule,
+    SuperAdminPublicListModule,
+    ProductTypeCheckUseModule,
+    MatErrorModule,
+    MatChipListModule,
+    MatChipModule,
+    FileManagementAddFileModule
   ],
   entryComponents: [
     ConfirmComponent,
@@ -223,12 +251,12 @@ declare var $: any;
     ModalAgentLinkComponent,
     ModalAddUsersNotifyComponent,
     ModalEditCategoryProductComponent,
-    AddUserToSubscribeComponent,
     InventoryCheckUseComponent,
+    UserDeArchiveNotificationComponent,
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
     UsersCheckUseComponent,
-    TicketsFilterSaveComponent
+    ManufacturesCheckUseComponent
   ],
   providers: [
     {
@@ -262,7 +290,8 @@ declare var $: any;
     PermissionCompanyDevicesService,
     PermissionNoSuperAdminService,
     PermissionClientUserService,
-    PermissionMyProfileService
+    PermissionMyProfileService,
+    SuperAdminKnowledgeBaseService
   ],
   bootstrap: [AppComponent]
 })

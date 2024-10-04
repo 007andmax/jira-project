@@ -14,10 +14,8 @@ import { REMOVE_TICKET_INVOICE } from 'src/app/const/confirm';
 import { environment } from 'src/environments/environment';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { InvoiceRealTimeService } from 'src/app/states/invoice/invoice-real-time.service';
-import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { InvoiceFormComponent } from './invoice-form/invoice-form.component';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
-import { InvoicesService } from 'src/app/services/invoices/invoices.service';
 import { AppService } from 'src/app/states/app/app.service';
 
 @Component({
@@ -54,7 +52,6 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private invoiceRealTimeService: InvoiceRealTimeService,
     private leftPanelStateService: LeftPanelStateService,
-    private invoicesService: InvoicesService,
     private _ngZone: NgZone,
     private billableService: BillableService) { }
 

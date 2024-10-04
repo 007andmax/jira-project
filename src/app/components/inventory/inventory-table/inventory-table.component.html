@@ -1,9 +1,19 @@
-<tr>
-    <td class="products-table__product-name pre-line">
+<div class="qt-table-modern__row qt-table-modern__row--height-auto">
+    <div class="companies-table__check">
+        <label class="qt-checkbox pointer">
+            <input
+                type="checkbox"
+                [(ngModel)]="inventory.selected"
+                (change)="selectIventory($event)"
+            >
+            <span></span>
+        </label>
+    </div>
+    <div class="products-table__product-name pre-line">
         <!-- <pre [textContent]="inventory.description"></pre> -->
         <textarea
             appTextArea
-            [limit]="160"
+            [height]="'144px'"
             class="inventory-description-textarea"
             placeholder="Write Product Description"
             (input)="onChangeDescription($event)"
@@ -18,8 +28,8 @@
             (keydown)="onEnterDescription($event)"
             (blur)="onBlurDescription($event)"
         ></div> -->
-    </td>
-    <td class="products-table__category">
+    </div>
+    <div class="products-table__category">
         <!-- <div [textContent]="inventory.category.name"></div> -->
         <app-drop-down
             #categoriesSelect
@@ -38,8 +48,8 @@
             (onSelectedItem)="onSelectCategory($event)"
         >
         </app-drop-down>
-    </td>
-    <td class="products-table__cost">
+    </div>
+    <div class="products-table__cost">
         <div
             *ngIf="!getPermissions('VIEW_PRODUCT_COST')"
             [textContent]="'$' + parseTotal(inventory.cost || 0)"
@@ -59,15 +69,15 @@
                 (keyup)="onEnterCost($event)"
                 placeholder="Enter Cost"
             >
-            <mat-error
+            <app-mat-error
                 class="qt-tooltip-error"
                 *ngIf="!validate.getCostSale()"
             >
                 Cost cannot be higher than Price
-            </mat-error>
+            </app-mat-error>
         </div>
-    </td>
-    <td class="products-table__cost">
+    </div>
+    <div class="products-table__cost">
         <div class="products-table__cost-container">
             <input
                 type="text"
@@ -79,8 +89,8 @@
                 placeholder="Enter Markup"
             >
         </div>
-    </td>
-    <td class="products-table__sale-price">
+    </div>
+    <div class="products-table__sale-price">
         <!-- <div [textContent]="'$' + parseTotal(inventory.sale || 0)"></div> -->
         <div class="products-table__sale-price-container">
             <input
@@ -96,22 +106,22 @@
                 (keyup)="onEnterSale($event)"
                 placeholder="Enter Price"
             >
-            <mat-error
+            <app-mat-error
                 class="qt-tooltip-error"
                 *ngIf="!validate.getSale()"
             >
                 Price is required
-            </mat-error>
+            </app-mat-error>
         </div>
-    </td>
-    <td class="products-table__mfg">
+    </div>
+    <div class="products-table__mfg">
         <div class="products-table__mfg-container">
-            <mat-error
+            <app-mat-error
                 class="qt-tooltip-error"
                 *ngIf="!validate.getManufactureIsExist()"
             >
                 This number is already occupied
-            </mat-error>
+            </app-mat-error>
             <input
                 type="text"
                 [ngClass]="{'--input-error' : !validate.getManufactureIsExist()}"
@@ -122,8 +132,8 @@
             >
         </div>
         <!-- <div [textContent]="inventory.manufacture"></div> -->
-    </td>
-    <td class="products-table__tac">
+    </div>
+    <div class="products-table__tac">
         <app-taxes
             [isLabel]="false"
             [isAdd]="false"
@@ -131,15 +141,15 @@
             [selectedTax]="getSelectedTaxes()"
             (taxesChange)="onTaxesChange($event)"
         ></app-taxes>
-    </td>
-    <td class="products-table__ilc">
+    </div>
+    <div class="products-table__ilc">
         <div class="products-table__ilc-container">
-            <mat-error
+            <app-mat-error
                 class="qt-tooltip-error"
                 *ngIf="!validate.getILCIsExist()"
             >
                 This number is already occupied
-            </mat-error>
+            </app-mat-error>
             <input
                 type="text"
                 [ngClass]="{'--input-error' : !validate.getILCIsExist()}"
@@ -149,8 +159,8 @@
                 placeholder="Enter ILC Number"
             >
         </div>
-    </td>
-    <td class="products-table__gl">
+    </div>
+    <div class="products-table__gl">
         <!-- <div [textContent]="getGlNumberName()"></div> -->
         <app-drop-down
             #glNumberSelect
@@ -170,8 +180,25 @@
             (onSelectedItem)="onSelectGlNumbers($event)"
         >
         </app-drop-down>
-    </td>
-    <td class="products-table__menu">
+    </div>
+    <div class="products-table__product-type">
+        <!-- <div [textContent]="getGlNumberName()"></div> -->
+        <app-drop-down
+            #glNumberSelect
+            [class]="['--small-padding']"
+            [list]="listTypes"
+            [placeholder]="'Select Product Type'"
+            [container]="'body'"
+            [editItem]="inventory.productType"
+            [field]="'title'"
+            uiType="dark"
+            heightInput="32px"
+            dropdownWidth="392px"
+            (onSelectedItem)="onSelectProuctType($event)"
+        >
+        </app-drop-down>
+    </div>
+    <div class="products-table__menu">
         <div
             *ngIf="getPermissions('MANAGE_PRODUCTS')"
             [container]="'body'"
@@ -179,7 +206,7 @@
             ngbDropdown
         >
             <div
-                class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
+                class="qt-ic-c qt-icon icon__more  qt-pointer qt-sz-16 qt-bg-contain"
                 id="dropdownBasic1"
                 ngbDropdownToggle
             ></div>
@@ -193,7 +220,7 @@
                     ngbDropdownItem
                     (click)="edit()"
                 >
-                    <div class="icon__edit qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                    <div class="qt-icon icon__edit qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Edit
                 </li>
                 <li
@@ -202,7 +229,7 @@
                     (click)="setActive(false)"
                     *ngIf="inventory.active"
                 >
-                    Mark inactive
+                    Mark as inactive
                 </li>
                 <li
                     class="pointer"
@@ -210,17 +237,17 @@
                     (click)="setActive(true)"
                     *ngIf="!inventory.active"
                 >
-                    Mark active
+                    Mark as active
                 </li>
                 <li
                     class="pointer"
                     ngbDropdownItem
                     (click)="delete()"
                 >
-                    <div class="icon__archive qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                    <div class="qt-icon icon__delete qt-icon__red-600 qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Delete
                 </li>
             </ul>
         </div>
-    </td>
-</tr>
+    </div>
+</div>

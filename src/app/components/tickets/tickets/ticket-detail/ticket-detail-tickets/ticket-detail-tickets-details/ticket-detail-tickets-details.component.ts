@@ -4,7 +4,6 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { Ticket } from '../../../../class/ticket';
 import { TicketProfile } from '../../../class/ticket-profile';
 import * as moment from "moment";
-import { Company } from 'src/app/interfaces/company/company';
 import { TicketsListService } from '../../../services/tickets-list.service';
 import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -34,10 +33,12 @@ export class TicketDetailTicketsDetailsComponent implements OnInit {
     private companiesStateService: CompaniesStateService,
     private ticketsListService: TicketsListService,) { }
   ngOnInit(): void {
+    this.initDefaultTicketsList();
+  }
+  public initDefaultTicketsList() {
     this.container = this.elRef.nativeElement.querySelector(".ticket-detail-tickets__body");
     this.onScroll();
   }
-
   public setDefaultScoll() {
     this.page_number = 0;
     this.ticketsListService.setBlockList(false);

@@ -1,9 +1,9 @@
 import { Tax } from 'src/app/interfaces/service/tax';
 import { VersionedId } from 'src/app/interfaces/versioned-id';
-import { DefaultServices } from '../../../default-services/class/default-service';
+import { NonContractServices } from '../../../non-contract-services/class/non-contract-service';
 import { ContractsHourlyService } from './contracts-hourly-service';
 
-export class DefaultServicesHourlyContract extends DefaultServices {
+export class DefaultServicesHourlyContract extends NonContractServices {
     selected: boolean = false;
     isCopy: boolean = false;
     rate_str: string;

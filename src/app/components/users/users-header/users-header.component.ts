@@ -1,28 +1,24 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { USERS } from 'src/app/const/emails';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 import { UsersHeaderService } from './services/users-header.service';
 import { User } from '../class/user';
-
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ARCHIVE_USER, ARCHIVE_USERS, MULTI_DELETE_USER_FROM_SUBSCRIPTION } from 'src/app/const/confirm';
+import { ARCHIVE_USERS, MULTI_DELETE_USER_FROM_SUBSCRIPTION } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
-import { UsersService } from 'src/app/services/users/users.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CurrentUser } from 'src/class/current-user/current-user';
-import { TicketsFilterComponent } from '../../tickets/tickets/tickets-header/tickets-filter/tickets-filter.component';
-import { UsersFilterComponent } from './users-filter/users-filter.component';
 import { TYPE_LIST_ALL_USERS, TYPE_LIST_COMPANY_USERS, TYPE_LIST_MARKETING_USERS } from 'src/app/const/users';
-import { UserCustomSubscription } from '../class/user-custom-subscription';
-import { AddUserToSubscribeComponent } from '../add-user-to-subscribe/add-user-to-subscribe.component';
 import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
 import { forkJoin, of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { UserFilter } from '../class/user-filter';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { AppService } from 'src/app/states/app/app.service';
+import { AddUserToCompanyComponent } from '../add-user-to-company/add-user-to-company.component';
+import { UserFilters } from '../class/user-filters';
+import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
 
 
 @Component({
@@ -36,16 +32,13 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   @Output() onChangeFilterField = new EventEmitter<any>();
   @Output() onSelectAllUser = new EventEmitter<any>();
   @Output() onSearch = new EventEmitter<any>();
-  @Input() set users(value: Array<User>) {
-    this._users = value;
-  }
-  reqUsers: Array<User> = [];
+  @Input() users: Array<User> = [];
+  @Output() onToggleFilter = new EventEmitter<any>();
+  searchText: string = "";
   @Input() selectAll: boolean = false;
-  _users: Array<User> = [];
   @Input() count: number = 0;
   @Input() type: string;
-  @ViewChild('filter', { static: true }) filter: UsersFilterComponent;
-  userFilter: UserFilter = new UserFilter();
+  userFilter: UserFilters = new UserFilters();
   sub: Subscription = new Subscription();
   countFilter: number = 0;
   toggleFilter: boolean = false;
@@ -53,7 +46,6 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   TYPE_LIST_MARKETING_USERS = TYPE_LIST_MARKETING_USERS;
   TYPE_LIST_ALL_USERS = TYPE_LIST_ALL_USERS;
   TYPE_LIST_COMPANY_USERS = TYPE_LIST_COMPANY_USERS;
-  searchText: string = "";
   constructor(private usersStateService: UsersStateService,
     private draftEmailStateService: DraftEmailStateService,
     private confirmStateService: ConfirmStateService,
@@ -62,12 +54,15 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     private marketingEmailService: MarketingEmailService,
     private permissionsService: PermissionsService,
     private ref: ChangeDetectorRef,
+    private companiesStateService: CompaniesStateService,
+    private marketingEmailStateService: MarketingEmailStateService,
     private usersHeaderService: UsersHeaderService) {
   }
 
   ngOnInit() {
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
-      this.userFilter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions, data.tags);
+      this.userFilter.setData(data);
+      this.onChangeCountFilter();
     })
     this.sub.add(geLefttFilter);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
@@ -78,31 +73,36 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+    let onToggleFilter = this.usersStateService.onToggleFilter.subscribe(data => {
+      this.setToggleFilter(data);
+    })
+    this.sub.add(onToggleFilter);
     this.currentUser = this.usersStateService.getCurrentUser();
     this.ref.markForCheck();
   }
-  onBlurSearch(event) {
-    this.onSearch.emit(event.target.value);
+  public setUsers(data) {
+    this.users = data;
+    this.ref.markForCheck();
   }
   onKeyUp(event) {
     if (event.keyCode === 13) this.onSearch.emit(event.target.value);
   }
-  clearSearch() {
+  clearSearch(withEvent = true) {
     this.searchText = "";
-    this.onSearch.emit("");
+    if (withEvent) this.onSearch.emit("");
   }
-  public setReqUsers(data) {
-    this.reqUsers = data;
-    this.ref.markForCheck();
+  public setToggleFilter(data) {
+    this.toggleFilter = data;
+    this.onToggleFilter.emit(data);
   }
   public showAsideForDraftEmail() {
     this.draftEmailStateService.setAction(USERS);
     this.draftEmailStateService.resetSelectedUsers();
     if (this.userFilter.customSubscriptions.length === 1 && this.type === TYPE_LIST_MARKETING_USERS) {
-      let users = this.reqUsers.filter(item => item.selected).filter(item => item.customSubscriptions.find(subscription => subscription.id === this.userFilter.customSubscriptions[0].id && subscription.activated));
+      let users = this.users.filter(item => item.selected).filter(item => item.customSubscriptions.find(subscription => subscription.id === this.userFilter.customSubscriptions[0] && subscription.activated));
       this.draftEmailStateService.setSelectedUser(users);
     } else {
-      this.draftEmailStateService.setSelectedUser(this.reqUsers.filter(item => item.selected));
+      this.draftEmailStateService.setSelectedUser(this.users.filter(item => item.selected));
     }
     this.draftEmailStateService.toggleAsideForAdd();
     this.ref.markForCheck();
@@ -112,47 +112,44 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     this.confirmStateService.setConfirmAction(ARCHIVE_USERS);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
 
-    if (this._users.filter(item => item.selected).length === 1) {
-      let user = this._users.filter(item => item.selected)[0];
+    if (this.users.filter(item => item.selected).length === 1) {
+      let user = this.users.filter(item => item.selected)[0];
       modalRef.componentInstance.message = `Do you want to archive ${user.firstName + ' ' + user.lastName}`;
     } else {
       modalRef.componentInstance.message = `Do you want to archive users?`;
     }
-    this.usersStateService.setUsersForArchive(this._users.filter(item => item.selected));
+    this.usersStateService.setUsersForArchive(this.users.filter(item => item.selected));
     this.ref.markForCheck();
   }
 
   isExistArchiveUser() {
-    return this._users.filter(item => item.selected).find(item => item.deletedAt != null);
+    return this.users.filter(item => item.selected).find(item => item.deletedAt != null);
   }
   isExistPrimaryContact() {
-    return this._users.filter(item => item.selected).find(item => item.isContact);
+    return this.users.filter(item => item.selected).find(item => item.isContact);
   }
   showAddToSubscription() {
-    const modalRef = this.modalService.open(AddUserToSubscribeComponent, { windowClass: 'xs-modal modal-dialog__save-to-subscription', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.users = this.reqUsers.filter(item => item.selected);
+    this.marketingEmailStateService.onOpenAsige(this.users.filter(item => item.selected));
     this.ref.markForCheck();
   }
-  toggleAllUser(data) {
-    this.selectAll = true;
-    this.onSelectAllUser.emit(data);
-    this.ref.detectChanges();
-  }
+
   getSelectedCount() {
-    return this.reqUsers.filter(item => item.selected).length;
+    return this.users.filter(item => item.selected).length;
   }
   public onFilter(field) {
     this.onChangeFilterField.emit(field);
     this.ref.detectChanges();
   }
-  clearAll() {
-    this.filter.onClearAll();
-  }
   addUser() {
-    this.usersStateService.onOpenAsige();
+    if (this.type == TYPE_LIST_COMPANY_USERS) {
+      const modalRef = this.modalService.open(AddUserToCompanyComponent, { windowClass: 'xs-modal user-modal add-user-to-company', backdrop: 'static', keyboard: false });
+      modalRef.componentInstance.company = this.companiesStateService.getCompanies().find(item => item.id == this.userFilter.companies[0]);
+    } else {
+      this.usersStateService.onOpenAsige();
+    }
   }
   isUserOneCustomSubscription() {
-    return this.filter.filter.customSubscriptions.length === 1;
+    return this.userFilter.customSubscriptions.length === 1;
   }
   removeUsersFromSubscription() {
     this.confirmStateService.setConfirmAction(MULTI_DELETE_USER_FROM_SUBSCRIPTION);
@@ -161,22 +158,26 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     this.ref.markForCheck();
   }
   onRemoveUsersFromSubscription() {
-    let users = this.reqUsers.filter(item => item.selected);
-    forkJoin(users.map(item => this.marketingEmailService.removeUser(item.id, this.filter.filter.customSubscriptions[0].id).pipe(map((res) => res),
+    let users = this.users.filter(item => item.selected);
+    forkJoin(users.map(item => this.marketingEmailService.removeUser(item.id, this.userFilter.customSubscriptions[0]).pipe(map((res) => res),
       catchError(error => of(undefined)))))
       .subscribe(
         () => {
-          /* this.selectAll = false;
-           this._users.forEach(item => item.selected = false);
-           this.reqUsers.forEach(item => item.selected = false);*/
         },
         error => {
         }
       );
   }
-  onChangeCountFilter(data) {
-    this.countFilter = data;
-    this.ref.markForCheck();
+  onChangeCountFilter() {
+    this.countFilter = 0;
+    if (this.userFilter.jobTitles.length > 0) this.countFilter++;
+    if (this.userFilter.companies.length > 0) this.countFilter++;
+    if (this.userFilter.ticketSubscription) this.countFilter++;
+    if (this.userFilter.invoiceSubscription) this.countFilter++;
+    if (this.userFilter.ticketManagerSubscription) this.countFilter++;
+    if (this.userFilter.tags.length > 0) this.countFilter++;
+    if (this.userFilter.customSubscriptions.length > 0) this.countFilter++;
+    if (this.userFilter.hasAccess) this.countFilter++;
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

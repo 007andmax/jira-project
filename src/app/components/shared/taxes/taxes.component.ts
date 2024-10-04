@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, Input, ChangeDetectorRef } from '@angular/core';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
-import { ENTER, COMMA } from '@angular/cdk/keycodes';
-import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Tax } from 'src/app/interfaces/service/tax';
 import { Subscription } from 'rxjs';
 import { TaxesService } from 'src/app/services/taxes/taxes.service';

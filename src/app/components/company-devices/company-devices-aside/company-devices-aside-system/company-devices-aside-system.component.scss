@@ -1,5 +1,32 @@
+@import './src/assets/styles/variable';
+
 .edit-field:hover {
  .device-name-edit-marker {
           display: flex;
         }
+}
+/deep/.company-devices-aside-system-dp  {
+  input {
+    height: 28px !important;
+  }
+    .icn-remove-old,.report-caret-icon {
+      top: 4px;
+      transform:none;
+    }
+    .qt-dropdown-input {
+      &:focus {
+          &[aria-expanded="true"]+.app-drop-down__right-icon .report-caret-icon,
+          &[aria-expanded="true"]+span .report-caret-icon {
+            transform: rotate(180deg);
+          }
+    }
+  }
+}
+.sidebar-system__info-text {
+  height: 28px;
+}
+.qt-editable-input {
+  &::placeholder {
+      color: $gray-400;
+    }
 }

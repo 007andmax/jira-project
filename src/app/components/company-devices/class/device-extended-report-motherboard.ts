@@ -1,6 +1,6 @@
 export class DeviceExtendedReportMotherboard {
     manufacturer: string;
     product: string;
-    serial_number: string;
+    serialNumber: string;
     version: string;
 }

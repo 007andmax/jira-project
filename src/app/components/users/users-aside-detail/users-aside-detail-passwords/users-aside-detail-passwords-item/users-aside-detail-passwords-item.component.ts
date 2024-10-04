@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { PasswordManagerTableComponent } from 'src/app/components/password-manager/password-manager-table/password-manager-table.component';
 
 @Component({

@@ -10,10 +10,9 @@
             ></div>
         </div>
         <div>
-          <div
-            class="qt-aside__restore-modal">
-            <div class="icon__reset qt-sz-16 qt-bg-contain"></div>
-          </div>
+            <div class="qt-aside__restore-modal">
+                <div class="qt-icon icon__reset qt-sz-16 qt-bg-contain"></div>
+            </div>
         </div>
     </div>
     <div class="qt-aside-modern__content">
@@ -34,25 +33,25 @@
                 maxlength="250"
                 placeholder="Write Ticket subject"
             >
-            <mat-error
-              class="invalid-feedback"
-              *ngIf="!noteTemplateValidate.getTitle()"
+            <app-mat-error
+                class="invalid-feedback"
+                *ngIf="!noteTemplateValidate.getTitle()"
             >
-              Title is required field
-            </mat-error>
-            <mat-error
-              class="invalid-feedback"
-              *ngIf="noteTemplateValidate.getTitleIsExist()"
+                Title is required field
+            </app-mat-error>
+            <app-mat-error
+                class="invalid-feedback"
+                *ngIf="noteTemplateValidate.getTitleIsExist()"
             >
-              Title value must be unique
-            </mat-error>
+                Title value must be unique
+            </app-mat-error>
         </div>
         <div class="qt-input-block qt-w100 editor-container qt-mt-0">
             <label
                 for="add-ticket-subject"
                 class="qt-input-block__label"
             >
-              Template Description
+                Template Description
             </label>
             <angular-editor
                 [(ngModel)]="noteTemplate.note"
@@ -60,12 +59,12 @@
                 [config]="editorConfig"
                 (input)="noteTemplateValidate.resetNote()"
             ></angular-editor>
-            <mat-error
-              class="invalid-feedback --pos-static"
-              *ngIf="!noteTemplateValidate.getNote()"
+            <app-mat-error
+                class="invalid-feedback --pos-static"
+                *ngIf="!noteTemplateValidate.getNote()"
             >
-              Description is required field
-            </mat-error>
+                Description is required field
+            </app-mat-error>
         </div>
         <div class="qt-df qt-ai-c qt-mt-16">
             <label
@@ -78,7 +77,7 @@
                     [(ngModel)]="noteTemplate.active"
                 >
                 <span></span>
-              <div class="qt-fs-13 qt-ml-8 qt-color-gray-700">Mark as Active</div>
+                <div class="qt-fs-13 qt-ml-8 qt-color-gray-700">Mark as Active</div>
             </label>
         </div>
     </div>
@@ -91,10 +90,10 @@
                 Cancel
             </button>
             <button
-              class="qt-button qt-jc-c qt-w100"
-              (click)="noteTemplate.getEditMode() ? save() : add()"
+                class="qt-button qt-jc-c qt-w100"
+                (click)="noteTemplate.getEditMode() ? save() : add()"
             >
-              Save
+                Save
             </button>
         </div>
     </div>

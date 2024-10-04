@@ -29,11 +29,76 @@ export class ProductService {
     private appStateService: AppStateService
   ) { }
 
+  validateForRemoveProductType(id) {
+    return this.http.get(`${this.apiUrl}products/types/validate/${id}`);
+  }
+
   /**
    * Get products categories
    */
-  public getCategories() {
-    return this.http.get(`${this.apiUrl}products/autocompleteList`).pipe(map((data: any) => data.map(item => new CategoryProductitem(item))));
+  public addProductType(data) {
+    return this.http.post(`${this.apiUrl}products/types`, { title: data }).pipe(
+      tap(data => {
+        this.toastrService.success("The new product type has been successfully created");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  /**
+  * Get products categories
+  */
+  public setProductType(productTypeId, productIds, active = null) {
+    let data: any = {
+      "productIds": productIds
+    }
+    if (productTypeId) data.productTypeId = productTypeId;
+    if (active != null) data.active = active;
+    return this.http.put(`${this.apiUrl}products/update`, data).pipe(
+      tap(res => {
+        this.toastrService.success("Product type has been successfully changed");
+        this.appStateService.changeDetectorRef();
+        return res;
+      }));
+  }
+
+  /**
+  * Get products categories
+  */
+  public removeProductType(id) {
+    this.appStateService.setCustomeError(true, "The error has occurred, please check your entries");
+    return this.http.delete(`${this.apiUrl}products/types/${id}`).pipe(
+      tap(data => {
+        this.appStateService.setCustomeError(false);
+        this.toastrService.success("The Product type has been successfully deleted");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+
+  /**
+  * Get products categories
+  */
+  public editProductType(id, data) {
+    return this.http.put(`${this.apiUrl}products/types/${id}`, { title: data }).pipe(
+      tap(data => {
+        this.toastrService.success("The product type has been successfully updated");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+
+  /**
+  * Get products categories
+  */
+  public getCategories(needArchived = false) {
+    return (needArchived ? this.http.get(`${this.apiUrl}products/autocompleteList?needArchived=${needArchived}`) : this.http.get(`${this.apiUrl}products/autocompleteList`)).pipe(map((data: any) => data.map(item => new CategoryProductitem(item))));
+  }
+
+  /**
+ * Get products categories
+ */
+  public getProductsTypes() {
+    return this.http.get(`${this.apiUrl}products/types/filtered?titleSortDirection=desc&page=0&size=1000`);
   }
 
   /**
@@ -101,8 +166,8 @@ export class ProductService {
   /**
  * Get products categories
  */
-  public getProducts(active) {
-    return this.http.get(`${this.apiUrl}products/?active=${active}`).pipe(map((data: any) => data.map(item => new InventoryItem(item))));
+  public getProducts(active, typeId = null) {
+    return this.http.get(`${this.apiUrl}products/?active=${active}${typeId ? '&typeId=' + typeId : ''}`).pipe(map((data: any) => data.map(item => new InventoryItem(item))));
   }
 
 

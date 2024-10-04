@@ -7,11 +7,9 @@ import { UsersAsideService } from './services/users-aside.service';
 import { UserValidate } from '../class/user-validate';
 import { UsersService } from 'src/app/services/users/users.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ImageCropperComponent } from '../../shared/image-cropper/image-cropper.component';
 import { CompanySubscriptionStateService } from '../../companies/company-subscription/class/company-subscription-state.service';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
-import { TitleListType } from '../../tickets/tickets/tickets-header/class/title-list-type';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { Subscription } from 'rxjs';
 import { CrmCompanyJobType } from '../../setting/crm-settings/crm-company-job-type/class/crm-company-job-type';
@@ -19,7 +17,6 @@ import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { MODE_EDIT_SUBSCRIPTION, MODE_HIDE_ACTIVE } from 'src/app/const/users';
 import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-industry/class/crm-company-industry';
-import { Company } from 'src/app/interfaces/company/company';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { UserRole } from '../class/user-role';
 import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-role-state.service';
@@ -44,7 +41,6 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
   validate: UserValidate = new UserValidate();
   userTypes: Array<CrmCompanyJobType> = [];
   phoneTypes = ['Office', 'Mobile', 'Fax'];
-  industries: Array<CrmCompanyIndustry> = [];
   idUploadFile: string;
   userRoles: Array<UserRole> = [];
   sub: Subscription = new Subscription();
@@ -53,20 +49,14 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
     private usersAsideService: UsersAsideService,
     private usersService: UsersService,
     private companiesStateService: CompaniesStateService,
-    private companySubscriptionState: CompanySubscriptionStateService,
     public cd: ChangeDetectorRef,
     private companiesService: CompaniesService,
     private crmStateService: CrmStateService,
     public customerRoleStateService: CustomerRoleStateService,
-    private modalService: NgbModal,) { }
+  ) { }
 
 
   ngOnInit() {
-    this.industries = this.crmStateService.getIndustryList();
-    let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
-      this.industries = data;
-    })
-    this.sub.add(onGetIndustry);
     this.jobTitleList = this.crmStateService.getJobTitleList();
     let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
       this.jobTitleList = data;
@@ -74,7 +64,7 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
     this.sub.add(onGetJobTitle);
     this.onCroppImage();
     this.userRoles = this.customerRoleStateService.getUserRoles();
-    this.usersStateService.getOpenAside().subscribe(data => {
+    let getOpenAside = this.usersStateService.getOpenAside().subscribe(data => {
       if (!this.customerRoleStateService.isGetUserRole) this.customerRoleStateService.onInitGetUsersRoles();
       this.getJobTypeList();
       this.opened = true;
@@ -82,15 +72,13 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
       this.user.setCompanyId(this.companiesStateService.getCurrentCompany().id);
       if (this.opened && this.companiesStateService.getCompanyRoutingId()) this.onSelectCompany(this.companiesStateService.getCompanies().find(item => item.id === this.companiesStateService.getCompanyRoutingId()), 0);
     })
+    this.sub.add(getOpenAside);
     let onGetUserRole = this.customerRoleStateService.onGetUserRole.subscribe(data => {
       this.userRoles = this.customerRoleStateService.getUserRoles();
       if (this.userRolesDP) this.userRolesDP.reset(this.userRoles);
     })
     this.sub.add(onGetUserRole);
 
-  }
-  onSelectClientIndustry(item) {
-    this.user.setUserIndustryId((item) ? item.id : null);
   }
   getJobTypeList() {
     if (this.crmStateService.getJobTypeList().length === 0) {
@@ -133,9 +121,9 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
     this.user.setCustomSubscriptions(data);
   }
   onCheckEmail() {
-
     if (this.user.primaryEmail && this.user.primaryEmail.length > 0) {
       this.validate.checkValidPrimaryEmail(this.user.primaryEmail);
+      this.cd.detectChanges();
       if (this.validate.getPrimaryContactEmail()) this.onCheckValidPrimaryEmail();
     }
   }

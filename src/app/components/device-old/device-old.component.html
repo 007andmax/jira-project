@@ -6,7 +6,7 @@
                 <div class="hp-device-info">
                     <span class="device-icn">
                         <img
-                            [attr.src]="deviceType === 'printer' ? '/html/assets/img/icons/print.svg' : '/html/assets/img/icons/computer.svg'"
+                            [attr.src]="deviceType === 'printer' ? '/html/assets/img/icons/print.svg' : '/html/assets/img/icons/devices.svg'"
                             alt="device"
                         >
                     </span>
@@ -22,7 +22,7 @@
                 </div>
                 <div class="hp-device-info">
                     <span class="device-icn">
-                        <span class="icon__time--white qt-bg-contain qt-sz-16"></span>
+                        <span class="qt-icon icon__time qt-icon__white qt-sz-16"></span>
                     </span>
                     <div class="head-device">
                         <div
@@ -72,33 +72,31 @@
                     (click)="sendCommand('r')"
                     class="head-btn-info btn-refresh"
                 >
-                  <span class="icon__reset--white qt-sz-20 qt-dib"></span>
+                    <span class="qt-icon icon__reset qt-icon__white qt-sz-20 qt-dib"></span>
                 </a>
                 <a
                     href="javascript:;"
                     (click)="sendCommand('s')"
                     class="head-btn-info btn-shutDown"
                 >
-                  <span class="icon__shutdown--white qt-sz-20 qt-dib"></span>
+                    <span class="qt-icon icon__shutdown qt-icon__white qt-sz-20 qt-dib"></span>
                 </a>
             </div>
         </div>
         <div class="head-counter">
             <div class="sub-head-counter pointer">
-              <span class="icon__reset--white qt-sz-24 qt-dib"></span>
+                <span class="qt-icon icon__reset qt-icon__white qt-sz-24 qt-dib"></span>
             </div>
             <div class="sub-head-counter pointer">
-                <img
-                    [attr.src]="interval && !playTimer ? '/html/assets/img/icons/play-circle.svg' : '/html/assets/img/icons/pause.svg'"
-                    alt="Play"
+                <div
+                    class="qt-icon qt-icon__white qt-sz-24"
+                    [ngClass]="interval && !playTimer ? 'icon__start' : 'icon__pause'"
                     (click)="timerControl()"
                 >
+                </div>
             </div>
             <div class="sub-head-counter">
-                <img
-                    src="/html/assets/img/icons/timer-counter.svg"
-                    alt="Print"
-                >
+                <div class="qt-icon icon__timer qt-icon__white qt-sz-24"></div>
                 <span id="counter">
                     {{padNumber(this.totalHours)}} hr : {{padNumber(this.totalMinutes)}} min : {{padNumber(this.totalSeconds)}} sec
                 </span>

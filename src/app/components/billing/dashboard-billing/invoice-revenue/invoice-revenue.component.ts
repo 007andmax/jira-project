@@ -3,7 +3,6 @@ import { DashboardBillingService } from 'src/app/services/dashboard-billing/dash
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { InvoiceRevenue } from '../class/invoice-revenue';
 import * as moment from "moment";
-import { ReportsService } from 'src/app/services/reports/reports.service';
 import { MultiDatepickerDashboardComponent } from '../multi-datepicker-dashboard/multi-datepicker-dashboard.component';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
@@ -22,7 +21,6 @@ export class InvoiceRevenueComponent implements OnInit {
   data: any;
 
   constructor(private companiesStateService: CompaniesStateService,
-    private reportsService: ReportsService,
     public cd: ChangeDetectorRef,
     private permissionsService: PermissionsService,
     private dashboardBillingService: DashboardBillingService) { }

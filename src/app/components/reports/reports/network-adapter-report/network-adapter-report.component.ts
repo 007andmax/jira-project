@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
@@ -13,13 +13,14 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { NetworkAdapterReport } from '../../class/network-adapter-report';
 import { ReportSendEmailComponent } from '../../report-additional-actions/report-send-email/report-send-email.component';
 import { DeviceNetworkAdapterReportFilter } from './Class/network-adapter-report';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'network-adapter-report',
   templateUrl: './network-adapter-report.component.html',
   styleUrls: ['./network-adapter-report.component.scss']
 })
-export class NetworkAdapterReportComponent implements OnInit {
+export class NetworkAdapterReportComponent implements OnInit, OnDestroy {
   @ViewChild('dropdownDevice', { static: true }) dropdownDevice: DropDownComponent;
   clientName: string;
   companies = [];
@@ -37,19 +38,18 @@ export class NetworkAdapterReportComponent implements OnInit {
   template: string = "PDF_TEMPLATE";
   fileName: string = "network-adapter-report";
   accountType = "CLIENT";
-
+  sub: Subscription = new Subscription();
   constructor(
     private agentService: AgentService,
-    private companiesState: CompaniesStateService,
     private companiesStateService: CompaniesStateService,
     public leftPanelStateService: LeftPanelStateService,
-    private modalService: NgbModal,
     private commonHttpServices: CommonHttpServices,
     private toastr: ToastrService,
     private excelService: ExcelService,
     public elRef: ElementRef,
     public draftEmailStateService: DraftEmailStateService,
   ) { }
+
 
   ngOnInit() {
     this.clientName = "All Companies";
@@ -59,9 +59,10 @@ export class NetworkAdapterReportComponent implements OnInit {
 
   setPreviewDataDevice() {
     if (this.companiesStateService.getCompanies().length > 0) this.companies = this.getClientsList(this.companiesStateService.getCompanies());
-    this.companiesStateService.getOnCompanies().subscribe((data) => {
+    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = this.getClientsList(data);
     });
+    this.sub.add(getOnCompanies);
   }
 
   getDeviceNetworkAdapterList() {
@@ -370,5 +371,7 @@ export class NetworkAdapterReportComponent implements OnInit {
   onFilter(field) {
     this.filter.onFilter(field, this.networkAdapterList);
   }
-
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

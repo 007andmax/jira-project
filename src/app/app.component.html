@@ -53,6 +53,7 @@
                             style="display: none;"
                         ></div>
                         <router-outlet></router-outlet>
+                        <app-preview-attachment></app-preview-attachment>
                     </div>
                 </div>
             </div>
@@ -82,9 +83,9 @@
                         <app-ticket-add-aside></app-ticket-add-aside>
                         <app-users-aside></app-users-aside>
                         <app-company-add-aside></app-company-add-aside>
-                        <app-default-services-add></app-default-services-add>
+                        <app-non-contract-services-add></app-non-contract-services-add>
                         <users-aside-edit></users-aside-edit>
-                        <app-default-services-edit></app-default-services-edit>
+                        <app-non-contract-services-edit></app-non-contract-services-edit>
                         <app-inventory-edit-aside></app-inventory-edit-aside>
                         <app-invoices-aside-preview></app-invoices-aside-preview>
                         <router-outlet></router-outlet>
@@ -95,6 +96,8 @@
                         <app-preview-attachment></app-preview-attachment>
                         <help-center-info-aside></help-center-info-aside>
                         <app-report-send-email></app-report-send-email>
+                        <app-marketing-subscriptions-aside></app-marketing-subscriptions-aside>
+                        <app-preview-file></app-preview-file>
                         <!-- Mobile Style -->
                         <div class="footer-nav">
                             <ul class="footer-nav__menu">
@@ -107,7 +110,7 @@
                                         href="javascript:;"
                                         class="footer-nav__link"
                                     >
-                                        <span class="icon__tickets-gray qt-sz-24 qt-bg-contain qt-dib"></span>
+                                        <span class="qt-icon icon__tickets qt-icon__gray-400 qt-sz-24 qt-bg-contain qt-dib"></span>
                                     </a>
                                 </li>
                                 <li
@@ -120,25 +123,9 @@
                                         href="javascript:;"
                                         class="footer-nav__link"
                                     >
-                                        <span class="icon__company-gray qt-sz-24 qt-bg-contain qt-dib"></span>
+                                        <span class="qt-icon icon__companies qt-sz-24 qt-icon__gray-400 qt-dib"></span>
                                     </a>
                                 </li>
-                                <!-- <li class="footer-nav__list">
-                                <a
-                                    href="javascript:;"
-                                    class="footer-nav__link"
-                                >
-                                    <span class="icon__users-gray qt-sz-24 qt-bg-contain qt-dib"></span>
-                                </a>
-                            </li> -->
-                                <!-- <li class="footer-nav__list">
-                                <a
-                                    href="javascript:;"
-                                    class="footer-nav__link"
-                                >
-                                    <span class="icon__billing-gray qt-sz-24 qt-bg-contain qt-dib"></span>
-                                </a>
-                            </li> -->
                                 <li
                                     class="footer-nav__list"
                                     [ngClass]="{'--active':state === 'password-manager'}"
@@ -149,17 +136,9 @@
                                         href="javascript:;"
                                         class="footer-nav__link"
                                     >
-                                        <span class="icon__password-manager-gray qt-sz-24 qt-bg-contain qt-dib"></span>
+                                        <span class="icon__password qt-icon__gray-400 qt-sz-24 qt-dib"></span>
                                     </a>
                                 </li>
-                                <!-- <li class="footer-nav__list">
-                                <a
-                                    href="javascript:;"
-                                    class="footer-nav__link"
-                                >
-                                    <span class="icon__inventory-gray qt-sz-24 qt-bg-contain qt-dib"></span>
-                                </a>
-                            </li> -->
                             </ul>
                         </div>
                         <!-- End Mobile Style -->

@@ -1,9 +1,9 @@
-<tr>
-    <td
+<div class="qt-table-modern__row">
+    <div
         class="billable-payment-table__date pointer"
         [textContent]="getDate()"
-    ></td>
-    <td class="billable-payment-table__invoice pointer">
+    ></div>
+    <div class="billable-payment-table__invoice pointer">
         <ng-template
             ngFor
             let-invoice
@@ -16,39 +16,55 @@
                 (click)="onShowPreviewInvoice(i)"
             ></span>
         </ng-template>
-    </td>
-    <td
+    </div>
+    <div
         class="billable-payment-table__company pointer"
-        [textContent]="payment.clientCompanyName"
         (click)="showDetailsPayment()"
-    ></td>
-    <td
+        [textContent]="payment.clientCompanyName"
+        *ngIf="payment.multipleCompanies.length == 0"
+    ></div>
+    <div
+        class="billable-payment-table__company pointer qt-df qt-fd-c qt-ai-fs"
+        (click)="showDetailsPayment()"
+        *ngIf="payment.multipleCompanies.length > 0"
+    >
+        <ng-template
+            ngFor
+            let-company
+            [ngForOf]="payment.multipleCompanies"
+            [ngForTrackBy]="trackById"
+            let-i="index"
+        >
+            <span [textContent]="company.name"></span>
+        </ng-template>
+    </div>
+    <div
         class="billable-payment-table__payment-mode pointer"
         [textContent]="parsePaymentMethod(payment.paymentMethod)"
         (click)="showDetailsPayment()"
-    ></td>
-    <td
+    ></div>
+    <div
         class="billable-payment-table__reference pointer"
         [textContent]="payment.reference"
         (click)="showDetailsPayment()"
-    ></td>
-    <td class="billable-payment-table__payment">
+    ></div>
+    <div class="billable-payment-table__payment">
         <ng-template #tipContent>
             <div [textContent]="payment.note"></div>
         </ng-template>
         <div
-            class="icon__payment-note qt-sz-24 qt-ic-c qt-mr-8 payments-page__payment-note-table-icon pointer"
+            class="qt-icon icon__documents qt-sz-24 qt-ic-c qt-mr-8 payments-page__payment-note-table-icon pointer"
             *ngIf="payment.note && payment.note.length > 0"
             placement="left"
             [ngbTooltip]="tipContent"
         ></div>
-    </td>
-    <td
+    </div>
+    <div
         class="billable-payment-table__amount pointer"
         [textContent]="(payment.partialPaidAmount || payment.totalSum ) | currency"
         (click)="showDetailsPayment()"
-    ></td>
-    <td
+    ></div>
+    <div
         class="billable-payment-table__status pointer"
         (click)="showDetailsPayment()"
     >
@@ -58,14 +74,14 @@
             [textContent]="payment.refundMethod ? 'Refund' : 'Paid'"
         >
         </span>
-    </td>
-    <td
+    </div>
+    <div
         class="billable-payment-table__menu"
         ngbDropdown
         [container]="'body'"
     >
         <div
-            class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
+            class="qt-ic-c qt-icon icon__more  qt-pointer qt-sz-16 qt-bg-contain"
             id="dropdownBasic1"
             ngbDropdownToggle
         ></div>
@@ -80,7 +96,7 @@
                 (click)="showEditPayment()"
                 *ngIf="!payment.refundMethod && !customerPortalStateService.isCustomerPortal"
             >
-                <div class="icon__edit qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                <div class="qt-icon icon__edit qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Edit payment
             </li>
             <li
@@ -89,8 +105,16 @@
                 (click)="showRefundPayment()"
                 *ngIf="!payment.refundMethod && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')"
             >
-                <div class="icon__refund-payment qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                <div class="qt-icon icon__return-money qt-sz-20 qt-mr-12"></div>
                 Refund payment
+            </li>
+            <li
+                class="pointer"
+                ngbDropdownItem
+                (click)="resendPaymentReceipt()"
+            >
+                <div class="qt-icon icon__resend-receipt qt-sz-20 qt-mr-12"></div>
+                Resend payment receipt
             </li>
             <li
                 class="pointer"
@@ -98,9 +122,9 @@
                 (click)="deletePayment()"
                 *ngIf="!customerPortalStateService.isCustomerPortal"
             >
-                <div class="icon__remove qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                <div class="qt-icon icon__delete qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Delete payment
             </li>
         </ul>
-    </td>
-</tr>
+    </div>
+</div>

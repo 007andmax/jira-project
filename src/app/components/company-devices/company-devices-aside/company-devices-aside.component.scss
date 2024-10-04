@@ -2,3 +2,11 @@
     position: fixed !important;
     top: 2px !important;
 }
+/deep/ .aside-filters {
+  height: calc(100vh - 168px);
+  .aside-filters-content__footer {
+    .qt-button {
+      max-width: 100%;
+    }
+  }
+}

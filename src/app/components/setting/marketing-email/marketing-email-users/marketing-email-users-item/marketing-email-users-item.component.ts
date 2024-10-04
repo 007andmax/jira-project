@@ -12,16 +12,11 @@ export class MarketingEmailUsersItemComponent implements OnInit {
   @Input() user: User;
   @Output() onRemove: EventEmitter<any> = new EventEmitter();
   indexNoAvatar: number = 0;
-  listColorNoAvatar = ['#2BC7C6',
-    '#7839EE',
-    '#FFB937',
-    '#155EEF',
-    '#D92D20',
-    '#2EC866',
-    '#16A4FA'];
+  listColorNoAvatar = [];
   constructor(public ticketsListService: TicketsListService) { }
 
   ngOnInit() {
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
     this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
   }
   remove() {

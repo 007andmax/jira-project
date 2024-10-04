@@ -7,7 +7,6 @@ import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
-import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { DocumentEditCategory } from './class/document-edit-category';
 
 @Component({

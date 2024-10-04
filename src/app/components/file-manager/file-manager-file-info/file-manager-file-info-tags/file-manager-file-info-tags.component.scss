@@ -1,0 +1,135 @@
+@import './src/assets/styles/variable';
+@import "./src/assets/styles/mixin/dropdown";
+
+.dropdown-menu {
+    transform: translate(0, 0) !important;
+    top: 35px !important;
+    left: 56px !important;
+    width: 270px;
+    max-height: 230px !important;
+}
+.info-file-label-edit {
+  width: 28px;
+  height: 28px;
+}
+/deep/ .ticket-tags-container {
+    .dropdown-item {
+        @include dropdown-item;
+    }
+}
+
+/deep/ .ticket-edit-tags {
+    padding: 0;
+
+    input.mat-chip-input {
+        width: 20px;
+        margin: 0;
+        flex: 1 0 20px;
+    }
+
+    .mat-form-field {
+        width: 100%;
+    }
+
+    .mat-form-field-infix {
+        padding: 0;
+        border: none;
+    }
+
+    .mat-form-field-underline {
+        display: none;
+    }
+
+    .selected-tag-ticket {
+        .mat-chip {
+            background-color: $gray-100;
+            margin: 0px;
+            padding: 2px 6px;
+        }
+    }
+
+    .tag-icon {
+        display: none;
+    }
+
+    .mat-chip.mat-standard-chip .mat-chip-remove {
+        width: 12px;
+        height: 12px;
+        margin-left: 4px;
+
+        &:before {
+            top: 1px;
+            right: 0;
+            width: 12px;
+            height: 12px;
+        }
+    }
+
+    .mat-chip-remove {
+        opacity: 1;
+    }
+    .mat-form-field-appearance-legacy .mat-form-field-underline,
+    .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    display: none;
+    }
+    .mat-chip-remove:before {
+        filter: brightness(0.8)
+    }
+
+    .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+        padding: 0;
+    }
+
+    .mat-standard-chip:focus {
+        box-shadow: none;
+    }
+
+    .mat-form-field-label-wrapper {
+        font-size: 14px;
+        font-weight: 400;
+        color:$gray-400;
+    }
+
+    .mat-chip-list-wrapper {
+        margin: 0;
+        gap: 8px;
+    }
+
+    input.mat-chip-input {
+        height: 24px;
+        padding: 0 6px;
+        border: unset;
+        box-shadow: unset;
+
+        &::placeholder {
+            color: $gray-400 !important;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+        }
+    }
+
+    .selected-tag-ticket+input.mat-chip-input {
+        &::placeholder {
+            color: transparent !important;
+        }
+
+        &:focus {
+            &::placeholder {
+                color: $gray-400 !important;
+            }
+        }
+    }
+}
+.file-manager-tag-input {
+    &::placeholder {
+        opacity: 0 !important;
+        color: $gray-400;
+    }
+}
+.pengind-loading {
+    width: 25px !important;
+    height: 25px !important;
+    min-height: auto !important;
+    left: calc(50% - 12px) !important;
+}

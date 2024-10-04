@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
@@ -13,7 +13,6 @@ import { DraftEmailStateService } from "src/app/states/draft-email/draft-email-s
 import { LeftPanelStateService } from "src/app/states/left-panel/left-panel-state.service";
 import { DeviceSummaryReport } from "../../class/device-summary-report";
 import { ReportValidate1 } from "../../class/report-validate1";
-import { ReportSendEmailComponent } from "../../report-additional-actions/report-send-email/report-send-email.component";
 import { DeviceSummaryReportFilter } from "./Class/device-summary-report";
 
 @Component({
@@ -21,7 +20,7 @@ import { DeviceSummaryReportFilter } from "./Class/device-summary-report";
   templateUrl: "./report-device-summary.component.html",
   styleUrls: ["./report-device-summary.component.scss"],
 })
-export class ReportDeviceSummaryComponent implements OnInit {
+export class ReportDeviceSummaryComponent implements OnInit, OnDestroy {
   @ViewChild('dropdownDevice', { static: true }) dropdownDevice: DropDownComponent;
   tempararyDeviceList: any = [];
   tempararyDevice: any = [];
@@ -50,12 +49,11 @@ export class ReportDeviceSummaryComponent implements OnInit {
     private commonHttpServices: CommonHttpServices,
     private toastr: ToastrService,
     private excelService: ExcelService,
-    private companiesState: CompaniesStateService,
     public leftPanelStateService: LeftPanelStateService,
-    private modalService: NgbModal,
     public elRef: ElementRef,
     public draftEmailStateService: DraftEmailStateService,
   ) { }
+
 
   ngOnInit() {
     this.clientName = "All Companies";
@@ -404,5 +402,8 @@ export class ReportDeviceSummaryComponent implements OnInit {
       fileName: this.fileName,
       accountType: this.accountType
     });
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

@@ -1,6 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild, OnDestroy } from '@angular/core';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
 import { CompaniesService } from 'src/app/services/company/companies.service';
+import { DevicesService } from 'src/app/services/devices/devices.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -11,7 +13,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
   styleUrls: ['./drop-down.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DropDownComponent implements OnInit {
+export class DropDownComponent implements OnInit, OnDestroy {
   selectedItem = null;
   @ViewChild('dp', { static: true }) dp: NgbDropdown;
   @Input() dropdownWidth: string = null;
@@ -43,14 +45,16 @@ export class DropDownComponent implements OnInit {
   @Output() onAddItem = new EventEmitter<any>();
   @Output() onSelectedItem = new EventEmitter<any>();
   reqList = [];
-
+  sub: Subscription = new Subscription();
   public isAdd: boolean = false;
   constructor(public elRef: ElementRef,
     public companiesStateService: CompaniesStateService,
     public usersStateService: UsersStateService,
     public customerPortalStateService: CustomerPortalStateService,
     public companiesService: CompaniesService,
+    public devicesService: DevicesService,
     public ref: ChangeDetectorRef) { }
+
 
   ngOnInit() {
     if (this.class.length > 0) this.class = this.class;
@@ -122,6 +126,7 @@ export class DropDownComponent implements OnInit {
     return this.elRef.nativeElement.querySelector("#dropdown1").value;
   }
   public clearWithOutChanges() {
+    this.elRef.nativeElement.querySelector("#dropdown1").value = "";
     this.isAdd = false;
     this.selectedItem = null;
     this.ref.markForCheck();
@@ -139,5 +144,7 @@ export class DropDownComponent implements OnInit {
   reduceItemName(item) {
     return this.reducerItem(item);
   }
-
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

@@ -2,12 +2,9 @@ import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Outpu
 import { TicketsListService } from '../../../../services/tickets-list.service';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { FormControl } from '@angular/forms';
-import { MatAutocomplete } from '@angular/material';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
-import { UserCustomerCompaniesInfo } from 'src/app/components/users/class/user-customer-companies-info';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
-import { CompanyUser } from '../../../../ticket-add-aside/company-users-drop-down/class/company-user';
 import { TicketStateService } from '../../../../ticket-edit-aside/services/ticket-state.service';
 import { CompanyUserNote } from './class/company-user-note';
 import { UserNoteValidate } from './class/user-note-validate';

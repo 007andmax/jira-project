@@ -5,10 +5,8 @@ import { first } from 'rxjs/operators';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { isArray } from 'util';
 import { Subscription } from 'rxjs';
-import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { CONFIGCONSTANTS } from '../config/app-constants';
 import { UserListService } from '../../users/services/user-list.service';
-import { CompaniesRealTimeService } from 'src/app/states/company/companies-real-time.service';
 import { ShellStateService } from 'src/app/states/shell/shell-state.service';
 import { command, script, commandModal, scriptModal } from './../class/device';
 import { AgentService } from 'src/app/services/agent/agent.service';
@@ -101,9 +99,6 @@ export class TerminalComponent implements OnInit, OnDestroy {
   constructor(private terminalService: TerminalService,
     private toastr: ToastrService,
     private modalService: NgbModal,
-    private socketService: WebsocketService,
-    private userListService: UserListService,
-    private companiesRealTimeService: CompaniesRealTimeService,
     private shellStateService: ShellStateService,
     public cd: ChangeDetectorRef,
     private agentService: AgentService,
@@ -144,7 +139,7 @@ export class TerminalComponent implements OnInit, OnDestroy {
   }
 
   onTerminalPowershall() {
-    this.kafkaStateService.onPowerShellCommand.subscribe((resp) => {
+    let onPowerShellCommand = this.kafkaStateService.onPowerShellCommand.subscribe((resp) => {
       let item = resp.find((x) => x.key == this.asset.ID);
       if (item) {
         if (!item.Value.startsWith("Executing")) {
@@ -160,10 +155,11 @@ export class TerminalComponent implements OnInit, OnDestroy {
         }
       }
     });
+    this.sub.add(onPowerShellCommand);
   }
 
   onTerminalCommand() {
-    this.kafkaStateService.onTerminalCommand.subscribe((resp) => {
+    let onTerminalCommand = this.kafkaStateService.onTerminalCommand.subscribe((resp) => {
       let item = resp.find((x) => x.key == this.asset.ID);
       if (item) {
         if (!item.Value.startsWith("Executing")) {
@@ -179,6 +175,7 @@ export class TerminalComponent implements OnInit, OnDestroy {
         }
       }
     });
+    this.sub.add(onTerminalCommand);
   }
 
   getCommandList() {

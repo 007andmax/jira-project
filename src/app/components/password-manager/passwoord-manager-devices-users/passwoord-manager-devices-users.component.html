@@ -9,12 +9,12 @@
         class="app-drop-down__title"
         [textContent]="title"
     ></div>
-    <mat-error
+    <app-mat-error
         class="app-drop-down__error qt-tooltip-error mat-error"
         *ngIf="!validate"
         [textContent]="errorMessage"
     >
-    </mat-error>
+    </app-mat-error>
     <input
         type="text"
         [ngStyle]="{'width': '100%', 'height': heightInput ? heightInput : '40px' }"
@@ -68,31 +68,31 @@
             <div
                 (click)="onSelect(item)"
                 *ngIf="!isIOSDevice()"
-                   [ngClass]="{'--selected':isSelected(item.id)}"
+                [ngClass]="{'--selected':isSelected(item.id)}"
                 ngbDropdownItem
             >
                 <i
-                    class="icon__user-grey qt-sz-20 qt-bg-contain qt-fs-0 qt-mr-12"
+                    class="qt-icon icon__user qt-sz-20 qt-fs-0 qt-mr-12"
                     *ngIf="item.type === 'USER'"
                 ></i>
                 <i
-                    class="icon__devices-grey qt-sz-20 qt-bg-contain qt-fs-0 qt-mr-12"
+                    class="qt-icon icon__devices qt-sz-20 qt-fs-0 qt-mr-12"
                     *ngIf="item.type === 'DEVICE'"
                 ></i>
-                <span  [textContent]="item.name"></span>
+                <span [textContent]="item.name"></span>
             </div>
             <div
                 (touchstart)="onSelect(item)"
                 ngbDropdownItem
                 *ngIf="isIOSDevice()"
-                   [ngClass]="{'--selected':isSelected(item.id)}"
+                [ngClass]="{'--selected':isSelected(item.id)}"
             >
                 <i
-                    class="icon__user-grey qt-sz-20 qt-bg-contain qt-mr-12"
+                    class="qt-icon icon__user qt-sz-20 qt-mr-12"
                     *ngIf="item.type === 'USER'"
                 ></i>
                 <i
-                    class="icon__devices-grey qt-sz-20 qt-bg-contain qt-mr-12"
+                    class="qt-icon icon__devices qt-sz-20 qt-mr-12"
                     *ngIf="item.type === 'DEVICE'"
                 ></i>
                 <span [textContent]="item.name"></span>

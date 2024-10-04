@@ -2,7 +2,6 @@ import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { NgbActiveModal, NgbModalConfig, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ImageCropperStateService } from 'src/app/states/image-cropper/image-cropper-state.service';
-import { CompaniesService } from 'src/app/services/company/companies.service';
 import { ImageCropper } from './class/image-cropper';
 
 
@@ -21,7 +20,7 @@ export class ImageCropperComponent implements OnInit {
   imageBase64 = '';
   @Input() public data = '';
   constructor(public activeModal: NgbActiveModal, public cd: ChangeDetectorRef,
-    private imageCropperStateService: ImageCropperStateService, private companiesService: CompaniesService, config: NgbModalConfig,) {
+    private imageCropperStateService: ImageCropperStateService, config: NgbModalConfig,) {
 
     this.cd.detectChanges();
     config.backdrop = 'static';

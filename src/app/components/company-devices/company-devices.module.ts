@@ -16,6 +16,27 @@ import { CompanyDevicesAsideUpdatesComponent } from './company-devices-aside/com
 import { CompanyDevicesEditLabelModule } from './company-devices-edit-label/company-devices-edit-label.module';
 import { DatePickerModule } from '../shared/date-picker/date-picker.module';
 import { CompanyDevicesRoutingModule } from './company-devices-routing.module';
+import { CompanyDevicesTagsComponent } from './company-devices-tags/company-devices-tags.component';
+import { CompanyDevicesTagsModule } from './company-devices-tags/company-devices-tags.module';
+import { CompanyDevicesCustomAsideComponent } from './company-devices-custom-aside/company-devices-custom-aside.component';
+import { DropDownModule } from '../shared/drop-down/drop-down.module';
+import { PreloaderTicketModule } from '../shared/preloader-ticket/preloader-ticket.module';
+import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
+import { CompanyDevicesCustomDropDownComponent } from './company-devices-custom-aside/company-devices-custom-drop-down/company-devices-custom-drop-down.component';
+import { CompanyDevicesCustomAsideModule } from './company-devices-custom-aside/company-devices-custom-aside.module';
+import { CompanyDevicesEditIpComponent } from './company-devices-edit-ip/company-devices-edit-ip.component';
+import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
+import { CompanyDevicesEditMacComponent } from './company-devices-edit-mac/company-devices-edit-mac.component';
+import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
+import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
+import { MatErrorModule } from '../shared/mat-error/mat-error.module';
+import { CompanyDevicesFilterComponent } from './company-devices-filter/company-devices-filter.component';
+import { CompanyDevicesFilterTypeComponent } from './company-devices-filter/company-devices-filter-type/company-devices-filter-type.component';
+import { DynamicTooltipModule } from '../shared/dynamic-tooltip/dynamic-tooltip.module';
+import { FilterDevicesPipe } from './pipe/filter-devices.pipe';
+import { MatChipModule } from '../shared/mat-chip/mat-chip.module';
+import { MatFormFieldModule } from '../shared/mat-form-field/mat-form-field.module';
+import { MatChipListModule } from '../shared/mat-chip-list/mat-chip-list.module';
 
 
 @NgModule({
@@ -30,7 +51,13 @@ import { CompanyDevicesRoutingModule } from './company-devices-routing.module';
         CompanyDevicesAsideSystemComponent,
         CompanyDevicesAsideNetworkTabComponent,
         CompanyDevicesAsideSoftwareComponent,
-        CompanyDevicesAsideUpdatesComponent
+        CompanyDevicesAsideUpdatesComponent,
+        CompanyDevicesEditIpComponent,
+        CompanyDevicesEditMacComponent,
+        CompanyDevicesFilterComponent,
+        CompanyDevicesFilterTypeComponent,
+        FilterDevicesPipe,
+
     ],
     imports: [
         CommonModule,
@@ -38,7 +65,18 @@ import { CompanyDevicesRoutingModule } from './company-devices-routing.module';
         NgbModule,
         CompanyDevicesEditLabelModule,
         DatePickerModule,
-        CompanyDevicesRoutingModule
+        CompanyDevicesRoutingModule,
+        CompanyDevicesTagsModule,
+        CompanyDevicesCustomAsideModule,
+        TextAreaModule,
+        DropDownModule,
+        ClickOutsideModule,
+        KeyUpEnterModule,
+        MatErrorModule,
+        DynamicTooltipModule,
+        MatChipModule,
+        MatFormFieldModule,
+        MatChipListModule,
     ],
 
 

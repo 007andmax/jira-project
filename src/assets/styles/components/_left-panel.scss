@@ -84,7 +84,7 @@
     width: 20px;
     height: 20px;
     cursor: pointer;
-    background-image: url("/assets/img/icons-left-sidebar/panel-open.svg");
+    background-image: url("/assets/img/icons/panel-open.svg");
     transition: transform 300ms, left 300ms;
     z-index: 9999;
   }
@@ -93,7 +93,7 @@
     width: 24px;
     height: 24px;
     cursor: pointer;
-    background-image: url("/assets/img/icons-left-sidebar/panel-open.svg");
+    background-image: url("/assets/img/icons/panel-open.svg");
     transition: transform 300ms;
   }
 
@@ -149,58 +149,65 @@
     height: 24px;
     background-position: center;
     background-color: $gray-300;
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
 
     &.--quick-support {
-      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-quick-support.svg");
-      mask-image: url("/assets/img/icons-left-sidebar/menu-quick-support.svg");
+      -webkit-mask-image: url("/assets/img/icons/quick-support.svg");
+      mask-image: url("/assets/img/icons/quick-support.svg");
     }
     &.--tickets {
-      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-tickets.svg");
-      mask-image: url("/assets/img/icons-left-sidebar/menu-tickets.svg");
+      -webkit-mask-image: url("/assets/img/icons/tickets.svg");
+      mask-image: url("/assets/img/icons/tickets.svg");
     }
     &.--companies {
-      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-company.svg");
-      mask-image: url("/assets/img/icons-left-sidebar/menu-company.svg");
+      -webkit-mask-image: url("/assets/img/icons/companies.svg");
+      mask-image: url("/assets/img/icons/companies.svg");
     }
     &.--users {
-      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-users.svg");
-      mask-image: url("/assets/img/icons-left-sidebar/menu-users.svg");
+      -webkit-mask-image: url("/assets/img/icons/users.svg");
+      mask-image: url("/assets/img/icons/users.svg");
     }
     &.--marketing {
-      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-marketing.svg");
-      mask-image: url("/assets/img/icons-left-sidebar/menu-marketing.svg");
+      -webkit-mask-image: url("/assets/img/icons/marketing.svg");
+      mask-image: url("/assets/img/icons/marketing.svg");
     }
     &.--billing {
-      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-billing.svg");
-      mask-image: url("/assets/img/icons-left-sidebar/menu-billing.svg");
+      -webkit-mask-image: url("/assets/img/icons/billing.svg");
+      mask-image: url("/assets/img/icons/billing.svg");
     }
     &.--products {
-      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-products.svg");
-      mask-image: url("/assets/img/icons-left-sidebar/menu-products.svg");
+      -webkit-mask-image: url("/assets/img/icons/products.svg");
+      mask-image: url("/assets/img/icons/products.svg");
     }
     &.--password-manager {
-      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-password-manager.svg");
-      mask-image: url("/assets/img/icons-left-sidebar/menu-password-manager.svg");
+      -webkit-mask-image: url("/assets/img/icons/password.svg");
+      mask-image: url("/assets/img/icons/password.svg");
     }
     &.--reports {
-      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-reports.svg");
-      mask-image: url("/assets/img/icons-left-sidebar/menu-reports.svg");
+      -webkit-mask-image: url("/assets/img/icons/reports.svg");
+      mask-image: url("/assets/img/icons/reports.svg");
+    }
+    &.--folder-management {
+      -webkit-mask-image: url("/assets/img/icons/folder-management.svg");
+      mask-image: url("/assets/img/icons/folder-management.svg");
     }
     &.--settings {
-      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-settings.svg");
-      mask-image: url("/assets/img/icons-left-sidebar/menu-settings.svg");
+      -webkit-mask-image: url("/assets/img/icons/settings.svg");
+      mask-image: url("/assets/img/icons/settings.svg");
     }
     &.--documents {
-      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-documents.svg");
-      mask-image: url("/assets/img/icons-left-sidebar/menu-documents.svg");
+      -webkit-mask-image: url("/assets/img/icons/documents.svg");
+      mask-image: url("/assets/img/icons/documents.svg");
     }
     &.--devices{
-      -webkit-mask-image: url("/assets/img/icons-left-sidebar/devices.svg");
-      mask-image: url("/assets/img/icons-left-sidebar/devices.svg");
+      -webkit-mask-image: url("/assets/img/tool.svg");
+      mask-image: url("/assets/img/tool.svg");
     }
     &.--logout {
-      -webkit-mask-image: url("/assets/img/icons-left-sidebar/logout.svg");
-      mask-image: url("/assets/img/icons-left-sidebar/logout.svg");
+      -webkit-mask-image: url("/assets/img/icons/logout.svg");
+      mask-image: url("/assets/img/icons/logout.svg");
     }
   }
 
@@ -213,13 +220,7 @@
     background-size: contain;
     opacity: 0.5;
     &.--folder {
-      background-image: url("/assets/img/icons-left-sidebar/submenu-folder.svg");
-    }
-    &.--add-folder {
-      width: 18px;
-      height: 18px;
-      margin-right: 6px;
-      background-image: url("/assets/img/icons-left-sidebar/submenu-add-folder.svg");
+      background-image: url("/assets/img/icons/folder.svg");
     }
   }
 
@@ -251,6 +252,10 @@
       max-width: 184px;
       padding: 5px 8px;
       top: 100%;
+    }
+
+    .icon__globe {
+      mask-size: cover;
     }
   }
   &__menu-expand li:not(.dropdown-item) {
@@ -327,7 +332,7 @@
 .app-left-panel.--mini {
   width: $left-panel-mini-width;
 
-  .icon__quicktech-logo-mini {
+  .icon__monogram {
     opacity: 0;
   }
 

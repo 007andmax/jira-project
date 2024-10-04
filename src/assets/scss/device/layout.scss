@@ -1,5 +1,6 @@
 @import "./src/assets/styles/variable";
 @import "./src/assets/styles/mixin/dropdown";
+@import "./src/assets/styles/mixin/breakpoint";
 
 .ng7-device {
   overflow: auto;
@@ -8,7 +9,7 @@
     margin-top: 108px;
     margin-right: 352px;
     transition: all 0.4s ease;;
-    @media only screen and (max-width: 1440px) {
+    @include media-breakpoint-down($md) {
       margin-right: 64px;
     }
     &.mainSidebar {
@@ -240,7 +241,7 @@
           position: relative;
           right: 0;
           padding-left: 30px;
-          img {
+          .icon__timer {
             margin-right: 4px;
             position: absolute;
             left: 7px;
@@ -437,7 +438,7 @@
     height: calc(100vh - 72px);
     transition: all 0.4s ease;
     &:not(.terminal-sidebar) {
-      @media only screen and (max-width: 1440px) {
+      @include media-breakpoint-down($md) {
         right: -288px;
       }
     }
@@ -458,7 +459,7 @@
       img {
         transition: all 0.4s ease;
       }
-      @media only screen and (min-width: 1441px) {
+      @include media-breakpoint-up($md) {
         display: none;
       }
     }
@@ -589,11 +590,18 @@
             left: -30px;
             content: "";
             position: absolute;
-            background: url("../../../assets/img/icons/task-pending.svg") no-repeat center;
+            mask-image: url("../../../assets/img/icons/check.svg");
+            background-color: $green-600;
+            mask-repeat: no-repeat;
+            mask-position: center;
+            mask-size: contain;
           }
           &.complete {
             &::before {
-              background: url("../../../assets/img/icons/task-completed.svg") no-repeat center;
+              mask-image: url("../../../assets/img/icons/check.svg") no-repeat center;
+              background-color: $green-600;
+              mask-size: contain;
+              mask-repeat: no-repeat;
             }
           }
           h5 {
@@ -742,7 +750,7 @@
       transform: translateX(-50%);
       top: -42px;
       visibility: hidden;
-      @media only screen and (max-width: 1199px) {
+      @include media-breakpoint-down($sm) {
         display: none;
       }
     }
@@ -762,7 +770,7 @@
       bottom: 14px;
       z-index: 1;
       visibility: hidden;
-      @media only screen and (max-width: 1199px) {
+      @include media-breakpoint-down($sm) {
         display: none;
       }
     }
@@ -977,7 +985,7 @@
 }
 
 /*** Ticket Sidebar Expand ***/
-@media only screen and (max-width: 1440px) {
+@include media-breakpoint-down($md) {
   .ng7-device {
     &.expandTicket {
       .page-wrapper {

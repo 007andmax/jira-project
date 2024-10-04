@@ -1,0 +1,104 @@
+<div class="qt-table-modern__row">
+    <div
+        class="default-service-table__service-name"
+        [textContent]="service.name"
+    ></div>
+    <div
+        class="default-service-table__rate"
+        [textContent]="service.rate | currency"
+    ></div>
+    <div
+        class="default-service-table__taxes"
+        [textContent]="getSelectedTaxNames(service.taxes)"
+    ></div>
+    <div class="default-service-table__gl">
+        <app-drop-down
+            #glNumberSelect
+            [class]="['--small-padding']"
+            [list]="glNumbers"
+            [placeholder]="'Select GL'"
+            [container]="'body'"
+            [change]="false"
+            [editItem]="service.glNumber"
+            [add]="true"
+            [field]="'glNumber'"
+            uiType="dark"
+            heightInput="32px"
+            dropdownWidth="392px"
+            [reducerItem]="glDropDownItemName"
+            (onAddItem)="onAddGlNumber($event)"
+            [isDisabled]="!getPermissions('MANAGE_SERVICES')"
+            (onSelectedItem)="onSelectGlNumbers($event)"
+        >
+        </app-drop-down>
+    </div>
+    <div class="default-service-table__billable">
+        <div class="qt-df qt-jc-c qt-w100">
+            <label
+                class="qt-checkbox pointer"
+                [attr.for]="'service-billable-' + service.versionedId.id"
+            >
+                <input
+                    [attr.id]="'service-billable-' + service.versionedId.id"
+                    type="checkbox"
+                    [(ngModel)]="service.billable"
+                    [disabled]="!getPermissions('MANAGE_SERVICES')"
+                    (change)="onChangeBillalble()"
+                >
+                <span></span>
+            </label>
+        </div>
+    </div>
+    <div class="default-service-table__default">
+        <div class="qt-df qt-jc-c qt-w100">
+            <label
+                class="qt-checkbox pointer"
+                [attr.for]="'service-default-' + service.versionedId.id"
+            >
+                <input
+                    [attr.id]="'service-default-' + service.versionedId.id"
+                    type="checkbox"
+                    [(ngModel)]="service.canUseInTicket"
+                    [disabled]="!getPermissions('MANAGE_SERVICES')"
+                    (change)="onChangeDefault()"
+                >
+                <span></span>
+            </label>
+        </div>
+    </div>
+    <div class="default-service-table__menu">
+        <div
+            *ngIf="getPermissions('MANAGE_SERVICES')"
+            ngbDropdown
+            ngbDropdown
+            container="body"
+        >
+            <div
+                class="qt-ic-c qt-icon icon__more qt-pointer qt-sz-16 qt-bg-contain"
+                ngbDropdownToggle
+            ></div>
+            <ul
+                class="qt-dropdown-menu default-services-items-dropdown"
+                ngbDropdownMenu
+                aria-labelledby="dropdownBasic1"
+            >
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                    (click)="edit()"
+                >
+                    <div class="qt-icon icon__edit qt-sz-20 qt-mr-12 qt-bg-contain"></div>
+                    Edit
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                    (click)="delete()"
+                >
+                    <div class="qt-icon icon__delete qt-sz-20 qt-mr-12 qt-bg-contain"></div>
+                    Delete
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

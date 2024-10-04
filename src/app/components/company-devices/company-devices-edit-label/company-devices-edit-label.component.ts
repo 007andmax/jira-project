@@ -8,24 +8,27 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class CompanyDevicesEditLabelComponent implements OnInit {
   value: string;
   @Input() field: string;
-  @Input() title: string;
   @Input() isDisabled: boolean = false;
   showEdit: boolean = false;
-  placeholder: string = '';
+  @Input() placeholder: string = '';
   @Output() onChange = new EventEmitter();
+  isInitEdit: boolean = false;
   constructor() { }
 
   ngOnInit() {
     this.value = JSON.parse(JSON.stringify(this.field));
   }
+  public setIsInitEdit(data) {
+    this.isInitEdit = data;
+  }
   public setValue(value) {
     this.value = JSON.parse(JSON.stringify(value));
   }
-  ngDoCheck() {
-    this.placeholder = (this.field !== '') ? this.field : `Enter ${this.title} here`;
-  }
   onCheckValue() {
-    if (this.value !== this.field) this.onChange.emit(this.value);
+    if (this.value !== this.field) {
+      this.onChange.emit(this.value);
+      this.setIsInitEdit(false);
+    }
   }
   public onUpdate() {
     this.value = JSON.parse(JSON.stringify(this.field));

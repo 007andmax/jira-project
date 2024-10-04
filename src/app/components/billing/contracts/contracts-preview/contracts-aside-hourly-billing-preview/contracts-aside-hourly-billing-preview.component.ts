@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ContractsFilterType } from '../../class/contracts-filter-type';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { ServiceAgreement } from '../../class/service-agreement';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { Tax } from 'src/class/taxes/tax';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -12,13 +13,14 @@ import { Tax } from 'src/class/taxes/tax';
   templateUrl: './contracts-aside-hourly-billing-preview.component.html',
   styleUrls: ['./contracts-aside-hourly-billing-preview.component.scss']
 })
-export class ContractsAsideHourlyBillingPreviewComponent implements OnInit {
+export class ContractsAsideHourlyBillingPreviewComponent implements OnInit, OnDestroy {
   selectedCompany: any;
   selectedTaxes = [];
   taxes: Array<Tax> = [];
   selectedType = new ContractsFilterType('Hourly', 'HOURLY', null);
   @Input() contractsHourly: ServiceAgreement = new ServiceAgreement();
   formatDate: string = FORMAT_DATE_2;
+  sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
     private taxesStateService: TaxesStateService,
   ) { }
@@ -32,6 +34,7 @@ export class ContractsAsideHourlyBillingPreviewComponent implements OnInit {
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
       this.taxes = data;
     });
+    this.sub.add(getOnTaxess);
   }
   getSelectedTaxes(taxes) {
     let selectedTax = [];
@@ -45,5 +48,8 @@ export class ContractsAsideHourlyBillingPreviewComponent implements OnInit {
   }
   public trackById(index, item) {
     return item.id;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

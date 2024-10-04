@@ -8,7 +8,7 @@
     <div class="tab-pane__body">
         <div class="tab-pane__row">
             <div class="tab-pane-input__row company-info-block">
-                <div class="icon__company-info qt-sz-20 qt-ic-c qt-mr-8 qt-fs-0 qt-mt-2"></div>
+                <div class="qt-icon icon__info qt-sz-20 qt-ic-c qt-mr-8 qt-fs-0 qt-mt-2"></div>
                 <span class="qt-f-1">
                     Incoming emails sent to your default address will automaticly create a new
         ticket. If you have a support email already setup with your existing domain
@@ -22,13 +22,11 @@
                 <div class="tab-pane-input__row">
                     <div class="qt-input-block">
                         <div class="qt-df">
-                            <input
-                                class="qt-input-afterpend"
+                            <div
                                 *ngIf="supportMailBox"
-                                type="text"
-                                value="{{ supportMailBox }}"
-                                disabled
-                            >
+                                [textContent]="supportMailBox"
+                                class="qt-input-afterpend email-domain-text"
+                            ></div>
                             <span class="qt-input-afterfix">@inbox.quicktech.com</span>
                         </div>
                         <div class="qt-input-help-text qt-mt-12">

@@ -1,19 +1,23 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy, TemplateRef } from "@angular/core";
-import { EmailTempleteService } from "./email-template.service";
+import { EmailTempleteService } from "../../../services/email-template/email-template.service";
 import { map, catchError } from "rxjs/operators";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { of } from "rxjs";
+import { of, Subscription } from "rxjs";
 import { ToastrService } from "ngx-toastr";
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
 import { EmailTemplateStateService } from "src/app/states/email-template/email-template-state.service";
+import { fadeInAnimation } from "src/app/animations";
 
 declare var $: any;
 
 @Component({
   selector: "app-email-template",
   templateUrl: "./email-template.component.html",
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ["./email-template.component.scss"]
 })
 export class EmailTempleteComponent implements OnInit, OnDestroy {
@@ -23,6 +27,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   ticketTemplates: any;
   agentTemplates: any;
   invoiceTemplates: any;
+  userTemplates: any;
   currentOpenTemplate = "";
   keywords: any[];
   templeteInfo: any;
@@ -35,10 +40,10 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   openEmailTemplate: string;
   public show = false;
   public buttonName: any = "Show Description";
-  templatesData = { subject: {}, body: {} };
+  templatesData = { subject: {}, body: {}, isActive: false };
   @ViewChild("body", { static: false }) body: ElementRef;
   @ViewChild("subject", { static: false }) subject: ElementRef;
-
+  sub: Subscription = new Subscription();
   constructor(
     private modalService: NgbModal,
     private emailService: EmailTempleteService,
@@ -51,6 +56,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     this.ticketTemplates = this.emailService.getTicketTemplates();
     this.agentTemplates = this.emailService.getAgentTemplates();
     this.invoiceTemplates = this.emailService.getInvoiceTemplates();
+    this.userTemplates = this.emailService.getUserTemplates();
   }
 
   ngOnInit() {
@@ -59,11 +65,12 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     this.keywords = [];
     this.templeteForm = this.formBuilder.group({
       subject: ["", Validators.required],
-      body: [""]
+      body: [""],
+      isActive: [false]
     });
     this.getEmailPages();
     this.settingStateService.setComponentName('EmailTempleteComponent');
-    this.emailTemplateStateService.onChangeEmailTemplates.subscribe(data => {
+    let onChangeEmailTemplates = this.emailTemplateStateService.onChangeEmailTemplates.subscribe(data => {
       if (data.action == "COMPANY_EMAIL_NOTIFICATION") {
         for (const key in this.ticketTemplates) {
           if (data.data[key]) {
@@ -83,10 +90,15 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
             break;
           }
         }
-
+        for (const key in this.userTemplates) {
+          if (data.data[key]) {
+            this.emailPages.activeAndNotDefault[key] = data.data[key];
+            break;
+          }
+        }
       }
-
     })
+    this.sub.add(onChangeEmailTemplates);
   }
 
   ngOnDestroy() {
@@ -109,6 +121,10 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     ) {
       return new UploadAdapter(loader);
     };
+  }
+
+  public trackByIndex(index, item) {
+    return index;
   }
 
   /**
@@ -136,14 +152,14 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
    * @param templete
    * @param index
    */
-  getTemplate(templete, index) {
+  getTemplate(templete, key) {
     if (!templete) {
       return;
     }
-    this.templeteInfo = { ...templete.value, key: templete.key };
+    this.templeteInfo = { ...templete, key: key };
     this.edit = true;
     this.emailService
-      .getTemplate(templete.key)
+      .getTemplate(key)
       .pipe(
         map((res: any) => {
           if (res) {
@@ -167,13 +183,13 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
                 Validators.required
               ]);
             }
-
             this.templeteForm.patchValue({
               subject: this.templatesData.subject,
-              body: this.templatesData.body
+              body: this.templatesData.body,
+              isActive: res.active
             });
           }
-          this.openEmailTemplate = templete.key;
+          this.openEmailTemplate = key;
         })
       )
       .subscribe();

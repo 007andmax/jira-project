@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Company } from 'src/app/interfaces/company/company';
 import { GadgetsService } from 'src/app/services/gadgets/gadgets.service';
@@ -6,7 +6,6 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { PasswordDeviceUser } from '../../class/password-device-user';
-
 import { PasswordRecordAdd } from '../../class/password-record-add';
 import { PasswordRecordValidate } from '../../class/password-record-validate';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
@@ -14,13 +13,15 @@ import { TicketStateService } from 'src/app/components/tickets/tickets/ticket-ed
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { Device } from 'src/app/components/company-devices/class/device';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
+import { TicketsPermissionsService } from 'src/app/components/tickets/tickets/ticket-edit-aside/services/tickets-permissions.service';
 
 @Component({
   selector: 'password-manager-linked',
   templateUrl: './password-manager-linked.component.html',
-  styleUrls: ['./password-manager-linked.component.scss']
+  styleUrls: ['./password-manager-linked.component.scss'],
+  providers: [TicketsPermissionsService]
 })
-export class PasswordManagerLinkedComponent implements OnInit {
+export class PasswordManagerLinkedComponent implements OnInit, OnDestroy {
   @Input() passwordRecordAdd: PasswordRecordAdd;
   @Input() validate: PasswordRecordValidate;
   public selectedUserAndDevices: Array<PasswordDeviceUser> = [];
@@ -48,7 +49,9 @@ export class PasswordManagerLinkedComponent implements OnInit {
     public devicesStateService: DevicesStateService,
     public customerPortalStateService: CustomerPortalStateService,
     public devicesService: DevicesService,
+    public ticketsPermissionsService: TicketsPermissionsService,
     private usersStateService: UsersStateService,) { }
+
 
   ngOnInit() {
     if (this.selectedCompanyId) this.onSelectCompany(this.selectedCompanyId);
@@ -64,7 +67,7 @@ export class PasswordManagerLinkedComponent implements OnInit {
   }
   getDevices() {
     this.devicesService.getCompanyDevices(this.selectedCompanyId).subscribe((data: any) => {
-      let devices = (data[this.selectedCompanyId]) ? JSON.parse(JSON.stringify(data[this.selectedCompanyId])).map(item => new Device(item)) : [];
+      let devices = (data[this.selectedCompanyId]) ? JSON.parse(JSON.stringify(data[this.selectedCompanyId])).filter(item => !item.isCustom).map(item => new Device(item)) : [];
       devices.forEach(item => {
         this.devicesList.push(new PasswordDeviceUser(item.id, this.getLabelDevice(item), 'DEVICE'));
       })
@@ -174,5 +177,8 @@ export class PasswordManagerLinkedComponent implements OnInit {
   }
   public trackByIndex(index, item) {
     return index;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

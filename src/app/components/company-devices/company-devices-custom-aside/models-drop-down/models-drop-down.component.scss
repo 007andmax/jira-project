@@ -1,0 +1,19 @@
+@import "./src/assets/styles/variable";
+
+.disabled {
+    background: $gray-50;
+    color: $gray-400;
+
+    &::placeholder {
+        color: $gray-400;
+    }
+}
+
+.icon__done.qt-icon__blue-light-600 {
+    background-size: 15px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.loading.xs {
+    top: 35px !important;
+}

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
 import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
@@ -14,7 +14,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
   templateUrl: './quotes-filter.component.html',
   styleUrls: ['./quotes-filter.component.scss']
 })
-export class QuotesFilterComponent implements OnInit {
+export class QuotesFilterComponent implements OnInit, OnDestroy {
   @ViewChild('companyDp', { static: true }) companyDp: CompanyDropDownComponent;
   @ViewChild('statusDp', { static: true }) statusDp: DropDownComponent;
   @ViewChild('datesDp', { static: true }) datesDp: MultiDatepickerComponent;
@@ -30,6 +30,7 @@ export class QuotesFilterComponent implements OnInit {
   constructor(private companiesState: CompaniesStateService,
     private customerPortalStateService: CustomerPortalStateService,
     private quoteStateService: QuoteStateService) { }
+
 
   ngOnInit() {
     if (this.customerPortalStateService.isCustomerPortal && this.companiesState.getCompanies().length > 0) this.checkCompanyCustomerUser();
@@ -96,5 +97,8 @@ export class QuotesFilterComponent implements OnInit {
     if (this.quotesFilter.quoteNumber) count++;
     if (this.quotesFilter.status) count++;
     this.changeCountFilter.emit(count);
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

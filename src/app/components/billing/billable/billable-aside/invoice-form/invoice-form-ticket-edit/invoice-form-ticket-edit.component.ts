@@ -2,8 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { InvoiceProfileTicket } from '../../../class/invoice-profile-ticket';
 import * as moment from "moment";
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
-import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+
 @Component({
   selector: 'app-invoice-form-ticket-edit',
   templateUrl: './invoice-form-ticket-edit.component.html',
@@ -15,8 +15,7 @@ export class InvoiceFormTicketEditComponent implements OnInit {
 
   currentCompany;
   constructor(private companiesStateService: CompaniesStateService,
-    private permissionsService: PermissionsService,
-    private ticketsService: TicketsService,) { }
+    private permissionsService: PermissionsService) { }
 
   ngOnInit() {
     this.currentCompany = this.companiesStateService.getCurrentCompany();
@@ -27,9 +26,6 @@ export class InvoiceFormTicketEditComponent implements OnInit {
   }
   onChangeSubject() {
     this.ticket.setChangeSubject(this.ticket.newSubject !== this.ticket.subject);
-    // this.ticketsService.changeSubjectNoteTicket(this.ticket.id, this.ticket.subject, this.ticket.note).subscribe(data => {
-    //   this.onUpdateSubject.emit(this.ticket.subject);
-    // })
   }
   getDuration(input) {
     let timeInMinutes = input * 60,

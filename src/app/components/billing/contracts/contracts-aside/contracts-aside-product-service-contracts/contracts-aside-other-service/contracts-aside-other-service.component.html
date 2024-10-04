@@ -14,12 +14,12 @@
         ></app-drop-down>
     </td>
     <td class="contract-product-service-table__description --editable qt-pos-rel">
-        <mat-error
+        <app-mat-error
             class="qt-tooltip-error qt-w-auto-important"
             *ngIf="!service.validateDescription"
         >
             Description is required
-        </mat-error>
+        </app-mat-error>
         <input
             type="text"
             [ngClass]="{'--input-error' : !service.validateDescription}"
@@ -47,7 +47,7 @@
     </td>
     <td>
         <div
-            class="icon__raw-clear qt-ic-c qt-sz-16"
+            class="qt-icon icon__inactive qt-ic-c qt-sz-16"
             (click)="remove()"
         ></div>
     </td>

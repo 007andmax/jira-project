@@ -7,13 +7,16 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
-import { CompanyTagsStateService } from '../../companies/company-tags/states/company-tags-state.service';
 import { DocumentAdd } from './class/document-add';
 import { DocumentValidate } from './class/document-validate';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'app-documents-add',
   templateUrl: './documents-add.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./documents-add.component.scss']
 })
 export class DocumentsAddComponent implements OnInit, OnDestroy {
@@ -32,7 +35,6 @@ export class DocumentsAddComponent implements OnInit, OnDestroy {
     public documentsService: DocumentsService,
     public cd: ChangeDetectorRef,
     public tagsService: TagsService,
-    private tagsStateService: TagsStateService,
     public companiesStateService: CompaniesStateService,
     public leftPanelStateService: LeftPanelStateService) {
   }
@@ -72,9 +74,10 @@ export class DocumentsAddComponent implements OnInit, OnDestroy {
     if (!this.companyId) this.leftPanelStateService.changeStateWithoutNavigate('new-add-documents');
     if (this.companyId) this.leftPanelStateService.changeStateWithoutNavigate('new-add-documents-company');
     if (this.usersStateService.getCurrentUser()) this.currentUser = this.usersStateService.getCurrentUser();
-    this.usersStateService.getOnGetCurrentuser().subscribe(data => {
+    let getOnGetCurrentuser = this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.currentUser = data;
     })
+    this.sub.add(getOnGetCurrentuser);
   }
   onChangeAttachments(data) {
     this.attachments = data;
@@ -83,6 +86,7 @@ export class DocumentsAddComponent implements OnInit, OnDestroy {
     this.documentAdd.setContent(data);
   }
   ngOnDestroy(): void {
+    this.sub.unsubscribe();
     this.companiesStateService.setCompanyRoutingId(null);
   }
 }

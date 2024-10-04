@@ -35,7 +35,7 @@ export class MarketingEmailUsersComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    let openAside = this.marketingEmailStateService.openAside.subscribe(data => {
+    let openAside = this.marketingEmailStateService.openAsideSettings.subscribe(data => {
       this.marketingSubscription = data;
       this.opened = true;
       this.marketingEmailService.getUsersList(data.id, data.getSubscribed()).subscribe((res: any) => {

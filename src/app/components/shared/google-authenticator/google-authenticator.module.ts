@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { GoogleAuthenticatorComponent } from './google-authenticator.component';
 import { NgxMaskModule } from 'ngx-mask';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatSelectModule } from '@angular/material/select';
+import { MatErrorModule } from '../mat-error/mat-error.module';
 @NgModule({
     declarations: [
         GoogleAuthenticatorComponent
@@ -12,9 +11,8 @@ import { MatSelectModule } from '@angular/material/select';
     imports: [
         CommonModule,
         FormsModule,
-        MatSelectModule,
-        MatChipsModule,
         NgxMaskModule.forRoot(),
+        MatErrorModule
     ],
     entryComponents: [GoogleAuthenticatorComponent],
     exports: [GoogleAuthenticatorComponent],

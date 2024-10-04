@@ -23,14 +23,14 @@ export class UsersAsideDetailCompanyInfoComponent implements OnInit, OnDestroy {
   @Input() customerCompaniesInfo: UserCustomerCompaniesInfo;
   @Input() user: UserProfile = new UserProfile();
   @Output() onUpdate = new EventEmitter<any>();
-  @ViewChild('userRolesDP', { static: true }) userRolesDP: DropDownComponent;
+  @ViewChild('jobTitleDp', { static: false }) jobTitleDp: DropDownComponent;
+  @ViewChild('userRolesDP', { static: false }) userRolesDP: DropDownComponent;
   toggleContainer: boolean = false;
   MODE_EDIT_SUBSCRIPTION = MODE_EDIT_SUBSCRIPTION;
   jobTitleList: Array<CrmCompanyJobTitle> = [];
   userRoles: Array<UserRole> = [];
   sub: Subscription = new Subscription();
-  constructor(private companiesStateService: CompaniesStateService,
-    private crmStateService: CrmStateService,
+  constructor(private crmStateService: CrmStateService,
     private permissionsService: PermissionsService,
     private usersService: UsersService,
     public usersStateService: UsersStateService,

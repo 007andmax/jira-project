@@ -1,11 +1,8 @@
 import { Component, OnInit, Input, EventEmitter, Output, ViewChild, OnDestroy } from '@angular/core';
 import * as moment from "moment";
-import { Validate } from '../class/validate';
 import { GlNumber } from '../class/gl-number';
 import { ReportsService } from 'src/app/services/reports/reports.service';
-import { GlNumberItem } from '../class/gl-number-item';
 import { ReportsStateService } from 'src/app/states/reports/reports-state.service';
-import { MultiDatepickerComponent } from '../../shared/multi-datepicker/multi-datepicker.component';
 import { ReportValidate } from '../class/report-validate';
 import { AccountsReceivable } from '../class/accounts-receivable';
 import { TaxesReport } from '../class/taxes';
@@ -114,7 +111,6 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(onDeviceUninstalled);
-    //  this.sub.add(getOnCompanies);
   }
   /**
    * @description Return parse company name
@@ -158,6 +154,7 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.softwareSummaryReport.setPreloaderSoft(false);
       this.deviceIpSummary.setPreloaderDevices(false);
       this.remoteConnectionReport.setPreloaderDevices(false);
+      this.dpDevices.reset(this.devices);
     }, err => {
       this.softwareSummaryReport.resetSoft();
       this.softwareSummaryReport.setPreloaderSoft(false);
@@ -255,13 +252,16 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     this.isDisabledCompany = (data === 'Summary') ? true : false;
     if (data === 'Summary') this.validate.resetCompany();
   }
+  selectMultiClient(data) {
+    this.accountsReceivable.setClientCompanyIds(data.map(item => item.id));
+    if (data.length == 0) this.accountsReceivable.setIsCommonReport(true);
+  }
   /**
 * @description Set new value selected company from dropdown
 * @param {Object} selectClient - Object Company
 */
   public selectClient(selectClient) {
     if (selectClient == null) {
-      this.accountsReceivable.setClientCompanyId(null);
       this.selectedClient = null;
       this.glNumber.setClientCompanyId(null);
       this.productSalesReport.setCompanyId(null);
@@ -282,7 +282,6 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.detailContractReport.setCompanyId(selectClient.id);
       this.accountingReport.setCompanyId(selectClient.id);
       this.glNumber.setClientCompanyId(selectClient.id);
-      this.accountsReceivable.setClientCompanyId(selectClient.id);
       this.productSalesReport.setCompanyId(selectClient.id);
       this.customerSalesReport.setCompanyId(selectClient.id);
       this.serviceReport.setCompanyId(selectClient.id);
@@ -483,6 +482,8 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.techService.setList(data.lines);
       this.techService.setTotalQuantity(data.totalQuantity);
       this.setDatareport(this.techService)
+      this.reportsStateService.onChangeExportCSV(new ExportCSV('reports/sales/byServices', this.techService.getForExportRequest(), 'Sales_report_by_tech'));
+
     });
   }
   getReportDetailedCommissions() {
@@ -524,6 +525,9 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
   }
   public trackByIndex(index, item) {
     return index;
+  }
+  onSetIsCommonReport(data) {
+    this.accountsReceivable.isCommonReport = data;
   }
   /**
   * filter data by date

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CompanyTagsComponent } from 'src/app/components/companies/company-tags/company-tags.component';
 import { CompanyTagsListService } from 'src/app/components/companies/company-tags/services/company-tags-list.service';
 import { TicketsListService } from '../../../services/tickets-list.service';
@@ -62,7 +62,7 @@ export class TicketsFilterDropDownComponent extends CompanyTagsComponent {
 * @param {Object} event - Object from input
 */
   onSearch(event) {
-    this.list = this.reqList.filter(item => ((this.field) ? item[this.field] : item).toLowerCase().includes(event.target.value));
+    this.list = this.reqList.filter(item => ((this.field) ? item[this.field] : item).toLowerCase().includes(event.target.value.toLowerCase()));
   }
   /**
 * @description Check if element dropdown added in selectedItems

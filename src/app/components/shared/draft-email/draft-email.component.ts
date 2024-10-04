@@ -85,16 +85,16 @@ export class DraftEmailComponent implements OnInit, OnDestroy {
     this.onShowAside();
   }
   onChangeFiles(ids) {
-    if (this.draftEmail.attachments.length > ids.length) {
-      this.draftEmail.attachments.forEach(item => {
-        let find = ids.find(id => id === item);
-        if (!find) {
-          this.draftEmailService.removeAttachment(item).subscribe(data => {
-          })
-        }
-      })
-    }
-    this.draftEmail.setAttachments(JSON.parse(JSON.stringify(ids)));
+    /* if (this.draftEmail.attachments.length > ids.length) {
+       this.draftEmail.attachments.forEach(item => {
+         let find = ids.find(id => id === item);
+         if (!find) {
+           this.draftEmailService.removeAttachment(item).subscribe(data => {
+           })
+         }
+       })
+     }*/
+    this.draftEmail.setAttachments(JSON.parse(JSON.stringify(ids.map(item => item.id))));
   }
   public onShowAside() {
     this.draftEmailStateService.getShowAsideForAdd().subscribe(() => {

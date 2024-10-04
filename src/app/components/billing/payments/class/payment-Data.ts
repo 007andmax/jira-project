@@ -6,7 +6,8 @@ export class PaymentData {
     paidAmount_str: string;
     invoicePaidDue: number;
     invoiceNumber: string;
-    constructor(invoiceAmount, invoiceDate, invoiceId, paidAmount, invoiceNumber, invoicePaidDue) {
+    companyName: string;
+    constructor(invoiceAmount, invoiceDate, invoiceId, paidAmount, invoiceNumber, invoicePaidDue, companyName) {
         this.invoiceAmount = invoiceAmount;
         this.invoiceDate = invoiceDate;
         this.invoiceId = invoiceId;
@@ -14,5 +15,6 @@ export class PaymentData {
         this.invoiceNumber = invoiceNumber;
         this.invoicePaidDue = invoicePaidDue;
         this.paidAmount_str = this.paidAmount.toFixed(2);
+        this.companyName = companyName;
     }
 }

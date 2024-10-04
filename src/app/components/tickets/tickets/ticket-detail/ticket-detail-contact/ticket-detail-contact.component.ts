@@ -1,9 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Company } from 'src/app/interfaces/company/company';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
-import { CurrentUser } from 'src/class/current-user/current-user';
 import { TicketProfile } from '../../class/ticket-profile';
 import { TicketsListService } from '../../services/tickets-list.service';
 
@@ -29,7 +27,7 @@ export class TicketDetailContactComponent implements OnInit, OnDestroy {
     return (this.ticketProfile.createdUser) ? this.usersStateService.getAllUsers().find(user => user.id === this.ticketProfile.createdUser.id) : null;
   }
   getCompanyUser() {
-    return this.companiesStateService.getCompanies().find(item => this.usersStateService.getAllUsers().find(user => user.id === this.ticketProfile.createdUser.id).customerCompaniesInfo.some(clientCompany => clientCompany.companyId === item.id));
+    return this.companiesStateService.getCompanies().find(item => this.ticketProfile.company.id === item.id);
   }
   getPhoneNumbers() {
     return this.usersStateService.getAllUsers().find(user => user.id === this.ticketProfile.createdUser.id).phoneNumbers;

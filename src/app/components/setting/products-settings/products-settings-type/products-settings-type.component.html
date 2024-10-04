@@ -1,0 +1,81 @@
+<div class="cmn-area">
+    <div
+        class="tab-pane__table"
+        [ngClass]="{'cleat-height-dataTable':!showPreloader}"
+    >
+        <div class="tab-pane__table-header">
+            <div class="tab-pane__table-row">
+                <div
+                    class="tab-pane__table-cell crm-settings-company-industry-table__industry-type pointer"
+                    (click)="onFilter('name')"
+                >
+                    Type name
+                    <div class="qt-table-modern__sorting--new"></div>
+                </div>
+                <div class="tab-pane__table-cell crm-settings-company-industry-table__action"></div>
+            </div>
+        </div>
+        <div
+            class="tab-pane__table-body"
+            *ngIf="!showPreloader"
+        >
+            <app-add-product-type
+                *ngIf="showAdd"
+                [list]="list"
+                (onClose)="showAdd = false"
+            ></app-add-product-type>
+            <div
+                class="tab-pane__table-row"
+                *ngFor="let item of list; let i = index"
+                appClickOtside
+                [init]="item.isInitEdit"
+                [ngClass]="'edit-crm-container-' + i"
+                [class]="'.edit-crm-container-' + i"
+                (onOutSide)="onEditType(item,$event)"
+            >
+                <div
+                    class="tab-pane__table-cell crm-settings-company-industry-table__industry-type"
+                    [ngClass]="{'--input-error' :  item.disableUpdate  }"
+                >
+                    <input
+                        type="text"
+                        class="form-input --editable"
+                        placeholder="Enter Name Category"
+                        [(ngModel)]="item.title"
+                        appKeyUpEnter
+                        (onChange)="onEditType(item,$event)"
+                        maxlength="100"
+                        (input)="item.onInitEdit(true);item.checkDublicate(list)"
+                    >
+                    <app-mat-error
+                        class="invalid-feedback"
+                        *ngIf="item.disableUpdate"
+                    >
+                        This type is already occupied
+                    </app-mat-error>
+                </div>
+                <div class="tab-pane__table-cell crm-settings-company-industry-table__action">
+                    <div class="qt-df qt-ai-c">
+                        <app-dynamic-tooltip
+                            [content]="'Remove'"
+                            [position]="'top'"
+                            #removeTooltip
+                        ></app-dynamic-tooltip>
+                        <div
+                            data-tooltip="Remove"
+                            class="icon__delete qt-sz-20 qt-bg-contain pointer"
+                            (click)="removeType(item)"
+                            (mouseenter)="removeTooltip.show($event.target)"
+                            (mouseleave)="removeTooltip.hide()"
+                        >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div
+            class="loading"
+            *ngIf="showPreloader"
+        ></div>
+    </div>
+</div>

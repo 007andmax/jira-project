@@ -1,4 +1,4 @@
-<div class="qt-page-list company-devices-page">
+<div class="qt-page-list company-devices-page --sticky-breadcrumbs">
     <div class="qt-page-list__header">
         <div class="qt-page-list__header-title-line">
             <div class="qt-page-list__header-title-line--left">
@@ -6,42 +6,52 @@
                     class="qt-page-list__header-title"
                     [textContent]="'Devices'"
                 ></h3>
-                <div class="Rectangle">
+                <div
+                    class="Rectangle"
+                    ngbDropdown
+                    container="body"
+                >
                     <span class="qt-input-search"></span>
                     <div class="SearchRectangle">
-                        <mat-form-field
+                        <app-mat-form-field
                             class="example-chip-list"
                             appearance="none"
+                            #formField
                         >
-                            <mat-chip-list #chipList>
-                                <mat-chip
+                            <app-mat-chip-list
+                                #chipList
+                                [items]="selectedTag"
+                                (onChangeItems)="formField.checkSelectedItems(selectedTag)"
+                            >
+                                <app-mat-chip
                                     *ngFor="let tag of selectedTag; let i=index"
-                                    (removed)="remove(i)"
+                                    (onClose)="remove(i)"
+                                    [isRemove]="true"
                                 >
                                     {{tag}}
-                                    <mat-icon matChipRemove></mat-icon>
-                                </mat-chip>
+                                </app-mat-chip>
                                 <input
                                     #dropdownServices
                                     autofocus
                                     [formControl]="selectedCtrl"
                                     [(ngModel)]="tagFilterValue"
-                                    [matAutocomplete]="auto"
+                                    ngbDropdownToggle
                                     class="pointer"
                                     placeholder="Input at least 3 characters to start searching by companies, devices, work stations etc. "
-                                    [matChipInputFor]="chipList"
                                     (keyup.enter)="add($event.target.value)"
                                     (keyup)="onSearchTag($event.target.value)"
                                 >
-                            </mat-chip-list>
-                            <mat-autocomplete
-                                class="extended"
-                                #auto="matAutocomplete"
-                                (optionSelected)="selectedSearch($event)"
+                            </app-mat-chip-list>
+                            <div
+                                class="mat-autocomplete-panel mat-autocomplete-visible"
+                                ngbDropdownMenu
+                                aria-labelledby="dropdownServices"
                             >
-                                <mat-option
+                                <app-mat-option
                                     class="SubRectangle"
                                     *ngFor="let search of autosearchDevice"
+                                    ngbDropdownItem
+                                    (click)="selectedSearch(search)"
                                 >
                                     {{search.Result}}
                                     <span
@@ -49,9 +59,9 @@
                                         [ngClass]="search.Type"
                                         [title]="search.Type"
                                     ></span>
-                                </mat-option>
-                            </mat-autocomplete>
-                        </mat-form-field>
+                                </app-mat-option>
+                            </div>
+                        </app-mat-form-field>
                     </div>
                 </div>
                 <span>
@@ -110,7 +120,7 @@
                                     *ngIf="!isOfflineDeviceSelected"
                                     (click)="sendCommandHeader('r')"
                                 >
-                                    <div class="icon__reset qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                    <div class="qt-icon icon__reset qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                     Restart
                                 </li>
                                 <li
@@ -119,14 +129,14 @@
                                     *ngIf="!isOfflineDeviceSelected"
                                     (click)="sendCommandHeader('s')"
                                 >
-                                    <div class="icon__shutdown qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                    <div class="qt-icon icon__shutdown qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                     Shutdown
                                 </li>
                                 <li
                                     class="pointer"
                                     (click)="sendCommandHeader('ar')"
                                 >
-                                    <div class="icon__remove pointer qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                    <div class="qt-icon icon__delete pointer qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                     Remove Agent
                                 </li>
                             </ul>
@@ -210,7 +220,7 @@
                         >
                             <div
                                 *ngIf="asset.IsMasterAgent"
-                                class="icon__master-agent qt-bg-contain qt-sz-16 qt-mr-8"
+                                class="qt-icon icon__agent qt-sz-16 qt-mr-8"
                                 title="Master Agent"
                             ></div>
                         </td>
@@ -224,7 +234,7 @@
                     icon__computer:
                     asset.iconName === 'Workstation' || !asset.iconName,
                     icon__tablet: asset.iconName === 'Networking Hardware',
-                    icon__printer: asset.iconName === 'Printer',
+                    icon__print: asset.iconName === 'Printer',
                     icon__server: asset.iconName === 'Server',
                     icon__documents: asset.iconName !== 'Workstation' || asset.iconName !== 'Networking Hardware' || asset.iconName !== 'Printer' || asset.iconName !== 'Server',
                     '--ofline': !asset.online
@@ -251,7 +261,7 @@
                                 hardwar.Name === 'Workstation' || !hardwar.Name,
                               icon__tablet:
                                 hardwar.Name === 'Networking Hardware',
-                              icon__printer: hardwar.Name === 'Printer',
+                              icon__print: hardwar.Name === 'Printer',
                               icon__server: hardwar.Name === 'Server',
                               icon__documents: hardwar.Name !== 'Workstation' || hardwar.Name !== 'Networking Hardware' || hardwar.Name !== 'Printer' || hardwar.Name !== 'Server'
                             }"
@@ -341,14 +351,14 @@
                                     class="qt-df qt-ai-c qt-pointer"
                                     (click)="openAside('NETWORK',asset)"
                                 >
-                                    <div class="icon__network qt-ic-c qt-mr-6 qt-sz-16"></div>
+                                    <div class="qt-icon icon__network qt-icon__blue-light-600 qt-ic-c qt-mr-6 qt-sz-16"></div>
                                     <div>Network</div>
                                 </div>
                             </div>
                         </td>
                         <td class="company-devices-table__ip-address">
                             <span
-                                class="qt-pl-30 company-devices-table__ip-address-text"
+                                class="company-devices-table__ip-address-text"
                                 [textContent]="asset.InternalIPAddress"
                             ></span>
                             <div class="company-devices-table__ip-address-buttons qt-pl-15">
@@ -356,14 +366,14 @@
                                     class="qt-df qt-ai-c qt-mr-20 qt-pointer"
                                     (click)="openAside('SOFTWARE',asset)"
                                 >
-                                    <div class="icon__software qt-ic-c qt-mr-6 qt-sz-16"></div>
+                                    <div class="qt-icon icon__software qt-icon__blue-light-600 qt-ic-c qt-mr-6 qt-sz-16"></div>
                                     <div>Software</div>
                                 </div>
                                 <div
                                     class="qt-df qt-ai-c qt-pointer"
                                     (click)="openAside('UPDATES',asset)"
                                 >
-                                    <div class="icon__updates qt-ic-c qt-mr-6 qt-sz-16"></div>
+                                    <div class="qt-icon icon__subscription qt-icon__blue-light-600 qt-ic-c qt-mr-6 qt-sz-16"></div>
                                     <div>Updates</div>
                                 </div>
                             </div>
@@ -401,7 +411,7 @@
                                 #tipDeviceDetailTooltip
                             ></app-dynamic-tooltip>
                             <div
-                                class="qt-ic-c icon__go-to qt-pointer qt-sz-24 qt-bgsz-16"
+                                class="qt-ic-c qt-icon icon__external-link qt-pointer qt-sz-24"
                                 *ngIf="asset.ID"
                                 (mouseenter)="tipDeviceDetailTooltip.show($event.target)"
                                 (mouseleave)="tipDeviceDetailTooltip.hide()"
@@ -424,7 +434,7 @@
                                     [hidden]="!(asset.RemoteOnline)"
                                     class="
                       qt-ic-c
-                      icon__quick-connect
+                      qt-icon icon__remote-access
                       qt-pointer qt-sz-24 qt-bgsz-16
                     "
                                     placement="top"
@@ -459,7 +469,7 @@
                                 container="body"
                             >
                                 <div
-                                    class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"
+                                    class="qt-ic-c qt-icon icon__more qt-pointer qt-sz-16 qt-bg-contain"
                                     ngbDropdownToggle
                                 ></div>
                                 <ul
@@ -472,7 +482,7 @@
                                         ngbDropdownItem
                                         (click)="sendCommand('r', asset.ID)"
                                     >
-                                        <div class="icon__reset qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                        <div class="qt-icon icon__reset qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                         Restart
                                     </li>
                                     <li
@@ -481,7 +491,7 @@
                                         ngbDropdownItem
                                         (click)="sendCommand('s', asset.ID)"
                                     >
-                                        <div class="icon__shutdown qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                        <div class="qt-icon icon__shutdown qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                         Shutdown
                                     </li>
                                     <li
@@ -490,10 +500,7 @@
                                         ngbDropdownItem
                                         (click)="sendCommand('m', asset.Guid)"
                                     >
-                                        <div class="
-                          icon__master-agent
-                          qt-bg-contain qt-sz-16 qt-mr-8
-                        "></div>
+                                        <div class="qt-icon icon__agent qt-sz-16 qt-mr-8"></div>
                                         Set as Master Agent
                                     </li>
                                     <li
@@ -501,7 +508,7 @@
                                         (click)="sendCommand('ar', asset.ID)"
                                         ngbDropdownItem
                                     >
-                                        <div class="icon__remove qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                        <div class="qt-icon icon__delete qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                         Remove
                                     </li>
                                     <li
@@ -510,7 +517,7 @@
                                         (click)="sendCommand('ira', asset.ID)"
                                         ngbDropdownItem
                                     >
-                                        <div class="icon__reset qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                        <div class="qt-icon icon__reset qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                         Install Remote Agent
                                     </li>
                                     <li
@@ -519,7 +526,7 @@
                                         (click)="sendCommand('ura', asset.ID)"
                                         ngbDropdownItem
                                     >
-                                        <div class="icon__remove qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                        <div class="qt-icon icon__delete qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                         Uninstall Remote Agent
                                     </li>
                                 </ul>
@@ -576,7 +583,7 @@
                         [ngClass]="{ icon__computer:
               assetData.iconName === 'Workstation' || !assetData.iconName,
             icon__tablet: assetData.iconName === 'Networking Hardware',
-            icon__printer: assetData.iconName === 'Printer',
+            icon__print: assetData.iconName === 'Printer',
             icon__server: assetData.iconName === 'Server',
             icon__documents: assetData.iconName !== 'Workstation' || assetData.iconName !== 'Networking Hardware' || assetData.iconName !== 'Printer' || assetData.iconName !== 'Server',
             '--offline': !assetData.online,
@@ -591,7 +598,7 @@
                         [ngClass]="{ icon__computer:
             assetData.iconName === 'Workstation' || !assetData.iconName,
           icon__tablet: assetData.iconName === 'Networking Hardware',
-          icon__printer: assetData.iconName === 'Printer',
+          icon__print: assetData.iconName === 'Printer',
           icon__server: assetData.iconName === 'Server',
           icon__documents: assetData.iconName !== 'Workstation' || assetData.iconName !== 'Networking Hardware' || assetData.iconName !== 'Printer' || assetData.iconName !== 'Server',
           '--offline': !assetData.online,
@@ -622,7 +629,7 @@
                                 ngbDropdownItem
                                 (click)="gotiDetailDevice(assetData.Guid)"
                             >
-                                <div class="qt-ic-c icon__go-to qt-pointer qt-sz-16 qt-mr-8"></div>
+                                <div class="qt-ic-c qt-icon icon__external-link qt-pointer qt-sz-24 qt-mr-8"></div>
                                 Device Detail
                             </li>
                             <li
@@ -630,7 +637,7 @@
                                 ngbDropdownItem
                                 (click)="sendCommand('r', assetData.ID)"
                             >
-                                <div class="icon__reset qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                <div class="qt-icon icon__reset qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                 Restart
                             </li>
                             <li
@@ -638,29 +645,31 @@
                                 ngbDropdownItem
                                 (click)="sendCommand('s', assetData.ID)"
                             >
-                                <div class="icon__shutdown qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                <div class="qt-icon icon__shutdown qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                 Shutdown
                             </li>
                             <li
                                 class="pointer"
                                 ngbDropdownItem
                             >
-                                <div class="icon__master-agent qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                <div class="qt-icon icon__agent qt-sz-16 qt-mr-8"></div>
                                 Set as Master Agent
                             </li>
                             <li
                                 class="pointer"
                                 (click)="sendCommand('ar', assetData.ID)"
                             >
-                                <div class="icon__remove pointer qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                <div class="qt-icon icon__delete pointer qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                 Remove
                             </li>
                         </ul>
                     </div>
                     <div
-                        class="qt-pointer company-device-aside__arrow-right-icon icon__arrow-right"
+                        class="qt-pointer company-device-aside__arrow-right-icon qt-df qt-ai-c qt-jc-c"
                         (click)="menuclose()"
-                    ></div>
+                    >
+                      <div class="qt-icon icon__arrow-right qt-sz-24"></div>
+                    </div>
                 </div>
             </div>
             <div class="company-device-aside__subheader">
@@ -680,10 +689,12 @@
                     (click)="tab = 'SOFTWARE'"
                 ></div>
                 <div
-                    class="company-device-aside__subheader-item subheader-item-updates"
+                    class="company-device-aside__subheader-item qt-df qt-ai-c qt-jc-c"
                     [ngClass]="{'--active':tab === 'UPDATES'}"
                     (click)="tab = 'UPDATES'"
-                ></div>
+                >
+                  <div class="qt-icon icon__update qt-sz-16"></div>
+                </div>
             </div>
             <div class="company-device-aside__body">
                 <div
@@ -1086,13 +1097,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
 <div
     [hidden]="!opened"
     class="qt-aside-modern"
@@ -1103,7 +1107,7 @@
         </div>
         <div>
             <div
-                class="qt-aside__close-modal icon__close"
+                class="qt-aside__close-modal qt-icon icon__close"
                 (click)="closed()"
             ></div>
         </div>
@@ -1221,15 +1225,22 @@
                 Linked Devices
             </label>
             <div class="Rectangle_device-popup">
-                <mat-form-field appearance="none">
-                    <mat-chip-list #chipdeviceTag>
-                        <mat-chip
+                <app-mat-form-field
+                    appearance="none"
+                    #formField1
+                >
+                    <app-mat-chip-list
+                        [items]="linkDevicesTag"
+                        (onChangeItems)="formField1.checkSelectedItems(linkDevicesTag)"
+                        #chipdeviceTag
+                    >
+                        <app-mat-chip
                             *ngFor="let tag of linkDevicesTag; let i=index"
-                            (removed)="Deviceremove(i)"
+                            (onClose)="Deviceremove(i)"
+                            [isRemove]="true"
                         >
                             {{tag.Name}}
-                            <mat-icon matChipRemove></mat-icon>
-                        </mat-chip>
+                        </app-mat-chip>
                         <input
                             autofocus
                             id="dropdownServices"
@@ -1238,11 +1249,10 @@
                             ngbDropdownToggle
                             class="pointer"
                             placeholder="Enter Devices"
-                            [matChipInputFor]="chipdeviceTag"
                             (keyup)="onSearchLinkDevices($event.target.value)"
                         >
-                    </mat-chip-list>
-                </mat-form-field>
+                    </app-mat-chip-list>
+                </app-mat-form-field>
             </div>
             <div
                 class="dropdown-menu"
@@ -1275,15 +1285,22 @@
                 Tag
             </label>
             <div class="Rectangle_device-popup">
-                <mat-form-field appearance="none">
-                    <mat-chip-list #chipTag>
-                        <mat-chip
+                <app-mat-form-field
+                    #formField2
+                    appearance="none"
+                >
+                    <app-mat-chip-list
+                        [items]="selectedSidebarTag"
+                        (onChangeItems)="formField2.checkSelectedItems(selectedSidebarTag)"
+                        #chipTag
+                    >
+                        <app-mat-chip
                             *ngFor="let tag of selectedSidebarTag; let i = index"
-                            (removed)="onTagRemove(i)"
+                            (onClose)="onTagRemove(i)"
+                            [isRemove]="true"
                         >
                             {{ tag.Name }}
-                            <mat-icon matChipRemove>cancel</mat-icon>
-                        </mat-chip>
+                        </app-mat-chip>
                         <input
                             autofocus
                             id="dropdownServices"
@@ -1292,13 +1309,12 @@
                             ngbDropdownToggle
                             class="pointer"
                             placeholder="Enter tag"
-                            [matChipInputFor]="chipTag"
                             (blur)="addTags($event.target.value)"
                             (keyup.enter)="addTags($event.target.value)"
                             (keyup)="onSidebarSearchTag($event.target.value)"
                         >
-                    </mat-chip-list>
-                </mat-form-field>
+                    </app-mat-chip-list>
+                </app-mat-form-field>
             </div>
             <div
                 class="dropdown-menu"
@@ -1384,13 +1400,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
 <ng-template #templatePowersell>
     <div class="modal-content restart-modal">
         <div class="modal-header">

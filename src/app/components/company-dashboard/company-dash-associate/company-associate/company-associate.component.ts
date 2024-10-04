@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CompanyAssociateItem } from './class/company-associate-item';
+import { MatFormFieldComponent } from 'src/app/components/shared/mat-form-field/mat-form-field.component';
 
 @Component({
   selector: 'company-associate',
@@ -31,10 +32,10 @@ export class CompanyAssociateComponent implements OnInit, OnDestroy {
   @ViewChild('dp', { static: true }) dp: any;
   @Output() companiesChange = new EventEmitter();
   /**
-   * Creates an instance of the TagsComponent with the injected services
-   * @param {TagsService} tagsService Service to work with tags
-   * @param {TagsStateService} tagsState to work with tags state
-   */
+ * Creates an instance of the TagsComponent with the injected services
+ * @param {TagsService} tagsService Service to work with tags
+ * @param {TagsStateService} tagsState to work with tags state
+ */
   public constructor(
 
     private companiesStateService: CompaniesStateService,
@@ -99,9 +100,7 @@ export class CompanyAssociateComponent implements OnInit, OnDestroy {
   */
 
   public setDefaultScoll() {
-
     this.selectedCompanies = [];
-
   }
 
 

@@ -11,11 +11,7 @@ import { ModalImageCropperStateService } from 'src/app/services/modal/modal-imag
 import { ImageCroper } from 'src/app/services/modal/modal-image-cropper/class/image-croper';
 import { CompanyEditLogo } from '../../companies/class/company-edit-logo';
 import { CompaniesService } from 'src/app/services/company/companies.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ImageCropperComponent } from '../../shared/image-cropper/image-cropper.component';
 import { CompanySubscriptionStateService } from '../../companies/company-subscription/class/company-subscription-state.service';
-import { Company } from 'src/app/interfaces/company/company';
-import { TitleListType } from '../../tickets/tickets/tickets-header/class/title-list-type';
 import { CompanyTagsStateService } from '../../companies/company-tags/states/company-tags-state.service';
 import { CompanyTagsComponent } from '../../companies/company-tags/company-tags.component';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
@@ -45,19 +41,16 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
   phoneTypes = ['Office', 'Mobile', 'Fax'];
   selectedUserType: CrmCompanyJobType;
   selectedUserTitle: CrmCompanyJobTitle;
-  selectedUserIndustry: CrmCompanyIndustry;
   userTypes: Array<CrmCompanyJobType> = [];
   sub: Subscription = new Subscription();
   MODE_EDIT_SUBSCRIPTION = MODE_EDIT_SUBSCRIPTION;
   MODE_EDIT_USER_SUBSCRIPTION = MODE_EDIT_USER_SUBSCRIPTION;
-  industries: Array<CrmCompanyIndustry> = [];
   idUploadFile: string;
   userRoles: Array<UserRole> = [];
   @ViewChild('editBtn', { static: true }) editBtn: DisabledBtnDirective;
   @ViewChild('companyTags', { static: true }) companyTags: CompanyTagsComponent;
   @ViewChild('jobTitleDp', { static: false }) jobTitleDp: DropDownComponent;
   @ViewChild('jobTypeDp', { static: true }) jobTypeDp: DropDownComponent;
-  @ViewChild('jobIndustryDp', { static: true }) jobIndustryDp: DropDownComponent;
   @ViewChild('userRolesDP', { static: false }) userRolesDP: DropDownComponent;
   constructor(private imageCropperStateService: ImageCropperStateService,
     public ticketsListService: TicketsListService,
@@ -66,8 +59,6 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     private usersService: UsersService,
     private companiesStateService: CompaniesStateService,
     private modalImageCropperStateService: ModalImageCropperStateService,
-    private tagsState: CompanyTagsStateService,
-    private companySubscriptionState: CompanySubscriptionStateService,
     private crmStateService: CrmStateService,
     public customerRoleStateService: CustomerRoleStateService,
     public customerPortalStateService: CustomerPortalStateService,
@@ -75,11 +66,6 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.industries = this.crmStateService.getIndustryList();
-    let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
-      this.industries = data;
-    })
-    this.sub.add(onGetIndustry);
     this.jobTitleList = this.crmStateService.getJobTitleList();
     let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
       this.jobTitleList = data;
@@ -87,7 +73,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     this.sub.add(onGetJobTitle);
     this.onCroppImage();
     this.userRoles = this.customerRoleStateService.getUserRoles();
-    this.usersStateService.getOpenEditAside().subscribe(data => {
+    let getOpenEditAside = this.usersStateService.getOpenEditAside().subscribe(data => {
       if (!this.customerRoleStateService.isGetUserRole) this.customerRoleStateService.onInitGetUsersRoles();
       this.opened = true;
       this.getJobTypeList();
@@ -96,19 +82,14 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
       this.companyTags.setSelectedTag(this.user.tags);
       this.selectedUserType = this.userTypes.find(item => item.id == this.user.jobTypeId);
       this.selectedUserTitle = this.jobTitleList.find(item => item.id == this.user.jobTitleId);
-      this.selectedUserIndustry = this.industries.find(item => item.id == this.user.userIndustryId);
       this.validate.addPhoneNumbers(this.user.phoneNumbers);
     })
+    this.sub.add(getOpenEditAside);
     let onGetUserRole = this.customerRoleStateService.onGetUserRole.subscribe(data => {
       this.userRoles = this.customerRoleStateService.getUserRoles();
       if (this.userRolesDP) this.userRolesDP.reset(this.userRoles);
     })
     this.sub.add(onGetUserRole);
-  }
-
-  onSelectClientIndustry(item) {
-    this.selectedUserIndustry = item;
-    this.user.setUserIndustryId((item) ? item.id : null);
   }
   public onChangeTags(tags) {
     this.user.setTags(tags);
@@ -196,6 +177,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     if (this.user.primaryEmail && this.user.primaryEmail.length > 0 && this.user.companyId) this.onCheckValidPrimaryEmail();
   }
   onCheckValidPrimaryEmail() {
+    if (!this.validate.getPrimaryContactEmail()) return;
     this.usersService.checkValidPrimaryEmail(this.user.primaryEmail, this.companiesStateService.getCurrentCompany().id, this.usersStateService.getuserForEdit().id).subscribe((data: any) => {
 
       this.validate.setExistPrimaryContactEmail(data.value);
@@ -303,10 +285,8 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     this.validate = new UserValidate();
     this.selectedUserTitle = null;
     this.selectedUserType = null;
-    this.selectedUserIndustry = null;
     this.jobTitleDp.clearWithOutChanges();
     this.jobTypeDp.clearWithOutChanges();
-    this.jobIndustryDp.clearWithOutChanges();
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
     }

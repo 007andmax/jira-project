@@ -9,16 +9,19 @@ import { Subscription } from 'rxjs';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { ROLLBACK_INVOICE, REFUND_PAYMENTS } from 'src/app/const/confirm';
 import { InvoiceRealTimeService } from 'src/app/states/invoice/invoice-real-time.service';
-import { InvoicesAsidePreviewComponent } from './invoices-aside-preview/invoices-aside-preview.component';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toastr-progress-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'app-invoices',
   templateUrl: './invoices.component.html',
   styleUrls: ['./invoices.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   providers: [InvoicesListService]
 })
 export class InvoicesComponent implements OnInit, OnDestroy {
@@ -26,14 +29,12 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   invoices: Array<Invoice> = [];
   showPendingPreloader: boolean = false;
   showPreloader: boolean = true;
-  selectedCompanyId: string = null;
+  selectedCompanyIds: Array<string> = [];
   public sort: string = '';
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
-  // showPreviewInvoice: boolean = false;
   offset: number = 40;
   public direction: string = 'ASC';
-  //previewInvoice: Invoice;
   selectedInvoices: Array<Invoice> = [];
   sub: Subscription = new Subscription();
   container = document.body.querySelector(".main-container");
@@ -51,15 +52,15 @@ export class InvoicesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.customerPortalStateService.isCustomerPortal) {
-      this.invoicesFilter.setCompanyId(this.customerPortalStateService.getInvoicesFilter().companyId);
-      this.websocketService.onInitConnectCustomerUser("new-billable-invoices", this.customerPortalStateService.getInvoicesFilter().companyId);
+      this.invoicesFilter.setCompanyIds(this.customerPortalStateService.getInvoicesFilter().companyIds);
+      this.websocketService.onInitConnectCustomerUser("new-billable-invoices", this.customerPortalStateService.getInvoicesFilter().companyIds[0]);
     }
     let onInvoiceFilters = this.customerPortalStateService.onInvoiceFilters.subscribe(data => {
       this.invoicesFilter.onInitLeftOffset(false);
       this.invoicesFilter.resetLeftOffset();
       this.selectedInvoices = [];
-      this.selectedCompanyId = null;
-      this.invoicesFilter.setCompanyId(this.customerPortalStateService.getInvoicesFilter().companyId);
+      this.selectedCompanyIds = [];
+      this.invoicesFilter.setCompanyIds(this.customerPortalStateService.getInvoicesFilter().companyIds);
       this.invoicesFilter.resetSortBy();
       this.showPreloader = true;
       document.body.querySelector(".main-container").scrollTo(0, 0);
@@ -74,12 +75,11 @@ export class InvoicesComponent implements OnInit, OnDestroy {
       this.onScroll();
     })
     this.sub.add(getOnCompanies);
-
     let getOnInitFilter = this.invoiceStateService.getOnInitFilter().subscribe(data => {
       this.invoicesFilter.onInitLeftOffset(false);
       this.invoicesFilter.resetLeftOffset();
       this.selectedInvoices = [];
-      this.selectedCompanyId = null;
+      this.selectedCompanyIds = [];
       this.invoicesFilter = data;
       this.invoicesFilter.resetSortBy();
       this.showPreloader = true;
@@ -99,7 +99,6 @@ export class InvoicesComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
-
     let changeInvoice = this.invoiceRealTimeService.changeInvoice.subscribe(data => {
       if (data.action === 'INVOICE_SAVED') {
         let index = this.invoices.findIndex(item => item.id === data.data.id);
@@ -130,7 +129,6 @@ export class InvoicesComponent implements OnInit, OnDestroy {
             this.invoicesFilter.updateLeftOffset();
           }
         });
-
       }
       if (data.action === 'INVOICE_DELETED') {
         let index = this.invoices.findIndex(item => item.id === data.data.id);
@@ -145,11 +143,9 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(changeInvoice);
     let getClosedAside = this.invoiceStateService.getClosedAside().subscribe(data => {
-
-      this.selectedCompanyId = null;
+      this.selectedCompanyIds = [];
       this.invoices.forEach(item => {
         item.selected = false;
-        item.blockSelected = false;
       })
     })
     this.sub.add(getClosedAside);
@@ -170,7 +166,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   }
   onCreatePayment() {
     this.selectedInvoices = [];
-    if (this.selectedCompanyId) {
+    if (this.selectedCompanyIds.length > 0) {
       this.invoices.forEach(item => {
         if (item.selected) this.selectedInvoices.push(item);
       })
@@ -181,12 +177,6 @@ export class InvoicesComponent implements OnInit, OnDestroy {
 
   onPreviewInvoice(data) {
     this.invoiceStateService.togglePreview(data.id);
-    /*  this.previewInvoice = data;
-      if (this.showPreviewInvoice) {
-        this.cd.detectChanges();
-        this.previewInvoiceAside.onGetInvoice();
-      }
-      this.showPreviewInvoice = true;*/
   }
   onRollbackInvoice(invoice) {
     this.toastrProgressStateService.onInit(invoice.id);
@@ -199,7 +189,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   public sortBy(sort) {
     this.showPreloader = true;
     this.selectedInvoices = [];
-    this.selectedCompanyId = null;
+    this.selectedCompanyIds = [];
     this.direction = this.invoicesListService.getDirection(this.direction, this.sort, sort);
     this.sort = sort;
     this.invoicesFilter.setSortBy(`${this.sort}_${this.direction}`);
@@ -208,19 +198,12 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     this.onScroll();
   }
   onSelectInvoice() {
-    let find = this.invoices.find(item => item.selected);
-    if (find) {
-      this.selectedCompanyId = find.companyId;
-      this.invoices.forEach(item => {
-        if (item.companyId !== this.selectedCompanyId) item.blockSelected = true;
-        if (item.companyId === this.selectedCompanyId) item.blockSelected = false;
-      })
-    } else {
-      this.selectedCompanyId = null;
-      this.invoices.forEach(item => {
-        item.blockSelected = false
-      })
-    }
+    this.invoices.forEach(item => {
+      if (item.selected) this.selectedCompanyIds.push(item.companyId);
+    })
+    this.selectedCompanyIds = this.selectedCompanyIds.filter((item, pos, self) => {
+      return self.indexOf(item) == pos;
+    })
     this.cd.detectChanges();
   }
   getInvoices() {
@@ -232,10 +215,6 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     if (this.page_number > 0) this.showPendingPreloader = true;
     this.invoicesService.getInvoices(this.invoicesFilter.getFIlter()).subscribe((data: any) => {
       this.invoices = [...this.invoices, ...data.map(item => new Invoice(item))];
-      if (this.selectedCompanyId) this.invoices.forEach(item => {
-        if (item.companyId !== this.selectedCompanyId) item.blockSelected = true;
-        if (item.companyId === this.selectedCompanyId) item.blockSelected = false;
-      })
       this.infiniteScrollDisabled = false;
       if (data.length < this.offset) this.invoicesListService.setBlockList(true);
       this.page_number += 1;

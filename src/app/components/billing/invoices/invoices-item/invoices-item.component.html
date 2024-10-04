@@ -1,9 +1,17 @@
-<tr [ngClass]="{'--selected': invoice.selected}">
-    <td class="invoice-table__check">
-        <div class="qt-df">
+<div
+    class="qt-table-modern__row"
+    [ngClass]="{'--selected': invoice.selected}"
+>
+    <div
+        class="invoice-table__check"
+        [ngClass]="{'no-pointer':invoice.status == 'DELETED'}"
+    >
+        <div
+            class="qt-df"
+            *ngIf="invoice.status != 'DELETED'"
+        >
             <label
-                class="qt-checkbox"
-                [ngClass]="{'--disabled':invoice.blockSelected, 'pointer':!invoice.blockSelected}"
+                class="qt-checkbox pointer"
                 [attr.for]="'invoice-' + invoice.id"
             >
                 <input
@@ -11,61 +19,71 @@
                     [(ngModel)]="invoice.selected"
                     type="checkbox"
                     (change)="onChangeSelect()"
-                    [disabled]="invoice.blockSelected"
                 >
                 <span></span>
             </label>
         </div>
-    </td>
-    <td
-        class="invoce-table__date"
+    </div>
+    <div
+        class="invoce-table__date no-pointer"
         [textContent]="getDate(invoice.date)"
-    ></td>
-    <td
-        class="invoce-table__invoice"
+    ></div>
+    <div
+        class="invoce-table__invoice pointer"
         [textContent]="invoice.number"
         (click)="onShowPreviewInvoice()"
-    ></td>
-    <td
-        class="invoce-table__company"
-        [textContent]="(company) ? company.name : ''"
-    ></td>
-    <td class="invoce-table__status">
+    ></div>
+    <div class="invoce-table__company ellipsis no-pointer">
+        <span
+            class="ellipsis"
+            [textContent]="(company) ? company.name : ''"
+        ></span>
+    </div>
+    <div class="invoce-table__status no-pointer">
         <span
             class="tag__modern --warning"
-            *ngIf="invoice.isOverDue && !invoice.paidOn"
+            *ngIf="invoice.isOverDue && !invoice.paidOn && invoice.status != 'DELETED'"
             [textContent]="'Overdue by ' + invoice.getOverDueDate() + ' days'"
         ></span>
         <span
             class="tag__modern --info"
-            *ngIf="!invoice.isOverDue && !invoice.paidOn"
+            *ngIf="!invoice.isOverDue && !invoice.paidOn && invoice.status != 'DELETED'"
             [textContent]="'Due in ' + invoice.getDueDate() + ' days'"
         ></span>
         <span
             class="tag__modern --success"
-            *ngIf="invoice.paidOn"
+            *ngIf="invoice.paidOn && invoice.status != 'DELETED'"
             [textContent]="'Paid ' + invoice.getPaidOnDate() + ' days ago'"
         ></span>
-    </td>
-    <td
-        class="invoce-table__read-on"
+        <span
+            class="tag__modern saved"
+            *ngIf="invoice.status == 'DELETED'"
+            [textContent]="'Deleted'"
+        ></span>
+    </div>
+    <div
+        class="invoce-table__read-on no-pointer"
         [textContent]="getDate(invoice.readedAt)"
-    ></td>
-    <td
-        class="invoce-table__amount"
-        [textContent]="invoice.totalSum | currency"
-    ></td>
-    <td
-        class="invoce-table__balance-due"
-        [textContent]="((invoice.totalSum || invoice.sum) - invoice.paidSum) | currency"
-    ></td>
-    <td
+    ></div>
+    <div class="invoce-table__amount ellipsis no-pointer">
+        <span
+            class="ellipsis"
+            [textContent]="invoice.totalSum | currency"
+        ></span>
+    </div>
+    <div class="invoce-table__balance-due no-pointer">
+        <span
+            class="ellipsis"
+            [textContent]="((invoice.totalSum || invoice.sum) - invoice.paidSum) | currency"
+        ></span>
+    </div>
+    <div
         class="invoce-table__menu"
         ngbDropdown
         [container]="'body'"
     >
         <div
-            class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
+            class="qt-ic-c qt-icon icon__more  qt-pointer qt-sz-16 qt-bg-contain"
             id="dropdownBasic1"
             ngbDropdownToggle
         >
@@ -78,27 +96,27 @@
                     class="pointer"
                     ngbDropdownItem
                     (click)="resendInvoices(false)"
-                    *ngIf="!customerPortalStateService.isCustomerPortal"
+                    *ngIf="!customerPortalStateService.isCustomerPortal && invoice.status != 'DELETED'"
                 >
-                    <div class="icon__email-dark qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                    <div class="qt-icon icon__email-send qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Resend
                 </li>
                 <li
                     class="pointer"
                     ngbDropdownItem
                     (click)="resendInvoices(true)"
-                    *ngIf="!customerPortalStateService.isCustomerPortal"
+                    *ngIf="!customerPortalStateService.isCustomerPortal && invoice.status != 'DELETED'"
                 >
-                    <div class="icon__resend-pdf qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                    <div class="qt-icon icon__resend qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Resend with PDF
                 </li>
                 <li
                     class="pointer"
                     ngbDropdownItem
-                    *ngIf="!invoice.readedAt && !customerPortalStateService.isCustomerPortal"
+                    *ngIf="!invoice.readedAt && !customerPortalStateService.isCustomerPortal && invoice.status != 'DELETED'"
                     (click)="markAsRead()"
                 >
-                    <div class="icon__mark-as-read qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                    <div class="qt-icon icon__show qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Mark as Read
                 </li>
                 <li
@@ -106,33 +124,33 @@
                     ngbDropdownItem
                     (click)="exportAsPDF()"
                 >
-                    <div class="icon__download-pdf qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                    <div class="qt-icon icon__download qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Export as PDF
                 </li>
                 <li
                     class="pointer"
                     ngbDropdownItem
-                    *ngIf="invoice.paidOn && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')"
+                    *ngIf="invoice.paidOn && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE') && invoice.status != 'DELETED'"
                     (click)="refundPayments()"
                 >
-                    <div class="icon__refund-payment qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                    <div class="qt-icon icon__return-money qt-sz-20 qt-mr-12"></div>
                     Refund Payments
                 </li>
                 <li
                     class="pointer"
                     ngbDropdownItem
-                    *ngIf="!invoice.paidOn && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')"
+                    *ngIf="!invoice.paidOn && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE') && invoice.status != 'DELETED'"
                     (click)="rollbackInvoice()"
                 >
-                    <div class="icon__rool-back qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                    <div class="qt-icon icon__subscription qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Rollback
                 </li>
                 <li
                     ngbDropdownItem
                     class="payment-menu-item"
-                    *ngIf="!customerPortalStateService.isCustomerPortal"
+                    *ngIf="!customerPortalStateService.isCustomerPortal && invoice.status != 'DELETED'"
                 >
-                    <div class="icon__payment-history qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                    <div class="qt-icon icon__updates qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Payment history
                     <div class="dropdown-submenu-wrapper payment-info-submenu">
                         <div class="payment-info">
@@ -171,5 +189,5 @@
                 </li>
             </ul>
         </div>
-    </td>
-</tr>
+    </div>
+</div>

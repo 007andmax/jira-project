@@ -1,6 +1,11 @@
 @import "./src/assets/styles/variable";
+@import "./src/assets/styles/mixin/breakpoint";
 
 .quotes-page {
+  .qt-table-modern__row {
+    min-height: 48px;
+    height: auto;
+  }
   .quotes-company-filter {
     width: 35%;
     margin-right: 8px;
@@ -15,7 +20,6 @@
   }
   .quotes-date-filter {
     width: 23%;
-    //max-width: 216px; // TODO check this style
   }
 
   .quotes-table {
@@ -24,32 +28,31 @@
       word-break: break-word;
     }
     &__check {
-      max-width: 32px;
-      min-width: 32px;
-      width: 32px;
+      flex: 0 0 50px;
       padding-right: 0px;
       padding-left: 16px;
+    }
+    .qt-table-modern__row {
+      .quotes-table__check {
+        padding-left: 22px;
+      }
     }
     td.quotes-table__check {
       padding-top: 16px;
     }
 
     &__date {
-      max-width: 113px;
-      min-width: 113px;
-      width: 113px;
-      padding-left: 16px;
-      padding-right: 8px;
-      padding-top: 14px;
+      flex: 0 0 113px;
     }
     td.quotes-table__date {
       padding-top: 14px;
     }
 
     &__company {
-      max-width: 192px;
-      min-width: 192px;
-      width: 192px;
+      flex: 0 0 190px;
+      @include media-breakpoint-down($md) {
+        flex: 0 0 156px;
+      }
       padding-left: 8px;
       padding-right: 8px;
     }
@@ -58,7 +61,7 @@
     }
 
     &__description {
-      width: 100%;
+      flex: 2 0 130px;
       padding-left: 8px;
       padding-right: 8px;
     }
@@ -67,29 +70,31 @@
     }
 
     &__number {
-      max-width: 72px;
-      min-width: 72px;
-      width: 72px;
+      flex: 0 0 72px;
       padding-left: 8px;
       padding-right: 8px;
     }
-    td.quotes-table__number {
-      font-weight: $fw-medium;
-      color: $blue-light-600;
-      padding-top: 14px;
+    .qt-table-modern__row {
+      .quotes-table__number {
+        font-weight: 500;
+        color: $blue-light-600;
+        font-size: 14px;
+      }
     }
 
     &__create-by {
-      max-width: 160px;
-      min-width: 160px;
-      width: 160px;
+      flex: 0 0 160px;
       padding-left: 8px;
       padding-right: 8px;
+      @include media-breakpoint-up($md) {
+        flex: 0 0 200px;
+      }
+      &-user-name {
+        max-width: calc(100% - 55px);
+      }
     }
     &__recipients {
-      max-width: 190px;
-      min-width: 190px;
-      width: 190px;
+      flex: 0 0 190px;
       padding-left: 8px;
       padding-right: 8px;
     }
@@ -98,9 +103,7 @@
     }
 
     &__status {
-      max-width: 90px;
-      min-width: 90px;
-      width: 90px;
+      flex: 0 0 90px;
       padding-left: 8px;
       padding-right: 8px;
     }
@@ -109,9 +112,7 @@
     }
 
     &__valid {
-      max-width: 100px;
-      min-width: 100px;
-      width: 100px;
+      flex: 0 0 104px;
       padding-left: 8px;
       padding-right: 8px;
     }
@@ -120,9 +121,7 @@
     }
 
     &__total {
-      max-width: 92px;
-      min-width: 92px;
-      width: 92px;
+      flex: 0 0 92px;
       padding-left: 8px;
       padding-right: 12px;
       text-align: right;
@@ -132,12 +131,11 @@
     }
 
     &__menu {
-      max-width: 24px;
-      min-width: 24px;
-      width: 24px;
+      flex: 0 0 50px;
       padding-left: 0;
       padding-right: 0;
-      padding-top: 16px;
+      padding-top: 15px;
+      padding-bottom: 15px;
     }
     td.quotes-table__menu {
       padding-top: 16px;
@@ -295,7 +293,6 @@
       margin-right: -30px;
       &__textarea {
         min-height: 72px;
-        max-width: 541px;
       }
     }
 
@@ -312,7 +309,7 @@
     }
     .mat-form-field-wrapper {
       padding: 0;
-      border-radius: 4px;
+      border-radius: 6px;
       border: solid 1px $gray-200;
 
       &:hover {
@@ -336,7 +333,6 @@
     .mat-form-field-label {
       margin: 0;
       font-size: 13px;
-      font-weight: normal;
       font-stretch: normal;
       font-style: normal;
       line-height: 1.54;
@@ -353,6 +349,9 @@
     input {
       border-color: transparent;
       height: 38px;
+      &:hover {
+        background-color: transparent;
+      }
     }
     .mat-chip.mat-primary {
       height: 32px;
@@ -397,11 +396,12 @@
   .mat-option {
     color: $gray-900;
     font-size: 13px;
-    height: 32px;
+    height: 36px !important;
+    line-height: 36px !important;
     padding: 6px 15px;
     &:hover {
-      background-color: $background !important;
-      color: $gray-900;
+      background-color: $gray-50;
+      color: $blue-light-600 !important;
     }
   }
 }
@@ -434,5 +434,13 @@
         height: 300px;
       }
     }
+  }
+}
+
+
+.quotes-page {
+  .qt-page-list__header-thead,
+  .qt-page-list__body-tbody {
+    min-width: 1180px;
   }
 }

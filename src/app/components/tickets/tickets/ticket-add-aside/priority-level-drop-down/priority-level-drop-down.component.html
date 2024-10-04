@@ -1,0 +1,94 @@
+<div
+    ngbDropdown
+    #dp="ngbDropdown"
+    [ngClass]="class"
+    [container]="container"
+    [ngStyle]="{'width':widthInput ? widthInput : '100%'}"
+>
+    <div
+        *ngIf="title"
+        class="app-drop-down__title"
+        [textContent]="title"
+    ></div>
+    <app-mat-error
+        class="invalid-feedback"
+        *ngIf="!validate"
+        [textContent]="errorMessage"
+    >
+    </app-mat-error>
+    <div
+        class="qt-input-block__dot priority-dot selected-priority"
+        [ngStyle]="{'background-color':  statusColors[selectedItem.color] && statusColors[selectedItem.color].textColor ,
+                            'border-color':  statusColors[selectedItem.color] && statusColors[selectedItem.color].textColor}"
+    ></div>
+    <input
+        type="text"
+        [ngStyle]="{'width': '100%', 'height': heightInput ? heightInput : '40px' }"
+        [ngClass]="{'disabled': isDisabled, '--input-error' : !validate}"
+        [disabled]="isDisabled"
+        [value]="getSelectedItemText()"
+        autocomplete="off"
+        [placeholder]="placeholder"
+        id="dropdown1"
+        class="qt-dropdown-input"
+        [attr.maxlength]="maxlength"
+        (input)="onCheckAdd($event)"
+        (focus)="onFocus($event)"
+        [readonly]="!change"
+        ngbDropdownAnchor
+    >
+    <span
+        class="app-drop-down__right-icon pointer"
+        *ngIf="list && !isDisabled"
+        [ngStyle]="{'bottom': heightInput ? dividePosition(heightInput) : '20px' }"
+    >
+        <i
+            *ngIf="selectedItem && !isAdd && !isBlockClear"
+            class="icn-sm icn-remove-old"
+            (click)="clearClient()"
+        ></i>
+        <i
+            *ngIf="(!selectedItem || isBlockClear) && !isAdd && !preloader"
+            class="icn-sm report-caret-icon"
+        ></i>
+        <i
+            *ngIf="isAdd"
+            (click)="addItem()"
+            class="icn-sm icn-product-save qt-icon icon__done qt-icon__blue-light-600"
+        ></i>
+    </span>
+    <i
+        class="loading xs"
+        *ngIf="preloader"
+    ></i>
+    <div
+        ngbDropdownMenu
+        [ngStyle]="{'width': dropdownWidth ? dropdownWidth : '100%', 'max-height': dropdownHeight ? dropdownHeight : '192px'}"
+        aria-labelledby="dropdown1"
+        class="app-drop-down__dropdown"
+    >
+        <ng-template
+            ngFor
+            let-item
+            [ngForOf]="list"
+            let-i="index"
+        >
+            <div
+                class="qt-df qt-ai-c qt-ml-8 priority-item"
+                [ngClass]="{'--selected':isSelected(item)}"
+            >
+                <div
+                    class="qt-input-block__dot priority-dot"
+                    [ngStyle]="{'background-color':  statusColors[item.color] && statusColors[item.color].textColor ,
+                            'border-color':  statusColors[item.color] && statusColors[item.color].textColor}"
+                ></div>
+                <button
+                    ngbDropdownItem
+                    [textContent]="reduceItemName(item)"
+                    (click)="onSelect(item)"
+                    [title]="reduceItemName(item)"
+                ></button>
+            </div>
+        </ng-template>
+    </div>
+</div>

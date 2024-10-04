@@ -7,6 +7,8 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { UserCustomerCompaniesInfo } from 'src/app/components/users/class/user-customer-companies-info';
 import { CompanyUser } from './class/company-user';
+import { DevicesService } from 'src/app/services/devices/devices.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'company-users-drop-down',
@@ -15,22 +17,27 @@ import { CompanyUser } from './class/company-user';
   providers: [TicketsListService],
 })
 export class CompanyUsersDropDownComponent extends DropDownComponent {
-
-  selectedCustomerCompany: UserCustomerCompaniesInfo;
+  @Input() isShowTooltip: boolean = false;
+  sub: Subscription = new Subscription();
+  @Input() selectedCustomerCompany: UserCustomerCompaniesInfo;
+  @Input() selectedItem = null;
+  @Input() tooltipMessage = "";
   constructor(public elRef: ElementRef,
     public companiesStateService: CompaniesStateService,
     public usersStateService: UsersStateService,
     public customerPortalStateService: CustomerPortalStateService,
     public companiesService: CompaniesService,
     public ticketsListService: TicketsListService,
+    public devicesService: DevicesService,
     public cd: ChangeDetectorRef,) {
-    super(elRef, companiesStateService, usersStateService, customerPortalStateService, companiesService, cd);
+    super(elRef, companiesStateService, usersStateService, customerPortalStateService, companiesService, devicesService, cd);
   }
   ngOnInit() {
     if (this.usersStateService.getAllUsers().length > 0) this.onGetUsers(this.usersStateService.getAllUsers());
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.onGetUsers(data);
     })
+    this.sub.add(getOnUsers);
   }
   /**
  * @description Check if item is selected
@@ -45,7 +52,7 @@ export class CompanyUsersDropDownComponent extends DropDownComponent {
  * @returns {String} This is the result
 */
   getSelectedItemText() {
-    return (this.selectedItem) ? `${this.getUserName(this.selectedItem)} - ${this.selectedCustomerCompany.clientCompanyName}` : "";
+    return (this.selectedItem && this.selectedCustomerCompany) ? `${this.getUserName(this.selectedItem)} - ${this.selectedCustomerCompany.clientCompanyName}` : "";
   }
   /**
  * @description Init logic to get user list from global request

@@ -1,0 +1,26 @@
+<div
+    class="qt-pos-rel qt-w100 edit-ip-container"
+    [ngClass]="{'qt-mb-12' : !validate.getIpAdress()}"
+    [init]="isInitEdit"
+    appClickOtside
+    [class]="'.edit-ip-container'"
+    (onOutSide)="onCheckValue()"
+>
+    <input
+        type="text"
+        [ngClass]="{'--input-error': !validate.getIpAdress()}"
+        class="device-table__input-name"
+        [(ngModel)]="value"
+        appKeyUpEnter
+        (onChange)="onCheckValue()"
+        [disabled]="isDisabled"
+        [attr.placeholder]="placeholder"
+        (input)="setIsInitEdit(true)"
+    >
+    <app-mat-error
+        class="invalid-feedback"
+        *ngIf="!validate.getIpAdress()"
+    >
+        Enter a valid IP value
+    </app-mat-error>
+</div>

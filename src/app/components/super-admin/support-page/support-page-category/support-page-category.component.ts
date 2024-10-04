@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { forkJoin, Subscription } from 'rxjs';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
@@ -17,7 +17,7 @@ import { SupportPageHeaderComponent } from '../support-page-header/support-page-
   templateUrl: './support-page-category.component.html',
   styleUrls: ['./support-page-category.component.scss']
 })
-export class SupportPageCategoryComponent implements OnInit {
+export class SupportPageCategoryComponent implements OnInit, OnDestroy {
   _id: string = '';
   content: string = "";
   isPreview: boolean = false;
@@ -37,6 +37,7 @@ export class SupportPageCategoryComponent implements OnInit {
     private supportPageCategoriesRealTimeService: SupportPageCategoriesRealTimeService,
     private supportPageCategoriesStateService: SupportPageCategoriesStateService) { }
 
+
   ngOnInit() {
     this._id = this.activateRoute.snapshot.params['id'];
     let subscription = this.activateRoute.params.subscribe(params => {
@@ -45,15 +46,17 @@ export class SupportPageCategoryComponent implements OnInit {
     });
     this.sub.add(subscription);
     if (this._id && this.isFirstOpen) this.getCategories(this.supportPageCategoriesStateService.getCategories());
-    this.supportPageCategoriesStateService.onGetCategories.subscribe((data) => {
+    let onGetCategories = this.supportPageCategoriesStateService.onGetCategories.subscribe((data) => {
       if (this.isFirstOpen) this.getCategories(data);
     });
+    this.sub.add(onGetCategories);
     this.supportPageCategoriesStateService.toggleShowHelpCenter(false);
-    this.supportPageCategoriesRealTimeService.changeCategoryArray.subscribe(data => {
+    let changeCategoryArray = this.supportPageCategoriesRealTimeService.changeCategoryArray.subscribe(data => {
       if (data.action === "DELETE_SUPPORT_CATEGORY" && (this.selectedCategory && this.selectedCategory.id === data.data)) this.selectedCategory = null;
       if (data.action === "EDIT_SUPPORT_CATEGORY" && (this.selectedCategory && this.selectedCategory.id === data.data)) this.selectedCategory.onUpdate(data.data);
       this.cd.markForCheck();
     });
+    this.sub.add(changeCategoryArray);
   }
   getCategories(data) {
     if (data.length > 0) this.isFirstOpen = false;
@@ -193,5 +196,8 @@ export class SupportPageCategoryComponent implements OnInit {
   }
   onChangeAttachments(data) {
     this.attachments = data;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

@@ -1,11 +1,6 @@
 <div class="qt-page-list__header --sticky">
     <div class="qt-page-list__header-title-line">
-        <div class="qt-page-list__header-title-line--left">
-            <h6
-                class="qt-page-list__header-title"
-                [textContent]="'All Users (' + count + ')'"
-            ></h6>
-        </div>
+        <app-users-filter-info></app-users-filter-info>
         <div class="qt-page-list__header-title-line--rigth">
             <div class="qt-df qt-ai-c">
                 <div class="qt-input-search qt-ml-8">
@@ -14,65 +9,58 @@
                         type="text"
                         placeholder="Search user"
                         [(ngModel)]="searchText"
-                        (blur)="onBlurSearch($event)"
                         (keyup)="onKeyUp($event)"
                     >
                     <span
-                        class="search-clear icon__close-round"
+                        class="search-clear qt-icon icon__close-round qt-icon__gray-400"
                         *ngIf="searchText.length > 0"
                         (click)="clearSearch()"
                     ></span>
                 </div>
-                <button
-                    class="qt-btn --transparent"
-                    (click)="clearAll()"
-                    *ngIf="countFilter > 0"
-                >
-                    Clear all
-                </button>
                 <div
-                    class="company-devices-page__list-header-buttons"
+                    class="company-devices-page__list-header-buttons qt-fs-0 qt-ml-8"
                     *ngIf="getSelectedCount() > 0"
                 >
-                    <div [textContent]="getSelectedCount() + ' Users Selected'"></div>
+                    <div class="qt-fs-0" [textContent]="getSelectedCount() + ' Users Selected'"></div>
                     <div
-                        class="qt-ml-20 qt-fw-500 qt-df qt-ai-c qt-color-info qt-ai-c qt-pointer"
+                        class="qt-ml-20 qt-fw-500 qt-df qt-ai-c qt-color-info qt-ai-c qt-pointer qt-fs-0"
                         *ngIf="!isExistArchiveUser() && (type === TYPE_LIST_MARKETING_USERS || type === TYPE_LIST_COMPANY_USERS)"
                         (click)="showAsideForDraftEmail()"
                     >
-                        <div class="icon__email-blue qt-sz-16 qt-ic-c qt-mr-6"></div>
+                        <div class="qt-icon icon__email qt-icon__blue-light-600 qt-sz-16 qt-ic-c qt-mr-6"></div>
                         <div class="qt-lh-1">Send email</div>
                     </div>
                     <div
-                        class="qt-ml-20 qt-fw-500 qt-df qt-ai-c qt-color-info qt-ai-c qt-pointer"
+                        class="qt-ml-20 qt-fw-500 qt-df qt-ai-c qt-color-info qt-ai-c qt-pointer qt-fs-0"
                         *ngIf="!isExistArchiveUser() && (type === TYPE_LIST_MARKETING_USERS || type === TYPE_LIST_COMPANY_USERS)"
                         (click)="showAddToSubscription()"
                     >
-                        <div class="icon__list qt-sz-16 qt-ic-c qt-mr-6"></div>
+                        <div class="qt-icon icon__documents qt-icon__blue-light-600 qt-sz-16 qt-ic-c qt-mr-6 qt-fs-0"></div>
                         <div class="qt-lh-1">Save to Subscriptions</div>
                     </div>
                     <div
-                        class="qt-ml-20 qt-fw-500 qt-df qt-ai-c qt-color-info qt-ai-c qt-pointer"
+                        class="qt-ml-20 qt-fw-500 qt-df qt-ai-c qt-color-info qt-ai-c qt-pointer qt-fs-0"
                         *ngIf="!isExistArchiveUser() && isUserOneCustomSubscription()"
                         (click)="removeUsersFromSubscription()"
                     >
-                        <div class="icon__new-remove-user qt-sz-16 qt-ic-c qt-mr-6"></div>
+                        <div class="icon__new-remove-user qt-sz-16 qt-ic-c qt-mr-6 qt-fs-0"></div>
                         <div class="qt-lh-1">Remove From Marketing Subscription</div>
                     </div>
                     <div
-                        class="qt-ml-20 qt-fw-500 qt-df qt-ai-c qt-color-info qt-ai-c qt-pointer"
+                        class="qt-ml-20 qt-fw-500 qt-df qt-ai-c qt-color-info qt-ai-c qt-pointer qt-fs-0"
                         *ngIf="!isExistArchiveUser() && !isExistPrimaryContact() && currentUser && currentUser.checkPermission('ARCHIVE_USERS')"
                         (click)="delete()"
                     >
-                        <div class="icon__archive-blue qt-sz-16 qt-ic-c qt-mr-6"></div>
+                        <div class="qt-icon icon__delete qt-icon__red-600 qt-sz-16 qt-ic-c qt-mr-6"></div>
                         <div class="qt-lh-1">Archive User</div>
                     </div>
                 </div>
                 <button
-                    class="qt-btn btn-filter qt-ml-8 qt-df"
-                    [ngClass]="{'active':!toggleFilter}"
-                    (click)="toggleFilter  = !toggleFilter"
+                    class="qt-button --gray --md filter-button qt-ml-8 qt-df"
+                    [ngClass]="{'active':toggleFilter}"
+                    (click)="setToggleFilter(!toggleFilter)"
                 >
+                    <span class="qt-icon icon__filter qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
                     <span
                         class="filter-counter qt-circle qt-sz-18 qt-fw-600 qt-fs-10 qt-color-white qt-bg-info qt-mr-8 qt-df qt-ai-c qt-jc-c"
                         *ngIf="countFilter > 0"
@@ -82,7 +70,8 @@
                 </button>
                 <!-- add class 'active' if filters open -->
                 <button
-                    class="qt-button --gray --md qt-ml-8"
+                    [ngClass]="(type == TYPE_LIST_COMPANY_USERS) ? 'qt-button --md qt-ml-8' : 'qt-button --gray --md qt-ml-8'"
+                    class="qt-button --md"
                     (click)="addUser()"
                     *ngIf="getPermissions('CREATE_USERS')"
                 >
@@ -91,101 +80,9 @@
             </div>
         </div>
     </div>
-    <app-users-filter
+    <!-- <app-users-filter
         #filter
         (changeCountFilter)="onChangeCountFilter($event)"
         [hidden]="toggleFilter"
-    ></app-users-filter>
-    <div class="qt-page-list__header-thead-container">
-        <table class="qt-table-modern qt-page-list__header-thead">
-            <thead>
-                <tr>
-                    <th class="users-table__check">
-                        <div class="qt-df">
-                            <label
-                                class="qt-checkbox"
-                                for="all-users"
-                            >
-                                <input
-                                    id="all-users"
-                                    [(ngModel)]="selectAll"
-                                    (change)="toggleAllUser($event)"
-                                    type="checkbox"
-                                >
-                                <span></span>
-                            </label>
-                        </div>
-                    </th>
-                    <th
-                        class="users-table__name pointer"
-                        (click)="onFilter('name')"
-                    >
-                        Name
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
-                        class="users-table__company pointer"
-                        (click)="onFilter('company')"
-                        [ngClass]="{'users-table__company-full': type === TYPE_LIST_ALL_USERS}"
-                        *ngIf="type === TYPE_LIST_ALL_USERS || type === TYPE_LIST_MARKETING_USERS"
-                    >
-                        Company
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
-                        class="users-table__company pointer"
-                        (click)="onFilter('portalAccessStatus')"
-                        *ngIf="type !== TYPE_LIST_MARKETING_USERS"
-                    >
-                        Portal Status
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
-                        class="users-table__company pointer"
-                        (click)="onFilter('primaryEmail')"
-                        *ngIf="type === TYPE_LIST_COMPANY_USERS"
-                    >
-                        Email
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
-                        class="users-table__company pointer"
-                        (click)="onFilter('industry')"
-                    >
-                        Industry
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
-                        class="users-table__contract-no pointer"
-                        (click)="onFilter('contact')"
-                    >
-                        Contact No
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
-                        class="users-table__subscription"
-                        *ngIf="type === TYPE_LIST_COMPANY_USERS"
-                    >
-                        Subscription
-                    </th>
-                    <th
-                        class="users-table__subscription"
-                        *ngIf="type === TYPE_LIST_MARKETING_USERS"
-                    >
-                        Marketing Subscription
-                    </th>
-                    <th
-                        class="users-table__tickets pointer"
-                        (click)="onFilter('tickets')"
-                        *ngIf="type === TYPE_LIST_ALL_USERS || type === TYPE_LIST_COMPANY_USERS"
-                    >
-                        Tickets
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th class="users-table__email"></th>
-                    <th class="users-table__menu"></th>
-                </tr>
-            </thead>
-        </table>
-    </div>
+    ></app-users-filter> -->
 </div>

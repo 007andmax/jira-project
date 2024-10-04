@@ -17,11 +17,13 @@
                 #copyKeyTooltip
             ></app-dynamic-tooltip>
             <div
-                class="support-item-menu__button icon__copy pointer"
+                class="support-item-menu__button qt-df qt-ai-c qt-jc-c pointer"
                 (mouseenter)="copyKeyTooltip.show($event.target)"
                 (mouseleave)="copyKeyTooltip.hide()"
                 (click)="copyKey()"
-            ></div>
+            >
+              <div class="qt-icon icon__copy qt-sz-20"></div>
+            </div>
             <app-dynamic-tooltip
                 [content]="'Email Info'"
                 [position]="'top'"
@@ -30,9 +32,11 @@
             <div
                 (mouseenter)="emailInfoTooltip.show($event.target)"
                 (mouseleave)="emailInfoTooltip.hide()"
-                class="support-item-menu__button icon__email-dark pointer"
+                class="support-item-menu__button pointer qt-df qt-ai-c qt-jc-c"
                 (click)="sendEmail()"
-            ></div>
+            >
+              <div class="qt-icon icon__email-send qt-sz-20"></div>
+            </div>
             <app-dynamic-tooltip
                 [content]="'Copy Support URL'"
                 [position]="'top'"
@@ -41,9 +45,11 @@
             <div
                 (mouseenter)="copySupportTooltip.show($event.target)"
                 (mouseleave)="copySupportTooltip.hide()"
-                class="support-item-menu__button icon__link-agent pointer"
+                class="support-item-menu__button qt-df qt-ai-c qt-jc-c pointer"
                 (click)="copyLink()"
-            ></div>
+            >
+              <div class="qt-icon icon__links qt-sz-20"></div>
+            </div>
         </div>
         <div class="support-timeline-status">
             <app-dynamic-tooltip
@@ -52,9 +58,9 @@
                 #performerTooltip
             ></app-dynamic-tooltip>
             <div
-                class="support-timeline-status__step1 qt-fs-0"
-                [ngClass]="{'icon__monitor-green' : item.status === 'CONNECTED',
-                'icon__monitor' : item.status !== 'CONNECTED'}"
+                class="support-timeline-status__step1 qt-fs-0 qt-icon icon__monitor"
+                [ngClass]="{'qt-icon__green-600' : item.status === 'CONNECTED',
+                'qt-icon__gray-500' : item.status !== 'CONNECTED'}"
                 (mouseenter)="performerTooltip.show($event.target)"
                 (mouseleave)="performerTooltip.hide()"
             ></div>
@@ -74,12 +80,14 @@
                 (mouseenter)="agentConnectedTooltip.show($event.target)"
                 (mouseleave)="agentConnectedTooltip.hide()"
             >
-                <i class="icon__connection-green"></i>
+                <i class="qt-icon icon__connection qt-icon__green-600"></i>
             </div>
             <div
                 *ngIf="!(item.status === 'CONNECTED' && item.online) && !(item.status === 'INSTALLED' && item.online)"
-                class="support-timeline-status__step2 icon__connection qt-fs-0"
-            ></div>
+                class="support-timeline-status__step2 qt-fs-0 qt-df qt-ai-c qt-jc-c"
+            >
+              <div class="qt-icon icon__connection qt-sz-20"></div>
+            </div>
             <div
                 *ngIf="item.status === 'INSTALLED' && item.online"
                 class="support-timeline-status__step2 pointer"
@@ -87,7 +95,7 @@
                 container="body"
                 ngbDropdownToggle
             >
-                <i class="icon__connection-green"></i>
+                <i class="qt-icon icon__connection qt-icon__green-600"></i>
                 <ul
                     ngbDropdownMenu
                     class="qt-dropdown-menu"
@@ -117,9 +125,9 @@
                 #userNameTooltip
             ></app-dynamic-tooltip>
             <div
-                class="support-timeline-status__step3 qt-fs-0"
-                [ngClass]="{'icon__monitor-green' : item.status === 'CONNECTED' && item.online,
-                'icon__monitor' : item.status !== 'CONNECTED' || !item.online}"
+                class="support-timeline-status__step3 qt-fs-0 qt-icon icon__monitor"
+                [ngClass]="{'qt-icon__green-600' : item.status === 'CONNECTED' && item.online,
+                'qt-icon__gray-500' : item.status !== 'CONNECTED' || !item.online}"
                 (mouseenter)="userNameTooltip.show($event.target)"
                 (mouseleave)="userNameTooltip.hide()"
             ></div>
@@ -129,7 +137,7 @@
         class="tab-pane-input__row company-info-block company-info-block__yellow qt-mr-16 qt-ml-16 qt-mt-16 qt-mb-30"
         *ngIf="item"
     >
-        <div class="icon__company-info--yellow-800 qt-sz-20 qt-ic-c qt-mr-8 qt-fs-0"></div>
+        <div class="qt-icon icon__info qt-icon__yellow-800 qt-sz-20 qt-ic-c qt-mr-8 qt-fs-0"></div>
         <span
             class="qt-f-1"
             [innerHTML]="getMessage()"
@@ -139,7 +147,9 @@
         class="qt-df qt-ai-c qt-fd-c init-connection qt-pb-30 qt-pt-30"
         *ngIf="!item"
     >
-        <div class="icon__connection qt-sz-24 qt-mb-16"></div>
+        <div class="icon__connection-wrap qt-df qt-ai-c qt-jc-c qt-mb-16">
+          <div class="qt-icon icon__connection qt-sz-24"></div>
+        </div>
         <div class="csp-block-support__title qt-mb-8">No Connection Establish</div>
         <p class="csp-block-support__text qt-mb-16">Click button to create new one</p>
         <a
@@ -147,7 +157,7 @@
             class="qt-button qt-button--with-icon --gray --md pointer cps-block__create-connection-btn"
             (click)="create()"
         >
-            <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+            <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8 qt-button-icon"></span>
             Create Connection
         </a>
     </div>

@@ -8,6 +8,9 @@
         width: 36px;
         height: 36px;
     }
+  &.show {
+    display: flex !important;
+  }
 }
 .open-pdf-btn {
     display: flex;

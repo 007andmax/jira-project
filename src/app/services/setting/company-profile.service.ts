@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { ToastrService } from 'ngx-toastr';
 import { tap } from 'rxjs/operators';
@@ -79,7 +79,12 @@ export class CompanyProfileService {
     return this.http.put(
       `${this.apiUrl}settings/companyProfile/ticketSettings`,
       workTime
-    );
+    ).pipe(
+      tap(data => {
+        this.toastrService.success("Records Saved Successfully");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   getConstants() {
@@ -106,7 +111,12 @@ export class CompanyProfileService {
   }
 
   setAccountingStartDate(data) {
-    return this.http.post(this.apiUrl + `settings/companyProfile/accountingStartDate`, data);
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    return this.http.post(this.apiUrl + `settings/companyProfile/accountingStartDate`, data, options);
   }
 
   resetAccountingStartDate() {

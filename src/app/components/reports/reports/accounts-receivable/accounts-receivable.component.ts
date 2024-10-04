@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { ReportsStateService } from 'src/app/states/reports/reports-state.service';
 import { AccountsReceivable } from '../../class/accounts-receivable';
+import { AccountsReceivableItem } from './class/accounts-receivable-item';
 
 @Component({
   selector: 'app-accounts-receivable',
@@ -14,7 +14,7 @@ export class AccountsReceivableComponent implements OnInit {
   classes = [];
   selectedClient = null;
   loadingInProgress: boolean = false;
-  constructor(private reportsStateService: ReportsStateService, public cd: ChangeDetectorRef,) { }
+  constructor(public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
 
@@ -36,36 +36,60 @@ export class AccountsReceivableComponent implements OnInit {
     this.headers.push("Total");
     this.classes = ["accounts-receivable__col-company-name", "", "", "", "", "", ""];
     this.list = [];
-    this.accountsReceivable.lines.forEach((item, index) => {
-      let list = [];
-
-      if (this.accountsReceivable.type === "SUMMARY") list.push(item.clientCompanyName);
-      if (this.accountsReceivable.type === "DETAILED") list.push(item.invoiceNumber);
-      list.push(`$${this.parseTotal(item.currentSum)}`);
-      list.push(`$${this.parseTotal(item.month1Sum)}`);
-      list.push(`$${this.parseTotal(item.month2Sum)}`);
-      list.push(`$${this.parseTotal(item.month3Sum)}`);
-      list.push(`$${this.parseTotal(item.olderSum)}`);
-      list.push(`$${this.parseTotal(item.totalSum)}`);
-      this.list.push(list);
+    this.accountsReceivable.reportData.forEach((item, index) => {
+      let list: Array<AccountsReceivableItem> = [];
+      if (this.accountsReceivable.type != "DETAILED") {
+        list.push(new AccountsReceivableItem(item.clientCompanyName));
+        list.push(new AccountsReceivableItem(`$${this.parseTotal(item.totalCurrentSum)}`));
+        list.push(new AccountsReceivableItem(`$${this.parseTotal(item.total1MonthSum)}`));
+        list.push(new AccountsReceivableItem(`$${this.parseTotal(item.total2MonthSum)}`));
+        list.push(new AccountsReceivableItem(`$${this.parseTotal(item.total3MonthSum)}`));
+        list.push(new AccountsReceivableItem(`$${this.parseTotal(item.totalOlderSum)}`));
+        list.push(new AccountsReceivableItem(`$${this.parseTotal(item.totalSum)}`));
+        this.list.push(list);
+      } else {
+        this.list.push([new AccountsReceivableItem(item.clientCompanyName, "qt-fw-b"), new AccountsReceivableItem(''), new AccountsReceivableItem(''), new AccountsReceivableItem(''), new AccountsReceivableItem(''), new AccountsReceivableItem(''), new AccountsReceivableItem('')]);
+      }
+      item.lines.forEach((itemLine, index) => {
+        let listLine = [];
+        listLine.push(new AccountsReceivableItem(itemLine.invoiceNumber));
+        listLine.push(new AccountsReceivableItem(`$${this.parseTotal(itemLine.currentSum)}`));
+        listLine.push(new AccountsReceivableItem(`$${this.parseTotal(itemLine.month1Sum)}`));
+        listLine.push(new AccountsReceivableItem(`$${this.parseTotal(itemLine.month2Sum)}`));
+        listLine.push(new AccountsReceivableItem(`$${this.parseTotal(itemLine.month3Sum)}`));
+        listLine.push(new AccountsReceivableItem(`$${this.parseTotal(itemLine.olderSum)}`));
+        listLine.push(new AccountsReceivableItem(`$${this.parseTotal(itemLine.totalSum)}`));
+        this.list.push(listLine);
+      });
+      if (this.accountsReceivable.type == "DETAILED") {
+        this.list.push([new AccountsReceivableItem('Total', "qt-fw-b"), new AccountsReceivableItem(this.parseTotal(item.totalCurrentSum)), new AccountsReceivableItem(this.parseTotal(item.total1MonthSum)), new AccountsReceivableItem(this.parseTotal(item.total2MonthSum)), new AccountsReceivableItem(this.parseTotal(item.total3MonthSum)), new AccountsReceivableItem(this.parseTotal(item.totalOlderSum)), new AccountsReceivableItem(this.parseTotal(item.totalSum))]);
+        this.list.push([new AccountsReceivableItem(''), new AccountsReceivableItem(''), new AccountsReceivableItem(''), new AccountsReceivableItem(''), new AccountsReceivableItem(''), new AccountsReceivableItem(''), new AccountsReceivableItem('')]);
+      }
     })
+    this.list.push([new AccountsReceivableItem(''), new AccountsReceivableItem(''), new AccountsReceivableItem(''), new AccountsReceivableItem(''), new AccountsReceivableItem(''), new AccountsReceivableItem(''), new AccountsReceivableItem('')]);
     let list = [];
-    list.push("Total");
-    list.push(`$${this.parseTotal(this.accountsReceivable.totalCurrentSum)}`);
-    list.push(`$${this.parseTotal(this.accountsReceivable.total1MonthSum)}`);
-    list.push(`$${this.parseTotal(this.accountsReceivable.total2MonthSum)}`);
-    list.push(`$${this.parseTotal(this.accountsReceivable.total3MonthSum)}`);
-    list.push(`$${this.parseTotal(this.accountsReceivable.totalOlderSum)}`);
-    list.push(`$${this.parseTotal(this.accountsReceivable.totalSum)}`);
+    if (this.accountsReceivable.type == "DETAILED") {
+      list.push(new AccountsReceivableItem('Report total', "qt-fw-b"));
+    } else {
+      list.push(new AccountsReceivableItem('Total', "qt-fw-b"));
+    }
+    list.push(new AccountsReceivableItem(`$${this.parseTotal(this.accountsReceivable.totalCurrentSum)}`));
+    list.push(new AccountsReceivableItem(`$${this.parseTotal(this.accountsReceivable.total1MonthSum)}`));
+    list.push(new AccountsReceivableItem(`$${this.parseTotal(this.accountsReceivable.total2MonthSum)}`));
+    list.push(new AccountsReceivableItem(`$${this.parseTotal(this.accountsReceivable.total3MonthSum)}`));
+    list.push(new AccountsReceivableItem(`$${this.parseTotal(this.accountsReceivable.totalOlderSum)}`));
+    list.push(new AccountsReceivableItem(`$${this.parseTotal(this.accountsReceivable.totalSum)}`));
     this.list.push(list);
+
     this.cd.detectChanges();
   }
   onSelectedClient(client) {
     this.selectedClient = client;
-
   }
   parseTotal(value) {
     return parseFloat(value.toString()).toFixed(2)
   }
-
+  public trackByIndex(index, item) {
+    return index;
+  }
 }

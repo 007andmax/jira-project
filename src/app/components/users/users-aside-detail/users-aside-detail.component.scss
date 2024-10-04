@@ -75,8 +75,7 @@ users-aside-detail-tickets,
 users-aside-detail-documents,
 users-aside-detail-passwords,
 users-aside-detail-messages {
-  //height: 100%;
-  height: calc(100% - 40px); // TODO check this style
+  height: calc(100% - 40px);
   flex: 1;
   display: flex;
 }
@@ -123,7 +122,7 @@ users-aside-detail-messages {
   outline: none;
 }
 .qt-input-block {
-  .icon__edit-gray {
+  .icon__edit {
     position: absolute;
     top: 0;
     right: 0;

@@ -1,0 +1,93 @@
+<div
+    class="qt-aside-modern users-page__aside"
+    *ngIf="opened"
+>
+    <!-- *ngIf="opened" -->
+    <div class="qt-aside-modern__header">
+        <div
+            class="qt-aside-modern__header-title"
+            *ngIf="!editMode"
+        >
+            Save to Subscription
+        </div>
+        <div
+            class="qt-aside-modern__header-title qt-df qt-ai-c pointer"
+            *ngIf="editMode"
+            (click)="toggleEdit()"
+        >
+            <i class="qt-icon icon__arrow-back qt-ic-c qt-sz-24 qt-va-m qt-dib qt-mr-12"></i>
+            <span class="qt-color-gray-500 qt-fs-14">Save to Subscription</span>
+            <span class="qt-color-gray-500 qt-mr-4 qt-ml-4 qt-fs-14">/</span>
+            <span class="qt-color-gray-900 qt-fs-14">Edit Subscription</span>
+        </div>
+        <div
+            class="qt-df"
+            *ngIf="!editMode"
+        >
+            <div
+                class="qt-button --square-md --gray pointer"
+                (click)="toggleEdit()"
+                placement="top"
+                ngbTooltip="Edit Subscription"
+            >
+                <i class="qt-icon icon__edit qt-sz-16 qt-bg-contain"></i>
+            </div>
+            <div
+                class="qt-button --square-md --gray pointer qt-ml-8"
+                (click)="add()"
+                placement="left"
+                ngbTooltip="Create new subscription"
+            >
+                <i class="qt-icon icon__add  qt-sz-16"></i>
+            </div>
+        </div>
+    </div>
+    <div class="qt-aside-modern__content">
+        <div class="qt-inputs-row">
+            <div class="qt-input-block qt-f100">
+                <div
+                    class="qt-input-block__label qt-mb-12"
+                    *ngIf="!editMode"
+                >
+                    Select Subscription from following List
+                </div>
+                <ng-template
+                    ngFor
+                    let-subscription
+                    [ngForOf]="listCustomSubscription"
+                    [ngForTrackBy]="trackById"
+                >
+                    <app-marketing-subscriptions-aside-item-info
+                        *ngIf="!editMode"
+                        [subscription]="subscription"
+                    ></app-marketing-subscriptions-aside-item-info>
+                    <app-marketing-subscriptions-aside-item-edit
+                        *ngIf="editMode"
+                        [subscription]="subscription"
+                        class="qt-mb-12"
+                    ></app-marketing-subscriptions-aside-item-edit>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+    <div class="qt-aside-modern__footer">
+        <div class="qt-df qt-w100">
+            <button
+                class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
+                (click)="close()"
+            >
+                Cancel
+            </button>
+            <button
+                class="qt-button qt-jc-c qt-w100"
+                appDisabledBtn
+                #addBtn="disabled"
+                (onClick)="save()"
+                [ngClass]="{'--loading':addBtn.isBlock()}"
+            >
+                <span>Save</span>
+                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+            </button>
+        </div>
+    </div>
+</div>

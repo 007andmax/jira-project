@@ -1,12 +1,15 @@
 <div class="qt-page-list products-page">
     <inventory-header
+        #header
         (onSearch)="onSearch($event)"
         (onFilter)="onFilter($event)"
+        (onSelectAllIventory)="onSelectAllIventory($event)"
     ></inventory-header>
     <div class="qt-page-list__body">
         <div class="qt-page-list__body-table-container">
-            <table class="qt-page-list__body-tbody qt-table-modern products-table">
-                <tbody
+            <div class="qt-page-list__body-tbody qt-table-modern products-table">
+                <div
+                    class="tbody"
                     infiniteScroll
                     [infiniteScrollContainer]="container"
                     [infiniteScrollDistance]="2"
@@ -21,10 +24,12 @@
                         [ngForTrackBy]="trackById"
                     >
                         <app-inventory-table
+                            #inventoryItem
                             [companies]="companies"
                             [taxes]="taxes"
                             [glNumbers]="glNumbers"
                             [item]="inventory"
+                            (onSelectIventory)="onSelectIventory($event)"
                         ></app-inventory-table>
                     </ng-template>
                     <div
@@ -37,8 +42,8 @@
                         class="loading"
                         *ngIf="showPreloader"
                     ></div>
-                </tbody>
-            </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>

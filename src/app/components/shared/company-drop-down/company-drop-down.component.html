@@ -11,12 +11,12 @@
         class="app-drop-down__title"
         [textContent]="title"
     ></div>
-    <mat-error
+    <app-mat-error
         class="invalid-feedback mat-error"
         *ngIf="!validate"
         [textContent]="errorMessage"
     >
-    </mat-error>
+    </app-mat-error>
     <form>
         <input
             type="text"
@@ -51,7 +51,7 @@
             <i
                 *ngIf="isAdd"
                 (click)="addItem()"
-                class="icn-sm icn-product-save icon__active_subscription"
+                class="icn-sm icn-product-save qt-icon icon__done qt-icon__blue-light-600"
             ></i>
         </span>
         <i

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from "@angular/core";
-import { EmailSettingService } from "../email-setting.service";
+import { EmailSettingService } from "../../../../services/email-settings/email-setting.service";
 import { SettingService } from "src/app/services/setting/setting.service";
 import { ToastrService } from "ngx-toastr";
 import {
@@ -354,6 +354,9 @@ export class OutgoingEmailComponent implements OnInit {
   changeEncryption(value) {
     this.encryptionType = this.encryptionTypes.find(itme => itme.type == value);
     if (value) {
+      this.smtpForm.patchValue({
+        encryptionType: value == "PLAIN" ? "NONE" : value
+      });
       if (this.initialized || this.portIsEmpty) {
         var port = this.portToTypes[value];
         if (port) {

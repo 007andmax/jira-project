@@ -1,0 +1,262 @@
+<div
+    class="loading-container"
+    *ngIf="loading"
+>
+    <div class="loading"></div>
+</div>
+<div
+    class="cmn-area profile"
+    [hidden]="loading"
+>
+    <div class="tab-pane__header">
+        <div class="tab-pane__header-title">Company Info</div>
+    </div>
+    <div class="tab-pane__body">
+        <form [formGroup]="cProfileForm">
+            <div class="tab-pane__row">
+                <div class="tab-pane__subtitle">Company Name</div>
+                <div class="tab-pane-input__row">
+                    <div class="qt-input-block">
+                        <input
+                            type="text"
+                            class="form-input"
+                            placeholder="Enter Company Name"
+                            formControlName="name"
+                        >
+                        <div
+                            *ngIf="submitted && f.name.errors"
+                            class="invalid-feedback"
+                        >
+                            <div *ngIf="f.name.errors.required">Company Name is required</div>
+                            <div *ngIf="f.name.errors.minlength">Company name is too short.</div>
+                            <div *ngIf="f.name.errors.maxlength">Company name is too large.</div>
+                        </div>
+                        <label
+                            *ngIf="!isCompanyNameUnique"
+                            class="invalid-feedback"
+                        >
+                            This company name already occupied.
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane__row">
+                <div class="tab-pane__subtitle">Company Logo</div>
+                <div class="tab-pane-input__row">
+                    <span
+                        class="dp"
+                        *ngIf="imageSrc"
+                    >
+                        <img
+                            [src]="imageSrc"
+                            alt="Company"
+                        >
+                    </span>
+                    <span
+                        class="dp company-info__dp"
+                        *ngIf="imageSrc === ''"
+                    >
+                        A
+                    </span>
+                    <div class="dp-info">
+                        <input
+                            #uploadFile
+                            type="file"
+                            id="profile-dp"
+                            accept="image/gif, image/jpeg, image/png, image/jpg"
+                            (change)="onSelectFile($event)"
+                            style="display: none;"
+                        >
+                        <div class="static-link">
+                            <label
+                                class="profile-dp"
+                                for="profile-dp"
+                            >
+                                <a
+                                    href="javascript:void(0)"
+                                    class="qt-button --gray qt-mr-12"
+                                    (click)="uploadFile.click()"
+                                >
+                                    {{
+                                                    imageSrc ? "Change Logo" : "Upload Photo"
+                                                    }}
+                                </a>
+                            </label>
+                            <label
+                                for="profile-dp"
+                                *ngIf="imageSrc"
+                                (click)="deleteAvatar()"
+                            >
+                                <a
+                                    href="javascript:void(0)"
+                                    restore-default-button
+                                    class="qt-button --gray --color-red"
+                                >
+                                    Remove
+                                </a>
+                            </label>
+                        </div>
+                        <span class="dp-info-area">Maximum size of 4MB. JPG, GIF, PNG</span>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane__row">
+                <div class="tab-pane__subtitle">Mailing Address</div>
+                <div class="tab-pane-input__row">
+                    <div class="qt-input-block">
+                        <input
+                            #search
+                            id="mailing-address"
+                            placeholder="search for location"
+                            autocorrect="off"
+                            autocapitalize="off"
+                            class="form-input"
+                            spellcheck="off"
+                            type="text"
+                            formControlName="address"
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane__row">
+                <div class="tab-pane__subtitle">Suite Number & Zip Code</div>
+                <div class="tab-pane-input__row">
+                    <div class="qt-input-block qt-mr-24">
+                        <input
+                            type="text"
+                            placeholder="Enter Suite Number"
+                            class="form-input"
+                            formControlName="suiteNumber"
+                        >
+                    </div>
+                    <div class="qt-input-block">
+                        <input
+                            type="text"
+                            placeholder="Enter ZIP Code"
+                            class="form-input"
+                            formControlName="postalCode"
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane__row">
+                <div class="tab-pane__subtitle">Primary Phone Number</div>
+                <div class="tab-pane-input__row">
+                    <div class="qt-input-block qt-input-block-100">
+                        <div class="qt-df">
+                            <app-drop-down
+                                [class]="['qt-select-input-40 qt-input-prefix-drop-down']"
+                                [list]="phoneTypes"
+                                [editItem]="primaryPhoneType"
+                                [field]="'title'"
+                                [sort]="false"
+                                [isBlockClear]="true"
+                                [widthInput]="'110px'"
+                                (onSelectedItem)="onChangePrimaryPhoneType($event)"
+                            >
+                            </app-drop-down>
+                            <input
+                                type="text"
+                                class="form-input qt-input-prepend"
+                                placeholder="Primary Phone Number"
+                                prefix="+1"
+                                [validation]="true"
+                                formControlName="primaryPhone"
+                                mask="(000) 000-0000 Ext: 999999||000-000-0000"
+                                [specialCharacters]="['(',')',' ','-','E','x','t',':']"
+                                [dropSpecialCharacters]="false"
+                                (blur)="onChangePrimaryPhone($event)"
+                            >
+                            <div
+                                *ngIf="submitted && f.primaryPhone.errors"
+                                class="invalid-feedback"
+                            >
+                                <div *ngIf="f.primaryPhone.errors.minlength">Enter a valid phone number.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="qt-input-block qt-mt-16">
+                        <a
+                            href="javascript:;"
+                            *ngIf="!isAddPhone"
+                            (click)="onAddPhone()"
+                            class="qt-button --gray qt-jc-c qt-w100 ng-star-inserted"
+                        >
+                            <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8 qt-button-icon"></span>
+                            Add Phone
+                        </a>
+                    </div>
+                    <div
+                        *ngIf="isAddPhone"
+                        class="qt-input-block-100"
+                    >
+                        <div class="qt-input-block qt-input-block-100 qt-mt-16">
+                            <div class="qt-df">
+                                <app-drop-down
+                                    [class]="['qt-select-input-40 qt-input-prefix-drop-down']"
+                                    [list]="phoneTypes"
+                                    [editItem]="secondaryPhoneType"
+                                    [field]="'title'"
+                                    [sort]="false"
+                                    [isBlockClear]="true"
+                                    [widthInput]="'110px'"
+                                    (onSelectedItem)="onChangeSecondaryPhoneType($event)"
+                                >
+                                </app-drop-down>
+                                <input
+                                    type="text"
+                                    class="form-input qt-input-prepend"
+                                    [validation]="true"
+                                    formControlName="secondaryPhone"
+                                    placeholder="Secondary Phone Number"
+                                    prefix="+1"
+                                    mask="(000) 000-0000 Ext: 999999||000-000-0000"
+                                    [specialCharacters]="['(',')',' ','-','E','x','t',':']"
+                                    [dropSpecialCharacters]="false"
+                                    (blur)="onChangeSecondaryPhone($event)"
+                                >
+                                <div
+                                    *ngIf="submitted && f.secondaryPhone.errors"
+                                    class="invalid-feedback"
+                                >
+                                    <div *ngIf="f.secondaryPhone.errors.minlength">Enter a valid phone number.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            *ngIf="isAddPhone"
+                            class="qt-input-block-100 qt-mt-16"
+                        >
+                            <a
+                                href="javascript:;"
+                                class="qt-button --gray qt-jc-c qt-w100 --color-red"
+                                (click)="onAddPhone()"
+                            >
+                                <div class="qt-icon icon__delete qt-icon__red-500 qt-sz-20 qt-bg-contain qt-mr-8 qt-button-icon"></div>
+                                Remove
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane__row">
+                <div class="tab-pane__subtitle">Time Zone</div>
+                <div class="tab-pane-input__row">
+                    <div class="qt-input-block">
+                        <app-company-time-zone
+                            *ngIf="cProfile.address.length > 0"
+                            [selectedItem]="cProfile.address[0].timeZone"
+                            (selectedOffsetItem)="onChangeTimeZone($event)"
+                        ></app-company-time-zone>
+                        <div
+                            *ngIf="submitted && f.locale.errors"
+                            class="invalid-feedback"
+                        >
+                            <div *ngIf="f.locale.errors.required">Time zone value is required</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

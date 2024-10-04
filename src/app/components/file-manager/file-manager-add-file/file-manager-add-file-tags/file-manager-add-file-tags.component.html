@@ -1,0 +1,115 @@
+<div
+    class="qt-temporary-col-fix --required filter-tags-body"
+    ngbDropdown
+    container="body"
+    (openChange)="openChange($event)"
+    #dp="ngbDropdown"
+>
+    <app-mat-form-field
+        ngbDropdownAnchor
+        #formField
+        [ngClass]="{'hidde-label' :!showLabel}"
+    >
+        <app-mat-chip-list
+            #chipList
+            aria-label="Fruit selection"
+            [items]="selectedTag"
+            (onChangeItems)="formField.checkSelectedItems(selectedTag)"
+        >
+            <app-mat-chip
+                *ngFor="let tag of selectedTag; let i = index"
+                (onClose)="remove(i)"
+                [ngClass]="{'no-remove':!checkRemoveTag(i)}"
+                placement="top"
+                container="body"
+                tooltipClass="company-tags-default-tooltip"
+                ngbTooltip="This is a default tag. You cannot remove it."
+                [disableTooltip]="checkRemoveTag(i)"
+                [isRemove]="!isDisabled"
+            >
+                {{tag.word}}
+            </app-mat-chip>
+            <input
+                id="dropdownServices"
+                ngbDropdownToggle
+                placeholder="Add a Tag"
+                #userInput
+                class="pointer"
+                (input)="onSearch($event)"
+                (keyup)="onKeyUp($event)"
+                autocomplete="off"
+                [ngClass]="{'disabled': isDisabled}"
+                [disabled]="isDisabled"
+            >
+        </app-mat-chip-list>
+    </app-mat-form-field>
+    <div
+        class="select-wrapper user-aside-tags-dropdown"
+        ngbDropdownMenu
+        aria-labelledby="dropdownServices"
+    >
+        <div
+            class="content"
+            #content
+            (click)="$event.preventDefault()"
+            infiniteScroll
+            [infiniteScrollContainer]="content"
+            [infiniteScrollDistance]="2"
+            [infiniteScrollThrottle]="50"
+            [infiniteScrollDisabled]="infiniteScrollDisabled"
+            [fromRoot]="true"
+            (scrolled)="onScroll()"
+        >
+            <ng-template
+                ngFor
+                let-item
+                let-i="index"
+                [ngForOf]="tags"
+                [ngForTrackBy]="trackById"
+            >
+                <div
+                    (click)="toggleItem(item)"
+                    class="company-tag-item"
+                    [ngClass]="{'is-hover':item.isHover,
+                '--selected':isSeleted(item)}"
+                    [id]="'tag-' + item.id"
+                    *ngIf="item.defaultTag && item.defaultTag === 'USER_TAG' && !blockUserTag || item.defaultTag && item.defaultTag !== 'USER_TAG'"
+                >
+                    <label class="qt-checkbox pointer">
+                        <input
+                            type="checkbox"
+                            [checked]="isSeleted(item)"
+                            readonly
+                        >
+                        <span></span>
+                        <div class="text-content">
+                            <div class="name">{{item.word}}</div>
+                            <div
+                                class="description"
+                                *ngIf="item.defaultTag && item.defaultTag === 'USER_TAG'"
+                                [textContent]="getCompanyName(item)"
+                            >
+                            </div>
+                        </div>
+                        <i
+                            *ngIf="item.defaultTag && item.defaultTag === 'USER_TAG'"
+                            class="icon__user-grey qt-sz-16 qt-bg-contain qt-ml-8"
+                        ></i>
+                        <i
+                            *ngIf="item.defaultTag && item.defaultTag === 'COMMON'"
+                            class="icon__tag-light-gray qt-sz-16 qt-bg-contain qt-ml-8"
+                        ></i>
+                        <i
+                            *ngIf="item.defaultTag && item.defaultTag === 'COMPANY_TAG'"
+                            class="icon__company-gray qt-za-16 qt-sz-16 qt-bg-contain qt-ml-8"
+                        ></i>
+                    </label>
+                </div>
+            </ng-template>
+            <div
+                class="loading pengind-loading"
+                *ngIf="showPreloader"
+            ></div>
+        </div>
+    </div>
+</div>

@@ -9,18 +9,18 @@
                 placeholder="Write Company or Search Company"
                 (blur)="onChangeName()"
             >
-            <mat-error
+            <app-mat-error
                 class="invalid-feedback"
                 *ngIf="validate.getNameIsExist()"
             >
                 This company name already occupied
-            </mat-error>
-            <mat-error
+            </app-mat-error>
+            <app-mat-error
                 class="invalid-feedback"
                 *ngIf="!validate.getName()"
             >
                 Company name is required
-            </mat-error>
+            </app-mat-error>
         </div>
     </div>
     <div class="qt-inputs-row">
@@ -53,12 +53,12 @@
                 [specialCharacters]="['(',')',' ','-','E','x','t',':']"
                 [dropSpecialCharacters]="false"
             >
-            <mat-error
+            <app-mat-error
                 class="invalid-feedback"
                 *ngIf="!validate.getPhoneNumber()"
             >
                 Phone number is required
-            </mat-error>
+            </app-mat-error>
         </div>
     </div>
     <div class="qt-inputs-row --required">
@@ -71,24 +71,24 @@
                 [(ngModel)]="company.domain"
                 placeholder="example.com"
             >
-            <mat-error
+            <app-mat-error
                 class="invalid-feedback"
                 *ngIf="!validate.getDomain()"
             >
                 Domain is required
-            </mat-error>
-            <mat-error
+            </app-mat-error>
+            <app-mat-error
                 class="invalid-feedback"
                 *ngIf="!validate.getDomainValid()"
             >
                 Please enter a valid domain
-            </mat-error>
-            <mat-error
+            </app-mat-error>
+            <app-mat-error
                 class="invalid-feedback"
                 *ngIf="validate.getDomainIsExist()"
             >
                 This company domain already occupied
-            </mat-error>
+            </app-mat-error>
         </div>
     </div>
     <div
@@ -102,7 +102,7 @@
             >
                 + Create user
             </span>
-            <company-users-drop-down
+            <app-users-drop-down
                 #userDp
                 [class]="['qt-select-input-40']"
                 [placeholder]="'Select user'"
@@ -116,7 +116,7 @@
                 [title]="'User'"
                 (onSelectedItem)="onSelectUser($event.user)"
             >
-            </company-users-drop-down>
+            </app-users-drop-down>
         </div>
     </div>
     <div
@@ -142,12 +142,12 @@
                 (input)="onChangeFirstName()"
                 placeholder="Enter First Name"
             >
-            <mat-error
+            <app-mat-error
                 class="invalid-feedback first-name-invalid"
                 *ngIf="!validate.getFirstName()"
             >
                 First name must be a minimum of 2 characters long
-            </mat-error>
+            </app-mat-error>
         </div>
         <div class="qt-input-block qt-f50">
             <div class="qt-input-block__label">Last Name</div>
@@ -174,29 +174,35 @@
                 [specialCharacters]="['(',')',' ','-','E','x','t',':']"
                 [dropSpecialCharacters]="false"
             >
-            <mat-error
+            <app-mat-error
                 class="invalid-feedback"
                 *ngIf="!validate.getPrimaryPhoneNumber()"
             >
                 Please enter a valid phone number
-            </mat-error>
+            </app-mat-error>
         </div>
         <div class="qt-input-block qt-f50 --required">
             <div class="qt-input-block__label">Primary Contact Email</div>
             <input
                 type="text"
-                [ngClass]="{'--input-error' : !validate.getPrimaryContactEmail()}"
+                [ngClass]="{'--input-error' : !validate.getPrimaryContactEmail() || !validate.getExistPrimaryContactEmail()}"
                 [(ngModel)]="company.contacts[0].primaryEmail"
                 (input)="onChangePrimaryEmail()"
                 (blur)="onCheckEmail()"
                 placeholder="Primary Email Address"
             >
-            <mat-error
+            <app-mat-error
                 class="invalid-feedback"
                 *ngIf="!validate.getPrimaryContactEmail()"
             >
                 Please enter a valid email address
-            </mat-error>
+            </app-mat-error>
+            <app-mat-error
+                class="invalid-feedback"
+                *ngIf="!validate.getExistPrimaryContactEmail()"
+            >
+                The email address is already occupied
+            </app-mat-error>
         </div>
     </div>
     <div class="qt-inputs-row">
@@ -205,7 +211,7 @@
                 Would you like to Create Company in Advance mode?
             </div>
             <div class="info-section">
-                <div class="icon__tips qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"></div>
+                <div class="qt-icon icon__info qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"></div>
                 <span class="text">
                     Advance Company mode will provide user to add more detail like Settings, Primary
         Contact detail etc…

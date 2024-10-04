@@ -8,7 +8,6 @@ import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
-import { AppService } from 'src/app/states/app/app.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketsListService } from '../../../../services/tickets-list.service';
@@ -38,7 +37,6 @@ export class TicketDetailProfileUpdatesServiceInfoComponent implements OnInit, O
     public ticketStateService: TicketStateService,
     private ticketsService: TicketsService,
     private companiesStateService: CompaniesStateService,
-    private appService: AppService,
     public modalService: NgbModal) { }
   ngOnInit() {
     if (this.service.date) {

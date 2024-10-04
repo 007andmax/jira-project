@@ -1,20 +1,20 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { InvoiceTicketsService } from '../../accounting/accounting-settings.service';
+import { InvoiceTicketsService } from '../../../../services/accounting/accounting-settings.service';
 import { UsersService } from 'src/app/services/users/users.service';
 import { ToastrService } from 'ngx-toastr';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
-import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-ticket-settings',
   templateUrl: './ticket-settings.component.html',
   styleUrls: ['./ticket-settings.component.scss']
 })
-export class TicketSettingsComponent implements OnInit {
+export class TicketSettingsComponent implements OnInit, OnDestroy {
   intervals = [new CompanySetting('1 minute', 'ONE_MINUTE'),
   new CompanySetting('5 minutes', 'FIVE_MINUTES'),
   new CompanySetting('10 minutes', 'TEN_MINUTES'),
@@ -30,13 +30,13 @@ export class TicketSettingsComponent implements OnInit {
   public currentUser: any;
   currentCompany: any;
   hasChange: boolean = false;
+  sub: Subscription = new Subscription();
   constructor(
     private formBuilder: FormBuilder,
     private invoiceTicketsService: InvoiceTicketsService,
     private toastr: ToastrService,
     private companiesStateService: CompaniesStateService,
     private usersStateService: UsersStateService,
-    private usersService: UsersService
   ) { }
 
   /**
@@ -47,9 +47,10 @@ export class TicketSettingsComponent implements OnInit {
     if (this.usersStateService.getCurrentUser()) {
       this.currentUser = this.usersStateService.getCurrentUser();
     }
-    this.usersStateService.getOnGetCurrentuser().subscribe(data => {
+    let getOnGetCurrentuser = this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.currentUser = data;
     })
+    this.sub.add(getOnGetCurrentuser);
     this.ticketForm = this.formBuilder.group({
       ticketCount: [
         '',
@@ -64,9 +65,10 @@ export class TicketSettingsComponent implements OnInit {
       interval: ['FIVE_MINUTES'],
     });
     if (this.companiesStateService.getCurrentCompany()) this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
-    this.companiesStateService.onCurrentCompany.subscribe(res => {
+    let onCurrentCompany = this.companiesStateService.onCurrentCompany.subscribe(res => {
       this.getCurrentCompany(res);
     })
+    this.sub.add(onCurrentCompany);
     this.getActualNumber();
   }
 
@@ -195,4 +197,8 @@ export class TicketSettingsComponent implements OnInit {
       }
     );
   }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
 }

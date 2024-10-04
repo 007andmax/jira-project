@@ -1,21 +1,23 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
-import { DefaultServices } from '../../../../default-services/class/default-service';
+import { NonContractServices } from '../../../../non-contract-services/class/non-contract-service';
 import { ContractsOtherService } from '../../class/contracts-other-service';
 import { DefaultServicesHourlyContract } from '../../class/default-service-hourly-contract';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-contracts-aside-other-service',
   templateUrl: './contracts-aside-other-service.component.html',
   styleUrls: ['./contracts-aside-other-service.component.scss']
 })
-export class ContractsAsideOtherServiceComponent implements OnInit {
+export class ContractsAsideOtherServiceComponent implements OnInit, OnDestroy {
   formatDate: string = FORMAT_DATE_2;
   @Input() service: ContractsOtherService;
-  editItem: DefaultServices = null;
+  editItem: NonContractServices = null;
   @Output() onRemove = new EventEmitter<any>();
+  sub: Subscription = new Subscription();
   defaultServices: Array<DefaultServicesHourlyContract> = [];
   constructor(private contractsStateService: ContractsStateService,
     private companiesStateService: CompaniesStateService) { }
@@ -27,11 +29,12 @@ export class ContractsAsideOtherServiceComponent implements OnInit {
 
     if (this.contractsStateService.getDefaultService().length > 0) this.defaultServices = this.contractsStateService.getDefaultService().map(item => new DefaultServicesHourlyContract(item));
     this.defaultServices.sort((a, b) => a.name.localeCompare(b.name));
-    this.contractsStateService.getOnDefaultServices().subscribe(data => {
+    let getOnDefaultServices = this.contractsStateService.getOnDefaultServices().subscribe(data => {
       this.defaultServices = data.map(item => new DefaultServicesHourlyContract(item));
       this.defaultServices.sort((a, b) => a.name.localeCompare(b.name));
     })
-    if (this.service.serviceId.length > 0) this.editItem = new DefaultServices(this.service);
+    this.sub.add(getOnDefaultServices);
+    if (this.service.serviceId.length > 0) this.editItem = new NonContractServices(this.service);
   }
   public getHours() {
     let timeInMinutes = this.service.quantity * 60;
@@ -50,7 +53,7 @@ export class ContractsAsideOtherServiceComponent implements OnInit {
   public onChangeDurationService(data) {
     this.service.setQuantity(data);
   }
-  select(data: DefaultServices) {
+  select(data: NonContractServices) {
     this.editItem = data;
     this.service.setData(data);
   }
@@ -60,4 +63,8 @@ export class ContractsAsideOtherServiceComponent implements OnInit {
   remove() {
     this.onRemove.emit(null);
   }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
 }

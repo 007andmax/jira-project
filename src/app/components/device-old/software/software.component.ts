@@ -14,6 +14,7 @@ import { environment } from './../../../../environments/environment';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import DataTables from 'datatables.net';
 import { SoftwareHeaderComponent } from './software-header/software-header.component';
 
 @Component({
@@ -29,7 +30,7 @@ export class SoftwareComponent implements OnInit, OnDestroy {
   deviceDetail: any = {};
   search = '';
   DateFormat = CONFIGCONSTANTS.DateFormat;
-  dtOptions: DataTables.Settings = {
+  dtOptions: any = {
     searching: false,
     paging: false,
     info: false,
@@ -56,14 +57,10 @@ export class SoftwareComponent implements OnInit, OnDestroy {
   @ViewChild('header', { static: true }) header: SoftwareHeaderComponent;
   dtTrigger = new Subject();
   sub: Subscription = new Subscription();
-  constructor(private softwareListService: SoftwareListService,
-    private toastr: ToastrService,
+  constructor(private toastr: ToastrService,
     private deviceDetailService: DeviceDetailService,
     private hardwareService: HardwareService,
     private router: Router,
-    private excelService: ExcelService,
-    private modalService: NgbModal,
-    private confirmStateService: ConfirmStateService,
     public cd: ChangeDetectorRef,
   ) {
   }

@@ -48,16 +48,12 @@ export class DeviceIpSummaryDeviceReportComponent implements OnInit {
   tempararyDevice: any = [];
 
   constructor(public cd: ChangeDetectorRef,
-    private domSanitizer: DomSanitizer,
     private companiesStateService: CompaniesStateService,
-    private devicesStateService: DevicesStateService,
     public leftPanelStateService: LeftPanelStateService,
-    private modalService: NgbModal,
     private excelService: ExcelService,
     private commonHttpServices: CommonHttpServices,
     private toastr: ToastrService,
     private agentService: AgentService,
-    private companiesState: CompaniesStateService,
     public draftEmailStateService: DraftEmailStateService,
   ) { }
 

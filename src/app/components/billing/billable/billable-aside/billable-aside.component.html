@@ -1,5 +1,5 @@
 <div
-    class="billing-page__aside qt-aside-modern --x-large"
+    class="billing-page__aside qt-aside-modern"
     *ngIf="opened"
 >
     <div class="qt-aside-modern__header">
@@ -9,7 +9,7 @@
             *ngIf="isInit"
         >
             <div
-                class="icon__clock-timer qt-sz-20 qt-ic-c qt-mr-6"
+                class="qt-icon icon__timer qt-sz-20 qt-ic-c qt-mr-6"
                 *ngIf="billableTaimer && !billableTaimer.isFinished"
             ></div>
             <div
@@ -33,7 +33,7 @@
                 Invoice has been expired and it cannot be saved
             </div>
             <div
-                class="qt-aside-modern__header-close icon__close"
+                class="qt-aside-modern__header-close qt-icon icon__close"
                 (click)="unlock()"
             ></div>
         </div>
@@ -86,7 +86,7 @@
                         #saveAndPrintBtn="disabled"
                         (onClick)="saveAndPrint()"
                     >
-                        <div class="icon__print qt-sz-20 qt-mr-12 qt-bg-contain"></div>
+                        <div class="qt-icon icon__print qt-sz-20 qt-mr-12 qt-bg-contain"></div>
                         Save and Print
                     </li>
                     <li
@@ -95,7 +95,7 @@
                         #saveAndDownloadBtn="disabled"
                         (onClick)="saveAndDownload()"
                     >
-                        <div class="icon__download qt-sz-20 qt-mr-12 qt-bg-contain"></div>
+                        <div class="qt-icon icon__download qt-sz-20 qt-mr-12"></div>
                         Save and Download
                     </li>
                 </ul>
@@ -114,7 +114,7 @@
                         id="dropdownSave"
                         ngbDropdownToggle
                     >
-                        <div class="qt-sz-16 qt-ic-c icon__dropdown-arrow-up"></div>
+                        <div class="qt-sz-16 qt-ic-c qt-icon icon__arrow-up qt-icon__white"></div>
                     </div>
                 </button>
             </div>

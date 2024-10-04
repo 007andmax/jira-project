@@ -1,0 +1,98 @@
+<div
+    class="qt-input-block"
+    ngbDropdown
+    #tagsDp="ngbDropdown"
+    (openChange)="onChangeDropDown($event)"
+    autoClose="outside"
+    container="body"
+>
+    <div class="qt-df qt-ai-c qt-mb-12">
+        <span class="qt-fs-14 qt-color-gray-900 qt-f-1">Tags</span>
+        <div class="qt-button --square-md --gray qt-ml-8 info-file-label-edit qt-fs-0">
+            <div class="qt-icon icon__edit qt-sz-16"></div>
+        </div>
+    </div>
+    <div class="light-dropdown ticket-edit-tags">
+        <app-mat-form-field
+            #formField
+            ngbDropdownAnchor
+        >
+            <app-mat-chip-list
+                #chipList
+                aria-label="Fruit selection"
+                [items]="selectedTag"
+                (onChangeItems)="formField.checkSelectedItems(selectedTag)"
+            >
+                <span class="tag-icon"></span>
+                <app-mat-chip
+                    class="selected-tag-ticket"
+                    *ngFor="let tag of selectedTag; let i = index"
+                    (onClose)="remove(i)"
+                    [isRemove]="removable && !customerPortalStateService.isCustomerPortal"
+                >
+                    {{tag.word}}
+                </app-mat-chip>
+                <input
+                    id="dropdownServices"
+                    ngbDropdownToggle
+                    #userInput
+                    placeholder="Type characters and hit tab"
+                    class="file-manager-tag-input pointer"
+                    autocomplete="new-password"
+                    [formControl]="tagCtrl"
+                    (input)="onSearch($event)"
+                    (keyup)="onKeyUp($event)"
+                    [hidden]="customerPortalStateService.isCustomerPortal"
+                >
+            </app-mat-chip-list>
+        </app-mat-form-field>
+        <div
+            class="dropdown-menu ticket-detail-tag__dropdown-menu"
+            ngbDropdownMenu
+            aria-labelledby="dropdownServices"
+        >
+            <div class="qt-input-search">
+                <input
+                    id="search-dropdown"
+                    placeholder="Search Tags"
+                    class="pointer"
+                    autocomplete="new-password"
+                    (input)="onSearch($event)"
+                >
+            </div>
+            <div class="ticket-tags-container">
+                <div
+                    class="content"
+                    #content
+                    (click)="$event.preventDefault()"
+                    infiniteScroll
+                    [infiniteScrollContainer]="content"
+                    [infiniteScrollDistance]="2"
+                    [infiniteScrollThrottle]="50"
+                    [infiniteScrollDisabled]="infiniteScrollDisabled"
+                    [fromRoot]="true"
+                    (scrolled)="onScroll()"
+                >
+                    <ng-template
+                        ngFor
+                        let-tag
+                        [ngForOf]="tags"
+                        [ngForTrackBy]="trackById"
+                    >
+                        <button
+                            class="dropdown-item"
+                            (click)="selected(tag)"
+                            [textContent]="tag.word"
+                            [ngClass]="{'--selected':isSelected(tag.id)}"
+                        >
+                        </button>
+                    </ng-template>
+                    <div
+                        class="loading pengind-loading"
+                        *ngIf="showPreloader"
+                    ></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

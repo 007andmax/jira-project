@@ -1,34 +1,40 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { RecurringTicket } from '../class/recurring-ticket';
 import { MONTHS_SHORT } from 'src/app/const/date';
-
 import { RecurringTicketsStateService } from '../services/recurring-tickets-state.service';
 import { RecurringService } from 'src/app/services/recurring/recurring.service';
+import { TicketsListService } from '../../tickets/services/tickets-list.service';
+import { AddAssignedUserComponent } from '../../tickets/ticket-edit-aside/add-assigned-user/add-assigned-user.component';
 
 
 
 @Component({
   selector: 'app-recurring-tickets-table',
   templateUrl: './recurring-tickets-table.component.html',
-  styleUrls: ['./recurring-tickets-table.component.scss']
+  styleUrls: ['./recurring-tickets-table.component.scss'],
+
 })
 export class RecurringTicketsTableComponent implements OnInit {
   @Input() ticket: RecurringTicket;
   public showSelect = false;
 
+  @ViewChild("assignedUser") assignedUser: AddAssignedUserComponent;
   /**
    * Creates an instance of the RecurringTicketsHeaderComponent with the injected services
    * @param {RecurringTicketsStateService} recurringState to work recurring state
    * @param {RecurringService} recurringService Service to work with recurring tickets
    * 
    */
-  constructor(public recurringState: RecurringTicketsStateService, private recurringService: RecurringService,
+  constructor(public recurringState: RecurringTicketsStateService,
+    private recurringService: RecurringService,
   ) { }
 
   ngOnInit() {
 
   }
-
+  getStyleNetAvatar(i) {
+    return `${12 * i}px`;
+  }
   /**
   * Get Date
   * @param milisecong - milisecong date
@@ -37,6 +43,12 @@ export class RecurringTicketsTableComponent implements OnInit {
     let date = new Date(milisecong);
     let startDate = new Date(date.getTime() + (date.getTimezoneOffset() * 60 * 1000) + this.recurringState.getTechCompany().addresses[0].timeZone.timeOffset);
     return `${startDate.getDate()} ${MONTHS_SHORT[startDate.getMonth()]} ${startDate.getFullYear()}`;
+  }
+
+  getAssignedUserNameForAvatar(user) {
+    if (!user) return '';
+    if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}${(user.lastName) ? user.lastName[0].toUpperCase() : ''}`;
+    return '';
   }
 
   /**
@@ -58,8 +70,10 @@ export class RecurringTicketsTableComponent implements OnInit {
  * show selecct wrapper
  */
   public showSelectWrapper($event) {
-    this.showSelect = !this.showSelect;
     this.stopEvent($event);
+    this.assignedUser.assignedUserDp.open();
+    this.showSelect = !this.showSelect;
+
   }
 
   /**
@@ -100,5 +114,7 @@ export class RecurringTicketsTableComponent implements OnInit {
   public trackByIndex(index, item) {
     return index;
   }
-
+  public trackById(index, item) {
+    return item.id;
+  }
 }

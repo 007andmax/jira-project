@@ -9,6 +9,8 @@ import { Device } from '../../components/company-devices/class/device';
 import { DeviceCompany } from '../../components/company-devices/class/device-company';
 import { WebsocketService } from '../../services/websocket/websocket.service';
 import { DeviceStatus } from './class/device-status';
+import { ManufactureDevice } from 'src/app/components/company-devices/company-devices-custom-aside/class/manufacture-device';
+import { ModelDevice } from 'src/app/components/company-devices/company-devices-custom-aside/class/model-device';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +23,7 @@ export class DevicesStateService {
   onUpdateAgentActivityStatus: EventEmitter<any> = new EventEmitter();
   onResetDeviceTiming: EventEmitter<any> = new EventEmitter();
   onOpenAside: EventEmitter<any> = new EventEmitter();
+  onOpenCustomAside: EventEmitter<any> = new EventEmitter();
   onCloseAside: EventEmitter<any> = new EventEmitter();
   onRemoveConnecion: EventEmitter<any> = new EventEmitter();
   onChangeInfoForDevice: EventEmitter<any> = new EventEmitter();
@@ -30,8 +33,15 @@ export class DevicesStateService {
   onSendDeviceStatus: EventEmitter<any> = new EventEmitter();
   onLaunchRemoteApp: EventEmitter<any> = new EventEmitter();
   onInitWebSocket: EventEmitter<any> = new EventEmitter();
+  onGetManufactures: EventEmitter<any> = new EventEmitter();
+  onAddModel: EventEmitter<any> = new EventEmitter();
   isInitWebSocket: boolean = false;
   preloaderDevices: boolean = true;
+  isGetManufactures: boolean = false;
+  manufactures: Array<ManufactureDevice> = [];
+  manufacturForRemove: ManufactureDevice = null;
+  modelForRemove: ModelDevice = null;
+  onFilter: EventEmitter<any> = new EventEmitter();
   // onChangeDevices: EventEmitter<DeviceUpdate> = new EventEmitter();
   constructor(private userStateService: UsersStateService,
     private devicesService: DevicesService,
@@ -48,7 +58,52 @@ export class DevicesStateService {
       if (newChange.action === 'REMOTE_CONNECTION' && newChange.data.status === 'offline') this.closedRemoveConnecion(newChange.data.id);
       if (newChange.action === 'DEVICE_INSTALLED') this.onChangeDevice.emit(newChange);
       if (newChange.action === 'DEVICE_COUNT') this.onChangeDeviceCount.emit(newChange);
+      if (newChange.action === 'MANUFACTURE_SAVED') {
+        this.manufactures.push(new ManufactureDevice(newChange.data));
+        this.manufactures.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0);
+        this.onGetManufactures.emit(this.manufactures);
+      }
+      if (newChange.action === 'MANUFACTURE_EDITED') {
+        let index = this.manufactures.findIndex(item => item.id == newChange.data.id);
+        if (index > -1) this.manufactures[index] = new ManufactureDevice(newChange.data);
+        this.onGetManufactures.emit(this.manufactures);
+      }
+      if (newChange.action === 'MANUFACTURE_DELETED') {
+        let index = this.manufactures.findIndex(item => item.id == newChange.data);
+        if (index > -1) this.manufactures.splice(index, 1);
+        this.onGetManufactures.emit(this.manufactures);
+      }
+      if (newChange.action === 'MANUFACTURE_MODULE_SAVED') this.onAddModel.emit(newChange.data);
     })
+  }
+  public onInitFilter(data) {
+    this.onFilter.emit(data);
+  }
+  public setModelForRemove(data) {
+    this.modelForRemove = data;
+  }
+  public getModelForRemove() {
+    return this.modelForRemove;
+  }
+  public setManufacturForRemove(data) {
+    this.manufacturForRemove = data;
+  }
+  public getManufacturForRemove() {
+    return this.manufacturForRemove;
+  }
+  public initGetManufactures() {
+    this.devicesService.getManufactures().subscribe((data: any) => {
+      this.manufactures = data.manufacturers.map(item => new ManufactureDevice(item));
+      this.manufactures.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0);
+      this.onGetManufactures.emit(this.manufactures);
+      this.isGetManufactures = true;
+    })
+  }
+  public setManufactures(data) {
+    this.manufactures = data;
+  }
+  public getManufactures() {
+    return this.manufactures;
   }
   public changeDevice(allDevices, newChange) {
     if (newChange.action === 'DEVICE_UNINSTALLED') {
@@ -126,6 +181,9 @@ export class DevicesStateService {
   }
   public getOnOpenAside() {
     return this.onOpenAside;
+  }
+  public openAsideAddCustom() {
+    this.onOpenCustomAside.emit(null);
   }
   public setCloseAside() {
     this.onCloseAside.emit();

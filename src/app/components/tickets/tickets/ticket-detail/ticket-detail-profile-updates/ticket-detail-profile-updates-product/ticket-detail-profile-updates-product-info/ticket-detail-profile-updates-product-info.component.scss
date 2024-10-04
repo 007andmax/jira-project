@@ -297,10 +297,12 @@
           color: $gray-500;
           padding: 5px 12px;
 
-          .add-user {
+          .icon__add-user {
             width: 16px;
             height: 16px;
-            background: url('/assets/img/icons/assign-user-plus.svg') no-repeat center/contain;
+            mask-image: url('/assets/img/icons/assign-user.svg');
+            mask-repeat: no-repeat;
+            mask-size: contain;
             margin-right: 6px;
           }
         }
@@ -322,4 +324,15 @@
   background: $green-25;
   box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
   color: $green-800;
+}
+.serial-number {
+    position: static;
+    transform: unset;
+    width: 200px;
+    flex: 1;
+}
+/deep/.ticket-updates__ticket-price {
+  .tooltip-inner {
+    word-break: break-all;
+  }
 }

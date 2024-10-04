@@ -10,12 +10,12 @@
         class="app-drop-down__title"
         [textContent]="title"
     ></div>
-    <mat-error
+    <app-mat-error
         class="invalid-feedback"
         *ngIf="!validate"
         [textContent]="errorMessage"
     >
-    </mat-error>
+    </app-mat-error>
     <input
         type="text"
         [ngStyle]="{'width': '100%', 'height': heightInput ? heightInput : '40px' }"
@@ -45,11 +45,12 @@
         <i
             *ngIf="(!selectedItem || isBlockClear) && !isAdd && !preloader"
             class="icn-sm report-caret-icon"
+            ngbDropdownToggle
         ></i>
         <i
             *ngIf="isAdd"
             (click)="addItem()"
-            class="icn-sm icn-product-save icon__active_subscription"
+            class="icn-sm icn-product-save qt-icon icon__done qt-icon__blue-light-600"
         ></i>
     </span>
     <i

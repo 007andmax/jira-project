@@ -3,9 +3,6 @@ import { CommonModule } from '@angular/common';
 import { TicketDetailComponent } from './ticket-detail.component';
 import { TicketDetailRoutingModule } from './ticket-detail-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxMaskModule } from 'ngx-mask';
@@ -18,7 +15,7 @@ import { ProductListModule } from 'src/app/components/shared/product-list/produc
 import { ServicesListModule } from 'src/app/components/shared/services-list/services-list.module';
 import { TechUsersModule } from 'src/app/components/shared/tech-users/tech-users.module';
 import { UploadAreaProgressModule } from 'src/app/components/shared/upload-area/upload-area-progress/upload-area-progress.module';
-import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.module';
+import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { NumberModule } from 'src/app/directives/number/number.module';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
@@ -88,6 +85,11 @@ import { AddAssignedUserNoteComponent } from './ticket-detail-profile-form-updat
 import { TicketDetailTicketsDetailsComponent } from './ticket-detail-tickets/ticket-detail-tickets-details/ticket-detail-tickets-details.component';
 import { TicketDetailTicketsComponent } from './ticket-detail-tickets/ticket-detail-tickets.component';
 import { TicketDetailTicketsStatusComponent } from './ticket-detail-tickets/ticket-detail-tickets-status/ticket-detail-tickets-status.component';
+import { MatChipListModule } from 'src/app/components/shared/mat-chip-list/mat-chip-list.module';
+import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.module';
+import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
+import { MatFormFieldModule } from 'src/app/components/shared/mat-form-field/mat-form-field.module';
+import { CompanyUsersDropDownModule } from '../ticket-add-aside/company-users-drop-down/company-users-drop-down.module';
 
 
 
@@ -155,9 +157,6 @@ import { TicketDetailTicketsStatusComponent } from './ticket-detail-tickets/tick
         TicketDetailRoutingModule,
         DynamicTooltipModule,
         NgbModule,
-        MatSelectModule,
-        MatChipsModule,
-        MatIconModule,
         ReactiveFormsModule,
         DisabledBtnModule,
         PreloaderTicketModule,
@@ -175,7 +174,7 @@ import { TicketDetailTicketsStatusComponent } from './ticket-detail-tickets/tick
         InfiniteScrollModule,
         TechUsersModule,
         UploadAreaProgressModule,
-        ClickOtsideModule,
+        ClickOutsideModule,
         TicketProfileAttachmentsModule,
         PreviewPhoneMaskModule,
         InvoiceFormTicketEditTaxesModule,
@@ -185,7 +184,12 @@ import { TicketDetailTicketsStatusComponent } from './ticket-detail-tickets/tick
         KeyUpEnterModule,
         DropDownModule,
         CompanyDropDownModule,
-        DndModule
+        DndModule,
+        MatChipModule,
+        MatFormFieldModule,
+        MatChipListModule,
+        MatErrorModule,
+        CompanyUsersDropDownModule
     ],
 
 

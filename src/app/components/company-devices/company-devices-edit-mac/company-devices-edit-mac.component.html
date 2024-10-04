@@ -1,0 +1,25 @@
+<div
+    class="qt-pos-rel qt-w100 edit-mac-container"
+    [init]="isInitEdit"
+    appClickOtside
+    [class]="'.edit-mac-container'"
+    (onOutSide)="onCheckValue()"
+>
+    <input
+        type="text"
+        [ngClass]="{'--input-error': !validate.getMacAdress()}"
+        class="device-table__input-name"
+        [(ngModel)]="value"
+        appKeyUpEnter
+        (onChange)="onCheckValue()"
+        (input)="setIsInitEdit(true)"
+        [disabled]="isDisabled"
+        [attr.placeholder]="placeholder"
+    >
+    <app-mat-error
+        class="invalid-feedback"
+        *ngIf="!validate.getMacAdress()"
+    >
+        Enter a valid MAC address value - format XXXXXXXXXXXX
+    </app-mat-error>
+</div>

@@ -8,6 +8,7 @@ export class UsersRealTimeService {
   public changeUsersArray: EventEmitter<any> = new EventEmitter();
   public changePermissionsUsers: EventEmitter<any> = new EventEmitter();
   public changeSubscriptionsUsers: EventEmitter<any> = new EventEmitter();
+  public changeUsersFilters: EventEmitter<any> = new EventEmitter();
 
 
   /**
@@ -28,5 +29,8 @@ export class UsersRealTimeService {
   }
   public handleRealTimeSubscriptions(newChange) {
     this.changeSubscriptionsUsers.emit(newChange);
+  }
+  public handleRealTimeChangesUsersFilters(newChange) {
+    this.changeUsersFilters.emit(newChange);
   }
 }

@@ -1,7 +1,7 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { ClickOtsideDirective } from 'src/app/directives/click-otside/click-otside.directive';
+import { ClickOutsideDirective } from 'src/app/directives/click-otside/click-otside.directive';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketProfile } from '../../class/ticket-profile';
@@ -14,6 +14,7 @@ import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.comp
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TicketsRealTimeService } from 'src/app/states/tickets/tickets-real-time.service';
 import { OnDestroy } from '@angular/core';
+import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tickets-permissions.service';
 
 @Component({
   selector: 'ticket-detail-tasks',
@@ -26,13 +27,15 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
   addTask: TicketProfileTask = new TicketProfileTask();
   listTechUsers = [];
   sub: Subscription = new Subscription();
-  @ViewChild('addTaskBtn', { static: false }) addTaskBtn: ClickOtsideDirective;
+  @ViewChild('addTaskBtn', { static: false }) addTaskBtn: ClickOutsideDirective;
   @Input() ticketProfile: TicketProfile = new TicketProfile();
   constructor(private ticketsService: TicketsService,
     private ticketStateService: TicketStateService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     private ticketsRealTimeService: TicketsRealTimeService,
+    public cd: ChangeDetectorRef,
+    public ticketsPermissionsService: TicketsPermissionsService,
     private usersStateService: UsersStateService,) { }
 
   ngOnInit() {
@@ -60,6 +63,7 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
         this.list.splice(index, 1);
       }
       this.ticketStateService.setListTasks(this.list);
+      this.cd.detectChanges();
     })
     this.sub.add(changeTicketTasks);
 
@@ -68,6 +72,7 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
     this.ticketsService.getTicketTasks(id).subscribe((data: any) => {
       this.list = data.map(item => new TicketProfileTask(item))
       this.ticketStateService.setListTasks(this.list);
+      this.cd.detectChanges();
     })
   }
   setStatus(item, status) {

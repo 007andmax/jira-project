@@ -6,6 +6,11 @@
   .qt-aside-modern__content {
     height: calc(100% - 146px);
   }
+  /deep/ app-assigned-ticket-user {
+    .app-drop-down__right-icon {
+      bottom: unset !important;
+    }
+  }
 }
 
 .qt-aside-modern.recurring-tickets-content__modal .qt-aside-modern__footer {

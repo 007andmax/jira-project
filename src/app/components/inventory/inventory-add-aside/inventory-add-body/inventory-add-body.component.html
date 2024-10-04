@@ -13,12 +13,12 @@
                 (blur)="onCheckManufacture()"
                 placeholder="Enter Item Number"
             >
-            <mat-error
+            <app-mat-error
                 class="invalid-feedback"
                 *ngIf="!validate.getManufactureIsExist()"
             >
                 This number is already occupied
-            </mat-error>
+            </app-mat-error>
         </div>
         <div class="qt-input-block qt-f50 --required">
             <div class="qt-input-block__label">ILC Number</div>
@@ -29,29 +29,48 @@
                 (blur)="onCheckILC()"
                 placeholder="Enter ILC Number"
             >
-            <mat-error
+            <app-mat-error
                 class="invalid-feedback"
                 *ngIf="!validate.getILCIsExist()"
             >
                 This number is already occupied
-            </mat-error>
+            </app-mat-error>
         </div>
     </div>
     <div class="qt-inputs-row">
-        <div class="--required">
-            <div class="qt-input-block__label">GL Number</div>
+        <div class="qt-input-block --required">
             <app-drop-down
-                [class]="['light-dropdown', 'new-product-gl-select', 'qt-select-input-40']"
-                [list]="glNumbers"
-                [reducerItem]="formatterGLNumber"
-                [reducerSelectedItem]="formatterSeletedGLNumber"
-                #glNumberSelect
-                [placeholder]="'Select GL'"
+                #categoriesSelect
+                [class]="['qt-select-input-40']"
+                [placeholder]="'Select Category'"
+                [validate]="validate.getCategory()"
+                [errorMessage]="'Category is required'"
+                [title]="'Category'"
+                [field]="'name'"
                 [add]="true"
-                [field]="'glNumber'"
-                (onAddItem)="onAddGlNumber($event)"
-                (onSelectedItem)="onSelectGlNumbers($event)"
-            ></app-drop-down>
+                [list]="categories"
+                [search]="true"
+                [change]="true"
+                (onAddItem)="onAddCategory($event)"
+                (onSelectedItem)="onSelectCategory($event)"
+            >
+            </app-drop-down>
+        </div>
+    </div>
+    <div class="qt-inputs-row">
+        <div class="qt-input-block --required">
+            <app-drop-down
+                #typeSelect
+                [class]="['qt-select-input-40']"
+                [placeholder]="'Select Type'"
+                [title]="'Product Type'"
+                [field]="'title'"
+                [list]="listTypes"
+                [search]="true"
+                [change]="true"
+                (onSelectedItem)="onSelectProuctType($event)"
+            >
+            </app-drop-down>
         </div>
     </div>
     <div class="qt-inputs-row --required">
@@ -63,20 +82,20 @@
             >
                 <textarea
                     appTextArea
-                    [limit]="160"
-                    [default]="5"
+                    [height]="'100px'"
+                    rows="5"
                     id="inventory-description"
                     placeholder="Write Product Description"
                     (input)="onChangeDescription($event)"
                     (paste)="onPastDescription($event)"
                 ></textarea>
             </div>
-            <mat-error
+            <app-mat-error
                 class="invalid-feedback"
                 *ngIf="!validate.getDescription()"
             >
                 Description is required
-            </mat-error>
+            </app-mat-error>
         </div>
     </div>
     <div class="qt-inputs-row">
@@ -94,12 +113,12 @@
                 [value]="inventory.cost"
                 placeholder="Enter Cost"
             >
-            <mat-error
+            <app-mat-error
                 class="invalid-feedback --pos-static"
                 *ngIf="!validate.getCostSale()"
             >
                 Cost cannot be higher than Price
-            </mat-error>
+            </app-mat-error>
         </div>
         <div class="qt-f33 qt-input-block --required">
             <div class="qt-input-block__label">Markup %</div>
@@ -128,12 +147,12 @@
                 (onChange)="changeSales($event)"
                 placeholder="Enter Price"
             >
-            <mat-error
+            <app-mat-error
                 class="invalid-feedback"
                 *ngIf="!validate.getSale()"
             >
                 Price is required
-            </mat-error>
+            </app-mat-error>
         </div>
     </div>
     <div class="qt-inputs-row">
@@ -146,23 +165,20 @@
         </div>
     </div>
     <div class="qt-inputs-row">
-        <div class="select-open-top --required">
+        <div class="--required">
+            <div class="qt-input-block__label">GL Number</div>
             <app-drop-down
-                #categoriesSelect
-                [class]="['qt-select-input-40']"
-                [placeholder]="'Select Category'"
-                [validate]="validate.getCategory()"
-                [errorMessage]="'Category is required'"
-                [title]="'Category'"
-                [field]="'name'"
+                [class]="['light-dropdown', 'new-product-gl-select', 'qt-select-input-40']"
+                [list]="glNumbers"
+                [reducerItem]="formatterGLNumber"
+                [reducerSelectedItem]="formatterSeletedGLNumber"
+                #glNumberSelect
+                [placeholder]="'Select GL'"
                 [add]="true"
-                [list]="categories"
-                [search]="true"
-                [change]="true"
-                (onAddItem)="onAddCategory($event)"
-                (onSelectedItem)="onSelectCategory($event)"
-            >
-            </app-drop-down>
+                [field]="'glNumber'"
+                (onAddItem)="onAddGlNumber($event)"
+                (onSelectedItem)="onSelectGlNumbers($event)"
+            ></app-drop-down>
         </div>
     </div>
     <div class="qt-inputs-row">
@@ -194,18 +210,22 @@
     </div>
 </div>
 <div class="qt-aside-modern__footer">
-    <div class="qt-df">
+    <div class="qt-df qt-w100">
         <button
-            class="qt-button qt-mr-12"
-            (click)="add()"
-        >
-            Create Product
-        </button>
-        <button
-            class="qt-button --gray"
+            class="qt-button --gray qt-mr-12 qt-w100 qt-jc-c"
             (click)="close()"
         >
             Cancel
+        </button>
+        <button
+            class="qt-button qt-w100 qt-jc-c"
+            appDisabledBtn
+            #addBtn="disabled"
+            (onClick)="add()"
+            [ngClass]="{'--loading':addBtn.isBlock()}"
+        >
+            <span>Create Product</span>
+            <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
         </button>
     </div>
 </div>

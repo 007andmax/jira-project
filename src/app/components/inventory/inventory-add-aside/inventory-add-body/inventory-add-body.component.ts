@@ -17,6 +17,8 @@ import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
+import { ProductType } from 'src/app/components/setting/products-settings/class/product-type';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
   selector: 'app-inventory-add-body',
@@ -24,13 +26,15 @@ import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component'
   styleUrls: ['./inventory-add-body.component.scss']
 })
 export class InventoryAddBodyComponent implements OnInit, OnDestroy {
+  @ViewChild('addTax', { static: true }) containerAddTax;
   @ViewChild('taxesDp', { static: true }) taxesDp: TaxesComponent;
   @ViewChild('glNumberSelect', { static: true }) glNumberSelect: DropDownComponent;
   @ViewChild('categoriesSelect', { static: true }) categoriesSelect: DropDownComponent;
   @ViewChild('suppliersSelect', { static: true }) suppliersSelect: DropDownComponent;
+  @ViewChild('typeSelect', { static: true }) typeSelect: DropDownComponent;
+  @ViewChild('addBtn', { static: true }) addBtn: DisabledBtnDirective;
   @Output() onClose: EventEmitter<any> = new EventEmitter();
   @Input() class: string;
-  //opened: boolean = false;
   inventory: InventoryItem = new InventoryItem();
   glNumbers: Array<GlNumber> = [];
   taxes: Array<Tax> = [];
@@ -40,7 +44,7 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
   selectedItem: any;
   categories: Array<CategoryProduct> = [];
   validate: InventoryValidate = new InventoryValidate();
-
+  listTypes: Array<ProductType> = [];
   constructor(private inventoryStateService: InventoryStateService,
     private taxesStateService: TaxesStateService,
     private glNumberStateService: GlNumberStateService,
@@ -54,6 +58,17 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
     private glNumberService: GlNumberService) { }
 
   ngOnInit() {
+    if (this.inventoryStateService.getListTypes().length === 0) {
+      this.inventoryStateService.onInitGetServiceTypeList();
+    } else {
+      this.listTypes = this.inventoryStateService.getListTypes().sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
+        1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
+    }
+    let onGetServiceType = this.inventoryStateService.onGetListType.subscribe(data => {
+      this.listTypes = data.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
+        1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));;
+    })
+    this.sub.add(onGetServiceType);
     if (this.glNumberStateService.getGLNumbers().length > 0) this.glNumbers = this.sortGlNumbers(this.glNumberStateService.getGLNumbers());
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
       this.glNumbers = this.sortGlNumbers(data);
@@ -80,7 +95,9 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
     this.sub.add(getOnCategries);
     this.cd.detectChanges();
   }
-
+  onSelectProuctType(data) {
+    this.inventory.setProductType(data);
+  }
   onCheckILC() {
     this.productService.validateProductILC(this.inventory.ilc, '').subscribe((data: any) => {
       this.validate.resetILCIsExist();
@@ -197,15 +214,20 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
     this.taxesDp.close();
     this.elRef.nativeElement.querySelector('#inventory-description').value = '';
     this.validate = new InventoryValidate();
+    this.typeSelect.clearWithOutChanges();
     this.onClose.emit(null);
     this.cd.detectChanges();
   }
   add() {
     if (!this.validate.isValidate(this.inventory)) return;
+    this.addBtn.setDisabled(true);
     this.productService.addProduct(this.inventory.getForAdd()).subscribe(data => {
+      this.addBtn.setDisabled(false);
       this.toastrService.success("The new product has been successfully created");
       this.appStateService.changeDetectorRef();
       this.close();
+    }, err => {
+      this.addBtn.setDisabled(false);
     })
   }
   formatterGLNumber = (result) => {

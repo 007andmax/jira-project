@@ -22,18 +22,18 @@
                                 value="Starting ticket number"
                                 maxlength="7"
                             >
-                            <mat-error
+                            <app-mat-error
                                 class="invalid-feedback --pos-static"
                                 *ngIf="submitted && f.ticketCount.errors && f.ticketCount.errors.required"
                             >
                                 Starting ticket number is required
-                            </mat-error>
-                            <mat-error
+                            </app-mat-error>
+                            <app-mat-error
                                 class="invalid-feedback --pos-static"
                                 *ngIf="submitted && f.ticketCount.errors && f.ticketCount.errors.pattern"
                             >
                                 Only Number is allowed
-                            </mat-error>
+                            </app-mat-error>
                             <label
                                 class="control-label"
                                 *ngIf="used"
@@ -66,22 +66,22 @@
                                         class="quantity-arrow-up pointer"
                                         (click)="changeOutliersTime(ticketForm.value.outliersTime +1)"
                                     >
-                                        <div class="icon__up-arrow-gray-400 qt-sz-12 qt-bg-contain qt-ic-c"></div>
+                                        <div class="qt-icon icon__arrow-up qt-sz-12 qt-ic-c"></div>
                                     </div>
                                     <div
                                         class="quantity-arrow-down pointer"
                                         (click)="changeOutliersTime(ticketForm.value.outliersTime -1)"
                                     >
-                                        <div class="icon__down-arrow__sm qt-sz-12 qt-bg-contain qt-ic-c "></div>
+                                        <div class="qt-icon icon__arrow-down qt-sz-12 qt-ic-c "></div>
                                     </div>
                                 </div>
                             </label>
-                            <mat-error
+                            <app-mat-error
                                 class="qt-tooltip-error"
                                 *ngIf="submitted && f.outliersTime.errors && f.outliersTime.errors.required"
                             >
                                 OutliersTime is required
-                            </mat-error>
+                            </app-mat-error>
                         </div>
                     </div>
                 </div>

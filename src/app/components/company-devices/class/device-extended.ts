@@ -12,7 +12,7 @@ export class DeviceExtended extends Device {
     public getDataForUpdateAssetTag(value) {
         return {
             system: {
-                asset_tag: value
+                assetTag: value
             }
         }
     }
@@ -40,7 +40,7 @@ export class DeviceExtended extends Device {
     public getDataForUpdateInstallDate(value) {
         return {
             system: {
-                install_date: value
+                installDate: value
             }
         }
     }

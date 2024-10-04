@@ -6,18 +6,11 @@ import { TicketsStateService } from 'src/app/states/tickets/tickets-state.servic
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
-import { CompaniesService } from 'src/app/services/company/companies.service';
-import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { ItemStatus } from 'src/app/components/tickets/class/item-status';
-import { Subscribable, Subscription } from 'rxjs';
-import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
+import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/states/app/app.service';
 import { TicketsFilterTagsComponent } from './tickets-filter-tags/tickets-filter-tags.component';
-import { StatusColor } from '../../../class/status-color';
-import { TicketStatus } from 'src/app/components/setting/ticket-settings-page/tickets-status/class/ticket-status';
 import { TicketStatusFilter } from '../class/ticket-status-filter';
-import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
-import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { TicketGlobalFilter } from '../../class/ticket-global-filter';
 import { TagsStateService } from 'src/app/states/tags/tags-state.service';
@@ -303,7 +296,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   /**
 * @description Clear all dropdown and "ticketsFilter"
 */
-  public onClearAll() {
+  public clearAll() {
 
     if (!this.ticketsFilter.isDisbledCompany) this.ticketsFilter.setCompanies([]);
     this.ticketsFilter.setTechUsers([]);
@@ -326,6 +319,9 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.onChangeCounterFilter();
     if (this.listType !== 'RECURRING_TICKETS') this.getCount();
     this.ticketsStateService.onChangeLeftPanelFilter(this.listType);
+    let ticketGlobalFilter = new TicketGlobalFilter();
+    if (this.ticketsFilter.isDisbledCompany) ticketGlobalFilter.setClientCompaies(this.ticketsFilter.selectedCompanies.map(item => item.id));
+    this.ticketsStateService.onChangeGlobalFilter(ticketGlobalFilter);
   }
   /**
   * @description Check which filters use, and update count by Output event

@@ -1,0 +1,116 @@
+<div
+    class="default-services-page__aside qt-aside-modern"
+    *ngIf="showAdd"
+>
+    <div class="qt-aside-modern__header">
+        <div class="qt-aside-modern__header-title">Create Service</div>
+        <div
+            class="qt-aside-modern__header-close qt-icon icon__close"
+            (click)="close()"
+        ></div>
+    </div>
+    <div class="qt-aside-modern__content">
+        <div class="qt-inputs-row">
+            <div
+                class="qt-input-block"
+                [ngClass]="{'--input-error':!validate.getName()}"
+            >
+                <div class="qt-input-block__label">Service Name</div>
+                <input
+                    [value]="'Checks & System Maintenance'"
+                    placeholder="Service Name"
+                    [(ngModel)]="service.name"
+                    type="text"
+                    (input)="onChangeName()"
+                >
+                <app-mat-error
+                    class="invalid-feedback"
+                    *ngIf="!validate.getName()"
+                >
+                    Service name is required
+                </app-mat-error>
+            </div>
+        </div>
+        <div class="qt-inputs-row">
+            <div
+                class="qt-input-block qt-w50"
+                [ngClass]="{'--input-error':!validate.getRate()}"
+            >
+                <div class="qt-input-block__label">Hourly Rate($)</div>
+                <input
+                    [(ngModel)]="service.rate"
+                    type="text"
+                    number
+                    placeholder="Per Hour Rate"
+                    [money]="true"
+                    (input)="onChangeRate($event)"
+                    appToFixed
+                >
+                <app-mat-error
+                    class="invalid-feedback"
+                    *ngIf="!validate.getRate()"
+                >
+                    Hour rate is required
+                </app-mat-error>
+            </div>
+            <div class="qt-input-block qt-w50">
+                <div class="create-product-taxes-select">
+                    <app-taxes
+                        [selectedTax]="defaultSelectedTax"
+                        (taxesChange)="onTaxesChange($event)"
+                    ></app-taxes>
+                </div>
+            </div>
+        </div>
+        <div class="qt-inputs-row">
+            <div class="qt-input-block">
+                <gl-numbers-drop-down
+                    [title]="'GL Number'"
+                    [placeholder]="'Select GL'"
+                    [list]="glNumbers"
+                    [field]="'glNumber'"
+                    [add]="true"
+                    [search]="true"
+                    [change]="true"
+                    [reducerItem]="glDropDownItemName"
+                    (onAddItem)="onAddGlNumber($event)"
+                    (onSelectedItem)="onSelectGlNumbers($event)"
+                >
+                </gl-numbers-drop-down>
+            </div>
+        </div>
+        <div class="qt-inputs-row">
+            <label
+                class="qt-checkbox"
+                for="email-payment"
+            >
+                <input
+                    id="email-payment"
+                    type="checkbox"
+                    [(ngModel)]="service.billable"
+                >
+                <span></span>
+                <div class="qt-ml-8 qt-fw-400 qt-lh-1">Make this service billable</div>
+            </label>
+        </div>
+    </div>
+    <div class="qt-aside-modern__footer">
+        <div class="qt-df qt-w100">
+            <button
+                class="qt-button --gray qt-mr-12 qt-w100 qt-jc-c"
+                (click)="close()"
+            >
+                Cancel
+            </button>
+            <button
+                class="qt-button qt-w100 qt-jc-c"
+                appDisabledBtn
+                #addBtn="disabled"
+                (onClick)="add()"
+            >
+                <span *ngIf="!addBtn.isBlock()">Create Service</span>
+                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+            </button>
+        </div>
+    </div>
+</div>

@@ -4,7 +4,7 @@
             <div class="script-side-header__title">Script Library</div>
             <a
                 href="javascript:;"
-                class="qt-aside__close-modal icon__close"
+                class="qt-aside__close-modal qt-icon icon__close"
                 title="Close"
                 (click)="close()"
             >
@@ -59,14 +59,14 @@
                                       data-tooltip="Run Script"
                                       (click)="copyToTerminal(script.command, script.type, true)"
                                     >
-                                      <div class="icon__play-script qt-sz-16 qt-bg-contain "></div>
+                                      <div class="qt-icon icon__category-closed qt-sz-12"></div>
                                     </div>
                                     <div
                                       class="qt-button --square-md --gray pointer qt-bg-contain device-tooltip"
                                       data-tooltip="View Script"
                                       (click)="viewScriptDetail(script);"
                                     >
-                                      <div class="icon__view qt-sz-16 qt-bg-contain"></div>
+                                      <div class="qt-icon icon__show qt-sz-16 qt-bg-contain"></div>
                                     </div>
                                 </div>
                             </li>
@@ -122,14 +122,14 @@
                                       data-tooltip="Clone Script"
                                       (click)="cloneScript(shared.id)"
                                     >
-                                      <div class="icon__copy qt-sz-16 qt-bg-contain"></div>
+                                      <div class="qt-icon icon__copy qt-sz-16 qt-bg-contain"></div>
                                     </div>
                                     <div
                                       class="qt-button --square-md --gray pointer device-tooltip"
                                       data-tooltip="View Script"
                                       (click)="viewScriptDetail(shared);"
                                     >
-                                      <div class="icon__view qt-sz-16 qt-bg-contain"></div>
+                                      <div class="qt-icon icon__show qt-sz-16 qt-bg-contain"></div>
                                     </div>
                                 </div>
                             </li>

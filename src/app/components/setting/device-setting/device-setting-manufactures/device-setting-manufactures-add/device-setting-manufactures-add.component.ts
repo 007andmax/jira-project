@@ -1,0 +1,46 @@
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DevicesService } from 'src/app/services/devices/devices.service';
+
+@Component({
+  selector: 'app-device-setting-manufactures-add',
+  templateUrl: './device-setting-manufactures-add.component.html',
+  styleUrls: ['./device-setting-manufactures-add.component.scss']
+})
+export class DeviceSettingManufacturesAddComponent implements OnInit {
+  @Output() onClose = new EventEmitter();
+  manufactureForm: FormGroup;
+  submitted: boolean = false;
+  constructor(private formBuilder: FormBuilder,
+    private devicesService: DevicesService) { }
+
+  ngOnInit() {
+    this.manufactureForm = this.formBuilder.group({
+      manufacturer: [
+        "",
+        [Validators.required, Validators.minLength(1), Validators.maxLength(255)]
+      ],
+    })
+  }
+  onSubmitManufacturer() {
+    this.submitted = true;
+    if (this.manufactureForm.invalid) {
+      return;
+    }
+
+    // add
+    this.devicesService.addManufacture(this.manufactureForm.value)
+      .subscribe(
+        () => {
+          //this.getManufacturers(this.techCompany.id)
+          this.closed();
+        });
+  }
+  get f1() {
+    return this.manufactureForm.controls;
+  }
+  closed() {
+    this.onClose.emit();
+  }
+
+}

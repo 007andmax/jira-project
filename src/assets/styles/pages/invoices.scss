@@ -2,6 +2,10 @@
 @import "./src/assets/styles/mixin/input";
 
 .invoices-page {
+  .qt-page-list__header-thead__row {
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+  }
   .pengind-loading {
     bottom: -10px;
     top: auto;
@@ -84,76 +88,69 @@
   }
 
   .invoice-table__check {
-    width: 32px;
-    min-width: 32px;
+    flex: 0 0 50px;
     padding-right: 0;
   }
 
   .invoce-table__date {
+    flex: 0 0 106px;
     padding-left: 8px;
     padding-right: 8px;
-    width: 100px;
-    min-width: 100px;
   }
 
   .invoce-table__company {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    width: 100%;
+    flex: 2 0 200px;
   }
 
   .invoce-table__invoice {
+    flex: 0 0 93px;
     padding-left: 8px;
     padding-right: 8px;
-    width: 93px;
-    min-width: 93px;
   }
-  td.invoce-table__invoice {
-   font-weight: $fw-medium;
-    color: $blue-light-600;
+  .qt-table-modern__row {
+    .invoce-table__invoice {
+      font-weight: 500;
+      color: $blue-light-600;
+      font-size: 14px;
+    }
   }
 
   .invoce-table__status {
-    width: 133px;
-    min-width: 133px;
+    flex: 0 0 149px;
     padding-left: 8px;
     padding-right: 8px;
   }
 
   .invoce-table__read-on {
-    width: 107px;
-    min-width: 107px;
+    flex: 0 0 107px;
     padding-left: 8px;
     padding-right: 8px;
   }
 
   .invoce-table__due-date {
-    width: 116px;
-    min-width: 116px;
+    flex: 0 0 116px;
     padding-left: 8px;
     padding-right: 8px;
   }
 
   .invoce-table__amount {
-    width: 89px;
-    min-width: 89px;
+    flex: 0 0 89px;
     padding-left: 8px;
     padding-right: 8px;
   }
 
   .invoce-table__balance-due {
-    width: 110px;
-    min-width: 110px;
+    flex: 0 0 110px;
     padding-left: 8px;
     padding-right: 8px;
     text-align: right;
   }
 
   .invoce-table__menu {
-    width: 28px;
-    min-width: 28px;
-    max-width: 28px;
+    flex: 0 0 50px;
     padding-left: 0;
     padding-right: 0;
 
@@ -213,13 +210,10 @@
       tbody {
         display: block;
         max-height: 162px;
-        overflow-y: scroll;
+        overflow-y: auto;
         border-bottom: 1px solid #dfe3e9;
         border-bottom-left-radius: 4px;
         border-bottom-right-radius: 4px;
-        &::-webkit-scrollbar {
-          width: 0;
-        }
         tr:last-child {
           td {
             border-bottom: none;
@@ -356,7 +350,7 @@ app-invoices-item,app-payment-item {
 // aside invoice preview
 .invoices-page__aside {
   &.aside-preview {
-    width: 940px;
+    width: 950px;
 
     .documents-page .documents-table__title {
       max-width: 190px;
@@ -533,6 +527,9 @@ app-invoices-item,app-payment-item {
     left: -20px;
     &.--paid {
       background: url('/assets/img/icons/update-label.svg');
+    }
+    &.--draft {
+      background: url('/assets/img/icons/delete-label.svg');
     }
     &.--overdue {
       background: url('/assets/img/icons/overdue.svg');

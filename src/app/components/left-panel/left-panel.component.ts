@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from "@angular/router";
 import { Company } from 'src/app/interfaces/company/company';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
@@ -13,7 +13,6 @@ import { TicketStateService } from '../tickets/tickets/ticket-edit-aside/service
 import { User } from '../users/class/user';
 import { LeftPanelBillingComponent } from './left-panel-billing/left-panel-billing.component';
 import { LeftPanelCompaniesComponent } from './left-panel-companies/left-panel-companies.component';
-import { LeftPanelCompanyComponent } from './left-panel-company/left-panel-company.component';
 import { LeftPanelDevicesComponent } from './left-panel-devices/left-panel-devices.component';
 import { LeftPanelDocumentsComponent } from './left-panel-documents/left-panel-documents.component';
 import { LeftPanelInventoryComponent } from './left-panel-inventory/left-panel-inventory.component';
@@ -24,6 +23,8 @@ import { LeftPanelSupportComponent } from './left-panel-support/left-panel-suppo
 import { LeftPanelTicketsComponent } from './left-panel-tickets/left-panel-tickets.component';
 import { LeftPanelUsersComponent } from './left-panel-users/left-panel-users.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { Subscription } from 'rxjs';
+import { LeftPanelFileManagerComponent } from './left-panel-file-manager/left-panel-file-manager.component';
 
 /**
  * Left panel component
@@ -33,7 +34,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
   templateUrl: './left-panel.component.html',
   styleUrls: ['./left-panel.component.scss']
 })
-export class LeftPanelComponent implements OnInit {
+export class LeftPanelComponent implements OnInit, OnDestroy {
   currentCompany: Company;
   currentUser: User;
   toggleLeftPanel: boolean = false;
@@ -52,8 +53,8 @@ export class LeftPanelComponent implements OnInit {
   @ViewChild('panelInventory', { static: true }) panelInventory: LeftPanelInventoryComponent;
   @ViewChild('panelMarketing', { static: false }) panelMarketing: LeftPanelMarketingComponent;
   @ViewChild('panelPasswordManager', { static: false }) panelPasswordManager: LeftPanelPasswordManagerComponent;
-
-
+  @ViewChild('filesCompanies', { static: false }) filesCompanies: LeftPanelFileManagerComponent;
+  sub: Subscription = new Subscription();
   /**
    * Creates an instance of the LeftPanelComponent with the injected services
    * @param {Router} router Service to work with router
@@ -78,31 +79,36 @@ export class LeftPanelComponent implements OnInit {
    */
   ngOnInit() {
     if (this.usersStateService.getCurrentUser()) this.getCurrentUser(this.usersStateService.getCurrentUser());
-    this.usersStateService.getOnGetCurrentuser().subscribe(data => {
+    let getOnGetCurrentuser = this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.getCurrentUser(data)
     })
+    this.sub.add(getOnGetCurrentuser);
     this.currentCompany = this.companiesStateService.getCurrentCompany();
-    this.companiesStateService.getOnCurrentCompany().subscribe(data => {
+    let getOnCurrentCompany = this.companiesStateService.getOnCurrentCompany().subscribe(data => {
       this.currentCompany = this.companiesStateService.getCurrentCompany();
     });
-
-    this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
+    this.sub.add(getOnCurrentCompany);
+    let onToggleLeftPanel = this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       this.toggleLeftPanel = data;
     });
-
-    this.router.events
+    this.sub.add(onToggleLeftPanel);
+    let events = this.router.events
       .subscribe((event: any) => {
         if (event.navigationTrigger === "popstate") this.isInitPopStateNaviate = true;
         if (this.state === '' || (event instanceof NavigationEnd && this.isInitPopStateNaviate)) {
           if (window.location.href.includes(`/companies`)) this.state = 'new-companies';
           if (window.location.href.includes(`/billing-dashboard`)) this.state = 'billing-dashboard';
-          if (window.location.href.includes(`/default-services`)) this.state = 'new-services';
+          if (window.location.href.includes(`/non-contract-services`)) this.state = 'non-contract-services';
           if (window.location.href.includes(`/billable`)) this.state = 'new-billable';
           if (window.location.href.includes(`/invoices`)) this.state = 'new-billable-invoices';
           if (window.location.href.includes(`/quotes`)) this.state = 'quotes-component';
           if (window.location.href.includes(`/payments`)) this.state = 'new-payments-ng2';
           if (window.location.href.includes(`/contracts`)) this.state = 'new-contracts';
           if (window.location.href.includes(`/default`)) this.state = 'default';
+          if (window.location.href.includes(`/file-manager`)) this.state = 'file-manager';
+          if (window.location.href.includes(`/file-manager`) && window.location.href.includes(`category`)) this.state = 'file-manager-category';
+          if (window.location.href.includes(`/file-manager`) && window.location.href.includes(`all-customer`)) this.state = 'file-manager-all-customer';
+
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`dashboard`)) this.state = 'company-dashboard';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`tickets`)) this.state = 'company-tickets';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`user`)) this.state = 'company-user';
@@ -114,6 +120,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`products`)) this.state = 'company-products';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`contracts`)) this.state = 'company-contracts';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`documents`)) this.state = 'company-documents';
+          if (window.location.href.includes(`/company/`) && window.location.href.includes(`file-manager`)) this.state = 'company-file-manager';
 
 
           if (window.location.href.includes(`/inventory/products`)) this.state = 'inventory';
@@ -140,6 +147,8 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/contract-statistics`)) this.state = 'contract-statistics';
           if (window.location.href.includes(`/support-page`)) this.state = 'support-page';
           if (window.location.href.includes(`/tech-companies`)) this.state = 'tech-companies';
+          if (window.location.href.includes(`/knowledge-base`)) this.state = 'knowledge-base';
+
           if (window.location.href.includes(`/users`)) this.state = 'new-users';
           if (!window.location.href.includes(`/setting/marketing-email`) && window.location.href.includes(`/marketing`)) this.state = 'marketing';
           if (window.location.href.includes(`/reports`)) this.state = 'new-reports';
@@ -209,11 +218,12 @@ export class LeftPanelComponent implements OnInit {
           this.isInitPopStateNaviate = false;
         }
       });
-
-    this.leftPanelStateService.onGoToState.subscribe(data => {
+    this.sub.add(events);
+    let onGoToState = this.leftPanelStateService.onGoToState.subscribe(data => {
       this.onChangeState(data);
     })
-    this.leftPanelStateService.onOpenCompanyPage.subscribe(data => {
+    this.sub.add(onGoToState);
+    let onOpenCompanyPage = this.leftPanelStateService.onOpenCompanyPage.subscribe(data => {
       if (this.panelBilling) this.panelBilling.close();
 
       if (this.panelSettings) this.panelSettings.close();
@@ -222,17 +232,19 @@ export class LeftPanelComponent implements OnInit {
       if (this.panelUsers) this.panelUsers.close();
       if (this.panelDocuments) this.panelDocuments.close();
       if (this.panelDevices) this.panelDevices.close();
-
+      if (this.filesCompanies) this.filesCompanies.close();
       if (this.panelCompanies) this.panelCompanies.openPanel();
       if (this.panelCompanies) this.panelCompanies.togglePanel(true);
     })
-    this.leftPanelStateService.onChangeStateWithoutNavigate.subscribe(data => {
+    this.sub.add(onOpenCompanyPage);
+    let onChangeStateWithoutNavigate = this.leftPanelStateService.onChangeStateWithoutNavigate.subscribe(data => {
       this.state = data;
       if (!this.cd['destroyed']) {
         this.updatePage(this.state);
         this.cd.detectChanges();
       }
     })
+    this.sub.add(onChangeStateWithoutNavigate);
     /* this.companiesStateService.onCurrentCompany.subscribe(data => {
        if (this.state === '') {
          this.leftPanelStateService.firstOpen(this.state);
@@ -253,7 +265,10 @@ export class LeftPanelComponent implements OnInit {
     if (this.leftPanelService.isSupportPage(data)) this.page = "SUPPORT";
     if (this.leftPanelService.isTicketsPage(data)) this.page = "TICKETS";
     if (this.leftPanelService.isTicketDetailPage(data)) this.page = "TICKET-DETAIL";
-    if (this.leftPanelService.isUsersPage(data)) this.page = "USERS";
+    if (this.leftPanelService.isUsersPage(data)) {
+      this.page = "USERS";
+      if (this.panelUsers) this.panelUsers.getUsersCount();
+    }
     if (this.leftPanelService.isMarketingPage(data)) this.page = "MARKETING";
     if (this.leftPanelService.isCompanyPage(data)) this.page = "COMPANIES";
     if (this.leftPanelService.isBillingState(data)) this.page = "BILLING";
@@ -263,6 +278,7 @@ export class LeftPanelComponent implements OnInit {
     if (this.leftPanelService.isReportsState(data)) this.page = "REPORTS";
     if (this.leftPanelService.isSettingsPage(data)) this.page = "SETTINGS";
     if (this.leftPanelService.isDevicesPage(data)) this.page = "DEVICES";
+    if (this.leftPanelService.isFilePage(data)) this.page = "FILE_MANAGER";
   }
   setDefaultTypeFilter() {
     this.panelTickets.setTypeFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage)
@@ -304,7 +320,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'contract-statistics') this.goToLink(`contract-statistics`);
       if (this.state === 'new-companies') this.goToLink(`companies`);
       if (this.state === 'billing-dashboard') this.goToLink('billing-dashboard');
-      if (this.state === 'new-services') this.goToLink('default-services');
+      if (this.state === 'non-contract-services') this.goToLink('non-contract-services');
       if (this.state === 'default') this.goToLink('default');
       if (this.state === 'new-billable') this.goToLink('billable');
       if (this.state === 'new-billable-invoices') this.goToLink('invoices');
@@ -320,6 +336,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'company-password-manager') this.goToLink('company/password-manager');
       if (this.state === 'company-products') this.goToLink('company/products');
       if (this.state === 'company-contracts') this.goToLink('company/contracts');
+      if (this.state === 'company-file-manager') this.goToLink(`company/${this.companiesStateService.getCompanyRoutingId()}/file-manager`);
       if (this.state === 'inventory') this.goToLink(`inventory/products`);
       if (this.state === 'password-manager') this.goToLink(`password-manager`);
       if (this.state === 'myprofile-component') this.goToLink('setting/myprofile');
@@ -358,9 +375,13 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'new-template-documents') this.goToLink('documents/templates');
       if (this.state === 'support-page') this.goToLink('support-page');
       if (this.state === 'tech-companies') this.goToLink('tech-companies');
+      if (this.state === 'knowledge-base') this.goToLink('knowledge-base');
+
       if (this.state === 'company-documents') this.goToLink(`company/${this.companiesStateService.getCompanyRoutingId()}/documents`);
       if (this.state === 'new-devices') this.goToLink('devices');
       if (this.state === 'new-device-summary') this.goToLink('devices/reports');
+      if (this.state === 'file-manager') this.goToLink('file-manager');
+      if (this.state === 'file-manager-all-customer') this.goToLink('file-manager/all-customer');
 
       if (this.state === 'byProducts' ||
         this.state === 'byCustomers' ||
@@ -428,4 +449,8 @@ export class LeftPanelComponent implements OnInit {
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
 }

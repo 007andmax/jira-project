@@ -5,7 +5,7 @@
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">Create New Company</div>
         <div
-            class="qt-aside-modern__header-close icon__close"
+            class="qt-aside-modern__header-close qt-icon icon__close"
             (click)="close()"
         ></div>
     </div>
@@ -21,10 +21,16 @@
         *ngIf="version === 'full'"
     ></company-add-aside-full>
     <div class="qt-aside-modern__footer">
-        <div class="qt-df">
+        <div class="qt-df qt-w100">
+            <button
+                class="qt-button --gray qt-mr-12 qt-w100 qt-jc-c"
+                (click)="close()"
+            >
+                Cancel
+            </button>
             <button
                 *ngIf="version === 'short'"
-                class="qt-button qt-mr-12"
+                class="qt-button qt-w100 qt-jc-c"
                 appDisabledBtn
                 #addBtn="disabled"
                 (onClick)="onAddShort()"
@@ -35,7 +41,7 @@
             </button>
             <button
                 *ngIf="version === 'full'"
-                class="qt-button qt-mr-12"
+                class="qt-button qt-w100 qt-jc-c"
                 appDisabledBtn
                 #addBtn="disabled"
                 (onClick)="onAddFull()"
@@ -43,12 +49,6 @@
             >
                 <span>Save Company</span>
                 <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
-            </button>
-            <button
-                class="qt-button --gray"
-                (click)="close()"
-            >
-                Cancel
             </button>
         </div>
     </div>

@@ -20,3 +20,8 @@ border-bottom: 1px solid $gray-200;
     top: 0px;
     right: 0px;
 }
+.qt-input-block__textarea {
+    font-size: 13.5px !important;
+    overflow: hidden;
+    width: 100% !important;
+}

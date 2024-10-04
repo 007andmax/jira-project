@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, ViewChild, OnDestroy } from '@angular/core';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Subscription } from 'rxjs';
 import { InvoicesService } from 'src/app/services/invoices/invoices.service';
@@ -18,7 +18,7 @@ import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.servic
   templateUrl: './invoices-aside.component.html',
   styleUrls: ['./invoices-aside.component.scss']
 })
-export class InvoicesAsideComponent implements OnInit {
+export class InvoicesAsideComponent implements OnInit, OnDestroy {
   companies = [];
   reqCompanies = [];
   validate: PaymentInvoice = new PaymentInvoice();
@@ -32,7 +32,7 @@ export class InvoicesAsideComponent implements OnInit {
   paymentModes = [new CompanySetting('Cash', 'CASH'), new CompanySetting('Cheque', 'CHEQUE'), new CompanySetting('Debit Card', 'DEBIT_CARD'),
   new CompanySetting('Credit Card', 'CREDIT_CARD'),
   new CompanySetting('Wire Transfer', 'WIRE_TRANSFER')];
-  selectedCompany: any = null;
+  selectedCompanies = [];
   isChangeAmountReceived: boolean = false;
   selectAllInvoice: boolean = false;
   opened: boolean = false;
@@ -55,8 +55,8 @@ export class InvoicesAsideComponent implements OnInit {
       this.opened = true;
       this.selectedInvoices = data;
       if (this.selectedInvoices.length > 0) {
-        this.selectedCompany = this.reqCompanies.find(item => item.id === this.selectedInvoices[0].companyId);
-        this.onSelectCompany(this.selectedCompany);
+        this.selectedCompanies = this.reqCompanies.filter(item => this.selectedInvoices.some(invoice => invoice.companyId == item.id));
+        this.onSelectCompany(this.selectedCompanies);
       }
       let today = new Date();
       this.payment.setDate(today.getDate(), today.getMonth() + 1, today.getFullYear(), this.companiesState.getCurrentCompany().addresses[0].timeZone.timeOffset);
@@ -114,7 +114,7 @@ export class InvoicesAsideComponent implements OnInit {
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);
   }
   create() {
-    if (!this.selectedCompany || this.invoices.filter(item => item.selected).length == 0 || !this.validate.isValidate(this.amountReceived, this.invoices)) return;
+    if (this.selectedCompanies.length == 0 || this.invoices.filter(item => item.selected).length == 0 || !this.validate.isValidate(this.amountReceived, this.invoices)) return;
     this.invoices.forEach(item => {
       if (item.selected) {
         this.payment.addInvoiceId(item.id);
@@ -179,11 +179,13 @@ export class InvoicesAsideComponent implements OnInit {
     }, 0);
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);
   }
-  onSelectCompany(item) {
-    if (item) {
+  onSelectCompany(items) {
+    this.selectedCompanies = items;
+    if (items.length > 0) {
       this.invoicesFilter.setLimit(10000);
       this.invoicesFilter.setStatus("UNPAID");
-      this.invoicesFilter.setCompanyId(item.id);
+      this.invoicesFilter.setCompanyIds(items.map(item => item.id));
+      this.invoicesFilter.setExcludeDeleted(true);
       this.invoicesService.getInvoices(this.invoicesFilter.getFIlter()).subscribe((data: Array<Invoice>) => {
         this.invoices = data;
 
@@ -200,10 +202,8 @@ export class InvoicesAsideComponent implements OnInit {
           this.amountReceived_str = this.amountReceived.toFixed(2);
         }
       })
-      this.selectedCompany = item;
     } else {
       this.invoices = [];
-      this.selectedCompany = null;
     }
   }
   getDate(date) {
@@ -226,7 +226,7 @@ export class InvoicesAsideComponent implements OnInit {
     this.payment = new Payment();
     this.amountReceived = 0;
     this.amountReceived_str = "0.00";
-    this.selectedCompany = null;
+    this.selectedCompanies = [];
     this.isChangeAmountReceived = false;
     this.selectAllInvoice = false;
     this.selectedPaymentMode = new CompanySetting('Cheque', 'CHEQUE');
@@ -234,5 +234,8 @@ export class InvoicesAsideComponent implements OnInit {
   }
   public trackById(index, item) {
     return item.id;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

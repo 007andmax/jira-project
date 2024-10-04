@@ -1,4 +1,4 @@
-<div class="qt-page-list documents-page ">
+<div class="qt-page-list documents-page --sticky-breadcrumbs">
     <documents-header
         #header
         [companyId]="companyId"
@@ -7,8 +7,8 @@
     ></documents-header>
     <div class="qt-page-list__body">
         <div class="qt-page-list__body-table-container">
-            <table class="qt-page-list__body-tbody qt-table-modern documents-table">
-                <tbody>
+            <div class="qt-page-list__body-tbody qt-table-modern documents-table">
+                <div class="tbody">
                     <ng-template
                         ngFor
                         let-item
@@ -23,8 +23,8 @@
                         >
                         </company-documents-table>
                     </ng-template>
-                </tbody>
-            </table>
+                </div>
+            </div>
             <div
                 class="loading"
                 *ngIf="showPreloader"

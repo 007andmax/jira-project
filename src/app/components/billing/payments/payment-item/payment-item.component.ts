@@ -1,11 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Payment } from '../class/payment';
-import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmStateService } from '../../../shared/confirm/services/confirm-state.service';
 import { PaymentsStateService } from 'src/app/states/payments/payments-state.service';
-import { AppService } from 'src/app/states/app/app.service';
-import { PaymentsService } from 'src/app/services/payments/payments.service';
 import * as moment from "moment";
 import { DELETE_PAYMENT } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
@@ -25,10 +22,11 @@ export class PaymentItemComponent implements OnInit {
   @Output() onRefundPayment = new EventEmitter<any>();
   @Output() onPreviewInvoice = new EventEmitter<any>();
   @Output() onEditPayment = new EventEmitter<any>();
+  @Output() onResendPaymentReceipt = new EventEmitter<any>();
   allPayments = [];
   paymentSum: number;
   allPaymentsSum: number = 0;
-  constructor(private companiesStateService: CompaniesStateService,
+  constructor(
     private modalService: NgbModal,
     private paymentsStateService: PaymentsStateService,
     public customerPortalStateService: CustomerPortalStateService,
@@ -50,6 +48,9 @@ export class PaymentItemComponent implements OnInit {
   }
   showRefundPayment() {
     this.onRefundPayment.emit(this.payment);
+  }
+  resendPaymentReceipt() {
+    this.onResendPaymentReceipt.emit(this.payment);
   }
   onShowPreviewInvoice(index) {
     if (this.usersStateService.getCurrentUser().accountType == "CLIENT") {

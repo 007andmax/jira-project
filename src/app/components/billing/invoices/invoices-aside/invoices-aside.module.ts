@@ -4,29 +4,31 @@ import { InvoicesAsideComponent } from './invoices-aside.component';
 import { DatePickerModule } from 'src/app/components/shared/date-picker/date-picker.module';
 import { NumberModule } from 'src/app/directives/number/number.module';
 import { FormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from 'src/app/components/shared/preloader-ticket/preloader-ticket.module';
 import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-down/company-drop-down.module';
 import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.module';
+import { MultiCompanyDropDownModule } from 'src/app/components/shared/multi-company-drop-down/multi-company-drop-down.module';
+import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 
 
 @NgModule({
-    declarations: [InvoicesAsideComponent
+        declarations: [InvoicesAsideComponent
 
-    ],
-    imports: [
-        CommonModule,
-        DatePickerModule,
-        NumberModule,
-        FormsModule,
-        MatFormFieldModule,
-        DisabledBtnModule,
-        PreloaderTicketModule,
-        CompanyDropDownModule,
-        DropDownModule
-    ],
-    exports: [InvoicesAsideComponent]
+        ],
+        imports: [
+                CommonModule,
+                DatePickerModule,
+                NumberModule,
+                FormsModule,
+                DisabledBtnModule,
+                PreloaderTicketModule,
+                CompanyDropDownModule,
+                DropDownModule,
+                MultiCompanyDropDownModule,
+                MatErrorModule
+        ],
+        exports: [InvoicesAsideComponent]
 
 
 })

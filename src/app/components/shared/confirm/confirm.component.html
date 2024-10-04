@@ -6,9 +6,32 @@
         <h3>
             Are you sure want to delete “{{message | titlecase}}” Tag?
         </h3>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
-        </p>
+    </div>
+    <div class="archive-modal__footer">
+        <div class="qt-df qt-jc-fe">
+            <button
+                class="btn-new disabled"
+                (click)=cancelConfirm()
+            >
+                Cancel
+            </button>
+            <button
+                class="btn-new btn-primary"
+                (click)=approveConfirm()
+            >
+                Yes, I am sure
+            </button>
+        </div>
+    </div>
+</div>
+<div
+    class="archive-modal"
+    *ngIf="action === 'DELETE_DEVICE_TAG'"
+>
+    <div class="archive-modal__body">
+        <h3>
+            Are you sure want to delete “{{message | titlecase}}” Tag?
+        </h3>
     </div>
     <div class="archive-modal__footer">
         <div class="qt-df qt-jc-fe">
@@ -59,6 +82,81 @@
 >
     <div class="archive-modal__body">
         <h3>Archive User</h3>
+        <p [textContent]="message"></p>
+    </div>
+    <div class="archive-modal__footer">
+        <div class="qt-df qt-jc-fe">
+            <button
+                class="btn-new disabled"
+                (click)=cancelConfirm()
+            >
+                Cancel
+            </button>
+            <button
+                class="btn-new btn-primary"
+                (click)=approveConfirm()
+            >
+                Yes, I am sure
+            </button>
+        </div>
+    </div>
+</div>
+<div
+    class="archive-modal"
+    *ngIf="action === 'REMOVE_CATEGORY_FILES'"
+>
+    <div class="archive-modal__body">
+        <h3>Delete Folder</h3>
+        <p [textContent]="message"></p>
+    </div>
+    <div class="archive-modal__footer">
+        <div class="qt-df qt-jc-fe">
+            <button
+                class="btn-new disabled"
+                (click)=cancelConfirm()
+            >
+                Cancel
+            </button>
+            <button
+                class="btn-new btn-primary"
+                (click)=approveConfirm()
+            >
+                Yes, I am sure
+            </button>
+        </div>
+    </div>
+</div>
+<div
+    class="archive-modal"
+    *ngIf="action === 'REMOVE_FILE'"
+>
+    <div class="archive-modal__body">
+        <h3>Delete File</h3>
+        <p [textContent]="message"></p>
+    </div>
+    <div class="archive-modal__footer">
+        <div class="qt-df qt-jc-fe">
+            <button
+                class="btn-new disabled"
+                (click)=cancelConfirm()
+            >
+                Cancel
+            </button>
+            <button
+                class="btn-new btn-primary"
+                (click)=approveConfirm()
+            >
+                Yes, I am sure
+            </button>
+        </div>
+    </div>
+</div>
+<div
+    class="archive-modal"
+    *ngIf="action === 'DELETE_NEWS'"
+>
+    <div class="archive-modal__body">
+        <h3>Delete Announcement</h3>
         <p [textContent]="message"></p>
     </div>
     <div class="archive-modal__footer">
@@ -232,7 +330,7 @@
 </div>
 <div
     class="archive-modal de-archive"
-    *ngIf="action === 'DELETE_GLOBAL_FILTER'"
+    *ngIf="action === 'DELETE_GLOBAL_FILTER' || action === 'DELETE_GLOBAL_USERS_FILTER'"
 >
     <div class="archive-modal__body">
         <h3>Delete saved filter</h3>
@@ -366,6 +464,33 @@
     <div class="archive-modal__body">
         <h3>Delete Script</h3>
         <p [textContent]="message"></p>
+    </div>
+    <div class="archive-modal__footer">
+        <div class="qt-df qt-jc-fe">
+            <button
+                class="btn-new disabled"
+                (click)=cancelConfirm()
+            >
+                Cancel
+            </button>
+            <button
+                class="btn-new btn-primary"
+                (click)=approveConfirm()
+            >
+                Yes, I am sure
+            </button>
+        </div>
+    </div>
+</div>
+<div
+    class="archive-modal delete-marketing-subscribes"
+    *ngIf="action === 'DELETE_SUBSCRIPTION_TYPE'"
+>
+    <div class="archive-modal__body">
+        <h3 [textContent]="message"></h3>
+        <p>
+            Are you sure want to remove this subscription?
+        </p>
     </div>
     <div class="archive-modal__footer">
         <div class="qt-df qt-jc-fe">

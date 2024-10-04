@@ -7,7 +7,6 @@ import { AppService } from 'src/app/states/app/app.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { TicketsFilter } from '../class/tickets-filter';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
-import { TicketGlobalFilter } from '../class/ticket-global-filter';
 
 @Component({
   selector: 'app-tickets-header',
@@ -35,7 +34,6 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
   selectedListType: TitleListType = new TitleListType('My Tickets', 'USERS');
   constructor(private ticketsStateService: TicketsStateService,
     public appService: AppService,
-    private leftPanelStateService: LeftPanelStateService,
     public customerPortalStateService: CustomerPortalStateService,
     public cd: ChangeDetectorRef,) { }
 
@@ -53,10 +51,11 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
       this.onChangeCounterFilter();
     })
     this.sub.add(getOnInitFilter);
-    this.ticketsStateService.getOnInitCount().subscribe(data => {
+    let getOnInitCount = this.ticketsStateService.getOnInitCount().subscribe(data => {
       this.count = data;
       this.onSetCount();
     })
+    this.sub.add(getOnInitCount);
     /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
     /* START */
     if (this.ticketsStateService.getListType() && this.ticketsStateService.getTicketsCounts()) {
@@ -120,15 +119,6 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
 */
   refreshFilters() {
     this.filter.applyFilters();
-  }
-  /**
-* @description Clear all filters and global filter
-*/
-  clearAll() {
-    if (this.filter) this.filter.onClearAll();
-    let ticketGlobalFilter = new TicketGlobalFilter();
-    if (this.ticketsFilter.isDisbledCompany) ticketGlobalFilter.setClientCompaies(this.ticketsFilter.selectedCompanies.map(item => item.id));
-    this.ticketsStateService.onChangeGlobalFilter(ticketGlobalFilter);
   }
   /**
 * @description Return text 'Filter' + countFilter

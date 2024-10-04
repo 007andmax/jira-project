@@ -1,0 +1,31 @@
+@import "./src/assets/styles/variable";
+;
+
+.manage-tags-table {
+    &__custom-tags {
+        flex: 1 1 150px;
+        padding: 0 8px;
+    }
+
+    &__count {
+        flex: 1 1 350px;
+        padding: 0 8px;
+    }
+
+    &__action {
+        flex: 0 0 56px;
+    }
+}
+
+.pengind-loading {
+    bottom: 20px;
+    top: auto;
+}
+.--input-error {
+    position: relative;
+
+    input,
+    input:hover {
+        border: solid 1px $red-600 !important;
+    }
+}

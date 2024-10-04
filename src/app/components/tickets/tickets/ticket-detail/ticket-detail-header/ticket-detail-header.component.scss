@@ -1,5 +1,7 @@
 @import "./src/assets/styles/variable";
 @import "./src/assets/styles/fonts";
+@import "./src/assets/styles/mixin/breakpoint";
+
 .breadcrumbs {
     display: inline-flex;
     flex-wrap: wrap;
@@ -69,7 +71,7 @@
   }
 }
 
-.icon__category-more-dropdown {
+.icon__more-dropdown {
   width: 200px;
   padding: 8px;
 
@@ -111,7 +113,7 @@
 }
 
 .ticket-detail-page__management-block {
-  @media (max-width: 2048px) {
+  @include media-breakpoint-down($lg) {
     position: fixed;
     top: 12px;
     right: 16px;

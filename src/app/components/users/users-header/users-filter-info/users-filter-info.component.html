@@ -1,0 +1,14 @@
+<div class="qt-page-list__header-title-line--left">
+    <h6 class="qt-page-list__header-title qt-fs-0">All Users</h6>
+    <div
+        class="qt-df qt-ai-c"
+        *ngIf="globalFilter.id"
+    >
+        <div class="users-filter-info__separator"></div>
+        <i class="qt-icon icon__filter-lines qt-sz-16 qt-bg-contain qt-dib qt-mr-4"></i>
+        <div
+            class="users-filter-info__text"
+            [textContent]="globalFilter.name"
+        ></div>
+    </div>
+</div>

@@ -1,5 +1,5 @@
-<tr>
-    <td
+<div class="qt-table-modern__row">
+    <div
         class="billable-item-table__check"
         *ngIf="getPermissions('CREATE_INVOICE')"
     >
@@ -17,13 +17,13 @@
                 <span></span>
             </label>
         </div>
-    </td>
-    <td
+    </div>
+    <div
         class="billable-table__company-name --strong"
         [textContent]="item.name"
         (click)="moToBillableTickets()"
-    ></td>
-    <td
+    ></div>
+    <div
         class="billable-table__tickets"
         (click)="moToBillableTickets()"
     >
@@ -39,25 +39,25 @@
             </div>
             <div [textContent]="ticketsListService.getUserName(salesPerson)"></div>
         </div>
-    </td>
-    <td
+    </div>
+    <div
         class="billable-table__sales"
         [textContent]="item.countTickets"
         (click)="moToBillableTickets()"
-    ></td>
-    <td
+    ></div>
+    <div
         class="billable-table__billable"
         [textContent]="(item.total | currency)"
         (click)="moToBillableTickets()"
-    ></td>
-    <td
+    ></div>
+    <div
         class="invoce-table__menu"
         ngbDropdown
         [container]="'body'"
         *ngIf="getPermissions('CREATE_INVOICE')"
     >
         <div
-            class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
+            class="qt-ic-c qt-icon icon__more  qt-pointer qt-sz-16 qt-bg-contain"
             id="dropdownBasic1"
             ngbDropdownToggle
         >
@@ -71,10 +71,10 @@
                     ngbDropdownItem
                     (click)="onInvoiceAll()"
                 >
-                    <div class="icon__convert-invoice qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                    <div class="qt-icon icon__billing qt-sz-20 qt-mr-12"></div>
                     Invoice All
                 </li>
             </ul>
         </div>
-    </td>
-</tr>
+    </div>
+</div>

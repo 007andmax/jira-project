@@ -7,7 +7,7 @@
     ></app-contracts-aside-top>
     <div class="qt-inputs-row">
         <div class="qt-pl-12 qt-pr-12 qt-df qt-ai-c contract-tipe-info">
-            <div class="qt-sz-16 icon__tips qt-mr-5"></div>
+            <div class="qt-sz-16 qt-icon icon__info qt-mr-5"></div>
             <div>
                 Contract time can be based on the amount of users or devices
             </div>
@@ -21,7 +21,7 @@
                 [formatDate]="formatDate"
                 [editMode]="true"
                 [editDate]="startDate"
-                [useMinDate]="false"
+                [minDate]="minStartDate"
                 (onChange)="onChangeStartDate($event)"
             ></app-date-picker>
         </div>
@@ -59,12 +59,12 @@
                 [(ngModel)]="contractsUserDevice.description"
                 (input)="validate.resetDescription()"
             >
-            <mat-error
+            <app-mat-error
                 class="invalid-feedback"
                 *ngIf="!validate.getDescription()"
             >
                 Description is required
-            </mat-error>
+            </app-mat-error>
         </div>
     </div>
     <div class="qt-inputs-row-background">
@@ -102,7 +102,12 @@
                     <tr>
                         <th>Device Name</th>
                         <th class="col-count">Count</th>
-                        <th class="col-tax">Tax</th>
+                        <th
+                            class="col-tax"
+                            *ngIf="!contractsUserDevice.invoiceAsSingleItem"
+                        >
+                            Tax
+                        </th>
                         <th class="col-price">Price</th>
                         <th></th>
                     </tr>
@@ -116,7 +121,9 @@
                         [ngForTrackBy]="trackById"
                     >
                         <app-contracts-aside-user-device-service
+                            #deviceService
                             [service]="item"
+                            [invoiceAsSingleItem]="contractsUserDevice.invoiceAsSingleItem"
                             (onRemove)="onRemoveServiceContractServices(i)"
                             (onCheckName)="onCheckDuplicatedServiceContractServices()"
                         ></app-contracts-aside-user-device-service>
@@ -125,11 +132,36 @@
             </table>
         </div>
         <button
-            class="qt-button --gray --sm qt-mb-24"
+            class="qt-button --gray --sm"
             (click)="addServiceContractService()"
         >
             + Add Service
         </button>
+        <div class="qt-df qt-ai-c single-invoice">
+            <div
+                class="qt-toggle qt-mr-8"
+                [ngClass]="{'--on':contractsUserDevice.invoiceAsSingleItem}"
+                (click)="setInvoiceAsSingleItem(!contractsUserDevice.invoiceAsSingleItem)"
+            >
+                <div class="qt-toggle__circle"></div>
+            </div>
+            <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-gray-600">Invoice as single item</div>
+            <div
+                class="qt-inputs-row qt-ml-auto"
+                [hidden]="!contractsUserDevice.invoiceAsSingleItem"
+            >
+                <div class="qt-input-block">
+                    <div class="qt-input-block__label">Select taxes</div>
+                    <app-taxes
+                        class="qt-taxes-multiselect"
+                        #taxesServices
+                        [isLabel]="false"
+                        [isAdd]="false"
+                        (taxesChange)="onServiceTaxesChange($event)"
+                    ></app-taxes>
+                </div>
+            </div>
+        </div>
         <div class="qt-fs-15 qt-fw-600 qt-lh-147 qt-color-gray-900 qt-mb-16">
             Create service that you want to track the time for. Tracked service time counts towards contract and is not billed to customer
         </div>
@@ -163,7 +195,7 @@
         >
             + Add Service
         </button>
-        <div class="qt-df qt-mb-24">
+        <div class="qt-df">
             <div
                 class="qt-toggle qt-mr-8"
                 [ngClass]="{'--on':toggleMaximumAmountHours}"
@@ -174,7 +206,7 @@
             <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-gray-600">Set maximum amount of hours</div>
         </div>
         <div
-            class="qt-inputs-row"
+            class="qt-inputs-row qt-mt-24"
             [hidden]="!toggleMaximumAmountHours"
         >
             <div class="qt-input-block qt-f50 --required">
@@ -187,12 +219,12 @@
                     [value]="contractsUserDevice.includedHours"
                     (onChange)="contractsUserDevice.includedHours=$event"
                 >
-                <mat-error
+                <app-mat-error
                     class="invalid-feedback"
                     *ngIf="!validate.getIncludedHours()"
                 >
-                    Field is required
-                </mat-error>
+                    Cannot be 0
+                </app-mat-error>
             </div>
             <div class="qt-input-block qt-f50 --required">
                 <div class="qt-input-block__label">Rate exceding block time</div>
@@ -208,12 +240,12 @@
                         (input)="validate.resetRateExceeding()"
                         (onChange)="contractsUserDevice.rateExceeding=$event"
                     >
-                    <mat-error
+                    <app-mat-error
                         class="invalid-feedback"
                         *ngIf="!validate.getRateExceeding()"
                     >
-                        Field is required
-                    </mat-error>
+                        Rate cannot be 0.00
+                    </app-mat-error>
                 </div>
             </div>
             <div class="qt-input-block qt-f50">
@@ -226,16 +258,6 @@
                     (taxesChange)="onTaxesChange($event)"
                 ></app-taxes>
             </div>
-        </div>
-        <div class="qt-df">
-            <div
-                class="qt-toggle qt-mr-8"
-                [ngClass]="{'--on':contractsUserDevice.invoiceAsSingleItem}"
-                (click)="contractsUserDevice.invoiceAsSingleItem = !contractsUserDevice.invoiceAsSingleItem"
-            >
-                <div class="qt-toggle__circle"></div>
-            </div>
-            <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-gray-600">Invoice as single item</div>
         </div>
     </div>
     <div class="qt-df qt-mb-16 qt-mt-16">
@@ -301,9 +323,9 @@
             </ng-template>
             <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-gray-600 qt-df qt-ai-c">
                 Manual create billable item
-                <span class="icon__automatically-create-invoice qt-bg-contain qt-dib qt-sz-20 qt-ml-8"></span>
+                <span class="qt-icon icon__automatically-create-invoice qt-dib qt-sz-20 qt-ml-8"></span>
                 <span
-                    class="icon__help qt-dib qt-sz-12 qt-ic-c qt-ml-8"
+                    class="qt-icon icon__help qt-dib qt-sz-12 qt-ic-c qt-ml-8"
                     placement="top"
                     [ngbTooltip]="manualContent"
                 ></span>
@@ -328,9 +350,9 @@
             </ng-template>
             <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-gray-600 qt-df qt-ai-c">
                 Automatically create and send invoice
-                <span class="icon__manual-create-billable qt-bg-contain qt-dib qt-sz-20 qt-ml-8"></span>
+                <span class="qt-icon icon__manual-create-billable qt-dib qt-sz-20 qt-ml-8"></span>
                 <span
-                    class="icon__help qt-dib qt-sz-12 qt-ic-c qt-ml-8"
+                    class="qt-icon icon__help qt-dib qt-sz-12 qt-ic-c qt-ml-8"
                     placement="top"
                     [ngbTooltip]="tipContent"
                 ></span>

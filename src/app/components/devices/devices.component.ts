@@ -1,20 +1,16 @@
 import { Subscription } from 'rxjs';
-import { ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Session } from 'inspector';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { AgentService } from 'src/app/services/agent/agent.service';
-import { CompaniesService } from 'src/app/services/company/companies.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { KafkaStateService } from 'src/app/states/kafka/kafka-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { CommonHttpServices } from '../device/_services/common_http.service';
 import { ExcelService } from '../device/_services/download_csv.service';
 import { RemoteControlService } from '../device/_services/remoteControl.service';
-import { ReportSendEmailComponent } from '../reports/report-additional-actions/report-send-email/report-send-email.component';
 import { DeviceFilter } from './class/devices';
 import { DropDownComponent } from '../shared/drop-down/drop-down.component';
 import { v4 as uuidv4 } from 'uuid';
@@ -30,7 +26,7 @@ import { DevicesService } from 'src/app/services/devices/devices.service';
   templateUrl: './devices.component.html',
   styleUrls: ['./devices.component.scss']
 })
-export class DevicesComponent implements OnInit {
+export class DevicesComponent implements OnInit, OnDestroy {
   @ViewChild("templatePowersell", { static: true }) template;
   @ViewChild("templateConnection", { static: true }) templateconnection;
   @ViewChild("screenConnect", { static: true }) screenConnect;
@@ -41,9 +37,8 @@ export class DevicesComponent implements OnInit {
   @ViewChild('dropdownManufacturer', { static: true }) dropdownManufacturer: DropDownComponent;
   @ViewChild('installdatePicker', { static: true }) installdatePicker: DatePickerComponent;
   @ViewChild('warrantydatePicker', { static: true }) warrantydatePicker: DatePickerComponent;
-  @ViewChild('dropdownManufacturersidebar', { static: false }) dropdownManufacturersidebar: DropDownComponent;
-  @ViewChild('dropdownModelSidebar', { static: false }) dropdownModelSidebar: DropDownComponent;
-  @ViewChild('dropdownServices', { static: true }) selectedInput: ElementRef<HTMLInputElement>;
+  @ViewChild('dropdownManufacturersidebar', { static: true }) dropdownManufacturersidebar: DropDownComponent;
+  @ViewChild('dropdownModelSidebar', { static: true }) dropdownModelSidebar: DropDownComponent;
   companyId: any;
   tagFilterValue: string = "";
   searchTag: any[] = [];
@@ -320,9 +315,7 @@ export class DevicesComponent implements OnInit {
     });
   }
 
-  ngOnDestroy() {
-    this.sub.unsubscribe();
-  }
+
 
   setPreviewDataDevice() {
     let searchData: any = localStorage.getItem("currentSearch");
@@ -667,15 +660,15 @@ export class DevicesComponent implements OnInit {
     }, 500);
   }
 
-  selected(event: MatAutocompleteSelectedEvent): void {
-    let data = this.selectedTag.find(x => x.toLowerCase() == event.option.viewValue.toLocaleLowerCase());
+  selected(search): void {
+    let data = this.selectedTag.find(x => x.toLowerCase() == search.Result.toLocaleLowerCase());
     if (!data) {
-      this.selectedTag.push(event.option.viewValue);
+      this.selectedTag.push(search.Result);
       this.searchTag = [];
       this.searchTag = this.selectedTag;
       this.selectedInput.nativeElement.value = '';
       this.selectedCtrl.setValue(null);
-      this.add(event.option.viewValue);
+      this.add(search.Result);
     }
     this.selectedInput.nativeElement.value = '';
   }
@@ -2023,5 +2016,7 @@ export class DevicesComponent implements OnInit {
       }
     });
   }
-
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 }

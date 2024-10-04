@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersAsideEditComponent } from './users-aside-edit.component';
 import { FormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { CompanySubscriptionModule } from '../../companies/company-subscription/company-subscription.module';
 import { CompanyTagsModule } from '../../companies/company-tags/company-tags.module';
@@ -15,6 +14,7 @@ import { CompanyDropDownModule } from '../../shared/company-drop-down/company-dr
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 @NgModule({
     declarations: [UsersAsideEditComponent
@@ -22,7 +22,6 @@ import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-toolt
     imports: [
         CommonModule,
         FormsModule,
-        MatFormFieldModule,
         DropDownModule,
         CompanySubscriptionModule,
         CompanyTagsModule,
@@ -34,7 +33,8 @@ import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-toolt
         CompanyDropDownModule,
         PreloaderTicketModule,
         DisabledBtnModule,
-        DynamicTooltipModule
+        DynamicTooltipModule,
+        MatErrorModule
     ],
     exports: [UsersAsideEditComponent]
 

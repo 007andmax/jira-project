@@ -37,12 +37,12 @@
                             (input)="gl.onInitEdit(true);gl.checkDublicate(numberList)"
                             maxlength="50"
                         >
-                        <mat-error
+                        <app-mat-error
                             class="qt-tooltip-error"
                             *ngIf="gl.disableUpdate"
                         >
                             This Gl Number is already occupied
-                        </mat-error>
+                        </app-mat-error>
                     </div>
                     <div class="tab-pane__table-cell gl-numbers__table-description">
                         <input
@@ -65,7 +65,7 @@
                         <div
                             (mouseenter)="removeTooltip.show($event.target)"
                             (mouseleave)="removeTooltip.hide()"
-                            class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                            class="qt-icon icon__delete qt-sz-20 qt-bg-contain pointer"
                             (click)="removeConfirm(gl)"
                         >
                         </div>

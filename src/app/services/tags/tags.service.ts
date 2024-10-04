@@ -36,6 +36,9 @@ export class TagsService {
     if (partWord.length === 0) return this.http.get(this.apiUrl + `commonTags/getAll?page=${page}&size=20&defaultTag=COMMON`)
     return this.http.get(this.apiUrl + `commonTags/filter?page=${page}&size=20&partWord=${partWord}&defaultTag=COMMON`)
   }
+  searchFilesTags(page, partWord) {
+    return this.http.get(`${this.apiUrl}commonTags/${partWord != '' ? 'filter' : 'getAll'}?page=${page}&size=20${partWord != '' ? `&partWord=${partWord}` : ''}&defaultTag=FILE_TAG`)
+  }
   getTagsCompanyById(companyId) {
     return this.http.get(this.apiUrl + `commonTags/filter?page=0&size=20&companyId=${companyId}`)
 

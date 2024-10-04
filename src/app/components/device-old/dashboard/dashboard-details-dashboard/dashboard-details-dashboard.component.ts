@@ -14,7 +14,7 @@ export class DashboardDetailsDashboardComponent implements OnInit {
   @Input() hostName = '';
   @Input() system;
   @Input() networkAdapters = {
-    ip_address: ''
+    ipAddress: ''
   };
   @Input() _id = '';
   @Input() windows_info: string = '';

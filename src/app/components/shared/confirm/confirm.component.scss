@@ -2,10 +2,11 @@
 
 .modal-body {
     padding: 0px;
-    
+
 }
 /deep/.archive-modal {
-    width: 504px;
+    max-width: 504px;
+    width: 100%;
     padding: 32px;
     .archive-modal__body {
         margin-bottom: 32px;
@@ -34,4 +35,7 @@
         font-size: 14px;
         margin-left: 12px;
     }
+}
+.delete-marketing-subscribes {
+    
 }

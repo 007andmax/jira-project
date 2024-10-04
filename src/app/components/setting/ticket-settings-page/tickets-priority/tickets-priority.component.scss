@@ -15,6 +15,13 @@
     &__color {
         flex: 1 1 190px;
     }
+    &__display {
+        flex: 1 1 500px;
+        padding: 0px !important;
+        label {
+            width: max-content;
+        }
+    }
 
     &__preview {
         flex: 1 1 500px;
@@ -79,8 +86,8 @@
                 background-color: $white;
                 -webkit-mask-position: center;
                 mask-position: center;
-                -webkit-mask-image: url("/assets/img/icons/done-blue.svg");
-                mask-image: url("/assets/img/icons/done-blue.svg");
+                -webkit-mask-image: url("/assets/img/icons/done.svg");
+                mask-image: url("/assets/img/icons/done.svg");
                 -webkit-mask-repeat: no-repeat;
                 mask-repeat: no-repeat;
                 -webkit-mask-size: 16px 16px;

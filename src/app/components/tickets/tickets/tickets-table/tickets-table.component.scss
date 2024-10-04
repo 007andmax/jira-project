@@ -1,4 +1,5 @@
 @import "./src/assets/styles/variable";
+@import "./src/assets/styles/mixin/breakpoint";
 
 ::ng-deep .ticket-table {
   th {
@@ -27,7 +28,7 @@ app-tickets-table-item {
   display: none;
   width: 48px;
   height: 48px;
-  background: $blue-light-600 url('/assets/img/icons/add-product.svg') 16px 16px no-repeat;
+  background: $blue-light-600;
   box-shadow: 0 8px 16px 0 rgba(22, 164, 250, 0.2);
   position: fixed;
   right: 16px;
@@ -143,7 +144,6 @@ app-tickets-table-item {
   .search-status,
   .search-company,
   .light-dropdown.dropdown {
-    margin-bottom: 16px;
 
     &::before {
       color: $gray-900;
@@ -265,7 +265,7 @@ app-tickets-table-item {
       width: calc(412px - 16px);
       flex: 1;
 
-      @media (max-width: 1600px) {
+      @include media-breakpoint-down($md) {
         max-width: calc(345px - 16px);
       }
     }

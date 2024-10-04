@@ -35,7 +35,7 @@ export class CompanyProfile {
     workingDays: Array<WorkDay>;
     techLeadId: string;
     id: string;
-    tags: Array<Tag>;
+    tags: Array<Tag> = [];
     associatedCompanies: Array<CompanyAssociated> = [];
     reputation?: number = 0;
     primaryContact: CompanyAndressContact;
@@ -161,6 +161,7 @@ export class CompanyProfile {
             techLeadId: this.techLeadId,
             id: this.id,
             tags: this.tags,
+            reputation: this.reputation
         }
     }
     public getDataForAdd() {

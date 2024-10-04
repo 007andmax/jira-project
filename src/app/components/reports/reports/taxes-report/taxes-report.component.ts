@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { TaxesReport } from '../../class/taxes';
-import { ReportsStateService } from 'src/app/states/reports/reports-state.service';
 
 @Component({
   selector: 'app-taxes-report',
@@ -13,7 +12,7 @@ export class TaxesReportComponent implements OnInit {
   list = [];
   selectedClient = null;
   loadingInProgress: boolean = false;
-  constructor(private reportsStateService: ReportsStateService, public cd: ChangeDetectorRef,) { }
+  constructor(public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
   }

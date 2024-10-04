@@ -1,56 +1,55 @@
 import { Directive, OnInit, ElementRef, Injectable, Input, ChangeDetectorRef, OnChanges, SimpleChanges, AfterContentChecked, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 var $ = require("jquery");
 @Directive({
   selector: '[appTextArea]'
 })
 export class TextAreaDirective implements OnInit {
-
-  cloned: HTMLTextAreaElement;
-  lines: number = 1;
-  height: number = 0;
-  @Input() lineHeight = false;
-  @Input() limit;
-  @Input() default;
-  @Input() minHeight;
-  @Input() maxLines = 5;
+  @Input() height = 'auto';
+  @Input() checkScrollHeight = false;
+  @Input() maxHeight;
   @Output() onPast = new EventEmitter<any>();
   block: boolean = false;
-  ctrlDown: boolean = false;
-  keyCode = null;
-  constructor(private element: ElementRef, public cd: ChangeDetectorRef) {
-
+  constructor(private element: ElementRef, public cd: ChangeDetectorRef,
+    private appStateService: AppStateService,
+  ) {
   }
 
   ngOnInit() {
-    if (this.minHeight) this.element.nativeElement.style.minHeight = this.minHeight + "px";
-    this.element.nativeElement.style.visibility = 'visible';
-    this.element.nativeElement.style.display = 'block';
-    this.element.nativeElement.parentNode.style.position = 'relative';
+
+    this.element.nativeElement.addEventListener('input', () => {
+      // Reset the height to auto to calculate the new height
+      this.element.nativeElement.style.height = this.height;
+
+      // Get the scroll height and set the new height accordingly
+      let computedStyle = getComputedStyle(this.element.nativeElement);
+      const newHeight = this.element.nativeElement.scrollHeight + parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom);
+
+      // Set height, but limit it to the maximum height
+      if (newHeight <= this.maxHeight) {
+        this.element.nativeElement.style.height = `${newHeight}px`;
+      } else {
+        this.element.nativeElement.style.height = `${this.maxHeight}px`;
+        this.element.nativeElement.style.overflowY = 'scroll';  // Show scrollbar when max height is reached
+      }
+    });
   }
   ngDoCheck() {
-    if (this.element.nativeElement.value === "") {
-      this.element.nativeElement.setAttribute("rows", (this.default) ? this.default : 1);
-    } else {
-      this.lines = this.getNumberOfLines(this.element.nativeElement.value);
-      if (this.lines <= this.maxLines) {
-        this.element.nativeElement.setAttribute("rows", (this.default && this.default > this.lines) ? this.default : this.lines);
+    if (this.element.nativeElement.value !== "" && !this.block) {
+      if (this.checkScrollHeight && this.element.nativeElement.scrollHeight == 0) return;
+      this.element.nativeElement.style.height = this.height;
+      // Get the scroll height and set the new height accordingly
+      let computedStyle = getComputedStyle(this.element.nativeElement);
+      const newHeight = this.element.nativeElement.scrollHeight + parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom);
+      // Set height, but limit it to the maximum height
+      if (newHeight <= this.maxHeight) {
+        this.element.nativeElement.style.height = `${newHeight}px`;
       } else {
-        this.element.nativeElement.setAttribute("rows", this.maxLines);
+        this.element.nativeElement.style.height = `${this.maxHeight}px`;
+        this.element.nativeElement.style.overflowY = 'scroll';  // Show scrollbar when max height is reached
       }
+      this.block = true;
+      // this.appStateService.changeDetectorRef();
     }
-
   }
-
-  private getNumberOfLines(str) {
-    if (this.lineHeight) {
-      let lineHeight = parseInt($('.qt-editable-input').css('lineHeight'));
-      var vs = this.element.nativeElement.scrollHeight > this.element.nativeElement.clientHeight;
-      return vs ? Math.ceil(this.element.nativeElement.scrollHeight / lineHeight) : this.lines;
-    }
-    if (str) {
-      return str.split(/\r\n|\r|\n/).length;
-    }
-    return 1;
-  }
-
 }

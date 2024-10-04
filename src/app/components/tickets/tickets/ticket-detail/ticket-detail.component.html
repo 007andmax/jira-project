@@ -13,7 +13,7 @@
         (onToggleRigthPanel)="onToggleRigthPanel($event)"
     ></ticket-detail-header>
     <!-- <div -->
-    <!-- class="collapse-arrow icon__close" -->
+    <!-- class="collapse-arrow qt-icon icon__close" -->
     <!-- (click)="close()" -->
     <!-- ></div> -->
     <div
@@ -92,7 +92,7 @@
                                         <div class="ticket-detail-page-content__body-header-data">
                                             <span [textContent]="getCreatAt()"></span>
                                             <div class="ticket-detail-page-content__body-header-data-divider"></div>
-                                            <span class="icon__companies qt-sz-16 qt-dib qt-mr-8"></span>
+                                            <span class="qt-icon icon__companies qt-sz-16 qt-dib qt-mr-8"></span>
                                             <span
                                                 class="pointer"
                                                 [textContent]="getCompanyName()"
@@ -114,23 +114,23 @@
                         <div class="qt-df qt-ai-fs qt-mt-24 qt-mb-24">
                             <div class="ticket-detail-page__desc-icon qt-mr-16 qt-fs-0">
                                 <span
-                                    class="icon__email qt-sz-16 qt-dib"
+                                    class="qt-icon icon__email qt-sz-16 qt-dib"
                                     *ngIf="ticketProfile.ticketSource === 'FROM_EMAIL'"
                                 ></span>
                                 <span
-                                    class="icon__monitor qt-sz-16 qt-dib"
+                                    class="qt-icon icon__monitor qt-sz-16 qt-dib"
                                     *ngIf="ticketProfile.ticketSource === 'FROM_AGENT'"
                                 ></span>
                                 <span
-                                    class="icon__globe qt-sz-16 qt-dib"
+                                    class="qt-icon icon__globe qt-sz-16 qt-dib"
                                     *ngIf="ticketProfile.ticketSource === 'FROM_WEB'"
                                 ></span>
                                 <span
-                                    class="icon__calendar-recurring-ticket qt-sz-16 qt-dib"
+                                    class="qt-icon qt-icon icon__calendar-tick qt-sz-16 qt-dib"
                                     *ngIf="ticketProfile.ticketSource === 'FROM_RECURRING_TICKET'"
                                 ></span>
                                 <span
-                                    class="icon__receipt qt-sz-16 qt-dib"
+                                    class="qt-icon icon__quotes qt-sz-16 qt-dib"
                                     *ngIf="ticketProfile.ticketSource === 'FROM_SALE_QUOTE'"
                                 ></span>
                             </div>
@@ -138,15 +138,15 @@
                                 <div
                                     class="ticket-detail-page__edit"
                                     appClickOtside
-                                    [init]="modeDescription === 'edit'"
+                                    [init]="modeDescription === 'edit' && ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
                                     [class]="'.ticket-detail-page__edit-wrap'"
                                     (onOutSide)="toggleNote()"
                                 >
                                     <div
-                                        class="ticket-detail-page__editor pointer"
-                                        [ngClass]="{'no-edit-note':!getPermissions('EDIT_TICKETS')}"
+                                        class="ticket-detail-page__editor"
+                                        [ngClass]="{'no-edit-note':!getPermissions('EDIT_TICKETS'),'pointer':ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)}"
                                         (blur)="modeDescription = 'edit'"
-                                        [attr.contenteditable]="getPermissions('EDIT_TICKETS')"
+                                        [attr.contenteditable]="getPermissions('EDIT_TICKETS') && ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
                                         id="ticket-note"
                                         placeholder="Enter description here"
                                     ></div>
@@ -193,10 +193,39 @@
                 *ngIf="!showPreloader"
             >
                 <ticket-detail-claim-info [ticketProfile]="ticketProfile"></ticket-detail-claim-info>
-                <ticket-detail-change-status [ticketProfile]="ticketProfile"></ticket-detail-change-status>
+                <ticket-detail-change-status
+                    #changeStatus
+                    [ticketProfile]="ticketProfile"
+                ></ticket-detail-change-status>
                 <ticket-detail-change-priority [ticketProfile]="ticketProfile"></ticket-detail-change-priority>
-                <ticket-detail-change-company [ticketProfile]="ticketProfile"></ticket-detail-change-company>
+                <ticket-detail-change-company
+                    #changeCompany
+                    [ticketProfile]="ticketProfile"
+                ></ticket-detail-change-company>
+                <div class="qt-inputs-row">
+                    <div class="qt-input-block qt-f100">
+                        <company-users-drop-down
+                            #userDP
+                            [title]="' Ticket creator'"
+                            [class]="['qt-dropdown']"
+                            [placeholder]="'Select'"
+                            [field]="'name'"
+                            [dropdownHeight]="'345px'"
+                            [search]="true"
+                            [change]="true"
+                            [sort]="false"
+                            [isBlockClear]="true"
+                            [selectedItem]="ticketProfile.createdUser"
+                            [tooltipMessage]="'You can set a new company for the ticket unless the ticket contains at least one product/service update.'"
+                            [selectedCustomerCompany]="ticketProfile.selectedCustomerCompany"
+                            [isShowTooltip]="true"
+                            [isDisabled]="getCompany(ticketProfile.company.id).isUnknown || customerPortalStateService.isCustomerPortal"
+                            (onSelectedItem)="onSelectUser($event.user,$event.customerCompany)"
+                        ></company-users-drop-down>
+                    </div>
+                </div>
                 <ticket-detail-add-assigned-user
+                    [ticketProfile]="ticketProfile"
                     [listAssignedUser]="listAssignedUser"
                     (onSelectAssignedUser)="onSelectAssignedUser($event)"
                 ></ticket-detail-add-assigned-user>
@@ -205,11 +234,15 @@
                     [selectedCompanyId]="ticketProfile.company.id"
                 ></ticket-detail-linked-agents>
                 <ticket-detail-edit-tags
+                    [ticketProfile]="ticketProfile"
                     [selectedTag]="ticketProfile.tags"
                     (tagsChange)="onChangeTags($event,false)"
                     (tagsRemove)="onChangeTags($event,true)"
                 ></ticket-detail-edit-tags>
-                <ticket-detail-attachments [attachments]="ticketProfile.attachments"></ticket-detail-attachments>
+                <ticket-detail-attachments
+                    [ticketProfile]="ticketProfile"
+                    [attachments]="ticketProfile.attachments"
+                ></ticket-detail-attachments>
                 <!-- <div class="qt-input-block">
                     <span class="qt-input-block__label">Priority Level</span>
                     <app-drop-down
@@ -232,11 +265,13 @@
                     *ngIf="toggleRigthPanelContainer"
                 >
                     <ticket-detail-contact-details
+                        #contactDetail
                         *ngIf="typeRigthDetailAside == 'CONTACT'"
                         [ticketProfile]="ticketProfile"
                         (onClose)="onCloseDetails()"
                     ></ticket-detail-contact-details>
                     <ticket-detail-contact
+                        #contact
                         *ngIf="toggleRigthPanel"
                         [ticketProfile]="ticketProfile"
                         (onShowMore)="onShowMore('CONTACT')"
@@ -255,6 +290,7 @@
                         (onShowMore)="onShowMore('DEVICES')"
                     ></ticket-detail-devices>
                     <ticket-detail-tickets
+                        #ticketsDetail
                         *ngIf="toggleRigthPanel"
                         [ticketProfile]="ticketProfile"
                         (onShowMore)="onShowMore('TICKETS')"
@@ -264,12 +300,14 @@
                         *ngIf="ticketStateService.getDocumentForPreview()"
                     ></ticket-detail-documents-preview>
                     <ticket-detail-documents-details
+                        #documentsRecordDetail
                         [ticketProfile]="ticketProfile"
                         (onViewDocument)="onViewDocumentsPreview($event)"
                         *ngIf="typeRigthDetailAside == 'DOCUMENT'"
                         (onClose)="onCloseDetails()"
                     ></ticket-detail-documents-details>
                     <ticket-detail-passwords-details
+                        #passwordRecordDetail
                         [ticketProfile]="ticketProfile"
                         *ngIf="typeRigthDetailAside == 'PASSWORD'"
                         (onClose)="onCloseDetails()"
@@ -279,6 +317,7 @@
                         (onClose)="onCloseDetails()"
                     ></ticket-detail-devices-details>
                     <ticket-detail-tickets-details
+                        #ticketsDetailList
                         [ticketProfile]="ticketProfile"
                         *ngIf="typeRigthDetailAside == 'TICKETS'"
                         (onClose)="onCloseDetails()"
@@ -293,31 +332,31 @@
                     class="ticket-detail-page-content__sidebar-menu-button"
                     (click)="openDetailRigthPanel('CONTACT')"
                 >
-                    <div class="icon__company-info qt-sz-20 qt-bg-contain"></div>
+                    <div class="qt-icon icon__info qt-sz-20 qt-bg-contain"></div>
                 </div>
                 <div
                     class="ticket-detail-page-content__sidebar-menu-button"
                     (click)="openDetailRigthPanel('PASSWORD')"
                 >
-                    <div class="icon__locked qt-sz-20 qt-bg-contain"></div>
+                    <div class="qt-icon icon__password qt-sz-20 qt-bg-contain"></div>
                 </div>
                 <div
                     class="ticket-detail-page-content__sidebar-menu-button"
                     (click)="openDetailRigthPanel('DEVICES')"
                 >
-                    <div class="icon__devices-computer qt-sz-20 qt-bg-contain"></div>
+                    <div class="qt-icon icon__devices qt-sz-20"></div>
                 </div>
                 <div
                     class="ticket-detail-page-content__sidebar-menu-button"
                     (click)="openDetailRigthPanel('DOCUMENT')"
                 >
-                    <div class="icon__documents qt-sz-20 qt-bg-contain"></div>
+                    <div class="qt-icon icon__documents qt-sz-20 qt-bg-contain"></div>
                 </div>
                 <div
                     class="ticket-detail-page-content__sidebar-menu-button"
                     (click)="openDetailRigthPanel('TICKETS')"
                 >
-                    <div class="icon__tickets-detail-contact qt-sz-20 qt-bg-contain"></div>
+                    <div class="qt-icon icon__tickets qt-sz-20"></div>
                 </div>
             </div>
         </div>

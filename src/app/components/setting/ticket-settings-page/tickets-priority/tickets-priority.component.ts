@@ -6,11 +6,11 @@ import { TicketsPriority } from './class/tickets-priority';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { catchError, map } from 'rxjs/operators';
-import { ClickOtsideDirective } from 'src/app/directives/click-otside/click-otside.directive';
+import { ClickOutsideDirective } from 'src/app/directives/click-otside/click-otside.directive';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
-import { DELETE_TICKET_PRIORITY, DELETE_TICKET_STATUS } from 'src/app/const/confirm';
+import { DELETE_TICKET_PRIORITY } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 
 @Component({
@@ -26,7 +26,7 @@ export class TicketsPriorityComponent implements OnInit {
   statusColors: Array<StatusColor> = [];
   editTicketsStatus: TicketStatus;
   sort = "ASC";
-  @ViewChild('addPriorityBtn', { static: false }) addPriorityBtn: ClickOtsideDirective;
+  @ViewChild('addPriorityBtn', { static: false }) addPriorityBtn: ClickOutsideDirective;
   sub: Subscription = new Subscription();
   constructor(private ticketsStateService: TicketsStateService,
     private ticketsService: TicketsService,
@@ -74,7 +74,7 @@ export class TicketsPriorityComponent implements OnInit {
   onEditTicketPriority(item) {
     if (item.isInitEdit) {
       if (item.name.length === 0 || item.disableUpdate) return;
-      this.ticketsService.editPriority(item.id, item.getDataForEdit(item.name, item.color)).pipe(map((res) => res),
+      this.ticketsService.editPriority(item.id, item.getDataForRequest(item.name, item.color)).pipe(map((res) => res),
         catchError(error => of(undefined))).subscribe(data => {
           item.onInitEdit(false);
         })
@@ -85,13 +85,16 @@ export class TicketsPriorityComponent implements OnInit {
     item.onInitEdit(true);
     this.onEditTicketPriority(item);
   }
+  editDisplay(item) {
+    item.onInitEdit(true);
+  }
   onKeyUp(event) {
     if (event.keyCode === 13) this.onAddTicketPriority();
   }
   onAddTicketPriority() {
     if (this.addPriority.name.length === 0 || !this.addPriorityBtn.getInit() || this.addPriority.disableCreate) return;
     this.addPriorityBtn.setInit(false);
-    this.ticketsService.addPriority(this.addPriority.name, this.addPriority.color).pipe(map((res) => res),
+    this.ticketsService.addPriority(this.addPriority.getDataForRequest(this.addPriority.name, this.addPriority.color)).pipe(map((res) => res),
       catchError(error => of(undefined))).subscribe(data => {
         this.showAddPriority = false;
         this.addPriority = new TicketsPriority();

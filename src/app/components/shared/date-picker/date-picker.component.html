@@ -6,8 +6,11 @@
     [placement]="placement"
     [container]="container"
 >
-    <div *ngIf="type === 'DETAIL_TICKET_UPDATE'">
-        <i class="icn-16 icon__calendar pointer"></i>
+    <div *ngIf="type === 'DETAIL_TICKET_UPDATE' || type === 'COMPANY_DEVICE'">
+        <i
+            class="icn-16 qt-icon icon__calendar pointer"
+            *ngIf="!selectedDateModel || type !== 'COMPANY_DEVICE'"
+        ></i>
         <input
             [disabled]="isDisabled"
             type="text"
@@ -18,6 +21,11 @@
             [value]="geTextDate()"
             readonly
         >
+        <i
+            *ngIf="selectedDateModel && type == 'COMPANY_DEVICE'"
+            class="icn-sm icn-remove-old"
+            (click)="clear()"
+        ></i>
     </div>
     <div
         class="detail-ticket-date-picker"
@@ -32,9 +40,9 @@
             class="detail-ticket-txt"
             [textContent]="geTextDate()"
         ></span>
-        <i class="icn-16 icon__calendar pointer"></i>
+        <i class="icn-16 qt-icon icon__calendar pointer"></i>
         <input
-            [disabled]="disabled"
+            [disabled]="isDisabled"
             type="text"
             class="pointer qt-input-block__input"
             placeholder="Select Date"
@@ -48,7 +56,7 @@
     </div>
     <input
         *ngIf="type === 'INPUT'"
-        [disabled]="disabled"
+        [disabled]="isDisabled"
         type="text"
         class="pointer qt-input-block__input"
         placeholder="Select Date"
@@ -66,7 +74,7 @@
         *ngIf="type === 'ICON'"
         (mouseenter)="dateTooltip.show($event.target)"
         (mouseleave)="dateTooltip.hide()"
-        class="ticket-updates__date-icon icon__assign-date btn-icon-date-picker"
+        class="ticket-updates__date-icon qt-icon icon__calendar qt-icon__blue-light-600 btn-icon-date-picker"
         ngbDropdownToggle
         [disabled]="isDisabled"
         id="dropdownDate"
@@ -76,14 +84,14 @@
         *ngIf="type === 'NO_ICON'"
         placement="top"
         ngbTooltip="Date"
-        class="ticket-updates__date-icon icon__assign-date hidden-icon"
+        class="ticket-updates__date-icon qt-icon icon__calendar qt-icon__blue-light-600 hidden-icon"
         ngbDropdownToggle
         id="dropdownDate"
     >
     </div>
     <i
         *ngIf="type === 'INPUT'"
-        class="icn-16 icon__calendar pointer"
+        class="icn-16 qt-icon icon__calendar pointer"
     ></i>
     <div
         ngbDropdownMenu

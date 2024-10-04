@@ -1,7 +1,5 @@
-import { NetworkAdapterReport } from './../../class/network-adapter-report';
 import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DeviceIpSummary } from '../../class/device-ip-summary';
@@ -18,7 +16,6 @@ export class DeviceIpSummaryReportComponent implements OnInit {
   company: any;
   deviceIpSummary: DeviceIpSummary = new DeviceIpSummary();
   constructor(public cd: ChangeDetectorRef,
-    private domSanitizer: DomSanitizer,
     public companiesStateService: CompaniesStateService) { }
   ngOnInit() {
   }
@@ -40,7 +37,7 @@ export class DeviceIpSummaryReportComponent implements OnInit {
     var currentItem = '';
     if (device.report) {
       device.report.networkAdapters.map((item) => {
-        if (item.ip_enabled) { currentItem = item[params]; }
+        if (item.ipEnabled) { currentItem = item[params]; }
       });
       if (params === 'dns' || 'subnet') {
         var regex = /;/gi;

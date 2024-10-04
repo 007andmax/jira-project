@@ -1,5 +1,5 @@
-<tr>
-    <td class="quotes-table__check">
+<div class="qt-table-modern__row">
+    <div class="quotes-table__check">
         <div
             class="qt-df"
             *ngIf="quote.checkStatus(['UNREAD','SAVED', 'EXPIRED', 'INVOICED', 'TICKETED','CANCELED','BILLED'])"
@@ -17,31 +17,33 @@
                 <span></span>
             </label>
         </div>
-    </td>
-    <td
-        class="quotes-table__date"
+    </div>
+    <div
+        class="quotes-table__date cursor-default"
         [textContent]="getDate(quote.date)"
     >
-    </td>
-    <td
+    </div>
+    <div
         class="quotes-table__number pointer"
         [textContent]="'#' + quote.number"
         (click)="preview()"
-    ></td>
-    <td
-        class="quotes-table__company"
+    ></div>
+    <div
+        class="quotes-table__company cursor-default"
         [textContent]="quote.company.name"
-    ></td>
-    <td
-        class="quotes-table__description"
+    ></div>
+    <div
+        class="quotes-table__description cursor-default"
         [textContent]="quote.description"
-    ></td>
-    <td
-        class="quotes-table__recipients"
-        [innerHtml]="quote.parseRecipients()"
-    ></td>
-    <td class="quotes-table__create-by">
-        <div class="qt-df qt-ai-c">
+    ></div>
+    <div class="quotes-table__recipients ellipsis cursor-default">
+        <div
+            class="ellipsis"
+            [innerHtml]="quote.parseRecipients()"
+        ></div>
+    </div>
+    <div class="quotes-table__create-by ellipsis cursor-default">
+        <div class="qt-df qt-ai-c qt-w100">
             <div
                 class="qt-table-modern__circle-avatar"
                 [ngClass]="!usersStateService.getNameForAvatar(createdUser).length ? 'transparent-text' : ''"
@@ -50,11 +52,15 @@
             ></div>
             <div
                 [textContent]="getUserName(createdUser)"
-                class="ellipsis"
+                class="ellipsis quotes-table__create-by-user-name"
             ></div>
         </div>
-    </td>
-    <td class="quotes-table__status">
+    </div>
+    <div
+        class="quotes-table__status"
+        [ngClass]="{'cursor-default':!(quote.status === 'TICKETED' && !customerPortalStateService.isCustomerPortal) &&
+    quote.status !== 'INVOICED'}"
+    >
         <span
             class="tag__modern"
             [ngClass]="[getStatusClass(quote.status),(quote.status === 'TICKETED' || quote.status === 'INVOICED' && getPermissions('VIEW_ACCOUNTING')) ? 'pointer' : '']"
@@ -63,23 +69,23 @@
         >
             <!-- [ngClass]="payment.refundMethod ? '--error' : '--success'" -->
         </span>
-    </td>
-    <td
-        class="quotes-table__valid"
+    </div>
+    <div
+        class="quotes-table__valid cursor-default"
         [textContent]="getDate(quote.validUntil)"
     >
-    </td>
-    <td
-        class="quotes-table__total"
+    </div>
+    <div
+        class="quotes-table__total cursor-default"
         [textContent]="quote.totalAmount | currency"
-    ></td>
-    <td
+    ></div>
+    <div
         class="quotes-table__menu"
         ngbDropdown
         [container]="'body'"
     >
         <div
-            class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"
+            class="qt-ic-c qt-icon icon__more qt-pointer qt-sz-16 qt-bg-contain"
             id="dropdownBasic1"
             ngbDropdownToggle
         ></div>
@@ -94,7 +100,7 @@
                 (click)="resend()"
                 *ngIf="!customerPortalStateService.isCustomerPortal"
             >
-                <div class="icon__email-dark qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                <div class="qt-icon icon__email-send qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Resend quote
             </li>
             <li
@@ -102,7 +108,7 @@
                 ngbDropdownItem
                 (click)="downloadPdf()"
             >
-                <div class="icon__download-pdf qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                <div class="qt-icon icon__download qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Export as PDF
             </li>
             <li
@@ -111,7 +117,7 @@
                 (click)="convertToInvoice()"
                 *ngIf="quote.checkStatus(['APPROVED']) && !customerPortalStateService.isCustomerPortal"
             >
-                <div class="icon__convert-invoice qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                <div class="qt-icon icon__billing qt-sz-20 qt-mr-12"></div>
                 Convert to Invoice
             </li>
             <li
@@ -120,7 +126,7 @@
                 (click)="convertToTicket()"
                 *ngIf="quote.checkStatus(['APPROVED']) && !customerPortalStateService.isCustomerPortal"
             >
-                <div class="icon__convert-ticket qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                <div class="qt-icon icon__tickets qt-sz-20 qt-mr-12"></div>
                 Convert to Ticket
             </li>
             <li
@@ -129,7 +135,7 @@
                 (click)="approveQuote()"
                 *ngIf="quote.checkStatus(['SAVED', 'READ', 'EXPIRED', 'UNREAD'])"
             >
-                <div class="icon__approve-quote qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                <div class="qt-icon icon__approve qt-sz-20 qt-mr-12"></div>
                 Approve a quote
             </li>
             <li
@@ -138,7 +144,7 @@
                 (click)="markAsRead()"
                 *ngIf="quote.checkStatus(['UNREAD']) && !customerPortalStateService.isCustomerPortal"
             >
-                <div class="icon__mark-as-read qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                <div class="qt-icon icon__show qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Mark as Read
             </li>
             <li
@@ -147,7 +153,7 @@
                 (click)="cancelQuote()"
                 *ngIf="quote.checkStatus(['READ','UNREAD']) && !customerPortalStateService.isCustomerPortal"
             >
-                <div class="icon__uninstall qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                <div class="qt-icon icon__uninstall qt-sz-20 qt-mr-12"></div>
                 Cancel quote
             </li>
             <li
@@ -156,7 +162,7 @@
                 (click)="archiveQuote()"
                 *ngIf="quote.checkStatus(['UNREAD','SAVED', 'EXPIRED', 'INVOICED', 'TICKETED','CANCELED','BILLED'])"
             >
-                <div class="icon__remove qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                <div class="qt-icon icon__delete qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Archive a quote
             </li>
             <li
@@ -174,7 +180,7 @@
                 (click)="goToQuoteEdit()"
                 *ngIf="quote.checkStatus(['READ','UNREAD','SAVED', 'APPROVED', 'CANCELED', 'EXPIRED']) && !customerPortalStateService.isCustomerPortal"
             >
-                <i class="icon__edit qt-bg-contain qt-sz-20 qt-mr-12"></i>
+                <i class="qt-icon icon__edit qt-bg-contain qt-sz-20 qt-mr-12"></i>
                 Edit a quote
             </li>
             <li
@@ -183,9 +189,9 @@
                 (click)="copy()"
                 *ngIf="!customerPortalStateService.isCustomerPortal"
             >
-                <div class="icon__copy qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                <div class="qt-icon icon__copy qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Copy a quote
             </li>
         </ul>
-    </td>
-</tr>
+    </div>
+</div>

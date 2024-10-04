@@ -4,7 +4,6 @@ import { CompanyItem } from 'src/app/components/companies/class/company-item';
 import { CompanyProfile } from 'src/app/components/companies/class/company-profile';
 import { CompanyProfileAddress } from 'src/app/components/companies/class/company-profile-address';
 import { CompanyUpdate } from 'src/app/components/companies/class/company-update';
-import { InvoiceTicketsService } from 'src/app/components/setting/accounting/accounting-settings.service';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { BillableService } from 'src/app/services/billable/billable.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
@@ -19,6 +18,7 @@ import { QuoteValdiateEdit } from '../../class/quote-vildate-edit';
 import { ServiceListQuoteComponent } from '../../quote-aside-add/service-list-quote/service-list-quote.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
+import { InvoiceTicketsService } from 'src/app/services/accounting/accounting-settings.service';
 
 @Component({
   selector: 'app-quote-aside-edit-body',
@@ -54,15 +54,15 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.companiesState.getCompanies().length > 0) this.getCLientsList(this.companiesState.getCompanies());
-    this.companiesState.getOnCompanies().subscribe((data) => {
+    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
       this.getCLientsList(data);
     })
+    this.sub.add(getOnCompanies);
     let getChangeCompanies = this.companiesState.getChangeCompanies().subscribe((data: CompanyUpdate) => {
       if (data.action === 'COMPANY_SAVED' && this.quoteCompany && this.quoteCompany.id === data.data.id) {
         this.quote.company.name = data.data.name;
         this.quote.company.primaryContact.firstName = data.data.companyInfo.contacts[0].firstName;
         this.quote.company.primaryContact.lastName = data.data.companyInfo.contacts[0].lastName;
-        // this.quote.company.addresses[0].address = data.data.companyInfo.addresses[0].address;
         this.quote.company.primaryContact.primaryEmail = data.data.companyInfo.contacts[0].primaryEmail;
         if (data.data.companyInfo.addresses.length == 1) {
           this.quote.company.addresses[0] = new CompanyProfileAddress(data.data.companyInfo.addresses[0]);

@@ -21,11 +21,15 @@ import { NetworkScanSomeInfoForDevice } from '../company-network-scan-beta/class
 import { installationStatuses } from '../company-network-scan-beta/const/const';
 import { CompanyNetworkScanService } from '../company-network-scan-beta/services/company-network-scan.service';
 import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'company-network-scan',
   templateUrl: './company-network-scan.component.html',
   styleUrls: ['./company-network-scan.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   providers: [CompanyNetworkScanService]
 })
 export class CompanyNetworkScanComponent implements OnInit {
@@ -140,7 +144,7 @@ export class CompanyNetworkScanComponent implements OnInit {
   }
   getDevices(id) {
     this.devicesService.getCompanyDevices(id).subscribe((data: any) => {
-      this.devices = (data[this.companyId]) ? JSON.parse(JSON.stringify(data[this.companyId])).map(item => new Device(item)) : [];
+      this.devices = (data[this.companyId]) ? JSON.parse(JSON.stringify(data[this.companyId])).filter(item => !item.isCustom).map(item => new Device(item)) : [];
       this.companyNetworkScanService.onFilterName(this.devices);
       if (this.devices.length > 0 && !this.isGetDevices) this.getSomeInfoForDevices().then(result => {
         this.findMasterAgent();

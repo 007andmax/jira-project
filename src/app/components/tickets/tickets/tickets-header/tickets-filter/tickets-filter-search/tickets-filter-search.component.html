@@ -19,7 +19,7 @@
                 [ngModelOptions]="{ standalone: true }"
             >
             <span
-                class="global-search__close icon__close-round"
+                class="global-search__close qt-icon icon__close-round qt-icon__gray-400"
                 *ngIf="word.length > 0"
                 (click)="clearWord()"
             ></span>
@@ -59,7 +59,7 @@
                     class="global-search__menu-item"
                     (click)="selectTicket(item)"
                 >
-                    <div class="icon__ticket-filter qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                    <div class="qt-icon icon__tickets qt-sz-20 qt-mr-12"></div>
                     <div>
                         <div
                             class="global-search__menu-item-title"

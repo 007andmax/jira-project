@@ -11,7 +11,7 @@
             [ngClass]="{'--done':editProduct.completed}"
         >
             <div class="d-f ai-c ">
-                <div class="ticket-updates__done-status icon__task-pending"></div>
+                <div class="ticket-updates__done-status qt-icon icon__check qt-icon__green-600"></div>
                 <app-product-list
                     [type]="'TICKET'"
                     [editItem]="editProduct.item"
@@ -30,12 +30,12 @@
                         (blur)="onValidateSaleCost()"
                         [disabled]="!getPermissions('MANAGE_PRODUCTS')"
                     >
-                    <mat-error
+                    <app-mat-error
                         class="qt-tooltip-error"
                         *ngIf="!valdiateSaleCost"
                     >
                         Product price can not be lower than cost
-                    </mat-error>
+                    </app-mat-error>
                 </div>
                 <input
                     class="input-default input-qty"
@@ -45,7 +45,7 @@
                     class="ticket-updates__ticket-total"
                     [textContent]="'$' + getTotal(editProduct.item.sale,editProduct.quantity)"
                 ></div>
-                <div class="ticket-updates__date-icon icon__assign-date"></div>
+                <div class="ticket-updates__date-icon qt-icon icon__calendar qt-icon__blue-light-600"></div>
                 <div
                     class="ticket-updates__photo-people"
                     [textContent]="ticketsListService.getAssignedUserNameForAvatar(editProduct.user)"
@@ -77,11 +77,11 @@
     <div class="right-side-icons">
         <i
             (click)="saveProduct()"
-            class="icn-20 icon__active_subscription save-product pointer"
+            class="icn-20 qt-icon icon__done qt-icon__blue-light-600 save-product pointer"
         ></i>
         <i
             (click)="cancelProduct()"
-            class="icn-20 icon__close pointer"
+            class="icn-20 qt-icon icon__close pointer"
         ></i>
     </div>
 </div>

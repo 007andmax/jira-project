@@ -1,0 +1,73 @@
+<div
+    class="qt-temporary-col-fix --required filter-tags-body"
+    ngbDropdown
+    #dp="ngbDropdown"
+>
+    <app-mat-form-field
+        #formField
+        ngbDropdownAnchor
+        [ngClass]="{'hidde-label' :!showLabel}"
+    >
+        <app-mat-chip-list
+            [items]="selectedTag"
+            (onChangeItems)="formField.checkSelectedItems(selectedTag)"
+        >
+            <app-mat-chip
+                *ngFor="let tag of selectedTag; let i = index"
+                (onClose)="remove(i)"
+                [isRemove]="!isDisabled"
+            >
+                {{tag.name}}
+            </app-mat-chip>
+            <input
+                id="dropdownServices"
+                ngbDropdownToggle
+                #userInput
+                class="company-tag-input pointer"
+                (input)="onSearch($event)"
+                (keyup)="onKeyUp($event)"
+                autocomplete="off"
+                [ngClass]="{'disabled': isDisabled}"
+                [disabled]="isDisabled"
+            >
+        </app-mat-chip-list>
+    </app-mat-form-field>
+    <div
+        class="select-wrapper user-aside-tags-dropdown"
+        ngbDropdownMenu
+        aria-labelledby="dropdownServices"
+    >
+        <div
+            class="content"
+            (click)="$event.preventDefault()"
+        >
+            <ng-template
+                ngFor
+                let-item
+                let-i="index"
+                [ngForOf]="tags"
+                [ngForTrackBy]="trackById"
+            >
+                <div
+                    (click)="toggleItem(item)"
+                    class="company-tag-item"
+                    [ngClass]="{'is-hover':item.selected,
+                '--selected':isSeleted(item)}"
+                    [id]="'tag-' + item.id"
+                >
+                    <label class="qt-checkbox pointer">
+                        <input
+                            type="checkbox"
+                            [checked]="isSeleted(item)"
+                            readonly
+                        >
+                        <span></span>
+                        <div class="text-content">
+                            <div class="name">{{item.name}}</div>
+                        </div>
+                    </label>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

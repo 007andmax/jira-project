@@ -51,7 +51,7 @@ export class SupportPageInfoTagsComponent implements OnInit {
       }
     })
     this.sub.add(getConfirm);
-    this.tagsRealTimeService.changeTagsArray.subscribe((data: any) => {
+    let changeTagsArray = this.tagsRealTimeService.changeTagsArray.subscribe((data: any) => {
       if (data.action === "TAG_SAVED" && Array.isArray(data.data)) {
         data.data.forEach(item => {
           let index = this.reqTags.findIndex(tag => tag.id == item.id);
@@ -84,6 +84,7 @@ export class SupportPageInfoTagsComponent implements OnInit {
         1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
       this.cd.detectChanges();
     })
+    this.sub.add(changeTagsArray);
   }
   onSearch(event) {
     this.tags = this.reqTags.filter(item => item.word.toLowerCase().includes(event.target.value.toLowerCase()));

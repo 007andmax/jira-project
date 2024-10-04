@@ -31,7 +31,6 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     private marketingEmailStateService: MarketingEmailStateService,
-    private marketingEmailRealTimeService: MarketingEmailRealTimeService,
     public usersStateService: UsersStateService,
     private toastrService: ToastrService,
     private appStateService: AppStateService,
@@ -127,13 +126,11 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
   onRemoveSubscription(id) {
     this.marketingEmailService.removeSubscriptionType(id).subscribe(data => {
       this.marketingEmailStateService.setListSubscriptionTypeForRemove([]);
-      this.toastrService.success("The subscription has been successfully removed");
-      this.appStateService.changeDetectorRef();
     })
   }
   openAside(item, subscribed) {
     item.setSubscribed(subscribed);
-    this.marketingEmailStateService.onOpenAsige(item);
+    this.marketingEmailStateService.onOpenAsigeSettings(item);
   }
   select(event, item) {
     this.onSelect.emit({ event: event, item: item });

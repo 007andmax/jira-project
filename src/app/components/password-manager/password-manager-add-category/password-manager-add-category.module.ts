@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PasswordManagerAddCategoryComponent } from '../password-manager-add-category/password-manager-add-category.component';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 
 @NgModule({
@@ -13,11 +12,10 @@ import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-t
     ],
     imports: [
         CommonModule,
-        MatSelectModule,
-        MatChipsModule,
         FormsModule,
         DisabledBtnModule,
-        PreloaderTicketModule
+        PreloaderTicketModule,
+        MatErrorModule
     ],
     exports: [PasswordManagerAddCategoryComponent]
 

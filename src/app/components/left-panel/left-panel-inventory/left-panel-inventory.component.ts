@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Output, EventEmitter, Input } from '@angular/core';
 import { ProductService } from 'src/app/services/product/product.service';
 import { CategoryProduct } from 'src/app/interfaces/product/category-product';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
@@ -20,8 +20,7 @@ export class LeftPanelInventoryComponent implements OnInit {
   @Output() onChangeState = new EventEmitter();
   @Output() onGoToLink = new EventEmitter();
 
-  constructor(private productService: ProductService,
-    private confirmStateService: ConfirmStateService,
+  constructor(private confirmStateService: ConfirmStateService,
     private inventoryStateService: InventoryStateService,
     private modalService: NgbModal,
     public cd: ChangeDetectorRef

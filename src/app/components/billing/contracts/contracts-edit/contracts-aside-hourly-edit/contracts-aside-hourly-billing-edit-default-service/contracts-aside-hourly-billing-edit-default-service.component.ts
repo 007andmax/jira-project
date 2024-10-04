@@ -1,17 +1,18 @@
-import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { ContractsHourlyService } from '../../../contracts-aside/class/contracts-hourly-service';
-import { InvoiceFormTicketEditTaxesComponent } from '../../../../billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { Tax } from 'src/class/taxes/tax';
 import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-contracts-aside-hourly-billing-edit-default-service',
   templateUrl: './contracts-aside-hourly-billing-edit-default-service.component.html',
   styleUrls: ['./contracts-aside-hourly-billing-edit-default-service.component.scss']
 })
-export class ContractsAsideHourlyBillingEditDefaultServiceComponent implements OnInit {
+export class ContractsAsideHourlyBillingEditDefaultServiceComponent implements OnInit, OnDestroy {
   taxes: Array<Tax> = [];
+  sub: Subscription = new Subscription();
   @Input() service: ContractsHourlyService;
   @ViewChild('taxes', { static: true }) taxesDropDown: TaxesComponent;
   @Output() onSelectService = new EventEmitter<any>();
@@ -22,6 +23,7 @@ export class ContractsAsideHourlyBillingEditDefaultServiceComponent implements O
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
       this.getTaxes(data);
     })
+    this.sub.add(getOnTaxess);
   }
   getTaxes(taxes) {
     this.taxes = taxes;
@@ -44,5 +46,8 @@ export class ContractsAsideHourlyBillingEditDefaultServiceComponent implements O
   public onChangeRate(val) {
     let value = Number(val);
     this.service.rate = value;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

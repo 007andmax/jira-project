@@ -3,7 +3,6 @@ import { BillableStateService } from 'src/app/states/billable/billable-state.ser
 import { BillableProfile } from '../class/billable-profile';
 import * as moment from "moment";
 import { CompanyFilterTop } from '../../../companies/class/company-filter-top';
-import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { REMOVE_TICKETS_BILLABLE, REMOVE_TICKET_BILLABLE } from 'src/app/const/confirm';
 import { ConfirmStateService } from '../../../shared/confirm/services/confirm-state.service';
@@ -15,15 +14,17 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { BillableRealTimeService } from 'src/app/states/billable/billable-real-time.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
-import { ToastrService } from 'ngx-toastr';
-import { AppStateService } from 'src/app/states/app/app-state.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { TicketStateService } from 'src/app/components/tickets/tickets/ticket-edit-aside/services/ticket-state.service';
 import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toastr-progress-state.service';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'billable-tickets',
   templateUrl: './billable-tickets.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./billable-tickets.component.scss']
 })
 export class BillableTicketsComponent implements OnInit, OnDestroy {
@@ -39,7 +40,6 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
   isCurrentCompanyAddressEmpty: boolean = true;
   sub: Subscription = new Subscription();
   constructor(private billableStateService: BillableStateService,
-    private ticketsStateService: TicketsStateService,
     private ticketsService: TicketsService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
@@ -47,8 +47,6 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
     private companiesStateService: CompaniesStateService,
     private billableRealTimeService: BillableRealTimeService,
     private leftPanelStateService: LeftPanelStateService,
-    private toastrService: ToastrService,
-    private appStateService: AppStateService,
     private permissionsService: PermissionsService,
     private ticketStateService: TicketStateService,
     private toastrProgressStateService: ToastrProgressStateService,

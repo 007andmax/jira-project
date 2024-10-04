@@ -3,25 +3,45 @@
         <div class="qt-aside-modern__header-title">Payment Detail</div>
         <div class="qt-df qt-ai-c">
             <div
-                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__edit"
+                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon qt-df qt-ai-c qt-jc-c"
                 *ngIf="!payment.refundMethod && !customerPortalStateService.isCustomerPortal"
                 (click)="showEdit()"
-            ></div>
+                placement="top"
+                ngbTooltip="Edit payment"
+            >
+                <div class="qt-icon icon__edit qt-sz-20"></div>
+            </div>
             <div
-                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__refund-payment"
+                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon qt-df qt-ai-c qt-jc-c"
                 *ngIf="!payment.refundMethod && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')"
                 (click)="showRefund()"
-            ></div>
+                placement="top"
+                ngbTooltip="Refund payment"
+            >
+                <div class="qt-icon icon__return-money qt-sz-20"></div>
+            </div>
+            <div
+                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon qt-df qt-ai-c qt-jc-c"
+                (click)="resendPaymentReceipt()"
+                placement="top"
+                ngbTooltip="Resend payment receipt"
+            >
+                <div class="qt-icon icon__resend-receipt qt-sz-20"></div>
+            </div>
             <div
                 class="qt-circle qt-bg-white qt-mr-16 header-circle-icon qt-sz-32 qt-df qt-ai-c qt-jc-c pointer"
                 (click)="deletePayment()"
                 *ngIf="!customerPortalStateService.isCustomerPortal"
+                placement="top"
+                ngbTooltip="Delete payment"
             >
-                <div class="qt-sz-20 icon__remove"></div>
+                <div class="qt-sz-20 qt-icon icon__delete"></div>
             </div>
             <div
-                class="icon__close qt-sz-24 qt-pointer qt-ic-c"
+                class="qt-icon icon__close qt-sz-24 qt-pointer qt-ic-c"
                 (click)="close()"
+                placement="top"
+                ngbTooltip="Closed"
             ></div>
         </div>
     </div>
@@ -54,43 +74,44 @@
             </div>
             <hr class="qt-divider qt-mt-24 qt-mb-40">
             <div class="qt-df">
-                <div
-                    class="payments-page__payment-info qt-pr-15"
-                    *ngIf="company"
-                >
-                    <div class="qt-fw-600 qt-fs-16 qt-lh-133 qt-mb-4 qt-color-gray-900 qt-df qt-ai-c">
-                        <div class="icon__verified qt-mr-5 qt-ic-c qt-sz-24"></div>
-                        Amount Received
+                <div class="payments-page__payment-info qt-pr-15">
+                    <div>
+                        <div class="qt-fw-600 qt-fs-16 qt-lh-133 qt-mb-4 qt-color-gray-900 qt-df qt-ai-c">
+                            <div class="icon__status-green qt-mr-5 qt-ic-c qt-sz-24"></div>
+                            Amount Received
+                        </div>
+                        <div
+                            class="qt-fs-40 qt-fw-600 qt-lh-12 qt-color-gray-900"
+                            [textContent]="(payment.partialPaidAmount || payment.totalSum ) | currency"
+                        ></div>
                     </div>
-                    <div
-                        class="qt-fs-40 qt-fw-600 qt-lh-12 qt-color-gray-900"
-                        [textContent]="(payment.partialPaidAmount || payment.totalSum ) | currency"
-                    ></div>
-                    <div class="qt-fs-10 qt-mt-25 qt-lh-12 qt-fw-600  qt-mb-8 qt-text-upper qt-color-gray-400">Received From</div>
-                    <div
-                        class="qt-fs-13 qt-fw-600 qt-color-gray-900 qt-lh-154"
-                        [textContent]="company.name"
-                    ></div>
-                    <div
-                        class="qt-fs-13 qt-color-dark-light qt-lh-154"
-                        *ngIf="company.companyInfo.contacts"
-                        [textContent]="company.companyInfo.contacts[0].firstName + ' ' +
+                    <div *ngIf="!isExistMultipleCompanies">
+                        <div class="qt-fs-10 qt-mt-25 qt-lh-12 qt-fw-600  qt-mb-8 qt-text-upper qt-color-gray-400">Received From</div>
+                        <div
+                            class="qt-fs-13 qt-fw-600 qt-color-gray-900 qt-lh-154"
+                            [textContent]="company.name"
+                        ></div>
+                        <div
+                            class="qt-fs-13 qt-color-dark-light qt-lh-154"
+                            *ngIf="company.companyInfo.contacts"
+                            [textContent]="company.companyInfo.contacts[0].firstName + ' ' +
               company.companyInfo.contacts[0].lastName"
-                    ></div>
-                    <div
-                        class="qt-fs-13 qt-color-gray-600 qt-lh-154"
-                        [textContent]="company.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode"
-                    ></div>
-                    <div
-                        class="qt-fs-13 qt-color-dark-light qt-lh-154"
-                        *ngIf="company.companyInfo.contacts"
-                        [textContent]="company.companyInfo.contacts[0].primaryEmail"
-                    ></div>
-                    <div
-                        class="qt-fs-13 qt-color-dark-light qt-lh-154"
-                        *ngIf="company.companyInfo.contacts && company.companyInfo.contacts[0].phoneNumbers && company.companyInfo.contacts[0].phoneNumbers.length > 0"
-                    >
-                        <preview-phone-mask [number]="company.companyInfo.contacts[0].phoneNumbers[0].number"></preview-phone-mask>
+                        ></div>
+                        <div
+                            class="qt-fs-13 qt-color-gray-600 qt-lh-154"
+                            [textContent]="company.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode"
+                        ></div>
+                        <div
+                            class="qt-fs-13 qt-color-dark-light qt-lh-154"
+                            *ngIf="company.companyInfo.contacts"
+                            [textContent]="company.companyInfo.contacts[0].primaryEmail"
+                        ></div>
+                        <div
+                            class="qt-fs-13 qt-color-dark-light qt-lh-154"
+                            *ngIf="company.companyInfo.contacts && company.companyInfo.contacts[0].phoneNumbers && company.companyInfo.contacts[0].phoneNumbers.length > 0"
+                        >
+                            <preview-phone-mask [number]="company.companyInfo.contacts[0].phoneNumbers[0].number"></preview-phone-mask>
+                        </div>
                     </div>
                 </div>
                 <div class="qt-pl-40 qt-w100">
@@ -118,7 +139,7 @@
                         </div>
                     </div>
                     <div class="payment-info__notes">
-                        <div class="icon__payment-note qt-mb-5 qt-ic-c qt-sz-16"></div>
+                        <div class="qt-icon icon__documents qt-mb-5 qt-ic-c qt-sz-16"></div>
                         <div [textContent]="payment.note"></div>
                     </div>
                 </div>
@@ -129,6 +150,7 @@
                 <thead>
                     <tr>
                         <th class="payment-table__number">Invoice Number</th>
+                        <th class="payment-table__company">Company Name</th>
                         <th class="payment-table__date">Invoice Date</th>
                         <th class="payment-table__inv-amount">Invoice Amount</th>
                         <th class="payment-table__pay-amount">Payment Amount</th>
@@ -145,6 +167,10 @@
                             <td
                                 class="payment-table__number"
                                 [textContent]="item.invoiceNumber"
+                            ></td>
+                            <td
+                                class="payment-table__company"
+                                [textContent]="item.companyName"
                             ></td>
                             <td
                                 class="payment-table__date"

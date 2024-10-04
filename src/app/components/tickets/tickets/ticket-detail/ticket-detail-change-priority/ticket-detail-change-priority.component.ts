@@ -1,9 +1,8 @@
-import { ChangeDetectorRef, Component, ElementRef, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input } from '@angular/core';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { TicketProfile } from '../../class/ticket-profile';
-import { TitleListType } from '../../tickets-header/class/title-list-type';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tickets-permissions.service';
@@ -12,6 +11,9 @@ import { TicketsPriority } from 'src/app/components/setting/ticket-settings-page
 import { StatusColor } from '../../../class/status-color';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
+import { DevicesService } from 'src/app/services/devices/devices.service';
+import { Subscription } from 'rxjs';
+import { TicketStateService } from '../../ticket-edit-aside/services/ticket-state.service';
 
 @Component({
   selector: 'ticket-detail-change-priority',
@@ -23,6 +25,7 @@ export class TicketDetailChangePriorityComponent extends DropDownComponent {
   selectedPriority: TicketsPriority;
   statusColors: Array<StatusColor> = [];
   list: Array<TicketsPriority> = [];
+  sub: Subscription = new Subscription();
   constructor(public elRef: ElementRef,
     public ticketsPermissionsService: TicketsPermissionsService,
     public companiesStateService: CompaniesStateService,
@@ -32,8 +35,10 @@ export class TicketDetailChangePriorityComponent extends DropDownComponent {
     private leftPanelService: LeftPanelService,
     public cd: ChangeDetectorRef,
     public ticketsService: TicketsService,
+    public devicesService: DevicesService,
+    public ticketStateService: TicketStateService,
     public companiesService: CompaniesService) {
-    super(elRef, companiesStateService, usersStateService, customerPortalStateService, companiesService, cd);
+    super(elRef, companiesStateService, usersStateService, customerPortalStateService, companiesService, devicesService, cd);
 
   }
   ngOnInit() {
@@ -62,11 +67,20 @@ export class TicketDetailChangePriorityComponent extends DropDownComponent {
     } else {
       this.statusColors = this.ticketsStateService.getListStatusColor();
     }
+    this.ticketStateService.onCloseTicket.subscribe(data => {
+      this.isDisabled = true;
+      this.cd.detectChanges();
+    })
+    this.ticketStateService.onOpenTicket.subscribe(data => {
+      this.isDisabled = false;
+      this.cd.detectChanges();
+    })
     let getOnUpdateTicket = this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
       this.isDisabled = !(this.ticketsPermissionsService.isActionVisible('update', this.ticketProfile, null, null) && (this.customerPortalStateService.isCustomerPortal && this.isAddNoteForCustomerUser() || !this.customerPortalStateService.isCustomerPortal));
       this.selectedItem = this.ticketProfile.priorityLevel;
       this.cd.detectChanges();
     })
+    this.sub.add(getOnUpdateTicket);
   }
   isAddNoteForCustomerUser() {
     return this.customerPortalStateService.checkEditTicket(this.usersStateService.getCurrentUser(), this.ticketProfile.createdUserId, this.ticketProfile.companyId);

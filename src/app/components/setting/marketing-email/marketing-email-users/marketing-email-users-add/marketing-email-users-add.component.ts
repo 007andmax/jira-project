@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { User } from 'src/app/components/users/class/user';
 import { UserListService } from 'src/app/components/users/services/user-list.service';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
@@ -6,6 +6,9 @@ import { MarketingEmailService } from 'src/app/services/marketing-email/marketin
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { MarketingSubscriptionType } from '../../marketing-subscription-type/class/marketing-subscription-type';
+import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'marketing-email-users-add',
@@ -13,7 +16,7 @@ import { MarketingSubscriptionType } from '../../marketing-subscription-type/cla
   styleUrls: ['./marketing-email-users-add.component.scss'],
   providers: [UserListService],
 })
-export class MarketingEmailUsersAddComponent implements OnInit {
+export class MarketingEmailUsersAddComponent implements OnInit, OnDestroy {
   opened: boolean = false;
   users: Array<User> = [];
   reqUsers: Array<User> = [];
@@ -23,11 +26,12 @@ export class MarketingEmailUsersAddComponent implements OnInit {
   @ViewChild('addBtn', { static: true }) addBtn: DisabledBtnDirective;
   public page_number: number = 0;
   public infiniteScrollDisabled = false;
-
-  constructor(private marketingEmailStateService: MarketingEmailStateService,
-    private userListService: UserListService,
+  sub: Subscription = new Subscription();
+  constructor(private userListService: UserListService,
     private marketingEmailService: MarketingEmailService,
     private cd: ChangeDetectorRef,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService,
     private usersStateService: UsersStateService,) { }
 
   ngOnInit() {
@@ -36,7 +40,7 @@ export class MarketingEmailUsersAddComponent implements OnInit {
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.getUsersList(data);
     })
-
+    this.sub.add(getOnUsers);
   }
   onSearch() {
     this.userListService.setBlockList(false);
@@ -70,6 +74,8 @@ export class MarketingEmailUsersAddComponent implements OnInit {
     if (this.reqUsers.filter(item => item.selected).length > 0) {
       this.addBtn.setDisabled(true);
       this.marketingEmailService.addUsers(this.marketingSubscription.id, this.reqUsers.filter(item => item.selected).map(item => item.id)).subscribe(data => {
+        this.toastrService.success("The subscription has been successfully added");
+        this.appStateService.changeDetectorRef();
         this.addBtn.setDisabled(false);
         this.close();
       })
@@ -103,4 +109,8 @@ export class MarketingEmailUsersAddComponent implements OnInit {
   public trackById(index, item) {
     return item.id;
   }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
 }

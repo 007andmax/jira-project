@@ -6,26 +6,49 @@
         <div class="qt-aside-modern__header-info qt-df qt-ai-c">
             <div class="qt-aside__title">Help & Support</div>
         </div>
-        <div>
+        <div class="qt-df qt-ai-c">
             <div
-                class="qt-aside__close-modal icon__close"
+                class="qt-aside__close-modal icon__arrow-back qt-mr-8"
+                (click)="showNews = false"
+                *ngIf="showNews"
+            ></div>
+            <div
+                class="qt-aside__close-modal qt-icon icon__close"
                 (click)="closed()"
             ></div>
         </div>
     </div>
-    <div class="qt-aside-modern__content">
+    <div
+        class="qt-aside-modern__content"
+        [ngClass]="{'show-list-news':showNews}"
+    >
         <div
             class="help-support-list-item pointer"
             (click)="gotiHelpCenter()"
+            *ngIf="!showNews"
         >
             <div class="help-support-list-item-icon">
-                <div class="icon__help-center qt-bg-contain qt-sz-24"></div>
+                <div class="qt-icon icon__help qt-bg-contain qt-sz-24"></div>
             </div>
             <div class="help-support-list-item-text qt-ml-10">
                 <h3>Quicktech Knowledge Base</h3>
                 <span>Learn how to set up your Quicktech</span>
             </div>
         </div>
+        <div
+            class="help-support-list-item pointer"
+            (click)="showListNews()"
+            *ngIf="!showNews"
+        >
+            <div class="help-support-list-item-icon">
+                <div class="qt-icon icon__new qt-bg-contain qt-sz-24"></div>
+            </div>
+            <div class="help-support-list-item-text qt-ml-10">
+                <h3>Quicktech Announcements</h3>
+                <span>Find out what's new</span>
+            </div>
+        </div>
+        <app-super-admin-public-list *ngIf="showNews"></app-super-admin-public-list>
     </div>
     <div class="qt-aside-modern__footer"></div>
 </div>

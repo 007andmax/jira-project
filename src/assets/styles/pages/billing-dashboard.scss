@@ -180,6 +180,9 @@
       background-repeat: no-repeat;
       background-position: center;
       background-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     &__text-info {
       display: flex;
@@ -400,12 +403,12 @@
   }
 }
 
-@media only screen and (max-width: 1400px) {
+@include media-breakpoint-down($md) {
   .billing-dashboard-page {
     .contract-dashboard-chart-card {
       app-multi-datepicker-dashboard .date-picker {
         p.pointer {
-          max-width: 80px;
+          max-width: 90px;
           line-height: 1.2;
         }
       }

@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TicketProfileUpdatesServiceTimepickerComponent } from './ticket-profile-updates-service-timepicker.component';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatSelectModule } from '@angular/material/select';
+import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 
 
 
@@ -12,9 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
     ],
     imports: [
         CommonModule,
-        MatSelectModule,
-        MatChipsModule,
-
+        MatErrorModule
     ],
     exports: [TicketProfileUpdatesServiceTimepickerComponent]
 

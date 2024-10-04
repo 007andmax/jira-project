@@ -4,13 +4,11 @@ import { Company } from 'src/app/interfaces/company/company';
 import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { UserDefaultSubscription } from './user-default-subscription';
 import { UserCustomSubscription } from './user-custom-subscription';
-import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-industry/class/crm-company-industry';
 import { CompanyTag } from '../../companies/company-tags/class/company-tag';
 
 export class UserFilter {
     filterTop: Array<FilterListTop> = [new FilterListTop('name', 'ASC'),
     new FilterListTop('company', ''),
-    new FilterListTop('industry', ''),
     new FilterListTop('portalAccessStatus', ''),
     new FilterListTop('primaryEmail', ''),
     new FilterListTop('contact', ''),
@@ -18,7 +16,6 @@ export class UserFilter {
     tags: Array<CompanyTag> = []
     clientType: string;
     company: string;
-    clientIndustry: CrmCompanyIndustry;
     title: CrmCompanyJobTitle;
     defaultSubscriptions: UserDefaultSubscription;
     customSubscriptions: Array<UserCustomSubscription> = [];
@@ -54,23 +51,20 @@ export class UserFilter {
 * @description Set new values for fields:
 * - clientType
 * - company
-* - clientIndustry
-* - title
+ * - title
 * - defaultSubscriptions
 * - customSubscriptions
 * - tags
 * @param {string} clientType - Value Client Type
 * @param {string} company - Value Company
-* @param {CrmCompanyIndustry} clientIndustry - Object Client Industry
-* @param {string} title - Value Title
+ * @param {string} title - Value Title
 * @param {UserDefaultSubscription} defaultSubscriptions - Object Default Subscriptions
 * @param {Array<UserCustomSubscription>} customSubscriptions - Array Objects Custom Subscriptions
 * @param {Array<CompanyTag>} tags - Array Objects Tags
 */
-    public setLeftFilters(clientType, company, clientIndustry, title, defaultSubscriptions, customSubscriptions, tags) {
+    public setLeftFilters(clientType, company, title, defaultSubscriptions, customSubscriptions, tags) {
         this.clientType = clientType;
         this.company = company;
-        this.clientIndustry = clientIndustry;
         this.title = title;
         this.defaultSubscriptions = defaultSubscriptions;
         this.customSubscriptions = customSubscriptions;
@@ -115,12 +109,10 @@ export class UserFilter {
         let list = reqUsersList.filter(item => {
             let indexCompany = companies.findIndex(company => item.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === company.id));
             let clientType: boolean = false;
-            let clientIndustry: boolean = false;
             let searchName = false;
             if (indexCompany > -1 && this.clientType === companies[indexCompany].clientType) clientType = true;
-            //if (this.clientIndustry === ((companies[indexCompany].clientIndustry) ? companies[indexCompany].clientIndustry.name : '')) clientIndustry = true;
 
-            if ((this.search ? `${item.firstName} ${item.lastName}`.toLocaleLowerCase().includes(this.search.toLocaleLowerCase()) : true) && ((this.clientType) ? clientType === true : true) && ((this.title) ? item.customerCompaniesInfo.some(clientCompany => clientCompany.jobTitleDto && clientCompany.jobTitleDto.id == this.title.id) : true) && ((this.company) ? item.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.company) : true) && ((this.clientIndustry) ? this.clientIndustry.id === item.userIndustryId : true) && this.isUserDefaultSubscription(item.customerCompaniesInfo) && this.isUserCustomSubscription(item.customSubscriptions) && this.isUserTags(item.tags)) {
+            if ((this.search ? `${item.firstName} ${item.lastName}`.toLocaleLowerCase().includes(this.search.toLocaleLowerCase()) : true) && ((this.clientType) ? clientType === true : true) && ((this.title) ? item.customerCompaniesInfo.some(clientCompany => clientCompany.jobTitleDto && clientCompany.jobTitleDto.id == this.title.id) : true) && ((this.company) ? item.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.company) : true) && this.isUserDefaultSubscription(item.customerCompaniesInfo) && this.isUserCustomSubscription(item.customSubscriptions) && this.isUserTags(item.tags)) {
                 return true;
             } else {
                 return false;
@@ -172,13 +164,7 @@ export class UserFilter {
         })
         return isExist;
     }
-    /**
-* @description Set new value field 'clientIndustry' 
-* @param  {CrmCompanyIndustry} data  - Object of CrmCompanyIndustry
-*/
-    public setClientIndustry(data) {
-        this.clientIndustry = data;
-    }
+
     /**
 * @description Return data field 'customSubscriptions'
 * @returns  {Array<UserCustomSubscription>} This is the result
@@ -197,9 +183,8 @@ export class UserFilter {
       * @param  {string} field  - field for sort
       * @param  {Array<User>} reqUsers  - user list for sort
       * @param  {Array<Company>} companies  - company 
-      * @param  {Array<CrmCompanyIndustry>} industries  - CrmCompanyIndustry list
-      */
-    public onFilter(field, reqUsers, companies, industries) {
+       */
+    public onFilter(field, reqUsers, companies) {
 
         let index = this.filterTop.findIndex(item => item.field === field);
         if (index > -1) {
@@ -234,21 +219,6 @@ export class UserFilter {
                     this.filterTop[index].filter = 'DESC';
                     reqUsers.reverse();
                 }
-            }
-            if (field === 'industry') {
-                this.clearFilter();
-                if (sort === '' || sort === 'DESC') {
-
-                    this.filterTop[index].filter = 'ASC';
-                    this.onFilterIndustry(reqUsers, industries);
-
-                } else {
-
-                    this.filterTop[index].filter = 'DESC';
-                    reqUsers.reverse();
-                }
-
-
             }
             if (field === 'contact') {
                 this.clearFilter();
@@ -314,16 +284,6 @@ export class UserFilter {
         return (index > -1) ? companies[index].name : '';
     }
     /**
-   * @description Return name industri by userIndustryId from User
-   * @param  {User} user  - Object user
-   * @param  {Array<CrmCompanyIndustry>} industries  - Array objects industries
-   * @returns  {string} This is the result
-   */
-    private getIndustryName(user, industries) {
-        let index = industries.findIndex(item => item.id == user.userIndustryId);
-        return (index > -1) ? industries[index].name : '';
-    }
-    /**
    * @description Sort user list by contact phone number
    * @param  {Array<User>} reqUsers  - Array Object user
    */
@@ -343,19 +303,6 @@ export class UserFilter {
         reqUsers.sort((a, b) => {
             let first = this.getCompanyName(a, companies);
             let next = this.getCompanyName(b, companies);
-            return (first.toLowerCase() > next.toLowerCase()) ?
-                1 : ((next.toLowerCase() > first.toLowerCase()) ? -1 : 0)
-        });
-    }
-    /**
-   * @description Sort user list by Industry Name
-   * @param  {Array<User>} reqUsers  - Array Object user
-   * @param  {Array<CrmCompanyIndustry>} industries  - Array Object CrmCompanyIndustry
-   */
-    private onFilterIndustry(reqUsers, industries) {
-        reqUsers.sort((a, b) => {
-            let first = this.getIndustryName(a, industries);
-            let next = this.getIndustryName(b, industries);
             return (first.toLowerCase() > next.toLowerCase()) ?
                 1 : ((next.toLowerCase() > first.toLowerCase()) ? -1 : 0)
         });

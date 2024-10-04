@@ -5,22 +5,27 @@
 >
     <div class="qt-df qt-ai-fs">
         <div
-            class="qt-df qt-ai-c qt-jc-c qt-sz-40 qt-circle ticket-detail-devices__item-icon qt-mr-8 device-type-icon qt-fs-0"
-            [ngClass]="{'--ofline': !device.online}"
+            class="qt-df qt-ai-c qt-jc-c qt-sz-40 qt-circle ticket-detail-devices__item-icon qt-mr-8 qt-fs-0 qt-icon"
+            [ngClass]="{'--ofline': !device.online,'device-type-icon':!device.isCustom}"
         >
             <div
-                [ngClass]="{'icon__computer' : device.iconName === 'workstation' || !device.iconName,
-              'icon__tablet' : device.iconName === 'device',
-            'icon__printer' : device.iconName === 'printer',
-          'icon__server' : device.iconName === 'server'}"
-                class="qt-za-16 qt-sz-16 qt-bg-contain"
+                class="qt-icon qt-za-16 qt-sz-16"
+                [ngClass]="{'icon__devices' : device.getFieldForCheckIcon() === 'workstation' || !device.getFieldForCheckIcon(),
+               'icon__router' : device.getFieldForCheckIcon() === 'router',
+            'icon__print' : device.getFieldForCheckIcon() === 'printer',
+                'icon__network-switch' : device.getFieldForCheckIcon() === 'switch',
+          'icon__server' : device.getFieldForCheckIcon() === 'server',
+            'icon__tablet' : device.getFieldForCheckIcon() === 'tablet',
+            'icon__network_device' : device.getFieldForCheckIcon() === 'network device',
+            'icon__old-phone' : device.getFieldForCheckIcon() === 'phone',
+             'icon__generic_device' : device.getFieldForCheckIcon() === 'generic device'}"
             >
             </div>
         </div>
         <div>
             <div
                 class="ticket-detail-devices__item-subtitle"
-                [textContent]="device.getLabelForEdit()"
+                [textContent]="getLabelForEdit()"
             ></div>
             <div class="ticket-detail-devices__item-text qt-df qt-ai-c">
                 <span
@@ -32,7 +37,7 @@
                     [ngClass]="{'logged-time-point':device.userName,
                 'qt-ml-4': device.userName}"
                     class="logged-time"
-                    *ngIf="device.online && device.timing.idle > 0"
+                    *ngIf="!device.isCustom && device.online && device.timing.idle > 0"
                 >
                     Idle:
                     <span *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).hours > 0">
@@ -47,7 +52,7 @@
                     [ngClass]="{'logged-time-point':device.userName,
                 'qt-ml-4': device.userName}"
                     class="logged-time"
-                    *ngIf="device.timing.idle == 0"
+                    *ngIf="!device.isCustom && device.timing.idle == 0"
                 >
                     <div *ngIf="device.online">
                         Online
@@ -62,7 +67,7 @@
         </div>
     </div>
     <div
-        class="icon__category-more qt-sz-16 qt-bg-contain action-more"
+        class="qt-icon icon__more qt-sz-16 qt-bg-contain action-more"
         ngbDropdownToggle
     ></div>
     <div
@@ -72,30 +77,33 @@
         <div
             class="qt-df qt-ai-c pointer dropdown-menu-qt-item"
             (click)="remoteAccess('CSS')"
+            *ngIf="!device.isCustom"
         >
-            <i class="icon__remote-access-ticket qt-sz-20 qt-bg-contain qt-mr-12 qt-fs-0 qt-dib"></i>
+            <i class="qt-icon icon__remote-access qt-sz-20 qt-mr-12 qt-fs-0 qt-dib"></i>
             Remote Access
         </div>
         <div
             class="qt-df qt-ai-c pointer dropdown-menu-qt-item"
             (click)="turnOff('reboot')"
+            *ngIf="!device.isCustom"
         >
-            <i class="icon__reset qt-sz-20 qt-bg-contain qt-mr-12 qt-fs-0 qt-dib"></i>
+            <i class="qt-icon icon__reset qt-sz-20 qt-mr-12 qt-fs-0 qt-dib"></i>
             Restart
         </div>
         <div
             class="qt-df qt-ai-c pointer dropdown-menu-qt-item"
             (click)="turnOff('shutdown')"
+            *ngIf="!device.isCustom"
         >
-            <i class="icon__shutdown qt-sz-20 qt-bg-contain qt-mr-12 qt-fs-0 qt-dib"></i>
+            <i class="qt-icon icon__shutdown qt-sz-20 qt-bg-contain qt-mr-12 qt-fs-0 qt-dib"></i>
             Shutdown
         </div>
-        <hr>
+        <hr *ngIf="!device.isCustom">
         <div
             class="qt-df qt-ai-c pointer dropdown-menu-qt-item qt-color-red-600"
             (click)="removeDevice()"
         >
-            <i class="icon__remove qt-sz-20 qt-bg-contain qt-mr-12 qt-fs-0 qt-dib"></i>
+            <i class="qt-icon icon__delete qt-sz-20 qt-bg-contain qt-mr-12 qt-fs-0 qt-dib"></i>
             Remove
         </div>
     </div>

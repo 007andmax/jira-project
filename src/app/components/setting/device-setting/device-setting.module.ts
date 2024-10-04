@@ -3,10 +3,6 @@ import { CommonModule } from '@angular/common';
 import { DeviceSettingComponent } from './device-setting.component';
 import { DeviceSettingRoutingModule } from './device-setting-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModelPipe } from 'src/app/pipe/model.pipe';
@@ -18,6 +14,13 @@ import { DeviceSettingDeviceTypeComponent } from './device-setting-device-type/d
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 import { DeviceSettingManufactureComponent } from './device-setting-manufacture/device-setting-manufacture.component';
 import { DeviceSettingModelComponent } from './device-setting-model/device-setting-model.component';
+import { DeviceSettingManufacturesComponent } from './device-setting-manufactures/device-setting-manufactures.component';
+import { DeviceSettingManufacturesAddComponent } from './device-setting-manufactures/device-setting-manufactures-add/device-setting-manufactures-add.component';
+import { DeviceSettingModelsComponent } from './device-setting-models/device-setting-models.component';
+import { DeviceSettingModelsAddComponent } from './device-setting-models/device-setting-models-add/device-setting-models-add.component';
+import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
+import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
+import { ManufacturesCheckUseComponent } from './manufactures-check-use/manufactures-check-use.component';
 
 @NgModule({
     declarations: [
@@ -29,20 +32,22 @@ import { DeviceSettingModelComponent } from './device-setting-model/device-setti
         DeviceSettingAsideComponent,
         DeviceSettingDeviceTypeComponent,
         DeviceSettingManufactureComponent,
-        DeviceSettingModelComponent
+        DeviceSettingModelComponent,
+        DeviceSettingManufacturesComponent,
+        DeviceSettingManufacturesAddComponent,
+        DeviceSettingModelsComponent,
+        DeviceSettingModelsAddComponent
     ],
     imports: [
         CommonModule,
         DeviceSettingRoutingModule,
         ReactiveFormsModule,
         FormsModule,
-        MatSelectModule,
-        MatChipsModule,
-        MatIconModule,
         DropDownModule,
-        MatFormFieldModule,
         NgbModule,
-        DynamicTooltipModule
+        DynamicTooltipModule,
+        ClickOutsideModule,
+        KeyUpEnterModule
     ],
 })
 export class DeviceSettingModule { }

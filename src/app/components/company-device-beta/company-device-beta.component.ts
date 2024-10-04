@@ -10,7 +10,6 @@ import { KafkaStateService } from "src/app/states/kafka/kafka-state.service";
 import { LeftPanelStateService } from "src/app/states/left-panel/left-panel-state.service";
 import { RemoteControlService } from "../device/_services/remoteControl.service";
 import { CompanyDeviceBetaFilter } from "./class/device-beta";
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import * as _ from "lodash";
 import { v4 as uuidv4 } from 'uuid';
 import { DropDownComponent } from "../shared/drop-down/drop-down.component";
@@ -23,10 +22,14 @@ import { Subscription } from "rxjs";
 import { DeviceCompany } from "../company-devices/class/device-company";
 import { DevicesService } from "src/app/services/devices/devices.service";
 import { CompanyDevicesRemoteAccessComponent } from "../company-devices/company-devices-remote-access/company-devices-remote-access.component";
+import { fadeInAnimation } from "src/app/animations";
 
 @Component({
   selector: "app-company-device-beta",
   templateUrl: "./company-device-beta.component.html",
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ["./company-device-beta.component.scss"]
 })
 export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
@@ -159,7 +162,6 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private ngZone: NgZone,
     private remoteControlService: RemoteControlService,
-    private companiesState: CompaniesStateService,
     private commonHttpServices: CommonHttpServices,
     private excelService: ExcelService,
     public draftEmailStateService: DraftEmailStateService,
@@ -170,8 +172,6 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.showPreloader = true;
     this.leftPanelStateService.changeStateWithoutNavigate('company-devices-beta');
-    // this.companiesState.onInit();
-    // this.devicesStateService.onInit();
     this.clientName = "All Companies";
     this.companyId = this.activateRoute.snapshot.params["id"];
     let id = this.activateRoute.snapshot.params['id'];
@@ -185,14 +185,14 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
     });
     this.sub.add(subscription);
     if (id) this.companiesStateService.setCompanyRoutingId(id);
-    this.companiesStateService.getOnCompanies().subscribe((data) => {
+    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = this.getClientsList(data);
     });
+    this.sub.add(getOnCompanies);
     let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
       if (id == newChange.data.clientCompanyId) this.devicesStateService.changeDevice(this.devices, newChange);
     })
     this.sub.add(onDeviceUninstalled);
-
     let company = this.companiesStateService.getCurrentCompany();
     if (company) {
       this.currentCompany = company;
@@ -222,17 +222,17 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
     this.onInstallRemoteAgentCommand();
     this.onUninstallRemoteAgentCommand();
 
-    this.kafkaStateService.onCurrentConfig.subscribe((resp) => {
+    let onCurrentConfig = this.kafkaStateService.onCurrentConfig.subscribe((resp) => {
       if (resp.length > 0) {
         this.onCurrentConfig(resp)
       }
     });
-
-    this.kafkaStateService.onInstallWindowsUpdates.subscribe((resp) => {
+    this.sub.add(onCurrentConfig);
+    let onInstallWindowsUpdates = this.kafkaStateService.onInstallWindowsUpdates.subscribe((resp) => {
       this.IsCurrentConfigLoading = true;
       this.agentService.GetCurrentConfig(this.asset.ID);
     });
-
+    this.sub.add(onInstallWindowsUpdates);
     this.todaysDate = Date.now();
   }
 
@@ -787,14 +787,14 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
     }, 500);
   }
 
-  selectedSearch(event: MatAutocompleteSelectedEvent): void {
-    let data = this.selectedTag.find(x => x.toLowerCase() == event.option.viewValue.toLocaleLowerCase());
+  selectedSearch(search): void {
+    let data = this.selectedTag.find(x => x.toLowerCase() == search.Result.toLocaleLowerCase());
     if (!data) {
-      this.selectedTag.push(event.option.viewValue);
-      this.searchTag.push(event.option.viewValue);
+      this.selectedTag.push(search.Result);
+      this.searchTag.push(search.Result);
       this.selectedInput.nativeElement.value = '';
       this.selectedCtrl.setValue(null);
-      this.add(event.option.viewValue);
+      this.add(search.Result);
     }
     this.selectedInput.nativeElement.value = '';
   }
@@ -905,14 +905,6 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
 
   onRemoveTag(index: number): void {
     this.selectedTagdevicelist.splice(index, 1);
-  }
-
-
-  selectedSearchTag(event: MatAutocompleteSelectedEvent): void {
-    this.selectedTagdevicelist.push(event.option.viewValue);
-    this.tagSearch.push(event.option.viewValue);
-    this.selectedInput.nativeElement.value = '';
-    this.selectedCtrl.setValue(null);
   }
 
   getDeviceName(ID) {

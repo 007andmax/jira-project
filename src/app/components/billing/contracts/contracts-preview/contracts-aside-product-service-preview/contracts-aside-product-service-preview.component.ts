@@ -3,7 +3,6 @@ import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { ContractsFilterType } from '../../class/contracts-filter-type';
 import { ServiceAgreement } from '../../class/service-agreement';
 import * as moment from "moment";
-import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
@@ -19,7 +18,7 @@ export class ContractsAsideProductServicePreviewComponent implements OnInit {
   @Input() contractsOther: ServiceAgreement = new ServiceAgreement();
   formatDate: string = FORMAT_DATE_2;
   type: string = "PRODUCTS";
-  constructor(private inventoryStateService: InventoryStateService,
+  constructor(
     private companiesStateService: CompaniesStateService,) { }
 
   ngOnInit() {

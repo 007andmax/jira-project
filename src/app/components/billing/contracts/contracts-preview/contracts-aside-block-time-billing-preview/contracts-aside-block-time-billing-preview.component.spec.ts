@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ContractsAsideBlockTimeBillingPreviewComponent } from './contracts-aside-block-time-billing-preview.component';
+import { ContractsAsideBlockTimeBillingPreviewComponent } from './ContractsAsideBlockTimeBillingPreviewComponent';
 
 describe('ContractsAsideBlockTimeBillingPreviewComponent', () => {
   let component: ContractsAsideBlockTimeBillingPreviewComponent;
@@ -8,9 +8,9 @@ describe('ContractsAsideBlockTimeBillingPreviewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ContractsAsideBlockTimeBillingPreviewComponent ]
+      declarations: [ContractsAsideBlockTimeBillingPreviewComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

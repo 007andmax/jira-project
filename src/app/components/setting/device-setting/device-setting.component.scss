@@ -3,6 +3,7 @@
 @import "./src/assets/scss/mixin";
 @import "./src/assets/scss/custom";
 @import "./src/assets/styles/fonts";
+@import "./src/assets/styles/mixin/breakpoint";
 
 .manage-taxes {
     .cmn-area {
@@ -33,7 +34,7 @@
     .check-area {
         margin-top: -10px;
         margin-bottom: 18px;
-        @media only screen and (max-width: 1280px) {
+        @include media-breakpoint-down($sm) {
             margin-top: 0;
         }
         .cmn-checkbox {

@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter, ElementRef, OnDestroy, Input } from '@angular/core';
-import { TimeZoneService } from './services/time-zone.service';
+import { Component, OnInit, Output, EventEmitter, OnDestroy, Input } from '@angular/core';
 import { TimeZone } from './class/time-zone';
 import { CompanyTimeZoneStateService } from './services/company-time-zone-state.service';
 import { Subscription } from 'rxjs';
@@ -15,18 +14,20 @@ export class CompanyTimeZoneComponent implements OnInit, OnDestroy {
   public list: Array<TimeZone> = [];
   @Input() selectedItem: TimeZone = null;
   sub: Subscription = new Subscription();
-  constructor(private timeZoneService: TimeZoneService, private elRef: ElementRef,
+  constructor(
     private companyTimeZoneState: CompanyTimeZoneStateService) { }
 
   ngOnInit() {
-    let getTimeZones = this.timeZoneService.getTimeZones().subscribe((data: any) => {
+    if (this.companyTimeZoneState.getTimeZone().length > 0) this.list = this.companyTimeZoneState.getTimeZone();
+    if (this.companyTimeZoneState.getTimeZone().length == 0) this.companyTimeZoneState.onGetTimeZone();
+    let onTimeZone = this.companyTimeZoneState.onTimeZone.subscribe(data => {
       this.list = data.map(item => new TimeZone(item));
       if (this.selectedItem) {
         let find = this.list.find(item => item.second === this.selectedItem.second);
         this.selectedItem = find;
       }
     })
-    this.sub.add(getTimeZones);
+    this.sub.add(onTimeZone);
     this.onEditMode();
   }
 
@@ -46,7 +47,6 @@ export class CompanyTimeZoneComponent implements OnInit, OnDestroy {
     */
   public setOffset(data: TimeZone) {
     this.selectedItem = data;
-    // this.elRef.nativeElement.querySelector('#dropdownTimeZone').value = data.first;
     this.selectedOffsetItem.next(data);
   }
 

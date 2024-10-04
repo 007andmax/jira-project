@@ -114,7 +114,7 @@
     *ngIf="!customerPortalStateService.isCustomerPortal"
 >
     <li class="qt-mt-12 name-custom-filter">
-        <span class="icon__filter-lines--gray-300 qt-sz-16 qt-bg-contain qt-dib qt-mr-4"></span>
+        <span class="qt-icon icon__filter-lines qt-icon__gray-300 qt-sz-16 qt-bg-contain qt-dib qt-mr-4"></span>
         Custom Filters
     </li>
     <ng-template
@@ -131,14 +131,14 @@
             <div [textContent]="filter.name"></div>
             <div class="qt-df qt-ai-c">
                 <i
-                    class="icon__exclamation qt-bg-contain qt-sz-16 pointer qt-ml-4 qt-mr-6"
+                    class="qt-icon icon__warning qt-icon__yellow-600 qt-sz-16 pointer qt-ml-4 qt-mr-6"
                     container="body"
                     placement="top"
                     ngbTooltip="Some parameters of the filter have been deleted"
                     *ngIf="filter.modified"
                 ></i>
                 <i
-                    class="icon__globe qt-bg-contain qt-sz-16 pointer qt-ml-4 qt-mr-6"
+                    class="qt-icon icon__globe qt-bg-contain qt-sz-16 pointer qt-ml-4 qt-mr-6"
                     container="body"
                     placement="top"
                     ngbTooltip="Global Filter"
@@ -151,7 +151,7 @@
                     (click)="blockClick($event)"
                 >
                     <div
-                        class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain actions-filter"
+                        class="qt-ic-c qt-icon icon__more qt-pointer qt-sz-16 qt-bg-contain actions-filter"
                         id="dropdownBasic1"
                         ngbDropdownToggle
                     ></div>
@@ -165,7 +165,7 @@
                             (click)="removeFilter(filter)"
                             ngbDropdownItem
                         >
-                            <div class="icon__remove qt-sz-20 qt-mr-12 qt-bg-contain pointer"></div>
+                            <div class="qt-icon icon__delete qt-sz-20 qt-mr-12 qt-bg-contain pointer"></div>
                             Delete
                         </li>
                     </ul>

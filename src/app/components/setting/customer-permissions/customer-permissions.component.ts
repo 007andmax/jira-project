@@ -4,7 +4,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { UsersService } from 'src/app/services/users/users.service';
 import { UserRole } from '../../users/class/user-role';
 import { UserPermissions } from '../../users/class/user-permissions';
-import { PermissionManageService } from '../tech-users-settings/permission-manage/permission-manage.service';
+import { PermissionManageService } from '../../../services/permission-manage/permission-manage.service';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { DELETE_USER_ROLE } from 'src/app/const/confirm';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -12,10 +12,14 @@ import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { CustomerPermissionsRemoveRole } from './customer-permissions-remove-role/class/customer-permissions-user-role';
 import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-role-state.service';
 import { CustomerRoleRealTimeService } from 'src/app/states/customer-role/customer-role-real-time.service';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'customer-permissions',
   templateUrl: './customer-permissions.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./customer-permissions.component.scss']
 })
 export class CustomerPermissionsComponent implements OnInit, OnDestroy {

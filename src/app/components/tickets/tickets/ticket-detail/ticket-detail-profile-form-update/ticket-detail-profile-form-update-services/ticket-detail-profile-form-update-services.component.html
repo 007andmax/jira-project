@@ -20,18 +20,18 @@
                         [itemList]="servicesList"
                         (selectedServicesItem)="onSelectService($event,i)"
                     ></app-services-list>
-                    <mat-error
+                    <app-mat-error
                         class="invalid-feedback --pos-static"
                         *ngIf="!service.validate"
                     >
                         The Service is required
-                    </mat-error>
-                    <mat-error
+                    </app-mat-error>
+                    <app-mat-error
                         class="invalid-feedback --pos-static"
                         *ngIf="!service.validateQuantity"
                     >
                         You have to set any time value
-                    </mat-error>
+                    </app-mat-error>
                 </div>
                 <div class="qt-df">
                     <app-ticket-profile-updates-service-timepicker
@@ -83,7 +83,7 @@
                 class="service-item__btn-del qt-button --gray --md qt-jc-c"
                 (click)="removeService(i)"
             >
-                <span class="icon__remove--red-600 qt-ic-c qt-sz-16 qt-mr-4"></span>
+                <span class="qt-icon icon__delete qt-icon__red-600 qt-ic-c qt-sz-16 qt-mr-4"></span>
                 <span class="qt-color-red-600 qt-fw-500">Remove</span>
             </button>
         </div>
@@ -97,12 +97,12 @@
                     [itemList]="servicesList"
                     (selectedServicesItem)="selectService($event)"
                 ></app-services-list>
-                <mat-error
+                <app-mat-error
                     class="invalid-feedback --pos-static"
                     *ngIf="!currentService.validate"
                 >
                     The Service is required
-                </mat-error>
+                </app-mat-error>
             </div>
             <div class="qt-df ticket-timepicker-time-in-out">
                 <app-ticket-profile-updates-service-timepicker
@@ -152,13 +152,13 @@
             (click)="clearForm()"
             *ngIf="addedServiceList.length > 0"
         >
-            <span class="icon__remove--red-600 qt-ic-c qt-sz-16 qt-mr-4"></span>
+            <span class="qt-icon icon__delete qt-icon__red-600 qt-ic-c qt-sz-16 qt-mr-4"></span>
             <span class="qt-color-red-600 qt-fw-500">Remove</span>
         </button>
     </div>
 </div>
 <p *ngIf="areTicketsPresented && areTicketsTerminated">
-    Your contacts are expired/terminated. Please recreate them in order to use contract's services or remove them in order to use default services
+    Your contacts are expired/terminated. Please recreate them in order to use contract's services or remove them in order to use non-contract services
 </p>
 <p *ngIf="!getPermissions('VIEW_SERVICE_AGREEMENTS')">
     You cannot add a service due to disabled permission - "View service agreements". Contact the owner of the tech company to get more info

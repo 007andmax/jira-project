@@ -25,7 +25,7 @@
     </div>
     <div class="qt-inputs-row">
         <div class="qt-pl-12 qt-pr-12 qt-df qt-ai-c contract-tipe-info">
-            <div class="qt-sz-16 icon__tips qt-mr-5"></div>
+            <div class="qt-sz-16 qt-icon icon__info qt-mr-5"></div>
             <div>
                 Block Time Contracts are based on preselling a block of time your customer
             </div>
@@ -36,7 +36,7 @@
             <div class="qt-input-block__label">Start Date</div>
             <app-date-picker
                 [formatDate]="formatDate"
-                [disabled]="true"
+                [isDisabled]="true"
                 [editMode]="true"
                 [editDate]="contractsBlockTime.startDate"
             ></app-date-picker>
@@ -56,7 +56,7 @@
             <div class="qt-input-block__label">Review Date</div>
             <app-date-picker
                 [formatDate]="formatDate"
-                [disabled]="true"
+                [isDisabled]="true"
                 [editMode]="true"
                 [editDate]="contractsBlockTime.reviewDate"
             ></app-date-picker>
@@ -185,6 +185,29 @@
                 </div>
             </div>
         </div>
+        <div
+            class="ticket-edit-user-tags contract-time-users qt-mt-16"
+            *ngIf="contractsBlockTime.shares.length > 0"
+        >
+            <app-mat-chip-list class="example-chip">
+                <app-mat-chip
+                    class="selected-tag-user"
+                    *ngFor="let user of contractsBlockTime.shares; let i = index"
+                >
+                    <div class="assigne-user-item">
+                        <div
+                            class="assigne-user-avatar"
+                            [textContent]="getAssignedUserNameForAvatar(getUser(user.userId))"
+                            [ngStyle]="{'background': getStyleAvatar(getUser(user.userId)),'background-size': 'contain'}"
+                        ></div>
+                        <div
+                            class="assigne-user-name"
+                            [textContent]="getUserName(getUser(user.userId))"
+                        ></div>
+                    </div>
+                </app-mat-chip>
+            </app-mat-chip-list>
+        </div>
     </div>
     <div class="qt-df qt-mb-16 qt-mt-24">
         <div
@@ -258,29 +281,6 @@
             </tbody>
         </table>
     </div>
-    <div
-        class="ticket-edit-user-tags contract-time-users"
-        *ngIf="contractsBlockTime.shares.length > 0"
-    >
-        <mat-chip-list class="example-chip">
-            <mat-chip
-                class="selected-tag-user"
-                *ngFor="let user of contractsBlockTime.shares; let i = index"
-            >
-                <div class="assigne-user-item">
-                    <div
-                        class="assigne-user-avatar"
-                        [textContent]="getAssignedUserNameForAvatar(getUser(user.userId))"
-                        [ngStyle]="{'background': getStyleAvatar(getUser(user.userId)),'background-size': 'contain'}"
-                    ></div>
-                    <div
-                        class="assigne-user-name"
-                        [textContent]="getUserName(getUser(user.userId))"
-                    ></div>
-                </div>
-            </mat-chip>
-        </mat-chip-list>
-    </div>
     <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">
     <div class="qt-df qt-jc-sb qt-ai-c qt-mb-16">
         <div class="qt-df">
@@ -298,9 +298,9 @@
             </ng-template>
             <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-gray-600 qt-df qt-ai-c">
                 Manual create billable item
-                <span class="icon__automatically-create-invoice qt-bg-contain qt-dib qt-sz-20 qt-ml-8"></span>
+                <span class="qt-icon icon__automatically-create-invoice qt-dib qt-sz-20 qt-ml-8"></span>
                 <span
-                    class="icon__help qt-dib qt-sz-12 qt-ic-c qt-ml-8"
+                    class="qt-icon icon__help qt-dib qt-sz-12 qt-ic-c qt-ml-8"
                     placement="top"
                     [ngbTooltip]="manualContent"
                 ></span>
@@ -324,9 +324,9 @@
             </ng-template>
             <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-gray-600 qt-df qt-ai-c">
                 Automatically create and send invoice
-                <span class="icon__manual-create-billable qt-bg-contain qt-dib qt-sz-20 qt-ml-8"></span>
+                <span class="qt-icon icon__manual-create-billable qt-dib qt-sz-20 qt-ml-8"></span>
                 <span
-                    class="icon__help qt-dib qt-sz-12 qt-ic-c qt-ml-8"
+                    class="qt-icon icon__help qt-dib qt-sz-12 qt-ic-c qt-ml-8"
                     placement="top"
                     [ngbTooltip]="tipContent"
                 ></span>

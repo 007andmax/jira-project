@@ -8,29 +8,35 @@
     >
         <div class="qt-df qt-ai-c qt-ml-auto">
             <div
-                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__download-pdf"
+                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon qt-df qt-jc-c qt-ai-c"
                 (click)="exportPdf()"
                 placement="top"
                 container="body"
                 ngbTooltip="Download"
-            ></div>
+            >
+              <div class="qt-icon icon__download qt-sz-20"></div>
+            </div>
             <div
-                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__edit"
+                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon qt-df qt-ai-c qt-jc-c"
                 (click)="editDocument()"
                 placement="top"
                 container="body"
                 ngbTooltip="Edit"
-            ></div>
+            >
+              <div class="qt-sz-20 qt-icon icon__edit"></div>
+            </div>
             <div
-                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__print"
+                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon qt-df qt-ai-c qt-jc-c"
                 (click)="printPdf()"
                 placement="top"
                 ngbTooltip="Print"
                 container="body"
-            ></div>
+            >
+              <div class="qt-icon icon__print qt-sz-20"></div>
+            </div>
         </div>
         <div
-            class="qt-aside-modern__header-close icon__close"
+            class="qt-aside-modern__header-close qt-icon icon__close"
             (click)="openAside = false"
         >
         </div>
@@ -69,7 +75,10 @@
                 </button>
             </div>
         </div>
-        <div class="documents-create-panel__body qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24"></div>
+        <div
+            class="documents-create-panel__body qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24"
+            (click)="preview($event)"
+        ></div>
     </div>
     <div
         class="loading"

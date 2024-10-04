@@ -1,6 +1,11 @@
 @import "./src/assets/styles/variable";
+@import "./src/assets/styles/mixin/breakpoint";
 
 .documents-page {
+  .qt-page-list__header-thead__row {
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+  }
   .qt-page-list__header-filters {
     .qt-dropdown input,
     .filter-users-documents .dropdown-toggle,
@@ -9,8 +14,8 @@
       height: 36px;
     }
   }
-  tr.documents-no-valid {
-    td {
+  .documents-no-valid {
+    > div {
       &:first-child {
         position: relative;
       }
@@ -18,7 +23,7 @@
       &:first-child::before {
         position: absolute;
         content: "";
-        background: url("/assets/img/icons/update.svg") no-repeat;
+        background: url("/assets/img/icons/new-update.svg") no-repeat;
         width: 44px;
         height: 20px;
         padding-left: 5px;
@@ -33,34 +38,26 @@
   }
   .documents-table {
     &__title {
-      min-width: 430px;
-      width: 430px;
-      max-width: 430px;
+      flex: 2 0 200px;
     }
     &__create-by {
-      width: 140px;
-      max-width: 140px;
-      min-width: 140px;
+     flex: 0 0 280px;
+     @include media-breakpoint-down($md) {
+       flex: 0 0 206px;
+     }
     }
     &__created-date {
-      width: 116px;
-      max-width: 116px;
-      min-width: 116px;
+      flex: 0 0 116px;
     }
     &__review-date {
-      width: 110px;
-      max-width: 110px;
-      min-width: 110px;
+      flex: 0 0 110px;
     }
     &__company {
-      width: 220px;
-      max-width: 220px;
-      min-width: 220px;
+      flex: 1 0 220px;
+      max-width: 380px;
     }
     &__menu {
-      width: 28px;
-      max-width: 28px;
-      min-width: 28px;
+      flex: 0 0 52px;
 
       .menu {
         display: block;
@@ -68,9 +65,7 @@
       }
     }
     &__shared {
-      width: 32px;
-      max-width: 32px;
-      min-width: 32px;
+      flex: 0 0 32px
     }
 
     tr td:last-child {
@@ -327,15 +322,19 @@ document-preview,
   .documents-filter-tags {
     .mat-form-field-infix {
       min-height: 40px;
-      padding: 0;
-      padding-left: 36px;
-
-      &::before {
-        top: 11px;
+      padding: 0px 0px 0px 36px !important;
+      position: relative;
+      &:before {
+        left: 12px;
+        top: 9px;
+        position: absolute;
+        content: "";
+        width: 20px;
+        height: 20px;
+        background: url(/assets/img/icons/tags.svg);
       }
-
-      input {
-        height: 38px !important;
+      .mat-form-field-label {
+        left: 25px;
       }
     }
     .mat-chip-list-wrapper {

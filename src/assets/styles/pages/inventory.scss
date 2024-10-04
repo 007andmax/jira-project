@@ -1,4 +1,12 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/mixin/breakpoint";
+
 .products-page {
+  .qt-table-modern__row:hover > div {
+    textarea {
+      background-color: $gray-50;
+    }
+  }
   table.qt-table-modern tbody tr:hover td {
     background-color: $white;
   }
@@ -29,7 +37,11 @@
       content: '';
       width: 20px;
       height: 20px;
-      background-image: url("/assets/img/icons/search.svg");
+      mask-image: url("/assets/img/icons/search.svg");
+      mask-position: center;
+      mask-repeat: no-repeat;
+      mask-size: contain;
+      background-color: $gray-400;
       left: 10px;
       top: calc(50% - 10px);
       z-index: 1;
@@ -38,27 +50,29 @@
 
   .products-table {
     &__product-name {
-      width: 280px;
-      max-width: 280px;
-      min-width: 280px;
-      //width: -webkit-max-content;
-      //width: -moz-max-content;
-      //width: max-content;
+     flex: 2 0 280px;
       font-weight: $fw-medium;
       color: $gray-900;
+      @include media-breakpoint-down($lg) {
+        max-width: 382px;
+      }
     }
 
-    &__category {
-      width: 144px;
-      max-width: 144px;
-      min-width: 144px;
+    &__category,
+    &__product-type {
+      flex: 1 0 144px;
       color: $gray-600;
+      @include media-breakpoint-up($lg) {
+        flex: 1 0 200px;
+      }
+
+      app-drop-down {
+        width: 100%;
+      }
     }
 
     &__menu {
-      width: 62px;
-      max-width: 62px;
-      min-width: 62px;
+      flex: 0 0 50px;
       color: $gray-600;
     }
 
@@ -71,32 +85,49 @@
 
     &__tac,
     &__gl {
-      width: 92px;
-      max-width: 92px;
-      min-width: 92px;
+      flex: 0 0 92px;
       color: $gray-600;
+      @include media-breakpoint-down($lg) {
+        flex-grow: 1;
+      }
+      @include media-breakpoint-up($lg) {
+        flex: 0 0 182px;
+      }
     }
 
     &__sale-price,
     &__mfg,
     &__ilc,
     &__cost{
-      width: 120px;
-      max-width: 120px;
-      min-width: 120px;
+      flex: 0 0 120px;
       color: $gray-600;
+      @include media-breakpoint-down($lg) {
+        flex-grow: 1;
+      }
+    }
+    &__mfg,
+    &__ilc {
+      flex: 0 0 120px;
+      @include media-breakpoint-down($md) {
+        flex: 0 0 100px;
+      }
+      @include media-breakpoint-up($lg) {
+        flex: 0 0 220px;
+      }
     }
     &__cost {
-      width: 78px;
-      max-width: 78px;
-      min-width: 78px;
+      flex: 0 0 101px;
       color: $gray-600;
       position: relative;
+      @include media-breakpoint-down($md) {
+        flex: 0 0 78px;
+      }
     }
     &__sale-price {
-      width: 92px;
-      max-width: 92px;
-      min-width: 92px;
+      flex: 0 0 109px;
+      @include media-breakpoint-down($md) {
+        flex: 0 0 92px;
+      }
       color: $gray-600;
     }
   }
@@ -143,4 +174,11 @@ app-accounting-settings {
 }
 app-inventory-table {
   display: contents;
+}
+
+.products-page {
+  .qt-page-list__header-thead,
+  .qt-page-list__body-tbody {
+    min-width: 1815px;
+  }
 }

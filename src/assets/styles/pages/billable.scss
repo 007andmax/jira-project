@@ -1,4 +1,5 @@
 @import './src/assets/styles/variable';
+@import "./src/assets/styles/mixin/breakpoint";
 
 .page-list-billable {
 
@@ -19,20 +20,25 @@
     }
 
     &__company-name {
-      width: calc(45% - 110px);
+      flex: 2 0 368px;
     }
 
     &__tickets {
-      width: 30%;
+      flex: 1 0 320px;
     }
 
     &__sales {
-    width: 12%;
+      flex: 0 0 128px;
+      @include media-breakpoint-up($lg) {
+        flex: 1 0 128px;
+      }
     }
 
     &__billable {
-      width: 12%;
-      min-width: 144px;
+      flex: 0 0 144px;
+      @include media-breakpoint-up($lg) {
+        flex: 1 0 144px;
+      }
     }
 
   }
@@ -65,28 +71,26 @@
   }
 
   &__check {
-    width: 40px;
-    padding-right: 4px !important;
+    flex: 0 0 52px;
   }
 
   &__date {
     padding-left: 4px !important;
   }
 
-  &__date, &__ticket {
+  &__date {
     width: 115px;
+  }
+  &__amount,
+  &__ticket {
+    flex: 0 0 115px;
   }
 
   &__subject {
-    width: max-content;
-    max-width: 500px;
+   flex: 2 0 320px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-  }
-
-  &__amount {
-    width: 115px;
   }
 }
 
@@ -142,7 +146,7 @@
             width: 30px;
             background: transparent;
             padding: 0;
-            .icon__move-light {
+            .icon__dot-vertical {
               margin-left: auto;
             }
           }
@@ -183,7 +187,7 @@
       }
       &__col-quentity {
         text-align: right;
-        width: 90px;
+        width: 135px;
       }
       &__col-tax {
         text-align: right;
@@ -260,6 +264,14 @@
 
   .qt-table-modern__sorting {
     transform: translateY(2px);
+  }
+
+  .qt-table-modern__row > div:first-child {
+    padding: 12px 8px 12px 24px;
+  }
+  .qt-page-list__header-thead__row {
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
   }
 }
 
@@ -563,6 +575,17 @@ app-invoice-form-ticket-edit-service,app-invoice-form-ticket-edit-product {
 
     app-ticket-profile-updates-service-timepicker {
       flex-direction: column;
+      .start-end-timer {
+        flex-direction: column;
+      }
+      .start-end-timer__label {
+        display: flex;
+        align-items: center;
+        margin-right: 0px !important;
+       .icon__time {
+        display: none !important;
+       }
+      }
   }
 
     .time.start, .time.end {

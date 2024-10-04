@@ -32,67 +32,65 @@
             </div>
         </div>
         <div class="qt-page-list__header-thead-container">
-            <table class="qt-table-modern qt-page-list__header-thead">
-                <thead>
-                    <tr>
-                        <th
-                            class="billable-item-table__check"
-                            *ngIf="getPermissions('CREATE_INVOICE')"
+            <div class="qt-table-modern qt-page-list__header-thead">
+                <div class="qt-page-list__header-thead__row">
+                  <div
+                    class="billable-item-table__check"
+                    *ngIf="getPermissions('CREATE_INVOICE')"
+                  >
+                    <div class="qt-df">
+                      <label class="qt-checkbox">
+                        <input
+                          type="checkbox"
+                          (change)="onToggleAll($event)"
                         >
-                            <div class="qt-df">
-                                <label class="qt-checkbox">
-                                    <input
-                                        type="checkbox"
-                                        (change)="onToggleAll($event)"
-                                    >
-                                    <span></span>
-                                </label>
-                            </div>
-                        </th>
-                        <th
-                            class="billable-table__company-name"
-                            (click)="onFilter('name')"
-                        >
-                            Company Name
-                            <span class="qt-table-modern__sorting"></span>
-                        </th>
-                        <th
-                            class="billable-table__tickets"
-                            (click)="onFilter('salesPerson')"
-                        >
-                            Sales Person
-                            <span class="qt-table-modern__sorting"></span>
-                        </th>
-                        <th
-                            class="billable-table__sales"
-                            (click)="onFilter('countTickets')"
-                        >
-                            Tickets
-                            <span class="qt-table-modern__sorting"></span>
-                        </th>
-                        <th
-                            class="billable-table__billable"
-                            (click)="onFilter('total')"
-                        >
-                            Billable Amount
-                            <span class="qt-table-modern__sorting"></span>
-                        </th>
-                        <th
-                            class="billable-table__menu"
-                            *ngIf="getPermissions('CREATE_INVOICE')"
-                        ></th>
-                    </tr>
-                </thead>
-            </table>
+                        <span></span>
+                      </label>
+                    </div>
+                  </div>
+                  <div
+                    class="billable-table__company-name"
+                    (click)="onFilter('name')"
+                  >
+                    Company Name
+                    <span class="qt-table-modern__sorting"></span>
+                  </div>
+                  <div
+                    class="billable-table__tickets"
+                    (click)="onFilter('salesPerson')"
+                  >
+                    Sales Person
+                    <span class="qt-table-modern__sorting"></span>
+                  </div>
+                  <div
+                    class="billable-table__sales"
+                    (click)="onFilter('countTickets')"
+                  >
+                    Tickets
+                    <span class="qt-table-modern__sorting"></span>
+                  </div>
+                  <div
+                    class="billable-table__billable"
+                    (click)="onFilter('total')"
+                  >
+                    Billable Amount
+                    <span class="qt-table-modern__sorting"></span>
+                  </div>
+                  <div
+                    class="billable-table__menu"
+                    *ngIf="getPermissions('CREATE_INVOICE')"
+                  ></div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="qt-page-list__body">
         <div class="qt-page-list__body-table-container">
-            <table
+            <div
                 class="qt-page-list__body-tbody qt-table-modern billable-table"
                 *ngIf="!showPreloader"
             >
-                <tbody>
+                <div class="tbody">
                     <ng-template
                         ngFor
                         let-item
@@ -105,8 +103,8 @@
                             (onSelect)="onSelectItem($event,item)"
                         ></app-billable-item>
                     </ng-template>
-                </tbody>
-            </table>
+                </div>
+            </div>
             <div
                 class="loading"
                 *ngIf="showPreloader"

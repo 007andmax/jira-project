@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NoteTemplate } from 'src/app/components/setting/ticket-settings-page/canned-responses/class/note-template';
 import { NoteService } from 'src/app/services/note/note.service';
@@ -10,7 +10,7 @@ import { NoteStateService } from 'src/app/states/note/note-state.service';
   templateUrl: './ticket-profile-form-update-note-list.component.html',
   styleUrls: ['./ticket-profile-form-update-note-list.component.scss']
 })
-export class TicketProfileFormUpdateNoteListComponent implements OnInit {
+export class TicketProfileFormUpdateNoteListComponent implements OnInit, OnDestroy {
   noteTemplate: Array<NoteTemplate> = [];
   @Output() onSelected = new EventEmitter();
   sub: Subscription = new Subscription();
@@ -19,6 +19,7 @@ export class TicketProfileFormUpdateNoteListComponent implements OnInit {
     public cd: ChangeDetectorRef,
     private permissionsService: PermissionsService,
     private noteService: NoteService,) { }
+
 
   ngOnInit() {
     let onUpdateActiveNotes = this.noteStateService.onUpdateActiveNotes.subscribe(data => {
@@ -52,5 +53,8 @@ export class TicketProfileFormUpdateNoteListComponent implements OnInit {
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

@@ -116,10 +116,10 @@
   -webkit-mask-size: 16px;
   mask-size: 16px;
 }
-::ng-deep .icon__task-pending {
+::ng-deep .icon__check {
   background-size: contain;
 }
-::ng-deep .icon__active {
+::ng-deep .qt-icon icon__check {
   background-size: contain;
 }
 ::ng-deep .tag__modern {

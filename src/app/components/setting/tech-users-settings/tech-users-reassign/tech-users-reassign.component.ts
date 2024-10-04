@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-
+import { Subscription } from 'rxjs';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { TechUsersService } from 'src/app/services/setting/tech-users.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -10,21 +10,24 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
   templateUrl: './tech-users-reassign.component.html',
   styleUrls: ['./tech-users-reassign.component.scss']
 })
-export class TechUsersReassignComponent implements OnInit {
+export class TechUsersReassignComponent implements OnInit, OnDestroy {
   namesTechUsersList = [];
   techUsersList = [];
   @Input() techUser;
   selectedUser;
+  sub: Subscription = new Subscription();
   constructor(private usersStateService: UsersStateService,
     public activeModal: NgbActiveModal,
     private confirmStateService: ConfirmStateService,
     private techUsersService: TechUsersService,) { }
+
 
   ngOnInit() {
     if (this.usersStateService.getAllUsers().length > 0) this.onGetTechUsers(this.usersStateService.getAllUsers());
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.onGetTechUsers(data);
     })
+    this.sub.add(getOnUsers);
   }
   onGetTechUsers(data) {
     this.techUsersList = data.filter(item => {
@@ -58,5 +61,7 @@ export class TechUsersReassignComponent implements OnInit {
   onSelectTechUser(item) {
     this.selectedUser = item;
   }
-
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

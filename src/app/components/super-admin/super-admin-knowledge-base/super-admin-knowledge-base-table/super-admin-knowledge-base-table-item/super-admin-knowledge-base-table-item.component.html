@@ -1,0 +1,83 @@
+<div class="qt-table-modern__row">
+    <div class="companies-table__check">
+        <label class="qt-checkbox pointer">
+            <input type="checkbox">
+            <span></span>
+        </label>
+    </div>
+    <div
+        class="ticket-table__subject qt-color-gray-900 qt-fs-14 qt-fw-500"
+        (click)="select()"
+    >
+        <div
+            class="ellipsis"
+            [textContent]="news.title"
+        ></div>
+    </div>
+    <div
+        class="ticket-table__created-date qt-color-gray-900 qt-fs-14 qt-fw-400"
+        [textContent]="getDate(news.createdAt)"
+        (click)="select()"
+    ></div>
+    <div
+        class="ticket-table__status grey-dropdown"
+        (click)="select()"
+        ngbDropdown
+    >
+        <span
+            class="tag__modern"
+            [ngClass]="{'status-published':news.status == 'PUBLISHED',
+        'status-draft':news.status == 'DRAFT',
+    'status-archived':news.status == 'ARCHIVED'}"
+            [textContent]="news.parseStatus()"
+            ngbDropdownToggle
+        ></span>
+        <div
+            ngbDropdownMenu
+            class="qt-dropdown-menu dropdown-menu"
+        >
+            <ng-template
+                ngFor
+                let-item
+                [ngForOf]="listStatus"
+                [ngForTrackBy]="trackById"
+            >
+                <button
+                    ngbDropdownItem
+                    class="dropdown-item"
+                    (click)="setStatus(item.value)"
+                    [textContent]="item.title"
+                >
+                </button>
+            </ng-template>
+        </div>
+    </div>
+    <div class="companies-table__menu pointer">
+        <div
+            class="grey-dropdown right with-icons"
+            ngbDropdown
+        >
+            <div
+                class="qt-button --square-md --gray pointer"
+                id="dropdownBasic1"
+                ngbDropdownToggle
+            >
+                <i class="icn-16 qt-bg-contain qt-icon icon__more pointer"></i>
+            </div>
+            <div
+                class="qt-dropdown-menu"
+                ngbDropdownMenu
+                aria-labelledby="dropdownBasic1"
+            >
+                <button
+                    ngbDropdownItem
+                    (click)="removeNews()"
+                    class="qt-dropdown-menu__item-red"
+                >
+                    <i class="qt-icon icon__delete qt-icon__red-600 qt-bg-contain qt-sz-20 qt-mr-12"></i>
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

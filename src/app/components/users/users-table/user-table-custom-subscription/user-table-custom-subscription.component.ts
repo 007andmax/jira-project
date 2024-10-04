@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UserCustomSubscription } from '../../class/user-custom-subscription';
-import { UserDefaultSubscription } from '../../class/user-default-subscription';
 
 @Component({
   selector: 'user-table-custom-subscription',
@@ -17,6 +16,9 @@ export class UserTableCustomSubscriptionComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+  getListHiveSubscribes() {
+    return this.customSubscriptions.slice(2).map(item => item.name).join(",");
   }
   toggleIsUpdate(data) {
     this.isUpdate = data;

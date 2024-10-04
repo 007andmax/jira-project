@@ -9,15 +9,19 @@ import { SettingStateService } from 'src/app/states/setting/setting-state.servic
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
-import { InvoiceTicketsService } from '../accounting/accounting-settings.service';
+import { InvoiceTicketsService } from '../../../services/accounting/accounting-settings.service';
 import { CannedResponsesComponent } from './canned-responses/canned-responses.component';
 import { TicketSettingsComponent } from './ticket-settings/ticket-settings.component';
 import { TicketsStatusComponent } from './tickets-status/tickets-status.component';
 import { TicketsPriorityComponent } from './tickets-priority/tickets-priority.component';
+import { fadeInAnimation } from 'src/app/animations';
 declare var $: any;
 @Component({
   selector: 'ticket-settings-page',
   templateUrl: './ticket-settings-page.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./ticket-settings-page.component.scss']
 })
 export class TicketSettingsPageComponent implements OnInit, OnDestroy {
@@ -28,8 +32,7 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
   @ViewChild('ticketsStatus', { static: true }) ticketsStatus: TicketsStatusComponent;
   @ViewChild('cannedResponses', { static: true }) cannedResponses: CannedResponsesComponent;
   @ViewChild('ticketPriority', { static: true }) ticketPriority: TicketsPriorityComponent;
-  constructor(private invoiceTicketsService: InvoiceTicketsService,
-    private confirmStateService: ConfirmStateService,
+  constructor(private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     private ticketsService: TicketsService,
     public cd: ChangeDetectorRef,

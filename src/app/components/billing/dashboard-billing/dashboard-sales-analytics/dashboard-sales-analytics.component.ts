@@ -19,7 +19,6 @@ export class DashboardSalesAnalyticsComponent implements OnInit {
     new CompanySetting('Daily', 'DAILY'),
     new CompanySetting('Weekly', 'WEEKLY'),
     new CompanySetting('Monthly', 'MONTHLY')];
-  /*Random Data Generator */
 
   constructor() { }
 
@@ -97,19 +96,13 @@ export class DashboardSalesAnalyticsComponent implements OnInit {
   getDataForChart() {
     let sin = [], sin2 = [];
     this.chartData = (this.chartData.length > 30) ? this.chartData.splice(this.chartData.length - 30, this.chartData.length) : this.chartData;
-    //  this.chartData = JSON.parse(JSON.stringify(this.chartData.reverse()));
-    //Data is represented as an array of {x,y} pairs.
     for (let i = 1; i < 30; i++) {
       if (i >= this.chartData.length) {
-        /* sin.push({ x: i, y: 0 });
-         sin2.push({ x: i, y: 0 });*/
       } else {
         sin.push({ x: i, y: this.chartData[i].totalSales });
         sin2.push({ x: i, y: this.chartData[i].totalIncomeAmount });
       }
-
     }
-
     //Line chart data should be sent as an array of series objects.
     return [
       {

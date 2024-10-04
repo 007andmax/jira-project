@@ -7,8 +7,11 @@
     color: $gray-400;
   }
 }
-.icon__active_subscription {
+.icon__done.qt-icon__blue-light-600 {
   background-size: 15px;
   background-position: center;
   background-repeat: no-repeat;
+}
+.--input-error {
+  border: solid 1px $red-600 !important;
 }

@@ -25,7 +25,7 @@
     </div>
     <div class="qt-inputs-row">
         <div class="qt-pl-12 qt-pr-12 qt-df qt-ai-c contract-tipe-info">
-            <div class="qt-sz-16 icon__tips qt-mr-5"></div>
+            <div class="qt-sz-16 qt-icon icon__info qt-mr-5"></div>
             <div>
                 Block Time Contracts are based on preselling a block of time your customer
             </div>
@@ -77,31 +77,41 @@
                 [(ngModel)]="contractsBlockTime.description"
                 (input)="validate.resetDescription()"
             >
-            <mat-error
+            <app-mat-error
                 class="invalid-feedback"
                 *ngIf="!validate.getDescription()"
             >
                 Description is required
-            </mat-error>
+            </app-mat-error>
         </div>
     </div>
     <div class="qt-inputs-row-background">
-        <div class="qt-fs-15 qt-fw-600 qt-lh-147 qt-color-gray-900 qt-mb-16">Select how you bill your customer</div>
+        <div class="qt-fs-15 qt-fw-600 qt-lh-147 qt-color-gray-900 qt-mb-16">
+            Select how you bill your customer
+            <i
+                #customerTooltip="ngbTooltip"
+                class="icon__help default-services-page__question-icon qt-sz-12 qt-ic-c qt-ml-8"
+                placement="top"
+                container="body"
+                [tooltipClass]="'cotract-billable-tooltip'"
+                ngbTooltip="If you change the existing 'Rate exceeding block time' value or 'Taxes' and update the contract then the new values will be applied to all contract services that have not been invoiced yet. The total amount for unbilled services will be recalculated taking into account the new values."
+            ></i>
+        </div>
         <div class="qt-df qt-mb-24">
-            <div class="qt-input-block --required qt-w25 qt-mr-16">
+            <div class="qt-input-block --required qt-w25 qt-mr-16 --disabled">
                 <div class="qt-input-block__label">Included block time</div>
                 <input
                     class="payment-input qt-input-in-table"
                     placeholder="1"
                     [value]="contractsBlockTime.includedHours"
-                    readonly
+                    disabled
                 >
-                <mat-error
+                <app-mat-error
                     class="invalid-feedback"
                     *ngIf="!validate.getIncludedHours()"
                 >
                     Field is required
-                </mat-error>
+                </app-mat-error>
             </div>
             <div class="qt-input-block --required qt-w25 qt-mr-16">
                 <div class="qt-input-block__label">Block Rate</div>
@@ -117,12 +127,12 @@
                         (input)="validate.resetBlockRate()"
                         (onChange)="contractsBlockTime.blockRate=$event"
                     >
-                    <mat-error
+                    <app-mat-error
                         class="invalid-feedback"
                         *ngIf="!validate.getBlockRate()"
                     >
                         Field is required
-                    </mat-error>
+                    </app-mat-error>
                 </div>
             </div>
             <div class="qt-input-block --required qt-w25 qt-mr-16">
@@ -136,15 +146,15 @@
                         [useFixed]="true"
                         placeholder="0.00"
                         [value]="contractsBlockTime.rateExceeding_str"
-                        (input)="validate.resetRateExceeding()"
-                        (onChange)="contractsBlockTime.rateExceeding=$event"
+                        (input)="customerTooltip.open();validate.resetRateExceeding()"
+                        (onChange)="onChangeRate($event)"
                     >
-                    <mat-error
+                    <app-mat-error
                         class="invalid-feedback"
                         *ngIf="!validate.getRateExceeding()"
                     >
                         Field is required
-                    </mat-error>
+                    </app-mat-error>
                 </div>
             </div>
             <div class="qt-input-block qt-w25 qt-mr-16">
@@ -260,6 +270,12 @@
                 ></app-tech-users>
             </div>
         </div>
+        <app-contracts-aside-block-time-billing-users
+            class="qt-mt-16 qt-db"
+            *ngIf="toggleNotifyAgentsUser"
+            (onSelected)="onChangeUser($event)"
+            [selectedUsers]="selectedUsers"
+        ></app-contracts-aside-block-time-billing-users>
     </div>
     <div class="qt-df qt-mb-16 qt-mt-24">
         <div
@@ -311,11 +327,6 @@
         *ngIf="toggleContractServices"
         (onSelect)="onAddDefaultService($event)"
     ></app-contracts-aside-block-time-billing-add-default-service>
-    <app-contracts-aside-block-time-billing-users
-        *ngIf="toggleNotifyAgentsUser"
-        (onSelected)="onChangeUser($event)"
-        [selectedUsers]="selectedUsers"
-    ></app-contracts-aside-block-time-billing-users>
     <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">
     <div class="qt-df qt-jc-sb qt-ai-c qt-mb-16">
         <div class="qt-df">
@@ -334,9 +345,9 @@
             </ng-template>
             <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-gray-600 qt-df qt-ai-c">
                 Manual create billable item
-                <span class="icon__automatically-create-invoice qt-bg-contain qt-dib qt-sz-20 qt-ml-8"></span>
+                <span class="qt-icon icon__automatically-create-invoice qt-dib qt-sz-20 qt-ml-8"></span>
                 <span
-                    class="icon__help qt-dib qt-sz-12 qt-ic-c qt-ml-8"
+                    class="qt-icon icon__help qt-dib qt-sz-12 qt-ic-c qt-ml-8"
                     placement="top"
                     [ngbTooltip]="manualContent"
                 ></span>
@@ -361,9 +372,9 @@
             </ng-template>
             <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-gray-600 qt-df qt-ai-c">
                 Automatically create and send invoice
-                <span class="icon__manual-create-billable qt-bg-contain qt-dib qt-sz-20 qt-ml-8"></span>
+                <span class="qt-icon icon__manual-create-billable qt-dib qt-sz-20 qt-ml-8"></span>
                 <span
-                    class="icon__help qt-dib qt-sz-12 qt-ic-c qt-ml-8"
+                    class="qt-icon icon__help qt-dib qt-sz-12 qt-ic-c qt-ml-8"
                     placement="top"
                     [ngbTooltip]="tipContent"
                 ></span>

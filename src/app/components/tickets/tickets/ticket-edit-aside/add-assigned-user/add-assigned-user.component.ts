@@ -2,9 +2,8 @@ import { Component, OnInit, Input, ViewChild, ElementRef, HostListener, Output, 
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { MatAutocomplete } from '@angular/material/autocomplete';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
-import { NgbActiveModal, NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { TicketStateService } from '../services/ticket-state.service';
 import { TicketsListService } from '../../services/tickets-list.service';
 import { CompanyUser } from '../../ticket-add-aside/company-users-drop-down/class/company-user';
@@ -19,7 +18,7 @@ import { CompanyUser } from '../../ticket-add-aside/company-users-drop-down/clas
 export class AddAssignedUserComponent implements OnInit {
 
   selectable = true;
-  removable = true;
+  @Input() removable = true;
   addOnBlur = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   userCtrl = new FormControl();
@@ -36,7 +35,7 @@ export class AddAssignedUserComponent implements OnInit {
   @Output() hidden = new EventEmitter<any>();
   @Output() onSelected = new EventEmitter<any>();
   @ViewChild('userInput', { static: false }) userInput: ElementRef<HTMLInputElement>;
-  @ViewChild('assignedUserDp', { static: true }) assignedUserDp: NgbDropdown;
+  @ViewChild('assignedUserDp', { static: false }) assignedUserDp: NgbDropdown;
 
   /**
    * Creates an instance of the QuoteCreateContentComponent with the injected services

@@ -15,11 +15,11 @@
     align-items: center;
     margin: 0 0 8px 0;
 
-    &__help-center {
+    &__help {
         margin-left: 14px;
     }
 
-    .icon__move-light {
+    .icon__dot-vertical {
         opacity: 0;
         cursor: grab;
     }
@@ -27,11 +27,11 @@
     &:hover {
         background-color: $white;
 
-        .icon__move-light {
+        .icon__dot-vertical {
             opacity: 1;
         }
 
-        /deep/.icon__category-more {
+        /deep/.icon__more {
             opacity: 1;
         }
     }
@@ -70,7 +70,7 @@
 }
 
 .category-item-category-body {
-    /deep/.icon__category-more {
+    /deep/.icon__more {
         opacity: 0;
     }
 }

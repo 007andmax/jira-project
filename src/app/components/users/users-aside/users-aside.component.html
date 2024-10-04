@@ -5,7 +5,7 @@
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">Add user</div>
         <div
-            class="qt-aside-modern__header-close icon__close"
+            class="qt-aside-modern__header-close qt-icon icon__close"
             (click)="close()"
         ></div>
     </div>
@@ -18,7 +18,7 @@
                     [src]="user.avatar.base64"
                 >
                 <div
-                    class="upload-photo__no-avatar-icon icon__upload-avtar"
+                    class="upload-photo__no-avatar-icon icon__user-avatar"
                     *ngIf="!user.avatar"
                 ></div>
             </div>
@@ -58,12 +58,12 @@
                     [(ngModel)]="user.firstName"
                     placeholder="Enter First Name"
                 >
-                <mat-error
+                <app-mat-error
                     class="invalid-feedback first-name-invalid"
                     *ngIf="!validate.getFirstName()"
                 >
                     First name must be a minimum of 2 characters long
-                </mat-error>
+                </app-mat-error>
             </div>
             <div class="qt-input-block qt-f50">
                 <div class="qt-input-block__label">Last Name</div>
@@ -86,31 +86,18 @@
                     (blur)="onCheckEmail()"
                     placeholder="Enter Email"
                 >
-                <mat-error
+                <app-mat-error
                     class="invalid-feedback"
                     *ngIf="!validate.getPrimaryContactEmail()"
                 >
                     Please enter a valid email address
-                </mat-error>
-                <mat-error
+                </app-mat-error>
+                <app-mat-error
                     class="invalid-feedback"
                     *ngIf="!validate.getExistPrimaryContactEmail()"
                 >
                     The email address is already occupied
-                </mat-error>
-            </div>
-        </div>
-        <div class="qt-inputs-row">
-            <div class="qt-f50">
-                <app-drop-down
-                    [placeholder]="'Select Industry'"
-                    [list]="industries"
-                    [field]="'name'"
-                    [search]="true"
-                    [change]="true"
-                    [title]="'Industry'"
-                    (onSelectedItem)="onSelectClientIndustry($event)"
-                ></app-drop-down>
+                </app-mat-error>
             </div>
         </div>
         <div class="qt-inputs-row">
@@ -124,7 +111,6 @@
                     appTextArea
                     maxlength="500"
                     cols="30"
-                    [default]="3"
                     rows="3"
                 ></textarea>
             </div>
@@ -185,12 +171,12 @@
                         </div>
                     </div>
                 </div>
-                <mat-error
+                <app-mat-error
                     class="invalid-feedback"
                     *ngIf="!validate.getPhoneNumber(0)"
                 >
                     Please enter a valid phone number
-                </mat-error>
+                </app-mat-error>
             </div>
             <div class="qt-input-block qt-f50">
                 <app-drop-down
@@ -273,12 +259,12 @@
                                 </ng-template>
                             </div>
                         </div>
-                        <mat-error
+                        <app-mat-error
                             class="invalid-feedback"
                             *ngIf="!validate.getPhoneNumber(i)"
                         >
                             Please enter a valid phone number
-                        </mat-error>
+                        </app-mat-error>
                     </div>
                 </div>
             </div>
@@ -382,7 +368,7 @@
                                 <div class="qt-ml-8">
                                     Access to the Customer portal
                                     <i
-                                        class="icon__help default-services-page__question-icon qt-sz-12 qt-ic-c"
+                                        class="qt-icon icon__help default-services-page__question-icon qt-sz-12 qt-ic-c"
                                         (mouseenter)="customerPortalTooltip.show($event.target)"
                                         (mouseleave)="customerPortalTooltip.hide()"
                                     ></i>
@@ -461,9 +447,15 @@
         </div>
     </div>
     <div class="qt-aside-modern__footer">
-        <div class="qt-df">
+        <div class="qt-df qt-w100">
             <button
-                class="qt-button qt-mr-12"
+                class="qt-button --gray qt-mr-12 qt-w100 qt-jc-c"
+                (click)="close()"
+            >
+                Cancel
+            </button>
+            <button
+                class="qt-button qt-w100 qt-jc-c"
                 appDisabledBtn
                 #addBtn="disabled"
                 (onClick)="onAdd()"
@@ -471,12 +463,6 @@
             >
                 <span>Add User</span>
                 <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
-            </button>
-            <button
-                class="qt-button --gray"
-                (click)="close()"
-            >
-                Cancel
             </button>
         </div>
     </div>

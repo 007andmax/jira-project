@@ -20,7 +20,7 @@
         <div class="ellipsis">
             {{'Tkt# ' + ticket.number + ' - ' + ticket.subject}}
             <span
-                *ngIf="ticket.priorityLevel && ticket.priorityLevel.name === 'MEDIUM'"
+                *ngIf="ticket.priorityLevel && ticket.priorityLevel.isDisplay"
                 class="priority-icon"
                 [ngStyle]="{'background-color':  listColors[ticket.priorityLevel.color] && listColors[ticket.priorityLevel.color].textColor ,
                             'border-color':  listColors[ticket.priorityLevel.color] && listColors[ticket.priorityLevel.color].textColor}"

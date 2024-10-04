@@ -6,7 +6,7 @@
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">Write Email</div>
         <div
-            class="qt-aside-modern__header-close icon__close"
+            class="qt-aside-modern__header-close qt-icon icon__close"
             (click)="close()"
         ></div>
     </div>
@@ -24,12 +24,12 @@
                     placeholder="Write Subject line"
                     (input)="validate.resetSubject()"
                 >
-                <mat-error
+                <app-mat-error
                     class="invalid-feedback"
                     *ngIf="!validate.getSubject()"
                 >
                     Subject is required
-                </mat-error>
+                </app-mat-error>
             </div>
         </div>
         <div class="qt-inputs-row">
@@ -174,21 +174,21 @@
         </div>
     </div>
     <div class="qt-aside-modern__footer">
-        <div class="qt-df">
+        <div class="qt-df qt-w100">
             <button
-                class="qt-button qt-mr-12"
+                class="qt-button --gray qt-mr-12 qt-w100 qt-jc-c"
+                (click)="close()"
+            >
+                Cancel
+            </button>
+            <button
+                class="qt-button qt-w100 qt-jc-c"
                 appDisabledBtn
                 #addBtn="disabled"
                 (onClick)="onSend()"
             >
                 <span *ngIf="!addBtn.isBlock()">Send Email</span>
                 <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
-            </button>
-            <button
-                class="qt-button --gray"
-                (click)="close()"
-            >
-                Cancel
             </button>
         </div>
     </div>

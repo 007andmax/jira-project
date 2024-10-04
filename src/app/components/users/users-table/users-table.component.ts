@@ -5,7 +5,6 @@ import { Company } from 'src/app/interfaces/company/company';
 import { UsersService } from 'src/app/services/users/users.service';
 import { CurrentUser } from 'src/class/current-user/current-user';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
-
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { ARCHIVE_USER, DEARCHIVE_USER } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
@@ -16,8 +15,6 @@ import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-s
 import { USERS } from 'src/app/const/emails';
 import { TYPE_LIST_ALL_USERS, TYPE_LIST_COMPANY_USERS, TYPE_LIST_MARKETING_USERS } from 'src/app/const/users';
 import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
-import { CrmCompanyJobType } from '../../setting/crm-settings/crm-company-job-type/class/crm-company-job-type';
-import { UserDefaultSubscriptionAdd } from '../class/user-default-subscription-add';
 import { UserDefaultSubscription } from '../class/user-default-subscription';
 import { UserCustomSubscription } from '../class/user-custom-subscription';
 import { UserTableCustomSubscriptionComponent } from './user-table-custom-subscription/user-table-custom-subscription.component';
@@ -29,6 +26,7 @@ import { UserCustomerCompaniesDefaultSubscribtionAdd } from '../class/user-custo
 import { TechUsersService } from 'src/app/services/setting/tech-users.service';
 import { UsersCheckUseComponent } from '../users-check-use/users-check-use.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
 
 @Component({
   selector: 'app-users-table',
@@ -41,15 +39,16 @@ export class UsersTableComponent implements OnInit, OnDestroy {
   @Input() selected: boolean = false;
   @Input() user: User;
   @Input() type: string;
+  @Input() toggleFilter: boolean = false;
   @Input() showArchivedUsers: boolean;
   @Output() onSelectUser = new EventEmitter<any>();
   @Input() jobTitleList: Array<CrmCompanyJobTitle> = [];
   @Input() listCustomSubscription: Array<UserCustomSubscription> = [];
   @Input() companyId: string;
-  industries: Array<CrmCompanyIndustry> = [];
   @ViewChild('customSubscription', { static: false }) customSubscription: UserTableCustomSubscriptionComponent;
   companies: Array<Company> = [];
   currentUser: CurrentUser = new CurrentUser();
+  defaultSubscriptions: UserDefaultSubscription = new UserDefaultSubscription(null);
   sub: Subscription = new Subscription();
   TYPE_LIST_ALL_USERS = TYPE_LIST_ALL_USERS;
   TYPE_LIST_MARKETING_USERS = TYPE_LIST_MARKETING_USERS;
@@ -66,7 +65,7 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     private permissionsService: PermissionsService,
     private techUsersService: TechUsersService,
     public customerPortalStateService: CustomerPortalStateService,
-    private elRef: ElementRef) { }
+    private usersRealTimeService: UsersRealTimeService) { }
 
 
   onChangeDefaultSubscriptions(subscriptions) {
@@ -98,10 +97,7 @@ export class UsersTableComponent implements OnInit, OnDestroy {
       sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
         1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
   }
-  getUserIndustry() {
-    let find = this.industries.find(item => item.id === this.user.userIndustryId);
-    return (find) ? find.name : '';
-  }
+
   getJobTitle() {
     let find = this.jobTitleList.find(item => item.id === this.user.jobTitleId);
     return (find) ? find.name : '';
@@ -109,14 +105,12 @@ export class UsersTableComponent implements OnInit, OnDestroy {
   getUserName() {
     return `${this.user.firstName} ${this.user.lastName}`;
   }
+  getJobTitleCompany() {
+    return this.user.customerCompaniesInfo.find(item => item.companyId == this.companyId).jobTitleDto;
+  }
   showDetailUser() {
     this.usersStateService.showDetailUser(this.user);
     this.cd.markForCheck();
-  }
-  getUserCompanyName() {
-    if (this.user.company.isDefault) return '';
-    let index = this.companies.findIndex(item => item.id === this.user.company.id);
-    return (index > -1) ? this.companies[index].name : '';
   }
   isPrimaryContact() {
     if (!this.customerPortalStateService.isCustomerPortal && this.companyId) return this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).isPrimaryContact;
@@ -128,32 +122,36 @@ export class UsersTableComponent implements OnInit, OnDestroy {
 
     })
   }
-  getDefaultSubscriptions() {
-    return (this.companyId) ? this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).defaultSubscriptions : new UserDefaultSubscription(null);
-  }
   edit() {
     this.usersStateService.setUserForEdit(new User(JSON.parse(JSON.stringify(this.user))));
     this.usersStateService.onOpenEditAsige();
     this.cd.markForCheck();
   }
   ngOnInit() {
-    this.industries = this.crmStateService.getIndustryList();
-    let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
-      this.industries = data;
-      this.cd.detectChanges();
-    })
-    this.sub.add(onGetIndustry);
     if (this.companiesStateService.getCompanies().length > 0) this.companies = this.companiesStateService.getCompanies();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = data;
     })
+    this.sub.add(getOnCompanies);
     this.currentUser = this.usersStateService.getCurrentUser();
     this.cd.markForCheck();
     //this.sub.add(getOnCompanies);
-    this.usersStateService.onSelectAll.subscribe(data => {
+    let onSelectAll = this.usersStateService.onSelectAll.subscribe(data => {
       this.user.selected = data;
       this.cd.markForCheck();
     })
+    this.sub.add(onSelectAll);
+    this.defaultSubscriptions = (this.companyId) ? this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).defaultSubscriptions : new UserDefaultSubscription(null);
+    let stompClient = this.usersRealTimeService.changeSubscriptionsUsers.subscribe(newChange => {
+      if (newChange.action === 'DEFAULT_SUBSCRIPTION_SAVED') {
+        if (this.user.id == newChange.data.userId && this.companyId == newChange.data.companyId) {
+          this.defaultSubscriptions = new UserDefaultSubscription(newChange.data.defaultSubscriptions);
+        }
+        this.cd.detectChanges();
+      }
+      this.cd.detectChanges();
+    });
+    this.sub.add(stompClient);
   }
   delete() {
     if (this.user.customerCompaniesInfo.find(item => item.isPrimaryContact)) {
@@ -172,10 +170,6 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to archive ${this.user.firstName + ' ' + this.user.lastName}`;
     this.usersStateService.setUserForArchive(this.user);
-    this.cd.markForCheck();
-  }
-  showUserDetails() {
-    this.elRef.nativeElement.querySelector('.new-users-content__list--item').classList.toggle('show-details');
     this.cd.markForCheck();
   }
   restore() {
@@ -202,9 +196,6 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     this.draftEmailStateService.addSelectedUser(this.user);
     this.draftEmailStateService.toggleAsideForAdd();
     this.cd.markForCheck();
-  }
-  getPermissionCustomerUser(permission) {
-    return this.currentUser.customerCompaniesInfo.find(item => item.companyId === this.customerPortalStateService.getUsersFilters().company).customerUserRole.getPermission(permission);
   }
   public trackById(index, item) {
     return item.id;

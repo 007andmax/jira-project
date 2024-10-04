@@ -1,5 +1,5 @@
 export class DeviceExtendedReportBios {
     manufacturer: string;
-    release_date: string;
+    releaseDate: string;
     version: string;
 }

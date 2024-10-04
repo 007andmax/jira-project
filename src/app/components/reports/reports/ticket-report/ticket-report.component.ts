@@ -5,6 +5,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import * as moment from "moment";
 import { Company } from 'src/app/interfaces/company/company';
 import { User } from 'src/app/components/users/class/user';
+
 @Component({
   selector: 'app-ticket-report',
   templateUrl: './ticket-report.component.html',

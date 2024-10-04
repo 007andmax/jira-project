@@ -27,6 +27,7 @@ import { TicketsListService } from '../../services/tickets-list.service';
 import { TicketProfileFormUpdate } from '../../ticket-edit-aside/class/ticket-profile-form-update';
 import { TicketStateService } from '../../ticket-edit-aside/services/ticket-state.service';
 import { TicketProfileFormUpdateNoteListComponent } from '../ticket-profile-form-update-note-list/ticket-profile-form-update-note-list.component';
+import { TicketDetailProfileFormUpdateHeaderComponent } from './ticket-detail-profile-form-update-header/ticket-detail-profile-form-update-header.component';
 
 @Component({
   selector: 'ticket-detail-profile-form-update',
@@ -36,6 +37,7 @@ import { TicketProfileFormUpdateNoteListComponent } from '../ticket-profile-form
 export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy {
   ticketProfile: TicketProfile = new TicketProfile();
   ticketProfileFormUpdate: TicketProfileFormUpdate = new TicketProfileFormUpdate();
+  @ViewChild('updateHeader', { static: false }) updateHeader: TicketDetailProfileFormUpdateHeaderComponent;
   @ViewChild('update_closeBtn', { static: false }) update_closeBtn: DisabledBtnDirective;
   @ViewChild('updateBtn', { static: false }) updateBtn: DisabledBtnDirective;
   @ViewChild('addMoreMobileBtn', { static: false }) addMoreMobileBtn: DisabledBtnDirective;
@@ -233,9 +235,11 @@ export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy
   }
   public setTab(data) {
     this.tab = data;
+
     this.ticketProfileFormUpdate.setType(data);
     this.ticketProfileFormUpdate.clearShares();
     if (this.tab === 'NOTE' && this.noteList && this.ticketProfile.id) this.noteList.onGetNoteList()
+    if (this.updateHeader) this.updateHeader.setTab(this.tab);
   }
 
   onChangeProducts(data) {
@@ -347,10 +351,11 @@ export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy
   ngOnInit() {
     this.currentUser = this.usersStateService.getCurrentUser();
     this.ticketProfileFormUpdate.setTechUser(this.currentUser);
-    this.usersStateService.onGetCurrentUser.subscribe(data => {
+    let onGetCurrentUser = this.usersStateService.onGetCurrentUser.subscribe(data => {
       this.currentUser = data;
       this.ticketProfileFormUpdate.setTechUser(this.currentUser);
     })
+    this.sub.add(onGetCurrentUser);
     let oneTimeConnectionArray = this.devicesRealTimeService.oneTimeConnectionArray.subscribe(newChange => {
       if (newChange.action === 'ONE_TIME_DOWNLOADED' || newChange.action === 'ONE_TIME_INSTALLED' || newChange.action === 'ONE_TIME_CONNECTION_OPEN' || newChange.action === 'ONE_TIME_URL_GENERATED' || newChange.action === 'ONE_TIME_URL_OPEN' || newChange.action === 'ONE_TIME_ONLINE' || newChange.action === 'ONE_TIME_OFFLINE') {
         if (newChange.data.oneTime) {

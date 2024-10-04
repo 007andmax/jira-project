@@ -1,4 +1,4 @@
-<div class="qt-page-list page-list-ticket">
+<div class="qt-page-list page-list-ticket --sticky-breadcrumbs">
     <app-tickets-header #header></app-tickets-header>
     <div class="qt-page-list__container">
         <div class="qt-page-list__body">
@@ -48,8 +48,9 @@
                 class="qt-page-list__body-table-container"
                 [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}"
             >
-                <table class="qt-table-modern qt-page-list__body-tbody ticket-table company-tickets-table">
-                    <tbody
+                <div class="qt-table-modern qt-page-list__body-tbody ticket-table company-tickets-table">
+                    <div
+                        class="tbody"
                         infiniteScroll
                         [infiniteScrollContainer]="container"
                         [infiniteScrollDistance]="2"
@@ -71,8 +72,8 @@
                                 [setTicket]="ticket"
                             ></app-tickets-table-item>
                         </ng-template>
-                    </tbody>
-                </table>
+                    </div>
+                </div>
                 <div
                     class="no-exist-elements"
                     *ngIf="!showPreloader && tickets.length == 0"
@@ -99,7 +100,7 @@
                     class="qt-button --square-md --gray pointer"
                     (click)="onToggleFilter(false)"
                 >
-                    <div class="icon__close qt-bg-contain qt-sz-16 pointer"></div>
+                    <div class="qt-icon icon__close qt-bg-contain qt-sz-16 pointer"></div>
                 </div>
             </div>
             <div class="aside-filters-content">

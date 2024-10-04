@@ -1,14 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { GlNumber } from '../../class/gl-number';
-import { CurrentUser } from 'src/class/current-user/current-user';
-import { ActivatedRoute } from '@angular/router';
 import { ReportsStateService } from 'src/app/states/reports/reports-state.service';
-import { ReportsService } from 'src/app/services/reports/reports.service';
-import { AppService } from 'src/app/states/app/app.service';
-import { CompaniesService } from 'src/app/services/company/companies.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
-import { UsersStateService } from 'src/app/states/users/users-state.service';
-import * as $ from 'jquery';
 import * as moment from "moment";
 import { GlNumberItem } from '../../class/gl-number-item';
 
@@ -28,14 +21,9 @@ export class GlNumberComponent implements OnInit {
 
   headers = [];
   list = [];
-  constructor(private route: ActivatedRoute, private reportsStateService: ReportsStateService,
-    private reportsService: ReportsService,
+  constructor(private reportsStateService: ReportsStateService,
     public cd: ChangeDetectorRef,
-    private elRef: ElementRef,
-    private appService: AppService,
-    private companiesService: CompaniesService,
     private companiesStateService: CompaniesStateService,
-    private usersStateService: UsersStateService,
   ) { }
   ngOnInit() {
 

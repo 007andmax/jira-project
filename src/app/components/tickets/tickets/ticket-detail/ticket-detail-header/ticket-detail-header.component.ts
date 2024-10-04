@@ -3,7 +3,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
-import { User } from 'src/app/components/users/class/user';
 import { MOVE_TO_SPAM_TICKET_DETAIL, MOVE_TO_TRASH_TICKET_DETAIL } from 'src/app/const/confirm';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
@@ -51,9 +50,10 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.usersStateService.getCurrentUser()) this.currentUser = this.usersStateService.getCurrentUser();
-    this.usersStateService.getOnGetCurrentuser().subscribe(data => {
+    let getOnGetCurrentuser = this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.currentUser = data;
     })
+    this.sub.add(getOnGetCurrentuser);
     this.interval = setInterval(() => {
       if (this.second == 59) {
         if (this.minute == 59) {
@@ -86,7 +86,6 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
     return this.customerPortalStateService.checkEditTicket(this.usersStateService.getCurrentUser(), this.ticketProfile.createdUserId, this.ticketProfile.companyId);
   }
   checkClose() {
-    if (this.ticketProfile.updates.length === 0) return true;
     let completeServices = true;
     let completeProducts = true;
     let completeTasks = true;
@@ -106,6 +105,7 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
     this.update_closeBtn.setDisabled(true);
     this.isUpdateAndClose = true;
     this.ticketsService.updateTicket(this.getDataForClose(), true).subscribe(data => {
+      this.ticketStateService.fastCloseTicket();
     }, err => {
       this.isUpdateAndClose = false;
       this.update_closeBtn.setDisabled(false);

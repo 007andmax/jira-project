@@ -1,9 +1,7 @@
 import { Input } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
-import { PasswordDeviceUser } from 'src/app/components/password-manager/class/password-device-user';
+import { Component } from '@angular/core';
 import { PasswordManagerLinkedComponent } from 'src/app/components/password-manager/password-manager-add-aside/password-manager-linked/password-manager-linked.component';
 import { TicketProfile } from '../../class/ticket-profile';
-import { Device } from 'src/app/components/company-devices/class/device';
 
 @Component({
   selector: 'ticket-detail-linked-agents',
@@ -29,7 +27,7 @@ export class TicketDetailLinkedAgentsComponent extends PasswordManagerLinkedComp
     this.sub.add(getOnCompanies);
   }
   getDevicesCompany(data) {
-    this.devices = data;
+    this.devices = data.filter(item => !item.isCustom);
     this.preloader = false;
     if (this.selectedCompanyId) this.onSelectCompany(this.selectedCompanyId);
   }

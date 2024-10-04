@@ -1,6 +1,7 @@
 <div class="ticket-edit-user-tags">
     <span *ngIf="type == 'DETAIL-TICKET'">Notify to All:</span>
-    <mat-form-field
+    <app-mat-form-field
+        #formField
         ngbDropdown
         [autoClose]="'outside'"
         [placement]="placement"
@@ -8,17 +9,18 @@
         [container]="container"
         (openChange)="onCloseDropDown($event)"
     >
-        <mat-chip-list
+        <app-mat-chip-list
             #chipList
             aria-label="Fruit selection"
             ngbDropdownAnchor
+            [items]="selectedUsers"
+            (onChangeItems)="formField.checkSelectedItems(selectedUsers)"
         >
-            <mat-chip
+            <app-mat-chip
                 class="selected-tag-user"
                 *ngFor="let user of selectedUsers; let i = index"
-                [selectable]="selectable"
-                [removable]="removable"
-                (removed)="remove(i)"
+                [isRemove]="removable"
+                (onClose)="remove(i)"
             >
                 <div class="assigne-user-item">
                     <div
@@ -27,26 +29,18 @@
                         [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
                     ></div>
                     <div [textContent]="getUserName(user)"></div>
-                    <mat-icon
-                        matChipRemove
-                        *ngIf="removable"
-                    >
-                        cancel
-                    </mat-icon>
                 </div>
-            </mat-chip>
+            </app-mat-chip>
             <input
                 *ngIf="type != 'DETAIL_TICKET_ASSIGNED_USER'"
                 #userInput
                 class="pointer"
                 [formControl]="userCtrl"
-                [matChipInputFor]="chipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                 (input)="onSearchUser($event)"
                 id="dropdown"
                 ngbDropdownToggle
             >
-        </mat-chip-list>
+        </app-mat-chip-list>
         <span
             class="placeholder-detail-ticket"
             *ngIf="type == 'DETAIL_TICKET_ASSIGNED_USER' && selectedUsers.length == 0"
@@ -67,17 +61,14 @@
                     id="search-user"
                     class="pointer"
                     [formControl]="userCtrl"
-                    [matChipInputFor]="chipList"
-                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                     (input)="onSearchUser($event)"
                     placeholder="Search Users"
                 >
             </div>
             <div class="autocomplete-container">
-                <mat-option
-                    class="qt-ai-c"
+                <app-mat-chip
+                    class="qt-ai-c pointer"
                     *ngFor="let user of users"
-                    [value]="user"
                     (click)="selected(user)"
                 >
                     <div class="assigne-user-item">
@@ -96,11 +87,11 @@
                         ></span>
                         <i
                             *ngIf="isSelected(user)"
-                            class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
+                            class="qt-icon icon__done qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
                         ></i>
                     </div>
-                </mat-option>
+                </app-mat-chip>
             </div>
         </div>
-    </mat-form-field>
+    </app-mat-form-field>
 </div>

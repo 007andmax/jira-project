@@ -1,7 +1,10 @@
 <div class="contracts-page__aside qt-aside-modern --x-large">
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">Preview Contract</div>
-        <div class="qt-aside-modern__header-close icon__close" (click)="closed()"></div>
+        <div
+            class="qt-aside-modern__header-close qt-icon icon__close"
+            (click)="closed()"
+        ></div>
     </div>
     <app-contracts-aside-hourly-billing-preview
         *ngIf="serviceAgreement.type === 'HOURLY'"
@@ -21,6 +24,12 @@
     ></app-contracts-aside-product-service-preview>
     <div class="qt-aside-modern__footer">
         <div class="qt-df">
+            <button
+                class="qt-button --gray qt-mr-12"
+                (click)="closed()"
+            >
+                Cancel
+            </button>
             <button
                 class="qt-button qt-mr-12"
                 (click)="copy()"
@@ -47,12 +56,6 @@
                 *ngIf="serviceAgreement.status !== 'TERMINATED'"
             >
                 Terminate and close
-            </button>
-            <button
-                class="qt-button --gray"
-                (click)="closed()"
-            >
-                Cancel
             </button>
         </div>
     </div>

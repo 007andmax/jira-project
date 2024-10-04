@@ -11,6 +11,7 @@ export class UserCustomerCompaniesInfo {
     "defaultSubscriptions": UserDefaultSubscription;
     "hasAccess": boolean;
     "isPrimaryContact": boolean = false;
+    isArchived: boolean = false;
     constructor(data = null) {
         if (data) {
             for (const key in data) {

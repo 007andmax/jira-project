@@ -1,27 +1,30 @@
 <div
     class="light-dropdown"
     ngbDropdown
-    #products="ngbDropdown"
+    #dp="ngbDropdown"
     [placement]="placement"
 >
     <p
         class="title-filter qt-mb-8"
         [textContent]="title"
     ></p>
-    <mat-form-field ngbDropdownAnchor>
-        <mat-chip-list
+    <app-mat-form-field
+        #formField
+        ngbDropdownAnchor
+    >
+        <app-mat-chip-list
             #chipList
-            aria-label="Fruit selection"
+            [items]="selectedTag"
+            (onChangeItems)="formField.checkSelectedItems(selectedTag)"
         >
             <app-dynamic-tooltip
                 [position]="'top'"
                 #productTooltip
             ></app-dynamic-tooltip>
-            <mat-chip
+            <app-mat-chip
                 *ngFor="let tag of selectedTag; let i = index"
-                [selectable]="selectable"
-                [removable]="removable"
-                (removed)="remove(i)"
+                [isRemove]="removable"
+                (onClose)="remove(i)"
             >
                 <div class="assigne-user-item">
                     <div
@@ -43,28 +46,19 @@
                     >
                         {{reduceItemName(tag)}}
                     </div>
-                    <mat-icon
-                        matChipRemove
-                        *ngIf="removable"
-                    >
-                        cancel
-                    </mat-icon>
                 </div>
-            </mat-chip>
+            </app-mat-chip>
             <input
                 id="dropdownServices"
                 ngbDropdownToggle
                 [placeholder]="placeholder"
                 #userInput
                 class="pointer"
-                [matChipInputFor]="chipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                [matChipInputAddOnBlur]="addOnBlur"
                 autocomplete="off"
                 (input)="onSearch($event)"
             >
-        </mat-chip-list>
-    </mat-form-field>
+        </app-mat-chip-list>
+    </app-mat-form-field>
     <div
         class="dropdown-menu"
         ngbDropdownMenu
@@ -93,7 +87,7 @@
                 ></div>
                 <div
                     *ngIf="isSelected(item)"
-                    class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain filter-users-check"
+                    class="qt-icon icon__done qt-za-20 qt-sz-20 qt-bg-contain filter-users-check"
                 ></div>
             </div>
         </ng-template>

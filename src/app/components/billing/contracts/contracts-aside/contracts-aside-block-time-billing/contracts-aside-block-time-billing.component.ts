@@ -5,19 +5,17 @@ import { ContractsBlockTime } from '../class/contracts-block-time';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { ContractsBlockTimeService } from '../class/contracts-block-time-service';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
-import { DefaultServicesService } from 'src/app/services/default-services/default-services.service';
+import { NonContractServicesService } from 'src/app/services/non-contract-services/non-contract-services.service';
 import * as moment from "moment";
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TechUsersStateService } from 'src/app/components/shared/tech-users/services/tech-users-state.service';
 import { ContractsBlockTimeValidate } from '../class/contracts-block-time-validate';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ContractsConfirmComponent } from '../../contracts-confirm/contracts-confirm.component';
-
 import { Subscription } from 'rxjs';
 import { СontractsBlockTimeShare } from '../class/contracts-block-time-share';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
 import { ContractsAsideTopComponent } from '../contracts-aside-top/contracts-aside-top.component';
-import { InvoiceFormTicketEditTaxesComponent } from '../../../billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { Tax } from 'src/class/taxes/tax';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
@@ -57,7 +55,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     private сontractsStateService: ContractsStateService,
     private contractsService: ContractsService,
     private usersStateService: UsersStateService,
-    private defaultServicesService: DefaultServicesService,
+    private nonContractServicesService: NonContractServicesService,
     private techState: TechUsersStateService,
     private modalService: NgbModal,
     private taxesStateService: TaxesStateService,
@@ -88,6 +86,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
       this.taxes = data;
       this.setDefaultTaxes(data);
     })
+    this.sub.add(getOnTaxess);
     if (this.сontractsStateService.getContractForCopy()) this.onInitCopy();
   }
   private setDefaultTaxes(lsitTaxes) {
@@ -154,7 +153,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
       this.cd.detectChanges();
       return;
     }
-    this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
+    this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
       moment(this.contractsBlockTime.endDate).format('DD MMM YYYY'), this.contractsBlockTime.companyId, null, this.contractsBlockTime.getAllServicesName()).subscribe(data => {
         if (Object.keys(data).length === 0) {
           this.contractsService.createContract(createBillableItem, this.contractsBlockTime.getDataForCreate()).subscribe(res => {
@@ -181,7 +180,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
   }
   onCheckDuplicatedCustomService() {
     if (this.contractsBlockTime.blockTimeServices.length === 0 || !this.contractsBlockTime.checkDuplicatedBlockTimeServices()) return;
-    this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
+    this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
       moment(this.contractsBlockTime.endDate).format('DD MMM YYYY'), this.contractsBlockTime.companyId, null, this.contractsBlockTime.getBlockTimeServicesName()).subscribe(data => {
         if (Object.keys(data).length > 0) {
           let names = Object.keys(data);
@@ -196,7 +195,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
   }
   onCheckDuplicatedService() {
     if (this.contractsBlockTime.services.length === 0 || !this.contractsBlockTime.checkDuplicatedServices()) return;
-    this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
+    this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
       moment(this.contractsBlockTime.endDate).format('DD MMM YYYY'), this.contractsBlockTime.companyId, null, this.contractsBlockTime.getServicesName()).subscribe(data => {
         if (Object.keys(data).length > 0) {
           let names = Object.keys(data);

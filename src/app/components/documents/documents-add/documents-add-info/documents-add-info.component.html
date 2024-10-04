@@ -4,13 +4,13 @@
 >
     <div class="qt-aside-modern__header">
         <div
-            class="toggle-aside icon__panel-open qt-mr-16"
+            class="toggle-aside qt-icon icon__panel-open qt-mr-16"
             [ngClass]="{'opened' : openAside}"
             (click)="toggleAside()"
         ></div>
         <div class="qt-aside-modern__header-title qt-mr-auto">Create Document</div>
         <div
-            class="qt-aside-modern__header-close icon__close"
+            class="qt-aside-modern__header-close qt-icon icon__close"
             (click)="goToDocumentsList()"
         >
         </div>
@@ -39,146 +39,147 @@
             >
                 <div class="qt-inputs-row --required">
                     <div class="qt-input-block">
-                      <div class="qt-input-block__label">Document Title</div>
-                      <input
-                        type="text"
-                        class="qt-input-40 documents-add-body__input"
-                        placeholder="Printer Installation Guide"
-                        [(ngModel)]="documentAdd.title"
-                        [ngClass]="{'--input-error':!documentValidate.getTitle() || !documentValidate.getUniqueTittle()}"
-                        (blur)="onChangeTitle()"
-                        min="1"
-                        max="250"
-                      >
-                      <mat-error
-                        class="invalid-feedback"
-                        *ngIf="!documentValidate.getTitle()"
-                        [textContent]="'Document title is required'"
-                      >
-                      </mat-error>
-                      <mat-error
-                        class="invalid-feedback"
-                        *ngIf="!documentValidate.getUniqueTittle()"
-                        [textContent]="'Document title value must be unique'"
-                      >
-                      </mat-error>
-                    </div>
-                </div>
-                <div class="qt-inputs-row --required">
-                    <div class="qt-input-block">
-                      <div class="qt-input-block__label">Document Description</div>
-                      <textarea
-                        class="qt-input-block__textarea"
-                        appTextArea
-                        [limit]="160"
-                        minlength="1"
-                        maxlength="1000"
-                        placeholder="Write Description"
-                        [(ngModel)]="documentAdd.description"
-                      ></textarea>
-                    </div>
-                </div>
-                <div class="qt-inputs-row --required">
-                    <div class="qt-input-block">
-                      <div class="qt-df qt-jc-sb">
-                        <div class="qt-input-block__label">Document Category</div>
-                        <div
-                          class="qt-fs-13 qt-lh-133 qt-color-info ng-star-inserted"
-                          (click)="toggleEditCategories = true"
-                          *ngIf="getPermissions('EDIT_CATEGORY')"
+                        <div class="qt-input-block__label">Document Title</div>
+                        <input
+                            type="text"
+                            class="qt-input-40 documents-add-body__input"
+                            placeholder="Printer Installation Guide"
+                            [(ngModel)]="documentAdd.title"
+                            [ngClass]="{'--input-error':!documentValidate.getTitle() || !documentValidate.getUniqueTittle()}"
+                            (blur)="onChangeTitle()"
+                            min="1"
+                            max="250"
                         >
-                          Edit
+                        <app-mat-error
+                            class="invalid-feedback"
+                            *ngIf="!documentValidate.getTitle()"
+                            [textContent]="'Document title is required'"
+                        >
+                        </app-mat-error>
+                        <app-mat-error
+                            class="invalid-feedback"
+                            *ngIf="!documentValidate.getUniqueTittle()"
+                            [textContent]="'Document title value must be unique'"
+                        >
+                        </app-mat-error>
+                    </div>
+                </div>
+                <div class="qt-inputs-row --required">
+                    <div class="qt-input-block">
+                        <div class="qt-input-block__label">Document Description</div>
+                        <textarea
+                            class="qt-input-block__textarea"
+                            appTextArea
+                            minlength="1"
+                            maxlength="1000"
+                            placeholder="Write Description"
+                            [(ngModel)]="documentAdd.description"
+                        ></textarea>
+                    </div>
+                </div>
+                <div class="qt-inputs-row --required">
+                    <div class="qt-input-block">
+                        <div class="qt-df qt-jc-sb">
+                            <div class="qt-input-block__label">Document Category</div>
+                            <div
+                                class="qt-fs-13 qt-lh-133 qt-color-info ng-star-inserted"
+                                (click)="toggleEditCategories = true"
+                                *ngIf="getPermissions('EDIT_CATEGORY')"
+                            >
+                                Edit
+                            </div>
                         </div>
-                      </div>
-                      <app-drop-down
-                        #categoriesDp
-                        [class]="['qt-select-input-40']"
-                        [placeholder]="'Select Category'"
-                        [errorMessage]="'Category is required'"
-                        [editItem]="getSelectedCategory()"
-                        [field]="'name'"
-                        [add]="getPermissions('CREATE_CATEGORY')"
-                        [list]="categories"
-                        [search]="true"
-                        [change]="true"
-                        (onSelectedItem)="onSelectCategory($event)"
-                        (onAddItem)="onAddCategory($event)"
-                      >
-                      </app-drop-down>
+                        <app-drop-down
+                            #categoriesDp
+                            [class]="['qt-select-input-40']"
+                            [placeholder]="'Select Category'"
+                            [errorMessage]="'Category is required'"
+                            [editItem]="getSelectedCategory()"
+                            [field]="'name'"
+                            [add]="getPermissions('CREATE_CATEGORY')"
+                            [list]="categories"
+                            [search]="true"
+                            [change]="true"
+                            (onSelectedItem)="onSelectCategory($event)"
+                            (onAddItem)="onAddCategory($event)"
+                        >
+                        </app-drop-down>
                     </div>
                 </div>
                 <div class="qt-inputs-row">
                     <div class="qt-input-block">
-                      <documents-linked
-                        #linked
-                        [isDisabled]="templateId"
-                        [editItems]="documentAdd.linked"
-                        (onSelectedItem)="onChangeLinked($event)"
-                      ></documents-linked>
+                        <documents-linked
+                            #linked
+                            [isDisabled]="templateId"
+                            [editItems]="documentAdd.linked"
+                            (onSelectedItem)="onChangeLinked($event)"
+                        ></documents-linked>
                     </div>
                 </div>
                 <div class="qt-inputs-row">
                     <div class="qt-input-block">
-                      <div class="qt-input-block__label">Tags</div>
-                      <app-company-tags
-                        class="documents-filter-tags"
-                        [selectedTag]="documentAdd.tags"
-                        (tagsChange)="onSelectTags($event)"
-                      ></app-company-tags>
+                        <div class="qt-input-block__label">Tags</div>
+                        <app-company-tags
+                            class="documents-filter-tags"
+                            [selectedTag]="documentAdd.tags"
+                            (tagsChange)="onSelectTags($event)"
+                        ></app-company-tags>
                     </div>
                 </div>
                 <div class="qt-inputs-row checkbox-wrapper">
                     <div class="with-checkbox">
                         <label
-                          class="qt-checkbox"
-                          [ngClass]="{'disabled':templateId}"
+                            class="qt-checkbox"
+                            [ngClass]="{'disabled':templateId}"
                         >
-                          <input
-                            id
-                            type="checkbox"
-                            [disabled]="templateId"
-                            [(ngModel)]="requiredCompanyType"
-                            (change)="onResetCompanyType()"
-                          >
-                          <span></span>
-                          <div>Required by Company Type</div>
-                          <i
-                            class="icn-sm icon__help"
-                            placement="top"
-                            ngbTooltip="The required type value can be used only for templates"
-                          ></i>
+                            <input
+                                id
+                                type="checkbox"
+                                [disabled]="templateId"
+                                [(ngModel)]="requiredCompanyType"
+                                (change)="onResetCompanyType()"
+                            >
+                            <span></span>
+                            <div>Required by Company Type</div>
+                            <i
+                                class="icn-sm qt-icon icon__help"
+                                placement="top"
+                                ngbTooltip="The required type value can be used only for templates"
+                            ></i>
                         </label>
                     </div>
                 </div>
                 <div class="qt-inputs-row">
-                   <div class="qt-input-block">
-                     <app-drop-down
-                       #companyTypeDp
-                       class="dropdown"
-                       [placeholder]="'Select Company Type'"
-                       [editItem]="getSelectedClientType()"
-                       [list]="companyTypes"
-                       [field]="'title'"
-                       [search]="true"
-                       [change]="true"
-                       [isDisabled]="!requiredCompanyType"
-                       heightInput="40px"
-                       widthInput="100%"
-                       (onSelectedItem)="onSelectCompanyType($event)"
-                     ></app-drop-down>
-                   </div>
+                    <div class="qt-input-block">
+                        <app-drop-down
+                            #companyTypeDp
+                            class="dropdown"
+                            [placeholder]="'Select Company Type'"
+                            [editItem]="getSelectedClientType()"
+                            [list]="companyTypes"
+                            [field]="'title'"
+                            [search]="true"
+                            [change]="true"
+                            [isDisabled]="!requiredCompanyType"
+                            heightInput="40px"
+                            widthInput="100%"
+                            (onSelectedItem)="onSelectCompanyType($event)"
+                        ></app-drop-down>
+                    </div>
                 </div>
                 <div class="qt-inputs-row">
                     <div class="qt-input-block qt-f50">
-                      <div class="qt-input-block__label">Document Review Date</div>
-                      <app-date-picker
-                        #reviewDp
-                        [editDate]="documentAdd.parseReviewDate()"
-                        [placement]="'top'"
-                        [editMode]="true"
-                        [useMinDate]="false"
-                        (onChange)="onChangeReviewDate($event)"
-                      ></app-date-picker>
+                        <div class="qt-input-block__label">Document Review Date</div>
+                        <app-date-picker
+                            #reviewDp
+                            [editDate]="documentAdd.parseReviewDate()"
+                            [placement]="'top'"
+                            [editMode]="true"
+                            [useMinDate]="false"
+                            [container]="'body'"
+                            [dropdownClass]="'date-picker'"
+                            (onChange)="onChangeReviewDate($event)"
+                        ></app-date-picker>
                     </div>
                 </div>
             </div>

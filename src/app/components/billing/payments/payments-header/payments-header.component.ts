@@ -1,11 +1,9 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
-import { InvoicesService } from 'src/app/services/invoices/invoices.service';
 import { PaymentsService } from 'src/app/services/payments/payments.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { ReportsService } from 'src/app/services/reports/reports.service';
 import { AppService } from 'src/app/states/app/app.service';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
-import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
 import { PaymentsStateService } from 'src/app/states/payments/payments-state.service';
 import { PaymentsFilterComponent } from './payments-filter/payments-filter.component';
 
@@ -15,7 +13,6 @@ import { PaymentsFilterComponent } from './payments-filter/payments-filter.compo
   styleUrls: ['./payments-header.component.scss']
 })
 export class PaymentsHeaderComponent implements OnInit {
-
   @ViewChild('filter', { static: true }) filter: PaymentsFilterComponent;
   countFilter: number = 0;
   toggleFilter: boolean = false;

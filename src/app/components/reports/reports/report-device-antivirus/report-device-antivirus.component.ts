@@ -1,5 +1,5 @@
 import { DatePipe } from "@angular/common";
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
@@ -12,15 +12,15 @@ import { CompaniesStateService } from "src/app/states/company/companies-state.se
 import { DraftEmailStateService } from "src/app/states/draft-email/draft-email-state.service";
 import { LeftPanelStateService } from "src/app/states/left-panel/left-panel-state.service";
 import { DeviceAntivirusReport } from "../../class/device-antivirus-report";
-import { ReportSendEmailComponent } from "../../report-additional-actions/report-send-email/report-send-email.component";
 import { DeviceAntivirusReportFilter } from "./Class/device-antivirus-report";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "report-device-antivirus",
   templateUrl: "./report-device-antivirus.component.html",
   styleUrls: ["./report-device-antivirus.component.scss"],
 })
-export class ReportDeviceAntivirusComponent implements OnInit {
+export class ReportDeviceAntivirusComponent implements OnInit, OnDestroy {
   @ViewChild('dropdownDevice', { static: true }) dropdownDevice: DropDownComponent;
   clientName: string;
   companies = [];
@@ -39,19 +39,18 @@ export class ReportDeviceAntivirusComponent implements OnInit {
   fileName: string = "device-antivirus-report";
   accountType = "CLIENT";
   pipe = new DatePipe("en-US");
-
+  sub: Subscription = new Subscription();
   constructor(
     private agentService: AgentService,
-    private companiesState: CompaniesStateService,
     private companiesStateService: CompaniesStateService,
     public leftPanelStateService: LeftPanelStateService,
-    private modalService: NgbModal,
     private commonHttpServices: CommonHttpServices,
     private toastr: ToastrService,
     private excelService: ExcelService,
     public elRef: ElementRef,
     public draftEmailStateService: DraftEmailStateService,
   ) { }
+
 
   ngOnInit() {
     this.clientName = "All Companies";
@@ -61,9 +60,10 @@ export class ReportDeviceAntivirusComponent implements OnInit {
 
   setPreviewDataDevice() {
     if (this.companiesStateService.getCompanies().length > 0) this.companies = this.getClientsList(this.companiesStateService.getCompanies());
-    this.companiesStateService.getOnCompanies().subscribe((data) => {
+    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = this.getClientsList(data);
     });
+    this.sub.add(getOnCompanies);
   }
 
   getDeviceAntivirusList() {
@@ -359,5 +359,8 @@ export class ReportDeviceAntivirusComponent implements OnInit {
 
   onFilter(field) {
     this.filter.onFilter(field, this.deviceAntivirusList);
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

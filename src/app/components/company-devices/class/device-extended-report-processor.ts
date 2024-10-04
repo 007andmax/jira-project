@@ -1,4 +1,4 @@
 export class DeviceExtendedReportProcessor {
-    device_id: string;
+    deviceId: string;
     name: string;
 }

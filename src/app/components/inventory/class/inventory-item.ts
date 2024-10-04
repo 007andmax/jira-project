@@ -19,6 +19,8 @@ export class InventoryItem {
     markup: number = 0;
     active: boolean = true;
     isEdit: boolean = false;
+    productType: any;
+    selected: boolean = false;
     constructor(data = null) {
         if (data != null) {
             this.versionedId = data.versionedId;
@@ -33,9 +35,16 @@ export class InventoryItem {
             this.billable = data.billable;
             this.taxIds = data.taxIds;
             this.active = data.active;
+            this.productType = data.productType;
             if (this.cost) this.cost_str = this.cost.toFixed(2);
             if (this.sale) this.sale_str = this.sale.toFixed(2);
         }
+    }
+    public setSelected(data) {
+        this.selected = data;
+    }
+    public setProductType(data) {
+        this.productType = data;
     }
     public setIsEdit(data) {
         this.isEdit = data;
@@ -52,6 +61,7 @@ export class InventoryItem {
             active: this.active,
             categoryId: (this.category) ? this.category.id : null,
             glNumber: (this.glNumber && this.glNumber.id) ? { id: this.glNumber.id } : null,
+            productType: this.productType ? { id: this.productType.id } : null
         }
         return item;
     }
@@ -71,6 +81,7 @@ export class InventoryItem {
             active: this.active,
             categoryId: (this.category) ? this.category.id : null,
             glNumber: (this.glNumber && this.glNumber.id) ? { id: this.glNumber.id } : null,
+            productType: this.productType ? { id: this.productType.id } : null
         }
         return item;
     }

@@ -1,7 +1,7 @@
 <div class="qt-df qt-mb-16 ticket-updates__update-block__inner">
     <div class="qt-df qt-fd-c qt-ai-c qt-mr-16">
         <div class="ticket-updates__ticket-icon qt-mb-4">
-            <i class="icon__products icn-16"></i>
+            <i class="qt-icon icon__products icn-16"></i>
         </div>
         <div class="ticket-updates__ticket-line"></div>
     </div>
@@ -11,7 +11,7 @@
             *ngIf="index > 0"
         >
             <div class="qt-df qt-ai-c">
-                <div class="icn-16 icon__calendar pointer qt-mr-8 qt-fs-0"></div>
+                <div class="icn-16 qt-icon icon__calendar pointer qt-mr-8 qt-fs-0"></div>
                 <span
                     class="ticket-updates__tag-completed --completed"
                     *ngIf="product.completed && showCompleteLabel"
@@ -34,7 +34,7 @@
                     (mouseenter)="editTooltip.show($event.target)"
                     (mouseleave)="editTooltip.hide()"
                 >
-                    <div class="icon__edit qt-sz-16"></div>
+                    <div class="qt-icon icon__edit qt-sz-16"></div>
                 </div>
                 <div
                     class="qt-button-square qt-button-square__prepend pointer"
@@ -43,7 +43,7 @@
                     (mouseenter)="editTooltip.show($event.target)"
                     (mouseleave)="editTooltip.hide()"
                 >
-                    <div class="icon__edit qt-sz-16"></div>
+                    <div class="qt-icon icon__edit qt-sz-16"></div>
                 </div>
                 <div
                     class="qt-button-square qt-button-square__afterpend pointer"
@@ -51,7 +51,7 @@
                     (mouseenter)="deleteTooltip.show($event.target)"
                     (mouseleave)="deleteTooltip.hide()"
                 >
-                    <div class="icon__remove qt-sz-16"></div>
+                    <div class="qt-icon icon__delete qt-sz-16"></div>
                 </div>
                 <app-dynamic-tooltip
                     [content]="'Delete Product'"
@@ -76,7 +76,7 @@
                         #productTooltip
                     ></app-dynamic-tooltip>
                     <div
-                        class="icon__discount qt-ml-4 qt-sz-16 qt-ic-c"
+                        class="qt-icon icon__commissions qt-icon__blue-light-600 qt-ml-4 qt-sz-16 qt-ic-c"
                         *ngIf="product.discountAmount"
                         (mouseenter)="productTooltip.show($event.target)"
                         (mouseleave)="productTooltip.hide()"
@@ -101,12 +101,22 @@
             </div>
         </div>
         <div class="qt-df qt-ai-c qt-jc-sb qt-mt-8">
-            <div class="ticket-updates__ticket-price qt-fs-0">
+            <div class="ticket-updates__ticket-price qt-fs-0 qt-df qt-a">
                 <span>Serial number -</span>
-                <span [textContent]="product.serialNumber"></span>
+                <div
+                    class="ellipsis serial-number"
+                    [textContent]="product.serialNumber"
+                ></div>
+                <i
+                    *ngIf="product.serialNumber && product.serialNumber.length > 19"
+                    class="icon__help default-services-page__question-icon qt-sz-12 qt-ic-c qt-ml-8"
+                    placement="top"
+                    [ngbTooltip]="product.serialNumber"
+                ></i>
             </div>
             <div class="qt-ml-16 qt-df qt-ai-c">
                 <app-tech-users
+                    *ngIf="listTechUsers.length > 0"
                     [isDisabled]="isBlockChange"
                     [type]="'DETAIL_TICKET'"
                     [editMode]="true"
@@ -131,11 +141,11 @@
                 'button-mark-complete': product.completed}"
                 >
                     <i
-                        class="icon__task-pending --done qt-bg-contain qt-mr-6 icn-16"
+                        class="qt-icon icon__check qt-icon__green-600 qt-mr-6 icn-16"
                         *ngIf="product.completed"
                     ></i>
                     <i
-                        class="icon__active qt-bg-contain qt-mr-6 icn-16"
+                        class="qt-icon icon__check qt-mr-6 icn-16"
                         *ngIf="!product.completed"
                     ></i>
                     <span [textContent]="(!product.completed) ? 'Mark completed' : 'Сompleted'"></span>

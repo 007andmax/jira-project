@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -13,7 +13,7 @@ import { SupportPageCategoryContent } from '../../super-admin/support-page/class
   templateUrl: './super-admin-public-detail.component.html',
   styleUrls: ['./super-admin-public-detail.component.scss']
 })
-export class SuperAdminPublicDetailComponent implements OnInit {
+export class SuperAdminPublicDetailComponent implements OnInit, OnDestroy {
   _id: string = '';
   isFirstOpen: boolean = true;
   categories: Array<SupportPageCategory> = [];
@@ -36,13 +36,11 @@ export class SuperAdminPublicDetailComponent implements OnInit {
     });
     this.sub.add(subscription);
     if (this._id && this.isFirstOpen) this.getCategories(this.supportPageCategoriesStateService.getCategories());
-    this.supportPageCategoriesStateService.onGetCategories.subscribe((data) => {
+    let onGetCategories = this.supportPageCategoriesStateService.onGetCategories.subscribe((data) => {
       if (this.isFirstOpen) this.getCategories(data);
-    });
-    this.supportPageCategoriesStateService.onGetCategories.subscribe(data => {
-      this.categories = data;
       this.cd.detectChanges();
-    })
+    });
+    this.sub.add(onGetCategories);
   }
   getCategories(data) {
     if (data.length > 0) this.isFirstOpen = false;
@@ -116,5 +114,8 @@ export class SuperAdminPublicDetailComponent implements OnInit {
   }
   public trackById(index, item) {
     return item.id;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

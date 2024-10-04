@@ -3,12 +3,16 @@ import { PasswordManagerComponent } from '../password-manager/password-manager.c
 import { PasswordRecord } from '../password-manager/class/password-record';
 import { PasswordManagerListService } from '../password-manager/services/password-manager-list.service';
 import { REMOVE_RECORD } from '../../const/confirm';
+import { fadeInAnimation } from 'src/app/animations';
 
 
 @Component({
   selector: 'company-password-manager',
   templateUrl: './company-password-manager.component.html',
   styleUrls: ['./company-password-manager.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   providers: [PasswordManagerListService]
 })
 export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
@@ -28,7 +32,6 @@ export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
       this.onScroll();
     });
     this.sub.add(subscription);
-
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_RECORD) this.onRemoveRecord(this.passwordManagerStateService.getRecordForRemove().id);
@@ -44,7 +47,8 @@ export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
     this.sub.add(geLefttFilter);
     let onChangeRealTime = this.passwordManagerStateService.onChangeRealTime.subscribe(newChange => {
       if (newChange.action === 'PASSWORD_RECORD_CREATED' && newChange.data.companyId === this.companiesStateService.getCompanyRoutingId()) {
-        this.list_records.push(new PasswordRecord(newChange.data));
+        let index = this.list_records.findIndex(item => item.id == newChange.data.id);
+        if (index == -1) this.list_records.push(new PasswordRecord(newChange.data));
       } else if (newChange.action === 'PASSWORD_RECORD_UPDATED') {
         let indexList = this.list_records.findIndex(item => item.id === newChange.data.id);
         if (indexList > -1) this.list_records[indexList].onUpdate(newChange.data);

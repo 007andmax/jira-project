@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Subscription } from 'rxjs';
 import { InvoicesFilter } from '../../class/invoices-filter';
@@ -14,18 +14,19 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
   templateUrl: './invoices-filter.component.html',
   styleUrls: ['./invoices-filter.component.scss']
 })
-export class InvoicesFilterComponent implements OnInit {
+export class InvoicesFilterComponent implements OnInit, OnDestroy {
   @ViewChild('companyDp', { static: true }) companyDp: CompanyDropDownComponent;
   @ViewChild('statusDp', { static: true }) statusDp: DropDownComponent;
   @ViewChild('datesDp', { static: true }) datesDp: MultiDatepickerComponent;
   sub: Subscription = new Subscription();
   invoicesFilter: InvoicesFilter = new InvoicesFilter();
   @Output() changeCountFilter = new EventEmitter<any>();
-  statusTypes = [new CompanySetting('Paid invoices', 'PAID'), new CompanySetting('Unpaid invoices', 'UNPAID'), new CompanySetting('Overdue invoices', 'OVERDUE')];
+  statusTypes = [new CompanySetting('Paid invoices', 'PAID'), new CompanySetting('Unpaid invoices', 'UNPAID'), new CompanySetting('Overdue invoices', 'OVERDUE'), new CompanySetting('Deleted invoices', 'DELETED')];
   constructor(private companiesState: CompaniesStateService,
     private elRef: ElementRef,
     private customerPortalStateService: CustomerPortalStateService,
     private invoiceStateService: InvoiceStateService) { }
+
 
   ngOnInit() {
     if (this.customerPortalStateService.isCustomerPortal && this.companiesState.getCompanies().length > 0) this.checkCompanyCustomerUser();
@@ -52,7 +53,7 @@ export class InvoicesFilterComponent implements OnInit {
     this.datesDp.clearWithOutChanges();
     this.statusDp.clearWithOutChanges();
     this.invoicesFilter.setStatus(null);
-    if (!this.customerPortalStateService.isCustomerPortal) this.invoicesFilter.setCompanyId(null);
+    if (!this.customerPortalStateService.isCustomerPortal) this.invoicesFilter.setCompanyIds([]);
     this.invoicesFilter.setStartDate(null);
     this.invoicesFilter.setEndDate(null);
     this.invoicesFilter.setInvoiceNumber(null);
@@ -64,9 +65,9 @@ export class InvoicesFilterComponent implements OnInit {
 
   public onSelectCompany(item) {
     if (!item) {
-      this.invoicesFilter.setCompanyId(null);
+      this.invoicesFilter.setCompanyIds([]);
     } else {
-      this.invoicesFilter.setCompanyId(item.id);
+      this.invoicesFilter.setCompanyIds([item.id]);
     }
     this.invoiceStateService.onInitFilter(this.invoicesFilter);
     this.onChangeCounterFilter();
@@ -95,11 +96,14 @@ export class InvoicesFilterComponent implements OnInit {
   }
   public onChangeCounterFilter() {
     let count = 0;
-    if (this.invoicesFilter.companyId) count++;
+    if (this.invoicesFilter.companyIds.length > 0) count++;
     if (this.invoicesFilter.endDate && this.invoicesFilter.startDate) count++;
     if (this.invoicesFilter.invoiceNumber) count++;
     if (this.invoicesFilter.status) count++;
     if (this.invoicesFilter.amount) count++;
     this.changeCountFilter.emit(count);
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

@@ -22,10 +22,16 @@ import { ConfirmStateService } from "../../shared/confirm/services/confirm-state
 import { DELETE_MANAGE_TAG } from "src/app/const/confirm";
 import { ConfirmComponent } from "../../shared/confirm/confirm.component";
 import { ManageTag } from "./class/manage-tag";
+import { ManageTagsDevicesComponent } from "./manage-tags-devices/manage-tags-devices.component";
+import { fadeInAnimation } from "src/app/animations";
+import { ManageTagsFilesComponent } from "./manage-tags-files/manage-tags-files.component";
 declare var $: any;
 @Component({
   selector: "app-manage-tags",
   templateUrl: "./manage-tags.component.html",
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ["./manage-tags.component.scss"],
   providers: [ManageTagsListService],
 })
@@ -48,12 +54,14 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
   setActiveTab = "company";
   private tagId: string;
   public loading = true;
-  dtOptions: DataTables.Settings = {
+  dtOptions: any = {
     searching: false,
     paging: false,
     info: false
   };
   @ViewChild("tickets", { static: true }) tickets: ElementRef;
+  @ViewChild("devicesTags", { static: true }) devicesTags: ManageTagsDevicesComponent;
+  @ViewChild("filesTags", { static: true }) filesTags: ManageTagsFilesComponent;
   private tabSet: ViewContainerRef;
   @ViewChild(NgbTabset, { static: true }) set content(content: ViewContainerRef) {
     this.tabSet = content;
@@ -87,9 +95,10 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       id: [""]
     });
     if (this.companiesStateService.getCurrentCompany()) this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
-    this.companiesStateService.onCurrentCompany.subscribe(res => {
+    let onCurrentCompany = this.companiesStateService.onCurrentCompany.subscribe(res => {
       this.getCurrentCompany(res);
     })
+    this.sub.add(onCurrentCompany);
     this.serviceAllTickets = this.tagsService.getTags();
     this.getAllTags();
     this.settingStateService.setComponentName('ManageTagsComponent');
@@ -121,11 +130,13 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     })
     this.sub.add(changeTagsArray);
   }
-
   ngAfterViewInit(): void {
     this.dtTrigger.next();
   }
-
+  onPreloader(data) {
+    this.loading = data;
+    this.cd.detectChanges();
+  }
   /**
    * load all services
    */
@@ -165,8 +176,12 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     );
   }
   onSearch() {
-    this.setDefaultScoll();
-    this.onScroll();
+    if (this.setActiveTab == "company") {
+      this.setDefaultScoll();
+      this.onScroll();
+    }
+    if (this.devicesTags) this.devicesTags.searchTag = this.searchTag;
+    if (this.filesTags) this.filesTags.onSearch(this.searchTag);
   }
   public setDefaultScoll() {
     this.page = 0;
@@ -192,6 +207,12 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       if (this.reqcompanyTags.length === data.totalElements) this.manageTagsListService.setBlockList(true);
       this.loading = false;
       this.showPendingPreloader = false;
+      this.cd.detectChanges();
+      setTimeout(() => {
+        var div = document.getElementsByClassName('main-container')[0];
+        var hasVerticalScrollbar = div.scrollHeight > div.clientHeight;
+        if (!hasVerticalScrollbar && this.reqcompanyTags.length !== data.totalElements) this.onScroll();
+      }, 1000)
     })
   }
 
@@ -251,6 +272,9 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     } else if (data['nextId'] === 'tab3') {
       this.infiniteScrollDisabled = true;
       this.setActiveTab = "device";
+    } else if (data['nextId'] === 'tab4') {
+      this.infiniteScrollDisabled = true;
+      this.setActiveTab = "file";
     }
   }
 
@@ -277,6 +301,8 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     this.searchTag = "";
     this.create = true;
     this.selectedIdx = -1;
+    if (this.devicesTags) this.devicesTags.onAdd();
+    if (this.filesTags) this.filesTags.onAdd();
   }
 
   onCancel() {

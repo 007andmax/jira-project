@@ -1,5 +1,5 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Company } from 'src/app/interfaces/company/company';
@@ -7,20 +7,21 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { DocumentLinked } from '../../../class/document-linked';
 import { DocumentCompanyUser } from '../../class/document-company-user';
+import { MatFormFieldComponent } from 'src/app/components/shared/mat-form-field/mat-form-field.component';
 
 @Component({
   selector: 'documents-linked',
   templateUrl: './documents-linked.component.html',
   styleUrls: ['./documents-linked.component.scss']
 })
-export class DocumentsLinkedComponent implements OnInit {
+export class DocumentsLinkedComponent implements OnInit, OnDestroy {
   selectable = true;
   removable = true;
   addOnBlur = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   linkedCtrl = new FormControl();
   public selectedUserAndCompanies: Array<DocumentCompanyUser> = [];
-
+  @ViewChild('formField') formField: MatFormFieldComponent;
   @Input() editItems: DocumentLinked;
   @Input() isDisabled: boolean = false;
   public tabs = ['User', 'Company'];
@@ -116,4 +117,9 @@ export class DocumentsLinkedComponent implements OnInit {
   public trackByIndex(index, item) {
     return index;
   }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
 }

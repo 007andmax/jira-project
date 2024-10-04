@@ -7,11 +7,16 @@ import { TagsService } from 'src/app/services/tags/tags.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
 import { TagsStateService } from 'src/app/states/tags/tags-state.service';
+import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tickets-permissions.service';
+import { TicketProfile } from '../../class/ticket-profile';
+import { FileManagementStateService } from 'src/app/states/file-management/file-management-state.service';
+import { CompanyTagsListService } from 'src/app/components/companies/company-tags/services/company-tags-list.service';
 
 @Component({
   selector: 'ticket-detail-edit-tags',
   templateUrl: './ticket-detail-edit-tags.component.html',
-  styleUrls: ['./ticket-detail-edit-tags.component.scss']
+  styleUrls: ['./ticket-detail-edit-tags.component.scss'],
+  providers: [TicketsPermissionsService, CompanyTagsListService]
 })
 export class TicketDetailEditTagsComponent implements OnInit, OnDestroy {
   visible = true;
@@ -33,6 +38,7 @@ export class TicketDetailEditTagsComponent implements OnInit, OnDestroy {
   @Output() tagsChange = new EventEmitter();
   @ViewChild('tagsDp', { static: true }) tagsDp: any;
   @Output() tagsRemove = new EventEmitter();
+  @Input() ticketProfile: TicketProfile = new TicketProfile();
   /**
    * Creates an instance of the TagsComponent with the injected services
    * @param {TagsService} tagsService Service to work with tags
@@ -44,7 +50,10 @@ export class TicketDetailEditTagsComponent implements OnInit, OnDestroy {
     public tagsRealTimeService: TagsRealTimeService,
     public cd: ChangeDetectorRef,
     public customerPortalStateService: CustomerPortalStateService,
-    public elRef: ElementRef
+    public ticketsPermissionsService: TicketsPermissionsService,
+    public elRef: ElementRef,
+    public companyTagsListService: CompanyTagsListService,
+    public fileManagementStateService: FileManagementStateService
   ) { }
 
   /**
@@ -104,7 +113,7 @@ export class TicketDetailEditTagsComponent implements OnInit, OnDestroy {
   /**
   * Subscribe for edit mode
   */
-  private onCheckEditItem() {
+  public onCheckEditItem() {
     let getTagsFromEdit = this.tagsState.getTagsFromEdit().subscribe((data) => {
       this.selectedTag = data;
     });
@@ -114,7 +123,7 @@ export class TicketDetailEditTagsComponent implements OnInit, OnDestroy {
   /**
   * Subscribe for clear data
   */
-  private onInitClearState() {
+  public onInitClearState() {
     let getClearState = this.tagsState.getClearState().subscribe(() => this.close());
     this.sub.add(getClearState);
   }

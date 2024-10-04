@@ -31,6 +31,7 @@ export class ContractsUserDevice {
     reviewDate: string;
     taxIds: Array<string>;
     type: string = "SERVICE_CONTRACT";
+    isCopy: boolean = false;
     manualCreateBillableItem: boolean = false;
     enableInvoiceAutoCreate: boolean = false;
     constructor() {
@@ -42,7 +43,7 @@ export class ContractsUserDevice {
         this.blockRate = (data.blockRate.length > 0) ? Number(data.blockRate) : undefined;
         this.blockTimeServices = (data.blockTimeServices.length > 0) ? data.blockTimeServices.map(item => new ContractsBlockTimeService(item.name, item.rate)) : data.serviceContractServicesToTrack.map(item => new ContractsBlockTimeService(item.name, item.rate));
         this.companyId = data.companyId;
-        this.contractWithBlockTime = (data.rateExceeding && data.includedHours) ? true : false;
+        this.contractWithBlockTime = (data.rateExceeding && (data.includedHours || data.includedHours == 0)) ? true : false;
         this.customInterval = data.customInterval;
         this.description = data.description;
         this.endDate = data.endDate;
@@ -62,6 +63,7 @@ export class ContractsUserDevice {
         if (data.enableInvoiceAutoCreate != undefined) this.enableInvoiceAutoCreate = data.enableInvoiceAutoCreate;
         this.reviewDate = data.reviewDate;
         this.calculateEndDate();
+        this.isCopy = true;
     }
     public setManualCreateBillableItem(data) {
         this.manualCreateBillableItem = data;

@@ -1,0 +1,22 @@
+<div class="qt-page-list page-list-ticket">
+    <div class="qt-page-list__header --sticky">
+        <div class="qt-page-list__header-title-line">
+            <div class="qt-page-list__header-title-line--left">
+                <h6 class="qt-page-list__header-title qt-fs-18">What’s New</h6>
+            </div>
+            <div class="qt-page-list__header-title-line--rigth">
+                <div class="qt-df qt-ai-c">
+                    <button
+                        class="qt-button --md"
+                        (click)="onAddNew()"
+                    >
+                        <span class="qt-icon icon__add qt-icon__white qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
+                        Create
+                    </button>
+                    <div class="icon__search-white qt-sz-24 qt-bg-contain qt-ml-6 pointer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-super-admin-knowledge-base-table #table></app-super-admin-knowledge-base-table>
+</div>

@@ -7,9 +7,6 @@ import { RecurringTicketsTableComponent } from './recurring-tickets-table/recurr
 import { RecurringTicketsEditAsideComponent } from './recurring-tickets-edit-aside/recurring-tickets-edit-aside.component';
 import { RecurringTicketsAddAsideComponent } from './recurring-tickets-add-aside/recurring-tickets-add-aside.component';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
 import { DevicesRecurringTicketsComponent } from './devices-recurring-tickets/devices-recurring-tickets.component';
 import { DatePickerModule } from '../../shared/date-picker/date-picker.module';
 import { IntervalComponent } from '../../shared/interval/interval.component';
@@ -23,6 +20,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RecurringTicketsRoutingModule } from './recurring-tickets-routing.module';
 import { TechUsersModule } from '../../shared/tech-users/tech-users.module';
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
+import { RecurringTicketsTableAssignedUserComponent } from './recurring-tickets-table/recurring-tickets-table-assigned-user/recurring-tickets-table-assigned-user.component';
+import { RecurringTicketsTableAssignedUserMoreComponent } from './recurring-tickets-table/recurring-tickets-table-assigned-user-more/recurring-tickets-table-assigned-user-more.component';
+import { AssignedTicketUserModule } from '../tickets/ticket-add-aside/assigned-ticket-user/assigned-ticket-user.module';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
+import { MatChipListModule } from '../../shared/mat-chip-list/mat-chip-list.module';
+import { MatChipModule } from '../../shared/mat-chip/mat-chip.module';
+import { MatFormFieldModule } from '../../shared/mat-form-field/mat-form-field.module';
+import { MatOptionModule } from '../../shared/mat-option/mat-option.module';
+
 
 
 
@@ -35,15 +41,15 @@ import { CompanyDropDownModule } from '../../shared/company-drop-down/company-dr
         DevicesRecurringTicketsComponent,
         IntervalComponent,
         DurationComponent,
-        TagsComponent
+        TagsComponent,
+        RecurringTicketsTableAssignedUserComponent,
+        RecurringTicketsTableAssignedUserMoreComponent
 
     ],
     imports: [
         CommonModule,
         InfiniteScrollModule,
         TextAreaModule,
-        MatSelectModule,
-        MatChipsModule,
         DatePickerModule,
         ProductListModule,
         FormsModule,
@@ -51,10 +57,15 @@ import { CompanyDropDownModule } from '../../shared/company-drop-down/company-dr
         ServicesListModule,
         TechUsersModule,
         NgbModule,
-        MatIconModule,
         ReactiveFormsModule,
         RecurringTicketsRoutingModule,
-        CompanyDropDownModule
+        CompanyDropDownModule,
+        AssignedTicketUserModule,
+        MatErrorModule,
+        MatChipModule,
+        MatFormFieldModule,
+        MatChipListModule,
+        MatOptionModule
     ],
 
 

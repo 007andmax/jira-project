@@ -38,7 +38,6 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     public appService: AppService,
     private permissionsService: PermissionsService,
-    private leftPanelStateService: LeftPanelStateService,
     private confirmStateService: ConfirmStateService,
     private usersStateService: UsersStateService,
     public cd: ChangeDetectorRef,
@@ -56,9 +55,6 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
   clearSearch() {
     this.searchText = "";
     this.onSearch.emit("");
-  }
-  onBlurSearch(event) {
-    this.onSearch.emit(event.target.value);
   }
   onKeyUp(event) {
     if (event.keyCode === 13) this.onSearch.emit(event.target.value);

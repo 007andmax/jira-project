@@ -1,17 +1,17 @@
-<tr
-    class="pointer"
+<div
+    class="pointer qt-table-modern__row"
     [ngClass]="(showNotificationReview) ? 'documents-no-valid' : ''"
     (click)="showTemplate()"
 >
-    <td
-        class="documents-table__title"
+    <div
+        class="documents-table__title ellipsis"
         (click)="navigateToCategory()"
         [ngClass]="{'pointer':item.isCategory}"
     >
-        <div class="documents-table__title-menu">
+        <div class="documents-table__title-menu ellipsis">
             <div
                 class="qt-sz-16 qt-bg-contain qt-mr-8 qt-fs-0"
-                [ngClass]="{ 'icon__documents':item.documentType === 'TEMPLATE',
+                [ngClass]="{ 'qt-icon icon__documents':item.documentType === 'TEMPLATE',
             'icon__templete-thumb':item.documentType === 'DOCUMENT'}"
             ></div>
             <div
@@ -19,32 +19,33 @@
                 [textContent]="item.isCategory ? item.categoryName : item.title"
             ></div>
         </div>
-    </td>
-    <td
+    </div>
+    <div
         class="documents-table__create-by ellipsis"
         [textContent]="item.isCategory ? '' : getCreateBy()"
         (click)="navigateToCategory()"
         [ngClass]="{'pointer':item.isCategory}"
-    ></td>
-    <td
+    ></div>
+    <div
         class="documents-table__created-date ellipsis"
         [textContent]="item.isCategory ? '' : parseCreateAt()"
         (click)="navigateToCategory()"
         [ngClass]="{'pointer':item.isCategory}"
-    ></td>
-    <td
+    ></div>
+    <div
         class="documents-table__review-date ellipsis"
         [textContent]="item.isCategory ? '' : parseReviewAt()"
         (click)="navigateToCategory()"
         [ngClass]="{'pointer':item.isCategory}"
-    ></td>
-    <td
+    ></div>
+    <div
         class="documents-table__company ellipsis"
-        [textContent]="item.isCategory ? '' : getCompanies()"
         (click)="navigateToCategory()"
         [ngClass]="{'pointer':item.isCategory}"
-    ></td>
-    <td
+    >
+      <div class="ellipsis" [textContent]="item.isCategory ? '' : getCompanies()"></div>
+    </div>
+    <div
         class="documents-table__menu"
         (click)="$event.stopPropagation();"
     >
@@ -55,7 +56,7 @@
         >
             <div
                 *ngIf="!item.isCategory && (getPermissions('EDIT_DOCUMENT') || getPermissions('CREATE_DOCUMENT') || getPermissions('VIEW_DOCUMENT') || getPermissions('DELETE_DOCUMENT')) || item.isCategory"
-                class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"
+                class="qt-ic-c qt-icon icon__more qt-pointer qt-sz-16 qt-bg-contain"
                 id="dropdownBasic1"
                 ngbDropdownToggle
             ></div>
@@ -71,7 +72,7 @@
                     (click)="goToAddDocumentInCategory()"
                     *ngIf="getPermissions('CREATE_DOCUMENT')"
                 >
-                    <div class="icon__add-document qt-sz-20 qt-bg-contain qt-mr-12"></div>
+                    <div class="qt-icon icon__add-document qt-sz-20 qt-mr-12"></div>
                     Add New Document
                 </li>
                 <li
@@ -79,7 +80,7 @@
                     ngbDropdownItem
                     (click)="removeCategory()"
                 >
-                    <div class="icon__remove qt-sz-20 qt-bg-contain qt-mr-12"></div>
+                    <div class="qt-icon icon__delete qt-sz-20 qt-bg-contain qt-mr-12"></div>
                     Delete
                 </li>
             </ul>
@@ -95,7 +96,7 @@
                     (click)="goToEditDocument()"
                     *ngIf="getPermissions('EDIT_DOCUMENT')"
                 >
-                    <div class="icon__edit qt-sz-20 qt-bg-contain qt-mr-12"></div>
+                    <div class="qt-icon icon__edit qt-sz-20 qt-bg-contain qt-mr-12"></div>
                     Edit
                 </li>
                 <li
@@ -113,7 +114,7 @@
                     (click)="printPdf()"
                     *ngIf="getPermissions('VIEW_DOCUMENT')"
                 >
-                    <div class="icon__print qt-sz-20 qt-bg-contain qt-mr-12"></div>
+                    <div class="qt-icon icon__print qt-sz-20 qt-bg-contain qt-mr-12"></div>
                     Print
                 </li>
                 <li
@@ -122,7 +123,7 @@
                     (click)="exportPdf()"
                     *ngIf="getPermissions('VIEW_DOCUMENT')"
                 >
-                    <div class="icon__download-pdf qt-sz-20 qt-bg-contain qt-mr-12"></div>
+                    <div class="qt-icon icon__download qt-sz-20 qt-bg-contain qt-mr-12"></div>
                     Export PDF
                 </li>
                 <li
@@ -131,7 +132,7 @@
                     (click)="previewDocument()"
                     *ngIf="getPermissions('VIEW_DOCUMENT')"
                 >
-                    <div class="icon__go-to qt-sz-20 qt-bg-contain qt-mr-12"></div>
+                    <div class="qt-icon icon__external-link qt-sz-20 qt-mr-12"></div>
                     Open in new tab
                 </li>
                 <li
@@ -141,10 +142,10 @@
                     (click)="removeDocument()"
                     *ngIf="getPermissions('DELETE_DOCUMENT')"
                 >
-                    <div class="icon__remove qt-sz-20 qt-bg-contain qt-mr-12"></div>
+                    <div class="qt-icon icon__delete qt-sz-20 qt-bg-contain qt-mr-12"></div>
                     Delete
                 </li>
             </ul>
         </div>
-    </td>
-</tr>
+    </div>
+</div>

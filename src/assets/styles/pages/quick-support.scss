@@ -47,17 +47,13 @@
       display: flex;
       align-items: center;
     }
-    &__close {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background-color: $gray-50;
-      background-position: center;
-      background-size: 18px;
-      background-repeat: no-repeat;
-    }
   }
-
+  .support-tickets-list__close {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: $gray-50;
+  }
 }
 
 .support-item-menu {
@@ -119,10 +115,9 @@
   &__step2 {
     width: 40px;
     height: 40px;
-    background-color: $gray-50;
     border-radius: 50%;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-color: $gray-50;
+    margin: 8px;
   }
   &__line {
     width: 192px;

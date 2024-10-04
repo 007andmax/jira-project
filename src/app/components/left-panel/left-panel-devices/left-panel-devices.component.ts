@@ -1,7 +1,8 @@
 import { AgentService } from 'src/app/services/agent/agent.service';
-import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input, OnDestroy } from '@angular/core';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -9,7 +10,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
   templateUrl: './left-panel-devices.component.html',
   styleUrls: ['./left-panel-devices.component.scss']
 })
-export class LeftPanelDevicesComponent implements OnInit {
+export class LeftPanelDevicesComponent implements OnInit, OnDestroy {
   type: string = 'Dashboard';
   open: boolean = false;
   @Input() activePage: string = "";
@@ -27,7 +28,7 @@ export class LeftPanelDevicesComponent implements OnInit {
   currentActiveReportPageChild: string = "";
   currentActivePinnedPageChild: string = "";
   currentActiveCompanyPageChild: string = "";
-
+  sub: Subscription = new Subscription();
 
   constructor(private leftPanelStateService: LeftPanelStateService,
     private agentService: AgentService,
@@ -35,39 +36,44 @@ export class LeftPanelDevicesComponent implements OnInit {
     private companiesState: CompaniesStateService,
   ) { }
 
+
   ngOnInit() {
     //  this.companiesState.onInit();
     if (this.companiesStateService.getCurrentCompany()) this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
-    this.companiesStateService.onCurrentCompany.subscribe(data => {
+    let onCurrentCompany = this.companiesStateService.onCurrentCompany.subscribe(data => {
       this.getCurrentCompany(data);
     })
-    this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
+    this.sub.add(onCurrentCompany);
+    let onToggleLeftPanel = this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       if (data) {
         this.open = false;
       }
     })
-    this.leftPanelStateService.onChangeState.subscribe(state => {
+    this.sub.add(onToggleLeftPanel);
+    let onChangeState = this.leftPanelStateService.onChangeState.subscribe(state => {
       if (!this.isSupportPage(state)) {
         this.open = false;
       }
     })
-    this.leftPanelStateService.onFirstOpen.subscribe(data => {
+    this.sub.add(onChangeState);
+    let onFirstOpen = this.leftPanelStateService.onFirstOpen.subscribe(data => {
       if (this.isSupportPage(data)) {
         this.open = true;
       }
     })
-    this.leftPanelStateService.onSearchItemAdded.subscribe(data => {
+    this.sub.add(onFirstOpen);
+    let onSearchItemAdded = this.leftPanelStateService.onSearchItemAdded.subscribe(data => {
       this.getCurrentCompany(this.company);
     });
-
+    this.sub.add(onSearchItemAdded);
     this.companiesState.getOnCompanies().subscribe(data => {
       this.companyReportList = this.getCompaniesNames(data.filter((item) => (item.accountType === "CLIENT" || item.accountType === "LEAD") && !item.deletedAt));
       this.companyList = this.companyReportList.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0);
     })
-
-    this.leftPanelStateService.onPageActive.subscribe(data => {
+    let onPageActive = this.leftPanelStateService.onPageActive.subscribe(data => {
       this.currentActiveReportPageChild = data;
     })
+    this.sub.add(onPageActive);
   }
   getCurrentCompany(data) {
     this.company = data;
@@ -186,5 +192,8 @@ export class LeftPanelDevicesComponent implements OnInit {
     this.agentService.deleteAssetSearch(pinnedSearch).subscribe((res) => {
       this.getCurrentCompany(this.company);
     });
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

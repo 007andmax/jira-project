@@ -1,0 +1,39 @@
+.dropdown-menu {
+    margin-top: 6px;
+    width: 100%;
+}
+
+.clip-text {
+    max-width: 230px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.filter-tags-check {
+    position: absolute;
+    right: 26px;
+    top: 6px;
+}
+
+.content {
+    height: 100%;
+    overflow: scroll;
+}
+
+.qt-pos-rel {
+    i {
+        display: block;
+        flex-shrink: 0;
+        position: absolute;
+        right: 6px;
+        top: 6px;
+    }
+}
+input {
+    border: none !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+    height: auto !important;
+    padding: 11px 14px;
+}

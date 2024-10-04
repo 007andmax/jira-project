@@ -1,0 +1,110 @@
+<div
+    ngbDropdown
+    #dp="ngbDropdown"
+    [ngClass]="class"
+    [container]="container"
+    [ngStyle]="{'width':widthInput ? widthInput : '100%'}"
+>
+    <div class="qt-df qt-ai-c">
+        <div
+            *ngIf="title"
+            class="app-drop-down__title"
+            [textContent]="title"
+        ></div>
+        <div
+            class="qt-ic-c qt-pointer device-type-icon qt-sz-24 qt-mb-8 qt-ml-8 qt-icon"
+            [ngClass]="{'icon__devices' : getTypeToLocaleLowerCase(selectedItem) === 'workstation',
+               'icon__router' : getTypeToLocaleLowerCase(selectedItem) === 'router',
+            'icon__print' : getTypeToLocaleLowerCase(selectedItem) === 'printer',
+                'qt-icon icon__network-switch' : getTypeToLocaleLowerCase(selectedItem) === 'switch',
+          'icon__server' : getTypeToLocaleLowerCase(selectedItem) === 'server',
+            'icon__tablet' : getTypeToLocaleLowerCase(selectedItem) === 'tablet',
+            'icon__network_device' : getTypeToLocaleLowerCase(selectedItem) === 'network device',
+            'icon__old-phone' : getTypeToLocaleLowerCase(selectedItem) === 'phone',
+             'icon__generic_device' : getTypeToLocaleLowerCase(selectedItem) === 'generic device'}"
+        >
+        </div>
+    </div>
+    <div
+        class="invalid-feedback"
+        *ngIf="!validate"
+        [textContent]="errorMessage"
+    >
+    </div>
+    <input
+        type="text"
+        [ngStyle]="{'width': '100%', 'height': heightInput ? heightInput : '40px' }"
+        [ngClass]="{'disabled': isDisabled, '--input-error' : !validate}"
+        [disabled]="isDisabled"
+        [value]="getSelectedItemText()"
+        autocomplete="off"
+        [placeholder]="placeholder"
+        id="dropdown1"
+        class="qt-dropdown-input"
+        [attr.maxlength]="maxlength"
+        (input)="onCheckAdd($event)"
+        (focus)="onFocus($event)"
+        [readonly]="!change"
+        ngbDropdownAnchor
+    >
+    <span
+        class="app-drop-down__right-icon pointer"
+        *ngIf="list && !isDisabled"
+        [ngStyle]="{'bottom': heightInput ? dividePosition(heightInput) : '20px' }"
+    >
+        <i
+            *ngIf="selectedItem && !isAdd && !isBlockClear"
+            class="icn-sm icn-remove-old"
+            (click)="clearClient()"
+        ></i>
+        <i
+            *ngIf="(!selectedItem || isBlockClear) && !isAdd && !preloader"
+            class="icn-sm report-caret-icon"
+        ></i>
+        <i
+            *ngIf="isAdd"
+            (click)="addItem()"
+            class="icn-sm icn-product-save qt-icon icon__done qt-icon__blue-light-600"
+        ></i>
+    </span>
+    <i
+        class="loading xs"
+        *ngIf="preloader"
+    ></i>
+    <div
+        ngbDropdownMenu
+        [ngStyle]="{'width': dropdownWidth ? dropdownWidth : '100%', 'max-height': dropdownHeight ? dropdownHeight : '192px'}"
+        aria-labelledby="dropdown1"
+        class="app-drop-down__dropdown"
+    >
+        <ng-template
+            ngFor
+            let-item
+            [ngForOf]="list"
+            let-i="index"
+        >
+            <div class="qt-df qt-ai-c qt-pl-8">
+                <div
+                    class="qt-ic-c qt-pointer device-type-icon qt-sz-24 qt-icon"
+                    [ngClass]="{'icon__devices' : getTypeToLocaleLowerCase(item) === 'workstation',
+               'icon__router' : getTypeToLocaleLowerCase(item) === 'router',
+            'icon__print' : getTypeToLocaleLowerCase(item) === 'printer',
+                'icon__network-switch' : getTypeToLocaleLowerCase(item) === 'switch',
+          'icon__server' : getTypeToLocaleLowerCase(item) === 'server',
+            'icon__tablet' : getTypeToLocaleLowerCase(item) === 'tablet',
+            'icon__network_device' : getTypeToLocaleLowerCase(item) === 'network device',
+            'icon__old-phone' : getTypeToLocaleLowerCase(item) === 'phone',
+             'icon__generic_device' : getTypeToLocaleLowerCase(item) === 'generic device'}"
+                >
+                </div>
+                <button
+                    ngbDropdownItem
+                    [textContent]="reduceItemName(item)"
+                    (click)="onSelect(item)"
+                    [title]="reduceItemName(item)"
+                    [ngClass]="{'--selected':isSelected(item)}"
+                ></button>
+            </div>
+        </ng-template>
+    </div>
+</div>

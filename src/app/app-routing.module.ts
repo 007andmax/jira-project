@@ -48,7 +48,12 @@ const routes: Routes = [
   },
   {
     path: ':domain/tech-companies',
-    loadChildren: './components/super-admin/super-admin-companies/super-admin-companies.module#SuperAdminCompaniesModule',
+    loadChildren: () => import('./components/super-admin/super-admin-companies/super-admin-companies.module').then(m => m.SuperAdminCompaniesModule),
+    canActivate: [PermissionSuperAdminService]
+  },
+  {
+    path: ':domain/knowledge-base',
+    loadChildren: () => import('./components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base.module').then(m => m.SuperAdminKnowledgeBaseModule),
     canActivate: [PermissionSuperAdminService]
   },
   {
@@ -194,12 +199,11 @@ const routes: Routes = [
     loadChildren: () => import('./components/setting/commission/commission.module').then(m => m.CommissionModule),
     canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
   },
-  /* {
-     path: ':domain/setting/deviceSetting',
-     loadChildren: './components/setting/device-setting/device-setting.module#DeviceSettingModule',
-     // canActivate: [PermissionNoSuperAdminService]
-     canActivate: [TestPermissionService]
-   },*/
+  {
+    path: ':domain/setting/deviceSetting',
+    loadChildren: () => import('./components/setting/device-setting/device-setting.module').then(m => m.DeviceSettingModule),
+    // canActivate: [PermissionNoSuperAdminService]
+  },
   {
     path: ':domain/inventory/products',
     loadChildren: () => import('./components/inventory/inventory.module').then(m => m.InventoryModule),
@@ -227,8 +231,16 @@ const routes: Routes = [
     path: ':domain/company/:id/documents',
     loadChildren: () => import('./components/companies/company-documents/company-documents.module').then(m => m.CompanyDocumentsModule),
     canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]
-
-
+  },
+  {
+    path: ':domain/company/:id/file-manager',
+    loadChildren: () => import('./components/companies/company-file-manager/company-file-manager.module').then(m => m.CompanyFileManagerModule),
+    canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]
+  },
+  {
+    path: ':domain/company/:id/file-manager/category/:categoryId',
+    loadChildren: () => import('./components/companies/company-file-manager/company-file-manager-category/company-file-manager-category.module').then(m => m.CompanyFileManagerCategoryModule),
+    canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/documents/preview/:id',
@@ -250,7 +262,7 @@ const routes: Routes = [
   },
   {
     path: ':domain/default-services',
-    loadChildren: () => import('./components/billing/default-services/default-services.module').then(m => m.DefaultServicesModule),
+    loadChildren: () => import('./components/billing/non-contract-services/non-contract-services.module').then(m => m.NonContractServicesModule),
     canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
 
   },
@@ -374,8 +386,28 @@ const routes: Routes = [
   },
   {
     path: ':domain/contract-statistics',
-    loadChildren: './components/billing/contracts-statistics/contracts-statistics.module#ContractsStatisticsModule',
+    loadChildren: () => import('./components/billing/contracts-statistics/contracts-statistics.module').then(m => m.ContractsStatisticsModule),
     canActivate: [PermissionContractsService, PermissionNoSuperAdminService]
+  },
+  {
+    path: ':domain/file-manager',
+    loadChildren: () => import('./components/file-manager/file-manager.module').then(m => m.FileManagementModule),
+    canActivate: [PermissionSupportService, PermissionNoSuperAdminService, TestPermissionService]
+  },
+  {
+    path: ':domain/file-manager/all-customer',
+    loadChildren: () => import('./components/file-manager/file-manager-all-customer/file-manager-all-customer.module').then(m => m.FileManagementAllCustomerModule),
+    canActivate: [PermissionSupportService, PermissionNoSuperAdminService, TestPermissionService]
+  },
+  {
+    path: ':domain/file-manager/all-customer/:id',
+    loadChildren: () => import('./components/file-manager/file-manager-all-customer-company/file-manager-all-customer-company.module').then(m => m.FileManagementAllCustomerCompanyModule),
+    canActivate: [PermissionSupportService, PermissionNoSuperAdminService, TestPermissionService]
+  },
+  {
+    path: ':domain/file-manager/category/:id',
+    loadChildren: () => import('./components/file-manager/file-manager-category/file-manager-category.module').then(m => m.FileManagementCategoryModule),
+    canActivate: [PermissionSupportService, PermissionNoSuperAdminService, TestPermissionService]
   },
 ];
 

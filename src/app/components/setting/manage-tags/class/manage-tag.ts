@@ -7,10 +7,14 @@ export class ManageTag {
     disableUpdate: boolean = false;
     selected: boolean = false;
     isInitRequest: boolean = false;
+    isUniqueness: boolean = true;
     constructor(data) {
         for (const key in data) {
             this[key] = data[key];
         }
+    }
+    public setIsUniqueness(data) {
+        this.isUniqueness = data;
     }
     public setIsInitRequest(data) {
         this.isInitRequest = data;

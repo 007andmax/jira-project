@@ -1,9 +1,7 @@
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { Company } from 'src/app/interfaces/company/company';
 import { CompanyAndressContact } from 'src/app/interfaces/company/company-address-contact';
 import { CompanyAndress } from 'src/app/interfaces/company/company-address';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
-import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
@@ -14,10 +12,7 @@ import { DownloadAgentStateService } from 'src/app/states/download-agent/downloa
 import { DownloadAgentComponent } from '../download-agent/download-agent.component';
 import { CompanyProfile } from '../class/company-profile';
 import { DEARCHIVE_COMPANY, ARCHIVE_COMPANY } from 'src/app/const/confirm';
-import { AppService } from 'src/app/states/app/app.service';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
-import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
-import { Router } from '@angular/router';
 import { CompanyItem } from '../class/company-item';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { CompanyDeviceCount } from '../class/company-device-count';
@@ -42,17 +37,13 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   constructor(private usersStateService: UsersStateService,
     public companiesStateService: CompaniesStateService,
-    private devicesState: DevicesStateService,
     private modalService: NgbModal,
     private confirmStateService: ConfirmStateService,
     private companiesService: CompaniesService,
     private downloadAgentStateService: DownloadAgentStateService,
-    private appService: AppService,
-    private router: Router,
     public cd: ChangeDetectorRef,
     private draftEmailStateService: DraftEmailStateService,
-    private permissionsService: PermissionsService,
-    private elRef: ElementRef) { }
+    private permissionsService: PermissionsService) { }
 
   ngOnInit() {
     if (this.usersStateService.getAllUsers().length > 0) this.onGetUsersCount(this.usersStateService.getAllUsers());

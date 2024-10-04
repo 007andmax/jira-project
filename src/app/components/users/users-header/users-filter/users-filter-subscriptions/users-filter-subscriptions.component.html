@@ -4,25 +4,23 @@
     #dp="ngbDropdown"
     (openChange)="openChange($event)"
 >
-    <mat-form-field ngbDropdownAnchor>
-        <mat-chip-list
+    <app-mat-form-field
+        #formField
+        ngbDropdownAnchor
+    >
+        <app-mat-chip-list
             #chipList
             aria-label="Fruit selection"
+            [items]="selectedSubscriptions"
+            (onChangeItems)="formField.checkSelectedItems(selectedSubscriptions)"
         >
-            <mat-chip
+            <app-mat-chip
                 *ngFor="let subscription of selectedSubscriptions; let i = index"
-                [selectable]="selectable"
-                [removable]="removable"
-                (removed)="toggleSubscription(subscription)"
+                [isRemove]="removable"
+                (onClose)="toggleSubscription(subscription)"
             >
                 {{subscription.name}}
-                <mat-icon
-                    matChipRemove
-                    *ngIf="removable"
-                >
-                    cancel
-                </mat-icon>
-            </mat-chip>
+            </app-mat-chip>
             <input
                 id="dropdownServices"
                 ngbDropdownToggle
@@ -30,14 +28,11 @@
                 #userInput
                 class="pointer"
                 [formControl]="tagCtrl"
-                [matChipInputFor]="chipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                [matChipInputAddOnBlur]="addOnBlur"
                 (input)="onSearch($event)"
                 autocomplete="off"
             >
-        </mat-chip-list>
-    </mat-form-field>
+        </app-mat-chip-list>
+    </app-mat-form-field>
     <div
         class="select-wrapper"
         ngbDropdownMenu

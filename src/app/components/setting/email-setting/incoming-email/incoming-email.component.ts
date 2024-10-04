@@ -1,15 +1,16 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { EmailSettingService } from '../email-setting.service';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { EmailSettingService } from '../../../../services/email-settings/email-setting.service';
 import { ToastrService } from 'ngx-toastr';
 import { SettingService } from 'src/app/services/setting/setting.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-incoming-email',
   templateUrl: './incoming-email.component.html',
   styleUrls: ['./incoming-email.component.scss']
 })
-export class IncomingEmailComponent implements OnInit {
+export class IncomingEmailComponent implements OnInit, OnDestroy {
   smtpSettings: {};
   supportMailBox: any;
   loading = true;
@@ -19,13 +20,13 @@ export class IncomingEmailComponent implements OnInit {
   inboxEnabled: boolean;
   @Input() smtpSettingsInput: any;
   @Input() supportMailBoxInput: any;
-
+  sub: Subscription = new Subscription();
   constructor(
     private emailSettingService: EmailSettingService,
-    private settingService: SettingService,
     private toastr: ToastrService,
     private companiesStateService: CompaniesStateService,
   ) { }
+
 
   /**
    * ng onInit
@@ -34,11 +35,11 @@ export class IncomingEmailComponent implements OnInit {
     this.smtpSettings = this.smtpSettingsInput;
     this.supportMailBox = this.supportMailBoxInput;
     if (this.companiesStateService.getCurrentCompany()) this.currentCompany(this.companiesStateService.getCurrentCompany());
-    this.companiesStateService.onCurrentCompany.subscribe(res => {
+    let onCurrentCompany = this.companiesStateService.onCurrentCompany.subscribe(res => {
       this.currentCompany(res);
     })
+    this.sub.add(onCurrentCompany);
     this.getConstants();
-    // this.SMTPSettings();
   }
 
   /**
@@ -109,5 +110,8 @@ export class IncomingEmailComponent implements OnInit {
         this.toastr.error(`Error Occured, ${error}`);
       }
     );
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

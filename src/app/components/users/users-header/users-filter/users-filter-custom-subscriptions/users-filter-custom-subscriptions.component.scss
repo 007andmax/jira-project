@@ -1,0 +1,29 @@
+@import "./src/assets/styles/variable";
+
+.dropdown-menu {
+    margin-top: 6px;
+    width: 100%;
+}
+
+.title-filter {
+    color: $gray-500;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.light-dropdown {
+    padding-top: 16px !important;
+}
+
+.clip-text {
+    max-width: 230px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.filter-check {
+    position: absolute;
+    right: 6px;
+    top: 6px;
+}

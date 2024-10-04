@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
 import { ContractsAsideUserDeviceServiceComponent } from './contracts-aside-user-device-service.component';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -10,6 +7,7 @@ import { InvoiceFormTicketEditTaxesModule } from 'src/app/components/billing/bil
 import { NumberModule } from 'src/app/directives/number/number.module';
 import { TaxesModule } from 'src/app/components/shared/taxes/taxes.module';
 import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-number.module';
+import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 
 
 
@@ -18,18 +16,14 @@ import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-n
     ],
     imports: [
         CommonModule,
-        MatSelectModule,
-        MatChipsModule,
-        MatIconModule,
         FormsModule,
         NgbModule,
         TaxesModule,
         NumberModule,
         InvoiceFormTicketEditTaxesModule,
-        DecimalNumberModule
+        DecimalNumberModule,
+        MatErrorModule
     ],
     exports: [ContractsAsideUserDeviceServiceComponent]
-
-
 })
 export class ContractsAsideUserDeviceServiceModule { }

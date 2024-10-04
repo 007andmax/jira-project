@@ -1,46 +1,85 @@
-<div class="qt-page-list__header-filters">
-    <app-drop-down
-        #titlesDp
-        class="qt-w100 qt-mr-8"
-        [placeholder]="'Select Job Title'"
-        [list]="jobTitleList"
-        [field]="'name'"
-        [search]="true"
-        [change]="true"
-        [heightInput]="'36px'"
-        (onSelectedItem)="onSelectTitle($event)"
-    ></app-drop-down>
-    <company-drop-down
+<div class="left-panel-ng2__content--filters aside-filters-content__main">
+    <div class="content-filters-header">
+        <div
+            class="qt-icon icon__close qt-icon__white qt-sz-20"
+            (click)="close()"
+        ></div>
+        <div class="content-filters-header__title pointer">Filters</div>
+    </div>
+    <app-users-filter-job-title
+        #jobTitleDp
+        (onSelectTitle)="onSelectTitle($event.item, $event.event)"
+    ></app-users-filter-job-title>
+    <tickets-filter-companies-drop-down
         #companiesDp
-        class="qt-w100 qt-mr-8"
-        [placeholder]="'Search By Company'"
+        [clientType]="'CLIENT'"
+        [title]="'Company'"
+        [placeholder]="'Select company'"
+        [placement]="'bottom-left'"
         [field]="'name'"
-        [search]="true"
-        [change]="true"
-        [heightInput]="'36px'"
-        (onSelectedItem)="onSelectCompany($event)"
-    ></company-drop-down>
-    <users-filter-subscriptions
-        #subscriptionDp
-        class="qt-w100 qt-mr-8"
-        (onChangeDefault)="onChangeDefaultSubscription($event)"
-        (onChangeCustom)="onChangeCustomSubscription($event)"
-    ></users-filter-subscriptions>
-    <app-drop-down
-        #industriesDp
-        class="qt-w100 qt-mr-8"
-        [placeholder]="'Search By Industry'"
-        [list]="industries"
-        [field]="'name'"
-        [search]="true"
-        [change]="true"
-        [heightInput]="'36px'"
-        (onSelectedItem)="onSelectClientIndustry($event)"
-    ></app-drop-down>
-    <app-company-tags
+        (filterChange)="onSelectCompany($event)"
+    >
+    </tickets-filter-companies-drop-down>
+    <app-users-filter-default-subscription
+        [defaultSubscriptions]="filter.defaultSubscriptions"
+        (onChange)="onChangeDefaultSubscriptions($event)"
+    ></app-users-filter-default-subscription>
+    <app-users-filter-tags
         #tagsDp
-        [blockUserTag]="true"
-        class="filter-category tags dropdown companies-filter-tags qt-w100"
+        [placement]="'top-left'"
         (tagsChange)="onChangeTags($event)"
-    ></app-company-tags>
+    ></app-users-filter-tags>
+    <app-users-filter-custom-subscriptions
+        #customSubscriptionDp
+        *ngIf="usersStateService.getModeUserFilterSubscription() == MODE_MARKETING_USERS_LIST"
+        [title]="'Marketing Subscription'"
+        [placeholder]="'Search by Marketing Subscription'"
+        [placement]="'top-left'"
+        [field]="'name'"
+        [list]="listCustomSubscription"
+        (filterChange)="onSelectCustomSubscription($event)"
+    ></app-users-filter-custom-subscriptions>
+    <div class="qt-mt-16">
+        <p class="title-filter qt-mb-8">Permission</p>
+        <div class="qt-input-block qt-f50">
+            <div class="qt-df qt-ai-c">
+                <label
+                    class="qt-checkbox receive-full-amount-check qt-mb-0 pointer access-customer-portal"
+                    [attr.for]="'permission-a'"
+                >
+                    <input
+                        [attr.id]="'permission-a'"
+                        type="checkbox"
+                        [(ngModel)]="globalFilter.hasAccess"
+                        (change)="onChangeHasAccess($event)"
+                    >
+                    <span></span>
+                    <div class="qt-ml-8">Access to customer portal</div>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="aside-filters-content__footer">
+    <div class="qt-df">
+        <button
+            class="qt-button --md --gray qt-mr-12 qt-w100 qt-jc-c"
+            (click)="clearAll()"
+        >
+            Clear All
+        </button>
+        <button
+            class="qt-button --md --gray qt-mr-12 qt-w100 qt-jc-c"
+            (click)="saveFilter()"
+            *ngIf="globalFilter.global && (getPermissions('CREATE_GLOBAL_USER_FILTER') || getPermissions('EDIT_GLOBAL_USER_FILTER')) || !globalFilter.global"
+        >
+            Save Fiter
+        </button>
+        <button
+            class="qt-button --md qt-w100 qt-jc-c"
+            (click)="applyFilters()"
+        >
+            Apply
+        </button>
+    </div>
 </div>

@@ -4,9 +4,9 @@ export class System {
     architecture: string;
     warranty: string;
     caption: string;
-    service_pack: string;
+    servicePack: string;
     version: string;
-    release_id: string;
+    releaseId: string;
 }
 
 export class Graphics {
@@ -17,12 +17,12 @@ export class Graphics {
 
 export class Motherboard {
     manufacturer: string;
-    serial_number: string;
+    serialNumber: string;
 }
 
 export class Bios {
     manufacturer: string;
-    release_date: string;
+    releaseDate: string;
     version: string;
 }
 
@@ -36,9 +36,9 @@ export class Display {
 }
 
 export class LogicalDisk {
-    device_id: string;
+    deviceId: string;
     size: number;
-    free_space: number;
+    freeSpace: number;
 }
 
 export class Memory {
@@ -47,12 +47,12 @@ export class Memory {
 
 export class Adapter {
     description: string;
-    ip_address: string;
+    ipAddress: string;
     subnet: string;
     dns: string;
     speed: number;
     mac: string;
-    dhcp_server: string;
+    dhcpServer: string;
 }
 
 export class DeviceDetail {

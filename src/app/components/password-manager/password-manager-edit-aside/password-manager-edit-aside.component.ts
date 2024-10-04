@@ -8,14 +8,13 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { PasswordRecord } from '../class/password-record';
 import { PasswordDeviceUser } from '../class/password-device-user';
 import { PasswordRecordValidate } from '../class/password-record-validate';
-import { Company } from 'src/app/interfaces/quote/company';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { PasswordManagerStateService } from 'src/app/states/password-manager/password-manager-state.service';
 import { REMOVE_RECORD } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { PasswordRecordCategories } from '../class/password-record-categories';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
@@ -162,7 +161,7 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
   getDevices() {
     if (this.devices.length == 0) {
       this.devicesService.getCompanyDevices(this.selectedClient.id).subscribe((data: any) => {
-        this.devices = (data[this.selectedClient.id]) ? JSON.parse(JSON.stringify(data[this.selectedClient.id])).map(item => new Device(item)) : [];
+        this.devices = (data[this.selectedClient.id]) ? JSON.parse(JSON.stringify(data[this.selectedClient.id])).filter(item => !item.isCustom).map(item => new Device(item)) : [];
         this.passwordManagerStateService.setDevices(this.devices);
       });
     } else {
@@ -292,6 +291,7 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
     this.saveRecord.setDisabled(true);
     this.passwordManagerService.editRecord(this.editItem.getDataForEdit(this.selectedUserAndDevices))
       .subscribe((res) => {
+        this.passwordManagerStateService.onChangeRealTime.next({ action: "PASSWORD_RECORD_UPDATED", data: res });
         this.passwordManagerStateService.changePassword(this.editItem);
         this.saveRecord.setDisabled(false);
         this.close();
@@ -333,10 +333,6 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.message = `Are you sure you want to delete the password record?`;
     this.passwordManagerStateService.setRecordForRemove(this.editItem);
   }
-  ngOnDestroy() {
-    if (this.intervalContainer) clearInterval(this.intervalContainer);
-    this.sub.unsubscribe();
-  }
   public trackByIndex(index, item) {
     return index;
   }
@@ -348,5 +344,9 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
   }
   getNameForAvatar(item) {
     return (this.usersStateService.getUserAvatarUrl(this.getUserById(item.userId)) == '') ? `${item.userName[0].toUpperCase()}${item.userName[item.userName.indexOf(" ") + 1].toUpperCase()}` : '';
+  }
+  ngOnDestroy() {
+    if (this.intervalContainer) clearInterval(this.intervalContainer);
+    this.sub.unsubscribe();
   }
 }

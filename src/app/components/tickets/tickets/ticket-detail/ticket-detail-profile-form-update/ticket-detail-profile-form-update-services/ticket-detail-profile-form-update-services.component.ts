@@ -55,10 +55,10 @@ export class TicketDetailProfileFormUpdateServicesComponent implements OnInit, O
     this.currentCompany = this.companiesStateService.getCurrentCompany();
 
     this.getServices();
-    this.ticketStateService.getOnGetServicesList().subscribe(data => {
+    let getOnGetServicesList = this.ticketStateService.getOnGetServicesList().subscribe(data => {
       this.getServices();
     })
-
+    this.sub.add(getOnGetServicesList);
     let currentDate = new Date();
     this.currentService.setDate(currentDate.getDate(), currentDate.getMonth() + 1, currentDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
 

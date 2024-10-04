@@ -16,7 +16,7 @@ import { TicketsRealTimeService } from '../../states/tickets/tickets-real-time.s
 import { BillableRealTimeService } from '../../states/billable/billable-real-time.service';
 import { InvoiceRealTimeService } from '../../states/invoice/invoice-real-time.service';
 import { PaymentsRealTimeService } from '../../states/payments/payments-real-time.service';
-import { DefaultServicesRealTimeService } from '../../states/default-services/default-services-real-time.service';
+import { NonContractServicesRealTimeService } from '../../states/non-contract-services/non-contract-services-real-time.service';
 import { ContractsRealTimeService } from '../../states/contracts/contracts-real-time.service';
 
 import { ShellRealTimeService } from '../../states/shell/shell-real-time.service';
@@ -39,6 +39,8 @@ import { NoteRealTimeService } from 'src/app/states/note/note-real-time.service'
 import { EmailTemplateRealTimeService } from 'src/app/states/email-template/email-template-real-time.service';
 import { CustomerRoleRealTimeService } from 'src/app/states/customer-role/customer-role-real-time.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { DeviceTagsRealTimeService } from 'src/app/states/device-tags/device-tags-real-time.service';
+import { FileManagementRealTimeService } from 'src/app/states/file-management/file-management-real-time.service';
 
 
 /**
@@ -52,6 +54,7 @@ export class WebsocketService {
   private serverUrl = 'realtime';
   private stompClient;
   private netScanSub;
+  private userFilters;
   public IsKafkaConnected: boolean = false;
   onInit: EventEmitter<any> = new EventEmitter();
   isInit: boolean = false;
@@ -81,7 +84,7 @@ export class WebsocketService {
     private paymentsRealTimeService: PaymentsRealTimeService,
     private billableRealTimeService: BillableRealTimeService,
     private invoiceRealTimeService: InvoiceRealTimeService,
-    private defaultServicesRealTimeService: DefaultServicesRealTimeService,
+    private nonContractServicesRealTimeService: NonContractServicesRealTimeService,
     private contractsRealTimeService: ContractsRealTimeService,
     private shellRealTimeService: ShellRealTimeService,
     private tagsRealTimeService: TagsRealTimeService,
@@ -98,6 +101,8 @@ export class WebsocketService {
     private emailTemplateRealTimeService: EmailTemplateRealTimeService,
     private customerRoleRealTimeService: CustomerRoleRealTimeService,
     private customerPortalStateService: CustomerPortalStateService,
+    private deviceTagsRealTimeService: DeviceTagsRealTimeService,
+    private fileManagementRealTimeService: FileManagementRealTimeService
 
   ) {
   }
@@ -166,9 +171,11 @@ export class WebsocketService {
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToPayments();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToSubmittedService();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToSubmittedServiceAgreement();
+      if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToSubmittedFileManagement();
       that.subsribeToSubmittedOneTimeConnection();
       that.subsribeToLockScreen();
       that.subsribeToTicketPriority();
+      that.subsribeToAgentNotification();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToTags();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToDocuments();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToDocumentsCategory();
@@ -245,6 +252,17 @@ export class WebsocketService {
       this.stompClient.subscribe("/user/watch/user", (message) => {
         var newChange = JSON.parse(message.body);
         this.usersRealTimeService.handleRealTimeChanges(newChange);
+        if (message.body) {
+        }
+      });
+    }, 3000);
+  }
+  private subsribeToAgentNotification() {
+
+    setTimeout(() => {
+      this.stompClient.subscribe("/user/watch/agent", (message) => {
+        var newChange = JSON.parse(message.body);
+        this.deviceTagsRealTimeService.handleRealTimeChanges(newChange);
         if (message.body) {
         }
       });
@@ -520,6 +538,19 @@ export class WebsocketService {
     }, 3000);
   }
 
+  public subsribeToUsersFilters() {
+
+    setTimeout(() => {
+
+      this.userFilters = this.stompClient.subscribe(`/user/watch/userFilters`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.usersRealTimeService.handleRealTimeChangesUsersFilters(newChange);
+
+      });
+
+    }, 3000);
+  }
+
   public subsribeToTicketsCustomerUsers(clientCompId) {
     this.ticketsRealTimeService.subsribeToTicketsCustomerUser = this.stompClient.subscribe(`/user/watch/tickets/${clientCompId}`, (message) => {
       var newChange = JSON.parse(message.body);
@@ -608,7 +639,7 @@ export class WebsocketService {
     setTimeout(() => {
       this.stompClient.subscribe(`/user/watch/service`, (message) => {
         var newChange = JSON.parse(message.body);
-        this.defaultServicesRealTimeService.handleRealTimeChanges(newChange);
+        this.nonContractServicesRealTimeService.handleRealTimeChanges(newChange);
       });
 
     }, 3000);
@@ -619,6 +650,15 @@ export class WebsocketService {
       this.stompClient.subscribe(`/user/watch/serviceAgreement`, (message) => {
         var newChange = JSON.parse(message.body);
         this.contractsRealTimeService.handleRealTimeChanges(newChange);
+      });
+
+    }, 3000);
+  }
+  public subsribeToSubmittedFileManagement() {
+    setTimeout(() => {
+      this.stompClient.subscribe(`/user/watch/fileManagement`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.fileManagementRealTimeService.handleRealTimeChanges(newChange);
       });
 
     }, 3000);
@@ -745,6 +785,9 @@ export class WebsocketService {
 
   public unSubsribeNetScan() {
     if (this.netScanSub) this.netScanSub.unsubscribe();
+  }
+  public unSubsribeUsersFilters() {
+    if (this.userFilters) this.userFilters.unsubscribe();
   }
   public getClient() {
     return this.stompClient;

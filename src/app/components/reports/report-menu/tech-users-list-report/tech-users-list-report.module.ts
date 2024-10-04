@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TechUsersListReportComponent } from './tech-users-list-report.component';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatSelectModule } from '@angular/material/select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 
 
 
@@ -12,10 +11,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ],
     imports: [
         CommonModule,
-        MatSelectModule,
-        MatChipsModule,
         NgbModule,
-
+        MatErrorModule
     ],
     exports: [TechUsersListReportComponent]
 

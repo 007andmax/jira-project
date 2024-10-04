@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
-import { CommissionService } from '../commission.service';
+import { CommissionService } from '../../../../services/commission/commission.service';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';

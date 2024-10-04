@@ -5,8 +5,6 @@ import { DocumentsAddHeaderModule } from '../documents-add/documents-add-header/
 import { DocumentsAddBodyModule } from '../documents-add/documents-add-body/documents-add-body.module';
 import { DocumentsAddFooterModule } from '../documents-add/documents-add-footer/documents-add-footer.module';
 import { DocumentsEditInfoComponent } from './documents-edit-info/documents-edit-info.component';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
@@ -16,6 +14,8 @@ import { DatePickerModule } from '../../shared/date-picker/date-picker.module';
 import { DocumentsEditHistoryComponent } from './documents-edit-history/documents-edit-history.component';
 import { DocumentsAddEditCategoriesModule } from '../documents-add/documents-add-info/documents-add-edit-categories/documents-add-edit-categories.module';
 import { DocumentsEditRoutingModule } from './documents-edit-routing.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 
 @NgModule({
@@ -29,8 +29,6 @@ import { DocumentsEditRoutingModule } from './documents-edit-routing.module';
         DocumentsAddHeaderModule,
         DocumentsAddBodyModule,
         DocumentsAddFooterModule,
-        MatSelectModule,
-        MatChipsModule,
         FormsModule,
         TextAreaModule,
         DropDownModule,
@@ -38,7 +36,9 @@ import { DocumentsEditRoutingModule } from './documents-edit-routing.module';
         CompanyTagsModule,
         DatePickerModule,
         DocumentsAddEditCategoriesModule,
-        DocumentsEditRoutingModule
+        DocumentsEditRoutingModule,
+        NgbModule,
+        MatErrorModule
     ],
 
 

@@ -1,6 +1,7 @@
 <div class="add-assigned-user-note">
     <span>Notify to All:</span>
-    <mat-form-field
+    <app-mat-form-field
+        #formField
         ngbDropdown
         [autoClose]="'outside'"
         [placement]="placement"
@@ -9,17 +10,18 @@
         [container]="container"
         (openChange)="onCloseDropDown($event)"
     >
-        <mat-chip-list
+        <app-mat-chip-list
             #chipList
             aria-label="Fruit selection"
             ngbDropdownAnchor
+            [items]="selectedUsers"
+            (onChangeItems)="formField.checkSelectedItems(selectedUsers)"
         >
-            <mat-chip
+            <app-mat-chip
                 class="selected-tag-user"
                 *ngFor="let user of selectedUsers; let i = index"
-                [selectable]="selectable"
-                [removable]="removable"
-                (removed)="remove(i)"
+                [isRemove]="removable"
+                (onClose)="remove(i)"
             >
                 <div class="assigne-user-item">
                     <div
@@ -42,32 +44,24 @@
                         *ngIf="user.isCustomEmail"
                         [textContent]="user.recipient"
                     ></div>
-                    <mat-icon
-                        matChipRemove
-                        *ngIf="removable"
-                    >
-                        cancel
-                    </mat-icon>
                 </div>
-            </mat-chip>
+            </app-mat-chip>
             <input
                 #userInput
                 class="pointer"
                 [formControl]="userCtrl"
-                [matChipInputFor]="chipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                 (input)="onSearchUser($event)"
                 (keyup)="onKeyUp($event)"
                 id="dropdown"
                 ngbDropdownToggle
             >
-            <mat-error
+            <app-mat-error
                 class="invalid-feedback"
                 *ngIf="!validate.getEmail()"
             >
                 Please enter a valid email address
-            </mat-error>
-        </mat-chip-list>
+            </app-mat-error>
+        </app-mat-chip-list>
         <div
             ngbDropdownMenu
             aria-labelledby="dropdown"
@@ -113,7 +107,7 @@
                                 ></div>
                             </div>
                             <i
-                                class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
+                                class="qt-icon icon__done qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
                                 *ngIf="isSelected(user)"
                             ></i>
                         </div>
@@ -142,12 +136,12 @@
                             ></div>
                         </div>
                         <i
-                            class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
+                            class="qt-icon icon__done qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
                             *ngIf="isSelected(user)"
                         ></i>
                     </div>
                 </ng-container>
             </ng-template>
         </div>
-    </mat-form-field>
+    </app-mat-form-field>
 </div>

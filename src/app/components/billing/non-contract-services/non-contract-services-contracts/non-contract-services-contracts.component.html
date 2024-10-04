@@ -1,0 +1,30 @@
+<div class="qt-table-modern__row">
+    <div
+        class="default-service-table__service-name"
+        [textContent]="(type === 'BLOCK_TIME') ? 'Block Time Contracts' : 'User / Device Contracts'"
+    ></div>
+    <div class="default-service-table__rate"></div>
+    <div class="default-service-table__taxes"></div>
+    <div class="default-service-table__gl">
+        <app-drop-down
+            [class]="['--small-padding']"
+            [list]="glNumbers"
+            [placeholder]="'Select GL'"
+            [container]="'body'"
+            [change]="false"
+            [editItem]="selectedGlNumber"
+            [add]="true"
+            [field]="'glNumber'"
+            uiType="dark"
+            heightInput="32px"
+            dropdownWidth="392px"
+            [reducerItem]="glDropDownItemName"
+            (onAddItem)="onAddGlNumber($event)"
+            (onSelectedItem)="onSelectGlNumbers($event)"
+        >
+        </app-drop-down>
+    </div>
+    <div class="default-service-table__billable"></div>
+    <div class="default-service-table__default"></div>
+    <div class="default-service-table__menu"></div>
+</div>

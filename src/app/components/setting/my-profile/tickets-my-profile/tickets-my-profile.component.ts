@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
 import { UsersService } from 'src/app/services/users/users.service';
@@ -22,6 +23,7 @@ export class TicketsMyProfileComponent implements OnInit {
   new TitleListType("Spam Tickets", "SPAM")];
   public currentUser: any;
   loading = true;
+  sub: Subscription = new Subscription();
   constructor(private usersStateService: UsersStateService,
     private usersService: UsersService) { }
 
@@ -31,11 +33,12 @@ export class TicketsMyProfileComponent implements OnInit {
       this.selectedDefaulPage = this.listDefaultPages.find(item => item.type == this.currentUser.startPage);
       this.loading = false;
     }
-    this.usersStateService.getOnGetCurrentuser().subscribe(data => {
+    let getOnGetCurrentuser = this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.currentUser = data;
       this.selectedDefaulPage = this.listDefaultPages.find(item => item.type == this.currentUser.startPage);
       this.loading = false;
     })
+    this.sub.add(getOnGetCurrentuser);
   }
   onChangeDefaultPage(data) {
     this.selectedDefaulPage = data;

@@ -1,52 +1,138 @@
 <!-- for show filters add class "show" for app-left-panel -->
-<div class="qt-page-list users-page">
+<div class="qt-page-list page-list-users --sticky-breadcrumbs">
     <app-users-header
         #header
         [type]="TYPE_LIST_COMPANY_USERS"
-        [count]="count"
+        [count]="users.length"
         (onChangeFilterField)="onFilter($event)"
         [users]="users"
         [selectAll]="selectAll"
-        (onSelectAllUser)="onSelectAllUser($event)"
+        (onSelectAllUser)="toggleAllUser($event)"
+        (onSearch)="onSearch($event)"
+        (onToggleFilter)="toggleFilter = $event"
     ></app-users-header>
-    <div class="qt-page-list__body">
-        <div class="qt-page-list__body-table-container">
-            <table class="qt-page-list__body-tbody qt-table-modern users-table">
-                <tbody
-                    infiniteScroll
-                    [infiniteScrollContainer]="container"
-                    [infiniteScrollDistance]="2"
-                    [infiniteScrollThrottle]="50"
-                    [infiniteScrollDisabled]="infiniteScrollDisabled"
-                    (scrolled)="onScroll()"
-                >
-                    <ng-template
-                        ngFor
-                        let-user
-                        [ngForOf]="users"
-                        [ngForTrackBy]="trackById"
-                    >
-                        <app-users-table
-                            [companyId]="filter.company"
-                            [type]="TYPE_LIST_COMPANY_USERS"
-                            [listCustomSubscription]="listCustomSubscription"
-                            [jobTitleList]="jobTitleList"
-                            [showArchivedUsers]="showArchivedUsers"
-                            [user]="user"
-                            (onSelectUser)="onSelectUser($event)"
-                        ></app-users-table>
-                    </ng-template>
-                </tbody>
-            </table>
+    <div class="qt-page-list users-page qt-df">
+        <div
+            class="qt-page-list__body qt-pl-32"
+            [ngClass]="{'qt-pr-32':!toggleFilter,
+        '--open-filters':toggleFilter}"
+        >
+            <div class="qt-page-list__header-thead-container">
+                <div class="qt-table-modern qt-page-list__header-thead">
+                    <div class="qt-page-list__header-thead__row">
+                        <div class="users-table__check">
+                            <div class="qt-df">
+                                <label
+                                    class="qt-checkbox"
+                                    for="all-users"
+                                >
+                                    <input
+                                        id="all-users"
+                                        [(ngModel)]="selectAll"
+                                        (change)="toggleAllUser($event)"
+                                        type="checkbox"
+                                    >
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div
+                            class="users-table__name pointer"
+                            (click)="onFilter('NAME')"
+                        >
+                            Name
+                            <span class="qt-table-modern__sorting"></span>
+                        </div>
+                        <div class="users-table__email">Email</div>
+                        <div class="users-table__industry">Job Title</div>
+                        <div class="users-table__contract-no">Contact No</div>
+                        <div class="users-table__subscription">Subscription</div>
+                        <div
+                            class="users-table__tickets pointer"
+                            (click)="onFilter('TICKET_NUMBER')"
+                        >
+                            Tickets
+                            <span class="qt-table-modern__sorting"></span>
+                        </div>
+                        <div
+                            class="users-table__portal-status pointer"
+                            (click)="onFilter('PORTAL_STATUS')"
+                        >
+                            Portal Status
+                            <span class="qt-table-modern__sorting"></span>
+                        </div>
+                        <div class="users-table__menu"></div>
+                    </div>
+                </div>
+            </div>
             <div
-                class="loading"
-                *ngIf="showPreloader"
-            ></div>
-            <div
-                class="no-exist-elements"
-                *ngIf="!showPreloader && users.length == 0"
+                class="qt-page-list__body-table-container"
+                [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}"
             >
-                We couldn't find any results
+                <div class="qt-page-list__body-tbody qt-table-modern users-table">
+                    <div
+                        class="tbody"
+                        infiniteScroll
+                        [infiniteScrollContainer]="container"
+                        [infiniteScrollDistance]="2"
+                        [infiniteScrollThrottle]="50"
+                        [infiniteScrollDisabled]="infiniteScrollDisabled"
+                        (scrolled)="onScroll()"
+                    >
+                        <ng-template
+                            ngFor
+                            let-user
+                            [ngForOf]="users"
+                            [ngForTrackBy]="trackById"
+                        >
+                            <app-users-table
+                                [companyId]="filter.companies[0]"
+                                [type]="TYPE_LIST_COMPANY_USERS"
+                                [listCustomSubscription]="listCustomSubscription"
+                                [jobTitleList]="jobTitleList"
+                                [showArchivedUsers]="showArchivedUsers"
+                                [user]="user"
+                                (onSelectUser)="onSelectUser($event)"
+                            ></app-users-table>
+                        </ng-template>
+                    </div>
+                </div>
+                <div
+                    class="loading"
+                    *ngIf="showPreloader"
+                ></div>
+                <div
+                    class="no-exist-elements"
+                    *ngIf="!showPreloader && users.length == 0"
+                >
+                    We couldn't find any results
+                </div>
+                <div
+                    class="loading pengind-loading"
+                    *ngIf="showPendingPreloader"
+                ></div>
+            </div>
+        </div>
+        <div
+            class="aside-filters qt-ml-16"
+            [hidden]="!toggleFilter"
+        >
+            <div class="aside-filters-header qt-df qt-ai-c qt-jc-sb">
+                <div class="aside-filters-header__title">Filters</div>
+                <div
+                    class="qt-button --square-md --gray pointer"
+                    (click)="onCloseFilters()"
+                >
+                    <div class="qt-icon icon__close qt-bg-contain qt-sz-16 pointer"></div>
+                </div>
+            </div>
+            <div class="aside-filters-content">
+                <app-users-filter
+                    class="qt-w100"
+                    #filters
+                    (onClearAll)="onClearAll()"
+                    (onClose)="onCloseFilters()"
+                ></app-users-filter>
             </div>
         </div>
     </div>

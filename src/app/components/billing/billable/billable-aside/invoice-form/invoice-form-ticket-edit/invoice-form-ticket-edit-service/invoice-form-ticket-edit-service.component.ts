@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ChangeDetectorRef, ViewChild, OnDestroy } from '@angular/core';
 import { BillableProfileTicketServiceExpense } from '../../../../class/billable-profile-ticket-service-expense';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { InvoiceFormTicketEditTaxesComponent } from '../invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
@@ -13,7 +13,7 @@ import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component'
   templateUrl: './invoice-form-ticket-edit-service.component.html',
   styleUrls: ['./invoice-form-ticket-edit-service.component.scss']
 })
-export class InvoiceFormTicketEditServiceComponent implements OnInit {
+export class InvoiceFormTicketEditServiceComponent implements OnInit, OnDestroy {
   @ViewChild('taxes', { static: true }) taxesDropDown: TaxesComponent;
   @Input() service: BillableProfileTicketServiceExpense;
   minutes: number = 0;
@@ -27,7 +27,6 @@ export class InvoiceFormTicketEditServiceComponent implements OnInit {
   constructor(private companiesStateService: CompaniesStateService,
     public cd: ChangeDetectorRef,
     private taxesStateService: TaxesStateService,
-    private taxesService: TaxesService,
     private elRef: ElementRef,) { }
 
   ngOnInit() {
@@ -88,4 +87,8 @@ export class InvoiceFormTicketEditServiceComponent implements OnInit {
   public onPastDescription(value) {
     this.service.description = value;
   }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
 }

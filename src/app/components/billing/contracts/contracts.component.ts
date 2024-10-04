@@ -5,10 +5,14 @@ import { Subscription } from 'rxjs';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { ActivatedRoute } from '@angular/router';
+import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'contracts',
   templateUrl: './contracts.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./contracts.component.scss'],
 })
 export class ContractsComponent implements OnInit, OnDestroy {

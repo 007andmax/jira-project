@@ -21,7 +21,6 @@ export class CompanyContractsComponent extends ContractsComponent implements OnI
       this.companyContracts = this.companiesStateService.getCompanies().find(item => item.id === id);
     });
     this.sub.add(subscription);
-
     let getOnShowNotificationReview = this.contractsStateService.getOnShowNotificationReview().subscribe(data => {
       this.showNotificationReview = true;
     })
@@ -42,7 +41,6 @@ export class CompanyContractsComponent extends ContractsComponent implements OnI
     })
     this.sub.add(getOnPreview);
     let getOnTogglePreview = this.contractsStateService.getOnTogglePreview().subscribe(data => {
-
       this.showPreview = false;
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();

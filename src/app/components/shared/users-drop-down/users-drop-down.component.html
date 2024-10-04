@@ -1,0 +1,110 @@
+<div
+    ngbDropdown
+    #dp="ngbDropdown"
+    [ngClass]="class"
+    [container]="container"
+    [ngStyle]="{'width':widthInput ? widthInput : '100%'}"
+>
+    <div class="qt-df qt-ai-c">
+        <div
+            *ngIf="title"
+            class="app-drop-down__title qt-mr-8"
+            [textContent]="title"
+        ></div>
+        <span
+            *ngIf="isShowTooltip"
+            class="qt-icon icon__help qt-sz-16 qt-ic-c qt-mb-8"
+            placement="top"
+            [ngbTooltip]="tooltipMessage"
+            container="body"
+        ></span>
+    </div>
+    <app-mat-error
+        class="invalid-feedback mat-error"
+        *ngIf="!validate"
+        [textContent]="errorMessage"
+    >
+    </app-mat-error>
+    <form>
+        <input
+            type="text"
+            class="pointer"
+            [ngStyle]="{'width': '100%', 'height': heightInput ? heightInput : '40px' }"
+            [ngClass]="{'disabled': isDisabled, '--input-error' : !validate}"
+            [disabled]="isDisabled"
+            [value]="getSelectedItemText()"
+            autocomplete="off"
+            [placeholder]="placeholder"
+            id="dropdown1"
+            [attr.maxlength]="maxlength"
+            (input)="onCheckAdd($event)"
+            (focus)="onFocus($event)"
+            [readonly]="!change"
+            ngbDropdownAnchor
+        >
+        <span
+            class="app-drop-down__right-icon pointer"
+            *ngIf="list && !isDisabled"
+            [ngStyle]="{'bottom': heightInput ? dividePosition(heightInput) : '20px' }"
+        >
+            <i
+                *ngIf="selectedItem && !isAdd && !isBlockClear"
+                class="icn-sm icn-remove-old"
+                (click)="clearClient()"
+            ></i>
+            <i
+                *ngIf="(!selectedItem || isBlockClear) && !isAdd && !preloader"
+                class="icn-sm report-caret-icon"
+            ></i>
+            <i
+                *ngIf="isAdd"
+                (click)="addItem()"
+                class="icn-sm icn-product-save qt-icon icon__done qt-icon__blue-light-600"
+            ></i>
+        </span>
+        <i
+            class="loading xs"
+            *ngIf="preloader"
+        ></i>
+        <div
+            ngbDropdownMenu
+            [ngStyle]="{'width': dropdownWidth ? dropdownWidth : '100%', 'max-height': dropdownHeight ? dropdownHeight : '192px'}"
+            aria-labelledby="dropdown1"
+            class="app-drop-down__dropdown"
+        >
+            <ng-template
+                ngFor
+                let-item
+                [ngForOf]="list"
+                let-i="index"
+            >
+                <div
+                    ngbDropdownItem
+                    (click)="onSelectUser(item)"
+                    [ngClass]="{'--selected':isSelectedUser(item)}"
+                    class="qt-df user-container pointer"
+                >
+                    <div
+                        class="assigne-user-avatar qt-mr-12"
+                        [textContent]="ticketsListService.getAssignedUserNameForAvatar(item)"
+                        [ngStyle]="{'background': ticketsListService.getStyleAvatar(item)}"
+                    ></div>
+                    <div>
+                        <div
+                            class="user-name"
+                            [textContent]="getUserName(item)"
+                        ></div>
+                        <span
+                            class="user-email"
+                            [textContent]="item.primaryEmail"
+                        ></span>
+                    </div>
+                    <i
+                        class="qt-icon icon__done qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
+                        *ngIf="isSelectedUser(item)"
+                    ></i>
+                </div>
+            </ng-template>
+        </div>
+    </form>
+</div>

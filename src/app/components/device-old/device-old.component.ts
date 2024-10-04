@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonHttpServices } from './_services/common_http.service';
 import { RemoteControlService } from './_services/remoteControl.service';
 import { CommonServices } from './_services/common.service';
@@ -43,12 +43,8 @@ export class DeviceOldComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   constructor(private modalService: NgbModal, private commonHttpServices: CommonHttpServices,
     private commonServices: CommonServices, private toastr: ToastrService,
-    private hardwareService: HardwareService,
     private deviceDetailService: DeviceDetailService,
-    private remoteControlService: RemoteControlService,
     private companiesStateService: CompaniesStateService,
-    private socketService: WebsocketService,
-    private usersStateService: UsersStateService,
     private shellStateService: ShellStateService,
     private devicesStateService: DevicesStateService,
     private devicesService: DevicesService,

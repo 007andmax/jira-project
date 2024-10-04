@@ -1,5 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { DeviceExtended } from '../../class/device-extended';
+import { DeviceCompany } from '../../class/device-company';
+import { DevicesService } from 'src/app/services/devices/devices.service';
+import { CompanyDevicesEditIpComponent } from '../../company-devices-edit-ip/company-devices-edit-ip.component';
+import { CompanyDevicesEditLabelComponent } from '../../company-devices-edit-label/company-devices-edit-label.component';
+import { CompanyDevicesEditMacComponent } from '../../company-devices-edit-mac/company-devices-edit-mac.component';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-company-devices-aside-network-tab',
@@ -7,17 +13,50 @@ import { DeviceExtended } from '../../class/device-extended';
   styleUrls: ['./company-devices-aside-network-tab.component.scss']
 })
 export class CompanyDevicesAsideNetworkTabComponent implements OnInit {
+  @ViewChild('ipLabel') ipLabel: CompanyDevicesEditIpComponent;
+  @ViewChild('portLabel') portLabel: CompanyDevicesEditLabelComponent;
+  @ViewChild('macLabel') macLabel: CompanyDevicesEditMacComponent;
   @Input() device: DeviceExtended;
+  @Input() customDevice: DeviceCompany;
   toggleIpSettings: boolean = false;
-  constructor() { }
+  constructor(private devicesService: DevicesService,
+    public customerPortalStateService: CustomerPortalStateService,
+    public cd: ChangeDetectorRef
+  ) { }
 
   ngOnInit() {
+  }
+  public refresh(data) {
+    this.customDevice = data;
+    this.device = null;
+    if (this.ipLabel) this.ipLabel.setValue(this.customDevice.ip);
+    if (this.portLabel) this.portLabel.setValue(this.customDevice.port);
+    if (this.macLabel) this.macLabel.setValue(this.customDevice.macAddress);
+    this.cd.detectChanges();
+  }
+  onChangeIp(data) {
+    this.customDevice.setIp(data);
+    this.devicesService.editDevice(this.customDevice.getRequestForEdit()).subscribe(data => {
+
+    })
+  }
+  onChangeMac(data) {
+    this.customDevice.setMacAddress(data);
+    this.devicesService.editDevice(this.customDevice.getRequestForEdit()).subscribe(data => {
+
+    })
+  }
+  onChangePort(data) {
+    this.customDevice.setPort(data);
+    this.devicesService.editDevice(this.customDevice.getRequestForEdit()).subscribe(data => {
+
+    })
   }
   public chackDefaultValue(value) {
     return (!value || value === "") ? "N\A" : value;
   }
   getNetworkAdapterField(field) {
-    let find = this.device.report.networkAdapters.find(item => item.is_default);
+    let find = this.device.report.networkAdapters.find(item => item.isDefault);
     return (find) ? find[field] : null;
   }
   getLinkSpeed() {

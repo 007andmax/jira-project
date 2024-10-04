@@ -4,8 +4,25 @@ export class CompanyDeviceFilter {
     filterTop: Array<FilterListTop> = [new FilterListTop('name', 'ASC'),
     new FilterListTop('user_name', ''),
     new FilterListTop('up_time', '')];
+    assestType: Array<string> = [];
+    isCustomDevices: boolean = true;
+    isAgent: boolean = true;
     constructor() { }
 
+    public setAssestType(data) {
+        this.assestType = data;
+    }
+    public setIsCustomDevices(data) {
+        this.isCustomDevices = data;
+    }
+    public setIsAgent(data) {
+        this.isAgent = data;
+    }
+    public setFilter(data) {
+        this.isCustomDevices = data.isCustomDevices;
+        this.isAgent = data.isAgent;
+        this.assestType = data.assestType;
+    }
     public onFilter(field, devices) {
         let index = this.filterTop.findIndex(item => item.field === field);
         if (index > -1) {
@@ -67,6 +84,7 @@ export class CompanyDeviceFilter {
             1 : ((this.getNameDevice(b).toLowerCase() > this.getNameDevice(a).toLowerCase()) ? -1 : 0));
     }
     private getNameDevice(device) {
+        if (device.isCustom) return device.name;
         return device.label || device.hostName || device.ip
     }
     public clearFilter() {

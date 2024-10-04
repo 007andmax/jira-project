@@ -7,7 +7,7 @@
     ></app-contracts-aside-top>
     <div class="qt-inputs-row">
         <div class="qt-pl-12 qt-pr-12 qt-df qt-ai-c contract-tipe-info">
-            <div class="qt-sz-16 icon__tips qt-mr-5"></div>
+            <div class="qt-sz-16 qt-icon icon__info qt-mr-5"></div>
             <div>
                 Contact time can be based on the amount of users or devices, these number generated automaticaly
             </div>
@@ -60,12 +60,12 @@
                 [(ngModel)]="contractsOther.description"
                 (input)="validate.resetDescription()"
             >
-            <mat-error
+            <app-mat-error
                 class="invalid-feedback"
                 *ngIf="!validate.getDescription()"
             >
                 Description is required
-            </mat-error>
+            </app-mat-error>
         </div>
     </div>
     <div class="qt-inputs-row-background">
@@ -158,9 +158,9 @@
         >
             + Add Service
         </button>
-        <mat-error *ngIf="!validate.getServicesOrProducts()">
+        <app-mat-error *ngIf="!validate.getServicesOrProducts()">
             At least one {{(type === 'PRODUCTS' ? 'product' : 'service')}} should be added
-        </mat-error>
+        </app-mat-error>
     </div>
     <div class="qt-pt-16 qt-pb-16">
         <div class="qt-df qt-jc-sb qt-ai-c ">
@@ -180,9 +180,9 @@
                 </ng-template>
                 <div class="qt-fs-13 qt-ff-gm qt-lh-154 qt-color-gray-600 qt-df qt-ai-c">
                     Manual create billable item
-                    <span class="icon__automatically-create-invoice qt-bg-contain qt-dib qt-sz-20 qt-ml-8"></span>
+                    <span class="qt-icon icon__automatically-create-invoice qt-dib qt-sz-20 qt-ml-8"></span>
                     <span
-                        class="icon__help qt-dib qt-sz-12 qt-ic-c qt-ml-8"
+                        class="qt-icon icon__help qt-dib qt-sz-12 qt-ic-c qt-ml-8"
                         placement="top"
                         [ngbTooltip]="manualContent"
                     ></span>
@@ -208,9 +208,9 @@
                 </ng-template>
                 <div class="qt-fs-13 qt-ff-gm qt-lh-154 qt-color-gray-600 qt-df qt-ai-c">
                     Automatically create and send invoice
-                    <span class="icon__manual-create-billable qt-bg-contain qt-dib qt-sz-20 qt-ml-8"></span>
+                    <span class="qt-icon icon__manual-create-billable qt-dib qt-sz-20 qt-ml-8"></span>
                     <span
-                        class="icon__help qt-dib qt-sz-12 qt-ic-c qt-ml-8"
+                        class="qt-icon icon__help qt-dib qt-sz-12 qt-ic-c qt-ml-8"
                         placement="top"
                         [ngbTooltip]="tipContent"
                     ></span>

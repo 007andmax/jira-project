@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Company } from 'src/app/interfaces/company/company';
 import { AppService } from 'src/app/states/app/app.service';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';

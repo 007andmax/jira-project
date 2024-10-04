@@ -7,24 +7,29 @@
         class="qt-button --gray qt-mr-8"
         (click)="editDocument()"
         *ngIf="getPermissions('EDIT_DOCUMENT')"
+        ngbTooltip="Edit"
+        placement="top"
     >
         Edit
     </button>
     <button
         class="qt-button --gray qt-mr-8"
         (click)="printPdf()"
+        ngbTooltip="Print"
+        placement="top"
     >
         Print
     </button>
     <button
         class="qt-button qt-mr-12 qt-mr-8"
         (click)="exportPdf()"
+        ngbTooltip="Download"
+        placement="top"
     >
         Export PDF
     </button>
-
     <div
-        class="qt-aside-modern__header-close icon__close"
+        class="qt-aside-modern__header-close qt-icon icon__close"
         (click)="goToDocumentsList()"
     >
     </div>

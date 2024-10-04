@@ -33,14 +33,15 @@ export class TicketDetailContactDetailsComponent implements OnInit, OnDestroy {
     private usersStateService: UsersStateService) { }
 
   ngOnInit() {
-    this.company = this.companiesStateService.getCompanies().find(item => item.id === this.ticketProfile.company.id);
-
-    this.getDataCompany();
+    this.resetCompany();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
-      this.company = this.companiesStateService.getCompanies().find(item => item.id === this.ticketProfile.company.id);
-      this.getDataCompany();
+      this.resetCompany();
     })
     this.sub.add(getOnCompanies);
+  }
+  public resetCompany() {
+    this.company = this.companiesStateService.getCompanies().find(item => item.id === this.ticketProfile.company.id);
+    this.getDataCompany();
   }
   getDataCompany() {
     if (this.company) {
@@ -120,7 +121,7 @@ export class TicketDetailContactDetailsComponent implements OnInit, OnDestroy {
     return (this.ticketProfile.createdUser) ? this.usersStateService.getAllUsers().find(user => user.id === this.ticketProfile.createdUser.id) : null;
   }
   getCompanyUser() {
-    return this.companiesStateService.getCompanies().find(item => this.usersStateService.getAllUsers().find(user => user.id === this.ticketProfile.createdUser.id).customerCompaniesInfo.some(clientCompany => clientCompany.companyId === item.id));
+    return this.companiesStateService.getCompanies().find(item => this.ticketProfile.company.id === item.id);
   }
   onShowMap() {
     this.mapModalStateService.onSohwMap({
