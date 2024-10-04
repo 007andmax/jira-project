@@ -37,12 +37,12 @@
                                 type="text"
                                 placeholder="File Name"
                             >
-                            <mat-error
+                            <app-mat-error
                                 class="invalid-feedback"
                                 *ngIf="submitted && f2.name.errors"
+                                [textContent]="'Name is required'"
                             >
-                                Name is required
-                            </mat-error>
+                            </app-mat-error>
                         </div>
                     </div>
                     <div class="qt-inputs-row">
@@ -64,9 +64,9 @@
                                 class="terms-n-conditions__textarea qt-input-block__textarea"
                                 placeholder="Add a file description"
                                 appTextArea
+                                [height]="'100px'"
                                 maxlength="1000"
                                 cols="30"
-                                [default]="3"
                                 rows="3"
                             ></textarea>
                         </div>

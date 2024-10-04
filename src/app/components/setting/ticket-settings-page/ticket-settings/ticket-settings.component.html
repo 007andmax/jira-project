@@ -22,18 +22,18 @@
                                 value="Starting ticket number"
                                 maxlength="7"
                             >
-                            <mat-error
+                            <app-mat-error
                                 class="invalid-feedback --pos-static"
                                 *ngIf="submitted && f.ticketCount.errors && f.ticketCount.errors.required"
                             >
                                 Starting ticket number is required
-                            </mat-error>
-                            <mat-error
+                            </app-mat-error>
+                            <app-mat-error
                                 class="invalid-feedback --pos-static"
                                 *ngIf="submitted && f.ticketCount.errors && f.ticketCount.errors.pattern"
                             >
                                 Only Number is allowed
-                            </mat-error>
+                            </app-mat-error>
                             <label
                                 class="control-label"
                                 *ngIf="used"
@@ -76,12 +76,12 @@
                                     </div>
                                 </div>
                             </label>
-                            <mat-error
+                            <app-mat-error
                                 class="qt-tooltip-error"
                                 *ngIf="submitted && f.outliersTime.errors && f.outliersTime.errors.required"
                             >
                                 OutliersTime is required
-                            </mat-error>
+                            </app-mat-error>
                         </div>
                     </div>
                 </div>

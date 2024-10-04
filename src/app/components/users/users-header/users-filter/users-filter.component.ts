@@ -10,7 +10,6 @@ import { UserFilters } from '../../class/user-filters';
 import { TicketsFilterCompaniesDropDownComponent } from 'src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-companies-drop-down/tickets-filter-companies-drop-down.component';
 import { UserDefaultSubscription } from '../../class/user-default-subscription';
 import { UsersFilterJobTitleComponent } from './users-filter-job-title/users-filter-job-title.component';
-import { UsersFilterIndustryComponent } from './users-filter-industry/users-filter-industry.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserFilterSaveComponent } from '../../user-filter-save/user-filter-save.component';
 import { UserGlobalFilter } from '../../class/user-global-filters';
@@ -24,6 +23,7 @@ import { MarketingSubscriptionType } from 'src/app/components/setting/marketing-
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
 import { MODE_MARKETING_USERS_LIST } from 'src/app/const/users';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { UsersFilterCustomSubscriptionsComponent } from './users-filter-custom-subscriptions/users-filter-custom-subscriptions.component';
 
 @Component({
   selector: 'app-users-filter',
@@ -34,14 +34,12 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 export class UsersFilterComponent implements OnInit, OnDestroy {
   @ViewChild('jobTitleDp') jobTitleDp: UsersFilterJobTitleComponent;
   @ViewChild('companiesDp') companiesDp: TicketsFilterCompaniesDropDownComponent;
-  @ViewChild('customSubscriptionDp') customSubscriptionDp: UsersFilterIndustryComponent;
-  @ViewChild('industriesDp') industriesDp: UsersFilterIndustryComponent;
+  @ViewChild('customSubscriptionDp') customSubscriptionDp: UsersFilterCustomSubscriptionsComponent;
   @ViewChild('subscriptionDp') subscriptionDp: UsersFilterSubscriptionsComponent;
   @ViewChild('tagsDp') tagsDp: UsersFilterTagsComponent;
   @Output() onClearAll = new EventEmitter();
   @Output() onClose = new EventEmitter();
   globalFilter: UserGlobalFilter = new UserGlobalFilter();
-  industries: Array<CrmCompanyIndustry> = [];
   listCustomSubscription: Array<MarketingSubscriptionType> = [];
   public filter: UserFilters = new UserFilters();
   MODE_MARKETING_USERS_LIST = MODE_MARKETING_USERS_LIST;
@@ -65,13 +63,6 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
     this.sub.add(getOnCompanies);
     let onTicketFilters = this.customerPortalStateService.onUsersFilters.subscribe(data => (this.checkCompanyCustomerUser()));
     this.sub.add(onTicketFilters);
-
-    this.industries = this.crmStateService.getIndustryList();
-    let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
-      this.industries = data;
-      this.ref.markForCheck();
-    })
-    this.sub.add(onGetIndustry);
     let onLeftPanelMarketingFilter = this.usersStateService.onLeftPanelMarketingFilter.subscribe((data) => {
       this.subscriptionDp.clearCustomSubscription();
       this.filter.setCustomSubscriptions([]);
@@ -102,14 +93,6 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
         this.onSelectCompany([]);
       }
 
-      let industries: Array<CrmCompanyIndustry> = this.industries.filter(item => data.industries.some(userId => userId == item.id));
-      if (industries.length > 0) {
-        this.industriesDp.selectedTag = industries;
-        this.filter.setIndustries(industries.map(item => item.id));
-      } else {
-        this.industriesDp.clearWithOutChanges();
-        this.onSelectIndustry([]);
-      }
       let jobTitles = this.crmStateService.getJobTitleList().filter(item => data.jobTitles.some(statusId => statusId == item.id));
       this.jobTitleDp.clearWithOutChanges();
       if (jobTitles.length > 0) {
@@ -181,8 +164,6 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
     this.filter.setJobTitles([]);
     this.jobTitleDp.clearWithOutChanges();
     this.filter.resetDefaultSubscriptions();
-    this.filter.setIndustries([]);
-    this.industriesDp.clearWithOutChanges();
     this.filter.setTags([]);
     this.tagsDp.clearWithOutChanges();
     this.filter.setUserName(null);
@@ -208,17 +189,9 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
     this.filter.setCompanies(items.map(item => item.id));
     this.globalFilter.setCompanies(items.map(item => item.id));
   }
-  public onSelectIndustry(items) {
-    this.filter.setIndustries(items.map(item => item.id));
-    this.globalFilter.setIndustries(items.map(item => item.id));
-  }
   public onSelectCustomSubscription(items) {
     this.filter.setCustomSubscriptions(items.map(item => item.id));
     this.globalFilter.setCustomSubscriptions(items.map(item => item.id));
-  }
-  clearClientIndustry() {
-    this.filter.setIndustries([]);
-    this.usersStateService.onInitFilter(this.filter);
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

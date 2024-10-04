@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { DeviceSettingComponent } from './device-setting.component';
 import { DeviceSettingRoutingModule } from './device-setting-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatChipsModule, MatFormFieldModule, MatIconModule, MatSelectModule } from '@angular/material';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModelPipe } from 'src/app/pipe/model.pipe';
@@ -44,11 +43,7 @@ import { ManufacturesCheckUseComponent } from './manufactures-check-use/manufact
         DeviceSettingRoutingModule,
         ReactiveFormsModule,
         FormsModule,
-        MatSelectModule,
-        MatChipsModule,
-        MatIconModule,
         DropDownModule,
-        MatFormFieldModule,
         NgbModule,
         DynamicTooltipModule,
         ClickOutsideModule,

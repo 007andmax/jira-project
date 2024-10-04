@@ -21,12 +21,12 @@
             maxlength="30"
             required
         >
-        <mat-error
-          class="invalid-feedback"
-          *ngIf="disableCreate"
+        <app-mat-error
+            class="invalid-feedback"
+            *ngIf="disableCreate"
         >
-          This job type is already occupied
-        </mat-error>
+            This job type is already occupied
+        </app-mat-error>
     </div>
     <div class="tab-pane__table-cell crm-settings-table-job-type__action"></div>
 </div>

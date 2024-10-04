@@ -39,7 +39,6 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
   validate: UserValidate = new UserValidate();
   userTypes: Array<CrmCompanyJobType> = [];
   phoneTypes = ['Office', 'Mobile', 'Fax'];
-  industries: Array<CrmCompanyIndustry> = [];
   idUploadFile: string;
   @ViewChild('jobTypeDp') jobTypeDp: DropDownComponent;
   @ViewChild('jobTitleDp') jobTitleDp: DropDownComponent;
@@ -58,11 +57,6 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    this.industries = this.crmStateService.getIndustryList();
-    let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
-      this.industries = data;
-    })
-    this.sub.add(onGetIndustry);
     this.jobTitleList = this.crmStateService.getJobTitleList();
     let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
       this.jobTitleList = data;
@@ -85,9 +79,6 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onGetUserRole);
 
-  }
-  onSelectClientIndustry(item) {
-    this.user.setUserIndustryId((item) ? item.id : null);
   }
   getJobTypeList() {
     if (this.crmStateService.getJobTypeList().length === 0) {

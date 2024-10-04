@@ -9,12 +9,12 @@
         class="app-drop-down__title"
         [textContent]="title"
     ></div>
-    <mat-error
+    <app-mat-error
         class="app-drop-down__error qt-tooltip-error mat-error"
         *ngIf="!validate"
         [textContent]="errorMessage"
     >
-    </mat-error>
+    </app-mat-error>
     <input
         type="text"
         [ngStyle]="{'width':widthInput ? widthInput : '100%', 'height': heightInput ? heightInput : '40px' }"
@@ -70,7 +70,7 @@
                 [textContent]="reduceItemName(item)"
                 (click)="onSelect(item)"
                 [title]="reduceItemName(item)"
-                 [ngClass]="{'--selected':isSelected(item.id)}"
+                [ngClass]="{'--selected':isSelected(item.id)}"
             ></button>
         </ng-template>
     </div>

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContractsAsideBlockTimeBillingCustomerServiceComponent } from './contracts-aside-block-time-billing-customer-service.component';
-import { MatChipsModule, MatSelectModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
+import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 
 
 @NgModule({
@@ -10,10 +10,8 @@ import { FormsModule } from '@angular/forms';
     ],
     imports: [
         CommonModule,
-        MatSelectModule,
-        MatChipsModule,
         FormsModule,
-
+        MatErrorModule
     ],
     exports: [ContractsAsideBlockTimeBillingCustomerServiceComponent]
 

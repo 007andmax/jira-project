@@ -301,8 +301,7 @@
           margin: 2px;
         }
       }
-      .mat-form-field-appearance-legacy .mat-form-field-underline,
-      .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+      .mat-form-field-appearance-legacy .mat-form-field-underline {
         display: none;
       }
       .mat-form-field-appearance-legacy .mat-form-field-wrapper {
@@ -319,8 +318,7 @@
       .mat-form-field-infix {
         border: 1px solid $gray-200;
         border-radius: 6px;
-        padding: 0;
-        padding-left: 36px;
+        padding: 0px 0px 0px 36px !important;
         position: relative;
         min-height: 36px;
         &:hover {

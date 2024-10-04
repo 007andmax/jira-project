@@ -19,9 +19,25 @@
     </div>
     <div
         class="billable-payment-table__company pointer"
-        [textContent]="payment.clientCompanyName"
         (click)="showDetailsPayment()"
+        [textContent]="payment.clientCompanyName"
+        *ngIf="payment.multipleCompanies.length == 0"
     ></div>
+    <div
+        class="billable-payment-table__company pointer qt-df qt-fd-c qt-ai-fs"
+        (click)="showDetailsPayment()"
+        *ngIf="payment.multipleCompanies.length > 0"
+    >
+        <ng-template
+            ngFor
+            let-company
+            [ngForOf]="payment.multipleCompanies"
+            [ngForTrackBy]="trackById"
+            let-i="index"
+        >
+            <span [textContent]="company.name"></span>
+        </ng-template>
+    </div>
     <div
         class="billable-payment-table__payment-mode pointer"
         [textContent]="parsePaymentMethod(payment.paymentMethod)"

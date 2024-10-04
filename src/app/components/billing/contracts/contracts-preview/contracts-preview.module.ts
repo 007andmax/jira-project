@@ -8,8 +8,9 @@ import { DatePickerModule } from 'src/app/components/shared/date-picker/date-pic
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.module';
-import { MatChipsModule, MatSelectModule } from '@angular/material';
 import { ContractsAsideBlockTimeBillingPreviewComponent } from './contracts-aside-block-time-billing-preview/contracts-aside-block-time-billing-preview.component';
+import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.module';
+import { MatChipListModule } from 'src/app/components/shared/mat-chip-list/mat-chip-list.module';
 
 
 
@@ -27,8 +28,8 @@ import { ContractsAsideBlockTimeBillingPreviewComponent } from './contracts-asid
         FormsModule,
         NgbModule,
         DropDownModule,
-        MatSelectModule,
-        MatChipsModule,
+        MatChipModule,
+        MatChipListModule
     ],
     exports: [ContractsPreviewComponent]
 

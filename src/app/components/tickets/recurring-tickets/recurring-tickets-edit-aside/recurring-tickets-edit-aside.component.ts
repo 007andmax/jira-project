@@ -31,6 +31,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   public opened = false;
   public productList = [];
   public servicesList = [];
+  agreements = [];
   public products: Array<ForCreateProduct> = [];
   public services: Array<ForCreateService> = [];
   public type: string = "services";
@@ -42,7 +43,6 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   public listTechUsers: Array<TechUserItem> = [];
   description: TextAreaDirective;
   areTicketsPresented: boolean = false;
-  areTicketsTerminated: boolean = false;
   @ViewChild(TextAreaDirective) set appTextArea(directive: TextAreaDirective) {
     this.description = directive;
   };
@@ -160,12 +160,14 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   }
   private getServiceAgreements(id) {
     this.contractsService.getServiceAgreementsByCompany(id).subscribe((data: any) => {
-      let Agreements = data;
-      this.areTicketsPresented = (Agreements.length > 0) ? true : false;
-      this.areTicketsTerminated = Agreements.every((el) => {
-        return el.status === 'EXPIRED' || el.status === 'TERMINATED'
-      })
+      this.agreements = data;
+      this.areTicketsPresented = (this.agreements.length > 0) ? true : false;
     })
+  }
+  checkServiceTerminated(service) {
+    if (!service.serviceAgreement && !service.serviceContractServiceAgreement) return false;
+    let serviceAgreement = this.agreements.find(item => service.serviceAgreement && service.serviceAgreement.id == item.id || service.serviceContractServiceAgreement && service.serviceContractServiceAgreement.id == item.id);
+    return serviceAgreement ? (serviceAgreement.status === 'EXPIRED' || serviceAgreement.status === 'TERMINATED') : false;
   }
   /**
   * Subscribe to change description
@@ -413,16 +415,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
         this.recurringState.getCreateTicket().clearProducts();
       }
     }
-    if (this.createService.checkServicesForSave(this.ticketForEdit, this.services)) {
-      this.services.forEach((item: ForCreateService) => (item.versionedId && (item.name || item.description)) && this.recurringState.getCreateTicket().addService(new CreateRecurringTicketsService(item.versionedId.id, item.description, item.duration)));
-    } else {
-      if (this.ticketForEdit === null) {
-        this.recurringState.getCreateTicket().resetServices();
-
-      } else {
-        this.recurringState.getCreateTicket().clearServices();
-      }
-    }
+    this.services.filter((item: ForCreateService) => item.versionedId).forEach(item => this.recurringState.getCreateTicket().addService(new CreateRecurringTicketsService(item.versionedId.id, item.description, item.duration)));
     if (this.ticketForEdit && this.ticketForEdit.id) {
 
       this.recurringState.getCreateTicket().checkForEdit(this.ticketForEdit);

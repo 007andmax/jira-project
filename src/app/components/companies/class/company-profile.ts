@@ -35,7 +35,7 @@ export class CompanyProfile {
     workingDays: Array<WorkDay>;
     techLeadId: string;
     id: string;
-    tags: Array<Tag>;
+    tags: Array<Tag> = [];
     associatedCompanies: Array<CompanyAssociated> = [];
     reputation?: number = 0;
     primaryContact: CompanyAndressContact;

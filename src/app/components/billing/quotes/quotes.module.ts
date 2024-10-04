@@ -18,7 +18,6 @@ import { QuotesFilterComponent } from './quotes-header/quotes-filter/quotes-filt
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { InvoiceFormEditCustomerModule } from '../billable/billable-aside/invoice-form/invoice-form-edit-customer/invoice-form-edit-customer.module';
 import { FormsModule } from '@angular/forms';
-import { MatSelectModule, MatChipsModule } from '@angular/material';
 import { DatePickerModule } from '../../shared/date-picker/date-picker.module';
 import { ServiceItemQuoteComponent } from './quote-aside-add/service-item-quote/service-item-quote.component';
 import { ProductItemQuoteComponent } from './quote-aside-add/product-item-quote/product-item-quote.component';
@@ -36,6 +35,8 @@ import { InvoiceChangeAddressModule } from '../billable/billable-aside/invoice-f
 import { QuoteAsideAddChangeAddressComponent } from './quote-aside-add/quote-aside-add-change-address/quote-aside-add-change-address.component';
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 import { NumberModule } from 'src/app/directives/number/number.module';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
+import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 
 
 
@@ -69,8 +70,6 @@ import { NumberModule } from 'src/app/directives/number/number.module';
         DropDownModule,
         InvoiceFormEditCustomerModule,
         FormsModule,
-        MatSelectModule,
-        MatChipsModule,
         DatePickerModule,
         InvoiceRegularNoteModule,
         MultiDatepickerModule,
@@ -81,7 +80,9 @@ import { NumberModule } from 'src/app/directives/number/number.module';
         KeyUpEnterModule,
         InvoiceChangeAddressModule,
         CompanyDropDownModule,
-        NumberModule
+        NumberModule,
+        MatErrorModule,
+        TextAreaModule
     ],
 
 

@@ -46,7 +46,6 @@ export class User {
     jobDescription: string;
     jobTitleId: string;
     jobTypeId: string;
-    userIndustryId: string;
     userEmailNotifications: UserEmailNotifications;
     customerCompaniesInfo: Array<UserCustomerCompaniesInfo> = [];
     constructor(data = null) {

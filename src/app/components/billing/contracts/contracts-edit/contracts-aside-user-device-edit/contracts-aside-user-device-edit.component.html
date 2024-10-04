@@ -77,12 +77,12 @@
                 [(ngModel)]="contractsUserDevice.description"
                 (input)="validate.resetDescription()"
             >
-            <mat-error
+            <app-mat-error
                 class="invalid-feedback"
                 *ngIf="!validate.getDescription()"
             >
                 Description is required
-            </mat-error>
+            </app-mat-error>
         </div>
     </div>
     <div class="qt-inputs-row-background">
@@ -267,12 +267,12 @@
                         (input)="maximumAmount.open();validate.resetRateExceeding()"
                         (onChange)="onChangeRateExceeding($event)"
                     >
-                    <mat-error
+                    <app-mat-error
                         class="invalid-feedback"
                         *ngIf="!validate.getRateExceeding()"
                     >
                         Rate cannot be 0.00
-                    </mat-error>
+                    </app-mat-error>
                 </div>
             </div>
             <div class="qt-input-block qt-w25 qt-mr-16">

@@ -10,7 +10,6 @@ import { KafkaStateService } from "src/app/states/kafka/kafka-state.service";
 import { LeftPanelStateService } from "src/app/states/left-panel/left-panel-state.service";
 import { RemoteControlService } from "../device/_services/remoteControl.service";
 import { CompanyDeviceBetaFilter } from "./class/device-beta";
-import { MatAutocompleteSelectedEvent } from '@angular/material';
 import * as _ from "lodash";
 import { v4 as uuidv4 } from 'uuid';
 import { DropDownComponent } from "../shared/drop-down/drop-down.component";
@@ -789,14 +788,14 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
     }, 500);
   }
 
-  selectedSearch(event: MatAutocompleteSelectedEvent): void {
-    let data = this.selectedTag.find(x => x.toLowerCase() == event.option.viewValue.toLocaleLowerCase());
+  selectedSearch(search): void {
+    let data = this.selectedTag.find(x => x.toLowerCase() == search.Result.toLocaleLowerCase());
     if (!data) {
-      this.selectedTag.push(event.option.viewValue);
-      this.searchTag.push(event.option.viewValue);
+      this.selectedTag.push(search.Result);
+      this.searchTag.push(search.Result);
       this.selectedInput.nativeElement.value = '';
       this.selectedCtrl.setValue(null);
-      this.add(event.option.viewValue);
+      this.add(search.Result);
     }
     this.selectedInput.nativeElement.value = '';
   }
@@ -907,14 +906,6 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
 
   onRemoveTag(index: number): void {
     this.selectedTagdevicelist.splice(index, 1);
-  }
-
-
-  selectedSearchTag(event: MatAutocompleteSelectedEvent): void {
-    this.selectedTagdevicelist.push(event.option.viewValue);
-    this.tagSearch.push(event.option.viewValue);
-    this.selectedInput.nativeElement.value = '';
-    this.selectedCtrl.setValue(null);
   }
 
   getDeviceName(ID) {

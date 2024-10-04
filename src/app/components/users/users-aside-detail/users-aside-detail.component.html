@@ -13,7 +13,7 @@
                 ngbTooltip="Edit"
                 *ngIf="getPermissions('EDIT_USERS')"
             >
-              <div class="qt-icon icon__edit qt-sz-20"></div>
+                <div class="qt-icon icon__edit qt-sz-20"></div>
             </div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-16 header-circle-icon qt-df qt-jc-c qt-ai-c qt-mr-16 pointer"
@@ -23,7 +23,7 @@
                 [ngbTooltip]="'Draft Email'"
                 *ngIf="!customerPortalStateService.isCustomerPortal"
             >
-              <div class="qt-icon icon__email-send qt-sz-20"></div>
+                <div class="qt-icon icon__email-send qt-sz-20"></div>
             </div>
             <div
                 class="qt-icon icon__close qt-aside-modern__header-close"
@@ -84,18 +84,18 @@
                         placeholder="Enter Email"
                         [disabled]="!getPermissions('EDIT_USERS')"
                     >
-                    <mat-error
+                    <app-mat-error
                         class="invalid-feedback"
                         *ngIf="!validate.getPrimaryContactEmail()"
                     >
                         Please enter a valid email address
-                    </mat-error>
-                    <mat-error
+                    </app-mat-error>
+                    <app-mat-error
                         class="invalid-feedback"
                         *ngIf="!validate.getExistPrimaryContactEmail()"
                     >
                         The email address is already occupied
-                    </mat-error>
+                    </app-mat-error>
                 </div>
                 <div
                     class="qt-input-block"
@@ -133,12 +133,12 @@
                                 [dropSpecialCharacters]="false"
                                 [disabled]="!getPermissions('EDIT_USERS')"
                             >
-                            <mat-error
+                            <app-mat-error
                                 class="invalid-feedback"
                                 *ngIf="!validate.getPhoneNumber(i)"
                             >
                                 Phone number is required
-                            </mat-error>
+                            </app-mat-error>
                         </div>
                     </ng-template>
                 </div>
@@ -188,7 +188,6 @@
                             placeholder="Enter job description"
                             appTextArea
                             cols="30"
-                            [default]="3"
                             rows="3"
                             [disabled]="!getPermissions('EDIT_USERS')"
                         ></textarea>

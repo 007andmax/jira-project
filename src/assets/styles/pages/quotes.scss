@@ -293,7 +293,6 @@
       margin-right: -30px;
       &__textarea {
         min-height: 72px;
-        max-width: 541px;
       }
     }
 
@@ -397,7 +396,8 @@
   .mat-option {
     color: $gray-900;
     font-size: 13px;
-    height: 34px;
+    height: 36px !important;
+    line-height: 36px !important;
     padding: 6px 15px;
     &:hover {
       background-color: $gray-50;

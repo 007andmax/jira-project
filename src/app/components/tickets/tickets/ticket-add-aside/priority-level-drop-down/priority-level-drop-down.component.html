@@ -10,12 +10,12 @@
         class="app-drop-down__title"
         [textContent]="title"
     ></div>
-    <mat-error
+    <app-mat-error
         class="invalid-feedback"
         *ngIf="!validate"
         [textContent]="errorMessage"
     >
-    </mat-error>
+    </app-mat-error>
     <div
         class="qt-input-block__dot priority-dot selected-priority"
         [ngStyle]="{'background-color':  statusColors[selectedItem.color] && statusColors[selectedItem.color].textColor ,

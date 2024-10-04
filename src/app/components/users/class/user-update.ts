@@ -29,7 +29,6 @@ export class UserUpdate {
   jobTypeId: string;
   customSubscriptionIds: Array<string> = [];
   customerCompaniesInfo: Array<UserCustomerCompaniesInfoUpdate> = [];
-  userIndustryId: string;
   sendPortalInvitation: boolean;
   constructor(data: UserProfile, user: User) {
     this.phoneNumbers = data.phoneNumbers.map((item, index) => {
@@ -61,7 +60,6 @@ export class UserUpdate {
     this.sendPortalInvitation = data.sendPortalInvitation;
     this.jobDescription = data.jobDescription;
     this.jobTypeId = data.jobTypeId;
-    this.userIndustryId = data.userIndustryId;
     this.customerCompaniesInfo = data.customerCompaniesInfo.filter(item => item.companyId).map(item => new UserCustomerCompaniesInfoUpdate(item));
   }
 }

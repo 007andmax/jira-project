@@ -3,7 +3,6 @@ import { UserDefaultSubscription } from "./user-default-subscription";
 
 export class UserFilters {
     filterTop: Array<FilterListTop> = [new FilterListTop('NAME', 'ASC'),
-    new FilterListTop('INDUSTRY', ''),
     new FilterListTop('TICKET_NUMBER', ''),
     new FilterListTop('PORTAL_STATUS', '')];
     "jobTitles": Array<string> = [];
@@ -11,7 +10,6 @@ export class UserFilters {
     "ticketSubscription": boolean;
     "ticketManagerSubscription": boolean;
     "invoiceSubscription": boolean;
-    "industries": Array<string> = [];
     "tags": Array<string> = [];
     "customSubscriptions": Array<string> = [];
     "hasAccess": boolean = false;
@@ -37,14 +35,6 @@ export class UserFilters {
         if (index > -1) {
             let sort = this.filterTop[index].filter;
             if (field === 'NAME') {
-                this.clearFilter();
-                if (sort === '' || sort === 'DESC') {
-                    this.filterTop[index].filter = 'ASC';
-                } else {
-                    this.filterTop[index].filter = 'DESC';
-                }
-            }
-            if (field === 'INDUSTRY') {
                 this.clearFilter();
                 if (sort === '' || sort === 'DESC') {
                     this.filterTop[index].filter = 'ASC';
@@ -92,7 +82,6 @@ export class UserFilters {
         this.ticketSubscription = data.ticketSubscription;
         this.ticketManagerSubscription = data.ticketManagerSubscription;
         this.invoiceSubscription = data.invoiceSubscription;
-        this.industries = data.industries;
         this.tags = data.tags;
         this.customSubscriptions = data.customSubscriptions;
         this.hasAccess = data.hasAccess;
@@ -107,9 +96,6 @@ export class UserFilters {
         this.ticketManagerSubscription = false;
         this.invoiceSubscription = false;
         this.defaultSubscriptions.clearEnabledAll();
-    }
-    public setIndustries(data) {
-        this.industries = data;
     }
     public setTags(data) {
         this.tags = data;
@@ -138,7 +124,6 @@ export class UserFilters {
             this.ticketSubscription ||
             this.invoiceSubscription ||
             this.invoiceSubscription ||
-            this.industries.length > 0 ||
             this.tags.length > 0 ||
             this.customSubscriptions.length > 0 ||
             this.hasAccess
@@ -150,7 +135,6 @@ export class UserFilters {
         if (this.ticketSubscription) data.ticketSubscription = this.ticketSubscription;
         if (this.ticketManagerSubscription) data.ticketManagerSubscription = this.ticketManagerSubscription;
         if (this.invoiceSubscription) data.invoiceSubscription = this.invoiceSubscription;
-        if (this.industries.length > 0) data.industries = this.industries;
         if (this.tags.length > 0) data.tags = this.tags;
         if (this.customSubscriptions.length > 0) data.customSubscriptions = this.customSubscriptions;
         if (this.hasAccess) data.hasAccess = this.hasAccess;

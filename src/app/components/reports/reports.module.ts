@@ -15,7 +15,7 @@ import { DetailedContractReportComponent } from './reports/detailed-contract-rep
         CommonModule,
         ReportsRoutingModule,
         ToFixedModule,
-        ReportListItemModule
+        ReportListItemModule,
 
     ],
 

@@ -322,15 +322,19 @@ document-preview,
   .documents-filter-tags {
     .mat-form-field-infix {
       min-height: 40px;
-      padding: 0;
-      padding-left: 36px;
-
-      &::before {
-        top: 11px;
+      padding: 0px 0px 0px 36px !important;
+      position: relative;
+      &:before {
+        left: 12px;
+        top: 9px;
+        position: absolute;
+        content: "";
+        width: 20px;
+        height: 20px;
+        background: url(/assets/img/icons/tags.svg);
       }
-
-      input {
-        height: 38px !important;
+      .mat-form-field-label {
+        left: 25px;
       }
     }
     .mat-chip-list-wrapper {

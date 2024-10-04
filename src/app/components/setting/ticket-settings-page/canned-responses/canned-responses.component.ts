@@ -40,7 +40,7 @@ export class CannedResponsesComponent implements OnInit {
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === DELETE_NOTE_TEMPLATE) {
-          this.onRemoveIndustry(this.noteStateService.getNoteTemplateForRemove().id);
+          this.onRemoveNoteTemplate(this.noteStateService.getNoteTemplateForRemove().id);
         }
 
       }
@@ -80,7 +80,7 @@ export class CannedResponsesComponent implements OnInit {
       this.getNoteList();
     }
   }
-  onRemoveIndustry(id) {
+  onRemoveNoteTemplate(id) {
     this.noteService.removeNoteTemplate(id).subscribe(data => {
 
     })

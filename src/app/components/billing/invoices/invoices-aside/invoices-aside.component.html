@@ -16,18 +16,15 @@
             <div class="qt-w50 qt-pt-16 qt-pr-24 qt-pl-32 qt-pb-24">
                 <div class="qt-input-block">
                     <label class="qt-input-block__label">Customer Name</label>
-                    <company-drop-down
-                        class="search-company"
+                    <app-multi-company-drop-down
                         #companyDp
-                        [placeholder]="'Select Company'"
+                        class="multi-company-dropdown-invoices"
                         [change]="true"
                         [search]="true"
-                        [class]="['qt-dropdown']"
-                        [field]="'name'"
-                        [editItem]="selectedCompany"
-                        [list]="companies"
-                        (onSelectedItem)="onSelectCompany($event)"
-                    ></company-drop-down>
+                        [sort]="false"
+                        [selectedCompanies]="selectedCompanies"
+                        (onChangeCompanies)="onSelectCompany($event)"
+                    ></app-multi-company-drop-down>
                 </div>
             </div>
         </div>
@@ -61,12 +58,12 @@
                         (change)="onChangeAmountReceived($event)"
                         appToFixed
                     >
-                    <mat-error
+                    <app-mat-error
                         class="invalid-feedback amount-received-invalid-feedback"
                         *ngIf="!validate.getAmountReceived()"
                     >
                         You must use the entire amount. ${{getUnUsedAmountReceived()}} left unused
-                    </mat-error>
+                    </app-mat-error>
                 </div>
                 <!-- <div class="qt-df qt-ai-c qt-mt-10">
           <label class="qt-checkbox receive-full-amount-check qt-mb-0">
@@ -132,6 +129,7 @@
                                 <span></span>
                             </label>
                         </th>
+                        <th class="unpaid-table__invoice qt-text-left">Company Name</th>
                         <th class="unpaid-table__invoice qt-text-left">Invoice#</th>
                         <th class="unpaid-table__date qt-text-left">Invoice Date</th>
                         <th class="unpaid-table__amount qt-text-right">Invoice Amount</th>
@@ -162,6 +160,10 @@
                                     <span></span>
                                 </label>
                             </td>
+                            <td
+                                class="unpaid-table__invoice ellipsis"
+                                [textContent]="invoice.company.name"
+                            ></td>
                             <td
                                 class="unpaid-table__invoice"
                                 [textContent]="'INV ' + invoice.number"
@@ -200,9 +202,9 @@
                 class="error-payments --input-error"
                 *ngIf="!validate.getPayment()"
             >
-                <mat-error class="qt-tooltip-error">
+                <app-mat-error class="qt-tooltip-error">
                     The payment amount is more than the Amount Due of invoices
-                </mat-error>
+                </app-mat-error>
             </div>
         </div>
         <div class="summary-info qt-df qt-pl-30 qt-pr-30 qt-pb-24 qt-jc-sb">

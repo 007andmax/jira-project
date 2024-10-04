@@ -50,12 +50,12 @@
                                 min="1"
                                 max="100"
                             >
-                            <mat-error
+                            <app-mat-error
                                 class="invalid-feedback --pos-static"
                                 *ngIf="!editCategory.getValidate() && editCategory.isEditMode(item.id)"
                                 [textContent]="'This category name is already occupied'"
                             >
-                            </mat-error>
+                            </app-mat-error>
                             <p
                                 *ngIf="!editCategory.isEditMode(item.id)"
                                 class="pointer"
@@ -97,12 +97,12 @@
                             max="100"
                             (keyup)="onAddCategoryByEnter($event)"
                         >
-                        <mat-error
+                        <app-mat-error
                             class="invalid-feedback --pos-static"
                             *ngIf="!addCategory.getValidate()"
                             [textContent]="'This category name is already occupied'"
                         >
-                        </mat-error>
+                        </app-mat-error>
                     </div>
                 </div>
             </div>

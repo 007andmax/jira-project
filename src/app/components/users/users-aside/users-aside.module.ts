@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersAsideComponent } from './users-aside.component';
 import { FormsModule } from '@angular/forms';
-import { MatChipsModule, MatSelectModule } from '@angular/material';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { CompanySubscriptionModule } from '../../companies/company-subscription/company-subscription.module';
 import { CompanyTagsModule } from '../../companies/company-tags/company-tags.module';
@@ -17,6 +16,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 @NgModule({
     declarations: [UsersAsideComponent,
@@ -25,8 +25,6 @@ import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-toolt
     imports: [
         CommonModule,
         FormsModule,
-        MatSelectModule,
-        MatChipsModule,
         DropDownModule,
         CompanySubscriptionModule,
         CompanyTagsModule,
@@ -38,7 +36,8 @@ import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-toolt
         NgxMaskModule.forRoot(),
         CompanyDropDownModule,
         PreloaderTicketModule,
-        DynamicTooltipModule
+        DynamicTooltipModule,
+        MatErrorModule
     ],
     exports: [UsersAsideComponent]
 

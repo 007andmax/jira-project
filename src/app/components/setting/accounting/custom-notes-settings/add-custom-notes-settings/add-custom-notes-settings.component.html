@@ -18,12 +18,12 @@
                 (input)="validate.resetTitle();"
                 [ngClass]="{'--input-error' : !validate.getTitle()}"
             >
-            <mat-error
+            <app-mat-error
                 class="invalid-feedback"
                 *ngIf="!validate.getTitle()"
             >
                 Title is required
-            </mat-error>
+            </app-mat-error>
         </div>
         <div class="qt-input-block qt-input-line">
             <label
@@ -42,12 +42,12 @@
                 (input)="validate.resetContent();"
                 [ngClass]="{'--error' : !validate.getContent()}"
             ></textarea>
-            <mat-error
+            <app-mat-error
                 class="invalid-feedback"
                 *ngIf="!validate.getContent()"
             >
                 Description is required
-            </mat-error>
+            </app-mat-error>
         </div>
     </div>
     <div class="qt-aside-modern__footer">

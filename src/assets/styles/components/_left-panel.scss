@@ -143,6 +143,63 @@
     mask-size: contain;
     mask-repeat: no-repeat;
     mask-position: center;
+
+    &.--quick-support {
+      -webkit-mask-image: url("/assets/img/icons/quick-support.svg");
+      mask-image: url("/assets/img/icons/quick-support.svg");
+    }
+    &.--tickets {
+      -webkit-mask-image: url("/assets/img/icons/tickets.svg");
+      mask-image: url("/assets/img/icons/tickets.svg");
+    }
+    &.--companies {
+      -webkit-mask-image: url("/assets/img/icons/companies.svg");
+      mask-image: url("/assets/img/icons/companies.svg");
+    }
+    &.--users {
+      -webkit-mask-image: url("/assets/img/icons/users.svg");
+      mask-image: url("/assets/img/icons/users.svg");
+    }
+    &.--marketing {
+      -webkit-mask-image: url("/assets/img/icons/marketing.svg");
+      mask-image: url("/assets/img/icons/marketing.svg");
+    }
+    &.--billing {
+      -webkit-mask-image: url("/assets/img/icons/billing.svg");
+      mask-image: url("/assets/img/icons/billing.svg");
+    }
+    &.--products {
+      -webkit-mask-image: url("/assets/img/icons/products.svg");
+      mask-image: url("/assets/img/icons/products.svg");
+    }
+    &.--password-manager {
+      -webkit-mask-image: url("/assets/img/icons/password.svg");
+      mask-image: url("/assets/img/icons/password.svg");
+    }
+    &.--reports {
+      -webkit-mask-image: url("/assets/img/icons/reports.svg");
+      mask-image: url("/assets/img/icons/reports.svg");
+    }
+    &.--folder-management {
+      -webkit-mask-image: url("/assets/img/icons/folder-management.svg");
+      mask-image: url("/assets/img/icons/folder-management.svg");
+    }
+    &.--settings {
+      -webkit-mask-image: url("/assets/img/icons/settings.svg");
+      mask-image: url("/assets/img/icons/settings.svg");
+    }
+    &.--documents {
+      -webkit-mask-image: url("/assets/img/icons/documents.svg");
+      mask-image: url("/assets/img/icons/documents.svg");
+    }
+    &.--devices{
+      -webkit-mask-image: url("/assets/img/tool.svg");
+      mask-image: url("/assets/img/tool.svg");
+    }
+    &.--logout {
+      -webkit-mask-image: url("/assets/img/icons/logout.svg");
+      mask-image: url("/assets/img/icons/logout.svg");
+    }
   }
 
   &__submenu-icon {

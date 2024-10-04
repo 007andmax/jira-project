@@ -16,7 +16,6 @@
                 <div class="editable-description">
                     <textarea
                         appTextArea
-                        [limit]="250"
                         id="service-description"
                         placeholder="Write Description"
                         [value]="(ticketForEdit) ? ticketForEdit.description : ''"
@@ -65,7 +64,7 @@
                     [valid]="validate.getInterval()"
                     (cronChange)="onChangeCron($event)"
                 ></app-interval>
-                <mat-error *ngIf="!validate.getInterval()">Interval is required</mat-error>
+                <app-mat-error *ngIf="!validate.getInterval()">Interval is required</app-mat-error>
             </div>
         </div>
         <div class="qt-inputs-row ticket-tabs">
@@ -251,7 +250,7 @@
                             <div class="qt-input-block__label">
                                 Service
                                 <span
-                                    *ngIf="areTicketsPresented && areTicketsTerminated"
+                                    *ngIf="areTicketsPresented && checkServiceTerminated(service)"
                                     class="qt-icon icon__help default-services-page__question-icon qt-sz-12 qt-ic-c"
                                     placement="top"
                                     ngbTooltip="Your contacts are expired/terminated. Please recreate them in order to use contract's services or remove them in order to use non-contract services"
@@ -259,7 +258,7 @@
                                 ></span>
                             </div>
                             <app-services-list
-                                [isDisabled]="areTicketsPresented && areTicketsTerminated"
+                                [isDisabled]="areTicketsPresented && checkServiceTerminated(service)"
                                 [editItem]="service"
                                 [itemList]="servicesList"
                                 (selectedServicesItem)="setService($event,i)"
@@ -289,7 +288,6 @@
                             <div class="editable-description">
                                 <textarea
                                     appTextArea
-                                    [limit]="250"
                                     [(ngModel)]="service.description"
                                     placeholder="Write Description"
                                     (onPast)="onPastDescriptionService($event,i)"

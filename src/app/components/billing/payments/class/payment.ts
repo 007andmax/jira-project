@@ -1,3 +1,4 @@
+import { Company } from 'src/app/interfaces/company/company';
 import { PaymentData } from './payment-Data';
 
 export class Payment {
@@ -15,6 +16,7 @@ export class Payment {
     reference: string;
     refundMethod: string;
     totalSum: number;
+    multipleCompanies: Array<any> = [];
     constructor(data) {
         this.clientCompanyId = data.clientCompanyId;
         this.clientCompanyName = data.clientCompanyName;
@@ -26,17 +28,18 @@ export class Payment {
         this.partialPaidAmount = data.partialPaidAmount;
         this.partialPaidInvoices = data.partialPaidInvoices;
         this.paymentData = (data.paymentData) ? data.paymentData.map(item => {
-            return new PaymentData(item.invoiceAmount, item.invoiceDate, item.invoiceId, item.paidAmount, item.invoiceNumber, item.invoicePaidDue);
+            return new PaymentData(item.invoiceAmount, item.invoiceDate, item.invoiceId, item.paidAmount, item.invoiceNumber, item.invoicePaidDue, item.companyName);
         }) : [];
         this.paymentMethod = data.paymentMethod;
         this.reference = data.reference;
         this.refundMethod = data.refundMethod;
         this.totalSum = data.totalSum;
+        this.multipleCompanies = data.multipleCompanies;
     }
     public getDataForExportPDF() {
         return {
             createdAt: this.createdAt,
-            clientCompanyName: this.clientCompanyName,
+            multipleCompanies: this.multipleCompanies.map(item => ({ name: item.name })),
             note: this.note,
             paymentMethod: this.paymentMethod,
             partialPaidAmount: this.partialPaidAmount,

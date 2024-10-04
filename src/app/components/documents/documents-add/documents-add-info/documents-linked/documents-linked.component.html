@@ -13,10 +13,16 @@
         #products="ngbDropdown"
         [ngClass]="{ 'disabled': isDisabled}"
     >
-        <mat-form-field ngbDropdownAnchor>
-            <mat-chip-list
+        <app-mat-form-field
+            ngbDropdownAnchor
+            #formField
+            [placeholder]="'Select company to link'"
+        >
+            <app-mat-chip-list
                 #chipListCompanies
                 aria-label="Fruit selection"
+                [items]="selectedUserAndCompanies"
+                (onChangeItems)="formField.checkSelectedItems(selectedUserAndCompanies)"
             >
                 <ng-template
                     ngFor
@@ -25,36 +31,25 @@
                     let-i="index"
                     [ngForTrackBy]="trackByIndex"
                 >
-                    <mat-chip
+                    <app-mat-chip
                         *ngIf="item.type === 'COMPANY'"
-                        [selectable]="selectable"
-                        [removable]="removable"
-                        (removed)="removeItem(i)"
+                        [isRemove]="true"
+                        (onClose)="removeItem(i)"
                     >
                         <i class="qt-icon icon__devices qt-sz-16"></i>
                         {{item.name}}
-                        <mat-icon
-                            matChipRemove
-                            *ngIf="removable"
-                        >
-                            cancel
-                        </mat-icon>
-                    </mat-chip>
+                    </app-mat-chip>
                 </ng-template>
                 <input
                     id="dropdownCompanies"
                     ngbDropdownToggle
-                    placeholder="Select company to link"
-                    class="pointer"
+                    class="pointer mat-chip-input mat-input-element"
                     [formControl]="linkedCtrl"
-                    [matChipInputFor]="chipListCompanies"
-                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                    [matChipInputAddOnBlur]="addOnBlur"
                     [disabled]="isDisabled"
                     (input)="onSearch($event)"
                 >
-            </mat-chip-list>
-        </mat-form-field>
+            </app-mat-chip-list>
+        </app-mat-form-field>
         <div
             class="select-wrapper"
             ngbDropdownMenu
@@ -100,10 +95,14 @@
         #products="ngbDropdown"
         [ngClass]="{ 'disabled': isDisabled}"
     >
-        <mat-form-field ngbDropdownAnchor>
-            <mat-chip-list
-                #chipListUsers
-                aria-label="Fruit selection"
+        <app-mat-form-field
+            ngbDropdownAnchor
+            #formField1
+            [placeholder]="'Select user to link'"
+        >
+            <app-mat-chip-list
+                [items]="selectedUserAndCompanies"
+                (onChangeItems)="formField1.checkSelectedItems(selectedUserAndCompanies)"
             >
                 <ng-template
                     ngFor
@@ -112,36 +111,25 @@
                     let-i="index"
                     [ngForTrackBy]="trackByIndex"
                 >
-                    <mat-chip
+                    <app-mat-chip
                         *ngIf="item.type === 'USER'"
-                        [selectable]="selectable"
-                        [removable]="removable"
-                        (removed)="removeItem(i)"
+                        [isRemove]="true"
+                        (onClose)="removeItem(i)"
                     >
                         <i class="qt-icon icon__user qt-sz-16"></i>
                         {{item.name}}
-                        <mat-icon
-                            matChipRemove
-                            *ngIf="removable"
-                        >
-                            cancel
-                        </mat-icon>
-                    </mat-chip>
+                    </app-mat-chip>
                 </ng-template>
                 <input
                     id="dropdownUsers"
                     ngbDropdownToggle
-                    placeholder="Select user to link"
-                    class="pointer"
+                    class="pointer mat-chip-input mat-input-element"
                     [formControl]="linkedCtrl"
-                    [matChipInputFor]="chipListUsers"
-                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                    [matChipInputAddOnBlur]="addOnBlur"
                     [disabled]="isDisabled"
                     (input)="onSearch($event)"
                 >
-            </mat-chip-list>
-        </mat-form-field>
+            </app-mat-chip-list>
+        </app-mat-form-field>
         <div
             class="select-wrapper"
             ngbDropdownMenu

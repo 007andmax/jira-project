@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { CompanyTagsComponent } from 'src/app/components/companies/company-tags/company-tags.component';
 import { CompanyTagsListService } from 'src/app/components/companies/company-tags/services/company-tags-list.service';
 import { TicketsListService } from '../../../services/tickets-list.service';
+import { MatFormFieldComponent } from 'src/app/components/shared/mat-form-field/mat-form-field.component';
 
 @Component({
   selector: 'app-tickets-filter-tags',
@@ -11,6 +12,7 @@ import { TicketsListService } from '../../../services/tickets-list.service';
 })
 export class TicketsFilterTagsComponent extends CompanyTagsComponent {
   @Input() placement: string = 'bottom-left';
+
   public ngOnInit() {
     if (this.tagsStateService.getTags().length == 0) {
       let getTags = this.tagsService.getTags().subscribe((data) => {
@@ -76,4 +78,18 @@ export class TicketsFilterTagsComponent extends CompanyTagsComponent {
   isSelected(id) {
     return this.selectedTag.find(item => item.id == id);
   }
+
+  /**
+ * Remove tag from selected
+ * @param index - user index
+ */
+  public remove(index): void {
+    if (index >= 0) {
+      if (!this.checkRemoveTag(index)) return;
+      this.selectedTag.splice(index, 1);
+      this.tagsChange.emit(this.selectedTag);
+      this.cd.detectChanges();
+    }
+  }
+
 }

@@ -40,7 +40,7 @@
                     placement="top"
                     ngbTooltip="Edit Note"
                 >
-                  <div class="qt-icon qt-icon__done qt-icon__white qt-sz-16"></div>
+                    <div class="qt-icon icon__done qt-icon__white qt-sz-16"></div>
                 </div>
                 <div
                     class="qt-square-btn qt-ml-8"
@@ -77,12 +77,12 @@
                 rows="1"
                 [ngClass]="{'--error' : !validate.getContent()}"
             ></textarea>
-            <mat-error
+            <app-mat-error
                 class="invalid-feedback"
                 *ngIf="!validate.getContent()"
             >
                 Description is required
-            </mat-error>
+            </app-mat-error>
         </div>
     </div>
 </div>

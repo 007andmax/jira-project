@@ -1,7 +1,6 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, ElementRef, ViewChild, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatChipInputEvent } from '@angular/material/chips';
 import { TagsService } from 'src/app/services/tags/tags.service';
 import { Tag } from 'src/app/interfaces/tag/tag';
 import { Subscription } from 'rxjs';
@@ -75,34 +74,28 @@ export class TagsComponent implements OnInit, OnDestroy {
     this.sub.add(getClearState);
   }
 
-  /**
-   * Add selected tag
-   * @param event - selected tag
-   */
-  public add(event: MatChipInputEvent): void {
+  onKeyUp(event) {
+    if (event.keyCode === 13) {
+      const input = event.target.input;
+      const value = event.target.value;
+      if ((value || '').trim()) {
+        let tag: any = {
+          colorCode: 0, usedCounter: 0, word: value.trim(), id: ''
+        }
 
-    // if (!this.matAutocomplete.isOpen) {
-    const input = event.input;
-    const value = event.value;
+        this.tagsService.addCompanyTags(tag).subscribe((res) => {
+          tag.id = res.id;
+          this.tags.push(tag);
+          this.selectedTag.push(tag);
+          this.tagsChange.emit(this.selectedTag);
+        });
 
-    if ((value || '').trim()) {
-      let tag: any = {
-        colorCode: 0, usedCounter: 0, word: value.trim(), id: ''
       }
-
-      this.tagsService.addCompanyTags(tag).subscribe((res) => {
-        tag.id = res.id;
-        this.tags.push(tag);
-        this.selectedTag.push(tag);
-        this.tagsChange.emit(this.selectedTag);
-      });
-
+      if (input) {
+        input.value = '';
+      }
+      this.tagCtrl.setValue(null);
     }
-    if (input) {
-      input.value = '';
-    }
-    this.tagCtrl.setValue(null);
-    // }
   }
 
   public isSelected(id) {

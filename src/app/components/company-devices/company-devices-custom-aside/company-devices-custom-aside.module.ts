@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CompanyDevicesCustomAsideComponent } from './company-devices-custom-aside.component';
 import { CompanyDevicesCustomDropDownComponent } from './company-devices-custom-drop-down/company-devices-custom-drop-down.component';
-import { MatSelectModule, MatChipsModule, MatIconModule } from '@angular/material';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
@@ -13,6 +12,9 @@ import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-toolt
 import { ManufacturesDropDownComponent } from './manufactures-drop-down/manufactures-drop-down.component';
 import { ModelsDropDownComponent } from './models-drop-down/models-drop-down.component';
 import { CompanyDevicesAssestTypeDropDownComponent } from './company-devices-assest-type-drop-down/company-devices-assest-type-drop-down.component';
+import { MatChipModule } from '../../shared/mat-chip/mat-chip.module';
+import { MatFormFieldModule } from '../../shared/mat-form-field/mat-form-field.module';
+import { MatChipListModule } from '../../shared/mat-chip-list/mat-chip-list.module';
 
 
 @NgModule({
@@ -27,9 +29,9 @@ import { CompanyDevicesAssestTypeDropDownComponent } from './company-devices-ass
         CommonModule,
         FormsModule,
         DropDownModule,
-        MatSelectModule,
-        MatChipsModule,
-        MatIconModule,
+        MatChipModule,
+        MatFormFieldModule,
+        MatChipListModule,
         PreloaderTicketModule,
         DisabledBtnModule,
         DatePickerModule,

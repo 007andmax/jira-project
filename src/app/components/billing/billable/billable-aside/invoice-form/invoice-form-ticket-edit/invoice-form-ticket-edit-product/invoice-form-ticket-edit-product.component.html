@@ -21,12 +21,12 @@
             (ngModelChange)="onChangeSale($event)"
             [disabled]="!getPermissions('MANAGE_PRODUCTS')"
         >
-        <mat-error
+        <app-mat-error
             class="qt-tooltip-error"
             *ngIf="!valdiateSaleCost"
         >
             Product price can not be lower than cost
-        </mat-error>
+        </app-mat-error>
     </td>
     <td class="invoice-item__col-quentity  --product">
         <input

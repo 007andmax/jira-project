@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatSelectModule, MatChipsModule } from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.module';
 import { FormsModule } from '@angular/forms';
@@ -14,8 +13,6 @@ import { InventoryChangeProductTypeComponent } from './inventory-change-product-
         CommonModule,
         FormsModule,
         DropDownModule,
-        MatSelectModule,
-        MatChipsModule,
         NgbModule,
     ],
     entryComponents: [InventoryChangeProductTypeComponent],

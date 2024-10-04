@@ -28,12 +28,12 @@
                     (blur)="onCheckILC()"
                     placeholder="Enter ILC Number"
                 >
-                <mat-error
+                <app-mat-error
                     class="invalid-feedback"
                     *ngIf="!validate.getILCIsExist()"
                 >
                     This number is already occupied
-                </mat-error>
+                </app-mat-error>
             </div>
         </div>
         <div class="qt-inputs-row">
@@ -78,19 +78,19 @@
                 <div class="qt-input-block__label">Description</div>
                 <textarea
                     appTextArea
-                    [limit]="160"
-                    [default]="5"
+                    [height]="'100px'"
+                    rows="5"
                     id="inventory-description"
                     placeholder="Write Product Description"
                     (input)="onChangeDescription($event)"
                     (paste)="onPastDescription($event)"
                 ></textarea>
-                <mat-error
+                <app-mat-error
                     class="invalid-feedback"
                     *ngIf="!validate.getDescription()"
                 >
                     Description is required
-                </mat-error>
+                </app-mat-error>
             </div>
         </div>
         <div class="qt-inputs-row">
@@ -124,12 +124,12 @@
                     (onChange)="onChangeCost($event)"
                     placeholder="Enter Cost"
                 >
-                <mat-error
+                <app-mat-error
                     class="invalid-feedback --pos-static"
                     *ngIf="!validate.getCostSale()"
                 >
                     Cost cannot be higher than Price
-                </mat-error>
+                </app-mat-error>
             </div>
             <div class="qt-f33 qt-input-block --required">
                 <div class="qt-input-block__label">Markup %</div>
@@ -155,12 +155,12 @@
                     (onChange)="onChangeSale($event)"
                     placeholder="Enter Price"
                 >
-                <mat-error
+                <app-mat-error
                     class="invalid-feedback"
                     *ngIf="!validate.getSale()"
                 >
                     Price is required
-                </mat-error>
+                </app-mat-error>
             </div>
         </div>
         <div class="qt-inputs-row">

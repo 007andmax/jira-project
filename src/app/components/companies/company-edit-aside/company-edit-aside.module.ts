@@ -1,10 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { MatSelectModule } from '@angular/material/select';
-import { MatChipsModule } from '@angular/material/chips';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CompanyEditAsideComponent } from './company-edit-aside.component';
@@ -19,6 +14,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { UserDefaultSubscriptionModule } from '../../users/users-aside/user-default-subscription/user-default-subscription.module';
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 @NgModule({
     declarations: [CompanyEditAsideComponent,
@@ -27,9 +23,7 @@ import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.
     ],
     imports: [
         CommonModule,
-        MatSelectModule,
         FormsModule,
-        MatChipsModule,
         NgbModule,
         DropDownModule,
         CompanySubscriptionModule,
@@ -40,7 +34,8 @@ import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.
         NgxMaskModule.forRoot(),
         UserDefaultSubscriptionModule,
         PreloaderTicketModule,
-        DisabledBtnModule
+        DisabledBtnModule,
+        MatErrorModule
 
     ],
     exports: [CompanyEditAsideComponent]

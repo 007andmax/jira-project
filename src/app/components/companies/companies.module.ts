@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 
 
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { MatSelectModule } from '@angular/material/select';
-import { MatChipsModule } from '@angular/material/chips';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CompaniesComponent } from './companies.component';
@@ -21,7 +19,6 @@ import { PreparePhoneModule } from 'src/app/pipe/prepare-phone/prepare-phone.mod
 import { DynamicTooltipModule } from '../shared/dynamic-tooltip/dynamic-tooltip.module';
 import { DropDownModule } from '../shared/drop-down/drop-down.module';
 import { CompanyTagsModule } from './company-tags/company-tags.module';
-import { MatIconModule } from '@angular/material';
 import { RightClickBlankModule } from 'src/app/directives/right-click-blank/right-click-blank.module';
 import { PreviewPhoneMaskModule } from '../shared/preview-phone-mask/preview-phone-mask.module';
 import { CompanyFileManagerComponent } from './company-file-manager/company-file-manager.component';
@@ -36,8 +33,6 @@ import { CompanyFileManagerComponent } from './company-file-manager/company-file
         CommonModule,
         CompaniesRoutingModule,
         InfiniteScrollModule,
-        MatSelectModule,
-        MatChipsModule,
         FormsModule,
         NgbModule,
         CompanyEditAsideModule,
@@ -48,7 +43,6 @@ import { CompanyFileManagerComponent } from './company-file-manager/company-file
         DynamicTooltipModule,
         DropDownModule,
         CompanyTagsModule,
-        MatIconModule,
         RightClickBlankModule,
         PreviewPhoneMaskModule
     ],

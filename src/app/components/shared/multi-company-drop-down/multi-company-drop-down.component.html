@@ -1,0 +1,79 @@
+<div
+    class="light-dropdown"
+    ngbDropdown
+    #products="ngbDropdown"
+    (openChange)="onOpenChange($event)"
+>
+    <app-mat-form-field
+        ngbDropdownAnchor
+        #formField
+    >
+        <app-mat-chip-list
+            #chipList
+            aria-label="Fruit selection"
+            [items]="selectedCompanies"
+            (onChangeItems)="formField.checkSelectedItems(selectedCompanies)"
+        >
+            <app-dynamic-tooltip
+                [position]="'top'"
+                #productTooltip
+            ></app-dynamic-tooltip>
+            <app-mat-chip
+                *ngFor="let company of selectedCompanies; let i = index"
+                [isRemove]="true"
+                (onClose)="remove(i)"
+            >
+                <div
+                    class="clip-text"
+                    *ngIf="company.name.length >= 30"
+                    (mouseenter)="productTooltip.setContent(company.name);productTooltip.show($event.target)"
+                    (mouseleave)="productTooltip.hide()"
+                >
+                    {{company.name}}
+                </div>
+                <div
+                    class="clip-text"
+                    *ngIf="company.name.length < 30"
+                >
+                    {{company.name}}
+                </div>
+            </app-mat-chip>
+            <input
+                id="dropdownServices"
+                ngbDropdownToggle
+                placeholder="Select Company"
+                #userInput
+                class="pointer"
+                autocomplete="off"
+                (input)="onSearch($event)"
+            >
+        </app-mat-chip-list>
+    </app-mat-form-field>
+    <div
+        class="dropdown-menu"
+        ngbDropdownMenu
+        aria-labelledby="dropdownServices"
+    >
+        <ng-template
+            ngFor
+            let-company
+            [ngForOf]="list"
+            [ngForTrackBy]="trackById"
+        >
+            <div class="qt-pos-rel">
+                <button
+                    ngbDropdownItem
+                    class="dropdown-item"
+                    (click)="toggleItem(company)"
+                    [textContent]="company.name"
+                    [ngClass]="{'--selected':isSeleted(company)}"
+                >
+                </button>
+                <div
+                    *ngIf="isSeleted(company)"
+                    class="qt-icon icon__done qt-za-20 qt-sz-20 qt-bg-contain filter-tags-check"
+                ></div>
+            </div>
+        </ng-template>
+    </div>
+</div>
