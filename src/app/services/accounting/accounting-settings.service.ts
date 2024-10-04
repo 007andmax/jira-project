@@ -24,6 +24,16 @@ export class InvoiceTicketsService {
   }
 
 
+  /**
+    * actual number
+    * @param type 
+    */
+  getQuoteSettings() {
+    return this.http
+      .get(`${this.apiUrl}settings/companyProfile/QuoteSettings`)
+      .pipe(map(data => data));
+  }
+
 
   /**
    * actual number
