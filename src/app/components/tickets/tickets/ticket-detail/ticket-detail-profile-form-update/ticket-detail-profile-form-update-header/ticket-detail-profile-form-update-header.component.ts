@@ -8,6 +8,7 @@ import { TicketsListService } from '../../../services/tickets-list.service';
 import { TicketProfileFormUpdate } from '../../../ticket-edit-aside/class/ticket-profile-form-update';
 import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-state.service';
 import { AddAssignedUserNoteComponent } from './add-assigned-user-note/add-assigned-user-note.component';
+import { AddAssignedUserComponent } from '../../../ticket-edit-aside/add-assigned-user/add-assigned-user.component';
 
 @Component({
   selector: 'ticket-detail-profile-form-update-header',

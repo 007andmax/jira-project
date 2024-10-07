@@ -131,7 +131,6 @@ export class DevicesComponent implements OnInit, OnDestroy {
   categories: number;
   check: any[] = [];
   InstallUpdateselected: number = 0;
-  selectednum = false;
   reloadWindowUpdatePendingList: any[] = [];
   isOverlay = false;
   selectAllSecurityDevices: boolean = false;
@@ -666,11 +665,9 @@ export class DevicesComponent implements OnInit, OnDestroy {
       this.selectedTag.push(search.Result);
       this.searchTag = [];
       this.searchTag = this.selectedTag;
-      this.selectedInput.nativeElement.value = '';
       this.selectedCtrl.setValue(null);
       this.add(search.Result);
     }
-    this.selectedInput.nativeElement.value = '';
   }
 
   remove(index: number) {
@@ -696,7 +693,6 @@ export class DevicesComponent implements OnInit, OnDestroy {
   add(Tag): void {
     this.tagFilterValue = "";
 
-    this.selectedInput.nativeElement.value = '';
     this.selectedCtrl.setValue(null);
     let findTag: any[] = [];
 

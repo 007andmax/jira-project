@@ -40,7 +40,7 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
   tab: string = 'tickets';
   selectedCompany = null;
   MODE_EDIT_SUBSCRIPTION = MODE_EDIT_SUBSCRIPTION;
-  @ViewChildren('companyInfo', { static: false }) companyInfo: QueryList<UsersAsideDetailCompanyInfoComponent>;
+  @ViewChildren('companyInfo') companyInfo: QueryList<UsersAsideDetailCompanyInfoComponent>;
   @ViewChild('ticketsDetail', { static: false }) ticketsDetail: UsersAsideDetailTicketsComponent;
   sub: Subscription = new Subscription();
   constructor(public ticketsListService: TicketsListService,
