@@ -21,7 +21,6 @@ export class DocumentsLinkedComponent implements OnInit, OnDestroy {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   linkedCtrl = new FormControl();
   public selectedUserAndCompanies: Array<DocumentCompanyUser> = [];
-  @ViewChild('formField') formField: MatFormFieldComponent;
   @Input() editItems: DocumentLinked;
   @Input() isDisabled: boolean = false;
   public tabs = ['User', 'Company'];

@@ -1,7 +1,7 @@
 @import "./src/assets/styles/variable";
 @import "./src/assets/styles/mixin/breakpoint";
 
-/deep/ .ticket-table {
+::ng-deep .ticket-table {
     th {
         white-space: nowrap;
     }
@@ -57,15 +57,15 @@ app-tickets-table-item {
     display: flex;
 }
 
-/deep/ .filter-button.--gray:focus {
+::ng-deep .filter-button.--gray:focus {
     background-color: $white;
 }
 
-/deep/ .filter-button.active:focus {
+::ng-deep .filter-button.active:focus {
     background-color: #16a4fa10;
 }
 
-/deep/ .aside-filters {
+::ng-deep .aside-filters {
     width: 320px;
     flex-shrink: 0;
     background-color: $white;
@@ -223,7 +223,7 @@ app-tickets-table-item {
     }
 }
 
-/deep/ .qt-table-modern__row {
+::ng-deep .qt-table-modern__row {
     position: relative;
     min-height: 56px;
     border: unset;
@@ -297,11 +297,11 @@ app-tickets-table-item {
     }
 }
 
-/deep/ .qt-table-modern .ticket-table__contract-description {
+::ng-deep .qt-table-modern .ticket-table__contract-description {
     max-width: 300px;
 }
 
-/deep/ .qt-table-modern .ticket-table__subject {
+::ng-deep .qt-table-modern .ticket-table__subject {
     @include media-breakpoint-down($md) {
         max-width: calc(345px - 16px);
     }
@@ -327,12 +327,12 @@ app-tickets-table-item {
 .list-filters {
   display: none;
   margin: -8px -8px 8px -8px;
-  /deep/.mat-form-field-infix {
+  ::ng-deep .mat-form-field-infix {
     overflow: auto;
     border: none;
     border-radius: 0;
   }
-  /deep/.mat-chip-list-wrapper {
+  ::ng-deep.mat-chip-list-wrapper {
     width: fit-content;
     margin: 0;
     flex-wrap: unset;

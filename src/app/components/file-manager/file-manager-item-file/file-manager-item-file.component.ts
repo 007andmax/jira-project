@@ -13,7 +13,7 @@ import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./file-manager-item-file.component.scss']
 })
 export class FileManagerItemFileComponent implements OnInit {
-  @ViewChild('db') db: NgbDropdown;
+  @ViewChild('db', { static: true }) db: NgbDropdown;
   @Input() item: FileManagerFile;
   @Output() onRemove = new EventEmitter<any>();
   @Output() onFileInfo = new EventEmitter<any>();

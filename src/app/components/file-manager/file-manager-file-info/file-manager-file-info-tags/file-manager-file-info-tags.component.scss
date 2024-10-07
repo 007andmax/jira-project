@@ -12,13 +12,13 @@
   width: 28px;
   height: 28px;
 }
-/deep/ .ticket-tags-container {
+::ng-deep .ticket-tags-container {
     .dropdown-item {
         @include dropdown-item;
     }
 }
 
-/deep/ .ticket-edit-tags {
+::ng-deep .ticket-edit-tags {
     padding: 0;
 
     input.mat-chip-input {

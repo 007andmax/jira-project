@@ -1,6 +1,6 @@
 @import './src/assets/styles/variable';
 
-/deep/.main-container {
+::ng-deep.main-container {
     background-color: $background;
 }
 
@@ -12,7 +12,7 @@
     padding: 0;
     background-color: $white;
 }
-/deep/ .qt-page-list__header-title {
+::ng-deep .qt-page-list__header-title {
     font-size: 16px;
     font-weight: 600;
     letter-spacing: 0;
@@ -25,7 +25,7 @@
     border-bottom: 1px solid $gray-200;
 }
 
-/deep/ contracts-statistics {
+::ng-deep contracts-statistics {
   .qt-table-modern {
     .ticket-table {
       &__status {
@@ -54,7 +54,7 @@
   }
 }
 
-/deep/ contracts-statistics {
+::ng-deep contracts-statistics {
   .qt-page-list__header-thead,
   .qt-page-list__body-tbody {
     min-width: 1406px;

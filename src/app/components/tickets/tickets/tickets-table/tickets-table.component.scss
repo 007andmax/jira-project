@@ -52,14 +52,14 @@ app-tickets-table-item {
 .qt-page-list__container {
   display: flex;
 }
-/deep/ .filter-button.--gray:focus {
+::ng-deep .filter-button.--gray:focus {
   background-color: $white;
 }
-/deep/ .filter-button.active:focus {
+::ng-deep .filter-button.active:focus {
   background-color: #16a4fa10;
 }
 
-/deep/ .aside-filters {
+::ng-deep .aside-filters {
   width: 320px;
   flex-shrink: 0;
   background-color: $white;
@@ -210,7 +210,7 @@ app-tickets-table-item {
   }
 }
 
-/deep/ .qt-table-modern__row {
+::ng-deep .qt-table-modern__row {
     position: relative;
     min-height: 56px;
     border: unset;
@@ -287,7 +287,7 @@ app-tickets-table-item {
   }
 }
 
-/deep/ .qt-table-modern .ticket-table__company {
+::ng-deep .qt-table-modern .ticket-table__company {
   max-width: 300px;
 }
 .qt-page-list__body-table-container {

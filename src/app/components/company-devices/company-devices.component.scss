@@ -38,7 +38,7 @@ app-company-devices-item {
 }
 
 
-/deep/ .company-devices-page {
+::ng-deep .company-devices-page {
   padding: 0;
   background-color: $white;
   min-height: calc(100vh - 109px);
@@ -56,7 +56,7 @@ app-company-devices-item {
   border-left: 1px solid transparent;
   border-right: 1px solid transparent;
 }
-/deep/ .company-devices-table {
+::ng-deep .company-devices-table {
   &__check {
     flex: 0 0 50px;
   }
@@ -146,7 +146,7 @@ app-company-devices-item {
     }
   }
 }
-/deep/ .aside-filters {
+::ng-deep .aside-filters {
   width: 320px;
   flex-shrink: 0;
   background-color: $white;
@@ -296,14 +296,14 @@ app-company-devices-item {
   }
 }
 
-/deep/ .content-container .content-wrapper .breadcrumbs {
+::ng-deep .content-container .content-wrapper .breadcrumbs {
   padding: 15px 30px;
   background-color: $white;
 }
 
 .qt-page-list__body {
   &.--open-filters {
-    /deep/ .company-devices-table {
+    ::ng-deep .company-devices-table {
       &__logged-user {
         @include media-breakpoint-down($lg) {
           flex: 0 0 136px;

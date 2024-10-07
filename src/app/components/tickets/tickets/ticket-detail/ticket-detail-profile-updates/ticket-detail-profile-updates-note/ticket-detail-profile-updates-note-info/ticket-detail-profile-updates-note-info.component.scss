@@ -224,11 +224,11 @@
     color: $gray-900;
     word-break: break-word;
 
-    /deep/ span {
+    ::ng-deep span {
       word-break: break-word;
     }
 
-    /deep/ table {
+    ::ng-deep table {
       width: 787px !important;
 
       span {

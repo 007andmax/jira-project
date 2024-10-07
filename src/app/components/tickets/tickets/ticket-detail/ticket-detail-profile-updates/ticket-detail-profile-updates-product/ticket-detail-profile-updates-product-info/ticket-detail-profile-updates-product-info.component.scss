@@ -331,7 +331,7 @@
     width: 200px;
     flex: 1;
 }
-/deep/.ticket-updates__ticket-price {
+::ng-deep.ticket-updates__ticket-price {
   .tooltip-inner {
     word-break: break-all;
   }

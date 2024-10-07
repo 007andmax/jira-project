@@ -41,14 +41,14 @@ export class CompanyDevicesCustomAsideComponent implements OnInit, OnDestroy {
   manufactures: Array<ManufactureDevice> = [];
   validate: ValidateCustomAside = new ValidateCustomAside();
   opened: boolean = false;
-  @ViewChild('tagsDd') tagsDd: CompanyDevicesCustomDropDownComponent;
+  @ViewChild('tagsDd', { static: true }) tagsDd: CompanyDevicesCustomDropDownComponent;
   sub: Subscription = new Subscription();
-  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
-  @ViewChild('typeDd') typeDd: DropDownComponent;
-  @ViewChild('manufacturesDd') manufacturesDd: ManufacturesDropDownComponent;
-  @ViewChild('modelsDd') modelsDd: ModelsDropDownComponent;
-  @ViewChild('installDateDP') installDateDP: DatePickerComponent;
-  @ViewChild('warrantyDateDP') warrantyDateDP: DatePickerComponent;
+  @ViewChild('addBtn', { static: true }) addBtn: DisabledBtnDirective;
+  @ViewChild('typeDd', { static: true }) typeDd: DropDownComponent;
+  @ViewChild('manufacturesDd', { static: true }) manufacturesDd: ManufacturesDropDownComponent;
+  @ViewChild('modelsDd', { static: true }) modelsDd: ModelsDropDownComponent;
+  @ViewChild('installDateDP', { static: true }) installDateDP: DatePickerComponent;
+  @ViewChild('warrantyDateDP', { static: true }) warrantyDateDP: DatePickerComponent;
   constructor(public devicesStateService: DevicesStateService,
     private deviceTagsStateService: DeviceTagsStateService,
     public customerPortalStateService: CustomerPortalStateService,

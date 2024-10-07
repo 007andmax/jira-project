@@ -44,7 +44,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
   toggleNotifyAgentsUser: boolean = false;
   selectedUsers: any = [];
   userList = [];
-  @ViewChild('customerTooltip') customerTooltip: NgbTooltip;
+  @ViewChild('customerTooltip', { static: true }) customerTooltip: NgbTooltip;
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
     private contractsService: ContractsService,

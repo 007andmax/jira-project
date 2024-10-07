@@ -31,7 +31,7 @@
             opacity: 1;
         }
 
-        /deep/.icon__more {
+        ::ng-deep.icon__more {
             opacity: 1;
         }
     }
@@ -70,7 +70,7 @@
 }
 
 .category-item-category-body {
-    /deep/.icon__more {
+    ::ng-deep.icon__more {
         opacity: 0;
     }
 }

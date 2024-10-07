@@ -7,7 +7,7 @@ import { SuperAdminKnowledgeBaseTableComponent } from './super-admin-knowledge-b
   styleUrls: ['./super-admin-knowledge-base.component.scss']
 })
 export class SuperAdminKnowledgeBaseComponent implements OnInit {
-  @ViewChild('table') table: SuperAdminKnowledgeBaseTableComponent;
+  @ViewChild('table', { static: true }) table: SuperAdminKnowledgeBaseTableComponent;
   constructor() { }
 
   ngOnInit() {

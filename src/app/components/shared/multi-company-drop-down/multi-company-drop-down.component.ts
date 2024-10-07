@@ -13,7 +13,7 @@ export class MultiCompanyDropDownComponent extends CompanyDropDownComponent {
   @Input() selectedCompanies = [];
   @Output() onChangeCompanies = new EventEmitter<any>();
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
+  @ViewChild('userInput', { static: true }) userInput: ElementRef<HTMLInputElement>;
   /**
    * Remove tag from selected
    * @param index - user index

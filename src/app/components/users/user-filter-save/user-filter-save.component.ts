@@ -15,7 +15,7 @@ import { UserFilterSaveValidate } from './class/user-filter-save-validate';
   styleUrls: ['./user-filter-save.component.scss']
 })
 export class UserFilterSaveComponent implements OnInit {
-  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
+  @ViewChild('addBtn', { static: true }) addBtn: DisabledBtnDirective;
   @Input() globalFilter: UserGlobalFilter;
   oldName: string;
   isDisabled: boolean = false;

@@ -40,8 +40,8 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
   toggleContractServices: boolean = false;
   defaultSelectedTax: Array<Tax> = [];
   sub: Subscription = new Subscription();
-  @ViewChild('managedServices') managedServices: NgbTooltip;
-  @ViewChild('maximumAmount') maximumAmount: NgbTooltip;
+  @ViewChild('managedServices', { static: true }) managedServices: NgbTooltip;
+  @ViewChild('maximumAmount', { static: true }) maximumAmount: NgbTooltip;
   constructor(private companiesStateService: CompaniesStateService,
     private taxesStateService: TaxesStateService,
     private nonContractServicesService: NonContractServicesService,

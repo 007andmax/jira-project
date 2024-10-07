@@ -37,7 +37,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
   companyId: string;
   toggleFilter: boolean = false;
   sub: Subscription = new Subscription();
-  @ViewChild('header') header: CompanyDevicesHeaderComponent;
+  @ViewChild('header', { static: true }) header: CompanyDevicesHeaderComponent;
   constructor(private devicesStateService: DevicesStateService,
     private devicesService: DevicesService,
     private confirmStateService: ConfirmStateService,

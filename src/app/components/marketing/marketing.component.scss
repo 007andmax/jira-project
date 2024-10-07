@@ -1,7 +1,7 @@
 @import "./src/assets/styles/variable";
 @import "./src/assets/styles/mixin/breakpoint";
 
-/deep/ .aside-filters {
+::ng-deep .aside-filters {
     width: 320px;
     flex-shrink: 0;
     background-color: $white;
@@ -190,24 +190,24 @@
     padding: 0;
     background-color: $white;
 
-    /deep/ .qt-page-list {
+    ::ng-deep .qt-page-list {
         background-color: $white;
         padding: 0;
     }
 
-    /deep/ table.qt-table-modern tbody tr td:first-child {
+    ::ng-deep table.qt-table-modern tbody tr td:first-child {
         border-left: 1px solid $gray-200;
         border-top-left-radius: unset;
         border-bottom-left-radius: unset;
     }
 
-    /deep/ table.qt-table-modern tbody tr td:last-child {
+    ::ng-deep table.qt-table-modern tbody tr td:last-child {
         border-right: 1px solid $gray-200;
         border-top-right-radius: unset;
         border-bottom-right-radius: unset;
     }
 
-    /deep/ table.qt-table-modern tbody tr td {
+    ::ng-deep table.qt-table-modern tbody tr td {
         border-bottom: 1px solid $gray-200;
     }
 }

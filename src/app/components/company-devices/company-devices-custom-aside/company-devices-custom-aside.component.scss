@@ -18,7 +18,7 @@
 .first-name-invalid {
     bottom: -30px !important;
 }
- /deep/app-company-devices-custom-drop-down .mat-form-field {
+ ::ng-deep app-company-devices-custom-drop-down .mat-form-field {
      width: 100%;
  }
 app-company-devices-custom-drop-down {
@@ -49,7 +49,7 @@ app-company-devices-custom-drop-down {
 .qt-aside-modern {
     width: 480px;
 }
-/deep/.placeholder-date {
+::ng-deep.placeholder-date {
 .qt-input-block__input {
     color: $gray-400 !important;
 }

@@ -22,18 +22,18 @@
     }
   }
 
-  /deep/tickets-filter-drop-down .mat-form-field {
+  ::ng-deep tickets-filter-drop-down .mat-form-field {
     width: 100%;
   }
-  /deep/tickets-filter-users-drop-down .mat-form-field {
+  ::ng-deep tickets-filter-users-drop-down .mat-form-field {
     width: 100%;
   }
-  /deep/tickets-filter-companies-drop-down .mat-form-field {
+  ::ng-deep tickets-filter-companies-drop-down .mat-form-field {
     width: 100%;
   }
 }
 
-/deep/ .qt-page-list__header-title {
+::ng-deep .qt-page-list__header-title {
   font-size: 16px;
   font-weight: 600;
   letter-spacing: 0;

@@ -1,6 +1,6 @@
 @import './src/assets/styles/variable';
 
-/deep/.contract-time-users {
+::ng-deep.contract-time-users {
   .mat-chip-remove {
       width: 16px !important;
       height: 16px !important;

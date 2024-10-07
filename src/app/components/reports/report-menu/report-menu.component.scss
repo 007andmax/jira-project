@@ -41,7 +41,7 @@
       color: $white;;
   }
 }
-/deep/ .accounts-receivable-multi-company-drop-down {
+::ng-deep .accounts-receivable-multi-company-drop-down {
   input {
     padding: 4px 14px !important;
   }

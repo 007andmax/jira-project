@@ -4,7 +4,7 @@
     padding: 0px;
 
 }
-/deep/.archive-modal {
+::ng-deep.archive-modal {
     max-width: 504px;
     width: 100%;
     padding: 32px;

@@ -72,7 +72,7 @@
 
     }
 }
-/deep/ .aside-filters {
+::ng-deep .aside-filters {
     width: 320px;
     flex-shrink: 0;
     background-color: $white;

@@ -107,7 +107,7 @@
     .mat-form-field-label,.mat-form-field-ripple {
         display: none;
     }
-   /deep/ input {
+   ::ng-deep input {
         &::placeholder {
             opacity: 0 !important;
         }

@@ -9,7 +9,7 @@ import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down
   styleUrls: ['./ticket-detail-change-status.component.scss']
 })
 export class TicketDetailChangeStatusComponent extends TicketChangeStatusComponent {
-  @ViewChild('dp') dp: DropDownComponent;
+  @ViewChild('dp', { static: true }) dp: DropDownComponent;
   selectedTicketStatus: TitleListType;
   list: Array<TitleListType> = [new TitleListType('In Progress', 'IN_PROGRESS'),
   new TitleListType('On Hold', 'ON_HOLD')];

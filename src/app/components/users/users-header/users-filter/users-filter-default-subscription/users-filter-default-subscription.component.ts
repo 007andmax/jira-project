@@ -9,7 +9,7 @@ import { MatFormFieldComponent } from 'src/app/components/shared/mat-form-field/
 })
 export class UsersFilterDefaultSubscriptionComponent extends UserDefaultSubscriptionComponent {
 
-  @ViewChild('formField') formField: MatFormFieldComponent;
+  @ViewChild('formField', { static: true }) formField: MatFormFieldComponent;
   selected(field) {
     let subscription = JSON.parse(JSON.stringify(this.defaultSubscriptions));
     subscription[field].enabled = !subscription[field].enabled;

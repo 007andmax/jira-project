@@ -44,7 +44,7 @@
    background-color: $gray-500;
   
 }
-/deep/.fr-dib {
+::ng-deep.fr-dib {
    margin: 5px auto;
    display: block;
    float: none;
@@ -63,7 +63,7 @@
 .tag__modern {
    text-transform: capitalize;
 }
-/deep/.news-description {
+::ng-deep.news-description {
    img {
       cursor: pointer !important;
    }

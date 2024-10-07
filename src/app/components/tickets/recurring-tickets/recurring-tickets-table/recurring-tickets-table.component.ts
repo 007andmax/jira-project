@@ -18,7 +18,6 @@ export class RecurringTicketsTableComponent implements OnInit {
   @Input() ticket: RecurringTicket;
   public showSelect = false;
 
-  @ViewChild("assignedUser") assignedUser: AddAssignedUserComponent;
   /**
    * Creates an instance of the RecurringTicketsHeaderComponent with the injected services
    * @param {RecurringTicketsStateService} recurringState to work recurring state
@@ -71,7 +70,6 @@ export class RecurringTicketsTableComponent implements OnInit {
  */
   public showSelectWrapper($event) {
     this.stopEvent($event);
-    this.assignedUser.assignedUserDp.open();
     this.showSelect = !this.showSelect;
 
   }

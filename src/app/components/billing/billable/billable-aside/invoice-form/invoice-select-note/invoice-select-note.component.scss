@@ -97,7 +97,7 @@
   }
 }
 .invoice-select-note {
-/deep/ .dropdown-menu {
+::ng-deep .dropdown-menu {
     max-height:192px;
     height: auto;
     overflow: auto;

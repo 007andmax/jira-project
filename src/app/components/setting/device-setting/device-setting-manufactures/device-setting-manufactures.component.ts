@@ -22,7 +22,7 @@ export class DeviceSettingManufacturesComponent implements OnInit, OnDestroy {
   filter: DeviceSettingFilter = new DeviceSettingFilter();
   manufactures: Array<ManufactureDevice> = [];
   sub: Subscription = new Subscription();
-  @ViewChild("models") models: DeviceSettingModelsComponent;
+  @ViewChild("models", { static: true }) models: DeviceSettingModelsComponent;
   constructor(private devicesStateService: DevicesStateService,
     public cd: ChangeDetectorRef,
     private confirmStateService: ConfirmStateService,

@@ -24,7 +24,7 @@ export class MarketingSubscriptionsAsideComponent implements OnInit, OnDestroy {
   users: Array<User> = [];
   editMode: boolean = false;
   sub: Subscription = new Subscription();
-  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
+  @ViewChild('addBtn', { static: false }) addBtn: DisabledBtnDirective;
   constructor(private marketingEmailStateService: MarketingEmailStateService,
     private marketingEmailService: MarketingEmailService,
     private modalService: NgbModal,

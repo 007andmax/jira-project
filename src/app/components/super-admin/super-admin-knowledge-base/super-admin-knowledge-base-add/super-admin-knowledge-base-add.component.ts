@@ -17,7 +17,7 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
   styleUrls: ['./super-admin-knowledge-base-add.component.scss']
 })
 export class SuperAdminKnowledgeBaseAddComponent implements OnInit, OnDestroy {
-  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
+  @ViewChild('addBtn', { static: true }) addBtn: DisabledBtnDirective;
   @Output() onClose = new EventEmitter();
   private apiUrl = environment.apiUrl;
   news: News = new News();

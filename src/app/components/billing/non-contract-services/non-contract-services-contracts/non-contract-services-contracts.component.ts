@@ -11,7 +11,6 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./non-contract-services-contracts.component.scss']
 })
 export class NonContractServicesContractsComponent implements OnInit, OnDestroy {
-  @ViewChild('glNumberSelect') glNumberSelect: DropDownComponent;
   @Input() type: string = '';
   glNumbers: Array<GlNumber> = [];
   selectedGlNumber: GlNumber = null;

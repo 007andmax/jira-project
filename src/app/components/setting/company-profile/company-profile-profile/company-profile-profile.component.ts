@@ -57,7 +57,7 @@ export class CompanyProfileProfileComponent implements OnInit, OnDestroy {
   timezones: Array<TimeZone> = [];
   fromGoogle = false;
   @Output() onGetCurrentCompany: EventEmitter<any> = new EventEmitter();
-  @ViewChild('search') searchElementRef: ElementRef;
+  @ViewChild('search', { static: true }) searchElementRef: ElementRef;
   secondaryPhone: string = '';
   sub: Subscription = new Subscription();
   constructor(private companyProfileService: CompanyProfileService,

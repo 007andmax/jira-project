@@ -27,8 +27,8 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
   activeTab: string = "productCategories";
   loading: boolean = true;
   sub: Subscription = new Subscription();
-  @ViewChild("productType") productType: ProductsSettingsTypeComponent;
-  @ViewChild("categories") categories: ProductsSettingsCategoryComponent;
+  @ViewChild("productType", { static: true }) productType: ProductsSettingsTypeComponent;
+  @ViewChild("categories", { static: true }) categories: ProductsSettingsCategoryComponent;
   constructor(private inventoryStateService: InventoryStateService,
     private confirmStateService: ConfirmStateService,
     public cd: ChangeDetectorRef,

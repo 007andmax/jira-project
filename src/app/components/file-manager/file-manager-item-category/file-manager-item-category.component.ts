@@ -12,7 +12,7 @@ import * as moment from "moment";
   styleUrls: ['./file-manager-item-category.component.scss']
 })
 export class FileManagerItemCategoryComponent implements OnInit {
-  @ViewChild('db') db: NgbDropdown;
+  @ViewChild('db', { static: true }) db: NgbDropdown;
   @Input() isRemove: boolean = false;
   @Input() item: FileManagerCategory;
   @Output() onRemove = new EventEmitter<any>();

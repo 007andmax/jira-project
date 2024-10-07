@@ -1,6 +1,6 @@
 @import "./src/assets/styles/variable";
 
-/deep/.mat-chip-list {
+::ng-deep.mat-chip-list {
 .mat-chip-input {
         width: 150px;
         margin: 3px;
@@ -29,9 +29,9 @@
     align-items: center;
     margin: -4px;
 }
-/deep/.page-list-ticket .mat-form-field-wrapper .mat-form-field-infix input,
-/deep/.users-page .mat-form-field-wrapper .mat-form-field-infix input,
-/deep/.company-devices-page .mat-form-field-wrapper .mat-form-field-infix input {
+::ng-deep.page-list-ticket .mat-form-field-wrapper .mat-form-field-infix input,
+::ng-deep.users-page .mat-form-field-wrapper .mat-form-field-infix input,
+::ng-deep.company-devices-page .mat-form-field-wrapper .mat-form-field-infix input {
     font-size: 14px;
     font-weight: 400;
     line-height: 17px;

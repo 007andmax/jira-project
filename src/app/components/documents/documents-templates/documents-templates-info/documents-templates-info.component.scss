@@ -259,6 +259,6 @@
     background-position: center;
     cursor: pointer;
 }
-/deep/.documents-create-panel__body img {
+::ng-deep.documents-create-panel__body img {
     cursor: pointer;
 }

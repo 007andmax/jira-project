@@ -893,7 +893,7 @@ app-ticket-change-status {
     }
   }
   &__edit-wrap {
-    /deep/ pre {
+    ::ng-deep pre {
       word-break: break-word;
       white-space: break-spaces;
     }

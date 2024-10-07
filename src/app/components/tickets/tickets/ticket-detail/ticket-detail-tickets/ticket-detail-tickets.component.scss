@@ -180,7 +180,7 @@
     }
 }
 
-/deep/ .ticket-detail-tickets-info-line__input {
+::ng-deep .ticket-detail-tickets-info-line__input {
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
@@ -196,7 +196,7 @@
     line-height: 31px;
 }
 
-/deep/ preview-phone-mask {
+::ng-deep preview-phone-mask {
     line-height: 16px;
 
     .ticket-detail-tickets-info-line__label {

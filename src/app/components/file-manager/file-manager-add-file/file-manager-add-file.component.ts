@@ -14,7 +14,7 @@ import { DocumentsService } from 'src/app/services/documents/documents.service';
   providers: [NgbModalConfig, NgbModal]
 })
 export class FileManagerAddFileComponent implements OnInit {
-  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
+  @ViewChild('addBtn', { static: true }) addBtn: DisabledBtnDirective;
   @Input() categoryId: string;
   @Input() companyId: string;
   addForm: FormGroup;

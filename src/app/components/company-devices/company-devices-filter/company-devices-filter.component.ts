@@ -22,7 +22,7 @@ export class CompanyDevicesFilterComponent implements OnInit {
     "Phone",
     "Generic device"];
   filter: CompanyDeviceFilter = new CompanyDeviceFilter();
-  @ViewChild('typesDp') typesDp: CompanyDevicesFilterTypeComponent;
+  @ViewChild('typesDp', { static: true }) typesDp: CompanyDevicesFilterTypeComponent;
   @Output() changeCountFilter = new EventEmitter<any>();
   @Output() onClose = new EventEmitter();
   sub: Subscription = new Subscription();

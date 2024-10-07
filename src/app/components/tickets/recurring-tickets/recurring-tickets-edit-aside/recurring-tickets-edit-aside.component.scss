@@ -6,7 +6,7 @@
   .qt-aside-modern__content {
     height: calc(100% - 146px);
   }
-  /deep/ app-assigned-ticket-user {
+  ::ng-deep app-assigned-ticket-user {
     .app-drop-down__right-icon {
       bottom: unset !important;
     }

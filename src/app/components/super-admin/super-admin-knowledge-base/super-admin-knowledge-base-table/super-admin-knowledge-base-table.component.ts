@@ -25,8 +25,8 @@ export class SuperAdminKnowledgeBaseTableComponent implements OnInit, OnDestroy 
   toggleFilter: boolean = false;
   showPendingPreloader: boolean = false;
   container = document.body.querySelector(".main-container");
-  @ViewChild("addAside") addAside: SuperAdminKnowledgeBaseAddComponent;
-  @ViewChild("editAside") editAside: SuperAdminKnowledgeBaseEditComponent;
+  @ViewChild("addAside", { static: true }) addAside: SuperAdminKnowledgeBaseAddComponent;
+  @ViewChild("editAside", { static: true }) editAside: SuperAdminKnowledgeBaseEditComponent;
   constructor(private ticketsListService: TicketsListService,
     private superAdminKnowledgeBaseService: SuperAdminKnowledgeBaseService,
     public cd: ChangeDetectorRef,

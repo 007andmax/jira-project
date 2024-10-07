@@ -18,7 +18,7 @@ tr {
       border-color: $blue-light-600;
     }
 }
-/deep/ .qt-table-modern__row {
+::ng-deep .qt-table-modern__row {
     position: relative;
     height: auto;
     min-height: 56px;

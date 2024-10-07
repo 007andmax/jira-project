@@ -12,7 +12,7 @@
 
 @import "./src/assets/styles/variable";
 
-/deep/ .ticket-table {
+::ng-deep .ticket-table {
     th {
         white-space: nowrap;
     }
@@ -41,7 +41,7 @@ super-admin-companies-item {
   min-width: 1376px;
 }
 
-/deep/ .qt-table-modern .ticket-table__company {
+::ng-deep .qt-table-modern .ticket-table__company {
     max-width: 300px;
 }
 .qt-page-list__header.--sticky {
@@ -52,7 +52,7 @@ super-admin-companies-item {
     background-color: $gray-50;
     border-bottom: 1px solid $gray-200;
 }
-/deep/ .qt-page-list__header-title {
+::ng-deep .qt-page-list__header-title {
     font-size: 16px;
     font-weight: 600;
     letter-spacing: 0;

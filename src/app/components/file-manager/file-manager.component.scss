@@ -26,7 +26,7 @@
   flex-wrap: wrap;
   gap: 16px;
 }
-/deep/ .user-modal .modal-dialog {
+::ng-deep .user-modal .modal-dialog {
   max-width: 504px;
   padding: 0;
 
@@ -36,7 +36,7 @@
     letter-spacing: 0;
   }
 }
-/deep/ .aside-filters {
+::ng-deep .aside-filters {
     width: 320px;
     flex-shrink: 0;
     background-color: $white;
@@ -151,7 +151,7 @@
 
     }
 }
-/deep/ .selected-item {
+::ng-deep .selected-item {
   .item-file-container {
     border: 1px solid $blue-light-600 !important;
     &::after {

@@ -1,5 +1,5 @@
 @import './src/assets/styles/variable';
-/deep/.contract-time-users {
+::ng-deep.contract-time-users {
     app-mat-chip {
       border-radius: 16px !important;
       border: solid 1px $gray-200;

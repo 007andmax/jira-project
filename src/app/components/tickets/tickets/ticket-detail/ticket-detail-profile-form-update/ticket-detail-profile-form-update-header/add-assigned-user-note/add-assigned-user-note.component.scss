@@ -18,7 +18,7 @@
     display: flex !important;
 }
 
-/deep/ .add-assigned-user-note {
+::ng-deep .add-assigned-user-note {
     position: relative;
     padding: 0;
     width: 100%;
@@ -112,7 +112,7 @@
         filter: brightness(0.8)
     }
 }
-/deep/ .add-assigned-user-note-db {
+::ng-deep .add-assigned-user-note-db {
         max-height: 357px;
         max-width: 100%;
         margin-left: 108px;

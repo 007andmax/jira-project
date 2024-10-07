@@ -1,6 +1,6 @@
 @import "./src/assets/styles/variable";
 
-/deep/ .ticket-table {
+::ng-deep .ticket-table {
     th {
         white-space: nowrap;
     }
@@ -57,11 +57,11 @@ app-tickets-table-item {
     display: flex;
 }
 
-/deep/ .filter-button.--gray:focus {
+::ng-deep .filter-button.--gray:focus {
     background-color: $white;
 }
 
-/deep/ .filter-button.active:focus {
+::ng-deep .filter-button.active:focus {
     background-color: #16a4fa10;
 }
 
@@ -91,7 +91,7 @@ app-tickets-table-item {
     }
 }
 
-/deep/ .qt-table-modern__row {
+::ng-deep .qt-table-modern__row {
     position: relative;
     min-height: 56px;
     border: unset;
@@ -170,7 +170,7 @@ app-tickets-table-item {
     }
 }
 
-/deep/ .qt-table-modern .ticket-table__company {
+::ng-deep .qt-table-modern .ticket-table__company {
     max-width: 300px;
 }
 

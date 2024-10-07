@@ -141,21 +141,21 @@
         }
     }
 
-    /deep/tickets-filter-drop-down .mat-form-field {
+    ::ng-deep tickets-filter-drop-down .mat-form-field {
         width: 100%;
     }
 
-    /deep/tickets-filter-users-drop-down .mat-form-field {
+    ::ng-deep tickets-filter-users-drop-down .mat-form-field {
         width: 100%;
     }
 
-    /deep/tickets-filter-companies-drop-down .mat-form-field {
+    ::ng-deep tickets-filter-companies-drop-down .mat-form-field {
         width: 100%;
     }
 }
 
  
-/deep/ #froala-editor {
+::ng-deep #froala-editor {
     .fr-btn-grp {
         display: flex;
         align-items: center;

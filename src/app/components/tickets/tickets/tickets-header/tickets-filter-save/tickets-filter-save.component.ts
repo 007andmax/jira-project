@@ -12,7 +12,7 @@ import { TicketsFilterSaveValidate } from './class/tickets-filter-save-validate'
   styleUrls: ['./tickets-filter-save.component.scss']
 })
 export class TicketsFilterSaveComponent implements OnInit {
-  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
+  @ViewChild('addBtn', { static: true }) addBtn: DisabledBtnDirective;
   @Input() globalFilter: TicketGlobalFilter;
   validate: TicketsFilterSaveValidate = new TicketsFilterSaveValidate();
   oldName: string;

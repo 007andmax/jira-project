@@ -18,7 +18,7 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
 })
 export class AddUserToCompanyComponent implements OnInit, OnDestroy {
   @Input() company: Company;
-  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
+  @ViewChild('addBtn', { static: true }) addBtn: DisabledBtnDirective;
   container = document.body.querySelector(".user-company-list");
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
