@@ -83,6 +83,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
       this.selectedUserType = this.userTypes.find(item => item.id == this.user.jobTypeId);
       this.selectedUserTitle = this.jobTitleList.find(item => item.id == this.user.jobTitleId);
       this.validate.addPhoneNumbers(this.user.phoneNumbers);
+      console.log("this.user", this.user);
     })
     this.sub.add(getOpenEditAside);
     let onGetUserRole = this.customerRoleStateService.onGetUserRole.subscribe(data => {
@@ -225,6 +226,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     this.editBtn.setDisabled(true);
     this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit())).subscribe(data => {
       this.editBtn.setDisabled(false);
+      this.usersStateService.fastEditUser(this.user);
       this.close();
     }, err => {
       this.editBtn.setDisabled(false);
