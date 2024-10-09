@@ -30,7 +30,7 @@ export class InvoiceTicketsService {
     */
   getQuoteSettings() {
     return this.http
-      .get(`${this.apiUrl}settings/companyProfile/QuoteSettings`)
+      .get(`${this.apiUrl}settings/companyProfile/saleQuoteSettings`)
       .pipe(map(data => data));
   }
 
