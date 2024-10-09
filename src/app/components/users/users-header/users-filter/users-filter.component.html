@@ -21,6 +21,7 @@
     >
     </tickets-filter-companies-drop-down>
     <app-users-filter-default-subscription
+        #defaultSubscription
         [defaultSubscriptions]="filter.defaultSubscriptions"
         (onChange)="onChangeDefaultSubscriptions($event)"
     ></app-users-filter-default-subscription>

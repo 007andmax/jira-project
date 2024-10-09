@@ -261,7 +261,7 @@ const routes: Routes = [
 
   },
   {
-    path: ':domain/default-services',
+    path: ':domain/non-contract-services',
     loadChildren: () => import('./components/billing/non-contract-services/non-contract-services.module').then(m => m.NonContractServicesModule),
     canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
 

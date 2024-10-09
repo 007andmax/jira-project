@@ -19,4 +19,7 @@ export class UsersFilterDefaultSubscriptionComponent extends UserDefaultSubscrip
     if (subscription.invoiceSubscription.enabled || subscription.ticketSubscription.enabled || subscription.ticketManagerSubscription.enabled) this.formField.checkSelectedItems([true]);
     if (!subscription.invoiceSubscription.enabled && !subscription.ticketSubscription.enabled && !subscription.ticketManagerSubscription.enabled) this.formField.checkSelectedItems([]);
   }
+  clearWithOutChanges() {
+    this.formField.checkSelectedItems([]);
+  }
 }

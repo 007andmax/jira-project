@@ -169,7 +169,7 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
       this.validate.setCompanyValid(index);
     }
     if (this.user.primaryEmail && this.user.primaryEmail.length > 0) this.onCheckValidPrimaryEmail();
-
+    this.cd.detectChanges();
   }
   removeLogo() {
     this.companiesService.removeAttachment(this.user.avatar.origin.id).subscribe(data => {

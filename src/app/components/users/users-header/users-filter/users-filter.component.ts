@@ -24,6 +24,7 @@ import { MarketingEmailStateService } from 'src/app/states/marketing-email/marke
 import { MODE_MARKETING_USERS_LIST } from 'src/app/const/users';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { UsersFilterCustomSubscriptionsComponent } from './users-filter-custom-subscriptions/users-filter-custom-subscriptions.component';
+import { UsersFilterDefaultSubscriptionComponent } from './users-filter-default-subscription/users-filter-default-subscription.component';
 
 @Component({
   selector: 'app-users-filter',
@@ -32,6 +33,7 @@ import { UsersFilterCustomSubscriptionsComponent } from './users-filter-custom-s
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersFilterComponent implements OnInit, OnDestroy {
+  @ViewChild('defaultSubscription', { static: true }) defaultSubscription: UsersFilterDefaultSubscriptionComponent;
   @ViewChild('jobTitleDp', { static: true }) jobTitleDp: UsersFilterJobTitleComponent;
   @ViewChild('companiesDp', { static: true }) companiesDp: TicketsFilterCompaniesDropDownComponent;
   @ViewChild('customSubscriptionDp', { static: false }) customSubscriptionDp: UsersFilterCustomSubscriptionsComponent;
@@ -164,6 +166,7 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
     this.filter.setJobTitles([]);
     this.jobTitleDp.clearWithOutChanges();
     this.filter.resetDefaultSubscriptions();
+    this.defaultSubscription.clearWithOutChanges();
     this.filter.setTags([]);
     this.tagsDp.clearWithOutChanges();
     this.filter.setUserName(null);
