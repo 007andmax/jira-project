@@ -58,6 +58,7 @@ export class QuotesSettingsComponent implements OnInit {
       quoteExpirationDate: data.type,
     });
     console.log("this.quotesForm.value", this.quotesForm.value);
+    this.expirationDate = data;
   }
   /**
    * get quote number
