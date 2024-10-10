@@ -88,7 +88,7 @@ export class BillableComponent implements OnInit, OnDestroy {
         this.removeTicket(data, this.reqList);
         this.removeTicket(data, this.list);
       }
-      if (data.action == 'BILLABLE_EXPENSE_ADDED') {
+      if (data.action == 'BILLABLE_EXPENSE_ADDED' && !this.showPreloader) {
         this.addTicket(data, this.reqList);
         this.addTicket(data, this.list);
       }
