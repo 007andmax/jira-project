@@ -6,7 +6,7 @@ import { CompaniesStateService } from '../../states/company/companies-state.serv
 import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
 import { UsersService } from '../../services/users/users.service';
 import { DraftEmailStateService } from '../../states/draft-email/draft-email-state.service';
-import { ARCHIVE_USER, DEARCHIVE_USER } from '../../const/confirm';
+import { ARCHIVE_USER, ARCHIVE_USERS, DEARCHIVE_USER } from '../../const/confirm';
 import { UserChange } from '../users/class/user-change';
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
 import { UsersHeaderComponent } from '../users/users-header/users-header.component';
@@ -19,11 +19,13 @@ import { CrmCompanyJobTitle } from '../setting/crm-settings/crm-company-job-titl
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
 import { MarketingSubscriptionType } from '../setting/marketing-email/marketing-subscription-type/class/marketing-subscription-type';
 import { UserCustomerCompaniesInfo } from '../users/class/user-customer-companies-info';
-import { Subscription } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 import { UserFilters } from '../users/class/user-filters';
 import { UsersFilterComponent } from '../users/users-header/users-filter/users-filter.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { fadeInAnimation } from 'src/app/animations';
+import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 @Component({
   selector: 'company-user',
@@ -62,6 +64,8 @@ export class CompanyUserComponent implements OnInit {
     private leftPanelStateService: LeftPanelStateService,
     private usersRealTimeService: UsersRealTimeService,
     public customerPortalStateService: CustomerPortalStateService,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService,
     private marketingEmailStateService: MarketingEmailStateService) { }
 
   ngOnInit() {
@@ -112,6 +116,9 @@ export class CompanyUserComponent implements OnInit {
         if (this.confirmStateService.getConfirmAction() === DEARCHIVE_USER) {
           this.onDeArchiveUser(this.usersStateService.getUserForDeArchive().id);
         }
+        if (this.confirmStateService.getConfirmAction() === ARCHIVE_USERS) {
+          this.onArchiveUsers(this.usersStateService.getUsersForArchive());
+        }
       }
     })
     this.sub.add(getConfirm);
@@ -153,6 +160,21 @@ export class CompanyUserComponent implements OnInit {
     })
     this.sub.add(onGetListCustomSubscription);
     this.onInitSubscribe();
+  }
+  private onArchiveUsers(users) {
+    let list = users.filter(item => item.customerCompaniesInfo.every(company => !company.isPrimaryContact));
+    let listPrimary = users.filter(item => item.customerCompaniesInfo.some(company => company.isPrimaryContact));
+    console.log("list", list);
+    console.log("listPrimary", listPrimary);
+    listPrimary.forEach(item => {
+      this.toastrService.error(`You can't remove the user ${item.firstName} ${item.lastName}`);
+    })
+    this.appStateService.changeDetectorRef();
+    if (list.length > 0) forkJoin(
+      list.map(item => this.usersService.onArchiveUsers(item.id))
+    )
+      .subscribe(res => {
+      });
   }
   onCloseFilters() {
     this.header.setToggleFilter(false);
