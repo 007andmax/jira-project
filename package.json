@@ -57,6 +57,7 @@
     "ngx-mask": "^8.1.7",
     "ngx-toastr": "^10.1.0",
     "ngx-uploader": "^8.0.0",
+    "node-sass": "^4.13.1",
     "randombytes": "^2.1.0",
     "rxjs": "~6.3.3",
     "rxjs-compat": "^6.4.0",
