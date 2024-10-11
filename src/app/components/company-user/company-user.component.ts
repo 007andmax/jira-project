@@ -164,10 +164,8 @@ export class CompanyUserComponent implements OnInit {
   private onArchiveUsers(users) {
     let list = users.filter(item => item.customerCompaniesInfo.every(company => !company.isPrimaryContact));
     let listPrimary = users.filter(item => item.customerCompaniesInfo.some(company => company.isPrimaryContact));
-    console.log("list", list);
-    console.log("listPrimary", listPrimary);
     listPrimary.forEach(item => {
-      this.toastrService.error(`You can't remove the user ${item.firstName} ${item.lastName}`);
+      this.toastrService.error(`You cannot archive a primary contact user of a customer company`);
     })
     this.appStateService.changeDetectorRef();
     if (list.length > 0) forkJoin(
@@ -281,13 +279,6 @@ export class CompanyUserComponent implements OnInit {
 
     })
     this.userListService.addSubscription(archiveUser);
-  }
-  private onArchiveUsers(ids) {
-    forkJoin(
-      ids.map(item => this.usersService.onArchiveUsers(item))
-    )
-      .subscribe(res => {
-      });
   }
   public onScroll() {
     this.infiniteScrollDisabled = true;

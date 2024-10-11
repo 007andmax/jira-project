@@ -53,11 +53,9 @@ export class QuotesSettingsComponent implements OnInit {
   }
 
   onDefaultExpirationDate(data) {
-    console.log("data", data);
     this.quotesForm.patchValue({
       quoteExpirationDate: data.type,
     });
-    console.log("this.quotesForm.value", this.quotesForm.value);
     this.expirationDate = data;
   }
   /**
@@ -73,7 +71,6 @@ export class QuotesSettingsComponent implements OnInit {
             quoteExpirationDate: res.quoteExpirationDate
           });
           this.expirationDate = this.expirationDates.find(item => item.type == res.quoteExpirationDate);
-          console.log("this.expirationDate", this.expirationDate);
         }
       },
       error => {
@@ -89,7 +86,6 @@ export class QuotesSettingsComponent implements OnInit {
     if (this.quotesForm.invalid) {
       return;
     }
-    console.log("this.quotesForm.value", this.quotesForm.value);
     const objQuotes = {
       emailSettingPageNumberFormDto: {
         count: this.quotesForm.value.count,

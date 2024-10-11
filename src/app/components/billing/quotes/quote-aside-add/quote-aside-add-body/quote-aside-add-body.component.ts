@@ -85,7 +85,6 @@ export class QuoteAsideAddBodyComponent implements OnInit, OnDestroy {
     });
     if (this.quoteStateService.getQuoteForCopy()) this.onInitCopy();
     if (!this.customerPortalStateService.isCustomerPortal) this.getInvoiceNote();
-    console.log("quoteExpirationDate", isNaN(this.companiesState.getCurrentCompany().quoteExpirationDate));
     if (!isNaN(this.companiesState.getCurrentCompany().quoteExpirationDate)) this.quote.setValidUntilFromSettings(this.companiesState.getCurrentCompany().quoteExpirationDate);
     this.sub.add(getChangeCompanies);
   }

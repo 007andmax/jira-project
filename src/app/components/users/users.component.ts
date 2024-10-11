@@ -179,8 +179,6 @@ export class UsersComponent implements OnInit, OnDestroy {
   private onArchiveUsers(users) {
     let list = users.filter(item => item.customerCompaniesInfo.every(company => !company.isPrimaryContact));
     let listPrimary = users.filter(item => item.customerCompaniesInfo.some(company => company.isPrimaryContact));
-    console.log("list", list);
-    console.log("listPrimary", listPrimary);
     listPrimary.forEach(item => {
       this.toastrService.error(`You can't remove the user ${item.firstName} ${item.lastName}`);
     })

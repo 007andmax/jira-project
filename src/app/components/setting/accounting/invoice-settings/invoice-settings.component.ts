@@ -206,7 +206,6 @@ export class InvoiceSettingsComponent implements OnInit {
   }
 
   onDefaultPaymentMethodChange(data) {
-    console.log("onDefaultPaymentMethodChange", data);
     this.paymentMethod = data;
     this.invoiceForm.patchValue({ defaultPaymentMethod: data.value });
   }
@@ -283,7 +282,6 @@ export class InvoiceSettingsComponent implements OnInit {
     if (!this.invoiceForm.value.invoiceCount.trim()) {
       return;
     }
-    console.log("this.invoiceForm.value", this.invoiceForm.value);
     const objInvoice = {
       emailSettingPageNumberFormDto: {
         count: this.invoiceForm.value.invoiceCount,
