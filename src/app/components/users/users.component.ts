@@ -26,6 +26,7 @@ import { UserFilters } from './class/user-filters';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserDeArchiveNotificationComponent } from './user-de-archive-notification/user-de-archive-notification.component';
 import { fadeInAnimation } from 'src/app/animations';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-users',
@@ -63,6 +64,8 @@ export class UsersComponent implements OnInit, OnDestroy {
     public customerPortalStateService: CustomerPortalStateService,
     private websocketService: WebsocketService,
     private modalService: NgbModal,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService
   ) {
   }
   ngOnInit() {
@@ -109,7 +112,7 @@ export class UsersComponent implements OnInit, OnDestroy {
           this.onDeArchiveUser(this.usersStateService.getUserForDeArchive().id);
         }
         if (this.confirmStateService.getConfirmAction() === ARCHIVE_USERS) {
-          this.onArchiveUsers(this.usersStateService.getUsersForArchive().map(item => item.id));
+          this.onArchiveUsers(this.usersStateService.getUsersForArchive());
         }
       }
     })
@@ -173,9 +176,17 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.header.setUsers(this.users);
     this.setDefaultScoll();
   }
-  private onArchiveUsers(ids) {
-    forkJoin(
-      ids.map(item => this.usersService.onArchiveUsers(item))
+  private onArchiveUsers(users) {
+    let list = users.filter(item => item.customerCompaniesInfo.every(company => !company.isPrimaryContact));
+    let listPrimary = users.filter(item => item.customerCompaniesInfo.some(company => company.isPrimaryContact));
+    console.log("list", list);
+    console.log("listPrimary", listPrimary);
+    listPrimary.forEach(item => {
+      this.toastrService.error(`You can't remove the user ${item.firstName} ${item.lastName}`);
+    })
+    this.appStateService.changeDetectorRef();
+    if (list.length > 0) forkJoin(
+      list.map(item => this.usersService.onArchiveUsers(item.id))
     )
       .subscribe(res => {
       });

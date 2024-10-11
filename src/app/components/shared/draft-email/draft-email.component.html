@@ -97,6 +97,12 @@
                         >
                     </div>
                 </div>
+                <textarea
+                    *ngIf="tab == 'html'"
+                    [(ngModel)]="messageHTML"
+                    class="email-text-block textarea"
+                    placeholder="Put here your HTML"
+                ></textarea>
                 <app-upload-area
                     #uplaodFile
                     (changeFiles)="onChangeFiles($event)"
@@ -164,12 +170,6 @@
                         </ng-template>
                     </ul>
                 </div>
-                <textarea
-                    *ngIf="tab == 'html'"
-                    [(ngModel)]="messageHTML"
-                    class="email-text-block textarea"
-                    placeholder="Put here your HTML"
-                ></textarea>
             </div>
         </div>
     </div>

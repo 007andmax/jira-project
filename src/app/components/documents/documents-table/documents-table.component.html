@@ -1,4 +1,5 @@
-<div class="qt-table-modern__row"
+<div
+    class="qt-table-modern__row"
     [ngClass]="{'pointer':!item.isCategory && getPermissions('VIEW_DOCUMENT'),
     'documents-no-valid' : showNotificationReview}"
     (click)="showTemplate()"
@@ -65,7 +66,6 @@
         <div
             ngbDropdown
             [container]="'body'"
-            [placement]="'bottom-right'"
         >
             <div
                 class="qt-ic-c qt-icon icon__more  qt-pointer qt-sz-16 qt-bg-contain"

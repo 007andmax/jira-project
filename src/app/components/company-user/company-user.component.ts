@@ -24,6 +24,8 @@ import { UserFilters } from '../users/class/user-filters';
 import { UsersFilterComponent } from '../users/users-header/users-filter/users-filter.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { fadeInAnimation } from 'src/app/animations';
+import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 @Component({
   selector: 'company-user',
@@ -62,6 +64,8 @@ export class CompanyUserComponent implements OnInit {
     private leftPanelStateService: LeftPanelStateService,
     private usersRealTimeService: UsersRealTimeService,
     public customerPortalStateService: CustomerPortalStateService,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService,
     private marketingEmailStateService: MarketingEmailStateService) { }
 
   ngOnInit() {
@@ -113,7 +117,7 @@ export class CompanyUserComponent implements OnInit {
           this.onDeArchiveUser(this.usersStateService.getUserForDeArchive().id);
         }
         if (this.confirmStateService.getConfirmAction() === ARCHIVE_USERS) {
-          this.onArchiveUsers(this.usersStateService.getUsersForArchive().map(item => item.id));
+          this.onArchiveUsers(this.usersStateService.getUsersForArchive());
         }
       }
     })
@@ -156,6 +160,21 @@ export class CompanyUserComponent implements OnInit {
     })
     this.sub.add(onGetListCustomSubscription);
     this.onInitSubscribe();
+  }
+  private onArchiveUsers(users) {
+    let list = users.filter(item => item.customerCompaniesInfo.every(company => !company.isPrimaryContact));
+    let listPrimary = users.filter(item => item.customerCompaniesInfo.some(company => company.isPrimaryContact));
+    console.log("list", list);
+    console.log("listPrimary", listPrimary);
+    listPrimary.forEach(item => {
+      this.toastrService.error(`You can't remove the user ${item.firstName} ${item.lastName}`);
+    })
+    this.appStateService.changeDetectorRef();
+    if (list.length > 0) forkJoin(
+      list.map(item => this.usersService.onArchiveUsers(item.id))
+    )
+      .subscribe(res => {
+      });
   }
   onCloseFilters() {
     this.header.setToggleFilter(false);

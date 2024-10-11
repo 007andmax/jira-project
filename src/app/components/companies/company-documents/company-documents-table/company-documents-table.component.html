@@ -43,7 +43,10 @@
         (click)="navigateToCategory()"
         [ngClass]="{'pointer':item.isCategory}"
     >
-      <div class="ellipsis" [textContent]="item.isCategory ? '' : getCompanies()"></div>
+        <div
+            class="ellipsis"
+            [textContent]="item.isCategory ? '' : getCompanies()"
+        ></div>
     </div>
     <div
         class="documents-table__menu"
@@ -52,7 +55,6 @@
         <div
             ngbDropdown
             [container]="'body'"
-            [placement]="'bottom-right'"
         >
             <div
                 *ngIf="!item.isCategory && (getPermissions('EDIT_DOCUMENT') || getPermissions('CREATE_DOCUMENT') || getPermissions('VIEW_DOCUMENT') || getPermissions('DELETE_DOCUMENT')) || item.isCategory"
