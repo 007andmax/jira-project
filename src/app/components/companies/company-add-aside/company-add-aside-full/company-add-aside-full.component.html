@@ -481,12 +481,14 @@
         </div>
         <div class="qt-input-block qt-f50">
             <app-drop-down
+                #paymentTerm
                 [class]="['qt-select-input-40']"
                 [placeholder]="'Select Payment Terms'"
                 [field]="'title'"
                 [list]="paymentTerms"
                 [search]="true"
                 [change]="true"
+                [sort]="false"
                 [title]="'Payment Terms'"
                 (onSelectedItem)="onSelectPaymentTerms($event)"
             >
@@ -496,6 +498,7 @@
     <div class="qt-inputs-row">
         <div class="qt-input-block qt-f50">
             <app-drop-down
+                #paymentMethod
                 [class]="['qt-select-input-40']"
                 [placeholder]="'Select Payment Method'"
                 [field]="'title'"

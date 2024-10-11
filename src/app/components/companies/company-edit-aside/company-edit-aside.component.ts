@@ -41,7 +41,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   selectedTechLead: ItemFilterPerson;
   companyTypes = [new CompanySetting('Client', 'CLIENT'), new CompanySetting('Lead', 'LEAD'), new CompanySetting('Vendor', 'VENDOR'), new CompanySetting('Supplier', 'SUPPLIER')];
   phoneTypes = ['Office', 'Mobile', 'Fax'];
-  paymentTerms = [new CompanySetting('COD', 0), new CompanySetting('7 days', 7), new CompanySetting('15 days', 15), new CompanySetting('30 days', 30)];
+  paymentTerms = [new CompanySetting('COD', 0), new CompanySetting('7 days', 7), new CompanySetting('15 days', 15), new CompanySetting('30 days', 30), new CompanySetting('45 days', 45), new CompanySetting('60 days', 60)];
   serviceTypes: Array<CrmCompanyServiceType> = [];
   paymentMethods = [new CompanySetting('Cash', 'CASH'),
   new CompanySetting('Cheque', 'CHEQUE'),

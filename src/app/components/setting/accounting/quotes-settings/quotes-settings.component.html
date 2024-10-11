@@ -6,10 +6,7 @@
         <div class="tab-pane__header-title">Quote Settings</div>
     </div>
     <div class="tab-pane__body">
-        <form
-            [formGroup]="quotesForm"
-            (ngSubmit)="onSubmit()"
-        >
+        <form [formGroup]="quotesForm">
             <div class="tab-pane__row">
                 <div class="tab-pane__subtitle">Starting Quote Number</div>
                 <div class="tab-pane-input__row">
@@ -31,6 +28,25 @@
                         </div>
                     </div>
                     <div class="qt-input-help-text qt-mt-12">Maximum 7 Number</div>
+                </div>
+            </div>
+            <div class="tab-pane__row">
+                <div class="tab-pane__subtitle">Default expiration date</div>
+                <div class="tab-pane-input__row">
+                    <div class="qt-input-block">
+                        <div class="qt-w100">
+                            <app-drop-down
+                                [class]="['qt-select-input-40']"
+                                [list]="expirationDates"
+                                [editItem]="expirationDate"
+                                [field]="'title'"
+                                [sort]="false"
+                                [isBlockClear]="true"
+                                (onSelectedItem)="onDefaultExpirationDate($event)"
+                            >
+                            </app-drop-down>
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>

@@ -24,6 +24,16 @@ export class InvoiceTicketsService {
   }
 
 
+  /**
+    * actual number
+    * @param type 
+    */
+  getQuoteSettings() {
+    return this.http
+      .get(`${this.apiUrl}settings/companyProfile/saleQuoteSettings`)
+      .pipe(map(data => data));
+  }
+
 
   /**
    * actual number
@@ -43,7 +53,14 @@ export class InvoiceTicketsService {
       .get(`${this.apiUrl}settings/emailPages/invoiceContact`)
       .pipe(map(data => data));
   }
-
+  /**
+    * get invoice contact
+    */
+  getInvoiceSettings() {
+    return this.http
+      .get(`${this.apiUrl}settings/companyProfile/InvoiceSettings`)
+      .pipe(map(data => data));
+  }
   /**
    * get tax number
    */

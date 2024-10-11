@@ -31,6 +31,25 @@
                 </div>
             </div>
             <div class="tab-pane__row">
+                <div class="tab-pane__subtitle">Default payment method</div>
+                <div class="tab-pane-input__row">
+                    <div class="qt-input-block">
+                        <div class="qt-w100">
+                            <app-drop-down
+                                [class]="['qt-select-input-40']"
+                                [list]="paymentMethods"
+                                [editItem]="paymentMethod"
+                                [field]="'title'"
+                                [sort]="false"
+                                [isBlockClear]="true"
+                                (onSelectedItem)="onDefaultPaymentMethodChange($event)"
+                            >
+                            </app-drop-down>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane__row">
                 <div class="tab-pane__subtitle">Default invoice terms</div>
                 <div class="tab-pane-input__row">
                     <div class="qt-input-block">
@@ -113,11 +132,14 @@
                 <div class="tab-pane__subtitle">Invoice Email Settings</div>
                 <div class="tab-pane-input__row">
                     <div class="qt-input-block qt-input-block-100 qt-pb-25">
-                        <div class="qt-df qt-ai-c">
+                        <div
+                            class="qt-df qt-ai-c"
+                            *ngIf="invoiceSettings"
+                        >
                             <div
                                 class="qt-toggle"
-                                [ngClass]="{'--on':includeInvoiceAsAttachmentSetting}"
-                                (click)="includeInvoiceAsAttachmentSetting = !includeInvoiceAsAttachmentSetting"
+                                [ngClass]="{'--on':invoiceSettings.includeInvoiceAsAttachmentSetting}"
+                                (click)="invoiceSettings.includeInvoiceAsAttachmentSetting = !invoiceSettings.includeInvoiceAsAttachmentSetting"
                             >
                                 <div class="qt-toggle__circle"></div>
                             </div>
@@ -125,11 +147,14 @@
                         </div>
                     </div>
                     <div class="qt-input-block qt-input-block-100">
-                        <div class="qt-df qt-ai-c">
+                        <div
+                            class="qt-df qt-ai-c"
+                            *ngIf="invoiceSettings"
+                        >
                             <div
                                 class="qt-toggle"
-                                [ngClass]="{'--on':includeAccountReceivableReportAsAttachmentSetting}"
-                                (click)="includeAccountReceivableReportAsAttachmentSetting = !includeAccountReceivableReportAsAttachmentSetting"
+                                [ngClass]="{'--on':invoiceSettings.includeAccountReceivableReportAsAttachmentSetting}"
+                                (click)="invoiceSettings.includeAccountReceivableReportAsAttachmentSetting = !invoiceSettings.includeAccountReceivableReportAsAttachmentSetting"
                             >
                                 <div class="qt-toggle__circle"></div>
                             </div>

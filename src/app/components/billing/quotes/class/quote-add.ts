@@ -28,6 +28,11 @@ export class QuoteAdd {
         current.setMonth(current.getMonth() + 1);
         this.validUntil = current.getTime();
     }
+    public setValidUntilFromSettings(value) {
+        let current = new Date();
+        current.setDate(current.getDate() + value);
+        this.validUntil = current.getTime();
+    }
     public setBillTo(data) {
         this.billTo = data;
     }
