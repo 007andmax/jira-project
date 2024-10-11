@@ -1,6 +1,7 @@
 <div
     class="item-file-container"
     ngbDropdown
+    [container]="'body'"
     #db="ngbDropdown"
     appDoubleClick
     (doubleClick)="navigateToCategory()"
@@ -33,7 +34,6 @@
     </div>
     <div
         ngbDropdownMenu
-        [container]="'body'"
         class="dropdown-menu-qt icon__more-dropdown"
         (click)="$event.stopPropagation();"
     >
