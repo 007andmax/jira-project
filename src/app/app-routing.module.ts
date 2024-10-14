@@ -109,6 +109,12 @@ const routes: Routes = [
 
   },
   {
+    path: ':domain/users/:id',
+    loadChildren: './components/users-details/users-details.module#UsersDetailsModule',
+    canActivate: [PermissionUsersService, PermissionNoSuperAdminService]
+
+  },
+  {
     path: ':domain/reports',
     loadChildren: './components/reports/reports.module#ReportsModule',
     canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]

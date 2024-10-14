@@ -152,6 +152,9 @@ import { FileManagementAddFileModule } from './components/file-manager/file-mana
 import { PreviewFileComponent } from './components/shared/preview-file/preview-file.component';
 import { UsersDropDownComponent } from './components/shared/users-drop-down/users-drop-down.component';
 import { MultiCompanyDropDownComponent } from './components/shared/multi-company-drop-down/multi-company-drop-down.component';
+import { UsersDetailsComponent } from './components/users-details/users-details.component';
+import { UsersDetailsHeaderComponent } from './components/users-details/users-details-header/users-details-header.component';
+import { UsersDetailsLeftPanelComponent } from './components/users-details/users-details-left-panel/users-details-left-panel.component';
 declare var $: any;
 
 /**
@@ -182,7 +185,7 @@ declare var $: any;
     CannedResponsesAsideComponent,
     ManufacturesCheckUseComponent,
     UserDeArchiveNotificationComponent,
-    PreviewFileComponent
+    PreviewFileComponent,
   ],
   imports: [
     BrowserModule,

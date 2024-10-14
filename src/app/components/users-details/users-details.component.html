@@ -1,0 +1,20 @@
+<div class="ticket-detail-page">
+    <app-users-details-header [user]="user"></app-users-details-header>
+    <div
+        class="prelaoder-body"
+        *ngIf="showPreloader"
+    >
+        <div class="loading"></div>
+    </div>
+    <div
+        class="ticket-detail-page-content"
+        [hidden]="showPreloader"
+    >
+        <div class="ticket-detail-page-content-main">
+            <div class="ticket-detail-page-content__body">
+                <app-users-details-left-panel [user]="user"></app-users-details-left-panel>
+            </div>
+
+        </div>
+    </div>
+</div>

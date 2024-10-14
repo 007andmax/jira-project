@@ -28,6 +28,7 @@ import { UsersCheckUseComponent } from '../users-check-use/users-check-use.compo
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
 import { UserProfile } from '../class/user-profile';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users-table',
@@ -66,6 +67,7 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     private permissionsService: PermissionsService,
     private techUsersService: TechUsersService,
     public customerPortalStateService: CustomerPortalStateService,
+    private router: Router,
     private usersRealTimeService: UsersRealTimeService) { }
 
 
@@ -110,8 +112,10 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     return this.user.customerCompaniesInfo.find(item => item.companyId == this.companyId).jobTitleDto;
   }
   showDetailUser() {
-    this.usersStateService.showDetailUser(this.user);
-    this.cd.markForCheck();
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().techDomain}/users/`, this.user.id]);
+    // this.usersStateService.showDetailUser(this.user);
+    //  this.cd.markForCheck();
   }
   isPrimaryContact() {
     if (!this.customerPortalStateService.isCustomerPortal && this.companyId) return this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).isPrimaryContact;
