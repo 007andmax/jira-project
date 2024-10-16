@@ -1,0 +1,19 @@
+@import "./src/assets/styles/variable";
+
+.qt-page-list__header.--sticky {
+    margin: 0;
+    padding: 14px 32px;
+    background-color: $white;
+    border-bottom: 1px solid $gray-200;
+}
+.breadcrumb-item,.breadcrumb-splite {
+    font-weight: 400;
+    color: $gray-500;
+}
+.breadcrumb-splite {
+    color: $gray-300;
+}
+.breadcrumb-item-active {
+    font-weight: 600;
+    color: $gray-900;
+}

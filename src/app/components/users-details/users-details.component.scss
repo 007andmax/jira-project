@@ -1,0 +1,10 @@
+@import "./src/assets/styles/variable";
+
+.page-list-users {
+    padding: 0px;
+}
+.qt-page-list__body {
+    background-color: $white;
+    border-radius: 12px;
+    border: 1px solid $gray-100;
+}

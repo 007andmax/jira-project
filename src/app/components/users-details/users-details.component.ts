@@ -3,6 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { UserProfile } from '../users/class/user-profile';
+import { User } from '../users/class/user';
+import { USERS } from 'src/app/const/emails';
+import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 
 @Component({
   selector: 'app-users-details',
@@ -15,6 +18,7 @@ export class UsersDetailsComponent implements OnInit {
   sub: Subscription = new Subscription();
   constructor(public usersStateService: UsersStateService,
     public activateRoute: ActivatedRoute,
+    private draftEmailStateService: DraftEmailStateService,
   ) { }
 
   ngOnInit() {
@@ -33,5 +37,17 @@ export class UsersDetailsComponent implements OnInit {
   setUserRoutingId(id) {
     this.user.onEdit(this.usersStateService.getAllUsers().find(item => item.id == id));
     this.showPreloader = false;
+  }
+  edit() {
+    this.usersStateService.setUserForEdit(new User(JSON.parse(JSON.stringify(this.usersStateService.getAllUsers().find(item => item.id == this.user.id)))));
+    this.usersStateService.onOpenEditAsige();
+    //  this.cd.markForCheck();
+  }
+  public showAsideForDraftEmail() {
+    this.draftEmailStateService.setAction(USERS);
+    this.draftEmailStateService.resetSelectedUsers();
+    this.draftEmailStateService.addSelectedUser(this.user);
+    this.draftEmailStateService.toggleAsideForAdd();
+    // this.cd.markForCheck();
   }
 }

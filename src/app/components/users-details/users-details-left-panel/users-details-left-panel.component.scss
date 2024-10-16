@@ -1,0 +1,55 @@
+@import "./src/assets/styles/variable";
+
+.user-detail-aside__header-avatar {
+    width: 56px;
+    height: 56px;
+     background-position: center !important;
+    background-size: cover !important;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+    color: $white;
+    font-size: 22px;
+}
+.left-panel-header,.left-panel-contact,.left-panel-job-description,.left-panel-marketing,.left-panel-tags,.left-panel-company-details {
+    border-bottom: 1px solid $gray-200;
+}
+.left-panel-contact {
+    .qt-editable-input {
+        text-align: right;
+    }
+}
+.left-panel-container {
+    width: 360px;
+    border-right: 1px solid $gray-200;
+}
+.terms-n-conditions__textarea {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0px !important;
+}
+.draft-email-btn,.actions-btn {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+}
+/deep/ .left-panel-tags {
+    app-company-tags {
+        .mat-form-field-infix {
+            border: none;
+        }
+        .no-remove {
+            background: none;
+        }
+        .mat-chip {
+            padding: 2px 4px !important;
+            background-color: $gray-100;
+            border: 1px solid $gray-100;
+            color: $gray-600;
+            border-radius: 6px !important;
+            font-weight: 500;
+        }
+    }
+}

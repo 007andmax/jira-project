@@ -43,3 +43,14 @@
     }
   }
 }
+.user-subscription {
+    border: none;
+    > div {
+        height: 24px;
+        font-size: 13px;
+        font-weight: 500;
+        padding: 4px;
+        margin: 0px 8px 8px 0;
+        border-radius: 6px;
+    }   
+}

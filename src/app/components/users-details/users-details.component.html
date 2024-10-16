@@ -1,20 +1,21 @@
-<div class="ticket-detail-page">
-    <app-users-details-header [user]="user"></app-users-details-header>
-    <div
-        class="prelaoder-body"
-        *ngIf="showPreloader"
-    >
-        <div class="loading"></div>
-    </div>
-    <div
-        class="ticket-detail-page-content"
-        [hidden]="showPreloader"
-    >
-        <div class="ticket-detail-page-content-main">
-            <div class="ticket-detail-page-content__body">
-                <app-users-details-left-panel [user]="user"></app-users-details-left-panel>
-            </div>
+<div class="qt-page-list page-list-users">
+    <app-users-details-header
+        [user]="user"
+        (onEdit)="edit()"
+        (onDraftEmail)="showAsideForDraftEmail()"
+    ></app-users-details-header>
 
+    <div class="qt-page-list users-page qt-df">
+        <div class="qt-page-list__body ">
+            <div class="qt-page-list__container">
+
+                <app-users-details-left-panel
+                    [user]="user"
+                    (onEdit)="edit()"
+                    (onDraftEmail)="showAsideForDraftEmail()"
+                ></app-users-details-left-panel>
+
+            </div>
         </div>
     </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UserProfile } from '../../users/class/user-profile';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -17,6 +17,8 @@ import { USERS } from 'src/app/const/emails';
 })
 export class UsersDetailsHeaderComponent implements OnInit {
   @Input() user: UserProfile = new UserProfile();
+  @Output() onEdit = new EventEmitter<any>();
+  @Output() onDraftEmail = new EventEmitter<any>();
   constructor(public customerPortalStateService: CustomerPortalStateService,
     private companiesStateService: CompaniesStateService,
     private permissionsService: PermissionsService,
@@ -34,15 +36,9 @@ export class UsersDetailsHeaderComponent implements OnInit {
       [`${this.companiesStateService.getCurrentCompany().techDomain}/users/`]);
   }
   public showAsideForDraftEmail() {
-    this.draftEmailStateService.setAction(USERS);
-    this.draftEmailStateService.resetSelectedUsers();
-    this.draftEmailStateService.addSelectedUser(this.user);
-    this.draftEmailStateService.toggleAsideForAdd();
-    // this.cd.markForCheck();
+    this.onDraftEmail.emit(null);
   }
   edit() {
-    this.usersStateService.setUserForEdit(new User(JSON.parse(JSON.stringify(this.usersStateService.getAllUsers().find(item => item.id == this.user.id)))));
-    this.usersStateService.onOpenEditAsige();
-    //  this.cd.markForCheck();
+    this.onEdit.emit(null);
   }
 }

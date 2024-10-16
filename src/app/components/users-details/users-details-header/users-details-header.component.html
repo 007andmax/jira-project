@@ -10,7 +10,7 @@
                 </span>
                 <span class="qt-fs-14 qt-ml-8 qt-mr-8 breadcrumb-splite">/</span>
                 <span
-                    class="qt-fs-14 breadcrumb-item  qt-fw-600"
+                    class="qt-fs-14 breadcrumb-item breadcrumb-item-active"
                     [textContent]="user.getUserName()"
                 ></span>
             </div>
@@ -19,7 +19,7 @@
             <div class="qt-df qt-ai-c">
                 <a
                     href="javascript:;"
-                    class="qt-button --md --gray qt-button--with-icon qt-jc-c pointer qt-ml-12 button-gl-number__add"
+                    class="qt-button --sm  --gray qt-button--with-icon qt-jc-c pointer button-gl-number__add"
                     *ngIf="!user.deletedAt && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user))"
                     (click)="edit()"
                 >
@@ -28,7 +28,7 @@
                 </a>
                 <a
                     href="javascript:;"
-                    class="qt-button --md --gray qt-button--with-icon qt-jc-c pointer qt-ml-12 button-gl-number__add"
+                    class="qt-button --sm  --gray qt-button--with-icon qt-jc-c pointer qt-ml-12 button-gl-number__add"
                     *ngIf="!user.deletedAt && !customerPortalStateService.isCustomerPortal"
                     (click)="showAsideForDraftEmail()"
                 >

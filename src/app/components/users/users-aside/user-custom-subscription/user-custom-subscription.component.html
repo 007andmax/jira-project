@@ -2,7 +2,6 @@
     class="grey-dropdown filter-tags-body"
     ngbDropdown
 >
-    <i class="icn-sm report-caret-icon"></i>
     <div
         class="user-subscription"
         id="dropdownServices"
@@ -19,11 +18,6 @@
         >
             <div [ngClass]="{'active':custom.activated && custom.isExist,
             'no-active':!custom.activated && custom.isExist}">
-                <i
-                    class="qt-sz-16 qt-bg-contain qt-dib qt-mr-4"
-                    *ngIf="custom.isExist"
-                    [ngClass]="{'icon__unsubscribe':!custom.activated,'icon__status-green':custom.activated}"
-                ></i>
                 {{custom.name}}
                 <i
                     *ngIf="!isDisabled"

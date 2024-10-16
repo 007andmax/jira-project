@@ -7,19 +7,27 @@ import { UsersDetailsLeftPanelComponent } from './users-details-left-panel/users
 import { UsersDetailsRoutingModule } from './users-details-routing.module';
 import { UsersDetailsComponent } from './users-details.component';
 import { DynamicTooltipModule } from '../shared/dynamic-tooltip/dynamic-tooltip.module';
+import { MatErrorModule } from '../shared/mat-error/mat-error.module';
+import { NgxMaskModule } from 'ngx-mask';
+import { UserCustomSubscriptionModule } from '../users/users-aside/user-custom-subscription/user-custom-subscription.module';
+import { CompanyTagsModule } from '../companies/company-tags/company-tags.module';
 
 
 @NgModule({
     declarations: [UsersDetailsComponent,
         UsersDetailsHeaderComponent,
-        UsersDetailsLeftPanelComponent
+        UsersDetailsLeftPanelComponent,
     ],
     imports: [
         CommonModule,
         UsersDetailsRoutingModule,
         FormsModule,
         NgbModule,
-        DynamicTooltipModule
+        DynamicTooltipModule,
+        NgxMaskModule.forRoot(),
+        MatErrorModule,
+        UserCustomSubscriptionModule,
+        CompanyTagsModule
     ],
 })
 export class UsersDetailsModule { }
