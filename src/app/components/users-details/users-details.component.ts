@@ -7,6 +7,8 @@ import { User } from '../users/class/user';
 import { USERS } from 'src/app/const/emails';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 import { UsersDetailsLeftPanelComponent } from './users-details-left-panel/users-details-left-panel.component';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-users-details',
@@ -14,6 +16,7 @@ import { UsersDetailsLeftPanelComponent } from './users-details-left-panel/users
   styleUrls: ['./users-details.component.scss']
 })
 export class UsersDetailsComponent implements OnInit {
+  tab: string = 'companies';
   user: UserProfile = new UserProfile();
   showPreloader: boolean = true;
   sub: Subscription = new Subscription();
@@ -21,6 +24,8 @@ export class UsersDetailsComponent implements OnInit {
   constructor(public usersStateService: UsersStateService,
     public activateRoute: ActivatedRoute,
     private draftEmailStateService: DraftEmailStateService,
+    public customerPortalStateService: CustomerPortalStateService,
+    private permissionsService: PermissionsService,
   ) { }
 
   ngOnInit() {
@@ -38,15 +43,19 @@ export class UsersDetailsComponent implements OnInit {
   }
   setUserRoutingId(id) {
     let user = this.usersStateService.getAllUsers().find(item => item.id == id);
+    console.log("user", user);
     this.usersStateService.setUserForEdit(user);
     this.user.onEdit(user);
-    this.leftPanel.setForm(this.user);
+    console.log("this.user", this.user);
     this.showPreloader = false;
   }
   edit() {
     this.usersStateService.setUserForEdit(new User(JSON.parse(JSON.stringify(this.usersStateService.getAllUsers().find(item => item.id == this.user.id)))));
     this.usersStateService.onOpenEditAsige();
     //  this.cd.markForCheck();
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   public showAsideForDraftEmail() {
     this.draftEmailStateService.setAction(USERS);

@@ -1,11 +1,14 @@
 <div class="qt-page-list page-list-users">
     <app-users-details-header
+        *ngIf="!showPreloader"
         [user]="user"
         (onEdit)="edit()"
         (onDraftEmail)="showAsideForDraftEmail()"
     ></app-users-details-header>
-
-    <div class="qt-page-list users-page qt-df">
+    <div
+        class="qt-page-list users-page qt-df"
+        *ngIf="!showPreloader"
+    >
         <div class="qt-page-list__body ">
             <div class="qt-page-list__container">
 
@@ -15,8 +18,75 @@
                     (onEdit)="edit()"
                     (onDraftEmail)="showAsideForDraftEmail()"
                 ></app-users-details-left-panel>
-
+                <div class="user-detail-statictics">
+                    <div class="tabs">
+                        <span
+                            class="pointer"
+                            [ngClass]="{'active':tab === 'tickets'}"
+                            (click)="setTab('tickets')"
+                            *ngIf="customerPortalStateService.checkShowTabTicketsAsideUserDetail( usersStateService.getCurrentUser(),  user)"
+                        >
+                            Tickets
+                        </span>
+                        <span
+                            class="pointer"
+                            [ngClass]="{'active':tab === 'companies'}"
+                            (click)="setTab('companies')"
+                            *ngIf="customerPortalStateService.checkShowTabTicketsAsideUserDetail( usersStateService.getCurrentUser(),  user)"
+                        >
+                            Companies
+                        </span>
+                        <span
+                            class="pointer"
+                            [ngClass]="{'active':tab === 'passwords'}"
+                            (click)="setTab('passwords')"
+                            *ngIf="getPermissions('VIEW_PASSWORD_SECTION') && !customerPortalStateService.isCustomerPortal"
+                        >
+                            Passwords
+                        </span>
+                        <span
+                            class="pointer"
+                            [ngClass]="{'active':tab === 'documents'}"
+                            (click)="setTab('documents')"
+                            *ngIf="!customerPortalStateService.isCustomerPortal"
+                        >
+                            Documents
+                        </span>
+                        <span
+                            class="pointer"
+                            [ngClass]="{'active':tab === 'messages'}"
+                            (click)="setTab('messages')"
+                        >
+                            Messages
+                        </span>
+                    </div>
+                    <app-users-details-tab-companies
+                        *ngIf="tab === 'companies'"
+                        [user]="user"
+                    ></app-users-details-tab-companies>
+                    <!-- <users-aside-detail-tickets
+                        *ngIf="tab === 'tickets'"
+                        #ticketsDetail
+                        [setUser]="user"
+                    ></users-aside-detail-tickets>
+                    <users-aside-detail-documents
+                        *ngIf="tab === 'documents'"
+                        [user]="user"
+                    ></users-aside-detail-documents>
+                    <users-aside-detail-passwords
+                        *ngIf="tab === 'passwords' && getPermissions('VIEW_PASSWORD_SECTION')"
+                        [user]="user"
+                    ></users-aside-detail-passwords>
+                    <users-aside-detail-messages
+                        *ngIf="tab === 'messages'"
+                        [user]="user"
+                    ></users-aside-detail-messages> -->
+                </div>
             </div>
         </div>
     </div>
+    <div
+        class="loading"
+        *ngIf="showPreloader"
+    ></div>
 </div>

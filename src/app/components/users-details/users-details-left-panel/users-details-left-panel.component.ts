@@ -44,6 +44,15 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
         [Validators.required, this.checkEmail()]
       ],
     })
+    this.user.phoneNumbers.forEach(item => {
+      const itemGroup = this.formBuilder.group({
+        name: [item.typeNumber, Validators.required], // Define the fields inside the FormGroup
+        value: [item.number, this.checkPhone()]
+      });
+      this.phones.push(itemGroup);
+    });
+    console.log("this.phones", this.phones);
+    this.modelForm.controls["primaryEmail"].setValue(this.user.primaryEmail);
   }
   checkEmail(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
@@ -59,17 +68,6 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
   // Getter to access the FormArray
   get phones(): FormArray {
     return this.modelForm.get('phones') as FormArray;
-  }
-  public setForm(data) {
-    data.phoneNumbers.forEach(item => {
-      const itemGroup = this.formBuilder.group({
-        name: [item.typeNumber, Validators.required], // Define the fields inside the FormGroup
-        value: [item.number, this.checkPhone()]
-      });
-      this.phones.push(itemGroup);
-    });
-    console.log("this.phones", this.phones);
-    this.modelForm.controls["primaryEmail"].setValue(data.primaryEmail);
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

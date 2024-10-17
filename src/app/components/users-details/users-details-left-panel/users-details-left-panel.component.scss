@@ -20,6 +20,7 @@
     .qt-editable-input {
         text-align: right;
         padding: 0px;
+        line-height: 15px;
         &:hover {
             border: none;
         }
@@ -56,4 +57,7 @@
             font-weight: 500;
         }
     }
+}
+.type-phone,.company-details-field,.company-details-value {
+    line-height: 17px;
 }

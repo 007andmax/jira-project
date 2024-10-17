@@ -107,7 +107,10 @@
                          'icon__phone':item.value.name == 'OFFICE'}"
                                     class=" qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"
                                 ></div>
-                                <span [textContent]="item.value.name == 'OFFICE' ? 'Phone' : item.value.name == 'MOBILE' ? 'Mobile' : item.value.name == 'FAX' ? 'Fax' : ''"></span>
+                                <span
+                                    class="type-phone"
+                                    [textContent]="item.value.name == 'OFFICE' ? 'Phone' : item.value.name == 'MOBILE' ? 'Mobile' : item.value.name == 'FAX' ? 'Fax' : ''"
+                                ></span>
                             </div>
                             <input
                                 type="text"
@@ -139,7 +142,6 @@
                     <input
                         type="text"
                         class="qt-editable-input qt-fw-500"
-                        [(ngModel)]="user.primaryEmail"
                         (blur)="onCheckEmail()"
                         placeholder="Enter Email"
                         [disabled]="!getPermissions('EDIT_USERS')"
@@ -168,30 +170,30 @@
             <div class="qt-df qt-ai-c qt-jc-sb qt-mb-16">
                 <div class="qt-df qt-ai-c">
                     <div class="icon__companies qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"></div>
-                    <span>Company</span>
+                    <span class="company-details-field">Company</span>
                 </div>
-                <div class="ellipsis qt-fs-14 qt-fw-500 qt-color-gray-900">wefewfwefew</div>
+                <div class="ellipsis qt-fs-14 qt-fw-500 qt-color-gray-900 company-details-value">wefewfwefew</div>
             </div>
             <div class="qt-df qt-ai-c qt-jc-sb qt-mb-16">
                 <div class="qt-df qt-ai-c">
                     <div class="icon__phone qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"></div>
-                    <span>Telephone</span>
+                    <span class="company-details-field">Telephone</span>
                 </div>
-                <div class="ellipsis qt-fs-14 qt-fw-500 qt-color-gray-900">wefewfwefew</div>
+                <div class="ellipsis qt-fs-14 qt-fw-500 qt-color-gray-900 company-details-value">wefewfwefew</div>
             </div>
             <div class="qt-df qt-ai-c qt-jc-sb qt-mb-16">
                 <div class="qt-df qt-ai-c">
                     <div class="icon__email qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"></div>
-                    <span>Email</span>
+                    <span class="company-details-field">Email</span>
                 </div>
-                <div class="ellipsis qt-fs-14 qt-fw-500 qt-color-gray-900">wefewfwefew</div>
+                <div class="ellipsis qt-fs-14 qt-fw-500 qt-color-gray-900 company-details-value">wefewfwefew</div>
             </div>
             <div class="qt-df qt-ai-c qt-jc-sb">
                 <div class="qt-df qt-ai-c">
                     <div class="icon__map-pin qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"></div>
-                    <span>Address</span>
+                    <span class="company-details-field">Address</span>
                 </div>
-                <div class="ellipsis qt-fs-14 qt-fw-500 qt-color-gray-900">wefewfwefew</div>
+                <div class="ellipsis qt-fs-14 qt-fw-500 qt-color-gray-900 company-details-value">wefewfwefew</div>
             </div>
         </div>
     </div>
