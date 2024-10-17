@@ -19,6 +19,10 @@
 .left-panel-contact {
     .qt-editable-input {
         text-align: right;
+        padding: 0px;
+        &:hover {
+            border: none;
+        }
     }
 }
 .left-panel-container {

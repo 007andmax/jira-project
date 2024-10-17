@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -6,6 +6,7 @@ import { UserProfile } from '../users/class/user-profile';
 import { User } from '../users/class/user';
 import { USERS } from 'src/app/const/emails';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
+import { UsersDetailsLeftPanelComponent } from './users-details-left-panel/users-details-left-panel.component';
 
 @Component({
   selector: 'app-users-details',
@@ -16,6 +17,7 @@ export class UsersDetailsComponent implements OnInit {
   user: UserProfile = new UserProfile();
   showPreloader: boolean = true;
   sub: Subscription = new Subscription();
+  @ViewChild('leftPanel') leftPanel: UsersDetailsLeftPanelComponent;
   constructor(public usersStateService: UsersStateService,
     public activateRoute: ActivatedRoute,
     private draftEmailStateService: DraftEmailStateService,
@@ -35,7 +37,10 @@ export class UsersDetailsComponent implements OnInit {
     this.sub.add(onGetUsers);
   }
   setUserRoutingId(id) {
-    this.user.onEdit(this.usersStateService.getAllUsers().find(item => item.id == id));
+    let user = this.usersStateService.getAllUsers().find(item => item.id == id);
+    this.usersStateService.setUserForEdit(user);
+    this.user.onEdit(user);
+    this.leftPanel.setForm(this.user);
     this.showPreloader = false;
   }
   edit() {

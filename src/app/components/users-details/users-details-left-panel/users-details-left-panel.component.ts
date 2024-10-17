@@ -7,9 +7,10 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 import { USERS } from 'src/app/const/emails';
-import { UserValidate } from '../../users/class/user-validate';
 import { UsersService } from 'src/app/services/users/users.service';
 import { TagsService } from 'src/app/services/tags/tags.service';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { PhoneNumber } from 'src/class/phone-number';
 
 @Component({
   selector: 'app-users-details-left-panel',
@@ -19,7 +20,9 @@ import { TagsService } from 'src/app/services/tags/tags.service';
 })
 export class UsersDetailsLeftPanelComponent implements OnInit {
   companyId: string;
-  validate: UserValidate = new UserValidate();
+  modelForm: FormGroup;
+  submitted: boolean = false;
+  reEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
   @Input() user: UserProfile = new UserProfile();
   @Output() onEdit = new EventEmitter<any>();
   @Output() onDraftEmail = new EventEmitter<any>();
@@ -31,9 +34,42 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
     private usersService: UsersService,
     private draftEmailStateService: DraftEmailStateService,
     private tagsService: TagsService,
+    public formBuilder: FormBuilder,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
+    this.modelForm = this.formBuilder.group({
+      phones: this.formBuilder.array([]),
+      primaryEmail: ["",
+        [Validators.required, this.checkEmail()]
+      ],
+    })
+  }
+  checkEmail(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const primaryContactEmail = (control.value && control.value.match(this.reEmail));
+      return !primaryContactEmail ? { primaryContactEmail: { value: control.value } } : null;
+    };
+  }
+  checkPhone(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      return control.value.length > 0 && control.value.length < 14 ? { validPhoneNumber: { value: control.value } } : null;
+    };
+  }
+  // Getter to access the FormArray
+  get phones(): FormArray {
+    return this.modelForm.get('phones') as FormArray;
+  }
+  public setForm(data) {
+    data.phoneNumbers.forEach(item => {
+      const itemGroup = this.formBuilder.group({
+        name: [item.typeNumber, Validators.required], // Define the fields inside the FormGroup
+        value: [item.number, this.checkPhone()]
+      });
+      this.phones.push(itemGroup);
+    });
+    console.log("this.phones", this.phones);
+    this.modelForm.controls["primaryEmail"].setValue(data.primaryEmail);
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
@@ -46,15 +82,20 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
   public showAsideForDraftEmail() {
     this.onDraftEmail.emit(null);
   }
-  onCheckPhoneNumber(i) {
-    this.validate.checkValidPhoneNumber(i, this.user.phoneNumbers[i].number);
-  }
-  onUpdatePhoneNumber() {
-    if (this.validate.isValidate(this.user)) this.updateUser();
-  }
   updateUser() {
-    this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit())).subscribe(data => {
+    this.submitted = true;
+    console.log("this.modelForm", this.modelForm);
+    if (this.modelForm.invalid) {
 
+      return;
+    }
+    this.user.phoneNumbers = this.modelForm.value.phones.map(item => new PhoneNumber(item.name, item.value));
+    this.user.primaryEmail = this.modelForm.value.primaryEmail;
+
+    this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit())).subscribe(data => {
+      this.submitted = false;
+    }, err => {
+      this.submitted = false;
     })
   }
   onChangeCustomSubscriptions(data) {
@@ -72,15 +113,15 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
     })
   }
   onCheckEmail() {
-    if (this.user.primaryEmail && this.user.primaryEmail.length > 0) this.validate.checkValidPrimaryEmail(this.user.primaryEmail);
-    if (this.user.primaryEmail && this.user.primaryEmail.length > 0) this.onCheckValidPrimaryEmail();
+    console.log("this.f2.primaryEmail", this.f2.primaryEmail);
+    this.submitted = true;
+    if (!this.f2.primaryEmail.errors) this.onCheckValidPrimaryEmail();
   }
   onCheckValidPrimaryEmail() {
     this.usersService.checkValidPrimaryEmail(this.user.primaryEmail, this.companiesStateService.getCurrentCompany().id, this.user.id).subscribe((data: any) => {
-
-      this.validate.setExistPrimaryContactEmail(data.value);
-      if (this.validate.isValidate(this.user)) this.updateUser();
-
+      if (data.value) this.modelForm.controls["primaryEmail"].setErrors(null)
+      if (!data.value) this.modelForm.controls["primaryEmail"].setErrors({ existPrimaryContactEmail: true })
+      this.updateUser();
       this.cd.detectChanges();
     })
   }
@@ -89,5 +130,8 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
   }
   edit() {
     this.onEdit.emit(null);
+  }
+  get f2() {
+    return this.modelForm.controls;
   }
 }

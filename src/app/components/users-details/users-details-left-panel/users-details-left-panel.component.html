@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="qt-df qt-ai-c">
-            <button class="qt-button --sm qt-w qt-w100">
+            <button class="qt-button --sm qt-w qt-w100 qt-jc-c">
                 <span class="qt-icon icon__add qt-sz-16 qt-icon__white qt-dib qt-mr-8"></span>
                 Add to a New Company
             </button>
@@ -88,76 +88,79 @@
         </div>
     </div>
     <div class="left-panel-contact qt-pl-16 qt-pr-16 qt-pt-16 qt-pb-16">
-        <div
-            class="qt-input-block"
-            [ngClass]="{'--input-error':!validate.getPrimaryContactEmail() || !validate.getExistPrimaryContactEmail()}"
+        <form
+            class="needs-validation"
+            [formGroup]="modelForm"
         >
-            <label class="qt-input-block__label qt-fs-14 qt-fw-600 qt-mb-12">Contact Details</label>
-            <ng-template
-                ngFor
-                let-number
-                let-i="index"
-                [ngForOf]="user.phoneNumbers"
-                [ngForTrackBy]="trackById"
-            >
-                <div class="qt-df qt-ai-c qt-jc-sb qt-mb-16">
+            <div class="qt-input-block">
+                <label class="qt-input-block__label qt-fs-14 qt-fw-600 qt-mb-12">Contact Details</label>
+                <div formArrayName="phones">
+                    <div
+                        *ngFor="let item of phones.controls; let i = index"
+                        [formGroupName]="i"
+                    >
+                        <div class="qt-df qt-ai-c qt-jc-sb qt-mb-16 relative">
+                            <div class="qt-df qt-ai-c">
+                                <div
+                                    [ngClass]="{'icon__old-phone':item.value.name == 'FAX',
+                        'icon__mobile':item.value.name == 'MOBILE',
+                         'icon__phone':item.value.name == 'OFFICE'}"
+                                    class=" qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"
+                                ></div>
+                                <span [textContent]="item.value.name == 'OFFICE' ? 'Phone' : item.value.name == 'MOBILE' ? 'Mobile' : item.value.name == 'FAX' ? 'Fax' : ''"></span>
+                            </div>
+                            <input
+                                type="text"
+                                class="qt-editable-input qt-fw-500"
+                                (blur)="updateUser()"
+                                placeholder="Enter Primary Phone"
+                                formControlName="value"
+                                prefix="+1"
+                                mask="(000) 000-0000 Ext: 999999||000-000-0000"
+                                [specialCharacters]="['(',')',' ','-','E','x','t',':']"
+                                [dropSpecialCharacters]="false"
+                                [disabled]="!getPermissions('EDIT_USERS')"
+                                [ngClass]="{'--input-error':submitted && item.controls.value.errors && item.controls.value.errors.validPhoneNumber}"
+                            >
+                            <app-mat-error
+                                class="invalid-feedback"
+                                *ngIf="submitted && item.controls.value.errors && item.controls.value.errors.validPhoneNumber"
+                            >
+                                Phone number is required
+                            </app-mat-error>
+                        </div>
+                    </div>
+                </div>
+                <div class="qt-df qt-ai-c qt-jc-sb relative">
                     <div class="qt-df qt-ai-c">
-                        <div
-                            [ngClass]="{'icon__old-phone':number.typeNumber == 'FAX',
-                        'icon__mobile':number.typeNumber == 'MOBILE',
-                         'icon__phone':number.typeNumber == 'OFFICE'}"
-                            class=" qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"
-                        ></div>
-                        <span [textContent]="number.typeNumber == 'OFFICE' || number.typeNumber == 'FAX' ? 'Phone' : number.typeNumber == 'MOBILE' ? 'Mobile' : ''"></span>
+                        <div class="icon__email qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"></div>
+                        <span>Email</span>
                     </div>
                     <input
                         type="text"
                         class="qt-editable-input qt-fw-500"
-                        [(ngModel)]="number.number"
-                        (input)="onCheckPhoneNumber(i)"
-                        (blur)="onUpdatePhoneNumber()"
-                        placeholder="Enter Primary Phone"
-                        prefix="+1"
-                        mask="(000) 000-0000 Ext: 999999||000-000-0000"
-                        [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                        [dropSpecialCharacters]="false"
+                        [(ngModel)]="user.primaryEmail"
+                        (blur)="onCheckEmail()"
+                        placeholder="Enter Email"
                         [disabled]="!getPermissions('EDIT_USERS')"
+                        formControlName="primaryEmail"
+                        [ngClass]="{'--input-error':submitted && f2.primaryEmail.errors}"
                     >
                     <app-mat-error
                         class="invalid-feedback"
-                        *ngIf="!validate.getPhoneNumber(i)"
+                        *ngIf="submitted && f2.primaryEmail.errors && f2.primaryEmail.errors.primaryContactEmail"
                     >
-                        Phone number is required
+                        Please enter a valid email address
+                    </app-mat-error>
+                    <app-mat-error
+                        class="invalid-feedback"
+                        *ngIf="submitted && f2.primaryEmail.errors && f2.primaryEmail.errors.existPrimaryContactEmail"
+                    >
+                        The email address is already occupied
                     </app-mat-error>
                 </div>
-            </ng-template>
-            <div class="qt-df qt-ai-c qt-jc-sb">
-                <div class="qt-df qt-ai-c">
-                    <div class="icon__email qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"></div>
-                    <span>Email</span>
-                </div>
-                <input
-                    type="text"
-                    class="qt-editable-input qt-fw-500"
-                    [(ngModel)]="user.primaryEmail"
-                    (blur)="onCheckEmail()"
-                    placeholder="Enter Email"
-                    [disabled]="!getPermissions('EDIT_USERS')"
-                >
-                <app-mat-error
-                    class="invalid-feedback"
-                    *ngIf="!validate.getPrimaryContactEmail()"
-                >
-                    Please enter a valid email address
-                </app-mat-error>
-                <app-mat-error
-                    class="invalid-feedback"
-                    *ngIf="!validate.getExistPrimaryContactEmail()"
-                >
-                    The email address is already occupied
-                </app-mat-error>
             </div>
-        </div>
+        </form>
     </div>
     <div class="left-panel-company-details qt-pl-16 qt-pr-16 qt-pt-16 qt-pb-16">
         <div class="qt-input-block">
