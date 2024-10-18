@@ -12,6 +12,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { UserCustomSubscriptionModule } from '../users/users-aside/user-custom-subscription/user-custom-subscription.module';
 import { CompanyTagsModule } from '../companies/company-tags/company-tags.module';
 import { UsersDetailsTabCompaniesComponent } from './users-details-tab-companies/users-details-tab-companies.component';
+import { UsersDetailsTabCompaniesItemComponent } from './users-details-tab-companies/users-details-tab-companies-item/users-details-tab-companies-item.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { UsersDetailsTabCompaniesComponent } from './users-details-tab-companies
         UsersDetailsHeaderComponent,
         UsersDetailsLeftPanelComponent,
         UsersDetailsTabCompaniesComponent,
+        UsersDetailsTabCompaniesItemComponent,
     ],
     imports: [
         CommonModule,

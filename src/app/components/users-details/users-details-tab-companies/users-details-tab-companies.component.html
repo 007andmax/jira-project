@@ -40,25 +40,17 @@
                     </div>
                 </div>
                 <!-- / New Header -->
-                <!-- <div
+                <div
                     class="qt-page-list__body-table-container"
                     [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}"
                 >
                     <div class="qt-page-list__body-tbody qt-table-modern users-table">
-                        <div
-                            class="tbody"
-                            infiniteScroll
-                            [infiniteScrollContainer]="container"
-                            [infiniteScrollDistance]="2"
-                            [infiniteScrollThrottle]="50"
-                            [infiniteScrollDisabled]="infiniteScrollDisabled"
-                            (scrolled)="onScroll()"
-                        >
+                        <div class="tbody">
                             <ng-template
                                 ngFor
-                                let-user
-                                [ngForOf]="users"
-                                [ngForTrackBy]="trackById"
+                                let-customerCompaniesInfo
+                                [ngForOf]="user.customerCompaniesInfo"
+                                [ngForTrackBy]="trackByCompanyId"
                             >
                                 <app-users-table
                                     [toggleFilter]="toggleFilter"
@@ -87,7 +79,7 @@
                         class="loading pengind-loading"
                         *ngIf="showPendingPreloader"
                     ></div>
-                </div> -->
+                </div>
             </div>
         </div>
     </div>

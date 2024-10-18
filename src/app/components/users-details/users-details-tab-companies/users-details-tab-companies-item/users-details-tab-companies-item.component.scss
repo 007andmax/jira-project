@@ -1,0 +1,86 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/mixin/breakpoint";
+
+.phones-numbers {
+    display: flex;
+    flex-direction: column;
+
+    .item-phone {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+}
+
+.user-details {
+    display: flex;
+}
+
+.drop-down-users {
+    width: fit-content;
+}
+
+tr {
+    cursor: pointer;
+}
+
+.users-table__name--profession {
+    color: $gray-400;
+}
+
+.users-table__email,
+.users-table__company {
+    flex: 2 0 220px;
+
+    @include media-breakpoint-down($md) {
+        flex: 2 0 200px;
+    }
+
+    @include media-breakpoint-up($lg) {
+        flex: 3 0 220px;
+    }
+}
+
+.users-table__portal-status {
+    flex: 0 0 118px;
+}
+
+.users-table__contract-no--number {
+    background-color: transparent;
+    border: none;
+    width: 190px;
+}
+
+.users-table__company-full {
+    flex: 2 0 220px;
+
+    @include media-breakpoint-down($md) {
+        flex: 2 0 200px;
+    }
+
+    @include media-breakpoint-up($lg) {
+        flex: 3 0 220px;
+    }
+}
+
+.users-table__industry {
+    flex: 0 0 176px;
+
+    @include media-breakpoint-down($md) {
+        display: none;
+    }
+
+    @include media-breakpoint-up($lg) {
+        flex: 1 0 180px;
+    }
+}
+
+.user-primary-email {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.job-title-item {
+    min-height: 24px;
+}
