@@ -7,17 +7,17 @@
 >
     <aside id="aside-left-panel">
         <app-left-panel
-            [hidden]="!(currentUser && currentUser.role !== 'SUPER_ADMIN' && state !== 'help-center' && currentUser.accountType == 'TECH')"
+            [hidden]="!(currentUser && currentUser.role !== 'SUPER_ADMIN' && state !== 'help-center' && (currentUser.accountType == 'TECH' || currentUser.accountType == 'CLIENT'))"
             class="app-left-panel"
             [ngStyle]="{'display' : !hideleLeftPanel ? 'block' : 'none'}"
             [ngClass]="{'--mini':toggleLeftPanel}"
         ></app-left-panel>
-        <left-panel-customer-portal
+        <!-- <left-panel-customer-portal
             [hidden]="!(currentUser && currentUser.role !== 'SUPER_ADMIN' && state !== 'help-center' && currentUser.accountType == 'CLIENT')"
             class="app-left-panel"
             [ngStyle]="{'display' : !hideleLeftPanel ? 'block' : 'none'}"
             [ngClass]="{'--mini':toggleLeftPanel}"
-        ></left-panel-customer-portal>
+        ></left-panel-customer-portal> -->
         <hr>
     </aside>
     <div

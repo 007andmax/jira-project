@@ -106,7 +106,6 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
           if (window.location.href.includes(`/quotes`)) this.state = 'quotes-component';
           if (window.location.href.includes(`/payments`)) this.state = 'new-payments-ng2';
           if (window.location.href.includes(`/contracts`)) this.state = 'new-contracts';
-          if (window.location.href.includes(`/default`)) this.state = 'default';
           if (window.location.href.includes(`/file-manager`)) this.state = 'file-manager';
           if (window.location.href.includes(`/file-manager`) && window.location.href.includes(`category`)) this.state = 'file-manager-category';
           if (window.location.href.includes(`/file-manager`) && window.location.href.includes(`all-customer`)) this.state = 'file-manager-all-customer';
@@ -209,7 +208,7 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
           if (window.location.href.includes(`/devices/reports`)) this.state == 'new-device-summary';
           if (window.location.href.includes(`/help-center`)) this.state = 'help-center';
           if (window.location.href.includes(`/device/`)) this.state = 'new-device';
-          if (this.state === '' && this.companiesStateService.getCurrentCompany() && this.usersStateService.getCurrentUser().role !== "SUPER_ADMIN" && !this.customerPortalStateService.isCustomerPortal) this.goToDefaultPage();
+          if (this.state === '' && this.companiesStateService.getCurrentCompany() && this.usersStateService.getCurrentUser().role !== "SUPER_ADMIN") this.goToDefaultPage();
           this.leftPanelStateService.firstOpen(this.state);
           this.leftPanelStateService.changeState(this.state);
           if (!this.cd['destroyed']) {
@@ -260,6 +259,7 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
     this.currentUser = data;
   }
   goToDefaultPage() {
+    console.log("goToDefaultPage");
     this.state = 'new-tickets';
     this.goToLink('tickets');
   }
@@ -323,7 +323,6 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
       if (this.state === 'new-companies') this.goToLink(`companies`);
       if (this.state === 'billing-dashboard') this.goToLink('billing-dashboard');
       if (this.state === 'non-contract-services') this.goToLink('non-contract-services');
-      if (this.state === 'default') this.goToLink('default');
       if (this.state === 'new-billable') this.goToLink('billable');
       if (this.state === 'new-billable-invoices') this.goToLink('invoices');
       if (this.state === 'quotes-component') this.goToLink('quotes');
