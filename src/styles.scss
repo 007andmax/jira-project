@@ -1630,26 +1630,13 @@ app-quotes-item {
         .tab-product,
         .tab-service {
           position: static;
-          mask-image: url("./assets/img/icons/products.svg");
-          mask-size: contain;
           margin-right: 8px;
           background-color: $gray-500;
-        }
-        .tab-service {
-          mask-image: url("./assets/img/icons/service.svg");
-          mask-size: contain;
         }
         &.active-tab {
           color: $blue-light-600;
           border-bottom: 2px solid $blue-light-600;
-          .tab-product {
-            mask-image: url("/assets/img/icons/products.svg");
-            mask-size: contain;
-            background-color: $blue-light-600;
-          }
-          .tab-service {
-            mask-image: url("/assets/img/icons/time.svg");
-            mask-size: contain;
+          .qt-icon {
             background-color: $blue-light-600;
           }
         }
@@ -1890,20 +1877,6 @@ app-quotes-item {
 }
 .new-users-content__modal,
 .new-companies-content__modal {
-  .create-contract {
-    position: relative;
-    margin-right: 20px;
-    &:after {
-      position: absolute;
-      content: "";
-      background: url("./assets/img/icons/help.svg") no-repeat center / contain;
-      height: 16px;
-      width: 16px;
-      right: -22px;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-  }
   .advanced {
     .editable-field {
       position: relative;
@@ -2473,9 +2446,6 @@ app-quotes-item {
     margin: 0;
   }
 }
-
-@import "./assets/styles/dropdowns.scss";
-@import "./assets/styles/icons.scss";
 
 .ng-sidebar {
   position: fixed !important;
@@ -3568,7 +3538,7 @@ app-company-devices-tags {
         border-radius: 6px;
         font-weight: 500;
         font-size: 12px;
-        margin: 0 4px 0px px 0px;
+        margin: 0 4px 0 0;
         background-color: $gray-100;
         color: $gray-500;
     }

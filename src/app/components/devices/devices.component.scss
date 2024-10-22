@@ -101,18 +101,6 @@
   &__button {
     min-width: 153px;
   }
-  .remote-desctop-icon {
-    background-image: url(/assets/img/remote-desktop.svg);
-    width: 66px;
-    min-width: 66px;
-    height: 66px;
-  }
-  .connect-icon {
-    background-image: url(/assets/img/icons/quicktech-connect.svg);
-    width: 66px;
-    min-width: 66px;
-    height: 66px;
-  }
 }
 .qt-list-loading {
   display: flex;
@@ -162,19 +150,6 @@ img.Online-Search {
   padding: 5px 8px;
   border-radius: 4px;
   background-color: $gray-500;
-}
-
-.Favourite {
-  margin-bottom: 5px;
-  mask-image: url('/assets/img/icons/rating-filled.svg');
-  background-color: $background;
-  mask-position: center;
-  mask-repeat: no-repeat;
-  mask-size: contain;
-  display: inline-block;
-  max-width: 100%;
-  width: 24px;
-  height: 24px;
 }
 
 .SearchRectangle {

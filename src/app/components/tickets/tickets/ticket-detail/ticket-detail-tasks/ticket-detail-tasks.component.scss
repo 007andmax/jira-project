@@ -95,21 +95,11 @@
   color: transparent;
 }
 
-/deep/ .tab-pane__table-cell .tech-users-container .ticket-updates__photo-people {
-  width: 28px;
-  height: 28px;
-}
-
-/deep/ .tab-pane__table-cell .tech-users-container .tech__user-icon {
-  width: 28px;
-  height: 28px;
-  border: 1px solid $gray-200;
-  background-color: $white;
-  background-image: url('/assets/img/icons/user.svg');
-  background-size: 16px 16px;
-  background-position: center;
-  background-repeat: no-repeat;
-  margin-right: 8px;
+/deep/ .tab-pane__table-cell .tech-users-container {
+  .ticket-updates__photo-people {
+    width: 28px;
+    height: 28px;
+  }
 }
 
 /deep/ .ticket-updates__delete {

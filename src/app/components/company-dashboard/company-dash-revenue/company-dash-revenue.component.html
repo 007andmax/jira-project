@@ -4,7 +4,7 @@
    <div
      ngbDropdown
      [placement]="'bottom-right'"
-     class="qt-dflex"
+     class="qt-df qt-ai-c"
    >
      <button class="selected-item" id="dropdownBasic1" ngbDropdownToggle>Last {{month}} months</button>
      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
@@ -12,6 +12,7 @@
        <button class="item" ngbDropdownItem (click)="getInvoiceRevenue('6')">Last 6 months</button>
        <button class="item" ngbDropdownItem (click)="getInvoiceRevenue('3')">Last 3 months</button>
      </div>
+     <div class="qt-icon icon__arrow-down qt-sz-16 qt-fs-0"></div>
    </div>
   </div>
    <div class="donalt-chart-wrapper">

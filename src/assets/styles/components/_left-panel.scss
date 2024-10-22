@@ -84,17 +84,8 @@
     width: 20px;
     height: 20px;
     cursor: pointer;
-    background-image: url("/assets/img/icons/panel-open.svg");
     transition: transform 300ms, left 300ms;
     z-index: 9999;
-  }
-
-  &__header-open-btn {
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-    background-image: url("/assets/img/icons/panel-open.svg");
-    transition: transform 300ms;
   }
 
   &__menu {
@@ -219,9 +210,6 @@
     background-position: center;
     background-size: contain;
     opacity: 0.5;
-    &.--folder {
-      background-image: url("/assets/img/icons/folder.svg");
-    }
   }
 
   &__menu-expand {

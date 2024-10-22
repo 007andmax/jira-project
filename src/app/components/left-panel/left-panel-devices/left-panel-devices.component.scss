@@ -34,51 +34,9 @@ li.child-menu {
     margin-left: -15px;
 }
 
-.menu-inner .fav {
-    width: 14px;
-    height: 14px;
-    margin-right: 4px;
-    background-image: url(/assets/img/icons/favourite.svg);
-}
-
-.menu-inner li {
-    padding-left: 15px;
-}
-
-.favr {
-  height: 14px;
-  margin-right: 4px;
-  background-image: url(/assets/img/icons/favourite.svg);
-  display: inline-block;
-  max-width: 100%;
-  background-repeat: no-repeat;
-  width: 25px;
-  background-position: center;
-}
-
 .device-caret-icon-rotate {
     transform: rotate(90deg);
     top:5px;
-}
-
-.compinesicon{
-    width: 24px;
-    min-width: 24px;
-    height: 24px;
-    background-position: center;
-    opacity: 0.5;
-    background-image: url(/assets/img/icons/companies.svg);
-    background-repeat: no-repeat;
-    display: inline-block;
-}
-
-.devices-ping-remove{
-    display: flex;
-    background-image: url(/assets/img/icons/delete.svg);
-    background-repeat: no-repeat;
-    justify-content: center;
-    align-items: center;
-    background-position: center;
 }
 
 .device-pinched-padding{

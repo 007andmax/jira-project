@@ -66,7 +66,7 @@
                         This Ticket Status is already occupied
                     </app-mat-error>
                 </div>
-                <div class="tab-pane__table-cell ticket-status-table__color">
+                <div class="tab-pane__table-cell ticket-status-table__color">123123123
                     <div
                         class="form-row tag-color-container"
                         ngbDropdown
@@ -188,12 +188,14 @@
                         ngbDropdown
                     >
                         <div id="dropdownBasic1">
-                            <i
-                                class="tag-color pointer"
+                            <div
+                                class="qt-df qt-ai-c qt-jc-c qt-sz-24 tag-color pointer"
                                 ngbDropdownToggle
                                 [ngStyle]="{'background-color':statusColors[item.color] && statusColors[item.color].textColor ,
                             'border-color': statusColors[item.color] && statusColors[item.color].textColor}"
-                            ></i>
+                            >
+                              <div class="qt-icon icon__color-picker qt-icon__white qt-sz-16 qt-icon__white"></div>
+                            </div>
                         </div>
                         <div
                             ngbDropdownMenu
@@ -207,12 +209,14 @@
                                     (click)="editColor(i,item)"
                                     ngbDropdownItem
                                 >
-                                    <i
-                                        class="tag-color"
+                                    <div
+                                        class="qt-df qt-ai-c qt-jc-c qt-sz-24 tag-color"
                                         [ngClass]="{'--active':item.color == i}"
                                         [ngStyle]="{'background-color':tagColor.textColor ,
                             'border-color': tagColor.textColor}"
-                                    ></i>
+                                    >
+                                        <div class="qt-icon icon__done qt-icon__white qt-sz-16 qt-icon__white"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

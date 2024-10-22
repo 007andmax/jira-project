@@ -100,145 +100,6 @@
                 width: 50%;
             }
 
-            &.work-group {
-                ul {
-                    display: -ms-flexbox;
-                    display: -webkit-flex;
-                    display: flex;
-                    width: 100%;
-                    flex-direction: row;
-                    flex-wrap: wrap;
-                    width: 100%;
-                    margin-bottom: 0;
-                    align-content: center;
-
-                    li {
-                        width: 33.33%;
-                        font-size: 13px;
-                        font-style: normal;
-                        font-weight: 600;
-                        line-height: 1.54;
-                        letter-spacing: normal;
-                        color: $gray-600;
-                        padding: 0 18px;
-                        background: url(../../../../assets/img/icons/bullet.svg) no-repeat 5px 5px;
-                        margin: 6px 0;
-                        position: relative;
-                        display: -ms-flexbox;
-                        display: -webkit-flex;
-                        display: flex;
-                        flex-direction: row;
-                        span{
-                            font-weight: 400;
-                            color: $gray-400;
-                            margin-right: 2px;
-                            display: inline-block;
-                            vertical-align: bottom;
-                            min-width: 120px;
-                        }
-
-                        &>div {
-                            font-size: 13px;
-                            font-style: normal;
-                            font-weight: 600;
-                            line-height: 1.54;
-                            letter-spacing: normal;
-                            color: $gray-600;
-                        }
-
-                        span.edit-field {
-                            top: -3px;
-                            left: 130px;
-
-                            input {
-                                // padding: 8px 10px;
-                                height: auto;
-                                line-height: 1;
-                                font-size: 13px;
-                                font-weight: 600;
-                                color: $gray-800;
-                                font-style: normal;
-                            }
-
-                            &>div {
-                                //   padding: 8px 10px;
-                                padding: 4px 12px;
-                                font-size: 13px;
-                                font-weight: 600;
-                                font-style: normal;
-                                line-height: 1.54;
-                                letter-spacing: normal;
-                                color: $gray-800;
-                            }
-                        }
-
-                        span.edit-field[data-tooltip] {
-                            &::before {
-                                position: absolute;
-                                padding: 9px 7px;
-                                content: attr(data-tooltip);
-                                text-align: center;
-                                border-radius: 3px;
-                                background-color: $gray-600;
-                                font-size: 12px;
-                                font-weight: 500;
-                                font-style: normal;
-                                font-stretch: normal;
-                                line-height: 1.33;
-                                letter-spacing: normal;
-                                color: $white;
-                                left: 0;
-                                top: -30px;
-                                visibility: hidden;
-                                white-space: nowrap;
-                                overflow: hidden;
-                                text-overflow: ellipsis;
-
-                                @include media-breakpoint-down($sm) {
-                                    display: none;
-                                }
-                            }
-
-                            &::after {
-                                top: 3px;
-                                left: 50%;
-                                border: solid transparent;
-                                content: " ";
-                                height: 0;
-                                width: 0;
-                                position: absolute;
-                                pointer-events: none;
-                                border-color: rgba(79, 95, 121, 0);
-                                border-top-color: $gray-600;
-                                border-width: 6px;
-                                margin-left: -78px;
-                                bottom: 32px;
-                                z-index: 1;
-                                visibility: hidden;
-
-                                @include media-breakpoint-down($sm) {
-                                    display: none;
-                                }
-                            }
-
-                            &:hover,
-                            &:focus {
-
-                                &::after,
-                                &::before {
-                                    visibility: visible;
-                                }
-
-                                .sub-label-field {
-                                    border: solid 1px $gray-300;
-                                    outline: 0;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
             .label-field {
                 border-color: transparent;
                 background-color: $white;
@@ -381,7 +242,6 @@
                                     height: 20px;
                                     content: "";
                                     background: transparent;
-                                    // background: url('../../../../assets/img/icons/status-green.svg') no-repeat center;
                                 }
                             }
 
@@ -400,7 +260,7 @@
                             &.alert {
                                 figure {
                                     &::after {
-                                        background: url('../../../../assets/img/icons/alert.svg') no-repeat center;
+                                        background: url('../../../../assets/img/icons/warning.svg') no-repeat center;
                                     }
                                 }
                             }

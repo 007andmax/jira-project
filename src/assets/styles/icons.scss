@@ -17,18 +17,42 @@
   height: 16px;
   display: block;
 }
-.convert-to-billable {
-  background-image: url("/assets/img/icons/billable.svg");
-}
 .no-valid-label {
-  background: url("/assets/img/icons/new-update.svg") no-repeat;
-  display: block;
   width: 44px;
   height: 20px;
 }
 
+/*
+========================================
+Adding Images to the Page
+========================================
+
+*** Size Class (qt-sz-{size}) ***
+- Size class: qt-sz-{size}, where {size} is a numeric value representing the size of the icon in pixels.
+
+1. *** Color Icon (background-image) ***
+- Used for adding an icon with a background image.
+- Alignment: qt-bg-contain — ensures the background image is contained within the element.
+
+Example:
+.icon__computer qt-sz-40 qt-bg-contain -> Adds a 40px wide icon with the background sized to contain.
+
+2. *** Monochrome Icon (mask-image) ***
+- Used for adding a monochrome image using mask-image.
+- Base class: qt-icon — applies alignment and base color ($gray-500).
+- Change color: Use class qt-icon__{color}, where {color} defines the desired icon color.
+
+Example:
+.qt-icon icon__tickets qt-icon__gray-400 qt-sz-24 -> Adds a 24px wide icon with the color gray-400.
+
+========================================
+*/
+
 .icon {
   // Start Color Icon
+  &__user-image {
+    background-image: url('/assets/img/icons/user.jpg');
+  }
   &__unsubscribe {
     background-image: url("/assets/img/icons/unsubscribe.svg");
   }
@@ -188,7 +212,34 @@
   &__file-type-ods {
     background-image: url("/assets/img/icons/file-type-ods.svg");
   }
+  &__remote-desktop {
+    background-image: url("/assets/img/icons/remote-desktop.svg");
+  }
+  &__quicktech-connect {
+    background-image: url("/assets/img/icons/quicktech-connect.svg");
+  }
+
+  &__badge-ticket-paid {
+    background-image: url("/assets/img/icons/badge-ticket-paid.svg");
+  }
+  &__badge-ticket-invoiced {
+    background-image: url("/assets/img/icons/badge-ticket-invoiced.svg");
+  }
+  &__badge-ticket-draft {
+    background-image: url("/assets/img/icons/badge-ticket-draft.svg");
+  }
+  &__badge-ticket-overdue {
+    background-image: url("/assets/img/icons/badge-ticket-overdue.svg");
+  }
+  &__badge-bill-approved {
+    background-image: url("/assets/img/icons/badge-bill-approved.svg");
+  }
+  &__badge-bill-ticketed {
+    background-image: url("/assets/img/icons/badge-bill-ticketed.svg");
+  }
   // END Color Icon
+
+  // Start Monochrome image
   &__warning {
     mask-image: url("/assets/img/icons/warning.svg");
   }
@@ -219,8 +270,14 @@
   &__map {
     mask-image: url("/assets/img/icons/map.svg");
   }
+  &__map-pin {
+    mask-image: url("/assets/img/icons/map-pin.svg");
+  }
   &__new {
     mask-image: url("/assets/img/icons/new.svg");
+  }
+  &__signature {
+    mask-image: url("/assets/img/icons/signature.svg");
   }
   &__folder {
     mask-image: url("/assets/img/icons/folder.svg");
@@ -405,6 +462,9 @@
   &__stop {
     mask-image: url("/assets/img/icons/stop.svg");
   }
+  &__billable {
+    mask-image: url("/assets/img/icons/billable.svg");
+  }
   &__shutdown {
     mask-image: url("/assets/img/icons/shutdown.svg");
   }
@@ -570,7 +630,7 @@
   &__old-phone {
     mask-image: url("/assets/img/icons/old-phone.svg");
   }
-  &__collapse {
+  &__minus {
     mask-image: url("/assets/img/icons/minus.svg");
   }
   &__sidebar {
@@ -581,6 +641,9 @@
   }
   &__close-round {
     mask-image: url("/assets/img/icons/close-round.svg");
+  }
+  &__color-picker {
+    mask-image: url("/assets/img/icons/color-picker.svg");
   }
   &__key {
     mask-image: url("/assets/img/icons/key.svg");
@@ -595,10 +658,16 @@
     mask-image: url("/assets/img/icons/remote-access.svg");
   }
   &__device-connected {
-    mask-image: url("/assets/img/icons/computer-green.svg");
+    mask-image: url("/assets/img/icons/device-connected.svg");
   }
   &__resend-receipt {
     mask-image: url("/assets/img/icons/resend-receipt.svg");
+  }
+  &__quick-support {
+    mask-image: url("/assets/img/icons/quick-support.svg");
+  }
+  &__reports {
+    mask-image: url("/assets/img/icons/reports.svg");
   }
 
   &.--updated {
@@ -622,7 +691,7 @@
       height: 20px;
       right: -2px;
       top: -3px;
-      background-image: url("/assets/img/icons/alert.svg");
+      background-image: url("/assets/img/icons/warning.svg");
     }
   }
   &.--online,

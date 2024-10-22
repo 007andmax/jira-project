@@ -53,37 +53,6 @@
                 }
 
             }
-            ul {
-                float: left;
-                width: 100%;
-                margin-bottom: 0;
-                li {
-                    width: 100%;
-                    font-size: 13px;
-                    font-style: normal;
-                    font-weight: 600;
-                    line-height: 1.54;
-                    letter-spacing: normal;
-                    color: $gray-600;
-                    padding-left: 18px;
-                    background: url(../../../../assets/img/icons/bullet.svg) no-repeat 5px center;
-                    margin: 3px 0;
-                    display: flex;
-                    align-items: center;
-                    flex-direction: revert;
-                    span{
-                        font-weight: 400;
-                        color: $gray-400;
-                        margin-right: 2px;
-                        display: inline-block;
-                        vertical-align: bottom;
-                        min-width: 130px;
-                    }
-                    & > div{
-                        font-weight: 400;
-                    }
-                }
-            }
         }
     }
     .label-field {
