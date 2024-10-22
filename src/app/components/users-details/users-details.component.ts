@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -9,6 +9,9 @@ import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-s
 import { UsersDetailsLeftPanelComponent } from './users-details-left-panel/users-details-left-panel.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
+import { UserCustomerCompaniesInfo } from '../users/class/user-customer-companies-info';
+import { UserCustomSubscription } from '../users/class/user-custom-subscription';
 
 @Component({
   selector: 'app-users-details',
@@ -26,6 +29,8 @@ export class UsersDetailsComponent implements OnInit {
     private draftEmailStateService: DraftEmailStateService,
     public customerPortalStateService: CustomerPortalStateService,
     private permissionsService: PermissionsService,
+    private usersRealTimeService: UsersRealTimeService,
+    public cd: ChangeDetectorRef,
   ) { }
 
   ngOnInit() {
@@ -40,7 +45,25 @@ export class UsersDetailsComponent implements OnInit {
       if (this.usersStateService.getAllUsers().length > 0 && this.activateRoute.snapshot.params['id']) this.setUserRoutingId(this.activateRoute.snapshot.params['id']);
     })
     this.sub.add(onGetUsers);
+    setTimeout(() => {
+
+      let stompClient = this.usersRealTimeService.changeSubscriptionsUsers.subscribe(newChange => {
+        if (newChange.action === 'DEFAULT_SUBSCRIPTION_SAVED') {
+          if (this.user.id == newChange.data.userId) {
+            let index = this.user.customerCompaniesInfo.findIndex(item => item.companyId === newChange.data.companyId);
+            if (index > -1) this.user.customerCompaniesInfo[index] = new UserCustomerCompaniesInfo(newChange.data);
+          }
+          this.cd.detectChanges();
+        }
+        if (newChange.action === 'CUSTOM_SUBSCRIPTION_SAVED') {
+          if (this.user.id == newChange.data.userId) this.user.changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
+          this.cd.detectChanges();
+        }
+      });
+      this.sub.add(stompClient);
+    }, 3000);
   }
+
   setUserRoutingId(id) {
     let user = this.usersStateService.getAllUsers().find(item => item.id == id);
     console.log("user", user);

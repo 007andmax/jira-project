@@ -4,6 +4,7 @@ import { UserJobTitle } from "./user-job-title";
 import { UserRole } from "./user-role";
 
 export class UserCustomerCompaniesInfo {
+    selected: boolean = false;
     clientCompanyName: string;
     "companyId": string;
     "jobTitleDto": UserJobTitle;

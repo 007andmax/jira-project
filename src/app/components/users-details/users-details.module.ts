@@ -13,6 +13,10 @@ import { UserCustomSubscriptionModule } from '../users/users-aside/user-custom-s
 import { CompanyTagsModule } from '../companies/company-tags/company-tags.module';
 import { UsersDetailsTabCompaniesComponent } from './users-details-tab-companies/users-details-tab-companies.component';
 import { UsersDetailsTabCompaniesItemComponent } from './users-details-tab-companies/users-details-tab-companies-item/users-details-tab-companies-item.component';
+import { DropDownModule } from '../shared/drop-down/drop-down.module';
+import { UserTableDefaultSubscriptionModule } from '../users/users-table/user-table-default-subscription/user-table-default-subscription.module';
+import { PreviewPhoneMaskModule } from '../shared/preview-phone-mask/preview-phone-mask.module';
+import { UserTableCustomSubscriptionModule } from '../users/users-table/user-table-custom-subscription/user-table-custom-subscription.module';
 
 
 @NgModule({
@@ -33,6 +37,10 @@ import { UsersDetailsTabCompaniesItemComponent } from './users-details-tab-compa
         UserCustomSubscriptionModule,
         CompanyTagsModule,
         ReactiveFormsModule,
+        DropDownModule,
+        UserTableDefaultSubscriptionModule,
+        PreviewPhoneMaskModule,
+        UserTableCustomSubscriptionModule
     ],
 })
 export class UsersDetailsModule { }

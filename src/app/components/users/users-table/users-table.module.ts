@@ -11,6 +11,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserTableDefaultSubscriptionComponent } from './user-table-default-subscription/user-table-default-subscription.component';
 import { UserTableCustomSubscriptionComponent } from './user-table-custom-subscription/user-table-custom-subscription.component';
 import { PreviewPhoneMaskModule } from '../../shared/preview-phone-mask/preview-phone-mask.module';
+import { UserTableDefaultSubscriptionModule } from './user-table-default-subscription/user-table-default-subscription.module';
+import { UserTableCustomSubscriptionModule } from './user-table-custom-subscription/user-table-custom-subscription.module';
 
 
 
@@ -18,9 +20,7 @@ import { PreviewPhoneMaskModule } from '../../shared/preview-phone-mask/preview-
 @NgModule({
     declarations: [
         UsersTableComponent,
-        UserTableSubscriptionComponent,
-        UserTableDefaultSubscriptionComponent,
-        UserTableCustomSubscriptionComponent
+        UserTableSubscriptionComponent
     ],
     imports: [
         CommonModule,
@@ -30,11 +30,10 @@ import { PreviewPhoneMaskModule } from '../../shared/preview-phone-mask/preview-
         PreparePhoneModule,
         DynamicTooltipModule,
         NgbModule,
-        PreviewPhoneMaskModule
+        PreviewPhoneMaskModule,
+        UserTableDefaultSubscriptionModule,
+        UserTableCustomSubscriptionModule
     ],
     exports: [UsersTableComponent]
-
-
-
 })
 export class UsersTableModule { }

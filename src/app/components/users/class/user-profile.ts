@@ -34,6 +34,9 @@ export class UserProfile {
     constructor() {
 
     }
+    public setPortalAccessStatus(data) {
+        this.portalAccessStatus = data;
+    }
     /**
 * @description Add new element to array ojects customerCompaniesInfo
 */

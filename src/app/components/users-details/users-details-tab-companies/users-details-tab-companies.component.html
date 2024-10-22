@@ -22,7 +22,6 @@
                                     </label>
                                 </div>
                             </div>
-
                             <div
                                 class="users-table__company-full"
                                 (click)="onFilter('TICKET_NUMBER')"
@@ -35,7 +34,6 @@
                             <div class="users-table__tickets pointer">Company Email</div>
                             <div class="users-table__portal-status pointer">Primary Contact</div>
                             <div class="users-table__portal-status pointer">Portal Access</div>
-                            <div class="users-table__menu"></div>
                         </div>
                     </div>
                 </div>
@@ -52,33 +50,20 @@
                                 [ngForOf]="user.customerCompaniesInfo"
                                 [ngForTrackBy]="trackByCompanyId"
                             >
-                                <app-users-table
-                                    [toggleFilter]="toggleFilter"
-                                    [selected]="idDetailUser === user.id"
-                                    [type]="TYPE_LIST_ALL_USERS"
-                                    [showArchivedUsers]="filter.isArchive"
-                                    (onSelectUser)="onSelectUser($event)"
+                                <app-users-details-tab-companies-item
+                                    [customerCompaniesInfo]="customerCompaniesInfo"
                                     [user]="user"
-                                    [listCustomSubscription]="listCustomSubscription"
-                                    [jobTitleList]="jobTitleList"
-                                ></app-users-table>
+                                    (onUpdate)="updateUser()"
+                                ></app-users-details-tab-companies-item>
                             </ng-template>
                         </div>
                     </div>
                     <div
-                        class="loading"
-                        *ngIf="showPreloader"
-                    ></div>
-                    <div
                         class="no-exist-elements"
-                        *ngIf="!showPreloader && users.length == 0"
+                        *ngIf="user.customerCompaniesInfo.length == 0"
                     >
                         We couldn't find any results
                     </div>
-                    <div
-                        class="loading pengind-loading"
-                        *ngIf="showPendingPreloader"
-                    ></div>
                 </div>
             </div>
         </div>
