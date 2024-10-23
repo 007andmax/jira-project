@@ -69,14 +69,10 @@ export class UsersComponent implements OnInit, OnDestroy {
   ) {
   }
   ngOnInit() {
-    if (this.customerPortalStateService.isCustomerPortal) {
-      this.filter.setCompanies(this.customerPortalStateService.getUsersFilters().companies);
-    } else {
-      this.filter = this.usersStateService.getFilter();
-      if (this.websocketService.isInit) this.websocketService.subsribeToUsersFilters();
-      let onInit = this.websocketService.onInit.subscribe(data => this.websocketService.subsribeToUsersFilters());
-      this.sub.add(onInit);
-    }
+    this.filter = this.usersStateService.getFilter();
+    if (this.websocketService.isInit) this.websocketService.subsribeToUsersFilters();
+    let onInit = this.websocketService.onInit.subscribe(data => this.websocketService.subsribeToUsersFilters());
+    this.sub.add(onInit);
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.usersStateService.setModeUserFilterSubscription(MODE_USERS_LIST);
     this.filter.setIsArchive(JSON.parse(JSON.stringify(this.usersStateService.getShowArchivedCompanies())));
@@ -96,13 +92,6 @@ export class UsersComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     });
     this.sub.add(geLefttFilter);
-    let onUsersFilters = this.customerPortalStateService.onUsersFilters.subscribe(data => {
-      document.body.querySelector(".main-container").scrollTo(0, 0);
-      this.showPreloader = true;
-      this.setFilters(this.customerPortalStateService.getUsersFilters());
-      this.onScroll();
-    });
-    this.sub.add(onUsersFilters);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === ARCHIVE_USER) {

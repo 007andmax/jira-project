@@ -126,7 +126,6 @@ export class AppComponent implements OnInit {
     this.usersStateService.onInit();
     this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.currentUser = data;
-      if (this.state !== '' && this.customerPortalStateService.isCustomerPortal) this.customerPortalStateService.setFilters(this.currentUser, this.state);
       if (this.currentUser.twoFactorAuthType === "GOOGLE_SECURE" && !this.currentUser.userTOTP.confirmed) this.onCheckGoogleAuthenticator();
       if (this.appService.getIsInit()) return;
       if (data.role !== "SUPER_ADMIN") {
@@ -266,16 +265,17 @@ export class AppComponent implements OnInit {
     this.companiesState.onCurrentCompany.subscribe(data => {
       if (!this.currentUser) return;
       if (this.router.url.includes("tickets") && !this.router.url.includes("company") && (this.state == "new-tickets" || this.state == '')) {
-        this.ticketsStateService.onChangeTypeFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
-        this.ticketsStateService.onChangeLeftPanelFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
+        this.ticketsStateService.onChangeTypeFilter(this.currentUser.startPage == "MY_TICKETS" || this.currentUser.accountType == "CLIENT" ? "USERS" : this.currentUser.startPage);
+        this.ticketsStateService.onChangeLeftPanelFilter(this.currentUser.startPage == "MY_TICKETS" || this.currentUser.accountType == "CLIENT" ? "USERS" : this.currentUser.startPage);
       }
       if (this.router.url === "/" && this.currentUser.role !== "SUPER_ADMIN" && this.state == 'new-tickets' && this.main_page == PAGE_MAIN && !this.ticketsStateService.getListType()) {
-        this.ticketsStateService.onChangeTypeFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
-        this.ticketsStateService.onChangeLeftPanelFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
+        this.ticketsStateService.onChangeTypeFilter(this.currentUser.startPage == "MY_TICKETS" || this.currentUser.accountType == "CLIENT" ? "USERS" : this.currentUser.startPage);
+        this.ticketsStateService.onChangeLeftPanelFilter(this.currentUser.startPage == "MY_TICKETS" || this.currentUser.accountType == "CLIENT" ? "USERS" : this.currentUser.startPage);
       }
       if (this.router.url === "/" && this.currentUser.role !== "SUPER_ADMIN" && this.state == '' && this.main_page == PAGE_MAIN) {
-        this.ticketsStateService.onChangeTypeFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
-        this.ticketsStateService.onChangeLeftPanelFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
+        console.log("this.currentUser.accountType", this.currentUser.accountType);
+        this.ticketsStateService.onChangeTypeFilter(this.currentUser.startPage == "MY_TICKETS" || this.currentUser.accountType == "CLIENT" ? "USERS" : this.currentUser.startPage);
+        this.ticketsStateService.onChangeLeftPanelFilter(this.currentUser.startPage == "MY_TICKETS" || this.currentUser.accountType == "CLIENT" ? "USERS" : this.currentUser.startPage);
         this.router.navigate(
           [`${data.techDomain}/tickets/`]);
       }

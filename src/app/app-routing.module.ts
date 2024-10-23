@@ -380,11 +380,6 @@ const routes: Routes = [
     canActivate: [PermissionTechUserService, TestPermissionService]
   },
   {
-    path: ':domain/default',
-    loadChildren: './components/customer-portal/customer-portal-default/customer-portal-default.module#CustomerPortalDefaultModule',
-    canActivate: [PermissionClientUserService]
-  },
-  {
     path: ':domain/contract-statistics',
     loadChildren: './components/billing/contracts-statistics/contracts-statistics.module#ContractsStatisticsModule',
     canActivate: [PermissionContractsService, PermissionNoSuperAdminService]

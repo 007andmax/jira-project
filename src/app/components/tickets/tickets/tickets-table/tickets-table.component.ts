@@ -49,31 +49,11 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
-    if (this.customerPortalStateService.isCustomerPortal) {
-      this.ticketsFilter.setListType("ALL");
-      this.ticketsFilter.setFilter(JSON.parse(JSON.stringify(this.customerPortalStateService.getTicketsFilter())));
-      this.ticketsFilter.isDisbledCompany = true;
+    if (this.ticketsStateService.getListType()) {
+      console.log("this.ticketsStateService.getListType()", JSON.parse(JSON.stringify(this.ticketsStateService.getListType())));
+      this.ticketsFilter.setListType(this.ticketsStateService.getListType());
       this.onScroll();
-      this.websocketService.onInitConnectCustomerUser("new-tickets", this.customerPortalStateService.getTicketsFilter().selectedCompanies[0].id);
-    } else {
-      /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
-      /* START */
-      if (this.ticketsStateService.getListType()) {
-        this.ticketsFilter.setListType(this.ticketsStateService.getListType());
-        this.onScroll();
-      }
-      /* END */
     }
-    let onTicketFilters = this.customerPortalStateService.onTicketFilters.subscribe(data => {
-      this.ticketsFilter.setListType("ALL");
-      this.ticketsFilter.setFilter(JSON.parse(JSON.stringify(this.customerPortalStateService.getTicketsFilter())));
-      this.showPreloader = true;
-      document.body.querySelector(".main-container").scrollTo(0, 0);
-      this.setDefaultScoll();
-      this.onScroll();
-    });
-    this.sub.add(onTicketFilters);
-
     let getOnAddTicket = this.ticketsStateService.getOnAddTicket().subscribe(data => {
       if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter, data) && !this.tickets.find(item => item.id == data.id) && !(this.page_number == 0 && this.showPreloader)) {
         this.tickets.unshift(data);
@@ -151,6 +131,8 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     window.open(url, '_blank');
   }
   private getTickets() {
+    console.log("this.ticketsStateService.getListType()", this.ticketsStateService.getListType());
+    console.log("getTickets", this.ticketsFilter.getListTupe());
     if (this.ticketsListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;

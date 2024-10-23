@@ -58,21 +58,6 @@ export class PaymentsComponent implements OnInit, OnDestroy {
     private paymentsListService: PaymentsListService) { }
 
   ngOnInit() {
-    if (this.customerPortalStateService.isCustomerPortal) {
-      this.paymentsFilter.setCompanyId(this.customerPortalStateService.getPaymentsFilter().companyId);
-      this.websocketService.onInitConnectCustomerUser("new-payments-ng2", this.customerPortalStateService.getPaymentsFilter().companyId);
-    }
-    let onPaymentsFilters = this.customerPortalStateService.onPaymentsFilters.subscribe(data => {
-      this.selectedPayments = [];
-      this.selectedCompanyId = null;
-      this.paymentsFilter.setCompanyId(this.customerPortalStateService.getPaymentsFilter().companyId);
-      this.paymentsFilter.resetSortBy();
-      this.showPreloader = true;
-      document.body.querySelector(".main-container").scrollTo(0, 0);
-      this.setDefaultScoll();
-      this.onScroll();
-    });
-    this.sub.add(onPaymentsFilters);
     this.leftPanelStateService.setBillingPage('new-payments-ng2');
     document.body.querySelector(".main-container").scrollTo(0, 0);
     if (this.companiesStateService.getCompanies().length > 0) this.onScroll();

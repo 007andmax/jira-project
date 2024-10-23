@@ -97,13 +97,6 @@ export class CompanyUserComponent implements OnInit {
       this.cd.detectChanges();
     })
     this.sub.add(geLefttFilter);
-    let onUsersFilters = this.customerPortalStateService.onUsersFilters.subscribe(data => {
-      document.body.querySelector(".main-container").scrollTo(0, 0);
-      this.showPreloader = true;
-      this.setFilters(this.customerPortalStateService.getUsersFilters());
-      this.onScroll();
-    });
-    this.sub.add(onUsersFilters);
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       if (id) this.onInitFilters(id);
     })

@@ -56,13 +56,6 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
     private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
-    if (this.customerPortalStateService.isCustomerPortal && this.companiesState.getCompanies().length > 0) this.checkCompanyCustomerUser();
-    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
-      if (this.customerPortalStateService.isCustomerPortal) this.checkCompanyCustomerUser();
-    })
-    this.sub.add(getOnCompanies);
-    let onTicketFilters = this.customerPortalStateService.onUsersFilters.subscribe(data => (this.checkCompanyCustomerUser()));
-    this.sub.add(onTicketFilters);
     let onLeftPanelMarketingFilter = this.usersStateService.onLeftPanelMarketingFilter.subscribe((data) => {
       this.subscriptionDp.clearCustomSubscription();
       this.filter.setCustomSubscriptions([]);
@@ -129,13 +122,6 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
       this.usersStateService.onInitFilter(this.filter);
     })
     this.sub.add(onInitGlobalFilter);
-  }
-  private checkCompanyCustomerUser() {
-    this.filter = this.customerPortalStateService.getUsersFilters();
-    let selectedCompany = this.companiesState.getCompanies().find(item => item.id == localStorage.getItem('company_info_id'));
-    this.companiesDp.selectItemWithOutChanges(selectedCompany);
-    this.companiesDp.isDisabled = true;
-    this.ref.markForCheck();
   }
   applyFilters() {
     this.usersStateService.onInitFilter(this.filter);

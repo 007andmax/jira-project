@@ -104,9 +104,6 @@ import { GoogleAuthenticatorModule } from './components/shared/google-authentica
 import { SupportPageEditCategoryModule } from './components/super-admin/shared/support-page-edit-category/support-page-edit-category.module';
 import { TestPermissionService } from './services/test-permission/test-permission.service';
 import { ModalQuoteModule } from './services/modal/modal-quote/modal-quote.module';
-import { LeftPanelCustomerPortalComponent } from './components/customer-portal/left-panel-customer-portal/left-panel-customer-portal.component';
-import { LeftPanelCustomerPortalUsersComponent } from './components/customer-portal/left-panel-customer-portal/left-panel-customer-portal-users/left-panel-customer-portal-users.component';
-import { LeftPanelCustomerPortalModule } from './components/customer-portal/left-panel.module';
 import { PermissionPaymentsService } from './components/billing/payments/permission-payments.service';
 import { PermissionQuotesService } from './components/billing/quotes/permission-quotes.service';
 import { PermissionTicketsService } from './components/tickets/tickets/permission-tickets.service';
@@ -227,7 +224,6 @@ declare var $: any;
     GoogleAuthenticatorModule,
     SupportPageEditCategoryModule,
     ModalQuoteModule,
-    LeftPanelCustomerPortalModule,
     AddUserToCompanyModule,
     UserFilterSaveModule,
     TicketsFilterSaveModule,
