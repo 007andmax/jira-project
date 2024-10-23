@@ -77,11 +77,14 @@
     </div>
     <div class="users-table__portal-status">
         <app-drop-down
-            [placeholder]="'Select Job Title'"
-            [list]="portalAccessList"
+            #userRolesDP
+            *ngIf="customerRoleStateService.isGetUserRole"
+            [placeholder]="'Select role'"
+            [list]="userRoles"
+            [field]="'name'"
             [search]="true"
             [change]="true"
-            [editItem]="user.portalAccessStatus"
+            [editItem]="customerCompaniesInfo.customerUserRole"
             (onSelectedItem)="onSelectPortalAccessStatus($event)"
         ></app-drop-down>
     </div>

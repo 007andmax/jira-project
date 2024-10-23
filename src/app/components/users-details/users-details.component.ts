@@ -12,6 +12,7 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
 import { UserCustomerCompaniesInfo } from '../users/class/user-customer-companies-info';
 import { UserCustomSubscription } from '../users/class/user-custom-subscription';
+import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-role-state.service';
 
 @Component({
   selector: 'app-users-details',
@@ -31,6 +32,7 @@ export class UsersDetailsComponent implements OnInit {
     private permissionsService: PermissionsService,
     private usersRealTimeService: UsersRealTimeService,
     public cd: ChangeDetectorRef,
+    public customerRoleStateService: CustomerRoleStateService,
   ) { }
 
   ngOnInit() {
@@ -45,6 +47,7 @@ export class UsersDetailsComponent implements OnInit {
       if (this.usersStateService.getAllUsers().length > 0 && this.activateRoute.snapshot.params['id']) this.setUserRoutingId(this.activateRoute.snapshot.params['id']);
     })
     this.sub.add(onGetUsers);
+    if (!this.customerRoleStateService.isGetUserRole) this.customerRoleStateService.onInitGetUsersRoles();
     setTimeout(() => {
 
       let stompClient = this.usersRealTimeService.changeSubscriptionsUsers.subscribe(newChange => {

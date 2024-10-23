@@ -1,15 +1,18 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CrmCompanyJobTitle } from 'src/app/components/setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { UserCustomerCompaniesDefaultSubscribtionAdd } from 'src/app/components/users/class/user-customer-companies-default-subscribtion-add';
 import { UserCustomerCompaniesInfo } from 'src/app/components/users/class/user-customer-companies-info';
 import { UserDefaultSubscription } from 'src/app/components/users/class/user-default-subscription';
 import { UserProfile } from 'src/app/components/users/class/user-profile';
+import { UserRole } from 'src/app/components/users/class/user-role';
 import { Company } from 'src/app/interfaces/company/company';
 import { CompanyAndressContact } from 'src/app/interfaces/company/company-address-contact';
 import { UsersService } from 'src/app/services/users/users.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
+import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-role-state.service';
 import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
 
 @Component({
@@ -18,6 +21,7 @@ import { UsersRealTimeService } from 'src/app/states/users/users-real-time.servi
   styleUrls: ['./users-details-tab-companies-item.component.scss']
 })
 export class UsersDetailsTabCompaniesItemComponent implements OnInit, OnDestroy {
+  @ViewChild('userRolesDP') userRolesDP: DropDownComponent;
   @Input() customerCompaniesInfo: UserCustomerCompaniesInfo;
   @Input() user: UserProfile = new UserProfile();
   @Output() onUpdate = new EventEmitter<any>();
@@ -27,12 +31,14 @@ export class UsersDetailsTabCompaniesItemComponent implements OnInit, OnDestroy 
   defaultSubscriptions: UserDefaultSubscription = new UserDefaultSubscription(null);
   public primaryContact: CompanyAndressContact;
   public primaryPhone: Array<any>;
+  userRoles: Array<UserRole> = [];
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
     private crmStateService: CrmStateService,
     private usersService: UsersService,
     private usersRealTimeService: UsersRealTimeService,
     public cd: ChangeDetectorRef,
+    public customerRoleStateService: CustomerRoleStateService,
   ) { }
 
 
@@ -44,7 +50,12 @@ export class UsersDetailsTabCompaniesItemComponent implements OnInit, OnDestroy 
       this.jobTitleList = data;
     })
     this.sub.add(onGetJobTitle);
-
+    this.userRoles = this.customerRoleStateService.getUserRoles();
+    let onGetUserRole = this.customerRoleStateService.onGetUserRole.subscribe(data => {
+      this.userRoles = this.customerRoleStateService.getUserRoles();
+      if (this.userRolesDP) this.userRolesDP.reset(this.userRoles);
+    })
+    this.sub.add(onGetUserRole);
   }
   ngDoCheck() {
     if (this.getCpmpany()) {
@@ -90,7 +101,8 @@ export class UsersDetailsTabCompaniesItemComponent implements OnInit, OnDestroy 
       })
   }
   onSelectPortalAccessStatus(data) {
-    this.user.setPortalAccessStatus(data);
+    console.log("onSelectPortalAccessStatus", data);
+    this.customerCompaniesInfo.setUserRole(data);
     this.onUpdate.emit(null);
   }
   getCpmpany() {
