@@ -55,10 +55,9 @@
         [link]="getLinkSection('user')"
         target="_blank"
         appRightClickBlank
-        *ngIf="getCompanyInfoPermissions('VIEW_ALL_USERS')"
+        *ngIf="getPermissions('VIEW_USERS') || getCompanyInfoPermissions('VIEW_MY_PROFILE')"
     >
         <li
-            *ngIf="getPermissions('VIEW_USERS')"
             [ngClass]="{'--active':activePage === 'company-user'}"
             (click)="goToCompanySection('user')"
         >
@@ -125,10 +124,9 @@
         [link]="getLinkSection('password-manager')"
         target="_blank"
         appRightClickBlank
-        *ngIf="!customerPortalStateService.isCustomerPortal"
+        *ngIf="getPermissions('VIEW_PASSWORD_SECTION') || !customerPortalStateService.isCustomerPortal"
     >
         <li
-            *ngIf="getPermissions('VIEW_PASSWORD_SECTION')"
             [ngClass]="{'--active':activePage === 'company-password-manager'}"
             (click)="goToCompanySection('password-manager')"
         >
