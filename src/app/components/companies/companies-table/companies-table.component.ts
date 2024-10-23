@@ -16,6 +16,7 @@ import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-s
 import { CompanyItem } from '../class/company-item';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { CompanyDeviceCount } from '../class/company-device-count';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-companies-table',
@@ -43,6 +44,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     private downloadAgentStateService: DownloadAgentStateService,
     public cd: ChangeDetectorRef,
     private draftEmailStateService: DraftEmailStateService,
+    private customerPortalStateService: CustomerPortalStateService,
     private permissionsService: PermissionsService) { }
 
   ngOnInit() {
@@ -100,7 +102,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     return `company/${this.company.id}/dashboard`;
   }
   goToDashboard() {
-    const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/company/${this.company.id}/dashboard`;
+    const url = (!this.customerPortalStateService.isCustomerPortal) ? `/#/${this.companiesStateService.getCurrentCompany().techDomain}/company/${this.company.id}/dashboard` : `/#/${this.companiesStateService.getCurrentCompany().techDomain}/company/${this.company.id}/tickets`;
     window.open(url, '_blank');
     this.cd.detectChanges();
   }

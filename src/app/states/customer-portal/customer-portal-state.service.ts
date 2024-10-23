@@ -38,7 +38,7 @@ export class CustomerPortalStateService {
     return false;
   }
   getPermissionCustomerUser(currentUser, permission) {
-    return currentUser.customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id')).customerUserRole.getPermission(permission);
+    return currentUser.customerCompaniesInfo.some(item => item.customerUserRole.getPermission(permission));
   }
   public checkShowTabTicketsAsideUserDetail(currentUser, user) {
     if (this.isCustomerPortal && this.getPermissionCustomerUser(currentUser, 'VIEW_MY_TICKETS')

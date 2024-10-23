@@ -3,7 +3,9 @@ import { Subscription } from 'rxjs';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 /**
  * Left panel billing component
@@ -30,6 +32,8 @@ export class LeftPanelBillingComponent implements OnInit, OnDestroy {
     private permissionsService: PermissionsService,
     public contractsStateService: ContractsStateService,
     private leftPanelService: LeftPanelService,
+    public customerPortalStateService: CustomerPortalStateService,
+    private usersStateService: UsersStateService,
   ) { }
 
 
@@ -59,7 +63,9 @@ export class LeftPanelBillingComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnShowNotificationReview);
   }
-
+  public getCompanyInfoPermissions(action) {
+    return (this.usersStateService.getCurrentUser() && this.usersStateService.getCurrentUser().accountType == "CLIENT" && this.usersStateService.getCurrentUser().customerCompaniesInfo.some(compnayInfo => compnayInfo.customerUserRole.getPermission(action)));
+  }
   public close() {
     this.open = false;
   }

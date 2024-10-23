@@ -282,6 +282,9 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
     if (this.leftPanelService.isDevicesPage(data)) this.page = "DEVICES";
     if (this.leftPanelService.isFilePage(data)) this.page = "FILE_MANAGER";
   }
+  public getCompanyInfoPermissions(action) {
+    return (this.usersStateService.getCurrentUser() && this.usersStateService.getCurrentUser().accountType == "CLIENT" && this.usersStateService.getCurrentUser().customerCompaniesInfo.some(compnayInfo => compnayInfo.customerUserRole.getPermission(action)));
+  }
   setDefaultTypeFilter() {
     this.panelTickets.setTypeFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage)
     this.ticketsStateService.onChangeTypeFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);

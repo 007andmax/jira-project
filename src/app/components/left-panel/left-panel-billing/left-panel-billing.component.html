@@ -28,6 +28,7 @@
         [link]="'non-contract-services'"
         target="_blank"
         appRightClickBlank
+        *ngIf="!customerPortalStateService.isCustomerPortal"
     >
         <li
             [ngClass]="{'--active':activePage === 'non-contract-services'}"
@@ -57,7 +58,7 @@
         appRightClickBlank
     >
         <li
-            *ngIf="getPermissions('VIEW_ACCOUNTING')"
+            *ngIf="getPermissions('VIEW_ACCOUNTING') || getCompanyInfoPermissions('VIEW_ALL_INVOICES')"
             [ngClass]="{'--active':activePage === 'new-billable-invoices'}"
             (click)="goToState('new-billable-invoices')"
         >

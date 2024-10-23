@@ -27,6 +27,7 @@
         [link]="getLinkSection('dashboard')"
         target="_blank"
         appRightClickBlank
+        *ngIf="!customerPortalStateService.isCustomerPortal"
     >
         <li
             [ngClass]="{'--active':activePage === 'company-dashboard'}"
@@ -40,6 +41,7 @@
         [link]="getLinkSection('tickets')"
         target="_blank"
         appRightClickBlank
+        *ngIf="getCompanyInfoPermissions('VIEW_MY_PROFILE') || getCompanyInfoPermissions('VIEW_ALL_TICKETS')"
     >
         <li
             [ngClass]="{'--active':activePage === 'company-tickets'}"
@@ -53,6 +55,7 @@
         [link]="getLinkSection('user')"
         target="_blank"
         appRightClickBlank
+        *ngIf="getCompanyInfoPermissions('VIEW_ALL_USERS')"
     >
         <li
             *ngIf="getPermissions('VIEW_USERS')"
@@ -108,6 +111,7 @@
         [link]="getLinkSection('network-scan')"
         target="_blank"
         appRightClickBlank
+        *ngIf="!customerPortalStateService.isCustomerPortal"
     >
         <li
             [ngClass]="{'--active':activePage === 'company-network-scan'}"
@@ -121,6 +125,7 @@
         [link]="getLinkSection('password-manager')"
         target="_blank"
         appRightClickBlank
+        *ngIf="!customerPortalStateService.isCustomerPortal"
     >
         <li
             *ngIf="getPermissions('VIEW_PASSWORD_SECTION')"
@@ -149,6 +154,7 @@
         [link]="getLinkSection('contracts')"
         target="_blank"
         appRightClickBlank
+        *ngIf="!customerPortalStateService.isCustomerPortal"
     >
         <li
             *ngIf="getPermissions('VIEW_SERVICE_AGREEMENTS') && selectedCompany &&  selectedCompany.clientType !== 'LEAD' && selectedCompany.clientType !== 'VENDOR'"
@@ -164,6 +170,7 @@
         [link]="getLinkSection('file-manager')"
         target="_blank"
         appRightClickBlank
+        *ngIf="!customerPortalStateService.isCustomerPortal"
     >
         <li
             [ngClass]="{'--active':activePage === 'company-file-manager'}"
@@ -178,6 +185,7 @@
         [link]="getLinkSection('documents')"
         target="_blank"
         appRightClickBlank
+        *ngIf="!customerPortalStateService.isCustomerPortal"
     >
         <li [ngClass]="{'--active':activePage === 'company-documents'}">
             <span
@@ -200,7 +208,7 @@
     </a>
     <ul
         class="categories"
-        *ngIf="toogleCategoriesDocuments"
+        *ngIf="toogleCategoriesDocuments && !customerPortalStateService.isCustomerPortal"
     >
         <ng-template
             ngFor
