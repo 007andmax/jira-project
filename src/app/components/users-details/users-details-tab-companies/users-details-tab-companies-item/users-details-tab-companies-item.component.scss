@@ -30,7 +30,7 @@ tr {
 
 .users-table__email,
 .users-table__company {
-    flex: 2 0 220px;
+    
 
     @include media-breakpoint-down($md) {
         flex: 2 0 200px;
@@ -52,7 +52,7 @@ tr {
 }
 
 .users-table__company-full {
-    flex: 2 0 220px;
+     
 
     @include media-breakpoint-down($md) {
         flex: 2 0 200px;
@@ -64,7 +64,7 @@ tr {
 }
 
 .users-table__industry {
-    flex: 0 0 176px;
+    
 
     @include media-breakpoint-down($md) {
         display: none;
@@ -83,4 +83,27 @@ tr {
 
 .job-title-item {
     min-height: 24px;
+}
+.users-table__company-full {
+    flex: 0 0 336px;
+}
+
+.users-table__industry {
+    flex: 0 0 170px;
+}
+
+.users-table__contract-no {
+    flex: 0 0 324px;
+}
+
+.users-table__tickets {
+    flex: 0 0 303px;
+}
+
+.users-table__primary {
+    flex: 0 0 318px;
+}
+
+.users-table__portal-status {
+    flex: 0 0 160px;
 }

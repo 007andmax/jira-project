@@ -18,13 +18,13 @@
             </label>
         </div>
     </div>
-    <div class="users-table__name">
+    <div class="users-table__company-full">
         <div>
             <span class="qt-icon icon__companies qt-sz-16 qt-dib"></span>
         </div>
         <span [textContent]="customerCompaniesInfo.clientCompanyName"></span>
     </div>
-    <div class="users-table__company qt-fd-c qt-ai-fs qt-jc-c">
+    <div class="users-table__industry qt-fd-c qt-ai-fs qt-jc-c">
         <app-drop-down
             #jobTitleDp
             [placeholder]="'Select Job Title'"
@@ -36,7 +36,7 @@
             (onSelectedItem)="onSelectJobTitle($event)"
         ></app-drop-down>
     </div>
-    <div class="users-table__email ellipsis">
+    <div class="users-table__contract-no">
         <user-table-default-subscription
             class="users-table__subscription--dropdown"
             (onChangeDefault)="onChangeDefaultSubscriptions($event)"
@@ -45,11 +45,11 @@
         </user-table-default-subscription>
     </div>
     <div
-        class="users-table__industry qt-fd-c qt-ai-fs qt-jc-c ellipsis"
+        class="users-table__tickets qt-fd-c qt-ai-fs qt-jc-c ellipsis"
         [textContent]="(primaryContact) ? primaryContact.primaryEmail : ''"
     ></div>
     <div
-        class="users-table__contract-no qt-fd-c qt-ai-fs qt-jc-c"
+        class="users-table__primary qt-fd-c qt-ai-fs qt-jc-c"
         (click)="showDetailUser()"
     >
         <ng-template
