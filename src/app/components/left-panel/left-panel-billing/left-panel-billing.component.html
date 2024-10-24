@@ -70,6 +70,7 @@
         [link]="'quotes'"
         target="_blank"
         appRightClickBlank
+        *ngIf="customerPortalStateService.isCustomerPortal && getCompanyInfoPermissions('VIEW_ALL_QUOTES') || !customerPortalStateService.isCustomerPortal"
     >
         <li
             [ngClass]="{'--active':activePage === 'quotes-component'}"
@@ -83,6 +84,7 @@
         [link]="'payments'"
         target="_blank"
         appRightClickBlank
+        *ngIf="customerPortalStateService.isCustomerPortal && getCompanyInfoPermissions('VIEW_ALL_PAYMENTS') || !customerPortalStateService.isCustomerPortal"
     >
         <li
             [ngClass]="{'--active':activePage === 'new-payments-ng2'}"
