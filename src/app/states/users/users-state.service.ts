@@ -170,7 +170,6 @@ export class UsersStateService {
   public onInitGetCurrentUser() {
     this.userService.getCurrentUser().subscribe((data: any) => {
       this.currentUser = new CurrentUser(data);
-      if (data.accountType == "TECH") localStorage.removeItem("company_info_id");
       if (data.accountType == "CLIENT" && !this.customerPortalStateService.isCustomerPortal) {
         this.customerPortalStateService.setCustomerPortal(true);
         //this.customerPortalStateService.setFilters(this.currentUser);

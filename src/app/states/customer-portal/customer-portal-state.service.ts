@@ -22,11 +22,6 @@ export class CustomerPortalStateService {
   public setCustomerPortal(data) {
     this.isCustomerPortal = data;
   }
-
-  public setCompnayIdInfo(data) {
-    localStorage.setItem("company_info_id", data);
-  }
-
   public checkEditTicket(currentUser, createdUserId, companyId) {
     if (currentUser.id === createdUserId && currentUser.customerCompaniesInfo.find(item => item.companyId === companyId).customerUserRole.getPermission('VIEW_MY_TICKETS')) return true;
 

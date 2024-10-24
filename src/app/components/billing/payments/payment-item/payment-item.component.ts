@@ -54,10 +54,12 @@ export class PaymentItemComponent implements OnInit {
   }
   onShowPreviewInvoice(index) {
     if (this.usersStateService.getCurrentUser().accountType == "CLIENT") {
-      let customerCompaniesInfo = this.usersStateService.getCurrentUser().customerCompaniesInfo.find(item => item.companyId == localStorage.getItem("company_info_id"));
-      if (!customerCompaniesInfo.customerUserRole.getPermission('VIEW_ALL_PAYMENTS') || !customerCompaniesInfo.customerUserRole.getPermission('VIEW_ALL_INVOICES')) return;
+      if (!this.getCompanyInfoPermissions('VIEW_ALL_PAYMENTS') || !this.getCompanyInfoPermissions('VIEW_ALL_INVOICES')) return;
     }
     this.onPreviewInvoice.emit(this.payment.paymentData[index].invoiceId);
+  }
+  public getCompanyInfoPermissions(action) {
+    return (this.usersStateService.getCurrentUser() && this.usersStateService.getCurrentUser().accountType == "CLIENT" && this.usersStateService.getCurrentUser().customerCompaniesInfo.some(compnayInfo => compnayInfo.customerUserRole.getPermission(action)));
   }
   getInvoices() {
     let invoices = [];

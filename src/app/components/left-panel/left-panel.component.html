@@ -54,6 +54,7 @@
             <div class="app-left-panel__menu-icon --companies"></div>
         </div>
         <div
+            *ngIf="customerPortalStateService.isCustomerPortal && (getCompanyInfoPermissions('VIEW_ALL_QUOTES') || getCompanyInfoPermissions('VIEW_ALL_INVOICES') || getCompanyInfoPermissions('VIEW_ALL_PAYMENTS')) || !customerPortalStateService.isCustomerPortal"
             class="app-left-panel__menu-icon-wrap pointer"
             (click)="changePage('BILLING');onOpenPanel();onChangeState('billing-dashboard')"
             [ngClass]="{'--active':page === 'BILLING' }"
