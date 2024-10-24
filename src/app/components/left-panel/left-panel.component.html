@@ -14,6 +14,7 @@
             <div class="app-left-panel__menu-icon --quick-support"></div>
         </div>
         <div
+            *ngIf="customerPortalStateService.isCustomerPortal && (getCompanyInfoPermissions('VIEW_MY_PROFILE') || getCompanyInfoPermissions('VIEW_ALL_TICKETS') || getCompanyInfoPermissions('EDIT_OTHER_TICKETS')) || !customerPortalStateService.isCustomerPortal"
             class="app-left-panel__menu-icon-wrap pointer"
             (click)="setDefaultTypeFilter();changePage('TICKETS');onOpenPanel()"
             [ngClass]="{'--active':page === 'TICKETS' }"

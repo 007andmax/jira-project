@@ -68,6 +68,14 @@ export class CompanyUsersDropDownComponent extends DropDownComponent {
     this.reqList.sort((a, b) => (this.getUserName(a).toLowerCase() > this.getUserName(b).toLowerCase()) ?
       1 : ((this.getUserName(b).toLowerCase() > this.getUserName(a).toLowerCase()) ? -1 : 0));
     this.list = JSON.parse(JSON.stringify(this.reqList)).map(item => new CompanyUser(item));
+    if (this.customerPortalStateService.isCustomerPortal) {
+      this.reqList = this.reqList.filter(item => {
+        let customerCompaniesInfo = this.usersStateService.getCurrentUser().customerCompaniesInfo.find(customerCompaniesInfo => customerCompaniesInfo.companyId === item.id);
+        if (customerCompaniesInfo && customerCompaniesInfo.customerUserRole && customerCompaniesInfo.customerUserRole.getPermission('VIEW_MY_TICKETS')) return true;
+        return false;
+      })
+      this.list = JSON.parse(JSON.stringify(this.reqList)).map(item => new CompanyUser(item));
+    }
   }
   /**
  * @description Clear selected fileds, input and reset list

@@ -43,9 +43,7 @@ export class CustomerPortalStateService {
   public checkShowTabTicketsAsideUserDetail(currentUser, user) {
     if (this.isCustomerPortal && this.getPermissionCustomerUser(currentUser, 'VIEW_MY_TICKETS')
       && this.getPermissionCustomerUser(currentUser, 'VIEW_ALL_TICKETS')
-      && this.getPermissionCustomerUser(currentUser, 'VIEW_ALL_USERS')
-      && this.getPermissionCustomerUser(currentUser, 'VIEW_MY_PROFILE')
-      && currentUser.id != user.id || this.isCustomerPortal && this.getPermissionCustomerUser(currentUser, 'VIEW_MY_TICKETS') && this.getPermissionCustomerUser(currentUser, 'VIEW_MY_PROFILE') && currentUser.id == user.id || !this.isCustomerPortal) {
+      && currentUser.id != user.id || this.isCustomerPortal && this.getPermissionCustomerUser(currentUser, 'VIEW_MY_TICKETS') && currentUser.id == user.id || !this.isCustomerPortal) {
       return true;
     } else {
       return false;
