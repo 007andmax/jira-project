@@ -150,6 +150,7 @@
         ></app-left-panel-support>
         <app-left-panel-tickets
             #panelTickets
+            *ngIf="customerPortalStateService.isCustomerPortal && (getCompanyInfoPermissions('VIEW_MY_PROFILE') || getCompanyInfoPermissions('VIEW_ALL_TICKETS') || getCompanyInfoPermissions('EDIT_OTHER_TICKETS')) || !customerPortalStateService.isCustomerPortal"
             (onOpenPanel)="onOpenPanel()"
             (onChangeState)="onChangeState($event)"
             [activePage]="state"
