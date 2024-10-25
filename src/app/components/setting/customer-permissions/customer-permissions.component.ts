@@ -113,10 +113,6 @@ export class CustomerPermissionsComponent implements OnInit, OnDestroy {
     ) {
       return true;
     } else if (
-      ["EDIT_USERS"].indexOf(permission) > -1
-    ) {
-      return true;
-    } else if (
       userPermission.permissions.indexOf('VIEW_ALL_DEVICES') === -1 &&
       ["DEVICES_REMOTE_CONTROL"].indexOf(permission) > -1
     ) {

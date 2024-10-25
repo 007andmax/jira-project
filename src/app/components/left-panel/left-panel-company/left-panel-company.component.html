@@ -55,7 +55,7 @@
         [link]="getLinkSection('user')"
         target="_blank"
         appRightClickBlank
-        *ngIf="getPermissions('VIEW_USERS') || !customerPortalStateService.isCustomerPortal"
+        *ngIf="getPermissions('VIEW_USERS') || customerPortalStateService.isCustomerPortal"
     >
         <li
             [ngClass]="{'--active':activePage === 'company-user'}"
