@@ -94,16 +94,40 @@ tr {
 
 .users-table__contract-no {
     flex: 0 0 324px;
+    @include media-breakpoint-down($md) {
+            display: none;
+        }
 }
 
 .users-table__tickets {
     flex: 0 0 303px;
+    @include media-breakpoint-down($md) {
+            display: none;
+    }
 }
 
 .users-table__primary {
     flex: 0 0 318px;
+    @include media-breakpoint-down($md) {
+            display: none;
+    }
 }
 
 .users-table__portal-status {
     flex: 0 0 160px;
+    @include media-breakpoint-down($md) {
+            display: none;
+    }
+}
+.company-icon-container {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    background-color: $gray-100;
+}
+.users-table__check {
+    padding-left: 0px;
+}
+.qt-table-modern__row > div {
+    padding: 16px;
 }

@@ -18,13 +18,28 @@
 }
 .users-table__contract-no {
     flex:0 0 324px;
+    @include media-breakpoint-down($md) {
+            display: none;
+        }
 }
 .users-table__tickets {
     flex:0 0 303px;
+    @include media-breakpoint-down($md) {
+            display: none;
+        }
 }
 .users-table__primary {
     flex:0 0 318px;
+    @include media-breakpoint-down($md) {
+            display: none;
+        }
 }
 .users-table__portal-status {
     flex:0 0 160px;
+    @include media-breakpoint-down($md) {
+            display: none;
+        }
+}
+.qt-page-list__header-thead__row > div {
+    padding: 11px 16px !important;
 }

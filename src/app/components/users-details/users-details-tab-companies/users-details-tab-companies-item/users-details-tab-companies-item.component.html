@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="users-table__company-full">
-        <div>
+        <div class="company-icon-container qt-df qt-ai-c qt-jc-c qt-mr-8">
             <span class="qt-icon icon__companies qt-sz-16 qt-dib"></span>
         </div>
         <span [textContent]="customerCompaniesInfo.clientCompanyName"></span>
@@ -27,6 +27,8 @@
     <div class="users-table__industry qt-fd-c qt-ai-fs qt-jc-c">
         <app-drop-down
             #jobTitleDp
+            [class]="['qt-dropdown']"
+            [heightInput]="'32px'"
             [placeholder]="'Select Job Title'"
             [list]="jobTitleList"
             [field]="'name'"
@@ -78,6 +80,8 @@
     <div class="users-table__portal-status">
         <app-drop-down
             #userRolesDP
+            [class]="['qt-dropdown']"
+            [heightInput]="'32px'"
             *ngIf="customerRoleStateService.isGetUserRole"
             [placeholder]="'Select role'"
             [list]="userRoles"
