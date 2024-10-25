@@ -24,7 +24,7 @@
             <div class="app-left-panel__menu-icon --tickets"></div>
         </div>
         <div
-            *ngIf="getPermissions('VIEW_USERS') || getCompanyInfoPermissions('VIEW_MY_PROFILE')"
+            *ngIf="getPermissions('VIEW_USERS') || !customerPortalStateService.isCustomerPortal"
             class="app-left-panel__menu-icon-wrap pointer"
             (click)="changePage('USERS');onOpenPanel();onChangeState('new-users')"
             [ngClass]="{'--active':page === 'USERS' }"
@@ -158,7 +158,7 @@
             [hidden]="page !== 'TICKETS' && page !== 'TICKET-DETAIL'"
         ></app-left-panel-tickets>
         <app-left-panel-users
-            *ngIf="getPermissions('VIEW_USERS') || getCompanyInfoPermissions('VIEW_MY_PROFILE')"
+            *ngIf="getPermissions('VIEW_USERS') || !customerPortalStateService.isCustomerPortal"
             #panelUsers
             (onOpenPanel)="onOpenPanel()"
             (onChangeState)="onChangeState($event)"

@@ -41,7 +41,7 @@
         [link]="getLinkSection('tickets')"
         target="_blank"
         appRightClickBlank
-        *ngIf="getCompanyInfoPermissions('VIEW_MY_PROFILE') || getCompanyInfoPermissions('VIEW_ALL_TICKETS')"
+        *ngIf="getCompanyInfoPermissions('VIEW_ALL_TICKETS')"
     >
         <li
             [ngClass]="{'--active':activePage === 'company-tickets'}"
@@ -55,7 +55,7 @@
         [link]="getLinkSection('user')"
         target="_blank"
         appRightClickBlank
-        *ngIf="getPermissions('VIEW_USERS') || getCompanyInfoPermissions('VIEW_MY_PROFILE')"
+        *ngIf="getPermissions('VIEW_USERS') || !customerPortalStateService.isCustomerPortal"
     >
         <li
             [ngClass]="{'--active':activePage === 'company-user'}"
@@ -69,6 +69,7 @@
         [link]="getLinkSection('devices')"
         target="_blank"
         appRightClickBlank
+        *ngIf="customerPortalStateService.isCustomerPortal && getCompanyInfoPermissions('VIEW_ALL_DEVICES') || !customerPortalStateService.isCustomerPortal"
     >
         <li
             [ngClass]="{'--active':activePage === 'company-devices'}"

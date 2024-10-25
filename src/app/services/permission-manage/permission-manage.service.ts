@@ -117,8 +117,6 @@ export class PermissionManageService {
       'EDIT_OTHER_TICKETS'
     ],
     'Users': [
-      'VIEW_MY_PROFILE',
-      'VIEW_ALL_USERS',
       'EDIT_USERS'
     ],
     Devices: ['VIEW_ALL_DEVICES',
