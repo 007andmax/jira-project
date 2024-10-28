@@ -25,6 +25,7 @@ export class UsersDetailsTabCompaniesItemComponent implements OnInit, OnDestroy 
   @Input() customerCompaniesInfo: UserCustomerCompaniesInfo;
   @Input() user: UserProfile = new UserProfile();
   @Output() onUpdate = new EventEmitter<any>();
+  @Output() onSelect = new EventEmitter<any>();
   portalAccessList = ["Registered", "Invite sent", "Unauthorizeds"];
   selectedCompany: Company;
   jobTitleList: Array<CrmCompanyJobTitle> = [];
@@ -99,6 +100,11 @@ export class UsersDetailsTabCompaniesItemComponent implements OnInit, OnDestroy 
           this.customerCompaniesInfo.companyId)
       }).subscribe(res => {
       })
+  }
+  selectCustomerCompaniesInfo(event) {
+    this.customerCompaniesInfo.selected = event.target.checked;
+    this.onSelect.emit(this.customerCompaniesInfo);
+    this.cd.detectChanges();
   }
   onSelectPortalAccessStatus(data) {
     console.log("onSelectPortalAccessStatus", data);

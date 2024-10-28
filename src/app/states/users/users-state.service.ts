@@ -38,6 +38,8 @@ export class UsersStateService {
   onInitGlobalFilter: EventEmitter<any> = new EventEmitter();
   onToggleFilter: EventEmitter<any> = new EventEmitter();
   onGetGlobalFilters: EventEmitter<any> = new EventEmitter();
+  onSelectCustomerCompaniesInfo: EventEmitter<any> = new EventEmitter();
+  onShowAddCustomerCompaniesInfo: EventEmitter<any> = new EventEmitter();
   userForArchive: User = null;
   usersForArchive: Array<User> = [];
   userForDeArchive: User = null;
@@ -100,6 +102,12 @@ export class UsersStateService {
       }
 
     })
+  }
+  public showAddCustomerCompaniesInfo() {
+    this.onShowAddCustomerCompaniesInfo.emit(null)
+  }
+  public setSelectedCustomerCompaniesInfo(data) {
+    this.onSelectCustomerCompaniesInfo.emit(data)
   }
   public fastEditUser(data) {
     let index = this.allUsers.findIndex(item => item.id == data.id);

@@ -17,6 +17,9 @@ import { DropDownModule } from '../shared/drop-down/drop-down.module';
 import { UserTableDefaultSubscriptionModule } from '../users/users-table/user-table-default-subscription/user-table-default-subscription.module';
 import { PreviewPhoneMaskModule } from '../shared/preview-phone-mask/preview-phone-mask.module';
 import { UserTableCustomSubscriptionModule } from '../users/users-table/user-table-custom-subscription/user-table-custom-subscription.module';
+import { UsersDetailsTabCompaniesAddComponent } from './users-details-tab-companies/users-details-tab-companies-add/users-details-tab-companies-add.component';
+import { CompanyDropDownModule } from '../shared/company-drop-down/company-drop-down.module';
+import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
 
 
 @NgModule({
@@ -25,6 +28,7 @@ import { UserTableCustomSubscriptionModule } from '../users/users-table/user-tab
         UsersDetailsLeftPanelComponent,
         UsersDetailsTabCompaniesComponent,
         UsersDetailsTabCompaniesItemComponent,
+        UsersDetailsTabCompaniesAddComponent,
     ],
     imports: [
         CommonModule,
@@ -40,7 +44,9 @@ import { UserTableCustomSubscriptionModule } from '../users/users-table/user-tab
         DropDownModule,
         UserTableDefaultSubscriptionModule,
         PreviewPhoneMaskModule,
-        UserTableCustomSubscriptionModule
+        UserTableCustomSubscriptionModule,
+        CompanyDropDownModule,
+        ClickOutsideModule
     ],
 })
 export class UsersDetailsModule { }

@@ -129,6 +129,9 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
   edit() {
     this.onEdit.emit(null);
   }
+  addCompany() {
+    this.usersStateService.showAddCustomerCompaniesInfo();
+  }
   get f2() {
     return this.modelForm.controls;
   }

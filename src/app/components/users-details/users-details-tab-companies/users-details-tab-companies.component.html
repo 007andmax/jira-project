@@ -44,6 +44,11 @@
                 >
                     <div class="qt-page-list__body-tbody qt-table-modern users-table">
                         <div class="tbody">
+                            <app-users-details-tab-companies-add
+                                *ngIf="isShowAdd"
+                                [user]="user"
+                                (onClose)="isShowAdd = false"
+                            ></app-users-details-tab-companies-add>
                             <ng-template
                                 ngFor
                                 let-customerCompaniesInfo
@@ -54,6 +59,7 @@
                                     [customerCompaniesInfo]="customerCompaniesInfo"
                                     [user]="user"
                                     (onUpdate)="updateUser()"
+                                    (onSelect)="onSelectCustomerCompaniesInfo()"
                                 ></app-users-details-tab-companies-item>
                             </ng-template>
                         </div>

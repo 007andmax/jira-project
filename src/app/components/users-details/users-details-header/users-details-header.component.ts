@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { User } from '../../users/class/user';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 import { USERS } from 'src/app/const/emails';
+import { UserCustomerCompaniesInfo } from '../../users/class/user-customer-companies-info';
+import { UsersService } from 'src/app/services/users/users.service';
 
 
 @Component({
@@ -19,14 +21,28 @@ export class UsersDetailsHeaderComponent implements OnInit {
   @Input() user: UserProfile = new UserProfile();
   @Output() onEdit = new EventEmitter<any>();
   @Output() onDraftEmail = new EventEmitter<any>();
+  selectedCustomerCompaniesInfo: Array<UserCustomerCompaniesInfo> = [];
   constructor(public customerPortalStateService: CustomerPortalStateService,
     private companiesStateService: CompaniesStateService,
     private permissionsService: PermissionsService,
     public usersStateService: UsersStateService,
     private draftEmailStateService: DraftEmailStateService,
+    private usersService: UsersService,
     private router: Router,) { }
 
   ngOnInit() {
+    this.usersStateService.onSelectCustomerCompaniesInfo.subscribe(data => {
+      this.selectedCustomerCompaniesInfo = data;
+    })
+  }
+  removeCompany() {
+    this.selectedCustomerCompaniesInfo.forEach(item => {
+      let index = this.user.customerCompaniesInfo.findIndex(company => company.companyId == item.companyId);
+      if (index > -1) this.user.customerCompaniesInfo.splice(index, 1);
+    })
+    this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit())).subscribe(data => {
+
+    })
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

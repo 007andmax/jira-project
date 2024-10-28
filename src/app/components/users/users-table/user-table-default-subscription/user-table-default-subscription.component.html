@@ -6,6 +6,7 @@
         class="list-default-subscriptions"
         id="dropdownBasic"
         ngbDropdownToggle
+        [ngClass]="{'block-click':isDisabled}"
     >
         <div
             *ngIf="defaultSubscriptions && defaultSubscriptions.invoiceSubscription && defaultSubscriptions.invoiceSubscription.enabled"

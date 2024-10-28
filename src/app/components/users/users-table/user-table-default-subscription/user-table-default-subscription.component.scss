@@ -154,3 +154,6 @@
     justify-content: center;
     background-color: $gray-50;
 }
+.block-click {
+    pointer-events: none;
+}

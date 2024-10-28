@@ -1,0 +1,87 @@
+<div
+    class="qt-table-modern__row qt-table-modern__row--height-auto add-customer-companies-info"
+    [init]="customerCompaniesInfo.companyId"
+    appClickOtside
+    [class]="'.add-customer-companies-info'"
+    (onOutSide)="addCompany()"
+>
+    <div class="users-table__check"></div>
+    <div class="users-table__company-full">
+        <company-drop-down
+            [placeholder]="'Company'"
+            [errorMessage]="'The company name is required'"
+            [field]="'name'"
+            [search]="true"
+            [change]="true"
+            [isBlockClear]="true"
+            (onSelectedItem)="onSelectCompany($event)"
+        >
+        </company-drop-down>
+    </div>
+    <div class="users-table__industry qt-fd-c qt-ai-fs qt-jc-c">
+        <app-drop-down
+            #jobTitleDp
+            [class]="['qt-dropdown']"
+            [heightInput]="'32px'"
+            [placeholder]="'Select Job Title'"
+            [list]="jobTitleList"
+            [field]="'name'"
+            [search]="true"
+            [change]="true"
+            [isDisabled]="!customerCompaniesInfo.companyId"
+            (onSelectedItem)="onSelectJobTitle($event)"
+        ></app-drop-down>
+    </div>
+    <div class="users-table__contract-no">
+        <user-table-default-subscription
+            class="users-table__subscription--dropdown"
+            (onChangeDefault)="onChangeDefaultSubscriptions($event)"
+            [defaultSubscriptions]="defaultSubscriptions"
+            [isDisabled]="!customerCompaniesInfo.companyId"
+        >
+        </user-table-default-subscription>
+    </div>
+    <div
+        class="users-table__tickets qt-fd-c qt-ai-fs qt-jc-c ellipsis"
+        [textContent]="(primaryContact) ? primaryContact.primaryEmail : ''"
+    ></div>
+    <div class="users-table__primary qt-fd-c qt-ai-fs qt-jc-c">
+        <ng-template
+            ngFor
+            let-phone
+            [ngForOf]="primaryPhone"
+            [ngForTrackBy]="trackById"
+        >
+            <div class="qt-df qt-ai-c">
+                <div>
+                    <div
+                        [ngClass]="{'icon__old-phone':phone.typeNumber == 'FAX',
+                        'icon__mobile':phone.typeNumber == 'MOBILE',
+                         'icon__phone':phone.typeNumber == 'OFFICE'}"
+                        class="qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-6 qt-icon"
+                    ></div>
+                </div>
+                <preview-phone-mask
+                    [class]="'users-table__contract-no--number'"
+                    *ngIf="phone.number"
+                    [number]="phone.number"
+                ></preview-phone-mask>
+            </div>
+        </ng-template>
+    </div>
+    <div class="users-table__portal-status">
+        <app-drop-down
+            #userRolesDP
+            [class]="['qt-dropdown']"
+            [heightInput]="'32px'"
+            *ngIf="customerRoleStateService.isGetUserRole"
+            [placeholder]="'Select role'"
+            [list]="userRoles"
+            [field]="'name'"
+            [search]="true"
+            [change]="true"
+            [isDisabled]="!customerCompaniesInfo.companyId"
+            (onSelectedItem)="onSelectPortalAccessStatus($event)"
+        ></app-drop-down>
+    </div>
+</div>

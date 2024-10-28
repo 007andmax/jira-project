@@ -30,6 +30,9 @@ export class UserCustomerCompaniesInfo {
         }
 
     }
+    public setDefaultSubscriptions(data) {
+        this.defaultSubscriptions = data;
+    }
     public setDefaultSubscriptionsForAddUser() {
         this.defaultSubscriptions.invoiceSubscription = new UserDefaultSubscriptionItem({ enabled: false, activated: true, });
         this.defaultSubscriptions.ticketSubscription = new UserDefaultSubscriptionItem({ enabled: true, activated: true, });
@@ -83,5 +86,12 @@ export class UserCustomerCompaniesInfo {
 */
     public setUserRole(data) {
         this.customerUserRole = data;
+    }
+
+    public setCompanyId(data) {
+        this.companyId = data;
+    }
+    public setClientCompanyName(data) {
+        this.clientCompanyName = data;
     }
 }
