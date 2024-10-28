@@ -12,13 +12,14 @@
         <div class="qt-page-list__body ">
             <div class="qt-page-list__container qt-df">
 
+
                 <app-users-details-left-panel
                     #leftPanel
                     [user]="user"
                     (onEdit)="edit()"
                     (onDraftEmail)="showAsideForDraftEmail()"
                 ></app-users-details-left-panel>
-                <div class="user-detail-statictics">
+                <div class="user-detail-statictics qt-w100">
                     <div class="tabs">
                         <span
                             class="pointer"

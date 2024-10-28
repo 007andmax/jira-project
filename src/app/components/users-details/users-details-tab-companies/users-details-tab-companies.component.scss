@@ -1,4 +1,5 @@
 @import "./src/assets/styles/variable";
+@import "./src/assets/styles/mixin/breakpoint";
 
 .users-page {
     background-color: $white;
@@ -12,31 +13,38 @@
 }
 .users-table__company-full {
     flex:0 0 336px;
+    @include media-breakpoint-up($xl) {
+            flex: 1 0 336px;
+    }
 }
 .users-table__industry {
     flex:0 0 170px;
 }
 .users-table__contract-no {
     flex:0 0 324px;
-    @include media-breakpoint-down($md) {
-            display: none;
-        }
+   
 }
 .users-table__tickets {
     flex:0 0 303px;
-    @include media-breakpoint-down($md) {
+    @include media-breakpoint-down($xl) {
             display: none;
-        }
+    }
+    @include media-breakpoint-up($xl) {
+        flex: 1 0 303px;
+    }
 }
 .users-table__primary {
     flex:0 0 318px;
-    @include media-breakpoint-down($md) {
+    @include media-breakpoint-down($xl) {
             display: none;
         }
+    @include media-breakpoint-up($xl) {
+        flex: 1 0 318px;
+    }
 }
 .users-table__portal-status {
     flex:0 0 160px;
-    @include media-breakpoint-down($md) {
+    @include media-breakpoint-down($xl) {
             display: none;
         }
 }
