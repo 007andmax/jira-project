@@ -21,8 +21,13 @@
         text-align: right;
         padding: 0px;
         line-height: 15px;
+        width: auto;
         &:hover {
-            border: none;
+            border: 1px solid transparent;
+        }
+        &:focus {
+            border: 1px solid $blue-light-600;
+            padding: 6px 8px 5px 8px;
         }
     }
 }

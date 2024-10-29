@@ -18,7 +18,10 @@
             </label>
         </div>
     </div>
-    <div class="users-table__company-full">
+    <div
+        class="users-table__company-full"
+        (click)="select()"
+    >
         <div class="company-icon-container qt-df qt-ai-c qt-jc-c qt-mr-8">
             <span class="qt-icon icon__companies qt-sz-16 qt-dib"></span>
         </div>
@@ -40,7 +43,7 @@
     </div>
     <div class="users-table__contract-no">
         <user-table-default-subscription
-            class="users-table__subscription--dropdown"
+            class="users-table__subscription--dropdown qt-w100"
             (onChangeDefault)="onChangeDefaultSubscriptions($event)"
             [defaultSubscriptions]="defaultSubscriptions"
         >

@@ -11,6 +11,7 @@ import { UsersService } from 'src/app/services/users/users.service';
 import { TagsService } from 'src/app/services/tags/tags.service';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { PhoneNumber } from 'src/class/phone-number';
+import { UserCustomerCompaniesInfo } from '../../users/class/user-customer-companies-info';
 
 @Component({
   selector: 'app-users-details-left-panel',
@@ -23,6 +24,8 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
   modelForm: FormGroup;
   submitted: boolean = false;
   reEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+  isChange: boolean = false;
+  seelectedCustomerCompaniesInfo: UserCustomerCompaniesInfo;
   @Input() user: UserProfile = new UserProfile();
   @Output() onEdit = new EventEmitter<any>();
   @Output() onDraftEmail = new EventEmitter<any>();
@@ -43,6 +46,7 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
       primaryEmail: ["",
         [Validators.required, this.checkEmail()]
       ],
+
     })
     this.user.phoneNumbers.forEach(item => {
       const itemGroup = this.formBuilder.group({
@@ -51,8 +55,16 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
       });
       this.phones.push(itemGroup);
     });
+
     console.log("this.phones", this.phones);
     this.modelForm.controls["primaryEmail"].setValue(this.user.primaryEmail);
+    this.modelForm.valueChanges.subscribe(res => {
+      console.log("res", res);
+      this.isChange = true;
+    })
+    this.usersStateService.onSelectCustomerCompanyInfo.subscribe(data => {
+      this.seelectedCustomerCompaniesInfo = data;
+    })
   }
   checkEmail(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
@@ -83,7 +95,7 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
   updateUser() {
     this.submitted = true;
     console.log("this.modelForm", this.modelForm);
-    if (this.modelForm.invalid) {
+    if (this.modelForm.invalid || !this.isChange) {
 
       return;
     }
@@ -92,6 +104,7 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
 
     this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit())).subscribe(data => {
       this.submitted = false;
+      this.isChange = false;
     }, err => {
       this.submitted = false;
     })
@@ -109,6 +122,9 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
     this.tagsService.setTagsUser(this.user.id, ids).subscribe(data => {
 
     })
+  }
+  onChangeContact() {
+
   }
   onCheckEmail() {
     console.log("this.f2.primaryEmail", this.f2.primaryEmail);
@@ -128,6 +144,41 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
   }
   edit() {
     this.onEdit.emit(null);
+  }
+  getCompany() {
+    return this.seelectedCustomerCompaniesInfo ? this.companiesStateService.getCompanies().find(item => item.id == this.seelectedCustomerCompaniesInfo.companyId) : null;
+  }
+  getContactCompany() {
+    if (this.getCompany()) {
+      let primaryContact,
+        primaryAddress,
+        primaryPhone;
+      if (this.getCompany().companyInfo) {
+        if (this.getCompany().companyInfo.contacts) {
+          for (let contact of this.getCompany().companyInfo.contacts) {
+            if (!primaryContact || contact.priority > primaryContact.priority) primaryContact = contact;
+          }
+        }
+        if (this.getCompany().companyInfo.addresses) {
+          for (let address of this.getCompany().companyInfo.addresses) {
+            if (address.isPrimary) primaryAddress = address;
+          }
+        }
+        if (primaryAddress && primaryAddress.phoneNumbers.length) {
+          primaryPhone = primaryAddress.phoneNumbers;
+          primaryPhone.forEach(element => {
+            if (element.number[0] === "1") element.number = `+${element.number}`;
+          });
+
+        }
+      }
+      return {
+        primaryAddress: primaryAddress,
+        primaryContact: primaryContact,
+        primaryPhone: primaryPhone
+      }
+    }
+    return null
   }
   addCompany() {
     this.usersStateService.showAddCustomerCompaniesInfo();

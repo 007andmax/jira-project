@@ -20,6 +20,18 @@ import { UserTableCustomSubscriptionModule } from '../users/users-table/user-tab
 import { UsersDetailsTabCompaniesAddComponent } from './users-details-tab-companies/users-details-tab-companies-add/users-details-tab-companies-add.component';
 import { CompanyDropDownModule } from '../shared/company-drop-down/company-drop-down.module';
 import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
+import { UsersAsideDetailTicketsModule } from '../users/users-aside-detail/users-aside-detail-tickets/users-aside-detail-tickets.module';
+import { UsersDetailsTabTicketsComponent } from './users-details-tab-tickets/users-details-tab-tickets.component';
+import { UsersDetailsTabTicketsItemComponent } from './users-details-tab-tickets/users-details-tab-tickets-item/users-details-tab-tickets-item.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { UsersDetailsTabPasswordsComponent } from './users-details-tab-passwords/users-details-tab-passwords.component';
+import { UsersDetailsTabPasswordsItemComponent } from './users-details-tab-passwords/users-details-tab-passwords-item/users-details-tab-passwords-item.component';
+import { UsersDetailsTabDocumentsComponent } from './users-details-tab-documents/users-details-tab-documents.component';
+import { UsersDetailsTabDocumentsItemComponent } from './users-details-tab-documents/users-details-tab-documents-item/users-details-tab-documents-item.component';
+import { DocumentsTemplatesInfoModule } from '../documents/documents-templates/documents-templates-info/documents-templates-info.module';
+import { UsersDetailsTabMessagesComponent } from './users-details-tab-messages/users-details-tab-messages.component';
+import { UsersDetailsTabMessagesFullBodyComponent } from './users-details-tab-messages/users-details-tab-messages-full-body/users-details-tab-messages-full-body.component';
+import { TicketProfileAttachmentsModule } from '../tickets/tickets/ticket-edit-aside/ticket-profile-attachments/ticket-profile-attachments.module';
 
 
 @NgModule({
@@ -29,6 +41,14 @@ import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside
         UsersDetailsTabCompaniesComponent,
         UsersDetailsTabCompaniesItemComponent,
         UsersDetailsTabCompaniesAddComponent,
+        UsersDetailsTabTicketsComponent,
+        UsersDetailsTabTicketsItemComponent,
+        UsersDetailsTabPasswordsComponent,
+        UsersDetailsTabPasswordsItemComponent,
+        UsersDetailsTabDocumentsComponent,
+        UsersDetailsTabDocumentsItemComponent,
+        UsersDetailsTabMessagesComponent,
+        UsersDetailsTabMessagesFullBodyComponent,
     ],
     imports: [
         CommonModule,
@@ -46,7 +66,10 @@ import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside
         PreviewPhoneMaskModule,
         UserTableCustomSubscriptionModule,
         CompanyDropDownModule,
-        ClickOutsideModule
+        ClickOutsideModule,
+        InfiniteScrollModule,
+        DocumentsTemplatesInfoModule,
+        TicketProfileAttachmentsModule
     ],
 })
 export class UsersDetailsModule { }

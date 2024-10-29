@@ -1,0 +1,137 @@
+<div
+    class="qt-table-modern__row qt-table-modern__row--height-auto"
+    [ngClass]="{'pointer':!item.isCategory && getPermissions('VIEW_DOCUMENT'),
+    'documents-no-valid' : showNotificationReview}"
+    (click)="showTemplate()"
+>
+    <div class="users-table__company-full">
+        <div
+            class="qt-sz-16 qt-bg-contain qt-mr-8 qt-fs-0"
+            [ngClass]="{'qt-icon icon__folder':item.isCategory,
+            'icon__templete-thumb':!item.isCategory}"
+        ></div>
+        <div
+            class="title ellipsis"
+            [textContent]="item.isCategory ? item.categoryName : item.title"
+        ></div>
+    </div>
+    <div
+        class="users-table__industry qt-fd-c qt-ai-fs qt-jc-c"
+        [textContent]="item.isCategory ? '' : getCreateBy()"
+        (click)="navigateToCategory()"
+        [ngClass]="{'pointer':item.isCategory}"
+    >
+    </div>
+    <div
+        class="users-table__contract-no"
+        [textContent]="item.isCategory ? '' : parseCreateAt()"
+        (click)="navigateToCategory()"
+        [ngClass]="{'pointer':item.isCategory}"
+    >
+
+    </div>
+    <div
+        class="users-table__tickets qt-fd-c qt-ai-fs qt-jc-c"
+        [textContent]="item.isCategory ? '' : parseReviewAt()"
+        (click)="navigateToCategory()"
+        [ngClass]="{'pointer':item.isCategory}"
+    ></div>
+    <div
+        class="users-table__portal-status"
+        (click)="$event.stopPropagation();"
+    >
+        <div
+            ngbDropdown
+            [container]="'body'"
+        >
+            <div
+                class="qt-ic-c qt-icon icon__more  qt-pointer qt-sz-16 qt-bg-contain"
+                id="dropdownBasic1"
+                ngbDropdownToggle
+            ></div>
+            <ul
+                class="qt-dropdown-menu"
+                ngbDropdownMenu
+                *ngIf="item.isCategory"
+                aria-labelledby="dropdownBasic1"
+            >
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                    (click)="goToAddDocument()"
+                    *ngIf="getPermissions('CREATE_DOCUMENT')"
+                >
+                    <div class="qt-icon icon__add-document qt-sz-16 qt-mr-8"></div>
+                    Add New Document
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                    (click)="removeCategory()"
+                >
+                    <div class="qt-icon icon__delete qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Delete
+                </li>
+            </ul>
+            <ul
+                class="qt-dropdown-menu"
+                ngbDropdownMenu
+                *ngIf="!item.isCategory"
+                aria-labelledby="dropdownBasic1"
+            >
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                    (click)="goToEditDocument()"
+                    *ngIf="getPermissions('EDIT_DOCUMENT')"
+                >
+                    <div class="qt-icon icon__edit qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Edit
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                    (click)="goToCloneDocument()"
+                    *ngIf="getPermissions('CREATE_DOCUMENT')"
+                >
+                    <div class="icon__clone-document qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Clone Document
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                    (click)="printPdf()"
+                >
+                    <div class="qt-icon icon__print qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Print
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                    (click)="exportPdf()"
+                >
+                    <div class="qt-icon icon__download qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Export PDF
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                    (click)="previewDocument()"
+                >
+                    <div class="qt-icon icon__external-link qt-sz-16 qt-mr-8"></div>
+                    Open in new tab
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                    class="remove-item"
+                    (click)="removeDocument()"
+                    *ngIf="getPermissions('DELETE_DOCUMENT')"
+                >
+                    <div class="qt-icon icon__delete qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Delete
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

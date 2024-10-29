@@ -13,6 +13,9 @@ import { UsersRealTimeService } from 'src/app/states/users/users-real-time.servi
 import { UserCustomerCompaniesInfo } from '../users/class/user-customer-companies-info';
 import { UserCustomSubscription } from '../users/class/user-custom-subscription';
 import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-role-state.service';
+import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
+import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
+import { StatusColor } from '../tickets/class/status-color';
 
 @Component({
   selector: 'app-users-details',
@@ -33,6 +36,8 @@ export class UsersDetailsComponent implements OnInit {
     private usersRealTimeService: UsersRealTimeService,
     public cd: ChangeDetectorRef,
     public customerRoleStateService: CustomerRoleStateService,
+    private ticketsStateService: TicketsStateService,
+    private leftPanelService: LeftPanelService,
   ) { }
 
   ngOnInit() {
@@ -48,6 +53,7 @@ export class UsersDetailsComponent implements OnInit {
     })
     this.sub.add(onGetUsers);
     if (!this.customerRoleStateService.isGetUserRole) this.customerRoleStateService.onInitGetUsersRoles();
+    this.getColors();
     setTimeout(() => {
 
       let stompClient = this.usersRealTimeService.changeSubscriptionsUsers.subscribe(newChange => {
@@ -66,7 +72,16 @@ export class UsersDetailsComponent implements OnInit {
       this.sub.add(stompClient);
     }, 3000);
   }
-
+  getColors() {
+    if (this.ticketsStateService.getListStatusColor().length === 0) {
+      this.leftPanelService.getColors().subscribe((data: any) => {
+        let statusColors = data.map(item => {
+          return new StatusColor(item.borderColor, item.textColor);
+        })
+        this.ticketsStateService.onColorStatus(statusColors);
+      })
+    }
+  }
   setUserRoutingId(id) {
     let user = this.usersStateService.getAllUsers().find(item => item.id == id);
     console.log("user", user);
@@ -82,6 +97,9 @@ export class UsersDetailsComponent implements OnInit {
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
+  }
+  setTab(data) {
+    this.tab = data;
   }
   public showAsideForDraftEmail() {
     this.draftEmailStateService.setAction(USERS);

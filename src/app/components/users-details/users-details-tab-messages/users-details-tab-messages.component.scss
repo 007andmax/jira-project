@@ -1,0 +1,148 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
+
+.qt-page-list__body-tbody {
+    min-width: auto !important;
+    border-spacing: 0;
+    padding: 16px;
+
+    tr {
+        display: block;
+        padding: 12px 16px;
+        border: 1px solid $gray-100;
+        border-radius: 12px;
+        background-color: $white;
+        cursor: pointer;
+
+        &:not(:last-child) {
+            margin-bottom: 16px;
+        }
+
+        &:hover {
+            border-color: $gray-300;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        &:hover h3 {
+            color: $blue-light-600;
+        }
+    }
+
+    td {
+        display: block;
+        height: auto;
+        padding: 0;
+    }
+}
+
+.qt-page-list__body-table-container {
+    position: relative;
+    min-height: calc(100vh - 110px - 64px - 80px);
+    height: 100%;
+    overflow: scroll;
+}
+
+.pengind-loading {
+    bottom: 20px;
+    top: auto;
+}
+
+.qt-page-list__body {
+    position: relative;
+    background-color: $gray-25;
+}
+
+.messages-table__account-text {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+.messages-table-user {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+
+    .messages-table-user-name {
+        font-size: 12px;
+        color: $gray-900;
+    }
+
+    .messages-table-user-email {
+        font-size: 12px;
+        color: $gray-500;
+        font-weight: 500;
+    }
+}
+
+.messages-table-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+
+    &::after {
+        position: absolute;
+        content: " ";
+        height: 1px;
+        background: $gray-100;
+        right: 0;
+        left: 0;
+        bottom: 0;
+    }
+}
+
+.messages-table__account-date,
+.messages-table__account-time {
+    font-size: 11px;
+    line-height: 16px;
+    color: $gray-400;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+h3 {
+    font-size: 16px;
+    font-weight: 500;
+    font-family: "Inter", sans-serif;
+    line-height: 1.5;
+    color: $gray-900;
+}
+
+.messages-table__account-text {
+    font-size: 13px;
+    font-family: "Inter", sans-serif;
+    color: $gray-900;
+    font-weight: 500;
+}
+
+.messages-table__account {
+    &::after {
+        display: none;
+    }
+}
+
+.messages-table__account-data {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.order-id {
+    color: $blue-light-600;
+    font-size: 11px;
+    line-height: 16px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.no-exist-messages {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}

@@ -13,6 +13,12 @@
             <div class="qt-page-list__container qt-df">
 
 
+
+
+
+
+
+
                 <app-users-details-left-panel
                     #leftPanel
                     [user]="user"
@@ -65,23 +71,22 @@
                         *ngIf="tab === 'companies'"
                         [user]="user"
                     ></app-users-details-tab-companies>
-                    <!-- <users-aside-detail-tickets
+                    <app-users-details-tab-tickets
                         *ngIf="tab === 'tickets'"
-                        #ticketsDetail
                         [setUser]="user"
-                    ></users-aside-detail-tickets>
-                    <users-aside-detail-documents
+                    ></app-users-details-tab-tickets>
+                    <app-users-details-tab-documents
                         *ngIf="tab === 'documents'"
                         [user]="user"
-                    ></users-aside-detail-documents>
-                    <users-aside-detail-passwords
+                    ></app-users-details-tab-documents>
+                    <app-users-details-tab-passwords
                         *ngIf="tab === 'passwords' && getPermissions('VIEW_PASSWORD_SECTION')"
                         [user]="user"
-                    ></users-aside-detail-passwords>
-                    <users-aside-detail-messages
+                    ></app-users-details-tab-passwords>
+                    <app-users-details-tab-messages
                         *ngIf="tab === 'messages'"
                         [user]="user"
-                    ></users-aside-detail-messages> -->
+                    ></app-users-details-tab-messages>
                 </div>
             </div>
         </div>

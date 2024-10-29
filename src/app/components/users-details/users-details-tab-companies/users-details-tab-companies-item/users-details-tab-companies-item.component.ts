@@ -14,6 +14,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-role-state.service';
 import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
   selector: 'app-users-details-tab-companies-item',
@@ -40,6 +41,7 @@ export class UsersDetailsTabCompaniesItemComponent implements OnInit, OnDestroy 
     private usersRealTimeService: UsersRealTimeService,
     public cd: ChangeDetectorRef,
     public customerRoleStateService: CustomerRoleStateService,
+    public usersStateService: UsersStateService,
   ) { }
 
 
@@ -85,6 +87,9 @@ export class UsersDetailsTabCompaniesItemComponent implements OnInit, OnDestroy 
       this.primaryContact = primaryContact;
       this.primaryPhone = primaryPhone;
     }
+  }
+  select() {
+    this.usersStateService.setSelectedCustomerCompanyInfo(this.customerCompaniesInfo);
   }
   onSelectJobTitle(data) {
     this.customerCompaniesInfo.setJobTitleDto(data);

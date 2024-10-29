@@ -38,6 +38,7 @@ export class UsersStateService {
   onInitGlobalFilter: EventEmitter<any> = new EventEmitter();
   onToggleFilter: EventEmitter<any> = new EventEmitter();
   onGetGlobalFilters: EventEmitter<any> = new EventEmitter();
+  onSelectCustomerCompanyInfo: EventEmitter<any> = new EventEmitter();
   onSelectCustomerCompaniesInfo: EventEmitter<any> = new EventEmitter();
   onShowAddCustomerCompaniesInfo: EventEmitter<any> = new EventEmitter();
   userForArchive: User = null;
@@ -105,6 +106,9 @@ export class UsersStateService {
   }
   public showAddCustomerCompaniesInfo() {
     this.onShowAddCustomerCompaniesInfo.emit(null)
+  }
+  public setSelectedCustomerCompanyInfo(data) {
+    this.onSelectCustomerCompanyInfo.emit(data)
   }
   public setSelectedCustomerCompaniesInfo(data) {
     this.onSelectCustomerCompaniesInfo.emit(data)

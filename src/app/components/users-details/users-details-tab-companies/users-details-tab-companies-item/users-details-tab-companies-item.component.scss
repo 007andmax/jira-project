@@ -43,6 +43,7 @@ tr {
     min-height: 24px;
 }
 .users-table__company-full {
+    cursor: default;
     flex: 0 0 336px;
     @include media-breakpoint-up($xl) {
             flex: 1 0 336px;
@@ -59,6 +60,7 @@ tr {
 }
 
 .users-table__tickets {
+    cursor: default;
     flex: 0 0 303px;
     @include media-breakpoint-down($xl) {
             display: none;
@@ -69,6 +71,7 @@ tr {
 }
 
 .users-table__primary {
+    cursor: default;
     flex: 0 0 318px;
     @include media-breakpoint-down($xl) {
             display: none;

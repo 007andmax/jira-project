@@ -167,7 +167,10 @@
             </div>
         </form>
     </div>
-    <div class="left-panel-company-details qt-pl-16 qt-pr-16 qt-pt-16 qt-pb-16">
+    <div
+        class="left-panel-company-details qt-pl-16 qt-pr-16 qt-pt-16 qt-pb-16"
+        *ngIf="getCompany()"
+    >
         <div class="qt-input-block">
             <label class="qt-input-block__label qt-fs-14 qt-fw-600 qt-mb-12">Company Details</label>
             <div class="qt-df qt-ai-c qt-jc-sb qt-mb-16">
@@ -175,28 +178,41 @@
                     <div class="icon__companies qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"></div>
                     <span class="company-details-field">Company</span>
                 </div>
-                <div class="ellipsis qt-fs-14 qt-fw-500 qt-color-gray-900 company-details-value">wefewfwefew</div>
+                <div
+                    class="ellipsis qt-fs-14 qt-fw-500 qt-color-gray-900 company-details-value"
+                    [textContent]="getCompany().name"
+                ></div>
             </div>
             <div class="qt-df qt-ai-c qt-jc-sb qt-mb-16">
                 <div class="qt-df qt-ai-c">
                     <div class="icon__phone qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"></div>
                     <span class="company-details-field">Telephone</span>
                 </div>
-                <div class="ellipsis qt-fs-14 qt-fw-500 qt-color-gray-900 company-details-value">wefewfwefew</div>
+                <div
+                    class="ellipsis qt-fs-14 qt-fw-500 qt-color-gray-900 company-details-value"
+                    [textContent]="(getContactCompany() && getContactCompany().primaryPhone) ? getContactCompany().primaryPhone[0].number : ''"
+                ></div>
             </div>
             <div class="qt-df qt-ai-c qt-jc-sb qt-mb-16">
                 <div class="qt-df qt-ai-c">
                     <div class="icon__email qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"></div>
                     <span class="company-details-field">Email</span>
                 </div>
-                <div class="ellipsis qt-fs-14 qt-fw-500 qt-color-gray-900 company-details-value">wefewfwefew</div>
+                <div
+                    class="ellipsis qt-fs-14 qt-fw-500 qt-color-gray-900 company-details-value"
+                    [textContent]="(getContactCompany() && getContactCompany().primaryContact) ?  getContactCompany().primaryContact.primaryEmail : ''"
+                ></div>
             </div>
             <div class="qt-df qt-ai-c qt-jc-sb">
                 <div class="qt-df qt-ai-c">
                     <div class="icon__map-pin qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"></div>
                     <span class="company-details-field">Address</span>
                 </div>
-                <div class="ellipsis qt-fs-14 qt-fw-500 qt-color-gray-900 company-details-value">wefewfwefew</div>
+                <div
+                    class="ellipsis qt-fs-14 qt-fw-500 qt-color-gray-900 company-details-value"
+                    [textContent]="(getContactCompany() && getContactCompany().primaryAddress) ? getContactCompany().primaryAddress.address : ''"
+                >
+                </div>
             </div>
         </div>
     </div>
