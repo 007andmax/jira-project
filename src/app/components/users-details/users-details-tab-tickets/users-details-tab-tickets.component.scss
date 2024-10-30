@@ -14,11 +14,7 @@
 }
 
 .users-table__company-full {
-    flex: 0 0 336px;
-
-    @include media-breakpoint-up($xl) {
-        flex: 1 0 336px;
-    }
+    flex: 1 0 336px;
 }
 
 .users-table__industry {
@@ -31,37 +27,20 @@
 }
 
 .users-table__tickets {
-    flex: 0 0 303px;
-
-    @include media-breakpoint-down($xl) {
-        display: none;
-    }
-
-    @include media-breakpoint-up($xl) {
-        flex: 1 0 303px;
-    }
+    flex: 1 0 303px;
 }
 
 .users-table__primary {
-    flex: 0 0 318px;
-
-    @include media-breakpoint-down($xl) {
-        display: none;
-    }
-
-    @include media-breakpoint-up($xl) {
-        flex: 1 0 318px;
-    }
+    flex: 1 0 318px;
 }
 
 .users-table__portal-status {
     flex: 0 0 160px;
-
-    @include media-breakpoint-down($xl) {
-        display: none;
-    }
 }
 
 .qt-page-list__header-thead__row>div {
     padding: 11px 16px !important;
+}
+.qt-page-list__body-table-container {
+    min-height: calc(100vh - 110px - 64px - 80px);
 }

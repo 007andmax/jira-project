@@ -24,10 +24,10 @@
 .placeholder-subscription {
     position: relative;
     &:after {
-        content: "Select marketing subscription";
+        content: "No subscription selected, Click to select";
         position: absolute;
         top: 7px;
-        left: 15px;
+        left: 0px;
         color: $gray-400;
         font-size: 13px;
     }

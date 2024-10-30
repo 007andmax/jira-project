@@ -45,11 +45,7 @@ tr {
 }
 
 .users-table__company-full {
-    flex: 0 0 336px;
-
-    @include media-breakpoint-up($xl) {
-        flex: 1 0 336px;
-    }
+    flex: 1 0 336px;
 }
 
 .users-table__industry {
@@ -62,35 +58,15 @@ tr {
 }
 
 .users-table__tickets {
-    flex: 0 0 303px;
-
-    @include media-breakpoint-down($xl) {
-        display: none;
-    }
-
-    @include media-breakpoint-up($xl) {
-        flex: 1 0 303px;
-    }
+    flex: 1 0 303px;
 }
 
 .users-table__primary {
-    flex: 0 0 318px;
-
-    @include media-breakpoint-down($xl) {
-        display: none;
-    }
-
-    @include media-breakpoint-up($xl) {
-        flex: 1 0 318px;
-    }
+    flex: 1 0 318px;
 }
 
 .users-table__portal-status {
     flex: 0 0 160px;
-
-    @include media-breakpoint-down($xl) {
-        display: none;
-    }
 }
 
 .company-icon-container {
@@ -106,4 +82,13 @@ tr {
 
 .qt-table-modern__row>div {
     padding: 16px;
+}
+/deep/ .users-details-select-company {
+    input {
+        border-color: transparent;
+        padding: 11px 14px 11px 0px;
+    } 
+    .report-caret-icon {
+        display: none;
+    }
 }

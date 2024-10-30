@@ -7,14 +7,20 @@
 >
     <div class="users-table__check"></div>
     <div class="users-table__company-full">
+        <div class="company-icon-container qt-df qt-ai-c qt-jc-c qt-mr-8">
+            <span class="qt-icon icon__companies qt-sz-16 qt-dib"></span>
+        </div>
         <company-drop-down
-            [placeholder]="'Company'"
+            class="users-details-select-company"
+            [placeholder]="'Select Company'"
             [errorMessage]="'The company name is required'"
             [field]="'name'"
             [search]="true"
             [change]="true"
             [isBlockClear]="true"
             (onSelectedItem)="onSelectCompany($event)"
+            [dropdownWidth]="'400px'"
+            [heightInput]="'32px'"
         >
         </company-drop-down>
     </div>

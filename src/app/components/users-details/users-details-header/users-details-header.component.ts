@@ -41,7 +41,7 @@ export class UsersDetailsHeaderComponent implements OnInit {
       if (index > -1) this.user.customerCompaniesInfo.splice(index, 1);
     })
     this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit())).subscribe(data => {
-
+      this.selectedCustomerCompaniesInfo = [];
     })
   }
   public getPermissions(action) {

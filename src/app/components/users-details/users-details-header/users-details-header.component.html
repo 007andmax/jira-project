@@ -20,7 +20,7 @@
                 <a
                     href="javascript:;"
                     class="qt-button --sm  --gray qt-button--with-icon qt-jc-c pointer button-gl-number__add"
-                    *ngIf="!user.deletedAt && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user))"
+                    *ngIf="(!user.deletedAt && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user))) && selectedCustomerCompaniesInfo.length == 0"
                     (click)="edit()"
                 >
                     <span class="qt-icon icon__edit qt-sz-16 qt-dib qt-mr-8 qt-button-icon"></span>
@@ -29,7 +29,7 @@
                 <a
                     href="javascript:;"
                     class="qt-button --sm  --gray qt-button--with-icon qt-jc-c pointer qt-ml-12 button-gl-number__add"
-                    *ngIf="!user.deletedAt && !customerPortalStateService.isCustomerPortal"
+                    *ngIf="!user.deletedAt && !customerPortalStateService.isCustomerPortal && selectedCustomerCompaniesInfo.length == 0"
                     (click)="showAsideForDraftEmail()"
                 >
                     <span class="qt-icon icon__email-send qt-sz-16 qt-dib qt-mr-8 qt-button-icon"></span>
