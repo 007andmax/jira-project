@@ -8,10 +8,10 @@ import { UsersStateService } from "src/app/states/users/users-state.service";
 export class PermissionTicketsService implements CanActivate {
     constructor(private permissionsService: PermissionsService, private usersStateService: UsersStateService) { }
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
-        if (this.usersStateService.getCurrentUser()) return this.getCompanyInfoPermissions('VIEW_ALL_TICKETS') || this.getCompanyInfoPermissions('VIEW_MY_TICKETS') || this.getCompanyInfoPermissions('EDIT_OTHER_TICKETS');
+        if (this.usersStateService.getCurrentUser()) return this.getCompanyInfoPermissions('VIEW_ALL_TICKETS') || this.getCompanyInfoPermissions('EDIT_OTHER_TICKETS');
         return new Promise((resolve, reject) => {
             this.usersStateService.getOnGetCurrentuser().subscribe(data => {
-                if (this.getCompanyInfoPermissions('VIEW_ALL_TICKETS') || this.getCompanyInfoPermissions('VIEW_MY_TICKETS') || this.getCompanyInfoPermissions('EDIT_OTHER_TICKETS')) {
+                if (this.getCompanyInfoPermissions('VIEW_ALL_TICKETS') || this.getCompanyInfoPermissions('EDIT_OTHER_TICKETS')) {
                     resolve(true);
                 } else {
                     resolve(false);

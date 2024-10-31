@@ -89,7 +89,7 @@ export class CustomerPermissionsComponent implements OnInit, OnDestroy {
     if (index > -1) {
       userPermission.permissions.splice(index, 1);
       let listPermissionsForRemove = [];
-      if (permission === "VIEW_MY_TICKETS" || permission === "VIEW_ALL_TICKETS") listPermissionsForRemove = this.customerRoleStateService.VIEW_MY_TICKETS_related_permissions;
+      if (permission === "VIEW_ALL_TICKETS") listPermissionsForRemove = this.customerRoleStateService.VIEW_MY_TICKETS_related_permissions;
       if (permission === "VIEW_ALL_DEVICES") listPermissionsForRemove = this.customerRoleStateService.VIEW_ALL_DEVICES_related_permissions;
       userPermission.permissions = userPermission.permissions.filter(item => listPermissionsForRemove.indexOf(item) == -1);
     } else {
@@ -103,11 +103,6 @@ export class CustomerPermissionsComponent implements OnInit, OnDestroy {
     let userPermission = this.userPermissions.find(item => item.id == role.id);
     if (!userPermission) return false;
     if (
-      userPermission.permissions.indexOf('VIEW_MY_TICKETS') === -1 &&
-      ["VIEW_ALL_TICKETS"].indexOf(permission) > -1
-    ) {
-      return true;
-    } else if (
       userPermission.permissions.indexOf('VIEW_ALL_TICKETS') === -1 &&
       ["EDIT_OTHER_TICKETS"].indexOf(permission) > -1
     ) {

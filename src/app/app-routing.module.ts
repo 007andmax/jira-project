@@ -34,12 +34,12 @@ const routes: Routes = [
   {
     path: ':domain/tickets',
     loadChildren: './components/tickets/tickets/tickets.module#TicketsModule',
-    canActivate: [PermissionTicketsService, PermissionNoSuperAdminService]
+    canActivate: [PermissionNoSuperAdminService]
   },
   {
     path: ':domain/ticket/:id',
     loadChildren: './components/tickets/tickets/ticket-detail/ticket-detail.module#TicketDetailModule',
-    canActivate: [PermissionTicketsService, PermissionNoSuperAdminService]
+    canActivate: [PermissionNoSuperAdminService]
   },
   {
     path: ':domain/support-page',

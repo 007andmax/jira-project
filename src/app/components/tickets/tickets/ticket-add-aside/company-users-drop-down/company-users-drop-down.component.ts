@@ -70,8 +70,7 @@ export class CompanyUsersDropDownComponent extends DropDownComponent {
     this.list = JSON.parse(JSON.stringify(this.reqList)).map(item => new CompanyUser(item));
   }
   checkCompanyForCustomerPortal(item) {
-    let customerCompaniesInfo = this.usersStateService.getCurrentUser().customerCompaniesInfo.find(customerCompaniesInfo => customerCompaniesInfo.companyId === item.companyId);
-    if (customerCompaniesInfo && customerCompaniesInfo.customerUserRole && customerCompaniesInfo.customerUserRole.getPermission('VIEW_MY_TICKETS') && item.eligibleForTicket == true) return true;
+    if (item.eligibleForTicket == true) return true;
     return false;
   }
   /**

@@ -41,7 +41,6 @@
         [link]="getLinkSection('tickets')"
         target="_blank"
         appRightClickBlank
-        *ngIf="getCompanyInfoPermissions('VIEW_ALL_TICKETS')"
     >
         <li
             [ngClass]="{'--active':activePage === 'company-tickets'}"
