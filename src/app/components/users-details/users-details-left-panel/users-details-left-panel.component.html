@@ -103,7 +103,7 @@
                         [formGroupName]="i"
                     >
                         <div class="qt-df qt-ai-c qt-jc-sb qt-mb-2 relative">
-                            <div class="qt-df qt-ai-c">
+                            <div class="left-panel-contact__details-title qt-df qt-ai-c qt-mr-8">
                                 <div
                                     [ngClass]="{'icon__old-phone':item.value.name == 'FAX',
                         'icon__mobile':item.value.name == 'MOBILE',
@@ -115,54 +115,58 @@
                                     [textContent]="item.value.name == 'OFFICE' ? 'Phone' : item.value.name == 'MOBILE' ? 'Mobile' : item.value.name == 'FAX' ? 'Fax' : ''"
                                 ></span>
                             </div>
-                            <input
-                                type="text"
-                                class="qt-editable-input qt-fw-500"
-                                (blur)="updateUser()"
-                                placeholder="Enter Primary Phone"
-                                formControlName="value"
-                                prefix="+1"
-                                mask="(000) 000-0000 Ext: 999999||000-000-0000"
-                                [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                                [dropSpecialCharacters]="false"
-                                [disabled]="!getPermissions('EDIT_USERS')"
-                                [ngClass]="{'--input-error':submitted && item.controls.value.errors && item.controls.value.errors.validPhoneNumber}"
-                            >
-                            <app-mat-error
-                                class="invalid-feedback"
-                                *ngIf="submitted && item.controls.value.errors && item.controls.value.errors.validPhoneNumber"
-                            >
-                                Phone number is required
-                            </app-mat-error>
+                           <div class="left-panel-contact__details-input-wrap qt-pos-rel qt-w100">
+                             <input
+                               type="text"
+                               class="qt-editable-input qt-fw-500"
+                               (blur)="updateUser()"
+                               placeholder="Enter Primary Phone"
+                               formControlName="value"
+                               prefix="+1"
+                               mask="(000) 000-0000 Ext: 999999||000-000-0000"
+                               [specialCharacters]="['(',')',' ','-','E','x','t',':']"
+                               [dropSpecialCharacters]="false"
+                               [disabled]="!getPermissions('EDIT_USERS')"
+                               [ngClass]="{'--input-error':submitted && item.controls.value.errors && item.controls.value.errors.validPhoneNumber}"
+                             >
+                             <app-mat-error
+                               class="invalid-feedback"
+                               *ngIf="submitted && item.controls.value.errors && item.controls.value.errors.validPhoneNumber"
+                             >
+                               Phone number is required
+                             </app-mat-error>
+                           </div>
                         </div>
                     </div>
                 </div>
                 <div class="qt-df qt-ai-c qt-jc-sb relative">
-                    <div class="qt-df qt-ai-c">
+                    <div class="left-panel-contact__details-title qt-df qt-ai-c qt-mr-8">
                         <div class="icon__email qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"></div>
                         <span>Email</span>
                     </div>
-                    <input
-                        type="text"
-                        class="qt-editable-input qt-fw-500"
-                        (blur)="onCheckEmail()"
-                        placeholder="Enter Email"
-                        [disabled]="!getPermissions('EDIT_USERS')"
-                        formControlName="primaryEmail"
-                        [ngClass]="{'--input-error':submitted && f2.primaryEmail.errors}"
-                    >
-                    <app-mat-error
-                        class="invalid-feedback"
-                        *ngIf="submitted && f2.primaryEmail.errors && f2.primaryEmail.errors.primaryContactEmail"
-                    >
-                        Please enter a valid email address
-                    </app-mat-error>
-                    <app-mat-error
-                        class="invalid-feedback"
-                        *ngIf="submitted && f2.primaryEmail.errors && f2.primaryEmail.errors.existPrimaryContactEmail"
-                    >
-                        The email address is already occupied
-                    </app-mat-error>
+                   <div class="left-panel-contact__details-input-wrap qt-pos-rel qt-w100">
+                     <input
+                       type="text"
+                       class="qt-editable-input qt-fw-500"
+                       (blur)="onCheckEmail()"
+                       placeholder="Enter Email"
+                       [disabled]="!getPermissions('EDIT_USERS')"
+                       formControlName="primaryEmail"
+                       [ngClass]="{'--input-error':submitted && f2.primaryEmail.errors}"
+                     >
+                     <app-mat-error
+                       class="invalid-feedback"
+                       *ngIf="submitted && f2.primaryEmail.errors && f2.primaryEmail.errors.primaryContactEmail"
+                     >
+                       Please enter a valid email address
+                     </app-mat-error>
+                     <app-mat-error
+                       class="invalid-feedback"
+                       *ngIf="submitted && f2.primaryEmail.errors && f2.primaryEmail.errors.existPrimaryContactEmail"
+                     >
+                       The email address is already occupied
+                     </app-mat-error>
+                   </div>
                 </div>
             </div>
         </form>

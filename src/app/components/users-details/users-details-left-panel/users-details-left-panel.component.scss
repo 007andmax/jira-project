@@ -17,15 +17,24 @@
     border-bottom: 1px solid $gray-200;
 }
 .left-panel-contact {
+    &__details-title {
+      min-width: 65px;
+    }
+    &__details-input-wrap {
+      .invalid-feedback {
+        left: 0;
+        bottom: -15px;
+        z-index: 1;
+      }
+    }
     .qt-editable-input {
         text-align: right;
-        padding: 0px;
         line-height: 15px;
         width: 100%;
         padding: 6px 8px 5px 8px;
         &:focus {
             border: 1px solid $blue-light-600;
-           
+
         }
     }
 }
@@ -33,10 +42,21 @@
     width: 360px;
     border-right: 1px solid $gray-200;
 }
-.terms-n-conditions__textarea {
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0px !important;
+.user-detail__row-info-value {
+  .terms-n-conditions__textarea {
+    border-color: transparent;
+    box-shadow: none;
+
+    &:hover {
+      border-color: $gray-200;
+    }
+    &:focus {
+      border-color: $blue-light-600;
+    }
+    &.--input-error:focus {
+      border-color: $red-600;
+    }
+  }
 }
 .draft-email-btn,.actions-btn {
     width: 28px;
