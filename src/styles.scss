@@ -556,7 +556,7 @@ app-company-dash-detail {
           background: url("./assets/img/icons/tags.svg");
         }
         input {
-          height: 38px !important;      
+          height: 38px !important;
           padding: 11px 14px;
           margin: 0;
           min-width: 100px;
@@ -791,8 +791,8 @@ app-company-dash-detail {
       position: absolute;
       top: 2px;
       right: -3px;
-      width: 14px;
-      height: 14px;
+      width: 16px;
+      height: 16px;
       mask-image: url("/assets/img/icons/close.svg");
       background-color: $gray-400;
       mask-position: center;
@@ -3353,7 +3353,7 @@ input.--input-error:hover {
   .mat-form-field-underline {
     display: none;
   }
-  
+
   .mat-form-field-label-wrapper {
     position: absolute;
     left: 0;
@@ -3502,7 +3502,7 @@ app-company-devices-tags {
         border: none;
       }
 
-     
+
 
       .mat-form-field-appearance-legacy .mat-form-field-wrapper {
         padding: 0;
@@ -3585,18 +3585,18 @@ app-company-devices-edit-ip,app-company-devices-edit-mac {
 app-multi-company-drop-down {
  &:before {
      display: none;
-     
+
   }
 
    .mat-form-field-label-wrapper {
      top: -20px;
      padding-top: 15px;
-    
+
   }
 
    .mat-form-field-wrapper {
      padding-bottom: 0px !important;
-    
+
   }
   .mat-form-field {
       width: 100%;

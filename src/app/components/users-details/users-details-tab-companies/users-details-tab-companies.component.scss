@@ -6,7 +6,7 @@
     padding: 16px !important;
 }
 .qt-page-list__header-thead-container {
-    
+
 }
 .users-table__check {
     border-top-left-radius: 8px;
@@ -14,14 +14,14 @@
 }
 .users-table__company-full {
     flex:1 0 336px;
-   
+
 }
 .users-table__industry {
     flex:0 0 170px;
 }
 .users-table__contract-no {
-    flex:0 0 324px;
-   
+    flex:0 0 380px;
+
 }
 .users-table__tickets {
     flex:1 0 303px;
@@ -42,7 +42,7 @@
 }
 .qt-page-list__body {
     overflow: auto;
-    
+
 }
 .qt-page-list__body-table-container {
     min-height: calc(100vh - 110px - 64px - 80px);
