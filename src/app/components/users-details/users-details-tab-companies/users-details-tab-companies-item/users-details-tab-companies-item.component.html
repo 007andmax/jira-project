@@ -37,6 +37,7 @@
             [field]="'name'"
             [search]="true"
             [change]="true"
+            [container]="'body'"
             [editItem]="customerCompaniesInfo.jobTitleDto"
             (onSelectedItem)="onSelectJobTitle($event)"
         ></app-drop-down>
@@ -87,6 +88,7 @@
             [heightInput]="'32px'"
             *ngIf="customerRoleStateService.isGetUserRole"
             [placeholder]="'Select role'"
+            [container]="'body'"
             [list]="userRoles"
             [field]="'name'"
             [search]="true"
