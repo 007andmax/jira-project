@@ -41,6 +41,7 @@ export class UsersStateService {
   onSelectCustomerCompanyInfo: EventEmitter<any> = new EventEmitter();
   onSelectCustomerCompaniesInfo: EventEmitter<any> = new EventEmitter();
   onShowAddCustomerCompaniesInfo: EventEmitter<any> = new EventEmitter();
+  isShowAddCustomerCompaniesInfo: boolean = false;
   userForArchive: User = null;
   usersForArchive: Array<User> = [];
   userForDeArchive: User = null;
@@ -105,7 +106,11 @@ export class UsersStateService {
     })
   }
   public showAddCustomerCompaniesInfo() {
+    this.isShowAddCustomerCompaniesInfo = true;
     this.onShowAddCustomerCompaniesInfo.emit(null)
+  }
+  public setIsShowAddCustomerCompaniesInfo(data) {
+    this.isShowAddCustomerCompaniesInfo = data;
   }
   public setSelectedCustomerCompanyInfo(data) {
     this.onSelectCustomerCompanyInfo.emit(data)

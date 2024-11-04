@@ -18,8 +18,15 @@ export class UsersDetailsTabCompaniesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log("this.usersStateService.isShowAddCustomerCompaniesInfo", this.usersStateService.isShowAddCustomerCompaniesInfo);
+    if (this.usersStateService.isShowAddCustomerCompaniesInfo) {
+      console.log("this.isShowAdd", this.isShowAdd);
+      this.isShowAdd = true;
+      this.usersStateService.setIsShowAddCustomerCompaniesInfo(false);
+    }
     this.usersStateService.onShowAddCustomerCompaniesInfo.subscribe(data => {
       this.isShowAdd = true;
+      this.usersStateService.setIsShowAddCustomerCompaniesInfo(false);
     })
   }
   updateUser() {

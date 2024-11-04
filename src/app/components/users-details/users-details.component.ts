@@ -71,6 +71,9 @@ export class UsersDetailsComponent implements OnInit {
       });
       this.sub.add(stompClient);
     }, 3000);
+    this.usersStateService.onShowAddCustomerCompaniesInfo.subscribe(data => {
+      this.tab = 'companies';
+    })
   }
   getColors() {
     if (this.ticketsStateService.getListStatusColor().length === 0) {
