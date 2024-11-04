@@ -33,8 +33,8 @@ export class CustomerPortalStateService {
     return currentUser.customerCompaniesInfo.some(item => item.customerUserRole.getPermission(permission));
   }
   public checkShowTabTicketsAsideUserDetail(currentUser, user) {
-    if (this.isCustomerPortal && this.getPermissionCustomerUser(currentUser, 'VIEW_ALL_TICKETS')
-      && currentUser.id != user.id || currentUser.id == user.id || !this.isCustomerPortal) {
+    if (this.isCustomerPortal && currentUser.customerCompaniesInfo.filter(item => user.customerCompaniesInfo.some(userCompany => userCompany.companyId == item.companyId)).some(item => item.customerUserRole.getPermission('VIEW_ALL_TICKETS'))
+      && currentUser.id != user.id || this.isCustomerPortal && currentUser.id == user.id || !this.isCustomerPortal) {
       return true;
     } else {
       return false;
