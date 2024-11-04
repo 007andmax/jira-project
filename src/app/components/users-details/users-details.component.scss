@@ -1,7 +1,34 @@
 @import "./src/assets/styles/variable";
 
+/deep/ .qt-page-list {
+  min-height: unset;
+}
+.user-detail-statistics {
+  width: calc(100vw - 360px - 16px * 4 - 282px);
+  height: calc(100vh - 64px - 60px - 16px * 2);
+  //overflow-x: auto;
+  overflow-y: clip;
+
+  /deep/ .qt-page-list {
+    .qt-page-list__body {
+      //overflow: unset;
+      height: calc(100% - 48px);
+      overflow-y: auto;
+      width: calc(100vw - 360px - 20px* 4 - 282px);
+      //overflow-x: clip;
+    }
+    &.users-page {
+      height: 100%;
+      min-height: unset;
+    }
+    .qt-page-list__body-table-container {
+      min-height: unset;
+    }
+  }
+}
+
 .page-list-users {
-    padding: 0px;
+    padding: 0;
 }
 .qt-page-list__body {
     background-color: $white;
@@ -9,11 +36,13 @@
     border: 1px solid $gray-100;
 }
 .users-page {
-    padding: 16px !important;
+    padding: 16px;
 }
 .tabs {
     display: flex;
     align-items: center;
+    position: sticky;
+    left: 0;
     padding: 32px 16px 14px 16px;
     border-bottom: 1px solid $gray-200;
 
