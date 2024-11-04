@@ -286,9 +286,9 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
     return (this.usersStateService.getCurrentUser() && this.usersStateService.getCurrentUser().accountType == "CLIENT" && this.usersStateService.getCurrentUser().customerCompaniesInfo.some(compnayInfo => compnayInfo.customerUserRole.getPermission(action)));
   }
   setDefaultTypeFilter() {
-    this.panelTickets.setTypeFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage)
-    this.ticketsStateService.onChangeTypeFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
-    this.ticketsStateService.onChangeLeftPanelFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
+    this.panelTickets.setTypeFilter(this.currentUser.startPage == "MY_TICKETS" || this.currentUser.accountType == "CLIENT" ? "USERS" : this.currentUser.startPage)
+    if (!this.customerPortalStateService.isCustomerPortal) this.ticketsStateService.onChangeTypeFilter(this.currentUser.startPage == "MY_TICKETS" || this.currentUser.accountType == "CLIENT" ? "USERS" : this.currentUser.startPage);
+    this.ticketsStateService.onChangeLeftPanelFilter(this.currentUser.startPage == "MY_TICKETS" || this.currentUser.accountType == "CLIENT" ? "USERS" : this.currentUser.startPage);
   }
   changePage(page) {
     this.page = page;
