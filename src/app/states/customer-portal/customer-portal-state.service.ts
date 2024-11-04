@@ -23,7 +23,8 @@ export class CustomerPortalStateService {
     this.isCustomerPortal = data;
   }
   public checkEditTicket(currentUser, createdUserId, companyId) {
-    if (currentUser.customerCompaniesInfo.find(item => item.companyId === companyId).customerUserRole.getPermission('EDIT_OTHER_TICKETS')) {
+    if (currentUser.customerCompaniesInfo.find(item => item.companyId === companyId).customerUserRole.getPermission('EDIT_OTHER_TICKETS') ||
+      currentUser.id == createdUserId) {
       return true;
     }
     return false;
@@ -33,7 +34,7 @@ export class CustomerPortalStateService {
   }
   public checkShowTabTicketsAsideUserDetail(currentUser, user) {
     if (this.isCustomerPortal && this.getPermissionCustomerUser(currentUser, 'VIEW_ALL_TICKETS')
-      && currentUser.id != user.id || !this.isCustomerPortal) {
+      && currentUser.id != user.id || currentUser.id == user.id || !this.isCustomerPortal) {
       return true;
     } else {
       return false;

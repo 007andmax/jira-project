@@ -276,13 +276,13 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.techUsersDp.clearWithOutChanges();
     this.tagsDp.clearWithOutChanges();
     this.ticketsFilter.setCustomStatus(false);
-    this.ticketsStateService.onInitFilter(this.ticketsFilter);
+    if (this.customerPortalStateService.isCustomerPortal) this.ticketsStateService.onInitFilter(this.ticketsFilter);
     this.onChangeCounterFilter();
     if (this.listType !== 'RECURRING_TICKETS') this.getCount();
-    this.ticketsStateService.onChangeLeftPanelFilter(this.listType);
+    // this.ticketsStateService.onChangeLeftPanelFilter(this.listType);
     let ticketGlobalFilter = new TicketGlobalFilter();
     if (this.ticketsFilter.isDisbledCompany) ticketGlobalFilter.setClientCompaies(this.ticketsFilter.selectedCompanies.map(item => item.id));
-    this.ticketsStateService.onChangeGlobalFilter(ticketGlobalFilter);
+    if (!this.customerPortalStateService.isCustomerPortal) this.ticketsStateService.onChangeGlobalFilter(ticketGlobalFilter);
   }
   /**
   * @description Check which filters use, and update count by Output event
