@@ -70,8 +70,10 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
   ngOnInit() {
     this.filter = this.usersStateService.getFilter();
-    if (this.websocketService.isInit) this.websocketService.subsribeToUsersFilters();
-    let onInit = this.websocketService.onInit.subscribe(data => this.websocketService.subsribeToUsersFilters());
+    if (this.websocketService.isInit && !this.customerPortalStateService.isCustomerPortal) this.websocketService.subsribeToUsersFilters();
+    let onInit = this.websocketService.onInit.subscribe(data => {
+      if (!this.customerPortalStateService.isCustomerPortal) this.websocketService.subsribeToUsersFilters()
+    });
     this.sub.add(onInit);
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.usersStateService.setModeUserFilterSubscription(MODE_USERS_LIST);
