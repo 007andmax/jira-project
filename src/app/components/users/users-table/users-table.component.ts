@@ -112,8 +112,13 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     return this.user.customerCompaniesInfo.find(item => item.companyId == this.companyId).jobTitleDto;
   }
   showDetailUser() {
-    this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().techDomain}/users/`, this.user.id]);
+    if (this.type == TYPE_LIST_COMPANY_USERS) {
+      this.router.navigate(
+        [`${this.companiesStateService.getCurrentCompany().techDomain}/company/${this.companyId}/user/`, this.user.id]);
+    } else {
+      this.router.navigate(
+        [`${this.companiesStateService.getCurrentCompany().techDomain}/users/`, this.user.id]);
+    }
     // this.usersStateService.showDetailUser(this.user);
     //  this.cd.markForCheck();
   }

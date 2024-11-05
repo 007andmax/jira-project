@@ -56,7 +56,7 @@
     >
         <li
             *ngIf="getPermissions('VIEW_USERS')"
-            [ngClass]="{'--active':activePage === 'company-user'}"
+            [ngClass]="{'--active':activePage === 'company-user' || activePage === 'company-user-details'}"
             (click)="goToCompanySection('user')"
         >
             Users

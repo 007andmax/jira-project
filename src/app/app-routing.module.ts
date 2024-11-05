@@ -74,6 +74,12 @@ const routes: Routes = [
 
   },
   {
+    path: ':domain/company/:id/user/:iduser',
+    loadChildren: './components/companies/companies-users-details/companies-users-details.module#CompaniesUsersDetailsModule',
+    canActivate: [PermissionCompanyService, PermissionUsersService, PermissionNoSuperAdminService]
+
+  },
+  {
     path: ':domain/company/:id/tickets',
     loadChildren: './components/company-tickets/company-tickets.module#CompanyTicketsModule',
     canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]

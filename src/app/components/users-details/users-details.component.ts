@@ -16,6 +16,8 @@ import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { StatusColor } from '../tickets/class/status-color';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 
 @Component({
   selector: 'app-users-details',
@@ -33,11 +35,13 @@ export class UsersDetailsComponent implements OnInit {
     private draftEmailStateService: DraftEmailStateService,
     public customerPortalStateService: CustomerPortalStateService,
     private permissionsService: PermissionsService,
-    private usersRealTimeService: UsersRealTimeService,
+    public usersRealTimeService: UsersRealTimeService,
     public cd: ChangeDetectorRef,
     public customerRoleStateService: CustomerRoleStateService,
     private ticketsStateService: TicketsStateService,
     private leftPanelService: LeftPanelService,
+    public companiesStateService: CompaniesStateService,
+    public leftPanelStateService: LeftPanelStateService,
   ) { }
 
   ngOnInit() {

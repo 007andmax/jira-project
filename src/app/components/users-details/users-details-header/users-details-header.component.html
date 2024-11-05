@@ -1,10 +1,42 @@
 <div class="qt-page-list__header --sticky">
     <div class="qt-page-list__header-title-line">
         <div class="qt-page-list__header-title-line--left">
-            <div class="qt-df qt-ai-c">
+            <div
+                class="qt-df qt-ai-c"
+                *ngIf="!companyId"
+            >
                 <span
                     class="qt-fs-14 breadcrumb-item qt-pointer"
                     (click)="goToUsers()"
+                >
+                    Users
+                </span>
+                <span class="qt-fs-14 qt-ml-8 qt-mr-8 breadcrumb-splite">/</span>
+                <span
+                    class="qt-fs-14 breadcrumb-item breadcrumb-item-active"
+                    [textContent]="user.getUserName()"
+                ></span>
+            </div>
+            <div
+                class="qt-df qt-ai-c"
+                *ngIf="companyId"
+            >
+                <span
+                    class="qt-fs-14 breadcrumb-item qt-pointer"
+                    (click)="goToCompanies()"
+                >
+                    All companies
+                </span>
+                <span class="qt-fs-14 qt-ml-8 qt-mr-8 breadcrumb-splite">/</span>
+                <span
+                    class="qt-fs-14 breadcrumb-item qt-pointer"
+                    [textContent]="getCompany().name"
+                    (click)="goToCompany()"
+                ></span>
+                <span class="qt-fs-14 qt-ml-8 qt-mr-8 breadcrumb-splite">/</span>
+                <span
+                    class="qt-fs-14 breadcrumb-item qt-pointer"
+                    (click)="goToUsersCompany()"
                 >
                     Users
                 </span>

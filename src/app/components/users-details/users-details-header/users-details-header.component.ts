@@ -10,6 +10,7 @@ import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-s
 import { USERS } from 'src/app/const/emails';
 import { UserCustomerCompaniesInfo } from '../../users/class/user-customer-companies-info';
 import { UsersService } from 'src/app/services/users/users.service';
+import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 
 
 @Component({
@@ -18,6 +19,7 @@ import { UsersService } from 'src/app/services/users/users.service';
   styleUrls: ['./users-details-header.component.scss']
 })
 export class UsersDetailsHeaderComponent implements OnInit {
+  @Input() companyId: string;
   @Input() user: UserProfile = new UserProfile();
   @Output() onEdit = new EventEmitter<any>();
   @Output() onDraftEmail = new EventEmitter<any>();
@@ -28,12 +30,16 @@ export class UsersDetailsHeaderComponent implements OnInit {
     public usersStateService: UsersStateService,
     private draftEmailStateService: DraftEmailStateService,
     private usersService: UsersService,
+    private leftPanelStateService: LeftPanelStateService,
     private router: Router,) { }
 
   ngOnInit() {
     this.usersStateService.onSelectCustomerCompaniesInfo.subscribe(data => {
       this.selectedCustomerCompaniesInfo = data;
     })
+  }
+  getCompany() {
+    return this.companiesStateService.getCompanies().find(item => item.id == this.companyId);
   }
   removeCompany() {
     this.selectedCustomerCompaniesInfo.forEach(item => {
@@ -53,6 +59,15 @@ export class UsersDetailsHeaderComponent implements OnInit {
   }
   public showAsideForDraftEmail() {
     this.onDraftEmail.emit(null);
+  }
+  goToCompanies() {
+    this.leftPanelStateService.goToState('new-companies');
+  }
+  goToCompany() {
+    this.leftPanelStateService.goToState('company-dashboard');
+  }
+  goToUsersCompany() {
+    this.leftPanelStateService.goToState('company-user');
   }
   edit() {
     this.onEdit.emit(null);

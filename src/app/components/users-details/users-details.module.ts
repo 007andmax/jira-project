@@ -32,44 +32,29 @@ import { DocumentsTemplatesInfoModule } from '../documents/documents-templates/d
 import { UsersDetailsTabMessagesComponent } from './users-details-tab-messages/users-details-tab-messages.component';
 import { UsersDetailsTabMessagesFullBodyComponent } from './users-details-tab-messages/users-details-tab-messages-full-body/users-details-tab-messages-full-body.component';
 import { TicketProfileAttachmentsModule } from '../tickets/tickets/ticket-edit-aside/ticket-profile-attachments/ticket-profile-attachments.module';
+import { UsersDetailsHeaderModule } from './users-details-header/users-details-header.module';
+import { UsersDetailsLeftPanelModule } from './users-details-left-panel/users-details-left-panel.module';
+import { UsersDetailsTabCompaniesModule } from './users-details-tab-companies/users-details-tab-companies.module';
+import { UsersDetailsTabDocumentsModule } from './users-details-tab-documents/users-details-tab-documents.module';
+import { UsersDetailsTabMessagesModule } from './users-details-tab-messages/users-details-tab-messages.module';
+import { UsersDetailsTabPasswordsModule } from './users-details-tab-passwords/users-details-tab-passwords.module';
+import { UsersDetailsTabTicketsModule } from './users-details-tab-tickets/users-details-tab-tickets.module';
 
 
 @NgModule({
     declarations: [UsersDetailsComponent,
-        UsersDetailsHeaderComponent,
-        UsersDetailsLeftPanelComponent,
-        UsersDetailsTabCompaniesComponent,
-        UsersDetailsTabCompaniesItemComponent,
-        UsersDetailsTabCompaniesAddComponent,
-        UsersDetailsTabTicketsComponent,
-        UsersDetailsTabTicketsItemComponent,
-        UsersDetailsTabPasswordsComponent,
-        UsersDetailsTabPasswordsItemComponent,
-        UsersDetailsTabDocumentsComponent,
-        UsersDetailsTabDocumentsItemComponent,
-        UsersDetailsTabMessagesComponent,
-        UsersDetailsTabMessagesFullBodyComponent,
     ],
     imports: [
         CommonModule,
         UsersDetailsRoutingModule,
         FormsModule,
-        NgbModule,
-        DynamicTooltipModule,
-        NgxMaskModule.forRoot(),
-        MatErrorModule,
-        UserCustomSubscriptionModule,
-        CompanyTagsModule,
-        ReactiveFormsModule,
-        DropDownModule,
-        UserTableDefaultSubscriptionModule,
-        PreviewPhoneMaskModule,
-        UserTableCustomSubscriptionModule,
-        CompanyDropDownModule,
-        ClickOutsideModule,
-        InfiniteScrollModule,
-        DocumentsTemplatesInfoModule,
-        TicketProfileAttachmentsModule
+        UsersDetailsHeaderModule,
+        UsersDetailsLeftPanelModule,
+        UsersDetailsTabCompaniesModule,
+        UsersDetailsTabDocumentsModule,
+        UsersDetailsTabMessagesModule,
+        UsersDetailsTabPasswordsModule,
+        UsersDetailsTabTicketsModule
     ],
 })
 export class UsersDetailsModule { }

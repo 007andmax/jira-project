@@ -329,9 +329,9 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
       if (this.state === 'quotes-component') this.goToLink('quotes');
       if (this.state === 'new-payments-ng2') this.goToLink('payments');
       if (this.state === 'new-contracts') this.goToLink('contracts');
-      if (this.state === 'company-dashboard') this.goToLink(`company/dashboard/${this.companiesStateService.getCompanyRoutingId()}`);
+      if (this.state === 'company-dashboard') this.goToLink(`company/${this.companiesStateService.getCompanyRoutingId()}/dashboard`);
       if (this.state === 'company-tickets') this.goToLink('company/tickets');
-      if (this.state === 'company-user') this.goToLink('company/user');
+      if (this.state === 'company-user') this.goToLink(`company/${this.companiesStateService.getCompanyRoutingId()}/user`);
       if (this.state === 'company-devices') this.goToLink('company/devices');
       if (this.state === 'company-network-scan-beta') this.goToLink('company/network-scan-beta');
       if (this.state === 'company-network-scan') this.goToLink('company/network-scan');
