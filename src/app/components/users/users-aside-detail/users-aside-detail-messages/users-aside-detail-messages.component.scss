@@ -43,6 +43,9 @@
 .qt-page-list__body {
     position: relative;
     background-color: $gray-25;
+    max-height: calc(100% - 48px);
+    height: fit-content;
+    overflow-y: auto;
 }
 .messages-table__account-text {
     -webkit-user-select: text;

@@ -45,7 +45,8 @@ tr {
 }
 
 .users-table__company-full {
-    flex: 1 0 336px;
+    flex: 1 0 323px;
+   padding: 16px 16px 16px 2px !important;
 }
 
 .users-table__industry {
@@ -80,6 +81,7 @@ tr {
     height: 32px;
     border-radius: 6px;
     border:1px solid $gray-200;
+    background-color: $white;
     &:hover {
         background-color: $gray-50;
     }

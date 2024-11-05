@@ -18,7 +18,7 @@ export class UsersAsideDetailMessagesComponent implements OnInit {
   showPreloader = true;
   messages: Array<UserMessage> = [];
   public page_number: number = 0;
-  public infiniteScrollDisabled = false;
+  public infiniteScrollDisabled = true;
   constructor(private usersService: UsersService,
     private sanitized: DomSanitizer,
     private usersStateService: UsersStateService,
