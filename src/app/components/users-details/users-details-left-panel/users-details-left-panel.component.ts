@@ -141,6 +141,7 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
   }
   onChangeJobDescription(event) {
     this.user.jobDescription = event.target.value;
+    this.isChange = true;
   }
   edit() {
     this.onEdit.emit(null);

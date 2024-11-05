@@ -97,6 +97,7 @@ export class UsersDetailsTabCompaniesAddComponent implements OnInit {
   }
   addCompany() {
     console.log("addCompany");
+    if (!this.customerCompaniesInfo.companyId) return;
     this.user.customerCompaniesInfo.push(this.customerCompaniesInfo);
     console.log(this.user.getUserForUpdate(this.usersStateService.getuserForEdit()));
     this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit())).subscribe(data => {

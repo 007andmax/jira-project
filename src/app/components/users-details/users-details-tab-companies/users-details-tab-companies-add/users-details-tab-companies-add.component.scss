@@ -75,6 +75,26 @@ tr {
     border-radius: 6px;
     background-color: $gray-100;
 }
+.add-company-icon-container {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    border:1px solid $gray-200;
+    &:hover {
+        background-color: $gray-50;
+    }
+}
+.add-company-icon-container-disable {
+    border: 1px solid $gray-300;
+    background-color: $gray-300;
+    cursor: default !important;
+    &:hover {
+            background-color: $gray-300;
+    }
+    .qt-icon {
+        background-color: $white;
+    }
+}
 
 .users-table__check {
     padding-left: 0px;

@@ -9,6 +9,7 @@ import { CompanyDropDownModule } from '../../shared/company-drop-down/company-dr
 import { PreviewPhoneMaskModule } from '../../shared/preview-phone-mask/preview-phone-mask.module';
 import { UserTableDefaultSubscriptionModule } from '../../users/users-table/user-table-default-subscription/user-table-default-subscription.module';
 import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside
     PreviewPhoneMaskModule,
     UserTableDefaultSubscriptionModule,
     ClickOutsideModule,
+    NgbModule
   ],
   exports: [UsersDetailsTabCompaniesComponent]
 })

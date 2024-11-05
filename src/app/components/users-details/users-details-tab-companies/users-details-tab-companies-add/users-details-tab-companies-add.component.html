@@ -1,11 +1,17 @@
-<div
-    class="qt-table-modern__row qt-table-modern__row--height-auto add-customer-companies-info"
-    [init]="customerCompaniesInfo.companyId"
-    appClickOtside
-    [class]="'.add-customer-companies-info'"
-    (onOutSide)="addCompany()"
->
-    <div class="users-table__check"></div>
+<div class="qt-table-modern__row qt-table-modern__row--height-auto add-customer-companies-info">
+    <div class="users-table__check">
+        <div
+            class="add-company-icon-container qt-df qt-ai-c qt-jc-c"
+            (click)="addCompany()"
+            [ngClass]="{'add-company-icon-container-disable':!customerCompaniesInfo.companyId}"
+            placement="top"
+            container="body"
+            ngbTooltip="You have to select company"
+            [disableTooltip]="customerCompaniesInfo.companyId"
+        >
+            <span class="qt-icon icon__add qt-sz-16 qt-dib"></span>
+        </div>
+    </div>
     <div class="users-table__company-full">
         <div class="company-icon-container qt-df qt-ai-c qt-jc-c qt-mr-8">
             <span class="qt-icon icon__companies qt-sz-16 qt-dib"></span>
@@ -35,7 +41,6 @@
             [field]="'name'"
             [search]="true"
             [change]="true"
-            [isDisabled]="!customerCompaniesInfo.companyId"
             (onSelectedItem)="onSelectJobTitle($event)"
         ></app-drop-down>
     </div>
@@ -44,7 +49,6 @@
             class="users-table__subscription--dropdown"
             (onChangeDefault)="onChangeDefaultSubscriptions($event)"
             [defaultSubscriptions]="defaultSubscriptions"
-            [isDisabled]="!customerCompaniesInfo.companyId"
         >
         </user-table-default-subscription>
     </div>
@@ -87,7 +91,6 @@
             [field]="'name'"
             [search]="true"
             [change]="true"
-            [isDisabled]="!customerCompaniesInfo.companyId"
             (onSelectedItem)="onSelectPortalAccessStatus($event)"
         ></app-drop-down>
     </div>
