@@ -12,10 +12,17 @@
   /deep/ .qt-page-list {
     .qt-page-list__body {
       //overflow: unset;
-      height: calc(100% - 48px);
+      max-height: calc(100% - 48px);
+      height: fit-content;
       overflow-y: auto;
       width: calc(100vw - 360px - 20px* 4 - 282px);
       //overflow-x: clip;
+
+      .qt-page-list__body {
+        overflow: unset;
+        overflow-y: clip;
+        width: auto;
+      }
     }
     &.users-page {
       height: 100%;
@@ -23,6 +30,13 @@
     }
     .qt-page-list__body-table-container {
       min-height: unset;
+    }
+  }
+}
+app-users-details-tab-tickets {
+  /deep/ .qt-page-list__container {
+    .qt-page-list__header-thead-container {
+      min-width: fit-content;
     }
   }
 }
