@@ -73,7 +73,7 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private ticketsStateService: TicketsStateService,
     private passwordManagerStateService: PasswordManagerStateService,
-    private customerPortalStateService: CustomerPortalStateService,
+    public customerPortalStateService: CustomerPortalStateService,
   ) { }
 
   /**

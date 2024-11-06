@@ -29,7 +29,7 @@ export class LeftPanelSettingsComponent implements OnInit, OnDestroy {
     private leftPanelStateService: LeftPanelStateService,
     private leftPanelService: LeftPanelService,
     public companiesStateService: CompaniesStateService,
-    private customerPortalStateService: CustomerPortalStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     private usersStateService: UsersStateService) {
   }
 

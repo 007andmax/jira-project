@@ -31,7 +31,7 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
     public companiesStateService: CompaniesStateService,
     public activateRoute: ActivatedRoute,
     private leftPanelStateService: LeftPanelStateService,
-    private customerPortalStateService: CustomerPortalStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     private usersStateService: UsersStateService,
   ) { }
 
