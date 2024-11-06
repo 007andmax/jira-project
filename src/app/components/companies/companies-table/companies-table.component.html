@@ -143,7 +143,7 @@
         <button
             class="mob-hidden qt-df"
             (click)="downloadAgent()"
-            *ngIf="!showArchivedCompanies"
+            *ngIf="!showArchivedCompanies && !customerPortalStateService.isCustomerPortal"
         >
             <i class="qt-icon icon__download qt-za-16 qt-sz-16 qt-dib"></i>
         </button>
