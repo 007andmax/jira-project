@@ -50,7 +50,6 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.ticketsStateService.getListType()) {
-      console.log("this.ticketsStateService.getListType()", JSON.parse(JSON.stringify(this.ticketsStateService.getListType())));
       this.ticketsFilter.setListType(this.ticketsStateService.getListType());
       this.onScroll();
     }
@@ -131,8 +130,6 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     window.open(url, '_blank');
   }
   private getTickets() {
-    console.log("this.ticketsStateService.getListType()", this.ticketsStateService.getListType());
-    console.log("getTickets", this.ticketsFilter.getListTupe());
     if (this.ticketsListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;

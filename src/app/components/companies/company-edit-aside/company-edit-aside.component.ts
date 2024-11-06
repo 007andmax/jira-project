@@ -124,8 +124,6 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     } else {
       this.selectedTimeZone = null;
     }
-    console.log("this.company.addresses[0].timeZone", this.company.addresses[0].timeZone);
-    console.log("this.selectedTimeZone", this.selectedTimeZone);
   }
   removeLogo() {
     this.companiesService.removeAvatar(this.company.id).subscribe(data => {

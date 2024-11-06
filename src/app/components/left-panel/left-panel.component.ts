@@ -259,7 +259,6 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
     this.currentUser = data;
   }
   goToDefaultPage() {
-    console.log("goToDefaultPage");
     this.state = 'new-tickets';
     this.goToLink('tickets');
   }

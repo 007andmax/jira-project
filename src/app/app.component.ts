@@ -273,7 +273,6 @@ export class AppComponent implements OnInit {
         this.ticketsStateService.onChangeLeftPanelFilter(this.currentUser.startPage == "MY_TICKETS" || this.currentUser.accountType == "CLIENT" ? "USERS" : this.currentUser.startPage);
       }
       if (this.router.url === "/" && this.currentUser.role !== "SUPER_ADMIN" && this.state == '' && this.main_page == PAGE_MAIN) {
-        console.log("this.currentUser.accountType", this.currentUser.accountType);
         this.ticketsStateService.onChangeTypeFilter(this.currentUser.startPage == "MY_TICKETS" || this.currentUser.accountType == "CLIENT" ? "USERS" : this.currentUser.startPage);
         this.ticketsStateService.onChangeLeftPanelFilter(this.currentUser.startPage == "MY_TICKETS" || this.currentUser.accountType == "CLIENT" ? "USERS" : this.currentUser.startPage);
         this.router.navigate(
