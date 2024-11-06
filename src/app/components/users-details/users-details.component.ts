@@ -45,6 +45,7 @@ export class UsersDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.leftPanelStateService.changeStateWithoutNavigate('new-users');
     let id = this.activateRoute.snapshot.params['id'];
     let subscription = this.activateRoute.params.subscribe(params => {
       this.showPreloader = true;

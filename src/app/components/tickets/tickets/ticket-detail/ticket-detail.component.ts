@@ -408,8 +408,11 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   showDetailUser() {
     if (!this.getPermissions('VIEW_USERS')) return;
     let user = this.usersStateService.getAllUsers().find(item => item.id === this.ticketProfile.createdUser.id);
-    this.usersStateService.showDetailUser(user);
-    (<any>document.body.querySelector(".ticket-edit-aside")).style.zIndex = "1";
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().techDomain}/users/`, user.id]);
+    this.leftPanelStateService.toggleLeftPanel(false);
+    //this.usersStateService.showDetailUser(user);
+    // (<any>document.body.querySelector(".ticket-edit-aside")).style.zIndex = "1";
   }
   parseTicketSource() {
     if (this.ticketProfile.deviceId && this.ticketProfile.sourceName == null && this.ticketProfile.ticketSource == "FROM_AGENT") {

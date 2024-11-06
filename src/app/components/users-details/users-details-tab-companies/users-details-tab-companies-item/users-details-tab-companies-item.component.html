@@ -19,13 +19,16 @@
         </div>
     </div>
     <div
-        class="users-table__company-full"
+        class="users-table__company-full qt-df qt-ai-c ellipsis"
         (click)="select()"
     >
         <div class="company-icon-container qt-df qt-ai-c qt-jc-c qt-mr-8">
             <span class="qt-icon icon__companies qt-sz-16 qt-dib"></span>
         </div>
-        <span [textContent]="customerCompaniesInfo.clientCompanyName"></span>
+        <div
+            class="ellipsis"
+            [textContent]="customerCompaniesInfo.clientCompanyName"
+        ></div>
     </div>
     <div class="users-table__industry qt-fd-c qt-ai-fs qt-jc-c">
         <app-drop-down

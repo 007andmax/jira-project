@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./users-details-tab-companies.component.scss']
 })
 export class UsersDetailsTabCompaniesComponent implements OnInit, OnDestroy {
+  sort = 'ASC';
   @Input() user: UserProfile = new UserProfile();
   selectAll: boolean = false;
   isShowAdd: boolean = false;
@@ -37,6 +38,17 @@ export class UsersDetailsTabCompaniesComponent implements OnInit, OnDestroy {
     this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit())).subscribe(data => {
 
     })
+  }
+  sortCompanies() {
+    if (this.sort == 'DESC') {
+      this.sort = 'ASC';
+      this.user.customerCompaniesInfo.sort((a, b) => (a.clientCompanyName.toLowerCase() > b.clientCompanyName.toLowerCase()) ?
+        1 : ((b.clientCompanyName.toLowerCase() > a.clientCompanyName.toLowerCase()) ? -1 : 0));
+    } else {
+      this.sort = 'DESC';
+      this.user.customerCompaniesInfo.reverse();
+    }
+    this.cd.detectChanges();
   }
   toggleAllUser(event) {
     this.selectAll = event.target.checked;
