@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users/users.service';
 import { User } from '../../class/user';
 import { UserListService } from '../../services/user-list.service';
@@ -19,10 +19,12 @@ export class UsersAsideDetailMessagesComponent implements OnInit {
   messages: Array<UserMessage> = [];
   public page_number: number = 0;
   public infiniteScrollDisabled = true;
+  showPendingPreloader: boolean = false;
   constructor(private usersService: UsersService,
     private sanitized: DomSanitizer,
     private usersStateService: UsersStateService,
-    private userListService: UserListService,) { }
+    private userListService: UserListService,
+    public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
     this.onScroll();
@@ -38,12 +40,15 @@ export class UsersAsideDetailMessagesComponent implements OnInit {
       this.infiniteScrollDisabled = false;
       return;
     }
+    if (this.page_number > 0) this.showPendingPreloader = true;
     this.usersService.getMessagesUser(this.user.id, this.page_number).subscribe((data: any) => {
       this.page_number += 1;
       this.messages = [...this.messages, ...data.emails.map(item => new UserMessage(item))];
       this.infiniteScrollDisabled = false;
       this.showPreloader = false;
+      this.showPendingPreloader = false;
       if (data.totalElements === this.messages.length) this.userListService.setBlockList(true);
+      this.cd.detectChanges();
     })
   }
   showFullMessage(data) {

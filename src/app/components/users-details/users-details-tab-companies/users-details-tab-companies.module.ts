@@ -10,6 +10,8 @@ import { PreviewPhoneMaskModule } from '../../shared/preview-phone-mask/preview-
 import { UserTableDefaultSubscriptionModule } from '../../users/users-table/user-table-default-subscription/user-table-default-subscription.module';
 import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
+import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     PreviewPhoneMaskModule,
     UserTableDefaultSubscriptionModule,
     ClickOutsideModule,
-    NgbModule
+    NgbModule,
+    DisabledBtnModule,
+    PreloaderTicketModule
   ],
   exports: [UsersDetailsTabCompaniesComponent]
 })

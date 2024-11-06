@@ -6,6 +6,7 @@ import { UserCustomerCompaniesInfo } from 'src/app/components/users/class/user-c
 import { UserDefaultSubscription } from 'src/app/components/users/class/user-default-subscription';
 import { UserProfile } from 'src/app/components/users/class/user-profile';
 import { UserRole } from 'src/app/components/users/class/user-role';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { CompanyAndressContact } from 'src/app/interfaces/company/company-address-contact';
 import { UsersService } from 'src/app/services/users/users.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -27,6 +28,7 @@ export class UsersDetailsTabCompaniesAddComponent implements OnInit {
   @ViewChild('userRolesDP') userRolesDP: DropDownComponent;
   @Input() user: UserProfile = new UserProfile();
   @Output() onClose = new EventEmitter<any>();
+  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   public primaryContact: CompanyAndressContact;
   public primaryPhone: Array<any>;
   constructor(private crmStateService: CrmStateService,
@@ -98,10 +100,14 @@ export class UsersDetailsTabCompaniesAddComponent implements OnInit {
   addCompany() {
     console.log("addCompany");
     if (!this.customerCompaniesInfo.companyId) return;
+    this.addBtn.setDisabled(true);
     this.user.customerCompaniesInfo.push(this.customerCompaniesInfo);
     console.log(this.user.getUserForUpdate(this.usersStateService.getuserForEdit()));
     this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit())).subscribe(data => {
+      this.addBtn.setDisabled(false);
       this.onClose.emit(null);
+    }, err => {
+      this.addBtn.setDisabled(false);
     })
   }
 }

@@ -2,14 +2,20 @@
     <div class="users-table__check">
         <div
             class="add-company-icon-container qt-df qt-ai-c qt-jc-c"
-            (click)="addCompany()"
             [ngClass]="{'add-company-icon-container-disable':!customerCompaniesInfo.companyId}"
             placement="top"
             container="body"
             ngbTooltip="You have to select company"
             [disableTooltip]="customerCompaniesInfo.companyId"
+            appDisabledBtn
+            #addBtn="disabled"
+            (onClick)="addCompany()"
         >
-            <span class="qt-icon icon__add qt-sz-16 qt-dib"></span>
+            <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+            <span
+                class="qt-icon icon__add qt-sz-16 qt-dib"
+                *ngIf="!addBtn.isBlock()"
+            ></span>
         </div>
     </div>
     <div class="users-table__company-full">
