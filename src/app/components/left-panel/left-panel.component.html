@@ -23,7 +23,7 @@
             <div class="app-left-panel__menu-icon qt-icon icon__tickets qt-icon__gray-300 --tickets"></div>
         </div>
         <div
-            *ngIf="getPermissions('VIEW_USERS')"
+            *ngIf="getPermissions('VIEW_USERS') || customerPortalStateService.isCustomerPortal"
             class="app-left-panel__menu-icon-wrap pointer"
             (click)="changePage('USERS');onOpenPanel();onChangeState('new-users')"
             [ngClass]="{'--active':page === 'USERS' }"
@@ -43,7 +43,7 @@
             <div class="app-left-panel__menu-icon qt-icon icon__marketing qt-icon__gray-300 --marketing"></div>
         </div>
         <div
-            *ngIf="getPermissions('VIEW_COMPANIES')"
+            *ngIf="getPermissions('VIEW_COMPANIES') || customerPortalStateService.isCustomerPortal"
             class="app-left-panel__menu-icon-wrap pointer"
             (click)="changePage('COMPANIES');onOpenPanel();panelCompanies.onShowAll()"
             [ngClass]="{'--active':page === 'COMPANIES' }"
@@ -53,6 +53,7 @@
             <div class="app-left-panel__menu-icon qt-icon icon__companies qt-icon__gray-300 --companies"></div>
         </div>
         <div
+            *ngIf="customerPortalStateService.isCustomerPortal && (getCompanyInfoPermissions('VIEW_ALL_QUOTES') || getCompanyInfoPermissions('VIEW_ALL_INVOICES') || getCompanyInfoPermissions('VIEW_ALL_PAYMENTS')) || !customerPortalStateService.isCustomerPortal"
             class="app-left-panel__menu-icon-wrap pointer"
             (click)="changePage('BILLING');onOpenPanel();onChangeState('billing-dashboard')"
             [ngClass]="{'--active':page === 'BILLING' }"
@@ -62,6 +63,7 @@
             <div class="app-left-panel__menu-icon qt-icon icon__billing qt-icon__white --billing"></div>
         </div>
         <div
+            *ngIf="!customerPortalStateService.isCustomerPortal"
             class="app-left-panel__menu-icon-wrap pointer"
             (click)="changePage('INVENTORY');onOpenPanel();panelInventory.goToAll()"
             [ngClass]="{'--active':page === 'INVENTORY' }"
@@ -81,6 +83,7 @@
             <div class="app-left-panel__menu-icon qt-icon icon__password qt-icon__gray-300 --password-manager"></div>
         </div>
         <div
+            *ngIf="!customerPortalStateService.isCustomerPortal"
             class="app-left-panel__menu-icon-wrap pointer"
             (click)="changePage('DOCUMENTS');onOpenPanel();onChangeState('new-documents')"
             [ngClass]="{'--active':page === 'DOCUMENTS' }"
@@ -110,7 +113,7 @@
             <div class="app-left-panel__menu-icon qt-icon icon__reports qt-icon__gray-300 --reports"></div>
         </div>
         <div
-            *ngIf="currentCompany && (currentCompany.id === '73221c72-f87c-4519-8235-c4b57ad1cc19' || currentCompany.id === '72381bff-127c-4a63-9d2e-6e952350dcbd')"
+            *ngIf="currentCompany && (currentCompany.id === '73221c72-f87c-4519-8235-c4b57ad1cc19' || currentCompany.id === '72381bff-127c-4a63-9d2e-6e952350dcbd') && !customerPortalStateService.isCustomerPortal"
             class="app-left-panel__menu-icon-wrap pointer"
             (click)="changePage('FILE_MANAGER');onChangeState('file-manager')"
             [ngClass]="{'--active':page === 'FILE_MANAGER' }"
@@ -153,7 +156,7 @@
             [hidden]="page !== 'TICKETS' && page !== 'TICKET-DETAIL'"
         ></app-left-panel-tickets>
         <app-left-panel-users
-            *ngIf="getPermissions('VIEW_USERS')"
+            *ngIf="getPermissions('VIEW_USERS') || customerPortalStateService.isCustomerPortal"
             #panelUsers
             (onOpenPanel)="onOpenPanel()"
             (onChangeState)="onChangeState($event)"
@@ -169,7 +172,7 @@
             [hidden]="page !== 'MARKETING'"
         ></left-panel-marketing>
         <app-left-panel-companies
-            *ngIf="getPermissions('VIEW_COMPANIES')"
+            *ngIf="getPermissions('VIEW_COMPANIES') || customerPortalStateService.isCustomerPortal"
             #panelCompanies
             (onOpenPanel)="onOpenPanel()"
             (onChangeState)="onChangeState($event)"

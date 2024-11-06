@@ -29,19 +29,7 @@ export class InvoicesFilterComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    if (this.customerPortalStateService.isCustomerPortal && this.companiesState.getCompanies().length > 0) this.checkCompanyCustomerUser();
-    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
-      if (this.customerPortalStateService.isCustomerPortal) this.checkCompanyCustomerUser();
-    })
-    this.sub.add(getOnCompanies);
-    let onTicketFilters = this.customerPortalStateService.onInvoiceFilters.subscribe(data => (this.checkCompanyCustomerUser()));
-    this.sub.add(onTicketFilters);
-  }
-  private checkCompanyCustomerUser() {
-    this.invoicesFilter = this.customerPortalStateService.getInvoicesFilter();
-    let selectedCompany = this.companiesState.getCompanies().find(item => item.id == localStorage.getItem('company_info_id'));
-    this.companyDp.selectItemWithOutChanges(selectedCompany);
-    this.companyDp.isDisabled = true;
+
   }
   onSelectStatus(status) {
     this.invoicesFilter.setStatus((status) ? status.value : null);

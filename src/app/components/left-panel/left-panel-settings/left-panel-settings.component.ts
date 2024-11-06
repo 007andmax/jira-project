@@ -7,6 +7,7 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Subscription } from 'rxjs';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-left-panel-settings',
@@ -28,6 +29,7 @@ export class LeftPanelSettingsComponent implements OnInit, OnDestroy {
     private leftPanelStateService: LeftPanelStateService,
     private leftPanelService: LeftPanelService,
     public companiesStateService: CompaniesStateService,
+    private customerPortalStateService: CustomerPortalStateService,
     private usersStateService: UsersStateService) {
   }
 

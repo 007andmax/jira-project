@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { TimeZone } from '../class/time-zone';
-import { TimeZoneService } from './time-zone.service';
+import { CompanyProfileService } from 'src/app/services/setting/company-profile.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +10,10 @@ export class CompanyTimeZoneStateService {
   editMode: EventEmitter<any> = new EventEmitter();
   onTimeZone: EventEmitter<any> = new EventEmitter();
   public list: Array<TimeZone> = [];
-  constructor(private timeZoneService: TimeZoneService) { }
+  constructor(private companyProfileService: CompanyProfileService) { }
 
   public onGetTimeZone() {
-    this.timeZoneService.getTimeZones().subscribe((data: any) => {
+    this.companyProfileService.getGroupedLocales().subscribe((data: any) => {
       this.list = data.map(item => new TimeZone(item));
       this.onTimeZone.emit(data);
     })

@@ -111,39 +111,6 @@ export class WebsocketService {
     if (this.usersState.getCurrentUser().role !== "SUPER_ADMIN") this.onInitConnect();
     if (this.usersState.getCurrentUser().role === "SUPER_ADMIN") this.onInitSuperAdminConnect();
   }
-  onInitConnectCustomerUser(state, clientCompId) {
-    if (this.isInit) {
-      if (state == "new-tickets" || state == "ticket-detail") this.subsribeToTicketsCustomerUsers(clientCompId);
-      if (state == "new-billable-invoices") this.subsribeToInvoiceCustomerUsers(clientCompId);
-      if (state == "quotes-component") this.subsribeToQuoteCustomerUsers(clientCompId);
-      if (state == "new-payments-ng2") this.subsribeToPaymentsCustomerUsers(clientCompId);
-      if (state == "company-devices") this.subsribeToDevicesCustomerUsers(clientCompId);
-      return;
-    }
-    this.ws = new SockJS(this.serverUrl);
-    this.stompClient = Stomp.over(this.ws);
-    this.stompClient.logRawCommunication = true;
-    this.onConnect();
-    let that = this;
-    this.stompClient.onConnect = (data) => {
-      //   that.subsribeToKafka();
-      if (state == "new-tickets" || state == "ticket-detail") that.subsribeToTicketsCustomerUsers(clientCompId);
-      if (state == "new-billable-invoices") that.subsribeToInvoiceCustomerUsers(clientCompId);
-      if (state == "quotes-component") this.subsribeToQuoteCustomerUsers(clientCompId);
-      if (state == "new-payments-ng2") this.subsribeToPaymentsCustomerUsers(clientCompId);
-      if (state == "company-devices") this.subsribeToDevicesCustomerUsers(clientCompId);
-      that.onInit.emit(true);
-      that.isInit = true;
-    }
-    this.stompClient.debug = (data) => {
-      console.log("debug", data);
-    }
-    this.stompClient.onWebSocketClose = (data) => {
-      setTimeout(() => {
-        this.onInitConnectCustomerUser(state, clientCompId);
-      }, 20000);
-    }
-  }
   onInitConnect() {
     this.ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(this.ws);
@@ -154,7 +121,7 @@ export class WebsocketService {
       //   that.subsribeToKafka();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToPermissions();
       that.subsribeToUsers();
-      if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToDevices();
+      that.subsribeToDevices();
       that.subsribeToCompany();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToPasswordRecods();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToTaxes();
@@ -162,13 +129,13 @@ export class WebsocketService {
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToProducts();
       that.subsribeToTicketActualNumber();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToTicketsFilters();
-      if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToTickets();
+      that.subsribeToTickets();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToCmdShellOutput();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToBillable();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToInvoiceNumber();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToBillableCount();
-      if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToInvoice();
-      if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToPayments();
+      that.subsribeToInvoice();
+      that.subsribeToPayments();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToSubmittedService();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToSubmittedServiceAgreement();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToSubmittedFileManagement();

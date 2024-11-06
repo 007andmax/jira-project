@@ -28,6 +28,7 @@ import { CrmCompanyServiceType } from '../../setting/crm-settings/crm-company-se
 import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { MODE_EDIT_SUBSCRIPTION, MODE_EDIT_USER_SUBSCRIPTION } from 'src/app/const/users';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { TimeZone } from '../company-time-zone/class/time-zone';
 
 @Component({
   selector: 'app-company-edit-aside',
@@ -60,6 +61,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   idUploadFile: string;
   MODE_EDIT_USER_SUBSCRIPTION = MODE_EDIT_USER_SUBSCRIPTION;
   MODE_EDIT_SUBSCRIPTION = MODE_EDIT_SUBSCRIPTION;
+  selectedTimeZone: TimeZone;
   @ViewChild('companyTags') companyTags: CompanyTagsComponent;
   @ViewChild('addresstext') addresstext: any;
   @ViewChild('clientType') clientType: DropDownComponent;
@@ -94,16 +96,17 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
       this.jobTitleList = data;
     })
     this.sub.add(onGetJobTitle);
-    if (this.crmStateService.getServiceTypeList().length === 0) {
-      this.crmStateService.onInitGetServiceTypeList();
-    } else {
-      this.serviceTypes = this.crmStateService.getServiceTypeList();
-    }
+
     let onGetServiceType = this.crmStateService.onGetServiceType.subscribe(data => {
       this.serviceTypes = data;
       if (this.serviceType) this.serviceType.reset(this.serviceTypes);
+      this.setSelectServiceTypes();
     })
     this.sub.add(onGetServiceType);
+    let onTimeZone = this.companyTimeZoneState.onTimeZone.subscribe(data => {
+      this.setTimeZone(data);
+    })
+    this.sub.add(onTimeZone);
     if (this.usersStateService.getAllUsers().length > 0) {
       this.getTechusers(this.usersStateService.getAllUsers());
     }
@@ -114,7 +117,14 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     this.onCroppImage();
     this.onEditCompany();
   }
-
+  setTimeZone(data) {
+    let list = data.map(item => new TimeZone(item));
+    if (this.company.addresses.length > 0 && this.company.addresses[0].timeZone) {
+      this.selectedTimeZone = list.find(item => item.second === this.company.addresses[0].timeZone.name);
+    } else {
+      this.selectedTimeZone = null;
+    }
+  }
   removeLogo() {
     this.companiesService.removeAvatar(this.company.id).subscribe(data => {
       this.company.editLogo(null);
@@ -190,11 +200,10 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
       this.company = new CompanyProfile();
       this.company.onEditMode(data);
       if (this.company.addresses.length == 1) this.company.initShippingAdress();
-      this.companyTimeZoneState.onEditMode(this.company.addresses[0].timeZone);
+      //this.companyTimeZoneState.onEditMode(this.company.addresses[0].timeZone);
+      if (this.companyTimeZoneState.getTimeZone().length > 0) this.setTimeZone(this.companyTimeZoneState.getTimeZone());
       let indexTerms = this.paymentTerms.findIndex(item => item.value === this.company.paymentTerms);
       if (indexTerms > -1) this.onSelectPaymentTerms(this.paymentTerms[indexTerms]);
-      let indexServiceType = this.serviceTypes.findIndex(item => item.name === this.company.serviceType);
-      if (indexServiceType > -1) this.onSelectServiceTypes(this.serviceTypes[indexServiceType]);
       let indexPersone = this.listPersons.findIndex(item => item.id === this.company.techLeadId);
       if (indexPersone > -1) this.selectedTechLead = this.listPersons[indexPersone];
       let indexType = this.companyTypes.findIndex(item => item.value === this.company.clientType);
@@ -203,9 +212,19 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
       this.companyTags.setSelectedTag(this.company.tags);
       this.elRef.nativeElement.querySelector("#company-description").value = this.company.description;
       this.opened = true;
+      if (this.crmStateService.getServiceTypeList().length === 0) {
+        this.crmStateService.onInitGetServiceTypeList();
+      } else {
+        this.serviceTypes = this.crmStateService.getServiceTypeList();
+        this.setSelectServiceTypes();
+      }
       this.cd.detectChanges();
     })
     this.sub.add(getCompanyFromEdit);
+  }
+  setSelectServiceTypes() {
+    let indexServiceType = this.serviceTypes.findIndex(item => item.name === this.company.serviceType);
+    if (indexServiceType > -1) this.onSelectServiceTypes(this.serviceTypes[indexServiceType]);
   }
   onSameAsBilling(event) {
     if (event.target.checked) this.company.addresses[1].initSameAsBilling(this.company.addresses[0]);
@@ -303,6 +322,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
 
   public onChangeTimeZone(data) {
     this.company.addresses[0].locale = (data) ? data.second : '';
+    this.selectedTimeZone = data;
   }
   onSelectClientIndustry(item) {
     this.company.clientIndustry.name = (item) ? item.name : null;

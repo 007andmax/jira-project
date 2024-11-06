@@ -6,6 +6,8 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { CompanyAssigned } from '../../companies/class/company-assigned';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
   selector: 'app-left-panel-company',
@@ -29,11 +31,13 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
     public companiesStateService: CompaniesStateService,
     public activateRoute: ActivatedRoute,
     private leftPanelStateService: LeftPanelStateService,
+    private customerPortalStateService: CustomerPortalStateService,
+    private usersStateService: UsersStateService,
   ) { }
 
   ngOnInit() {
     this.companyId = this.companiesStateService.getCompanyRoutingId();
-    if (this.companyId != this.companiesStateService.getCompanyIdForassignedDocumentCategory()) this.companiesStateService.getCategoriesDocuments(this.companyId);
+    if (this.companyId != this.companiesStateService.getCompanyIdForassignedDocumentCategory() && !this.customerPortalStateService.isCustomerPortal) this.companiesStateService.getCategoriesDocuments(this.companyId);
     if (this.companyId === this.companiesStateService.getCompanyIdForassignedDocumentCategory()) this.assignedDocumentCategories = this.companiesStateService.getAssignedDocumentCategories().sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
     let onGetAssignedDocumentCategories = this.companiesStateService.onGetAssignedDocumentCategories.subscribe(data => {
@@ -80,7 +84,11 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
   checkLogo() {
     return (this.selectedCompany && this.selectedCompany.logo && this.selectedCompany.logo.cropped && this.selectedCompany.logo.cropped.id || this.selectedCompany && this.selectedCompany.logo && this.selectedCompany.logo.origin && this.selectedCompany.logo.origin.id)
   }
-
+  public getCompanyInfoPermissions(action) {
+    let compnayInfo = this.usersStateService.getCurrentUser().customerCompaniesInfo.find(item => item.companyId == this.companyId)
+    if (this.usersStateService.getCurrentUser().accountType == "TECH") return true;
+    return (compnayInfo && this.usersStateService.getCurrentUser().accountType == "CLIENT" && compnayInfo.customerUserRole.getPermission(action))
+  }
   public goToState(state) {
     this.onChangeState.emit(state);
   }

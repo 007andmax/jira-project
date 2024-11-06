@@ -54,19 +54,6 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     private quoteServices: QuoteService,) { }
 
   ngOnInit() {
-    if (this.customerPortalStateService.isCustomerPortal) {
-      this.filter.setCompanyId(this.customerPortalStateService.getQuotesFilter().companyId);
-      this.websocketService.onInitConnectCustomerUser("quotes-component", this.customerPortalStateService.getQuotesFilter().companyId);
-    }
-    let onQuotesFilters = this.customerPortalStateService.onQuotesFilters.subscribe(data => {
-      this.filter.setData(this.customerPortalStateService.getQuotesFilter());
-      this.filter.clearSortBy();
-      this.showPreloader = true;
-      document.body.querySelector(".main-container").scrollTo(0, 0);
-      this.setDefaultScoll();
-      this.onScroll();
-    });
-    this.sub.add(onQuotesFilters);
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.onScroll();
     let getOnInitFilter = this.quoteStateService.getOnInitFilter().subscribe(data => {

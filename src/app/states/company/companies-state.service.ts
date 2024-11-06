@@ -178,7 +178,7 @@ export class CompaniesStateService {
   }
   private initSubscriptions() {
     if (!this.customerPortalStateService.isCustomerPortal) this.websocketService.subsribeToGlNumber(this.currentCompany.id);
-    if (!this.customerPortalStateService.isCustomerPortal) this.websocketService.subsribeToQuote(this.currentCompany.id);
+    this.websocketService.subsribeToQuote(this.currentCompany.id);
     if (!this.customerPortalStateService.isCustomerPortal) this.websocketService.subsribeToRecurringTickets(this.currentCompany.id);
     this.websocketService.subsribeToUserSubscriptions(this.currentCompany.id);
     this.isInitSubscriptions = true;

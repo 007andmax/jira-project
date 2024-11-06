@@ -436,7 +436,11 @@
         </div>
         <div class="qt-inputs-row">
             <div class="qt-input-block qt-f50">
-                <app-company-time-zone (selectedOffsetItem)="onChangeTimeZone($event)"></app-company-time-zone>
+                <app-company-time-zone
+                    *ngIf="opened"
+                    [selectedItem]="selectedTimeZone"
+                    (selectedOffsetItem)="onChangeTimeZone($event)"
+                ></app-company-time-zone>
             </div>
             <div class="qt-input-block qt-f50">
                 <app-drop-down

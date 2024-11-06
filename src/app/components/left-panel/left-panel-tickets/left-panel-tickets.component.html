@@ -13,6 +13,7 @@
         [ngClass]="{'--active': listType === 'DASHBOARD' && activePage === 'new-tickets-dashboard'}"
         class="desktop-version"
         (click)="goToBashboard()"
+        *ngIf="!customerPortalStateService.isCustomerPortal"
     >
         <div>Dashboard</div>
     </li>
@@ -84,6 +85,7 @@
         [ngClass]="{'--active': listType === 'RECURRING_TICKETS' && activePage === 'recurring-tickets'}"
         (click)="goToRecurringTickets('RECURRING_TICKETS')"
         class="desktop-version"
+        *ngIf="!customerPortalStateService.isCustomerPortal"
     >
         <div>Recurring tickets</div>
     </li>

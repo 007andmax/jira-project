@@ -34,12 +34,12 @@ const routes: Routes = [
   {
     path: ':domain/tickets',
     loadChildren: './components/tickets/tickets/tickets.module#TicketsModule',
-    canActivate: [PermissionTicketsService, PermissionNoSuperAdminService]
+    canActivate: [PermissionNoSuperAdminService]
   },
   {
     path: ':domain/ticket/:id',
     loadChildren: './components/tickets/tickets/ticket-detail/ticket-detail.module#TicketDetailModule',
-    canActivate: [PermissionTicketsService, PermissionNoSuperAdminService]
+    canActivate: [PermissionNoSuperAdminService]
   },
   {
     path: ':domain/support-page',
@@ -378,11 +378,6 @@ const routes: Routes = [
     loadChildren: './components/devices/devices-report/devices-report.module#DevicesReportModule',
     //canActivate: [PermissionNoSuperAdminService]
     canActivate: [PermissionTechUserService, TestPermissionService]
-  },
-  {
-    path: ':domain/default',
-    loadChildren: './components/customer-portal/customer-portal-default/customer-portal-default.module#CustomerPortalDefaultModule',
-    canActivate: [PermissionClientUserService]
   },
   {
     path: ':domain/contract-statistics',
