@@ -71,10 +71,16 @@
                     href="javascript:;"
                     class="qt-button --sm  --gray qt-button--with-icon qt-jc-c pointer qt-ml-12 button-gl-number__add remove-company"
                     *ngIf="selectedCustomerCompaniesInfo.length > 0"
-                    (click)="removeCompany()"
+                    appDisabledBtn
+                    #addBtn="disabled"
+                    (onClick)="removeCompany()"
                 >
-                    <span class="qt-icon icon__delete qt-icon__red-600 qt-bg-contain qt-sz-16 qt-mr-8"></span>
-                    Remove Company
+                    <span
+                        *ngIf="!addBtn.isBlock()"
+                        class="qt-icon icon__delete qt-icon__red-600 qt-bg-contain qt-sz-16 qt-mr-8"
+                    ></span>
+                    <span *ngIf="!addBtn.isBlock()">Remove Company</span>
+                    <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
                 </a>
             </div>
         </div>

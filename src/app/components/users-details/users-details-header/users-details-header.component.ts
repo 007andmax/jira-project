@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { UserProfile } from '../../users/class/user-profile';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -11,6 +11,7 @@ import { USERS } from 'src/app/const/emails';
 import { UserCustomerCompaniesInfo } from '../../users/class/user-customer-companies-info';
 import { UsersService } from 'src/app/services/users/users.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class UsersDetailsHeaderComponent implements OnInit {
   @Input() user: UserProfile = new UserProfile();
   @Output() onEdit = new EventEmitter<any>();
   @Output() onDraftEmail = new EventEmitter<any>();
+  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   selectedCustomerCompaniesInfo: Array<UserCustomerCompaniesInfo> = [];
   constructor(public customerPortalStateService: CustomerPortalStateService,
     private companiesStateService: CompaniesStateService,
@@ -46,8 +48,12 @@ export class UsersDetailsHeaderComponent implements OnInit {
       let index = this.user.customerCompaniesInfo.findIndex(company => company.companyId == item.companyId);
       if (index > -1) this.user.customerCompaniesInfo.splice(index, 1);
     })
+    this.addBtn.setDisabled(true);
     this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit())).subscribe(data => {
+      this.addBtn.setDisabled(false);
       this.selectedCustomerCompaniesInfo = [];
+    }, err => {
+      this.addBtn.setDisabled(false);
     })
   }
   public getPermissions(action) {
@@ -70,6 +76,7 @@ export class UsersDetailsHeaderComponent implements OnInit {
     this.leftPanelStateService.goToState('company-user');
   }
   edit() {
+
     this.onEdit.emit(null);
   }
 }
