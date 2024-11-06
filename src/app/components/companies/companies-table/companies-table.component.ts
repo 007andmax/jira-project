@@ -44,7 +44,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     private downloadAgentStateService: DownloadAgentStateService,
     public cd: ChangeDetectorRef,
     private draftEmailStateService: DraftEmailStateService,
-    private customerPortalStateService: CustomerPortalStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     private permissionsService: PermissionsService) { }
 
   ngOnInit() {
