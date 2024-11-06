@@ -167,7 +167,7 @@
     <div class="companies-table__menu pointer">
         <div
             class="grey-dropdown right with-icons"
-            *ngIf="!showArchivedCompanies"
+            *ngIf="!showArchivedCompanies && !customerPortalStateService.isCustomerPortal"
             ngbDropdown
             [container]="'body'"
         >
