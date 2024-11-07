@@ -26,7 +26,7 @@ import { CurrentUser } from 'src/class/current-user/current-user';
   selector: 'app-users-details-left-panel',
   templateUrl: './users-details-left-panel.component.html',
   styleUrls: ['./users-details-left-panel.component.scss'],
-  providers: [TicketsListService]
+  providers: [TicketsListService, UsersTableService]
 })
 export class UsersDetailsLeftPanelComponent implements OnInit {
   companyId: string;
