@@ -404,7 +404,6 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     return `${this.ticketProfile.createdUser.firstName} ${this.ticketProfile.createdUser.lastName}`
   }
   showDetailUser() {
-    if (!this.getPermissions('VIEW_USERS')) return;
     let user = this.usersStateService.getAllUsers().find(item => item.id === this.ticketProfile.createdUser.id);
     this.router.navigate(
       [`${this.companiesStateService.getCurrentCompany().techDomain}/users/`, user.id]);
