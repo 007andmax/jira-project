@@ -1,12 +1,12 @@
 @import "./src/assets/styles/variable";
 
 .active {
-    color: $green-600;
-    background-color: rgba(46, 200, 102, 0.08);
+    background-color: $green-25 !important;
+    color: $green-700 !important;
 }
 .no-active {
-    color: $red-600;
-    background-color: rgba(255, 82, 99, 0.08) !important;
+    background-color: $red-50 !important;
+    color: $red-600 !important;
 }
 .list-custom-subscriptions {
     display: block;
