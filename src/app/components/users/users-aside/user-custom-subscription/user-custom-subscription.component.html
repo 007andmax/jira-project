@@ -19,15 +19,10 @@
         >
             <div [ngClass]="{'active':custom.activated && custom.isExist,
             'no-active':!custom.activated && custom.isExist}">
-                <i
-                    class="qt-sz-16 qt-bg-contain qt-dib qt-mr-4"
-                    *ngIf="custom.isExist"
-                    [ngClass]="{'icon__unsubscribe':!custom.activated,'icon__status-green':custom.activated}"
-                ></i>
                 {{custom.name}}
                 <i
                     *ngIf="!isDisabled"
-                    class="qt-icon icon__close qt-icon__gray-400 qt-sz-12 qt-ml-4 qt-dib "
+                    class="qt-icon icon__close qt-icon__gray-400 qt-sz-16 qt-ml-4 qt-dib "
                     (click)="selected(custom)"
                 ></i>
             </div>

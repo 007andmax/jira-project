@@ -127,17 +127,16 @@
     width: max-content;
     line-height: 1.2;
     padding: 4px 6px;
-    height: 20px;
+    height: 24px;
     border-radius: 6px;
     font-size: 10px;
-    margin: 0 4px 4px 0;
     .icon__close {
         margin: 2px 0 2px 4px;
     }
 }
 .list-default-subscriptions {
-    display: block;
-    width: auto;
+    display: flex;
+    gap: 8px;
     min-height: 20px;
 }
 .container-caret {
@@ -153,4 +152,13 @@
     align-items: center;
     justify-content: center;
     background-color: $gray-50;
+}
+.block-click {
+    pointer-events: none;
+}
+
+.list-default-subscriptions-button {
+    display: inline-flex;
+    width: 24px;
+    height: 24px;
 }

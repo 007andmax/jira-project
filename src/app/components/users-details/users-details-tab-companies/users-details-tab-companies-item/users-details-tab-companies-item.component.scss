@@ -1,0 +1,83 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/mixin/breakpoint";
+
+.phones-numbers {
+    display: flex;
+    flex-direction: column;
+
+    .item-phone {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+}
+
+.user-details {
+    display: flex;
+}
+
+.drop-down-users {
+    width: fit-content;
+}
+
+tr {
+    cursor: pointer;
+}
+
+.users-table__name--profession {
+    color: $gray-400;
+}
+
+.users-table__contract-no--number {
+    background-color: transparent;
+    border: none;
+    width: 190px;
+}
+.user-primary-email {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.job-title-item {
+    min-height: 24px;
+}
+.users-table__company-full {
+    cursor: default;
+    flex: 1 0 336px;
+}
+
+.users-table__industry {
+    flex: 0 0 170px;
+}
+
+.users-table__contract-no {
+    flex: 0 0 380px;
+
+}
+
+.users-table__tickets {
+    cursor: default;
+    flex: 1 0 303px;
+}
+
+.users-table__primary {
+    cursor: default;
+    flex: 1 0 318px;
+}
+
+.users-table__portal-status {
+    flex: 0 0 160px;
+}
+.company-icon-container {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    background-color: $gray-100;
+}
+.users-table__check {
+    padding-left: 0px;
+}
+.qt-table-modern__row > div {
+    padding: 16px;
+}

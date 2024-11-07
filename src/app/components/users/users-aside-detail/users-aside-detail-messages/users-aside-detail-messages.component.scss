@@ -31,9 +31,10 @@
 }
 .qt-page-list__body-table-container {
     position: relative;
-    min-height: auto !important;
     height: 100%;
     overflow: scroll;
+    min-height: calc(100vh - 110px - 64px - 80px);
+    
 }
 .pengind-loading {
     bottom: 20px;
@@ -42,6 +43,9 @@
 .qt-page-list__body {
     position: relative;
     background-color: $gray-25;
+    max-height: calc(100% - 48px);
+    height: fit-content;
+    overflow-y: auto;
 }
 .messages-table__account-text {
     -webkit-user-select: text;

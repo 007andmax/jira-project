@@ -297,6 +297,9 @@ Example:
   &__companies {
     mask-image: url("/assets/img/icons/companies.svg");
   }
+  &__map-pin {
+    mask-image: url("/assets/img/icons/map-pin.svg");
+  }
   &__pages {
     mask-image: url("/assets/img/icons/pages.svg");
   }
@@ -509,6 +512,9 @@ Example:
   }
   &__password {
     mask-image: url("/assets/img/icons/password.svg");
+  }
+  &__password-manager {
+    mask-image: url("/assets/img/icons/password-manager.svg");
   }
   &__globe {
     mask-image: url("/assets/img/icons/globe.svg");

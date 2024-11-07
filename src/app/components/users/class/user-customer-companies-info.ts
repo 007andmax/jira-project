@@ -4,6 +4,7 @@ import { UserJobTitle } from "./user-job-title";
 import { UserRole } from "./user-role";
 
 export class UserCustomerCompaniesInfo {
+    selected: boolean = false;
     clientCompanyName: string;
     "companyId": string;
     "jobTitleDto": UserJobTitle;
@@ -28,6 +29,9 @@ export class UserCustomerCompaniesInfo {
             this.hasAccess = false;
         }
 
+    }
+    public setDefaultSubscriptions(data) {
+        this.defaultSubscriptions = data;
     }
     public setDefaultSubscriptionsForAddUser() {
         this.defaultSubscriptions.invoiceSubscription = new UserDefaultSubscriptionItem({ enabled: false, activated: true, });
@@ -82,5 +86,12 @@ export class UserCustomerCompaniesInfo {
 */
     public setUserRole(data) {
         this.customerUserRole = data;
+    }
+
+    public setCompanyId(data) {
+        this.companyId = data;
+    }
+    public setClientCompanyName(data) {
+        this.clientCompanyName = data;
     }
 }

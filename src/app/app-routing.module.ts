@@ -74,6 +74,12 @@ const routes: Routes = [
 
   },
   {
+    path: ':domain/company/:id/user/:iduser',
+    loadChildren: './components/companies/companies-users-details/companies-users-details.module#CompaniesUsersDetailsModule',
+    canActivate: [PermissionCompanyService, PermissionUsersService, PermissionNoSuperAdminService]
+
+  },
+  {
     path: ':domain/company/:id/tickets',
     loadChildren: './components/company-tickets/company-tickets.module#CompanyTicketsModule',
     canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]
@@ -105,6 +111,12 @@ const routes: Routes = [
   }, {
     path: ':domain/users',
     loadChildren: './components/users/users.module#UsersModule',
+    canActivate: [PermissionUsersService, PermissionNoSuperAdminService]
+
+  },
+  {
+    path: ':domain/users/:id',
+    loadChildren: './components/users-details/users-details.module#UsersDetailsModule',
     canActivate: [PermissionUsersService, PermissionNoSuperAdminService]
 
   },

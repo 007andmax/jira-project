@@ -1,0 +1,88 @@
+<div class="qt-page-list__header --sticky">
+    <div class="qt-page-list__header-title-line">
+        <div class="qt-page-list__header-title-line--left">
+            <div
+                class="qt-df qt-ai-c"
+                *ngIf="!companyId"
+            >
+                <span
+                    class="qt-fs-14 breadcrumb-item qt-pointer"
+                    (click)="goToUsers()"
+                >
+                    Users
+                </span>
+                <span class="qt-fs-14 qt-ml-8 qt-mr-8 breadcrumb-splite">/</span>
+                <span
+                    class="qt-fs-14 breadcrumb-item breadcrumb-item-active"
+                    [textContent]="user.getUserName()"
+                ></span>
+            </div>
+            <div
+                class="qt-df qt-ai-c"
+                *ngIf="companyId"
+            >
+                <span
+                    class="qt-fs-14 breadcrumb-item qt-pointer"
+                    (click)="goToCompanies()"
+                >
+                    All companies
+                </span>
+                <span class="qt-fs-14 qt-ml-8 qt-mr-8 breadcrumb-splite">/</span>
+                <span
+                    class="qt-fs-14 breadcrumb-item qt-pointer"
+                    [textContent]="getCompany().name"
+                    (click)="goToCompany()"
+                ></span>
+                <span class="qt-fs-14 qt-ml-8 qt-mr-8 breadcrumb-splite">/</span>
+                <span
+                    class="qt-fs-14 breadcrumb-item qt-pointer"
+                    (click)="goToUsersCompany()"
+                >
+                    Users
+                </span>
+                <span class="qt-fs-14 qt-ml-8 qt-mr-8 breadcrumb-splite">/</span>
+                <span
+                    class="qt-fs-14 breadcrumb-item breadcrumb-item-active"
+                    [textContent]="user.getUserName()"
+                ></span>
+            </div>
+        </div>
+        <div class="qt-page-list__header-title-line--rigth">
+            <div class="qt-df qt-ai-c">
+                <a
+                    href="javascript:;"
+                    class="qt-button --sm  --gray qt-button--with-icon qt-jc-c pointer button-gl-number__add"
+                    *ngIf="(!user.deletedAt && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user))) && selectedCustomerCompaniesInfo.length == 0"
+                    (click)="edit()"
+                >
+                    <span class="qt-icon icon__edit qt-sz-16 qt-dib qt-mr-8 qt-button-icon"></span>
+                    Edit User
+                </a>
+                <a
+                    href="javascript:;"
+                    class="qt-button --sm  --gray qt-button--with-icon qt-jc-c pointer qt-ml-12 button-gl-number__add"
+                    *ngIf="!user.deletedAt && !customerPortalStateService.isCustomerPortal && selectedCustomerCompaniesInfo.length == 0"
+                    (click)="showAsideForDraftEmail()"
+                >
+                    <span class="qt-icon icon__email-send qt-sz-16 qt-dib qt-mr-8 qt-button-icon"></span>
+                    Draft Email
+                </a>
+                <a
+                    href="javascript:;"
+                    class="qt-button --sm  --gray qt-button--with-icon qt-jc-c pointer qt-ml-12 button-gl-number__add remove-company"
+                    *ngIf="selectedCustomerCompaniesInfo.length > 0"
+                    appDisabledBtn
+                    #addBtn="disabled"
+                    (onClick)="removeCompany()"
+                >
+                    <span
+                        *ngIf="!addBtn.isBlock()"
+                        class="qt-icon icon__delete qt-icon__red-600 qt-bg-contain qt-sz-16 qt-mr-8"
+                    ></span>
+                    <span *ngIf="!addBtn.isBlock()">Remove Company</span>
+                    <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

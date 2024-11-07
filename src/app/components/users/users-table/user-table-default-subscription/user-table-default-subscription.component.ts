@@ -10,7 +10,7 @@ import { UserDefaultSubscription } from '../../class/user-default-subscription';
 export class UserTableDefaultSubscriptionComponent implements OnInit {
   @Input() defaultSubscriptions: UserDefaultSubscription;
   @Output() onChangeDefault = new EventEmitter();
-
+  @Input() isDisabled: boolean = false;
   constructor(private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -18,9 +18,8 @@ export class UserTableDefaultSubscriptionComponent implements OnInit {
   }
 
   updateDefault(field) {
-    let subscription = JSON.parse(JSON.stringify(this.defaultSubscriptions));
-    subscription[field].enabled = !subscription[field].enabled;
-    this.onChangeDefault.emit(subscription);
+    this.defaultSubscriptions[field].enabled = !this.defaultSubscriptions[field].enabled;
+    this.onChangeDefault.emit(this.defaultSubscriptions);
     this.ref.detectChanges();
   }
 

@@ -1,0 +1,49 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/mixin/breakpoint";
+
+.users-page {
+    background-color: $white;
+    padding: 16px !important;
+}
+.qt-page-list__header-thead-container {
+
+}
+.users-table__check {
+    border-top-left-radius: 8px;
+    border-left: 1px solid $gray-200;
+}
+.users-table__company-full {
+    flex:1 0 336px;
+
+}
+.users-table__industry {
+    flex:0 0 170px;
+}
+.users-table__contract-no {
+    flex:0 0 380px;
+
+}
+.users-table__tickets {
+    flex:1 0 303px;
+}
+.users-table__primary {
+    flex:1 0 318px;
+}
+.users-table__portal-status {
+    flex:0 0 160px;
+    border-top-right-radius: 8px;
+    border-right: 1px solid $gray-200;
+}
+.qt-page-list__header-thead__row > div {
+    padding: 11px 16px !important;
+    background-color: $gray-50;
+    border-top: 1px solid $gray-200;
+    border-bottom: 1px solid $gray-200;
+}
+.qt-page-list__body {
+    overflow: auto;
+
+}
+.qt-page-list__body-table-container {
+    min-height: calc(100vh - 110px - 64px - 80px);
+}

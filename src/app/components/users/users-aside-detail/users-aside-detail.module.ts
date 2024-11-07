@@ -25,13 +25,12 @@ import { CompanyDropDownModule } from '../../shared/company-drop-down/company-dr
 import { UsersAsideDetailCompanyInfoComponent } from './users-aside-detail-company-info/users-aside-detail-company-info.component';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
+import { UsersAsideDetailTicketsModule } from './users-aside-detail-tickets/users-aside-detail-tickets.module';
 
 @NgModule({
     declarations: [UsersAsideDetailComponent,
-        UsersAsideDetailTicketsComponent,
         UsersAsideDetailDocumentsComponent,
         UsersAsideDetailPasswordsComponent,
-        UsersAsideDetailTicketsItemComponent,
         UsersAsideDetailDocumentsItemComponent,
         UsersAsideDetailPasswordsItemComponent,
         UsersAsideDetailMessagesComponent,
@@ -54,7 +53,8 @@ import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
         NgxMaskModule.forRoot(),
         CompanyDropDownModule,
         DynamicTooltipModule,
-        MatErrorModule
+        MatErrorModule,
+        UsersAsideDetailTicketsModule
     ],
     exports: [UsersAsideDetailComponent]
 

@@ -1,0 +1,263 @@
+<div class="left-panel-container qt-pb-18">
+    <div class="left-panel-header qt-pl-16 qt-pr-16 qt-pt-16 qt-pb-16">
+        <div
+            class="user-detail-aside__header-avatar qt-mb-12"
+            [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+            [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
+        ></div>
+        <div class="qt-mb-16">
+            <div class="qt-mb-4">
+                <span
+                    class="qt-fs-20 qt-fw-500 qt-color-gray-900"
+                    [textContent]="user.getUserName()"
+                ></span>
+            </div>
+            <div class="qt-df qt-ai-c">
+                <div class="icon__password-manager qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-4 qt-icon"></div>
+                <span
+                    class="qt-fs-13 qt-color-gray-500 qt-fw-400"
+                    [textContent]="user.portalAccessStatus"
+                ></span>
+            </div>
+        </div>
+        <div class="qt-df qt-ai-c">
+            <button
+                class="qt-button --sm qt-w qt-w100 qt-jc-c"
+                (click)="addCompany()"
+            >
+                <span class="qt-icon icon__add qt-sz-16 qt-icon__white qt-dib qt-mr-8"></span>
+                Add to a New Company
+            </button>
+            <div
+                class="qt-button-square pointer qt-ml-8 draft-email-btn"
+                *ngIf="!user.deletedAt && !customerPortalStateService.isCustomerPortal"
+                (click)="showAsideForDraftEmail()"
+                (mouseenter)="draftEmailTooltip.show($event.target)"
+                (mouseleave)="draftEmailTooltip.hide()"
+            >
+                <app-dynamic-tooltip
+                    [content]="'Email to ' + user.getUserName()"
+                    [position]="'top'"
+                    #draftEmailTooltip
+                ></app-dynamic-tooltip>
+                <div class="qt-icon icon__email qt-sz-16 pointer qt-bg-contain"></div>
+            </div>
+            <div
+                class="qt-ml-8"
+                ngbDropdown
+                [container]="'body'"
+            >
+                <div
+                    class="qt-button-square actions-btn pointer"
+                    id="dropdownBasic1"
+                    ngbDropdownToggle
+                >
+                    <div class="qt-ic-c qt-icon icon__more qt-pointer qt-sz-16 qt-bg-contain"></div>
+                </div>
+                <ul
+                    class="qt-dropdown-menu"
+                    ngbDropdownMenu
+                    aria-labelledby="dropdownBasic1"
+                >
+                    <li
+                        class="pointer"
+                        *ngIf="!showArchivedUsers && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user))"
+                        (click)="edit()"
+                        ngbDropdownItem
+                    >
+                        <div class="qt-icon icon__edit qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                        Edit
+                    </li>
+                    <li
+                        class="pointer"
+                        *ngIf="!showArchivedUsers && getPermissions('EDIT_USERS') && type !== TYPE_LIST_MARKETING_USERS && (user.portalAccessStatus == 'Unauthorized' || user.portalAccessStatus == 'Invite sent')"
+                        (click)="sendInvite(user.primaryEmail)"
+                        ngbDropdownItem
+                    >
+                        <div class="qt-icon icon__email qt-sz-20 qt-bg-contain pointer qt-mr-10"></div>
+                        Send Invite
+                    </li>
+                    <li
+                        class="pointer qt-dropdown-menu__item-red qt-dropdown-menu__top-line"
+                        *ngIf="currentUser && (!customerPortalStateService.isCustomerPortal && currentUser.checkPermission('ARCHIVE_USERS') ||  customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user) && !isPrimaryContact())  && !showArchivedUsers"
+                        (click)="delete()"
+                        ngbDropdownItem
+                    >
+                        <div class="qt-icon icon__delete qt-icon__red-600 qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                        Archive
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="left-panel-contact qt-pl-16 qt-pr-16 qt-pt-16 qt-pb-16">
+        <form
+            class="needs-validation"
+            [formGroup]="modelForm"
+        >
+            <div class="qt-input-block">
+                <label class="qt-input-block__label qt-fs-14 qt-fw-600 qt-mb-12">Contact Details</label>
+                <div formArrayName="phones">
+                    <div
+                        *ngFor="let item of phones.controls; let i = index"
+                        [formGroupName]="i"
+                    >
+                        <div class="qt-df qt-ai-c qt-jc-sb qt-mb-2 relative">
+                            <div class="left-panel-contact__details-title qt-df qt-ai-c qt-mr-8">
+                                <div
+                                    [ngClass]="{'icon__old-phone':item.value.name == 'FAX',
+                        'icon__mobile':item.value.name == 'MOBILE',
+                         'icon__phone':item.value.name == 'OFFICE'}"
+                                    class=" qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"
+                                ></div>
+                                <span
+                                    class="type-phone"
+                                    [textContent]="item.value.name == 'OFFICE' ? 'Phone' : item.value.name == 'MOBILE' ? 'Mobile' : item.value.name == 'FAX' ? 'Fax' : ''"
+                                ></span>
+                            </div>
+                            <div class="left-panel-contact__details-input-wrap qt-pos-rel qt-w100">
+                                <input
+                                    type="text"
+                                    class="qt-editable-input qt-fw-500"
+                                    (blur)="updateUser()"
+                                    placeholder="Enter Primary Phone"
+                                    formControlName="value"
+                                    prefix="+1"
+                                    mask="(000) 000-0000 Ext: 999999||000-000-0000"
+                                    [specialCharacters]="['(',')',' ','-','E','x','t',':']"
+                                    [dropSpecialCharacters]="false"
+                                    [disabled]="!getPermissions('EDIT_USERS')"
+                                    [ngClass]="{'--input-error':submitted && item.controls.value.errors && item.controls.value.errors.validPhoneNumber}"
+                                >
+                                <app-mat-error
+                                    class="invalid-feedback"
+                                    *ngIf="submitted && item.controls.value.errors && item.controls.value.errors.validPhoneNumber"
+                                >
+                                    Phone number is required
+                                </app-mat-error>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="qt-df qt-ai-c qt-jc-sb relative">
+                    <div class="left-panel-contact__details-title qt-df qt-ai-c qt-mr-8">
+                        <div class="icon__email qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"></div>
+                        <span>Email</span>
+                    </div>
+                    <div class="left-panel-contact__details-input-wrap qt-pos-rel qt-w100">
+                        <input
+                            type="text"
+                            class="qt-editable-input qt-fw-500"
+                            (blur)="onCheckEmail()"
+                            placeholder="Enter Email"
+                            [disabled]="!getPermissions('EDIT_USERS')"
+                            formControlName="primaryEmail"
+                            [ngClass]="{'--input-error':submitted && f2.primaryEmail.errors}"
+                        >
+                        <app-mat-error
+                            class="invalid-feedback"
+                            *ngIf="submitted && f2.primaryEmail.errors && f2.primaryEmail.errors.primaryContactEmail"
+                        >
+                            Please enter a valid email address
+                        </app-mat-error>
+                        <app-mat-error
+                            class="invalid-feedback"
+                            *ngIf="submitted && f2.primaryEmail.errors && f2.primaryEmail.errors.existPrimaryContactEmail"
+                        >
+                            The email address is already occupied
+                        </app-mat-error>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div
+        class="left-panel-company-details qt-pl-16 qt-pr-16 qt-pt-16 qt-pb-16"
+        *ngIf="getCompany()"
+    >
+        <div class="qt-input-block">
+            <label class="qt-input-block__label qt-fs-14 qt-fw-600 qt-mb-12">Company Details</label>
+            <div class="qt-df qt-ai-c qt-jc-sb qt-mb-16">
+                <div class="qt-df qt-ai-c">
+                    <div class="icon__companies qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"></div>
+                    <span class="company-details-field">Company</span>
+                </div>
+                <div
+                    class="ellipsis qt-fs-14 qt-fw-500 qt-color-gray-900 company-details-value"
+                    [textContent]="getCompany().name"
+                ></div>
+            </div>
+            <div class="qt-df qt-ai-c qt-jc-sb qt-mb-16">
+                <div class="qt-df qt-ai-c">
+                    <div class="icon__phone qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"></div>
+                    <span class="company-details-field">Telephone</span>
+                </div>
+                <div
+                    class="ellipsis qt-fs-14 qt-fw-500 qt-color-gray-900 company-details-value"
+                    [textContent]="(getContactCompany() && getContactCompany().primaryPhone) ? getContactCompany().primaryPhone[0].number : ''"
+                ></div>
+            </div>
+            <div class="qt-df qt-ai-c qt-jc-sb qt-mb-16">
+                <div class="qt-df qt-ai-c">
+                    <div class="icon__email qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"></div>
+                    <span class="company-details-field">Email</span>
+                </div>
+                <div
+                    class="ellipsis qt-fs-14 qt-fw-500 qt-color-gray-900 company-details-value"
+                    [textContent]="(getContactCompany() && getContactCompany().primaryContact) ?  getContactCompany().primaryContact.primaryEmail : ''"
+                ></div>
+            </div>
+            <div class="qt-df qt-ai-c qt-jc-sb">
+                <div class="qt-df qt-ai-c">
+                    <div class="icon__map-pin qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"></div>
+                    <span class="company-details-field">Address</span>
+                </div>
+                <div
+                    class="ellipsis qt-fs-14 qt-fw-500 qt-color-gray-900 company-details-value"
+                    [textContent]="(getContactCompany() && getContactCompany().primaryAddress) ? getContactCompany().primaryAddress.address : ''"
+                >
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="left-panel-job-description qt-pl-16 qt-pr-16 qt-pt-16 qt-pb-16">
+        <div class="qt-input-block">
+            <div class="qt-input-block__label qt-fs-14 qt-fw-600 qt-mb-12">Job Description</div>
+            <div class="user-detail__row-info-value container">
+                <textarea
+                    id="description-global-note"
+                    [value]="user.jobDescription"
+                    (input)="onChangeJobDescription($event)"
+                    (blur)="updateUser()"
+                    class="terms-n-conditions__textarea qt-input-block__textarea"
+                    placeholder="Write Job Description"
+                    appTextArea
+                    [maxHeight]="200"
+                    maxlength="500"
+                    [disabled]="!getPermissions('EDIT_USERS')"
+                ></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="left-panel-marketing qt-pl-16 qt-pr-16 qt-pt-16 qt-pb-16">
+        <div class="user-detail__row-info-label qt-fs-14 qt-fw-600 qt-mb-12">Marketing Subscription</div>
+        <user-custom-subscription
+            [isDisabled]="!getPermissions('EDIT_USERS')"
+            [classDropDown]="'user-aside-detail-custom-subscription'"
+            [customSubscriptions]="user.customSubscriptions"
+            (onChange)="onChangeCustomSubscriptions($event)"
+        ></user-custom-subscription>
+    </div>
+    <div class="left-panel-tags qt-pl-16 qt-pr-16 qt-pt-16 qt-pb-16">
+        <div class="user-detail__row-info-label qt-fs-14 qt-fw-600 qt-mb-12">Tags</div>
+        <app-company-tags
+            #companyTags
+            [showLabel]="false"
+            [selectedTag]="user.tags"
+            [placement]="'top'"
+            [blockUserTag]="true"
+            [isDisabled]="!getPermissions('EDIT_USERS')"
+            (tagsChange)="onChangeTags($event)"
+        ></app-company-tags>
+    </div>
+</div>
