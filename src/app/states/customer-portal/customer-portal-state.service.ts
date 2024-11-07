@@ -42,7 +42,7 @@ export class CustomerPortalStateService {
   }
   public checkEditUser(currentUser, user) {
     if (this.isCustomerPortal
-      && this.getPermissionCustomerUser(currentUser, 'EDIT_USERS')
+      && currentUser.customerCompaniesInfo.filter(item => user.customerCompaniesInfo.some(userCompany => userCompany.companyId == item.companyId)).some(item => item.customerUserRole.getPermission('EDIT_USERS'))
       && currentUser.id !== user.id
       || this.isCustomerPortal
       && currentUser.id === user.id

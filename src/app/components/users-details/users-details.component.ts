@@ -96,6 +96,11 @@ export class UsersDetailsComponent implements OnInit {
     this.usersStateService.setUserForEdit(user);
     this.user.onEdit(user);
     console.log("this.user", this.user);
+    if (this.customerPortalStateService.checkShowTabTicketsAsideUserDetail(this.usersStateService.getCurrentUser(), this.user)) {
+      this.tab = 'tickets';
+    } else {
+      this.tab = 'messages';
+    }
     this.showPreloader = false;
   }
   edit() {

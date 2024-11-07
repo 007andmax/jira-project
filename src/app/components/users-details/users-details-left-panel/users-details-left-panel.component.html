@@ -24,6 +24,7 @@
             <button
                 class="qt-button --sm qt-w qt-w100 qt-jc-c"
                 (click)="addCompany()"
+                *ngIf="!customerPortalStateService.isCustomerPortal"
             >
                 <span class="qt-icon icon__add qt-sz-16 qt-icon__white qt-dib qt-mr-8"></span>
                 Add to a New Company
@@ -43,7 +44,8 @@
                 <div class="qt-icon icon__email qt-sz-16 pointer qt-bg-contain"></div>
             </div>
             <div
-                class="qt-ml-8"
+                [ngClass]="{'qt-ml-auto':customerPortalStateService.isCustomerPortal,
+            'qt-ml-8':!customerPortalStateService.isCustomerPortal}"
                 ngbDropdown
                 [container]="'body'"
             >

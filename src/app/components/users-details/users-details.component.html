@@ -31,7 +31,7 @@
                             class="pointer"
                             [ngClass]="{'active':tab === 'companies'}"
                             (click)="setTab('companies')"
-                            *ngIf="customerPortalStateService.checkShowTabTicketsAsideUserDetail( usersStateService.getCurrentUser(),  user)"
+                            *ngIf="!customerPortalStateService.isCustomerPortal"
                         >
                             Companies
                         </span>
@@ -72,7 +72,7 @@
                         [user]="user"
                     ></app-users-details-tab-documents>
                     <app-users-details-tab-passwords
-                        *ngIf="tab === 'passwords' && getPermissions('VIEW_PASSWORD_SECTION')"
+                        *ngIf="tab === 'passwords'"
                         [user]="user"
                     ></app-users-details-tab-passwords>
                     <app-users-details-tab-messages
