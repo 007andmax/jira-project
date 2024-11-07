@@ -90,19 +90,15 @@ export class UsersDetailsTabCompaniesAddComponent implements OnInit {
     this.customerCompaniesInfo.setJobTitleDto(data);
   }
   onChangeDefaultSubscriptions(data) {
-    console.log("data", data);
     this.customerCompaniesInfo.setDefaultSubscriptions(data);
   }
   onSelectPortalAccessStatus(data) {
-    console.log("onSelectPortalAccessStatus", data);
     this.customerCompaniesInfo.setUserRole(data);
   }
   addCompany() {
-    console.log("addCompany");
     if (!this.customerCompaniesInfo.companyId) return;
     this.addBtn.setDisabled(true);
     this.user.customerCompaniesInfo.push(this.customerCompaniesInfo);
-    console.log(this.user.getUserForUpdate(this.usersStateService.getuserForEdit()));
     this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit())).subscribe(data => {
       this.addBtn.setDisabled(false);
       this.onClose.emit(null);

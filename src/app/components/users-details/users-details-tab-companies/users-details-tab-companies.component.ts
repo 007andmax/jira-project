@@ -22,9 +22,7 @@ export class UsersDetailsTabCompaniesComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    console.log("this.usersStateService.isShowAddCustomerCompaniesInfo", this.usersStateService.isShowAddCustomerCompaniesInfo);
     if (this.usersStateService.isShowAddCustomerCompaniesInfo) {
-      console.log("this.isShowAdd", this.isShowAdd);
       this.isShowAdd = true;
       this.usersStateService.setIsShowAddCustomerCompaniesInfo(false);
     }
@@ -60,6 +58,9 @@ export class UsersDetailsTabCompaniesComponent implements OnInit, OnDestroy {
   }
   onSelectCustomerCompaniesInfo() {
     this.usersStateService.setSelectedCustomerCompaniesInfo(this.user.customerCompaniesInfo.filter(item => item.selected));
+  }
+  public trackByCompanyId(index, item) {
+    return item.companyId;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

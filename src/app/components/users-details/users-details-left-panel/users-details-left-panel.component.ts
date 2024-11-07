@@ -12,6 +12,15 @@ import { TagsService } from 'src/app/services/tags/tags.service';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { PhoneNumber } from 'src/class/phone-number';
 import { UserCustomerCompaniesInfo } from '../../users/class/user-customer-companies-info';
+import { TechUsersService } from 'src/app/services/setting/tech-users.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UsersCheckUseComponent } from '../../users/users-check-use/users-check-use.component';
+import { UsersTableService } from '../../users/users-table/services/users-table.service';
+import { AlertComponent } from '../../shared/alert/alert.component';
+import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
+import { ARCHIVE_USER } from 'src/app/const/confirm';
+import { ConfirmComponent } from '../../shared/confirm/confirm.component';
+import { CurrentUser } from 'src/class/current-user/current-user';
 
 @Component({
   selector: 'app-users-details-left-panel',
@@ -26,6 +35,7 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
   reEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
   isChange: boolean = false;
   seelectedCustomerCompaniesInfo: UserCustomerCompaniesInfo;
+  currentUser: CurrentUser = new CurrentUser();
   @Input() user: UserProfile = new UserProfile();
   @Output() onEdit = new EventEmitter<any>();
   @Output() onDraftEmail = new EventEmitter<any>();
@@ -36,11 +46,16 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
     public ticketsListService: TicketsListService,
     private usersService: UsersService,
     private draftEmailStateService: DraftEmailStateService,
+    private confirmStateService: ConfirmStateService,
     private tagsService: TagsService,
     public formBuilder: FormBuilder,
+    private techUsersService: TechUsersService,
+    private usersTableService: UsersTableService,
+    private modalService: NgbModal,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
+    this.currentUser = this.usersStateService.getCurrentUser();
     this.modelForm = this.formBuilder.group({
       phones: this.formBuilder.array([]),
       primaryEmail: ["",
@@ -55,11 +70,8 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
       });
       this.phones.push(itemGroup);
     });
-
-    console.log("this.phones", this.phones);
     this.modelForm.controls["primaryEmail"].setValue(this.user.primaryEmail);
     this.modelForm.valueChanges.subscribe(res => {
-      console.log("res", res);
       this.isChange = true;
     })
     this.usersStateService.onSelectCustomerCompanyInfo.subscribe(data => {
@@ -94,9 +106,7 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
   }
   updateUser() {
     this.submitted = true;
-    console.log("this.modelForm", this.modelForm);
     if (this.modelForm.invalid || !this.isChange) {
-
       return;
     }
     this.user.phoneNumbers = this.modelForm.value.phones.map(item => new PhoneNumber(item.name, item.value));
@@ -127,7 +137,6 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
 
   }
   onCheckEmail() {
-    console.log("this.f2.primaryEmail", this.f2.primaryEmail);
     this.submitted = true;
     if (!this.f2.primaryEmail.errors) this.onCheckValidPrimaryEmail();
   }
@@ -139,10 +148,35 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
       this.cd.detectChanges();
     })
   }
+  sendInvite(userEmail) {
+    this.techUsersService
+      .verifyUserEmail(userEmail)
+      .subscribe();
+  }
+  delete() {
+    if (this.user.customerCompaniesInfo.find(item => item.isPrimaryContact)) {
+      const modalRef = this.modalService.open(UsersCheckUseComponent, { windowClass: 'xs-modal user-modal', container: (this.companyId) ? "company-user" : "app-users", backdrop: 'static', keyboard: false });
+      modalRef.componentInstance.user = this.user;
+      this.cd.markForCheck();
+      return;
+    }
+    if (this.usersTableService.getUsersCount(this.usersStateService.getAllUsers(), this.user.customerCompaniesInfo, this.user.isArchive()) === 1) {
+      const modalRef = this.modalService.open(AlertComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+      modalRef.componentInstance.message = `You cannot archive all users. At least one must remain.`;
+      this.cd.markForCheck();
+      return;
+    }
+    this.confirmStateService.setConfirmAction(ARCHIVE_USER);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.message = `Do you want to archive ${this.user.firstName + ' ' + this.user.lastName}`;
+    this.usersStateService.setUserForArchive(this.user);
+    this.cd.markForCheck();
+  }
   onChangeJobDescription(event) {
     this.user.jobDescription = event.target.value;
     this.isChange = true;
   }
+
   edit() {
     this.onEdit.emit(null);
   }

@@ -112,7 +112,6 @@ export class UsersDetailsTabCompaniesItemComponent implements OnInit, OnDestroy 
     this.cd.detectChanges();
   }
   onSelectPortalAccessStatus(data) {
-    console.log("onSelectPortalAccessStatus", data);
     this.customerCompaniesInfo.setUserRole(data);
     this.onUpdate.emit(null);
   }

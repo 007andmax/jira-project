@@ -57,15 +57,11 @@
         class="users-table__tickets qt-fd-c qt-ai-fs qt-jc-c ellipsis"
         [textContent]="(primaryContact) ? primaryContact.primaryEmail : ''"
     ></div>
-    <div
-        class="users-table__primary qt-fd-c qt-ai-fs qt-jc-c"
-        (click)="showDetailUser()"
-    >
+    <div class="users-table__primary qt-fd-c qt-ai-fs qt-jc-c">
         <ng-template
             ngFor
             let-phone
             [ngForOf]="primaryPhone"
-            [ngForTrackBy]="trackById"
         >
             <div class="qt-df qt-ai-c">
                 <div>

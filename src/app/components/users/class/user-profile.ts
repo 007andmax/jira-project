@@ -34,6 +34,9 @@ export class UserProfile {
     constructor() {
 
     }
+    public isArchive() {
+        return this.deletedAt != null;
+    }
     public setPortalAccessStatus(data) {
         this.portalAccessStatus = data;
     }

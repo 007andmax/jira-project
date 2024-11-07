@@ -15,7 +15,6 @@ export class CompaniesUsersDetailsComponent extends UsersDetailsComponent {
     this.leftPanelStateService.changeStateWithoutNavigate('company-user-details');
     let id = this.activateRoute.snapshot.params['iduser'];
     let subscription = this.activateRoute.params.subscribe(params => {
-      console.log("params", params);
       this.showPreloader = true;
       id = params['iduser'];
       this.companyId = params['id'];

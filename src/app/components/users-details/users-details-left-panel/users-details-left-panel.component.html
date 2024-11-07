@@ -48,9 +48,9 @@
             'qt-ml-8':!customerPortalStateService.isCustomerPortal}"
                 ngbDropdown
                 [container]="'body'"
-                *ngIf="(!showArchivedUsers && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user))) || 
-                !showArchivedUsers && getPermissions('EDIT_USERS') && type !== TYPE_LIST_MARKETING_USERS && (user.portalAccessStatus == 'Unauthorized' || user.portalAccessStatus == 'Invite sent') ||
-                (currentUser && (!customerPortalStateService.isCustomerPortal && currentUser.checkPermission('ARCHIVE_USERS') ||  customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user) && !isPrimaryContact())  && !showArchivedUsers)"
+                *ngIf="(!user.isArchive() && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user))) || 
+                !user.isArchive() && getPermissions('EDIT_USERS')  && (user.portalAccessStatus == 'Unauthorized' || user.portalAccessStatus == 'Invite sent') ||
+                (currentUser && (!customerPortalStateService.isCustomerPortal && currentUser.checkPermission('ARCHIVE_USERS') ||  customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user) && !isPrimaryContact())  && !user.isArchive())"
             >
                 <div
                     class="qt-button-square actions-btn pointer"
@@ -66,7 +66,7 @@
                 >
                     <li
                         class="pointer"
-                        *ngIf="!showArchivedUsers && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user))"
+                        *ngIf="!user.isArchive() && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user))"
                         (click)="edit()"
                         ngbDropdownItem
                     >
@@ -75,7 +75,7 @@
                     </li>
                     <li
                         class="pointer"
-                        *ngIf="!showArchivedUsers && getPermissions('EDIT_USERS') && type !== TYPE_LIST_MARKETING_USERS && (user.portalAccessStatus == 'Unauthorized' || user.portalAccessStatus == 'Invite sent')"
+                        *ngIf="!user.isArchive() && getPermissions('EDIT_USERS') && (user.portalAccessStatus == 'Unauthorized' || user.portalAccessStatus == 'Invite sent')"
                         (click)="sendInvite(user.primaryEmail)"
                         ngbDropdownItem
                     >
@@ -84,7 +84,7 @@
                     </li>
                     <li
                         class="pointer qt-dropdown-menu__item-red qt-dropdown-menu__top-line"
-                        *ngIf="currentUser && (!customerPortalStateService.isCustomerPortal && currentUser.checkPermission('ARCHIVE_USERS') ||  customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user) && !isPrimaryContact())  && !showArchivedUsers"
+                        *ngIf="currentUser && (!customerPortalStateService.isCustomerPortal && currentUser.checkPermission('ARCHIVE_USERS') ||  customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user) && !isPrimaryContact())  && !user.isArchive()"
                         (click)="delete()"
                         ngbDropdownItem
                     >
@@ -132,7 +132,7 @@
                                     [specialCharacters]="['(',')',' ','-','E','x','t',':']"
                                     [dropSpecialCharacters]="false"
                                     [ngClass]="{'--input-error':submitted && item.controls.value.errors && item.controls.value.errors.validPhoneNumber}"
-                                    *ngIf="!showArchivedUsers && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user))"
+                                    *ngIf="!user.isArchive() && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user))"
                                 >
                                 <input
                                     type="text"
@@ -140,7 +140,7 @@
                                     placeholder="Enter Primary Phone"
                                     formControlName="value"
                                     disabled
-                                    *ngIf="!(!showArchivedUsers && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user)))"
+                                    *ngIf="!(!user.isArchive() && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user)))"
                                 >
                                 <app-mat-error
                                     class="invalid-feedback"
@@ -165,7 +165,7 @@
                             placeholder="Enter Email"
                             formControlName="primaryEmail"
                             [ngClass]="{'--input-error':submitted && f2.primaryEmail.errors}"
-                            *ngIf="!showArchivedUsers && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user))"
+                            *ngIf="!user.isArchive() && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user))"
                         >
                         <input
                             type="text"
@@ -173,7 +173,7 @@
                             placeholder="Enter Email"
                             disabled
                             formControlName="primaryEmail"
-                            *ngIf="!(!showArchivedUsers && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user)))"
+                            *ngIf="!(!user.isArchive() && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user)))"
                         >
                         <app-mat-error
                             class="invalid-feedback"
@@ -255,8 +255,8 @@
                     appTextArea
                     [maxHeight]="200"
                     maxlength="500"
-                    [ngClass]="{'disabled': !(!showArchivedUsers && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user)))}"
-                    [disabled]="!(!showArchivedUsers && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user)))"
+                    [ngClass]="{'disabled': !(!user.isArchive() && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user)))}"
+                    [disabled]="!(!user.isArchive() && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user)))"
                 ></textarea>
             </div>
         </div>
@@ -264,7 +264,7 @@
     <div class="left-panel-marketing qt-pl-16 qt-pr-16 qt-pt-16 qt-pb-16">
         <div class="user-detail__row-info-label qt-fs-14 qt-fw-600 qt-mb-12">Marketing Subscription</div>
         <user-custom-subscription
-            [isDisabled]="!(!showArchivedUsers && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user)))"
+            [isDisabled]="!(!user.isArchive() && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user)))"
             [classDropDown]="'user-aside-detail-custom-subscription'"
             [customSubscriptions]="user.customSubscriptions"
             (onChange)="onChangeCustomSubscriptions($event)"
@@ -278,7 +278,7 @@
             [selectedTag]="user.tags"
             [placement]="'top'"
             [blockUserTag]="true"
-            [isDisabled]="!(!showArchivedUsers && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user)))"
+            [isDisabled]="!(!user.isArchive() && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user)))"
             (tagsChange)="onChangeTags($event)"
         ></app-company-tags>
     </div>

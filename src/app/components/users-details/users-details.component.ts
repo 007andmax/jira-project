@@ -92,10 +92,8 @@ export class UsersDetailsComponent implements OnInit {
   }
   setUserRoutingId(id) {
     let user = this.usersStateService.getAllUsers().find(item => item.id == id);
-    console.log("user", user);
     this.usersStateService.setUserForEdit(user);
     this.user.onEdit(user);
-    console.log("this.user", this.user);
     if (this.customerPortalStateService.checkShowTabTicketsAsideUserDetail(this.usersStateService.getCurrentUser(), this.user)) {
       this.tab = 'tickets';
     } else {
