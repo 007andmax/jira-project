@@ -408,8 +408,6 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.router.navigate(
       [`${this.companiesStateService.getCurrentCompany().techDomain}/users/`, user.id]);
     this.leftPanelStateService.toggleLeftPanel(false);
-    //this.usersStateService.showDetailUser(user);
-    // (<any>document.body.querySelector(".ticket-edit-aside")).style.zIndex = "1";
   }
   parseTicketSource() {
     if (this.ticketProfile.deviceId && this.ticketProfile.sourceName == null && this.ticketProfile.ticketSource == "FROM_AGENT") {

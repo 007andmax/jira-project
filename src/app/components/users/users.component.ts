@@ -151,10 +151,6 @@ export class UsersComponent implements OnInit, OnDestroy {
       this.listCustomSubscription = data;
     })
     this.sub.add(onGetListCustomSubscription);
-    let openDetailAside = this.usersStateService.openDetailAside.subscribe(data => {
-      this.setIdDetailUser(data);
-    });
-    this.sub.add(openDetailAside);
   }
   onCloseFilters() {
     this.header.setToggleFilter(false);

@@ -224,4 +224,7 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
   get f2() {
     return this.modelForm.controls;
   }
+  public trackById(index, item) {
+    return item.id;
+  }
 }

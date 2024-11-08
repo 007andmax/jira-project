@@ -119,8 +119,6 @@ export class UsersTableComponent implements OnInit, OnDestroy {
       this.router.navigate(
         [`${this.companiesStateService.getCurrentCompany().techDomain}/users/`, this.user.id]);
     }
-    // this.usersStateService.showDetailUser(this.user);
-    //  this.cd.markForCheck();
   }
   isPrimaryContact() {
     if (!this.customerPortalStateService.isCustomerPortal && this.companyId) return this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).isPrimaryContact;

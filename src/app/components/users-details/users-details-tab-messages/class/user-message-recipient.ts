@@ -1,4 +1,4 @@
-import { UserAvatar } from "../../../class/user-avatar";
+import { UserAvatar } from "../../../users/class/user-avatar";
 
 export class UserMessageRecipient {
     accountType: string;

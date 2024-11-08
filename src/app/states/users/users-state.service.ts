@@ -32,7 +32,6 @@ export class UsersStateService {
   onClearGlobalFilter: EventEmitter<any> = new EventEmitter();
   openMessageAside: EventEmitter<any> = new EventEmitter();
   onSelectAll: EventEmitter<any> = new EventEmitter();
-  openDetailAside: EventEmitter<any> = new EventEmitter();
   closeDetailAside: EventEmitter<any> = new EventEmitter();
   onChangeUserPermissions: EventEmitter<any> = new EventEmitter();
   onInitGlobalFilter: EventEmitter<any> = new EventEmitter();
@@ -206,9 +205,6 @@ export class UsersStateService {
   }
   public hideDetailUser() {
     this.closeDetailAside.emit(null);
-  }
-  public showDetailUser(data) {
-    this.openDetailAside.emit(data);
   }
   public getFilter() {
     return this.filter;

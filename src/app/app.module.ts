@@ -76,7 +76,6 @@ import { ModalAddUpdateTicketComponent } from './services/modal/modal-add-update
 import { ModalAddUsersNotifyComponent } from './services/modal/modal-add-users-notify/modal-add-users-notify.component';
 import { ModalAgentLinkComponent } from './services/modal/modal-agent-link/modal-agent-link.component';
 import { ModalEditCategoryProductComponent } from './services/modal/modal-edit-category-product/modal-edit-category-product.component';
-import { UsersAsideDetailModule } from './components/users/users-aside-detail/users-aside-detail.module';
 import { TextAreaModule } from './directives/text-area/text-area.module';
 import { AddMarketingSubscriptionTypeModule } from './components/setting/marketing-email/marketing-subscription-type/add-marketing-subscription-type/add-marketing-subscription-type.module';
 import { PermissionInvoicesService } from './components/billing/invoices/permission-invoices.service';
@@ -216,7 +215,6 @@ declare var $: any;
     NonContractServicesEditModule,
     HeaderModule,
     BreadcrumbsModule,
-    UsersAsideDetailModule,
     TextAreaModule,
     AddMarketingSubscriptionTypeModule,
     PreviewAttachmentModule,
