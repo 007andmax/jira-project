@@ -58,10 +58,21 @@
         >
         </user-table-default-subscription>
     </div>
-    <div
-        class="users-table__tickets qt-fd-c qt-ai-fs qt-jc-c ellipsis"
-        [textContent]="(primaryContact) ? primaryContact.primaryEmail : ''"
-    ></div>
+    <div class="users-table__tickets">
+        <div class="qt-df">
+            <label
+                class="qt-checkbox"
+                [attr.for]="'eligibleForTicket-add'"
+            >
+                <input
+                    [attr.id]="'eligibleForTicket-add'"
+                    [(ngModel)]="customerCompaniesInfo.eligibleForTicket"
+                    type="checkbox"
+                >
+                <span></span>
+            </label>
+        </div>
+    </div>
     <div class="users-table__primary qt-fd-c qt-ai-fs qt-jc-c">
         <ng-template
             ngFor

@@ -64,7 +64,7 @@ export class UsersDetailsTabCompaniesItemComponent implements OnInit, OnDestroy 
     if (this.getCpmpany()) {
       let primaryContact,
         primaryAddress,
-        primaryPhone;
+        primaryPhone = [];
       if (this.getCpmpany().companyInfo) {
         if (this.getCpmpany().companyInfo.contacts) {
           for (let contact of this.getCpmpany().companyInfo.contacts) {
@@ -74,14 +74,11 @@ export class UsersDetailsTabCompaniesItemComponent implements OnInit, OnDestroy 
         if (this.getCpmpany().companyInfo.addresses) {
           for (let address of this.getCpmpany().companyInfo.addresses) {
             if (address.isPrimary) primaryAddress = address;
+            primaryPhone = [...primaryPhone, ...address.phoneNumbers];
+            primaryPhone.forEach(element => {
+              if (element.number[0] === "1") element.number = `+${element.number}`;
+            });
           }
-        }
-        if (primaryAddress && primaryAddress.phoneNumbers.length) {
-          primaryPhone = primaryAddress.phoneNumbers;
-          primaryPhone.forEach(element => {
-            if (element.number[0] === "1") element.number = `+${element.number}`;
-          });
-
         }
       }
       this.primaryContact = primaryContact;
@@ -110,6 +107,10 @@ export class UsersDetailsTabCompaniesItemComponent implements OnInit, OnDestroy 
     this.customerCompaniesInfo.selected = event.target.checked;
     this.onSelect.emit(this.customerCompaniesInfo);
     this.cd.detectChanges();
+  }
+  changeEligibleForTicket(event) {
+    this.customerCompaniesInfo.eligibleForTicket = event.target.checked;
+    this.onUpdate.emit(null);
   }
   onSelectPortalAccessStatus(data) {
     this.customerCompaniesInfo.setUserRole(data);

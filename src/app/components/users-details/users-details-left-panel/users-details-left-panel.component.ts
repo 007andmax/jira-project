@@ -208,12 +208,15 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
         }
       }
       return {
-        primaryAddress: primaryAddress,
+        primaryAddress: this.getCompany().companyInfo.addresses,
         primaryContact: primaryContact,
         primaryPhone: primaryPhone
       }
     }
     return null
+  }
+  parseAddress(item) {
+    return `${item.suiteNumber ? item.suiteNumber + ', ' : ''}${item.address} ${item.postalCode}`;
   }
   addCompany() {
     this.usersStateService.showAddCustomerCompaniesInfo();

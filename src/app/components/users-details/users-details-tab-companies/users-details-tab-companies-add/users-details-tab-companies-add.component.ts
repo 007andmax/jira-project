@@ -55,7 +55,7 @@ export class UsersDetailsTabCompaniesAddComponent implements OnInit {
     if (this.getCpmpany()) {
       let primaryContact,
         primaryAddress,
-        primaryPhone;
+        primaryPhone = [];
       if (this.getCpmpany().companyInfo) {
         if (this.getCpmpany().companyInfo.contacts) {
           for (let contact of this.getCpmpany().companyInfo.contacts) {
@@ -65,14 +65,11 @@ export class UsersDetailsTabCompaniesAddComponent implements OnInit {
         if (this.getCpmpany().companyInfo.addresses) {
           for (let address of this.getCpmpany().companyInfo.addresses) {
             if (address.isPrimary) primaryAddress = address;
+            primaryPhone = [...primaryPhone, ...address.phoneNumbers];
+            primaryPhone.forEach(element => {
+              if (element.number[0] === "1") element.number = `+${element.number}`;
+            });
           }
-        }
-        if (primaryAddress && primaryAddress.phoneNumbers.length) {
-          primaryPhone = primaryAddress.phoneNumbers;
-          primaryPhone.forEach(element => {
-            if (element.number[0] === "1") element.number = `+${element.number}`;
-          });
-
         }
       }
       this.primaryContact = primaryContact;

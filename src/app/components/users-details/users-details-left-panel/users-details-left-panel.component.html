@@ -218,7 +218,7 @@
                     [textContent]="(getContactCompany() && getContactCompany().primaryPhone) ? getContactCompany().primaryPhone[0].number : ''"
                 ></div>
             </div>
-            <div class="qt-df qt-ai-c qt-jc-sb qt-mb-16">
+            <div class="qt-df qt-ai-c qt-jc-sb  ">
                 <div class="qt-df qt-ai-c">
                     <div class="icon__email qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"></div>
                     <span class="company-details-field">Email</span>
@@ -228,17 +228,28 @@
                     [textContent]="(getContactCompany() && getContactCompany().primaryContact) ?  getContactCompany().primaryContact.primaryEmail : ''"
                 ></div>
             </div>
-            <div class="qt-df qt-ai-c qt-jc-sb">
-                <div class="qt-df qt-ai-c">
-                    <div class="icon__map-pin qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"></div>
-                    <span class="company-details-field">Address</span>
+            <ng-template
+                ngFor
+                let-item
+                [ngForOf]="getContactCompany() && getContactCompany().primaryAddress"
+                [ngForTrackBy]="trackById"
+            >
+                <div class="qt-df qt-ai-c qt-jc-sb qt-mt-16">
+                    <div class="qt-df qt-ai-c">
+                        <div class="icon__map-pin qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"></div>
+                        <span
+                            class="company-details-field"
+                            [textContent]="item.isPrimary ? 'Billing address' : 'Shipping address'"
+                        >
+                        </span>
+                    </div>
+                    <div
+                        class="qt-fs-14 qt-fw-500 qt-color-gray-900 company-details-value qt-ml-16"
+                        [textContent]="parseAddress(item)"
+                    >
+                    </div>
                 </div>
-                <div
-                    class="ellipsis qt-fs-14 qt-fw-500 qt-color-gray-900 company-details-value"
-                    [textContent]="(getContactCompany() && getContactCompany().primaryAddress) ? getContactCompany().primaryAddress.address : ''"
-                >
-                </div>
-            </div>
+            </ng-template>
         </div>
     </div>
     <div class="left-panel-job-description qt-pl-16 qt-pr-16 qt-pt-16 qt-pb-16">
