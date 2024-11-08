@@ -18,6 +18,7 @@ import { TicketsStateService } from 'src/app/states/tickets/tickets-state.servic
 import { StatusColor } from '../tickets/class/status-color';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { UserChange } from '../users/class/user-change';
 
 @Component({
   selector: 'app-users-details',
@@ -78,6 +79,13 @@ export class UsersDetailsComponent implements OnInit {
     }, 3000);
     this.usersStateService.onShowAddCustomerCompaniesInfo.subscribe(data => {
       this.tab = 'companies';
+    })
+    let getChangeCompanies = this.usersStateService.getChangeUsers().subscribe((data: UserChange) => {
+      if ((data.action === 'USER_SAVED' || data.action === 'USER_ARCHIVED') && data.data.accountType !== "TECH" && data.data.id == this.user.id) {
+        this.user.onEdit(new User(data.data));
+        this.leftPanel.updateForm();
+      }
+      this.cd.detectChanges();
     })
   }
   getColors() {

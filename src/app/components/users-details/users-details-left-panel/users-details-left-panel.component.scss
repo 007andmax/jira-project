@@ -84,6 +84,9 @@
 .type-phone,.company-details-field,.company-details-value {
     line-height: 17px;
 }
+.company-details-field {
+  color: $gray-500;
+}
 .address-value {
   text-align: right;
 }
