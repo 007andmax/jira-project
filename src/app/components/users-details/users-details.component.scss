@@ -38,6 +38,7 @@
     }
   }
 }
+
 app-users-details-tab-tickets {
   /deep/ .qt-page-list__container {
     .qt-page-list__header-thead-container {
@@ -65,20 +66,23 @@ app-users-details-tab-tickets {
     }
   }
 }
-/deep/ .qt-page-list__header-thead-container {
-  position: sticky;
-  top: 0;
-  z-index: 1;
 
-  &::after {
-    content: "";
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    width: 100%;
-    height: 40px;
-    background-color: #fff;
-    z-index: -1;
+app-users-details {
+  /deep/ .qt-page-list__header-thead-container {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      width: 100%;
+      height: 40px;
+      background-color: #fff;
+      z-index: -1;
+    }
   }
 }
 

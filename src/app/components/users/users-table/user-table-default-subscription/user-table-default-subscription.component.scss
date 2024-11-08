@@ -1,12 +1,12 @@
 @import "./src/assets/styles/variable";
 
 .active {
-    color: $green-600;
-    background-color: rgba(46, 200, 102, 0.08);
+    color: $green-700;
+    background-color: $green-25;
 }
 .no-active {
     color: $red-600;
-    background-color: rgba(255, 82, 99, 0.08);
+    background-color: $red-50;
 }
 .filter-tags-body {
     padding: 0;
@@ -121,24 +121,6 @@
         }
     }
 }
-.selected-item {
-    display: inline-flex;
-    align-items: center;
-    width: max-content;
-    line-height: 1.2;
-    padding: 4px 6px;
-    height: 24px;
-    border-radius: 6px;
-    font-size: 10px;
-    .icon__close {
-        margin: 2px 0 2px 4px;
-    }
-}
-.list-default-subscriptions {
-    display: flex;
-    gap: 8px;
-    min-height: 20px;
-}
 .container-caret {
     position: absolute;
     top: 0;
@@ -157,8 +139,43 @@
     pointer-events: none;
 }
 
-.list-default-subscriptions-button {
+/deep/ .selected-item {
+  display: inline-flex;
+  align-items: center;
+  width: max-content;
+  line-height: 1.2;
+  padding: 4px 6px;
+  height: 24px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  margin: 0 4px 4px 0;
+  .icon__close {
+    margin: 2px 0 2px 4px;
+  }
+}
+/deep/ .list-default-subscriptions {
+  display: block;
+  width: auto;
+  min-height: 20px;
+}
+/deep/ .list-default-subscriptions-button {
+  display: none;
+}
+/deep/ app-users-details-tab-companies {
+  .list-default-subscriptions-button {
     display: inline-flex;
     width: 24px;
     height: 24px;
+  }
+
+  .list-default-subscriptions {
+    display: flex;
+    gap: 8px;
+    min-height: 20px;
+  }
+  .selected-item {
+    margin: 0;
+  }
 }
+
