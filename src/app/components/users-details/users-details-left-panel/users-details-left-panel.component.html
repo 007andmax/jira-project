@@ -15,7 +15,7 @@
             <div class="qt-df qt-ai-c">
                 <div class="icon__password-manager qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-4 qt-icon"></div>
                 <span
-                    class="qt-fs-13 qt-color-gray-500 qt-fw-400"
+                    class="qt-fs-13 qt-color-gray-500 qt-fw-400 qt-lh-1"
                     [textContent]="user.portalAccessStatus"
                 ></span>
             </div>
@@ -48,7 +48,7 @@
             'qt-ml-8':!customerPortalStateService.isCustomerPortal}"
                 ngbDropdown
                 [container]="'body'"
-                *ngIf="(!user.isArchive() && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user))) || 
+                *ngIf="(!user.isArchive() && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user))) ||
                 !user.isArchive() && getPermissions('EDIT_USERS')  && (user.portalAccessStatus == 'Unauthorized' || user.portalAccessStatus == 'Invite sent') ||
                 (currentUser && (!customerPortalStateService.isCustomerPortal && currentUser.checkPermission('ARCHIVE_USERS') ||  customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user) && !isPrimaryContact())  && !user.isArchive())"
             >
