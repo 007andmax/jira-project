@@ -249,7 +249,11 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     if (indexServiceType > -1) this.onSelectServiceTypes(this.serviceTypes[indexServiceType]);
   }
   onSameAsBilling(event) {
-    if (event.target.checked) this.company.addresses[1].initSameAsBilling(this.company.addresses[0]);
+    if (event.target.checked) {
+      this.company.addresses[1].initSameAsBilling(this.company.addresses[0]);
+      this.validate.resetShippingAddress();
+      this.onChangeShippingPhoneNumber();
+    }
   }
   public onSelectCompanyTypes(type) {
     if (type) this.company.clientType = type.value;

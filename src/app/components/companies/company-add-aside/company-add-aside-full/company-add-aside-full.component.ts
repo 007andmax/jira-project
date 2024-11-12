@@ -159,6 +159,8 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
       this.company.addresses[1] = new CompanyProfileAddress(JSON.parse(JSON.stringify(this.company.addresses[0])));
       this.company.addresses[1].sameAsBilling = true;
       this.company.addresses[1].isPrimary = false;
+      this.validate.resetShippingAddress();
+      this.onChangeShippingPhoneNumber();
     }
   }
   removeLogo() {

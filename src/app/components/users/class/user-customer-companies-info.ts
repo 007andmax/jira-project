@@ -63,7 +63,8 @@ export class UserCustomerCompaniesInfo {
             "customerUserRole": this.customerUserRole,
             defaultSubscriptions: this.defaultSubscriptions.getDataForUpdate(),
             "hasAccess": this.hasAccess,
-            "isPrimaryContact": this.isPrimaryContact
+            "isPrimaryContact": this.isPrimaryContact,
+            eligibleForTicket: this.eligibleForTicket
         }
     }
     /**
