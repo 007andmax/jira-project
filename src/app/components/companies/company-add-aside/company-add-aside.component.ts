@@ -58,6 +58,7 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
   }
   public onAddFull() {
+    console.log("this.validate", this.validate);
     if (!this.validate.isValidate(this.company)) return;
     this.addBtn.setDisabled(true);
     let createCompany = this.companiesService.createCompany(this.company.getDataForAdd()).subscribe(data => {

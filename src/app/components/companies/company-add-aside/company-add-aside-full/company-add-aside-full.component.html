@@ -130,7 +130,7 @@
                 type="text"
                 [ngClass]="{'--input-error' : !validate.getBillindAddress()}"
                 [(ngModel)]="company.addresses[0].locationName"
-                (input)="validate.resetBillindAddress()"
+                (input)="onChangeBillingLocationName($event)"
                 placeholder="Enter Location Name"
             >
             <app-mat-error
@@ -140,17 +140,17 @@
                 Billing Location Name is required
             </app-mat-error>
         </div>
-        <div class="qt-inputs-row">
-            <div class="qt-input-block">
-                <div class="qt-input-block__label">Location</div>
-                <input
-                    type="text"
-                    location-is-init="false"
-                    [(ngModel)]="company.addresses[0].address"
-                    (focus)="onCheckGoogleAutoComplete($event,0)"
-                    placeholder="Enter Location"
-                >
-            </div>
+    </div>
+    <div class="qt-inputs-row">
+        <div class="qt-input-block">
+            <div class="qt-input-block__label">Location</div>
+            <input
+                type="text"
+                location-is-init="false"
+                [(ngModel)]="company.addresses[0].address"
+                (focus)="onCheckGoogleAutoComplete($event,0)"
+                placeholder="Enter Location"
+            >
         </div>
     </div>
     <div class="qt-inputs-row">
@@ -159,6 +159,7 @@
             <input
                 type="text"
                 [(ngModel)]="company.addresses[0].suiteNumber"
+                (input)="onChangeBillingSuiteNo($event)"
                 placeholder="Enter Suite Number"
             >
         </div>
@@ -167,6 +168,7 @@
             <input
                 type="text"
                 [(ngModel)]="company.addresses[0].postalCode"
+                (input)="onChangeBillingZip($event)"
                 placeholder="Enter Zip"
             >
         </div>
@@ -224,7 +226,15 @@
                 [(ngModel)]="company.addresses[1].locationName"
                 placeholder="Enter Location Name"
                 [disabled]="company.addresses[1].sameAsBilling"
+                [ngClass]="{'--input-error' : !validate.getShippingAddress()}"
+                (input)="validate.resetShippingAddress()"
             >
+            <app-mat-error
+                class="invalid-feedback"
+                *ngIf="!validate.getShippingAddress()"
+            >
+                Shipping Location Name is required
+            </app-mat-error>
         </div>
     </div>
     <div class="qt-inputs-row">
