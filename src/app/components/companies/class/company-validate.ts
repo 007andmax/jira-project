@@ -192,7 +192,7 @@ export class CompanyValdiate {
         if (company.isUseSelectedUser && !company.contacts[0].id) this.user = false;
         if (!company.isUseSelectedUser && (!company.contacts[0].primaryEmail || !company.contacts[0].primaryEmail.match(this.reEmail))) this.primaryContactEmail = false;
         if (!company.addresses[0].phoneNumbers[0].number || company.addresses[0].phoneNumbers[0].number.length < 14) this.phoneNumber = false;
-        if (!company.addresses[1].phoneNumbers[0].number || company.addresses[1].phoneNumbers[0].number.length < 14) this.shippingPhoneNumber = false;
+        if (company.addresses.length > 1 && (!company.addresses[1].phoneNumbers[0].number || company.addresses[1].phoneNumbers[0].number.length < 14)) this.shippingPhoneNumber = false;
         if (!company.domain) this.domain = false;
         if (company.domain && !company.domain.match(this.reDomain)) this.domainValid = false;
         if (company.addresses.length > 0 && company.addresses[0].locationName != undefined && company.addresses[0].locationName.length == 0) this.billindAddress = false;
