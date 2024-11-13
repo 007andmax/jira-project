@@ -63,6 +63,21 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
       ],
 
     })
+    this.updateForm();
+    this.modelForm.valueChanges.subscribe(res => {
+      this.isChange = true;
+    })
+    this.usersStateService.onSelectCustomerCompanyInfo.subscribe(data => {
+      this.seelectedCustomerCompaniesInfo = data;
+    })
+  }
+  updateForm() {
+    console.log("this.phones", this.phones);
+    while (this.phones.length) {
+      this.phones.removeAt(0);
+    }
+    //this.modelForm.reset();
+    console.log("this.user.phoneNumbers", this.user.phoneNumbers);
     this.user.phoneNumbers.forEach(item => {
       const itemGroup = this.formBuilder.group({
         name: [item.typeNumber, Validators.required], // Define the fields inside the FormGroup
@@ -71,12 +86,7 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
       this.phones.push(itemGroup);
     });
     this.modelForm.controls["primaryEmail"].setValue(this.user.primaryEmail);
-    this.modelForm.valueChanges.subscribe(res => {
-      this.isChange = true;
-    })
-    this.usersStateService.onSelectCustomerCompanyInfo.subscribe(data => {
-      this.seelectedCustomerCompaniesInfo = data;
-    })
+    this.cd.detectChanges();
   }
   checkEmail(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {

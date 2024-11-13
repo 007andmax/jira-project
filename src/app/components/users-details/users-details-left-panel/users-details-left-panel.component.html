@@ -15,7 +15,7 @@
             <div class="qt-df qt-ai-c">
                 <div class="icon__password-manager qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-4 qt-icon"></div>
                 <span
-                    class="qt-fs-13 qt-color-gray-500 qt-fw-400"
+                    class="qt-fs-13 qt-color-gray-500 qt-fw-400 qt-lh-1"
                     [textContent]="user.portalAccessStatus"
                 ></span>
             </div>
@@ -48,7 +48,7 @@
             'qt-ml-8':!customerPortalStateService.isCustomerPortal}"
                 ngbDropdown
                 [container]="'body'"
-                *ngIf="(!user.isArchive() && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user))) || 
+                *ngIf="(!user.isArchive() && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user))) ||
                 !user.isArchive() && getPermissions('EDIT_USERS')  && (user.portalAccessStatus == 'Unauthorized' || user.portalAccessStatus == 'Invite sent') ||
                 (currentUser && (!customerPortalStateService.isCustomerPortal && currentUser.checkPermission('ARCHIVE_USERS') ||  customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user) && !isPrimaryContact())  && !user.isArchive())"
             >
@@ -116,7 +116,7 @@
                                     class=" qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"
                                 ></div>
                                 <span
-                                    class="type-phone"
+                                    class="type-phone qt-color-gray-500"
                                     [textContent]="item.value.name == 'OFFICE' ? 'Phone' : item.value.name == 'MOBILE' ? 'Mobile' : item.value.name == 'FAX' ? 'Fax' : ''"
                                 ></span>
                             </div>
@@ -155,7 +155,7 @@
                 <div class="qt-df qt-ai-c qt-jc-sb relative">
                     <div class="left-panel-contact__details-title qt-df qt-ai-c qt-mr-8">
                         <div class="icon__email qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"></div>
-                        <span>Email</span>
+                        <span class="qt-color-gray-500">Email</span>
                     </div>
                     <div class="left-panel-contact__details-input-wrap qt-pos-rel qt-w100">
                         <input
@@ -273,7 +273,7 @@
         </div>
     </div>
     <div class="left-panel-marketing qt-pl-16 qt-pr-16 qt-pt-16 qt-pb-16">
-        <div class="user-detail__row-info-label qt-fs-14 qt-fw-600 qt-mb-12">Marketing Subscription</div>
+        <div class="user-detail__row-info-label qt-fs-14 qt-fw-600 qt-mb-12 qt-color-gray-900">Marketing Subscription</div>
         <user-custom-subscription
             [isDisabled]="!(!user.isArchive() && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user)))"
             [classDropDown]="'user-aside-detail-custom-subscription'"
@@ -282,7 +282,7 @@
         ></user-custom-subscription>
     </div>
     <div class="left-panel-tags qt-pl-16 qt-pr-16 qt-pt-16 qt-pb-16">
-        <div class="user-detail__row-info-label qt-fs-14 qt-fw-600 qt-mb-12">Tags</div>
+        <div class="user-detail__row-info-label qt-fs-14 qt-fw-600 qt-mb-12 qt-color-gray-900">Tags</div>
         <app-company-tags
             #companyTags
             [showLabel]="false"

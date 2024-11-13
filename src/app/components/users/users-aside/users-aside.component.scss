@@ -1,3 +1,5 @@
+@import "./src/assets/styles/variable";
+
 .job-description {
     width: 100%;
 }
@@ -30,4 +32,12 @@
 }
 .first-name-invalid {
     bottom: -30px !important;
+}
+/deep/.custom-subscription-user-aside {
+ .user-subscription {
+    border: 1px solid $gray-200 !important;
+    &::after {
+        left: 14px !important;
+    }
+ }
 }

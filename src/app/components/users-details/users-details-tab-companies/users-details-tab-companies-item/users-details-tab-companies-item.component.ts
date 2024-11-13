@@ -59,6 +59,20 @@ export class UsersDetailsTabCompaniesItemComponent implements OnInit, OnDestroy 
       if (this.userRolesDP) this.userRolesDP.reset(this.userRoles);
     })
     this.sub.add(onGetUserRole);
+    setTimeout(() => {
+      let stompClient = this.usersRealTimeService.changeSubscriptionsUsers.subscribe(newChange => {
+        if (newChange.action === 'DEFAULT_SUBSCRIPTION_SAVED') {
+          /* if (this.user.id == newChange.data.userId) {
+             let index = this.user.customerCompaniesInfo.findIndex(item => item.companyId === newChange.data.companyId);
+             if (index > -1) this.user.customerCompaniesInfo[index] = new UserCustomerCompaniesInfo(newChange.data);
+           }*/
+          this.defaultSubscriptions = this.customerCompaniesInfo.defaultSubscriptions;
+          this.cd.detectChanges();
+        }
+
+      });
+      this.sub.add(stompClient);
+    }, 3000);
   }
   ngDoCheck() {
     if (this.getCpmpany()) {

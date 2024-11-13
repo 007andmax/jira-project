@@ -19,6 +19,10 @@ export class UserTableDefaultSubscriptionComponent implements OnInit {
 
   updateDefault(field) {
     this.defaultSubscriptions[field].enabled = !this.defaultSubscriptions[field].enabled;
+    if (this.defaultSubscriptions[field].enabled) {
+      this.defaultSubscriptions[field].activated = false;
+      this.defaultSubscriptions[field].isExist = false;
+    }
     this.onChangeDefault.emit(this.defaultSubscriptions);
     this.ref.detectChanges();
   }
