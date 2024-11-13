@@ -64,7 +64,9 @@
                   "maximumWarning": "3mb",
                   "maximumError": "6mb"
                 }
-              ]
+              ],
+              "baseHref": "/html/",
+              "deployUrl": "/html/"
             },
             "dev": {
               "fileReplacements": [
