@@ -1,7 +1,10 @@
 <div class="qt-page-list users-page qt-df">
     <div class="qt-page-list__body">
         <div class="qt-page-list__container">
-            <div class="qt-page-list__body">
+            <div
+                class="qt-page-list__body"
+                [ngClass]="['--subscription-column-' + maxSubscribes]"
+            >
                 <!-- New Header -->
                 <div class="qt-page-list__header-thead-container">
                     <div class="qt-table-modern qt-page-list__header-thead">
@@ -39,10 +42,7 @@
                 </div>
                 <!-- / New Header -->
                 <div class="qt-page-list__body-table-container">
-                    <div
-                        class="qt-page-list__body-tbody qt-table-modern users-table"
-                        [ngClass]="['--subscription-column-' + maxSubscribes,'--primary-contact-column-' + maxPhoneNumbers]"
-                    >
+                    <div class="qt-page-list__body-tbody qt-table-modern users-table">
                         <div class="tbody">
                             <app-users-details-tab-companies-add
                                 *ngIf="isShowAdd"
@@ -56,7 +56,6 @@
                                 [ngForTrackBy]="trackByCompanyId"
                             >
                                 <app-users-details-tab-companies-item
-                                    #company
                                     [customerCompaniesInfo]="customerCompaniesInfo"
                                     [user]="user"
                                     (onUpdate)="updateUser()"

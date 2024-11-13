@@ -15,7 +15,6 @@ export class UsersDetailsTabCompaniesComponent implements OnInit, OnDestroy {
   maxSubscribes: number = 0;
   maxPhoneNumbers: number = 0;
   @Input() user: UserProfile = new UserProfile();
-  @ViewChildren("company") companies: QueryList<UsersDetailsTabCompaniesItemComponent>;
   selectAll: boolean = false;
   isShowAdd: boolean = false;
   sub: Subscription = new Subscription();
@@ -42,9 +41,7 @@ export class UsersDetailsTabCompaniesComponent implements OnInit, OnDestroy {
     })
   }
   ngDoCheck() {
-    if (this.companies) this.maxPhoneNumbers = Math.max(...this.companies.toArray().map(item => item.primaryPhone.length));
     this.maxSubscribes = Math.max(...this.user.customerCompaniesInfo.map(item => item.getCountDefaultSubscriptions()));
-
   }
   sortCompanies() {
     if (this.sort == 'DESC') {
