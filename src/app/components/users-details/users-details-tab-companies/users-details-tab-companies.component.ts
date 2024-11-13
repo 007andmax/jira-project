@@ -1,8 +1,9 @@
-import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { UserProfile } from '../../users/class/user-profile';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { UsersService } from 'src/app/services/users/users.service';
 import { Subscription } from 'rxjs';
+import { UsersDetailsTabCompaniesItemComponent } from './users-details-tab-companies-item/users-details-tab-companies-item.component';
 
 @Component({
   selector: 'app-users-details-tab-companies',
@@ -11,7 +12,10 @@ import { Subscription } from 'rxjs';
 })
 export class UsersDetailsTabCompaniesComponent implements OnInit, OnDestroy {
   sort = 'ASC';
+  maxSubscribes: number = 0;
+  maxPhoneNumbers: number = 0;
   @Input() user: UserProfile = new UserProfile();
+  @ViewChildren("company") companies: QueryList<UsersDetailsTabCompaniesItemComponent>;
   selectAll: boolean = false;
   isShowAdd: boolean = false;
   sub: Subscription = new Subscription();
@@ -36,6 +40,11 @@ export class UsersDetailsTabCompaniesComponent implements OnInit, OnDestroy {
     this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit())).subscribe(data => {
 
     })
+  }
+  ngDoCheck() {
+    if (this.companies) this.maxPhoneNumbers = Math.max(...this.companies.toArray().map(item => item.primaryPhone.length));
+    this.maxSubscribes = Math.max(...this.user.customerCompaniesInfo.map(item => item.getCountDefaultSubscriptions()));
+
   }
   sortCompanies() {
     if (this.sort == 'DESC') {
