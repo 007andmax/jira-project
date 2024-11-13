@@ -5,7 +5,7 @@
     "ng": "ng",
     "dev": "set NODE_OPTIONS=--openssl-legacy-provider && ng serve --live-reload false --openssl-legacy-provider --vendor-source-map",
     "dev-front": "ng serve",
-    "build": "node --openssl-legacy-provider --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build --configuration=dev --vendor-source-map",
+    "build": "node --openssl-legacy-provider --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build --configuration=dev --base-href=/html/ --vendor-source-map",
     "build-prod": "node --openssl-legacy-provider --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build --prod --configuration=production --base-href=/html/ --vendor-source-map",
     "test": "ng test",
     "lint": "ng lint",
