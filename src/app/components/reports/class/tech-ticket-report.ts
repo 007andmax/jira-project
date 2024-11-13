@@ -14,14 +14,14 @@ export class TechTicketReport {
     startDate: string = '';
     endDate: string = '';
     totalClosed: number;
-    totalCreated: number;
+    totalClaimed: number;
     isDisabledDuration: boolean = false;
     constructor(data = null) {
         if (data) {
             this.lines = data.lines;
             this.selectedDuration = data.selectedDuration;
             this.totalClosed = data.totalClosed;
-            this.totalCreated = data.totalCreated;
+            this.totalClaimed = data.totalClaimed;
             this.startDate = data.startDate;
             this.endDate = data.endDate;
         }
@@ -40,7 +40,7 @@ export class TechTicketReport {
     public setDataFromRequest(data) {
         this.lines = (data.lines) ? data.lines.map(item => new TechTicketItem(item)) : [];
         this.totalClosed = data.totalClosed;
-        this.totalCreated = data.totalCreated;
+        this.totalClaimed = data.totalClaimed;
     }
 
     public setDuration(data) {
