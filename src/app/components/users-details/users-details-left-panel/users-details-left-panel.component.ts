@@ -72,12 +72,9 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
     })
   }
   updateForm() {
-    console.log("this.phones", this.phones);
     while (this.phones.length) {
       this.phones.removeAt(0);
     }
-    //this.modelForm.reset();
-    console.log("this.user.phoneNumbers", this.user.phoneNumbers);
     this.user.phoneNumbers.forEach(item => {
       const itemGroup = this.formBuilder.group({
         name: [item.typeNumber, Validators.required], // Define the fields inside the FormGroup
