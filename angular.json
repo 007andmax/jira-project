@@ -49,6 +49,7 @@
             "production": {
               "outputPath": "dist",
               "deployUrl": "/html/",
+              "baseHref": "/html/",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
