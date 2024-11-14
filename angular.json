@@ -29,7 +29,7 @@
               {
                 "glob": "**/*",
                 "input": "src/assets",
-                "output": "/html/assets/"
+                "output": "/html/"
               },
               "src/ng1"
             ],
