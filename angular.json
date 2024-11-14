@@ -27,7 +27,6 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/assets",
               "src/ng1"
             ],
             "styles": [
@@ -44,6 +43,9 @@
           },
           "configurations": {
             "production": {
+              "outputPath": "dist",
+              "baseHref": "/html/",
+              "deployUrl": "/html/",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
