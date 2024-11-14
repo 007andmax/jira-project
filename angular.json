@@ -25,12 +25,8 @@
             "vendorSourceMap": true,
             "sourceMap": true,
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "src/assets/",
-                "output": "html/assets/"
-              },
               "src/favicon.ico",
+              "src/assets",
               "src/ng1"
             ],
             "styles": [
@@ -47,6 +43,8 @@
           },
           "configurations": {
             "production": {
+              "outputPath": "./dist",
+              "deployUrl": "/html/",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
