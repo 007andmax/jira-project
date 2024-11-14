@@ -27,7 +27,6 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/assets",
               "src/ng1"
             ],
             "styles": [
@@ -65,7 +64,6 @@
                   "maximumError": "6mb"
                 }
               ],
-              "baseHref": "/html/",
               "deployUrl": "/html/assets/"
             },
             "dev": {
