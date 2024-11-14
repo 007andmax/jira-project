@@ -26,11 +26,8 @@
             "sourceMap": true,
             "assets": [
               "src/favicon.ico",
-              {
-                "glob": "**/*",
-                "input": "src/assets",
-                "output": "html/assets"
-              },
+              "src/assets",
+              "src/assets",
               "src/ng1"
             ],
             "styles": [
@@ -47,9 +44,6 @@
           },
           "configurations": {
             "production": {
-              "outputPath": "dist",
-              "deployUrl": "/html/",
-              "baseHref": "/html/",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
