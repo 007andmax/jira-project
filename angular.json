@@ -27,11 +27,10 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "src/assets/img",
-                "output": "html/assets/img"
+                "input": "src/assets/",
+                "output": "html/assets/"
               },
               "src/favicon.ico",
-              "src/assets",
               "src/ng1"
             ],
             "styles": [
