@@ -25,6 +25,11 @@
             "vendorSourceMap": true,
             "sourceMap": true,
             "assets": [
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "html/assets"
+              },
               "src/favicon.ico",
               "src/assets",
               "src/ng1"
@@ -63,8 +68,7 @@
                   "maximumWarning": "3mb",
                   "maximumError": "6mb"
                 }
-              ],
-              "deployUrl": "/html/assets/"
+              ]
             },
             "dev": {
               "fileReplacements": [
