@@ -729,5 +729,24 @@ app-users-details {
         }
       }
     }
+
+    .qt-page-list__body {
+      &.--subscription-column-0,
+      &.--subscription-column-1 {
+        .users-table__contract-no {
+          flex: 0 0 198px;
+        }
+      }
+      &.--subscription-column-2 {
+        .users-table__contract-no {
+          flex: 0 0 344px;
+        }
+      }
+      &.--subscription-column-3 {
+        .users-table__contract-no {
+          flex: 0 0 480px;
+        }
+      }
+    }
   }
 }
