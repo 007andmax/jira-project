@@ -43,7 +43,7 @@
           },
           "configurations": {
             "production": {
-              "baseHref": "/html/",
+              "baseHref": "./html/",
               "deployUrl": "/html/",
               "fileReplacements": [
                 {
