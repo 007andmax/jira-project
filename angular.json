@@ -43,8 +43,7 @@
           },
           "configurations": {
             "production": {
-              "baseHref": "./html/",
-              "deployUrl": "/html/",
+              "baseHref": "./html/assets/",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
