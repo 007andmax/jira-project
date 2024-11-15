@@ -139,7 +139,7 @@
     pointer-events: none;
 }
 
-/deep/ .selected-item {
+::ng-deep .selected-item {
   display: inline-flex;
   align-items: center;
   width: max-content;
@@ -156,15 +156,15 @@
     margin: 2px 0 2px 4px;
   }
 }
-/deep/ .list-default-subscriptions {
+::ng-deep .list-default-subscriptions {
   display: block;
   width: auto;
   min-height: 20px;
 }
-/deep/ .list-default-subscriptions-button {
+::ng-deep .list-default-subscriptions-button {
   display: none;
 }
-/deep/ app-users-details-tab-companies {
+::ng-deep app-users-details-tab-companies {
   .list-default-subscriptions-button {
     display: inline-flex;
     width: 24px;

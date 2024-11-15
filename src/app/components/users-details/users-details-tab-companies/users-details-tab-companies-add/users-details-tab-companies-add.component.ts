@@ -25,10 +25,10 @@ export class UsersDetailsTabCompaniesAddComponent implements OnInit {
   sub: Subscription = new Subscription();
   userRoles: Array<UserRole> = [];
   defaultSubscriptions: UserDefaultSubscription = new UserDefaultSubscription(null);
-  @ViewChild('userRolesDP') userRolesDP: DropDownComponent;
+  @ViewChild('userRolesDP', { static: false }) userRolesDP: DropDownComponent;
   @Input() user: UserProfile = new UserProfile();
   @Output() onClose = new EventEmitter<any>();
-  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
+  @ViewChild('addBtn', { static: true }) addBtn: DisabledBtnDirective;
   public primaryContact: CompanyAndressContact;
   public primaryPhone: Array<any>;
   constructor(private crmStateService: CrmStateService,

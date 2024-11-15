@@ -42,11 +42,11 @@
     width: 360px;
     border-right: 1px solid $gray-200;
 
-    /deep/ .user-subscription {
+    ::ng-deep .user-subscription {
       min-height: 32px;
       margin-bottom: -6px;
     }
-    /deep/ .placeholder-subscription:after {
+    ::ng-deep .placeholder-subscription:after {
       top: 3px;
     }
 }
@@ -71,7 +71,7 @@
     height: 28px;
     min-width: 28px;
 }
-/deep/ .left-panel-tags {
+::ng-deep .left-panel-tags {
     app-company-tags {
         .mat-form-field-infix {
             border: none;

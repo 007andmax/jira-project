@@ -95,7 +95,7 @@
   color: transparent;
 }
 
-/deep/ .tab-pane__table-cell .tech-users-container {
+::ng-deep .tab-pane__table-cell .tech-users-container {
   .ticket-updates__photo-people {
     width: 28px;
     height: 28px;

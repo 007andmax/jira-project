@@ -46,7 +46,7 @@
 .first-name-invalid {
     bottom: -30px !important;
 }
-/deep/.custom-subscription-user-aside {
+::ng-deep.custom-subscription-user-aside {
     .user-subscription {
         border: 1px solid $gray-200 !important;
 

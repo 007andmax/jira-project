@@ -1,6 +1,6 @@
 @import "./src/assets/styles/variable";
 
-/deep/ .qt-page-list {
+::ng-deep .qt-page-list {
     min-height: unset;
 }
 
@@ -10,7 +10,7 @@
     //overflow-x: auto;
     overflow-y: clip;
 
-    /deep/ .qt-page-list {
+    ::ng-deep .qt-page-list {
         .qt-page-list__body {
             //overflow: unset;
             max-height: calc(100% - 48px);
@@ -38,7 +38,7 @@
 }
 
 app-users-details-tab-tickets {
-    /deep/ .qt-page-list__container {
+    ::ng-deep .qt-page-list__container {
         .qt-page-list__header-thead-container {
             min-width: fit-content;
         }

@@ -105,7 +105,7 @@ tr {
 .qt-table-modern__row>div {
     padding: 16px;
 }
-/deep/ .users-details-select-company {
+::ng-deep .users-details-select-company {
     input {
         border-color: transparent;
         padding: 11px 14px;

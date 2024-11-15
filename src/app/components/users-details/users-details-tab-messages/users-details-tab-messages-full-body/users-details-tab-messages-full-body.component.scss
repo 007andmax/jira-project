@@ -162,7 +162,7 @@ h3 {
     color: $gray-600;
 }
 
-/deep/ .attachments-message {
+::ng-deep .attachments-message {
     .attachment-component {
         padding: 0px !important;
     }

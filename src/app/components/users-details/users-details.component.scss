@@ -1,6 +1,6 @@
 @import "./src/assets/styles/variable";
 
-/deep/ .qt-page-list {
+::ng-deep .qt-page-list {
   min-height: unset;
 }
 .user-detail-statistics {
@@ -8,7 +8,7 @@
   height: calc(100vh - 64px - 60px - 16px * 2);
   overflow-y: clip;
 
-  /deep/ .qt-page-list {
+  ::ng-deep .qt-page-list {
     .qt-page-list__body {
       max-height: calc(100% - 48px);
       height: fit-content;
@@ -40,12 +40,12 @@
 }
 
 app-users-details-tab-tickets {
-  /deep/ .qt-page-list__container {
+  ::ng-deep .qt-page-list__container {
     .qt-page-list__header-thead-container {
       min-width: fit-content;
     }
   }
-  /deep/ .qt-page-list__header-thead-container {
+  ::ng-deep .qt-page-list__header-thead-container {
     border: unset;
 
     .qt-page-list__header-thead__row {
@@ -68,7 +68,7 @@ app-users-details-tab-tickets {
 }
 
 app-users-details {
-  /deep/ .qt-page-list__header-thead-container {
+  ::ng-deep .qt-page-list__header-thead-container {
     position: sticky;
     top: 0;
     z-index: 1;
