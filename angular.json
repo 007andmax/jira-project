@@ -29,7 +29,7 @@
               {
                 "glob": "**/*",
                 "input": "src/assets",
-                "output": "/html/"
+                "output": "/html/assets/"
               },
               "src/ng1"
             ],
@@ -47,7 +47,7 @@
           },
           "configurations": {
             "production": {
-              "baseHref": "./html/assets/",
+              "baseHref": "/html/assets/",
               "deployUrl": "/html/",
               "fileReplacements": [
                 {
