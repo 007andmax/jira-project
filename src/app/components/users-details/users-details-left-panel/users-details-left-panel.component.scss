@@ -1,0 +1,100 @@
+@import "./src/assets/styles/variable";
+
+.user-detail-aside__header-avatar {
+    width: 56px;
+    height: 56px;
+     background-position: center !important;
+    background-size: cover !important;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+    color: $white;
+    font-size: 22px;
+}
+.left-panel-header,.left-panel-contact,.left-panel-job-description,.left-panel-marketing,.left-panel-tags,.left-panel-company-details {
+    border-bottom: 1px solid $gray-200;
+}
+.left-panel-contact {
+    &__details-title {
+      min-width: 65px;
+    }
+    &__details-input-wrap {
+      .invalid-feedback {
+        left: 0;
+        bottom: -15px;
+        z-index: 1;
+      }
+    }
+    .qt-editable-input {
+        text-align: right;
+        line-height: 15px;
+        width: 100%;
+        padding: 6px 8px 5px 8px;
+        &:focus {
+            border: 1px solid $blue-light-600;
+
+        }
+    }
+}
+.left-panel-container {
+    width: 360px;
+    border-right: 1px solid $gray-200;
+
+    /deep/ .user-subscription {
+      min-height: 32px;
+      margin-bottom: -6px;
+    }
+    /deep/ .placeholder-subscription:after {
+      top: 3px;
+    }
+}
+.user-detail__row-info-value {
+  .terms-n-conditions__textarea {
+    border-color: transparent;
+    box-shadow: none;
+
+    &:hover {
+      border-color: $gray-200;
+    }
+    &:focus {
+      border-color: $blue-light-600;
+    }
+    &.--input-error:focus {
+      border-color: $red-600;
+    }
+  }
+}
+.draft-email-btn,.actions-btn {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+}
+/deep/ .left-panel-tags {
+    app-company-tags {
+        .mat-form-field-infix {
+            border: none;
+        }
+        .no-remove {
+            background: none;
+        }
+        .mat-chip {
+            padding: 2px 4px !important;
+            background-color: $gray-100;
+            border: 1px solid $gray-100;
+            color: $gray-600;
+            border-radius: 6px !important;
+            font-weight: 500;
+        }
+    }
+}
+.type-phone,.company-details-field,.company-details-value {
+    line-height: 17px;
+}
+.company-details-field {
+  color: $gray-500;
+}
+.address-value {
+  text-align: right;
+}

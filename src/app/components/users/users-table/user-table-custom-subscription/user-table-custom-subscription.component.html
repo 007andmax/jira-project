@@ -23,6 +23,8 @@
             <div
                 class="selected-item"
                 *ngIf="i < 2"
+                [ngClass]="{'active':custom.activated && custom.isExist,
+            'no-active':!custom.activated && custom.isExist}"
             >
                 {{custom.name}}
                 <div

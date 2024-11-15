@@ -144,6 +144,7 @@
                     [ngClass]="{'--input-error' : !validate.getBillindAddress()}"
                     [(ngModel)]="company.addresses[0].locationName"
                     placeholder="Enter Location Name"
+                    (input)="onChangeBillingLocationName($event)"
                 >
                 <app-mat-error
                     class="invalid-feedback"
@@ -171,6 +172,7 @@
                 <input
                     type="text"
                     [(ngModel)]="company.addresses[0].suiteNumber"
+                    (input)="onChangeBillingSuiteNo($event)"
                     placeholder="Enter Suite Number"
                 >
             </div>
@@ -179,6 +181,7 @@
                 <input
                     type="text"
                     [(ngModel)]="company.addresses[0].postalCode"
+                    (input)="onChangeBillingZip($event)"
                     placeholder="Enter Zip"
                 >
             </div>
@@ -236,7 +239,15 @@
                     [(ngModel)]="company.addresses[1].locationName"
                     placeholder="Enter Location Name"
                     [disabled]="company.addresses[1].sameAsBilling"
+                    [ngClass]="{'--input-error' : !validate.getShippingAddress()}"
+                    (input)="validate.resetShippingAddress()"
                 >
+                <app-mat-error
+                    class="invalid-feedback"
+                    *ngIf="!validate.getShippingAddress()"
+                >
+                    Shipping Location Name is required
+                </app-mat-error>
             </div>
         </div>
         <div class="qt-inputs-row">
@@ -373,7 +384,7 @@
                                 [textContent]="company.contacts[0].phoneNumbers[0].typeNumber"
                             >
                             </button>
-                            <i class="icn-sm report-caret-icon"></i>
+                            <i class="icn-sm qt-icon icon__arrow-down report-caret-icon"></i>
                             <div
                                 ngbDropdownMenu
                                 aria-labelledby="dropdownBasic"
@@ -436,7 +447,11 @@
         </div>
         <div class="qt-inputs-row">
             <div class="qt-input-block qt-f50">
-                <app-company-time-zone (selectedOffsetItem)="onChangeTimeZone($event)"></app-company-time-zone>
+                <app-company-time-zone
+                    *ngIf="opened"
+                    [selectedItem]="selectedTimeZone"
+                    (selectedOffsetItem)="onChangeTimeZone($event)"
+                ></app-company-time-zone>
             </div>
             <div class="qt-input-block qt-f50">
                 <app-drop-down
@@ -448,6 +463,7 @@
                     [list]="paymentTerms"
                     [search]="true"
                     [change]="true"
+                    [sort]="false"
                     [title]="'Payment Terms'"
                     (onSelectedItem)="onSelectPaymentTerms($event)"
                 >

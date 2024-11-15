@@ -33,13 +33,13 @@ const routes: Routes = [
 
   {
     path: ':domain/tickets',
-    loadChildren: () => import('./components/tickets/tickets/tickets.module').then(m => m.TicketsModule),
-    canActivate: [PermissionTicketsService, PermissionNoSuperAdminService]
+    loadChildren: './components/tickets/tickets/tickets.module#TicketsModule',
+    canActivate: [PermissionNoSuperAdminService]
   },
   {
     path: ':domain/ticket/:id',
-    loadChildren: () => import('./components/tickets/tickets/ticket-detail/ticket-detail.module').then(m => m.TicketDetailModule),
-    canActivate: [PermissionTicketsService, PermissionNoSuperAdminService]
+    loadChildren: './components/tickets/tickets/ticket-detail/ticket-detail.module#TicketDetailModule',
+    canActivate: [PermissionNoSuperAdminService]
   },
   {
     path: ':domain/support-page',
@@ -70,6 +70,12 @@ const routes: Routes = [
   {
     path: ':domain/company/:id/user',
     loadChildren: () => import('./components/company-user/company-user.module').then(m => m.CompanyUserModule),
+    canActivate: [PermissionCompanyService, PermissionUsersService, PermissionNoSuperAdminService]
+
+  },
+  {
+    path: ':domain/company/:id/user/:iduser',
+    loadChildren: './components/companies/companies-users-details/companies-users-details.module#CompaniesUsersDetailsModule',
     canActivate: [PermissionCompanyService, PermissionUsersService, PermissionNoSuperAdminService]
 
   },
@@ -105,6 +111,12 @@ const routes: Routes = [
   }, {
     path: ':domain/users',
     loadChildren: () => import('./components/users/users.module').then(m => m.UsersModule),
+    canActivate: [PermissionUsersService, PermissionNoSuperAdminService]
+
+  },
+  {
+    path: ':domain/users/:id',
+    loadChildren: './components/users-details/users-details.module#UsersDetailsModule',
     canActivate: [PermissionUsersService, PermissionNoSuperAdminService]
 
   },
@@ -380,34 +392,30 @@ const routes: Routes = [
     canActivate: [PermissionTechUserService, TestPermissionService]
   },
   {
-    path: ':domain/default',
-    loadChildren: () => import('./components/customer-portal/customer-portal-default/customer-portal-default.module').then(m => m.CustomerPortalDefaultModule),
-    canActivate: [PermissionClientUserService]
-  },
-  {
     path: ':domain/contract-statistics',
     loadChildren: () => import('./components/billing/contracts-statistics/contracts-statistics.module').then(m => m.ContractsStatisticsModule),
     canActivate: [PermissionContractsService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/file-manager',
-    loadChildren: () => import('./components/file-manager/file-manager.module').then(m => m.FileManagementModule),
-    canActivate: [PermissionSupportService, PermissionNoSuperAdminService, TestPermissionService]
+    loadChildren: './components/file-manager/file-manager.module#FileManagementModule',
+    canActivate: [PermissionNoSuperAdminService]
   },
   {
     path: ':domain/file-manager/all-customer',
-    loadChildren: () => import('./components/file-manager/file-manager-all-customer/file-manager-all-customer.module').then(m => m.FileManagementAllCustomerModule),
-    canActivate: [PermissionSupportService, PermissionNoSuperAdminService, TestPermissionService]
+    loadChildren: './components/file-manager/file-manager-all-customer/file-manager-all-customer.module#FileManagementAllCustomerModule',
+    canActivate: [PermissionNoSuperAdminService]
   },
   {
     path: ':domain/file-manager/all-customer/:id',
-    loadChildren: () => import('./components/file-manager/file-manager-all-customer-company/file-manager-all-customer-company.module').then(m => m.FileManagementAllCustomerCompanyModule),
-    canActivate: [PermissionSupportService, PermissionNoSuperAdminService, TestPermissionService]
+    loadChildren: './components/file-manager/file-manager-all-customer-company/file-manager-all-customer-company.module#FileManagementAllCustomerCompanyModule',
+    canActivate: [PermissionNoSuperAdminService]
   },
   {
     path: ':domain/file-manager/category/:id',
-    loadChildren: () => import('./components/file-manager/file-manager-category/file-manager-category.module').then(m => m.FileManagementCategoryModule),
-    canActivate: [PermissionSupportService, PermissionNoSuperAdminService, TestPermissionService]
+    loadChildren: './components/file-manager/file-manager-category/file-manager-category.module#FileManagementCategoryModule',
+    canActivate: [PermissionNoSuperAdminService]
+
   },
 ];
 

@@ -178,6 +178,15 @@ export class UsersService {
         return data;
       }));
   }
+  public updateeligibleForTicket(userId, companyId, eligibleForTicket) {
+
+    return this.http.put(this.apiUrl + `users/${userId}/companies/${companyId}/ticketEligibility`, { "eligibleForTicket": eligibleForTicket }).pipe(
+      tap(data => {
+        this.toastrService.success("The user has been successfully updated");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
   public onArchiveUsers(archivedUserId) {
     return this.http.post(this.apiUrl + `users/archive`, {
       "archivedUserId": archivedUserId,

@@ -1,0 +1,83 @@
+<div
+    class="qt-page-list__body"
+    #content
+>
+    <div
+        class="qt-page-list__body-table-container"
+        [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}"
+    >
+        <table class="qt-page-list__body-tbody qt-table-modern ticket-table">
+            <tbody
+                infiniteScroll
+                [infiniteScrollContainer]="content"
+                [infiniteScrollDistance]="2"
+                [infiniteScrollThrottle]="15"
+                [infiniteScrollDisabled]="infiniteScrollDisabled"
+                [fromRoot]="true"
+                (scrolled)="onScroll()"
+            >
+                <ng-template
+                    ngFor
+                    let-message
+                    [ngForOf]="messages"
+                    let-i="index"
+                    [ngForTrackBy]="trackById"
+                >
+                    <tr (click)="showFullMessage(message)">
+                        <td class="messages-table__account">
+                            <div class="messages-table-header">
+                                <div class="messages-table-user">
+                                    <span
+                                        class="messages-table-user-name"
+                                        [textContent]="message.senderName"
+                                    ></span>
+                                    <span
+                                        class="messages-table-user-email"
+                                        [textContent]="message.emailFrom"
+                                    ></span>
+                                </div>
+                                <div class="messages-table__account-data">
+                                    <div
+                                        class="messages-table__account-header qt-mr-8"
+                                        [textContent]="message.type"
+                                    ></div>
+                                    <time
+                                        datetime="2021-03-20"
+                                        class="messages-table__account-date qt-mr-4"
+                                        [textContent]="getDate(message.createdAt) + ', '"
+                                    >
+                                    </time>
+                                    <time
+                                        datetime="12-59"
+                                        class="messages-table__account-time"
+                                        [textContent]="getTime(message.createdAt)"
+                                    >
+                                    </time>
+                                </div>
+                            </div>
+                            <h3 [textContent]="message.subject"></h3>
+                            <div class="messages-table__account-text">
+                                <span [innerHTML]="getHtml(getBody(message.body))"></span>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+            </tbody>
+        </table>
+        <div
+            class="loading pengind-loading"
+            *ngIf="showPendingPreloader"
+        ></div>
+    </div>
+    <div
+        class="loading"
+        *ngIf="showPreloader"
+    ></div>
+    <div
+        class="no-exist-elements"
+        *ngIf="!showPreloader && messages.length === 0"
+    >
+        No messages
+    </div>
+</div>
+<app-users-details-tab-messages-full-body></app-users-details-tab-messages-full-body>

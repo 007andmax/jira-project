@@ -114,7 +114,7 @@
     </div>
     <div class="light-dropdown new-product-gl-select qt-select-input-40 qt-dropdown-input">
         <i
-            class="icn-sm report-caret-icon"
+            class="icn-sm qt-icon icon__arrow-down report-caret-icon"
             ngbDropdownToggle
             *ngIf="!isDisabled"
         ></i>
@@ -149,7 +149,7 @@
             >
                 <span [textContent]="tax.name + ' ' + tax.rate + '%'"></span>
                 <i
-                    class="qt-sz-20 qt-bg-contain icn-label-save taxes-dropdown__check-icon"
+                    class="qt-sz-20 icon__done qt-icon__blue-light-600 icn-label-save taxes-dropdown__check-icon"
                     *ngIf="checkTaxIsSelected(tax)"
                 ></i>
             </li>

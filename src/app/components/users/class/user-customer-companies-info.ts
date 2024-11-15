@@ -4,6 +4,7 @@ import { UserJobTitle } from "./user-job-title";
 import { UserRole } from "./user-role";
 
 export class UserCustomerCompaniesInfo {
+    selected: boolean = false;
     clientCompanyName: string;
     "companyId": string;
     "jobTitleDto": UserJobTitle;
@@ -12,6 +13,7 @@ export class UserCustomerCompaniesInfo {
     "hasAccess": boolean;
     "isPrimaryContact": boolean = false;
     isArchived: boolean = false;
+    eligibleForTicket: boolean = false;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -27,6 +29,9 @@ export class UserCustomerCompaniesInfo {
             this.hasAccess = false;
         }
 
+    }
+    public setDefaultSubscriptions(data) {
+        this.defaultSubscriptions = data;
     }
     public setDefaultSubscriptionsForAddUser() {
         this.defaultSubscriptions.invoiceSubscription = new UserDefaultSubscriptionItem({ enabled: false, activated: true, });
@@ -58,7 +63,8 @@ export class UserCustomerCompaniesInfo {
             "customerUserRole": this.customerUserRole,
             defaultSubscriptions: this.defaultSubscriptions.getDataForUpdate(),
             "hasAccess": this.hasAccess,
-            "isPrimaryContact": this.isPrimaryContact
+            "isPrimaryContact": this.isPrimaryContact,
+            eligibleForTicket: this.eligibleForTicket
         }
     }
     /**
@@ -81,5 +87,12 @@ export class UserCustomerCompaniesInfo {
 */
     public setUserRole(data) {
         this.customerUserRole = data;
+    }
+
+    public setCompanyId(data) {
+        this.companyId = data;
+    }
+    public setClientCompanyName(data) {
+        this.clientCompanyName = data;
     }
 }

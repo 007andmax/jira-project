@@ -51,23 +51,6 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     private invoicesListService: InvoicesListService) { }
 
   ngOnInit() {
-    if (this.customerPortalStateService.isCustomerPortal) {
-      this.invoicesFilter.setCompanyIds(this.customerPortalStateService.getInvoicesFilter().companyIds);
-      this.websocketService.onInitConnectCustomerUser("new-billable-invoices", this.customerPortalStateService.getInvoicesFilter().companyIds[0]);
-    }
-    let onInvoiceFilters = this.customerPortalStateService.onInvoiceFilters.subscribe(data => {
-      this.invoicesFilter.onInitLeftOffset(false);
-      this.invoicesFilter.resetLeftOffset();
-      this.selectedInvoices = [];
-      this.selectedCompanyIds = [];
-      this.invoicesFilter.setCompanyIds(this.customerPortalStateService.getInvoicesFilter().companyIds);
-      this.invoicesFilter.resetSortBy();
-      this.showPreloader = true;
-      document.body.querySelector(".main-container").scrollTo(0, 0);
-      this.setDefaultScoll();
-      this.onScroll();
-    });
-    this.sub.add(onInvoiceFilters);
     this.leftPanelStateService.setBillingPage('new-billable-invoices');
     document.body.querySelector(".main-container").scrollTo(0, 0);
     if (this.companiesStateService.getCompanies().length > 0) this.onScroll();

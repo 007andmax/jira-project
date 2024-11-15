@@ -55,7 +55,7 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
     /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
     /* START */
     let onGetCurrentUser = this.usersStateService.onGetCurrentUser.subscribe(data => {
-      if (!this.ticketsStateService.isMoveToTickets && this.activePage !== 'help-center' && !this.customerPortalStateService.isCustomerPortal) this.getCounts();
+      if (!this.ticketsStateService.isMoveToTickets && this.activePage !== 'help-center') this.getCounts();
     })
     this.sub.add(onGetCurrentUser);
     if (this.ticketsStateService.isMoveToTickets) {

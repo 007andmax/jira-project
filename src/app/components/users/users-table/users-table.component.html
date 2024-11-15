@@ -168,6 +168,28 @@
         (click)="showDetailUser()"
     ></div>
     <div
+        *ngIf="type === TYPE_LIST_COMPANY_USERS"
+        class="users-table__tickets"
+    >
+        <div
+            class="qt-df"
+            *ngIf="getCustomerCompaniesInfo()"
+        >
+            <label
+                class="qt-checkbox"
+                [attr.for]="'user-display-' + user.id"
+            >
+                <input
+                    [attr.id]="'user-display-' + user.id"
+                    [(ngModel)]="getCustomerCompaniesInfo().eligibleForTicket"
+                    type="checkbox"
+                    (change)="changeDisplay($event)"
+                >
+                <span></span>
+            </label>
+        </div>
+    </div>
+    <div
         class="users-table__portal-status"
         (click)="showDetailUser()"
         *ngIf="type !== TYPE_LIST_MARKETING_USERS"
@@ -200,7 +222,6 @@
             <div
                 ngbDropdown
                 [container]="'body'"
-                [placement]="'bottom-right'"
             >
                 <div
                     class="qt-button-square qt-button-square__afterpend pointer"

@@ -72,21 +72,9 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
-    /* START */
-    if (this.customerPortalStateService.isCustomerPortal && this.companiesState.getCompanies().length > 0) this.checkCompanyCustomerUser();
-    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
-      if (this.customerPortalStateService.isCustomerPortal) this.checkCompanyCustomerUser();
-    })
-    this.sub.add(getOnCompanies);
-    let onTicketFilters = this.customerPortalStateService.onTicketFilters.subscribe(data => {
-      this.checkCompanyCustomerUser();
-      this.checkUserCustomerUser();
-    });
-    this.sub.add(onTicketFilters);
     this.listType = this.ticketsStateService.getListType();
     this.ticketsFilter.setListType(this.listType);
-    /* END */
+
     let getOnChangeTypeFilter = this.ticketsStateService.getOnChangeTypeFilter().subscribe(type => {
       this.listType = type;
       this.ticketsFilter = new TicketsFilter();
@@ -267,33 +255,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     }
   }
   /**
-* @description Get filters tickets and disabled company dropdown
-*/
-  private checkCompanyCustomerUser() {
-    this.ticketsFilter = this.customerPortalStateService.getTicketsFilter();
-    let selectedCompanies = [this.companiesState.getCompanies().find(item => item.id == localStorage.getItem('company_info_id'))];
-    this.companyDp.selectItemsWithOutChanges(selectedCompanies);
-    this.companyDp.isDisabled = true;
-    this.companyDp.setRemovable(false);
-    this.ticketsFilter.isDisbledCompany = true;
-    this.onChangeCounterFilter();
-    this.onGetUsers();
-  }
-  /**
-* @description Check if use customer use and disable user dropdown
-*/
-  private checkUserCustomerUser() {
-    let customerCompanyInfo = this.usersStateService.getCurrentUser().customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id'));
-    if (customerCompanyInfo && customerCompanyInfo.customerUserRole.getPermission('VIEW_MY_TICKETS') && !customerCompanyInfo.customerUserRole.getPermission('VIEW_ALL_TICKETS')) {
-      let users = this.usersStateService.getAllUsers().filter(item => item.id === this.usersStateService.getCurrentUser().id);
-      this.usersDp.selectedTag = users;
-      this.onSelectUser(users);
-      this.usersDp.isDisabled = true;
-    } else {
-      this.usersDp.clearWithOutChanges();
-    }
-  }
-  /**
 * @description Clear all dropdown and "ticketsFilter"
 */
   public clearAll() {
@@ -315,13 +276,13 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.techUsersDp.clearWithOutChanges();
     this.tagsDp.clearWithOutChanges();
     this.ticketsFilter.setCustomStatus(false);
-    this.ticketsStateService.onInitFilter(this.ticketsFilter);
+    if (this.customerPortalStateService.isCustomerPortal) this.ticketsStateService.onInitFilter(this.ticketsFilter);
     this.onChangeCounterFilter();
     if (this.listType !== 'RECURRING_TICKETS') this.getCount();
-    this.ticketsStateService.onChangeLeftPanelFilter(this.listType);
+    // this.ticketsStateService.onChangeLeftPanelFilter(this.listType);
     let ticketGlobalFilter = new TicketGlobalFilter();
     if (this.ticketsFilter.isDisbledCompany) ticketGlobalFilter.setClientCompaies(this.ticketsFilter.selectedCompanies.map(item => item.id));
-    this.ticketsStateService.onChangeGlobalFilter(ticketGlobalFilter);
+    if (!this.customerPortalStateService.isCustomerPortal) this.ticketsStateService.onChangeGlobalFilter(ticketGlobalFilter);
   }
   /**
   * @description Check which filters use, and update count by Output event
@@ -395,7 +356,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
 * @param {Array} data - List of Objects User
 */
   onGetTechUsers(data) {
-    if (this.customerPortalStateService.isCustomerPortal) this.checkUserCustomerUser();
     this.techUsersList = data.filter(item => {
       if (item.accountType === 'TECH' && !item.deletedAt) {
         return item;

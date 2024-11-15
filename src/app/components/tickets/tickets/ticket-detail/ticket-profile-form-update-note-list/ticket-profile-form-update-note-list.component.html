@@ -4,13 +4,15 @@
     [placement]="placement"
 >
     <div
-        class="icon__note-list-container pointer"
+        class="qt-button-square pointer qt-mr-12"
         ngbDropdownToggle
         placement="top"
         [container]="'body'"
         [ngbTooltip]="'Canned Responses'"
     >
-        <i class="qt-icon icon__note-list qt-sz-16 qt-dib"></i>
+        <div class="icon__note-list-container pointer">
+            <i class="qt-icon icon__note-list qt-sz-16 qt-dib"></i>
+        </div>
     </div>
     <div
         ngbDropdownMenu

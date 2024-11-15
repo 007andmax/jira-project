@@ -28,19 +28,7 @@ export class PaymentsFilterComponent implements OnInit, OnDestroy {
     private paymentsStateService: PaymentsStateService) { }
 
   ngOnInit() {
-    if (this.customerPortalStateService.isCustomerPortal && this.companiesState.getCompanies().length > 0) this.checkCompanyCustomerUser();
-    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
-      if (this.customerPortalStateService.isCustomerPortal) this.checkCompanyCustomerUser();
-    })
-    this.sub.add(getOnCompanies);
-    let onPaymentsFilters = this.customerPortalStateService.onPaymentsFilters.subscribe(data => (this.checkCompanyCustomerUser()));
-    this.sub.add(onPaymentsFilters);
-  }
-  private checkCompanyCustomerUser() {
-    this.paymentsFilter = this.customerPortalStateService.getPaymentsFilter();
-    let selectedCompany = this.companiesState.getCompanies().find(item => item.id == localStorage.getItem('company_info_id'));
-    this.companyDp.selectItemWithOutChanges(selectedCompany);
-    this.companyDp.isDisabled = true;
+
   }
   onSelectStatus(status) {
     this.paymentsFilter.setStatus((status) ? status.value : null);

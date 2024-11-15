@@ -76,7 +76,6 @@ import { ModalAddUpdateTicketComponent } from './services/modal/modal-add-update
 import { ModalAddUsersNotifyComponent } from './services/modal/modal-add-users-notify/modal-add-users-notify.component';
 import { ModalAgentLinkComponent } from './services/modal/modal-agent-link/modal-agent-link.component';
 import { ModalEditCategoryProductComponent } from './services/modal/modal-edit-category-product/modal-edit-category-product.component';
-import { UsersAsideDetailModule } from './components/users/users-aside-detail/users-aside-detail.module';
 import { TextAreaModule } from './directives/text-area/text-area.module';
 import { AddMarketingSubscriptionTypeModule } from './components/setting/marketing-email/marketing-subscription-type/add-marketing-subscription-type/add-marketing-subscription-type.module';
 import { PermissionInvoicesService } from './components/billing/invoices/permission-invoices.service';
@@ -104,9 +103,6 @@ import { GoogleAuthenticatorModule } from './components/shared/google-authentica
 import { SupportPageEditCategoryModule } from './components/super-admin/shared/support-page-edit-category/support-page-edit-category.module';
 import { TestPermissionService } from './services/test-permission/test-permission.service';
 import { ModalQuoteModule } from './services/modal/modal-quote/modal-quote.module';
-import { LeftPanelCustomerPortalComponent } from './components/customer-portal/left-panel-customer-portal/left-panel-customer-portal.component';
-import { LeftPanelCustomerPortalUsersComponent } from './components/customer-portal/left-panel-customer-portal/left-panel-customer-portal-users/left-panel-customer-portal-users.component';
-import { LeftPanelCustomerPortalModule } from './components/customer-portal/left-panel.module';
 import { PermissionPaymentsService } from './components/billing/payments/permission-payments.service';
 import { PermissionQuotesService } from './components/billing/quotes/permission-quotes.service';
 import { PermissionTicketsService } from './components/tickets/tickets/permission-tickets.service';
@@ -152,6 +148,9 @@ import { FileManagementAddFileModule } from './components/file-manager/file-mana
 import { PreviewFileComponent } from './components/shared/preview-file/preview-file.component';
 import { UsersDropDownComponent } from './components/shared/users-drop-down/users-drop-down.component';
 import { MultiCompanyDropDownComponent } from './components/shared/multi-company-drop-down/multi-company-drop-down.component';
+import { UsersDetailsComponent } from './components/users-details/users-details.component';
+import { UsersDetailsHeaderComponent } from './components/users-details/users-details-header/users-details-header.component';
+import { UsersDetailsLeftPanelComponent } from './components/users-details/users-details-left-panel/users-details-left-panel.component';
 declare var $: any;
 /**
  * This module represents the main application module
@@ -181,7 +180,7 @@ declare var $: any;
     CannedResponsesAsideComponent,
     ManufacturesCheckUseComponent,
     UserDeArchiveNotificationComponent,
-    PreviewFileComponent
+    PreviewFileComponent,
   ],
   imports: [
     BrowserModule,
@@ -215,7 +214,6 @@ declare var $: any;
     NonContractServicesEditModule,
     HeaderModule,
     BreadcrumbsModule,
-    UsersAsideDetailModule,
     TextAreaModule,
     AddMarketingSubscriptionTypeModule,
     PreviewAttachmentModule,
@@ -226,7 +224,6 @@ declare var $: any;
     GoogleAuthenticatorModule,
     SupportPageEditCategoryModule,
     ModalQuoteModule,
-    LeftPanelCustomerPortalModule,
     AddUserToCompanyModule,
     UserFilterSaveModule,
     TicketsFilterSaveModule,

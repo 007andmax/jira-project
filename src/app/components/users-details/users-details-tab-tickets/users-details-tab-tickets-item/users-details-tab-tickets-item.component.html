@@ -1,0 +1,43 @@
+<div class="qt-table-modern__row qt-table-modern__row--height-auto">
+    <div class="users-table__company-full ellipsis">
+        <div class="ellipsis">
+            {{'Tkt# ' + ticket.number + ' - ' + ticket.subject}}
+        </div>
+        <span [ngClass]="getClassType()"></span>
+    </div>
+    <div class="users-table__industry qt-fd-c qt-ai-fs qt-jc-c">
+        <span
+            class="tag__modern"
+            [ngStyle]="getStyleStatus((ticket.customStatus) ? ticket.customStatus : ticket.status)"
+            *ngIf="ticket.status === 'IN_PROGRESS'"
+        >
+            {{(!ticket.customStatus) ? 'In Progress' : ticket.customStatus}}
+        </span>
+        <span
+            class="tag__modern"
+            [ngStyle]="getStyleStatus(ticket.status)"
+            *ngIf="ticket.status === 'COMPLETED'"
+        >
+            Completed
+        </span>
+        <span
+            class="tag__modern"
+            [ngStyle]="getStyleStatus('UNASSIGNED')"
+            *ngIf="ticket.status === null"
+        >
+            Unassigned
+        </span>
+        <span
+            class="tag__modern"
+            [ngStyle]="getStyleStatus(ticket.status)"
+            *ngIf="ticket.status === 'ON_HOLD'"
+        >
+            On Hold
+        </span>
+    </div>
+    <div
+        class="users-table__contract-no"
+        [textContent]="getCreateAt()"
+    >
+    </div>
+</div>

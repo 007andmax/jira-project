@@ -30,8 +30,15 @@ export class UserProfile {
     jobTypeId: string;
     sendPortalInvitation: boolean = false;
     portalAccessStatus: string;
+    deletedAt: number;
     constructor() {
 
+    }
+    public isArchive() {
+        return this.deletedAt != null;
+    }
+    public setPortalAccessStatus(data) {
+        this.portalAccessStatus = data;
     }
     /**
 * @description Add new element to array ojects customerCompaniesInfo
@@ -85,7 +92,15 @@ export class UserProfile {
         this.jobTypeId = user.jobTypeId;
         this.customerCompaniesInfo = user.customerCompaniesInfo;
         this.portalAccessStatus = user.portalAccessStatus;
+        this.deletedAt = user.deletedAt;
     }
+    /**
+* @description Return collab firstName and lastName
+*/
+    public getUserName() {
+        return `${this.firstName} ${this.lastName}`
+    }
+
     /**
 * @description Set avatar
 * @param  {UserAvatar} data  - Object of UserAvatar

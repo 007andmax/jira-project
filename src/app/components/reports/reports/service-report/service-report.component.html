@@ -149,10 +149,10 @@
                                 <td>
                                     {{ parseDateTicket(ticket.expenseDate) }}
                                 </td>
-                                <td>{{ getUserName(ticket.serviceUser) }}</td>
                                 <td>
                                     {{ getUserName(ticket.ticketCreatedBy) }}
                                 </td>
+                                <td>{{ getUserName(ticket.serviceUser) }}</td>
                                 <td>{{ticket.ticketSubject}}</td>
                                 <td>
                                     {{ getDurationFilter(ticket.serviceTime) }}

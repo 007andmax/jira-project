@@ -2,7 +2,9 @@
 <div class="attachment-component">
   <div class="attachment-item__header">
     <div class="attachment-item__count-items" [textContent]="attachments.length + ' Attachments'"></div>
-    <div (click)="hiddenAttachments = !hiddenAttachments" class="attachment-item__show-hide-btn pointer"></div>
+    <div (click)="hiddenAttachments = !hiddenAttachments" class="attachment-item__show-hide-btn qt-df qt-ai-c qt-jc-c pointer">
+      <div class="qt-icon icon__download qt-sz-16"></div>
+    </div>
   </div>
 
   <div [hidden]="hiddenAttachments" class="attached-files-container">
@@ -12,9 +14,11 @@
         <p [textContent]="attachment.file.name" (click)="preview(attachment.file.id,attachment.file.contentType)"></p>
 
 
-        <div class="attachment-item__download pointer"
+        <div class="attachment-item__download pointer qt-df qt-ai-c qt-jc-c"
         (click)="download(attachment.file.id,attachment.file.contentType,attachment.file.name)"
-        ></div>
+        >
+          <div class="qt-icon icon__download qt-icon__white qt-sz-12"></div>
+        </div>
       </div>
     </ng-template>
   </div>

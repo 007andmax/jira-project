@@ -169,10 +169,7 @@
                 (click)="openMap(content,companyDetailing.addresses[0])"
                 class="btn btn-outline"
             >
-                <img
-                    src="html/assets/img/icons/map-pin-blue.svg"
-                    alt="location"
-                >
+               <span class="qt-icon icon__map-pin qt-icon__blue-light-600 qt-sz-16 qt-dib qt-mr-4"></span>
                 Get Direction
             </a>
         </div>
@@ -204,10 +201,7 @@
                 (click)="openMap(content,companyDetailing.addresses.length > 1 ? companyDetailing.addresses[1] : null)"
                 class="btn btn-outline"
             >
-                <img
-                    src="html/assets/img/icons/map-pin-blue.svg"
-                    alt="location"
-                >
+               <span class="qt-icon icon__map-pin qt-icon__blue-light-600 qt-sz-16 qt-dib qt-mr-4"></span>
                 Get Direction
             </a>
         </div>
@@ -226,7 +220,7 @@
                 {{companyOpen}}
             </span>
             <i
-                class="icn-sm report-caret-icon qt-ml-8"
+                class="icn-sm qt-icon icon__arrow-down report-caret-icon qt-ml-8"
                 *ngIf="!showWorkingHours"
                 (click)="showWorkingHours = !showWorkingHours"
             ></i>
@@ -354,10 +348,7 @@
             (click)="downloadAgent()"
             class="btn btn-outline download-agent"
         >
-            <img
-                src="html/assets/img/icons/download.svg"
-                alt="download"
-            >
+           <span class="qt-icon icon__download qt-icon__blue-light-600 qt-sz-16 qt-dib"></span>
             Download Agent
         </a>
         <a
@@ -377,7 +368,7 @@
         <h1>Edit Hours</h1>
         <button
             type="button"
-            class="close"
+            class="qt-icon icon__close qt-sz-20 close"
             aria-label="Close"
             (click)="modal.dismiss('Cross click')"
         >
@@ -485,7 +476,7 @@
         <div class="footer-area-modal qt-df">
             <button
                 type="button"
-                class="btn btn-secondary"
+                class="btn btn-secondary qt-w100"
                 aria-label="Close"
                 (click)="modal.dismiss('Cross click')"
             >
@@ -493,7 +484,7 @@
             </button>
             <button
                 type="button"
-                class="btn btn-primary"
+                class="btn btn-primary qt-w100 qt-ml-12"
                 (click)="saveHours();modal.dismiss();"
             >
                 Save Changes
@@ -509,7 +500,7 @@
 >
     <button
         type="button"
-        class="close"
+        class="qt-icon icon__close qt-sz-20 close"
         aria-label="Close"
         (click)="modal.dismiss('Cross click')"
     >

@@ -33,19 +33,7 @@ export class QuotesFilterComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    if (this.customerPortalStateService.isCustomerPortal && this.companiesState.getCompanies().length > 0) this.checkCompanyCustomerUser();
-    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
-      if (this.customerPortalStateService.isCustomerPortal) this.checkCompanyCustomerUser();
-    })
-    this.sub.add(getOnCompanies);
-    let onQuotesFilters = this.customerPortalStateService.onQuotesFilters.subscribe(data => (this.checkCompanyCustomerUser()));
-    this.sub.add(onQuotesFilters);
-  }
-  private checkCompanyCustomerUser() {
-    this.quotesFilter = this.customerPortalStateService.getQuotesFilter();
-    let selectedCompany = this.companiesState.getCompanies().find(item => item.id == localStorage.getItem('company_info_id'));
-    this.companyDp.selectItemWithOutChanges(selectedCompany);
-    this.companyDp.isDisabled = true;
+
   }
   onSelectStatus(status) {
     this.quotesFilter.setStatus((status) ? status.value : null);

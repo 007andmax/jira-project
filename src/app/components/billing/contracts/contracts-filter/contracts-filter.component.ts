@@ -42,23 +42,12 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
     private customerPortalStateService: CustomerPortalStateService,
     public cd: ChangeDetectorRef,) { }
   ngOnInit() {
-    if (this.customerPortalStateService.isCustomerPortal && this.companiesState.getCompanies().length > 0) this.checkCompanyCustomerUser();
-    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
-      if (this.customerPortalStateService.isCustomerPortal) this.checkCompanyCustomerUser();
-    })
-    this.sub.add(getOnCompanies);
     if (this.companyContracts) {
       this.companyDp.editItem = this.companyContracts;
       this.companyDp.isDisabled = true;
       this.onSelectCompany(this.companyContracts);
       this.cd.detectChanges();
     }
-  }
-  private checkCompanyCustomerUser() {
-    this.contractsFilter.setFilters(JSON.parse(JSON.stringify(this.contractsStateService.getContractsFilter())));
-    this.companyContracts = this.companiesState.getCompanies().find(item => item.id == localStorage.getItem('company_info_id'));
-    this.companyDp.selectItemWithOutChanges(this.companyContracts);
-    this.companyDp.isDisabled = true;
   }
   public onClearAll() {
     if (!this.companyContracts) this.contractsFilter.setCompany(null);

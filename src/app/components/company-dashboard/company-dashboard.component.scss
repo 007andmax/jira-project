@@ -150,99 +150,6 @@
         right: 4px;
     }
 
-    /*** Form elements ***/
-
-    form::not(app-company-edit-aside) {
-        position: relative;
-        width: 100%;
-        float: left;
-        .form-row {
-            float: left;
-            width: 100%;
-            margin: 0 0 25px 0;
-        }
-        label,
-        .form-label {
-            font-weight: 600;
-            font-size: 13px;
-            font-style: normal;
-            font-stretch: normal;
-            line-height: 1.54;
-            letter-spacing: normal;
-            color: $gray-600;
-            text-transform: capitalize;
-            margin-bottom: 10px;
-            display: flex;
-            -webkit-display: flex;
-            justify-content: space-between;
-            align-items: center;
-            .static-link {
-                float: right;
-            }
-        }
-        .form-input {
-            float: left;
-            width: 100%;
-            @include border-radius(4px);
-            border: solid 1px $gray-300;
-            background-color: $white;
-            padding: 9px 14px;
-            font-size: 13px;
-            font-weight: normal;
-            font-weight: 400;
-            line-height: 1.54;
-            letter-spacing: normal;
-            color: $gray-600;
-            outline: none !important;
-            height: auto;
-            &:focus {
-                border-color: $gray-400;
-            }
-            &:hover {
-                border-color: $gray-400;
-            }
-            &:disabled {
-                cursor: not-allowed;
-                background-color: $background;
-                border-color: $background;
-            }
-            &.link {
-                background-image: url("/assets/img/icons/links.svg");
-                background-repeat: no-repeat;
-                background-position: right 13px center;
-                padding-right: 25px;
-            }
-            &::-webkit-input-placeholder {
-                color: $gray-400;
-                @include opacity(1);
-            }
-            &::-moz-placeholder {
-                color: $gray-400;
-                @include opacity(1);
-            }
-            &:-ms-input-placeholder {
-                color: $gray-400;
-                @include opacity(1);
-            }
-            &:-moz-placeholder {
-                color: $gray-400;
-                @include opacity(1);
-            }
-            textarea {
-                resize: none;
-            }
-        }
-        select.cmn-select {
-            @include app-none();
-            background: url("/assets/img/icons/arrow-down.svg") no-repeat right 7px center;
-            padding-right: 25px;
-            option {
-                padding: 10px;
-                background-color: $white;
-            }
-        }
-    }
-
     /*** Modal Style ***/
     .modal {
         // background-color: rgba(54, 70, 86, 0.8);
@@ -276,21 +183,6 @@
                 h4 {
                     margin-bottom: 30px;
                 }
-            }
-            button.close {
-                height: 24px;
-                width: 24px;
-                position: absolute;
-                right: 40px;
-                top: 40px;
-                background: url("/assets/img/icons/close.svg") no-repeat center;
-                font-size: 0;
-                padding: 0;
-                cursor: pointer;
-                outline: none;
-                border: none;
-                opacity: 1;
-                z-index: 1;
             }
         }
         .f-row {
@@ -348,8 +240,10 @@
                 @include border-radius(50%);
                 overflow: hidden;
                 figure {
+                    display: flex;
                     align-items: center;
                     justify-content: center;
+                    align-items: center;
                     width: 56px;
                     height: 56px;
                     background-color: $white;
@@ -546,7 +440,7 @@
                         margin: 0 4px;
                         width: 144px;
                         padding: 11px 5px;
-                        img {
+                        .qt-icon {
                             @include media-breakpoint-down($md) {
                                 display: none;
                             }
@@ -711,11 +605,9 @@
                         }
                         .cmp-board-title-wrap {
                             .dropdown {
+                                display: flex !important;
+                                gap: 4px;
                                 width: 90px;
-                                padding-left: 22px;
-                                mask-image: url("../../../assets/img/icons/calendar.svg");
-                                mask-repeat: no-repeat;
-                                mask-position: left top;
                                 min-height: 16px;
                                 .dropdown-toggle {
                                     margin-top: 2px;
@@ -725,18 +617,7 @@
                     }
                     &.cmp-board-revenue {
                         flex-direction: column;
-                        h2 {
-                            // width: 100%;
-                            // margin-bottom: 35px;
-                            //font-size: 18px !important;
-                        }
-
-                        // svg{
-                        //     width: 160px !important;
-                        //     height: 160px !important;
-                        // }
                         .chart-status {
-                            // margin: 0 -24px !important;
                             margin: 0;
                             @include flexbox;
                             align-items: center;
@@ -830,7 +711,6 @@
                     width: 100%;
                 }
                 .cmp-board-information {
-                    // width: inherit;
                     .cmp-board-info-row {
                         margin: 0 -8px;
                         width: calc(100% + 16px);
@@ -1120,7 +1000,7 @@
             margin-top: -2px;
           }
           .report-caret-icon {
-            transform: translateY(-3px);
+            transform: translateY(5px);
           }
         }
         .working-hrs {
@@ -1224,10 +1104,8 @@
                     line-height: 1.23;
                     letter-spacing: normal;
                     color: $gray-600;
-                    padding: 0 15px 0 0;
                     text-align: left;
-                    background: url(/assets/img/icons/arrow-down.svg) no-repeat right center $white;
-                    background-size: 16px;
+                    padding: 0;
                     display: flex;
                 }
             }
@@ -1245,7 +1123,8 @@
                 margin-bottom: 0 !important;
             }
             .dropdown {
-                width: 160px;
+                display: flex !important;
+                width: 168px;
                 .dropdown-toggle {
                     font-size: 12px;
                 }
@@ -1682,24 +1561,6 @@
                                                 width: 110px;
                                                 margin-right: 55px;
                                                 position: relative;
-                                                select.form-input {
-                                                    padding: 9px 10px;
-                                                    width: 100%;
-                                                    border-radius: 4px;
-                                                    border: solid 1px $gray-300;
-                                                    line-height: 1.54;
-                                                    letter-spacing: normal;
-                                                    height: auto;
-                                                    background: url("/assets/img/icons/arrow-down.svg") no-repeat right 15px
-                                                        center;
-                                                    padding-right: 30px;
-                                                    -webkit-appearance: none;
-                                                    -moz-appearance: none;
-                                                    outline: none;
-                                                    ::-ms-expand {
-                                                        display: none;
-                                                    }
-                                                }
                                                 &:last-child {
                                                     margin-right: 0;
                                                     &::after {
@@ -1732,7 +1593,6 @@
                         justify-content: flex-end;
                         flex-direction: row;
                         .btn {
-                            margin-left: 12px;
                             height: 40px;
                             @include flexbox;
                             align-items: center;
@@ -1773,8 +1633,6 @@
                 position: absolute;
                 right: 16px;
                 top: 16px;
-                background: url(/assets/img/icons/close.svg) no-repeat center transparent;
-                background-size: 20px auto;
                 font-size: 0;
                 padding: 0;
                 cursor: pointer;

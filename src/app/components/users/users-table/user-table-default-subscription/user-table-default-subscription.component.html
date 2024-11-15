@@ -6,6 +6,7 @@
         class="list-default-subscriptions"
         id="dropdownBasic"
         ngbDropdownToggle
+        [ngClass]="{'block-click':isDisabled}"
     >
         <div
             *ngIf="defaultSubscriptions && defaultSubscriptions.invoiceSubscription && defaultSubscriptions.invoiceSubscription.enabled"
@@ -15,7 +16,7 @@
         >
             Invoice Updates
             <div
-                class="qt-sz-10 qt-ml-4 qt-icon icon__close qt-icon__gray-400 qt-bg-contain qt-dib"
+                class="qt-sz-16 qt-ml-4 qt-icon icon__close qt-icon__gray-400 qt-bg-contain qt-dib"
                 (click)="updateDefault('invoiceSubscription')"
             ></div>
         </div>
@@ -27,7 +28,7 @@
         >
             Ticket Updates
             <div
-                class="qt-sz-10 qt-ml-4 qt-icon icon__close qt-icon__gray-400 qt-bg-contain qt-dib"
+                class="qt-sz-16 qt-ml-4 qt-icon icon__close qt-icon__gray-400 qt-bg-contain qt-dib"
                 (click)="updateDefault('ticketSubscription')"
             ></div>
         </div>
@@ -39,9 +40,12 @@
         >
             Ticket Manager
             <div
-                class="qt-sz-10 qt-ml-4 qt-icon icon__close qt-icon__gray-400 qt-bg-contain qt-dib"
+                class="qt-sz-16 qt-ml-4 qt-icon icon__close qt-icon__gray-400 qt-bg-contain qt-dib"
                 (click)="updateDefault('ticketManagerSubscription')"
             ></div>
+        </div>
+        <div class="qt-button-square pointer list-default-subscriptions-button pointer">
+          <div class="qt-icon icon__arrow-down qt-sz-16"></div>
         </div>
     </div>
     <div

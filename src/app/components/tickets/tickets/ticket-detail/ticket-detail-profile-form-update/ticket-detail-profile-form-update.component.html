@@ -35,17 +35,13 @@
 </div>
 <div class="ticket-detail-profile-form-update__footer qt-df jc-sb qt-ai-c">
     <div class="qt-df ticket-edit-aside-bottom-part-users-attack">
-        <div
-            class="qt-button-square pointer qt-mr-12"
+        <ticket-profile-form-update-note-list
             [hidden]="tab !== 'NOTE'"
-        >
-            <ticket-profile-form-update-note-list
-                #noteList
-                [placement]="'top-left'"
-                class="ticket-detail-form-update-note-list"
-                (onSelected)="onSelectedNote($event)"
-            ></ticket-profile-form-update-note-list>
-        </div>
+            #noteList
+            [placement]="'top-left'"
+            class="ticket-detail-form-update-note-list"
+            (onSelected)="onSelectedNote($event)"
+        ></ticket-profile-form-update-note-list>
         <div
             class="qt-button-square pointer ticket-edit-aside__attach-button"
             placement="top"
@@ -53,6 +49,7 @@
             *ngIf="tab === 'NOTE'"
         >
             <input
+                class="qt-pointer"
                 type="file"
                 #fileDropRef
                 id="fileDropRef"

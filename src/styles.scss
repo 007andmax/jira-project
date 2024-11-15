@@ -389,12 +389,13 @@ html {
   > div {
     display: flex;
     align-items: center;
-    font-size: 12px;
-    padding: 3px 8px;
+    font-size: 13px;
+    padding: 4px 6px;
     background: $gray-25;
     border: 1px solid $background;
     border-radius: 3px;
     margin: 2px 4px 2px 0;
+    font-weight: 500;
   }
 }
 .user-detail-info {
@@ -491,7 +492,6 @@ documents-filter {
 .billing-dashboard-page__content,
 documents-filter,
 .company-dashboard-add-tag,
-users-aside-detail,
 app-company-dash-detail {
   .tab-btns {
     display: flex;
@@ -556,7 +556,7 @@ app-company-dash-detail {
           background: url("./assets/img/icons/tags.svg");
         }
         input {
-          height: 38px !important;      
+          height: 38px !important;
           padding: 11px 14px;
           margin: 0;
           min-width: 100px;
@@ -791,8 +791,8 @@ app-company-dash-detail {
       position: absolute;
       top: 2px;
       right: -3px;
-      width: 14px;
-      height: 14px;
+      width: 16px;
+      height: 16px;
       mask-image: url("/assets/img/icons/close.svg");
       background-color: $gray-400;
       mask-position: center;
@@ -1630,26 +1630,13 @@ app-quotes-item {
         .tab-product,
         .tab-service {
           position: static;
-          mask-image: url("./assets/img/icons/products.svg");
-          mask-size: contain;
           margin-right: 8px;
           background-color: $gray-500;
-        }
-        .tab-service {
-          mask-image: url("./assets/img/icons/service.svg");
-          mask-size: contain;
         }
         &.active-tab {
           color: $blue-light-600;
           border-bottom: 2px solid $blue-light-600;
-          .tab-product {
-            mask-image: url("/assets/img/icons/products.svg");
-            mask-size: contain;
-            background-color: $blue-light-600;
-          }
-          .tab-service {
-            mask-image: url("/assets/img/icons/time.svg");
-            mask-size: contain;
+          .qt-icon {
             background-color: $blue-light-600;
           }
         }
@@ -1890,20 +1877,6 @@ app-quotes-item {
 }
 .new-users-content__modal,
 .new-companies-content__modal {
-  .create-contract {
-    position: relative;
-    margin-right: 20px;
-    &:after {
-      position: absolute;
-      content: "";
-      background: url("./assets/img/icons/help.svg") no-repeat center / contain;
-      height: 16px;
-      width: 16px;
-      right: -22px;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-  }
   .advanced {
     .editable-field {
       position: relative;
@@ -2473,9 +2446,6 @@ app-quotes-item {
     margin: 0;
   }
 }
-
-@import "./assets/styles/dropdowns.scss";
-@import "./assets/styles/icons.scss";
 
 .ng-sidebar {
   position: fixed !important;
@@ -3353,7 +3323,7 @@ input.--input-error:hover {
   .mat-form-field-underline {
     display: none;
   }
-  
+
   .mat-form-field-label-wrapper {
     position: absolute;
     left: 0;
@@ -3502,7 +3472,7 @@ app-company-devices-tags {
         border: none;
       }
 
-     
+
 
       .mat-form-field-appearance-legacy .mat-form-field-wrapper {
         padding: 0;
@@ -3568,7 +3538,7 @@ app-company-devices-tags {
         border-radius: 6px;
         font-weight: 500;
         font-size: 12px;
-        margin: 0 4px 0px px 0px;
+        margin: 0 4px 0 0;
         background-color: $gray-100;
         color: $gray-500;
     }
@@ -3585,18 +3555,18 @@ app-company-devices-edit-ip,app-company-devices-edit-mac {
 app-multi-company-drop-down {
  &:before {
      display: none;
-     
+
   }
 
    .mat-form-field-label-wrapper {
      top: -20px;
      padding-top: 15px;
-    
+
   }
 
    .mat-form-field-wrapper {
      padding-bottom: 0px !important;
-    
+
   }
   .mat-form-field {
       width: 100%;

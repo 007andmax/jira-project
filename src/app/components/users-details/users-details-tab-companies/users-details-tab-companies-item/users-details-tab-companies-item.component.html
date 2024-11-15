@@ -1,0 +1,111 @@
+<div
+    class="qt-table-modern__row qt-table-modern__row--height-auto"
+    [ngClass]="{'--selected': customerCompaniesInfo.selected}"
+>
+    <div class="users-table__check">
+        <div class="qt-df">
+            <label
+                class="qt-checkbox"
+                [attr.for]="'customerCompaniesInfo-' + customerCompaniesInfo.companyId"
+            >
+                <input
+                    [attr.id]="'customerCompaniesInfo-' + customerCompaniesInfo.companyId"
+                    [(ngModel)]="customerCompaniesInfo.selected"
+                    type="checkbox"
+                    (change)="selectCustomerCompaniesInfo($event)"
+                >
+                <span></span>
+            </label>
+        </div>
+    </div>
+    <div
+        class="users-table__company-full qt-df qt-ai-c ellipsis qt-pointer"
+        (click)="select()"
+    >
+        <div class="company-icon-container qt-df qt-ai-c qt-jc-c qt-mr-8">
+            <span class="qt-icon icon__companies qt-sz-16 qt-dib"></span>
+        </div>
+        <div
+            class="ellipsis"
+            [textContent]="customerCompaniesInfo.clientCompanyName"
+        ></div>
+    </div>
+    <div class="users-table__industry qt-fd-c qt-ai-fs qt-jc-c">
+        <app-drop-down
+            #jobTitleDp
+            [class]="['qt-dropdown']"
+            [heightInput]="'32px'"
+            [placeholder]="'Select Job Title'"
+            [list]="jobTitleList"
+            [field]="'name'"
+            [search]="true"
+            [change]="true"
+            [container]="'body'"
+            [editItem]="customerCompaniesInfo.jobTitleDto"
+            (onSelectedItem)="onSelectJobTitle($event)"
+        ></app-drop-down>
+    </div>
+    <div class="users-table__contract-no">
+        <user-table-default-subscription
+            class="users-table__subscription--dropdown qt-w100"
+            (onChangeDefault)="onChangeDefaultSubscriptions($event)"
+            [defaultSubscriptions]="defaultSubscriptions"
+        >
+        </user-table-default-subscription>
+    </div>
+    <div class="users-table__tickets">
+        <div class="qt-df">
+            <label
+                class="qt-checkbox"
+                [attr.for]="'eligibleForTicket-' + customerCompaniesInfo.companyId"
+            >
+                <input
+                    [attr.id]="'eligibleForTicket-' + customerCompaniesInfo.companyId"
+                    [(ngModel)]="customerCompaniesInfo.eligibleForTicket"
+                    type="checkbox"
+                    (change)="changeEligibleForTicket($event)"
+                >
+                <span></span>
+            </label>
+        </div>
+    </div>
+    <div class="users-table__primary qt-fd-c qt-ai-fs qt-jc-c">
+        <ng-template
+            ngFor
+            let-phone
+            [ngForOf]="primaryPhone"
+        >
+            <div class="qt-df qt-ai-c">
+                <div>
+                    <div
+                        [ngClass]="{'icon__old-phone':phone.typeNumber == 'FAX',
+                        'icon__mobile':phone.typeNumber == 'MOBILE',
+                         'icon__phone':phone.typeNumber == 'OFFICE'}"
+                        class="qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-6 qt-icon"
+                    ></div>
+                </div>
+                <preview-phone-mask
+                    [class]="'users-table__contract-no--number'"
+                    *ngIf="phone.number"
+                    [number]="phone.number"
+                ></preview-phone-mask>
+            </div>
+        </ng-template>
+    </div>
+    <div class="users-table__portal-status">
+        <app-drop-down
+            #userRolesDP
+            [class]="['qt-dropdown']"
+            [heightInput]="'32px'"
+            *ngIf="customerRoleStateService.isGetUserRole"
+            [placeholder]="'Select role'"
+            [container]="'body'"
+            [list]="userRoles"
+            [field]="'name'"
+            [search]="true"
+            [change]="true"
+            [editItem]="customerCompaniesInfo.customerUserRole"
+            (onSelectedItem)="onSelectPortalAccessStatus($event)"
+        ></app-drop-down>
+    </div>
+</div>

@@ -38,6 +38,10 @@ export class CompanyUsersDropDownComponent extends DropDownComponent {
       this.onGetUsers(data);
     })
     this.sub.add(getOnUsers);
+    let onEditUser = this.usersStateService.onEditUser.subscribe((data) => {
+      this.onGetUsers(this.usersStateService.getAllUsers());
+    })
+    this.sub.add(onEditUser);
   }
   /**
  * @description Check if item is selected
@@ -64,6 +68,10 @@ export class CompanyUsersDropDownComponent extends DropDownComponent {
     this.reqList.sort((a, b) => (this.getUserName(a).toLowerCase() > this.getUserName(b).toLowerCase()) ?
       1 : ((this.getUserName(b).toLowerCase() > this.getUserName(a).toLowerCase()) ? -1 : 0));
     this.list = JSON.parse(JSON.stringify(this.reqList)).map(item => new CompanyUser(item));
+  }
+  checkCompanyForCustomerPortal(item) {
+    if (item.eligibleForTicket == true) return true;
+    return false;
   }
   /**
  * @description Clear selected fileds, input and reset list

@@ -168,6 +168,10 @@ export class CompanyProfile {
         let contacts = JSON.parse(JSON.stringify(this.contacts.map(item => (item.getDataForRequest(true, this.isUseSelectedUser)))));
         let addresses = [this.addresses[0]];
         if (this.addresses.length == 2 && this.addresses[1].checkForAdd()) addresses.push(this.addresses[1]);
+        if (this.addresses.length == 1) {
+            addresses.push(JSON.parse(JSON.stringify(this.addresses[0])));
+            addresses[1].isPrimary = false;
+        }
         return {
             associatedCompanies: this.associatedCompanies,
             accountNumber: this.accountNumber,

@@ -152,7 +152,7 @@
                             ngbDropdownToggle
                             [textContent]="user.phoneNumbers[0].typeNumber"
                         ></button>
-                        <i class="icn-sm report-caret-icon"></i>
+                        <i class="icn-sm qt-icon icon__arrow-down report-caret-icon"></i>
                         <div
                             ngbDropdownMenu
                             aria-labelledby="dropdownBasic0"
@@ -241,7 +241,7 @@
                                 ngbDropdownToggle
                                 [textContent]="phone.typeNumber"
                             ></button>
-                            <i class="icn-sm report-caret-icon"></i>
+                            <i class="icn-sm qt-icon icon__arrow-down report-caret-icon"></i>
                             <div
                                 ngbDropdownMenu
                                 [attr.aria-labelledby]="'dropdownBasic' + i"
@@ -403,11 +403,11 @@
                     </div>
                 </div>
                 <div
-                    class="qt-inputs-row"
+                    class="qt-inputs-row qt-mb-12"
                     *ngIf="i == 0"
                 >
                     <div class="qt-input-block qt-f50">
-                        <div class="qt-df qt-ai-c qt-mt-15 qt-mb-12">
+                        <div class="qt-df qt-ai-c qt-mt-15">
                             <label
                                 class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
                                 for="sendPortalInvitation"
@@ -423,12 +423,33 @@
                         </div>
                     </div>
                 </div>
+                <div class="qt-inputs-row">
+                    <div class="qt-input-block qt-f100">
+                        <div class="qt-df qt-ai-c qt-mt-15">
+                            <label
+                                class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
+                                [attr.for]="'eligibleForTicket-' + i"
+                            >
+                                <input
+                                    [attr.id]="'eligibleForTicket-' + i"
+                                    type="checkbox"
+                                    [(ngModel)]="companyInfo.eligibleForTicket"
+                                >
+                                <span></span>
+                                <div class="qt-ml-8">
+                                    Display in the "Users" dropdown to create a new ticket
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
             </div>
         </ng-template>
         <div class="qt-inputs-row qt-mt-24">
             <div class="qt-input-block">
                 <div class="qt-input-block__label">Marketing Subscription</div>
                 <user-custom-subscription
+                    class="custom-subscription-user-aside"
                     [mode]="MODE_HIDE_ACTIVE"
                     (onChange)="onChangeCustomSubscriptions($event)"
                 ></user-custom-subscription>

@@ -96,7 +96,6 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
   }
 
   getServiceAgreements(companies) {
-    if (this.customerPortalStateService.isCustomerPortal) this.companyContracts = companies.find(item => item.id === localStorage.getItem('company_info_id'));
     let subscribe = (this.companyContracts) ? this.contractsService.getServiceAgreementsByCompany(this.companyContracts.id) : this.contractsService.getServiceAgreements();
     subscribe.subscribe(data => {
       let showNotificationReview = false;

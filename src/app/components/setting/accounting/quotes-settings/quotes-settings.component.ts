@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { InvoiceTicketsService } from '../../../../services/accounting/accounting-settings.service';
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
+import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
 
 @Component({
   selector: 'app-quotes-settings',
@@ -13,7 +14,12 @@ export class QuotesSettingsComponent implements OnInit {
   quotesForm: FormGroup;
   submitted = false;
   loading = true;
-
+  expirationDate;
+  expirationDates = [new TitleListType("1 day", "1"),
+  new TitleListType("7 days", "7"),
+  new TitleListType("14 days", "14"),
+  new TitleListType("30 days", "30"),
+  new TitleListType("45 days", "45")];
   constructor(
     private formBuilder: FormBuilder,
     private invoiceTicketsService: InvoiceTicketsService,
@@ -33,6 +39,9 @@ export class QuotesSettingsComponent implements OnInit {
           Validators.maxLength(7)
         ])
       ],
+      quoteExpirationDate: [
+        ''
+      ],
       defaultTerms: ['15days'],
       memoQuote: ['']
     });
@@ -43,17 +52,25 @@ export class QuotesSettingsComponent implements OnInit {
     return this.quotesForm.controls;
   }
 
+  onDefaultExpirationDate(data) {
+    this.quotesForm.patchValue({
+      quoteExpirationDate: data.type,
+    });
+    this.expirationDate = data;
+  }
   /**
    * get quote number
    */
   getActualNumber() {
-    this.invoiceTicketsService.actualNumber('SALE_QUOTE').subscribe(
+    this.invoiceTicketsService.getQuoteSettings().subscribe(
       (res: any) => {
         this.loading = false;
         if (res) {
           this.quotesForm.patchValue({
-            count: res.number
+            count: res.number,
+            quoteExpirationDate: res.quoteExpirationDate
           });
+          this.expirationDate = this.expirationDates.find(item => item.type == res.quoteExpirationDate);
         }
       },
       error => {
@@ -73,7 +90,8 @@ export class QuotesSettingsComponent implements OnInit {
       emailSettingPageNumberFormDto: {
         count: this.quotesForm.value.count,
         prefix: '',
-        type: 'SALE_QUOTE'
+        type: 'SALE_QUOTE',
+        expirationDate: Number(this.quotesForm.value.quoteExpirationDate)
       }
     };
     this.invoiceTicketsService

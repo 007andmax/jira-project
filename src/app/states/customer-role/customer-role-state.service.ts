@@ -13,7 +13,7 @@ export class CustomerRoleStateService {
   onGetUserRole: EventEmitter<any> = new EventEmitter();
   onGetUserPermissions: EventEmitter<any> = new EventEmitter();
   VIEW_MY_TICKETS_related_permissions = ["VIEW_ALL_TICKETS", "EDIT_OTHER_TICKETS"];
-  VIEW_MY_PROFILE_related_permissions = ["VIEW_ALL_USERS", "EDIT_USERS"];
+  VIEW_MY_PROFILE_related_permissions = ["EDIT_USERS"];
   VIEW_ALL_DEVICES_related_permissions = ["DEVICES_REMOTE_CONTROL"];
   constructor(private userService: UsersService,
     private customerRoleRealTimeService: CustomerRoleRealTimeService) { }

@@ -1,11 +1,11 @@
 export class TechTicketItem {
     closed: number;
-    created: number;
+    claimed: number;
     fullName: string;
 
     constructor(data) {
         this.closed = data.closed;
-        this.created = data.created;
+        this.claimed = data.claimed;
         this.fullName = data.fullName;
 
     }

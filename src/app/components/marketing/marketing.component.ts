@@ -22,6 +22,7 @@ import { UserCustomerCompaniesInfo } from '../users/class/user-customer-companie
 import { UsersHeaderComponent } from '../users/users-header/users-header.component';
 import { UserFilters } from '../users/class/user-filters';
 import { fadeInAnimation } from 'src/app/animations';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'marketing',
@@ -57,14 +58,17 @@ export class MarketingComponent implements OnInit {
     private crmStateService: CrmStateService,
     private usersRealTimeService: UsersRealTimeService,
     private marketingEmailStateService: MarketingEmailStateService,
+    private customerPortalStateService: CustomerPortalStateService,
     private websocketService: WebsocketService) { }
 
   ngOnInit() {
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.usersStateService.setModeUserFilterSubscription(MODE_MARKETING_USERS_LIST);
     this.filter = this.usersStateService.getFilter();
-    if (this.websocketService.isInit) this.websocketService.subsribeToUsersFilters();
-    let onInit = this.websocketService.onInit.subscribe(data => this.websocketService.subsribeToUsersFilters());
+    if (this.websocketService.isInit && !this.customerPortalStateService.isCustomerPortal) this.websocketService.subsribeToUsersFilters();
+    let onInit = this.websocketService.onInit.subscribe(data => {
+      if (!this.customerPortalStateService.isCustomerPortal) this.websocketService.subsribeToUsersFilters()
+    });
     this.sub.add(onInit);
     this.showPreloader = true;
     this.onScroll();

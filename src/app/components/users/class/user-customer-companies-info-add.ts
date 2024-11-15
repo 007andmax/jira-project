@@ -19,6 +19,7 @@ export class UserCustomerCompaniesInfoAdd {
     }
     "hasAccess": boolean;
     isPrimaryContact: boolean;
+    eligibleForTicket: boolean;
     constructor(data) {
         this.companyId = data.companyId;
         if (data.jobTitleDto) this.jobTitleDto = { id: data.jobTitleDto.id };
@@ -26,6 +27,7 @@ export class UserCustomerCompaniesInfoAdd {
         this.defaultSubscriptions = this.getDefaultSubscriptionsForUpdate(data.defaultSubscriptions);
         this.hasAccess = data.hasAccess;
         this.isPrimaryContact = data.isPrimaryContact;
+        this.eligibleForTicket = data.eligibleForTicket;
     }
     /**
  * @description Return Object for Default Subscriptions  

@@ -32,12 +32,15 @@ export class UsersStateService {
   onClearGlobalFilter: EventEmitter<any> = new EventEmitter();
   openMessageAside: EventEmitter<any> = new EventEmitter();
   onSelectAll: EventEmitter<any> = new EventEmitter();
-  openDetailAside: EventEmitter<any> = new EventEmitter();
   closeDetailAside: EventEmitter<any> = new EventEmitter();
   onChangeUserPermissions: EventEmitter<any> = new EventEmitter();
   onInitGlobalFilter: EventEmitter<any> = new EventEmitter();
   onToggleFilter: EventEmitter<any> = new EventEmitter();
   onGetGlobalFilters: EventEmitter<any> = new EventEmitter();
+  onSelectCustomerCompanyInfo: EventEmitter<any> = new EventEmitter();
+  onSelectCustomerCompaniesInfo: EventEmitter<any> = new EventEmitter();
+  onShowAddCustomerCompaniesInfo: EventEmitter<any> = new EventEmitter();
+  isShowAddCustomerCompaniesInfo: boolean = false;
   userForArchive: User = null;
   usersForArchive: Array<User> = [];
   userForDeArchive: User = null;
@@ -48,6 +51,7 @@ export class UsersStateService {
   userRoleForRemove: UserRole;
   globalFilters: Array<UserGlobalFilter> = [];
   globalFilterForRemove: UserGlobalFilter = null;
+  onEditUser: EventEmitter<any> = new EventEmitter();
   constructor(private userService: UsersService,
     private appService: AppService,
     private customerPortalStateService: CustomerPortalStateService,
@@ -99,6 +103,24 @@ export class UsersStateService {
       }
 
     })
+  }
+  public showAddCustomerCompaniesInfo() {
+    this.isShowAddCustomerCompaniesInfo = true;
+    this.onShowAddCustomerCompaniesInfo.emit(null)
+  }
+  public setIsShowAddCustomerCompaniesInfo(data) {
+    this.isShowAddCustomerCompaniesInfo = data;
+  }
+  public setSelectedCustomerCompanyInfo(data) {
+    this.onSelectCustomerCompanyInfo.emit(data)
+  }
+  public setSelectedCustomerCompaniesInfo(data) {
+    this.onSelectCustomerCompaniesInfo.emit(data)
+  }
+  public fastEditUser(data) {
+    let index = this.allUsers.findIndex(item => item.id == data.id);
+    if (index > -1) this.allUsers[index].onUpdate(data);
+    this.onEditUser.emit(data);
   }
   public clearGlobalFilter() {
     this.onClearGlobalFilter.emit(null);
@@ -164,7 +186,6 @@ export class UsersStateService {
   public onInitGetCurrentUser() {
     this.userService.getCurrentUser().subscribe((data: any) => {
       this.currentUser = new CurrentUser(data);
-      if (data.accountType == "TECH") localStorage.removeItem("company_info_id");
       if (data.accountType == "CLIENT" && !this.customerPortalStateService.isCustomerPortal) {
         this.customerPortalStateService.setCustomerPortal(true);
         //this.customerPortalStateService.setFilters(this.currentUser);
@@ -184,9 +205,6 @@ export class UsersStateService {
   }
   public hideDetailUser() {
     this.closeDetailAside.emit(null);
-  }
-  public showDetailUser(data) {
-    this.openDetailAside.emit(data);
   }
   public getFilter() {
     return this.filter;

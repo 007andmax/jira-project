@@ -5,10 +5,11 @@
             <div class="header-left">
                 <div class="hp-device-info">
                     <span class="device-icn">
-                        <img
-                            [attr.src]="deviceType === 'printer' ? '/html/assets/img/icons/print.svg' : '/html/assets/img/icons/devices.svg'"
-                            alt="device"
+                        <span
+                          class="qt-icon icon__devices qt-sz-20 qt-icon__white"
+                          [ngClass]="deviceType === 'printer' ? 'icon__print' : 'icon__devices'"
                         >
+                        </span>
                     </span>
                     <div class="head-device">
                         <div class="head-device__title">Device</div>
@@ -102,7 +103,6 @@
                 </span>
             </div>
         </div>
-        <!-- <div class="head-counter"><img src="/html/assets/img/device/counter.svg" alt="Print" /> 00 hr : 00 min : 00 sec</div> -->
     </header>
     <!-- left sidebar nav -->
     <aside class="left-sidebar">

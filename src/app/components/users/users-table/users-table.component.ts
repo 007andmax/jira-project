@@ -27,6 +27,8 @@ import { TechUsersService } from 'src/app/services/setting/tech-users.service';
 import { UsersCheckUseComponent } from '../users-check-use/users-check-use.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
+import { UserProfile } from '../class/user-profile';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users-table',
@@ -65,6 +67,7 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     private permissionsService: PermissionsService,
     private techUsersService: TechUsersService,
     public customerPortalStateService: CustomerPortalStateService,
+    private router: Router,
     private usersRealTimeService: UsersRealTimeService) { }
 
 
@@ -109,17 +112,31 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     return this.user.customerCompaniesInfo.find(item => item.companyId == this.companyId).jobTitleDto;
   }
   showDetailUser() {
-    this.usersStateService.showDetailUser(this.user);
-    this.cd.markForCheck();
+    if (this.type == TYPE_LIST_COMPANY_USERS) {
+      this.router.navigate(
+        [`${this.companiesStateService.getCurrentCompany().techDomain}/company/${this.companyId}/user/`, this.user.id]);
+    } else {
+      this.router.navigate(
+        [`${this.companiesStateService.getCurrentCompany().techDomain}/users/`, this.user.id]);
+    }
   }
   isPrimaryContact() {
     if (!this.customerPortalStateService.isCustomerPortal && this.companyId) return this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).isPrimaryContact;
-    if (this.customerPortalStateService.isCustomerPortal && this.user.customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id'))) return this.user.customerCompaniesInfo.find(item => item.companyId === localStorage.getItem('company_info_id')).isPrimaryContact;
     return false
   }
   resetPrimaryContact() {
     this.usersService.resetPrimaryContact(this.user.id, this.companyId).subscribe(data => {
 
+    })
+  }
+  getCustomerCompaniesInfo() {
+    return this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId);
+  }
+  changeDisplay(event) {
+    let index = this.user.customerCompaniesInfo.findIndex(item => item.companyId === this.companyId);
+    this.user.customerCompaniesInfo[index].eligibleForTicket = event.target.checked;
+    this.usersService.updateeligibleForTicket(this.user.id, this.companyId, event.target.checked).subscribe(data => {
+      this.usersStateService.fastEditUser(this.user);
     })
   }
   edit() {

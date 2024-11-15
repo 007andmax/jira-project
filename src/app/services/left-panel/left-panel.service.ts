@@ -51,6 +51,7 @@ export class LeftPanelService {
       || state == 'company-dashboard'
       || state == 'company-tickets'
       || state == 'company-user'
+      || state == 'company-user-details'
       || state == 'company-devices'
       || state == 'company-network-scan-beta'
       || state == 'company-network-scan'

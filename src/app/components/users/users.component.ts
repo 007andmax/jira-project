@@ -26,6 +26,7 @@ import { UserFilters } from './class/user-filters';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserDeArchiveNotificationComponent } from './user-de-archive-notification/user-de-archive-notification.component';
 import { fadeInAnimation } from 'src/app/animations';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-users',
@@ -63,17 +64,17 @@ export class UsersComponent implements OnInit, OnDestroy {
     public customerPortalStateService: CustomerPortalStateService,
     private websocketService: WebsocketService,
     private modalService: NgbModal,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService
   ) {
   }
   ngOnInit() {
-    if (this.customerPortalStateService.isCustomerPortal) {
-      this.filter.setCompanies(this.customerPortalStateService.getUsersFilters().companies);
-    } else {
-      this.filter = this.usersStateService.getFilter();
-      if (this.websocketService.isInit) this.websocketService.subsribeToUsersFilters();
-      let onInit = this.websocketService.onInit.subscribe(data => this.websocketService.subsribeToUsersFilters());
-      this.sub.add(onInit);
-    }
+    this.filter = this.usersStateService.getFilter();
+    if (this.websocketService.isInit && !this.customerPortalStateService.isCustomerPortal) this.websocketService.subsribeToUsersFilters();
+    let onInit = this.websocketService.onInit.subscribe(data => {
+      if (!this.customerPortalStateService.isCustomerPortal) this.websocketService.subsribeToUsersFilters()
+    });
+    this.sub.add(onInit);
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.usersStateService.setModeUserFilterSubscription(MODE_USERS_LIST);
     this.filter.setIsArchive(JSON.parse(JSON.stringify(this.usersStateService.getShowArchivedCompanies())));
@@ -93,13 +94,6 @@ export class UsersComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     });
     this.sub.add(geLefttFilter);
-    let onUsersFilters = this.customerPortalStateService.onUsersFilters.subscribe(data => {
-      document.body.querySelector(".main-container").scrollTo(0, 0);
-      this.showPreloader = true;
-      this.setFilters(this.customerPortalStateService.getUsersFilters());
-      this.onScroll();
-    });
-    this.sub.add(onUsersFilters);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === ARCHIVE_USER) {
@@ -109,7 +103,7 @@ export class UsersComponent implements OnInit, OnDestroy {
           this.onDeArchiveUser(this.usersStateService.getUserForDeArchive().id);
         }
         if (this.confirmStateService.getConfirmAction() === ARCHIVE_USERS) {
-          this.onArchiveUsers(this.usersStateService.getUsersForArchive().map(item => item.id));
+          this.onArchiveUsers(this.usersStateService.getUsersForArchive());
         }
       }
     })
@@ -157,10 +151,6 @@ export class UsersComponent implements OnInit, OnDestroy {
       this.listCustomSubscription = data;
     })
     this.sub.add(onGetListCustomSubscription);
-    let openDetailAside = this.usersStateService.openDetailAside.subscribe(data => {
-      this.setIdDetailUser(data);
-    });
-    this.sub.add(openDetailAside);
   }
   onCloseFilters() {
     this.header.setToggleFilter(false);
@@ -173,9 +163,15 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.header.setUsers(this.users);
     this.setDefaultScoll();
   }
-  private onArchiveUsers(ids) {
-    forkJoin(
-      ids.map(item => this.usersService.onArchiveUsers(item))
+  private onArchiveUsers(users) {
+    let list = users.filter(item => item.customerCompaniesInfo.every(company => !company.isPrimaryContact));
+    let listPrimary = users.filter(item => item.customerCompaniesInfo.some(company => company.isPrimaryContact));
+    listPrimary.forEach(item => {
+      this.toastrService.error(`You can't remove the user ${item.firstName} ${item.lastName}`);
+    })
+    this.appStateService.changeDetectorRef();
+    if (list.length > 0) forkJoin(
+      list.map(item => this.usersService.onArchiveUsers(item.id))
     )
       .subscribe(res => {
       });

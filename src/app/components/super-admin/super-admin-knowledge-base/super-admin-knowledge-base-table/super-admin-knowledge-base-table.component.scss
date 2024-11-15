@@ -29,7 +29,6 @@ app-tickets-table-item {
     display: none;
     width: 48px;
     height: 48px;
-    background: $blue-light-600 url('/assets/img/icons/add-product.svg') 16px 16px no-repeat;
     box-shadow: 0 8px 16px 0 rgba(22, 164, 250, 0.2);
     position: fixed;
     right: 16px;
@@ -43,7 +42,6 @@ app-tickets-table-item {
     top: 92px;
     z-index: 1;
     background-color: $white;
-    //padding-top: 32px;
     border-radius: 8px;
 
     .qt-page-list__header-thead {
