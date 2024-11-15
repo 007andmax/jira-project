@@ -11,6 +11,7 @@ export class CompanyValdiate {
     primaryPhoneNumber: boolean = true;
     shippingPhoneNumber: boolean = true;
     billindAddress: boolean = true;
+    shippingAddress: boolean = true;
     user: boolean = true;
     rePhoneNumber = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/;
     reEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
@@ -26,6 +27,9 @@ export class CompanyValdiate {
     public getBillindAddress() {
         return this.billindAddress;
     }
+    public getShippingAddress() {
+        return this.shippingAddress;
+    }
     public getUser() {
         return this.user;
     }
@@ -34,6 +38,9 @@ export class CompanyValdiate {
     }
     public resetBillindAddress() {
         this.billindAddress = true;
+    }
+    public resetShippingAddress() {
+        this.shippingAddress = true;
     }
     public resetExistPrimaryContactEmail() {
         this.existPrimaryContactEmail = true;
@@ -185,11 +192,12 @@ export class CompanyValdiate {
         if (company.isUseSelectedUser && !company.contacts[0].id) this.user = false;
         if (!company.isUseSelectedUser && (!company.contacts[0].primaryEmail || !company.contacts[0].primaryEmail.match(this.reEmail))) this.primaryContactEmail = false;
         if (!company.addresses[0].phoneNumbers[0].number || company.addresses[0].phoneNumbers[0].number.length < 14) this.phoneNumber = false;
-        if (company.addresses.length === 2 && company.addresses[1].phoneNumbers[0].number.length > 0 && company.addresses[1].phoneNumbers[0].number.length < 14) this.shippingPhoneNumber = false;
+        if (company.addresses.length > 1 && (!company.addresses[1].phoneNumbers[0].number || company.addresses[1].phoneNumbers[0].number.length < 14)) this.shippingPhoneNumber = false;
         if (!company.domain) this.domain = false;
         if (company.domain && !company.domain.match(this.reDomain)) this.domainValid = false;
         if (company.addresses.length > 0 && company.addresses[0].locationName != undefined && company.addresses[0].locationName.length == 0) this.billindAddress = false;
-        return this.name && this.type && this.primaryPhoneNumber && this.primaryContactEmail && this.phoneNumber && this.firstName && this.domain && this.domainValid && !this.domainIsExist && this.shippingPhoneNumber && this.billindAddress && this.user && this.existPrimaryContactEmail && !this.isCheckingEmail;
+        if (company.addresses.length > 1 && company.addresses[1].locationName != undefined && company.addresses[1].locationName.length == 0) this.shippingAddress = false;
+        return this.name && this.type && this.primaryPhoneNumber && this.primaryContactEmail && this.phoneNumber && this.firstName && this.domain && this.domainValid && !this.domainIsExist && this.shippingPhoneNumber && this.billindAddress && this.user && this.existPrimaryContactEmail && !this.isCheckingEmail && this.shippingAddress;
     }
 
 

@@ -144,6 +144,7 @@
                     [ngClass]="{'--input-error' : !validate.getBillindAddress()}"
                     [(ngModel)]="company.addresses[0].locationName"
                     placeholder="Enter Location Name"
+                    (input)="onChangeBillingLocationName($event)"
                 >
                 <app-mat-error
                     class="invalid-feedback"
@@ -171,6 +172,7 @@
                 <input
                     type="text"
                     [(ngModel)]="company.addresses[0].suiteNumber"
+                    (input)="onChangeBillingSuiteNo($event)"
                     placeholder="Enter Suite Number"
                 >
             </div>
@@ -179,6 +181,7 @@
                 <input
                     type="text"
                     [(ngModel)]="company.addresses[0].postalCode"
+                    (input)="onChangeBillingZip($event)"
                     placeholder="Enter Zip"
                 >
             </div>
@@ -236,7 +239,15 @@
                     [(ngModel)]="company.addresses[1].locationName"
                     placeholder="Enter Location Name"
                     [disabled]="company.addresses[1].sameAsBilling"
+                    [ngClass]="{'--input-error' : !validate.getShippingAddress()}"
+                    (input)="validate.resetShippingAddress()"
                 >
+                <app-mat-error
+                    class="invalid-feedback"
+                    *ngIf="!validate.getShippingAddress()"
+                >
+                    Shipping Location Name is required
+                </app-mat-error>
             </div>
         </div>
         <div class="qt-inputs-row">
