@@ -176,12 +176,14 @@
   dependencies:
     "tslib" "^1.9.0"
 
-"@angular/cdk@github:angular/cdk-builds#89f40f293288fc8e568cc01c7b79d31e25c61de0":
-  "integrity" "sha512-Cejg43dIbT45bs/kQmfsbpaVDx1wKtmLBD8GR89Rr9XAjvST/2yPiegAaXXVaVvr9phnjxbS/t1uZxRDIn+OHA=="
-  "resolved" "git+ssh://git@github.com/angular/cdk-builds.git#89f40f293288fc8e568cc01c7b79d31e25c61de0"
-  "version" "6.0.0-beta.4-c28549d"
+"@angular/cdk@7.2.1":
+  "integrity" "sha512-oU1Pjq3JkDtkXquLxWK84A2jOCeYRf352dVGbQCxWoSOQ5KBtMAd42huGidPiOSHN6/f7xZwL3n4fq3fVIut8A=="
+  "resolved" "https://registry.npmjs.org/@angular/cdk/-/cdk-7.2.1.tgz"
+  "version" "7.2.1"
   dependencies:
     "tslib" "^1.7.1"
+  optionalDependencies:
+    "parse5" "^5.0.0"
 
 "@angular/cli@^8.0.2":
   "integrity" "sha512-pW+iU0eKHIae+A1b9W5g8DKefMQcehZ+drGKs4Hryh8G+XGFS00BIWkmh6c1mydWTEhdsFlhdjD/rXCem7MAQQ=="
@@ -228,7 +230,7 @@
     "semver" "5.6.0"
     "symbol-observable" "1.2.0"
 
-"@angular/common@^6.0.0 || ^7.0.0", "@angular/common@^6.0.0 || ^7.0.0 || ^8.0.0", "@angular/common@^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0", "@angular/common@^7.0.0", "@angular/common@^8.0.0", "@angular/common@^8.2.14", "@angular/common@>= 7.0.0", "@angular/common@>=6.0.0", "@angular/common@>=6.0.0 <9.0.0", "@angular/common@>=6.0.0-beta.0 <7.0.0", "@angular/common@>=7.0.0 <8", "@angular/common@~7.0.0", "@angular/common@7.0.4", "@angular/common@7.2.16":
+"@angular/common@^6.0.0 || ^7.0.0", "@angular/common@^6.0.0 || ^7.0.0 || ^8.0.0", "@angular/common@^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0", "@angular/common@^7.0.0", "@angular/common@^8.0.0", "@angular/common@^8.2.14", "@angular/common@>= 7.0.0", "@angular/common@>=6.0.0", "@angular/common@>=6.0.0 <9.0.0", "@angular/common@>=7.0.0", "@angular/common@>=7.0.0 <8", "@angular/common@~7.0.0", "@angular/common@7.0.4", "@angular/common@7.2.16":
   "integrity" "sha512-akQojdqY/RBlItkDWAPI3k0Llk1wnbAp+f47yySi3cgQz9SaZ1/RLNWZV84I/cKrksb4ehorT/lTqRBojsAD1A=="
   "resolved" "https://registry.npmmirror.com/@angular/common/-/common-7.0.4.tgz"
   "version" "7.0.4"
@@ -259,7 +261,7 @@
   dependencies:
     "tslib" "^1.9.0"
 
-"@angular/core@^6.0.0 || ^7.0.0", "@angular/core@^6.0.0 || ^7.0.0 || ^8.0.0", "@angular/core@^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0", "@angular/core@^7.0.0", "@angular/core@^8.0.0", "@angular/core@^8.2.14", "@angular/core@>= 7.0.0", "@angular/core@>=2.3.0", "@angular/core@>=2.3.1 <8.0.0 || >7.0.0-beta <8.0.0", "@angular/core@>=6.0.0", "@angular/core@>=6.0.0 <9.0.0", "@angular/core@>=6.0.0-beta.0 <7.0.0", "@angular/core@>=7.0.0 <8", "@angular/core@~7.0.0", "@angular/core@7.0.4", "@angular/core@7.2.16", "@angular/core@9.1.10":
+"@angular/core@^6.0.0 || ^7.0.0", "@angular/core@^6.0.0 || ^7.0.0 || ^8.0.0", "@angular/core@^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0", "@angular/core@^7.0.0", "@angular/core@^8.0.0", "@angular/core@^8.2.14", "@angular/core@>= 7.0.0", "@angular/core@>=2.3.0", "@angular/core@>=2.3.1 <8.0.0 || >7.0.0-beta <8.0.0", "@angular/core@>=6.0.0", "@angular/core@>=6.0.0 <9.0.0", "@angular/core@>=7.0.0", "@angular/core@>=7.0.0 <8", "@angular/core@~7.0.0", "@angular/core@7.0.4", "@angular/core@7.2.16", "@angular/core@9.1.10":
   "integrity" "sha512-17SSmCz1wQoZKnVHF/T8UkWYPpDm5kPyoc1okkTTv8ZA2EAMMuZFFnRSAxEL5i7mNB9z5CvRqF2tRx/DbgbIRA=="
   "resolved" "https://registry.npmmirror.com/@angular/core/-/core-7.0.4.tgz"
   "version" "7.0.4"
@@ -1842,15 +1844,15 @@
   "resolved" "https://registry.npmmirror.com/acorn-walk/-/acorn-walk-7.2.0.tgz"
   "version" "7.2.0"
 
-"acorn@^6.0.0", "acorn@^7.0.0", "acorn@^7.1.0":
-  "integrity" "sha512-nQyp0o1/mNdbTO1PO6kHkwSrmgZ0MT/jCCpNiwbUjGoRN4dlBhqJtoQuCnEOKzgTVwg0ZWiCoQy6SxMebQVh8A=="
-  "resolved" "https://registry.npmmirror.com/acorn/-/acorn-7.4.1.tgz"
-  "version" "7.4.1"
-
-"acorn@^6.0.5":
+"acorn@^6.0.0", "acorn@^6.0.5":
   "integrity" "sha512-XtGIhXwF8YM8bJhGxG5kXgjkEuNGLTkoYqVE+KMR+aspr4KGYmKYg7yUe3KghyQ9yheNwLnjmzh/7+gfDBmHCQ=="
   "resolved" "https://registry.npmmirror.com/acorn/-/acorn-6.4.2.tgz"
   "version" "6.4.2"
+
+"acorn@^7.0.0", "acorn@^7.1.0":
+  "integrity" "sha512-nQyp0o1/mNdbTO1PO6kHkwSrmgZ0MT/jCCpNiwbUjGoRN4dlBhqJtoQuCnEOKzgTVwg0ZWiCoQy6SxMebQVh8A=="
+  "resolved" "https://registry.npmmirror.com/acorn/-/acorn-7.4.1.tgz"
+  "version" "7.4.1"
 
 "adm-zip@^0.5.2":
   "integrity" "sha512-x0HvcHqVJNTPk/Bw8JbLWlWoo6Wwnsug0fnYYro1HBrjxZ3G7/AZk7Ahv8JwDe1uIcz8eBqvu86FuF1POiG7vQ=="
@@ -7739,9 +7741,9 @@
   "version" "0.0.8"
 
 "nan@^2.13.2":
-  "integrity" "sha512-W7tfG7vMOGtD30sHoZSSc/JVYiyDPEyQVso/Zz+/uQd0B0L46gtC+pHha5FFMRpil6fm/AoEcRWyOVi4+E/f8w=="
-  "resolved" "https://registry.npmmirror.com/nan/-/nan-2.18.0.tgz"
-  "version" "2.18.0"
+  "integrity" "sha512-nbajikzWTMwsW+eSsNm3QwlOs7het9gGJU5dDZzRTQGk03vyBOauxgI4VakDzE0PtsGTmXPsXTbbjVhRwR5mpw=="
+  "resolved" "https://registry.npmjs.org/nan/-/nan-2.22.0.tgz"
+  "version" "2.22.0"
 
 "nanomatch@^1.2.9":
   "integrity" "sha512-fpoe2T0RbHwBTBUOftAfBPaDEi06ufaUai0mE6Yn1kacc3SnTErfb/h+X94VXzI64rKFHYImXSvdwGGCmwOqCA=="
@@ -8549,6 +8551,11 @@
   dependencies:
     "domhandler" "^5.0.2"
     "parse5" "^7.0.0"
+
+"parse5@^5.0.0":
+  "integrity" "sha512-ugq4DFI0Ptb+WWjAdOK16+u/nHfiIrcE+sh8kZMaM0WllQKLI9rOUq6c2b7cwPkXdzfQESqvoqK6ug7U/Yyzug=="
+  "resolved" "https://registry.npmjs.org/parse5/-/parse5-5.1.1.tgz"
+  "version" "5.1.1"
 
 "parse5@^7.0.0":
   "integrity" "sha512-Czj1WaSVpaoj0wbhMzLmWD69anp2WH7FXMB9n1Sy8/ZFF9jolSQVMu1Ij5WIyGmcBmhk7EOndpO4mIpihVqAXw=="
@@ -10906,7 +10913,7 @@
 
 "tslib@^1.7.1":
   "integrity" "sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg=="
-  "resolved" "https://registry.npmmirror.com/tslib/-/tslib-1.14.1.tgz"
+  "resolved" "https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz"
   "version" "1.14.1"
 
 "tslib@^1.8.0":

@@ -347,8 +347,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.imageChangedEvent = event;
     if (event.target.files && event.target.files[0]) {
       const size = event.target.files[0].size;
-      if (size > 4194304) {
-        this.toastr.info('Maximum size of 4MB');
+      if (size > 15728640) {
+        this.toastr.info('Maximum size of 15MB');
         return;
       }
       const fromData = new FormData();

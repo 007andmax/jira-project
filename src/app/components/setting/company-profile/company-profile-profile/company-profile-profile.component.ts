@@ -231,8 +231,8 @@ export class CompanyProfileProfileComponent implements OnInit, OnDestroy {
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
       const size = event.target.files[0].size;
-      if (size > 4194304) {
-        this.toaster.info('Maximum size of 4MB');
+      if (size > 15728640) {
+        this.toaster.info('Maximum size of 15MB');
         return;
       }
       const fromData = new FormData();

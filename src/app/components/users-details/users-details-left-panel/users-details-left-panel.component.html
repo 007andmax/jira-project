@@ -116,14 +116,14 @@
                                     class=" qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"
                                 ></div>
                                 <span
-                                    class="type-phone qt-color-gray-500"
+                                    class="type-phone qt-color-gray-500 qt-fw-500"
                                     [textContent]="item.value.name == 'OFFICE' ? 'Phone' : item.value.name == 'MOBILE' ? 'Mobile' : item.value.name == 'FAX' ? 'Fax' : ''"
                                 ></span>
                             </div>
                             <div class="left-panel-contact__details-input-wrap qt-pos-rel qt-w100">
                                 <input
                                     type="text"
-                                    class="qt-editable-input qt-fw-500"
+                                    class="qt-editable-input qt-fw-400"
                                     (blur)="updateUser()"
                                     placeholder="Enter Primary Phone"
                                     formControlName="value"
@@ -155,12 +155,12 @@
                 <div class="qt-df qt-ai-c qt-jc-sb relative">
                     <div class="left-panel-contact__details-title qt-df qt-ai-c qt-mr-8">
                         <div class="icon__email qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"></div>
-                        <span class="qt-color-gray-500">Email</span>
+                        <span class="qt-color-gray-500 qt-fw-500">Email</span>
                     </div>
                     <div class="left-panel-contact__details-input-wrap qt-pos-rel qt-w100">
                         <input
                             type="text"
-                            class="qt-editable-input qt-fw-500"
+                            class="qt-editable-input qt-fw-400"
                             (blur)="onCheckEmail()"
                             placeholder="Enter Email"
                             formControlName="primaryEmail"
@@ -169,7 +169,7 @@
                         >
                         <input
                             type="text"
-                            class="qt-editable-input qt-fw-500 disabled"
+                            class="qt-editable-input qt-fw-400 disabled"
                             placeholder="Enter Email"
                             disabled
                             formControlName="primaryEmail"
@@ -201,30 +201,30 @@
             <div class="qt-df qt-ai-c qt-jc-sb qt-mb-16">
                 <div class="qt-df qt-ai-c">
                     <div class="icon__companies qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"></div>
-                    <span class="company-details-field">Company</span>
+                    <span class="company-details-field qt-fw-500">Company</span>
                 </div>
                 <div
-                    class="ellipsis qt-fs-14 qt-fw-500 qt-color-gray-900 company-details-value"
+                    class="ellipsis qt-fs-14 qt-fw-400 qt-color-gray-900 company-details-value"
                     [textContent]="getCompany().name"
                 ></div>
             </div>
             <div class="qt-df qt-ai-c qt-jc-sb qt-mb-16">
                 <div class="qt-df qt-ai-c">
                     <div class="icon__phone qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"></div>
-                    <span class="company-details-field">Telephone</span>
+                    <span class="company-details-field qt-fw-500">Telephone</span>
                 </div>
                 <div
-                    class="ellipsis qt-fs-14 qt-fw-500 qt-color-gray-900 company-details-value"
+                    class="ellipsis qt-fs-14 qt-fw-400 qt-color-gray-900 company-details-value"
                     [textContent]="(getContactCompany() && getContactCompany().primaryPhone) ? getContactCompany().primaryPhone[0].number : ''"
                 ></div>
             </div>
             <div class="qt-df qt-ai-c qt-jc-sb  ">
                 <div class="qt-df qt-ai-c">
                     <div class="icon__email qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"></div>
-                    <span class="company-details-field">Email</span>
+                    <span class="company-details-field qt-fw-500">Email</span>
                 </div>
                 <div
-                    class="ellipsis qt-fs-14 qt-fw-500 qt-color-gray-900 company-details-value"
+                    class="ellipsis qt-fs-14 qt-fw-400 qt-color-gray-900 company-details-value"
                     [textContent]="(getContactCompany() && getContactCompany().primaryContact) ?  getContactCompany().primaryContact.primaryEmail : ''"
                 ></div>
             </div>
@@ -238,13 +238,13 @@
                     <div class="qt-df qt-ai-c">
                         <div class="icon__map-pin qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"></div>
                         <span
-                            class="company-details-field"
+                            class="company-details-field qt-fw-500"
                             [textContent]="item.isPrimary ? 'Billing address' : 'Shipping address'"
                         >
                         </span>
                     </div>
                     <div
-                        class="qt-fs-14 qt-fw-500 qt-color-gray-900 company-details-value address-value qt-ml-16"
+                        class="qt-fs-14 qt-fw-400 qt-color-gray-900 company-details-value address-value qt-ml-16"
                         [textContent]="parseAddress(item)"
                     >
                     </div>
