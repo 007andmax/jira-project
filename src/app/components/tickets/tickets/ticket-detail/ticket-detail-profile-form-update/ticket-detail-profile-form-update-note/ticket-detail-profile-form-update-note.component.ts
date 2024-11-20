@@ -29,7 +29,7 @@ export class TicketDetailProfileFormUpdateNoteComponent implements OnInit {
     if (index === this.files.length) {
       return;
     } else {
-      if (this.files[index].size > 4000000) {
+      if (this.files[index].size > 15000000) {
         this.files[index].showError = true;
         this.uploadFilesSimulator(index + 1);
         return;
