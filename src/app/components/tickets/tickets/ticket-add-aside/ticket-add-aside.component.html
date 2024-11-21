@@ -85,7 +85,7 @@
             <div class="qt-df qt-ai-c company-actions">
                 <span
                     class="qt-fw-600 qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info pointer"
-                    (click)="toggleAddCompany = !toggleAddCompany;"
+                    (click)="changeToggleAddCompany(!toggleAddCompany)"
                     [textContent]="toggleAddCompany ? 'Users dropdown' : 'Advanced'"
                 >
                 </span>
@@ -143,6 +143,7 @@
                     [search]="true"
                     [change]="true"
                     [sort]="false"
+                    [selectedCustomerCompany]="selectedCustomerCompany"
                     [validate]="ticketValidate.getClientUser()"
                     [errorMessage]="'Client user is required'"
                     [isDisabled]="!selectedCompany"

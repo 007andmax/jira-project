@@ -28,6 +28,7 @@ import { CompanyUsersDropDownComponent } from './company-users-drop-down/company
 import { AssignedTicketUserComponent } from './assigned-ticket-user/assigned-ticket-user.component';
 import { Company } from 'src/app/interfaces/company/company';
 import { UsersDropDownComponent } from 'src/app/components/shared/users-drop-down/users-drop-down.component';
+import { UserCustomerCompaniesInfo } from 'src/app/components/users/class/user-customer-companies-info';
 
 
 
@@ -56,6 +57,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
   namesTechUsersList = [];
   shareUsersList = [];
   selectedCompany: Company;
+  selectedCustomerCompany: UserCustomerCompaniesInfo;
   statusColors: Array<StatusColor> = [];
   listTechUsersForAssign: Array<TechUserItem> = [];
   ticketPriorities: Array<TicketsPriority> = [];
@@ -156,13 +158,17 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
 
       });
     }
+    this.toggleAddCompany = false;
+    this.selectedCustomerCompany = null;
+    this.selectedCompany = null;
     this.ticketAdd = new TicketAdd();
     this.ticketValidate = new TicketValidate();
     this.shareUsersList = [];
     this.elRef.nativeElement.querySelector('#add-ticket-describe-issue').innerHTML = '';
     this.opened = false;
     if (this.deviceDP) this.deviceDP.clearClient();
-    this.userDP.clearClient();
+    if (this.userDP) this.userDP.clearClient();
+    if (this.clientUserDP) this.clientUserDP.clearWithOutChanges();
     if (this.techUserDP) this.techUserDP.clearClient();
     this.uplaodFile.onClearState();
     this.cd.detectChanges();
@@ -198,8 +204,11 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
   onSelectCompany(item) {
     if (item) {
       this.selectedCompany = item;
+      this.selectedCustomerCompany = new UserCustomerCompaniesInfo();
+      this.selectedCustomerCompany.clientCompanyName = item.name;
+      this.selectedCustomerCompany.companyId = item.id;
       this.ticketAdd.createdUser.setCompanyId(item.id);
-      this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === item.id)));
+      this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === item.id)));
       this.onGetDevices();
       let list = this.users.filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === item.id).defaultSubscriptions.ticketManagerSubscription.enabled);
       list = list.map(item => {
@@ -212,6 +221,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       this.ticketValidate.resetCompany();
     } else {
       this.selectedCompany = null;
+      this.selectedCustomerCompany = null;
       this.ticketAdd.createdUser = new TicketCreatedUser();
       this.ticketAdd.clearDeviceId();
       this.users = [];
@@ -333,6 +343,18 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       }
     });
     this.clientUserDP.reset(this.users);
+  }
+  changeToggleAddCompany(data) {
+    this.selectedCompany = null;
+    this.toggleAddCompany = data;
+    this.selectedCompany = null;
+    this.ticketAdd.createdUser = new TicketCreatedUser();
+    this.ticketAdd.clearDeviceId();
+    this.users = [];
+    this.devices = [];
+    this.shareUsersList = [];
+    this.techUsersDp.selectItemsWithOutChanges(this.shareUsersList);
+    this.clientUserDP.clearWithOutChanges();
   }
   onChangeSubject() {
     this.ticketValidate.resetSubject();
