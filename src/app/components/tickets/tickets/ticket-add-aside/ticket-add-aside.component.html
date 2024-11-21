@@ -81,8 +81,19 @@
                 ></app-priority-level-drop-down>
             </div>
         </div>
-        <div class="qt-inputs-row">
-            <div class="qt-input-block qt-f100">
+        <div class="qt-inputs-row qt-pos-rel">
+            <div class="qt-df qt-ai-c company-actions">
+                <span
+                    class="qt-fw-600 qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info pointer"
+                    (click)="toggleAddCompany = !toggleAddCompany;"
+                    [textContent]="toggleAddCompany ? 'Users dropdown' : 'Advanced'"
+                >
+                </span>
+            </div>
+            <div
+                class="qt-input-block qt-f100"
+                *ngIf="!toggleAddCompany"
+            >
                 <company-users-drop-down
                     #userDP
                     [title]="'User'"
@@ -97,6 +108,47 @@
                     [sort]="false"
                     (onSelectedItem)="onSelectUser($event.user,$event.customerCompany)"
                 ></company-users-drop-down>
+            </div>
+            <div
+                class="qt-input-block qt-f100"
+                *ngIf="toggleAddCompany"
+            >
+                <company-drop-down
+                    [placeholder]="'Company'"
+                    [validate]="ticketValidate.getCompany()"
+                    [errorMessage]="'The company name is required'"
+                    [title]="'Company'"
+                    [field]="'name'"
+                    [search]="true"
+                    [change]="true"
+                    [editItem]="selectedCompany"
+                    [isBlockClear]="true"
+                    (onSelectedItem)="onSelectCompany($event)"
+                >
+                </company-drop-down>
+            </div>
+        </div>
+        <div
+            class="qt-inputs-row"
+            [hidden]="!toggleAddCompany"
+        >
+            <div class="qt-input-block qt-f100">
+                <span class="qt-input-block__label">Users</span>
+                <app-users-drop-down
+                    #clientUserDP
+                    [class]="['qt-select-input-40']"
+                    [placeholder]="'Users'"
+                    [field]="'name'"
+                    [dropdownHeight]="'345px'"
+                    [search]="true"
+                    [change]="true"
+                    [sort]="false"
+                    [validate]="ticketValidate.getClientUser()"
+                    [errorMessage]="'Client user is required'"
+                    [isDisabled]="!selectedCompany"
+                    (onSelectedItem)="onSelectClientUser($event.user)"
+                >
+                </app-users-drop-down>
             </div>
         </div>
         <div
@@ -130,7 +182,7 @@
                     [search]="true"
                     [change]="true"
                     [preloader]="ticketAdd.getPreloaderDevices()"
-                    [isDisabled]="!selectedCompanyId || ticketAdd.getPreloaderDevices()"
+                    [isDisabled]="!selectedCompany || ticketAdd.getPreloaderDevices()"
                     [placeholder]="'Select'"
                     (onSelectedItem)="onSelectDevice($event)"
                 ></app-drop-down>

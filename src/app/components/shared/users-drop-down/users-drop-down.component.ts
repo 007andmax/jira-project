@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CompanyUsersDropDownComponent } from '../../tickets/tickets/ticket-add-aside/company-users-drop-down/company-users-drop-down.component';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
+import { CompanyUser } from '../../tickets/tickets/ticket-add-aside/company-users-drop-down/class/company-user';
 
 @Component({
   selector: 'app-users-drop-down',
@@ -16,6 +17,14 @@ export class UsersDropDownComponent extends CompanyUsersDropDownComponent {
  */
   public isSelectedUser(item) {
     return this.selectedItem && this.selectedCustomerCompany && this.selectedItem.id == item.id;
+  }
+
+  public reset(data) {
+    this.reqList = JSON.parse(JSON.stringify(data)).map(item => new CompanyUser(item));
+    this.reqList.sort((a, b) => (this.getUserName(a).toLowerCase() > this.getUserName(b).toLowerCase()) ?
+      1 : ((this.getUserName(b).toLowerCase() > this.getUserName(a).toLowerCase()) ? -1 : 0));
+    this.list = JSON.parse(JSON.stringify(this.reqList)).map(item => new CompanyUser(item));
+    this.ref.markForCheck();
   }
   /**
 * @description Set new value selected element and init Output Event

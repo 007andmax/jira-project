@@ -26,6 +26,8 @@ import { DevicesService } from 'src/app/services/devices/devices.service';
 import { Device } from 'src/app/components/company-devices/class/device';
 import { CompanyUsersDropDownComponent } from './company-users-drop-down/company-users-drop-down.component';
 import { AssignedTicketUserComponent } from './assigned-ticket-user/assigned-ticket-user.component';
+import { Company } from 'src/app/interfaces/company/company';
+import { UsersDropDownComponent } from 'src/app/components/shared/users-drop-down/users-drop-down.component';
 
 
 
@@ -41,9 +43,11 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
   @ViewChild('uplaodFile') uplaodFile: UploadAreaComponent;
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   @ViewChild('techUsersDp') techUsersDp: AssignedTicketUserComponent;
+  @ViewChild('clientUserDP') clientUserDP: UsersDropDownComponent;
   actualNumber: string = '';
   opened = false;
   isAdd = false;
+  toggleAddCompany: boolean = false;
   mode = 'edit';
   ticketAdd: TicketAdd = new TicketAdd();
   devices = [];
@@ -51,7 +55,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
   techUsersList = [];
   namesTechUsersList = [];
   shareUsersList = [];
-  selectedCompanyId: string;
+  selectedCompany: Company;
   statusColors: Array<StatusColor> = [];
   listTechUsersForAssign: Array<TechUserItem> = [];
   ticketPriorities: Array<TicketsPriority> = [];
@@ -74,7 +78,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    if (this.selectedCompanyId) this.onGetDevices();
+    if (this.selectedCompany) this.onGetDevices();
     this.ticketsService.getActualNumber().subscribe((data: any) => {
       this.actualNumber = data.number;
       this.ticketsStateService.onInitActualNumber(data.number);
@@ -97,7 +101,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onChangeAssignedUser);
     let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
-      if (this.selectedCompanyId == newChange.data.clientCompanyId) this.devicesStateService.changeDevice(this.devices, newChange);
+      if (this.selectedCompany && this.selectedCompany.id == newChange.data.clientCompanyId) this.devicesStateService.changeDevice(this.devices, newChange);
     })
     this.sub.add(onDeviceUninstalled);
   }
@@ -193,7 +197,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
   }
   onSelectCompany(item) {
     if (item) {
-      this.selectedCompanyId = item.id;
+      this.selectedCompany = item;
       this.ticketAdd.createdUser.setCompanyId(item.id);
       this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === item.id)));
       this.onGetDevices();
@@ -207,7 +211,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       this.techUsersDp.selectItemsWithOutChanges(this.shareUsersList);
       this.ticketValidate.resetCompany();
     } else {
-      this.selectedCompanyId = null;
+      this.selectedCompany = null;
       this.ticketAdd.createdUser = new TicketCreatedUser();
       this.ticketAdd.clearDeviceId();
       this.users = [];
@@ -245,6 +249,26 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     } else {
       this.ticketAdd.createdUser.clearUserData();
       this.onSelectCompany(null);
+    }
+    this.listTechUsersForAssign = this.getListTechUsersForAssign();
+    this.techUsersDp.reset(this.listTechUsersForAssign);
+  }
+  onSelectClientUser(selectedUser) {
+    let shareUser = this.shareUsersList.find(item => item.id === this.ticketAdd.createdUser.id);
+    if (selectedUser) {
+      if (!(shareUser && shareUser.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.selectedCompany.id) && shareUser.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.selectedCompany.id).defaultSubscriptions.ticketManagerSubscription.enabled) && this.ticketAdd.createdUser.id) this.removeShareUser(this.ticketAdd.createdUser.id);
+      let indexhUser = this.users.findIndex(user => user.id === selectedUser.id);
+      if (indexhUser > -1) this.ticketAdd.createdUser.setUserData(this.users[indexhUser]);
+      let findSharedUser = this.shareUsersList.find(item => item.id === this.users[indexhUser].id);
+      if (!findSharedUser && this.users[indexhUser]) {
+        let user = new TechUserItem(JSON.parse(JSON.stringify(this.users[indexhUser])));
+        user.selected = true;
+        this.shareUsersList.push(user);
+      }
+      this.ticketValidate.resetClientUser();
+      this.techUsersDp.selectItemsWithOutChanges(this.shareUsersList);
+    } else {
+      this.ticketAdd.createdUser.clearUserData();
     }
     this.listTechUsersForAssign = this.getListTechUsersForAssign();
     this.techUsersDp.reset(this.listTechUsersForAssign);
@@ -294,8 +318,8 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
 
   onGetDevices() {
     this.ticketAdd.setPreloaderDevices(true);
-    this.devicesService.getCompanyDevices(this.selectedCompanyId).subscribe((data: any) => {
-      this.devices = (data[this.selectedCompanyId]) ? JSON.parse(JSON.stringify(data[this.selectedCompanyId])).filter(item => !item.isCustom).map(item => new Device(item)) : [];
+    this.devicesService.getCompanyDevices(this.selectedCompany.id).subscribe((data: any) => {
+      this.devices = (data[this.selectedCompany.id]) ? JSON.parse(JSON.stringify(data[this.selectedCompany.id])).filter(item => !item.isCustom).map(item => new Device(item)) : [];
       this.devices.sort((a, b) => (a.hostName.toLowerCase() > b.hostName.toLowerCase()) ?
         1 : ((b.hostName.toLowerCase() > a.hostName.toLowerCase()) ? -1 : 0));
       this.ticketAdd.setPreloaderDevices(false);
@@ -308,6 +332,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
         return item;
       }
     });
+    this.clientUserDP.reset(this.users);
   }
   onChangeSubject() {
     this.ticketValidate.resetSubject();
