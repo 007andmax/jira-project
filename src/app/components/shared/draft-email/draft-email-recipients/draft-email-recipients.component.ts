@@ -4,11 +4,14 @@ import { FormControl } from '@angular/forms';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 import { Company } from 'src/app/interfaces/company/company';
+import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
   selector: 'app-draft-email-recipients',
   templateUrl: './draft-email-recipients.component.html',
-  styleUrls: ['./draft-email-recipients.component.scss']
+  styleUrls: ['./draft-email-recipients.component.scss'],
+  providers: [TicketsListService]
 })
 export class DraftEmailRecipientsComponent implements OnInit {
   reEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
@@ -43,7 +46,9 @@ export class DraftEmailRecipientsComponent implements OnInit {
 
     private companiesState: CompaniesStateService,
     private draftEmailStateService: DraftEmailStateService,
-    public cd: ChangeDetectorRef
+    public cd: ChangeDetectorRef,
+    public ticketsListService: TicketsListService,
+    private usersStateService: UsersStateService,
   ) { }
 
   /**
@@ -151,6 +156,10 @@ export class DraftEmailRecipientsComponent implements OnInit {
   }
   getFirstLastName(user) {
     return `${user.firstName} ${user.lastName}`;
+  }
+  getJobTitleDto(userCompany, company) {
+    let user = this.usersStateService.getAllUsers().find(item => item.id == userCompany.id);
+    return user ? user.customerCompaniesInfo.find(item => item.companyId == company.id).jobTitleDto : null;
   }
   public trackByIndex(index, item) {
     return index;

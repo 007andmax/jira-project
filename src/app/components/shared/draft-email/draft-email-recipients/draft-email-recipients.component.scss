@@ -12,12 +12,7 @@
 /deep/.dropdown-recipients-body .mat-chip {
     cursor: default;
 }
-.user-name {
-    min-width: 50px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
+ 
 
 .dropdown-item {
     display: flex !important;
@@ -41,3 +36,60 @@
 .invalid-feedback {
     bottom: 0px !important;
 }
+ .app-drop-down__dropdown {
+     width: 100%;
+     top: 20px !important;
+ }
+
+ .--selected {
+     background: $gray-50;
+     border-radius: 6px;
+ }
+
+ .icon__done {
+     top: calc(50% - 10px);
+     position: absolute;
+     right: 8px;
+ }
+ .assigne-user-avatar {
+     width: 36px;
+     height: 36px;
+     font-weight: 500;
+     font-size: 16px;
+     background-size: cover !important;
+     background-position: center !important;
+     border-radius: 50%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     color: $white;
+ }
+
+ .user-name {
+     font-size: 14px;
+     font-weight: 600;
+     color: $gray-900;
+     line-height: normal;
+     margin-bottom: 2px;
+
+ }
+
+ .user-description {
+     font-size: 13px;
+     font-weight: 400;
+     color: $gray-500;
+     line-height: normal;
+     margin-bottom: 2px;
+ }
+
+ .user-container {
+     align-items: self-start !important;
+     padding: 6px 8px !important;
+     position: relative !important;
+     height: auto !important;
+
+     &:hover {
+         background: $gray-50 !important;
+         border-radius: 6px;
+     }
+ }
