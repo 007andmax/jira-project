@@ -5,11 +5,13 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 import { User } from '../../../users/class/user';
 import { USER } from 'src/app/const/users';
+import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 
 @Component({
   selector: 'draft-email-user-recipients',
   templateUrl: './draft-email-user-recipients.component.html',
-  styleUrls: ['./draft-email-user-recipients.component.scss']
+  styleUrls: ['./draft-email-user-recipients.component.scss'],
+  providers: [TicketsListService]
 })
 export class DraftEmailUserRecipientsComponent implements OnInit {
   reEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
@@ -46,7 +48,8 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
 
     private draftEmailStateService: DraftEmailStateService,
     private usersStateService: UsersStateService,
-    public cd: ChangeDetectorRef
+    public cd: ChangeDetectorRef,
+    public ticketsListService: TicketsListService,
   ) { }
 
   /**
@@ -99,7 +102,9 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
     })
     this.onCompanyEmails.emit(this.userEmails);
   }
-
+  getJobTitleDto(user) {
+    return user.customerCompaniesInfo.find(item => item.companyId == this.selectedClient.id).jobTitleDto;
+  }
   /**
    * Remove user from selected
    * @param index - user index

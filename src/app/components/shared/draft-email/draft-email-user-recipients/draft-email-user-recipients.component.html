@@ -1,5 +1,5 @@
 <div
-    class="qt-temporary-col-fix light-dropdown"
+    class="qt-temporary-col-fix"
     ngbDropdown
     #products="ngbDropdown"
     [ngClass]="{'hide-all-user':!toggleAllUsers}"
@@ -45,7 +45,7 @@
         At least one email address must be added
     </app-mat-error>
     <div
-        class="dropdown-menu unique-down"
+        class="app-drop-down__dropdown"
         ngbDropdownMenu
         aria-labelledby="dropdownServices"
     >
@@ -55,15 +55,34 @@
             [ngForOf]="usersClients"
             [ngForTrackBy]="trackByIndex"
         >
-            <button
+            <div
+                class="qt-df user-container pointer"
                 ngbDropdownItem
-                class="dropdown-item"
                 (click)="selected(user)"
                 [ngClass]="{'--selected':isSelected(user.primaryEmail)}"
             >
-                <span class="user-name">{{getFirstLastName(user)}}</span>
-                <span class="user-email qt-ml-8">{{user.primaryEmail}}</span>
-            </button>
+                <div class="qt-df">
+                    <div
+                        class="assigne-user-avatar qt-mr-12"
+                        [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+                        [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
+                    ></div>
+                    <div>
+                        <div class="user-name qt-mb-2">{{getFirstLastName(user)}}</div>
+                        <div class="user-email qt-mb-2">{{user.primaryEmail}}</div>
+                        <div
+                            class="qt-df qt-ai-c"
+                            *ngIf="selectedClient && getJobTitleDto(user)"
+                        >
+                            <div class="qt-icon icon__permission-role qt-sz-16 qt-mr-4"></div>
+                            <span
+                                class="user-description"
+                                [textContent]="getJobTitleDto(user).name"
+                            ></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </ng-template>
         <ng-template
             ngFor
@@ -71,15 +90,24 @@
             [ngForOf]="usersTechnical"
             [ngForTrackBy]="trackByIndex"
         >
-            <button
+            <div
+                class="qt-df user-container pointer"
                 ngbDropdownItem
-                class="dropdown-item"
                 (click)="selected(user)"
-                [ngClass]="{'--selected' : isSelected(user.primaryEmail)}"
+                [ngClass]="{'--selected':isSelected(user.primaryEmail)}"
             >
-                <span class="user-name">{{getFirstLastName(user)}}</span>
-                <span class="user-email qt-ml-8">{{user.primaryEmail}}</span>
-            </button>
+                <div class="qt-df">
+                    <div
+                        class="assigne-user-avatar qt-mr-12"
+                        [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+                        [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
+                    ></div>
+                    <div>
+                        <div class="user-name qt-mb-2">{{getFirstLastName(user)}}</div>
+                        <div class="user-email qt-mb-2">{{user.primaryEmail}}</div>
+                    </div>
+                </div>
+            </div>
         </ng-template>
     </div>
     <p
