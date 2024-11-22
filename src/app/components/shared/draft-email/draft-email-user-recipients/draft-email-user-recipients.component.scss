@@ -65,13 +65,20 @@
 
      &:hover {
          background: $gray-50 !important;
+        border-radius: 6px;
      }
  }
  .app-drop-down__dropdown {
     width: 100%;
     top: 20px !important;
  }
-.--selected {
-    background: $gray-50;
-    border-radius: 8px;
-}
+ .--selected {
+     background: $gray-50;
+     border-radius: 6px;
+ }
+
+ .icon__done {
+     top: calc(50% - 10px);
+     position: absolute;
+     right: 8px;
+ }

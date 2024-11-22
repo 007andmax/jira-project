@@ -74,7 +74,7 @@
                                 ></div>
                                 <div>
                                     <div class="user-name qt-mb-2">{{getFirstLastName(user)}}</div>
-                                    <div class="user-email qt-mb-2">{{user.primaryEmail}}</div>
+                                    <div class="user-description qt-mb-2">{{user.primaryEmail}}</div>
                                     <div
                                         class="qt-df qt-ai-c"
                                         *ngIf="companyId && getJobTitleDto(user)"
@@ -87,6 +87,10 @@
                                     </div>
                                 </div>
                             </div>
+                            <i
+                                *ngIf="isSelected(user)"
+                                class="qt-icon icon__done qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
+                            ></i>
                         </div>
                         <hr>
                         <div
@@ -103,9 +107,13 @@
                                 ></div>
                                 <div>
                                     <div class="user-name qt-mb-2">{{getFirstLastName(user)}}</div>
-                                    <div class="user-email qt-mb-2">{{user.primaryEmail}}</div>
+                                    <div class="user-description qt-mb-2">{{user.primaryEmail}}</div>
                                 </div>
                             </div>
+                            <i
+                                *ngIf="isSelected(user)"
+                                class="qt-icon icon__done qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
+                            ></i>
                         </div>
                     </div>
                 </app-mat-form-field>

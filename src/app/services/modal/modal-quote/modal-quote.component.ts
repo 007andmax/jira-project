@@ -272,7 +272,9 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
       input.value = '';
     }
   }
-
+  public isSelected(user) {
+    return this.selectedUsers.some(item => item == user.primaryEmail);
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
