@@ -264,7 +264,7 @@
                     class="terms-n-conditions__textarea qt-input-block__textarea"
                     placeholder="Write Job Description"
                     appTextArea
-                    [maxHeight]="200"
+                    [maxHeight]="100"
                     maxlength="500"
                     [ngClass]="{'disabled': !(!user.isArchive() && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user)))}"
                     [disabled]="!(!user.isArchive() && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user)))"

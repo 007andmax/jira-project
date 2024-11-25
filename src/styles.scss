@@ -3572,3 +3572,15 @@ app-multi-company-drop-down {
       width: 100%;
   }
 }
+textarea {
+  &:hover {
+    border: 1px solid $gray-300 !important;
+  }
+  &:focus {
+    border: 1px solid $blue-light-600 !important;
+  }
+  &:disabled {
+    border: 1px solid $gray-200 !important;
+    background-color: $gray-50 !important;
+  }
+}

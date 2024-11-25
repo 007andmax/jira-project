@@ -169,7 +169,7 @@
                 (click)="openMap(content,companyDetailing.addresses[0])"
                 class="btn btn-outline"
             >
-               <span class="qt-icon icon__map-pin qt-icon__blue-light-600 qt-sz-16 qt-dib qt-mr-4"></span>
+                <span class="qt-icon icon__map-pin qt-icon__blue-light-600 qt-sz-16 qt-dib qt-mr-4"></span>
                 Get Direction
             </a>
         </div>
@@ -201,7 +201,7 @@
                 (click)="openMap(content,companyDetailing.addresses.length > 1 ? companyDetailing.addresses[1] : null)"
                 class="btn btn-outline"
             >
-               <span class="qt-icon icon__map-pin qt-icon__blue-light-600 qt-sz-16 qt-dib qt-mr-4"></span>
+                <span class="qt-icon icon__map-pin qt-icon__blue-light-600 qt-sz-16 qt-dib qt-mr-4"></span>
                 Get Direction
             </a>
         </div>
@@ -284,13 +284,12 @@
             <div class="small-title">Notes</div>
             <textarea
                 class="qt-editable-input ng-untouched ng-pristine ng-valid"
-                appTextArea
                 placeholder="Write note here..."
                 [(ngModel)]="companyDetailing.description"
                 (blur)="onChangeNote($event)"
                 maxlength="1000"
-                cols="2"
-                rows="1"
+                appTextArea
+                [maxHeight]="100"
             ></textarea>
         </div>
     </div>
@@ -348,7 +347,7 @@
             (click)="downloadAgent()"
             class="btn btn-outline download-agent"
         >
-           <span class="qt-icon icon__download qt-icon__blue-light-600 qt-sz-16 qt-dib"></span>
+            <span class="qt-icon icon__download qt-icon__blue-light-600 qt-sz-16 qt-dib"></span>
             Download Agent
         </a>
         <a
