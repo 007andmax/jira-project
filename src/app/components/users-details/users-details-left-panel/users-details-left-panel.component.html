@@ -266,6 +266,7 @@
                     appTextArea
                     [maxHeight]="100"
                     maxlength="500"
+                    [height]="'80px'"
                     [ngClass]="{'disabled': !(!user.isArchive() && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user)))}"
                     [disabled]="!(!user.isArchive() && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user)))"
                 ></textarea>

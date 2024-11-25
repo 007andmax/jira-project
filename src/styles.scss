@@ -3575,12 +3575,15 @@ app-multi-company-drop-down {
 textarea {
   &:hover {
     border: 1px solid $gray-300 !important;
+    border-radius: 8px;
   }
   &:focus {
     border: 1px solid $blue-light-600 !important;
+    border-radius: 8px;
   }
   &:disabled {
     border: 1px solid $gray-200 !important;
     background-color: $gray-50 !important;
+    border-radius: 8px;
   }
 }

@@ -192,7 +192,5 @@ address {
     color: $gray-900 !important;
 }
 .qt-editable-input {
-    &:focus {
-        border-color: $gray-200;
-    }
+    height: 80px;
 }

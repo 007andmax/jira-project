@@ -6,6 +6,7 @@ import { InventoryItem } from '../class/inventory-item';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { InventoryChangeProductTypeComponent } from '../inventory-change-product-type/inventory-change-product-type.component';
 import { ProductService } from 'src/app/services/product/product.service';
+import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toastr-progress-state.service';
 
 @Component({
   selector: 'inventory-header',
@@ -26,6 +27,7 @@ export class InventoryHeaderComponent implements OnInit {
     public cd: ChangeDetectorRef,
     private modalService: NgbModal,
     private productService: ProductService,
+    private toastrProgressStateService: ToastrProgressStateService,
     public appService: AppService) { }
 
   ngOnInit() {
@@ -44,9 +46,11 @@ export class InventoryHeaderComponent implements OnInit {
     return '';
   }
   setActive() {
+    let id = this.reqInventoryList.filter(item => item.selected)[0].versionedId.id;
     let active = this.reqInventoryList.filter(item => item.selected).some(item => item.active) ? false : true;
+    this.toastrProgressStateService.onInit(id);
     this.productService.setProductType(null, this.reqInventoryList.filter(item => item.selected).map(item => item.versionedId.id), active).subscribe(data => {
-
+      this.toastrProgressStateService.clear(id);
     })
   }
   resetSelected() {
