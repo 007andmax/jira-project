@@ -484,22 +484,6 @@ app-users-table {
     }
   }
 
-  &__editor-tab {
-    display: flex;
-    color: $gray-900;
-    @include сaption-l__sb;
-  }
-
-  &__editor-tab-item {
-    padding: 0 8px 8px 8px;
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    &.active {
-      color: $blue-light-600;
-      border-color: $blue-light-600;
-    }
-  }
-
   select#fontSelector-,
   select#fontSizeSelector- {
     background-color: $white !important;
