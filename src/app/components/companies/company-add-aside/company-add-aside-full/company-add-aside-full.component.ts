@@ -111,7 +111,6 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
     this.company.addresses[1].sameAsBilling = true;
     this.company.addresses[1].isPrimary = false;
     this.onCroppImage();
-    console.log("this.companyTimeZoneState.getTimeZone().length", this.companyTimeZoneState.getTimeZone());
     if (this.companyTimeZoneState.getTimeZone().length > 0) this.setTimeZone(this.companyTimeZoneState.getTimeZone());
     if (this.companyTimeZoneState.getTimeZone().length == 0) this.companyTimeZoneState.onGetTimeZone();
     let onTimeZone = this.companyTimeZoneState.onTimeZone.subscribe(data => {
@@ -121,10 +120,7 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
   }
   setTimeZone(data) {
     let list = data.map(item => new TimeZone(item));
-    console.log("list", list);
-    console.log("this.company.addresses[0].timeZone.name", this.companiesStateService.getCurrentCompany().addresses[0].timeZone.name);
     this.selectedTimeZone = list.find(item => item.second === this.companiesStateService.getCurrentCompany().addresses[0].timeZone.name);
-    console.log("this.selectedTimeZone", this.selectedTimeZone);
   }
   onGetUsers(data) {
     this.users = data.filter(item => {
