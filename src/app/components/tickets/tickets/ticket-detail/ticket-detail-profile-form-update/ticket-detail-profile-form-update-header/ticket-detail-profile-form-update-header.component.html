@@ -67,6 +67,7 @@
     </div>
     <add-assigned-user-note
         #addAssignedUser
+        [container]="'body'"
         *ngIf="isShowAssignedUser()"
         [compayId]="ticketProfile.company.id"
         [type]="ticketProfileFormUpdate.noteType"
