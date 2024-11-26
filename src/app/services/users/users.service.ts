@@ -57,7 +57,7 @@ export class UsersService {
   }
 
   public changeUserRole(userId, jobTypeId) {
-    return this.http.put(this.apiUrl + '/users/jobType', {
+    return this.http.put(this.apiUrl + 'users/jobType', {
       "userId": userId,
       "jobTypeId": jobTypeId
     });
@@ -127,7 +127,7 @@ export class UsersService {
       }));
   }
   public resetPrimaryContact(userId, companyId) {
-    return this.http.get(this.apiUrl + `/company/resetPrimaryContact?userId=${userId}&companyId=${companyId}`);
+    return this.http.get(this.apiUrl + `company/resetPrimaryContact?userId=${userId}&companyId=${companyId}`);
   }
 
   public getUserRoles() {

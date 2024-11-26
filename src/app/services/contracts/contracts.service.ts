@@ -51,7 +51,7 @@ export class ContractsService {
       }));
   }
   public getServiceAgreement(agreementId) {
-    return this.http.get(this.apiUrl + `/serviceAgreements/${agreementId}`).pipe(map((data: any) => new ServiceAgreement(data)));
+    return this.http.get(this.apiUrl + `serviceAgreements/${agreementId}`).pipe(map((data: any) => new ServiceAgreement(data)));
   }
   public createContract(createBillableItem, data) {
     return this.http.post(this.apiUrl + `serviceAgreements?createBillableItem=${createBillableItem}`, data).pipe(
@@ -73,7 +73,7 @@ export class ContractsService {
       }));
   }
   public validateCrossingDatesHourly(startDate, endDate, companyId, agreementId) {
-    return this.http.get(this.apiUrl + `/serviceAgreements/validateCrossingDates?companyId=${companyId}&startDate=${startDate}&endDate=${endDate + ((agreementId) ? '&agreementId=' + agreementId : '')}`);
+    return this.http.get(this.apiUrl + `serviceAgreements/validateCrossingDates?companyId=${companyId}&startDate=${startDate}&endDate=${endDate + ((agreementId) ? '&agreementId=' + agreementId : '')}`);
   }
   public getServiceAgreements() {
     return this.http.post(this.apiUrl + 'serviceAgreements/filtered', {

@@ -148,7 +148,7 @@ export class CompaniesService {
    * Get tech company
    */
   public getTechCompany() {
-    return this.http.get(this.apiUrl + '/company/current');
+    return this.http.get(this.apiUrl + 'company/current');
   }
 
   public uploadAvatar(file) {
@@ -156,7 +156,7 @@ export class CompaniesService {
   }
 
   public editCompanyAvatar(id, data) {
-    return this.http.post(this.apiUrl + `/company/${id}/logo`, data);
+    return this.http.post(this.apiUrl + `company/${id}/logo`, data);
   }
 
   public setСustomStorage(customKey, value) {
