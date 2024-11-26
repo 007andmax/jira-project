@@ -6,9 +6,11 @@
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">Write Email</div>
         <div
-            class="qt-aside-modern__header-close qt-icon icon__close"
+            class="qt-button --square-md --gray pointer"
             (click)="close()"
-        ></div>
+        >
+            <div class="qt-icon icon__close qt-sz-16 pointer"></div>
+        </div>
     </div>
     <div class="qt-aside-modern__content new-companies-content__modal--content">
         <div class="qt-inputs-row">
@@ -50,20 +52,20 @@
             </div>
         </div>
         <div class="draft-email-container">
-            <div class="qt-w100 draft-email-sidebar__editor-tab">
+            <div class="qt-w100 draft-email-sidebar__editor-tab qt-df qt-ai-c qt-mb-12">
                 <div
                     class="draft-email-sidebar__editor-tab-item"
                     [ngClass]="{active: tab == 'plain'}"
                     (click)="tab = 'plain'"
                 >
-                    Plain Text
+                    Text
                 </div>
                 <div
-                    class="draft-email-sidebar__editor-tab-item"
+                    class="draft-email-sidebar__editor-tab-item qt-ml-4"
                     [ngClass]="{active: tab == 'html'}"
                     (click)="tab = 'html'"
                 >
-                    Past Html
+                    Html
                 </div>
             </div>
             <div class="qt-w100 editor-container qt-mt-0">
