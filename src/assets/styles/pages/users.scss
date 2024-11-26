@@ -455,15 +455,13 @@ app-users-table {
     }
 
     .mat-standard-chip.mat-chip-with-trailing-icon {
-      padding-top: 6px;
-      padding-bottom: 6px;
-      padding-right: 7px;
-      padding-left: 8px;
+      padding: 6px !important;
       @include сaption-l;
       font-weight: 500 !important;
       margin-right: 0px;
-      color: $gray-600;
+      color: $gray-600 !important;
       background-color: $gray-100 !important;
+      font-size: 13px !important;
     }
 
     .mat-chip.mat-standard-chip .mat-chip-remove::before {
