@@ -3073,6 +3073,10 @@ app-ticket-edit-aside {
       top: 9px;
     }
   }
+  .mat-chip-with-trailing-icon {
+    background-color: $gray-100 !important;
+    font-weight: 500 !important;
+  }
 }
 
 // create product

@@ -1,10 +1,20 @@
 @import "./src/assets/styles/variable";
 
 .toggle-all-users {
-    text-align: right;
-    color: $blue-light-600;
+   padding: 5px 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: $gray-500;
+    border: 1px solid $gray-200;
+    border-radius: 6px;
+    width: fit-content;
     cursor: pointer;
-    font-size: 12px;
+    position: absolute;
+    top: -42px;
+    right: 0px;
+    span {
+        line-height: normal;
+    }
 }
 .dropdown-recipients-body {
     cursor: pointer;

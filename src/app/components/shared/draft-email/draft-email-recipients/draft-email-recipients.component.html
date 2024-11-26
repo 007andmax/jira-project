@@ -95,17 +95,20 @@
     </div>
     <p *ngIf="showError">at least 1 user</p>
     <p *ngIf="showErrorClient">please choose Client</p>
-    <p
-        class="toggle-all-users"
-        [textContent]="'Show all ' + selectedCompanies.length + ' emails'"
+    <div
+        class="toggle-all-users qt-df qt-ai-c"
         *ngIf="!toggleAllUsers"
         (click)="toggleAllUsers = true"
-    ></p>
-    <p
-        class="toggle-all-users"
+    >
+        <div class="qt-icon icon__show qt-za-16 qt-sz-16 qt-bg-contain qt-mr-4 pointer"></div>
+        <span [textContent]="'Show All Emails (' + selectedCompanies.length +')'"></span>
+    </div>
+    <div
+        class="toggle-all-users qt-df qt-ai-c"
         *ngIf="toggleAllUsers"
         (click)="toggleAllUsers = false"
     >
-        Hide
-    </p>
+        <div class="qt-icon icon__hide qt-za-16 qt-sz-16 qt-bg-contain qt-mr-4 pointer"></div>
+        <span [textContent]="'Hide Multiple Emails'"></span>
+    </div>
 </div>

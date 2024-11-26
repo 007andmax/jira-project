@@ -460,9 +460,10 @@ app-users-table {
       padding-right: 7px;
       padding-left: 8px;
       @include сaption-l;
+      font-weight: 500 !important;
       margin-right: 0px;
       color: $gray-600;
-      background-color: $gray-25;
+      background-color: $gray-100 !important;
     }
 
     .mat-chip.mat-standard-chip .mat-chip-remove::before {
