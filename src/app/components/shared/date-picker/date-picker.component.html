@@ -44,6 +44,8 @@
         <i
             class="icn-16 qt-icon icon__calendar pointer"
             ngbDropdownToggle
+            (mouseenter)="dateTooltip.show($event.target)"
+            (mouseleave)="dateTooltip.hide()"
         ></i>
         <input
             [disabled]="isDisabled"
@@ -54,8 +56,6 @@
             id="dropdownDate"
             [value]="geTextDate()"
             readonly
-            (mouseenter)="dateTooltip.show($event.target)"
-            (mouseleave)="dateTooltip.hide()"
         >
     </div>
     <input
