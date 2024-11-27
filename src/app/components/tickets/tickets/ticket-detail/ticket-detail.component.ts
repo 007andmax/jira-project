@@ -148,7 +148,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     let getOnUpdateTicket = this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
       let ticket = new Ticket(data);
       let isChangeCompany = data.companyId != this.ticketProfile.companyId;
-      let isChangeUser = data.createdUser.id != this.ticketProfile.createdUser.id;
+      let isChangeUser = data.createdUser && data.createdUser.id != this.ticketProfile.createdUser.id;
       if (this.ticketProfile.id === ticket.id) {
         this.ticketProfile.update(data);
         this.elRef.nativeElement.querySelector("#ticket-note").innerHTML = this.ticketProfile.note;

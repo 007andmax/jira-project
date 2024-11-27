@@ -57,10 +57,10 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
         let index = this.list.findIndex(item => item.id == data.data.id);
         this.list[index] = new TicketProfileTask(data.data);
       }
-      if (data.action == "TASK_SAVED") this.list.push(new TicketProfileTask(data.data));
+      if (data.action == "TASK_SAVED" && !this.list.some(item => item.id == data.data.id)) this.list.push(new TicketProfileTask(data.data));
       if (data.action == "TASK_REMOVED") {
         let index = this.list.findIndex(item => item.id == data.data);
-        this.list.splice(index, 1);
+        if (index > -1) this.list.splice(index, 1);
       }
       this.ticketStateService.setListTasks(this.list);
       this.cd.detectChanges();
@@ -105,7 +105,8 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
   }
   onDelete() {
     this.ticketsService.removeTicketTask(this.ticketStateService.getTaskForRemove().id).subscribe(data => {
-
+      let index = this.list.findIndex(item => item.id == this.ticketStateService.getTaskForRemove().id);
+      if (index > -1) this.list.splice(index, 1);
     })
   }
   onAddTicketTask() {
@@ -115,6 +116,7 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
       catchError(error => of(undefined))).subscribe(data => {
         this.showAdd = false;
         this.addTask = new TicketProfileTask();
+        if (!this.list.some(item => item.id == data.id)) this.list.push(new TicketProfileTask(data));
       }, err => {
         setTimeout(() => this.addTaskBtn.setInit(true), 2000);
       })
@@ -125,6 +127,8 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
       this.ticketsService.editTicketTask(item.getDataForUpdate()).pipe(map((res) => res),
         catchError(error => of(undefined))).subscribe(data => {
           item.onInitEdit(false);
+          let index = this.list.findIndex(item => item.id == data.id);
+          this.list[index] = new TicketProfileTask(data);
         })
     }
   }
