@@ -413,7 +413,8 @@ export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy
   onUpdateTicket(data) {
     this.updateBtn.setDisabled(true);
     this.isUpdate = true;
-    this.ticketsService.updateTicket(data).subscribe(data => {
+    this.ticketsService.updateTicket(data).subscribe(res => {
+      this.ticketStateService.setEditUpdate(res);
       this.isUpdate = false;
       this.updateBtn.setDisabled(false);
       this.close();

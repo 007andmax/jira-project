@@ -53,14 +53,17 @@ export class TicketDetailProfileUpdatesComponent implements OnInit, OnDestroy {
   }
   removeService() {
     this.ticketsService.removeService(this.ticketProfile.id, this.ticketStateService.getUpdateForRemove().id, this.ticketStateService.getServiceForRemove().id).subscribe(data => {
+      this.ticketStateService.removeUpdate(this.ticketStateService.getUpdateForRemove());
     })
   }
   removeProduct() {
     this.ticketsService.removeProduct(this.ticketProfile.id, this.ticketStateService.getUpdateForRemove().id, this.ticketStateService.getProductForRemove().id).subscribe(data => {
+      this.ticketStateService.removeUpdate(this.ticketStateService.getUpdateForRemove());
     })
   }
   removeUpdate() {
     this.ticketsService.deleteUpdate(this.ticketProfile.id, this.ticketStateService.getUpdateForRemove().id).subscribe(data => {
+      this.ticketStateService.removeUpdate(this.ticketStateService.getUpdateForRemove());
     })
   }
   fetchUpdates() {

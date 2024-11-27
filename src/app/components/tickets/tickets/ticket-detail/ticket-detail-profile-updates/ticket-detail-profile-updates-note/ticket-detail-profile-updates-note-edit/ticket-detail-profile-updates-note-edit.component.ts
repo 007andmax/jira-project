@@ -1,6 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TicketProfileUpdate } from '../../../../class/ticket-profile-update';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
+import { TicketStateService } from '../../../../ticket-edit-aside/services/ticket-state.service';
 
 @Component({
   selector: 'ticket-detail-profile-updates-note-edit',
@@ -13,6 +14,7 @@ export class TicketDetailProfileUpdatesNoteEditComponent implements OnInit {
   @Input() idTicket: string;
   editUpdate: TicketProfileUpdate;
   constructor(private elRef: ElementRef,
+    private ticketStateService: TicketStateService,
     private ticketsService: TicketsService,) { }
 
   ngOnInit() {
@@ -27,7 +29,8 @@ export class TicketDetailProfileUpdatesNoteEditComponent implements OnInit {
     this.editUpdate.note = value.replace(/\n/g, '<br/>');
   }
   saveService() {
-    this.ticketsService.updateNote(this.idTicket, this.update.id, this.elRef.nativeElement.querySelector("#note-description").innerHTML).subscribe(data => {
+    this.ticketsService.updateNote(this.idTicket, this.update.id, this.elRef.nativeElement.querySelector("#note-description").innerHTML).subscribe(res => {
+      this.ticketStateService.setEditUpdate(res);
       this.onEdit.emit(null);
     })
   }
