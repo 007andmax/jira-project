@@ -3636,8 +3636,15 @@ app-company-devices-edit-ip,app-company-devices-edit-mac {
 }
 .cotract-billable-tooltip {
   .tooltip-inner {
-    width: 400px;
-    min-width: 400px;
+    width: 420px;
+    min-width: 420px;
+  }
+}
+.dshboard-billable-tooltip {
+  .tooltip-inner {
+    width: 270px;
+    min-width: 270px;
+    text-align: justify;
   }
 }
 app-multi-company-drop-down {
