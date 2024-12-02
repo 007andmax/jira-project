@@ -7,7 +7,10 @@
                 </figure>
             </div>
             <div class="stastics-info qt-df">
-                <h4 class>{{countUsers}}</h4>
+                <h4
+                    class
+                    [textContent]="countUsers"
+                ></h4>
                 <span>Total Users</span>
             </div>
         </li>
@@ -18,7 +21,10 @@
                 </figure>
             </div>
             <div class="stastics-info qt-df">
-                <h4 class>{{countDevices}}</h4>
+                <h4
+                    class
+                    [textContent]="countDevices"
+                ></h4>
                 <span>Total Devices</span>
             </div>
         </li>
@@ -29,7 +35,10 @@
                 </figure>
             </div>
             <div class="stastics-info qt-df">
-                <h4 class>{{totalTickets}}</h4>
+                <h4
+                    class
+                    [textContent]="totalTickets"
+                ></h4>
                 <span>Total Tickets</span>
             </div>
         </li>
@@ -40,7 +49,10 @@
                 </figure>
             </div>
             <div class="stastics-info qt-df">
-                <h4 class>{{averageResponseTime}} min</h4>
+                <h4
+                    class
+                    [textContent]="averageResponseTime + ' min'"
+                ></h4>
                 <span>Avg. Response time</span>
             </div>
         </li>

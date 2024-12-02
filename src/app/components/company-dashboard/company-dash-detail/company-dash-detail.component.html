@@ -14,15 +14,18 @@
             class="cmp-profile-dp qt-df"
             *ngIf="!checkLogo()"
         >
-            <figure class="qt-df qt-ai-c qt-jc-c compamy-name-charter">{{getCharacter(companyDetailing.name)}}</figure>
+            <figure
+                class="qt-df qt-ai-c qt-jc-c compamy-name-charter"
+                [textContent]="getCharacter(companyDetailing.name)"
+            ></figure>
         </div>
         <div class="cmp-profile-user qt-df">
-            <h4>{{companyDetailing.name}}</h4>
+            <h4 [textContent]="companyDetailing.name"></h4>
             <a
-                href="https://{{companyDetailing.domain}}"
+                [attr.href]="'https://' + companyDetailing.domain"
                 target="_blank"
+                [textContent]="companyDetailing.domain"
             >
-                {{companyDetailing.domain}}
             </a>
         </div>
         <div class="cmp-dboard-rating qt-df">
@@ -44,14 +47,14 @@
                 <span
                     class="user-info-pt qt-df"
                     *ngIf="companyDetailing?.clientType"
+                    [textContent]="companyDetailing.clientType"
                 >
-                    {{companyDetailing.clientType}}
                 </span>
                 <span
                     class="user-info-pt qt-df"
                     *ngIf="companyDetailing.serviceType !== '' "
+                    [textContent]="serviceTypesMap[companyDetailing.serviceType]"
                 >
-                    {{serviceTypesMap[companyDetailing.serviceType]}}
                 </span>
             </div>
         </div>
@@ -146,10 +149,12 @@
     >
         <div class="other-info-col qt-df">
             <div class="small-title">Billing Address</div>
-            <span class="qt-fs-13 qt-fw-600">
-                {{companyDetailing.billingLocationName}}
+            <span
+                class="qt-fs-13 qt-fw-600"
+                [textContent]="companyDetailing.billingLocationName"
+            >
             </span>
-            <a href="tel:{{companyDetailing?.addresses[0]?.phoneNumbers[0]?.number}}">
+            <a [attr.href]="'tel:' + companyDetailing?.addresses[0]?.phoneNumbers[0]?.number">
                 <preview-phone-mask
                     *ngIf="companyDetailing?.addresses[0]?.phoneNumbers[0]?.number"
                     [number]="companyDetailing?.addresses[0]?.phoneNumbers[0]?.number"
@@ -162,8 +167,10 @@
                 ></span>
                 {{companyDetailing.addresses_name}}
             </address>
-            <span class="qt-fs-13 qt-mb-8 dfn qt-color-gray-900">
-                {{companyDetailing?.addresses[0]?.postalCode}}
+            <span
+                class="qt-fs-13 qt-mb-8 dfn qt-color-gray-900"
+                [textContent]="companyDetailing?.addresses[0]?.postalCode"
+            >
             </span>
             <a
                 (click)="openMap(content,companyDetailing.addresses[0])"
@@ -178,10 +185,12 @@
             *ngIf="companyDetailing.addresses.length == 2"
         >
             <div class="small-title">Shipping Address</div>
-            <span class="qt-fs-13 qt-fw-600">
-                {{companyDetailing.shippingLocationName}}
+            <span
+                class="qt-fs-13 qt-fw-600"
+                [textContent]="companyDetailing.shippingLocationName"
+            >
             </span>
-            <a href="tel:{{companyDetailing?.addresses[1]?.phoneNumbers[0]?.number}}">
+            <a [attr.href]="'tel:' + companyDetailing?.addresses[1]?.phoneNumbers[0]?.number">
                 <preview-phone-mask
                     *ngIf="companyDetailing?.addresses[1]?.phoneNumbers[0]?.number"
                     [number]="companyDetailing?.addresses[1]?.phoneNumbers[0]?.number"
@@ -194,8 +203,10 @@
                 ></span>
                 {{companyDetailing.shipping_addresses_name}}
             </address>
-            <span class="qt-fs-13 qt-mb-8 dfn qt-color-gray-900">
-                {{companyDetailing?.addresses[1]?.postalCode}}
+            <span
+                class="qt-fs-13 qt-mb-8 dfn qt-color-gray-900"
+                [textContent]="companyDetailing?.addresses[1]?.postalCode"
+            >
             </span>
             <a
                 (click)="openMap(content,companyDetailing.addresses.length > 1 ? companyDetailing.addresses[1] : null)"
@@ -216,8 +227,8 @@
                 class="selected-item qt-ml-8 qt-fs-11"
                 *ngIf="!showWorkingHours"
                 (click)="showWorkingHours = !showWorkingHours"
+                [textContent]="companyOpen"
             >
-                {{companyOpen}}
             </span>
             <i
                 class="icn-sm qt-icon icon__arrow-down report-caret-icon qt-ml-8"
@@ -241,8 +252,8 @@
                             <span
                                 class="info-time-work"
                                 *ngIf="hours.isSelected"
+                                [textContent]="hours.timing"
                             >
-                                {{hours.timing}}
                             </span>
                             <span
                                 class="info-time-work-status"
@@ -278,7 +289,7 @@
             *ngIf="companyDetailing?.clientIndustry !== undefined && companyDetailing?.clientIndustry !== null && companyDetailing?.clientIndustry !== ''"
         >
             <div class="small-title">Industry</div>
-            <p>{{companyDetailing.clientIndustry}}</p>
+            <p [textContent]="companyDetailing.clientIndustry"></p>
         </div>
         <div class="other-info-col qt-df">
             <div class="small-title">Notes</div>
@@ -300,19 +311,25 @@
     >
         <div class="small-title">Primary Contact</div>
         <div class="contact-info qt-df">
-            <figure class="qt-dflex no-user-init uppercase qt-df qt-ai-c qt-jc-c">
-                {{getCharacter(companyDetailing?.primaryContact.firstName)}}
+            <figure
+                class="qt-dflex no-user-init uppercase qt-df qt-ai-c qt-jc-c"
+                [textContent]="getCharacter(companyDetailing?.primaryContact.firstName)"
+            >
             </figure>
             <div class="primary-contact-info qt-df">
-                <div class="h5">
-                    {{companyDetailing?.primaryContact.firstName}} {{companyDetailing?.primaryContact.lastName}}
+                <div
+                    class="h5"
+                    [textContent]="companyDetailing?.primaryContact.firstName + ' ' + companyDetailing?.primaryContact.lastName"
+                >
                 </div>
-                <a href="mailto:{{companyDetailing?.primaryContact.email}}">
-                    {{companyDetailing?.primaryContact.email}}
+                <a
+                    [attr.href]="'mailto:' + companyDetailing?.primaryContact.email"
+                    [textContent]="companyDetailing?.primaryContact.email"
+                >
                 </a>
                 <a
                     *ngIf="companyDetailing?.primaryContact.phoneNumber !== ''"
-                    href="tel:{{companyDetailing?.primaryContact.phoneNumber}}"
+                    [attr.href]="'tel:' + companyDetailing?.primaryContact.phoneNumber"
                 >
                     <preview-phone-mask
                         *ngIf="companyDetailing?.primaryContact.phoneNumber"
@@ -389,15 +406,15 @@
                     <div class="cmn-checkbox">
                         <input
                             type="checkbox"
-                            id="{{ work.dayOfWeek }}"
+                            [attr.id]="work.dayOfWeek"
                             [(ngModel)]="work.isSelected"
-                            name="{{ work.dayOfWeek | titlecase }}"
+                            [attr.name]="work.dayOfWeek | titlecase"
                             [ngModelOptions]="{ standalone: true }"
                         >
-                        <label for="{{ work.dayOfWeek }}">
-                            {{
-                    work.dayOfWeek
-                  }}
+                        <label
+                            [attr.for]="work.dayOfWeek"
+                            [textContent]="work.dayOfWeek"
+                        >
                         </label>
                     </div>
                     <div class="time-zone">
@@ -414,10 +431,10 @@
                                 <button
                                     class="selected-item"
                                     [disabled]="!work.isSelected"
-                                    [id]=" 'from-'+work.dayOfWeek"
+                                    [id]="'from-'+work.dayOfWeek"
                                     ngbDropdownToggle
+                                    [textContent]="filterTime(fromTime_convert(work.startTime))"
                                 >
-                                    {{filterTime(fromTime_convert(work.startTime))}}
                                 </button>
                                 <div
                                     ngbDropdownMenu
@@ -429,8 +446,8 @@
                                         ngbDropdownItem
                                         *ngFor="let hours of workingHoursList"
                                         [class.active]="fromTime_convert(work.startTime) == hours.value"
+                                        [textContent]="hours.name"
                                     >
-                                        {{hours.name}}
                                     </button>
                                 </div>
                             </div>
@@ -450,8 +467,8 @@
                                     [disabled]="!work.isSelected"
                                     [id]="'to-'+work.dayOfWeek"
                                     ngbDropdownToggle
+                                    [textContent]="filterTime(toTime_convert(work.endTime))"
                                 >
-                                    {{filterTime(toTime_convert(work.endTime))}}
                                 </button>
                                 <div
                                     ngbDropdownMenu
@@ -463,8 +480,8 @@
                                         ngbDropdownItem
                                         *ngFor="let hours of workingHoursList"
                                         [class.active]="toTime_convert(work.endTime) == hours.value"
+                                        [textContent]="hours.name"
                                     >
-                                        {{hours.name}}
                                     </button>
                                 </div>
                             </div>

@@ -297,7 +297,7 @@
                                 ></span>
                                 <span class="logged-time">
                                     Idle:
-                                    <span>{{ asset.IdelTime }}</span>
+                                    <span [textContent]="asset.IdelTime"></span>
                                 </span>
                             </div>
                         </td>
@@ -307,14 +307,14 @@
                                     <span
                                         *ngIf="asset.IsActive && asset.online"
                                         class="companydevice-beta-online"
+                                        [textContent]="asset.UpTime"
                                     >
-                                        {{ asset.UpTime }}
                                     </span>
                                     <span
                                         *ngIf="asset.IsActive && !asset.online"
                                         class="companydevice-beta-offline"
+                                        [textContent]="getLastCheckIn(asset)"
                                     >
-                                        {{ getLastCheckIn(asset)}}
                                     </span>
                                 </span>
                                 <span
@@ -388,8 +388,8 @@
                                 !asset.IsAgentCurrent
                               "
                                     class="agent-tag qt-ff-gm --offline"
+                                    [textContent]="asset.AgentVersion"
                                 >
-                                    {{asset.AgentVersion}}
                                 </span>
                                 <span
                                     *ngIf="
@@ -399,8 +399,8 @@
                                 asset.IsAgentCurrent
                               "
                                     class="agent-tag qt-ff-gm"
+                                    [textContent]="asset.AgentVersion"
                                 >
-                                    {{asset.AgentVersion}}
                                 </span>
                             </div>
                         </td>
@@ -573,8 +573,8 @@
                     <ng-template
                         #asideMenuItem
                         class="tooltip"
+                        [textContent]="assetData.Title || assetData.Name"
                     >
-                        {{assetData.Title || assetData.Name}}
                     </ng-template>
                     <div
                         placement="left"
@@ -668,7 +668,7 @@
                         class="qt-pointer company-device-aside__arrow-right-icon qt-df qt-ai-c qt-jc-c"
                         (click)="menuclose()"
                     >
-                      <div class="qt-icon icon__arrow-right qt-sz-24"></div>
+                        <div class="qt-icon icon__arrow-right qt-sz-24"></div>
                     </div>
                 </div>
             </div>
@@ -693,7 +693,7 @@
                     [ngClass]="{'--active':tab === 'UPDATES'}"
                     (click)="tab = 'UPDATES'"
                 >
-                  <div class="qt-icon icon__update qt-sz-16"></div>
+                    <div class="qt-icon icon__update qt-sz-16"></div>
                 </div>
             </div>
             <div class="company-device-aside__body">
@@ -1011,7 +1011,10 @@
                             >
                             </div>
                             <div class="sidebar-updates__title">Security Updates</div>
-                            <div class="sidebar-updates__subtitle">Install {{securityUpdate}} Updates</div>
+                            <div
+                                class="sidebar-updates__subtitle"
+                                [textContent]="'Install ' + securityUpdate + ' Updates'"
+                            ></div>
                         </div>
                         <div class="sidebar-updates__item">
                             <div class="sidebar-updates__icon icon__drivers-missing icon --updated"></div>

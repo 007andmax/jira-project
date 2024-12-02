@@ -1,52 +1,120 @@
 <div class="qt-dflex">
-   <div class="cmp-board-contract cmn-box qt-df">
-         <div class="progress-contract qt-df">
-               <div class="progress-count qt-df">
-                 <h4 class="">{{statisticsCount}} hr</h4>
-                 <span class="st-hrs">Hours Spent</span>
-               </div>
-               <div class="cmp-board-progresbbar qt-df">
-                   <span *ngFor="let stat of statistics; let i = index;" [style.backgroundColor]="stat.color" [style.width]="stat.width">{{i}}</span>
+    <div class="cmp-board-contract cmn-box qt-df">
+        <div class="progress-contract qt-df">
+            <div class="progress-count qt-df">
+                <h4
+                    class
+                    [textContent]="statisticsCount +' hr'"
+                ></h4>
+                <span class="st-hrs">Hours Spent</span>
+            </div>
+            <div class="cmp-board-progresbbar qt-df">
+                <span
+                    *ngFor="let stat of statistics; let i = index;"
+                    [style.backgroundColor]="stat.color"
+                    [style.width]="stat.width"
+                    [textContent]="i"
+                >
+                </span>
+            </div>
+            <ul class="list-unstyled qt-df">
+                <li
+                    [ngClass]="'color' + i"
+                    class="qt-dflex "
+                    *ngFor="let stat of statistics; let i = index;"
+                >
+                    <span [textContent]="stat.itemName"></span>
+                    <b [textContent]="stat.quantity + ' hr'"></b>
+                </li>
+            </ul>
+            <div class="contract-info qt-df">
+                <div class="caption-l">Hourly Contract</div>
+                <p>
+                    Bill your customers by the hour, or create custom service that work for you and your customers
+                </p>
+            </div>
+            <h6 *ngIf="contractsList.length > 0">Contracts</h6>
+            <div
+                class="cmp-dash-table-wrap"
+                *ngIf="contractsList.length > 0"
+            >
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Contract</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let contract of contractsList">
+                            <td
+                                (click)="openContractPreview(contract)"
+                                class="pointer"
+                            >
+                                <ng-template #tipContent>
+                                    <div [textContent]="contract.serviceAgreement.description"></div>
+                                </ng-template>
+                                <span
+                                    [ngbTooltip]="tipContent"
+                                    placement="right"
+                                    [textContent]="contractType[contract.serviceAgreement.type]"
+                                >
+                                </span>
+                            </td>
+                            <td [textContent]="contract.serviceAgreement.startDateName"></td>
+                            <td [textContent]="contract.serviceAgreement.endDateName"></td>
+                            <td
+                                class="hold"
+                                *ngIf="contract.serviceAgreement.status == 'PENDING'"
+                            >
+                                Pending
+                            </td>
+                            <td
+                                class="going"
+                                *ngIf="contract.serviceAgreement.status == 'CURRENT'"
+                            >
+                                Current
+                            </td>
+                            <td
+                                class="expired"
+                                *ngIf="contract.serviceAgreement.status == 'TERMINATED'"
+                            >
+                                Terminated
+                            </td>
+                            <td
+                                class="expired"
+                                *ngIf="contract.serviceAgreement.status == 'EXPIRED'"
+                            >
+                                Expired
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-               </div>
-               <ul class="list-unstyled qt-df">
-                   <li class="qt-dflex color{{i}}" *ngFor="let stat of statistics; let i = index;">
-                       <span>{{stat.itemName}}</span>
-                       <b>{{stat.quantity}} hr</b>
-                   </li>
-               </ul>
-               <div class="contract-info qt-df">
-                     <div class="caption-l">Hourly Contract</div>
-                     <p>Bill your customers by the hour, or create custom service that work for you and your customers</p>
-               </div>
-               <h6 *ngIf="contractsList.length > 0">Contracts</h6>
-           <div class="cmp-dash-table-wrap" *ngIf="contractsList.length > 0">
-             <table>
-                <thead>
-                   <tr>
-                      <th>Contract</th>
-                      <th>Start Date</th>
-                      <th>End Date</th>
-                      <th>Status</th>
-                   </tr>
-                </thead>
-                <tbody>
-                   <tr *ngFor="let contract of contractsList">
-                     <td (click)="openContractPreview(contract)" class="pointer"><ng-template #tipContent><div [textContent]="contract.serviceAgreement.description"></div></ng-template><span [ngbTooltip]="tipContent" placement="right">{{contractType[contract.serviceAgreement.type]}}</span></td>
-                     <td>{{contract.serviceAgreement.startDateName}}</td>
-                     <td>{{contract.serviceAgreement.endDateName}}</td>
-                     <td class="hold" *ngIf="contract.serviceAgreement.status == 'PENDING'">Pending</td>
-                     <td class="going" *ngIf="contract.serviceAgreement.status == 'CURRENT'">Current</td>
-                     <td class="expired" *ngIf="contract.serviceAgreement.status == 'TERMINATED'">Terminated</td>
-                     <td class="expired" *ngIf="contract.serviceAgreement.status == 'EXPIRED'">Expired</td>
-                   </tr>
-                </tbody>
-             </table>
-           </div>
 
-         </div>
-   </div>
- </div>
 
- <app-contracts-preview *ngIf="showContractPreview" [serviceAgreement]="serviceAgreement"  ></app-contracts-preview>
-<app-contracts-edit *ngIf="showContractEdit" [serviceAgreement]="serviceAgreement"></app-contracts-edit>
+
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<app-contracts-preview
+    *ngIf="showContractPreview"
+    [serviceAgreement]="serviceAgreement"
+></app-contracts-preview>
+<app-contracts-edit
+    *ngIf="showContractEdit"
+    [serviceAgreement]="serviceAgreement"
+></app-contracts-edit>

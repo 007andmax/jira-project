@@ -18,11 +18,15 @@
             ></div>
             <div class="connected-tooltip-text">
                 Connected:
-                <span *ngIf="returnTimeFormat(item.agentConnectedAt).hours > 0">
-                    {{returnTimeFormat(item.agentConnectedAt ).hours}} hrs
+                <span
+                    *ngIf="returnTimeFormat(item.agentConnectedAt).hours > 0"
+                    [textContent]="returnTimeFormat(item.agentConnectedAt ).hours + ' hrs'"
+                >
                 </span>
-                <span *ngIf="returnTimeFormat(item.agentConnectedAt ).minutes >= 0">
-                    {{returnTimeFormat(item.agentConnectedAt ).minutes}} min
+                <span
+                    *ngIf="returnTimeFormat(item.agentConnectedAt ).minutes >= 0"
+                    [textContent]="returnTimeFormat(item.agentConnectedAt ).minutes + ' min'"
+                >
                 </span>
             </div>
         </ng-template>
